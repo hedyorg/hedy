@@ -87,9 +87,6 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Du kanske har märkt att det fortfarande finns ett problem i de tidigare nivåerna. Försökte du skriva ut en mening som innehöll ordet namn? Dvs. `{print}` mitt namn är namn.
-                    Du kan lösa det på den här nivån. Du måste använda citattecken runt allt du ska skriva ut.
-
                     ### Övning
                     Kopiera exempelkoden och avsluta den genom att lägga till citattecken på de tomma fälten på rad 1 och 2.
                     De tomma fälten på rad 3 och 4 ska inte ersättas med citattecken, utan ett `{sleep}`- och ett `{clear}`-kommando. Kan du få det att fungera?
@@ -563,20 +560,32 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Det här räknespelet hjälper dig att öva på multiplikationstabellerna!
-                    ### Övning
-                    Kan du lägga till fler tal i listan så du kan öva multiplikationstabellerna upp till 10?
+                    This calculator game helps you practise your tables of multiplication!
+                    ### Exercise
+                    Fill in the blanks. We want this program to ask the player these questions:
+                    ```
+                    How much is 1 times 1?
+                    How much is 1 times 2?
+                    How much is 1 times 3?
+                    How much is 2 times 1?
+                    How much is 2 times 2?
+                    How much is 2 times 3?
+                    How much is 3 times 1?
+                    How much is 3 times 2?
+                    How much is 3 times 3?
+                    _
+                    ```
                 example_code: |
                     ```
-                    tal = 1, 2, 3
-                    {for} tal1 {in} tal
-                        {for} tal2 {in} tal
-                            svar = {ask} 'Hur mycket är ' tal2 ' gånger ' tal1 '?'
-                            rätt = tal1 * tal2
-                            {if} svar {is} rätt
-                                {print} 'Bra jobbat!'
+                    numbers = 1, 2, 3
+                    {for} _
+                        {for} _
+                            answer = {ask} _
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
                             {else}
-                                {print} 'Det är fel. Rätt svar är ' rätt
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |
@@ -848,9 +857,6 @@ adventures:
                     total = price + amount_of_product
                     {print} 'That will be $' price 'please'
                     ```
-
-                    total = price + amount_of_product
-                    {print} 'That will be $' price 'please'
             7:
                 story_text: |-
                     ### Exercise
@@ -888,21 +894,7 @@ adventures:
                     {sleep} 5
                     {print} 'All done! That will be $' price ' please!'
                     {print} 'Thank you! Byebye!'
-
-                            {print} That will be $25'
-                            price = 25
-                        {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
-                    {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
+                    ```
             9:
                 story_text: |-
                     ### Exercise
@@ -1194,7 +1186,7 @@ adventures:
                     for i in range 1 to 3
                         animal = animals[i]
                         sound = sounds[i]
-                        print 'Old McDonald had a farm'
+                        print 'Old MacDonald had a farm'
                         print 'E I E I O!'
                         print 'and on that farm he had a ' animal
                         print 'E I E I O!'
@@ -1229,6 +1221,8 @@ adventures:
                     Grattis! Du har nått nivå 2. Förhoppningsvis har du redan gjort lite fantastisk kod!
                     På den första nivån kanske du märkte att kommandot `{echo}` bara kan spara en information åt gången.
                     Till exempel: i restaurangäventyret kunde man upprepa vad kunden ville äta, eller vad de ville dricka, men inte båda i en mening.
+                    Det ändras på nivå 2. På nivå 2 lär du dig att arbeta med variabler, som låter dig spara flera olika informationer och skriva ut dem var du vill.
+                    Så fortsätt nu till nästa flik!
                 example_code: |
                     ```
                     {print} Välkommen till Hedys
@@ -1237,12 +1231,6 @@ adventures:
                     {ask} Vad vill du dricka till?
                     {echo} Så du vill ha
                     ```
-                story_text_2: |
-                    Om spelaren skriver en hamburgare och cola kan du inte säga "så du vill ha en hamburgare och cola", utan du måste göra två separata rader.
-                    Dessutom  upprepar `{echo}`-kommandot bara ordet i slutet av meningen. Så du kan inte säga "din hamburgare är på väg!".
-
-                    Det ändras på nivå 2. På nivå 2 lär du dig att arbeta med variabler, som låter dig spara flera olika informationer och skriva ut dem var du vill.
-                    Så fortsätt nu till nästa flik!
             3:
                 story_text: |
                     På den föregående nivån har du lärt dig vad en variabel är och hur du kan använda den för att göra dina äventyr mer interaktiva.
@@ -1702,6 +1690,20 @@ adventures:
                     {for} djuret {in} djur
                         {print} 'Jag älskar ' djuret
                     ```
+                story_text_2: |
+                    ### Exercise
+                    Finish this code by adding `{for} action {in} actions` to line 2.
+                example_code_2: |
+                    ```
+                    actions = clap your hands, stomp your feet, shout Hurray!
+                    _
+                        {repeat} 2 {times}
+                            {print} 'If youre happy and you know it, ' action
+                            {sleep} 2
+                        {print} 'If youre happy and you know it, and you really want to show it'
+                        {print} 'If youre happy and you know it, ' action
+                        {sleep} 3
+                    ```
             11:
                 story_text: |-
                     På den här nivån lägger vi till en ny form av `{for}`. På tidigare nivåer använde vi `{for}` med en lista, men vi kan också använda `{for}` med tal.
@@ -1767,12 +1769,6 @@ adventures:
                     Just nu kan Hedy bara svara ja, nej eller kanske. Kan du ge Hedy fler svarsalternativ, till exempel 'definitivt' eller 'fråga igen'.
             4:
                 story_text: |
-                    Den här nivån har inga nya funktioner, men ger dig chansen att öva på att använda citattecken.
-                    Du kan göra om din kod från nivå 3 och se till att lägga till citattecken på rätt ställen!
-
-                    Tänk på att vi på nivå 3 inte kunde använda ordet 'fråga' både som namn på variabeln och som ett normalt ord som kan skrivas ut.
-                    Citattecken på nivå 4 gör detta möjligt!
-
                     ### Övning
                     Vi har tagit bort alla citattecken från den här exempelkoden – kan du lägga till dem på alla ställen där det behövs?
 
@@ -2561,7 +2557,9 @@ adventures:
                     play C5
                     ```
             2:
-                story_text: Finish the songs! We have started the codes for some melodies.
+                story_text: |
+                    ### Exercise
+                    Finish the songs! We have started the codes for some melodies.
                 example_code: |
                     ```
                     {print} Old Mac Donald had a farm
@@ -2604,7 +2602,7 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Use the `{clear}` command to create a karaokemachine!
+                    Use the `{clear}` command to create a karaoke machine!
 
                     ### Exercise
                     Finish the karaoke version of 'Mary had a little lamb'.
@@ -2796,7 +2794,7 @@ adventures:
                     ```
             14:
                 story_text: |
-                    You can programm music for fun, but you can also use the musical notes to make something useful like a fire alarm!
+                    You can program music for fun, but you can also use the musical notes to make something useful like a fire alarm!
 
                     ### Exercise
                     Make sure the fire alarm rings when there is a fire!
@@ -2815,6 +2813,106 @@ adventures:
                     fire = {ask} 'Is there a fire?'
                     {if} fire _ 'yes'
                         {call} fire_alarm
+                    ```
+            15:
+                story_text: |
+                    **Warning** This adventure can become extremely annoying!
+                    We can also use the {while} command to repeat a song forever.
+
+                    ### Exercise
+                    Finish the never-ending song.
+                example_code: |
+                    ```
+                    {define} song
+                        {play} _
+
+                    yes_or_no = {ask} 'Do you want to hear my never-ending song?'
+                    {while} yes_or_no = 'yes'
+                        {call} song
+                        {print} '🥳'
+                    ```
+            16:
+                story_text: |
+                    Upgrade your Old MacDonald code!
+
+                    ### Exercise
+                    Take your code from the 'Sing a Song' adventure and add musical notes to it!
+                    You can make a function for each line in the song and call that function after the line is printed.
+                    We defined the first line for you and called it in the code. Can you finish the whole song?
+                example_code: |
+                    ```
+                    {define} line_1
+                        {for} i {in} {range} 1 {to} 3
+                            {play} G
+                        {play} D
+                        {for} i {in} {range} 1 {to} 2
+                            {play} E
+                        {play} D
+
+                    animals = ['pig', 'dog', 'cow']
+                    sounds = ['oink', 'woof', 'moo']
+                    for i in range 1 to 3
+                        animal = animals[i]
+                        sound = sounds[i]
+                        print 'Old MacDonald had a farm'
+                        call line_1
+                        print 'E I E I O!'
+                        _
+                    ```
+            17:
+                story_text: |
+                    You can use the {elif} to create different options.
+
+                    ### Exercise
+                    Firstly, add colons to get the code to work.
+                    Then finish this code by adding at least 2 other songs for other moods. For example a happy song and an angry song.
+                example_code: |
+                    ```
+                    {define} scary_song
+                        {for} i {in} {range} 1 {to} 3
+                            {play} G
+                        {play} E
+                        {sleep} 2
+                        {for} i {in} {range} 1 {to} 3
+                            {play} F
+                        {play} D
+
+                    mood = {ask} 'Which emotion are you feeling?'
+                    {if} mood {is} 'fear'
+                        {call} scary_song
+                    {elif} _
+                    ```
+            18:
+                story_text: |
+                    ### Exercise
+                    Even in this last level of Hedy we can make some music! Be careful of all the syntax that is needed now.
+                    Take a good look at how the functions are defined and called upon in the example code.
+                    Finish the song!
+                example_code: |
+                    ```
+                    {def} line_1():
+                        {for} i {in} {range}(1, 5):
+                            {play} A
+                        {play} D
+                        {play} F
+                        {play} A
+
+                    {def} line_2():
+                        {for} i {in} {range}(1, 5):
+                            {play} G
+                        {play} C
+                        {play} E
+                        {play} G
+
+                    {def} line_3():
+                    _
+
+                    {print} ('The drunken sailor')
+                    {print} ('What shall we do with the drunken sailor?')
+                    line_1()
+                    line_2()
+                    line_3()
+                    {print} ('Early in the morning')
                     ```
     parrot:
         name: Papegoja
@@ -3126,10 +3224,10 @@ adventures:
                 story_text_2: |
                     **Alla element i listor behöver också citattecken**.
                     Listor är texter, så de behöver också citattecken. Tänk på att varje element i listan ska ha citattecken.
-                    Detta gör att du kan spara två ord som ett element i listan, till exempel 'Iron Man'.
+                    Detta gör att du kan spara två ord som ett element i listan, till exempel 'Black Widow'.
                 example_code_2: |
                     ```
-                    superhjältar = 'Spiderman', 'Batman', 'Iron Man'
+                    superhjältar = 'Spiderman', 'Batman', 'Black Widow'
                     {print} superhjältar {at} {random}
                     ```
                 story_text_3: |
@@ -3302,14 +3400,6 @@ adventures:
             1:
                 story_text: |
                     På nivå 1 kan du göra din egen virtuella restaurang och ta emot dina gästers beställningar.
-                example_code: |
-                    ```
-                    {print} Välkommen till Hedys restaurang 🍟
-                    _ Vad vill du beställa?
-                    {echo} Så du vill beställa
-                    {print} Tack för din beställning!
-                    {print} Den är på väg!
-                    ```
                 story_text_2: |
                     ### Övning
                     Kopiera exempelkoden till din inmatningsskärm genom att klicka på den gula knappen.
@@ -3317,6 +3407,14 @@ adventures:
                     Lägg sedan till minst fyra rader kod till restaurangprogrammet.
                     Fråga kunden vad han eller hon vill dricka och fråga om han eller hon vill betala med kontanter eller kort.
                     Fundera till sist ut ett trevligt sätt att säga hejdå till din kund.
+                example_code_2: |
+                    ```
+                    {print} Välkommen till Hedys restaurang 🍟
+                    _ Vad vill du beställa?
+                    {echo} Så du vill beställa
+                    {print} Tack för din beställning!
+                    {print} Den är på väg!
+                    ```
             2:
                 story_text: |
                     På nivå 2 kan du utöka din restaurang genom att använda variabler. På nivå 1 kunde Hedy bara `{echo}` beställningen en gång och bara komma ihåg det sista som beställdes.
@@ -3370,8 +3468,6 @@ adventures:
                     ```
             4:
                 story_text: |
-                    På den här nivån måste du använda citattecken när du använder kommandona `{print}` eller `{ask}`.
-
                     ### Övning
                     Lägg till citattecken till den här koden för att få det att fungera! Var försiktig: variabler ska inte vara inom citattecken.
                     Använd sedan kommandot `{clear}` för att bara visa en rad i taget på utdataskärmen.
@@ -3450,6 +3546,10 @@ adventures:
             8:
                 story_text: |
                     På den här nivån kan du göra din virtuella restaurang mer avancerad genom att upprepa flera kodrader. Till exempel så här:
+
+                    ### Övning
+                    Den här koden kan utökas med fler alternativ på menyn, t.ex. drycker eller flera rätter eller efterrätter. Lägg till minst ett ytterligare alternativ.
+                    **Extrauppgift** Lägg till ännu fler artiklar, så många alternativ du vill!
                 example_code: |
                     ```
                     {print} 'Välkommen till restaurang Chez Hedy!'
@@ -3461,10 +3561,6 @@ adventures:
                     {print} 'Tack för beställningen!'
                     {print} 'Smaklig måltid!'
                     ```
-                story_text_2: |
-                    ### Övning
-                    Den här koden kan utökas med fler alternativ på menyn, t.ex. drycker eller flera rätter eller efterrätter. Lägg till minst ett ytterligare alternativ.
-                    **Extrauppgift** Lägg till ännu fler artiklar, så många alternativ du vill!
             9:
                 story_text: "På den här nivån kan du använda dig av nästlad kod för att göra din restaurang mer realistisk och roligare!\n\n### Övning\nIndragen (mellanslagen) togs bort i exempelkoden. \nKan du räkna ut hur mycket indrag varje rad behöver för att koden ska fungera korrekt?\nOm kunden\
                     \ beställer pizza ska Hedy inte fråga vilken sås kunden vill ha.\n\n**Extrauppgift** En restaurang har inte alla såser i lager. Gör en lista över tillgängliga såser och ge ett svar vid varje beställning om ni säljer den. <br>\n**Extrauppgift** Pizzor har en fyllning. Fråga kunderna\
@@ -3650,7 +3746,12 @@ adventures:
                 story_text: |
                     På den här nivån kan vi också programmera sten, sax, påse. Men om du vill lägga till text måste du använda citattecken även här.
                     ### Övning
-                    Kopiera din kod från föregående nivå och få den att fungera genom att använda citattecken efter varje `{print}` - eller `{ask}` -kommando.
+                    Fill in quotation marks on the blanks. Mind that the variable `choices` should be outside the quotes.
+                example_code: |
+                    ```
+                    choices {is} rock, paper, scissors
+                    {print} _The computer chooses..._ choices {at} {random}
+                    ```
             5:
                 story_text: |
                     På den här nivån kan vi avgöra om det är oavgjort eller inte. För det behöver du det nya nyckelordet `{if}`.
@@ -3972,7 +4073,7 @@ adventures:
                     {for} i {in} {range} 1 {to} 3
                         animal = _
                         sound = _
-                        {print} 'Old McDonald had a farm'
+                        {print} 'Old MacDonald had a farm'
                         {print} 'E I E I O!'
                         {print} 'and on that farm he had a ' animal
                         {print} 'E I E I O!'
@@ -4291,10 +4392,15 @@ adventures:
                     Med `{forward}` ritar du en linje framåt. Talet efter avgör hur långt sköldpaddan kommer att gå. `{turn} {right}` vrider ett kvarts varv medurs, `{turn} {left}` vrider moturs.
 
                     Om du vill gå bakåt använder du kommandot `{forward}` men med ett negativt tal. Till exempel `{forward} -100`
-
+                example_code: |
+                    ```
+                    {forward} 100
+                    {turn} {left}
+                    ```
+                story_text_2: |
                     ### Övning
                     Det här är början på en liten trappa. Kan du göra så den får fem steg?
-                example_code: |
+                example_code_2: |
                     ```
                     {forward} 20
                     {turn} {right}
