@@ -291,8 +291,8 @@ def task_extract():
     return dict(
         title=lambda _: 'Extract new keys from the code',
         actions=[
-            'pybabel extract -F babel.cfg -o messages.pot . --no-location --sort-output --omit-header',
-            'pybabel update -i messages.pot -d translations -N --no-wrap --omit-header',
+            'pybabel extract -F babel.cfg -o messages.pot . --no-location --sort-output',
+            'pybabel update -i messages.pot -d translations -N --no-wrap',
         ],
     )
 
@@ -409,7 +409,10 @@ def task__autopr():
             'backend',
             'frontend',
         ],
-        actions=None)
+        actions=[
+            # Run a script to strip things that lead to conflicts from po files
+            [python3, 'build-tools/github/normalize-pofiles.py'],
+        ])
 
 
 ######################################################################################
