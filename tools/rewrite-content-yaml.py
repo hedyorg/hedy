@@ -116,7 +116,7 @@ def rewrite_yaml_file(fn, strip_strings):
     # adventures contain meaningful whitespace
     data = custom_rewrite_data(data, strip_strings)
     new_string = yaml.safe_dump(
-        data, indent=4, allow_unicode=True, sort_keys=False, width=300
+        data, indent=4, allow_unicode=True, sort_keys=False, width=30000
     )
     with open(fn, "w") as fp:
         fp.write(new_string)
