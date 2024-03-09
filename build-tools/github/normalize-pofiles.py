@@ -33,7 +33,7 @@ def strip_headers(filename):
         ),
         (
             r'^"Last-Translator: [^\]+\n"$',
-            f'"Last-Translator: Someone <someone@example.com>\n"$'
+            '"Last-Translator: Someone <someone@example.com>\n"$'
         ),
     ]
 
