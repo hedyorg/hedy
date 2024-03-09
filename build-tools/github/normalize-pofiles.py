@@ -1,4 +1,4 @@
-#/usr/bin/env python3
+# /usr/bin/env python3
 # For all pofiles, normalize then to reduce the amounts of things that can go wrong.
 #
 # Currently, specifically:
@@ -6,6 +6,7 @@
 from os import path
 import os
 import re
+
 
 def scan_pofiles(root, scanner):
     """Return True if there are any problems."""
