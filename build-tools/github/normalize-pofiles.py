@@ -29,11 +29,11 @@ def strip_headers(filename):
             f'"POT-Creation-Date: {bogus_date}\\\\n"'
         ),
         (
-            r'^"PO-Revision-Date: [^"]"$',
+            r'^"PO-Revision-Date: [^"]+"$',
             f'"PO-Revision-Date: {bogus_date}\\\\n"'
         ),
         (
-            r'^"Last-Translator: [^"]"$',
+            r'^"Last-Translator: [^"]+"$',
             '"Last-Translator: Someone <someone@example.com>\\\\n"'
         ),
     ]
