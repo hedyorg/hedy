@@ -291,8 +291,8 @@ def task_extract():
     return dict(
         title=lambda _: 'Extract new keys from the code',
         actions=[
-            'pybabel extract -F babel.cfg -o messages.pot . --no-location --sort-output',
-            'pybabel update -i messages.pot -d translations -N --no-wrap',
+            'pybabel extract -F babel.cfg -o messages.pot . --no-location --sort-output --omit-header',
+            'pybabel update -i messages.pot -d translations -N --no-wrap --omit-header',
         ],
     )
 
@@ -390,6 +390,27 @@ def task__offline():
             'rm -rf dist/offlinehedy/_internal/content/research/*',
         ],
     )
+
+
+def task__precommit():
+    """Run code generation tasks that should commit to PRs.
+
+    This runs some tasks, mostly around translation, that
+    contributors should run on their machines but tend to forget.
+
+    That's what machines are for!
+    """
+
+    return dict(
+        title=lambda _: 'Run automatic commit updates',
+        task_dep=[
+            'extract',
+            'backend',
+            'lezer_parsers',
+            # Potentially we could do TypeScript here, but we also
+            # already have a GitHub Action for that.
+        ],
+        actions=None)
 
 
 ######################################################################################
