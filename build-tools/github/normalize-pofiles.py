@@ -25,16 +25,16 @@ def strip_headers(filename):
 
     replacements = [
         (
-            r'^"POT-Creation-Date: [^\]+\n"$',
-            f'"POT-Creation-Date: {bogus_date}\n"$'
+            '^"POT-Creation-Date: [^\\\\]+\\n"$',
+            f'"POT-Creation-Date: {bogus_date}\\n"$'
         ),
         (
-            r'^"PO-Revision-Date: [^\]+\n"$',
-            f'"PO-Revision-Date: {bogus_date}\n"$'
+            '^"PO-Revision-Date: [^\\\\]+\n"$',
+            f'"PO-Revision-Date: {bogus_date}\\n"$'
         ),
         (
-            r'^"Last-Translator: [^\]+\n"$',
-            '"Last-Translator: Someone <someone@example.com>\n"$'
+            '^"Last-Translator: [^\\\\]+\n"$',
+            '"Last-Translator: Someone <someone@example.com>\\n"$'
         ),
     ]
 
