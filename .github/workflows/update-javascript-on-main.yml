@@ -1,6 +1,5 @@
-# Script to regenerate the TypeScript on the main branch, if it ever happens
-# that the JS bundle we find there is out of sync.
-name: Automatically update JavaScript bundle
+# Script to update files that should have been automatically generated.
+name: Automatically update generated files
 
 on:
   push:
@@ -27,10 +26,6 @@ jobs:
       if: github.event_name != 'push'
       with:
         fetch-depth: 1
-    - name: Install Nodejs dependencies
-      run: |
-        npm ci
-
     - name: Set up Python 3.12
       uses: actions/setup-python@v1
       with:
@@ -40,15 +35,15 @@ jobs:
         python3 -m pip install --upgrade pip
         pip3 install -r requirements.txt
 
-    - name: Generating TypeScript
+    - name: Automatically updating generated files
       run: |
-        doit run typescript
+        doit run _autopr
 
     - name: Commit changed files
       uses: stefanzweifel/git-auto-commit-action@v2.3.0
       if: github.event_name == 'push'
       with:
-        commit_message: Automatically update JavaScript bundle 🤖 beep boop
+        commit_message: Automatically update generated files 🤖 beep boop
         branch: ${{ github.ref_name }}
       env:
         # This is necessary to bypass branch protection (which will disallow non-reviewed pushes otherwise)
