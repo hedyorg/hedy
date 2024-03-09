@@ -392,13 +392,14 @@ def task__offline():
     )
 
 
-def task__precommit():
+def task__autopr():
     """Run code generation tasks that should commit to PRs.
 
-    This runs some tasks, mostly around translation, that
-    contributors should run on their machines but tend to forget.
+    This runs some tasks, mostly around translation, that contributors should
+    run on their machines but tend to forget. That's what machines are for!
 
-    That's what machines are for!
+    Running 'extract' and 'compile' has the benefit that it will unwrap
+    any files that were wrapped by Weblate.
     """
 
     return dict(
@@ -406,9 +407,7 @@ def task__precommit():
         task_dep=[
             'extract',
             'backend',
-            'lezer_parsers',
-            # Potentially we could do TypeScript here, but we also
-            # already have a GitHub Action for that.
+            'frontend',
         ],
         actions=None)
 
