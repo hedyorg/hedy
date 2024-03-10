@@ -63,7 +63,6 @@ jobs:
     - uses: actions/checkout@v4
       name: Checkout branch
       with:
-      if: github.event_name == 'pull_request'
         fetch-depth: 1
         ref: ${{ steps.branch.outputs.branch }}
         repository: ${{ steps.branch.outputs.repo }}
