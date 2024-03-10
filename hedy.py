@@ -304,51 +304,36 @@ def promote_types(types, rules):
     return types
 
 
+def add_level(commands, level, add=None, remove=None):
+    # Adds the commands for the given level by taking the commands of the previous level
+    # and adjusting the list based on which keywords need to be added or/and removed
+    if not add:
+        add = []
+    if not remove:
+        remove = []
+    commands[level] = [c for c in commands[level-1] if c not in remove] + add
+
+
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
-# FH, dec 2023: TODO: Lots of duplication here! Could be made nicer?
-commands_per_level = {
-    1: ['print', 'ask', 'echo', 'turn', 'forward', 'color', 'play'],
-    2: ['print', 'ask', 'is', 'turn', 'forward', 'color', 'sleep', 'play'],
-    3: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from',
-        'play'],
-    4: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from',
-        'clear', 'play'],
-    5: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'clear', 'play'],
-    6: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'clear', 'play'],
-    7: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
-    8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
-    9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
-    10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'for', 'clear', 'play'],
-    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear', 'play'],
-    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear', 'define', 'call',
-         'play'],
-    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define',
-         'call', 'play'],
-    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define',
-         'call', 'play'],
-    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear',
-         'define', 'call', 'play'],
-    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear',
-         'define', 'call', 'play'],
-    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif',
-         'clear', 'define', 'call', 'play'],
-    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if',
-         'not_in', 'else', 'for', 'ifpressed', 'assign_button', 'range', 'repeat', 'and', 'or', 'while', 'elif',
-         'input', 'clear', 'define', 'call', 'play'],
-}
+commands_per_level = {1: ['ask', 'color', 'echo', 'forward', 'play', 'print', 'turn']}
+add_level(commands_per_level, level=2, add=['is', 'sleep'], remove=['echo'])
+add_level(commands_per_level, level=3, add=['add', 'at', 'from', 'random', 'remove', 'to'])
+add_level(commands_per_level, level=4, add=['clear'])
+add_level(commands_per_level, level=5, add=['assign_button', 'else', 'if', 'ifpressed', 'in', 'not_in'])
+add_level(commands_per_level, level=6)
+add_level(commands_per_level, level=7, add=['repeat', 'times'])
+add_level(commands_per_level, level=8)
+add_level(commands_per_level, level=9)
+add_level(commands_per_level, level=10, add=['for'])
+add_level(commands_per_level, level=11, add=['range'], remove=['times'])
+add_level(commands_per_level, level=12, add=['define', 'call'])
+add_level(commands_per_level, level=13, add=['and', 'or'])
+add_level(commands_per_level, level=14)
+add_level(commands_per_level, level=15, add=['while'])
+add_level(commands_per_level, level=16)
+add_level(commands_per_level, level=17, add=['elif'])
+add_level(commands_per_level, level=18, add=['input'], remove=['ask'])
+
 
 command_turn_literals = ['right', 'left']
 english_colors = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
