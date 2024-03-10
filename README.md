@@ -40,16 +40,16 @@ A simple way to help out Hedy is to [help us translate Hedy](https://github.com/
 
 Oh no! Here is how you can let us know:
 
-* If it is a small fix and clearly wrong (such as a crash or a wrong error message) please [make an issue](https://github.com/hedyorg/hedy/issues/new/choose). 
+* If it is a small fix and clearly wrong (such as a crash or a wrong error message) please [make an issue](https://github.com/hedyorg/hedy/issues/new/choose).
 
 * If it is more of an idea, please reach out to us on [Discord](https://discord.gg/8yY7dEme9r).
 
 Please note that we are a friendly and welcoming open source project. If you submit an issue, refrain from saying things are "bad", or "wrong" or "broken". Assume that code that is there was made by people that do their best! Neutrally phrased messages are nicer for everyone. For example use "did not do what I expected", "appears not to work" or "could be improved". For full community guidelines, please read the [Hedy Wiki](https://github.com/hedyorg/hedy/wiki)
 Also feel free to join our [Discord](https://discord.gg/8yY7dEme9r) server to discuss ideas, and get in touch with us our show of your Hedy related creations.
 
-## I want to contribute 
+## I want to contribute
 
-Great, thanks!! 
+Great, thanks!!
 
 Before you start, please consult the ["before your first contribution"](https://github.com/hedyorg/hedy/wiki#getting-started-on-your-first-contribution) section of our Wiki. First contributions that are not linked to issues either labeled "good first issue" or "approved", or that do not link to any issues will be closed. We don't have the bandwidth to inspect pull requests that are not aligned with our goals. If you need any help getting started, the Wiki is the best place to start, and you can also always drop into the Discord! (in #programmers-general).
 
@@ -59,3 +59,4 @@ Thank you very much for taking your time to help Hedy.
 
 [![Contributors](https://contrib.rocks/image?repo=hedyorg/hedy)]([https://github.com/codemaniac-sahil/news-webapp-api](https://github.com/hedyorg/hedy)https://github.com/hedyorg/hedy/graphs/contributors)
 <p align="right">(<a href="#top">🔼 Back to top</a>)</p>
+
