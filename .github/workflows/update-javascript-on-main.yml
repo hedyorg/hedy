@@ -38,11 +38,13 @@ jobs:
       id: branch
       run: |
         if [[  "${{ github.event_name }}" == "pull_request" ]]; then
+          echo "Pull Request"
           echo "branch=${{ github.event.pull_request.head.ref }}" >> $GITHUB_OUTPUT
           echo "repo=${{ github.event.pull_request.head.repo.full_name }}" >> $GITHUB_OUTPUT
         elif [[  "${{ github.event_name }}" == "push" ]]; then
+          echo "Push Event"
           echo "branch=${{ github.ref }}" >> $GITHUB_OUTPUT
-          echo "repo=${{ github.event.push.repository.full_name }}" >> $GITHUB_OUTPUT
+          echo "repo=${{ github.event.repository.full_name }}" >> $GITHUB_OUTPUT
         else
           echo "Unsupported event type!" >&2
           exit 1
@@ -58,8 +60,7 @@ jobs:
     # works mostly automatically, but for PRs we must be very explicit to get the right
     # branch and also support forks.
     - uses: actions/checkout@v4
-      name: Checkout branch (pull request)
-      if: github.event_name == 'pull_request'
+      name: Checkout branch
       with:
         fetch-depth: 1
         ref: ${{ steps.branch.outputs.branch }}
