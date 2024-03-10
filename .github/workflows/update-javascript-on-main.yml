@@ -4,7 +4,7 @@ name: Automatically update generated files
 on:
   push:
     branches: [ main ]
-  pull_request:
+  pull_request_target:
     branches: [ main ]
 
 jobs:
@@ -12,20 +12,63 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v4
-      name: Checkout branch (with token)
-      if: github.event_name == 'push'
-      with:
-        fetch-depth: 1
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
+      contents: write
 
-        # We need to pass the token here -- the commit action below will not overwrite the token to push.
-        token: ${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}
+    steps:
+    - name: Print event (for debugging)
+      run: cat $GITHUB_EVENT_PATH
+
+    #----------------------------------------------------------------------
+    # Either use FELIENNE_GITHUB_ACCESS_TOKEN or GITHUB_TOKEN
+    # GITHUB_TOKEN can do fewer things (push to main, trigger new GHAs, etc).
+    - name: Check for presence of GitHub Token
+      id: secret
+      run: |
+        if [ ! -z "${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}" ]; then
+          echo "We have a token!"
+          echo "secret=${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}" >> $GITHUB_OUTPUT
+        else
+          echo "We do not have a token"
+          echo "secret=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Determine branch name
+      id: branch
+      run: |
+        if [[  "${{ github.event_name }}" == "pull_request" ]]; then
+          echo "branch=${{ github.event.pull_request.head.ref }}" >> $GITHUB_OUTPUT
+          echo "repo=${{ github.event.pull_request.head.repo.full_name }}" >> $GITHUB_OUTPUT
+        elif [[  "${{ github.event_name }}" == "push" ]]; then
+          echo "branch=${{ github.ref }}" >> $GITHUB_OUTPUT
+          echo "repo=${{ github.event.push.repository.full_name }}" >> $GITHUB_OUTPUT
+        else
+          echo "Unsupported event type!" >&2
+          exit 1
+        fi
+
+    #----------------------------------------------------------------------
+    #  Checkout source
+    #
+    # We need to pass the token here -- the commit action below will not overwrite the token to push.
+    # This is necessary to bypass branch protection (which will disallow non-reviewed pushes otherwise)
+    #
+    # Make a distinction between Pull Request checkout and Push checkout. Push checkout
+    # works mostly automatically, but for PRs we must be very explicit to get the right
+    # branch and also support forks.
     - uses: actions/checkout@v4
-      name: Checkout branch (on pull requests)
-      if: github.event_name != 'push'
+      name: Checkout branch (pull request)
+      if: github.event_name == 'pull_request'
       with:
         fetch-depth: 1
+        ref: ${{ steps.branch.outputs.branch }}
+        repository: ${{ steps.branch.outputs.repo }}
+        token: ${{ steps.secret.outputs.secret }}
+
+    #----------------------------------------------------------------------
+    #  Actual build
+
     - name: Set up Python 3.12
       uses: actions/setup-python@v1
       with:
@@ -35,16 +78,18 @@ jobs:
         python3 -m pip install --upgrade pip
         pip3 install -r requirements.txt
 
-    - name: Automatically updating generated files
+    - name: Automatically update generated files
       run: |
         doit run _autopr
 
-    - name: Commit changed files
+    #----------------------------------------------------------------------
+    #  Commit back
+    # For some reason, we must supply the token here again, even though
+    # we already supplied it during checkout.
+    - name: Commit changed files (with token)
       uses: stefanzweifel/git-auto-commit-action@v2.3.0
-      if: github.event_name == 'push'
       with:
-        commit_message: Automatically update generated files 🤖 beep boop
-        branch: ${{ github.ref_name }}
+        commit_message: 🤖 Automatically update generated files
+        branch: ${{ steps.branch.outputs.branch }}
       env:
-        # This is necessary to bypass branch protection (which will disallow non-reviewed pushes otherwise)
-        GITHUB_TOKEN: ${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}
+        GITHUB_TOKEN: ${{ steps.secret.outputs.secret }}
