@@ -963,7 +963,9 @@ class ForTeachersModule(WebsiteModule):
             # return gettext("language_invalid"), 400
 
         current_adventure = self.db.get_adventure(body["id"])
-        current_classes = current_adventure["classes"]
+        current_classes = {}
+        if body.get("classes"):
+            current_classes = current_adventure["classes"]
         current_levels = []
         if current_adventure["level"] is not 1:
             current_levels = current_adventure["levels"]
@@ -1008,7 +1010,7 @@ class ForTeachersModule(WebsiteModule):
                     tag_adventure["language"] = body["language"]
             self.db.update_tag(tag["id"], {"tagged_in": tag["tagged_in"]})
 
-        if current_levels:
+        if current_levels and current_classes:
             for old_class in current_classes:
                 for level in current_levels:
                     if old_class not in body["classes"] or level not in body["levels"]:
