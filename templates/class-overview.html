@@ -80,10 +80,10 @@
                 <td class="username_cell">{{second_teacher.username}}</td>
                 <td id="role_cell">{% if second_teacher.username == class_info.teacher %}{{_('creator').lower()}}{% else %}{{second_teacher.role}}{% endif %}</td>
                 {% if second_teacher.username != username %}
-                  <td class="overview_cell"><a href="/for-teachers/class/{{class_info.id}}/programs/{{second_teacher.username}}" 
+                  <td class="overview_cell"><a href="/for-teachers/class/{{class_info.id}}/programs/{{second_teacher.username}}" data-cy="programs"
                      >{{second_teacher.username}}'s {{_('page')}}</a></td>
                 {% else %}
-                  <td class="overview_cell"><a href="/programs">{{ _('program_header').lower()}}</a></td>
+                  <td class="overview_cell"><a href="/programs" data-cy="programs">{{ _('program_header').lower()}}</a></td>
                 {% endif %}
                 <td class="remove_second_teacher_cell text-center">
                   {% if second_teacher.username != class_info.teacher %}<a href="#" class="no-underline" id="remove-second-teacher"
