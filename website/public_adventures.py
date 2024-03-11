@@ -29,10 +29,7 @@ class PublicAdventuresModule(WebsiteModule):
         self.available_languages = set()
         self.available_tags = set()
 
-    @route("/", methods=["GET"], defaults={'level': 1})
-    @route("/<level>", methods=["GET"])
-    @requires_teacher
-    def index(self, user, level):
+    def init(self, user):
         adventures = []
         included = {}
         self.adventures = {}
@@ -82,11 +79,15 @@ class PublicAdventuresModule(WebsiteModule):
             available_levels = adventure["levels"] if adventure.get("levels") else [adventure["level"]]
             self.customizations["available_levels"].update([int(adv_level) for adv_level in available_levels])
 
-        return self.filtering(index_page=True)
-
-    @route("/filter", methods=["GET", "POST"])
+    @route("/", methods=["GET"])
+    @route("/filter", methods=["POST"])
     @requires_teacher
     def filtering(self, user, index_page=False):
+        index_page = request.method == "GET"
+
+        if index_page:
+            self.init(user)
+
         level = int(request.args["level"]) if request.args.get("level") else 1
         language = request.args.get("lang", "")
         tag = request.args.get("tag", "")
@@ -147,6 +148,15 @@ class PublicAdventuresModule(WebsiteModule):
             commands = hedy.commands_per_level.get(level)
             prev_level, next_level = utils.find_prev_next_levels(list(self.customizations["available_levels"]), level)
 
+        js = dict(
+            page='code',
+            lang=g.lang,
+            level=level,
+            adventures=adventures,
+            initial_tab='',
+            current_user_name=user['username'],
+        )
+
         temp = render_template(
             "public-adventures/index.html" if index_page else "public-adventures/body.html",
             adventures=adventures,
@@ -175,19 +185,11 @@ class PublicAdventuresModule(WebsiteModule):
             customizations=self.customizations,
 
             public_adventures_page=True,
-        )
-
-        javascript_page_options = dict(
-            page='code',
-            lang=g.lang,
-            level=level,
-            adventures=adventures,
-            initial_tab='',
-            current_user_name=user['username'],
+            javascript_page_options=js,
         )
 
         response = make_response(temp)
-        response.headers["HX-Trigger"] = json.dumps({"updateTSCode": javascript_page_options})
+        response.headers["HX-Trigger"] = json.dumps({"updateTSCode": js})
         return response
 
     @route("/clone/<adventure_id>", methods=["POST"])
