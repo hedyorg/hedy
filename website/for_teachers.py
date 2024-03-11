@@ -967,7 +967,7 @@ class ForTeachersModule(WebsiteModule):
         if body.get("classes"):
             current_classes = current_adventure["classes"]
         current_levels = []
-        if current_adventure["level"] is not 1:
+        if current_adventure["level"] != 1:
             current_levels = current_adventure["levels"]
         if not current_adventure:
             return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
