@@ -933,39 +933,15 @@ class TypeValidator(Transformer):
 
     def get_type(self, tree):
         # The rule var_access is used in the grammars definitions only in places where a variable needs to be accessed.
+        # var_access_print is identical to var_access and is introduced only to differentiate error messages.
         # So, if it cannot be found in the lookup table, then it is an undefined variable for sure.
-        if tree.data == 'var_access':
+        if tree.data in ['var_access', 'var_access_print']:
             var_name = tree.children[0]
             in_lookup, type_in_lookup = self.try_get_type_from_lookup(var_name)
             if in_lookup:
                 return type_in_lookup
             else:
-                raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
-
-        if tree.data == 'var_access_print':
-            var_name = tree.children[0]
-            in_lookup, type_in_lookup = self.try_get_type_from_lookup(var_name)
-            if in_lookup:
-                return type_in_lookup
-            else:
-                # is there a variable that is mildly similar?
-                # if so, we probably meant that one
-
-                # we first check if the list of vars is empty since that is cheaper than stringdistancing.
-                # TODO: Can be removed since fall back handles that now
-                if len(self.lookup) == 0:
-                    raise hedy.exceptions.UnquotedTextException(
-                        level=self.level, unquotedtext=var_name, line_number=tree.meta.line)
-                else:
-                    # TODO: decide when this runs for a while whether this distance small enough!
-                    minimum_distance_allowed = 4
-                    for var_in_lookup in self.lookup:
-                        if calculate_minimum_distance(var_in_lookup.name, var_name) <= minimum_distance_allowed:
-                            raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
-
-                    # nothing found? fall back to UnquotedTextException
-                    raise hedy.exceptions.UnquotedTextException(
-                        level=self.level, unquotedtext=var_name, line_number=tree.meta.line)
+                self.get_var_access_error(tree, var_name)
 
         # TypedTree with type 'None' and 'string' could be in the lookup because of the grammar definitions
         # If the tree has more than 1 child, then it is not a leaf node, so do not search in the lookup
@@ -975,6 +951,22 @@ class TypeValidator(Transformer):
                 return type_in_lookup
         # If the value is not in the lookup or the type is other than 'None' or 'string', return evaluated type
         return tree.type_
+
+    def get_var_access_error(self, tree, var_name):
+        # var_access_print is a var_access used in print statements to provide the following better error messages
+        if tree.data == 'var_access_print':
+            # is there a variable that is mildly similar? if so, we probably meant that one
+            minimum_distance_allowed = 4
+            for var_in_lookup in self.lookup:
+                if calculate_minimum_distance(var_in_lookup.name, var_name) <= minimum_distance_allowed:
+                    raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
+
+            # no variable which looks similar? Then, fall back to UnquotedTextException
+            raise hedy.exceptions.UnquotedTextException(
+                level=self.level, unquotedtext=var_name, line_number=tree.meta.line)
+
+        # for all other var_access instances, use UndefinedVarException
+        raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
 
     def ignore_type(self, type_):
         return type_ in [HedyType.any, HedyType.none]
