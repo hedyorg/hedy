@@ -604,7 +604,7 @@ def parse():
 
         try:
             if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
-                username, code, level, response, transpile_result.commands):
+                    username, code, level, response, transpile_result.commands):
                 response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
         except Exception as E:
             print(f"error determining achievements for {code} with {E}")
@@ -1069,7 +1069,7 @@ def programs_page(user):
     # Some old programs don't have adventure_name in them, or the field is emtpy.
     for program in all_programs:
         if 'adventure_name' in program and program['adventure_name'] and \
-            program['adventure_name'] not in adventure_names:
+                program['adventure_name'] not in adventure_names:
             ids_to_fetch.append(program['adventure_name'])
 
     teacher_adventures = DATABASE.batch_get_adventures(ids_to_fetch)
@@ -1491,15 +1491,15 @@ def index(level, program_id):
             previous_quiz_level = level
             for _prev_level in range(level - 1, 0, -1):
                 if _prev_level in available_levels and \
-                    customizations["sorted_adventures"][str(_prev_level)][-1].get("name") == "quiz" and \
-                    not any(x.get("scores") for x in quiz_stats if x.get("level") == _prev_level):
+                        customizations["sorted_adventures"][str(_prev_level)][-1].get("name") == "quiz" and \
+                        not any(x.get("scores") for x in quiz_stats if x.get("level") == _prev_level):
                     previous_quiz_level = _prev_level
                     break
 
             # Not current leve-quiz's data because some levels may have no data for quizes,
             # but we still need to check for the threshold.
             if level - 1 in available_levels and level > 1 and \
-                (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
+                    (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
 
                 # Only if we have found a quiz in previous levels with quiz data, we check the threshold.
                 if previous_quiz_level < level:
@@ -1520,8 +1520,8 @@ def index(level, program_id):
                 for _next_level in range(level, hedy.HEDY_MAX_LEVEL):
                     # find the next level whose quiz isn't answered.
                     if _next_level in available_levels and \
-                        customizations["sorted_adventures"][str(_next_level)][-1].get("name") == "quiz" and \
-                        not any(x.get("scores") for x in quiz_stats if x.get("level") == _next_level):
+                            customizations["sorted_adventures"][str(_next_level)][-1].get("name") == "quiz" and \
+                            not any(x.get("scores") for x in quiz_stats if x.get("level") == _next_level):
                         next_level_with_quiz = _next_level
                         break
 
@@ -1589,10 +1589,10 @@ def index(level, program_id):
         parson_exercises = len(PARSONS[g.lang].get_parsons_data_for_level(level))
 
     if not parsons_in_level or 'other_settings' in customizations and \
-        'hide_parsons' in customizations['other_settings']:
+            'hide_parsons' in customizations['other_settings']:
         parsons = False
     if not quiz_in_level or 'other_settings' in customizations and \
-        'hide_quiz' in customizations['other_settings']:
+            'hide_quiz' in customizations['other_settings']:
         quiz = False
 
     max_level = hedy.HEDY_MAX_LEVEL
@@ -1883,11 +1883,11 @@ def get_embedded_code_editor(level):
     return render_template("embedded-editor.html", fullWidth=fullWidth, run=run, language=language,
                            keyword_language=keyword_language, readOnly=readOnly,
                            level=level, javascript_page_options=dict(
-            page='view-program',
-            lang=language,
-            level=level,
-            code=program
-        ))
+                               page='view-program',
+                               lang=language,
+                               level=level,
+                               code=program
+                           ))
 
 
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
