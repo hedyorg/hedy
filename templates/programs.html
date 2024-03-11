@@ -58,10 +58,6 @@
         {% else %}
             <p class="text-xl" data-cy="no-programs">{{_('no_programs')}}</p>
         {% endif %}
-        <button id='go_back_button' class="back-btn" _="on click window.open('/for-teachers/class/{{class_id}}', '_self')" data-cy="go_back_button">
-            <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
-            {{_('go_back')}}
-        </button>
     {% endif %}
 
   {% if next_page_url %}
