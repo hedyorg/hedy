@@ -1,22 +1,17 @@
-import { modal } from './modal';
 import { initialize } from "./initialize";
-import { initializeHighlightedCodeBlocks } from "./app";
-import { postJson } from "./comm";
 
 let levelSelect: HTMLElement;
 let languageSelect: HTMLElement;
 let tagsSelect: HTMLElement;
+let searchInput: HTMLInputElement;
+
 function initializeVariables() {
     // Get and initialize needed variables
     levelSelect = document.getElementById("level-select") as HTMLElement;
     languageSelect = document.getElementById("language-select") as HTMLElement;
     tagsSelect = document.getElementById("tag-select") as HTMLElement;
+    searchInput = document.getElementById('search_adventure') as HTMLInputElement;
 }
-
-const searchInput = document.getElementById('search_adventure') as HTMLInputElement | null;
-let searchTimeout: NodeJS.Timeout;
-
-searchInput?.addEventListener('input', handleSearchInput);
 
 document.addEventListener("DOMContentLoaded", prepareDropdowns);
 
@@ -64,21 +59,6 @@ function prepareDropdowns() {
     });
 }
     
-    
-    
-    
-//     updateDOM()
-//     setTimeout(() => {
-//         if (!levelSelect)
-//             return
-//         // Since we render html as a string, the js is lost and thus any js needed
-//         // has to be applied again.
-//         const level = levelSelect.getAttribute("data-value") || "";
-//         const cloneBtn = document.getElementById(`clone_adventure_btn_${level}`);
-//         cloneBtn?.addEventListener('click', handleCloning);
-//     }, 500)
-// })
-
 
 function getSelectedOptions(_options: NodeListOf<Element>) {
     return Array.from(_options)
@@ -97,32 +77,13 @@ function updateLabelText(dropdown: Element) {
 }
 
 
-
-async function handleCloning(e: MouseEvent) {
-    const target = e.target as HTMLElement;
-    const adventureId = target.getAttribute("data-id");
-    try {
-        const data = await postJson(`public-adventures/clone/${adventureId}`);
-        modal.notifySuccess(data.message)
-        await updateDOM();
-    } catch (error: any) {
-        modal.notifyError(error.responseText)
-    }
-}
-
-function handleSearchInput() {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(updateDOM, 500);
-}
-
-
 function updateURL() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const level = levelSelect.getAttribute("data-value") || "";
     const lanugage = languageSelect.getAttribute("data-value") || "";
     const tags = tagsSelect.getAttribute("data-value") || "";
-    console.log(level, lanugage, tags, urlParams)
+
     urlParams.set('level', level)
     urlParams.set('lang', lanugage)
     urlParams.set('tag', tags)
@@ -133,64 +94,20 @@ function updateURL() {
 
 }
 
-async function updateDOM() {
-    return
-    if (!levelSelect || !languageSelect || !tagsSelect)
-        return
-    // Since the select has no default values, we don't want to pass undefined to the backend.
-    const level = levelSelect.getAttribute("data-value") || "";
-    const lanugage = languageSelect.getAttribute("data-value") || "";
-    const tags = tagsSelect.getAttribute("data-value") || "";
-    const response = await fetch(`public-adventures/filter?tag=${tags}`
-                    + `&lang=${lanugage}&level=${level}`
-                    + `&search=${searchInput?.value}`, {
-      method: 'GET',
-      keepalive: true,
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-        'Accept': 'application/json',
-      },
-    });
-    const { html, js } = await response.json()
-    updateURL()
 
-    const publicAdventuresBody = document.getElementById('public-adventures-body') as HTMLElement;
-    if (publicAdventuresBody) {
-        publicAdventuresBody.innerHTML = html
-
-        // Since we render html as a string, the js is lost and thus any js needed
-        // has to be applied again.
-        initialize({lang: js.lang, level: js.level, keyword_language: js.lang,
-            javascriptPageOptions: js})
-
-        // reset data values for each filter.
-        levelSelect.setAttribute("data-value", js.level);
-        languageSelect.setAttribute("data-value", js.lang);
-        tagsSelect.setAttribute("data-value", js.tags);
-
-        initializeHighlightedCodeBlocks(publicAdventuresBody)
-        
-        const cloneBtn = document.getElementById(`clone_adventure_btn_${level}`);
-        cloneBtn?.addEventListener('click', handleCloning);
-    }
-}
 document.addEventListener("updateTSCode", (e: any) => {
-    initializeVariables();
-    updateURL();
-    const js = e.detail;
-
-    const level = levelSelect.getAttribute("data-value") || "";
-    const lanugage = languageSelect.getAttribute("data-value") || "";
-    console.log('updatingnowwww', js, level, lanugage)
-    // const tags = tagsSelect.getAttribute("data-value") || "";
     setTimeout(() => {
-        
-    prepareDropdowns();
-    initialize({lang: js.lang, level: parseInt(js.level), keyword_language: js.lang,
-        javascriptPageOptions: js
-        });
+        initializeVariables();
+        const js = e.detail;
+    
+        const level = levelSelect.getAttribute("data-value") || "";
+        const lanugage = languageSelect.getAttribute("data-value") || "";
+        console.log('updatingnowwww', js, level, lanugage)
+        // const tags = tagsSelect.getAttribute("data-value") || "";
+        updateURL();
+        prepareDropdowns();
+        initialize({lang: js.lang, level: parseInt(js.level), keyword_language: js.lang,
+            javascriptPageOptions: js
+            });
     }, 500);
-
-    // const publicAdventuresBody = document.getElementById('public-adventures-body') as HTMLElement;
-    // initializeHighlightedCodeBlocks(publicAdventuresBody)
 })
