@@ -59,15 +59,16 @@
                         name="message"
                         id="modal-feedback-input"
                         type="text"
+                        required
                         class="border border-green-400 rounded py-2 px-2 w-full h-32"
                         placeholder="Please provide your message"></textarea>
 
                         <div>
-                          <input type="radio" id="bug" name="category" value="bug" />
+                          <input type="radio" id="bug" required name="category" value="bug" />
                           <label for="bug">{{_('bug')}}</label>
-                          <input type="radio" id="feature" name="category" value="feature" />
+                          <input type="radio" id="feature" required name="category" value="feature" />
                           <label for="feature">{{_('feature')}}</label>
-                          <input type="radio" id="feedback" name="category" value="feedback" />
+                          <input type="radio" id="feedback" required name="category" value="feedback" />
                           <label for="feedback">{{_('feedback')}}</label>
                         </div>
                         
