@@ -23,7 +23,7 @@ jobs:
       run: |
         echo '[weblate]' >> .weblate
         echo 'url = https://hosted.weblate.org/api/' >> .weblate
-        echo 'translate = hedy' >> .weblate
+        echo 'translation = hedy' >> .weblate
         echo '[keys]' >> .weblate
         echo 'https://hosted.weblate.org/api/ = ${{ secrets.WEBLATE_API_KEY }}' >> .weblate
     - name: Weblate commands
