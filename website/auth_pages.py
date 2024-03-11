@@ -436,6 +436,7 @@ class AuthModule(WebsiteModule):
             "teacher_request": True if account.get("is_teacher") else None,
             "verification_pending": hashed_token,
             "last_login": timems(),
+            "pair_with_teacher": 1 if account.get("pair_with_teacher") else 0,
         }
 
         for field in ["country", "birth_year", "gender", "language", "heard_about", "prog_experience",
