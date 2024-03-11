@@ -3,6 +3,8 @@
 
 {% block regular_content %}
 
+    <div id="public-adventures">
+
     <div id="filters"
         class="flex flex-col sm:flex-row items-center gap-2
         justify-around bg-blue-400 shadow-md rounded-lg p-4 mb-4"
@@ -37,6 +39,8 @@
                         end">
                     {% for level in customizations["available_levels"] %}
                         <div class="option {% if selectedLevel|string == level|string %}selected{% endif %}"
+                            hx-post="/public-adventures/filter"
+                            hx-target="#public-adventures"
                             data-value="{{level}}"
                         >{{ level }}</div>
                     {% endfor %}
@@ -104,6 +108,7 @@
       <div id="public-adventures-body">
         {% include "public-adventures-body.html" %}
       </div>
+    </div>
 
 
 {% endblock %}
