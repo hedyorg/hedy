@@ -20,9 +20,7 @@ function prepareDropdowns() {
 
     options.forEach(function (option) {
         option.addEventListener('click', function () {
-            console.log("clicked now", option)
             const dropdown = option.closest(".dropdown") as Element;
-            console.log(dropdown)
             if (!dropdown) {
                 return;
             }
@@ -51,7 +49,6 @@ function prepareDropdowns() {
                 nextValue =  option.getAttribute("data-value") || "";
             }
             dropdown.setAttribute("data-value", nextValue)
-            console.log('set it now', nextValue)
             option.classList.toggle('selected');
 
             updateLabelText(dropdown);
@@ -72,7 +69,6 @@ function updateLabelText(dropdown: Element) {
     const relativeOptions = dropdown.querySelectorAll(".option") as NodeListOf<Element>;
     const label = toggleButton.querySelector(".label") as Element;
     const selectedOptions = getSelectedOptions(relativeOptions);
-    console.log(selectedOptions)
     label.textContent = selectedOptions.length === 0 ? label.getAttribute("data-value") : selectedOptions.join(', ');
 }
 
@@ -100,10 +96,6 @@ document.addEventListener("updateTSCode", (e: any) => {
         initializeVariables();
         const js = e.detail;
     
-        const level = levelSelect.getAttribute("data-value") || "";
-        const lanugage = languageSelect.getAttribute("data-value") || "";
-        console.log('updatingnowwww', js, level, lanugage)
-        // const tags = tagsSelect.getAttribute("data-value") || "";
         updateURL();
         prepareDropdowns();
         initialize({lang: js.lang, level: parseInt(js.level), keyword_language: js.lang,
