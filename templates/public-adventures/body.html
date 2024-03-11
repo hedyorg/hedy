@@ -7,14 +7,16 @@
         <div id="search" class="w-full sm:basis-1/2">
             <input id="search_adventure"
                 type="search"
+                name="search"
                 value="{{currentSearch}}"
+                {% if currentSearch %}autofocus{% endif %}
+                hx-trigger="input changed delay:500ms, search" 
+                hx-post="/public-adventures/filter?level={{level}}&lang={{selectedLang}}&tag={{selectedTag}}&search={{currentSearch}}"
+                hx-target="#public-adventures"
                 placeholder="{{_('search')}}"
                 class="border text-black border-gray-500 rounded h-8 px-2 w-full"
                 >
         </div>
-        {{selectedTag}}
-        {{selectedLevel}}
-        {{selectedLang}}
         <div class="flex w-full sm:basis-1/2 gap-2">
             <div id="levels" class="flex-1">
                 <div class="dropdown relative" data-type="single" id="level-select" data-value="{{selectedLevel}}">
@@ -101,7 +103,11 @@
                       {% for tag in available_tags %}
                           {% set selected = tag in selectedTag %}
                           <div class="option {% if selected %}selected{% endif %}"
-                            hx-post="/public-adventures/filter?tag={{tag}}&level={{selectedLevel}}&lang={{selectedLang}}&search={{currentSearch}}"
+                            {% if selected %}
+                              hx-post="/public-adventures/filter?tag={{tag}}&reset={{selectedTag}}&level={{selectedLevel}}&lang={{selectedLang}}&search={{currentSearch}}"
+                            {% else %}
+                              hx-post="/public-adventures/filter?tag={{tag + ',' +  selectedTag}}&level={{selectedLevel}}&lang={{selectedLang}}&search={{currentSearch}}"
+                            {% endif %}
                             hx-target="#public-adventures"
                             data-value="{{tag}}">{{tag}}</div>
                       {% endfor %}
