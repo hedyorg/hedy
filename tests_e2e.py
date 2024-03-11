@@ -1602,7 +1602,7 @@ class TestCustomAdventures(AuthHelper):
         body = {
             'id': '123',
             'name': 'panda',
-            'classes': [],
+            'classes': ['Class1'],
             'levels': ['5'],
             'content': 'This is just long enough!',
             'public': True,

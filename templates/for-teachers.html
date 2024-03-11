@@ -105,7 +105,7 @@
                   </td>
                   <td class="text-center p-2 hidden sm:block">{{adventure.date}}</td>
                   <td class="text-center p-2"><a class="no-underline cursor-pointer" href="/adventure/{{ adventure.name }}?creator={{ adventure.creator }}">👁</a></td>
-                  <td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.delete_adventure("{{adventure.id}}", {{_('delete_adventure_prompt')|default(None)|tojson}})'>🗑️</a></td>
+                  <td class="text-center p-2"><a class="no-underline cursor-pointer" data-cy="delete-adventure" onclick='hedyApp.delete_adventure("{{adventure.id}}", {{_('delete_adventure_prompt')|default(None)|tojson}})'>🗑️</a></td>
                 </tr>
               {% endfor %}
             </tbody>
