@@ -27,6 +27,7 @@ class FeedbackModule(WebsiteModule):
         feedback = {
             "id": uuid.uuid4().hex,
             "username": user.get("username"),
+            "email": user.get("email", ""),
             "message": body.get("message"),
             "category": body.get("category"),
             "page": body.get("page", ""),
