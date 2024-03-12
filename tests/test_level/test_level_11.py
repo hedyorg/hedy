@@ -344,22 +344,14 @@ class TestsLevel11(HedyTester):
         expected = textwrap.dedent("""\
         step = 1 if int(1) < int(10) else -1
         for i in range(int(1), int(10) + step, step):
-          pygame_end = False
-          while not pygame_end:
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-              pygame_end = True
-              pygame.quit()
-              break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode == 'p':
-                print(f'press')
-                break
-              # End of PyGame Event Handler    
-              else:
-                print(f'no!')
-                break
+          if_pressed_mapping = {"else": "if_pressed_default_else"}
+          if_pressed_mapping['p'] = 'if_pressed_p_'
+          def if_pressed_p_():
+              print(f'press')
+          if_pressed_mapping['else'] = 'if_pressed_else_'
+          def if_pressed_else_():
+              print(f'no!')
+          extensions.if_pressed(if_pressed_mapping)
           time.sleep(0.1)""")
 
         self.single_level_tester(

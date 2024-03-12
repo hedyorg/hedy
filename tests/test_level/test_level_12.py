@@ -2193,24 +2193,16 @@ class TestsLevel12(HedyTester):
 
         expected = HedyTester.dedent("""\
         lijstje = ['kip', 'haan', 'kuiken']
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'x':
-              for dier in lijstje:
-                print(f'''dier''')
-                time.sleep(0.1)
-              break
-            # End of PyGame Event Handler    
-            else:
-              print(f'''onbekend dier''')
-              break""")
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        def if_pressed_x_():
+            for dier in lijstje:
+              print(f'''dier''')
+              time.sleep(0.1)
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_else_():
+            print(f'''onbekend dier''')
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(
             code=code,
@@ -2240,25 +2232,17 @@ class TestsLevel12(HedyTester):
         else
             print 'Other button is pressed!'""")
 
-        expected = HedyTester.dedent(f"""\
-        x = 'PRINT'
-        create_button(x)
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'PRINT':
-              print(f'''The button got pressed!''')
-              break
-            # End of PyGame Event Handler    
-            else:
-              print(f'''Other button is pressed!''')
-              break""")
+        expected = HedyTester.dedent("""\
+         x = 'PRINT'
+         create_button(x)
+         if_pressed_mapping = {"else": "if_pressed_default_else"}
+         if_pressed_mapping['PRINT'] = 'if_pressed_PRINT_'
+         def if_pressed_PRINT_():
+             print(f'''The button got pressed!''')
+         if_pressed_mapping['else'] = 'if_pressed_else_'
+         def if_pressed_else_():
+             print(f'''Other button is pressed!''')
+         extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=16)
 
@@ -2285,27 +2269,19 @@ class TestsLevel12(HedyTester):
             else
                 print 'nah'""")
 
-        expected = HedyTester.dedent(f"""\
-        x = 'but'
-        create_button(x)
-        for i in range(int('3')):
-          pygame_end = False
-          while not pygame_end:
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-              pygame_end = True
-              pygame.quit()
-              break
-            if event.type == pygame.USEREVENT:
-              if event.key == 'but':
-                print(f'''wow''')
-                break
-              # End of PyGame Event Handler    
-              else:
-                print(f'''nah''')
-                break
-          time.sleep(0.1)""")
+        expected = HedyTester.dedent("""\
+         x = 'but'
+         create_button(x)
+         for i in range(int('3')):
+           if_pressed_mapping = {"else": "if_pressed_default_else"}
+           if_pressed_mapping['but'] = 'if_pressed_but_'
+           def if_pressed_but_():
+               print(f'''wow''')
+           if_pressed_mapping['else'] = 'if_pressed_else_'
+           def if_pressed_else_():
+               print(f'''nah''')
+           extensions.if_pressed(if_pressed_mapping)
+           time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=16)
 
