@@ -7,6 +7,7 @@ import { startTeacherTutorial } from './tutorials/tutorial';
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
 import { CustomWindow } from './custom-window';
+import { addCurlyBracesToCode } from './adventure';
 
 declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
@@ -213,36 +214,52 @@ export function remove_student(class_id: string, student_id: string, prompt: str
 }
 
 function update_db_adventure(adventure_id: string) {
-   // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
+  // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
 
-   const adventure_name = $('#custom_adventure_name').val();
-   const levels = $('#custom_adventure_levels').val();
-   const content = DOMPurify.sanitize(window.ckEditor.getData());
-   const agree_public = $('#agree_public').prop('checked');
-   const language = $('#language').val();
+  const adventure_name = $('#custom_adventure_name').val();
+  const levels: string[] = $('#custom_adventure_levels').val() as string[];
+  const content = DOMPurify.sanitize(window.ckEditor.getData());
+  
+  const parser = new DOMParser();
+  const html = parser.parseFromString(content, 'text/html');
+  const minLevel = Math.min(...levels.map((el) => Number(el)));
+  let snippets: string[] = [] ;
 
-    $.ajax({
-      type: 'POST',
-      url: '/for-teachers/customize-adventure',
-      data: JSON.stringify({
-        id: adventure_id,
-        name: adventure_name,
-        content: content,
-        public: agree_public,
-        language,
-        levels,
-      }),
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-      modal.notifySuccess(response.success);
-    }).fail(function(err) {
-      modal.notifyError(err.responseText);
-    });
+  for (const tag of html.getElementsByTagName('code')) {
+    if (tag.className === "language-python") {
+      snippets.push(tag.outerText);
+    }
+  }
+
+  for (const snippet of snippets) {
+    console.log(addCurlyBracesToCode(snippet, minLevel));
+  }
+
+  const agree_public = $('#agree_public').prop('checked');
+  const language = $('#language').val();
+
+  $.ajax({
+    type: 'POST',
+    url: '/for-teachers/customize-adventure',
+    data: JSON.stringify({
+      id: adventure_id,
+      name: adventure_name,
+      content: content,
+      public: agree_public,
+      language,
+      levels,
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function (response) {
+    modal.notifySuccess(response.success);
+  }).fail(function (err) {
+    modal.notifyError(err.responseText);
+  });
 }
 
-export function update_adventure(adventure_id: string, first_edit: boolean, prompt: string) {
-   if (!first_edit) {
+export function update_adventure(adventure_id: string, first_edit: boolean, prompt: string) {  
+  if (!first_edit) {
     modal.confirm (prompt, function () {
         update_db_adventure(adventure_id);
     });
