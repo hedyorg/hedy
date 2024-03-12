@@ -32,6 +32,7 @@ class Modal {
     $('#modal-copy').hide();
     $('#modal-repair').hide();
     $('#modal-preview').hide();
+    $('#modal-feedback').hide();
   }
 
   public hide_alert() {
