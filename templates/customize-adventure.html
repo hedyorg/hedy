@@ -1,6 +1,12 @@
 {% extends "auth.html" %}
 
 {% block regular_content %}
+<button id='go_back_button' class="back-btn"
+onclick="window.open('/for-teachers', '_self');">
+    <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
+    <span>{{_('go_back')}}</span>
+</button>
+<br><br>
 <div class="flex flex-col gap-2">
     <h2>{{_('customize_adventure')}}</h2>
     <div class="border-gray-400 border rounded-lg p-4">

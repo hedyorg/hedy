@@ -10,6 +10,10 @@
     </script>
     {% endif %}
     <div class="flex flex-col gap-4">
+        <button class="back-btn" id="go_back_button" onclick="window.location.href = '/for-teachers'">
+          <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
+          {{_('go_back')}}
+        </button>
       <div id="survey" class="hidden"></div>
       {% if second_teacher %}<h1>{{_('role')}}: {{role}}</h1>{% endif %}
         <div class="flex flex-row items-center gap-2">
@@ -121,9 +125,6 @@
                 _="on htmx:afterRequest if detail.xhr.response
                 window.open('/for-teachers/customize-adventure/' + detail.xhr.response + '/{{class_info.id}}', '_self')"
                 data-cy="edit-link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
-        </div>
-        <div class="flex ltr:ml-auto rtl:mr-auto">
-            <button class="blue-btn" id="go_back_to_teacher_page_button" onclick="window.location.href = '/for-teachers'">{{_('back_to_teachers_page')}}</button>
         </div>
       </div>
       <div id="add_students_options" class="flex flex-col items-center border-t border-gray-500" style="display: none;">
