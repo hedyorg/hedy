@@ -29,6 +29,7 @@ jobs:
     - name: Weblate commands
       run: |
         set -x
+        wlc repo
         wlc pull
         wlc commit
         wlc push
