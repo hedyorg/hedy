@@ -767,21 +767,13 @@ class TestsLevel16(HedyTester):
 
         expected = HedyTester.dedent("""\
         lijstje = ['kip', 'haan', 'kuiken']
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'x':
-              for dier in lijstje:
-                print(f'''dier''')
-                time.sleep(0.1)
-              break
-            # End of PyGame Event Handler""")
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        def if_pressed_x_():
+            for dier in lijstje:
+              print(f'''dier''')
+              time.sleep(0.1)
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.single_level_tester(code=code, expected=expected)
 
