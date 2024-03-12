@@ -757,7 +757,7 @@ def download_machine_file(filename, extension="zip"):
     return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
-MICROBIT_FEATURE = True
+MICROBIT_FEATURE = False
 
 
 @app.route('/generate_microbit_files', methods=['POST'])
@@ -1626,6 +1626,7 @@ def index(level, program_id):
         blur_button_available=False,
         initial_adventure=adventures_map[initial_tab],
         current_user_is_in_class=len(current_user().get('classes') or []) > 0,
+        microbit_feature=MICROBIT_FEATURE,
         # See initialize.ts
         javascript_page_options=dict(
             page='code',
