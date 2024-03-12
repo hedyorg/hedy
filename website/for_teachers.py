@@ -1013,7 +1013,7 @@ class ForTeachersModule(WebsiteModule):
                             "teacher": Class.get("teacher"), "students": Class.get("students", []),
                             "date": Class.get("date"), "classes": Class.get("classes")}
                     class_data.append(temp)
-                    Class["from_teacher"] = True
+                    # Class["from_teacher"] = True
                     break
 
         return render_template(
@@ -1061,15 +1061,15 @@ class ForTeachersModule(WebsiteModule):
         current_adventure = self.db.get_adventure(body["id"])
         if not current_adventure:
             return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
+        # TODO: instead of not allowing the teacher, let them update the adventure in their relevant classes only.
+        elif current_adventure["creator"] != user["username"]:
+            return gettext("unauthorized"), 403
         current_classes = {}
         if body.get("classes"):
             current_classes = current_adventure["classes"]
         current_levels = []
         if current_adventure["level"] != 1:
             current_levels = current_adventure["levels"]
-        # TODO: instead of not allowing the teacher, let them update the adventure in their relevant classes only.
-        elif current_adventure["creator"] != user["username"]:
-            return gettext("unauthorized"), 403
 
         adventures = self.db.get_teacher_adventures(user["username"])
         for adventure in adventures:
