@@ -187,9 +187,10 @@ class Modal {
 
     public feedback(message: string) {
       this.hide();
-      $('#modal-prompt-text').text(message);
+      $('#modal-feedback-message').text(message);
       this.show();
       $('#modal-feedback').show();
+      $('#modal-feedback-input').trigger("focus");
     }
 }
 

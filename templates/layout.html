@@ -38,7 +38,7 @@
        </div>
 
         <div id="modal-feedback" class="hidden">                                                                                                                                                            
-            <div id="modal-feedback-text" class="text-white mb-4 text-xl"></div>                                                                                                                            
+            <div id="modal-feedback-message" class="text-white mb-4 text-xl"></div>                                                                                                                            
             <div class="mx-auto flex flex-col gap-4">                                                                                                                                                       
                 <div class="mt-4 flex flex-row justify-between gap-x-2">                                                                                                                                    
                     <form                                                                                                                                                                                   
@@ -60,8 +60,7 @@
                         id="modal-feedback-input"
                         type="text"
                         required
-                        class="border border-green-400 rounded py-2 px-2 w-full h-32"
-                        placeholder="Please provide your message"></textarea>
+                        class="border border-green-400 rounded py-2 px-2 w-full h-32"></textarea>
 
                         <div>
                           <input type="radio" id="bug" required name="category" value="bug" />
@@ -157,9 +156,8 @@
 
     {% if is_teacher or is_second_teacher %}
         <div id="feedback_button"
-            _="on click call hedyApp.modal.feedback({{_('feedback_modal_message')}})"
-              class="fixed bottom-6 right-6 rounded-full cursor-pointer w-12 h-12 bg-white shadow-md hover:shadow-xl hover:scale-110 transition-all duration-200 ease-in-out"
-              title={{_('Teacher_feedback_tooltip')}}>
+            _="on click call hedyApp.modal.feedback('{{_('feedback_modal_message')}}')"
+              class="fixed bottom-6 right-6 rounded-full cursor-pointer w-12 h-12 bg-white shadow-md hover:shadow-xl hover:scale-110 transition-all duration-200 ease-in-out">
             <svg viewBox="0 0 112.77 122.88" xmlns="http://www.w3.org/2000/svg"><path d="m64.44 61.11c1.79 0 3.12-1.45 3.12-3.12 0-1.78-1.45-3.12-3.12-3.12h-39.69c-1.78 0-3.12 1.45-3.12 3.12 0 1.78 1.45 3.12 3.12 3.12zm13.01-41.38 18.1-19.14c.69-.58 1.39-.81 2.2-.35l14.56 14.1c.58.69.69 1.5-.12 2.31l-18.44 19.49zm10.29 22.54-18.66 3.86 2.36-20.28zm-68.6-29.18h41.73l-3.05 6.45h-38.68c-3.48 0-6.65 1.43-8.96 3.73s-3.73 5.46-3.73 8.96v45.74c0 3.48 1.43 6.66 3.73 8.96s5.47 3.73 8.96 3.73h3.72v.01l.21.01c1.77.12 3.12 1.66 2.99 3.43l-1.26 18.1 23.98-14.51c.58-.58 1.38-.93 2.27-.93h37.32c3.48 0 6.65-1.42 8.96-3.73 2.3-2.3 3.73-5.48 3.73-8.96v-33.63h6.68v42.69c.35 9.63-3.58 15.04-19.43 15.7l-32.25-.74-32.73 13.87-.16.13c-1.35 1.16-3.38 1-4.54-.36-.57-.67-.82-1.49-.77-2.3l1.55-22.34h-.26c-5.26 0-10.05-2.15-13.52-5.62-3.48-3.45-5.63-8.24-5.63-13.5v-45.75c0-5.26 2.15-10.05 5.62-13.52 3.46-3.47 8.25-5.62 13.52-5.62zm60.55 65.33c1.79 0 3.12-1.45 3.12-3.12 0-1.79-1.45-3.12-3.12-3.12h-54.94c-1.78 0-3.12 1.45-3.12 3.12 0 1.78 1.45 3.12 3.12 3.12zm-29.3-34.61c1.78 0 3.12-1.45 3.12-3.12s-1.45-3.12-3.12-3.12h-25.64c-1.78 0-3.12 1.45-3.12 3.12 0 1.78 1.45 3.12 3.12 3.12z"/></svg>
         </div>
     {% endif %}
