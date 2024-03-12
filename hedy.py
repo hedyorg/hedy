@@ -33,7 +33,6 @@ from hedy_sourcemap import SourceMap, source_map_transformer
 
 from prefixes.music import notes_mapping
 
-
 HEDY_MAX_LEVEL = 18
 HEDY_MAX_LEVEL_SKIPPING_FAULTY = 5
 MAX_LINES = 100
@@ -168,6 +167,7 @@ for lang, keywords in KEYWORDS.items():
         indent_keywords[lang].append(keyword)  # always also check for En
         indent_keywords[lang].append(keywords.get(keyword))
 
+
 # These are the preprocessor rules that we use to specify changes in the rules that
 # are expected to work across several rules
 # Example
@@ -299,22 +299,45 @@ def promote_types(types, rules):
 commands_per_level = {
     1: ['print', 'ask', 'echo', 'turn', 'forward', 'color', 'play'],
     2: ['print', 'ask', 'is', 'turn', 'forward', 'color', 'sleep', 'play'],
-    3: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'play'],
-    4: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'clear', 'play'],
-    5: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'clear', 'play'],
-    6: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'clear', 'play'],
-    7: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
-    8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
-    9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
-    10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'for', 'clear', 'play'],
-    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear', 'play'],
-    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear', 'define', 'call', 'play'],
-    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call', 'play'],
-    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define', 'call', 'play'],
-    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call', 'play'],
-    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear', 'define', 'call', 'play'],
-    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'clear', 'define', 'call', 'play'],
-    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not_in', 'else', 'for', 'ifpressed', 'assign_button', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input', 'clear', 'define', 'call', 'play'],
+    3: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from',
+        'play'],
+    4: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from',
+        'clear', 'play'],
+    5: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
+        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'clear', 'play'],
+    6: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
+        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'clear', 'play'],
+    7: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
+        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
+    8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
+        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
+    9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
+        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
+    10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
+         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'for', 'clear', 'play'],
+    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
+         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear', 'play'],
+    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
+         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear', 'define', 'call',
+         'play'],
+    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
+         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define',
+         'call', 'play'],
+    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
+         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define',
+         'call', 'play'],
+    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
+         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear',
+         'define', 'call', 'play'],
+    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
+         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear',
+         'define', 'call', 'play'],
+    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
+         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif',
+         'clear', 'define', 'call', 'play'],
+    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if',
+         'not_in', 'else', 'for', 'ifpressed', 'assign_button', 'range', 'repeat', 'and', 'or', 'while', 'elif',
+         'input', 'clear', 'define', 'call', 'play'],
 }
 
 command_turn_literals = ['right', 'left']
@@ -354,9 +377,9 @@ commands_and_types_per_level = {
     Command.forward: {1: [HedyType.integer, HedyType.input],
                       12: [HedyType.integer, HedyType.input, HedyType.float]
                       },
-    Command.sleep:    {1: [HedyType.integer, HedyType.input],
-                       12: [HedyType.integer, HedyType.input, HedyType.float]
-                       },
+    Command.sleep: {1: [HedyType.integer, HedyType.input],
+                    12: [HedyType.integer, HedyType.input, HedyType.float]
+                    },
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
     Command.not_in_list: {1: [HedyType.list]},
@@ -417,9 +440,9 @@ def get_list_keywords(commands, to_lang):
             to_yaml_dict = yaml.safe_load(stream)
         for command in commands:
             if command == 'ifpressed':  # TODO: this is a bit of a hack
-                command = 'pressed'    # since in the yamls they are called pressed
+                command = 'pressed'  # since in the yamls they are called pressed
             if command == 'assign_button':  # but in the grammar 'ifpressed'
-                command = 'button'         # should be changed in the yaml eventually!
+                command = 'button'  # should be changed in the yaml eventually!
             try:
                 translation_commands.append(to_yaml_dict[command])
             except Exception:
@@ -909,7 +932,8 @@ class TypeValidator(Transformer):
                 result = {k: v for k, v in result.items()}
                 command = ' '.join([v.strip() for v in result.values() if v is not None])
             raise exceptions.InvalidArgumentTypeException(command=command, invalid_type=arg_type,
-                                                          invalid_argument=variable, allowed_types=allowed_types, line_number=meta.line)
+                                                          invalid_argument=variable, allowed_types=allowed_types,
+                                                          line_number=meta.line)
         return arg_type
 
     def get_type(self, tree):
@@ -1111,7 +1135,8 @@ class AllCommands(Transformer):
         # for the achievements we want to be able to also detect which operators were used by a kid
         operators = ['addition', 'subtraction', 'multiplication', 'division']
 
-        if production_rule_name in commands_per_level[self.level] or production_rule_name in operators or production_rule_name == 'ifpressed_else':
+        if production_rule_name in commands_per_level[
+                self.level] or production_rule_name in operators or production_rule_name == 'ifpressed_else':
             # ifpressed_else is not in the yamls, upsetting lookup code to get an alternative later
             # lookup should be fixed instead, making a special case for now
             if production_rule_name == 'else':  # use of else also has an if
@@ -1279,6 +1304,9 @@ class IsValid(Filter):
     def error_for_missing_command(self, meta, args):
         raise exceptions.IncompleteCommandException(incomplete_command='for', level=self.level, line_number=meta.line)
 
+    def error_assign_list_missing_brackets(self, meta, args):
+        raise exceptions.MissingBracketsException(level=self.level, line_number=meta.line)
+
     def error_nested_define(self, meta, args):
         raise exceptions.NestedFunctionException()
 
@@ -1360,16 +1388,18 @@ def hedy_transpiler(level):
         TRANSPILER_LOOKUP[level] = c
         c.level = level
         return c
+
     return decorator
 
 
 @v_args(meta=True)
 class ConvertToPython(Transformer):
-    def __init__(self, lookup, language="en", numerals_language="Latin", is_debug=False):
+    def __init__(self, lookup, language="en", numerals_language="Latin", is_debug=False, microbit=False):
         self.lookup = lookup
         self.language = language
         self.numerals_language = numerals_language
         self.is_debug = is_debug
+        self.microbit = microbit
 
     def add_debug_breakpoint(self):
         if self.is_debug:
@@ -1550,11 +1580,12 @@ class ConvertToPython(Transformer):
 @source_map_transformer(source_map)
 class ConvertToPython_1(ConvertToPython):
 
-    def __init__(self, lookup, language, numerals_language, is_debug):
+    def __init__(self, lookup, language, numerals_language, is_debug, microbit=False):
         self.numerals_language = numerals_language
         self.language = language
         self.lookup = lookup
         self.is_debug = is_debug
+        self.microbit = microbit
         __class__.level = 1
 
     def program(self, meta, args):
@@ -1579,7 +1610,13 @@ class ConvertToPython_1(ConvertToPython):
     def print(self, meta, args):
         # escape needed characters
         argument = process_characters_needing_escape(args[0])
-        return f"print('" + argument + "')" + self.add_debug_breakpoint()
+        if not self.microbit:
+            return f"print('" + argument + "')" + self.add_debug_breakpoint()
+        else:
+            return textwrap.dedent(f"""\
+            from microbit import *
+            while True:
+                display.scroll('{argument}')""")
 
     def ask(self, meta, args):
         argument = process_characters_needing_escape(args[0])
@@ -1607,7 +1644,8 @@ class ConvertToPython_1(ConvertToPython):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return add_sleep_to_command(f't.forward(50){self.add_debug_breakpoint()}', False, self.is_debug, location="after")
+            return add_sleep_to_command(f't.forward(50){self.add_debug_breakpoint()}', False, self.is_debug,
+                                        location="after")
         return self.make_forward(int(args[0]))
 
     def color(self, meta, args):
@@ -1620,7 +1658,8 @@ class ConvertToPython_1(ConvertToPython):
         else:
             # the TypeValidator should protect against reaching this line:
             raise exceptions.InvalidArgumentTypeException(command=Command.color, invalid_type='', invalid_argument=arg,
-                                                          allowed_types=get_allowed_types(Command.color, self.level), line_number=meta.line)
+                                                          allowed_types=get_allowed_types(Command.color, self.level),
+                                                          line_number=meta.line)
 
     def turn(self, meta, args):
         if len(args) == 0:
@@ -1634,7 +1673,8 @@ class ConvertToPython_1(ConvertToPython):
         else:
             # the TypeValidator should protect against reaching this line:
             raise exceptions.InvalidArgumentTypeException(command=Command.turn, invalid_type='', invalid_argument=arg,
-                                                          allowed_types=get_allowed_types(Command.turn, self.level), line_number=meta.line)
+                                                          allowed_types=get_allowed_types(Command.turn, self.level),
+                                                          line_number=meta.line)
 
     def make_turn(self, parameter):
         return self.make_turtle_command(parameter, Command.turn, 'right', False, 'int')
@@ -1654,9 +1694,10 @@ class ConvertToPython_1(ConvertToPython):
     def make_play_var(self, note, meta):
         exception_text = translate_value_error('play', note, 'note')
         self.check_var_usage([note], meta.line)
+        chosen_note = note.children[0] if isinstance(note, Tree) else note
 
         return textwrap.dedent(f"""\
-                chosen_note = str({note}).upper()
+                chosen_note = str({chosen_note}).upper()
                 if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
                     raise Exception({exception_text})
                 play(notes_mapping.get(chosen_note, chosen_note))
@@ -1786,11 +1827,18 @@ class ConvertToPython_2(ConvertToPython_1):
             else:
                 # this regex splits words from non-letter characters, such that name! becomes [name, !]
                 res = regex.findall(
-                    r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+", a)
+                    r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+",
+                    a)
                 args_new.append(''.join([self.process_variable_for_fstring(x, meta.line) for x in res]))
         exception = self.make_catch_exception(args)
         argument_string = ' '.join(args_new)
-        return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
+        if not self.microbit:
+            return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
+        else:
+            return textwrap.dedent(f"""\
+                from microbit import *
+                while True:
+                    display.scroll('{argument_string}')""")
 
     def ask(self, meta, args):
         var = args[0]
@@ -1799,7 +1847,8 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return add_sleep_to_command(f't.forward(50){self.add_debug_breakpoint()}', False, self.is_debug, location="after")
+            return add_sleep_to_command(f't.forward(50){self.add_debug_breakpoint()}', False, self.is_debug,
+                                        location="after")
 
         if ConvertToPython.is_int(args[0]):
             parameter = int(args[0])
@@ -1820,9 +1869,10 @@ class ConvertToPython_2(ConvertToPython_1):
         # if not an int, then it is a variable
 
         note = args[0]
-        uppercase_note = note.upper()
-        if uppercase_note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
-            return self.make_play(uppercase_note, meta)
+        if isinstance(note, str):
+            uppercase_note = note.upper()
+            if uppercase_note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
+                return self.make_play(uppercase_note, meta)
 
         # no note? it must be a variable!
         self.add_variable_access_location(note, meta.line)
@@ -1897,7 +1947,7 @@ class ConvertToPython_3(ConvertToPython_2):
             list_name = arg.split('[')[0]
             self.add_variable_access_location(list_name, meta.line)
             before_index, after_index = arg.split(']', 1)
-            return before_index + '-1' + ']' + after_index   # account for 1-based indexing
+            return before_index + '-1' + ']' + after_index  # account for 1-based indexing
         else:
             return self.process_variable(arg, meta.line)
 
@@ -1961,7 +2011,13 @@ class ConvertToPython_4(ConvertToPython_3):
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
         exceptions = self.make_catch_exception(args)
-        return exceptions + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
+        if not self.microbit:
+            return exceptions + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
+        else:
+            return textwrap.dedent(f"""\
+                from microbit import *
+                while True:
+                    display.scroll('{argument_string}')""")
 
     def ask(self, meta, args):
         var = args[0]
@@ -1993,8 +2049,9 @@ except NameError:
 @hedy_transpiler(level=5)
 @source_map_transformer(source_map)
 class ConvertToPython_5(ConvertToPython_4):
-    def __init__(self, lookup, language, numerals_language, is_debug):
-        super().__init__(lookup, language, numerals_language, is_debug)
+
+    def __init__(self, lookup, language, numerals_language, is_debug, microbit):
+        super().__init__(lookup, language, numerals_language, is_debug, microbit)
 
     def ifs(self, meta, args):  # might be worth asking if we want a debug breakpoint here
         return f"""if {args[0]}:{self.add_debug_breakpoint()}
@@ -2203,7 +2260,8 @@ class ConvertToPython_6(ConvertToPython_5):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return add_sleep_to_command('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug, location="after")
+            return add_sleep_to_command('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug,
+                                        location="after")
         arg = args[0]
         if self.is_variable(arg, meta.line):
             return self.make_forward(escape_var(arg))
@@ -2333,7 +2391,8 @@ if event.unicode == '{args[0]}':
         else:
             # this is list_access
             return escape_var(args[0]) + "[" + str(escape_var(args[1])) + "]" if type(args[1]
-                                                                                      ) is not Tree else "random.choice(" + str(escape_var(args[0])) + ")"
+                                                                                      ) is not Tree else "random.choice(" + str(
+                escape_var(args[0])) + ")"
 
     def var_access_print(self, meta, args):
         return self.var_access(meta, args)
@@ -2353,7 +2412,7 @@ class ConvertToPython_10(ConvertToPython_8_9):
         body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
 
         body = add_sleep_to_command(body, True, self.is_debug, location="after")
-        return f"for {times} in {args[1]}:{ self.add_debug_breakpoint() }\n{body}"
+        return f"for {times} in {args[1]}:{self.add_debug_breakpoint()}\n{body}"
 
 
 @v_args(meta=True)
@@ -2465,7 +2524,13 @@ class ConvertToPython_12(ConvertToPython_11):
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
         exception = self.make_catch_exception(args)
-        return exception + f"print(f'''{argument_string}''')" + self.add_debug_breakpoint()
+        if not self.microbit:
+            return exception + f"print(f'''{argument_string}''')" + self.add_debug_breakpoint()
+        else:
+            return textwrap.dedent(f"""\
+                from microbit import *
+                while True:
+                    display.scroll('{argument_string}')""")
 
     def ask(self, meta, args):
         var = args[0]
@@ -2532,7 +2597,8 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def forward(self, meta, args):
         if len(args) == 0:
-            return add_sleep_to_command('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug, location="after")
+            return add_sleep_to_command('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug,
+                                        location="after")
         arg = args[0]
         if self.is_variable(arg, meta.line):
             return self.make_forward(escape_var(arg))
@@ -2726,7 +2792,8 @@ def merge_grammars(grammar_text_1, grammar_text_2):
     # rules that are new in the second file are added (remaining_rules_grammar_2)
     merged_grammar = []
 
-    deletables = []   # this list collects rules we no longer need,
+    deletables = []
+    # this list collects rules we no longer need,
     # they will be removed when we encounter them
 
     rules_grammar_1 = grammar_text_1.split('\n')
@@ -2760,8 +2827,7 @@ def merge_grammars(grammar_text_1, grammar_text_2):
                 if definition_1.strip() == definition_2.strip():
                     warn_message = f"The rule {name_1} is duplicated: {definition_1} and {definition_2}. Please check!"
                     warnings.warn(warn_message)
-                # Used to compute the rules that use the merge operators in the grammar
-                # namely +=, -= and >
+                # Used to compute the rules that use the merge operators in the grammar, namely +=, -= and >>
                 new_rule, new_deletables = merge_rules_operator(definition_1, definition_2, name_1, line_2_processed)
                 if new_deletables:
                     deletables += new_deletables
@@ -2786,51 +2852,53 @@ def merge_grammars(grammar_text_1, grammar_text_2):
     return '\n'.join(rules_to_keep)
 
 
+ADD_GRAMMAR_MERGE_OP = '+='
+REMOVE_GRAMMAR_MERGE_OP = '-='
+LAST_GRAMMAR_MERGE_OP = '>>'
+GRAMMAR_MERGE_OPERATORS = [ADD_GRAMMAR_MERGE_OP, REMOVE_GRAMMAR_MERGE_OP, LAST_GRAMMAR_MERGE_OP]
+
+
 def merge_rules_operator(prev_definition, new_definition, name, complete_line):
-    # Check if the rule is adding or substracting new rules
-    has_add_op = new_definition.startswith('+=')
-    has_remove_op = has_add_op and '-=' in new_definition
-    has_last_op = has_add_op and '>' in new_definition
-    deletables = None
-    if has_remove_op:
-        # Get the rules we need to substract
-        part_list = new_definition.split('-=')
-        add_list, commands_after_minus = (part_list[0], part_list[1]) if has_remove_op else (part_list[0], '')
-        add_list = add_list[3:]
+    op_to_arg = get_operator_to_argument(new_definition)
 
-        # Get the rules that need to be last
-        split_on_greater_than = commands_after_minus.split('>')
-        commands_to_be_removed, last_list = (
-            split_on_greater_than[0], split_on_greater_than[1]) if has_last_op else (split_on_greater_than[0], '')
-        commands_after_minus = commands_to_be_removed + '|' + last_list
-        result_cmd_list = get_remaining_rules(prev_definition, commands_after_minus)
-        deletables = commands_to_be_removed.strip().split('|')
-    elif has_add_op:
-        # Get the rules that need to be last
-        part_list = new_definition.split('>')
-        add_list, commands_after_minus = (part_list[0], part_list[1]) if has_last_op else (part_list[0], '')
-        add_list = add_list[3:]
-        last_list = commands_after_minus
-        result_cmd_list = get_remaining_rules(prev_definition, commands_after_minus)
-    else:
-        result_cmd_list = prev_definition
+    add_arg = op_to_arg.get(ADD_GRAMMAR_MERGE_OP, '')
+    remove_arg = op_to_arg.get(REMOVE_GRAMMAR_MERGE_OP, '')
+    last_arg = op_to_arg.get(LAST_GRAMMAR_MERGE_OP, '')
+    remaining_commands = get_remaining_rules(prev_definition, remove_arg, last_arg)
+    ordered_commands = split_rule(remaining_commands, add_arg, last_arg)
 
-    if has_last_op:
-        new_rule = f"{name}: {result_cmd_list} | {add_list} | {last_list}"
-    elif has_add_op:
-        new_rule = f"{name}: {result_cmd_list} | {add_list}"
-    else:
-        new_rule = complete_line
-
-    return new_rule, deletables
+    new_rule = f"{name}: {' | '.join(ordered_commands)}" if bool(op_to_arg) else complete_line
+    deletable = split_rule(remove_arg)
+    return new_rule, deletable
 
 
-def get_remaining_rules(orig_def, sub_def):
-    original_commands = [command.strip() for command in orig_def.split('|')]
-    commands_after_minus = [command.strip() for command in sub_def.split('|')]
+def get_operator_to_argument(definition):
+    # Creates a map of all used operators and their respective arguments e.g. {'+=': 'print | play', '>>': 'echo'}
+    operator_to_index = [(op, definition.find(op)) for op in GRAMMAR_MERGE_OPERATORS if op in definition]
+    result = {}
+    for i, (op, index) in enumerate(operator_to_index):
+        start_index = index + len(op)
+        if i + 1 < len(operator_to_index):
+            _, next_index = operator_to_index[i + 1]
+            result[op] = definition[start_index:next_index].strip()
+        else:
+            result[op] = definition[start_index:].strip()
+    return result
+
+
+def get_remaining_rules(orig_def, *sub_def):
+    original_commands = split_rule(orig_def)
+    commands_after_minus = split_rule(*sub_def)
+    misses = [c for c in commands_after_minus if c not in original_commands]
+    if misses:
+        raise Exception(f"Command(s) {'|'.join(misses)} do not exist in the previous definition")
     remaining_commands = [cmd for cmd in original_commands if cmd not in commands_after_minus]
     remaining_commands = ' | '.join(remaining_commands)  # turn the result list into a string
     return remaining_commands
+
+
+def split_rule(*rules):
+    return [c.strip() for rule in rules for c in rule.split('|') if c.strip() != '']
 
 
 # this is only a couple of MB in total, safe to cache
@@ -2960,6 +3028,7 @@ def get_full_grammar_for_level(level):
     with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
         grammar_text = file.read()
     return grammar_text
+
 
 # TODO FH, May 2022. I feel there are other places in the code where we also do this
 # opportunity to combine?
@@ -3091,11 +3160,12 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
 
 
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle',
-                         'has_pygame', 'has_clear', 'has_music', 'commands'])
+                                         'has_pygame', 'has_clear', 'has_music', 'commands'])
 
 
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en", unused_allowed=True):
-    def skipping_faulty(meta, args): return [True]
+    def skipping_faulty(meta, args):
+        return [True]
 
     defined_errors = [method for method in dir(IsValid) if method.startswith('error')]
     defined_errors_original = dict()
@@ -3140,7 +3210,7 @@ def transpile_inner_with_skipping_faulty(input_string, level, lang="en", unused_
     return transpile_result
 
 
-def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False, unused_allowed=False):
+def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False, unused_allowed=False, microbit=False):
     """
     Function that transpiles the Hedy code to Python
 
@@ -3155,7 +3225,7 @@ def transpile(input_string, level, lang="en", skip_faulty=True, is_debug=False, 
     try:
         source_map.set_skip_faulty(False)
         transpile_result = transpile_inner(input_string, level, lang, populate_source_map=True,
-                                           is_debug=is_debug, unused_allowed=unused_allowed)
+                                           is_debug=is_debug, unused_allowed=unused_allowed, microbit=microbit)
 
     except Exception as original_error:
         hedy_amount_lines = len(input_string.strip().split('\n'))
@@ -3253,7 +3323,7 @@ def preprocess_blocks(code, level, lang):
     next_line_needs_indentation = False
     for line in lines:
         if ' _ ' in line or line == '_':
-            raise hedy.exceptions.CodePlaceholdersPresentException(line_number=line_number+1)
+            raise hedy.exceptions.CodePlaceholdersPresentException(line_number=line_number + 1)
 
         leading_spaces = find_indent_length(line)
 
@@ -3350,7 +3420,8 @@ def preprocess_ifs(code, lang='en'):
         repeat_plus_translated = ['repeat', keywords_in_lang.get('repeat')]
         times_plus_translated = ['times', keywords_in_lang.get('times')]
 
-        if len(elements_in_line) > 2 and elements_in_line[0] in repeat_plus_translated and elements_in_line[2] in times_plus_translated:
+        if len(elements_in_line) > 2 and elements_in_line[0] in repeat_plus_translated and elements_in_line[
+                2] in times_plus_translated:
             line = ' '.join(elements_in_line[3:])
 
         if lang in ALL_KEYWORD_LANGUAGES:
@@ -3380,7 +3451,8 @@ def preprocess_ifs(code, lang='en'):
         if lang in ALL_KEYWORD_LANGUAGES:
             command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
             for c in command_plus_translated_command:
-                if line.count(' ' + c + ' ') >= 2:  # surround in spaces since we dont want to mathc something like 'dishwasher is sophie'
+                if line.count(
+                        ' ' + c + ' ') >= 2:  # surround in spaces since we dont want to mathc something like 'dishwasher is sophie'
                     return True
             return False
 
@@ -3413,7 +3485,8 @@ def preprocess_ifs(code, lang='en'):
         line = lines[i]
 
         # if this line starts with if but does not contain an else, and the next non-empty line too is not an else.
-        if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (not starts_with('else', next_non_empty_line(lines, i))) and (not contains('else', line)):
+        if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (
+                not starts_with('else', next_non_empty_line(lines, i))) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
             commands = ["print", "ask", "forward", "turn", "play"]
             excluded_commands = ["pressed"]
@@ -3442,7 +3515,7 @@ def location_of_first_blank(code_snippet):
         code = lines[i]
         if len(code) > 0:
             if (" _" in code) or ("_ " in code) or (code[-1] == "_"):
-                return i+1
+                return i + 1
     return 0
 
 
@@ -3564,7 +3637,8 @@ def create_AST(input_string, level, lang="en"):
     return abstract_syntax_tree, lookup_table, commands
 
 
-def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False, unused_allowed=False):
+def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False, unused_allowed=False,
+                    microbit=False):
     check_program_size_is_valid(input_string)
     input_string = process_input_string(input_string, level, lang)
 
@@ -3578,7 +3652,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         source_map.set_language(lang)
         source_map.set_hedy_input(input_string)
 
-    # FH, may 2022. for now, we just output arabic numerals when the language is ar
+    # FH, May 2022. for now, we just output arabic numerals when the language is ar
     # this can be changed into a profile setting or could be detected
     # in usage of programs
     if lang == "ar":
@@ -3591,7 +3665,8 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
 
         # grab the right transpiler from the lookup
         convertToPython = TRANSPILER_LOOKUP[level]
-        python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
+        python = convertToPython(lookup_table, lang, numerals_language, is_debug,
+                                 microbit).transform(abstract_syntax_tree)
 
         has_clear = "clear" in commands
         has_turtle = "forward" in commands or "turn" in commands or "color" in commands

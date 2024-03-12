@@ -502,6 +502,28 @@ class TestsLevel16(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
+    def test_assign_list_missing_brackets_gives_error(self):
+        code = textwrap.dedent("""\
+        animals = 'chicken', 'horse', 'cow'
+        print animals[random]""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingBracketsException,
+            max_level=17
+        )
+
+    def test_assign_list_missing_bracket_gives_error(self):
+        code = textwrap.dedent("""\
+        animals = ['chicken', 'horse', 'cow'
+        print animals[random]""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingBracketsException,
+            max_level=17
+        )
+
     def test_equality_with_number_and_list_gives_error(self):
         code = textwrap.dedent("""\
         color is [5, 6, 7]

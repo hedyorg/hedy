@@ -1,4 +1,3 @@
-import { initializeSyntaxHighlighter } from './syntaxModesRules';
 import { ClientMessages } from './client-messages';
 import { modal, error, success, tryCatchPopup } from './modal';
 import JSZip from "jszip";
@@ -13,12 +12,13 @@ import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-
 import { incrementDebugLine, initializeDebugger, load_variables, startDebug } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
-import { postJson } from './comm';
+import { postJson, postNoResponse } from './comm';
 import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
+import { initializeActivity } from './user-activity';
 
 export let theGlobalDebugger: any;
 export let theGlobalEditor: HedyEditor;
@@ -137,9 +137,6 @@ export function initializeApp(options: InitializeAppOptions) {
   theStaticRoot = options.staticRoot ?? '';
   // When we are in Alpha or in dev the static root already points to an internal directory
   theStaticRoot = theStaticRoot === '/' ? '' : theStaticRoot;
-  initializeSyntaxHighlighter({
-    keywordLanguage: options.keywordLanguage,
-  });
   initializeCopyToClipboard();
 
   // Close the dropdown menu if the user clicks outside of it
@@ -179,6 +176,8 @@ export function initializeApp(options: InitializeAppOptions) {
   });
 
   initializeLoginLinks();
+
+  initializeActivity();
 }
 
 export interface InitializeCodePageOptions {
@@ -727,8 +726,12 @@ export function tryPaletteCode(exampleCode: string) {
   if (theGlobalEditor?.isReadOnly) {
     return;
   }
-
-  theGlobalEditor.contents = exampleCode + '\n';
+  const lines = theGlobalEditor.contents.split('\n')
+  if (lines[lines.length-1] !== '') {
+    theGlobalEditor.contents += '\n' + exampleCode;
+  } else {
+    theGlobalEditor.contents += exampleCode;
+  }
   //As the commands try-it buttons only contain english code -> make sure the selected language is english
   if (!($('#editor').attr('lang') == 'en')) {
       $('#editor').attr('lang', 'en');
@@ -1941,8 +1944,6 @@ export function closeContainingModal(target: HTMLElement) {
 function initializeShareProgramButtons() {
   $('input[type="radio"][name="public"]').on('change', (ev) => {
     if ((ev.target as HTMLInputElement).checked) {
-      const isPublic = $(ev.target).val() === '1' ? true : false;
-
       // Async-safe copy of current tab
       const adventure = theAdventures[currentTab];
 
@@ -1953,17 +1954,7 @@ function initializeShareProgramButtons() {
         if (!saveInfo) {
           throw new Error('This program does not have an id');
         }
-
-        const response = await postJsonWithAchievements('/programs/share', {
-          id: saveInfo.id,
-          public: isPublic,
-        });
-
-        modal.notifySuccess(response.message);
-        if (response.save_info) {
-          adventure.save_info = response.save_info;
-        }
-        updatePageElements();
+        await postNoResponse(`/programs/share/${saveInfo.id}`, {})
       });
     }
   })
@@ -2105,43 +2096,6 @@ async function saveIfNecessary() {
 
 function currentTabLsKey() {
   return `save-${currentTab}-${theLevel}`;
-}
-
-export async function share_program(id: string, index: number, Public: boolean, prompt: string) {
-  await modal.confirmP(prompt);
-  await tryCatchPopup(async () => {
-    const response = await postJsonWithAchievements('/programs/share', { id, public: Public });
-    showAchievements(response.achievement, true, "");
-    if (Public) {
-      change_shared(true, index);
-    } else {
-      change_shared(false, index);
-    }
-    modal.notifySuccess(response.message);
-  });
-}
-
-function change_shared (shared: boolean, index: number) {
-  // Index is a front-end unique given to each program container and children
-  // This value enables us to remove, hide or show specific element without connecting to the server (again)
-  // When index is -1 we share the program from code page (there is no program container) -> no visual change needed
-  if (index == -1) {
-    return;
-  }
-  if (shared) {
-    $('#non_public_button_container_' + index).hide();
-    $('#public_button_container_' + index).show();
-    $('#favourite_program_container_' + index).show();
-  } else {
-    $('#modal-copy-button').hide();
-    $('#public_button_container_' + index).hide();
-    $('#non_public_button_container_' + index).show();
-    $('#favourite_program_container_' + index).hide();
-
-    // In the theoretical situation that a user unshares their favourite program -> Change UI
-    $('#favourite_program_container_' + index).removeClass('text-yellow-400');
-    $('#favourite_program_container_' + index).addClass('text-white');
-  }
 }
 
 export function goToLevel(level: any) {

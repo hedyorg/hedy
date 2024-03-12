@@ -316,7 +316,7 @@ def task_devserver():
                 os.environ,
                 # These are required to make some local features work.
                 BASE_URL="http://localhost:8080/",
-                ADMIN_USER="admin"))
+                ADMIN_USER="admin",))
         ],
         verbosity=2,  # show everything live
     )
@@ -390,6 +390,29 @@ def task__offline():
             'rm -rf dist/offlinehedy/_internal/content/research/*',
         ],
     )
+
+
+def task__autopr():
+    """Run code generation tasks that should commit to PRs.
+
+    This runs some tasks, mostly around translation, that contributors should
+    run on their machines but tend to forget. That's what machines are for!
+
+    Running 'extract' and 'compile' has the benefit that it will unwrap
+    any files that were wrapped by Weblate.
+    """
+
+    return dict(
+        title=lambda _: 'Run automatic commit updates',
+        task_dep=[
+            'extract',
+            'backend',
+            'frontend',
+        ],
+        actions=[
+            # Run a script to strip things that lead to conflicts from po files
+            [python3, 'build-tools/github/normalize-pofiles.py'],
+        ])
 
 
 ######################################################################################

@@ -7,16 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-01-18 10:49+0100\n"
-"PO-Revision-Date: 2024-02-10 12:08+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language-Team: pt_PT <LL@li.org>\n"
+"POT-Creation-Date: 2000-01-01 00:00+0000\n"
+"PO-Revision-Date: 2000-01-01 00:00+0000\n"
+"Last-Translator: Someone <someone@example.com>\n"
 "Language: pt_PT\n"
+"Language-Team: pt_PT <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -88,7 +87,9 @@ msgstr "It looks like you forgot to use a command on line {line_number}."
 msgid "Missing Inner Command"
 msgstr "It looks like you forgot to use a command with the {command} statement you used on line {line_number}."
 
-#, fuzzy
+msgid "Missing Square Brackets"
+msgstr "Parece que se esqueceu de utilizar parênteses retos [] à volta da lista que estava a criar na linha {line_number}."
+
 msgid "Missing Variable"
 msgstr "It looks like your {command} is missing a variable at the start of the line."
 
@@ -207,6 +208,14 @@ msgid "adventure_cloned"
 msgstr "Adventure is cloned"
 
 #, fuzzy
+msgid "adventure_code_button"
+msgstr "Adventure Code"
+
+#, fuzzy
+msgid "adventure_codeblock_button"
+msgstr "Use this button when you want to create a block of code that students can run in your adventure. Tip: put the selection at the end of the last line of the code block and <kbd>Enter</kbd> 3 times to type after a code block."
+
+#, fuzzy
 msgid "adventure_duplicate"
 msgstr "You already have an adventure with this name."
 
@@ -215,16 +224,11 @@ msgid "adventure_empty"
 msgstr "You didn't enter an adventure name!"
 
 #, fuzzy
-msgid "adventure_exp_1"
-msgstr "Type your adventure of choice on the right-hand side. After creating your adventure you can include it in one of your classes under \"customizations\". If you want to include a command in your adventure please use code anchors like this:"
-
-#, fuzzy
-msgid "adventure_exp_2"
-msgstr "If you want to show actual code snippets, for example to give student a template or example of the code. Please use pre anchors like this:"
-
-#, fuzzy
 msgid "adventure_exp_3"
 msgstr "You can use the \"preview\" button to view a styled version of your adventure. To view the adventure on a dedicated page, select \"view\" from the teachers page."
+
+msgid "adventure_exp_classes"
+msgstr "Your adventure is used within the following classes"
 
 #, fuzzy
 msgid "adventure_id_invalid"
@@ -249,10 +253,6 @@ msgstr "I agree that my adventure might be made publicly available on Hedy."
 #, fuzzy
 msgid "adventure_updated"
 msgstr "The adventure has been updated!"
-
-#, fuzzy
-msgid "adventures"
-msgstr "Available Adventures"
 
 #, fuzzy
 msgid "adventures_info"
@@ -636,6 +636,14 @@ msgid "disable"
 msgstr "Disable"
 
 #, fuzzy
+msgid "disable_parsons"
+msgstr "Disable all puzzles"
+
+#, fuzzy
+msgid "disable_quizes"
+msgstr "Disable all quizes"
+
+#, fuzzy
 msgid "disabled"
 msgstr "Disabled"
 
@@ -888,10 +896,6 @@ msgid "hello_logo"
 msgstr "Ola!"
 
 #, fuzzy
-msgid "hello_world"
-msgstr "Hello world!"
-
-#, fuzzy
 msgid "hidden"
 msgstr "Hint?"
 
@@ -902,14 +906,6 @@ msgstr "Hide cheatsheet"
 #, fuzzy
 msgid "hide_keyword_switcher"
 msgstr "Hide keyword switcher"
-
-#, fuzzy
-msgid "hide_parsons"
-msgstr "Hide parsons"
-
-#, fuzzy
-msgid "hide_quiz"
-msgstr "Hide quiz"
 
 #, fuzzy
 msgid "highest_level_reached"
@@ -1096,9 +1092,8 @@ msgstr "Level disabled"
 msgid "level_future"
 msgstr "This level will open automatically after the opening date"
 
-#, fuzzy
 msgid "level_invalid"
-msgstr "This Hedy level in invalid."
+msgstr "Este nível Hedy é inválido."
 
 #, fuzzy
 msgid "level_not_class"
@@ -1232,6 +1227,9 @@ msgstr "Masculino"
 #, fuzzy
 msgid "mandatory_mode"
 msgstr "Mandatory developer's mode"
+
+msgid "more_options"
+msgstr "Mais opções"
 
 msgid "my_account"
 msgstr "O meu perfil"
@@ -1454,6 +1452,10 @@ msgstr "page"
 #, fuzzy
 msgid "page_not_found"
 msgstr "We could not find that page!"
+
+#, fuzzy
+msgid "pair_with_teacher"
+msgstr "I would like to be paired with another teacher for help"
 
 #, fuzzy
 msgid "parsons_title"
@@ -1831,6 +1833,9 @@ msgstr "Select all"
 msgid "select_lang"
 msgstr "Select language"
 
+msgid "select_levels"
+msgstr "Select levels"
+
 #, fuzzy
 msgid "select_tag"
 msgstr "Select tag"
@@ -1857,18 +1862,9 @@ msgstr "Receberás em breve um email com instruções de como recuperar a palavr
 msgid "settings"
 msgstr "My personal settings"
 
-msgid "share"
-msgstr "Partilha"
-
 #, fuzzy
 msgid "share_by_giving_link"
 msgstr "Show your program to other people by giving them the link below:"
-
-msgid "share_confirm"
-msgstr "Tens a certeza que queres tornar o programa público?"
-
-msgid "share_success_detail"
-msgstr "Programa partilhado com sucesso"
 
 #, fuzzy
 msgid "share_your_program"
@@ -1911,6 +1907,10 @@ msgid "start_hedy_tutorial"
 msgstr "Start hedy tutorial"
 
 #, fuzzy
+msgid "start_learning"
+msgstr "Start learning"
+
+#, fuzzy
 msgid "start_programming"
 msgstr "Directly start programming"
 
@@ -1925,6 +1925,10 @@ msgstr "Start quiz"
 #, fuzzy
 msgid "start_teacher_tutorial"
 msgstr "Start teacher tutorial"
+
+#, fuzzy
+msgid "start_teaching"
+msgstr "Start teaching"
 
 msgid "step_title"
 msgstr "Tarefa"
@@ -2218,10 +2222,6 @@ msgid "translator"
 msgstr "Translator"
 
 #, fuzzy
-msgid "try_it"
-msgstr "Experimenta"
-
-#, fuzzy
 msgid "tutorial"
 msgstr "Tutorial"
 
@@ -2252,15 +2252,6 @@ msgstr "Unlock level thresholds"
 #, fuzzy
 msgid "unsaved_class_changes"
 msgstr "There are unsaved changes, are you sure you want to leave this page?"
-
-msgid "unshare"
-msgstr "Remover partilha"
-
-msgid "unshare_confirm"
-msgstr "Tens a certeza que queres tornar o programa privado?"
-
-msgid "unshare_success_detail"
-msgstr "Programa removido da partilha com sucesso"
 
 #, fuzzy
 msgid "update_adventure_prompt"
@@ -2478,9 +2469,6 @@ msgstr "Your program"
 #~ msgid "question_invalid"
 #~ msgstr "Your token is invalid."
 
-#~ msgid "select_levels"
-#~ msgstr "Select levels"
-
 #~ msgid "too_many_attempts"
 #~ msgstr "Too many attempts"
 
@@ -2516,3 +2504,37 @@ msgstr "Your program"
 
 #~ msgid "write_first_program"
 #~ msgstr "Escreve o teu primeiro programa!"
+
+#~ msgid "adventures"
+#~ msgstr "Available Adventures"
+
+#~ msgid "share_confirm"
+#~ msgstr "Tens a certeza que queres tornar o programa público?"
+
+#~ msgid "share_success_detail"
+#~ msgstr "Programa partilhado com sucesso"
+
+#~ msgid "try_it"
+#~ msgstr "Experimenta"
+
+#~ msgid "unshare_confirm"
+#~ msgstr "Tens a certeza que queres tornar o programa privado?"
+
+#~ msgid "unshare_success_detail"
+#~ msgstr "Programa removido da partilha com sucesso"
+
+#~ msgid "adventure_exp_2"
+#~ msgstr "If you want to show actual code snippets, for example to give student a template or example of the code. Please use pre anchors like this:"
+
+#~ msgid "hello_world"
+#~ msgstr "Hello world!"
+
+#~ msgid "adventure_exp_1"
+#~ msgstr "Type your adventure of choice on the right-hand side. After creating your adventure you can include it in one of your classes under \"customizations\". If you want to include a command in your adventure please use code anchors like this:"
+
+#~ msgid "hide_parsons"
+#~ msgstr "Hide parsons"
+
+#~ msgid "hide_quiz"
+#~ msgstr "Hide quiz"
+

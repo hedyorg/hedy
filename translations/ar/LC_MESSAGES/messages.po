@@ -7,16 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-01-18 10:49+0100\n"
-"PO-Revision-Date: 2024-02-10 12:07+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language-Team: ar <LL@li.org>\n"
+"POT-Creation-Date: 2000-01-01 00:00+0000\n"
+"PO-Revision-Date: 2000-01-01 00:00+0000\n"
+"Last-Translator: Someone <someone@example.com>\n"
 "Language: ar\n"
+"Language-Team: ar <LL@li.org>\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=0 && n%100<=2 ? 4 : 5);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=0 && n%100<=2 ? 4 : 5);\n"
-"X-Generator: Weblate 5.4-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -79,6 +78,9 @@ msgstr "يبدو أنك نسيت استخدام أمر برمجي في السط�
 msgid "Missing Inner Command"
 msgstr "يبدو أنك نسيت استخدام أمر برمجي مع الجملة {command} التي استعملتها في السطر رقم {line_number}."
 
+msgid "Missing Square Brackets"
+msgstr "It looks like you forgot to use square brackets [] around the list you were creating on line {line_number}."
+
 #, fuzzy
 msgid "Missing Variable"
 msgstr "It looks like your {command} is missing a variable at the start of the line."
@@ -139,6 +141,7 @@ msgstr "Your function used the wrong number of arguments. You provided {used_num
 msgid "account_overview"
 msgstr "نظرة عامة على الحساب"
 
+#, fuzzy
 msgid "accounts_created"
 msgstr "تم إنشاء الحسابات بنجاح."
 
@@ -183,20 +186,24 @@ msgstr "مغامرة"
 msgid "adventure_cloned"
 msgstr "المغامرة قد نُسخت"
 
+#, fuzzy
+msgid "adventure_code_button"
+msgstr "Adventure Code"
+
+msgid "adventure_codeblock_button"
+msgstr "استخدم هذه الكبسة لكتابة مجموعة كود لكي يستخدمها الطلاب. ملاحظة: لكي تخرج من المجموعة هذه, إنقر على <kbd>Enter</kbd> 3 مرات وأنت في نهاية الكود."
+
 msgid "adventure_duplicate"
 msgstr "لديك بالفعل مغامرة بنفس هذا الإسم."
 
 msgid "adventure_empty"
 msgstr "لم تدخل اسم المغامرة!"
 
-msgid "adventure_exp_1"
-msgstr "اكتب مغامرتك المفضلة على الجانب الأيسر. بعد إنشاء مغامرتك ، يمكنك تضمينها في أحد الصفوف الخاصة بك من خلال \"التخصيصات\". إذا كنت تريد تضمين أمر برمجي في مغامرتك، فيرجى استخدام مرساة الكود مثل هذا:"
-
-msgid "adventure_exp_2"
-msgstr "إذا كنت تريد إظهار مقتطفات برمجيةفعلية ، على سبيل المثال لإعطاء التلاميذ قالبًا أو مثالاً على البرامج. الرجاء استخدام المراسي المسبقة مثل هذا:"
-
 msgid "adventure_exp_3"
 msgstr "يمكنك استخدام زر \"معاينة\" لعرض نسخة مصممة من مغامرتك. لعرض المغامرة على صفحة مخصصة ، اختر \"عرض\" من صفحة المعلمين."
+
+msgid "adventure_exp_classes"
+msgstr "المغامرة هذه مُستخدمة في الصفوف التالية"
 
 msgid "adventure_id_invalid"
 msgstr "رمز المغامرة هذا غير صالح."
@@ -215,10 +222,6 @@ msgstr "أوافق على أن مغامرتي قد تصير متاحة على ا
 
 msgid "adventure_updated"
 msgstr "تم تحديث المغامرة!"
-
-#, fuzzy
-msgid "adventures"
-msgstr "Available Adventures"
 
 #, fuzzy
 msgid "adventures_info"
@@ -558,6 +561,12 @@ msgstr "افتتح مباشرة"
 msgid "disable"
 msgstr "Disable"
 
+msgid "disable_parsons"
+msgstr "عطل كل الأحجيات"
+
+msgid "disable_quizes"
+msgstr "عطّل كل الفحوص"
+
 #, fuzzy
 msgid "disabled"
 msgstr "Disabled"
@@ -785,10 +794,6 @@ msgstr "بدء الدليل التوجيهي"
 msgid "hello_logo"
 msgstr "مرحبا!"
 
-#, fuzzy
-msgid "hello_world"
-msgstr "Hello world!"
-
 msgid "hidden"
 msgstr "مخفي"
 
@@ -797,13 +802,6 @@ msgstr "اخفاء ورقة الغش"
 
 msgid "hide_keyword_switcher"
 msgstr "اخفاء تبديل الكلمات المفتاحية"
-
-#, fuzzy
-msgid "hide_parsons"
-msgstr "Hide parsons"
-
-msgid "hide_quiz"
-msgstr "نهاية الفحص السريع"
 
 msgid "highest_level_reached"
 msgstr "أعلى مستوى تم الوصول له"
@@ -831,6 +829,7 @@ msgstr "تلميح؟"
 msgid "ill_work_some_more"
 msgstr "I'll work on it a little longer"
 
+#, fuzzy
 msgid "image_invalid"
 msgstr "الصورة التي اخترتها غير صالحة."
 
@@ -969,6 +968,7 @@ msgstr "Level disabled"
 msgid "level_future"
 msgstr "This level will open automatically after the opening date"
 
+#, fuzzy
 msgid "level_invalid"
 msgstr "هذا المستوى من هيدي غير صحيح."
 
@@ -1094,6 +1094,10 @@ msgstr "ولد / ذكر"
 
 msgid "mandatory_mode"
 msgstr "وضع المبرمج الإلزامي"
+
+#, fuzzy
+msgid "more_options"
+msgstr "More options"
 
 msgid "my_account"
 msgstr "حسابي"
@@ -1284,6 +1288,10 @@ msgstr "صفحة"
 
 msgid "page_not_found"
 msgstr "لم نستطع ايجاد تلك الصفحة!"
+
+#, fuzzy
+msgid "pair_with_teacher"
+msgstr "I would like to be paired with another teacher for help"
 
 msgid "parsons_title"
 msgstr "الأحجية"
@@ -1610,6 +1618,9 @@ msgstr "Select all"
 msgid "select_lang"
 msgstr "اختر اللغة"
 
+msgid "select_levels"
+msgstr "Select levels"
+
 msgid "select_tag"
 msgstr "اختر العلامة"
 
@@ -1632,18 +1643,9 @@ msgstr "ستصلك على الفور رسالة على البريد الإلكت
 msgid "settings"
 msgstr "اعداداتي الشخصية"
 
-msgid "share"
-msgstr "مشاركة"
-
 #, fuzzy
 msgid "share_by_giving_link"
 msgstr "Show your program to other people by giving them the link below:"
-
-msgid "share_confirm"
-msgstr "هل أنت متأكد من أنك تريد جعل البرنامج عاماً/علنياً؟"
-
-msgid "share_success_detail"
-msgstr "تم مشاركة البرنامج بنجاح."
 
 #, fuzzy
 msgid "share_your_program"
@@ -1684,6 +1686,10 @@ msgstr "علامة النجمة"
 msgid "start_hedy_tutorial"
 msgstr "بدء الدليل التوجيهي"
 
+#, fuzzy
+msgid "start_learning"
+msgstr "Start learning"
+
 msgid "start_programming"
 msgstr "ابدأ البرمجة"
 
@@ -1696,6 +1702,10 @@ msgstr "بدء الفحص السريع"
 
 msgid "start_teacher_tutorial"
 msgstr "بدء الدليل التوجيهي للمعلم"
+
+#, fuzzy
+msgid "start_teaching"
+msgstr "Start teaching"
 
 msgid "step_title"
 msgstr "المهمة"
@@ -1944,9 +1954,6 @@ msgstr "Translating Hedy"
 msgid "translator"
 msgstr "Translator"
 
-msgid "try_it"
-msgstr "جرب ذلك"
-
 #, fuzzy
 msgid "tutorial"
 msgstr "Tutorial"
@@ -1977,15 +1984,6 @@ msgstr "Unlock level thresholds"
 #, fuzzy
 msgid "unsaved_class_changes"
 msgstr "There are unsaved changes, are you sure you want to leave this page?"
-
-msgid "unshare"
-msgstr "الغاء المشاركة"
-
-msgid "unshare_confirm"
-msgstr "هل أنت متأكد من أنك تريد جعل البرنامج خاصاً/سرّياً؟"
-
-msgid "unshare_success_detail"
-msgstr "تم التراجع عن مشاركة البرنامج بنجاح."
 
 msgid "update_adventure_prompt"
 msgstr "هل أنت متأكد أنك تريد تعديل هذه المغامرة؟"
@@ -2188,9 +2186,6 @@ msgstr "Your program"
 #~ msgid "question_invalid"
 #~ msgstr "الرمز الخاص بك غير صالح."
 
-#~ msgid "select_levels"
-#~ msgstr "Select levels"
-
 #~ msgid "too_many_attempts"
 #~ msgstr "Too many attempts"
 
@@ -2223,3 +2218,34 @@ msgstr "Your program"
 
 #~ msgid "write_first_program"
 #~ msgstr "اكتب أول برامجك!"
+
+#~ msgid "adventure_exp_1"
+#~ msgstr "اكتب مغامرتك المفضلة على الجانب الأيسر. بعد إنشاء مغامرتك ، يمكنك تضمينها في أحد الصفوف الخاصة بك من خلال \"التخصيصات\". إذا كنت تريد تضمين أمر برمجي في مغامرتك، فيرجى استخدام مرساة الكود مثل هذا:"
+
+#~ msgid "adventure_exp_2"
+#~ msgstr "إذا كنت تريد إظهار مقتطفات برمجيةفعلية ، على سبيل المثال لإعطاء التلاميذ قالبًا أو مثالاً على البرامج. الرجاء استخدام المراسي المسبقة مثل هذا:"
+
+#~ msgid "adventures"
+#~ msgstr "Available Adventures"
+
+#~ msgid "hello_world"
+#~ msgstr "Hello world!"
+
+#~ msgid "share_confirm"
+#~ msgstr "هل أنت متأكد من أنك تريد جعل البرنامج عاماً/علنياً؟"
+
+#~ msgid "share_success_detail"
+#~ msgstr "تم مشاركة البرنامج بنجاح."
+
+#~ msgid "unshare_confirm"
+#~ msgstr "هل أنت متأكد من أنك تريد جعل البرنامج خاصاً/سرّياً؟"
+
+#~ msgid "unshare_success_detail"
+#~ msgstr "تم التراجع عن مشاركة البرنامج بنجاح."
+
+#~ msgid "hide_parsons"
+#~ msgstr "Hide parsons"
+
+#~ msgid "hide_quiz"
+#~ msgstr "نهاية الفحص السريع"
+

@@ -8,8 +8,8 @@
 -   name: '{echo}'
     explanation: Wiederhole etwas mit `{echo}`.
     demo_code: "{ask} Was ist deine Lieblingsfarbe? \n{echo} Also deine Lieblingsfarbe ist"
--   name: '{print} emojis'
-    explanation: Gebe ein emoji mit `{print}`aus.
+-   name: '{print} Emojis'
+    explanation: Gib ein Emoji mit `{print}` aus.
     demo_code: '{print} 🙋 🌍 ❗'
 -   name: '{forward}'
     explanation: Zeichne eine Linie mit `{forward}`.
@@ -91,7 +91,7 @@
     explanation: Prüfe, ob ein Ding in einer Liste enthalten ist mit `{in}`.
     demo_code: |-
         schöne_farben {is} Grün, Gelb
-        farbe {is} {ask} 'Was {is} deine Lieblingsfarbe?'
+        farbe {is} {ask} 'Was ist deine Lieblingsfarbe?'
         {if} farbe {in} schöne_farben {print} 'hübsch!' {else} {print} 'bäh'
 -   name: '{pressed}'
     explanation: Prüfe, ob eine gegebene Taste auf der Tastatur `{pressed}` ist.
@@ -306,7 +306,7 @@
         erstesobst = obst[1]
         {print} erstesobst
 -   name: Nimm ein zufälliges Element aus einer Liste
-    explanation: Um ein zufälliges Element aus einer Liste zu erhalten, verwenden wir [random]. Mit obst[random] erhalten wir also ein zufälliges Obst aus der Liste!
+    explanation: Um ein zufälliges Element aus einer Liste zu erhalten, verwenden wir [{random}]. Mit obst[{random}] erhalten wir also ein zufälliges Obst aus der Liste!
     demo_code: |-
         obst = ['Banane', 'Apfel', 'Kirsche']
         zufälliges_obst = obst[{random}]

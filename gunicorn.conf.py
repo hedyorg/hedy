@@ -4,9 +4,11 @@
 def worker_exit(server, worker):
     # When the worker is being exited (perhaps because of a timeout),
     # give the query_log handler a chance to flush to disk.
-    from website import querylog, s3_logger
+    from website import querylog, user_activity
+    import app
     querylog.emergency_shutdown()
-    s3_logger.emergency_shutdown()
+    app.parse_logger.emergency_shutdown()
+    user_activity.logger.emergency_shutdown()
 
 
 def post_fork(server, worker):

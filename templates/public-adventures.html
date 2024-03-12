@@ -3,6 +3,8 @@
 
 {% block regular_content %}
 
+    <div id="public-adventures">
+
     <div id="filters"
         class="flex flex-col sm:flex-row items-center gap-2
         justify-around bg-blue-400 shadow-md rounded-lg p-4 mb-4"
@@ -21,7 +23,7 @@
                   <button class="toggle-button font-semibold rounded inline-flex justify-between 
                      appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
                     onclick="$('#level_dropdown').slideToggle('medium');">
-                    <span class="label" data-value="{{_('select_lang')}}">{{selectedLevel or _('select_lang')}}</span>
+                    <span class="label" data-value="{{_('select_levels')}}">{{selectedLevel or _('select_levels')}}</span>
                     <svg id="keyword-arrow_level" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                       <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                     </svg>
@@ -37,6 +39,8 @@
                         end">
                     {% for level in customizations["available_levels"] %}
                         <div class="option {% if selectedLevel|string == level|string %}selected{% endif %}"
+                            hx-post="/public-adventures/filter"
+                            hx-target="#public-adventures"
                             data-value="{{level}}"
                         >{{ level }}</div>
                     {% endfor %}
@@ -104,6 +108,7 @@
       <div id="public-adventures-body">
         {% include "public-adventures-body.html" %}
       </div>
+    </div>
 
 
 {% endblock %}

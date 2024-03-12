@@ -1,14 +1,70 @@
-<div class="flex flex-row w-full" id="adventure-dragger">
-    <div id="sortadventures" data-cy="sortadventures" class="flex flex-row w-10/12">   
+<div class="flex flex-col w-full px-4 border border-gray-400 rounded-lg" id="adventure-dragger">
+        <div class="flex w-full overflow-x-auto my-2">
+            <h3 class="flex-1">{{_('select_adventures')}}</h3>
+            <div class="flex items-center gap-2">
+                <select class="py-2 px-1 h-10 text-center " name="level" id="levels-dropdown"
+                        data-cy="adventures"
+                        hx-get="/for-teachers/get-customization-level"
+                        hx-target="#adventure-dragger"
+                        hx-swap="outerHTML"
+                        hx-trigger="input"
+                        hx-indicator="#indicator">
+                    {% for i in range(1, max_level + 1) %}
+                    <option id="select-{{i}}" value="{{ i }}" {% if i|string == level|string %} selected {% endif %}>
+                        {{ _('level_title') }} {{ i }}
+                    </option>
+                    {% endfor %}
+                </select>
+                <select class="py-2 px-1 h-10 text-center min-w-[200px]" name="adventure_id" id="available"
+                        data-cy="available_adventures_current_level"
+                        hx-post="/for-teachers/add-adventure/level/{{ level }}"
+                        hx-target="#adventure-dragger"
+                        hx-swap="outerHTML"
+                        hx-trigger="change"
+                        hx-indicator="#indicator">
+                    <option value="none" selected disabled>{{_('add')}}</option>
+                    {% for adventure in available_adventures[level|int] %}
+                        <option value="{{ adventure.short_name }}">
+                            {{ adventure.long_name }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <button data-cy="reset_adventures" title="{{_('reset_adventures')}}" class="yellow-btn text-white place-self-center"
+                    hx-get="/for-teachers/restore-adventures-modal/level/{{ level }}"
+                    hx-target="#modal-target"
+                    >
+                    {{_('reset_button')}}
+                </button>
+            </div>
+        </div>
+        <div class="flex items-center min-w-max">
+            <div id="state-accessible" class="leading-6 rounded-lg bg-gray-200 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
+                <span>{{_('level_accessible')}}</span>
+            </div>
+            <div id="state-disabled" class="leading-6 rounded-lg bg-gray-400 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
+                <span>{{_('level_disabled')}}</span>
+            </div>
+            <div id="state-future" class="leading-6 rounded-lg bg-green-300 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
+                <span>{{_('level_future')}}</span>
+                <span id="opening_date"></span>
+            </div>
+            <div id="indicator" class="htmx-indicator custom-indicator pl-4">{{_('updating_indicator')}} <i class="fa fa-spinner fa-spin"></i> </div>
+        </div>
+    <div id="sortadventures" data-cy="sortadventures" class="flex overflow-x-auto">   
         <div id="level-{{ level }}" data-cy="level-{{ level }}" class="adventures-tab flex sortable" 
-            style="transform: translate3d(0, 0, 0)"
+            style="min-width: fit-content;"
             hx-trigger="end"
             hx-post="/for-teachers/sort-adventures?level={{ level }}"
             hx-target="#adventure-dragger" 
+            hx-swap="outerHTML"
             hx-include="[name='adventure']"
             hx-indicator="#indicator">
                 {% for adventure in adventures[level|int] %}
-                    <div class="tab {% if adventure.is_teacher_adventure %}teacher_tab{% elif adventure.is_command_adventure %}command_tab{% endif %} z-10 whitespace-nowrap flex items-center justify-left relative" data-cy="{{ adventure.short_name }}">
+                    <div class="tab 
+                        {% if adventure.is_teacher_adventure %}teacher_tab{% elif adventure.is_command_adventure %}command_tab{% endif %} 
+                        {% if adventure.short_name in ['quiz', 'parsons'] %}special_tab{% endif %}
+                        z-10 whitespace-nowrap flex items-center justify-left relative" data-cy="{{ adventure.short_name }}">
                         <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"
                             hx-post="/for-teachers/remove-adventure?adventure_id={{ adventure.short_name }}&level={{ level }}" 
                             hx-target="#adventure-dragger"
@@ -20,20 +76,11 @@
                 {% endfor %}
         </div>
     </div>
-    <select class="py-2 px-1 w-full mt-2 h-10 text-center ml-2 w-2/12 min-w-[200px]" name="adventure_id" id="available"
-            data-cy="available_adventures_current_level"
-            hx-post="/for-teachers/add-adventure/level/{{ level }}"                
-            hx-target="#adventure-dragger"
-            hx-trigger="change"
-            hx-indicator="#indicator">
-        <option value="none" selected disabled>{{_('adventures')}}</option>
-        {% for adventure in available_adventures[level|int] %}
-            <option value="{{ adventure.short_name }}"> 
-                {{ adventure.long_name }} 
-            </option>
-        {% endfor %}
-    </select> 
-    <button data-cy="reset_adventures" title="{{_('reset_adventures')}}" class="yellow-btn text-white mr-4 ml-6 place-self-center" hx-get="/for-teachers/restore-adventures-modal/level/{{ level }}" hx-target="#modal-target">
-        {{_('reset_button')}}
-    </button>
+        <script>
+                if (window.hedyApp) {
+                    hedyApp.initializeCustomizeClassPage({
+                        level:  '{{  level }}',
+                    })
+                }
+        </script>
 </div> 
