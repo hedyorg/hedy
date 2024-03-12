@@ -29,7 +29,6 @@ jobs:
     - name: Weblate commands
       run: |
         set -x
-        wlc reset
         wlc pull
         wlc commit
         wlc push
