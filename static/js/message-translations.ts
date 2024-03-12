@@ -839,7 +839,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "restaurant": "🍣, 🍕, 🍔",
     "rock": "✂️, 📜, 🗻",
     "songs": "🎵,🎶",
-    "teacher_welcome": "Welkom bij Hedy! Jouw account is omgezet naar een lerarenaccount. Je \"kan nu klassen maken en er leerlingen in uitnodigen.",
+    "teacher_welcome": "Welkom bij Hedy! Jouw account is omgezet naar een lerarenaccount. Je kan nu klassen maken en er leerlingen in uitnodigen.",
     "turtle": "🐢",
     "unsaved_class_changes": "Er zijn wijzigingen nog niet opgeslagen, weet je zeker dat je terug wilt gaan?"
   },
