@@ -28,6 +28,7 @@ jobs:
         echo 'https://hosted.weblate.org/api/ = ${{ secrets.WEBLATE_API_KEY }}' >> .weblate
     - name: Weblate commands
       run: |
+        set -x
         wlc reset
         wlc pull
         wlc commit
