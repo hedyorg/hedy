@@ -3032,59 +3032,43 @@ def create_grammar(level, lang, skip_faulty):
     return merged_grammars
 
 
-def save_total_grammar_file(level, grammar, lang):
-    # Load Lark grammars relative to directory of current file
-    script_dir = path.abspath(path.dirname(__file__))
-    filename = "level" + str(level) + "." + lang + "-Total.lark"
-    loc = path.join(script_dir, "grammars-Total", filename)
-    file = open(loc, "w", encoding="utf-8")
-    file.write(grammar)
-    file.close()
+def save_total_grammar_file(level, grammar, lang_):
+    write_file(grammar, 'grammars-Total', f'level{level}.{lang_}-Total.lark')
 
 
-def get_additional_rules_for_level(level, sub=0):
-    script_dir = path.abspath(path.dirname(__file__))
-    if sub:
-        filename = "level" + str(level) + "-" + str(sub) + "-Additions.lark"
-    else:
-        filename = "level" + str(level) + "-Additions.lark"
-    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-        grammar_text = file.read()
-    return grammar_text
+def get_additional_rules_for_level(level):
+    return read_file('grammars', f'level{level}-Additions.lark')
 
 
 def get_full_grammar_for_level(level):
-    script_dir = path.abspath(path.dirname(__file__))
-    filename = "level" + str(level) + ".lark"
-    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-        grammar_text = file.read()
-    return grammar_text
-
-
-# TODO FH, May 2022. I feel there are other places in the code where we also do this
-# opportunity to combine?
+    return read_file('grammars', f'level{level}.lark')
 
 
 def get_keywords_for_language(language):
-    script_dir = path.abspath(path.dirname(__file__))
+    if not local_keywords_enabled:
+        language = 'en'
     try:
-        if not local_keywords_enabled:
-            raise FileNotFoundError("Local keywords are not enabled")
-        filename = "keywords-" + str(language) + ".lark"
-        with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-            keywords = file.read()
+        return read_file('grammars', f'keywords-{language}.lark')
     except FileNotFoundError:
-        filename = "keywords-en.lark"
-        with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-            keywords = file.read()
-    return keywords
+        return read_file('grammars', f'keywords-en.lark')
 
 
 def get_terminals():
+    return read_file('grammars', 'terminals.lark')
+
+
+def read_file(*paths):
     script_dir = path.abspath(path.dirname(__file__))
-    with open(path.join(script_dir, "grammars", "terminals.lark"), "r", encoding="utf-8") as file:
-        terminals = file.read()
-    return terminals
+    path_ = path.join(script_dir, *paths)
+    with open(path_, "r", encoding="utf-8") as file:
+        return file.read()
+
+
+def write_file(content, *paths):
+    script_dir = path.abspath(path.dirname(__file__))
+    path_ = path.join(script_dir, *paths)
+    with open(path_, "w", encoding="utf-8") as file:
+        file.write(content)
 
 
 PARSER_CACHE = {}
