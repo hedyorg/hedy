@@ -560,20 +560,32 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Det här räknespelet hjälper dig att öva på multiplikationstabellerna!
-                    ### Övning
-                    Kan du lägga till fler tal i listan så du kan öva multiplikationstabellerna upp till 10?
+                    This calculator game helps you practise your tables of multiplication!
+                    ### Exercise
+                    Fill in the blanks. We want this program to ask the player these questions:
+                    ```
+                    How much is 1 times 1?
+                    How much is 1 times 2?
+                    How much is 1 times 3?
+                    How much is 2 times 1?
+                    How much is 2 times 2?
+                    How much is 2 times 3?
+                    How much is 3 times 1?
+                    How much is 3 times 2?
+                    How much is 3 times 3?
+                    _
+                    ```
                 example_code: |
                     ```
-                    tal = 1, 2, 3
-                    {for} tal1 {in} tal
-                        {for} tal2 {in} tal
-                            svar = {ask} 'Hur mycket är ' tal2 ' gånger ' tal1 '?'
-                            rätt = tal1 * tal2
-                            {if} svar {is} rätt
-                                {print} 'Bra jobbat!'
+                    numbers = 1, 2, 3
+                    {for} _
+                        {for} _
+                            answer = {ask} _
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
                             {else}
-                                {print} 'Det är fel. Rätt svar är ' rätt
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |
@@ -1174,7 +1186,7 @@ adventures:
                     for i in range 1 to 3
                         animal = animals[i]
                         sound = sounds[i]
-                        print 'Old McDonald had a farm'
+                        print 'Old MacDonald had a farm'
                         print 'E I E I O!'
                         print 'and on that farm he had a ' animal
                         print 'E I E I O!'
@@ -1678,6 +1690,20 @@ adventures:
                     {for} djuret {in} djur
                         {print} 'Jag älskar ' djuret
                     ```
+                story_text_2: |
+                    ### Exercise
+                    Finish this code by adding `{for} action {in} actions` to line 2.
+                example_code_2: |
+                    ```
+                    actions = clap your hands, stomp your feet, shout Hurray!
+                    _
+                        {repeat} 2 {times}
+                            {print} 'If youre happy and you know it, ' action
+                            {sleep} 2
+                        {print} 'If youre happy and you know it, and you really want to show it'
+                        {print} 'If youre happy and you know it, ' action
+                        {sleep} 3
+                    ```
             11:
                 story_text: |-
                     På den här nivån lägger vi till en ny form av `{for}`. På tidigare nivåer använde vi `{for}` med en lista, men vi kan också använda `{for}` med tal.
@@ -2010,8 +2036,7 @@ adventures:
         description: Flykten från spökhuset
         levels:
             1:
-                story_text: "I det här äventyret jobbar du med att skapa ett spel där du måste fly från ett hemsökt hus genom att välja rätt dörr.\nOm du väljer rätt dörr kommer du att överleva, men om du inte gör det kan ett hemskt monster...\n \nPå nivå 1 börjar vi vårt spökhusspel med att hitta på\
-                    \ en skrämmande historia och frågar spelaren vilket monster de kommer att se i spökhuset.\n"
+                story_text: "I det här äventyret jobbar du med att skapa ett spel där du måste fly från ett hemsökt hus genom att välja rätt dörr.\nOm du väljer rätt dörr kommer du att överleva, men om du inte gör det kan ett hemskt monster...\n \nPå nivå 1 börjar vi vårt spökhusspel med att hitta på en skrämmande historia och frågar spelaren vilket monster de kommer att se i spökhuset.\n"
                 example_code: |
                     ```
                     {print} Hur kom jag hit?
@@ -2128,9 +2153,7 @@ adventures:
                     {else} {print} 'Åh nej! Du blir uppäten av en ...' monster {at} {random}
                     ```
             9:
-                story_text: "På den här nivån kan du använda dig av nästlade satser, vilket gör spökhuset ännu mer interaktivt!\n\n### Övning\nNu är det väldigt svårt att vinna det här spelet; kan du göra det lättare att vinna?\nÄndra din kod så att den bara har en felaktig dörr och två korrekta dörrar\
-                    \ istället för en korrekt dörr och två felaktiga? \nTips: Detta innebär att du ändrar variabeln korrekt_dörr till fel_dörr och byter ut koden `{if}` och `{else}`.\n Och naturligtvis kan du också ändra berättelsen och göra den mer personlig. Ändra monstren eller gör det till en glad\
-                    \ spelshow där du får en gåva!\n"
+                story_text: "På den här nivån kan du använda dig av nästlade satser, vilket gör spökhuset ännu mer interaktivt!\n\n### Övning\nNu är det väldigt svårt att vinna det här spelet; kan du göra det lättare att vinna?\nÄndra din kod så att den bara har en felaktig dörr och två korrekta dörrar istället för en korrekt dörr och två felaktiga? \nTips: Detta innebär att du ändrar variabeln korrekt_dörr till fel_dörr och byter ut koden `{if}` och `{else}`.\n Och naturligtvis kan du också ändra berättelsen och göra den mer personlig. Ändra monstren eller gör det till en glad spelshow där du får en gåva!\n"
                 example_code: |
                     ```
                     {print} 'Fly från spökhuset!'
@@ -2153,9 +2176,7 @@ adventures:
                         {print} 'Bra! Du överlevde!'
                     ```
             11:
-                story_text: "På den här nivån har vi ändrat kommandot `{for}` så att vi kan berätta för spelaren var den befinner sig. \n\n### Övning 1\nAvsluta programmet så att spelaren vet vilket rum den befinner sig i.\n\n### Övning 2\nGör programmet till ett äventyr genom att följa dessa steg:\n\n\
-                    1. Gör en lista med valmöjligheter (till exempel: slåss eller fly).\n2. Se till att spelaren kan välja ett alternativ med `{ask}`\n3. Är svaret rätt? Då får den gå vidare till nästa monster. Ger den fel svar? Låt spelaren veta det med en `{print}`. \n\n**Extrauppgift** Om du väljer\
-                    \ fel visas ändå ett monster! Hur kan man ändra på det?\n"
+                story_text: "På den här nivån har vi ändrat kommandot `{for}` så att vi kan berätta för spelaren var den befinner sig. \n\n### Övning 1\nAvsluta programmet så att spelaren vet vilket rum den befinner sig i.\n\n### Övning 2\nGör programmet till ett äventyr genom att följa dessa steg:\n\n1. Gör en lista med valmöjligheter (till exempel: slåss eller fly).\n2. Se till att spelaren kan välja ett alternativ med `{ask}`\n3. Är svaret rätt? Då får den gå vidare till nästa monster. Ger den fel svar? Låt spelaren veta det med en `{print}`. \n\n**Extrauppgift** Om du väljer fel visas ändå ett monster! Hur kan man ändra på det?\n"
                 example_code: |
                     ```
                     {print} "Escape from the Haunted House!"
@@ -2618,8 +2639,7 @@ adventures:
                     _
                     ```
             6:
-                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting\
-                    \ numbers. \nThen, see if you can compose a song using the numbers.\n"
+                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting numbers. \nThen, see if you can compose a song using the numbers.\n"
                 example_code: |
                     ```
                     number = {ask} 'Say a starting number between 1 and 67'
@@ -2768,7 +2788,7 @@ adventures:
                     ```
             14:
                 story_text: |
-                    You can programm music for fun, but you can also use the musical notes to make something useful like a fire alarm!
+                    You can program music for fun, but you can also use the musical notes to make something useful like a fire alarm!
 
                     ### Exercise
                     Make sure the fire alarm rings when there is a fire!
@@ -2787,6 +2807,106 @@ adventures:
                     fire = {ask} 'Is there a fire?'
                     {if} fire _ 'yes'
                         {call} fire_alarm
+                    ```
+            15:
+                story_text: |
+                    **Warning** This adventure can become extremely annoying!
+                    We can also use the {while} command to repeat a song forever.
+
+                    ### Exercise
+                    Finish the never-ending song.
+                example_code: |
+                    ```
+                    {define} song
+                        {play} _
+
+                    yes_or_no = {ask} 'Do you want to hear my never-ending song?'
+                    {while} yes_or_no = 'yes'
+                        {call} song
+                        {print} '🥳'
+                    ```
+            16:
+                story_text: |
+                    Upgrade your Old MacDonald code!
+
+                    ### Exercise
+                    Take your code from the 'Sing a Song' adventure and add musical notes to it!
+                    You can make a function for each line in the song and call that function after the line is printed.
+                    We defined the first line for you and called it in the code. Can you finish the whole song?
+                example_code: |
+                    ```
+                    {define} line_1
+                        {for} i {in} {range} 1 {to} 3
+                            {play} G
+                        {play} D
+                        {for} i {in} {range} 1 {to} 2
+                            {play} E
+                        {play} D
+
+                    animals = ['pig', 'dog', 'cow']
+                    sounds = ['oink', 'woof', 'moo']
+                    for i in range 1 to 3
+                        animal = animals[i]
+                        sound = sounds[i]
+                        print 'Old MacDonald had a farm'
+                        call line_1
+                        print 'E I E I O!'
+                        _
+                    ```
+            17:
+                story_text: |
+                    You can use the {elif} to create different options.
+
+                    ### Exercise
+                    Firstly, add colons to get the code to work.
+                    Then finish this code by adding at least 2 other songs for other moods. For example a happy song and an angry song.
+                example_code: |
+                    ```
+                    {define} scary_song
+                        {for} i {in} {range} 1 {to} 3
+                            {play} G
+                        {play} E
+                        {sleep} 2
+                        {for} i {in} {range} 1 {to} 3
+                            {play} F
+                        {play} D
+
+                    mood = {ask} 'Which emotion are you feeling?'
+                    {if} mood {is} 'fear'
+                        {call} scary_song
+                    {elif} _
+                    ```
+            18:
+                story_text: |
+                    ### Exercise
+                    Even in this last level of Hedy we can make some music! Be careful of all the syntax that is needed now.
+                    Take a good look at how the functions are defined and called upon in the example code.
+                    Finish the song!
+                example_code: |
+                    ```
+                    {def} line_1():
+                        {for} i {in} {range}(1, 5):
+                            {play} A
+                        {play} D
+                        {play} F
+                        {play} A
+
+                    {def} line_2():
+                        {for} i {in} {range}(1, 5):
+                            {play} G
+                        {play} C
+                        {play} E
+                        {play} G
+
+                    {def} line_3():
+                    _
+
+                    {print} ('The drunken sailor')
+                    {print} ('What shall we do with the drunken sailor?')
+                    line_1()
+                    line_2()
+                    line_3()
+                    {print} ('Early in the morning')
                     ```
     parrot:
         name: Papegoja
@@ -3098,10 +3218,10 @@ adventures:
                 story_text_2: |
                     **Alla element i listor behöver också citattecken**.
                     Listor är texter, så de behöver också citattecken. Tänk på att varje element i listan ska ha citattecken.
-                    Detta gör att du kan spara två ord som ett element i listan, till exempel 'Iron Man'.
+                    Detta gör att du kan spara två ord som ett element i listan, till exempel 'Black Widow'.
                 example_code_2: |
                     ```
-                    superhjältar = 'Spiderman', 'Batman', 'Iron Man'
+                    superhjältar = 'Spiderman', 'Batman', 'Black Widow'
                     {print} superhjältar {at} {random}
                     ```
                 story_text_3: |
@@ -3436,9 +3556,7 @@ adventures:
                     {print} 'Smaklig måltid!'
                     ```
             9:
-                story_text: "På den här nivån kan du använda dig av nästlad kod för att göra din restaurang mer realistisk och roligare!\n\n### Övning\nIndragen (mellanslagen) togs bort i exempelkoden. \nKan du räkna ut hur mycket indrag varje rad behöver för att koden ska fungera korrekt?\nOm kunden\
-                    \ beställer pizza ska Hedy inte fråga vilken sås kunden vill ha.\n\n**Extrauppgift** En restaurang har inte alla såser i lager. Gör en lista över tillgängliga såser och ge ett svar vid varje beställning om ni säljer den. <br>\n**Extrauppgift** Pizzor har en fyllning. Fråga kunderna\
-                    \ vad de vill ha.<br>\n**Extrauppgift** Vill kunderna ha något att dricka? Fråga dem också! <br>\n"
+                story_text: "På den här nivån kan du använda dig av nästlad kod för att göra din restaurang mer realistisk och roligare!\n\n### Övning\nIndragen (mellanslagen) togs bort i exempelkoden. \nKan du räkna ut hur mycket indrag varje rad behöver för att koden ska fungera korrekt?\nOm kunden beställer pizza ska Hedy inte fråga vilken sås kunden vill ha.\n\n**Extrauppgift** En restaurang har inte alla såser i lager. Gör en lista över tillgängliga såser och ge ett svar vid varje beställning om ni säljer den. <br>\n**Extrauppgift** Pizzor har en fyllning. Fråga kunderna vad de vill ha.<br>\n**Extrauppgift** Vill kunderna ha något att dricka? Fråga dem också! <br>\n"
                 example_code: |
                     ```
                     {print} 'Välkommen till restaurang Chez Hedy!'
@@ -3648,8 +3766,7 @@ adventures:
 
                     Fyll i rätt kod i tomrummen för att se om det är oavgjort.
             9:
-                story_text: "På den här nivån kan du programmera hela spelet sten, sax, påse genom att nästla `{if}` -kommandon. \n\n### Övning\nKan du göra klart koden? Programmet behöver berätta vem som har vunnit för varje kombination.\n\n **Extrauppgift** Vill du spela mer än en omgång? Bygg ut koden\
-                    \ så att du kan spela flera omgångar. Du kan till och med använda en `{ask}` för att fråga användaren hur många rundor hen vill spela.\n"
+                story_text: "På den här nivån kan du programmera hela spelet sten, sax, påse genom att nästla `{if}` -kommandon. \n\n### Övning\nKan du göra klart koden? Programmet behöver berätta vem som har vunnit för varje kombination.\n\n **Extrauppgift** Vill du spela mer än en omgång? Bygg ut koden så att du kan spela flera omgångar. Du kan till och med använda en `{ask}` för att fråga användaren hur många rundor hen vill spela.\n"
                 example_code: |
                     ```
                     val = sten, sax, påse
@@ -3947,7 +4064,7 @@ adventures:
                     {for} i {in} {range} 1 {to} 3
                         animal = _
                         sound = _
-                        {print} 'Old McDonald had a farm'
+                        {print} 'Old MacDonald had a farm'
                         {print} 'E I E I O!'
                         {print} 'and on that farm he had a ' animal
                         {print} 'E I E I O!'
@@ -4401,8 +4518,7 @@ adventures:
                     {turn} vinkel
                     ```
             8:
-                story_text: "Nu när vi kan upprepa flera rader kan vi lättare skapa figurer.\n Vi behöver bara ställa in vinkeln en gång och sedan använda den variabeln i `{repeat}`.\n\n### Övning 1\nExempelkoden skapar en kvadrat. Ändra koden så att den skapar en annan figur, till exempel en triangel\
-                    \ eller en sexhörning. \nDetta kräver en ändring av två kodrader.\nTips: En hel cirkel är 360 grader.\n \n### Övning 2\nSkapa nu en ritning som består av minst två polygoner.\n"
+                story_text: "Nu när vi kan upprepa flera rader kan vi lättare skapa figurer.\n Vi behöver bara ställa in vinkeln en gång och sedan använda den variabeln i `{repeat}`.\n\n### Övning 1\nExempelkoden skapar en kvadrat. Ändra koden så att den skapar en annan figur, till exempel en triangel eller en sexhörning. \nDetta kräver en ändring av två kodrader.\nTips: En hel cirkel är 360 grader.\n \n### Övning 2\nSkapa nu en ritning som består av minst två polygoner.\n"
                 example_code: |
                     ```
                     vinkel = 90
