@@ -1013,7 +1013,7 @@ class ForTeachersModule(WebsiteModule):
                             "teacher": Class.get("teacher"), "students": Class.get("students", []),
                             "date": Class.get("date"), "classes": Class.get("classes")}
                     class_data.append(temp)
-                    # Class["from_teacher"] = True
+                    Class["from_teacher"] = True
                     break
 
         return render_template(
