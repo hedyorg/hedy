@@ -3116,7 +3116,6 @@ ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle',
                                          'has_pressed', 'has_clear', 'has_music', 'commands'])
 
 
-
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en", unused_allowed=True):
     def skipping_faulty(meta, args):
         return [True]
