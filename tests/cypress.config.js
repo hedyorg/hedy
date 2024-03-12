@@ -5,7 +5,7 @@ module.exports = defineConfig({
   watchForFileChanges: false,
   video: false,
   redirectionLimit: 100,
-  // numTestsKeptInMemory: 0,
+  numTestsKeptInMemory: 0,
   experimentalMemoryManagement: true,
   e2e: {
     baseUrl: 'http://localhost:8080',
@@ -32,9 +32,8 @@ module.exports = defineConfig({
     teachers_page: '/for-teachers',
     class_page: '/for-teachers/class/',
     customize_class_page: '/for-teachers/customize-class/', // You should concatenate this with the class id e.g. /for-teachers/customize_class/<class id>
-    stats_page: '/stats/class/', // You should concatenate this with the class id e.g. /stats/class/<class id>
-    logs_page: '/logs/class/', // You should concatenate this with the class id e.g. /logs/class/<class id>
-    grid_overview_page: '/grid_overview/class', 
+    stats_page: '/live_stats/class/', // You should concatenate this with the class id e.g. /stats/class/<class id>
+    grid_overview_page: '/grid_overview/class/', 
     register_student_page: '/signup?teacher=false',
     register_teacher_page: '/signup?teacher=true',
     profile_page: '/my-profile',
