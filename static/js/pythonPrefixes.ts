@@ -169,7 +169,6 @@ def sum_with_error(left, right, err):
         return left + right
     except Exception:
         raise Exception(err.format(left, right))
-
 `;
 
 export const music_prefix = 
