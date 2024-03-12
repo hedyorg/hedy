@@ -1,5 +1,5 @@
 
-from flask import request, make_response, jsonify
+from flask import request, make_response
 from flask_babel import gettext
 import json
 import uuid
@@ -39,7 +39,7 @@ class FeedbackModule(WebsiteModule):
             print(e)
             return gettext('feedback_message_error'), 500
 
-        response = make_response(jsonify({'success': gettext("feedback_message_success")}))
+        response = make_response("")
         response.headers["HX-Push-URL"] = 'false'
         response.headers["HX-Trigger"] = json.dumps({"hideFeedbackModal": True})
 

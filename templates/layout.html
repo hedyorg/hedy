@@ -48,7 +48,7 @@
                             set detail.requestConfig.parameters.page to window.location.pathname
                           on hideFeedbackModal
                             if detail.value then
-                                hedyApp.modal.notifySuccess('{{_('feedback_message_sent')}}')
+                                hedyApp.modal.notifySuccess('{{_('feedback_message_success')}}')
                                 detail.elt.reset()
                                 hedyApp.modal.hide()
                             end"
