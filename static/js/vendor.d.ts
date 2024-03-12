@@ -30,7 +30,7 @@ declare const Sk: {
   configure(options: any): void;
 
   misceval: {
-    asyncToPromise<A>(fn: () => Suspension, handler?: Record<string, () => void>): Promise<A>;
+    asyncToPromise<A>(fn: () => Suspension, handler?: Record<string, (r: any) => void>, currentProgram: number): Promise<A>;
     promiseToSuspension;
     Suspension: { }
   },
