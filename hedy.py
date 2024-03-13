@@ -179,37 +179,47 @@ def needs_colon(rule):
     return f'{rule[0:pos]} _COLON {rule[pos:]}'
 
 
-def _translate_index_error(code, list_name):
-    exception_text = gettext('catch_index_exception').replace('{list_name}', style_command(list_name))
-    return textwrap.dedent(f"""\
-        try:
-          {code}
-        except IndexError:
-          raise Exception({repr(exception_text)})
-        """)
-
-
-def translate_value_error(command, value, suggestion_type):
-    exception_text = gettext('catch_value_exception')
-    # Right now we only have three types of suggestion
-    # In the future we might change this if the number increases
-    if suggestion_type == 'number':
-        suggestion_text = gettext('suggestion_number')
-    elif suggestion_type == 'color':
-        suggestion_text = gettext('suggestion_color')
-    elif suggestion_type == 'note':
-        suggestion_text = gettext('suggestion_note')
-
-    exception_text = exception_text.replace('{command}', style_command(command))
-    exception_text = exception_text.replace('{value}', style_command(value))
-    exception_text = exception_text.replace('{suggestion}', suggestion_text)
-
-    return repr(exception_text)
-
-
 PREPROCESS_RULES = {
     'needs_colon': needs_colon
 }
+
+
+def translate_value_error(command, value, suggested_type):
+    return translate_error(gettext('catch_value_exception'), [
+        ('{command}', command, 1),
+        ('{value}', value, 1),
+        ('{suggestion}', translate_suggestion(suggested_type), 0)
+    ])
+
+
+def translate_values_error(command, suggested_type):
+    return translate_error(gettext("catch_multiple_values_exception"), [
+        ('{command}', command, 1),
+        ('{value}', '{}', 1),
+        ('{suggestion}', translate_suggestion(suggested_type), 0)
+    ])
+
+
+def translate_error(exception_text, variables):
+    for template, value, is_highlighted in variables:
+        result = style_command(value) if is_highlighted else value
+        exception_text = exception_text.replace(template, result)
+    # The error is transpiled in f-strings with ", ' and ''' quotes. The only option is to use """.
+    return '"""' + exception_text + '"""'
+
+
+def translate_suggestion(suggestion_type):
+    # Right now we only have three types of suggestion
+    # In the future we might change this if the number increases
+    if suggestion_type == 'number':
+        return gettext('suggestion_number')
+    elif suggestion_type == 'color':
+        return gettext('suggestion_color')
+    elif suggestion_type == 'note':
+        return gettext('suggestion_note')
+    elif suggestion_type == 'numbers_or_strings':
+        return gettext('suggestion_numbers_or_strings')
+    return ''
 
 
 class Command:
@@ -1707,7 +1717,7 @@ class ConvertToPython_1(ConvertToPython):
     def make_turtle_command(self, parameter, command, command_text, add_sleep, type):
         exception = ''
         if isinstance(parameter, str):
-            exception = self.make_catch_exception([parameter])
+            exception = self.make_index_error_check_if_list([parameter])
         variable = self.get_fresh_var('__trtl')
         exception_text = translate_value_error(command, variable, 'number')
         transpiled = exception + textwrap.dedent(f"""\
@@ -1740,27 +1750,35 @@ class ConvertToPython_1(ConvertToPython):
                 {variable} = color_dict[{variable}]
             t.{command_text}({variable}){self.add_debug_breakpoint()}""")
 
-    def make_catch_exception(self, args):
+    def make_index_error_check_if_list(self, args):
         lists_names = []
         list_args = []
-        var_regex = r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+"
         # List usage comes in indexation and random choice
-        list_regex = fr"(({var_regex})+\[int\(({var_regex})\)-1\])|(random\.choice\(({var_regex})\))"
+        var_regex = r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+"
+        list_access_with_int_cast = fr"(({var_regex})+\[int\(({var_regex})\)-1\])"
+        list_access_without_cast = fr"(({var_regex})+\[({var_regex})-1\])"
+        list_access_random = fr"(random\.choice\(({var_regex})\))"
+        list_regex = f"{list_access_with_int_cast}|{list_access_without_cast}|{list_access_random}"
         for arg in args:
             # Expressions come inside a Tree object, so unpack them
             if isinstance(arg, Tree):
                 arg = arg.children[0]
             for group in regex.findall(list_regex, arg):
-                if group[0] != '':
-                    list_args.append(group[0])
-                    lists_names.append(group[1])
-                else:
-                    list_args.append(group[3])
-                    lists_names.append(group[4])
-        code = ""
-        for i, list_name in enumerate(lists_names):
-            code += _translate_index_error(list_args[i], list_name)
-        return code
+                match = [e for e in group if e][:2]
+                list_args.append(match[0])
+                lists_names.append(match[1])
+
+        errors = [self.make_index_error(list_args[i], list_name) for i, list_name in enumerate(lists_names)]
+        return ''.join(errors)
+
+    def make_index_error(self, code, list_name):
+        exception_text = translate_error(gettext('catch_index_exception'), [('{list_name}', list_name, 1)])
+        return textwrap.dedent(f"""\
+            try:
+              {code}
+            except IndexError:
+              raise Exception({exception_text})
+            """)
 
 
 @v_args(meta=True)
@@ -1828,7 +1846,7 @@ class ConvertToPython_2(ConvertToPython_1):
                     r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+",
                     a)
                 args_new.append(''.join([self.process_variable_for_fstring(x, meta.line) for x in res]))
-        exception = self.make_catch_exception(args)
+        exception = self.make_index_error_check_if_list(args)
         argument_string = ' '.join(args_new)
         if not self.microbit:
             return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
@@ -1879,7 +1897,7 @@ class ConvertToPython_2(ConvertToPython_1):
         value = args[1]
 
         if self.is_random(value) or self.is_list(value):
-            exception = self.make_catch_exception([value])
+            exception = self.make_index_error_check_if_list([value])
             return exception + variable_name + " = " + value + self.add_debug_breakpoint()
         else:
             if self.is_variable(value, meta.line):  # if the value is a variable, this is a reassign
@@ -1898,7 +1916,7 @@ class ConvertToPython_2(ConvertToPython_1):
             value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
             if not self.is_int(args[0]):
                 self.add_variable_access_location(value, meta.line)
-            exceptions = self.make_catch_exception(args)
+            exceptions = self.make_index_error_check_if_list(args)
             try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
             exception_text = translate_value_error(Command.sleep, value, 'number')
             code = try_prefix + textwrap.dedent(f"""\
@@ -2006,7 +2024,7 @@ class ConvertToPython_4(ConvertToPython_3):
 
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
-        exceptions = self.make_catch_exception(args)
+        exceptions = self.make_index_error_check_if_list(args)
         if not self.microbit:
             return exceptions + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
         else:
@@ -2161,7 +2179,7 @@ class ConvertToPython_6(ConvertToPython_5):
                 if not self.is_int(args[0]):
                     self.add_variable_access_location(value, meta.line)
 
-            exceptions = self.make_catch_exception(args)
+            exceptions = self.make_index_error_check_if_list(args)
             try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
             exception_text = translate_value_error(Command.sleep, value, 'number')
             code = try_prefix + textwrap.dedent(f"""\
@@ -2202,7 +2220,7 @@ class ConvertToPython_6(ConvertToPython_5):
             if self.is_variable(value, meta.line):
                 value = self.process_variable(value, meta.line)
                 if self.is_list(value) or self.is_random(value):
-                    exception = self.make_catch_exception([value])
+                    exception = self.make_index_error_check_if_list([value])
                     return exception + parameter + " = " + value + self.add_debug_breakpoint()
                 else:
                     return parameter + " = " + value
@@ -2221,13 +2239,23 @@ class ConvertToPython_6(ConvertToPython_5):
         self.add_variable_access_location(argument, meta.line)
         return f'int({argument})'
 
+    def process_token_or_tree_for_calculation(self, argument, command, meta):
+        if type(argument) is Tree:
+            return f'{str(argument.children[0])}'
+        if argument.isnumeric():
+            latin_numeral = int(argument)
+            return f'int({latin_numeral})'
+        self.add_variable_access_location(argument, meta.line)
+        exception_text = translate_value_error(command, argument, 'number')
+        return f'int_with_error({argument}, {exception_text})'
+
     def process_calculation(self, args, operator, meta):
         # arguments of a sum are either a token or a
         # tree resulting from earlier processing
         # for trees we need to grap the inner string
         # for tokens we add int around them
 
-        args = [self.process_token_or_tree(a, meta) for a in args]
+        args = [self.process_token_or_tree_for_calculation(a, operator, meta) for a in args]
         return Tree('sum', [f'{args[0]} {operator} {args[1]}'])
 
     def addition(self, meta, args):
@@ -2472,7 +2500,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def returns(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
-        exception = self.make_catch_exception(args)
+        exception = self.make_index_error_check_if_list(args)
         return exception + f"return f'''{argument_string}'''"
 
     def number(self, meta, args):
@@ -2501,14 +2529,6 @@ class ConvertToPython_12(ConvertToPython_11):
             return f'"{text}"'
         return f"'{text}'"
 
-    def process_token_or_tree(self, argument, meta):
-        if isinstance(argument, Tree):
-            return f'{str(argument.children[0])}'
-        else:
-            # this is a variable, add to the table
-            self.add_variable_access_location(argument, meta.line)
-            return argument
-
     def print_ask_args(self, meta, args):
         result = super().print_ask_args(meta, args)
         if "'''" in result:
@@ -2517,7 +2537,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
-        exception = self.make_catch_exception(args)
+        exception = self.make_index_error_check_if_list(args)
         if not self.microbit:
             return exception + f"print(f'''{argument_string}''')" + self.add_debug_breakpoint()
         else:
@@ -2565,11 +2585,11 @@ class ConvertToPython_12(ConvertToPython_11):
         self.check_var_usage_when_quotes_are_required(right_hand_side, meta)
 
         if isinstance(right_hand_side, Tree):
-            exception = self.make_catch_exception([right_hand_side.children[0]])
+            exception = self.make_index_error_check_if_list([right_hand_side.children[0]])
             return exception + left_hand_side + " = " + right_hand_side.children[0] + self.add_debug_breakpoint()
         else:
             # we no longer escape quotes here because they are now needed
-            exception = self.make_catch_exception([right_hand_side])
+            exception = self.make_index_error_check_if_list([right_hand_side])
             return exception + left_hand_side + " = " + right_hand_side + "" + self.add_debug_breakpoint()
 
     def var(self, meta, args):
@@ -2603,6 +2623,40 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def make_forward(self, parameter):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'float')
+
+    def process_token_or_tree(self, argument, meta):
+        if isinstance(argument, Tree):
+            return f'{str(argument.children[0])}'
+        else:
+            # this is a variable, add to the table
+            self.add_variable_access_location(argument, meta.line)
+            return argument
+
+    def process_token_or_tree_for_calculation(self, argument, command, meta):
+        if type(argument) is Tree:
+            return f'{str(argument.children[0])}'
+        else:
+            # this is a variable, add to the table
+            self.add_variable_access_location(argument, meta.line)
+            exception_text = translate_value_error(command, argument, 'number')
+            return f'number_with_error({argument}, {exception_text})'
+
+    def process_token_or_tree_for_addition(self, argument, meta):
+        if type(argument) is Tree:
+            return f'{str(argument.children[0])}'
+        else:
+            # this is a variable, add to the table
+            self.add_variable_access_location(argument, meta.line)
+            return argument
+
+    # From level 12 concatenation should also work, so the args could be either numbers or strings
+    def addition(self, meta, args):
+        args = [self.process_token_or_tree_for_addition(a, meta) for a in args]
+        if all([self.is_int(a) or self.is_float(a) for a in args]):
+            return Tree('sum', [f'{args[0]} + {args[1]}'])
+        else:
+            exception_text = translate_values_error(Command.addition, 'numbers_or_strings')
+            return Tree('sum', [f'sum_with_error({args[0]}, {args[1]}, {exception_text})'])
 
     def division(self, meta, args):
         return self.process_calculation(args, '/', meta)
@@ -2663,7 +2717,7 @@ class ConvertToPython_15(ConvertToPython_14):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
         body = add_sleep_to_command(body, True, self.is_debug, location="after")
-        exceptions = self.make_catch_exception([args[0]])
+        exceptions = self.make_index_error_check_if_list([args[0]])
         return exceptions + "while " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + body
 
     def ifpressed(self, meta, args):
@@ -2707,12 +2761,12 @@ class ConvertToPython_16(ConvertToPython_15):
         self.add_variable_access_location(args[1], meta.line)
         self.add_variable_access_location(args[2], meta.line)
 
-        exception = _translate_index_error(left_side, args[0])
+        exception = self.make_index_error_check_if_list([left_side])
         return exception + left_side + ' = ' + right_side + self.add_debug_breakpoint()
 
     def ifs(self, meta, args):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
-        exceptions = self.make_catch_exception([args[0]])
+        exceptions = self.make_index_error_check_if_list([args[0]])
         return exceptions + "if " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
 
