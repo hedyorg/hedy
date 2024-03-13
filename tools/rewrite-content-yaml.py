@@ -113,16 +113,13 @@ def rewrite_yaml_file(fn):
     data = custom_rewrite_data(data, False)
 
     out = StringIO()
-    yaml.dump(
-        # data, indent=4, allow_unicode=True, width=30000
-        data, out
-    )
+    yaml.dump(data, out)
     new_string = out.getvalue()
-    with open(fn, "w") as fp:
-        fp.write(new_string)
     made_a_change = old_string.strip() != new_string.strip()
     if made_a_change:
-        sys.stderr.write(f'x')
+        with open(fn, "w") as fp:
+            fp.write(new_string)
+        sys.stderr.write('x')
     else:
         sys.stderr.write('.')
     sys.stderr.flush()
