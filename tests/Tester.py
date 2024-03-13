@@ -530,16 +530,24 @@ class HedyTester(unittest.TestCase):
                 error_message = translate_error(E.error_code, E.arguments, 'en')
                 error_message = error_message.replace('<span class="command-highlighted">', '`')
                 error_message = error_message.replace('</span>', '`')
-                lines = snippet.code.split('\n')
-                lines_with_numbers = [lines[i] + " <-------" if i+1 == location[0]
-                                      and arrow else lines[i] for i in range(len(lines))]
-                code_with_numbers = '\n'.join(lines_with_numbers)
 
-                print(f'\n----\n{code_with_numbers}')
-                print(f'----\n{snippet.original_code}\n----')
-                print(f'in language {snippet.language} from level {snippet.level} gives error:')
-                print(f'{error_message} at line {location}')
-                raise E
+        def add_arrow(code):
+            """Adds an arrow to the given code snippet on the line that caused the error."""
+            if not arrow:
+                return code
+            lines = code.split('\n')
+            lines = [line + (" <---- ERROR HERE" if i+1 == location[0] else "")
+                     for i, line in enumerate(len(lines))]
+            return '\n'.join(lines).trim()
+
+        print('======================================================================')
+        print(f'Language {snippet.language}, level {snippet.level} produces an error:')
+        print(f'{error_message} at line {location}')
+        print('-- keywords --')
+        print(add_arrow(snippet.original_code))
+        print('-- translated --')
+        print(add_arrow(snippet.code))
+        raise E
 
 
 def create_hash(hedy_language, test_hash):
