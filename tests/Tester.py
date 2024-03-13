@@ -531,18 +531,23 @@ class HedyTester(unittest.TestCase):
                 error_message = error_message.replace('<span class="command-highlighted">', '`')
                 error_message = error_message.replace('</span>', '`')
 
-        lines = snippet.code.split('\n')
-        lines_with_numbers = [lines[i] + " <-------" if i+1 == location[0]
-                                and arrow else lines[i] for i in range(len(lines))]
-        code_with_numbers = '\n'.join(lines_with_numbers)
+
+        def add_arrow(code):
+            """Adds an arrow to the given code snippet on the line that caused the error."""
+            if not arrow:
+                return code
+            lines = code.split('\n')
+            lines = [line + (" <---- ERROR HERE" if i+1 == location[0] else "")
+                     for i, line in enumerate(len(lines))]
+            return '\n'.join(lines).trim()
 
         print('======================================================================')
         print(f'Language {snippet.language}, level {snippet.level} produces an error:')
         print(f'{error_message} at line {location}')
         print('-- keywords --')
-        print(snippet.original_code)
+        print(add_arrow(snippet.original_code))
         print('-- translated --')
-        print(code_with_numbers)
+        print(add_arrow(snippet.code))
         raise E
 
 

@@ -56,7 +56,7 @@ class TestsPublicPrograms(HedyTester):
 
             except OSError:
                 return None  # programs with ask cannot be tested with output :(
-            except hedy.exceptions.ParseException as E:
+            except hedy.exceptions.ParseException as PE:
                 # TODO: Can we use 'self.output_test_error' here?
 
                 try:
