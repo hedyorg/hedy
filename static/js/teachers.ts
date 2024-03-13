@@ -228,21 +228,24 @@ function update_db_adventure(adventure_id: string) {
 
   for (const tag of html.getElementsByTagName('code')) {
     if (tag.className === "language-python") {
-      snippets.push(tag.outerText);
+      snippets.push(tag.innerText);
     }
   }
 
   for (const snippet of snippets) {
     snippetsFormatted.push(addCurlyBracesToCode(snippet, minLevel));
   }
+
   let i = 0;
   for (const tag of html.getElementsByTagName('code')) {
     if (tag.className === "language-python") {
-      tag.outerText = snippetsFormatted[i]
+      tag.innerText = snippetsFormatted[i]
+      console.log(tag.outerHTML)
       i++;
     }
   }
-
+  // We have to replace <br> for newlines, because the serializer swithces them around
+  const formatted_content = html.getElementsByTagName('body')[0].outerHTML.replace(/<br>/, '\n');
   const agree_public = $('#agree_public').prop('checked');
   const language = $('#language').val();
 
@@ -253,6 +256,7 @@ function update_db_adventure(adventure_id: string) {
       id: adventure_id,
       name: adventure_name,
       content: content,
+      formatted_content: formatted_content,
       public: agree_public,
       language,
       levels,

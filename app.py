@@ -241,8 +241,12 @@ def load_customized_adventures(level, customizations, into_adventures):
     for a in order_for_this_level:
         if a['from_teacher'] and (db_row := teacher_adventure_map.get(a['name'])):
             try:
-                db_row['content'] = safe_format(db_row['content'],
-                                                **hedy_content.KEYWORDS.get(g.keyword_lang))
+                if 'formatted_content' in db_row:
+                    db_row['formatted_content'] = safe_format(db_row['formatted_content'],
+                                                              **hedy_content.KEYWORDS.get(g.keyword_lang))
+                else:
+                    db_row['content'] = safe_format(db_row['content'],
+                                                    **hedy_content.KEYWORDS.get(g.keyword_lang))
             except Exception:
                 # We don't want teacher being able to break the student UI -> pass this adventure
                 pass
