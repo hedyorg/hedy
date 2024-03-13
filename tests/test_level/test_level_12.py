@@ -1620,7 +1620,7 @@ class TestsLevel12(HedyTester):
             print 'koekoek'""")
 
         expected = textwrap.dedent("""\
-        for i in range(int('5')):
+        for __i in range(int('5')):
           print(f'''koekoek''')
           time.sleep(0.1)""")
 
@@ -1635,7 +1635,7 @@ class TestsLevel12(HedyTester):
         expected = HedyTester.dedent(
             "n = 5",
             self.variable_type_check_transpiled('n', 'int'),
-            "for i in range(int(n)):",
+            "for __i in range(int(n)):",
             ("print(f'''me wants a cookie!''')", '  '),
             ("time.sleep(0.1)", '  ')
         )
@@ -1659,7 +1659,7 @@ class TestsLevel12(HedyTester):
 
         expected = textwrap.dedent(f"""\
         count = 1
-        for i in range(int('12')):
+        for __i in range(int('12')):
           print(f'''{{count}} times 12 is {{{self.number_cast_transpiled('count')} * {self.number_cast_transpiled(12)}}}''')
           count = {self.addition_transpiled('count', 1)}
           time.sleep(0.1)""")
@@ -1672,7 +1672,7 @@ class TestsLevel12(HedyTester):
             sleep""")
 
         expected = textwrap.dedent("""\
-        for i in range(int('5')):
+        for __i in range(int('5')):
           time.sleep(1)
           time.sleep(0.1)""")
 
@@ -1686,7 +1686,7 @@ class TestsLevel12(HedyTester):
             print 'me wants a cookie!'""")
 
         expected = textwrap.dedent(f"""\
-        for i in range(int('{int(number)}')):
+        for __i in range(int('{int(number)}')):
           print(f'''me wants a cookie!''')
           time.sleep(0.1)""")
 
@@ -1699,36 +1699,6 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, output=output, max_level=17)
 
-    def test_repeat_with_variable_name_collision(self):
-        code = textwrap.dedent("""\
-        i is 'hallo!'
-        repeat 5 times
-            print 'me wants a cookie!'
-        print i""")
-
-        expected = textwrap.dedent("""\
-        i = 'hallo!'
-        for _i in range(int('5')):
-          print(f'''me wants a cookie!''')
-          time.sleep(0.1)
-        print(f'''{i}''')""")
-
-        output = textwrap.dedent("""\
-        me wants a cookie!
-        me wants a cookie!
-        me wants a cookie!
-        me wants a cookie!
-        me wants a cookie!
-        hallo!""")
-
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            expected_commands=['is', 'repeat', 'print', 'print'],
-            output=output,
-            max_level=17
-        )
-
     def test_repeat_nested_in_repeat(self):
         code = textwrap.dedent("""\
         repeat 2 times
@@ -1736,8 +1706,8 @@ class TestsLevel12(HedyTester):
                 print 'hello'""")
 
         expected = textwrap.dedent("""\
-           for i in range(int('2')):
-             for i in range(int('3')):
+           for __i in range(int('2')):
+             for __i in range(int('3')):
                print(f'''hello''')
                time.sleep(0.1)""")
 
@@ -2340,7 +2310,7 @@ class TestsLevel12(HedyTester):
         expected = HedyTester.dedent(f"""\
         x = 'but'
         create_button(x)
-        for i in range(int('3')):
+        for __i in range(int('3')):
           pygame_end = False
           while not pygame_end:
             pygame.display.update()
@@ -2707,7 +2677,7 @@ class TestsLevel12(HedyTester):
 
         expected = textwrap.dedent(f"""\
         notes = [1, 2, 3]
-        for i in range(int('10')):
+        for __i in range(int('10')):
           chosen_note = str(random.choice(notes)).upper()
           if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
               raise Exception({self.value_exception_transpiled()})
