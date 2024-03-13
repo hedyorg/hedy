@@ -7,16 +7,41 @@ import { theKeywordLanguage } from "./app";
 
 declare let window: CustomWindow;
 
-
-let $editor: ClassicEditor;
-const editorContainer = document.querySelector('#adventure-editor') as HTMLElement;
-const lang = document.querySelector('html')?.getAttribute('lang') || 'en';
-// Initialize the editor with the default language
-if (editorContainer) {
-    initializeEditor(lang);
+export interface InitializeCustomizeAdventurePage {
+    readonly page: 'customize-adventure';
 }
 
-function initializeEditor(language: string): Promise<void> {
+let $editor: ClassicEditor;
+
+export async function initializeCustomAdventurePage(_options: InitializeCustomizeAdventurePage) {
+    const editorContainer = document.querySelector('#adventure-editor') as HTMLElement;
+    const lang = document.querySelector('html')?.getAttribute('lang') || 'en';
+    // Initialize the editor with the default language
+    if (editorContainer) {
+        initializeEditor(lang, editorContainer);
+    }
+
+    // We wait until Tailwind generates the select
+    const tailwindSelects = await waitForElm('[data-te-select-option-ref]')
+    tailwindSelects.forEach((el) => {
+        el.addEventListener('click', () => {
+            // After clicking, it takes some time for the checkbox to change state, so if we want to target the checkbox
+            // that are checked after clicking we can't do that inmediately after the click
+            // therofore we wait for 100ms
+            setTimeout(function(){
+                const numberOfLevels = document.querySelectorAll('[aria-selected="true"]').length;
+                const numberOfSnippets = document.querySelectorAll('pre[data-language="Hedy"]').length
+                if(numberOfLevels > 1 && numberOfSnippets > 0) {
+                    $('#warningbox').show()
+                } else if(numberOfLevels <= 1 || numberOfSnippets === 0) {
+                    $('#warningbox').hide()
+                }
+            }, 100);
+        })
+    })
+}
+
+function initializeEditor(language: string, editorContainer: HTMLElement): Promise<void> {
     return new Promise((resolve, reject) => {
         if ($editor) {
             $editor.destroy();
@@ -110,4 +135,25 @@ export function addCurlyBracesToCode(code: string, level: number) {
     formattedCode = resultingLines.join('\n');
     
     return formattedCode;
+}
+
+function waitForElm(selector: string): Promise<NodeListOf<Element>>  {
+    return new Promise(resolve => {
+        if (document.querySelector(selector)) {
+            return resolve(document.querySelectorAll(selector));
+        }
+
+        const observer = new MutationObserver(_mutations => {
+            if (document.querySelector(selector)) {
+                observer.disconnect();
+                resolve(document.querySelectorAll(selector));
+            }
+        });
+
+        // If you get "parameter 1 is not of type 'Node'" error, see https://stackoverflow.com/a/77855838/492336
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    });
 }

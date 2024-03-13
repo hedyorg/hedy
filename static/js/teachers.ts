@@ -224,6 +224,7 @@ function update_db_adventure(adventure_id: string) {
   const html = parser.parseFromString(content, 'text/html');
   const minLevel = Math.min(...levels.map((el) => Number(el)));
   let snippets: string[] = [] ;
+  let snippetsFormatted: string[] = [];
 
   for (const tag of html.getElementsByTagName('code')) {
     if (tag.className === "language-python") {
@@ -232,7 +233,14 @@ function update_db_adventure(adventure_id: string) {
   }
 
   for (const snippet of snippets) {
-    console.log(addCurlyBracesToCode(snippet, minLevel));
+    snippetsFormatted.push(addCurlyBracesToCode(snippet, minLevel));
+  }
+  let i = 0;
+  for (const tag of html.getElementsByTagName('code')) {
+    if (tag.className === "language-python") {
+      tag.outerText = snippetsFormatted[i]
+      i++;
+    }
   }
 
   const agree_public = $('#agree_public').prop('checked');

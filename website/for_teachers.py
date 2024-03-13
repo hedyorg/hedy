@@ -1026,6 +1026,9 @@ class ForTeachersModule(WebsiteModule):
             js=dict(
                 content=adventure.get("content"),
                 lang=g.lang,
+            ),
+            javascript_page_options=dict(
+                page='customize-adventure'
             )
         )
 
