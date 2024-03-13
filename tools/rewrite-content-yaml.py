@@ -114,7 +114,7 @@ def rewrite_yaml_file(fn):
 
     out = StringIO()
     yaml.dump(
-        #data, indent=4, allow_unicode=True, width=30000
+        # data, indent=4, allow_unicode=True, width=30000
         data, out
     )
     new_string = out.getvalue()
