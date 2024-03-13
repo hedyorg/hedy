@@ -467,39 +467,32 @@ def escape_var(var):
     return "_" + var_name if var_name in reserved_words else var_name
 
 
-def closest_command(invalid_command, known_commands, threshold=2):
-    # closest_command() searches for a similar command (distance smaller than threshold)
-    # TODO: make the result value be tuple instead of a ugly None & string mix
-    # returns None if the invalid command does not contain any known command.
-    # returns 'keyword' if the invalid command is exactly a command (so shoudl not be suggested)
-
-    min_command = closest_command_with_min_distance(invalid_command, known_commands, threshold)
-
-    # Check if we are not returning the found command
-    # In that case we have no suggestion
-    # This is to prevent "print is not a command in Hedy level 3, did you mean print?" error message
-
-    if min_command == invalid_command:
-        return 'keyword'
-    return min_command
-
-
 def style_command(command):
     return f'<span class="command-highlighted">{command}</span>'
 
 
-def closest_command_with_min_distance(invalid_command, commands, threshold):
-    # FH, early 2020: simple string distance, could be more sophisticated MACHINE LEARNING!
+def closest_command(input_, known_commands, threshold=2):
+    # Find the closest command to the input, i.e. the one with the smallest distance within the threshold. Returns:
+    #  (None, _)  No suggestion. There is no command similar enough to the input. For example, the distance
+    #             between 'eechoooo' and 'echo' is higher than the specified threshold.
+    #  (False, _) Invalid suggestion. The suggested command is identical to the input, so it is not a suggestion.
+    #             This is to prevent "print is not a command in Hedy level 3, did you mean print?" error message.
+    #  (True, 'sug') Valid suggestion. A command is similar enough to the input but not identical, e.g. 'aks' -> 'ask'
 
+    # FH, early 2020: simple string distance, could be more sophisticated MACHINE LEARNING!
     minimum_distance = 1000
-    closest_command = None
-    for command in commands:
-        minimum_distance_for_command = calculate_minimum_distance(command, invalid_command)
+    result = None
+    for command in known_commands:
+        minimum_distance_for_command = calculate_minimum_distance(command, input_)
         if minimum_distance_for_command < minimum_distance and minimum_distance_for_command <= threshold:
             minimum_distance = minimum_distance_for_command
-            closest_command = command
+            result = command
 
-    return closest_command
+    if result:
+        if result != input_:
+            return True, result  # Valid suggestion
+        return False, ''  # Invalid suggestion
+    return None, ''  # No suggestion
 
 
 def calculate_minimum_distance(s1, s2):
@@ -1214,24 +1207,24 @@ class IsValid(Filter):
 
     def error_invalid(self, meta, args):
         invalid_command = args[0][1]
-        closest = closest_command(invalid_command, get_suggestions_for_language(self.lang, self.level))
+        sug_exists, suggestion = closest_command(invalid_command, get_suggestions_for_language(self.lang, self.level))
 
-        if closest == 'keyword':  # we couldn't find a suggestion
+        if sug_exists is None:  # there is no suggestion
+            raise exceptions.MissingCommandException(level=self.level, line_number=meta.line)
+        if not sug_exists:  # the suggestion is invalid, i.e. identical to the command
             invalid_command_en = hedy_translation.translate_keyword_to_en(invalid_command, lang)
             if invalid_command_en == Command.turn:
                 arg = args[0][0]
-                raise hedy.exceptions.InvalidArgumentException(command=invalid_command,
-                                                               allowed_types=get_allowed_types(
-                                                                   Command.turn, self.level),
-                                                               invalid_argument=arg,
-                                                               line_number=meta.line)
+                raise hedy.exceptions.InvalidArgumentException(
+                    command=invalid_command,
+                    allowed_types=get_allowed_types(Command.turn, self.level),
+                    invalid_argument=arg,
+                    line_number=meta.line)
             # clearly the error message here should be better or it should be a different one!
             raise exceptions.ParseException(level=self.level, location=[meta.line, meta.column], found=invalid_command)
-        elif closest is None:
-            raise exceptions.MissingCommandException(level=self.level, line_number=meta.line)
-        else:
+        else:  # there is a valid suggestion
             result = None
-            fixed_code = self.input_string.replace(invalid_command, closest)
+            fixed_code = self.input_string.replace(invalid_command, suggestion)
             if fixed_code != self.input_string:  # only if we have made a successful fix
                 try:
                     fixed_result = transpile_inner(fixed_code, self.level)
@@ -1241,7 +1234,7 @@ class IsValid(Filter):
                     pass
 
         raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=self.level,
-                                                 guessed_command=closest, line_number=meta.line,
+                                                 guessed_command=suggestion, line_number=meta.line,
                                                  fixed_code=fixed_code, fixed_result=result)
 
     def error_unsupported_number(self, meta, args):
