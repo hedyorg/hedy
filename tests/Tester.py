@@ -531,7 +531,6 @@ class HedyTester(unittest.TestCase):
                 error_message = error_message.replace('<span class="command-highlighted">', '`')
                 error_message = error_message.replace('</span>', '`')
 
-
         def add_arrow(code):
             """Adds an arrow to the given code snippet on the line that caused the error."""
             if not arrow:
