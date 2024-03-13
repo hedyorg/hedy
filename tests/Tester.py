@@ -533,7 +533,7 @@ class HedyTester(unittest.TestCase):
 
         lines = snippet.code.split('\n')
         lines_with_numbers = [lines[i] + " <-------" if i+1 == location[0]
-                                and arrow else lines[i] for i in range(len(lines))]
+                              and arrow else lines[i] for i in range(len(lines))]
         code_with_numbers = '\n'.join(lines_with_numbers)
 
         print('======================================================================')
