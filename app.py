@@ -757,7 +757,7 @@ def download_machine_file(filename, extension="zip"):
     return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
-MICROBIT_FEATURE = False
+MICROBIT_FEATURE = True
 
 
 @app.route('/generate_microbit_files', methods=['POST'])
@@ -787,6 +787,7 @@ def save_transpiled_code_for_microbit(transpiled_python_code):
 
         # Add space before every display.scroll call
         indented_code = transpiled_python_code.replace("display.scroll(", "    display.scroll(")
+        indented_code = indented_code.replace("question", "    question")
 
         # Append the indented transpiled code
         file.write(indented_code)
