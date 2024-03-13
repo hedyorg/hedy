@@ -530,16 +530,20 @@ class HedyTester(unittest.TestCase):
                 error_message = translate_error(E.error_code, E.arguments, 'en')
                 error_message = error_message.replace('<span class="command-highlighted">', '`')
                 error_message = error_message.replace('</span>', '`')
-                lines = snippet.code.split('\n')
-                lines_with_numbers = [lines[i] + " <-------" if i+1 == location[0]
-                                      and arrow else lines[i] for i in range(len(lines))]
-                code_with_numbers = '\n'.join(lines_with_numbers)
 
-                print(f'\n----\n{code_with_numbers}')
-                print(f'----\n{snippet.original_code}\n----')
-                print(f'in language {snippet.language} from level {snippet.level} gives error:')
-                print(f'{error_message} at line {location}')
-                raise E
+        lines = snippet.code.split('\n')
+        lines_with_numbers = [lines[i] + " <-------" if i+1 == location[0]
+                                and arrow else lines[i] for i in range(len(lines))]
+        code_with_numbers = '\n'.join(lines_with_numbers)
+
+        print('======================================================================')
+        print(f'Language {snippet.language}, level {snippet.level} produces an error:')
+        print(f'{error_message} at line {location}')
+        print('-- keywords --')
+        print(snippet.original_code)
+        print('-- translated --')
+        print(code_with_numbers)
+        raise E
 
 
 def create_hash(hedy_language, test_hash):
