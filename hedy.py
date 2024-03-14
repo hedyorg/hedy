@@ -1632,17 +1632,17 @@ class ConvertToPython_1(ConvertToPython):
         if not self.microbit:
             return f"answer = input('" + argument + "')" + self.add_debug_breakpoint()
         else:
-            user_answer = input(f"{argument}") + self.add_debug_breakpoint()
-            return user_answer
-
-    import textwrap
+            return textwrap.dedent(f"""\
+                            display.scroll('{argument}')""")
 
     def echo(self, meta, args):
         if len(args) == 0:
             if not self.microbit:
                 return f"print(answer){self.add_debug_breakpoint()}"
             else:
-                return self.ask(self, args)
+                user_answer = input(meta)
+                return textwrap.dedent(f"""\
+                            speech.say('{user_answer}')""")
         else:
             argument = process_characters_needing_escape(args[0])
             return f"print('" + argument + " '+answer)" + self.add_debug_breakpoint()

@@ -782,12 +782,13 @@ def save_transpiled_code_for_microbit(transpiled_python_code):
     if not os.path.exists(folder):
         os.makedirs(folder)
     with open(filepath, 'w') as file:
-        custom_string = "from microbit import *\nwhile True:"
+        custom_string = "from microbit import *\nimport speech\nwhile True:"
         file.write(custom_string + "\n")
 
         # Add space before every display.scroll call
         indented_code = transpiled_python_code.replace("display.scroll(", "    display.scroll(")
         indented_code = indented_code.replace("question", "    question")
+        indented_code = indented_code.replace("speech.say(", "    speech.say(")
 
         # Append the indented transpiled code
         file.write(indented_code)
