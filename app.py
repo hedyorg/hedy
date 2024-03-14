@@ -107,6 +107,7 @@ ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 DATABASE = database.Database()
 ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
 SURVEYS = surveys.SurveysModule(DATABASE)
+STATISTICS = statistics.StatisticsModule(DATABASE)
 
 TAGS = collections.defaultdict(hedy_content.NoSuchAdventure)
 for lang in ALL_LANGUAGES.keys():
@@ -624,16 +625,20 @@ def parse():
     if username and body.get('save_name'):
         try:
             program_logic = programs.ProgramsLogic(DATABASE, ACHIEVEMENTS)
-            program = program_logic.store_user_program(
-                user=current_user(),
-                level=level,
-                name=body.get('save_name'),
-                program_id=body.get('program_id'),
-                adventure_name=body.get('adventure_name'),
-                code=code,
-                error=exception is not None)
+            full_adventures = hedy_content.Adventures("en").get_adventures(g.keyword_lang)
+            teacher_adventures = DATABASE.get_teacher_adventures(current_user()["username"])
+            program = DATABASE.program_by_id(body.get('program_id'))
+            if STATISTICS.is_program_modified(program, full_adventures, teacher_adventures):
+                program = program_logic.store_user_program(
+                    user=current_user(),
+                    level=level,
+                    name=body.get('save_name'),
+                    program_id=body.get('program_id'),
+                    adventure_name=body.get('adventure_name'),
+                    code=code,
+                    error=exception is not None)
 
-            response['save_info'] = SaveInfo.from_program(Program.from_database_row(program))
+        # response['save_info'] = SaveInfo.from_program(Program.from_database_row(program))
         except programs.NotYourProgramError:
             # No permissions to overwrite, no biggie
             pass
