@@ -418,7 +418,7 @@ class TestsLevel14(HedyTester):
         )
 
     def test_simple_function(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(f"""\
         define test_function_1
             int = 1
             return "Test function " int
@@ -443,7 +443,7 @@ class TestsLevel14(HedyTester):
         print call test_function_2 with m
         print call test_function_2 with 4.0
         print call test_function_2 with "5"
-        print call test_function_2 with 4 * 1.5
+        print call test_function_2 with 1.5 * 4
         print ""
         call test_function_3 with 4
         print ""
@@ -451,12 +451,12 @@ class TestsLevel14(HedyTester):
         print ""
         call test_function_3 with 6""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         def test_function_1():
           _int = 1
-          return f'''Test function {_int}'''
+          return f'''Test function {{_int}}'''
         def test_function_2(_int):
-          return f'''Test function {_int}'''
+          return f'''Test function {{_int}}'''
         def test_function_3(_input):
           if convert_numerals('Latin', _input)!=convert_numerals('Latin', 5):
             print(f'''NE5''')
@@ -470,13 +470,13 @@ class TestsLevel14(HedyTester):
             print(f'''GTE5''')
           if convert_numerals('Latin', _input) == convert_numerals('Latin', '5'):
             print(f'''E5''')
-        print(f'''{test_function_1()}''')
-        print(f'''{test_function_2(2)}''')
+        print(f'''{{test_function_1()}}''')
+        print(f'''{{test_function_2(2)}}''')
         m = 3
-        print(f'''{test_function_2(m)}''')
-        print(f'''{test_function_2(4.0)}''')
-        print(f'''{test_function_2('5')}''')
-        print(f'''{test_function_2(4 * 1.5)}''')
+        print(f'''{{test_function_2(m)}}''')
+        print(f'''{{test_function_2(4.0)}}''')
+        print(f'''{{test_function_2('5')}}''')
+        print(f'''{{test_function_2({self.number_cast_transpiled('1.5')} * {self.number_cast_transpiled('4')})}}''')
         print(f'''''')
         test_function_3(4)
         print(f'''''')

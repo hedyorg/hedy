@@ -292,12 +292,12 @@ class TestsLevel8(HedyTester):
         if test is cmp
             acu is acu + 1""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         cmp = '1'
         test = '2'
         acu = '0'
         if convert_numerals('Latin', test) == convert_numerals('Latin', cmp):
-          acu = int(acu) + int(1)""")
+          acu = {self.int_cast_transpiled('acu', False)} + int(1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -741,11 +741,11 @@ class TestsLevel8(HedyTester):
             print count ' times 12 is ' count * 12
             count is count + 1""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         count = '1'
         for i in range(int('12')):
-          print(f'{count} times 12 is {int(count) * int(12)}')
-          count = int(count) + int(1)
+          print(f'{{count}} times 12 is {{{self.int_cast_transpiled('count', False)} * int(12)}}')
+          count = {self.int_cast_transpiled('count', False)} + int(1)
           time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -1257,18 +1257,18 @@ class TestsLevel8(HedyTester):
                 print note
                 play note""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
             for i in range(int('10')):
               notes = ['C4', 'E4', 'D4', 'F4', 'G4']
               try:
                 random.choice(notes)
               except IndexError:
-                raise Exception('catch_index_exception')
+                raise Exception({self.index_exception_transpiled()})
               note = random.choice(notes)
-              print(f'{note}')
+              print(f'{{note}}')
               chosen_note = str(note).upper()
               if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
-                  raise Exception('catch_value_exception')
+                  raise Exception({self.value_exception_transpiled()})
               play(notes_mapping.get(chosen_note, chosen_note))
               time.sleep(0.5)
               time.sleep(0.1)""")
@@ -1289,12 +1289,12 @@ class TestsLevel8(HedyTester):
         repeat 10 times
             play notes at random""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         notes = ['1', '2', '3']
         for i in range(int('10')):
           chosen_note = str(random.choice(notes)).upper()
           if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
-              raise Exception('catch_value_exception')
+              raise Exception({self.value_exception_transpiled()})
           play(notes_mapping.get(chosen_note, chosen_note))
           time.sleep(0.5)
           time.sleep(0.1)""")
@@ -1315,15 +1315,15 @@ class TestsLevel8(HedyTester):
             play note
             note is note + 1""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         note = '34'
         for i in range(int('3')):
           chosen_note = str(note).upper()
           if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
-              raise Exception('catch_value_exception')
+              raise Exception({self.value_exception_transpiled()})
           play(notes_mapping.get(chosen_note, chosen_note))
           time.sleep(0.5)
-          note = int(note) + int(1)
+          note = {self.int_cast_transpiled('note', False)} + int(1)
           time.sleep(0.1)""")
 
         self.multi_level_tester(
