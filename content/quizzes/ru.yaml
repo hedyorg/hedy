@@ -596,7 +596,7 @@ levels:
                 feedback: Take a look at the `{remove}` commands
             -   option: sea salt
                 feedback: sea salt is removed from the list
-            -   option: paprika
+            -   option: паприка
                 feedback: Paprika is removed from the list
             -   option: sour cream
                 feedback: That's right!
@@ -920,7 +920,7 @@ levels:
                 name {is} {ask} 'What is your name?'
                 {if} name {is} Hedy {print} 'fun' {else} {print} 'less fun'
             mp_choice_options:
-            -   option: fun
+            -   option: веселье
                 feedback: That's right!
             -   option: less fun
                 feedback: If the name is Hedy, it will say 'fun''
@@ -956,11 +956,11 @@ levels:
                 {if} password {is} SECRET {print} 'Correct!'
                 {else} {print} 'ALARM! INTRUDER!'
             mp_choice_options:
-            -   option: Correct
+            -   option: Правильно
                 feedback: That's printed if the correct answer is given, not the wrong one...
             -   option: SECRET
                 feedback: That's not the right answer
-            -   option: Wrong!
+            -   option: Неправильно!
                 feedback: No, this is not what Hedy will print
             -   option: ALARM! INTRUDER!
                 feedback: Great job!
@@ -1111,7 +1111,7 @@ levels:
             mp_choice_options:
             -   option: Hedy picks a random monster each time.
                 feedback: Потрясающе!
-            -   option: vampire
+            -   option: вампир
                 feedback: Not always...
             -   option: werewolf
                 feedback: Not always...
@@ -2007,7 +2007,7 @@ levels:
                         {repeat} 3 {times}
                             {print} 'Icecream is the best!'
                     ```
-                feedback: Perfect
+                feedback: Идеально
             -   option: |-
                     ```
                     {repeat} 3 {times}
@@ -2049,7 +2049,7 @@ levels:
                             {if} drink {is} coke
                                 price = price - 2
                     ```
-                feedback: Amazing!
+                feedback: Впечатляет!
             -   option: |-
                     ```
                     {if} food {is} pizza
@@ -2750,8 +2750,7 @@ levels:
             question_score: '10'
         6:
             question_text: Which line should be filled in at the ???
-            code: "{print} 'Добро пожаловать в МакХеди!'\norder = {ask} 'Вы хотите гамбургер или картофель фри?'\n{if} заказ = 'гамбургер'\n\tцена = 12\n{if} заказ = 'картофель фри'\n\tцена = 4\nнапитки = {ask} 'Хотите ли вы напиток с этим за 2 доллара?'\n{if} напитки = 'да'\n\t???\n{print} 'Это будет\
-                \ ' цена ' доллар, пожалуйста'"
+            code: "{print} 'Добро пожаловать в МакХеди!'\norder = {ask} 'Вы хотите гамбургер или картофель фри?'\n{if} заказ = 'гамбургер'\n\tцена = 12\n{if} заказ = 'картофель фри'\n\tцена = 4\nнапитки = {ask} 'Хотите ли вы напиток с этим за 2 доллара?'\n{if} напитки = 'да'\n\t???\n{print} 'Это будет ' цена ' доллар, пожалуйста'"
             mp_choice_options:
             -   option: |-
                     ```
@@ -2778,8 +2777,7 @@ levels:
             question_score: '10'
         7:
             question_text: Which output does a vegan get?
-            code: "меню = 'печенье', 'сыр', 'виноград'\n{print} \"Сегодня мой день рождения! Я принесла немного закусок!\"\nдиета = {ask} 'Есть ли у вас какие-либо ограничения в питании?'\n{if} диета = 'без глютена'\n\t{remove} 'печенье' {from} меню\n{if} диета = 'веган'\n\t{remove} 'сыр' {from} меню\n\
-                {print} 'Для вас я принесла:'\n{for} закуска {in} меню\n\t{print} закуска"
+            code: "меню = 'печенье', 'сыр', 'виноград'\n{print} \"Сегодня мой день рождения! Я принесла немного закусок!\"\nдиета = {ask} 'Есть ли у вас какие-либо ограничения в питании?'\n{if} диета = 'без глютена'\n\t{remove} 'печенье' {from} меню\n{if} диета = 'веган'\n\t{remove} 'сыр' {from} меню\n{print} 'Для вас я принесла:'\n{for} закуска {in} меню\n\t{print} закуска"
             mp_choice_options:
             -   option: |-
                     It's my birthday! I've brought some snacks!
@@ -2865,8 +2863,7 @@ levels:
             question_score: '10'
         10:
             question_text: Which line of code should be filled in at the ??? to complete the song ?
-            code: "действия = \"хлопайте в ладоши\", \"топайте ногами\", \"кричите Ура!\".\n???\n\t{for} i {in} диапазон 0 {to} 1\n\t\t{print} 'если вы счастливы и знаете это'\n\t\t{print} действие\n\t{print} 'если вы счастливы и знаете это, и вы действительно хотите показать это'\n\t{print} 'если вы\
-                \ счастливы и знаете это'\n\t{print} действие"
+            code: "действия = \"хлопайте в ладоши\", \"топайте ногами\", \"кричите Ура!\".\n???\n\t{for} i {in} диапазон 0 {to} 1\n\t\t{print} 'если вы счастливы и знаете это'\n\t\t{print} действие\n\t{print} 'если вы счастливы и знаете это, и вы действительно хотите показать это'\n\t{print} 'если вы счастливы и знаете это'\n\t{print} действие"
             mp_choice_options:
             -   option: for i in range 1 to 3
                 feedback: This is a hard one! All the actions on the list must be in the song.

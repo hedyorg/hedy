@@ -8,6 +8,7 @@ import json
 import datetime
 import os
 import re
+import subprocess
 import sys
 import traceback
 import textwrap
@@ -43,13 +44,12 @@ from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, st
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
-                     translating, tags, surveys, public_adventures, user_activity)
+                     translating, tags, surveys, public_adventures, user_activity, feedback)
 from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
                           forget_current_user)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
-
 
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -757,6 +757,66 @@ def download_machine_file(filename, extension="zip"):
     return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
+MICROBIT_FEATURE = False
+
+
+@app.route('/generate_microbit_files', methods=['POST'])
+def generate_microbit_file():
+    if MICROBIT_FEATURE:
+        # Extract variables from request body
+        body = request.json
+        code = body.get("code")
+        level = body.get("level")
+
+        transpile_result = hedy.transpile_and_return_python(code, level)
+        save_transpiled_code_for_microbit(transpile_result)
+        return jsonify({'filename': 'Micro-bit.py', 'microbit': True}), 200
+    else:
+        return jsonify({'message': 'Microbit feature is disabled'}), 403
+
+
+def save_transpiled_code_for_microbit(transpiled_python_code):
+    folder = 'Micro-bit'
+    filepath = os.path.join(folder, 'Micro-bit.py')
+
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+    with open(filepath, 'w') as file:
+        custom_string = "from microbit import *\nwhile True:"
+        file.write(custom_string + "\n")
+
+        # Add space before every display.scroll call
+        indented_code = transpiled_python_code.replace("display.scroll(", "    display.scroll(")
+
+        # Append the indented transpiled code
+        file.write(indented_code)
+
+
+@app.route('/download_microbit_files/', methods=['GET'])
+def convert_to_hex_and_download():
+    if MICROBIT_FEATURE:
+        flash_micro_bit()
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        micro_bit_directory = os.path.join(current_directory, 'Micro-bit')
+
+        @after_this_request
+        def remove_file(response):
+            try:
+                os.remove("Micro-bit/micropython.hex")
+                os.remove("Micro-bit/Micro-bit.py")
+            except BaseException:
+                print("Error removing one of the generated files!")
+            return response
+
+        return send_file(os.path.join(micro_bit_directory, "micropython.hex"), as_attachment=True)
+    else:
+        return jsonify({'message': 'Microbit feature is disabled'}), 403
+
+
+def flash_micro_bit():
+    subprocess.run(['uflash', "Micro-bit/Micro-bit.py", "Micro-bit"])
+
+
 def transpile_add_stats(code, level, lang_, is_debug):
     username = current_user()['username'] or None
     number_of_lines = code.count('\n')
@@ -872,8 +932,8 @@ def translate_list(args):
 
     if len(translated_args) > 1:
         return f"{', '.join(translated_args[0:-1])}" \
-            f" {gettext('or')} " \
-            f"{translated_args[-1]}"
+               f" {gettext('or')} " \
+               f"{translated_args[-1]}"
     return ''.join(translated_args)
 
 
@@ -1008,7 +1068,7 @@ def programs_page(user):
     ids_to_fetch = []
     # Some old programs don't have adventure_name in them, or the field is emtpy.
     for program in all_programs:
-        if 'adventure_name' in program and program['adventure_name'] and\
+        if 'adventure_name' in program and program['adventure_name'] and \
                 program['adventure_name'] not in adventure_names:
             ids_to_fetch.append(program['adventure_name'])
 
@@ -1043,10 +1103,10 @@ def programs_page(user):
              }
         )
 
-    sorted_level_programs = hedy_content.Adventures(g.lang)\
-                                        .get_sorted_level_programs(all_programs, adventure_names)
-    sorted_adventure_programs = hedy_content.Adventures(g.lang)\
-                                            .get_sorted_adventure_programs(all_programs, adventure_names)
+    sorted_level_programs = hedy_content.Adventures(g.lang) \
+        .get_sorted_level_programs(all_programs, adventure_names)
+    sorted_adventure_programs = hedy_content.Adventures(g.lang) \
+        .get_sorted_adventure_programs(all_programs, adventure_names)
 
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
@@ -1175,6 +1235,7 @@ def teacher_tutorial(user):
                                page='for-teachers',
                                tutorial=True,
                            ))
+
 
 # routing to index.html
 
@@ -1355,6 +1416,7 @@ def hour_of_code(level, program_id=None):
 @app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'program_id': None})
+@app.route('/hedy', methods=['GET'], defaults={'program_id': None, 'level': '1'})
 @app.route('/hedy/<int:level>', methods=['GET'], defaults={'program_id': None})
 @app.route('/hedy/<int:level>/<program_id>', methods=['GET'])
 def index(level, program_id):
@@ -1404,9 +1466,20 @@ def index(level, program_id):
     # - The level is allowed and available
     # - But, if there is a quiz threshold we have to check again if the user has reached it
 
+    parsons_in_level = True
+    quiz_in_level = True
+    if customizations.get("sorted_adventures") and len(customizations["sorted_adventures"]) > 2:
+        parsons_in_level = [adv for adv in customizations["sorted_adventures"][str(level)][-2:]
+                            if adv.get("name") == "parsons"]
+        quiz_in_level = [adv for adv in customizations["sorted_adventures"][str(level)][-2:]
+                         if adv.get("name") == "quiz"]
+
     if 'level_thresholds' in customizations:
-        show_quiz = 'other_settings' in customizations and 'hide_quiz' not in customizations['other_settings']
-        if show_quiz and 'quiz' in customizations.get('level_thresholds'):
+        # If quiz in level and in some of the previous levels, then we check the threshold level.
+        check_threshold = 'other_settings' in customizations and 'hide_quiz' not in customizations['other_settings']
+
+        if check_threshold and 'quiz' in customizations.get('level_thresholds'):
+
             # Temporary store the threshold
             threshold = customizations.get('level_thresholds').get('quiz')
             level_quiz_data = QUIZZES[g.lang].get_quiz_data_for_level(level)
@@ -1414,29 +1487,59 @@ def index(level, program_id):
             # A bit out-of-scope, but we want to enable the next level button directly after finishing the quiz
             # Todo: How can we fix this without a re-load?
             quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
+
+            previous_quiz_level = level
+            for _prev_level in range(level - 1, 0, -1):
+                if _prev_level in available_levels and \
+                        customizations["sorted_adventures"][str(_prev_level)][-1].get("name") == "quiz" and \
+                        not any(x.get("scores") for x in quiz_stats if x.get("level") == _prev_level):
+                    previous_quiz_level = _prev_level
+                    break
+
             # Not current leve-quiz's data because some levels may have no data for quizes,
             # but we still need to check for the threshold.
             if level - 1 in available_levels and level > 1 and \
                     (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
-                scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
-                scores = [score for week_scores in scores for score in week_scores]
-                max_score = 0 if len(scores) < 1 else max(scores)
-                if max_score < threshold:
-                    return utils.error_page(
-                        error=403, ui_message=gettext('quiz_threshold_not_reached'))
+
+                # Only if we have found a quiz in previous levels with quiz data, we check the threshold.
+                if previous_quiz_level < level:
+                    # scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
+                    scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == previous_quiz_level]
+                    scores = [score for week_scores in scores for score in week_scores]
+                    max_score = 0 if len(scores) < 1 else max(scores)
+                    if max_score < threshold:
+                        # Instead of sending this level isn't available, we could send them to the right level?!
+                        # return redirect(f"/hedy/{previous_quiz_level}")
+                        return utils.error_page(
+                            error=403, ui_message=gettext('quiz_threshold_not_reached'))
 
             # We also have to check if the next level should be removed from the available_levels
             # Only check the quiz threshold if there is a quiz to obtain a score on the current level
             if level <= hedy.HEDY_MAX_LEVEL and level_quiz_data:
-                scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level]
-                scores = [score for week_scores in scores for score in week_scores]
-                max_score = 0 if len(scores) < 1 else max(scores)
-                # We don't have the score yet for the next level -> remove all upcoming
-                # levels from 'available_levels'
-                if max_score < threshold:
-                    # if this level is currently available, but score is below max score
-                    customizations["below_threshold"] = (level + 1 in available_levels)
-                    available_levels = available_levels[:available_levels.index(level) + 1]
+                next_level_with_quiz = level - 1
+                for _next_level in range(level, hedy.HEDY_MAX_LEVEL):
+                    # find the next level whose quiz isn't answered.
+                    if _next_level in available_levels and \
+                            customizations["sorted_adventures"][str(_next_level)][-1].get("name") == "quiz" and \
+                            not any(x.get("scores") for x in quiz_stats if x.get("level") == _next_level):
+                        next_level_with_quiz = _next_level
+                        break
+
+                # If the next quiz is in the current or upcoming level,
+                # we attempt to adjust available levels beginning from that level.
+                # e.g., student2 completed quiz 2, levels 3,4 and 5 have not quizes, 6 does.
+                # We should start from that level. If next_level_with_quiz >= level,
+                # meaning we don't need to adjust available levels ~ all available/quizes done!
+                if next_level_with_quiz >= level:
+                    scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == next_level_with_quiz]
+                    scores = [score for week_scores in scores for score in week_scores]
+                    max_score = 0 if len(scores) < 1 else max(scores)
+                    # We don't have the score yet for the next level -> remove all upcoming
+                    # levels from 'available_levels'
+                    if max_score < threshold:
+                        # if this level is currently available, but score is below max score
+                        customizations["below_threshold"] = (next_level_with_quiz + 1 in available_levels)
+                        available_levels = available_levels[:available_levels.index(next_level_with_quiz) + 1]
 
     # Add the available levels to the customizations dict -> simplify
     # implementation on the front-end
@@ -1485,9 +1588,11 @@ def index(level, program_id):
     if parsons:
         parson_exercises = len(PARSONS[g.lang].get_parsons_data_for_level(level))
 
-    if 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']:
+    if not parsons_in_level or 'other_settings' in customizations and \
+            'hide_parsons' in customizations['other_settings']:
         parsons = False
-    if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
+    if not quiz_in_level or 'other_settings' in customizations and \
+            'hide_quiz' in customizations['other_settings']:
         quiz = False
 
     max_level = hedy.HEDY_MAX_LEVEL
@@ -1521,6 +1626,7 @@ def index(level, program_id):
         blur_button_available=False,
         initial_adventure=adventures_map[initial_tab],
         current_user_is_in_class=len(current_user().get('classes') or []) > 0,
+        microbit_feature=MICROBIT_FEATURE,
         # See initialize.ts
         javascript_page_options=dict(
             page='code',
@@ -1995,8 +2101,10 @@ def main_page():
     if os.path.isfile(f'static/images/hero-graphic/hero-graphic-{g.lang}.png'):
         custom_logo = True
 
+    user = current_user()
+
     return render_template('main-page.html', page_title=gettext('title_start'), custom_logo=custom_logo,
-                           current_page='start', content=content)
+                           current_page='start', content=content, user=user)
 
 
 @app.route('/subscribe')
@@ -2456,6 +2564,7 @@ def get_user_messages():
 
 app.add_template_global(utils.prepare_content_for_ckeditor, name="prepare_content_for_ckeditor")
 
+
 # Todo TB: Re-write this somewhere sometimes following the line below
 # We only store this @app.route here to enable the use of achievements ->
 # might want to re-write this in the future
@@ -2586,8 +2695,10 @@ def public_user_page(username):
         certificate_message = safe_format(gettext('see_certificate'), username=username)
         print(user_programs)
         # Todo: TB -> In the near future: add achievement for user visiting their own profile
-        next_page_url = url_for('public_user_page', username=username, **dict(request.args,
-                                page=next_page_token)) if next_page_token else None
+        next_page_url = url_for(
+            'public_user_page',
+            username=username, **dict(request.args,
+                                      page=next_page_token)) if next_page_token else None
         return render_template(
             'public-page.html',
             user_info=user_public_info,
@@ -2677,6 +2788,7 @@ app.register_blueprint(user_activity.UserActivityModule(DATABASE))
 app.register_blueprint(tags.TagsModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(public_adventures.PublicAdventuresModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(surveys.SurveysModule(DATABASE))
+app.register_blueprint(feedback.FeedbackModule(DATABASE))
 
 
 # *** START SERVER ***
@@ -2825,6 +2937,7 @@ if __name__ == '__main__':
     start_snapshot = None
     if profile_memory:
         import tracemalloc
+
         tracemalloc.start()
         start_snapshot = tracemalloc.take_snapshot()
 
@@ -2843,6 +2956,7 @@ if __name__ == '__main__':
     if profile_memory:
         print('⏳ Taking memory snapshot. This may take a moment.')
         import gc
+
         gc.collect()
         end_snapshot = tracemalloc.take_snapshot()
         analyze_memory_snapshot(start_snapshot, end_snapshot)

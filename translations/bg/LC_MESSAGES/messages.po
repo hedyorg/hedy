@@ -7,16 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-02-13 11:36+0100\n"
-"PO-Revision-Date: 2024-02-29 13:29+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language-Team: bg <LL@li.org>\n"
+"POT-Creation-Date: 2000-01-01 00:00+0000\n"
+"PO-Revision-Date: 2000-01-01 00:00+0000\n"
+"Last-Translator: Someone <someone@example.com>\n"
 "Language: bg\n"
+"Language-Team: bg <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -86,6 +85,9 @@ msgstr "It looks like you forgot to use a command on line {line_number}."
 msgid "Missing Inner Command"
 msgstr "It looks like you forgot to use a command with the {command} statement you used on line {line_number}."
 
+msgid "Missing Square Brackets"
+msgstr "It looks like you forgot to use square brackets [] around the list you were creating on line {line_number}."
+
 #, fuzzy
 msgid "Missing Variable"
 msgstr "It looks like your {command} is missing a variable at the start of the line."
@@ -108,6 +110,9 @@ msgstr "Този код не е валиден на Хеди. Има грешк�
 #, fuzzy
 msgid "Pressit Missing Else"
 msgstr "You forgot to add what happens when you press a different key, add an {else} to your code"
+
+msgid "Save Microbit code "
+msgstr "Изтегли код за Микробит"
 
 msgid "Too Big"
 msgstr "Уау! Написал(а) си много код, цели {lines_of_code} реда! в това ниво Хеди има лимит за обработка до {max_lines} реда. Пренапиши си редовете то лимита и пробвай пак!"
@@ -204,6 +209,14 @@ msgid "adventure_cloned"
 msgstr "Adventure is cloned"
 
 #, fuzzy
+msgid "adventure_code_button"
+msgstr "Adventure Code"
+
+#, fuzzy
+msgid "adventure_codeblock_button"
+msgstr "Use this button when you want to create a block of code that students can run in your adventure. Tip: put the selection at the end of the last line of the code block and <kbd>Enter</kbd> 3 times to type after a code block."
+
+#, fuzzy
 msgid "adventure_duplicate"
 msgstr "You already have an adventure with this name."
 
@@ -214,6 +227,9 @@ msgstr "You didn't enter an adventure name!"
 #, fuzzy
 msgid "adventure_exp_3"
 msgstr "You can use the \"preview\" button to view a styled version of your adventure. To view the adventure on a dedicated page, select \"view\" from the teachers page."
+
+msgid "adventure_exp_classes"
+msgstr "Your adventure is used within the following classes"
 
 #, fuzzy
 msgid "adventure_id_invalid"
@@ -238,10 +254,6 @@ msgstr "I agree that my adventure might be made publicly available on Hedy."
 #, fuzzy
 msgid "adventure_updated"
 msgstr "The adventure has been updated!"
-
-#, fuzzy
-msgid "adventures"
-msgstr "Available Adventures"
 
 #, fuzzy
 msgid "adventures_info"
@@ -310,19 +322,15 @@ msgid "ask_needs_var"
 msgstr "От ниво 2 нагоре, командата ask изисква променлива. Например: name is ask What are you called?"
 
 #, fuzzy
-msgid "back_to_class"
-msgstr "Go back to class"
-
-#, fuzzy
-msgid "back_to_teachers_page"
-msgstr "Go back to teachers page"
-
-#, fuzzy
 msgid "become_a_sponsor"
 msgstr "Become a sponsor"
 
 msgid "birth_year"
 msgstr "Година на раждане"
+
+#, fuzzy
+msgid "bug"
+msgstr "Bug"
 
 msgid "by"
 msgstr "от"
@@ -338,6 +346,9 @@ msgstr "Couldn't parse the program"
 #, fuzzy
 msgid "catch_index_exception"
 msgstr "You tried to access the list {list_name} but it is either empty or the index is not there."
+
+msgid "catch_multiple_values_exception"
+msgstr "While running your program the command {command} received the values {value} and {value} which are not allowed. {suggestion}."
 
 #, fuzzy
 msgid "catch_value_exception"
@@ -629,6 +640,14 @@ msgid "disable"
 msgstr "Disable"
 
 #, fuzzy
+msgid "disable_parsons"
+msgstr "Disable all puzzles"
+
+#, fuzzy
+msgid "disable_quizes"
+msgstr "Disable all quizes"
+
+#, fuzzy
 msgid "disabled"
 msgstr "Disabled"
 
@@ -765,6 +784,26 @@ msgstr "Your chosen favourite program is invalid."
 msgid "favourite_success"
 msgstr "Your program is set as favourite."
 
+#, fuzzy
+msgid "feature"
+msgstr "Feature"
+
+#, fuzzy
+msgid "feedback"
+msgstr "Feedback"
+
+#, fuzzy
+msgid "feedback_message_error"
+msgstr "Something went wrong, please try again later."
+
+#, fuzzy
+msgid "feedback_message_success"
+msgstr "Thank you, we recieved your feedback and will contact you if needed."
+
+#, fuzzy
+msgid "feedback_modal_message"
+msgstr "Please send us a message with a category. We appreciate your help to improve Hedy!"
+
 msgid "female"
 msgstr "Женски"
 
@@ -822,6 +861,10 @@ msgstr "Get your certificate!"
 #, fuzzy
 msgid "give_link_to_teacher"
 msgstr "Give the following link to your teacher:"
+
+#, fuzzy
+msgid "go_back"
+msgstr "Go back"
 
 #, fuzzy
 msgid "go_back_to_main"
@@ -893,14 +936,6 @@ msgstr "Hide cheatsheet"
 #, fuzzy
 msgid "hide_keyword_switcher"
 msgstr "Hide keyword switcher"
-
-#, fuzzy
-msgid "hide_parsons"
-msgstr "Hide parsons"
-
-#, fuzzy
-msgid "hide_quiz"
-msgstr "Hide quiz"
 
 #, fuzzy
 msgid "highest_level_reached"
@@ -1443,6 +1478,10 @@ msgid "page_not_found"
 msgstr "Не можахме да намерим тази страница!"
 
 #, fuzzy
+msgid "pair_with_teacher"
+msgstr "I would like to be paired with another teacher for help"
+
+#, fuzzy
 msgid "parsons_title"
 msgstr "Hedy"
 
@@ -1826,6 +1865,9 @@ msgstr "Select all"
 msgid "select_lang"
 msgstr "Select language"
 
+msgid "select_levels"
+msgstr "Избери нива"
+
 #, fuzzy
 msgid "select_tag"
 msgstr "Select tag"
@@ -1857,14 +1899,6 @@ msgstr "My personal settings"
 #, fuzzy
 msgid "share_by_giving_link"
 msgstr "Show your program to other people by giving them the link below:"
-
-#, fuzzy
-msgid "share_confirm"
-msgstr "Are you sure you want to make the program public?"
-
-#, fuzzy
-msgid "share_success_detail"
-msgstr "Program shared successfully."
 
 #, fuzzy
 msgid "share_your_program"
@@ -1907,6 +1941,10 @@ msgid "start_hedy_tutorial"
 msgstr "Start hedy tutorial"
 
 #, fuzzy
+msgid "start_learning"
+msgstr "Start learning"
+
+#, fuzzy
 msgid "start_programming"
 msgstr "Directly start programming"
 
@@ -1920,6 +1958,10 @@ msgstr "Започни теста"
 #, fuzzy
 msgid "start_teacher_tutorial"
 msgstr "Start teacher tutorial"
+
+#, fuzzy
+msgid "start_teaching"
+msgstr "Start teaching"
 
 msgid "step_title"
 msgstr "Задача"
@@ -2010,6 +2052,9 @@ msgstr "Use a note between C0 and B9 or a number between 1 and 70"
 #, fuzzy
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
+
+msgid "suggestion_numbers_or_strings"
+msgstr "Try changing the values to be all text or all numbers"
 
 #, fuzzy
 msgid "surname"
@@ -2198,9 +2243,6 @@ msgstr "Translating Hedy"
 msgid "translator"
 msgstr "Translator"
 
-msgid "try_it"
-msgstr "Опитай"
-
 #, fuzzy
 msgid "tutorial"
 msgstr "Tutorial"
@@ -2231,14 +2273,6 @@ msgstr "Unlock level thresholds"
 #, fuzzy
 msgid "unsaved_class_changes"
 msgstr "There are unsaved changes, are you sure you want to leave this page?"
-
-#, fuzzy
-msgid "unshare_confirm"
-msgstr "Are you sure you want to make the program private?"
-
-#, fuzzy
-msgid "unshare_success_detail"
-msgstr "Program unshared successfully."
 
 #, fuzzy
 msgid "update_adventure_prompt"
@@ -2457,9 +2491,6 @@ msgstr "Your program"
 #~ msgid "question_invalid"
 #~ msgstr "Your token is invalid."
 
-#~ msgid "select_levels"
-#~ msgstr "Select levels"
-
 #~ msgid "too_many_attempts"
 #~ msgstr "Too many attempts"
 
@@ -2496,18 +2527,36 @@ msgstr "Your program"
 #~ msgid "write_first_program"
 #~ msgstr "Напиши първата си програма!"
 
-#, fuzzy
-msgid "adventure_exp_1"
-msgstr "Type your adventure of choice on the right-hand side. After creating your adventure you can include it in one of your classes under \"customizations\". If you want to include a command in your adventure please use code anchors like this:"
+#~ msgid "adventures"
+#~ msgstr "Available Adventures"
 
-#, fuzzy
-msgid "hello_world"
-msgstr "Hello world!"
+#~ msgid "share_confirm"
+#~ msgstr "Are you sure you want to make the program public?"
 
-#, fuzzy
-msgid "adventure_exp_2"
-msgstr "If you want to show actual code snippets, for example to give student a template or example of the code. Please use pre anchors like this:"
+#~ msgid "share_success_detail"
+#~ msgstr "Program shared successfully."
 
-#, fuzzy
-msgid "Missing Square Brackets"
-msgstr "It looks like you forgot to use square brackets [] around the list you were creating on line {line_number}."
+#~ msgid "unshare_confirm"
+#~ msgstr "Are you sure you want to make the program private?"
+
+#~ msgid "unshare_success_detail"
+#~ msgstr "Program unshared successfully."
+
+#~ msgid "adventure_exp_1"
+#~ msgstr "Type your adventure of choice on the right-hand side. After creating your adventure you can include it in one of your classes under \"customizations\". If you want to include a command in your adventure please use code anchors like this:"
+
+#~ msgid "hello_world"
+#~ msgstr "Hello world!"
+
+#~ msgid "adventure_exp_2"
+#~ msgstr "If you want to show actual code snippets, for example to give student a template or example of the code. Please use pre anchors like this:"
+
+#~ msgid "hide_parsons"
+#~ msgstr "Hide parsons"
+
+#~ msgid "hide_quiz"
+#~ msgstr "Hide quiz"
+
+#~ msgid "back_to_class"
+#~ msgstr "Go back to class"
+

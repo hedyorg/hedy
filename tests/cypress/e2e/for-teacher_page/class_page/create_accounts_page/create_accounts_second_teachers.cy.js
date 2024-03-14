@@ -49,7 +49,7 @@ describe('Is able to go to logs page', () => {
         currentUrl = url;
         cy.get('#add-student').click();
         cy.get('#create-accounts').click(); 
-        cy.get('#back_to_class_button').click();
+        cy.get('#go_back_button').click();
         cy.wait(1000);
         let statsUrl = Cypress.env('class_page') + currentUrl.substring(currentUrl.indexOf('class/')+6);
         cy.url().should('include', statsUrl); 

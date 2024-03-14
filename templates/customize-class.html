@@ -1,5 +1,10 @@
 {% extends "auth.html" %}
 {% block regular_content %}
+<button id="back_to_class" class="back-btn" data-cy="back_to_class">
+    <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
+    <span>{{_('go_back')}}</span>
+</button>
+<br><br>
 <div class="flex flex-col gap-2">
     <h2>{{_('customize_class')}}: {{class_info.name}}</h2>
 
@@ -86,14 +91,14 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="text-left border-t border-r border-gray-400">{{_('hide_quiz')}}</td>
+                                <td class="text-left border-t border-r border-gray-400">{{_('disable_quizes')}}</td>
                                 <td class="border-t border-gray-400">
                                     <input class="other_settings_checkbox" id="hide_quiz" type="checkbox" {%
                                         if "hide_quiz" in customizations['other_settings'] %}checked{% endif %}>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="text-left border-t border-r border-gray-400">{{_('hide_parsons')}}</td>
+                                <td class="text-left border-t border-r border-gray-400">{{_('disable_parsons')}}</td>
                                 <td class="border-t border-gray-400">
                                     <input class="other_settings_checkbox" id="hide_parsons" type="checkbox" {%
                                         if "hide_parsons" in customizations['other_settings'] %}checked{% endif %}>
@@ -185,7 +190,6 @@
                         onclick='hedyApp.restore_customization_to_default({{_('remove_customizations_prompt')|default(None)|tojson}})'>
                             {{_('remove_customization')}}
                     </button>
-                    <button id='back_to_class' class="green-btn" data-cy="back_to_class">{{_('back_to_class')}}</button>
                 </div>
             </div>
             {% endif %}
