@@ -1624,8 +1624,6 @@ class ConvertToPython_1(ConvertToPython):
             return f"print('" + argument + "')" + self.add_debug_breakpoint()
         else:
             return textwrap.dedent(f"""\
-            from microbit import *
-            while True:
                 display.scroll('{argument}')""")
 
     def ask(self, meta, args):
@@ -1854,8 +1852,6 @@ class ConvertToPython_2(ConvertToPython_1):
             return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
         else:
             return textwrap.dedent(f"""\
-                from microbit import *
-                while True:
                     display.scroll('{argument_string}')""")
 
     def ask(self, meta, args):
@@ -2033,8 +2029,6 @@ class ConvertToPython_4(ConvertToPython_3):
             return exceptions + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
         else:
             return textwrap.dedent(f"""\
-                from microbit import *
-                while True:
                     display.scroll('{argument_string}')""")
 
     def ask(self, meta, args):
@@ -2548,8 +2542,6 @@ class ConvertToPython_12(ConvertToPython_11):
             return exception + f"print(f'''{argument_string}''')" + self.add_debug_breakpoint()
         else:
             return textwrap.dedent(f"""\
-                from microbit import *
-                while True:
                     display.scroll('{argument_string}')""")
 
     def ask(self, meta, args):
@@ -3754,3 +3746,8 @@ def execute(input_string, level):
     if python.has_turtle:
         raise exceptions.HedyException("hedy.execute doesn't support turtle")
     exec(python.code)
+
+
+def transpile_and_return_python(input_string, level):
+    python = transpile(input_string, level, microbit=True)
+    return str(python.code)

@@ -318,8 +318,6 @@ class TestsLevel1(HedyTester):
     def test_print_microbit(self):
         code = "print a"
         expected = textwrap.dedent(f"""\
-            from microbit import *
-            while True:
                 display.scroll('a')""")
 
         self.multi_level_tester(
