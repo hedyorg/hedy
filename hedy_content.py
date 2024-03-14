@@ -230,8 +230,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
     12: [
         'default',
         'maths',
-        'functions',
         'quotation_marks',
+        'functions',
         'story',
         'fortune',
         'music',
