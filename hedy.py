@@ -1,5 +1,4 @@
 import textwrap
-import uuid
 from functools import lru_cache, cache
 
 import lark
