@@ -142,6 +142,11 @@
           <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}}, "run")'>{{_('run_code_button')}} </button>
           <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
         </div>
+      <div id="saveMicrobitFilesContainer" {% if not microbit_feature %} class="hidden" {% endif %} >
+        <button id="runMicrobit" class="green-btn" onclick="hedyApp.saveMicrobit({{ level }});" > {{ _('Save Microbit code ') }}
+            <img src="{{ static('/images/microbit_logo_icon_248480.png') }}" style="width: 25px; height: 25px; margin-left: 1px; display: inline;" alt=""/>
+        </button>
+      </div>
         <div id="saveFilesContainer" class="hidden">
           <button id="saveFiles" class="green-btn" onclick="hedyApp.saveMachineFiles();">💾</button>
         </div>

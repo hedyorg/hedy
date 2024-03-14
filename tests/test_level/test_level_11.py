@@ -26,10 +26,10 @@ class TestsLevel11(HedyTester):
         code = textwrap.dedent("""\
         for i in range 1 to 10
             a is i + 1""")
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         step = 1 if int(1) < int(10) else -1
         for i in range(int(1), int(10) + step, step):
-          a = int(i) + int(1)
+          a = {self.int_cast_transpiled('i', False)} + int(1)
           time.sleep(0.1)""")
 
         self.single_level_tester(
@@ -113,13 +113,13 @@ class TestsLevel11(HedyTester):
             a is a + 2
             b is b + 2""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         a = '2'
         b = '3'
         step = 1 if int(2) < int(4) else -1
         for a in range(int(2), int(4) + step, step):
-          a = int(a) + int(2)
-          b = int(b) + int(2)
+          a = {self.int_cast_transpiled('a', False)} + int(2)
+          b = {self.int_cast_transpiled('b', False)} + int(2)
           time.sleep(0.1)""")
 
         self.single_level_tester(code=code, expected=expected)

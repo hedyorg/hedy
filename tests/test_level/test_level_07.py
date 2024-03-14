@@ -409,6 +409,97 @@ class TestsLevel7(HedyTester):
             repeat 3 times if y is pressed forward 15 else forward -15
             repeat 3 times if z is pressed forward 15 else forward -15""")
 
+        expected = HedyTester.dedent(f"""\
+        for __i__ in range(int('3')):
+          pygame_end = False
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN:
+              if event.unicode == 'x':
+                __trtl = 15
+                try:
+                  __trtl = int(__trtl)
+                except ValueError:
+                  raise Exception({self.value_exception_transpiled()})
+                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+                time.sleep(0.1)
+                break
+              else:
+                __trtl = -15
+                try:
+                  __trtl = int(__trtl)
+                except ValueError:
+                  raise Exception({self.value_exception_transpiled()})
+                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+                time.sleep(0.1)
+                break
+              # End of PyGame Event Handler
+          time.sleep(0.1)
+        for __i__ in range(int('3')):
+          pygame_end = False
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN:
+              if event.unicode == 'y':
+                __trtl = 15
+                try:
+                  __trtl = int(__trtl)
+                except ValueError:
+                  raise Exception({self.value_exception_transpiled()})
+                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+                time.sleep(0.1)
+                break
+              else:
+                __trtl = -15
+                try:
+                  __trtl = int(__trtl)
+                except ValueError:
+                  raise Exception({self.value_exception_transpiled()})
+                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+                time.sleep(0.1)
+                break
+              # End of PyGame Event Handler
+          time.sleep(0.1)
+        for __i__ in range(int('3')):
+          pygame_end = False
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN:
+              if event.unicode == 'z':
+                __trtl = 15
+                try:
+                  __trtl = int(__trtl)
+                except ValueError:
+                  raise Exception({self.value_exception_transpiled()})
+                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+                time.sleep(0.1)
+                break
+              else:
+                __trtl = -15
+                try:
+                  __trtl = int(__trtl)
+                except ValueError:
+                  raise Exception({self.value_exception_transpiled()})
+                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+                time.sleep(0.1)
+                break
+              # End of PyGame Event Handler
+          time.sleep(0.1)""")
         expected = HedyTester.dedent("""\
           for __i__ in range(int('3')):
             if_pressed_mapping = {"else": "if_pressed_default_else"}
@@ -544,10 +635,10 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent("""\
             repeat 3 times play C4""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
             for __i__ in range(int('3')):
               if 'C4' not in notes_mapping.keys() and 'C4' not in notes_mapping.values():
-                  raise Exception('catch_value_exception')
+                  raise Exception({self.value_exception_transpiled()})
               play(notes_mapping.get(str('C4'), str('C4')))
               time.sleep(0.5)
               time.sleep(0.1)""")
@@ -566,12 +657,12 @@ class TestsLevel7(HedyTester):
             notes is C4, E4, D4, F4, G4
             repeat 3 times play notes at random""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
             notes = ['C4', 'E4', 'D4', 'F4', 'G4']
             for __i__ in range(int('3')):
               chosen_note = str(random.choice(notes)).upper()
               if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
-                  raise Exception('catch_value_exception')
+                  raise Exception({self.value_exception_transpiled()})
               play(notes_mapping.get(chosen_note, chosen_note))
               time.sleep(0.5)
               time.sleep(0.1)""")

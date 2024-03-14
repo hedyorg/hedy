@@ -977,12 +977,16 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 
     });
 
+    const currentProgram: number = Number(sessionStorage.getItem('currentProgram') || 0) + 1;
+    sessionStorage.setItem('currentProgram', currentProgram.toString());
+
     return Sk.misceval.asyncToPromise(() =>
       Sk.importMainWithBody("<stdin>", false, code, true), {
         "*": () => {
           // We don't do anything here...
         }
-      }
+      },
+      currentProgram
      ).then(function(_mod) {
       console.log('Program executed');
       const pythonVariables = Sk.globals;

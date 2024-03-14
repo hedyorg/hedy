@@ -228,11 +228,11 @@ class TestsLevel16(HedyTester):
             "lijst = [1, 2, 3]",
             HedyTester.list_access_transpiled('lijst[int(1)-1]'),
             HedyTester.list_access_transpiled('lijst[int(2)-1]'),
-            "optellen = lijst[int(1)-1] + lijst[int(2)-1]",
+            f"optellen = {self.addition_transpiled('lijst[int(1)-1]','lijst[int(2)-1]')}",
             HedyTester.list_access_transpiled('lijst[int(3)-1]'),
-            """\
-            optellen = optellen + lijst[int(3)-1]
-            print(f'''{optellen}''')""")
+            f"""\
+            optellen = {self.addition_transpiled('optellen','lijst[int(3)-1]')}
+            print(f'''{{optellen}}''')""")
 
         self.multi_level_tester(
             code=code,
@@ -812,11 +812,11 @@ class TestsLevel16(HedyTester):
         notes = ['C4', 'E4', 'D4', 'F4', 'G4']
         play notes[random]""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         notes = ['C4', 'E4', 'D4', 'F4', 'G4']
         chosen_note = str(random.choice(notes)).upper()
         if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
-            raise Exception('catch_value_exception')
+            raise Exception({self.value_exception_transpiled()})
         play(notes_mapping.get(chosen_note, chosen_note))
         time.sleep(0.5)""")
 

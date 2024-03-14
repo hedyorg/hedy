@@ -288,9 +288,9 @@ class TestsLevel1(HedyTester):
 
     def test_play_no_args(self):
         code = "play "
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         if 'C4' not in notes_mapping.keys() and 'C4' not in notes_mapping.values():
-            raise Exception('catch_value_exception')
+            raise Exception({self.value_exception_transpiled()})
         play(notes_mapping.get(str('C4'), str('C4')))
         time.sleep(0.5)""")
 
@@ -303,9 +303,9 @@ class TestsLevel1(HedyTester):
 
     def test_play(self):
         code = "play A"
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         if 'A' not in notes_mapping.keys() and 'A' not in notes_mapping.values():
-            raise Exception('catch_value_exception')
+            raise Exception({self.value_exception_transpiled()})
         play(notes_mapping.get(str('A'), str('A')))
         time.sleep(0.5)""")
 
@@ -318,8 +318,6 @@ class TestsLevel1(HedyTester):
     def test_print_microbit(self):
         code = "print a"
         expected = textwrap.dedent(f"""\
-            from microbit import *
-            while True:
                 display.scroll('a')""")
 
         self.multi_level_tester(
@@ -333,9 +331,9 @@ class TestsLevel1(HedyTester):
 
     def test_play_lowercase(self):
         code = "play a"
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         if 'A' not in notes_mapping.keys() and 'A' not in notes_mapping.values():
-            raise Exception('catch_value_exception')
+            raise Exception({self.value_exception_transpiled()})
         play(notes_mapping.get(str('A'), str('A')))
         time.sleep(0.5)""")
 
@@ -347,9 +345,9 @@ class TestsLevel1(HedyTester):
 
     def test_play_int(self):
         code = "play 34"
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         if '34' not in notes_mapping.keys() and '34' not in notes_mapping.values():
-            raise Exception('catch_value_exception')
+            raise Exception({self.value_exception_transpiled()})
         play(notes_mapping.get(str('34'), str('34')))
         time.sleep(0.5)""")
 

@@ -143,14 +143,14 @@ class TestsLevel9(HedyTester):
                 prijs is prijs + 1
         print 'Dat is in totaal ' prijs ' euro.'""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         prijs = '0'
         for i in range(int('7')):
           ingredient = input(f'wat wil je kopen?')
           if convert_numerals('Latin', ingredient) == convert_numerals('Latin', 'appel'):
-            prijs = int(prijs) + int(1)
+            prijs = {self.int_cast_transpiled('prijs', False)} + int(1)
           time.sleep(0.1)
-        print(f'Dat is in totaal {prijs} euro.')""")
+        print(f'Dat is in totaal {{prijs}} euro.')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -163,14 +163,14 @@ class TestsLevel9(HedyTester):
                 prijs is prijs + 1
         print 'Dat is in totaal ' prijs ' euro.'""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         prijs = '0'
         for i in range(int('7')):
           ingredient = input(f'wat wil je kopen?')
           if convert_numerals('Latin', ingredient) == convert_numerals('Latin', 'appel'):
-            prijs = int(prijs) + int(1)
+            prijs = {self.int_cast_transpiled('prijs', False)} + int(1)
           time.sleep(0.1)
-        print(f'Dat is in totaal {prijs} euro.')""")
+        print(f'Dat is in totaal {{prijs}} euro.')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
