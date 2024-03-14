@@ -18,9 +18,9 @@
       <p>{{ _('classes_info') }}</p>
       </div>
       <div class="flex flex-row gap-3 justify-end">
-        <button class="green-btn" id="create_class_button" onclick='hedyApp.create_class ({{_('class_name_prompt')|default(None)|tojson}})'
+        <button class="green-btn inline-flex items-center" id="create_class_button" onclick='hedyApp.create_class ({{_('class_name_prompt')|default(None)|tojson}})'
         {% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_class')}}</button>
-        <button class="white-btn"
+        <button class="white-btn inline-flex items-center gap-2"
         _="on click toggle .hidden on #classes_table
         set t to #adventures_table
         if not t.classList.contains('hidden')
@@ -33,7 +33,7 @@
         else
           remove .rotate-180 from arrow"
         >
-        {{_('view_classes')}}
+        <span>{{_('view_classes')}}</span>
         <svg id="classes_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
           <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
         </svg>
@@ -43,15 +43,15 @@
     <div class="flex flex-col items-left gap-3 pb-10 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full lg:w-1/4 p-8">
       <h2 class="m-0"> {{_('adventures')}} </h2>
       <div class="text-black">{{ _('adventures_info') }}</div>
-      <div class="flex flex-row gap-3 justify-center">
-            <button id="create_adventure_button" class="green-btn" 
+      <div class="flex flex-row gap-3">
+            <button id="create_adventure_button" class="green-btn inline-flex items-center" 
               hx-trigger="click"
               hx-post="/for-teachers/create-adventure"
               hx-swap="none"
               _="on htmx:afterRequest if detail.xhr.response
               window.open('/for-teachers/customize-adventure/' + detail.xhr.response, '_self')"
               data-cy="edit-link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
-            <button class="white-btn"
+            <button class="white-btn inline-flex items-center"
             _="on click toggle .hidden on #adventures_table
             set t to #classes_table
             if not t.classList.contains('hidden')
@@ -62,13 +62,14 @@
             if not arrow.classList.contains('rotate-180')
               add .rotate-180 to arrow
             else
-              remove .rotate-180 from arrow"
-            >{{_('view_adventures')}}
+              remove .rotate-180 from arrow">
+            <span>{{_('view_adventures')}}</span>
             <svg id="adventures_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-            </svg></button>
-            <button id="public-adventures-link" class="blue-btn"
-            _="on click window.open('/public-adventures', '_self')">{{_('public_adventures')}}</button>
+            </svg>
+          </button>
+          <button id="public-adventures-link" class="blue-btn inline-flex items-center"
+          _="on click window.open('/public-adventures', '_self')">{{_('public_adventures')}}</button>
       </div>
     </div>
   </div>
@@ -181,7 +182,7 @@
       <h2 class="m-0"> {{_('slides')}} </h2>
       <div class="text-black">{{ _('slides_info') }}</div>
       <div style="text-align: right;">
-        <button class="white-btn"
+        <button class="white-btn inline-flex items-center"
         _="on click toggle .hidden on #adventure_table
         set arrow to #slides_arrow
         if not arrow.classList.contains('rotate-180')
@@ -189,11 +190,10 @@
         else
           remove .rotate-180 from arrow"
         >
-        <span>{{_('view_slides')}}
+        <span>{{_('view_slides')}}</span>
           <svg id="slides_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
           </svg>
-        </span>
         </button>
       </div>
       <div class="overflow-hidden">
