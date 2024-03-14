@@ -1199,7 +1199,7 @@ class ForTeachersModule(WebsiteModule):
             "date": utils.timems(),
             "creator": user["username"],
             "name": name,
-            "classes": class_id,
+            "classes": [class_id],
             "level": 1,
             "content": "",
             "language": g.lang,
