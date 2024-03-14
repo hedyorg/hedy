@@ -1305,6 +1305,10 @@ class IsValid(Filter):
     def error_nested_define(self, meta, args):
         raise exceptions.NestedFunctionException()
 
+    def error_if_pressed_missing_else(self, meta, args):
+        raise exceptions.MissingElseForPressitException(
+            command='ifpressed_else', level=self.level, line_number=meta.line)
+
     # other rules are inherited from Filter
 
 

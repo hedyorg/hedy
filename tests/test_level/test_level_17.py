@@ -5,12 +5,12 @@ from parameterized import parameterized
 import exceptions
 import hedy
 from hedy_sourcemap import SourceRange
-# from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester, SkippedMapping  # , SkippedMapping
+from tests.Tester import HedyTester, SkippedMapping
 
 
 class TestsLevel17(HedyTester):
     level = 17
+    maxDiff = None
 
     def test_if_with_indent(self):
         code = textwrap.dedent("""\
@@ -445,18 +445,18 @@ class TestsLevel17(HedyTester):
           color red""")
 
         expected = HedyTester.dedent("""\
-         if_pressed_mapping = {"else": "if_pressed_default_else"}
-         if_pressed_mapping['x'] = 'if_pressed_x_'
-         def if_pressed_x_():
-             __trtl = f'red'
-             color_dict = {'black': 'black', 'blue': 'blue', 'brown': 'brown', 'gray': 'gray', 'green': 'green', 'orange': 'orange', 'pink': 'pink', 'purple': 'purple', 'red': 'red', 'white': 'white', 'yellow': 'yellow'}
-             if __trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
-               raise Exception('catch_value_exception')
-             else:
-               if not __trtl in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
-                 __trtl = color_dict[__trtl]
-             t.pencolor(__trtl)
-         extensions.if_pressed(if_pressed_mapping)""")
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        def if_pressed_x_():
+            __trtl = f'red'
+            color_dict = {'black': 'black', 'blue': 'blue', 'brown': 'brown', 'gray': 'gray', 'green': 'green', 'orange': 'orange', 'pink': 'pink', 'purple': 'purple', 'red': 'red', 'white': 'white', 'yellow': 'yellow'}
+            if __trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
+              raise Exception(\"""catch_value_exception\""")
+            else:
+              if not __trtl in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
+                __trtl = color_dict[__trtl]
+            t.pencolor(__trtl)
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(
             code=code,

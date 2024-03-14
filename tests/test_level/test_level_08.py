@@ -1033,28 +1033,27 @@ class TestsLevel8(HedyTester):
         self.maxDiff = None
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-    # FH, march 2024 not sure how to fix this
-    # def test_if_pressed_missing_else_gives_error(self):
-    #     code = textwrap.dedent("""\
-    #     prind skipping
-    #     if x is pressed
-    #       print 'missing else!'""")
-    #
-    #     expected = textwrap.dedent("""\
-    #     pass
-    #     pass""")
-    #
-    #     skipped_mappings = [
-    #         SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
-    #         SkippedMapping(SourceRange(2, 1, 3, 33), hedy.exceptions.MissingElseForPressitException),
-    #     ]
-    #
-    #     self.multi_level_tester(
-    #         code=code,
-    #         expected=expected,
-    #         skipped_mappings=skipped_mappings,
-    #         max_level=14
-    #     )
+    def test_if_pressed_missing_else_gives_error(self):
+        code = textwrap.dedent("""\
+        prind skipping
+        if x is pressed
+          print 'missing else!'""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 1, 3, 33), hedy.exceptions.MissingElseForPressitException),
+        ]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=14
+        )
 
     def test_if_no_indent_after_pressed_and_else_gives_noindent_error(self):
         code = textwrap.dedent("""\
