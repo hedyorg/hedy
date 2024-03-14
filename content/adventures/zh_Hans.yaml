@@ -387,6 +387,9 @@ adventures:
                     最接近21但没有超过它的玩家获胜。
 
                     好好享受游戏吧！
+
+                    ### Exercise
+                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -442,9 +445,9 @@ adventures:
                             points = points + 10
                         {elif} card_3 == 'Ace':
                             {if} points > 11:
-                                points = points + 11
-                            {else}:
                                 points = points + 1
+                            {else}:
+                                points = points + 11
                         {else}:
                             points = points + card_3
                         {print} 'You get an extra ' card_3 ' (' points ' points)'

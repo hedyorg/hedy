@@ -361,7 +361,11 @@ adventures:
         description: Probeer zo dicht mogelijk bij 21 te komen
         levels:
             17:
-                story_text: "Blackjack is een simpel kaartspelletje waarbij je zo dicht mogelijk bij 21 punten moet komen. Je krijgt twee kaarten. Elke kaart is het getal waard dat erop staat, en de kaarten met plaatjes (Boer, Vrouw, Heer) zijn 10 punten waard.\nDe Aas is 1 of 11 punten waard (dat mag je zelf kiezen). De dealer, jouw tegenstander, krijgt ook twee kaarten.\nAls je wil, mag je een derde kaart pakken en die punten worden bij jouw score opgeteld. De dealer mag ook een extra kaart pakken.\nMaar pas op dat je nooit over de 21 punten heengaat, want dan verlies je!\nDe speler die het dichtst bij de 21 punten komt, zonder eroverheen te gaan, wint! \n\nVeel plezier!\n"
+                story_text: |
+                    Blackjack is een simpel kaartspelletje waarbij je zo dicht mogelijk bij 21 punten moet komen. Je krijgt twee kaarten. Elke kaart is het getal waard dat erop staat, en de kaarten met plaatjes (Boer, Vrouw, Heer) zijn 10 punten waard.\nDe Aas is 1 of 11 punten waard (dat mag je zelf kiezen). De dealer, jouw tegenstander, krijgt ook twee kaarten.\nAls je wil, mag je een derde kaart pakken en die punten worden bij jouw score opgeteld. De dealer mag ook een extra kaart pakken.\nMaar pas op dat je nooit over de 21 punten heengaat, want dan verlies je!\nDe speler die het dichtst bij de 21 punten komt, zonder eroverheen te gaan, wint!
+                    Veel plezier!
+                    ### Opdracht
+                     Dit programma werkt prima, maar de code is verschrikkelijk lang en omslachting. Kun jij de code opruimen en inkorten door fucnties te gebruiken?
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -417,9 +421,9 @@ adventures:
                             punten = punten + 10
                         {elif} kaart_3 == 'Aas':
                             {if} punten > 11:
-                                punten = punten + 11
-                            {else}:
                                 punten = punten + 1
+                            {else}:
+                                punten = punten + 11
                         {else}:
                             punten = punten + kaart_3
                         print 'Je krijgt een extra ' kaart_3 ' (' punten ' punten)'

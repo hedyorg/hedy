@@ -413,6 +413,9 @@ adventures:
                     Den spelare som kommer närmast 21, utan att gå över det, vinner!
 
                     Ha det så kul!
+
+                    ### Exercise
+                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -468,9 +471,9 @@ adventures:
                             poäng = poäng + 10
                         {elif} kort_3 == 'ess':
                             {if} poäng > 11:
-                                poäng = poäng + 11
-                            {else}:
                                 poäng = poäng + 1
+                            {else}:
+                                poäng = poäng + 11
                         {else}:
                             poäng = poäng + kort_3
                         {print} 'Du får ett extra ' kort_3 ' (' poäng ' poäng)'

@@ -399,6 +399,9 @@ adventures:
                     La ludanto, kiu plej alproksimiĝos al 21, ne superante 21, gajnos!
 
                     Amuziĝu!
+
+                    ### Exercise
+                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
                 example_code: |
                     ```
                     {print} 'NIGRA FANTO'
@@ -454,9 +457,9 @@ adventures:
                             poentoj = poentoj + 10
                         {elif} karto_3 == 'Aso':
                             {if} poentoj > 11:
-                                poentoj = poentoj + 11
-                            {else}:
                                 poentoj = poentoj + 1
+                            {else}:
+                                poentoj = poentoj + 11
                         {else}:
                             poentoj = poentoj + karto_3
                         print 'Vi akiris kroman karton: ' karto_3 ' (' poentoj ' poentoj)'

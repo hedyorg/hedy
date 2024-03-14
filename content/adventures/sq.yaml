@@ -410,6 +410,9 @@ adventures:
                     Lojtari që afrohet më shumë me 21, pa e kaluar atë, fiton!
 
                     Argëtohu!
+
+                    ### Exercise
+                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -465,9 +468,9 @@ adventures:
                             pikë = pikë + 10
                         {elif} karta_3 == 'Njësh':
                             {if} pikë > 11:
-                                pikë = pikë + 11
-                            {else}:
                                 pikë = pikë + 1
+                            {else}:
+                                pikë = pikë + 11
                         {else}:
                             pikë = pikë + karta_3
                         {print} 'Ju merrni një shtesë ' karta_3 ' (' pikë ' pikë)'

@@ -411,6 +411,9 @@ adventures:
                     Der Spieler, der am nächsten an 21 herankommt ohne sie zu überschreiten, gewinnt!
 
                     Viel Spaß!
+
+                    ### Exercise
+                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -466,9 +469,9 @@ adventures:
                             punkte = punkte + 10
                         {elif} karte_3 == 'Ace':
                             {if} punkte > 11:
-                                punkte = punkte + 11
-                            {else}:
                                 punkte = punkte + 1
+                            {else}:
+                                punkte = punkte + 11
                         {else}:
                             punkte = punkte + karte_3
                         {print} 'Du hast extra ' karte_3 ' (' punkte ' Punkte)'

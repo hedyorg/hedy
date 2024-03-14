@@ -376,6 +376,9 @@ adventures:
                     The player who gets closest to 21, without going over it, wins!
 
                     Have fun!
+
+                    ### Exercise
+                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
                 example_code: |
                     ```
                     {print} 'VINTE-E-UM'
@@ -431,9 +434,9 @@ adventures:
                             pontos = pontos + 10
                         {elif} carta_3 == 'Ás':
                             {if} pontos > 11:
-                                pontos = pontos + 11
-                            {else}:
                                 pontos = pontos + 1
+                            {else}:
+                                pontos = pontos + 11
                         {else}:
                             pontos = pontos + carta_3
                         {print} 'Você pegou uma carta extra: ' carta_3 ' (' pontos ' pontos)'

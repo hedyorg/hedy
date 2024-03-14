@@ -412,6 +412,9 @@ adventures:
                     21'i aşmadan 21'e en çok yaklaşan oyuncu kazanır!
 
                     İyi eğlenceler!
+
+                    ### Exercise
+                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
                 example_code: |
                     ```
                     {print} 'YİRMİBİR'
@@ -467,9 +470,9 @@ adventures:
                             puanlar = puanlar + 10
                         {elif} kart_3 == 'As':
                             {if} puanlar < 11:
-                                puanlar = puanlar + 11
-                            {else}:
                                 puanlar = puanlar + 1
+                            {else}:
+                                puanlar = puanlar + 11
                         {else}:
                             puanlar = puanlar + kart_3
                         {print} 'Çektiğin ek kart bir ' kart_3 ' (' puanlar ' puan)'

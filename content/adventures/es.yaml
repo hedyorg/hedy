@@ -403,6 +403,9 @@ adventures:
                     ¡El jugador que se acerque mas a 21 sin pasarse gana!
 
                     ¡Buena suerte!
+
+                    ### Exercise
+                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -458,9 +461,9 @@ adventures:
                             puntos = puntos + 10
                         {elif} carta_3 == 'As':
                             {if} puntos > 11:
-                                puntos = puntos + 11
-                            {else}:
                                 puntos = puntos + 1
+                            {else}:
+                                puntos = puntos + 11
                         {else}:
                             puntos = puntos + carta_3
                         {print} 'Tienes un' carta_3 ' extra (' puntos ' puntos)'

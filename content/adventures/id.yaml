@@ -391,6 +391,8 @@ adventures:
                     The player who gets closest to 21, without going over it, wins!
 
                     Have fun!
+                    ### Exercise
+                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -446,9 +448,9 @@ adventures:
                             poin = poin + 10
                         {elif} kartu_3 == 'Ace':
                             {if} poin > 11:
-                                poin = poin + 11
-                            {else}:
                                 poin = poin + 1
+                            {else}:
+                                poin = poin + 11
                         {else}:
                             poin = poin + kartu_3
                         {print} 'Anda mendapatkan tambahan ' kartu_3 ' (' poin ' poin)'

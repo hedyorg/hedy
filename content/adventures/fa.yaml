@@ -393,8 +393,10 @@ adventures:
                     If you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.
                     But be careful not to get more than 21 points, because if you do, you lose!
                     The player who gets closest to 21, without going over it, wins!
-
                     Have fun!
+
+                    ### Exercise
+                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -450,14 +452,14 @@ adventures:
                             points = points + 10
                         {elif} card_3 == 'Ace':
                             {if} points > 11:
-                                points = points + 11
-                            {else}:
                                 points = points + 1
+                            {else}:
+                                points = points + 11
                         {else}:
                             points = points + card_3
-                        print 'You get an extra ' card_3 ' (' points ' points)'
+                        {print} 'You get an extra ' card_3 ' (' points ' points)'
                     {else}:
-                        print 'No extra cards'
+                        {print} 'No extra cards'
                     # Winner
                     {if} points > 21 {or} dealer_points > points {or} dealer_points == 21:
                         {print} 'You lose'
