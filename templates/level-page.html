@@ -6,7 +6,7 @@
   <div class="bg-red-500 text-white text-sm font-bold px-4 py-3" data-cy="preview_adventure_banner" role="alert">
       <div class="text-center center-text">{{_('previewing_adventure')}} 
         {% if initial_adventure.author == username %}
-          <a class="text-white" href="/for-teachers/customize-adventure/{{initial_adventure.id}}/for-teachers">{{_('edit_adventure')}}</a>
+          <a class="text-white" href="/for-teachers/customize-adventure/{{initial_adventure.id}}">{{_('edit_adventure')}}</a>
         {% else %}
           <a class="text-white" href="/public-adventures">{{_('public_adventures')}}</a>
         {% endif %}

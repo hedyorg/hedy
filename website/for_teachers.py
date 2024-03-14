@@ -985,11 +985,9 @@ class ForTeachersModule(WebsiteModule):
             current_page="for-teachers",
         )
 
-    @route("/customize-adventure/<adventure_id>/<current_page>", methods=["GET"])
+    @route("/customize-adventure/<adventure_id>", methods=["GET"])
     @requires_teacher
-    def get_adventure_info(self, user, adventure_id, current_page):
-        if current_page != "for-teachers":
-            current_page = 'for-teachers/class/' + current_page
+    def get_adventure_info(self, user, adventure_id):
         if not adventure_id:
             return gettext("adventure_empty"), 400
         if not isinstance(adventure_id, str):
@@ -1024,7 +1022,7 @@ class ForTeachersModule(WebsiteModule):
             all_classes=Classes,
             username=user["username"],
             max_level=hedy.HEDY_MAX_LEVEL,
-            current_page=current_page,
+            go_back=session['class_id'],
             # TODO: update tags to be {name, canEdit} where canEdit is true if currentUser is the creator.
             adventure_tags=adventure.get("tags", []),
             js=dict(
@@ -1195,6 +1193,7 @@ class ForTeachersModule(WebsiteModule):
                 name += 'X'
                 continue
 
+        session['class_id'] = class_id
         adventure = {
             "id": adventure_id,
             "date": utils.timems(),

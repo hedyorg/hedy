@@ -2,7 +2,11 @@
 
 {% block regular_content %}
 <button id='go_back_button' class="back-btn"
-onclick="window.open('/{{current_page}}', '_self');">
+{% if go_back %}
+onclick="window.open('/for-teachers/class/{{go_back}}', '_self');"
+{% else %}
+onclick="window.open('/for-teachers', '_self');"
+{% endif %}>
     <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
     <span>{{_('go_back')}}</span>
 </button>
