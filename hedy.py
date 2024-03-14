@@ -1042,8 +1042,8 @@ def flatten_list_of_lists_to_list(args):
     flat_list = []
     for element in args:
         if isinstance(
-            element,
-            str):  # str needs a special case before list because a str is also a list and we don't want to split all letters out
+                element,
+                str):  # str needs a special case before list because a str is also a list and we don't want to split all letters out
             flat_list.append(element)
         elif isinstance(element, list):
             flat_list += flatten_list_of_lists_to_list(element)
@@ -1146,7 +1146,7 @@ class AllCommands(Transformer):
         operators = ['addition', 'subtraction', 'multiplication', 'division']
 
         if production_rule_name in commands_per_level[
-            self.level] or production_rule_name in operators or production_rule_name == 'ifpressed_else':
+                self.level] or production_rule_name in operators or production_rule_name == 'ifpressed_else':
             # ifpressed_else is not in the yamls, upsetting lookup code to get an alternative later
             # lookup should be fixed instead, making a special case for now
             if production_rule_name == 'else':  # use of else also has an if
@@ -3481,7 +3481,7 @@ def preprocess_ifs(code, lang='en'):
         times_plus_translated = ['times', keywords_in_lang.get('times')]
 
         if len(elements_in_line) > 2 and elements_in_line[0] in repeat_plus_translated and elements_in_line[
-            2] in times_plus_translated:
+                2] in times_plus_translated:
             line = ' '.join(elements_in_line[3:])
 
         if lang in ALL_KEYWORD_LANGUAGES:
@@ -3512,7 +3512,7 @@ def preprocess_ifs(code, lang='en'):
             command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
             for c in command_plus_translated_command:
                 if line.count(
-                    ' ' + c + ' ') >= 2:  # surround in spaces since we dont want to mathc something like 'dishwasher is sophie'
+                        ' ' + c + ' ') >= 2:  # surround in spaces since we dont want to mathc something like 'dishwasher is sophie'
                     return True
             return False
 
@@ -3546,7 +3546,7 @@ def preprocess_ifs(code, lang='en'):
 
         # if this line starts with if but does not contain an else, and the next non-empty line too is not an else.
         if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (
-            not starts_with('else', next_non_empty_line(lines, i))) and (not contains('else', line)):
+                not starts_with('else', next_non_empty_line(lines, i))) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
             commands = ["print", "ask", "forward", "turn", "play"]
             excluded_commands = ["pressed"]
