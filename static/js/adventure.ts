@@ -3,7 +3,6 @@ import { CustomWindow } from './custom-window';
 import { languagePerLevel, keywords } from "./lezer-parsers/language-packages";
 import { SyntaxNode } from "@lezer/common";
 import { initializeTranslation } from "./lezer-parsers/tokens";
-import { theKeywordLanguage } from "./app";
 
 declare let window: CustomWindow;
 
@@ -25,7 +24,7 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
     const tailwindSelects = await waitForElm('[data-te-select-option-ref]')
     tailwindSelects.forEach((el) => {
         el.addEventListener('click', () => {
-            // After clicking, it takes some time for the checkbox to change state, so if we want to target the checkbox
+            // After clicking, it takes some time for the checkbox to change state, so if we want to target the checkboxess 
             // that are checked after clicking we can't do that inmediately after the click
             // therofore we wait for 100ms
             setTimeout(function(){
@@ -68,11 +67,11 @@ function initializeEditor(language: string, editorContainer: HTMLElement): Promi
     });
 }
 
-export function addCurlyBracesToCode(code: string, level: number) {
+export function addCurlyBracesToCode(code: string, level: number, language: string = 'en') {
     // If code already has curly braces, we don't do anything about it
     if (code.match(/\{(\w|_)+\}/g)) return code
     
-    initializeTranslation({keywordLanguage: theKeywordLanguage, level: level})
+    initializeTranslation({keywordLanguage: language, level: level})
 
     let parser = languagePerLevel[level];
     let parseResult = parser.parse(code);

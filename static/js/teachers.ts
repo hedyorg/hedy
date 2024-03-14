@@ -233,7 +233,7 @@ function update_db_adventure(adventure_id: string) {
   }
 
   for (const snippet of snippets) {
-    snippetsFormatted.push(addCurlyBracesToCode(snippet, minLevel));
+    snippetsFormatted.push(addCurlyBracesToCode(snippet, minLevel, $('#language').val() as string || 'en'));
   }
 
   let i = 0;
