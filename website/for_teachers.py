@@ -1176,6 +1176,8 @@ class ForTeachersModule(WebsiteModule):
             adventures[int(level)].append(sorted_adventure)
         else:
             adventures[int(level)].remove(sorted_adventure)
+        self.reorder_adventures(adventures[int(level)], from_sorted_adv_class=True)
+        self.reorder_adventures(customizations['sorted_adventures'][level])
         self.db.update_class_customizations(customizations)
 
     @route("/create-adventure/<class_id>", methods=["POST"])
