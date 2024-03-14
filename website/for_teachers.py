@@ -1180,9 +1180,10 @@ class ForTeachersModule(WebsiteModule):
         self.reorder_adventures(customizations['sorted_adventures'][level])
         self.db.update_class_customizations(customizations)
 
+    @route("/create-adventure/", methods=["POST"])
     @route("/create-adventure/<class_id>", methods=["POST"])
     @requires_teacher
-    def create_adventure(self, user, class_id):
+    def create_adventure(self, user, class_id=None):
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
 
@@ -1205,7 +1206,7 @@ class ForTeachersModule(WebsiteModule):
             "language": g.lang,
         }
         self.db.store_adventure(adventure)
-        if class_id != '0':
+        if class_id:
             self.add_adventure_to_class_level(user, class_id, adventure_id, "1", False)
 
         return adventure["id"], 200
