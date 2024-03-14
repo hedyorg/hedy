@@ -4076,6 +4076,34 @@ adventures:
                     {print} 'die drinkt zijn melk zo zoetjes'
                     {call} _
                     ```
+            16:
+                story_text: |
+                    ### Opdracht
+                    Maak het liedje af door de ontbrekende regels en variabelen in te vullen. Vul daarna de lijsten aan met nog meer dieren die iets doen, zoals leeuwen die samen geeuwen, koeien die bootje roeien of...?
+                example_code: |
+                    ```
+                    dieren = ['beren', 'apen', 'bijen', _]
+                    lijdend_voorwerp = ['broodjes', 'lekker', 'auto, _']
+                    werkwoord = ['smeren', 'slapen', 'rijden', _]
+                    _
+                        {print} 'Ik zag twee ' dieren[i] ' ' lijdend_voorwerp[i] ' ' werkwoord[i]
+                        {print} 'Oh het was een wonder'
+                        {print} 'Het was een wonder, boven wonder'
+                        {print} 'Dat die ' _ ' ' _ ' konden'
+                        {print} 'Hi hi hi'
+                        {print} 'Ha ha ha'
+                        {print} 'Ik stond erbij en ik keek er naar'
+                        {sleep} 5
+                        {clear}
+                    ```
+                story_text_2: |
+                    ### Opdracht 2
+                    Maak nu op dezelfde manier je eigen code voor het liedje 'de wielen van de bus'!
+                example_code_2: |
+                    ```
+                    voorwerp = ['wielen', 'deuren', _]
+                    movement = [ 'rond en rond', 'open en dicht', _]
+                    ```
     tic:
         name: Boter Kaas en Eieren
         default_save_name: Boter

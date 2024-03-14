@@ -297,6 +297,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'random_command',
         'haunted',
         'songs',
+        'songs_2',
         'language',
         'debugging',
         'quiz',
