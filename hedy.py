@@ -478,7 +478,9 @@ def get_suggestions_for_language(lang, level):
 
 
 def escape_var(var):
-    var_name = var.name if type(var) is LookupEntry else var
+    var_name = var
+    if isinstance(var, LookupEntry):
+        var_name = var.name
     return "_" + var_name if var_name in reserved_words else var_name
 
 
@@ -2311,15 +2313,23 @@ def add_sleep_to_command(commands, indent=True, is_debug=False, location="after"
 @hedy_transpiler(level=7)
 @source_map_transformer(source_map)
 class ConvertToPython_7(ConvertToPython_6):
-    def repeat(self, meta, args):
-        var_name = self.get_fresh_var('__i__')
+    def make_repeat(self, meta, args, multiline):
+        var_name = self.get_fresh_var('__i')
         times = self.process_variable(args[0], meta.line)
-        command = args[1]
-        # in level 7, repeats can only have 1 line as their arguments
-        command = add_sleep_to_command(command, False, self.is_debug, location="after")
+
+        # In level 7, repeat can only have 1 line in its body
+        if not multiline:
+            body = self.indent(args[1])
+        # In level 8 and up, repeat can have multiple lines in its body
+        else:
+            body = "\n".join([self.indent(x) for x in args[1:]])
+
+        body = add_sleep_to_command(body, indent=True, is_debug=self.is_debug, location="after")
         type_check = self.code_to_ensure_variable_type(times, 'int', Command.repeat, 'number')
-        return f"""{type_check}for {var_name} in range(int({str(times)})):{self.add_debug_breakpoint()}
-{ConvertToPython.indent(command)}"""
+        return f"{type_check}for {var_name} in range(int({times})):{self.add_debug_breakpoint()}\n{body}"
+
+    def repeat(self, meta, args):
+        return self.make_repeat(meta, args, multiline=False)
 
 
 @v_args(meta=True)
@@ -2333,17 +2343,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
         return "".join(args)
 
     def repeat(self, meta, args):
-        # todo fh, may 2022, could be merged with 7 if we make
-        # indent a boolean parameter?
-
-        var_name = self.get_fresh_var('i')
-        times = self.process_variable(args[0], meta.line)
-
-        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
-        body = "\n".join(all_lines)
-        body = add_sleep_to_command(body, indent=True, is_debug=self.is_debug, location="after")
-        type_check = self.code_to_ensure_variable_type(times, 'int', Command.repeat, 'number')
-        return f"""{type_check}for {var_name} in range(int({times})):{self.add_debug_breakpoint()}\n{body}"""
+        return self.make_repeat(meta, args, multiline=True)
 
     def ifs(self, meta, args):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
