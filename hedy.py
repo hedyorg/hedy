@@ -304,51 +304,36 @@ def promote_types(types, rules):
     return types
 
 
+def add_level(commands, level, add=None, remove=None):
+    # Adds the commands for the given level by taking the commands of the previous level
+    # and adjusting the list based on which keywords need to be added or/and removed
+    if not add:
+        add = []
+    if not remove:
+        remove = []
+    commands[level] = [c for c in commands[level-1] if c not in remove] + add
+
+
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
-# FH, dec 2023: TODO: Lots of duplication here! Could be made nicer?
-commands_per_level = {
-    1: ['print', 'ask', 'echo', 'turn', 'forward', 'color', 'play'],
-    2: ['print', 'ask', 'is', 'turn', 'forward', 'color', 'sleep', 'play'],
-    3: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from',
-        'play'],
-    4: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from',
-        'clear', 'play'],
-    5: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'clear', 'play'],
-    6: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'clear', 'play'],
-    7: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
-    8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
-    9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
-    10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'for', 'clear', 'play'],
-    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear', 'play'],
-    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear', 'define', 'call',
-         'play'],
-    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define',
-         'call', 'play'],
-    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define',
-         'call', 'play'],
-    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear',
-         'define', 'call', 'play'],
-    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear',
-         'define', 'call', 'play'],
-    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif',
-         'clear', 'define', 'call', 'play'],
-    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if',
-         'not_in', 'else', 'for', 'ifpressed', 'assign_button', 'range', 'repeat', 'and', 'or', 'while', 'elif',
-         'input', 'clear', 'define', 'call', 'play'],
-}
+commands_per_level = {1: ['ask', 'color', 'echo', 'forward', 'play', 'print', 'turn']}
+add_level(commands_per_level, level=2, add=['is', 'sleep'], remove=['echo'])
+add_level(commands_per_level, level=3, add=['add', 'at', 'from', 'random', 'remove', 'to'])
+add_level(commands_per_level, level=4, add=['clear'])
+add_level(commands_per_level, level=5, add=['assign_button', 'else', 'if', 'ifpressed', 'in', 'not_in'])
+add_level(commands_per_level, level=6)
+add_level(commands_per_level, level=7, add=['repeat', 'times'])
+add_level(commands_per_level, level=8)
+add_level(commands_per_level, level=9)
+add_level(commands_per_level, level=10, add=['for'])
+add_level(commands_per_level, level=11, add=['range'], remove=['times'])
+add_level(commands_per_level, level=12, add=['define', 'call'])
+add_level(commands_per_level, level=13, add=['and', 'or'])
+add_level(commands_per_level, level=14)
+add_level(commands_per_level, level=15, add=['while'])
+add_level(commands_per_level, level=16)
+add_level(commands_per_level, level=17, add=['elif'])
+add_level(commands_per_level, level=18, add=['input'], remove=['ask'])
+
 
 command_turn_literals = ['right', 'left']
 english_colors = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
@@ -484,39 +469,32 @@ def escape_var(var):
     return "_" + var_name if var_name in reserved_words else var_name
 
 
-def closest_command(invalid_command, known_commands, threshold=2):
-    # closest_command() searches for a similar command (distance smaller than threshold)
-    # TODO: make the result value be tuple instead of a ugly None & string mix
-    # returns None if the invalid command does not contain any known command.
-    # returns 'keyword' if the invalid command is exactly a command (so shoudl not be suggested)
-
-    min_command = closest_command_with_min_distance(invalid_command, known_commands, threshold)
-
-    # Check if we are not returning the found command
-    # In that case we have no suggestion
-    # This is to prevent "print is not a command in Hedy level 3, did you mean print?" error message
-
-    if min_command == invalid_command:
-        return 'keyword'
-    return min_command
-
-
 def style_command(command):
     return f'<span class="command-highlighted">{command}</span>'
 
 
-def closest_command_with_min_distance(invalid_command, commands, threshold):
-    # FH, early 2020: simple string distance, could be more sophisticated MACHINE LEARNING!
+def closest_command(input_, known_commands, threshold=2):
+    # Find the closest command to the input, i.e. the one with the smallest distance within the threshold. Returns:
+    #  (None, _)  No suggestion. There is no command similar enough to the input. For example, the distance
+    #             between 'eechoooo' and 'echo' is higher than the specified threshold.
+    #  (False, _) Invalid suggestion. The suggested command is identical to the input, so it is not a suggestion.
+    #             This is to prevent "print is not a command in Hedy level 3, did you mean print?" error message.
+    #  (True, 'sug') Valid suggestion. A command is similar enough to the input but not identical, e.g. 'aks' -> 'ask'
 
+    # FH, early 2020: simple string distance, could be more sophisticated MACHINE LEARNING!
     minimum_distance = 1000
-    closest_command = None
-    for command in commands:
-        minimum_distance_for_command = calculate_minimum_distance(command, invalid_command)
+    result = None
+    for command in known_commands:
+        minimum_distance_for_command = calculate_minimum_distance(command, input_)
         if minimum_distance_for_command < minimum_distance and minimum_distance_for_command <= threshold:
             minimum_distance = minimum_distance_for_command
-            closest_command = command
+            result = command
 
-    return closest_command
+    if result:
+        if result != input_:
+            return True, result  # Valid suggestion
+        return False, ''  # Invalid suggestion
+    return None, ''  # No suggestion
 
 
 def calculate_minimum_distance(s1, s2):
@@ -950,39 +928,15 @@ class TypeValidator(Transformer):
 
     def get_type(self, tree):
         # The rule var_access is used in the grammars definitions only in places where a variable needs to be accessed.
+        # var_access_print is identical to var_access and is introduced only to differentiate error messages.
         # So, if it cannot be found in the lookup table, then it is an undefined variable for sure.
-        if tree.data == 'var_access':
+        if tree.data in ['var_access', 'var_access_print']:
             var_name = tree.children[0]
             in_lookup, type_in_lookup = self.try_get_type_from_lookup(var_name)
             if in_lookup:
                 return type_in_lookup
             else:
-                raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
-
-        if tree.data == 'var_access_print':
-            var_name = tree.children[0]
-            in_lookup, type_in_lookup = self.try_get_type_from_lookup(var_name)
-            if in_lookup:
-                return type_in_lookup
-            else:
-                # is there a variable that is mildly similar?
-                # if so, we probably meant that one
-
-                # we first check if the list of vars is empty since that is cheaper than stringdistancing.
-                # TODO: Can be removed since fall back handles that now
-                if len(self.lookup) == 0:
-                    raise hedy.exceptions.UnquotedTextException(
-                        level=self.level, unquotedtext=var_name, line_number=tree.meta.line)
-                else:
-                    # TODO: decide when this runs for a while whether this distance small enough!
-                    minimum_distance_allowed = 4
-                    for var_in_lookup in self.lookup:
-                        if calculate_minimum_distance(var_in_lookup.name, var_name) <= minimum_distance_allowed:
-                            raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
-
-                    # nothing found? fall back to UnquotedTextException
-                    raise hedy.exceptions.UnquotedTextException(
-                        level=self.level, unquotedtext=var_name, line_number=tree.meta.line)
+                self.get_var_access_error(tree, var_name)
 
         # TypedTree with type 'None' and 'string' could be in the lookup because of the grammar definitions
         # If the tree has more than 1 child, then it is not a leaf node, so do not search in the lookup
@@ -992,6 +946,22 @@ class TypeValidator(Transformer):
                 return type_in_lookup
         # If the value is not in the lookup or the type is other than 'None' or 'string', return evaluated type
         return tree.type_
+
+    def get_var_access_error(self, tree, var_name):
+        # var_access_print is a var_access used in print statements to provide the following better error messages
+        if tree.data == 'var_access_print':
+            # is there a variable that is mildly similar? if so, we probably meant that one
+            minimum_distance_allowed = 4
+            for var_in_lookup in self.lookup:
+                if calculate_minimum_distance(var_in_lookup.name, var_name) <= minimum_distance_allowed:
+                    raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
+
+            # no variable which looks similar? Then, fall back to UnquotedTextException
+            raise hedy.exceptions.UnquotedTextException(
+                level=self.level, unquotedtext=var_name, line_number=tree.meta.line)
+
+        # for all other var_access instances, use UndefinedVarException
+        raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
 
     def ignore_type(self, type_):
         return type_ in [HedyType.any, HedyType.none]
@@ -1239,24 +1209,24 @@ class IsValid(Filter):
 
     def error_invalid(self, meta, args):
         invalid_command = args[0][1]
-        closest = closest_command(invalid_command, get_suggestions_for_language(self.lang, self.level))
+        sug_exists, suggestion = closest_command(invalid_command, get_suggestions_for_language(self.lang, self.level))
 
-        if closest == 'keyword':  # we couldn't find a suggestion
+        if sug_exists is None:  # there is no suggestion
+            raise exceptions.MissingCommandException(level=self.level, line_number=meta.line)
+        if not sug_exists:  # the suggestion is invalid, i.e. identical to the command
             invalid_command_en = hedy_translation.translate_keyword_to_en(invalid_command, lang)
             if invalid_command_en == Command.turn:
                 arg = args[0][0]
-                raise hedy.exceptions.InvalidArgumentException(command=invalid_command,
-                                                               allowed_types=get_allowed_types(
-                                                                   Command.turn, self.level),
-                                                               invalid_argument=arg,
-                                                               line_number=meta.line)
+                raise hedy.exceptions.InvalidArgumentException(
+                    command=invalid_command,
+                    allowed_types=get_allowed_types(Command.turn, self.level),
+                    invalid_argument=arg,
+                    line_number=meta.line)
             # clearly the error message here should be better or it should be a different one!
             raise exceptions.ParseException(level=self.level, location=[meta.line, meta.column], found=invalid_command)
-        elif closest is None:
-            raise exceptions.MissingCommandException(level=self.level, line_number=meta.line)
-        else:
+        else:  # there is a valid suggestion
             result = None
-            fixed_code = self.input_string.replace(invalid_command, closest)
+            fixed_code = self.input_string.replace(invalid_command, suggestion)
             if fixed_code != self.input_string:  # only if we have made a successful fix
                 try:
                     fixed_result = transpile_inner(fixed_code, self.level)
@@ -1266,7 +1236,7 @@ class IsValid(Filter):
                     pass
 
         raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=self.level,
-                                                 guessed_command=closest, line_number=meta.line,
+                                                 guessed_command=suggestion, line_number=meta.line,
                                                  fixed_code=fixed_code, fixed_result=result)
 
     def error_unsupported_number(self, meta, args):
@@ -3047,59 +3017,43 @@ def create_grammar(level, lang, skip_faulty):
     return merged_grammars
 
 
-def save_total_grammar_file(level, grammar, lang):
-    # Load Lark grammars relative to directory of current file
-    script_dir = path.abspath(path.dirname(__file__))
-    filename = "level" + str(level) + "." + lang + "-Total.lark"
-    loc = path.join(script_dir, "grammars-Total", filename)
-    file = open(loc, "w", encoding="utf-8")
-    file.write(grammar)
-    file.close()
+def save_total_grammar_file(level, grammar, lang_):
+    write_file(grammar, 'grammars-Total', f'level{level}.{lang_}-Total.lark')
 
 
-def get_additional_rules_for_level(level, sub=0):
-    script_dir = path.abspath(path.dirname(__file__))
-    if sub:
-        filename = "level" + str(level) + "-" + str(sub) + "-Additions.lark"
-    else:
-        filename = "level" + str(level) + "-Additions.lark"
-    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-        grammar_text = file.read()
-    return grammar_text
+def get_additional_rules_for_level(level):
+    return read_file('grammars', f'level{level}-Additions.lark')
 
 
 def get_full_grammar_for_level(level):
-    script_dir = path.abspath(path.dirname(__file__))
-    filename = "level" + str(level) + ".lark"
-    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-        grammar_text = file.read()
-    return grammar_text
-
-
-# TODO FH, May 2022. I feel there are other places in the code where we also do this
-# opportunity to combine?
+    return read_file('grammars', f'level{level}.lark')
 
 
 def get_keywords_for_language(language):
-    script_dir = path.abspath(path.dirname(__file__))
+    if not local_keywords_enabled:
+        language = 'en'
     try:
-        if not local_keywords_enabled:
-            raise FileNotFoundError("Local keywords are not enabled")
-        filename = "keywords-" + str(language) + ".lark"
-        with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-            keywords = file.read()
+        return read_file('grammars', f'keywords-{language}.lark')
     except FileNotFoundError:
-        filename = "keywords-en.lark"
-        with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-            keywords = file.read()
-    return keywords
+        return read_file('grammars', f'keywords-en.lark')
 
 
 def get_terminals():
+    return read_file('grammars', 'terminals.lark')
+
+
+def read_file(*paths):
     script_dir = path.abspath(path.dirname(__file__))
-    with open(path.join(script_dir, "grammars", "terminals.lark"), "r", encoding="utf-8") as file:
-        terminals = file.read()
-    return terminals
+    path_ = path.join(script_dir, *paths)
+    with open(path_, "r", encoding="utf-8") as file:
+        return file.read()
+
+
+def write_file(content, *paths):
+    script_dir = path.abspath(path.dirname(__file__))
+    path_ = path.join(script_dir, *paths)
+    with open(path_, "w", encoding="utf-8") as file:
+        file.write(content)
 
 
 PARSER_CACHE = {}
