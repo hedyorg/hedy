@@ -361,7 +361,11 @@ adventures:
         description: Probeer zo dicht mogelijk bij 21 te komen
         levels:
             17:
-                story_text: "Blackjack is een simpel kaartspelletje waarbij je zo dicht mogelijk bij 21 punten moet komen. Je krijgt twee kaarten. Elke kaart is het getal waard dat erop staat, en de kaarten met plaatjes (Boer, Vrouw, Heer) zijn 10 punten waard.\nDe Aas is 1 of 11 punten waard (dat mag je zelf kiezen). De dealer, jouw tegenstander, krijgt ook twee kaarten.\nAls je wil, mag je een derde kaart pakken en die punten worden bij jouw score opgeteld. De dealer mag ook een extra kaart pakken.\nMaar pas op dat je nooit over de 21 punten heengaat, want dan verlies je!\nDe speler die het dichtst bij de 21 punten komt, zonder eroverheen te gaan, wint! \n\nVeel plezier!\n"
+                story_text: |
+                    Blackjack is een simpel kaartspelletje waarbij je zo dicht mogelijk bij 21 punten moet komen. Je krijgt twee kaarten. Elke kaart is het getal waard dat erop staat, en de kaarten met plaatjes (Boer, Vrouw, Heer) zijn 10 punten waard.\nDe Aas is 1 of 11 punten waard (dat mag je zelf kiezen). De dealer, jouw tegenstander, krijgt ook twee kaarten.\nAls je wil, mag je een derde kaart pakken en die punten worden bij jouw score opgeteld. De dealer mag ook een extra kaart pakken.\nMaar pas op dat je nooit over de 21 punten heengaat, want dan verlies je!\nDe speler die het dichtst bij de 21 punten komt, zonder eroverheen te gaan, wint!
+                    Veel plezier!
+                    ### Opdracht
+                     Dit programma werkt prima, maar de code is verschrikkelijk lang en omslachting. Kun jij de code opruimen en inkorten door fucnties te gebruiken?
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -417,9 +421,9 @@ adventures:
                             punten = punten + 10
                         {elif} kaart_3 == 'Aas':
                             {if} punten > 11:
-                                punten = punten + 11
-                            {else}:
                                 punten = punten + 1
+                            {else}:
+                                punten = punten + 11
                         {else}:
                             punten = punten + kaart_3
                         print 'Je krijgt een extra ' kaart_3 ' (' punten ' punten)'
@@ -578,7 +582,7 @@ adventures:
                     ### Opdracht 1
                     Maak het sommenoefenprogramma nu extra moeilijk. De speler moet twee sommen achter elkaar goed hebben. Maak de codes op de streepjes af.
 
-                    ### Opdracht 2 (extra)
+                    ### Opdracht 2
                     Sommen hebben soms meerdere goede antwoorden. Je kan 10 bijvoorbeeld delen door 5, maar ook door 2. Dus de som 'Door welk getal kan je 10 delen?' heeft twee goede antwoorden.
                     Verzin zelf een som met meerdere antwoorden, vraag de speler om een antwoord en reken ze beide goed met `{or}`.
                     Begin opnieuw met een leeg programmeerveld en programmeer het helemaal zelf.
@@ -2647,10 +2651,10 @@ adventures:
                     ```
             12:
                 story_text: |
-                    Use functions in you songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle little star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
+                    Use functions in your songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle Little Star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
 
                     ### Exercise
-                    Finish the song of Twinkle Twinkle little star.
+                    Finish the song of Twinkle Twinkle Little Star.
                     Then look back at all the songs you've programmed in the levels before, can you make those codes better and shorter using functions too?
                 example_code: |
                     ```
@@ -2693,7 +2697,7 @@ adventures:
                     ```
             13:
                 story_text: |
-                    You can use a function with an argument for songs that have line taht are almost the same, but slightly different each time.
+                    You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
                     One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, buyt each time they are followed by a different couple of notes.
 
                     ### Exercise
@@ -4076,6 +4080,34 @@ adventures:
                     {print} 'die drinkt zijn melk zo zoetjes'
                     {call} _
                     ```
+            16:
+                story_text: |
+                    ### Opdracht
+                    Maak het liedje af door de ontbrekende regels en variabelen in te vullen. Vul daarna de lijsten aan met nog meer dieren die iets doen, zoals leeuwen die samen geeuwen, koeien die bootje roeien of...?
+                example_code: |
+                    ```
+                    dieren = ['beren', 'apen', 'bijen', _]
+                    lijdend_voorwerp = ['broodjes', 'lekker', 'auto, _']
+                    werkwoord = ['smeren', 'slapen', 'rijden', _]
+                    _
+                        {print} 'Ik zag twee ' dieren[i] ' ' lijdend_voorwerp[i] ' ' werkwoord[i]
+                        {print} 'Oh het was een wonder'
+                        {print} 'Het was een wonder, boven wonder'
+                        {print} 'Dat die ' _ ' ' _ ' konden'
+                        {print} 'Hi hi hi'
+                        {print} 'Ha ha ha'
+                        {print} 'Ik stond erbij en ik keek er naar'
+                        {sleep} 5
+                        {clear}
+                    ```
+                story_text_2: |
+                    ### Opdracht 2
+                    Maak nu op dezelfde manier je eigen code voor het liedje 'de wielen van de bus'!
+                example_code_2: |
+                    ```
+                    voorwerp = ['wielen', 'deuren', _]
+                    movement = [ 'rond en rond', 'open en dicht', _]
+                    ```
     tic:
         name: Boter Kaas en Eieren
         default_save_name: Boter
@@ -4722,6 +4754,8 @@ adventures:
                 story_text: |
                     ### Opdracht
                     Maak een code om armbanden te ontwerpen!
+                    </div>
+                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
                 example_code: |
                     Hint voor het ontwerpen van armbanden:
 
