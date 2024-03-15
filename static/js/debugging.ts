@@ -118,7 +118,7 @@ function special_style_for_variable(variable: Variable) {
 //hiding certain variables from the list unwanted for users
 function clean_variables(variables: Record<string, Variable>) {
   const new_variables = [];
-  const unwanted_variables = ["random", "time", "int_saver", "int_$rw$", "turtle", "t"];
+  const unwanted_variables = ["random", "time", "int_saver", "int_$rw$", "turtle", "t", "chosen_note"];
   for (const variable in variables) {
     if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
       let extraStyle = special_style_for_variable(variables[variable]);
