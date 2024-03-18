@@ -598,7 +598,8 @@ def parse():
         with querylog.log_time('detect_sleep'):
             try:
                 # FH, Nov 2023: hmmm I don't love that this is not done in the same place as the other "has"es
-                response['has_sleep'] = int(re.search(r'time\.sleep\(int\("(?P<sleep_time>\d+)"\)\)', response['Code']).group('sleep_time'))
+                response['has_sleep'] = int(
+                    re.search(r'time\.sleep\(int\("(?P<sleep_time>\d+)"\)\)', response['Code']).group('sleep_time'))
             except BaseException:
                 pass
 
