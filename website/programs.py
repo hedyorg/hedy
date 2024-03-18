@@ -49,7 +49,6 @@ class ProgramsLogic:
         Returns the program record.
         """
 
-
         # Some user input and a bunch of metadata
         updates = {
             "session": utils.session_id(),
