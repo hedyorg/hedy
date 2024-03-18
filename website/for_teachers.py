@@ -1022,7 +1022,6 @@ class ForTeachersModule(WebsiteModule):
             all_classes=Classes,
             username=user["username"],
             max_level=hedy.HEDY_MAX_LEVEL,
-            go_back=session['class_id'],
             # TODO: update tags to be {name, canEdit} where canEdit is true if currentUser is the creator.
             adventure_tags=adventure.get("tags", []),
             js=dict(
