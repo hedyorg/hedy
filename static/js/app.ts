@@ -36,6 +36,10 @@ let pygameRunning = false;
  * Represents whether there's an open 'ask' prompt
  */
 let askPromptOpen = false;
+/**
+ * Represents whether there's an open 'sleeping' prompt
+ */
+let sleepRunning = false;
 
 // Many bits of code all over this file need this information globally.
 // Not great but it'll do for now until we refactor this file some more.
@@ -451,6 +455,12 @@ export function stopit() {
       $('#stopit').hide();
       $('#runit').show();
   }
+  else if (sleepRunning){
+      sleepRunning = false;
+      $('#sleep-modal').hide();
+      $('#stopit').hide();
+      $('#runit').show();
+  }
   else
   {
       // We bucket-fix stop the current program by setting the run limit to 1ms
@@ -863,7 +873,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: number, hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
   let skip_faulty_found_errors = false;
@@ -936,6 +946,15 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   if (hasMusic) {
     code_prefix += music_prefix;
     $('#turtlecanvas').show();
+  }
+
+  if (hasSleep){
+    $('#sleep-modal').show();
+    sleepRunning = true;
+    setTimeout(function() {
+      $('#sleep-modal').hide();
+      sleepRunning = false;
+      }, hasSleep * 1000);
   }
 
   if (hasPygame){
