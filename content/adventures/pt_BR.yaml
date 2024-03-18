@@ -591,7 +591,7 @@ adventures:
                     ### Exercício 1
                     Vamos deixar o programa de prática um pouco mais difícil. O(a) jogador(a) agora terá de responder duas respostas corretamente. Preencha as lacunas para completar o programa.
 
-                    ### Exercício 2 Extra
+                    ### Exercício 2
                     Às vezes, cálculos podem ter mais de uma resposta correta. Por exemplo, 10 pode ser dividido tanto por 5 quanto por 2. Então a pergunta 'Que número divide o 10?' pode ser respondida por 2 ou por 5.
                     Faça uma pergunta de um cálculo que aceite mais de uma resposta correta, peça ao(à) jogador(a) para dar uma resposta e determine se ela está correta usando `{or}`.
                     Esvazie o campo de programação e crie a sua própria solução.
@@ -1256,7 +1256,7 @@ adventures:
             9:
                 story_text: |
                     Ótimo trabalho! Você alcançou mais um nível novo! No nível anterior, você aprendeu a usar múltiplas linhas de código nos comandos {if} e {repeat}. Mas você ainda não pôde combinar os dois...
-                    Boas notícias! Neste nível, você terá permissão de colocar um {if} dentro de outro {if}, ou dentro de um comando {repeat}.
+                    Boas notícias! Neste nível, você terá permissão de colocar um {if} dentro de outro {if}, ou dentro de um comando {repeat}. Colocar um bloco de código dentro de outro é chamado de "nesting" (aninhamento, em inglês).
                 example_code: |
                     ```
                     resposta = {ask} 'Você está pronto(a) para aprender algo novo?'
@@ -1318,7 +1318,7 @@ adventures:
                     ```
             14:
                 story_text: |
-                    Com o programa abaixo, você pode calcular sua média e ver se você passou em uma matéria da escola (nesse caso, com uma média de 6 ou mais).
+                    Com o código exemplo, você pode calcular sua média e ver se você passou em uma matéria da escola (nesse caso, com uma média de 6 ou mais).
                     Você pode ver que esse código é extremamente ineficiente, devido à linha 5 ser tão longa.
                     Todas as diferentes médias de 1 a 5 tiveram de ser programadas separadamente. Sorte a sua que, nesse nível, você irá aprender a fazer isso sem usar esse código gigante!
                 example_code: |
@@ -2026,12 +2026,12 @@ adventures:
                     Let Hedy decide randomly!
                 example_code: |
                     ```
-                    _ Escape from the haunted house!
-                    _ There are 3 doors in front of you...
-                    _ _ _ Which door do you choose?
-                    _ You picked door ... choice
-                    monsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    _ You see...
+                    _ Escape da casa mal-assombrada!
+                    _ Há 3 portas na sua frente...
+                    _ _ _ Qual delas você escolhe?
+                    _ Você escolheu a porta... escolha
+                    monstros _ um zumbi, um vampiro, NADA DE QUE VOCÊ CONSIGA ESCAPAR
+                    _ Você vê...
                     {sleep}
                     _ _ _ _
                     ```
@@ -2251,7 +2251,7 @@ adventures:
                     ```
             9:
                 story_text: |
-                    In this level you can also put an {if} command inside another {if} command.
+                    Neste nível, você também pode colocar um comando `{if}` dentro de outro comando `{if}`.
                 example_code: |
                     ```
                     continue = {ask} 'Do you want to continue?'
@@ -2271,14 +2271,14 @@ adventures:
         levels:
             5:
                 story_text: |
-                    ## Lists
-                    When we want to check if something is in a list, we can now use the `{in}` command.
-                    This code prints pretty! if you choose green or yellow, and meh otherwise.
+                    ## Listas
+                    A partir de agora, quando quisermos checar se algo está em uma lista, poderemos usar o comando `{in}`.
+                    Este código imprime 'bela!' se você escolhe verde ou amarelo, e 'meh' caso contrário.
                 example_code: |
                     ```
-                    pretty_colors {is} green, yellow
-                    favorite_color {is} {ask} 'What is your favorite color?'
-                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                    cores_belas {is} verde, amarelo
+                    cor_favorita {is} {ask} 'Qual é a sua cor favorita?'
+                    {if} cor_favorita {in} cores_belas {print} 'bela!'
                     {else} {print} 'meh'
                     ```
                 story_text_2: |

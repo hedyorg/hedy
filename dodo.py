@@ -322,6 +322,26 @@ def task_devserver():
     )
 
 
+def task_normalize_yaml():
+    """Normalize the YAML files by running a script.
+
+    Makes indentation and key ordering uniform, even if the files get rewritten by
+    Weblate.
+    """
+    yamls = glob('content/**/*.yaml', recursive=True)
+
+    return dict(
+        title=lambda _: 'Normalize YAML',
+        file_dep=[
+            'tools/rewrite-content-yaml.py',
+            *yamls,
+        ],
+        actions=[
+            [python3, 'tools/rewrite-content-yaml.py', *yamls]
+        ]
+    )
+
+
 ######################################################################################
 # Some useful task groups
 #
@@ -408,12 +428,12 @@ def task__autopr():
             'extract',
             'backend',
             'frontend',
+            'normalize_yaml',
         ],
         actions=[
             # Run a script to strip things that lead to conflicts from po files
             [python3, 'build-tools/github/normalize-pofiles.py'],
         ])
-
 
 ######################################################################################
 # Below this line are helpers for the task definitions
