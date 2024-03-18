@@ -1630,7 +1630,7 @@ class ConvertToPython_1(ConvertToPython):
         # escape needed characters
         argument = process_characters_needing_escape(args[0])
         if not self.microbit:
-            return f"answers = input('" + argument + "')" + self.add_debug_breakpoint()
+            return f"answer = input('" + argument + "')" + self.add_debug_breakpoint()
         else:
             return (f"answers = input('" + argument + "')" + self.add_debug_breakpoint() and
                     textwrap.dedent(f"""\
