@@ -228,17 +228,17 @@ levels:
                 {print} "Bonne année !"
         2:
             story: |-
-                Create a program that tells us the final results of the science fair. Firstly define the variable contestants, then the variable place.
-                **Hint** Line 5 should be the sleep command, and you should end with saying congratulations.
+                Créé un programme qui nous donne le résultat final du concours scientifique. Commence par définir la variable `concurrents`, puis la variable `place`.
+                **Indice** La ligne 5 devrait être une commande `{sleep}`, et tu dois finir par des félicitations.
             code: |-
                 {print} "Et maintenant vont être révélé les résultats du concours scientifique"
-                contestants = Vivienne, Paul, Trixy, Bianca, Katya
+                concurrents = Vivienne, Paul, Trixy, Bianca, Katya
                 place = 5
-                {for} contestant {in} contestants
+                {for} concurrent {in} concurrents
                     {sleep} 2
-                    {print} 'On number ' place ' has ended... ' contestant
+                    {print} concurrent "termine à la place… " place
                     place = place - 1
-                {print} 'Congratulations!'
+                {print} "Félicitations !"
     12:
         1:
             story: |-

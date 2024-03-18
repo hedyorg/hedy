@@ -387,6 +387,9 @@ adventures:
                     最接近21但没有超过它的玩家获胜。
 
                     好好享受游戏吧！
+
+                    ### Exercise
+                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -442,9 +445,9 @@ adventures:
                             points = points + 10
                         {elif} card_3 == 'Ace':
                             {if} points > 11:
-                                points = points + 11
-                            {else}:
                                 points = points + 1
+                            {else}:
+                                points = points + 11
                         {else}:
                             points = points + card_3
                         {print} 'You get an extra ' card_3 ' (' points ' points)'
@@ -2628,7 +2631,7 @@ adventures:
                     ```
             12:
                 story_text: |
-                    在你的歌曲中使用函数!正如您在示例代码中看到的，您可以为Twinkle Twinkle little star的每一行创建一个函数。一旦您编写了前三行代码，您所要做的就是按照您想要的顺序调用函数。
+                    在你的歌曲中使用函数!正如您在示例代码中看到的，您可以为Twinkle Twinkle Little Star的每一行创建一个函数。一旦您编写了前三行代码，您所要做的就是按照您想要的顺序调用函数。
 
                     ### 练习
                     完成《闪烁小星星》这首歌。
@@ -3999,6 +4002,33 @@ adventures:
                     {print} '好像一颗钻石'
                     {call} _
                     ```
+            16:
+                story_text: |
+                    ### Exercise
+                    Finish the nursery rhyme!
+                example_code: |
+                    ```
+                    number = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+                    object = ['on his drum', 'on his shoe', 'on his knee', 'on his door', 'on his hive', 'on his sticks', 'up in heaven', 'on his gate', 'on his vine', 'once again']
+
+                    _
+                        {print} 'This old man'
+                        {print} 'He played ' _
+                        {print} 'He played knick-knack ' _
+                        {print} 'With a knick-knack paddywhack'
+                        {print} 'Give the dog a bone'
+                        {print} 'This old man came rolling home'
+                        {sleep} 8
+                        {clear}
+                    ```
+                story_text_2: |
+                    ### Exersice 2
+                    Now create your own code for the nursery rhyme 'The wheels on the bus' on the same way!
+                example_code_2: |
+                    ```
+                    object = ['wheels', 'doors', _]
+                    movement = [ 'round and round', 'open and shut', _]
+                    ```
     tic:
         name: 井字游戏
         default_save_name: 井字游戏
@@ -4535,7 +4565,7 @@ adventures:
                 example_code: |
                     提示:
                     ```
-                    选择的字母 {is} {ask} '您想看哪个字母? F, E 或 L?
+                    选择的字母 {is} {ask} '您想看哪个字母? F, E 或 L?'
                     {if} _
                     ```
             6:
@@ -4675,6 +4705,8 @@ adventures:
                 story_text: |
                     ### 练习
                     用小海龟重画图画!
+                    </div>
+                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
                 example_code: |
                     提示: 手环设计程序
 
