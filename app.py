@@ -625,7 +625,7 @@ def parse():
     if username and body.get('save_name'):
         try:
             program_logic = programs.ProgramsLogic(DATABASE, ACHIEVEMENTS, STATISTICS)
-            program_logic.store_user_program(
+            program = program_logic.store_user_program(
                 user=current_user(),
                 level=level,
                 name=body.get('save_name'),
@@ -634,7 +634,7 @@ def parse():
                 code=code,
                 error=exception is not None)
 
-        # response['save_info'] = SaveInfo.from_program(Program.from_database_row(program))
+            response['save_info'] = SaveInfo.from_program(Program.from_database_row(program))
         except programs.NotYourProgramError:
             # No permissions to overwrite, no biggie
             pass
