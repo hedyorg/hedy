@@ -1779,6 +1779,12 @@ class ConvertToPython_1(ConvertToPython):
 class ConvertToPython_2(ConvertToPython_1):
 
     # ->>> why doesn't this live in isvalid? refactor now that isvalid is cleaned up!
+    def __init__(self, lookup, language, numerals_language, is_debug, microbit=False, argument=None):
+        super().__init__(lookup, language, numerals_language, is_debug, microbit, argument)
+        self.answers = {}
+        self.answer = ''
+        self.variable = ''
+
     def error_ask_dep_2(self, meta, args):
         # ask is no longer usable this way, raise!
         # ask_needs_var is an entry in lang.yaml in texts where we can add extra info on this error
@@ -1835,16 +1841,25 @@ class ConvertToPython_2(ConvertToPython_1):
             else:
                 # this regex splits words from non-letter characters, such that name! becomes [name, !]
                 res = regex.findall(
-                    r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+",
+                    r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{"
+                    r"Lo}\p{Nl}]+",
                     a)
                 args_new.append(''.join([self.process_variable_for_fstring(x, meta.line) for x in res]))
         exception = self.make_index_error_check_if_list(args)
         argument_string = ' '.join(args_new)
         if not self.microbit:
+            argument_string += f" {self.variable}"
             return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
         else:
+            clean_argument_string = ' '.join(args)
+            if hasattr(self, 'answers') and isinstance(self.answers, dict):
+                for var_name, answer in self.answers.items():
+                    # Use word boundaries around the variable names to ensure we replace only whole words
+                    pattern = r'\b' + re.escape(var_name) + r'\b'
+                    clean_argument_string = re.sub(pattern, str(answer), clean_argument_string)
+            clean_argument_string = re.sub(r'\{[^}]*\}', '', clean_argument_string)
             return textwrap.dedent(f"""\
-                    display.scroll('{argument_string}')""")
+                               display.scroll("{clean_argument_string} ")""")
 
     def ask(self, meta, args):
         var = args[0]
@@ -1855,9 +1870,12 @@ class ConvertToPython_2(ConvertToPython_1):
             display_code = ""
             for i in range(1, len(args), 2):
                 question = args[i]
+                self.variable = args[i-1]
+                self.answer = input(question)
+                self.answers[self.variable] = self.answer  # Store the answer with the variable as key
                 display_question = textwrap.dedent(f"""\
-                               display.show('{question}')""")
-                display_code += display_question 
+                               display.show("{question}")""")
+                display_code += display_question
             return display_code
 
     def forward(self, meta, args):
