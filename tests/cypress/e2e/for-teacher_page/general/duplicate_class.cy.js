@@ -11,7 +11,8 @@ describe('Duplicate class tests', () => {
     const duplicate_class = `test class ${Math.random()}`;
 
     // Click on duplicate icon
-    cy.get('.no-underline > .fas').first().click();
+    cy.get("#view_classes").click();
+    cy.get('#duplicate_class').first().click();
 
     // Checks for input field
     cy.get('#modal-prompt-input').type(duplicate_class);
@@ -33,11 +34,12 @@ describe('Duplicate class tests', () => {
     loginForTeacher();
     goToTeachersPage();
 
+    cy.get("#view_classes").click();
     cy.get("tr") // This class has second teachers.
-    cy.get("#teacher_classes tbody .view_class")
+    cy.get("#classes_table tbody .view_class")
       .each(($class, i) => {
           if ($class.text().includes("CLASS1")) {
-            cy.get(`tbody :nth-child(${i+1}) .no-underline > .fas`).first().click();
+            cy.get(`tbody :nth-child(${i+1}) #duplicate_class`).first().click();
           }
       })
 

@@ -5,7 +5,7 @@ describe('Is able to click on create new class', () => {
     loginForTeacher();
 
     // Click 'Create class' button
-    cy.get('#teacher_classes > .green-btn').click();
+    cy.get('#classes_table > .green-btn').click();
 
     // Assert that the input field is empty,
     // the ok button is visible and

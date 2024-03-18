@@ -80,7 +80,7 @@
           {% for class in teacher_classes %}
             <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
               <td class="text-center px-4 py-2"><a href="for-teachers/class/{{class.id}}" class="view_class" data-cy="view_class_link">{{class.name|e}}</a></td>
-              <td class="text-center p-2">{{class.teacher}}</td>
+              <td id="teacher_cell" class="text-center p-2">{{class.teacher}}</td>
               <td class="text-center p-2">{{class.students|length}}</td>
               <td class="text-center p-2">
                 <div class="flex justify-center text-blue-900">
@@ -89,7 +89,7 @@
                     <span class="fas fa-pen block mb-1"></span>
                     <span>{{_('customize')}}</span>
                   </button>
-                  <button class="flex flex-col items-center mr-16"
+                  <button class="flex flex-col items-center mr-16" id="duplicate_class"
                   onclick='hedyApp.duplicate_class("{{class.id}}", "{{class.second_teachers}}", {{_('second_teacher_copy_prompt')|default(None)|tojson}}, {{_('class_name_prompt')|default(None)|tojson}}, {% if class.teacher != username %}"{{class.name}}"{% else %}" "{% endif %})'>
                     <span class="fas fa-copy block mb-1"></span>
                     <span>{{_('duplicate')}}</span>
