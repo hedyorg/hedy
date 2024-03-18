@@ -1015,6 +1015,15 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   code = code_prefix + code;
   if (hasPygame) code += pygame_suffix;
 
+  (Sk as any).builtins.play = new Sk.builtin.func((notes:any) => {
+    //const now = Tone.now()
+    const note_name = notes.v;
+
+    //play note_name for the duration of an 16th note
+    synth.triggerAttackRelease(note_name, "16n");
+
+  });
+
   if (run_type === "run") {
     Sk.configure({
       output: outf,
@@ -1051,15 +1060,6 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         // Set a time-out of either 20 seconds when having a sleep and 5 seconds when not
         return ((hasSleep) ? 20000 : 5000);
       }) ()
-    });
-
-    (Sk as any).builtins.play = new Sk.builtin.func((notes:any) => {
-        //const now = Tone.now()
-        const note_name = notes.v;
-
-        //play note_name for the duration of an 16th note
-        synth.triggerAttackRelease(note_name, "16n");
-
     });
 
     const currentProgram: number = Number(sessionStorage.getItem('currentProgram') || 0) + 1;

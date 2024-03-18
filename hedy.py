@@ -1858,11 +1858,11 @@ class ConvertToPython_2(ConvertToPython_1):
         if isinstance(note, str):
             uppercase_note = note.upper()
             if uppercase_note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
-                return self.make_play(uppercase_note, meta)
+                return self.make_play(uppercase_note, meta) + self.add_debug_breakpoint()
 
         # no note? it must be a variable!
         self.add_variable_access_location(note, meta.line)
-        return self.make_play_var(note, meta)
+        return self.make_play_var(note, meta) + self.add_debug_breakpoint()
 
     def assign(self, meta, args):
         variable_name = args[0]
