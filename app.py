@@ -1412,7 +1412,35 @@ def hour_of_code(level, program_id=None):
         ))
 
 
+def possibly_migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden):
+    """If the puzzles/quizzes were not migrated yet which is possible if the teacher didn't tweak
+        the class customizations, if this is the case, we need to add them if possible."""
+    migrated = customizations.get("quiz_parsons_tabs_migrated")
+    if not migrated and customizations.get("sorted_adventures"):
+        for level, sorted_adventures in customizations["sorted_adventures"].items():
+            last_two_adv_names = [adv["name"] for adv in sorted_adventures[-2:]]
+            parson_in_level = "parsons" in last_two_adv_names
+            quiz_in_level = "quiz" in last_two_adv_names
+            # In some levels, we don't need quiz/parsons
+            level_accepts_parsons = "parsons" in hedy_content.ADVENTURE_ORDER_PER_LEVEL[int(level)]
+            level_accepts_quiz = "quiz" in hedy_content.ADVENTURE_ORDER_PER_LEVEL[int(level)]
+            if not parson_in_level and not parsons_hidden and level_accepts_parsons:
+                sorted_adventures.append(
+                    {"name": "parsons", "from_teacher": False})
+
+            if not quiz_in_level and not quizzes_hidden and level_accepts_quiz:
+                sorted_adventures.append(
+                    {"name": "quiz", "from_teacher": False})
+            # Need to reorder, for instance, in case parsons was hidden and the other was not.
+            for_teachers.ForTeachersModule.reorder_adventures(sorted_adventures)
+
+        # Mark current customization as being migrated so that we don't do this step next time.
+        customizations["quiz_parsons_tabs_migrated"] = 1
+        DATABASE.update_class_customizations(customizations)
+
 # routing to index.html
+
+
 @app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'program_id': None})
@@ -1465,15 +1493,6 @@ def index(level, program_id):
     # At this point we can have the following scenario:
     # - The level is allowed and available
     # - But, if there is a quiz threshold we have to check again if the user has reached it
-
-    parsons_in_level = True
-    quiz_in_level = True
-    if customizations.get("sorted_adventures") and len(customizations["sorted_adventures"]) > 2:
-        parsons_in_level = [adv for adv in customizations["sorted_adventures"][str(level)][-2:]
-                            if adv.get("name") == "parsons"]
-        quiz_in_level = [adv for adv in customizations["sorted_adventures"][str(level)][-2:]
-                         if adv.get("name") == "quiz"]
-
     if 'level_thresholds' in customizations:
         # If quiz in level and in some of the previous levels, then we check the threshold level.
         check_threshold = 'other_settings' in customizations and 'hide_quiz' not in customizations['other_settings']
@@ -1588,11 +1607,23 @@ def index(level, program_id):
     if parsons:
         parson_exercises = len(PARSONS[g.lang].get_parsons_data_for_level(level))
 
-    if not parsons_in_level or 'other_settings' in customizations and \
-            'hide_parsons' in customizations['other_settings']:
+    parsons_hidden = 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']
+    quizzes_hidden = 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']
+
+    if customizations:
+        possibly_migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden)
+
+    parsons_in_level = True
+    quiz_in_level = True
+    if customizations.get("sorted_adventures") and\
+            len(customizations.get("sorted_adventures", {str(level): []})[str(level)]) > 2:
+        last_two_adv_names = [adv["name"] for adv in customizations["sorted_adventures"][str(level)][-2:]]
+        parsons_in_level = "parsons" in last_two_adv_names
+        quiz_in_level = "quiz" in last_two_adv_names
+
+    if not parsons_in_level or parsons_hidden:
         parsons = False
-    if not quiz_in_level or 'other_settings' in customizations and \
-            'hide_quiz' in customizations['other_settings']:
+    if not quiz_in_level or quizzes_hidden:
         quiz = False
 
     max_level = hedy.HEDY_MAX_LEVEL

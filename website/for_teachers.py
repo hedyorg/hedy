@@ -572,11 +572,11 @@ class ForTeachersModule(WebsiteModule):
         default_adventures["parsons"] = {}
 
         parsons_hidden = False
-        quizes_hidden = False
+        quizzes_hidden = False
         if customizations:
             parsons_hidden = 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']
-            quizes_hidden = 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']
-            if quizes_hidden:
+            quizzes_hidden = 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']
+            if quizzes_hidden:
                 del default_adventures["quiz"]
             if parsons_hidden:
                 del default_adventures["parsons"]
@@ -633,7 +633,7 @@ class ForTeachersModule(WebsiteModule):
                     sorted_adventures.append(
                         {"name": "parsons", "from_teacher": False})
 
-                if not quizes_hidden and not quiz_in_level and level_accepts_quiz and get_customizations:
+                if not quizzes_hidden and not quiz_in_level and level_accepts_quiz and get_customizations:
                     sorted_adventures.append(
                         {"name": "quiz", "from_teacher": False})
                 # Need to reorder, for instance, in case parsons was hidden and the other was not.
