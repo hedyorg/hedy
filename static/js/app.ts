@@ -456,6 +456,8 @@ export function stopit() {
       $('#runit').show();
   }
   else if (sleepRunning){
+      Sk.execLimit = 1;
+      clearTimeouts();
       sleepRunning = false;
       $('#sleep-modal').hide();
       $('#stopit').hide();
