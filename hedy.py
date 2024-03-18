@@ -1779,8 +1779,8 @@ class ConvertToPython_1(ConvertToPython):
 class ConvertToPython_2(ConvertToPython_1):
 
     # ->>> why doesn't this live in isvalid? refactor now that isvalid is cleaned up!
-    def __init__(self, lookup, language, numerals_language, is_debug, microbit=False, argument=None):
-        super().__init__(lookup, language, numerals_language, is_debug, microbit, argument)
+    def __init__(self, lookup, language, numerals_language, is_debug, microbit=False):
+        super().__init__(lookup, language, numerals_language, is_debug, microbit,)
         self.answers = {}
         self.answer = ''
         self.variable = ''
@@ -1841,13 +1841,14 @@ class ConvertToPython_2(ConvertToPython_1):
             else:
                 # this regex splits words from non-letter characters, such that name! becomes [name, !]
                 res = regex.findall(
-                    r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+",
+                    r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{"
+                    r"Lo}\p{Nl}]+",
                     a)
                 args_new.append(''.join([self.process_variable_for_fstring(x, meta.line) for x in res]))
         exception = self.make_index_error_check_if_list(args)
         argument_string = ' '.join(args_new)
         if not self.microbit:
-            argument_string += f" {self.variable}"
+            argument_string += f"{self.variable}"
             return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
         else:
             clean_argument_string = ' '.join(args)
