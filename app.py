@@ -627,16 +627,16 @@ def parse():
             program_logic = programs.ProgramsLogic(DATABASE, ACHIEVEMENTS)
             full_adventures = hedy_content.Adventures("en").get_adventures(g.keyword_lang)
             teacher_adventures = DATABASE.get_teacher_adventures(current_user()["username"])
-            program = DATABASE.program_by_id(body.get('program_id'))
-            if STATISTICS.is_program_modified(program, full_adventures, teacher_adventures):
-                program = program_logic.store_user_program(
-                    user=current_user(),
-                    level=level,
-                    name=body.get('save_name'),
-                    program_id=body.get('program_id'),
-                    adventure_name=body.get('adventure_name'),
-                    code=code,
-                    error=exception is not None)
+            program = program_logic.store_user_program(
+                user=current_user(),
+                level=level,
+                name=body.get('save_name'),
+                program_id=body.get('program_id'),
+                adventure_name=body.get('adventure_name'),
+                code=code,
+                error=exception is not None)
+            if not STATISTICS.is_program_modified(program, full_adventures, teacher_adventures):
+                DATABASE.delete_program_by_id(program['id'])
 
         # response['save_info'] = SaveInfo.from_program(Program.from_database_row(program))
         except programs.NotYourProgramError:
