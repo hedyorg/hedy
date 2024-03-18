@@ -1639,8 +1639,9 @@ class ConvertToPython_1(ConvertToPython):
     def echo(self, meta, args):
         if len(args) == 0:
             if not self.microbit:
-                return f"print(answers){self.add_debug_breakpoint()}"
+                return f"print(answer){self.add_debug_breakpoint()}"
             else:
+                print(args, meta)
                 user_answer = input(meta)
                 return textwrap.dedent(f"""\
                             speech.say('{user_answer}')""")
