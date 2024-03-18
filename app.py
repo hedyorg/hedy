@@ -789,6 +789,7 @@ def save_transpiled_code_for_microbit(transpiled_python_code):
         indented_code = transpiled_python_code.replace("display.scroll(", "    display.scroll(")
         indented_code = indented_code.replace("question", "    question")
         indented_code = indented_code.replace("speech.say(", "    speech.say(")
+        indented_code = indented_code.replace("display.show(", "    display.show(")
 
         # Append the indented transpiled code
         file.write(indented_code)
