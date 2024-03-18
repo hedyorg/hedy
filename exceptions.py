@@ -361,4 +361,19 @@ class InvalidErrorSkippedException(HedyException):
         super().__init__('Invalid Error Skipped')
 
 
+class RuntimeValueException(HedyException):
+    def __init__(self, command, value, tip):
+        super().__init__('Runtime Value Error', command=command, value=value, tip=tip)
+
+
+class RuntimeValuesException(HedyException):
+    def __init__(self, command, value, tip):
+        super().__init__('Runtime Values Error', command=command, value=value, tip=tip)
+
+
+class RuntimeIndexException(HedyException):
+    def __init__(self, name):
+        super().__init__('Runtime Index Error', name=name)
+
+
 HEDY_EXCEPTIONS = {name: cls for name, cls in globals().items() if inspect.isclass(cls)}

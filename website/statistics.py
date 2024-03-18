@@ -9,6 +9,7 @@ import hedy_content
 import exceptions as hedy_exceptions
 from hedy import check_program_size_is_valid, parse_input, is_program_valid, process_input_string, HEDY_MAX_LEVEL
 import hedy
+from hedy_error import get_error_text
 import jinja_partials
 from website.flask_helpers import render_template
 from website import querylog
@@ -697,7 +698,7 @@ class LiveStatisticsModule(WebsiteModule):
                  'submitted': item.get('submitted'),
                  'public': item.get('public'),
                  'number_lines': item['code'].count('\n') + 1,
-                 'error_message': _translate_error(error_class, item['lang']) if error_class else None,
+                 'error_message': get_error_text(error_class, item['lang']) if error_class else None,
                  'error_header': 'Oops'  # TODO: get proper header message that gets translated, e.g. Transpile_error
                  }
             )
@@ -1249,29 +1250,6 @@ def _get_error_info(code, level, lang='en'):
     except hedy_exceptions.HedyException as exc:
         return exc
     return None
-
-
-def _translate_error(error_class, lang):
-    """
-    Translates the error code to the given language.
-    This is because the error code needs to be passed through the translation things in order to give more info on the
-    student details
-    screen.
-
-    A part of this code is duplicate from app.hedy_error_to_response but importing app.py leads to circular
-    imports and moving those functions to util.py is cumbersome (but not impossible) given the integration with other
-    functions in app.py
-    """
-    class_args = error_class.arguments
-
-    error_template = gettext('' + str(error_class.error_code))
-
-    # Check if argument is substring of error_template, if so replace
-    for k, v in class_args.items():
-        if f'{{{k}}}' in error_template:
-            error_template = error_template.replace(f'{{{k}}}', str(v))
-
-    return error_template
 
 
 def _build_url_args(**kwargs):
