@@ -179,37 +179,47 @@ def needs_colon(rule):
     return f'{rule[0:pos]} _COLON {rule[pos:]}'
 
 
-def _translate_index_error(code, list_name):
-    exception_text = gettext('catch_index_exception').replace('{list_name}', style_command(list_name))
-    return textwrap.dedent(f"""\
-        try:
-          {code}
-        except IndexError:
-          raise Exception({repr(exception_text)})
-        """)
-
-
-def translate_value_error(command, value, suggestion_type):
-    exception_text = gettext('catch_value_exception')
-    # Right now we only have three types of suggestion
-    # In the future we might change this if the number increases
-    if suggestion_type == 'number':
-        suggestion_text = gettext('suggestion_number')
-    elif suggestion_type == 'color':
-        suggestion_text = gettext('suggestion_color')
-    elif suggestion_type == 'note':
-        suggestion_text = gettext('suggestion_note')
-
-    exception_text = exception_text.replace('{command}', style_command(command))
-    exception_text = exception_text.replace('{value}', style_command(value))
-    exception_text = exception_text.replace('{suggestion}', suggestion_text)
-
-    return repr(exception_text)
-
-
 PREPROCESS_RULES = {
     'needs_colon': needs_colon
 }
+
+
+def translate_value_error(command, value, suggested_type):
+    return translate_error(gettext('catch_value_exception'), [
+        ('{command}', command, 1),
+        ('{value}', value, 1),
+        ('{suggestion}', translate_suggestion(suggested_type), 0)
+    ])
+
+
+def translate_values_error(command, suggested_type):
+    return translate_error(gettext("catch_multiple_values_exception"), [
+        ('{command}', command, 1),
+        ('{value}', '{}', 1),
+        ('{suggestion}', translate_suggestion(suggested_type), 0)
+    ])
+
+
+def translate_error(exception_text, variables):
+    for template, value, is_highlighted in variables:
+        result = style_command(value) if is_highlighted else value
+        exception_text = exception_text.replace(template, result)
+    # The error is transpiled in f-strings with ", ' and ''' quotes. The only option is to use """.
+    return '"""' + exception_text + '"""'
+
+
+def translate_suggestion(suggestion_type):
+    # Right now we only have three types of suggestion
+    # In the future we might change this if the number increases
+    if suggestion_type == 'number':
+        return gettext('suggestion_number')
+    elif suggestion_type == 'color':
+        return gettext('suggestion_color')
+    elif suggestion_type == 'note':
+        return gettext('suggestion_note')
+    elif suggestion_type == 'numbers_or_strings':
+        return gettext('suggestion_numbers_or_strings')
+    return ''
 
 
 class Command:
@@ -294,51 +304,36 @@ def promote_types(types, rules):
     return types
 
 
+def add_level(commands, level, add=None, remove=None):
+    # Adds the commands for the given level by taking the commands of the previous level
+    # and adjusting the list based on which keywords need to be added or/and removed
+    if not add:
+        add = []
+    if not remove:
+        remove = []
+    commands[level] = [c for c in commands[level-1] if c not in remove] + add
+
+
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
-# FH, dec 2023: TODO: Lots of duplication here! Could be made nicer?
-commands_per_level = {
-    1: ['print', 'ask', 'echo', 'turn', 'forward', 'color', 'play'],
-    2: ['print', 'ask', 'is', 'turn', 'forward', 'color', 'sleep', 'play'],
-    3: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from',
-        'play'],
-    4: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from',
-        'clear', 'play'],
-    5: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'clear', 'play'],
-    6: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'clear', 'play'],
-    7: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
-    8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
-    9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-        'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'clear', 'play'],
-    10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'repeat', 'times', 'for', 'clear', 'play'],
-    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear', 'play'],
-    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'clear', 'define', 'call',
-         'play'],
-    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define',
-         'call', 'play'],
-    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'clear', 'define',
-         'call', 'play'],
-    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear',
-         'define', 'call', 'play'],
-    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'clear',
-         'define', 'call', 'play'],
-    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in',
-         'not_in', 'if', 'else', 'ifpressed', 'assign_button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif',
-         'clear', 'define', 'call', 'play'],
-    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if',
-         'not_in', 'else', 'for', 'ifpressed', 'assign_button', 'range', 'repeat', 'and', 'or', 'while', 'elif',
-         'input', 'clear', 'define', 'call', 'play'],
-}
+commands_per_level = {1: ['ask', 'color', 'echo', 'forward', 'play', 'print', 'turn']}
+add_level(commands_per_level, level=2, add=['is', 'sleep'], remove=['echo'])
+add_level(commands_per_level, level=3, add=['add', 'at', 'from', 'random', 'remove', 'to'])
+add_level(commands_per_level, level=4, add=['clear'])
+add_level(commands_per_level, level=5, add=['assign_button', 'else', 'if', 'ifpressed', 'in', 'not_in'])
+add_level(commands_per_level, level=6)
+add_level(commands_per_level, level=7, add=['repeat', 'times'])
+add_level(commands_per_level, level=8)
+add_level(commands_per_level, level=9)
+add_level(commands_per_level, level=10, add=['for'])
+add_level(commands_per_level, level=11, add=['range'], remove=['times'])
+add_level(commands_per_level, level=12, add=['define', 'call'])
+add_level(commands_per_level, level=13, add=['and', 'or'])
+add_level(commands_per_level, level=14)
+add_level(commands_per_level, level=15, add=['while'])
+add_level(commands_per_level, level=16)
+add_level(commands_per_level, level=17, add=['elif'])
+add_level(commands_per_level, level=18, add=['input'], remove=['ask'])
+
 
 command_turn_literals = ['right', 'left']
 english_colors = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
@@ -468,43 +463,38 @@ def get_suggestions_for_language(lang, level):
 
 
 def escape_var(var):
-    var_name = var.name if type(var) is LookupEntry else var
+    var_name = var
+    if isinstance(var, LookupEntry):
+        var_name = var.name
     return "_" + var_name if var_name in reserved_words else var_name
-
-
-def closest_command(invalid_command, known_commands, threshold=2):
-    # closest_command() searches for a similar command (distance smaller than threshold)
-    # TODO: make the result value be tuple instead of a ugly None & string mix
-    # returns None if the invalid command does not contain any known command.
-    # returns 'keyword' if the invalid command is exactly a command (so shoudl not be suggested)
-
-    min_command = closest_command_with_min_distance(invalid_command, known_commands, threshold)
-
-    # Check if we are not returning the found command
-    # In that case we have no suggestion
-    # This is to prevent "print is not a command in Hedy level 3, did you mean print?" error message
-
-    if min_command == invalid_command:
-        return 'keyword'
-    return min_command
 
 
 def style_command(command):
     return f'<span class="command-highlighted">{command}</span>'
 
 
-def closest_command_with_min_distance(invalid_command, commands, threshold):
-    # FH, early 2020: simple string distance, could be more sophisticated MACHINE LEARNING!
+def closest_command(input_, known_commands, threshold=2):
+    # Find the closest command to the input, i.e. the one with the smallest distance within the threshold. Returns:
+    #  (None, _)  No suggestion. There is no command similar enough to the input. For example, the distance
+    #             between 'eechoooo' and 'echo' is higher than the specified threshold.
+    #  (False, _) Invalid suggestion. The suggested command is identical to the input, so it is not a suggestion.
+    #             This is to prevent "print is not a command in Hedy level 3, did you mean print?" error message.
+    #  (True, 'sug') Valid suggestion. A command is similar enough to the input but not identical, e.g. 'aks' -> 'ask'
 
+    # FH, early 2020: simple string distance, could be more sophisticated MACHINE LEARNING!
     minimum_distance = 1000
-    closest_command = None
-    for command in commands:
-        minimum_distance_for_command = calculate_minimum_distance(command, invalid_command)
+    result = None
+    for command in known_commands:
+        minimum_distance_for_command = calculate_minimum_distance(command, input_)
         if minimum_distance_for_command < minimum_distance and minimum_distance_for_command <= threshold:
             minimum_distance = minimum_distance_for_command
-            closest_command = command
+            result = command
 
-    return closest_command
+    if result:
+        if result != input_:
+            return True, result  # Valid suggestion
+        return False, ''  # Invalid suggestion
+    return None, ''  # No suggestion
 
 
 def calculate_minimum_distance(s1, s2):
@@ -938,39 +928,15 @@ class TypeValidator(Transformer):
 
     def get_type(self, tree):
         # The rule var_access is used in the grammars definitions only in places where a variable needs to be accessed.
+        # var_access_print is identical to var_access and is introduced only to differentiate error messages.
         # So, if it cannot be found in the lookup table, then it is an undefined variable for sure.
-        if tree.data == 'var_access':
+        if tree.data in ['var_access', 'var_access_print']:
             var_name = tree.children[0]
             in_lookup, type_in_lookup = self.try_get_type_from_lookup(var_name)
             if in_lookup:
                 return type_in_lookup
             else:
-                raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
-
-        if tree.data == 'var_access_print':
-            var_name = tree.children[0]
-            in_lookup, type_in_lookup = self.try_get_type_from_lookup(var_name)
-            if in_lookup:
-                return type_in_lookup
-            else:
-                # is there a variable that is mildly similar?
-                # if so, we probably meant that one
-
-                # we first check if the list of vars is empty since that is cheaper than stringdistancing.
-                # TODO: Can be removed since fall back handles that now
-                if len(self.lookup) == 0:
-                    raise hedy.exceptions.UnquotedTextException(
-                        level=self.level, unquotedtext=var_name, line_number=tree.meta.line)
-                else:
-                    # TODO: decide when this runs for a while whether this distance small enough!
-                    minimum_distance_allowed = 4
-                    for var_in_lookup in self.lookup:
-                        if calculate_minimum_distance(var_in_lookup.name, var_name) <= minimum_distance_allowed:
-                            raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
-
-                    # nothing found? fall back to UnquotedTextException
-                    raise hedy.exceptions.UnquotedTextException(
-                        level=self.level, unquotedtext=var_name, line_number=tree.meta.line)
+                self.get_var_access_error(tree, var_name)
 
         # TypedTree with type 'None' and 'string' could be in the lookup because of the grammar definitions
         # If the tree has more than 1 child, then it is not a leaf node, so do not search in the lookup
@@ -980,6 +946,22 @@ class TypeValidator(Transformer):
                 return type_in_lookup
         # If the value is not in the lookup or the type is other than 'None' or 'string', return evaluated type
         return tree.type_
+
+    def get_var_access_error(self, tree, var_name):
+        # var_access_print is a var_access used in print statements to provide the following better error messages
+        if tree.data == 'var_access_print':
+            # is there a variable that is mildly similar? if so, we probably meant that one
+            minimum_distance_allowed = 4
+            for var_in_lookup in self.lookup:
+                if calculate_minimum_distance(var_in_lookup.name, var_name) <= minimum_distance_allowed:
+                    raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
+
+            # no variable which looks similar? Then, fall back to UnquotedTextException
+            raise hedy.exceptions.UnquotedTextException(
+                level=self.level, unquotedtext=var_name, line_number=tree.meta.line)
+
+        # for all other var_access instances, use UndefinedVarException
+        raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
 
     def ignore_type(self, type_):
         return type_ in [HedyType.any, HedyType.none]
@@ -1227,24 +1209,24 @@ class IsValid(Filter):
 
     def error_invalid(self, meta, args):
         invalid_command = args[0][1]
-        closest = closest_command(invalid_command, get_suggestions_for_language(self.lang, self.level))
+        sug_exists, suggestion = closest_command(invalid_command, get_suggestions_for_language(self.lang, self.level))
 
-        if closest == 'keyword':  # we couldn't find a suggestion
+        if sug_exists is None:  # there is no suggestion
+            raise exceptions.MissingCommandException(level=self.level, line_number=meta.line)
+        if not sug_exists:  # the suggestion is invalid, i.e. identical to the command
             invalid_command_en = hedy_translation.translate_keyword_to_en(invalid_command, lang)
             if invalid_command_en == Command.turn:
                 arg = args[0][0]
-                raise hedy.exceptions.InvalidArgumentException(command=invalid_command,
-                                                               allowed_types=get_allowed_types(
-                                                                   Command.turn, self.level),
-                                                               invalid_argument=arg,
-                                                               line_number=meta.line)
+                raise hedy.exceptions.InvalidArgumentException(
+                    command=invalid_command,
+                    allowed_types=get_allowed_types(Command.turn, self.level),
+                    invalid_argument=arg,
+                    line_number=meta.line)
             # clearly the error message here should be better or it should be a different one!
             raise exceptions.ParseException(level=self.level, location=[meta.line, meta.column], found=invalid_command)
-        elif closest is None:
-            raise exceptions.MissingCommandException(level=self.level, line_number=meta.line)
-        else:
+        else:  # there is a valid suggestion
             result = None
-            fixed_code = self.input_string.replace(invalid_command, closest)
+            fixed_code = self.input_string.replace(invalid_command, suggestion)
             if fixed_code != self.input_string:  # only if we have made a successful fix
                 try:
                     fixed_result = transpile_inner(fixed_code, self.level)
@@ -1254,7 +1236,7 @@ class IsValid(Filter):
                     pass
 
         raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=self.level,
-                                                 guessed_command=closest, line_number=meta.line,
+                                                 guessed_command=suggestion, line_number=meta.line,
                                                  fixed_code=fixed_code, fixed_result=result)
 
     def error_unsupported_number(self, meta, args):
@@ -1614,8 +1596,6 @@ class ConvertToPython_1(ConvertToPython):
             return f"print('" + argument + "')" + self.add_debug_breakpoint()
         else:
             return textwrap.dedent(f"""\
-            from microbit import *
-            while True:
                 display.scroll('{argument}')""")
 
     def ask(self, meta, args):
@@ -1709,7 +1689,7 @@ class ConvertToPython_1(ConvertToPython):
     def make_turtle_command(self, parameter, command, command_text, add_sleep, type):
         exception = ''
         if isinstance(parameter, str):
-            exception = self.make_catch_exception([parameter])
+            exception = self.make_index_error_check_if_list([parameter])
         variable = self.get_fresh_var('__trtl')
         exception_text = translate_value_error(command, variable, 'number')
         transpiled = exception + textwrap.dedent(f"""\
@@ -1742,27 +1722,35 @@ class ConvertToPython_1(ConvertToPython):
                 {variable} = color_dict[{variable}]
             t.{command_text}({variable}){self.add_debug_breakpoint()}""")
 
-    def make_catch_exception(self, args):
+    def make_index_error_check_if_list(self, args):
         lists_names = []
         list_args = []
-        var_regex = r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+"
         # List usage comes in indexation and random choice
-        list_regex = fr"(({var_regex})+\[int\(({var_regex})\)-1\])|(random\.choice\(({var_regex})\))"
+        var_regex = r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+"
+        list_access_with_int_cast = fr"(({var_regex})+\[int\(({var_regex})\)-1\])"
+        list_access_without_cast = fr"(({var_regex})+\[({var_regex})-1\])"
+        list_access_random = fr"(random\.choice\(({var_regex})\))"
+        list_regex = f"{list_access_with_int_cast}|{list_access_without_cast}|{list_access_random}"
         for arg in args:
             # Expressions come inside a Tree object, so unpack them
             if isinstance(arg, Tree):
                 arg = arg.children[0]
             for group in regex.findall(list_regex, arg):
-                if group[0] != '':
-                    list_args.append(group[0])
-                    lists_names.append(group[1])
-                else:
-                    list_args.append(group[3])
-                    lists_names.append(group[4])
-        code = ""
-        for i, list_name in enumerate(lists_names):
-            code += _translate_index_error(list_args[i], list_name)
-        return code
+                match = [e for e in group if e][:2]
+                list_args.append(match[0])
+                lists_names.append(match[1])
+
+        errors = [self.make_index_error(list_args[i], list_name) for i, list_name in enumerate(lists_names)]
+        return ''.join(errors)
+
+    def make_index_error(self, code, list_name):
+        exception_text = translate_error(gettext('catch_index_exception'), [('{list_name}', list_name, 1)])
+        return textwrap.dedent(f"""\
+            try:
+              {code}
+            except IndexError:
+              raise Exception({exception_text})
+            """)
 
 
 @v_args(meta=True)
@@ -1830,14 +1818,12 @@ class ConvertToPython_2(ConvertToPython_1):
                     r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+",
                     a)
                 args_new.append(''.join([self.process_variable_for_fstring(x, meta.line) for x in res]))
-        exception = self.make_catch_exception(args)
+        exception = self.make_index_error_check_if_list(args)
         argument_string = ' '.join(args_new)
         if not self.microbit:
             return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
         else:
             return textwrap.dedent(f"""\
-                from microbit import *
-                while True:
                     display.scroll('{argument_string}')""")
 
     def ask(self, meta, args):
@@ -1872,18 +1858,18 @@ class ConvertToPython_2(ConvertToPython_1):
         if isinstance(note, str):
             uppercase_note = note.upper()
             if uppercase_note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
-                return self.make_play(uppercase_note, meta)
+                return self.make_play(uppercase_note, meta) + self.add_debug_breakpoint()
 
         # no note? it must be a variable!
         self.add_variable_access_location(note, meta.line)
-        return self.make_play_var(note, meta)
+        return self.make_play_var(note, meta) + self.add_debug_breakpoint()
 
     def assign(self, meta, args):
         variable_name = args[0]
         value = args[1]
 
         if self.is_random(value) or self.is_list(value):
-            exception = self.make_catch_exception([value])
+            exception = self.make_index_error_check_if_list([value])
             return exception + variable_name + " = " + value + self.add_debug_breakpoint()
         else:
             if self.is_variable(value, meta.line):  # if the value is a variable, this is a reassign
@@ -1902,7 +1888,7 @@ class ConvertToPython_2(ConvertToPython_1):
             value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
             if not self.is_int(args[0]):
                 self.add_variable_access_location(value, meta.line)
-            exceptions = self.make_catch_exception(args)
+            exceptions = self.make_index_error_check_if_list(args)
             try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
             exception_text = translate_value_error(Command.sleep, value, 'number')
             code = try_prefix + textwrap.dedent(f"""\
@@ -2010,13 +1996,11 @@ class ConvertToPython_4(ConvertToPython_3):
 
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
-        exceptions = self.make_catch_exception(args)
+        exceptions = self.make_index_error_check_if_list(args)
         if not self.microbit:
             return exceptions + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
         else:
             return textwrap.dedent(f"""\
-                from microbit import *
-                while True:
                     display.scroll('{argument_string}')""")
 
     def ask(self, meta, args):
@@ -2167,7 +2151,7 @@ class ConvertToPython_6(ConvertToPython_5):
                 if not self.is_int(args[0]):
                     self.add_variable_access_location(value, meta.line)
 
-            exceptions = self.make_catch_exception(args)
+            exceptions = self.make_index_error_check_if_list(args)
             try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
             exception_text = translate_value_error(Command.sleep, value, 'number')
             code = try_prefix + textwrap.dedent(f"""\
@@ -2208,7 +2192,7 @@ class ConvertToPython_6(ConvertToPython_5):
             if self.is_variable(value, meta.line):
                 value = self.process_variable(value, meta.line)
                 if self.is_list(value) or self.is_random(value):
-                    exception = self.make_catch_exception([value])
+                    exception = self.make_index_error_check_if_list([value])
                     return exception + parameter + " = " + value + self.add_debug_breakpoint()
                 else:
                     return parameter + " = " + value
@@ -2227,13 +2211,23 @@ class ConvertToPython_6(ConvertToPython_5):
         self.add_variable_access_location(argument, meta.line)
         return f'int({argument})'
 
+    def process_token_or_tree_for_calculation(self, argument, command, meta):
+        if type(argument) is Tree:
+            return f'{str(argument.children[0])}'
+        if argument.isnumeric():
+            latin_numeral = int(argument)
+            return f'int({latin_numeral})'
+        self.add_variable_access_location(argument, meta.line)
+        exception_text = translate_value_error(command, argument, 'number')
+        return f'int_with_error({argument}, {exception_text})'
+
     def process_calculation(self, args, operator, meta):
         # arguments of a sum are either a token or a
         # tree resulting from earlier processing
         # for trees we need to grap the inner string
         # for tokens we add int around them
 
-        args = [self.process_token_or_tree(a, meta) for a in args]
+        args = [self.process_token_or_tree_for_calculation(a, operator, meta) for a in args]
         return Tree('sum', [f'{args[0]} {operator} {args[1]}'])
 
     def addition(self, meta, args):
@@ -2289,15 +2283,23 @@ def add_sleep_to_command(commands, indent=True, is_debug=False, location="after"
 @hedy_transpiler(level=7)
 @source_map_transformer(source_map)
 class ConvertToPython_7(ConvertToPython_6):
-    def repeat(self, meta, args):
-        var_name = self.get_fresh_var('__i__')
+    def make_repeat(self, meta, args, multiline):
+        var_name = self.get_fresh_var('__i')
         times = self.process_variable(args[0], meta.line)
-        command = args[1]
-        # in level 7, repeats can only have 1 line as their arguments
-        command = add_sleep_to_command(command, False, self.is_debug, location="after")
+
+        # In level 7, repeat can only have 1 line in its body
+        if not multiline:
+            body = self.indent(args[1])
+        # In level 8 and up, repeat can have multiple lines in its body
+        else:
+            body = "\n".join([self.indent(x) for x in args[1:]])
+
+        body = add_sleep_to_command(body, indent=True, is_debug=self.is_debug, location="after")
         type_check = self.code_to_ensure_variable_type(times, 'int', Command.repeat, 'number')
-        return f"""{type_check}for {var_name} in range(int({str(times)})):{self.add_debug_breakpoint()}
-{ConvertToPython.indent(command)}"""
+        return f"{type_check}for {var_name} in range(int({times})):{self.add_debug_breakpoint()}\n{body}"
+
+    def repeat(self, meta, args):
+        return self.make_repeat(meta, args, multiline=False)
 
 
 @v_args(meta=True)
@@ -2311,17 +2313,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
         return "".join(args)
 
     def repeat(self, meta, args):
-        # todo fh, may 2022, could be merged with 7 if we make
-        # indent a boolean parameter?
-
-        var_name = self.get_fresh_var('i')
-        times = self.process_variable(args[0], meta.line)
-
-        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
-        body = "\n".join(all_lines)
-        body = add_sleep_to_command(body, indent=True, is_debug=self.is_debug, location="after")
-        type_check = self.code_to_ensure_variable_type(times, 'int', Command.repeat, 'number')
-        return f"""{type_check}for {var_name} in range(int({times})):{self.add_debug_breakpoint()}\n{body}"""
+        return self.make_repeat(meta, args, multiline=True)
 
     def ifs(self, meta, args):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
@@ -2478,7 +2470,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def returns(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
-        exception = self.make_catch_exception(args)
+        exception = self.make_index_error_check_if_list(args)
         return exception + f"return f'''{argument_string}'''"
 
     def number(self, meta, args):
@@ -2507,14 +2499,6 @@ class ConvertToPython_12(ConvertToPython_11):
             return f'"{text}"'
         return f"'{text}'"
 
-    def process_token_or_tree(self, argument, meta):
-        if isinstance(argument, Tree):
-            return f'{str(argument.children[0])}'
-        else:
-            # this is a variable, add to the table
-            self.add_variable_access_location(argument, meta.line)
-            return argument
-
     def print_ask_args(self, meta, args):
         result = super().print_ask_args(meta, args)
         if "'''" in result:
@@ -2523,13 +2507,11 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
-        exception = self.make_catch_exception(args)
+        exception = self.make_index_error_check_if_list(args)
         if not self.microbit:
             return exception + f"print(f'''{argument_string}''')" + self.add_debug_breakpoint()
         else:
             return textwrap.dedent(f"""\
-                from microbit import *
-                while True:
                     display.scroll('{argument_string}')""")
 
     def ask(self, meta, args):
@@ -2573,11 +2555,11 @@ class ConvertToPython_12(ConvertToPython_11):
         self.check_var_usage_when_quotes_are_required(right_hand_side, meta)
 
         if isinstance(right_hand_side, Tree):
-            exception = self.make_catch_exception([right_hand_side.children[0]])
+            exception = self.make_index_error_check_if_list([right_hand_side.children[0]])
             return exception + left_hand_side + " = " + right_hand_side.children[0] + self.add_debug_breakpoint()
         else:
             # we no longer escape quotes here because they are now needed
-            exception = self.make_catch_exception([right_hand_side])
+            exception = self.make_index_error_check_if_list([right_hand_side])
             return exception + left_hand_side + " = " + right_hand_side + "" + self.add_debug_breakpoint()
 
     def var(self, meta, args):
@@ -2611,6 +2593,40 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def make_forward(self, parameter):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'float')
+
+    def process_token_or_tree(self, argument, meta):
+        if isinstance(argument, Tree):
+            return f'{str(argument.children[0])}'
+        else:
+            # this is a variable, add to the table
+            self.add_variable_access_location(argument, meta.line)
+            return argument
+
+    def process_token_or_tree_for_calculation(self, argument, command, meta):
+        if type(argument) is Tree:
+            return f'{str(argument.children[0])}'
+        else:
+            # this is a variable, add to the table
+            self.add_variable_access_location(argument, meta.line)
+            exception_text = translate_value_error(command, argument, 'number')
+            return f'number_with_error({argument}, {exception_text})'
+
+    def process_token_or_tree_for_addition(self, argument, meta):
+        if type(argument) is Tree:
+            return f'{str(argument.children[0])}'
+        else:
+            # this is a variable, add to the table
+            self.add_variable_access_location(argument, meta.line)
+            return argument
+
+    # From level 12 concatenation should also work, so the args could be either numbers or strings
+    def addition(self, meta, args):
+        args = [self.process_token_or_tree_for_addition(a, meta) for a in args]
+        if all([self.is_int(a) or self.is_float(a) for a in args]):
+            return Tree('sum', [f'{args[0]} + {args[1]}'])
+        else:
+            exception_text = translate_values_error(Command.addition, 'numbers_or_strings')
+            return Tree('sum', [f'sum_with_error({args[0]}, {args[1]}, {exception_text})'])
 
     def division(self, meta, args):
         return self.process_calculation(args, '/', meta)
@@ -2671,7 +2687,7 @@ class ConvertToPython_15(ConvertToPython_14):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
         body = add_sleep_to_command(body, True, self.is_debug, location="after")
-        exceptions = self.make_catch_exception([args[0]])
+        exceptions = self.make_index_error_check_if_list([args[0]])
         return exceptions + "while " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + body
 
     def ifpressed(self, meta, args):
@@ -2715,12 +2731,12 @@ class ConvertToPython_16(ConvertToPython_15):
         self.add_variable_access_location(args[1], meta.line)
         self.add_variable_access_location(args[2], meta.line)
 
-        exception = _translate_index_error(left_side, args[0])
+        exception = self.make_index_error_check_if_list([left_side])
         return exception + left_side + ' = ' + right_side + self.add_debug_breakpoint()
 
     def ifs(self, meta, args):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
-        exceptions = self.make_catch_exception([args[0]])
+        exceptions = self.make_index_error_check_if_list([args[0]])
         return exceptions + "if " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
 
@@ -3001,59 +3017,43 @@ def create_grammar(level, lang, skip_faulty):
     return merged_grammars
 
 
-def save_total_grammar_file(level, grammar, lang):
-    # Load Lark grammars relative to directory of current file
-    script_dir = path.abspath(path.dirname(__file__))
-    filename = "level" + str(level) + "." + lang + "-Total.lark"
-    loc = path.join(script_dir, "grammars-Total", filename)
-    file = open(loc, "w", encoding="utf-8")
-    file.write(grammar)
-    file.close()
+def save_total_grammar_file(level, grammar, lang_):
+    write_file(grammar, 'grammars-Total', f'level{level}.{lang_}-Total.lark')
 
 
-def get_additional_rules_for_level(level, sub=0):
-    script_dir = path.abspath(path.dirname(__file__))
-    if sub:
-        filename = "level" + str(level) + "-" + str(sub) + "-Additions.lark"
-    else:
-        filename = "level" + str(level) + "-Additions.lark"
-    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-        grammar_text = file.read()
-    return grammar_text
+def get_additional_rules_for_level(level):
+    return read_file('grammars', f'level{level}-Additions.lark')
 
 
 def get_full_grammar_for_level(level):
-    script_dir = path.abspath(path.dirname(__file__))
-    filename = "level" + str(level) + ".lark"
-    with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-        grammar_text = file.read()
-    return grammar_text
-
-
-# TODO FH, May 2022. I feel there are other places in the code where we also do this
-# opportunity to combine?
+    return read_file('grammars', f'level{level}.lark')
 
 
 def get_keywords_for_language(language):
-    script_dir = path.abspath(path.dirname(__file__))
+    if not local_keywords_enabled:
+        language = 'en'
     try:
-        if not local_keywords_enabled:
-            raise FileNotFoundError("Local keywords are not enabled")
-        filename = "keywords-" + str(language) + ".lark"
-        with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-            keywords = file.read()
+        return read_file('grammars', f'keywords-{language}.lark')
     except FileNotFoundError:
-        filename = "keywords-en.lark"
-        with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-            keywords = file.read()
-    return keywords
+        return read_file('grammars', f'keywords-en.lark')
 
 
 def get_terminals():
+    return read_file('grammars', 'terminals.lark')
+
+
+def read_file(*paths):
     script_dir = path.abspath(path.dirname(__file__))
-    with open(path.join(script_dir, "grammars", "terminals.lark"), "r", encoding="utf-8") as file:
-        terminals = file.read()
-    return terminals
+    path_ = path.join(script_dir, *paths)
+    with open(path_, "r", encoding="utf-8") as file:
+        return file.read()
+
+
+def write_file(content, *paths):
+    script_dir = path.abspath(path.dirname(__file__))
+    path_ = path.join(script_dir, *paths)
+    with open(path_, "w", encoding="utf-8") as file:
+        file.write(content)
 
 
 PARSER_CACHE = {}
@@ -3700,3 +3700,8 @@ def execute(input_string, level):
     if python.has_turtle:
         raise exceptions.HedyException("hedy.execute doesn't support turtle")
     exec(python.code)
+
+
+def transpile_and_return_python(input_string, level):
+    python = transpile(input_string, level, microbit=True)
+    return str(python.code)

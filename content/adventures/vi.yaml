@@ -1,167 +1,184 @@
 adventures:
     story:
-        name: Story
-        default_save_name: Story
-        description: Story
+        name: Câu chuyện
+        default_save_name: Câu chuyện
+        description: Câu chuyện
         levels:
             1:
                 story_text: |
-                    In level 1 you can make a story with a different main character that you enter yourself.
+                    Ở cấp độ thứ nhất bạn có thể tạo ra một câu chuyện với nhân vật chính do bạn tự tạo nên
 
-                    In the first line, use `{ask}` and ask who the main character of the story will be.
+                    Ở dòng đầu tiên, sử dụng `{ask}`và đặt câu hỏi ai sẽ là nhân vật chính của câu chuyện.
 
-                    After that first line, start with `{print}` if the sentence needs to be printed.
-                    You use `{echo}` if you want your main character to be at the end of the sentence.
+                    Sau đó, bắt đầu với `{print}` nếu câu lệnh cần được in.
+                    Sử dụng  `{echo}`nếu bạn muốn ký tự chính nằm ở cuối câu lệnh.
                 example_code: |
                     ```
-                    {ask} The main character of this story is
-                    {print} The main character is now going to walk in the forest
-                    {echo} They're a bit scared,
-                    {print} They hear crazy noises everywhere
-                    {print} They're afraid this is a haunted forest
+                    {ask} Nhân vật chính của câu chuyện là
+                    {print} Nhân vật chính đang đi dạo trong rừng
+                    {echo} Họ có chút sợ,
+                    {print}Họ nghe thấy tiếng ồn kinh khủng ở khắp mọi nơi
+                    {print} Họ sợ rằng đây là khu rừng ma ám
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Can you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?
+                    ### Bài tập
+                    Giờ đây bạn hãy tự tạo nên câu chuyện của riêng mình với 6 dòng code.
+                    Cốt truyện không được giống với code ví dụ.
+                    Sử dụng ít nhất một lệnh `{ask}` và một  lệnh`{echo}` .
+                    Bạn có thể tạo ra bằng bất kì chủ đề nào bạn thích.
+                    Nếu bạn không nghĩ ra chủ đề nào, sử dụng một trong số những lựa chọn của chúng tôi: đi đến rạp phim, một trận thể thao hay một ngày ở sở thú.
             2:
                 story_text: |
-                    In level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.
+                    Ở cấp độ thứ hai, bạn có thể làm cho câu chuyện trở nên thú vị hơn. Tên của nhân vật chính giờ đây có thể ở mọi câu lệnh.
 
-                    You do have to program a little bit extra for that. You must now name your main character first.
+                    Bạn cần lập trình thêm một chút. Giờ bạn cần đặt tên cho nhân vật chính trước.
 
-                    You can then put that name anywhere in a sentence.
-
-                    ### Exercise
-                    Can you make a story using a variable yourself? Can you add even more variables?
+                    Đặt ở một câu lệnh bất kỳ.
                 example_code: |-
                     ```
-                    name {is} {ask} What is the name of the main character?
-                    {print} name is now going to run in the woods
-                    {print} name is a bit scared
-                    {print} Suddenly she hears a crazy noise...
+                    tên {is} {ask} Tên của nhân vật chính là gì?
+                    {print}tên đang chạy ở trong rừng
+                    {print} tên có chút sợ sệt
+                    {print} Đột nhiên cô ấy nghe thấy một âm thanh kinh khủng
                     {sleep}
-                    {print} name is afraid this is a haunted forest
+                    {print} tên lo sợ rằng đây là một khu rừng ma ám
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Now it's time to add variables to your own story that you've made in the previous level.
-                    Go to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.
+                    ### Bài tập
+                    Đã đến làm cho câu chuyện của bạn trở nên phong phú hơn cấp độ trước.
+                    Chọn 'My programs', tìm cấp độ 1 trong câu chuyện trinh thám của bạn và sao chép code. Dán phần code vào màn hình chính ở mức độ này.
 
-                    This code won't work in this level, because you have not used variables yet.
-                    Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
+                    Code sẽ không hoạt động nếu bạn vẫn chưa mở rộng nhé.
+                    Thay đổi câu lệnh `{ask}` và câu lệnh`{echo}` trong dòng code của bạn để sửa theo mẫu mà bạn được học ở cấp độ này.
 
-                    **Extra** Add a sleep command to your code to build up tension in your story.
+                    **Extra** để thêm câu lệnh  `{sleep}` vào dòng code để tạo nên sự gay cấn cho câu chuyện.
             3:
                 story_text: |
-                    In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:
+                    Ở cấp độ 3 này bạn có thể làm câu chuyện trở nên thú vị hơn nữa. Bạn có thể chọn ngẫu nhiên một con quái vật, động vật hay chướng ngại vật, như này:
                 example_code: |
                     ```
-                    animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} They now hear the sound of an animals {at} {random}
+                    nhữngthú {is} 🦔, 🐿, 🦉, 🦇
+                    {print} Họ nghe thấy tiếng nhữngthú {at} {random}
                     ```
                 story_text_2: |
-                    The command `{add}` can also come in handy in your story.
+                    Câu lệnh`{add}` có thể có ích cho câu chuyện của bạn.
                 example_code_2: |
                     ```
-                    {print} He hears a sound
-                    animals {is} 🐿, 🦔, 🦇, 🦉
-                    animal {is} {ask} What do you think it is?
-                    {add} animal {to_list} animals
-                    {print} it was a animals {at} {random}
+                    {print} Họ nghe thấy tiếng
+                    nhữngthú {is} 🐿, 🦔, 🦇, 🦉
+                    thú {is} {ask} Bạn nghĩ là cái gì>
+                    {add} thú {to_list} nhữngthú
+                    {print} Là một nhữngthú {at} {random}
                     ```
                 story_text_3: |
-                    This is an example of the `{remove}` command in your story
+                    Đây là ví dụ về câu lệnh `{remove}` trong câu chuyện của bạn
 
-                    ### Exercise
-                    Can you use the 3 new commands `{at} {random}` , `{add} {to_list}` and `{remove} {from}` in your own story?
+                    ### Bài tập
+                    Sao chép câu chuyện từ những cấp độ trước.
+                    Ở cấp độ này bạn được học 3 câu lệnh mới `{at} {random}` , `{add} {to_list}`và `{remove} {from}`.
+                    Thêm nhiều dòng code vào trong câu chuyện để tất cả những câu lệnh mới đều xuất hiện ít nhất một lần trong câu chuyện của bạn.
                 example_code_3: |
                     ```
-                    {print} His backpack got way too heavy.
-                    {print} Inside were a bottle of water, a flashlight and a brick.
-                    bag {is} water, flashlight, brick
-                    dump {is} {ask} Which item should he dump?
-                    {remove} dump {from} bag
+                    {print} Balo của anh ấy nặng quá.
+                    {print} Bên trong có một chai nước, một đèn pin và một viên gạch.
+                    túi {is} nước, đèn pin, gạch
+                    bỏ {is} {ask} Vật dụng nào anh ấy nên bỏ đi?
+                    {remove} bỏ {from} túi
                     ```
             4:
                 story_text: |
-                    ### Exercise
-                    Copy the example code and finish it by adding quotation marks on the blanks in lines 1 and 2.
-                    The blanks in line 3 and 4 should not be replaced by quotation marks, but a `{sleep}` and a `{clear}` command. Can you make it work?
+                    ### Bài tập
+                    Sao chép code ví dụ và hoàn thành nó bằng cách thêm dấu ngoặc kép vào chỗ trống ở dòng 1 và 2.
+                    Chỗ trống ở dòng 3 và 4 không cần thêm dấu ngoặc kép, nhưng cần thêm câu lệnh  `{sleep}`và `{clear}` . Bạn làm được chứ?
 
-                    ### Exercise 2
-                    Go back to the previous level and copy your story code. Make the code work in this level by adding quotation marks in the right spots.
-                    Mind: The variables in your own story should be outside of the quotation marks. Just like the second line of the example code. In that line the variable name is placed outside of the quotation marks.
+                    ### Bài tập 2
+                    Quay lại cấp độ trước và sao chép code câu chuyện của bán. Cho code chạy ở cấp độ này bằng cách thêm dấu ngoặc kép vào đúng chỗ.
+                    Chú ý: Các biến số trong câu chuyện của bạn phải nằm ngoài dấu ngoặc kép. Giống như dòng thứ hai của code ví dụ. Trong dòng đó tên biến được đặt bên ngoài dấu ngoặc kép
                 example_code: |
                     ```
-                    name {is} {ask} _ What is your name? _
-                    {print}  _ The main character is called _ name
+                    tên {is} {ask} _ Tên bạn là gì? _
+                    {print}  _ Nhân vật chính được gọi là _ tên
                     _
                     _
-                    {print} name  _ is now going to walk in the woods _
-                    {print} name _ is a bit scared _
-                    animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _ He hears the sound of a _ animals {at} {random}
-                    {print} name _ is afraid this is a haunted forest _
+                    {print} tên  _ đang đi dạo trong rừng_
+                    {print} tên _có chút sợ hãi_
+                    nhữngthú {is} 🦔, 🐿, 🦉, 🦇
+                    {print} _ Anh ấy nghe thấy âm thanh của một_ nhữngthú {at} {random}
+                    {print} tên _lo sợ rằng đây là khu rừng ma ám _
                     ```
             5:
                 story_text: |
-                    In this level you can program different endings, which will make your story even more fun.
+                    Ở cấp độ này ban có thể lập trình ra nhiều cái kết khác nhau, khiến câu chuyện của bạn trở nên thú vị hơn.
+                    Phần code ví dụ bạn có thể thấy hai cái kết khác nhau.
 
-                    ### Exercise
-                    Think of two endings for your story, for example:
+                    ###Bài tập 1
+                    Viết một câu chuyện mới với ít nhất 6 dòng code về một chủ đề mà bạn chọn.
+                    Không có cảm hứng? Chọn một trong những chủ đề sau đây: siêu anh hùng, một ngày đi học buồn chán, lạc trên đảo hoang.
 
-                    - The princess is walking through the forest
-                    - She runs into a monster
+                    Cho người chơi lựa chọn cái kết có hậu và cái kết buồn, như code ví dụ.
+                    Lập trình cả hai cái kết.
 
-                    - Happy ending: She takes her sword and the monster quickly runs away
-                    - Bad Ending: The monster eats the princess
-
-                    You can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `{if}`, and then you have already made a whole program!
+                    ###Bài tập 2
+                    Sao chép câu chuyện trinh thám mà bạn vừa tạo nên ở những cấp độ trước.
+                    Tìm cách thêm vào ít nhất 2 câu lệnh  `{if}` và `{else}`  trong câu chuyện của bạn.
+                    Đây có thể là kết thúc vui hoặc buồn, nhưng bạn cũng có thể tìm nhiều cách khác để kết hợp các câu lệnh.
                 example_code: |
                     ```
-                    name {is} {ask} 'Who is walking in the forest?'
-                    {print} name 'walks through the forest'
-                    {print} name 'encounter a monster'
-                    end {is} {ask} 'Would you like a good or a bad ending?'
-                    {if} end {is} good {print} name 'takes the sword and the monster quickly runs away'
-                    {else} {print} 'The monster eats' name
+                    tên {is} {ask} 'Ai là người đi trong rừng vậy?'
+                    {print} tên ' đi ở trong rừng'
+                    {print} tên ' bắt gặp một con quái vật'
+                    kếtthúc {is} {ask} 'Bạn muốn kết thúc vui hay buồn?'
+                    {if} kếtthúc {is} vui {print} tên ' nắm lấy thanh kiếm và con quái vật nhanh chóng chạy đi mất'
+                    {else} {print} 'Con quái vật nuốt chửng' tên
                     ```
             7:
                 story_text: |
-                    In a story, someone says words several times. For example, when someone calls for help or sings a song.
-                    You can put such repetitions in your story, in this level with `{repeat}`.
+                    Trong một câu chuyện, đôi lúc sẽ có người nói. Ví dụ, khi có người kêu cứu hoặc hát một bài.
+                    Bạn có thể lặp lại điều này trong câu chuyện ở cấp độ này bằng cách dùng `{repeat}`.
 
-                    ### Exercise
-                    Can you make your own story with repitition?
+                    ### Bài tập
+                    Thêm phần lặp lại vào trong câu chuyện của bạn. Quay lại để lưu chương trình, chọn lập trình cho câu truyện từ cấp độ trước cấp 6 và tìm dòng có chứa `{print}` để lặp lại nó!
                 example_code: |
                     ```
-                    {print} 'The prince kept calling for help'
-                    {repeat} 5 {times} {print} 'Help!'
-                    {print} 'Why is nobody helping me?'
+                    {print} 'Chàng hoàng tử liên tục cầu cứu'
+                    {repeat} 5 {times} {print} 'Cứu!'
+                    {print} 'Sao không ai cứu mình vậy?'
                     ```
             8:
                 story_text: |
-                    In this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!
+                    Ở cấp độ này bạn có thể sử dụng nhiều câu khác nhau ở câu lệnh `{if}` , cách này giúp bạn nâng cấp thêm cho cái kết vui hay buồn!
 
-                    ### Exercise
-                    Can you make your own story with two different endings?
+                    ### Bài tập 1
+                    Code ví dụ đưa ra hai cái kết khác nhau; một là khi nhân vật nhảy vào cỗ máy thời gian và một là anh ấy không nhảy.
+                    Hoàn thành ô trống với ít nhất một câu cho mỗi cái kết.
+                    **(eExtra)**Làm cho câu chuyện dài thêm. Điều gì sẽ xảy ra trong câu chuyện? Bạn cũng có thể thêm `{ask}` lần thứ hai với nhiều lựa chọn khác nhau.
+
+                    ### Bài tập 2
+                    Quay lại và lưu tiến trình, chọn chương trình từ cấp độ 5. Bây giờ hãy viết nên cái kết vui và buồn với mỗi câu dài ít nhất ba dòng!
                 example_code: |
                     ```
-                    {print} 'OH NO! The T-rex is closing in!'
-                    end = {ask} 'Do you want a happy or a sad ending?'
-                    {if} end {is} happy
-                        {print} 'Just in time Richard jumps back into the time machine!'
-                        {print} 'Michael types in the code and...'
-                        {print} '💥ZAP!💥'
-                        {print} 'They are back in their garage'
+                    {print} 'ÔI KHÔNG!T-rex đang đến gần!'
+                    kết thúc = {ask} 'Bạn muốn một cái kết vui hay buồn?'
+                    {if} kết thúc {is} vui
+                        {print} 'Richard nhảy vào cỗ máy thời gian vừa kịp lúc!'
+                         {print} _
                     {else}
-                        {print} 'Michael yells COME ON RICHARD! RUN FASTER!'
-                        {print} 'But Richard is too slow...'
-                        {print} 'The T-rex closes in and eats him in one big bite!🦖'
+                        {print} 'Ôi không! Richard đã quá muộn...'
+                        {print} _
                     ```
             9:
                 story_text: |
-                    In this level you can use nesting to put `{if}`, `{repeat}` or `{for}` commands inside other `{if}`, `{repeat}` or `{for}` commands. This gives you many options and really helps you to make your story interactive.
+                    Ở cấp độ này bạn có thể sử dụng câu lệnh `{if}` và `{repeat}` bên trong một câu lệnh `{if}` và `{repeat}` khác.
+                    Điều này giúp bạn có nhiều lựa chọ và giúp cho câu chuyện của bạn có sự tương tác
+
+                    ### Bài tập 1
+                    Hoàn thành dòng code để  `{if}` hoạt động đúng.
+
+                    ### Bài tập 2
+                    Thêm  `{if}` và `{else}` trong phân đoạn Robin đi về nhà.
+
+                    ### Bài tập 3
+                    Quay lại cấp độ 8 trong câu chuyện và sử dụng ít nhất 2 lần `{if}` ở trong 1 `{if}`khác.
                 example_code: |
                     ```
                     {print} 'Robin is walking downtown'
@@ -409,8 +426,10 @@ adventures:
                     If you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.
                     But be careful not to get more than 21 points, because if you do, you lose!
                     The player who gets closest to 21, without going over it, wins!
-
                     Have fun!
+
+                    ### Exercise
+                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -466,14 +485,14 @@ adventures:
                             points = points + 10
                         {elif} card_3 == 'Ace':
                             {if} points > 11:
-                                points = points + 11
-                            {else}:
                                 points = points + 1
+                            {else}:
+                                points = points + 11
                         {else}:
                             points = points + card_3
-                        print 'You get an extra ' card_3 ' (' points ' points)'
+                        {print} 'You get an extra ' card_3 ' (' points ' points)'
                     {else}:
-                        print 'No extra cards'
+                        {print} 'No extra cards'
                     # Winner
                     {if} points > 21 {or} dealer_points > points {or} dealer_points == 21:
                         {print} 'You lose'
@@ -615,7 +634,7 @@ adventures:
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 Extra
+                    ### Exercise 2
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -2661,10 +2680,10 @@ adventures:
                     ```
             12:
                 story_text: |
-                    Use functions in you songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle little star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
+                    Use functions in your songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle Little Star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
 
                     ### Exercise
-                    Finish the song of Twinkle Twinkle little star.
+                    Finish the song of Twinkle Twinkle Little Star.
                     Then look back at all the songs you've programmed in the levels before, can you make those codes better and shorter using functions too?
                 example_code: |
                     ```
@@ -2707,7 +2726,7 @@ adventures:
                     ```
             13:
                 story_text: |
-                    You can use a function with an argument for songs that have line taht are almost the same, but slightly different each time.
+                    You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
                     One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, buyt each time they are followed by a different couple of notes.
 
                     ### Exercise
@@ -3979,7 +3998,7 @@ adventures:
 
                     ### Exercise
                     Can you add the right amount of indentation to each line to make the song play correctly?
-                    Mind: Not all lines need indentation
+                    Hint: Not all lines need indentation.
                 example_code: |
                     ```
                     _ actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
@@ -4083,6 +4102,33 @@ adventures:
                     {print} 'Up above the world so high'
                     {print} 'Like a diamond in the sky'
                     {call} _
+                    ```
+            16:
+                story_text: |
+                    ### Exercise
+                    Finish the nursery rhyme!
+                example_code: |
+                    ```
+                    number = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+                    object = ['on his drum', 'on his shoe', 'on his knee', 'on his door', 'on his hive', 'on his sticks', 'up in heaven', 'on his gate', 'on his vine', 'once again']
+
+                    _
+                        {print} 'This old man'
+                        {print} 'He played ' _
+                        {print} 'He played knick-knack ' _
+                        {print} 'With a knick-knack paddywhack'
+                        {print} 'Give the dog a bone'
+                        {print} 'This old man came rolling home'
+                        {sleep} 8
+                        {clear}
+                    ```
+                story_text_2: |
+                    ### Exersice 2
+                    Now create your own code for the nursery rhyme 'The wheels on the bus' on the same way!
+                example_code_2: |
+                    ```
+                    object = ['wheels', 'doors', _]
+                    movement = [ 'round and round', 'open and shut', _]
                     ```
     tic:
         name: Tic Tac Toe
@@ -4655,7 +4701,7 @@ adventures:
                 example_code: |
                     Hint:
                     ```
-                    chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?
+                    chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?'
                     {if} _
                     ```
             6:
@@ -4795,12 +4841,10 @@ adventures:
                 story_text: |
                     ### Exercise
                     Recreate the drawings with the turtle!
+                    Hint: Bracelet designing program. Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
+                    </div>
+                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
                 example_code: |
-                    Hint: Bracelet designing program
-
-
-                    Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
-
                     ```
                     {define} draw_a_square
                     _

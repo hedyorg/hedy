@@ -29,7 +29,7 @@ class TestsLevel7(HedyTester):
         code = "repeat 3 times forward 100"
 
         expected = HedyTester.dedent(
-            "for __i__ in range(int('3')):",
+            "for __i in range(int('3')):",
             (HedyTester.forward_transpiled(100, self.level), '  '))
 
         self.single_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
@@ -38,7 +38,7 @@ class TestsLevel7(HedyTester):
         code = "repeat 5 times print 'me wants a cookie!'"
 
         expected = textwrap.dedent("""\
-        for __i__ in range(int('5')):
+        for __i in range(int('5')):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -59,7 +59,7 @@ class TestsLevel7(HedyTester):
         expected = HedyTester.dedent(
             "n = '5'",
             self.variable_type_check_transpiled('n', 'int'),
-            "for __i__ in range(int(n)):",
+            "for __i in range(int(n)):",
             ("print(f'me wants a cookie!')", '  '),
             ("time.sleep(0.1)", '  ')
         )
@@ -198,7 +198,7 @@ class TestsLevel7(HedyTester):
 
         expected = textwrap.dedent("""\
         pass
-        for __i__ in range(int('3')):
+        for __i in range(int('3')):
           pass
           time.sleep(0.1)""")
 
@@ -250,7 +250,7 @@ class TestsLevel7(HedyTester):
         expected = HedyTester.dedent(
             "n = input(f'How many times?')",
             self.variable_type_check_transpiled('n', 'int'),
-            "for __i__ in range(int(n)):",
+            "for __i in range(int(n)):",
             ("print(f'n')", '  '),
             ("time.sleep(0.1)", '  ')
         )
@@ -263,7 +263,7 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent(f"repeat {number} times print 'me wants a cookie!'")
 
         expected = textwrap.dedent(f"""\
-        for __i__ in range(int('{int(number)}')):
+        for __i in range(int('{int(number)}')):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -281,7 +281,7 @@ class TestsLevel7(HedyTester):
         repeat 10 times print 'me wants a cookie!'""")
 
         expected = textwrap.dedent("""\
-        for __i__ in range(int('10')):
+        for __i in range(int('10')):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -311,7 +311,7 @@ class TestsLevel7(HedyTester):
 
         expected = textwrap.dedent("""\
         i = 'hallo!'
-        for __i__ in range(int('5')):
+        for __i in range(int('5')):
           print(f'me wants a cookie!')
           time.sleep(0.1)
         print(f'{i}')""")
@@ -338,7 +338,7 @@ class TestsLevel7(HedyTester):
         expected = textwrap.dedent("""\
         naam = 'Hedy'
         if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
-          for __i__ in range(int('3')):
+          for __i in range(int('3')):
             print(f'Hallo Hedy!')
             time.sleep(0.1)""")
 
@@ -360,7 +360,7 @@ class TestsLevel7(HedyTester):
             break
           if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
-              for __i__ in range(int('5')):
+              for __i in range(int('5')):
                 print(f'doe het 5 keer!')
                 time.sleep(0.1)
               break
@@ -440,8 +440,8 @@ class TestsLevel7(HedyTester):
             repeat 3 times if y is pressed forward 15 else forward -15
             repeat 3 times if z is pressed forward 15 else forward -15""")
 
-        expected = HedyTester.dedent("""\
-        for __i__ in range(int('3')):
+        expected = HedyTester.dedent(f"""\
+        for __i in range(int('3')):
           pygame_end = False
           while not pygame_end:
             pygame.display.update()
@@ -456,7 +456,7 @@ class TestsLevel7(HedyTester):
                 try:
                   __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception('catch_value_exception')
+                  raise Exception({self.value_exception_transpiled()})
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break
@@ -465,13 +465,13 @@ class TestsLevel7(HedyTester):
                 try:
                   __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception('catch_value_exception')
+                  raise Exception({self.value_exception_transpiled()})
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break
               # End of PyGame Event Handler
           time.sleep(0.1)
-        for __i__ in range(int('3')):
+        for __i in range(int('3')):
           pygame_end = False
           while not pygame_end:
             pygame.display.update()
@@ -486,7 +486,7 @@ class TestsLevel7(HedyTester):
                 try:
                   __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception('catch_value_exception')
+                  raise Exception({self.value_exception_transpiled()})
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break
@@ -495,13 +495,13 @@ class TestsLevel7(HedyTester):
                 try:
                   __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception('catch_value_exception')
+                  raise Exception({self.value_exception_transpiled()})
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break
               # End of PyGame Event Handler
           time.sleep(0.1)
-        for __i__ in range(int('3')):
+        for __i in range(int('3')):
           pygame_end = False
           while not pygame_end:
             pygame.display.update()
@@ -516,7 +516,7 @@ class TestsLevel7(HedyTester):
                 try:
                   __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception('catch_value_exception')
+                  raise Exception({self.value_exception_transpiled()})
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break
@@ -525,7 +525,7 @@ class TestsLevel7(HedyTester):
                 try:
                   __trtl = int(__trtl)
                 except ValueError:
-                  raise Exception('catch_value_exception')
+                  raise Exception({self.value_exception_transpiled()})
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
                 break
@@ -545,13 +545,13 @@ class TestsLevel7(HedyTester):
 
         expected = HedyTester.dedent("""\
         aan = 'ja'
-        for __i__ in range(int('3')):
+        for __i in range(int('3')):
           if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
             print(f'Hedy is leuk!')
           else:
             x__x__x__x = '5'
           time.sleep(0.1)
-        for __i__ in range(int('3')):
+        for __i in range(int('3')):
           if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
             print(f'Hedy is leuk!')
           time.sleep(0.1)""")
@@ -577,7 +577,7 @@ class TestsLevel7(HedyTester):
 
         expected_code = textwrap.dedent("""\
         print(f'The prince kept calling for help')
-        for __i__ in range(int('5')):
+        for __i in range(int('5')):
           print(f'Help!')
           time.sleep(0.1)
         print(f'Why is nobody helping me?')""")
@@ -599,10 +599,10 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent("""\
             repeat 3 times play C4""")
 
-        expected = textwrap.dedent("""\
-            for __i__ in range(int('3')):
+        expected = textwrap.dedent(f"""\
+            for __i in range(int('3')):
               if 'C4' not in notes_mapping.keys() and 'C4' not in notes_mapping.values():
-                  raise Exception('catch_value_exception')
+                  raise Exception({self.value_exception_transpiled()})
               play(notes_mapping.get(str('C4'), str('C4')))
               time.sleep(0.5)
               time.sleep(0.1)""")
@@ -621,12 +621,12 @@ class TestsLevel7(HedyTester):
             notes is C4, E4, D4, F4, G4
             repeat 3 times play notes at random""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
             notes = ['C4', 'E4', 'D4', 'F4', 'G4']
-            for __i__ in range(int('3')):
+            for __i in range(int('3')):
               chosen_note = str(random.choice(notes)).upper()
               if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
-                  raise Exception('catch_value_exception')
+                  raise Exception({self.value_exception_transpiled()})
               play(notes_mapping.get(chosen_note, chosen_note))
               time.sleep(0.5)
               time.sleep(0.1)""")
