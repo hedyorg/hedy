@@ -1093,16 +1093,16 @@ def programs_page(user):
         if item['is_modified'] == True:
             programs.append(
                 {'id': item['id'],
-                'preview_code': preview_code,
-                'code': item['code'],
-                'date': date,
-                'level': item['level'],
-                'name': item['name'],
-                'adventure_name': item.get('adventure_name'),
-                'submitted': item.get('submitted'),
-                'public': item.get('public'),
-                'number_lines': item['code'].count('\n') + 1
-                }
+                 'preview_code': preview_code,
+                 'code': item['code'],
+                 'date': date,
+                 'level': item['level'],
+                 'name': item['name'],
+                 'adventure_name': item.get('adventure_name'),
+                 'submitted': item.get('submitted'),
+                 'public': item.get('public'),
+                 'number_lines': item['code'].count('\n') + 1
+                 }
             )
 
     sorted_level_programs = hedy_content.Adventures(g.lang) \
