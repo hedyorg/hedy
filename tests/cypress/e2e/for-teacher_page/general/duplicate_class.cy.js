@@ -19,6 +19,7 @@ describe('Duplicate class tests', () => {
 
     cy.reload();
 
+    cy.get("#view_classes").click();
     cy.get(".view_class").contains(duplicate_class).click();
     cy.get("#customize-class-button").click();
     cy.get("#opening_date_container").should("not.be.visible")
@@ -48,6 +49,7 @@ describe('Duplicate class tests', () => {
 
     cy.reload();
 
+    cy.get("#view_classes").click();
     cy.get(".view_class").contains(duplicate_class).click();
     cy.get("#invites-block").should('be.visible');
     cy.get("#customize-class-button").click();

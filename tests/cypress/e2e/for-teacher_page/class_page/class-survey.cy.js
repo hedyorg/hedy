@@ -7,6 +7,7 @@ let className = "CLASS1"
 beforeEach(() => {
     loginForTeacher("teacher4");
     goToTeachersPage();
+    cy.get("#view_classes").click();
     cy.get(".view_class").contains(new RegExp(`^${className}$`)).click();
     cy.get("#survey_status_button").click();
 })

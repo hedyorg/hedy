@@ -13,6 +13,7 @@ describe('Go to level dropdown', () => {
     ({classname, students} = createClassAndAddStudents());
     goToTeachersPage();
 
+    cy.get("#view_classes").click();
     cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
     cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide());
     cy.getBySel('customize_class_button').click();

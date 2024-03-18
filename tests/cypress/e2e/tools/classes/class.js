@@ -50,6 +50,7 @@ export function addStudents(classname, count) {
     goToTeachersPage();
     cy.wait(500);
 
+    cy.get("#view_classes").click();
     cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
     cy.wait(500);
 
@@ -69,6 +70,7 @@ export function addStudents(classname, count) {
 export function addCustomizations(classname){
     goToTeachersPage();
 
+    cy.get("#view_classes").click();
     cy.get(".view_class").contains(classname).click();
     cy.get('#customize-class-button').click();
     cy.get("#opening_date_container").should("not.be.visible")
@@ -88,6 +90,7 @@ export function createClassAndAddStudents(){
 export function navigateToClass(classname) {
     goToTeachersPage();
     cy.wait(500);
+    cy.get("#view_classes").click();
     cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
     cy.wait(500);
     cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
