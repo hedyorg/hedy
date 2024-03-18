@@ -13,6 +13,7 @@ from website.auth import current_user, email_base_url, is_admin, requires_admin,
 
 from .achievements import Achievements
 from .database import Database
+from .statistics import StatisticsModule
 from .website_module import WebsiteModule, route
 from .frontend_types import SaveInfo, Program
 from . import querylog
@@ -28,9 +29,10 @@ class ProgramsLogic:
     Achievements and stuff.
     """
 
-    def __init__(self, db: Database, achievements: Achievements):
+    def __init__(self, db: Database, achievements: Achievements, statistics: StatisticsModule):
         self.db = db
         self.achievements = achievements
+        self.statistics = statistics
 
     @querylog.timed
     def store_user_program(self,
@@ -47,6 +49,7 @@ class ProgramsLogic:
         Returns the program record.
         """
 
+
         # Some user input and a bunch of metadata
         updates = {
             "session": utils.session_id(),
@@ -60,6 +63,11 @@ class ProgramsLogic:
             "error": error,
             "adventure_name": adventure_name,
         }
+
+        full_adventures = hedy_content.Adventures("en").get_adventures(g.keyword_lang)
+        teacher_adventures = self.db.get_teacher_adventures(current_user()["username"])
+        is_modified = self.statistics.is_program_modified(updates, full_adventures, teacher_adventures)
+        updates['is_modified'] = is_modified
 
         if set_public is not None:
             updates['public'] = 1 if set_public else 0
@@ -91,9 +99,9 @@ class ProgramsLogic:
 class ProgramsModule(WebsiteModule):
     """Flask routes that deal with manipulating programs."""
 
-    def __init__(self, db: Database, achievements: Achievements):
+    def __init__(self, db: Database, achievements: Achievements, statistics: StatisticsModule):
         super().__init__("programs", __name__, url_prefix="/programs")
-        self.logic = ProgramsLogic(db, achievements)
+        self.logic = ProgramsLogic(db, achievements, statistics)
         self.db = db
         self.achievements = achievements
 
