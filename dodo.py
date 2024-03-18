@@ -321,6 +321,7 @@ def task_devserver():
         verbosity=2,  # show everything live
     )
 
+
 def task_normalize_yaml():
     """Normalize the YAML files by running a script.
 
