@@ -90,12 +90,7 @@ def main():
     filenames = sys.argv[1:]
 
     with Pool() as p:
-        changes = p.map(rewrite_yaml_file, filenames)
-
-    if any(changes):
-        sys.exit(1)
-    else:
-        sys.exit(0)
+        p.map(rewrite_yaml_file, filenames)
 
 
 def rewrite_yaml_file(fn):
