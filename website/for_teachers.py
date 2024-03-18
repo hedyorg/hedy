@@ -1113,7 +1113,8 @@ class ForTeachersModule(WebsiteModule):
         for class_id in body["classes"]:
             if class_id != '0':
                 for level in body["levels"]:
-                    self.add_adventure_to_class_level(user, class_id, body["id"], level, False)
+                    if level not in current_levels:
+                        self.add_adventure_to_class_level(user, class_id, body["id"], level, False)
 
         return {"success": gettext("adventure_updated")}, 200
 
@@ -1148,7 +1149,7 @@ class ForTeachersModule(WebsiteModule):
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        customizations, adventures, adventure_names, _, _ = self.get_class_info(
+        customizations, adventures, adventure_names, available_adventures, _ = self.get_class_info(
             user, class_id)
 
         teacher_adventures = list(self.db.get_teacher_adventures(user["username"]))
