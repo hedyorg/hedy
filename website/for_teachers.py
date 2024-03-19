@@ -1203,7 +1203,7 @@ class ForTeachersModule(WebsiteModule):
             "name": name,
             "classes": [class_id],
             "level": 1,
-            "levels": "1",
+            "levels": ["1"],
             "content": "",
             "public": 0,
             "language": g.lang,
