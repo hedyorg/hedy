@@ -1159,7 +1159,7 @@ class ForTeachersModule(WebsiteModule):
         is_teacher_adventure = self.is_adventure_from_teacher(adventure_id, teacher_adventures)
 
         if not remove_adv and any(adventure['name'] == adventure_id
-                              for adventure in customizations['sorted_adventures'][level]):
+                            for adventure in customizations['sorted_adventures'][level]):
             return
         if not remove_adv:
             customizations['sorted_adventures'][level].append(
