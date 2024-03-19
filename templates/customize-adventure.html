@@ -21,7 +21,6 @@ onclick="window.open('/for-teachers', '_self');">
                     </div>
                     <div class="flex flex-row items-center mb-4">
                         <label for="custom_adventure_levels" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('levels')}}</label>
-                                <!-- data-te-class-notch-trailing-normal="!border-gray-200" -->
                         <div
                             id="custom_adventure_levels_container"
                             data-te-input-wrapper-init
@@ -90,6 +89,26 @@ onclick="window.open('/for-teachers', '_self');">
                         </div>
                     </div>
                     {{ render_partial('htmx-tags-list.html', tags=adventure_tags, adventure_id=adventure.id, creator=adventure.creator) }}
+
+                    <div id="warningbox"
+                        class="flex-0 z-20 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md"
+                        role="alert" style="display: none;">
+                        <p class="close-dialog" onclick="hedyApp.error.hide ()"><i class="fa-solid fa-xmark"></i></p>
+                        <div class="flex">
+                            <div class="py-1">
+                                <div id="warningbox_icon">
+                                    <svg class="fill-current h-6 w-6 text-yellow-500 ltr:mr-4 rtl:ml-4" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path
+                                            d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="details text-sm">{{ _('multiple_levels_warning') }}</p>
+                            </div>
+                        </div>
+                    </div>                    
                 </div>
 
                 <div class="flex flex-col w-full">
