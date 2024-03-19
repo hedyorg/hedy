@@ -596,13 +596,12 @@ def parse():
             pass
 
         with querylog.log_time('detect_sleep'):
+            # FH, Nov 2023: hmmm I don't love that this is not done in the same place as the other "has"es
             try:
                 match = re.search(r'time\.sleep\(int\("(?P<sleep_time>\d+)"\)\)|time\.sleep\(int\((?P<variable>\w+)\)\)', response['Code'])
-
                 if match:
                     sleep_time = match.group('sleep_time')
                     variable = match.group('variable')
-
                     if sleep_time:
                         response['has_sleep'] = int(sleep_time)
                     elif variable:
