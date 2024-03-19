@@ -1412,7 +1412,7 @@ def hour_of_code(level, program_id=None):
         ))
 
 
-def possibly_migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden):
+def migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden):
     """If the puzzles/quizzes were not migrated yet which is possible if the teacher didn't tweak
         the class customizations, if this is the case, we need to add them if possible."""
     migrated = customizations.get("quiz_parsons_tabs_migrated")
@@ -1611,7 +1611,7 @@ def index(level, program_id):
     quizzes_hidden = 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']
 
     if customizations:
-        possibly_migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden)
+        migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden)
 
     parsons_in_level = True
     quiz_in_level = True

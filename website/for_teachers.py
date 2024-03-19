@@ -12,6 +12,8 @@ import hedy_content
 import hedyweb
 import utils
 from safe_format import safe_format
+from datetime import date
+
 from website.server_types import SortedAdventure
 from website.flask_helpers import render_template
 from website.auth import (
@@ -26,7 +28,7 @@ from website.auth import (
 from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
-from datetime import date
+from app import migrate_quizzes_parsons_tabs
 
 SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
 for lang in hedy_content.ALL_LANGUAGES.keys():
@@ -620,28 +622,8 @@ class ForTeachersModule(WebsiteModule):
             }
             self.db.update_class_customizations(customizations)
 
-        migrated = customizations.get("quiz_parsons_tabs_migrated")
-        if not migrated:
-            for level, sorted_adventures in customizations['sorted_adventures'].items():
-                last_two_adv_names = [adv["name"] for adv in sorted_adventures[-2:]]
-                parson_in_level = "parsons" in last_two_adv_names
-                quiz_in_level = "quiz" in last_two_adv_names
-                # In some levels, we don't need quiz/parsons
-                level_accepts_parsons = "parsons" in hedy_content.ADVENTURE_ORDER_PER_LEVEL[int(level)]
-                level_accepts_quiz = "quiz" in hedy_content.ADVENTURE_ORDER_PER_LEVEL[int(level)]
-                if not parsons_hidden and not parson_in_level and level_accepts_parsons and get_customizations:
-                    sorted_adventures.append(
-                        {"name": "parsons", "from_teacher": False})
-
-                if not quizzes_hidden and not quiz_in_level and level_accepts_quiz and get_customizations:
-                    sorted_adventures.append(
-                        {"name": "quiz", "from_teacher": False})
-                # Need to reorder, for instance, in case parsons was hidden and the other was not.
-                self.reorder_adventures(sorted_adventures)
-
-            # Mark current customization as being migrated so that we don't do this step next time.
-            customizations["quiz_parsons_tabs_migrated"] = True
-            self.db.update_class_customizations(customizations)
+        if get_customizations:
+            migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden)
 
         for level, sorted_adventures in customizations['sorted_adventures'].items():
             for adventure in sorted_adventures:
