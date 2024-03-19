@@ -1153,10 +1153,7 @@ class ForTeachersModule(WebsiteModule):
         customizations, adventures, adventure_names, _, _ = self.get_class_info(
             user, class_id)
 
-        teacher_adventures = list(self.db.get_teacher_adventures(user["username"]))
-        second_teacher_adventures = self.db.get_second_teacher_adventures([Class], user["username"])
-        teacher_adventures += second_teacher_adventures
-        is_teacher_adventure = self.is_adventure_from_teacher(adventure_id, teacher_adventures)
+        is_teacher_adventure = True
 
         if not remove_adv and any(adventure['name'] == adventure_id
                                   for adventure in customizations['sorted_adventures'][level]):
