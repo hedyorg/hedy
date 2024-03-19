@@ -1164,7 +1164,7 @@ class ForTeachersModule(WebsiteModule):
         if not remove_adv:
             customizations['sorted_adventures'][level].append(
                 {'name': adventure_id, 'from_teacher': is_teacher_adventure})
-        else:
+        elif {'name': adventure_id, 'from_teacher': is_teacher_adventure} in customizations['sorted_adventures'][level]:
             customizations['sorted_adventures'][level].remove(
                 {'name': adventure_id, 'from_teacher': is_teacher_adventure})
         sorted_adventure = SortedAdventure(short_name=adventure_id,
@@ -1174,10 +1174,8 @@ class ForTeachersModule(WebsiteModule):
 
         if not remove_adv:
             adventures[int(level)].append(sorted_adventure)
-        else:
-            adventures[int(level)].remove(sorted_adventure)
-        self.reorder_adventures(adventures[int(level)], from_sorted_adv_class=True)
-        self.reorder_adventures(customizations['sorted_adventures'][level])
+            self.reorder_adventures(adventures[int(level)], from_sorted_adv_class=True)
+            self.reorder_adventures(customizations['sorted_adventures'][level])
         self.db.update_class_customizations(customizations)
 
     @route("/create-adventure/", methods=["POST"])
