@@ -596,8 +596,8 @@ def parse():
             pass
 
         with querylog.log_time('detect_sleep'):
-            # FH, Nov 2023: hmmm I don't love that this is not done in the same place as the other "has"es
             try:
+                # FH, Nov 2023: hmmm I don't love that this is not done in the same place as the other "has"es
                 match = re.search(
                     r'time\.sleep\(int\("(?P<sleep_time>\d+)"\)\)|time\.sleep\(int\((?P<variable>\w+)\)\)', response['Code'])
                 if match:
