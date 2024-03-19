@@ -129,6 +129,6 @@ class Adventure:
             name=row['name'],
             save_name=row['name'],
             editor_contents='',  # Teacher adventures don't seem to have this
-            text=row['content'],
+            text=row['formatted_content'] if 'formatted_content' in row else row['content'],
             is_teacher_adventure=True,
             is_command_adventure=False)
