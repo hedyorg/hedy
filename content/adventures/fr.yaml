@@ -606,21 +606,21 @@ adventures:
                     ```
             12:
                 story_text: |
-                    Dans ce niveau, tu dois fabriquer une calculatrice qui fonctionne avec des nombres décimaux.
+                    À ce niveau, tu peux fabriquer une calculatrice qui fonctionne avec des nombres décimaux.
 
                     ### Exercice 1
-                    Remplis les blancs pour compléter la calculatrice. Souviens-toi d'utiliser un point et non une virgule pour les nombres décimaux.
+                    Complète les blancs pour faire marcher la calculatrice. Quand tu réponds aux questions, souviens-toi d'utiliser un point et non une virgule pour les nombres décimaux. 
 
                     ### Exercice 2
-                    Crée un nouveau programme d'application mathématique, mais utilise des nombres décimaux cette fois.
+                    Crée un nouveau programme d'entrainement au calcul, mais utilise des nombres décimaux cette fois.
                     Crée une liste de nombres, choisis-en deux à multiplier et laisse le joueur répondre.
-                    Bien sûr, tu dois valider la réponse ! **Extra** Augmente la difficulté en ajoutant un système de vies : un joueur perd une vie pour une mauvaise réponse, et après trois mauvaises réponses le jeu s'arrête.
+                    Bien sûr, tu dois valider la réponse ! **Bonus** Augmente la difficulté en ajoutant un système de vies : un joueur perd une vie pour une mauvaise réponse, et arrête le jeu après trois mauvaises réponses.
                 example_code: |
                     ```
-                    nombre1 = {ask} 'Quel est le premier nombre?'
-                    nombre2 = {ask} 'Quel est le second nombre?'
+                    nombre1 = {ask} "Quel est le premier nombre ?"
+                    nombre2 = {ask} "Quel est le second nombre ?"
                     réponse = nombre1 + nombre2
-                    {print} nombre1 ' plus ' nombre2 ' est ' _
+                    {print} nombre1 " plus " nombre2 " fait " _
                     ```
             13:
                 story_text: |
@@ -1860,7 +1860,7 @@ adventures:
                     ```
                     prédictions = "Tu vas glisser sur une peau de banane", _
                     {print} "Je regarde le futur dans ma boule de cristal"
-                    {print} 'Je vois… je vois…'
+                    {print} "Je vois… je vois…"
                     {sleep}
                     {print} prédictions {at} {random}
                     ```
@@ -4021,20 +4021,20 @@ adventures:
                     ```
             12:
                 story_text: |
-                    In this song we can make it even easier to program 'if you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
+                    Dans cette chanson, nous pouvons programmer plus facilement la partie « si tu as de la joie au cœur, tape des mains ». Parce que nous pouvons mettre toutes les actions dans une liste, comme ceci :
 
-                    ### Exercise
-                    Can you add the right amount of indentation to each line to make the song play correctly?
-                    Hint: Not all lines need indentation.
+                    ### Exercice
+                    Peux-tu ajouter le bon nombre d'indentations pour chaque ligne pour que la chanson soit chantée correctement ?
+                    Conseil : Tu n'es pas obligé d'indenter toutes les lignes.
                 example_code: |
                     ```
-                    _ actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
+                    _ actions = "tape des mains", "tape du pied", "crie hourra !"
                     _ {for} action {in} actions
                     _ {for} i {in} {range} 1 {to} 2
-                    _ {print} 'if youre happy and you know it'
+                    _ {print} "si tu as de la joie au coeur"
                     _ {print} action
-                    _ {print} 'if youre happy and you know it and you really want to show it'
-                    _ {print} 'if youre happy and you know it'
+                    _ {print} "si tu as de la joie au coeur et que tu souhaite le partager"
+                    _ {print} "si tu as de la joie au coeur"
                     _ {print} action
                     ```
             13:
@@ -4116,18 +4116,18 @@ adventures:
         levels:
             12:
                 story_text: |
-                    Songs contain a lot of repetition. We can capture it with a function!
-                    ### Exercise
-                    Look at the example code with the function. Fill out the two lines so the full song is printed.
+                    Les chansons contiennent beaucoup de répétitions. Nous pouvons capturer ces répétitions dans une fonction !
+                    ### Exercice
+                    Regarde l'exemple de code avec la fonction. Complète les deux lignes pour que la chanson soit écrite entièrement.
                 example_code: |
                     ```
-                    {define} twinkle
-                        {print} 'Twinkle'
-                        {print} '...'
+                    {define} brille
+                        {print} "Brille"
+                        {print} _
 
-                    {call} twinkle
-                    {print} 'Up above the world so high'
-                    {print} 'Like a diamond in the sky'
+                    {call} brille
+                    {print} "Si haut au-dessus du monde,"
+                    {print} "Comme un diamant dans le ciel."
                     {call} _
                     ```
             16:
