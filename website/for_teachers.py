@@ -1110,12 +1110,11 @@ class ForTeachersModule(WebsiteModule):
                         self.add_adventure_to_class_level(user, old_class, body["id"], level, True)
 
         for class_id in body["classes"]:
-            if class_id:
-                for level in body["levels"]:
-                    if level not in current_levels and class_id in current_classes:
-                        self.add_adventure_to_class_level(user, class_id, body["id"], level, False)
-                    elif class_id not in current_classes:
-                        self.add_adventure_to_class_level(user, class_id, body["id"], level, False)
+            for level in body["levels"]:
+                if level not in current_levels and class_id in current_classes:
+                    self.add_adventure_to_class_level(user, class_id, body["id"], level, False)
+                elif class_id not in current_classes:
+                    self.add_adventure_to_class_level(user, class_id, body["id"], level, False)
 
         return {"success": gettext("adventure_updated")}, 200
 
