@@ -1145,7 +1145,7 @@ class ForTeachersModule(WebsiteModule):
             return gettext("something_went_wrong_keyword_parsing"), 400
         return {"code": code}, 200
 
-    def add_adventure_to_class_level(self, user, class_id, adventure_id, level, remove):
+    def add_adventure_to_class_level(self, user, class_id, adventure_id, level, remove_adv):
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
@@ -1158,10 +1158,10 @@ class ForTeachersModule(WebsiteModule):
         teacher_adventures += second_teacher_adventures
         is_teacher_adventure = self.is_adventure_from_teacher(adventure_id, teacher_adventures)
 
-        if not remove and any(adventure['name'] == adventure_id
+        if not remove_adv and any(adventure['name'] == adventure_id
                               for adventure in customizations['sorted_adventures'][level]):
             return
-        if not remove:
+        if not remove_adv:
             customizations['sorted_adventures'][level].append(
                 {'name': adventure_id, 'from_teacher': is_teacher_adventure})
         else:
@@ -1172,7 +1172,7 @@ class ForTeachersModule(WebsiteModule):
                                            is_teacher_adventure=is_teacher_adventure,
                                            is_command_adventure=adventure_id in hedy_content.KEYWORDS_ADVENTURES)
 
-        if not remove:
+        if not remove_adv:
             adventures[int(level)].append(sorted_adventure)
         else:
             adventures[int(level)].remove(sorted_adventure)
