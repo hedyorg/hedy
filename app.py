@@ -597,7 +597,8 @@ def parse():
 
         with querylog.log_time('detect_sleep'):
             try:
-                match = re.search(r'time\.sleep\(int\("(?P<sleep_time>\d+)"\)\)|time\.sleep\(int\((?P<variable>\w+)\)\)', response['Code'])
+                match = re.search(
+                    r'time\.sleep\(int\("(?P<sleep_time>\d+)"\)\)|time\.sleep\(int\((?P<variable>\w+)\)\)', response['Code'])
 
                 if match:
                     sleep_time = match.group('sleep_time')
