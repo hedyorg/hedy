@@ -59,7 +59,7 @@ class TestsLevel8(HedyTester):
 
         # gives the right exception for all levels even though it misses brackets
         # because the indent check happens before parsing
-        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+        self.single_level_tester(code=code, exception=hedy.exceptions.TooFewIndentsStartLevelException)
 
     def test_if_equality_with_is(self):
         code = textwrap.dedent("""\
@@ -401,10 +401,8 @@ class TestsLevel8(HedyTester):
         else
         print 'bah slecht'""")
 
-        # gives the right exception for all levels even though it misses brackets
-        # because the indent check happens before parsing
-        self.multi_level_tester(code=code,
-                                exception=hedy.exceptions.NoIndentationException)
+        self.single_level_tester(code=code,
+                                 exception=hedy.exceptions.TooFewIndentsStartLevelException)
 
     def test_if_equality_print_else_print(self):
         code = textwrap.dedent("""\
@@ -569,7 +567,7 @@ class TestsLevel8(HedyTester):
           repeat 3 times
           print 'hooray!'""")
 
-        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+        self.single_level_tester(code=code, exception=hedy.exceptions.TooFewIndentsStartLevelException)
 
     def test_repeat_repair_too_few_indents(self):
         code = textwrap.dedent("""\
@@ -582,9 +580,9 @@ class TestsLevel8(HedyTester):
              print('repair')
              print('me')""")
 
-        self.multi_level_tester(
+        self.single_level_tester(
             code=code,
-            exception=hedy.exceptions.NoIndentationException,
+            exception=hedy.exceptions.TooFewIndentsStartLevelException,
             extra_check_function=(lambda x: x.exception.fixed_code == fixed_code)
         )
 
@@ -598,9 +596,9 @@ class TestsLevel8(HedyTester):
           print('repair')
           print('me')""")
 
-        self.multi_level_tester(
+        self.single_level_tester(
             code=code,
-            exception=hedy.exceptions.IndentationException,
+            exception=hedy.exceptions.TooManyIndentsStartLevelException,
             extra_check_function=(lambda x: x.exception.fixed_code == fixed_code)
         )
 
@@ -609,9 +607,9 @@ class TestsLevel8(HedyTester):
         print('repair')
            print('me')""")
 
-        self.multi_level_tester(
+        self.single_level_tester(
             code=code,
-            exception=hedy.exceptions.IndentationException
+            exception=hedy.exceptions.TooManyIndentsStartLevelException
         )
 
     def test_repeat_turtle(self):
@@ -916,7 +914,7 @@ class TestsLevel8(HedyTester):
                 prijs is prijs + 1
         print 'Dat is in totaal ' prijs ' euro.'""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.LockedLanguageFeatureException)
+        self.single_level_tester(code=code, exception=hedy.exceptions.TooManyIndentsStartLevelException)
 
     def test_if_repeat_gives_error(self):
         code = textwrap.dedent("""\
@@ -925,7 +923,7 @@ class TestsLevel8(HedyTester):
             repeat 3 times
                 print 'mooi'""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.LockedLanguageFeatureException)
+        self.single_level_tester(code=code, exception=hedy.exceptions.TooManyIndentsStartLevelException)
 
     #
     # if pressed tests
@@ -1103,16 +1101,14 @@ class TestsLevel8(HedyTester):
             max_level=14
         )
 
-    def test_if_no_indent_after_pressed_and_else_gives_noindent_error(self):
+    def test_if_no_indent_after_pressed_and_else_gives_error(self):
         code = textwrap.dedent("""\
         if x is pressed
         print 'no indent!'
         else
         print 'no indent again!'""")
 
-        # gives the right exception for all levels even though it misses brackets
-        # because the indent check happens before parsing
-        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+        self.single_level_tester(code=code, exception=hedy.exceptions.TooFewIndentsStartLevelException)
 
     #
     # button tests

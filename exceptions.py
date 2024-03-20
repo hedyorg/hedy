@@ -301,6 +301,18 @@ class CodePlaceholdersPresentException(HedyException):
         super().__init__('Has Blanks', line_number=line_number)
 
 
+class TooManyIndentsStartLevelException(HedyException):
+    def __init__(self, line_number, leading_spaces, fixed_code=None):
+        super().__init__('Too Many Indents', line_number=line_number, leading_spaces=leading_spaces)
+        self.fixed_code = fixed_code
+
+
+class TooFewIndentsStartLevelException(HedyException):
+    def __init__(self, line_number, leading_spaces, fixed_code=None):
+        super().__init__('Too Few Indents', line_number=line_number, leading_spaces=leading_spaces)
+        self.fixed_code = fixed_code
+
+
 class NoIndentationException(HedyException):
     def __init__(self, line_number, leading_spaces, indent_size, fixed_code=None):
         super().__init__('No Indentation',
@@ -322,11 +334,6 @@ class IndentationException(HedyException):
 class UnsupportedFloatException(HedyException):
     def __init__(self, value):
         super().__init__('Unsupported Float', value=value)
-
-
-class LockedLanguageFeatureException(HedyException):
-    def __init__(self, concept):
-        super().__init__('Locked Language Feature', concept=concept)
 
 
 class UnsupportedStringValue(HedyException):
