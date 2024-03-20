@@ -1632,16 +1632,11 @@ export function saveForTeacherTable(table: string) {
     $('#' + table).show();
     arrow.classList.add('rotate-180');
   }
-  let test = window.localStorage.getItem(table);
-  console.log("SHOUlD NOW BE OPEN:")
-  console.log(test)
 }
 
 export function getForTeacherTable(table: string) {
   let open = window.localStorage.getItem(table);
   const arrow = document.querySelector('#' + table + '_arrow') as HTMLElement;
-  console.log("ON LOAD SHOULD BE OPEN:")
-  console.log(open)
   if (open == 'true'){
     $('#' + table).show();
     arrow.classList.add('rotate-180');
