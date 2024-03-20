@@ -599,12 +599,15 @@ def parse():
         except Exception:
             pass
 
-        pattern = r'time\.sleep\((?P<time>\d+)\)|time\.sleep\(int\("(?P<sleep_time>\d+)"\)\)|time\.sleep\(int\((?P<variable>\w+)\)\)'
         if level < 7:
             with querylog.log_time('detect_sleep'):
                 try:
                     # FH, Nov 2023: hmmm I don't love that this is not done in the same place as the other "has"es
                     sleep_list = []
+                    pattern = (
+                    r'time\.sleep\((?P<time>\d+)\)'
+                    r'|time\.sleep\(int\("(?P<sleep_time>\d+)"\)\)'
+                    r'|time\.sleep\(int\((?P<variable>\w+)\)\)')
                     matches = re.finditer(
                         pattern,
                         response['Code'])
