@@ -165,18 +165,21 @@
         </div>
         </div>
       </div>
-      <div class="flex flex-row gap-4 mb-8 md:px-16">
+      <div class="flex flex-row gap-4 mb-8 md:px-16" id="row">
         <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg lg:w-2/4 p-8" id="slides">
         <h2 class="m-0 basis-1/12"> {{_('slides')}} </h2>
         <div class="text-black basis-10/12">{{ _('slides_info') }}</div>
         <div class="flex flex-row gap-3 justify-end basis-1/12">
+          <!-- it's ugly to add a fixed height to content_table, to solve it from growing with slides, but not sure how else to fix it-->
           <button class="white-btn inline-flex items-center"
           _="on click toggle .hidden on #slides_table
           set arrow to #slides_arrow
           if not arrow.classList.contains('rotate-180')
             add .rotate-180 to arrow
+            add .max-h-80 to #content_table
           else
-            remove .rotate-180 from arrow"
+            remove .rotate-180 from arrow
+            remove .max-h-80 from #content_table"
           >
           <span>{{_('view_slides')}}</span>
             <svg id="slides_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
