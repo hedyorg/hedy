@@ -241,8 +241,12 @@ def load_customized_adventures(level, customizations, into_adventures):
     for a in order_for_this_level:
         if a['from_teacher'] and (db_row := teacher_adventure_map.get(a['name'])):
             try:
-                db_row['content'] = safe_format(db_row['content'],
-                                                **hedy_content.KEYWORDS.get(g.keyword_lang))
+                if 'formatted_content' in db_row:
+                    db_row['formatted_content'] = safe_format(db_row['formatted_content'],
+                                                              **hedy_content.KEYWORDS.get(g.keyword_lang))
+                else:
+                    db_row['content'] = safe_format(db_row['content'],
+                                                    **hedy_content.KEYWORDS.get(g.keyword_lang))
             except Exception:
                 # We don't want teacher being able to break the student UI -> pass this adventure
                 pass
@@ -952,8 +956,8 @@ def translate_list(args):
 
     if len(translated_args) > 1:
         return f"{', '.join(translated_args[0:-1])}" \
-               f" {gettext('or')} " \
-               f"{translated_args[-1]}"
+            f" {gettext('or')} " \
+            f"{translated_args[-1]}"
     return ''.join(translated_args)
 
 
@@ -1433,6 +1437,8 @@ def hour_of_code(level, program_id=None):
 
 
 # routing to index.html
+
+
 @app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'program_id': None})
@@ -1485,15 +1491,6 @@ def index(level, program_id):
     # At this point we can have the following scenario:
     # - The level is allowed and available
     # - But, if there is a quiz threshold we have to check again if the user has reached it
-
-    parsons_in_level = True
-    quiz_in_level = True
-    if customizations.get("sorted_adventures") and len(customizations["sorted_adventures"]) > 2:
-        parsons_in_level = [adv for adv in customizations["sorted_adventures"][str(level)][-2:]
-                            if adv.get("name") == "parsons"]
-        quiz_in_level = [adv for adv in customizations["sorted_adventures"][str(level)][-2:]
-                         if adv.get("name") == "quiz"]
-
     if 'level_thresholds' in customizations:
         # If quiz in level and in some of the previous levels, then we check the threshold level.
         check_threshold = 'other_settings' in customizations and 'hide_quiz' not in customizations['other_settings']
@@ -1608,11 +1605,23 @@ def index(level, program_id):
     if parsons:
         parson_exercises = len(PARSONS[g.lang].get_parsons_data_for_level(level))
 
-    if not parsons_in_level or 'other_settings' in customizations and \
-            'hide_parsons' in customizations['other_settings']:
+    parsons_hidden = 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']
+    quizzes_hidden = 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']
+
+    if customizations:
+        for_teachers.ForTeachersModule.migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden)
+
+    parsons_in_level = True
+    quiz_in_level = True
+    if customizations.get("sorted_adventures") and\
+            len(customizations.get("sorted_adventures", {str(level): []})[str(level)]) > 2:
+        last_two_adv_names = [adv["name"] for adv in customizations["sorted_adventures"][str(level)][-2:]]
+        parsons_in_level = "parsons" in last_two_adv_names
+        quiz_in_level = "quiz" in last_two_adv_names
+
+    if not parsons_in_level or parsons_hidden:
         parsons = False
-    if not quiz_in_level or 'other_settings' in customizations and \
-            'hide_quiz' in customizations['other_settings']:
+    if not quiz_in_level or quizzes_hidden:
         quiz = False
 
     max_level = hedy.HEDY_MAX_LEVEL
