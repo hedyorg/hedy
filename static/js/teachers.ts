@@ -215,8 +215,8 @@ export function remove_student(class_id: string, student_id: string, prompt: str
 
 function update_db_adventure(adventure_id: string) {
   // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
-
   const adventure_name = $('#custom_adventure_name').val();
+  const classes = $('#custom_adventure_classes').val();
   const levels: string[] = $('#custom_adventure_levels').val() as string[];
   const content = DOMPurify.sanitize(window.ckEditor.getData());
   
@@ -259,6 +259,7 @@ function update_db_adventure(adventure_id: string) {
       formatted_content: formatted_content,
       public: agree_public,
       language,
+      classes,
       levels,
     }),
     contentType: 'application/json',

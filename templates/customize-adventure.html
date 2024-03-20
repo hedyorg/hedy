@@ -20,7 +20,36 @@ onclick="window.open('/for-teachers', '_self');">
                         <input id="custom_adventure_name" required value="{{ adventure.name }}" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"{% if 'AdventureX' in adventure.name %}autofocus{% endif %}>
                     </div>
                     <div class="flex flex-row items-center mb-4">
-                        <label for="custom_adventure_levels" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('levels')}}</label>
+                        <label for="custom_adventure_classes" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('used_in')}}</label>
+                        <div
+                            id="custom_adventure_classes_container"
+                            data-te-input-wrapper-init
+                            class="block appearance-none w-full bg-gray-200 text-gray-700 rounded">
+                            <select 
+                                id="custom_adventure_classes"
+                                name="classes"
+                                multiple
+                                data-te-select-init
+                                data-te-select-visible-options="10"
+                                data-te-select-size="lg"
+                                data-te-select-options-selected-label="{{_('selected')}}"
+                                data-te-select-all-label="{{_('select_all')}}"
+                                data-te-class-select-arrow="hidden"
+                                >
+                                {% for class in all_classes %}
+                                <option value="{{ class.id }}"
+                                    {% if class.id in adventure.classes %}
+                                    selected
+                                    {% endif %}>
+                                    {{ class.name }}
+                                </option>
+                            {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex flex-row items-center mb-4">
+                        <label for="custom_adventure_levels" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('available_in')}}</label>
+                                <!-- data-te-class-notch-trailing-normal="!border-gray-200"-->
                         <div
                             id="custom_adventure_levels_container"
                             data-te-input-wrapper-init
