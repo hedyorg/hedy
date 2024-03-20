@@ -48,7 +48,6 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
                         let p = clone.querySelector('p[class^="details"]')!
                         let message = ClientMessages['multiple_keywords_warning']
                         message = message.replace("{orig_keyword}", formatKeyword(tag.innerText))
-                        console.log(coincidences)
                         let keywordList = ''
                         for (const keyword of coincidences) {
                             keywordList = keywordList === '' ? formatKeyword(`{${keyword}}`) : keywordList + `, ${formatKeyword(`{${keyword}}`)}`
@@ -199,6 +198,21 @@ export function addCurlyBracesToCode(code: string, level: number, language: stri
     formattedCode = resultingLines.join('\n');
     
     return formattedCode;
+}
+
+export function addCurlyBracesToKeyword(name: string) {
+    let lang =  $('#language').val() as string || 'en'
+    const TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;    
+    if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
+    let TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
+
+    for (const [key, regexString] of TRADUCTION) {        
+        if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
+            return `{${key}}`
+        }
+    }
+
+    return name;
 }
 
 function waitForElm(selector: string): Promise<NodeListOf<Element>>  {
