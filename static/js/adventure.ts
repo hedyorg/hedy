@@ -3,6 +3,10 @@ import { CustomWindow } from './custom-window';
 import { languagePerLevel, keywords } from "./lezer-parsers/language-packages";
 import { SyntaxNode } from "@lezer/common";
 import { initializeTranslation } from "./lezer-parsers/tokens";
+import DOMPurify from "dompurify";
+import TRADUCTION_IMPORT from '../../highlighting/highlighting-trad.json';
+import { convert } from "./utils";
+import { ClientMessages } from "./client-messages";
 
 declare let window: CustomWindow;
 
@@ -11,14 +15,60 @@ export interface InitializeCustomizeAdventurePage {
 }
 
 let $editor: ClassicEditor;
+let keywordHasAlert: Map<string, boolean> = new Map()
 
 export async function initializeCustomAdventurePage(_options: InitializeCustomizeAdventurePage) {
     const editorContainer = document.querySelector('#adventure-editor') as HTMLElement;
-    const lang = document.querySelector('html')?.getAttribute('lang') || 'en';
     // Initialize the editor with the default language
+    let lang =  $('#language').val() as string || 'en'
+    const TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;    
+    if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
+    let TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
+
     if (editorContainer) {
-        initializeEditor(lang, editorContainer);
+        await initializeEditor(lang, editorContainer);
+        $editor.model.document.on('change:data', () => {            
+            const content = DOMPurify.sanitize($editor.getData())
+            const parser = new DOMParser();
+            const html = parser.parseFromString(content, 'text/html');
+
+            for (const tag of html.getElementsByTagName('code')) {
+                if (tag.className !== "language-python") {
+                    const coincidences = findCoincidences(tag.innerText, TRADUCTION);
+                    if (coincidences.length > 1 && !keywordHasAlert.get(tag.innerText)) {
+                        keywordHasAlert.set(tag.innerText, true);
+                        // We create the alert box dynamically using the template element in the HTML object
+                        const template = document.querySelector('#warning_template') as HTMLTemplateElement
+                        const clone = template.content.cloneNode(true) as HTMLElement
+                        let close = clone.querySelector('.close-dialog');
+                        close?.addEventListener('click', () => {
+                            keywordHasAlert.set(tag.innerText, false);
+                            close?.parentElement?.remove()
+                        })
+                        let p = clone.querySelector('p[class^="details"]')!
+                        let message = ClientMessages['multiple_keywords_warning']
+                        message = message.replace("{orig_keyword}", formatKeyword(tag.innerText))
+                        console.log(coincidences)
+                        let keywordList = ''
+                        for (const keyword of coincidences) {
+                            keywordList = keywordList === '' ? formatKeyword(`{${keyword}}`) : keywordList + `, ${formatKeyword(`{${keyword}}`)}`
+                        }
+                        message = message.replace("{keyword_list}", keywordList)
+                        p.innerHTML = message
+                        // Once the warning has been created we append it to the container
+                        const warningContainer = document.getElementById('warnings_container')!
+                        warningContainer.appendChild(clone)
+                    }
+                }
+            }
+        })
     }
+
+    $('#language').on('change', () => {
+        let lang = $('#language').val() as string || 'en'
+        if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
+        TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
+    })
 
     // We wait until Tailwind generates the select
     const tailwindSelects = await waitForElm('[data-te-select-option-ref]')
@@ -38,6 +88,21 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
             }, 100);
         })
     })
+
+}
+
+function formatKeyword(name: string) {
+    return `<span class='command-highlighted'>${name}</span>`
+}
+
+function findCoincidences(name: string, TRADUCTION: Map<string, string>) {
+    let coincidences = [];
+    for (const [key, regexString] of TRADUCTION) {        
+        if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
+            coincidences.push(key)
+        }
+    }
+    return coincidences;
 }
 
 function initializeEditor(language: string, editorContainer: HTMLElement): Promise<void> {
