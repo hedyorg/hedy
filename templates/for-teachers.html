@@ -20,19 +20,17 @@
       <div class="flex flex-row gap-3 justify-end basis-1/12">
         <button class="green-btn inline-flex items-center" id="create_class_button" onclick='hedyApp.create_class ({{_('class_name_prompt')|default(None)|tojson}})'
         {% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_class')}}</button>
+        {% if teacher_classes %}
         <button class="white-btn inline-flex items-center gap-2" id="view_classes"
-        _="on click toggle .hidden on #classes_table
-        set arrow to #classes_arrow
-        if not arrow.classList.contains('rotate-180')
-          add .rotate-180 to arrow
-        else
-          remove .rotate-180 from arrow"
+        _="on load hedyApp.getForTeacherTable('classes_table') end
+        on click hedyApp.saveForTeacherTable('classes_table') end"
         >
         <span>{{_('view_classes')}}</span>
-        <svg id="classes_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+        <svg id="classes_table_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
           <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
         </svg>
       </button>
+      {% endif %}
       </div>
     </div>
     <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full lg:w-2/4 p-8">
@@ -46,18 +44,16 @@
               _="on htmx:afterRequest if detail.xhr.response
               window.open('/for-teachers/customize-adventure/' + detail.xhr.response, '_self')"
               data-cy="edit-link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
+            {% if teacher_adventures %}
             <button class="white-btn inline-flex" id="view_adventures"
-            _="on click toggle .hidden on #adventures_table
-            set arrow to #adventures_arrow
-            if not arrow.classList.contains('rotate-180')
-              add .rotate-180 to arrow
-            else
-              remove .rotate-180 from arrow">
+            _="on load hedyApp.getForTeacherTable('adventures_table') end
+              on click hedyApp.saveForTeacherTable('adventures_table') end">
             <span>{{_('view_adventures')}}</span>
-            <svg id="adventures_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <svg id="adventures_table_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
             </svg>
           </button>
+          {% endif %}
       </div>
     </div>
   </div>
@@ -172,17 +168,11 @@
         <div class="flex flex-row gap-3 justify-end basis-1/12">
           <!-- it's ugly to add a fixed height to content_table, to solve it from growing with slides, but not sure how else to fix it-->
           <button class="white-btn inline-flex items-center"
-          _="on click toggle .hidden on #slides_table
-          set arrow to #slides_arrow
-          if not arrow.classList.contains('rotate-180')
-            add .rotate-180 to arrow
-            add .max-h-80 to #content_table
-          else
-            remove .rotate-180 from arrow
-            remove .max-h-80 from #content_table"
+          _="on load hedyApp.getForTeacherTable('slides_table') end
+              on click hedyApp.saveForTeacherTable('slides_table') end"
           >
           <span>{{_('view_slides')}}</span>
-            <svg id="slides_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <svg id="slides_table_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
             </svg>
           </button>

@@ -1620,6 +1620,37 @@ export function toggleDevelopersMode(event='click', enforceDevMode: boolean) {
   });
 }
 
+export function saveForTeacherTable(table: string) {
+  let open = window.localStorage.getItem(table);
+  const arrow = document.querySelector('#' + table + '_arrow') as HTMLElement;
+  if (open == 'true'){
+    window.localStorage.setItem(table, 'false')
+    $('#' + table).hide();
+    arrow.classList.remove('rotate-180');
+  } else {
+    window.localStorage.setItem(table, 'true')
+    $('#' + table).show();
+    arrow.classList.add('rotate-180');
+  }
+  let test = window.localStorage.getItem(table);
+  console.log("SHOUlD NOW BE OPEN:")
+  console.log(test)
+}
+
+export function getForTeacherTable(table: string) {
+  let open = window.localStorage.getItem(table);
+  const arrow = document.querySelector('#' + table + '_arrow') as HTMLElement;
+  console.log("ON LOAD SHOULD BE OPEN:")
+  console.log(open)
+  if (open == 'true'){
+    $('#' + table).show();
+    arrow.classList.add('rotate-180');
+  } else {
+    $('#' + table).hide()
+    arrow.classList.remove('rotate-180');
+  }
+}
+
 /**
  * Run a code block, show an error message if we catch an exception
  */
