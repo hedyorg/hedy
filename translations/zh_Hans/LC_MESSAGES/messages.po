@@ -22,7 +22,7 @@ msgid "Access Before Assign"
 msgstr "您尝试在第 {access_line_number} 行使用变量 {name}，但在第 {definition_line_number} 行设置了它。要在使用变量之前设置它。"
 
 msgid "Cyclic Var Definition"
-msgstr "需要先设置名称 {variable}，然后才能在 {is} 命令的右侧使用它。"
+msgstr "需要先设置名称 `{variable}`，然后才能在 `{is}` 命令的右侧使用它。"
 
 msgid "Function Undefined"
 msgstr "您尝试使用函数 {name}，但没有定义它。"
@@ -31,55 +31,55 @@ msgid "Has Blanks"
 msgstr "你的代码还不完整。你需要在空白的地方填上代码。"
 
 msgid "Incomplete"
-msgstr "呀！你漏写了一些代码！在第{line_number}行，你需要在{incomplete_command}后面输 入文字。"
+msgstr "呀！你漏写了一些代码！在第{line_number}行，你需要在`{incomplete_command}`后面输 入文字。"
 
 msgid "Incomplete Repeat"
-msgstr "您似乎忘记使用在第 {line_number} 行使用的 {repeat} 命令。"
+msgstr "您似乎忘记使用在第 {line_number} 行使用的 `{repeat}` 命令。"
 
 msgid "Invalid"
-msgstr "{invalid_command} 不是海蒂第{level}关里的命令。你是不是想写 {guessed_command}？"
+msgstr "`{invalid_command}` 不是海蒂第{level}关里的命令。你是不是想写 `{guessed_command}`？"
 
 msgid "Invalid Argument"
-msgstr "你不能在命令{command}中使用{invalid_argument}。试着把{invalid_argument}改成 {allowed_types}。"
+msgstr "你不能在命令`{command}`中使用`{invalid_argument}`。试着把`{invalid_argument}`改成 {allowed_types}。"
 
 msgid "Invalid Argument Type"
-msgstr "你不能在{command}中使用{invalid_argument}，因为它是个{invalid_type}。试着把 {invalid_argument}改成{allowed_types}。"
+msgstr "你不能在`{command}`中使用`{invalid_argument}`，因为它是个{invalid_type}。试着把 `{invalid_argument}`改成{allowed_types}。"
 
 msgid "Invalid At Command"
-msgstr "从 16 级开始，不能使用 {command} 命令。 您可以使用方括号来使用列表中的元素，例如“friends[i]”、“lucky_numbers[{random}]”。"
+msgstr "从 16 级开始，不能使用 `{command}` 命令。 您可以使用方括号来使用列表中的元素，例如“friends[i]”、“lucky_numbers[{random}]”。"
 
 msgid "Invalid Space"
 msgstr "呀！你在第{line_number}开头加了一个空格。空格会让电脑产生困惑，你不能能删除这 个空格？"
 
 msgid "Invalid Type Combination"
-msgstr "你不能在{command}中使用{invalid_argument}和{invalid_argument_2}，因为它们一个是{invalid_type}，一个是{invalid_type_2}。试着把{invalid_argument}改成{invalid_type_2}，或者把{invalid_argument_2}改成{invalid_type}。"
+msgstr "你不能在`{command}`中使用`{invalid_argument}`和`{invalid_argument_2}`，因为它们一个是{invalid_type}，一个是{invalid_type_2}。试着把`{invalid_argument}`改成{invalid_type_2}，或者把`{invalid_argument_2}`改成{invalid_type}。"
 
 msgid "Locked Language Feature"
 msgstr "你正在使用{concept}！这很棒，但是{concept}还没有解锁！它会在后续关卡中解锁。"
 
 msgid "Lonely Echo"
-msgstr "您在 {ask} 之前使用了 {echo}，或者在没有 {ask} 的情况下使用了 {echo}。 在 {echo} 之前要放置一个 {ask}。"
+msgstr "您在 `{ask}` 之前使用了 `{echo}`，或者在没有 `{ask}` 的情况下使用了 `{echo}`。 在 `{echo}` 之前要放置一个 `{ask}`。"
 
 msgid "Lonely Text"
 msgstr "看来你忘记在第{line_number}行的文字里使用指令"
 
 msgid "Missing Additional Command"
-msgstr "似乎忘记在第 {line_number} 行上完成写入 {command}。 尝试将 {missing_command} 添加到你的代码中。"
+msgstr "似乎忘记在第 {line_number} 行上完成写入 `{command}`。 尝试将 `{missing_command}` 添加到你的代码中。"
 
 msgid "Missing Command"
 msgstr "看上去你忘记在第{line_number}行写命令了。"
 
 msgid "Missing Inner Command"
-msgstr "看上去你忘了在第{line_number}行的{command}这一句里加上一个命令。"
+msgstr "看上去你忘了在第{line_number}行的`{command}`这一句里加上一个命令。"
 
 msgid "Missing Square Brackets"
-msgstr "看起来您忘记在{line_number}行上创建的列表两端使用方括号[]。"
+msgstr "看起来您忘记在{line_number}行上创建的列表两端使用方括号`[]`。"
 
 msgid "Missing Variable"
-msgstr "看起来你的 {command} 在行开头缺少变量。"
+msgstr "看起来你的 `{command}` 在行开头缺少变量。"
 
 msgid "Misspelled At Command"
-msgstr "看来您可能拼错了 {command} 命令，而是在第 {line_number} 行中写了 {invalid_argument}。"
+msgstr "看来您可能拼错了 `{command}` 命令，而是在第 {line_number} 行中写了 `{invalid_argument}`。"
 
 msgid "No Indentation"
 msgstr "第{line_number}行的空格太少了。你空了{leading_spaces}格，这样不够。每个新的代码块都要比前一行多{indent_size}个空格。"
@@ -88,10 +88,19 @@ msgid "Non Decimal Variable"
 msgstr "在第 {line_number} 行，您可能尝试使用 海蒂 不太喜欢的号码！ 尝试将其更改为十进制数，例如 2。"
 
 msgid "Parse"
-msgstr "你输入的代码不是正确的海蒂代码。错误点在第{location[0]}行，第{location[1]}个字。你输入了一个禁止使用的字符：{character_found}。"
+msgstr "你输入的代码不是正确的海蒂代码。错误点在第{location[0]}行，第{location[1]}个字。你输入了一个禁止使用的字符：`{character_found}`。"
 
 msgid "Pressit Missing Else"
-msgstr "您忘记添加按不同键时会发生的情况，请在代码中添加 {else}"
+msgstr "您忘记添加按不同键时会发生的情况，请在代码中添加 `{else}`"
+
+msgid "Runtime Index Error"
+msgstr "你尝试访问列表 {name}，但它要么是空的，要么索引不存在。"
+
+msgid "Runtime Value Error"
+msgstr "在运行程序时，命令`{command}`收到了不允许的值{value}。{tip}。"
+
+msgid "Runtime Values Error"
+msgstr "While running your program the command `{command}` received the values `{value}` and `{value}` which are not allowed. {tip}."
 
 msgid "Save Microbit code "
 msgstr "保存 Microbit 代码"
@@ -103,19 +112,19 @@ msgid "Unexpected Indentation"
 msgstr "第{line_number}行的空格太多了。你空了{leading_spaces}格，这样太多。每个新的代码块都要比前一行多{indent_size}个空格。"
 
 msgid "Unquoted Assignment"
-msgstr "从这个级别开始，您需要将文本放置在引号之间的 {is} 右侧。 您忘记了文本 {text} 的内容。"
+msgstr "从这个级别开始，您需要将文本放置在引号之间的 `{is}` 右侧。 您忘记了文本 {text} 的内容。"
 
 msgid "Unquoted Equality Check"
 msgstr "如果你想检查一个变量的内容是否是一些词，那就需要用引号将这些词括起来！"
 
 msgid "Unquoted Text"
-msgstr "当心。 如果您{ask}或{print}某些内容，则文本应以引号开头和结尾。 您忘记了文本 {unquotedtext} 的内容。"
+msgstr "当心。 如果您`{ask}`或`{print}`某些内容，则文本应以引号开头和结尾。 您忘记了文本 {unquotedtext} 的内容。"
 
 msgid "Unsupported Float"
 msgstr "现在暂不支持非整数，但是再过几关就会支持了。当下先把{value}改成整数。"
 
 msgid "Unsupported String Value"
-msgstr "文本值不能包含{invalid_value}。"
+msgstr "文本值不能包含`{invalid_value}`。"
 
 msgid "Unused Variable"
 msgstr "您在第{line_number}行定义了变量{variable_name}，但没有使用它。"
@@ -124,7 +133,7 @@ msgid "Var Undefined"
 msgstr "你试图使用变量 {name}，但你没设置过这个变量。也有可能是你想输入 {name} 这个词，但是忘记加引号了。"
 
 msgid "Wrong Level"
-msgstr "这是正确的海蒂代码，但不是在正确的关卡。你在第{working_level}关用了{offending_keyword}。提示：{tip}"
+msgstr "这是正确的海蒂代码，但不是在正确的关卡。你在第{working_level}关用了`{offending_keyword}`。提示：{tip}"
 
 msgid "Wrong Number of Arguments"
 msgstr "您的函数使用了错误数量的参数。 您提供了 {used_number} 但函数 {name} 需要 {defined_number}"
@@ -257,10 +266,11 @@ msgid "are_you_sure"
 msgstr "你确定吗？ 你无法撤销此操作。"
 
 msgid "ask_needs_var"
-msgstr "从第2关开始，{ask}需要和变量共同使用。例子：名字{is} {ask}你叫什么？"
+msgstr "从第2关开始，`{ask}`需要和变量共同使用。例子：名字`{is}` `{ask}`你叫什么？"
 
+#, fuzzy
 msgid "available_in"
-msgstr ""
+msgstr "Available in:"
 
 msgid "become_a_sponsor"
 msgstr "成为赞助商"
@@ -279,15 +289,6 @@ msgstr "取消"
 
 msgid "cant_parse_exception"
 msgstr "无法解析程序"
-
-msgid "catch_index_exception"
-msgstr "你尝试访问列表 {list_name}，但它要么是空的，要么索引不存在。"
-
-msgid "catch_multiple_values_exception"
-msgstr "While running your program the command {command} received the values {value} and {value} which are not allowed. {suggestion}."
-
-msgid "catch_value_exception"
-msgstr "在运行程序时，命令{command}收到了不允许的值{value}。{suggestion}。"
 
 msgid "certificate"
 msgstr "竣工证书"
@@ -542,7 +543,7 @@ msgid "echo_and_ask_mismatch_exception"
 msgstr "回声和询问不匹配"
 
 msgid "echo_out"
-msgstr "从第二级起，你不再需要{echo}。你可以用{ask}和{print}来复述答案。比如：名字 {is} {ask} 你叫什么？{print} 你好，名字"
+msgstr "从第二级起，你不再需要`{echo}`。你可以用`{ask}`和`{print}`来复述答案。比如：名字 `{is}` `{ask}` 你叫什么？`{print}` 你好，名字"
 
 msgid "edit_adventure"
 msgstr "编辑冒险"
@@ -779,7 +780,7 @@ msgid "indentation_exception"
 msgstr "缩进不正确"
 
 msgid "input"
-msgstr "{ask}中的输入"
+msgstr "`{ask}`中的输入"
 
 msgid "integer"
 msgstr "数字"
@@ -1081,7 +1082,7 @@ msgid "no_certificate"
 msgstr "此用户尚未获得 Hedy 结业证书"
 
 msgid "no_more_flat_if"
-msgstr "从第 8 级开始，{if} 之后的代码需要放在下一行，并以 4 个空格开头。"
+msgstr "从第 8 级开始，`{if}` 之后的代码需要放在下一行，并以 4 个空格开头。"
 
 msgid "no_programs"
 msgstr "还没有程序."
@@ -1381,7 +1382,7 @@ msgid "repair_program_logo_alt"
 msgstr "修复程序图标"
 
 msgid "repeat_dep"
-msgstr "从第 8 级开始，{repeat} 需要与缩进一起使用。 可以在第 8 级的 {repeat} 选项卡上查看示例。"
+msgstr "从第 8 级开始，`{repeat}` 需要与缩进一起使用。 可以在第 8 级的 `{repeat}` 选项卡上查看示例。"
 
 msgid "repeat_match_password"
 msgstr "再次输入的密码和第一次输入的密码不一致。"
@@ -1527,8 +1528,9 @@ msgstr "单引号"
 msgid "slash"
 msgstr "斜杠"
 
+#, fuzzy
 msgid "sleeping"
-msgstr ""
+msgstr "Sleeping..."
 
 msgid "slides"
 msgstr "幻灯"
@@ -1703,8 +1705,8 @@ msgstr ""
 "\n"
 "但有时我可能想展示一段代码，如下所示：\n"
 "<pre>\n"
-"ask 你叫什么名字？\n"
-"echo 所以你的名字是\n"
+"{ask} 你叫什么名字？\n"
+"{echo} 所以你的名字是\n"
 "</pre>"
 
 msgid "this_turns_in_assignment"
@@ -1838,8 +1840,9 @@ msgstr "程序中空格的使用"
 msgid "use_of_nested_functions_exception"
 msgstr "嵌套函数的使用"
 
+#, fuzzy
 msgid "used_in"
-msgstr ""
+msgstr "Used in:"
 
 msgid "user"
 msgstr "用户"

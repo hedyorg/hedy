@@ -24,7 +24,7 @@ msgstr "You tried to use the variable {name} on line {access_line_number}, but y
 
 #, fuzzy
 msgid "Cyclic Var Definition"
-msgstr "The name {variable} needs to be set before you can use it on the right-hand side of the is command"
+msgstr "The name `{variable}` needs to be set before you can use it on the right-hand side of the is command"
 
 #, fuzzy
 msgid "Function Undefined"
@@ -34,33 +34,33 @@ msgid "Has Blanks"
 msgstr "Tink der om! Dyn koade is noch net ôf. Der stiet noch leech streepke yn, dêr moat de goede koade noch stean."
 
 msgid "Incomplete"
-msgstr "Tink derom, bist wat koade fergetten. Op rigel {line_number} moat der efter {incomplete_command} noch tekst komme."
+msgstr "Tink derom, bist wat koade fergetten. Op rigel {line_number} moat der efter `{incomplete_command}` noch tekst komme."
 
 #, fuzzy
 msgid "Incomplete Repeat"
-msgstr "It looks like you forgot to use {command} with the repeat command you used on line {line_number}."
+msgstr "It looks like you forgot to use `{command}` with the repeat command you used on line {line_number}."
 
 msgid "Invalid"
-msgstr "{invalid_command} is gjin commando yn Hedy level {level}. Bedoelst {guessed_command}?"
+msgstr "`{invalid_command}` is gjin commando yn Hedy level {level}. Bedoelst `{guessed_command}`?"
 
 #, fuzzy
 msgid "Invalid Argument"
-msgstr "You cannot use the command {command} with {invalid_argument} . Try changing {invalid_argument} to {allowed_types}."
+msgstr "You cannot use the command `{command}` with `{invalid_argument}` . Try changing `{invalid_argument}` to {allowed_types}."
 
 #, fuzzy
 msgid "Invalid Argument Type"
-msgstr "You cannot use {command} with {invalid_argument} because it is {invalid_type}. Try changing {invalid_argument} to {allowed_types}."
+msgstr "You cannot use `{command}` with `{invalid_argument}` because it is {invalid_type}. Try changing `{invalid_argument}` to {allowed_types}."
 
 #, fuzzy
 msgid "Invalid At Command"
-msgstr "The {at} command may not be used from level 16 onward. You can use square brackets to use an element from a list, for example `friends[i]`, `lucky_numbers[{random}]`."
+msgstr "The `{command}` command may not be used from level 16 onward. You can use square brackets to use an element from a list, for example `friends[i]`, `lucky_numbers[{random}]`."
 
 msgid "Invalid Space"
 msgstr "Heden! Rigel {line_number} begjint mei ien spaasje. Computers kinne net sa goed oer spaasjes, kinst him fuorthelje?"
 
 #, fuzzy
 msgid "Invalid Type Combination"
-msgstr "You cannot use {invalid_argument} and {invalid_argument_2} with {command} because one is {invalid_type} and the other is {invalid_type_2}. Try changing {invalid_argument} to {invalid_type_2} or {invalid_argument_2} to {invalid_type}."
+msgstr "You cannot use `{invalid_argument}` and `{invalid_argument_2}` with `{command}` because one is {invalid_type} and the other is {invalid_type_2}. Try changing `{invalid_argument}` to {invalid_type_2} or `{invalid_argument_2}` to {invalid_type}."
 
 #, fuzzy
 msgid "Locked Language Feature"
@@ -75,7 +75,7 @@ msgstr "It looks like you forgot to use a command with the text you put in line 
 
 #, fuzzy
 msgid "Missing Additional Command"
-msgstr "It looks like you forgot to complete writing {command} on line {line_number}."
+msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
 
 #, fuzzy
 msgid "Missing Command"
@@ -83,18 +83,18 @@ msgstr "It looks like you forgot to use a command on line {line_number}."
 
 #, fuzzy
 msgid "Missing Inner Command"
-msgstr "It looks like you forgot to use a command with the {command} statement you used on line {line_number}."
+msgstr "It looks like you forgot to use a command with the `{command}` statement you used on line {line_number}."
 
 msgid "Missing Square Brackets"
-msgstr "It looks like you forgot to use square brackets [] around the list you were creating on line {line_number}."
+msgstr "It looks like you forgot to use square brackets `[]` around the list you were creating on line {line_number}."
 
 #, fuzzy
 msgid "Missing Variable"
-msgstr "It looks like your {command} is missing a variable at the start of the line."
+msgstr "It looks like your `{command}` is missing a variable at the start of the line."
 
 #, fuzzy
 msgid "Misspelled At Command"
-msgstr "It looks like you might have misspelled the {command} command, instead you wrote {invalid_argument} in line {line_number}."
+msgstr "It looks like you might have misspelled the `{command}` command, instead you wrote `{invalid_argument}` in line {line_number}."
 
 #, fuzzy
 msgid "No Indentation"
@@ -105,11 +105,22 @@ msgid "Non Decimal Variable"
 msgstr "At line {line_number}, you might have tried using a number which Hedy does not like very much! Try changing it to a decimal number like 2."
 
 msgid "Parse"
-msgstr "De koade dysto skreaun hast is gjin jildige Hedy-koade. Der sit in flater op rigel {location[0]}, op posysje {location[1]}. Do hast  {character_found} typt, mar dat mei op dy plak net."
+msgstr "De koade dysto skreaun hast is gjin jildige Hedy-koade. Der sit in flater op rigel {location[0]}, op posysje {location[1]}. Do hast  `{character_found}` typt, mar dat mei op dy plak net."
 
 #, fuzzy
 msgid "Pressit Missing Else"
-msgstr "You forgot to add what happens when you press a different key, add an {else} to your code"
+msgstr "You forgot to add what happens when you press a different key, add an `{else}` to your code"
+
+#, fuzzy
+msgid "Runtime Index Error"
+msgstr "You tried to access the list {name} but it is either empty or the index is not there."
+
+#, fuzzy
+msgid "Runtime Value Error"
+msgstr "While running your program the command `{command}` received the value `{value}` which is not allowed. {tip}."
+
+msgid "Runtime Values Error"
+msgstr "While running your program the command `{command}` received the values `{value}` and `{value}` which are not allowed. {tip}."
 
 #, fuzzy
 msgid "Save Microbit code "
@@ -134,21 +145,21 @@ msgstr "Tink der om! Bij `print` en `ask` moat foar én en efter de tekst in oan
 
 #, fuzzy
 msgid "Unsupported Float"
-msgstr "Non-integer numbers are not supported yet but they will be in a few levels. For now change {value} to an integer."
+msgstr "Non-integer numbers are not supported yet but they will be in a few levels. For now change `{value}` to an integer."
 
 #, fuzzy
 msgid "Unsupported String Value"
-msgstr "Text values cannot contain {invalid_value}."
+msgstr "Text values cannot contain `{invalid_value}`."
 
 #, fuzzy
 msgid "Unused Variable"
 msgstr "You defined the variable {variable_name} on line {line_number}, but you did not use it."
 
 msgid "Var Undefined"
-msgstr "Do besykest de fariabele {name} te printen, mar dy hast gjin wearde jûn. It kin ek wêze datst it wurd {name} printen woest en oanhellingtekens fergetten bist."
+msgstr "Do besykest de fariabele `{name}` te printen, mar dy hast gjin wearde jûn. It kin ek wêze datst it wurd `{name}` printen woest en oanhellingtekens fergetten bist."
 
 msgid "Wrong Level"
-msgstr "Dat wie bêste koade hear, mar net op in goeie level. Hast koade {offending_keyword} skreaun foar level {working_level}. Tip: {tip}."
+msgstr "Dat wie bêste koade hear, mar net op in goeie level. Hast koade `{offending_keyword}` skreaun foar level {working_level}. Tip: {tip}."
 
 #, fuzzy
 msgid "Wrong Number of Arguments"
@@ -320,8 +331,9 @@ msgstr "Bisto wis? Kinst dit net mear weromdraaie."
 msgid "ask_needs_var"
 msgstr "Starting in level 2, ask needs to be used with a variable. Example: name is ask What are you called?"
 
+#, fuzzy
 msgid "available_in"
-msgstr ""
+msgstr "Available in:"
 
 #, fuzzy
 msgid "become_a_sponsor"
@@ -343,17 +355,6 @@ msgstr "Ofbrekke"
 #, fuzzy
 msgid "cant_parse_exception"
 msgstr "Couldn't parse the program"
-
-#, fuzzy
-msgid "catch_index_exception"
-msgstr "You tried to access the list {list_name} but it is either empty or the index is not there."
-
-msgid "catch_multiple_values_exception"
-msgstr "While running your program the command {command} received the values {value} and {value} which are not allowed. {suggestion}."
-
-#, fuzzy
-msgid "catch_value_exception"
-msgstr "While running your program the command {command} received the value {value} which is not allowed. {suggestion}."
 
 #, fuzzy
 msgid "certificate"
@@ -980,7 +981,7 @@ msgstr "Incorrect Indentation"
 
 #, fuzzy
 msgid "input"
-msgstr "input from ask"
+msgstr "input from `{ask}`"
 
 #, fuzzy
 msgid "integer"
@@ -1339,7 +1340,7 @@ msgstr "This user hasn't earned the Hedy Certificate of Completion"
 
 #, fuzzy
 msgid "no_more_flat_if"
-msgstr "Starting in level 8, the code after {if} needs to be placed on the next line and start with 4 spaces."
+msgstr "Starting in level 8, the code after `{if}` needs to be placed on the next line and start with 4 spaces."
 
 #, fuzzy
 msgid "no_programs"
@@ -1714,7 +1715,7 @@ msgstr "Repair program icon"
 
 #, fuzzy
 msgid "repeat_dep"
-msgstr "Starting in level 8, {repeat} needs to be used with indentation. You can see examples on the {repeat} tab in level 8."
+msgstr "Starting in level 8, `{repeat}` needs to be used with indentation. You can see examples on the `{repeat}` tab in level 8."
 
 msgid "repeat_match_password"
 msgstr "De wachtwurden binne net itselde."
@@ -1896,8 +1897,9 @@ msgstr "inn hege komma"
 msgid "slash"
 msgstr "in skean streepke"
 
+#, fuzzy
 msgid "sleeping"
-msgstr ""
+msgstr "Sleeping..."
 
 #, fuzzy
 msgid "slides"
@@ -2117,7 +2119,7 @@ msgid "template_code"
 msgstr ""
 "This is the explanation of my adventure!\n"
 "\n"
-"This way I can show a command: <code>print</code>\n"
+"This way I can show a command: <code>{print}</code>\n"
 "\n"
 "But sometimes I might want to show a piece of code, like this:\n"
 "<pre>\n"
@@ -2247,7 +2249,9 @@ msgstr "Tutorial"
 
 #, fuzzy
 msgid "tutorial_code_snippet"
-msgstr "Hide cheatsheet"
+msgstr ""
+"{print} Hello world!\n"
+"{print} I'm learning Hedy with the tutorial!"
 
 #, fuzzy
 msgid "tutorial_message_not_found"
@@ -2296,8 +2300,9 @@ msgstr "Use of blanks in programs"
 msgid "use_of_nested_functions_exception"
 msgstr "Use of nested functions"
 
+#, fuzzy
 msgid "used_in"
-msgstr ""
+msgstr "Used in:"
 
 #, fuzzy
 msgid "user"
