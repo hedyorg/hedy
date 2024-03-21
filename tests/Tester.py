@@ -517,7 +517,10 @@ class HedyTester(unittest.TestCase):
 
         return snippets
 
-    def output_test_error(self, E, snippet):
+    def format_test_error(self, E, snippet):
+        """Given a snippet and an exception, return a string describing the problem."""
+        message = []
+
         arrow = True  # set to False if you want to remove the <---- in the output f.e. for easy copy-pasting
         try:
             location = E.error_location
@@ -537,17 +540,18 @@ class HedyTester(unittest.TestCase):
                 return code
             lines = code.split('\n')
             lines = [line + (" <---- ERROR HERE" if i+1 == location[0] else "")
-                     for i, line in enumerate(len(lines))]
-            return '\n'.join(lines).trim()
+                     for i, line in enumerate(lines)]
+            return '\n'.join(lines).strip()
 
-        print('======================================================================')
-        print(f'Language {snippet.language}, level {snippet.level} produces an error:')
-        print(f'{error_message} at line {location}')
-        print('-- keywords --')
-        print(add_arrow(snippet.original_code))
-        print('-- translated --')
-        print(add_arrow(snippet.code))
-        raise E
+        message.append('======================================================================')
+        message.append(f'Language {snippet.language}, level {snippet.level} produces an error:')
+        message.append(f'{error_message} at line {location}')
+        message.append('-- keywords --')
+        message.append(add_arrow(snippet.original_code))
+        message.append('-- translated --')
+        message.append(add_arrow(snippet.code))
+
+        return '\n'.join(message)
 
 
 def create_hash(hedy_language, test_hash):
