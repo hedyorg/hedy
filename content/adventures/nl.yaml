@@ -2655,14 +2655,13 @@ adventures:
                     ```
             12:
                 story_text: |
-                    Use functions in your songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle Little Star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
-
-                    ### Exercise
-                    Finish the song of Twinkle Twinkle Little Star.
-                    Then look back at all the songs you've programmed in the levels before, can you make those codes better and shorter using functions too?
+                    Gebruik functies in je liedjes! Zoals je kunt zien in de voorbeeldcode, kun je een functie maken voor elke regel uit Altijd is Kortjakje ziek. Zodra je de 3 zinnen hebt geprogrammeerd, hoef je alleen nog maar de functies in de juiste volgorde op te roepen.
+                    ### Opdracht
+                    Maak het liedje 'Altijd is Kortjakje ziek' af.
+                    Kijk daarna terug naar liedjes die je geprogrammeerd hebt in voorgaande levels. Kun je die liedjes inkorten en verbeteren door functies te gebruiken?
                 example_code: |
                     ```
-                    {define} first_line
+                    {define} eerste_regel
                         {play} C
                         {play} C
                         {play} G
@@ -2672,7 +2671,7 @@ adventures:
                         {play} G
                         {sleep}
 
-                    {define} second_line
+                    {define} tweede_regel
                         {play} F
                         {play} F
                         {play} E
@@ -2682,7 +2681,7 @@ adventures:
                         {play} C
                         {sleep}
 
-                    {define} third_line
+                    {define} derde_regel
                         {play} G
                         {play} G
                         {play} F
@@ -2701,12 +2700,12 @@ adventures:
                     ```
             13:
                 story_text: |
-                    You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
-                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, buyt each time they are followed by a different couple of notes.
+                    Je kunt een functie met een argument gebruiken bij liedjes die steeds bijna hetzelfde zijn, maar een heel klein verschilletje bevatten.
+                    Een voorbeeld van zo'n liedje is het Engelse deuntje 'Yankee Doodle'. De eerste 4 noten van elke regel zijn steeds gelijk, maar het einde vershcilt steeds.
 
-                    ### Exercise
-                    Can you finish the song of Yankee Doodle?
-                    Can you think of another song to programm this way?
+                    ### Voorbeeldcode
+                    Kun jij Yanklee Doodle afmaken?
+                    Kun je een ander liedje programmeren op deze manier?
                 example_code: |
                     ```
                     {print} 'Yankee Doodle'
