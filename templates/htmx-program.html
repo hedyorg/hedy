@@ -27,8 +27,8 @@
         </table>
         {% if public_profile and not second_teachers_programs %}
             {% set favourite_program = (public_profile.favourite_program and public_profile.favourite_program == program.id) %}
-            <div class="ml-auto favourite_program_container {% if favourite_program %}text-yellow-400{% else %}text-white{% endif %} text-2xl{% if not program.public %} hidden{% endif %}" id="favourite_program_container_{{ loop.index }}">
-                <i class="fa fa-star p-4 bg-blue-300 rounded-full cursor-pointer hover:bg-blue-600" onclick="hedyApp.set_favourite_program('{{ program.id }}', {{ loop.index }}, {% if favourite_program %}false{% else %}true{% endif %}, '{{_('favourite_confirm')}}', '{{_('unfavourite_confirm')}}');" aria-hidden="true"></i>
+            <div class="ml-auto favourite_program_container {% if favourite_program %}text-yellow-400{% else %}text-white{% endif %} text-2xl{% if not program.public %} hidden{% endif %}" id="favourite_program_container_{{ loop_index }}">
+                <i class="fa fa-star p-4 bg-blue-300 rounded-full cursor-pointer hover:bg-blue-600" onclick="hedyApp.set_favourite_program('{{ program.id }}', {{ loop_index }}, {% if favourite_program %}false{% else %}true{% endif %}, '{{_('favourite_confirm')}}', '{{_('unfavourite_confirm')}}');" aria-hidden="true"></i>
             </div>
         {% endif %}
           <div class="ml-auto dropdown relative">
