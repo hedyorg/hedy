@@ -146,6 +146,54 @@ describe('Lezer parser tests for level 5', () => {
 
                 singleLevelTester('Test print command after if', code, expectedTree, 5);
             })
+
+            describe('Test if text in list print', () => {
+                const code = `if text in list print 'in'`
+                const expectedTree =
+                `Program(
+                    Command(
+                        If(
+                            if,
+                            Condition(InListCheck(Text,in,Text)),
+                            IfLessCommand(Print(print,String))
+                        )
+                    )
+                )`
+
+                multiLevelTester('Test if text in list print', code, expectedTree, 5, 7);
+            })
+
+            describe('Test if text not in list print', () => {
+                const code = `if text not in list print 'in'`
+                const expectedTree =
+                `Program(
+                    Command(
+                        If(
+                            if,
+                            Condition(NotInListCheck(Text,not_in,not_in,Text)),
+                            IfLessCommand(Print(print,String))
+                        )
+                    )
+                )`
+
+                multiLevelTester('Test if text not in list print', code, expectedTree, 5, 7);
+            })
+
+            describe('Test if text not in spanish, but using english keyword', () => {
+                const code = `si text not in list imprimir 'in'`
+                const expectedTree =
+                `Program(
+                    Command(
+                        If(
+                            if,
+                            Condition(NotInListCheck(Text,not_in,not_in,Text)),
+                            IfLessCommand(Print(print,String))
+                        )
+                    )
+                )`
+
+                multiLevelTester('Test if text not in list print', code, expectedTree, 5, 7, 'es');
+            })
         });
     });
 })

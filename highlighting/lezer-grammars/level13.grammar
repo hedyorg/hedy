@@ -35,7 +35,7 @@ ListAccess { Text at+ (random+ | Text | Number) }
 Add { add+ (Expression ) toList+ Text }
 Remove { remove+ (Expression ) from+ Text }
 Clear { clear+ }
-Play { play+ Text+ }
+Play { play+ (ListAccess | Expression) }
 
 Turtle[@isGroup=turtle] {
     Forward { forward+ (Expression | ListAccess ) } |
@@ -47,9 +47,9 @@ If { ifs+ Condition ((and+ | or+) Condition)* }
 Else { elses+ } 
 
 Condition { 
-    EqualityCheck { Text (is+ | Op<"=">) (Expression | pressed+) } |
-    InListCheck { Text ins+  Text } |
-    NotInListCheck { Text not_in+  Text }
+    EqualityCheck { (String | Text | Number) (is+ | Op<"=">) (Expression | pressed+) } |
+    InListCheck { (String | Text | Number) ins+ Text } |
+    NotInListCheck { (String | Text | Number) not_in+ Text }
 }
 
 Repeat { repeat+ (Number | Text) times+ }

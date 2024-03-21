@@ -181,16 +181,16 @@ class TestsLevel3(HedyTester):
         code = textwrap.dedent("""\
             n is 1, 2, 3
             sleep n at 1""")
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         n = ['1', '2', '3']
         try:
           try:
             n[int(1)-1]
           except IndexError:
-            raise Exception('catch_index_exception')
+            raise Exception({self.index_exception_transpiled()})
           time.sleep(int(n[int(1)-1]))
         except ValueError:
-          raise Exception('catch_value_exception')""")
+          raise Exception({self.value_exception_transpiled()})""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
@@ -199,10 +199,9 @@ class TestsLevel3(HedyTester):
             time is 10
             sleep time""")
 
-        expected = HedyTester.dedent("""\
-            _time = '10'""",
-                                     HedyTester.sleep_command_transpiled('_time')
-                                     )
+        expected = HedyTester.dedent(
+            "_time = '10'",
+            HedyTester.sleep_command_transpiled('_time'))
 
         self.multi_level_tester(
             code=code,
@@ -214,16 +213,16 @@ class TestsLevel3(HedyTester):
         code = textwrap.dedent("""\
             n is 1, 2, 3
             sleep n at random""")
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         n = ['1', '2', '3']
         try:
           try:
             random.choice(n)
           except IndexError:
-            raise Exception('catch_index_exception')
+            raise Exception({self.index_exception_transpiled()})
           time.sleep(int(random.choice(n)))
         except ValueError:
-          raise Exception('catch_value_exception')""")
+          raise Exception({self.value_exception_transpiled()})""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
@@ -869,11 +868,11 @@ class TestsLevel3(HedyTester):
         notes is C4, E4, D4, F4, G4
         play notes at random""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         notes = ['C4', 'E4', 'D4', 'F4', 'G4']
         chosen_note = str(random.choice(notes)).upper()
         if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
-            raise Exception('catch_value_exception')
+            raise Exception({self.value_exception_transpiled()})
         play(notes_mapping.get(chosen_note, chosen_note))
         time.sleep(0.5)""")
 

@@ -40,4 +40,25 @@ describe('Is able to run code', () => {
         cy.get('#not-logged-in-warning').should('be.visible');
       }
     })
+
+    it ("Old programs doesn't execute after cancelled", () => {
+      // Only works for now if the old program is stuck in an ask, and doesn't return an
+      // exception
+      cy.visit('/hedy/14#tic')
+      
+      const program_1 = "for i in range 1 to 10\n  choice = ask 'What is your choice?'"
+      cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').clear()
+      cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').type(program_1)
+      cy.get('#runit')
+
+      cy.getBySel('quizmaster').click()
+      const program_2 = "name = ask 'what is your name?'"
+      cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').clear()
+      cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').type(program_2)
+      cy.get('#runit').click()
+      cy.get('#ask-modal').type('Hedy')
+      cy.get('#ask-modal > form').submit()
+
+      cy.get('#ask-modal').should('not.be.visible')
+    })
   })

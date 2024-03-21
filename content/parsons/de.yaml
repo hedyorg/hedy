@@ -37,17 +37,8 @@ levels:
                 {print} Danke für deinen Einkauf bei uns!
     3:
         1:
-            story: |-
-                Das neue Schuljahr in Hogwarts beginnt!
-                Es ist die Aufgabe des Sortierhutes, dich in eines der Häuser zu sortieren.
-                In welches Haus wirst du einsortiert werden? Bist du ein Gryffindor, Hufflepuff, Ravenclaw oder Slytherin.
-                Bevor der Sortierhut dein Haus verrät, kannst du ihm sagen, dass er keines der Häuser auswählen soll.
-            code: |-
-                {print} Der Sortierhut ist bereit dich in eines der Hogwarts Häuser einzuteilen.
-                häuser {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
-                abneigung {is} {ask} Gibt es Häuser denen du nicht zugeteilt werden möchtest?
-                {remove} abneigung {from} häuser
-                {print} Wohl nicht abneigung, was? Besser ein... houses {at} {random}
+            story: "The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into? Are you a Gryffindor, Hufflepuff, Ravenclaw or Slytherin.\nBefore the sorting hat reveals your house, you can tell it to not pick one of the houses."
+            code: "{print} The sorting hat is ready to sort you into a Hogwarts house.\nhouses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin\ndislike {is} {ask} Are there any houses you do not want to be part of?\n{remove} dislike {from} houses\n{print} Not dislike eh? Better be... houses {at} {random}"
         2:
             story: Erstelle ein Programm, das eine zufällige Mahlzeit für dich auswählt. Erstelle eine Essensliste und eine Liste von Garnierungen und lasse das Programm entscheiden, was du essen wirst!
             code: |-
@@ -123,7 +114,7 @@ levels:
             code: |-
                 {print} 'Du hast Geburtstag!'
                 leute = {ask} 'Wie vielen Leuten möchtest du ein Stück Torte geben?'
-                kuchen_anzahl {is} leute/8
+                kuchen_anzahl = leute/8
                 {print} 'Du musst ' kuchen_anzahl ' Torten kaufen'
     7:
         1:
@@ -193,8 +184,8 @@ levels:
     10:
         1:
             story: |-
-                Help this family out by creating a schedule of who is cooking and what they should be making this week. The remove commands make sure nobody has to cook twice and they have a differnet dinner every day.
-                **Mind!** the variable order should be first days, then people, and lastly dinner_options. This goes for the lines with the remove commands too.
+                Hilf dieser Familie, indem du einen Plan erstellst, wer kocht und was sie diese Woche kochen sollten. Die `{remove}` Befehle stellen sicher, dass niemand zwei Mal kochen muss und dass es jeden Tag ein anderes Abendessen gibt.
+                **Beachte!** Die Reihenfolge der Variablen sollte zuerst Tage, dann Leute und dann Essensoption sein. Dies gilt auch für die Zeilen mit den `{remove}` Befehlen.
             code: |-
                 days = Monday, Tuesday, Wednesday, Thursday, Friday
                 people = mom, dad, Martin, Abby, Jesse
@@ -230,8 +221,8 @@ levels:
                 {print} 'Happy New Year!'
         2:
             story: |-
-                Create a program that tells us the final results of the science fair. Firstly define the variable contestants, then the variable place.
-                **Hint** Line 5 should be the sleep command, and you should end with saying congratulations.
+                Erstelle ein Programm, das uns die Ergebnisse der Wissenschaftsschau sagt. Definiere zuerst die Variable Teilnehmer, dann die Variable Platzierung.
+                **Hinweis** Zeile 5 sollte der Schlafbefehl sein und du solltest am Ende Glückwunsch sagen.
             code: |-
                 {print} 'And now we will reveal the results of the science fair'
                 contestants = Vivienne, Paul, Trixy, Bianca, Katya

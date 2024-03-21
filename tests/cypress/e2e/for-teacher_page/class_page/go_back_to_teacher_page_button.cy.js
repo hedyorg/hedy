@@ -10,7 +10,7 @@ describe('Is able to go to logs page', () => {
     cy.get(".view_class").first().click(); // Press view class button
     cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
 
-    cy.get('#go_back_to_teacher_page_button')
+    cy.get('#go_back_button')
       .should('be.visible')
       .should('not.be.disabled')
       .click();   

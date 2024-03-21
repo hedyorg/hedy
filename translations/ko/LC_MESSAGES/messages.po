@@ -7,16 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-01-29 20:23-0800\n"
-"PO-Revision-Date: 2024-02-10 12:08+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language-Team: ko <LL@li.org>\n"
+"POT-Creation-Date: 2000-01-01 00:00+0000\n"
+"PO-Revision-Date: 2000-01-01 00:00+0000\n"
+"Last-Translator: Someone <someone@example.com>\n"
 "Language: ko\n"
+"Language-Team: ko <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.4-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -91,6 +90,9 @@ msgstr "{line_number} 라인에서 명령을 사용하는 것을 잊어버린 �
 msgid "Missing Inner Command"
 msgstr "{line_number} 라인에서 사용한 {command} 문에 명령을 사용하지 않은 것 같습니다."
 
+msgid "Missing Square Brackets"
+msgstr "It looks like you forgot to use square brackets [] around the list you were creating on line {line_number}."
+
 #, fuzzy
 msgid "Missing Variable"
 msgstr "It looks like your {command} is missing a variable at the start of the line."
@@ -114,6 +116,10 @@ msgstr "입력한 코드가 올바른 Hedy 코드가 아닙니다. {location[1]}
 #, fuzzy
 msgid "Pressit Missing Else"
 msgstr "다른 키를 누를 때 발생하는 작업을 코드에 {else}을(를) 추가하지 않았습니다"
+
+#, fuzzy
+msgid "Save Microbit code "
+msgstr "Save Microbit code"
 
 #, fuzzy
 msgid "Too Big"
@@ -216,6 +222,14 @@ msgid "adventure_cloned"
 msgstr "Adventure is cloned"
 
 #, fuzzy
+msgid "adventure_code_button"
+msgstr "Adventure Code"
+
+#, fuzzy
+msgid "adventure_codeblock_button"
+msgstr "Use this button when you want to create a block of code that students can run in your adventure. Tip: put the selection at the end of the last line of the code block and <kbd>Enter</kbd> 3 times to type after a code block."
+
+#, fuzzy
 msgid "adventure_duplicate"
 msgstr "당신은 이미 동일한 모험 이름을 사용하고 있습니다."
 
@@ -224,16 +238,11 @@ msgid "adventure_empty"
 msgstr "모험 이름을 입력하지 않으셨군요!"
 
 #, fuzzy
-msgid "adventure_exp_1"
-msgstr "선택한 모험을 오른쪽에 입력합니다. 모험을 만든 후에는 \"사용자 지정\" 아래의 수업 중 하나에 모험을 포함시킬 수 있습니다. 모험에 명령어를 포함시키고 싶다면 다음과 같은 코드 앵커를 사용하십시오:"
-
-#, fuzzy
-msgid "adventure_exp_2"
-msgstr "예를 들어 학생에게 템플릿이나 코드 예제를 제공하는 등 실제 코드 조각을 보여주고 싶다면 다음과 같이 프리앵커를 사용하십시오:"
-
-#, fuzzy
 msgid "adventure_exp_3"
 msgstr "키워드를 항상 {}(으)로 둘러싸야 합니다. 그러면 키워드가 올바르게 인식됩니다. 미리보기 버튼을 사용하여 모험의 스타일화된 버전을 볼 수 있습니다. 모험을 전용 페이지에서 보려면 선생님 페이지에서 \"보기\"를 선택합니다."
+
+msgid "adventure_exp_classes"
+msgstr "Your adventure is used within the following classes"
 
 #, fuzzy
 msgid "adventure_id_invalid"
@@ -258,10 +267,6 @@ msgstr "나는 내 모험이 Hedy에서 공유 되는 것에 동의합니다."
 #, fuzzy
 msgid "adventure_updated"
 msgstr "모험이 업데이트 되었습니다!"
-
-#, fuzzy
-msgid "adventures"
-msgstr "사용 가능한 모험"
 
 #, fuzzy
 msgid "adventures_info"
@@ -332,12 +337,8 @@ msgid "ask_needs_var"
 msgstr "레벨 2부터 {ask}을(를) 변수와 함께 사용해야 합니다. 예: 이름 {is} {ask} 무엇이라고 부르십니까?"
 
 #, fuzzy
-msgid "back_to_class"
-msgstr "수업으로 돌아가기"
-
-#, fuzzy
-msgid "back_to_teachers_page"
-msgstr "선생님 페이지로 돌아가기"
+msgid "available_in"
+msgstr "Available in:"
 
 #, fuzzy
 msgid "become_a_sponsor"
@@ -346,6 +347,10 @@ msgstr "후원자 되기"
 #, fuzzy
 msgid "birth_year"
 msgstr "출생년도"
+
+#, fuzzy
+msgid "bug"
+msgstr "Bug"
 
 #, fuzzy
 msgid "by"
@@ -362,6 +367,9 @@ msgstr "프로그램을 구문 분석할 수 없습니다"
 #, fuzzy
 msgid "catch_index_exception"
 msgstr "{list_name} 목록에 액세스하려고 했지만 비어 있거나 인덱스가 없습니다."
+
+msgid "catch_multiple_values_exception"
+msgstr "While running your program the command {command} received the values {value} and {value} which are not allowed. {suggestion}."
 
 #, fuzzy
 msgid "catch_value_exception"
@@ -660,6 +668,14 @@ msgid "disable"
 msgstr "사용 안 함"
 
 #, fuzzy
+msgid "disable_parsons"
+msgstr "Disable all puzzles"
+
+#, fuzzy
+msgid "disable_quizes"
+msgstr "Disable all quizes"
+
+#, fuzzy
 msgid "disabled"
 msgstr "비활성화됨"
 
@@ -804,6 +820,26 @@ msgid "favourite_success"
 msgstr "프로그램이 즐겨찾기로 설정되어 있습니다."
 
 #, fuzzy
+msgid "feature"
+msgstr "Feature"
+
+#, fuzzy
+msgid "feedback"
+msgstr "Feedback"
+
+#, fuzzy
+msgid "feedback_message_error"
+msgstr "Something went wrong, please try again later."
+
+#, fuzzy
+msgid "feedback_message_success"
+msgstr "Thank you, we recieved your feedback and will contact you if needed."
+
+#, fuzzy
+msgid "feedback_modal_message"
+msgstr "Please send us a message with a category. We appreciate your help to improve Hedy!"
+
+#, fuzzy
 msgid "female"
 msgstr "여자"
 
@@ -862,6 +898,10 @@ msgstr "자격증을 따세요!"
 #, fuzzy
 msgid "give_link_to_teacher"
 msgstr "선생님께 다음 링크를 드립니다:"
+
+#, fuzzy
+msgid "go_back"
+msgstr "Go back"
 
 #, fuzzy
 msgid "go_back_to_main"
@@ -924,10 +964,6 @@ msgid "hello_logo"
 msgstr "안녕하세요"
 
 #, fuzzy
-msgid "hello_world"
-msgstr "안녕하세요!"
-
-#, fuzzy
 msgid "hidden"
 msgstr "숨기기"
 
@@ -938,14 +974,6 @@ msgstr "컨닝 페이퍼 숨기기"
 #, fuzzy
 msgid "hide_keyword_switcher"
 msgstr "키워드 변환기 숨기기"
-
-#, fuzzy
-msgid "hide_parsons"
-msgstr "퍼즐 숨기기"
-
-#, fuzzy
-msgid "hide_quiz"
-msgstr "퀴즈 숨기기"
 
 #, fuzzy
 msgid "highest_level_reached"
@@ -1292,6 +1320,14 @@ msgid "mandatory_mode"
 msgstr "필수 개발자 모드"
 
 #, fuzzy
+msgid "more_options"
+msgstr "More options"
+
+#, fuzzy
+msgid "multiple_levels_warning"
+msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
+
+#, fuzzy
 msgid "my_account"
 msgstr "나의 계정"
 
@@ -1522,6 +1558,10 @@ msgstr "page"
 #, fuzzy
 msgid "page_not_found"
 msgstr "We couldn't find that page!"
+
+#, fuzzy
+msgid "pair_with_teacher"
+msgstr "I would like to be paired with another teacher for help"
 
 #, fuzzy
 msgid "parsons_title"
@@ -1921,6 +1961,9 @@ msgstr "Select all"
 msgid "select_lang"
 msgstr "Select language"
 
+msgid "select_levels"
+msgstr "Select levels"
+
 #, fuzzy
 msgid "select_tag"
 msgstr "Select tag"
@@ -1950,20 +1993,8 @@ msgid "settings"
 msgstr "개인 정보 설정"
 
 #, fuzzy
-msgid "share"
-msgstr "공유하다"
-
-#, fuzzy
 msgid "share_by_giving_link"
 msgstr "다른 사용자에게 아래 링크를 제공하여 프로그램을 보여줍니다:"
-
-#, fuzzy
-msgid "share_confirm"
-msgstr "프로그램을 공개로 설정 하시겠습니까?"
-
-#, fuzzy
-msgid "share_success_detail"
-msgstr "프로그램이 성공적으로 공유되었습니다."
 
 #, fuzzy
 msgid "share_your_program"
@@ -1980,6 +2011,10 @@ msgstr "인용구 하나"
 #, fuzzy
 msgid "slash"
 msgstr "slash"
+
+#, fuzzy
+msgid "sleeping"
+msgstr "Sleeping..."
 
 #, fuzzy
 msgid "slides"
@@ -2010,6 +2045,10 @@ msgid "start_hedy_tutorial"
 msgstr "hedy 튜토리얼 시작"
 
 #, fuzzy
+msgid "start_learning"
+msgstr "Start learning"
+
+#, fuzzy
 msgid "start_programming"
 msgstr "프로그래밍시작"
 
@@ -2024,6 +2063,10 @@ msgstr "퀴즈시작"
 #, fuzzy
 msgid "start_teacher_tutorial"
 msgstr "선생님 튜토리얼 시작하기"
+
+#, fuzzy
+msgid "start_teaching"
+msgstr "Start teaching"
 
 #, fuzzy
 msgid "step_title"
@@ -2117,6 +2160,9 @@ msgstr "Use a note between C0 and B9 or a number between 1 and 70"
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
 
+msgid "suggestion_numbers_or_strings"
+msgstr "Try changing the values to be all text or all numbers"
+
 #, fuzzy
 msgid "surname"
 msgstr "First Name"
@@ -2198,8 +2244,8 @@ msgstr ""
 "\n"
 "But sometimes I might want to show a piece of code, like this:\n"
 "<pre>\n"
-"{ask} What's your name?\n"
-"{echo} so your name is \n"
+"ask What's your name?\n"
+"echo so your name is \n"
 "</pre>"
 
 #, fuzzy
@@ -2319,10 +2365,6 @@ msgid "translator"
 msgstr "Translator"
 
 #, fuzzy
-msgid "try_it"
-msgstr "시작하기"
-
-#, fuzzy
 msgid "tutorial"
 msgstr "튜토리얼"
 
@@ -2357,18 +2399,6 @@ msgid "unsaved_class_changes"
 msgstr "There are unsaved changes, are you sure you want to leave this page?"
 
 #, fuzzy
-msgid "unshare"
-msgstr "Unshare"
-
-#, fuzzy
-msgid "unshare_confirm"
-msgstr "Are you sure you want to make the program private?"
-
-#, fuzzy
-msgid "unshare_success_detail"
-msgstr "Program unshared successfully."
-
-#, fuzzy
 msgid "update_adventure_prompt"
 msgstr "Are you sure you want to update this adventure?"
 
@@ -2391,6 +2421,10 @@ msgstr "Use of blanks in programs"
 #, fuzzy
 msgid "use_of_nested_functions_exception"
 msgstr "Use of nested functions"
+
+#, fuzzy
+msgid "used_in"
+msgstr "Used in:"
 
 #, fuzzy
 msgid "user"
@@ -2511,3 +2545,43 @@ msgstr "Your program"
 
 #~ msgid "write_first_program"
 #~ msgstr "Write your first program!"
+
+#~ msgid "adventures"
+#~ msgstr "사용 가능한 모험"
+
+#~ msgid "share_confirm"
+#~ msgstr "프로그램을 공개로 설정 하시겠습니까?"
+
+#~ msgid "share_success_detail"
+#~ msgstr "프로그램이 성공적으로 공유되었습니다."
+
+#~ msgid "try_it"
+#~ msgstr "시작하기"
+
+#~ msgid "unshare_confirm"
+#~ msgstr "Are you sure you want to make the program private?"
+
+#~ msgid "unshare_success_detail"
+#~ msgstr "Program unshared successfully."
+
+#~ msgid "adventure_exp_2"
+#~ msgstr "If you want to show actual code snippets, for example to give student a template or example of the code. Please use pre anchors like this:"
+
+#~ msgid "hello_world"
+#~ msgstr "Hello world!"
+
+#~ msgid "adventure_exp_1"
+#~ msgstr "Type your adventure of choice on the right-hand side. After creating your adventure you can include it in one of your classes under \"customizations\". If you want to include a command in your adventure please use code anchors like this:"
+
+#~ msgid "hide_parsons"
+#~ msgstr "퍼즐 숨기기"
+
+#~ msgid "hide_quiz"
+#~ msgstr "퀴즈 숨기기"
+
+#~ msgid "back_to_class"
+#~ msgstr "수업으로 돌아가기"
+
+#~ msgid "classes"
+#~ msgstr ""
+

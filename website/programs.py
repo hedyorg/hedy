@@ -3,6 +3,8 @@ from typing import Optional
 
 from flask import g, request, jsonify
 from flask_babel import gettext
+import jinja_partials
+import hedy_content
 
 import hedy
 import utils
@@ -205,19 +207,12 @@ class ProgramsModule(WebsiteModule):
             "achievements": self.achievements.get_earned_achievements(),
         })
 
-    @route("/share", methods=["POST"])
+    @route("/share/<program_id>", methods=['POST'], defaults={'loop_index': 0, 'second_teachers_programs': False})
+    @route("/share/<program_id>/<loop_index>/<second_teachers_programs>", methods=["POST"])
     @requires_login
-    def share_unshare_program(self, user):
-        body = request.json
-        if not isinstance(body, dict):
-            return "body must be an object", 400
-        if not isinstance(body.get("id"), str):
-            return "id must be a string", 400
-        if not isinstance(body.get("public"), bool):
-            return "public must be a boolean", 400
-
-        result = self.db.program_by_id(body["id"])
-        if not result or result["username"] != user["username"]:
+    def share_unshare_program(self, user, program_id, loop_index, second_teachers_programs):
+        program = self.db.program_by_id(program_id)
+        if not program or program["username"] != user["username"]:
             return "No such program!", 404
 
         # This only happens in the situation were a user un-shares their favourite program -> Delete from public profile
@@ -225,26 +220,30 @@ class ProgramsModule(WebsiteModule):
         if (
             public_profile
             and "favourite_program" in public_profile
-            and public_profile["favourite_program"] == body["id"]
+            and public_profile["favourite_program"] == program_id
         ):
             self.db.set_favourite_program(user["username"], None)
 
-        program = self.db.set_program_public_by_id(body["id"], bool(body["public"]))
-        achievement = self.achievements.add_single_achievement(user["username"], "sharing_is_caring")
-
-        resp = {
-            "id": body["id"],
-            "public": bool(body["public"]),
-            "save_info": SaveInfo.from_program(Program.from_database_row(program)),
-        }
-
-        if bool(body["public"]):
-            resp["message"] = gettext("share_success_detail")
+        if program.get("public"):
+            public = 0
         else:
-            resp["message"] = gettext("unshare_success_detail")
+            public = 1
+        program = self.db.set_program_public_by_id(program_id, public)
+        achievement = self.achievements.add_single_achievement(user["username"], "sharing_is_caring")
         if achievement:
-            resp["achievement"] = achievement
-        return jsonify(resp)
+            utils.add_pending_achievement({"achievement": achievement})
+
+        keyword_lang = g.keyword_lang
+        adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
+        program["date"] = utils.delta_timestamp(program["date"])
+        program["preview_code"] = "\n".join(program["code"].split("\n")[:4])
+        program["number_lines"] = program["code"].count('\n') + 1
+        return jinja_partials.render_partial('htmx-program.html',
+                                             program=program,
+                                             adventure_names=adventure_names,
+                                             public_profile=public_profile,
+                                             loop_index=loop_index,
+                                             second_teachers_programs=second_teachers_programs == 'True')
 
     @route("/submit", methods=["POST"])
     @requires_login

@@ -1,6 +1,7 @@
 from collections import namedtuple
 from enum import Enum
-
+from difflib import SequenceMatcher
+import re
 from flask import g, jsonify, request
 from flask_babel import gettext
 import utils
@@ -15,6 +16,7 @@ from website.auth import is_admin, is_teacher, requires_admin, requires_login
 
 from .database import Database
 from .website_module import WebsiteModule, route
+from bs4 import BeautifulSoup
 
 """The Key tuple is used to aggregate the raw data by level, time or username."""
 Key = namedtuple("Key", ["name", "class_"])
@@ -153,9 +155,10 @@ class StatisticsModule(WebsiteModule):
         class_ = self.db.get_class(class_id)
         if hedy_content.Adventures(g.lang).has_adventures():
             adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+            full_adventures = hedy_content.Adventures(g.lang).get_adventures(g.keyword_lang)
         else:
+            full_adventures = hedy_content.Adventures("en").get_adventures(g.keyword_lang)
             adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
-
         students = sorted(class_.get("students", []))
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
 
@@ -185,7 +188,6 @@ class StatisticsModule(WebsiteModule):
             programs = self.db.last_level_programs_for_user(student, level)
             if programs:
                 ticked_adventures[student] = []
-                current_program = {}
                 for _, program in programs.items():
                     # Old programs sometimes don't have adventures associated to them
                     # So skip them
@@ -193,7 +195,8 @@ class StatisticsModule(WebsiteModule):
                         continue
                     name = adventure_names.get(program['adventure_name'], program['adventure_name'])
                     customized_level = class_adventures_formatted.get(str(program['level']))
-                    if name in customized_level:
+                    if name in customized_level\
+                            and self.is_program_modified(program, full_adventures, teacher_adventures):
                         student_adventure_id = f"{student}-{program['adventure_name']}-{level}"
                         current_adventure = self.db.student_adventure_by_id(student_adventure_id)
                         if not current_adventure:
@@ -208,6 +211,70 @@ class StatisticsModule(WebsiteModule):
                         ticked_adventures[student].append(current_program)
 
         return students, class_, class_adventures_formatted, ticked_adventures, adventure_names, student_adventures
+
+    def is_program_modified(self, program, full_adventures, teacher_adventures):
+        # a single adventure migh have several code snippets, formatted using markdown
+        # we need to get them individually
+        adventure_info = full_adventures.get(program['adventure_name'], {})\
+            .get('levels', {})\
+            .get(program['level'], {})
+
+        example_codes = []
+        # for what I can see the examples codes start with no index, and then jump to two
+        # e.g: example_code, example_code_2, etc.
+        example_codes.append(adventure_info.get('example_code', ''))
+        i = 2
+        while adventure_info.get(f'example_code_{i}') is not None:
+            example_codes.append(adventure_info[f'example_code_{i}'])
+            i += 1
+        # Examples codes sometimes are not single code sections
+        # but actually can be several code sections mixed with text
+        # formatted using markdown.
+        adventure_snippets = []
+        for code in example_codes:
+            consecutive_backticks = 0
+            inside_code = False
+            previous_char = ''
+            code_start = -1
+            for index, char in enumerate(code):
+                if char == '`':
+                    consecutive_backticks += 1
+                    if consecutive_backticks == 3:
+                        # We've already finished the code section, which means
+                        # we can add it to the example_codes array
+                        if inside_code:
+                            adventure_snippets.append(code[code_start:index-3])
+                            inside_code = False
+                        # We are starting a code section, therefore we need to save this index
+                        else:
+                            code_start = index + 1
+                            inside_code = True
+                # if we find a char before 3 consecutive backticks it's either inline code
+                # or a malformed code section
+                elif char != '`' and previous_char == '`':
+                    consecutive_backticks = 0
+                previous_char = char
+        # now we have to get the snippets of the teacher adventures
+        for adventure in teacher_adventures:
+            if program['adventure_name'] == adventure["id"]:
+                content = adventure['content']
+                soup = BeautifulSoup(content, features="html.parser")
+                for pre in soup.find_all('pre'):
+                    adventure_snippets.append(pre.contents[0])
+
+        student_code = program['code']
+        student_code = student_code
+        # now we have to calculate the differences between the student code and the code snippets
+        can_save = True
+        for snippet in adventure_snippets:
+            seq_match = SequenceMatcher(None, snippet, student_code)
+            # Allowing a difference of more than 10% or the student filled the placeholders
+            if seq_match.ratio() > 0.95 and (self.has_placeholder(student_code) or not self.has_placeholder(snippet)):
+                can_save = False
+        return can_save
+
+    def has_placeholder(self, code):
+        return re.search(r'(?<![^ \n])(_)(?= |$)', code, re.M) is not None
 
 
 class LiveStatisticsModule(WebsiteModule):

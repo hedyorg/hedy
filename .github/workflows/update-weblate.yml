@@ -1,0 +1,37 @@
+# Get Weblate to commit and push changes to a PR,
+# which will be auto-approved.
+name: Update Weblate
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # 6 in the morning
+    - cron:  '0 6 * * *'
+
+jobs:
+  update-weblate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.12
+    - name: Install Weblate Client
+      run: pip install wlc
+    - name: Prepare client config
+      run: |
+        echo '[weblate]' >> .weblate
+        echo 'url = https://hosted.weblate.org/api/' >> .weblate
+        echo 'translation = hedy' >> .weblate
+        echo '[keys]' >> .weblate
+        echo 'https://hosted.weblate.org/api/ = ${{ secrets.WEBLATE_API_KEY }}' >> .weblate
+    - name: Weblate commands
+      run: |
+        set -x
+        wlc repo
+        wlc pull
+        wlc commit
+        wlc push
+
+

@@ -45,7 +45,7 @@ levels:
             text: La salida también puede ser un dibujo.
             code: |-
                 {forward} 100
-                {turn} izquierda
+                {turn} {left}
     1:
         1:
             header: ¡Bienvenido al nivel 1!
@@ -116,7 +116,7 @@ levels:
             text: '`{turn}` se utiliza para hacer que la tortuga gire a la izquierda o a la derecha.'
             code: |-
                 {forward} 50
-                {turn} izquierda
+                {turn} {left}
         12:
             header: Depurar
             text: Depurar un código significa eliminar los errores en el código. Depuremos este código juntos. Haz clic en el botón de la mariquita para iniciar el depurador.
@@ -726,18 +726,17 @@ levels:
             header: Debugging
             text: Let's debug this code
             code: |-
-                {print} 'Ladies and gentlemen!'
-                {print} 'For one night and one night only in circus Hedy!'
-                acts = shoot out of a canon, walk the tightrope, pack themself in a suitcase,
-                people = Iris the Incredible Achmed the Amazing Francis the Fantastic
-                    {for} people {in} acts
-                chosen_person {is} people {random}
+                {print} "¡Damas y caballeros!"
+                {print} '¡Por una noche y una sola noche en el circo Hedy!'
+                actos = disparar de un cañón, caminar por la cuerda floja, meterse en una maleta,
+                gente = Iris la Increíble Achmed el Increíble Francis el Fantástico
+                    {for} personas {in} actos
+                chosen_person {es} personas {random}
                     chosen_person ' will ' act
-                {add} chosen_person {from} people
-                {print} 'Come and watch our show tonight!'
-                {print} 'Tickets are only available at the counter
-            debug: true {print} '¡Señoras y señores!' {print} '¡Por una noche y sólo una noche en el circo Hedy!' actos = disparar desde un cañón, funambulismo, meterse en una maleta, gente = Iris la Increíble Achmed el Maravilloso Francis el Fantástico {for} gente {in} actos persona_elegida {is} gente
-                {random} persona_elegida ' hará ' act {add} persona_elegida {from} gente {print} '¡Ven a ver nuestro espectáculo esta noche!' {print} 'Las entradas sólo están disponibles en la taquilla
+                {add} chosen_person {from} personas
+                {print} '¡Ven a ver nuestro espectáculo esta noche!'
+                {print} 'Las entradas sólo están disponibles en el mostrador
+            debug: true {print} '¡Señoras y señores!' {print} '¡Por una noche y sólo una noche en el circo Hedy!' actos = disparar desde un cañón, funambulismo, meterse en una maleta, gente = Iris la Increíble Achmed el Maravilloso Francis el Fantástico {for} gente {in} actos persona_elegida {is} gente {random} persona_elegida ' hará ' act {add} persona_elegida {from} gente {print} '¡Ven a ver nuestro espectáculo esta noche!' {print} 'Las entradas sólo están disponibles en la taquilla
         5:
             header: ¡Hora de programar!
             text: ¡Disfruta las aventuras en el nivel 10!
@@ -1013,24 +1012,24 @@ levels:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                item = 'not bought'
-                {print} 'I would like to buy this item'
-                price == {ask} 'What is the price?'
-                {if} price less than or the same as 10
-                    {print} 'Thats a great deal!'
-                    item = 'bought'
-                {if} price is more than 10 {and} less than or the same as 20
-                    {print} 'Alright'
-                    item = 'bought'
-                {if} price is more than 20 {and} less than 50
-                    {print} 'That is a bit much!'
-                {if} price is more than or the same as 50
-                    {print} 'No way!'
-                {if} item =! bought
-                    {print} 'Shame.. I wont buy it'
+                item = 'no comprado'
+                {print} 'Me gustaría comprar este artículo'
+                price == {ask} '¿Cuál es el precio?'
+                {si} precio inferior o igual a 10
+                    {print} '¡Eso es mucho!'
+                    artículo = 'comprado'
+                {if} precio es superior a 10 {and} inferior o igual a 20
+                    {print} 'De acuerdo'
+                    artículo = 'comprado'
+                {if} precio es superior a 20 {and} inferior a 50
+                    {print} '¡Eso es demasiado!'
+                {si} precio es mayor o igual que 50
+                    {print} '¡De ninguna manera!'
+                {if} artículo =! comprado
+                    {print} 'Vergüenza.. No lo voy a comprar.
                 {else}
-                    {print} 'I will buy it! Thank you!'
-            debug: true
+                    {print} '¡Lo compraré! ¡Gracias!"
+            debug: 'True'
         7:
             header: ¡Manos a la obra!
             text: ¡Disfruta de las aventuras en el nivel 14!
@@ -1058,8 +1057,7 @@ levels:
             text: En este nivel aprenderás sobre los [corchetes] y cómo se usan.
         2:
             header: Corchetes
-            text: Vamos a hacer listas a la manera de Python, ¡con corchetes alrededor de las listas! También mantendremos las comillas alrededor de cada objeto como hemos aprendido en los niveles anteriores. Usamos corchetes para apuntar a un lugar en una lista. El comando en aleatorio ya no se puede
-                usar nunca más.
+            text: Vamos a hacer listas a la manera de Python, ¡con corchetes alrededor de las listas! También mantendremos las comillas alrededor de cada objeto como hemos aprendido en los niveles anteriores. Usamos corchetes para apuntar a un lugar en una lista. El comando en aleatorio ya no se puede usar nunca más.
             code: |-
                 amigos = ['Ahmed', 'Ben', 'Cayden']
                 {print} amigos[1] ' es el primer amigo en la lista.'
@@ -1106,8 +1104,7 @@ levels:
     18:
         1:
             header: Bienvenido al nivel 18
-            text: ¡Enhorabuena! ¡Has alcanzado el último nivel de Hedy! El código que has creado se puede copiar a un entorno de Python como replit o PyCharm, ¡y puedes continuar aprendiendo allí! Sin embargo ten en cuenta que Python sólo puede ller comandos en inglés, así que si has usado otros lenguajes,
-                tendrás ahora que cambiar a inglés.
+            text: ¡Enhorabuena! ¡Has alcanzado el último nivel de Hedy! El código que has creado se puede copiar a un entorno de Python como replit o PyCharm, ¡y puedes continuar aprendiendo allí! Sin embargo ten en cuenta que Python sólo puede ller comandos en inglés, así que si has usado otros lenguajes, tendrás ahora que cambiar a inglés.
         2:
             header: Al estilo Python
             text: |-

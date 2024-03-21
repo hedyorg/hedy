@@ -138,7 +138,7 @@ class HedyTester(unittest.TestCase):
         code = re.sub(r'time\.sleep\([^\n]*\)', 'pass', code)
 
         with HedyTester.captured_output() as (out, err):
-            exec(code)
+            exec(code, locals())
         return out.getvalue().strip()
 
     def name(self):
@@ -180,7 +180,8 @@ class HedyTester(unittest.TestCase):
             lang='en',
             translate=True,
             output=None,
-            skip_faulty=True
+            skip_faulty=True,
+            microbit=False
     ):
         # used to test the same code snippet over multiple levels
         # Use exception to check for an exception
@@ -212,7 +213,8 @@ class HedyTester(unittest.TestCase):
                 lang=lang,
                 translate=translate,
                 output=output,
-                skip_faulty=skip_faulty)
+                skip_faulty=skip_faulty,
+                microbit=microbit)
             print(f'Passed for level {level}')
 
     def single_level_tester(
@@ -229,6 +231,7 @@ class HedyTester(unittest.TestCase):
             lang='en',
             translate=True,
             skip_faulty=True,
+            microbit=False
     ):
         if level is None:  # no level set (from the multi-tester)? grap current level from class
             level = self.level
@@ -268,7 +271,8 @@ class HedyTester(unittest.TestCase):
                     if extra_check_function is not None:
                         self.assertTrue(extra_check_function(context))
                 else:
-                    result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty, unused_allowed=unused_allowed)
+                    result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty,
+                                            unused_allowed=unused_allowed, microbit=microbit)
                     if expected is not None:
                         self.assertEqual(expected, result.code)
 
@@ -278,7 +282,11 @@ class HedyTester(unittest.TestCase):
                     # <- use this to run tests locally with unittest
                     skipped_commands = ['ask', 'input', 'clear', 'play']
                     if not any(x for x in skipped_commands if x in all_commands):
-                        self.assertTrue(self.validate_Python_code(result))
+                        if microbit:
+                            return
+                        else:
+                            self.assertTrue(self.validate_Python_code(result))
+
                     if output is not None:
                         if extra_check_function is None:  # most programs have no turtle so make that the default
                             extra_check_function = self.is_not_turtle()
@@ -372,36 +380,36 @@ class HedyTester(unittest.TestCase):
 
         type = 'int' if level < 12 else 'float'
 
-        return textwrap.dedent(f"""\
+        return textwrap.dedent(f'''\
       __trtl = {val}
       try:
         __trtl = {type}(__trtl)
       except ValueError:
-        raise Exception('catch_value_exception')
-      t.{command}(min(600, __trtl) if __trtl > 0 else max(-600, __trtl)){suffix}""")
+        raise Exception("""catch_value_exception""")
+      t.{command}(min(600, __trtl) if __trtl > 0 else max(-600, __trtl)){suffix}''')
 
     @staticmethod
     def sleep_command_transpiled(val):
-        return textwrap.dedent(f"""\
+        return textwrap.dedent(f'''\
         try:
           time.sleep(int({val}))
         except ValueError:
-          raise Exception('catch_value_exception')""")
+          raise Exception("""catch_value_exception""")''')
 
     @staticmethod
     def turtle_color_command_transpiled(val, lang="en"):
         color_dict = {hedy_translation.translate_keyword_from_en(x, lang): x for x in hedy.english_colors}
         both_colors = hedy.command_make_color_local(lang)
 
-        return textwrap.dedent(f"""\
+        return textwrap.dedent(f'''\
         __trtl = f'{val}'
         color_dict = {color_dict}
         if __trtl not in {both_colors}:
-          raise Exception('catch_value_exception')
+          raise Exception("""catch_value_exception""")
         else:
           if not __trtl in {hedy.english_colors}:
             __trtl = color_dict[__trtl]
-        t.pencolor(__trtl)""")
+        t.pencolor(__trtl)''')
 
     @staticmethod
     def input_transpiled(var_name, text):
@@ -425,14 +433,45 @@ class HedyTester(unittest.TestCase):
 
     @staticmethod
     def list_access_transpiled(list_access):
-        return textwrap.dedent(f"""\
+        return textwrap.dedent(f'''\
         try:
           {list_access}
         except IndexError:
-          raise Exception('catch_index_exception')""")
+          raise Exception("""catch_index_exception""")''')
+
+    @staticmethod
+    def variable_type_check_transpiled(variable, type_,):
+        return textwrap.dedent(f'''\
+        try:
+          {type_}({variable})
+        except ValueError:
+          raise Exception(f"""catch_value_exception""")''')
+
+    @staticmethod
+    def int_cast_transpiled(val, quotes=True):
+        value = f"'{val}'" if quotes else val
+        return f'''int_with_error({value}, """catch_value_exception""")'''
+
+    @staticmethod
+    def number_cast_transpiled(val, quotes=False):
+        value = f"'{val}'" if quotes else val
+        return f'''number_with_error({value}, """catch_value_exception""")'''
+
+    @staticmethod
+    def addition_transpiled(left, right):
+        return f'''sum_with_error({left}, {right}, """catch_multiple_values_exception""")'''
+
+    @staticmethod
+    def value_exception_transpiled():
+        return '"""catch_value_exception"""'
+
+    @staticmethod
+    def index_exception_transpiled():
+        return '"""catch_index_exception"""'
 
     # Used to overcome indentation issues when the above code is inserted
     # in test cases which use different indentation style (e.g. 2 or 4 spaces)
+
     @staticmethod
     def dedent(*args):
         return '\n'.join([textwrap.indent(textwrap.dedent(a[0]), a[1]) if isinstance(a, tuple) else textwrap.dedent(a)
@@ -478,7 +517,10 @@ class HedyTester(unittest.TestCase):
 
         return snippets
 
-    def output_test_error(self, E, snippet):
+    def format_test_error(self, E, snippet):
+        """Given a snippet and an exception, return a string describing the problem."""
+        message = []
+
         arrow = True  # set to False if you want to remove the <---- in the output f.e. for easy copy-pasting
         try:
             location = E.error_location
@@ -491,16 +533,25 @@ class HedyTester(unittest.TestCase):
                 error_message = translate_error(E.error_code, E.arguments, 'en')
                 error_message = error_message.replace('<span class="command-highlighted">', '`')
                 error_message = error_message.replace('</span>', '`')
-                lines = snippet.code.split('\n')
-                lines_with_numbers = [lines[i] + " <-------" if i+1 == location[0]
-                                      and arrow else lines[i] for i in range(len(lines))]
-                code_with_numbers = '\n'.join(lines_with_numbers)
 
-                print(f'\n----\n{code_with_numbers}')
-                print(f'----\n{snippet.original_code}\n----')
-                print(f'in language {snippet.language} from level {snippet.level} gives error:')
-                print(f'{error_message} at line {location}')
-                raise E
+        def add_arrow(code):
+            """Adds an arrow to the given code snippet on the line that caused the error."""
+            if not arrow:
+                return code
+            lines = code.split('\n')
+            lines = [line + (" <---- ERROR HERE" if i+1 == location[0] else "")
+                     for i, line in enumerate(lines)]
+            return '\n'.join(lines).strip()
+
+        message.append('======================================================================')
+        message.append(f'Language {snippet.language}, level {snippet.level} produces an error:')
+        message.append(f'{error_message} at line {location}')
+        message.append('-- keywords --')
+        message.append(add_arrow(snippet.original_code))
+        message.append('-- translated --')
+        message.append(add_arrow(snippet.code))
+
+        return '\n'.join(message)
 
 
 def create_hash(hedy_language, test_hash):

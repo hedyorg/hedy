@@ -16,9 +16,9 @@ adventures:
                     ```
                     {ask} The main character of this story is
                     {print} The main character is now going to walk in the forest
-                    {echo} He's a bit scared,
-                    {print} He hears crazy noises everywhere
-                    {print} He's afraid this is a haunted forest
+                    {echo} They're a bit scared,
+                    {print} They hear crazy noises everywhere
+                    {print} They're afraid this is a haunted forest
                     ```
                 story_text_2: |
                     ### Exercise
@@ -35,7 +35,7 @@ adventures:
                     name {is} {ask} What is the name of the main character?
                     {print} name is now going to run in the woods
                     {print} name is a bit scared
-                    {print} Suddenly he hears a crazy noise...
+                    {print} Suddenly she hears a crazy noise...
                     {sleep}
                     {print} name is afraid this is a haunted forest
                     ```
@@ -54,7 +54,7 @@ adventures:
                 example_code: |
                     ```
                     animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} He now hears the sound of an animals {at} {random}
+                    {print} They now hear the sound of an animals {at} {random}
                     ```
                 story_text_2: |
                     The command `{add}` can also come in handy in your story.
@@ -78,17 +78,24 @@ adventures:
                     ```
             4:
                 story_text: |
-                    You may have noticed that there is still a problem in the previous levels. Did you try to print a sentence that contained the word name?
-                    You can solve that in this level. You must use quotation marks for everything that you are going to print.
+                    ### Exercise
+                    Copy the example code and finish it by adding quotation marks on the blanks in lines 1 and 2.
+                    The blanks in line 3 and 4 should not be replaced by quotation marks, but a `{sleep}` and a `{clear}` command. Can you make it work?
+
+                    ### Exercise 2
+                    Go back to the previous level and copy your story code. Make the code work in this level by adding quotation marks in the right spots.
+                    Mind: The variables in your own story should be outside of the quotation marks. Just like the second line of the example code. In that line the variable name is placed outside of the quotation marks.
                 example_code: |
                     ```
-                    name {is} Hans
-                    {print} 'The name of the main character is' name
-                    {print} name 'is now going to walk in the woods'
-                    {print} name 'is a bit scared'
+                    name {is} {ask} _ What is your name? _
+                    {print}  _ The main character is called _ name
+                    _
+                    _
+                    {print} name  _ is now going to walk in the woods _
+                    {print} name _ is a bit scared _
                     animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} 'He hears the sound of an' animals {at} {random}
-                    {print} name 'is afraid this is a haunted forest'
+                    {print} _ He hears the sound of a _ animals {at} {random}
+                    {print} name _ is afraid this is a haunted forest _
                     ```
             5:
                 story_text: |
@@ -259,7 +266,7 @@ adventures:
             3:
                 story_text: |
                     ## Add to
-                    You can add items to the list with the `{add} {to}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
+                    You can add items to the list with the `{add} {to_list}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
                 example_code: |
                     ```
                     animals {is} dog, cat, kangaroo
@@ -315,15 +322,15 @@ adventures:
             1:
                 story_text: |
                     ## The ask command
-                    Now that o kgona to use the `{print}` command, you are ready to learn the next command ye bitswang: `{ask}`. With the `{ask}` command, oka botsa potso. Check it out:
+                    Now that you can use the `{print}` command, you are ready to learn the next command: `{ask}`. With the `{ask}` command, you can ask a question. Check it out:
                 example_code: |
                     ```
                     {print} Dumela!
                     {ask} O bitswa mang?
                     ```
                 story_text_2: |
-                    ## The echo command
-                    Fa o bata computer to repeat the answer, o ka dirisa `{echo}` command. The answer will then be echoed back at the end of the sentence, so in this example after Dumela.
+                    ## The `{echo}` command
+                    If you want the computer to repeat the answer back to you, you can use the `{echo}` command. The answer will be echoed back at the end of the sentence, so in this example after hello.
                 example_code_2: |
                     ```
                     {print} Dumela!
@@ -332,7 +339,7 @@ adventures:
                     ```
                 story_text_3: |
                     ### Exercise
-                    Lekeletsa di command tsa `{ask}` and `{echo}` . Firstly, kwala mo di blanks to make this program work.
+                    Try out the `{ask}` and `{echo}` commands. Firstly, fill in the blanks to make this program work.
                     Then ask 2 more questions using the `{ask}` command, after each `{ask}` use an `{echo}` to print the answer on the screen.
                 example_code_3: |
                     ```
@@ -342,7 +349,7 @@ adventures:
             2:
                 story_text: |
                     ## The ask command
-                    Now that re kgona go dirisa **variables** in our codes, we no longer need the `{echo}` command.
+                    Now that we can use **variables** in our codes, we no longer need the `{echo}` command.
                     We can use variables to store the answers to our questions and this way we can use the answer to multiple questions in our codes.
                     Check it out:
 
@@ -356,15 +363,15 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercise
-                    In the previous tab you have practised with setting variables ka command ya `{is}`.
+                    In the previous tab you have practised with setting variables with the `{is}` command.
                     You have created at least 3 variables and used them with a print command.
                     Now, instead of setting the variables we want you to make the variables interactive, like we did in our example.
 
                     Copy your code from the previous tab and make the variables interactive by using `{ask}` commands.
                 example_code_2: |
                     ```
-                    diphologolo is ask O rata which animals?
-                    print I like diphologolo
+                    favorite_animals {is} {ask} O rata phologolo ehe?
+                    {print} Ke rata favorite_animals
                     ```
             18:
                 story_text: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
@@ -386,8 +393,10 @@ adventures:
                     If you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.
                     But be careful not to get more than 21 points, because if you do, you lose!
                     The player who gets closest to 21, without going over it, wins!
-
                     Have fun!
+
+                    ### Exercise
+                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -443,14 +452,14 @@ adventures:
                             points = points + 10
                         {elif} card_3 == 'Ace':
                             {if} points > 11:
-                                points = points + 11
-                            {else}:
                                 points = points + 1
+                            {else}:
+                                points = points + 11
                         {else}:
                             points = points + card_3
-                        print 'You get an extra ' card_3 ' (' points ' points)'
+                        {print} 'You get an extra ' card_3 ' (' points ' points)'
                     {else}:
-                        print 'No extra cards'
+                        {print} 'No extra cards'
                     # Winner
                     {if} points > 21 {or} dealer_points > points {or} dealer_points == 21:
                         {print} 'You lose'
@@ -513,37 +522,56 @@ adventures:
                     {else} _
             9:
                 story_text: |
-                    In previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game. Like this...
+                    In a previous level you've created a calculator, in this level you can expand that code so it asks multiple questions.
+
+                    ### Exercise 1
+                    Can you finish line 10 to get the code to work?
+
+                    ### Exercise 2
+                    Give the player feedback when the enter an answer, like `{print} 'Correct!'` or `{print} 'Wrong! The correct answer is ' correct_answer`.
                 example_code: |
                     ```
                     score = 0
                     {repeat} 10 {times}
                         numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        number1 = numbers {at} {random}
-                        number2 = numbers {at} {random}
-                        correct_answer = number1 * number2
-                        {print} 'What is ' number1 ' times ' number2 '?'
+                        number_1 = numbers {at} {random}
+                        number_2 = numbers {at} {random}
+                        correct_answer = number_1 * number_2
+                        {print} 'What is ' number_1 ' times ' number_2 '?'
                         answer = {ask} 'Type your answer here...'
-                        {print} 'Your answer is' answer
-                        {if} answer {is} correct_answer
+                        {print} 'Your answer is ' answer
+                        {if} _ {is} _
                             score = score + 1
                     {print} 'Great job! Your score is... ' score ' out of 10!'
                     ```
             10:
                 story_text: |
                     This calculator game helps you practise your tables of multiplication!
-                    If you add more numbers to the list, you can practise all the multiplications.
+                    ### Exercise
+                    Fill in the blanks. We want this program to ask the player these questions:
+                    ```
+                    How much is 1 times 1?
+                    How much is 1 times 2?
+                    How much is 1 times 3?
+                    How much is 2 times 1?
+                    How much is 2 times 2?
+                    How much is 2 times 3?
+                    How much is 3 times 1?
+                    How much is 3 times 2?
+                    How much is 3 times 3?
+                    _
+                    ```
                 example_code: |
                     ```
                     numbers = 1, 2, 3
-                    {for} number1 {in} numbers
-                        {for} number2 {in} numbers
-                            answer = {ask} 'How much is ' number2 ' times ' number1 '?'
-                            correct = number1 * number2
+                    {for} _
+                        {for} _
+                            answer = {ask} _
+                            correct = number_1 * number_2
                             {if} answer {is} correct
                                 {print} 'Great job!'
                             {else}
-                                {print} 'Thats wrong. The right answer is ' correct
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |
@@ -575,7 +603,7 @@ adventures:
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 Extra
+                    ### Exercise 2
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -807,9 +835,6 @@ adventures:
                     total = price + amount_of_product
                     {print} 'That will be $' price 'please'
                     ```
-
-                    total = price + amount_of_product
-                    {print} 'That will be $' price 'please'
             7:
                 story_text: |-
                     ### Exercise
@@ -847,21 +872,7 @@ adventures:
                     {sleep} 5
                     {print} 'All done! That will be $' price ' please!'
                     {print} 'Thank you! Byebye!'
-
-                            {print} That will be $25'
-                            price = 25
-                        {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
-                    {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
+                    ```
             9:
                 story_text: |-
                     ### Exercise
@@ -1153,7 +1164,7 @@ adventures:
                     for i in range 1 to 3
                         animal = animals[i]
                         sound = sounds[i]
-                        print 'Old McDonald had a farm'
+                        print 'Old MacDonald had a farm'
                         print 'E I E I O!'
                         print 'and on that farm he had a ' animal
                         print 'E I E I O!'
@@ -1170,41 +1181,54 @@ adventures:
         levels:
             1:
                 story_text: |
-                    Mo legatong la ntha o ka dirisa mafoko a `{print}`, `{ask}` le `{echo}`.
-                    Kwala  code ya gago mo tsejwaneng ya  programming. Kana tobetsa fa botaleng mo sekaing sa karolo ya code, ka jalo code ya gago etlaabo e kwalega ka boyone!
-                    Lekeletsa code kabowena kago tobetsa botala, fa go kwadilweng 'Run code' kotlase ga tsebe ya   programming.
+                    Welcome to Hedy! Here you can learn how to program step by step.
 
-                    O ka gatisa mokwalo mo sekerineng o dirisa  molao wa  `{print}`.
+                    Try the code yourself! The yellow button copies the example code to your programming field.
+                    Then push the green 'Run code' button under the programming field to run the code.
+
+                    Ready? Then go to the next tab to learn how to make your own codes!
                 example_code: |
                     ```
                     {print} Hello world!
                     ```
             2:
                 story_text: |
-                    mo legatong la bobedi re ithuta ditaelo tse pedi tse disha: `{is}`.
-                    oka bitsa lefoko leina ka `{is}`. Se se bidiwa gotwe variable. Mo sekaing se re dirile variable ee bidiwang leina le variable ee bidiwang dingwaga. O ka dirisa lefoko la leina gongwe le gongwe mo codeng ya gago mme etlaa direlwa leemedi ke Hedy, jaana:
+                    Congratulations! You've reached level 2. Hopefully you've already made some awesome codes!
+                    In the first level you might've notice that the `{echo}` command can only save one bit of information at a time.
+                    For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
 
-                    Ka jalo gao sa thole o thoka taelo ya `{echo}` !
+                    That changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.
+                    So let's go to the next tab!
                 example_code: |
+                    **Warning! This code does not work!**
+                    In Hedy commands will change sometimes. `{echo}` for example only works in level 1. In this level you'll learn a better way to echo answers back.
                     ```
-                    Leina {is} Hedy
-                    Dingwaga {is} 15
-                    {print} leina ke dingwaga tse
+                    {print} Welcome at Hedy's
+                    {ask} What would you like to eat?
+                    {echo} So you want
+                    {ask} what would you like to drink?
+                    {echo} So you want
                     ```
-                story_text_2: |
-                    `{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:
             3:
                 story_text: |
-                    Mo legatong la boraro okadira lenaneo. O ka dira gore computara e kgethe sengwe random mo lenaneong. O dira jalo ka `{at} {random}`.
+                    In the previous level you've learned what a variable is and how you can use it to make your adventures more interactive.
+                    But... that's not the only thing you can do with variables! You can also use variables to make lists.
+                    And you can even let Hedy pick a random word out of a list, which allows you to make real games!
+                    Take a quick look at the next tab!
             4:
                 story_text: |
-                    Mo legatong la bone `{ask}` le `{print}` di fetogile.
+                    In the previous levels you've been practising with variables, but you may have come across this problem.
+                    You might have tried to run a code like this:
 
-                    O tshwanetse go tsenya text eo batang go e gatisa mo gare ga matshwao a ditsejwana.
+                    Of course you wanted to print
 
-                    Se se botlhokwa kagore , jaanong o kgona go gatisa mafoko otlhe a o a batang. le mafoko ao a dirisitseng go baya sengwe ka one`{is}`.
+                    `My name is Neo`
 
-                    Bontsi ja diteme tsa programming di dirisa matshwao a ditsejwana fa di gatisa, ka jalo re atumela programming ya nnete!
+                    but Hedy prints
+
+                    `My Sophie is Neo`.
+
+                    In this level this problem is fixed by using quotation marks.
                 example_code: |
                     ```
                     {print} 'O tshwanetse go dirisa matshwao a ditsejwana go ya pele!'
@@ -1213,9 +1237,11 @@ adventures:
                     ```
             5:
                 story_text: |
-                    Mo legatong la botlhano gona le sengwe se sesha, the `{if}`! ka `{if}` oka ikgethela mo ditshwetsong tse pedi tse di farologanyeng.
-                    code ee printa bontle faoka tsenya Hedy ele leina, le boo! faoka tsenya sepe se sele.
-                    `{ask}` and `{print}` di ntse di bereka jaaka ko legatong labone.
+                    In the previous levels you've already learned to use `{at} {random}` which made your games different every time you ran the code.
+                    But it's not really interactive, the player doesn't have any influence on what happens in the game.
+
+                    In this level you'll learn the `{if}` command, that allows you to give different responses in your program. This way you can program a secret password for your computer for example.
+                    So let's go to next tab for the new command!
                 example_code: |
                     ```
                     leina {is} {ask} 'leina la gago ke mang'
@@ -1280,9 +1306,13 @@ adventures:
                             {print} 'pizza e botoka'
                     ```
             10:
-                story_text: |-
-                    Mo legatong le re ithuta code e ntsha ee bidiwang `{for}`. ka `{for}` o ka dira lenaneo o bo o dirisa  maele otlhe.
-                    `{for}` dira block, jaaka `{repeat}` le `{if}` ka jalo mela yotlhe mo blockong e tshwanelwa ke go simolola ka dispace.
+                story_text: |
+                    You're doing great! In the previous levels we still faced a small problem. You have learned to repeat lines, but what if you'd want to slightly change the line.
+                    For example if you want to sing the song 'if you're happy and you know it'. It would look like this:
+
+                    If you'd also want the next verse 'stomp your feet', and the next one, and the next one, you'd have to change the code completely.
+                    In this level you'll learn the `{for}` command, which allows you to make a list of actions and repeat the code with another action each time!
+                    Please take a look!
                 example_code: |
                     ```
                     diphologolo {is} ntsa, katse, thapi
@@ -1305,8 +1335,7 @@ adventures:
 
                     {print} 2.5 + 2.5
             13:
-                story_text: Mo legatong le, retile go ithuta `{and}` le `{or}`! Fa o batla o ka thodumela diele tse pedi, ga o tlhoke go dirisa bo {if} ba babedi, mme o ka dirisa `{and}` le `{kana}`. Fa o ka dirisa `{and}`, diele tsotlhe ka bobedi, molema le moja wa `{and}` di tlhoka go nna boammaaruri.
-                    gape re ka dirisa  `{kana}`. Ka jalo, seele sele sengwe fela se tlhoka go baakanngwa.
+                story_text: Mo legatong le, retile go ithuta `{and}` le `{or}`! Fa o batla o ka thodumela diele tse pedi, ga o tlhoke go dirisa bo {if} ba babedi, mme o ka dirisa `{and}` le `{kana}`. Fa o ka dirisa `{and}`, diele tsotlhe ka bobedi, molema le moja wa `{and}` di tlhoka go nna boammaaruri. gape re ka dirisa  `{kana}`. Ka jalo, seele sele sengwe fela se tlhoka go baakanngwa.
                 example_code: |
                     ```
                     leina = {ask} 'leina la gago ke mang?'
@@ -1363,7 +1392,7 @@ adventures:
                 story_text: |-
                     jaanong reya go fetola indentation gole gonnye. Nako tsotlhe fa re tlhoka indentation, re tlhoka `:` mo lineng pele ga indentation.
 
-                    Mo legatong le, o ka diria command e ntsha: `{elif}`. `{elif}` e khutshwafaditswe goraya {else} {if} gape oa e tlhoka fa o batla go dira dile tharo (kana go feta!) tse o ka thophang mogo tsone.
+                    Mo legatong le, o ka diria command e ntsha: `{elif}`. `{elif}` e khutshwafaditswe goraya `{else} {if}` gape oa e tlhoka fa o batla go dira dile tharo (kana go feta!) tse o ka thophang mogo tsone.
                     lekeletsa!
             18:
                 story_text: |-
@@ -1606,6 +1635,20 @@ adventures:
                     {for} animal {in} animals
                         {print} 'I love ' animal
                     ```
+                story_text_2: |
+                    ### Exercise
+                    Finish this code by adding `{for} action {in} actions` to line 2.
+                example_code_2: |
+                    ```
+                    actions = clap your hands, stomp your feet, shout Hurray!
+                    _
+                        {repeat} 2 {times}
+                            {print} 'If youre happy and you know it, ' action
+                            {sleep} 2
+                        {print} 'If youre happy and you know it, and you really want to show it'
+                        {print} 'If youre happy and you know it, ' action
+                        {sleep} 3
+                    ```
             11:
                 story_text: |-
                     In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
@@ -1671,14 +1714,11 @@ adventures:
                     Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
             4:
                 story_text: |
-                    This level has no new functions, but allows you to practice with using the quotation marks.
-                    You can remake your level 3 code, and make sure to add the quotation marks in the right places!
+                    ### Exercise
+                    We have removed all the quotation marks from this example code, can you add them in all the right places?
 
-                    Mind that in level 3, we couldn't use the word 'question' as both the name of the variable and a normal word that could be printed.
-                    The quotation marks in level 3 make this possible!
-
-                    Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
-                    Make sure to remove those apostrophes and change the spelling to Im or Whats.
+                    ### Exercise 2
+                    Go back to the previous level and copy your fortune teller code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ```
                     {print} 'Im Hedy the fortune teller!'
@@ -2188,8 +2228,8 @@ adventures:
             5:
                 story_text: |
                     ## If... else....
-                    Mo level 5 gona le di command tse di new, the `{if}`! With the `{if}` you can choose between two different options.
-                    This code prints nice if you enter Mpho as a name, and boo! if you enter something else.
+                    In level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.
+                    This code prints nice if you enter Hedy as a name, and boo! if you enter something else.
                     `{ask}` and `{print}` still work like they did in level 4.
                 example_code: |
                     ```
@@ -2281,16 +2321,16 @@ adventures:
                 story_text: |
                     ## Variables
                     You can name a word with `{is}`. This is called a **variable**. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:
-                example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name o dingwaga tse age \n```\n"
+                example_code: "```\nname {is} Poloko\nage {is} 15\n{print} name o dingwaga tse age \n```\n"
                 story_text_2: |
                     ### Exercise
-                    Ke nako ya go itirela you own variables!
-                    In the example code re dirile example ya variable `diphologolo`. In line 1 the variable is set, and in line 2 we haved used the variable in a print command.
-                    Firstly, finish our example by filling in your favorite phologolo in the blanks. Then make at least 3 of these codes yourself. Pick a variable, and set the variable with the {is} command. Then use it with a {print} command, just like we did.
+                    Time to make your own variables!
+                    In the example code we made an example of the variable `favorite_animals`. In line 1 the variable is set, and in line 2 we used the variable in a `{print}` command.
+                    Firstly, finish our example by filling in your favorite animal in the blanks. Then make at least 3 of these codes yourself. Pick a variable, and set the variable with the `{is}` command. Then use it with a `{print}` command, just like we did.
                 example_code_2: |
                     ```
-                    diphologolo is _
-                    {print} I like diphologolo
+                    favorite_animals {is} _
+                    {print} ke rata favorite_animals
                     ```
             6:
                 story_text: |
@@ -2427,7 +2467,7 @@ adventures:
                     C1 is the lowest note you can play, C10 is the highest.
 
                     ### Exercise
-                    Try out the example code and thenplay around with it! Can you create your own melody?
+                    Try out the example code and then play around with it! Can you create your own melody?
                     In the next level you'll learn how to play some existing songs.
                 example_code: |-
                     ```
@@ -2441,7 +2481,9 @@ adventures:
                     play C5
                     ```
             2:
-                story_text: Finish the songs! We have started the codes for some melodies.
+                story_text: |
+                    ### Exercise
+                    Finish the songs! We have started the codes for some melodies.
                 example_code: |
                     ```
                     {print} Old Mac Donald had a farm
@@ -2484,7 +2526,7 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Use the `{clear}` command to create a karaokemachine!
+                    Use the `{clear}` command to create a karaoke machine!
 
                     ### Exercise
                     Finish the karaoke version of 'Mary had a little lamb'.
@@ -2526,8 +2568,7 @@ adventures:
                     _
                     ```
             6:
-                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting\
-                    \ numbers. \nThen, see if you can compose a song using the numbers.\n"
+                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting numbers. \nThen, see if you can compose a song using the numbers.\n"
                 example_code: |
                     ```
                     number = {ask} 'Say a starting number between 1 and 67'
@@ -2598,10 +2639,10 @@ adventures:
                     ```
             12:
                 story_text: |
-                    Use functions in you songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle little star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
+                    Use functions in your songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle Little Star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
 
                     ### Exercise
-                    Finish the song of Twinkle Twinkle little star.
+                    Finish the song of Twinkle Twinkle Little Star.
                     Then look back at all the songs you've programmed in the levels before, can you make those codes better and shorter using functions too?
                 example_code: |
                     ```
@@ -2644,7 +2685,7 @@ adventures:
                     ```
             13:
                 story_text: |
-                    You can use a function with an argument for songs that have line taht are almost the same, but slightly different each time.
+                    You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
                     One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, buyt each time they are followed by a different couple of notes.
 
                     ### Exercise
@@ -2676,7 +2717,7 @@ adventures:
                     ```
             14:
                 story_text: |
-                    You can programm music for fun, but you can also use the musical notes to make something useful like a fire alarm!
+                    You can program music for fun, but you can also use the musical notes to make something useful like a fire alarm!
 
                     ### Exercise
                     Make sure the fire alarm rings when there is a fire!
@@ -2695,6 +2736,106 @@ adventures:
                     fire = {ask} 'Is there a fire?'
                     {if} fire _ 'yes'
                         {call} fire_alarm
+                    ```
+            15:
+                story_text: |
+                    **Warning** This adventure can become extremely annoying!
+                    We can also use the {while} command to repeat a song forever.
+
+                    ### Exercise
+                    Finish the never-ending song.
+                example_code: |
+                    ```
+                    {define} song
+                        {play} _
+
+                    yes_or_no = {ask} 'Do you want to hear my never-ending song?'
+                    {while} yes_or_no = 'yes'
+                        {call} song
+                        {print} '🥳'
+                    ```
+            16:
+                story_text: |
+                    Upgrade your Old MacDonald code!
+
+                    ### Exercise
+                    Take your code from the 'Sing a Song' adventure and add musical notes to it!
+                    You can make a function for each line in the song and call that function after the line is printed.
+                    We defined the first line for you and called it in the code. Can you finish the whole song?
+                example_code: |
+                    ```
+                    {define} line_1
+                        {for} i {in} {range} 1 {to} 3
+                            {play} G
+                        {play} D
+                        {for} i {in} {range} 1 {to} 2
+                            {play} E
+                        {play} D
+
+                    animals = ['pig', 'dog', 'cow']
+                    sounds = ['oink', 'woof', 'moo']
+                    for i in range 1 to 3
+                        animal = animals[i]
+                        sound = sounds[i]
+                        print 'Old MacDonald had a farm'
+                        call line_1
+                        print 'E I E I O!'
+                        _
+                    ```
+            17:
+                story_text: |
+                    You can use the {elif} to create different options.
+
+                    ### Exercise
+                    Firstly, add colons to get the code to work.
+                    Then finish this code by adding at least 2 other songs for other moods. For example a happy song and an angry song.
+                example_code: |
+                    ```
+                    {define} scary_song
+                        {for} i {in} {range} 1 {to} 3
+                            {play} G
+                        {play} E
+                        {sleep} 2
+                        {for} i {in} {range} 1 {to} 3
+                            {play} F
+                        {play} D
+
+                    mood = {ask} 'Which emotion are you feeling?'
+                    {if} mood {is} 'fear'
+                        {call} scary_song
+                    {elif} _
+                    ```
+            18:
+                story_text: |
+                    ### Exercise
+                    Even in this last level of Hedy we can make some music! Be careful of all the syntax that is needed now.
+                    Take a good look at how the functions are defined and called upon in the example code.
+                    Finish the song!
+                example_code: |
+                    ```
+                    {def} line_1():
+                        {for} i {in} {range}(1, 5):
+                            {play} A
+                        {play} D
+                        {play} F
+                        {play} A
+
+                    {def} line_2():
+                        {for} i {in} {range}(1, 5):
+                            {play} G
+                        {play} C
+                        {play} E
+                        {play} G
+
+                    {def} line_3():
+                    _
+
+                    {print} ('The drunken sailor')
+                    {print} ('What shall we do with the drunken sailor?')
+                    line_1()
+                    line_2()
+                    line_3()
+                    {print} ('Early in the morning')
                     ```
     parrot:
         name: Parrot
@@ -2894,7 +3035,7 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     In Hedy you will find di exercises in every adventure. Exercise e go letelela to practise the new commands and concepts tsa coding.
-                    In this exercise o ta bona a pink blank space. Kwala something in the place of the blank space before the code can be ran.
+                    In this exercise o ta bona a pink blank space. Kwala something in the place of the blank space before the code can be run.
 
                     Fill in the `{print}` command in the blank space and then add five more lines of code. Each line has to start with a `{print}` command.
                     Have fun!
@@ -2904,7 +3045,7 @@ adventures:
                     ```
             18:
                 story_text: |-
-                    Re gorogile mo real Python code! That means we need to use parentheses with `{print}` and `{range}` from now on.
+                    We arrived at real Python code! That means we need to use parentheses with `{print}` and `{range}` from now on.
                     It also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so.
                 example_code: |
                     ```
@@ -2959,12 +3100,12 @@ adventures:
                 story_text: |
                     ## 'Quotation marks'
                     In level 4 `{ask}` and `{print}` have changed.
-                    O tshwanetse go tsenya text that you want to print between quotation marks.
-                    Go a thusa ka gore jaanong you can print all the words you want. Also the words you used to store something with `{is}`.
+                    You must put text that you want to print between quotation marks.
+                    This is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.
                     Most programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!
                 example_code: |
                     ```
-                    {print} 'Dirisa quotation marks from now on!'
+                    {print} 'Dirisa quotation marks mo code from now on!'
                     answer {is} {ask} 'Re thoka go dirisa eng from now on?'
                     {print} 'We need to use ' answer
                     ```
@@ -2976,7 +3117,7 @@ adventures:
                 example_code_2: |
                     ```
                     _ This is the wrong way of using apostrophes _
-                    {print} 'I'm babysitting my sister's kids'
+                    {print} 'I'm babysitting ngwana wa my sister'
                     {print} 'What's more fun than that?'
                     ```
             12:
@@ -2991,10 +3132,10 @@ adventures:
                 story_text_2: |
                     **All items in lists need quotation marks too**
                     Lists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.
-                    This allows you to save two words as 1 item on the list, for example 'Iron Man'.
+                    This allows you to save two words as 1 item on the list, for example 'Black Widow'.
                 example_code_2: |
                     ```
-                    superheroes = 'Spiderman', 'Batman', 'Iron Man'
+                    superheroes = 'Spiderman', 'Batman', 'Black Widow'
                     {print} superheroes {at} {random}
                     ```
                 story_text_3: |
@@ -3021,7 +3162,7 @@ adventures:
             3:
                 story_text: |
                     ## At random
-                    In this level oka dira list using the `{is}` command. You can let the computer choose a random item from that list. O ka dira jalo using command ya `{at} {random}`.
+                    In this level you can make a list using the `{is}` command. You can let the computer choose a random item from that list. You do that with `{at} {random}`.
                 example_code: |
                     ```
                     animals {is} tlou, tau, phiri
@@ -3032,17 +3173,17 @@ adventures:
                 example_code_2: |
                     ```
                     food {is} magwinya, mafresh, serobe, koko
-                    {print} I am going to have a food {at} {random} ka lunch.
+                    {print} I am going to have food {at} {random} ka lunch.
                     ```
                 story_text_3: |
                     ### Exercise
-                    Lekeletsa `{at} {random}` command by making your own show where batho win prices where you choose a suitcase and it contains a big price!
+                    Try out the `{at} {random}` command by making your own gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
                     Can you do it? We have already put the first lines into the example code.
                 example_code_3: |
                     ```
                     {print} The big gameshow!
                     {print} Gona le 3 suitcases in front of you...
-                    chosen {is} {ask} Which suitcase do you choose?
+                    chosen {is} {ask} O bata suitcase ehe?
                     prices {is} _
                     _
                     ```
@@ -3100,18 +3241,18 @@ adventures:
                     ```
             9:
                 story_text: |
-                    In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!
-                    In the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.
-                    Give it a try!
+                    Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...
+                    Good news! In this level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command. Putting a block of code inside another block of code is called nesting.                     ``` Putting a block of code inside another block of code is called nesting.
                 example_code: |
                     ```
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
-                    ```
+                    answer = {ask} 'Are you ready to learn something new?'
+                    {if} answer {is} yes
+                        {print} 'Great! You can learn to use the repeat command in the if command!'
+                        {print} 'Hooray!'
+                        {print} 'Hooray!'
+                        {print} 'Hooray!'
+                    {else}
+                        {print} 'Maybe you should practice some more in the previous level'
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: repeat_command_2
@@ -3161,35 +3302,47 @@ adventures:
         levels:
             1:
                 story_text: |
-                    Mo level 1 ya Hedy o ka itirela app ya gago ya semausu kana tuckshop o bo o tsaya di orders tsa  dicustomera tsa gago.
-                example_code: "{printa}```\n{printa} You are welcome mo semausung sa Mosaditshwene \U0001F35F\n{ask} O bata go reka eng?\n{echo} Good, so o bata go reka \n{printa} Thanks you for your order!\n{printa} Dijo tsa gago di eta!\n```\n"
+                    In level 1 you can make your own virtual restaurant and take your guests' orders.
                 story_text_2: |
                     ### Exercise
-                    Great job! Can you think of more lines tsa code go oketsa code ya gago ya semausu? For example, o ka botsa dicustomara tsa gago o dirisa command ya {ask}  gore ba bata go nwa eng, kana tell them  price ya se ba se batang, kana o ba botse gore how will they pay (karata or cash). Lastly, o ka ba laela gore Goodbye.
+                    Copy the example code into your input screen by clicking the yellow button.
+                    Firstly, fill in the correct command on the blanks to make to code work properly.
+                    Then add at least 4 more lines of code to the restaurant program.
+                    Ask the costumer what they would like to drink and ask if they want to pay with cash or card.
+                    Lastly, think of a nice way to say goodbye to your costumer.
+                example_code_2: "```\n{print} Re a go amogela mo semausung sa Mosaditshwene 🍟\n{ask} O bata go reka eng?\n{echo} Good, so o bata go reka \n{print} Thanks you for your order!\n{print} Dijo tsa gago di eta!\n```\n"
             2:
                 story_text: |
-                    Great job! Mo level 2 jaanong you can use mo go tweng variables mo code ya gago. Mo level 1 Hedy code could only {echo} the order ya customer once and only remember the last thing that was ordered ke customer ya gago.
-                    Jaanong mo level 2 o ka dirisa variables gore o dire code ya gago mo Hedy to remember both dijo le dino tsa your customers !
+                    In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only `{echo}` the order once and only remember the last thing that was ordered.
+                    Now you can use variables and Hedy can remember both the food and the toppings!
                 example_code: |
                     ```
-                    {print} Re a go amogela mo Mosaditshwene!
+                    {print} Re a go amogela mo semausu sa Mosaditshwene!
                     {print} Today re rekisa mangwinya le mafresh.
-                    dijo {is} {ask} O bata go ja eng mo go tsone?
-                    {print} Great choice! dijo ke a a rata lenna!
+                    food {is} {ask} O bata go ja eng mo go tsone?
+                    {print} Great choice! lenna ke rata food!
                     tsedingwe {is} {ask} A o bata go oketsa? O bata re tsenya serobe kana sebete?
-                    {print} dijo le tsedingwe di eta!
+                    {print} food le tsedingwe di eta!
                     drinks {is} {ask} O bata drink ehe?
                     {print} Thank you for your order.
                     {print} dijo le tsedingwe le drinks will be right there!
                     ```
-                story_text_2: "### Exercise\nGreat job! O bata go oketsa code ya gago ya semausu? \nYou can copy code ya gago ya semausu from to previous level to the input screen below.\nOka Fixa the code by replacing the `{ask}` and `{echo}` commands and using variables, jaaka o ithutile mo level 2\
-                    \ ye.\n\nNow that your code is working again, it's time to add something more.\nLook at the last line of the example code: `{print} dijo le tsedingwe le drinks is on its way!`\nIn this single line 2 variables have been used to create a summary of the order.\nNow add your own summary\
-                    \ of the food and drinks ordered by the customer.\n"
+                story_text_2: |
+                    ### Exercise
+                    Copy your own restaurant code from to previous level to the input screen below.
+                    Fix the code by replacing the `{ask}` and `{echo}` commands and using variables, like you've learned in this level.
+
+                    Now that your code is working again, it's time to add something more.
+                    Look at the last line of the example code: `{print} food with topping is on its way!`
+                    In this single line 2 variables have been used to create a summary of the order.
+                    Now add your own summary of the food and drinks ordered by the customer.
+
+                    **Extra** Now that you've learned how to use variables, you can use as many variables in one line as you'd like. Can you add more variables to your code, like eat in or take-away, cash or card, with or without a straw etc.?
             3:
                 story_text: |
-                    Sometimes, o kgona go togela Hedy e go choosetsa gore o bata go ja eng randomly.
-                    Simply add lists of dijo tse o di ratang and Hedy can randomly choose your dinner.
-                    You can also have a bit of fun, o ka togela Hedy to choose the price for your dinner as well! What will you get?
+                    Having trouble to decide what you wanna have for dinner? You can let Hedy choose for you!
+                    Simply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.
+                    You can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?
                 example_code: |
                     ```
                     {print} Welcome to semausu sa Mosaditshwene!
@@ -3205,7 +3358,10 @@ adventures:
                     {print} Thank you and enjoy your meal!
                     ```
                 story_text_2: |
-                    Does your customer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.
+                    ### Exercise
+                    Now make your own version of the random restaurant.
+                    Make a list of starts, mains, desserts, drinks and prices yourself.
+                    Then use `{print}` and `{at} {random}` commands to tell the costumer what will be on their menu tonight.
                 example_code_2: |
                     ```
                     {print} Di cupcake
@@ -3216,47 +3372,40 @@ adventures:
                     ```
             4:
                 story_text: |
-                    In this level you have to use quotation marks when using the `{print}` command.
-                    Can you make your code from the previous levels work in this level too by adding the quotation marks?
+                    ### Exercise
+                    Add the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.
+                    Then, use the `{clear}` command to only show one line at a time in your output screen.
 
-                    Be careful! In the previous levels apostrophes were allowed in the text, but in this level Hedy will confuse them for quotation marks and the code will not work!
-                    So instead of typing `{print} Tsatsijeno we're serving mangwinya` , you should type `{print} 'Today we are serving mangwinya'`
+                    ### Exercise 2
+                    Go back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots and add some `{clear}` commands.
                 example_code: |
                     ```
-                    {print} 'Welcome to semausu sa ga Mosaditshwene!'
-                    {print} 'Today gona le mangwinya le mafresh.'
-                    dijo {is} {ask} 'O bata go ja eng mo go tsone?'
-                    {print} 'Great choice! Le nna ke rata ' dijo ' thata'
-                    seshabo {is} {ask} 'O bata go tsenya serobe kana sebete?'
-                    {print} dijo ' le ' seshabo ' di eta!'
-                    drinks {is} {ask} 'O bata go nwa eng?'
-                    {print} 'Thank you for your order.'
-                    {print} 'Your ' dijo ' and ' drinks ' will be right there!'
+                    _ Add the quotation marks to this code _
+                    {print} Re a go amogela semausu sa ga Mosaditshwene!
+                    {print} Today gona le mangwinya le mafresh.
+                    food {is} {ask} O bata go ja eng mo go tsone?
+                    {print} Great choice! Lenna ke rata food!
+                    topping {is} {ask} O bata go tsenya serobe kana sebete?
+                    {print} food  le  topping  di eta!
+                    drinks {is} {ask} O bata go nwa eng?
+                    {print} Thank you for your order.
+                    {print} Your  food  and  drinks  will be right there!
                     ```
             5:
                 story_text: |
                     ### Exercise
-                    The example code shows how you could program ka Hedy, o supa gore dijo tse dingwe ga diyo mo semausung sa gago.
-                    Copy code ya gago ya semausu from the previous levels. Create a problem mo semausung sa gago and code it, like the example code did.
-                    For example, gongwe ga ona dijo tse dingwe mo semausung, or you don't take dikarata for payment, or di drink ga di tsididi.
+                    The example code shows how you could program that you've run out of a menu item in your restaurant.
+                    Copy your own restaurant code from the previous levels. Create a problem in your restaurant and code it, like the example code did.
+                    For instance, you could also run out of a menu item, or you don't take credit cards, or the ice cream machine is broken.
 
                     **Extra** Have you programmed the problem and programmed appropriate responses? Then try to add more `{if}` and `{else}` commands into your code.
                     Try to add an `{if}` after every `{ask}` command in your code to make the code as interactive as possible!
                 example_code: |
                     ```
-                    {print} 'Welcome to semausu sa ga Mosaditshwene!'
-                    special {is} {ask} 'Can i tell you what we have tsatsijeno (yes/no)?'
-                    {if} special {is} yes {print} 'Todays gona le mafresh kana mangwinya.' {else} {print} 'Gosiame.'
-                    food {is} {ask} 'O bata go ja eng (mafresh/magwinya)?'
-                    {print} food ', coming right up!'
-                    drink {is} {ask} 'What would you like to drink with food (coke/gemere)?'
-                    {if} drink {is} coke {print} 'Im sorry, coke e hedile!' {else} {print} 'Great choice!'
-                    anything {is} {ask} 'Would you like anything {else}?'
-                    {print} 'Let me repeat your order...'
-                    {print} 'O bata ' food
-                    {if} drink {is} coke {print} 'and...' {else} {print} 'One ' drink
-                    {if} anything {is} no {print} 'Go heletse!' {else} {print} 'One ' anything
-                    {print} 'Thank you for your order and enjoy dijo tsa gago!'
+                    drinks_in_stock {is} metsi, gemere, coke, orange juice
+                    drink {is} {ask} 'O bata go nwa eng?'
+                    {if} drink {in} drinks_in_stock {print} 'One ' drink 'e eta!'
+                    {else} {print} 'Sorry, ga re rena yone mo semausung'
                     ```
             6:
                 story_text: |
@@ -3290,9 +3439,13 @@ adventures:
             8:
                 story_text: |
                     In this level you can make your virtual restaurant more elaborate by repeating multiple lines of code. Like this:
+
+                    ### Exercise
+                    This code can be expanded with more items on the menu, for example offering drinks, and/or multiple courses or desserts. Add at least one more item.
+                    **Extra** Add even more items, as many options as you like!
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
+                    {print} 'Welcome to Restaurant Chez Hedy!'
                     people = {ask} 'How many people will be joining us today?'
                     {print} 'Great!'
                     {repeat} people {times}
@@ -3301,9 +3454,6 @@ adventures:
                     {print} 'Thank you for ordering!'
                     {print} 'Enjoy your meal!'
                     ```
-                story_text_2: |
-                    ### Exercise
-                    Of course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!
             9:
                 story_text: |
                     In this level you can use nesting to make your restaurant more realistic and more fun!
@@ -3333,7 +3483,10 @@ adventures:
                     ```
             10:
                 story_text: |
-                    In this level you'll learn how to easily {ask} your guests' orders in a short code.
+                    In this level you'll learn how to easily ask orders for different courses.
+
+                    ### Exercise 1
+                    Finish the code with an `{ask}` on the blanks such that the customer is asked what they want to eat for each course.
                 example_code: |
                     ```
                     courses = appetizer, main course, dessert
@@ -3480,8 +3633,14 @@ adventures:
                     ```
             4:
                 story_text: |
-                    In this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.
-                    Do you complete the code by entering the correct commands or characters on the underscores?
+                    In this level we can further program rock, paper, scissors. But if you want to add text, you have to use quotation marks here too.
+                    ### Exercise
+                    Fill in quotation marks on the blanks. Mind that the variable `choices` should be outside the quotes.
+                example_code: |
+                    ```
+                    choices {is} rock, paper, scissors
+                    {print} _The computer chooses..._ choices {at} {random}
+                    ```
             5:
                 story_text: |
                     In this level we can determine who won.
@@ -3701,7 +3860,7 @@ adventures:
                 story_text: |
                     In this level you can easily make the childrens' song 'Five little monkeys'. Can you make the last chorus?
                     You can also make the whole baby shark song (including all the other sharks in the family) in only 6 lines!
-                    Or you can make Old McDonald with all the different animals.
+                    Or you can make Old MacDonald with all the different animals.
                 example_code: |
                     ```
                     monkeys = 5, 4, 3, 2
@@ -3729,7 +3888,7 @@ adventures:
                             sound = woof
                         {if} animal {is} cow
                             sound = moo
-                        {print} 'Old McDonald had a farm'
+                        {print} 'Old MacDonald had a farm'
                         {print} 'E I E I O!'
                         {print} 'and on that farm he had a ' animal
                         {print} 'E I E I O!'
@@ -3764,17 +3923,21 @@ adventures:
                     ```
             12:
                 story_text: |
-                    In this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
+                    In this song we can make it even easier to program 'if you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
+
+                    ### Exercise
+                    Can you add the right amount of indentation to each line to make the song play correctly?
+                    Hint: Not all lines need indentation.
                 example_code: |
                     ```
-                    actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
-                    {for} action {in} actions
-                        {for} i {in} {range} 1 {to} 2
-                            {print} 'if youre happy and you know it'
-                            {print} action
-                        {print} 'if youre happy and you know it and you really want to show it'
-                        {print} 'if youre happy and you know it'
-                        {print} action
+                    _ actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
+                    _ {for} action {in} actions
+                    _ {for} i {in} {range} 1 {to} 2
+                    _ {print} 'if youre happy and you know it'
+                    _ {print} action
+                    _ {print} 'if youre happy and you know it and you really want to show it'
+                    _ {print} 'if youre happy and you know it'
+                    _ {print} action
                     ```
             13:
                 story_text: |
@@ -3798,7 +3961,7 @@ adventures:
                     The Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!
 
                     ### Exercise
-                    Complete the Old McDonald song by setting the variable `animal` to `animals[i]` and `sound` to `sounds[i]`.
+                    Complete the Old MacDonald song by setting the variable `animal` to `animals[i]` and `sound` to `sounds[i]`.
                 example_code: |
                     ```
                     animals = ['pig', 'dog', 'cow']
@@ -3806,7 +3969,7 @@ adventures:
                     {for} i {in} {range} 1 {to} 3
                         animal = _
                         sound = _
-                        {print} 'Old McDonald had a farm'
+                        {print} 'Old MacDonald had a farm'
                         {print} 'E I E I O!'
                         {print} 'and on that farm he had a ' animal
                         {print} 'E I E I O!'
@@ -3868,6 +4031,33 @@ adventures:
                     {print} 'Up above the world so high'
                     {print} 'Like a diamond in the sky'
                     {call} _
+                    ```
+            16:
+                story_text: |
+                    ### Exercise
+                    Finish the nursery rhyme!
+                example_code: |
+                    ```
+                    number = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+                    object = ['on his drum', 'on his shoe', 'on his knee', 'on his door', 'on his hive', 'on his sticks', 'up in heaven', 'on his gate', 'on his vine', 'once again']
+
+                    _
+                        {print} 'This old man'
+                        {print} 'He played ' _
+                        {print} 'He played knick-knack ' _
+                        {print} 'With a knick-knack paddywhack'
+                        {print} 'Give the dog a bone'
+                        {print} 'This old man came rolling home'
+                        {sleep} 8
+                        {clear}
+                    ```
+                story_text_2: |
+                    ### Exersice 2
+                    Now create your own code for the nursery rhyme 'The wheels on the bus' on the same way!
+                example_code_2: |
+                    ```
+                    object = ['wheels', 'doors', _]
+                    movement = [ 'round and round', 'open and shut', _]
                     ```
     tic:
         name: Tic Tac Toe
@@ -3938,7 +4128,7 @@ adventures:
                     ```
             14:
                 story_text: |
-                    In the previous levels you've made a tic tac toe game. Now you've learned how to use the = sign, the == sign and the != sign.
+                    In the previous levels you've made a tic tac toe game. Now you've learned how to use the `=` sign, the `==` sign and the `!=` sign.
                     You can use this knowledge in your new Tic Tac Toe game, like this:
                 example_code: |
                     ```
@@ -4156,9 +4346,15 @@ adventures:
 
                     Using `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} {right}` turns a quarter turn in clockwise direction, `{turn} {left}` turns counter clockwise.
                     If you want to go backwards, you use the `{forward}` command but with a negative number. So for example `{forward} -100`
-
-                    This is the start of a little staircase. Can you make it have 5 steps?
                 example_code: |
+                    ```
+                    {forward} 100
+                    {turn} {left}
+                    ```
+                story_text_2: |
+                    ### Exercise
+                    This is the start of a little staircase. Can you make it have 5 steps?
+                example_code_2: |
                     ```
                     {forward} 20
                     {turn} {right}
@@ -4429,7 +4625,7 @@ adventures:
                 example_code: |
                     Hint:
                     ```
-                    chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?
+                    chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?'
                     {if} _
                     ```
             6:
@@ -4569,12 +4765,10 @@ adventures:
                 story_text: |
                     ### Exercise
                     Recreate the drawings with the turtle!
+                    Hint: Bracelet designing program. Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
+                    </div>
+                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
                 example_code: |
-                    Hint: Bracelet designing program
-
-
-                    Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
-
                     ```
                     {define} draw_a_square
                     _

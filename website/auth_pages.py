@@ -12,6 +12,7 @@ from website.auth import (
     RESET_LENGTH,
     SESSION_LENGTH,
     TOKEN_COOKIE_NAME,
+    JUST_LOGGED_OUT,
     check_password,
     create_recover_link,
     create_verify_link,
@@ -245,6 +246,7 @@ class AuthModule(WebsiteModule):
         forget_current_user()
         if request.cookies.get(TOKEN_COOKIE_NAME):
             self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
+        session[JUST_LOGGED_OUT] = True
         return "", 200
 
     @ route("/destroy", methods=["POST"])
@@ -253,6 +255,7 @@ class AuthModule(WebsiteModule):
         forget_current_user()
         self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         self.db.forget_user(user["username"])
+        session[JUST_LOGGED_OUT] = True
         return "", 200
 
     @ route("/destroy_public", methods=["POST"])
@@ -433,6 +436,7 @@ class AuthModule(WebsiteModule):
             "teacher_request": True if account.get("is_teacher") else None,
             "verification_pending": hashed_token,
             "last_login": timems(),
+            "pair_with_teacher": 1 if account.get("pair_with_teacher") else 0,
         }
 
         for field in ["country", "birth_year", "gender", "language", "heard_about", "prog_experience",

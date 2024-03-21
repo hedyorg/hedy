@@ -7,16 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-01-18 10:49+0100\n"
-"PO-Revision-Date: 2024-02-10 12:08+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language-Team: tr <LL@li.org>\n"
+"POT-Creation-Date: 2000-01-01 00:00+0000\n"
+"PO-Revision-Date: 2000-01-01 00:00+0000\n"
+"Last-Translator: Someone <someone@example.com>\n"
 "Language: tr\n"
+"Language-Team: tr <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.4-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -75,6 +74,9 @@ msgstr "Görünüşe göre {line_number} numaralı satırda bir komut kullanmay�
 msgid "Missing Inner Command"
 msgstr "Görünüşe göre {line_number} satırında kullandığınız {command} deyimiyle bir komut kullanmayı unutmuşsunuz."
 
+msgid "Missing Square Brackets"
+msgstr "It looks like you forgot to use square brackets [] around the list you were creating on line {line_number}."
+
 #, fuzzy
 msgid "Missing Variable"
 msgstr "It looks like your {command} is missing a variable at the start of the line."
@@ -95,6 +97,10 @@ msgstr "Girdiğiniz kod geçerli bir Hedy kodu değil. {location[0]} numaralı s
 
 msgid "Pressit Missing Else"
 msgstr "Farklı bir tuşa bastığınızda ne olacağını eklemeyi unuttunuz, kodunuza bir {else} ekleyin"
+
+#, fuzzy
+msgid "Save Microbit code "
+msgstr "Save Microbit code"
 
 msgid "Too Big"
 msgstr "Vay canına! Programınızda etkileyici sayıda {lines_of_code} kod satırı var! Ancak bu seviyede yalnızca {max_lines} satır işleyebiliyoruz. Programınızı biraz küçültün ve tekrar deneyin."
@@ -134,6 +140,7 @@ msgstr "Your function used the wrong number of arguments. You provided {used_num
 msgid "account_overview"
 msgstr "Hesaba genel bakış"
 
+#, fuzzy
 msgid "accounts_created"
 msgstr "Hesaplar başarıyla oluşturuldu."
 
@@ -175,20 +182,27 @@ msgstr "Macera"
 msgid "adventure_cloned"
 msgstr "Adventure is cloned"
 
+#, fuzzy
+msgid "adventure_code_button"
+msgstr "Adventure Code"
+
+#, fuzzy
+msgid "adventure_codeblock_button"
+msgstr "Use this button when you want to create a block of code that students can run in your adventure. Tip: put the selection at the end of the last line of the code block and <kbd>Enter</kbd> 3 times to type after a code block."
+
 msgid "adventure_duplicate"
 msgstr "Bu isimle bir maceranız zaten var."
 
 msgid "adventure_empty"
 msgstr "Bir macera ismi girmediniz!"
 
-msgid "adventure_exp_1"
-msgstr "Seçtiğiniz macerayı sağ tarafa yazın. Maceranızı oluşturduktan sonra \"özelleştirmeler\" altındaki sınıflarınızdan birine dahil edebilirsiniz. Eğer maceranıza bir komut eklemek istiyorsanız lütfen aşağıdaki gibi kod çapaları kullanın:"
-
-msgid "adventure_exp_2"
-msgstr "Gerçek kod parçacıklarını göstermek istiyorsanız, örneğin öğrencilere bir şablon veya kod örneği vermek için, lütfen bunun gibi ön çapalar kullanın:"
-
+#, fuzzy
 msgid "adventure_exp_3"
 msgstr "Anahtar kelimeleri her zaman { } ile çevrelediğinizden emin olun, böylece doğru şekilde tanınırlar. Maceranızın işlenmiş şeklini görüntülemek için \"önizleme\" düğmesini kullanabilirsiniz. Macerayı, ona özel bir sayfada görüntülemek için öğretmenler sayfasından \"görüntüle\"yi seçin."
+
+#, fuzzy
+msgid "adventure_exp_classes"
+msgstr "Your adventure is used within the following classes"
 
 msgid "adventure_id_invalid"
 msgstr "Bu macera kimliği geçersiz."
@@ -207,9 +221,6 @@ msgstr "Maceramın Hedy'de herkese açık hale getirilebileceğini kabul ediyoru
 
 msgid "adventure_updated"
 msgstr "Macera güncellendi!"
-
-msgid "adventures"
-msgstr "Mevcut Maceralar"
 
 #, fuzzy
 msgid "adventures_info"
@@ -263,17 +274,19 @@ msgstr "Emin misiniz? Bu işlemi geri alamazsınız."
 msgid "ask_needs_var"
 msgstr "2. seviyeden itibaren, {ask} bir değişkenle birlikte kullanılmalıdır. Örnek: isim {is} {ask} Senin adın ne?"
 
-msgid "back_to_class"
-msgstr "Sınıfına geri dön"
-
-msgid "back_to_teachers_page"
-msgstr "Öğretmenler sayfasına geri dönün"
+#, fuzzy
+msgid "available_in"
+msgstr "Available in:"
 
 msgid "become_a_sponsor"
 msgstr "Sponsor olun"
 
 msgid "birth_year"
 msgstr "Doğum yılı"
+
+#, fuzzy
+msgid "bug"
+msgstr "Bug"
 
 msgid "by"
 msgstr "tarafından"
@@ -286,6 +299,9 @@ msgstr "Program ayrıştırılamadı"
 
 msgid "catch_index_exception"
 msgstr "{list_name} listesine erişmeye çalıştınız ancak liste ya boş ya da istenen dizin orada değil."
+
+msgid "catch_multiple_values_exception"
+msgstr "While running your program the command {command} received the values {value} and {value} which are not allowed. {suggestion}."
 
 #, fuzzy
 msgid "catch_value_exception"
@@ -520,6 +536,14 @@ msgstr "Doğrudan açın"
 msgid "disable"
 msgstr "Devre dışı bırak"
 
+#, fuzzy
+msgid "disable_parsons"
+msgstr "Disable all puzzles"
+
+#, fuzzy
+msgid "disable_quizes"
+msgstr "Disable all quizes"
+
 msgid "disabled"
 msgstr "Devre dışı"
 
@@ -630,6 +654,26 @@ msgstr "Seçtiğiniz favori program geçersiz."
 msgid "favourite_success"
 msgstr "Programınız favori olarak ayarlanmıştır."
 
+#, fuzzy
+msgid "feature"
+msgstr "Feature"
+
+#, fuzzy
+msgid "feedback"
+msgstr "Feedback"
+
+#, fuzzy
+msgid "feedback_message_error"
+msgstr "Something went wrong, please try again later."
+
+#, fuzzy
+msgid "feedback_message_success"
+msgstr "Thank you, we recieved your feedback and will contact you if needed."
+
+#, fuzzy
+msgid "feedback_modal_message"
+msgstr "Please send us a message with a category. We appreciate your help to improve Hedy!"
+
 msgid "female"
 msgstr "Kadın"
 
@@ -674,6 +718,10 @@ msgstr "Sertifikanızı alın!"
 
 msgid "give_link_to_teacher"
 msgstr "Aşağıdaki bağlantıyı öğretmeninize verin:"
+
+#, fuzzy
+msgid "go_back"
+msgstr "Go back"
 
 msgid "go_back_to_main"
 msgstr "Ana sayfaya geri dön"
@@ -720,9 +768,6 @@ msgstr "Hedy öğretici simgesi"
 msgid "hello_logo"
 msgstr "Merhaba"
 
-msgid "hello_world"
-msgstr "Merhaba dünya!"
-
 msgid "hidden"
 msgstr "Gizli"
 
@@ -731,12 +776,6 @@ msgstr "Kopya kağıdını gizle"
 
 msgid "hide_keyword_switcher"
 msgstr "Anahtar kelime değiştiriciyi gizle"
-
-msgid "hide_parsons"
-msgstr "Yap-bozu gizle"
-
-msgid "hide_quiz"
-msgstr "Kısa sınavı gizle"
 
 msgid "highest_level_reached"
 msgstr "Ulaşılan en yüksek seviye"
@@ -759,6 +798,7 @@ msgstr "İpucu?"
 msgid "ill_work_some_more"
 msgstr "Üzerinde biraz daha çalışacağım"
 
+#, fuzzy
 msgid "image_invalid"
 msgstr "Seçtiğiniz resim geçersiz."
 
@@ -880,6 +920,7 @@ msgstr "Seviye devre dışı"
 msgid "level_future"
 msgstr "Bu seviye otomatik olarak açılacak "
 
+#, fuzzy
 msgid "level_invalid"
 msgstr "Bu Hedy seviyesi geçersiz."
 
@@ -1004,6 +1045,14 @@ msgstr "Erkek"
 
 msgid "mandatory_mode"
 msgstr "Zorunlu geliştirici kipi"
+
+#, fuzzy
+msgid "more_options"
+msgstr "More options"
+
+#, fuzzy
+msgid "multiple_levels_warning"
+msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
 
 msgid "my_account"
 msgstr "Hesabım"
@@ -1182,6 +1231,10 @@ msgstr "sayfa"
 
 msgid "page_not_found"
 msgstr "Aradığın sayfayı bulamadık!"
+
+#, fuzzy
+msgid "pair_with_teacher"
+msgstr "I would like to be paired with another teacher for help"
 
 msgid "parsons_title"
 msgstr "Yap-boz"
@@ -1495,6 +1548,9 @@ msgstr "Select all"
 msgid "select_lang"
 msgstr "Select language"
 
+msgid "select_levels"
+msgstr "Select levels"
+
 #, fuzzy
 msgid "select_tag"
 msgstr "Select tag"
@@ -1518,17 +1574,8 @@ msgstr "Yakında şifrenizi nasıl sıfırlayacağınıza ilişkin talimatları 
 msgid "settings"
 msgstr "Kişisel ayarlarım"
 
-msgid "share"
-msgstr "Paylaş"
-
 msgid "share_by_giving_link"
 msgstr "Aşağıdaki bağlantıyı vererek programınızı diğer insanlara gösterin:"
-
-msgid "share_confirm"
-msgstr "Programı herkese açık yapmak istediğinizden emin misiniz?"
-
-msgid "share_success_detail"
-msgstr "Program başarıyla paylaşıldı."
 
 msgid "share_your_program"
 msgstr "Programınızı paylaşın"
@@ -1541,6 +1588,10 @@ msgstr "bir tek tırnak"
 
 msgid "slash"
 msgstr "bir sağa eğik çizgi"
+
+#, fuzzy
+msgid "sleeping"
+msgstr "Sleeping..."
 
 #, fuzzy
 msgid "slides"
@@ -1565,6 +1616,10 @@ msgstr "bir yıldız"
 msgid "start_hedy_tutorial"
 msgstr "Hedy öğreticisini başlat"
 
+#, fuzzy
+msgid "start_learning"
+msgstr "Start learning"
+
 msgid "start_programming"
 msgstr "Programlamaya başlayın"
 
@@ -1576,6 +1631,10 @@ msgstr "Kısa sınavı başlatın"
 
 msgid "start_teacher_tutorial"
 msgstr "Öğretmen öğreticisini başlatın"
+
+#, fuzzy
+msgid "start_teaching"
+msgstr "Start teaching"
 
 msgid "step_title"
 msgstr "Ödev"
@@ -1652,6 +1711,9 @@ msgstr "Use a note between C0 and B9 or a number between 1 and 70"
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
 
+msgid "suggestion_numbers_or_strings"
+msgstr "Try changing the values to be all text or all numbers"
+
 msgid "surname"
 msgstr "İlk Adınız"
 
@@ -1722,8 +1784,8 @@ msgstr ""
 "\n"
 "Ama bazen de bir kod parçası göstermek isteyebilirim, bunun gibi:\n"
 "<pre>\n"
-"{ask} Adın ne senin?\n"
-"{echo} Demek senin adın \n"
+"ask Adın ne senin?\n"
+"echo Demek senin adın \n"
 "</pre>"
 
 msgid "this_turns_in_assignment"
@@ -1815,9 +1877,6 @@ msgstr "Hedy'nin çevirisini yapmak"
 msgid "translator"
 msgstr "Çevirmen"
 
-msgid "try_it"
-msgstr "Hadi Deneyin"
-
 msgid "tutorial"
 msgstr "Öğretici"
 
@@ -1844,15 +1903,6 @@ msgstr "Seviye eşiklerinin kilidini aç"
 msgid "unsaved_class_changes"
 msgstr "Kaydedilmemiş değişiklikler var, bu sayfadan ayrılmak istediğinize emin misiniz?"
 
-msgid "unshare"
-msgstr "Paylaşımı kaldır"
-
-msgid "unshare_confirm"
-msgstr "Programı tekrar size özel yapmak istediğinizden emin misiniz?"
-
-msgid "unshare_success_detail"
-msgstr "Programın paylaşılması başarıyla kaldırıldı."
-
 msgid "update_adventure_prompt"
 msgstr "Bu macerayı güncellemek istediğinize emin misiniz?"
 
@@ -1870,6 +1920,10 @@ msgstr "Programlarda boşlukların kullanılması"
 
 msgid "use_of_nested_functions_exception"
 msgstr "İç içe fonksiyonların kullanımı"
+
+#, fuzzy
+msgid "used_in"
+msgstr "Used in:"
 
 msgid "user"
 msgstr "kullanıcı"
@@ -2054,9 +2108,6 @@ msgstr "Programınız"
 #~ msgid "question_invalid"
 #~ msgstr "Your token is invalid."
 
-#~ msgid "select_levels"
-#~ msgstr "Select levels"
-
 #~ msgid "too_many_attempts"
 #~ msgstr "Too many attempts"
 
@@ -2077,3 +2128,40 @@ msgstr "Programınız"
 
 #~ msgid "write_first_program"
 #~ msgstr "İlk programınızı yazın!"
+
+#~ msgid "adventure_exp_1"
+#~ msgstr "Seçtiğiniz macerayı sağ tarafa yazın. Maceranızı oluşturduktan sonra \"özelleştirmeler\" altındaki sınıflarınızdan birine dahil edebilirsiniz. Eğer maceranıza bir komut eklemek istiyorsanız lütfen aşağıdaki gibi kod çapaları kullanın:"
+
+#~ msgid "adventure_exp_2"
+#~ msgstr "Gerçek kod parçacıklarını göstermek istiyorsanız, örneğin öğrencilere bir şablon veya kod örneği vermek için, lütfen bunun gibi ön çapalar kullanın:"
+
+#~ msgid "adventures"
+#~ msgstr "Mevcut Maceralar"
+
+#~ msgid "hello_world"
+#~ msgstr "Merhaba dünya!"
+
+#~ msgid "share_confirm"
+#~ msgstr "Programı herkese açık yapmak istediğinizden emin misiniz?"
+
+#~ msgid "share_success_detail"
+#~ msgstr "Program başarıyla paylaşıldı."
+
+#~ msgid "unshare_confirm"
+#~ msgstr "Programı tekrar size özel yapmak istediğinizden emin misiniz?"
+
+#~ msgid "unshare_success_detail"
+#~ msgstr "Programın paylaşılması başarıyla kaldırıldı."
+
+#~ msgid "hide_parsons"
+#~ msgstr "Yap-bozu gizle"
+
+#~ msgid "hide_quiz"
+#~ msgstr "Kısa sınavı gizle"
+
+#~ msgid "back_to_class"
+#~ msgstr "Sınıfına geri dön"
+
+#~ msgid "classes"
+#~ msgstr ""
+

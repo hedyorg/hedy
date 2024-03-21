@@ -32,7 +32,7 @@ Input { Text (is+ | Op<"=">) input+ Op<"("> Arguments? Op<")"> }
 Sleep { sleep+ (Expression )? }
 
 ListAccess { Text Op<"["> (random+ | Text | Number) Op<"]">}
-Play { play+ Text+ }
+Play { play+ Expression }
 
 Turtle[@isGroup=turtle] {
     Forward { forward+ (Expression ) } |

@@ -8,6 +8,9 @@ describe('customize class page', () => {
       cy.getBySel('view_class_link').first().click(); // Press on view class button
       cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
       cy.getBySel('customize_class_button').click(); // Press customize class button
+      cy.get("#opening_date_container").should("not.be.visible")
+      cy.get("#opening_date_label").click();
+      cy.get("#opening_date_container").should("be.visible")
 
       // Remove any customizations that already exist to get the class into a predictable state
       // This always throws up a modal dialog
@@ -123,8 +126,8 @@ describe('customize class page', () => {
                 .should('have.length', startLength);
 
               // the adventure should now be last
-              cy.get('[data-cy="level-2"] div:last input')
-                .should('have.value', `${adventure}`)
+              cy.get(`[data-cy="level-2"] div[data-cy="${adventure}"`)
+                .should("exist")
           });
       });
     });

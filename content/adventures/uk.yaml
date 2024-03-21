@@ -74,7 +74,7 @@ adventures:
                     Ось приклад команди `{remove}` у вашій історії
 
                     Скопіюйте свою історію з попередніх рівнів у цей рівень.
-                    У цьому рівні ви вивчили 3 нові команди `{at} {random}`, `{add} {to}` та `{remove} {from}` .
+                    У цьому рівні ви вивчили 3 нові команди `{at} {random}`, `{add} {to_list}` та `{remove} {from}` .
                     Додайте нові рядки коду до вашої історії, щоб усі нові команди з'явилися у ній хоча б один раз.
                 example_code_3: |
                     ```
@@ -86,9 +86,6 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Ви могли помітити, що у попередніх рівнях залишилась проблема. Ви намагались надрукувати речення, яке містить слово name, тобто `{print}` моє ім'я - name.
-                    Ви можете розв'язувати цю проблему у цьому рівні. Ви повинні використовувати лапки для всього, що збираєтесь надрукувати.
-
                     ##Вправа
                     Скопіюйте приклад коду і змусьте його працювати, додавши лапки в рядках.
 
@@ -167,8 +164,7 @@ adventures:
                         {print} _
                     ```
             9:
-                story_text: "У цьому рівні ви можете використовувати команди `{if}` і `{repeat}` всередині інших команд `{if}` і `{repeat}`. \nЦе дає вам багато можливостей і дійсно допомагає зробити вашу історію інтерактивною.\n\n### Вправа 1\n Закінчіть код, щоб `{if}` працював коректно.\n\n### Вправа\
-                    \ 2\nДодайте `{if}` та `{else}` для тієї частини історії, де Робін також повертається додому.\n \n### Вправа 3\nПоверніться до своєї історії 8-го рівня і використайте принаймні два `{if}` всередині іншого `{if}`.\n"
+                story_text: "У цьому рівні ви можете використовувати команди `{if}` і `{repeat}` всередині інших команд `{if}` і `{repeat}`. \nЦе дає вам багато можливостей і дійсно допомагає зробити вашу історію інтерактивною.\n\n### Вправа 1\n Закінчіть код, щоб `{if}` працював коректно.\n\n### Вправа 2\nДодайте `{if}` та `{else}` для тієї частини історії, де Робін також повертається додому.\n \n### Вправа 3\nПоверніться до своєї історії 8-го рівня і використайте принаймні два `{if}` всередині іншого `{if}`.\n"
                 example_code: |
                     ```
                     {print} 'Робін йде центром міста'
@@ -277,7 +273,7 @@ adventures:
             3:
                 story_text: |
                     ## Add to
-                    You can add items to the list with the `{add} {to}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
+                    You can add items to the list with the `{add} {to_list}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
                 example_code: |
                     ```
                     animals {is} dog, cat, kangaroo
@@ -404,8 +400,10 @@ adventures:
                     If you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.
                     But be careful not to get more than 21 points, because if you do, you lose!
                     The player who gets closest to 21, without going over it, wins!
-
                     Have fun!
+
+                    ### Exercise
+                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -461,14 +459,14 @@ adventures:
                             points = points + 10
                         {elif} card_3 == 'Ace':
                             {if} points > 11:
-                                points = points + 11
-                            {else}:
                                 points = points + 1
+                            {else}:
+                                points = points + 11
                         {else}:
                             points = points + card_3
-                        print 'You get an extra ' card_3 ' (' points ' points)'
+                        {print} 'You get an extra ' card_3 ' (' points ' points)'
                     {else}:
-                        print 'No extra cards'
+                        {print} 'No extra cards'
                     # Winner
                     {if} points > 21 {or} dealer_points > points {or} dealer_points == 21:
                         {print} 'You lose'
@@ -531,37 +529,56 @@ adventures:
                     {else} _
             9:
                 story_text: |
-                    In previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game. Like this...
+                    In a previous level you've created a calculator, in this level you can expand that code so it asks multiple questions.
+
+                    ### Exercise 1
+                    Can you finish line 10 to get the code to work?
+
+                    ### Exercise 2
+                    Give the player feedback when the enter an answer, like `{print} 'Correct!'` or `{print} 'Wrong! The correct answer is ' correct_answer`.
                 example_code: |
                     ```
                     score = 0
                     {repeat} 10 {times}
                         numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        number1 = numbers {at} {random}
-                        number2 = numbers {at} {random}
-                        correct_answer = number1 * number2
-                        {print} 'What is ' number1 ' times ' number2 '?'
+                        number_1 = numbers {at} {random}
+                        number_2 = numbers {at} {random}
+                        correct_answer = number_1 * number_2
+                        {print} 'What is ' number_1 ' times ' number_2 '?'
                         answer = {ask} 'Type your answer here...'
-                        {print} 'Your answer is' answer
-                        {if} answer {is} correct_answer
+                        {print} 'Your answer is ' answer
+                        {if} _ {is} _
                             score = score + 1
                     {print} 'Great job! Your score is... ' score ' out of 10!'
                     ```
             10:
                 story_text: |
                     This calculator game helps you practise your tables of multiplication!
-                    If you add more numbers to the list, you can practise all the multiplications.
+                    ### Exercise
+                    Fill in the blanks. We want this program to ask the player these questions:
+                    ```
+                    How much is 1 times 1?
+                    How much is 1 times 2?
+                    How much is 1 times 3?
+                    How much is 2 times 1?
+                    How much is 2 times 2?
+                    How much is 2 times 3?
+                    How much is 3 times 1?
+                    How much is 3 times 2?
+                    How much is 3 times 3?
+                    _
+                    ```
                 example_code: |
                     ```
                     numbers = 1, 2, 3
-                    {for} number1 {in} numbers
-                        {for} number2 {in} numbers
-                            answer = {ask} 'How much is ' number2 ' times ' number1 '?'
-                            correct = number1 * number2
+                    {for} _
+                        {for} _
+                            answer = {ask} _
+                            correct = number_1 * number_2
                             {if} answer {is} correct
                                 {print} 'Great job!'
                             {else}
-                                {print} 'Thats wrong. The right answer is ' correct
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |
@@ -593,7 +610,7 @@ adventures:
                     ### Exercise 1
                     Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
 
-                    ### Exercise 2 Extra
+                    ### Exercise 2
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
                     Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
                     Empty the programming field and create your own solution.
@@ -825,9 +842,6 @@ adventures:
                     total = price + amount_of_product
                     {print} 'That will be $' price 'please'
                     ```
-
-                    total = price + amount_of_product
-                    {print} 'That will be $' price 'please'
             7:
                 story_text: |-
                     ### Exercise
@@ -865,21 +879,7 @@ adventures:
                     {sleep} 5
                     {print} 'All done! That will be $' price ' please!'
                     {print} 'Thank you! Byebye!'
-
-                            {print} That will be $25'
-                            price = 25
-                        {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
-                    {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
+                    ```
             9:
                 story_text: |-
                     ### Exercise
@@ -1171,7 +1171,7 @@ adventures:
                     for i in range 1 to 3
                         animal = animals[i]
                         sound = sounds[i]
-                        print 'Old McDonald had a farm'
+                        print 'Old MacDonald had a farm'
                         print 'E I E I O!'
                         print 'and on that farm he had a ' animal
                         print 'E I E I O!'
@@ -1187,26 +1187,29 @@ adventures:
         description: Пояснення рівнів
         levels:
             1:
-                story_text: "На першому рівні ви можете використовувати команди `{print}`, `{ask}` та `{echo}`.\nНаберіть свій код у полі для програмування. Або натисніть зелену кнопку в блоці прикладу коду, і код буде набраний за вас!\nСпробуйте код самостійно, натиснувши зелену кнопку \"Запустити код\"\
-                    \ під полем програмування.\n \nВивести текст на екран можна за допомогою команди `{print}`.     \n"
+                story_text: "На першому рівні ви можете використовувати команди `{print}`, `{ask}` та `{echo}`.\nНаберіть свій код у полі для програмування. Або натисніть зелену кнопку в блоці прикладу коду, і код буде набраний за вас!\nСпробуйте код самостійно, натиснувши зелену кнопку \"Запустити код\" під полем програмування.\n \nВивести текст на екран можна за допомогою команди `{print}`.     \n"
                 example_code: |
                     ```
                     {print} Hello world!
                     ```
             2:
                 story_text: |
-                    На 2-му рівні ми вивчимо дві нові команди: `{is}` та `{sleep}`.
-                    Ви можете назвати слово за допомогою `{is}`. Це називається змінною. У цьому прикладі ми створили змінну з назвою name і змінну з назвою age. Ви можете використовувати слово name в будь-якому місці вашого коду, і воно буде замінено на Хеді, ось так:
+                    Congratulations! You've reached level 2. Hopefully you've already made some awesome codes!
+                    In the first level you might've notice that the `{echo}` command can only save one bit of information at a time.
+                    For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
 
-                    Таким чином, вам більше не потрібна команда `{echo}`
+                    That changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.
+                    So let's go to the next tab!
                 example_code: |
+                    **Warning! This code does not work!**
+                    In Hedy commands will change sometimes. `{echo}` for example only works in level 1. In this level you'll learn a better way to echo answers back.
                     ```
-                    name {is} Хеді
-                    age {is} 15
-                    {print} name is age years old
+                    {print} Welcome at Hedy's
+                    {ask} What would you like to eat?
+                    {echo} So you want
+                    {ask} what would you like to drink?
+                    {echo} So you want
                     ```
-                story_text_2: |
-                    Команда `{print}` працює так само, але змінилася команда `{ask}`. У команді `{ask}` також потрібно використовувати змінну. Виглядає це наступним чином:
             3:
                 story_text: |
                     На рівні 3 ви можете скласти список. Ви можете дозволити комп'ютеру вибрати щось випадкове зі списку. Для цього використовується команда `{at} {random}`.
@@ -1316,8 +1319,7 @@ adventures:
 
                     {print} 2.5 + 2.5
             13:
-                story_text: "Зараз ми будемо вивчати `{and}` та `{or}`! Якщо ви хочете перевірити два оператори, вам не обов'язково використовувати два `{if}`, ви можете використовувати `{and}` і `{or}`. \n\nЯкщо ви використовуєте `{and}`, обидва оператори, зліва і справа від `{and}`, повинні бути істинними.\
-                    \ Ми також можемо використовувати `{or}`. Тоді лише одне твердження має бути правильним."
+                story_text: "Зараз ми будемо вивчати `{and}` та `{or}`! Якщо ви хочете перевірити два оператори, вам не обов'язково використовувати два `{if}`, ви можете використовувати `{and}` і `{or}`. \n\nЯкщо ви використовуєте `{and}`, обидва оператори, зліва і справа від `{and}`, повинні бути істинними. Ми також можемо використовувати `{or}`. Тоді лише одне твердження має бути правильним."
                 example_code: |
                     ```
                     name = {ask} 'what is your name?'
@@ -1617,6 +1619,20 @@ adventures:
                     {for} animal {in} animals
                         {print} 'I love ' animal
                     ```
+                story_text_2: |
+                    ### Exercise
+                    Finish this code by adding `{for} action {in} actions` to line 2.
+                example_code_2: |
+                    ```
+                    actions = clap your hands, stomp your feet, shout Hurray!
+                    _
+                        {repeat} 2 {times}
+                            {print} 'If youre happy and you know it, ' action
+                            {sleep} 2
+                        {print} 'If youre happy and you know it, and you really want to show it'
+                        {print} 'If youre happy and you know it, ' action
+                        {sleep} 3
+                    ```
             11:
                 story_text: |-
                     На цьому рівні ми додаємо нову форму `{for}`. На попередніх рівнях ми використовували `{for}` зі списком, але ми також можемо використовувати `{for}` з числами.
@@ -1683,14 +1699,11 @@ adventures:
                     Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
             4:
                 story_text: |
-                    This level has no new functions, but allows you to practice with using the quotation marks.
-                    You can remake your level 3 code, and make sure to add the quotation marks in the right places!
+                    ### Exercise
+                    We have removed all the quotation marks from this example code, can you add them in all the right places?
 
-                    Mind that in level 3, we couldn't use the word 'question' as both the name of the variable and a normal word that could be printed.
-                    The quotation marks in level 3 make this possible!
-
-                    Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
-                    Make sure to remove those apostrophes and change the spelling to Im or Whats.
+                    ### Exercise 2
+                    Go back to the previous level and copy your fortune teller code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ```
                     {print} 'Im Hedy the fortune teller!'
@@ -2444,7 +2457,7 @@ adventures:
                     C1 is the lowest note you can play, C10 is the highest.
 
                     ### Exercise
-                    Try out the example code and thenplay around with it! Can you create your own melody?
+                    Try out the example code and then play around with it! Can you create your own melody?
                     In the next level you'll learn how to play some existing songs.
                 example_code: |-
                     ```
@@ -2458,7 +2471,9 @@ adventures:
                     play C5
                     ```
             2:
-                story_text: Finish the songs! We have started the codes for some melodies.
+                story_text: |
+                    ### Exercise
+                    Finish the songs! We have started the codes for some melodies.
                 example_code: |
                     ```
                     {print} Old Mac Donald had a farm
@@ -2501,7 +2516,7 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Use the `{clear}` command to create a karaokemachine!
+                    Use the `{clear}` command to create a karaoke machine!
 
                     ### Exercise
                     Finish the karaoke version of 'Mary had a little lamb'.
@@ -2543,8 +2558,7 @@ adventures:
                     _
                     ```
             6:
-                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting\
-                    \ numbers. \nThen, see if you can compose a song using the numbers.\n"
+                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting numbers. \nThen, see if you can compose a song using the numbers.\n"
                 example_code: |
                     ```
                     number = {ask} 'Say a starting number between 1 and 67'
@@ -2615,10 +2629,10 @@ adventures:
                     ```
             12:
                 story_text: |
-                    Use functions in you songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle little star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
+                    Use functions in your songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle Little Star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
 
                     ### Exercise
-                    Finish the song of Twinkle Twinkle little star.
+                    Finish the song of Twinkle Twinkle Little Star.
                     Then look back at all the songs you've programmed in the levels before, can you make those codes better and shorter using functions too?
                 example_code: |
                     ```
@@ -2661,7 +2675,7 @@ adventures:
                     ```
             13:
                 story_text: |
-                    You can use a function with an argument for songs that have line taht are almost the same, but slightly different each time.
+                    You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
                     One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, buyt each time they are followed by a different couple of notes.
 
                     ### Exercise
@@ -2693,7 +2707,7 @@ adventures:
                     ```
             14:
                 story_text: |
-                    You can programm music for fun, but you can also use the musical notes to make something useful like a fire alarm!
+                    You can program music for fun, but you can also use the musical notes to make something useful like a fire alarm!
 
                     ### Exercise
                     Make sure the fire alarm rings when there is a fire!
@@ -2712,6 +2726,106 @@ adventures:
                     fire = {ask} 'Is there a fire?'
                     {if} fire _ 'yes'
                         {call} fire_alarm
+                    ```
+            15:
+                story_text: |
+                    **Warning** This adventure can become extremely annoying!
+                    We can also use the {while} command to repeat a song forever.
+
+                    ### Exercise
+                    Finish the never-ending song.
+                example_code: |
+                    ```
+                    {define} song
+                        {play} _
+
+                    yes_or_no = {ask} 'Do you want to hear my never-ending song?'
+                    {while} yes_or_no = 'yes'
+                        {call} song
+                        {print} '🥳'
+                    ```
+            16:
+                story_text: |
+                    Upgrade your Old MacDonald code!
+
+                    ### Exercise
+                    Take your code from the 'Sing a Song' adventure and add musical notes to it!
+                    You can make a function for each line in the song and call that function after the line is printed.
+                    We defined the first line for you and called it in the code. Can you finish the whole song?
+                example_code: |
+                    ```
+                    {define} line_1
+                        {for} i {in} {range} 1 {to} 3
+                            {play} G
+                        {play} D
+                        {for} i {in} {range} 1 {to} 2
+                            {play} E
+                        {play} D
+
+                    animals = ['pig', 'dog', 'cow']
+                    sounds = ['oink', 'woof', 'moo']
+                    for i in range 1 to 3
+                        animal = animals[i]
+                        sound = sounds[i]
+                        print 'Old MacDonald had a farm'
+                        call line_1
+                        print 'E I E I O!'
+                        _
+                    ```
+            17:
+                story_text: |
+                    You can use the {elif} to create different options.
+
+                    ### Exercise
+                    Firstly, add colons to get the code to work.
+                    Then finish this code by adding at least 2 other songs for other moods. For example a happy song and an angry song.
+                example_code: |
+                    ```
+                    {define} scary_song
+                        {for} i {in} {range} 1 {to} 3
+                            {play} G
+                        {play} E
+                        {sleep} 2
+                        {for} i {in} {range} 1 {to} 3
+                            {play} F
+                        {play} D
+
+                    mood = {ask} 'Which emotion are you feeling?'
+                    {if} mood {is} 'fear'
+                        {call} scary_song
+                    {elif} _
+                    ```
+            18:
+                story_text: |
+                    ### Exercise
+                    Even in this last level of Hedy we can make some music! Be careful of all the syntax that is needed now.
+                    Take a good look at how the functions are defined and called upon in the example code.
+                    Finish the song!
+                example_code: |
+                    ```
+                    {def} line_1():
+                        {for} i {in} {range}(1, 5):
+                            {play} A
+                        {play} D
+                        {play} F
+                        {play} A
+
+                    {def} line_2():
+                        {for} i {in} {range}(1, 5):
+                            {play} G
+                        {play} C
+                        {play} E
+                        {play} G
+
+                    {def} line_3():
+                    _
+
+                    {print} ('The drunken sailor')
+                    {print} ('What shall we do with the drunken sailor?')
+                    line_1()
+                    line_2()
+                    line_3()
+                    {print} ('Early in the morning')
                     ```
     parrot:
         name: Папуга
@@ -2914,7 +3028,7 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     In Hedy you will find exercises in every adventure. An exercise allows you to practise the new commands and concepts, and lets you give your own twist to the example codes.
-                    In this exercise you will see a pink blank space. You have to fill something in the place of the blank space before the code can be ran.
+                    In this exercise you will see a pink blank space. You have to fill something in the place of the blank space before the code can be run.
 
                     Fill in the `{print}` command in the blank space and then add five more lines of code. Each line has to start with a `{print}` command.
                     Have fun!
@@ -3011,10 +3125,10 @@ adventures:
                 story_text_2: |
                     **All items in lists need quotation marks too**
                     Lists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.
-                    This allows you to save two words as 1 item on the list, for example 'Iron Man'.
+                    This allows you to save two words as 1 item on the list, for example 'Black Widow'.
                 example_code_2: |
                     ```
-                    superheroes = 'Spiderman', 'Batman', 'Iron Man'
+                    superheroes = 'Spiderman', 'Batman', 'Black Widow'
                     {print} superheroes {at} {random}
                     ```
                 story_text_3: |
@@ -3120,18 +3234,18 @@ adventures:
                     ```
             9:
                 story_text: |
-                    In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!
-                    In the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.
-                    Give it a try!
+                    Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...
+                    Good news! In this level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command. Putting a block of code inside another block of code is called nesting.                     ``` Putting a block of code inside another block of code is called nesting.
                 example_code: |
                     ```
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
-                    ```
+                    answer = {ask} 'Are you ready to learn something new?'
+                    {if} answer {is} yes
+                        {print} 'Great! You can learn to use the repeat command in the if command!'
+                        {print} 'Hooray!'
+                        {print} 'Hooray!'
+                        {print} 'Hooray!'
+                    {else}
+                        {print} 'Maybe you should practice some more in the previous level'
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: repeat_command_2
@@ -3182,7 +3296,10 @@ adventures:
             1:
                 story_text: |
                     In level 1 you can make your own virtual restaurant and take your guests' orders.
-                example_code: |
+                story_text_2: |
+                    ### Exercise
+                    Can you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?
+                example_code_2: |
                     ```
                     {print} Welcome to Hedy's restaurant 🍟
                     {ask} What would you like to order?
@@ -3190,9 +3307,6 @@ adventures:
                     {print} Thanks you for your order!
                     {print} It's on its way!
                     ```
-                story_text_2: |
-                    ### Exercise
-                    Can you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?
             2:
                 story_text: |
                     In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.
@@ -3245,22 +3359,24 @@ adventures:
                     ```
             4:
                 story_text: |
-                    In this level you have to use quotation marks when using the `{print}` command.
-                    Can you make your code from the previous levels work in this level too by adding the quotation marks?
+                    ### Exercise
+                    Add the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.
+                    Then, use the `{clear}` command to only show one line at a time in your output screen.
 
-                    Be careful! In the previous levels apostrophes were allowed in the text, but in this level Hedy will confuse them for quotation marks and the code will not work!
-                    So instead of typing  `{print} Today we're serving pizza` , you should type `{print} 'Today we are serving pizza'`
+                    ### Exercise 2
+                    Go back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots and add some `{clear}` commands.
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    {print} 'Today we are serving pizza or lasagna.'
-                    food {is} {ask} 'What would you like to eat?'
-                    {print} 'Great choice! The ' food ' is my favorite!'
-                    topping {is} {ask} 'Would you like meat or veggies on that?'
-                    {print} food ' with ' topping ' is on its way!'
-                    drinks {is} {ask} 'What would you like to drink with that?'
-                    {print} 'Thank you for your order.'
-                    {print} 'Your ' food ' and ' drinks ' will be right there!'
+                    _ Add the quotation marks to this code _
+                    {print} Welcome to Restaurant Chez Hedy!
+                    {print} Today we are serving pizza or lasagna.
+                    food {is} {ask} What would you like to eat?
+                    {print} Great choice! The  food  is my favorite!
+                    topping {is} {ask} Would you like meat or veggies on that?
+                    {print} food  with  topping  is on its way!
+                    drinks {is} {ask} What would you like to drink with that?
+                    {print} Thank you for your order.
+                    {print} Your  food  and  drinks  will be right there!
                     ```
             5:
                 story_text: |
@@ -3314,9 +3430,13 @@ adventures:
             8:
                 story_text: |
                     In this level you can make your virtual restaurant more elaborate by repeating multiple lines of code. Like this:
+
+                    ### Exercise
+                    This code can be expanded with more items on the menu, for example offering drinks, and/or multiple courses or desserts. Add at least one more item.
+                    **Extra** Add even more items, as many options as you like!
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
+                    {print} 'Welcome to Restaurant Chez Hedy!'
                     people = {ask} 'How many people will be joining us today?'
                     {print} 'Great!'
                     {repeat} people {times}
@@ -3325,9 +3445,6 @@ adventures:
                     {print} 'Thank you for ordering!'
                     {print} 'Enjoy your meal!'
                     ```
-                story_text_2: |
-                    ### Exercise
-                    Of course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!
             9:
                 story_text: |
                     У цьому рівні ви можете використовувати кластеризацію, щоб зробити ваш ресторан більш реалістичним та веселим!
@@ -3503,8 +3620,14 @@ adventures:
                     ```
             4:
                 story_text: |
-                    In this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.
-                    Do you complete the code by entering the correct commands or characters on the underscores?
+                    In this level we can further program rock, paper, scissors. But if you want to add text, you have to use quotation marks here too.
+                    ### Exercise
+                    Fill in quotation marks on the blanks. Mind that the variable `choices` should be outside the quotes.
+                example_code: |
+                    ```
+                    choices {is} rock, paper, scissors
+                    {print} _The computer chooses..._ choices {at} {random}
+                    ```
             5:
                 story_text: |
                     In this level we can determine who won.
@@ -3752,7 +3875,7 @@ adventures:
                             sound = woof
                         {if} animal {is} cow
                             sound = moo
-                        {print} 'Old McDonald had a farm'
+                        {print} 'Old MacDonald had a farm'
                         {print} 'E I E I O!'
                         {print} 'and on that farm he had a ' animal
                         {print} 'E I E I O!'
@@ -3787,17 +3910,21 @@ adventures:
                     ```
             12:
                 story_text: |
-                    In this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
+                    In this song we can make it even easier to program 'if you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
+
+                    ### Exercise
+                    Can you add the right amount of indentation to each line to make the song play correctly?
+                    Hint: Not all lines need indentation.
                 example_code: |
                     ```
-                    actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
-                    {for} action {in} actions
-                        {for} i {in} {range} 1 {to} 2
-                            {print} 'if youre happy and you know it'
-                            {print} action
-                        {print} 'if youre happy and you know it and you really want to show it'
-                        {print} 'if youre happy and you know it'
-                        {print} action
+                    _ actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
+                    _ {for} action {in} actions
+                    _ {for} i {in} {range} 1 {to} 2
+                    _ {print} 'if youre happy and you know it'
+                    _ {print} action
+                    _ {print} 'if youre happy and you know it and you really want to show it'
+                    _ {print} 'if youre happy and you know it'
+                    _ {print} action
                     ```
             13:
                 story_text: |
@@ -3821,7 +3948,7 @@ adventures:
                     The Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!
 
                     ### Exercise
-                    Complete the Old McDonald song by setting the variable `animal` to `animals[i]` and `sound` to `sounds[i]`.
+                    Complete the Old MacDonald song by setting the variable `animal` to `animals[i]` and `sound` to `sounds[i]`.
                 example_code: |
                     ```
                     animals = ['pig', 'dog', 'cow']
@@ -3829,7 +3956,7 @@ adventures:
                     {for} i {in} {range} 1 {to} 3
                         animal = _
                         sound = _
-                        {print} 'Old McDonald had a farm'
+                        {print} 'Old MacDonald had a farm'
                         {print} 'E I E I O!'
                         {print} 'and on that farm he had a ' animal
                         {print} 'E I E I O!'
@@ -3891,6 +4018,33 @@ adventures:
                     {print} 'Up above the world so high'
                     {print} 'Like a diamond in the sky'
                     {call} _
+                    ```
+            16:
+                story_text: |
+                    ### Exercise
+                    Finish the nursery rhyme!
+                example_code: |
+                    ```
+                    number = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+                    object = ['on his drum', 'on his shoe', 'on his knee', 'on his door', 'on his hive', 'on his sticks', 'up in heaven', 'on his gate', 'on his vine', 'once again']
+
+                    _
+                        {print} 'This old man'
+                        {print} 'He played ' _
+                        {print} 'He played knick-knack ' _
+                        {print} 'With a knick-knack paddywhack'
+                        {print} 'Give the dog a bone'
+                        {print} 'This old man came rolling home'
+                        {sleep} 8
+                        {clear}
+                    ```
+                story_text_2: |
+                    ### Exersice 2
+                    Now create your own code for the nursery rhyme 'The wheels on the bus' on the same way!
+                example_code_2: |
+                    ```
+                    object = ['wheels', 'doors', _]
+                    movement = [ 'round and round', 'open and shut', _]
                     ```
     tic:
         name: Tic Tac Toe
@@ -3961,7 +4115,7 @@ adventures:
                     ```
             14:
                 story_text: |
-                    In the previous levels you've made a tic tac toe game. Now you've learned how to use the = sign, the == sign and the != sign.
+                    In the previous levels you've made a tic tac toe game. Now you've learned how to use the `=` sign, the `==` sign and the `!=` sign.
                     You can use this knowledge in your new Tic Tac Toe game, like this:
                 example_code: |
                     ```
@@ -4179,9 +4333,15 @@ adventures:
 
                     Using `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} {right}` turns a quarter turn in clockwise direction, `{turn} {left}` turns counter clockwise.
                     If you want to go backwards, you use the `{forward}` command but with a negative number. So for example `{forward} -100`
-
-                    This is the start of a little staircase. Can you make it have 5 steps?
                 example_code: |
+                    ```
+                    {forward} 100
+                    {turn} {left}
+                    ```
+                story_text_2: |
+                    ### Exercise
+                    This is the start of a little staircase. Can you make it have 5 steps?
+                example_code_2: |
                     ```
                     {forward} 20
                     {turn} {right}
@@ -4452,7 +4612,7 @@ adventures:
                 example_code: |
                     Hint:
                     ```
-                    chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?
+                    chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?'
                     {if} _
                     ```
             6:
@@ -4592,12 +4752,10 @@ adventures:
                 story_text: |
                     ### Exercise
                     Recreate the drawings with the turtle!
+                    Hint: Bracelet designing program. Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
+                    </div>
+                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
                 example_code: |
-                    Hint: Bracelet designing program
-
-
-                    Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
-
                     ```
                     {define} draw_a_square
                     _

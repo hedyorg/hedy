@@ -2,13 +2,21 @@ import functools
 import operator
 import itertools
 from datetime import date, timedelta
+import sys
+from os import path
 
 from utils import timems, times
 
 from . import dynamo, auth
 from . import querylog
 
-storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage("dev_database.json")
+is_offline = getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
+if is_offline:
+    # Offline mode. Store data 1 directory upwards from `_internal`
+    storage = dynamo.MemoryStorage(path.join(sys._MEIPASS, "..", "database.json"))
+else:
+    # Production or dev: use environment variables or dev storage
+    storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage("dev_database.json")
 
 USERS = dynamo.Table(storage, "users", "username", indexes=[
     dynamo.Index("email"),
@@ -66,6 +74,8 @@ TAGS = dynamo.Table(storage, "tags", "id", indexes=[dynamo.Index("name", sort_ke
 # - skip (str): if the survey should never be shown or today date to be reminded later
 
 SURVEYS = dynamo.Table(storage, "surveys", "id")
+
+FEEDBACK = dynamo.Table(storage, "teacher_feedback", "id")
 
 # Class customizations
 #
@@ -690,6 +700,10 @@ class Database:
     def update_class_data(self, id, class_data):
         """Updates a class."""
         CLASSES.update({"id": id}, class_data)
+
+    def store_feedback(self, feedback):
+        """Store a feedback message in the database"""
+        FEEDBACK.create(feedback)
 
     def store_survey(self, survey):
         SURVEYS.create(survey)

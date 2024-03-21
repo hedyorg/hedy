@@ -244,7 +244,7 @@ levels:
             question_text: 如果你运行这段代码，它会输出什么？
             code: |-
                 名字 {is} 海蒂
-                {print} 你好，我的 名字 是 名字！
+                {print} 你好，我的 名字 是 名字
             mp_choice_options:
             -   option: 你好，我的 名字 是 名字
                 feedback: 变量“名字”会被替换成海蒂
@@ -2291,10 +2291,7 @@ levels:
                 {for} i {in} _ 1 {to} 10
                     {print} i
             mp_choice_options:
-            -   option: |-
-                    ```
-                    计数器
-                    ```
+            -   option: '`counter`'
                 feedback: 不是
             -   option: '`{range}`'
                 feedback: 正确
@@ -2312,15 +2309,26 @@ levels:
                     {print} i
             mp_choice_options:
             -   option: |-
+                    ```
                     1
                     2
                     3
+                    ```
                 feedback: 正确！
-            -   option: 1 2 3
+            -   option: |-
+                    ```
+                    1 2 3
+                    ```
                 feedback: 不是这个
-            -   option: 1, 2, 3
+            -   option: |-
+                    ```
+                    1, 2, 3
+                    ```
                 feedback: 不是这个
-            -   option: '123'
+            -   option: |-
+                    ```
+                    123
+                    ```
                 feedback: 不是这个
             hint: 这些数字会如何显示在屏幕上？
             correct_answer: A
@@ -2390,13 +2398,13 @@ levels:
             -   option: |-
                     ```
                     {for} i {in} {range} 0 {to} 10
-                        {print} - i
+                        {print} - 1 * i
                     ```
                 feedback: 这样海蒂会打印负数。
             -   option: |-
                     ```
-                    {for} i {in} {range}10到0
-                        {print} 10 9 8 7 6 5 4 3 2 1 0
+                    {for} i {in} {range}10 {to} 0
+                        {print} i
                     ```
                 feedback: 不幸的是这样并不对。
             -   option: |-
@@ -2405,7 +2413,7 @@ levels:
                         {print} 10 - i
                     ```
                 feedback: 对！
-            hint: 这里需要用到计算……
+            hint: 这里需要用到计算…
             correct_answer: D
             question_score: '10'
         5:
@@ -2476,16 +2484,23 @@ levels:
                     {print} 'hi'
             mp_choice_options:
             -   option: |-
+                    ```
                     23
                     24
                     25
+                    ```
                 feedback: 数字没有出现。 它没有说`{print}`i.
-            -   option: 23 hi 24 hi 25 hi
+            -   option: |-
+                    ```
+                    23 hi 24 hi 25 hi
+                    ```
                 feedback: 数字没有出现。 它没有说`{print}` i
             -   option: |-
+                    ```
                     hi
                     hi
                     hi
+                    ```
                 feedback: 正确
             -   option: '''hi''这个词会连续出现 25 次。'
                 feedback: 不，它只会出现 3 次。
@@ -3060,8 +3075,7 @@ levels:
             question_score: '10'
         10:
             question_text: 哪个命令需要出现在第8行???的地方？
-            code: "{print} '欢迎来到本超市的商品查找机'\n项目 = {ask} '你来找什么商品?'\n烘焙 = 'bread', 'buns', 'muffins'\n饮料= 'soda', 'water', 'lemonade'\n零食= 'chips', 'nuts', 'dips'\n冷冻= 'fries', 'icecream', 'pizza'\n水果= 'bananas', 'apples', 'oranges'\n{if} 项目 {in} 零食??? 项目 {in} 饮料\n    {print} '在第三通道'\n{if} 项目 {in} 烘焙 {or}\
-                \ 项目  {in} 烘焙 \n    {print} '这件东西放在商店的后面'\n{if} 项目  {in} 水果\n    {print} '水果在收银台附近出售'"
+            code: "{print} '欢迎来到本超市的商品查找机'\n项目 = {ask} '你来找什么商品?'\n烘焙 = 'bread', 'buns', 'muffins'\n饮料= 'soda', 'water', 'lemonade'\n零食= 'chips', 'nuts', 'dips'\n冷冻= 'fries', 'icecream', 'pizza'\n水果= 'bananas', 'apples', 'oranges'\n{if} 项目 {in} 零食??? 项目 {in} 饮料\n    {print} '在第三通道'\n{if} 项目 {in} 烘焙 {or} 项目  {in} 烘焙 \n    {print} '这件东西放在商店的后面'\n{if} 项目  {in} 水果\n    {print} '水果在收银台附近出售'"
             mp_choice_options:
             -   option: '`{and}`'
                 feedback: 没有同时出现在零食清单和饮料清单上的东西
@@ -3357,13 +3371,13 @@ levels:
                     tries = tries + 1
                 {print} '你掷出6点用了' tries ' 次.'
             mp_choice_options:
-            -   option: 在第1行 应该使用== 而不是 =
+            -   option: 在第 1 行中，应使用“==”而不是“=”
                 feedback: 不是这样的
             -   option: 第二行缺少引号
                 feedback: 这是不对的
-            -   option: 在第5行应该使用{if}而不是{while}
+            -   option: 在第5行应该使用`{if}`而不是`{while}`
                 feedback: 不是这样的
-            -   option: 在第5行中应该使用!=而不是==
+            -   option: 在第5行中应该使用`==`而不是`!=`
                 feedback: 你是正确的
             hint: 第5行有问题
             correct_answer: D
@@ -3380,13 +3394,25 @@ levels:
 
                 {print} '全干了!'
             mp_choice_options:
-            -   option: = 湿润
+            -   option: |-
+                    ```
+                        = 湿润
+                    ```
                 feedback: 这不会改变任何事情
-            -   option: = 湿润 = 1
+            -   option: |-
+                    ```
+                        = 湿润 = 1
+                    ```
                 feedback: 一行中不能有两次 = 出现
-            -   option: = 湿润 - 1
+            -   option: |-
+                    ```
+                        = 湿润 - 1
+                    ```
                 feedback: 你是正确的!
-            -   option: = 湿润 + 1
+            -   option: |-
+                    ```
+                        = 湿润 + 1
+                    ```
                 feedback: 程序将开始倒计时
             hint: 每次湿润应该少一些
             correct_answer: C
@@ -3400,9 +3426,9 @@ levels:
                 {if} answer == 'yes'
                     lives = lives - 1
             mp_choice_options:
-            -   option: '{while} 应该是 {if}'
+            -   option: '`{while}` 应该是 `{if}`'
                 feedback: 这不正确
-            -   option: '{if} 应该是 {while}'
+            -   option: '`{if}` 应该是 `{while}`'
                 feedback: 这不正确
             -   option: 第3行应该以更多的缩进开始
                 feedback: 这不正确
@@ -3428,13 +3454,13 @@ levels:
                         {print} _
                         game = 'over'
             mp_choice_options:
-            -   option: '... 将第一个 {if} 换成 {while}'
+            -   option: '... 将第一个 `{if}` 换成 `{while}`'
                 feedback: 完美!
-            -   option: '... 将第2个 {if} 换成 {while}'
+            -   option: '... 将第2个 `{if}` 换成 `{while}`'
                 feedback: 这不是很正确.
-            -   option: '... 将第三个 {if} 换成 {while}'
+            -   option: '... 将第三个 `{if}` 换成 `{while}`'
                 feedback: 这不是很正确。
-            -   option: '... 将第4个 {if} 换成 {while}'
+            -   option: '... 将第4个 `{if}` 换成 `{while}`'
                 feedback: 这不是很正确。
             hint: 最后的时候应该说你赢了。
             correct_answer: A
@@ -3490,13 +3516,25 @@ levels:
                 {while} points_player_1 > points_player_2
                     {print} _ ' is in the lead right now!'
             mp_choice_options:
-            -   option: 姓名玩家1
+            -   option: |-
+                    ```
+                       name_player_1
+                    ```
                 feedback: 你是对的!
-            -   option: 姓名玩家2
+            -   option: |-
+                    ```
+                       name_player_2
+                    ```
                 feedback: 他们输了!
-            -   option: 玩家1得分
+            -   option: |-
+                    ```
+                       points_player_1
+                    ```
                 feedback: 你应该填写名字，而不是数字
-            -   option: 玩家2得分
+            -   option: |-
+                    ```
+                       points_player_2
+                    ```
                 feedback: 你应该填写名字，而不是数字
             hint: 你得最多的分数就能赢得比赛。你的名字应该出现在屏幕上
             correct_answer: A
@@ -3522,8 +3560,8 @@ levels:
         2:
             question_text: 如果你想列一个列表，哪些家务，是由谁做的，你应该在空白处填什么?
             code: |-
-                朋友 = ['Wesley', 'Eric', 'Kaylee']
-                家务 = [the cooking, the cleaning, nothing]
+                friends = ['Wesley', 'Eric', 'Kaylee']
+                chores = ['the cooking', 'the cleaning', 'nothing']
                 {for} i {in} {range} 1 {to} 3
                     {print}  _
             mp_choice_options:
@@ -3553,10 +3591,10 @@ levels:
         3:
             question_text: 这个程序可能的输出是什么?
             code: |-
-                朋友 = ['Wesley', 'Eric', 'Kaylee']
-                家务 = [the cooking, the cleaning, nothing]
+                friends = ['Wesley', 'Eric', 'Kaylee']
+                chore = ['the cooking', 'the cleaning', 'nothing']
                 {for} i {in} {range} 1 {to} 3
-                    {print}  朋友[i] 需要做 家务[i]
+                    {print}  friends[i] has to do chores[i]
             mp_choice_options:
             -   option: |-
                     ```
@@ -3598,9 +3636,9 @@ levels:
                     print '幸运数字' 朋友们[i]
                     print '是' 幸运数字[i]
             mp_choice_options:
-            -   option: 第4行中的变量应该是'朋友[i]'，而不是'朋友们[i]'
+            -   option: 第4行中的变量应该是 `friend[i]`，而不是`friends[i]`
                 feedback: 这是不对的.
-            -   option: 第3行应该是"在1到3范围内"而不是"在0到3范围内"
+            -   option: 第3行应该是`in range 1 to 3` 而不是 `in range 0 to 3`
                 feedback: 答得好!
             -   option: 第4行应该是 '幸运数字', 而不是 '幸运数字
                 feedback: 它不是变量，只是文本。
@@ -3617,13 +3655,25 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                     {print} '这 ' 动物们[i] ' 叫 ' 声音[i]
             mp_choice_options:
-            -   option: 声音 = ['moo', 'woof', 'neigh']
+            -   option: |-
+                    ```
+                       noises = ['moo', 'woof', 'neigh']
+                    ```
                 feedback: 注意变量名和叫声顺序。
-            -   option: 声音 = '[woof], [moo], [neigh]'.
+            -   option: |-
+                    ```
+                       sounds = '[woof], [moo], [neigh]'
+                    ```
                 feedback: 看看第一行，好知道应该如何使用括号。
-            -   option: 叫声 = [woof, moo, neigh]
+            -   option: |-
+                    ```
+                       sounds = [woof, moo, neigh]
+                    ```
                 feedback: 别忘了引号!
-            -   option: 叫声 = ['woof', 'moo', 'neigh']
+            -   option: |-
+                    ```
+                       sounds = ['woof', 'moo', 'neigh']
+                    ```
                 feedback: 干得漂亮!
             hint: 查看第1行，了解括号和引号的正确使用。
             correct_answer: D
