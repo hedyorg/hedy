@@ -6,6 +6,7 @@ import datetime
 import time
 import functools
 import os
+from io import StringIO
 from os import path
 import re
 import string
@@ -117,18 +118,29 @@ def set_debug_mode(debug_mode):
     DEBUG_MODE = debug_mode
 
 
+def rt_yaml():
+    y = yaml.YAML(typ='rt')
+    # Needs to match the Weblate YAML settings for all components
+    y.indent = 4
+    y.preserve_quotes = True
+    y.width = 30000
+    return y
+
 def load_yaml_rt(filename):
     """Load YAML with the round trip loader."""
     try:
+        rt = rt_yaml()
         with open(filename, 'r', encoding='utf-8') as f:
-            return yaml.round_trip_load(f, preserve_quotes=True)
+            return rt.load(f)
     except IOError:
         return {}
 
 
 def dump_yaml_rt(data):
     """Dump round-tripped YAML."""
-    return yaml.round_trip_dump(data, indent=4, width=999)
+    out = StringIO()
+    rt_yaml().dump(data, out)
+    return out.getvalue()
 
 
 def slash_join(*args):
