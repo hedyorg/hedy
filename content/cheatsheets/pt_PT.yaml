@@ -100,9 +100,9 @@
 -   name: '{in}'
     explanation: Check elements with `{in}`
     demo_code: |-
-        pretty_colors {is} green, yellow
-        color {is} {ask} 'What is your favorite color?'
-        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
+        cores_bonitas {is} verde, amarelo
+        cor {is} {ask} 'Qual é a tua cor favorita?'
+        {if} cor {in} cores_bonitas {print} 'bonita!' {else} {print} 'meh'
 -   name: '{pressed}'
     explanation: Verifica se uma determinada tecla do teclado é `{pressed}`.
     demo_code: '{if} a {is} {pressed} {print} ''Carregou no A!'' {else} {print} ''Carregou noutra tecla!'''
