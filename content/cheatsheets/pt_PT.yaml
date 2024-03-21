@@ -102,7 +102,7 @@
     demo_code: |-
         cores_bonitas {is} verde, amarelo
         cor {is} {ask} 'Qual é a tua cor favorita?'
-        {if} cor cores_bonitas {print} 'bonita!' {else} {print} 'meh'
+        {if} cor {in} cores_bonitas {print} 'bonita!' {else} {print} 'meh'
 -   name: '{pressed}'
     explanation: Verifica se uma determinada tecla do teclado é `{pressed}`.
     demo_code: '{if} a {is} {pressed} {print} ''Carregou no A!'' {else} {print} ''Carregou noutra tecla!'''
