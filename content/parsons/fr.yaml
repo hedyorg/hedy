@@ -20,14 +20,8 @@ levels:
                 {echo} Super choix ! J'adore
     2:
         1:
-            story: |-
-                Tes amis et toi aller faire une soirée télé avec Hedy.
-                Demande à Hedy d'afficher le titre du film puis de vous souhaiter une bonne soirée !
-            code: |-
-                {print} C'est l'heure du film du soir sur TV Hedy !
-                film {is} Sonic le hérisson 2
-                {print} Vous pourrez voir film
-                {print} Amusez-vous bien !
+            story: "You and your friends are going to watch some Netflix.\nShow which movie you're about to watch and wish the viewers lot of fun!"
+            code: "{print} It is time for an evening of Netflix\nfilm {is} Sonic the Hedgehog 2\n{print} We're going to watch film\n{print} Have fun!"
         2:
             story: Ceci est la boutique en ligne d'un magasin de jouets. Crée un programme où les clients peuvent ajouter un jouet dans leur panier.
             code: |-
