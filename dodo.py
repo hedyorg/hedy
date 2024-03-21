@@ -26,7 +26,7 @@ from glob import glob
 import sys
 import platform
 
-from doit.tools import CmdAction, LongRunning
+from doit.tools import LongRunning
 
 if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
     # Add MSYS2 to the path, so we can use commands like 'bash' and 'cp' and 'mv'.
