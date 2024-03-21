@@ -100,9 +100,9 @@
 -   name: '{in}'
     explanation: Check elements with `{in}`
     demo_code: |-
-        cores_bonitas {is} verde, amarelo
-        cor {is} {ask} 'Qual é a tua cor favorita?'
-        {if} cor cores_bonitas {print} 'bonita!' {else} {print} 'meh'
+        pretty_colors {is} green, yellow
+        color {is} {ask} 'What is your favorite color?'
+        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
 -   name: '{pressed}'
     explanation: Verifica se uma determinada tecla do teclado é `{pressed}`.
     demo_code: '{if} a {is} {pressed} {print} ''Carregou no A!'' {else} {print} ''Carregou noutra tecla!'''
@@ -162,9 +162,9 @@
     explanation: Verifica se uma determinada tecla do teclado é `{pressed}`.
     demo_code: |-
         {if} a {is} {pressed}
-            {print} 'Carregou em A!'
+            {print} 'You pressed A!'
         {else}
-            {print} ''Carregou noutra tecla!'
+            {print} 'You pressed another key!'
 9:
 -   name: '`if` with multiple lines'
     explanation: The answer of a sum of questions with 'ask' and see if it is correct. Now we print out two lines.

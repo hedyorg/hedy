@@ -141,9 +141,7 @@ def collect_cheatsheet_snippets(path):
                         snippet = Snippet(
                             filename=file,
                             level=level,
-                            field_name='command ' +
-                            command_text_short +
-                            ' demo_code',
+                            field_name=str(k),
                             code=command['demo_code'])
                         Hedy_snippets.append(snippet)
                 except BaseException:
@@ -267,7 +265,7 @@ class HedySnippetTester(HedyTester):
 
                 with open(path.join(rootdir(), 'snippet-report.txt'), 'a') as f:
                     f.write(error_message + '\n')
-                    f.write('*** This snippet has been restored to its English source ***\n')
+                    f.write('*** This snippet has been reverted to English ***\n\n')
             else:
                 print(error_message)
                 raise E

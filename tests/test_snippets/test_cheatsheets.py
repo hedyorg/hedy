@@ -18,4 +18,11 @@ class TestsCheatsheetPrograms(snippet_tester.HedySnippetTester):
 
     @parameterized.expand(Hedy_snippets, skip_on_empty=True)
     def test_cheatsheets_programs(self, name, snippet):
-        self.do_snippet(snippet)
+        self.do_snippet(snippet, yaml_locator=cheatsheet_locator)
+
+
+def cheatsheet_locator(snippet, yaml):
+    """Returns where in the cheatsheet YAML we found a cheatsheet snippet."""
+    return snippet_tester.YamlLocation(
+        dict=yaml[snippet.level][int(snippet.field_name)],
+        key='demo_code')
