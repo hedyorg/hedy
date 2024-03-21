@@ -160,25 +160,37 @@
         </table>
         </div>
         </div>
-      </div>
-      <div class="flex flex-row gap-4 mb-8 md:px-16" id="row">
-        <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg lg:w-2/4 p-8" id="slides">
+    </div>
+    <div class="flex flex-row gap-4 mb-8 mt-10 md:px-16">
+      <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full lg:w-2/4 p-8">
         <h2 class="m-0 basis-1/12"> {{_('slides')}} </h2>
-        <div class="text-black basis-10/12">{{ _('slides_info') }}</div>
+        <div class="text-black basis-10/12">
+        <p>{{ _('slides_info') }}</p>
+        </div>
         <div class="flex flex-row gap-3 justify-end basis-1/12">
-          <!-- it's ugly to add a fixed height to content_table, to solve it from growing with slides, but not sure how else to fix it-->
-          <button class="white-btn inline-flex items-center"
+          <button class="white-btn inline-flex items-center gap-2" id="view_slides"
           _="on load hedyApp.getForTeacherTable('slides_table') end
-              on click hedyApp.saveForTeacherTable('slides_table') end"
+          on click hedyApp.saveForTeacherTable('slides_table') end"
           >
           <span>{{_('view_slides')}}</span>
-            <svg id="slides_table_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-            </svg>
-          </button>
+          <svg id="slides_table_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+          </svg>
+        </button>
         </div>
-        <div class="w-full hidden" id="slides_table">
-            {% for level in slides %}
+      </div>
+      <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full lg:w-2/4 p-8">
+        <h2 class="m-0 basis-1/12"> {{_('public_content')}} </h2>
+        <div class="text-black basis-10/12">{{ _('public_content_info') }}</div>
+        <div class="flex gap-3 justify-end basis-1/12">
+              <button id="public-adventures-link" class="blue-btn inline-flex items-center"
+            _="on click window.open('/public-adventures', '_self')">{{_('public_adventures')}}</button>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col gap-4 mb-8 md:px-16 hidden" id="slides_table">
+      <div class="flex flex-col gap-4 pb-4 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full lg:w-2/4 p-8">
+        {% for level in slides %}
             <div class="bg-gray-100 border rounded-lg mb-4 p-2 flex justify-between items-center">
                 <div class="text-left text-blue-500 font-semibold ml-6">
                     {% if level == 0 %}
@@ -200,14 +212,7 @@
             </div>
             {% endfor %}
         </div>
-        </div>
-        <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg lg:w-2/4 p-8" id="content_table">
-          <h2 class="m-0 basis-1/12"> {{_('public_content')}} </h2>
-          <div class="text-black basis-10/12">{{ _('public_content_info') }}</div>
-          <div class="flex flex-row gap-3 justify-end basis-1/12">
-            <button id="public-adventures-link" class="blue-btn inline-flex items-center"
-            _="on click window.open('/public-adventures', '_self')">{{_('public_adventures')}}</button>
-        </div>
-  </div>
+      </div>
+      </div>
 </div>
 {% endblock %}
