@@ -298,6 +298,13 @@ class Database:
         Return the updated program state.
         """
         return PROGRAMS.update({"id": id}, {"submitted": True, "date": timems()})
+    
+    def unsubmit_program_by_id(self, id):
+        """Switch a program to unsubmitted.
+
+        Return the updated program state.
+        """
+        return PROGRAMS.update({"id": id}, {"submitted": '', "date": timems()})
 
     def delete_program_by_id(self, id):
         """Delete a program by id."""

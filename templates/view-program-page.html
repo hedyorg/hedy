@@ -6,6 +6,7 @@
       <div class="text-center">
         <h2>{{_('submitted_header')}}</h2>
         <h3 class="inline-block mt-0">{{_('submission_time')}}: {{program_timestamp}}</h3>
+        <button class="green-btn" data-cy="submit-btn" onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.unsubmit_program ('{{initial_adventure.id}}'})">{{_('unsubmit')}}</button>
       </div>
   {% endif %}
   <h1>{{initial_adventure.name}}</h1>
