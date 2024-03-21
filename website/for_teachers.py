@@ -1017,8 +1017,9 @@ class ForTeachersModule(WebsiteModule):
                                           if adv.get("name") == adventure.get("id")):
                     temp = {"name": Class.get("name"), "id": Class.get("id"),
                             "teacher": Class.get("teacher"), "students": Class.get("students", []),
-                            "date": Class.get("date")}
+                            "date": Class.get("date"), "classes": Class.get("classes")}
                     class_data.append(temp)
+                    # Class["from_teacher"] = True
                     break
 
         return render_template(
@@ -1026,9 +1027,9 @@ class ForTeachersModule(WebsiteModule):
             page_title=gettext("title_customize-adventure"),
             adventure=adventure,
             adventure_classes=class_data,
+            all_classes=Classes,
             username=user["username"],
             max_level=hedy.HEDY_MAX_LEVEL,
-            current_page="for-teachers",
             # TODO: update tags to be {name, canEdit} where canEdit is true if currentUser is the creator.
             adventure_tags=adventure.get("tags", []),
             js=dict(
@@ -1073,6 +1074,12 @@ class ForTeachersModule(WebsiteModule):
         # TODO: instead of not allowing the teacher, let them update the adventure in their relevant classes only.
         elif current_adventure["creator"] != user["username"]:
             return gettext("unauthorized"), 403
+        current_classes = {}
+        if body.get("classes"):
+            current_classes = current_adventure["classes"]
+        current_levels = []
+        if current_adventure["level"] != 1:
+            current_levels = current_adventure["levels"]
 
         adventures = self.db.get_teacher_adventures(user["username"])
         for adventure in adventures:
@@ -1093,6 +1100,7 @@ class ForTeachersModule(WebsiteModule):
             "date": utils.timems(),
             "creator": user["username"],
             "name": body["name"],
+            "classes": body["classes"],
             "level": body["levels"][0],  # TODO: this should be removed gradually.
             "levels": body["levels"],
             "content": body["content"],
@@ -1112,6 +1120,19 @@ class ForTeachersModule(WebsiteModule):
                     tag_adventure["public"] = body["public"]
                     tag_adventure["language"] = body["language"]
             self.db.update_tag(tag["id"], {"tagged_in": tag["tagged_in"]})
+
+        if current_levels and current_classes:
+            for old_class in current_classes:
+                for level in current_levels:
+                    if old_class not in body["classes"] or level not in body["levels"]:
+                        self.add_adventure_to_class_level(user, old_class, body["id"], level, True)
+
+        for class_id in body["classes"]:
+            for level in body["levels"]:
+                if level not in current_levels and class_id in current_classes:
+                    self.add_adventure_to_class_level(user, class_id, body["id"], level, False)
+                elif class_id not in current_classes:
+                    self.add_adventure_to_class_level(user, class_id, body["id"], level, False)
 
         return {"success": gettext("adventure_updated")}, 200
 
@@ -1141,26 +1162,59 @@ class ForTeachersModule(WebsiteModule):
             return gettext("something_went_wrong_keyword_parsing"), 400
         return {"code": code}, 200
 
-    @route("/create-adventure", methods=["POST"])
+    def add_adventure_to_class_level(self, user, class_id, adventure_id, level, remove_adv):
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        customizations, adventures, adventure_names, _, _ = self.get_class_info(
+            user, class_id)
+
+        is_teacher_adventure = True
+
+        if not remove_adv and any(adventure['name'] == adventure_id
+                                  for adventure in customizations['sorted_adventures'][level]):
+            return
+        if not remove_adv:
+            customizations['sorted_adventures'][level].append(
+                {'name': adventure_id, 'from_teacher': is_teacher_adventure})
+        elif {'name': adventure_id, 'from_teacher': is_teacher_adventure} in customizations['sorted_adventures'][level]:
+            customizations['sorted_adventures'][level].remove(
+                {'name': adventure_id, 'from_teacher': is_teacher_adventure})
+
+        self.reorder_adventures(customizations['sorted_adventures'][level])
+        self.db.update_class_customizations(customizations)
+
+    @route("/create-adventure/", methods=["POST"])
+    @route("/create-adventure/<class_id>", methods=["POST"])
     @requires_teacher
-    def create_adventure(self, user):
+    def create_adventure(self, user, class_id=None):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+
         adventure_id = uuid.uuid4().hex
         name = "AdventureX"
         adventures = self.db.get_teacher_adventures(user["username"])
-
         for adventure in adventures:
             if adventure["name"] == name:
                 name += 'X'
                 continue
 
+        session['class_id'] = class_id
         adventure = {
             "id": adventure_id,
             "date": utils.timems(),
             "creator": user["username"],
             "name": name,
+            "classes": [class_id],
             "level": 1,
+            "levels": ["1"],
             "content": "",
+            "public": 0,
             "language": g.lang,
         }
         self.db.store_adventure(adventure)
+        if class_id:
+            self.add_adventure_to_class_level(user, class_id, adventure_id, "1", False)
+
         return adventure["id"], 200

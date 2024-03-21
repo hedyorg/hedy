@@ -1560,32 +1560,32 @@ class TestCustomAdventures(AuthHelper):
             {
                 'id': '123',
                 'name': 123,
-                'classes': []
+                'classes': ['Class1']
             },
             {
                 'id': '123',
                 'name': 123,
-                'classes': [],
+                'classes': ['Class1'],
                 'level': 5
             },
             {
                 'id': '123',
                 'name': 123,
-                'classes': [],
+                'classes': ['Class1'],
                 'level': 5,
                 'content': 123
             },
             {
                 'id': adventure_id,
                 'name': 'panda',
-                'classes': [],
+                'classes': ['Class1'],
                 'level': '5',
                 'content': 'too short!'
             },
             {
                 'id': adventure_id,
                 'name': 'panda',
-                'classes': [],
+                'classes': ['Class1'],
                 'level': '5',
                 'content': 'This is just long enough!',
                 'public': 'panda',
@@ -1602,7 +1602,7 @@ class TestCustomAdventures(AuthHelper):
         body = {
             'id': '123',
             'name': 'panda',
-            'classes': [],
+            'classes': ['Class1'],
             'levels': ['5'],
             'content': 'This is just long enough!',
             'public': True,
