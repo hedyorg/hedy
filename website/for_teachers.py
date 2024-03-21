@@ -1075,11 +1075,11 @@ class ForTeachersModule(WebsiteModule):
         elif current_adventure["creator"] != user["username"]:
             return gettext("unauthorized"), 403
         current_classes = {}
-        if body.get("classes") and current_adventure.get('classes'):
-            current_classes = current_adventure["classes"]
+        if body.get("classes"):
+            current_classes = current_adventure.get('classes', [])
         current_levels = []
-        if current_adventure["level"] != 1 and current_adventure.get('levels'):
-            current_levels = current_adventure["levels"]
+        if current_adventure["level"] != 1:
+            current_levels = current_adventure.get('levels', [])
 
         adventures = self.db.get_teacher_adventures(user["username"])
         for adventure in adventures:
