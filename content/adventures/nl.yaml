@@ -827,28 +827,28 @@ adventures:
                     ```
             8:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Opdracht
+                    Debug deze code. Succes!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Pas op! Deze code bevat fouten!**
                     ```
-                    {print} 'Welcome to Manicures and Pedicures by Hedy'
-                    bodypart = {ask} 'Are you getting your fingernails or toenails done today? Or both?'
-                    {if} bodyparts {is} both
-                            {print} That will be $25'
-                            price = 25
+                    {print} 'Welkom bij de manicure- en pedicuresalon'
+                    bodypart = {ask} 'Komt u voor uw vingernagels, teennagels of beide?'
+                    {if} lichaamsdelen {is} beide
+                            {print} Dat wordt dan $25'
+                            prijs = 25
                         {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
+                            {print} Dat wordt dan $18'
+                            prijs = 18
+                    kleur = {ask} Welke kleur wilt u?
+                    glitter = {ask} 'Met glitters?'
+                    {if} glitter {is} ja
+                        {print} 'Dat kost $3 extra'
+                    prijs = prijs + 3
+                    {else} {print} 'Geen glitter' {print} 'U hoeft niet bij te betalen'
                     {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
+                    {print} 'Klaar! Dat wordt dan $' prijs ' alstublieft!'
+                    {print} 'Bedankt en tot ziens!'
                     ```
             9:
                 story_text: |-
