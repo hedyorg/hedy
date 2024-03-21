@@ -33,8 +33,42 @@
   </div>
   
   {# The actual table that holds the data #}
-  <div class="border border-gray-400 py-2 px-4 rounded-lg w-full overflow-x-auto">
-    <table class="table-auto text-center w-full pt-5" id="adventure_table">
+  <div class="py-2 px-4 rounded-lg w-full overflow-x-auto">
+      <div class="overflow-hidden rounded-lg shadow-lg">
+        <table class="w-full border border-gray-400">
+        <thead>
+          <tr class="bg-blue-300 text-blue-900">
+            <th class="px-4 py-2 text-center">{{_('students')}}</th>
+            {% for adventure in adventure_table['adventures'][level] %}
+            <th class="px-4 py-2 text-center">{{ adventure }}</th>
+            {% endfor %}
+            <th class="px-4 p-2 bg-blue-900 text-white">{{_('actions')}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for student in adventure_table['students'] %}
+            <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
+              <td id="teacher_cell" class="text-center p-2">{{student}}</td>
+              {% for adventure in adventure_table['adventures'][level] %}
+              <td id="teacher_cell" class="text-center p-2">✅</td>
+              {% endfor %}
+              <td class="text-center p-2">
+                <div class="flex justify-center text-blue-900">
+                  <button class="flex flex-col items-center mr-8" onclick='hedyApp.change_password_student("{{student}}", {{_('enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})'>
+                    <span class="fas fa-pen block mb-1"></span>
+                    <span>{{_('change_password')}}</span>
+                  </button>
+                  <button class="flex flex-col items-center mr-8" onclick=window.open('/programs?user={{student}}') id="duplicate_class">
+                    <span class="fas fa-code block mb-1"></span>
+                    <span>{{_('programs')}}</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    <table class="hidden table-auto text-center w-full pt-5" id="adventure_table">
       <thead>
         <colgroup>
           <col>

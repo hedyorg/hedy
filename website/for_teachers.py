@@ -206,6 +206,9 @@ class ForTeachersModule(WebsiteModule):
 
         teacher = user if Class["teacher"] == user["username"] else self.db.user_by_username(Class["teacher"])
         second_teachers = [teacher] + Class.get("second_teachers", [])
+        print("HELLO")
+        print(student_adventures)
+        print(class_adventures_formatted)
         return render_template(
             "class-overview.html",
             current_page="for-teachers",
