@@ -2709,7 +2709,7 @@ adventures:
                 example_code: |
                     ```
                     {print} 'Yankee Doodle'
-                    {define} _ {with} note_1, note_2, note_3
+                    {define} _ {with} noot_1, noot_2, noot_3
                         {play} C4
                         {play} C4
                         {play} D4
@@ -2718,9 +2718,9 @@ adventures:
                         {play} _
                         {play} _
 
-                    {call} line_1 {with} 29, 31, 30
-                    {call} line_1 {with} 29, 28, 0
-                    {call} line_1 {with} 32, 31, 30
+                    {call} regel_1 {with} 29, 31, 30
+                    {call} regel_1 {with} 29, 28, 0
+                    {call} regel_1 {with} 32, 31, 30
 
                     {play} C4
                     {play} B3
@@ -2732,54 +2732,54 @@ adventures:
                     ```
             14:
                 story_text: |
-                    You can program music for fun, but you can also use the musical notes to make something useful like a fire alarm!
+                    Je kunt natuurlijk voor de lol een liedje programmeren, maar de muzieknoten kunnen ook nuttig ingezet worden, zoals bij dit brandalarm!
 
-                    ### Exercise
-                    Make sure the fire alarm rings when there is a fire!
+                    ### Opdracht
+                    Zorg dat het brandalarm afgaat als er brand is!
                 example_code: |
                     ```
-                    {define} fire_alarm
-                        {print} 'FIRE!'
-                        note = 40
+                    {define} brandalarm
+                        {print} 'BRAND!'
+                        noot = 40
                         {for} i {in} {range} 1 {to} 100
-                            {if} note _ 50
-                                note = note + 5
+                            {if} noot _ 50
+                                noot = noot + 5
                                 {play} _
                             {else}
-                                note = 40
+                                noot = 40
 
-                    fire = {ask} 'Is there a fire?'
-                    {if} fire _ 'yes'
-                        {call} fire_alarm
+                    brand = {ask} 'Is er brand?'
+                    {if} fire _ 'ja'
+                        {call} brandalarm
                     ```
             15:
                 story_text: |
-                    **Warning** This adventure can become extremely annoying!
-                    We can also use the {while} command to repeat a song forever.
+                    **Waarschuwing** Dit avontuur kan behoorlijk irritant worden!
+                    We kunnen het `{while}` commando inzetten om een liedje eeuwig te blijven herhalen.
 
-                    ### Exercise
-                    Finish the never-ending song.
+                    ### Opdracht
+                    Maak dit liedje zonder einde af.
                 example_code: |
                     ```
-                    {define} song
+                    {define} lied
                         {play} _
 
-                    yes_or_no = {ask} 'Do you want to hear my never-ending song?'
-                    {while} yes_or_no = 'yes'
-                        {call} song
+                    ja_of_nee = {ask} 'Wil je mijn liedje zonder einde horen?'
+                    {while} ja_of_nee = 'ja'
+                        {call} lied
                         {print} '🥳'
                     ```
             16:
                 story_text: |
-                    Upgrade your Old MacDonald code!
+                    Upgrade je Old MacDonald code!
 
-                    ### Exercise
-                    Take your code from the 'Sing a Song' adventure and add musical notes to it!
-                    You can make a function for each line in the song and call that function after the line is printed.
-                    We defined the first line for you and called it in the code. Can you finish the whole song?
+                    ### Opdracht
+                    Neem je code van het Zinge een lied avontuur en voeg muzieknoten toe!
+                    Je kunt een functie maken voor elke regel van het lied en die fucntie oproepen zodra die regel geprint is.
+                    We hebben de eerste regel alvast voorgedaan. Kun jij het hele lied afmaken?
                 example_code: |
                     ```
-                    {define} line_1
+                    {define} regel_1
                         {for} i {in} {range} 1 {to} 3
                             {play} G
                         {play} D
@@ -2789,24 +2789,26 @@ adventures:
 
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
-                    for i in range 1 to 3
+                    {for} i {in} {range} 1 {to} 3
                         animal = animals[i]
                         sound = sounds[i]
-                        print 'Old MacDonald had a farm'
-                        call line_1
-                        print 'E I E I O!'
+                        {print} 'Old MacDonald had a farm'
+                        {call} regel_1
+                        {print} 'E I E I O!'
                         _
                     ```
             17:
                 story_text: |
+                    Je kunt de `{elif}` gebruiken om verschillende opties te creëren.
+
+                    ### Opdracht
+                    Voeg dubbele punten toe om de code aan de praat te krijgen.
+                    Maak de code dan af door nog minstens 2 liedjes bij te maken voor andere stemmingen. Bijvoorbeeld een blij liedje en een boos liedje.
                     You can use the {elif} to create different options.
 
-                    ### Exercise
-                    Firstly, add colons to get the code to work.
-                    Then finish this code by adding at least 2 other songs for other moods. For example a happy song and an angry song.
                 example_code: |
                     ```
-                    {define} scary_song
+                    {define} bang_liedje
                         {for} i {in} {range} 1 {to} 3
                             {play} G
                         {play} E
@@ -2815,17 +2817,17 @@ adventures:
                             {play} F
                         {play} D
 
-                    mood = {ask} 'Which emotion are you feeling?'
-                    {if} mood {is} 'fear'
-                        {call} scary_song
+                    stemming = {ask} 'Hoe voel je je?'
+                    {if} stemming {is} 'bang'
+                        {call} bang_liedje
                     {elif} _
                     ```
             18:
                 story_text: |
-                    ### Exercise
-                    Even in this last level of Hedy we can make some music! Be careful of all the syntax that is needed now.
-                    Take a good look at how the functions are defined and called upon in the example code.
-                    Finish the song!
+                    ### Opdracht
+                    Zelfs in dit laatste level van Hedy kunnen we muziek maken! Let op alle syntax die nu nodig is.
+                    Kijk goed hoe de functies gedefinieerd worden en geroepen worden in de voorbeeldcode.
+                    Maak het liedje af!
                 example_code: |
                     ```
                     {def} line_1():
@@ -2845,12 +2847,12 @@ adventures:
                     {def} line_3():
                     _
 
-                    {print} ('The drunken sailor')
-                    {print} ('What shall we do with the drunken sailor?')
+                    {print} ('De dronken zeeman')
+                    {print} ('Wat gaan we doen met de dronken zeeman?')
                     line_1()
                     line_2()
                     line_3()
-                    {print} ('Early in the morning')
+                    {print} ('s Morgens in de vroegte!')
                     ```
     parrot:
         name: Papegaai
