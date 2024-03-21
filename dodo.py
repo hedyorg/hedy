@@ -26,7 +26,7 @@ from glob import glob
 import sys
 import platform
 
-from doit.tools import LongRunning
+from doit.tools import CmdAction, LongRunning
 
 if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
     # Add MSYS2 to the path, so we can use commands like 'bash' and 'cp' and 'mv'.
@@ -433,6 +433,22 @@ def task__autopr():
         actions=[
             # Run a script to strip things that lead to conflicts from po files
             [python3, 'build-tools/github/normalize-pofiles.py'],
+        ])
+
+def task__autopr_weblate():
+    """Run code generation tasks that should commit to PRs, only for Weblate PRs.
+
+    This runs YAML snippet tests, in a way that will revert snippets to Enligsh
+    if they fail.
+
+    These are separate from normal autofixes because unit tests may take a long time
+    to run, and we don't want to hold up normal PRs.
+    """
+    os.environ['FIX_FOR_WEBLATE'] = '1'
+    return dict(
+        title=lambda _: 'Automatic tasks for Weblate only',
+        actions=[
+            [python3, '-m', 'pytest', 'tests/test_snippets/'],
         ])
 
 ######################################################################################
