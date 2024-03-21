@@ -11,9 +11,11 @@ describe('Duplicate class tests', () => {
     const duplicate_class = `test class ${Math.random()}`;
 
     // Click on duplicate icon
-    if (!cy.get(".view_class")){
-        cy.get("#view_classes").click();
-    }
+    cy.get(".view_class").then($viewClass => {
+      if (!$viewClass.is(':visible')) {
+          cy.get("#view_classes").click();
+      }
+    });
     cy.get('#duplicate_class').first().click();
 
     // Checks for input field
@@ -22,9 +24,11 @@ describe('Duplicate class tests', () => {
 
     cy.reload();
 
-    if (!cy.get(".view_class")){
-        cy.get("#view_classes").click();
-    }
+    cy.get(".view_class").then($viewClass => {
+      if (!$viewClass.is(':visible')) {
+          cy.get("#view_classes").click();
+      }
+    });
     cy.get(".view_class").contains(duplicate_class).click();
     cy.get("#customize-class-button").click();
     cy.get("#opening_date_container").should("not.be.visible")
@@ -38,9 +42,11 @@ describe('Duplicate class tests', () => {
     loginForTeacher();
     goToTeachersPage();
 
-    if (!cy.get(".view_class")){
-        cy.get("#view_classes").click();
-    }
+    cy.get(".view_class").then($viewClass => {
+      if (!$viewClass.is(':visible')) {
+          cy.get("#view_classes").click();
+      }
+    });
     cy.get("tr") // This class has second teachers.
     cy.get("#classes_table tbody .view_class")
       .each(($class, i) => {
@@ -57,9 +63,11 @@ describe('Duplicate class tests', () => {
 
     cy.reload();
 
-    if (!cy.get(".view_class")){
-        cy.get("#view_classes").click();
-    }
+    cy.get(".view_class").then($viewClass => {
+      if (!$viewClass.is(':visible')) {
+          cy.get("#view_classes").click();
+      }
+    });
     cy.get(".view_class").contains(duplicate_class).click();
     cy.get("#invites-block").should('be.visible');
     cy.get("#customize-class-button").click();

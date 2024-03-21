@@ -13,9 +13,11 @@ describe('Go to level dropdown', () => {
     ({classname, students} = createClassAndAddStudents());
     goToTeachersPage();
 
-    if (!cy.get(".view_class")){
-        cy.get("#view_classes").click();
-    }
+    cy.get(".view_class").then($viewClass => {
+      if (!$viewClass.is(':visible')) {
+          cy.get("#view_classes").click();
+      }
+    });
     cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
     cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide());
     cy.getBySel('customize_class_button').click();
