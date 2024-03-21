@@ -38,39 +38,6 @@ def rootdir():
     return os.path.join(os.path.dirname(__file__), '..', '..')
 
 
-def collect_adventures_snippets(path):
-    Hedy_snippets = []
-    files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
-    for file in files:
-        lang = file.split(".")[0]
-        file = os.path.join(path, file)
-        yaml = YamlFile.for_file(file)
-        levels = yaml.get('levels')
-
-        for level, content in levels.items():
-            level_number = int(level)
-            if level_number > hedy.HEDY_MAX_LEVEL:
-                print('content above max level!')
-            else:
-                try:
-                    number = 0
-                    # commands.k.demo_code
-                    for x, y in content.items():
-                        if 'code' in y.keys() and 'debug' not in y.keys():
-                            snippet = Snippet(
-                                filename=file,
-                                level=level_number if level_number > 0 else 1,
-                                language=lang,
-                                field_name=f'snippet {number}',
-                                code=y['code'])
-                            Hedy_snippets.append(snippet)
-                            number += 1
-                except BaseException:
-                    print(f'Problem reading commands yaml for {lang} level {level}')
-
-    return Hedy_snippets
-
-
 def collect_adventures_snippets(path, filtered_language=None):
     Hedy_snippets = []
     files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
@@ -135,10 +102,6 @@ def collect_cheatsheet_snippets(path):
                 try:
                     # commands.k.demo_code
                     for k, command in enumerate(yaml[level]):
-                        command_text_short = \
-                            command['name'] if 'name' in command.keys()\
-                            else command['explanation'][0:10]
-
                         snippet = Snippet(
                             filename=file,
                             level=level,
