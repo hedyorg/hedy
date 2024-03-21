@@ -435,6 +435,23 @@ def task__autopr():
             [python3, 'build-tools/github/normalize-pofiles.py'],
         ])
 
+
+def task__autopr_weblate():
+    """Run code generation tasks that should commit to PRs, only for Weblate PRs.
+
+    This runs YAML snippet tests, in a way that will revert snippets to Enligsh
+    if they fail.
+
+    These are separate from normal autofixes because unit tests may take a long time
+    to run, and we don't want to hold up normal PRs.
+    """
+    os.environ['FIX_FOR_WEBLATE'] = '1'
+    return dict(
+        title=lambda _: 'Automatic tasks for Weblate only',
+        actions=[
+            [python3, '-m', 'pytest', 'tests/test_snippets/'],
+        ])
+
 ######################################################################################
 # Below this line are helpers for the task definitions
 #

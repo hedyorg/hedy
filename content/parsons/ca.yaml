@@ -147,16 +147,8 @@ levels:
                 {print} "per tota la ciutat"
     8:
         1:
-            story: |-
-                Tu i quatre amics més esteu jugant a Pokémon Go! Crea un programa que decideixi en quin equip jugarà cadascun de vosaltres.
-                Pot ser vermell, groc o blau! Feu una petita pausa després d'anunciar cada equip.
-            code: |-
-                equips = vermell, groc, blau
-                {print} "Vermell, groc o blau?"
-                {repeat} 5 {times}
-                    {print} "Has sigut seleccionat a l'equip..."
-                    {print} equips {at} {random}
-                    dormir 2
+            story: "You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.\nEither red, yellow or blue! Take a little pause after announcing a team."
+            code: "teams = red, yellow, blue\n{print} 'Red, Yellow or Blue?'\n{repeat} 5 {times}\n    {print} 'You are selected in team... '\n    {print} teams {at} {random}\n    {sleep} 2"
         2:
             story: Imprimeix el compte enrere per al joc de l'amagatall.
             code: |-
@@ -180,19 +172,8 @@ levels:
                     {else}
                         {print} 'No! La resposta correcta és ' resposta_correcta
         2:
-            story: |-
-                Aquest codi demana als clients en un restaurant si volen demanar postres. Si ho fan, els demana quin tipus de postres volen. Si es demana tiramisú se'ls diu que el tiramisú està esgotat.
-                Pot fer-lo funcionar?
-            code: |-
-                comanda = {ask} 'Voleu menjar postres?'
-                {if} comanda = si
-                postre = {ask} 'Quin tipus de postre voleu?'
-                    {if} postre = tiramisu
-                        {print} 'Disculpa, se'ns ha acabat el tiramisu.'
-                    {else}
-                        {print} 'Un ' postre ' en marxa!'
-                {else}
-                    {print} 'No vols cap postre. Cap problema!'
+            story: "This code asks the costumers in a restaurant if they would like to order dessert. If they do, it asks them what kind of dessert. If they order tiramisu they are told that the tiramisu is sold out.\nCan you get the code to work?"
+            code: "order = {ask} 'Would you like to order dessert?'\n{if} order = yes\n    dessert = {ask} 'What kind of dessert would you like?'\n    {if} dessert = tiramisu\n        {print} 'Sorry, we are out of tiramisu.'\n    {else}\n        {print} 'One ' dessert ' coming right up!'\n{else}\n    {print} 'You dont want a dessert. No problem!'"
     10:
         1:
             story: |-
