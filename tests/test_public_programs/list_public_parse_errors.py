@@ -2,7 +2,8 @@ import json
 import hedy
 from tests.Tester import HedyTester, Snippet
 from parameterized import parameterized
-from app import translate_error, app
+from app import app
+from hedy_error import get_error_text
 from flask_babel import force_locale
 import exceptions
 
@@ -67,7 +68,7 @@ class TestsPublicPrograms(HedyTester):
                 # Must run this in the context of the Flask app, because FlaskBabel requires that.
                 with app.app_context():
                     with force_locale('en'):
-                        error_message = translate_error(PE.error_code, PE.arguments, 'en')
+                        error_message = get_error_text(PE, 'en')
                         error_message = error_message.replace('<span class="command-highlighted">', '`')
                         error_message = error_message.replace('</span>', '`')
                         print(f'\n----\n{snippet.code}\n----')
