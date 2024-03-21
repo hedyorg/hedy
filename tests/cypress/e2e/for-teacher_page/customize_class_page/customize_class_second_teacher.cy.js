@@ -5,7 +5,9 @@ describe('customize class page', () => {
       loginForTeacher("teacher4");
       // ensureIsSecondTeacher("teacher1", "teacher2")
       // await ensureClass();
-      cy.get("#view_classes").click();
+      if (!cy.get(".view_class")){
+        cy.get("#view_classes").click();
+      }
       cy.getBySel('view_class_link').first().click(); // Press on view class button
       cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
       cy.getBySel('customize_class_button').click(); // Press customize class button

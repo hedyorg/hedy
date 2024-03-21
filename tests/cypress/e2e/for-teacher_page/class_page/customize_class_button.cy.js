@@ -7,7 +7,9 @@ describe('Is able to go to logs page', () => {
     loginForTeacher();
     cy.wait(500);
 
-    cy.get("#view_classes").click();
+    if (!cy.get(".view_class")){
+      cy.get("#view_classes").click();
+    }
     cy.get(".view_class").first().click(); // Press view class button
 
     var currentUrl = '';

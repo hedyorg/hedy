@@ -18,7 +18,9 @@ export function createAdventure(name="")
 export function deleteAdventure(name) {
     // Delete that adventure
     goToTeachersPage();
-    cy.get("#view_adventures").click();
+    if (!cy.get(".view_adventures")){
+        cy.get("#view_adventures").click();
+    }
     cy.get("#adventures_table tbody tr")
     .each(($tr, i) => {
         if ($tr.text().includes(name)) {

@@ -7,7 +7,9 @@ describe('Is able to add student by name', () => {
 
     cy.wait(500);
 
-    cy.get("#view_classes").click();
+    if (!cy.get(".view_class")){
+      cy.get("#view_classes").click();
+    }
     cy.get(".view_class").first().click();
     cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
 
