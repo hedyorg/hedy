@@ -14,6 +14,7 @@ lang = None
 level = None
 Hedy_snippets = snippet_tester.filter_snippets(Hedy_snippets, lang=lang, level=level)
 
+
 class TestsCheatsheetPrograms(snippet_tester.HedySnippetTester):
 
     @parameterized.expand(Hedy_snippets, skip_on_empty=True)

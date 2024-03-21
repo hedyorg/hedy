@@ -17,6 +17,7 @@ Hedy_snippets = snippet_tester.filter_snippets(Hedy_snippets, lang=lang, level=l
 if lang:
     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.language[:2] == lang]
 
+
 class TestsSlidesPrograms(snippet_tester.HedySnippetTester):
     @parameterized.expand(Hedy_snippets, skip_on_empty=True)
     def test_slide_programs(self, name, snippet):

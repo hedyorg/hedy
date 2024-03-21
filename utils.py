@@ -126,6 +126,7 @@ def rt_yaml():
     y.width = 30000
     return y
 
+
 def load_yaml_rt(filename):
     """Load YAML with the round trip loader."""
     try:

@@ -435,6 +435,7 @@ def task__autopr():
             [python3, 'build-tools/github/normalize-pofiles.py'],
         ])
 
+
 def task__autopr_weblate():
     """Run code generation tasks that should commit to PRs, only for Weblate PRs.
 

@@ -70,6 +70,7 @@ def collect_adventures_snippets(path):
 
     return Hedy_snippets
 
+
 def collect_adventures_snippets(path, filtered_language=None):
     Hedy_snippets = []
     files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
@@ -239,6 +240,7 @@ class HedySnippetTester(HedyTester):
     'yaml_locator' is a function that, given a snippet, will tell us where
     in the file it was found, by returning a pair of `(containing_dict,
     """
+
     def do_snippet(self, snippet, yaml_locator=None):
         if snippet is None or len(snippet.code) == 0:
             return
@@ -286,4 +288,3 @@ class HedySnippetTester(HedyTester):
         broken_loc.dict[broken_loc.key] = original_loc.dict[original_loc.key]
         with open(snippet.filename, 'w') as file:
             file.write(utils.dump_yaml_rt(broken_yaml))
-
