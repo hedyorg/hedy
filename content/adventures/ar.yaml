@@ -691,71 +691,71 @@ adventures:
                     {print} 'SURPRISE!'
                     ```
     debugging:
-        name: debugging
-        default_save_name: debugging
-        description: debugging adventure
+        name: تصحيح الأخطاء
+        default_save_name: تصحيح الأخطاء
+        description: مغامرة تصحيح الأخطاء
         levels:
             1:
                 story_text: |-
-                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
-                    That means that in these debugging adventures, we will show you code that does not work yet.
-                    You will have to figure out what's wrong and correct the mistakes.
+                    نرحب بكم في مغامرة تصحيح الأخطاء. تصحيح كود يعني التخلص من الأخطاء في كود.
+                     هذا يعني أنه في هذه المغامرات التصحيحية، سنعرض لك كود لا يعمل .
+                    عليك أن تكتشف ماهو الخطأ وتصحيحه .‍
 
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### التمرين
+                    صحح هذا الكود. حظًا سعيدًا!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **تحذير! هذا الكود بحاجة إلى تصحيح!**
                     ```
-                    {print} I love programming
-                    Do you love programming too?
+                    {print} انا أحب البرمجة
+                    أتحب البرمجة أيضًا؟
                     {echo}
-                    {print} What are your hobbies?
-                    {echo} Your hobbies are
+                    {print} ما هي هواياتك؟
+                    {echo} هاوياتك هي
                     ```
             2:
                 story_text: |-
-                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
-                    That means that in these debugging adventures, we will give you a code that does not work yet.
-                    You will have to figure out what's wrong and correct the mistakes.
+                    نرحب بكم في مغامرة تصحيح الأخطاء. تصحيح كود يعني التخلص من الأخطاء في كود.
+                    هذا يعني أنه في هذه المغامرات التصحيحية، سنعرض لك كود لا يعمل .
+                    عليك أن تكتشف ماهو الخطأ وتصحيحه .‍
 
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### التمرين
+                    صحح هذا الكود. حظًا سعيدًا!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **تحذير! هذا الكود بحاجة إلى تصحيح!**
                     ```
-                    destination {ask} Where are you going on holidays?
-                    {print} The flight to dstination leaves at 3 pm.
-                    {ask} Did you check in your luggage yet?
+                    أين ستذهب في عطلتك  {ask} على وجهة ؟
+                    {print} الرحلة إلى الوجهة تغادر في الساعة الثالثة مساءً.
+                    {ask} هل قمت بفحص أمتعتك حتى الآن؟
                     {echo}
-                    {print} Let me print your boarding pass for you.
+                    {print} اسمح لي بطباعة بطاقة الصعود لك.
                     {sleep}
-                    Here you go! Have a nice trip!
+                    ها هي! تمتع برحلة ممتعة!
                     ```
             3:
                 story_text: |-
-                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
-                    That means that in these debugging adventures, we will give you a code that does not work yet.
-                    You will have to figure out what's wrong and correct the mistakes.
+                    نرحب بكم في مغامرة تصحيح الأخطاء. تصحيح كود يعني التخلص من الأخطاء في كود.
+                    هذا يعني أنه في هذه المغامرات التصحيحية، سنعرض لك كود لا يعمل .
+                    عليك أن تكتشف ماهو الخطأ وتصحيحه .‍
 
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### التمرين
+                    صحح هذا الكود. حظًا سعيدًا!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **تحذير! هذا الكود بحاجة إلى تصحيح!**
                     ```
-                    movie_choices {is} dracula, fast and furious, home alone, barbie
-                    chosen_movie {is} movies {at} {random}
-                    {print} Tonight we will watch chosen _movies
-                    like {ask} Do you like that movie?
-                    {print} Tomorrow we will watch something else.
-                    {add} chosen_movie {to} movie_choices
-                    {print} Tomorrow we will watch tomorrows_movie
-                    tomorrows_movie {is} movie_choices {at} {random}
-                    I'll go get the popcorn! {print}
+                    اختيارات_الفيلم {is} dracula, fast and furious, home alone, barbie
+                    الفيلم_المختار {is} الفيلم {at} {random}
+                    {print} الليلة سوف نشاهد الفيلم_المختار
+                    مثال{ask} هل تحب هذا الفيلم?
+                    {print} غدا سنشاهد شيئا آخر.
+                    {add} الفيلم_المختار {to_list} اختيارات_الفيلم
+                    {print}غدا سنشاهد فيلم_الغد
+                    فيلم_الغد {is} اختيارات_الفيلم {at} {random}
+                    سأذهب للحصول على الفشار!{print}
                     ```
             4:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### التمرين
+                    صحح هذا الكود. حظًا سعيدًا!
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -2339,22 +2339,22 @@ adventures:
 
                     {print} 2.5 + 2.5
     music:
-        name: music
-        default_save_name: music
-        description: Play a tune!
+        name: موسيقى
+        default_save_name: موسيقى
+        description: ألعب لحن!
         levels:
             1:
                 story_text: |-
-                    In this level you'll learn how to use the `{play}` command to play a tune!
+                    في هذا المستوى ستتعلم كيفية استخدام `{play}`  للعب لحن!
 
-                    Type `{play}` followed by the note you want to play. The scale goes C-D-E-F-G-A-B.
-                    As you can see there are 7 different letters, but we can play more than just 7 notes.
-                    Type a number between 1 and 10 behind the letter to choose the scale, for example after B4 comes C5.
-                    C1 is the lowest note you can play, C10 is the highest.
+                    كتب `{play}` متبوعًا بالملاحظة التي تريد تشغيلها. المقياس هو C-D-E-F-G-A-B.
+                    ما ترون هناك 7 أحرف مختلفة، ولكن يمكننا أن نعزف أكثر من 7 نغمات فقط.
+                    قم بكتابة رقم بين 1 و10 خلف الحرف لاختيار المقياس، على سبيل المثال بعد B4 يأتي C5.
+                    C1 هي أدنى نغمة يمكنك عزفها، وC10 هي الأعلى.
 
-                    ### Exercise
-                    Try out the example code and then play around with it! Can you create your own melody?
-                    In the next level you'll learn how to play some existing songs.
+                    ### تمرين
+                    حاول على سبيل المثال هذا كود ثم العب به! هل يمكنك إنشاء اللحن الخاص بك؟
+                    في المستوى التالي ستتعلم كيفية تشغيل بعض الأغاني الموجودة.
                 example_code: |-
                     ```
                     play C4
@@ -2572,11 +2572,11 @@ adventures:
             13:
                 story_text: |
                     You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
-                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, buyt each time they are followed by a different couple of notes.
+                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, but each time they are followed by a different couple of notes.
 
                     ### Exercise
                     Can you finish the song of Yankee Doodle?
-                    Can you think of another song to programm this way?
+                    Can you think of another song to program this way?
                 example_code: |
                     ```
                     {print} 'Yankee Doodle'

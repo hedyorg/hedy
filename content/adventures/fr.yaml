@@ -614,7 +614,7 @@ adventures:
                     ### Exercice 2
                     Crée un nouveau programme d'entrainement au calcul, mais utilise des nombres décimaux cette fois.
                     Crée une liste de nombres, choisis-en deux à multiplier et laisse le joueur répondre.
-                    Bien sûr, tu dois valider la réponse ! **Bonus** Augmente la difficulté en ajoutant un système de vies : un joueur perd une vie pour une mauvaise réponse, et arrête le jeu après trois mauvaises réponses.
+                    Bien sûr, tu dois valider la réponse ! **Bonus** Augmente la difficulté en ajoutant un système de vies : un joueur perd une vie pour une mauvaise réponse, et le jeu s'arrête après trois mauvaises réponses.
                 example_code: |
                     ```
                     nombre1 = {ask} "Quel est le premier nombre ?"
@@ -2751,11 +2751,11 @@ adventures:
             13:
                 story_text: |
                     You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
-                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, buyt each time they are followed by a different couple of notes.
+                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, but each time they are followed by a different couple of notes.
 
                     ### Exercise
                     Can you finish the song of Yankee Doodle?
-                    Can you think of another song to programm this way?
+                    Can you think of another song to program this way?
                 example_code: |
                     ```
                     {print} 'Yankee Doodle'
@@ -2996,23 +2996,28 @@ adventures:
                     _ _ "🧒 Non, Hedy ! Dis " nouveau_mot
                     ```
     piggybank:
-        name: Piggy Bank
-        default_save_name: Piggy Bank
-        description: Count your pocketmoney!
+        name: Tirelire
+        default_save_name: Tirelire
+        description: Compte ton argent de poche !
         levels:
             12:
                 story_text: |
-                    In this adventure you learn how to make a digital piggy bank, to calculate how much money you have and how long you need to save up to buy what you want!
+                    Dans cette aventure, tu apprendras comment faire une tirelire numérique.
+
+                    ### Exercice
+                    Termine le code pour calculer combien d'argent, tu as et pendant combien de temps tu dois économiser pour t'acheter ce que tu veux !
+                    Quand tu réponds aux questions, souviens-toi d'utiliser un point et non une virgule pour les nombres décimaux.
+                    **Bonus** Peut-être as-tu déjà économisé un peu d'argent ? Déduis-le du montant total que tu devras économiser.
                 example_code: |
                     ```
-                    {print} 'The digital piggy bank'
-                    wish = {ask} 'What would you like to buy?'
-                    price = {ask} 'How much does that cost?'
-                    saved = {ask} 'How much money have you saved already?'
-                    allowance = {ask} 'How much pocket money do you get per week?'
-                    to_save = price - saved
-                    weeks = to_save / allowance
-                    {print} 'You can buy a ' wish ' in ' weeks ' weeks.'
+                    {print} "La tirelire numérique"
+                    souhait = {ask} "Que veux-tu acheter ?"
+                    prix = {ask} "Combien ça coûte ?"
+                    économisé = {ask} "Combien d'argent as-tu déjà économisé ?"
+                    argent_de_poche = {ask} "Combien d'argent de poche reçois-tu par semaine ?"
+                    à_économiser = prix - économisé
+                    nombre_semaines = à_économiser / argent_de_poche
+                    {print} "Tu pourras acheter " _ " dans " _ " semaines."
                     ```
             14:
                 story_text: |
@@ -3635,21 +3640,24 @@ adventures:
                     ```
             12:
                 story_text: |
-                    From this level on you can use decimal numbers to make you menu more realistic.
+                    À partir de ce niveau, tu peux utiliser les nombres décimaux pour rendre ton menu plus réaliste.
+
+                    ### Exercice
+                    Peux-tu écrire le code pour donner à tes amis et à ta famille une réduction de 15 % ?
                 example_code: |
                     ```
-                    price = 0
-                    food = {ask} 'What would you like to order?'
-                    drink = {ask} 'What would you like to drink?'
-                    {if} food {is} 'hamburger'
-                        price = price + 6.50
-                    {if} food {is} 'pizza'
-                        price = price + 5.75
-                    {if} drink {is} 'water'
-                        price = price + 1.20
-                    {if} drink {is} 'soda'
-                        price = price + 2.35
-                    {print} 'That will be ' price ' dollar, please'
+                    total = 0.0
+                    nouriture = {ask} "Que voulez-vous commander ?"
+                    boisson = {ask} "Que voulez-vous boire ?"
+                    {if} nouriture {is} "hamburger"
+                        total = total + 6.50
+                    {if} nouriture {is} "pizza"
+                        total = total + 5.75
+                    {if} boisson {is} "water"
+                        total = total + 1.20
+                    {if} boisson {is} "soda"
+                        total = total + 2.35
+                    {print} "Ça vous fera un total de " total " euros, s'il vous plait"
                     ```
             13:
                 story_text: |
@@ -3857,31 +3865,43 @@ adventures:
                     {print} Je choisi choix
                     ```
     secret:
-        name: SuperEspion
-        default_save_name: SuperSpy
-        description: Make your own spy code
+        name: Agent secret
+        default_save_name: AgentSecret
+        description: Écrit ton code d'agent secret
         levels:
             12:
                 story_text: |
-                    In this adventure you can create your own super spy code. Encode a message that only the right agent can decipher.
-                    If the enemy tries to crack the code, they will get some false info to waste their time.
+                    Dans cette aventure, tu peux créer ton propre code d'agent secret. Encode un message que seul le bon agent pourra déchiffre.
+                    Si l'ennemie essaye de craquer ton code, il recevra une fausse information pour lui faire perdre son temps.
+
+                    ### Exercice 1
+                    Invente ton propre code secret pour ton agent secret et retourne les deux parties seulement au vrai espion.
+
+                    ### Exercice 2
+                    Ajoute un troisième composant au code, comme le nom d'un vêtement ou d'un objet.
                 example_code: |
                     ```
-                    name {is} {ask} 'What is your name?'
-                    {if} name {is} '_'
-                        a {is} 'Go to the airport '
+                    nom {is} {ask} "Quel est ton nom ?"
+                    {if} nom {is} _
+                        a = " rends-toi à l'aéroport "
                     {else}
-                        a {is} 'Go to the trainstation '
-                    password {is} {ask} 'What is the password?'
-                    {if} password {is} _
-                        b {is} 'tomorrow at 02.00'
+                        a = " rends-toi à la gare "
+                    mot_de_passe {is} {ask} "Quel est le mot de passe ?"
+                    {if} mot_de_passe {is} _
+                        b = "demain à 14 h 00."
                     {else}
-                        b {is} 'today at 10.00'
+                        b = "aujourd'hui à 10 h 00."
                     {print} _ _ _
                     ```
             13:
                 story_text: |
-                    The code you made in the previous level can be made a lot easier in this one with the `{and}` command.
+                    We can simplify the superspy code with `{and}`, such that we only need one `{if}`.
+
+                    ### Exercise 1
+                    Complete the code by filling the right command on the blank. Tip: The superspy has to answer BOTH questions correctly, before they get the confidential information!
+
+                    ### Exercise 2
+                    We want to confuse the enemy even more! Create a list with fake answers and select one at random when a wrong answer is given.
                 example_code: |
                     ```
                     name = {ask} 'What is your name?'
@@ -3909,8 +3929,8 @@ adventures:
                     {print} le vert !
                     ```
     songs:
-        name: Chante une chanson!
-        default_save_name: Song
+        name: Chante une chanson !
+        default_save_name: Chanson
         description: Écrit une chanson
         levels:
             6:
@@ -4110,9 +4130,9 @@ adventures:
                         {print} 'early in the morning'
                     ```
     songs_2:
-        name: Sing a song! 2
-        default_save_name: Song 2
-        description: Sing a song 2
+        name: Chante une chanson ! 2
+        default_save_name: Chanson 2
+        description: Chante une chanson ! 2
         levels:
             12:
                 story_text: |
@@ -4646,27 +4666,27 @@ adventures:
                     ```
             12:
                 story_text: |
-                    We can use functions to draw more complex figures with less code.
-                    ### Exercise 1
-                    Fill the function so that three squares are created. If you want the image to look nicer, you can make the lines between the squares white.
+                    Nous pouvons utiliser les fonctions pour dessiner des formes plus complexes avec moins de code.
+                    ### Exercice 1
+                    Complète la fonction pour qu'elle dessine un carré. Tu peux rendre l'image finale plus belle en dessinant des lignes blanches entre les carrés.
 
-                    ### Exercise 2
-                    The code can be made even shorter. Place the final lines into a `{repeat}` so the figure remains the same.
+                    ### Exercice 2
+                    Le code peut être réduit encore plus. Place les lignes finales dans un `{repeat}` tout en conservant le même dessin.
 
-                    ### Exercise 3
-                    Create your own drawing with different figures.
-                    Change both the number of figures with the `{repeat}` and the shape of the figures in the `{define}`
+                    ### Exercice 3
+                    Crée ton propre dessin avec des formes différentes.
+                    Change le nombre de formes avec le `{repeat}` et les formes elles-mêmes dans le `{define}`
                 example_code: |
                     ```
-                    {define} square
+                    {define} carré
                         {repeat} 4 {times}
                             {turn} _
                             {forward} _
-                    {call} square
+                    {call} carré
                     {forward} 50
-                    {call} square
+                    {call} carré
                     {forward} 50
-                    {call} square
+                    {call} carré
                     ```
     turtle_draw_it:
         name: Dessine !
@@ -4875,32 +4895,27 @@ adventures:
                 story_text: |
                     ### Exercice
                     Refait les dessins avec la tortue !
+                    Aide pour le programme de conception de bracelet. Commence par définir une fonction **pour chaque forme** que tu veux utiliser dans le bracelet. Ensuite, ajoute les formes au bracelet comme ceci :
 
-                    </div>
-                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
+                    Bracelet <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
                 example_code: |
-                    Hint: Bracelet designing program
-
-
-                    Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
-
                     ```
-                    {define} draw_a_square
+                    {define} dessine_un_carré
                     _
 
-                    {color} white
+                    {color} blanc
                     {turn} -90
                     {forward} 300
                     {turn} 180
 
                     {for} i {in} {range} 1 {to} 5
-                        {color} gray
+                        {color} gris
                         {forward} 100
-                        shape = {ask} 'What kind of shape would you like next on the bracelet?'
-                        chosen_color = {ask} 'In which color?'
-                        {color} chosen_color
-                        {if} shape = 'square'
-                            {call} draw_a_square
+                        forme = {ask} "Quelle forme veux-tu ensuite dans ton bracelet ?"
+                        couleur = {ask} "Dans quelle couleur ?"
+                        {color} couleur
+                        {if} forme = "carré"
+                            {call} dessine_un_carré
                     ```
             13:
                 story_text: |
