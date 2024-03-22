@@ -11,6 +11,8 @@ describe('Duplicate class tests', () => {
     const duplicate_class = `test class ${Math.random()}`;
 
     // Click on duplicate icon
+    cy.reload();
+    cy.wait(500);
     cy.get(".view_class").then($viewClass => {
       if (!$viewClass.is(':visible')) {
           cy.get("#view_classes").click();
@@ -23,6 +25,7 @@ describe('Duplicate class tests', () => {
     cy.get('#modal-ok-button').click();
 
     cy.reload();
+    cy.wait(500);
 
     cy.get(".view_class").then($viewClass => {
       if (!$viewClass.is(':visible')) {
@@ -62,6 +65,7 @@ describe('Duplicate class tests', () => {
     cy.get('#modal-ok-button').click();
 
     cy.reload();
+    cy.wait(500);
 
     cy.get(".view_class").then($viewClass => {
       if (!$viewClass.is(':visible')) {

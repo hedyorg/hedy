@@ -13,6 +13,7 @@ describe('Go to level dropdown', () => {
     ({classname, students} = createClassAndAddStudents());
     goToTeachersPage();
 
+    cy.wait(500);
     cy.get(".view_class").then($viewClass => {
       if (!$viewClass.is(':visible')) {
           cy.get("#view_classes").click();
