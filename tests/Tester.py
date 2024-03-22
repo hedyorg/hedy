@@ -300,9 +300,11 @@ class HedyTester(unittest.TestCase):
             # because in that case our preprocessor throws the error so there is no parsetree
             # (todo maybe parse first?)
 
-            skipped_exceptions = [hedy.exceptions.ParseException, hedy.exceptions.NoIndentationException,
-                                  hedy.exceptions.IndentationException, hedy.exceptions.LockedLanguageFeatureException,
-                                  hedy.exceptions.CodePlaceholdersPresentException]
+            skipped_exceptions = [
+                hedy.exceptions.ParseException, hedy.exceptions.CodePlaceholdersPresentException,
+                hedy.exceptions.TooFewIndentsStartLevelException, hedy.exceptions.TooManyIndentsStartLevelException,
+                hedy.exceptions.NoIndentationException, hedy.exceptions.IndentationException
+            ]
 
             if translate and exception not in skipped_exceptions and skipped_mappings is None:
                 self.verify_translation(code, lang, level)
