@@ -1,25 +1,25 @@
 levels:
     1:
         1:
-            code: "{print} Welcome to bakery Hedy!\n{ask} What type of pie do you want to order?\n{echo} So you want\n{print} Your order is being prepared!"
-            story: "Puzzels are exercises in which the lines of code are already written for you. You only have to place the lines in the correct order. Drag the lines of code into the input screen and run the code. Can you get the program to work?\n\nYou're a customer at bakery Hedy.\nYou walk into the bakery and are welcomed by the baker.\nHe asks what type of pie you want to order.\nThen he repeats your answer back to you.\nLastly, your order is being prepared."
+            code: "{print} Dobrodošli v pekarni Hedy!\n{ask} Katero vrsto pite želite naročiti?\n{echo} Torej želite\n{print} Vaše naročilo se pripravlja!"
+            story: "Uganke so vaje, pri katerih so vrstice programa že napisane za vas. Vrstice morate le razvrstiti v pravilnem vrstnem redu. Vrstice kode povlecite v vnosno okno in zaženite kodo. Ali vam bo program deloval?\n\nSte stranka v pekarni Hedy.\nVstopite v pekarno, kjer vas pozdravi pek.\nVpraša vas, katero vrsto pite želite naročiti.\nNato vam ponovi vaš odgovor.\nNa koncu se vaše naročilo pripravi."
         2:
-            code: "{print} This is DJ Hedy\n{ask} Are you ready to party?\n{ask} What song would you like to hear?\n{echo} Great choice! I love the song"
-            story: You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.
+            code: "{print} To je DJ Hedy\n{ask} Ste pripravljeni na zabavo?\n{ask} Katero pesem bi radi slišali?\n{echo} Odlična izbira! ta pesem mi je všeč"
+            story: Pri DJ-u prosite za pesem. Ustvarite program, ki vas vpraša, ali ste pripravljeni na zabavo, nato pa vas vpraša, katero skladbo bi radi slišali.
     2:
         2:
-            story: This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.
-            code: "{print} Welcome to our toystore\ntoy {is} {ask} What would you like to buy?\n{print} toy is added to your shopping cart.\n{print} Thank you for shopping with us!"
+            story: To je spletna trgovina z igračami. Ustvarite program, v katerem lahko kupci dodajo predmet v nakupovalno košarico.
+            code: "{print} Dobrodošli v naši trgovini z igračami\nigrača {is} {ask} Kaj bi radi kupili?\nIgrača {print} je dodana v vašo košarico.\n{print} Hvala, ker ste nakupovali pri nas!"
         1:
-            story: "You and your friends are going to watch some Netflix.\nShow which movie you're about to watch and wish the viewers lot of fun!"
-            code: "{print} It is time for an evening of Netflix\nfilm {is} Sonic the Hedgehog 2\n{print} We're going to watch film\n{print} Have fun!"
+            story: "S prijatelji boste gledali Netflix.\nPokažite, kateri film boste gledali, in zaželite gledalcem veliko zabave!"
+            code: "{print} Čas je za Netflix večer\nfilm {is} Ježek Sonic 2\n{print} Ogledali si bomo film\n{print}. Zabavajte se!"
     3:
         2:
-            story: Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
-            code: "food {is} pizza, icecream, salad, sandwich\ntoppings {is} chocolate, cheese, tuna, sprinkles\n{print} Your random meal for today is...\n{sleep} 2\n{print} food {at} {random} with toppings {at} {random}"
+            story: Ustvarite program, ki bo za vas izbral naključni obrok. Sestavite seznam jedi in seznam prelivov ter pustite programu, da odloči, kaj boste jedli!
+            code: "hrana {is} pica, sladoled, solata, sendvič\ndodatki {is} čokolada, sir, tuna, mrvice\n{print} Vaš naključni obrok za danes je...\n{sleep} 2\n{print} hrana {at} {random} z dodatkom {at} {random}"
         1:
-            story: "The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into? Are you a Gryffindor, Hufflepuff, Ravenclaw or Slytherin.\nBefore the sorting hat reveals your house, you can tell it to not pick one of the houses."
-            code: "{print} The sorting hat is ready to sort you into a Hogwarts house.\nhouses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin\ndislike {is} {ask} Are there any houses you do not want to be part of?\n{remove} dislike {from} houses\n{print} Not dislike eh? Better be... houses {at} {random}"
+            story: "Na Bradavičarki se začenja se novo šolsko leto! \nNaloga razvrščevalnega klobuka je, da vas razvrsti v eno od hiš.\nV katero hišo boste razvrščeni? Ali ste Gryffindor, Hufflepuff, Ravenclaw ali Slytherin.\nPreden razvrščevalni klobuk razkrije vašo hišo, mu lahko poveste, naj ne izbere nobene od hiš."
+            code: "{print} Klobuk za razvrščanje je pripravljen, da te razvrsti v hišo Bradavičarke.\nhiše {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin\nne maram{is} {ask} Ali so kakšne hiše, v katerih ne želiš biti?\n{remove} ne maram {from} hiš\n{print} Nimaš rad, a? Bolje, da so... hiše {at} {random}"
         3:
             story: "In a chess tournament there are three players left.\nCreate a program that decides which two players have to play against each other first.\nStart by printing the two players who play the first match, then print against which player the winner will play."
             code: "players {is} Liam, Noah, Sophie\nplayer_1 {is} players {at} {random}\n{remove} player_1 {from} players\nplayer_2 {is} players {at} {random}\n{print} player_1 ' first plays against ' player_2\n{remove} player_2 {from} players\n{print} 'The winner plays against ' players {at} {random}"
