@@ -106,9 +106,7 @@ jobs:
       if: ${{ hashFiles('snippet-report.md.tmp') != '' }}
       run: |
         echo 'The automatic script made changes' >> comment.md.tmp
-        echo '```' >> comment.md.tmp
         cat snippet-report.md.tmp >> comment.md.tmp
-        echo '```' >> comment.md.tmp
 
     - name: Post comment
       if: ${{ hashFiles('comment.md.tmp') != '' && github.event_name == 'pull_request_target' }}
