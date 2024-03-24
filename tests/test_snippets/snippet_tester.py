@@ -223,14 +223,14 @@ class HedySnippetTester(HedyTester):
         except OSError:
             return None  # programs with ask cannot be tested with output :(
         except exceptions.HedyException as E:
-            error_message = self.format_test_error(E, snippet)
+            error_message = self.format_test_error_md(E, snippet)
 
             if fix_error and yaml_locator:
                 self.restore_snippet_to_english(snippet, yaml_locator)
 
-                with open(path.join(rootdir(), 'snippet-report.txt'), 'a') as f:
+                with open(path.join(rootdir(), 'snippet-report.md.txt'), 'a') as f:
                     f.write(error_message + '\n')
-                    f.write('*** This snippet has been reverted to English ***\n\n')
+                    f.write('This snippet has been reverted to English.\n\n')
             else:
                 print(error_message)
                 raise E
