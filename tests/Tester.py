@@ -520,7 +520,7 @@ class HedyTester(unittest.TestCase):
 
         return snippets
 
-    def format_test_error(self, E, snippet):
+    def format_test_error(self, E, snippet: Snippet):
         """Given a snippet and an exception, return a string describing the problem."""
         message = []
 
@@ -547,7 +547,7 @@ class HedyTester(unittest.TestCase):
             return '\n'.join(lines).strip()
 
         message.append('======================================================================')
-        message.append(f'Language {snippet.language}, level {snippet.level} produces an error:')
+        message.append(f'{snippet.filename}: snippet in level {snippet.level} produces an error:')
         message.append(f'{error_message} at line {location}')
         message.append('-- keywords --')
         message.append(add_arrow(snippet.original_code))
