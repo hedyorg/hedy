@@ -546,7 +546,9 @@ class HedyTester(unittest.TestCase):
                      for i, line in enumerate(lines)]
             return '\n'.join(lines).strip()
 
-        message.append(f'## {snippet.filename}: snippet in level {snippet.level}')
+        rel_file = os.path.relpath(snippet.filename, ROOT_DIR)
+        message.append(f'## {rel_file}')
+        message.append(f'There was a problem in a level {snippet.level} snippet:')
 
         # Use a 'caution' admonition because it renders in red
         message.append('> [!CAUTION]')
