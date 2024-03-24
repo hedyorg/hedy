@@ -228,7 +228,7 @@ class HedySnippetTester(HedyTester):
             if fix_error and yaml_locator:
                 self.restore_snippet_to_english(snippet, yaml_locator)
 
-                with open(path.join(rootdir(), 'snippet-report.md.txt'), 'a') as f:
+                with open(path.join(rootdir(), 'snippet-report.md.tmp'), 'a') as f:
                     f.write(error_message + '\n')
                     f.write('This snippet has been reverted to English.\n\n')
             else:
