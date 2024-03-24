@@ -9,17 +9,17 @@ levels:
     2:
         2:
             story: To je spletna trgovina z igračami. Ustvarite program, v katerem lahko kupci dodajo predmet v nakupovalno košarico.
-            code: "{print} Dobrodošli v naši trgovini z igračami\nigrača {is} {ask} Kaj bi radi kupili?\nIgrača {print} je dodana v vašo košarico.\n{print} Hvala, ker ste nakupovali pri nas!"
+            code: "{print} Dobrodošli v naši trgovini z igračami\nigrača {is} {ask} Kaj bi radi kupili?\n{print} igrača je dodana v vašo košarico.\n{print} Hvala, ker ste nakupovali pri nas!"
         1:
             story: "S prijatelji boste gledali Netflix.\nPokažite, kateri film boste gledali, in zaželite gledalcem veliko zabave!"
             code: "{print} Čas je za Netflix večer\nfilm {is} Ježek Sonic 2\n{print} Ogledali si bomo film\n{print}. Zabavajte se!"
     3:
         2:
             story: Ustvarite program, ki bo za vas izbral naključni obrok. Sestavite seznam jedi in seznam prelivov ter pustite programu, da odloči, kaj boste jedli!
-            code: "hrana {is} pica, sladoled, solata, sendvič\ndodatki {is} čokolada, sir, tuna, mrvice\n{print} Vaš naključni obrok za danes je...\n{sleep} 2\n{print} hrana {at} {random} z dodatkom {at} {random}"
+            code: "hrana {is} pica, sladoled, solata, sendvič\ndodatki {is} čokolada, sir, tuna, mrvice\n{print} Vaš naključni obrok za danes je...\n{sleep} 2\n{print} hrana {at} {random} z dodatki {at} {random}"
         1:
             story: "Na Bradavičarki se začenja se novo šolsko leto! \nNaloga razvrščevalnega klobuka je, da vas razvrsti v eno od hiš.\nV katero hišo boste razvrščeni? Ali ste Gryffindor, Hufflepuff, Ravenclaw ali Slytherin.\nPreden razvrščevalni klobuk razkrije vašo hišo, mu lahko poveste, naj ne izbere nobene od hiš."
-            code: "{print} Klobuk za razvrščanje je pripravljen, da te razvrsti v hišo Bradavičarke.\nhiše {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin\nne maram{is} {ask} Ali so kakšne hiše, v katerih ne želiš biti?\n{remove} ne maram {from} hiš\n{print} Nimaš rad, a? Bolje, da so... hiše {at} {random}"
+            code: "{print} Klobuk za razvrščanje je pripravljen, da te razvrsti v hišo Bradavičarke.\nhiše {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin\nne_maram {is} {ask} Ali so kakšne hiše, v katerih ne želiš biti?\n{remove} ne_maram {from} hiš\n{print} Nimaš rad, a? Bolje, da so... hiše {at} {random}"
         3:
             story: "In a chess tournament there are three players left.\nCreate a program that decides which two players have to play against each other first.\nStart by printing the two players who play the first match, then print against which player the winner will play."
             code: "players {is} Liam, Noah, Sophie\nplayer_1 {is} players {at} {random}\n{remove} player_1 {from} players\nplayer_2 {is} players {at} {random}\n{print} player_1 ' first plays against ' player_2\n{remove} player_2 {from} players\n{print} 'The winner plays against ' players {at} {random}"
