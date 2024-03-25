@@ -143,8 +143,7 @@ class Adventure:
 
     @staticmethod
     def from_teacher_adventure_database_row(row):
-        text = row['formatted_content'] if 'formatted_content' in row else row['content']
-        text, example_code = halve_adventure_content(text)
+        text, example_code = halve_adventure_content(row["content"])
         return Adventure(
             short_name=row['id'],
             name=row['name'],
