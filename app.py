@@ -12,6 +12,7 @@ import subprocess
 import sys
 import traceback
 import textwrap
+import unicodedata
 import zipfile
 import jinja_partials
 from typing import Optional
@@ -413,6 +414,9 @@ def setup_language():
     # This is the only place to expand / shrink the list of RTL languages ->
     # front-end is fixed based on this value
     g.dir = static_babel_content.TEXT_DIRECTIONS.get(g.lang, 'ltr')
+
+    # True if it is a Latin alphabet, False if not
+    g.latin = all('LATIN' in unicodedata.name(char, '').upper() for char in current_language()['sym'])
 
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
