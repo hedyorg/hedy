@@ -1095,10 +1095,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         return;
       }
       if (!hasWarnings && code !== last_code) {
-          showSuccesMessage(); //FH nov 2023: typo in success :)
-          if (isModified){
-            $('#confetti-button').show();
-          }
+          showSuccessMessage(isModified);
           last_code = code;
       }
       if (cb) cb ();
@@ -1579,11 +1576,11 @@ export function modalStepOne(level: number){
   }
 }
 
-function showSuccesMessage(){
+function showSuccessMessage(isModified: boolean){
   removeBulb();
   var allsuccessmessages = ClientMessages['Transpile_success'].split('\n');
   var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
-  success.show(allsuccessmessages[randomnum]);
+  success.show(allsuccessmessages[randomnum], isModified);
 }
 
 function createModal(level:number ){

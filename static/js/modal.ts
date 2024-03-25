@@ -209,7 +209,10 @@ export const success = {
     $('#okbox').show();
   },
 
-  show(caption: string) {
+  show(caption: string, confetti: boolean) {
+    if (confetti){
+      $('#confetti-button').show();
+    }
     $('#okbox .caption').text(caption);
     $('#okbox').show();
     setTimeout(function() {
