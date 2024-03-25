@@ -607,7 +607,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
       program_data = theGlobalDebugger.get_program_data();
     }
 
-    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pygame, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, cb, run_type).catch(function(err: any) {
+    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pygame, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, program_data.is_modified ,cb, run_type).catch(function(err: any) {
       // The err is null if we don't understand it -> don't show anything
       if (err != null) {
         error.show(ClientMessages['Execute_error'], err.message);
@@ -863,7 +863,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, isModified: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
   let skip_faulty_found_errors = false;
@@ -1094,7 +1094,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);
         return;
       }
-      if (!hasWarnings && code !== last_code) {
+      if (!hasWarnings && code !== last_code && isModified) {
           showSuccesMessage(); //FH nov 2023: typo in success :)
           last_code = code;
       }

@@ -657,6 +657,8 @@ def parse():
 
     if "Error" in response and error_check:
         response["message"] = gettext('program_contains_error')
+    if program.get('is_modified'):
+        response['is_modified'] = True
     return jsonify(response)
 
 
@@ -1090,7 +1092,7 @@ def programs_page(user):
         date = utils.delta_timestamp(item['date'])
         # This way we only keep the first 4 lines to show as preview to the user
         preview_code = "\n".join(item['code'].split("\n")[:4])
-        if item['is_modified'] == True:
+        if item.get('is_modified'):
             programs.append(
                 {'id': item['id'],
                  'preview_code': preview_code,
