@@ -520,8 +520,8 @@ class HedyTester(unittest.TestCase):
 
         return snippets
 
-    def format_test_error(self, E, snippet):
-        """Given a snippet and an exception, return a string describing the problem."""
+    def format_test_error_md(self, E, snippet: Snippet):
+        """Given a snippet and an exception, return a Markdown string describing the problem."""
         message = []
 
         arrow = True  # set to False if you want to remove the <---- in the output f.e. for easy copy-pasting
@@ -546,13 +546,22 @@ class HedyTester(unittest.TestCase):
                      for i, line in enumerate(lines)]
             return '\n'.join(lines).strip()
 
-        message.append('======================================================================')
-        message.append(f'Language {snippet.language}, level {snippet.level} produces an error:')
-        message.append(f'{error_message} at line {location}')
-        message.append('-- keywords --')
+        rel_file = os.path.relpath(snippet.filename, ROOT_DIR)
+        message.append(f'## {rel_file}')
+        message.append(f'There was a problem in a level {snippet.level} snippet:')
+
+        # Use a 'caution' admonition because it renders in red
+        message.append('> [!CAUTION]')
+        message.append(f'> {error_message} at line {location}')
+
+        message.append('\nTranslation source')
+        message.append('```')
         message.append(add_arrow(snippet.original_code))
-        message.append('-- translated --')
+        message.append('```')
+        message.append('\nTranslated version')
+        message.append('```')
         message.append(add_arrow(snippet.code))
+        message.append('```')
 
         return '\n'.join(message)
 

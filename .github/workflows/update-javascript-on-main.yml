@@ -103,18 +103,16 @@ jobs:
         doit run _autopr_weblate
 
     - name: Prepare comment
-      if: ${{ hashFiles('snippet-report.txt') != '' }}
+      if: ${{ hashFiles('snippet-report.md.tmp') != '' }}
       run: |
-        echo 'The automatic script made changes' >> comment.txt
-        echo '```' >> comment.txt
-        cat snippet-report.txt >> comment.txt
-        echo '```' >> comment.txt
+        echo 'The automatic script made changes' >> comment.md.tmp
+        cat snippet-report.md.tmp >> comment.md.tmp
 
     - name: Post comment
-      if: ${{ hashFiles('comment.txt') != '' && github.event_name == 'pull_request_target' }}
+      if: ${{ hashFiles('comment.md.tmp') != '' && github.event_name == 'pull_request_target' }}
       uses: thollander/actions-comment-pull-request@v2
       with:
-        filePath: comment.txt
+        filePath: comment.md.tmp
 
     #----------------------------------------------------------------------
     #  Commit back
