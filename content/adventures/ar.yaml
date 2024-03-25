@@ -757,133 +757,125 @@ adventures:
                     ### التمرين
                     صحح هذا الكود. حظًا سعيدًا!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **تحذير! هذا الكود بحاجة إلى تصحيح!**
                     ```
-                    {print} 'Welcome to the online library!
-                    {ask} What genre of books do you like?
-                    {print} You like genre
-                    author {is} {ask} 'Who's your favorite author?'
-                    {print} 'author is your favorite author'
-                    {print} Hmmm... i think you should try... books {at} {random}
+                    {print} مرحباً بكم في المكتبة الإلكترونية!
+                    {ask} ما نوع الكتب التي تحبها؟
+                    {print}تحب النوع
+                    كاتب{is} {ask} 'من هو كاتبك المفض؟
+                    {print}"المؤلف هو مؤلفك المفضل"
+                    {print} هممم... أعتقد أنك يجب أن تجرب... الكتب {at} {random}
                     ```
             5:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### التمرين
+                    صحح هذا الكود. حظًا سعيدًا!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    {print} Welcome to Swimming Pool Hedy!
-                    class {is} {ask} 'Are you here to join a class today?'
-                    {if} class yes
-                    {print} 'Great! You're joining a class!
-                    {print} {else} 'You will not be joining a class'
-                    discount {is} 'Do you have a discount code?'
-                    {if} discount {is} yes
-                    discount_answer {is} {ask} 'What's your discount code?'
-                    discount_codes = Senior4231, Student8786, NewMember6709
-                    {if} discount_answer {is} {in} discount_cods
-                    {print} 'That will be $3,50'
-                    'That will be $5,50'
-                    {print} 'Have a nice swim!'
-                    ```
+                    **تحذير! هذا الكود بحاجة إلى تصحيح!**
+
+                    {print} مرحبًا بكم في حمام السباحة هيدي!
+                    صف {is} {ask} 'هل أنت هنا للانضمام إلى صف اليوم؟'
+                    {if} صف نعم
+                    {print} 'رائع! أنت تنضم إلى صف!
+                    {print} {else} 'لن تنضم إلى صف'
+                    خصم {is} 'هل لديك رمز خصم؟'
+                    {if} خصم {is} نعم
+                    إجابة_الخصم {is} {ask} 'ما هو رمز الخصم الخاص بك؟'
+                    رموز_الخصم = طالب4231، طالب8786، عضوجديد6709
+                    {if} إجابة_الخصم {is} {in} رموز_الخص
+                    {print} 'سيكون ذلك بمبلغ 3.50 دولار'
+                    'سيكون ذلك بمبلغ 5.50 دولار'
+                    {print} 'تمتع بالسباحة الجيدة!'‎
             6:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### التمرين
+                    صحح هذا الكود. حظًا سعيدًا!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    {print} 'Vending machine'
-                    chosen_product = {ask} 'Please select a product'
-                    1_dollar_products = coke orange juice water
-                    2_dollar_products = chocolate, cookie, museli bar
-                    3dollar_prodcuts = potato chips, beef jerky, banana bread
-                    {if} chosen {is} {in} 1_dollar_products
-                    price = 1
-                    {if} chosen_product {is} 2_dollar_products
-                    price = 2
-                    {else} chosen_product {in} 3_dollar_products
-                    price = 3
-                    amount_of_products = '{ask} How many of ' chosen_product would you like to have?'
-                    total = price + amount_of_product
-                    {print} 'That will be $' price 'please'
-                    ```
+                    **تحذير! هذا الكود بحاجة إلى تصحيح!**
+
+                    {print} 'آلة البيع'
+                    المنتج_المختار = {ask} 'الرجاء اختيار منتج'
+                    المنتجات_بقيمة_دولار_1 = عصير برتقال ماء كوكا
+                    المنتجات_بقيمة_دولار_2 = الشوكولاتة، البسكويت، بار الموسلي
+                    المنتجات_بقيمة_دولار_3 = رقائق البطاطس، لحم البقر المقدد، خبز الموز
+                    {if} المنتج_المختار {is} {in} المنتجات_بقيمة_دولار_1
+                    السعر = 1
+                    {if} المنتج_المختار {is} {in} المنتجات_بقيمة_دولار_2
+                    السعر = 2
+                    {else} المنتج_المختار {in} المنتجات_بقيمة_دولار_3
+                    السعر = 3
+                    عدد_المنتجات = '{ask} كم من ' المنتج_المختار ' ترغب في الحصول عليه؟'
+                    المجموع = السعر + عدد_المنتجات
+                    {print} 'سيكون ثمنه $' السعر 'من فضلك'
             7:
                 story_text: |-
-                    ### Exercise
-                    Surprise! This program looks more like an output than a code. And yet, we don't want you to just add `{print}` commands in front of each line.
-                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jaques)' by using the {repeat} command of course!
+                    ### تمرين
+                    مفاجأة! يبدو أن هذا البرنامج أكثر مظهرًا مثل إخراج من الشاشة بدلاً من كود برمجي. ومع ذلك، نريدك أن لا تقوم فقط بإضافة أوامر `{print}` أمام كل سطر.
+                    قم بتصحيح هذا البرنامج لتحويله إلى قصيدة الأطفال 'فرير جون (Frère Jacques)' باستخدام أمر `{repeat}` بالطبع!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    Are you sleeping?
-                    Brother John!
-                    Morning bells are ringing!
-                    Ding, dang, dong!
-                    ```
+                    **تحذير! هذا الكود بحاجة إلى تصحيح!**
+
+                    هل أنت نائم؟
+                    أخي جون!
+                    أجراس الصباح ترن!
+                    دينغ، دانغ، دونغ!``
             8:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    {print} 'Welcome to Manicures and Pedicures by Hedy'
-                    bodypart = {ask} 'Are you getting your fingernails or toenails done today? Or both?'
-                    {if} bodyparts {is} both
-                            {print} That will be $25'
-                            price = 25
+                    ### التمرين
+                    صحح هذا الكود. حظًا سعيدًا!
+                example_code: |-
+                    **تحذير! هذا الكود بحاجة إلى تصحيح!**
+
+                    {print} 'مرحبًا بكم في تجميل الأظافر والقدمين بواسطة هيدي'
+                    جزء_الجسم = {ask} 'هل ستقوم بتجميل أظافر يديك أم قدميك اليوم؟ أو الاثنين؟'
+                    {if} جزء_الجسم {is} الاثنين
+                          {print} 'سيكون ذلك بمبلغ 25 دولارًا'
+                           السعر = 25 
                         {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
+                              {print} 'سيكون ذلك بمبلغ 18 دولارًا'
+                               السعر = 18
+                    لون = {ask} 'ما هو اللون الذي ترغب فيه؟'
+                    التألق = {ask} 'هل ترغب في بعض التألق؟'
+                    {if} التألق {is} نعم
+                        {print} 'سنضيف 3 دولارات إضافية لذلك'
+                        السعر = السعر + 3
+                    {else}
+                        {print} 'لا يوجد تألق' {print} 'لذا لا تكلفة إضافية'
                     {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
-                    ```
+                    {print} 'انتهينا! يرجى دفع مبلغ $' السعر ' من فضلك!'
+                    {print} 'شكرًا لك! وداعًا!'
             9:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### التمرين
+                    صحح هذا الكود. حظًا سعيدًا!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    {print} 'Welcome to our sandwich shop'
-                    amount 'How many sandwiches would you like to buy?'
-                    {repeat} amount {times}
-                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
-                    types_of_bread {is} white, wheat, rye, garlic, gluten free
-                    {if} chosen_bread in types_of_bread
-                    {print} 'Lovely!'
-                    {else}
-                    'I'm sorry we don't sell that'
-                    topping {is} {ask} 'What kind of topping would you like?'
-                    sauce {is} {ask} 'What kind of sauce would you like?'
-                    {print} One chosen_bread with topping and sauce.
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
-                    ```
+                    **تحذير! هذا الكود بحاجة إلى تصحيح!**
 
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
+                    {print} 'مرحبًا بكم في محل السندويشات لدينا'
+                    الكمية 'كم سندويتش ترغب في شرائها؟'
+                    {repeat} الكمية {times}
+                    {ask} {is} {ask} 'أي نوع من الخبز تفضله لسندويتشك؟'
+                    أنواع_الخبز {is} أبيض، قمح، رغيف، ثوم، خالي من الجلوتين
+                    {if} الخبز_المختار في أنواع_الخبز
+                    {print} 'رائع!'
+                    {else}
+                    'آسف، لا نبيع ذلك'
+                    الطبقة {is} {ask} 'أي نوع من الطبقة ترغب فيها؟'
+                    الصلصة {is} {ask} 'أي نوع من الصلصة ترغب فيها؟'
+                    {print} سندويتش واحد بالخبز الخبز_المختار مع الطبقة والصلصة.
+                    السعر = الكمية * 6
+                    {print} 'سيكون ذلك 'سعر الدولار' من فضلك'
             10:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### التمرين
+                    صحح هذا الكود. حظًا سعيدًا!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **تحذير! هذا الكود بحاجة إلى تصحيح!**
                     ```
-                    names = Muad Hasan Samira Noura
-                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
-                    {for} name {is} names
-                    {print} At the beach name loves to activity at random
-                    ```
+                    الأسماء = معاذ حسن سميرة نورة
+                    الأنشطة = يطير طائرة ورقية، يذهب للسباحة، يذهب للمشي في الطبيعة، يستلقي للحصول على لون برونزي من الشمس
+                    {for} الاسم {is} الأسماء
+                    {print} في الشاطئ الاسم يحب القيام ب نشاط   {at} {random}
             11:
                 story_text: |-
                     ### Exercise
@@ -2572,11 +2564,11 @@ adventures:
             13:
                 story_text: |
                     You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
-                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, buyt each time they are followed by a different couple of notes.
+                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, but each time they are followed by a different couple of notes.
 
                     ### Exercise
                     Can you finish the song of Yankee Doodle?
-                    Can you think of another song to programm this way?
+                    Can you think of another song to program this way?
                 example_code: |
                     ```
                     {print} 'Yankee Doodle'

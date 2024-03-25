@@ -114,6 +114,40 @@ class TestsLevel9(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
+    def test_if_else_no_indentation(self):
+        code = textwrap.dedent("""\
+        antwoord is ask Hoeveel is 10 keer tien?
+        if antwoord is 100
+        print 'goed zo'
+        else
+        print 'bah slecht'""")
+
+        # gives the right exception for all levels even though it misses brackets
+        # because the indent check happens before parsing
+        self.multi_level_tester(code=code,
+                                exception=hedy.exceptions.NoIndentationException)
+
+    def test_if_no_indent_after_pressed_and_else_gives_error(self):
+        code = textwrap.dedent("""\
+        if x is pressed
+        print 'no indent!'
+        else
+        print 'no indent again!'""")
+
+        # gives the right exception for all levels even though it misses brackets
+        # because the indent check happens before parsing
+        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+
+    def test_if_no_indentation(self):
+        code = textwrap.dedent("""\
+        antwoord is ask Hoeveel is 10 keer tien?
+        if antwoord is 100
+        print 'goed zo'""")
+
+        # gives the right exception for all levels even though it misses brackets
+        # because the indent check happens before parsing
+        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+
     #
     # repeat nesting
     #
@@ -130,6 +164,46 @@ class TestsLevel9(HedyTester):
                time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_repeat_no_indentation(self):
+        code = textwrap.dedent("""\
+          repeat 3 times
+          print 'hooray!'""")
+
+        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+
+    def test_repeat_repair_too_few_indents(self):
+        code = textwrap.dedent("""\
+        repeat 5 times
+             print('repair')
+          print('me')""")
+
+        fixed_code = textwrap.dedent("""\
+        repeat 5 times
+             print('repair')
+             print('me')""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.NoIndentationException,
+            extra_check_function=(lambda x: x.exception.fixed_code == fixed_code)
+        )
+
+    def test_repeat_repair_too_many_indents(self):
+        code = textwrap.dedent("""\
+        repeat 5 times
+          print('repair')
+             print('me')""")
+        fixed_code = textwrap.dedent("""\
+        repeat 5 times
+          print('repair')
+          print('me')""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.IndentationException,
+            extra_check_function=(lambda x: x.exception.fixed_code == fixed_code)
+        )
 
     #
     # if and repeat nesting
@@ -305,6 +379,16 @@ class TestsLevel9(HedyTester):
           time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_unexpected_indent(self):
+        code = textwrap.dedent("""\
+         print('repair')
+            print('me')""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.IndentationException
+        )
 
     def test_source_map(self):
         code = textwrap.dedent("""\

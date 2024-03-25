@@ -17,7 +17,8 @@ from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 from hedy_sourcemap import SourceRange
 from functools import cache
 
-from app import translate_error, app
+from app import app
+from hedy_error import get_error_text
 from flask_babel import force_locale
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -299,9 +300,11 @@ class HedyTester(unittest.TestCase):
             # because in that case our preprocessor throws the error so there is no parsetree
             # (todo maybe parse first?)
 
-            skipped_exceptions = [hedy.exceptions.ParseException, hedy.exceptions.NoIndentationException,
-                                  hedy.exceptions.IndentationException, hedy.exceptions.LockedLanguageFeatureException,
-                                  hedy.exceptions.CodePlaceholdersPresentException]
+            skipped_exceptions = [
+                hedy.exceptions.ParseException, hedy.exceptions.CodePlaceholdersPresentException,
+                hedy.exceptions.TooFewIndentsStartLevelException, hedy.exceptions.TooManyIndentsStartLevelException,
+                hedy.exceptions.NoIndentationException, hedy.exceptions.IndentationException
+            ]
 
             if translate and exception not in skipped_exceptions and skipped_mappings is None:
                 self.verify_translation(code, lang, level)
@@ -385,7 +388,7 @@ class HedyTester(unittest.TestCase):
       try:
         __trtl = {type}(__trtl)
       except ValueError:
-        raise Exception("""catch_value_exception""")
+        raise Exception({HedyTester.value_exception_transpiled()})
       t.{command}(min(600, __trtl) if __trtl > 0 else max(-600, __trtl)){suffix}''')
 
     @staticmethod
@@ -394,7 +397,7 @@ class HedyTester(unittest.TestCase):
         try:
           time.sleep(int({val}))
         except ValueError:
-          raise Exception("""catch_value_exception""")''')
+          raise Exception({HedyTester.value_exception_transpiled()})''')
 
     @staticmethod
     def turtle_color_command_transpiled(val, lang="en"):
@@ -405,7 +408,7 @@ class HedyTester(unittest.TestCase):
         __trtl = f'{val}'
         color_dict = {color_dict}
         if __trtl not in {both_colors}:
-          raise Exception("""catch_value_exception""")
+          raise Exception({HedyTester.value_exception_transpiled()})
         else:
           if not __trtl in {hedy.english_colors}:
             __trtl = color_dict[__trtl]
@@ -437,7 +440,7 @@ class HedyTester(unittest.TestCase):
         try:
           {list_access}
         except IndexError:
-          raise Exception("""catch_index_exception""")''')
+          raise Exception({HedyTester.index_exception_transpiled()})''')
 
     @staticmethod
     def variable_type_check_transpiled(variable, type_,):
@@ -445,29 +448,29 @@ class HedyTester(unittest.TestCase):
         try:
           {type_}({variable})
         except ValueError:
-          raise Exception(f"""catch_value_exception""")''')
+          raise Exception(f{HedyTester.value_exception_transpiled()})''')
 
     @staticmethod
     def int_cast_transpiled(val, quotes=True):
         value = f"'{val}'" if quotes else val
-        return f'''int_with_error({value}, """catch_value_exception""")'''
+        return f'''int_with_error({value}, {HedyTester.value_exception_transpiled()})'''
 
     @staticmethod
     def number_cast_transpiled(val, quotes=False):
         value = f"'{val}'" if quotes else val
-        return f'''number_with_error({value}, """catch_value_exception""")'''
+        return f'''number_with_error({value}, {HedyTester.value_exception_transpiled()})'''
 
     @staticmethod
     def addition_transpiled(left, right):
-        return f'''sum_with_error({left}, {right}, """catch_multiple_values_exception""")'''
+        return f'''sum_with_error({left}, {right}, """Runtime Values Error""")'''
 
     @staticmethod
     def value_exception_transpiled():
-        return '"""catch_value_exception"""'
+        return '"""Runtime Value Error"""'
 
     @staticmethod
     def index_exception_transpiled():
-        return '"""catch_index_exception"""'
+        return '"""Runtime Index Error"""'
 
     # Used to overcome indentation issues when the above code is inserted
     # in test cases which use different indentation style (e.g. 2 or 4 spaces)
@@ -517,8 +520,8 @@ class HedyTester(unittest.TestCase):
 
         return snippets
 
-    def format_test_error(self, E, snippet):
-        """Given a snippet and an exception, return a string describing the problem."""
+    def format_test_error_md(self, E, snippet: Snippet):
+        """Given a snippet and an exception, return a Markdown string describing the problem."""
         message = []
 
         arrow = True  # set to False if you want to remove the <---- in the output f.e. for easy copy-pasting
@@ -530,7 +533,7 @@ class HedyTester(unittest.TestCase):
         # Must run this in the context of the Flask app, because FlaskBabel requires that.
         with app.app_context():
             with force_locale('en'):
-                error_message = translate_error(E.error_code, E.arguments, 'en')
+                error_message = get_error_text(E, 'en')
                 error_message = error_message.replace('<span class="command-highlighted">', '`')
                 error_message = error_message.replace('</span>', '`')
 
@@ -543,13 +546,22 @@ class HedyTester(unittest.TestCase):
                      for i, line in enumerate(lines)]
             return '\n'.join(lines).strip()
 
-        message.append('======================================================================')
-        message.append(f'Language {snippet.language}, level {snippet.level} produces an error:')
-        message.append(f'{error_message} at line {location}')
-        message.append('-- keywords --')
+        rel_file = os.path.relpath(snippet.filename, ROOT_DIR)
+        message.append(f'## {rel_file}')
+        message.append(f'There was a problem in a level {snippet.level} snippet:')
+
+        # Use a 'caution' admonition because it renders in red
+        message.append('> [!CAUTION]')
+        message.append(f'> {error_message} at line {location}')
+
+        message.append('\nTranslation source')
+        message.append('```')
         message.append(add_arrow(snippet.original_code))
-        message.append('-- translated --')
+        message.append('```')
+        message.append('\nTranslated version')
+        message.append('```')
         message.append(add_arrow(snippet.code))
+        message.append('```')
 
         return '\n'.join(message)
 
