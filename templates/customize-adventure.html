@@ -120,8 +120,7 @@ onclick="window.open('/for-teachers', '_self');">
                 </div>
             </div>
             <div class="flex flex-row justify-end gap-2 my-4">
-                <button class="blue-btn" id="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">{{_('preview')}}</button>
-                <button type="submit" class="green-btn" id="save_adventure_button" data-te-submit-btn-ref>{{_('save')}}</button>
+                <button class="green-btn" id="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">{{_('preview')}}</button>
                 <button type="reset" class="red-btn" id="remove_adventure_button" onclick="hedyApp.delete_adventure('{{ adventure.id }}', '{{_('delete_adventure_prompt')}}')">{{_('remove')}}</button>
             </div>
         </form>

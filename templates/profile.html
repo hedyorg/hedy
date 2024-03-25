@@ -152,9 +152,6 @@
                     {% endfor %}
                 </select>
             </div>
-            <div class="mb-4">
-                <button type="submit" class="green-btn mt-4">{{_('update_profile')}}</button>
-            </div>
         </form>
         <button class="red-btn" onclick="hedyApp.destroy('{{_('are_you_sure')}}')" id="delete_profile_button">{{_('destroy_profile')}}</button>
        </div>
@@ -174,7 +171,6 @@
                     <label for="password_repeat" class="inline-block w-72">{{_('repeat_new_password')}}</label>
                     <input id="password_repeat" name="password_repeat" class="personal-input" minlength="6" type=password role="presentation" autocomplete="new-password" required>
                 </div>
-                <button type="submit" class="green-btn mt-2">{{_('change_password')}}</button>
             </form>
         </div>
         {% if not is_teacher and not user_data['teacher_request'] %}
