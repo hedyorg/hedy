@@ -782,7 +782,7 @@ def download_machine_file(filename, extension="zip"):
     return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
-MICROBIT_FEATURE = False
+MICROBIT_FEATURE = True
 
 
 @app.route('/generate_microbit_files', methods=['POST'])
@@ -807,11 +807,14 @@ def save_transpiled_code_for_microbit(transpiled_python_code):
     if not os.path.exists(folder):
         os.makedirs(folder)
     with open(filepath, 'w') as file:
-        custom_string = "from microbit import *\nwhile True:"
+        custom_string = "from microbit import *\nimport speech\nwhile True:"
         file.write(custom_string + "\n")
 
         # Add space before every display.scroll call
         indented_code = transpiled_python_code.replace("display.scroll(", "    display.scroll(")
+        indented_code = indented_code.replace("question", "    question")
+        indented_code = indented_code.replace("speech.say(", "    speech.say(")
+        indented_code = indented_code.replace("display.show(", "    display.show(")
 
         # Append the indented transpiled code
         file.write(indented_code)
