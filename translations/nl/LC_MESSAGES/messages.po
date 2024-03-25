@@ -22,7 +22,7 @@ msgid "Access Before Assign"
 msgstr "Je probeerde de variabele {name} te gebruiken op regel {access_line_number}, maar stelt de variabele in op regel {definition_line_number}. Stel een variabele in voor je die gebruikt."
 
 msgid "Cyclic Var Definition"
-msgstr "De variabele {variable} moet worden ingesteld voor je die aan de rechterkant van een {is} mag gebruiken."
+msgstr "De variabele `{variable}` moet worden ingesteld voor je die aan de rechterkant van een `{is}` mag gebruiken."
 
 msgid "Function Undefined"
 msgstr "Je gebruikt de functie {name} te gebruiken, maar je hebt die niet gedefinieerd."
@@ -31,56 +31,53 @@ msgid "Has Blanks"
 msgstr "Je code is onvolledig. Er zijn nog invulplaatsen die je moet vervangen door code."
 
 msgid "Incomplete"
-msgstr "Let op, je bent een stukje code vergeten. Op regel {line_number} moet er achter {incomplete_command} nog tekst komen."
+msgstr "Let op, je bent een stukje code vergeten. Op regel {line_number} moet er achter `{incomplete_command}` nog tekst komen."
 
 msgid "Incomplete Repeat"
-msgstr "Het lijkt erop dat je vergeten bent om het {repeat} commando op regel {line_number} in te vullen."
+msgstr "Het lijkt erop dat je vergeten bent om het `{repeat}` commando op regel {line_number} in te vullen."
 
 msgid "Invalid"
-msgstr "{invalid_command} is geen commando in Hedy level {level}. Bedoelde je {guessed_command}?"
+msgstr "`{invalid_command}` is geen commando in Hedy level {level}. Bedoelde je `{guessed_command}`?"
 
 msgid "Invalid Argument"
-msgstr "Je kan commando {command} niet gebruiken met {invalid_argument}. Probeer {invalid_argument} te vervangen door iets uit {allowed_types}."
+msgstr "Je kan commando `{command}` niet gebruiken met `{invalid_argument}`. Probeer `{invalid_argument}` te vervangen door iets uit {allowed_types}."
 
 msgid "Invalid Argument Type"
-msgstr "Je kan {command} niet gebruiken met {invalid_argument} omdat dat {invalid_type} is. Je kan {{invalid_argument}} wel gebruiken met {allowed_types}."
+msgstr "Je kan `{command}` niet gebruiken met `{invalid_argument}` omdat dat {invalid_type} is. Je kan `{invalid_argument}` wel gebruiken met {allowed_types}."
 
 msgid "Invalid At Command"
-msgstr "Het {command} commando mag niet gebruikt worden van af level 16. Je kunt blokhaken gebruiken om een element uit een lijst te gebruiken, bijvoorbeeld `vrienden[i]`, `geluksnummers[{random}]`."
+msgstr "Het `{command}` commando mag niet gebruikt worden van af level 16. Je kunt blokhaken gebruiken om een element uit een lijst te gebruiken, bijvoorbeeld `vrienden[i]`, `geluksnummers[{random}]`."
 
 msgid "Invalid Space"
 msgstr "Oeps! Regel {line_number} begint met een spatie. Computers kunnen niet zo goed tegen spaties, kun je 'm weghalen?"
 
 msgid "Invalid Type Combination"
-msgstr "Je kan {invalid_argument} en {invalid_argument_2} niet gebruiken met {command} omdat de ene {invalid_type} is, en de andere {invalid_type_2}. Verander {invalid_argument} in {invalid_type_2} of {invalid_argument_2} in {invalid_type}."
-
-msgid "Locked Language Feature"
-msgstr "In jouw programma zit {concept}! Goed gedaan! Maar {concept} is nog niet beschikbaar. Dat komt in een later level."
+msgstr "Je kan `{invalid_argument}` en `{invalid_argument_2}` niet gebruiken met `{command}` omdat de ene {invalid_type} is, en de andere {invalid_type_2}. Verander `{invalid_argument}` in {invalid_type_2} of `{invalid_argument_2}` in {invalid_type}."
 
 msgid "Lonely Echo"
-msgstr "Je gebruikt een {echo} voor een {ask}, of een {echo} zonder een {ask}. Gebruik altijd een {ask} voor een {echo}."
+msgstr "Je gebruikt een `{echo}` voor een `{ask}`, of een `{echo}` zonder een `{ask}`. Gebruik altijd een `{ask}` voor een `{echo}`."
 
 msgid "Lonely Text"
 msgstr "Het lijkt erop dat je bent vergeten bent een commando te gebruiken in de tekst die je op regel {line_number} hebt geschreven"
 
 msgid "Missing Additional Command"
-msgstr "Het lijkt erop dat je {command} niet volledig hebt geschreven op regel {line_number}. Probeer {missing_command} toe te voegen aan je code."
+msgstr "Het lijkt erop dat je `{command}` niet volledig hebt geschreven op regel {line_number}. Probeer `{missing_command}` toe te voegen aan je code."
 
 msgid "Missing Command"
 msgstr "Het lijkt erop dat je vergeten bent om een commando te gebruiken op regel {line_number}."
 
 msgid "Missing Inner Command"
-msgstr "Het lijkt erop dat je vergeten bent om het {command} commando op regel {line_number} in te vullen."
+msgstr "Het lijkt erop dat je vergeten bent om het `{command}` commando op regel {line_number} in te vullen."
 
 #, fuzzy
 msgid "Missing Square Brackets"
-msgstr "It looks like you forgot to use square brackets [] around the list you were creating on line {line_number}."
+msgstr "It looks like you forgot to use square brackets `[]` around the list you were creating on line {line_number}."
 
 msgid "Missing Variable"
-msgstr "Het lijkt erop dat {command} een variabele mist op het begin van de regel."
+msgstr "Het lijkt erop dat `{command}` een variabele mist op het begin van de regel."
 
 msgid "Misspelled At Command"
-msgstr "Je hebt {command} verkeerd geschreven, jij schreef {invalid_argument} op regel {line_number}."
+msgstr "Je hebt `{command}` verkeerd geschreven, jij schreef `{invalid_argument}` op regel {line_number}."
 
 msgid "No Indentation"
 msgstr "Je hebt te weinig spaties voor regel {line_number} gebruikt. Er staan {leading_spaces} spaties, maar dat is te weinig. Begin een blok steeds met {indent_size} meer spaties dan de regel ervoor."
@@ -89,10 +86,19 @@ msgid "Non Decimal Variable"
 msgstr "Op regel {line_number}, heb jij misschien geprobeerd om een nummer te gebruiken, iets dat Hedy niet leuk vindt! Probeer het te veranderen in een decimaal nummer, zoals 2."
 
 msgid "Parse"
-msgstr "De code die jij intypte is geen geldige Hedy code. Er zit een foutje op regel {location[0]}, op positie {location[1]}. Jij typte {character_found}, maar dat mag op die plek niet."
+msgstr "De code die jij intypte is geen geldige Hedy code. Er zit een foutje op regel {location[0]}, op positie {location[1]}. Jij typte `{character_found}`, maar dat mag op die plek niet."
 
 msgid "Pressit Missing Else"
-msgstr "Je moet ook nog instellen wat er gebeurt als je een andere toets indrukt. Voeg daarvoor een {else} toe aan je programma"
+msgstr "Je moet ook nog instellen wat er gebeurt als je een andere toets indrukt. Voeg daarvoor een `{else}` toe aan je programma"
+
+msgid "Runtime Index Error"
+msgstr "Je hebt geprobeerd de lijst {name} te gebruiken, maar deze is óf leeg óf de index bestaat niet."
+
+msgid "Runtime Value Error"
+msgstr "Tijdens het runnen van jouw programma heeft het commando `{command}` een waarde gekregen `{value}` wat niet is toegestaan. {tip}."
+
+msgid "Runtime Values Error"
+msgstr "While running your program the command `{command}` received the values `{value}` and `{value}` which are not allowed. {tip}."
 
 #, fuzzy
 msgid "Save Microbit code "
@@ -101,32 +107,40 @@ msgstr "Save Microbit code"
 msgid "Too Big"
 msgstr "Wow! Jouw programma is wel {lines_of_code} regels lang! Maar... wij kunnen maar {max_lines} regels aan in dit level. Maak je programma wat kleiner en probeer het nog eens."
 
+#, fuzzy
+msgid "Too Few Indents"
+msgstr "You used too few leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too few."
+
+#, fuzzy
+msgid "Too Many Indents"
+msgstr "You used too many leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too many."
+
 msgid "Unexpected Indentation"
 msgstr "Je hebt te veel spaties voor regel {line_number} gebruikt. Er staan {leading_spaces} spaties, maar dat is te veel. Begin een blok steeds met {indent_size} spaties."
 
 msgid "Unquoted Assignment"
-msgstr "Let op. Vanaf dit level moet je tekst rechts van de {is} tussen aanhalingstekens zetten. Jij bent dat vergeten voor de tekst {text}."
+msgstr "Let op. Vanaf dit level moet je tekst rechts van de `{is}` tussen aanhalingstekens zetten. Jij bent dat vergeten voor de tekst {text}."
 
 msgid "Unquoted Equality Check"
 msgstr "Als je wilt kijken of een variabele gelijk is aan meerdere woorden, moeten die woorden tussen aanhalingstekens staan!"
 
 msgid "Unquoted Text"
-msgstr "Let op! Bij {print} en {ask} moet voor én achter de tekst een aanhalingsteken komen. Jij bent dat vergeten voor de tekst {unquotedtext}."
+msgstr "Let op! Bij `{print}` en `{ask}` moet voor én achter de tekst een aanhalingsteken komen. Jij bent dat vergeten voor de tekst {unquotedtext}."
 
 msgid "Unsupported Float"
-msgstr "Helaas, Hedy ondersteunt nog geen kommagetallen. Verander {value} in een geheel getal."
+msgstr "Helaas, Hedy ondersteunt nog geen kommagetallen. Verander `{value}` in een geheel getal."
 
 msgid "Unsupported String Value"
-msgstr "Tekst waarden mogen geen {invalid_value} bevatten."
+msgstr "Tekst waarden mogen geen `{invalid_value}` bevatten."
 
 msgid "Unused Variable"
 msgstr "Jij definieerde de variable {variable_name} op regel {line_number}, maar die heb jij helemaal niet gebruikt."
 
 msgid "Var Undefined"
-msgstr "Je gebruikt de variabele {name}, maar die heb je niet ingesteld. Het kan ook zijn dat je het woord {name} wilde gebruiken en aanhalingstekens vergeten bent."
+msgstr "Je gebruikt de variabele `{name}`, maar die heb je niet ingesteld. Het kan ook zijn dat je het woord `{name}` wilde gebruiken en aanhalingstekens vergeten bent."
 
 msgid "Wrong Level"
-msgstr "Dat was goede code hoor, maar niet op het goede level. Je schreef een {offending_keyword} voor level {working_level}. Tip: {tip}"
+msgstr "Dat was goede code hoor, maar niet op het goede level. Je schreef een `{offending_keyword}` voor level {working_level}. Tip: {tip}"
 
 msgid "Wrong Number of Arguments"
 msgstr "Jouw functie gebruikt een verkeerd aantal argumenten. Jij gaf {used_number} argumenten, maar de functie {name} heeft er nodig: {defined_number}"
@@ -262,7 +276,7 @@ msgid "are_you_sure"
 msgstr "Weet je het zeker? Je kunt dit niet meer ongedaan maken."
 
 msgid "ask_needs_var"
-msgstr "Vanaf level 2 hoort {ask} met een variabele ervoor. Bijv: naam {is} {ask} Hoe heet jij?"
+msgstr "Vanaf level 2 hoort `{ask}` met een variabele ervoor. Bijv: naam `{is}` `{ask}` Hoe heet jij?"
 
 #, fuzzy
 msgid "available_in"
@@ -286,15 +300,6 @@ msgstr "Afbreken"
 
 msgid "cant_parse_exception"
 msgstr "We konden het programma niet lezen"
-
-msgid "catch_index_exception"
-msgstr "Je hebt geprobeerd de lijst {list_name} te gebruiken, maar deze is óf leeg óf de index bestaat niet."
-
-msgid "catch_multiple_values_exception"
-msgstr "While running your program the command {command} received the values {value} and {value} which are not allowed. {suggestion}."
-
-msgid "catch_value_exception"
-msgstr "Tijdens het runnen van jouw programma heeft het commando {command} een waarde gekregen {value} wat niet is toegestaan. {suggestion}."
 
 msgid "certificate"
 msgstr "Certificaat van voltooiing"
@@ -551,7 +556,7 @@ msgid "echo_and_ask_mismatch_exception"
 msgstr "Echo en vraag kloppen niet met elkaar"
 
 msgid "echo_out"
-msgstr "Vanaf level 2 heb je geen {echo} meer nodig! Je kunt een variabele gebruiken om iets te herhalen, met {ask} en {print}. Voorbeeld: naam {is} {ask} Hoe heet jij? {print} hallo naam"
+msgstr "Vanaf level 2 heb je geen `{echo}` meer nodig! Je kunt een variabele gebruiken om iets te herhalen, met `{ask}` en `{print}`. Voorbeeld: naam `{is}` `{ask}` Hoe heet jij? `{print}` hallo naam"
 
 msgid "edit_adventure"
 msgstr "Aanpassen adventure"
@@ -794,7 +799,7 @@ msgid "indentation_exception"
 msgstr "Inspringen niet goed gebruikt"
 
 msgid "input"
-msgstr "invoer van {ask}"
+msgstr "invoer van `{ask}`"
 
 msgid "integer"
 msgstr "een getal"
@@ -1059,9 +1064,6 @@ msgstr "Meer info"
 msgid "nav_start"
 msgstr "Home"
 
-msgid "nested blocks"
-msgstr "een blok in een blok"
-
 msgid "new_password"
 msgstr "Nieuw wachtwoord"
 
@@ -1096,7 +1098,7 @@ msgid "no_certificate"
 msgstr "Deze gebruiker heeft het Hedy certificaat voor afronden niet behaald"
 
 msgid "no_more_flat_if"
-msgstr "Vanaf level 8 moet de code na {if} op de volgende regel komen en beginnen met 4 spaties."
+msgstr "Vanaf level 8 moet de code na `{if}` op de volgende regel komen en beginnen met 4 spaties."
 
 msgid "no_programs"
 msgstr "Er zijn geen programma's."
@@ -1396,7 +1398,7 @@ msgid "repair_program_logo_alt"
 msgstr "Repareer programma icon"
 
 msgid "repeat_dep"
-msgstr "Vanaf level 8 moet je regels van {repeat} inspringen. Hiervan heb je een voorbeeld op level 8 bij de {repeat} pagina."
+msgstr "Vanaf level 8 moet je regels van `{repeat}` inspringen. Hiervan heb je een voorbeeld op level 8 bij de `{repeat}` pagina."
 
 msgid "repeat_match_password"
 msgstr "Het herhaalde wachtwoord is niet gelijk."
@@ -2103,4 +2105,10 @@ msgstr "Jouw programma"
 
 #~ msgid "classes"
 #~ msgstr ""
+
+#~ msgid "Locked Language Feature"
+#~ msgstr "In jouw programma zit {concept}! Goed gedaan! Maar {concept} is nog niet beschikbaar. Dat komt in een later level."
+
+#~ msgid "nested blocks"
+#~ msgstr "een blok in een blok"
 

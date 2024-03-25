@@ -10,6 +10,7 @@ from os import path, getenv
 
 import warnings
 import hedy
+import hedy_error
 import hedy_translation
 from utils import atomic_write_file
 from hedy_content import ALL_KEYWORD_LANGUAGES
@@ -161,11 +162,11 @@ reserved_words = set(PYTHON_BUILTIN_FUNCTIONS + PYTHON_KEYWORDS + LIBRARIES)
 
 # Let's retrieve all keywords dynamically from the cached KEYWORDS dictionary
 indent_keywords = {}
-for lang, keywords in KEYWORDS.items():
-    indent_keywords[lang] = []
+for lang_, keywords in KEYWORDS.items():
+    indent_keywords[lang_] = []
     for keyword in ['if', 'elif', 'for', 'repeat', 'while', 'else', 'define', 'def']:
-        indent_keywords[lang].append(keyword)  # always also check for En
-        indent_keywords[lang].append(keywords.get(keyword))
+        indent_keywords[lang_].append(keyword)  # always also check for En
+        indent_keywords[lang_].append(keywords.get(keyword))
 
 
 # These are the preprocessor rules that we use to specify changes in the rules that
@@ -184,28 +185,17 @@ PREPROCESS_RULES = {
 }
 
 
-def translate_value_error(command, value, suggested_type):
-    return translate_error(gettext('catch_value_exception'), [
-        ('{command}', command, 1),
-        ('{value}', value, 1),
-        ('{suggestion}', translate_suggestion(suggested_type), 0)
-    ])
+def make_value_error(command, value, tip, lang):
+    return make_error_text(exceptions.RuntimeValueException(command=command, value=value, tip=tip), lang)
 
 
-def translate_values_error(command, suggested_type):
-    return translate_error(gettext("catch_multiple_values_exception"), [
-        ('{command}', command, 1),
-        ('{value}', '{}', 1),
-        ('{suggestion}', translate_suggestion(suggested_type), 0)
-    ])
+def make_values_error(command, tip, lang):
+    return make_error_text(exceptions.RuntimeValuesException(command=command, value='{}', tip=tip), lang)
 
 
-def translate_error(exception_text, variables):
-    for template, value, is_highlighted in variables:
-        result = style_command(value) if is_highlighted else value
-        exception_text = exception_text.replace(template, result)
-    # The error is transpiled in f-strings with ", ' and ''' quotes. The only option is to use """.
-    return '"""' + exception_text + '"""'
+def make_error_text(ex, lang):
+    # The error text is transpiled in f-strings with ", ' and ''' quotes. The only option is to use """.
+    return f'"""{hedy_error.get_error_text(ex, lang)}"""'
 
 
 def translate_suggestion(suggestion_type):
@@ -1214,7 +1204,7 @@ class IsValid(Filter):
         if sug_exists is None:  # there is no suggestion
             raise exceptions.MissingCommandException(level=self.level, line_number=meta.line)
         if not sug_exists:  # the suggestion is invalid, i.e. identical to the command
-            invalid_command_en = hedy_translation.translate_keyword_to_en(invalid_command, lang)
+            invalid_command_en = hedy_translation.translate_keyword_to_en(invalid_command, self.lang)
             if invalid_command_en == Command.turn:
                 arg = args[0][0]
                 raise hedy.exceptions.InvalidArgumentException(
@@ -1507,7 +1497,7 @@ class ConvertToPython(Transformer):
     def code_to_ensure_variable_type(self, arg, expected_type, command, suggested_type):
         if not self.is_variable(arg):
             return ""
-        exception = translate_value_error(command, f'{{{arg}}}', suggested_type)
+        exception = make_value_error(command, f'{{{arg}}}', suggested_type, self.language)
         return textwrap.dedent(f"""\
             try:
               {expected_type}({arg})
@@ -1663,7 +1653,7 @@ class ConvertToPython_1(ConvertToPython):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'int')
 
     def make_play(self, note, meta):
-        exception_text = translate_value_error('play', note, 'note')
+        exception_text = make_value_error('play', note, 'suggestion_note', self.language)
 
         return textwrap.dedent(f"""\
                 if '{note}' not in notes_mapping.keys() and '{note}' not in notes_mapping.values():
@@ -1672,7 +1662,7 @@ class ConvertToPython_1(ConvertToPython):
                 time.sleep(0.5)""")
 
     def make_play_var(self, note, meta):
-        exception_text = translate_value_error('play', note, 'note')
+        exception_text = make_value_error('play', note, 'suggestion_note', self.language)
         self.check_var_usage([note], meta.line)
         chosen_note = note.children[0] if isinstance(note, Tree) else note
 
@@ -1691,7 +1681,7 @@ class ConvertToPython_1(ConvertToPython):
         if isinstance(parameter, str):
             exception = self.make_index_error_check_if_list([parameter])
         variable = self.get_fresh_var('__trtl')
-        exception_text = translate_value_error(command, variable, 'number')
+        exception_text = make_value_error(command, variable, 'suggestion_number', self.language)
         transpiled = exception + textwrap.dedent(f"""\
             {variable} = {parameter}
             try:
@@ -1711,7 +1701,7 @@ class ConvertToPython_1(ConvertToPython):
         # coming from a random list or ask
 
         color_dict = {hedy_translation.translate_keyword_from_en(x, language): x for x in english_colors}
-        exception_text = translate_value_error(command, parameter, 'color')
+        exception_text = make_value_error(command, parameter, 'suggestion_color', self.language)
         return textwrap.dedent(f"""\
             {variable} = f'{parameter}'
             color_dict = {color_dict}
@@ -1744,7 +1734,7 @@ class ConvertToPython_1(ConvertToPython):
         return ''.join(errors)
 
     def make_index_error(self, code, list_name):
-        exception_text = translate_error(gettext('catch_index_exception'), [('{list_name}', list_name, 1)])
+        exception_text = make_error_text(exceptions.RuntimeIndexException(name=list_name), self.language)
         return textwrap.dedent(f"""\
             try:
               {code}
@@ -1890,7 +1880,7 @@ class ConvertToPython_2(ConvertToPython_1):
                 self.add_variable_access_location(value, meta.line)
             exceptions = self.make_index_error_check_if_list(args)
             try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
-            exception_text = translate_value_error(Command.sleep, value, 'number')
+            exception_text = make_value_error(Command.sleep, value, 'suggestion_number', self.language)
             code = try_prefix + textwrap.dedent(f"""\
                   time.sleep(int({value})){self.add_debug_breakpoint()}
                 except ValueError:
@@ -2153,7 +2143,7 @@ class ConvertToPython_6(ConvertToPython_5):
 
             exceptions = self.make_index_error_check_if_list(args)
             try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
-            exception_text = translate_value_error(Command.sleep, value, 'number')
+            exception_text = make_value_error(Command.sleep, value, 'suggestion_number', self.language)
             code = try_prefix + textwrap.dedent(f"""\
                   time.sleep(int({value}))
                 except ValueError:
@@ -2218,7 +2208,7 @@ class ConvertToPython_6(ConvertToPython_5):
             latin_numeral = int(argument)
             return f'int({latin_numeral})'
         self.add_variable_access_location(argument, meta.line)
-        exception_text = translate_value_error(command, argument, 'number')
+        exception_text = make_value_error(command, argument, 'suggestion_number', self.language)
         return f'int_with_error({argument}, {exception_text})'
 
     def process_calculation(self, args, operator, meta):
@@ -2295,7 +2285,7 @@ class ConvertToPython_7(ConvertToPython_6):
             body = "\n".join([self.indent(x) for x in args[1:]])
 
         body = add_sleep_to_command(body, indent=True, is_debug=self.is_debug, location="after")
-        type_check = self.code_to_ensure_variable_type(times, 'int', Command.repeat, 'number')
+        type_check = self.code_to_ensure_variable_type(times, 'int', Command.repeat, 'suggestion_number')
         return f"{type_check}for {var_name} in range(int({times})):{self.add_debug_breakpoint()}\n{body}"
 
     def repeat(self, meta, args):
@@ -2608,7 +2598,7 @@ class ConvertToPython_12(ConvertToPython_11):
         else:
             # this is a variable, add to the table
             self.add_variable_access_location(argument, meta.line)
-            exception_text = translate_value_error(command, argument, 'number')
+            exception_text = make_value_error(command, argument, 'suggestion_number', self.language)
             return f'number_with_error({argument}, {exception_text})'
 
     def process_token_or_tree_for_addition(self, argument, meta):
@@ -2625,8 +2615,8 @@ class ConvertToPython_12(ConvertToPython_11):
         if all([self.is_int(a) or self.is_float(a) for a in args]):
             return Tree('sum', [f'{args[0]} + {args[1]}'])
         else:
-            exception_text = translate_values_error(Command.addition, 'numbers_or_strings')
-            return Tree('sum', [f'sum_with_error({args[0]}, {args[1]}, {exception_text})'])
+            ex_text = make_values_error(Command.addition, 'suggestion_numbers_or_strings', self.language)
+            return Tree('sum', [f'sum_with_error({args[0]}, {args[1]}, {ex_text})'])
 
     def division(self, meta, args):
         return self.process_calculation(args, '/', meta)
@@ -3339,39 +3329,33 @@ def preprocess_blocks(code, level, lang):
             indent_size = leading_spaces
             indent_size_adapted = True
 
-        # indentation size not 4
+        # there is inconsistent indentation, not sure if that is too much or too little!
         if (leading_spaces % indent_size) != 0:
-            # there is inconsistent indentation, not sure if that is too much or too little!
+            fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
             if leading_spaces < current_number_of_indents * indent_size:
-                fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-                raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                             indent_size=indent_size, fixed_code=fixed_code)
+                raise_too_few_indents_error(line_number, leading_spaces, indent_size, fixed_code, level)
             else:
-                fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-                raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                           indent_size=indent_size, fixed_code=fixed_code)
+                raise_too_many_indents_error(line_number, leading_spaces, indent_size, fixed_code, level)
 
-        # happy path, multiple of 4 spaces:
+        # happy path, indentation is consistent, i.e. multiple of 2 or 4:
         current_number_of_indents = leading_spaces // indent_size
         if current_number_of_indents > 1 and level == hedy.LEVEL_STARTING_INDENTATION:
-            raise hedy.exceptions.LockedLanguageFeatureException(concept="nested blocks")
+            raise hedy.exceptions.TooManyIndentsStartLevelException(line_number=line_number,
+                                                                    leading_spaces=leading_spaces)
 
         if current_number_of_indents > previous_number_of_indents and not next_line_needs_indentation:
             # we are indenting, but this line is not following* one that even needs indenting, raise
             # * note that we have not yet updated the value of 'next line needs indenting' so if refers to this line!
             fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-            raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                       indent_size=indent_size, fixed_code=fixed_code)
+            raise_too_many_indents_error(line_number, leading_spaces, indent_size, fixed_code, level)
 
         if next_line_needs_indentation and current_number_of_indents <= previous_number_of_indents:
             fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-            raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                         indent_size=indent_size, fixed_code=fixed_code)
+            raise_too_few_indents_error(line_number, leading_spaces, indent_size, fixed_code, level)
 
         if current_number_of_indents - previous_number_of_indents > 1:
             fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-            raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                       indent_size=indent_size, fixed_code=fixed_code)
+            raise_too_many_indents_error(line_number, leading_spaces, indent_size, fixed_code, level)
 
         if current_number_of_indents < previous_number_of_indents:
             # we are dedenting ('jumping back) so we need to and an end-block
@@ -3397,6 +3381,24 @@ def preprocess_blocks(code, level, lang):
     for i in range(current_number_of_indents):
         processed_code[-1] += '#ENDBLOCK'
     return "\n".join(processed_code)
+
+
+def raise_too_many_indents_error(line_number, leading_spaces, indent_size, fixed_code, level):
+    if level == hedy.LEVEL_STARTING_INDENTATION:
+        raise hedy.exceptions.TooManyIndentsStartLevelException(line_number=line_number, leading_spaces=leading_spaces,
+                                                                fixed_code=fixed_code)
+    else:
+        raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                                   indent_size=indent_size, fixed_code=fixed_code)
+
+
+def raise_too_few_indents_error(line_number, leading_spaces, indent_size, fixed_code, level):
+    if level == hedy.LEVEL_STARTING_INDENTATION:
+        raise hedy.exceptions.TooFewIndentsStartLevelException(line_number=line_number, leading_spaces=leading_spaces,
+                                                               fixed_code=fixed_code)
+    else:
+        raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                                     indent_size=indent_size, fixed_code=fixed_code)
 
 
 def preprocess_ifs(code, lang='en'):
