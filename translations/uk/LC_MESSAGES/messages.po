@@ -23,7 +23,7 @@ msgid "Access Before Assign"
 msgstr "You tried to use the variable {name} on line {access_line_number}, but you set it on line {definition_line_number}. Set a variable before using it."
 
 msgid "Cyclic Var Definition"
-msgstr "Ім'я {variable} повинно бути задане до того, як ви зможете використовувати її в правій частині команди {is}."
+msgstr "Ім'я `{variable}` повинно бути задане до того, як ви зможете використовувати її в правій частині команди `{is}`."
 
 #, fuzzy
 msgid "Function Undefined"
@@ -33,58 +33,55 @@ msgid "Has Blanks"
 msgstr "Ваш код є неповним. Він містить пробіли, які необхідно замінити кодом."
 
 msgid "Incomplete"
-msgstr "Ой! Ви забули трохи коду! У рядку {line_number} потрібно ввести текст за {incomplete_command}."
+msgstr "Ой! Ви забули трохи коду! У рядку {line_number} потрібно ввести текст за `{incomplete_command}`."
 
 msgid "Incomplete Repeat"
-msgstr "Схоже на те, що ви забули використати команду {repeat}, яку використовували в рядку {line_number}."
+msgstr "Схоже на те, що ви забули використати команду `{repeat}`, яку використовували в рядку {line_number}."
 
 msgid "Invalid"
-msgstr "{invalid_command} не є командою рівня {level} Hedy. Ви мали на увазі {guessed_command}?"
+msgstr "`{invalid_command}` не є командою рівня {level} Hedy. Ви мали на увазі `{guessed_command}`?"
 
 msgid "Invalid Argument"
-msgstr "Ви не можете використовувати команду {command} з {invalid_argument}. Спробуйте змінити {invalid_argument} на {allowed_types}."
+msgstr "Ви не можете використовувати команду `{command}` з `{invalid_argument}`. Спробуйте змінити `{invalid_argument}` на {allowed_types}."
 
 msgid "Invalid Argument Type"
-msgstr "Ви не можете використовувати {command} з {invalid_argument}, оскільки він є {invalid_type}. Спробуйте змінити {invalid_argument} на {allowed_types}."
+msgstr "Ви не можете використовувати `{command}` з `{invalid_argument}`, оскільки він є {invalid_type}. Спробуйте змінити `{invalid_argument}` на {allowed_types}."
 
 msgid "Invalid At Command"
-msgstr "Команду {at} не можна використовувати, починаючи з рівня 16. Ви можете використовувати квадратні дужки для використання елемента зі списку, наприклад `friends[i]`, `lucky_numbers[{random}]`."
+msgstr "Команду `{command}` не можна використовувати, починаючи з рівня 16. Ви можете використовувати квадратні дужки для використання елемента зі списку, наприклад `friends[i]`, `lucky_numbers[{random}]`."
 
 msgid "Invalid Space"
 msgstr "Упс! Ви почали рядок з пробілу в рядку {line_number}. Пробіли збивають з пантелику комп'ютер, чи можете ви його прибрати?"
 
 msgid "Invalid Type Combination"
-msgstr "Ви не можете використовувати {invalid_argument} і {invalid_argument_2} з {command}, оскільки один з них є {invalid_type}, а інший - {invalid_type_2}. Спробуйте змінити {invalid_argument} на {invalid_type_2} або {invalid_argument_2} на {invalid_type}."
-
-msgid "Locked Language Feature"
-msgstr "Ви використовуєте {concept}! Це чудово, але {concept} ще не розблоковано! Його буде розблоковано на наступному рівні."
+msgstr "Ви не можете використовувати `{invalid_argument}` і `{invalid_argument_2}` з `{command}`, оскільки один з них є {invalid_type}, а інший - {invalid_type_2}. Спробуйте змінити `{invalid_argument}` на {invalid_type_2} або `{invalid_argument_2}` на {invalid_type}."
 
 msgid "Lonely Echo"
-msgstr "Ви використали {echo} перед {ask} або {echo} без {ask}. Поставте {ask} перед {echo}."
+msgstr "Ви використали `{echo}` перед `{ask}` або `{echo}` без `{ask}`. Поставте `{ask}` перед `{echo}`."
 
 msgid "Lonely Text"
 msgstr "Схоже, що ви забули використати команду з текстом, яка використовується в рядку {line_number}"
 
 #, fuzzy
 msgid "Missing Additional Command"
-msgstr "It looks like you forgot to complete writing {command} on line {line_number}."
+msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
 
 msgid "Missing Command"
 msgstr "Схоже, що ви забули використати команду в рядку {line_number}."
 
 msgid "Missing Inner Command"
-msgstr "Схоже, що ви забули використати команду з оператором {command}, який ви використовували в рядку {line_number}."
+msgstr "Схоже, що ви забули використати команду з оператором `{command}`, який ви використовували в рядку {line_number}."
 
 msgid "Missing Square Brackets"
-msgstr "It looks like you forgot to use square brackets [] around the list you were creating on line {line_number}."
+msgstr "It looks like you forgot to use square brackets `[]` around the list you were creating on line {line_number}."
 
 #, fuzzy
 msgid "Missing Variable"
-msgstr "It looks like your {command} is missing a variable at the start of the line."
+msgstr "It looks like your `{command}` is missing a variable at the start of the line."
 
 #, fuzzy
 msgid "Misspelled At Command"
-msgstr "It looks like you might have misspelled the {command} command, instead you wrote {invalid_argument} in line {line_number}."
+msgstr "It looks like you might have misspelled the `{command}` command, instead you wrote `{invalid_argument}` in line {line_number}."
 
 msgid "No Indentation"
 msgstr "У рядку {line_number} використано занадто мало пробілів. Ви використали {leading_spaces} пробілів, що недостатньо. Починайте кожен новий блок з {indent_size} пробілів більше, ніж у попередньому рядку."
@@ -94,11 +91,21 @@ msgid "Non Decimal Variable"
 msgstr "At line {line_number}, you might have tried using a number which Hedy does not like very much! Try changing it to a decimal number like 2."
 
 msgid "Parse"
-msgstr "Введений вами код не є дійсним кодом Hedy. У рядку {location[0]}, в позиції {location[1]}, помилка. Ви ввели {character_found}, але це не допустимо."
+msgstr "Введений вами код не є дійсним кодом Hedy. У рядку {location[0]}, в позиції {location[1]}, помилка. Ви ввели `{character_found}`, але це не допустимо."
 
 #, fuzzy
 msgid "Pressit Missing Else"
-msgstr "You forgot to add what happens when you press a different key, add an {else} to your code"
+msgstr "You forgot to add what happens when you press a different key, add an `{else}` to your code"
+
+msgid "Runtime Index Error"
+msgstr "Ви намагалися отримати доступ до списку {name}, але він або порожній, або індекс там відсутній."
+
+#, fuzzy
+msgid "Runtime Value Error"
+msgstr "While running your program the command `{command}` received the value `{value}` which is not allowed. {tip}."
+
+msgid "Runtime Values Error"
+msgstr "While running your program the command `{command}` received the values `{value}` and `{value}` which are not allowed. {tip}."
 
 #, fuzzy
 msgid "Save Microbit code "
@@ -107,33 +114,42 @@ msgstr "Save Microbit code"
 msgid "Too Big"
 msgstr "Ого! Ваша програма має вражаючу кількість {lines_of_code} рядків коду! Але ми можемо обробити лише {max_lines} рядків на цьому рівні. Зменште розмір програми та спробуйте ще раз."
 
+#, fuzzy
+msgid "Too Few Indents"
+msgstr "You used too few leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too few."
+
+#, fuzzy
+msgid "Too Many Indents"
+msgstr "You used too many leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too many."
+
 msgid "Unexpected Indentation"
 msgstr "У рядку {line_number} використано занадто багато пробілів. Ви використали {leading_spaces} пробілів, що є занадто багато. Починайте кожен новий блок з {indent_size} пробілів більше, ніж у попередньому рядку."
 
 msgid "Unquoted Assignment"
-msgstr "З цього рівня потрібно розміщувати тексти праворуч від {is} між лапками. Ви забули, це для тексту {text}."
+msgstr "З цього рівня потрібно розміщувати тексти праворуч від `{is}` між лапками. Ви забули, це для тексту {text}."
 
 msgid "Unquoted Equality Check"
 msgstr "Якщо потрібно перевірити, чи дорівнює змінна декільком словам, то слова повинні бути взяті в лапки!"
 
 msgid "Unquoted Text"
-msgstr "Будьте уважні. Якщо ви щось {ask} або {print}, то текст повинен починатися і закінчуватися лапками. Це ви забули для тексту {unquotedtext}."
+msgstr "Будьте уважні. Якщо ви щось `{ask}` або `{print}`, то текст повинен починатися і закінчуватися лапками. Це ви забули для тексту {unquotedtext}."
 
 msgid "Unsupported Float"
-msgstr "Нецілі числа поки що не підтримуються, але це буде через декілька рівнів. Наразі змініть {value} на ціле число."
+msgstr "Нецілі числа поки що не підтримуються, але це буде через декілька рівнів. Наразі змініть `{value}` на ціле число."
 
 msgid "Unsupported String Value"
-msgstr "Текстові значення не можуть містити {invalid_value}."
+msgstr "Текстові значення не можуть містити `{invalid_value}`."
 
 #, fuzzy
 msgid "Unused Variable"
 msgstr "You defined the variable {variable_name} on line {line_number}, but you did not use it."
 
+#, fuzzy
 msgid "Var Undefined"
 msgstr "Ви намагалися використати перемінну {name}, але не задали її. Також можливо, що ви намагалися використати слово {name}, але забули взяти лапки."
 
 msgid "Wrong Level"
-msgstr "Це був правильний код Hedy, але не на тому рівні. Ви написали {offending_keyword} для рівня {working_level}. Підказка: {tip}"
+msgstr "Це був правильний код Hedy, але не на тому рівні. Ви написали `{offending_keyword}` для рівня {working_level}. Підказка: {tip}"
 
 #, fuzzy
 msgid "Wrong Number of Arguments"
@@ -274,7 +290,11 @@ msgid "are_you_sure"
 msgstr "Ви впевнені? Ви не можете відкликати цю операцію."
 
 msgid "ask_needs_var"
-msgstr "Починаючи з рівня 2, {ask} потрібно використовувати із перемінною. Приклад: name {is} {ask} Як тебе звати?"
+msgstr "Починаючи з рівня 2, `{ask}` потрібно використовувати із перемінною. Приклад: name `{is}` `{ask}` Як тебе звати?"
+
+#, fuzzy
+msgid "available_in"
+msgstr "Available in:"
 
 msgid "become_a_sponsor"
 msgstr "Стати спонсором"
@@ -296,16 +316,6 @@ msgstr "Скасувати"
 #, fuzzy
 msgid "cant_parse_exception"
 msgstr "Couldn't parse the program"
-
-msgid "catch_index_exception"
-msgstr "Ви намагалися отримати доступ до списку {list_name}, але він або порожній, або індекс там відсутній."
-
-msgid "catch_multiple_values_exception"
-msgstr "While running your program the command {command} received the values {value} and {value} which are not allowed. {suggestion}."
-
-#, fuzzy
-msgid "catch_value_exception"
-msgstr "While running your program the command {command} received the value {value} which is not allowed. {suggestion}."
 
 msgid "certificate"
 msgstr "Свідоцтво про проходження курсу"
@@ -581,7 +591,7 @@ msgid "echo_and_ask_mismatch_exception"
 msgstr "Echo and ask mismatch"
 
 msgid "echo_out"
-msgstr "Починаючи з рівня 2 команда {echo} більше не потрібна. Тепер ви можете повторити відповідь за допомогою {ask} і {print}. Приклад: ім'я - {ask} Як тебе звати? {print} привіт ім'я"
+msgstr "Починаючи з рівня 2 команда `{echo}` більше не потрібна. Тепер ви можете повторити відповідь за допомогою `{ask}` і `{print}`. Приклад: ім'я - `{ask}` Як тебе звати? `{print}` привіт ім'я"
 
 #, fuzzy
 msgid "edit_adventure"
@@ -881,7 +891,7 @@ msgid "indentation_exception"
 msgstr "Incorrect Indentation"
 
 msgid "input"
-msgstr "вхідні дані з {ask}"
+msgstr "вхідні дані з `{ask}`"
 
 #, fuzzy
 msgid "integer"
@@ -1160,6 +1170,10 @@ msgid "more_options"
 msgstr "More options"
 
 #, fuzzy
+msgid "multiple_levels_warning"
+msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
+
+#, fuzzy
 msgid "my_account"
 msgstr "My account"
 
@@ -1198,9 +1212,6 @@ msgstr "Дізнатися більше"
 
 msgid "nav_start"
 msgstr "Головна"
-
-msgid "nested blocks"
-msgstr "блок в блоці"
 
 #, fuzzy
 msgid "new_password"
@@ -1244,7 +1255,7 @@ msgstr "Цей користувач не отримав сертифікат п�
 
 #, fuzzy
 msgid "no_more_flat_if"
-msgstr "Starting in level 8, the line after {if} needs to start with 4 spaces."
+msgstr "Starting in level 8, the line after `{if}` needs to start with 4 spaces."
 
 #, fuzzy
 msgid "no_programs"
@@ -1619,7 +1630,7 @@ msgstr "Repair program icon"
 
 #, fuzzy
 msgid "repeat_dep"
-msgstr "Starting in level 8, {repeat} needs to be used with indentation. You can see examples on the {repeat} tab in level 8."
+msgstr "Starting in level 8, `{repeat}` needs to be used with indentation. You can see examples on the `{repeat}` tab in level 8."
 
 #, fuzzy
 msgid "repeat_match_password"
@@ -1808,6 +1819,10 @@ msgstr "a single quote"
 
 msgid "slash"
 msgstr "коса риска"
+
+#, fuzzy
+msgid "sleeping"
+msgstr "Sleeping..."
 
 #, fuzzy
 msgid "slides"
@@ -2031,8 +2046,8 @@ msgstr ""
 "\n"
 "Але іноді мені хочеться показати шматок коду, наприклад, такий:\n"
 "<pre>\n"
-"{ask} Як тебе звати?\n"
-"{echo} Отже, твоє ім'я \n"
+"ask Як тебе звати?\n"
+"echo Отже, твоє ім'я \n"
 "</pre>"
 
 #, fuzzy
@@ -2189,6 +2204,10 @@ msgstr "Use of blanks in programs"
 #, fuzzy
 msgid "use_of_nested_functions_exception"
 msgstr "Use of nested functions"
+
+#, fuzzy
+msgid "used_in"
+msgstr "Used in:"
 
 #, fuzzy
 msgid "user"
@@ -2449,4 +2468,10 @@ msgstr "Your program"
 
 #~ msgid "back_to_class"
 #~ msgstr "Поверніться до класу"
+
+#~ msgid "Locked Language Feature"
+#~ msgstr "Ви використовуєте {concept}! Це чудово, але {concept} ще не розблоковано! Його буде розблоковано на наступному рівні."
+
+#~ msgid "nested blocks"
+#~ msgstr "блок в блоці"
 

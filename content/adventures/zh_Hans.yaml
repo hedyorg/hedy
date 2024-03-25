@@ -387,6 +387,9 @@ adventures:
                     最接近21但没有超过它的玩家获胜。
 
                     好好享受游戏吧！
+
+                    ### Exercise
+                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -442,9 +445,9 @@ adventures:
                             points = points + 10
                         {elif} card_3 == 'Ace':
                             {if} points > 11:
-                                points = points + 11
-                            {else}:
                                 points = points + 1
+                            {else}:
+                                points = points + 11
                         {else}:
                             points = points + card_3
                         {print} 'You get an extra ' card_3 ' (' points ' points)'
@@ -598,13 +601,13 @@ adventures:
                     ```
             13:
                 story_text: |
-                    ### 练习1
-                    来让这个练习程序难一点吧 .操作者现在需要正确地回答两个问题.请填写空格以完成程序.
+                    ### 练习 1
+                    让我们把练习计划变得更难一些。 玩家现在必须正确回答两个问题。 填空以完成该程序。
 
-                    ### 练习2（附加）
-                    有时候, 计算有多个正确答案.例如，10可以被5和2整除.那么问题'什么数能整除10?'可以用2和5来回答.
-                    要求一个有多个正确答案的计算,让操作者回答它, 并确定其是否正确使用了 `{or}`.
-                    清空编程字段并且创造你自己的解决方案.
+                    ### 练习 2
+                    有时，计算有多个正确答案。 例如，10 可以除以 5 和 2。所以问题是“什么数可以整除 10？” 可以用2和5来回答。
+                    要求有多个正确答案的计算，要求玩家回答，并使用`{or}`确定是否正确。
+                    清空编程领域并创建您自己的解决方案。
                 example_code: |
                     ```
                     answer1 = {ask} '10 乘以 7 是多少？'
@@ -1253,7 +1256,7 @@ adventures:
                     ```
             13:
                 story_text: |
-                    在前面的级别中，您学习了如何将两个`{if}`命令彼此放在一起。 这工作得很好，但它确实会给你带来非常长且不方便的代码，如下所示：
+                    在前面的级别中，您已经学习了如何将两个`{if}`命令彼此放在一起。 这工作得很好，但它确实会给你带来非常长且不方便的代码，如下所示：
 
                     在此系统中，您必须提供正确的用户名和密码。
                     在本级别中，您将学习`{and}`命令，这将使此代码变得更短且更易于理解！
@@ -1272,9 +1275,9 @@ adventures:
                     ```
             14:
                 story_text: |
-                    使用以下程序，你可以计算出你出否通过学校的科目（因此，级别六或者更高）。
-                    由于第5行中代码很长，可以看到此代码效率极低。
-                    从1到5的所有不同等级都必须单独编程。 幸运的是，在这个级别上，您将学习如何在无需这个非常长的代码的情况下完成此操作！
+                    使用示例代码，您可以计算您是否通过了学校的一门科目（即六年级或更高年级）。
+                    您可以看到该代码效率极低，因为第 5 行的代码非常长。
+                    从 1 到 5 的所有不同等级都必须单独编程。 幸运的是，在这个级别中，您将学习如何在没有这段极长代码的情况下做到这一点！
                 example_code: |
                     ```
                     first_grade = {ask}'您在第一次测试中获得了什么分数？”
@@ -2628,7 +2631,7 @@ adventures:
                     ```
             12:
                 story_text: |
-                    在你的歌曲中使用函数!正如您在示例代码中看到的，您可以为Twinkle Twinkle little star的每一行创建一个函数。一旦您编写了前三行代码，您所要做的就是按照您想要的顺序调用函数。
+                    在你的歌曲中使用函数!正如您在示例代码中看到的，您可以为Twinkle Twinkle Little Star的每一行创建一个函数。一旦您编写了前三行代码，您所要做的就是按照您想要的顺序调用函数。
 
                     ### 练习
                     完成《闪烁小星星》这首歌。
@@ -2674,12 +2677,12 @@ adventures:
                     ```
             13:
                 story_text: |
-                    您可以使用带有参数的函数来处理具有几乎相同但每次都略有不同的行的歌曲。
-                    《扬基歌》就是一个例子。第一行的前四个音符是相同的，但每次它们后面都有几个不同的音符。
+                    您可以使用带有参数的函数来处理歌词几乎相同但每次略有不同的歌曲。
+                    一个例子是歌曲“Yankee Doodle”。 第一行的前 4 个音符是相同的，每次后面都有不同的音符。
 
                     ### 练习
-                    你能唱完《扬基歌》吗?
-                    你能想到另一首用这种方法编程的歌吗?
+                    你能唱完Yankee Doodle 的歌吗？
+                    你能想出另一首歌以这种方式编程吗？
                 example_code: |
                     ```
                     {print} 'Yankee Doodle'
@@ -3517,7 +3520,7 @@ adventures:
                     ```
             12:
                 story_text: |
-                    从这一层开始，你可以使用小数点后的数字来使你的菜单更加真实。
+                    从这一级别开始，你可以使用小数点后的数字来使你的菜单更加真实。
 
                     ### 练习
                     你能构思出一个代码来给你的朋友和家人提供15%的折扣吗？
@@ -3762,7 +3765,7 @@ adventures:
                 example_code: |
                     ```
                     名字 = {ask} '你的名字是什么？'
-                    {if} 名字 {is} _
+                    {if} 名字 {is}  _
                         a = '去机场'
                     {else}
                         a = '去火车站'
@@ -3781,7 +3784,7 @@ adventures:
                     通过在空白处填写正确的命令来完成代码。提示:超级间谍必须正确回答这两个问题，才能获得机密信息!
 
                     ### 练习2
-                    我们要更加迷惑敌人!创建一个假答案列表，当给出错误答案时随机选择一个。
+                    我们要令敌人更加迷惑! 创建一个假答案列表，当给出错误答案时随机选择一个。
                 example_code: |
                     ```
                     名字 = {ask} '你的名字是什么？
@@ -3894,7 +3897,7 @@ adventures:
                         _
                     ```
             12:
-                story_text: "在这首歌中，我们可以使编程变得更加容易 '如果你很快乐，你意识到了，拍拍你的手'。因为我们可以把所有的动作放在一个变量中，看看吧。\n \n### 练习 \n你能在每一行中加入适量的缩进，使歌曲正确播放吗？ \n注意：不是所有的行都需要缩进\n"
+                story_text: "在这首歌中，我们可以更轻松地编写“如果你很高兴并且你知道的话，请拍手”。 因为我们可以将所有操作放入一个变量中，所以请检查一下：\n\n### 练习\n您能否为每行添加适量的缩进以使歌曲正确播放？\n提示：并非所有行都需要缩进。\n"
                 example_code: |
                     ```
                     _一组动作 = '拍拍手', '跺跺脚', '喊万岁!'
@@ -3992,12 +3995,39 @@ adventures:
                     ```
                     {define} 闪亮
                         {print} '闪亮'
-                        {print} '...'
+                        {print} _
 
                     {call} 闪亮
                     {print} '高高地在天空上'
                     {print} '好像一颗钻石'
                     {call} _
+                    ```
+            16:
+                story_text: |
+                    ### Exercise
+                    Finish the nursery rhyme!
+                example_code: |
+                    ```
+                    number = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+                    object = ['on his drum', 'on his shoe', 'on his knee', 'on his door', 'on his hive', 'on his sticks', 'up in heaven', 'on his gate', 'on his vine', 'once again']
+
+                    _
+                        {print} 'This old man'
+                        {print} 'He played ' _
+                        {print} 'He played knick-knack ' _
+                        {print} 'With a knick-knack paddywhack'
+                        {print} 'Give the dog a bone'
+                        {print} 'This old man came rolling home'
+                        {sleep} 8
+                        {clear}
+                    ```
+                story_text_2: |
+                    ### Exersice 2
+                    Now create your own code for the nursery rhyme 'The wheels on the bus' on the same way!
+                example_code_2: |
+                    ```
+                    object = ['wheels', 'doors', _]
+                    movement = [ 'round and round', 'open and shut', _]
                     ```
     tic:
         name: 井字游戏
@@ -4535,7 +4565,7 @@ adventures:
                 example_code: |
                     提示:
                     ```
-                    选择的字母 {is} {ask} '您想看哪个字母? F, E 或 L?
+                    选择的字母 {is} {ask} '您想看哪个字母? F, E 或 L?'
                     {if} _
                     ```
             6:
@@ -4675,14 +4705,11 @@ adventures:
                 story_text: |
                     ### 练习
                     用小海龟重画图画!
+                    </div>
+                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
                 example_code: |
-                    提示: 手环设计程序
-
-
-                    首先，为要在手环上使用的**每个形状**定义一个函数。然后，像这样添加形状到手环:
-
                     ```
-                    {define} 画正方形
+                    {define} draw_a_square
                     _
 
                     {color} white
@@ -4693,11 +4720,11 @@ adventures:
                     {for} i {in} {range} 1 {to} 5
                         {color} gray
                         {forward} 100
-                        shape = {ask} '你想在手环上放的下一个形状是什么?'
-                        chosen_color = {ask} '什么颜色的?'
+                        shape = {ask} '接下来您想要手镯的形状是什么?'
+                        chosen_color = {ask} '选择哪个颜色?'
                         {color} chosen_color
-                        {if} shape = '正方形'
-                            {call} 画正方形
+                        {if} shape = 'square'
+                            {call} draw_a_square
                     ```
             13:
                 story_text: |

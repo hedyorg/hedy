@@ -59,7 +59,7 @@ class TestsLevel8(HedyTester):
 
         # gives the right exception for all levels even though it misses brackets
         # because the indent check happens before parsing
-        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+        self.single_level_tester(code=code, exception=hedy.exceptions.TooFewIndentsStartLevelException)
 
     def test_if_equality_with_is(self):
         code = textwrap.dedent("""\
@@ -401,10 +401,8 @@ class TestsLevel8(HedyTester):
         else
         print 'bah slecht'""")
 
-        # gives the right exception for all levels even though it misses brackets
-        # because the indent check happens before parsing
-        self.multi_level_tester(code=code,
-                                exception=hedy.exceptions.NoIndentationException)
+        self.single_level_tester(code=code,
+                                 exception=hedy.exceptions.TooFewIndentsStartLevelException)
 
     def test_if_equality_print_else_print(self):
         code = textwrap.dedent("""\
@@ -569,7 +567,7 @@ class TestsLevel8(HedyTester):
           repeat 3 times
           print 'hooray!'""")
 
-        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+        self.single_level_tester(code=code, exception=hedy.exceptions.TooFewIndentsStartLevelException)
 
     def test_repeat_repair_too_few_indents(self):
         code = textwrap.dedent("""\
@@ -582,9 +580,9 @@ class TestsLevel8(HedyTester):
              print('repair')
              print('me')""")
 
-        self.multi_level_tester(
+        self.single_level_tester(
             code=code,
-            exception=hedy.exceptions.NoIndentationException,
+            exception=hedy.exceptions.TooFewIndentsStartLevelException,
             extra_check_function=(lambda x: x.exception.fixed_code == fixed_code)
         )
 
@@ -598,9 +596,9 @@ class TestsLevel8(HedyTester):
           print('repair')
           print('me')""")
 
-        self.multi_level_tester(
+        self.single_level_tester(
             code=code,
-            exception=hedy.exceptions.IndentationException,
+            exception=hedy.exceptions.TooManyIndentsStartLevelException,
             extra_check_function=(lambda x: x.exception.fixed_code == fixed_code)
         )
 
@@ -609,9 +607,9 @@ class TestsLevel8(HedyTester):
         print('repair')
            print('me')""")
 
-        self.multi_level_tester(
+        self.single_level_tester(
             code=code,
-            exception=hedy.exceptions.IndentationException
+            exception=hedy.exceptions.TooManyIndentsStartLevelException
         )
 
     def test_repeat_turtle(self):
@@ -620,7 +618,7 @@ class TestsLevel8(HedyTester):
                 forward 100""")
 
         expected = HedyTester.dedent(
-            "for i in range(int('3')):",
+            "for __i in range(int('3')):",
             (HedyTester.forward_transpiled(100, self.level), '  '))
 
         self.multi_level_tester(
@@ -636,7 +634,7 @@ class TestsLevel8(HedyTester):
             print 'koekoek'""")
 
         expected = textwrap.dedent("""\
-        for i in range(int('5')):
+        for __i in range(int('5')):
           print(f'koekoek')
           time.sleep(0.1)""")
 
@@ -651,7 +649,7 @@ class TestsLevel8(HedyTester):
         expected = HedyTester.dedent(
             "n = '5'",
             self.variable_type_check_transpiled('n', 'int'),
-            "for i in range(int(n)):",
+            "for __i in range(int(n)):",
             ("print(f'me wants a cookie!')", '  '),
             ("time.sleep(0.1)", '  ')
         )
@@ -671,7 +669,7 @@ class TestsLevel8(HedyTester):
             print 'koekoek'""")
 
         expected = textwrap.dedent("""\
-        for i in range(int('5')):
+        for __i in range(int('5')):
           print(f'koekoek')
           time.sleep(0.1)""")
 
@@ -686,7 +684,7 @@ class TestsLevel8(HedyTester):
         expected = HedyTester.dedent(
             "n = '٥'",
             self.variable_type_check_transpiled('n', 'int'),
-            "for i in range(int(n)):",
+            "for __i in range(int(n)):",
             ("print(f'me wants a cookie!')", '  '),
             ("time.sleep(0.1)", '  ')
         )
@@ -709,7 +707,7 @@ class TestsLevel8(HedyTester):
         expected = HedyTester.dedent(
             "állatok = '5'",
             self.variable_type_check_transpiled('állatok', 'int'),
-            "for i in range(int(állatok)):",
+            "for __i in range(int(állatok)):",
             ("print(f'me wants a cookie!')", '  '),
             ("time.sleep(0.1)", '  ')
         )
@@ -743,7 +741,7 @@ class TestsLevel8(HedyTester):
 
         expected = textwrap.dedent(f"""\
         count = '1'
-        for i in range(int('12')):
+        for __i in range(int('12')):
           print(f'{{count}} times 12 is {{{self.int_cast_transpiled('count', False)} * int(12)}}')
           count = {self.int_cast_transpiled('count', False)} + int(1)
           time.sleep(0.1)""")
@@ -757,7 +755,7 @@ class TestsLevel8(HedyTester):
             print 'koekoek'""")
 
         expected = textwrap.dedent("""\
-        for i in range(int('5')):
+        for __i in range(int('5')):
           print(f'koekoek')
           print(f'koekoek')
           time.sleep(0.1)""")
@@ -805,7 +803,7 @@ class TestsLevel8(HedyTester):
         expected = HedyTester.dedent(
             "n = input(f'How many times?')",
             self.variable_type_check_transpiled('n', 'int'),
-            'for i in range(int(n)):',
+            'for __i in range(int(n)):',
             ("print(f'n')", '  '),
             ('time.sleep(0.1)', '  ')
         )
@@ -820,7 +818,7 @@ class TestsLevel8(HedyTester):
             print 'me wants a cookie!'""")
 
         expected = textwrap.dedent(f"""\
-        for i in range(int('{int(number)}')):
+        for __i in range(int('{int(number)}')):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -839,7 +837,7 @@ class TestsLevel8(HedyTester):
             print 'me wants a cookie!'""")
 
         expected = textwrap.dedent("""\
-        for i in range(int('10')):
+        for __i in range(int('10')):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -872,7 +870,7 @@ class TestsLevel8(HedyTester):
 
         expected = textwrap.dedent("""\
         i = 'hallo!'
-        for _i in range(int('5')):
+        for __i in range(int('5')):
           print(f'me wants a cookie!')
           time.sleep(0.1)
         print(f'{i}')""")
@@ -916,7 +914,7 @@ class TestsLevel8(HedyTester):
                 prijs is prijs + 1
         print 'Dat is in totaal ' prijs ' euro.'""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.LockedLanguageFeatureException)
+        self.single_level_tester(code=code, exception=hedy.exceptions.TooManyIndentsStartLevelException)
 
     def test_if_repeat_gives_error(self):
         code = textwrap.dedent("""\
@@ -925,7 +923,7 @@ class TestsLevel8(HedyTester):
             repeat 3 times
                 print 'mooi'""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.LockedLanguageFeatureException)
+        self.single_level_tester(code=code, exception=hedy.exceptions.TooManyIndentsStartLevelException)
 
     #
     # if pressed tests
@@ -1103,16 +1101,14 @@ class TestsLevel8(HedyTester):
             max_level=14
         )
 
-    def test_if_no_indent_after_pressed_and_else_gives_noindent_error(self):
+    def test_if_no_indent_after_pressed_and_else_gives_error(self):
         code = textwrap.dedent("""\
         if x is pressed
         print 'no indent!'
         else
         print 'no indent again!'""")
 
-        # gives the right exception for all levels even though it misses brackets
-        # because the indent check happens before parsing
-        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+        self.single_level_tester(code=code, exception=hedy.exceptions.TooFewIndentsStartLevelException)
 
     #
     # button tests
@@ -1222,7 +1218,7 @@ class TestsLevel8(HedyTester):
             "people = input(f'How many people will be joining us today?')",
             "print(f'Great!')",
             self.variable_type_check_transpiled('people', 'int'),
-            "for i in range(int(people)):",
+            "for __i in range(int(people)):",
             ("food = input(f'What would you like to order?')", '  '),
             ("print(f'{food}')", '  '),
             ("time.sleep(0.1)", '  '),
@@ -1258,7 +1254,7 @@ class TestsLevel8(HedyTester):
                 play note""")
 
         expected = textwrap.dedent(f"""\
-            for i in range(int('10')):
+            for __i in range(int('10')):
               notes = ['C4', 'E4', 'D4', 'F4', 'G4']
               try:
                 random.choice(notes)
@@ -1291,7 +1287,7 @@ class TestsLevel8(HedyTester):
 
         expected = textwrap.dedent(f"""\
         notes = ['1', '2', '3']
-        for i in range(int('10')):
+        for __i in range(int('10')):
           chosen_note = str(random.choice(notes)).upper()
           if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
               raise Exception({self.value_exception_transpiled()})
@@ -1317,7 +1313,7 @@ class TestsLevel8(HedyTester):
 
         expected = textwrap.dedent(f"""\
         note = '34'
-        for i in range(int('3')):
+        for __i in range(int('3')):
           chosen_note = str(note).upper()
           if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
               raise Exception({self.value_exception_transpiled()})

@@ -53,25 +53,10 @@ levels:
                 {print} Not dislike eh? Better be... houses {at} {random}
         2:
             story: Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
-            code: |-
-                Makanan {is} pizza, es krim, salad, sandwich
-                Topping {is} cokelat, keju, tuna, taburan
-                {print} Makanan acak Anda hari ini adalah...
-                {sleep} 2
-                {print} Makanan {at} {random} dengan topping {at} {random}
+            code: "food {is} pizza, icecream, salad, sandwich\ntoppings {is} chocolate, cheese, tuna, sprinkles\n{print} Your random meal for today is...\n{sleep} 2\n{print} food {at} {random} with toppings {at} {random}"
         3:
-            story: |-
-                In a chess tournament there are three players left.
-                Create a program that decides which two players have to play against each other first.
-                Start by printing the two players who play the first match, then print against which player the winner will play.
-            code: |-
-                Para pemain {is} Liam, Noah, Sophie
-                Pemain_1 {is} dari para pemain {at}{random}
-                {remove} Pemain_1 {from} para pemain
-                Pemain_2 {is} dari para pemain {at}{random}
-                {print} Pemain_1 'pertama kali bermain melawan' Pemain_2
-                {remove} Pemain_2 {from} para pemain
-                {print} 'Pemenangnya akan bermain melawan' para pemain {at}{random}
+            story: "In a chess tournament there are three players left.\nCreate a program that decides which two players have to play against each other first.\nStart by printing the two players who play the first match, then print against which player the winner will play."
+            code: "players {is} Liam, Noah, Sophie\nplayer_1 {is} players {at} {random}\n{remove} player_1 {from} players\nplayer_2 {is} players {at} {random}\n{print} player_1 ' first plays against ' player_2\n{remove} player_2 {from} players\n{print} 'The winner plays against ' players {at} {random}"
     4:
         1:
             story: |-
