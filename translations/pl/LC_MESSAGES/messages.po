@@ -54,9 +54,6 @@ msgstr "Ups! Linia numer {line_number} zaczyna się od spacji. Spacje są dziwne
 msgid "Invalid Type Combination"
 msgstr "Nie możesz użyć `{invalid_argument}` oraz `{invalid_argument_2}` z `{command}` ponieważ pierwszy jest typu {invalid_type}, a drugi jest typu {invalid_type_2}. Spróbuj zmienić `{invalid_argument}` na {invalid_type_2} lub `{invalid_argument_2}` na {invalid_type}."
 
-msgid "Locked Language Feature"
-msgstr "Używasz {concept}! To super, ale {concept} nie jest jeszcze odblokowany! Będzie odblokowany na następnym poziomie."
-
 msgid "Lonely Echo"
 msgstr "Użyłeś `{echo}` przed `{ask}` lub `{echo}` bez `{ask}`. Umieść `{ask}` przed `{echo}`."
 
@@ -112,6 +109,14 @@ msgstr "Save Microbit code"
 msgid "Too Big"
 msgstr "Wow! Twój program ma aż {lines_of_code} linii kodu! Ale możemy przetworzyć tylko {max_lines} linii na tym poziomie. Zmniejsz swój program, i spróbuj ponownie."
 
+#, fuzzy
+msgid "Too Few Indents"
+msgstr "You used too few leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too few."
+
+#, fuzzy
+msgid "Too Many Indents"
+msgstr "You used too many leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too many."
+
 msgid "Unexpected Indentation"
 msgstr "Użyto zbyt dużo spacji w linii {line_number}. Użyto {leading_spaces} spacji, to za dużo. Rozpocznij każdy blok {indent_size} spacji dalej niż poprzednia linia."
 
@@ -121,6 +126,7 @@ msgstr "Od tego poziomu, tekst po `{is}` będzie musiał być między apostrofam
 msgid "Unquoted Equality Check"
 msgstr "Jeśli chcesz sprawdzić, czy zmienna jest równa wielu słowom, słowa powinny być pomiędzy apostrofami!"
 
+#, fuzzy
 msgid "Unquoted Text"
 msgstr "Uważaj. Jeżeli chcesz coś wypisać, tekst powinien zaczynać i kończyć się apostrofem. Zapomniano o tym dla tekstu {unquotedtext}."
 
@@ -1101,9 +1107,6 @@ msgstr "Dowiedz się więcej"
 
 msgid "nav_start"
 msgstr "Dom"
-
-msgid "nested blocks"
-msgstr "blok w bloku"
 
 msgid "new_password"
 msgstr "Nowe hasło"
@@ -2191,4 +2194,10 @@ msgstr "Twój program"
 
 #~ msgid "back_to_class"
 #~ msgstr "Powróć do klasy"
+
+#~ msgid "Locked Language Feature"
+#~ msgstr "Używasz {concept}! To super, ale {concept} nie jest jeszcze odblokowany! Będzie odblokowany na następnym poziomie."
+
+#~ msgid "nested blocks"
+#~ msgstr "blok w bloku"
 

@@ -58,9 +58,7 @@ msgstr "أوه! يوجد مسافة زائدة في بداية السطر رقم
 msgid "Invalid Type Combination"
 msgstr "لا يمكن استعمال `{invalid_argument}` و`{invalid_argument_2}` مع الأمر `{command}` وذلك بسبب كون الأول{invalid_type} وكون الآخر {invalid_type_2}. حاول تغيير `{invalid_argument}` الى {invalid_type_2} أو `{invalid_argument_2}` الى {invalid_type}."
 
-msgid "Locked Language Feature"
-msgstr "أنت تستعمل {concept}! هذا مدهش، لكن {concept} غير متاح لك حالياً! سيتاح لك استعماله في مستوى لاحق."
-
+#, fuzzy
 msgid "Lonely Echo"
 msgstr "لقد استعملت الأمر ردد قبل الأمر اسأل، أو استعملت الأمر ردد بدون استعمال الأمر اسأل. قم باستعمال الأمر اسأل للحصول على اجابة أولاً ثم استعمل الأمر ردد."
 
@@ -121,15 +119,25 @@ msgstr "Save Microbit code"
 msgid "Too Big"
 msgstr "واو! برنامجك يحتوي على {lines_of_code} سطر برمجي! لكننا نستطيع معالجة {max_lines} سطر برمجي كحد أقصى في هذا المستوى. اجعل برنامجك أصغر وحاول مرة أخرى."
 
+#, fuzzy
+msgid "Too Few Indents"
+msgstr "You used too few leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too few."
+
+#, fuzzy
+msgid "Too Many Indents"
+msgstr "You used too many leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too many."
+
 msgid "Unexpected Indentation"
 msgstr "لقد استخدمت عدداً أكثر من اللازم من الفراغات كإزاحة في السطر رقم {line_number}. لقد استخدمت {leading_spaces} إزاحات وهذا أكثر من اللازم. يجب عليك أن تبدأ كل مجموعة جديدة من الكود ب {indent_size} إزاحات أكثر من السطر الذي يسبقها."
 
+#, fuzzy
 msgid "Unquoted Assignment"
 msgstr "ابتداء من هذا المستوى عليك وضع النص على يسار `هو` بين علامات الاقتباس. لقد نسيت فعل ذلك مع النص {text}."
 
 msgid "Unquoted Equality Check"
 msgstr "اذا كنت تريد فحص ما اذا كان المتغير مساويا لنص من عدة كلمات، هذه الكلمات يجب أن تكون محاطة بعلامات الاقتباس!"
 
+#, fuzzy
 msgid "Unquoted Text"
 msgstr "انتبه! عند استعمال الأوامر اسأل أو قول يجب أن يكون النص بين علامات الاقتباس \". على ما يبدو أنك نسيت اضافة واحدة منهم في مكان ما."
 
@@ -294,6 +302,7 @@ msgstr "البرامج المرسلة"
 msgid "are_you_sure"
 msgstr "هل أنت متأكد؟ لا يمكنك التراجع عن هذا الإجراء."
 
+#, fuzzy
 msgid "ask_needs_var"
 msgstr "ابتداء من المستوى الثاني، نستخدم الأمر اسأل مع متغير. مثال: الاسم هو اسأل ما اسمك؟"
 
@@ -887,6 +896,7 @@ msgstr "Incorrect use of variable"
 msgid "indentation_exception"
 msgstr "Incorrect Indentation"
 
+#, fuzzy
 msgid "input"
 msgstr "اجابة باستخدام اسأل"
 
@@ -1170,9 +1180,6 @@ msgstr "المزيد من المعلومات"
 
 msgid "nav_start"
 msgstr "صفحة البدأ"
-
-msgid "nested blocks"
-msgstr "مجموعة ضمن مجموعة"
 
 msgid "new_password"
 msgstr "كلمة المرور الجديدة"
@@ -2304,4 +2311,10 @@ msgstr "Your program"
 
 #~ msgid "back_to_class"
 #~ msgstr "الرجوع الى صف"
+
+#~ msgid "Locked Language Feature"
+#~ msgstr "أنت تستعمل {concept}! هذا مدهش، لكن {concept} غير متاح لك حالياً! سيتاح لك استعماله في مستوى لاحق."
+
+#~ msgid "nested blocks"
+#~ msgstr "مجموعة ضمن مجموعة"
 

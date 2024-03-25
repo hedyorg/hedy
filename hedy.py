@@ -3329,39 +3329,33 @@ def preprocess_blocks(code, level, lang):
             indent_size = leading_spaces
             indent_size_adapted = True
 
-        # indentation size not 4
+        # there is inconsistent indentation, not sure if that is too much or too little!
         if (leading_spaces % indent_size) != 0:
-            # there is inconsistent indentation, not sure if that is too much or too little!
+            fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
             if leading_spaces < current_number_of_indents * indent_size:
-                fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-                raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                             indent_size=indent_size, fixed_code=fixed_code)
+                raise_too_few_indents_error(line_number, leading_spaces, indent_size, fixed_code, level)
             else:
-                fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-                raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                           indent_size=indent_size, fixed_code=fixed_code)
+                raise_too_many_indents_error(line_number, leading_spaces, indent_size, fixed_code, level)
 
-        # happy path, multiple of 4 spaces:
+        # happy path, indentation is consistent, i.e. multiple of 2 or 4:
         current_number_of_indents = leading_spaces // indent_size
         if current_number_of_indents > 1 and level == hedy.LEVEL_STARTING_INDENTATION:
-            raise hedy.exceptions.LockedLanguageFeatureException(concept="nested blocks")
+            raise hedy.exceptions.TooManyIndentsStartLevelException(line_number=line_number,
+                                                                    leading_spaces=leading_spaces)
 
         if current_number_of_indents > previous_number_of_indents and not next_line_needs_indentation:
             # we are indenting, but this line is not following* one that even needs indenting, raise
             # * note that we have not yet updated the value of 'next line needs indenting' so if refers to this line!
             fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-            raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                       indent_size=indent_size, fixed_code=fixed_code)
+            raise_too_many_indents_error(line_number, leading_spaces, indent_size, fixed_code, level)
 
         if next_line_needs_indentation and current_number_of_indents <= previous_number_of_indents:
             fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-            raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                         indent_size=indent_size, fixed_code=fixed_code)
+            raise_too_few_indents_error(line_number, leading_spaces, indent_size, fixed_code, level)
 
         if current_number_of_indents - previous_number_of_indents > 1:
             fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-            raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                       indent_size=indent_size, fixed_code=fixed_code)
+            raise_too_many_indents_error(line_number, leading_spaces, indent_size, fixed_code, level)
 
         if current_number_of_indents < previous_number_of_indents:
             # we are dedenting ('jumping back) so we need to and an end-block
@@ -3387,6 +3381,24 @@ def preprocess_blocks(code, level, lang):
     for i in range(current_number_of_indents):
         processed_code[-1] += '#ENDBLOCK'
     return "\n".join(processed_code)
+
+
+def raise_too_many_indents_error(line_number, leading_spaces, indent_size, fixed_code, level):
+    if level == hedy.LEVEL_STARTING_INDENTATION:
+        raise hedy.exceptions.TooManyIndentsStartLevelException(line_number=line_number, leading_spaces=leading_spaces,
+                                                                fixed_code=fixed_code)
+    else:
+        raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                                   indent_size=indent_size, fixed_code=fixed_code)
+
+
+def raise_too_few_indents_error(line_number, leading_spaces, indent_size, fixed_code, level):
+    if level == hedy.LEVEL_STARTING_INDENTATION:
+        raise hedy.exceptions.TooFewIndentsStartLevelException(line_number=line_number, leading_spaces=leading_spaces,
+                                                               fixed_code=fixed_code)
+    else:
+        raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                                     indent_size=indent_size, fixed_code=fixed_code)
 
 
 def preprocess_ifs(code, lang='en'):

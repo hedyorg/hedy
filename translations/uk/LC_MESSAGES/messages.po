@@ -56,9 +56,6 @@ msgstr "Упс! Ви почали рядок з пробілу в рядку {li
 msgid "Invalid Type Combination"
 msgstr "Ви не можете використовувати `{invalid_argument}` і `{invalid_argument_2}` з `{command}`, оскільки один з них є {invalid_type}, а інший - {invalid_type_2}. Спробуйте змінити `{invalid_argument}` на {invalid_type_2} або `{invalid_argument_2}` на {invalid_type}."
 
-msgid "Locked Language Feature"
-msgstr "Ви використовуєте {concept}! Це чудово, але {concept} ще не розблоковано! Його буде розблоковано на наступному рівні."
-
 msgid "Lonely Echo"
 msgstr "Ви використали `{echo}` перед `{ask}` або `{echo}` без `{ask}`. Поставте `{ask}` перед `{echo}`."
 
@@ -117,6 +114,14 @@ msgstr "Save Microbit code"
 msgid "Too Big"
 msgstr "Ого! Ваша програма має вражаючу кількість {lines_of_code} рядків коду! Але ми можемо обробити лише {max_lines} рядків на цьому рівні. Зменште розмір програми та спробуйте ще раз."
 
+#, fuzzy
+msgid "Too Few Indents"
+msgstr "You used too few leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too few."
+
+#, fuzzy
+msgid "Too Many Indents"
+msgstr "You used too many leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too many."
+
 msgid "Unexpected Indentation"
 msgstr "У рядку {line_number} використано занадто багато пробілів. Ви використали {leading_spaces} пробілів, що є занадто багато. Починайте кожен новий блок з {indent_size} пробілів більше, ніж у попередньому рядку."
 
@@ -139,6 +144,7 @@ msgstr "Текстові значення не можуть містити `{inv
 msgid "Unused Variable"
 msgstr "You defined the variable {variable_name} on line {line_number}, but you did not use it."
 
+#, fuzzy
 msgid "Var Undefined"
 msgstr "Ви намагалися використати перемінну {name}, але не задали її. Також можливо, що ви намагалися використати слово {name}, але забули взяти лапки."
 
@@ -1206,9 +1212,6 @@ msgstr "Дізнатися більше"
 
 msgid "nav_start"
 msgstr "Головна"
-
-msgid "nested blocks"
-msgstr "блок в блоці"
 
 #, fuzzy
 msgid "new_password"
@@ -2465,4 +2468,10 @@ msgstr "Your program"
 
 #~ msgid "back_to_class"
 #~ msgstr "Поверніться до класу"
+
+#~ msgid "Locked Language Feature"
+#~ msgstr "Ви використовуєте {concept}! Це чудово, але {concept} ще не розблоковано! Його буде розблоковано на наступному рівні."
+
+#~ msgid "nested blocks"
+#~ msgstr "блок в блоці"
 
