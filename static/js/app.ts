@@ -1094,8 +1094,11 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);
         return;
       }
-      if (!hasWarnings && code !== last_code && isModified) {
+      if (!hasWarnings && code !== last_code) {
           showSuccesMessage(); //FH nov 2023: typo in success :)
+          if (isModified){
+            $('#confetti-button').show();
+          }
           last_code = code;
       }
       if (cb) cb ();
