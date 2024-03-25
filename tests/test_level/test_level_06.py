@@ -148,13 +148,11 @@ class TestsLevel6(HedyTester):
         code = textwrap.dedent(f"""\
             note is 34
             play note {op} 1""")
-        expected = textwrap.dedent(f"""\
-            note = '34'
-            chosen_note = str({self.int_cast_transpiled('note', False)} {expected_op} int(1)).upper()
-            if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
-                raise Exception({self.value_exception_transpiled()})
-            play(notes_mapping.get(chosen_note, chosen_note))
-            time.sleep(0.5)""")
+        expected = HedyTester.dedent(
+            "note = '34'",
+            self.play_transpiled(
+                f'{self.int_cast_transpiled("note", quotes=False)} {expected_op} int(1)', quotes=False
+            ))
 
         self.multi_level_tester(
             code=code,
@@ -973,17 +971,9 @@ class TestsLevel6(HedyTester):
 
         expected = textwrap.dedent(f"""\
         num = '10'
-        __trtl = {self.int_cast_transpiled('num', False)} + int(10)
-        try:
-          __trtl = int(__trtl)
-        except ValueError:
-          raise Exception({self.value_exception_transpiled()})
+        __trtl = {self.int_cast_transpiled(self.int_cast_transpiled('num', False) + ' + int(10)', False)}
         t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
-        __trtl = int(10) + {self.int_cast_transpiled('num', False)}
-        try:
-          __trtl = int(__trtl)
-        except ValueError:
-          raise Exception({self.value_exception_transpiled()})
+        __trtl = {self.int_cast_transpiled('int(10) + ' + self.int_cast_transpiled('num', False), False)}
         t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
         time.sleep(0.1)""")
 
