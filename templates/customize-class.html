@@ -19,6 +19,9 @@
                         available_adventures=available_adventures)
     }}
 
+    <form onsubmit="event.preventDefault(); hedyApp.save_customizations('{{class_info.id}}')"
+        id="customize_class">
+
     <div class="flex flex-col lg:flex-row gap-4">
         <div class="flex flex-col gap- w-full"> 
             <div class="flex flex-col">
@@ -195,5 +198,10 @@
             {% endif %}
         </div>
     </div>
+    </form>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => hedyApp.autoSave("customize_class",
+        customEvent=null, triggerGetRequest={elementId: "levels-dropdown", trigger: "input"}));
+</script>
 {% endblock %}
