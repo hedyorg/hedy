@@ -976,26 +976,26 @@ adventures:
                 example_code: |
                     **Attention ! Ce code doit être débuggé !**
                     ```
-                    {define} greet
-                    greetings = 'Hello', 'Bonjour', 'Bonsoir'
-                        {print} greetings {at} {random}
+                    {define} accueil
+                    messages = "Salut", "Bonjour", "Bonsoir"
+                        {print} messages {at} {random}
 
-                    {define} take_order
-                        food = {ask} 'Que voulez-vous manger ?'
-                        {print} 'Un' food'
-                        drink = 'Que voulez-vous boire ?'
-                        {print} 'Un ' drink
-                        more = {ask} 'Voulez-vous quelque chose d'autre ?'
-                            {if} more {is} 'non'
-                        {print} 'D'accord'
+                    {define} prise_de_commande
+                        nouriture = {ask} "Que voulez-vous manger ?"
+                        {print} "Vous voulez manger nourriture"
+                        boisson = "Que voulez-vous boire ?"
+                        {print} "Vous voulez boire " boisson
+                        en_plus = {ask} "Voulez-vous quelque chose d'autre ?"
+                            {if} en_plus {is} "non"
+                        {print} "D'accord"
                             {else}
-                            {print} 'Et ' more
-                    {print} 'Merci !'
+                            {print} "Et " en_plus
+                    {print} "Merci"
 
-                    {print} 'Bienvenu dans notre restaurant'
-                    people = {ask} 'Combien êtes vous ce soir ?'
-                    {for} i {in} {range} 0 {to} people
-                        {call} greet_costumer
+                    {print} "Bienvenue dans notre restaurant"
+                    nombre_personnes = {ask} "Combien de personnes viendront à votre fête ce soir ?"
+                    {for} i {in} {range} 0 {to} nombre_personnes
+                        {call} accueil_client
                     ```
             13:
                 story_text: |-
@@ -4914,7 +4914,7 @@ adventures:
                         forme = {ask} "Quelle forme veux-tu ensuite dans ton bracelet ?"
                         couleur = {ask} "Dans quelle couleur ?"
                         {color} couleur
-                        {if} forme = "carré"
+                        {if} forme {is} "carré"
                             {call} dessine_un_carré
                     ```
             13:
