@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-02-26 13:05+0100\n"
-"PO-Revision-Date: 2024-02-19 01:12+0000\n"
-"Last-Translator: Snoring Parrot <snoring_parrot@users.noreply.hosted.weblate.org>\n"
+"POT-Creation-Date: 2000-01-01 00:00+0000\n"
+"PO-Revision-Date: 2000-01-01 00:00+0000\n"
+"Last-Translator: Someone <someone@example.com>\n"
 "Language: sv\n"
 "Language-Team: sv <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
@@ -22,7 +22,7 @@ msgid "Access Before Assign"
 msgstr "Du försökte använda variabeln {name} på rad {access_line_number}, men du tilldelar den på rad {definition_line_number}. Ge variabeln ett värde innan du använder den."
 
 msgid "Cyclic Var Definition"
-msgstr "Namnet {variable} måste ges ett värde innan du kan använda det på höger sida av {is}-kommandot."
+msgstr "Namnet `{variable}` måste ges ett värde innan du kan använda det på höger sida av `{is}`-kommandot."
 
 #, fuzzy
 msgid "Function Undefined"
@@ -32,58 +32,55 @@ msgid "Has Blanks"
 msgstr "Din kod är ofullständig. Den innehåller tomrum som du måste ersätta med kod."
 
 msgid "Incomplete"
-msgstr "Hoppsan! Du glömde lite kod! På rad {line_number} måste du ange text efter {incomplete_command}."
+msgstr "Hoppsan! Du glömde lite kod! På rad {line_number} måste du ange text efter `{incomplete_command}`."
 
 msgid "Incomplete Repeat"
-msgstr "Du verkar ha glömt att använda ett kommando med {repeat}-kommandot som du använde på rad {line_number}."
+msgstr "Du verkar ha glömt att använda ett kommando med `{repeat}`-kommandot som du använde på rad {line_number}."
 
 msgid "Invalid"
-msgstr "{invalid_command} är inte ett Hedy-kommando på nivå {level}. Menade du {guessed_command}?"
+msgstr "`{invalid_command}` är inte ett Hedy-kommando på nivå {level}. Menade du `{guessed_command}`?"
 
 msgid "Invalid Argument"
-msgstr "Du kan inte använda kommandot {command} med {invalid_argument}. Försök att ändra {invalid_argument} till {allowed_types}."
+msgstr "Du kan inte använda kommandot `{command}` med `{invalid_argument}`. Försök att ändra `{invalid_argument}` till {allowed_types}."
 
 msgid "Invalid Argument Type"
-msgstr "Du kan inte använda {command} med {invalid_argument} eftersom det är {invalid_type}. Försök ändra {invalid_argument} till {allowed_types}."
+msgstr "Du kan inte använda `{command}` med `{invalid_argument}` eftersom det är {invalid_type}. Försök ändra `{invalid_argument}` till {allowed_types}."
 
 msgid "Invalid At Command"
-msgstr "Kommandot {at} får inte användas från och med nivå 16. Du kan använda hakparenteser för att använda ett element från en lista, till exempel `vänner[i]`, `lyckonummer[{random}]`."
+msgstr "Kommandot `{command}` får inte användas från och med nivå 16. Du kan använda hakparenteser för att använda ett element från en lista, till exempel `vänner[i]`, `lyckonummer[{random}]`."
 
 msgid "Invalid Space"
 msgstr "Hoppsan! Du började en rad med ett mellanslag på rad {line_number}. Mellanslag förvirrar datorer; kan du ta bort det?"
 
 msgid "Invalid Type Combination"
-msgstr "Du kan inte använda {invalid_argument} och {invalid_argument_2} med {command} eftersom det ena är {invalid_type} och det andra är {invalid_type_2}. Försök att ändra {invalid_argument} till {invalid_type_2} eller {invalid_argument_2} till {invalid_type}."
-
-msgid "Locked Language Feature"
-msgstr "Du använder {concept}! Det är jättebra men {concept} är inte upplåst än! Den kommer att låsas upp på en senare nivå."
+msgstr "Du kan inte använda `{invalid_argument}` och `{invalid_argument_2}` med `{command}` eftersom det ena är {invalid_type} och det andra är {invalid_type_2}. Försök att ändra `{invalid_argument}` till {invalid_type_2} eller `{invalid_argument_2}` till {invalid_type}."
 
 msgid "Lonely Echo"
-msgstr "Du använde {echo} före {ask}, eller {echo} utan något {ask}. Skriv {ask} före {echo}."
+msgstr "Du använde `{echo}` före `{ask}`, eller `{echo}` utan något `{ask}`. Skriv `{ask}` före `{echo}`."
 
 msgid "Lonely Text"
 msgstr "Du verkar ha glömt att använda ett kommando ihop med texten du använde på rad {line_number}"
 
 #, fuzzy
 msgid "Missing Additional Command"
-msgstr "It looks like you forgot to complete writing {command} on line {line_number}."
-
-msgid "Missing Square Brackets"
-msgstr ""
+msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
 
 msgid "Missing Command"
 msgstr "Du verkar ha glömt att använda ett kommando på rad {line_number}."
 
 msgid "Missing Inner Command"
-msgstr "Du verkar ha glömt ett kommando ihop med {command} som du använde på rad {line_number}."
+msgstr "Du verkar ha glömt ett kommando ihop med `{command}` som du använde på rad {line_number}."
+
+msgid "Missing Square Brackets"
+msgstr "It looks like you forgot to use square brackets `[]` around the list you were creating on line {line_number}."
 
 #, fuzzy
 msgid "Missing Variable"
-msgstr "It looks like your {command} is missing a variable at the start of the line."
+msgstr "It looks like your `{command}` is missing a variable at the start of the line."
 
 #, fuzzy
 msgid "Misspelled At Command"
-msgstr "It looks like you might have misspelled the {command} command, instead you wrote {invalid_argument} in line {line_number}."
+msgstr "It looks like you might have misspelled the `{command}` command, instead you wrote `{invalid_argument}` in line {line_number}."
 
 msgid "No Indentation"
 msgstr "Du har använt för få mellanslag på rad {line_number}. Du använde {leading_spaces} mellanslag och det är för få. Börja varje nytt block med {indent_size} mellanslag mer än raden innan."
@@ -93,41 +90,63 @@ msgid "Non Decimal Variable"
 msgstr "At line {line_number}, you might have tried using a number which Hedy does not like very much! Try changing it to a decimal number like 2."
 
 msgid "Parse"
-msgstr "Koden du matat in är inte giltig Hedy-kod. Det finns ett fel på rad {location[0]} och kolumn {location[1]}. Du skrev {character_found}, men det är inte tillåtet."
+msgstr "Koden du matat in är inte giltig Hedy-kod. Det finns ett fel på rad {location[0]} och kolumn {location[1]}. Du skrev `{character_found}`, men det är inte tillåtet."
 
 msgid "Pressit Missing Else"
-msgstr "Du glömde att lägga till vad som händer när du trycker på en annan tangent; lägg till ett {else} i din kod"
+msgstr "Du glömde att lägga till vad som händer när du trycker på en annan tangent; lägg till ett `{else}` i din kod"
+
+msgid "Runtime Index Error"
+msgstr "Du försökte komma åt listan {name} men den är antingen tom eller så finns inte det indexet."
+
+#, fuzzy
+msgid "Runtime Value Error"
+msgstr "While running your program the command `{command}` received the value `{value}` which is not allowed. {tip}."
+
+msgid "Runtime Values Error"
+msgstr "While running your program the command `{command}` received the values `{value}` and `{value}` which are not allowed. {tip}."
+
+#, fuzzy
+msgid "Save Microbit code "
+msgstr "Save Microbit code"
 
 msgid "Too Big"
 msgstr "Wow! Ditt program har {lines_of_code} rader kod vilket är imponerande! Men vi kan bara hantera {max_lines} kodrader på den här nivån. Korta ner ditt program och försök igen."
+
+#, fuzzy
+msgid "Too Few Indents"
+msgstr "You used too few leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too few."
+
+#, fuzzy
+msgid "Too Many Indents"
+msgstr "You used too many leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too many."
 
 msgid "Unexpected Indentation"
 msgstr "Du använde för många mellanslag på rad {line_number}. Du använde {leading_spaces} mellanslag och det är för många. Börja varje nytt block med {indent_size} mellanslag mer än raden innan."
 
 msgid "Unquoted Assignment"
-msgstr "Från den här nivån behöver du skriva texter till höger om {is} inom citattecken. Du glömde det för texten {text}."
+msgstr "Från den här nivån behöver du skriva texter till höger om `{is}` inom citattecken. Du glömde det för texten {text}."
 
 msgid "Unquoted Equality Check"
 msgstr "Om du vill kontrollera om en variabel är lika med flera ord, ska orden omges av citattecken!"
 
 msgid "Unquoted Text"
-msgstr "Var försiktig. Om du {ask} eller {print} något ska texten börja och sluta med ett citattecken. Du glömde det för texten {unquotedtext}."
+msgstr "Var försiktig. Om du `{ask}` eller `{print}` något ska texten börja och sluta med ett citattecken. Du glömde det för texten {unquotedtext}."
 
 msgid "Unsupported Float"
-msgstr "Icke-heltal stöds inte än, men kommer att finnas några nivåer högre upp. Ändra {value} till ett heltal för tillfället."
+msgstr "Icke-heltal stöds inte än, men kommer att finnas några nivåer högre upp. Ändra `{value}` till ett heltal för tillfället."
 
 msgid "Unsupported String Value"
-msgstr "Textvärden kan inte innehålla {invalid_value}."
+msgstr "Textvärden kan inte innehålla `{invalid_value}`."
 
 #, fuzzy
 msgid "Unused Variable"
 msgstr "You defined the variable {variable_name} on line {line_number}, but you did not use it."
 
 msgid "Var Undefined"
-msgstr "Du försökte använda variabeln {name}, men du har inte tilldelat den något värde. Det är också möjligt att du försökte använda ordet {name} men glömde citattecken."
+msgstr "Du försökte använda variabeln `{name}`, men du har inte tilldelat den något värde. Det är också möjligt att du försökte använda ordet `{name}` men glömde citattecken."
 
 msgid "Wrong Level"
-msgstr "Det var rätt Hedy-kod, men inte på rätt nivå. Du skrev {offending_keyword} på nivå {working_level}. Tips: {tip}"
+msgstr "Det var rätt Hedy-kod, men inte på rätt nivå. Du skrev `{offending_keyword}` på nivå {working_level}. Tips: {tip}"
 
 #, fuzzy
 msgid "Wrong Number of Arguments"
@@ -178,20 +197,27 @@ msgstr "Äventyr"
 msgid "adventure_cloned"
 msgstr "Adventure is cloned"
 
+#, fuzzy
+msgid "adventure_code_button"
+msgstr "Adventure Code"
+
+#, fuzzy
+msgid "adventure_codeblock_button"
+msgstr "Use this button when you want to create a block of code that students can run in your adventure. Tip: put the selection at the end of the last line of the code block and <kbd>Enter</kbd> 3 times to type after a code block."
+
 msgid "adventure_duplicate"
 msgstr "Du har redan ett äventyr med det här namnet."
 
 msgid "adventure_empty"
 msgstr "Du har inte angett ett äventyrsnamn!"
 
-msgid "adventure_exp_1"
-msgstr "Skriv in ditt äventyr på höger sida. När du har skapat ditt äventyr kan du lägga till det i någon av dina klasser under \"anpassningar\". Om du vill ha med ett kommando i ditt äventyr, använd kodankare så här:"
-
-msgid "adventure_exp_2"
-msgstr "Om du vill visa kodsnuttar, till exempel för att ge eleverna en mall eller ett exempel på koden. Använd då ankare så här:"
-
+#, fuzzy
 msgid "adventure_exp_3"
 msgstr "Du behöver alltid ha klammer { } runt nyckelord, så att de känns igen korrekt. Du kan använda knappen \"förhandsgranska\" för att visa en formatterad version av ditt äventyr. Om du vill visa äventyret på en egen sida väljer du \"visa\" på lärarsidan."
+
+#, fuzzy
+msgid "adventure_exp_classes"
+msgstr "Your adventure is used within the following classes"
 
 msgid "adventure_id_invalid"
 msgstr "Äventyrs-id är ogiltigt."
@@ -210,9 +236,6 @@ msgstr "Jag samtycker till att mitt äventyr kan göras tillgängligt för allm�
 
 msgid "adventure_updated"
 msgstr "Äventyret har uppdaterats!"
-
-msgid "adventures"
-msgstr "Äventyr"
 
 #, fuzzy
 msgid "adventures_info"
@@ -264,19 +287,21 @@ msgid "are_you_sure"
 msgstr "Är du säker? Du kan inte ångra den här åtgärden."
 
 msgid "ask_needs_var"
-msgstr "Från och med nivå 2 måste {ask} användas med en variabel. Exempel: namn {is} {ask} Vad heter du?"
+msgstr "Från och med nivå 2 måste `{ask}` användas med en variabel. Exempel: namn `{is}` `{ask}` Vad heter du?"
 
-msgid "back_to_class"
-msgstr "Gå tillbaka till klassen"
-
-msgid "back_to_teachers_page"
-msgstr "Gå tillbaka till lärarsidan"
+#, fuzzy
+msgid "available_in"
+msgstr "Available in:"
 
 msgid "become_a_sponsor"
 msgstr "Bli sponsor"
 
 msgid "birth_year"
 msgstr "Födelseår"
+
+#, fuzzy
+msgid "bug"
+msgstr "Bug"
 
 msgid "by"
 msgstr "av"
@@ -286,13 +311,6 @@ msgstr "Avbryt"
 
 msgid "cant_parse_exception"
 msgstr "Kan inte analysera programmet"
-
-msgid "catch_index_exception"
-msgstr "Du försökte komma åt listan {list_name} men den är antingen tom eller så finns inte det indexet."
-
-#, fuzzy
-msgid "catch_value_exception"
-msgstr "While running your program the command {command} received the value {value} which is not allowed. {suggestion}."
 
 msgid "certificate"
 msgstr "Diplom för genomförd utbildning"
@@ -523,6 +541,14 @@ msgstr "Öppna direkt"
 msgid "disable"
 msgstr "Inaktivera"
 
+#, fuzzy
+msgid "disable_parsons"
+msgstr "Disable all puzzles"
+
+#, fuzzy
+msgid "disable_quizes"
+msgstr "Disable all quizes"
+
 msgid "disabled"
 msgstr "Inaktiverad"
 
@@ -552,7 +578,7 @@ msgid "echo_and_ask_mismatch_exception"
 msgstr "Echo and ask mismatch"
 
 msgid "echo_out"
-msgstr "Från och med nivå 2 behövs inte längre {echo}. Du kan nu istället upprepa ett svar med {ask} och {print}. Exempel: namnet är {ask} Vad heter du? {print} Hej namn"
+msgstr "Från och med nivå 2 behövs inte längre `{echo}`. Du kan nu istället upprepa ett svar med `{ask}` och `{print}`. Exempel: namnet är `{ask}` Vad heter du? `{print}` Hej namn"
 
 #, fuzzy
 msgid "edit_adventure"
@@ -634,6 +660,26 @@ msgstr "Ditt valda favoritprogram är ogiltigt."
 msgid "favourite_success"
 msgstr "Ditt program är favoritmarkerat."
 
+#, fuzzy
+msgid "feature"
+msgstr "Feature"
+
+#, fuzzy
+msgid "feedback"
+msgstr "Feedback"
+
+#, fuzzy
+msgid "feedback_message_error"
+msgstr "Something went wrong, please try again later."
+
+#, fuzzy
+msgid "feedback_message_success"
+msgstr "Thank you, we recieved your feedback and will contact you if needed."
+
+#, fuzzy
+msgid "feedback_modal_message"
+msgstr "Please send us a message with a category. We appreciate your help to improve Hedy!"
+
 msgid "female"
 msgstr "Tjej"
 
@@ -678,6 +724,10 @@ msgstr "Få ditt diplom!"
 
 msgid "give_link_to_teacher"
 msgstr "Ge den här länken till din lärare:"
+
+#, fuzzy
+msgid "go_back"
+msgstr "Go back"
 
 msgid "go_back_to_main"
 msgstr "Tillbaka till huvudsidan"
@@ -724,9 +774,6 @@ msgstr "Logga för Hedy-handledning"
 msgid "hello_logo"
 msgstr "hej"
 
-msgid "hello_world"
-msgstr "Hej, världen!"
-
 msgid "hidden"
 msgstr "Gömda"
 
@@ -735,12 +782,6 @@ msgstr "Dölj lathund"
 
 msgid "hide_keyword_switcher"
 msgstr "Göm tangentbordsväxlaren"
-
-msgid "hide_parsons"
-msgstr "Göm pusslet"
-
-msgid "hide_quiz"
-msgstr "Göm quiz"
 
 msgid "highest_level_reached"
 msgstr "Högsta uppnådda nivån"
@@ -788,7 +829,7 @@ msgid "indentation_exception"
 msgstr "Incorrect Indentation"
 
 msgid "input"
-msgstr "indata från {ask}"
+msgstr "indata från `{ask}`"
 
 msgid "integer"
 msgstr "ett tal"
@@ -897,6 +938,7 @@ msgstr "Nivån är inte aktiv"
 msgid "level_future"
 msgstr "Den här nivån öppnas automatiskt den "
 
+#, fuzzy
 msgid "level_invalid"
 msgstr "Hedy-nivån är ogiltig."
 
@@ -1023,6 +1065,14 @@ msgstr "Kille"
 msgid "mandatory_mode"
 msgstr "Obligatoriskt utvecklarläge"
 
+#, fuzzy
+msgid "more_options"
+msgstr "More options"
+
+#, fuzzy
+msgid "multiple_levels_warning"
+msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
+
 msgid "my_account"
 msgstr "Mitt konto"
 
@@ -1056,9 +1106,6 @@ msgstr "Lär dig mer"
 
 msgid "nav_start"
 msgstr "Hem"
-
-msgid "nested blocks"
-msgstr "ett block inuti ett block"
 
 msgid "new_password"
 msgstr "Nytt lösenord"
@@ -1096,7 +1143,7 @@ msgid "no_certificate"
 msgstr "Den här användaren har inte fått Hedys diplom för slutförande"
 
 msgid "no_more_flat_if"
-msgstr "Från och med nivå 8 måste koden efter {if} placeras på nästa rad och börja med fyra mellanslag."
+msgstr "Från och med nivå 8 måste koden efter `{if}` placeras på nästa rad och börja med fyra mellanslag."
 
 #, fuzzy
 msgid "no_programs"
@@ -1202,6 +1249,10 @@ msgstr "sida"
 
 msgid "page_not_found"
 msgstr "Vi kunde inte hitta den sidan!"
+
+#, fuzzy
+msgid "pair_with_teacher"
+msgstr "I would like to be paired with another teacher for help"
 
 msgid "parsons_title"
 msgstr "Pussel"
@@ -1401,7 +1452,7 @@ msgstr "Ikon för programreparation"
 
 #, fuzzy
 msgid "repeat_dep"
-msgstr "Starting in level 8, {repeat} needs to be used with indentation. You can see examples on the {repeat} tab in level 8."
+msgstr "Starting in level 8, `{repeat}` needs to be used with indentation. You can see examples on the `{repeat}` tab in level 8."
 
 msgid "repeat_match_password"
 msgstr "Det upprepade lösenordet stämmer inte."
@@ -1517,6 +1568,9 @@ msgstr "Select all"
 msgid "select_lang"
 msgstr "Select language"
 
+msgid "select_levels"
+msgstr "Select levels"
+
 #, fuzzy
 msgid "select_tag"
 msgstr "Select tag"
@@ -1540,17 +1594,8 @@ msgstr "Du bör snart få ett e-postmeddelande med instruktioner hur du återst�
 msgid "settings"
 msgstr "Mina inställningar"
 
-msgid "share"
-msgstr "Dela"
-
 msgid "share_by_giving_link"
 msgstr "Visa ditt program för andra genom att ge dem länken nedan:"
-
-msgid "share_confirm"
-msgstr "Är du säker på att du vill publicera programmet?"
-
-msgid "share_success_detail"
-msgstr "Programmet har delats."
 
 msgid "share_your_program"
 msgstr "Dela ditt program"
@@ -1563,6 +1608,10 @@ msgstr "ett enkelt citattecken"
 
 msgid "slash"
 msgstr "ett snedstreck"
+
+#, fuzzy
+msgid "sleeping"
+msgstr "Sleeping..."
 
 #, fuzzy
 msgid "slides"
@@ -1587,6 +1636,10 @@ msgstr "en stjärna"
 msgid "start_hedy_tutorial"
 msgstr "Starta Hedy-handledning"
 
+#, fuzzy
+msgid "start_learning"
+msgstr "Start learning"
+
 msgid "start_programming"
 msgstr "Börja programmera"
 
@@ -1598,6 +1651,10 @@ msgstr "Starta quiz"
 
 msgid "start_teacher_tutorial"
 msgstr "Starta lärarhandledning"
+
+#, fuzzy
+msgid "start_teaching"
+msgstr "Start teaching"
 
 msgid "step_title"
 msgstr "Uppgift"
@@ -1675,6 +1732,9 @@ msgstr "Use a note between C0 and B9 or a number between 1 and 70"
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
 
+msgid "suggestion_numbers_or_strings"
+msgstr "Try changing the values to be all text or all numbers"
+
 msgid "surname"
 msgstr "Förnamn"
 
@@ -1745,8 +1805,8 @@ msgstr ""
 "\n"
 "Men ibland kanske jag vill visa en kodsnutt, så här:\n"
 "<pre>\n"
-"{ask} Vad heter du?\n"
-"{echo} så ditt namn är\n"
+"ask Vad heter du?\n"
+"echo så ditt namn är\n"
 "</pre>"
 
 msgid "this_turns_in_assignment"
@@ -1840,9 +1900,6 @@ msgstr "Översätta Hedy"
 msgid "translator"
 msgstr "Translator"
 
-msgid "try_it"
-msgstr "Prova själv"
-
 msgid "tutorial"
 msgstr "Handledning"
 
@@ -1869,15 +1926,6 @@ msgstr "Lås upp gränserna för uppgiftsnivån"
 msgid "unsaved_class_changes"
 msgstr "Det finns osparade ändringar; är du säker på att du vill lämna sidan?"
 
-msgid "unshare"
-msgstr "Sluta dela"
-
-msgid "unshare_confirm"
-msgstr "Är du säker på att du vill göra programmet privat?"
-
-msgid "unshare_success_detail"
-msgstr "Programmet delas inte längre."
-
 msgid "update_adventure_prompt"
 msgstr "Är du säker på att du vill uppdatera det här äventyret?"
 
@@ -1897,6 +1945,10 @@ msgstr "Use of blanks in programs"
 #, fuzzy
 msgid "use_of_nested_functions_exception"
 msgstr "Use of nested functions"
+
+#, fuzzy
+msgid "used_in"
+msgstr "Used in:"
 
 msgid "user"
 msgstr "användare"
@@ -2073,9 +2125,6 @@ msgstr "Ditt program"
 #~ msgid "question_invalid"
 #~ msgstr "Your token is invalid."
 
-#~ msgid "select_levels"
-#~ msgstr "Select levels"
-
 #~ msgid "too_many_attempts"
 #~ msgstr "Too many attempts"
 
@@ -2111,4 +2160,46 @@ msgstr "Ditt program"
 
 #~ msgid "write_first_program"
 #~ msgstr "Skriv ditt första program!"
+
+#~ msgid "adventure_exp_1"
+#~ msgstr "Skriv in ditt äventyr på höger sida. När du har skapat ditt äventyr kan du lägga till det i någon av dina klasser under \"anpassningar\". Om du vill ha med ett kommando i ditt äventyr, använd kodankare så här:"
+
+#~ msgid "adventure_exp_2"
+#~ msgstr "Om du vill visa kodsnuttar, till exempel för att ge eleverna en mall eller ett exempel på koden. Använd då ankare så här:"
+
+#~ msgid "adventures"
+#~ msgstr "Äventyr"
+
+#~ msgid "hello_world"
+#~ msgstr "Hej, världen!"
+
+#~ msgid "share_confirm"
+#~ msgstr "Är du säker på att du vill publicera programmet?"
+
+#~ msgid "share_success_detail"
+#~ msgstr "Programmet har delats."
+
+#~ msgid "unshare_confirm"
+#~ msgstr "Är du säker på att du vill göra programmet privat?"
+
+#~ msgid "unshare_success_detail"
+#~ msgstr "Programmet delas inte längre."
+
+#~ msgid "hide_parsons"
+#~ msgstr "Göm pusslet"
+
+#~ msgid "hide_quiz"
+#~ msgstr "Göm quiz"
+
+#~ msgid "back_to_class"
+#~ msgstr "Gå tillbaka till klassen"
+
+#~ msgid "classes"
+#~ msgstr ""
+
+#~ msgid "Locked Language Feature"
+#~ msgstr "Du använder {concept}! Det är jättebra men {concept} är inte upplåst än! Den kommer att låsas upp på en senare nivå."
+
+#~ msgid "nested blocks"
+#~ msgstr "ett block inuti ett block"
 

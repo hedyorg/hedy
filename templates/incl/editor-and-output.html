@@ -126,6 +126,12 @@
             <p class="text-2xl font-bold caption">{{_('pygame_waiting_for_input')}}</p>
           </div>
         </div>
+        <div id="sleep-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99;">
+          <!--Title-->
+          <div class="flex justify-between items-center">
+            <p class="text-2xl font-bold caption">{{_('sleeping')}}</p>
+          </div>
+        </div>
       </div>
       <div id="dynamic-buttons" class="flex mt-3 gap-2 overflow-auto border-4 border-blue-600 rounded bg-blue-300 py-2 px-3" style="display: none">
       </div>
@@ -142,6 +148,11 @@
           <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}}, "run")'>{{_('run_code_button')}} </button>
           <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
         </div>
+      <div id="saveMicrobitFilesContainer" {% if not microbit_feature %} class="hidden" {% endif %} >
+        <button id="runMicrobit" class="green-btn" onclick="hedyApp.saveMicrobit({{ level }});" > {{ _('Save Microbit code ') }}
+            <img src="{{ static('/images/microbit_logo_icon_248480.png') }}" style="width: 25px; height: 25px; margin-left: 1px; display: inline;" alt=""/>
+        </button>
+      </div>
         <div id="saveFilesContainer" class="hidden">
           <button id="saveFiles" class="green-btn" onclick="hedyApp.saveMachineFiles();">💾</button>
         </div>

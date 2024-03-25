@@ -12,12 +12,13 @@ import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-
 import { incrementDebugLine, initializeDebugger, load_variables, startDebug } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
-import { postJson } from './comm';
+import { postJson, postNoResponse } from './comm';
 import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
+import { initializeActivity } from './user-activity';
 
 export let theGlobalDebugger: any;
 export let theGlobalEditor: HedyEditor;
@@ -35,6 +36,10 @@ let pygameRunning = false;
  * Represents whether there's an open 'ask' prompt
  */
 let askPromptOpen = false;
+/**
+ * Represents whether there's an open 'sleeping' prompt
+ */
+let sleepRunning = false;
 
 // Many bits of code all over this file need this information globally.
 // Not great but it'll do for now until we refactor this file some more.
@@ -175,6 +180,8 @@ export function initializeApp(options: InitializeAppOptions) {
   });
 
   initializeLoginLinks();
+
+  initializeActivity();
 }
 
 export interface InitializeCodePageOptions {
@@ -445,6 +452,14 @@ export function stopit() {
       pygameRunning = false;
       document.onkeydown = null;
       $('#pygame-modal').hide();
+      $('#stopit').hide();
+      $('#runit').show();
+  }
+  else if (sleepRunning){
+      Sk.execLimit = 1;
+      clearTimeouts();
+      sleepRunning = false;
+      $('#sleep-modal').hide();
       $('#stopit').hide();
       $('#runit').show();
   }
@@ -723,8 +738,12 @@ export function tryPaletteCode(exampleCode: string) {
   if (theGlobalEditor?.isReadOnly) {
     return;
   }
-
-  theGlobalEditor.contents = exampleCode + '\n';
+  const lines = theGlobalEditor.contents.split('\n')
+  if (lines[lines.length-1] !== '') {
+    theGlobalEditor.contents += '\n' + exampleCode;
+  } else {
+    theGlobalEditor.contents += exampleCode;
+  }
   //As the commands try-it buttons only contain english code -> make sure the selected language is english
   if (!($('#editor').attr('lang') == 'en')) {
       $('#editor').attr('lang', 'en');
@@ -856,7 +875,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: number[], hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
   let skip_faulty_found_errors = false;
@@ -930,6 +949,42 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     code_prefix += music_prefix;
     $('#turtlecanvas').show();
   }
+
+  if (hasSleep) {
+    function executeWithDelay(index: number) {
+      return new Promise((resolve, reject) => {
+        if (index >= hasSleep.length) {
+          resolve(reject);
+          return;
+        }
+
+        const sleepTime = hasSleep[index];
+        if (sleepTime) {
+          $('#sleep-modal').show();
+          sleepRunning = true;
+          setTimeout(() => {
+            $('#sleep-modal').hide();
+            sleepRunning = false;
+            setTimeout(() => {
+              resolve(reject);
+            }, 100);
+          }, (sleepTime * 1000) - 100);
+        } else {
+          setTimeout(() => {
+            resolve(reject);
+          }, 100);
+        }
+      });
+    }
+
+    async function executeAllDelays() {
+      for (let i = 0; i < hasSleep.length; i++) {
+        await executeWithDelay(i);
+      }
+    }
+    executeAllDelays()
+  }
+
 
   if (hasPygame){
     skulptExternalLibraries = {
@@ -1008,6 +1063,15 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   code = code_prefix + code;
   if (hasPygame) code += pygame_suffix;
 
+  (Sk as any).builtins.play = new Sk.builtin.func((notes:any) => {
+    //const now = Tone.now()
+    const note_name = notes.v;
+
+    //play note_name for the duration of an 16th note
+    synth.triggerAttackRelease(note_name, "16n");
+
+  });
+
   if (run_type === "run") {
     Sk.configure({
       output: outf,
@@ -1046,21 +1110,16 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       }) ()
     });
 
-    (Sk as any).builtins.play = new Sk.builtin.func((notes:any) => {
-        //const now = Tone.now()
-        const note_name = notes.v;
-
-        //play note_name for the duration of an 16th note
-        synth.triggerAttackRelease(note_name, "16n");
-
-    });
+    const currentProgram: number = Number(sessionStorage.getItem('currentProgram') || 0) + 1;
+    sessionStorage.setItem('currentProgram', currentProgram.toString());
 
     return Sk.misceval.asyncToPromise(() =>
       Sk.importMainWithBody("<stdin>", false, code, true), {
         "*": () => {
           // We don't do anything here...
         }
-      }
+      },
+      currentProgram
      ).then(function(_mod) {
       console.log('Program executed');
       const pythonVariables = Sk.globals;
@@ -1937,8 +1996,6 @@ export function closeContainingModal(target: HTMLElement) {
 function initializeShareProgramButtons() {
   $('input[type="radio"][name="public"]').on('change', (ev) => {
     if ((ev.target as HTMLInputElement).checked) {
-      const isPublic = $(ev.target).val() === '1' ? true : false;
-
       // Async-safe copy of current tab
       const adventure = theAdventures[currentTab];
 
@@ -1949,17 +2006,7 @@ function initializeShareProgramButtons() {
         if (!saveInfo) {
           throw new Error('This program does not have an id');
         }
-
-        const response = await postJsonWithAchievements('/programs/share', {
-          id: saveInfo.id,
-          public: isPublic,
-        });
-
-        modal.notifySuccess(response.message);
-        if (response.save_info) {
-          adventure.save_info = response.save_info;
-        }
-        updatePageElements();
+        await postNoResponse(`/programs/share/${saveInfo.id}`, {})
       });
     }
   })
@@ -2101,43 +2148,6 @@ async function saveIfNecessary() {
 
 function currentTabLsKey() {
   return `save-${currentTab}-${theLevel}`;
-}
-
-export async function share_program(id: string, index: number, Public: boolean, prompt: string) {
-  await modal.confirmP(prompt);
-  await tryCatchPopup(async () => {
-    const response = await postJsonWithAchievements('/programs/share', { id, public: Public });
-    showAchievements(response.achievement, true, "");
-    if (Public) {
-      change_shared(true, index);
-    } else {
-      change_shared(false, index);
-    }
-    modal.notifySuccess(response.message);
-  });
-}
-
-function change_shared (shared: boolean, index: number) {
-  // Index is a front-end unique given to each program container and children
-  // This value enables us to remove, hide or show specific element without connecting to the server (again)
-  // When index is -1 we share the program from code page (there is no program container) -> no visual change needed
-  if (index == -1) {
-    return;
-  }
-  if (shared) {
-    $('#non_public_button_container_' + index).hide();
-    $('#public_button_container_' + index).show();
-    $('#favourite_program_container_' + index).show();
-  } else {
-    $('#modal-copy-button').hide();
-    $('#public_button_container_' + index).hide();
-    $('#non_public_button_container_' + index).show();
-    $('#favourite_program_container_' + index).hide();
-
-    // In the theoretical situation that a user unshares their favourite program -> Change UI
-    $('#favourite_program_container_' + index).removeClass('text-yellow-400');
-    $('#favourite_program_container_' + index).addClass('text-white');
-  }
 }
 
 export function goToLevel(level: any) {

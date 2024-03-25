@@ -75,6 +75,8 @@ TAGS = dynamo.Table(storage, "tags", "id", indexes=[dynamo.Index("name", sort_ke
 
 SURVEYS = dynamo.Table(storage, "surveys", "id")
 
+FEEDBACK = dynamo.Table(storage, "teacher_feedback", "id")
+
 # Class customizations
 #
 # Various columns with different meanings:
@@ -698,6 +700,10 @@ class Database:
     def update_class_data(self, id, class_data):
         """Updates a class."""
         CLASSES.update({"id": id}, class_data)
+
+    def store_feedback(self, feedback):
+        """Store a feedback message in the database"""
+        FEEDBACK.create(feedback)
 
     def store_survey(self, survey):
         SURVEYS.create(survey)

@@ -316,9 +316,29 @@ def task_devserver():
                 os.environ,
                 # These are required to make some local features work.
                 BASE_URL="http://localhost:8080/",
-                ADMIN_USER="admin"))
+                ADMIN_USER="admin",))
         ],
         verbosity=2,  # show everything live
+    )
+
+
+def task_normalize_yaml():
+    """Normalize the YAML files by running a script.
+
+    Makes indentation and key ordering uniform, even if the files get rewritten by
+    Weblate.
+    """
+    yamls = glob('content/**/*.yaml', recursive=True)
+
+    return dict(
+        title=lambda _: 'Normalize YAML',
+        file_dep=[
+            'tools/rewrite-content-yaml.py',
+            *yamls,
+        ],
+        actions=[
+            [python3, 'tools/rewrite-content-yaml.py', *yamls]
+        ]
     )
 
 
@@ -391,6 +411,46 @@ def task__offline():
         ],
     )
 
+
+def task__autopr():
+    """Run code generation tasks that should commit to PRs.
+
+    This runs some tasks, mostly around translation, that contributors should
+    run on their machines but tend to forget. That's what machines are for!
+
+    Running 'extract' and 'compile' has the benefit that it will unwrap
+    any files that were wrapped by Weblate.
+    """
+
+    return dict(
+        title=lambda _: 'Run automatic commit updates',
+        task_dep=[
+            'extract',
+            'backend',
+            'frontend',
+            'normalize_yaml',
+        ],
+        actions=[
+            # Run a script to strip things that lead to conflicts from po files
+            [python3, 'build-tools/github/normalize-pofiles.py'],
+        ])
+
+
+def task__autopr_weblate():
+    """Run code generation tasks that should commit to PRs, only for Weblate PRs.
+
+    This runs YAML snippet tests, in a way that will revert snippets to Enligsh
+    if they fail.
+
+    These are separate from normal autofixes because unit tests may take a long time
+    to run, and we don't want to hold up normal PRs.
+    """
+    os.environ['FIX_FOR_WEBLATE'] = '1'
+    return dict(
+        title=lambda _: 'Automatic tasks for Weblate only',
+        actions=[
+            [python3, '-m', 'pytest', 'tests/test_snippets/'],
+        ])
 
 ######################################################################################
 # Below this line are helpers for the task definitions

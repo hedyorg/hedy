@@ -48,78 +48,16 @@
     </form>
   </div>
   <div class="programs w-full">
-    {% if programs|length == 0 %}
-        <p class="text-xl" >{{_('no_programs')}}</p>
-    {% endif %}
-  {% for program in programs %}
-    <div id="program_{{ loop.index }}" class="program w-full border-solid border-2 {% if program.submitted %} border-gray-400 bg-gray-400 {% else %} border-orange-400 {% endif %} rounded p-4 mb-4">
-        <h3 id="submitted_header_{{ loop.index }}" class="mt-0 mb-4 text-red-500 text-center {% if not program.submitted %} hidden{% endif %}">{{_('submitted_header')}}</h3>
-        <div class="flex flex-row">
-            <table class="table-auto mb-4">
-            <thead>
-                <tr class="text-left">
-                    <th class="w-64 text-blue-600">{{_('title')}}</th>
-                    <th class="w-24 text-blue-600">{{_('level')}}</th>
-                    <th class="w-32 text-blue-600">{{_('adventure')}}</th>
-                    <th class="w-64 text-blue-600">{{_('number_lines')}}</th>
-                    <th class="text-blue-600">{{_('last_edited')}}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{program.name|truncate(30)}}</td>
-                    <td>{{_('level')}} {{ program.level }}</td>
-                    {% if program.adventure_name %}
-                        <td>{{adventure_names.get(program.adventure_name)}}</td>
-                    {% else %}
-                        <td>-</td>
-                    {% endif %}
-                    <td>{{ program.number_lines }}</td>
-                    <td>{{_('ago')|replace("{timestamp}", program.date)}}</td>
-                </tr>
-            </tbody>
-            </table>
-            {% if public_profile and not second_teachers_programs %}
-                <div class="ml-auto favourite_program_container {% if public_profile.favourite_program and public_profile.favourite_program == program.id %}text-yellow-400{% else %}text-white{% endif %} text-2xl{% if not program.public %} hidden{% endif %}" id="favourite_program_container_{{ loop.index }}">
-                    <i class="fa fa-star p-4 bg-blue-300 rounded-full cursor-pointer hover:bg-blue-600" onclick="hedyApp.set_favourite_program('{{ program.id }}', {{ loop.index }}, '{{_('favourite_confirm')}}');" aria-hidden="true"></i>
-                </div>
-            {% endif %}
-        </div>
-        <div class="w-3/4 turn-pre-into-ace mb-4">
-          <pre level="{{ program.level }}">{{program.preview_code }}</pre>
-        </div>
-        <div id="submitted_button_container_{{ loop.index }}" class="flex flex-row gap-2" {% if not program.submitted %} style="display: none;" {% endif %}>
-            <button class="green-btn" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('open')}}</button>
-            {% if not second_teachers_programs %}
-            <button class="blue-btn" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'), '{{_('copy_clipboard')}}')">{{_('copy_link_to_share')}}</button>
-            <button class="red-btn" data-cy="delete_submitted_program_{{ loop.index }}" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
-            {% endif %}
-        </div>
-        <div id="non_submitted_button_container_{{ loop.index }}" class="flex flex-row w-full gap-2 {% if program.submitted %} hidden {% endif %}">
-            <a href="/hedy/{{program.level|string}}/{{program.id}}"><button class="green-btn">{{_('open')}}</button></a>
-            {% if not second_teachers_programs %}
-            <div id="public_button_container_{{ loop.index }}" {% if not program.public %}style="display: none;"{% endif %}> <!-- ml-auto alignment doesn't work with hidden but does with display: none; -->
-                <button class="green-btn" onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}', {{ loop.index }})})">{{_('submit_program')}}</button>
-                <button class="blue-btn" data-cy="unshare_program_{{ loop.index }}" onclick="hedyApp.share_program('{{program.id}}', {{ loop.index }}, false, '{{_('unshare_confirm')}}')">{{_('unshare')}}</button>
-                <button class="blue-btn" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'), '{{_('copy_clipboard')}}')">{{_('copy_link_to_share')}}</button>
-            </div>
-            <div id="non_public_button_container_{{ loop.index }}" class="{% if program.public %} hidden {% endif %}">
-                <button class="blue-btn" onclick="hedyApp.share_program ('{{program.id}}', {{ loop.index }}, true, '{{_('share_confirm')}}')">{{_('share')}}</button>
-            </div>
-            <button class="blue-btn" onclick="hedyApp.copy_to_clipboard(`{{program.code}}`, '{{_('copy_clipboard')}}')">{{_('copy_code')}}</button>
-            <button class="red-btn ltr:ml-auto rtl:mr-auto" data-cy="delete_non_submitted_program_{{ loop.index }}" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
-            {% endif %}
-        </div>
-    </div>
+    {% for program in programs %}
+        {{ render_partial('htmx-program.html', program=program, adventure_names=adventure_names, public_profile=public_profile, loop_index=loop.index, second_teachers_programs=second_teachers_programs) }}
     {% endfor %}
 
-    {% if second_teachers_programs %}
     {% if programs|length == 0 %}
-        <div class="my-8">{{ from_user }} {{_('no_shared_programs')}}</div>
-    {% endif %}
-        <div class="flex flex-row ml-auto gap-2">
-            <button id='back_to_class' class="green-btn" _="on click window.open('/for-teachers/class/{{class_id}}', '_self')" data-cy="back_to_class">{{_('back_to_class')}}</button>
-        </div>
+        {% if second_teachers_programs %}
+            <p class="text-xl" data-cy="no-programs">{{ from_user }} {{_('no_shared_programs')}}</p>
+        {% else %}
+            <p class="text-xl" data-cy="no-programs">{{_('no_programs')}}</p>
+        {% endif %}
     {% endif %}
 
   {% if next_page_url %}

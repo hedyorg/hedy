@@ -47,7 +47,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle_draw_it',
         'restaurant',
         'fortune',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     2: [
         'default',
@@ -63,7 +65,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'turtle',
         'turtle_draw_it',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     3: [
         'default',
@@ -80,7 +84,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'haunted',
         'turtle',
         'turtle_draw_it',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     4: [
         'default',
@@ -97,7 +103,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'haunted',
         'fortune',
         'restaurant',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     5: [
         'default',
@@ -116,7 +124,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'pressit',
         'turtle',
         'turtle_draw_it',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     6: [
         'default',
@@ -131,7 +141,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'calculator',
         'fortune',
         'restaurant',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     7: [
         'default',
@@ -146,7 +158,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'pressit',
         'turtle_draw_it',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     8: [
         'default',
@@ -161,7 +175,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'turtle',
         'turtle_draw_it',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     9: [
         'default',
@@ -176,7 +192,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'pressit',
         'turtle',
         'turtle_draw_it',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     10: [
         'default',
@@ -192,7 +210,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'rock',
         'calculator',
         'restaurant',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     11: [
         'default',
@@ -203,13 +223,15 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'haunted',
         'turtle_draw_it',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     12: [
         'default',
         'maths',
-        'functions',
         'quotation_marks',
+        'functions',
         'story',
         'fortune',
         'music',
@@ -221,7 +243,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'piggybank',
         'secret',
         'turtle_draw_it',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     13: [
         'default',
@@ -235,7 +259,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'calculator',
         'tic',
-        'debugging'
+        'debugging',
+        'quiz',
     ],
     14: [
         'default',
@@ -251,7 +276,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'piggybank',
         'quizmaster',
         'tic',
-        'debugging'
+        'debugging',
+        'quiz',
     ],
     15: [
         'default',
@@ -263,15 +289,18 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'rock',
         'calculator',
         'tic',
-        'debugging'
+        'debugging',
+        'quiz',
     ],
     16: [
         'default',
         'random_command',
         'haunted',
         'songs',
+        'songs_2',
         'language',
-        'debugging'
+        'debugging',
+        'quiz',
     ],
     17: [
         'default',
@@ -279,7 +308,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'elif_command',
         'tic',
         'blackjack',
-        'debugging'
+        'debugging',
+        'quiz',
     ],
     18: [
         'default',
@@ -531,9 +561,9 @@ class Adventures(StructuredDataFile):
         sort = {}
         for program in programs_by_level:
             if program['level'] in sort:
-                sort[program['level']].append(adventure_names.get(program['adventure_name']))
+                sort[program['level']].append(adventure_names.get(program['adventure_name'], program['adventure_name']))
             else:
-                sort[program['level']] = [adventure_names.get(program['adventure_name'])]
+                sort[program['level']] = [adventure_names.get(program['adventure_name'], program['adventure_name'])]
         for level, adventures in sort.copy().items():
             sort[level] = sorted(adventures, key=lambda s: s.lower())
 
@@ -542,11 +572,12 @@ class Adventures(StructuredDataFile):
     def get_sorted_adventure_programs(self, programs, adventure_names):
         programs_by_adventure = []
         for item in programs:
-            programs_by_adventure.append(
-                {'adventure_name': adventure_names.get(item.get('adventure_name')),
-                 'level': item['level'],
-                 }
-            )
+            if item.get('adventure_name') != '':
+                programs_by_adventure.append(
+                    {'adventure_name': adventure_names.get(item.get('adventure_name'), item.get('adventure_name')),
+                     'level': item['level'],
+                     }
+                )
 
         sort = {}
         for program in programs_by_adventure:

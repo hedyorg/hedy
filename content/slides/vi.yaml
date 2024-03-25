@@ -6,42 +6,42 @@ levels:
         2:
             header: Lập trình
             text: |-
-                Programming is giving instructions to a computer, using the language of the computer.
+                Lập trình là công việc đưa ra các chỉ dẫn cho máy tính, sử dụng các ngôn ngữ [mà] máy tính hiểu được.
 
-                Such a language is called a "programming language".
+                Những ngôn ngữ như vậy được gọi là "ngôn ngữ lập trình".
         3:
             header: Ngôn ngữ lập trình
             text: |-
-                Maybe you already know some programming languages?
-                Some examples are:
+                Có thể bạn đã biết đến một số ngôn ngữ lập trình rồi nhỉ?
+                Dưới đây là một số ví dụ:
                 * Scratch
                 * Python
                 * HTML
         4:
-            header: Programming
+            header: Lập trình
             text: |-
                 If you can program, you can do many cool things:
                 * Build interactive stories
                 * Create computer drawings and draw these on paper or fabric
                 * Build your own apps to use on your phone
         5:
-            header: Programming in Hedy
+            header: Lập trình bằng ngôn ngữ Hedy
             text: In Hedy we use special codes, like `{print}`.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} Chào mừng đến với Hedy!'
         6:
-            header: Programming in Hedy
+            header: Lập trình bằng ngôn ngữ Hedy
             text: Code words will be shown in pink.
             code: '{print} Welcome to Hedy!'
         7:
-            header: Programming in Hedy
+            header: Lập trình bằng ngôn ngữ Hedy
             text: We start the code with the Run code button underneath the code.
             code: '{print} Welcome to Hedy!'
         8:
-            header: Programming in Hedy
+            header: Lập trình bằng ngôn ngữ Hedy
             text: Output appears on the left-hand side.
             code: '{print} Welcome to Hedy!'
         9:
-            header: Programming in Hedy
+            header: Lập trình bằng ngôn ngữ Hedy
             text: The output can also be a drawing.
             code: |-
                 {forward} 100
@@ -114,14 +114,14 @@ levels:
                 {forward} 50
                 {turn} left
         12:
-            header: Debugging
-            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            header: Gỡ lỗi
+            text: Gỡ lỗi (hay sửa lỗi) trong lập trình là việc loại bỏ các lỗi sai trong mã nguồn. Hãy cùng gỡ lỗi nào! Nhấn vào nút hình bọ rùa (🐞) để khởi động trình gỡ lỗi.
             code: |-
                 I am DJ Hedy
                 {print} What song would you like to hear?
                 {ask} I like that song too!
                 {print} Next up... {echo}
-            debug: true
+            debug: 'True'
         13:
             header: Let the programming fun begin!
             text: Enjoy the adventures in level 1!
@@ -179,8 +179,8 @@ levels:
                 {sleep} pause
                 {print} green!
         7:
-            header: Debugging
-            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            header: Gỡ lỗi
+            text: Gỡ lỗi (hay sửa lỗi) trong lập trình là việc loại bỏ các lỗi sai trong mã nguồn. Hãy cùng gỡ lỗi nào! Nhấn vào nút hình bọ rùa (🐞) để khởi động trình gỡ lỗi.
             code: |-
                 {print} Welcome to the donut shop!
                 filling {is} What kind of filling would you like?
@@ -190,7 +190,7 @@ levels:
                 {print} I'll go get your donut. {sleep}
                 {print} Here you go! A filling donut with toping!
                 {ask} Have a nice day!
-            debug: true
+            debug: 'True'
         8:
             header: Let the programming fun begin!
             text: Enjoy the adventures in level 2!
@@ -244,7 +244,7 @@ levels:
                 {print} I choose animals {at} {random}
         7:
             header: Debugging
-            text: Let's debug this code!
+            text: Cùng gỡ lỗi nào!
             editor: |-
                 music_genres {is} rock, pop, metal, indie, jazz
                 chosen_genre is music {at} {random}
@@ -255,7 +255,7 @@ levels:
                 {print} or do you prefer... second_choice {at} {random}
                 {remove} second_choice {to} music_genres
                 {print} I like music_genre {random} best!
-            debug: true
+            debug: 'True'
         8:
             header: Let's get to work!
             text: Enjoy the adventures in level 3!
@@ -270,7 +270,7 @@ levels:
             code: |-
                 name {is} Sophie
                 {print} My name is name
-            debug: true
+            debug: 'True'
         3:
             header: Fixing it with quotation marks
             text: |-
@@ -308,7 +308,7 @@ levels:
 
                 Please try to print a contraction like "you're" or "I'm" in the screen below and see what happens....
             code: '{print} ''This won''t work!'''
-            debug: true
+            debug: 'True'
         9:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
@@ -321,8 +321,8 @@ levels:
                 {clear}
                 {print} 'SURPRISE!'
         10:
-            header: Debugging
-            text: Let's debug this code!
+            header: Gỡ lỗi
+            text: Cùng gỡ lỗi nào!
             code: |-
                 {clear}
                 {print} What a nice day to go to the beach!
@@ -333,7 +333,7 @@ levels:
                 colors {is} 'orange, silver, white, brown'
                 {print} 'I love the colors {at} {random} one!'
                 choice {is} {ask} Which one do you like?
-            debug: true
+            debug: 'True'
         11:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
@@ -356,7 +356,7 @@ levels:
                 When using the `{if}` command, don't forget to use the `{print}` command.
                 This code will not work!
             code: '{if} name {is} Hedy ''nice'''
-            debug: true
+            debug: 'True'
         4:
             header: else
             text: |-
@@ -387,8 +387,8 @@ levels:
                 {if} favorite_color {in} pretty_colors {print} 'pretty!'
                 {else} {print} 'meh'
         7:
-            header: Debugging
-            text: Let's debug this code!
+            header: Gỡ lỗi
+            text: Cùng gỡ lỗi nào!
             code: |-
                 {print} Welcome to HedyAir Security!
                 boarding_pass {is} {ask} 'Do you have your boarding pass?'
@@ -402,7 +402,7 @@ levels:
                 item_to_declare {is} {ask} 'What would you like to declare'
                 {else} Alright
                 {print} Thank you. Please head to gate A22.'
-            debug: true
+            debug: 'True'
         8:
             header: Let's go!
             text: Enjoy the adventures in level 5!
@@ -451,8 +451,8 @@ levels:
                 correct_answer = number_1 * number_2
                 {print} number_1 ' times ' number_2 ' is ' correct_answer
         9:
-            header: Debugging
-            text: Let's debug this code!
+            header: Gỡ lỗi
+            text: Cùng gỡ lỗi nào!
             code: |-
                 {print} 'This is the water park ticket machine'
                 {print} 'Price list: Children under 12 $3, Adults $5'
@@ -467,7 +467,7 @@ levels:
                 {if} day {is} monday
                 total_price = total_price * 0.25
                 {print} 'That will be total_price please'
-            debug: true
+            debug: 'True'
         10:
             header: Let's get to work!
             text: Enjoy the adventures in level 6!
@@ -490,7 +490,7 @@ levels:
             header: Don't forget the print command
             text: When using the repeat command, do not forget the `{print}` command.
             code: '{repeat} 5 {times} ''Help!'''
-            debug: true
+            debug: 'True'
         4:
             header: Repeat an ask command
             text: You can also repeat an `{ask}`, `{if}` or `{else}` command multiple times.
@@ -512,7 +512,7 @@ levels:
                 {if} yes
                 {print} 'Hurray!
                 {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
-            debug: true
+            debug: 'True'
         6:
             header: Ready Set Go!
             text: Enjoy the adventures in level 7!
@@ -527,7 +527,7 @@ levels:
 
                 You could only repeat one line of code.
             code: '{repeat} 5 {times} {print} ''Help!'''
-            debug: true
+            debug: 'True'
         3:
             header: '{repeat} commands now'
             text: |-
@@ -556,7 +556,7 @@ levels:
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
-            debug: true
+            debug: 'True'
         6:
             header: if and else now
             text: |-
@@ -578,8 +578,8 @@ levels:
                 You might have thought of trying to put an if command inside a repeat command, or inside another if command.
                 For now, this is not possible yet. In the higher levels, it will be allowed, but for now let's focus on practising the `{if}` `{else}` and `{repeat}` commands with proper indentation first.
         9:
-            header: Debugging
-            text: Let's debug this code!
+            header: Gỡ lỗi
+            text: Cùng gỡ lỗi nào!
             code: |-
                 {print} 'HedyWheels bus tickets machine'
                 zone_1 = Town Hall, Library, Campus, Market Place
@@ -599,7 +599,7 @@ levels:
                         {print} You chose a round trip ticket'
                 price * 2
                 {print} 'That will be ' price ' euros please'
-            debug: true
+            debug: 'True'
         10:
             header: Let's check out the adventures!
             text: Enjoy the adventures in level 8!
@@ -675,8 +675,8 @@ levels:
                     {else}
                         {print} 'pizza is better'
         8:
-            header: Debugging
-            text: Let's debug this code!
+            header: Gỡ lỗi
+            text: Cùng gỡ lỗi nào!
             code: |-
                 {print} 'Welcome to HedyJumps, your parachute jump adventure!'
                 people = {ask} 'How many people are you jumping with today?
@@ -691,7 +691,7 @@ levels:
                 {else}
                 {print} 'Fun!'
                 {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
-            debug: true
+            debug: 'True'
         9:
             header: Let's go!
             text: Enjoy the adventures in level 9!
@@ -715,8 +715,8 @@ levels:
                 {for} day {in} days
                     {print} names {at} {random} ' does the dishes on ' day
         4:
-            header: Debugging
-            text: Let's debug this code
+            header: Gỡ lỗi
+            text: Cùng gỡ lỗi nào!
             code: |-
                 {print} 'Ladies and gentlemen!'
                 {print} 'For one night and one night only in circus Hedy!'
@@ -728,7 +728,7 @@ levels:
                 {add} chosen_person {from} people
                 {print} 'Come and watch our show tonight!'
                 {print} 'Tickets are only available at the counter
-            debug: true
+            debug: 'True'
         5:
             header: Time to program!
             text: Enjoy the adventures in level 10!
@@ -758,14 +758,14 @@ levels:
                 {for} i {in} {range} 1 {to} 10
                     {print} i * number
         4:
-            header: Debugging
-            text: Let's debug this code!
+            header: Gỡ lỗi
+            text: Cùng gỡ lỗi nào!
             code: |-
                 factor {is} {ask} 'Which table of multiplication do you need?'
                 {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
                     {print} This is the table of multiplications for factor
                     {print} number ' x ' factor ' = ' i * factor
-            debug: true
+            debug: 'True'
         5:
             header: Let's start programming!
             text: Enjoy the adventures in level 11!
@@ -784,7 +784,7 @@ levels:
                 name = 'Hedy the Robot'
                 {print} 'Hello ' name
         3:
-            header: Decimal numbers
+            header: Số thập phân
             text: |-
                 From this level on you are also allowed to use decimal numbers. This can make programs like your restaurant even better!
 
@@ -830,7 +830,7 @@ levels:
                 {call} new member
                     {else}
                         password = {ask} 'Please enter password'
-            debug: true
+            debug: 'True'
         8:
             header: Ready to try it out?
             text: Enjoy the adventures in level 12!
@@ -864,7 +864,7 @@ levels:
             header: Functions with arguments
             text: Now that you've learned how to use functions, you'll learn how to use a function with an **argument**. An argument is a variable that is used within a function. It is not used outside the function.
         5:
-            header: Example
+            header: Ví dụ
             text: |-
                 In this example you see how the argument 'place' is used in the function.
                 Run the code and change 'ocean' and 'sea' to something else, and see what happens.
@@ -918,8 +918,8 @@ levels:
                 {call} song {with} 'sea'
                 {call} song {with} 'ocean'
         8:
-            header: Debugging
-            text: Let's debug this code!
+            header: Gỡ lỗi
+            text: Cùng gỡ lỗi nào!
             code: |-
                 {define} happiness {with} name
                     {print} '🥳'
@@ -940,7 +940,7 @@ levels:
                     {call} happiness {with} person
                 {else} mood = sad
                     {define} sadness {to} name
-            debug: true
+            debug: 'True'
         9:
             header: Let's go!
             text: Enjoy the adventures in level 13!
@@ -985,11 +985,10 @@ levels:
                 {if} answer != 'yes'
                     {print} 'That is a shame!'
         4:
-            header: Return value
-            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return
-                value**.
+            header: Giá trị trả về
+            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
         5:
-            header: Return value
+            header: Giá trị trả về
             text: For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
             code: |-
                 {define} calculate_new_price {with} amount, percentage
@@ -1003,8 +1002,8 @@ levels:
                 new_price = {call} calculate_new_price {with} old_price, discount
                 {print} 'The new price is ' new_price ' dollar'
         6:
-            header: Debugging
-            text: Let's debug this code!
+            header: Gỡ lỗi
+            text: Cùng gỡ lỗi nào!
             code: |-
                 item = 'not bought'
                 {print} 'I would like to buy this item'
@@ -1023,7 +1022,7 @@ levels:
                     {print} 'Shame.. I wont buy it'
                 {else}
                     {print} 'I will buy it! Thank you!'
-            debug: true
+            debug: 'True'
         7:
             header: Let's get to work!
             text: Enjoy the adventures in level 14!
@@ -1098,8 +1097,7 @@ levels:
     18:
         1:
             header: Welcome to level 18
-            text: Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages,
-                you will need to switch to English now.
+            text: Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.
         2:
             header: The Python way
             text: |-
