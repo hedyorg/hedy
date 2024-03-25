@@ -1,64 +1,32 @@
 <div id="adventure_overview">
   {# The header of the table #}
-  <div class="sm:grid sm:grid-cols-3 flex flex-row gap-5  mb-4 w-full">
-    <div class="dropdown relative ">
-      <button class="white-btn px-4 rounded inline-flex items-center gap-2 text-xl" id="dropdown_level_button"
-        onclick="$('#level_dropdown').slideToggle('medium');">
-        <span>{{ _('level_title') }} {{ adventure_table.level }}</span> <i id="level-arrow" class="fa-solid fa-angle-down"></i>
-      </button>
-      <div class="w-40">
-        <div class="dropdown-menu dropdown-blue !w-40 z-20 ltr:left-0 rtl:right-0" id="level_dropdown"
-          style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;" _="on mutation of @style
-                      set arrow to #level-arrow
-                      if *display == 'none'
-                          remove .rotate-180 from arrow
-                      else if not arrow.classList.contains('rotate-180')
-                          add .rotate-180 to arrow
-                      end">
-          {% for dropdown_level in range(1, 19) %}
-          <button id="level_button_{{dropdown_level}}" class="flex-row flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500
-                          {% if dropdown_level == adventure_table.level %}bg-white{% else %}hover:bg-blue-100 bg-blue-200{% endif %}" {%
-            if dropdown_level== adventure_table.level %}disabled{% endif %} style="width: 100%;"
-            hx-get="/live_stats/class/{{class_info.id}}/level/{{dropdown_level}}" hx-target="#adventure_overview"
-            hx-swap="outerHTML">
-            <div class="flex-grow h-min min-w-80" tabindex=0>
-              {{ _('level_title') }} {{ dropdown_level }}
-            </div>
-          </button>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-    <h2 class="text-center place-self-center mb-0 mt-0">{{_('review_adventures')}}</h2>
-  </div>
   
   {# The actual table that holds the data #}
-  <div class="py-2 px-4 rounded-lg w-full overflow-x-auto">
-      <div class="overflow-hidden rounded-lg shadow-lg">
-        <table class="w-full border border-gray-400">
+  <div class="w-full overflow-x-auto border rounded-lg">
+        <table>
         <thead>
           <tr class="bg-blue-300 text-blue-900">
-            <th class="px-4 py-2 text-center">{{_('students')}}</th>
+            <th class="px-2 py-2 text-center">{{_('students')}}</th>
             {% for adventure in adventure_table['adventures'][level] %}
-            <th class="px-4 py-2 text-center">{{ adventure }}</th>
+            <th class="px-2 py-2 text-center">{{ adventure }}</th>
             {% endfor %}
-            <th class="px-4 p-2 bg-blue-900 text-white">{{_('actions')}}</th>
+            <th class="px-2 p-2 bg-blue-900 text-white">{{_('actions')}}</th>
           </tr>
         </thead>
         <tbody>
           {% for student in adventure_table['students'] %}
             <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
-              <td id="teacher_cell" class="text-center p-2">{{student}}</td>
+              <td id="teacher_cell" class="text-center font-medium text-blue-900">{{student}}</td>
               {% for adventure in adventure_table['adventures'][level] %}
-              <td id="teacher_cell" class="text-center p-2">✅</td>
+              <td id="teacher_cell" class="text-center"><span class="fas fa-check-square text-green-500"></span></td>
               {% endfor %}
-              <td class="text-center p-2">
-                <div class="flex justify-center text-blue-900">
-                  <button class="flex flex-col items-center mr-8" onclick='hedyApp.change_password_student("{{student}}", {{_('enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})'>
+              <td class="text-center text-blue-900">
+                <div class="flex justify-center">
+                  <button class="flex flex-col items-center" onclick='hedyApp.change_password_student("{{student}}", {{_('enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})'>
                     <span class="fas fa-pen block mb-1"></span>
                     <span>{{_('change_password')}}</span>
                   </button>
-                  <button class="flex flex-col items-center mr-8" onclick=window.open('/programs?user={{student}}') id="duplicate_class">
+                  <button class="flex flex-col items-center" onclick=window.open('/programs?user={{student}}') id="duplicate_class">
                     <span class="fas fa-code block mb-1"></span>
                     <span>{{_('programs')}}</span>
                   </button>
@@ -134,5 +102,4 @@
         {% endfor %}
       </tbody>
     </table>
-  </div>
 </div>
