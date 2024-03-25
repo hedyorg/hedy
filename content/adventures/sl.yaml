@@ -70,7 +70,7 @@ adventures:
         levels:
             13:
                 story_text: "We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but can use `{and}` and `{or}`.\n\nIf you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct."
-                example_code: "```\nime= {ask} 'kako vam je ime?'\nstarost= {ask} 'koliko ste stari?'\n{if} ime {is} 'Hedy' {and} star {is} 2\n    {print} 'Ti si pravi Hedy!'\n```\n"
+                example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
     ask_command:
         name: '{ask}'
         default_save_name: ukaz_vprašaj
@@ -665,7 +665,7 @@ adventures:
                 story_text_3: "**All text after `{if}` comparisons need quotation marks too**\n"
                 example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
                 story_text_4: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
-                example_code_4: "```\nrezultat = 25\n{print} 'Vaš rezultat je' score\n```\n"
+                example_code_4: "```\nscore = 25\n{print} 'You got ' score\n```\n"
     random_command:
         name: '{random}'
         default_save_name: random_command
@@ -725,7 +725,7 @@ adventures:
                 story_text_2: "### Exercise\nCopy your own restaurant code from to previous level to the input screen below.\nFix the code by replacing the `{ask}` and `{echo}` commands and using variables, like you've learned in this level.\n\nNow that your code is working again, it's time to add something more.\nLook at the last line of the example code: `{print} food with topping is on its way!`\nIn this single line 2 variables have been used to create a summary of the order.\nNow add your own summary of the food and drinks ordered by the customer.\n\n**Extra** Now that you've learned how to use variables, you can use as many variables in one line as you'd like. Can you add more variables to your code, like eat in or take-away, cash or card, with or without a straw etc.?\n"
             3:
                 story_text: "Imate težave pri odločanju, kaj bi imeli za večerjo? Dovolite Hedy, da izbere za vas!\nPreprosto dodajte sezname vaših najljubših (ali najmanj priljubljenih) jedi in Hedy lahko naključno izbere vašo večerjo.\nLahko se tudi malo zabavate, tako da dovolite, da Hedy izbere ceno za vašo večerjo! Kaj boste dobili?\n"
-                example_code: "```\njedi {is} špageti, brstični ohrovt, hamburgerji\n{print} Nocoj boste imeli jedi {at} {random}!\ncene {is} 1 evro, 10 evrov, 100 evrov\n{print} To bo stalo {at} {random} prosim.\n```\n"
+                example_code: "```\ndishes {is} spaghetti, brussels sprouts, hamburgers\n{print} You will have dishes {at} {random} tonight!\nprices {is} 1 euro, 10 euros, 100 euros\n{print} That will be prices {at} {random} please.\n```\n"
                 story_text_2: "### Vaja\nSedaj ustvarite svojo različico naključne restavracije.\nUstvarite seznam predjedi, glavnih jedi, desertov, pijač in cen sami.\nNato uporabite ukaze `{print}` in `{at} {random}` da poveste stranki, kaj bo nocoj na njihovem jedilniku.\n"
                 example_code_2: "```\n{print} Dobrodošli v vaši lastni naključni restavraciji!\npredjedi {is} _\nglavne jedi {is} _\nsladice {is} _\npijače {is} _\ncene {is}_\n_\n```\n"
             4:
