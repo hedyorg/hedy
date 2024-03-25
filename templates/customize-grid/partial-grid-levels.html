@@ -17,8 +17,16 @@
           {% for student in adventure_table['students'] %}
             <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
               <td id="teacher_cell" class="text-center font-medium text-blue-900">{{student}}</td>
+              {{adventure_table['student_adventures']}}
               {% for adventure in adventure_table['adventures'][level] %}
-              <td id="teacher_cell" class="text-center"><span class="fas fa-check-square text-green-500"></span></td>
+              {% set student_adventure_id = (student ~ '-' ~ adventure ~ '-' ~ level) | lower %}
+              {% set student_adventure = adventure_table.student_adventures[student_adventure_id] %}
+              {% if student_adventure_id in adventure_table['student_adventures'] %}
+              <td id="teacher_cell" class="text-center"><span class="fas fa-eye"></span></td>
+              <!-- <td id="teacher_cell" class="text-center"><span class="fas fa-check-square text-green-500"></span></td> -->
+              {% else %}
+              <td id="teacher_cell" class="text-center"><span class="fas fa-square-xmark text-red-500"></span></td>
+              {% endif %}
               {% endfor %}
               <td class="text-center text-blue-900">
                 <div class="flex justify-center">
