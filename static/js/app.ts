@@ -801,7 +801,8 @@ export function submit_program (id: string, index: number) {
 
 export function unsubmit_program (id: string) {
   tryCatchPopup(async () => {
-    await postJsonWithAchievements('/programs/unsubmit', { id });
+    const response = await postJsonWithAchievements('/programs/unsubmit', { id });
+    modal.notifySuccess(response.message);
   });
 }
 
