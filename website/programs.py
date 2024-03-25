@@ -269,7 +269,7 @@ class ProgramsModule(WebsiteModule):
             "achievements": self.achievements.get_earned_achievements(),
         }
         return jsonify(response)
-    
+
     @route("/unsubmit", methods=["POST"])
     @requires_login
     def unsubmit_program(self, user):
