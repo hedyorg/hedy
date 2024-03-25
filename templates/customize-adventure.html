@@ -166,6 +166,9 @@ onclick="window.open('/for-teachers', '_self');">
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         hedyApp.autoSave("customize_adventure")
+        if (window.ckEditor) {
+            window.ckEditor.model.document.on("change:data", e => hedyApp.autoSave("customize_adventure", customEvent=e))
+        }
     });
 </script>
 
