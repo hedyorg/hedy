@@ -108,6 +108,7 @@ ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 DATABASE = database.Database()
 ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
 SURVEYS = surveys.SurveysModule(DATABASE)
+STATISTICS = statistics.StatisticsModule(DATABASE)
 
 TAGS = collections.defaultdict(hedy_content.NoSuchAdventure)
 for lang in ALL_LANGUAGES.keys():
@@ -648,7 +649,7 @@ def parse():
     # Save this program (if the user is logged in)
     if username and body.get('save_name'):
         try:
-            program_logic = programs.ProgramsLogic(DATABASE, ACHIEVEMENTS)
+            program_logic = programs.ProgramsLogic(DATABASE, ACHIEVEMENTS, STATISTICS)
             program = program_logic.store_user_program(
                 user=current_user(),
                 level=level,
@@ -1023,19 +1024,20 @@ def programs_page(user):
         date = utils.delta_timestamp(item['date'])
         # This way we only keep the first 4 lines to show as preview to the user
         preview_code = "\n".join(item['code'].split("\n")[:4])
-        programs.append(
-            {'id': item['id'],
-             'preview_code': preview_code,
-             'code': item['code'],
-             'date': date,
-             'level': item['level'],
-             'name': item['name'],
-             'adventure_name': item.get('adventure_name'),
-             'submitted': item.get('submitted'),
-             'public': item.get('public'),
-             'number_lines': item['code'].count('\n') + 1
-             }
-        )
+        if item['is_modified'] == True:
+            programs.append(
+                {'id': item['id'],
+                 'preview_code': preview_code,
+                 'code': item['code'],
+                 'date': date,
+                 'level': item['level'],
+                 'name': item['name'],
+                 'adventure_name': item.get('adventure_name'),
+                 'submitted': item.get('submitted'),
+                 'public': item.get('public'),
+                 'number_lines': item['code'].count('\n') + 1
+                 }
+            )
 
     sorted_level_programs = hedy_content.Adventures(g.lang) \
         .get_sorted_level_programs(all_programs, adventure_names)
@@ -2713,7 +2715,7 @@ def current_user_allowed_to_see_program(program):
 
 app.register_blueprint(auth_pages.AuthModule(DATABASE))
 app.register_blueprint(profile.ProfileModule(DATABASE))
-app.register_blueprint(programs.ProgramsModule(DATABASE, ACHIEVEMENTS))
+app.register_blueprint(programs.ProgramsModule(DATABASE, ACHIEVEMENTS, STATISTICS))
 app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(classes.ClassModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(classes.MiscClassPages(DATABASE, ACHIEVEMENTS))
