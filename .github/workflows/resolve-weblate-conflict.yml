@@ -39,9 +39,7 @@ jobs:
       name: Checkout branch
       with:
         fetch-depth: 0
-        # token: ${{ steps.secret.outputs.secret }}
-        # Let's see if the GitHub Token suffices
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ steps.secret.outputs.secret }}
     - name: Configure Git identity
       run: |
         git config user.name github-actions[bot]
@@ -86,9 +84,7 @@ jobs:
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v6
       with:
-        # token: ${{ steps.secret.outputs.secret }}
-        # Let's see if the GitHub Token suffices
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ steps.secret.outputs.secret }}
         commit-message: 'Changes from Weblate repository'
         title: 'Translations from Hosted Weblate'
         body: >
