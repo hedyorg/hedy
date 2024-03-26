@@ -456,6 +456,7 @@ def task__autopr_weblate():
 # Below this line are helpers for the task definitions
 #
 
+
 def replace_ext(filename, ext):
     """Replace the extension of a filename."""
     return path.splitext(filename)[0] + ext
