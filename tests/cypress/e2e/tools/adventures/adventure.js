@@ -18,7 +18,15 @@ export function createAdventure(name="")
 export function deleteAdventure(name) {
     // Delete that adventure
     goToTeachersPage();
-    cy.get("#teacher_adventures tbody tr")
+    cy.reload();
+    cy.wait(500);
+    cy.get("#adventures_table").then($viewClass => {
+        if (!$viewClass.is(':visible')) {
+            cy.get("#view_adventures").click();
+        }
+    });
+
+    cy.get("#adventures_table tbody tr")
     .each(($tr, i) => {
         if ($tr.text().includes(name)) {
             cy.get(`tbody :nth-child(${i+1}) [data-cy="delete-adventure"]`).click();
