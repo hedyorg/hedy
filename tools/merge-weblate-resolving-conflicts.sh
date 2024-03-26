@@ -5,7 +5,7 @@ set -eu
 set -x
 
 # Checkout Weblate main repo
-git remote add -f weblate-main https://hosted.weblate.org/git/hedy/adventures/ || true
+git remote add weblate-main https://hosted.weblate.org/git/hedy/adventures/ || true
 git fetch weblate-main
 git checkout -B weblate-hedy-adventures-conflicts weblate-main/main
 
