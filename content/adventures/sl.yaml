@@ -646,7 +646,7 @@ adventures:
         levels:
             14:
                 story_text: "### Vaja\nV tej dogodivščini lahko naredite svoj kviz! Izpolnite prazna mesta, dodajte več vprašanj in uživajte v svojem kvizu!\nSestavite lahko kviz o vsem, kar želite: o svojem hobiju, najljubši živali, najljubši knjigi ali karkoli drugega!\n"
-                example_code: "```\n{print} 'Naredi svoj kviz'\ntočke_a = 0\ntočke_b  = 0\n{print} 'Vprašanje'\n{print} 'Odgovor  A'\n{print} 'Odgovor B'\nodgovor = {ask} 'Kateri odgovor?'\n{if} odgovor == 'A'\n    točke_a = točke_a + 1\n{if} odgovor == 'B'\n    točke_b = točke_b + 1\n{print} 'Konec kviza!'\n{print} 'Pa poglejmo rezultate!'\n{if} točke_a > točke_b\n    {print} 'Pripadaš v razred A'\n{if} točke_b > točke_a \n    {print} 'Pripadaš v razred B'\n```\n"
+                example_code: "```\n{print} 'Make your own quiz'\npoints_a = 0\npoints_b = 0\n{print} 'Question'\n{print} 'Answer option A'\n{print} 'Answer option B'\nanswer = {ask} 'Which answer?'\n{if} answer == 'A'\n    points_a = points_a + 1\n{if} answer == 'B'\n    points_b = points_b + 1\n{print} 'End of the quiz!'\n{print} 'Lets see the results!'\n{if} points_a > points_b\n    {print} 'You belong to the A club'\n{if} points_b > points_a\n    {print} 'You belong to the B club'\n```\n"
     quotation_marks:
         name: "'quotation marks'"
         default_save_name: quotation_marks
