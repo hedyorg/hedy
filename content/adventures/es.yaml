@@ -403,6 +403,9 @@ adventures:
                     ¡El jugador que se acerque mas a 21 sin pasarse gana!
 
                     ¡Buena suerte!
+
+                    ### Exercise
+                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -458,9 +461,9 @@ adventures:
                             puntos = puntos + 10
                         {elif} carta_3 == 'As':
                             {if} puntos > 11:
-                                puntos = puntos + 11
-                            {else}:
                                 puntos = puntos + 1
+                            {else}:
+                                puntos = puntos + 11
                         {else}:
                             puntos = puntos + carta_3
                         {print} 'Tienes un' carta_3 ' extra (' puntos ' puntos)'
@@ -2670,10 +2673,10 @@ adventures:
                     ```
             12:
                 story_text: |
-                    Use functions in you songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle little star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
+                    Use functions in your songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle Little Star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
 
                     ### Exercise
-                    Finish the song of Twinkle Twinkle little star.
+                    Finish the song of Twinkle Twinkle Little Star.
                     Then look back at all the songs you've programmed in the levels before, can you make those codes better and shorter using functions too?
                 example_code: |
                     ```
@@ -2716,12 +2719,12 @@ adventures:
                     ```
             13:
                 story_text: |
-                    You can use a function with an argument for songs that have line taht are almost the same, but slightly different each time.
-                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, buyt each time they are followed by a different couple of notes.
+                    You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
+                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, but each time they are followed by a different couple of notes.
 
                     ### Exercise
                     Can you finish the song of Yankee Doodle?
-                    Can you think of another song to programm this way?
+                    Can you think of another song to program this way?
                 example_code: |
                     ```
                     {print} 'Yankee Doodle'
@@ -4075,6 +4078,33 @@ adventures:
                     {print} 'Like a diamond in the sky'
                     {call} _
                     ```
+            16:
+                story_text: |
+                    ### Exercise
+                    Finish the nursery rhyme!
+                example_code: |
+                    ```
+                    number = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+                    object = ['on his drum', 'on his shoe', 'on his knee', 'on his door', 'on his hive', 'on his sticks', 'up in heaven', 'on his gate', 'on his vine', 'once again']
+
+                    _
+                        {print} 'This old man'
+                        {print} 'He played ' _
+                        {print} 'He played knick-knack ' _
+                        {print} 'With a knick-knack paddywhack'
+                        {print} 'Give the dog a bone'
+                        {print} 'This old man came rolling home'
+                        {sleep} 8
+                        {clear}
+                    ```
+                story_text_2: |
+                    ### Exersice 2
+                    Now create your own code for the nursery rhyme 'The wheels on the bus' on the same way!
+                example_code_2: |
+                    ```
+                    object = ['wheels', 'doors', _]
+                    movement = [ 'round and round', 'open and shut', _]
+                    ```
     tic:
         name: Tres en raya
         default_save_name: Tres en raya
@@ -4614,7 +4644,7 @@ adventures:
                 example_code: |
                     Pista:
                     ```
-                    letra_elegida {is} {ask} '¿Qué letra te gustaría ver? F, E o L?
+                    letra_elegida {is} {ask} '¿Qué letra te gustaría ver? F, E o L?'
                     {if} _
                     ```
             6:
@@ -4754,6 +4784,9 @@ adventures:
                 story_text: |
                     ### Ejercicio
                     ¡Vuelve a crear los dibujos con la tortuga!
+
+                    </div>
+                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
                 example_code: |
                     Sugerencia: Programa para diseñar pulsera
 

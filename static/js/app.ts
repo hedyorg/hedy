@@ -32,6 +32,10 @@ let last_code: string;
  * Represents whether there's an open 'ask' prompt
  */
 let askPromptOpen = false;
+/**
+ * Represents whether there's an open 'sleeping' prompt
+ */
+let sleepRunning = false;
 
 // Many bits of code all over this file need this information globally.
 // Not great but it'll do for now until we refactor this file some more.
@@ -428,23 +432,21 @@ export function getHighlighter(level: number) {
   return `ace/mode/level${level}`;
 }
 
-export function stopit() {  
+export function stopit() {
   // We bucket-fix stop the current program by setting the run limit to 1ms
   Sk.execLimit = 1;
   clearTimeouts();
   $('#stopit').hide();
   $('#runit').show();
-
-  // This gets a bit complex: if we do have some input modal waiting, fake submit it and hide it
-  // This way the Promise is no longer "waiting" and can no longer mess with our next program
-  if ($('#ask-modal').is(":visible")) {
-    $('#ask-modal').hide();
+  $('#ask-modal').hide();
+  document.onkeydown = null;
+  $('#keybinding-modal').hide();
+  $('#sleep-modal').hide();
+  
+  if (sleepRunning) {    
+    sleepRunning = false;
   }
 
-  if($('#keybinding-modal').is(":visible")) {
-    document.onkeydown = null;
-    $('#keybinding-modal').hide();
-  }
   askPromptOpen = false;
 }
 
@@ -837,7 +839,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPressed: boolean, hasSleep: boolean, hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPressed: boolean, hasSleep: number[], hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
   let skip_faulty_found_errors = false;
@@ -917,7 +919,51 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     $('#turtlecanvas').show();
   }
 
+  if (hasSleep) {
+    function executeWithDelay(index: number) {
+      return new Promise((resolve, reject) => {
+        if (index >= hasSleep.length) {
+          resolve(reject);
+          return;
+        }
+
+        const sleepTime = hasSleep[index];
+        if (sleepTime) {
+          $('#sleep-modal').show();
+          sleepRunning = true;
+          setTimeout(() => {
+            $('#sleep-modal').hide();
+            sleepRunning = false;
+            setTimeout(() => {
+              resolve(reject);
+            }, 100);
+          }, (sleepTime * 1000) - 100);
+        } else {
+          setTimeout(() => {
+            resolve(reject);
+          }, 100);
+        }
+      });
+    }
+
+    async function executeAllDelays() {
+      for (let i = 0; i < hasSleep.length; i++) {
+        await executeWithDelay(i);
+      }
+    }
+    executeAllDelays()
+  }
+
   code = code_prefix + code;
+
+  (Sk as any).builtins.play = new Sk.builtin.func((notes:any) => {
+    //const now = Tone.now()
+    const note_name = notes.v;
+
+    //play note_name for the duration of an 16th note
+    synth.triggerAttackRelease(note_name, "16n");
+
+  });
 
   if (run_type === "run") {
     Sk.configure({
@@ -955,15 +1001,6 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         // Set a time-out of either 20 seconds when having a sleep and 5 seconds when not
         return ((hasSleep) ? 20000 : 5000);
       }) ()
-    });
-
-    (Sk as any).builtins.play = new Sk.builtin.func((notes:any) => {
-        //const now = Tone.now()
-        const note_name = notes.v;
-
-        //play note_name for the duration of an 16th note
-        synth.triggerAttackRelease(note_name, "16n");
-
     });
 
     const currentProgram: number = Number(sessionStorage.getItem('currentProgram') || 0) + 1;

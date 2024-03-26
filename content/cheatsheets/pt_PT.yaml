@@ -100,12 +100,12 @@
 -   name: '{in}'
     explanation: Check elements with `{in}`
     demo_code: |-
-        pretty_colors {is} green, yellow
-        color {is} {ask} 'What {is} your favorite color?'
-        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
+        cores_bonitas {is} verde, amarelo
+        cor {is} {ask} 'Qual é a tua cor favorita?'
+        {if} cor {in} cores_bonitas {print} 'bonita!' {else} {print} 'meh'
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
+    explanation: Verifica se uma determinada tecla do teclado é `{pressed}`.
+    demo_code: '{if} a {is} {pressed} {print} ''Carregou no A!'' {else} {print} ''Carregou noutra tecla!'''
 6:
 -   name: '{print}'
     explanation: Escreve com exactidão usando aspas simples.
@@ -115,7 +115,7 @@
     demo_code: |-
         resultado = ask 'Quanto é 10 mais 10?'
         if resultado is 20 print 'Sim!' else print 'Oops'
--   name: '`ask` and `if` turtle'
+-   name: '`{ask}` e `{if}` com turtle'
     explanation: Ask the user how many angles they want
     demo_code: |-
         angles = ask 'How many angles?'
@@ -159,12 +159,12 @@
             {turn} 90
             {forward} 50
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    explanation: Verifica se uma determinada tecla do teclado é `{pressed}`.
     demo_code: |-
         {if} a {is} {pressed}
-            {print} 'You pressed A!'
+            {print} 'Carregou em A!'
         {else}
-            {print} 'You pressed another key!'
+            {print} 'Carregou noutra tecla!'
 9:
 -   name: '`if` with multiple lines'
     explanation: The answer of a sum of questions with 'ask' and see if it is correct. Now we print out two lines.
@@ -220,7 +220,7 @@
     demo_code: |-
         name = 'Hedy the Robot'
         {print} 'Hello ' name
--   name: quotes after {if} comparison
+-   name: aspas após a comparação `{if}`
     explanation: Text with quotation marks after {if}
     demo_code: |-
         name = {ask} 'Who are you?'
@@ -316,7 +316,7 @@
         primeirafruta = fruta[1]
         print primeirafruta
 -   name: Obtém um elemento aleatório da lista.
-    explanation: 'Para obter um elemento aleatório da lista usamos [random], pelo que, fruta[random] significa: obtém uma fruta ao calhas da lista!'
+    explanation: 'Para obter um item aleatório de uma lista, usamos {random} portanto fruta[{random}] significa, obter um fruto aleatório da lista!'
     demo_code: |-
         fruta = ['banana', 'maçã', 'cereja']
         qualquer_fruta = fruta[random]

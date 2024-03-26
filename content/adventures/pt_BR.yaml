@@ -376,6 +376,9 @@ adventures:
                     The player who gets closest to 21, without going over it, wins!
 
                     Have fun!
+
+                    ### Exercise
+                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
                 example_code: |
                     ```
                     {print} 'VINTE-E-UM'
@@ -431,9 +434,9 @@ adventures:
                             pontos = pontos + 10
                         {elif} carta_3 == 'Ás':
                             {if} pontos > 11:
-                                pontos = pontos + 11
-                            {else}:
                                 pontos = pontos + 1
+                            {else}:
+                                pontos = pontos + 11
                         {else}:
                             pontos = pontos + carta_3
                         {print} 'Você pegou uma carta extra: ' carta_3 ' (' pontos ' pontos)'
@@ -588,7 +591,7 @@ adventures:
                     ### Exercício 1
                     Vamos deixar o programa de prática um pouco mais difícil. O(a) jogador(a) agora terá de responder duas respostas corretamente. Preencha as lacunas para completar o programa.
 
-                    ### Exercício 2 Extra
+                    ### Exercício 2
                     Às vezes, cálculos podem ter mais de uma resposta correta. Por exemplo, 10 pode ser dividido tanto por 5 quanto por 2. Então a pergunta 'Que número divide o 10?' pode ser respondida por 2 ou por 5.
                     Faça uma pergunta de um cálculo que aceite mais de uma resposta correta, peça ao(à) jogador(a) para dar uma resposta e determine se ela está correta usando `{or}`.
                     Esvazie o campo de programação e crie a sua própria solução.
@@ -1253,7 +1256,7 @@ adventures:
             9:
                 story_text: |
                     Ótimo trabalho! Você alcançou mais um nível novo! No nível anterior, você aprendeu a usar múltiplas linhas de código nos comandos {if} e {repeat}. Mas você ainda não pôde combinar os dois...
-                    Boas notícias! Neste nível, você terá permissão de colocar um {if} dentro de outro {if}, ou dentro de um comando {repeat}.
+                    Boas notícias! Neste nível, você terá permissão de colocar um {if} dentro de outro {if}, ou dentro de um comando {repeat}. Colocar um bloco de código dentro de outro é chamado de "nesting" (aninhamento, em inglês).
                 example_code: |
                     ```
                     resposta = {ask} 'Você está pronto(a) para aprender algo novo?'
@@ -1315,7 +1318,7 @@ adventures:
                     ```
             14:
                 story_text: |
-                    Com o programa abaixo, você pode calcular sua média e ver se você passou em uma matéria da escola (nesse caso, com uma média de 6 ou mais).
+                    Com o código exemplo, você pode calcular sua média e ver se você passou em uma matéria da escola (nesse caso, com uma média de 6 ou mais).
                     Você pode ver que esse código é extremamente ineficiente, devido à linha 5 ser tão longa.
                     Todas as diferentes médias de 1 a 5 tiveram de ser programadas separadamente. Sorte a sua que, nesse nível, você irá aprender a fazer isso sem usar esse código gigante!
                 example_code: |
@@ -2023,12 +2026,12 @@ adventures:
                     Let Hedy decide randomly!
                 example_code: |
                     ```
-                    _ Escape from the haunted house!
-                    _ There are 3 doors in front of you...
-                    _ _ _ Which door do you choose?
-                    _ You picked door ... choice
-                    monsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    _ You see...
+                    _ Escape da casa mal-assombrada!
+                    _ Há 3 portas na sua frente...
+                    _ _ _ Qual delas você escolhe?
+                    _ Você escolheu a porta... escolha
+                    monstros _ um zumbi, um vampiro, NADA DE QUE VOCÊ CONSIGA ESCAPAR
+                    _ Você vê...
                     {sleep}
                     _ _ _ _
                     ```
@@ -2248,7 +2251,7 @@ adventures:
                     ```
             9:
                 story_text: |
-                    In this level you can also put an {if} command inside another {if} command.
+                    Neste nível, você também pode colocar um comando `{if}` dentro de outro comando `{if}`.
                 example_code: |
                     ```
                     continue = {ask} 'Do you want to continue?'
@@ -2268,14 +2271,14 @@ adventures:
         levels:
             5:
                 story_text: |
-                    ## Lists
-                    When we want to check if something is in a list, we can now use the `{in}` command.
-                    This code prints pretty! if you choose green or yellow, and meh otherwise.
+                    ## Listas
+                    A partir de agora, quando quisermos checar se algo está em uma lista, poderemos usar o comando `{in}`.
+                    Este código imprime 'bela!' se você escolhe verde ou amarelo, e 'meh' caso contrário.
                 example_code: |
                     ```
-                    pretty_colors {is} green, yellow
-                    favorite_color {is} {ask} 'What is your favorite color?'
-                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                    cores_belas {is} verde, amarelo
+                    cor_favorita {is} {ask} 'Qual é a sua cor favorita?'
+                    {if} cor_favorita {in} cores_belas {print} 'bela!'
                     {else} {print} 'meh'
                     ```
                 story_text_2: |
@@ -2619,10 +2622,10 @@ adventures:
                     ```
             12:
                 story_text: |
-                    Use functions in you songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle little star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
+                    Use functions in your songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle Little Star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
 
                     ### Exercise
-                    Finish the song of Twinkle Twinkle little star.
+                    Finish the song of Twinkle Twinkle Little Star.
                     Then look back at all the songs you've programmed in the levels before, can you make those codes better and shorter using functions too?
                 example_code: |
                     ```
@@ -2665,12 +2668,12 @@ adventures:
                     ```
             13:
                 story_text: |
-                    You can use a function with an argument for songs that have line taht are almost the same, but slightly different each time.
-                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, buyt each time they are followed by a different couple of notes.
+                    You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
+                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, but each time they are followed by a different couple of notes.
 
                     ### Exercise
                     Can you finish the song of Yankee Doodle?
-                    Can you think of another song to programm this way?
+                    Can you think of another song to program this way?
                 example_code: |
                     ```
                     {print} 'Yankee Doodle'
@@ -3972,6 +3975,33 @@ adventures:
                     {print} 'Like a diamond in the sky'
                     {call} _
                     ```
+            16:
+                story_text: |
+                    ### Exercise
+                    Finish the nursery rhyme!
+                example_code: |
+                    ```
+                    number = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+                    object = ['on his drum', 'on his shoe', 'on his knee', 'on his door', 'on his hive', 'on his sticks', 'up in heaven', 'on his gate', 'on his vine', 'once again']
+
+                    _
+                        {print} 'This old man'
+                        {print} 'He played ' _
+                        {print} 'He played knick-knack ' _
+                        {print} 'With a knick-knack paddywhack'
+                        {print} 'Give the dog a bone'
+                        {print} 'This old man came rolling home'
+                        {sleep} 8
+                        {clear}
+                    ```
+                story_text_2: |
+                    ### Exersice 2
+                    Now create your own code for the nursery rhyme 'The wheels on the bus' on the same way!
+                example_code_2: |
+                    ```
+                    object = ['wheels', 'doors', _]
+                    movement = [ 'round and round', 'open and shut', _]
+                    ```
     tic:
         name: Jogo da velha
         default_save_name: Tic
@@ -4542,7 +4572,7 @@ adventures:
                 example_code: |
                     Hint:
                     ```
-                    chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?
+                    chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?'
                     {if} _
                     ```
             6:
@@ -4682,12 +4712,10 @@ adventures:
                 story_text: |
                     ### Exercise
                     Recreate the drawings with the turtle!
+                    Hint: Bracelet designing program. Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
+                    </div>
+                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
                 example_code: |
-                    Hint: Bracelet designing program
-
-
-                    Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
-
                     ```
                     {define} draw_a_square
                     _

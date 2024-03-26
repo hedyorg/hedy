@@ -33,6 +33,7 @@ import hedy_content
 import hedy_translation
 import hedyweb
 import utils
+from hedy_error import get_error_text
 from safe_format import safe_format
 from config import config
 from website.flask_helpers import render_template, proper_tojson, JinjaCompatibleJsonProvider
@@ -241,8 +242,12 @@ def load_customized_adventures(level, customizations, into_adventures):
     for a in order_for_this_level:
         if a['from_teacher'] and (db_row := teacher_adventure_map.get(a['name'])):
             try:
-                db_row['content'] = safe_format(db_row['content'],
-                                                **hedy_content.KEYWORDS.get(g.keyword_lang))
+                if 'formatted_content' in db_row:
+                    db_row['formatted_content'] = safe_format(db_row['formatted_content'],
+                                                              **hedy_content.KEYWORDS.get(g.keyword_lang))
+                else:
+                    db_row['content'] = safe_format(db_row['content'],
+                                                    **hedy_content.KEYWORDS.get(g.keyword_lang))
             except Exception:
                 # We don't want teacher being able to break the student UI -> pass this adventure
                 pass
@@ -551,7 +556,7 @@ def parse():
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
             except hedy.exceptions.WarningException as ex:
-                translated_error = translate_error(ex.error_code, ex.arguments, keyword_lang)
+                translated_error = get_error_text(ex, keyword_lang)
                 if isinstance(ex, hedy.exceptions.InvalidSpaceException):
                     response['Warning'] = translated_error
                 elif isinstance(ex, hedy.exceptions.UnusedVariableException):
@@ -562,7 +567,7 @@ def parse():
                 transpile_result = ex.fixed_result
                 exception = ex
             except hedy.exceptions.UnquotedEqualityCheckException as ex:
-                response['Error'] = translate_error(ex.error_code, ex.arguments, keyword_lang)
+                response['Error'] = get_error_text(ex, keyword_lang)
                 response['Location'] = ex.error_location
                 exception = ex
 
@@ -572,11 +577,7 @@ def parse():
 
             for i, mapping in source_map_result.items():
                 if mapping['error'] is not None:
-                    source_map_result[i]['error'] = translate_error(
-                        source_map_result[i]['error'].error_code,
-                        source_map_result[i]['error'].arguments,
-                        keyword_lang
-                    )
+                    source_map_result[i]['error'] = get_error_text(source_map_result[i]['error'], keyword_lang)
 
             response['source_map'] = source_map_result
 
@@ -595,12 +596,36 @@ def parse():
         except Exception:
             pass
 
-        with querylog.log_time('detect_sleep'):
-            try:
-                # FH, Nov 2023: hmmm I don't love that this is not done in the same place as the other "has"es
-                response['has_sleep'] = 'sleep' in transpile_result.commands
-            except BaseException:
-                pass
+        if level < 7:
+            with querylog.log_time('detect_sleep'):
+                try:
+                    # FH, Nov 2023: hmmm I don't love that this is not done in the same place as the other "has"es
+                    sleep_list = []
+                    pattern = (
+                        r'time\.sleep\((?P<time>\d+)\)'
+                        r'|time\.sleep\(int\("(?P<sleep_time>\d+)"\)\)'
+                        r'|time\.sleep\(int\((?P<variable>\w+)\)\)')
+                    matches = re.finditer(
+                        pattern,
+                        response['Code'])
+                    for i, match in enumerate(matches, start=1):
+                        time = match.group('time')
+                        sleep_time = match.group('sleep_time')
+                        variable = match.group('variable')
+                        if sleep_time:
+                            sleep_list.append(int(sleep_time))
+                        elif time:
+                            sleep_list.append(int(time))
+                        elif variable:
+                            assignment_match = re.search(r'{} = (.+?)\n'.format(variable), response['Code'])
+                            if assignment_match:
+                                assignment_code = assignment_match.group(1)
+                                variable_value = eval(assignment_code)
+                                sleep_list.append(int(variable_value))
+                    if sleep_list:
+                        response['has_sleep'] = sleep_list
+                except BaseException:
+                    pass
 
         try:
             if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
@@ -841,100 +866,9 @@ def get_class_name(i):
 def hedy_error_to_response(ex):
     keyword_lang = current_keyword_language()["lang"]
     return {
-        "Error": translate_error(ex.error_code, ex.arguments, keyword_lang),
+        "Error": get_error_text(ex, keyword_lang),
         "Location": ex.error_location
     }
-
-
-def translate_error(code, arguments, keyword_lang):
-    arguments_that_require_translation = [
-        'allowed_types',
-        'invalid_type',
-        'invalid_type_2',
-        'offending_keyword',
-        'character_found',
-        'concept',
-        'tip',
-        'else',
-        'command',
-        'incomplete_command',
-        'missing_command',
-        'print',
-        'ask',
-        'echo',
-        'is',
-        'if',
-        'repeat']
-    arguments_that_require_highlighting = [
-        'command',
-        'incomplete_command',
-        'missing_command',
-        'guessed_command',
-        'invalid_argument',
-        'invalid_argument_2',
-        'offending_keyword',
-        'variable',
-        'invalid_value',
-        'print',
-        'else',
-        'ask',
-        'echo',
-        'is',
-        'if',
-        'repeat',
-        '[]']
-
-    # Todo TB -> We have to find a more delicate way to fix this: returns some gettext() errors
-    error_template = gettext('' + str(code))
-
-    # Fetch tip if it exists and merge into template, since it can also contain placeholders
-    # that need to be translated/highlighted
-
-    if 'tip' in arguments:
-        error_template = error_template.replace("{tip}", gettext('' + str(arguments['tip'])))
-        # TODO, FH Oct 2022 -> Could we do this with a format even though we don't have all fields?
-
-    # adds keywords to the dictionary so they can be translated if they occur in the error text
-
-    # FH Oct 2022: this could be optimized by only adding them when they occur in the text
-    # (either with string matching or with a list of placeholders for each error)
-    arguments["print"] = "print"
-    arguments["ask"] = "ask"
-    arguments["echo"] = "echo"
-    arguments["else"] = "else"
-    arguments["repeat"] = "repeat"
-    arguments["is"] = "is"
-    arguments["if"] = "if"
-
-    # some arguments like allowed types or characters need to be translated in the error message
-    for k, v in arguments.items():
-        if k in arguments_that_require_translation:
-            if isinstance(v, list):
-                arguments[k] = translate_list(v)
-            else:
-                arguments[k] = gettext('' + str(v))
-
-        if k in arguments_that_require_highlighting:
-            if k in arguments_that_require_translation:
-                local_keyword = hedy_translation.translate_keyword_from_en(v, keyword_lang)
-                arguments[k] = hedy.style_command(local_keyword)
-            else:
-                arguments[k] = hedy.style_command(v)
-
-    return safe_format(error_template, **arguments)
-
-
-def translate_list(args):
-    translated_args = [gettext('' + str(a)) for a in args]
-    # Deduplication is needed because diff values could be translated to the
-    # same value, e.g. int and float => a number
-    translated_args = list(dict.fromkeys(translated_args))
-
-    if len(translated_args) > 1:
-        return f"{', '.join(translated_args[0:-1])}" \
-               f" {gettext('or')} " \
-               f"{translated_args[-1]}"
-    return ''.join(translated_args)
 
 
 @app.route('/report_error', methods=['POST'])
@@ -1413,6 +1347,8 @@ def hour_of_code(level, program_id=None):
 
 
 # routing to index.html
+
+
 @app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters', methods=['GET'], defaults={'level': '1', 'program_id': None})
 @app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'program_id': None})
@@ -1465,15 +1401,6 @@ def index(level, program_id):
     # At this point we can have the following scenario:
     # - The level is allowed and available
     # - But, if there is a quiz threshold we have to check again if the user has reached it
-
-    parsons_in_level = True
-    quiz_in_level = True
-    if customizations.get("sorted_adventures") and len(customizations["sorted_adventures"]) > 2:
-        parsons_in_level = [adv for adv in customizations["sorted_adventures"][str(level)][-2:]
-                            if adv.get("name") == "parsons"]
-        quiz_in_level = [adv for adv in customizations["sorted_adventures"][str(level)][-2:]
-                         if adv.get("name") == "quiz"]
-
     if 'level_thresholds' in customizations:
         # If quiz in level and in some of the previous levels, then we check the threshold level.
         check_threshold = 'other_settings' in customizations and 'hide_quiz' not in customizations['other_settings']
@@ -1588,11 +1515,23 @@ def index(level, program_id):
     if parsons:
         parson_exercises = len(PARSONS[g.lang].get_parsons_data_for_level(level))
 
-    if not parsons_in_level or 'other_settings' in customizations and \
-            'hide_parsons' in customizations['other_settings']:
+    parsons_hidden = 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']
+    quizzes_hidden = 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']
+
+    if customizations:
+        for_teachers.ForTeachersModule.migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden)
+
+    parsons_in_level = True
+    quiz_in_level = True
+    if customizations.get("sorted_adventures") and\
+            len(customizations.get("sorted_adventures", {str(level): []})[str(level)]) > 2:
+        last_two_adv_names = [adv["name"] for adv in customizations["sorted_adventures"][str(level)][-2:]]
+        parsons_in_level = "parsons" in last_two_adv_names
+        quiz_in_level = "quiz" in last_two_adv_names
+
+    if not parsons_in_level or parsons_hidden:
         parsons = False
-    if not quiz_in_level or 'other_settings' in customizations and \
-            'hide_quiz' in customizations['other_settings']:
+    if not quiz_in_level or quizzes_hidden:
         quiz = False
 
     max_level = hedy.HEDY_MAX_LEVEL

@@ -22,7 +22,7 @@ msgid "Access Before Assign"
 msgstr "Você tentou utilizar a variável {name} na linha {access_line_number}, mas você a definiu na linha {definition_line_number}. Defina uma variável antes de utiliza-la."
 
 msgid "Cyclic Var Definition"
-msgstr "O nome {variable} precisa ser definido antes que voce possa utiliza-lo do lado direito do comando {is}."
+msgstr "O nome `{variable}` precisa ser definido antes que voce possa utiliza-lo do lado direito do comando `{is}`."
 
 msgid "Function Undefined"
 msgstr "Você tentou usar a função {name}, mas você não a definiu."
@@ -31,55 +31,52 @@ msgid "Has Blanks"
 msgstr "Seu codigo esta incompleto. Ele contém espaços em branco que precisam ser preenchidos com codigo."
 
 msgid "Incomplete"
-msgstr "Opa! Você esqueceu uma parte do código! Na linha {line_number}, você precisa colocar texto antes de {incomplete_command}."
+msgstr "Opa! Você esqueceu uma parte do código! Na linha {line_number}, você precisa colocar texto antes de `{incomplete_command}`."
 
 msgid "Incomplete Repeat"
-msgstr "Parece que você esqueceu de usar um comando com o {repeat} que você escreveu na linha {line_number}."
+msgstr "Parece que você esqueceu de usar um comando com o `{repeat}` que você escreveu na linha {line_number}."
 
 msgid "Invalid"
-msgstr "{invalid_command} não é um commando do nível {level} da Hedy. Você quis dizer {guessed_command}?"
+msgstr "`{invalid_command}` não é um commando do nível {level} da Hedy. Você quis dizer `{guessed_command}`?"
 
 msgid "Invalid Argument"
-msgstr "Você não pode usar o comando {command} com {invalid_argument} . Tente mudar {invalid_argument} para {allowed_types}."
+msgstr "Você não pode usar o comando `{command}` com `{invalid_argument}` . Tente mudar `{invalid_argument}` para {allowed_types}."
 
 msgid "Invalid Argument Type"
-msgstr "Você não pode usar {command} com {invalid_argument} porque ele é {invalid_type}. Tente mudar {invalid_argument} para {allowed_types}."
+msgstr "Você não pode usar `{command}` com `{invalid_argument}` porque ele é {invalid_type}. Tente mudar `{invalid_argument}` para {allowed_types}."
 
 msgid "Invalid At Command"
-msgstr "O comando {command} não pode mais ser usado a partir do nível 16. Você pode usar colchetes para usar um elemento de uma lista, por exemplo `amigos[i]`, `números_da_sorte[{random}]`."
+msgstr "O comando `{command}` não pode mais ser usado a partir do nível 16. Você pode usar colchetes para usar um elemento de uma lista, por exemplo `amigos[i]`, `números_da_sorte[{random}]`."
 
 msgid "Invalid Space"
 msgstr "Opa! Você começou uma linha com um espaço na linha {line_number}. Espaços confundem os computadores, você poderia removê-lo?"
 
 msgid "Invalid Type Combination"
-msgstr "Você não pode usar {invalid_argument} e {invalid_argument_2} com {command} porque um é {invalid_type} e o outro é {invalid_type_2}. Tente mudar {invalid_argument} para {invalid_type_2} ou {invalid_argument_2} para {invalid_type}."
-
-msgid "Locked Language Feature"
-msgstr "Você está usando {concept}! Isso é ótimo, mas {concept} não foi desbloqueado ainda! Ele será desbloqueado em um nível mais adiante."
+msgstr "Você não pode usar `{invalid_argument}` e `{invalid_argument_2}` com `{command}` porque um é {invalid_type} e o outro é {invalid_type_2}. Tente mudar `{invalid_argument}` para {invalid_type_2} ou `{invalid_argument_2}` para {invalid_type}."
 
 msgid "Lonely Echo"
-msgstr "Você usou um {echo} antes de um {ask}, ou um {echo} sem um {ask}. Coloque um {ask} antes do {echo}."
+msgstr "Você usou um `{echo}` antes de um `{ask}`, ou um `{echo}` sem um `{ask}`. Coloque um `{ask}` antes do `{echo}`."
 
 msgid "Lonely Text"
 msgstr "Parece que você esqueceu de usar um comando com o texto que você usou na linha {line_number}"
 
 msgid "Missing Additional Command"
-msgstr "Parece que você esqueceu de terminar de escrever {command} na linha {line_number}. Tente adicionar {missing_command} a seu código."
+msgstr "Parece que você esqueceu de terminar de escrever `{command}` na linha {line_number}. Tente adicionar `{missing_command}` a seu código."
 
 msgid "Missing Command"
 msgstr "Parece que você esqueceu de usar um comando na linha {line_number}."
 
 msgid "Missing Inner Command"
-msgstr "Parece que você esqueceu de usar um comando com a declaração {command} que você usou na linha {line_number}."
+msgstr "Parece que você esqueceu de usar um comando com a declaração `{command}` que você usou na linha {line_number}."
 
 msgid "Missing Square Brackets"
-msgstr "Parece que você esqueceu de usar colchetes [] ao redor da lista que você tentou criar na linha {line_number}."
+msgstr "Parece que você esqueceu de usar colchetes `[]` ao redor da lista que você tentou criar na linha {line_number}."
 
 msgid "Missing Variable"
-msgstr "Parece que está faltando uma variável no seu comando {command} no começo da linha."
+msgstr "Parece que está faltando uma variável no seu comando `{command}` no começo da linha."
 
 msgid "Misspelled At Command"
-msgstr "Talvez você tenha cometido um erro de digitação tentando escrever o comando {command}, ao invés de {invalid_argument} na linha {line_number}."
+msgstr "Talvez você tenha cometido um erro de digitação tentando escrever o comando `{command}`, ao invés de `{invalid_argument}` na linha {line_number}."
 
 msgid "No Indentation"
 msgstr "Você não usou espaços suficientes na linha {line_number}. Você usou {leading_spaces} espaços, que é menos do que a quantia necessária. Comece todo bloco novo com {indent_size} espaços a mais do que na linha anterior."
@@ -88,10 +85,19 @@ msgid "Non Decimal Variable"
 msgstr "Na linha {line_number}, você pode ter tentado usar um número de que Hedy não gosta muito! Tente mudá-lo para um número decimal como 2."
 
 msgid "Parse"
-msgstr "O código que você enviou não é um código Hedy válido. O erro é na linha {location[0]}, posição {location[1]}. Você escreveu {character_found}, mas isso não é permitido."
+msgstr "O código que você enviou não é um código Hedy válido. O erro é na linha {location[0]}, posição {location[1]}. Você escreveu `{character_found}`, mas isso não é permitido."
 
 msgid "Pressit Missing Else"
-msgstr "Você esqueceu de escrever o que acontece quando você aperta uma tecla diferente, adicione um {else} a seu código"
+msgstr "Você esqueceu de escrever o que acontece quando você aperta uma tecla diferente, adicione um `{else}` a seu código"
+
+msgid "Runtime Index Error"
+msgstr "Você tentou acessar a lista {name} mas ou ela está vazia, ou o índice não está presente nela."
+
+msgid "Runtime Value Error"
+msgstr "Durante a execução do seu programa, o comando `{command}` recebeu o valor {value}, o que não é permitido. {tip}."
+
+msgid "Runtime Values Error"
+msgstr "While running your program the command `{command}` received the values `{value}` and `{value}` which are not allowed. {tip}."
 
 #, fuzzy
 msgid "Save Microbit code "
@@ -100,32 +106,40 @@ msgstr "Save Microbit code"
 msgid "Too Big"
 msgstr "Uau! Seu programa tem impressionantes {lines_of_code} linhas de código! Mas só podemos processar {max_lines} linhas nesse nível. Diminua um pouco o seu programa e tente novamente."
 
+#, fuzzy
+msgid "Too Few Indents"
+msgstr "You used too few leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too few."
+
+#, fuzzy
+msgid "Too Many Indents"
+msgstr "You used too many leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too many."
+
 msgid "Unexpected Indentation"
 msgstr "Você usou espaços demais na linha {line_number}. Você usou {leading_spaces} espaços, que é mais do que a quantia necessária. Comece todo bloco novo com {indent_size} espaços a mais do que na linha anterior."
 
 msgid "Unquoted Assignment"
-msgstr "A partir desse nível, você precisa colocar os textos à direita do {is} e entre aspas. Você esqueceu disso no texto {text}."
+msgstr "A partir desse nível, você precisa colocar os textos à direita do `{is}` e entre aspas. Você esqueceu disso no texto {text}."
 
 msgid "Unquoted Equality Check"
 msgstr "Se você quer checar se uma variável é igual a múltiplas palavras, elas devem estar cercadas por aspas!"
 
 msgid "Unquoted Text"
-msgstr "Tome cuidado. Se for usar {ask} ou {print}, o texto deve começar e terminar com aspas. Você esqueceu uma no texto {unquotedtext}."
+msgstr "Tome cuidado. Se for usar `{ask}` ou `{print}`, o texto deve começar e terminar com aspas. Você esqueceu uma no texto {unquotedtext}."
 
 msgid "Unsupported Float"
-msgstr "Números não inteiros ainda não são suportados, mas serão daqui a alguns níveis. Por enquanto, troque {value} por um inteiro."
+msgstr "Números não inteiros ainda não são suportados, mas serão daqui a alguns níveis. Por enquanto, troque `{value}` por um inteiro."
 
 msgid "Unsupported String Value"
-msgstr "Valores de texto não podem conter {invalid_value}."
+msgstr "Valores de texto não podem conter `{invalid_value}`."
 
 msgid "Unused Variable"
 msgstr "Você definiu a variável {variable_name} na linha {line_number}, mas não a usou."
 
 msgid "Var Undefined"
-msgstr "Você tentou usar a variável {name}, mas não a definiu primeiro. Ou, talvez, você tenha tentado usar a palavra {name} mas tenha esquecido de usar aspas."
+msgstr "Você tentou usar a variável `{name}`, mas não a definiu primeiro. Ou, talvez, você tenha tentado usar a palavra `{name}` mas tenha esquecido de usar aspas."
 
 msgid "Wrong Level"
-msgstr "Este era um código Hedy correto, mas não para o nível correto. Você escreveu {offending_keyword} para o nível {working_level}. Dica: {tip}"
+msgstr "Este era um código Hedy correto, mas não para o nível correto. Você escreveu `{offending_keyword}` para o nível {working_level}. Dica: {tip}"
 
 msgid "Wrong Number of Arguments"
 msgstr "Sua função usou a quantidade errada de parâmetros. Você forneceu {used_number} mas a função {name} requer {defined_number}"
@@ -263,7 +277,11 @@ msgid "are_you_sure"
 msgstr "Tem certeza? Você não poderá reverter esta ação."
 
 msgid "ask_needs_var"
-msgstr "A partir do nível 2, {ask} precisa ser usado com uma variável. Exemplo: nome {is} {ask} Qual é o seu nome?"
+msgstr "A partir do nível 2, `{ask}` precisa ser usado com uma variável. Exemplo: nome `{is}` `{ask}` Qual é o seu nome?"
+
+#, fuzzy
+msgid "available_in"
+msgstr "Available in:"
 
 msgid "become_a_sponsor"
 msgstr "Tornar-se um patrocinador"
@@ -283,15 +301,6 @@ msgstr "Cancelar"
 
 msgid "cant_parse_exception"
 msgstr "Não foi possível analisar o programa"
-
-msgid "catch_index_exception"
-msgstr "Você tentou acessar a lista {list_name} mas ou ela está vazia, ou o índice não está presente nela."
-
-msgid "catch_multiple_values_exception"
-msgstr "While running your program the command {command} received the values {value} and {value} which are not allowed. {suggestion}."
-
-msgid "catch_value_exception"
-msgstr "Durante a execução do seu programa, o comando {command} recebeu o valor {value}, o que não é permitido. {suggestion}."
 
 msgid "certificate"
 msgstr "Certificado de Conclusão"
@@ -815,7 +824,7 @@ msgid "indentation_exception"
 msgstr "Indentação incorreta"
 
 msgid "input"
-msgstr "entrada de {ask}"
+msgstr "entrada de `{ask}`"
 
 msgid "integer"
 msgstr "um número"
@@ -1048,6 +1057,10 @@ msgstr "Mandatory developer's mode"
 msgid "more_options"
 msgstr "Mais opções"
 
+#, fuzzy
+msgid "multiple_levels_warning"
+msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
+
 msgid "my_account"
 msgstr "Minha conta"
 
@@ -1080,9 +1093,6 @@ msgstr "Saiba mais"
 
 msgid "nav_start"
 msgstr "Início"
-
-msgid "nested blocks"
-msgstr "um bloco em um bloco"
 
 msgid "new_password"
 msgstr "Nova senha"
@@ -1118,7 +1128,7 @@ msgid "no_certificate"
 msgstr "Esse usuário ainda não conseguiu o Certificado Hedy de Conclusão"
 
 msgid "no_more_flat_if"
-msgstr "A partir do nível 8, o código depois do {if} precisa ser colocado na linha seguinte e começar com 4 espaços."
+msgstr "A partir do nível 8, o código depois do `{if}` precisa ser colocado na linha seguinte e começar com 4 espaços."
 
 msgid "no_programs"
 msgstr "Não há programas."
@@ -1431,7 +1441,7 @@ msgid "repair_program_logo_alt"
 msgstr "Ícone de reparar programa"
 
 msgid "repeat_dep"
-msgstr "A partir do nível 8, {repeat} precisa ser usado com indentação. Você pode ver exemplos na aba {repeat} do nível 8."
+msgstr "A partir do nível 8, `{repeat}` precisa ser usado com indentação. Você pode ver exemplos na aba `{repeat}` do nível 8."
 
 msgid "repeat_match_password"
 msgstr "A senha repetida não corresponde."
@@ -1594,6 +1604,10 @@ msgstr "aspas simples"
 
 msgid "slash"
 msgstr "uma barra"
+
+#, fuzzy
+msgid "sleeping"
+msgstr "Sleeping..."
 
 msgid "slides"
 msgstr "Slides"
@@ -1795,8 +1809,8 @@ msgstr ""
 "\n"
 "Mas posso, também, mostrar um pedaço de código, desse jeito:\n"
 "<pre>\n"
-"{ask} Qual é o seu nome?\n"
-"{echo} então o seu nome é \n"
+"ask Qual é o seu nome?\n"
+"echo então o seu nome é \n"
 "</pre>"
 
 #, fuzzy
@@ -1938,6 +1952,10 @@ msgstr "Uso de lacunas (_) nos programas"
 
 msgid "use_of_nested_functions_exception"
 msgstr "Uso de funções dentro de funções"
+
+#, fuzzy
+msgid "used_in"
+msgstr "Used in:"
 
 msgid "user"
 msgstr "usuário"
@@ -2187,4 +2205,12 @@ msgstr "Seu programa"
 
 #~ msgid "pygame_waiting_for_input"
 #~ msgstr "Esperando um botão ser apertado..."
+#~ msgid "classes"
+#~ msgstr ""
+
+#~ msgid "Locked Language Feature"
+#~ msgstr "Você está usando {concept}! Isso é ótimo, mas {concept} não foi desbloqueado ainda! Ele será desbloqueado em um nível mais adiante."
+
+#~ msgid "nested blocks"
+#~ msgstr "um bloco em um bloco"
 
