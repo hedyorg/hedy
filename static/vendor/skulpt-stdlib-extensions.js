@@ -5,6 +5,24 @@ var $builtinmodule = function (name) {
         $('#output').text('');
     });
 
+    function animateKeys(event) {
+      const keyColors = ['#cbd5e0', '#bee3f8', '#4299e1', '#ff617b', '#ae81ea', '#68d391'];
+      const output = $("#output");
+  
+      if (output !== null) {
+        let keyElement = $("<div></div>");
+        output.append(keyElement);
+  
+        keyElement.text(event.key);
+        keyElement.css('color', keyColors[Math.floor(Math.random() * keyColors.length)]);
+        keyElement.addClass('animate-keys')
+  
+        setTimeout(function () {
+          keyElement.remove()
+        }, 1500);
+      }
+    } 
+
     function keyBoardInputPromise(if_pressed_mapping) {
       $('#keybinding-modal').show();
       return new Promise((resolve, reject) => {
@@ -34,9 +52,10 @@ var $builtinmodule = function (name) {
     }
 
     mod.if_pressed = new Sk.builtin.func(function (if_pressed_mapping) {
+        document.onkeydown = animateKeys;
         return new Sk.misceval.promiseToSuspension(keyBoardInputPromise(
             if_pressed_mapping
-        ).then(() => Sk.builtin.none.none$));
+        ).then(() => {document.onkeydown = null; return Sk.builtin.none.none$}));
     });
 
     return mod;

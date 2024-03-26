@@ -29,11 +29,6 @@ const editorCreator: HedyCodeMirrorEditorCreator = new HedyCodeMirrorEditorCreat
 let last_code: string;
 
 /**
- * Represents whether there's an active keybinding
- */
-let hasKeybinding = false;
-
-/**
  * Represents whether there's an open 'ask' prompt
  */
 let askPromptOpen = false;
@@ -433,29 +428,23 @@ export function getHighlighter(level: number) {
   return `ace/mode/level${level}`;
 }
 
-export function stopit() {
-  if (hasKeybinding) {
-      hasKeybinding = false;
-      document.onkeydown = null;
-      $('#keybinding-modal').hide();
-      $('#stopit').hide();
-      $('#runit').show();
-  }
-  else
-  {
-      // We bucket-fix stop the current program by setting the run limit to 1ms
-      Sk.execLimit = 1;
-      clearTimeouts();
-      $('#stopit').hide();
-      $('#runit').show();
+export function stopit() {  
+  // We bucket-fix stop the current program by setting the run limit to 1ms
+  Sk.execLimit = 1;
+  clearTimeouts();
+  $('#stopit').hide();
+  $('#runit').show();
 
-      // This gets a bit complex: if we do have some input modal waiting, fake submit it and hide it
-      // This way the Promise is no longer "waiting" and can no longer mess with our next program
-      if ($('#ask-modal').is(":visible")) {
-        $('#ask-modal').hide();
-      }
+  // This gets a bit complex: if we do have some input modal waiting, fake submit it and hide it
+  // This way the Promise is no longer "waiting" and can no longer mess with our next program
+  if ($('#ask-modal').is(":visible")) {
+    $('#ask-modal').hide();
   }
 
+  if($('#keybinding-modal').is(":visible")) {
+    document.onkeydown = null;
+    $('#keybinding-modal').hide();
+  }
   askPromptOpen = false;
 }
 
@@ -1159,11 +1148,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     if (storage.getItem("prompt-" + prompt) == null) {
     Sk.execStart = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
     $('#turtlecanvas').hide();
-
-    if (hasKeybinding) {
-      document.onkeydown = null;
-      $('#keybinding-modal').hide();
-    }
+    document.onkeydown = null;
+    $('#keybinding-modal').hide();
 
     return new Promise(function(ok) {
       askPromptOpen = true;
@@ -1184,10 +1170,6 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 
         if (hasTurtle) {
           $('#turtlecanvas').show();
-        }
-
-        if (hasKeybinding) {
-          document.onkeydown = animateKeys;
         }
 
         // We reset the timer to the present moment.
@@ -1234,24 +1216,6 @@ function resetTurtleTarget() {
     }
 
     return null;
-}
-
-function animateKeys(event: KeyboardEvent) {
-    const keyColors = ['#cbd5e0', '#bee3f8', '#4299e1', '#ff617b', '#ae81ea', '#68d391'];
-    const output = $("#output");
-
-    if (output !== null) {
-      let keyElement = $("<div></div>");
-      output.append(keyElement);
-
-      keyElement.text(event.key);
-      keyElement.css('color', keyColors[Math.floor(Math.random() * keyColors.length)]);
-      keyElement.addClass('animate-keys')
-
-      setTimeout(function () {
-        keyElement.remove()
-      }, 1500);
-    }
 }
 
 function speak(text: string) {
