@@ -86,7 +86,7 @@ levels:
     2:
         1:
             header: Welcome to level 2
-            text: "In this level you will learn to use variables.\n\nA variable is a word that can be used to store information.\n\nFor example: a name, age or favorite sports team."
+            text: "Na tej stopnji se boste naučili uporabljati spremenljivke.\n\nSpremenljivka je beseda, ki se lahko uporablja za shranjevanje informacij.\n\nNa primer: ime, starost ali najljubša športna ekipa."
         2:
             header: Variables
             text: To make or 'set' a variable we use the `{is}` command
@@ -96,8 +96,8 @@ levels:
             text: "We can also set a variable by asking questions.\n\nThe answer to the question is stored in the variable.\n\nThis way we don't need the `{echo}` command."
             code: "name {is} {ask} What is your name?\n{print} Hello name"
         4:
-            header: Multiple variables
-            text: Now that we use variables, we can use multiple variables instead of just one `{echo}` command.
+            header: Več spremenljivk
+            text: Zdaj, ko znamo uporabljati spremenljivke, lahko namesto enega ukaza `{echo}` uporabimo več spremenljivk.
             code: "name {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old."
         5:
             header: Sleep
@@ -169,12 +169,12 @@ levels:
             text: This also goes for the `{ask}` command.
             code: name {is} {ask} 'name please?'
         6:
-            header: Quotation marks and variables
-            text: "You do not want variable names to be printed on the screen.\nThis is why variables should be left out of the quotation marks, like this:"
+            header: Narekovaji in spremenljivke
+            text: "Imena spremenljivk ne želite izpisati na zaslonu.\nZato je treba spremenljivke pustiti zunaj narekovajev, kot na primer:"
             code: "name {is} Harry\n{print} 'Hello ' name"
         7:
-            header: Quotation marks and variables
-            text: "When variable names are used in the middle of a sentence, you have to leave the variables out of the quotation marks.\nThe rest of the sentence however, does need quotation marks. That looks like this:"
+            header: Narekovaji in spremenljivke
+            text: "Če so imena spremenljivk uporabljena sredi stavka, jih morate pustiti zunaj narekovajev.\nZa preostali del stavka pa so potrebni narekovaji. To izgleda takole:"
             code: "name {is} Harry\n{print} 'Hello ' name ', how are you?'"
         8:
             header: Quotation marks and contractions
@@ -255,8 +255,8 @@ levels:
             text: "From now on you can also use the = symbol instead of the `{is}` command.\nThis goes for both numbers and words, and it also goes after the `{if}` or `{else}` commands."
             code: "name = Hedy\nanswer = 20 + 4"
         8:
-            header: Calculations with variables
-            text: 'You can use calculations with numbers, but you can also use variables to do calculations, like this:'
+            header: Računanje s spremenljivkami
+            text: 'Izračune lahko izvajate neposredno s številkami, vendar lahko za računanje uporabljate tudi spremenljivke, kot je ta:'
             code: "number_1 = {ask} 'Fill in the first number:'\nnumber_2 = {ask} 'Fill in the second number:'\ncorrect_answer = number_1 * number_2\n{print} number_1 ' times ' number_2 ' is ' correct_answer"
         9:
             header: Debugging
@@ -398,7 +398,7 @@ levels:
             code: "{for} counter {in} {range} 1 {to} 10\n    {print} counter\n{print} 'Ready or not. Here I come!'"
         3:
             header: the variable i
-            text: "In the previous slide the variable was named 'counter', because it was counting down.\nYou can of course use any name for the variable you want.\nThe standard name  for variables in this situation that is used in programming languages like Python is 'i'.\nThat looks like this:"
+            text: "Na prejšnji strani je bila spremenljivka poimenovana 'števec', ker je odštevala.\nSeveda lahko za spremenljivko uporabite poljubno ime.\nObičajno ime za spremenljivke v takšni situaciji, ki se uporablja v programskih jezikih, kot je Python, je 'i'.\nTo izgleda takole:"
             code: "number = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * number"
         4:
             header: Debugging
@@ -414,7 +414,7 @@ levels:
             text: "From this level on you are allowed to use decimal numbers and there are some changes to the quotation marks.\nYou can also use functions from this level on!"
         2:
             header: Quotation marks
-            text: "This level makes some changes to the usage of quotation marks.\nFrom now on, **all texts** need to be in quotation marks. This includes values of variables, items on lists and text after {if} commands."
+            text: "Na tej stopnji je nekaj sprememb pri uporabi narekovajev.\nOdslej morajo biti **vsa besedila** v narekovajih. To vključuje vrednosti spremenljivk, elemente na seznamih in besedilo za ukazi {if}."
             code: "name = 'Hedy the Robot'\n{print} 'Hello ' name"
         3:
             header: Decimal numbers
@@ -463,7 +463,7 @@ levels:
             code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'"
         7:
             header: Even more questions!
-            text: "Now we have combined even more question with the function. Type this code and see what happens.\n\nNote how the variables and the arguments have the same name. This is allowed.\nDoes it confuse you? Just use different names, that is allowed as well.\n```\ndefine song with name, place\n    print 'My ' name ' is ' place\n\nname is ask 'Who?'\nplace is ask 'Where are they?'\ncall song with name, place\n```"
+            text: "Zdaj smo v funkcijo združili več vprašanj. V program vnesite to kodo in poglejte, kaj se bo zgodilo.\n\nUpoštevajte, da imajo spremenljivke in argumenti enako ime. To je dovoljeno.\nVas to moti? Uporabite različna imena, tudi to je dovoljeno.\n```\ndefiniraj pesem z ime, kraj\n    izpiši 'Moje ' ime ' je ' kraj\n\nime je vprašaj 'Kdo?'\nplace is vprašaj 'Kje so?'\npokliči pesmi z ime, kraj\n```"
             code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'"
         8:
             header: Debugging
