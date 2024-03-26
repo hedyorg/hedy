@@ -182,7 +182,7 @@
                 <div class="flex ml-auto gap-2">
                     <a href="/for-teachers/class/{{class_info.id}}/preview" class="green-btn" data-cy="preview_class_link">{{_('preview')}}</a>
                     <button class="red-btn {% if not customizations %}hidden{% endif %}"
-                        id="remove_customizations_button" data-cy="remove_customizations_button"
+                        id="remove_customizations_button" type="button" data-cy="remove_customizations_button"
                         onclick='hedyApp.restore_customization_to_default({{_('remove_customizations_prompt')|default(None)|tojson}})'>
                             {{_('remove_customization')}}
                     </button>
