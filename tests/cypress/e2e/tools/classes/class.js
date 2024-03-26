@@ -67,6 +67,7 @@ export function addStudents(classname, count) {
 }
 
 export function addCustomizations(classname){
+    cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
     goToTeachersPage();
 
     cy.get(".view_class").contains(classname).click();
@@ -75,7 +76,10 @@ export function addCustomizations(classname){
     cy.get("#opening_date_label").click();
     cy.get("#opening_date_container").should("be.visible")
     cy.get('#enable_level_7').parent('.switch').click();
-    cy.getBySel("save_customizations").click();
+
+    cy.wait(1000)
+    cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
+
     cy.get("#back_to_class").click();
 }
 

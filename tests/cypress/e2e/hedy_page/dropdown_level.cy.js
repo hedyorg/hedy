@@ -4,6 +4,7 @@ import {createClassAndAddStudents} from '../tools/classes/class.js'
 
 describe('Go to level dropdown', () => {
   it('Is not able to go to disabled level 5', () => {  
+    cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
     
     loginForTeacher();
     cy.wait(500);
@@ -20,7 +21,9 @@ describe('Go to level dropdown', () => {
     cy.get("#opening_date_label").click();
     cy.get("#opening_date_container").should("be.visible")
     cy.get('#enable_level_5').parent('.switch').click();
-    cy.getBySel('save_customizations').click();
+    
+    cy.wait(1000)
+    cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
 
     logout()
     loginForStudent(students[0]);

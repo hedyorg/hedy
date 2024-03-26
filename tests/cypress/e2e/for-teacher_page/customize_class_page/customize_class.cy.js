@@ -132,27 +132,6 @@ describe('customize class page', () => {
       });
     });
 
-    it('saves the customizations and then removes them', () => {
-      //  We save the customizations first
-      cy.getBySel("save_customizations")
-        .should('be.visible')
-        .should('not.be.disabled')
-        .click();
-
-      cy.getBySel('modal_alert_text')
-        .should('be.visible');
-
-      // Now that it has customizations we can remove them
-      cy.getBySel('remove_customizations_button')
-        .should('be.visible')
-        .should('not.be.disabled')
-        .click();
-
-      cy.getBySel('modal_yes_button')
-        .should('be.visible')
-        .click();
-    });
-
     it('FIXME: selects two adventures and swaps them using drag and drop', () => {
       /**
        * FIXME: Since We changed the library that handles the drag and drop,
@@ -213,11 +192,15 @@ describe('customize class page', () => {
     });
 
     it('Disabling current level displays a message', () => {
+      cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
+
       cy.getBySel('level-1').should('be.visible');
       cy.get('#state-disabled').should('not.be.visible');
 
       cy.get('#enable_level_1').parent('.switch').click();
       cy.get('#state-disabled').should('be.visible');
+      
+      cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
     });
 
     it('Clicking the Reset button displays a confirm dialog', () => {

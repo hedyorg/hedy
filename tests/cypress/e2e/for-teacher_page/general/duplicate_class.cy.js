@@ -36,7 +36,7 @@ describe('Duplicate class tests', () => {
     cy.get("#teacher_classes tbody .view_class")
       .each(($class, i) => {
           if ($class.text().includes("CLASS1")) {
-            cy.get(`tbody :nth-child(${i+1}) .no-underline > .fas`).first().click();
+            cy.get(`tbody :nth-child(${i+1}) .no-underline > .fas`).click();
           }
       })
 
