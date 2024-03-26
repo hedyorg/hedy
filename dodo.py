@@ -449,13 +449,12 @@ def task__autopr_weblate():
     return dict(
         title=lambda _: 'Automatic tasks for Weblate only',
         actions=[
-            [python3, '-m', 'pytest', 'tests/test_snippets/'],
+            [python3, '-m', 'pytest', '-n', '4', 'tests/test_snippets/'],
         ])
 
 ######################################################################################
 # Below this line are helpers for the task definitions
 #
-
 
 def replace_ext(filename, ext):
     """Replace the extension of a filename."""

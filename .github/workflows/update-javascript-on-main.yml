@@ -98,7 +98,9 @@ jobs:
         doit run _autopr
 
     - name: Automatically update generated files (for Weblate PRs)
-      if: ${{ github.event.pull_request.user.login == 'weblate' }}
+      if: |
+        github.event.pull_request.user.login == 'weblate' ||
+        contains(github.event.pull_request.labels.*.name, 'translations')
       run: |
         doit run _autopr_weblate
 
