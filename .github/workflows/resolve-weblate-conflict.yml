@@ -74,16 +74,26 @@ jobs:
       run: |
         tools/merge-weblate-resolving-conflicts.sh
 
+    # The create-pull-request action wants to commit the changes, and wants to
+    # have them be on the main branch. Hence, move the current working tree to
+    # main (detach HEAD, move working tree, then reattach)
+    - name: Switch back to main
+      run: |
+        git checkout --detach
+        git reset --soft main
+        git checkout main
+
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v6
       with:
         # token: ${{ steps.secret.outputs.secret }}
         # Let's see if the GitHub Token suffices
         token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: 'Changes from Weblate repository'
         title: 'Translations from Hosted Weblate'
         body: >
           This PR merges pending commits from the Weblate repository that are conflicting
-          with changes on `main`.
+          with changes on `main`, while resolving conflicts in favor of the Weblate side.
         labels: translations
         branch: automatic/weblate-conflicts
         delete-branch: true
