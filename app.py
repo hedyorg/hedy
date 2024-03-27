@@ -1648,6 +1648,7 @@ def view_program(user, id):
                                lang=g.lang,
                                level=int(result['level']),
                                code=code),
+                            is_teacher=user['is_teacher'],
                            **arguments_dict)
 
 
