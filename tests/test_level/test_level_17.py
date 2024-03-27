@@ -5,12 +5,12 @@ from parameterized import parameterized
 import exceptions
 import hedy
 from hedy_sourcemap import SourceRange
-# from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester, SkippedMapping  # , SkippedMapping
+from tests.Tester import HedyTester, SkippedMapping
 
 
 class TestsLevel17(HedyTester):
     level = 17
+    maxDiff = None
 
     def test_if_with_indent(self):
         code = textwrap.dedent("""\
@@ -444,23 +444,19 @@ class TestsLevel17(HedyTester):
       if x is pressed:
           color red""")
 
-        expected = HedyTester.dedent(f"""\
-      pygame_end = False
-      while not pygame_end:
-        pygame.display.update()
-        event = pygame.event.wait()
-        if event.type == pygame.QUIT:
-          pygame_end = True
-          pygame.quit()
-          break
-        if event.type == pygame.KEYDOWN:
-          if event.unicode == 'x':
-            {HedyTester.indent(
-              HedyTester.turtle_color_command_transpiled('red'),
-              12, True)
-            }
-            break
-          # End of PyGame Event Handler""")
+        expected = HedyTester.dedent("""\
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        def if_pressed_x_():
+            __trtl = f'red'
+            color_dict = {'black': 'black', 'blue': 'blue', 'brown': 'brown', 'gray': 'gray', 'green': 'green', 'orange': 'orange', 'pink': 'pink', 'purple': 'purple', 'red': 'red', 'white': 'white', 'yellow': 'yellow'}
+            if __trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
+              raise Exception(\"""Runtime Value Error\""")
+            else:
+              if not __trtl in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
+                __trtl = color_dict[__trtl]
+            t.pencolor(__trtl)
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(
             code=code,
@@ -486,22 +482,14 @@ class TestsLevel17(HedyTester):
         if PRINT is pressed:
             print 'The button got pressed!'""")
 
-        expected = HedyTester.dedent(f"""\
-        x = 'PRINT'
-        create_button(x)
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'PRINT':
-              print(f'''The button got pressed!''')
-              break
-            # End of PyGame Event Handler""")
+        expected = HedyTester.dedent("""\
+         x = 'PRINT'
+         create_button(x)
+         if_pressed_mapping = {"else": "if_pressed_default_else"}
+         if_pressed_mapping['PRINT'] = 'if_pressed_PRINT_'
+         def if_pressed_PRINT_():
+             print(f'''The button got pressed!''')
+         extensions.if_pressed(if_pressed_mapping)""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -514,28 +502,18 @@ class TestsLevel17(HedyTester):
         else:
             print 'Other'""")
 
-        expected = HedyTester.dedent(f"""\
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'a':
-              print(f'''A''')
-              break
-            # End of PyGame Event Handler
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'b':
-              print(f'''B''')
-              break
-            # End of PyGame Event Handler    
-            else:
-              print(f'''Other''')
-              break""")
+        expected = HedyTester.dedent("""\
+         if_pressed_mapping = {"else": "if_pressed_default_else"}
+         if_pressed_mapping['a'] = 'if_pressed_a_'
+         def if_pressed_a_():
+             print(f'''A''')
+         if_pressed_mapping['b'] = 'if_pressed_b_'
+         def if_pressed_b_():
+             print(f'''B''')
+         if_pressed_mapping['else'] = 'if_pressed_else_'
+         def if_pressed_else_():
+             print(f'''Other''')
+         extensions.if_pressed(if_pressed_mapping)""")
 
         self.single_level_tester(code=code, expected=expected)
 

@@ -114,6 +114,40 @@ class TestsLevel9(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
+    def test_if_else_no_indentation(self):
+        code = textwrap.dedent("""\
+        antwoord is ask Hoeveel is 10 keer tien?
+        if antwoord is 100
+        print 'goed zo'
+        else
+        print 'bah slecht'""")
+
+        # gives the right exception for all levels even though it misses brackets
+        # because the indent check happens before parsing
+        self.multi_level_tester(code=code,
+                                exception=hedy.exceptions.NoIndentationException)
+
+    def test_if_no_indent_after_pressed_and_else_gives_error(self):
+        code = textwrap.dedent("""\
+        if x is pressed
+        print 'no indent!'
+        else
+        print 'no indent again!'""")
+
+        # gives the right exception for all levels even though it misses brackets
+        # because the indent check happens before parsing
+        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+
+    def test_if_no_indentation(self):
+        code = textwrap.dedent("""\
+        antwoord is ask Hoeveel is 10 keer tien?
+        if antwoord is 100
+        print 'goed zo'""")
+
+        # gives the right exception for all levels even though it misses brackets
+        # because the indent check happens before parsing
+        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+
     #
     # repeat nesting
     #
@@ -130,6 +164,46 @@ class TestsLevel9(HedyTester):
                time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_repeat_no_indentation(self):
+        code = textwrap.dedent("""\
+          repeat 3 times
+          print 'hooray!'""")
+
+        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+
+    def test_repeat_repair_too_few_indents(self):
+        code = textwrap.dedent("""\
+        repeat 5 times
+             print('repair')
+          print('me')""")
+
+        fixed_code = textwrap.dedent("""\
+        repeat 5 times
+             print('repair')
+             print('me')""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.NoIndentationException,
+            extra_check_function=(lambda x: x.exception.fixed_code == fixed_code)
+        )
+
+    def test_repeat_repair_too_many_indents(self):
+        code = textwrap.dedent("""\
+        repeat 5 times
+          print('repair')
+             print('me')""")
+        fixed_code = textwrap.dedent("""\
+        repeat 5 times
+          print('repair')
+          print('me')""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.IndentationException,
+            extra_check_function=(lambda x: x.exception.fixed_code == fixed_code)
+        )
 
     #
     # if and repeat nesting
@@ -249,24 +323,16 @@ class TestsLevel9(HedyTester):
             print '1 keertje'""")
 
         expected = HedyTester.dedent("""\
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'x':
-              for __i in range(int('5')):
-                print(f'doe het 5 keer!')
-                time.sleep(0.1)
-              break
-            # End of PyGame Event Handler    
-            else:
-              print(f'1 keertje')
-              break""")
+         if_pressed_mapping = {"else": "if_pressed_default_else"}
+         if_pressed_mapping['x'] = 'if_pressed_x_'
+         def if_pressed_x_():
+             for __i in range(int('5')):
+               print(f'doe het 5 keer!')
+               time.sleep(0.1)
+         if_pressed_mapping['else'] = 'if_pressed_else_'
+         def if_pressed_else_():
+             print(f'1 keertje')
+         extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -283,28 +349,30 @@ class TestsLevel9(HedyTester):
           else
             print 'nah'""")
 
-        expected = HedyTester.dedent(f"""\
-        create_button('button1')
-        for __i in range(int('3')):
-          pygame_end = False
-          while not pygame_end:
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-              pygame_end = True
-              pygame.quit()
-              break
-            if event.type == pygame.USEREVENT:
-              if event.key == 'button1':
-                print(f'wow')
-                break
-              # End of PyGame Event Handler    
-              else:
-                print(f'nah')
-                break
-          time.sleep(0.1)""")
+        expected = HedyTester.dedent("""\
+         create_button('button1')
+         for __i in range(int('3')):
+           if_pressed_mapping = {"else": "if_pressed_default_else"}
+           if_pressed_mapping['button1'] = 'if_pressed_button1_'
+           def if_pressed_button1_():
+               print(f'wow')
+           if_pressed_mapping['else'] = 'if_pressed_else_'
+           def if_pressed_else_():
+               print(f'nah')
+           extensions.if_pressed(if_pressed_mapping)
+           time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_unexpected_indent(self):
+        code = textwrap.dedent("""\
+         print('repair')
+            print('me')""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.IndentationException
+        )
 
     def test_source_map(self):
         code = textwrap.dedent("""\

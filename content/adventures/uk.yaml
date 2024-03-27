@@ -95,8 +95,10 @@ adventures:
                 example_code: |
                     ```
                     name {is} {ask} _ Як вас звати? _
-                    {print}   _ Головного героя звуть _ name
-                    {print} name   _ тепер буде гуляти в лісі _
+                    {print} _ Головного героя звуть _ name
+                    _
+                    _
+                    {print} name _ тепер буде гуляти в лісі _
                     {print} name _ трохи налякан. _
                     animals {is} 🦔, 🐿, 🦉, 🦇
                     {print} _ Він чує звук _ animals {at} {random}
@@ -122,7 +124,7 @@ adventures:
                     ```
                     мення {is} {ask} 'Хто йде лісом?'
                     {print} мення 'гуляє лісом'
-                    {print}  'зустрічає монстра'
+                    {print} 'зустрічає монстра'
                     кінець {is} {ask} 'Ви хочете гарний чи поганий кінець?'
                     {if} кінець {is} хороший {print} мення 'бере меч і монстр швидко тікає'
                     {else} {print} "Монстр з'їдає" мення
@@ -2676,11 +2678,11 @@ adventures:
             13:
                 story_text: |
                     You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
-                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, buyt each time they are followed by a different couple of notes.
+                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, but each time they are followed by a different couple of notes.
 
                     ### Exercise
                     Can you finish the song of Yankee Doodle?
-                    Can you think of another song to programm this way?
+                    Can you think of another song to program this way?
                 example_code: |
                     ```
                     {print} 'Yankee Doodle'

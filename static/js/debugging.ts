@@ -2,7 +2,6 @@ import { HedyAceEditor } from "./ace-editor";
 import { runit, theGlobalDebugger,theGlobalSourcemap } from "./app";
 import { HedyEditor, Breakpoints } from "./editor";
 import  TRADUCTION_IMPORT  from '../../highlighting/highlighting-trad.json'
-import { convert } from "./utils";
 let theGlobalEditor: HedyEditor;
 let theLevel: number;
 let theLanguage: string;
@@ -27,16 +26,16 @@ const fullLineCommands = [
 const blockCommands = [
   'ifs',
   'ifelse',
-  'ifpressed_else',
+  'if_pressed_else',
   'repeat',
-  'ifpressed',
+  'if_pressed',
   'elses',
-  'ifpressed_elses',
+  'if_pressed_elses',
   'for_list',
   'for_loop',
   'while_loop',
   'elifs',
-  'ifpressed_elifs',
+  'if_pressed_elifs',
 ]
 
 const ifRegex = "((__if__) *[^\n ]+ *((__is__)|(__in__)) *[^\n ]+) *.*";
@@ -419,4 +418,20 @@ function markCurrentDebuggerLine() {
  */
 function getBreakpoints(editor: AceAjax.Editor): Breakpoints {
   return editor.session.getBreakpoints() as unknown as Breakpoints;
+}
+
+export function convert(o:(object|undefined)) {
+  if (typeof o === 'object') {
+    let tmp:Map<string, object> = new Map(Object.entries(o));
+
+    let ret:Map<string, (undefined|object)> = new Map();
+
+    tmp.forEach((value, key) => {
+      ret.set(key, convert(value));
+    });
+
+    return ret;
+  } else {
+    return o;
+  }
 }
