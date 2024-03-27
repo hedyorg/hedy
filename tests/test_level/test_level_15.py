@@ -152,19 +152,11 @@ class TestsLevel15(HedyTester):
             print 'press'""")
 
         expected = textwrap.dedent("""\
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'p':
-              print(f'''press''')
-              break
-            # End of PyGame Event Handler""")
+         if_pressed_mapping = {"else": "if_pressed_default_else"}
+         if_pressed_mapping['p'] = 'if_pressed_p_'
+         def if_pressed_p_():
+             print(f'''press''')
+         extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code, expected=expected, max_level=16)
 
@@ -179,36 +171,20 @@ class TestsLevel15(HedyTester):
       print 'Uit de loop!'""")
 
         expected = textwrap.dedent("""\
-        stop = 0
-        while convert_numerals('Latin', stop)!=convert_numerals('Latin', 1):
-          pygame_end = False
-          while not pygame_end:
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-              pygame_end = True
-              pygame.quit()
-              break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode == 'p':
-                print(f'''press''')
-                break
-              # End of PyGame Event Handler
-          pygame_end = False
-          while not pygame_end:
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-              pygame_end = True
-              pygame.quit()
-              break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode == 's':
-                stop = 1
-                break
-              # End of PyGame Event Handler
-          time.sleep(0.1)
-        print(f'''Uit de loop!''')""")
+         stop = 0
+         while convert_numerals('Latin', stop)!=convert_numerals('Latin', 1):
+           if_pressed_mapping = {"else": "if_pressed_default_else"}
+           if_pressed_mapping['p'] = 'if_pressed_p_'
+           def if_pressed_p_():
+               print(f'''press''')
+           extensions.if_pressed(if_pressed_mapping)
+           if_pressed_mapping = {"else": "if_pressed_default_else"}
+           if_pressed_mapping['s'] = 'if_pressed_s_'
+           def if_pressed_s_():
+               stop = 1
+           extensions.if_pressed(if_pressed_mapping)
+           time.sleep(0.1)
+         print(f'''Uit de loop!''')""")
 
         self.multi_level_tester(
             code=code,
@@ -226,24 +202,16 @@ class TestsLevel15(HedyTester):
             print 'lalalalala'""")
 
         expected = textwrap.dedent("""\
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'x':
-              print(f'''x''')
-              print(f'''lalalalala''')
-              break
-            # End of PyGame Event Handler    
-            else:
-              print(f'''not x''')
-              print(f'''lalalalala''')
-              break""")
+         if_pressed_mapping = {"else": "if_pressed_default_else"}
+         if_pressed_mapping['x'] = 'if_pressed_x_'
+         def if_pressed_x_():
+             print(f'''x''')
+             print(f'''lalalalala''')
+         if_pressed_mapping['else'] = 'if_pressed_else_'
+         def if_pressed_else_():
+             print(f'''not x''')
+             print(f'''lalalalala''')
+         extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(
             code=code,

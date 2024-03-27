@@ -123,16 +123,6 @@ class HedyTester(unittest.TestCase):
 
         if parse_result.has_turtle:
             code += utils.TURTLE_PREFIX_CODE
-        if parse_result.has_pygame:
-            pygame_test_prefix = (
-                'import os\n'
-                'os.environ["SDL_VIDEODRIVER"] = "dummy" # No real image drivers exist, set to dummy for testing\n'
-                'os.environ["SDL_AUDIODRIVER"] = "disk" # No real audio drivers exist, set to disk for testing\n'
-            ) + utils.PYGAME_PREFIX_CODE + (
-                "pygame_end = True # Set to True so that we don't get stuck in a loop during testing\n"
-            )
-
-            code += pygame_test_prefix
 
         code += parse_result.code
         # remove sleep comments to make program execution less slow
@@ -355,7 +345,7 @@ class HedyTester(unittest.TestCase):
         # Code used in the Adventure and Level Defaults tester to validate Hedy code
 
         try:
-            if not parseresult.has_turtle and not parseresult.has_pygame:  # ouput from turtle or pygame cannot be captured
+            if not parseresult.has_turtle and not parseresult.has_pressed:  # ouput from turtle or pygame cannot be captured
                 HedyTester.run_code(parseresult)
         except hedy.exceptions.CodePlaceholdersPresentException:  # Code with blanks is allowed
             pass
