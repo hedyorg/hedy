@@ -1076,10 +1076,10 @@ class ForTeachersModule(WebsiteModule):
             return gettext("unauthorized"), 403
         current_classes = {}
         if body.get("classes"):
-            current_classes = current_adventure["classes"]
+            current_classes = current_adventure.get('classes', [])
         current_levels = []
         if current_adventure["level"] != 1:
-            current_levels = current_adventure["levels"]
+            current_levels = current_adventure.get('levels', [])
 
         adventures = self.db.get_teacher_adventures(user["username"])
         for adventure in adventures:
@@ -1167,7 +1167,7 @@ class ForTeachersModule(WebsiteModule):
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        customizations, adventures, adventure_names, _, _ = self.get_class_info(
+        customizations, _, _, _, _ = self.get_class_info(
             user, class_id)
 
         is_teacher_adventure = True
