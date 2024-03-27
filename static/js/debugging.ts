@@ -91,7 +91,7 @@ export function load_variables(variables: any) {
       }
     }
     show_variables();
-    hide_if_no_variables(); 
+    hide_if_no_variables();
   }
 }
 
