@@ -7,6 +7,11 @@
         <h2>{{_('submitted_header')}}</h2>
         <h3 class="inline-block mt-0">{{_('submission_time')}}: {{program_timestamp}}</h3>
       </div>
+      {% if is_teacher %}
+      <div class="text-center">
+        <button class="green-btn" data-cy="unsubmit-btn" onclick="hedyApp.modal.confirm ('{{_('unsubmit_warning')}}', function () {hedyApp.unsubmit_program ('{{initial_adventure.id}}', {{ loop_index }})})">{{_('unsubmit_program')}}</button>
+      </div>
+      {% endif %}
   {% endif %}
   <h1>{{initial_adventure.name}}</h1>
   <h2 class="mt-0">{{_('level_title')}} {{level}}</h2>

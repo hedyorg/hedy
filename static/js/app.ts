@@ -763,6 +763,13 @@ export function submit_program (id: string, index: number) {
   });
 }
 
+export function unsubmit_program (id: string) {
+  tryCatchPopup(async () => {
+    const response = await postJsonWithAchievements('/programs/unsubmit', { id });
+    modal.notifySuccess(response.message);
+  });
+}
+
 export async function set_explore_favourite(id: string, favourite: number) {
   let prompt = "Are you sure you want to remove this program as a \"Hedy\'s choice\" program?";
   if (favourite) {
