@@ -10,6 +10,7 @@ export function createAdventure(name="")
     if (name) {
         cy.intercept('/for-teachers/customize-adventure').as('customizeAdventure');      
         cy.get("#custom_adventure_name").clear().type(name);
+        cy.wait(500)
         cy.wait('@customizeAdventure').should('have.nested.property', 'response.statusCode', 200);
     }
 
