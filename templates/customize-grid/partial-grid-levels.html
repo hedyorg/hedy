@@ -3,7 +3,7 @@
   
   {# The actual table that holds the data #}
   <div class="w-full overflow-x-auto border rounded-lg">
-        <table>
+        <table class="w-full">
         <thead>
           <tr class="bg-blue-300 text-blue-900">
             <th class="px-2 py-2 text-center">{{_('students')}}</th>
@@ -17,19 +17,28 @@
           {% for student in adventure_table['students'] %}
             <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
               <td id="teacher_cell" class="text-center font-medium text-blue-900">{{student}}</td>
-              {{adventure_table['student_adventures']}}
               {% for adventure in adventure_table['adventures'][level] %}
               {% set student_adventure_id = (student ~ '-' ~ adventure ~ '-' ~ level) | lower %}
               {% set student_adventure = adventure_table.student_adventures[student_adventure_id] %}
               {% if student_adventure_id in adventure_table['student_adventures'] %}
-              <td id="teacher_cell" class="text-center"><span class="fas fa-eye"></span></td>
-              <!-- <td id="teacher_cell" class="text-center"><span class="fas fa-check-square text-green-500"></span></td> -->
+              <td id="teacher_cell" class="text-center">
+                <div class="flex justify-center gap-3">
+                <input type="checkbox" name="gridCheckBox"
+                      class="student_adventure_checkbox text-green-700 text-center text-sm cursor-pointer {% if student_adventure.ticked %}fa-solid fa-check{% endif %}"
+                      {% if student_adventure.ticked %}checked{% endif %}
+                      hx-post="/grid_overview/class/{{ class_info.id }}/level?level={{level}}&student={{student}}&adventure={{adventure|lower}}">
+                      <div>
+                        <a class="no-underline cursor-pointer text-gray-800 hover:bg-gray-400/50 hover:rounded-full"
+                        href='/hedy/{{student_adventure}}/view'><i class="fa-regular fa-eye"></i></a>
+                      </div>
+                </div>
+              </td>
               {% else %}
-              <td id="teacher_cell" class="text-center"><span class="fas fa-square-xmark text-red-500"></span></td>
+              <td id="teacher_cell" class="text-center"><span class="fa-regular fa-hourglass text-gray-600"></span></td>
               {% endif %}
               {% endfor %}
               <td class="text-center text-blue-900">
-                <div class="flex justify-center">
+                <div class="flex justify-center gap-2">
                   <button class="flex flex-col items-center" onclick='hedyApp.change_password_student("{{student}}", {{_('enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})'>
                     <span class="fas fa-pen block mb-1"></span>
                     <span>{{_('change_password')}}</span>
