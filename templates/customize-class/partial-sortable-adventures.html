@@ -36,6 +36,17 @@
                     >
                     {{_('reset_button')}}
                 </button>
+                <div class="flex flex-row">
+                    <button id="create_adventure_button" class="green-btn" 
+                    hx-trigger="click"
+                    hx-post="/for-teachers/create-adventure/{{class_id}}/{{level}}"
+                    hx-swap="none"
+                    _="on htmx:afterRequest if detail.xhr.response
+                    window.open('/for-teachers/customize-adventure/' + detail.xhr.response, '_self')"
+                    data-cy="edit-link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>
+                    {{_('create_adventure')}}
+                    </button>
+                    </div>
             </div>
         </div>
         <div class="flex items-center min-w-max">
@@ -74,17 +85,7 @@
                         <input type="hidden" value="{{ adventure.short_name }}" name="adventure">
                     </div>                    
                 {% endfor %}
-                <div class="tab teacher_tab
-                    z-10 whitespace-nowrap flex items-center justify-left relative" data-cy="create_adventure">
-                    <span class="absolute top-0.5 right-0.5 text-green-600 hover:text-red-400 fa-regular fa-plus-square" data-cy="hide"
-                    hx-trigger="click"
-                    hx-post="/for-teachers/create-adventure/{{class_id}}/{{level}}"
-                    hx-swap="none"
-                    _="on htmx:afterRequest if detail.xhr.response
-                    window.open('/for-teachers/customize-adventure/' + detail.xhr.response, '_self')"></span>
-                        {{_('create_adventure')}}
-                </div>
-        </div>
+            </div>
     </div>
         <script>
                 if (window.hedyApp) {
