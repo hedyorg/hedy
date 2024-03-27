@@ -207,7 +207,7 @@ export function addCurlyBracesToKeyword(name: string) {
     let TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
 
     for (const [key, regexString] of TRADUCTION) {        
-        if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
+        if ((new RegExp(`^(${regexString})$`, 'gu').test(name)) || name === key) {
             return `{${key}}`
         }
     }
