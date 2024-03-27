@@ -1940,8 +1940,8 @@ class TestsLevel12(HedyTester):
     @parameterized.expand(['-', '*', '/'])
     def test_print_float_calc_with_string(self, op):
         code = f"print 'het antwoord is ' 2.5 {op} 2.5"
-        expected = f"print(f'''het antwoord is {{{self.number_cast_transpiled('2.5')} {
-            op} {self.number_cast_transpiled('2.5')}}}''')"
+        expected = f"print(f'''het antwoord is {{{self.number_cast_transpiled('2.5')}\
+         {op} {self.number_cast_transpiled('2.5')}}}''')"
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
