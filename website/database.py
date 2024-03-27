@@ -292,19 +292,12 @@ class Database:
         """
         return PROGRAMS.update({"id": id}, {"public": 1 if public else 0})
 
-    def submit_program_by_id(self, id):
+    def submit_program_by_id(self, id, submit):
         """Switch a program to submitted.
 
         Return the updated program state.
         """
-        return PROGRAMS.update({"id": id}, {"submitted": True, "date": timems()})
-
-    def unsubmit_program_by_id(self, id):
-        """Switch a program to unsubmitted.
-
-        Return the updated program state.
-        """
-        return PROGRAMS.update({"id": id}, {"submitted": '', "date": timems()})
+        return PROGRAMS.update({"id": id}, {"submitted": submit, "date": timems()})
 
     def delete_program_by_id(self, id):
         """Delete a program by id."""

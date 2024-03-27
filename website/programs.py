@@ -258,7 +258,7 @@ class ProgramsModule(WebsiteModule):
         if not result or result["username"] != user["username"]:
             return "No such program!", 404
 
-        program = self.db.submit_program_by_id(body["id"])
+        program = self.db.submit_program_by_id(body["id"], True)
         self.db.increase_user_submit_count(user["username"])
         self.achievements.increase_count("submitted")
         self.achievements.verify_submit_achievements(user["username"])
@@ -283,10 +283,7 @@ class ProgramsModule(WebsiteModule):
         if not result:
             return "No such program!", 404
 
-        program = self.db.unsubmit_program_by_id(body["id"])
-        # self.db.increase_user_submit_count(user["username"])
-        # self.achievements.increase_count("submitted")
-        # self.achievements.verify_submit_achievements(user["username"])
+        program = self.db.submit_program_by_id(body["id"], False)
 
         response = {
             "message": gettext("unsubmitted"),
