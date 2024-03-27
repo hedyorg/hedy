@@ -1889,8 +1889,8 @@ class TestsLevel12(HedyTester):
         ('-', '-', '4')])
     def test_int_calc(self, op, transpiled_op, output):
         code = f"print 6 {op} 2"
-        expected = f"print(f'''{{{self.number_cast_transpiled(6)} {
-            transpiled_op} {self.number_cast_transpiled(2)}}}''')"
+        expected = f"print(f'''{{{self.number_cast_transpiled(6)}\
+         {transpiled_op} {self.number_cast_transpiled(2)}}}''')"
 
         self.multi_level_tester(code=code, unused_allowed=True, expected=expected, output=output, max_level=17)
 
