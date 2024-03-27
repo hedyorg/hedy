@@ -79,7 +79,7 @@
     {% endif %}
     {% if not hide_cheatsheet and cheatsheet %}
     <div class="dropdown relative">
-      <button class="green-btn font-semibold rounded inline-flex items-center gap-2" id="dropdown_cheatsheet_button"
+      <button class="green-btn font-semibold rounded inline-flex items-center gap-2 mr-2" id="dropdown_cheatsheet_button"
         onclick="$('#cheatsheet_dropdown').slideToggle('medium');">
         <span>{{ "🤔" }}</span>
         <svg id="cheatsheet-arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -115,7 +115,7 @@
     {% endif %}
     {% if get_syntax_language(g.lang) != "en" and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) %}
       <div class="dropdown relative">
-        <button class="green-btn font-semibold rounded inline-flex items-center gap-2"
+        <button class="green-btn font-semibold rounded inline-flex items-center gap-2 mr-2"
           onclick="$('#commands_dropdown').slideToggle('medium');" data-cy="kwlang-switch-btn">
           <span class="fa-solid fa-language"></span>
           <svg id="keyword-arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
