@@ -168,8 +168,8 @@ class TestsLevel12(HedyTester):
 
     def test_print_subtraction_with_text(self):
         code = "print 'And the winner is ' 5 - 5"
-        expected = f"print(f'''And the winner is {{{self.number_cast_transpiled(
-            5)} - {self.number_cast_transpiled(5)}}}''')"
+        expected = f"print(f'''And the winner is {{{self.number_cast_transpiled(5)} \
+            - {self.number_cast_transpiled(5)}}}''')"
         output = 'And the winner is 0'
 
         self.multi_level_tester(max_level=17, code=code, expected=expected, output=output)
