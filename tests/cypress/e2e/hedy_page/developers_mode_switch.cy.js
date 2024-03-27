@@ -19,14 +19,13 @@ describe('Developers mode', () => {
       cy.get('#adventures').should('be.visible');
     })
 
-    it.only('Should be enforced developer mode', () => {
+    it('Should be enforced developer mode', () => {
       cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
 
-      // ({classname, students} = createClassAndAddStudents());
-      navigateToClass("CLASS1");
+      ({classname, students} = createClassAndAddStudents());
+      navigateToClass(classname);
 
       cy.get("#customize-class-button").click();
-      // cy.wait(1000)
       cy.get("#developers_mode")
         .should("not.be.checked")
         .click()
@@ -38,10 +37,9 @@ describe('Developers mode', () => {
       cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
 
       logout();
-      loginForStudent("student2");
+      loginForStudent(students[0]);
       goToHedyPage();
       
       cy.get('#adventures').should('not.be.visible');
     })
-
 })
