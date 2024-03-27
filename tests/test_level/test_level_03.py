@@ -184,13 +184,10 @@ class TestsLevel3(HedyTester):
         expected = textwrap.dedent(f"""\
         n = ['1', '2', '3']
         try:
-          try:
-            n[int(1)-1]
-          except IndexError:
-            raise Exception({self.index_exception_transpiled()})
-          time.sleep(int(n[int(1)-1]))
-        except ValueError:
-          raise Exception({self.value_exception_transpiled()})""")
+          n[int(1)-1]
+        except IndexError:
+          raise Exception({self.index_exception_transpiled()})
+        time.sleep(int_with_error(n[int(1)-1], {self.value_exception_transpiled()}))""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
@@ -216,13 +213,10 @@ class TestsLevel3(HedyTester):
         expected = textwrap.dedent(f"""\
         n = ['1', '2', '3']
         try:
-          try:
-            random.choice(n)
-          except IndexError:
-            raise Exception({self.index_exception_transpiled()})
-          time.sleep(int(random.choice(n)))
-        except ValueError:
-          raise Exception({self.value_exception_transpiled()})""")
+          random.choice(n)
+        except IndexError:
+          raise Exception({self.index_exception_transpiled()})
+        time.sleep(int_with_error(random.choice(n), {self.value_exception_transpiled()}))""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
@@ -868,13 +862,9 @@ class TestsLevel3(HedyTester):
         notes is C4, E4, D4, F4, G4
         play notes at random""")
 
-        expected = textwrap.dedent(f"""\
-        notes = ['C4', 'E4', 'D4', 'F4', 'G4']
-        chosen_note = str(random.choice(notes)).upper()
-        if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
-            raise Exception({self.value_exception_transpiled()})
-        play(notes_mapping.get(chosen_note, chosen_note))
-        time.sleep(0.5)""")
+        expected = HedyTester.dedent(
+            "notes = ['C4', 'E4', 'D4', 'F4', 'G4']",
+            self.play_transpiled('random.choice(notes)', quotes=False))
 
         self.multi_level_tester(
             code=code,
