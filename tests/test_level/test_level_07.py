@@ -354,7 +354,7 @@ class TestsLevel7(HedyTester):
          if_pressed_mapping['x'] = 'if_pressed_x_'
          if_pressed_mapping['else'] = 'if_pressed_else_'
          def if_pressed_x_():
-           for __i__ in range(int('5')):
+           for __i in range(int('5')):
              print(f'doe het 5 keer!')
              time.sleep(0.1)
          def if_pressed_else_():
@@ -410,7 +410,7 @@ class TestsLevel7(HedyTester):
             repeat 3 times if z is pressed forward 15 else forward -15""")
 
         expected = HedyTester.dedent(f"""\
-            for __i__ in range(int('3')):
+            for __i in range(int('3')):
               if_pressed_mapping = {{"else": "if_pressed_default_else"}}
               if_pressed_mapping['x'] = 'if_pressed_x_'
               if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -432,7 +432,7 @@ class TestsLevel7(HedyTester):
                 time.sleep(0.1)
               extensions.if_pressed(if_pressed_mapping)
               time.sleep(0.1)
-            for __i__ in range(int('3')):
+            for __i in range(int('3')):
               if_pressed_mapping = {{"else": "if_pressed_default_else"}}
               if_pressed_mapping['y'] = 'if_pressed_y_'
               if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -454,7 +454,7 @@ class TestsLevel7(HedyTester):
                 time.sleep(0.1)
               extensions.if_pressed(if_pressed_mapping)
               time.sleep(0.1)
-            for __i__ in range(int('3')):
+            for __i in range(int('3')):
               if_pressed_mapping = {{"else": "if_pressed_default_else"}}
               if_pressed_mapping['z'] = 'if_pressed_z_'
               if_pressed_mapping['else'] = 'if_pressed_else_'

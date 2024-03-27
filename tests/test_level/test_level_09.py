@@ -326,7 +326,7 @@ class TestsLevel9(HedyTester):
          if_pressed_mapping = {"else": "if_pressed_default_else"}
          if_pressed_mapping['x'] = 'if_pressed_x_'
          def if_pressed_x_():
-             for i in range(int('5')):
+             for __i in range(int('5')):
                print(f'doe het 5 keer!')
                time.sleep(0.1)
          if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -351,7 +351,7 @@ class TestsLevel9(HedyTester):
 
         expected = HedyTester.dedent("""\
          create_button('button1')
-         for i in range(int('3')):
+         for __i in range(int('3')):
            if_pressed_mapping = {"else": "if_pressed_default_else"}
            if_pressed_mapping['button1'] = 'if_pressed_button1_'
            def if_pressed_button1_():

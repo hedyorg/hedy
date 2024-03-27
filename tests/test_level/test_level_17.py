@@ -451,7 +451,7 @@ class TestsLevel17(HedyTester):
             __trtl = f'red'
             color_dict = {'black': 'black', 'blue': 'blue', 'brown': 'brown', 'gray': 'gray', 'green': 'green', 'orange': 'orange', 'pink': 'pink', 'purple': 'purple', 'red': 'red', 'white': 'white', 'yellow': 'yellow'}
             if __trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
-              raise Exception(\"""catch_value_exception\""")
+              raise Exception(\"""Runtime Value Error\""")
             else:
               if not __trtl in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
                 __trtl = color_dict[__trtl]
