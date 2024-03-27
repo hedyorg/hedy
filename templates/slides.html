@@ -15,6 +15,38 @@
     <div class="reveal">
       <div class="slides">
           {% for index, slide in slides.items() %}
+          <h2>{{slide.header}}</h2>
+            {{slide}}
+          {% endfor %}
+      </div>
+    </div>
+    <script src="{{static('vendor/reveal/dist/reveal.js')}}"></script>
+    <script src="{{static('vendor/reveal/plugin/notes/notes.js')}}"></script>
+    <script src="{{static('vendor/reveal/plugin/markdown/markdown.js')}}"></script>
+    <script src="{{static('vendor/reveal/plugin/highlight/highlight.js')}}"></script>
+</body>
+
+</html>
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hedy - Slides - {{ level }} </title>
+    <link rel="stylesheet" href="{{static('css/reveal-js-custom.css')}}">
+    <link rel="stylesheet" href="{{static('vendor/reveal/dist/reset.css')}}">
+    <link rel="stylesheet" href="{{static('vendor/reveal/dist/reveal.css')}}">
+    <link rel="stylesheet" href="{{static('vendor/reveal/dist/theme/sky.css')}}">
+
+    <link rel="stylesheet" href="{{static('vendor/reveal/plugin/highlight/monokai.css')}}">
+</head>
+<body>
+    <div class="reveal">
+      <div class="slides">
+          {% for index, slide in slides.items() %}
             <section data-markdown style="text-align: left; height: 1018px; font-size:0.8em">
                 {{ slide['header'] }}
                 <textarea data-template>
@@ -51,4 +83,4 @@
     </script>
 </body>
 
-</html>
+</html> -->

@@ -2259,7 +2259,7 @@ def get_slides(level):
         return utils.error_page(error=404, ui_message="Slides do not exist!")
 
     slides = SLIDES[g.lang].get_slides_for_level(level, keyword_language)
-    return render_template('slides.html', level=level, slides=slides)
+    return render_template('slides.html', level=level, slides=slides, user=current_user()['username'])
 
 
 @app.route('/translate_keywords', methods=['POST'])
