@@ -9,7 +9,15 @@ import hedy_content
 import hedy
 import utils
 from config import config
-from website.auth import current_user, email_base_url, is_admin, requires_admin, requires_login, requires_teacher, send_email
+from website.auth import (
+    current_user, 
+    email_base_url, 
+    is_admin, 
+    requires_admin, 
+    requires_login, 
+    requires_teacher, 
+    send_email,
+)
 
 from .achievements import Achievements
 from .database import Database
