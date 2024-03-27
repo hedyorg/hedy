@@ -41,27 +41,10 @@
                 {% if adventure.short_name != initial_tab %}hidden{% endif %}
                 turn-pre-into-ace show-copy-button p-4 text-adventure-copy"
                 >
-                {% set text_length = adventure.text|length // 2 %}
-                {% set midpoint = adventure.text.find("\n", text_length) %}
-                {% if midpoint == -1 %}
-                    {% set midpoint = text_length %}
-                {% endif %}
-              <div class="lg:flex lg:flex-row">
-                  <div class="{% if adventure.example_code or (adventure.is_teacher_adventure and adventure.text|length > 750) %}lg:w-1/2 {% endif %}w-full p-2 ltr:mr-2 rtl:ml-2">
-                    <div class="max-w-prose">
-                    {% if adventure.is_teacher_adventure and adventure.text|length > 750 %}
-                        {{ adventure.text[:midpoint]|commonmark }}
-                    {% else %}
+              <div class="lg:flex lg:flex-row {% if adventure.is_teacher_adventure %}teacher-adv{% endif %}">
+                    <div class="w-full {% if adventure.example_code or adventure.is_teacher_adventure %}lg:w-1/2 {% endif %} p-2 ltr:mr-2 rtl:ml-2">
                         {{ adventure.text|commonmark }}
-                    {% endif %}
                     </div>
-                </div>
-                {% if adventure.is_teacher_adventure and adventure.text|length > 750 %}
-                    <div class="border"></div>
-                    <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
-                        {{ adventure.text[midpoint:]|commonmark }}
-                    </div>
-                {% endif %}
                   {% if adventure.example_code %}
                       <div class="border"></div>
                       <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
