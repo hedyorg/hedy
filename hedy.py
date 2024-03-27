@@ -1379,29 +1379,39 @@ class ConvertToPython(Transformer):
         else:
             return ""
 
+    def is_var_defined_before_access(self, variable_name, access_line_number):
+        all_names_before_access_line = [a.name for a in self.lookup if a.definition_line <= access_line_number]
+        return variable_name in all_names_before_access_line
+
+    def is_var_in_lookup(self, variable_name):
+        all_names = [a.name for a in self.lookup]
+        return variable_name in all_names
+
     # default for line number is max lines so if it is not given, there
     # is no check on whether the var is defined
     def is_variable(self, variable_name, access_line_number=100):
-        all_names = [a.name for a in self.lookup]
-        all_names_before_access_line = [a.name for a in self.lookup if a.definition_line <= access_line_number]
-        if variable_name in all_names and variable_name not in all_names_before_access_line:
-            # referenced before assignment!
+        if self.is_var_in_lookup(variable_name) and not self.is_var_defined_before_access(variable_name,
+                                                                                          access_line_number):
             definition_line_number = [a.definition_line for a in self.lookup if a.name == variable_name][0]
             raise hedy.exceptions.AccessBeforeAssignException(
                 name=variable_name,
                 access_line_number=access_line_number,
                 definition_line_number=definition_line_number)
-        else:
-            # valid use, store!
-            self.add_variable_access_location(variable_name, access_line_number)
 
-        is_function = False
+        # valid use, store!
+        self.add_variable_access_location(variable_name, access_line_number)
+
+        all_names_before_access_line = [a.name for a in self.lookup if a.definition_line <= access_line_number]
+        if escape_var(variable_name) in all_names_before_access_line:
+            return True
+
         if isinstance(variable_name, str):
             pattern = r'^([a-zA-Z_][a-zA-Z0-9_]*)\('
             match = re.match(pattern, variable_name)
             is_function = match and [a.name for a in self.lookup if match.group(1) + "()" == a.name]
+            return is_function
 
-        return escape_var(variable_name) in all_names_before_access_line or is_function
+        return False
 
     def process_variable(self, arg, access_line_number=100):
         # processes a variable by hashing and escaping when needed
@@ -1421,9 +1431,9 @@ class ConvertToPython(Transformer):
         return arg
 
     def process_variable_for_fstring(self, variable_name, access_line_number=100):
-        self.add_variable_access_location(variable_name, access_line_number)
-
-        if self.is_variable(variable_name, access_line_number):
+        if self.is_var_in_lookup(variable_name) and self.is_var_defined_before_access(variable_name,
+                                                                                      access_line_number):
+            self.add_variable_access_location(variable_name, access_line_number)
             return "{" + escape_var(variable_name) + "}"
         else:
             return process_characters_needing_escape(variable_name)

@@ -229,6 +229,30 @@ class TestsLevel4(HedyTester):
             max_level=5,
         )
 
+    def test_print_var_before_assign_gives_error(self):
+        code = textwrap.dedent("""\
+        print 'the program is ' name
+        name is Hedy""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.AccessBeforeAssignException,
+            skip_faulty=False,
+            max_level=11
+        )
+
+    def test_ask_var_before_assign_gives_error(self):
+        code = textwrap.dedent("""\
+        n is ask 'the program is ' name
+        name is Hedy""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.AccessBeforeAssignException,
+            skip_faulty=False,
+            max_level=11
+        )
+
     def test_print_without_ending_quote_gives_UnquotedException(self):
 
         code = "print 'hallo wereld"

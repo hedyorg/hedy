@@ -384,26 +384,28 @@ class TestsLevel2(HedyTester):
             max_level=11
         )
 
-    def test_access_before_assign_not_allowed(self):
+    def test_misspelled_command(self):
+        code = "prind skipping"
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidCommandException,
+            max_level=3,
+        )
+
+    def test_access_before_assign_converts_to_literal_string(self):
         code = textwrap.dedent("""\
         print the name program
-        prind skipping
         name is Hedy""")
 
         expected = textwrap.dedent("""\
-        pass
-        pass
+        print(f'the name program')
         name = 'Hedy'""")
-
-        skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 23), hedy.exceptions.AccessBeforeAssignException),
-            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
-        ]
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            skipped_mappings=skipped_mappings,
+            unused_allowed=True,
             max_level=3,
         )
 
