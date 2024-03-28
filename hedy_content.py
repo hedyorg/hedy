@@ -308,6 +308,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'elif_command',
         'tic',
         'blackjack',
+        'blackjack_2',
+        'blackjack_3',
         'debugging',
         'quiz',
     ],
