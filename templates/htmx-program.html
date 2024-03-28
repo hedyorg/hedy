@@ -1,4 +1,4 @@
-<div id="program_{{ loop_index }}" class="program w-full border-solid border-2 {% if program.submitted %} border-gray-400 bg-gray-400 {% else %} border-orange-400 {% endif %} rounded p-4 mb-4">
+<div id="program_{{ loop_index }}" data-id="{{program.id}}" class="program w-full border-solid border-2 {% if program.submitted %} border-gray-400 bg-gray-400 {% else %} border-orange-400 {% endif %} rounded p-4 mb-4">
     <h3 id="submitted_header_{{ loop_index }}" class="mt-0 mb-4 text-red-500 text-center {% if not program.submitted %} hidden{% endif %}">{{_('submitted_header')}}</h3>
     <div class="flex flex-row">
         <table class="table-auto mb-4">
@@ -26,9 +26,13 @@
         </tbody>
         </table>
         {% if public_profile and not second_teachers_programs %}
-            {% set favourite_program = (public_profile.favourite_program and public_profile.favourite_program == program.id) %}
-            <div class="ml-auto favourite_program_container {% if favourite_program %}text-yellow-400{% else %}text-white{% endif %} text-2xl{% if not program.public %} hidden{% endif %}" id="favourite_program_container_{{ loop_index }}">
-                <i class="fa fa-star p-4 bg-blue-300 rounded-full cursor-pointer hover:bg-blue-600" onclick="hedyApp.set_favourite_program('{{ program.id }}', {{ loop_index }}, {% if favourite_program %}false{% else %}true{% endif %}, '{{_('favourite_confirm')}}', '{{_('unfavourite_confirm')}}');" aria-hidden="true"></i>
+            {% set favourite_program = public_profile.favourite_program == program.id %}
+            <div 
+                id="favourite_program_container_{{ program.id }}"
+                    data-starred="{{favourite_program}}"
+                class="ml-auto favourite_program_container {% if favourite_program %}text-yellow-400{% else %}text-white{% endif %} text-2xl{% if not program.public %} hidden{% endif %}">
+                <i class="fa fa-star p-4 bg-blue-300 rounded-full cursor-pointer hover:bg-blue-600"
+                    onclick="hedyApp.set_favourite_program('{{ program.id }}', '{{_('favourite_confirm')}}', '{{_('unfavourite_confirm')}}');" aria-hidden="true"></i>
             </div>
         {% endif %}
           <div class="ml-auto dropdown relative">

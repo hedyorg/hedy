@@ -765,21 +765,25 @@ export async function delete_program(id: string, index: number, prompt: string) 
   });
 }
 
-function set_favourite(index: number, set: boolean) {
+function set_favourite(index: string, set: boolean) {
     $('.favourite_program_container').removeClass('text-yellow-400');
     $('.favourite_program_container').addClass('text-white');
+    $('.favourite_program_container').attr("data-starred", "false");
 
     if (set) {
         $('#favourite_program_container_' + index).removeClass('text-white');
         $('#favourite_program_container_' + index).addClass('text-yellow-400');
     }
+    $('#favourite_program_container_' + index).attr("data-starred", JSON.stringify(set));
 }
 
-export async function set_favourite_program(id: string, index: number, set: boolean, promptSet: string, promptUnset: string) {
-  await modal.confirmP(set ? promptSet : promptUnset);
+export async function set_favourite_program(id: string, promptSet: string, promptUnset: string) {
+  let set = JSON.parse($('#favourite_program_container_' + id).attr("data-starred")?.toLowerCase() || "");
+  await modal.confirmP(set ? promptUnset : promptSet);
   await tryCatchPopup(async () => {
-    const response = await postJsonWithAchievements('/programs/set_favourite', { id, set });
-    set_favourite(index, set)
+    const response = await postJsonWithAchievements('/programs/set_favourite', { id, set: !set });
+    // TODO: response with 200, assumed.
+    set_favourite(id, !set)
     modal.notifySuccess(response.message);
   });
 }
