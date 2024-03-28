@@ -86,7 +86,8 @@ export function load_variables(variables: any) {
     for (const i in variables) {
       // Only append if the variable contains any data (and is not undefined)
       if (variables[i][1]) {
-        const variableName = variables[i][0][0].replace('_', '');
+        console.log("HAAI")
+        const variableName = variables[i][0].replace(/^_/, '');
         variableList.append(`<li style=color:${variables[i][2]}>${variableName}: ${variables[i][1]}</li>`);
       }
     }
