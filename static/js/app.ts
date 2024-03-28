@@ -4,7 +4,7 @@ import JSZip from "jszip";
 import * as Tone from 'tone'
 import { Tabs } from './tabs';
 import { MessageKey } from './message-translations';
-import { turtle_prefix, pygame_prefix, normal_prefix, music_prefix } from './pythonPrefixes'
+import { turtle_prefix, pressed_prefix, normal_prefix, music_prefix } from './pythonPrefixes'
 import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './types';
 import { startIntroTutorial } from './tutorials/tutorial';
 import { get_parsons_code, initializeParsons, loadParsonsExercise } from './parsons';
@@ -29,10 +29,6 @@ const editorCreator: HedyCodeMirrorEditorCreator = new HedyCodeMirrorEditorCreat
 let last_code: string;
 
 /**
- * Used to record and undo pygame-related settings
- */
-let pygameRunning = false;
-/**
  * Represents whether there's an open 'ask' prompt
  */
 let askPromptOpen = false;
@@ -54,13 +50,6 @@ let theUserIsLoggedIn: boolean;
 //const synth = new Tone.Synth().toDestination();
 
 const synth = new Tone.PolySynth(Tone.Synth).toDestination();
-
-
-const pygame_suffix =
-`# coding=utf8
-pygame_end = True
-pygame.quit()
-`;
 
 const slides_template = `
 <!DOCTYPE html>
@@ -444,38 +433,18 @@ export function getHighlighter(level: number) {
 }
 
 export function stopit() {
-  if (pygameRunning) {
-      // when running pygame, raise the pygame quit event
-      Sk.insertPyGameEvent("quit");
-      Sk.unbindPygameListeners();
-
-      pygameRunning = false;
-      document.onkeydown = null;
-      $('#pygame-modal').hide();
-      $('#stopit').hide();
-      $('#runit').show();
-  }
-  else if (sleepRunning){
-      Sk.execLimit = 1;
-      clearTimeouts();
-      sleepRunning = false;
-      $('#sleep-modal').hide();
-      $('#stopit').hide();
-      $('#runit').show();
-  }
-  else
-  {
-      // We bucket-fix stop the current program by setting the run limit to 1ms
-      Sk.execLimit = 1;
-      clearTimeouts();
-      $('#stopit').hide();
-      $('#runit').show();
-
-      // This gets a bit complex: if we do have some input modal waiting, fake submit it and hide it
-      // This way the Promise is no longer "waiting" and can no longer mess with our next program
-      if ($('#ask-modal').is(":visible")) {
-        $('#ask-modal').hide();
-      }
+  // We bucket-fix stop the current program by setting the run limit to 1ms
+  Sk.execLimit = 1;
+  clearTimeouts();
+  $('#stopit').hide();
+  $('#runit').show();
+  $('#ask-modal').hide();
+  document.onkeydown = null;
+  $('#keybinding-modal').hide();
+  $('#sleep-modal').hide();
+  
+  if (sleepRunning) {    
+    sleepRunning = false;
   }
 
   askPromptOpen = false;
@@ -514,11 +483,6 @@ export async function runit(level: number, lang: string, disabled_prompt: string
   }
 
   theLocalSaveWarning.clickRun();
-
-  // Make sure to stop previous PyGame event listeners
-  if (typeof Sk.unbindPygameListeners === 'function') {
-    Sk.unbindPygameListeners();
-  }
 
   // We set the run limit to 1ms -> make sure that the previous programs stops (if there is any)
   Sk.execLimit = 1;
@@ -619,7 +583,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
       program_data = theGlobalDebugger.get_program_data();
     }
 
-    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pygame, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, cb, run_type).catch(function(err: any) {
+    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pressed, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, cb, run_type).catch(function(err: any) {
       // The err is null if we don't understand it -> don't show anything
       if (err != null) {
         error.show(ClientMessages['Execute_error'], err.message);
@@ -882,7 +846,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPygame: boolean, hasSleep: number[], hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPressed: boolean, hasSleep: number[], hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
   let skip_faulty_found_errors = false;
@@ -941,7 +905,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 
   let code_prefix = normal_prefix;
 
-  if (!hasTurtle && !hasPygame) {
+  if (!hasTurtle) {
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
     // remove it (by clearing the '#turtlecanvas' div)
     $('#turtlecanvas').empty();
@@ -949,7 +913,12 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 
   if (hasTurtle) {
     code_prefix += turtle_prefix;
+    resetTurtleTarget();
     $('#turtlecanvas').show();
+  }
+
+  if (hasPressed) {
+    code_prefix += pressed_prefix;
   }
 
   if (hasMusic) {
@@ -992,83 +961,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     executeAllDelays()
   }
 
-
-  if (hasPygame){
-    skulptExternalLibraries = {
-      './extensions.js': {
-        path: theStaticRoot + "/vendor/skulpt-stdlib-extensions.js",
-      },
-      './pygame.js': {
-        path: theStaticRoot + "/vendor/pygame_4_skulpt/init.js",
-      },
-      './display.js': {
-        path: theStaticRoot + "/vendor/pygame_4_skulpt/display.js",
-      },
-      './draw.js': {
-        path: theStaticRoot + "/vendor/pygame_4_skulpt/draw.js",
-      },
-      './event.js': {
-        path: theStaticRoot + "/vendor/pygame_4_skulpt/event.js",
-      },
-      './font.js': {
-        path: theStaticRoot + "/vendor/pygame_4_skulpt/font.js",
-      },
-      './image.js': {
-        path: theStaticRoot + "/vendor/pygame_4_skulpt/image.js",
-      },
-      './key.js': {
-        path: theStaticRoot + "/vendor/pygame_4_skulpt/key.js",
-      },
-      './mouse.js': {
-        path: theStaticRoot + "/vendor/pygame_4_skulpt/mouse.js",
-      },
-      './transform.js': {
-        path: theStaticRoot + "/vendor/pygame_4_skulpt/transform.js",
-      },
-      './locals.js': {
-        path: theStaticRoot + "/vendor/pygame_4_skulpt/locals.js",
-      },
-      './time.js': {
-        path: theStaticRoot + "/vendor/pygame_4_skulpt/time.js",
-      },
-      './version.js': {
-        path: theStaticRoot + "/vendor/pygame_4_skulpt/version.js",
-      },
-      './buttons.js': {
-          path: theStaticRoot + "/js/buttons.js",
-      },
-    };
-
-    code_prefix += pygame_prefix;
-
-    initSkulpt4Pygame();
-    initCanvas4PyGame();
-    let pygameModal = $('#pygame-modal');
-
-    const codeContainsInputFunctionBeforePygame = new RegExp(
-      "input\\([\\s\\S]*\\)[\\s\\S]*while not pygame_end", 'gm'
-    ).test(code);
-
-    if (!codeContainsInputFunctionBeforePygame) {
-      pygameModal.show();
-    }
-
-    if (hasTurtle) {
-      pygameModal.addClass('absolute');
-      pygameModal.addClass('bottom-0');
-      pygameModal.addClass('w-full');
-    } else {
-      pygameModal.removeClass('absolute');
-      pygameModal.removeClass('bottom-0');
-      pygameModal.removeClass('w-full');
-    }
-
-    document.onkeydown = animateKeys;
-    pygameRunning = true;
-  }
-
   code = code_prefix + code;
-  if (hasPygame) code += pygame_suffix;
 
   (Sk as any).builtins.play = new Sk.builtin.func((notes:any) => {
     //const now = Tone.now()
@@ -1104,8 +997,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       // So: a very large limit in these levels, keep the limit on other ones.
       execLimit: (function () {
         const level = theLevel;
-        if (hasTurtle || hasPygame || hasMusic) {
-          // We don't want a timeout when using the turtle or pygame or music -> just set one for 10 minutes
+        if (hasTurtle || hasMusic) {
+          // We don't want a timeout when using the turtle or music -> just set one for 10 minutes
           return (6000000);
         }
         if (level < 7) {
@@ -1134,10 +1027,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       $('#stopit').hide();
       $('#runit').show();
 
-      if (hasPygame) {
-        document.onkeydown = null;
-        $('#pygame-modal').hide();
-      }
+      document.onkeydown = null;
+      $('#keybinding-modal').hide();
 
       if (hasTurtle) {
         $('#saveFilesContainer').show();
@@ -1198,7 +1089,6 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       Code: code,
       source_map: sourceMap,
       has_turtle: hasTurtle,
-      has_pygame: hasPygame, //here too: where is hassleep?
       has_clear: hasClear,
       has_music: hasMusic,
       Warning: hasWarnings
@@ -1218,10 +1108,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 
         stopDebug();
 
-        if (hasPygame) {
-          document.onkeydown = null;
-          $('#pygame-modal').hide();
-        }
+        document.onkeydown = null;
+        $('#keybinding-modal').hide();
 
         if (hasTurtle) {
           $('#saveFilesContainer').show();
@@ -1279,22 +1167,16 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   function builtinRead(x: string) {
     if (x in skulptExternalLibraries) {
       const tmpPath = skulptExternalLibraries[x]["path"];
-      if (x === "./pygame.js") {
-        return Sk.misceval.promiseToSuspension(
-          fetch(tmpPath)
-              .then(r => r.text()))
+      
+      let request = new XMLHttpRequest();
+      request.open("GET", tmpPath, false);
+      request.send();
 
-      } else {
-        let request = new XMLHttpRequest();
-        request.open("GET", tmpPath, false);
-        request.send();
-
-        if (request.status !== 200) {
-          return void 0
-        }
-
-        return request.responseText
+      if (request.status !== 200) {
+        return void 0
       }
+
+      return request.responseText
     }
 
     if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
@@ -1310,12 +1192,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     if (storage.getItem("prompt-" + prompt) == null) {
     Sk.execStart = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
     $('#turtlecanvas').hide();
-
-    if (pygameRunning) {
-      Sk.unbindPygameListeners();
-      document.onkeydown = null;
-      $('#pygame-modal').hide();
-    }
+    document.onkeydown = null;
+    $('#keybinding-modal').hide();
 
     return new Promise(function(ok) {
       askPromptOpen = true;
@@ -1336,15 +1214,6 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 
         if (hasTurtle) {
           $('#turtlecanvas').show();
-        }
-
-        if (pygameRunning) {
-          Sk.bindPygameListeners();
-          document.onkeydown = animateKeys;
-
-          if (!hasTurtle) {
-            $('#pygame-modal').show();
-          }
         }
 
         // We reset the timer to the present moment.
@@ -1391,82 +1260,6 @@ function resetTurtleTarget() {
     }
 
     return null;
-}
-
-function animateKeys(event: KeyboardEvent) {
-    const keyColors = ['#cbd5e0', '#bee3f8', '#4299e1', '#ff617b', '#ae81ea', '#68d391'];
-    const output = $("#output");
-
-    if (output !== null) {
-      let keyElement = $("<div></div>");
-      output.append(keyElement);
-
-      keyElement.text(event.key);
-      keyElement.css('color', keyColors[Math.floor(Math.random() * keyColors.length)]);
-      keyElement.addClass('animate-keys')
-
-      setTimeout(function () {
-        keyElement.remove()
-      }, 1500);
-    }
-}
-
-function initCanvas4PyGame() {
-    let currentTarget = resetTurtleTarget();
-
-    let div1 = document.createElement("div");
-
-    if (currentTarget !== null) {
-      currentTarget.appendChild(div1);
-      $(div1).addClass("modal");
-      $(div1).css("text-align", "center");
-      $(div1).css("display", "none");
-
-      let div2 = document.createElement("div");
-      $(div2).addClass("modal-dialog modal-lg");
-      $(div2).css("display", "inline-block");
-
-      // I'm not sure what the code below was supposed to do,
-      // but it was referring to 'self.width' which does not
-      // exist, and the result would be 'undefined + 42 == NaN'.
-      //
-      // (as any to make TypeScript allow the nonsensical addition)
-      $(div2).width(undefined as any + 42);
-      $(div2).attr("role", "document");
-      div1.appendChild(div2);
-
-      let div3 = document.createElement("div");
-      $(div3).addClass("modal-content");
-      div2.appendChild(div3);
-
-      let div4 = document.createElement("div");
-      $(div4).addClass("modal-header d-flex justify-content-between");
-      let div5 = document.createElement("div");
-      $(div5).addClass("modal-body");
-      let div6 = document.createElement("div");
-      $(div6).addClass("modal-footer");
-      let div7 = document.createElement("div");
-      $(div7).addClass("col-md-8");
-      let div8 = document.createElement("div");
-      $(div8).addClass("col-md-4");
-
-      div3.appendChild(div4);
-      div3.appendChild(div5);
-      div3.appendChild(div6);
-
-      $(Sk.main_canvas).css("border", "none");
-      $(Sk.main_canvas).css("display", "none");
-      div5.appendChild(Sk.main_canvas);
-    }
-}
-
-function initSkulpt4Pygame() {
-    Sk.main_canvas = document.createElement("canvas");
-    Sk.configure({
-        killableWhile: true,
-        killableFor: true,
-        __future__: Sk.python3,
-    });
 }
 
 function speak(text: string) {
