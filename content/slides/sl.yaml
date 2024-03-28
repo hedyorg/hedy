@@ -88,7 +88,7 @@ levels:
             header: Welcome to level 2
             text: "Na tej stopnji se boste naučili uporabljati spremenljivke.\n\nSpremenljivka je beseda, ki se lahko uporablja za shranjevanje informacij.\n\nNa primer: ime, starost ali najljubša športna ekipa."
         2:
-            header: Variables
+            header: Spremenljivke
             text: To make or 'set' a variable we use the `{is}` command
             code: "name {is} Hedy\nage {is} 15\n{print} name is age years old"
         3:
@@ -490,8 +490,8 @@ levels:
             text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
         5:
             header: Return value
-            text: For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
-            code: "{define} calculate_new_price {with} amount, percentage\n    percentage = percentage / 100\n    discount_amount = amount * percentage\n    {return} amount - discount_amount\n\nold_price = {ask} 'How much is on the price tag?'\ndiscount = {ask} 'What percentage is the discount?'\n\nnew_price = {call} calculate_new_price {with} old_price, discount\n{print} 'The new price is ' new_price ' dollar'"
+            text: V tej kodi bo na primer funkcija izračunaj_novo_ceno izračunala novo ceno katerega koli predmeta. Vrnila bo novo ceno.
+            code: "{define} izračunaj_novo_ceno {with} znesek, odstotek\n    odstotek = odstotek/ 100\n    znesek_popusta = znesek* odstotek\n    return znesek - znesek_popusta\n\nstara_cena = {ask} 'Kakšna je označena cena?'\npopust = {ask} 'Kakšen je odstotek popusta?'\n\nnova_cena = _ izračunaj_novo_ceno {with} stara_cena, _\n{print} 'Nova cena je ' nova_cena ' Eurov'"
         6:
             header: Debugging
             text: Let's debug this code!
