@@ -2,6 +2,7 @@
 # Between 2 PO files, copy the header (and only the header) from one to the other.
 import sys
 
+
 def find_po_header(lines):
     """Find the po header, starting from 'msgid ""' to the next empty line."""
     start = None
@@ -21,7 +22,6 @@ if __name__ == '__main__':
 
     src_header = find_po_header(src)
     dst_header = find_po_header(dst)
-
 
     if src_header and dst_header:
         dst[dst_header[0]:dst_header[1]] = src[src_header[0]:src_header[1]]
