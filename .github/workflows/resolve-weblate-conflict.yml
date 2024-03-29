@@ -70,7 +70,7 @@ jobs:
 
     - name: Run weblate merge script
       run: |
-        tools/merge-weblate-resolving-conflicts.sh
+        bash tools/merge-weblate-resolving-conflicts.sh
 
     # The create-pull-request action wants to commit the changes, and wants to
     # have them be on the main branch. Hence, move the current working tree to
