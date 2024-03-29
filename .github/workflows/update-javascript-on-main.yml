@@ -42,7 +42,7 @@ jobs:
       run: |
         if [[  "${{ github.event_name }}" == "pull_request"* ]]; then
           echo "Pull Request"
-          echo "branch=${{ github.event.pull_request.head.ref }}" >> $GITHUB_OUTPUT
+          echo "branch=$PULL_REQUEST_HEAD_REF" >> $GITHUB_OUTPUT
           echo "repo=${{ github.event.pull_request.head.repo.full_name }}" >> $GITHUB_OUTPUT
         elif [[  "${{ github.event_name }}" == "push" ]]; then
           echo "Push Event"
@@ -52,6 +52,9 @@ jobs:
           echo "Unsupported event type!" >&2
           exit 1
         fi
+      env:
+        # Necessary to pass like this to avoid shell script injection
+        PULL_REQUEST_HEAD_REF: ${{ github.event.pull_request.head.ref }}
 
     #----------------------------------------------------------------------
     #  Checkout source
