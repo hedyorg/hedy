@@ -168,8 +168,8 @@ class TestsLevel12(HedyTester):
 
     def test_print_subtraction_with_text(self):
         code = "print 'And the winner is ' 5 - 5"
-        expected = f"print(f'''And the winner is {{{self.number_cast_transpiled(
-            5)} - {self.number_cast_transpiled(5)}}}''')"
+        five = self.number_cast_transpiled(5)
+        expected = f"print(f'''And the winner is {{{five} - {five}}}''')"
         output = 'And the winner is 0'
 
         self.multi_level_tester(max_level=17, code=code, expected=expected, output=output)
@@ -1561,7 +1561,7 @@ class TestsLevel12(HedyTester):
         a is 1
         if a is 1
             print a
-        else    
+        else
             print 'nee'""")
 
         expected = textwrap.dedent("""\
@@ -1906,8 +1906,10 @@ class TestsLevel12(HedyTester):
         ('-', '-', '3')])
     def test_nested_int_calc(self, op, transpiled_op, output):
         code = f"print 10 {op} 5 {op} 2"
-        expected = f"print(f'''{{{self.number_cast_transpiled(10)} {transpiled_op} {
-            self.number_cast_transpiled(5)} {transpiled_op} {self.number_cast_transpiled(2)}}}''')"
+        ten = self.number_cast_transpiled(10)
+        five = self.number_cast_transpiled(5)
+        two = self.number_cast_transpiled(2)
+        expected = f"print(f'''{{{ten} {transpiled_op} {five} {transpiled_op} {two}}}''')"
 
         self.multi_level_tester(code=code, unused_allowed=True, expected=expected, output=output, max_level=17)
 
@@ -1940,8 +1942,8 @@ class TestsLevel12(HedyTester):
     @parameterized.expand(['-', '*', '/'])
     def test_print_float_calc_with_string(self, op):
         code = f"print 'het antwoord is ' 2.5 {op} 2.5"
-        expected = f"print(f'''het antwoord is {{{self.number_cast_transpiled('2.5')} {
-            op} {self.number_cast_transpiled('2.5')}}}''')"
+        twona_half = self.number_cast_transpiled('2.5')
+        expected = f"print(f'''het antwoord is {{{twona_half} {op} {twona_half}}}''')"
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
@@ -2251,7 +2253,7 @@ class TestsLevel12(HedyTester):
         code = textwrap.dedent("""\
         x = 'PRINT'
         x is button
-        if PRINT is pressed 
+        if PRINT is pressed
             print 'The button got pressed!'
         else
             print 'Other button is pressed!'""")
@@ -2285,7 +2287,7 @@ class TestsLevel12(HedyTester):
 
     def test_if_button_is_pressed_print_in_repeat(self):
         code = textwrap.dedent("""\
-        x = 'but' 
+        x = 'but'
         x is button
         repeat 3 times
             if but is pressed
