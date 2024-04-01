@@ -2259,7 +2259,23 @@ def get_slides(level):
         return utils.error_page(error=404, ui_message="Slides do not exist!")
 
     slides = SLIDES[g.lang].get_slides_for_level(level, keyword_language)
-    return render_template('slides.html', level=level, slides=slides, user=current_user()['username'])
+    code = slides[2]['code']
+
+    try:
+        level = int(level)
+        if level == 0:  # in level 0, the intro slides, we use codes from level 1
+            level = 1
+    except BaseException:
+        return utils.error_page(error=404, ui_message=gettext('no_such_level'))
+
+    a = Adventure(
+        short_name='start',
+        name='start',
+        text='start',
+        save_name='start',
+        editor_contents=code)
+    adventures = [a]
+    return render_template('slides.html', level=level, slides=slides, user=current_user()['username'], adventures=adventures)
 
 
 @app.route('/translate_keywords', methods=['POST'])

@@ -1,41 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Hedy - Slides - {{ level }} </title>
-    <link rel="stylesheet" href="{{static('css/reveal-js-custom.css')}}">
-    <link rel="stylesheet" href="{{static('vendor/reveal/dist/reset.css')}}">
-    <link rel="stylesheet" href="{{static('vendor/reveal/dist/reveal.css')}}">
-    <link rel="stylesheet" href="{{static('vendor/reveal/dist/theme/sky.css')}}">
-
-    <!-- Theme used for syntax highlighted code -->
-    <link rel="stylesheet" href="{{static('vendor/reveal/plugin/highlight/monokai.css')}}">
-</head>
-<body>
-    <div class="reveal">
-      <div class="slides">
-      </div>
+<div class="slides bg-blue-200">
+    <div class="slides">
+        <div class="flex flex-row items-center justify-center border border-red-200">
+            <div id="lang-switch-btn" class="flex flew-row">
+            {{ render_partial('htmx-language-switch-button.html', commands=commands) }}
+            </div>
+            <div id="code" class="bg-red-200">
+            {{ render_partial("code-page.html",
+                specific_adventure=True,
+                level_nr=level,
+                level=level,
+                adventures=adventures,
+                raw=True,
+                menu=False,
+                blur_button_available=False,
+                javascript_page_options=dict(
+                    page='code',
+                    lang=g.lang,
+                    level=level,
+                    adventures=adventures,
+                    initial_tab='start',
+                    current_user_name=user,
+                    suppress_save_and_load_for_slides=True,
+                ))}}
+            </div>
+        </div>
     </div>
-    <script src="{{static('vendor/reveal/dist/reveal.js')}}"></script>
-    <script src="{{static('vendor/reveal/plugin/notes/notes.js')}}"></script>
-    <script src="{{static('vendor/reveal/plugin/markdown/markdown.js')}}"></script>
-    <script src="{{static('vendor/reveal/plugin/highlight/highlight.js')}}"></script>
-    <script>
-        // More info about initialization & config:
-        // - https://revealjs.com/initialization/
-        // - https://revealjs.com/config/
-        Reveal.initialize({
-            hash: true,
-            transition: 'none',
-            slideNumber: true,
-            keyboard: true,
-            // Learn about plugins: https://revealjs.com/plugins/
-            plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-        });
-    </script>
-</body>
-
-</html>
+</div>
 
 
 
