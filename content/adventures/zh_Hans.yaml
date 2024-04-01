@@ -132,7 +132,7 @@ adventures:
                     {else} {print} '怪物吃掉了' 名字
                     ```
             7:
-                story_text: "在故事里，有人会重复同一个词好几次。比如，当有人在呼救或者唱歌。\n在这一级，你可以通过`{repeat}`在故事中加入这种重复。\n \n### 练习 \n在你自己的故事中加入重复的内容。返回你保存的程序中，选择第6级的故事程序，找到一个包含`{print}` 的行，然后重复它！\n"
+                story_text: "在故事里，有人会重复同一个词好几次。比如，当有人在呼救或者唱歌。\n在这一级，你可以通过`{repeat}`在故事中加入这种重复。\n \n### 练习 \n在你自己的故事中加入重复的内容。返回你保存的程序中，选择第6级的故事程序，\n找到一个包含`{print}` 的行，然后重复它！\n"
                 example_code: |
                     ```
                     {print} '王子不断地呼救'
@@ -175,8 +175,7 @@ adventures:
 
                      ### 练习
 
-                    请看
-                    <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> the story</a> 如果你不知道这个故事，请确保它是按照书中的内容打印的。
+                    请看<a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> the story</a> 如果你不知道这个故事，请确保它是按照书中的内容打印的。
                 example_code: "```\n动物们 = _ , _ , _ \n{print} '棕熊，棕熊 '\n{print} '你看到了什么？'\n```\n"
             12:
                 story_text: |-
@@ -257,8 +256,8 @@ adventures:
         levels:
             3:
                 story_text: |
-                    ## 添加
-                    您可以使用`{add} {to_list}`命令将项目添加到列表中。 要将项目添加到列表中，您只需键入：`{add} 企鹅{to_list} 动物们`，或者您可以使用`{ask}`命令，如示例代码中所示。
+                    ## 添加到
+                    可以使用`{add} {to_list}`命令将项目添加到列表中。要将项目添加到列表中，可以简单地键入：`{add} penguin {to_list} animals`，或者可以像示例代码中那样使用`{ask}`命令。
                 example_code: |
                     ```
                     动物 {is} 狗, 猫, 袋鼠
@@ -362,8 +361,8 @@ adventures:
                     从前页复制你的代码，通过使用 `{ask}` 让变量交互运行.
                 example_code_2: |
                     ```
-                    favorite_animals {is} {ask} 你喜欢什么 动物?
-                    {print} 我喜欢 favorite_animals
+                    动物 {is} {ask} 你喜欢什么 动物?
+                    {print} 我喜欢  动物
                     ```
             18:
                 story_text: 要转换成Python代码，我们需要做的最后一个更改是替换 `{ask}` 为 `{input}`.
@@ -385,11 +384,10 @@ adventures:
                     如果你愿意，你可以再抽一张卡，它的积分会加到你的积分中。发牌人也可以选择拿另一张牌。
                     但是要注意不要超过21分，因为如果你超过了，你就输了!
                     最接近21但没有超过它的玩家获胜。
-
                     好好享受游戏吧！
 
-                    ### Exercise
-                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
+                    ### 练习
+                    这段代码运行良好，但太长太繁琐了。你能使用函数来缩短这段代码吗？
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -515,13 +513,13 @@ adventures:
                     ```
             9:
                 story_text: |
-                    在第 6 级中，您编写了一个计算器程序，在此级别中，您可以扩展该程序来提出多个问题。
+                    在上一个级别中，您创建了一个计算器，在此级别中，可以扩展该代码，以便它询问多个问题。
 
-                    ### 练习 1
-                    你能完成第 10 行以使程序工作吗？
+                    ### 练习1
+                    您可以完成第10行以使代码工作吗？
 
-                    ### 练习 2
-                    输入正确或错误的答案时对玩家给出反馈。为此，请使用 `{else}` 来扩展程序。
+                    ### 练习2
+                    当玩家输入答案时给予反馈，如`{print} 'Correct!'`”或`{print} 'Wrong! The correct answer is ' correct_answer`
                 example_code: |
                     ```
                     分数 = 0
@@ -1117,6 +1115,7 @@ adventures:
                     恭喜！ 您已达到第 2 级。希望您已经编写了一些很棒的代码！
                     在第一级中，您可能已经注意到 `{echo}`命令一次只能保存一位信息。
                     例如，在餐厅冒险中，您可以回应顾客想吃什么或他们想喝什么，但不能在一句话中同时回应两者。
+
                     这在第 2 级中发生了变化。在第 2 级中，您将学习如何使用变量，它允许您保存多条信息并将其打印在您想要的任何位置。
                     那么让我们转到下一个选项卡！
                 example_code: |
@@ -1828,7 +1827,7 @@ adventures:
 
                     例如，在这个代码中，我们编写了歌曲“My Bonnie is over the ocean”的第一节。
                     在这个示例代码中使用了参数`place`。place是一个只在函数中使用的变量，所以是一个参数。
-                    为了使用`place`，我们编写了一行`定义歌曲用place`。
+                    为了使用`place`，我们编写了一行`define song with place`。
                     当函数被调用时，计算机将用`call song with`后的一段文本替换参数`place`。
 
                     ### 练习
@@ -2302,17 +2301,17 @@ adventures:
                     ```
                     name {is} 海蒂
                     age {is} 15
-                    {print} name 是 age 岁
+                    {print} name  是 age  岁
                     ```
                 story_text_2: |
                     ### 练习
                     是时候创建自己的变量了!
-                    在示例代码中，我们以变量“favorite_animals”为例。在第1行中设置了变量，在第2行中，我们在`{print}`命令中使用了变量。
+                    在示例代码中，我们以变量“动物”为例。在第1行中设置了变量，在第2行中，我们在`{print}`命令中使用了变量。
                     首先，在空白处填上你最喜欢的动物，完成我们的例子。然后自己编写至少3个这样的代码。选择一个变量，并使用`{is}`命令设置该变量。然后使用`{print}`命令，就像我们所做的那样。
                 example_code_2: |
                     ```
                     最喜爱的动物 {is} _
-                    {print} 我喜欢 favorite_animals
+                    {print} 我喜欢  动物
                     ```
             6:
                 story_text: |
@@ -3238,18 +3237,19 @@ adventures:
                     ```
             9:
                 story_text: |
-                    在这个关卡中，您不仅可以对多行使用带有`{if}`和`{repeat}`，还可以将它们放在一起!
-                    在这个例子中，你可以在一个`{repeat}`命令中看到一个`{if}`命令。反过来也是允许的，`{if}`也可以出现在`{if}`中，`{repeat}`出现在`{repeat}`中。
-                    试试吧!
+                    干得好！你已经达到了另一个新水平！在上一级中，你学会了在{if}或{repeat}命令中使用多行代码。但是你还不能将两者结合起来……
+
+                    好消息！在这个级别中，您将被允许在{if}中或{repeat}命令中放置一个{if}。将一个代码块放在另一个代码块中称为嵌套。
                 example_code: |
                     ```
-                    {repeat} 3 {times}
-                        food = {ask} '你想要什么?'
-                        {if} food {is} pizza
-                            {print} '棒!'
-                        {else}
-                            {print} '披萨更好一点'
-                    ```
+                    answer = {ask} 'Are you ready to learn something new?'
+                    {if} answer {is} yes
+                        {print} 'Great! You can learn to use the repeat command in the if command!'
+                        {print} 'Hooray!'
+                        {print} 'Hooray!'
+                        {print} 'Hooray!'
+                    {else}
+                        {print} 'Maybe you should practice some more in the previous level'
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: repeat_命令_2
@@ -4704,9 +4704,10 @@ adventures:
             12:
                 story_text: |
                     ### 练习
-                    用小海龟重画图画!
+                    用乌龟重新绘制图纸！
+                    提示：手镯设计程序。首先，为手镯上要使用的每个形状定义一个函数。然后，将形状添加到手镯中，如下所示：
                     </div>
-                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
+                    手镯设计程序 <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
                 example_code: |
                     ```
                     {define} draw_a_square

@@ -166,7 +166,7 @@ def collect_slides_snippets(path):
                                 filename=file,
                                 level=level_number if level_number > 0 else 1,
                                 language=lang,
-                                field_name=f'snippet {number}',
+                                field_name=x,
                                 code=y['code'])
                             Hedy_snippets.append(snippet)
                             number += 1
