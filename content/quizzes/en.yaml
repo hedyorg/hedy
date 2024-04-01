@@ -2640,9 +2640,9 @@ levels:
                 feedback: Alright!
             -   option: |-
                     ```
-                                    flavors = 'vanilla, strawberry, chocolate'
-                                    {print} 'I would like a ' flavors {at} {random} ' cake.'
-                                    ```
+                    flavors = 'vanilla, strawberry, chocolate'
+                    {print} 'I would like a ' flavors {at} {random} ' cake.'
+                    ```
                 feedback: All the different values of flavors should be in quotation marks.
             hint: The second line is the same in each code, pay attention to the first line
             correct_answer: C
@@ -2710,7 +2710,7 @@ levels:
             correct_answer: B
             question_score: '10'
         6:
-            question_text: Which line should be filled in at the ???
+            question_text: Which line should be filled in at the `_`?
             code: |-
                 {print} 'Welcome to McHedy!'
                 order = {ask} 'Would you like a hamburger or fries?'
@@ -2720,7 +2720,7 @@ levels:
                     price = 4
                 drinks = {ask} 'Would you like a drink with that for 2 dollars?'
                 {if} drinks = 'yes'
-                    ???
+                    _
                 {print} 'That will be ' price ' dollar please'
             mp_choice_options:
             -   option: |-
@@ -2814,9 +2814,9 @@ levels:
             correct_answer: B
             question_score: '10'
         9:
-            question_text: Which code should be filled in in line 1 at the ???
+            question_text: Which code should be filled in in line 1 at the `_`?
             code: |-
-                ???
+                _
                 {print} 'You won ' prizes {at} {random} '!'
             mp_choice_options:
             -   option: |-
@@ -2843,10 +2843,10 @@ levels:
             correct_answer: C
             question_score: '10'
         10:
-            question_text: Which line of code should be filled in at the ??? to complete the song ?
+            question_text: Which line of code should be filled in at the `_` to complete the song ?
             code: |-
                 actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
-                ???
+                _
                     {for} i {in} {range} 0 {to} 1
                         {print} 'if youre happy and you know it'
                         {print} action
