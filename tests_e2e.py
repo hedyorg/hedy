@@ -1055,13 +1055,13 @@ class TestProgram(AuthHelper):
 
         # WHEN sharing a program without being logged in
         # THEN receive a forbidden response code from the server
-        self.post_data('programs/share/123456/1/False', {'id': '123456'},
+        self.post_data('programs/share/123456/False', {'id': '123456'},
                        expect_http_code=403,
                        no_cookie=True)
 
         # WHEN sharing a program that does not exist
         # THEN receive a not found response code from the server
-        self.post_data('programs/share/123456/1/0', {'id': '123456'}, expect_http_code=404)
+        self.post_data('programs/share/123456/0', {'id': '123456'}, expect_http_code=404)
 
     def test_valid_make_program_public(self):
         # GIVEN a logged in user with at least one program
@@ -1071,7 +1071,7 @@ class TestProgram(AuthHelper):
 
         # WHEN making a program public
         # THEN receive an OK response code from the server
-        self.post_data('programs/share/' + program_id + '/1' + '/False', {'id': program_id})
+        self.post_data('programs/share/' + program_id + '/False', {'id': program_id})
 
         saved_programs = self.get_data('programs/list')['programs']
         for program in saved_programs:
@@ -1091,11 +1091,11 @@ class TestProgram(AuthHelper):
         self.given_user_is_logged_in()
         program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         program_id = self.post_data('programs', program)['id']
-        self.post_data('programs/share/' + program_id + '/1' + '/0', {'id': program_id})
+        self.post_data('programs/share/' + program_id + '/0', {'id': program_id})
 
         # WHEN making a program private
         # THEN receive an OK response code from the server
-        self.post_data('programs/share/' + program_id + '/1' + '/False', {'id': program_id})
+        self.post_data('programs/share/' + program_id + '/False', {'id': program_id})
 
         saved_programs = self.get_data('programs/list')['programs']
         for program in saved_programs:
