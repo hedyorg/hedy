@@ -1290,7 +1290,7 @@ levels:
                 {print}'我很忧郁'
                 {repeat} 7 {times} {print} 'da ba dee, da ba da'
             mp_choice_options:
-            -   option: '`我是`'
+            -   option: '`I''m`'
                 feedback: 这是正确的！
             -   option: '`{print}`'
                 feedback: '`{print}` 拼写正确'
@@ -3371,7 +3371,7 @@ levels:
                     tries = tries + 1
                 {print} '你掷出6点用了' tries ' 次.'
             mp_choice_options:
-            -   option: 在第 1 行中，应使用“==”而不是“=”
+            -   option: 在第 1 行中，应使用`==`而不是`=`
                 feedback: 不是这样的
             -   option: 第二行缺少引号
                 feedback: 这是不对的
@@ -3619,9 +3619,9 @@ levels:
                 feedback: 可怜的Wesley!
             -   option: |-
                     ```
-                    Wesley得做饭
-                    Wesley得做饭
-                    Wesley得做饭
+                    韦斯利得做饭
+                    韦斯利得做饭
+                    韦斯利得做饭
                     ```
                 feedback: 不是这样的
             hint: 这不是随机的...
