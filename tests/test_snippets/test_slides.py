@@ -15,16 +15,16 @@ def slides_locator(entry):
         # Some entries are designed to fail, skip those
         return snippet_tester.SKIP
 
-    decision = snippet_tester.locator_decision_from_map(entry.field_path, {
+    return at_least_level_1(snippet_tester.locator_decision_from_map(entry.field_path, {
         'levels.<LEVEL>.*.code': snippet_tester.COLLECT,
-    })
+    }))
 
+def at_least_level_1(decision):
     # The slides contain level=0 entries, which should be treated as level=1
     if isinstance(decision, tuple):
-        decision, level = decision
-        if level == 0:
-            level = 1
-        return decision, level
+        if decision[1] == 0:
+            return decision[0], 1
+    return decision
 
 
 snippets = snippet_tester.collect_yaml_snippets('content/slides', slides_locator)
