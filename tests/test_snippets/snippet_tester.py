@@ -236,7 +236,6 @@ class HedySnippetTester(HedyTester):
                 print(error_message)
                 raise E
 
-
     def restore_snippet_to_english(self, snippet):
         # English file is always 'en.yaml' in the same dir
         en_file = path.join(path.dirname(snippet.filename), 'en.yaml')
