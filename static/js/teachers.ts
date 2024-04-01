@@ -245,7 +245,7 @@ function update_db_adventure(adventure_id: string) {
     }
   }
   // We have to replace <br> for newlines, because the serializer swithces them around
-  const formatted_content = html.getElementsByTagName('body')[0].outerHTML.replace(/<br>/, '\n');
+  const formatted_content = html.getElementsByTagName('body')[0].outerHTML.replace(/<br>/g, '\n');
   const agree_public = $('#agree_public').prop('checked');
   const language = $('#language').val();
 

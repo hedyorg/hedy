@@ -1,52 +1,52 @@
 levels:
     0:
         1:
-            header: Welcome to Hedy!
-            text: Hedy is a programming language.
+            header: Dobrodošli v Hedy!
+            text: Hedy je programski jezik.
         2:
-            header: Programming
-            text: "Programming is giving instructions to a computer, using the language of the computer.\n\nSuch a language is called a \"programming language\"."
+            header: Programiranje
+            text: "Programiranje je podajanje navodil računalniku z uporabo računalniku razumljivega jezika.\n\nTakšen jezik se imenuje \"programski jezik\"."
         3:
-            header: Programming Language
-            text: "Maybe you already know some programming languages?\nSome examples are:\n* Scratch\n* Python\n* HTML"
+            header: Programski Jezik
+            text: "Morda že poznate kakšen programski jezik?\nNekaj primerov:\n* Scratch\n* Python\n* HTML"
         4:
-            header: Programming
-            text: "If you can program, you can do many cool things:\n* Build interactive stories\n* Create computer drawings and draw these on paper or fabric\n* Build your own apps to use on your phone"
+            header: Programiranje
+            text: "Če znate programirati, lahko naredite veliko zanimivih stvari:\n* Zgradite interaktivne zgodbe ali kvize\n* Ustvarite računalniške risbe in jih narišite na papir ali blago\n* Ustvarite lastne aplikacije za uporabo v telefonu"
         5:
-            header: Programming in Hedy
-            text: In Hedy we use special codes, like `{print}`.
-            code: '{print} Welcome to Hedy!'
+            header: Programiranje v Hedy
+            text: V Hedy uporabljamo posebne izraze, kot je `{print}`.
+            code: '{print} Dobrodošli v Hedy!'
         6:
-            header: Programming in Hedy
-            text: Code words will be shown in pink.
-            code: '{print} Welcome to Hedy!'
+            header: Programiranje v Hedy-ju
+            text: Ključni ukazi bodo prikazani v rožnati barvi.
+            code: '{print} Dobrodošli v Hedy!'
         7:
-            header: Programming in Hedy
-            text: We start the code with the Run code button underneath the code.
-            code: '{print} Welcome to Hedy!'
+            header: Programiranje v Hedy-ju
+            text: Kodo zaženemo / začnemo izvajati z gumbom Zaženi program pod kodo.
+            code: '{print} Dobrodošli v Hedy!'
         8:
-            header: Programming in Hedy
-            text: Output appears on the right-hand side.
-            code: '{print} Welcome to Hedy!'
+            header: Programiranje v Hedy-ju
+            text: Rezultat se prikaže na desni strani.
+            code: '{print} Dobrodošli v Hedy!'
         9:
-            header: Programming in Hedy
-            text: The output can also be a drawing.
+            header: Programiranje v Hedy-ju
+            text: Rezultat je lahko tudi slika.
             code: "{forward} 100\n{turn} {left}"
     1:
         1:
-            header: Welcome to level 1!
-            text: "We will start level 1 by making stories in Hedy!\n\nWe need three text codes to create interactive stories."
+            header: Dobrodošli v prvo stopnjo!
+            text: "1. stopnjo bomo začeli z ustvarjanjem zgodb v Hedy!\n\nZa ustvarjanje interaktivnih zgodb potrebujemo tri ukaze."
         2:
             header: '{print}'
-            text: "The first code that you can use in level 1 is `{print}`.\n\n`{print}` is used to show text on the screen."
-            code: '{print} Show text on the screen'
+            text: "Prvi ukaz, ki ga lahko uporabite na ravni 1  je `{print}`.\n\n`{print}` se uporablja za prikaz besedila na zaslonu."
+            code: '{print} Izpiši besedilo na zaslonu'
         3:
             header: The {print} command
-            text: "You can change the text after the print command to whatever you want.\n\nOr you could print multiple lines by adding another line of code that also starts with `{print}`."
-            code: "{print} Welcome to Hedy!\n{print} Start programming now!"
+            text: "Besedilo po ukazu za tiskanje lahko poljubno spremenite.\n\nLahko pa natisnete več vrstic tako, da dodate drugo vrstico kode, ki se prav tako začne z `{print}``."
+            code: "{print} Dobrodošli v Hedy!\n{print} Zdaj pa začnimo programirati!"
         4:
             header: '{ask}'
-            text: "The second code that you can use in level 1 is `{ask}`.\n\n`{ask}` is used to ask a question that can be answered."
+            text: "Drugi ukaz, ki jo lahko uporabite na prvi stopnji, je `{ask}`.\n\n`{ask}` se uporablja za zastavljanje vprašanja, na katerega je mogoče odgovoriti."
             code: "{print} Welcome to your own rock scissors paper!\n{ask} What will you choose?"
         5:
             header: '{echo}'
@@ -86,9 +86,9 @@ levels:
     2:
         1:
             header: Welcome to level 2
-            text: "In this level you will learn to use variables.\n\nA variable is a word that can be used to store information.\n\nFor example: a name, age or favorite sports team."
+            text: "Na tej stopnji se boste naučili uporabljati spremenljivke.\n\nSpremenljivka je beseda, ki se lahko uporablja za shranjevanje informacij.\n\nNa primer: ime, starost ali najljubša športna ekipa."
         2:
-            header: Variables
+            header: Spremenljivke
             text: To make or 'set' a variable we use the `{is}` command
             code: "name {is} Hedy\nage {is} 15\n{print} name is age years old"
         3:
@@ -96,85 +96,85 @@ levels:
             text: "We can also set a variable by asking questions.\n\nThe answer to the question is stored in the variable.\n\nThis way we don't need the `{echo}` command."
             code: "name {is} {ask} What is your name?\n{print} Hello name"
         4:
-            header: Multiple variables
-            text: Now that we use variables, we can use multiple variables instead of just one `{echo}` command.
+            header: Več spremenljivk
+            text: Zdaj, ko znamo uporabljati spremenljivke, lahko namesto enega ukaza `{echo}` uporabimo več spremenljivk.
             code: "name {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old."
         5:
             header: Sleep
-            text: You can also use the `{sleep}` command to pause the code for a while.
-            code: "{print} My favorite colour is...\n{sleep} 2\n{print} green!"
+            text: Z ukazom`{sleep}`lahko izvajnje programa za nekaj časa zaustavite.
+            code: "{print} Moja priljubljena barva je...\n{sleep} 2\n{print} zelena!"
         6:
-            header: Sleep 5
-            text: "You can add a number after the `{sleep}` command if you want the pause to be longer.\n\nIf you want, you could even use a variable instead of a number to decide the duration of the sleep command."
+            header: Zaspi 5
+            text: "Za ukazom `{sleep}` lahko dodate številko, če želite, da je premor daljši.\n\nČe želite, lahko celo uporabite spremenljivko namesto številke, da določite  koliko sekund naj program spi."
             code: "pause {is} 10\n{print} My favorite colour is...\n{sleep} pause\n{print} green!"
         7:
-            header: Debugging
-            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
-            code: "{print} Welcome to the donut shop!\nfilling {is} What kind of filling would you like?\n{print} You have chosen... Filling! Yum!\ntopping {ask} What kind of topping would you like?\ntopping is delicious!\n{print} I'll go get your donut. {sleep}\n{print} Here you go! A filling donut with toping!\n{ask} Have a nice day!"
+            header: Razhroščevanje
+            text: Razhroščevanje oziroma odpravljanje napak pomeni, da se znebite napak v programu. Skupaj razhroščimo to kodo. Kliknite na gumb pikapolonica, da zaženete razhroščevalnik.
+            code: "Dobrodošli v trgovini s krofi!\npolnilo {is} Kakšno polnilo bi radi?\n{print} Izbrali ste... polnilo, njam!\npreliv {ask} Kakšen preliv bi želeli?\npreliv je okusen!\n{print} Grem po tvoj krof. {sleep}\n{print} Izvolite! Nasiten krof s prelivom!\n{ask} Lep dan!"
             debug: 'True'
         8:
-            header: Let the programming fun begin!
-            text: Enjoy the adventures in level 2!
+            header: Naj se zabava ob programiranju začne!
+            text: Uživajte v dogodivščinah na 2. stopnji!
     3:
         1:
-            header: Welcome to level 3
-            text: In this level you'll learn how to make a list, add and remove items form your lists and pick a random item off that list.
+            header: Dobrodošli na stopnjo 3
+            text: Na tej stopnji se boste naučili narediti seznam, dodati in odstraniti elemente s seznamov ter izbrati naključni element s tega seznama.
         2:
-            header: Making a list
-            text: "You make a list with `{is}`.\n\nSeparate the items on your list with a comma."
-            code: animals {is} dogs, cats, kangaroos
+            header: Ustvarjanje seznama
+            text: "Seznam ustvarite z ukazom `{is}`.\n\nPredmete na seznamu ločite z vejico."
+            code: živali {is} psi, mačke, kenguruji
         3:
-            header: At random
-            text: "You can use the list with the `{at}` `{random}` command.\nThe computer will randomly pick one item of the list.\nEvery time you run this code the output will differ."
-            code: "animals {is} dogs, cats, kangaroos\n{print} animals {at} {random}"
+            header: Naključno
+            text: "Seznam lahko uporabite z ukazom `{at}` `{random}`.\nRačunalnik bo naključno izbral en element s seznama.\nVsakič, ko zaženete to kodo, se bo rezultat razlikoval."
+            code: "žival {is} pes, mačka, kenguru\n{print} žival {at} {random}"
         4:
-            header: At random in a sentence
-            text: You can use the `{at}` `{random}` command in a sentence as well.
+            header: Naključno v stavku
+            text: Ukaz `{at}` `{random}` lahko uporabite tudi v stavku.
             code: "animals {is} dogs, cats, kangaroos\n{print} My favorite animal is animals {at} {random}"
         5:
             header: Add to
-            text: "You can add items to a list with the `{add}` `{to}` command.\n\nYou can choose what to add to the list or you can use the `{add}` `{to}` command in combination with the `{ask}` command.\nThis way you can let the player decide what to add to the list."
-            code: "animals {is} dog, cat, kangaroo\nlike {is} {ask} What is your favorite animal?\n{add} like {to_list} animals\n{print} I choose animals {at} {random}"
+            text: "Elemente lahko dodate na seznam z ukazom `{add}` `{to}`.\n\nIzberete lahko, kaj boste dodali na seznam, ali pa uporabite ukaz `{add}` `{to}` v kombinaciji z ukazom `{ask}`.\nTako lahko igralcem omgoočilte, da se odločijo, kaj dodati na seznam."
+            code: "žival {is} pes, mačka, kenguru\nvšeč {is} {ask} Katera je vaša najljubša žival?\n{add} všeč {to_list} žival\n{print} Jaz izberem žival {at} {random}"
         6:
-            header: Remove from
-            text: "The opposite of the `{add}` `{to}` command is the  `{remove}` `{from}` command.\nThis command removes an item from a list."
-            code: "animals {is} dog, cat, kangaroo\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}"
+            header: Odstrani iz
+            text: "Nasprotje ukaza `{add}` `{to}` je ukaz `{remove}` `{from}`.\nTa ukaz odstrani element s seznama."
+            code: "žival {is} pes, mačka, kenguru\nne_maram {is} {ask} Katere živali ne marate?\n{remove} ne_maram {from} žival\n{print} Jaz izberem žival {at} {random}"
         7:
-            header: Debugging
-            text: Let's debug this code!
+            header: Razhroševanje
+            text: Razhroščimo to kodo!
             editor: "music_genres {is} rock, pop, metal, indie, jazz\nchosen_genre is music {at} {random}\n{print} Let's listen to chosen genre\nnice {ask} Do you like that genre?\n{remove} chosen_genre {from} chosen_genre\nsecond_choice {is} music_genres\n{print} or do you prefer... second_choice {at} {random}\n{remove} second_choice {to} music_genres\n{print} I like music_genre {random} best!"
             debug: 'True'
         8:
-            header: Let's get to work!
-            text: Enjoy the adventures in level 3!
+            header: Gremo na delo!
+            text: Uživajte v dogodivščinah na 3. stopnji!
     4:
         1:
-            header: Welcome to level 4
-            text: In this level you will learn how to use quotation marks.
-            code: "{print} 'print with quotes!'"
+            header: Dobrodošli na stopnji 4
+            text: Na tej stopnji se boste naučili uporabljati narekovaje.
+            code: "{print} 'vprašaj z narekovaji'"
         2:
-            header: Problem
-            text: 'In the previous levels, you might have come across this problem:'
-            code: "name {is} Sophie\n{print} My name is name"
+            header: Težava
+            text: 'V prejšnjih stopnjah ste morda naleteli na to težavo:'
+            code: "ime {is} Sofija\n{print} Moje ime je ime"
             debug: 'True'
         3:
-            header: Fixing it with quotation marks
-            text: "In this level we will fix this problem by using quotation marks.\n\nThis also makes our code look more like 'real' Python code."
+            header: Popravek z narekovaji
+            text: "Na tej stopnji bomo to težavo odpravili z uporabo narekovajev.\n\nZaradi tega je tudi naša koda bolj podobna \"pravi\" Python kodi."
         4:
-            header: Quotation marks with print
-            text: Each time you use the `{print}` command you need to put the text that you want to appear on the screen in quotation marks.
+            header: Narekovaji in izpisovanje
+            text: Vsakič, ko uporabite ukaz `{print}`, morate dodati besedilo, ki ga želite prikazati na zaslonu, v narekovaje.
             code: "{print} 'print with quotes!'"
         5:
             header: Quotation marks with ask
             text: This also goes for the `{ask}` command.
             code: name {is} {ask} 'name please?'
         6:
-            header: Quotation marks and variables
-            text: "You do not want variable names to be printed on the screen.\nThis is why variables should be left out of the quotation marks, like this:"
+            header: Narekovaji in spremenljivke
+            text: "Imena spremenljivk ne želite izpisati na zaslonu.\nZato je treba spremenljivke pustiti zunaj narekovajev, kot na primer:"
             code: "name {is} Harry\n{print} 'Hello ' name"
         7:
-            header: Quotation marks and variables
-            text: "When variable names are used in the middle of a sentence, you have to leave the variables out of the quotation marks.\nThe rest of the sentence however, does need quotation marks. That looks like this:"
+            header: Narekovaji in spremenljivke
+            text: "Če so imena spremenljivk uporabljena sredi stavka, jih morate pustiti zunaj narekovajev.\nZa preostali del stavka pa so potrebni narekovaji. To izgleda takole:"
             code: "name {is} Harry\n{print} 'Hello ' name ', how are you?'"
         8:
             header: Quotation marks and contractions
@@ -255,8 +255,8 @@ levels:
             text: "From now on you can also use the = symbol instead of the `{is}` command.\nThis goes for both numbers and words, and it also goes after the `{if}` or `{else}` commands."
             code: "name = Hedy\nanswer = 20 + 4"
         8:
-            header: Calculations with variables
-            text: 'You can use calculations with numbers, but you can also use variables to do calculations, like this:'
+            header: Računanje s spremenljivkami
+            text: 'Izračune lahko izvajate neposredno s številkami, vendar lahko za računanje uporabljate tudi spremenljivke, kot je ta:'
             code: "number_1 = {ask} 'Fill in the first number:'\nnumber_2 = {ask} 'Fill in the second number:'\ncorrect_answer = number_1 * number_2\n{print} number_1 ' times ' number_2 ' is ' correct_answer"
         9:
             header: Debugging
@@ -398,7 +398,7 @@ levels:
             code: "{for} counter {in} {range} 1 {to} 10\n    {print} counter\n{print} 'Ready or not. Here I come!'"
         3:
             header: the variable i
-            text: "In the previous slide the variable was named 'counter', because it was counting down.\nYou can of course use any name for the variable you want.\nThe standard name  for variables in this situation that is used in programming languages like Python is 'i'.\nThat looks like this:"
+            text: "Na prejšnji strani je bila spremenljivka poimenovana 'števec', ker je odštevala.\nSeveda lahko za spremenljivko uporabite poljubno ime.\nObičajno ime za spremenljivke v takšni situaciji, ki se uporablja v programskih jezikih, kot je Python, je 'i'.\nTo izgleda takole:"
             code: "number = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * number"
         4:
             header: Debugging
@@ -414,7 +414,7 @@ levels:
             text: "From this level on you are allowed to use decimal numbers and there are some changes to the quotation marks.\nYou can also use functions from this level on!"
         2:
             header: Quotation marks
-            text: "This level makes some changes to the usage of quotation marks.\nFrom now on, **all texts** need to be in quotation marks. This includes values of variables, items on lists and text after {if} commands."
+            text: "Na tej stopnji je nekaj sprememb pri uporabi narekovajev.\nOdslej morajo biti **vsa besedila** v narekovajih. To vključuje vrednosti spremenljivk, elemente na seznamih in besedilo za ukazi {if}."
             code: "name = 'Hedy the Robot'\n{print} 'Hello ' name"
         3:
             header: Decimal numbers
@@ -463,7 +463,7 @@ levels:
             code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'"
         7:
             header: Even more questions!
-            text: "Now we have combined even more question with the function. Type this code and see what happens.\n\nNote how the variables and the arguments have the same name. This is allowed.\nDoes it confuse you? Just use different names, that is allowed as well.\n```\ndefine song with name, place\n    print 'My ' name ' is ' place\n\nname is ask 'Who?'\nplace is ask 'Where are they?'\ncall song with name, place\n```"
+            text: "Zdaj smo v funkcijo združili več vprašanj. V program vnesite to kodo in poglejte, kaj se bo zgodilo.\n\nUpoštevajte, da imajo spremenljivke in argumenti enako ime. To je dovoljeno.\nVas to moti? Uporabite različna imena, tudi to je dovoljeno.\n```\ndefiniraj pesem z ime, kraj\n    izpiši 'Moje ' ime ' je ' kraj\n\nime je vprašaj 'Kdo?'\nplace is vprašaj 'Kje so?'\npokliči pesmi z ime, kraj\n```"
             code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'"
         8:
             header: Debugging
@@ -490,8 +490,8 @@ levels:
             text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
         5:
             header: Return value
-            text: For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
-            code: "{define} calculate_new_price {with} amount, percentage\n    percentage = percentage / 100\n    discount_amount = amount * percentage\n    {return} amount - discount_amount\n\nold_price = {ask} 'How much is on the price tag?'\ndiscount = {ask} 'What percentage is the discount?'\n\nnew_price = {call} calculate_new_price {with} old_price, discount\n{print} 'The new price is ' new_price ' dollar'"
+            text: V tej kodi bo na primer funkcija izračunaj_novo_ceno izračunala novo ceno katerega koli predmeta. Vrnila bo novo ceno.
+            code: "{define} izračunaj_novo_ceno {with} znesek, odstotek\n    odstotek = odstotek/ 100\n    znesek_popusta = znesek* odstotek\n    return znesek - znesek_popusta\n\nstara_cena = {ask} 'Kakšna je označena cena?'\npopust = {ask} 'Kakšen je odstotek popusta?'\n\nnova_cena = _ izračunaj_novo_ceno {with} stara_cena, _\n{print} 'Nova cena je ' nova_cena ' Eurov'"
         6:
             header: Debugging
             text: Let's debug this code!

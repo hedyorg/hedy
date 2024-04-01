@@ -38,9 +38,6 @@ declare const Sk: {
   importMainWithBody(name: string, dumpJS: boolean, body: string, canSuspend: boolean): Suspension;
 
   setTimeout?: (func: () => void, delay: number) => any;
-  insertPyGameEvent: (eventName: string) => null;
-  bindPygameListeners(); void;
-  unbindPygameListeners(): void;
   Debugger: any
 }
 

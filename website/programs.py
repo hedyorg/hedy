@@ -9,7 +9,15 @@ import hedy_content
 import hedy
 import utils
 from config import config
-from website.auth import current_user, email_base_url, is_admin, requires_admin, requires_login, send_email
+from website.auth import (
+    current_user,
+    email_base_url,
+    is_admin,
+    requires_admin,
+    requires_login,
+    requires_teacher,
+    send_email,
+)
 
 from .achievements import Achievements
 from .database import Database
@@ -258,13 +266,35 @@ class ProgramsModule(WebsiteModule):
         if not result or result["username"] != user["username"]:
             return "No such program!", 404
 
-        program = self.db.submit_program_by_id(body["id"])
+        program = self.db.submit_program_by_id(body["id"], True)
         self.db.increase_user_submit_count(user["username"])
         self.achievements.increase_count("submitted")
         self.achievements.verify_submit_achievements(user["username"])
 
         response = {
             "message": gettext("submitted"),
+            "save_info": SaveInfo.from_program(Program.from_database_row(program)),
+            "achievements": self.achievements.get_earned_achievements(),
+        }
+        return jsonify(response)
+
+    @route("/unsubmit", methods=["POST"])
+    @requires_teacher
+    def unsubmit_program(self, user):
+        body = request.json
+        if not isinstance(body, dict):
+            return "body must be an object", 400
+        if not isinstance(body.get("id"), str):
+            return "id must be a string", 400
+
+        result = self.db.program_by_id(body["id"])
+        if not result:
+            return "No such program!", 404
+
+        program = self.db.submit_program_by_id(body["id"], False)
+
+        response = {
+            "message": gettext("unsubmitted"),
             "save_info": SaveInfo.from_program(Program.from_database_row(program)),
             "achievements": self.achievements.get_earned_achievements(),
         }
