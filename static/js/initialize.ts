@@ -4,6 +4,7 @@ import { initializeApp, initializeCodePage, InitializeCodePageOptions, initializ
 import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
 import { logs } from './logs';
+import { initializeSlides, InitializeSlidesOptions } from './slides';
 import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions } from './teachers';
 import { initializeTutorial } from './tutorials/tutorial';
 
@@ -55,6 +56,7 @@ type InitializePageOptions =
   | InitializeClassOverviewPageOptions
   | InitializeAdminUsersPageOptions
   | InitializeCustomizeAdventurePage
+  | InitializeSlidesOptions
   ;
 
 
@@ -100,6 +102,10 @@ export function initialize(options: InitializeOptions) {
     
     case 'customize-adventure':
       initializeCustomAdventurePage(options.javascriptPageOptions);
+      break;
+
+    case 'slides':
+      initializeSlides(options.javascriptPageOptions);
       break;
 
   }
