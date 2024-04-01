@@ -30,31 +30,16 @@ def at_least_level_1(decision):
 
 snippets = snippet_tester.collect_yaml_snippets('content/slides', slides_locator)
 
-Hedy_snippets = [(s.name, s) for s in snippet_tester.collect_slides_snippets(
-    path=path.join(snippet_tester.rootdir(), 'content/slides'))]
-
-assert len(snippets) == len(Hedy_snippets)
-
-
-Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
+snippets = HedyTester.translate_keywords_in_snippets(snippets)
 
 # lang = 'zh_hans' #useful if you want to test just 1 language
 lang = None
 level = None
-Hedy_snippets = snippet_tester.filter_snippets(Hedy_snippets, lang=lang, level=level)
-
-if lang:
-    Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.language[:2] == lang]
+snippets = snippet_tester.filter_snippets(snippets, lang=lang, level=level)
 
 
 class TestsSlidesPrograms(snippet_tester.HedySnippetTester):
-    @parameterized.expand(Hedy_snippets, skip_on_empty=True)
+    @parameterized.expand(snippet_tester.snippets_with_names(snippets), skip_on_empty=True)
     def test_slide_programs(self, name, snippet):
-        self.do_snippet(snippet, yaml_locator=slides_locator)
+        self.do_snippet(snippet)
 
-
-def slides_locator(snippet, yaml):
-    """Returns where in the Slides YAML we found a Slides snippet."""
-    return snippet_tester.YamlLocation(
-        dict=yaml['levels'][snippet.level][snippet.field_name],
-        key='code')
