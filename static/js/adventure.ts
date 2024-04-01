@@ -27,39 +27,9 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
 
     if (editorContainer) {
         await initializeEditor(lang, editorContainer);
+        showWarningIfMultipleLevels(TRADUCTION)
         $editor.model.document.on('change:data', () => {            
-            const content = DOMPurify.sanitize($editor.getData())
-            const parser = new DOMParser();
-            const html = parser.parseFromString(content, 'text/html');
-
-            for (const tag of html.getElementsByTagName('code')) {
-                if (tag.className !== "language-python") {
-                    const coincidences = findCoincidences(tag.innerText, TRADUCTION);
-                    if (coincidences.length > 1 && !keywordHasAlert.get(tag.innerText)) {
-                        keywordHasAlert.set(tag.innerText, true);
-                        // We create the alert box dynamically using the template element in the HTML object
-                        const template = document.querySelector('#warning_template') as HTMLTemplateElement
-                        const clone = template.content.cloneNode(true) as HTMLElement
-                        let close = clone.querySelector('.close-dialog');
-                        close?.addEventListener('click', () => {
-                            keywordHasAlert.set(tag.innerText, false);
-                            close?.parentElement?.remove()
-                        })
-                        let p = clone.querySelector('p[class^="details"]')!
-                        let message = ClientMessages['multiple_keywords_warning']
-                        message = message.replace("{orig_keyword}", formatKeyword(tag.innerText))
-                        let keywordList = ''
-                        for (const keyword of coincidences) {
-                            keywordList = keywordList === '' ? formatKeyword(`{${keyword}}`) : keywordList + `, ${formatKeyword(`{${keyword}}`)}`
-                        }
-                        message = message.replace("{keyword_list}", keywordList)
-                        p.innerHTML = message
-                        // Once the warning has been created we append it to the container
-                        const warningContainer = document.getElementById('warnings_container')!
-                        warningContainer.appendChild(clone)
-                    }
-                }
-            }
+            showWarningIfMultipleLevels(TRADUCTION)
         })
     }
 
@@ -88,6 +58,41 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
         })
     })
 
+}
+
+function showWarningIfMultipleLevels(TRADUCTION: Map<string, string>) {
+    const content = DOMPurify.sanitize($editor.getData())
+    const parser = new DOMParser();
+    const html = parser.parseFromString(content, 'text/html');
+
+    for (const tag of html.getElementsByTagName('code')) {
+        if (tag.className !== "language-python") {
+            const coincidences = findCoincidences(tag.innerText, TRADUCTION);
+            if (coincidences.length > 1 && !keywordHasAlert.get(tag.innerText)) {
+                keywordHasAlert.set(tag.innerText, true);
+                // We create the alert box dynamically using the template element in the HTML object
+                const template = document.querySelector('#warning_template') as HTMLTemplateElement
+                const clone = template.content.cloneNode(true) as HTMLElement
+                let close = clone.querySelector('.close-dialog');
+                close?.addEventListener('click', () => {
+                    keywordHasAlert.set(tag.innerText, false);
+                    close?.parentElement?.remove()
+                })
+                let p = clone.querySelector('p[class^="details"]')!
+                let message = ClientMessages['multiple_keywords_warning']
+                message = message.replace("{orig_keyword}", formatKeyword(tag.innerText))
+                let keywordList = ''
+                for (const keyword of coincidences) {
+                    keywordList = keywordList === '' ? formatKeyword(`{${keyword}}`) : keywordList + `, ${formatKeyword(`{${keyword}}`)}`
+                }
+                message = message.replace("{keyword_list}", keywordList)
+                p.innerHTML = message
+                // Once the warning has been created we append it to the container
+                const warningContainer = document.getElementById('warnings_container')!
+                warningContainer.appendChild(clone)
+            }
+        }
+    }
 }
 
 function formatKeyword(name: string) {
