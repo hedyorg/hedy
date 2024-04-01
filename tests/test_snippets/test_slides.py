@@ -21,4 +21,11 @@ if lang:
 class TestsSlidesPrograms(snippet_tester.HedySnippetTester):
     @parameterized.expand(Hedy_snippets, skip_on_empty=True)
     def test_slide_programs(self, name, snippet):
-        self.do_snippet(snippet)
+        self.do_snippet(snippet, yaml_locator=slides_locator)
+
+
+def slides_locator(snippet, yaml):
+    """Returns where in the Slides YAML we found a Slides snippet."""
+    return snippet_tester.YamlLocation(
+        dict=yaml['levels'][snippet.level][snippet.field_name],
+        key='code')

@@ -11,13 +11,13 @@ echo "------> Python unit tests"
 
 
 # test_snippets (~20,000 tests) are only run for Weblate PRs.
-slow_suites=test_highlighting,test_level,test_translation_level,test_snippet
+slow_suites=test_highlighting,test_level,test_translation_level,test_snippets
+workers=${WORKERS:-4}
 
 # This is expected to run from the repo root
-#
-eval python -m pytest -n 2 --ignore=tests/{$slow_suites}
+eval python -m pytest -n $workers --ignore=tests/{$slow_suites}
 
 if [[ "${1:-}" == "--weblate" ]]; then
   # Add in the slow suites
-  eval python -m pytest -n 2 {$slow_suites} --tb=no -rN
+  eval python -m pytest -n $workers tests/{$slow_suites} --tb=no -rN
 fi
