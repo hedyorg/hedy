@@ -371,23 +371,16 @@ class HedyTester(unittest.TestCase):
         if command == 'forward':
             suffix = '\n      time.sleep(0.1)'
 
-        type = 'int' if level < 12 else 'float'
+        func = 'int_with_error' if level < 12 else 'number_with_error'
 
         return textwrap.dedent(f'''\
-      __trtl = {val}
-      try:
-        __trtl = {type}(__trtl)
-      except ValueError:
-        raise Exception({HedyTester.value_exception_transpiled()})
+      __trtl = {func}({val}, {HedyTester.value_exception_transpiled()})
       t.{command}(min(600, __trtl) if __trtl > 0 else max(-600, __trtl)){suffix}''')
 
     @staticmethod
     def sleep_command_transpiled(val):
-        return textwrap.dedent(f'''\
-        try:
-          time.sleep(int({val}))
-        except ValueError:
-          raise Exception({HedyTester.value_exception_transpiled()})''')
+        return textwrap.dedent(f'\
+          time.sleep(int_with_error({val}, {HedyTester.value_exception_transpiled()}))')
 
     @staticmethod
     def turtle_color_command_transpiled(val, lang="en"):
@@ -398,7 +391,7 @@ class HedyTester(unittest.TestCase):
         __trtl = f'{val}'
         color_dict = {color_dict}
         if __trtl not in {both_colors}:
-          raise Exception({HedyTester.value_exception_transpiled()})
+          raise Exception(f{HedyTester.value_exception_transpiled()})
         else:
           if not __trtl in {hedy.english_colors}:
             __trtl = color_dict[__trtl]
@@ -425,20 +418,19 @@ class HedyTester(unittest.TestCase):
         pass""")
 
     @staticmethod
+    def play_transpiled(arg, quotes=True):
+        argument = f"'{arg}'" if quotes else arg
+        return textwrap.dedent(f"""\
+            play(note_with_error({argument}, {HedyTester.value_exception_transpiled()}))
+            time.sleep(0.5)""")
+
+    @staticmethod
     def list_access_transpiled(list_access):
         return textwrap.dedent(f'''\
         try:
           {list_access}
         except IndexError:
           raise Exception({HedyTester.index_exception_transpiled()})''')
-
-    @staticmethod
-    def variable_type_check_transpiled(variable, type_,):
-        return textwrap.dedent(f'''\
-        try:
-          {type_}({variable})
-        except ValueError:
-          raise Exception(f{HedyTester.value_exception_transpiled()})''')
 
     @staticmethod
     def int_cast_transpiled(val, quotes=True):

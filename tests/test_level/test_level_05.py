@@ -1364,13 +1364,10 @@ extensions.if_pressed(if_pressed_mapping)""")
             answer is ask 'What is the capital of Zimbabwe?'
             if answer is Harare play C6""")
 
-        expected = textwrap.dedent(f"""\
-        answer = input(f'What is the capital of Zimbabwe?')
-        if answer == 'Harare':
-          if 'C6' not in notes_mapping.keys() and 'C6' not in notes_mapping.values():
-              raise Exception({self.value_exception_transpiled()})
-          play(notes_mapping.get(str('C6'), str('C6')))
-          time.sleep(0.5)""")
+        expected = HedyTester.dedent(f"""\
+            answer = input(f'What is the capital of Zimbabwe?')
+            if answer == 'Harare':""",
+                                     (self.play_transpiled('C6'), '  '))
 
         self.single_level_tester(
             code=code,
@@ -1382,18 +1379,13 @@ extensions.if_pressed(if_pressed_mapping)""")
             answer is ask 'What is the capital of Zimbabwe?'
             if answer is Harare play C6 else play C1""")
 
-        expected = textwrap.dedent(f"""\
-        answer = input(f'What is the capital of Zimbabwe?')
-        if answer == 'Harare':
-          if 'C6' not in notes_mapping.keys() and 'C6' not in notes_mapping.values():
-              raise Exception({self.value_exception_transpiled()})
-          play(notes_mapping.get(str('C6'), str('C6')))
-          time.sleep(0.5)
-        else:
-          if 'C1' not in notes_mapping.keys() and 'C1' not in notes_mapping.values():
-              raise Exception({self.value_exception_transpiled()})
-          play(notes_mapping.get(str('C1'), str('C1')))
-          time.sleep(0.5)""")
+        expected = HedyTester.dedent(
+            f"""\
+            answer = input(f'What is the capital of Zimbabwe?')
+            if answer == 'Harare':""",
+            (self.play_transpiled('C6'), '  '),
+            "else:",
+            (self.play_transpiled('C1'), '  '))
 
         self.single_level_tester(
             code=code,
