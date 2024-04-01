@@ -19,6 +19,7 @@ def slides_locator(entry):
         'levels.<LEVEL>.*.code': snippet_tester.COLLECT,
     }))
 
+
 def at_least_level_1(decision):
     # The slides contain level=0 entries, which should be treated as level=1
     if isinstance(decision, tuple):
