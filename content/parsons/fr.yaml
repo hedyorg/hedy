@@ -236,27 +236,27 @@ levels:
     12:
         1:
             story: |-
-                Sing the song 'What shall we do with the drunken sailor'. In case you don't know it, the song goed like this:
+                Chantons la chanson de marins qui s'appelle « chanson à virer ». Voici une version simplifiée de cette chanson :
 
-                What will we do with the drunken sailor
-                What will we do with the drunken sailor
-                What will we do with the drunken sailor
-                Early in the morning
-                Way hey and up she rises
-                Way hey and up she rises
-                Way hey and up she rises
-                Early in the morning
+                Encore, et hop et vire
+                Encore, et hop et vire
+                Encore, et hop et vire
+                Vire encore un coup
+                Hardi les gars, nous arracherons l'ancre
+                Hardi les gars, nous arracherons l'ancre
+                Hardi les gars, nous arracherons l'ancre
+                Vire encore un coup
             code: |-
-                verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'
-                {for} verse {in} verses
-                    {for} count {in} {range} 1 {to} 3
-                        {print} verse
-                    {print} 'Early in the morning'
+                versets = "Encore, et hop et vire", "Hardi les gars, nous arracherons l'ancre"
+                {for} verset {in} versets
+                    {for} compteur {in} {range} 1 {to} 3
+                        {print} verset
+                    {print} "Vire encore un coup"
         2:
-            story: Play a game of Twister with us! First define the variable people, then limbs, then colors.
+            story: Joue avec nous le jeux du Twister ! Commencer par définir la variable « personnes », puis « membres », et enfin « couleurs »
             code: |-
-                people = 'Jess', 'Nick', 'Winston'
-                limbs = 'left hand', 'left foot', 'right hand', 'right foot'
-                colors = 'red', 'blue', 'green', 'yellow'
-                {for} person {in} people
-                    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}
+                personnes = "Jess", "Nicolas", "Willy"
+                membres = "main gauche", "pied gauche", "main droite", "pied droit"
+                couleurs = "rouge", "bleu", "vert", "jaune"
+                {for} personne {in} personnes
+                    {print} personne ", " membres {at} {random} " sur " couleurs {at} {random}
