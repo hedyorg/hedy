@@ -8,7 +8,9 @@ on:
 
 jobs:
   auto-approve:
-    if: github.event.pull_request.user.login == 'weblate'
+    if: |
+      github.event.pull_request.user.login == 'weblate' ||
+      contains(github.event.pull_request.labels.*.name, 'translations')
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write

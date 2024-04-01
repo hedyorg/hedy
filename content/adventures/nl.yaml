@@ -827,28 +827,28 @@ adventures:
                     ```
             8:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Opdracht
+                    Debug deze code. Succes!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Pas op! Deze code bevat fouten!**
                     ```
-                    {print} 'Welcome to Manicures and Pedicures by Hedy'
-                    bodypart = {ask} 'Are you getting your fingernails or toenails done today? Or both?'
-                    {if} bodyparts {is} both
-                            {print} That will be $25'
-                            price = 25
+                    {print} 'Welkom bij de manicure- en pedicuresalon'
+                    bodypart = {ask} 'Komt u voor uw vingernagels, teennagels of beide?'
+                    {if} lichaamsdelen {is} beide
+                            {print} Dat wordt dan $25'
+                            prijs = 25
                         {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
+                            {print} Dat wordt dan $18'
+                            prijs = 18
+                    kleur = {ask} Welke kleur wilt u?
+                    glitter = {ask} 'Met glitters?'
+                    {if} glitter {is} ja
+                        {print} 'Dat kost $3 extra'
+                    prijs = prijs + 3
+                    {else} {print} 'Geen glitter' {print} 'U hoeft niet bij te betalen'
                     {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
+                    {print} 'Klaar! Dat wordt dan $' prijs ' alstublieft!'
+                    {print} 'Bedankt en tot ziens!'
                     ```
             9:
                 story_text: |-
@@ -1440,7 +1440,7 @@ adventures:
                     {print} 'dat zijn dan ' punten ' punten'
                     ```
                 example_code_2: |
-                    Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                    Is het gelukt om de score te berekenen voor 8 dobbelstenen? Dat kostte een hoop knip-en-plakwerk, he? In het volgende level leer je een simpelere manier om dit voor elkaar te krijgen!
             7:
                 story_text: |
                     Je kunt ook in dit level weer een dobbelsteen maken. Met de `{repeat}` code kun je makkelijk een heel handje dobbelstenen rollen.
@@ -1870,7 +1870,7 @@ adventures:
                     Om 'plaats' te gebruiken hebben zetten we `{with} place` achter `{define} lied`.
                     Als de functie geroepen wordt vervangt de computer het argument 'plaats' met de text die na `{call} song {with}` staat.
 
-                    ### Exercise
+                    ### Opdracht
                     Het volgende couplet gaat zo:
 
                     Last night as I lay on my pillow
@@ -2465,22 +2465,22 @@ adventures:
 
                     {print} 2.5 + 2.5
     music:
-        name: music
+        name: Muziek
         default_save_name: music
         description: Play a tune!
         levels:
             1:
                 story_text: |-
-                    In this level you'll learn how to use the `{play}` command to play a tune!
+                    In dit level leer je het `{play}` commando te gebruiken om een muzieknoot te spelen!
 
-                    Type `{play}` followed by the note you want to play. The scale goes C-D-E-F-G-A-B.
-                    As you can see there are 7 different letters, but we can play more than just 7 notes.
-                    Type a number between 1 and 10 behind the letter to choose the scale, for example after B4 comes C5.
-                    C1 is the lowest note you can play, C10 is the highest.
+                    Type `{play}` en daarna de noot die jij wil afspelen. De toonladder gaat zo: C-D-E-F-G-A-B.
+                    Zoals je ziet zijn er 7 verschillende letters, maar er zijn veel meer dan 7 muzieknoten.
+                    Type een getal tussen 1 en 10 achter de letter om een toonladder te kiezen. Zo komt na de noot B4 de noot C5.
+                    C1 is de laagste noot die je kunt spelen en C10 is de hoogste.
 
-                    ### Exercise
-                    Try out the example code and then play around with it! Can you create your own melody?
-                    In the next level you'll learn how to play some existing songs.
+                    ### Opdracht
+                    Test de voorbeeldcode en speel er maar mee! Kun jij een melodietje maken?
+                    In het volgende level leer je enkele bestaande nummer spelen.
                 example_code: |-
                     ```
                     play C4
@@ -2494,8 +2494,8 @@ adventures:
                     ```
             2:
                 story_text: |
-                    ### Exercise
-                    Finish the songs! We have started the codes for some melodies.
+                    ### Opdracht
+                    Maak de liedjes af! We hebben al een beginnetje voor je gemaakt.
                 example_code: |
                     ```
                     {print} Old Mac Donald had a farm
@@ -2507,7 +2507,8 @@ adventures:
                     {play} A4
                     {play} G4
                     ```
-                story_text_2: As you can see, you can also use the `{sleep}` command to add a little pause in the song.
+                story_text_2: |
+                    Zoals je kunt zien kun je het `{sleep}` commando gebruiken om een pauze toe te voegen in je liedje.
                 example_code_2: |
                     ```
                     {print} Twinkle Twinkle Little Star
@@ -2524,28 +2525,28 @@ adventures:
                     ```
             3:
                 story_text: |
-                    Create a random melody!
+                    Maak een random deuntje!
 
-                    ### Exercise
-                    The example code creates a random melody, but it's very short and not many notes are used.
-                    Add more notes to the list and create a longer melody by copying the last line a couple more times.
+                    ### Opdracht
+                    De voorbeeldcode maakt een random deuntje, maar het is erg kort en bevat nog niet veel noten.
+                    Voeg meer noten toe aan de lijst en maak een langere melodie door de laatste regel een paar keer te kopiëren.
                 example_code: |
                     ```
-                    notes {is} A4, B4, C4
-                    {play} notes {at} {random}
-                    {play} notes {at} {random}
-                    {play} notes {at} {random}
+                    noten {is} A4, B4, C4
+                    {play} noten {at} {random}
+                    {play} noten {at} {random}
+                    {play} noten {at} {random}
                     ```
             4:
                 story_text: |
-                    Use the `{clear}` command to create a karaoke machine!
+                    Gebruik het `{clear}` commando om een karaoke machine te maken!
 
-                    ### Exercise
-                    Finish the karaoke version of 'Mary had a little lamb'.
-                    Then, create a karaoke version of any song you'd like!
+                    ### Opdracht
+                    Maak de karaoke versie van 'Mieke heeft een lammetje'.
+                    Bedenk daarna een karaoke versie van een zelfgekozen liedje.
                 example_code: |
                     ```
-                    {print} 'Mary had a little lamb'
+                    {print} 'Mieke heeft een lammetje'
                     {play} E
                     {play} D
                     {play} C
@@ -2554,7 +2555,7 @@ adventures:
                     {play} E
                     {play} E
                     {clear}
-                    {print} 'Little lamb, little lamb'
+                    {print} 'lammetje, lammetje'
                     {play} D
                     {play} D
                     {play} D
@@ -2562,60 +2563,63 @@ adventures:
                     {play} E
                     {play} E
                     {clear}
-                    {print} 'Mary had a little lamb'
+                    {print} 'Mieke heeft een lammetje'
                     {play} E
                     ```
             5:
                 story_text: |
-                    You don't always have to use the `{play}` command to play a whole song, sometimes you just want to play one note.
-                    For example, if you want to make a quiz, you can play a happy high note if the answer is right and a sad low note if the answer is wrong.
-
-                    ### Exercise
-                    Finish the first question by adding a line of code that plays a C3 note if the wrong answer is given.
-                    Then think of 3 more questions to add to this quiz.
+                    Je kunt het `{play}` commando gebruiken om een lied te maken, maar je kunt het natuurlijk ook gebruiken voor één enkele noot.
+                    Bijvoorbeeld als je een quiz wil maken en je een vrolijke hoge toon wil afspelen bij een juist antwoord en een sippe lage toon bij een fout antwoord.
+                    ### Opdracht
+                    Maak de eerste vraag af door een regel code toe te voegen die de noot C3 speelt bij een fout antwoord.
+                    Bedenk daarna nog 3 vragen en voeg ze toe aan de quiz.
                 example_code: |
                     ```
-                    answer {is} {ask} 'What is the capital of Zimbabwe?'
+                    antwoord {is} {ask} 'Wat is de hoofdstad van Zimbabwe?'
                     {if} answer {is} Harare {play} C6
                     _
                     ```
             6:
-                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting numbers. \nThen, see if you can compose a song using the numbers.\n"
+                story_text: |
+                    In plaats van noten zoals 'C5' of 'B8', kun je nu ook getallen spelen. Type bijvoorbeeld `{play} 1` voor de laagste noot, `{play} 70` voor de hoogste noot of elk willekeurig getal er tussenin.
+
+                    ### Opdracht
+                    Dit vraagt om muzikale berekeningen! Probeer de voorbeeldcode een paar keer uit met verschillende startgetallen. Componeer daarna je eigen muziek door getallen te gebruiken!
                 example_code: |
                     ```
-                    number = {ask} 'Say a starting number between 1 and 67'
-                    {print} number
-                    {play} number
-                    number = number + 1
-                    {print} number
-                    {play} number
-                    number = number + 1
-                    {print} number
-                    {play} number
+                    getal = {ask} 'Noem een getal tussen 1 en 67:'
+                    {print} getal
+                    {play} getal
+                    getal = getal + 1
+                    {print} getal
+                    {play} getal
+                    getal = getal + 1
+                    {print} getal
+                    {play} getal
                     ```
             7:
                 story_text: |
-                    Using the `{repeat}` command can make your codes for melodies a lot shorter!
+                    Met het `{repeat}` commando kun je de codes voor de liedjes een hoop inkorten!
 
-                    ### Exercise
-                    Finish the code for Twinkle Twinkle Little Star by using the `{repeat}`command.
-                    Then go back to the songs you've made in the previous levels. Can you shorten those codes too?
+                    ### Opdracht
+                    Maak de code voor 'Altijd is Kortjakje ziek' af met het `{repeat}` commando.
+                    Kijk daarna terug op de liedjes die je hebt gemaakt in de voorgaande levels. Kun je die ook inkorten?
                 example_code: |
                     ```
-                    {print} 'Twinkle Twinkle Little Star'
+                    {print} 'Altijd is Kortjakje ziek'
                     {repeat} 2 {times} {play} C4
                     {repeat} 2 {times} {play} G4
                     _
                     ```
             8:
                 story_text: |
-                    Now that we can use the `{repeat}` command for multiple lines, we can make songs even more easily!
+                    Nu we ook meerdere regels kunnen herhalen met `{repeat}, kunnen we de liedjes nog makkelijker programmeren!
 
-                    ### Exercise
-                    Finish the song of Brother John (Frère Jacques). Don't forget to use `{repeat}`!
+                    ### Opdracht
+                    Maak het liedje 'Vader Jacob' af. Vergeet `{repeat}` niet te gebruiken!
                 example_code: |
                     ```
-                    {print} 'Brother John'
+                    {print} 'Vader Jacob'
                     {repeat} 2 {times}
                         {play} C
                         {play} D
@@ -2629,36 +2633,35 @@ adventures:
                     ```
             9:
                 story_text: |
-                    From this level on you can - among other things - use a {repeat} command inside a {repeat} command.
-                    That makes songs like 'Happy birthday' even shorter!
+                    Vanaf dit level kun je - naast andere dingen- een {repeat} commando nesten in een ander `{repeat}` commando.
+                    Dat maakt liedjes als 'Happy Birthday' een stuk korter!
 
-                    ### Exercise
-                    Finish the song!
+                    ### Opdracht
+                    Maak het liedje af!
                 example_code: |
                     ```
-                    first_time = yes
+                    eerste_keer = ja
                     {repeat} 2 {times}
                         {repeat} 2 {times}
                             {play} C
                         {play} D
                         {play} C
-                        {if} first_time {is} yes
+                        {if} eerste_keer {is} ja
                             {play} F
                             {play} E
-                            first_time {is} no
+                            eerste_keer {is} nee
                         {else}
                             _
                     ```
             12:
                 story_text: |
-                    Use functions in your songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle Little Star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
-
-                    ### Exercise
-                    Finish the song of Twinkle Twinkle Little Star.
-                    Then look back at all the songs you've programmed in the levels before, can you make those codes better and shorter using functions too?
+                    Gebruik functies in je liedjes! Zoals je kunt zien in de voorbeeldcode, kun je een functie maken voor elke regel uit Altijd is Kortjakje ziek. Zodra je de 3 zinnen hebt geprogrammeerd, hoef je alleen nog maar de functies in de juiste volgorde op te roepen.
+                    ### Opdracht
+                    Maak het liedje 'Altijd is Kortjakje ziek' af.
+                    Kijk daarna terug naar liedjes die je geprogrammeerd hebt in voorgaande levels. Kun je die liedjes inkorten en verbeteren door functies te gebruiken?
                 example_code: |
                     ```
-                    {define} first_line
+                    {define} eerste_regel
                         {play} C
                         {play} C
                         {play} G
@@ -2668,7 +2671,7 @@ adventures:
                         {play} G
                         {sleep}
 
-                    {define} second_line
+                    {define} tweede_regel
                         {play} F
                         {play} F
                         {play} E
@@ -2678,7 +2681,7 @@ adventures:
                         {play} C
                         {sleep}
 
-                    {define} third_line
+                    {define} derde_regel
                         {play} G
                         {play} G
                         {play} F
@@ -2697,16 +2700,16 @@ adventures:
                     ```
             13:
                 story_text: |
-                    You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
-                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, buyt each time they are followed by a different couple of notes.
+                    Je kunt een functie met een argument gebruiken bij liedjes die steeds bijna hetzelfde zijn, maar een heel klein verschilletje bevatten.
+                    Een voorbeeld van zo'n liedje is het Engelse deuntje 'Yankee Doodle'. De eerste 4 noten van elke regel zijn steeds gelijk, maar het einde vershcilt steeds.
 
-                    ### Exercise
-                    Can you finish the song of Yankee Doodle?
-                    Can you think of another song to programm this way?
+                    ### Voorbeeldcode
+                    Kun jij Yanklee Doodle afmaken?
+                    Kun je een ander liedje programmeren op deze manier?
                 example_code: |
                     ```
                     {print} 'Yankee Doodle'
-                    {define} _ {with} note_1, note_2, note_3
+                    {define} _ {with} noot_1, noot_2, noot_3
                         {play} C4
                         {play} C4
                         {play} D4
@@ -2715,9 +2718,9 @@ adventures:
                         {play} _
                         {play} _
 
-                    {call} line_1 {with} 29, 31, 30
-                    {call} line_1 {with} 29, 28, 0
-                    {call} line_1 {with} 32, 31, 30
+                    {call} regel_1 {with} 29, 31, 30
+                    {call} regel_1 {with} 29, 28, 0
+                    {call} regel_1 {with} 32, 31, 30
 
                     {play} C4
                     {play} B3
@@ -2729,54 +2732,54 @@ adventures:
                     ```
             14:
                 story_text: |
-                    You can program music for fun, but you can also use the musical notes to make something useful like a fire alarm!
+                    Je kunt natuurlijk voor de lol een liedje programmeren, maar de muzieknoten kunnen ook nuttig ingezet worden, zoals bij dit brandalarm!
 
-                    ### Exercise
-                    Make sure the fire alarm rings when there is a fire!
+                    ### Opdracht
+                    Zorg dat het brandalarm afgaat als er brand is!
                 example_code: |
                     ```
-                    {define} fire_alarm
-                        {print} 'FIRE!'
-                        note = 40
+                    {define} brandalarm
+                        {print} 'BRAND!'
+                        noot = 40
                         {for} i {in} {range} 1 {to} 100
-                            {if} note _ 50
-                                note = note + 5
+                            {if} noot _ 50
+                                noot = noot + 5
                                 {play} _
                             {else}
-                                note = 40
+                                noot = 40
 
-                    fire = {ask} 'Is there a fire?'
-                    {if} fire _ 'yes'
-                        {call} fire_alarm
+                    brand = {ask} 'Is er brand?'
+                    {if} fire _ 'ja'
+                        {call} brandalarm
                     ```
             15:
                 story_text: |
-                    **Warning** This adventure can become extremely annoying!
-                    We can also use the {while} command to repeat a song forever.
+                    **Waarschuwing** Dit avontuur kan behoorlijk irritant worden!
+                    We kunnen het `{while}` commando inzetten om een liedje eeuwig te blijven herhalen.
 
-                    ### Exercise
-                    Finish the never-ending song.
+                    ### Opdracht
+                    Maak dit liedje zonder einde af.
                 example_code: |
                     ```
-                    {define} song
+                    {define} lied
                         {play} _
 
-                    yes_or_no = {ask} 'Do you want to hear my never-ending song?'
-                    {while} yes_or_no = 'yes'
-                        {call} song
+                    ja_of_nee = {ask} 'Wil je mijn liedje zonder einde horen?'
+                    {while} ja_of_nee = 'ja'
+                        {call} lied
                         {print} '🥳'
                     ```
             16:
                 story_text: |
-                    Upgrade your Old MacDonald code!
+                    Upgrade je Old MacDonald code!
 
-                    ### Exercise
-                    Take your code from the 'Sing a Song' adventure and add musical notes to it!
-                    You can make a function for each line in the song and call that function after the line is printed.
-                    We defined the first line for you and called it in the code. Can you finish the whole song?
+                    ### Opdracht
+                    Neem je code van het Zinge een lied avontuur en voeg muzieknoten toe!
+                    Je kunt een functie maken voor elke regel van het lied en die fucntie oproepen zodra die regel geprint is.
+                    We hebben de eerste regel alvast voorgedaan. Kun jij het hele lied afmaken?
                 example_code: |
                     ```
-                    {define} line_1
+                    {define} regel_1
                         {for} i {in} {range} 1 {to} 3
                             {play} G
                         {play} D
@@ -2786,24 +2789,24 @@ adventures:
 
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
-                    for i in range 1 to 3
+                    {for} i {in} {range} 1 {to} 3
                         animal = animals[i]
                         sound = sounds[i]
-                        print 'Old MacDonald had a farm'
-                        call line_1
-                        print 'E I E I O!'
+                        {print} 'Old MacDonald had a farm'
+                        {call} regel_1
+                        {print} 'E I E I O!'
                         _
                     ```
             17:
                 story_text: |
-                    You can use the {elif} to create different options.
+                    Je kunt de `{elif}` gebruiken om verschillende opties te creëren.
 
-                    ### Exercise
-                    Firstly, add colons to get the code to work.
-                    Then finish this code by adding at least 2 other songs for other moods. For example a happy song and an angry song.
+                    ### Opdracht
+                    Voeg dubbele punten toe om de code aan de praat te krijgen.
+                    Maak de code dan af door nog minstens 2 liedjes bij te maken voor andere stemmingen. Bijvoorbeeld een blij liedje en een boos liedje.
                 example_code: |
                     ```
-                    {define} scary_song
+                    {define} bang_liedje
                         {for} i {in} {range} 1 {to} 3
                             {play} G
                         {play} E
@@ -2812,17 +2815,17 @@ adventures:
                             {play} F
                         {play} D
 
-                    mood = {ask} 'Which emotion are you feeling?'
-                    {if} mood {is} 'fear'
-                        {call} scary_song
+                    stemming = {ask} 'Hoe voel je je?'
+                    {if} stemming {is} 'bang'
+                        {call} bang_liedje
                     {elif} _
                     ```
             18:
                 story_text: |
-                    ### Exercise
-                    Even in this last level of Hedy we can make some music! Be careful of all the syntax that is needed now.
-                    Take a good look at how the functions are defined and called upon in the example code.
-                    Finish the song!
+                    ### Opdracht
+                    Zelfs in dit laatste level van Hedy kunnen we muziek maken! Let op alle syntax die nu nodig is.
+                    Kijk goed hoe de functies gedefinieerd worden en geroepen worden in de voorbeeldcode.
+                    Maak het liedje af!
                 example_code: |
                     ```
                     {def} line_1():
@@ -2842,12 +2845,12 @@ adventures:
                     {def} line_3():
                     _
 
-                    {print} ('The drunken sailor')
-                    {print} ('What shall we do with the drunken sailor?')
+                    {print} ('De dronken zeeman')
+                    {print} ('Wat gaan we doen met de dronken zeeman?')
                     line_1()
                     line_2()
                     line_3()
-                    {print} ('Early in the morning')
+                    {print} ('s Morgens in de vroegte!')
                     ```
     parrot:
         name: Papegaai
@@ -4805,7 +4808,7 @@ adventures:
                     ```
             14:
                 story_text: |
-                    ### Exercise
+                    ### Opdracht
                     Maak een code die de speler vraagt hoeveel hoeken een figuur moet hebben, en dan dat figuur tekent.
                     Het plaatje toont het figuur wanneer de speler 10 invult.
 

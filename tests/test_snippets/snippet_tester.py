@@ -166,7 +166,7 @@ def collect_slides_snippets(path):
                                 filename=file,
                                 level=level_number if level_number > 0 else 1,
                                 language=lang,
-                                field_name=f'snippet {number}',
+                                field_name=x,
                                 code=y['code'])
                             Hedy_snippets.append(snippet)
                             number += 1
@@ -223,14 +223,14 @@ class HedySnippetTester(HedyTester):
         except OSError:
             return None  # programs with ask cannot be tested with output :(
         except exceptions.HedyException as E:
-            error_message = self.format_test_error(E, snippet)
+            error_message = self.format_test_error_md(E, snippet)
 
             if fix_error and yaml_locator:
                 self.restore_snippet_to_english(snippet, yaml_locator)
 
-                with open(path.join(rootdir(), 'snippet-report.txt'), 'a') as f:
+                with open(path.join(rootdir(), 'snippet-report.md.tmp'), 'a') as f:
                     f.write(error_message + '\n')
-                    f.write('*** This snippet has been reverted to English ***\n\n')
+                    f.write('This snippet has been reverted to English.\n\n')
             else:
                 print(error_message)
                 raise E
