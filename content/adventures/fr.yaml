@@ -1328,22 +1328,22 @@ adventures:
                     ```
             13:
                 story_text: |
-                    Dans les niveaux précédents, vous avez appris à mettre deux commandes `{if}` l'une à l'intérieur de l'autre. Cela fonctionne bien, mais cela crée des codes très longs et peu pratiques, comme celui-ci :
+                    Aux niveaux précédents, vous avez appris à mettre deux commandes `{if}` l'une à l'intérieur de l'autre. Cela fonctionne bien, mais cela crée des codes très longs et peu pratiques, comme celui-ci :
 
                     Ici, vous devez fournir à la fois le nom d'utilisateur correct et le mot de passe correct.
-                    Dans ce niveau, vous allez apprendre la commande `{and}` qui permettra de raccourcir considérablement ce code et le rendre plus compréhensible !
-                    Vérifions ça !
+                    Dans ce niveau, vous allez apprendre la commande `{and}` qui permettra de raccourcir considérablement ce code et le rendre plus compréhensible !
+                    Vérifions ça !
                 example_code: |
                     ```
-                    nom_utilisateur = {ask} "Quel est ton nom d'utilisateur ?"
-                    mot_de_passe = {ask} "Quel est ton mot de passe ?"
+                    nom_utilisateur = {ask} "Quel est ton nom d'utilisateur ?"
+                    mot_de_passe = {ask} "Quel est ton mot de passe ?"
                     {if} nom_utilisateur {is} "Hedy"
                         {if} mot_de_passe {is} "secret"
-                            {print} "Bienvenue Hedy !"
+                            {print} "Bienvenue Hedy !"
                         {else}
-                                {print} "Accès refusé"
+                            {print} "Accès refusé"
                     {else}
-                        {print} "Accès refusé !"
+                        {print} "Accès refusé !"
                     ```
             14:
                 story_text: |
@@ -1905,31 +1905,31 @@ adventures:
                     ```
             13:
                 story_text: |
-                    Maintenant que vous avez appris à utiliser les fonctions, vous allez apprendre à utiliser une fonction avec un argument.
-                    Un **argument** est une variable utilisée dans une fonction. Il n'est pas utilisé en dehors de la fonction.
+                    Maintenant que tu as appris à utiliser les fonctions, tu peux apprendre à utiliser une fonction avec un paramètre.
+                    Un **paramètre** est une variable utilisable dans la fonction dont la valeur est définie au moment de l'appel de la fonction. Cette variable ne peut pas être utilisée en dehors de la fonction.
 
-                    Par exemple, dans ce code, nous avons programmé le premier couplet de la chanson " My Bonnie is over the ocean ".
-                    Dans cet exemple de code, l'argument `place` est utilisé. `place` est une variable qui n'est utilisée que dans la fonction, donc un argument.
-                    Pour utiliser `place` , nous avons programmé la ligne `define song with place`.
-                    Lorsque la fonction est appelée, l'ordinateur remplacera l'argument `place` par le morceau de texte après `call song with`.
+                    Par exemple, dans ce code, nous avons programmé le premier couplet de la chanson « My Bonnie is over the ocean ».
+                    Dans cet exemple de code, nous utilisons le paramètre `place`. `place` est une variable qui n'est utilisée que dans la fonction.
+                    Le nom de la variable, `place`, est déclarée après le mot clé `{with}` de la déclaration de la fonction (la ligne qui commence par `{define}`).
+                    La valeur de la variable est définie après le mot clé `{with}` de l'appel de la fonction (la ligne qui commence par `{call}`).
 
                     ### Exercice
-                    Le couplet suivant de cette chanson dit :
-
-                    Hier soir, alors que j'étais allongé sur mon oreiller
-                    Hier soir, alors que j'étais allongé sur mon lit
-                    Hier soir, alors que j'étais allongé sur mon oreiller
-                    J'ai rêvé que ma Bonnie était morte
-
-                    Pouvez-vous programmer ce verset de la même manière que l’exemple ?
+                    Le couplet suivant de cette chanson est comme suit :
+                    ```
+                    Last night as I lay on my pillow
+                    Last night as I lay on my bed
+                    Last night as I lay on my pillow
+                    I dreamed that my Bonnie is dead
+                    ```
+                    Pouvez-vous programmer ce couplet de la même manière que dans l’exemple ?
                 example_code: |
                     ```
                     {define} chanson {with} place
-                        {print} "Ma Bonnie est à " place
+                        {print} "My Bonnie is over the " place
 
-                    {call} chanson {with} 'ocean'
-                    {call} chanson {with} 'mer'
-                    {call} chanson {with} 'ocean'
+                    {call} chanson {with} "ocean"
+                    {call} chanson {with} "sea"
+                    {call} chanson {with} "ocean"
                     ```
             14:
                 story_text: |
@@ -3895,21 +3895,21 @@ adventures:
                     ```
             13:
                 story_text: |
-                    We can simplify the superspy code with `{and}`, such that we only need one `{if}`.
+                    Nous pouvons simplifier le code de super espion avec `{and}`, pour n'utiliser qu'un seul `{if}`.
 
-                    ### Exercise 1
-                    Complete the code by filling the right command on the blank. Tip: The superspy has to answer BOTH questions correctly, before they get the confidential information!
+                    ### Exercice 1
+                    Termine le code en écrivant la bonne commande dans l'espace vide. Conseil : le super espion doit répondre correctement aux deux questions avant d'obtenir l'accès aux informations confidentielles !
 
-                    ### Exercise 2
-                    We want to confuse the enemy even more! Create a list with fake answers and select one at random when a wrong answer is given.
+                    ### Exercice 2
+                    Nous voulons embrouiller l'ennemie encore plus ! Crée une liste avec de fausses réponses et choisis en une au hasard en cas de mauvaise réponse.
                 example_code: |
                     ```
-                    name = {ask} 'What is your name?'
-                    password = {ask} 'What is your password?'
-                    {if} name {is} 'Agent007' _ password {is} 'TOPSECRET'
-                        {print} 'Go to the airport at 02.00'
+                    nom = {ask} "Quel est votre nom ?"
+                    mot_de_passe = {ask} "Quel est votre mot de passe ?"
+                    {if} nom {is} "Agent007" _ mot_de_passe {is} "TOPSECRET"
+                        {print} '"Rendez vous à l'aéroport à 14 h 00"
                     {else}
-                        {print} 'Go to the trainstation at 10.00'
+                        {print} 'Rendez vous à la gare à 10 h 00'
                      ```
     sleep_command:
         name: '{sleep}'
