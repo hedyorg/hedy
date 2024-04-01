@@ -2768,97 +2768,97 @@ levels:
                     ```
                     prix = 14
                     ```
-                feedback: Et si tu commandes frites et boisson ?
+                feedback: Et dans le cas où tu commandes frites et boisson ?
             -   option: |-
                     ```
                     prix = "14"
                     ```
-                feedback: What if you only order fries and a drink?
+                feedback: Et dans le cas où tu commandes frites et boisson ?
             -   option: |-
                     ```
-                    price = price + 2
+                    prix = prix + 2
                     ```
-                feedback: Excellent!
+                feedback: Excellent !
             -   option: |-
                     ```
-                    price = + 2
+                    prix = + 2
                     ```
-                feedback: Almost there!
-            hint: What if you only order fries and a drink?
+                feedback: Presque !
+            hint: Tu ne peux pas calculer le prix à l'avance !
             correct_answer: C
             question_score: '10'
         7:
-            question_text: Which output does a vegan get?
+            question_text: Que sera-t-il affiché pour une personne végane ?
             code: |-
-                menu = 'cookies', 'cheese', 'grapes'
-                print "It's my birthday! I`ve brought some snacks!"
-                diet = ask 'Do you have any dietary restrictions?'
-                if diet = 'gluten free'
-                    remove 'cookies' from menu
-                if diet = 'vegan'
-                    remove 'cheese' from menu
-                print 'For you I have brought: '
-                for snack in menu
-                    print snack
+                menu = "cookies", "fromage", "raisin"
+                {print} "C'est mon anniversaire ! j'ai acheté un goûter !"
+                régime = {ask} "Avez-vous un régime particulier ?"
+                {if} régime = "sans gluten"
+                    {remove} "cookies" {from} menu
+                {if} régime = "végan"
+                    {remove} "fromage" {from} menu
+                {print} "Pour toi, j'ai acheté :"
+                {for} goûter {in} menu
+                    {print} goûter
             mp_choice_options:
             -   option: |-
-                    It's my birthday! I've brought some snacks!
-                    For you I have brought:
+                    C'est mon anniversaire ! j'ai acheté un goûter !
+                    Pour toi, j'ai acheté :
                     cookies
-                    grapes
-                feedback: Terrific!
+                    raisin
+                feedback: Formidable !
             -   option: |-
-                    It's my birthday! I've brought some snacks!
-                    For you I have brought:
-                    grapes
-                feedback: There's more options than just one
+                    C'est mon anniversaire ! j'ai acheté un goûter !
+                    Pour toi, j'ai acheté :
+                    raisin
+                feedback: Il y a plus qu'un élément
             -   option: |-
-                    It's my birthday! I've brought some snacks!
-                    For you I have brought:
-                    cheese
-                    grapes
-                feedback: A vegan person can't have cheese
+                    C'est mon anniversaire ! j'ai acheté un goûter !
+                    Pour toi, j'ai acheté :
+                    fromage
+                    raisin
+                feedback: Une personne végane ne mange pas de fromage
             -   option: |-
-                    It's my birthday! I've brought some snacks!
-                    For you I have brought:
-                    grapes
+                    C'est mon anniversaire ! j'ai acheté un goûter !
+                    Pour toi, j'ai acheté :
+                    raisin
                     cookies
-                feedback: Almost there, but look at the order of snacks in the list
-            hint: What item is removed from the list when you answer 'vegan'?
+                feedback: Presque, mais regarde bien l'ordre des éléments dans la liste
+            hint: Quel élément est retiré de la liste quand tu réponds « végan » ?
             correct_answer: A
             question_score: '10'
         8:
-            question_text: Which code was used to create this output?
+            question_text: Quel code a été utilisé pour écrire ça ?
             code: '3.5'
             mp_choice_options:
             -   option: |-
                     ```
-                    print '7 / 2'
+                    {print} "7 / 2"
                     ```
-                feedback: 'No'
+                feedback: 'Non, il ne faut pas mettre les guillemets'
             -   option: |-
                     ```
-                    print 7 / 2
+                    {print} 7 / 2
                     ```
-                feedback: That is right!
+                feedback: C'est ça !
             -   option: |-
                     ```
-                    print 7 : 2
+                    {print} 7 : 2
                     ```
-                feedback: 'No'
+                feedback: 'Non'
             -   option: |-
                     ```
-                    print 7 * 2
+                    {print} 7 * 2
                     ```
-                feedback: 'No'
-            hint: 7 devided by 2 is 3.5
+                feedback: 'Non'
+            hint: 7 divisé par 2 fait 3.5
             correct_answer: B
             question_score: '10'
         9:
-            question_text: Which code should be filled in in line 1 at the ???
+            question_text: Quel code devrait être écrit à la ligne 1 à la place de `_` ?
             code: |-
-                ???
-                print 'You won ' prices at random '!'
+                _
+                {print} "Tu gagnes " prix {at} {random} " !"
             mp_choice_options:
             -   option: |-
                     ```
@@ -2872,9 +2872,9 @@ levels:
                 feedback: You won nothing
             -   option: |-
                     ```
-                    prices = 'one million dollars', 'nothing'
+                    prix = "un million d'euro", "rien"
                     ```
-                feedback: Winner!
+                feedback: Gagné !
             -   option: |-
                     ```
                     'prices' = 'one million dollars', 'nothing'
