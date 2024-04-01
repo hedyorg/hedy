@@ -236,8 +236,12 @@ def load_customized_adventures(level, customizations, into_adventures):
 
     adventure_ids = {a['name'] for a in order_for_this_level if a['from_teacher']}
     teacher_adventure_map = DATABASE.batch_get_adventures(adventure_ids)
-    builtin_adventure_map = {a.short_name: a for a in into_adventures}
+    # Make a deepcopy if working locally, otherwise the local database values
+    # are by-reference and overwritten
+    if not os.getenv('NO_DEBUG_MODE'):
+        teacher_adventure_map = copy.deepcopy(teacher_adventure_map)
 
+    builtin_adventure_map = {a.short_name: a for a in into_adventures}
     # Replace `into_adventures`
     into_adventures[:] = []
     for a in order_for_this_level:
