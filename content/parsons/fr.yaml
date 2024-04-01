@@ -235,23 +235,8 @@ levels:
                 {print} "Félicitations !"
     12:
         1:
-            story: |-
-                Chantons la chanson de marins qui s'appelle « chanson à virer ». Voici une version simplifiée de cette chanson :
-
-                Encore, et hop et vire
-                Encore, et hop et vire
-                Encore, et hop et vire
-                Vire encore un coup
-                Hardi les gars, nous arracherons l'ancre
-                Hardi les gars, nous arracherons l'ancre
-                Hardi les gars, nous arracherons l'ancre
-                Vire encore un coup
-            code: |-
-                versets = "Encore, et hop et vire", "Hardi les gars, nous arracherons l'ancre"
-                {for} verset {in} versets
-                    {for} compteur {in} {range} 1 {to} 3
-                        {print} verset
-                    {print} "Vire encore un coup"
+            story: "Sing the song 'What shall we do with the drunken sailor'. In case you don't know it, the song goed like this:\n\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nEarly in the morning\nWay hey and up she rises\nWay hey and up she rises\nWay hey and up she rises\nEarly in the morning"
+            code: "verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'\n{for} verse {in} verses\n    {for} count {in} {range} 1 {to} 3\n        {print} verse\n    {print} 'Early in the morning'"
         2:
             story: Joue avec nous le jeux du Twister ! Commencer par définir la variable « personnes », puis « membres », et enfin « couleurs »
             code: |-
