@@ -59,6 +59,7 @@ class YamlSnippet:
     - `field_path`: the full YAML path where this snippet was found, as an
        array of either strings or ints.
     """
+
     def __init__(self, filename, field_path, code, language, level):
         self.filename = filename
         self.field_path = field_path
