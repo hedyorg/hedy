@@ -1,12 +1,11 @@
-{% set slide_number = 1 %}
 <div class="bg-blue-200">
-    <div class="grid grid-cols-1 md:grid-row-2">
-        <div id="slide1" class="bg-red-200 flex flex-col justify-center items-center">
-            {% set slide = slides[slide_number] %}
-            <h1 id="header1">{{ slide['header'] }}</h1>
-            <p id="text1">{{ slide['text'] }}</p>
+    <div class="grid grid-rows-1 md:grid-rows-2">
+        <div id="slide" class="flex flex-col justify-center items-center">
+            {% set slide = slides[1] %}
+            <h1 id="header">{{ slide.header }}</h1>
+            <p id="text">{{ slide.text }}</p>
         </div>
-        <div id="code" class="bg-green-200 md:row-span-2">
+        <div id="code" class="">
             <div class="flex justify-end mr-4">
                 {{ render_partial('htmx-language-switch-button.html', commands=commands) }}
             </div>
