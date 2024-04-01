@@ -322,22 +322,14 @@ class TestsLevel18(HedyTester):
         if PRINT is pressed:
             print('The button got pressed!')""")
 
-        expected = HedyTester.dedent(f"""\
+        expected = HedyTester.dedent("""\
         x = 'PRINT'
         create_button(x)
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'PRINT':
-              print(f'''The button got pressed!''')
-              break
-            # End of PyGame Event Handler""")
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['PRINT'] = 'if_pressed_PRINT_'
+        def if_pressed_PRINT_():
+            print(f'''The button got pressed!''')
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.single_level_tester(code=code, expected=expected)
 

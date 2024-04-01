@@ -1,48 +1,48 @@
 1:
 -   name: '{print}'
-    explanation: Print something with `{print}`.
-    demo_code: '{print} Hello welcome to Hedy!'
+    explanation: Izpišite nekaj z `{print}`.
+    demo_code: '{print} Dobrodošli v Hedy!'
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
-    demo_code: '{ask} What is your favorite color?'
+    explanation: Vprašajte kaj z `{ask}`.
+    demo_code: '{ask} Katero barvo imate najrajši?'
 -   name: '{echo}'
-    explanation: Repeat something using `{echo}`.
-    demo_code: "{ask} What is your favorite color?\n{echo} so your favorite color is"
--   name: '{print} emojis'
-    explanation: Print an emoji with `{print}`.
+    explanation: Ponovite nekaj z `{echo}`.
+    demo_code: "{ask} Katero barvo imate najrajši?\n{echo} torej je vaša najljubša barva"
+-   name: '{print} emoji-ji'
+    explanation: Izpiši emoji z `{print}`.
     demo_code: '{print} 🙋 🌍 ❗'
 -   name: '{forward}'
-    explanation: Draw a line with `{forward}`.
+    explanation: Naredite črto z `{forward}`.
     demo_code: '{forward} 100'
 -   name: '{turn}'
-    explanation: Turn the drawing turtle with `{turn}`.
+    explanation: Obrnite želvo za risanje z `{turn}`.
     demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 2:
 -   name: '{is}'
-    explanation: Give a word a name to use in the program using `{is}`. You can choose the name yourself.
-    demo_code: "name {is} Hedy\n{print} welcome name"
+    explanation: Poimenujte besedo, ki jo boste uporabili v programu z uporabo `{is}`. Ime si lahko izberete sami.
+    demo_code: "ime {is} Hedy\n{print} dobrodošli ime"
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`.
-    demo_code: "color {is} {ask} What is your favorite color?\n{print} color is your favorite!"
+    explanation: Vprašajte nekaj z `{ask}`. Pozor! Odgovoru morate podati ime z `{is}`.
+    demo_code: "barva {is} {ask} Katera je vaša najljubša barva?\n{print} barva je vaša najljubša barva!"
 -   name: '{sleep}'
-    explanation: With `{sleep}`, you can let Hedy pause for a (couple of) second(s).
-    demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
--   name: '{is} with turtle'
-    explanation: Give a number a name using `{is}`. You can choose the name yourself.
-    demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
+    explanation: S `{sleep}`, lahko Hedy zaustavite za sekundo (ali več).
+    demo_code: "{print} Naj malo razmislim...\n{sleep}\n{print} Hmm.. Potrebujem še par sekund...\n{sleep} 2\n{print} Eureka, imam rešitev!"
+-   name: '{is} z želvo'
+    explanation: Številki dajte ime z `{is}`. Izberete lahko poljubno ime.
+    demo_code: "kot {is} 90\n{turn} kot\n{forward} 100"
 3:
--   name: Choose random
-    explanation: Choose a random word from a group with `{at}` and `{random}`.
-    demo_code: "animals {is} dog, cat, kangaroo\n{print} animals {at} {random}"
+-   name: Izberite naključno
+    explanation: Izberite naključno besedo iz skupine z `{at}` in `{random}`.
+    demo_code: "živali {is} pes, mačka, kenguru\n{print} živali {at} {random}"
 -   name: '{add}'
-    explanation: '`{add}` an item `{to_list}` a list.'
-    demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+    explanation: '`{add}` element `{to_list}` v seznam.'
+    demo_code: "živali {is} krava, mačka\n{add} pes {to_list} živali"
 -   name: '{remove}'
-    explanation: '`{remove}` an item `{from}` a list.'
-    demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+    explanation: '`{remove}` element `{from}` seznama.'
+    demo_code: "živali {is} mačka, pes, krava\n{remove} pes {from} živali"
 4:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
+    explanation: Izpišite natančno z uporabno navednic.
     demo_code: "{print} 'Hello welcome to Hedy.'"
 -   name: '{is}'
     explanation: Give a name to some text and `{print}` without quotation marks.
