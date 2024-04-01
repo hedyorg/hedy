@@ -42,4 +42,3 @@ class TestsSlidesPrograms(snippet_tester.HedySnippetTester):
     @parameterized.expand(snippet_tester.snippets_with_names(snippets), skip_on_empty=True)
     def test_slide_programs(self, name, snippet):
         self.do_snippet(snippet)
-
