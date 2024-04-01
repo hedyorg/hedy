@@ -9,19 +9,20 @@ TODO:
 - Snippets can hold on to the information where in the YAML file they were
   discovered. That way, individual test suites don't have to supply a
   'yaml_locator'.
-
-
 """
 
 import os
 from os import path
+from fnmatch import fnmatchcase
+from collections import namedtuple
 
 from dataclasses import dataclass
 import exceptions
 import hedy
 import utils
-from tests.Tester import HedyTester, Snippet
+from tests.Tester import HedyTester, Snippet, YamlSnippet
 from website.yaml_file import YamlFile
+from typing import List, Callable, Tuple, Dict, Union
 
 fix_error = False
 # set this to True to revert broken snippets to their en counterpart automatically
@@ -38,155 +39,158 @@ def rootdir():
     return os.path.join(os.path.dirname(__file__), '..', '..')
 
 
-def collect_adventures_snippets(path, filtered_language=None):
-    Hedy_snippets = []
+COLLECT, COLLECT_MARKDOWN, SKIP, RECURSE = 'COLLECT', 'COLLECT_MARKDOWN', 'SKIP', 'RECURSE'
+
+
+def collect_yaml_snippets(repository_path: str, locator: Union[Callable, Dict[str, str]]) -> List[YamlSnippet]:
+    """Collect all YAML snippets in a directory.
+
+    Snippet() has many fields; this function only sets 'filename', 'code' and 'field_path', which are used
+    in the rest of the snippet tester to revert failing snippets to English.
+
+    locator can be either a function, which will be called for every YAML entry and
+    should retur a decision (recurse, skip, collect snippets here and if so what's
+    their level?), or be a map that will be passed to `make_locator`.
+    """
+    path = os.path.join(rootdir(), repository_path)
     files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
+
+    locator = locator if callable(locator) else make_locator(locator)
+
+    ret = []
     for f in files:
+        filename = os.path.join(path, f)
         lang = f.split(".")[0]
-        # we always store the English snippets, to use them if we need to restore broken code
-        if not filtered_language or (filtered_language and (lang == filtered_language or lang == 'en')):
-            f = os.path.join(path, f)
-            yaml = YamlFile.for_file(f)
 
-            for key, adventure in yaml['adventures'].items():
-                # the default tab sometimes contains broken code to make a point to learners about changing syntax.
-                if not key == 'default' and not key == 'debugging':
-                    for level_number in adventure['levels']:
-                        if level_number > hedy.HEDY_MAX_LEVEL:
-                            print('content above max level!')
-                        else:
-                            level = adventure['levels'][level_number]
-                            adventure_name = adventure['name']
+        yaml = YamlFile.for_file(os.path.join(path, f))
 
-                            for adventure_part, text in level.items():
-                                # This block is markdown, and there can be multiple code blocks inside it
-                                codes = [tag.contents[0].contents[0]
-                                         for tag in utils.markdown_to_html_tags(text)
-                                         if tag.name == 'pre' and tag.contents and tag.contents[0].contents]
+        for field_path, level, code in recurse_yaml(yaml, [], locator):
+            ret.append(YamlSnippet(
+                filename=filename,
+                code=code,
+                level=level,
+                field_path=field_path,
+                language=lang))
 
-                                if check_stories and adventure_part == 'story_text' and codes != []:
-                                    # Can be used to catch languages with example codes in the story_text
-                                    # at once point in time, this was the default and some languages still use this old
-                                    # structure
-
-                                    feedback = f"Example code in story text {lang}, {adventure_name},\
-                                    {level_number}, not recommended!"
-                                    raise Exception(feedback)
-
-                                for i, code in enumerate(codes):
-                                    Hedy_snippets.append(Snippet(
-                                        filename=f,
-                                        level=level_number,
-                                        field_name=adventure_part,
-                                        code=code,
-                                        adventure_name=adventure_name,
-                                        key=key,
-                                        counter=1))
-
-    return Hedy_snippets
+    return ret
 
 
-def collect_cheatsheet_snippets(path):
-    Hedy_snippets = []
-    files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
-    for file in files:
-        lang = file.split(".")[0]
-        file = os.path.join(path, file)
-        yaml = YamlFile.for_file(file)
+def locator_decision_from_map(field_path, path_map):
+    """Source the decision for a YAML locator from a map.
 
-        for level in yaml:
-            level_number = int(level)
-            if level_number > hedy.HEDY_MAX_LEVEL:
-                print('content above max level!')
-            else:
-                try:
-                    # commands.k.demo_code
-                    for k, command in enumerate(yaml[level]):
-                        snippet = Snippet(
-                            filename=file,
-                            level=level,
-                            field_name=str(k),
-                            code=command['demo_code'])
-                        Hedy_snippets.append(snippet)
-                except BaseException:
-                    print(f'Problem reading commands yaml for {lang} level {level}')
+    The field_path will be compared as a string agains the entries from the map.
 
-    return Hedy_snippets
+    Here's a typical example of the map that should be passed to this function:
 
+    ```
+    {
+        'adventures.default': snippet_tester.SKIP,
+        'adventures.debugging': snippet_tester.SKIP,
+        'adventures.*.levels.<LEVEL>.story_text*': snippet_tester.COLLECT_MARKDOWN,
+        'adventures.*.levels.<LEVEL>.example_code*': snippet_tester.COLLECT_MARKDOWN,
+    }
+    ```
+    """
 
-def collect_parsons_snippets(path):
-    Hedy_snippets = []
-    files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
-    for file in files:
-        lang = file.split(".")[0]
-        file = os.path.join(path, file)
-        yaml = YamlFile.for_file(file)
-        levels = yaml.get('levels')
+    for pattern, effect in path_map.items():
+        # Treat '<LEVEL>' as * for the purposes of matching
+        match_pattern = pattern.replace('<LEVEL>', '*')
 
-        for level, content in levels.items():
-            level_number = int(level)
-            if level_number > hedy.HEDY_MAX_LEVEL:
-                print('content above max level!')
-            else:
-                try:
-                    for exercise_id, exercise in levels[level].items():
-                        code = exercise.get('code')
-                        snippet = Snippet(
-                            filename=file,
-                            level=level,
-                            field_name=f"{exercise_id}",
-                            code=code)
-                        Hedy_snippets.append(snippet)
-                except BaseException:
-                    print(f'Problem reading commands yaml for {lang} level {level}')
+        if fnmatchcase(field_path, match_pattern):
+            # Return the effect. If the effect is one of the collects, we must pattern match the level out of the path.
+            if effect == COLLECT or effect == COLLECT_MARKDOWN:
+                level_ix = pattern.split('.').index('<LEVEL>')
+                if level_ix == -1:
+                    raise RuntimeError('A pattern with COLLECT must contain the matcher <LEVEL> somewhere')
+                level = int(field_path.split('.')[level_ix])
+                return (effect, level)
 
-    return Hedy_snippets
+            return effect
 
 
-def collect_slides_snippets(path):
-    Hedy_snippets = []
-    files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
-    for file in files:
-        lang = file.split(".")[0]
-        file = os.path.join(path, file)
-        yaml = YamlFile.for_file(file)
-        levels = yaml.get('levels')
+def make_locator(path_map):
+    """Returns a locator from a path map."""
+    def locator(entry):
+        return locator_decision_from_map(entry.field_path, path_map)
 
-        for level, content in levels.items():
-            level_number = int(level)
-            if level_number > hedy.HEDY_MAX_LEVEL:
-                print('content above max level!')
-            else:
-                try:
-                    number = 0
-                    # commands.k.demo_code
-                    for x, y in content.items():
-                        if 'code' in y.keys() and 'debug' not in y.keys():
-                            snippet = Snippet(
-                                filename=file,
-                                level=level_number if level_number > 0 else 1,
-                                language=lang,
-                                field_name=x,
-                                code=y['code'])
-                            Hedy_snippets.append(snippet)
-                            number += 1
-                except BaseException:
-                    print(f'Problem reading commands yaml for {lang} level {level}')
+    return locator
 
-    return Hedy_snippets
+
+def path_match(field_path, patterns):
+    return any(fnmatchcase(field_path, pattern) for pattern in patterns)
+
+
+YamlEntry = namedtuple('YamlEntry', ('field_path', 'value'))
+
+
+def recurse_yaml(yaml_value, field_path: List[str], locator: Callable[[List[str]], str]):
+    # Protocol: locator must return either SKIP, RECURSE, or (COLLECT, <level>) or (COLLECT_MARKDOWN, <level>)
+    # RECURSE is the default action
+    entry = YamlEntry('.'.join((str(x) for x in field_path)), yaml_value)
+    orig_decision = locator(entry) or RECURSE
+    level = None
+    if isinstance(orig_decision, tuple):
+        level = orig_decision[1]
+        decision = orig_decision[0]
+    else:
+        decision = orig_decision
+
+    def assert_decision(*args):
+        if not decision in args:
+            raise RuntimeError(f'For path {field_path} decision must be one of {args}, got: {decision}')
+
+    if isinstance(yaml_value, str):
+        assert_decision(COLLECT, COLLECT_MARKDOWN, SKIP, RECURSE)
+
+        codes = []
+        if decision == COLLECT:
+            codes = [yaml_value]
+        if decision == COLLECT_MARKDOWN:
+            codes = [tag.contents[0].contents[0]
+                     for tag in utils.markdown_to_html_tags(yaml_value)
+                     if tag.name == 'pre' and tag.contents and tag.contents[0].contents]
+
+        for code in codes:
+            if not level:
+                raise RuntimeError(f'A locator returning COLLECT must also return a level (got {orig_decision})')
+            yield (field_path, level, code)
+
+    if isinstance(yaml_value, list):
+        assert_decision(RECURSE, SKIP)
+        if decision == RECURSE:
+            for i, value in enumerate(yaml_value):
+                yield from recurse_yaml(value, field_path + [i], locator)
+        return
+    if hasattr(yaml_value, 'items'):
+        assert_decision(RECURSE, SKIP)
+        if decision == RECURSE:
+            for key, value in yaml_value.items():
+                yield from recurse_yaml(value, field_path + [key], locator)
+        return
 
 
 def filter_snippets(snippets, level=None, lang=None):
     if (lang or level) and os.getenv('CI'):
         raise RuntimeError('Whoops, it looks like you left a snippet filter in!')
 
+    def snippet_from(x):
+        """From either a (name, snippet) pair or just a snippet, return the snippet."""
+        if isinstance(x, tuple):
+            return x[1]
+        return x
+
     if lang:
-        snippets = [(name, snippet) for (name, snippet) in snippets if snippet.language[:2] == lang]
+        snippets = [x for x in snippets if snippet_from(x).language[:2] == lang]
 
     if level:
-        snippets = [(name, snippet) for (name, snippet) in snippets if snippet.level == level]
+        snippets = [x for x in snippets if snippet_from(x).level == level]
 
     return snippets
+
+
+def snippets_with_names(snippets):
+    """Expand a set of snippets to pairs of (name, snippet). This is necessary to stick it into @parameterized.expand."""
+    return ((s.name, s) for s in snippets)
 
 
 @dataclass
@@ -199,12 +203,9 @@ class HedySnippetTester(HedyTester):
     """Base class for all other snippet testers.
 
     The logic is the same between all of them, so we can combine it.
-
-    'yaml_locator' is a function that, given a snippet, will tell us where
-    in the file it was found, by returning a pair of `(containing_dict,
     """
 
-    def do_snippet(self, snippet, yaml_locator=None):
+    def do_snippet(self, snippet):
         if snippet is None or len(snippet.code) == 0:
             return
 
@@ -225,8 +226,8 @@ class HedySnippetTester(HedyTester):
         except exceptions.HedyException as E:
             error_message = self.format_test_error_md(E, snippet)
 
-            if fix_error and yaml_locator:
-                self.restore_snippet_to_english(snippet, yaml_locator)
+            if fix_error and isinstance(snippet, YamlSnippet):
+                self.restore_snippet_to_english(snippet)
 
                 with open(path.join(rootdir(), 'snippet-report.md.tmp'), 'a') as f:
                     f.write(error_message + '\n')
@@ -235,19 +236,34 @@ class HedySnippetTester(HedyTester):
                 print(error_message)
                 raise E
 
-    def restore_snippet_to_english(self, snippet, yaml_locator):
+
+    def restore_snippet_to_english(self, snippet):
         # English file is always 'en.yaml' in the same dir
         en_file = path.join(path.dirname(snippet.filename), 'en.yaml')
 
         # Read English yaml file
         original_yaml = YamlFile.for_file(en_file)
-        original_loc = yaml_locator(snippet, original_yaml)
+        original_loc = locate_snippet_in_yaml(original_yaml, snippet, yaml_locator)
 
         # Read broken yaml file
         broken_yaml = utils.load_yaml_rt(snippet.filename)
-        broken_loc = yaml_locator(snippet, broken_yaml)
+        broken_loc = locate_snippet_in_yaml(broken_yaml, snippet, yaml_locator)
 
         # Restore to English version
         broken_loc.dict[broken_loc.key] = original_loc.dict[original_loc.key]
         with open(snippet.filename, 'w') as file:
             file.write(utils.dump_yaml_rt(broken_yaml))
+
+
+def locate_snippet_in_yaml(root, snippet):
+    """Given a snippet, locate its containing object and key.
+
+    Use the information in the snippet itself if it is a YamlSnippet, otherwise uses
+    the locator function.
+    """
+    path = snippet.field_path.copy()
+    print(path)
+    while len(path) > 1:
+        root = root[path[0]]
+        path = path[1:]
+    return YamlLocation(dict=root, key=path[0])

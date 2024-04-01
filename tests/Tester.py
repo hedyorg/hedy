@@ -25,7 +25,7 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 class Snippet:
-    def __init__(self, filename, level, code, field_name=None, adventure_name=None, error=None, language=None, key=None, counter=0):
+    def __init__(self, filename, level, code, field_name=None, adventure_name=None, error=None, language=None, key=None, counter=0, field_path=None):
         self.filename = filename
         self.level = level
         self.field_name = field_name if field_name is not None else ''
@@ -43,9 +43,38 @@ class Snippet:
         self.counter = counter
         if counter > 0:
             self.name += f'-{self.counter + 1}'
+        self.field_path = field_path
 
     def __repr__(self):
         return f'Snippet({self.name})'
+
+
+class YamlSnippet:
+    """A snippet found in one of the YAML files.
+
+    This is a replacement of 'Snippet', with fewer fields. 'Snippet' should be removed
+    at some point.
+
+    - `filename`: the filename where this snippet was found.
+    - `field_path`: the full YAML path where this snippet was found, as an
+       array of either strings or ints.
+    """
+    def __init__(self, filename, field_path, code, language, level):
+        self.filename = filename
+        self.field_path = field_path
+        self.code = code
+        self.language = language
+        self.level = level
+        self.relative_filename = os.path.relpath(self.filename, ROOT_DIR)
+
+        # 'code' may be replaced later on when translating keywords
+        self.original_code = code
+
+        self.name = f'{self.relative_filename}-{self.field_path_str}'
+
+    @property
+    def field_path_str(self):
+        return '.'.join(str(x) for x in self.field_path)
 
 
 class SkippedMapping:
@@ -494,19 +523,24 @@ class HedyTester(unittest.TestCase):
         # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
         # NOTE: .format() instead of safe_format() on purpose!
         for snippet in snippets:
+            if isinstance(snippet, tuple):
+                snippet_obj = snippet[1]
+            else:
+                snippet_obj = snippet
+
             # store original code
-            snippet[1].original_code = snippet[1].code
+            snippet_obj.original_code = snippet_obj.code
             try:
-                if snippet[1].language in ALL_KEYWORD_LANGUAGES.keys():
-                    snippet[1].code = snippet[1].code.format(**keyword_dict[snippet[1].language])
+                if snippet_obj.language in ALL_KEYWORD_LANGUAGES.keys():
+                    snippet_obj.code = snippet_obj.code.format(**keyword_dict[snippet_obj.language])
                 else:
-                    snippet[1].code = snippet[1].code.format(**english_keywords)
+                    snippet_obj.code = snippet_obj.code.format(**english_keywords)
             except KeyError:
                 print("This following snippet contains an invalid placeholder...")
-                print(snippet[1].code)
+                print(snippet_obj.code)
             except ValueError:
                 print("This following snippet contains an unclosed invalid placeholder...")
-                print(snippet[1].code)
+                print(snippet_obj.code)
 
         return snippets
 

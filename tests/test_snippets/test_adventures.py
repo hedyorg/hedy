@@ -6,26 +6,23 @@ from tests.Tester import HedyTester
 from . import snippet_tester
 
 
-check_stories = False
+snippets = snippet_tester.collect_yaml_snippets('content/adventures', {
+    # the default tab sometimes contains broken code to make a point to learners about changing syntax.
+    'adventures.default': snippet_tester.SKIP,
+    'adventures.debugging': snippet_tester.SKIP,
+    'adventures.*.levels.<LEVEL>.story_text*': snippet_tester.COLLECT_MARKDOWN,
+    'adventures.*.levels.<LEVEL>.example_code*': snippet_tester.COLLECT_MARKDOWN,
+})
 
-Hedy_snippets = [(s.name, s) for s in snippet_tester.collect_adventures_snippets(
-    path=path.join(snippet_tester.rootdir(), 'content/adventures'))]
-Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
+snippets = HedyTester.translate_keywords_in_snippets(snippets)
 
 # lang = 'zh_hans' #useful if you want to test just 1 language
 lang = None
 level = None
-Hedy_snippets = snippet_tester.filter_snippets(Hedy_snippets, lang=lang, level=level)
+snippets = snippet_tester.filter_snippets(snippets, lang=lang, level=level)
 
 
 class TestsAdventurePrograms(snippet_tester.HedySnippetTester):
-    @parameterized.expand(Hedy_snippets, skip_on_empty=True)
+    @parameterized.expand(snippet_tester.snippets_with_names(snippets), skip_on_empty=True)
     def test_adventures(self, name, snippet):
-        self.do_snippet(snippet, yaml_locator=adventure_locator)
-
-
-def adventure_locator(snippet, yaml):
-    """Returns where in the adventures YAML we found an adventure snippet."""
-    return snippet_tester.YamlLocation(
-        dict=yaml['adventures'][snippet.key]['levels'][snippet.level],
-        key=snippet.field_name)
+        self.do_snippet(snippet)

@@ -5,8 +5,36 @@ from parameterized import parameterized
 from tests.Tester import HedyTester
 from . import snippet_tester
 
+
+def slides_locator(entry):
+    """Locator for snippets in the slides YAML.
+
+    More complicated than the regular locators.
+    """
+    if isinstance(entry.value, dict) and entry.value.get('debug'):
+        # Some entries are designed to fail, skip those
+        return snippet_tester.SKIP
+
+    decision = snippet_tester.locator_decision_from_map(entry.field_path, {
+        'levels.<LEVEL>.*.code': snippet_tester.COLLECT,
+    })
+
+    # The slides contain level=0 entries, which should be treated as level=1
+    if isinstance(decision, tuple):
+        decision, level = decision
+        if level == 0:
+            level = 1
+        return decision, level
+
+
+snippets = snippet_tester.collect_yaml_snippets('content/slides', slides_locator)
+
 Hedy_snippets = [(s.name, s) for s in snippet_tester.collect_slides_snippets(
     path=path.join(snippet_tester.rootdir(), 'content/slides'))]
+
+assert len(snippets) == len(Hedy_snippets)
+
+
 Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
 
 # lang = 'zh_hans' #useful if you want to test just 1 language
