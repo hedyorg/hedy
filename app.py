@@ -2261,6 +2261,11 @@ def get_slides(level):
     slides = SLIDES[g.lang].get_slides_for_level(level, keyword_language)
     code = slides[2]['code']
 
+    # To pass slides from HTML to Typescript
+    for index in slides:
+        if slides[index].get('debug'):
+            slides[index]['debug'] = 'true'
+
     try:
         level = int(level)
         if level == 0:  # in level 0, the intro slides, we use codes from level 1
@@ -2275,7 +2280,7 @@ def get_slides(level):
         save_name='start',
         editor_contents=code)
     adventures = [a]
-    return render_template('slides.html', level=level, slides=slides, user=current_user()['username'], adventures=adventures)
+    return render_template('slides.html', level=level, slides=slides, user=current_user()['username'], adventures=adventures, slide_nr=1)
 
 
 @app.route('/translate_keywords', methods=['POST'])

@@ -323,7 +323,7 @@ function attachMainEditorEvents(editor: HedyEditor) {
       if (!theLevel || !theLanguage) {
         throw new Error('Oh no');
       }
-      runit (theLevel, theLanguage, "", "run",function () {
+      runit (theLevel, theLanguage, false, "", "run",function () {
         $ ('#output').focus ();
       });
     }
@@ -500,7 +500,7 @@ function clearOutput() {
   buttonsDiv.hide();
 }
 
-export async function runit(level: number, lang: string, disabled_prompt: string, run_type: "run" | "debug" | "continue", cb: () => void) {
+export async function runit(level: number, lang: string, raw: boolean, disabled_prompt: string, run_type: "run" | "debug" | "continue", cb: () => void) {
   // Copy 'currentTab' into a variable, so that our event handlers don't mess up
   // if the user changes tabs while we're waiting for a response
   const adventureName = currentTab;
@@ -580,7 +580,12 @@ export async function runit(level: number, lang: string, disabled_prompt: string
           save_name: saveNameFromInput(),
         };
 
-        let response = await postJsonWithAchievements('/parse', data);
+        let response
+        if (raw) {
+          response = await postJson('/parse', data);
+        } else {
+          response = await postJsonWithAchievements('/parse', data);
+        }
 
         program_data = response;
         console.log('Response', response);
@@ -1882,6 +1887,19 @@ function download(data: any, filename: any, type: any) {
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
   }, 0);
+}
+
+export function next_slide(slides: any, slideIndex: number, next: boolean) {
+  if (next) {
+    slideIndex++;
+  } else {
+    slideIndex--;
+  }
+  console.log(next)
+  console.log(slideIndex)
+  document.getElementById('header')!.innerText = slides[slideIndex].header;
+  document.getElementById('text')!.innerText = slides[slideIndex].text;
+  return slideIndex
 }
 
 /**

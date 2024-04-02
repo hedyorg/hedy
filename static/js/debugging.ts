@@ -253,7 +253,7 @@ function get_shift_key(event: Event | undefined) {
 
 function debugRun() {
   if (theLevel && theLanguage) {
-    runit(theLevel, theLanguage, "", "run", function () {
+    runit(theLevel, theLanguage, false, "", "run", function () {
       $('#output').focus();
     });
   }

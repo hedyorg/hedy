@@ -1,7 +1,7 @@
 <div class="bg-blue-200">
     <div class="grid grid-rows-1 md:grid-rows-2">
         <div id="slide" class="flex flex-col justify-center items-center">
-            {% set slide = slides[1] %}
+            {% set slide = slides[slide_nr] %}
             <h1 id="header">{{ slide.header }}</h1>
             <p id="text">{{ slide.text }}</p>
         </div>
@@ -27,5 +27,6 @@
                     suppress_save_and_load_for_slides=True,
                 ))}}
         </div>
+        <button id="next-slide" onclick="hedyApp.next_slide({{slides}}, {{slide_nr}}, true)">Next Slide</button>
     </div>
 </div>
