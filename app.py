@@ -2266,6 +2266,7 @@ def get_slides(level):
     slides = SLIDES[g.lang].get_slides_for_level(level, keyword_language)
     return render_template('slides.html', level=level, slides=slides)
 
+
 @app.route('/translate_keywords', methods=['POST'])
 def translate_keywords():
     body = request.json
