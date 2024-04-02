@@ -8,7 +8,10 @@
 flask_commonmark
 ----------------
 
-Commonmark filter class for Flask. One may notice a similarity to Dan Colish's Flask-Markdown, from which I shamelessly copied a bunch of this. Does not have all the nice provisions for extension baked in, but probably does what you need. See https://commonmark.org/ for details.
+Commonmark filter class for Flask. One may notice a similarity to Dan Colish's
+Flask-Markdown, from which I shamelessly copied a bunch of this. Does not have
+all the nice provisions for extension baked in, but probably does what you need.
+See https://commonmark.org/ for details.
 
 Usage
 ::
