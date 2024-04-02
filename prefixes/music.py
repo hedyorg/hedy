@@ -78,3 +78,15 @@ notes_mapping = {
     '69': 'A9',
     '70': 'B9',
 }
+
+
+def present_in_notes_mapping(value):
+    note = str(value).upper()
+    return note in notes_mapping.keys() or note in notes_mapping.values()
+
+
+def note_with_error(value, err):
+    note = str(value).upper()
+    if not present_in_notes_mapping(note):
+        raise Exception(err.format(value))
+    return notes_mapping.get(note, note)

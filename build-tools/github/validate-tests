@@ -9,13 +9,15 @@ python content/yaml_to_lark_utils.py
 
 echo "------> Python unit tests"
 
+
+# test_snippets (~20,000 tests) are only run for Weblate PRs.
+slow_suites=test_level,test_translation_level,test_snippets
+workers=${WORKERS:-4}
+
 # This is expected to run from the repo root
-if [[ "${1:-}" == "--all" ]]; then
-  python -m pytest -n 2
-elif [[ "${1:-}" == "--weblate" ]]; then
-  python -m pytest tests/test_snippets/test_adventures.py -s --tb=no -rN
-  python -m pytest tests/test_snippets/test_cheatsheets.py -s --tb=no -rN
-  python -m pytest tests/test_snippets/test_parsons.py -s --tb=no -rN
-else
-  python -m pytest --ignore=tests/test_highlighting --ignore=tests/test_level --ignore=tests/test_snippets --ignore=tests/test_translation_level
+eval python -m pytest -n $workers --ignore=tests/{$slow_suites}
+
+if [[ "${1:-}" == "--weblate" ]]; then
+  # Add in the slow suites
+  eval python -m pytest -n $workers --tb=no tests/{$slow_suites}
 fi

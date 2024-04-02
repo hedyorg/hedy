@@ -50,6 +50,11 @@ export function addStudents(classname, count) {
     goToTeachersPage();
     cy.wait(500);
 
+    cy.get(".view_class").then($viewClass => {
+        if (!$viewClass.is(':visible')) {
+            cy.get("#view_classes").click();
+        }
+    });
     cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
     cy.wait(500);
 
@@ -70,6 +75,11 @@ export function addCustomizations(classname){
     cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
     goToTeachersPage();
 
+    cy.get(".view_class").then($viewClass => {
+        if (!$viewClass.is(':visible')) {
+            cy.get("#view_classes").click();
+        }
+    });
     cy.get(".view_class").contains(classname).click();
     cy.get('#customize-class-button').click();
     cy.get("#opening_date_container").should("not.be.visible")
@@ -92,6 +102,11 @@ export function createClassAndAddStudents(){
 export function navigateToClass(classname) {
     goToTeachersPage();
     cy.wait(500);
+    cy.get(".view_class").then($viewClass => {
+        if (!$viewClass.is(':visible')) {
+            cy.get("#view_classes").click();
+        }
+    });
     cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
     cy.wait(500);
     cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
