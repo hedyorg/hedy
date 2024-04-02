@@ -595,7 +595,9 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
           error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
         }
 
-        showAchievements(response.achievements, false, "");
+        if (!raw) {
+          showAchievements(response.achievements, false, "");
+        }
         if (adventure && response.save_info) {
           adventure.save_info = response.save_info;
           adventure.editor_contents = code;
