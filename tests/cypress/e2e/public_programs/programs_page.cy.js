@@ -24,12 +24,19 @@ describe("General tests for my programs page (with both custom teacher and built
         deleteAdventure(programName)
     });
 
-    it('can make program public', () => {
+    it.only('can make program public', () => {
         cy.visit(`${Cypress.env('programs_page')}`);
-        cy.get('#share_option_dropdown_1').click();
-        cy.get('#share_button_1').click();
-        cy.get('#share_option_dropdown_1').should('contain.text', 'Public');
-        cy.get('#non_submitted_button_container_1 [data-cy="submit-btn"]').should('be.visible');
+        cy.get(`[data-name=${programName}]`)
+            .first()
+            .then($el => {
+                const programId = $el[0].getAttribute("data-id");
+                console.log("element here ", programId)
+                console.log($el)
+                cy.get(`#share_option_dropdown_${programId}`).click();
+                cy.get('#share_button_1').click();
+                cy.get('#share_option_dropdown_1').should('contain.text', 'Public');
+                cy.get('#non_submitted_button_container_1 [data-cy="submit-btn"]').should('be.visible');
+            })
     });
 
 
@@ -55,6 +62,7 @@ describe("General tests for my programs page (with both custom teacher and built
 
     it('can make program private', () => {
         cy.visit(`${Cypress.env('programs_page')}`);
+
         cy.get('#share_option_dropdown_1').click();
         cy.get('#share_button_1').click();
         cy.get('#share_option_dropdown_1').should('contain.text', 'Private');
