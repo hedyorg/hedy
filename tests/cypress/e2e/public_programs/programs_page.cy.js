@@ -24,18 +24,16 @@ describe("General tests for my programs page (with both custom teacher and built
         deleteAdventure(programName)
     });
 
-    it.only('can make program public', () => {
+    it('can make program public', () => {
         cy.visit(`${Cypress.env('programs_page')}`);
         cy.get(`[data-name=${programName}]`)
             .first()
             .then($el => {
                 const programId = $el[0].getAttribute("data-id");
-                console.log("element here ", programId)
-                console.log($el)
                 cy.get(`#share_option_dropdown_${programId}`).click();
-                cy.get('#share_button_1').click();
-                cy.get('#share_option_dropdown_1').should('contain.text', 'Public');
-                cy.get('#non_submitted_button_container_1 [data-cy="submit-btn"]').should('be.visible');
+                cy.get(`#share_button_${programId}`).click();
+                cy.get(`#share_option_dropdown_${programId}`).should('contain.text', 'Public');
+                cy.get(`#non_submitted_button_container_${programId} [data-cy="submit-btn"]`).should('be.visible');
             })
     });
 
@@ -50,11 +48,16 @@ describe("General tests for my programs page (with both custom teacher and built
                     cy.get(".programs")
                         .should("contain.text", programName);
                     // but second teacher should is not permitted to see submit or delete btns.
-                    cy.get('#non_submitted_button_container_1 [data-cy="submit-btn"]')
-                        .should('not.be.visible');
-                    cy.get(`#more_options_1`).click();
-                    cy.get(`#program_options_dropdown_1`).should("be.visible");
-                    cy.getBySel(`delete_non_submitted_program_1`).should("not.exist");
+                    cy.get(`[data-name=${programName}]`)
+                    .first()
+                    .then($el => {
+                        const programId = $el[0].getAttribute("data-id");
+                        cy.get(`#non_submitted_button_container_${programId} [data-cy="submit-btn"]`)
+                            .should('not.be.visible');
+                        cy.get(`#more_options_${programId}`).click();
+                        cy.get(`#program_options_dropdown_${programId}`).should("be.visible");
+                        cy.getBySel(`delete_non_submitted_program_${programId}`).should("not.exist");
+                    })
                 }
             })
 
@@ -63,10 +66,15 @@ describe("General tests for my programs page (with both custom teacher and built
     it('can make program private', () => {
         cy.visit(`${Cypress.env('programs_page')}`);
 
-        cy.get('#share_option_dropdown_1').click();
-        cy.get('#share_button_1').click();
-        cy.get('#share_option_dropdown_1').should('contain.text', 'Private');
-        cy.get('#non_submitted_button_container_1 [data-cy="submit-btn"]').should('not.be.visible');
+        cy.get(`[data-name=${programName}]`)
+                    .first()
+                    .then($el => {
+                        const programId = $el[0].getAttribute("data-id");
+                        cy.get(`#share_option_dropdown_${programId}`).click();
+                        cy.get(`#share_button_${programId}`).click();
+                        cy.get(`#share_option_dropdown_${programId}`).should('contain.text', 'Private');
+                        cy.get(`#non_submitted_button_container_${programId} [data-cy="submit-btn"]`).should('not.be.visible');
+                    })
     });
 
     it("second-teachers can NOT view each other's public programs", () => {
