@@ -233,7 +233,6 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
   tabs.on('afterSwitch', (ev) => {
     currentTab = ev.newTab;
-    console.log(currentTab)
     const adventure = theAdventures[currentTab];
 
     if (!options.suppress_save_and_load_for_slides) {
@@ -525,7 +524,6 @@ export async function runit(level: number, lang: string, disabled_prompt: string
     // console.log('Original program:\n', code);
 
     const adventure = theAdventures[adventureName];
-    console.log("advava", adventure, adventureName)
     let program_data;
 
     if (run_type === 'run' || run_type === 'debug') {
