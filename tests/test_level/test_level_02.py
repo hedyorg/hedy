@@ -343,17 +343,9 @@ class TestsLevel2(HedyTester):
         تقدم ١٠٠""")
         expected = textwrap.dedent(f"""\
         الزاوية = '٩٠'
-        __trtl = الزاوية
-        try:
-          __trtl = int(__trtl)
-        except ValueError:
-          raise Exception({self.value_exception_transpiled()})
+        __trtl = int_with_error(الزاوية, {HedyTester.value_exception_transpiled()})
         t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
-        __trtl = 100
-        try:
-          __trtl = int(__trtl)
-        except ValueError:
-          raise Exception({self.value_exception_transpiled()})
+        __trtl = int_with_error(100, {HedyTester.value_exception_transpiled()})
         t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
         time.sleep(0.1)""")
 
@@ -847,13 +839,9 @@ class TestsLevel2(HedyTester):
             n is C4
             play n""")
 
-        expected = textwrap.dedent(f"""\
-            n = 'C4'
-            chosen_note = str(n).upper()
-            if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
-                raise Exception({self.value_exception_transpiled()})
-            play(notes_mapping.get(chosen_note, chosen_note))
-            time.sleep(0.5)""")
+        expected = HedyTester.dedent(
+            "n = 'C4'",
+            self.play_transpiled('n', quotes=False))
 
         self.multi_level_tester(
             code=code,
