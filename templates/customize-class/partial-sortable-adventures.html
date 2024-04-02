@@ -87,11 +87,12 @@
                 {% endfor %}
         </div>
     </div>
-        <script>
-                if (window.hedyApp) {
-                    hedyApp.initializeCustomizeClassPage({
-                        level:  '{{  level }}',
-                    })
-                }
-        </script>
+    <script>
+        if (window.hedyApp) {
+            hedyApp.initializeCustomizeClassPage({
+                level:  '{{  level }}',
+                class_id: '{{ class_id }}',
+            })
+        }
+    </script>
 </div> 
