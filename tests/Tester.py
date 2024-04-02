@@ -563,7 +563,6 @@ class HedyTester(unittest.TestCase):
                 print("This following snippet contains an unclosed invalid placeholder...")
                 print(snippet.code)
 
-
     def format_test_error_md(self, E, snippet: Snippet):
         """Given a snippet and an exception, return a Markdown string describing the problem."""
         message = []
