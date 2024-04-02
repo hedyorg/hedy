@@ -1905,23 +1905,23 @@ adventures:
                     ```
             13:
                 story_text: |
-                    Maintenant que tu as appris à utiliser les fonctions, tu peux apprendre à utiliser une fonction avec un paramètre.
-                    Un **paramètre** est une variable utilisable dans la fonction dont la valeur est définie au moment de l'appel de la fonction. Cette variable ne peut pas être utilisée en dehors de la fonction.
+                    Now that you've learned how to use functions, you'll learn how to use a function with an argument.
+                    An **argument** is a variable that is used within a function. It is not used outside the function.
 
-                    Par exemple, dans ce code, nous avons programmé le premier couplet de la chanson « My Bonnie is over the ocean ».
-                    Dans cet exemple de code, nous utilisons le paramètre `place`. `place` est une variable qui n'est utilisée que dans la fonction.
-                    Le nom de la variable, `place`, est déclarée après le mot clé `{with}` de la déclaration de la fonction (la ligne qui commence par `{define}`).
-                    La valeur de la variable est définie après le mot clé `{with}` de l'appel de la fonction (la ligne qui commence par `{call}`).
+                    For example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.
+                    In this example code the argument `place` is used. Place is a variable that is only used in the function, so an argument.
+                    To use `place` we have programmed the line `define song with place`.
+                    When the function is called, computer will replace the argument `place`, with the piece of text after `call song with`.
 
-                    ### Exercice
-                    Le couplet suivant de cette chanson est comme suit :
-                    ```
+                    ### Exercise
+                    The next verse of this song goes:
+
                     Last night as I lay on my pillow
                     Last night as I lay on my bed
                     Last night as I lay on my pillow
                     I dreamed that my Bonnie is dead
-                    ```
-                    Pouvez-vous programmer ce couplet de la même manière que dans l’exemple ?
+
+                    Can you program this verse in the same way as the example?
                 example_code: |
                     ```
                     {define} chanson {with} place

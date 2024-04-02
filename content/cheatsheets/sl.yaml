@@ -98,7 +98,7 @@
     demo_code: "{print} '5 krat 5 je ' 5 * 5"
 -   name: '{ask}'
     explanation: Vprašajte za odgovor na vsoto izračuna in preverite, ali je pravilen. Zdaj lahko natisnemo 2 vrstici.
-    demo_code: "odgovor = {ask} 'Koliko je 5 plus 5?'\n{if} odgovor {is} 10\n    {print} \"Dobro opravljeno!\n    {print} 'Odgovor je bil ' odgovor\n{else}\n    {print} \"Ups!\n    {print} 'Odgovor je 10'"
+    demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\n{else}\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
 -   name: '{repeat} z želvo'
     explanation: Ponovite več vrstic.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
@@ -108,7 +108,7 @@
 9:
 -   name: '{if} z več vrsticami'
     explanation: Odgovor na vsoto vprašanj z `{ask}` in preverite, ali je pravilen. Zdaj izpišemo dve vrstici.
-    demo_code: "odgovor = {ask} 'Koliko je 10 plus 10?'\n{if} odgovor {is} 20\n    {print} 'Dobro opravljeno!!'\n    {print} 'Odgovor je res' odgovor\n{else}\n    {print} \"Napačno\n    {print} 'Odgovor je 20'"
+    demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20\n    {print} 'Well done!!'\n    {print} 'The answer is indeed' answer\n{else}\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
 -   name: '{repeat} z želvo'
     explanation: Ponovite več vrstic.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
@@ -125,11 +125,11 @@
     demo_code: "{for} števec {in} {range} 1 {to} 5\n    {print} števec"
 -   name: '{ask}'
     explanation: Vprašajte za odgovor na vsoto in preverite, ali je pravilen. Zdaj lahko natisnemo 2 vrstici.
-    demo_code: "odgovor = {ask} 'Koliko je 5 plus 5?'\n{if} odgovor {is} 10\n    {print} \"Dobro opravljeno!\n    {print} 'Odgovor je bil ' odgovor\n{else}\n    {print} \"Ups!\n    {print} 'Odgovor je 10'"
+    demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\n{else}\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
 12:
 -   name: plavajoče neposredno
     explanation: Decimalne številke.
-    demo_code: "{print} \"Izračunaj!\n{print} \"Dva in pol plus dva in pol je...\n{print} 2.5 + 2.5"
+    demo_code: "{print} 'Calculate away!'\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5"
 -   name: določi besedilo
     explanation: Besedilo z narekovaji za `=`
     demo_code: "ime = 'Hedy Robot'\n{print} 'Pozdravljen ' ime"
@@ -195,7 +195,7 @@
 18:
 -   name: '{print}'
     explanation: Za ukazom `{print}` morate uporabiti oklepaje.
-    demo_code: "{print}(Živijo!')"
+    demo_code: "{print}('hi!')"
 -   name: '{range}'
     explanation: Za ukazom `{range}` morate uporabiti oklepaje.
     demo_code: "{for} i {in} {range} (1,10):\n    {print}('Živijo, krat ', i)"
