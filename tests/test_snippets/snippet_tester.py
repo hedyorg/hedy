@@ -152,17 +152,11 @@ def filter_snippets(snippets, level=None, lang=None):
     if (lang or level) and os.getenv('CI'):
         raise RuntimeError('Whoops, it looks like you left a snippet filter in!')
 
-    def snippet_from(x):
-        """From either a (name, snippet) pair or just a snippet, return the snippet."""
-        if isinstance(x, tuple):
-            return x[1]
-        return x
-
     if lang:
-        snippets = [x for x in snippets if snippet_from(x).language[:2] == lang]
+        snippets = [s for s in snippets if x.language[:len(lang)] == lang]
 
     if level:
-        snippets = [x for x in snippets if snippet_from(x).level == level]
+        snippets = [s for s in snippets if x.level == level]
 
     return snippets
 

@@ -529,6 +529,8 @@ class HedyTester(unittest.TestCase):
 
     @staticmethod
     def translate_keywords_in_snippets(snippets):
+        """Mutates the snippets in-place."""
+
         # fill keyword dict for all keyword languages
         keyword_dict = {}
         for lang in ALL_KEYWORD_LANGUAGES:
@@ -541,14 +543,7 @@ class HedyTester(unittest.TestCase):
 
         # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
         # NOTE: .format() instead of safe_format() on purpose!
-        for snippet_element in snippets:
-            # We can handle 2 formats of lists here. We accept a list of
-            # snippets, as well as a list of (name, snippet).
-            if isinstance(snippet_element, tuple):
-                snippet = snippet_element[1]
-            else:
-                snippet = snippet_element
-
+        for snippet in snippets:
             # store original code
             snippet.original_code = snippet.code
             try:
