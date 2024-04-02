@@ -525,6 +525,8 @@ def parse():
         return "if present, body.adventure_name must be a string", 400
     if 'is_debug' not in body:
         return "body.is_debug must be a boolean", 400
+    if 'raw' not in body:
+        return "body.raw is missing", 400
     error_check = False
     if 'error_check' in body:
         error_check = True

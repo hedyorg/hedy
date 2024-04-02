@@ -574,18 +574,14 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
           tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
           read_aloud : !!$('#speak_dropdown').val(),
           adventure_name: adventureName,
+          raw: raw,
 
           // Save under an existing id if this field is set
           program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
           save_name: saveNameFromInput(),
         };
 
-        let response
-        if (raw) {
-          response = await postJson('/parse', data);
-        } else {
-          response = await postJsonWithAchievements('/parse', data);
-        }
+        let response = await postJsonWithAchievements('/parse', data);
 
         program_data = response;
         console.log('Response', response);
@@ -595,9 +591,7 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
           error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
         }
 
-        if (!raw) {
-          showAchievements(response.achievements, false, "");
-        }
+        showAchievements(response.achievements, false, "");
         if (adventure && response.save_info) {
           adventure.save_info = response.save_info;
           adventure.editor_contents = code;
