@@ -54,8 +54,8 @@ class Snippet:
 class YamlSnippet:
     """A snippet found in one of the YAML files.
 
-    This is a replacement of 'Snippet', with fewer fields. 'Snippet' should be removed
-    at some point.
+    This is a replacement of 'Snippet' with fewer fields, only the fields that
+    are used in the snippet tests.
 
     `yaml_path` is the path in the YAML where this snippet was found, as an
     array of either strings or ints.
@@ -93,7 +93,7 @@ class YamlSnippet:
     @property
     def location(self):
         """Returns a description of the location."""
-        return f'{self.filename} at {self.yaml_path_str}'
+        return f'{self.relative_filename} at {self.yaml_path_str}'
 
 
 class SkippedMapping:
@@ -541,27 +541,27 @@ class HedyTester(unittest.TestCase):
 
         # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
         # NOTE: .format() instead of safe_format() on purpose!
-        for snippet in snippets:
+        for snippet_element in snippets:
             # We can handle 2 formats of lists here. We accept a list of
             # snippets, as well as a list of (name, snippet).
-            if isinstance(snippet, tuple):
-                snippet_obj = snippet[1]
+            if isinstance(snippet_element, tuple):
+                snippet = snippet_element[1]
             else:
-                snippet_obj = snippet
+                snippet = snippet_element
 
             # store original code
-            snippet_obj.original_code = snippet_obj.code
+            snippet.original_code = snippet.code
             try:
-                if snippet_obj.language in ALL_KEYWORD_LANGUAGES.keys():
-                    snippet_obj.code = snippet_obj.code.format(**keyword_dict[snippet_obj.language])
+                if snippet.language in ALL_KEYWORD_LANGUAGES.keys():
+                    snippet.code = snippet.code.format(**keyword_dict[snippet.language])
                 else:
-                    snippet_obj.code = snippet_obj.code.format(**english_keywords)
+                    snippet.code = snippet.code.format(**english_keywords)
             except KeyError:
                 print("This following snippet contains an invalid placeholder...")
-                print(snippet_obj.code)
+                print(snippet.code)
             except ValueError:
                 print("This following snippet contains an unclosed invalid placeholder...")
-                print(snippet_obj.code)
+                print(snippet.code)
 
 
     def format_test_error_md(self, E, snippet: Snippet):
@@ -592,7 +592,7 @@ class HedyTester(unittest.TestCase):
 
         rel_file = os.path.relpath(snippet.filename, ROOT_DIR)
         message.append(f'## {rel_file}')
-        message.append(f'There was a problem in a level {snippet.level} snippet:')
+        message.append(f'There was a problem in a level {snippet.level} snippet, at {snippet.yaml_path_str}:')
 
         # Use a 'caution' admonition because it renders in red
         message.append('> [!CAUTION]')
