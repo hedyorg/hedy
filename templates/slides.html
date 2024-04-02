@@ -1,32 +1,54 @@
-<div class="bg-blue-200">
-    <div class="grid grid-rows-1 md:grid-rows-2">
-        <div id="slide" class="flex flex-col justify-center items-center">
-            {% set slide = slides[slide_nr] %}
-            <h1 id="header">{{ slide.header }}</h1>
-            <p id="text">{{ slide.text }}</p>
-        </div>
-        <div id="code" class="">
-            <div class="flex justify-end mr-4">
-                {{ render_partial('htmx-language-switch-button.html', commands=commands) }}
-            </div>
-            {{ render_partial("code-page.html",
-                specific_adventure=True,
-                level_nr=level,
-                level=level,
-                adventures=adventures,
-                raw=True,
-                menu=False,
-                blur_button_available=False,
-                javascript_page_options=dict(
-                    page='code',
-                    lang=g.lang,
-                    level=level,
-                    adventures=adventures,
-                    initial_tab='start',
-                    current_user_name=user,
-                    suppress_save_and_load_for_slides=True,
-                ))}}
-        </div>
-        <button id="next-slide" onclick="hedyApp.next_slide({{slides}}, {{slide_nr}}, true)">Next Slide</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hedy - Slides - {{ level }} </title>
+    <link rel="stylesheet" href="{{static('css/reveal-js-custom.css')}}">
+    <link rel="stylesheet" href="{{static('vendor/reveal/dist/reset.css')}}">
+    <link rel="stylesheet" href="{{static('vendor/reveal/dist/reveal.css')}}">
+    <link rel="stylesheet" href="{{static('vendor/reveal/dist/theme/sky.css')}}">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="{{static('vendor/reveal/plugin/highlight/monokai.css')}}">
+</head>
+<body>
+    <div class="reveal">
+      <div class="slides">
+          {% for index, slide in slides.items() %}
+            <section data-markdown style="text-align: left; height: 1018px; font-size:0.8em">
+                {{ slide['header'] }}
+                <textarea data-template>
+                    ### {{ slide['header'] }}
+
+                    {{ slide['text'] }}
+                    {% if slide['code'] %}
+                    <iframe class="fragment" src="/render_code/{{ level }}?code={{ slide['code'] | urlencode }}"></iframe>
+                    {% endif %}
+                    {% if slide['editor'] %}
+                    <iframe class="fragment" src="{{ slide['editor'] }}"></iframe>
+                    {% endif %}
+                </textarea>
+            </section>
+          {% endfor %}
+      </div>
     </div>
-</div>
+    <script src="{{static('vendor/reveal/dist/reveal.js')}}"></script>
+    <script src="{{static('vendor/reveal/plugin/notes/notes.js')}}"></script>
+    <script src="{{static('vendor/reveal/plugin/markdown/markdown.js')}}"></script>
+    <script src="{{static('vendor/reveal/plugin/highlight/highlight.js')}}"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            hash: true,
+            transition: 'none',
+            slideNumber: true,
+            keyboard: true,
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+        });
+    </script>
+</body>
+
+</html>
