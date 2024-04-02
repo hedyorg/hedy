@@ -157,9 +157,9 @@ class TestsLevel9(HedyTester):
             repeat 3 times
                 print 'hello'""")
 
-        expected = textwrap.dedent("""\
-           for __i in range(int('2')):
-             for __i in range(int('3')):
+        expected = textwrap.dedent(f"""\
+           for __i in range({self.int_cast_transpiled(2)}):
+             for __i in range({self.int_cast_transpiled(3)}):
                print(f'hello')
                time.sleep(0.1)""")
 
@@ -219,7 +219,7 @@ class TestsLevel9(HedyTester):
 
         expected = textwrap.dedent(f"""\
         prijs = '0'
-        for __i in range(int('7')):
+        for __i in range({self.int_cast_transpiled(7)}):
           ingredient = input(f'wat wil je kopen?')
           if convert_numerals('Latin', ingredient) == convert_numerals('Latin', 'appel'):
             prijs = {self.int_cast_transpiled('prijs', False)} + int(1)
@@ -239,7 +239,7 @@ class TestsLevel9(HedyTester):
 
         expected = textwrap.dedent(f"""\
         prijs = '0'
-        for __i in range(int('7')):
+        for __i in range({self.int_cast_transpiled(7)}):
           ingredient = input(f'wat wil je kopen?')
           if convert_numerals('Latin', ingredient) == convert_numerals('Latin', 'appel'):
             prijs = {self.int_cast_transpiled('prijs', False)} + int(1)
@@ -255,10 +255,10 @@ class TestsLevel9(HedyTester):
             repeat 3 times
                 print 'mooi'""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         kleur = 'groen'
         if convert_numerals('Latin', kleur) == convert_numerals('Latin', 'groen'):
-          for __i in range(int('3')):
+          for __i in range({self.int_cast_transpiled(3)}):
             print(f'mooi')
             time.sleep(0.1)""")
 
@@ -276,8 +276,8 @@ class TestsLevel9(HedyTester):
             else
                 print 'lalala'""")
 
-        expected = textwrap.dedent("""\
-        for __i in range(int('5')):
+        expected = textwrap.dedent(f"""\
+        for __i in range({self.int_cast_transpiled(5)}):
           if convert_numerals('Latin', 'antwoord2') == convert_numerals('Latin', '10'):
             print(f'Goedzo')
           else:
@@ -322,11 +322,11 @@ class TestsLevel9(HedyTester):
         else
             print '1 keertje'""")
 
-        expected = HedyTester.dedent("""\
-         if_pressed_mapping = {"else": "if_pressed_default_else"}
+        expected = HedyTester.dedent(f"""\
+         if_pressed_mapping = {{"else": "if_pressed_default_else"}}
          if_pressed_mapping['x'] = 'if_pressed_x_'
          def if_pressed_x_():
-             for __i in range(int('5')):
+             for __i in range({self.int_cast_transpiled(5)}):
                print(f'doe het 5 keer!')
                time.sleep(0.1)
          if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -349,10 +349,10 @@ class TestsLevel9(HedyTester):
           else
             print 'nah'""")
 
-        expected = HedyTester.dedent("""\
+        expected = HedyTester.dedent(f"""\
          create_button('button1')
-         for __i in range(int('3')):
-           if_pressed_mapping = {"else": "if_pressed_default_else"}
+         for __i in range({self.int_cast_transpiled(3)}):
+           if_pressed_mapping = {{"else": "if_pressed_default_else"}}
            if_pressed_mapping['button1'] = 'if_pressed_button1_'
            def if_pressed_button1_():
                print(f'wow')
@@ -386,11 +386,11 @@ class TestsLevel9(HedyTester):
         expected_source_map = {
             '2/5-2/9': '2/1-2/5',
             '2/5-2/35': '2/1-2/35',
-            '3/8-3/21': '7/-199-3/4',
+            '3/8-3/21': '7/-237-2/3',
             '4/9-4/22': '4/1-4/16',
             '3/5-4/31': '3/1-4/16',
             '6/9-6/32': '6/1-6/26',
-            '4/31-6/41': '7/-199-2/6',
+            '4/31-6/41': '7/-237-1/34',
             '3/5-6/41': '3/1-6/22',
             '1/1-6/50': '1/1-7/18',
             '1/1-6/51': '1/1-7/18'
