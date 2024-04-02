@@ -541,6 +541,7 @@ def parse():
 
     # true if kid enabled the read aloud option
     read_aloud = body.get('read_aloud', False)
+    raw = body.get('raw')
 
     response = {}
     username = current_user()['username'] or None
@@ -556,7 +557,8 @@ def parse():
                 transpile_result = transpile_add_stats(code, level, lang, is_debug)
                 if username and not body.get('tutorial'):
                     DATABASE.increase_user_run_count(username)
-                    ACHIEVEMENTS.increase_count("run")
+                    if not raw:
+                        ACHIEVEMENTS.increase_count("run")
             except hedy.exceptions.WarningException as ex:
                 translated_error = get_error_text(ex, keyword_lang)
                 if isinstance(ex, hedy.exceptions.InvalidSpaceException):
@@ -629,12 +631,13 @@ def parse():
                 except BaseException:
                     pass
 
-        try:
-            if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
-                    username, code, level, response, transpile_result.commands):
-                response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
-        except Exception as E:
-            print(f"error determining achievements for {code} with {E}")
+        if not raw:
+            try:
+                if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
+                        username, code, level, response, transpile_result.commands):
+                    response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
+            except Exception as E:
+                print(f"error determining achievements for {code} with {E}")
 
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()

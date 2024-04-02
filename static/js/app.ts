@@ -1885,19 +1885,6 @@ function download(data: any, filename: any, type: any) {
   }, 0);
 }
 
-export function next_slide(slides: any, slideIndex: number, next: boolean) {
-  if (next) {
-    slideIndex++;
-  } else {
-    slideIndex--;
-  }
-  console.log(next)
-  console.log(slideIndex)
-  document.getElementById('header')!.innerText = slides[slideIndex].header;
-  document.getElementById('text')!.innerText = slides[slideIndex].text;
-  return slideIndex
-}
-
 /**
  * Hide all things that may have been dynamically shown when switching tabs
  *
