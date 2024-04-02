@@ -261,6 +261,7 @@ class LocatedYamlValue:
     keep track of the path of strings, when they finally construct a
     `YamlSnippet`.
     """
+
     def __init__(self, inner, yaml_path):
         self.inner = inner
         self.yaml_path = yaml_path
@@ -309,5 +310,6 @@ class LocatedYamlValue:
     def as_string(self):
         """Returns the inner value, failing if it's not a string."""
         if not isinstance(self.inner, str):
-            raise TypeError('as_string(): expect inner value to be a string, got a %s: %r' % (type(self.inner), self.inner))
+            raise TypeError('as_string(): expect inner value to be a string, got a %s: %r' %
+                            (type(self.inner), self.inner))
         return self.inner
