@@ -26,16 +26,16 @@ const fullLineCommands = [
 const blockCommands = [
   'ifs',
   'ifelse',
-  'ifpressed_else',
+  'if_pressed_else',
   'repeat',
-  'ifpressed',
+  'if_pressed',
   'elses',
-  'ifpressed_elses',
+  'if_pressed_elses',
   'for_list',
   'for_loop',
   'while_loop',
   'elifs',
-  'ifpressed_elifs',
+  'if_pressed_elifs',
 ]
 
 const ifRegex = "((__if__) *[^\n ]+ *((__is__)|(__in__)) *[^\n ]+) *.*";
@@ -86,11 +86,12 @@ export function load_variables(variables: any) {
     for (const i in variables) {
       // Only append if the variable contains any data (and is not undefined)
       if (variables[i][1]) {
-        variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
+        const variableName = variables[i][0].replace(/^_/, '');
+        variableList.append(`<li style=color:${variables[i][2]}>${variableName}: ${variables[i][1]}</li>`);
       }
     }
-    show_variables(); 
-    hide_if_no_variables(); 
+    show_variables();
+    hide_if_no_variables();
   }
 }
 
