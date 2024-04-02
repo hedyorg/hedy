@@ -8,9 +8,7 @@ scriptdir=$(cd $(dirname $0) && pwd)
 # TODOs about extracting by JW 2023-10-03 for PR #4574
 $scriptdir/validate-typescript # TODO extract
 $scriptdir/validate-yaml # TODO extract
-if [[ "${1:-}" == "--all" ]]; then
-  $scriptdir/validate-tests --all
-elif [[ "${1:-}" == "--weblate" ]]; then
+if [[ "${1:-}" == "--weblate" ]]; then
   $scriptdir/validate-tests --weblate
 else
   $scriptdir/validate-tests

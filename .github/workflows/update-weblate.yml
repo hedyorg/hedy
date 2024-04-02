@@ -27,11 +27,17 @@ jobs:
         echo '[keys]' >> .weblate
         echo 'https://hosted.weblate.org/api/ = ${{ secrets.WEBLATE_API_KEY }}' >> .weblate
     - name: Weblate commands
+      # Do a weblate pull, commit and push.
+      # After pushing, clean the Weblate remote. This is necessary because we squash merge the
+      # commits that Weblate pushes, and if the bytes aren't exactly equivalent (for example
+      # if we wrap or we revert a broken bit of code) it will trigger a merge
+      # conflict.
       run: |
         set -x
         wlc repo
         wlc pull
         wlc commit
         wlc push
+        wlc reset
 
 
