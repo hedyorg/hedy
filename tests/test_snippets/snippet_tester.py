@@ -62,15 +62,14 @@ def collect_adventures_snippets():
                 continue
 
             for level_number, level in adventure['levels'].items():
-                for adventure_part, markdown_text in level.items():
-                    for code in markdown_code_blocks(markdown_text):
+                for markdown_text in level.values():
+                    for code in markdown_code_blocks(markdown_text.as_string()):
                         yield YamlSnippet(
                             code=code,
                             filename=filename,
                             language=language,
                             level=level_number,
-                            # The path in the YAML we took to get here
-                            yaml_path=['adventures', adventure_key, 'levels', level_number, adventure_part])
+                            yaml_path=markdown_text.yaml_path)
 
 
 @listify
@@ -78,15 +77,14 @@ def collect_cheatsheet_snippets():
     """Find the snippets in cheatsheets."""
     for filename, language, yaml in find_yaml_files('content/cheatsheets'):
         for level_number, level in yaml.items():
-            for command_index, command in enumerate(level):
+            for command in level:
                 if code := command.get('demo_code'):
                     yield YamlSnippet(
-                        code=code,
+                        code=code.as_string(),
                         filename=filename,
                         language=language,
                         level=level_number,
-                        # The path in the YAML we took to get here
-                        yaml_path=[level_number, command_index, 'demo_code'])
+                        yaml_path=code.yaml_path)
 
 
 @listify
@@ -94,14 +92,14 @@ def collect_parsons_snippets():
     """Find the snippets in Parsons YAMLs."""
     for filename, language, yaml in find_yaml_files('content/parsons'):
         for level_number, level in yaml['levels'].items():
-            for exercise_nr, exercise in level.items():
+            for exercise in level:
+                code = exercise['code']
                 yield YamlSnippet(
-                    code=exercise['code'],
+                    code=code.as_string(),
                     filename=filename,
                     language=language,
                     level=level_number,
-                    # The path in the YAML we took to get here
-                    yaml_path=['levels', level_number, exercise_nr, 'code'])
+                    yaml_path=code.yaml_path)
 
 
 @listify
@@ -109,26 +107,28 @@ def collect_slides_snippets():
     """Find the snippets in slides YAMLs."""
     for filename, language, yaml in find_yaml_files('content/slides'):
         for level_number, level in yaml['levels'].items():
-            for slide_nr, slide in level.items():
+            for slide in level:
                 # Some slides have code that is designed to fail
                 if slide.get('debug'):
                     continue
 
                 if code := slide.get('code'):
                     yield YamlSnippet(
-                        code=code,
+                        code=code.as_string(),
                         filename=filename,
                         language=language,
                         # Level 0 needs to be treated as level 1
                         level=max(1, level_number),
-                        # The path in the YAML we took to get here
-                        yaml_path=['levels', level_number, slide_nr, 'code'])
+                        yaml_path=code.yaml_path)
 
 
 def find_yaml_files(repository_path):
     """Find all YAML files in a given directory, relative to the repository root.
 
-    Returns an iterator of (filename, language, yaml_object).
+    Returns an iterator of (filename, language, located_yaml_object).
+
+    The `located_yaml_object` is a `LocatedYamlValue` representing the root of the
+    YAML file, which can be indexed using `[]` and by using `.items()` and `.values()`.
     """
     path = os.path.join(rootdir(), repository_path)
     files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
@@ -138,7 +138,7 @@ def find_yaml_files(repository_path):
         lang = f.split(".")[0]
         yaml = YamlFile.for_file(os.path.join(path, f))
 
-        yield (filename, lang, yaml)
+        yield (filename, lang, LocatedYamlValue(yaml, []))
 
 
 def markdown_code_blocks(text):
@@ -249,3 +249,65 @@ def locate_snippet_in_yaml(root, snippet):
         root = root[path[0]]
         path = path[1:]
     return YamlLocation(dict=root, key=path[0])
+
+
+class LocatedYamlValue:
+    """A value in a YAML file, along with its path inside that YAML file.
+
+    Has features to descend into children of the wrapped value, which also
+    emits `LocatedYamlValue`s with their paths automatically baked in.
+
+    This makes it so that the authors of YAML traversal functions don't have to
+    keep track of the path of strings, when they finally construct a
+    `YamlSnippet`.
+    """
+    def __init__(self, inner, yaml_path):
+        self.inner = inner
+        self.yaml_path = yaml_path
+
+    def items(self):
+        """Returns a set of (key, LocatedYamlValue) values, one for every element of the inner value.
+
+        The inner value must be a dict-like or list. For a list, the indexes will be returned as keys.
+        """
+        if hasattr(self.inner, 'items'):
+            # Dict-like
+            return [(k, LocatedYamlValue(v, self.yaml_path + [k])) for k, v in self.inner.items()]
+        if isinstance(self.inner, list):
+            # A list can be treated as a dict-like using integer indexes
+            return [(i, LocatedYamlValue(v, self.yaml_path + [i])) for i, v in enumerate(self.inner)]
+        raise TypeError('Can only call .items() on a value of type dict or list, got %r' % self.inner)
+
+    def values(self):
+        """Returns a list of `LocatedYamlValue`s, one for every element in this collection.
+
+        Ignores keys.
+        """
+        return [v for _, v in self.items()]
+
+    def __getitem__(self, key):
+        """Retrieve a single item from the inner value."""
+        ret = self.inner[key]
+        return LocatedYamlValue(ret, self.yaml_path + [key])
+
+    def get(self, key, default=None):
+        """Retrieve a single item from the inner value."""
+        ret = self.inner.get(key, default)
+        if ret is None:
+            return None
+        return LocatedYamlValue(ret, self.yaml_path + [key])
+
+    def __iter__(self):
+        """Returns an iterator over the values of this container.
+
+        Note that this function behaves differently from a normal dict for dict values:
+        normal dicts will iterate over dictionary keys, while this type of dict will
+        iterate over dictionary values.
+        """
+        return iter(self.values())
+
+    def as_string(self):
+        """Returns the inner value, failing if it's not a string."""
+        if not isinstance(self.inner, str):
+            raise TypeError('as_string(): expect inner value to be a string, got a %s: %r' % (type(self.inner), self.inner))
+        return self.inner
