@@ -257,6 +257,20 @@ class LocatedYamlValue:
     Has features to descend into children of the wrapped value, which also
     emits `LocatedYamlValue`s with their paths automatically baked in.
 
+    For example, if we have a referece to the adventure `1` (with path
+    `['adventures', 1]` in the following YAML:
+
+        adventures:
+            1:
+                code: |
+                print hello
+
+    And we would write:
+
+        code = level['code']
+
+    `code` would be a string that knew its path is `['adventures', 1, 'code']`.
+
     This makes it so that the authors of YAML traversal functions don't have to
     keep track of the path of strings, when they finally construct a
     `YamlSnippet`.
