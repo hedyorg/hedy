@@ -5,10 +5,9 @@ from parameterized import parameterized
 from . import snippet_tester
 
 
-snippets = snippet_tester.collect_yaml_snippets('content/parsons', {
-    'levels.<LEVEL>.*.code': snippet_tester.COLLECT,
-})
-snippets = HedyTester.translate_keywords_in_snippets(snippets)
+snippets = snippet_tester.collect_parsons_snippets()
+
+HedyTester.translate_keywords_in_snippets(snippets)
 
 # lang = 'zh_hans' #useful if you want to test just 1 language
 lang = None

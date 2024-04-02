@@ -13,16 +13,14 @@ TODO:
 
 import os
 from os import path
-from fnmatch import fnmatchcase
-from collections import namedtuple
 
 from dataclasses import dataclass
+import functools
 import exceptions
 import hedy
 import utils
-from tests.Tester import HedyTester, Snippet, YamlSnippet
+from tests.Tester import HedyTester, YamlSnippet
 from website.yaml_file import YamlFile
-from typing import List, Callable, Tuple, Dict, Union
 
 fix_error = False
 # set this to True to revert broken snippets to their en counterpart automatically
@@ -31,142 +29,123 @@ if os.getenv('fix_for_weblate') or os.getenv('FIX_FOR_WEBLATE'):
     fix_error = True
 
 
-check_stories = False
-
-
 def rootdir():
     """Return the repository root directory."""
     return os.path.join(os.path.dirname(__file__), '..', '..')
 
 
-COLLECT, COLLECT_MARKDOWN, SKIP, RECURSE = 'COLLECT', 'COLLECT_MARKDOWN', 'SKIP', 'RECURSE'
+def listify(fn):
+    """Turns a function written as a generator into a function that returns a list.
+
+    Writing a function that produces elements one by one is convenient to write
+    as a generator (using `yield`), but the return value can only be iterated once.
+    The caller needs to know that the function is a generator and call `list()` on
+    the result.
+
+    This decorator does that from the function side: `list()` is automatically
+    called, so the caller doesn't need to know anything, yet the function is still
+    nice to read and write.
+    """
+    @functools.wraps(fn)
+    def wrapper(*args, **kwargs):
+        return list(fn(*args, **kwargs))
+    return wrapper
 
 
-def collect_yaml_snippets(repository_path: str, locator: Union[Callable, Dict[str, str]]) -> List[YamlSnippet]:
-    """Collect all YAML snippets in a directory.
+@listify
+def collect_adventures_snippets():
+    """Find the snippets for adventures."""
+    for filename, language, yaml in find_yaml_files('content/adventures'):
+        for adventure_key, adventure in yaml['adventures'].items():
+            # the default tab sometimes contains broken code to make a point to learners about changing syntax.
+            if adventure_key in ['default', 'debugging']:
+                continue
 
-    Snippet() has many fields; this function only sets 'filename', 'code' and 'field_path', which are used
-    in the rest of the snippet tester to revert failing snippets to English.
+            for level_number, level in adventure['levels'].items():
+                for adventure_part, markdown_text in level.items():
+                    for code in markdown_code_blocks(markdown_text):
+                        yield YamlSnippet(
+                            code=code,
+                            filename=filename,
+                            language=language,
+                            level=level_number,
+                            # The path in the YAML we took to get here
+                            yaml_path=['adventures', adventure_key, 'levels', level_number, adventure_part])
 
-    locator can be either a function, which will be called for every YAML entry and
-    should retur a decision (recurse, skip, collect snippets here and if so what's
-    their level?), or be a map that will be passed to `make_locator`.
+
+@listify
+def collect_cheatsheet_snippets():
+    """Find the snippets in cheatsheets."""
+    for filename, language, yaml in find_yaml_files('content/cheatsheets'):
+        for level_number, level in yaml.items():
+            for command_index, command in enumerate(level):
+                if code := command.get('demo_code'):
+                    yield YamlSnippet(
+                        code=code,
+                        filename=filename,
+                        language=language,
+                        level=level_number,
+                        # The path in the YAML we took to get here
+                        yaml_path=[level_number, command_index, 'demo_code'])
+
+
+@listify
+def collect_parsons_snippets():
+    """Find the snippets in Parsons YAMLs."""
+    for filename, language, yaml in find_yaml_files('content/parsons'):
+        for level_number, level in yaml['levels'].items():
+            for exercise_nr, exercise in level.items():
+                yield YamlSnippet(
+                    code=exercise['code'],
+                    filename=filename,
+                    language=language,
+                    level=level_number,
+                    # The path in the YAML we took to get here
+                    yaml_path=['levels', level_number, exercise_nr, 'code'])
+
+
+@listify
+def collect_slides_snippets():
+    """Find the snippets in slides YAMLs."""
+    for filename, language, yaml in find_yaml_files('content/slides'):
+        for level_number, level in yaml['levels'].items():
+            for slide_nr, slide in level.items():
+                # Some slides have code that is designed to fail
+                if slide.get('debug'):
+                    continue
+
+                if code := slide.get('code'):
+                    yield YamlSnippet(
+                        code=code,
+                        filename=filename,
+                        language=language,
+                        # Level 0 needs to be treated as level 1
+                        level=max(1, level_number),
+                        # The path in the YAML we took to get here
+                        yaml_path=['levels', level_number, slide_nr, 'code'])
+
+
+def find_yaml_files(repository_path):
+    """Find all YAML files in a given directory, relative to the repository root.
+
+    Returns an iterator of (filename, language, yaml_object).
     """
     path = os.path.join(rootdir(), repository_path)
     files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
 
-    locator = locator if callable(locator) else make_locator(locator)
-
-    ret = []
     for f in files:
         filename = os.path.join(path, f)
         lang = f.split(".")[0]
-
         yaml = YamlFile.for_file(os.path.join(path, f))
 
-        for field_path, level, code in recurse_yaml(yaml, [], locator):
-            ret.append(YamlSnippet(
-                filename=filename,
-                code=code,
-                level=level,
-                field_path=field_path,
-                language=lang))
-
-    return ret
+        yield (filename, lang, yaml)
 
 
-def locator_decision_from_map(field_path, path_map):
-    """Source the decision for a YAML locator from a map.
-
-    The field_path will be compared as a string agains the entries from the map.
-
-    Here's a typical example of the map that should be passed to this function:
-
-    ```
-    {
-        'adventures.default': snippet_tester.SKIP,
-        'adventures.debugging': snippet_tester.SKIP,
-        'adventures.*.levels.<LEVEL>.story_text*': snippet_tester.COLLECT_MARKDOWN,
-        'adventures.*.levels.<LEVEL>.example_code*': snippet_tester.COLLECT_MARKDOWN,
-    }
-    ```
-    """
-
-    for pattern, effect in path_map.items():
-        # Treat '<LEVEL>' as * for the purposes of matching
-        match_pattern = pattern.replace('<LEVEL>', '*')
-
-        if fnmatchcase(field_path, match_pattern):
-            # Return the effect. If the effect is one of the collects, we must pattern match the level out of the path.
-            if effect == COLLECT or effect == COLLECT_MARKDOWN:
-                level_ix = pattern.split('.').index('<LEVEL>')
-                if level_ix == -1:
-                    raise RuntimeError('A pattern with COLLECT must contain the matcher <LEVEL> somewhere')
-                level = int(field_path.split('.')[level_ix])
-                return (effect, level)
-
-            return effect
-
-
-def make_locator(path_map):
-    """Returns a locator from a path map."""
-    def locator(entry):
-        return locator_decision_from_map(entry.field_path, path_map)
-
-    return locator
-
-
-def path_match(field_path, patterns):
-    return any(fnmatchcase(field_path, pattern) for pattern in patterns)
-
-
-YamlEntry = namedtuple('YamlEntry', ('field_path', 'value'))
-
-
-def recurse_yaml(yaml_value, field_path: List[str], locator: Callable[[List[str]], str]):
-    # Protocol: locator must return either SKIP, RECURSE, or (COLLECT, <level>) or (COLLECT_MARKDOWN, <level>)
-    # RECURSE is the default action
-    entry = YamlEntry('.'.join((str(x) for x in field_path)), yaml_value)
-    orig_decision = locator(entry) or RECURSE
-    level = None
-    if isinstance(orig_decision, tuple):
-        level = orig_decision[1]
-        decision = orig_decision[0]
-    else:
-        decision = orig_decision
-
-    def assert_decision(*args):
-        if not decision in args:
-            raise RuntimeError(f'For path {field_path} decision must be one of {args}, got: {decision}')
-
-    if isinstance(yaml_value, str):
-        assert_decision(COLLECT, COLLECT_MARKDOWN, SKIP, RECURSE)
-
-        codes = []
-        if decision == COLLECT:
-            codes = [yaml_value]
-        if decision == COLLECT_MARKDOWN:
-            codes = [tag.contents[0].contents[0]
-                     for tag in utils.markdown_to_html_tags(yaml_value)
-                     if tag.name == 'pre' and tag.contents and tag.contents[0].contents]
-
-        for code in codes:
-            if not level:
-                raise RuntimeError(f'A locator returning COLLECT must also return a level (got {orig_decision})')
-            yield (field_path, level, code)
-
-    if isinstance(yaml_value, list):
-        assert_decision(RECURSE, SKIP)
-        if decision == RECURSE:
-            for i, value in enumerate(yaml_value):
-                yield from recurse_yaml(value, field_path + [i], locator)
-        return
-    if hasattr(yaml_value, 'items'):
-        assert_decision(RECURSE, SKIP)
-        if decision == RECURSE:
-            for key, value in yaml_value.items():
-                yield from recurse_yaml(value, field_path + [key], locator)
-        return
+def markdown_code_blocks(text):
+    """Parse the text as MarkDown and return all code blocks in here."""
+    return [tag.contents[0].contents[0]
+            for tag in utils.markdown_to_html_tags(text)
+            if tag.name == 'pre' and tag.contents and tag.contents[0].contents]
 
 
 def filter_snippets(snippets, level=None, lang=None):
@@ -189,7 +168,10 @@ def filter_snippets(snippets, level=None, lang=None):
 
 
 def snippets_with_names(snippets):
-    """Expand a set of snippets to pairs of (name, snippet). This is necessary to stick it into @parameterized.expand."""
+    """Expand a set of snippets to pairs of (name, snippet).
+
+    This is necessary to stick it into @parameterized.expand.
+    """
     return ((s.name, s) for s in snippets)
 
 
@@ -255,13 +237,14 @@ class HedySnippetTester(HedyTester):
 
 
 def locate_snippet_in_yaml(root, snippet):
-    """Given a snippet, locate its containing object and key.
+    """Given a YamlSnippet, locate its containing object and key.
 
-    Use the information in the snippet itself if it is a YamlSnippet, otherwise uses
-    the locator function.
+    This uses the `yaml_path` to descend into the given YAML object bit
+    by bit (by indexing the dictionary or list with the next string
+    or int) until we arrive at the parent object of the string we're
+    looking for.
     """
-    path = snippet.field_path.copy()
-    print(path)
+    path = snippet.yaml_path.copy()
     while len(path) > 1:
         root = root[path[0]]
         path = path[1:]

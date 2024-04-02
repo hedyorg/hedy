@@ -1,5 +1,6 @@
 import random
 import textwrap
+from dataclasses import dataclass
 import pickle
 import hashlib
 import hedy
@@ -12,6 +13,7 @@ from contextlib import contextmanager
 import inspect
 import unittest
 import utils
+import typing
 from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 
 from hedy_sourcemap import SourceRange
@@ -25,7 +27,7 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 class Snippet:
-    def __init__(self, filename, level, code, field_name=None, adventure_name=None, error=None, language=None, key=None, counter=0, field_path=None):
+    def __init__(self, filename, level, code, field_name=None, adventure_name=None, error=None, language=None, key=None, counter=0):
         self.filename = filename
         self.level = level
         self.field_name = field_name if field_name is not None else ''
@@ -43,39 +45,55 @@ class Snippet:
         self.counter = counter
         if counter > 0:
             self.name += f'-{self.counter + 1}'
-        self.field_path = field_path
 
     def __repr__(self):
         return f'Snippet({self.name})'
 
 
+@dataclass
 class YamlSnippet:
     """A snippet found in one of the YAML files.
 
     This is a replacement of 'Snippet', with fewer fields. 'Snippet' should be removed
     at some point.
 
-    - `filename`: the filename where this snippet was found.
-    - `field_path`: the full YAML path where this snippet was found, as an
-       array of either strings or ints.
+    `yaml_path` is the path in the YAML where this snippet was found, as an
+    array of either strings or ints.
+
+    For example, in a YAML file that looks like:
+
+    ```
+    adventures:
+        1:
+            code: |
+               print hello
+    ```
+
+    The `yaml_path` would be `['adventures', 1, 'code']`.
     """
+    filename: str
+    yaml_path: typing.List
+    code: str
+    language: str
+    level: int
 
-    def __init__(self, filename, field_path, code, language, level):
-        self.filename = filename
-        self.field_path = field_path
-        self.code = code
-        self.language = language
-        self.level = level
-        self.relative_filename = os.path.relpath(self.filename, ROOT_DIR)
-
+    def __post_init__(self):
         # 'code' may be replaced later on when translating keywords
-        self.original_code = code
-
-        self.name = f'{self.relative_filename}-{self.field_path_str}'
+        self.original_code = self.code
+        self.name = f'{self.relative_filename}-{self.yaml_path_str}'
 
     @property
-    def field_path_str(self):
-        return '.'.join(str(x) for x in self.field_path)
+    def relative_filename(self):
+        return os.path.relpath(self.filename, ROOT_DIR)
+
+    @property
+    def yaml_path_str(self):
+        return '.'.join(str(x) for x in self.yaml_path)
+
+    @property
+    def location(self):
+        """Returns a description of the location."""
+        return f'{self.filename} at {self.yaml_path_str}'
 
 
 class SkippedMapping:
@@ -524,6 +542,8 @@ class HedyTester(unittest.TestCase):
         # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
         # NOTE: .format() instead of safe_format() on purpose!
         for snippet in snippets:
+            # We can handle 2 formats of lists here. We accept a list of
+            # snippets, as well as a list of (name, snippet).
             if isinstance(snippet, tuple):
                 snippet_obj = snippet[1]
             else:
@@ -543,7 +563,6 @@ class HedyTester(unittest.TestCase):
                 print("This following snippet contains an unclosed invalid placeholder...")
                 print(snippet_obj.code)
 
-        return snippets
 
     def format_test_error_md(self, E, snippet: Snippet):
         """Given a snippet and an exception, return a Markdown string describing the problem."""
