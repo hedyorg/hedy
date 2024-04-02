@@ -122,17 +122,16 @@ class TestDynamoAbstraction(unittest.TestCase, Helpers):
             'z': None,
         })
 
-
     def test_no_memory_sharing_direct(self):
         """Ensure that changes to objects retrieved from the database do not leak into other operations."""
-        self.table.put({ 'id': 'key', 'x': 1 })
+        self.table.put({'id': 'key', 'x': 1})
 
         # WHEN
-        retrieved = self.table.get({ 'id': 'key' })
+        retrieved = self.table.get({'id': 'key'})
         retrieved['x'] = 666
 
         # THEN
-        retrieved2 = self.table.get({ 'id': 'key' })
+        retrieved2 = self.table.get({'id': 'key'})
         self.assertEqual(retrieved2['x'], 1)
 
     def test_no_memory_sharing_sublists(self):
@@ -163,7 +162,6 @@ class TestDynamoAbstraction(unittest.TestCase, Helpers):
         # THEN
         obj2 = self.table.get(dict(id='lookatme'))
         self.assertEqual(obj2['x'], 0)
-
 
     def test_no_memory_sharing_insert_sublist(self):
         """Ensure that changes to objects we insert aren't accidentally seen by other viewers."""

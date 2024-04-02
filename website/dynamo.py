@@ -778,9 +778,9 @@ class MemoryStorage(TableStorage):
 
         # Do a final filtering to mimic DynamoDB FilterExpression
         return copy.deepcopy([record
-                          for _, record in with_keys
-                          if self._query_matches(record, filter_eq_conditions, filter_special_conditions)
-                          ]), next_page_key
+                              for _, record in with_keys
+                              if self._query_matches(record, filter_eq_conditions, filter_special_conditions)
+                              ]), next_page_key
 
     # NOTE: on purpose not @synchronized here
     def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None,
