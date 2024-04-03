@@ -51,8 +51,7 @@ class PublicAdventuresModule(WebsiteModule):
             public_profile = self.db.get_public_profile_settings(adventure.get('creator'))
             included[adventure["name"]] = True
 
-            content = safe_format(adventure['formatted_content']
-                                  if adventure.get("formatted_content") else adventure["content"],
+            content = safe_format(adventure.get('formatted_content', adventure['content']),
                                   **hedy_content.KEYWORDS.get(g.keyword_lang))
             current_adventure = {
                 "id": adventure.get("id"),
@@ -69,7 +68,6 @@ class PublicAdventuresModule(WebsiteModule):
                 "tags": adv_tags,
                 "text": content,
                 "is_teacher_adventure": True,
-                # "content": adventure.get("content")
             }
 
             # save adventures for later usage.
