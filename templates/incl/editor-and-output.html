@@ -153,10 +153,10 @@
           <button id="saveFiles" class="green-btn" onclick="hedyApp.saveMachineFiles();">💾</button>
         </div>
         <div id="debug_container" class="ltr:ml-auto rtl:mr-auto">
-          <button id="debug_button" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{raw | lower}}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>🐞</button>
-          <button id="debug_restart" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{raw | lower}}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>🔄</button>
+          <button id="debug_button" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>🐞</button>
+          <button id="debug_restart" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>🔄</button>
           <button id="debug_stop" class="green-btn hidden" onclick="hedyApp.stopDebug()">🛑</button>
-          <button id="debug_continue" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{raw | lower}}, {{_('already_program_running')|default(None)|tojson}}, "continue")'><div class="{% if g.dir == "rtl" %}rotate-180{% endif %}">⏩</div></button>
+          <button id="debug_continue" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "continue")'><div class="{% if g.dir == "rtl" %}rotate-180{% endif %}">⏩</div></button>
         </div>
         <button id="next_parson_button" max_exercise="{{ parsons_exercises }}" class="green-btn ltr:ml-auto rtl:mr-auto" style="display: none;">{{_('next_exercise')}}</button>
         {% if show_edit_button %}
