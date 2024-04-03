@@ -537,7 +537,7 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
           is_debug: run_type === 'debug',
           tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
           read_aloud : !!$('#speak_dropdown').val(),
-          adventure_name: adventureName,
+          adventure_name: adventure.name,
           raw: raw,
 
           // Save under an existing id if this field is set
