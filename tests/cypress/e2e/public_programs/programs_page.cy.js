@@ -2,6 +2,7 @@ import { createAdventure, deleteAdventure } from "../tools/adventures/adventure"
 import { executeHelloWorldProgram, deleteProgram } from "../tools/programs/program";
 import { loginForTeacher } from "../tools/login/login";
 import { navigateToClass } from "../tools/classes/class";
+import { makeProfilePublic } from "../tools/profile/profile";
 
 describe("General tests for my programs page (with both custom teacher and built-in adventure)", () => {
     const programName = "myTestProgram";
@@ -34,6 +35,24 @@ describe("General tests for my programs page (with both custom teacher and built
                 cy.get(`#share_button_${programId}`).click();
                 cy.get(`#share_option_dropdown_${programId}`).should('contain.text', 'Public');
                 cy.get(`#non_submitted_button_container_${programId} [data-cy="submit-btn"]`).should('be.visible');
+            })
+    });
+
+    it.only('can favourite and unfavourite a public program', () => {
+        makeProfilePublic();
+        cy.visit(`${Cypress.env('programs_page')}`);
+        cy.get(`[data-name=${programName}]`)
+            .first()
+            .then($el => {
+                const programId = $el[0].getAttribute("data-id");
+                //favourite a program:
+                cy.get(`#favourite_program_container_${programId}`).click();
+                cy.get(`#modal-confirm-text`).should('contain.text', 'favourite');
+                cy.get('#modal-yes-button').should('be.enabled').click();
+                //unfavourite a program:
+                cy.get(`#favourite_program_container_${programId}`).click();
+                cy.get(`#modal-confirm-text`).should('contain.text', 'unfavourite');
+                cy.get('#modal-yes-button').should('be.enabled').click();
             })
     });
 
