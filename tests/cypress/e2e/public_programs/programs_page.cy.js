@@ -38,7 +38,7 @@ describe("General tests for my programs page (with both custom teacher and built
             })
     });
 
-    it.only('can favourite and unfavourite a public program', () => {
+    it('can favourite and unfavourite a public program', () => {
         makeProfilePublic();
         cy.visit(`${Cypress.env('programs_page')}`);
         cy.get(`[data-name=${programName}]`)
