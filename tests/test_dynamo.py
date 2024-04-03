@@ -122,6 +122,60 @@ class TestDynamoAbstraction(unittest.TestCase, Helpers):
             'z': None,
         })
 
+    def test_no_memory_sharing_direct(self):
+        """Ensure that changes to objects retrieved from the database do not leak into other operations."""
+        self.table.put({'id': 'key', 'x': 1})
+
+        # WHEN
+        retrieved = self.table.get({'id': 'key'})
+        retrieved['x'] = 666
+
+        # THEN
+        retrieved2 = self.table.get({'id': 'key'})
+        self.assertEqual(retrieved2['x'], 1)
+
+    def test_no_memory_sharing_sublists(self):
+        """Ensure that changes to objects retrieved from the database do not leak into other operations."""
+        # GIVEN
+        self.table.put(dict(
+            id='with_list',
+            sublist=[1]
+        ))
+
+        # WHEN
+        retrieved = self.table.get(dict(id='with_list'))
+        retrieved['sublist'].append(2)
+
+        # THEN
+        retrieved2 = self.table.get(dict(id='with_list'))
+        self.assertEqual(retrieved2['sublist'], [1])
+
+    def test_no_memory_sharing_insert_direct(self):
+        """Ensure that changes to objects we insert aren't accidentally seen by other viewers."""
+        # GIVEN
+        obj = dict(id='lookatme', x=0)
+
+        # WHEN
+        self.table.put(obj)
+        obj['x'] = 1
+
+        # THEN
+        obj2 = self.table.get(dict(id='lookatme'))
+        self.assertEqual(obj2['x'], 0)
+
+    def test_no_memory_sharing_insert_sublist(self):
+        """Ensure that changes to objects we insert aren't accidentally seen by other viewers."""
+        # GIVEN
+        obj = dict(id='lookatme', x=[0])
+
+        # WHEN
+        self.table.put(obj)
+        obj['x'].append(1)
+
+        # THEN
+        obj2 = self.table.get(dict(id='lookatme'))
+        self.assertEqual(obj2['x'], [0])
+
 
 class TestSortKeysInMemory(unittest.TestCase):
     """Test that the operations work on an in-memory table with a sort key."""
