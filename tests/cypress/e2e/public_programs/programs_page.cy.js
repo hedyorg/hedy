@@ -50,6 +50,7 @@ describe("General tests for my programs page (with both custom teacher and built
                 cy.get(`#modal-confirm-text`).should('contain.text', 'favourite');
                 cy.get('#modal-yes-button').should('be.enabled').click();
                 //unfavourite a program:
+                cy.wait(500);
                 cy.get(`#favourite_program_container_${programId}`).click();
                 cy.get(`#modal-confirm-text`).should('contain.text', 'unfavourite');
                 cy.get('#modal-yes-button').should('be.enabled').click();
