@@ -1,0 +1,14 @@
+#!/bin/bash
+# Validate Python code
+set -eu
+scriptdir=$(cd $(dirname $0) && pwd)
+cd $scriptdir/../..
+
+echo "------> Check Python for problems using pylint"
+
+# Validate all .py files, except those found in .<whatever> directories in the root
+# (That excludes the venvs)
+#
+# Also exclude the 'prefixes' directory -- those don't actually contain Python code that runs
+# Syntax: ( <condition> -o <condition> -o <condition> ... -prune )
+pylint -E $(find . -not \( -path ./.\* -o -path ./prefixes -prune \) -name \*.py)
