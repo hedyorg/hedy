@@ -491,7 +491,7 @@ class LiveStatisticsModule(WebsiteModule):
             if programs_for_student != []:
                 attempted_adventures[level] = programs_for_student
         end = timer()
-        logger.debug(f'Time taken by get_class_live_stats {start-end}')
+        logger.debug(f'Time taken by get_class_live_stats {end-start}')
         return students, common_errors, selected_levels, quiz_info, attempted_adventures, adventures
 
     @route("/live_stats/class/<class_id>/select_level", methods=["GET"])
