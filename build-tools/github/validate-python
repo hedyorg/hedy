@@ -6,9 +6,14 @@ cd $scriptdir/../..
 
 echo "------> Check Python for problems using pylint"
 
-# Validate all .py files, except those found in .<whatever> directories in the root
-# (That excludes the venvs)
-#
-# Also exclude the 'prefixes' directory -- those don't actually contain Python code that runs
+# Find all .py files to validate, except those in the 'prefixes' directory.
 # Syntax: ( <condition> -o <condition> -o <condition> ... -prune )
-pylint -E $(find . -not \( -path ./.\* -o -path ./prefixes -prune \) -name \*.py)
+pyfiles=$(find . -not \( -path ./.\* -o -path ./prefixes -prune \) -name \*.py)
+
+# Get the system/library directories. pylint should not report any errors against those.
+sysdirs=$(python3 -c 'import sys; print(",".join(p for p in sys.path if p))')
+
+pylint -E \
+  --jobs 0 \
+  --ignore-paths $sysdirs \
+  $pyfiles
