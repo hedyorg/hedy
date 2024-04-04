@@ -362,94 +362,187 @@ adventures:
         levels:
             17:
                 story_text: |
-                    Blackjack is een simpel kaartspelletje waarbij je zo dicht mogelijk bij 21 punten moet komen. Je krijgt twee kaarten. Elke kaart is het getal waard dat erop staat, en de kaarten met plaatjes (Boer, Vrouw, Heer) zijn 10 punten waard.\nDe Aas is 1 of 11 punten waard (dat mag je zelf kiezen). De dealer, jouw tegenstander, krijgt ook twee kaarten.\nAls je wil, mag je een derde kaart pakken en die punten worden bij jouw score opgeteld. De dealer mag ook een extra kaart pakken.\nMaar pas op dat je nooit over de 21 punten heengaat, want dan verlies je!\nDe speler die het dichtst bij de 21 punten komt, zonder eroverheen te gaan, wint!
-                    Veel plezier!
+                    Blackjack is een simpel kaartspelletje waarbij je zo dicht mogelijk bij 21 punten moet komen. Je krijgt twee kaarten. Elke kaart is het getal waard dat erop staat, en de kaarten met plaatjes (Boer, Vrouw, Heer) zijn 10 punten waard.
+                    De Aas is 1 of 11 punten waard (dat mag je zelf kiezen). De dealer, jouw tegenstander, krijgt ook twee kaarten.\nAls je wil, mag je een derde kaart pakken en die punten worden bij jouw score opgeteld. De dealer mag ook een extra kaart pakken.
+                    Maar pas op dat je nooit over de 21 punten heengaat, want dan verlies je!
+                    De speler die het dichtst bij de 21 punten komt, zonder eroverheen te gaan, wint!
+
                     ### Opdracht
-                     Dit programma werkt prima, maar de code is verschrikkelijk lang en omslachting. Kun jij de code opruimen en inkorten door fucnties te gebruiken?
+                    In dit avontuur programmeren we het eerste deel van een potje Blackjack. We maken een functie waarmee we kunnen berekenen hoeveel punten een kaart waard is.
+
+                    ***Stel de variabelen in***
+                    Begin met het maken van een lijst met daarin alle kaarten van 2 tot Aas. Maak daarna een lijstje met alle plaatjeskaarten, oftewel Boer, Heer en Vrouw. Kies daarna een willekeurige kaart uit het lijstje kaarten en noem die kaart_1.
+
+                    ***Maak een functie om punten te berekenen***
+                    Maak een functie die berekent hoeveel punten een kaart waard is.
+                    Alle plaatjeskaarten zijn 10 punten waard, de Aas is 11 punten ward en alle andere kaarten zijn evenveel waard als erop staat.
+                    Aan het einde van de geeft de functie je de variabele `punten`.
+
+                    ***Test de functie***
+                    Test of je functie naar behoren werkt. Maak de eerste regel in dit onderdeel af door in te vullen welke kaart er gepakt is. Maak de volgende regel af door de functie op te roepen met `kaart_1`.
+                    Voer de code een aantal keer uit. Ben je blij met het resultaat? Super! Dan kun je dit testgedeelte weer verwijderen en door naar het volgende onderdeel op het volgende tabje.
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
-                    kaarten = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Boer', 'Vrouw','Heer', 'Aas']
-                    punten = 0
-                    dealer_punten = 0
-                    kaart_1 = kaarten[{random}]
-                    kaart_2 = kaarten[{random}]
-                    kaart_3 = kaarten[{random}]
-                    dealer_kaart_1 = kaarten[{random}]
-                    dealer_kaart_2 = kaarten[{random}]
-                    dealer_kaart_3 = kaarten[{random}]
-                    # Punten voor kaart 1
-                    {if} kaart_1 == 'Boer' {or} kaart_1 == 'Vrouw' {or} kaart_1 == 'Heer':
-                        punten = punten + 10
-                    {elif} kaart_1 == 'Aas':
-                        punten = punten + 11
-                    {else}:
-                        punten = punten + kaart_1
-                    # punten voor kaart 2
-                    {if} kaart_2 == 'Boer' {or} kaart_2 == 'Vrouw' {or} kaart_2 == 'Heer':
-                        punten = punten + 10
-                    {elif} kaart_2 == 'Aas':
-                        punten = punten + 11
-                    {else}:
-                        punten = punten + kaart_2
-                    # punten voor dealer kaart 1
-                    {if} dealer_kaart_1 == 'Boer' {or} dealer_kaart_1 == 'Vrouw' {or} dealer_kaart_1 == 'Heer':
-                        dealer_punten = dealer_punten + 10
-                    {elif} dealer_kaart_1 == 'Aas':
-                        dealer_punten = dealer_punten + 11
-                    {else}:
-                        dealer_punten = dealer_punten + dealer_kaart_1
-                    # punten voor dealer kaart 2
-                    {if} dealer_kaart_2 == 'Boer' {or} dealer_kaart_2 == 'Vrouw' {or} dealer_kaart_2 == 'Heer':
-                        dealer_punten = dealer_punten + 10
-                    {elif} dealer_kaart_2 == 'Aas':
-                        dealer_punten = dealer_punten + 11
-                    {else}:
-                        dealer_punten = dealer_punten + dealer_kaart_2
-                    # Twee Azen
-                    {if} kaart_1 == 'Aas' {and} kaart_2 == 'Aas':
-                        punten = 12
-                    {if} dealer_kaart_1 == 'Aas' {and} dealer_kaart_2 == 'Aas':
-                        dealer_punten = 12
-                    # Scorebord
-                    {print} 'Jij hebt een ' kaart_1 ' en een ' kaart_2 ' (' punten ' punten)'
-                    {print} 'De dealer heeft een ' dealer_kaart_1 ' en een ' dealer_kaart_2 ' (' dealer_punten ' punten)'
-                    # Extra kaart voor de speler
-                    hit = {ask} 'Wil je een extra kaart?'
+
+                    # Stel de variabelen in
+                    kaarten = _
+                    plaatjes = _
+                    kaart_1 =
+
+                    # Maak een functie om punten te berekenen
+                    {define} bereken_punten {with} kaart:
+                        {if} kaart {in} plaatjes:
+                            punten = _
+                        {elif} _
+                            _
+                        {else}:
+                            _
+                        _ punten
+
+                    # Test de functie
+                    {print} 'Jouw kaart is een ' _
+                    {print} 'Dat is ' _ ' punten waard'.
+                    ```
+    blackjack_2:
+        name: Blackjack 2
+        default_save_name: Blackjack_2
+        description: Blackjack part 2
+        levels:
+            17:
+                story_text: |
+                    ### Opdracht
+                    In dit avontuur programmeren we het tweede gedeelte van het Blackjack spel.
+
+                    ***Plak je code van het vorige avontuur***
+                    In het vorige tabje heb je een lijstje gemaakt met variabelen en heb je een functie gemaakt om te berekenen hoeveel een kaart waard is. Kopieer die code en plak hem hier. Let op! Je hebt ook een stuk code gemaakt om je functie te testen, dat heb je nu niet nodig. Heb je dat gedeelte nog niet verwijderd, verwijder het dan nu.
+
+                    ***Voeg meer variabelen toe***
+                    Je hebt de lijstjes `kaarten` en `plaatjes` gemaakt en de variabele `kaart_1`. Onder deze variabelen, maak je nog 3 variabelen, namelijk: `kaart_2`, `dealer_kaart_1` en `dealer_kaart_2`. Deze kaarten worden ook random getrokken uit het lijstje `kaarten`.
+
+                    ***Tel de punten op***
+                    Om te berekenen hoeveel punten je hebt behaald, roepen we de functie op met kaart_1 en doen we dat nogmaals met kaart_2. Daarna voeg je die twee scores samen om je totaal aantal punten te krijgen.
+                    Doe daarna hetzelfde voor de punten van de dealer. Let daarbij op dat je wel de kaarten van de dealer gebruikt en niet die van de speler!
+
+                    ***2 Azen***
+                    Lekker bezig! Bijna alle scores kunnen nu berekend worden. Er geldt nog één uitzondering: 2 Azen. Als je 2 Azen trekt, dan is je totaal aantal punten 12 en niet 22 (want bij 22 punten zou je af zijn!). Dit geldt natuurlijk ook voor de dealer.
+
+                    ***Toon de score***
+                    Tot slot wil je dat het programme je vertelt welke kaarten je hebt getrokken en hoeveel punten dat waard is. Toon ook welke kaarten de dealer heeft en hoeveel punten dat is.
+
+                    ***Ga door naar het volgende avontuur***
+                    Super! Je hebt dit gedeelte af! Kopieer je spel en ga door naar het volgende tabje om te leren hoe je een extra kaart kunt krijgen en een winnaar kunt uitroepen.
+                example_code: |
+                    ```
+                    # Plak hier je code van het vorige avontuur
+
+                    # Voeg deze variabelen toe aan het rijtje variabelen
+                    kaart_2 = _
+                    dealer_kaart_1 = _
+                    dealer_kaart_2 = _
+
+                    # Tel jouw punten op
+                    jouw_punten_1 = {call} _ {with} kaart_1
+                    jouw_punten_2 = _
+                    jouw_totaal = _
+
+                    # Tel de punten van de dealer op
+                    dealer_punten_1 = _
+                    _
+                    _
+
+                    # 2 Azen
+                    {if} kart_1 == 'Aas' {and} _
+                        jouw_totaal = 12
+                    {if} dealer_kaart_1 _
+                        dealer_totaal = _
+
+                    # Toon de scores
+                    {print} 'Jij hebt een ' _ ' en een ' _ '. Dat is ' _ ' punten.'
+                    {print} 'De dealer heeft een ' _ ' en een ' _ '. Dat is ' _ ' punten.'
+                    ```
+    blackjack_3:
+        name: Blackjack 3
+        default_save_name: Blackjack_3
+        description: Blackjack part 3
+        levels:
+            17:
+                story_text: |
+                    In het vorige avontuur heb je geleerd om 2 kaarten te trekken voor jezelf en voor de dealer en om de totaalscores te berekenen.
+                    In dit avontuur programmeer je hoe jij en de dealer een extra kaart kunnen krijgen.
+
+                    ### Opdracht
+                    ***Plak je code van het vorige avontuur hier*** Kopieer je code van het vorige avontuur en plek het hier.
+
+                    ***Een extra kaart voor jou*** Als je wil, kun je een extra kaart krijgen om zo dichtbij mogelijk de 21 te komen. Vraag eerst aan de speler of die een extra kaart wil.
+                    Als dat zo is, kies een willekeurige kaart en print welke kaart er getrokken is. Als de kaart geen Aas is, kun je de functie oproepen om de punten te berekenen.
+                    Is de nieuwe kaart wel een Aas, dan kun je deze functie niet gebruiken, gezien de Aas zowel 1 als 11 punten kan zijn (afhankelijk van hoeveel punten je al hebt).
+                    Is je totaal minder dan 11, dan wil je dat de Aas 11 punten waard is (want dan kom je het dichtsbij 21). Dus dan voeg je 11 punten toe aan je totaal.
+                    Is je totaal minder dan of gelijk aan 11, dan wil je dat de Aas maar 1 punt waard is (anders ga je over de 21 punten heen). Dus dan voeg je maar 1 punt toe aan je totaal.
+                    Tot slot wil je je nieuwe totaal printen.
+
+                    ***Extra kaart voor de dealer*** De dealer mag ook een extra kaart pakken. Dat hoef je niet aan de dealer te vragen, want die krijgt altijd een extra kaart als diens puntenaantal minder dan 17 is.
+                    Kopieer het stuk code dat je net hebt gemaakt bij 'extra kaart voor jou' en plak het bij de dealers sectie. Pas het stukje coded daarna aan om het kloppend te maken voor de dealer als die een extra kaart pakt.
+                example_code: |
+                    ```
+                    # Plak je code van het vorige avontuur hier
+
+                    # Extra kaart voor jou
+                    hit = {ask} _
                     {if} hit == 'ja':
-                        {if} kaart_3 == 'Boer' {or} kaart_3 == 'Vrouw' {or} kaart_3 == 'Heer':
-                            punten = punten + 10
-                        {elif} kaart_3 == 'Aas':
-                            {if} punten > 11:
-                                punten = punten + 1
-                            {else}:
-                                punten = punten + 11
+                        kaart_3 = _
+                        {print} _
+                        {if} kaart_3 _ 'Ace':
+                            jouw_punten_3 = _
+                            jouw_totaal = _
                         {else}:
-                            punten = punten + kaart_3
-                        print 'Je krijgt een extra ' kaart_3 ' (' punten ' punten)'
+                           {if} jouw_totaal _
+                                _
+                            {else}:
+                                _
+                        {print} _
+
+                    # Extra kaart voor de dealer
+                    {if} dealer_totaal < 17
+                    _
+                    ```
+    blackjack_4:
+        name: Blackjack 4
+        default_save_name: Blackjack_4
+        description: Blackjack part 4
+        levels:
+            17:
+                story_text: |
+                    In de afgelopen avonturen heb je al bijna een werkend blackjack spel gemakat! Het enige wat we nog nodig hebben is een manier om de winnaar uit te roepen!
+
+                    ### Opdracht
+                    ***Plak je code van het vorige avontuur hier***
+
+                    ***Een winnaar bepalen***
+                    Ten eerste is er sprake van gelijkspel, als jij en de dealer evenveel punten hebben.
+                    Ten tweede ben jij de winnaar, als de dealer meer dan 21 punten heeft en jij niet.
+                    Ten derde moeten we kijken wie het dichtstbij 21 punten is gekomen, als zowel jij als de dealer minder dan 21 punten hebben.  Dat doen we door te vergelijken wie de hoogste score heeft behaald. Is jouw totaal hoger dan dat van de dealer? Dan heb jij gewonnen. Zo niet, dan heeft de dealer gewonnen.
+                    Tot slot heb je in alle andere scenario's verloren. Bijvoorbeeld als je meer dan 21 punetn hebt en de dealer niet, of als jullie allebei meer dan 21 punten hebben.
+
+                    ***Spelen maar!***
+                    Werkt je spel helemaal? Geweldig! Dat heb je fantastisch gedaan! Veel speelplezier!
+                    Werkt het spel nog niet naar behoren? Geen zorgen, waarschijnlijk heb je ergens een foutje gemaakt. Kijk rustig naar je code en debug je code met de lieveheersbeestjesknop.
+                example_code: |
+                    ```
+                    # Plak je code van het vorige avontuur hier
+
+                    # Een winnaar bepalen
+                    {if} _
+                        {print} 'Gelijkspel! Doe nog een potje'
+                    {elif} _
+                        {print} 'Je wint!'
+                    {elif} _ :
+                        {if} _:
+                            {print} _
+                        {else}:
+                            {print} _
                     {else}:
-                        print 'Je krijgt geen extra kaarten'
-                    # Winnaar
-                    {if} punten > 21 {or} dealer_punten > punten {or} dealer_punten == 21:
-                        {print} 'Je verliest'
-                    {elif} dealer_punten < 17:
-                        {print} 'De dealer pakt een extra kaart. Het is een... ' dealer_kaart_3
-                        {if} dealer_kaart_3 == 'Boer' {or} dealer_kaart_3 == 'Vrouw' {or} dealer_kaart_3 == 'Heer':
-                            dealer_punten = dealer_punten + 10
-                        {elif} dealer_kaart_3 == 'Aas':
-                            {if} dealer_punten < 11:
-                                dealer_punten = dealer_punten + 11
-                            {else}:
-                                dealer_punten = dealer_punten + 1
-                        {else}:
-                            dealer_punten = dealer_punten + dealer_kaart_3
-                        {print} 'De dealer heeft nu  ' dealer_punten ' punten'
-                        {if} dealer_punten < 21 {and} dealer_punten > punten:
-                            {print} 'Je verliest'
-                        {else}:
-                            {print} 'Je wint!'
-                    {elif} punten > dealer_punten {and} punten < 21:
-                        {print} 'Je wint!!'
+                        _
                     ```
     calculator:
         name: Rekenmachine
