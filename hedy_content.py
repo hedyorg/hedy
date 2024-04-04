@@ -310,6 +310,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'blackjack',
         'blackjack_2',
         'blackjack_3',
+        'blackjack_4',
         'debugging',
         'quiz',
     ],
