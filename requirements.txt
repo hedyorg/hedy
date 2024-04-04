@@ -33,5 +33,6 @@ doit==0.36.0
 doit_watch>=0.1.0
 uflash>=2.0.0
 pyinstaller==6.3.0
+# pylint can never be upgraded past this version. There is an unresolvable dependency conflict on 'colorama' with awscli==1.*, on Windows.
 pylint==2.14.2
 commonmark==0.9.1
