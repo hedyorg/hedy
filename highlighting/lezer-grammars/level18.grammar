@@ -25,8 +25,7 @@ Command {
 String { doubleQuotedString | singleQuotedString }
 
 Print { print+  Op<"("> Arguments? Op<")"> }
-
-AssignList { Text (is+ | Op<"=">) Op<"["> (String | Number ) ~ambig  (Comma (String | Number ))+ Op<"]">} // Comma doesn't really parse well if it is not separated by spaces
+AssignList { Text (is+ | Op<"=">) Op<"["> ((String | Text | Number) ~ambig (Comma (String | Text | Number))*)? Op<"]"> } // Comma doesn't really parse well if it is not separated by spaces
 Assign { (Text | ListAccess) (is+ | Op<"=">) (Expression ~ambig )+ }
 Input { Text (is+ | Op<"=">) input+ Op<"("> Arguments? Op<")"> }
 Sleep { sleep+ (Expression )? }
