@@ -1,14 +1,6 @@
 """Shared helper functions for the snippet tester functionality.
 
 This code is there to test the code examples in all YAML files.
-
-This file has been put together quickly to solve a problem. It can be cleaned up.
-
-TODO:
-- The collection routines are very similar; combine them.
-- Snippets can hold on to the information where in the YAML file they were
-  discovered. That way, individual test suites don't have to supply a
-  'yaml_locator'.
 """
 
 import os
@@ -153,10 +145,10 @@ def filter_snippets(snippets, level=None, lang=None):
         raise RuntimeError('Whoops, it looks like you left a snippet filter in!')
 
     if lang:
-        snippets = [s for s in snippets if x.language[:len(lang)] == lang]
+        snippets = [s for s in snippets if s.language[:len(lang)] == lang]
 
     if level:
-        snippets = [s for s in snippets if x.level == level]
+        snippets = [s for s in snippets if s.level == level]
 
     return snippets
 
@@ -218,11 +210,11 @@ class HedySnippetTester(HedyTester):
 
         # Read English yaml file
         original_yaml = YamlFile.for_file(en_file)
-        original_loc = locate_snippet_in_yaml(original_yaml, snippet, yaml_locator)
+        original_loc = locate_snippet_in_yaml(original_yaml, snippet)
 
         # Read broken yaml file
         broken_yaml = utils.load_yaml_rt(snippet.filename)
-        broken_loc = locate_snippet_in_yaml(broken_yaml, snippet, yaml_locator)
+        broken_loc = locate_snippet_in_yaml(broken_yaml, snippet)
 
         # Restore to English version
         broken_loc.dict[broken_loc.key] = original_loc.dict[original_loc.key]
