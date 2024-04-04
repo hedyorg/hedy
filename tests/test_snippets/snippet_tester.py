@@ -1,6 +1,14 @@
 """Shared helper functions for the snippet tester functionality.
 
 This code is there to test the code examples in all YAML files.
+
+This file has been put together quickly to solve a problem. It can be cleaned up.
+
+TODO:
+- The collection routines are very similar; combine them.
+- Snippets can hold on to the information where in the YAML file they were
+  discovered. That way, individual test suites don't have to supply a
+  'yaml_locator'.
 """
 
 import os
