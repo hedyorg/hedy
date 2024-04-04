@@ -2608,10 +2608,10 @@ levels:
                     ```
                 feedback: 好吧！
             -   option: |-
-                    ```
-                    口味=香草、草莓、巧克力
-                    {print} '我想要一个 ' 口味 {at} {random} ' 蛋糕。'
-                    ```
+                    ````
+                    flavors = '香草,草莓,巧克力'
+                    {print} '我想要一个 ' flavors {at} {random} ' 的蛋糕。'
+                    ````
                 feedback: 所有不同的口味值都应该用引号引起来。
             hint: 每个代码中第二行都是一样的，注意第一行
             correct_answer: C

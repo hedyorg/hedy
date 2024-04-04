@@ -537,7 +537,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
           is_debug: run_type === 'debug',
           tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
           read_aloud : !!$('#speak_dropdown').val(),
-          adventure_name: adventureName,
+          adventure_name: adventure ? adventure.name : undefined,
 
           // Save under an existing id if this field is set
           program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
@@ -1466,6 +1466,32 @@ export function toggleDevelopersMode(event='click', enforceDevMode: boolean) {
     const heights = $(el).data('devmodeheight').split(',') as string[];
     $(el).css('height', heights[enable ? 1 : 0]);
   });
+}
+
+export function saveForTeacherTable(table: string) {
+  let open = window.localStorage.getItem(table);
+  const arrow = document.querySelector('#' + table + '_arrow') as HTMLElement;
+  if (open == 'true'){
+    window.localStorage.setItem(table, 'false')
+    $('#' + table).hide();
+    arrow.classList.remove('rotate-180');
+  } else {
+    window.localStorage.setItem(table, 'true')
+    $('#' + table).show();
+    arrow.classList.add('rotate-180');
+  }
+}
+
+export function getForTeacherTable(table: string) {
+  let open = window.localStorage.getItem(table);
+  const arrow = document.querySelector('#' + table + '_arrow') as HTMLElement;
+  if (open == 'true'){
+    $('#' + table).show();
+    arrow.classList.add('rotate-180');
+  } else {
+    $('#' + table).hide()
+    arrow.classList.remove('rotate-180');
+  }
 }
 
 /**
