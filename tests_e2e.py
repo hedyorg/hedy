@@ -403,7 +403,7 @@ class TestSessionVariables(AuthHelper):
         self.assertIn('session', test_body)
         self.assertIn('session_id', test_body['session'])
         self.assertIn('test_session', test_body['session'])
-        self.assertEquals(test_body['session']['session_id'], session['id'])
+        self.assertEqual(test_body['session']['session_id'], session['id'])
 
         # WHEN getting session variables from the main environment
         body = self.get_data('/session_main')
