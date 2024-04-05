@@ -217,8 +217,8 @@ adventures:
                     Trova una storia da un livello precedente, qualsiasi livello è ok. Ora assicurati che le virgolette siano aggiunte nei posti giusti.
                 example_code: |
                     ```
-                    name = 'The Queen of England'
-                    {print} name ' was eating a piece of cake, when suddenly...'
+                    name = 'La Regina D'Inghilterra'
+                    {print} name ' stava mangiando una fetta di torta, quando all'improvviso...'
                     ```
             13:
                 story_text: |
@@ -281,9 +281,9 @@ adventures:
                     {print}('Benvenuti in questa storia!')
                     ```
     add_remove_command:
-        name: '{add} {to} & {remove} {from}'
+        name: '{add} {to_list} & {remove} {from}'
         default_save_name: aggiungi_rimuovi_comando
-        description: introducendo aggiungi a e rimuovi da
+        description: introducendo {add} {to_list} e {remove} {from}
         levels:
             3:
                 story_text: |
@@ -311,18 +311,18 @@ adventures:
                     Prova i nuovi comandi in questo ristorante virtuale. Aggiungi il gusto che il giocatore desidera alla lista e rimuovi i sapori ai quali è allergico.
                 example_code_3: |
                     ```
-                    {print} Mystery milkshake
-                    flavors {is} strawberry, chocolate, vanilla
-                    hope {is} {ask} What flavor are you hoping for?
+                    {print} Milkshake misterioso
+                    Sapori {is} fragola, cioccolato, vaniglia
+                    Speranza {is} {ask} Quale gusto speri di avere?
                     _
-                    allergies {is} {ask} Are you allergic to any flavors?
+                    Allergie {is} {ask} Hai qualche allergia ai sapori?
                     _
-                    {print} You get a flavors {at} {random} milkshake
+                    {print} Ottieni un milkshake con il sapore di {at} {random}
                     ```
     and_or_command:
         name: '{and} & {or}'
         default_save_name: e o
-        description: introducing and or
+        description: Introducendo {and} e {or}
         levels:
             13:
                 story_text: |-
