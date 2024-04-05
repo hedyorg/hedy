@@ -8,14 +8,15 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2000-01-01 00:00+0000\n"
-"Last-Translator: Someone <someone@example.com>\n"
-"Language: zh_Hans\n"
+"PO-Revision-Date: 2024-04-01 06:32+0000\n"
+"Last-Translator: \"Zoom.Quiet\" <zoomquiet+gh@gmail.com>\n"
 "Language-Team: zh_Hans <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.5-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -34,7 +35,7 @@ msgid "Incomplete"
 msgstr "呀！你漏写了一些代码！在第{line_number}行，你需要在`{incomplete_command}`后面输 入文字。"
 
 msgid "Incomplete Repeat"
-msgstr "您似乎忘记使用在第 {line_number} 行使用的 `{repeat}` 命令。"
+msgstr "您似乎忘记使用在{command}第 {line_number} 行使用的 `{repeat}` 命令。"
 
 msgid "Invalid"
 msgstr "`{invalid_command}` 不是海蒂第{level}关里的命令。你是不是想写 `{guessed_command}`？"
@@ -105,13 +106,11 @@ msgstr "保存 Microbit 代码"
 msgid "Too Big"
 msgstr "哇！你的程序有足足{lines_of_code}行代码！但是这一关只能用{max_lines}行代码。把你的程序改得短一点，然后再试一次。"
 
-#, fuzzy
 msgid "Too Few Indents"
-msgstr "You used too few leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too few."
+msgstr "您在第 {line_number} 行中使用的前导空格太少。 您使用了 {leading_spaces} 个空格，这太少了。"
 
-#, fuzzy
 msgid "Too Many Indents"
-msgstr "You used too many leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too many."
+msgstr "您在第 {line_number} 行中使用了太多前导空格。 您使用了 {leading_spaces} 个空格，这太多了。"
 
 msgid "Unexpected Indentation"
 msgstr "第{line_number}行的空格太多了。你空了{leading_spaces}格，这样太多。每个新的代码块都要比前一行多{indent_size}个空格。"
@@ -125,9 +124,8 @@ msgstr "如果你想检查一个变量的内容是否是一些词，那就需要
 msgid "Unquoted Text"
 msgstr "当心。 如果您`{ask}`或`{print}`某些内容，则文本应以引号开头和结尾。 您忘记了文本 {unquotedtext} 的内容。"
 
-#, fuzzy
 msgid "Unsupported Float"
-msgstr "现在暂不支持非整数，但是再过几关就会支持了。当下先把{value}改成整数。"
+msgstr "尚不支持非整数，但它们将在几个级别上支持。 现在将`{value}`更改为整数。"
 
 msgid "Unsupported String Value"
 msgstr "文本值不能包含`{invalid_value}`。"
@@ -135,9 +133,8 @@ msgstr "文本值不能包含`{invalid_value}`。"
 msgid "Unused Variable"
 msgstr "您在第{line_number}行定义了变量{variable_name}，但没有使用它。"
 
-#, fuzzy
 msgid "Var Undefined"
-msgstr "你试图使用变量 {name}，但你没设置过这个变量。也有可能是你想输入 {name} 这个词，但是忘记加引号了。"
+msgstr "您尝试使用变量`{name}`, 但没有设置它。 也有可能您尝试使用单词`{name}`但忘记了引号。"
 
 msgid "Wrong Level"
 msgstr "这是正确的海蒂代码，但不是在正确的关卡。你在第{working_level}关用了`{offending_keyword}`。提示：{tip}"
@@ -166,14 +163,18 @@ msgstr "成就打勾图标"
 msgid "achievements_logo_alt"
 msgstr "成就图标"
 
+#, fuzzy
 msgid "actions"
-msgstr ""
+msgstr "Actions"
 
 msgid "add"
 msgstr "以及"
 
 msgid "add_students"
 msgstr "添加学生"
+
+msgid "add_students_options"
+msgstr "加入学生选项"
 
 msgid "admin"
 msgstr "管理员"
@@ -199,9 +200,8 @@ msgstr "您已经使用此名称进行了一次探险活动。"
 msgid "adventure_empty"
 msgstr "你没有输入一个探险活动的名字！"
 
-#, fuzzy
 msgid "adventure_exp_3"
-msgstr "确保始终用 { } 括住关键字，然后才能正确识别它们。 您可以使用“预览”按钮查看冒险的风格版本。 要在专用页面上查看冒险，请从教师页面中选择“查看”。"
+msgstr "当您在代码块之外编写关键字时，请确保始终用 { } 将关键字括起来，然后才能正确识别它们。 您可以使用“预览”按钮查看冒险的风格版本。 要在专用页面上查看冒险，请从教师页面中选择“查看”。"
 
 msgid "adventure_exp_classes"
 msgstr "您的冒险将在以下类中使用"
@@ -223,6 +223,10 @@ msgstr "我同意我的冒险可以在海蒂上公开。"
 
 msgid "adventure_updated"
 msgstr "这个探险活动已被更新！"
+
+#, fuzzy
+msgid "adventures"
+msgstr "Adventures"
 
 msgid "adventures_info"
 msgstr "每个 海蒂 级别都为学生提供内置练习，我们称之为冒险。 您可以创建自己的冒险并将其添加到您的课程中。 通过您自己的冒险，您可以创造与您的学生相关且有趣的冒险。 您可以在<a href=\"https://hedy.org/for-teachers/manual/features\">此处</a>找到有关创建自己的冒险的更多信息。"
@@ -275,12 +279,8 @@ msgstr "你确定吗？ 你无法撤销此操作。"
 msgid "ask_needs_var"
 msgstr "从第2关开始，`{ask}`需要和变量共同使用。例子：名字`{is}` `{ask}`你叫什么？"
 
-#, fuzzy
 msgid "available_in"
-msgstr "Available in:"
-
-msgid "back_to_class"
-msgstr ""
+msgstr "适用于："
 
 msgid "become_a_sponsor"
 msgstr "成为赞助商"
@@ -318,6 +318,9 @@ msgstr "你已经是班级的学生了"
 msgid "class_customize_success"
 msgstr "成功自定义课程。"
 
+msgid "class_live"
+msgstr "实时统计"
+
 msgid "class_name_duplicate"
 msgstr "您已经有一个同名的班级了。"
 
@@ -329,6 +332,9 @@ msgstr "此班级名称无效。"
 
 msgid "class_name_prompt"
 msgstr "请输入新班级的名称"
+
+msgid "class_overview"
+msgstr "课程概述"
 
 msgid "class_survey_description"
 msgstr "我们希望更好地了解 海蒂 用户。 通过提供这些答案，将有助于改进 Hedy。 谢谢你！"
@@ -347,6 +353,10 @@ msgstr "你们班级性别平衡嘛？"
 
 msgid "class_survey_question4"
 msgstr "你的学生与其他学生有何不同？"
+
+#, fuzzy
+msgid "classes"
+msgstr "Classes"
 
 msgid "classes_info"
 msgstr "创建一个班级，在仪表板中跟踪每个学生的进度，并自定义学生看到的冒险，甚至添加你自己的冒险！ 可以根据需要创建任意数量的班级，每个班级可以有多名教师，每个教师具有不同的角色。 还可以根据需要添加任意数量的学生，但请注意每个学生一次只能在一个班级中。 您可以在<a href=\"https://hedy.org/for-teachers/manual/preparations#for-teachers\">教师手册</a>中找到有关课程的更多信息。"
@@ -389,6 +399,12 @@ msgstr "已成功复制到剪贴板"
 
 msgid "copy_code"
 msgstr "复制代码"
+
+msgid "copy_join_link"
+msgstr "复制链接"
+
+msgid "copy_link_success"
+msgstr "成功把邀请链接复制到剪贴板"
 
 msgid "copy_link_to_share"
 msgstr "复制链接以分享"
@@ -452,6 +468,10 @@ msgstr "当前密码"
 
 msgid "customization_deleted"
 msgstr "已成功删除自定义项。"
+
+#, fuzzy
+msgid "customize"
+msgstr "Customize"
 
 msgid "customize_adventure"
 msgstr "自定义探险活动"
@@ -594,6 +614,9 @@ msgstr "退出预览模式"
 msgid "experience_invalid"
 msgstr "请选择有效的经验，选择（是，否）。"
 
+msgid "expiration_date"
+msgstr "过期日期"
+
 msgid "explore_explanation"
 msgstr "在此页面上，你可以浏览其他Hedy用户创建的程序。你可以根据海蒂关卡和冒险进行过滤。单击“查看程序”以打开程序并运行它。带有红色标题的程序包含错误。你仍然可以打开该程序，但运行它会导致错误。你当然可以尝试修复它！如果创建者有公开个人资料，你可以点击其用户名以访问其个人资料。在那里，你可以找到他们所有的共享程序等等！"
 
@@ -714,6 +737,10 @@ msgstr "海蒂成绩"
 msgid "hedy_choice_title"
 msgstr "海蒂选项"
 
+#, fuzzy
+msgid "hedy_introduction_slides"
+msgstr "Hedy Introduction Slides"
+
 msgid "hedy_logo_alt"
 msgstr "海蒂标志"
 
@@ -807,8 +834,17 @@ msgstr "无效的教学环节"
 msgid "invalid_username_password"
 msgstr "无效的用户名/密码。"
 
+msgid "invite_by_username"
+msgstr "按用户名邀请"
+
+msgid "invite_date"
+msgstr "邀请日期"
+
 msgid "invite_message"
 msgstr "你已经收到了加入班级的邀请"
+
+msgid "invite_prompt"
+msgstr "输入一个用户名"
 
 msgid "invite_teacher"
 msgstr "邀请老师"
@@ -818,6 +854,9 @@ msgstr "加入课堂"
 
 msgid "join_prompt"
 msgstr "你需要有一个帐户才能加入课程。你想立即登录吗？"
+
+msgid "keybinding_waiting_for_keypress"
+msgstr "等待按下按钮..."
 
 msgid "keyword_language_invalid"
 msgstr "请选择有效的关键词语言（选择英语或你自己的语言）。"
@@ -839,6 +878,9 @@ msgstr "最后编辑"
 
 msgid "last_error"
 msgstr "上一次的错误"
+
+msgid "last_login"
+msgstr "上次登录"
 
 msgid "last_program"
 msgstr "上一次的项目"
@@ -991,9 +1033,8 @@ msgstr "强制开发者模式"
 msgid "more_options"
 msgstr "更多选项"
 
-#, fuzzy
 msgid "multiple_levels_warning"
-msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
+msgstr "我们注意到您在冒险中选择了多个级别并包含代码片段，这可能会导致语法突出显示和关键字自动翻译出现问题"
 
 msgid "my_account"
 msgstr "我的账户"
@@ -1160,6 +1201,9 @@ msgstr "您已经有一个同名的程序，保存此程序将替换旧程序。
 msgid "owner"
 msgstr "所有者"
 
+msgid "page"
+msgstr "页面"
+
 msgid "page_not_found"
 msgstr "无法找到该页面！"
 
@@ -1198,6 +1242,9 @@ msgstr "密码已更新。"
 
 msgid "passwords_six"
 msgstr "所有的密码都至少需要六个字符或更长。"
+
+msgid "pending_invites"
+msgstr "等待邀请"
 
 msgid "people_with_a_link"
 msgstr "Other people with a link can see this program. It also can be found on the \"Explore\" page."
@@ -1295,6 +1342,14 @@ msgstr "公开"
 msgid "public_adventures"
 msgstr "浏览公开冒险"
 
+#, fuzzy
+msgid "public_content"
+msgstr "Public content"
+
+#, fuzzy
+msgid "public_content_info"
+msgstr "You can also look for public adventures and use them as an example."
+
 msgid "public_invalid"
 msgstr "此协议选择无效"
 
@@ -1306,9 +1361,6 @@ msgstr "通过选择此框，我使我的个人资料对所有人可见。请注
 
 msgid "public_profile_updated"
 msgstr "公开资料已更新。"
-
-msgid "pygame_waiting_for_input"
-msgstr "等待按下按钮..."
 
 msgid "question mark"
 msgstr "问号"
@@ -1345,6 +1397,12 @@ msgstr "删除自定义"
 
 msgid "remove_customizations_prompt"
 msgstr "您确定要删除该类的自定义吗？"
+
+msgid "remove_student_prompt"
+msgstr "你确定要将这名学生移出班级吗？"
+
+msgid "remove_user_prompt"
+msgstr "确认从班级中删除该用户。"
 
 msgid "repair_program_logo_alt"
 msgstr "修复程序图标"
@@ -1439,6 +1497,9 @@ msgstr "你确定要模仿这位老师吗？"
 msgid "second_teacher_prompt"
 msgstr "输入教师用户名以邀请他们。"
 
+msgid "second_teacher_warning"
+msgstr "本班所有老师都可以定制。"
+
 msgid "see_certificate"
 msgstr "查看 {username} 的证书！"
 
@@ -1493,12 +1554,15 @@ msgstr "单引号"
 msgid "slash"
 msgstr "斜杠"
 
-#, fuzzy
 msgid "sleeping"
-msgstr "Sleeping..."
+msgstr "休眠..."
 
 msgid "slides"
 msgstr "幻灯"
+
+#, fuzzy
+msgid "slides_for_level"
+msgstr "Slides for level"
 
 msgid "slides_info"
 msgstr "对于 海蒂 的每个级别，我们都创建了幻灯片来帮助您教学。 这些幻灯片包含每个级别的说明以及您可以在幻灯片中运行的 海蒂 示例。 只需点击链接即可开始！ 简介幻灯片是对 1 级之前的 海蒂 的一般说明。幻灯片是使用 <a href=\"https://slides.com\">slides.com</a> 创建的。 如果您想自行调整它们，可以下载它们，然后将生成的 zip 文件上传到 <a href=\"https://slides.com\">slides.com</a>。 您可以在<a href=\"https://hedy.org/for-teachers/manual/features\">教师手册</a>中找到有关幻灯片的更多信息。"
@@ -1556,6 +1620,9 @@ msgstr "该学生有待处理的邀请。"
 
 msgid "student_details"
 msgstr "学生详情"
+
+msgid "student_list"
+msgstr "学生列表"
 
 msgid "student_not_allowed_in_class"
 msgstr "学生不允许进入课堂"
@@ -1656,6 +1723,9 @@ msgstr "教师教程图标"
 msgid "teacher_welcome"
 msgstr "欢迎来到海蒂！ 您现在是教师帐户的自豪拥有者，该帐户允许您创建课程并邀请学生。"
 
+msgid "teachers"
+msgstr "孝顺"
+
 msgid "template_code"
 msgstr ""
 "这就是我的冒险说明！\n"
@@ -1664,8 +1734,8 @@ msgstr ""
 "\n"
 "但有时我可能想展示一段代码，如下所示：\n"
 "<pre>\n"
-"{ask} 你叫什么名字？\n"
-"{echo} 所以你的名字是\n"
+" 你叫什么名字？\n"
+"所以你的名字是\n"
 "</pre>"
 
 msgid "this_turns_in_assignment"
@@ -1781,6 +1851,15 @@ msgstr "解锁级别阈值"
 msgid "unsaved_class_changes"
 msgstr "有未保存的更改，您确定要离开此页面吗？"
 
+msgid "unsubmit_program"
+msgstr "不提交程序"
+
+msgid "unsubmit_warning"
+msgstr "您确定要取消提交此计划吗？"
+
+msgid "unsubmitted"
+msgstr "取消提交"
+
 msgid "update_adventure_prompt"
 msgstr "你确定要更新这个探险活动吗？"
 
@@ -1799,9 +1878,8 @@ msgstr "程序中空格的使用"
 msgid "use_of_nested_functions_exception"
 msgstr "嵌套函数的使用"
 
-#, fuzzy
 msgid "used_in"
-msgstr "Used in:"
+msgstr "用于："
 
 msgid "user"
 msgstr "用户"
@@ -1836,8 +1914,20 @@ msgstr "值"
 msgid "variables"
 msgstr "变量"
 
+#, fuzzy
+msgid "view_adventures"
+msgstr "View adventures"
+
+#, fuzzy
+msgid "view_classes"
+msgstr "View classes"
+
 msgid "view_program"
 msgstr "观看程序"
+
+#, fuzzy
+msgid "view_slides"
+msgstr "View slides"
 
 msgid "welcome"
 msgstr "欢迎"
@@ -1892,9 +1982,6 @@ msgstr "你的程序"
 
 #~ msgid "select_own_adventures"
 #~ msgstr "Select own adventures"
-
-#~ msgid "edit"
-#~ msgstr "编辑"
 
 #~ msgid "view"
 #~ msgstr "观看"
@@ -2019,9 +2106,6 @@ msgstr "你的程序"
 #~ msgid "adventure_exp_2"
 #~ msgstr "如果你想要展示实际的代码片段，，例如给学生一个模板或代码的例子。请像这样使用预锚:"
 
-#~ msgid "adventures"
-#~ msgstr "可用的冒险"
-
 #~ msgid "hello_world"
 #~ msgstr "世界你好！"
 
@@ -2046,63 +2130,9 @@ msgstr "你的程序"
 #~ msgid "back_to_class"
 #~ msgstr "回到课室"
 
-#~ msgid "classes"
-#~ msgstr ""
-
 #~ msgid "Locked Language Feature"
 #~ msgstr "你正在使用{concept}！这很棒，但是{concept}还没有解锁！它会在后续关卡中解锁。"
 
 #~ msgid "nested blocks"
 #~ msgstr "代码块里的代码块"
-
-#~ msgid "add_students_options"
-#~ msgstr "加入学生选项"
-
-#~ msgid "class_live"
-#~ msgstr "实时统计"
-
-#~ msgid "class_overview"
-#~ msgstr "课程概述"
-
-#~ msgid "copy_join_link"
-#~ msgstr "复制链接"
-
-#~ msgid "copy_link_success"
-#~ msgstr "成功把邀请链接复制到剪贴板"
-
-#~ msgid "expiration_date"
-#~ msgstr "过期日期"
-
-#~ msgid "invite_by_username"
-#~ msgstr "按用户名邀请"
-
-#~ msgid "invite_date"
-#~ msgstr "邀请日期"
-
-#~ msgid "invite_prompt"
-#~ msgstr "输入一个用户名"
-
-#~ msgid "last_login"
-#~ msgstr "上次登录"
-
-#~ msgid "page"
-#~ msgstr "页面"
-
-#~ msgid "pending_invites"
-#~ msgstr "等待邀请"
-
-#~ msgid "remove_student_prompt"
-#~ msgstr "你确定要将这名学生移出班级吗？"
-
-#~ msgid "remove_user_prompt"
-#~ msgstr "确认从班级中删除该用户。"
-
-#~ msgid "second_teacher_warning"
-#~ msgstr "本班所有老师都可以定制。"
-
-#~ msgid "student_list"
-#~ msgstr "学生列表"
-
-#~ msgid "teachers"
-#~ msgstr "孝顺"
 

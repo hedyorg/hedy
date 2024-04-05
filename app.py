@@ -12,6 +12,7 @@ import subprocess
 import sys
 import traceback
 import textwrap
+import unicodedata
 import zipfile
 import jinja_partials
 from typing import Optional
@@ -24,7 +25,7 @@ from flask import (Flask, Response, abort, after_this_request, g,
                    redirect, request, send_file, url_for, jsonify,
                    send_from_directory, session)
 from flask_babel import Babel, gettext
-from flask_commonmark import Commonmark
+from website.flask_commonmark import Commonmark
 from flask_compress import Compress
 from urllib.parse import quote_plus
 
@@ -75,7 +76,12 @@ app.json = JinjaCompatibleJsonProvider(app)
 # Use 5 minutes as a reasonable default for all files we load elsewise.
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = datetime.timedelta(minutes=5)
 
-babel = Babel(app)
+
+def get_locale():
+    return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
+
+
+babel = Babel(app, locale_selector=get_locale)
 
 jinja_partials.register_extensions(app)
 app.template_filter('tojson')(proper_tojson)
@@ -257,11 +263,6 @@ def load_customized_adventures(level, customizations, into_adventures):
             into_adventures.append(adv)
 
 
-@babel.localeselector
-def get_locale():
-    return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
-
-
 cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
 
 
@@ -413,6 +414,9 @@ def setup_language():
     # This is the only place to expand / shrink the list of RTL languages ->
     # front-end is fixed based on this value
     g.dir = static_babel_content.TEXT_DIRECTIONS.get(g.lang, 'ltr')
+
+    # True if it is a Latin alphabet, False if not
+    g.latin = all('LATIN' in unicodedata.name(char, '').upper() for char in current_language()['sym'])
 
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
@@ -581,8 +585,8 @@ def parse():
 
             response['source_map'] = source_map_result
 
-            if transpile_result.has_pygame:
-                response['has_pygame'] = True
+            if transpile_result.has_pressed:
+                response['has_pressed'] = True
 
             if transpile_result.has_turtle:
                 response['has_turtle'] = True
@@ -1648,6 +1652,7 @@ def view_program(user, id):
                                lang=g.lang,
                                level=int(result['level']),
                                code=code),
+                           is_teacher=user['is_teacher'],
                            **arguments_dict)
 
 

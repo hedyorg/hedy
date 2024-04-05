@@ -29,7 +29,7 @@ class TestsLevel7(HedyTester):
         code = "repeat 3 times forward 100"
 
         expected = HedyTester.dedent(
-            "for __i in range(int('3')):",
+            f"for __i in range({self.int_cast_transpiled(3)}):",
             (HedyTester.forward_transpiled(100, self.level), '  '))
 
         self.single_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
@@ -37,8 +37,8 @@ class TestsLevel7(HedyTester):
     def test_repeat_print(self):
         code = "repeat 5 times print 'me wants a cookie!'"
 
-        expected = textwrap.dedent("""\
-        for __i in range(int('5')):
+        expected = textwrap.dedent(f"""\
+        for __i in range({self.int_cast_transpiled(5)}):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -56,13 +56,11 @@ class TestsLevel7(HedyTester):
         n is 5
         repeat n times print 'me wants a cookie!'""")
 
-        expected = HedyTester.dedent(
-            "n = '5'",
-            self.variable_type_check_transpiled('n', 'int'),
-            "for __i in range(int(n)):",
-            ("print(f'me wants a cookie!')", '  '),
-            ("time.sleep(0.1)", '  ')
-        )
+        expected = textwrap.dedent(f"""\
+            n = '5'
+            for __i in range({self.int_cast_transpiled('n', quotes=False)}):
+              print(f'me wants a cookie!')
+              time.sleep(0.1)""")
 
         output = textwrap.dedent("""\
         me wants a cookie!
@@ -196,9 +194,9 @@ class TestsLevel7(HedyTester):
         prind skipping
         repeat 3 times 'n'""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         pass
-        for __i in range(int('3')):
+        for __i in range({self.int_cast_transpiled(3)}):
           pass
           time.sleep(0.1)""")
 
@@ -247,13 +245,11 @@ class TestsLevel7(HedyTester):
         n is ask 'How many times?'
         repeat n times print 'n'""")
 
-        expected = HedyTester.dedent(
-            "n = input(f'How many times?')",
-            self.variable_type_check_transpiled('n', 'int'),
-            "for __i in range(int(n)):",
-            ("print(f'n')", '  '),
-            ("time.sleep(0.1)", '  ')
-        )
+        expected = textwrap.dedent(f"""\
+            n = input(f'How many times?')
+            for __i in range({self.int_cast_transpiled('n', quotes=False)}):
+              print(f'n')
+              time.sleep(0.1)""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -263,7 +259,7 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent(f"repeat {number} times print 'me wants a cookie!'")
 
         expected = textwrap.dedent(f"""\
-        for __i in range(int('{int(number)}')):
+        for __i in range({self.int_cast_transpiled(int(number))}):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -280,8 +276,8 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent("""\
         repeat 10 times print 'me wants a cookie!'""")
 
-        expected = textwrap.dedent("""\
-        for __i in range(int('10')):
+        expected = textwrap.dedent(f"""\
+        for __i in range({self.int_cast_transpiled(10)}):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -309,12 +305,12 @@ class TestsLevel7(HedyTester):
         repeat 5 times print 'me wants a cookie!'
         print i""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         i = 'hallo!'
-        for __i in range(int('5')):
+        for __i in range({self.int_cast_transpiled(5)}):
           print(f'me wants a cookie!')
           time.sleep(0.1)
-        print(f'{i}')""")
+        print(f'{{i}}')""")
 
         output = textwrap.dedent("""\
         me wants a cookie!
@@ -335,10 +331,10 @@ class TestsLevel7(HedyTester):
         naam is Hedy
         if naam is Hedy repeat 3 times print 'Hallo Hedy!'""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         naam = 'Hedy'
         if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
-          for __i in range(int('3')):
+          for __i in range({self.int_cast_transpiled('3')}):
             print(f'Hallo Hedy!')
             time.sleep(0.1)""")
 
@@ -349,25 +345,17 @@ class TestsLevel7(HedyTester):
     def test_if_pressed_repeat(self):
         code = "if x is pressed repeat 5 times print 'doe het 5 keer!' else print 'iets anders'"
 
-        expected = HedyTester.dedent("""\
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'x':
-              for __i in range(int('5')):
-                print(f'doe het 5 keer!')
-                time.sleep(0.1)
-              break
-            else:
-              print(f'iets anders')
-              break
-            # End of PyGame Event Handler""")
+        expected = HedyTester.dedent(f"""\
+         if_pressed_mapping = {{"else": "if_pressed_default_else"}}
+         if_pressed_mapping['x'] = 'if_pressed_x_'
+         if_pressed_mapping['else'] = 'if_pressed_else_'
+         def if_pressed_x_():
+           for __i in range(int_with_error('5', {self.value_exception_transpiled()})):
+             print(f'doe het 5 keer!')
+             time.sleep(0.1)
+         def if_pressed_else_():
+           print(f'iets anders')
+         extensions.if_pressed(if_pressed_mapping)""")
 
         self.single_level_tester(
             code=code,
@@ -380,58 +368,35 @@ class TestsLevel7(HedyTester):
             if z is pressed print 'doe het 1 keer!' else print 'iets anders'""")
 
         expected = HedyTester.dedent("""\
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'x':
-              print(f'doe het 1 keer!')
-              break
-            else:
-              print(f'iets anders')
-              break
-            # End of PyGame Event Handler
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'y':
-              print(f'doe het 1 keer!')
-              break
-            else:
-              print(f'iets anders')
-              break
-            # End of PyGame Event Handler
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'z':
-              print(f'doe het 1 keer!')
-              break
-            else:
-              print(f'iets anders')
-              break
-            # End of PyGame Event Handler""")
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_x_():
+          print(f'doe het 1 keer!')
+        def if_pressed_else_():
+          print(f'iets anders')
+        extensions.if_pressed(if_pressed_mapping)
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['y'] = 'if_pressed_y_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_y_():
+          print(f'doe het 1 keer!')
+        def if_pressed_else_():
+          print(f'iets anders')
+        extensions.if_pressed(if_pressed_mapping)
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['z'] = 'if_pressed_z_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_z_():
+          print(f'doe het 1 keer!')
+        def if_pressed_else_():
+          print(f'iets anders')
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.single_level_tester(
             code=code,
             expected=expected,
+            skip_faulty=False,
             translate=False)
 
     def test_repeat_if_pressed_multiple(self):
@@ -441,96 +406,48 @@ class TestsLevel7(HedyTester):
             repeat 3 times if z is pressed forward 15 else forward -15""")
 
         expected = HedyTester.dedent(f"""\
-        for __i in range(int('3')):
-          pygame_end = False
-          while not pygame_end:
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-              pygame_end = True
-              pygame.quit()
-              break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode == 'x':
-                __trtl = 15
-                try:
-                  __trtl = int(__trtl)
-                except ValueError:
-                  raise Exception({self.value_exception_transpiled()})
+            for __i in range({self.int_cast_transpiled(3)}):
+              if_pressed_mapping = {{"else": "if_pressed_default_else"}}
+              if_pressed_mapping['x'] = 'if_pressed_x_'
+              if_pressed_mapping['else'] = 'if_pressed_else_'
+              def if_pressed_x_():
+                __trtl = {self.int_cast_transpiled(15, quotes=False)}
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
-                break
-              else:
-                __trtl = -15
-                try:
-                  __trtl = int(__trtl)
-                except ValueError:
-                  raise Exception({self.value_exception_transpiled()})
+              def if_pressed_else_():
+                __trtl = {self.int_cast_transpiled(-15, quotes=False)}
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
-                break
-              # End of PyGame Event Handler
-          time.sleep(0.1)
-        for __i in range(int('3')):
-          pygame_end = False
-          while not pygame_end:
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-              pygame_end = True
-              pygame.quit()
-              break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode == 'y':
-                __trtl = 15
-                try:
-                  __trtl = int(__trtl)
-                except ValueError:
-                  raise Exception({self.value_exception_transpiled()})
+              extensions.if_pressed(if_pressed_mapping)
+              time.sleep(0.1)
+            for __i in range({self.int_cast_transpiled(3)}):
+              if_pressed_mapping = {{"else": "if_pressed_default_else"}}
+              if_pressed_mapping['y'] = 'if_pressed_y_'
+              if_pressed_mapping['else'] = 'if_pressed_else_'
+              def if_pressed_y_():
+                __trtl = {self.int_cast_transpiled(15, quotes=False)}
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
-                break
-              else:
-                __trtl = -15
-                try:
-                  __trtl = int(__trtl)
-                except ValueError:
-                  raise Exception({self.value_exception_transpiled()})
+              def if_pressed_else_():
+                __trtl = {self.int_cast_transpiled(-15, quotes=False)}
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
-                break
-              # End of PyGame Event Handler
-          time.sleep(0.1)
-        for __i in range(int('3')):
-          pygame_end = False
-          while not pygame_end:
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-              pygame_end = True
-              pygame.quit()
-              break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode == 'z':
-                __trtl = 15
-                try:
-                  __trtl = int(__trtl)
-                except ValueError:
-                  raise Exception({self.value_exception_transpiled()})
+              extensions.if_pressed(if_pressed_mapping)
+              time.sleep(0.1)
+            for __i in range({self.int_cast_transpiled(3)}):
+              if_pressed_mapping = {{"else": "if_pressed_default_else"}}
+              if_pressed_mapping['z'] = 'if_pressed_z_'
+              if_pressed_mapping['else'] = 'if_pressed_else_'
+              def if_pressed_z_():
+                __trtl = {self.int_cast_transpiled(15, quotes=False)}
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
-                break
-              else:
-                __trtl = -15
-                try:
-                  __trtl = int(__trtl)
-                except ValueError:
-                  raise Exception({self.value_exception_transpiled()})
+              def if_pressed_else_():
+                __trtl = {self.int_cast_transpiled(-15, quotes=False)}
                 t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
                 time.sleep(0.1)
-                break
-              # End of PyGame Event Handler
-          time.sleep(0.1)""")
+              extensions.if_pressed(if_pressed_mapping)
+              time.sleep(0.1)""")
 
         self.single_level_tester(
             code=code,
@@ -543,15 +460,15 @@ class TestsLevel7(HedyTester):
             repeat 3 times if aan is ja print 'Hedy is leuk!'
             repeat 3 times if aan is ja print 'Hedy is leuk!'""")
 
-        expected = HedyTester.dedent("""\
+        expected = HedyTester.dedent(f"""\
         aan = 'ja'
-        for __i in range(int('3')):
+        for __i in range({self.int_cast_transpiled(3)}):
           if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
             print(f'Hedy is leuk!')
           else:
             x__x__x__x = '5'
           time.sleep(0.1)
-        for __i in range(int('3')):
+        for __i in range({self.int_cast_transpiled(3)}):
           if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
             print(f'Hedy is leuk!')
           time.sleep(0.1)""")
@@ -575,9 +492,9 @@ class TestsLevel7(HedyTester):
         repeat 5 times print 'Help!'
         print 'Why is nobody helping me?'""")
 
-        expected_code = textwrap.dedent("""\
+        expected_code = textwrap.dedent(f"""\
         print(f'The prince kept calling for help')
-        for __i in range(int('5')):
+        for __i in range({self.int_cast_transpiled(5)}):
           print(f'Help!')
           time.sleep(0.1)
         print(f'Why is nobody helping me?')""")
@@ -599,13 +516,10 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent("""\
             repeat 3 times play C4""")
 
-        expected = textwrap.dedent(f"""\
-            for __i in range(int('3')):
-              if 'C4' not in notes_mapping.keys() and 'C4' not in notes_mapping.values():
-                  raise Exception({self.value_exception_transpiled()})
-              play(notes_mapping.get(str('C4'), str('C4')))
-              time.sleep(0.5)
-              time.sleep(0.1)""")
+        expected = HedyTester.dedent(
+            f"for __i in range({self.int_cast_transpiled(3)}):",
+            (self.play_transpiled('C4'), '  '),
+            ("time.sleep(0.1)", '  '))
 
         self.multi_level_tester(
             code=code,
@@ -621,15 +535,11 @@ class TestsLevel7(HedyTester):
             notes is C4, E4, D4, F4, G4
             repeat 3 times play notes at random""")
 
-        expected = textwrap.dedent(f"""\
-            notes = ['C4', 'E4', 'D4', 'F4', 'G4']
-            for __i in range(int('3')):
-              chosen_note = str(random.choice(notes)).upper()
-              if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
-                  raise Exception({self.value_exception_transpiled()})
-              play(notes_mapping.get(chosen_note, chosen_note))
-              time.sleep(0.5)
-              time.sleep(0.1)""")
+        expected = HedyTester.dedent(
+            "notes = ['C4', 'E4', 'D4', 'F4', 'G4']",
+            f"for __i in range({self.int_cast_transpiled(3)}):",
+            (self.play_transpiled('random.choice(notes)', quotes=False), '  '),
+            ("time.sleep(0.1)", '  '))
 
         self.multi_level_tester(
             code=code,

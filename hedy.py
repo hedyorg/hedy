@@ -32,7 +32,7 @@ import utils
 from hedy_content import KEYWORDS
 from hedy_sourcemap import SourceMap, source_map_transformer
 
-from prefixes.music import notes_mapping
+from prefixes.music import present_in_notes_mapping
 
 HEDY_MAX_LEVEL = 18
 HEDY_MAX_LEVEL_SKIPPING_FAULTY = 5
@@ -185,7 +185,7 @@ PREPROCESS_RULES = {
 }
 
 
-def make_value_error(command, value, tip, lang):
+def make_value_error(command, tip, lang, value='{}'):
     return make_error_text(exceptions.RuntimeValueException(command=command, value=value, tip=tip), lang)
 
 
@@ -243,6 +243,7 @@ class Command:
     define = 'define'
     call = 'call'
     returns = 'return'
+    play = 'play'
 
 
 translatable_commands = {Command.print: ['print'],
@@ -309,7 +310,7 @@ commands_per_level = {1: ['ask', 'color', 'echo', 'forward', 'play', 'print', 't
 add_level(commands_per_level, level=2, add=['is', 'sleep'], remove=['echo'])
 add_level(commands_per_level, level=3, add=['add', 'at', 'from', 'random', 'remove', 'to'])
 add_level(commands_per_level, level=4, add=['clear'])
-add_level(commands_per_level, level=5, add=['assign_button', 'else', 'if', 'ifpressed', 'in', 'not_in'])
+add_level(commands_per_level, level=5, add=['assign_button', 'else', 'if', 'if_pressed', 'in', 'not_in'])
 add_level(commands_per_level, level=6)
 add_level(commands_per_level, level=7, add=['repeat', 'times'])
 add_level(commands_per_level, level=8)
@@ -424,9 +425,9 @@ def get_list_keywords(commands, to_lang):
         with open(to_yaml_filesname_with_path, 'r', encoding='utf-8') as stream:
             to_yaml_dict = yaml.safe_load(stream)
         for command in commands:
-            if command == 'ifpressed':  # TODO: this is a bit of a hack
+            if command == 'if_pressed':  # TODO: this is a bit of a hack
                 command = 'pressed'  # since in the yamls they are called pressed
-            if command == 'assign_button':  # but in the grammar 'ifpressed'
+            if command == 'assign_button':  # but in the grammar 'if_pressed'
                 command = 'button'  # should be changed in the yaml eventually!
             try:
                 translation_commands.append(to_yaml_dict[command])
@@ -1054,18 +1055,6 @@ class Filter(Transformer):
         return all(args), ''.join([c for c in args]), meta
 
 
-class UsesPyGame(Transformer):
-    command_prefix = (f"""\
-pygame_end = False
-while not pygame_end:
-  pygame.display.update()
-  event = pygame.event.wait()
-  if event.type == pygame.QUIT:
-    pygame_end = True
-    pygame.quit()
-    break""")
-
-
 class AllCommands(Transformer):
     def __init__(self, level):
         self.level = level
@@ -1107,9 +1096,8 @@ class AllCommands(Transformer):
         # for the achievements we want to be able to also detect which operators were used by a kid
         operators = ['addition', 'subtraction', 'multiplication', 'division']
 
-        if production_rule_name in commands_per_level[
-                self.level] or production_rule_name in operators or production_rule_name == 'ifpressed_else':
-            # ifpressed_else is not in the yamls, upsetting lookup code to get an alternative later
+        if production_rule_name in commands_per_level[self.level] or production_rule_name in operators or production_rule_name == 'if_pressed_else':
+            # if_pressed_else is not in the yamls, upsetting lookup code to get an alternative later
             # lookup should be fixed instead, making a special case for now
             if production_rule_name == 'else':  # use of else also has an if
                 return ['if', 'else'] + leaves
@@ -1206,7 +1194,7 @@ class IsValid(Filter):
         if not sug_exists:  # the suggestion is invalid, i.e. identical to the command
             invalid_command_en = hedy_translation.translate_keyword_to_en(invalid_command, self.lang)
             if invalid_command_en == Command.turn:
-                arg = args[0][0]
+                arg = args[1][1]
                 raise hedy.exceptions.InvalidArgumentException(
                     command=invalid_command,
                     allowed_types=get_allowed_types(Command.turn, self.level),
@@ -1263,10 +1251,6 @@ class IsValid(Filter):
             tip='no_more_flat_if',
             line_number=meta.line)
 
-    def error_ifpressed_missing_else(self, meta, args):
-        raise exceptions.MissingElseForPressitException(
-            command='ifpressed_else', level=self.level, line_number=meta.line)
-
     def error_for_missing_in(self, meta, args):
         raise exceptions.MissingAdditionalCommand(command='for', missing_command='in', line_number=meta.line)
 
@@ -1281,6 +1265,10 @@ class IsValid(Filter):
 
     def error_nested_define(self, meta, args):
         raise exceptions.NestedFunctionException()
+
+    def error_if_pressed_missing_else(self, meta, args):
+        raise exceptions.MissingElseForPressitException(
+            command='ifpressed_else', level=self.level, line_number=meta.line)
 
     # other rules are inherited from Filter
 
@@ -1379,29 +1367,39 @@ class ConvertToPython(Transformer):
         else:
             return ""
 
+    def is_var_defined_before_access(self, variable_name, access_line_number):
+        all_names_before_access_line = [a.name for a in self.lookup if a.definition_line <= access_line_number]
+        return variable_name in all_names_before_access_line
+
+    def is_var_in_lookup(self, variable_name):
+        all_names = [a.name for a in self.lookup]
+        return variable_name in all_names
+
     # default for line number is max lines so if it is not given, there
     # is no check on whether the var is defined
     def is_variable(self, variable_name, access_line_number=100):
-        all_names = [a.name for a in self.lookup]
-        all_names_before_access_line = [a.name for a in self.lookup if a.definition_line <= access_line_number]
-        if variable_name in all_names and variable_name not in all_names_before_access_line:
-            # referenced before assignment!
+        if self.is_var_in_lookup(variable_name) and not self.is_var_defined_before_access(variable_name,
+                                                                                          access_line_number):
             definition_line_number = [a.definition_line for a in self.lookup if a.name == variable_name][0]
             raise hedy.exceptions.AccessBeforeAssignException(
                 name=variable_name,
                 access_line_number=access_line_number,
                 definition_line_number=definition_line_number)
-        else:
-            # valid use, store!
-            self.add_variable_access_location(variable_name, access_line_number)
 
-        is_function = False
+        # valid use, store!
+        self.add_variable_access_location(variable_name, access_line_number)
+
+        all_names_before_access_line = [a.name for a in self.lookup if a.definition_line <= access_line_number]
+        if escape_var(variable_name) in all_names_before_access_line:
+            return True
+
         if isinstance(variable_name, str):
             pattern = r'^([a-zA-Z_][a-zA-Z0-9_]*)\('
             match = re.match(pattern, variable_name)
             is_function = match and [a.name for a in self.lookup if match.group(1) + "()" == a.name]
+            return is_function
 
-        return escape_var(variable_name) in all_names_before_access_line or is_function
+        return False
 
     def process_variable(self, arg, access_line_number=100):
         # processes a variable by hashing and escaping when needed
@@ -1421,9 +1419,9 @@ class ConvertToPython(Transformer):
         return arg
 
     def process_variable_for_fstring(self, variable_name, access_line_number=100):
-        self.add_variable_access_location(variable_name, access_line_number)
-
-        if self.is_variable(variable_name, access_line_number):
+        if self.is_var_in_lookup(variable_name) and self.is_var_defined_before_access(variable_name,
+                                                                                      access_line_number):
+            self.add_variable_access_location(variable_name, access_line_number)
             return "{" + escape_var(variable_name) + "}"
         else:
             return process_characters_needing_escape(variable_name)
@@ -1493,17 +1491,6 @@ class ConvertToPython(Transformer):
                     ConvertToPython.is_float(arg) or
                     ConvertToPython.is_random(arg)):
                 raise exceptions.UnquotedAssignTextException(text=arg, line_number=meta.line)
-
-    def code_to_ensure_variable_type(self, arg, expected_type, command, suggested_type):
-        if not self.is_variable(arg):
-            return ""
-        exception = make_value_error(command, f'{{{arg}}}', suggested_type, self.language)
-        return textwrap.dedent(f"""\
-            try:
-              {expected_type}({arg})
-            except ValueError:
-              raise Exception(f{exception})
-            """)
 
     # static methods
 
@@ -1647,47 +1634,37 @@ class ConvertToPython_1(ConvertToPython):
                                                           line_number=meta.line)
 
     def make_turn(self, parameter):
-        return self.make_turtle_command(parameter, Command.turn, 'right', False, 'int')
+        return self.make_turtle_command(parameter, Command.turn, 'right', False, HedyType.integer)
 
     def make_forward(self, parameter):
-        return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'int')
+        return self.make_turtle_command(parameter, Command.forward, 'forward', True, HedyType.integer)
 
     def make_play(self, note, meta):
-        exception_text = make_value_error('play', note, 'suggestion_note', self.language)
+        ex = make_value_error(Command.play, 'suggestion_note', self.language)
 
         return textwrap.dedent(f"""\
-                if '{note}' not in notes_mapping.keys() and '{note}' not in notes_mapping.values():
-                    raise Exception({exception_text})
-                play(notes_mapping.get(str('{note}'), str('{note}')))
+                play(note_with_error('{note}', {ex}))
                 time.sleep(0.5)""")
 
     def make_play_var(self, note, meta):
-        exception_text = make_value_error('play', note, 'suggestion_note', self.language)
         self.check_var_usage([note], meta.line)
         chosen_note = note.children[0] if isinstance(note, Tree) else note
+        ex = make_value_error(Command.play, 'suggestion_note', self.language)
 
         return textwrap.dedent(f"""\
-                chosen_note = str({chosen_note}).upper()
-                if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
-                    raise Exception({exception_text})
-                play(notes_mapping.get(chosen_note, chosen_note))
+                play(note_with_error({chosen_note}, {ex}))
                 time.sleep(0.5)""")
 
     def make_color(self, parameter, language):
         return self.make_turtle_color_command(parameter, Command.color, 'pencolor', language)
 
-    def make_turtle_command(self, parameter, command, command_text, add_sleep, type):
-        exception = ''
-        if isinstance(parameter, str):
-            exception = self.make_index_error_check_if_list([parameter])
+    def make_turtle_command(self, parameter, command, command_text, add_sleep, target_type):
+        list_index_exception = self.make_index_error_check_if_list([parameter]) if isinstance(parameter, str) else ''
         variable = self.get_fresh_var('__trtl')
-        exception_text = make_value_error(command, variable, 'suggestion_number', self.language)
-        transpiled = exception + textwrap.dedent(f"""\
-            {variable} = {parameter}
-            try:
-              {variable} = {type}({variable})
-            except ValueError:
-              raise Exception({exception_text})
+        func = 'int_with_error' if target_type == HedyType.integer else 'number_with_error'
+        ex = make_value_error(command, 'suggestion_number', self.language)
+        transpiled = list_index_exception + textwrap.dedent(f"""\
+            {variable} = {func}({parameter}, {ex})
             t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable})){self.add_debug_breakpoint()}""")
         if add_sleep and not self.is_debug:
             return add_sleep_to_command(transpiled, False, self.is_debug, location="after")
@@ -1701,12 +1678,12 @@ class ConvertToPython_1(ConvertToPython):
         # coming from a random list or ask
 
         color_dict = {hedy_translation.translate_keyword_from_en(x, language): x for x in english_colors}
-        exception_text = make_value_error(command, parameter, 'suggestion_color', self.language)
+        ex = make_value_error(command, 'suggestion_color', self.language, parameter)
         return textwrap.dedent(f"""\
             {variable} = f'{parameter}'
             color_dict = {color_dict}
             if {variable} not in {both_colors}:
-              raise Exception({exception_text})
+              raise Exception(f{ex})
             else:
               if not {variable} in {english_colors}:
                 {variable} = color_dict[{variable}]
@@ -1846,9 +1823,8 @@ class ConvertToPython_2(ConvertToPython_1):
 
         note = args[0]
         if isinstance(note, str):
-            uppercase_note = note.upper()
-            if uppercase_note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
-                return self.make_play(uppercase_note, meta) + self.add_debug_breakpoint()
+            if present_in_notes_mapping(note):  # this is a supported note
+                return self.make_play(note.upper(), meta) + self.add_debug_breakpoint()
 
         # no note? it must be a variable!
         self.add_variable_access_location(note, meta.line)
@@ -1871,20 +1847,16 @@ class ConvertToPython_2(ConvertToPython_1):
                 return variable_name + " = '" + value + "'" + self.add_debug_breakpoint()
 
     def sleep(self, meta, args):
-
         if not args:
             return f"time.sleep(1){self.add_debug_breakpoint()}"
         else:
             value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
             if not self.is_int(args[0]):
                 self.add_variable_access_location(value, meta.line)
-            exceptions = self.make_index_error_check_if_list(args)
-            try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
-            exception_text = make_value_error(Command.sleep, value, 'suggestion_number', self.language)
-            code = try_prefix + textwrap.dedent(f"""\
-                  time.sleep(int({value})){self.add_debug_breakpoint()}
-                except ValueError:
-                  raise Exception({exception_text})""")
+            index_exception = self.make_index_error_check_if_list(args)
+            ex = make_value_error(Command.sleep, 'suggestion_number', self.language)
+            code = index_exception + \
+                textwrap.dedent(f"time.sleep(int_with_error({value}, {ex})){self.add_debug_breakpoint()}")
             return code
 
 
@@ -2065,50 +2037,50 @@ else:{self.add_debug_breakpoint()}
         button_name = self.process_variable(args[0], meta.line)
         return f"""create_button({button_name})"""
 
-    def make_ifpressed_command(self, command, button=False, add_command_prefix=True):
-        if button:
-            command = f"""\
-  if event.type == pygame.USEREVENT:
-{ConvertToPython.indent(command, 4)}
-    # End of PyGame Event Handler"""
-        else:
-            command = f"""\
-  if event.type == pygame.KEYDOWN:
-{ConvertToPython.indent(command, 4)}
-    # End of PyGame Event Handler"""
+    def make_function_name(self, key_name):
+        return f"if_pressed_{key_name}_"
 
-        if add_command_prefix:
-            return UsesPyGame.command_prefix + "\n" + command
-        else:
-            return "\n" + command
+    def make_function(self, function_name, body):
+        return (
+            f'def {function_name}():' + '\n' +
+            ConvertToPython.indent(body)
+        )
 
-    def ifpressed_else(self, meta, args):
-        var_or_button = args[0]
-        if self.is_variable(var_or_button, meta.line):
-            return self.make_ifpressed_command(f"""\
-if event.key == {var_or_button}:
-{ConvertToPython.indent(args[1])}
-  break
-else:
-{ConvertToPython.indent(args[2])}
-  break""", button=False)
-        elif len(var_or_button) > 1:
-            button_name = self.process_variable(args[0], meta.line)
-            return self.make_ifpressed_command(f"""\
-if event.key == {button_name}:
-{ConvertToPython.indent(args[1])}
-  break
-else:
-{ConvertToPython.indent(args[2])}
-  break""", button=True)
-        else:
-            return self.make_ifpressed_command(f"""\
-if event.unicode == '{args[0]}':
-{ConvertToPython.indent(args[1])}
-  break
-else:
-{ConvertToPython.indent(args[2])}
-  break""", button=False)
+    def clear_key_mapping(self):
+        return 'if_pressed_mapping = {"else": "if_pressed_default_else"}'
+
+    def add_if_key_mapping(self, key, function_name):
+        return f"if_pressed_mapping['{key}'] = '{function_name}'"
+
+    def add_else_key_mapping(self, function_name):
+        return f"if_pressed_mapping['else'] = '{function_name}'"
+
+    def make_extension_call(self):
+        return 'extensions.if_pressed(if_pressed_mapping)'
+
+    def if_pressed_without_else(self, meta, args):
+        raise exceptions.MissingElseForPressitException(
+            command='if_pressed_else', level=self.level, line_number=meta.line
+        )
+
+    def if_pressed_else(self, meta, args):
+        self.process_variable(args[0], meta.line)
+        key = args[0]
+
+        if_code = args[1]
+        if_function_name = self.make_function_name(key)
+
+        else_code = args[2]
+        else_function_name = self.make_function_name('else')
+
+        return (
+            self.clear_key_mapping() + '\n' +
+            self.add_if_key_mapping(key, if_function_name) + '\n' +
+            self.add_else_key_mapping(else_function_name) + '\n' +
+            self.make_function(if_function_name, if_code) + '\n' +
+            self.make_function(else_function_name, else_code) + '\n' +
+            self.make_extension_call()
+        )
 
 
 @v_args(meta=True)
@@ -2141,13 +2113,9 @@ class ConvertToPython_6(ConvertToPython_5):
                 if not self.is_int(args[0]):
                     self.add_variable_access_location(value, meta.line)
 
-            exceptions = self.make_index_error_check_if_list(args)
-            try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
-            exception_text = make_value_error(Command.sleep, value, 'suggestion_number', self.language)
-            code = try_prefix + textwrap.dedent(f"""\
-                  time.sleep(int({value}))
-                except ValueError:
-                  raise Exception({exception_text})""")
+            index_exception = self.make_index_error_check_if_list(args)
+            ex = make_value_error(Command.sleep, 'suggestion_number', self.language)
+            code = index_exception + textwrap.dedent(f"time.sleep(int_with_error({value}, {ex}))")
             return code
 
     def print_ask_args(self, meta, args):
@@ -2208,7 +2176,7 @@ class ConvertToPython_6(ConvertToPython_5):
             latin_numeral = int(argument)
             return f'int({latin_numeral})'
         self.add_variable_access_location(argument, meta.line)
-        exception_text = make_value_error(command, argument, 'suggestion_number', self.language)
+        exception_text = make_value_error(command, 'suggestion_number', self.language)
         return f'int_with_error({argument}, {exception_text})'
 
     def process_calculation(self, args, operator, meta):
@@ -2285,8 +2253,8 @@ class ConvertToPython_7(ConvertToPython_6):
             body = "\n".join([self.indent(x) for x in args[1:]])
 
         body = add_sleep_to_command(body, indent=True, is_debug=self.is_debug, location="after")
-        type_check = self.code_to_ensure_variable_type(times, 'int', Command.repeat, 'suggestion_number')
-        return f"{type_check}for {var_name} in range(int({times})):{self.add_debug_breakpoint()}\n{body}"
+        ex = make_value_error(Command.repeat, 'suggestion_number', self.language)
+        return f"for {var_name} in range(int_with_error({times}, {ex})):{self.add_debug_breakpoint()}\n{body}"
 
     def repeat(self, meta, args):
         return self.make_repeat(meta, args, multiline=False)
@@ -2309,63 +2277,40 @@ class ConvertToPython_8_9(ConvertToPython_7):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         return "if " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
-    def ifpressed(self, meta, args):
+    def if_pressed(self, meta, args):
+        self.process_variable(args[0], meta.line)
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
-        all_lines = '\n'.join([x for x in args[1:]])
-        all_lines = ConvertToPython.indent(all_lines)
-        var_or_key = args[0]
-        # if this is a variable, we assume it is a key (for now)
-        if self.is_variable(var_or_key, meta.line):
-            return self.make_ifpressed_command(f"""\
-if event.unicode == {args[0]}:
-{all_lines}
-  break""", button=False)
-        elif len(var_or_key) == 1:  # one character? also a key!
-            return self.make_ifpressed_command(f"""\
-if event.unicode == '{args[0]}':
-{all_lines}
-  break""", button=False)
-        else:  # otherwise we mean a button
-            button_name = self.process_variable(args[0], meta.line)
-            return self.make_ifpressed_command(f"""\
-if event.key == {button_name}:
-{all_lines}
-  break""", button=True)
+        key = args[0]
 
-    def ifpressed_else(self, met, args):
+        if_code = '\n'.join([x for x in args[1:]])
+        if_code = ConvertToPython.indent(if_code)
+        if_function_name = self.make_function_name(key)
+
+        return (
+            self.clear_key_mapping() + '\n' +
+            self.add_if_key_mapping(key, if_function_name) + '\n' +
+            self.make_function(if_function_name, if_code) + '\n'
+        )
+
+    def if_pressed_elses(self, met, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        else_code = '\n'.join([x for x in args[0:]])
+        else_code = ConvertToPython.indent(else_code)
+        else_function_name = self.make_function_name('else')
 
-        all_lines = '\n'.join([x for x in args[1:]])
-        all_lines = ConvertToPython.indent(all_lines)
+        return (
+            self.add_else_key_mapping(else_function_name) + '\n' +
+            self.make_function(else_function_name, else_code) + '\n' +
+            self.make_extension_call()
 
-        if (len(args[0]) > 1):
-            button_name = self.process_variable(args[0], met.line)
-            return self.make_ifpressed_command(f"""\
-if event.key == {button_name}:
-{all_lines}
-  break""", button=True)
-        else:
-            return self.make_ifpressed_command(f"""\
-if event.unicode == '{args[0]}':
-{all_lines}
-  break""", button=False)
+        )
 
     def elses(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [ConvertToPython.indent(x) for x in args]
 
         return "\nelse:\n" + "\n".join(all_lines)
-
-    def ifpressed_elses(self, meta, args):
-        args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        args += ["  break"]
-
-        all_lines = "\n".join(
-            [ConvertToPython.indent(x, 4) for x in args]
-        )
-
-        return all_lines
 
     def var_access(self, meta, args):
         if len(args) == 1:  # accessing a var
@@ -2579,10 +2524,11 @@ class ConvertToPython_12(ConvertToPython_11):
         return self.make_forward(float(args[0]))
 
     def make_turn(self, parameter):
-        return self.make_turtle_command(parameter, Command.turn, 'right', False, 'float')
+        return self.make_turtle_command(parameter, Command.turn, 'right', False, HedyType.float)
 
     def make_forward(self, parameter):
-        return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'float')
+        return self.make_turtle_command(parameter, Command.forward,
+                                        'forward', True, HedyType.float)
 
     def process_token_or_tree(self, argument, meta):
         if isinstance(argument, Tree):
@@ -2598,20 +2544,12 @@ class ConvertToPython_12(ConvertToPython_11):
         else:
             # this is a variable, add to the table
             self.add_variable_access_location(argument, meta.line)
-            exception_text = make_value_error(command, argument, 'suggestion_number', self.language)
+            exception_text = make_value_error(command, 'suggestion_number', self.language)
             return f'number_with_error({argument}, {exception_text})'
-
-    def process_token_or_tree_for_addition(self, argument, meta):
-        if type(argument) is Tree:
-            return f'{str(argument.children[0])}'
-        else:
-            # this is a variable, add to the table
-            self.add_variable_access_location(argument, meta.line)
-            return argument
 
     # From level 12 concatenation should also work, so the args could be either numbers or strings
     def addition(self, meta, args):
-        args = [self.process_token_or_tree_for_addition(a, meta) for a in args]
+        args = [self.process_token_or_tree(a, meta) for a in args]
         if all([self.is_int(a) or self.is_float(a) for a in args]):
             return Tree('sum', [f'{args[0]} + {args[1]}'])
         else:
@@ -2680,28 +2618,28 @@ class ConvertToPython_15(ConvertToPython_14):
         exceptions = self.make_index_error_check_if_list([args[0]])
         return exceptions + "while " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + body
 
-    def ifpressed(self, meta, args):
-        button_name = self.process_variable(args[0], meta.line)
-        var_or_button = args[0]
-        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
-        body = "\n".join(all_lines)
+    def if_pressed_without_else(self, meta, args):
+        code = args[0]
 
-        # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
-        if self.is_variable(var_or_button, meta.line):
-            return self.make_ifpressed_command(f"""\
-if event.unicode == {args[0]}:
-{body}
-  break""", button=False)
-        elif len(var_or_button) > 1:
-            return self.make_ifpressed_command(f"""\
-if event.key == {button_name}:
-{body}
-  break""", button=True)
-        else:
-            return self.make_ifpressed_command(f"""\
-if event.unicode == '{args[0]}':
-{body}
-  break""", button=False)
+        return (
+            code + self.make_extension_call()
+        )
+
+    def if_pressed(self, meta, args):
+        self.process_variable(args[0], meta.line)
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+
+        key = args[0]
+
+        if_code = '\n'.join([x for x in args[1:]])
+        if_code = ConvertToPython.indent(if_code)
+        if_function_name = self.make_function_name(key)
+
+        return (
+            self.clear_key_mapping() + '\n' +
+            self.add_if_key_mapping(key, if_function_name) + '\n' +
+            self.make_function(if_function_name, if_code) + '\n'
+        )
 
 
 @v_args(meta=True)
@@ -2739,29 +2677,20 @@ class ConvertToPython_17(ConvertToPython_16):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         return "\nelif " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
-    def ifpressed_elifs(self, meta, args):
+    def if_pressed_elifs(self, meta, args):
+        self.process_variable(args[0], meta.line)
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
-        all_lines = '\n'.join([x for x in args[1:]])
-        all_lines = ConvertToPython.indent(all_lines)
-        var_or_key = args[0]
-        # if this is a variable, we assume it is a key (for now)
-        if self.is_variable(var_or_key, meta.line):
-            return self.make_ifpressed_command(f"""\
-if event.unicode == {args[0]}:
-{all_lines}
-  break""", button=False, add_command_prefix=False)
-        elif len(var_or_key) == 1:  # one character? also a key!
-            return self.make_ifpressed_command(f"""\
-if event.unicode == '{args[0]}':
-{all_lines}
-  break""", button=False, add_command_prefix=False)
-        else:  # otherwise we mean a button
-            button_name = self.process_variable(args[0], meta.line)
-            return self.make_ifpressed_command(f"""\
-if event.key == {button_name}:
-{all_lines}
-  break""", button=True, add_command_prefix=False)
+        key = args[0]
+
+        elif_code = '\n'.join([x for x in args[1:]])
+        elif_code = ConvertToPython.indent(elif_code)
+        elif_function_name = self.make_function_name(key)
+
+        return (
+            self.add_if_key_mapping(key, elif_function_name) + '\n' +
+            self.make_function(elif_function_name, elif_code) + '\n'
+        )
 
 
 @v_args(meta=True)
@@ -3150,7 +3079,7 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
 
 
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle',
-                                         'has_pygame', 'has_clear', 'has_music', 'commands'])
+                                         'has_pressed', 'has_clear', 'has_music', 'commands'])
 
 
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en", unused_allowed=True):
@@ -3672,10 +3601,10 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
 
         has_clear = "clear" in commands
         has_turtle = "forward" in commands or "turn" in commands or "color" in commands
-        has_pygame = "ifpressed" in commands or "ifpressed_else" in commands or "assign_button" in commands
+        has_pressed = "if_pressed" in commands or "if_pressed_else" in commands or "assign_button" in commands
         has_music = "play" in commands
 
-        parse_result = ParseResult(python, source_map, has_turtle, has_pygame, has_clear, has_music, commands)
+        parse_result = ParseResult(python, source_map, has_turtle, has_pressed, has_clear, has_music, commands)
 
         if populate_source_map:
             source_map.set_python_output(python)
@@ -3683,6 +3612,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         if not unused_allowed:
             for x in lookup_table:
                 if isinstance(x.name, str) and x.access_line is None and x.name != 'x__x__x__x':
+                    x.name = re.sub(r'^_', '', x.name)
                     raise hedy.exceptions.UnusedVariableException(
                         level, x.definition_line, x.name, fixed_code=python, fixed_result=parse_result)
 

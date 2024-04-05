@@ -1,4 +1,4 @@
-command: += while_loop | ifpressed -= error_ifpressed_missing_else >> error_ifelse | ifs
+command: += while_loop | if_pressed -= error_if_pressed_missing_else >> error_ifelse | ifs
 
 // new : while loop
 while_loop: _WHILE (_conditions) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK

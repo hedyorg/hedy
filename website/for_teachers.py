@@ -189,19 +189,6 @@ class ForTeachersModule(WebsiteModule):
                 }
             )
 
-            """
-            class_info=class_info, GOT IT
-                    max_level=max_level, 
-                    adventure_names=adventure_names, 
-                    adventures_default_order=adventures_default_order,
-                    class_id=class_id, GOT IT 
-                    level='1', 
-                    class_adventures=class_adventures,
-                    ticked_adventures=ticked_adventures,
-                    student_adventures=student_adventures,
-                    matrix_values=matrix_values
-            """
-
         student_overview_table, class_, class_adventures_formatted, ticked_adventures, \
             adventure_names, student_adventures = self.get_grid_info(user, class_id, 1)
 
@@ -1161,10 +1148,10 @@ class ForTeachersModule(WebsiteModule):
             return gettext("unauthorized"), 403
         current_classes = {}
         if body.get("classes"):
-            current_classes = current_adventure["classes"]
+            current_classes = current_adventure.get('classes', [])
         current_levels = []
         if current_adventure["level"] != 1:
-            current_levels = current_adventure["levels"]
+            current_levels = current_adventure.get('levels', [])
 
         adventures = self.db.get_teacher_adventures(user["username"])
         for adventure in adventures:
@@ -1252,7 +1239,7 @@ class ForTeachersModule(WebsiteModule):
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        customizations, adventures, adventure_names, _, _ = self.get_class_info(
+        customizations, _, _, _, _ = self.get_class_info(
             user, class_id)
 
         is_teacher_adventure = True
@@ -1272,8 +1259,9 @@ class ForTeachersModule(WebsiteModule):
 
     @route("/create-adventure/", methods=["POST"])
     @route("/create-adventure/<class_id>", methods=["POST"])
+    @route("/create-adventure/<class_id>/<level>", methods=["POST"])
     @requires_teacher
-    def create_adventure(self, user, class_id=None):
+    def create_adventure(self, user, class_id=None, level=None):
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
 
@@ -1285,6 +1273,9 @@ class ForTeachersModule(WebsiteModule):
                 name += 'X'
                 continue
 
+        if not level:
+            level = "1"
+
         session['class_id'] = class_id
         adventure = {
             "id": adventure_id,
@@ -1292,15 +1283,15 @@ class ForTeachersModule(WebsiteModule):
             "creator": user["username"],
             "name": name,
             "classes": [class_id],
-            "level": 1,
-            "levels": ["1"],
+            "level": int(level),
+            "levels": [level],
             "content": "",
             "public": 0,
             "language": g.lang,
         }
         self.db.store_adventure(adventure)
         if class_id:
-            self.add_adventure_to_class_level(user, class_id, adventure_id, "1", False)
+            self.add_adventure_to_class_level(user, class_id, adventure_id, str(level), False)
 
         return adventure["id"], 200
 
