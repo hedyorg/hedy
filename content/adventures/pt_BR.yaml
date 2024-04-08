@@ -3081,38 +3081,38 @@ adventures:
                         {print} 'You belong to the B club'
                     ```
     quotation_marks:
-        name: '''quotation marks'''
-        default_save_name: quotation_marks
+        name: '''aspas'''
+        default_save_name: aspas
         description: Introdução às aspas
         levels:
             4:
                 story_text: |
-                    ## 'Quotation marks'
-                    In level 4 `{ask}` and `{print}` have changed.
-                    You must put text that you want to print between quotation marks.
-                    This is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.
-                    Most programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!
+                    ## 'Aspas'
+                    No nível 4, `{ask}` e `{print}` mudaram.
+                    Agora, quando quiser imprimir qualquer texto, terá de colocá-lo entre aspas.
+                    O bom disso é que agora você pode imprimir todas as palavras que quiser, mesmo as que você já usou para guardar algum valor usando `{is}`.
+                    A maioria das linguagens de programação também usa aspas para isso, então estamos ficando um passo mais perto da programação real!
                 example_code: |
                     ```
-                    {print} 'You need to use quotation marks from now on!'
-                    answer {is} {ask} 'What do we need to use from now on?'
-                    {print} 'We need to use ' answer
+                    {print} 'Você terá de usar aspas de agora em diante!'
+                    resposta {is} {ask} 'O que teremos de usar de agora em diante?'
+                    {print} 'Teremos de usar ' resposta
                     ```
                 story_text_2: |
-                    ## Contractions
-                    Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
-                    Make sure to remove those apostrophes and change the spelling to I am or What is.
-                    Check out the example code to see the wrong way of using apostrophes.
+                    ## Contrações
+                    Importante! Note que, agora que estamos usando aspas (simples), Hedy ficará confusa se você usar o apóstrofo em contrações como "d'água".
+                    Evite o uso de aspas simples ou apóstrofos dentro do texto, certifique-se de retirar as contrações (ao invés de "d'água", diga "de água").
+                    Confira o código exemplo para ver o código incorreto, em que se usa apóstrofos.
                 example_code_2: |
                     ```
-                    _ This is the wrong way of using apostrophes _
-                    {print} 'I'm babysitting my sister's kids'
-                    {print} 'What's more fun than that?'
+                    _ Este código é incorreto, ele utiliza contrações e faz o uso de apóstrofos _
+                    {print} 'Amigo, poderia me trazer um copo d'água? Gelada, se tiver.'
+                    {print} 'Claro, acho ainda que tem uma garrafa d'água cheia na geladeira.'
                     ```
             12:
                 story_text: |
-                    **All texts need to be in quotation marks**
-                    For this level on you will also have to use quotation marks when storing a text with `=`:
+                    **Todos os textos precisam estar dentro de aspas**
+                    Neste nível, você também terá de usar aspas ao guardar um texto usando `=`:
                 example_code: |
                     ```
                     name = 'Hedy the Robot'
@@ -3128,7 +3128,7 @@ adventures:
                     {print} superheroes {at} {random}
                     ```
                 story_text_3: |
-                    **All text after `{if}` comparisons need quotation marks too**
+                    **Todos os textos depois de comparações `{if}` também precisam de aspas**
                 example_code_3: |
                     ```
                     name = {ask} 'What is your name?'
@@ -3136,33 +3136,33 @@ adventures:
                         {print} 'Hi there!'
                     ```
                 story_text_4: |
-                    **Numbers don't need quotation marks**
-                    For numbers, you do not use quotation marks in the `=`:
+                    **Números não precisam de aspas**
+                    Com números, não se usa aspas depois de `=`:
                 example_code_4: |
                     ```
-                    score = 25
-                    {print} 'You got ' score
+                    pontuação = 25
+                    {print} 'Você conseguiu ' pontuação
                     ```
     random_command:
         name: '{random}'
-        default_save_name: random_command
-        description: introducing at random command
+        default_save_name: comando_aleatório
+        description: introduzindo o comando em aleatório
         levels:
             3:
                 story_text: |
-                    ## At random
-                    In this level you can make a list using the `{is}` command. You can let the computer choose a random item from that list. You do that with `{at} {random}`.
+                    ## Em aleatório
+                    Neste nível, você pode fazer uma lista usando o comando `{is}` e então deixar o computador escolher um item aleatório dessa lista. Para isso, se usa o `{at} {random}`.
                 example_code: |
                     ```
-                    animals {is} dogs, cats, kangaroos
-                    {print} animals {at} {random}
+                    animais {is} cães, gatos, cangurus
+                    {print} animais {at} {random}
                     ```
                 story_text_2: |
-                    You can use the `{at} {random}` command in a sentence as well.
+                    Você pode usar o comando `{at} {random}` em uma frase também.
                 example_code_2: |
                     ```
-                    food {is} sandwich, slice of pizza, salad, burrito
-                    {print} I am going to have a food {at} {random} for lunch.
+                    comida {is} hambúrguer, pizza, salada, burrito
+                    {print} Vou comer comida {at} {random} no almoço.
                     ```
                 story_text_3: |
                     ### Exercise
@@ -4320,8 +4320,10 @@ adventures:
                     Além disso, no nível 1 a tartaruga só podia virar para a esquerda ou para a direita. Isso é um pouco chato!
                     No nível 2, ela pode apontar o nariz em todas as direções.
 
-                    Use 90 para virar um quarto. Chamamos isso de graus. Uma volta completa é de 360 graus.
-                    Você pode fazer uma figura com este código? Talvez um triângulo ou um círculo?
+                    Use 90 para virar um quarto de volta. Chamamos isso de graus. Uma volta completa é de 360 graus.
+
+                    ### Exercício
+                    Você consegue fazer uma figura com este código? Talvez um triângulo ou um círculo?
                 example_code_2: |
                     ```
                     {print} Desenhando figuras
@@ -4346,7 +4348,7 @@ adventures:
                     No nível 4 você tem que usar aspas com `{print}` e `{ask}`. Também ao desenhar!
                 example_code: |
                     ```
-                    {print} 'Desenhando figuras'
+                    {print} _ Desenhando figuras _
                     ângulo {is} 90
                     {turn} ângulo
                     {forward} 25
@@ -4429,13 +4431,12 @@ adventures:
                 example_code: |
                     ```
                     ângulo = 90
-                    {repeat} 10 {times}
+                    {repeat} 4 {times}
                         {turn} ângulo
                         {forward} 50
                     ```
                 story_text_2: |
-                    Além disso, agora podemos melhorar o programa que desenha diferentes figuras.
-                    Você consegue descobrir até onde a tartaruga tem que virar aqui? Termine o código e você pode desenhar qualquer polígono que quiser!
+                    **Extra** Agora podemos melhorar o programa que desenha diversas figuras. Termine o código e você poderá desenhar qualquer polígono que quiser!
                 example_code_2: |
                     ```
                     ângulos = {ask} 'Quantos ângulos eu deve desenhar?'
@@ -4478,10 +4479,9 @@ adventures:
                 example_code: |
                     ```
                     {turn} 90
-                    distances = 10, 20, 30, 40, 50, 60
-                    {for} distance {in} distances
-                        {forward} distance
-                    ```
+                    distâncias = 10, 20, 30, 40, 50, 60
+                    {for} distância {in} distâncias
+                        {forward} distância
                     ```
             12:
                 story_text: |

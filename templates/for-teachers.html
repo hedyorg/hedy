@@ -142,8 +142,8 @@
                 <td class="text-center p-2 hidden sm:block">{{adventure.date}}</td>
                 <td class="text-center p-2">
                   <div class="flex justify-center text-blue-900">
-                    <button class="flex flex-col items-center mr-16"
-                    _="on click window.open('/adventure/{{ adventure.name }}?creator={{ adventure.creator }}', '_self')">
+                    <button class="flex flex-col items-center mr-16" data-cy="preview-{{adventure.name}}"
+                    _="on click window.open('/adventure/{{ adventure.name }}/{{ adventure.level }}?creator={{ adventure.creator }}', '_self')">
                       <span class="fas fa-eye block mb-1"></span>
                       <span>{{_('preview')}}</span>
                     </button>

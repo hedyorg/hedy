@@ -1,4 +1,3 @@
-import { HedyAceEditor } from "./ace-editor";
 import { runit, theGlobalDebugger,theGlobalSourcemap } from "./app";
 import { HedyEditor, Breakpoints } from "./editor";
 import  TRADUCTION_IMPORT  from '../../highlighting/highlighting-trad.json'
@@ -225,23 +224,6 @@ function initializeBreakpoints(editor: HedyEditor) {
       e.editor.session.clearBreakpoint(row);
     }
     e.stop();
-  });
-
-  /**
- * Render markers for all lines that have breakpoints
- * 
- * (Breakpoints mean "disabled lines" in Hedy).
- * */
-  editor.on('changeBreakpoint', function() {
-    if (theGlobalEditor instanceof HedyAceEditor) {
-      const breakpoints = theGlobalEditor.getDeactivatedLines();
-      const disabledLines = Object.entries(breakpoints)
-        .filter(([_, bpClass]) => bpClass === BP_DISABLED_LINE)
-        .map(([line, _]) => line)
-        .map(x => parseInt(x, 10));
-      
-      theGlobalEditor.strikethroughLines(disabledLines);
-    }
   });
 }
 
