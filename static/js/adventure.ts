@@ -83,7 +83,7 @@ function showWarningIfMultipleLevels(TRADUCTION: Map<string, string>) {
                 message = message.replace("{orig_keyword}", formatKeyword(tag.innerText))
                 let keywordList = ''
                 for (const keyword of coincidences) {
-                    keywordList = keywordList === '' ? formatKeyword(`{${keyword}}`) : keywordList + `, ${formatKeyword(`{${keyword}}`)}`
+                    keywordList = keywordList === '' ? formatKeyword(`${keyword}`) : keywordList + `, ${formatKeyword(`${keyword}`)}`
                 }
                 message = message.replace("{keyword_list}", keywordList)
                 p.innerHTML = message
