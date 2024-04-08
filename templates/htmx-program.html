@@ -28,10 +28,10 @@
         {% if public_profile and not second_teachers_programs %}
             {% set favourite_program = public_profile.favourite_program == program.id %}
             <div
+                id="favourite_program_container_{{ program.id }}"
+                data-starred="{{favourite_program}}"
                 class="ml-auto favourite_program_container {% if favourite_program %}text-yellow-400{% else %}text-white{% endif %} text-2xl{% if not program.public %} hidden{% endif %}">
                 <i class="fa fa-star p-4 bg-blue-300 rounded-full cursor-pointer hover:bg-blue-600"
-                    id="favourite_program_container_{{ program.id }}"
-                    data-starred="{{favourite_program}}"
                     onclick="hedyApp.set_favourite_program('{{ program.id }}', '{{_('favourite_confirm')}}', '{{_('unfavourite_confirm')}}');" aria-hidden="true"></i>
             </div>
         {% endif %}
