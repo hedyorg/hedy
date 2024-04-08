@@ -25,7 +25,7 @@ from flask import (Flask, Response, abort, after_this_request, g,
                    redirect, request, send_file, url_for, jsonify,
                    send_from_directory, session)
 from flask_babel import Babel, gettext
-from flask_commonmark import Commonmark
+from website.flask_commonmark import Commonmark
 from flask_compress import Compress
 from urllib.parse import quote_plus
 
@@ -76,7 +76,12 @@ app.json = JinjaCompatibleJsonProvider(app)
 # Use 5 minutes as a reasonable default for all files we load elsewise.
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = datetime.timedelta(minutes=5)
 
-babel = Babel(app)
+
+def get_locale():
+    return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
+
+
+babel = Babel(app, locale_selector=get_locale)
 
 jinja_partials.register_extensions(app)
 app.template_filter('tojson')(proper_tojson)
@@ -256,11 +261,6 @@ def load_customized_adventures(level, customizations, into_adventures):
             into_adventures.append(Adventure.from_teacher_adventure_database_row(db_row))
         if not a['from_teacher'] and (adv := builtin_adventure_map.get(a['name'])):
             into_adventures.append(adv)
-
-
-@babel.localeselector
-def get_locale():
-    return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
 
 
 cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
