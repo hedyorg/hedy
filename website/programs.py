@@ -74,6 +74,7 @@ class ProgramsLogic:
         full_adventures = hedy_content.Adventures("en").get_adventures(g.keyword_lang)
         teacher_adventures = self.db.get_teacher_adventures(current_user()["username"])
         is_modified = self.statistics.is_program_modified(updates, full_adventures, teacher_adventures)
+        # if modified, increase counter for modified programs
         updates['is_modified'] = is_modified
 
         if set_public is not None:
@@ -91,7 +92,8 @@ class ProgramsLogic:
         else:
             updates['id'] = uuid.uuid4().hex
             program = self.db.store_program(updates)
-            self.db.increase_user_program_count(user["username"])
+            if is_modified:
+                self.db.increase_user_program_count(user["username"])
 
         self.db.increase_user_save_count(user["username"])
         self.achievements.increase_count("saved")

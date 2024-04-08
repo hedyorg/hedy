@@ -1053,6 +1053,12 @@ def programs_page(user):
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
 
+    user = DATABASE.user_by_username(username)
+    if user.get('program_count'):
+        user_program_count = user.get('program_count')
+    else:
+        user_program_count = 0
+
     return render_template(
         'programs.html',
         programs=programs,
@@ -1065,7 +1071,8 @@ def programs_page(user):
         adventure_names=adventure_names,
         max_level=hedy.HEDY_MAX_LEVEL,
         next_page_url=next_page_url,
-        second_teachers_programs=False)
+        second_teachers_programs=False,
+        user_program_count=user_program_count)
 
 
 @app.route('/logs/query', methods=['POST'])
@@ -2647,6 +2654,13 @@ def public_user_page(username):
             'public_user_page',
             username=username, **dict(request.args,
                                       page=next_page_token)) if next_page_token else None
+        
+        user = DATABASE.user_by_username(username)
+        if user.get('program_count'):
+            user_program_count = user.get('program_count')
+        else:
+            user_program_count = 0
+
         return render_template(
             'public-page.html',
             user_info=user_public_info,
@@ -2659,7 +2673,8 @@ def public_user_page(username):
             certificate_message=certificate_message,
             next_page_url=next_page_url,
             sorted_level_programs=sorted_level_programs,
-            sorted_adventure_programs=sorted_adventure_programs
+            sorted_adventure_programs=sorted_adventure_programs,
+            user_program_count=user_program_count,
         )
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 

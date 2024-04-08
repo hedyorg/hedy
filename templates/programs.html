@@ -5,7 +5,7 @@
   {% if from_user %}<h2>{{from_user}}'s recent programs</h2>
   {% else %}<h2>{{_('recent')}}</h2>{% endif %}
   <div class="w-full mb-8 flex items-center justify-between" id="program_filter">
-        <div class="pt-2 pb-1 px-4 border rounded no-underline bg-blue-700 text-white font-slab leading-6 font-normal tracking-wide">{% if programs|length == 1%}{{programs|length}} {{_('program_saved')}}{% else %}{{programs|length}} {{_('programs_saved')}}{% endif %}</div>
+        <div class="pt-2 pb-1 px-4 border rounded no-underline bg-blue-700 text-white font-slab leading-6 font-normal tracking-wide">{% if user_program_count == 1%}{{user_program_count}} {{_('program_saved')}}{% else %}{{user_program_count}} {{_('amount_saved')}}{% endif %}</div>
     <form>
         <input type="hidden" name="page" value=""> <!-- Submitting the form resets the page -->
         <input type="hidden" name="user" value="{{ from_user }}">
