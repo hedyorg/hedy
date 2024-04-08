@@ -20,14 +20,8 @@ levels:
                 {echo} Super choix ! J'adore
     2:
         1:
-            story: |-
-                Tes amis et toi aller faire une soirée télé avec Hedy.
-                Demande à Hedy d'afficher le titre du film puis de vous souhaiter une bonne soirée !
-            code: |-
-                {print} C'est l'heure du film du soir sur TV Hedy !
-                film {is} Sonic le hérisson 2
-                {print} Vous pourrez voir film
-                {print} Amusez-vous bien !
+            story: "You and your friends are going to watch some Netflix.\nShow which movie you're about to watch and wish the viewers lot of fun!"
+            code: "{print} It is time for an evening of Netflix\nfilm {is} Sonic the Hedgehog 2\n{print} We're going to watch film\n{print} Have fun!"
         2:
             story: Ceci est la boutique en ligne d'un magasin de jouets. Crée un programme où les clients peuvent ajouter un jouet dans leur panier.
             code: |-
@@ -228,41 +222,26 @@ levels:
                 {print} "Bonne année !"
         2:
             story: |-
-                Create a program that tells us the final results of the science fair. Firstly define the variable contestants, then the variable place.
-                **Hint** Line 5 should be the sleep command, and you should end with saying congratulations.
+                Créé un programme qui nous donne le résultat final du concours scientifique. Commence par définir la variable `concurrents`, puis la variable `place`.
+                **Indice** La ligne 5 devrait être une commande `{sleep}`, et tu dois finir par des félicitations.
             code: |-
                 {print} "Et maintenant vont être révélé les résultats du concours scientifique"
-                contestants = Vivienne, Paul, Trixy, Bianca, Katya
+                concurrents = Vivienne, Paul, Trixy, Bianca, Katya
                 place = 5
-                {for} contestant {in} contestants
+                {for} concurrent {in} concurrents
                     {sleep} 2
-                    {print} 'On number ' place ' has ended... ' contestant
+                    {print} concurrent "termine à la place… " place
                     place = place - 1
-                {print} 'Congratulations!'
+                {print} "Félicitations !"
     12:
         1:
-            story: |-
-                Sing the song 'What shall we do with the drunken sailor'. In case you don't know it, the song goed like this:
-
-                What will we do with the drunken sailor
-                What will we do with the drunken sailor
-                What will we do with the drunken sailor
-                Early in the morning
-                Way hey and up she rises
-                Way hey and up she rises
-                Way hey and up she rises
-                Early in the morning
-            code: |-
-                verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'
-                {for} verse {in} verses
-                    {for} count {in} {range} 1 {to} 3
-                        {print} verse
-                    {print} 'Early in the morning'
+            story: "Sing the song 'What shall we do with the drunken sailor'. In case you don't know it, the song goed like this:\n\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nWhat will we do with the drunken sailor\nEarly in the morning\nWay hey and up she rises\nWay hey and up she rises\nWay hey and up she rises\nEarly in the morning"
+            code: "verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'\n{for} verse {in} verses\n    {for} count {in} {range} 1 {to} 3\n        {print} verse\n    {print} 'Early in the morning'"
         2:
-            story: Play a game of Twister with us! First define the variable people, then limbs, then colors.
+            story: Joue avec nous le jeux du Twister ! Commencer par définir la variable « personnes », puis « membres », et enfin « couleurs »
             code: |-
-                people = 'Jess', 'Nick', 'Winston'
-                limbs = 'left hand', 'left foot', 'right hand', 'right foot'
-                colors = 'red', 'blue', 'green', 'yellow'
-                {for} person {in} people
-                    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}
+                personnes = "Jess", "Nicolas", "Willy"
+                membres = "main gauche", "pied gauche", "main droite", "pied droit"
+                couleurs = "rouge", "bleu", "vert", "jaune"
+                {for} personne {in} personnes
+                    {print} personne ", " membres {at} {random} " sur " couleurs {at} {random}

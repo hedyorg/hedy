@@ -16,20 +16,22 @@ jobs:
     permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
       contents: write
+      # For commenting on a PR
+      pull-requests: write
 
     steps:
     - name: Print event (for debugging)
       run: cat $GITHUB_EVENT_PATH
 
     #----------------------------------------------------------------------
-    # Either use FELIENNE_GITHUB_ACCESS_TOKEN or GITHUB_TOKEN
+    # Either use HEDY_BOT_TOKEN or GITHUB_TOKEN
     # GITHUB_TOKEN can do fewer things (push to main, trigger new GHAs, etc).
     - name: Check for presence of GitHub Token
       id: secret
       run: |
-        if [ ! -z "${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}" ]; then
+        if [ ! -z "${{ secrets.HEDY_BOT_TOKEN }}" ]; then
           echo "We have a token!"
-          echo "secret=${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}" >> $GITHUB_OUTPUT
+          echo "secret=${{ secrets.HEDY_BOT_TOKEN }}" >> $GITHUB_OUTPUT
         else
           echo "We do not have a token"
           echo "secret=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_OUTPUT
@@ -40,7 +42,7 @@ jobs:
       run: |
         if [[  "${{ github.event_name }}" == "pull_request"* ]]; then
           echo "Pull Request"
-          echo "branch=${{ github.event.pull_request.head.ref }}" >> $GITHUB_OUTPUT
+          echo "branch=$PULL_REQUEST_HEAD_REF" >> $GITHUB_OUTPUT
           echo "repo=${{ github.event.pull_request.head.repo.full_name }}" >> $GITHUB_OUTPUT
         elif [[  "${{ github.event_name }}" == "push" ]]; then
           echo "Push Event"
@@ -50,6 +52,9 @@ jobs:
           echo "Unsupported event type!" >&2
           exit 1
         fi
+      env:
+        # Necessary to pass like this to avoid shell script injection
+        PULL_REQUEST_HEAD_REF: ${{ github.event.pull_request.head.ref }}
 
     #----------------------------------------------------------------------
     #  Checkout source
@@ -80,9 +85,39 @@ jobs:
         python3 -m pip install --upgrade pip
         pip3 install -r requirements.txt
 
+    #----------------------------------------------------------------------
+    #  Set up cache so that running snippet tests is somewhat cheap
+    - name: Calculate hedy cache key
+      run: "echo value=$(ls -1 hedy.py grammars/* | sort | xargs tail -n 99999999 | sha256sum | cut -f 1 -d ' ') >> $GITHUB_OUTPUT"
+      id: hedy_cache_key
+    - name: Cache hedy test runs
+      uses: actions/cache@v3
+      with:
+        path: .test-cache
+        key: "hedy-test-cache-${{ steps.hedy_cache_key.outputs.value }}"
+
     - name: Automatically update generated files
       run: |
         doit run _autopr
+
+    - name: Automatically update generated files (for Weblate PRs)
+      if: |
+        github.event.pull_request.user.login == 'weblate' ||
+        contains(github.event.pull_request.labels.*.name, 'translations')
+      run: |
+        doit run _autopr_weblate
+
+    - name: Prepare comment
+      if: ${{ hashFiles('snippet-report.md.tmp') != '' }}
+      run: |
+        echo 'The automatic script made changes' >> comment.md.tmp
+        cat snippet-report.md.tmp >> comment.md.tmp
+
+    - name: Post comment
+      if: ${{ hashFiles('comment.md.tmp') != '' && github.event_name == 'pull_request_target' }}
+      uses: thollander/actions-comment-pull-request@v2
+      with:
+        filePath: comment.md.tmp
 
     #----------------------------------------------------------------------
     #  Commit back

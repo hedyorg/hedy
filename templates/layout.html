@@ -18,7 +18,7 @@
     {% endif %}
     <noscript>Hedy requires Javascript to be enabled in your browser.</noscript>
     <div id="modal-mask" class="hidden fixed bg-black z-50 w-full h-full opacity-75"></div>
-    <div id="modal-content" class="hidden fixed z-50 p-12 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
+    <div id="modal-content" class="hidden fixed z-50 p-12 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style="max-height: 80vh; overflow-y: auto;">
        <div id="modal-confirm" class="hidden">
           <div id="modal-confirm-text" class="text-white mb-8 text-xl"></div>
           <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
@@ -39,49 +39,48 @@
 
         <div id="modal-feedback" class="hidden">                                                                                                                                                            
             <div id="modal-feedback-message" class="text-white mb-4 text-xl"></div>                                                                                                                            
-            <div class="mx-auto flex flex-col gap-4">                                                                                                                                                       
-                <div class="mt-4 flex flex-row justify-between gap-x-2">                                                                                                                                    
-                    <form                                                                                                                                                                                   
-                        hx-post="/feedback" 
-                        hx-swap="none"
-                        _="on htmx:beforeRequest
-                            set detail.requestConfig.parameters.page to window.location.pathname
-                          on hideFeedbackModal
-                            if detail.value then
-                                hedyApp.modal.notifySuccess('{{_('feedback_message_success')}}')
-                                detail.elt.reset()
-                                hedyApp.modal.hide()
-                            end"
-                    >
-                      <fieldset>
+              <div class="mt-4 flex w-full justify-center">                                                                                                                                    
+                  <form                                                                                                                                                                                   
+                      hx-post="/feedback" 
+                      hx-swap="none"
+                      _="on htmx:beforeRequest
+                          set detail.requestConfig.parameters.page to window.location.pathname
+                        on hideFeedbackModal
+                          if detail.value then
+                              hedyApp.modal.notifySuccess('{{_('feedback_message_success')}}')
+                              detail.elt.reset()
+                              hedyApp.modal.hide()
+                          end"
+                      class="w-full"
+                  >
+                    <fieldset>
 
-                        <textarea
-                        name="message"
-                        id="modal-feedback-input"
-                        type="text"
-                        required
-                        class="border border-green-400 rounded py-2 px-2 w-full h-32"></textarea>
+                      <textarea
+                      name="message"
+                      id="modal-feedback-input"
+                      type="text"
+                      required
+                      class="border border-green-400 rounded py-2 px-2 w-full h-48"></textarea>
 
-                        <div>
-                          <input type="radio" id="bug" required name="category" value="bug" />
-                          <label for="bug">{{_('bug')}}</label>
-                          <input type="radio" id="feature" required name="category" value="feature" />
-                          <label for="feature">{{_('feature')}}</label>
-                          <input type="radio" id="feedback" required name="category" value="feedback" />
-                          <label for="feedback">{{_('feedback')}}</label>
-                        </div>
-                        
-                        <div class="mt-4 flex flex-row justify-center">
-                            <button id="modal-feedback-submit"
-                                class="green-btn block m-4 w-40 pb-4 pt-4">{{_('ok')}}</button>
-                            <button type="button" id="modal-feedback-cancel"
-                              _="on click call hedyApp.modal.hide()"
-                              class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
-                        </div>
-                      </fieldset>
-                    </form>
-                </div>
-            </div>
+                      <div class="pt-4 text-white flex justify-center items-center gap-2">
+                        <input type="radio" id="bug" required name="category" value="bug" />
+                        <label for="bug">{{_('bug')}}</label>
+                        <input type="radio" id="feature" required name="category" value="feature" />
+                        <label for="feature">{{_('feature')}}</label>
+                        <input type="radio" id="feedback" required name="category" value="feedback" />
+                        <label for="feedback">{{_('feedback')}}</label>
+                      </div>
+                      
+                      <div class="mt-4 flex flex-row justify-center">
+                          <button id="modal-feedback-submit"
+                              class="green-btn block m-4 w-40 pb-4 pt-4">{{_('ok')}}</button>
+                          <button type="button" id="modal-feedback-cancel"
+                            _="on click call hedyApp.modal.hide()"
+                            class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
+                      </div>
+                    </fieldset>
+                  </form>
+              </div>
         </div>
 
        <div id="modal-copy" class="hidden">

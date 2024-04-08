@@ -376,6 +376,9 @@ adventures:
                     The player who gets closest to 21, without going over it, wins!
 
                     Have fun!
+
+                    ### Exercise
+                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
                 example_code: |
                     ```
                     {print} 'VINTE-E-UM'
@@ -431,9 +434,9 @@ adventures:
                             pontos = pontos + 10
                         {elif} carta_3 == 'Ás':
                             {if} pontos > 11:
-                                pontos = pontos + 11
-                            {else}:
                                 pontos = pontos + 1
+                            {else}:
+                                pontos = pontos + 11
                         {else}:
                             pontos = pontos + carta_3
                         {print} 'Você pegou uma carta extra: ' carta_3 ' (' pontos ' pontos)'
@@ -588,7 +591,7 @@ adventures:
                     ### Exercício 1
                     Vamos deixar o programa de prática um pouco mais difícil. O(a) jogador(a) agora terá de responder duas respostas corretamente. Preencha as lacunas para completar o programa.
 
-                    ### Exercício 2 Extra
+                    ### Exercício 2
                     Às vezes, cálculos podem ter mais de uma resposta correta. Por exemplo, 10 pode ser dividido tanto por 5 quanto por 2. Então a pergunta 'Que número divide o 10?' pode ser respondida por 2 ou por 5.
                     Faça uma pergunta de um cálculo que aceite mais de uma resposta correta, peça ao(à) jogador(a) para dar uma resposta e determine se ela está correta usando `{or}`.
                     Esvazie o campo de programação e crie a sua própria solução.
@@ -1253,7 +1256,7 @@ adventures:
             9:
                 story_text: |
                     Ótimo trabalho! Você alcançou mais um nível novo! No nível anterior, você aprendeu a usar múltiplas linhas de código nos comandos {if} e {repeat}. Mas você ainda não pôde combinar os dois...
-                    Boas notícias! Neste nível, você terá permissão de colocar um {if} dentro de outro {if}, ou dentro de um comando {repeat}.
+                    Boas notícias! Neste nível, você terá permissão de colocar um {if} dentro de outro {if}, ou dentro de um comando {repeat}. Colocar um bloco de código dentro de outro é chamado de "nesting" (aninhamento, em inglês).
                 example_code: |
                     ```
                     resposta = {ask} 'Você está pronto(a) para aprender algo novo?'
@@ -1315,7 +1318,7 @@ adventures:
                     ```
             14:
                 story_text: |
-                    Com o programa abaixo, você pode calcular sua média e ver se você passou em uma matéria da escola (nesse caso, com uma média de 6 ou mais).
+                    Com o código exemplo, você pode calcular sua média e ver se você passou em uma matéria da escola (nesse caso, com uma média de 6 ou mais).
                     Você pode ver que esse código é extremamente ineficiente, devido à linha 5 ser tão longa.
                     Todas as diferentes médias de 1 a 5 tiveram de ser programadas separadamente. Sorte a sua que, nesse nível, você irá aprender a fazer isso sem usar esse código gigante!
                 example_code: |
@@ -2023,12 +2026,12 @@ adventures:
                     Let Hedy decide randomly!
                 example_code: |
                     ```
-                    _ Escape from the haunted house!
-                    _ There are 3 doors in front of you...
-                    _ _ _ Which door do you choose?
-                    _ You picked door ... choice
-                    monsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    _ You see...
+                    _ Escape da casa mal-assombrada!
+                    _ Há 3 portas na sua frente...
+                    _ _ _ Qual delas você escolhe?
+                    _ Você escolheu a porta... escolha
+                    monstros _ um zumbi, um vampiro, NADA DE QUE VOCÊ CONSIGA ESCAPAR
+                    _ Você vê...
                     {sleep}
                     _ _ _ _
                     ```
@@ -2248,7 +2251,7 @@ adventures:
                     ```
             9:
                 story_text: |
-                    In this level you can also put an {if} command inside another {if} command.
+                    Neste nível, você também pode colocar um comando `{if}` dentro de outro comando `{if}`.
                 example_code: |
                     ```
                     continue = {ask} 'Do you want to continue?'
@@ -2268,14 +2271,14 @@ adventures:
         levels:
             5:
                 story_text: |
-                    ## Lists
-                    When we want to check if something is in a list, we can now use the `{in}` command.
-                    This code prints pretty! if you choose green or yellow, and meh otherwise.
+                    ## Listas
+                    A partir de agora, quando quisermos checar se algo está em uma lista, poderemos usar o comando `{in}`.
+                    Este código imprime 'bela!' se você escolhe verde ou amarelo, e 'meh' caso contrário.
                 example_code: |
                     ```
-                    pretty_colors {is} green, yellow
-                    favorite_color {is} {ask} 'What is your favorite color?'
-                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                    cores_belas {is} verde, amarelo
+                    cor_favorita {is} {ask} 'Qual é a sua cor favorita?'
+                    {if} cor_favorita {in} cores_belas {print} 'bela!'
                     {else} {print} 'meh'
                     ```
                 story_text_2: |
@@ -2619,10 +2622,10 @@ adventures:
                     ```
             12:
                 story_text: |
-                    Use functions in you songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle little star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
+                    Use functions in your songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle Little Star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
 
                     ### Exercise
-                    Finish the song of Twinkle Twinkle little star.
+                    Finish the song of Twinkle Twinkle Little Star.
                     Then look back at all the songs you've programmed in the levels before, can you make those codes better and shorter using functions too?
                 example_code: |
                     ```
@@ -2665,12 +2668,12 @@ adventures:
                     ```
             13:
                 story_text: |
-                    You can use a function with an argument for songs that have line taht are almost the same, but slightly different each time.
-                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, buyt each time they are followed by a different couple of notes.
+                    You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
+                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, but each time they are followed by a different couple of notes.
 
                     ### Exercise
                     Can you finish the song of Yankee Doodle?
-                    Can you think of another song to programm this way?
+                    Can you think of another song to program this way?
                 example_code: |
                     ```
                     {print} 'Yankee Doodle'
@@ -3005,12 +3008,12 @@ adventures:
     print_command:
         name: '{print}'
         default_save_name: imprima
-        description: Introduction print command
+        description: Introdução ao comando imprima
         levels:
             1:
                 story_text: |
-                    ## The print command
-                    You can print text to the screen using the `{print}` command.
+                    ## O comando imprima
+                    Você pode imprimir texto na tela usando o comando `{print}`.
                 example_code: |
                     ```
                     {print} Olá, programador(a)!
@@ -3025,26 +3028,28 @@ adventures:
                     Have fun!
                 example_code_2: |
                     ```
-                    _ Hello!
+                    _ Olá!
                     ```
             18:
                 story_text: |-
-                    We arrived at real Python code! That means we need to use parentheses with `{print}` and `{range}` from now on.
-                    It also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so.
+                    Chegamos ao código real de Python! Isso significa que teremos de usar parênteses com `{print}` e `{range}` de agora em diante.
+                    Também significa que você pode usar códigos Hedy deste nível em qualquer ambiente Python contanto que você use os comandos em inglês. Caso ainda não tenha tentado, você pode trocar o idioma de comandos no menu de comandos.
                 example_code: |
                     ```
-                    {print}('Hello!')
+                    {print}('Olá!')
                     {for} i {in} {range}(1, 10):
-                        {print}('This is line ', i)
+                        {print}('Essa é a linha ', i)
                     ```
-                story_text_2: If you want to print more than one item, you need to separate them by commas.
+                story_text_2: Se quiser imprimir mais de um item, terá de separá-los por vírgulas.
                 example_code_2: |
                     ```
-                    temperature = 25
-                    {print}('It is ', temperature, ' degrees outside')
+                    temperatura = 25
+                    {print}('Está ', temperatura, ' graus lá fora.')
                     ```
-
-                    {print}('My name is ', name)
+                    ```
+                    nome = 'Hedy'
+                    {print}('Meu nome é ', nome)
+                    ```
     quizmaster:
         name: Quizmaster
         default_save_name: Quizmaster
@@ -3076,38 +3081,38 @@ adventures:
                         {print} 'You belong to the B club'
                     ```
     quotation_marks:
-        name: '''quotation marks'''
-        default_save_name: quotation_marks
+        name: '''aspas'''
+        default_save_name: aspas
         description: Introdução às aspas
         levels:
             4:
                 story_text: |
-                    ## 'Quotation marks'
-                    In level 4 `{ask}` and `{print}` have changed.
-                    You must put text that you want to print between quotation marks.
-                    This is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.
-                    Most programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!
+                    ## 'Aspas'
+                    No nível 4, `{ask}` e `{print}` mudaram.
+                    Agora, quando quiser imprimir qualquer texto, terá de colocá-lo entre aspas.
+                    O bom disso é que agora você pode imprimir todas as palavras que quiser, mesmo as que você já usou para guardar algum valor usando `{is}`.
+                    A maioria das linguagens de programação também usa aspas para isso, então estamos ficando um passo mais perto da programação real!
                 example_code: |
                     ```
-                    {print} 'You need to use quotation marks from now on!'
-                    answer {is} {ask} 'What do we need to use from now on?'
-                    {print} 'We need to use ' answer
+                    {print} 'Você terá de usar aspas de agora em diante!'
+                    resposta {is} {ask} 'O que teremos de usar de agora em diante?'
+                    {print} 'Teremos de usar ' resposta
                     ```
                 story_text_2: |
-                    ## Contractions
-                    Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
-                    Make sure to remove those apostrophes and change the spelling to I am or What is.
-                    Check out the example code to see the wrong way of using apostrophes.
+                    ## Contrações
+                    Importante! Note que, agora que estamos usando aspas (simples), Hedy ficará confusa se você usar o apóstrofo em contrações como "d'água".
+                    Evite o uso de aspas simples ou apóstrofos dentro do texto, certifique-se de retirar as contrações (ao invés de "d'água", diga "de água").
+                    Confira o código exemplo para ver o código incorreto, em que se usa apóstrofos.
                 example_code_2: |
                     ```
-                    _ This is the wrong way of using apostrophes _
-                    {print} 'I'm babysitting my sister's kids'
-                    {print} 'What's more fun than that?'
+                    _ Este código é incorreto, ele utiliza contrações e faz o uso de apóstrofos _
+                    {print} 'Amigo, poderia me trazer um copo d'água? Gelada, se tiver.'
+                    {print} 'Claro, acho ainda que tem uma garrafa d'água cheia na geladeira.'
                     ```
             12:
                 story_text: |
-                    **All texts need to be in quotation marks**
-                    For this level on you will also have to use quotation marks when storing a text with `=`:
+                    **Todos os textos precisam estar dentro de aspas**
+                    Neste nível, você também terá de usar aspas ao guardar um texto usando `=`:
                 example_code: |
                     ```
                     name = 'Hedy the Robot'
@@ -3123,7 +3128,7 @@ adventures:
                     {print} superheroes {at} {random}
                     ```
                 story_text_3: |
-                    **All text after `{if}` comparisons need quotation marks too**
+                    **Todos os textos depois de comparações `{if}` também precisam de aspas**
                 example_code_3: |
                     ```
                     name = {ask} 'What is your name?'
@@ -3131,33 +3136,33 @@ adventures:
                         {print} 'Hi there!'
                     ```
                 story_text_4: |
-                    **Numbers don't need quotation marks**
-                    For numbers, you do not use quotation marks in the `=`:
+                    **Números não precisam de aspas**
+                    Com números, não se usa aspas depois de `=`:
                 example_code_4: |
                     ```
-                    score = 25
-                    {print} 'You got ' score
+                    pontuação = 25
+                    {print} 'Você conseguiu ' pontuação
                     ```
     random_command:
         name: '{random}'
-        default_save_name: random_command
-        description: introducing at random command
+        default_save_name: comando_aleatório
+        description: introduzindo o comando em aleatório
         levels:
             3:
                 story_text: |
-                    ## At random
-                    In this level you can make a list using the `{is}` command. You can let the computer choose a random item from that list. You do that with `{at} {random}`.
+                    ## Em aleatório
+                    Neste nível, você pode fazer uma lista usando o comando `{is}` e então deixar o computador escolher um item aleatório dessa lista. Para isso, se usa o `{at} {random}`.
                 example_code: |
                     ```
-                    animals {is} dogs, cats, kangaroos
-                    {print} animals {at} {random}
+                    animais {is} cães, gatos, cangurus
+                    {print} animais {at} {random}
                     ```
                 story_text_2: |
-                    You can use the `{at} {random}` command in a sentence as well.
+                    Você pode usar o comando `{at} {random}` em uma frase também.
                 example_code_2: |
                     ```
-                    food {is} sandwich, slice of pizza, salad, burrito
-                    {print} I am going to have a food {at} {random} for lunch.
+                    comida {is} hambúrguer, pizza, salada, burrito
+                    {print} Vou comer comida {at} {random} no almoço.
                     ```
                 story_text_3: |
                     ### Exercise
@@ -3972,6 +3977,33 @@ adventures:
                     {print} 'Like a diamond in the sky'
                     {call} _
                     ```
+            16:
+                story_text: |
+                    ### Exercise
+                    Finish the nursery rhyme!
+                example_code: |
+                    ```
+                    number = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+                    object = ['on his drum', 'on his shoe', 'on his knee', 'on his door', 'on his hive', 'on his sticks', 'up in heaven', 'on his gate', 'on his vine', 'once again']
+
+                    _
+                        {print} 'This old man'
+                        {print} 'He played ' _
+                        {print} 'He played knick-knack ' _
+                        {print} 'With a knick-knack paddywhack'
+                        {print} 'Give the dog a bone'
+                        {print} 'This old man came rolling home'
+                        {sleep} 8
+                        {clear}
+                    ```
+                story_text_2: |
+                    ### Exersice 2
+                    Now create your own code for the nursery rhyme 'The wheels on the bus' on the same way!
+                example_code_2: |
+                    ```
+                    object = ['wheels', 'doors', _]
+                    movement = [ 'round and round', 'open and shut', _]
+                    ```
     tic:
         name: Jogo da velha
         default_save_name: Tic
@@ -4288,8 +4320,10 @@ adventures:
                     Além disso, no nível 1 a tartaruga só podia virar para a esquerda ou para a direita. Isso é um pouco chato!
                     No nível 2, ela pode apontar o nariz em todas as direções.
 
-                    Use 90 para virar um quarto. Chamamos isso de graus. Uma volta completa é de 360 graus.
-                    Você pode fazer uma figura com este código? Talvez um triângulo ou um círculo?
+                    Use 90 para virar um quarto de volta. Chamamos isso de graus. Uma volta completa é de 360 graus.
+
+                    ### Exercício
+                    Você consegue fazer uma figura com este código? Talvez um triângulo ou um círculo?
                 example_code_2: |
                     ```
                     {print} Desenhando figuras
@@ -4314,7 +4348,7 @@ adventures:
                     No nível 4 você tem que usar aspas com `{print}` e `{ask}`. Também ao desenhar!
                 example_code: |
                     ```
-                    {print} 'Desenhando figuras'
+                    {print} _ Desenhando figuras _
                     ângulo {is} 90
                     {turn} ângulo
                     {forward} 25
@@ -4397,13 +4431,12 @@ adventures:
                 example_code: |
                     ```
                     ângulo = 90
-                    {repeat} 10 {times}
+                    {repeat} 4 {times}
                         {turn} ângulo
                         {forward} 50
                     ```
                 story_text_2: |
-                    Além disso, agora podemos melhorar o programa que desenha diferentes figuras.
-                    Você consegue descobrir até onde a tartaruga tem que virar aqui? Termine o código e você pode desenhar qualquer polígono que quiser!
+                    **Extra** Agora podemos melhorar o programa que desenha diversas figuras. Termine o código e você poderá desenhar qualquer polígono que quiser!
                 example_code_2: |
                     ```
                     ângulos = {ask} 'Quantos ângulos eu deve desenhar?'
@@ -4446,10 +4479,9 @@ adventures:
                 example_code: |
                     ```
                     {turn} 90
-                    distances = 10, 20, 30, 40, 50, 60
-                    {for} distance {in} distances
-                        {forward} distance
-                    ```
+                    distâncias = 10, 20, 30, 40, 50, 60
+                    {for} distância {in} distâncias
+                        {forward} distância
                     ```
             12:
                 story_text: |
@@ -4542,7 +4574,7 @@ adventures:
                 example_code: |
                     Hint:
                     ```
-                    chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?
+                    chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?'
                     {if} _
                     ```
             6:
@@ -4682,12 +4714,10 @@ adventures:
                 story_text: |
                     ### Exercise
                     Recreate the drawings with the turtle!
+                    Hint: Bracelet designing program. Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
+                    </div>
+                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
                 example_code: |
-                    Hint: Bracelet designing program
-
-
-                    Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
-
                     ```
                     {define} draw_a_square
                     _

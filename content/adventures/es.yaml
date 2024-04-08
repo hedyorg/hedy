@@ -18,7 +18,7 @@ adventures:
                     {print} El protagonista camina por un bosque
                     {echo} Está bastante asustado
                     {print} Por todos lados se oyen extraños ruidos
-                    {print} Él tiene miedo de que éste sea un bosque encantado
+                    {print} Tiene miedo de que éste sea un bosque encantado
                     ```
                 story_text_2: |
                     ### ejercicio
@@ -58,13 +58,13 @@ adventures:
                 example_code: |
                     ```
                     animales {is} 🦔, 🐿, 🦉, 🦇
-                    {print} Él ahora escucha el ruido de un animales {at} {random}
+                    {print} Ahora escucha el ruido de un animales {at} {random}
                     ```
                 story_text_2: |
                     El comando `{add}` puede ser útil en tu historia.
                 example_code_2: |
                     ```
-                    {print} Él escucha un sonido
+                    {print} Se escucha un sonido
                     animales {is} 🐿, 🦔, 🦇, 🦉
                     animal {is} {ask} ¿Qué piensas qué es?
                     {add} animal {to_list} animales
@@ -204,7 +204,7 @@ adventures:
                 example_code: |
                     ```
                     nombre = 'La Reina de Inglaterra'
-                    {print} nombre ' estaba comiendo un pedazo de pastel, cuando de pronto...'
+                    {print} nombre ' estaba comiendo un pedazo de pastel, cuando de pronto…'
                     ```
             13:
                 story_text: |
@@ -403,6 +403,9 @@ adventures:
                     ¡El jugador que se acerque mas a 21 sin pasarse gana!
 
                     ¡Buena suerte!
+
+                    ### Exercise
+                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -458,9 +461,9 @@ adventures:
                             puntos = puntos + 10
                         {elif} carta_3 == 'As':
                             {if} puntos > 11:
-                                puntos = puntos + 11
-                            {else}:
                                 puntos = puntos + 1
+                            {else}:
+                                puntos = puntos + 11
                         {else}:
                             puntos = puntos + carta_3
                         {print} 'Tienes un' carta_3 ' extra (' puntos ' puntos)'
@@ -528,14 +531,14 @@ adventures:
                     ```
             9:
                 story_text: |
-                    En el nivel 6 creaste una calculadora, en este nivel puedes ampliar el código para que haga varias preguntas.
+                    En el nivel anterior creaste una calculadora, en este nivel puedes ampliar el código para que haga varias preguntas.
 
                     ### Ejercicio 1
-                    ¿Puedes completar la línea 1' para hacer que el programa funcione?
+                    ¿Puedes completar la línea 10 para hacer que el código funcione?
 
                     ### Ejercicio 2
-                    Dale al jugador información cuando introduzcan una pregunta acertada o errónea. Para conseguir eso, amplía tu programa con un `{else}`.
-                example_code: "```\npuntuación = 0\n{repeat} 10 {times}\n    números = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    número1 = números {at} {random}\n    número2 = números {at} {random}\n    respuesta_correcta = numero1 * numero2\n    {print} '¿Cuánto es 'número1' multiplicado por 'número2'?'\n    respuesta = {ask} 'Escriba su respuesta aquí...'\n    {print} 'Tu respuesta es' respuesta\n    {if}_{is}_ \n        puntuación = puntuación + 1\n{print} '¡Buen trabajo! Tu puntuación es... 'puntuación' sobre 10!'\n```\n"
+                    Dale al jugador información cuando introduzcan una pregunta, por ejemplo `{print} '¡Correcto!'` o `{print} '¡Error! la respuesta correcta era ' respuesta_correcta`
+                example_code: "```\npuntuación = 0\n{repeat} 10 {times}\n    números = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    número_1 = números {at} {random}\n    número_2 = números {at} {random}\n    respuesta_correcta = numero_1 * numero_2\n    {print} '¿Cuánto es 'número_1' multiplicado por 'número_2'?'\n    respuesta = {ask} 'Escriba su respuesta aquí...'\n    {print} 'Tu respuesta es ' respuesta\n    {if}_{is}_ \n        puntuación = puntuación + 1\n{print} '¡Buen trabajo! Tu puntuación es... 'puntuación' sobre 10!'\n```\n"
             10:
                 story_text: |
                     This calculator game helps you practise your tables of multiplication!
@@ -567,10 +570,10 @@ adventures:
                     ```
             11:
                 story_text: |
-                    Con `{for}` puedes simplificar programas de practica de las tablas de multiplicación.
+                    Con `{for}` puedes simplificar programas de práctica de las tablas de multiplicación.
 
                     ### Ejercicio 1
-                    Mejora el código de ejemplo para que
+                    Mejora el código de ejemplo para que imprima una tabla de multiplicación: <br> "1 veces 10 es 10", "2 veces 10 es 20", etc.
 
                     ### Ejercicio 2
                     Vuelve al código de multiplicación del nivel 10, y modifícalo para que use un `{for}` y `{range}`.
@@ -603,7 +606,7 @@ adventures:
                     ### Ejercicio 1
                     Hagamos el programa de práctica un poco más difícil. Ahora el jugador tiene que responder correctamente a dos preguntas. Rellena los espacios en blanco para completar el programa.
 
-                    ### Ejercicio 2 Extra
+                    ### Ejercicio 2
                     A veces, los cálculos tienen varias respuestas correctas. Por ejemplo, 10 se puede dividir entre 5 y entre 2. Así que la pregunta "¿Qué número divide a 10?" se puede responder entre 2 y entre 5.
                     Pide un cálculo que tenga múltiples respuestas correctas, pide al jugador que te responda y determine si es correcto utilizando `{or}`.
                     Vacía el campo de programación y crea tu propia solución.
@@ -1840,42 +1843,43 @@ adventures:
                     {print} fortunes {at} {random}
                     ```
     functions:
-        name: functions
-        default_save_name: functions
-        description: functions
+        name: funciones
+        default_save_name: funciones
+        description: funciones
         levels:
             12:
                 story_text: |
-                    In this level you'll learn how to use **functions**. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again.
-                    To create a function, use `{define}` and give the function a name. Then put all the lines you want in the function in a indented block under the `{define}` line.
-                    Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
+                    En este nivel aprenderás a usar **funciones**. Una función es un bloque de código que se puede utilizar fácilmente varias veces. Usar funciones nos ayuda a organizar piezas de código que podamos usar de forma repetida.
 
-                    Now, whenever we need that block of code, we just use <code>{call}</code> with the function's name to call it up! We don't have to type that block of code again.
+                    Para crear una función, usa `{define}` que da a la función un nombre. Luego pon todas las líneas que desees en la función en un bloque con sangría bajo la línea `{define}`.
+                    Deja una línea vacía en tu código para que parezca agradable y limpio. Y ya está, ¡Gran trabajo! ¡Has creado una función!
 
-                    Check out this example code of a game of Twister. The function 'turn' contains a block of code that chooses which limb should go where.
+                    ¡Ahora, cuando necesitemos ese bloque de código, solo usamos <code>{call}</code> con el nombre de la función para llamarlo! No tenemos que volver a escribir ese bloque de código.
 
-                    ### Exercise
-                    Finish this code by setting the 2 variables chosen_limb and chosen_color.
-                    Then, choose how many times you want to call the function to give the twister spinner a spin.
+                    Echa un vistazo a este código de ejemplo de un juego de Twister. La función 'turno' contiene un bloque de código que elige qué miembro debe ir donde.
 
-                    ### Exercise 2
-                    Improve your code by adding a variable called 'people'. Use the variable to give all the players their own command in the game.
-                    For example: 'Ahmed, right hand on green' or 'Jessica, left foot on yellow'.
+                    ### Ejercicio
+                    Termina este código estableciendo las 2 variables miembro_escogido y color_escogido.
+                    Luego, elige cuántas veces deseas llamar a la función para darle vueltas a la ruleta.
+
+                    ### Ejercicio 2
+                    Mejora tu código añadiendo una variable llamada "personas". Utiliza la variable para dar a todos los jugadores su propio comando en el juego.
+                    Por ejemplo: 'Amed, derecha en verde' o 'Jessica, pie izquierdo en amarillo'.
                 example_code: |
                     ```
-                    sides = 'left', 'right'
-                    limbs = 'hand', 'foot'
-                    colors = 'red', 'blue', 'green', 'yellow'
+                    lados = 'derecha', 'izquierda'
+                    mimebros = 'mano', 'pie'
+                    colores = 'rojo', 'azul', 'verde', 'amarillo'
 
-                    {define} turn
-                        chosen_side = sides {at} {random}
-                        chosen_limb = limbs _
-                        chosen_color = colors _
-                        {print} chosen_side ' ' chosen_limb ' on ' chosen_color
+                    {define} turno
+                        lado_escogido = sides {at} {random}
+                        miembro_escogido = limbs _
+                        color_escogido = colors _
+                        {print} lado_escogido' ' miembro_escogido' en ' color_escogido
 
-                    {print} 'Lets play a game of Twister!'
+                    {print} 'Vamos a jugar al Twister!'
                     {for} i {in} {range} 1 to _
-                        {call} turn
+                        {call} turno
                         {sleep} 2
                     ```
             13:
@@ -2670,10 +2674,10 @@ adventures:
                     ```
             12:
                 story_text: |
-                    Use functions in you songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle little star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
+                    Use functions in your songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle Little Star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
 
                     ### Exercise
-                    Finish the song of Twinkle Twinkle little star.
+                    Finish the song of Twinkle Twinkle Little Star.
                     Then look back at all the songs you've programmed in the levels before, can you make those codes better and shorter using functions too?
                 example_code: |
                     ```
@@ -2716,12 +2720,12 @@ adventures:
                     ```
             13:
                 story_text: |
-                    You can use a function with an argument for songs that have line taht are almost the same, but slightly different each time.
-                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, buyt each time they are followed by a different couple of notes.
+                    You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
+                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, but each time they are followed by a different couple of notes.
 
                     ### Exercise
                     Can you finish the song of Yankee Doodle?
-                    Can you think of another song to programm this way?
+                    Can you think of another song to program this way?
                 example_code: |
                     ```
                     {print} 'Yankee Doodle'
@@ -3896,7 +3900,7 @@ adventures:
                     {sleep}
                     ```
                 story_text_2: |
-                    Esta canción de niños cuenta desde 5 monos hasta un mono.
+                    Esta canción de niños cuenta desde 5 elefantes hasta un elefante.
                     ¡Si copias las líneas 2 a 7 debajo del código, puedes cantar toda la canción!
                 example_code_2: |
                     ```
@@ -3961,17 +3965,17 @@ adventures:
                     ```
             11:
                 story_text: |
-                    En este nivel, podrás usar el comando `{for}` con `{range}` para crear canciones que utilizan cuentas, como cinco pequeños monitos.
+                    En este nivel, podrás usar el comando `{for}` con `{range}` para crear canciones que utilizan cuentas, como cinco monos.
 
                     ### Ejercicio 1
                     ¡Rellena los espacios y haz que el código funcione! Si no recuerdas la letra de la canción, ¡búscala!
 
                     ### Ejercicio 2
-                    La ultima línea de la canción es diferente de las demás. Escribe esta línea dentro de `{for}`, y usa `{if}` para hacer que funcione correctamente.
+                    La última línea de la canción es diferente de las demás. Escribe esta línea dentro de `{for}`, y usa `{if}` para hacer que funcione correctamente.
                 example_code: |
                     ```
-                    _monos _ _ _ 5 _ 1
-                        {print} i ' pequeños monitos saltando en la cama'
+                    _ monos _ _ _ 5 _ 1
+                        {print} monos ' pequeños monitos saltando en la cama.'
                         _
                     ```
             12:
@@ -4074,6 +4078,33 @@ adventures:
                     {print} 'Up above the world so high'
                     {print} 'Like a diamond in the sky'
                     {call} _
+                    ```
+            16:
+                story_text: |
+                    ### Exercise
+                    Finish the nursery rhyme!
+                example_code: |
+                    ```
+                    number = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+                    object = ['on his drum', 'on his shoe', 'on his knee', 'on his door', 'on his hive', 'on his sticks', 'up in heaven', 'on his gate', 'on his vine', 'once again']
+
+                    _
+                        {print} 'This old man'
+                        {print} 'He played ' _
+                        {print} 'He played knick-knack ' _
+                        {print} 'With a knick-knack paddywhack'
+                        {print} 'Give the dog a bone'
+                        {print} 'This old man came rolling home'
+                        {sleep} 8
+                        {clear}
+                    ```
+                story_text_2: |
+                    ### Exersice 2
+                    Now create your own code for the nursery rhyme 'The wheels on the bus' on the same way!
+                example_code_2: |
+                    ```
+                    object = ['wheels', 'doors', _]
+                    movement = [ 'round and round', 'open and shut', _]
                     ```
     tic:
         name: Tres en raya
@@ -4614,7 +4645,7 @@ adventures:
                 example_code: |
                     Pista:
                     ```
-                    letra_elegida {is} {ask} '¿Qué letra te gustaría ver? F, E o L?
+                    letra_elegida {is} {ask} '¿Qué letra te gustaría ver? F, E o L?'
                     {if} _
                     ```
             6:
@@ -4754,6 +4785,9 @@ adventures:
                 story_text: |
                     ### Ejercicio
                     ¡Vuelve a crear los dibujos con la tortuga!
+
+                    </div>
+                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
                 example_code: |
                     Sugerencia: Programa para diseñar pulsera
 

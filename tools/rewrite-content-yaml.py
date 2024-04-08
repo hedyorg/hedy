@@ -90,12 +90,7 @@ def main():
     filenames = sys.argv[1:]
 
     with Pool() as p:
-        changes = p.map(rewrite_yaml_file, filenames)
-
-    if any(changes):
-        sys.exit(1)
-    else:
-        sys.exit(0)
+        p.map(rewrite_yaml_file, filenames)
 
 
 def rewrite_yaml_file(fn):
@@ -146,11 +141,28 @@ def custom_rewrite_data(obj, strip_strings):
         for key in sorted(obj.keys()):
             copy[key] = custom_rewrite_data(obj[key], strip_strings)
         return copy
-    elif isinstance(obj, list):
+    if isinstance(obj, list):
         # with lists simply recurse into the directory structure
         for (i, el) in enumerate(obj):
             obj[i] = custom_rewrite_data(el, strip_strings)
         return obj
+    if isinstance(obj, str):
+        # No string ever needs to have leading whitespace, and it messes
+        # with rendering and parsing.
+        #
+        # We could talk about trailing whitespace, but the lack of a trailing
+        # `\n` forces the block indicator to `|-` instead of `|`, and it ultimately
+        # doesn't matter that much.
+        #
+        # We could also force all (multiline) strings to be `|` blocks here if
+        # we wanted to. For now, we're just messing with things that cause problems.
+        #
+        # Only replace the original object if we have a change, to not
+        # destroy YAML metadata that may be attached to the string.
+        stripped = obj.lstrip()
+        clazz = type(obj)
+
+        return clazz(stripped) if obj != stripped else obj
     # everything else we leave alone
     return obj
 

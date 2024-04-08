@@ -230,8 +230,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
     12: [
         'default',
         'maths',
-        'functions',
         'quotation_marks',
+        'functions',
         'story',
         'fortune',
         'music',
@@ -297,6 +297,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'random_command',
         'haunted',
         'songs',
+        'songs_2',
         'language',
         'debugging',
         'quiz',
@@ -553,27 +554,28 @@ class Adventures(StructuredDataFile):
         for item in programs:
             programs_by_level.append(
                 {'level': item['level'],
-                 'adventure_name': item.get('adventure_name'),
+                 'adventure_name': item.get('adventure_name', item['name']),
                  }
             )
 
         sort = {}
+
         for program in programs_by_level:
             if program['level'] in sort:
                 sort[program['level']].append(adventure_names.get(program['adventure_name'], program['adventure_name']))
             else:
                 sort[program['level']] = [adventure_names.get(program['adventure_name'], program['adventure_name'])]
         for level, adventures in sort.copy().items():
-            sort[level] = sorted(adventures, key=lambda s: s.lower())
+            sort[level] = sorted(adventures, key=lambda s: s.lower() if s else "")
 
         return dict(sorted(sort.items(), key=lambda item: item[0]))
 
     def get_sorted_adventure_programs(self, programs, adventure_names):
         programs_by_adventure = []
         for item in programs:
-            if item.get('adventure_name') != '':
+            if item.get('adventure_name'):
                 programs_by_adventure.append(
-                    {'adventure_name': adventure_names.get(item.get('adventure_name'), item.get('adventure_name')),
+                    {'adventure_name': adventure_names.get(item.get('adventure_name')) or item.get('adventure_name'),
                      'level': item['level'],
                      }
                 )
@@ -588,7 +590,7 @@ class Adventures(StructuredDataFile):
             sort[adventure] = sorted(levels, key=lambda item: item)
 
         return {key: sort[key]
-                for key in sorted(sort.keys(), key=lambda s: s.lower())}
+                for key in sorted(sort.keys(), key=lambda s: s.lower() if s else "")}
 
     def get_adventure_names(self, keyword_lang):
         return {aid: adv['name'] for aid, adv in deep_translate_keywords(

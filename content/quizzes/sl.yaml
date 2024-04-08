@@ -1,0 +1,2543 @@
+levels:
+    1:
+        1:
+            question_text: Kako se imenuje ta programski jezik?
+            mp_choice_options:
+            -   option: Hedy
+                feedback: Dobro opravljeno delo!
+            -   option: Heddy
+                feedback: Ne tega!
+            -   option: Haydie
+                feedback: Ne tega!
+            -   option: Heidi
+                feedback: Ne tega!
+            hint: Poimenovan je po igralki in inovatorki Hedy Lamarr.
+            correct_answer: A
+            question_score: '10'
+        2:
+            question_text: Kako je treba izpolniti na prazna polja, da se bo izpisalo besedilo "Pozdravljeni!"?
+            code: _ Hello!
+            mp_choice_options:
+            -   option: '`{echo}`'
+                feedback: '`{echo}` repeats a given answer.'
+            -   option: '`{print}`'
+                feedback: Pravilno!
+            -   option: '`hello`'
+                feedback: Živijo ni ukaz.
+            -   option: '`{ask}`'
+                feedback: Z  ukazom `{ask}`, lahko kaj vprašate.
+            hint: _ Pozdravljen svet!
+            correct_answer: B
+            question_score: '10'
+        3:
+            question_text: Kako nekoga vprašate, katera je njegova najljubša barva?
+            mp_choice_options:
+            -   option: "```\n{print} Katera je vaša najljubša barva?\n```"
+                feedback: "`{print}` prints text, but it doesn't ask questions."
+            -   option: "```\n{ask} {print} What is your favorite color?\n```"
+                feedback: You only need one command, not two.
+            -   option: "```\n{ask} What is your favorite color?\n```"
+                feedback: Odlično!
+            -   option: "```\n{echo} What is your favorite color?\n```"
+                feedback: '`{echo}` repeats your answer back to you.'
+            hint: You can ask something with the `{ask}` command
+            correct_answer: C
+            question_score: '10'
+        4:
+            question_text: What is wrong with this code?
+            code: "Hi Im Hedy!\n{ask} Who are you?\n{echo} Hi..."
+            mp_choice_options:
+            -   option: '`{print}` in line 1 is missing.'
+                feedback: Pravilno!
+            -   option: The command in line 2 is spelled wrong.
+                feedback: The command is spelled correctly.
+            -   option: "`{echo}` isn't a command."
+                feedback: "`{echo}` is a command, there's another mistake."
+            -   option: Nothing! This is a perfect code!
+                feedback: Wrong, look carefully!
+            hint: Vrstica 1 se ne zdi v redu
+            correct_answer: A
+            question_score: '10'
+        5:
+            question_text: Which command is missing in line 2?
+            code: "{ask} What is your favorite pet?\n_ So your favorite pet is..."
+            mp_choice_options:
+            -   option: '`{print}`'
+                feedback: No, you would like the answer to be repeated back to you.
+            -   option: '`Hedy`'
+                feedback: Hedy isn't a command.
+            -   option: '`{ask}`'
+                feedback: With `{ask}` you can ask a question.
+            -   option: '`{echo}`'
+                feedback: Right on!
+            hint: You want to see the answer at the end of line 2...
+            correct_answer: D
+            question_score: '10'
+        6:
+            question_text: What's wrong with this code?
+            code: "{print} Hi im Hedy!\n{print} Which football team do you support?\n{echo} You support...\n{print} Cool! Me too!"
+            mp_choice_options:
+            -   option: In line 1 `{print}` should be replaced with `{ask}`.
+                feedback: '`{print}` in line 1 is correct.'
+            -   option: In line 2, `{print}` should be replaced with `{ask}`.
+                feedback: Great! You paid attention!
+            -   option: Line 3 has to begin with `{print}` instead of `{echo}`.
+                feedback: '`{echo}` is correct.'
+            -   option: In line 4, `{print}` is spelled wrong.
+                feedback: No, there is a mistake somewhere else
+            hint: Preveri `{print}` ukaze.
+            correct_answer: B
+            question_score: '10'
+        7:
+            question_text: What's wrong with this code?
+            code: "{print} Welcome at Hedys restaurant!\n{ask} What would you like to eat?\n{echo} So you want to order ...\n{print} Coming right up! Enjoy!"
+            mp_choice_options:
+            -   option: In line 1 `{print}` needs to be replaced with `{ask}`
+                feedback: Are you sure something is wrong?
+            -   option: In line 1 `{print}` needs to be replaced with `{echo}`
+                feedback: Are you sure something's wrong?
+            -   option: In line 3 `{echo}` needs to be replaced with `{print}`
+                feedback: Are you sure something is wrong?
+            -   option: Nothing! This is a perfect code!
+                feedback: Pravilno!
+            hint: Check the code line by line
+            correct_answer: D
+            question_score: '10'
+        8:
+            question_text: How do you use the `{echo}` command?
+            mp_choice_options:
+            -   option: You can use it to `{ask}` a question.
+                feedback: That's what `{ask}` is for!
+            -   option: You can use it exactly the same way as `{print}`.
+                feedback: That's what `{print}` is for!
+            -   option: You can use it to repeat an answer.
+                feedback: Good job!
+            -   option: You can use it to make text disappear.
+                feedback: That's not right...
+            hint: '`{echo}` is used after an `{ask}` command.'
+            correct_answer: C
+            question_score: '10'
+        9:
+            question_text: What's wrong with this code?
+            code: "{print} Hello!\n{print} How are you doing?\n{echo} So you are doing..."
+            mp_choice_options:
+            -   option: '`{print}` in line 1 should be `{ask}`'
+                feedback: No, `{print}` is right. Where is the question being asked?
+            -   option: '`{print}` in line 2 should be `{ask}`'
+                feedback: Super!
+            -   option: '`{echo}` in line 3 should be `{ask}`'
+                feedback: No, `{echo}` is right. Where is the question being asked?
+            -   option: Nothing. This is a perfect code!
+                feedback: Look carefully for the mistake...
+            hint: '`{ask}` allows you to ask a question'
+            correct_answer: B
+            question_score: '10'
+        10:
+            question_text: Which output will be in your output screen after you've run this code?
+            code: "{ask} Are you ready to go to level 2?\n{echo}\n{echo}"
+            mp_choice_options:
+            -   option: Are you ready to go to level 2?
+                feedback: There are two `{echo}` commands
+            -   option: "Yes!\nYes!"
+                feedback: Great job!
+            -   option: Da!
+                feedback: There are two `{echo}` commands
+            -   option: "Are you ready to go to level 2?\nYes!"
+                feedback: There are two `{echo}` commands
+            hint: Pa pojdimo!
+            correct_answer: B
+            question_score: '10'
+    2:
+        1:
+            question_text: Which statement is true?
+            mp_choice_options:
+            -   option: You can use the `{print}` command to ask questions.
+                feedback: That is what `{ask}` is for
+            -   option: You can use the `{ask}` command to echo answers.
+                feedback: That is not true
+            -   option: With the `{print}` command you can make text appear
+                feedback: Dobro
+            -   option: With the `{sleep}` command, you can remove text from the screen.
+                feedback: That's not how `{sleep}` works.
+            hint: '`{print}` still works the same way as in level 1'
+            correct_answer: C
+            question_score: '10'
+        2:
+            question_text: Which code is correct?
+            mp_choice_options:
+            -   option: "```\nname {is} {ask} What is your name?\n```"
+                feedback: Super!
+            -   option: "```\n{ask} {is} name What is your name\n```"
+                feedback: The words are right, the order is not!
+            -   option: "```\n{ask} What is your name?\n```"
+                feedback: This worked in level 1, but in level 2 and up it works differently.
+            -   option: "```\n{ask} What is your name? {is} name\n```"
+                feedback: The words are right, the order isn't!
+            hint: "`{ask}` doesn't work like in level 1"
+            correct_answer: A
+            question_score: '10'
+        3:
+            question_text: What appears on your output screen when you run this code?
+            code: "name {is} Marleen\n{print} name goes to the market and she buys an apple."
+            mp_choice_options:
+            -   option: name goes to the market and she buys an apple.
+                feedback: The word name is replaced with Marleen
+            -   option: Marleen goes to the market.
+                feedback: The second part of the sentence isn't left out!
+            -   option: Marleen goes to the market and she buys an apple.
+                feedback: Right on!
+            -   option: Marleen goes to the market and Marleen buys an apple.
+                feedback: She is not replaced with the name
+            hint: The word name is replaced with Marleen
+            correct_answer: C
+            question_score: '10'
+        4:
+            question_text: What will you see on the output screen when you run this code?
+            code: "name {is} Hedy\n{print} Hi my name is name"
+            mp_choice_options:
+            -   option: Hi my name is name
+                feedback: The variable name is replaced with Hedy
+            -   option: Hi my name is Hedy
+                feedback: The variable name is replaced with Hedy
+            -   option: Hi my Hedy is name
+                feedback: The variable name is replaced with Hedy
+            -   option: Hi my Hedy is Hedy
+                feedback: Correct, this mistake will be fixed in level 4!
+            hint: "'name' is being replaced with 'Hedy' in both places"
+            correct_answer: D
+            question_score: '10'
+        5:
+            question_text: What happens when you use the `{sleep}` command?
+            mp_choice_options:
+            -   option: It slows down your computer
+                feedback: fortunately not!
+            -   option: It closes down Hedy
+                feedback: fortunately not!
+            -   option: Your program pauses for a second and then continues
+                feedback: That's right!
+            -   option: You put it at the end so Hedy knows your program is finished
+                feedback: No it would be useless at the end of your code
+            hint: The computer waits for a second at the `{sleep}` command
+            correct_answer: C
+            question_score: '10'
+        6:
+            question_text: What should be on the lines?
+            code: "{print} And the award for best programming language goes to...\n_\n{print} Hedy!"
+            mp_choice_options:
+            -   option: '`{sleep}`'
+                feedback: Popolno!
+            -   option: '`{echo}`'
+                feedback: There is nothing to repeat back here
+            -   option: '`{print}`'
+                feedback: There is no text there to `{print}` there
+            -   option: '`{ask}`'
+                feedback: There is no question there to be asked
+            hint: Premor za dramatičen učinek...
+            correct_answer: A
+            question_score: '10'
+        7:
+            question_text: What command should be used on line 2?
+            code: "{print} I will explode in 3 seconds!\n_\n{print} BOOM!"
+            mp_choice_options:
+            -   option: "```\n{print} 3\n```"
+                feedback: You don't need to `{print}`
+            -   option: "```\n{sleep} 3\n```"
+                feedback: Perfektno!
+            -   option: "```\n{sleep}\n```"
+                feedback: This way the bomb will explode in 1 second
+            -   option: "```\n{sleep} {sleep} {sleep}\n```"
+                feedback: Make it easier on yourself by using the number 3
+            hint: You want the computer to wait for 3 seconds
+            correct_answer: B
+            question_score: '10'
+        8:
+            question_text: How would you correct the first line of code?
+            code: "{ask} {is} How old are you?\n{print} age"
+            mp_choice_options:
+            -   option: "```\nage {ask} {is} How old are you?\n```"
+                feedback: That is the wrong order
+            -   option: "```\n{ask} {is} age How old are you?\n```"
+                feedback: That is the wrong order
+            -   option: "```\nage {is} {ask} How old are you?\n```"
+                feedback: You get it!
+            -   option: "```\nage {is} How old are you?\n```"
+                feedback: Where is the `{ask}` command?
+            hint: The variable name should come first
+            correct_answer: C
+            question_score: '10'
+        9:
+            question_text: What is going wrong in this code?
+            code: "dogs {is} animal\n{print} I love animal"
+            mp_choice_options:
+            -   option: 'Line 1 should say: dogs `{is}` animals'
+                feedback: The variable name is animal
+            -   option: 'Line 1 should say: animal `{is}` dogs'
+                feedback: Odlično!
+            -   option: 'Line 2 should say: `{print}` I love animals'
+                feedback: The variable name is animal
+            -   option: 'Line 2 should say: `{sleep}` I love animals'
+                feedback: Sleep is not used to `{print}` text
+            hint: You want to `{print}` 'I love dogs'
+            correct_answer: B
+            question_score: '10'
+        10:
+            question_text: What command should be used on the line 1?
+            code: "flavor {is} _\n{print} Your favorite icecream is...\n{sleep}\n{print} flavor"
+            mp_choice_options:
+            -   option: "```\n{sleep} 3\n```"
+                feedback: You want to know the favorite flavor!
+            -   option: "```\n{print} strawberries\n```"
+                feedback: You do not want a `{print}` command at the middle of the line...
+            -   option: "```\nstrawberries, chocolate, vanilla\n```"
+                feedback: This way you are making a list. You don't want that now.
+            -   option: "```\n{ask} What flavor icecream do you like?\n```"
+                feedback: That's right!
+            hint: You want to `{ask}` a question
+            correct_answer: D
+            question_score: '10'
+    3:
+        1:
+            question_text: What command(s) do you use to let Hedy pick something arbitrarily?
+            mp_choice_options:
+            -   option: '`{print}`'
+                feedback: '`{print}` is used to print text'
+            -   option: '`{ask}`'
+                feedback: '`{ask}` is used to ask a question'
+            -   option: '`{is}`'
+                feedback: '`{is}` is used to make a list'
+            -   option: '`{at}` `{random}`'
+                feedback: Pravilno!
+            hint: Arbitrarily means without a plan or randomly.
+            correct_answer: D
+            question_score: '10'
+        2:
+            question_text: What's wrong with this code?
+            code: "animals {is} dog cat cow\n{print} animals {at} {random}"
+            mp_choice_options:
+            -   option: 'You need commas in line 1: dog, cat, cow.'
+                feedback: Good job!
+            -   option: Line 1 needs to start with `{print}`.
+                feedback: No, you don't need `{print}`
+            -   option: Line 2 needs to say 'animal' instead of 'animals'
+                feedback: animals is correct.
+            -   option: '`{at} {random}` is spelled incorrectly'
+                feedback: '`{at} {random}` is the correct spelling'
+            hint: There's something wrong in line 1
+            correct_answer: A
+            question_score: '10'
+        3:
+            question_text: How do you fix the mistake in line 2?
+            code: "options {is} rock, paper, scissors\n{print} rock, paper, scissors {at} {random}"
+            mp_choice_options:
+            -   option: "```\n{at} {random} {print} options\n```"
+                feedback: You're almost there. The order of the words isn't right yet.
+            -   option: "```\n{print} rock {at} {random}\n```"
+                feedback: you don't always want the Hedy to {print} rock, sometimes you want scissors or paper.
+            -   option: "```\n{print} options {at} {random}\n```"
+                feedback: Very good!
+            -   option: Nothing, the code is correct!
+                feedback: Look carefully for the mistake
+            hint: The variable (the list) is called options.
+            correct_answer: C
+            question_score: '10'
+        4:
+            question_text: What should change in line 2 to print a random price?
+            code: "prices {is} 1 dollar, 100 dollar, 1 million dollar\n{print} price {at} {random}"
+            mp_choice_options:
+            -   option: "```\n{print} price\n```"
+                feedback: You don't want to `{print}` the word price, but you want to `{print}` one price out of your list `{at} {random}`
+            -   option: "```\n{print} prices {at} {random}\n```"
+                feedback: Great! You've really paid attention.
+            -   option: "```\n{print} {at} {random} price\n```"
+                feedback: '`{at} {random}` is placed behind the variable.'
+            -   option: Nothing, this code is alright.
+                feedback: Look carefully for the mistake you missed!
+            hint: Ime spremenljivke je cene
+            correct_answer: B
+            question_score: '10'
+        5:
+            question_text: What is wrong in this code?
+            code: "question {is} {ask} What do you want to know?\n{print} question\nanswers {is} yes, no, maybe\n{print} answers {at} {random}"
+            mp_choice_options:
+            -   option: Line 1 needs to say `{print}` instead of `{ask}`
+                feedback: No, that's not wrong.
+            -   option: Line 2 needs to say `{ask}` instead of `{print}`
+                feedback: No that's not wrong.
+            -   option: Line 2 needs to say answers `{at} {random}` `{is}` yes, no, maybe
+                feedback: No, that's not wrong.
+            -   option: Nothing, this code is perfect
+                feedback: That's right!
+            hint: Does this code even have a mistake?
+            correct_answer: D
+            question_score: '10'
+        6:
+            question_text: What's wrong with this code?
+            code: "question {is} {ask} What do you want to know?\nanswers yes, no, maybe\n{print} answers {at} {random}"
+            mp_choice_options:
+            -   option: Line 2 needs to say question instead of answers
+                feedback: No that's not right
+            -   option: Line 2 needs the `{is}` command
+                feedback: Pravilno
+            -   option: Line 3 needs to say answer instead of answers
+                feedback: No the variable's called answers
+            -   option: Nothing! This code is great!
+                feedback: Actually, line 2 has a mistake.
+            hint: There is something wrong with line 2.
+            correct_answer: B
+            question_score: '10'
+        7:
+            question_text: What does the `{add}` command do?
+            code: "books {is} Harry Potter, The Hobbit, Green Eggs and Ham\nyour_book {is} {ask} What is your favorite book?\n{add} your_book {to} books\n{print} books {at} {random}"
+            mp_choice_options:
+            -   option: The `{add}` command removes a random book from the list
+                feedback: The remove command removes, the add command adds
+            -   option: The `{add}` command adds a random book to a list
+                feedback: It doesn't. It adds your answer to the list!
+            -   option: The `{add}` command adds your favorite book to the list
+                feedback: Pravilno!
+            -   option: The `{add}` command prints your favorite book.
+                feedback: No, it adds your favorite book to the list
+            hint: The `{add}` command adds a book, but which one?
+            correct_answer: C
+            question_score: '10'
+        8:
+            question_text: What is the output of this code?
+            code: "crisps {is} sea salt, paprika, sour cream\n{remove} sea salt {from} crisps\n{remove} paprika {from} crisps\n{print} crisps {at} {random}"
+            mp_choice_options:
+            -   option: You can't tell, because Hedy will `{print}` one of the 3 flavors `{at} {random}`
+                feedback: Take a look at the `{remove}` commands
+            -   option: sea salt
+                feedback: sea salt is removed from the list
+            -   option: paprika
+                feedback: Paprika is removed from the list
+            -   option: sour cream
+                feedback: That's right!
+            hint: There are 3 flavors, bit 2 are removed. Which one remains?
+            correct_answer: D
+            question_score: '10'
+        9:
+            question_text: What's wrong with this code?
+            code: "colors {is} blue, purple, green\nchosen_color {is} {ask} Which hair color wouldn't you like to have?\n{remove} chosen_color {from} colors\n{print} I will dye my hair color {at} {random}"
+            mp_choice_options:
+            -   option: 'Line 3 should say: `{remove}` blue `{from}` colors'
+                feedback: Maybe you want blue hair though!
+            -   option: Line 3 should have an `{add}` command instead of a `{remove}` command
+                feedback: You want to remove the chosen color so `{remove}` is right.
+            -   option: In line 4 the variable should be called colors instead of color
+                feedback: Great job!
+            -   option: Nothing, this is a correct code!
+                feedback: Find the mistake!
+            hint: Poglejte vrstico 4
+            correct_answer: C
+            question_score: '10'
+        10:
+            question_text: What should be on the _?
+            code: "walkers {is} dad, mom, Sam, Petra\nwalked_yesterday {is} {ask} Who walked the dogs yesterday?\n{print} walked_yesterday shouldn't have to walk the dogs again today\n_\n{print} walkers {at} {random} , it's your turn to walk the dogs!"
+            mp_choice_options:
+            -   option: "```\n{remove} walked_yesterday {from} walkers\n```"
+                feedback: Super!
+            -   option: "```\n{remove} walked_yesterday {to} walkers\n```"
+                feedback: '`{remove} {from}` or `{add} {to}`, not `{remove} {to}`'
+            -   option: "```\n{remove} walkers {from} yesterday\n```"
+                feedback: yesterday is not a variable
+            -   option: "```\n{add} walked_yesterday {to} walkers\n```"
+                feedback: This increased the chance that the person who walked yesterday now has to do it again. That's mean.
+            hint: The person who walked the dogs yesterday should be removed from the list.
+            correct_answer: A
+            question_score: '10'
+    4:
+        1:
+            question_text: Which of these codes is correct?
+            mp_choice_options:
+            -   option: "```\n{print} 'Im very excited to take this quiz!'\n```"
+                feedback: That's right
+            -   option: "```\n{print} Im very excited to take this quiz!\n```"
+                feedback: '{print} now needs quotation marks!'
+            -   option: "```\n{print} 'I'm very excited to take this quiz!'\n```"
+                feedback: do not use apostrophe or use backticks instead
+            -   option: "```\n{print} 'I'm very excited to take this quiz!\n```"
+                feedback: careful when using quotes and apostrophe
+            hint: In level 4 you need quotation marks for 2 commands.
+            correct_answer: A
+            question_score: '10'
+        2:
+            question_text: Which code uses the proper quotation marks?
+            mp_choice_options:
+            -   option: "```\n{print} `hello`\n```"
+                feedback: This quotation mark is skewed, you need a straight one.
+            -   option: "```\n{print} 'hello'\n```"
+                feedback: Pravilno
+            -   option: "```\n{print} hello\n```"
+                feedback: There are no quotation marks here!
+            -   option: "```\n{print} ,hello,\n```"
+                feedback: This is a comma, you need quotation marks.
+            hint: Izberite prave znake za narekovaje.
+            correct_answer: B
+            question_score: '10'
+        3:
+            question_text: Where are the quotation marks used correctly?
+            mp_choice_options:
+            -   option: "```\n{print} Hi Im Hedy\n```"
+                feedback: Add quotation marks please!
+            -   option: "```\n{print} 'Hi Im Hedy\n```"
+                feedback: Both before and after the words you want to print should be a quotation mark.
+            -   option: "```\n'{print} Hi Im Hedy'\n```"
+                feedback: The first quotation mark should be behind the word `{print}`
+            -   option: "```\n{print} 'Hi Im Hedy'\n```"
+                feedback: Perfektno!
+            hint: Both before and after the words you want to print should be a quotation mark.
+            correct_answer: D
+            question_score: '10'
+        4:
+            question_text: Which statement is true?
+            mp_choice_options:
+            -   option: "You need quotation marks around the word `{print}`, like this: `'{print}'`."
+                feedback: The quotation marks shouldn't be around the command itself.
+            -   option: You need quotation marks around the words you want to print.
+                feedback: Super!
+            -   option: You do not need quotation marks when using the `{ask}` command
+                feedback: Both `{print}` and `{ask}` require quotation marks
+            -   option: You can choose yourself whether to use quotation marks or not.
+                feedback: Unfortunately, Hedy is stricter than that.
+            hint: From level 4 on you need to use quotation marks.
+            correct_answer: B
+            question_score: '10'
+        5:
+            question_text: What has to be changed in order for the game to work?
+            code: "options {is} rock, paper, scissors\n{print} 'options {at} {random}'"
+            mp_choice_options:
+            -   option: "```\n'{print} options {at} {random}'\n```"
+                feedback: Never put the quotation mark in front of the `{print}` command.
+            -   option: "```\n{print} 'options' {at} {random}\n```"
+                feedback: options is a variable. You don't literally want to print 'options {at} {random}'.
+            -   option: "```\n{print} options {at} {random}\n```"
+                feedback: That's right
+            -   option: Nothing, the game already works!
+                feedback: Look carefully. There is an error.
+            hint: You don't want Hedy to literally print 'options {at} {random}', you want it to print 'rock' or 'paper' or 'scissors'.
+            correct_answer: C
+            question_score: '10'
+        6:
+            question_text: What would be a good next line in this code?
+            code: prices {is} 1 dollar, 100 dollars, 1 million dollars
+            mp_choice_options:
+            -   option: "```\n{print} 'You win...' prices {at} {random}\n```"
+                feedback: Great! You get it!
+            -   option: "```\n{print} You win... 'prices {at} {random}'\n```"
+                feedback: Hedy will literally print 'prices {at} {random}'
+            -   option: "```\n{print} You win... prices {at} {random}\n```"
+                feedback: You need some quotation marks!
+            -   option: "```\n{print} 'You win... prices {at} {random}'\n```"
+                feedback: Hedy will literally print 'prices {at} {random}''
+            hint: 'Think carefully: what is a variable and should be outside of the quotation marks? And what are normal words that should be inside?'
+            correct_answer: A
+            question_score: '10'
+        7:
+            question_text: What's wrong with this code?
+            code: "question {is} {ask} What do you want to know?\nanswers {is} yes, no, maybe\n{print} answers {at} {random}"
+            mp_choice_options:
+            -   option: Quotation marks are missing in line 1
+                feedback: Pravilno!
+            -   option: Quotation marks are missing in line 2
+                feedback: A variable doesn't need quotes
+            -   option: Quotation marks are missing in line 3
+                feedback: You don't want Hedy to literally print 'answers {at} {random}' so no quotation marks needed here!
+            -   option: Nothing, this code is good as is!
+                feedback: Look carefully. You missed a mistake!
+            hint: Check each line on whether they'd need quotation marks or not.
+            correct_answer: A
+            question_score: '10'
+        8:
+            question_text: What would be a good next line for this code?
+            code: "{print} 'Welcome at the money show!'\n{print} 'In front of you are 3 doors'\ndoor {is} {ask} 'Which door do you choose?'"
+            mp_choice_options:
+            -   option: "```\n{print} So you pick door door\n```"
+                feedback: We need quotation marks
+            -   option: "```\n{print} 'So you pick ' door door\n```"
+                feedback: If the player chooses door 3, Hedy will say 'So you pick 3 3
+            -   option: "```\n{print} 'So you pick door ' door\n```"
+                feedback: Super!
+            -   option: "```\n{print} 'So you pick door door'\n```"
+                feedback: Hedy will literally print 'So you pick door door
+            hint: The second word door should be replaced with the number, the first should still be the word door...
+            correct_answer: C
+            question_score: '10'
+        9:
+            question_text: What will never appear in your output screen?
+            code: "clubs {is} Real Madrid, Bayern Munchen, Manchester United, Ajax\n{print} clubs {at} {random} ' is going the win the champions league'"
+            mp_choice_options:
+            -   option: Ajax is going to win the champions league
+                feedback: Hedy could `{print}` that
+            -   option: Real Madrid is going to win the champions league
+                feedback: Hedy could `{print}` that
+            -   option: Bayern Munchen is going to win the champions league
+                feedback: Hedy could `{print}` that
+            -   option: FC Barcelona is going to win the champions league
+                feedback: That's right. It's not in the list
+            hint: What are Hedy's options to randomly pick from?
+            correct_answer: D
+            question_score: '10'
+        10:
+            question_text: Which statement is true?
+            code: "people {is} mom, dad, Emma, Sophie\n{print} The dishes are done by...\n{print} people {at} {random}"
+            mp_choice_options:
+            -   option: Quotation marks are missing in line 1
+                feedback: A list doesn't need quotation marks
+            -   option: Quotation marks are missing in line 2
+                feedback: Pravilno
+            -   option: Quotation marks are missing in both line 2 and 3
+                feedback: Line 3 doesn't need quotation marks because it's not printed literally
+            -   option: Nothing, this code has no mistakes
+                feedback: You missed one!
+            hint: One line needs quotation marks, because you want it to be printed literally.
+            correct_answer: B
+            question_score: '10'
+    5:
+        1:
+            question_text: Which command should be filled in on the _?
+            code: "number {is} {ask} 'What is your lucky number?'\n{if} number {is} 5 {print} 'Mine too!'\n_ {print} 'My lucky number is 5!'"
+            mp_choice_options:
+            -   option: '`{print}`'
+                feedback: There already is a `{print}` command.
+            -   option: '`{if}`'
+                feedback: The `{if}` command is used in the line above.
+            -   option: '`{sleep}`'
+                feedback: That's not it!
+            -   option: '`{else}`'
+                feedback: That's right!
+            hint: Which one goes together with the `{if}` command?
+            correct_answer: D
+            question_score: '10'
+        2:
+            question_text: What appears in your output screen when you type in the name Hedy?
+            code: "name {is} {ask} 'What is your name?'\n{if} name {is} Hedy {print} 'fun' {else} {print} 'less fun'"
+            mp_choice_options:
+            -   option: zabavno
+                feedback: That's right!
+            -   option: less fun
+                feedback: If the name is Hedy, it will say 'fun''
+            -   option: Hedy
+                feedback: No, it doesn't print the name
+            -   option: Napaka
+                feedback: Fortunately not!
+            hint: '`{if}` name `{is}` Hedy `{print}` ...?'
+            correct_answer: A
+            question_score: '10'
+        3:
+            question_text: What is the right password?
+            code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Correct!'\n{else} {print} 'ALARM! INTRUDER!'"
+            mp_choice_options:
+            -   option: Pravilno!
+                feedback: This is printed when you type in the correct password
+            -   option: SKRIVNOST
+                feedback: That's right!'
+            -   option: geslo
+                feedback: The password isn't password...
+            -   option: ALARM INTRUDER
+                feedback: This is printed when you type in the incorrect password!
+            hint: "`{if}` password `{is}` ... `{print}` 'Correct!'"
+            correct_answer: B
+            question_score: '10'
+        4:
+            question_text: What does Hedy print when you type in the wrong password?
+            code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Correct!'\n{else} {print} 'ALARM! INTRUDER!'"
+            mp_choice_options:
+            -   option: Pravilno
+                feedback: That's printed if the correct answer is given, not the wrong one...
+            -   option: SKRIVNOST
+                feedback: That's not the right answer
+            -   option: Narobe!
+                feedback: No, this is not what Hedy will print
+            -   option: ALARM! INTRUDER!
+                feedback: Great job!
+            hint: Your computer will sound the alarm for intruders!
+            correct_answer: D
+            question_score: '10'
+        5:
+            question_text: Why will Hedy say 'ALARM! INTRUDER' when you type in 'secret'?
+            code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Correct!'\n{else} {print} 'ALARM! INTRUDER!'"
+            mp_choice_options:
+            -   option: Because it needs to be in capitals, so SECRET
+                feedback: Prav zares!
+            -   option: Because the password is alarm
+                feedback: No, this is not the password.
+            -   option: Because it's spelled wrong.
+                feedback: That's not how you spell secret
+            -   option: Because Hedy makes a mistake
+                feedback: No, Hedy is right
+            hint: The spelling of the word has to be exactly the same.
+            correct_answer: A
+            question_score: '10'
+        6:
+            question_text: Which word should be on the place of the blank in the last line?
+            code: "{print} 'Im Hedy the football fortune teller!'\n{print} 'I will predict what place your team will end up!'\nclub is {ask} 'Which club is your favorite?'\n{if} club {is} ajax {print} 'Ajax is going to win of course!'\n_ {print} 'Sorry, your club is gonna be in last place...'"
+            mp_choice_options:
+            -   option: "```\n{if}\n```"
+                feedback: '`{if}` is already in the line above'
+            -   option: "```\n{at} {random}\n```"
+                feedback: No, you need `{else}`.
+            -   option: "```\n{else}\n```"
+                feedback: Enkratno!
+            -   option: "```\n{print}\n```"
+                feedback: '`{print}` is already there, we need a word before it!'
+            hint: '`{if}` gre skupaj z...?'
+            correct_answer: C
+            question_score: '10'
+        7:
+            question_text: Which word should be in the place of the blank?
+            code: "{print} 'I can predict if you will be a millionair or not!'\nname {is} {ask} 'Whats your name?'\n{if} name {is} Hedy {print} 'You will be a millionair!'\n{else} _ 'Unfortunately... No big money for you.'"
+            mp_choice_options:
+            -   option: '`{if}`'
+                feedback: '`{if}` is in the line above.'
+            -   option: '`{at}` `{random}`'
+                feedback: No, you don't need `{at} {random}`.
+            -   option: '`{else}`'
+                feedback: There already is an `{else}` command
+            -   option: '`{print}`'
+                feedback: Izjemno!
+            hint: After `{else}` a `{print}` command follows
+            correct_answer: D
+            question_score: '10'
+        8:
+            question_text: Which word should be on the place of the blank?
+            code: "animal {is} {ask} 'What is your favorite animal?'\n{if} _ {is} penguin {print} 'Thats my favorite animal too!'\n{else} {print} 'Cool! I like penguins.'"
+            mp_choice_options:
+            -   option: "```\nfavorite animal\n```"
+                feedback: That's not the variable name.
+            -   option: "```\nanimal\n```"
+                feedback: Great job!
+            -   option: '`{if}`'
+                feedback: '`{if}` is already there'
+            -   option: '`{print}`'
+                feedback: No, that's not it.
+            hint: Kakšno je ime spremenljivke?
+            correct_answer: B
+            question_score: '10'
+        9:
+            question_text: Which door should you choose to escape??
+            code: "{print} 'Escape from the haunted house!'\n{print} 'There are 3 doors in front of you'\ndoor {is} {ask} 'Which door do you choose?'\nmonsters {is} vampire, werewolf, giant spider\n{if} door {is} 2 {print} 'Yay, you can escape!'\n{else} {print} 'You are being devoured by a... ' monsters {at} {random}"
+            mp_choice_options:
+            -   option: '1'
+                feedback: Bad choice! You're being eaten
+            -   option: '2'
+                feedback: Super! You escaped!
+            -   option: '3'
+                feedback: Bad choice! You're being eaten.
+            -   option: It's a trap, you will always be eaten!
+                feedback: Luckily not!
+            hint: One of the doors will keep you safe..
+            correct_answer: B
+            question_score: '10'
+        10:
+            question_text: Which monster is standing behind door 1?
+            code: "{print} 'Escape from the haunted house!'\n{print} 'There are 3 doors in front of you'\ndoor {is} {ask} 'Which door do you choose?'\nmonsters {is} vampire, werewolf, giant spider\n{if} door {is} 2 {print} 'Yay, you can escape!'\n{else} {print} 'You are being devoured by a... ' monsters {at} {random}"
+            mp_choice_options:
+            -   option: Hedy picks a random monster each time.
+                feedback: Imenitno!
+            -   option: vampir
+                feedback: Not always...
+            -   option: volkodlak
+                feedback: Not always...
+            -   option: giant spider
+                feedback: Not always...
+            hint: Mind the last 3 words... monsters `{at} {random}`...
+            correct_answer: A
+            question_score: '10'
+    6:
+        1:
+            question_text: What's Hedy's output when you run this code?
+            code: '{print} 2*10'
+            mp_choice_options:
+            -   option: '20'
+                feedback: Pravilno!
+            -   option: '12'
+                feedback: No, the plus sign is used in addition
+            -   option: 2*10
+                feedback: No, Hedy will calculate the answer
+            -   option: '210'
+                feedback: Mind it's a calculation.
+            hint: The `*` is used as a multiplication sign
+            correct_answer: A
+            question_score: '10'
+        2:
+            question_text: What do you use when you want to add two numbers?
+            mp_choice_options:
+            -   option: '`-`'
+                feedback: That's not it
+            -   option: plus
+                feedback: That's not it
+            -   option: '`*`'
+                feedback: That's not it
+            -   option: '`+`'
+                feedback: Brez napake!
+            hint: To je znak plus.
+            correct_answer: D
+            question_score: '10'
+        3:
+            question_text: What's Hedy's output when you run this code?
+            code: "{print} '3*10'"
+            mp_choice_options:
+            -   option: '30'
+                feedback: This would be the right answer if there were no quotation marks.
+            -   option: '13'
+                feedback: Try again..
+            -   option: 3*10
+                feedback: Correct! There are quotation marks, so Hedy will print it literally.
+            -   option: Nothing, Hedy will give an error message.
+                feedback: No, Hedy will print it literally.
+            hint: Pazite na narekovaje!
+            correct_answer: C
+            question_score: '10'
+        4:
+            question_text: Kim is 10 years old. What will Hedy print for her?
+            code: "name = {ask} 'How many letters are in your name?'\nage = {ask} 'How old are you?'\nluckynumber = name*age\n{print} 'Your lucky number is...' luckynumber"
+            mp_choice_options:
+            -   option: '30'
+                feedback: Mind, Hedy also prints 'Your lucky number is...'
+            -   option: '10'
+                feedback: Please try again.
+            -   option: Your lucky number is... 30
+                feedback: That's right!
+            -   option: Your lucky number is... 10
+                feedback: Her lucky number is name times age...
+            hint: 'Kim has 3 letters, she is 10 years old so: letters times age = 3*10 = 30.'
+            correct_answer: C
+            question_score: '10'
+        5:
+            question_text: If 5 people eat at this restaurant, how much do they have to pay in total?
+            code: "{print} 'Welcome to Hedys!'\npeople = {ask} 'How many people are eating with us tonight?'\nprice = people * 10\n{print} 'That will be ' price 'dollar please'"
+            mp_choice_options:
+            -   option: 5 dollars
+                feedback: Unfortunately, it's not that cheap.
+            -   option: 10 dollars
+                feedback: No, it's 10 dollars each.
+            -   option: 15 dollars
+                feedback: The * means multiplication.
+            -   option: 50 dollars
+                feedback: Sijajno!
+            hint: '`price` `is` `people` `times` 10'
+            correct_answer: D
+            question_score: '10'
+        6:
+            question_text: How much does a hamburger cost in this virtual restaurant?
+            code: "{print} 'Welcome at Hedys diner'\nfood = {ask} 'What would you like to eat?'\nprice = 0\n{if} food {is} hamburger price = 15\n{if} food {is} fries price = 6"
+            mp_choice_options:
+            -   option: 15 dollars
+                feedback: Vrhunsko!
+            -   option: 6 dollars
+                feedback: The fries are 6 dollars
+            -   option: 0 dollars
+                feedback: The hamburger isn't free!
+            -   option: 21 dollars
+                feedback: That's the price for a hamburger and fries!
+            hint: Bodite pozorni na četrto vrstico.
+            correct_answer: A
+            question_score: '10'
+        7:
+            question_text: Why does line 7 say 'price is price + 3' instead of 'price is 3'?
+            code: "{print} 'Welcome at Hedys diner'\nfood = {ask} 'What would you like to eat?'\nprice = 0\n{if} food {is} hamburger price = price + 15\n{if} food {is} fries price = price + 6\ndrinks is {ask} 'What would you like to drink?'\n{if} drinks {is} coke price = price + 3\n{if} drinks {is} water price = price + 1\n{print} price ' dollars please'"
+            mp_choice_options:
+            -   option: It could have been `price = 3` just as well.
+                feedback: No, that's not true. Hedy needs to add 3 dollars to the total.
+            -   option: Because Hedy doesn't understand `price = 3`.
+                feedback: Hedy would understand, but it wouldn't be right.
+            -   option: Because Hedy would otherwise forget about the previous order. The price would be 3 dollars in total.
+                feedback: That's right!
+            -   option: Because the price is 0 dollars to begin with.
+                feedback: That's true, but not the reason
+            hint: The price shouldn't be 3, but 3 dollars more than it already was
+            correct_answer: C
+            question_score: '10'
+        8:
+            question_text: Why is this code incorrect?
+            code: "correct answer = 3*12\nanswer = {ask} 'What is 3 times 12?'\n{if} answer {is} correct answer {print} 'Good job!'\n{else} {print} 'No... It was ' correct answer"
+            mp_choice_options:
+            -   option: There shouldn't be quotation marks in line 2
+                feedback: No, there should be!
+            -   option: Spremenljivka se imenuje pravilen odgovor, vendar je ime spremenljivke lahko le ena beseda. Torej mora biti pravilen_odgovor
+                feedback: Pravilno!
+            -   option: The `{if}` and `{else}` commands should be in the same line.
+                feedback: No, that's not true.
+            -   option: Spremenljivka v vrstici 2 se ne more imenovati odgovor, ker je preveč podobna spremenljivki pravilen odgovor.
+                feedback: Variable names can be similar, but they can't be 2 words...
+            hint: Inspect what the variables are called.
+            correct_answer: B
+            question_score: '10'
+        9:
+            question_text: Imagine you love football a 10, you've eaten 2 bananas and have washed your hands 3 times today. How smart does the silly fortune teller think you are?
+            code: "{print} 'Im Hedy the silly fortune teller'\n{print} 'I will predict how smart you are!'\nfootball = {ask} 'On a scale of 0 to 10 how much do you love football?'\nbananas = {ask} 'How many bananas have you eaten this week?'\nhygiene = {ask} 'How many times did you wash your hands today??'\nresult = bananas + hygiene\nresult = result * football\n{print} 'You are ' result 'percent smart.'"
+            mp_choice_options:
+            -   option: 10%
+                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            -   option: 32%
+                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            -   option: 50%
+                feedback: Super! You are 100 percent smart!
+            -   option: 100%
+                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            hint: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            correct_answer: C
+            question_score: '10'
+        10:
+            question_text: Which statement is true?
+            code: "name _ Hedy\n{print} name 'is walking trough the forrest'"
+            mp_choice_options:
+            -   option: You can only fill in the word is on the `_`
+                feedback: You are allowed to use the `=` sign as well
+            -   option: You can fill in either the word is or the `=` sign on the `_`
+                feedback: Neverjetno!
+            -   option: You have to fill in =is= on the `_`
+                feedback: No, one `=` sign is enough
+            -   option: You can only use the `=` sign when working with numbers, not with words.
+                feedback: You can also use `=` with words.
+            hint: '`{is}` and `=` are both allowed'
+            correct_answer: B
+            question_score: '10'
+    7:
+        1:
+            question_text: How many lines can you repeat at once with the repeat command at this level?
+            mp_choice_options:
+            -   option: '0'
+                feedback: No you can repeat a line.
+            -   option: '1'
+                feedback: Correct, one line at a time
+            -   option: '3'
+                feedback: In this level only one line at a time
+            -   option: neskočno
+                feedback: In this level you can only repeat one line at a time
+            hint: You can only repeat one line at a time
+            correct_answer: B
+            question_score: '10'
+        2:
+            question_text: Which code is right?
+            mp_choice_options:
+            -   option: "```\n{print} 100 {times} 'hello'\n```"
+                feedback: "`{repeat}` 100 `{times}` `{print}` 'hello'"
+            -   option: "```\n{print} {repeat} 100 {times} 'hello'\n```"
+                feedback: "{repeat} 100 {times} {print} 'hello'"
+            -   option: "```\n{repeat} 'hello' 100 {times}\n```"
+                feedback: "{repeat} 100 {times} {print} 'hello'"
+            -   option: "```\n{repeat} 100 {times} {print} 'hello'\n```"
+                feedback: That's right!
+            hint: First the `{repeat}` command, then the `{print}` command
+            correct_answer: D
+            question_score: '10'
+        3:
+            question_text: Is this code right or wrong?
+            code: "{repeat} 100 {times} 'Hello!'"
+            mp_choice_options:
+            -   option: Desno
+                feedback: No, a word is missing
+            -   option: Wrong, the word `{repeat}` is missing
+                feedback: The word `{repeat}` is there, another word is missing
+            -   option: Wrong, the word `{times}` is missing
+                feedback: The word `{times}` is there, another word is missing.
+            -   option: Wrong, the word `{print}` is missing
+                feedback: Pravilno
+            hint: "It should be: `{repeat}` 100 `{times}` `{print}` 'Hello'"
+            correct_answer: D
+            question_score: '10'
+        4:
+            question_text: Which word is wrong in the code?
+            code: "{print} 'I'm blue'\n{repeat} 7 {times} {print} 'da ba dee, da ba da'"
+            mp_choice_options:
+            -   option: "`I'm`"
+                feedback: That's right!
+            -   option: '`{print}`'
+                feedback: '`{print}` is spelled correctly'
+            -   option: '`{repeat}`'
+                feedback: '`{repeat}` is spelled correctly'
+            -   option: '`{times}`'
+                feedback: '`{times}` is spelled correctly'
+            hint: I'm is wrong, you can't use apostrophes in a sentence
+            correct_answer: A
+            question_score: '10'
+        5:
+            question_text: Is this code right or wrong?
+            code: "{repeat} 100 {times} {print} 'Hedy is awesome!'"
+            mp_choice_options:
+            -   option: Correct
+                feedback: That's right!
+            -   option: Wrong
+                feedback: That's not it
+            hint: Koda je pravilna!
+            correct_answer: A
+            question_score: '10'
+        6:
+            question_text: What will be the output from this code?
+            code: "{print} 'The wheels on the bus go'\n{repeat} 3 {times} {print} ' round and round'"
+            mp_choice_options:
+            -   option: "```\nthe wheels on the bus go\nround and round\n```"
+                feedback: Only the second line is repeated 3 times
+            -   option: "```\nthe wheels on the bus go\nthe wheels on the bus go\nthe wheels on the bus go\nround and round\n```"
+                feedback: Only the second line is repeated 3 times
+            -   option: "```\nthe wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round\n```"
+                feedback: Only the second line is repeated 3 times
+            -   option: "```\nthe wheels on the bus go\nround and round\nround and round\nround and round\n```"
+                feedback: All through the town! Perfect!
+            hint: Only 'round and round' is repeated 3 times.
+            correct_answer: D
+            question_score: '10'
+        7:
+            question_text: What will be the output from this code?
+            code: "{repeat} 2 {times} {print} 'We will'\n{print} 'ROCK YOU!'"
+            mp_choice_options:
+            -   option: "```\nWe will We will\nROCK YOU!\n```"
+                feedback: "'We will' won't appear twice in the same line"
+            -   option: "```\nWe will\nWe will\nROCK YOU!\n```"
+                feedback: Great!
+            -   option: "```\nWe will\nROCK YOU!\nWe will\nROCK YOU!\n```"
+                feedback: ROCK YOU! won't be repeated
+            -   option: "```\nWe will\nROCK YOU!"
+                feedback: Mind the `{repeat}` command
+            hint: Bodite pozorni na ukaz `{repeat}`.
+            correct_answer: B
+            question_score: '10'
+        8:
+            question_text: What Hedy code belongs to this output?
+            code: "Here comes the sun\nDo do do do\nHere comes the sun\nAnd I say\nIts alright"
+            mp_choice_options:
+            -   option: "```\n{print} 'Here comes the sun'\n{print} 'Do do do do'\n{print} 'Here comes the sun'\n{print} 'And I say'\n{print} 'Its alright'\n```"
+                feedback: Awesome, you can't use the `{repeat}` command here.
+            -   option: "```\n{repeat} 2 {times} {print} 'Here comes the sun'\n{print} 'And I say'\n{print} 'Its alright'"
+                feedback: Where did you leave 'Do do do do'?
+            -   option: "```\n{repeat} 2 {times} {print} 'Here comes the sun'\n{print} 'Do do do do'\n{print} 'And I say'\n{print} 'Its alright'\n```"
+                feedback: This is not the correct order..
+            -   option: "```\n{repeat} 2 {times} {print} 'Here comes the sun'\n{repeat} 2 {times} {print} 'Do do'\n{print} 'And I say'\n{print} 'Its alright'\n```"
+                feedback: This is not the correct order..
+            hint: '`{repeat}` can only be used if you want to execute the same line multiple times in a row.'
+            correct_answer: A
+            question_score: '10'
+        9:
+            question_text: What Hedy code belongs to this output?
+            code: "Batman was flying through Gotham.\nWhen suddenly he heard someone screaming...\nHelp!\nHelp!\nHelp!\nPlease help me!"
+            mp_choice_options:
+            -   option: "```\n{print} 'Batman was flying through Gotham. '\n{print} 'When suddenly he heard someone screaming!'\n{print} 'Help!'\n{repeat} 3 {times} {print} 'Please help me!'\n```"
+                feedback: Your repeated line is incorrect.
+            -   option: "```\n{print} 'Batman was flying through Gotham.'\n{print} 'When suddenly he heard someone screaming!'\n{repeat} 3 {times} 'Help!'\n{print} 'Please help me!'\n```"
+                feedback: The `{print}` command is missing on line 3.
+            -   option: "```\n{print} Batman was flying through Gotham.\n{print} When suddenly he heard someone screaming!\n{repeat} 3 {times} {print} Help!\n{print} Please help me!\n```"
+                feedback: You're missing the quotation marks
+            -   option: "```\n{print} 'Batman was flying through Gotham.'\n{print} 'When suddenly he heard someone screaming!'\n{repeat} 3 {times} {print} 'Help!'\n{print} 'Please help me!'\n```"
+                feedback: Perfect
+            hint: "'Na  pomoč!' se ponovi 3-krat."
+            correct_answer: D
+            question_score: '10'
+        10:
+            question_text: Which code belongs to this output?
+            code: "if youre happy and you know it clap your hands\nif youre happy and you know it clap your hands\nif youre happy and you know it and you really want to show it\nif youre happy and you know it clap your hands"
+            mp_choice_options:
+            -   option: "```\n{repeat} 2 {times} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'\n```"
+                feedback: Almost! the first line needs an extra word
+            -   option: "```\n{repeat} 2 {times} {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'\n```"
+                feedback: Great!
+            -   option: "```\n{repeat} 3 {times} {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n```"
+                feedback: This is not in the right order.
+            -   option: "```\n{repeat} 4 {times} 'if youre happy and you know it'\n{repeat} 2 {times} 'clap your hands'\n{print} 'and you really want to show it'\n{print} 'clap your hands'\n```"
+                feedback: This is not in the right order.
+            hint: Mind the order of the sentences.
+            correct_answer: B
+            question_score: '10'
+    8:
+        1:
+            question_text: Which output will be produced by this code?
+            code: "{repeat} 2 {times}\n    {print} 'Hello'\n    {print} 'Im Hedy!'"
+            mp_choice_options:
+            -   option: "Hello\nIm Hedy!"
+                feedback: Everything is printed twice.
+            -   option: "Hello\nHello\nIm Hedy"
+                feedback: The second line is repeated twice as well.
+            -   option: "Hello\nIm Hedy!\nHello\nIm Hedy!"
+                feedback: Super!
+            -   option: "Hello\nHello\nIm Hedy!\nIm Hedy!"
+                feedback: Everything is printed twice
+            hint: Obe vrstice se ponovita dvakrat.
+            correct_answer: C
+            question_score: '10'
+        2:
+            question_text: What is wrong with this code?
+            code: "{repeat} 5 {times}\n{print} 'Hedy is cool!'"
+            mp_choice_options:
+            -   option: This should be only one line, not 2.
+                feedback: No it should be 2 lines.
+            -   option: This `{print}` command has to be removed.
+                feedback: No, you need it.
+            -   option: There is a spelling mistake in the `{repeat}` command.
+                feedback: No, `{repeat}` is the correct spelling
+            -   option: The second line needs to start with 4 spaces as indentation.
+                feedback: Correct!
+            hint: Something is missing in the second line?
+            correct_answer: D
+            question_score: '10'
+        3:
+            question_text: What output will be produced when you run this program?
+            code: "{repeat} 3 {times}\n    {print} 'Baby shark tututudutudu'\n{print} 'Baby shark'"
+            mp_choice_options:
+            -   option: "Baby shark tututudutudu\nBaby shark"
+                feedback: Mind the `{repeat}` command!
+            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark"
+                feedback: The last line has no indentation, so it's not repeated.
+            -   option: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
+                feedback: Right!
+            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark\nBaby shark"
+                feedback: What is being repeated and what isn't ?
+            hint: What is being repeated and what is not?
+            correct_answer: C
+            question_score: '10'
+        4:
+            question_text: Which output is correct?
+            code: "{print} 'The children went:'\n{repeat} 2 {times}\n    {print} 'Yay!'\n    {print} 'We are going on vacation!'"
+            mp_choice_options:
+            -   option: "The children went:\nYay!\nWe are going on vacation!"
+                feedback: Mind the `{repeat}` command!
+            -   option: "The children went:\nYay!\nWe are going on vacation!\nYay!\nWe are going on vacation!"
+                feedback: Correct!
+            -   option: "The children went:\nYay!\nYay!\nWe are going on vacation!\nWe are going on vacation!"
+                feedback: This order is incorrect.
+            -   option: "The children went:\nYay!\nYay!\nWe are going on vacation!"
+                feedback: The last line is repeated too.
+            hint: The block under the `{repeat}` command is repeated twice.
+            correct_answer: B
+            question_score: '10'
+        5:
+            question_text: What is wrong with this code?
+            code: "end = {ask} 'Do you want a happy or a sad ending?'\n{if} end {is} happy {print} 'They lived happily ever after'\n{else} {print} 'The world exploded. The end.'"
+            mp_choice_options:
+            -   option: The `{print}` commands on the last two lines should start on new lines and start with 4 spaces.
+                feedback: That's right!
+            -   option: '`{else}` is not a command!'
+                feedback: It is!
+            -   option: Lines that start with `{if}` should start with 4 spaces
+                feedback: That's not true
+            -   option: '`{ask}` is no longer a command'
+                feedback: That's not true
+            hint: Nekaj je narobe z zamikanjem
+            correct_answer: A
+            question_score: '10'
+        6:
+            question_text: What will be the output of this code when we enter pancakes?
+            code: "{print} 'Welcome to restaurant Hedy'\n{repeat} 2 {times}\n    food {is} {ask} 'What do you want to eat?'\n    {print} food"
+            mp_choice_options:
+            -   option: "Welcome to restaurant Hedy\nPancakes"
+                feedback: There is no repetition in this answer.
+            -   option: "Welcome to restaurant Hedy\nWelcome to restaurant Hedy\nPancakes\nPancakes"
+                feedback: This answer also repeats the welcome message
+            -   option: "Welcome to restaurant Hedy\nWhat do you want to eat?\nWhat do you want to eat?\nPancakes\nPancakes"
+                feedback: Almost! But look at the question, it is not repeated.
+            -   option: "Welcome to restaurant Hedy\nPancakes\nPancakes"
+                feedback: Well done!
+            hint: The first sentence and question will not be repeated
+            correct_answer: D
+            question_score: '10'
+        7:
+            question_text: What is wrong with this code?
+            code: "food = {ask} 'What would you like to eat?'\n{if} food {is} fries\nsauce = {ask} 'What sauce would you like?'\n    {print} 'One fries with ' sauce\n{if} food {is} pizza\n    topping = {ask} 'What topping would you like?'\n    {print} 'One pizza with ' topping\n{print} 'Thank you for your order'"
+            mp_choice_options:
+            -   option: Nothing. This code is correct!
+                feedback: Something is wrong!
+            -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
+                feedback: You are!
+            -   option: You don't have to use indentation twice. Only in the first `{if}` command.
+                feedback: You always have to use indentation.
+            -   option: The indentation is wrong in the first `{if}` command.
+                feedback: That's right.
+            hint: Take a careful look at the indentation.
+            correct_answer: D
+            question_score: '10'
+        8:
+            question_text: In which of the codes is the indentation done right?
+            mp_choice_options:
+            -   option: "```\n{if} answer {is} 32\n   {print} 'You are...'\n      {sleep}\n          {print} 'right!'\n      {else}\n          {print} 'You are wrong!'\n```"
+                feedback: You are wrong!
+            -   option: "```\n{if} answer {is} 32\n{print} 'You are...'\n{sleep}\n{print} 'right!'\n{else}\n{print} 'You are wrong!'\n```"
+                feedback: You are wrong!
+            -   option: "```\n{if} answer {is} 32\n    {print} 'You are...'\n    {sleep}\n    {print} 'right!'\n{else}\n    {print} 'You are wrong!'\n```"
+                feedback: You are... right!
+            -   option: "```\n{if} answer {is} 32\n    {print} 'You are...'\n    {sleep}\n{print} 'right!'\n{else}\n    {print} 'You are wrong!'\n```"
+                feedback: You are wrong!
+            hint: What should happen if the person is right? And what else?
+            correct_answer: C
+            question_score: '10'
+        9:
+            question_text: What line(s) in this code should start with 4 spaces?
+            code: "1 music = {ask} 'What is your favorite music genre?'\n2 {if} music {is} rock\n3 {print} '🤘'\n4 {else}\n5 {print} '👎'"
+            mp_choice_options:
+            -   option: Line 2 and 4
+                feedback: The lines after the `{if}` and `{else}` command should start with 4 spaces
+            -   option: Only line 3
+                feedback: Not only 3...
+            -   option: Line 3, 4 and 5
+                feedback: Line 4 shouldn't
+            -   option: Line 3 and 5
+                feedback: Great job!
+            hint: The lines after an `{if}` or `{else}` command should start with 4 spaces.
+            correct_answer: D
+            question_score: '10'
+        10:
+            question_text: Which statement is true?
+            code: "1 level = {ask} 'What level are you on?'\n2 {if} level {is} 8\n3 {print} 'Great job!'"
+            mp_choice_options:
+            -   option: All lines should start with 4 spaces
+                feedback: That's not true
+            -   option: Line 2 and 3 should start with 4 spaces
+                feedback: That's not true
+            -   option: Line 2 should start with 4 spaces
+                feedback: That's not true
+            -   option: Line 3 should start with 4 spaces
+                feedback: You are correct!
+            hint: Only one line starts with 4 spaces, but which one...?
+            correct_answer: D
+            question_score: '10'
+    9:
+        1:
+            question_text: What is wrong with this code?
+            code: "{repeat} 3 {times}\n   food = {ask} 'What would you like to eat?'\n   {if} food {is} fries\n       sauce = {ask} 'What sauce would you like?'\n       {print} 'One fries with ' sauce\n   {if} food {is} pizza\n       topping = {ask} 'What topping would you like?'\n       {print} 'One pizza with ' topping\n{print} 'Thank you for your order'"
+            mp_choice_options:
+            -   option: Nothing, this code is correct!
+                feedback: That's right!
+            -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
+                feedback: You are!
+            -   option: You don't have to use indentation twice.
+                feedback: You always have to use indentation.
+            -   option: The indentation is wrong in the last `{if}` command.
+                feedback: It is not the indentation.
+            hint: All the indentation is done correctly.
+            correct_answer: A
+            question_score: '10'
+        2:
+            question_text: What will be printed after entering the correct password?
+            code: "password = {ask} 'What is the password?'\ncorrect_password = Hedy\n{if} password {is} correct_password\n    {repeat} 2 {times}\n        {print} 'Good job!'\n        {print} 'You can use the computer!'\n{else}\n    {print} 'The computer will explode in 5... 4... 3... 2... 1...'"
+            mp_choice_options:
+            -   option: "```\nGood job!\nGood job!\n```"
+                feedback: That's not it!
+            -   option: "```\nThe computer will explode in 5... 4... 3... 2... 1...\n```"
+                feedback: That's not it!
+            -   option: "```\nGood job!\nGood job!\nYou can use the computer!\n```"
+                feedback: That's not it!
+            -   option: "```\nGood job!\nYou can use the computer!\nGood job!\nYou can use the computer!\n```"
+                feedback: Correct!
+            hint: Everything under the `{repeat}` command is repeated twice.
+            correct_answer: D
+            question_score: '10'
+        3:
+            question_text: Which case should you choose to win a million dollars?
+            code: "{print} 'Choose the right case and win!'\ncase = {ask} 'Which case will you pick? 1 or 2?'\n{if} case {is} 1\n     action = {ask} 'Open it or sell it?'\n     {if} action {is} sell\n         {print} 'You sell your case for 10 dollars'\n     {if} action {is} open\n         {print} 'You open the case and win an apple pie'\n{if} case {is} 2\n     action = {ask} 'Open it or sell it?'\n     {if} action {is} sell\n         {print} 'You sell the case for 500 dollars'\n     {if} action {is} open\n         {print} 'You open the case and win a million dollars!'"
+            mp_choice_options:
+            -   option: case 1, sell
+                feedback: You don't win a million!
+            -   option: case 1, open
+                feedback: You don't win a million
+            -   option: case 2, sell
+                feedback: You don't win a million
+            -   option: case 2, open
+                feedback: Great job! You win!
+            hint: Sledite pravi poti
+            correct_answer: D
+            question_score: '10'
+        4:
+            question_text: Which statement is true?
+            code: "name = {ask} 'What is your name?'\nsize = {ask} 'What is your shoe size?'\n{if} size {is} 38\n    {if} name {is} Cinderella\n        {print} '❤️❤️❤️'\n    {else}\n        {print} 'You are not the one!'\n{else}\n    {print} 'Ill keep looking'"
+            mp_choice_options:
+            -   option: Sleeping Beauty with shoe size 38 gets the output 'Ill keep looking'
+                feedback: No, she gets 'You are not the one!'
+            -   option: Cinderella with shoe size 40 gets the output '❤️❤️❤️'
+                feedback: No, she gets 'Ill keep looking'
+            -   option: Sleeping Beauty with shoe size 40 gets the output 'Ill keep looking'
+                feedback: That's right!
+            -   option: Cinderella with shoe size 38 gets the output 'Ill keep looking'
+                feedback: No she gets '❤️❤️❤️'
+            hint: No matter what your name is, if you have shoe size 40 you will get the message 'Ill keep looking'.
+            correct_answer: C
+            question_score: '10'
+        5:
+            question_text: Which code produced this output?
+            output: "Icecream is the best!\nIcecream is the best!\nIcecream is the best!"
+            mp_choice_options:
+            -   option: "```\ndessert = {ask} 'What is your favorite type of dessert?'\n{if} dessert {is} icecream\n    {repeat} 3 {times}\n    {print} 'Icecream is the best!'\n```"
+                feedback: Don't forget the indentation after `{repeat}` commands.
+            -   option: "```\ndessert = {ask} 'What is your favorite type of dessert?'\n{if} dessert {is} icecream\n{repeat} 3 {times}\n    {print} 'Icecream is the best!'\n```"
+                feedback: Use indentation after an `{if}` command
+            -   option: "```\ndessert = {ask} 'What is your favorite type of dessert?'\n{if} dessert {is} icecream\n    {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```"
+                feedback: Perfect
+            -   option: "```\n{repeat} 3 {times}\n    dessert = {ask} 'What is your favorite type of dessert?'\n    {if} dessert {is} icecream\n        {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```"
+                feedback: There are 2 `{repeat}` commands in this code.
+            hint: Pazite na zamike
+            correct_answer: C
+            question_score: '10'
+        6:
+            question_text: After which command(s) should you use indentation (starting the next line with 4 spaces)?
+            mp_choice_options:
+            -   option: '`{if}`'
+                feedback: Don't forget the others
+            -   option: '`{if}` `{repeat}`'
+                feedback: Don't forget `{else}`!
+            -   option: '`{if}` `{else}` `{repeat}`'
+                feedback: Keep it up!
+            -   option: '`{if}` `{else}` `{repeat}` `{print}`'
+                feedback: Not with `{print}`
+            hint: Indentation happens on the line below some commands
+            correct_answer: C
+            question_score: '10'
+        7:
+            question_text: You'll get a 5 dollar discount if you order a medium pizza with coke.<br>But the code has a mistake! How to debug it?
+            code: "{if} food {is} pizza\n{if} size {is} medium\n{if} drink {is} coke\nprice = price - 5"
+            mp_choice_options:
+            -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n        {if} drink {is} coke\n            price = price - 5\n```"
+                feedback: Amazing!
+            -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n{if} drink {is} coke\n    price = price - 5\n```"
+                feedback: The second `{if}` misses code!
+            -   option: "```\n{if} food {is} pizza\n{if} size {is} medium\n{if} drink {is} coke\n        price = price - 5\n```"
+                feedback: Two consecutive `{if}`s is never correct.
+            -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n        {if} drink {is} coke\n        price = price - 5\n```"
+                feedback: Almost right. Take another look at the last line
+            hint: After each `{if}` command, the line below should indent
+            correct_answer: A
+            question_score: '10'
+        8:
+            question_text: What is wrong in this code?
+            code: "age = {ask} 'Happy Birthday! How old are you?'\nsinging = {ask} 'Would you like us to sing?'\n{if} singing {is} yes\n    {repeat} years {times}\n        {print} 'Hip Hip Hooray'"
+            mp_choice_options:
+            -   option: You can't put two questions in a row
+                feedback: Yes you can.
+            -   option: The variable called 'age' is later on used as 'years'
+                feedback: Keen eye! Good job!
+            -   option: You're not allowed to start with 8 spaces, like line 5 does
+                feedback: You actually must start like that.
+            -   option: A code must always start with a `{print}` command in the first line
+                feedback: That's not true.
+            hint: The indentation is done right this time
+            correct_answer: B
+            question_score: '10'
+        9:
+            question_text: How many `{if}` commands can be placed inside another `{if}` command?
+            mp_choice_options:
+            -   option: None, that is not allowed
+                feedback: You are allowed to
+            -   option: Only 1
+                feedback: You could use more if you like
+            -   option: '3'
+                feedback: You could use more if you like
+            -   option: Infinite, as long as you keep using indentation correctly
+                feedback: That is true
+            hint: You can put an `{if}` command inside an `{if}` command.
+            correct_answer: D
+            question_score: '10'
+        10:
+            question_text: Which statement is true?
+            code: "1 {repeat} 2 {times}\n2 {if} level {is} 9\n3 {print} 'Great job!'"
+            mp_choice_options:
+            -   option: All lines should start with 4 spaces
+                feedback: Only line 2 and 3 start with spaces
+            -   option: Line 2 and 3 should start with 4 spaces
+                feedback: Line 3 should start with 8
+            -   option: Line 2 and 3 should start with 8 spaces
+                feedback: Line 2 should start with 4
+            -   option: line 2 should start with 4 spaces and line 3 with 8
+                feedback: You are correct!
+            hint: The first line doesn't start with any spaces
+            correct_answer: D
+            question_score: '10'
+    10:
+        1:
+            question_text: What do we need to fill in on the `_` if we want to print each compliment?
+            code: "compliments = perfect, great job, amazing\n_\n    {print} compliment"
+            mp_choice_options:
+            -   option: "```\n{for} each compliment\n```"
+                feedback: That's not it
+            -   option: "```\n{for} compliment {in} compliments\n```"
+                feedback: You deserve all those compliments!
+            -   option: "```\n{if} compliment {in} compliments\n```"
+                feedback: That's not it
+            -   option: "```\n{for} compliments {in} compliment\n```"
+                feedback: Almost there!
+            hint: '`{for}` each compliment in the lists of compliments...'
+            correct_answer: B
+            question_score: '10'
+        2:
+            question_text: Which output is correct?
+            code: "meals = pizza, pasta, pancakes\n{for} meal {in} meals\n    {print} 'I love ' meal"
+            mp_choice_options:
+            -   option: I love pizza
+                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
+            -   option: I love pasta
+                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
+            -   option: I love pancakes
+                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
+            -   option: "I love pizza\nI love pasta\nI love pancakes"
+                feedback: Great!
+            hint: Line 2 says for each meal in the list of meals. So each meal is printed.
+            correct_answer: D
+            question_score: '10'
+        3:
+            question_text: Which output is correct?
+            code: "animals = dogs, cats, hamsters, chickens\n{for} animal {in} animals\n    {print} animal ' are lovely pets'"
+            mp_choice_options:
+            -   option: dogs are lovely pets
+                feedback: Line 2 says {for} each animal in the list of animals. So each animal is {print}ed.
+            -   option: dogs, cats, hamsters, chickens are lovely pets
+                feedback: Each animal gets their own line in the output.
+            -   option: "dogs are lovely pets\ncats are lovely pets\nhamsters are lovely pets\nchickens are lovely pets"
+                feedback: Great!
+            -   option: You don't know yet. Because it chooses one of the animals {at} {random}.
+                feedback: Line 2 says {for} each animal in the list of animals. So each animal is {print}ed.
+            hint: Line 2 says {for} each animal in the list of animals. So each animal is printed
+            correct_answer: C
+            question_score: '10'
+        4:
+            question_text: What's wrong with this code?
+            code: "groceries = apples, bread, milk\n{for} item {in} groceries\n    {print} 'We need ' groceries"
+            mp_choice_options:
+            -   option: Line 2 needs to start with 4 spaces as indentation
+                feedback: No it doesn't. Only line 3 needs indentation, which it has.
+            -   option: Line 3 does not need to start with 4 spaces as indentation
+                feedback: Line 2 is a `{for}`command so line 3 does need to start with an indent.
+            -   option: Line 3 should say item instead of groceries
+                feedback: Good job!
+            -   option: Line 2 should say groceries instead of item
+                feedback: No it does not.
+            hint: Line 2 says `{for}` each item in the list of groceries
+            correct_answer: C
+            question_score: '10'
+        5:
+            question_text: What word should be on the `_` with these digital dice?
+            code: "{print} 'Welcome to the digital dice!'\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\n{for} player {in} players\n    {print} player ' throws ' _ {at} {random}"
+            mp_choice_options:
+            -   option: players
+                feedback: It would say 'Ann throws Jesse', instead of 'Ann throws 6'.
+            -   option: choices
+                feedback: That's right!
+            -   option: choice
+                feedback: You are very close. But you need Hedy to pick from the list called 'choices' not 'choice'...
+            -   option: dice
+                feedback: Look at the names of the variables.
+            hint: Hedy needs to pick a number `{at} {random}`
+            correct_answer: B
+            question_score: '10'
+        6:
+            question_text: Which of the answers below is a possible outcome when you run the code?
+            code: "choices = rock, paper, scissors\nplayers = Kelly, Meredith\n{for} player {in} players\n    {print} player ' chooses ' choices {at} {random}"
+            mp_choice_options:
+            -   option: "```\nKelly chooses rock\n```"
+                feedback: Meredith wants to play too!
+            -   option: "```\nMeredith chooses scissors\nKelly chooses rock\n```"
+                feedback: So close! But Kelly is first in the list, so she goes first
+            -   option: "```\nMeredith chooses paper\n```"
+                feedback: Kelly wants to play too!
+            -   option: "```\nKelly chooses paper\nMeredith chooses scissors\n```"
+                feedback: Amazing!
+            hint: Each player will pick an option. The player that's first on the list will go first.
+            correct_answer: D
+            question_score: '10'
+        7:
+            question_text: What line should be on the `_` in this code that decides what these people will have for dinner?
+            code: "names = Ron, Leslie, April, Andy\nfood = pasta, fries, salad\n_\n    {print} name ' has to eat ' food {at} {random} ' for dinner'"
+            mp_choice_options:
+            -   option: "```\n{for} name {in} names\n```"
+                feedback: You are on fire!
+            -   option: "```\n{for} names {in} name\n```"
+                feedback: No it should be for each name in the list nameS, so the other way around
+            -   option: "```\n{for} food {in} food\n```"
+                feedback: Each name should be told what they will have for dinner.
+            -   option: "```\n{for} name {in} food\n```"
+                feedback: Each name should be told what they will have for dinner.
+            hint: Each name should be told what they will have for dinner.
+            correct_answer: A
+            question_score: '10'
+        8:
+            question_text: What should be on the `_` in this code that decides which color shirt you get?
+            code: "names = Donna, Tommy, Ben\ncolors = blue, red, purple\n{for} name {in} names\n    {print} _"
+            mp_choice_options:
+            -   option: "```\n'name gets a color shirt'\n```"
+                feedback: That's not it!
+            -   option: "```\nname 'gets a ' colors {at} {random} ' shirt'\n```"
+                feedback: Great job! This was a hard one!
+            -   option: "```\nnames 'gets a ' color {at} {random} ' shirt'\n```"
+                feedback: You want each name printed. So the first word should not be names but...
+            -   option: "```\npeople ' gets a colors shirt'\n```"
+                feedback: There is no variable named people..
+            hint: Mind the quotation marks and the names of the variables
+            correct_answer: B
+            question_score: '10'
+        9:
+            question_text: What is the first question Hedy will ask you when you run the program?
+            code: "courses = appetizer, main course, dessert\nnames = Timon, Onno\n{for} name {in} names\n    {for} course {in} courses\n        food = {ask} name ', what would you like to eat as your ' course '?'\n        {print} name ' orders ' food ' as their ' course"
+            mp_choice_options:
+            -   option: Timon, what would you like to eat as your appetizer?
+                feedback: Perfect!
+            -   option: Onno, what would you like to eat as your appetizer?
+                feedback: Timon is first on the list!
+            -   option: Timon, what would you like to eat as your dessert?
+                feedback: Appetizers are first in the list
+            -   option: You don't know that. Hedy will choose `{at} {random}`.
+                feedback: There is no `{at} {random}` in this code...
+            hint: The first options from both lists are chosen.
+            correct_answer: A
+            question_score: '10'
+        10:
+            question_text: What is true about this code?
+            code: "prizes = 1 million dollars, car, sandwich\nnames = Bob, Patrick, Sandy, Larry\n{for} prize {in} prizes\n    {print} 'The ' prize ' is won by ' names {at} {random}"
+            mp_choice_options:
+            -   option: Everybody will always win a prize.
+                feedback: That is not true, you could end up without a prize.
+            -   option: All the prizes always go to one single person.
+                feedback: That is not true. All the prizes are given away, but to random people
+            -   option: Larry will never win a prize
+                feedback: That is not true. Larry has the same odds as the others
+            -   option: Someone might win two prizes
+                feedback: You get it!
+            hint: Try to imagine the output of this code.
+            correct_answer: D
+            question_score: '10'
+    11:
+        1:
+            question_text: What word should be at the place of the blank?
+            code: "{for} i {in} _ 1 {to} 10\n    {print} i"
+            mp_choice_options:
+            -   option: '`counter`'
+                feedback: No
+            -   option: '`{range}`'
+                feedback: Correct
+            -   option: '`{if}`'
+                feedback: No
+            -   option: '`{for}`'
+                feedback: No
+            hint: What did you learn in this level?
+            correct_answer: B
+            question_score: '10'
+        2:
+            question_text: What will be the output from this code?
+            code: "{for} i {in} {range} 1 {to} 3\n    {print} i"
+            mp_choice_options:
+            -   option: "```\n1\n2\n3\n```"
+                feedback: Correct!
+            -   option: "```\n1 2 3\n```"
+                feedback: That's not it
+            -   option: "```\n1, 2, 3\n```"
+                feedback: That's not it
+            -   option: "```\n123\n```"
+                feedback: That's not it
+            hint: How do the numbers appear in the screen?
+            correct_answer: A
+            question_score: '10'
+        3:
+            question_text: Which code was used to get this output?
+            output: "1\n2\n3\n4\n5\nOnce I caught a fish alive!"
+            mp_choice_options:
+            -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n{print} 'Once I caught a fish alive!'\n```"
+                feedback: Perfect
+            -   option: "```\n{for} i {in} {range} 1 {to} 5\n{print} i\n{print} 'Once I caught a fish alive!'\n```"
+                feedback: This code won't work. You need an indent after {for}.
+            -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n    {print} 'Once I caught a fish alive!'\n```"
+                feedback: Now Hedy will count '1 Once I caught a fish alive!, 2 Once I caught a fish alive! etc.
+            -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} 'i'\n{print} 'Once I caught a fish alive!'\n```"
+                feedback: i is a variable and shouldn't have quotation marks
+            hint: First all the numbers, then the sentence
+            correct_answer: A
+            question_score: '10'
+        4:
+            question_text: Which code was used to get this output?
+            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
+            mp_choice_options:
+            -   option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} i\n```"
+                feedback: Now Hedy prints the numbers from 0 to 10 instead of 10 to 0.
+            -   option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} -1 * i\n```"
+                feedback: Hedy would print negative numbers in this case.
+            -   option: "```\n{for} i {in} {range} 10 {to} 0\n    {print} i\n```"
+                feedback: Unfortunately this does not exist.
+            -   option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} 10 - i\n```"
+                feedback: That's right!
+            hint: It has to be a calculation…
+            correct_answer: D
+            question_score: '10'
+        5:
+            question_text: What's wrong with this code?
+            code: "{for} i {in} {range} 1 {to} 10\n{print} i"
+            mp_choice_options:
+            -   option: The i in the last line need quotation marks
+                feedback: No it doesn't.
+            -   option: You can't use `{range}` 1 `{to}` 5 only `{range}` 1 `{to}` 10
+                feedback: You could use 1 to 5 just as well!
+            -   option: Line 1 needs to start with an indention.
+                feedback: Not line 1...
+            -   option: Line 2 needs to start with an indention
+                feedback: Perfect!
+            hint: There is something wrong with the indention
+            correct_answer: D
+            question_score: '10'
+        6:
+            question_text: How many times does the word Hello appear on your screen when you run the code?
+            code: "{for} i {in} {range} 0 {to} 2\n    {print} 'Hello'"
+            mp_choice_options:
+            -   option: 1 time
+                feedback: No
+            -   option: 2 times
+                feedback: No
+            -   option: 3 times
+                feedback: That's right!
+            -   option: Never
+                feedback: No
+            hint: 0 also counts. So 0,1,2 that's 3 times.
+            correct_answer: C
+            question_score: '10'
+        7:
+            question_text: What should be on the place of the blank?
+            code: "{print} 'Welcome to Hedys diner'\npeople = {ask} 'How many people will be eating here tonight?'\n_\n    food = {ask} 'What would you like to order?'\n    {print} food"
+            mp_choice_options:
+            -   option: "```\n{for} i {in} {range} 0 {to} 3\n```"
+                feedback: There's not always 3 people
+            -   option: "```\n{for} i {in} {range} 1 {to} guests\n```"
+                feedback: The variable is not named guests
+            -   option: "```\n{for} i {in} {range} 1 {to} people\n```"
+                feedback: Great!
+            -   option: "```\n{for} i {in} {range} 0 {to} people\n```"
+                feedback: That's one order too many!
+            hint: Uporabite spremenljivko 'ljudje'
+            correct_answer: C
+            question_score: '10'
+        8:
+            question_text: What will be the output from this code?
+            code: "{for} i {in} {range} 23 {to} 25\n    {print} 'hi'"
+            mp_choice_options:
+            -   option: "```\n23\n24\n25\n```"
+                feedback: The numbers don't appear. It doesn't say `{print}` i.
+            -   option: "```\n23 hi 24 hi 25 hi\n```"
+                feedback: The numbers don't appear. It doesn't say `{print}` i
+            -   option: "```\nhi\nhi\nhi\n```"
+                feedback: Correct
+            -   option: The word 'hi' will appear 25 times in a row.
+                feedback: No it will only appear 3 times.
+            hint: Ne pravi `{print}` i
+            correct_answer: C
+            question_score: '10'
+        9:
+            question_text: How many times does Hedy chant Hip Hip Hooray?
+            code: "age = {ask} 'How old are you?'\n{for} i {in} {range} 1 {to} age\n    {print} 'Hip Hip Hoorray!'"
+            mp_choice_options:
+            -   option: 1 time
+                feedback: Try again
+            -   option: 2 times
+                feedback: Try again
+            -   option: Never
+                feedback: Try again
+            -   option: That depends on how old you are
+                feedback: That's right!
+            hint: '`{for}` i `{in}` `{range}` 1 `{to}` age'
+            correct_answer: D
+            question_score: '10'
+        10:
+            question_text: Which code belongs to this output?
+            output: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
+            mp_choice_options:
+            -   option: "```\n{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n    {print} Baby shark\n```"
+                feedback: Mind the indentation
+            -   option: "```\n{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n{print} Baby shark\n```"
+                feedback: That's right!
+            -   option: "```\n{for} i {in} {range} 0 {to} 3\n    {print} Baby shark tututudutudu\n{print} Baby shark\n```"
+                feedback: '`{range}` 0 `{to}` 3 is 4 times.'
+            -   option: "```\n{for} i {in} {range} 0 {to} 3\n    {print} Baby shark tututudutudu\n    {print} Baby shark\n```"
+                feedback: '`{range}` 0 `{to}` 3 is 4 times.'
+            hint: Bodite pozorni na zamike
+            correct_answer: B
+            question_score: '10'
+    12:
+        1:
+            question_text: Which output is correct?
+            code: "{print} 'three and a half plus one and a half is...'\n{print} 3.5 + 1.5"
+            mp_choice_options:
+            -   option: '5'
+                feedback: Don't forget the first line of code!
+            -   option: 3.5 + 1.5
+                feedback: This is not the one!
+            -   option: "three and a half plus one and a half is...\nfive"
+                feedback: Take a close look at the second line...
+            -   option: "three and a half plus one and a half is...\n5"
+                feedback: Great job!
+            hint: Obe vrstici sta izpisani!
+            correct_answer: D
+            question_score: '10'
+        2:
+            question_text: Which of these codes is correct?
+            mp_choice_options:
+            -   option: "```\nflavors {is} vanilla, strawberry, chocolate\n{print} 'I would like a ' flavors {at} {random} ' cake.'\n```"
+                feedback: All the different values of flavors should be in quotation marks.
+            -   option: "```\n'flavors = vanilla, strawberry, chocolate'\n{print} 'I would like a ' flavors {at} {random} ' cake.'\n```"
+                feedback: All the different values of flavors should be in quotation marks.
+            -   option: "```\nflavors = 'vanilla', 'strawberry', 'chocolate'\n{print} 'I would like a ' flavors {at} {random} ' cake.'\n```"
+                feedback: Alright!
+            -   option: "```\n                flavors = 'vanilla, strawberry, chocolate'\n                {print} 'I would like a ' flavors {at} {random} ' cake.'\n                ```"
+                feedback: All the different values of flavors should be in quotation marks.
+            hint: The second line is the same in each code, pay attention to the first line
+            correct_answer: C
+            question_score: '10'
+        3:
+            question_text: What's wrong with this code?
+            code: "favorite_animal = {ask} 'What is your favorite animal?'\n{print} 'I like ' favoriteanimal ' too!'"
+            mp_choice_options:
+            -   option: The name of the variable is different in line 1 than in line 2.
+                feedback: Correct!
+            -   option: The quotation marks aren't used correctly in line 2
+                feedback: That's not true
+            -   option: You can't use the = sign when using an {ask} command
+                feedback: That's not true
+            -   option: Nothing is wrong.
+                feedback: That's not true
+            hint: The quotation marks are used correctly
+            correct_answer: A
+            question_score: '10'
+        4:
+            question_text: In which lines are quotation marks needed to get the code to work?
+            code: "{print} Welcome to the online shoe shop\ncategory = {ask} What kind of shoes are you looking for?\n{if} category = high heels\n    {print} High heels are 50% off now!"
+            mp_choice_options:
+            -   option: Line 1 and 2
+                feedback: No
+            -   option: Line 1, 2 and 3
+                feedback: No
+            -   option: Line 1, 2 and 4
+                feedback: No
+            -   option: All of the lines
+                feedback: Perfect!
+            hint: Does line 3 need quotation marks too?
+            correct_answer: D
+            question_score: '10'
+        5:
+            question_text: What output does Agent007 get when they put in the correct password?
+            code: "name {is} {ask} 'What is your name?'\n{if} name {is} 'Agent007'\n    a {is} 'Go to the airport '\nelse\n    a {is} 'Go to the train station '\npassword {is} {ask} 'What is the password?'\n{if} password {is} 'TOPSECRET'\n    b {is} 'tomorrow at 02.00'\n{else}\n    b {is} 'today at 10.00'\n{print} a + b"
+            mp_choice_options:
+            -   option: Go to the train station today at 10.00
+                feedback: The agent won't be catching any bad guys here
+            -   option: Go to the airport tomorrow at 02.00
+                feedback: You've cracked the code!
+            -   option: Go to the train station tomorrow at 02.00
+                feedback: The agent won't be catching any bad guys here
+            -   option: Go to the airport tomorrow at 10.00
+                feedback: The agent won't be catching any bad guys here
+            hint: Pravilno geslo je  STROGO_ZAUPNO
+            correct_answer: B
+            question_score: '10'
+        6:
+            question_text: Which line should be filled in at the ???
+            code: "{print} 'Welcome to McHedy!'\norder = {ask} 'Would you like a hamburger or fries?'\n{if} order = 'hamburger'\n    price = 12\n{if} order = 'fries'\n    price = 4\ndrinks = {ask} 'Would you like a drink with that for 2 dollars?'\n{if} drinks = 'yes'\n    ???\n{print} 'That will be ' price ' dollar please'"
+            mp_choice_options:
+            -   option: "```\nprice = 14\n```"
+                feedback: What if you only order fries and a drink?
+            -   option: "```\nprice = '14'\n```"
+                feedback: What if you only order fries and a drink?
+            -   option: "```\nprice = price + 2\n```"
+                feedback: Excellent!
+            -   option: "```\nprice = + 2\n```"
+                feedback: Almost there!
+            hint: What if you only order fries and a drink?
+            correct_answer: C
+            question_score: '10'
+        7:
+            question_text: Which output does a vegan get?
+            code: "menu = 'cookies', 'cheese', 'grapes'\n{print} \"It's my birthday! I`ve brought some snacks!\"\ndiet = {ask} 'Do you have any dietary restrictions?'\n{if} diet = 'gluten free'\n    {remove} 'cookies' {from} menu\n{if} diet = 'vegan'\n    {remove} 'cheese' {from} menu\n{print} 'For you I have brought: '\n{for} snack {in} menu\n    {print} snack"
+            mp_choice_options:
+            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ncookies\ngrapes"
+                feedback: Terrific!
+            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ngrapes"
+                feedback: There's more options than just one
+            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ncheese\ngrapes"
+                feedback: A vegan person can't have cheese
+            -   option: "It's my birthday! I've brought some snacks!\nFor you I have brought:\ngrapes\ncookies"
+                feedback: Almost there, but look at the order of snacks in the list
+            hint: What item is removed from the list when you answer 'vegan'?
+            correct_answer: A
+            question_score: '10'
+        8:
+            question_text: Which code was used to create this output?
+            code: '3.5'
+            mp_choice_options:
+            -   option: "```\n{print} '7 / 2'\n```"
+                feedback: No
+            -   option: "```\n{print} 7 / 2\n```"
+                feedback: That is right!
+            -   option: "```\n{print} 7 : 2\n```"
+                feedback: No
+            -   option: "```\n{print} 7 * 2\n```"
+                feedback: No
+            hint: 7 devided by 2 is 3.5
+            correct_answer: B
+            question_score: '10'
+        9:
+            question_text: Which code should be filled in in line 1 at the ???
+            code: "???\n{print} 'You won ' prizes {at} {random} '!'"
+            mp_choice_options:
+            -   option: "```\nprizes = 'one' 'million' 'dollars', 'nothing'\n```"
+                feedback: You won nothing
+            -   option: "```\nprizes = 'one million dollars, nothing'\n```"
+                feedback: You won nothing
+            -   option: "```\nprizes = 'one million dollars', 'nothing'\n```"
+                feedback: Winner!
+            -   option: "```\n'prizes' = 'one million dollars', 'nothing'\n```"
+                feedback: You won nothing
+            hint: The items on the list should be in quotation marks
+            correct_answer: C
+            question_score: '10'
+        10:
+            question_text: Which line of code should be filled in at the ??? to complete the song ?
+            code: "actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n???\n    {for} i {in} {range} 0 {to} 1\n        {print} 'if youre happy and you know it'\n        {print} action\n    {print} 'if youre happy and you know it and you really want to show it'\n    {print} 'if youre happy and you know it'\n    {print} action"
+            mp_choice_options:
+            -   option: "```\n{for} i {in} {range} 1 {to} 3\n```"
+                feedback: This is a hard one! All the actions on the list must be in the song.
+            -   option: "```\n{for} action {in} actions\n```"
+                feedback: You are amazing!
+            -   option: "```\n{repeat} 3 {times}\n```"
+                feedback: This is a hard one! All the actions on the list must be in the song.
+            -   option: "```\n{print} actions {at} {random}\n```"
+                feedback: This is a hard one! All the actions on the list must be in the song.
+            hint: This is a hard one! All the actions on the list must be in the song.
+            correct_answer: B
+            question_score: '10'
+    13:
+        1:
+            question_text: Which code should be filled in at the ??? ?
+            code: "name = {ask} 'What is your name?'\nsong = {ask} 'Whould you like to hear a song?'\nbirthday = {ask} 'Is today your birthday?'\n???\n    {print} 'Happy Birthday to you!'\n    {print} 'Happy Birthday to you!'\n    {print} 'Happy Birthday dear ' name\n    {print} 'Happy Birthday to you!'"
+            mp_choice_options:
+            -   option: "```\n{if} birthday {and} song = 'yes'\n```"
+                feedback: Almost there
+            -   option: "```\n{if} birthday = 'yes' {and} name = 'Hedy'\n```"
+                feedback: Hedy only sings for you if you like to hear a song
+            -   option: "```\n{if} song = 'yes' {and} birthday = 'yes'\n```"
+                feedback: Super!
+            -   option: "```\n{if} song = 'yes' {or} birthday = 'yes'\n```"
+                feedback: Hedy only sings if both answers are yes
+            hint: Hedy sings if you want to hear a song and it's you birthday
+            correct_answer: C
+            question_score: '10'
+        2:
+            question_text: Which command is missing in the code at the place of the ??? ?
+            code: "menu = 'cheese', 'sausage rolls', 'cookies'\ndiet = {ask} 'Do you have any dietary restrictions?'\n{if} diet = 'vegan' ??? diet = 'halal'\n    {remove} 'sausage rolls' {from} menu"
+            mp_choice_options:
+            -   option: '`{and}`'
+                feedback: You don't have to be vegan and muslim
+            -   option: '`{or}`'
+                feedback: Great thinking!
+            -   option: '`+`'
+                feedback: No
+            -   option: '`{print}`'
+                feedback: No
+            hint: Neither vegans nor muslims can eat sausage rolls.
+            correct_answer: B
+            question_score: '10'
+        3:
+            question_text: Which output is given to a member without a discount code?
+            code: "member = {ask} 'Do you have a membership card?'\ndiscount = {ask} 'Do you have a discount code?'\n{if} member = 'yes' {or} discount = 'yes'\n    {print} 'You get a free apple pie!'\n{else}\n    {print} 'That will be 5 dollars please'"
+            mp_choice_options:
+            -   option: You get a free apple pie!
+                feedback: Great job!
+            -   option: That will be 5 dollars please
+                feedback: That is not true
+            -   option: This code won't work, so there is no output
+                feedback: There is nothing wrong with the code
+            -   option: There is no way of knowing
+                feedback: There is! Read the question carefully
+            hint: Mind the command `{or}` in line 3
+            correct_answer: A
+            question_score: '10'
+        4:
+            question_text: Which line of code should follow this line in rock-paper-scissors game?
+            code: "{if} computer_choice {is} 'rock' {and} your_choice {is} 'paper'"
+            mp_choice_options:
+            -   option: "```\n{print} 'you win'\n```"
+                feedback: You win!
+            -   option: "```\n{print} 'you lose'\n```"
+                feedback: You lose!
+            -   option: "```\n{print} 'tie'\n```"
+                feedback: It's only a tie if both choices are the same
+            -   option: "```\n{print} 'try again'\n```"
+                feedback: Try again!
+            hint: Papir premaga kamen
+            correct_answer: A
+            question_score: '10'
+        5:
+            question_text: Which statement is true about this code?
+            code: "{if} name = 'Cinderella' {and} shoe_size = 38\n    {print} 'You are my one true love!'"
+            mp_choice_options:
+            -   option: Every person with shoe size 38 is this prince's one true love
+                feedback: The prince is a little more picky than that!
+            -   option: Every person named Cinderella is this prince's one true love
+                feedback: The prince is a little more picky than that!
+            -   option: Every person that is named Cinderella and has shoe size 38 is this prince's one true love
+                feedback: Fantastic!
+            -   option: Every person that's not named Cinderella and does not have shoe size 38 is this prince's one true love
+                feedback: The prince is a little more picky than that!
+            hint: Both statements have to be true
+            correct_answer: C
+            question_score: '10'
+        6:
+            question_text: Which statement about this code is true?
+            code: "{print} 'Let me guess which family member you are!'\nglasses = {ask} 'Do you wear glasses?'\nfemale = {ask} 'Are you female?'\n{if} glasses = 'yes' {and} female = 'yes'\n    {print} 'You must be Sophie!'\n{if} glasses = 'no' {and} female = 'yes'\n   {print} 'You must be Marleen!'\n{if} glasses = 'yes' {and} female = 'no'\n    {print} 'You must be Wouter!'\n{if} glasses = 'no' {and} female = 'no'\n    {print} 'You must be Michael!'"
+            mp_choice_options:
+            -   option: Michael is a boy with glasses
+                feedback: Try again
+            -   option: Marleen is a girl with glasses
+                feedback: Try again
+            -   option: Wouter is a boy without glasses
+                feedback: Try again
+            -   option: Sophie is a girl with glasses
+                feedback: Great job!
+            hint: Take a good look! Or do you need glasses?
+            correct_answer: D
+            question_score: '10'
+        7:
+            question_text: Which statement is false?
+            code: "{print} 'Thank you for helping me take care of my pets'\n{print} 'Here is a program to help feed them'\nanimal = {ask} 'What kind of animal are they?'\ncolor = {ask} 'What colour are they?'\n{if} animal = 'cat' {and} color = 'grey'\n    {print} 'That is Abby. She eats 3 scoops of cat nibbles'\n{if} animal = 'cat' {and} color = 'orange'\n    {print} 'That is Milo. He eats 4 scoops of cat nibbles'\n{if} animal = 'bird' {or} color = 'black'\n    {print} 'I fed them this moring! They do not need more food today'\n{if} animal = 'hamster' {and} color = 'brown'\n    {print} 'You can feed them a piece of carrot'"
+            mp_choice_options:
+            -   option: The grey cat is called Abby
+                feedback: This is true!
+            -   option: Milo the orange cat eats 4 scoops of cat nibbles
+                feedback: This is true
+            -   option: The black hamster needs to be fed a piece of carrot
+                feedback: Great job!
+            -   option: The yellow bird was fed this morning
+                feedback: This is true
+            hint: Read the last 4 lines carefully
+            correct_answer: C
+            question_score: '10'
+        8:
+            question_text: What output do you get if you order popcorn but no drink?
+            code: "{print} 'Welcome to the movie theater'\npopcorn = {ask} 'Would you like some popcorn?'\ndrink = {ask} 'Would you like a drink?'\n{if} popcorn = 'yes' {and} drink = 'yes'\n    {print} 'That will be 8 dollars please'\n{if} popcorn = 'no' {and} drink = 'yes'\n   {print} 'That will be 3 dollars please'\n{if} popcorn = 'yes' {and} drink = 'no'\n    {print} 'That will be 5 dollars please'\n{if} popcorn = 'no' {and} drink = 'no'\n    {print} 'Ok'\n{print} 'Enjoy the movie'"
+            mp_choice_options:
+            -   option: "Welcome to the movie theater\nThat will be 8 dollars please\nEnjoy the movie"
+                feedback: You have paid too much!
+            -   option: "Welcome to the movie theater\nThat will be 5 dollars please\nEnjoy the movie"
+                feedback: Amazing!
+            -   option: "Welcome to the movie theater\nThat will be 3 dollars please\nEnjoy the movie"
+                feedback: That's not enough money!
+            -   option: "Welcome to the movie theater\nOk\nEnjoy the movie"
+                feedback: You have to pay for your popcorn!
+            hint: popcorn = yes and drink = no
+            correct_answer: B
+            question_score: '10'
+        9:
+            question_text: What is wrong with this code?
+            code: "1  chocolate = {ask} 'Would you like chocolate sauce on your ice cream?'\n2  sprinkles = {ask} 'Would you like sprinkles on your ice cream?'\n3  {if} chocolate {and} sprinkles = 'yes'\n4      {print} 'Ice cream with chocolate sauce and sprinkles, coming up!'\n5  {if} chocolate = 'yes' {and} sprinkles = 'no'\n6      {print} 'Ice cream with chocolate sauce, coming up!'\n7  {if} chocolate = 'no' {and} sprinkles = 'yes'\n8      {print} 'Ice cream with sprinkles, coming up'\n9  {if} chocolate = 'no' {and} sprinkles = 'no'\n10     {print} 'Just plain icecream, coming up!'"
+            mp_choice_options:
+            -   option: "Line 3 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'yes'\n```"
+                feedback: Correct!
+            -   option: "Line 3 should be: \n```\n{if} chocolate = 'no' {and} sprinkles = 'no'\n```"
+                feedback: This is not what I ordered!
+            -   option: "Line 5 should be: \n```\n{if} chocolate = 'yes' {and} sprinkles = 'yes'\n```"
+                feedback: This is not what I ordered!
+            -   option: "Line 7 should be:\n```\n{if} chocolate = 'yes' {and} sprinkles = 'no'\n```"
+                feedback: This is not what I ordered!
+            hint: There is a mistake in line 3
+            correct_answer: A
+            question_score: '10'
+        10:
+            question_text: Which command needs to be in line 8 at the place of the ??? ?
+            code: "{print} 'Welcome to the product finder of this supermarkt'\nitem = {ask} 'What product are you looking for?'\nbakery = 'bread', 'buns', 'muffins'\ndrinks = 'soda', 'water', 'lemonade'\nsnacks = 'chips', 'nuts', 'dips'\nfrozen = 'fries', 'icecream', 'pizza'\nfruit = 'bananas', 'apples', 'oranges'\n{if} item {in} snacks ??? item {in} drinks\n    {print} 'This item is in aisle 3'\n{if} item {in} bakery {or} item {in} bakery\n    {print} 'This item in in the back of the store'\n{if} item {in} fruit\n    {print} 'The fruit is sold near the register'"
+            mp_choice_options:
+            -   option: '`{and}`'
+                feedback: There are no items that are both the list of snacks and the list of drinks
+            -   option: '`{or}`'
+                feedback: Great job!
+            -   option: '`{in}`'
+                feedback: No
+            -   option: '`{if}`'
+                feedback: No
+            hint: The item is either in the list of snacks, or in the list of drinks
+            correct_answer: B
+            question_score: '10'
+    14:
+        1:
+            question_text: Which symbol should be used on the blank?
+            code: "name _ {ask} 'Who are you?'\n{if} name == 'Hedy'\n    {print} 'Me too!'"
+            mp_choice_options:
+            -   option: '`=>`'
+                feedback: This is not a symbol.
+            -   option: '`==`'
+                feedback: We are not comparing anything, just asking.
+            -   option: '`!=`'
+                feedback: We are not comparing anything, just asking
+            -   option: '`=`'
+                feedback: Right!
+            hint: We are not comparing anything, we are just asking a name.
+            correct_answer: D
+            question_score: '10'
+        2:
+            question_text: Which of these codes has used the correct = or == symbol?
+            mp_choice_options:
+            -   option: '{if} name = Hedy'
+                feedback: No
+            -   option: '{if} age = 24'
+                feedback: No
+            -   option: answer = {ask} 'What is your answer'
+                feedback: Yes!
+            -   option: answer == {ask} 'How are you doing?'
+                feedback: No
+            hint: When you are comparing two answers you should use ==
+            correct_answer: C
+            question_score: '10'
+        3:
+            question_text: Which symbols should be filled in on the two blanks?
+            code: "guests = {ask} 'How many people are at the party?'\n{if} guests _ 130\n    {print} 'You can come in!'\n{if} guests _ 130\n    {print} 'Im sorry, the club is full. '\n    {print} 'You have to wait for a guest to leave'"
+            mp_choice_options:
+            -   option: '`>` and `<`'
+                feedback: That's not it
+            -   option: '`=` and `>=`'
+                feedback: That's not it
+            -   option: '`<` and `>=`'
+                feedback: You are right
+            -   option: '`+` and `==`'
+            hint: There are 130 people allowed in the club
+            correct_answer: C
+            question_score: '10'
+            feedback: That's not it
+        4:
+            question_text: What's wrong with this code?
+            code: "price = 10\nmoney = {ask} How much money do you have?\nbuy = {ask} 'Would you like to buy this teddy bear?'\n{if} money >= price {and} buy == 'yes'\n    {print} 'You can buy the bear!'\n{else}\n    {print} 'You cannot buy this bear!'"
+            mp_choice_options:
+            -   option: In line 1 == should be used instead of =
+                feedback: No that's not it
+            -   option: Line 2 misses quotation marks
+                feedback: You are correct
+            -   option: In line 4 = should have been used instead of ==
+                feedback: No that's not it
+            -   option: In line 4 <= should have been used instead of >=
+                feedback: No that's not it
+            hint: Simboli so pravilni
+            correct_answer: B
+            question_score: '10'
+        5:
+            question_text: Which symbol should be filled in on the blanks if the movie is suitable for kids for the age of 12 and up?
+            code: "age = {ask} 'How old are you?'\nticket = {ask} 'Do you have a ticket?'\n{if} age _ {and} ticket == 'yes'\n    {print} 'You can enter the movie theater.'\n{else}\n    {print} 'You are not allowed to come in!'"
+            mp_choice_options:
+            -   option: '`> 12`'
+                feedback: 12 year olds are allowed too
+            -   option: '`>= 12`'
+                feedback: Great!
+            -   option: '`< 12`'
+                feedback: These kids are too young!
+            -   option: '`<= 12`'
+                feedback: These kids are too young
+            hint: '> pomeni je več kot'
+            correct_answer: B
+            question_score: '10'
+        6:
+            question_text: How many times do you have to say you are annoyed before this annoying game stops?
+            code: "lives = 2\n{repeat} 10 {times}\n    {if} lives != 0\n        answer = {ask} 'Are you annoyed yet?'\n    {if} answer == 'yes'\n        lives = lives - 1"
+            mp_choice_options:
+            -   option: 10 times
+                feedback: It stops after 2 times
+            -   option: 0 times
+                feedback: It stops after 2 times
+            -   option: 1 time
+                feedback: It stops after 2 times
+            -   option: 2 times
+                feedback: That is correct
+            hint: "!= pomeni 'ni enako'"
+            correct_answer: D
+            question_score: '10'
+        7:
+            question_text: What should be filled in on the three blanks?
+            code: "{print} 'Guess which number'\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber = numbers {at} {random}\ngame = 'on'\n{for} i {in} {range} 1 {to} 10\n    {if} game == 'on'\n        guess = {ask} 'Which number do you think it is?'\n        {if} guess < number\n            {print} _\n        {if} guess > number\n            {print} _\n        {if} guess == number\n            {print} _\n            game = 'over'"
+            mp_choice_options:
+            -   option: "`'Lower'` and `'Higher'` and `'You win!'`"
+                feedback: That's not quite right.
+            -   option: "`'Higher'` and `'Lower'` and `'You win!'`"
+                feedback: You win!
+            -   option: "`'You win!'` and `'Lower!'` and `'Higher'`"
+                feedback: That's not quite right.
+            -   option: "`'Lower!'` and `'You win!'` and `'Higher!'`"
+                feedback: That's not quite right.
+            hint: The last one should say you win.
+            correct_answer: B
+            question_score: '10'
+        8:
+            question_text: Which statement is true about this roller coaster?
+            code: "length = {ask} 'Please fill in your length in cm'\n{if} length < 120\n    {print} 'Sorry, you cannot go on this roller coaster.'\n{else}\n    {print} 'Enjoy the ride'"
+            mp_choice_options:
+            -   option: You must be taller than 120 cm to go on the roller coaster
+                feedback: True!
+            -   option: You must be taller than 119 cm to go on the roller coaster
+                feedback: If you are 120 cm you won't get in
+            -   option: You must be shorter than 120 cm to go on the roller coaster
+                feedback: '> means greater than'
+            -   option: There are no length restrictions to go on the roller coaster
+                feedback: There are.
+            hint: '> pomeni je več kot'
+            correct_answer: A
+            question_score: '10'
+        9:
+            question_text: How many pieces of chocolate will give you a stomach ache according to this fitbit?
+            code: "chocolate = {ask} 'How many pieces of chocolate have you eaten?'\n  {if} chocolate <= 2\n      {print} 'That is a healthy amount'\n  {if} chocolate > 2 {and} chocolate =< 8\n      {print} 'That is a bit much'\n  {if} chocolate > 8\n      {print} 'You will get a stomach ache!'"
+            mp_choice_options:
+            -   option: 1 or more
+                feedback: No
+            -   option: 2 or more
+                feedback: No
+            -   option: 8 or more
+                feedback: Almost
+            -   option: 9 or more
+                feedback: Great!
+            hint: '> 8 means more than 8'
+            correct_answer: D
+            question_score: '10'
+        10:
+            question_text: What should be filled in in the blanks?
+            code: "{print} 'Whoever gets the most points wins!'\n{if} points_player_1 < points_player_2\n    {print} _"
+            mp_choice_options:
+            -   option: "'player 1 wins'"
+                feedback: Look at who has the highest score!
+            -   option: "'player 2 wins'"
+                feedback: Yes!
+            -   option: "'player 2 loses'"
+                feedback: Look at who has the highest score!
+            -   option: "'It is a tie'"
+                feedback: No it's not, one player has a higher score
+            hint: You win the game by having the most points
+            correct_answer: B
+            question_score: '10'
+    15:
+        1:
+            question_text: 'Which symbol should be used on the blank? Tip: You must keep guessing until you get it right.'
+            code: "answer = 0\n{while} answer _ 'Amsterdam'\n    answer = {ask} 'What is the capital city of the Netherlands?'\n{print} 'You have given the correct answer'"
+            mp_choice_options:
+            -   option: '`=!`'
+                feedback: That is not right.
+            -   option: '`==`'
+                feedback: You don't have to keep guessing if you've given the right answer.
+            -   option: '`!=`'
+                feedback: Correct
+            -   option: '`=`'
+                feedback: That's not it
+            hint: Keep guessing until you say Amsterdam
+            correct_answer: C
+            question_score: '10'
+        2:
+            question_text: Which of these codes has used the correct symbol(s)?
+            mp_choice_options:
+            -   option: "```\n{while} name = Hedy\n```"
+                feedback: No
+            -   option: "```\n{while} age = 24\n```"
+                feedback: No
+            -   option: "```\n{while} time > 0\n```"
+                feedback: Yes!
+            -   option: "```\n{while} answer == yes'\n```"
+                feedback: A quotation mark is missing
+            hint: When you are comparing two answers you should use ==
+            correct_answer: C
+            question_score: '10'
+        3:
+            question_text: Which command should be filled in on the blank?
+            code: "_ age < 18\n  {print} 'you are not allowed in this bar'"
+            mp_choice_options:
+            -   option: '`{in}`'
+                feedback: That's not it
+            -   option: '`{while}`'
+                feedback: You are right
+            -   option: '`{for}`'
+                feedback: That's not it
+            -   option: '`{range}`'
+                feedback: That's not it
+            hint: You are not allowed in the bar as long as you are 17 or younger
+            correct_answer: B
+            question_score: '10'
+        4:
+            question_text: What's wrong with this code?
+            code: "options = 1, 2, 3, 4, 5, 6\n{print} 'Throw 6 as fast as you can!'\nthrown = 0\ntries = 0\n{while} thrown == 6\n    thrown = options {at} {random}\n    {print} 'You threw ' thrown\n    tries = tries + 1\n{print} 'Yes! You have thrown 6 in ' tries ' tries.'"
+            mp_choice_options:
+            -   option: In line 1 `==` should be used instead of `=`
+                feedback: No that's not it
+            -   option: Line 2 misses quotation marks
+                feedback: That's not right
+            -   option: In line 5 `{if}` should have been used instead of `{while}`
+                feedback: That's not it
+            -   option: In line 5 `!=` should have been used instead of `==`
+                feedback: You are correct
+            hint: There is something wrong in line 5
+            correct_answer: D
+            question_score: '10'
+        5:
+            question_text: What should be placed on the blank to make this program work correctly?
+            code: "wetness = 10\n{while} wetness != 0\n    {print} 'Your hair is still wet, hair dryer on!'\n    {sleep} 1\n    {clear}\n    wetness _\n\n{print} 'All dry!'"
+            mp_choice_options:
+            -   option: "```\n   = wetness\n```"
+                feedback: That will not change anything
+            -   option: "```\n   = wetness = 1\n```"
+                feedback: You can't have two times = in one line
+            -   option: "```\n   = wetness - 1\n```"
+                feedback: You are correct!
+            -   option: "```\n   = wetness + 1\n```"
+                feedback: The program should count down
+            hint: wetness should get less each time
+            correct_answer: C
+            question_score: '10'
+        6:
+            question_text: What is wrong with this code?
+            code: "lives = 100\n    {while} lives != 0\n    answer = {ask} 'Are you annoyed yet?'\n    {if} answer == 'yes'\n        lives = lives - 1"
+            mp_choice_options:
+            -   option: '`{while}` should be`{if}`'
+                feedback: No that is not right
+            -   option: '`{if}` should be `{while}`'
+                feedback: No that is not right
+            -   option: Line 3 should start with more indentation
+                feedback: No that's not right
+            -   option: Line 2 should start with less indentation
+                feedback: That is correct
+            hint: Pozorno poglejte na zamike
+            correct_answer: D
+            question_score: '10'
+        7:
+            question_text: How should this program be changed so that it works?
+            code: "{print} 'Guess which number'\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber = numbers {at} {random}\ngame = 'on'\n{if} game == 'on'\n    guess = {ask} 'Which number do you think it is?'\n    {if} guess < number\n        {print} _\n    {if} guess > number\n        {print} _\n    {if} guess == number\n        {print} _\n        game = 'over'"
+            mp_choice_options:
+            -   option: '... change the first `{if}` into a `{while}`'
+                feedback: Perfect!
+            -   option: '... change the second `{if}` into a `{while}`'
+                feedback: That's not quite right.
+            -   option: '... change the third `{if}` into a `{while}`'
+                feedback: That's not quite right.
+            -   option: '... change the fourth `{if}` into a `{while}`'
+                feedback: That's not quite right.
+            hint: The last one should say you win.
+            correct_answer: A
+            question_score: '10'
+        8:
+            question_text: Which statement is true about this automated toilet system?
+            code: "{while} toilet == 'occupied'\n    lights = 'on'\n    air_freshener_sprays = 'yes'\n    {sleep} 60\nlights = 'off'\nair_freshener_sprays = 'no'"
+            mp_choice_options:
+            -   option: The lights and air freshener will turn off after 1 minute
+                feedback: False!
+            -   option: The air freshener sprays once every minute and the lights stay on the whole time while you are on the toilet
+                feedback: Great job
+            -   option: The air freshener sprays once you leave the toilet.
+                feedback: It only sprays when you're in there.
+            -   option: The lights will always stay on.
+                feedback: That wouldn't be right.
+            hint: The block after the {while} command keeps happening while the toilet is occupied.
+            correct_answer: B
+            question_score: '10'
+        9:
+            question_text: What will the diet app say if you have eaten 1600 calories today?
+            code: "calories = {ask} 'How many calories have you eaten today?'\n  {while} calories <= 1000\n      {print} 'You could eat some more'\n  {while} calories > 1000 {and} calories =< 2000\n      {print} 'That is alright'\n  {while} calories > 2000\n      {print} 'You have had enough for today'"
+            mp_choice_options:
+            -   option: Nothing. 1600 is not programmed into the app.
+                feedback: No
+            -   option: You could eat some more
+                feedback: No
+            -   option: That is alright
+                feedback: Yes!
+            -   option: You have eaten enough for today
+                feedback: No
+            hint: 1600 is between 1000 and 2000
+            correct_answer: C
+            question_score: '10'
+        10:
+            question_text: 'What should be filled in in the blanks? Tip: the player with the most points is in the lead.'
+            code: "name_player_1 = {ask} 'Name player 1:'\nname_player_2 = {ask} 'Name player 2:'\n{while} points_player_1 > points_player_2\n    {print} _ ' is in the lead right now!'"
+            mp_choice_options:
+            -   option: "```\n   name_player_1\n```"
+                feedback: You are right!
+            -   option: "```\n   name_player_2\n```"
+                feedback: No they are losing!
+            -   option: "```\n   points_player_1\n```"
+                feedback: You should fill in a name, not a number
+            -   option: "```\n   points_player_2\n```"
+                feedback: You should fill in a name, not a number
+            hint: You win the game by having the most points. Your name should appear on the screen
+            correct_answer: A
+            question_score: '10'
+    16:
+        1:
+            question_text: Which command should be filled in on the blanks to print a random snack?
+            code: "snacks = nachos, chips, cucumber, sweets\n{print} _"
+            mp_choice_options:
+            -   option: '`snacks {at} {random}`'
+                feedback: This is the old way.
+            -   option: '`[{random} snack]`'
+                feedback: The order is wrong.
+            -   option: '`snacks[{random}]`'
+                feedback: Correct
+            -   option: '`snacks[{at} {random}]`'
+                feedback: We do not need `at`anymore
+            hint: Ne uporabljamo več {at}
+            correct_answer: C
+            question_score: '10'
+        2:
+            question_text: What should be filled in on the blanks if you want a list of what chores are done by whom?
+            code: "friends = ['Wesley', 'Eric', 'Kaylee']\nchores = ['the cooking', 'the cleaning', 'nothing']\n{for} i {in} {range} 1 {to} 3\n    {print}  _"
+            mp_choice_options:
+            -   option: "```\nfriends[i] has to do chores [i]\n```"
+                feedback: Mind the spacing.
+            -   option: "```\nfriends[1] has to do chores[1]\n```"
+                feedback: It will print 3 times that Wesley has to do the cooking
+            -   option: "```\nchores[i] ' has to do ' friends[random]\n```"
+                feedback: The person has to do the chore, not the other way around
+            -   option: "```\nfriends[i] ' has to do ' chores[i]\n```"
+                feedback: Fantastic!
+            hint: '`i` tells us what item in the list it is. So friend 1 does chore 1 etc.'
+            correct_answer: D
+            question_score: '10'
+        3:
+            question_text: What is a possible output for this program?
+            code: "friends = ['Wesley', 'Eric', 'Kaylee']\nchore = ['the cooking', 'the cleaning', 'nothing']\n{for} i {in} {range} 1 {to} 3\n    {print}  friends[i] has to do chores[i]"
+            mp_choice_options:
+            -   option: "```\nWesley has to do the cooking\nEric has to do the cleaning\nKaylee has to do nothing\n```"
+                feedback: Super!
+            -   option: "```\nKaylee has to do the cooking\nWesley has to do the cleaning\nEric has to do nothing\n```"
+                feedback: No, it is not random.
+            -   option: "```\nWesley has to do the cooking\nWesley has to do the cleaning\nWesley has to do the nothing\n```"
+                feedback: Poor Wesley!
+            -   option: "```\nWesley has to do the cooking\nWesley has to do the cooking\nWesley has to do the cooking\n```"
+                feedback: That's not it
+            hint: Ni naključno...
+            correct_answer: A
+            question_score: '10'
+        4:
+            question_text: What is wrong with this code?
+            code: "friends = ['Jaylee', 'Erin', 'Fay']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 0 {to} 3\n    print 'the lucky number of ' friends[i]\n    print 'is ' lucky_numbers[i]"
+            mp_choice_options:
+            -   option: The variable in line 4 should be `friend[i]`, not `friends[i]`
+                feedback: That is not right.
+            -   option: Line 3 should say `in range 1 to 3` not `in range 0 to 3`
+                feedback: Good catch!
+            -   option: Line 4 should say 'lucky_number', not 'lucky number
+                feedback: It's not a variable, it's just text.
+            -   option: '{in} in line 3 should be removed'
+                feedback: That's not it
+            hint: There's nothing wrong with line 4
+            correct_answer: B
+            question_score: '10'
+        5:
+            question_text: Which line should be filled in in the blank?
+            code: "animals = ['dog', 'cow', 'horse']\n_\n{for} i {in} {range} 1 {to} 3\n    {print} 'the ' animals[i] ' says ' sounds[i]"
+            mp_choice_options:
+            -   option: "```\n   noises = ['moo', 'woof', 'neigh']\n```"
+                feedback: Mind the variable name and the order of the sounds.
+            -   option: "```\n   sounds = '[woof], [moo], [neigh]'\n```"
+                feedback: Look at line one to see how brackets are supposed to be used.
+            -   option: "```\n   sounds = [woof, moo, neigh]\n```"
+                feedback: Don't forget the quotation marks!
+            -   option: "```\n   sounds = ['woof', 'moo', 'neigh']\n```"
+                feedback: Great job!
+            hint: Look at line 1 to see proper use of brackets and quotation marks.
+            correct_answer: D
+            question_score: '10'
+        6:
+            question_text: Which statement is true?
+            code: "people = ['Chris', 'Jaylino', 'Ryan']\ngames = ['fortnite', 'minecraft', 'fifa']\n{for} o {in} {range} 1 {to} 3\n  {print} people[o] ' likes ' games[o]"
+            mp_choice_options:
+            -   option: You are not allowed to use the variable o. It should be named i.
+                feedback: i is the most commonly used variable name in this case, but it's not mandatory to use i.
+            -   option: The output will say that Jaylino likes fortnite.
+                feedback: No, he likes minecraft.
+            -   option: The output will say that Ryan likes fifa
+                feedback: Correct
+            -   option: This code will not work. It will give and error.
+                feedback: No, the code is correct.
+            hint: There is nothing wrong with this code.
+            correct_answer: C
+            question_score: '10'
+        7:
+            question_text: What's wrong with this code?
+            code: "people = ['Savi', 'Senna', 'Fayenne']\ntransportation = ['bike', 'train', 'car']\n{for} i {in} {range} 1 {to} 3\n  {print} people[i] goes to school by transportation[i]"
+            mp_choice_options:
+            -   option: Line 1 needs less quotation marks
+                feedback: That is not right.
+            -   option: Line 3 should start with indentation
+                feedback: It should not!
+            -   option: Line 4 should start without indentation
+                feedback: It should not
+            -   option: Line 4 needs more quotation marks.
+                feedback: Amazing!
+            hint: There is a mistake made in the usage of quotation marks.
+            correct_answer: D
+            question_score: '10'
+        8:
+            question_text: Which of these codes belongs to this output?
+            code: "Macy and Kate get to go first\nLionell and Raj get to go second\nKim and Leroy get to go third"
+            mp_choice_options:
+            -   option: "```\nteams = ['Macy and Kate', 'Lionell and Raj', 'Kim and Leroy']\nposition = ['first', 'second', 'third']\n{for} i {in} {range} 0 {to} 3\n{print} teams[random] ' get to go ' position[i]\n```"
+                feedback: This is not right
+            -   option: "```\nteams = ['Macy and Kate', 'Lionell and Raj', 'Kim and Leroy']\nposition = ['first', 'second', 'third']\n{for} i {in} {range} 1 {to} 3\n  {print} teams[i] ' get to go ' position[i]\n```"
+                feedback: Amazing!
+            -   option: "```\nteams = ['Macy', 'Kate', 'Lionell', 'Raj', 'Kim', 'Leroy']\nposition = ['first', 'second', 'third']\n{for} i {in} {range} 1 {to} 6\n  {print} teams[random] ' get to go ' position[random]\n```"
+                feedback: This is not it.
+            -   option: "```\nteams = ['Macy and Kate' 'Lionell and Raj' 'Kim and Leroy']\nposition = ['first' 'second' 'third']\n{for} teams {in} {range} 0 {to} 3\n    {print} teams[i] ' get to go ' position[i]\n```"
+                feedback: This is not going to work!
+            hint: If you look carefully at the first line, you'll see that only the first two answers are possibly correct.
+            correct_answer: B
+            question_score: '10'
+        9:
+            question_text: What is a possible output for this code?
+            code: "countries = ['Canada', 'Zimbabwe', 'New Zealand']\n{for} i {in} {range} 0 {to} 1\n  {print} 'I will travel to ' countries[random]"
+            mp_choice_options:
+            -   option: "```\nI will travel to Canada\nI will travel to Canada\n```"
+                feedback: Great job!
+            -   option: "```\nI will travel to Canada\n```"
+                feedback: It will be repeated twice
+            -   option: "```\nI will travel to Canada, Zimbabwe and New Zealand\n```"
+                feedback: This is not it.
+            -   option: "```\nI will travel to Canada\nI will travel to Zimbabwe\nI will travel to New Zealand\n```"
+                feedback: It's only repeated twice
+            hint: Range 0 to 1 is 2 times
+            correct_answer: A
+            question_score: '10'
+        10:
+            question_text: Which 3 lines will complete this code correctly?
+            code: "{print} 'The book raffle will start soon'\n{print} 'Get your tickets now!'\n{books} = ['Narnia', 'The Hobbit', 'Oliver Twist', 'Harry Potter', 'Green eggs and ham']\npeople = {ask} 'How many raffle tickets are sold?'\nlist_of_raffle_numbers = [1, 2]\n{for} i {in} {range} 3 {to} people\n    {add} i {to} list_of_raffle_numbers\n{for} i {in} {range} 1 {to} 5"
+            mp_choice_options:
+            -   option: "```\nchosen_number = list_of_numbers at random\nprint books[i] ' will go to person number ' chosen_number\n{add} chosen_number {to} list_of_numbers\n```"
+                feedback: Almost there... but adding the winner to the list makes this raffle unfair
+            -   option: "```\nprint person[i] ' wins ' book[i]\n```"
+                feedback: There is no list called 'person'
+            -   option: "```\nchosen_number = list_of_numbers[people]\nprint books[people] ' will go to person number ' chosen_number\n{remove} chosen_number {from} list_of_numbers\n```"
+                feedback: This is not it.
+            -   option: "```\nchosen_number = list_of_numbers[random]\nprint books[i] ' will go to person number ' chosen_number\n{remove} chosen_number {from} list_of_numbers\n```"
+                feedback: Fantastic!
+            hint: You need to use the {remove} command
+            correct_answer: D
+            question_score: '10'
+    17:
+        1:
+            question_text: What is the output of this code?
+            code: "minions = ['Bob', 'Kevin', 'Stuart']\n{for} x in minions:\n    {print} x"
+            mp_choice_options:
+            -   option: "```\nm i n i o n s\n```"
+                feedback: This is not it.
+            -   option: "```\nBob\nKevin\nStuart\n```"
+                feedback: Correct!
+            -   option: "```\nminions\nminions\nminions\n```"
+                feedback: Take a look at the content of your list.
+            -   option: "```\nB o b K e v i n S t u a r t\n```"
+                feedback: Do not loop through the letters.
+            hint: Naredite zanko skozi vaš seznam.
+            correct_answer: B
+            question_score: '10'
+        2:
+            question_text: What is wrong with this code?
+            code: "seconds_minute = 60\nminute_hour = 60\nhour_day = 24\nleap_year = 366\nno_leap_year = 365\nyears = ask 'what year is it?'\n{if} years = 2024:\n print seconds_minute * minute_hour * hour_day * leap_year\n{else}:\n print seconds_minute * minute_hour * hour_day * noleap_year"
+            mp_choice_options:
+            -   option: You cannot have so many variables.
+                feedback: This is not it.
+            -   option: The way the variables are multiplied is incorrect.
+                feedback: Not true!
+            -   option: One of the variables `noleap_year` does not belong with the `{if}` statement.
+                feedback: Keep looking for the mistake.
+            -   option: The `noleap_year` has to be identical in both cases.
+                feedback: Correct!
+            hint: Pozorno preberite kodo.
+            correct_answer: D
+            question_score: '10'
+        3:
+            question_text: How many hedgehogs will this code print?
+            code: "{for} x in range 1 to 3:\n  {for} y in range 1 to 2:\n    {print} 🦔"
+            mp_choice_options:
+            -   option: "```\n🦔\n🦔\n🦔\n```"
+                feedback: Try again.
+            -   option: "```\n🦔\n🦔\n```"
+                feedback: One more try.
+            -   option: "```\n🦔\n🦔\n🦔\n🦔\n🦔\n🦔\n```"
+                feedback: Well done!
+            -   option: "```\n🦔\n🦔\n🦔\n🦔\n🦔\n```"
+                feedback: That is not it.
+            hint: Think about how many times you need repeating.
+            correct_answer: C
+            question_score: '10'
+        4:
+            question_text: What is wrong with code?
+            code: "name_color = {ask} 'What is your favorite color?'\n{if} name_color == 'red':\n  {print} 'the color of a tomato'\n{elif} name_color == 'green':\n  {print} 'the color of an apple'\n{elif} name_color == 'blue':\n  {print} 'the color of a blueberry'\n{elif} name_color == 'yellow':\n  {print} 'the color of a banana'\n{elif}:\n  {print} 'this fruit-color does not exist'"
+            mp_choice_options:
+            -   option: The first `{elif}` should be used before the `print` command
+                feedback: Try again.
+            -   option: '`{elif}` can only be used once'
+                feedback: From now on we can use elif multiple times.
+            -   option: '`==` used with `{elif}` should be replaced by `=`'
+                feedback: Not correct.
+            -   option: '`{elif}` in the last line should be replaced by `{else}`'
+                feedback: Great!
+            hint: Pomislite na `{if}`, `{elif}`, `{else}`.
+            correct_answer: D
+            question_score: '10'
+        5:
+            question_text: What is the output of this code?
+            code: "numbers = [7, 19, 29, 41, 53, 71, 79, 97]\n{for} prime in numbers:\n  {if} prime <= 10：\n    {print} prime\n  {elif} prime >= 60:\n    {print} prime\n  {elif} prime >= 90:\n    {print} prime\n  {else}:\n    {print} 'another number'"
+            mp_choice_options:
+            -   option: "```\n7\nanother number\nanother number\nanother number\nanother number\n71\n79\n97\n```"
+                feedback: Well done!
+            -   option: "```\nanother number\n19\n29\n41\n53\n71\n79\n97\n```"
+                feedback: Try again.
+            -   option: "```\n7\n19\n29\n41\n53\n71\n79\nanother number\n```"
+                feedback: One more try.
+            -   option: "```\n7\n19\n29\n41\n53\n71\n79\n97\n```"
+                feedback: That is not it.
+            hint: Think about how many times you need repeating and the values of if and elif.
+            correct_answer: A
+            question_score: '10'
+        6:
+            question_text: What is wrong with code?
+            code: "name = {ask} 'What is your name?'\n{if} name == 'Hedy':\npassword = {ask} 'What is your password?'\n    {if} password =='turtle123':\n        {print} 'Yey'\n    {else}:\n        {print} 'Access denied'\n{else}:\n {print} 'Go fish'"
+            mp_choice_options:
+            -   option: '`{elif}` is missing.'
+                feedback: Try again.
+            -   option: '`{else}` can only be used once.'
+                feedback: From now on we can use elif multiple times.
+            -   option: Nothing!
+                feedback: There is a mistake. Look carefully!
+            -   option: There is an indentation mistake in the last line.
+                feedback: Amazing!
+            hint: There is a mistake somewhere...
+            correct_answer: D
+            question_score: '10'
+        7:
+            question_text: Which of the following codes will print five times 'the result is 3' on the screen?
+            mp_choice_options:
+            -   option: "```\n numbers = [1, 2 , 3, 4, 5]\n {for} n in numbers：\n     result = n * 1\n {print} 'The result is ' result\n```"
+                feedback: Try again!
+            -   option: "```\nnumbers = [1, 2, 3, 4, 5]\n {for} u in numbers：\n     number = u\n {print} 'The result is ' number\n```"
+                feedback: That is not it.
+            -   option: "```\nnumbers = [1, 2, 3, 4, 5]\n {for} number in numbers：\n     number = 3\n {print} 'The result is ' number\n```"
+                feedback: Very good!
+            -   option: "```\nnumbers = [1, 2 , 3, 4, 5]\n {for} n in numbers：\n     n = result\n {print} 'The result is ' result\n```"
+                feedback: That is not it.
+            hint: Razmišljajte o matematičnih znakih.
+            correct_answer: C
+            question_score: '10'
+        8:
+            question_text: What is wrong with code?
+            code: "insects = ['🐝', '🦋', '🕷', '🐞']\nyour_favorite = {ask} 'what is your favorite insect?'\n{for} insect in insects:\n {if} your_favorite == '🐝' {or} your_favorite == '🐞':\n  {print} 'very useful'\n {elif} your_favorite == '🕷':\n  {print} 'it can catch mosquitoes'\n {else}:\n  {print} 'almost all insects can be useful one way or another'"
+            mp_choice_options:
+            -   option: '`{or}` cannot be used with `{if}`.'
+                feedback: Try again.
+            -   option: In the `{for}` command `insect` should be `insects`.
+                feedback: Not true.
+            -   option: Nothing!
+                feedback: Well done!
+            -   option: There is an indentation mistake in the last line.
+                feedback: Nope.
+            hint: Pozorno preberite kodo.
+            correct_answer: C
+            question_score: '10'
+        9:
+            question_text: Which one of the codes below gave this output?
+            code: "-5 is negative\n-4 is negative\n-3 is negative\n-2 is negative\n-1 is negative\n0 is positive\n1 is positive\n2 is positive\n3 is positive"
+            mp_choice_options:
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number < 0: \n      {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
+                feedback: Try again!
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number <= 0: \n     {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
+                feedback: That is not it.
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number >= 0: \n     {print} number ' is positive'\n     {elif} number < 0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
+                feedback: Very good!
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number < 0: \n      {print} number ' is positive'\n     {elif} number <=0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
+                feedback: That is not it.
+            hint: Pozorno preberite kodo.
+            correct_answer: C
+            question_score: '10'
+        10:
+            question_text: What is wrong with this code?
+            code: "{for} number in range 1 to 5:\n  volume_room = num * num * num\n  {print} volume_room ' cubic meters'\n    {if} volume_room > 100:\n      {print} 'this is a large room'\n    {elif} volume_room < 100:\n      {print} 'small room but cosy'\n    {else}:\n      {print} 'i will look for something else'"
+            mp_choice_options:
+            -   option: The word num needs quotation marks.
+                feedback: Try again.
+            -   option: The `{if}` command is not used correctly.
+                feedback: Not true.
+            -   option: Line 3 should be `volume_room = number * number * number`.
+                feedback: Well done!
+            -   option: There is an indentation mistake in the last line.
+                feedback: Nope.
+            hint: Pozorno preberite kodo.
+            correct_answer: C
+            question_score: '10'

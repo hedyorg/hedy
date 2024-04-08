@@ -41,33 +41,13 @@ levels:
     3:
         1:
             story: "The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into? Are you a Gryffindor, Hufflepuff, Ravenclaw or Slytherin.\nBefore the sorting hat reveals your house, you can tell it to not pick one of the houses."
-            code: |-
-                {print} 分院帽已经准备好把你分到霍格沃茨的房子里了。
-                房子 {is} 格兰芬多、赫奇普夫、拉文克劳、斯莱特林
-                不喜欢{is} {ask} 有没有你不想成为其中一部分的房子？
-                {remove} 不喜欢{from} 房子
-                {print} 不是不喜欢吧？最好是...房子{at} {random}
+            code: "{print} The sorting hat is ready to sort you into a Hogwarts house.\nhouses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin\ndislike {is} {ask} Are there any houses you do not want to be part of?\n{remove} dislike {from} houses\n{print} Not dislike eh? Better be... houses {at} {random}"
         2:
             story: Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
-            code: |-
-                食物 {is} 披萨,冰激凌, 沙拉, 三明治
-                浇头 {is} 巧克力, 芝士, 金枪鱼, 洒
-                {print} 你今天的随机餐是...
-                {sleep} 2
-                {print} 食物 {at} {random} 和浇头 {at} {random}
+            code: "food {is} pizza, icecream, salad, sandwich\ntoppings {is} chocolate, cheese, tuna, sprinkles\n{print} Your random meal for today is...\n{sleep} 2\n{print} food {at} {random} with toppings {at} {random}"
         3:
-            story: |-
-                在国际象棋锦标赛中，还剩下三名棋手。
-                创建一个程序，决定哪两个玩家必须首先相互对战。
-                首先打印参加第一场比赛的两名玩家，然后打印获胜者将与哪位玩家进行比赛。
-            code: |-
-                玩家 {is} 利亚姆、诺亚、苏菲
-                玩家_1 {is} 玩家 {at} {random}
-                {remove} 玩家_1 {from}玩家
-                玩家_2 {is} 玩家 {at} {random}
-                {print} 玩家_1 ' 第一次对阵' 玩家_2
-                {remove} 玩家_2 {from} 玩家
-                {print} '获胜者对战 ' 玩家 {at} {random}
+            story: "In a chess tournament there are three players left.\nCreate a program that decides which two players have to play against each other first.\nStart by printing the two players who play the first match, then print against which player the winner will play."
+            code: "players {is} Liam, Noah, Sophie\nplayer_1 {is} players {at} {random}\n{remove} player_1 {from} players\nplayer_2 {is} players {at} {random}\n{print} player_1 ' first plays against ' player_2\n{remove} player_2 {from} players\n{print} 'The winner plays against ' players {at} {random}"
     4:
         1:
             story: |-
@@ -80,30 +60,15 @@ levels:
                 {sleep}
                 {print} 口袋妖怪 {at} {random}
         2:
-            story: 创建一个彩票，让你选择一个你可能赢得的额外奖品。
-            code: |-
-                奖品 {is}汽车，仓鼠，100万欧元
-                价格 {is} {ask} “你想赢什么？”
-                {add} 价格 {to_list} 奖品
-                {print} “你赢得了一个”价格 {at} {random}
+            story: Create a lottery that lets you choose an extra prize that you might win.
+            code: "prizes {is} car, hamster, 1 million euros\nprize {is} {ask} 'What would you like to win?'\n{add} prize {to_list} prizes\n{print} 'You won a ' prizes {at} {random}"
     5:
         1:
-            story: |-
-                Make a program that checks if your favourite movie is already in the list of the computer.
-                If so, print that you have great taste, otherwise add the movie to the list.
-            code: |-
-                最喜欢的电影 {is} 蝙蝠侠、蜘蛛侠、复仇者联盟、侏罗纪公园
-                电影 {is} {ask} “你最喜欢的电影是什么？”
-                {if} 电影 {in} 最喜欢的电影 {print}“你的品味真高！”
-                {else} {print}“太可惜了，你最喜欢的电影不在列表中，我们会马上添加！”
-                {add} 电影{to_list} 最喜欢的电影
+            story: "Make a program that checks if your favourite movie is already in the list of the computer.\nIf so, print that you have great taste, otherwise add the movie to the list."
+            code: "favorite_movies {is} Batman, Spiderman, The Avengers, Jurassic Park\nmovie {is} {ask} 'What is your favourite movie?'\n{if} movie {in} favorite_movies {print} 'You have great taste!'\n{else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'\n{add} movie {to_list} favorite_movies"
         2:
             story: Create a maths game.
-            code: |-
-                {print}“解决这个问题”
-                答案{is} {ask} '88 - 16 = ?'
-                {if} 回答 {is} 72 {print} “对！”
-                {else} {print}“错！答案是72”
+            code: "{print} 'Solve this problem'\nanswer {is} {ask} '88 - 16 = ?'\n{if} answer {is} 72 {print} 'Correct!'\n{else} {print} 'Wrong! The answer was 72'"
     6:
         1:
             story: |-
@@ -119,11 +84,7 @@ levels:
                 {print} “在猫年里，你已经'cat_age'岁了。”
         2:
             story: Create a program that helps you calculate how many cakes you should buy for your birthday party.
-            code: |-
-                {print} “今天是你的生日！”
-                人 = {ask} “你想给多少人一块蛋糕？”
-                蛋糕数量 = 人数/8
-                {print} “你将不得不购买蛋糕数量的蛋糕”
+            code: "{print} 'It is your birthday!'\npeople = {ask} 'How many people do you want to give a slice of cake?'\ncakes_amount = people/8\n{print} 'You will have to buy ' cakes_amount ' cakes'"
     7:
         1:
             story: Complete the baby shark song. First comes baby shark, then mommy and finally daddy shark.
@@ -143,16 +104,8 @@ levels:
                 {print} 'all through the town'
     8:
         1:
-            story: |-
-                You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.
-                Either red, yellow or blue! Take a little pauze after announcing a team.
-            code: |-
-                团队 =红, 黄, 蓝
-                {print} '红, 黄，蓝?'
-                {repeat} 5 {times}
-                  {print} “你被选入了团队...'
-                  {print} 团队 {at} {random}
-                  {sleep} 2
+            story: "You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.\nEither red, yellow or blue! Take a little pause after announcing a team."
+            code: "teams = red, yellow, blue\n{print} 'Red, Yellow or Blue?'\n{repeat} 5 {times}\n    {print} 'You are selected in team... '\n    {print} teams {at} {random}\n    {sleep} 2"
         2:
             story: Print the countdown for a  game of hide and seek.
             code: |-
@@ -164,17 +117,8 @@ levels:
                 {print} “准备好了，我来不来！”
     9:
         1:
-            story: 这个游戏会给你三个数学作业。每次的问题都不同。你能弄清楚顺序吗？
-            code: |-
-                数字= 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                {repeat} 3 {times}
-                    数字 =数字 {at} {random}
-                    正确回答= 5 * 数字
-                    回答 = {ask} “5倍数是多少？”
-                    {if} 回答 = 正确回答
-                        {print} “干得好！”
-                    {else}
-                        {print}“不！正确答案是”正确答案
+            story: This game will give you three maths assignments. Each time the question is different. Can you figure out the order?
+            code: "numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n{repeat} 3 {times}\n    number = numbers {at} {random}\n    correct_answer = 5 * number\n    answer = {ask} 'What is 5 times' number '?'\n    {if} answer = correct_answer\n        {print} 'Good job!'\n    {else}\n        {print} 'No! The correct answer is ' correct_answer"
         2:
             story: |-
                 此代码询问餐厅的顾客是否要订购甜点。如果他们这样做，它会问他们什么样的甜点。如果他们订购提拉米苏，他们会被告知提拉米苏已经售罄。

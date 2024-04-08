@@ -6,14 +6,13 @@ queue_rules:
         - "check-success=build"
 
 pull_request_rules:
-  - name: Automatic squash merge on approval for non-Weblate PRs
+  - name: Automatic squash merge on approval
     conditions:
         - and:
           - "#approved-reviews-by>=1"
           - "#changes-requested-reviews-by=0"
           - "check-success=build"
           - "check-success=cypress"
-          - "-author=weblate"
     actions:
       comment:
         message: Thank you for contributing! Your pull request is now going on the merge train (choo choo! Do not click update from main anymore, and be sure to [allow changes to be pushed to your fork](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/allowing-changes-to-a-pull-request-branch-created-from-a-fork)).
@@ -24,20 +23,3 @@ pull_request_rules:
           {{ title }} (#{{number}})
           {{ body }}
 
-  - name: Automatic regular merge for Weblate PRs
-    conditions:
-        - and:
-          - "#approved-reviews-by>=1"
-          - "#changes-requested-reviews-by=0"
-          - "check-success=build"
-          - "check-success=cypress"
-          - "author=weblate"
-    actions:
-      comment:
-        message: Thanks Weblate! This pull request is going to be merged automatically.
-      queue:
-        name: default_queue
-        method: merge
-        commit_message_template: |-
-          {{ title }} (#{{number}})
-          {{ body }}
