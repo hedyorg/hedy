@@ -51,12 +51,7 @@ describe('Duplicate class tests', () => {
       }
     });
     cy.get("tr") // This class has second teachers.
-    cy.get("#classes_table tbody .view_class")
-      .each(($class, i) => {
-          if ($class.text().includes("CLASS1")) {
-            cy.get(`tbody :nth-child(${i+1}) .no-underline > .fas`).click();
-          }
-      })
+    cy.get("[data-cy='duplicate_CLASS1']").click();
 
     cy.get('#modal-yes-button').should('be.enabled').click();
 
