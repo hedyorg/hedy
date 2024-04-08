@@ -1028,7 +1028,7 @@ class ForTeachersModule(WebsiteModule):
             adventure["classes"] = [class_id]
 
         session["new_adventure"] = adventure
-        return redirect("/for-teachers/customize-adventure/" + adventure["id"])
+        return redirect(f"/for-teachers/customize-adventure/{adventure['id']}?new_adventure=1")
 
     @route("/customize-adventure/<adventure_id>", methods=["GET"])
     @requires_teacher
@@ -1039,11 +1039,11 @@ class ForTeachersModule(WebsiteModule):
             return gettext("adventure_name_invalid"), 400
 
         adventure = self.db.get_adventure(adventure_id)
-        if adventure:
-            if adventure["creator"] != user["username"] and not is_teacher(user):
-                return utils.error_page(error=403, ui_message=gettext("retrieve_adventure_error"))
-        else:
+        if not adventure and request.args.get("new_adventure"):
             adventure = session.get("new_adventure", self.create_basic_adventure(user, adventure_id))
+
+        if not adventure or adventure["creator"] != user["username"] and not is_teacher(user):
+            return utils.error_page(error=403, ui_message=gettext("retrieve_adventure_error"))
 
         # Now it gets a bit complex, we want to get the teacher classes as well as the customizations
         # This is a quite expensive retrieval, but we should be fine as this page is not called often
