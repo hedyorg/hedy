@@ -2654,7 +2654,7 @@ def public_user_page(username):
             'public_user_page',
             username=username, **dict(request.args,
                                       page=next_page_token)) if next_page_token else None
-        
+
         user = DATABASE.user_by_username(username)
         if user.get('program_count'):
             user_program_count = user.get('program_count')
