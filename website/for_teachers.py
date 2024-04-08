@@ -993,17 +993,58 @@ class ForTeachersModule(WebsiteModule):
             current_page="for-teachers",
         )
 
+    @staticmethod
+    def create_basic_adventure(user, adventure_id=None):
+        if not adventure_id:
+            adventure_id = uuid.uuid4().hex
+        return {
+            "id": adventure_id,
+            "date": utils.timems(),
+            "creator": user["username"],
+            "name": "",
+            "classes": [],
+            "level": 1,
+            "levels": ["1"],
+            "content": "",
+            "public": 0,
+            "language": g.lang,
+        }
+
+    @route("/customize-adventure", methods=["GET"])
+    @requires_teacher
+    def get_new_adventure(self, user):
+        class_id = request.args.get("class_id")
+        level = request.args.get("level", "1")
+
+        adventure_id = uuid.uuid4().hex
+        adventure = self.create_basic_adventure(user, adventure_id)
+
+        if level:
+            adventure["level"] = int(level)
+            adventure["levels"] = [level]
+
+        if class_id:
+            session['class_id'] = class_id
+            adventure["classes"] = [class_id]
+
+        session["new_adventure"] = adventure
+        return redirect("/for-teachers/customize-adventure/" + adventure["id"])
+
     @route("/customize-adventure/<adventure_id>", methods=["GET"])
     @requires_teacher
-    def get_adventure_info(self, user, adventure_id):
+    def get_adventure_info(self, user, adventure_id,):
         if not adventure_id:
             return gettext("adventure_empty"), 400
         if not isinstance(adventure_id, str):
             return gettext("adventure_name_invalid"), 400
 
         adventure = self.db.get_adventure(adventure_id)
-        if adventure["creator"] != user["username"] and not is_teacher(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_adventure_error"))
+        if adventure:
+            if adventure["creator"] != user["username"] and not is_teacher(user):
+                return utils.error_page(error=403, ui_message=gettext("retrieve_adventure_error"))
+        else:
+            adventure = session.get("new_adventure", self.create_basic_adventure(user, adventure_id))
+
         # Now it gets a bit complex, we want to get the teacher classes as well as the customizations
         # This is a quite expensive retrieval, but we should be fine as this page is not called often
         # We only need the name, id and if it already has the adventure set as data to the front-end
@@ -1013,8 +1054,9 @@ class ForTeachersModule(WebsiteModule):
             customizations = self.db.get_class_customizations(Class.get("id"))
             for level in adventure.get("levels", []):
                 # TODO: change name to id in sorted_adventures (probably it's only teachers' adventures!)
-                if customizations and any(adv for adv in customizations.get("sorted_adventures", {}).get(level)
-                                          if adv.get("name") == adventure.get("id")):
+                if customizations and customizations.get("sorted_adventures") and \
+                    any(adv for adv in customizations.get("sorted_adventures", {}).get(level, [])
+                        if adv.get("name") == adventure.get("id")):
                     temp = {"name": Class.get("name"), "id": Class.get("id"),
                             "teacher": Class.get("teacher"), "students": Class.get("students", []),
                             "date": Class.get("date"), "classes": Class.get("classes")}
@@ -1070,7 +1112,8 @@ class ForTeachersModule(WebsiteModule):
 
         current_adventure = self.db.get_adventure(body["id"])
         if not current_adventure:
-            return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
+            current_adventure = session.get("new_adventure", self.create_basic_adventure(user, body["id"]))
+
         # TODO: instead of not allowing the teacher, let them update the adventure in their relevant classes only.
         elif current_adventure["creator"] != user["username"]:
             return gettext("unauthorized"), 403
