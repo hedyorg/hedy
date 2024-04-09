@@ -664,6 +664,8 @@ def parse():
                 error=exception is not None)
 
             response['save_info'] = SaveInfo.from_program(Program.from_database_row(program))
+            if program.get('is_modified'):
+                response['is_modified'] = True
         except programs.NotYourProgramError:
             # No permissions to overwrite, no biggie
             pass
@@ -686,8 +688,6 @@ def parse():
 
     if "Error" in response and error_check:
         response["message"] = gettext('program_contains_error')
-    if program.get('is_modified'):
-        response['is_modified'] = True
     return jsonify(response)
 
 
