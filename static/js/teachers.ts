@@ -109,25 +109,6 @@ function apiDuplicateClass(id: string, prompt: string, second_teacher: boolean, 
   });
 }
 
-export function delete_class(id: string, prompt: string) {
-  modal.confirm (prompt, function () {
-    $.ajax({
-      type: 'DELETE',
-      url: '/class/' + id,
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-      if (response.achievement) {
-        showAchievements(response.achievement, true, '');
-      } else {
-        location.reload();
-      }
-    }).fail(function(err) {
-      modal.notifyError(err.responseText);
-    });
-  });
-}
-
 export function join_class(id: string, name: string) {
   $.ajax({
       type: 'POST',
@@ -338,21 +319,6 @@ export function preview_adventure() {
         show_preview(response.code);
     }).fail(function (err) {
       modal.notifyError(err.responseText);
-    });
-}
-
-export function delete_adventure(adventure_id: string, prompt: string) {
-    modal.confirm(prompt, function () {
-        $.ajax({
-            type: 'DELETE',
-            url: '/for-teachers/customize-adventure/' + adventure_id,
-            contentType: 'application/json',
-            dataType: 'json'
-        }).done(function () {
-            window.location.href = '/for-teachers';
-        }).fail(function (err) {
-            modal.notifyError(err.responseText);
-        });
     });
 }
 
