@@ -1151,7 +1151,26 @@ class ForTeachersModule(WebsiteModule):
             tagged_in = list(filter(lambda t: t["id"] != adventure_id, tag["tagged_in"]))
             if len(tag["tagged_in"]) != len(tagged_in):  # only update if this adventure was tagged.
                 self.db.update_tag(tag["id"], {"tagged_in": tagged_in})
-        return {}, 200
+
+        teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        adventures = []
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        # Get the adventures that are created by my second teachers.
+        second_teacher_adventures = self.db.get_second_teacher_adventures(teacher_classes, user["username"])
+        # second_teacher_adventures = self.db.get_second_teacher_adventures(user)
+        for adventure in list(teacher_adventures) + second_teacher_adventures:
+            adventures.append(
+                {
+                    "id": adventure.get("id"),
+                    "name": adventure.get("name"),
+                    "creator": adventure.get("creator"),
+                    "author": adventure.get("author"),
+                    "date": utils.localized_date_format(adventure.get("date")),
+                    "level": adventure.get("level"),
+                    "levels": adventure.get("levels"),
+                }
+            )
+        return render_partial('htmx-my-adventures-table.html', teacher_adventures=teacher_adventures)
 
     @route("/preview-adventure", methods=["POST"])
     def parse_preview_adventure(self):
