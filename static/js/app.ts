@@ -1516,23 +1516,29 @@ export function toggle_keyword_language(current_lang: string, new_lang: string) 
       level: theLevel,
     });
 
-  if (response.success) {
-    const code = response.code
-    theGlobalEditor.contents = code;
-    const saveName = saveNameFromInput();
+    if (response.success) {
+      const code = response.code
+      theGlobalEditor.contents = code;
+      const saveName = saveNameFromInput();
 
-    // save translated code to local storage
-    // such that it can be fetched after reload
-    localSave(currentTabLsKey(), { saveName, code });
-    $('#editor').attr('lang', new_lang);
+      // save translated code to local storage
+      // such that it can be fetched after reload
+      localSave(currentTabLsKey(), { saveName, code });
+      $('#editor').attr('lang', new_lang);
 
-    // update the whole page (example codes)
-    const hash = window.location.hash;
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    urlParams.set('keyword_language', new_lang)
-    window.location.search = urlParams.toString()
-    window.open(hash, "_self");
+      // update the whole page (example codes)
+      const hash = window.location.hash;
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      urlParams.set('keyword_language', new_lang)
+      window.location.search = urlParams.toString()
+      window.open(hash, "_self");
+
+      // if in iframe, reload the topper window level.
+      if (window.top) {
+        window.top.location.reload();
+      }
+
     }
   });
 }
