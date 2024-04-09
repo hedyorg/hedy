@@ -13,7 +13,7 @@ describe('Test for the Customize Adventure Page', () => {
         cy.get('[data-cke-tooltip-text="Bold (Ctrl+B)"]').click()
         cy.get('.ck-content[contenteditable=true]').realType('`to`')
         // The warning should be shown now and contain the right suggestions
-        cy.get('#warnings_container').should('be.visible').and('contain.text', '{to}, {to_list}')
+        cy.get('#warnings_container').should('be.visible').and('contain.text', 'to, to_list')
         // Once we click the close button
         cy.get('p[class="close-dialog"]').click()
         // The alert should not exist anymore
