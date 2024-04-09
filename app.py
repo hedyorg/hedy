@@ -1672,6 +1672,10 @@ def render_code_in_editor(level):
     except BaseException:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
+    if session.get("previous_keyword_lang"):
+        code = hedy_translation.translate_keywords(
+            code, session["previous_keyword_lang"], g.keyword_lang, level=int(level))
+
     a = Adventure(
         short_name='start',
         name='start',
@@ -2279,6 +2283,8 @@ def translate_keywords():
         translated_code = hedy_translation.translate_keywords(body.get('code'), body.get(
             'start_lang'), body.get('goal_lang'), level=int(body.get('level', 1)))
         if translated_code or translated_code == '':  # empty string is False, so explicitly allow it
+            session["previous_keyword_lang"] = body.get("start_lang")
+            session["keyword_lang"] = body.get("goal_lang")
             return jsonify({'success': 200, 'code': translated_code})
         else:
             return gettext('translate_error'), 400
