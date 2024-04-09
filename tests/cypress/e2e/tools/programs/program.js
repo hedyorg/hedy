@@ -22,10 +22,15 @@ export function deleteProgram(name) {
     cy.get(".programs")
         .each(($program, i) => {
             if ($program.text().includes(name)) {
-                cy.get(`#more_options_${i+1}`).click();
-                cy.get(`#more_options_${i+1}`).should("be.visible");
-                cy.getBySel(`delete_non_submitted_program_${i+1}`).click();
-                cy.getBySel('modal_yes_button').click();
+                cy.get(`[data-name=${name}]`)
+                .first()
+                .then($el => {
+                    const programId = $el[0].getAttribute("data-id");
+                    cy.get(`#more_options_${programId}`).click();
+                    cy.get(`#more_options_${programId}`).should("be.visible");
+                    cy.getBySel(`delete_non_submitted_program_${programId}`).click();
+                    cy.getBySel('modal_yes_button').click();
+            })
             }
         })
 }
