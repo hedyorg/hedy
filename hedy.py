@@ -32,7 +32,7 @@ import utils
 from hedy_content import KEYWORDS
 from hedy_sourcemap import SourceMap, source_map_transformer
 
-from prefixes.music import notes_mapping
+from prefixes.music import present_in_notes_mapping
 
 HEDY_MAX_LEVEL = 18
 HEDY_MAX_LEVEL_SKIPPING_FAULTY = 5
@@ -185,7 +185,7 @@ PREPROCESS_RULES = {
 }
 
 
-def make_value_error(command, value, tip, lang):
+def make_value_error(command, tip, lang, value='{}'):
     return make_error_text(exceptions.RuntimeValueException(command=command, value=value, tip=tip), lang)
 
 
@@ -243,6 +243,7 @@ class Command:
     define = 'define'
     call = 'call'
     returns = 'return'
+    play = 'play'
 
 
 translatable_commands = {Command.print: ['print'],
@@ -1193,7 +1194,7 @@ class IsValid(Filter):
         if not sug_exists:  # the suggestion is invalid, i.e. identical to the command
             invalid_command_en = hedy_translation.translate_keyword_to_en(invalid_command, self.lang)
             if invalid_command_en == Command.turn:
-                arg = args[0][0]
+                arg = args[1][1]
                 raise hedy.exceptions.InvalidArgumentException(
                     command=invalid_command,
                     allowed_types=get_allowed_types(Command.turn, self.level),
@@ -1366,29 +1367,39 @@ class ConvertToPython(Transformer):
         else:
             return ""
 
+    def is_var_defined_before_access(self, variable_name, access_line_number):
+        all_names_before_access_line = [a.name for a in self.lookup if a.definition_line <= access_line_number]
+        return variable_name in all_names_before_access_line
+
+    def is_var_in_lookup(self, variable_name):
+        all_names = [a.name for a in self.lookup]
+        return variable_name in all_names
+
     # default for line number is max lines so if it is not given, there
     # is no check on whether the var is defined
     def is_variable(self, variable_name, access_line_number=100):
-        all_names = [a.name for a in self.lookup]
-        all_names_before_access_line = [a.name for a in self.lookup if a.definition_line <= access_line_number]
-        if variable_name in all_names and variable_name not in all_names_before_access_line:
-            # referenced before assignment!
+        if self.is_var_in_lookup(variable_name) and not self.is_var_defined_before_access(variable_name,
+                                                                                          access_line_number):
             definition_line_number = [a.definition_line for a in self.lookup if a.name == variable_name][0]
             raise hedy.exceptions.AccessBeforeAssignException(
                 name=variable_name,
                 access_line_number=access_line_number,
                 definition_line_number=definition_line_number)
-        else:
-            # valid use, store!
-            self.add_variable_access_location(variable_name, access_line_number)
 
-        is_function = False
+        # valid use, store!
+        self.add_variable_access_location(variable_name, access_line_number)
+
+        all_names_before_access_line = [a.name for a in self.lookup if a.definition_line <= access_line_number]
+        if escape_var(variable_name) in all_names_before_access_line:
+            return True
+
         if isinstance(variable_name, str):
             pattern = r'^([a-zA-Z_][a-zA-Z0-9_]*)\('
             match = re.match(pattern, variable_name)
             is_function = match and [a.name for a in self.lookup if match.group(1) + "()" == a.name]
+            return is_function
 
-        return escape_var(variable_name) in all_names_before_access_line or is_function
+        return False
 
     def process_variable(self, arg, access_line_number=100):
         # processes a variable by hashing and escaping when needed
@@ -1408,9 +1419,9 @@ class ConvertToPython(Transformer):
         return arg
 
     def process_variable_for_fstring(self, variable_name, access_line_number=100):
-        self.add_variable_access_location(variable_name, access_line_number)
-
-        if self.is_variable(variable_name, access_line_number):
+        if self.is_var_in_lookup(variable_name) and self.is_var_defined_before_access(variable_name,
+                                                                                      access_line_number):
+            self.add_variable_access_location(variable_name, access_line_number)
             return "{" + escape_var(variable_name) + "}"
         else:
             return process_characters_needing_escape(variable_name)
@@ -1480,17 +1491,6 @@ class ConvertToPython(Transformer):
                     ConvertToPython.is_float(arg) or
                     ConvertToPython.is_random(arg)):
                 raise exceptions.UnquotedAssignTextException(text=arg, line_number=meta.line)
-
-    def code_to_ensure_variable_type(self, arg, expected_type, command, suggested_type):
-        if not self.is_variable(arg):
-            return ""
-        exception = make_value_error(command, f'{{{arg}}}', suggested_type, self.language)
-        return textwrap.dedent(f"""\
-            try:
-              {expected_type}({arg})
-            except ValueError:
-              raise Exception(f{exception})
-            """)
 
     # static methods
 
@@ -1634,47 +1634,37 @@ class ConvertToPython_1(ConvertToPython):
                                                           line_number=meta.line)
 
     def make_turn(self, parameter):
-        return self.make_turtle_command(parameter, Command.turn, 'right', False, 'int')
+        return self.make_turtle_command(parameter, Command.turn, 'right', False, HedyType.integer)
 
     def make_forward(self, parameter):
-        return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'int')
+        return self.make_turtle_command(parameter, Command.forward, 'forward', True, HedyType.integer)
 
     def make_play(self, note, meta):
-        exception_text = make_value_error('play', note, 'suggestion_note', self.language)
+        ex = make_value_error(Command.play, 'suggestion_note', self.language)
 
         return textwrap.dedent(f"""\
-                if '{note}' not in notes_mapping.keys() and '{note}' not in notes_mapping.values():
-                    raise Exception({exception_text})
-                play(notes_mapping.get(str('{note}'), str('{note}')))
+                play(note_with_error('{note}', {ex}))
                 time.sleep(0.5)""")
 
     def make_play_var(self, note, meta):
-        exception_text = make_value_error('play', note, 'suggestion_note', self.language)
         self.check_var_usage([note], meta.line)
         chosen_note = note.children[0] if isinstance(note, Tree) else note
+        ex = make_value_error(Command.play, 'suggestion_note', self.language)
 
         return textwrap.dedent(f"""\
-                chosen_note = str({chosen_note}).upper()
-                if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
-                    raise Exception({exception_text})
-                play(notes_mapping.get(chosen_note, chosen_note))
+                play(note_with_error({chosen_note}, {ex}))
                 time.sleep(0.5)""")
 
     def make_color(self, parameter, language):
         return self.make_turtle_color_command(parameter, Command.color, 'pencolor', language)
 
-    def make_turtle_command(self, parameter, command, command_text, add_sleep, type):
-        exception = ''
-        if isinstance(parameter, str):
-            exception = self.make_index_error_check_if_list([parameter])
+    def make_turtle_command(self, parameter, command, command_text, add_sleep, target_type):
+        list_index_exception = self.make_index_error_check_if_list([parameter]) if isinstance(parameter, str) else ''
         variable = self.get_fresh_var('__trtl')
-        exception_text = make_value_error(command, variable, 'suggestion_number', self.language)
-        transpiled = exception + textwrap.dedent(f"""\
-            {variable} = {parameter}
-            try:
-              {variable} = {type}({variable})
-            except ValueError:
-              raise Exception({exception_text})
+        func = 'int_with_error' if target_type == HedyType.integer else 'number_with_error'
+        ex = make_value_error(command, 'suggestion_number', self.language)
+        transpiled = list_index_exception + textwrap.dedent(f"""\
+            {variable} = {func}({parameter}, {ex})
             t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable})){self.add_debug_breakpoint()}""")
         if add_sleep and not self.is_debug:
             return add_sleep_to_command(transpiled, False, self.is_debug, location="after")
@@ -1688,12 +1678,12 @@ class ConvertToPython_1(ConvertToPython):
         # coming from a random list or ask
 
         color_dict = {hedy_translation.translate_keyword_from_en(x, language): x for x in english_colors}
-        exception_text = make_value_error(command, parameter, 'suggestion_color', self.language)
+        ex = make_value_error(command, 'suggestion_color', self.language, parameter)
         return textwrap.dedent(f"""\
             {variable} = f'{parameter}'
             color_dict = {color_dict}
             if {variable} not in {both_colors}:
-              raise Exception({exception_text})
+              raise Exception(f{ex})
             else:
               if not {variable} in {english_colors}:
                 {variable} = color_dict[{variable}]
@@ -1833,9 +1823,8 @@ class ConvertToPython_2(ConvertToPython_1):
 
         note = args[0]
         if isinstance(note, str):
-            uppercase_note = note.upper()
-            if uppercase_note in list(notes_mapping.values()) + list(notes_mapping.keys()):  # this is a supported note
-                return self.make_play(uppercase_note, meta) + self.add_debug_breakpoint()
+            if present_in_notes_mapping(note):  # this is a supported note
+                return self.make_play(note.upper(), meta) + self.add_debug_breakpoint()
 
         # no note? it must be a variable!
         self.add_variable_access_location(note, meta.line)
@@ -1858,20 +1847,16 @@ class ConvertToPython_2(ConvertToPython_1):
                 return variable_name + " = '" + value + "'" + self.add_debug_breakpoint()
 
     def sleep(self, meta, args):
-
         if not args:
             return f"time.sleep(1){self.add_debug_breakpoint()}"
         else:
             value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
             if not self.is_int(args[0]):
                 self.add_variable_access_location(value, meta.line)
-            exceptions = self.make_index_error_check_if_list(args)
-            try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
-            exception_text = make_value_error(Command.sleep, value, 'suggestion_number', self.language)
-            code = try_prefix + textwrap.dedent(f"""\
-                  time.sleep(int({value})){self.add_debug_breakpoint()}
-                except ValueError:
-                  raise Exception({exception_text})""")
+            index_exception = self.make_index_error_check_if_list(args)
+            ex = make_value_error(Command.sleep, 'suggestion_number', self.language)
+            code = index_exception + \
+                textwrap.dedent(f"time.sleep(int_with_error({value}, {ex})){self.add_debug_breakpoint()}")
             return code
 
 
@@ -2128,13 +2113,9 @@ class ConvertToPython_6(ConvertToPython_5):
                 if not self.is_int(args[0]):
                     self.add_variable_access_location(value, meta.line)
 
-            exceptions = self.make_index_error_check_if_list(args)
-            try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
-            exception_text = make_value_error(Command.sleep, value, 'suggestion_number', self.language)
-            code = try_prefix + textwrap.dedent(f"""\
-                  time.sleep(int({value}))
-                except ValueError:
-                  raise Exception({exception_text})""")
+            index_exception = self.make_index_error_check_if_list(args)
+            ex = make_value_error(Command.sleep, 'suggestion_number', self.language)
+            code = index_exception + textwrap.dedent(f"time.sleep(int_with_error({value}, {ex}))")
             return code
 
     def print_ask_args(self, meta, args):
@@ -2195,7 +2176,7 @@ class ConvertToPython_6(ConvertToPython_5):
             latin_numeral = int(argument)
             return f'int({latin_numeral})'
         self.add_variable_access_location(argument, meta.line)
-        exception_text = make_value_error(command, argument, 'suggestion_number', self.language)
+        exception_text = make_value_error(command, 'suggestion_number', self.language)
         return f'int_with_error({argument}, {exception_text})'
 
     def process_calculation(self, args, operator, meta):
@@ -2272,8 +2253,8 @@ class ConvertToPython_7(ConvertToPython_6):
             body = "\n".join([self.indent(x) for x in args[1:]])
 
         body = add_sleep_to_command(body, indent=True, is_debug=self.is_debug, location="after")
-        type_check = self.code_to_ensure_variable_type(times, 'int', Command.repeat, 'suggestion_number')
-        return f"{type_check}for {var_name} in range(int({times})):{self.add_debug_breakpoint()}\n{body}"
+        ex = make_value_error(Command.repeat, 'suggestion_number', self.language)
+        return f"for {var_name} in range(int_with_error({times}, {ex})):{self.add_debug_breakpoint()}\n{body}"
 
     def repeat(self, meta, args):
         return self.make_repeat(meta, args, multiline=False)
@@ -2543,10 +2524,11 @@ class ConvertToPython_12(ConvertToPython_11):
         return self.make_forward(float(args[0]))
 
     def make_turn(self, parameter):
-        return self.make_turtle_command(parameter, Command.turn, 'right', False, 'float')
+        return self.make_turtle_command(parameter, Command.turn, 'right', False, HedyType.float)
 
     def make_forward(self, parameter):
-        return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'float')
+        return self.make_turtle_command(parameter, Command.forward,
+                                        'forward', True, HedyType.float)
 
     def process_token_or_tree(self, argument, meta):
         if isinstance(argument, Tree):
@@ -2562,20 +2544,12 @@ class ConvertToPython_12(ConvertToPython_11):
         else:
             # this is a variable, add to the table
             self.add_variable_access_location(argument, meta.line)
-            exception_text = make_value_error(command, argument, 'suggestion_number', self.language)
+            exception_text = make_value_error(command, 'suggestion_number', self.language)
             return f'number_with_error({argument}, {exception_text})'
-
-    def process_token_or_tree_for_addition(self, argument, meta):
-        if type(argument) is Tree:
-            return f'{str(argument.children[0])}'
-        else:
-            # this is a variable, add to the table
-            self.add_variable_access_location(argument, meta.line)
-            return argument
 
     # From level 12 concatenation should also work, so the args could be either numbers or strings
     def addition(self, meta, args):
-        args = [self.process_token_or_tree_for_addition(a, meta) for a in args]
+        args = [self.process_token_or_tree(a, meta) for a in args]
         if all([self.is_int(a) or self.is_float(a) for a in args]):
             return Tree('sum', [f'{args[0]} + {args[1]}'])
         else:
@@ -3638,6 +3612,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         if not unused_allowed:
             for x in lookup_table:
                 if isinstance(x.name, str) and x.access_line is None and x.name != 'x__x__x__x':
+                    x.name = re.sub(r'^_', '', x.name)
                     raise hedy.exceptions.UnusedVariableException(
                         level, x.definition_line, x.name, fixed_code=python, fixed_result=parse_result)
 

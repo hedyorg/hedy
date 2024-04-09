@@ -51,11 +51,11 @@ jobs:
     - name: Run weblate tests
       shell: pwsh
       id: weblate_tests
-      if: ${{ github.event.pull_request.user.login == 'weblate' }}
+      if: github.event.pull_request.user.login == 'weblate'
       run: |
         build-tools/github/validate --weblate
     - name: Run all tests
       shell: pwsh
-      if: ${{ ((github.event.pull_request.user.login != 'weblate') || github.event.label.name == 'force_tests') }}
+      if: github.event.pull_request.user.login != 'weblate'
       run: |
-        build-tools/github/validate --all
+        build-tools/github/validate

@@ -24,14 +24,14 @@ jobs:
       run: cat $GITHUB_EVENT_PATH
 
     #----------------------------------------------------------------------
-    # Either use FELIENNE_GITHUB_ACCESS_TOKEN or GITHUB_TOKEN
+    # Either use HEDY_BOT_TOKEN or GITHUB_TOKEN
     # GITHUB_TOKEN can do fewer things (push to main, trigger new GHAs, etc).
     - name: Check for presence of GitHub Token
       id: secret
       run: |
-        if [ ! -z "${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}" ]; then
+        if [ ! -z "${{ secrets.HEDY_BOT_TOKEN }}" ]; then
           echo "We have a token!"
-          echo "secret=${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}" >> $GITHUB_OUTPUT
+          echo "secret=${{ secrets.HEDY_BOT_TOKEN }}" >> $GITHUB_OUTPUT
         else
           echo "We do not have a token"
           echo "secret=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_OUTPUT
@@ -42,7 +42,7 @@ jobs:
       run: |
         if [[  "${{ github.event_name }}" == "pull_request"* ]]; then
           echo "Pull Request"
-          echo "branch=${{ github.event.pull_request.head.ref }}" >> $GITHUB_OUTPUT
+          echo "branch=$PULL_REQUEST_HEAD_REF" >> $GITHUB_OUTPUT
           echo "repo=${{ github.event.pull_request.head.repo.full_name }}" >> $GITHUB_OUTPUT
         elif [[  "${{ github.event_name }}" == "push" ]]; then
           echo "Push Event"
@@ -52,6 +52,9 @@ jobs:
           echo "Unsupported event type!" >&2
           exit 1
         fi
+      env:
+        # Necessary to pass like this to avoid shell script injection
+        PULL_REQUEST_HEAD_REF: ${{ github.event.pull_request.head.ref }}
 
     #----------------------------------------------------------------------
     #  Checkout source

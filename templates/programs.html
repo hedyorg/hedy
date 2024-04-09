@@ -49,7 +49,7 @@
   </div>
   <div class="programs w-full">
     {% for program in programs %}
-        {{ render_partial('htmx-program.html', program=program, adventure_names=adventure_names, public_profile=public_profile, loop_index=loop.index, second_teachers_programs=second_teachers_programs) }}
+        {{ render_partial('htmx-program.html', program=program, adventure_names=adventure_names, public_profile=public_profile, second_teachers_programs=second_teachers_programs) }}
     {% endfor %}
 
     {% if programs|length == 0 %}

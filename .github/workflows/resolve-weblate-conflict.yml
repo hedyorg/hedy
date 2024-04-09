@@ -18,9 +18,9 @@ jobs:
     - name: Check for presence of GitHub Token
       id: secret
       run: |
-        if [ ! -z "${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}" ]; then
+        if [ ! -z "${{ secrets.HEDY_BOT_TOKEN }}" ]; then
           echo "We have a token!"
-          echo "secret=${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}" >> $GITHUB_OUTPUT
+          echo "secret=${{ secrets.HEDY_BOT_TOKEN }}" >> $GITHUB_OUTPUT
         else
           echo "We do not have a token"
           echo "secret=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_OUTPUT
@@ -70,7 +70,7 @@ jobs:
 
     - name: Run weblate merge script
       run: |
-        tools/merge-weblate-resolving-conflicts.sh
+        bash tools/merge-weblate-resolving-conflicts.sh
 
     # The create-pull-request action wants to commit the changes, and wants to
     # have them be on the main branch. Hence, move the current working tree to
