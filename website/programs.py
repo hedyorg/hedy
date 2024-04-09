@@ -132,7 +132,7 @@ class ProgramsModule(WebsiteModule):
             and "favourite_program" in public_profile
             and public_profile["favourite_program"] == body["id"]
         ):
-            self.db.set_favourite_program(user["username"], None)
+            self.db.set_favourite_program(user["username"], body["id"], None)
 
         achievement = self.achievements.add_single_achievement(user["username"], "do_you_have_copy")
         resp = {"message": gettext("delete_success")}
@@ -230,7 +230,7 @@ class ProgramsModule(WebsiteModule):
             and "favourite_program" in public_profile
             and public_profile["favourite_program"] == program_id
         ):
-            self.db.set_favourite_program(user["username"], None)
+            self.db.set_favourite_program(user["username"], program_id, None)
 
         if program.get("public"):
             public = 0
