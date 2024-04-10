@@ -1157,7 +1157,6 @@ class ForTeachersModule(WebsiteModule):
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
         # Get the adventures that are created by my second teachers.
         second_teacher_adventures = self.db.get_second_teacher_adventures(teacher_classes, user["username"])
-        # second_teacher_adventures = self.db.get_second_teacher_adventures(user)
         for adventure in list(teacher_adventures) + second_teacher_adventures:
             adventures.append(
                 {
