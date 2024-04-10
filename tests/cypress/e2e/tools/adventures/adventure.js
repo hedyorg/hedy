@@ -1,6 +1,6 @@
 import { goToTeachersPage } from "../navigation/nav";
 
-export function createAdventure(name="")
+export function createAdventure(name)
 {
     goToTeachersPage();
 

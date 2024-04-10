@@ -28,7 +28,7 @@ String { doubleQuotedString | singleQuotedString }
 Print { print+ ( Expression )+ }
 Ask { Text (is+ | Op<"=">) ask+ ( Expression )+ }
 
-AssignList { Text (is+ | Op<"=">) Op<"["> (String | Number ) ~ambig  (Comma (String | Number ))+ Op<"]">}
+AssignList { Text (is+ | Op<"=">) Op<"["> ((String | Text | Number) ~ambig (Comma (String | Text | Number))*)? Op<"]"> }
 Assign { (Text | ListAccess) (is+ | Op<"=">) (Expression ~ambig )+ }
 Sleep { sleep+ (Expression )? }
 ListAccess { Text Op<"["> (random+ | Text | Number) Op<"]"> }

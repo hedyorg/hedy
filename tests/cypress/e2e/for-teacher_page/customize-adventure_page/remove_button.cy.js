@@ -38,7 +38,7 @@ describe('Preview button test', () => {
       .should('not.be.visible');
 
     // Creating a new adventure to remove
-    createAdventure();
+    createAdventure("test adv");
 
     // Testing removing adventure (clicking on remove and then on 'yes')
     cy.get('#remove_adventure_button')
