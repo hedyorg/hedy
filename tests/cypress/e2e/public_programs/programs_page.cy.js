@@ -39,7 +39,12 @@ describe("General tests for my programs page (with both custom teacher and built
     });
 
     it('can favourite and unfavourite a public program', () => {
+        cy.intercept({
+            url: '/auth/public_profile',
+            method: "POST"
+        }).as('public_profile')
         makeProfilePublic();
+        cy.wait('@public_profile')
         cy.visit(`${Cypress.env('programs_page')}`);
         cy.get(`[data-name=${programName}]`)
             .first()
