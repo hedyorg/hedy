@@ -49,7 +49,7 @@ class StatisticsModule(WebsiteModule):
     @requires_login
     def render_class_grid_overview(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
 
         students, class_, class_adventures_formatted, ticked_adventures, \
             adventure_names, student_adventures = self.get_grid_info(
@@ -418,7 +418,7 @@ class LiveStatisticsModule(WebsiteModule):
     @requires_login
     def render_live_stats(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
 
         class_ = self.db.get_class(class_id)
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
@@ -501,7 +501,7 @@ class LiveStatisticsModule(WebsiteModule):
         Adds or remove the current level from the UI
         """
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
 
         class_ = self.db.get_class(class_id)
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
@@ -558,7 +558,7 @@ class LiveStatisticsModule(WebsiteModule):
         """
 
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
 
         class_ = self.db.get_class(class_id)
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
@@ -575,7 +575,7 @@ class LiveStatisticsModule(WebsiteModule):
         if student:
             class_students = class_.get("students", [])
             if student not in class_students:
-                return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
+                return utils.error_page(error=401, ui_message=gettext('not_enrolled'))
 
             student_programs, graph_data, graph_labels, selected_student = self.get_student_data(student, class_)
 
@@ -637,7 +637,7 @@ class LiveStatisticsModule(WebsiteModule):
         """
 
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
 
         class_ = self.db.get_class(class_id)
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
@@ -648,7 +648,7 @@ class LiveStatisticsModule(WebsiteModule):
 
         students = class_.get("students", [])
         if student not in students:
-            return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
+            return utils.error_page(error=401, ui_message=gettext('not_enrolled'))
 
         students, common_errors, selected_levels, quiz_info, attempted_adventures, \
             adventures = self.get_class_live_stats(user, class_)

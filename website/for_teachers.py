@@ -130,7 +130,7 @@ class ForTeachersModule(WebsiteModule):
     @requires_login
     def get_class(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
@@ -217,7 +217,7 @@ class ForTeachersModule(WebsiteModule):
     @requires_login
     def preview_class_as_teacher(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
@@ -250,7 +250,7 @@ class ForTeachersModule(WebsiteModule):
         allowed_to_edit = session.get("class_id", False) and utils.can_edit_class(user, Class)
 
         if from_user and not utils.can_edit_class(user, Class):
-            return utils.error_page(error=403, ui_message=gettext('not_teacher'))
+            return utils.error_page(error=401, ui_message=gettext('not_teacher'))
 
         # We request our own page -> also get the public_profile settings
         public_profile = None
@@ -313,7 +313,7 @@ class ForTeachersModule(WebsiteModule):
     @requires_login
     def get_class_customization_page(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
@@ -376,7 +376,7 @@ class ForTeachersModule(WebsiteModule):
     @requires_login
     def change_dropdown_level(self, user):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
         Class = self.db.get_class(session['class_id'])
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
@@ -418,7 +418,7 @@ class ForTeachersModule(WebsiteModule):
     @requires_login
     def add_adventure(self, user, level):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
         Class = self.db.get_class(session['class_id'])
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
@@ -467,7 +467,7 @@ class ForTeachersModule(WebsiteModule):
     @requires_login
     def remove_adventure_from_class(self, user):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
         Class = self.db.get_class(session['class_id'])
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
@@ -504,7 +504,7 @@ class ForTeachersModule(WebsiteModule):
     @requires_login
     def sort_adventures_in_class(self, user):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
         Class = self.db.get_class(session['class_id'])
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
@@ -920,6 +920,7 @@ class ForTeachersModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=403, ui_message=gettext("no_such_class"))
+        # should this be split up in 403 and 401?
 
         return render_template("create-accounts.html", current_class=Class)
 
@@ -973,12 +974,12 @@ class ForTeachersModule(WebsiteModule):
     @requires_login
     def view_adventure(self, user, adventure_id):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_adventure_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_adventure_error"))
         adventure = self.db.get_adventure(adventure_id)
         if not adventure:
             return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
         if adventure["creator"] != user["username"] and not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_adventure_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_adventure_error"))
 
         # Add level to the <pre> tag to let syntax highlighting know which highlighting we need!
         adventure["content"] = adventure["content"].replace(
@@ -1044,6 +1045,7 @@ class ForTeachersModule(WebsiteModule):
 
         if not adventure or adventure["creator"] != user["username"] and not is_teacher(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_adventure_error"))
+        # should this be split up in 403 and 401?
 
         # Now it gets a bit complex, we want to get the teacher classes as well as the customizations
         # This is a quite expensive retrieval, but we should be fine as this page is not called often
@@ -1116,7 +1118,7 @@ class ForTeachersModule(WebsiteModule):
 
         # TODO: instead of not allowing the teacher, let them update the adventure in their relevant classes only.
         elif current_adventure["creator"] != user["username"]:
-            return gettext("unauthorized"), 403
+            return gettext("unauthorized"), 401
         current_classes = {}
         if body.get("classes"):
             current_classes = current_adventure.get('classes', [])
@@ -1186,7 +1188,7 @@ class ForTeachersModule(WebsiteModule):
         if not adventure:
             return utils.error_page(error=404, ui_message=gettext("retrieve_adventure_error"))
         elif adventure["creator"] != user["username"]:
-            return gettext("unauthorized"), 403
+            return gettext("unauthorized"), 401
 
         self.db.delete_adventure(adventure_id)
         tags = self.db.read_tags(adventure.get("tags", []))
@@ -1234,7 +1236,7 @@ class ForTeachersModule(WebsiteModule):
     @requires_teacher
     def create_adventure(self, user, class_id=None, level=None):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
 
         adventure_id = uuid.uuid4().hex
         name = "AdventureX"

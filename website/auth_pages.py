@@ -389,6 +389,7 @@ class AuthModule(WebsiteModule):
         token = self.db.get_token(body["token"])
         if not token or body["token"] != token.get("id") or body["username"] != token.get("username"):
             return gettext("token_invalid"), 403
+            # is this a 401?
 
         hashed = password_hash(body["password"], make_salt())
         self.db.update_user(body["username"], {"password": hashed})

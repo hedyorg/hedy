@@ -96,7 +96,7 @@ class ClassModule(WebsiteModule):
         if not Class:
             return gettext("no_such_class"), 404
         if Class["teacher"] != user["username"]:  # only teachers can remove their classes.
-            return gettext("unauthorized"), 403
+            return gettext("unauthorized"), 401
 
         self.db.delete_class(Class)
 
@@ -421,7 +421,7 @@ class MiscClassPages(WebsiteModule):
 
         # Fixme TB -> Sure the user is also allowed to remove their invite, but why the 'retrieve_class_error'?
         if not is_teacher(user) and username != user.get("username"):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and username != user.get("username")):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
