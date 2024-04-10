@@ -28,7 +28,8 @@ class TagsModule(WebsiteModule):
     def get_public_tags(self, user, adventure_id):
         public_tags = self.db.read_public_tags()
         adventure_id = request.args.get("adventure_id")
-        if adventure_id:
+        adventure = self.db.get_adventure(adventure_id)
+        if adventure:
             adventure = self.db.get_adventure(adventure_id)
             # exclude current adventure's tags
             public_tags = list(filter(lambda t: t["name"] not in adventure.get("tags", []), public_tags))
