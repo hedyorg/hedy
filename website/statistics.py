@@ -576,6 +576,7 @@ class LiveStatisticsModule(WebsiteModule):
             class_students = class_.get("students", [])
             if student not in class_students:
                 return utils.error_page(error=401, ui_message=gettext('not_enrolled'))
+            # is this a 401?
 
             student_programs, graph_data, graph_labels, selected_student = self.get_student_data(student, class_)
 
@@ -649,6 +650,7 @@ class LiveStatisticsModule(WebsiteModule):
         students = class_.get("students", [])
         if student not in students:
             return utils.error_page(error=401, ui_message=gettext('not_enrolled'))
+            # is this a 401?
 
         students, common_errors, selected_levels, quiz_info, attempted_adventures, \
             adventures = self.get_class_live_stats(user, class_)
