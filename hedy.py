@@ -810,7 +810,8 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree, type_)
 
     def text_in_quotes(self, tree):
-        return self.to_typed_tree(tree.children[0], HedyType.string)
+        t = tree.children[0] if tree.children else tree
+        return self.to_typed_tree(t, HedyType.string)
 
     def var_access(self, tree):
         return self.to_typed_tree(tree, HedyType.string)
@@ -2429,7 +2430,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def text_in_quotes(self, meta, args):
         # We need to re-add the quotes, so that the Python code becomes name = 'Jan' or "Jan's"
-        text = args[0]
+        text = args[0] if args else ''
         if "'" in text:
             return f'"{text}"'
         return f"'{text}'"

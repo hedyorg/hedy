@@ -1066,6 +1066,13 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, unused_allowed=True, expected=expected, max_level=17)
 
+    @parameterized.expand(HedyTester.quotes)
+    def test_assign_empty_string(self, q):
+        code = f"name = {q}{q}"
+        expected = "name = ''"
+
+        self.multi_level_tester(code=code, unused_allowed=True, expected=expected)
+
     def test_assign_text_with_inner_double_quote(self):
         code = """a is 'It says "Hedy"'"""
         expected = """a = 'It says "Hedy"'"""
