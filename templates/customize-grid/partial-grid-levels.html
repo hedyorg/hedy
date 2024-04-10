@@ -34,7 +34,14 @@
                 </div>
               </td>
               {% else %}
-              <td id="teacher_cell" class="text-center"><span class="fa-regular fa-hourglass text-gray-600"></span></td>
+              <td id="teacher_cell" class="text-center">
+                <div class="text-center opacity-0 hover:opacity-100 duration-300 z-10">
+                  <span class="tooltiptext bg-white text-xs font-medium absolute rounded shadow-lg !fixed p-2" style="inset: auto; margin-left: -50px; margin-top: 10px; color:black; ">
+                    {{ _('waiting_for_submit') }}
+                  </span>
+                </div>
+                <span class="fa-regular fa-hourglass text-gray-600"></span>
+              </td>
               {% endif %}
               {% endfor %}
               <td class="text-center text-blue-900">
