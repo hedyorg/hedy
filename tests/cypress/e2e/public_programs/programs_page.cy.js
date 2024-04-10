@@ -5,6 +5,7 @@ import { navigateToClass } from "../tools/classes/class";
 
 describe("General tests for my programs page (with both custom teacher and built-in adventure)", () => {
     const programName = "myTestProgram";
+    const adventure = 'story'
     beforeEach(() => {
         loginForTeacher();
     }) 
@@ -22,6 +23,39 @@ describe("General tests for my programs page (with both custom teacher and built
         cy.get(".programs").should("contain.text", programName);
 
         deleteAdventure(programName)
+    });
+
+    it("should not be added to my programs when running a program with copied code", () => {
+        cy.visit(`${Cypress.env('hedy_page')}#${adventure}`);
+        // make sure to navigate to the wanted program tab.
+        cy.get(`[data-cy="${adventure}"]`)
+            .click();
+        // Paste example code 
+        cy.get(`[data-cy="paste-example-code-${adventure}"]`).click();
+        cy.get('#runit').click();
+        cy.wait(500);
+        cy.visit(`${Cypress.env('programs_page')}`);
+        cy.get(".programs").should("not.contain.text", adventure);
+        cy.wait(500);
+        cy.get('#more_options_1').click(); 
+        cy.get(`[data-cy="delete_non_submitted_program_1"]`).click();
+        cy.getBySel('modal_yes_button').click();
+        cy.wait(500);
+    });
+
+    it("should be added to my programs when running a program with modified code", () => {
+        cy.visit(`${Cypress.env('hedy_page')}#${adventure}`);
+        // make sure to navigate to the wanted program tab.
+        cy.get(`[data-cy="${adventure}"]`)
+            .click();
+        // Paste example code and modify code
+        cy.get(`[data-cy="paste-example-code-${adventure}"`).click();
+        cy.get('#editor .cm-content').click();
+        cy.focused().type('print Hello world');
+        cy.get('#runit').click();
+        cy.wait(500);
+        cy.visit(`${Cypress.env('programs_page')}`);
+        cy.get(".programs").should("contain.text", adventure);
     });
 
     it('can make program public', () => {

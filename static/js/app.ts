@@ -405,7 +405,8 @@ export function initializeHighlightedCodeBlocks(where: Element) {
           if (dir === "rtl") {
             symbol = "⇤";
           }
-          $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
+          const adventure = container.getAttribute('data-tabtarget')
+          $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').attr('data-cy', `paste-example-code-${adventure}`).text(symbol).appendTo(buttonContainer).click(function() {
             if (!theGlobalEditor?.isReadOnly) {
               theGlobalEditor.contents = exampleEditor.contents + '\n';
             }
