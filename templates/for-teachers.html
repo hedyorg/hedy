@@ -38,11 +38,8 @@
       <div class="text-black basis-10/12">{{ _('adventures_info') }}</div>
       <div class="flex gap-3 justify-end basis-1/12">
             <button id="create_adventure_button" class="green-btn inline-flex" 
-              hx-trigger="click"
-              hx-post="/for-teachers/create-adventure"
-              hx-swap="none"
-              _="on htmx:afterRequest if detail.xhr.response
-              window.open('/for-teachers/customize-adventure/' + detail.xhr.response, '_self')"
+              _="on click
+                window.open('/for-teachers/customize-adventure', '_self')"
               data-cy="edit-link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
             {% if teacher_adventures %}
             <button class="white-btn inline-flex" id="view_adventures"
@@ -142,8 +139,8 @@
                 <td class="text-center p-2 hidden sm:block">{{adventure.date}}</td>
                 <td class="text-center p-2">
                   <div class="flex justify-center text-blue-900">
-                    <button class="flex flex-col items-center mr-16"
-                    _="on click window.open('/adventure/{{ adventure.name }}?creator={{ adventure.creator }}', '_self')">
+                    <button class="flex flex-col items-center mr-16" data-cy="preview-{{adventure.name}}"
+                    _="on click window.open('/adventure/{{ adventure.name }}/{{ adventure.level }}?creator={{ adventure.creator }}', '_self')">
                       <span class="fas fa-eye block mb-1"></span>
                       <span>{{_('preview')}}</span>
                     </button>
