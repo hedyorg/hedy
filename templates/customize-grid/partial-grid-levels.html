@@ -22,7 +22,7 @@
               {% set student_adventure = adventure_table.student_adventures[student_adventure_id] %}
               {% if student_adventure_id in adventure_table['student_adventures'] %}
               <td id="teacher_cell" class="text-center">
-                <div class="flex justify-center gap-3">
+                <div class="flex justify-center gap-3 mt-1">
                 <input type="checkbox" name="gridCheckBox"
                       class="student_adventure_checkbox text-green-700 text-center text-sm cursor-pointer {% if student_adventure.ticked %}fa-solid fa-check{% endif %}"
                       {% if student_adventure.ticked %}checked{% endif %}
