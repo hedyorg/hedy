@@ -20,13 +20,13 @@ interface GetRequest {
 }
 
 export function autoSave(formId: string,
-  customEvent: Event | null=null,
+  customEvent: Event | any=null,
   triggerGetRequest: GetRequest | null = null,
   timeout: number=DEBOUNCE_TIMEOUT,
    ) {
-  // Debounce function to prevent excessive requests
     const formElement = document.getElementById(formId) as HTMLFormElement;
-    console.log(formId, formElement, customEvent)
+    if (!formElement) return
+    // Debounce function to prevent excessive requests
     const handler = debounce((e: Event) => {
         if (!customEvent && (e.target as HTMLElement).dataset["autosaved"]) {
           // If the event is not from a customEvent with is the element autosaved, we pass.
