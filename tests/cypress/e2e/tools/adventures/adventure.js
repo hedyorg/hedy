@@ -7,8 +7,12 @@ export function createAdventure(name)
     // Click 'Create new class' button
     cy.get('#create_adventure_button').click();
 
-    cy.get("#custom_adventure_name").clear().type(name);
-    cy.get("#save_adventure_button").click();
+    if (name) {
+        cy.intercept('/for-teachers/customize-adventure').as('customizeAdventure');      
+        cy.get("#custom_adventure_name").clear().type(name);
+        cy.wait(500)
+        cy.wait('@customizeAdventure').should('have.nested.property', 'response.statusCode', 200);
+    }
 
     cy.wait(500);
 }
@@ -24,13 +28,8 @@ export function deleteAdventure(name) {
         }
     });
 
-    cy.get("#adventures_table tbody tr")
-    .each(($tr, i) => {
-        if ($tr.text().includes(name)) {
-            cy.get(`tbody :nth-child(${i+1}) [data-cy="delete-adventure"]`).click();
-            cy.get('#modal-yes-button').should('be.enabled').click();
-        }
-    })
+    cy.get(`[data-cy='delete_${name}']`).click()
+    cy.get('#modal-yes-button').should('be.enabled').click();
 }
 
 export default {createAdventure};
