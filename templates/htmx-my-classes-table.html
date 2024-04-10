@@ -33,7 +33,7 @@
                   <span class="fas fa-eye block mb-1"></span>
                   <span>{{_('preview')}}</span>
                 </button>
-                <button class="flex flex-col items-center"
+                <button id="remove-class" class="flex flex-col items-center"
                     hx-trigger="click"
                     hx-delete="/class/{{class.id}}"
                     hx-target="#classes_table">

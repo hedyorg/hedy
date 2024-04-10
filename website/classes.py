@@ -103,7 +103,7 @@ class ClassModule(WebsiteModule):
 
         achievement = self.achievements.add_single_achievement(user["username"], "end_of_semester")
         if achievement:
-            return {"achievement": achievement}, 200
+            utils.add_pending_achievement({"achievement": achievement})
         teacher_classes = self.db.get_teacher_classes(user["username"], True)
         return render_partial('htmx-my-classes-table.html', teacher_classes=teacher_classes)
 

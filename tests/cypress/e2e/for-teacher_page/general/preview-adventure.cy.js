@@ -5,8 +5,8 @@ describe('Is able to preview adventures', () => {
     it(`Passes for ${adv}`, () => {
       loginForTeacher();
       // view the adventures if not opened.
-        cy.get("#adventures_table").then($viewClass => {
-            if (!$viewClass.is(':visible')) {
+        cy.get("#adventures_table").then($viewAdventure => {
+            if (!$viewAdventure.is(':visible')) {
                 cy.get("#view_adventures").click();
             }
         });
