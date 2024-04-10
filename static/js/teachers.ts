@@ -8,6 +8,7 @@ import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
 import { CustomWindow } from './custom-window';
 import { addCurlyBracesToCode } from './adventure';
+import { autoSave } from './autosave';
 
 declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
@@ -731,6 +732,12 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
           var level = $(this).val() as string;
           setLevelStateIndicator(level);
       });
+
+      // Autosave customize class page
+      // the third argument is used to trigger a GET request on the specified element
+      // if the trigger (input in this case) is changed.
+      autoSave("customize_class", null, {elementId: "levels-dropdown", trigger: "input"});
+
   });
 }
 

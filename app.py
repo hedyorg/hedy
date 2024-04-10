@@ -1996,7 +1996,10 @@ def profile_page(user):
         invitations=invitations,
         public_settings=public_profile_settings,
         user_classes=classes,
-        current_page='my-profile')
+        current_page='my-profile',
+        javascript_page_options=dict(
+            page='my-profile',
+        ))
 
 
 @app.route('/research/<filename>', methods=['GET'])
