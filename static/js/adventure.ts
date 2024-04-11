@@ -7,6 +7,7 @@ import DOMPurify from "dompurify";
 import TRADUCTION_IMPORT from '../../highlighting/highlighting-trad.json';
 import { convert } from "./utils";
 import { ClientMessages } from "./client-messages";
+import { autoSave } from "./autosave";
 
 declare let window: CustomWindow;
 
@@ -38,6 +39,8 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
         if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
         TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
     })
+    // Autosave customize adventure page
+    autoSave("customize_adventure")
 
     // We wait until Tailwind generates the select
     const tailwindSelects = await waitForElm('[data-te-select-option-ref]')
@@ -127,6 +130,7 @@ function initializeEditor(language: string, editorContainer: HTMLElement): Promi
             .then(editor => {
                 window.ckEditor = editor;
                 $editor = editor;
+                $editor.model.document.on("change:data", e => autoSave("customize_adventure", e))
                 resolve();
             })
             .catch(error => {
