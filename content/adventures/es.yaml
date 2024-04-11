@@ -4242,248 +4242,148 @@ adventures:
                     movement = [ 'round and round', 'open and shut', _]
                     ```
     tic:
-        name: Tres en raya
-        default_save_name: Tres en raya
-        description: ¡Juega al Tres en raya!
+        name: Tic-Tac-Toe
+        default_save_name: Tic
+        description: Play a game of Tic Tac Toe!
         levels:
-            13:
+            16:
                 story_text: |
-                    En esta aventura podrás programar el juego Tres en Raya. Puedes jugar con dos personas. En turnos, eliges un número (1-9) del sitio donde quieres poner tu señal (x u o).
-                    ¡El primer jugador que obtenga tres en línea (horizontal, vertical o en diagonal) gana!
+                    Let's program a game of tic-tac-toe!
 
-                    ### Ejercicio 1
-                    El juego funciona, pero tiene algunos errores. Por ejemplo, cualquier jugador puede elegir cualquier casilla, ¡incluso si ya estaba elegida! Usa un `{if}` allá donde la casilla esté tomada, y si lo está, avisa al jugador.
+                    ### Exercise
+                    In this adventure we'll start with creating an empty field.
 
-                    ### Ejercicio 2
-                    El juego tampoco decide quién ha ganado. Tienes que añadir esto comprobando si las 3 casilla en fila tienen el mismo símbolo.
+                    ***Create a list called field*** This list will be our playing field. This list is filled with 9 dots, since there are no x's and o's yet at the start of our game.
 
-                    ### Ejercicio 3 Extra
-                    No siempre tienes un amigo con el que jugar. ¿Puedes crear un rival informático?
+                    ***Create a function that prints the field*** Firstly, clear the screen so the old playing fields will be removed. Then we print the first line of our Tic Tac Toe field. This line constists of the first 3 spots in our list field.
+                    We have already programmed this line for you. Now finish the field by printing spot 4, 5, and 6 on the second row and spot 7, 8 and 9 in the third row.
+
+                    ***Call the function that prints the field*** Now call the function.
+                    <div class="w-full flex flex-row gap-2">
+                        Run the code. Your output should look like this: <img src="https://github.com/hedyorg/hedy/assets/80678586/bcbd156e-4b48-4e82-84ae-f86d21b0cbcc" width="100">
+                    </div>
+
+                    ***Continue in the next tab*** In the next tab you'll learn how to program the game itself.
                 example_code: |
                     ```
-                    jugador = 'x'
-                    campo = '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'
+                    # Create a list called field
+                    _ = ['.', '.', '.', '.', '.', '.', '.', '.', '.']
 
-                    {for} i {in} {range} 1 {to} 9
-                        elección = {ask} 'Jugador ' jugador ' ¿qué lugar eliges?'
-                        campo {at} elección = jugador
-                        {clear}
-                        {print} campo {at} 1 campo {at} 2 campo {at} 3
-                        {print} campo {at} 4 campo {at} 5 campo {at} 6
-                        {print} campo {at} 7 campo {at} 8 campo {at} 9
-                        {if} jugador = 'x'
-                            player = 'o'
-                        {else}
-                            player = 'x'
-                    ```
-            14:
-                story_text: |
-                    En los niveles anteriores has hecho un juego de tres en raya. Ahora hemos aprendido como usar los símbolos =, == y !=.
-                    Puedes usar este nuevo conocimiento en tu juego así:
-                example_code: |
-                    ```
-                    símbolo = 'x'
-                    casillas_disponibles = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    juego = 'en marcha'
-                    casilla_1 = '.'
-                    casilla_2 = '.'
-                    casilla_3 = '.'
-                    casilla_4 = '.'
-                    casilla_5 = '.'
-                    casilla_6 = '.'
-                    casilla_7 = '.'
-                    casilla_8 = '.'
-                    casilla_9 = '.'
-                    {print} '¡Tres en raya!'
-                    {print} casilla_1 casilla_2 casilla_3
-                    {print} casilla_4 casilla_5 casilla_6
-                    {print} casilla_7 casilla_8 casilla_9
-                    {print} ' '
-                    {for} i {in} {range} 1 {to} 9
-                        {if} juego != 'terminado'
-                            elección = {ask} 'Jugador ' símbolo ', ¿qué casilla quieres tomar?'
-                            {if} elección {in} casillas_disponibles
-                                {remove} elección {from} casillas_disponibles
-                                {if} elección == 1
-                                    casilla_1 = símbolo
-                                {if} elección == 2
-                                    casilla_2 = símbolo
-                                {if} elección == 3
-                                    casilla_3 = símbolo
-                                {if} elección == 4
-                                    casilla_4 = símbolo
-                                {if} elección == 5
-                                    casilla_5 = símbolo
-                                {if} elección == 6
-                                    casilla_6 = símbolo
-                                {if} elección == 7
-                                    casilla_7 = símbolo
-                                {if} elección == 8
-                                    casilla_8 = símbolo
-                                {if} elección == 9
-                                    casilla_9 = símbolo
-                            {else}
-                                {print} 'Esa casilla ya está tomada'
-                            {print} casilla_1 casilla_2 casilla_3
-                            {print} casilla_4 casilla_5 casilla_6
-                            {print} casilla_7 casilla_8 casilla_9
-                            {print} ' '
-                            ganador = {ask} '¿Ganaste?'
-                            {if} ganador == 'yes'
-                                {print} '¡Bien hecho, jugador ' símbolo '!'
-                                juego = 'terminado'
-                            {else}
-                                {if} símbolo == 'x'
-                                    símbolo = 'o'
-                                {else}
-                                    símbolo = 'x'
-                    ```
-            15:
-                story_text: |
-                    En este nivel puedes mejorar tu juego de tres en raya con el bucle {while}. Con este bucle puedes combinar el juego `{if} game != 'over'` y el `{for} i {in} {range} 1 {to} 9` en una sola línea.
-                    Compruébalo:
-                example_code: |
-                    ```
-                    símbolo = 'x'
-                    casillas_disponibles = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    juego = 'en marcha'
-                    casilla_1 = '.'
-                    casilla_2 = '.'
-                    casilla_3 = '.'
-                    casilla_4 = '.'
-                    casilla_5 = '.'
-                    casilla_6 = '.'
-                    casilla_7 = '.'
-                    casilla_8 = '.'
-                    casilla_9 = '.'
-                    {print} '¡Tres en raya!'
-                    {print} casilla_1 casilla_2 casilla_3
-                    {print} casilla_4 casilla_5 casilla_6
-                    {print} casilla_7 casilla_8 casilla_9
-                    {print} ' '
-                    {while} juego != 'terminado'
-                        elección = {ask} 'Jugador ' símbolo ', ¿qué casilla quieres tomar?'
-                        {if} elección {in} casillas_disponibles
-                            {remove} elección {from} casillas_disponibles
-                            {if} elección == 1
-                                casilla_1 = símbolo
-                            {if} elección == 2
-                                casilla_2 = símbolo
-                            {if} elección == 3
-                                casilla_3 = símbolo
-                            {if} elección == 4
-                                casilla_4 = símbolo
-                            {if} elección == 5
-                                casilla_5 = símbolo
-                            {if} elección == 6
-                                casilla_6 = símbolo
-                            {if} elección == 7
-                                casilla_7 = símbolo
-                            {if} elección == 8
-                                casilla_8 = símbolo
-                            {if} elección == 9
-                                casilla_9 = símbolo
-                        {else}
-                            {print} 'Esa casilla ya está tomada'
-                        {print} casilla_1 casilla_2 casilla_3
-                        {print} casilla_4 casilla_5 casilla_6
-                        {print} casilla_7 casilla_8 casilla_9
-                        {print} ' '
-                        ganador = {ask} '¿Ganaste?'
-                        {if} ganador == 'yes'
-                            {print} '¡Bien hecho, jugador ' símbolo '!'
-                            juego = 'terminado'
-                        {else}
-                            {if} símbolo == 'x'
-                                símbolo = 'o'
-                            {else}
-                                símbolo = 'x'
+                    # Create a function that prints the field
+                    {define} print_field
+                        _
+                        {print} 'TIC TAC TOE'
+                        {print} field[1] field[2] field[3]
+                        _
+                        _
+
+                    # Call the function
                     ```
             17:
                 story_text: |
-                    En los niveles anteriores el juego Tres en raya tenía un comportamiento algo molesto. Después de cada movimiento, tenías que decidir tú mismo si habías ganado o no.
-                    De esta forma se podía jugar, pero era algo lento. En este nivel hemos aprendido el comando `{elif}`, que podemos utilizarlo para solucionar el problema.
-                    Usar el {elif} para que Hedy pueda comprobar si el jugador ha ganado o no es divertido, pero también requiere unas cuantas líneas de código extra.
+                    In the previous level you've learned how to make a tic-tac-toe game. The game works, but is quite annoying as it keeps asking you if you've won yet.
+                    Now that we have the {elif} command, we can let the game decide if someone has won and it can stop asking us!
 
-                    En el código de ejemplo verás que hemos añadido los requisitos para ganar (3 casillas en línea, en horizontal, vertical o diagonal).
-                    Puedes encontrarlas en las líneas 46 a 69. Puedes comprobar que cada vez que se cumple el requisito el jugador a ganado y la variable juego se actualiza a 'fin'.
-                    Eso significa que el bucle `{while}` terminará y el juego se acabará.
+                    ### Exercise
+                    ***Paste your code*** Paste your code from the previous level here and make it level 17 proof. In this level you've learned to use a colon everytime you create a block of code. Please add the colons in the correct spots.
+
+                    ***Create a function that detects if someone's won*** We have started the function for you, paste it under the function `print_field` and finish the function. You can see that this first piece of code checks to see if spot 1, 2 and 3 are the same, because if they are you have 3 in a row.
+                    It also checks if they are not a dot, because if they are, the line might have the same symbols on them, but that's just because it's still empty.
+                    If all these conditions are met, the game is over and the winner is printed.
+                    Finish this function with all possible ways to win. This means you have to make this for the other 2 rows, 3 columns and 2 diagonals.
+                    If you've finished all the other options, the function should return the variable `game_over` so we can use it in our game.
+
+                    ***Call the function in the game*** Go to the line `game_over = {ask} 'Did you win?'` and change it to `game_over = {call} detect_winner {with} field, sign`. Now the function will check if there's a winner and the game doesn't need to keep asking anymore!
+
+                    ***Enjoy your game!*** Great job! You have finished the game! Enjoy playing it!
+
                 example_code: |
                     ```
-                    símbolo = 'x'
-                    casillas_disponibles = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-                    juego = 'en marcha'
-                    casilla_1 = '.'
-                    casilla_2 = '.'
-                    casilla_3 = '.'
-                    casilla_4 = '.'
-                    casilla_5 = '.'
-                    casilla_6 = '.'
-                    casilla_7 = '.'
-                    casilla_8 = '.'
-                    casilla_9 = '.'
-                    {print} '¡Tres en raya!'
-                    {print} casilla_1 casilla_2 casilla_3
-                    {print} casilla_4 casilla_5 casilla_6
-                    {print} casilla_7 casilla_8 casilla_9
-                    {print} ' '
-                    {while} juego != 'terminado':
-                        elección = {ask} 'Jugador ' símbolo ', ¿qué casilla quieres tomar?'
-                        {if} elección {in} casillas_disponibles:
-                            {remove} elección {from} casillas_disponibles
-                            {if} elección == 1:
-                                casilla_1 = símbolo
-                            {if} elección == 2:
-                                casilla_2 = símbolo
-                            {if} elección == 3:
-                                casilla_3 = símbolo
-                            {if} elección == 4:
-                                casilla_4 = símbolo
-                            {if} elección == 5:
-                                casilla_5 = símbolo
-                            {if} elección == 6:
-                                casilla_6 = símbolo
-                            {if} elección == 7:
-                                casilla_7 = símbolo
-                            {if} elección == 8:
-                                casilla_8 = símbolo
-                            {if} elección == 9:
-                                casilla_9 = símbolo
+                    # Paste your code here and make it level 17 proof
+
+                    # Create a function that detects if someone has won
+                    {define} detect_winner {with} field, sign:
+                        {if} field[1] == field[2] {and} field[2] == field[3] {and} field[1] != '.':
+                            game_over = 'yes'
+                            {print} 'Player ' sign 'wins!'
+                        {elif}:
+                            _
                         {else}:
-                            {print} 'Esa casilla ya está tomada'
-                        {print} casilla_1 casilla_2 casilla_3
-                        {print} casilla_4 casilla_5 casilla_6
-                        {print} casilla_7 casilla_8 casilla_9
-                        {print} ' '
-                        {if} casilla_1 == casilla_2 {and} casilla_2 == casilla_3 {and} casilla_1 != '.':
-                            {print} '¡Jugador ' símbolo ' gana!'
-                            juego = 'terminado'
-                        {elif} casilla_4 == casilla_5 {and} casilla_5 == casilla_6 {and} casilla_4 != '.':
-                            {print} '¡Jugador ' símbolo ' gana!'
-                            juego = 'terminado'
-                        {elif} casilla_7 == casilla_8 {and} casilla_8 == casilla_9 {and} casilla_7 != '.':
-                            {print} '¡Jugador ' símbolo ' gana!'
-                            juego = 'terminado'
-                        {elif} casilla_1 == casilla_4 {and} casilla_4 == casilla_7 {and} casilla_1 != '.':
-                            {print} '¡Jugador ' símbolo ' gana!'
-                            juego = 'terminado'
-                        {elif} casilla_2 == casilla_5 {and} casilla_5 == casilla_8 {and} casilla_2 != '.':
-                            {print} '¡Jugador ' símbolo ' gana!'
-                            juego = 'terminado'
-                        {elif} casilla_3 == casilla_6 {and} casilla_6 == casilla_9 {and} casilla_3 != '.':
-                            {print} '¡Jugador ' símbolo ' gana!'
-                            juego = 'terminado'
-                        {elif} casilla_1 == casilla_5 {and} casilla_5 == casilla_9 {and} casilla_1 != '.':
-                            {print} '¡Jugador ' símbolo ' gana!'
-                            juego = 'terminado'
-                        {elif} casilla_3 == casilla_5 {and} casilla_5 == casilla_7 {and} casilla_3 != '.':
-                            {print} '¡Jugador ' símbolo ' gana!'
-                            juego = 'terminado'
-                        {else}:
-                            {if} símbolo == 'x':
-                                símbolo = 'o'
-                            {else}:
-                                símbolo = 'x'
+                            game_over = 'no'
+                    {return} _
+                    ```
+    tic_2:
+        name: Tic-Tac-Toe 2
+        default_save_name: Tic
+        description: Play a game of Tic Tac Toe!
+        levels:
+            16:
+                story_text: |
+                    In the previous adventure you've learned how to create a playing field. Now you'll learn how to create the game!
+
+                    ### Exercise
+                    ***Paste your code*** Start by pasting your code from the previous adventure here.
+
+                    ***Add variables*** Underneath your list called `field` we'll add 2 more variables that we'll need to program the game.
+                    The variable `game_over` tells us if the game is over, and should be 'no' at the start of the game.
+                    The variable `sign` tells us if it's the turn of player x or player o. Set the variable to 'x'.
+
+                    ***The game*** First use a {while} command, to make sure the game keeps on playing the variable while game_over is set to no.
+                    During the game, we first ask the player which spot they choose. Then we change the field with the number they chose into their sign.
+                    Then we print the field again and we ask the player if they've won yet. Lastly we want to switch whose turn it is, so if the sign is 'x' it should be 'o' and the other way around.
+
+                    ***Test your game*** Does your game work? Great, have fun playing the game! If not, use the ladybug button to debug your code.
+                    You might have noticed one mistake in the code though, you can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and steal their spot.
+                    That's not fair! Go to the next tab to learn how to fix this problem.
+                example_code: |
+                    ```
+                    # Paste your code from the previous adventure here
+
+                    # Add variables
+                    game_over = _
+                    sign = _
+
+                    # The game
+                    {while} _
+                        choice = _ 'Player ' sign '_?'
+                        field[choice] = _
+                        _ print_field
+                        game_over = {ask} _
+                        {if} sign = 'o'
+                            sign = _
+                        _
+                            sign = _
+                    ```
+    tic_3:
+        name: Tic-Tac-Toe 3
+        default_save_name: Tic
+        description: Play a game of Tic Tac Toe!
+        levels:
+            16:
+                story_text: |
+                    You might have noticed one mistake in the code you've made in the previous adventure. You can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and steal their spot.
+                    That's not fair! In this tab we'll fix that mistake.
+
+                    ### Exercise
+                    ***Paste your code here*** Paste your code from the previous adventure here.
+
+                    ***Fix the mistake*** To fix the mistake we replace the line that says `field[choice] = sign`. This turns any spot that the player has chosen into their sign.
+                    Go to the header that says 'Use this to fix the mistake' and finish the code. We first want to check if the chosen spot is still empty, so `if field[choice] = '.'`. If that is the case, you are allowed to take it.
+                    Then we make an else command and print 'Sorry, this spot is already taken' if the spot is not empty. Lastly, we add a {sleep} command, so the players can actually read the text before it gets cleared again.
+                    Now copy this piece of code and replace the line `field[choice] = sign` with this new piece of code.
+
+                    ***Play your game!*** Now the game should work properly! Good job!
+                    The only flaw is that you can get a bit annoyed that the game keeps asking you if you've won yet. Do you want to fix that? Go to level 17 and we'll fix it!
+                example_code: |
+                    ```
+                    # Paste your code here
+
+                    # Use this to fix the mistake
+                    {if} _ = '.'
+                        field[choice] = sign
+                    {else}
+                        {print} _
+                        _
                     ```
     turtle:
         name: La tortuga
