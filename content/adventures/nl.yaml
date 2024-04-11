@@ -3993,48 +3993,49 @@ adventures:
         levels:
             16:
                 story_text: |
-                    Let's make a game of Simon Says! Simon Says is a memory game in which the player will be given a color. They have to repeat that color back.
-                    If they get it right a color is added to the sequence, so they now have to remember 2 colors, then 3, then 4 etc. the game stops as soon as the player makes a mistake.
+                    Tijd voor een potje 'Simon Says'! Simon Says is een geheugenspelletje waarbij de speler een kleur krijgt te zien. De speler moet de juiste kleur terugzeggen.
+                    Doe je het goed? Dan komt er steeds een kleur bij en wordt de reeks die je moet onthouden dus steeds langer. Het spel stopt zodra je een fout maakt.
 
-                    ### Exercise
-                    In this first part of the Simon Says adventure, we'll let the computer pick a random color and add it to a list.
+                    ### Opdracht
+                    In dit eerste deel van het Simon Says avontuur laten we de computer een random kleur kiezen en zetten we die op een lijstje.
 
-                    ***Make 2 lists*** First, make a list called `colors` and fill it with the colors red, yellow, green and blue.
-                    Then make a list called `simon_sequence`. This list will be used as the answer.
-                    At the start of the game this lists need to be empty. unfortunately, we can't create an empty list (yet), so we'll fill it with the words 'empty' and 'list' and we'll remove them from the list immediately.
+                    ***Maak 2 lijstjes***
+                    We maken eerst het lijstje `kleuren` en vullen dat lijstje met de kleuren rood, geel, groen en blauw.
+                    Dan maken we een lijstje genaamd `simon_reeks`. Dit lijstje wordt het lijstje met het goede antwoord.
+                    Aan het begin van het spel is het lijstje nog leeg. Helaas kunnen we (nog) geen lege lijstje maken, dus vullen we het lijstje met 'leeg' en 'lijstje' en halen we die twee woorden daarna meteen weer van het lijstje af.
 
-                    ***Create a function that adds a color to the sequence*** Now that we have an empty list called simon_sequence, we can start filling it with random colors.
-                    We do that with a function, so we can call it everytime there's a new level in our game. Create a function called `add_random_color`.
-                    Then create the variable random_color and set it to a random color. Next, add this random color to the simon_sequence.
+                    ***Maak een functie die en kleur toevoegt aan de reeks*** Nu we een leeg lijstje hebben voor het goede antwoord, kunnen we het lijstje gaan vullen met random kleuren.
+                    Dit doen we met een functie. Zo kunnen we de functie elk keer als er een nieuw level is weer gebruiken om weer een nieuwe kleur toe te voegen. Noem je functie `random_kleur_toevoegen`
+                    Maak daarna de variabele `random_kleur` en kies een willekeurige kleur. Voeg de gekozen random kleur toe aan de simon_reeks.
 
-                    ***Create a function that shows the simon_sequence*** Start by naming the new function `show_simon_sequence` with `level` as an argument. Now we want to show as many colors as the level we are in (in level 1 you see 1 color, in level 2 you see 2 colors etc).
-                    So we repeat `level` times, to print the `simon_sequence[i]`. Each time a color is shown, wait for 1 second and then clear the screen.
+                    ***Maak een functie die de simon_reeks toont*** Noem de nieuwe functie `toon_simon_reeks` met `level` als argument. Nu willen we zoveel kleuren laten zien als het level waar we inzitten (in level 1, dus 1 kleur en in level 2, 2 kleuren etc).
+                    Dus `simon_reeks[i]` moet `level` keer worden geprint. Elke keer als er een kleur wordt geprint, moet de code even 1 seconde wachten en het scherm daarna wissen.
 
-                    ***Test your program*** Before you go to the next level, test if the functions are working by calling both of the functions. If they're working you should see a random color in your output screen.
-                    Remove this testing part of your code, copy the code and continue to the next tab to learn more about the simon says game!
+                    ***Test het programma*** Voordat je doorgaat naar het volgende tabblad, kun je even testen of je fucnties het wel geod doen. Als de functies werken, zou je een willekeurige kleur in beeld moeten krijgen.
+                    Verwijder dit testgedeelte van je code zodra je tevreden bent en kopieer de rest van je code om verde te gaan in het volgende tabje.
                 example_code: |
                     ```
-                    # Make 2 lists
-                    colors = _
-                    _ = ['empty', 'list']
-                    {remove} _ {from} simon_sequence
+                    # Maak 2 lijstjes
+                    kleuren = _
+                    _ = ['leeg', 'lijstje']
+                    {remove} _ {from} simon_reeks
                     {remove} _
 
-                    # Create a function that adds a color
-                    _ add_random_color
+                    # Maak een functie die een kleur toevoegt aan de reeks
+                    _ random_kleur_toevoegen
                         _
                         {add} _
 
-                    # Create a function that shows the simon_sequence
+                    # Maak een functie die de simon_reeks toont
                     {define} _
                         {for} i {in} {range} 1 {to} _
                             {print} _
                             _
                             _
 
-                    #Test your program
+                    # Test het programma
                     {call} _
-                    {call} simon_sequence {with} 1
+                    {call} toon_simon_reeks {with} 1
                     ```
     simon_2:
         name: Simon Says 2
@@ -4043,30 +4044,29 @@ adventures:
         levels:
             16:
                 story_text: |
-                    We'll continue with our Simon Says game!
+                    We werken verder aan de Simon Says game!
 
-                    ### Exercise
-                    ***Paste your code here*** Paste your code from the previous level here. Don't forget to remove the part that was just used for testing the functions.
+                    ### Opdracht
+                    ***Plak je code hier*** Plak hier je code vanuit het voorgaande tabje. Vergeet niet om het testgedeelte te verwijderen, dat heb je nu namelijk niet nodig.
 
-                    ***Create a function that creates the player_sequence*** The list `player_sequence` is used to capture the answers of the player. First we define the function with the argument level.
-                    Next, we ask level times what the color is that they choose. We call that variable `answer`. Then we add the variable `answer` to the list player_sequence.
+                    ***Maak een functie voor de speler_reeks***  De lijst `speler_reeks` gebruiken we om de antwoorden van de speler in op te slaan. Allereerst definieren we de functie met het argument level.
+                    Daarna vragen we level keer welke kleur de speler wil kiezen. Die variabele noemen we `antwoord`. Vervolgens voegen we de variabele `antwoord` toe aan het lijstje speler_reeks.
 
-                    ***Setting up the game*** Before we program the game in the next tab, we'll need some starting variables. First, we'll set the variable `level` to 1 and the variable `game_over` to False.
-                    Then we make an introduction for the game. We'll print 'Welcome to Simon Says!' and clear the screen after 1 second.
+                    ***Voorbereidingen voor het spel*** Voordat we het spel programmeren in het volgende tabblad, moeten we nog wat startvariabelen maken. Eerst zetten we de variabele `level` op 1 en game_over op False (false betekent niet waar).
+                    Daarna introduceren we ons spelletje. We printen 'Welkom bij Simon Says' en wissen het scherm weer na 1 seconde.
 
-                    ***Continue to the next tab to finish the game!**** Don't forget to copy your code and take it with you to the next tab.
+                    ***Ga door naar het volgende tabje om het spel af te maken!*** Vergeet niet eerst je code te kopiëren.
                 example_code: |
                     ```
-                    # Paste your code here
+                    # Plak je code hier
 
-
-                    # Create a function that creates the player_sequence
+                    # Maak een functie voor de speler_reeks
                     {define} _
                         {for} _
-                            _ 'What is color number ' i '?'
-                            {add} answer {to} _
+                            _ 'Wat is kleur ' i '?'
+                            {add} antwoord {to} _
 
-                    #set up
+                    # Voorbereidingen voor het spel
                     level = _
                     game_over = _
                     {print} _
@@ -4080,35 +4080,36 @@ adventures:
         levels:
             16:
                 story_text: |
-                    In this tab we'll program the game of Simon Says!
+                    In dit tabje maken we het spel af!
 
-                    ### Exercise
-                    ***Paste your code*** Copy your code from the previous tab and paste it here.
+                    ### Opdracht
+                    ***Plak je code hier*** Kopieer je code van het vorige tabblad en plak het hier.
 
-                    ***Program the game*** We start by making sure the game goes on while the game isn't over. Then we print what level the player is on, we use the variable level for that. We only show that for 1 second and then we clear the screen again.
-                    Now, we have to create the empty list player_sequence. We've already programmed how to fill the list, with our function `player_sequence`, but we never made the list itself. To create the list we use the same trick as we did in the previous tab.
-                    We'll make a list with the words 'empty' and 'list' on it, and then we remove both these words. Next, we'll call all of the 3 functions that we've created.
-                    Lastly, we'll have to check if the player gave the correct answers (so if the player_sequence and the simon_sequence are the same).
-                    If that's the case, we'll compliment the player. Wiat for 1 second and increase the level with 1.
-                    Did the player give the wrong answer, we'll tell them and end the game by setting game_over to 'True'
+                    ***Programmeer het spel*** Eerst programmeren we dat het spel door blijft gaan zolang je niet game over bent. Daarna printen we op welk level de speler nu is, waarvoor we de variabele level natuurlijk gebruiken. Na één seconde wissen we het scherm weer.
+                    Nu moeten we de lijst speler_reeks maken. We hebben net al een functie gemaakt om die lijst te vullen, maar we hadden het lijstje zelf nog niet gemaakt.
+                    We maken weer een lege lijst met hetzelfde trucje als eerst. We maken een lijst met 'leeg' en 'lijstje' in de lijst en verwijderen deze twee woorden daarna weer meteen van de lijst.
+                    Daarna roepen we alle drie de functies op die we net gemaakt hebben.
+                    Tot slot checken we of de speler de juiste antwoorden geeft of niet (dus of het lijstje speler_reeks overeenkomt met simon_reeks).
+                    Als dat zo is, dan geven we een compliment aan de speler. De wachten 1 seconde en verhogen het level met 1.
+                    Had de speler een fout antwoordn, dan beëindigen we het spel door de variabele game_over op True (dat betekent waar) te zetten.
 
-                    ***Enjoy your game!*** Great job! Does your game not work? Use the ladybug button to debug your code!
+                    ***Veel speelplezier!*** Goed gedaan! Werkt je spel toch niet helemaal zoals het zou moeten? Debug je code dan met de lieveheersbeestjesknop.
                 example_code: |
                     ```
-                    # Paste your code here
+                    # Plak je code hier
 
-                    # The game
+                    # Het spel
                     {while} game_over _
                         {print} _
                         _
                         _
-                        _ = ['empty', 'list']
+                        _ = ['leeg', 'lijstje']
                         {remove} _
                         {remove} _
                         {call} _
                         {call} _ {with} _
                         {call} _ {with} _
-                        {if} player_sequence == _
+                        {if} speler_reeks == _
                             _
                             _
                             _
