@@ -33,10 +33,12 @@
               add .rotate-180 to arrow
               end">
               {% for dropdown_level in range(1, 19) %}
-              <button id="level_button_{{dropdown_level}}" class="flex-row flex justify-between items-center px-2 py-2 border-b border-dashed border-blue-500
-              {% if dropdown_level == adventure_table.level %}bg-white{% else %}hover:bg-blue-100 bg-blue-200{% endif %}" {%
-                if dropdown_level== adventure_table.level %}disabled{% endif %} style="width: 100%;"
-                hx-get="/live_stats/class/{{class_info.id}}/level/{{dropdown_level}}" hx-target="#adventure_overview"
+              <button id="level_button_{{dropdown_level}}" 
+                class="flex-row flex justify-between items-center px-2 py-2 border-b border-dashed border-blue-500
+                {% if dropdown_level == adventure_table.level %}bg-white{% else %}hover:bg-blue-100 bg-blue-200{% endif %}" 
+                {% if dropdown_level== adventure_table.level %}disabled{% endif %} style="width: 100%;"
+                hx-get="/for-teachers/grid_overview/{{ class_info.id }}/level?level={{dropdown_level}}"
+                hx-target="#adventure_overview"
                 hx-swap="outerHTML">
                 <div class="flex-grow h-min min-w-80" tabindex=0>
                   {{ _('level_title') }} {{ dropdown_level }}
