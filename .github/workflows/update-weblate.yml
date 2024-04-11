@@ -18,7 +18,8 @@ jobs:
     # new changes over the unmerged old changes, causing them to lost.
     - name: Check for existence of old Weblate PR
       run: |
-        if [[ "$(gh pr -R hedyorg/hedy list --search 'Translations update' --json number)" != "[]" ]]; then
+        prs=$(gh pr -R hedyorg/hedy list -q '.[] | select(.title | contains("Translations update"))' --json title)
+        if [[ "$prs" != "" ]]; then
           echo "Open Pull Request for Weblate!"
           gh pr -R hedyorg/hedy list --search 'Translations update'
           exit 1
