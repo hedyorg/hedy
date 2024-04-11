@@ -4282,12 +4282,13 @@ adventures:
                     ***Create a list called field*** This list will be our playing field. This list is filled with 9 dots, since there are no x's and o's yet at the start of our game.
 
                     ***Create a function that prints the field*** Firstly, clear the screen so the old playing fields will be removed. Then we print the first line of our Tic Tac Toe field. This line constists of the first 3 spots in our list field.
-                    We have already programmed this line for you. Now finish the field by printing spot 4, 5, and 6 on the second row and spot 7, 8 and 9 in the thrird row.
+                    We have already programmed this line for you. Now finish the field by printing spot 4, 5, and 6 on the second row and spot 7, 8 and 9 in the third row.
 
                     ***Call the function that prints the field*** Now call the function.
                     <div class="w-full flex flex-row gap-2">
                         Run the code. Your output should look like this: <img src="https://github.com/hedyorg/hedy/assets/80678586/bcbd156e-4b48-4e82-84ae-f86d21b0cbcc" width="100">
                     </div>
+
                     ***Continue in the next tab*** In the next tab you'll learn how to program the game itself.
                 example_code: |
                     ```
@@ -4297,9 +4298,11 @@ adventures:
                     # Create a function that prints the field
                     {define} print_field
                         _
+                        {print} 'TIC TAC TOE'
                         {print} field[1] field[2] field[3]
                         _
                         _
+
                     # Call the function
                     ```
             17:
@@ -4316,7 +4319,7 @@ adventures:
                     Finish this function with all possible ways to win. This means you have to make this for the other 2 rows, 3 columns and 2 diagonals.
                     If you've finished all the other options, the function should return the variable `game_over` so we can use it in our game.
 
-                    ***Call the function in the game*** Go to the line `game_over = {ask} 'Did you win?'` and change it to `game_over = {call} detect_winner`. Now the function will check if there's a winner and the game doesn't need to keep asking anymore!
+                    ***Call the function in the game*** Go to the line `game_over = {ask} 'Did you win?'` and change it to `game_over = {call} detect_winner {with} field, sign`. Now the function will check if there's a winner and the game doesn't need to keep asking anymore!
 
                     ***Enjoy your game!*** Great job! You have finished the game! Enjoy playing it!
 
@@ -4356,7 +4359,7 @@ adventures:
                     Then we print the field again and we ask the player if they've won yet. Lastly we want to switch whose turn it is, so if the sign is 'x' it should be 'o' and the other way around.
 
                     ***Test your game*** Does your game work? Great, have fun playing the game! If not, use the ladybug button to debug your code.
-                    You might have noticed one mistake in the code though, you can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and stela their spot.
+                    You might have noticed one mistake in the code though, you can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and steal their spot.
                     That's not fair! Go to the next tab to learn how to fix this problem.
                 example_code: |
                     ```
@@ -4384,14 +4387,16 @@ adventures:
         levels:
             16:
                 story_text: |
-                    You might have noticed one mistake in the code you've made in teh previous adventure. You can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and stela their spot.
+                    You might have noticed one mistake in the code you've made in the previous adventure. You can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and steal their spot.
                     That's not fair! In this tab we'll fix that mistake.
 
                     ### Exercise
                     ***Paste your code here*** Paste your code from the previous adventure here.
 
-                    ***Fix the mistake*** To fix the mistake we have to look at line 17: `field[choice] = sign`. This turns any spot that the player has chosen into their sign.
-                    Now add a line above this line that only makes it possible to do this if the spot is still empty, so `if field[choice] = '.'`. Then make an else command and print 'Sorry, this spot is already taken'.
+                    ***Fix the mistake*** To fix the mistake we replace the line that says `field[choice] = sign`. This turns any spot that the player has chosen into their sign.
+                    Go to the header that says 'Use this to fix the mistake' and finish the code. We first want to check if the chosen spot is still empty, so `if field[choice] = '.'`. If that is the case, you are allowed to take it.
+                    Then we make an else command and print 'Sorry, this spot is already taken' if the spot is not empty. Lastly, we add a {sleep} command, so the players can actually read the text before it gets cleared again.
+                    Now copy this piece of code and replace the line `field[choice] = sign` with this new piece of code.
 
                     ***Play your game!*** Now the game should work properly! Good job!
                     The only flaw is that you can get a bit annoyed that the game keeps asking you if you've won yet. Do you want to fix that? Go to level 17 and we'll fix it!
@@ -4404,6 +4409,7 @@ adventures:
                         field[choice] = sign
                     {else}
                         {print} _
+                        _
                     ```
     turtle:
         name: Turtle
