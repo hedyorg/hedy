@@ -1,89 +1,208 @@
-{% extends "auth.html" %}
-{% block full_width_content %}
+{% extends "auth.html" %} {% block full_width_content %}
 <div class="text-xl flex flex-col">
-    <div class="bg-blue-200 mt-8 mb-8 border-b-8 border-blue-300">
-        <div class="copy-container px-8 py-8 md:py-16 md:px-16 mb-8 flex flex-col gap-16 md:flex-row justify-between items-stretch">
-            <div class="flex flex-col gap-4">
-                <h1 class="font-bold font-slab text-sky-600 text-6xl tracking-wide">{{_('main_title')}}</h1>
-                <h2 class="py-0 my-0 font-sans font-light text-black tracking-wide">{{_('main_subtitle')}}</h2>
-                <div class="flex flex-row gap-4 min-w-full">
-                    <button id="try_learning_button" class="green-btn text-white w-64 py-4" onclick="window.location.href='/hedy'">{{_('start_learning')}}</button>
-                    <button id="try_teaching_button" class="white-btn text-blue-500 w-64 py-4" onclick="window.location.href={% if not user.is_teacher %}'signup?teacher=true'{% else %}'for-teachers'{% endif %}">{{_('start_teaching')}}</button>
-                </div>
-            </div>
-            {# image for large screens #}
-            <div class="hidden md:block overflow-visible relative flex-none" style="width: 500px">
-                {% if not custom_logo %}
-                    <div id="logo-code-overlay" class="absolute z-10 {% if (_('print_logo')|length + _('hello_logo')|length) > 15 %}text-2xl translate-y-8{% elif (_('print_logo')|length + _('hello_logo')|length) > 11 %}text-3xl translate-y-8{% else %}text-4xl translate-y-6{% endif %} h-full flex gap-4 items-center justify-center align-middle" style="width: 600px; font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;">
-                        <span style="color: #ff6188;">{{_('print_logo')}}</span>
-                        <span class="text-white">{{_('hello_logo')}}</span>
-                    </div>
-                    <img class="absolute drop-shadow-lg" src="{{static('/images/hero-graphic/hero-graphic-empty.png')}}" style="max-width: 600px; bottom: -170px;">
-                {% else %}
-                   <img class="absolute drop-shadow-lg" src="{{static('/images/hero-graphic/hero-graphic-' + g.lang + '.png')}}" style="max-width: 600px; bottom: -170px;">
-                {% endif %}
-
-            </div>
-            {# image for small screens #}
-            <div class="md:hidden flex-none">
-                <img src="images/hero-graphic/hero-graphic.png">
-            </div>
+  <div class="bg-blue-200 mt-8 mb-8 border-b-8 border-blue-300">
+    <div
+      class="copy-container px-8 py-8 md:py-16 md:px-16 mb-8 flex flex-col gap-16 md:flex-row justify-between items-stretch"
+    >
+      <div class="flex flex-col gap-2">
+        <h1 class="font-bold font-slab text-sky-600 text-6xl tracking-wide">
+          {{_('main_title')}}
+        </h1>
+        <h2 class="py-0 my-0 font-sans font-light text-black tracking-wide">
+          {{_('main_subtitle')}}
+        </h2>
+        <button
+          id="tryitbutton"
+          class="green-btn text-white px-8 py-4"
+          onclick="window.location.href='/hedy'"
+        >
+          {{_('try_it')}}
+        </button>
+      </div>
+      {# image for large screens #}
+      <div
+        class="hidden md:block overflow-visible relative flex-none"
+        style="width: 500px"
+      >
+        {% if not custom_logo %}
+        <div
+          id="logo-code-overlay"
+          class="absolute z-10 {% if (_('print_logo')|length + _('hello_logo')|length) > 15 %}text-2xl translate-y-8{% elif (_('print_logo')|length + _('hello_logo')|length) > 11 %}text-3xl translate-y-8{% else %}text-4xl translate-y-6{% endif %} h-full flex gap-4 items-center justify-center align-middle"
+          style="
+            width: 600px;
+            font-family: Courier New, Courier, Lucida Sans Typewriter,
+              Lucida Typewriter, monospace;
+          "
+        >
+          <span style="color: #ff6188">{{_('print_logo')}}</span>
+          <span class="text-white">{{_('hello_logo')}}</span>
         </div>
+        <img
+          class="absolute drop-shadow-lg"
+          src="{{static('/images/hero-graphic/hero-graphic-empty.png')}}"
+          style="max-width: 600px; bottom: -170px"
+        />
+        {% else %}
+        <img
+          class="absolute drop-shadow-lg"
+          src="{{static('/images/hero-graphic/hero-graphic-' + g.lang + '.png')}}"
+          style="max-width: 600px; bottom: -170px"
+        />
+        {% endif %}
+      </div>
+      {# image for small screens #}
+      <div class="md:hidden flex-none">
+        <img src="images/hero-graphic/hero-graphic.png" />
+      </div>
     </div>
-    <div id="main_page_content" class="text-display-copy">
-        {% for section in content %}
-        <div class="{{loop.cycle('stripe-white', 'stripe-colored')}} py-16">
-            {% if section['style'] == 'block' %}
-                <div class="copy-container px-10 md:px-16">
-                    <h2 class="font-bold">{{ section['title'] }}</h2>
-                    <div class="heading-underline"></div>
-                    <p>{{ section['text']|commonmark }}</p>
-                </div>
-            {% elif section['style'] == 'pane-with-image-left' %}
-                <div class="copy-container-wide px-4 md:px-16 flex flex-col items-center md:flex-row justify-between gap-6">
-                    <img src="{{static(section['image'])}}" class="w-4/5 md:w-2/5">
-                    <div class="column-pane px-8 py-4 md:w-3/5">
-                        <h3>{{ section['title'] }}</h3>
-                        <p>{{ section['text']|commonmark }}</p>
-                    </div>
-                </div>
-            {% elif section['style'] == 'pane-with-image-right' %}
-                <div class="copy-container-wide px-4 md:px-16 flex flex-col items-center md:flex-row justify-between gap-6">
-                    <div class="column-pane shadow-md rounded-lg px-8 py-4 md:w-3/5">
-                        <h3>{{ section['title'] }}</h3>
-                        <p>{{ section['text']|commonmark }}</p>
-                    </div>
-                    <img src="{{static(section['image'])}}" class="w-4/5 md:w-2/5">
-                </div>
-            {% elif section['style'] == 'columns' %}
-                <div class="copy-container columns px-4 md:px-16 flex flex-col md:flex-row justify-between gap-6">
-                    {% for col in section['columns'] %}
-                    <div class="column-pane shadow-md rounded-lg px-8 py-4 flex-1">
-                        <h3>{{ col['title'] }}</h3>
-                        <p>{{ col['text']|commonmark }}</p>
-                    </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
+  </div>
+  <div id="main_page_content" class="text-display-copy">
+    {% for section in content %}
+    <div class="{{loop.cycle('stripe-white', 'stripe-colored')}} py-16">
+      {% if section['style'] == 'block' %}
+      <div class="copy-container px-10 md:px-16">
+        <h2 class="font-bold">{{ section['title'] }}</h2>
+        <div class="heading-underline"></div>
+        <p>{{ section['text']|commonmark }}</p>
+      </div>
+      {% elif section['style'] == 'pane-with-image-left' %}
+      <div
+        class="copy-container-wide px-4 md:px-16 flex flex-col items-center md:flex-row justify-between gap-6"
+      >
+        <img src="{{static(section['image'])}}" class="w-4/5 md:w-2/5" />
+        <div class="column-pane px-8 py-4 md:w-3/5">
+          <h3>{{ section['title'] }}</h3>
+          <p>{{ section['text']|commonmark }}</p>
+        </div>
+      </div>
+      {% elif section['style'] == 'pane-with-image-right' %}
+      <div
+        class="copy-container-wide px-4 md:px-16 flex flex-col items-center md:flex-row justify-between gap-6"
+      >
+        <div class="column-pane shadow-md rounded-lg px-8 py-4 md:w-3/5">
+          <h3>{{ section['title'] }}</h3>
+          <p>{{ section['text']|commonmark }}</p>
+        </div>
+        <img src="{{static(section['image'])}}" class="w-4/5 md:w-2/5" />
+      </div>
+      {% elif section['style'] == 'columns' %}
+      <div
+        class="copy-container columns px-4 md:px-16 flex flex-col md:flex-row justify-between gap-6"
+      >
+        {% for col in section['columns'] %}
+        <div class="column-pane shadow-md rounded-lg px-8 py-4 flex-1">
+          <h3>{{ col['title'] }}</h3>
+          <p>{{ col['text']|commonmark }}</p>
         </div>
         {% endfor %}
+      </div>
+      {% endif %}
     </div>
-    <div class="bg-pink-800 text-sm text-white py-16">
-        <div class="flex w-100 max-w-screen-md mx-auto text-links-plain">
-            <div class="flex-1">
-                <a href="/subscribe">{{_('subscribe_newsletter')}}</a><br>
-                <a href="/learn-more" id="learnmorebutton">{{_('nav_learn_more')}}</a><br>
-                <a href="/for-teachers/manual">{{_('teacher_manual')}}</a><br>
-                <a href="/privacy">{{_('privacy_terms')}}</a><br>
-            </div>
-            <div class="flex-1">
-                <a href="https://github.com/hedyorg/hedy">{{_('hedy_on_github')}}</a><br>
-                <a href="https://github.com/sponsors/hedyorg">{{_('become_a_sponsor')}}</a><br>
-                <a href="https://discord.gg/8yY7dEme9r">{{_('discord_server')}}</a><br>
-                <a href="https://github.com/hedyorg/hedy/wiki/Hedy-Translation-Tutorial">{{_('translating_hedy')}}</a><br>
-                ✉️ <a href="mailto:hello@hedy.org">hello@hedy.org</a>
-            </div>
+    {% endfor %}
+  </div>
+
+  <footer class="bg-blue-200 text-sm text-white py-3">
+    <div class="bg-blue-200 text-sm text-white">
+      <div
+        class="flex w-full max-w-screen-md mx-auto justify-between text-links-plain"
+      >
+        <!-- External Links -->
+        <div class="flex-1 mr-20">
+          <a
+            href="https://github.com/hedyorg/hedy"
+            class="flex items-center mb-1"
+          >
+            <img
+              src="{{ static('/images/footer-icon/github.png') }}"
+              alt="GitHub Icon"
+              class="icon mr-2 h-12 w-auto"
+            />
+            <span>{{ _('Hedy on GitHub') }}</span>
+          </a>
+          <a
+            href="https://github.com/sponsors/hedyorg"
+            class="flex items-center mb-1"
+          >
+            <img
+              src="{{ static('/images/footer-icon/sponsor1-icon.png') }}"
+              alt="Sponsor Icon"
+              class="icon mr-2 h-12 w-auto"
+            />
+            <span>{{ _('Become a Sponsor') }}</span>
+          </a>
+          <a
+            href="https://discord.gg/8yY7dEme9r"
+            class="flex items-center mb-1"
+          >
+            <img
+              src="{{ static('/images/footer-icon/discord1.png') }}"
+              alt="Discord Icon"
+              class="icon mr-2 h-12 w-auto"
+            />
+            <span>{{ _('Discord Server') }}</span>
+          </a>
+          <a
+            href="https://github.com/hedyorg/hedy/wiki/Hedy-Translation-Tutorial"
+            class="flex items-center mb-1"
+          >
+            <img
+              src="{{ static('/images/footer-icon/translation-icon.png') }}"
+              alt="Translation Icon"
+              class="icon mr-2 h-12 w-auto"
+            />
+            <span>{{ _('Translating Hedy') }}</span>
+          </a>
         </div>
+
+        <!-- Newsletter and Information -->
+        <div class="flex-1 ml-20">
+          <a href="/subscribe" class="flex items-center mb-1">
+            <img
+              src="{{ static('/images/footer-icon/newsletter1-icon1.png') }}"
+              alt="Newsletter Icon"
+              class="icon mr-2 h-12 w-auto"
+            />
+            <span>{{ _('Subscribe to Newsletter') }}</span>
+          </a>
+          <a
+            href="/learn-more"
+            id="learnmorebutton"
+            class="flex items-center mb-1"
+          >
+            <img
+              src="{{ static('/images/footer-icon/info 1.png') }}"
+              alt="Learn more Icon"
+              class="icon mr-2 h-12 w-auto"
+            />
+            <span>{{ _('Learn More') }}</span>
+          </a>
+          <a href="/for-teachers/manual" class="flex items-center mb-1">
+            <img
+              src="{{ static('/images/footer-icon/teaching1-icon.png') }}"
+              alt="teachers manual Icon"
+              class="icon mr-2 h-12 w-auto"
+            />
+            <span>{{ _('Teacher Manual') }}</span>
+          </a>
+          <a href="/privacy" class="flex items-center mb-1">
+            <img
+              src="{{ static('/images/footer-icon/privcy-term1.png') }}"
+              alt="Privacy term Icon"
+              class="icon mr-2 h-12 w-auto"
+            />
+            <span>{{ _('Privacy Terms') }}</span>
+          </a>
+          <div class="flex items-center">
+            <img
+              src="{{ static('/images/footer-icon/email1.png') }}"
+              alt="Gmail Icon"
+              class="icon mr-2 h-12 w-auto"
+            />
+            <span>{{ _('hello@hedy.org') }}</span>
+          </div>
+        </div>
+      </div>
     </div>
+  </footer>
 </div>
 {% endblock %}
