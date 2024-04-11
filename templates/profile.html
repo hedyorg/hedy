@@ -37,7 +37,7 @@
              {% endfor %}
            </div>
        {% endif %}
-       <h1 class="section-header" onclick="$ ('#public_profile_body').toggle()">{{_('public_profile')}}</h1>
+       <h1 id="public_profile_button" class="section-header" onclick="$ ('#public_profile_body').toggle()">{{_('public_profile')}}</h1>
        <div id="public_profile_body" class="profile-section-body" {% if request.args.get('open') == "public-profile" %} style="display: inline;"{% endif %}>
             <h2 class="profile-section-body-header">{{_('public_profile')}}</h2>
              <form id="public_profile" class="flex flex-col gap-4">
@@ -74,7 +74,7 @@
                     <label for="agree_terms" class="cursor-pointer w-full">{{_('public_profile_info')}}</label>
                  </div>
                  <div class="flex flex-row">
-                    <button type="submit" class="green-btn">{{_('update_public')}}</button>
+                    <button id="submit_public_profile" type="submit" class="green-btn">{{_('update_public')}}</button>
                     {% if public_settings %}
                         <button type="reset" class="ml-auto red-btn" onclick="event.preventDefault(); hedyApp.destroy_public('{{_('are_you_sure')}}');">{{_('delete_public')}}</button>
                     {% endif %}
@@ -151,9 +151,6 @@
                         <option value="{{ alpha }}" {% if alpha == user_data['country'] %}selected{% endif %}>{{ name }}</option>
                     {% endfor %}
                 </select>
-            </div>
-            <div class="mb-4">
-                <button type="submit" class="green-btn mt-4">{{_('update_profile')}}</button>
             </div>
         </form>
         <button class="red-btn" onclick="hedyApp.destroy('{{_('are_you_sure')}}')" id="delete_profile_button">{{_('destroy_profile')}}</button>

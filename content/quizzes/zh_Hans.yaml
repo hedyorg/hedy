@@ -2679,8 +2679,8 @@ levels:
             correct_answer: B
             question_score: '10'
         6:
-            question_text: 应该填写哪一行,在???
-            code: "{print}‘欢迎来到麦克海蒂！’\norder={ask}‘你想吃汉堡包还是薯条？’\n {if}订单=‘汉堡包’\n\t价格=12\n{if} 订单=‘薯条’\n\t价格=4\n饮料={ask}‘你想用2美元买一杯饮料吗？’\n{if}饮料=‘是的’\n\t？？？\n{print}‘请付’price‘元， 谢谢！’"
+            question_text: 应该填写哪一行,在`_`?
+            code: "{print}‘欢迎来到麦克海蒂！’\norder={ask}‘你想吃汉堡包还是薯条？’\n {if}订单=‘汉堡包’\n\t价格=12\n{if} 订单=‘薯条’\n\t价格=4\n饮料={ask}‘你想用2美元买一杯饮料吗？’\n{if}饮料=‘是的’\n...._\n{print}‘请付’price‘元， 谢谢！’"
             mp_choice_options:
             -   option: |-
                     ```
@@ -2773,9 +2773,9 @@ levels:
             correct_answer: B
             question_score: '10'
         9:
-            question_text: 第1行???处应该填写哪个代码？
+            question_text: 第1行`_`?处应该填写哪个代码？
             code: |-
-                ？？？
+                _
                 {print} ‘你赢了’奖品{at} {random} ‘！’
             mp_choice_options:
             -   option: |-
@@ -2802,8 +2802,8 @@ levels:
             correct_answer: C
             question_score: '10'
         10:
-            question_text: 在???处填上哪一行代码，可以来完成这首歌?
-            code: "动作们=‘拍手’， ‘跺脚’，‘喊万岁！’   \n???\n\t{for} i{in} {range}0{to} 1\n\t\t{print} ‘如果你很高兴，你也知道’\n\t\t{print} 动作\n\t{print} ‘如果你很高兴，你也知道，而且你真的想表现出来’\n\t{print} ‘如果你很高兴，你也知道’\n\t{print} 动作"
+            question_text: 在`_`处填上哪一行代码，可以来完成这首歌?
+            code: "动作们=‘拍手’， ‘跺脚’，‘喊万岁！’   \n_\n\t{for} i{in} {range}0{to} 1\n\t\t{print} ‘如果你很高兴，你也知道’\n\t\t{print} 动作\n\t{print} ‘如果你很高兴，你也知道，而且你真的想表现出来’\n\t{print} ‘如果你很高兴，你也知道’\n\t{print} 动作"
             mp_choice_options:
             -   option: |-
                     ```
