@@ -6,6 +6,7 @@ import uuid
 from flask import g, jsonify, request, session, url_for, redirect
 from jinja_partials import render_partial
 from flask_babel import gettext
+import jinja_partials
 
 import hedy
 import hedy_content
@@ -189,14 +190,12 @@ class ForTeachersModule(WebsiteModule):
                 }
             )
 
-        student_overview_table, class_, class_adventures_formatted, ticked_adventures, \
-            adventure_names, student_adventures = self.get_grid_info(user, class_id, 1)
+        student_overview_table, _, class_adventures_formatted, \
+            _, student_adventures = self.get_grid_info(user, class_id, 1)
 
         teacher = user if Class["teacher"] == user["username"] else self.db.user_by_username(Class["teacher"])
         second_teachers = [teacher] + Class.get("second_teachers", [])
-        print("HELLO")
-        print(student_adventures)
-        print(class_adventures_formatted)
+
         return render_template(
             "class-overview.html",
             current_page="for-teachers",
@@ -255,12 +254,10 @@ class ForTeachersModule(WebsiteModule):
                     adventure_list.append(adventure_names[adventure['name']])
             class_adventures_formatted[key] = adventure_list
 
-        ticked_adventures = {}
         student_adventures = {}
         for student in students:
             programs = self.db.last_level_programs_for_user(student, level)
             if programs:
-                ticked_adventures[student] = []
                 current_program = {}
                 for _, program in programs.items():
                     # Old programs sometimes don't have adventures associated to them
@@ -277,13 +274,47 @@ class ForTeachersModule(WebsiteModule):
                             current_adventure = self.db.store_student_adventure(
                                 dict(id=f"{student_adventure_id}", ticked=False, program_id=program['id']))
 
-                        current_program = dict(id=program['id'], level=str(program['level']),
-                                               name=name, ticked=current_adventure['ticked'])
+                        current_program = dict(level=str(program['level']), name=name,
+                                               program=program['id'], ticked=current_adventure['ticked'])
 
-                        student_adventures[student_adventure_id] = program['id']
-                        ticked_adventures[student].append(current_program)
+                        student_adventures[student_adventure_id] = current_program
 
-        return students, class_, class_adventures_formatted, ticked_adventures, adventure_names, student_adventures
+        return students, class_, class_adventures_formatted, adventure_names, student_adventures
+
+    @route("/grid_overview/<class_id>/change_checkbox", methods=["POST"])
+    @requires_login
+    def change_checkbox(self, user, class_id):
+        level = request.args.get('level')
+        student_name = request.args.get('student', type=str)
+        adventure_name = request.args.get('adventure', type=str)
+
+        students, class_, class_adventures_formatted, adventure_names, _ = self.get_grid_info(
+            user, class_id, level)
+
+        adventure_names = {value: key for key, value in adventure_names.items()}
+        student_adventure_id = f"{student_name}-{adventure_name}-{level}"
+        current_adventure = self.db.student_adventure_by_id(student_adventure_id)
+        if not current_adventure:
+            return utils.error_page(error=404, ui_message=gettext("no_programs"))
+
+        self.db.update_student_adventure(student_adventure_id, current_adventure['ticked'])
+        student_overview_table, class_, class_adventures_formatted, \
+            adventure_names, student_adventures = self.get_grid_info(user, class_id, level)
+
+        return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
+                                             level=level,
+                                             class_info={"id": class_id, "students": students, "name": class_["name"]},
+                                             max_level=hedy.HEDY_MAX_LEVEL,
+                                             class_adventures=class_adventures_formatted,
+                                             adventure_names=adventure_names,
+                                             student_adventures=student_adventures,
+                                             adventure_table={
+                                                 'students': student_overview_table,
+                                                 'adventures': class_adventures_formatted,
+                                                 'student_adventures': student_adventures,
+                                                 'level': level
+                                             }
+                                             )
 
     @route("/class/<class_id>/preview", methods=["GET"])
     @requires_login
