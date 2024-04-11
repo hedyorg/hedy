@@ -3864,6 +3864,136 @@ adventures:
                     {else}
                         {print} 'Go to the trainstation at 10.00'
                      ```
+    simon:
+        name: Simon Says
+        default_save_name: Simon
+        description: Make a game of Simon Says
+        levels:
+            16:
+                story_text: |
+                    Let's make a game of Simon Says! Simon Says is a memory game in which the player will be given a color. They have to repeat that color back.
+                    If they get it right a color is added to the sequence, so they now have to remember 2 colors, then 3, then 4 etc. the game stops as soon as the player makes a mistake.
+
+                    ### Exercise
+                    In this first part of the Simon Says adventure, we'll let the computer pick a random color and add it to a list.
+
+                    ***Make 2 lists*** First, make a list called `colors` and fill it with the colors red, yellow, green and blue.
+                    Then make a list called `simon_sequence`. This list will be used as the answer.
+                    At the start of the game this lists need to be empty. unfortunately, we can't create an empty list (yet), so we'll fill it with the words 'empty' and 'list' and we'll remove them from the list immediately.
+
+                    ***Create a function that adds a color to the sequence*** Now that we have an empty list called simon_sequence, we can start filling it with random colors.
+                    We do that with a function, so we can call it everytime there's a new level in our game. Create a function called `add_random_color`.
+                    Then create the variable random_color and set it to a random color. Next, add this random color to the simon_sequence.
+
+                    ***Create a function that shows the simon_sequence*** Start by naming the new function `show_simon_sequence` with `level` as an argument. Now we want to show as many colors as the level we are in (in level 1 you see 1 color, in level 2 you see 2 colors etc).
+                    So we repeat `level` times, to print the `simon_sequence[i]`. Each time a color is shown, wait for 1 second and then clear the screen.
+
+                    ***Test your program*** Before you go to the next level, test if the functions are working by calling both of the functions. If they're working you should see a random color in your output screen.
+                    Remove this testing part of your code, copy the code and continue to the next tab to learn more about the simon says game!
+                example_code: |
+                    ```
+                    # Make 2 lists
+                    colors = _
+                    _ = ['empty', 'list']
+                    {remove} _ {from} simon_sequence
+                    {remove} _
+
+                    # Create a function that adds a color
+                    _ add_random_color
+                        _
+                        {add} _
+
+                    # Create a function that shows the simon_sequence
+                    {define} _
+                        {for} i {in} {range} 1 {to} _
+                            {print} _
+                            _
+                            _
+
+                    #Test your program
+                    {call} _
+                    {call} simon_sequence {with} 1
+                    ```
+    simon_2:
+        name: Simon Says 2
+        default_save_name: Simon
+        description: Make a game of Simon Says
+        levels:
+            16:
+                story_text: |
+                    We'll continue with our Simon Says game!
+
+                    ### Exercise
+                    ***Paste your code here*** Paste your code from the previous level here. Don't forget to remove the part that was just used for testing the functions.
+
+                    ***Create a function that creates the player_sequence*** The list `player_sequence` is used to capture the answers of the player. First we define the function with the argument level.
+                    Next, we ask level times what the color is that they choose. We call that variable `answer`. Then we add the variable `answer` to the list player_sequence.
+
+                    ***Setting up the game*** Before we program the game in the next tab, we'll need some starting variables. First, we'll set the variable `level` to 1 and the variable `game_over` to False.
+                    Then we make an introduction for the game. We'll print 'Welcome to Simon Says!' and clear the screen after 1 second.
+
+                    ***Continue to the next tab to finish the game!**** Don't forget to copy your code and take it with you to the next tab.
+                example_code: |
+                    ```
+                    # Paste your code here
+
+
+                    # Create a function that creates the player_sequence
+                    {define} _
+                        {for} _
+                            _ 'What is color number ' i '?'
+                            {add} answer {to} _
+
+                    #set up
+                    level = _
+                    game_over = _
+                    {print} _
+                    _ 1
+                    _
+                    ```
+    simon_3:
+        name: Simon Says 3
+        default_save_name: Simon
+        description: Make a game of Simon Says
+        levels:
+            16:
+                story_text: |
+                    In this tab we'll program the game of Simon Says!
+
+                    ### Exercise
+                    ***Paste your code*** Copy your code from the previous tab and paste it here.
+
+                    ***Program the game*** We start by making sure the game goes on while the game isn't over. Then we print what level the player is on, we use the variable level for that. We only show that for 1 second and then we clear the screen again.
+                    Now, we have to create the empty list player_sequence. We've already programmed how to fill the list, with our function `player_sequence`, but we never made the list itself. To create the list we use the same trick as we did in the previous tab.
+                    We'll make a list with the words 'empty' and 'list' on it, and then we remove both these words. Next, we'll call all of the 3 functions that we've created.
+                    Lastly, we'll have to check if the player gave the correct answers (so if the player_sequence and the simon_sequence are the same).
+                    If that's the case, we'll compliment the player. Wiat for 1 second and increase the level with 1.
+                    Did the player give the wrong answer, we'll tell them and end the game by setting game_over to 'True'
+
+                    ***Enjoy your game!*** Great job! Does your game not work? Use the ladybug button to debug your code!
+                example_code: |
+                    ```
+                    # Paste your code here
+
+                    # The game
+                    {while} game_over _
+                        {print} _
+                        _
+                        _
+                        _ = ['empty', 'list']
+                        {remove} _
+                        {remove} _
+                        {call} _
+                        {call} _ {with} _
+                        {call} _ {with} _
+                        {if} player_sequence == _
+                            _
+                            _
+                            _
+                        {else}
+                            _
+                            game_over = _
+                    ```
     sleep_command:
         name: '{sleep}'
         default_save_name: sleep_command
