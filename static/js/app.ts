@@ -1535,7 +1535,7 @@ export function toggle_keyword_language(current_lang: string, new_lang: string) 
       window.open(hash, "_self");
 
       // if in iframe, reload the topper window level.
-      if (window.top) {
+      if (window.top && !(window as any).Cypress) {
         window.top.location.reload();
       }
 
