@@ -3992,9 +3992,9 @@ adventures:
                             _
                             _
 
-                    #Test your program
+                    # Test your program
                     {call} _
-                    {call} simon_sequence {with} 1
+                    {call} show_simon_sequence {with} 1
                     ```
     simon_2:
         name: Simon Says 2
@@ -4026,7 +4026,7 @@ adventures:
                             _ 'What is color number ' i '?'
                             {add} answer {to} _
 
-                    #set up
+                    # Set up
                     level = _
                     game_over = _
                     {print} _
@@ -4049,7 +4049,7 @@ adventures:
                     Now, we have to create the empty list player_sequence. We've already programmed how to fill the list, with our function `player_sequence`, but we never made the list itself. To create the list we use the same trick as we did in the previous tab.
                     We'll make a list with the words 'empty' and 'list' on it, and then we remove both these words. Next, we'll call all of the 3 functions that we've created.
                     Lastly, we'll have to check if the player gave the correct answers (so if the player_sequence and the simon_sequence are the same).
-                    If that's the case, we'll compliment the player. Wiat for 1 second and increase the level with 1.
+                    If that's the case, we'll compliment the player. Wait for 1 second and increase the level with 1.
                     Did the player give the wrong answer, we'll tell them and end the game by setting game_over to 'True'
 
                     ***Enjoy your game!*** Great job! Does your game not work? Use the ladybug button to debug your code!
