@@ -373,4 +373,3 @@ class TestsLevel18(HedyTester):
             code=code,
             expected=expected,
         )
-
