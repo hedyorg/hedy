@@ -594,6 +594,29 @@ class TestsLevel16(HedyTester):
         )
 
     #
+    # and/or commands
+    #
+    @parameterized.expand(['and', 'or'])
+    def test_if_list_access_lhs_and_or(self, op):
+        code = textwrap.dedent(f"""\
+            colors = ['red', 'green', 'blue']
+            if colors[1] == colors[2] {op} 1 == 1
+                print 'red'""")
+
+        expected = HedyTester.dedent(
+            "colors = ['red', 'green', 'blue']",
+            self.list_access_transpiled('colors[int(1)-1]'),
+            self.list_access_transpiled('colors[int(2)-1]'),
+            f"""\
+            if convert_numerals('Latin', colors[int(1)-1]) == convert_numerals('Latin', colors[int(2)-1]) {op} convert_numerals('Latin', '1') == convert_numerals('Latin', '1'):
+              print(f'''red''')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+        )
+
+    #
     # in/not-in list commands
     #
     @parameterized.expand([
