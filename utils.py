@@ -481,3 +481,10 @@ def prepare_content_for_ckeditor(content):
         content += "<p>&nbsp;</p>"
 
     return content
+
+
+def remove_class_preview():
+    try:
+        del session["preview_class"]
+    except KeyError:
+        pass

@@ -6,7 +6,7 @@ from flask_babel import gettext
 from config import config
 from safe_format import safe_format
 from hedy_content import ALL_LANGUAGES, COUNTRIES
-from utils import extract_bcrypt_rounds, is_heroku, is_testing_request, timems, times
+from utils import extract_bcrypt_rounds, is_heroku, is_testing_request, timems, times, remove_class_preview
 from website.auth import (
     MAILCHIMP_API_URL,
     RESET_LENGTH,
@@ -247,6 +247,7 @@ class AuthModule(WebsiteModule):
         if request.cookies.get(TOKEN_COOKIE_NAME):
             self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         session[JUST_LOGGED_OUT] = True
+        remove_class_preview()
         return "", 200
 
     @ route("/destroy", methods=["POST"])
