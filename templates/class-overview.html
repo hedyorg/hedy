@@ -119,11 +119,8 @@
             <button class="green-btn" id="live_stats_button" onclick="window.location.href = '/live_stats/class/{{class_info.id}}'">{{_('class_live')}}</button>
             <button class="green-btn" id="grid_overview_button" onclick="window.location.href = '/grid_overview/class/{{class_info.id}}'">{{_('grid_overview')}}</button>
               <button id="create_adventure_button" class="green-btn" 
-                hx-trigger="click"
-                hx-post="/for-teachers/create-adventure/{{class_info.id}}"
-                hx-swap="none"
-                _="on htmx:afterRequest if detail.xhr.response
-                window.open('/for-teachers/customize-adventure/' + detail.xhr.response, '_self')"
+                _="on click
+                  window.open('/for-teachers/customize-adventure?class_id={{ class_info.id }}', '_self')"
                 data-cy="edit-link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
         </div>
       </div>

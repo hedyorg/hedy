@@ -3,6 +3,7 @@ import { CustomWindow } from './custom-window';
 import { languagePerLevel, keywords } from "./lezer-parsers/language-packages";
 import { SyntaxNode } from "@lezer/common";
 import { initializeTranslation } from "./lezer-parsers/tokens";
+import { autoSave } from "./autosave";
 
 declare let window: CustomWindow;
 
@@ -19,6 +20,9 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
     if (editorContainer) {
         initializeEditor(lang, editorContainer);
     }
+
+    // Autosave customize adventure page
+    autoSave("customize_adventure")
 
     // We wait until Tailwind generates the select
     const tailwindSelects = await waitForElm('[data-te-select-option-ref]')
@@ -58,6 +62,7 @@ function initializeEditor(language: string, editorContainer: HTMLElement): Promi
             .then(editor => {
                 window.ckEditor = editor;
                 $editor = editor;
+                $editor.model.document.on("change:data", e => autoSave("customize_adventure", e))
                 resolve();
             })
             .catch(error => {
