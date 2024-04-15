@@ -147,8 +147,8 @@ def markdown_code_blocks(text):
     Returns all code blocks, except those tagged as 'not_hedy_code'.
     """
     return [c.code
-           for c in utils.code_blocks_from_markdown(text)
-           if c.info != 'not_hedy_code']
+            for c in utils.code_blocks_from_markdown(text)
+            if c.info != 'not_hedy_code']
 
 
 def filter_snippets(snippets, level=None, lang=None):

@@ -308,7 +308,6 @@ def markdown_to_html_tags(markdown):
     return soup.find_all()
 
 
-
 MarkdownCode = collections.namedtuple('MarkdownCode', ('code', 'info'))
 
 
