@@ -502,6 +502,17 @@ class HedyTester(unittest.TestCase):
     def index_exception_transpiled():
         return '"""Runtime Index Error"""'
 
+    @staticmethod
+    def return_transpiled(arg):
+        return textwrap.dedent(f"""\
+        try:
+          return int(f'''{arg}''')
+        except ValueError:
+          try:
+            return float(f'''{arg}''')
+          except ValueError:
+            return f'''{arg}'''""")
+
     # Used to overcome indentation issues when the above code is inserted
     # in test cases which use different indentation style (e.g. 2 or 4 spaces)
 
