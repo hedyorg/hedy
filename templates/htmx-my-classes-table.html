@@ -34,6 +34,7 @@
                   <span>{{_('preview')}}</span>
                 </button>
                 <button id="remove-class" class="flex flex-col items-center"
+                    hx-confirm="{{_('delete_class_prompt')}}"
                     hx-trigger="click"
                     hx-delete="/class/{{class.id}}"
                     hx-target="#classes_table">

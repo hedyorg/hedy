@@ -38,6 +38,7 @@
                     <span>{{_('preview')}}</span>
                   </button>
                   <button id="delete_adventure" class="flex flex-col items-center" data-cy="delete-adventure" 
+                  hx-confirm="{{_('delete_adventure_prompt')}}"
                   hx-trigger="click"
                   hx-delete="/for-teachers/customize-adventure/{{adventure.id}}"
                   hx-target="#adventures_table">
