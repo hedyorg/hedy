@@ -15,6 +15,7 @@ import uuid
 import unicodedata
 import sys
 import traceback
+import collections
 
 from email_validator import EmailNotValidError, validate_email
 from flask_babel import gettext, format_date, format_datetime, format_timedelta
@@ -297,14 +298,32 @@ def random_id_generator(
     return ''.join(random.choice(chars) for _ in range(size))
 
 
-# This function takes a Markdown string and returns a list with each of the HTML elements obtained
-# by rendering the Markdown into HTML.
-
-
 def markdown_to_html_tags(markdown):
+    """
+    This function takes a Markdown string and returns a list with each of the HTML elements obtained
+    by rendering the Markdown into HTML.
+    """
     _html = commonmark_renderer.render(commonmark_parser.parse(markdown))
     soup = BeautifulSoup(_html, 'html.parser')
     return soup.find_all()
+
+
+
+MarkdownCode = collections.namedtuple('MarkdownCode', ('code', 'info'))
+
+
+def code_blocks_from_markdown(markdown):
+    """
+    Takes a MarkDown string and returns a list of code blocks, along with their metadata.
+
+    Returns pairs of `(code, info)`, where 'info' is the text that appears after the three
+    backticks (usually used to indicate the programming language).
+    """
+    md = commonmark_parser.parse(markdown)
+    for node, _ in md.walker():
+        # We will only ever see '_entered == True' for CodeBlock nodes.
+        if node.t == 'code_block':
+            yield MarkdownCode(node.literal.strip(), node.info)
 
 
 def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None, exception=None):

@@ -142,10 +142,13 @@ def find_yaml_files(repository_path):
 
 
 def markdown_code_blocks(text):
-    """Parse the text as MarkDown and return all code blocks in here."""
-    return [tag.contents[0].contents[0]
-            for tag in utils.markdown_to_html_tags(text)
-            if tag.name == 'pre' and tag.contents and tag.contents[0].contents]
+    """Parse the text as MarkDown and return all code blocks in here.
+
+    Returns all code blocks, except those tagged as 'not_hedy_code'.
+    """
+    return [c.code
+           for c in utils.code_blocks_from_markdown(text)
+           if c.info != 'not_hedy_code']
 
 
 def filter_snippets(snippets, level=None, lang=None):
