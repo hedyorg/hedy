@@ -312,7 +312,7 @@ function attachMainEditorEvents(editor: HedyEditor) {
       if (!theLevel || !theLanguage) {
         throw new Error('Oh no');
       }
-      runit (theLevel, theLanguage, "", "run",function () {
+      runit (theLevel, theLanguage, false, "", "run",function () {
         $ ('#output').focus ();
       });
     }
@@ -469,7 +469,7 @@ function clearOutput() {
   buttonsDiv.hide();
 }
 
-export async function runit(level: number, lang: string, disabled_prompt: string, run_type: "run" | "debug" | "continue", cb: () => void) {
+export async function runit(level: number, lang: string, raw: boolean, disabled_prompt: string, run_type: "run" | "debug" | "continue", cb: () => void) {
   // Copy 'currentTab' into a variable, so that our event handlers don't mess up
   // if the user changes tabs while we're waiting for a response
   const adventureName = currentTab;
@@ -537,7 +537,8 @@ export async function runit(level: number, lang: string, disabled_prompt: string
           is_debug: run_type === 'debug',
           tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
           read_aloud : !!$('#speak_dropdown').val(),
-          adventure_name: adventure ? adventure.name : undefined,
+          adventure_name: adventureName,
+          raw: raw,
 
           // Save under an existing id if this field is set
           program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
@@ -1521,23 +1522,29 @@ export function toggle_keyword_language(current_lang: string, new_lang: string) 
       level: theLevel,
     });
 
-  if (response.success) {
-    const code = response.code
-    theGlobalEditor.contents = code;
-    const saveName = saveNameFromInput();
+    if (response.success) {
+      const code = response.code
+      theGlobalEditor.contents = code;
+      const saveName = saveNameFromInput();
 
-    // save translated code to local storage
-    // such that it can be fetched after reload
-    localSave(currentTabLsKey(), { saveName, code });
-    $('#editor').attr('lang', new_lang);
+      // save translated code to local storage
+      // such that it can be fetched after reload
+      localSave(currentTabLsKey(), { saveName, code });
+      $('#editor').attr('lang', new_lang);
 
-    // update the whole page (example codes)
-    const hash = window.location.hash;
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    urlParams.set('keyword_language', new_lang)
-    window.location.search = urlParams.toString()
-    window.open(hash, "_self");
+      // update the whole page (example codes)
+      const hash = window.location.hash;
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      urlParams.set('keyword_language', new_lang)
+      window.location.search = urlParams.toString()
+      window.open(hash, "_self");
+
+      // if in iframe, reload the topper window level.
+      if (window.top && !(window as any).Cypress) {
+        window.top.location.reload();
+      }
+
     }
   });
 }
