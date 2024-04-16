@@ -1253,6 +1253,9 @@ class IsValid(Filter):
             tip='no_more_flat_if',
             line_number=meta.line)
 
+    def error_else_no_if(self, meta, args):
+        raise exceptions.ElseWithoutIfException(meta.line)
+
     def error_for_missing_in(self, meta, args):
         raise exceptions.MissingAdditionalCommand(command='for', missing_command='in', line_number=meta.line)
 

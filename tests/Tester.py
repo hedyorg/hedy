@@ -341,7 +341,8 @@ class HedyTester(unittest.TestCase):
             skipped_exceptions = [
                 hedy.exceptions.ParseException, hedy.exceptions.CodePlaceholdersPresentException,
                 hedy.exceptions.TooFewIndentsStartLevelException, hedy.exceptions.TooManyIndentsStartLevelException,
-                hedy.exceptions.NoIndentationException, hedy.exceptions.IndentationException
+                hedy.exceptions.NoIndentationException, hedy.exceptions.IndentationException,
+                hedy.exceptions.ElseWithoutIfException
             ]
 
             if translate and exception not in skipped_exceptions and skipped_mappings is None:
