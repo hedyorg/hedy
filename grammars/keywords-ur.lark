@@ -35,7 +35,7 @@ _IN: _SPACE ("میں" | "in") _SPACE
 _NOT_IN: _SPACE ("نہیں ہے" | "not in") _SPACE
 _IF: ("اگر" | "if") _SPACE
 _ELSE: "ورنہ" | "else"
-_AND: _SPACE ("اور" | "and") _SPACE
+_AND: _SPACE? ("اور" | "and") _SPACE
 _REPEAT: ("مکرر" | "repeat") _SPACE
 _TIMES: _SPACE ("دفعہ" | "times")
 _FOR: ("فی" | "for") _SPACE
@@ -44,7 +44,7 @@ _TO: _SPACE ("سے" | "to") _SPACE
 _STEP: "قدم" | "step"
 _ELIF: _SPACE? ("یااگر" | "elif") _SPACE
 _INPUT: ("بتاؤ" | "input")
-_OR: _SPACE ("یا" | "or") _SPACE
+_OR: _SPACE? ("یا" | "or") _SPACE
 _WHILE: ("جبتک" | "while") _SPACE
 _LENGTH: "لمبائی" | "length"
 _COLOR : ("رنگ" | "color") _SPACE?

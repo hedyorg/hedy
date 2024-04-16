@@ -35,7 +35,7 @@ _IN: _SPACE ("mewn" | "in") _SPACE
 _NOT_IN: _SPACE ("dim mewn" | "not in") _SPACE
 _IF: ("os" | "if") _SPACE
 _ELSE: "arall" | "else"
-_AND: _SPACE ("a" | "and") _SPACE
+_AND: _SPACE? ("a" | "and") _SPACE
 _REPEAT: ("ailadrodd" | "repeat") _SPACE
 _TIMES: _SPACE ("gwaith" | "times")
 _FOR: ("ar gyfer" | "for") _SPACE
@@ -44,7 +44,7 @@ _TO: _SPACE ("i" | "to") _SPACE
 _STEP: "cam" | "step"
 _ELIF: _SPACE? ("elif" | "elif") _SPACE
 _INPUT: ("mewnbwn" | "input")
-_OR: _SPACE ("neu" | "or") _SPACE
+_OR: _SPACE? ("neu" | "or") _SPACE
 _WHILE: ("tra" | "while") _SPACE
 _LENGTH: "hyd" | "length"
 _COLOR : ("lliw" | "color") _SPACE?

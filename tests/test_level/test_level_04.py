@@ -26,6 +26,18 @@ class TestsLevel4(HedyTester):
     #
     # print tests
     #
+    def test_print_list_gives_type_error(self):
+        code = textwrap.dedent("""\
+            plaatsen is een stad, een  dorp, een strand
+            print plaatsen""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException
+        )
+
     def test_print_single_quoted_text(self):
         code = "print 'hallo wereld!'"
         expected = "print(f'hallo wereld!')"
@@ -520,6 +532,18 @@ class TestsLevel4(HedyTester):
     #
     # ask tests
     #
+    def test_ask_list_gives_type_error(self):
+        code = textwrap.dedent("""\
+           plaatsen is een stad, een  dorp, een strand
+           var is ask plaatsen""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException
+        )
+
     def test_ask_single_quoted_text(self):
         code = "details is ask 'tell me more'"
         expected = "details = input(f'tell me more')"
@@ -647,12 +671,13 @@ class TestsLevel4(HedyTester):
 
     def test_ask_list_random(self):
         code = textwrap.dedent("""\
-        colors is orange, blue, green
-        favorite is ask 'Is your fav color ' colors at random""")
+            colors is orange, blue, green
+            favorite is ask 'Is your fav color ' colors at random""")
 
-        expected = textwrap.dedent("""\
-        colors = ['orange', 'blue', 'green']
-        favorite = input(f'Is your fav color {random.choice(colors)}')""")
+        expected = self.dedent(
+            "colors = ['orange', 'blue', 'green']",
+            self.list_access_transpiled('random.choice(colors)'),
+            "favorite = input(f'Is your fav color {random.choice(colors)}')")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
@@ -690,12 +715,13 @@ class TestsLevel4(HedyTester):
 
     def test_ask_list_access_index(self):
         code = textwrap.dedent("""\
-        colors is orange, blue, green
-        favorite is ask 'Is your fav color ' colors at 1""")
+            colors is orange, blue, green
+            favorite is ask 'Is your fav color ' colors at 1""")
 
-        expected = textwrap.dedent("""\
-        colors = ['orange', 'blue', 'green']
-        favorite = input(f'Is your fav color {colors[int(1)-1]}')""")
+        expected = self.dedent(
+            "colors = ['orange', 'blue', 'green']",
+            self.list_access_transpiled('colors[int(1)-1]'),
+            "favorite = input(f'Is your fav color {colors[int(1)-1]}')")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
