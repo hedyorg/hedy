@@ -6,6 +6,7 @@ import datetime
 import time
 import functools
 import os
+from io import StringIO
 from os import path
 import re
 import string
@@ -14,6 +15,7 @@ import uuid
 import unicodedata
 import sys
 import traceback
+import collections
 
 from email_validator import EmailNotValidError, validate_email
 from flask_babel import gettext, format_date, format_datetime, format_timedelta
@@ -37,8 +39,8 @@ with open(f'{prefixes_dir}/normal.py', encoding='utf-8') as f:
     NORMAL_PREFIX_CODE = f.read()
 
 # Define code that will be used if a pressed command is used
-with open(f'{prefixes_dir}/pygame.py', encoding='utf-8') as f:
-    PYGAME_PREFIX_CODE = f.read()
+with open(f'{prefixes_dir}/pressed.py', encoding='utf-8') as f:
+    PRESSSED_PREFIX_CODE = f.read()
 
 # Define code that will be used if music code is used
 with open(f'{prefixes_dir}/music.py', encoding='utf-8') as f:
@@ -117,18 +119,30 @@ def set_debug_mode(debug_mode):
     DEBUG_MODE = debug_mode
 
 
+def rt_yaml():
+    y = yaml.YAML(typ='rt')
+    # Needs to match the Weblate YAML settings for all components
+    y.indent = 4
+    y.preserve_quotes = True
+    y.width = 30000
+    return y
+
+
 def load_yaml_rt(filename):
     """Load YAML with the round trip loader."""
     try:
+        rt = rt_yaml()
         with open(filename, 'r', encoding='utf-8') as f:
-            return yaml.round_trip_load(f, preserve_quotes=True)
+            return rt.load(f)
     except IOError:
         return {}
 
 
 def dump_yaml_rt(data):
     """Dump round-tripped YAML."""
-    return yaml.round_trip_dump(data, indent=4, width=999)
+    out = StringIO()
+    rt_yaml().dump(data, out)
+    return out.getvalue()
 
 
 def slash_join(*args):
@@ -284,14 +298,31 @@ def random_id_generator(
     return ''.join(random.choice(chars) for _ in range(size))
 
 
-# This function takes a Markdown string and returns a list with each of the HTML elements obtained
-# by rendering the Markdown into HTML.
-
-
 def markdown_to_html_tags(markdown):
+    """
+    This function takes a Markdown string and returns a list with each of the HTML elements obtained
+    by rendering the Markdown into HTML.
+    """
     _html = commonmark_renderer.render(commonmark_parser.parse(markdown))
     soup = BeautifulSoup(_html, 'html.parser')
     return soup.find_all()
+
+
+MarkdownCode = collections.namedtuple('MarkdownCode', ('code', 'info'))
+
+
+def code_blocks_from_markdown(markdown):
+    """
+    Takes a MarkDown string and returns a list of code blocks, along with their metadata.
+
+    Returns pairs of `(code, info)`, where 'info' is the text that appears after the three
+    backticks (usually used to indicate the programming language).
+    """
+    md = commonmark_parser.parse(markdown)
+    for node, _ in md.walker():
+        # We will only ever see '_entered == True' for CodeBlock nodes.
+        if node.t == 'code_block':
+            yield MarkdownCode(node.literal.strip(), node.info)
 
 
 def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None, exception=None):
@@ -468,3 +499,10 @@ def prepare_content_for_ckeditor(content):
         content += "<p>&nbsp;</p>"
 
     return content
+
+
+def remove_class_preview():
+    try:
+        del session["preview_class"]
+    except KeyError:
+        pass

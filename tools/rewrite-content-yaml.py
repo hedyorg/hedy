@@ -17,8 +17,9 @@
 # json schema files but that was a lot of work...
 
 import sys
-import yaml
 from ruamel import yaml as ruamel_yaml
+from io import StringIO
+from multiprocessing import Pool
 
 
 # NOTE: we prefer the dict keys in this order
@@ -86,43 +87,37 @@ PREFERRED_KEY_ORDER = [
 
 
 def main():
-    # patch the yaml implementation to patch our own values
-    # we do this because if we use add_representer(`str`, ...)
-    # we also change the representation of the keys and not just the values
-    yaml.SafeDumper.org_represent_str = yaml.SafeDumper.represent_str
-    yaml.add_representer(
-        StringUsedInDictValueNotInKey, repr_str, Dumper=yaml.SafeDumper
-    )
-
-    # collect all filenames
-    # we can go for argparse if we decide to do something fancier
     filenames = sys.argv[1:]
 
-    made_a_change = False
-    for filename in filenames:
-        if rewrite_yaml_file(filename, strip_strings="/adventures/" not in filename):
-            made_a_change = True
-
-    if made_a_change:
-        sys.exit(1)
-    else:
-        sys.exit(0)
+    with Pool() as p:
+        p.map(rewrite_yaml_file, filenames)
 
 
-def rewrite_yaml_file(fn, strip_strings):
+def rewrite_yaml_file(fn):
     with open(fn, "r") as fp:
         old_string = fp.read()
-    data = ruamel_yaml.safe_load(old_string)
+
+    yaml = ruamel_yaml.YAML(typ='rt')
+    # Needs to match the Weblate YAML settings for all components
+    yaml.indent = 4
+    yaml.preserve_quotes = True
+    yaml.width = 30000
+
+    data = yaml.load(old_string)
     # adventures contain meaningful whitespace
-    data = custom_rewrite_data(data, strip_strings)
-    new_string = yaml.safe_dump(
-        data, indent=4, allow_unicode=True, sort_keys=False, width=30000
-    )
-    with open(fn, "w") as fp:
-        fp.write(new_string)
-    made_a_change = old_string != new_string
+    data = custom_rewrite_data(data, False)
+
+    out = StringIO()
+    yaml.dump(data, out)
+    new_string = out.getvalue()
+    made_a_change = old_string.strip() != new_string.strip()
     if made_a_change:
-        print(f"made a change to {fn} while reformatting the yaml")
+        with open(fn, "w") as fp:
+            fp.write(new_string)
+        sys.stderr.write('x')
+    else:
+        sys.stderr.write('.')
+    sys.stderr.flush()
     return made_a_change
 
 
@@ -130,30 +125,8 @@ class StringUsedInDictValueNotInKey(str):
     pass
 
 
-def repr_str(dumper, data):
-    # some yaml has extra newlines at the end, we should try to clean it up
-    # but then tests are failing so we should investigate which ones can be cleaned up
-    # and which ones can't
-    if data.strip_strings:
-        data = data.strip()
-
-    if "\n" in data:
-        return dumper.represent_scalar("tag:yaml.org,2002:str", data, style="|")
-    # we can consider forcing the quotes around all strings, but then some emojis are not
-    # visible in the source code due to escaping
-    # return dumper.represent_scalar(u'tag:yaml.org,2002:str', data, style='"')
-    return dumper.org_represent_str(data)
-
-
 def custom_rewrite_data(obj, strip_strings):
-    if isinstance(obj, str):
-        # patch our own string implementation so that we can finetune the way we render the string
-        copy = StringUsedInDictValueNotInKey(obj)
-        # Strip strings should not be done for all keys
-        copy.strip_strings = strip_strings
-        return copy
-
-    elif isinstance(obj, dict):
+    if isinstance(obj, dict):
         # use a custom order for the dicts
         # as of python 3.7 the value in strings is based on insertion
         # in our system it's nice if "title" comes first and then "text"
@@ -168,9 +141,28 @@ def custom_rewrite_data(obj, strip_strings):
         for key in sorted(obj.keys()):
             copy[key] = custom_rewrite_data(obj[key], strip_strings)
         return copy
-    elif isinstance(obj, list):
+    if isinstance(obj, list):
         # with lists simply recurse into the directory structure
-        return list([custom_rewrite_data(value, strip_strings) for value in obj])
+        for (i, el) in enumerate(obj):
+            obj[i] = custom_rewrite_data(el, strip_strings)
+        return obj
+    if isinstance(obj, str):
+        # No string ever needs to have leading whitespace, and it messes
+        # with rendering and parsing.
+        #
+        # We could talk about trailing whitespace, but the lack of a trailing
+        # `\n` forces the block indicator to `|-` instead of `|`, and it ultimately
+        # doesn't matter that much.
+        #
+        # We could also force all (multiline) strings to be `|` blocks here if
+        # we wanted to. For now, we're just messing with things that cause problems.
+        #
+        # Only replace the original object if we have a change, to not
+        # destroy YAML metadata that may be attached to the string.
+        stripped = obj.lstrip()
+        clazz = type(obj)
+
+        return clazz(stripped) if obj != stripped else obj
     # everything else we leave alone
     return obj
 

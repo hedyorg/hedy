@@ -28,3 +28,5 @@ export * from './public-adventures';
 export { loadParsonsExercise } from './parsons';
 export * from './user-activity';
 export * from './adventure';
+export * from './microbit';
+export * from './autosave';

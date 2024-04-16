@@ -288,11 +288,7 @@ class TestsLevel1(HedyTester):
 
     def test_play_no_args(self):
         code = "play "
-        expected = textwrap.dedent("""\
-        if 'C4' not in notes_mapping.keys() and 'C4' not in notes_mapping.values():
-            raise Exception('catch_value_exception')
-        play(notes_mapping.get(str('C4'), str('C4')))
-        time.sleep(0.5)""")
+        expected = self.play_transpiled('C4')
 
         self.multi_level_tester(
             code=code,
@@ -303,11 +299,7 @@ class TestsLevel1(HedyTester):
 
     def test_play(self):
         code = "play A"
-        expected = textwrap.dedent("""\
-        if 'A' not in notes_mapping.keys() and 'A' not in notes_mapping.values():
-            raise Exception('catch_value_exception')
-        play(notes_mapping.get(str('A'), str('A')))
-        time.sleep(0.5)""")
+        expected = self.play_transpiled('A')
 
         self.multi_level_tester(
             code=code,
@@ -318,8 +310,6 @@ class TestsLevel1(HedyTester):
     def test_print_microbit(self):
         code = "print a"
         expected = textwrap.dedent(f"""\
-            from microbit import *
-            while True:
                 display.scroll('a')""")
 
         self.multi_level_tester(
@@ -333,11 +323,7 @@ class TestsLevel1(HedyTester):
 
     def test_play_lowercase(self):
         code = "play a"
-        expected = textwrap.dedent("""\
-        if 'A' not in notes_mapping.keys() and 'A' not in notes_mapping.values():
-            raise Exception('catch_value_exception')
-        play(notes_mapping.get(str('A'), str('A')))
-        time.sleep(0.5)""")
+        expected = self.play_transpiled('A')
 
         self.multi_level_tester(
             code=code,
@@ -347,11 +333,7 @@ class TestsLevel1(HedyTester):
 
     def test_play_int(self):
         code = "play 34"
-        expected = textwrap.dedent("""\
-        if '34' not in notes_mapping.keys() and '34' not in notes_mapping.values():
-            raise Exception('catch_value_exception')
-        play(notes_mapping.get(str('34'), str('34')))
-        time.sleep(0.5)""")
+        expected = self.play_transpiled(34)
 
         self.multi_level_tester(
             code=code,
@@ -888,10 +870,10 @@ class TestsLevel1(HedyTester):
 
         expected_source_map = {
             '1/1-1/29': '1/1-1/32',
-            '2/1-2/11': '2/1-8/16',
-            '3/1-3/30': '9/1-9/44',
-            '4/1-4/27': '10/1-10/39',
-            '1/1-4/28': '1/1-10/39'
+            '2/1-2/11': '2/1-4/16',
+            '3/1-3/30': '5/1-5/44',
+            '4/1-4/27': '6/1-6/39',
+            '1/1-4/28': '1/1-6/39'
         }
 
         self.single_level_tester(code, expected=expected_code)

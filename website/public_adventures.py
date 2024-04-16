@@ -4,6 +4,7 @@ from flask_babel import gettext
 import json
 
 import hedy
+import hedy_content
 import utils
 from config import config
 from website.auth import requires_teacher
@@ -13,6 +14,7 @@ from jinja_partials import render_partial
 from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
+from safe_format import safe_format
 
 cookie_name = config["session"]["cookie_name"]
 invite_length = config["session"]["invite_length"] * 60
@@ -30,7 +32,6 @@ class PublicAdventuresModule(WebsiteModule):
         self.available_tags = set()
 
     def init(self, user):
-        adventures = []
         included = {}
         self.adventures = {}
         self.available_languages = set()
@@ -49,32 +50,33 @@ class PublicAdventuresModule(WebsiteModule):
                 continue
             public_profile = self.db.get_public_profile_settings(adventure.get('creator'))
             included[adventure["name"]] = True
-            adventures.append(
-                {
-                    "id": adventure.get("id"),
-                    "name": adventure.get("name"),
-                    "short_name": adventure.get("name"),
-                    "author": adventure.get("author", adventure["creator"]),
-                    "creator": adventure.get("creator"),
-                    "creator_public_profile": public_profile,
-                    "date": utils.localized_date_format(adventure.get("date")),
-                    "level": adventure.get("level"),
-                    "levels": adventure.get("levels"),
-                    "language": adv_lang,
-                    "cloned_times": adventure.get("cloned_times"),
-                    "tags": adv_tags,
-                    "text": adventure.get("content"),
-                    "is_teacher_adventure": True,
-                    # "content": adventure.get("content")
-                }
-            )
+
+            content = safe_format(adventure.get('formatted_content', adventure['content']),
+                                  **hedy_content.KEYWORDS.get(g.keyword_lang))
+            current_adventure = {
+                "id": adventure.get("id"),
+                "name": adventure.get("name"),
+                "short_name": adventure.get("name"),
+                "author": adventure.get("author", adventure["creator"]),
+                "creator": adventure.get("creator"),
+                "creator_public_profile": public_profile,
+                "date": utils.localized_date_format(adventure.get("date")),
+                "level": adventure.get("level"),
+                "levels": adventure.get("levels"),
+                "language": adv_lang,
+                "cloned_times": adventure.get("cloned_times"),
+                "tags": adv_tags,
+                "text": content,
+                "is_teacher_adventure": True,
+            }
+
             # save adventures for later usage.
             for _level in adventure.get("levels", [adventure.get("level")]):
                 _level = int(_level)
                 if self.adventures.get(_level):
-                    self.adventures[_level].append(adventures[-1])
+                    self.adventures[_level].append(current_adventure)
                 else:
-                    self.adventures[_level] = [adventures[-1]]
+                    self.adventures[_level] = [current_adventure]
 
             available_levels = adventure["levels"] if adventure.get("levels") else [adventure["level"]]
             self.customizations["available_levels"].update([int(adv_level) for adv_level in available_levels])
@@ -85,13 +87,12 @@ class PublicAdventuresModule(WebsiteModule):
     def filtering(self, user, index_page=False):
         index_page = request.method == "GET"
 
-        if index_page:
-            self.init(user)
-
         level = int(request.args["level"]) if request.args.get("level") else 1
         language = request.args.get("lang", "")
         tag = request.args.get("tag", "")
         search = request.form.get("search", request.args.get("search", ""))
+        if index_page or not self.adventures or not self.adventures.get(level):
+            self.init(user)
 
         adventures = self.adventures.get(level, [])
         # adjust available filters for the selected level.

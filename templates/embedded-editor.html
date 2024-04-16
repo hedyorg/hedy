@@ -88,10 +88,10 @@
                             </div>
                         </form>
                     </div>
-                    <div id="pygame-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99;">
+                    <div id="keybinding-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99; position: absolute; bottom: 0; width: 100%;">
                       <!--Title-->
                       <div class="flex justify-between items-center">
-                        <p class="text-2xl font-bold caption">{{_('pygame_waiting_for_input')}}</p>
+                        <p class="text-2xl font-bold caption">{{_('keybinding_waiting_for_keypress')}}</p>
                       </div>
                     </div>
                   </div>
@@ -104,7 +104,7 @@
             <div class="h-12" id="code_related_buttons">
               <div class="flex justify-between gap-2 items-start h-12 overflow-visible">
                 <div id="runButtonContainer">
-                  <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ language }}", {{_('already_program_running')|default(None)|tojson}}, "run")'>{{_('run_code_button')}} </button>
+                  <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ language }}", false, {{_('already_program_running')|default(None)|tojson}}, "run")'>{{_('run_code_button')}} </button>
                   <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
                 </div>
               </div>

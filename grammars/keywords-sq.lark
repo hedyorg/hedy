@@ -35,7 +35,7 @@ _IN: _SPACE ("në" | "in") _SPACE
 _NOT_IN: _SPACE ("jo në" | "not in") _SPACE
 _IF: ("nëse" | "if") _SPACE
 _ELSE: "ndryshe" | "else"
-_AND: _SPACE ("dhe" | "and") _SPACE
+_AND: _SPACE? ("dhe" | "and") _SPACE
 _REPEAT: ("përsërit" | "repeat") _SPACE
 _TIMES: _SPACE ("her" | "times")
 _FOR: ("për" | "for") _SPACE
@@ -44,7 +44,7 @@ _TO: _SPACE ("deri" | "to") _SPACE
 _STEP: "hap" | "step"
 _ELIF: _SPACE? ("nendryshe" | "elif") _SPACE
 _INPUT: ("hyrje" | "input")
-_OR: _SPACE ("ose" | "or") _SPACE
+_OR: _SPACE? ("ose" | "or") _SPACE
 _WHILE: ("derisa" | "while") _SPACE
 _LENGTH: "gjatësia" | "length"
 _COLOR : ("ngjyrë" | "color") _SPACE?

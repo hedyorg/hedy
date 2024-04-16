@@ -1,8 +1,4 @@
-{% if raw %}
-{% set editor_height='14rem' %}
-{% else %}
 {% set editor_height='22rem' %}
-{% endif %}
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
     <div id="editor-area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4">
 
@@ -105,7 +101,7 @@
       <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto" style="min-height: 3rem;"></div>
 
       <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
-      <div id="inline-modal" class="flex-0">
+      <div id="inline-modal" class="flex-0 absolute bottom-0 w-full z-20">
         <div id="ask-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none">
           <!--Title-->
           <div class="flex justify-between items-center">
@@ -120,10 +116,16 @@
             </div>
           </form>
         </div>
-        <div id="pygame-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99;">
+        <div id="keybinding-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99; position: absolute; bottom: 0; width: 100%;">
           <!--Title-->
           <div class="flex justify-between items-center">
-            <p class="text-2xl font-bold caption">{{_('pygame_waiting_for_input')}}</p>
+            <p class="text-2xl font-bold caption">{{_('keybinding_waiting_for_keypress')}}</p>
+          </div>
+        </div>
+        <div id="sleep-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99;">
+          <!--Title-->
+          <div class="flex justify-between items-center">
+            <p class="text-2xl font-bold caption">{{_('sleeping')}}</p>
           </div>
         </div>
       </div>
@@ -139,17 +141,22 @@
       {% endif %}
       <div class="flex justify-between gap-2 items-start h-12 overflow-visible">
         <div id="runButtonContainer">
-          <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}}, "run")'>{{_('run_code_button')}} </button>
+          <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>{{_('run_code_button')}} </button>
           <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
         </div>
+      <div id="saveMicrobitFilesContainer" {% if not microbit_feature %} class="hidden" {% endif %} >
+        <button id="runMicrobit" class="green-btn" onclick="hedyApp.saveMicrobit({{ level }});" > {{ _('Save Microbit code ') }}
+            <img src="{{ static('/images/microbit_logo_icon_248480.png') }}" style="width: 25px; height: 25px; margin-left: 1px; display: inline;" alt=""/>
+        </button>
+      </div>
         <div id="saveFilesContainer" class="hidden">
           <button id="saveFiles" class="green-btn" onclick="hedyApp.saveMachineFiles();">💾</button>
         </div>
         <div id="debug_container" class="ltr:ml-auto rtl:mr-auto">
-          <button id="debug_button" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}}, "debug")'>🐞</button>
-          <button id="debug_restart" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}}, "debug")'>🔄</button>
+          <button id="debug_button" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>🐞</button>
+          <button id="debug_restart" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>🔄</button>
           <button id="debug_stop" class="green-btn hidden" onclick="hedyApp.stopDebug()">🛑</button>
-          <button id="debug_continue" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|default(None)|tojson}}, "continue")'><div class="{% if g.dir == "rtl" %}rotate-180{% endif %}">⏩</div></button>
+          <button id="debug_continue" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "continue")'><div class="{% if g.dir == "rtl" %}rotate-180{% endif %}">⏩</div></button>
         </div>
         <button id="next_parson_button" max_exercise="{{ parsons_exercises }}" class="green-btn ltr:ml-auto rtl:mr-auto" style="display: none;">{{_('next_exercise')}}</button>
         {% if show_edit_button %}

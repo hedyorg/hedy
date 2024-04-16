@@ -1,0 +1,207 @@
+1:
+-   name: '{print}'
+    explanation: Izpišite nekaj z `{print}`.
+    demo_code: '{print} Dobrodošli v Hedy!'
+-   name: '{ask}'
+    explanation: Vprašajte kaj z `{ask}`.
+    demo_code: '{ask} Katero barvo imate najrajši?'
+-   name: '{echo}'
+    explanation: Ponovite nekaj z `{echo}`.
+    demo_code: "{ask} Katero barvo imate najrajši?\n{echo} torej je vaša najljubša barva"
+-   name: '{print} emoji-ji'
+    explanation: Izpiši emoji z `{print}`.
+    demo_code: '{print} 🙋 🌍 ❗'
+-   name: '{forward}'
+    explanation: Naredite črto z `{forward}`.
+    demo_code: '{forward} 100'
+-   name: '{turn}'
+    explanation: Obrnite želvo za risanje z `{turn}`.
+    demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
+2:
+-   name: '{is}'
+    explanation: Poimenujte besedo, ki jo boste uporabili v programu z uporabo `{is}`. Ime si lahko izberete sami.
+    demo_code: "ime {is} Hedy\n{print} dobrodošli ime"
+-   name: '{ask}'
+    explanation: Vprašajte nekaj z `{ask}`. Pozor! Odgovoru morate podati ime z `{is}`.
+    demo_code: "barva {is} {ask} Katera je vaša najljubša barva?\n{print} barva je vaša najljubša barva!"
+-   name: '{sleep}'
+    explanation: S `{sleep}`, lahko Hedy zaustavite za sekundo (ali več).
+    demo_code: "{print} Naj malo razmislim...\n{sleep}\n{print} Hmm.. Potrebujem še par sekund...\n{sleep} 2\n{print} Eureka, imam rešitev!"
+-   name: '{is} z želvo'
+    explanation: Številki dajte ime z `{is}`. Izberete lahko poljubno ime.
+    demo_code: "kot {is} 90\n{turn} kot\n{forward} 100"
+3:
+-   name: Izberite naključno
+    explanation: Izberite naključno besedo iz skupine z `{at}` in `{random}`.
+    demo_code: "živali {is} pes, mačka, kenguru\n{print} živali {at} {random}"
+-   name: '{add}'
+    explanation: '`{add}` element `{to_list}` v seznam.'
+    demo_code: "živali {is} krava, mačka\n{add} pes {to_list} živali"
+-   name: '{remove}'
+    explanation: '`{remove}` element `{from}` seznama.'
+    demo_code: "živali {is} mačka, pes, krava\n{remove} pes {from} živali"
+4:
+-   name: '{print}'
+    explanation: Izpišite natančno z uporabno navednic.
+    demo_code: "{print} 'Pozdravljeni in dobrodošli v Hedy.'"
+-   name: '{is}'
+    explanation: Dajte nekemu besedilu ime in uporabite ukaz `{print}` brez narekovajev.
+    demo_code: "ime {is} Hedy\n{print} 'moje ime je ' ime"
+-   name: '{ask}'
+    explanation: Vprašajte nekaj z `{ask}`.
+    demo_code: "barva {is} {ask} 'Katera je vaša najljubša barva?'\n{print} barva ' je vaša najljubša barva!'"
+5:
+-   name: '{print}'
+    explanation: Izpišite natančno z uporabo narekovajev.
+    demo_code: "{print} 'Pozdravljeni, dobrodošli v Hedy.'"
+-   name: '{ask}'
+    explanation: Vprašajte nekaj z ukazom `{ask}`.
+    demo_code: "barva {is} {ask} 'Katera je vaša najljubša barva?'\n{print} barva ' je vaša najljubša barva!'"
+-   name: '{if}'
+    explanation: Naredite izbiro z ukazom `{if}`.
+    demo_code: "barva {is} {ask} 'Katera je vaša najljubša barva?'\n{if} barva {is} zlena {print} 'lepo!' {else} {print} 'eh...'"
+-   name: '{if} z želvo'
+    explanation: Naredite izbiro z ukazom `{if}`.
+    demo_code: "odgovor {is} {ask} ' Kako daleč naj hodim?'\n{if} odgovor {is} daleč {forward} 100 {else} {forward} 5"
+-   name: '{in}'
+    explanation: Elemente preverite z ukazom `{in}`.
+    demo_code: "lepe_barve {is} zelena, rumena\nbarva {is} {ask} 'Katera je vaša najljubša barva?'\n{if} barva {in} lepe_barve  {print} 'Lepo!' {else} {print} 'eh...'"
+-   name: '{pressed}'
+    explanation: Preverite če je dana tipka pritisnjena na tipkovnici `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'Pritisnili ste A!' {else} {print} 'Pritisnili ste neko drugo tipko!'"
+6:
+-   name: '{print}'
+    explanation: Natančno natisnite z narekovaji.
+    demo_code: "{print} '5 krat 5 je ' 5 * 5"
+-   name: '{ask}'
+    explanation: Zahtevajte izračun in preverite, ali je pravilen.
+    demo_code: "odgovor = {ask} 'Koliko je 10 plus 10?'\n{if} odgovor {is} 20 {print} 'Pravilno!' {else} {print} 'Ups...'"
+-   name: '`{ask}` in `{if}` z želvo'
+    explanation: Uporabnike vprašajte, koliko kotov želijo.
+    demo_code: "koti = {ask} 'Koliko kotov?'\nkot = 360 / koti\n{forward} 50"
+7:
+-   name: '{print}'
+    explanation: Izpišite natančno z narekovaji.
+    demo_code: "{print} 'Pozdravljeni, dobrodošli v Hedy.'"
+-   name: '{ask}'
+    explanation: Vprašajte nekaj z ukazom `{ask}`.
+    demo_code: "barva = {ask} 'Katera je vaša najljubša barva?'\n{print} barva ' je vaša najljubša barva!'"
+-   name: '{if}'
+    explanation: Izberite z ukazom `{if}`.
+    demo_code: "barva = {ask} 'Katera je vaša najljubša barva?'\n{if} barva {is} zelena {print} 'Lepo!' {else} {print} 'Eh...'"
+-   name: '{repeat} z želvo'
+    explanation: Ponovite vrstico kode z ukazom `{repeat}`.
+    demo_code: '{repeat} 3 {times} {forward} 10'
+8:
+-   name: '{print}'
+    explanation: Nekaj izpišite. Pri dobesednem izpisovanju ne pozabite uporabiti narekovajev.
+    demo_code: "{print} '5 krat 5 je ' 5 * 5"
+-   name: '{ask}'
+    explanation: Vprašajte za odgovor na vsoto izračuna in preverite, ali je pravilen. Zdaj lahko natisnemo 2 vrstici.
+    demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\n{else}\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
+-   name: '{repeat} z želvo'
+    explanation: Ponovite več vrstic.
+    demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+-   name: '{pressed}'
+    explanation: Preveri, ali je dana tipka na tipkovnici `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'Pritisnili ste A!'\n{else}\n    {print} 'Pritisnili ste drugo tipko!'"
+9:
+-   name: '{if} z več vrsticami'
+    explanation: Odgovor na vsoto vprašanj z `{ask}` in preverite, ali je pravilen. Zdaj izpišemo dve vrstici.
+    demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20\n    {print} 'Well done!!'\n    {print} 'The answer is indeed' answer\n{else}\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
+-   name: '{repeat} z želvo'
+    explanation: Ponovite več vrstic.
+    demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+10:
+-   name: '{print}'
+    explanation: Nekaj natisnite. Pri dobesednem tiskanju ne pozabite uporabiti narekovajev.
+    demo_code: "{print} '5 krat 5 je ' 5 * 5"
+-   name: '{for} s seznamom'
+    explanation: Izpišite vse stvari na seznamu.
+    demo_code: "živali {is} pes, mačka, ribica\n{for} žival {in} živali\n  {print} 'I love ' žival"
+11:
+-   name: '{for} zanka'
+    explanation: Zanko `{for}` lahko uporabimo skupaj z `{range}`.
+    demo_code: "{for} števec {in} {range} 1 {to} 5\n    {print} števec"
+-   name: '{ask}'
+    explanation: Vprašajte za odgovor na vsoto in preverite, ali je pravilen. Zdaj lahko natisnemo 2 vrstici.
+    demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\n{else}\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
+12:
+-   name: plavajoče neposredno
+    explanation: Decimalne številke.
+    demo_code: "{print} 'Calculate away!'\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5"
+-   name: določi besedilo
+    explanation: Besedilo z narekovaji za `=`
+    demo_code: "ime = 'Hedy Robot'\n{print} 'Pozdravljen ' ime"
+-   name: narekovaji za primerjavo `{if}`
+    explanation: Besedilo v narekovajih za `{if}`.
+    demo_code: "ime = {ask} 'Kdo si ti?'\n{if} ime= 'Hedy'\n    {print} 'Živijo!'"
+-   name: narekovaji na seznamu
+    explanation: Seznam z narekovaji.
+    demo_code: "superjunaki = 'Iron Man', 'Batman', 'Superman'\n{print} superjunaki {at} {random}"
+13:
+-   name: '{and}'
+    explanation: Oba dela morata biti praivlna.
+    demo_code: "odgovor1 = {ask} 'Koliko je 3+2?'\nodgovor2 = {ask} 'Koliko je 2+2?'\n{if} odgovor1 {is} 5 {and} odgovor2 {is} 4\n     {print} 'Oba odgovora sta pravilna!'\n{else}\n     {print} 'Vsaj en odgovor je napačen!'"
+-   name: '{or}'
+    explanation: Vsaj 1 od obeh delov mora biti pravilen. Če je oboje pravilno, je tudi v redu.
+    demo_code: "odgovor1 = {ask} 'Koliko is 3+2?'\nodgovor2 = {ask} 'Koliko is 2+2?'\n{if} odgovor1 {is} 5 {or} odgovor2 {is} 4\n    {print} 'Vsaj en odgovor je pravilen!'\n{else}\n    {print} 'Oba odgovora sta nepravilna!'"
+14:
+-   name: Manjši
+    explanation: Za preverjanje, ali je prvo število manjše od drugega, uporabimo `<`.
+    demo_code: "starost = {ask} 'Koliko ste stari?'\n{if} starost < 13\n    {print} 'Mlajši ste od mene!'"
+-   name: Večje
+    explanation: Za preverjanje, ali je prvo število večje od drugega, uporabimo `>`.
+    demo_code: "starost = {ask} 'Koliko ste stari?'\n{if} starost > 13\n    {print} 'Starejši ste od mene!'"
+-   name: Je enako
+    explanation: Za preverjanje, ali sta dve vrednosti enaki, uporabljamo `==`.
+    demo_code: "odgovor = {ask} 'Koliko je 5 * 5?'\n{if} odgovor == 25\n    {print} 'Pravilno!'"
+-   name: Ni enako
+    explanation: Za preverjanje, ali dve vrednosti nista enaki, uporabljamo `!=`.
+    demo_code: "odgovor = {ask} 'Koliko je 5 * 5?'\n{if} odgovor != 25\n    {print} 'To ni pravilno!'"
+-   name: Manj ali enako
+    explanation: Ali je prva vrednost manjša ali enaka drugi preverimo z izrazom `<=`.
+    demo_code: "starost = {ask} 'Koliko ste stari?'\n{if} starost <= 12\n    {print} 'Mlajši ste od mene!'"
+-   name: Enako ali več
+    explanation: Ali je prva vrednost večja ali enaka drugi preverimo z izrazom `>=`.
+    demo_code: "starost = {ask} 'Koliko ste stari?'\n{if} starost >= 14\n    {print} 'Starejši ste od mene!'"
+15:
+-   name: '{while}'
+    explanation: Zanko `{while}` lahko uporabimo skupaj z ni enako.
+    demo_code: "odgovor = 0\n{while} odgovor != 25\n    odgovor = {ask} 'Koliko je 5 x 5?'\n{print} 'Podan je bil nepravilen odgovor'"
+-   name: Manjši {while}
+    explanation: Zanko `{while}` lahko uporabimo tudi z `<` ali `>`.
+    demo_code: "števec = 1\n{while} števec < 3\n    {print} 'Ponovimo to še ' 3 - števec '-krat'\n    števec = števec + 1\n{print} 'Pa smo opravili'"
+16:
+-   name: oglati oklepaji
+    explanation: Seznami z oglatimi oklepaji.
+    demo_code: "sadje = ['jabolko', 'banana', 'češnja']\n{print} sadje"
+-   name: Pridobite predmet s seznama
+    explanation: Za pridobitev predmeta s seznama uporabimo [število], tako da sadje[1] pomeni, da dobimo prvo sadje s seznama!
+    demo_code: "sadje = ['banana', 'jabolko', 'češnja']\nprvo_sadje = sadje[1]\n{print} prvo_sadje"
+-   name: Izbrite naključni predmet s seznama
+    explanation: Za izbiro naključnega predmeta s seznama uporabimo [{random}]. Torej, sadje[{random}] pomeni, da izberete naključno sadje s seznama!
+    demo_code: "sadje = ['banana', 'jabolko', 'češnja']\nnaključno_sadje = sadje[{random}]\n{print} naključno_sadje"
+17:
+-   name: '{elif}'
+    explanation: '`{elif}`'
+    demo_code: "a = 2\n{if} a == 1:\n    {print} 'a je 1'\n{elif} a == 2:\n    {print} 'a je 2'\n{else}:\n    {print} 'a ni ne 1, ne 2'"
+-   name: '{print}'
+    explanation: Ko uporabimo zanko `{for}`, moramo za ukazom `{for}` postaviti `:`!
+    demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Pripravljeni ali ne, prihajam!'"
+-   name: '{if}'
+    explanation: Enako moramo storiti z vsemi našimi `{if}` stavki .
+    demo_code: "barva = {ask} 'Katera je vaša najljubša barva?'\n{if} barva == 'zelena':\n     {print} 'Vaša najljubša barva je zelena'\n{else}:\n     {print} 'Tvoja najljubša barva ni zelena'"
+18:
+-   name: '{print}'
+    explanation: Za ukazom `{print}` morate uporabiti oklepaje.
+    demo_code: "{print}('hi!')"
+-   name: '{range}'
+    explanation: Za ukazom `{range}` morate uporabiti oklepaje.
+    demo_code: "{for} i {in} {range} (1,10):\n    {print}('Živijo, krat ', i)"
+-   name: '{print} s spremenljivko'
+    explanation: Pri ukazu `{print}` morate uporabiti oklepaje in vejice, če natisnete več elementov.
+    demo_code: "ime = 'Hedy'\n{print}('Moje ime je ', ime)"
+-   name: vprašajte nekaj z ukazom {input}
+    explanation: Uporabi `{input}` namesto `{ask}` da nekaj vprašate.
+    demo_code: "ime = {input}('Kako vam je ime?')\n{print}('Torej, ime vam je ', ime)"

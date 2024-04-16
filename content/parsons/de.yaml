@@ -37,17 +37,8 @@ levels:
                 {print} Danke für deinen Einkauf bei uns!
     3:
         1:
-            story: |-
-                Das neue Schuljahr in Hogwarts beginnt!
-                Es ist die Aufgabe des Sortierhutes, dich in eines der Häuser zu sortieren.
-                In welches Haus wirst du einsortiert werden? Bist du ein Gryffindor, Hufflepuff, Ravenclaw oder Slytherin.
-                Bevor der Sortierhut dein Haus verrät, kannst du ihm sagen, dass er keines der Häuser auswählen soll.
-            code: |-
-                {print} Der Sortierhut ist bereit dich in eines der Hogwarts Häuser einzuteilen.
-                häuser {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
-                abneigung {is} {ask} Gibt es Häuser denen du nicht zugeteilt werden möchtest?
-                {remove} abneigung {from} häuser
-                {print} Wohl nicht abneigung, was? Besser ein... houses {at} {random}
+            story: "The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into? Are you a Gryffindor, Hufflepuff, Ravenclaw or Slytherin.\nBefore the sorting hat reveals your house, you can tell it to not pick one of the houses."
+            code: "{print} The sorting hat is ready to sort you into a Hogwarts house.\nhouses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin\ndislike {is} {ask} Are there any houses you do not want to be part of?\n{remove} dislike {from} houses\n{print} Not dislike eh? Better be... houses {at} {random}"
         2:
             story: Erstelle ein Programm, das eine zufällige Mahlzeit für dich auswählt. Erstelle eine Essensliste und eine Liste von Garnierungen und lasse das Programm entscheiden, was du essen wirst!
             code: |-

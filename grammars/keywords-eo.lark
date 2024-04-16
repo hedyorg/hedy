@@ -35,7 +35,7 @@ _IN: _SPACE ("en" | "in") _SPACE
 _NOT_IN: _SPACE ("not in" | "not in") _SPACE
 _IF: ("se" | "if") _SPACE
 _ELSE: "alie" | "else"
-_AND: _SPACE ("kaj" | "and") _SPACE
+_AND: _SPACE? ("kaj" | "and") _SPACE
 _REPEAT: ("ripetu" | "repeat") _SPACE
 _TIMES: _SPACE ("fojojn" | "times")
 _FOR: ("por" | "for") _SPACE
@@ -44,7 +44,7 @@ _TO: _SPACE ("ĝis" | "ghis" | "gxis" | "^gis" | "g^is" | "to") _SPACE
 _STEP: "paŝo" | "pasho" | "pasxo" | "pa^so" | "pas^o" | "step"
 _ELIF: _SPACE? ("alie se" | "elif") _SPACE
 _INPUT: ("enigu" | "input")
-_OR: _SPACE ("aŭ" | "au" | "aux" | "or") _SPACE
+_OR: _SPACE? ("aŭ" | "au" | "aux" | "or") _SPACE
 _WHILE: ("dum" | "while") _SPACE
 _LENGTH: "longo" | "length"
 _COLOR : ("koloro" | "color") _SPACE?

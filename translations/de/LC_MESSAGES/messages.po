@@ -8,21 +8,22 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2000-01-01 00:00+0000\n"
-"Last-Translator: Someone <someone@example.com>\n"
-"Language: de\n"
+"PO-Revision-Date: 2024-04-09 14:41+0000\n"
+"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: de <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.5-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
 msgstr "Du hast versucht die Variable {name} in Zeile {access_line_number} zu benutzen, aber du hast sie erst in Zeile {definition_line_number} gesetzt. Setze eine Variable bevor du sie benutzt."
 
 msgid "Cyclic Var Definition"
-msgstr "Der Name {variable} muss gesetzt werden, bevor du ihn auf der rechten Seite des {is} Befehls verwenden kannst."
+msgstr "Der Name `{variable}` muss gesetzt werden, bevor du ihn auf der rechten Seite des `{is}` Befehls verwenden kannst."
 
 #, fuzzy
 msgid "Function Undefined"
@@ -32,58 +33,55 @@ msgid "Has Blanks"
 msgstr "Dein Befehl is unvollständig. Er enthält Leerzeichen die du mit Befehlen ersetzen musst."
 
 msgid "Incomplete"
-msgstr "Hoppla! Du hast ein Programm-Stück vergessen! In Zeile {line_number}, musst du nach {incomplete_command} noch Text eingeben."
+msgstr "Hoppla! Du hast ein Programm-Stück vergessen! In Zeile {line_number}, musst du nach `{incomplete_command}` noch Text eingeben."
 
 msgid "Incomplete Repeat"
-msgstr "Es sieht so aus also ob du vergessen hast unter deinen {repeat} Befehl auf Zeile {line_number} einen Befehl zu schreiben."
+msgstr "Es sieht so aus also ob du vergessen hast unter deinen `{repeat}` Befehl auf Zeile {line_number} einen Befehl zu schreiben."
 
 msgid "Invalid"
-msgstr "{invalid_command} ist kein Hedy-Level-{level}-Befehl. Meintest du {guessed_command}?"
+msgstr "`{invalid_command}` ist kein Hedy-Level-{level}-Befehl. Meintest du `{guessed_command}`?"
 
 msgid "Invalid Argument"
-msgstr "Du kannst den Befehl {command} nicht mit dem Argument {invalid_argument} benutzen. Ändere {invalid_argument} zu einem erlaubten Typ von {allowed_types}."
+msgstr "Du kannst den Befehl `{command}` nicht mit dem Argument `{invalid_argument}` benutzen. Ändere `{invalid_argument}` zu einem erlaubten Typ von {allowed_types}."
 
 msgid "Invalid Argument Type"
-msgstr "Du kannst den Befehl {command} nicht mit dem Argument {invalid_argument} benutzen weil es ein {invalid_type} ist. Ändere {invalid_argument} zu einem erlaubten Typ von {allowed_types}."
+msgstr "Du kannst den Befehl `{command}` nicht mit dem Argument `{invalid_argument}` benutzen weil es ein {invalid_type} ist. Ändere `{invalid_argument}` zu einem erlaubten Typ von {allowed_types}."
 
 msgid "Invalid At Command"
-msgstr "Der {at} Befehl darf ab Level 16 nicht mehr verwendet werden. Du kannst eckige Klammern benutzen, um ein Element aus einer Liste zu verwenden, zum Beispiel `freunde[i]`, `glückszahlen[{random}]`."
+msgstr "Der `{command}` Befehl darf ab Level 16 nicht mehr verwendet werden. Du kannst eckige Klammern benutzen, um ein Element aus einer Liste zu verwenden, zum Beispiel `freunde[i]`, `glückszahlen[{random}]`."
 
 msgid "Invalid Space"
 msgstr "Hoppla! Du hast Zeile {line_number} mit einem Leerzeichen begonnen. Leerzeichen bringen Computer durcheinander. Kannst du es entfernen?"
 
 msgid "Invalid Type Combination"
-msgstr "Du kannst die Argumente {invalid_argument} und {invalid_argument_2} nicht in {command} verwenden weil das eine ein {invalid_type} und das andere ein {invalid_type_2} ist. Ändere {invalid_argument} zu {invalid_type_2} or {invalid_argument_2} zu {invalid_type} und versuche ob es funktioniert."
-
-msgid "Locked Language Feature"
-msgstr "Du benutzt {concept}! Das ist toll, aber {concept} ist noch nicht freigeschaltet! Es wird in einem späteren Level freigeschaltet."
+msgstr "Du kannst die Argumente `{invalid_argument}` und `{invalid_argument_2}` nicht in `{command}` verwenden weil das eine ein {invalid_type} und das andere ein {invalid_type_2} ist. Ändere `{invalid_argument}` zu {invalid_type_2} or `{invalid_argument_2}` zu {invalid_type} und versuche ob es funktioniert."
 
 msgid "Lonely Echo"
-msgstr "Du hast ein {echo} vor einem {ask} verwendet, oder ein {echo} ohne {ask}. Benutze zuerst ein {ask} um eine Eingabe zu bekommen, danach {echo}."
+msgstr "Du hast ein `{echo}` vor einem `{ask}` verwendet, oder ein `{echo}` ohne `{ask}`. Benutze zuerst ein `{ask}` um eine Eingabe zu bekommen, danach `{echo}`."
 
 msgid "Lonely Text"
 msgstr "Es sieht so aus als ob du vergessen hast einen Befehl für deinen Text in Zeile {line_number} zu verwenden"
 
 #, fuzzy
 msgid "Missing Additional Command"
-msgstr "It looks like you forgot to complete writing {command} on line {line_number}."
+msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
 
 msgid "Missing Command"
 msgstr "Es sieht so aus als hättest du einen Befehl in Zeile {line_number} vergessen."
 
 msgid "Missing Inner Command"
-msgstr "Es sieht so aus als hättest du vergessen, den {command}- Ausdruck, den du in Zeile {line_number} benutzt hast, mit einem Befehl zu benutzen."
+msgstr "Es sieht so aus als hättest du vergessen, den `{command}`- Ausdruck, den du in Zeile {line_number} benutzt hast, mit einem Befehl zu benutzen."
 
 msgid "Missing Square Brackets"
-msgstr "It looks like you forgot to use square brackets [] around the list you were creating on line {line_number}."
+msgstr "It looks like you forgot to use square brackets `[]` around the list you were creating on line {line_number}."
 
 #, fuzzy
 msgid "Missing Variable"
-msgstr "It looks like your {command} is missing a variable at the start of the line."
+msgstr "It looks like your `{command}` is missing a variable at the start of the line."
 
 #, fuzzy
 msgid "Misspelled At Command"
-msgstr "It looks like you might have misspelled the {command} command, instead you wrote {invalid_argument} in line {line_number}."
+msgstr "It looks like you might have misspelled the `{command}` command, instead you wrote `{invalid_argument}` in line {line_number}."
 
 msgid "No Indentation"
 msgstr "Du hast zu wenige Leerzeichen verwendet in Zeile {line_number}. Du hast {leading_spaces} zu Anfang verwendet, das ist zu wenig. Starte jeden neuen Block mit {indent_size} Leerzeichen mehr als in der Zeile zuvor."
@@ -93,41 +91,63 @@ msgid "Non Decimal Variable"
 msgstr "At line {line_number}, you might have tried using a number which Hedy does not like very much! Try changing it to a decimal number like 2."
 
 msgid "Parse"
-msgstr "Dein Programm ist keine gültige Hedy-Sprache. In Zeile {location[0]} an Position {location[1]} ist ein kleiner Fehler. Du hast {character_found} geschrieben, aber das ist nicht erlaubt."
+msgstr "Dein Programm ist keine gültige Hedy-Sprache. In Zeile {location[0]} an Position {location[1]} ist ein kleiner Fehler. Du hast `{character_found}` geschrieben, aber das ist nicht erlaubt."
 
 msgid "Pressit Missing Else"
-msgstr "Du hast vergessen hinzuzufügen, was passiert, wenn du eine andere Taste drückst, füge ein {else} zu deinem Code hinzu"
+msgstr "Du hast vergessen hinzuzufügen, was passiert, wenn du eine andere Taste drückst, füge ein `{else}` zu deinem Code hinzu"
+
+msgid "Runtime Index Error"
+msgstr "Du hast versucht auf die Liste {name} zuzugreifen, aber sie ist entweder leer oder der Index ist nicht drin."
+
+#, fuzzy
+msgid "Runtime Value Error"
+msgstr "While running your program the command `{command}` received the value `{value}` which is not allowed. {tip}."
+
+msgid "Runtime Values Error"
+msgstr "While running your program the command `{command}` received the values `{value}` and `{value}` which are not allowed. {tip}."
+
+#, fuzzy
+msgid "Save Microbit code "
+msgstr "Save Microbit code"
 
 msgid "Too Big"
 msgstr "Wow! Dein Programm hat beeindruckende {lines_of_code} Befehlszeilen! Aber wir können höchstens {max_lines} Befehlszeilen verarbeiten in diesem Level. Verkleinere dein Programm und versuche es nochmal."
+
+#, fuzzy
+msgid "Too Few Indents"
+msgstr "You used too few leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too few."
+
+#, fuzzy
+msgid "Too Many Indents"
+msgstr "You used too many leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too many."
 
 msgid "Unexpected Indentation"
 msgstr "Du hast zu viele Leerzeichen verwendet in Zeile {line_number}. Du hast {leading_spaces} zu Anfang verwendet, das ist zu viel. Starte jeden neuen Block mit {indent_size} Leerzeichen mehr als in der Zeile zuvor."
 
 msgid "Unquoted Assignment"
-msgstr "Ab diesem Level musst du rechts neben einem {is} Befehl den Text in einfache Anführungszeichen setzen. Du hast das für den Text {text} vergessen."
+msgstr "Ab diesem Level musst du rechts neben einem `{is}` Befehl den Text in einfache Anführungszeichen setzen. Du hast das für den Text {text} vergessen."
 
 msgid "Unquoted Equality Check"
 msgstr "Wenn Du prüfen willst, ob eine Variable gleich mehreren Wörtern ist, musst Du die Wörter in Anführungszeichen setzen!"
 
 msgid "Unquoted Text"
-msgstr "Achtung. Wenn du etwas {ask} oder {print}, sollte der Text mit einem Anführungszeichen beginnen und enden. Du hast beim Text {unquotedtext} etwas vergessen."
+msgstr "Achtung. Wenn du etwas `{ask}` oder `{print}`, sollte der Text mit einem Anführungszeichen beginnen und enden. Du hast beim Text {unquotedtext} etwas vergessen."
 
 msgid "Unsupported Float"
-msgstr "Nicht-ganze Zahlen werden noch nicht unterstützt, sie werden es aber in ein paar Leveln. Für den Moment ändere {value} in eine ganze Zahl um."
+msgstr "Nicht-ganze Zahlen werden noch nicht unterstützt, sie werden es aber in ein paar Leveln. Für den Moment ändere `{value}` in eine ganze Zahl um."
 
 msgid "Unsupported String Value"
-msgstr "Text-Werte dürfen kein {invalid_value} enthalten."
+msgstr "Text-Werte dürfen kein `{invalid_value}` enthalten."
 
 #, fuzzy
 msgid "Unused Variable"
 msgstr "You defined the variable {variable_name} on line {line_number}, but you did not use it."
 
 msgid "Var Undefined"
-msgstr "Du hast versucht {name} auszugeben, aber du hast es nicht angelegt. Es ist auch möglich, dass du versucht hast, {name} zu nutzen, aber die Anführungszeichen vergessen hast."
+msgstr "Du hast versucht `{name}` auszugeben, aber du hast es nicht angelegt. Es ist auch möglich, dass du versucht hast, `{name}` zu nutzen, aber die Anführungszeichen vergessen hast."
 
 msgid "Wrong Level"
-msgstr "Das war richtige Hedy-Sprache, aber nicht im richtigen Level. Du hast Sprachelement {offending_keyword} für Level {working_level} verwendet. Tip: {tip}"
+msgstr "Das war richtige Hedy-Sprache, aber nicht im richtigen Level. Du hast Sprachelement `{offending_keyword}` für Level {working_level} verwendet. Tip: {tip}"
 
 #, fuzzy
 msgid "Wrong Number of Arguments"
@@ -154,6 +174,10 @@ msgstr "Zielerreichungsprüfsymbol"
 
 msgid "achievements_logo_alt"
 msgstr "Errungenschaften Logo"
+
+#, fuzzy
+msgid "actions"
+msgstr "Actions"
 
 #, fuzzy
 msgid "add"
@@ -192,6 +216,7 @@ msgstr "Du hast bereits ein Abenteuer mit diesem Namen."
 msgid "adventure_empty"
 msgstr "Du hast keinen Abenteuernamen eingegeben!"
 
+#, fuzzy
 msgid "adventure_exp_3"
 msgstr "Stelle sicher, dass du Schlüsselwörter immer mit { } einschließt, dann werden sie korrekt erkannt. Du kannst den Vorschau-Knopf verwenden, um eine gestylte Version deines Abenteuers zu sehen. Um das Abenteuer auf einer eigenen Seite zu sehen, wähle \"view\" von der Lehrerseite."
 
@@ -216,6 +241,10 @@ msgstr "Ich stimme zu, dass mein Abenteuer mglw. auf Hedy veröffentlicht wird."
 
 msgid "adventure_updated"
 msgstr "Das Abenteuer wurde geupdatet!"
+
+#, fuzzy
+msgid "adventures"
+msgstr "Adventures"
 
 #, fuzzy
 msgid "adventures_info"
@@ -267,19 +296,21 @@ msgid "are_you_sure"
 msgstr "Bist du sicher? Du kannst diese Aktion nicht rückgängig machen."
 
 msgid "ask_needs_var"
-msgstr "Ab Level 2 muss {ask} mit einer Variable benutzt werden. Beispiel: Name {is} {ask} Wie heißt du?"
+msgstr "Ab Level 2 muss `{ask}` mit einer Variable benutzt werden. Beispiel: Name `{is}` `{ask}` Wie heißt du?"
 
-msgid "back_to_class"
-msgstr "Gehe zurück zur Klasse"
-
-msgid "back_to_teachers_page"
-msgstr "Zurück zur Lehrerseite"
+#, fuzzy
+msgid "available_in"
+msgstr "Available in:"
 
 msgid "become_a_sponsor"
 msgstr "Werde ein Sponsor"
 
 msgid "birth_year"
 msgstr "Geburtjahr"
+
+#, fuzzy
+msgid "bug"
+msgstr "Bug"
 
 msgid "by"
 msgstr "von"
@@ -289,13 +320,6 @@ msgstr "Abbrechen"
 
 msgid "cant_parse_exception"
 msgstr "Das Programm konnte nicht analysiert werden"
-
-msgid "catch_index_exception"
-msgstr "Du hast versucht auf die Liste {list_name} zuzugreifen, aber sie ist entweder leer oder der Index ist nicht drin."
-
-#, fuzzy
-msgid "catch_value_exception"
-msgstr "While running your program the command {command} received the value {value} which is not allowed. {suggestion}."
 
 msgid "certificate"
 msgstr "Abschlusszertifikat"
@@ -356,6 +380,10 @@ msgstr "What is the gender balance in your class?"
 #, fuzzy
 msgid "class_survey_question4"
 msgstr "What distinguishes your students from others?"
+
+#, fuzzy
+msgid "classes"
+msgstr "Classes"
 
 #, fuzzy
 msgid "classes_info"
@@ -472,6 +500,10 @@ msgstr "Derzeitiges Passwort"
 msgid "customization_deleted"
 msgstr "Anpassungen erfolgreich gelöscht."
 
+#, fuzzy
+msgid "customize"
+msgstr "Customize"
+
 msgid "customize_adventure"
 msgstr "Modifiziere Abenteuer"
 
@@ -563,7 +595,7 @@ msgid "echo_and_ask_mismatch_exception"
 msgstr "Echo and ask mismatch"
 
 msgid "echo_out"
-msgstr "Ab Level 2 wird {echo} nicht mehr gebraucht. Du kannst jetzt eine Antwort mit {ask} und {print} wiedergeben. Beispiel: Name {is} {ask} Wie heißt Du? {print} Hallo Name"
+msgstr "Ab Level 2 wird `{echo}` nicht mehr gebraucht. Du kannst jetzt eine Antwort mit `{ask}` und `{print}` wiedergeben. Beispiel: Name `{is}` `{ask}` Wie heißt Du? `{print}` Hallo Name"
 
 #, fuzzy
 msgid "edit_adventure"
@@ -645,6 +677,26 @@ msgstr "Dein gewähltes Lieblingsprogramm ist ungültig."
 msgid "favourite_success"
 msgstr "Dein Programm wurde als Favorit gesetzt."
 
+#, fuzzy
+msgid "feature"
+msgstr "Feature"
+
+#, fuzzy
+msgid "feedback"
+msgstr "Feedback"
+
+#, fuzzy
+msgid "feedback_message_error"
+msgstr "Something went wrong, please try again later."
+
+#, fuzzy
+msgid "feedback_message_success"
+msgstr "Thank you, we recieved your feedback and will contact you if needed."
+
+#, fuzzy
+msgid "feedback_modal_message"
+msgstr "Please send us a message with a category. We appreciate your help to improve Hedy!"
+
 msgid "female"
 msgstr "weiblich"
 
@@ -690,6 +742,10 @@ msgstr "Hol dir dein Zertifikat!"
 msgid "give_link_to_teacher"
 msgstr "Gib den folgenden Link an deine Lehrerin oder deinen Lehrer weiter:"
 
+#, fuzzy
+msgid "go_back"
+msgstr "Go back"
+
 msgid "go_back_to_main"
 msgstr "Zurück zur Hauptseite"
 
@@ -722,6 +778,10 @@ msgstr "Hedy Errungenschaften"
 
 msgid "hedy_choice_title"
 msgstr "Hedys Auswahl"
+
+#, fuzzy
+msgid "hedy_introduction_slides"
+msgstr "Hedy Introduction Slides"
 
 msgid "hedy_logo_alt"
 msgstr "Hedy Logo"
@@ -788,7 +848,7 @@ msgid "indentation_exception"
 msgstr "Incorrect Indentation"
 
 msgid "input"
-msgstr "Eingabe aus {ask}"
+msgstr "Eingabe aus `{ask}`"
 
 msgid "integer"
 msgstr "eine ganze Zahl"
@@ -845,6 +905,9 @@ msgstr "Klasse beitreten"
 
 msgid "join_prompt"
 msgstr "Zum Beitreten benötigst du ein Konto. Möchtest du dich registrieren?"
+
+msgid "keybinding_waiting_for_keypress"
+msgstr "Warte auf Knopfdruck..."
 
 msgid "keyword_language_invalid"
 msgstr "Bitte wähle eine gültige Schlüsselwortsprache (wähle Englisch oder deine eigene Sprache)."
@@ -1025,6 +1088,10 @@ msgstr "Verpflichtender Entwicklermodus"
 msgid "more_options"
 msgstr "More options"
 
+#, fuzzy
+msgid "multiple_levels_warning"
+msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
+
 msgid "my_account"
 msgstr "Mein Konto"
 
@@ -1057,9 +1124,6 @@ msgstr "Mehr Infos"
 
 msgid "nav_start"
 msgstr "Willkommen"
-
-msgid "nested blocks"
-msgstr "ein Block in einem Block"
 
 msgid "new_password"
 msgstr "Neues Passwort"
@@ -1096,7 +1160,7 @@ msgid "no_certificate"
 msgstr "Dieser Nutzer hat noch kein Hedy Abschlusszertifikat"
 
 msgid "no_more_flat_if"
-msgstr "Ab Level 8 muss die Zeile nach {if} mit 4 Leerzeichen beginnen."
+msgstr "Ab Level 8 muss die Zeile nach `{if}` mit 4 Leerzeichen beginnen."
 
 #, fuzzy
 msgid "no_programs"
@@ -1341,6 +1405,14 @@ msgstr "Öffentlich"
 msgid "public_adventures"
 msgstr "Browse public adventures"
 
+#, fuzzy
+msgid "public_content"
+msgstr "Public content"
+
+#, fuzzy
+msgid "public_content_info"
+msgstr "You can also look for public adventures and use them as an example."
+
 msgid "public_invalid"
 msgstr "Diese Einverständnisauswahl ist ungültig"
 
@@ -1352,9 +1424,6 @@ msgstr "Wenn ich dieses Kästchen auswähle, mache ich mein Profil für alle sic
 
 msgid "public_profile_updated"
 msgstr "Öffentliches Profil wurde aktualisiert. Die Seite wird neu geladen."
-
-msgid "pygame_waiting_for_input"
-msgstr "Warte auf Knopfdruck..."
 
 msgid "question mark"
 msgstr "ein Fragezeichen"
@@ -1404,7 +1473,7 @@ msgstr "Repariere Programm Symbol"
 
 #, fuzzy
 msgid "repeat_dep"
-msgstr "Starting in level 8, {repeat} needs to be used with indentation. You can see examples on the {repeat} tab in level 8."
+msgstr "Starting in level 8, `{repeat}` needs to be used with indentation. You can see examples on the `{repeat}` tab in level 8."
 
 msgid "repeat_match_password"
 msgstr "Das wiederholte Passwort stimmt nicht mit dem ersten überein."
@@ -1465,9 +1534,6 @@ msgstr "Programm ausführen"
 #, fuzzy
 msgid "runs_over_time"
 msgstr "Runs over time"
-
-msgid "save"
-msgstr "Speichern"
 
 msgid "save_parse_warning"
 msgstr "Dieses Programm enthält einen Fehler, bist du dir sicher, dass du es speichern möchtest?"
@@ -1562,8 +1628,16 @@ msgid "slash"
 msgstr "ein Schrägstrich"
 
 #, fuzzy
+msgid "sleeping"
+msgstr "Sleeping..."
+
+#, fuzzy
 msgid "slides"
 msgstr "Slides"
+
+#, fuzzy
+msgid "slides_for_level"
+msgstr "Slides for level"
 
 #, fuzzy
 msgid "slides_info"
@@ -1679,6 +1753,9 @@ msgstr "Use a note between C0 and B9 or a number between 1 and 70"
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
 
+msgid "suggestion_numbers_or_strings"
+msgstr "Try changing the values to be all text or all numbers"
+
 msgid "surname"
 msgstr "Vorname"
 
@@ -1749,8 +1826,8 @@ msgstr ""
 "\n"
 "Aber manchmal möchte ich ein Stück Code wie folgt zeigen:\n"
 "<pre>\n"
-"{ask} Wie ist dein Name?\n"
-"{echo} also ist dein Name \n"
+"ask Wie ist dein Name?\n"
+"echo also ist dein Name \n"
 "</pre>"
 
 msgid "this_turns_in_assignment"
@@ -1859,6 +1936,14 @@ msgstr "Tutorial-Schritt nicht gefunden"
 msgid "unauthorized"
 msgstr "Du hast keine Zugriffsrechte für diese Seite"
 
+#, fuzzy
+msgid "unfavourite_confirm"
+msgstr "Are you sure you want to unfavourite this program?"
+
+#, fuzzy
+msgid "unfavourite_success"
+msgstr "Your program is unfavourited."
+
 msgid "unique_usernames"
 msgstr "Alle Nutzernamen müssen einzigartig sein."
 
@@ -1868,11 +1953,20 @@ msgstr "Schalte Level.Grenzen frei"
 msgid "unsaved_class_changes"
 msgstr "Es gibt ungespeicherte Änderungen, bist du dir sicher, dass du diese Seite verlassen möchtest?"
 
+#, fuzzy
+msgid "unsubmit_program"
+msgstr "Unsubmit program"
+
+#, fuzzy
+msgid "unsubmit_warning"
+msgstr "Are you sure you want to unsubmit this program?"
+
+#, fuzzy
+msgid "unsubmitted"
+msgstr "Unsubmitted"
+
 msgid "update_adventure_prompt"
 msgstr "Bist du sicher, dass du dieses Abenteuer updaten möchtest?"
-
-msgid "update_profile"
-msgstr "Aktualisiere dein Profil"
 
 msgid "update_public"
 msgstr "Öffentliches Profil-Update"
@@ -1886,6 +1980,10 @@ msgstr "Nutzung von Leerzeichen in Programmen"
 #, fuzzy
 msgid "use_of_nested_functions_exception"
 msgstr "Use of nested functions"
+
+#, fuzzy
+msgid "used_in"
+msgstr "Used in:"
 
 msgid "user"
 msgstr "Nutzer"
@@ -1920,8 +2018,20 @@ msgstr "Wert"
 msgid "variables"
 msgstr "Variablen"
 
+#, fuzzy
+msgid "view_adventures"
+msgstr "View adventures"
+
+#, fuzzy
+msgid "view_classes"
+msgstr "View classes"
+
 msgid "view_program"
 msgstr "Programm ansehen"
+
+#, fuzzy
+msgid "view_slides"
+msgstr "View slides"
 
 msgid "welcome"
 msgstr "Willkommen"
@@ -1976,9 +2086,6 @@ msgstr "Dein Programm"
 
 #~ msgid "select_own_adventures"
 #~ msgstr "Select own adventures"
-
-#~ msgid "edit"
-#~ msgstr "Bearbeiten"
 
 #~ msgid "view"
 #~ msgstr "Ansehen"
@@ -2103,9 +2210,6 @@ msgstr "Dein Programm"
 #~ msgid "adventure_exp_2"
 #~ msgstr "Wenn du echte Code-Schnipsel zeigen möchtest, zum Beispiel um den Schülerinnen und Schülern eine Vorlage zu geben, nutze bitte Vor-Anker wie folgt:"
 
-#~ msgid "adventures"
-#~ msgstr "Abenteuer"
-
 #~ msgid "hello_world"
 #~ msgstr "Hallo Welt!"
 
@@ -2126,4 +2230,19 @@ msgstr "Dein Programm"
 
 #~ msgid "hide_quiz"
 #~ msgstr "Verstecke Quiz"
+
+#~ msgid "back_to_class"
+#~ msgstr "Gehe zurück zur Klasse"
+
+#~ msgid "Locked Language Feature"
+#~ msgstr "Du benutzt {concept}! Das ist toll, aber {concept} ist noch nicht freigeschaltet! Es wird in einem späteren Level freigeschaltet."
+
+#~ msgid "nested blocks"
+#~ msgstr "ein Block in einem Block"
+
+#~ msgid "save"
+#~ msgstr "Speichern"
+
+#~ msgid "update_profile"
+#~ msgstr "Aktualisiere dein Profil"
 

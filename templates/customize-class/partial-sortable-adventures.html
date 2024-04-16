@@ -36,6 +36,14 @@
                     >
                     {{_('reset_button')}}
                 </button>
+                <div class="flex flex-row">
+                    <button id="create_adventure_button" class="green-btn" 
+                        _="on click
+                            window.open('/for-teachers/customize-adventure?class_id={{ class_id }}&level={{level}}', '_self')"
+                    data-cy="edit-link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>
+                    {{_('create_adventure')}}
+                    </button>
+                </div>
             </div>
         </div>
         <div class="flex items-center min-w-max">
@@ -76,11 +84,12 @@
                 {% endfor %}
         </div>
     </div>
-        <script>
-                if (window.hedyApp) {
-                    hedyApp.initializeCustomizeClassPage({
-                        level:  '{{  level }}',
-                    })
-                }
-        </script>
+    <script>
+        if (window.hedyApp) {
+            hedyApp.initializeCustomizeClassPage({
+                level:  '{{  level }}',
+                class_id: '{{ class_id }}',
+            })
+        }
+    </script>
 </div> 

@@ -5,6 +5,11 @@ describe('customize class page', () => {
       loginForTeacher("teacher4");
       // ensureIsSecondTeacher("teacher1", "teacher2")
       // await ensureClass();
+      cy.get(".view_class").then($viewClass => {
+        if (!$viewClass.is(':visible')) {
+            cy.get("#view_classes").click();
+        }
+      });
       cy.getBySel('view_class_link').first().click(); // Press on view class button
       cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
       cy.getBySel('customize_class_button').click(); // Press customize class button
@@ -132,33 +137,17 @@ describe('customize class page', () => {
       });
     });
 
-    it('saves the customizations and then removes them', () => {
-      //  We save the customizations first
-      cy.getBySel("save_customizations")
-        .should('be.visible')
-        .should('not.be.disabled')
-        .click();
-
-      cy.getBySel('modal_alert_text')
-        .should('be.visible');
-
-      // Now that it has customizations we can remove them
-      cy.getBySel('remove_customizations_button')
-        .should('be.visible')
-        .should('not.be.disabled')
-        .click();
-
-      cy.getBySel('modal_yes_button')
-        .should('be.visible')
-        .click();
-    });
 
     it('Disabling current level displays a message', () => {
+      cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
+
       cy.getBySel('level-1').should('be.visible');
       cy.get('#state-disabled').should('not.be.visible');
 
       cy.get('#enable_level_1').parent('.switch').click();
       cy.get('#state-disabled').should('be.visible');
+
+      cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
     });
 
     it('Clicking the Reset button displays a confirm dialog', () => {

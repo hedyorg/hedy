@@ -230,6 +230,20 @@ a.green-btn:hover {
   @apply active:bg-gray-700 active:border-gray-700;
 }
 
+.back-btn {
+  @apply gray-btn;
+  @apply text-blue-500;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  width: 8rem;
+}
+
+.back-btn:hover {
+  @apply bg-gray-200;
+  @apply active:bg-gray-700 active:border-gray-700;
+}
+
 /* Styles only for use in MarkDown blocks */
 /* NOTE: I'm pretty sure we don't render class="markdown" anymore anywhere */
 .markdown {

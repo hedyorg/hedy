@@ -37,6 +37,8 @@ jobs:
     - name: Prepare backend
       run: |
         doit run backend
+
+    # This code is also in 'update-javascript-on-main'
     - name: Calculate hedy cache key
       run: "echo value=$(ls -1 hedy.py grammars/* | sort | xargs tail -n 99999999 | sha256sum | cut -f 1 -d ' ') >> $GITHUB_OUTPUT"
       id: hedy_cache_key
@@ -45,14 +47,15 @@ jobs:
       with:
         path: .test-cache
         key: "hedy-test-cache-${{ steps.hedy_cache_key.outputs.value }}"
+
     - name: Run weblate tests
       shell: pwsh
       id: weblate_tests
-      if: ${{ github.event.pull_request.user.login == 'weblate' }}
+      if: github.event.pull_request.user.login == 'weblate'
       run: |
         build-tools/github/validate --weblate
     - name: Run all tests
       shell: pwsh
-      if: ${{ ((github.event.pull_request.user.login != 'weblate') || github.event.label.name == 'force_tests') }}
+      if: github.event.pull_request.user.login != 'weblate'
       run: |
-        build-tools/github/validate --all
+        build-tools/github/validate

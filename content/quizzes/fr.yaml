@@ -2638,120 +2638,120 @@ levels:
             question_score: '10'
     12:
         1:
-            question_text: Which output is correct?
+            question_text: Que va-t-il s'afficher ?
             code: |-
-                print 'three and a half plus one and a half is...'
-                print 3.5 + 1.5
+                {print} "Trois et demi plus un et demi fait…"
+                {print} 3.5 + 1.5
             mp_choice_options:
             -   option: '5'
-                feedback: Don't forget the first line of code!
+                feedback: N'oublie pas la première ligne de code !
             -   option: 3.5 + 1.5
-                feedback: This is not the one!
+                feedback: Ce n'est pas celle-là !
             -   option: |-
-                    thee and a half plus one and a half is...
-                    five
-                feedback: Take a close look at the second line...
+                    Trois et demi plus un et demi fait…
+                    cinq
+                feedback: Regarde de plus près la seconde ligne…
             -   option: |-
-                    three and a half plus one and a half is...
+                    Trois et demi plus un et demi fait…
                     5
                 feedback: Excellent travail !
-            hint: Both lines are printed!
+            hint: Les deux lignes s'affichent !
             correct_answer: D
             question_score: '10'
         2:
-            question_text: Which of these codes is correct?
+            question_text: Lequel de ces codes est correct ?
             mp_choice_options:
             -   option: |-
                     ```
-                    flavors is vanilla, strawberry, chocolate
-                    print 'I would like a ' flavors at random ' cake.'
+                    parfum {is} vanille, fraise, tomate
+                    {print} "Je voudrais un gâteau à la " parfum {at} {random} "."
                     ```
-                feedback: All the different values of flavors should be in quotation marks.
+                feedback: Les différents parfums doivent être entre guillemets.
             -   option: |-
                     ```
-                    'flavors = vanilla, strawberry, chocolate'
-                    print 'I would like a ' flavors at random ' cake.'
+                    "parfum = vanille, fraise, tomate"
+                    {print} "Je voudrais un gâteau à la " parfum {at} {random} "."
                     ```
-                feedback: All the different values of flavors should be in quotation marks.
+                feedback: Les différents parfums doivent être entre guillemets.
             -   option: |-
                     ```
-                    flavors = 'vanilla', 'strawberry', 'chocolate'
-                    print 'I would like a ' flavors at random ' cake.'
+                    parfum = "vanille", "fraise", "tomate"
+                    {print} "Je voudrais un gâteau à la " parfum {at} {random} "."
                     ```
-                feedback: Alright!
+                feedback: Bien !
             -   option: |-
                     ```
-                    flavors = 'vanilla, strawberry, chocolate'
-                    print 'I would like a ' flavors at random ' cake.'
+                    parfum = "vanille, fraise, tomate"
+                    {print} "Je voudrais un gâteau à la " parfum {at} {random} "."
                     ```
-                feedback: All the different values of flavors should be in quotation marks.
-            hint: The second line is the same in each code, pay attention to the first line
+                feedback: Les différents parfums doivent être entre guillemets.
+            hint: La deuxième ligne est la même pour chaque code, regarde attentivement la première ligne
             correct_answer: C
             question_score: '10'
         3:
-            question_text: What's wrong with this code?
+            question_text: Qu'est-ce qui ne va pas avec ce code ?
             code: |-
-                favorite_animal = ask 'What is your favorite animal?'
-                print 'I like ' favoriteanimal ' too!'
+                animal_préféré = {ask} "Quel est ton animal préféré ?"
+                {print} "J'aime aussi " animalpréféré
             mp_choice_options:
-            -   option: The name of the variable is different in line 1 than in line 2.
-                feedback: Correct!
-            -   option: The quotation marks aren't used correctly in line 2
-                feedback: That's not true
-            -   option: You can't use the = sign when using an ask command
-                feedback: That's not true
-            -   option: Nothing is wrong.
-                feedback: That's not true
-            hint: The quotation marks are used correctly
+            -   option: Le nom de la variable est différent entre la ligne 1 et la ligne 2.
+                feedback: Exacte !
+            -   option: Les guillemets ne sont pas utilisés correctement à la ligne 2
+                feedback: Ce n'est pas ça
+            -   option: On ne peut pas utiliser le signe = avec la commande {ask}
+                feedback: Ce n'est pas vrai
+            -   option: Il n'y a aucun problème.
+                feedback: Ce n'est pas vrai
+            hint: Les guillemets sont tous placés correctement
             correct_answer: A
             question_score: '10'
         4:
-            question_text: In which lines are quotation marks needed to get the code to work?
+            question_text: Quelles lignes ont besoins des guillemets ?
             code: |-
-                print Welcome to the online shoe shop
-                category = ask What kind of shoes are you looking for?
-                if category = high heels
-                  print High heels are 50% off now!
+                {print} Bienvenue dans la boutique en ligne de chaussures
+                catégorie = {ask} Quelle type de chaussures recherchez-vous ?
+                {if} catégorie = tallons hauts
+                    {print} Nous avons 50 % de remise sur les tallons hauts en ce moment !
             mp_choice_options:
-            -   option: Line 1 and 2
-                feedback: 'No'
-            -   option: Line 1, 2 and 3
-                feedback: 'No'
-            -   option: Line 1, 2 and 4
-                feedback: 'No'
-            -   option: All of the lines
-                feedback: Perfect!
-            hint: Does line 3 need quotation marks too?
+            -   option: Ligne 1 et 2
+                feedback: 'Non'
+            -   option: Ligne 1, 2 et 3
+                feedback: 'Non'
+            -   option: Ligne 1, 2 et 4
+                feedback: 'Non'
+            -   option: Toutes les lignes
+                feedback: Parfait !
+            hint: Est-ce que la ligne 3 a besoins de guillemets aussi ?
             correct_answer: D
             question_score: '10'
         5:
-            question_text: What output does Agent007 get when they put in the correct password?
+            question_text: Quel affichage Agent007 obtient quand il donne le bon mot de passe ?
             code: |-
-                name is ask 'What is your name?'
-                if name is 'Agent007'
-                    a is 'Go to the airport '
-                else
-                    a is 'Go to the train station '
-                password is ask 'What is the password?'
-                if password is 'TOPSECRET'
-                    b is 'tomorrow at 02.00'
-                else
-                    b is 'today at 10.00'
-                print a + b
+                nom {is} {ask} "Quel est ton nom ?"
+                si nom est "Agent007"
+                    a {is} "Rends-toi à l'aéroport "
+                sinon
+                    a {is} "Rends-toi à la gare "
+                mot_de_passe {is} {ask} "Quel est le mot de passe ?"
+                si mot_de_passe est "TOPSECRET"
+                    b {is} "demain à 14 h 00."
+                sinon
+                    b {is} "aujourd'hui à 10 h 00."
+                affiche a + b
             mp_choice_options:
-            -   option: Go to the train station today at 10.00
-                feedback: The agent won't be catching any bad guys here
-            -   option: Go to the airport tomorrow at 02.00
-                feedback: You've cracked the code!
-            -   option: Go to the train station tomorrow at 02.00
-                feedback: The agent won't be catching any bad guys here
-            -   option: Go to the airport tomorrow at 10.00
-                feedback: The agent won't be catching any bad guys here
-            hint: The correct password is TOPSECRET
+            -   option: Rends-toi à la gare aujourd'hui à 10 h 00.
+                feedback: L'agent ne va pas attraper de méchants ici
+            -   option: Rends-toi à l'aéroport demain à 14 h 00.
+                feedback: Tu as craqué le code !
+            -   option: Rends-toi à la gare demain à 14 h 00.
+                feedback: L'agent ne va pas attraper de méchants ici
+            -   option: Rends-toi à l'aéroport demain à 10 h 00.
+                feedback: L'agent ne va pas attraper de méchants ici
+            hint: Le mot de passe est TOPSECRET
             correct_answer: B
             question_score: '10'
         6:
-            question_text: Which line should be filled in at the ???
+            question_text: Quelle ligne écrire à la place de `_` ?
             code: |-
                 print 'Welcome to McHedy!'
                 order = ask 'Would you like a hamburger or fries?'
@@ -2766,144 +2766,144 @@ levels:
             mp_choice_options:
             -   option: |-
                     ```
-                    price = 14
+                    prix = 14
                     ```
-                feedback: What if you only order fries and a drink?
+                feedback: Et dans le cas où tu commandes frites et boisson ?
             -   option: |-
                     ```
-                    price = '14'
+                    prix = "14"
                     ```
-                feedback: What if you only order fries and a drink?
+                feedback: Et dans le cas où tu commandes frites et boisson ?
             -   option: |-
                     ```
-                    price = price + 2
+                    prix = prix + 2
                     ```
-                feedback: Excellent!
+                feedback: Excellent !
             -   option: |-
                     ```
-                    price = + 2
+                    prix = + 2
                     ```
-                feedback: Almost there!
-            hint: What if you only order fries and a drink?
+                feedback: Presque !
+            hint: Tu ne peux pas calculer le prix à l'avance !
             correct_answer: C
             question_score: '10'
         7:
-            question_text: Which output does a vegan get?
+            question_text: Que sera-t-il affiché pour une personne végane ?
             code: |-
-                menu = 'cookies', 'cheese', 'grapes'
-                print "It's my birthday! I`ve brought some snacks!"
-                diet = ask 'Do you have any dietary restrictions?'
-                if diet = 'gluten free'
-                    remove 'cookies' from menu
-                if diet = 'vegan'
-                    remove 'cheese' from menu
-                print 'For you I have brought: '
-                for snack in menu
-                    print snack
+                menu = "cookies", "fromage", "raisin"
+                {print} "C'est mon anniversaire ! j'ai acheté un goûter !"
+                régime = {ask} "Avez-vous un régime particulier ?"
+                {if} régime = "sans gluten"
+                    {remove} "cookies" {from} menu
+                {if} régime = "végan"
+                    {remove} "fromage" {from} menu
+                {print} "Pour toi, j'ai acheté :"
+                {for} goûter {in} menu
+                    {print} goûter
             mp_choice_options:
             -   option: |-
-                    It's my birthday! I've brought some snacks!
-                    For you I have brought:
+                    C'est mon anniversaire ! j'ai acheté un goûter !
+                    Pour toi, j'ai acheté :
                     cookies
-                    grapes
-                feedback: Terrific!
+                    raisin
+                feedback: Formidable !
             -   option: |-
-                    It's my birthday! I've brought some snacks!
-                    For you I have brought:
-                    grapes
-                feedback: There's more options than just one
+                    C'est mon anniversaire ! j'ai acheté un goûter !
+                    Pour toi, j'ai acheté :
+                    raisin
+                feedback: Il y a plus qu'un élément
             -   option: |-
-                    It's my birthday! I've brought some snacks!
-                    For you I have brought:
-                    cheese
-                    grapes
-                feedback: A vegan person can't have cheese
+                    C'est mon anniversaire ! j'ai acheté un goûter !
+                    Pour toi, j'ai acheté :
+                    fromage
+                    raisin
+                feedback: Une personne végane ne mange pas de fromage
             -   option: |-
-                    It's my birthday! I've brought some snacks!
-                    For you I have brought:
-                    grapes
+                    C'est mon anniversaire ! j'ai acheté un goûter !
+                    Pour toi, j'ai acheté :
+                    raisin
                     cookies
-                feedback: Almost there, but look at the order of snacks in the list
-            hint: What item is removed from the list when you answer 'vegan'?
+                feedback: Presque, mais regarde bien l'ordre des éléments dans la liste
+            hint: Quel élément est retiré de la liste quand tu réponds « végan » ?
             correct_answer: A
             question_score: '10'
         8:
-            question_text: Which code was used to create this output?
+            question_text: Quel code a été utilisé pour écrire ça ?
             code: '3.5'
             mp_choice_options:
             -   option: |-
                     ```
-                    print '7 / 2'
+                    {print} "7 / 2"
                     ```
-                feedback: 'No'
+                feedback: 'Non, il ne faut pas mettre les guillemets'
             -   option: |-
                     ```
-                    print 7 / 2
+                    {print} 7 / 2
                     ```
-                feedback: That is right!
+                feedback: C'est ça !
             -   option: |-
                     ```
-                    print 7 : 2
+                    {print} 7 : 2
                     ```
-                feedback: 'No'
+                feedback: 'Non'
             -   option: |-
                     ```
-                    print 7 * 2
+                    {print} 7 * 2
                     ```
-                feedback: 'No'
-            hint: 7 devided by 2 is 3.5
+                feedback: 'Non'
+            hint: 7 divisé par 2 fait 3.5
             correct_answer: B
             question_score: '10'
         9:
-            question_text: Which code should be filled in in line 1 at the ???
+            question_text: Quel code devrait être écrit à la ligne 1 à la place de `_` ?
             code: |-
-                ???
-                print 'You won ' prices at random '!'
+                _
+                {print} "Tu gagnes " prix {at} {random} " !"
             mp_choice_options:
             -   option: |-
                     ```
-                    prices = 'one' 'million' 'dollars', 'nothing'
+                    prix = "un" "million" "d'euro", "rien"
                     ```
-                feedback: You won nothing
+                feedback: Non
             -   option: |-
                     ```
-                    prices = 'one million dollars, nothing'
+                    prix = "un million d'euro, rien"
                     ```
-                feedback: You won nothing
+                feedback: Non
             -   option: |-
                     ```
-                    prices = 'one million dollars', 'nothing'
+                    prix = "un million d'euro", "rien"
                     ```
-                feedback: Winner!
+                feedback: Gagné !
             -   option: |-
                     ```
-                    'prices' = 'one million dollars', 'nothing'
+                    "prix" = "un million d'euro", "rien"
                     ```
-                feedback: You one nothing
+                feedback: Il ne faut pas mettre de guillemets aux noms des variables
             hint: The items on the list should be in quotation marks
             correct_answer: C
             question_score: '10'
         10:
-            question_text: Which line of code should be filled in at the ??? to complete the song ?
+            question_text: Quelle ligne de code devrait remplacer le `_` pour terminer le code ?
             code: |-
-                actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
-                ???
-                    for i in range 0 to 1
-                        print 'if youre happy and you know it'
-                        print action
-                    print 'if youre happy and you know it and you really want to show it'
-                    print 'if youre happy and you know it'
-                    print action
+                actions = "tape des mains", "tape du pied", "crie hourra !"
+                _
+                    {for} i {in} {range} 0 {to} 1
+                        {print} "si tu as de la joie au coeur"
+                        {print} action
+                    {print} "si tu as de la joie au coeur et que tu souhaite le partager"
+                    {print} "si tu as de la joie au coeur"
+                    {print} action
             mp_choice_options:
-            -   option: for i in range 1 to 3
-                feedback: This is a hard one! All the actions on the list must be in the song.
-            -   option: for action in actions
-                feedback: You are amazing!
-            -   option: repeat 3 times
-                feedback: This is a hard one! All the actions on the list must be in the song.
-            -   option: print actions at random
-                feedback: This is a hard one! All the actions on the list must be in the song.
-            hint: This is a hard one! All the actions on the list must be in the song.
+            -   option: "```\n{for} i {in} {range} 1 {to} 3\n```"
+                feedback: C'est difficile ! Toutes les actions de la liste doivent être dans la chanson.
+            -   option: "```\n{for} action {in} actions\n```"
+                feedback: Tu es formidable !
+            -   option: "```\n{repeat} 3 {times}\n```"
+                feedback: C'est difficile ! Toutes les actions de la liste doivent être dans la chanson.
+            -   option: "```\n{print} actions {at} {random}\n```"
+                feedback: C'est difficile ! Toutes les actions de la liste doivent être dans la chanson.
+            hint: C'est difficile ! Toutes les actions de la liste doivent être dans la chanson.
             correct_answer: B
             question_score: '10'
     13:

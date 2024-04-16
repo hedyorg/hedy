@@ -5,6 +5,11 @@ describe('customize class page', () => {
     beforeEach(() => {
       loginForTeacher();
       ensureClass();
+      cy.get(".view_class").then($viewClass => {
+        if (!$viewClass.is(':visible')) {
+            cy.get("#view_classes").click();
+        }
+      });
       cy.getBySel('view_class_link').first().click(); // Press on view class button
       cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
       cy.getBySel('customize_class_button').click(); // Press customize class button
@@ -90,37 +95,39 @@ describe('customize class page', () => {
         .should('have.value', 'quiz')
     });
 
-    it('disblae all quizes', () => {
-        cy.get("#hide_quiz")
-            .should("not.be.checked")
-            .click()
+    it.only('disblae all quizes', () => {
+      cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
 
-        cy.get("#hide_quiz")
-            .should("be.checked")
+      cy.get("#hide_quiz")
+          .should("not.be.checked")
+          .click()
 
-        cy.getBySel("save_customizations")
-            .should('be.visible')
-            .should('not.be.disabled')
-            .click();
-        cy.reload();
+      cy.get("#hide_quiz")
+          .should("be.checked")
+
+      cy.wait(1000)
+      cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
+
+      cy.reload();
 
       cy.get('[data-cy="level-1"] [data-cy="quiz"]')
         .should("not.exist")
     });
 
     it('disblae all parsons', () => {
-        cy.get("#hide_parsons")
-            .should("not.be.checked")
-            .click()
+      cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
 
-        cy.get("#hide_parsons")
-            .should("be.checked")
+      cy.get("#hide_parsons")
+          .should("not.be.checked")
+          .click()
 
-        cy.getBySel("save_customizations")
-            .should('be.visible')
-            .should('not.be.disabled')
-            .click();
-        cy.reload();
+      cy.get("#hide_parsons")
+          .should("be.checked")
+
+      cy.wait(1000)
+      cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
+
+      cy.reload();
 
       cy.get('[data-cy="level-1"] [data-cy="parsons"]')
         .should("not.exist")

@@ -30,7 +30,7 @@ declare const Sk: {
   configure(options: any): void;
 
   misceval: {
-    asyncToPromise<A>(fn: () => Suspension, handler?: Record<string, () => void>): Promise<A>;
+    asyncToPromise<A>(fn: () => Suspension, handler?: Record<string, (r: any) => void>, currentProgram: number): Promise<A>;
     promiseToSuspension;
     Suspension: { }
   },
@@ -38,9 +38,6 @@ declare const Sk: {
   importMainWithBody(name: string, dumpJS: boolean, body: string, canSuspend: boolean): Suspension;
 
   setTimeout?: (func: () => void, delay: number) => any;
-  insertPyGameEvent: (eventName: string) => null;
-  bindPygameListeners(); void;
-  unbindPygameListeners(): void;
   Debugger: any
 }
 

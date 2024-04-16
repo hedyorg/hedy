@@ -409,7 +409,7 @@ levels:
                 {if} declare {is} 是
                 item_to_declare {is} {ask} '您想声明什么'
                 {else} 好吧
-                {print}谢谢。 请前往 A22 登机口。
+                {print}谢谢。 请前往 A22 登机口。'
             debug: 对
         8:
             header: 我们走吧！
@@ -1093,7 +1093,7 @@ levels:
                 {else}:
                      {print} '下次祝你好运..'
         3:
-            header: Elif
+            header: 否则如果/Elif
             text: 在这个关卡中你还可以使用一个新命令：elif。 elif 是 else if 的缩写，当您想要创建 3 个（或更多！）选项时需要它。 一起来一探究竟！
             code: |-
                 价格 = ['100 万美元', '苹果派', '什么都没有']
