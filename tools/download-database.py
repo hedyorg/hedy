@@ -96,7 +96,13 @@ class TableInserter:
                 table.key_columns + [onetomanycol] if listcol.type.is_set else [])
             print(onetomanytable.table_name)
             cursor.execute(onetomanytable.drop_statement)
-            cursor.execute(onetomanytable.create_statement)
+            try:
+                # The `classes` table contains a list of objects, which this script can't
+                # deal with. Catch the error, but continue.
+                cursor.execute(onetomanytable.create_statement)
+            except Exception as e:
+                print(f'Dropping column {listcol.name} (running \'{onetomanytable.create_statement}\' leads to {e})')
+                continue
 
             one_to_many_data = []
             for row in table_data['rows']:
@@ -110,7 +116,7 @@ class TableInserter:
 
         # Maps (not implemented yet)
         for mapcol in (col for col in columns if col.type.is_map):
-            print(f'Dropping column: {table.original_name}.{mapcol.original_name}')
+            print(f'Dropping column: {table.original_name}.{mapcol.original_name} (no support for map columns)')
 
         self.db.commit()
 

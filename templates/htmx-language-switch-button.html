@@ -1,0 +1,57 @@
+<div class="dropdown relative">
+    <button class="green-btn font-semibold rounded inline-flex items-center gap-2"
+      onclick="$('#commands_dropdown').slideToggle('medium');" data-cy="kwlang-switch-btn">
+      <span class="fa-solid fa-language"></span>
+      <svg id="keyword-arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+      </svg>
+    </button>
+    <div class="dropdown-menu dropdown-green z-30 mt-2" id="commands_dropdown" {% if not
+      request.args.get('keyword_language') %}style="display: none;" {% endif %}
+      _="on mutation of @style
+          set arrow to #keyword-arrow
+          if *display == 'none'
+              remove .rotate-180 from arrow
+          else if not arrow.classList.contains('rotate-180')
+              add .rotate-180 to arrow
+          end">
+      <h2 class="px-4 pt-2">{{_('commands')}}</h2>
+      <!-- If the current language is non-english and supports keywords: show a two column table -->
+      <table class="mx-4 my-2" cellpadding="4">
+        <thead>
+          <tr class="text-center text-lg">
+            <td class="ltr:text-right rtl:text-left pb-2">{{_('english')}}</td>
+            <td id="keyword_toggle_container" class="pb-2">
+              <label for="keyword_toggle" class="flex flex-row items-center justify-center cursor-pointer"
+                data-cy="kwlang-switch-toggle">
+                <div class="relative flex w-full">
+                    <input id="keyword_toggle" type="checkbox"
+                    {% if (g.keyword_lang != "en" and not request.args.get('keyword_language')) or
+                    (request.args.get('keyword_language') and request.args.get('keyword_language') != "en") %}checked{% endif %}
+                    _="on click hedyApp.toggle_keyword_language(
+                    '{{  current_keyword_language().lang }}',
+                    {%if (g.keyword_lang != 'en' and not request.args.get('keyword_language')) or
+                          (request.args.get('keyword_language') and request.args.get('keyword_language') != 'en') %}'en'
+                      {% else %}'{{g.lang}}'
+                    {% endif %})"
+                    class="sr-only" />
+                  <div class="w-8 h-4 bg-gray-400 rounded-full shadow-inner"></div>
+                  <div class="toggle-circle absolute w-4 h-4 bg-green-600 rounded-full shadow transition"></div>
+                </div>
+              </label>
+            </td>
+            <td class="ltr:text-left rtl:text-right pb-2">{{ current_language().sym }}</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for command in commands %}
+          <tr>
+            <td class="ltr:text-right rtl:text-left"><code>{{ command }}</code></td>
+            <td class="text-center">⟷</td>
+            <td class="ltr:text-left rtl:text-right"><code>{{  translate_command(command) }}</code></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
