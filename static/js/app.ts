@@ -1198,7 +1198,6 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     var debug = storage.getItem("debugLine")
     if (storage.getItem("prompt-" + prompt) == null) {
     Sk.execStart = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
-    $('#turtlecanvas').hide();
     document.onkeydown = null;
     $('#keybinding-modal').hide();
 
