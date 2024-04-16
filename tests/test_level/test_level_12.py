@@ -700,16 +700,18 @@ class TestsLevel12(HedyTester):
         colors is 'orange', 'blue', 'green'
         favorite is ask 'Is your fav color' colors at 1""")
 
-        expected = textwrap.dedent("""\
-        colors = ['orange', 'blue', 'green']
-        favorite = input(f'''Is your fav color{colors[int(1)-1]}''')
-        try:
-          favorite = int(favorite)
-        except ValueError:
-          try:
-            favorite = float(favorite)
-          except ValueError:
-            pass""")
+        expected = self.dedent(
+            "colors = ['orange', 'blue', 'green']",
+            self.list_access_transpiled('colors[int(1)-1]'),
+            f"""\
+            favorite = input(f'''Is your fav color{{colors[int(1)-1]}}''')
+            try:
+              favorite = int(favorite)
+            except ValueError:
+              try:
+                favorite = float(favorite)
+              except ValueError:
+                pass""")
 
         self.multi_level_tester(code=code, unused_allowed=True, expected=expected, max_level=14)
 
@@ -827,7 +829,8 @@ class TestsLevel12(HedyTester):
             favorite is ask 'Is your fav number ' numbers at random""")
         expected = HedyTester.dedent(
             "numbers = [1, 2, 3]",
-            HedyTester.input_transpiled('favorite', 'Is your fav number {random.choice(numbers)}'))
+            self.list_access_transpiled('random.choice(numbers)'),
+            self.input_transpiled('favorite', 'Is your fav number {random.choice(numbers)}'))
 
         self.multi_level_tester(code=code, unused_allowed=True, expected=expected, max_level=15)
 
@@ -837,7 +840,8 @@ class TestsLevel12(HedyTester):
             favorite is ask 'Is your fav number ' numbers at 2""")
         expected = HedyTester.dedent(
             "numbers = [1, 2, 3]",
-            HedyTester.input_transpiled('favorite', 'Is your fav number {numbers[int(2)-1]}'))
+            self.list_access_transpiled('numbers[int(2)-1]'),
+            self.input_transpiled('favorite', 'Is your fav number {numbers[int(2)-1]}'))
 
         self.multi_level_tester(code=code, unused_allowed=True, expected=expected, max_level=15)
 

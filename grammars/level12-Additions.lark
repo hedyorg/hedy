@@ -30,7 +30,7 @@ call: _CALL function_name (_SPACE _WITH arguments)?
 
 function_name: NAME -> text
 
-?return: _RETURN (_print_argument)? -> returns
+?return: _RETURN (_print_ask_argument)? -> returns
 ?simple_expression:+= call
 ?turtle_color:+= call
 
