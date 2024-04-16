@@ -345,12 +345,14 @@ def command_make_color_local(language):
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
     Command.print: {
-        1: [HedyType.string, HedyType.integer, HedyType.input],
+        1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.list],
+        4: [HedyType.string, HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
         16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]
     },
     Command.ask: {
-        1: [HedyType.string, HedyType.integer, HedyType.input],
+        1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.list],
+        4: [HedyType.string, HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
         16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]
     },
@@ -358,8 +360,8 @@ commands_and_types_per_level = {
                    2: [HedyType.integer, HedyType.input],
                    12: [HedyType.integer, HedyType.input, HedyType.float]
                    },
-    Command.color: {1: english_colors,
-                    2: [english_colors, HedyType.string, HedyType.input]},
+    Command.color: {1: [english_colors, HedyType.list],
+                    2: [english_colors, HedyType.string, HedyType.input, HedyType.list]},
     Command.forward: {1: [HedyType.integer, HedyType.input],
                       12: [HedyType.integer, HedyType.input, HedyType.float]
                       },
@@ -1367,13 +1369,27 @@ class ConvertToPython(Transformer):
         else:
             return ""
 
-    def is_var_defined_before_access(self, variable_name, access_line_number):
-        all_names_before_access_line = [a.name for a in self.lookup if a.definition_line <= access_line_number]
-        return variable_name in all_names_before_access_line
-
     def is_var_in_lookup(self, variable_name):
         all_names = [a.name for a in self.lookup]
         return variable_name in all_names
+
+    # The var_to_escape parameter allows the ask command to force the variable defined
+    # by itself, i.e. the left-hand-side var, to not be defined on the same line
+    def is_var_defined_before_access(self, variable_name, access_line_number, var_to_escape=''):
+        def is_before(entry, line):
+            return entry.definition_line <= line if entry.name != var_to_escape else entry.definition_line < line
+
+        all_names_before_access_line = [entry.name for entry in self.lookup if is_before(entry, access_line_number)]
+        return variable_name in all_names_before_access_line
+
+    # In level 3, a list name without index or random should be treated as a literal string, e.g.
+    #   color = red, blue, yellow
+    #   print What is your favorite color? <- color is not a var reference here, but the text 'color'
+    def is_unreferenced_list(self, variable_name):
+        for entry in self.lookup:
+            if entry.name == escape_var(variable_name):
+                return entry.type_ == HedyType.list and '[' not in variable_name
+        return False
 
     # default for line number is max lines so if it is not given, there
     # is no check on whether the var is defined
@@ -1418,9 +1434,10 @@ class ConvertToPython(Transformer):
             return escape_var(arg)
         return arg
 
-    def process_variable_for_fstring(self, variable_name, access_line_number=100):
-        if self.is_var_in_lookup(variable_name) and self.is_var_defined_before_access(variable_name,
-                                                                                      access_line_number):
+    def process_variable_for_fstring(self, variable_name, access_line_number=100, var_to_escape=''):
+
+        if (self.is_var_defined_before_access(variable_name, access_line_number, var_to_escape) and
+                not self.is_unreferenced_list(variable_name)):
             self.add_variable_access_location(variable_name, access_line_number)
             return "{" + escape_var(variable_name) + "}"
         else:
@@ -1769,34 +1786,35 @@ class ConvertToPython_2(ConvertToPython_1):
         return self.var_access(meta, args)
 
     def print(self, meta, args):
-        args_new = []
-        for a in args:
-            # list access has been already rewritten since it occurs lower in the tree
-            # so when we encounter it as a child of print it will not be a subtree, but
-            # transpiled code (for example: random.choice(dieren))
-            # therefore we should not process it anymore and thread it as a variable:
-            # we set the line number to 100 so there is never an issue with variable access before
-            # assignment (regular code will not work since random.choice(dieren) is never defined as var as such)
-            if "random.choice" in a or "[" in a:
-                args_new.append(self.process_variable_for_fstring(a, meta.line))
-            else:
-                # this regex splits words from non-letter characters, such that name! becomes [name, !]
-                res = regex.findall(
-                    r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+",
-                    a)
-                args_new.append(''.join([self.process_variable_for_fstring(x, meta.line) for x in res]))
-        exception = self.make_index_error_check_if_list(args)
+        args_new = [self.make_print_ask_arg(a, meta) for a in args]
         argument_string = ' '.join(args_new)
         if not self.microbit:
+            exception = self.make_index_error_check_if_list(args)
             return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
         else:
-            return textwrap.dedent(f"""\
-                    display.scroll('{argument_string}')""")
+            return f"""display.scroll('{argument_string}')"""
 
     def ask(self, meta, args):
         var = args[0]
-        all_parameters = ["'" + process_characters_needing_escape(a) + "'" for a in args[1:]]
-        return f'{var} = input(' + '+'.join(all_parameters) + ")" + self.add_debug_breakpoint()
+        args_new = [self.make_print_ask_arg(a, meta, var) for a in args[1:]]
+        argument_string = ' '.join(args_new)
+        exception = self.make_index_error_check_if_list(args)
+        return exception + f"{var} = input(f'{argument_string}'){self.add_debug_breakpoint()}"
+
+    def make_print_ask_arg(self, arg, meta, var_to_escape=''):
+        # list access has been already rewritten since it occurs lower in the tree
+        # so when we encounter it as a child of print it will not be a subtree, but
+        # transpiled code (for example: random.choice(dieren))
+        # therefore we should not process it anymore and thread it as a variable:
+        # we set the line number to 100 so there is never an issue with variable access before
+        # assignment (regular code will not work since random.choice(dieren) is never defined as var as such)
+        if "random.choice" in arg or "[" in arg:
+            return self.process_variable_for_fstring(arg, meta.line, var_to_escape)
+
+        # this regex splits words from non-letter characters, such that name! becomes [name, !]
+        p = r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+"
+        res = regex.findall(p, arg)
+        return ''.join([self.process_variable_for_fstring(x, meta.line, var_to_escape) for x in res])
 
     def forward(self, meta, args):
         if len(args) == 0:
@@ -1968,7 +1986,8 @@ class ConvertToPython_4(ConvertToPython_3):
     def ask(self, meta, args):
         var = args[0]
         argument_string = self.print_ask_args(meta, args[1:])
-        return f"{var} = input(f'{argument_string}'){self.add_debug_breakpoint()}"
+        index_check = self.make_index_error_check_if_list(args)
+        return index_check + f"{var} = input(f'{argument_string}'){self.add_debug_breakpoint()}"
 
     def error_print_nq(self, meta, args):
         return ConvertToPython_2.print(self, meta, args)
@@ -2452,17 +2471,16 @@ class ConvertToPython_12(ConvertToPython_11):
     def ask(self, meta, args):
         var = args[0]
         argument_string = self.print_ask_args(meta, args[1:])
-        assign = f"{var} = input(f'''{argument_string}''')" + self.add_debug_breakpoint()
-
-        return textwrap.dedent(f"""\
-        {assign}
-        try:
-          {var} = int({var})
-        except ValueError:
-          try:
-            {var} = float({var})
-          except ValueError:
-            pass""")  # no number? leave as string
+        exception = self.make_index_error_check_if_list(args)
+        return exception + textwrap.dedent(f"""\
+            {var} = input(f'''{argument_string}'''){self.add_debug_breakpoint()}
+            try:
+              {var} = int({var})
+            except ValueError:
+              try:
+                {var} = float({var})
+              except ValueError:
+                pass""")  # no number? leave as string
 
     def assign_list(self, meta, args):
         parameter = args[0]

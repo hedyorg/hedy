@@ -12,7 +12,7 @@ error_assign_list_missing_brackets: var  (_IS | _EQUALS) (_LEFT_SQUARE_BRACKET)?
 
 error_list_access_at: var_access _AT (INT | random)
 
-_print_argument: (_SPACE | quoted_text | list_access | error_list_access_at | expression | print_expression)*
+_print_ask_argument: (_SPACE | quoted_text | list_access | error_list_access_at | expression | print_expression)*
 assign: var (_IS| _EQUALS) (list_access | error_list_access_at | atom | expression)
 error_print_no_quotes: _PRINT (textwithoutspaces | list_access | error_list_access_at | var_access) (_SPACE (textwithoutspaces | list_access | var_access))*  -> error_print_nq
 sleep: _SLEEP (INT | list_access | error_list_access_at | var_access | expression)?
