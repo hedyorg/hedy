@@ -1254,6 +1254,9 @@ class IsValid(Filter):
             tip='no_more_flat_if',
             line_number=meta.line)
 
+    def error_else_no_if(self, meta, args):
+        raise exceptions.ElseWithoutIfException(meta.line)
+
     def error_for_missing_in(self, meta, args):
         raise exceptions.MissingAdditionalCommand(command='for', missing_command='in', line_number=meta.line)
 
@@ -2426,7 +2429,14 @@ class ConvertToPython_12(ConvertToPython_11):
     def returns(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
         exception = self.make_index_error_check_if_list(args)
-        return exception + f"return f'''{argument_string}'''"
+        return exception + textwrap.dedent(f"""\
+            try:
+              return int(f'''{argument_string}''')
+            except ValueError:
+              try:
+                return float(f'''{argument_string}''')
+              except ValueError:
+                return f'''{argument_string}'''""")
 
     def number(self, meta, args):
         # try all ints? return ints
