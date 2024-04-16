@@ -35,7 +35,7 @@ _IN: _SPACE ("i" | "in") _SPACE
 _NOT_IN: _SPACE ("inte i" | "not in") _SPACE
 _IF: ("om" | "if") _SPACE
 _ELSE: "annars" | "else"
-_AND: _SPACE ("och" | "and") _SPACE
+_AND: _SPACE? ("och" | "and") _SPACE
 _REPEAT: ("upprepa" | "repeat") _SPACE
 _TIMES: _SPACE ("gånger" | "times")
 _FOR: ("för" | "for") _SPACE
@@ -44,7 +44,7 @@ _TO: _SPACE ("till" | "to") _SPACE
 _STEP: "steg" | "step"
 _ELIF: _SPACE? ("anom" | "elif") _SPACE
 _INPUT: ("inmatning" | "input")
-_OR: _SPACE ("eller" | "or") _SPACE
+_OR: _SPACE? ("eller" | "or") _SPACE
 _WHILE: ("medan" | "while") _SPACE
 _LENGTH: "längd" | "length"
 _COLOR : ("färg" | "color") _SPACE?
