@@ -11,10 +11,16 @@
 {% endif %}
 <div tabindex="0" class="p-4">
     {# When we're NOT in adventure mode but DO have adventures, render them in tabs #}
-    {% if not raw %}
+    {% if raw %}
+        {% if get_syntax_language(g.lang) != "en" and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) %}
+        <div class="flex justify-end mb-4">
+            {{ render_partial('htmx-language-switch-button.html', commands=commands) }}
+        </div>
+        {% endif %}
+    {% else %}
         {% include "incl/adventure-tabs.html" %}
     {% endif %}
-    {% include "incl/editor-and-output.html" %}
+        {% include "incl/editor-and-output.html" %}
 
     {% if latest and not raw %}
       <div class="text-sm mt-10 ltr:mr-5 rtl:ml-5 font-extralight">
