@@ -11,8 +11,7 @@ ask: var (_IS | _EQUALS) _ASK (_print_ask_argument)?
 play: _PLAY (list_access | expression | textwithoutspaces)
 
 equality_check: (textwithoutspaces | INT) (_IS | _EQUALS) (quoted_text| textwithoutspaces | INT)
-
-condition:+=  in_list_check | not_in_list_check | equality_check
+condition: >> equality_check
 
 list_access_var: var (_IS | _EQUALS) var _AT (INT | random)
 assign_button: NAME (_IS | _EQUALS) _BUTTON

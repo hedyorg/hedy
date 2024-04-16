@@ -365,7 +365,7 @@ adventures:
                     Blackjack is een simpel kaartspelletje waarbij je zo dicht mogelijk bij 21 punten moet komen. Je krijgt twee kaarten. Elke kaart is het getal waard dat erop staat, en de kaarten met plaatjes (Boer, Vrouw, Heer) zijn 10 punten waard.\nDe Aas is 1 of 11 punten waard (dat mag je zelf kiezen). De dealer, jouw tegenstander, krijgt ook twee kaarten.\nAls je wil, mag je een derde kaart pakken en die punten worden bij jouw score opgeteld. De dealer mag ook een extra kaart pakken.\nMaar pas op dat je nooit over de 21 punten heengaat, want dan verlies je!\nDe speler die het dichtst bij de 21 punten komt, zonder eroverheen te gaan, wint!
                     Veel plezier!
                     ### Opdracht
-                     Dit programma werkt prima, maar de code is verschrikkelijk lang en omslachting. Kun jij de code opruimen en inkorten door fucnties te gebruiken?
+                     Dit programma werkt prima, maar de code is verschrikkelijk lang en omslachting. Kun jij de code opruimen en inkorten door functies te gebruiken?
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -1939,6 +1939,140 @@ adventures:
                                 {print} 'Je hebt het getal geraden!'
                                 spel = 'over'
                     ```
+    hangman:
+        name: Galgje
+        default_save_name: Hangman
+        description: Guess the word
+        levels:
+            17:
+                story_text: |
+                    In dit avontuur leer je een potje galgje programmeren. We moeten eerst wat voorbereidingen treffen, daarna kunnen we het spel programmeren en tot slot laten we de tekenturtle de galg tekenen.
+
+                    ### Opdracht
+                    ***Stel de variabelen in*** In dit potje galgje kiest Speler 1 het antwoord en Speler 2 raadt het woord door letters te kiezen.
+                    Om de computer te vertellen welke letters in het antwoord zitten, maken we het antwoord een lijstje van letters. Dit doen we ook voor de letters die speler 2 geraden heeft.
+                    We beginnen het spel met 2 lege lijstjes, want er is nog geen antwoord gekozen en nog geen letters geraden. Wij hebben de lege lijst `antwoord` alvast voor je gemaakt. Maak nu zelf een lege lijst voor `geraden_letters`.
+                    Dan stellen we in hoeven fouten er al gemaakt zijn. Aan het begin van het spel is dat natuurlijk 0.
+                    De variabele `aantal_letters` vertelt ons hoeveel letters er in het antwoord zitten. Vraag Speler 1 hoeveel letters in het antwoord zitten.
+                    Tot slot vertellen we de computer of het spel al over is of niet. We gebruiken de variabele `game_over` en stellen hem in op `False` (dat betekent niet waar).
+
+                    ***Antwoord kiezen*** We willen dat Speler 1 het antwoord kan kiezen. We vragen de speler om de volgende letter in te vullen, zo vaak als nodig is.
+                    Daarna voegen we die letter toe aan de lijst `antwoord`. Tot slot voegen we lege streepjes _ toe aan de lijst van geraden letters. We hebben evenveel streepjes nodig als het aantal letters in het antwoord.
+
+                    ***De beurt van Speler 2***
+                    Zeg dat Speler 2 aan de beurt is. Vertel Speler 2 dan hoeveel letters er in het antwoord zitten. Print daarna de lijst `geraden_letters`.
+
+                    ***Ga naar het volgende tabje*** Nu je alle variabelen hebt ingesteld kun je het spelletje zelf gaan programmeren. Kijk snel in het volgende tabje om te leren hoe dat moet!
+                example_code: |
+                    ```
+                    print 'Galgje!'
+
+                    # Stel de variabelen in
+                    antwoord = []
+                    geraden_letters = _
+                    aantal_fouten = _
+                    aantal_letters = {ask} _
+                    _ = 'False'
+
+                    # Antwoord kiezen
+                    {for} _
+                        letter = {ask} 'Speler 1, wat is letter ' i '?'
+                        _
+                        {add} '_' {to} _
+
+                    # De beurt van Speler 2
+                    print _
+                    print _
+                    print geraden_letters
+                    ```
+    hangman_2:
+        name: Galgje 2
+        default_save_name: Hangman_2
+        description: Hangman 2
+        levels:
+            17:
+                story_text: |
+                    Tijd om het spelletje te programmeren!
+
+                    ### Opdracht
+                    ***Plak je code*** Kopieer je code vanuit het vorige tabje en plak het in het invoerscherm.
+
+                    ***Het spel*** Het spel blijft doorgaan totdat je game over bent. Vul het `{while}` commando in. Speler 2 mag nu een letter raden, dus vraag aan Speler 2 welke letter die wil raden.
+                    We moeten nu checken of hun geraden letter ergens in het (lijstje) `antwoord` zit. Is dat zo, dan moeten de computer nog checken waar in het antwoord de letter zich bevindt. Dat stukje code hebben wij alvast voor je gemaakt.
+                    Vervolgens willen we de speler een complimentje geven voor het vinden van de juiste letter en we willen het lijstje `geraden_letters` printen, zodat de speler kan zien welke letters die tot nu toe geraden heeft.
+
+                    In het volgende onderdeel gaan we programmeren wat er gebeurt als de speler alle letters van het antwoord heeft geraden. Dus wanneer het lijstje `geraden_letters` hetzelfde is als het lijstje `antwoord`.
+                    Als de lijstjes hetzelfde zijn, feliciteer Speler 2 met diens overwinning en zet de variabele `game_over` op 'True' (dat betekent waar).
+
+                    Daarna programmeren we wat er gebeurt als Speler 2 een foute gok doet (dus het `{else}` commando). Vertel de speler allereerst dat diens gok fout was. Verhoog daarna de variabele `aantal_fouten` met 1.
+
+                    Als laatste programmeren we wat er gebeurt als Speler 2 10 fouten heeft gemaakt en dus verliest. We printen dat Speler 1 gewonnen heeft. Daarna printen we het juiste antwoord. Tot slot zetten we de `game_over` variabele op `True` (waar) om het spel te stoppen.
+
+                    ***Ga naar het volgende tabje*** Fantastisch! Je hebt een speelbaar spelletje gemaakt! Maar zou het niet veel leuker zijn als de galg ook daadwerkelijk getekend wordt als Speler 2 een fout maakt...?
+                example_code: |
+                    ```
+                    # Plak je code hier
+
+                    # Het spel
+                    {while} game_over _
+                        gok = _
+                        {if} _
+                            {for} i {in} {range} 1 {to} aantal_letters:
+                                {if} antwoord[i] == gok:
+                                    geraden_letters[i] = gok
+                            {print} _
+                            {if} geraden_letters == _:
+                                {print} _
+                                game_over = _
+                        {else}:
+                            {print} _
+                            aantal_fouten _
+                            {if} _ == 10:
+                                {print} _
+                                {print} _
+                                _
+                    ```
+    hangman_3:
+        name: Galgje 3
+        default_save_name: Hangman_3
+        description: Hangman 3
+        levels:
+            17:
+                story_text: |
+                    In een potje galgje wordt bij elke fout geraden letter een stukje galg bijgetekend.
+                    Dat gaan we nu onze tekenturtle laten doen!
+
+                    ### Opdracht
+                    ***Maak een functie die de galg tekent*** Maak een functie die de galg tekent in 10 stapjes. We hebben stap 1 al voor je gemaakt.
+
+                    ***Test je functie*** Voordat je verder gaat, is het slim om je functie even te testen met 10. Ben je blij met de functie, verwijder dan de regel die de functie oproept weer. We zullen de functie later oproepen als de speler een fout maakt.
+
+                    ***Plak je galgje spel onder de functie*** Ga terug naar het vorige tabje en kopieer het spel dat je gemakat hebt. plak je spel onder de functie.
+
+                    ***Roep de functie op als de speler een fout maakt*** Onder de regel `aantal_fouten = aantal_fouten + 1` roepen we de functie op. We willen dat de turtle zoveel stapjes tekent als de hoeveelheid fouten die de speler gemaakt heeft, dus roepen we de functie op met `aantal_fouten` als argument.
+
+                    ***Spelen maar!***
+                    <div class="w-full flex flex-row gap-2">
+                        Heir zie je een voorbeeld van hoe je de galg eruit kan laten zien <img src="https://github.com/hedyorg/hedy/assets/80678586/d385b691-5701-4342-b5d9-dfae1589c129" width="100">
+                    </div>
+                example_code: |
+                    ```
+                    # Maak een functie die de galg tekent
+                    {define} teken_galg {with} stap:
+                        {if} stap == 1:
+                            {color} wit
+                            {forward} -100
+                            {turn} 90
+                            {forward} -50
+                            {color} zwart
+                            {forward} 100
+                            {forward} -50
+
+                        {if} stap == 2:
+                            _
+                    # Plak je galgje spel hier
+
+                    ```
     harry_potter:
         name: Harry Potter
         default_save_name: Harry Potter
@@ -2775,7 +2909,7 @@ adventures:
 
                     ### Opdracht
                     Neem je code van het Zinge een lied avontuur en voeg muzieknoten toe!
-                    Je kunt een functie maken voor elke regel van het lied en die fucntie oproepen zodra die regel geprint is.
+                    Je kunt een functie maken voor elke regel van het lied en die functie oproepen zodra die regel geprint is.
                     We hebben de eerste regel alvast voorgedaan. Kun jij het hele lied afmaken?
                 example_code: |
                     ```
@@ -3851,6 +3985,137 @@ adventures:
                         {print} 'Ga naar het vliegveld om 02:00'
                     {else}
                         {print} 'Ga naar het treinstation om 10:00'
+                    ```
+    simon:
+        name: Simon Says
+        default_save_name: Simon
+        description: Make a game of Simon Says
+        levels:
+            16:
+                story_text: |
+                    Tijd voor een potje 'Simon Says'! Simon Says is een geheugenspelletje waarbij de speler een kleur krijgt te zien. De speler moet de juiste kleur terugzeggen.
+                    Doe je het goed? Dan komt er steeds een kleur bij en wordt de reeks die je moet onthouden dus steeds langer. Het spel stopt zodra je een fout maakt.
+
+                    ### Opdracht
+                    In dit eerste deel van het Simon Says avontuur laten we de computer een random kleur kiezen en zetten we die op een lijstje.
+
+                    ***Maak 2 lijstjes***
+                    We maken eerst het lijstje `kleuren` en vullen dat lijstje met de kleuren rood, geel, groen en blauw.
+                    Dan maken we een lijstje genaamd `simon_reeks`. Dit lijstje wordt het lijstje met het goede antwoord.
+                    Aan het begin van het spel is het lijstje nog leeg. Helaas kunnen we (nog) geen lege lijstje maken, dus vullen we het lijstje met 'leeg' en 'lijstje' en halen we die twee woorden daarna meteen weer van het lijstje af.
+
+                    ***Maak een functie die en kleur toevoegt aan de reeks*** Nu we een leeg lijstje hebben voor het goede antwoord, kunnen we het lijstje gaan vullen met random kleuren.
+                    Dit doen we met een functie. Zo kunnen we de functie elk keer als er een nieuw level is weer gebruiken om weer een nieuwe kleur toe te voegen. Noem je functie `random_kleur_toevoegen`
+                    Maak daarna de variabele `random_kleur` en kies een willekeurige kleur. Voeg de gekozen random kleur toe aan de simon_reeks.
+
+                    ***Maak een functie die de simon_reeks toont*** Noem de nieuwe functie `toon_simon_reeks` met `level` als argument. Nu willen we zoveel kleuren laten zien als het level waar we inzitten (in level 1, dus 1 kleur en in level 2, 2 kleuren etc).
+                    Dus `simon_reeks[i]` moet `level` keer worden geprint. Elke keer als er een kleur wordt geprint, moet de code even 1 seconde wachten en het scherm daarna wissen.
+
+                    ***Test het programma*** Voordat je doorgaat naar het volgende tabblad, kun je even testen of je fucnties het wel geod doen. Als de functies werken, zou je een willekeurige kleur in beeld moeten krijgen.
+                    Verwijder dit testgedeelte van je code zodra je tevreden bent en kopieer de rest van je code om verde te gaan in het volgende tabje.
+                example_code: |
+                    ```
+                    # Maak 2 lijstjes
+                    kleuren = _
+                    _ = ['leeg', 'lijstje']
+                    {remove} _ {from} simon_reeks
+                    {remove} _
+
+                    # Maak een functie die een kleur toevoegt aan de reeks
+                    _ random_kleur_toevoegen
+                        _
+                        {add} _
+
+                    # Maak een functie die de simon_reeks toont
+                    {define} _
+                        {for} i {in} {range} 1 {to} _
+                            {print} _
+                            _
+                            _
+
+                    # Test het programma
+                    {call} _
+                    {call} toon_simon_reeks {with} 1
+                    ```
+    simon_2:
+        name: Simon Says 2
+        default_save_name: Simon
+        description: Make a game of Simon Says
+        levels:
+            16:
+                story_text: |
+                    We werken verder aan de Simon Says game!
+
+                    ### Opdracht
+                    ***Plak je code hier*** Plak hier je code vanuit het voorgaande tabje. Vergeet niet om het testgedeelte te verwijderen, dat heb je nu namelijk niet nodig.
+
+                    ***Maak een functie voor de speler_reeks***  De lijst `speler_reeks` gebruiken we om de antwoorden van de speler in op te slaan. Allereerst definieren we de functie met het argument level.
+                    Daarna vragen we level keer welke kleur de speler wil kiezen. Die variabele noemen we `antwoord`. Vervolgens voegen we de variabele `antwoord` toe aan het lijstje speler_reeks.
+
+                    ***Voorbereidingen voor het spel*** Voordat we het spel programmeren in het volgende tabblad, moeten we nog wat startvariabelen maken. Eerst zetten we de variabele `level` op 1 en game_over op False (false betekent niet waar).
+                    Daarna introduceren we ons spelletje. We printen 'Welkom bij Simon Says' en wissen het scherm weer na 1 seconde.
+
+                    ***Ga door naar het volgende tabje om het spel af te maken!*** Vergeet niet eerst je code te kopiëren.
+                example_code: |
+                    ```
+                    # Plak je code hier
+
+                    # Maak een functie voor de speler_reeks
+                    {define} _
+                        {for} _
+                            _ 'Wat is kleur ' i '?'
+                            {add} antwoord {to} _
+
+                    # Voorbereidingen voor het spel
+                    level = _
+                    game_over = _
+                    {print} _
+                    _ 1
+                    _
+                    ```
+    simon_3:
+        name: Simon Says 3
+        default_save_name: Simon
+        description: Make a game of Simon Says
+        levels:
+            16:
+                story_text: |
+                    In dit tabje maken we het spel af!
+
+                    ### Opdracht
+                    ***Plak je code hier*** Kopieer je code van het vorige tabblad en plak het hier.
+
+                    ***Programmeer het spel*** Eerst programmeren we dat het spel door blijft gaan zolang je niet game over bent. Daarna printen we op welk level de speler nu is, waarvoor we de variabele level natuurlijk gebruiken. Na één seconde wissen we het scherm weer.
+                    Nu moeten we de lijst speler_reeks maken. We hebben net al een functie gemaakt om die lijst te vullen, maar we hadden het lijstje zelf nog niet gemaakt.
+                    We maken weer een lege lijst met hetzelfde trucje als eerst. We maken een lijst met 'leeg' en 'lijstje' in de lijst en verwijderen deze twee woorden daarna weer meteen van de lijst.
+                    Daarna roepen we alle drie de functies op die we net gemaakt hebben.
+                    Tot slot checken we of de speler de juiste antwoorden geeft of niet (dus of het lijstje speler_reeks overeenkomt met simon_reeks).
+                    Als dat zo is, dan geven we een compliment aan de speler. De wachten 1 seconde en verhogen het level met 1.
+                    Had de speler een fout antwoordn, dan beëindigen we het spel door de variabele game_over op True (dat betekent waar) te zetten.
+
+                    ***Veel speelplezier!*** Goed gedaan! Werkt je spel toch niet helemaal zoals het zou moeten? Debug je code dan met de lieveheersbeestjesknop.
+                example_code: |
+                    ```
+                    # Plak je code hier
+
+                    # Het spel
+                    {while} game_over _
+                        {print} _
+                        _
+                        _
+                        _ = ['leeg', 'lijstje']
+                        {remove} _
+                        {remove} _
+                        {call} _
+                        {call} _ {with} _
+                        {call} _ {with} _
+                        {if} speler_reeks == _
+                            _
+                            _
+                            _
+                        {else}
+                            _
+                            game_over = _
                     ```
     sleep_command:
         name: '{sleep}'

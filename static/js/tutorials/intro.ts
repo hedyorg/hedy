@@ -79,7 +79,7 @@ function codeOutputStep() {
   $('#code_output').addClass("z-40");
   addHighlightBorder("code_output");
 
-  runit (1, "en", "", "run",function () {
+  runit (1, "en", false, "", "run",function () {
     $ ('#output').focus ();
   });
 
