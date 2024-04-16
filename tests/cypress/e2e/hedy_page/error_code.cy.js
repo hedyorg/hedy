@@ -1,0 +1,57 @@
+import {goToHedyLevel5Page, goToHedyPage} from "../tools/navigation/nav";
+
+describe('Error code gives correct error', () => {
+    it('Misspelled Keyword', () => {
+        const error_code = "prnt Hello world!"
+        const error_code2 = "print Hello world!\nak Hello world?"
+        const error_message = `Invalid`;
+        goToHedyPage();
+
+        cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').click();
+        cy.focused().type(error_code);
+
+        cy.get('#runit').click();
+        cy.get('#errorbox').should('be.visible').should('contain', error_message);
+
+        cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').clear();
+        cy.focused().type(error_code2);
+        cy.get('#runit').click();
+        cy.get('#errorbox').should('be.visible').should('contain', error_message);
+    })
+
+    it('Missing Command', () => {
+        const error_code = "hello world"
+        const error_message = `Missing Command`;
+        goToHedyPage();
+    
+        cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').click();
+        cy.focused().type(error_code);
+    
+        cy.get('#runit').click();
+        cy.get('#errorbox').should('be.visible').should('contain', error_message);
+    })
+
+    it('Invalid Argument Type', () => {
+        const error_code = "forward lalala"
+        const error_message = `Invalid Argument Type`;
+        goToHedyPage();
+
+        cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').click();
+        cy.focused().type(error_code);
+
+        cy.get('#runit').click();
+        cy.get('#errorbox').should('be.visible').should('contain', error_message);
+    })
+
+    it('Invalid Argument', () => {
+        const error_code = "turn test"
+        const error_message = `Invalid Argument`;
+        goToHedyPage();
+    
+        cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').click();
+        cy.focused().type(error_code);
+    
+        cy.get('#runit').click();
+        cy.get('#errorbox').should('be.visible').should('contain', error_message);
+    })
+})
