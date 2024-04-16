@@ -410,94 +410,182 @@ adventures:
                     Aber pass auf, dass du nicht mehr als 21 Punkte bekommst, denn dann verlierst du!
                     Der Spieler, der am nächsten an 21 herankommt ohne sie zu überschreiten, gewinnt!
 
-                    Viel Spaß!
-
                     ### Exercise
-                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
+                    In this adventure we code the first part of our Blackjack game. We'll create a function to calculate how many points a card is worth.
+
+                    ***Set the variables***
+                    Start by making a list of all the cards, from 2 to Ace. Next make a list of the face cards, so Jack, Queen and King. Then pick a random card from the list of cards to be card_1.
+
+                    ***Create a function to calculate the points***
+                    Create a function that calculates how many points a card is worth.
+                    All the face cards are worth 10 points, the Ace is worth 11 and all the other cards are worth their numeral.
+                    Return the variable `points` at the end of the function.
+
+                    ***Test the function***
+                    Test if your function is working properly. Finish the first print command by filling in which card you've drawn. Then finish the second line by calling the function with card_1.
+                    Run the code a couple of times. Are you happy with the results? Great! Then you can remove the testing part and move on the the next tab!
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
-                    karten = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Bube', 'Dame','König', 'As']
-                    punkte = 0
-                    geber_punkte = 0
-                    karte_1 = karten[{random}]
-                    karte_2 = karten[{random}]
-                    karte_3 = karten[{random}]
-                    geber_karte_1 = karten[{random}]
-                    geber_karte_2 = karten[{random}]
-                    geber_karte_3 = karten[{random}]
-                    # Punkte für Karte 1
-                    {if} karte_1 == 'Bube' {or} karte_1 == 'Dame' {or} karte_1 == 'König':
-                        punkte = punkte + 10
-                    {elif} karte_1 == 'As':
-                        punkte = punkte + 11
-                    {else}:
-                        punkte = punkte + karte_1
-                    # Punkte für Karte 2
-                    {if} karte_2 == 'Bube' {or} karte_2 == 'Dame' {or} karte_2 == 'König':
-                        punkte = punkte + 10
-                    {elif} karte_2 == 'As':
-                        punkte = punkte + 11
-                    {else}:
-                        punkte = punkte + karte_2
-                    # Punkte für Geberkarte 1
-                    {if} geber_karte_1 == 'Bube' {or} geber_karte_1 == 'Dame' {or} geber_karte_1 == 'König':
-                        geber_punkte = geber_punkte + 10
-                    {elif} geber_karte_1 == 'As':
-                        geber_punkte = geber_punkte + 11
-                    {else}:
-                        geber_punkte = geber_punkte + geber_karte_1
-                    # Punkte für Geberkarte 2
-                    {if} geber_karte_2 == 'Bube' {or} geber_karte_2 == 'Dame' {or} geber_karte_2 == 'König':
-                        geber_punkte = geber_punkte + 10
-                    {elif} geber_karte_2 == 'As':
-                        geber_punkte = geber_punkte + 11
-                    {else}:
-                        geber_punkte = geber_punkte + geber_karte_2
-                    # Zwei As
-                    {if} card_1 == 'As' {and} card_2 == 'As':
-                        punkte = 12
-                    {if} geber_karte_1 == 'As' {and} geber_karte_2 == 'As':
-                        geber_punkte = 12
-                    # Zwischenstand
-                    {print} 'Du hast ' karte_1 ' und ' karte_2 ' (' punkte ' Punkte)'
-                    {print} 'Der Geber hat ' geber_karte_1 ' und ' geber_karte_2 ' (' geber_punkte ' Punkte)'
-                    # Extra Karte für den Spieler
-                    extra = {ask} 'Möchtest du eine extra Karte?'
-                    {if} extra == 'ja':
-                        {if} karte_3 == 'Bube' {or} karte_3 == 'Dame' {or} karte_3 == 'König':
-                            punkte = punkte + 10
-                        {elif} karte_3 == 'Ace':
-                            {if} punkte > 11:
-                                punkte = punkte + 1
+
+                    # Set these variables
+                    cards = _
+                    face_cards = _
+                    card_1 =
+
+                    # Create a function to calculate the points
+                    {define} calculate_points {with} card:
+                        {if} card {in} face_cards:
+                            points = _
+                        {elif} _
+                            _
+                        {else}:
+                            _
+                        _ points
+
+                    # Test your function
+                    {print} 'Your card is a ' _
+                    {print} 'That is worth ' _ ' points'.
+                    ```
+    blackjack_2:
+        name: Blackjack 2
+        default_save_name: Blackjack_2
+        description: Blackjack part 2
+        levels:
+            17:
+                story_text: |
+                    ### Exercise
+                    In this adventure we code the second part of our Blackjack game.
+
+                    ***Paste your code from the previous adventure***
+                    In the previous adventure you've started a list of variables and created a function to calculate how many points a card is worth. Copy your code and paste it here. Mind that you don't need the testing part, so if you haven't removed that yet, please do so now.
+
+                    ***Add more variables***
+                    You have already set the lists `cards` and `face_cards` and the variable `card_1`. Underneath those variables create 3 more variables: `card_2`, dealer_card_1` and `dealer_card_2`. These variables are all set to a random card from the list of cards.
+
+                    ***Add up points***
+                    To calculate how many points you have scored we call the function with card 1 and we do it again for card 2. Then we add both these scores together to get your total.
+                    Do the same thing for the dealers points, but be sure to use the dealer's cards and not your own!
+
+                    ***2 Aces***
+                    You're doing great! Almost all scores can be calculated now. There is only one exception: 2 Aces. If you get 2 Aces, your total is 12 points and not 22 (because 22 points would be losing!). This of course also goes for the dealer.
+
+                    ***Show the score***
+                    Lastly, you want to tell the program to tell you which cards you have drawn and how many points that is. Then show which cards the dealer has and how many points they have.
+
+                    ***Continue in the next tab***
+                    Great! You have finished this part of the game! Copy your code and go to the next tab to learn how to ask for an extra card and to declare a winner.
+                example_code: |
+                    ```
+                    # Paste your code from the previous adventure here
+
+                    # Add these variables to the list of variables
+                    card_2 = _
+                    dealer_card_1 = _
+                    dealer_card_2 = _
+
+                    # Add up your points
+                    your_points_1 = {call} _ {with} card_1
+                    your_points_2 = _
+                    your_total = _
+
+                    # Add up the dealers points
+                    dealer_points_1 = _
+                    _
+                    _
+
+                    # 2 Aces
+                    {if} card_1 == 'Ace' {and} _
+                        your_total = 12
+                    {if} dealer_card_1 _
+                        dealer_total = _
+
+                    # Show the score
+                    {print} 'You have drawn a ' _ ' and a ' _ '. That is ' _ ' points'
+                    {print} 'The dealer has drawn a ' _ ' and a ' _ '. That is ' _ ' points'
+                    ```
+    blackjack_3:
+        name: Blackjack 3
+        default_save_name: Blackjack_3
+        description: Blackjack part 3
+        levels:
+            17:
+                story_text: |
+                    In the previous tabs you have learned how to draw 2 random cards for yourself and for the dealer and to calculate how many points you both got.
+                    In this adventure we add the option to ask for an extra card for both you and the dealer.
+
+                    ### Exercise
+                    ***Paste your code from the previous adventure*** Firstly, copy your code from the previous tab and paste it here.
+
+                    ***Extra card for you*** If you want, you can get an extra card to get your total as close to 21 as possible. First ask the player if they want an extra card.
+                    If they do, pick a random card and print what they have drawn. If the card is not an Ace, you can call the function and add the points to your total.
+                    In case the card is an Ace, you can't use the function, because the Ace can be either 1 point or 11 points, depending on how many points you already have earned.
+                    If your total is less than 11, you want the ace to be 11 points (because this is closest to 21). So you add 11 points to your total.
+                    If the total is more than or equal to 11, you want the ace to be 1 point (because you don't want more than 21 points). So you add 1 point to your total.
+                    Lastly, print your new total of points.
+
+                    ***Extra card for the dealer*** The dealer can also get an extra card. The dealer doesn't need to be asked, because they always get an extra card if their total is less than 17.
+                    Copy the 'Extra card for you code' and paste it in the dealers section. Then change it to fit the dealer picking an extra card and getting points added to their total.
+                example_code: |
+                    ```
+                    # Paste your code from the previous adventure here
+
+                    # Extra card for you
+                    hit = {ask} _
+                    {if} hit == 'yes':
+                        card_3 = _
+                        {print} _
+                        {if} card_3 _ 'Ace':
+                            your_points_3 = _
+                            your_total = _
+                        {else}:
+                           {if} your_total _
+                                _
                             {else}:
-                                punkte = punkte + 11
+                                _
+                        {print} _
+
+                    # Extra card for the dealer
+                    {if} dealer_total < 17
+                    _
+                    ```
+    blackjack_4:
+        name: Blackjack 4
+        default_save_name: Blackjack_4
+        description: Blackjack part 4
+        levels:
+            17:
+                story_text: |
+                    In the last 3 adventures you have alsmost created a working blackjack game! The only thing left to do is to decide a winner!
+
+                    ### Exercise
+                    ***Paste your code from the previous adventure*** Start by pasting the code that you've made so far into your programming field.
+
+                    ***Decide a winner***
+                    Firstly, if you and the dealer have an equal amount of points, it's a draw.
+                    Secondly, if the dealer has more than 21 points and you don't, you are the winner.
+                    Thirdly, if both you and the dealer have less than 22 points, we have to see who came closest to 21. We do that by comparing who has the highest score. Is your total higher than the dealer's total, then you are the winner. If not, the dealer wins.
+                    Lastly, in all other scenarios (e.g. you have more than 21 points and the dealer doesn't, or you both have more than 21 points) you are the loser.
+
+                    ***Enjoy the game!***
+                    Does your game work properly? Amazing! You have done a great job! Enjoy your game!
+                    If it doesn't work right away, no worries, you might have made a mistake. Just keep calm and bebug your code using the ladybug button.
+                example_code: |
+                    ```
+                    # Paste your code from the previous adventure here
+
+                    # Decide a winner
+                    {if} _
+                        {print} 'Its a draw! Play again!'
+                    {elif} _
+                        {print} 'You win!'
+                    {elif} _ :
+                        {if} _:
+                            {print} _
                         {else}:
-                            punkte = punkte + karte_3
-                        {print} 'Du hast extra ' karte_3 ' (' punkte ' Punkte)'
+                            {print} _
                     {else}:
-                        {print} 'Keine extra Karten'
-                    # Gewinner
-                    {if} punkte > 21 {or} geber_punkte > punkte {or} geber_punkte == 21:
-                        {print} 'Du verlierst'
-                    {elif} geber_punkte < 17:
-                        {print} 'Der Geber nimmt eine extra Karte. Es ist eine... ' geber_karte_3
-                        {if} geber_karte_3 == 'Bube' {or} geber_karte_3 == 'Dame' {or} geber_karte_3 == 'König':
-                            geber_punkte = geber_punkte + 10
-                        {elif} geber_karte_3 == 'As':
-                            {if} geber_punkte < 11:
-                                geber_punkte = geber_punkte + 11
-                            {else}:
-                                geber_punkte = geber_punkte + 1
-                        {else}:
-                            geber_punkte = geber_punkte + geber_karte_3
-                        {print} 'Der Geber hat jetzt ' geber_punkte ' Punkte'
-                        {if} geber_punkte < 21 {and} geber_punkte > punkte:
-                            {print} 'Du verlierst'
-                        {else}:
-                            {print} 'Du gewinnst'
-                    {elif} punkte > geber_punkte {and} punkte < 21:
-                        {print} 'Du gewinnst!'
+                        _
                     ```
     calculator:
         name: Taschenrechner
