@@ -35,7 +35,7 @@ _IN: _SPACE ("in" | "in") _SPACE
 _NOT_IN: _SPACE ("non quello" | "not in") _SPACE
 _IF: ("if" | "if") _SPACE
 _ELSE: "altrimenti" | "else"
-_AND: _SPACE ("e" | "and") _SPACE
+_AND: _SPACE? ("e" | "and") _SPACE
 _REPEAT: ("ripeti" | "repeat") _SPACE
 _TIMES: _SPACE ("volte" | "times")
 _FOR: ("for" | "for") _SPACE
@@ -44,7 +44,7 @@ _TO: _SPACE ("to" | "to") _SPACE
 _STEP: "passo" | "step"
 _ELIF: _SPACE? ("altrimenti se" | "elif") _SPACE
 _INPUT: ("input" | "input")
-_OR: _SPACE ("or" | "or") _SPACE
+_OR: _SPACE? ("or" | "or") _SPACE
 _WHILE: ("mentre" | "while") _SPACE
 _LENGTH: "lunghezza" | "length"
 _COLOR : ("colore" | "color") _SPACE?

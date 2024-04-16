@@ -35,7 +35,7 @@ _IN: _SPACE ("in" | "in") _SPACE
 _NOT_IN: _SPACE ("nu în" | "not in") _SPACE
 _IF: ("if" | "if") _SPACE
 _ELSE: "else" | "else"
-_AND: _SPACE ("si" | "and") _SPACE
+_AND: _SPACE? ("si" | "and") _SPACE
 _REPEAT: ("repetă" | "repeat") _SPACE
 _TIMES: _SPACE ("inmulțit" | "times")
 _FOR: ("pentru" | "for") _SPACE
@@ -44,7 +44,7 @@ _TO: _SPACE ("către" | "to") _SPACE
 _STEP: "pas" | "step"
 _ELIF: _SPACE? ("altfel dacă" | "elif") _SPACE
 _INPUT: ("intrare" | "input")
-_OR: _SPACE ("sau" | "or") _SPACE
+_OR: _SPACE? ("sau" | "or") _SPACE
 _WHILE: ("în timp ce" | "while") _SPACE
 _LENGTH: "lungime" | "length"
 _COLOR : ("culoare" | "color") _SPACE?
