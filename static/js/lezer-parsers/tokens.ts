@@ -150,6 +150,7 @@ import {
 
 import TRADUCTION_IMPORT from '../../../highlighting/highlighting-trad.json';
 import { Stack } from "@lezer/lr";
+import { convert } from "../utils";
 export interface InitializeCodeMirrorSyntaxHighlighterOptions {
     readonly keywordLanguage: string;
     readonly level: number;
@@ -732,20 +733,3 @@ export function extendKeyword(name: string, stack: Stack) {
     }
     return -1;
 }
-
-// convert an objet in a map
-function convert(o:(object|undefined)) {
-    if (typeof o === 'object') {
-      let tmp:Map<string, object> = new Map(Object.entries(o));
-  
-      let ret:Map<string, (undefined|object)> = new Map();
-  
-      tmp.forEach((value, key) => {
-        ret.set(key, convert(value));
-      });
-  
-      return ret;
-    } else {
-      return o;
-    }
-  }
