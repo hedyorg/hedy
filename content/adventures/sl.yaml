@@ -13,18 +13,18 @@ adventures:
                 example_code: "```\nname {is} {ask} What is the name of the main character?\n{print} name is now going to run in the woods\n{print} name is a bit scared\n{print} Suddenly she hears a crazy noise...\n{sleep}\n{print} name is afraid this is a haunted forest\n```"
                 story_text_2: "### Vaja\nZdaj je čas, da v svojo zgodbo, ki ste jo ustvarili v prejšnji stopnji, dodate spremenljivke.\nPojdite v \"Moji programi\", poiščite svojo zgodbo iz 1. stopnje in prekopirajte kodo. Kodo prilepite na vnosno okno v tej stopnji.\n\nTa koda ne bo delovala v tej stopnji, ker še niste uporabili spremenljivk.\nUkaze `{ask}` in `{echo}` v kodi spremenite v pravilno obliko, ki ste se je naučili v tej stopnji.\n\n**Dodatno** V kodo dodajte ukaz `{sleep}` in tako povečajte napetost v zgodbi.\n"
             3:
-                story_text: "In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:\n"
-                example_code: "```\nanimals {is} 🦔, 🐿, 🦉, 🦇\n{print} They now hear the sound of an animals {at} {random}\n```\n"
+                story_text: "V tretji stopnji lahko zgodbo naredite bolj zabavno. Pri vsaki pošasti, živali ali drugi oviri lahko uporabite naključja, kot je ta:\n"
+                example_code: "```\nživali {is} 🦔, 🐿, 🦉, 🦇\n{print} Sedaj slišijo zvok živali {at} {random}\n```\n"
                 story_text_2: "Ukaz`{add}` je lahko priročen za vašo zgodbo.\n"
                 example_code_2: "```\n{print} They hear a sound\nanimals {is} 🐿, 🦔, 🦇, 🦉\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was an animals {at} {random}\n```\n"
                 story_text_3: "To je primer ukaza `{remove}` v vaši zgodbi\n\n### Vaja\nSvojo zgodbo iz prejšnjih stopenj kopirajte v to stopnjo.\nNa tej stopni ste se naučili 3 nove ukaze: `{at} {random}`, `{add} {to_list}` in `{remove} {from}`.\nDodajte nove vrstice kode v svojo zgodbo tako, da bodo vsi novi ukazi vsaj enkrat uporabljeni v vaši zgodbi.\n"
                 example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
             4:
-                story_text: "### Exercise\nCopy the example code and finish it by adding quotation marks on the blanks in lines 1 and 2.\nThe blanks in line 3 and 4 should not be replaced by quotation marks, but a `{sleep}` and a `{clear}` command. Can you make it work?\n\n### Exercise 2\nGo back to the previous level and copy your story code. Make the code work in this level by adding quotation marks in the right spots.\nMind: The variables in your own story should be outside of the quotation marks. Just like the second line of the example code. In that line the variable name is placed outside of the quotation marks.\n"
-                example_code: "```\nname {is} {ask} _ What is your name? _\n{print}  _ The main character is called _ name\n_\n_\n{print} name  _ is now going to walk in the woods _\n{print} name _ is a bit scared _\nanimals {is} 🦔, 🐿, 🦉, 🦇\n{print} _ He hears the sound of a _ animals {at} {random}\n{print} name _ is afraid this is a haunted forest _\n```\n"
+                story_text: "### Vaja\nKopirajte kodo primera in jo dokončajte tako, da dodate narekovaje na prazna mesta v vrsticah 1 in 2.\nPraznih mest v vrsticah 3 in 4 ne smete nadomestiti z narekovaji, temveč z ukazoma `{sleep}` in `{clear}`. Vam bo uspelo?\n\n### Vaja 2\nVrnite se na prejšnjo stopnjo in kopirajte kodo svoje zgodbe. Poskrbite, da bo program deloval na tej stopnji tako, da na prava mesta dodate narekovaje.\nPozor: Spremenljivke v vaši zgodbi morajo biti zunaj narekovajev. Tako kot v drugi vrstici kode iz primera. V tej vrstici je ime spremenljivke postavljeno zunaj narekovajev.\n"
+                example_code: "```\nime {is} {ask} _ Kako vam je ime? _\n{print}  _ Glavnemu junaku je ime _ name\n_\n_\n{print} ime  _ se bo sedaj sprehodil-a po gozdu _\n{print} name _ je nekoliko preplašen-a _\nživali {is} 🦔, 🐿, 🦉, 🦇\n{print} _ Sliši zvok _ živali {at} {random}\n{print} ime _ se boji tega zakletega gozda _\n```\n"
             5:
-                story_text: "In this level you can program different endings, which will make your story even more fun.\nIn the example code you can see how to make 2 different endings.\n\n### Exercise 1\nWrite a new short story of at least 6 lines of code about a topic of your choosing.\nNo inspiration? Choose one of these topics: a superhero, a boring school day, stranded on a desert island.\n\nNow give the player a change to choose a happy or a bad end, just like in the example code.\nProgram both the endings.\n\n### Exercise 2\nCopy the story you've created in your own story adventure in the previous levels.\nFind a way to add at least 2 `{if}` and `{else}` commands to your story.\nThis can be with a happy or bad ending, but you can also try to find other ways to incoporate the commands.\n"
-                example_code: "```\nname {is} {ask} 'Who is walking in the forest?'\n{print} name ' walks through the forest'\n{print} name ' encounters a monster'\nend {is} {ask} 'Would you like a good or a bad ending?'\n{if} end {is} good {print} name ' takes the sword and the monster quickly runs away'\n{else} {print} 'The monster eats ' name\n```\n"
+                story_text: "Na tej stopnji lahko programirate različne konce, s katerimi bo vaša zgodba še bolj zabavna.\nV primeru si lahko ogledate, kako ustvariti 2 različna konca.\n\n#### Vaja 1\nNapišite novo kratko zgodbo z vsaj 6 vrsticami kode o temi, ki jo izberete sami.\nNimate navdiha? Izberite eno od teh tem: superjunak, dolgočasen šolski dan, samotni otok.\n\nSedaj dajte igralcem možnost, da izberejo srečen ali nesrečen konec, tako kot je prikazano v primeru.\nSprogramirajte oba konca.\n\n#### Vaja 2\nKopirajte zgodbo, ki ste jo ustvarili v svoji dogodivščini v prejšnjih stopnjah.\nPoiščite način, kako zgodbi dodati vsaj dva ukaza `{if}` in `{else}`.\nTo je lahko s srečnim ali slabim koncem, lahko pa poskusite najti tudi druge načine za vključitev ukazov.\n"
+                example_code: "```\noseba {is} {ask}  'Kdo hodi po gozdu?'\n{print} oseba ' hodi po gozdu'\n{print} oseba ' naleti na pošast'\nkonec {is} {ask} 'Želiš dober ali slab zaključek?'\n{if} konec {is} dober {print} oseba ' vzame meč in pošast hitro pobegne'\n{else} {print} 'Pošast poje ' oseba\n```\n"
             7:
                 story_text: "V zgodbi nekdo večkrat ponovi iste besede. Na primer, ko nekdo kliče na pomoč ali poje pesem.\nTakšna ponavljanja lahko vključite v svojo zgodbo, na tej stopnji z `{repeat}`.\n\n### Vaja\nV svojo zgodbo dodajte ponavljanje. Vrnite se v svoje shranjene programe, izberite program zgodbe s prejšnje stopnje,\npoiščite vrstico, ki vsebuje `{print}`, in jo ponovite!\n"
                 example_code: "```\n{print} 'Princ je ves čas klical na pomoč'\n{repeat} 5 {times} {print} 'Na pomoč!'\n{print} 'Zakaj mi nihče ne pomaga?'\n```\n"
@@ -41,35 +41,35 @@ adventures:
                 story_text: "Na tej stopnji bodo potrebni narekovaji za shranjevanje več besed v spremenljivko.\n\n### Telovadba\n\nPoiščite zgodbo iz prejšnje stopnje, katera koli raven je v redu. Zdaj pa se prepričajte, da so narekovaji dodani na prava mesta."
                 example_code: "```\nime = 'Kraljica Anglije'\n{print} ime ' je jedla torto, ko je nenadoma…'\n```\n"
             13:
-                story_text: "By using the `{and}` and `{or}` commands, you can make your stories more versatile. You can ask two questions and respond to the combination of answers.\n\n### Exercise 1\nLook at the example code and finish it. Then add at least 2 more `{if}` codes with `{and}` or `{or}`.\n\n### Exercise 2\nFind a story from a previous level, and add one `{and}` or `{or}`.\n"
-                example_code: "```\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\npath = {ask} 'Which path should she choose?'\nweapon = {ask} 'What weapon does she draw?'\n{if} path {is} 'left' {and} weapon {is} 'sword'\n    _\n```\n"
+                story_text: "Z uporabo ukazov `{and}` in `{or}` lahko svoje zgodbe naredite bolj vsestranske. Postavite lahko dve vprašanji in se odzovete na kombinacijo odgovorov.\n\n### Vaja 1\nOglejte si primer kode in ga dokončajte. Nato dodajte še vsaj dve vrstici `{if}` z `{and}` ali `{or}`.\n\n### Vaja 2\nPoiščite zgodbo iz prejšnje stopnje in dodajte eno `{and}` ali `{or}`.\n"
+                example_code: "```\n{print} 'Naš junak hodi po gozdu'\n{print} 'Pot se razcepi v dve smeri'\npot = {ask} 'Katero pot naj izbere, levo ali desno?'\norožje = {ask} 'Katero orožje si bo izbral?'\n{if} pot {is} 'levo' {and} orožje {is} 'meč'\n    _\n```\n"
             15:
-                story_text: "Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game == 'on'` so you can play until the game is over.\nOr you can use `{while} sword == 'lost'` so the player can't continue the game until they have found something.\n\n### Exercise\nThe example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.\n"
+                story_text: "Z uporabo zanke `{while}` lahko naredite svoje zgodbe bolj zanimive. Uporabite lahko na primer `{while} game == 'on'` (igra == 'vključena'), da lahko igrate, dokler se igra ne konča.\nLahko pa uporabite `{while} sword == 'lost'` (meč == 'izgubljen'), tako da igralec ne more nadaljevati igre, dokler nečesa ne najde.\n\n### Vaja\nPrimer prikazuje, kako uporabiti zanko `{while}` v zgodbi. **Sedaj si zamislite svoj scenarij**, v katerem mora igralec nekaj najti, preden lahko nadaljuje.\n"
                 example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
             18:
-                story_text: "We are going to print another story, but now we have to use brackets with `{print}`.\n\n### Exercise 1\nCreate a story of at least 5 sentences. You don't have to use 'name' just yet.\n"
+                story_text: "Natisnili bomo še eno zgodbo, vendar moramo zdaj uporabiti oklepaje z `{print}`.\n\n### Vaja 1\nUstvarite zgodbo z vsaj petimi stavki. Zaenkrat vam še ni treba uporabiti spremenljivke 'ime'.\n"
                 example_code: "```\n{print}('Dobrodošel v to zgodbo!')\n```\n"
-                story_text_2: "### Exercise 2\nWe have already prepared an `{input}` for you. First, use the `name` variable in your story.\nThen add a second `{ask}` and use that variable as well.\nTip: Remember the commas in a `{print}` between text and variables!\n"
+                story_text_2: "### Vaja 2\nZa vas smo že pripravili `{input}`. Najprej v svoji zgodbi uporabite spremenljivko `name`.\nNato dodajte `{ask}` še enkrat in rezultat  prav tako shranite v spremenljivko.\nNasvet: Ne pozabite na vejice med besedilom in spremenljivkami pri ukazu `{print}`!\n"
                 example_code_2: "```\nime= {input}(\"Kako vam je ime?\")\n{print}('Dobrodošli v to zgodbo!')\n```\n"
     add_remove_command:
         name: '{add} {to_list} & {remove} {from}'
-        default_save_name: add_remove_command
-        description: introducing {add} {to_list} and {remove} {from}
+        default_save_name: ukaz_dodaj_odstrani
+        description: predstavitev {add} {to_list} in {remove} {from}
         levels:
             3:
-                story_text: "## Add to\nYou can add items to the list with the `{add} {to_list}` command. To add an item to a list you can simply type: `{add} penguin {to_list} animals` or you can use the `{ask}` command like in the example code.\n"
-                example_code: "```\nanimals {is} dog, cat, kangaroo\nlike {is} {ask} What is your favorite animal?\n{add} like {to_list} animals\n{print} I choose animals {at} {random}\n```\n"
-                story_text_2: "## Remove from\nIf you can add items to a list, of course you can also take them off. This is done with the `{remove} {from}` command.\n"
-                example_code_2: "```\nanimals {is} dog, cat, kangaroo\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}\n```\n"
-                story_text_3: "### Exercise\nTry out the new commands in this virtual restaurant. Add the flavor the player is hoping for to the list and remove the flavors they are allergic to.\n"
-                example_code_3: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nhope {is} {ask} What flavor are you hoping for?\n_\nallergies {is} {ask} Are you allergic to any flavors?\n_\n{print} You get a flavors {at} {random} milkshake\n```\n"
+                story_text: "## Dodaj v\nNa seznam lahko dodajate elemente z ukazom `{add} {to_list}`. Če želite dodati objekt na seznam, lahko preprosto vnesete: `{add} penguin {to_list} animals` ali pa lahko uporabite ukaz `{ask}`, kot je prikazano v primeru.\n"
+                example_code: "```\nživali {is} pes, mačka, kenguru\nnajljubša {is} {ask} Katero žival imate najraje?\n{add} najljubša {to_list} živali\n{print} Jaz izberem živali {at} {random}\n```\n"
+                story_text_2: "## Odstrani iz\nČe lahko objekte dodajate na seznam, jih lahko seveda tudi odstranite. To storite z ukazom `{remove} {from}`.\n"
+                example_code_2: "```\nživali {is} pes, mačka, kenguru\nnajman_ljuba {is} {ask} Katere živali ne marate najbolj?\n{remove} najman_ljuba {from} živali\n{print} Jaz izberem živali {at} {random}\n```\n"
+                story_text_3: "#### Vaja\nPreizkusite nove ukaze v tej virtualni restavraciji. Na seznam dodajte okus, katerega ima obiskovalec rad, in odstranite okuse, na katere je alergičen.\n"
+                example_code_3: "```\n{print} Skrivnosten napitek\nokusi {is} jagoda, čokolada, vanilija\nupanje {is} {ask} Na kakšen okus upate?\n_\nalergije {is} {ask} Ali ste alergični na katere koli okuse?\n_\n{print} Dobiš napitek z okusom {at} {random} okusi\n```\n"
     and_or_command:
         name: '{and} & {or}'
-        default_save_name: and or
-        description: introducing {and} & {or}
+        default_save_name: in ali
+        description: predstavljamo {and} & {or}
         levels:
             13:
-                story_text: "We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but can use `{and}` and `{or}`.\n\nIf you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct."
+                story_text: "Zdaj se bomo naučili `{and}` in `{or}`! Če želite preveriti dva stavka, vam ni treba uporabiti dveh `{if}` ukazov, ampak lahko uporabite `{and}` in `{or}`.\n\nČe uporabljate ukaz `{and}`, morata biti obe trditvi, levo in desno od `{and}`, resnični. Uporabimo lahko tudi `{or}`. Potem mora biti le ena trditev pravilna."
                 example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
     ask_command:
         name: '{ask}'
@@ -81,20 +81,20 @@ adventures:
                 example_code: "```\n{print} Pozdravljeni!\n{ask} Kako vam je ime?\n```\n"
                 story_text_2: "## Ukaz `{echo}`\nČe želite, da vam računalnik ponovi odgovor, lahko uporabite ukaz `{echo}`. Odgovor bo ponovljen na koncu stavka, v tem primeru torej za pozdravom.\n"
                 example_code_2: "```\n{print} Pozdravljeni!\n{ask} Kako vam je ime?\n{echo} zdravo\n```\n"
-                story_text_3: "#### Vaja\nPreizkusite ukaza `{ask}` in `{echo}`. Najprej izpolnite prazna mesta, da bo program deloval.\nNato postavite še dve vprašanji z ukazom `{ask}`, po vsakem `{ask}` pa uporabite ukaz `{echo}` za izpis odgovora na zaslon.\n"
+                story_text_3: "#### Vaja\nPreizkusite ukaza `{ask}` in `{echo}`. Najprej izpolnite prazna mesta, da bo program deloval.\nNato postavite še dve vprašanji z ukazom `{ask}`, po vsakem ukazu `{ask}` pa dodajte še ukaz `{echo}` za izpis odgovora na zaslon.\n"
                 example_code_3: "```\n_ Kako ste?\n_\n```\n"
             2:
-                story_text: "## The ask command\nNow that we can use **variables** in our codes, we no longer need the `{echo}` command.\nWe can use variables to store the answers to our questions and this way we can use the answer to multiple questions in our codes.\nCheck it out:\n\nThis way your code is becoming interactive!\n"
-                example_code: "```\nname {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old.\n```\n"
-                story_text_2: "### Exercise\nIn the previous tab you have practised with setting variables with the `{is}` command.\nYou have created at least 3 variables and used them with a print command.\nNow, instead of setting the variables we want you to make the variables interactive, like we did in our example.\n\nCopy your code from the previous tab and make the variables interactive by using `{ask}` commands.\n"
-                example_code_2: "```\nfavorite_animals {is} {ask} What is your favorite animal?\n{print} I like favorite_animals\n```\n"
+                story_text: "## Ukaz vprašaj\nZdaj, ko lahko uporabljamo **spremenljivke** v naših programih, ne potrebujemo več ukaza `{echo}`.\nSpremenljivke lahko uporabimo za shranjevanje odgovorov na vprašanja. Tako lahko uporabimo odgovor na več vprašanj v naših programih.\nPreverite:\n\nNa ta način vaša koda postaja interaktivna!\n"
+                example_code: "```\nime {is} {ask} Kako vam je ime?\n{print} Pozdravljeni ime\nstarost {is} {ask} Koliko ste stari?\n{print} ime je star-a starost let.\n```\n"
+                story_text_2: "### Vaja\nV prejšnjem zavihku ste vadili nastavljanje spremenljivk z ukazom `{is}`.\nUstvarili ste vsaj 3 spremenljivke in jih uporabili z ukazom za izpisovanje.\nZdaj, namesto da nastavite spremenljivke, želimo, da spremenljivke naredite interaktivne, kot smo mi storili v našem primeru.\n\nKopirajte svojo kodo iz prejšnjega zavihka in naredite spremenljivke interaktivne z uporabo ukazov `{ask}`.\n"
+                example_code_2: "```\npriljubljena_žival {is} {ask} Katera žival vam je najljubša?\n{print} Rad-a imam priljubljena_žival\n```\n"
             18:
-                story_text: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
-                example_code: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
+                story_text: Zadnja sprememba, ki jo bomo morali narediti, da dobimo kodo Python, je sprememba iz `{ask}` v `{input}`.
+                example_code: "```\n{print}('Moje ime je Hedy!')\nime = {input}('Kako je pa vam ime?')\n{print}('Torej vam je ime ', ime)\n```\n"
     blackjack:
         name: Blackjack
         default_save_name: Blackjack
-        description: Try to get as close to 21 as you can
+        description: Poskusite se čim bolj približati 21
         levels:
             17:
                 story_text: |
@@ -282,19 +282,19 @@ adventures:
                         _
                     ```
     calculator:
-        name: Calculator
-        default_save_name: Calculator
-        description: Create a calculator
+        name: Kalkulator
+        default_save_name: Kalkulator
+        description: Ustvarite kalkulator
         levels:
             6:
-                story_text: "Now that you can do maths, you can make a calculator yourself!\n"
-                example_code: "```\nnumber_1 = {ask} 'Fill in the first number:'\nnumber_2 = {ask} 'Fill in the second number:'\ncorrect_answer = number_1 * number_2\n{print} number_1 ' times ' number_2 ' is ' correct_answer\n```\n"
-                story_text_2: "### Exercise\nThe calculator above will calculate the answer for you, but you can also make a program to test your own maths skills, like this:\nFill in the blanks to make it complete!\n"
-                example_code_2: "```\ncorrect_answer = 11 * 27\nanswer = {ask} 'How much is 11 times 27?'\n{if} answer {is} _ {print} 'good job!'\n{else} {print} 'Wrong! It was ' _\n```\n"
-                story_text_3: "**Extra** You can also let the computer do random products on its own using `{random}`.\n"
-                example_code_3: "```\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber_1 = _\nnumber_2 = _\ncorrect_answer = number_1 * number_2\ngiven_answer = {ask} 'What is ' number_1 ' times ' number_2 '?'\n{if} _\n{else} _\n```"
+                story_text: "Zdaj, ko znate računati, lahko sami naredite kalkulator!\n"
+                example_code: "```\nštevilka_1 = {ask} 'Vnesite prvo številko:'\nštevilka_2 = {ask} 'Vnesite drugo številko:'\npravilen_odgovor = številka_1  * številka_2\n{print} številka_1 ' krat ' številka_2 ' je ' pravilen_odgovor\n```\n"
+                story_text_2: "### Vaja\nZgornji kalkulator bo namesto vas izračunal odgovor, lahko pa naredite tudi program za preverjanje lastnih matematičnih sposobnosti, kot je ta:\nIzpolnite prazna polja, da bo dokončana!\n"
+                example_code_2: "```\npravilen_odgovor = 11 * 27\nodgovor = {ask} 'Koliko je 11 krat 27?'\n{if} answer {is} _ {print} 'Dobro opravljeno!'\n{else} {print} 'Narobe, odgovor je ' _\n```\n"
+                story_text_3: "**Dodatno** Računalniku lahko tudi dovolite, da sam naredi naključne izdelke z uporabo `{random}`.\n"
+                example_code_3: "```\nštevilke = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nštevilka_1 = _\nštevilka_2 = _\npravilen_odgovor = številka_1 * številka_2\npodan_odgovor = {ask} 'Koliko je ' številka_1' krat ' številka_2'?'\n{if} _\n{else} _\n```"
             9:
-                story_text: "In a previous level you've created a calculator, in this level you can expand that code so it asks multiple questions.\n\n### Exercise 1\nCan you finish line 10 to get the code to work?\n\n### Exercise 2\nGive the player feedback when they enter an answer, like `{print} 'Correct!'` or `{print} 'Wrong! The correct answer is ' correct_answer`.\n"
+                story_text: "Na prejšnji stopnji ste ustvarili kalkulator, na tej stopnji pa lahko to kodo razširite, tako da postavlja več vprašanj.\n\n### Vaja 1\nAli lahko končate vrstico 10, da bo koda delovala?\n\n### Vaja 2\nPosredujte igralcu povratne informacije, ko vnese odgovor, na primer `{print} 'Pravilno!'` ali pa `{print} 'Napačno! Pravilen odgovor je ' pravilen_odgovor`.\n"
                 example_code: "```\nscore = 0\n{repeat} 10 {times}\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number_1 = numbers {at} {random}\n    number_2 = numbers {at} {random}\n    correct_answer = number_1 * number_2\n    {print} 'What is ' number_1 ' times ' number_2 '?'\n    answer = {ask} 'Type your answer here...'\n    {print} 'Your answer is ' answer\n    {if} _ {is} _\n        score = score + 1\n{print} 'Great job! Your score is... ' score ' out of 10!'\n```\n"
             10:
                 story_text: "This calculator game helps you practise your tables of multiplication!\n### Exercise\nFill in the blanks. We want this program to ask the player these questions:\n```\nHow much is 1 times 1?\nHow much is 1 times 2?\nHow much is 1 times 3?\nHow much is 2 times 1?\nHow much is 2 times 2?\nHow much is 2 times 3?\nHow much is 3 times 1?\nHow much is 3 times 2?\nHow much is 3 times 3?\n_\n```\n"
@@ -578,6 +578,141 @@ adventures:
             14:
                 story_text: "In this level you can program the game 'Guess my number'\n\n### Exercise\nFill in the correct symbols on the blanks to get the game to work.\n"
                 example_code: "```\n{print} 'Guess my number'\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber = numbers {at} {random}\ngame = 'on'\n{for} i {in} {range} 1 {to} 10\n    {if} game == 'on'\n        guess = {ask} 'Which number do you think it is?'\n        {if} guess _ number\n            {print} 'Lower!'\n        {if} guess _ number\n            {print} 'Higher!'\n        {if} guess _ number\n            {print} 'You win!'\n            game = 'over'\n```\n"
+    hangman:
+        name: Hangman
+        default_save_name: Hangman
+        description: Guess the word
+        levels:
+            17:
+                story_text: |
+                    In this adventure we program a game of hangman. First we make some preparations, then we program the game and in the third part we add a drawing with the turtle.
+
+                    ### Exercise
+                    ***Set the variables*** In this game of hangman, Player 1 chooses an answer and Player 2 has to guess the letters in this answer.
+                    To let the computer know all the letters in the word, we will turn the answer into a list of letters. We also do this with the guesses Player 2 makes.
+                    We will start the game with 2 empty lists. We have made an empty list for the variable answer for you. Now make an empty list for guessed_letters as well.
+                    Then we fill in how many mistakes were made. At the start of the game, this should be 0.
+                    The variable `amount_letters` tells us how many letters are in the answer. Ask Player 1 to tell us how many letters their word has.
+                    Lastly we tell the computer if the game is over. We use the variable `game_over` and set it to `False`.
+
+                    ***Choosing the answer*** We want Player 1 to be able to choose the answer. We'll ask them, as many times as necessary, what the next letter is.
+                    Then we add that letter to the answer. Lastly, we add an empty _ to the list of guessed letters, so we get as many _s as there are letters in the answer.
+
+                    ***Player 2's turn***
+                    Tell Player 2 its their turn. Then tell Player 2 how many letters there are in the answer. Finally, print the list of `guessed_letters`.
+
+                    ***Go to the next tab*** Now that all the starting variables are set, we can start programming the game itself. Check out the next tab to learn how!
+                example_code: |
+                    ```
+                    print 'Hangman!'
+
+                    # Set the variables
+                    answer = []
+                    guessed_letters = _
+                    mistakes_made = _
+                    amount_letters = {ask} _
+                    _ = 'False'
+
+                    # Choosing the answer
+                    {for} _
+                        letter = {ask} 'Player 1, what is letter ' i '?'
+                        _
+                        {add} '_' {to} _
+
+                    # Player 2 turn
+                    print _
+                    print _
+                    print guessed_letters
+                    ```
+    hangman_2:
+        name: Hangman 2
+        default_save_name: Hangman_2
+        description: Hangman 2
+        levels:
+            17:
+                story_text: |
+                    Now it's time to program the hangman game.
+
+                    ### Exercise
+
+                    ***Paste your code*** Copy your code from the previous tab and paste the code in the programming field.
+
+                    ***The game*** This games continues playing until Player 2 is game over. Fill in the while command accordingly. Now, Player 2 is allowed to guess a letter, so ask Player 2 to guess a letter.
+                    We need to check if their answer is correct, so check if their `guess` is (somewhere) in the (list) `answer`. Then we let the computer figure out which of the letter(s) is the guess. We have already programmed that part for you.
+                    Next we want to compliment the player for finding a correct letter and we want to print the list `guessed_letters`, so the player can see their progress.
+
+                    The next part we're going to program is what happens when the player has guessed all of the letters. So if their list of `guessed_letters` is the same as our list `answer`.
+                    If the lists are the same, congratulate Player 2 with their victory and set the variable `game_over` to `True`.
+
+                    Next we'll program what happens when Player 2 guesses wrong (so the `{else}` command). First, tell the player that their guess was wrong. Then increase the `mistakes_made` variable by 1.
+
+                    For the last part we'll program what happens when Player 2 has made 10 mistakes. We'll print that Player 1 has won the game. Then we'll print the correct answer. And finally, we'll set our `game_over` variable to `True`, so the game stops.
+
+                    ***Go to the next tab*** Amazing work! Your game is playable, but wouldn't it be fun if the hangman was actually drawn when Player 2 makes a mistake..?
+                example_code: |
+                    ```
+                    # Paste your code here
+
+                    # The game
+                    {while} game_over _
+                        guess = _
+                        {if} _
+                            {for} i {in} {range} 1 {to} amount_letters:
+                                if answer[i] == guess:
+                                    guessed_letters[i] = guess
+                            {print} _
+                            {if} guessed_letters == _:
+                                {print} _
+                                game_over = _
+                        {else}:
+                            {print} _
+                            mistakes_made _
+                            {if} _ == 10:
+                                {print} _
+                                {print} _
+                                _
+                    ```
+    hangman_3:
+        name: Hangman 3
+        default_save_name: Hangman_3
+        description: Hangman 3
+        levels:
+            17:
+                story_text: |
+                    In a game of hangman the mistakes are shown by drawing a part of the hangman each time a mistake has been made.
+                    We now add those drawings with our turtle!
+
+                    ### Exercise
+                    ***Create a function that draws the hangman*** Create a function that draws the hangman in 10 steps. We have already made step 1 for you.
+
+                    ***Test the function*** Test the function by calling the function with 10. If you are happy with the function, remove the line that calls the function for now. We will call the function when the player makes a mistake.
+
+                    ***Paste your hangman game under your function*** Go back to the previous tab and copy your hangman game. Paste the game underneath your function.
+
+                    ***Call the function when the player makes a mistake*** Under the line `mistakes_made = mistakes_made + 1` we will call the function. We want the turtle to take the same amount of steps as the player has made mistakes, so we call the function with `mistakes_made` as argument.
+
+                    ***Enjoy your game!***
+                    <div class="w-full flex flex-row gap-2">
+                        The hangman could look like this <img src="https://github.com/hedyorg/hedy/assets/80678586/d385b691-5701-4342-b5d9-dfae1589c129" width="100">
+                    </div>
+                example_code: |
+                    ```
+                    # Create a function that draws the hangman
+                    {define} draw_hangman {with} step:
+                        {if} step == 1:
+                            {color} white
+                            {forward} -100
+                            {turn} 90
+                            {forward} -50
+                            {color} black
+                            {forward} 100
+                            {forward} -50
+
+                        {if} step == 2:
+                            _
+                    # Paste your hangman game here
+
+                    ```
     harry_potter:
         name: Harry Potter
         default_save_name: Harry Potter

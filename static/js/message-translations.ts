@@ -34,7 +34,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "bg": {
-    "CheckInternet": "Проблеми с интернетната ти връзка. Ще я провериш ли.",
+    "CheckInternet": "Провери дали имаш връзка с интернет.",
     "Connection_error": "Изгубихме връзка със сървъра.",
     "Empty_output": "Кодът работи, но няма нищо за принтиране.",
     "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
@@ -1105,7 +1105,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "disabled": "Disabled",
     "fortune": "🔮, ✨",
     "haunted": "🦇, 👻, 🎃",
-    "level_title": "Level",
+    "level_title": "Stopnja",
     "restaurant": "🍣, 🍕, 🍔",
     "rock": "✂️, 📜, 🗻",
     "songs": "🎵,🎶",

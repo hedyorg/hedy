@@ -132,7 +132,7 @@ adventures:
                     {else} {print} '怪物吃掉了' 名字
                     ```
             7:
-                story_text: "在故事里，有人会重复同一个词好几次。比如，当有人在呼救或者唱歌。\n在这一级，你可以通过`{repeat}`在故事中加入这种重复。\n \n### 练习 \n在你自己的故事中加入重复的内容。返回你保存的程序中，选择第6级的故事程序，找到一个包含`{print}` 的行，然后重复它！\n"
+                story_text: "在故事里，有人会重复同一个词好几次。比如，当有人在呼救或者唱歌。\n在这一级，你可以通过`{repeat}`在故事中加入这种重复。\n \n### 练习 \n在你自己的故事中加入重复的内容。返回你保存的程序中，选择第6级的故事程序，\n找到一个包含`{print}` 的行，然后重复它！\n"
                 example_code: |
                     ```
                     {print} '王子不断地呼救'
@@ -175,8 +175,7 @@ adventures:
 
                      ### 练习
 
-                    请看
-                    <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> the story</a> 如果你不知道这个故事，请确保它是按照书中的内容打印的。
+                    请看<a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> the story</a> 如果你不知道这个故事，请确保它是按照书中的内容打印的。
                 example_code: "```\n动物们 = _ , _ , _ \n{print} '棕熊，棕熊 '\n{print} '你看到了什么？'\n```\n"
             12:
                 story_text: |-
@@ -257,8 +256,8 @@ adventures:
         levels:
             3:
                 story_text: |
-                    ## 添加
-                    您可以使用`{add} {to_list}`命令将项目添加到列表中。 要将项目添加到列表中，您只需键入：`{add} 企鹅{to_list} 动物们`，或者您可以使用`{ask}`命令，如示例代码中所示。
+                    ## 添加到
+                    可以使用`{add} {to_list}`命令将项目添加到列表中。要将项目添加到列表中，可以简单地键入：`{add} penguin {to_list} animals`，或者可以像示例代码中那样使用`{ask}`命令。
                 example_code: |
                     ```
                     动物 {is} 狗, 猫, 袋鼠
@@ -362,8 +361,8 @@ adventures:
                     从前页复制你的代码，通过使用 `{ask}` 让变量交互运行.
                 example_code_2: |
                     ```
-                    favorite_animals {is} {ask} 你喜欢什么 动物?
-                    {print} 我喜欢 favorite_animals
+                    动物 {is} {ask} 你喜欢什么 动物?
+                    {print} 我喜欢  动物
                     ```
             18:
                 story_text: 要转换成Python代码，我们需要做的最后一个更改是替换 `{ask}` 为 `{input}`.
@@ -385,6 +384,7 @@ adventures:
                     如果你愿意，你可以再抽一张卡，它的积分会加到你的积分中。发牌人也可以选择拿另一张牌。
                     但是要注意不要超过21分，因为如果你超过了，你就输了!
                     最接近21但没有超过它的玩家获胜。
+
 
                     ### Exercise
                     In this adventure we code the first part of our Blackjack game. We'll create a function to calculate how many points a card is worth.
@@ -603,13 +603,13 @@ adventures:
                     ```
             9:
                 story_text: |
-                    在第 6 级中，您编写了一个计算器程序，在此级别中，您可以扩展该程序来提出多个问题。
+                    在上一个级别中，您创建了一个计算器，在此级别中，可以扩展该代码，以便它询问多个问题。
 
-                    ### 练习 1
-                    你能完成第 10 行以使程序工作吗？
+                    ### 练习1
+                    您可以完成第10行以使代码工作吗？
 
-                    ### 练习 2
-                    输入正确或错误的答案时对玩家给出反馈。为此，请使用 `{else}` 来扩展程序。
+                    ### 练习2
+                    当玩家输入答案时给予反馈，如`{print} 'Correct!'`”或`{print} 'Wrong! The correct answer is ' correct_answer`
                 example_code: |
                     ```
                     分数 = 0
@@ -1205,6 +1205,7 @@ adventures:
                     恭喜！ 您已达到第 2 级。希望您已经编写了一些很棒的代码！
                     在第一级中，您可能已经注意到 `{echo}`命令一次只能保存一位信息。
                     例如，在餐厅冒险中，您可以回应顾客想吃什么或他们想喝什么，但不能在一句话中同时回应两者。
+
                     这在第 2 级中发生了变化。在第 2 级中，您将学习如何使用变量，它允许您保存多条信息并将其打印在您想要的任何位置。
                     那么让我们转到下一个选项卡！
                 example_code: |
@@ -1916,7 +1917,7 @@ adventures:
 
                     例如，在这个代码中，我们编写了歌曲“My Bonnie is over the ocean”的第一节。
                     在这个示例代码中使用了参数`place`。place是一个只在函数中使用的变量，所以是一个参数。
-                    为了使用`place`，我们编写了一行`定义歌曲用place`。
+                    为了使用`place`，我们编写了一行`define song with place`。
                     当函数被调用时，计算机将用`call song with`后的一段文本替换参数`place`。
 
                     ### 练习
@@ -1987,6 +1988,141 @@ adventures:
                             {if} guess _ number
                                 {print} 'You win!'
                                 game = 'over'
+                    ```
+    hangman:
+        name: Hangman
+        default_save_name: Hangman
+        description: Guess the word
+        levels:
+            17:
+                story_text: |
+                    In this adventure we program a game of hangman. First we make some preparations, then we program the game and in the third part we add a drawing with the turtle.
+
+                    ### Exercise
+                    ***Set the variables*** In this game of hangman, Player 1 chooses an answer and Player 2 has to guess the letters in this answer.
+                    To let the computer know all the letters in the word, we will turn the answer into a list of letters. We also do this with the guesses Player 2 makes.
+                    We will start the game with 2 empty lists. We have made an empty list for the variable answer for you. Now make an empty list for guessed_letters as well.
+                    Then we fill in how many mistakes were made. At the start of the game, this should be 0.
+                    The variable `amount_letters` tells us how many letters are in the answer. Ask Player 1 to tell us how many letters their word has.
+                    Lastly we tell the computer if the game is over. We use the variable `game_over` and set it to `False`.
+
+                    ***Choosing the answer*** We want Player 1 to be able to choose the answer. We'll ask them, as many times as necessary, what the next letter is.
+                    Then we add that letter to the answer. Lastly, we add an empty _ to the list of guessed letters, so we get as many _s as there are letters in the answer.
+
+                    ***Player 2's turn***
+                    Tell Player 2 its their turn. Then tell Player 2 how many letters there are in the answer. Finally, print the list of `guessed_letters`.
+
+                    ***Go to the next tab*** Now that all the starting variables are set, we can start programming the game itself. Check out the next tab to learn how!
+                example_code: |
+                    ```
+                    print 'Hangman!'
+
+                    # Set the variables
+                    answer = []
+                    guessed_letters = _
+                    mistakes_made = _
+                    amount_letters = {ask} _
+                    _ = 'False'
+
+                    # Choosing the answer
+                    {for} _
+                        letter = {ask} 'Player 1, what is letter ' i '?'
+                        _
+                        {add} '_' {to} _
+
+                    # Player 2 turn
+                    print _
+                    print _
+                    print guessed_letters
+                    ```
+    hangman_2:
+        name: Hangman 2
+        default_save_name: Hangman_2
+        description: Hangman 2
+        levels:
+            17:
+                story_text: |
+                    Now it's time to program the hangman game.
+
+                    ### Exercise
+
+                    ***Paste your code*** Copy your code from the previous tab and paste the code in the programming field.
+
+                    ***The game*** This games continues playing until Player 2 is game over. Fill in the while command accordingly. Now, Player 2 is allowed to guess a letter, so ask Player 2 to guess a letter.
+                    We need to check if their answer is correct, so check if their `guess` is (somewhere) in the (list) `answer`. Then we let the computer figure out which of the letter(s) is the guess. We have already programmed that part for you.
+                    Next we want to compliment the player for finding a correct letter and we want to print the list `guessed_letters`, so the player can see their progress.
+
+                    The next part we're going to program is what happens when the player has guessed all of the letters. So if their list of `guessed_letters` is the same as our list `answer`.
+                    If the lists are the same, congratulate Player 2 with their victory and set the variable `game_over` to `True`.
+
+                    Next we'll program what happens when Player 2 guesses wrong (so the `{else}` command). First, tell the player that their guess was wrong. Then increase the `mistakes_made` variable by 1.
+
+                    For the last part we'll program what happens when Player 2 has made 10 mistakes. We'll print that Player 1 has won the game. Then we'll print the correct answer. And finally, we'll set our `game_over` variable to `True`, so the game stops.
+
+                    ***Go to the next tab*** Amazing work! Your game is playable, but wouldn't it be fun if the hangman was actually drawn when Player 2 makes a mistake..?
+                example_code: |
+                    ```
+                    # Paste your code here
+
+                    # The game
+                    {while} game_over _
+                        guess = _
+                        {if} _
+                            {for} i {in} {range} 1 {to} amount_letters:
+                                if answer[i] == guess:
+                                    guessed_letters[i] = guess
+                            {print} _
+                            {if} guessed_letters == _:
+                                {print} _
+                                game_over = _
+                        {else}:
+                            {print} _
+                            mistakes_made _
+                            {if} _ == 10:
+                                {print} _
+                                {print} _
+                                _
+                    ```
+    hangman_3:
+        name: Hangman 3
+        default_save_name: Hangman_3
+        description: Hangman 3
+        levels:
+            17:
+                story_text: |
+                    In a game of hangman the mistakes are shown by drawing a part of the hangman each time a mistake has been made.
+                    We now add those drawings with our turtle!
+
+                    ### Exercise
+                    ***Create a function that draws the hangman*** Create a function that draws the hangman in 10 steps. We have already made step 1 for you.
+
+                    ***Test the function*** Test the function by calling the function with 10. If you are happy with the function, remove the line that calls the function for now. We will call the function when the player makes a mistake.
+
+                    ***Paste your hangman game under your function*** Go back to the previous tab and copy your hangman game. Paste the game underneath your function.
+
+                    ***Call the function when the player makes a mistake*** Under the line `mistakes_made = mistakes_made + 1` we will call the function. We want the turtle to take the same amount of steps as the player has made mistakes, so we call the function with `mistakes_made` as argument.
+
+                    ***Enjoy your game!***
+                    <div class="w-full flex flex-row gap-2">
+                        The hangman could look like this <img src="https://github.com/hedyorg/hedy/assets/80678586/d385b691-5701-4342-b5d9-dfae1589c129" width="100">
+                    </div>
+                example_code: |
+                    ```
+                    # Create a function that draws the hangman
+                    {define} draw_hangman {with} step:
+                        {if} step == 1:
+                            {color} white
+                            {forward} -100
+                            {turn} 90
+                            {forward} -50
+                            {color} black
+                            {forward} 100
+                            {forward} -50
+
+                        {if} step == 2:
+                            _
+                    # Paste your hangman game here
+
                     ```
     harry_potter:
         name: 哈利·波特
@@ -2390,17 +2526,17 @@ adventures:
                     ```
                     name {is} 海蒂
                     age {is} 15
-                    {print} name 是 age 岁
+                    {print} name  是 age  岁
                     ```
                 story_text_2: |
                     ### 练习
                     是时候创建自己的变量了!
-                    在示例代码中，我们以变量“favorite_animals”为例。在第1行中设置了变量，在第2行中，我们在`{print}`命令中使用了变量。
+                    在示例代码中，我们以变量“动物”为例。在第1行中设置了变量，在第2行中，我们在`{print}`命令中使用了变量。
                     首先，在空白处填上你最喜欢的动物，完成我们的例子。然后自己编写至少3个这样的代码。选择一个变量，并使用`{is}`命令设置该变量。然后使用`{print}`命令，就像我们所做的那样。
                 example_code_2: |
                     ```
                     最喜爱的动物 {is} _
-                    {print} 我喜欢 favorite_animals
+                    {print} 我喜欢  动物
                     ```
             6:
                 story_text: |
@@ -3117,7 +3253,7 @@ adventures:
                 story_text_2: |
                     ### 练习
                     在海蒂中，你会在每一次冒险中找到练习。练习允许您练习新的命令和概念，并允许您对示例代码进行自己的修改。
-                    在这个练习中，你会看到一个粉红色的空白区域。在运行能代码之前，必须在空白处填充一些东西。
+                    在这个练习中，你会看到一个粉红色的空白区域。在运行代码之前，必须在空白处填充一些东西。
 
                     在空格中填写`{print}`命令，然后再添加5行代码。每行必须以`{print}`命令开头。
                     玩得开心!
@@ -3326,18 +3462,19 @@ adventures:
                     ```
             9:
                 story_text: |
-                    在这个关卡中，您不仅可以对多行使用带有`{if}`和`{repeat}`，还可以将它们放在一起!
-                    在这个例子中，你可以在一个`{repeat}`命令中看到一个`{if}`命令。反过来也是允许的，`{if}`也可以出现在`{if}`中，`{repeat}`出现在`{repeat}`中。
-                    试试吧!
+                    干得好！你已经达到了另一个新水平！在上一级中，你学会了在{if}或{repeat}命令中使用多行代码。但是你还不能将两者结合起来……
+
+                    好消息！在这个级别中，您将被允许在{if}中或{repeat}命令中放置一个{if}。将一个代码块放在另一个代码块中称为嵌套。
                 example_code: |
                     ```
-                    {repeat} 3 {times}
-                        food = {ask} '你想要什么?'
-                        {if} food {is} pizza
-                            {print} '棒!'
-                        {else}
-                            {print} '披萨更好一点'
-                    ```
+                    answer = {ask} 'Are you ready to learn something new?'
+                    {if} answer {is} yes
+                        {print} 'Great! You can learn to use the repeat command in the if command!'
+                        {print} 'Hooray!'
+                        {print} 'Hooray!'
+                        {print} 'Hooray!'
+                    {else}
+                        {print} 'Maybe you should practice some more in the previous level'
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: repeat_命令_2
@@ -4792,9 +4929,10 @@ adventures:
             12:
                 story_text: |
                     ### 练习
-                    用小海龟重画图画!
+                    用乌龟重新绘制图纸！
+                    提示：手镯设计程序。首先，为手镯上要使用的每个形状定义一个函数。然后，将形状添加到手镯中，如下所示：
                     </div>
-                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
+                    手镯设计程序 <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
                 example_code: |
                     ```
                     {define} draw_a_square

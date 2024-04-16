@@ -12,6 +12,7 @@ import subprocess
 import sys
 import traceback
 import textwrap
+import unicodedata
 import zipfile
 import jinja_partials
 from typing import Optional
@@ -24,7 +25,7 @@ from flask import (Flask, Response, abort, after_this_request, g,
                    redirect, request, send_file, url_for, jsonify,
                    send_from_directory, session)
 from flask_babel import Babel, gettext
-from flask_commonmark import Commonmark
+from website.flask_commonmark import Commonmark
 from flask_compress import Compress
 from urllib.parse import quote_plus
 
@@ -75,7 +76,12 @@ app.json = JinjaCompatibleJsonProvider(app)
 # Use 5 minutes as a reasonable default for all files we load elsewise.
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = datetime.timedelta(minutes=5)
 
-babel = Babel(app)
+
+def get_locale():
+    return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
+
+
+babel = Babel(app, locale_selector=get_locale)
 
 jinja_partials.register_extensions(app)
 app.template_filter('tojson')(proper_tojson)
@@ -257,11 +263,6 @@ def load_customized_adventures(level, customizations, into_adventures):
             into_adventures.append(adv)
 
 
-@babel.localeselector
-def get_locale():
-    return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
-
-
 cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
 
 
@@ -414,6 +415,9 @@ def setup_language():
     # front-end is fixed based on this value
     g.dir = static_babel_content.TEXT_DIRECTIONS.get(g.lang, 'ltr')
 
+    # True if it is a Latin alphabet, False if not
+    g.latin = all('LATIN' in unicodedata.name(char, '').upper() for char in current_language()['sym'])
+
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
         return "Language " + g.lang + " not supported", 404
@@ -525,6 +529,8 @@ def parse():
         return "if present, body.adventure_name must be a string", 400
     if 'is_debug' not in body:
         return "body.is_debug must be a boolean", 400
+    if 'raw' not in body:
+        return "body.raw is missing", 400
     error_check = False
     if 'error_check' in body:
         error_check = True
@@ -539,6 +545,7 @@ def parse():
 
     # true if kid enabled the read aloud option
     read_aloud = body.get('read_aloud', False)
+    raw = body.get('raw')
 
     response = {}
     username = current_user()['username'] or None
@@ -554,7 +561,8 @@ def parse():
                 transpile_result = transpile_add_stats(code, level, lang, is_debug)
                 if username and not body.get('tutorial'):
                     DATABASE.increase_user_run_count(username)
-                    ACHIEVEMENTS.increase_count("run")
+                    if not raw:
+                        ACHIEVEMENTS.increase_count("run")
             except hedy.exceptions.WarningException as ex:
                 translated_error = get_error_text(ex, keyword_lang)
                 if isinstance(ex, hedy.exceptions.InvalidSpaceException):
@@ -627,12 +635,13 @@ def parse():
                 except BaseException:
                     pass
 
-        try:
-            if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
-                    username, code, level, response, transpile_result.commands):
-                response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
-        except Exception as E:
-            print(f"error determining achievements for {code} with {E}")
+        if not raw:
+            try:
+                if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
+                        username, code, level, response, transpile_result.commands):
+                    response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
+            except Exception as E:
+                print(f"error determining achievements for {code} with {E}")
 
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
@@ -1663,6 +1672,10 @@ def render_code_in_editor(level):
     except BaseException:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
+    if session.get("previous_keyword_lang"):
+        code = hedy_translation.translate_keywords(
+            code, session["previous_keyword_lang"], g.keyword_lang, level=int(level))
+
     a = Adventure(
         short_name='start',
         name='start',
@@ -1991,7 +2004,10 @@ def profile_page(user):
         invitations=invitations,
         public_settings=public_profile_settings,
         user_classes=classes,
-        current_page='my-profile')
+        current_page='my-profile',
+        javascript_page_options=dict(
+            page='my-profile',
+        ))
 
 
 @app.route('/research/<filename>', methods=['GET'])
@@ -2270,6 +2286,8 @@ def translate_keywords():
         translated_code = hedy_translation.translate_keywords(body.get('code'), body.get(
             'start_lang'), body.get('goal_lang'), level=int(body.get('level', 1)))
         if translated_code or translated_code == '':  # empty string is False, so explicitly allow it
+            session["previous_keyword_lang"] = body.get("start_lang")
+            session["keyword_lang"] = body.get("goal_lang")
             return jsonify({'success': 200, 'code': translated_code})
         else:
             return gettext('translate_error'), 400

@@ -13,6 +13,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # If an open Weblate/translations PR still exists, we shouldn't tell Weblate to push again.
+    # Because we ended our previous push with a 'reset', Weblate would otherwise force-push
+    # new changes over the unmerged old changes, causing them to lost.
+    - name: Check for existence of old Weblate PR
+      run: |
+        prs=$(gh pr -R hedyorg/hedy list -q '.[] | select(.title | contains("Translations update"))' --json title)
+        if [[ "$prs" != "" ]]; then
+          echo "Open Pull Request for Weblate!"
+          gh pr -R hedyorg/hedy list --search 'Translations update'
+          exit 1
+        fi
+      env:
+        GH_TOKEN: ${{ github.token }}
     - name: Set up Python 3.12
       uses: actions/setup-python@v1
       with:
@@ -27,11 +40,21 @@ jobs:
         echo '[keys]' >> .weblate
         echo 'https://hosted.weblate.org/api/ = ${{ secrets.WEBLATE_API_KEY }}' >> .weblate
     - name: Weblate commands
+      # Do a weblate pull, commit and push.
+      # After pushing, clean the Weblate remote. This is necessary because we squash merge the
+      # commits that Weblate pushes, and if the bytes aren't exactly equivalent (for example
+      # if we wrap or we revert a broken bit of code) it will trigger a merge
+      # conflict.
       run: |
         set -x
         wlc repo
         wlc pull
         wlc commit
         wlc push
+        # On our repo, 'wlc reset' consistently times out the TCP connection after waiting
+        # for 5 minutes. The actual reset does seem to work, so we just don't wait for the
+        # command to finish, otherwise all our workflow executions show errors.
+        wlc reset &
+        sleep 10
 
 

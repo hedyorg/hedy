@@ -312,7 +312,7 @@ function attachMainEditorEvents(editor: HedyEditor) {
       if (!theLevel || !theLanguage) {
         throw new Error('Oh no');
       }
-      runit (theLevel, theLanguage, "", "run",function () {
+      runit (theLevel, theLanguage, false, "", "run",function () {
         $ ('#output').focus ();
       });
     }
@@ -469,7 +469,7 @@ function clearOutput() {
   buttonsDiv.hide();
 }
 
-export async function runit(level: number, lang: string, disabled_prompt: string, run_type: "run" | "debug" | "continue", cb: () => void) {
+export async function runit(level: number, lang: string, raw: boolean, disabled_prompt: string, run_type: "run" | "debug" | "continue", cb: () => void) {
   // Copy 'currentTab' into a variable, so that our event handlers don't mess up
   // if the user changes tabs while we're waiting for a response
   const adventureName = currentTab;
@@ -538,6 +538,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
           tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
           read_aloud : !!$('#speak_dropdown').val(),
           adventure_name: adventureName,
+          raw: raw,
 
           // Save under an existing id if this field is set
           program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
@@ -719,47 +720,53 @@ export function viewProgramLink(programId: string) {
   return window.location.origin + '/hedy/' + programId + '/view';
 }
 
-export async function delete_program(id: string, index: number, prompt: string) {
+export async function delete_program(id: string, prompt: string) {
   await modal.confirmP(prompt);
   await tryCatchPopup(async () => {
     const response = await postJsonWithAchievements('/programs/delete', { id });
     showAchievements(response.achievement, true, "");
-    $('#program_' + index).remove();
+    $('#program_' + id).remove();
     modal.notifySuccess(response.message);
   });
 }
 
-function set_favourite(index: number) {
+function set_favourite(id: string, set: boolean) {
     $('.favourite_program_container').removeClass('text-yellow-400');
     $('.favourite_program_container').addClass('text-white');
+    $('.favourite_program_container').attr("data-starred", "false");
 
-    $('#favourite_program_container_' + index).removeClass('text-white');
-    $('#favourite_program_container_' + index).addClass('text-yellow-400');
+    if (set) {
+        $('#favourite_program_container_' + id).removeClass('text-white');
+        $('#favourite_program_container_' + id).addClass('text-yellow-400');
+    }
+    $('#favourite_program_container_' + id).attr("data-starred", JSON.stringify(set));
 }
 
-export async function set_favourite_program(id: string, index: number, prompt: string) {
-  await modal.confirmP(prompt);
+export async function set_favourite_program(id: string, promptSet: string, promptUnset: string) {
+  let set = JSON.parse($('#favourite_program_container_' + id).attr("data-starred")?.toLowerCase() || "");
+  await modal.confirmP(set ? promptUnset : promptSet);
   await tryCatchPopup(async () => {
-    const response = await postJsonWithAchievements('/programs/set_favourite', { id });
-    set_favourite(index)
+    const response = await postJsonWithAchievements('/programs/set_favourite', { id, set: !set });
+    // TODO: response with 200, assumed.
+    set_favourite(id, !set)
     modal.notifySuccess(response.message);
   });
 }
 
-function change_to_submitted (index: number) {
+function change_to_submitted (id: string) {
     // Index is a front-end unique given to each program container and children
     // This value enables us to remove, hide or show specific element without connecting to the server (again)
-    $('#non_submitted_button_container_' + index).remove();
-    $('#submitted_button_container_' + index).show();
-    $('#submitted_header_' + index).show();
-    $('#program_' + index).removeClass("border-orange-400");
-    $('#program_' + index).addClass("border-gray-400 bg-gray-400");
+    $('#non_submitted_button_container_' + id).remove();
+    $('#submitted_button_container_' + id).show();
+    $('#submitted_header_' + id).show();
+    $('#program_' + id).removeClass("border-orange-400");
+    $('#program_' + id).addClass("border-gray-400 bg-gray-400");
 }
 
-export function submit_program (id: string, index: number) {
+export function submit_program (id: string) {
   tryCatchPopup(async () => {
     await postJsonWithAchievements('/programs/submit', { id });
-    change_to_submitted(index);
+    change_to_submitted(id);
   });
 }
 
@@ -1191,7 +1198,6 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     var debug = storage.getItem("debugLine")
     if (storage.getItem("prompt-" + prompt) == null) {
     Sk.execStart = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
-    $('#turtlecanvas').hide();
     document.onkeydown = null;
     $('#keybinding-modal').hide();
 
@@ -1468,6 +1474,32 @@ export function toggleDevelopersMode(event='click', enforceDevMode: boolean) {
   });
 }
 
+export function saveForTeacherTable(table: string) {
+  let open = window.localStorage.getItem(table);
+  const arrow = document.querySelector('#' + table + '_arrow') as HTMLElement;
+  if (open == 'true'){
+    window.localStorage.setItem(table, 'false')
+    $('#' + table).hide();
+    arrow.classList.remove('rotate-180');
+  } else {
+    window.localStorage.setItem(table, 'true')
+    $('#' + table).show();
+    arrow.classList.add('rotate-180');
+  }
+}
+
+export function getForTeacherTable(table: string) {
+  let open = window.localStorage.getItem(table);
+  const arrow = document.querySelector('#' + table + '_arrow') as HTMLElement;
+  if (open == 'true'){
+    $('#' + table).show();
+    arrow.classList.add('rotate-180');
+  } else {
+    $('#' + table).hide()
+    arrow.classList.remove('rotate-180');
+  }
+}
+
 /**
  * Run a code block, show an error message if we catch an exception
  */
@@ -1489,23 +1521,29 @@ export function toggle_keyword_language(current_lang: string, new_lang: string) 
       level: theLevel,
     });
 
-  if (response.success) {
-    const code = response.code
-    theGlobalEditor.contents = code;
-    const saveName = saveNameFromInput();
+    if (response.success) {
+      const code = response.code
+      theGlobalEditor.contents = code;
+      const saveName = saveNameFromInput();
 
-    // save translated code to local storage
-    // such that it can be fetched after reload
-    localSave(currentTabLsKey(), { saveName, code });
-    $('#editor').attr('lang', new_lang);
+      // save translated code to local storage
+      // such that it can be fetched after reload
+      localSave(currentTabLsKey(), { saveName, code });
+      $('#editor').attr('lang', new_lang);
 
-    // update the whole page (example codes)
-    const hash = window.location.hash;
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    urlParams.set('keyword_language', new_lang)
-    window.location.search = urlParams.toString()
-    window.open(hash, "_self");
+      // update the whole page (example codes)
+      const hash = window.location.hash;
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      urlParams.set('keyword_language', new_lang)
+      window.location.search = urlParams.toString()
+      window.open(hash, "_self");
+
+      // if in iframe, reload the topper window level.
+      if (window.top && !(window as any).Cypress) {
+        window.top.location.reload();
+      }
+
     }
   });
 }

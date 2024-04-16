@@ -3,6 +3,8 @@ import pytest
 from prefixes.normal import convert_numerals
 
 convert_numerals_test_data = [
+    ('Latin', None, ''),
+    ('Latin', '', ''),
     ('Latin', 1234567890, 1234567890),
     ('Latin', '١٢٣٤٥٦٧٨٩٠', 1234567890),
     ('Arabic', 1234567890, '١٢٣٤٥٦٧٨٩٠'),

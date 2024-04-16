@@ -777,10 +777,10 @@ class MemoryStorage(TableStorage):
             next_page_key = with_keys[-1][0]
 
         # Do a final filtering to mimic DynamoDB FilterExpression
-        return copy.copy([record
-                          for _, record in with_keys
-                          if self._query_matches(record, filter_eq_conditions, filter_special_conditions)
-                          ]), next_page_key
+        return copy.deepcopy([record
+                              for _, record in with_keys
+                              if self._query_matches(record, filter_eq_conditions, filter_special_conditions)
+                              ]), next_page_key
 
     # NOTE: on purpose not @synchronized here
     def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None,
@@ -810,9 +810,9 @@ class MemoryStorage(TableStorage):
         records = self.tables.setdefault(table_name, [])
         index = self._find_index(records, key)
         if index is None:
-            records.append(copy.copy(data))
+            records.append(copy.deepcopy(data))
         else:
-            records[index] = copy.copy(data)
+            records[index] = copy.deepcopy(data)
         self._flush()
 
     @lock.synchronized
@@ -888,7 +888,7 @@ class MemoryStorage(TableStorage):
             next_page_token = {"offset": start_index + limit}
             items = items[:limit]
 
-        items = copy.copy(items)
+        items = copy.deepcopy(items)
         return items, next_page_token
 
     def _find_index(self, records, key):

@@ -1,5 +1,6 @@
 import { initializeAdminUserPage, InitializeAdminUsersPageOptions } from './admin';
 import { initializeCustomAdventurePage, InitializeCustomizeAdventurePage } from './adventure';
+import { initializeMyProfilePage, InitializeMyProfilePage } from './profile';
 import { initializeApp, initializeCodePage, InitializeCodePageOptions, initializeViewProgramPage, InitializeViewProgramPageOptions } from './app';
 import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
@@ -55,6 +56,7 @@ type InitializePageOptions =
   | InitializeClassOverviewPageOptions
   | InitializeAdminUsersPageOptions
   | InitializeCustomizeAdventurePage
+  | InitializeMyProfilePage
   ;
 
 
@@ -100,6 +102,10 @@ export function initialize(options: InitializeOptions) {
     
     case 'customize-adventure':
       initializeCustomAdventurePage(options.javascriptPageOptions);
+      break;
+
+    case 'my-profile':
+      initializeMyProfilePage(options.javascriptPageOptions);
       break;
 
   }
