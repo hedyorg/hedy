@@ -451,38 +451,40 @@ class TestsLevel14(HedyTester):
         print ""
         call test_function_3 with 6""")
 
-        expected = textwrap.dedent(f"""\
-        def test_function_1():
-          _int = 1
-          return f'''Test function {{_int}}'''
-        def test_function_2(_int):
-          return f'''Test function {{_int}}'''
-        def test_function_3(_input):
-          if convert_numerals('Latin', _input)!=convert_numerals('Latin', 5):
-            print(f'''NE5''')
-          if convert_numerals('Latin', _input)<convert_numerals('Latin', 5):
-            print(f'''LT5''')
-          if convert_numerals('Latin', _input)<=convert_numerals('Latin', 5):
-            print(f'''LTE5''')
-          if convert_numerals('Latin', _input)>convert_numerals('Latin', 5):
-            print(f'''GT5''')
-          if convert_numerals('Latin', _input)>=convert_numerals('Latin', 5):
-            print(f'''GTE5''')
-          if convert_numerals('Latin', _input) == convert_numerals('Latin', '5'):
-            print(f'''E5''')
-        print(f'''{{test_function_1()}}''')
-        print(f'''{{test_function_2(2)}}''')
-        m = 3
-        print(f'''{{test_function_2(m)}}''')
-        print(f'''{{test_function_2(4.0)}}''')
-        print(f'''{{test_function_2('5')}}''')
-        print(f'''{{test_function_2({self.number_cast_transpiled('1.5')} * {self.number_cast_transpiled('4')})}}''')
-        print(f'''''')
-        test_function_3(4)
-        print(f'''''')
-        test_function_3(5)
-        print(f'''''')
-        test_function_3(6)""")
+        expected = self.dedent(
+            """\
+            def test_function_1():
+              _int = 1""",
+            (self.return_transpiled(f"Test function {{_int}}"), '  '),
+            "def test_function_2(_int):",
+            (self.return_transpiled(f"Test function {{_int}}"), '  '),
+            f"""\
+            def test_function_3(_input):
+              if convert_numerals('Latin', _input)!=convert_numerals('Latin', 5):
+                print(f'''NE5''')
+              if convert_numerals('Latin', _input)<convert_numerals('Latin', 5):
+                print(f'''LT5''')
+              if convert_numerals('Latin', _input)<=convert_numerals('Latin', 5):
+                print(f'''LTE5''')
+              if convert_numerals('Latin', _input)>convert_numerals('Latin', 5):
+                print(f'''GT5''')
+              if convert_numerals('Latin', _input)>=convert_numerals('Latin', 5):
+                print(f'''GTE5''')
+              if convert_numerals('Latin', _input) == convert_numerals('Latin', '5'):
+                print(f'''E5''')
+            print(f'''{{test_function_1()}}''')
+            print(f'''{{test_function_2(2)}}''')
+            m = 3
+            print(f'''{{test_function_2(m)}}''')
+            print(f'''{{test_function_2(4.0)}}''')
+            print(f'''{{test_function_2('5')}}''')
+            print(f'''{{test_function_2({self.number_cast_transpiled('1.5')} * {self.number_cast_transpiled('4')})}}''')
+            print(f'''''')
+            test_function_3(4)
+            print(f'''''')
+            test_function_3(5)
+            print(f'''''')
+            test_function_3(6)""")
 
         output = textwrap.dedent("""\
         Test function 1

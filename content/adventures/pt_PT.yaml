@@ -356,94 +356,183 @@ adventures:
                     If you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.
                     But be careful not to get more than 21 points, because if you do, you lose!
                     The player who gets closest to 21, without going over it, wins!
-                    Have fun!
 
                     ### Exercise
-                    This code works fine, but it's awfully long and cumbersome. Can you shorten the code by using functions?
+                    In this adventure we code the first part of our Blackjack game. We'll create a function to calculate how many points a card is worth.
+
+                    ***Set the variables***
+                    Start by making a list of all the cards, from 2 to Ace. Next make a list of the face cards, so Jack, Queen and King. Then pick a random card from the list of cards to be card_1.
+
+                    ***Create a function to calculate the points***
+                    Create a function that calculates how many points a card is worth.
+                    All the face cards are worth 10 points, the Ace is worth 11 and all the other cards are worth their numeral.
+                    Return the variable `points` at the end of the function.
+
+                    ***Test the function***
+                    Test if your function is working properly. Finish the first print command by filling in which card you've drawn. Then finish the second line by calling the function with card_1.
+                    Run the code a couple of times. Are you happy with the results? Great! Then you can remove the testing part and move on the the next tab!
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
-                    cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']
-                    points = 0
-                    dealer_points = 0
-                    card_1 = cards[{random}]
-                    card_2 = cards[{random}]
-                    card_3 = cards [{random}]
-                    dealer_card_1 = cards[{random}]
-                    dealer_card_2 = cards[{random}]
-                    dealer_card_3 = cards[{random}]
-                    # Points for card 1
-                    {if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':
-                        points = points + 10
-                    {elif} card_1 == 'Ace':
-                        points = points + 11
-                    {else}:
-                        points = points + card_1
-                    # Points for card 2
-                    {if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':
-                        points = points + 10
-                    {elif} card_2 == 'Ace':
-                        points = points + 11
-                    {else}:
-                        points = points + card_2
-                    # Points for dealer card 1
-                    {if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':
-                        dealer_points = dealer_points + 10
-                    {elif} dealer_card_1 == 'Ace':
-                        dealer_points = dealer_points + 11
-                    {else}:
-                        dealer_points = dealer_points + dealer_card_1
-                    # Points for dealer card 2
-                    {if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':
-                        dealer_points = dealer_points + 10
-                    {elif} dealer_card_2 == 'Ace':
-                        dealer_points = dealer_points + 11
-                    {else}:
-                        dealer_points = dealer_points + dealer_card_2
-                    # Two Aces
-                    {if} card_1 == 'Ace' {and} card_2 == 'Ace':
-                        points = 12
-                    {if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':
-                        dealer_points = 12
-                    # Scoreboard
-                    {print} 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'
-                    {print} 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'
-                    # Extra card for the player
-                    hit = {ask} 'Do you want an extra card?'
+
+                    # Set these variables
+                    cards = _
+                    face_cards = _
+                    card_1 =
+
+                    # Create a function to calculate the points
+                    {define} calculate_points {with} card:
+                        {if} card {in} face_cards:
+                            points = _
+                        {elif} _
+                            _
+                        {else}:
+                            _
+                        _ points
+
+                    # Test your function
+                    {print} 'Your card is a ' _
+                    {print} 'That is worth ' _ ' points'.
+                    ```
+    blackjack_2:
+        name: Blackjack 2
+        default_save_name: Blackjack_2
+        description: Blackjack part 2
+        levels:
+            17:
+                story_text: |
+                    ### Exercise
+                    In this adventure we code the second part of our Blackjack game.
+
+                    ***Paste your code from the previous adventure***
+                    In the previous adventure you've started a list of variables and created a function to calculate how many points a card is worth. Copy your code and paste it here. Mind that you don't need the testing part, so if you haven't removed that yet, please do so now.
+
+                    ***Add more variables***
+                    You have already set the lists `cards` and `face_cards` and the variable `card_1`. Underneath those variables create 3 more variables: `card_2`, dealer_card_1` and `dealer_card_2`. These variables are all set to a random card from the list of cards.
+
+                    ***Add up points***
+                    To calculate how many points you have scored we call the function with card 1 and we do it again for card 2. Then we add both these scores together to get your total.
+                    Do the same thing for the dealers points, but be sure to use the dealer's cards and not your own!
+
+                    ***2 Aces***
+                    You're doing great! Almost all scores can be calculated now. There is only one exception: 2 Aces. If you get 2 Aces, your total is 12 points and not 22 (because 22 points would be losing!). This of course also goes for the dealer.
+
+                    ***Show the score***
+                    Lastly, you want to tell the program to tell you which cards you have drawn and how many points that is. Then show which cards the dealer has and how many points they have.
+
+                    ***Continue in the next tab***
+                    Great! You have finished this part of the game! Copy your code and go to the next tab to learn how to ask for an extra card and to declare a winner.
+                example_code: |
+                    ```
+                    # Paste your code from the previous adventure here
+
+                    # Add these variables to the list of variables
+                    card_2 = _
+                    dealer_card_1 = _
+                    dealer_card_2 = _
+
+                    # Add up your points
+                    your_points_1 = {call} _ {with} card_1
+                    your_points_2 = _
+                    your_total = _
+
+                    # Add up the dealers points
+                    dealer_points_1 = _
+                    _
+                    _
+
+                    # 2 Aces
+                    {if} card_1 == 'Ace' {and} _
+                        your_total = 12
+                    {if} dealer_card_1 _
+                        dealer_total = _
+
+                    # Show the score
+                    {print} 'You have drawn a ' _ ' and a ' _ '. That is ' _ ' points'
+                    {print} 'The dealer has drawn a ' _ ' and a ' _ '. That is ' _ ' points'
+                    ```
+    blackjack_3:
+        name: Blackjack 3
+        default_save_name: Blackjack_3
+        description: Blackjack part 3
+        levels:
+            17:
+                story_text: |
+                    In the previous tabs you have learned how to draw 2 random cards for yourself and for the dealer and to calculate how many points you both got.
+                    In this adventure we add the option to ask for an extra card for both you and the dealer.
+
+                    ### Exercise
+                    ***Paste your code from the previous adventure*** Firstly, copy your code from the previous tab and paste it here.
+
+                    ***Extra card for you*** If you want, you can get an extra card to get your total as close to 21 as possible. First ask the player if they want an extra card.
+                    If they do, pick a random card and print what they have drawn. If the card is not an Ace, you can call the function and add the points to your total.
+                    In case the card is an Ace, you can't use the function, because the Ace can be either 1 point or 11 points, depending on how many points you already have earned.
+                    If your total is less than 11, you want the ace to be 11 points (because this is closest to 21). So you add 11 points to your total.
+                    If the total is more than or equal to 11, you want the ace to be 1 point (because you don't want more than 21 points). So you add 1 point to your total.
+                    Lastly, print your new total of points.
+
+                    ***Extra card for the dealer*** The dealer can also get an extra card. The dealer doesn't need to be asked, because they always get an extra card if their total is less than 17.
+                    Copy the 'Extra card for you code' and paste it in the dealers section. Then change it to fit the dealer picking an extra card and getting points added to their total.
+                example_code: |
+                    ```
+                    # Paste your code from the previous adventure here
+
+                    # Extra card for you
+                    hit = {ask} _
                     {if} hit == 'yes':
-                        {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':
-                            points = points + 10
-                        {elif} card_3 == 'Ace':
-                            {if} points > 11:
-                                points = points + 1
+                        card_3 = _
+                        {print} _
+                        {if} card_3 _ 'Ace':
+                            your_points_3 = _
+                            your_total = _
+                        {else}:
+                           {if} your_total _
+                                _
                             {else}:
-                                points = points + 11
-                        {else}:
-                            points = points + card_3
-                        {print} 'You get an extra ' card_3 ' (' points ' points)'
-                    {else}:
-                        {print} 'No extra cards'
-                    # Winner
-                    {if} points > 21 {or} dealer_points > points {or} dealer_points == 21:
-                        {print} 'You lose'
-                    {elif} dealer_points < 17:
-                        {print} 'The dealer takes an extra card. It is a... ' dealer_card_3
-                        {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':
-                            dealer_points = dealer_points + 10
-                        {elif} dealer_card_3 == 'Ace':
-                            {if} dealer_points < 11:
-                                dealer_points = dealer_points + 11
-                            {else}:
-                                dealer_points = dealer_points + 1
-                        {else}:
-                            dealer_points = dealer_points + dealer_card_3
-                        {print} 'The dealer has ' dealer_points ' points now'
-                        {if} dealer_points < 21 {and} dealer_points > points:
-                            {print} 'You lose'
-                        {else}:
-                            {print} 'You win'
-                    {elif} points > dealer_points {and} points < 21:
+                                _
+                        {print} _
+
+                    # Extra card for the dealer
+                    {if} dealer_total < 17
+                    _
+                    ```
+    blackjack_4:
+        name: Blackjack 4
+        default_save_name: Blackjack_4
+        description: Blackjack part 4
+        levels:
+            17:
+                story_text: |
+                    In the last 3 adventures you have alsmost created a working blackjack game! The only thing left to do is to decide a winner!
+
+                    ### Exercise
+                    ***Paste your code from the previous adventure*** Start by pasting the code that you've made so far into your programming field.
+
+                    ***Decide a winner***
+                    Firstly, if you and the dealer have an equal amount of points, it's a draw.
+                    Secondly, if the dealer has more than 21 points and you don't, you are the winner.
+                    Thirdly, if both you and the dealer have less than 22 points, we have to see who came closest to 21. We do that by comparing who has the highest score. Is your total higher than the dealer's total, then you are the winner. If not, the dealer wins.
+                    Lastly, in all other scenarios (e.g. you have more than 21 points and the dealer doesn't, or you both have more than 21 points) you are the loser.
+
+                    ***Enjoy the game!***
+                    Does your game work properly? Amazing! You have done a great job! Enjoy your game!
+                    If it doesn't work right away, no worries, you might have made a mistake. Just keep calm and bebug your code using the ladybug button.
+                example_code: |
+                    ```
+                    # Paste your code from the previous adventure here
+
+                    # Decide a winner
+                    {if} _
+                        {print} 'Its a draw! Play again!'
+                    {elif} _
                         {print} 'You win!'
+                    {elif} _ :
+                        {if} _:
+                            {print} _
+                        {else}:
+                            {print} _
+                    {else}:
+                        _
                     ```
     calculator:
         name: Calculator
@@ -3822,6 +3911,136 @@ adventures:
                     {else}
                         {print} 'Go to the trainstation at 10.00'
                      ```
+    simon:
+        name: Simon Says
+        default_save_name: Simon
+        description: Make a game of Simon Says
+        levels:
+            16:
+                story_text: |
+                    Let's make a game of Simon Says! Simon Says is a memory game in which the player will be given a color. They have to repeat that color back.
+                    If they get it right a color is added to the sequence, so they now have to remember 2 colors, then 3, then 4 etc. the game stops as soon as the player makes a mistake.
+
+                    ### Exercise
+                    In this first part of the Simon Says adventure, we'll let the computer pick a random color and add it to a list.
+
+                    ***Make 2 lists*** First, make a list called `colors` and fill it with the colors red, yellow, green and blue.
+                    Then make a list called `simon_sequence`. This list will be used as the answer.
+                    At the start of the game this lists need to be empty. unfortunately, we can't create an empty list (yet), so we'll fill it with the words 'empty' and 'list' and we'll remove them from the list immediately.
+
+                    ***Create a function that adds a color to the sequence*** Now that we have an empty list called simon_sequence, we can start filling it with random colors.
+                    We do that with a function, so we can call it everytime there's a new level in our game. Create a function called `add_random_color`.
+                    Then create the variable random_color and set it to a random color. Next, add this random color to the simon_sequence.
+
+                    ***Create a function that shows the simon_sequence*** Start by naming the new function `show_simon_sequence` with `level` as an argument. Now we want to show as many colors as the level we are in (in level 1 you see 1 color, in level 2 you see 2 colors etc).
+                    So we repeat `level` times, to print the `simon_sequence[i]`. Each time a color is shown, wait for 1 second and then clear the screen.
+
+                    ***Test your program*** Before you go to the next level, test if the functions are working by calling both of the functions. If they're working you should see a random color in your output screen.
+                    Remove this testing part of your code, copy the code and continue to the next tab to learn more about the simon says game!
+                example_code: |
+                    ```
+                    # Make 2 lists
+                    colors = _
+                    _ = ['empty', 'list']
+                    {remove} _ {from} simon_sequence
+                    {remove} _
+
+                    # Create a function that adds a color
+                    _ add_random_color
+                        _
+                        {add} _
+
+                    # Create a function that shows the simon_sequence
+                    {define} _
+                        {for} i {in} {range} 1 {to} _
+                            {print} _
+                            _
+                            _
+
+                    # Test your program
+                    {call} _
+                    {call} show_simon_sequence {with} 1
+                    ```
+    simon_2:
+        name: Simon Says 2
+        default_save_name: Simon
+        description: Make a game of Simon Says
+        levels:
+            16:
+                story_text: |
+                    We'll continue with our Simon Says game!
+
+                    ### Exercise
+                    ***Paste your code here*** Paste your code from the previous level here. Don't forget to remove the part that was just used for testing the functions.
+
+                    ***Create a function that creates the player_sequence*** The list `player_sequence` is used to capture the answers of the player. First we define the function with the argument level.
+                    Next, we ask level times what the color is that they choose. We call that variable `answer`. Then we add the variable `answer` to the list player_sequence.
+
+                    ***Setting up the game*** Before we program the game in the next tab, we'll need some starting variables. First, we'll set the variable `level` to 1 and the variable `game_over` to False.
+                    Then we make an introduction for the game. We'll print 'Welcome to Simon Says!' and clear the screen after 1 second.
+
+                    ***Continue to the next tab to finish the game!**** Don't forget to copy your code and take it with you to the next tab.
+                example_code: |
+                    ```
+                    # Paste your code here
+
+
+                    # Create a function that creates the player_sequence
+                    {define} _
+                        {for} _
+                            _ 'What is color number ' i '?'
+                            {add} answer {to} _
+
+                    # Set up
+                    level = _
+                    game_over = _
+                    {print} _
+                    _ 1
+                    _
+                    ```
+    simon_3:
+        name: Simon Says 3
+        default_save_name: Simon
+        description: Make a game of Simon Says
+        levels:
+            16:
+                story_text: |
+                    In this tab we'll program the game of Simon Says!
+
+                    ### Exercise
+                    ***Paste your code*** Copy your code from the previous tab and paste it here.
+
+                    ***Program the game*** We start by making sure the game goes on while the game isn't over. Then we print what level the player is on, we use the variable level for that. We only show that for 1 second and then we clear the screen again.
+                    Now, we have to create the empty list player_sequence. We've already programmed how to fill the list, with our function `player_sequence`, but we never made the list itself. To create the list we use the same trick as we did in the previous tab.
+                    We'll make a list with the words 'empty' and 'list' on it, and then we remove both these words. Next, we'll call all of the 3 functions that we've created.
+                    Lastly, we'll have to check if the player gave the correct answers (so if the player_sequence and the simon_sequence are the same).
+                    If that's the case, we'll compliment the player. Wait for 1 second and increase the level with 1.
+                    Did the player give the wrong answer, we'll tell them and end the game by setting game_over to 'True'
+
+                    ***Enjoy your game!*** Great job! Does your game not work? Use the ladybug button to debug your code!
+                example_code: |
+                    ```
+                    # Paste your code here
+
+                    # The game
+                    {while} game_over _
+                        {print} _
+                        _
+                        _
+                        _ = ['empty', 'list']
+                        {remove} _
+                        {remove} _
+                        {call} _
+                        {call} _ {with} _
+                        {call} _ {with} _
+                        {if} player_sequence == _
+                            _
+                            _
+                            _
+                        {else}
+                            _
+                            game_over = _
+                    ```
     sleep_command:
         name: '{sleep}'
         default_save_name: sleep_command

@@ -4,7 +4,7 @@ _empty_program: (_EOL | _SPACE)*
 _non_empty_program: _EOL* (command | error_invalid) _SPACE* (_EOL+ command _SPACE*)* _EOL* //lines may end on spaces and might be separated by many newlines
 
 //placing assign after print means print is will print 'is' and print is Felienne will print 'is Felienne'
-command: += assign_button | if_pressed_else | error_if_pressed_missing_else | if_pressed_without_else | ifelse | ifs -= error_invalid >> assign
+command: += assign_button | if_pressed_else | error_if_pressed_missing_else | if_pressed_without_else | ifelse | ifs | error_else_no_if -= error_invalid >> assign
 _if_less_command: print | ask | play | turtle | assign_button | assign_list | add | remove | sleep | error_print_no_quotes | assign
 
 // error_invalid is moved from to command to program, so that command rules have priority over error_invalid
@@ -26,9 +26,11 @@ if_pressed_without_else: _IF (LETTER_OR_NUMERAL | var) _IS _PRESSED _EOL* _if_le
 error_if_pressed_missing_else: if_pressed_without_else
 
 _if_clause: _IF (condition (_SPACE+ _EOL* | _SPACE* _EOL+) | condition_spaces _SPACE* _EOL+ | error_condition) _if_less_command
+_else_clause: _ELSE (_SPACE+ _EOL* | _SPACE* _EOL+) _if_less_command
 error_condition: condition_spaces _SPACE
-ifelse: _if_clause (_SPACE+ _EOL* | _SPACE* _EOL+) _ELSE (_SPACE+ _EOL* | _SPACE* _EOL+) _if_less_command
+ifelse: _if_clause (_SPACE+ _EOL* | _SPACE* _EOL+) _else_clause
 ifs: _if_clause // 'if' is a reserved word in Python, hence the name of the rule is 'ifs'
+error_else_no_if.-1: _else_clause
 
 condition_spaces: textwithoutspaces _IS textwithoutspaces (_SPACE textwithoutspaces)+
 condition: equality_check | in_list_check | not_in_list_check

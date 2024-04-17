@@ -684,6 +684,24 @@ class TestsLevel5(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
+    def test_else_without_if_gives_error(self):
+        code = "else print 'wrong'"
+
+        self.multi_level_tester(code=code, exception=hedy.exceptions.ElseWithoutIfException, max_level=7)
+
+    def test_else_without_if_indentation_gives_error(self):
+        code = textwrap.dedent("""\
+            if answer is yes print 'great!'
+            print 'correct'
+            else print 'wrong'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.ElseWithoutIfException,
+            max_level=7,
+            skip_faulty=False
+        )
+
     #
     # combined tests
     #
