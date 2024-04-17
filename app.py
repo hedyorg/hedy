@@ -529,6 +529,8 @@ def parse():
         return "if present, body.adventure_name must be a string", 400
     if 'is_debug' not in body:
         return "body.is_debug must be a boolean", 400
+    if 'raw' not in body:
+        return "body.raw is missing", 400
     error_check = False
     if 'error_check' in body:
         error_check = True
@@ -543,6 +545,7 @@ def parse():
 
     # true if kid enabled the read aloud option
     read_aloud = body.get('read_aloud', False)
+    raw = body.get('raw')
 
     response = {}
     username = current_user()['username'] or None
@@ -558,7 +561,8 @@ def parse():
                 transpile_result = transpile_add_stats(code, level, lang, is_debug)
                 if username and not body.get('tutorial'):
                     DATABASE.increase_user_run_count(username)
-                    ACHIEVEMENTS.increase_count("run")
+                    if not raw:
+                        ACHIEVEMENTS.increase_count("run")
             except hedy.exceptions.WarningException as ex:
                 translated_error = get_error_text(ex, keyword_lang)
                 if isinstance(ex, hedy.exceptions.InvalidSpaceException):
@@ -631,12 +635,13 @@ def parse():
                 except BaseException:
                     pass
 
-        try:
-            if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
-                    username, code, level, response, transpile_result.commands):
-                response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
-        except Exception as E:
-            print(f"error determining achievements for {code} with {E}")
+        if not raw:
+            try:
+                if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
+                        username, code, level, response, transpile_result.commands):
+                    response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
+            except Exception as E:
+                print(f"error determining achievements for {code} with {E}")
 
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
@@ -1667,6 +1672,10 @@ def render_code_in_editor(level):
     except BaseException:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
+    if session.get("previous_keyword_lang"):
+        code = hedy_translation.translate_keywords(
+            code, session["previous_keyword_lang"], g.keyword_lang, level=int(level))
+
     a = Adventure(
         short_name='start',
         name='start',
@@ -1995,7 +2004,10 @@ def profile_page(user):
         invitations=invitations,
         public_settings=public_profile_settings,
         user_classes=classes,
-        current_page='my-profile')
+        current_page='my-profile',
+        javascript_page_options=dict(
+            page='my-profile',
+        ))
 
 
 @app.route('/research/<filename>', methods=['GET'])
@@ -2274,6 +2286,8 @@ def translate_keywords():
         translated_code = hedy_translation.translate_keywords(body.get('code'), body.get(
             'start_lang'), body.get('goal_lang'), level=int(body.get('level', 1)))
         if translated_code or translated_code == '':  # empty string is False, so explicitly allow it
+            session["previous_keyword_lang"] = body.get("start_lang")
+            session["keyword_lang"] = body.get("goal_lang")
             return jsonify({'success': 200, 'code': translated_code})
         else:
             return gettext('translate_error'), 400

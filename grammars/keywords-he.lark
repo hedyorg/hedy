@@ -35,7 +35,7 @@ _IN: _SPACE ("בתוך" | "in") _SPACE
 _NOT_IN: _SPACE ("not in" | "not in") _SPACE
 _IF: ("אם" | "if") _SPACE
 _ELSE: "אחרת" | "else"
-_AND: _SPACE ("וגם" | "and") _SPACE
+_AND: _SPACE? ("וגם" | "and") _SPACE
 _REPEAT: ("חזור" | "repeat") _SPACE
 _TIMES: _SPACE ("פעמים" | "times")
 _FOR: ("לכל" | "for") _SPACE
@@ -44,7 +44,7 @@ _TO: _SPACE ("עד" | "to") _SPACE
 _STEP: "צעד" | "step"
 _ELIF: _SPACE? ("אחרתאם" | "elif") _SPACE
 _INPUT: ("קלט" | "input")
-_OR: _SPACE ("או" | "or") _SPACE
+_OR: _SPACE? ("או" | "or") _SPACE
 _WHILE: ("כלעוד" | "while") _SPACE
 _LENGTH: "אורך" | "length"
 _COLOR : ("צבע" | "color") _SPACE?

@@ -13,7 +13,7 @@ sleep: _SLEEP (NUMBER | list_access | var_access | expression)?
 // all literal strings have to be quoted now, so arithmetic operators don't need to be excluded anymore
 text_with_spaces_without_single_quotes: /(?:[^\n،,' ]| (?!else|başka|अन्यथा|否则|ellers|anders|sinon|sino|وإلا))+/ -> text
 text_with_spaces_without_double_quotes: /(?:[^\n،," ]| (?!else|başka|अन्यथा|否则|ellers|anders|sinon|sino|وإلا))+/ -> text
-text_in_quotes: _SINGLE_QUOTE text_with_spaces_without_single_quotes _SINGLE_QUOTE | _DOUBLE_QUOTE text_with_spaces_without_double_quotes _DOUBLE_QUOTE
+text_in_quotes: _SINGLE_QUOTE text_with_spaces_without_single_quotes? _SINGLE_QUOTE | _DOUBLE_QUOTE text_with_spaces_without_double_quotes? _DOUBLE_QUOTE
 
 // FUNCTIONS ======================================== =============================
 command:+= call | error_nested_define | return
@@ -30,7 +30,7 @@ call: _CALL function_name (_SPACE _WITH arguments)?
 
 function_name: NAME -> text
 
-?return: _RETURN (_print_argument)? -> returns
+?return: _RETURN (_print_ask_argument)? -> returns
 ?simple_expression:+= call
 ?turtle_color:+= call
 

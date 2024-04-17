@@ -7,7 +7,8 @@ import { startTeacherTutorial } from './tutorials/tutorial';
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
 import { CustomWindow } from './custom-window';
-import { addCurlyBracesToCode } from './adventure';
+import { addCurlyBracesToCode, addCurlyBracesToKeyword } from './adventure';
+import { autoSave } from './autosave';
 
 declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
@@ -225,10 +226,14 @@ function update_db_adventure(adventure_id: string) {
   const minLevel = Math.min(...levels.map((el) => Number(el)));
   let snippets: string[] = [] ;
   let snippetsFormatted: string[] = [];
+  let keywords: string[] = []
+  let keywordsFormatted: string[] = []
 
   for (const tag of html.getElementsByTagName('code')) {
     if (tag.className === "language-python") {
       snippets.push(tag.innerText);
+    } else {
+      keywords.push(tag.innerText);
     }
   }
 
@@ -236,12 +241,17 @@ function update_db_adventure(adventure_id: string) {
     snippetsFormatted.push(addCurlyBracesToCode(snippet, minLevel, $('#language').val() as string || 'en'));
   }
 
+  for (const keyword of keywords) {
+    keywordsFormatted.push(addCurlyBracesToKeyword(keyword))
+  }
+
   let i = 0;
+  let j = 0;
   for (const tag of html.getElementsByTagName('code')) {
     if (tag.className === "language-python") {
-      tag.innerText = snippetsFormatted[i]
-      console.log(tag.outerHTML)
-      i++;
+      tag.innerText = snippetsFormatted[i++]
+    } else {
+      tag.innerText = keywordsFormatted[j++]
     }
   }
   // We have to replace <br> for newlines, because the serializer swithces them around
@@ -731,6 +741,12 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
           var level = $(this).val() as string;
           setLevelStateIndicator(level);
       });
+
+      // Autosave customize class page
+      // the third argument is used to trigger a GET request on the specified element
+      // if the trigger (input in this case) is changed.
+      autoSave("customize_class", null, {elementId: "levels-dropdown", trigger: "input"});
+
   });
 }
 
