@@ -1,7 +1,7 @@
 import { loginForAdmin } from '../../tools/login/login.js'
 import { goToAdminAchievementsPage } from '../../tools/navigation/nav.js';
 
-it('it should return to admin page button', () => {
+it('should return to admin page button', () => {
   loginForAdmin();
   goToAdminAchievementsPage();
 

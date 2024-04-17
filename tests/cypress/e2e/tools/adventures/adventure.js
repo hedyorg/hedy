@@ -29,7 +29,7 @@ export function deleteAdventure(name) {
     });
 
     cy.get(`[data-cy='delete_${name}']`).click()
-    cy.get('#modal-yes-button').should('be.enabled').click();
+    cy.get('[data-cy="modal_yes_button"]').should('be.enabled').click();
 }
 
 export default {createAdventure};
