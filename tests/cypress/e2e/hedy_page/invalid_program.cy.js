@@ -11,7 +11,9 @@ describe('Error code gives correct error', () => {
         cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').click();
         cy.focused().type(error_code);
 
+        cy.intercept('/parse').as('parse')
         cy.get('#runit').click();
+        cy.wait('@parse')
         cy.get('#errorbox').should('be.visible').should('contain', error_message);
 
         cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').clear();
