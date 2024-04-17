@@ -727,14 +727,6 @@ export async function delete_program(id: string, prompt: string) {
     const response = await postJsonWithAchievements('/programs/delete', { id });
     showAchievements(response.achievement, true, "");
     $('#program_' + id).remove();
-    let text = $('#program_count').text();
-    let match = text.match(/\d+/);
-    if (match){
-      let currentNumber = parseInt(match[0]);
-      let newNumber = currentNumber - 1;
-      let newText = text.replace(/\d+/, newNumber.toString());
-      $('#program_count').text(newText);
-    }
     modal.notifySuccess(response.message);
   });
 }
