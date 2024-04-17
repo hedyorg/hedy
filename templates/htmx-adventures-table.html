@@ -1,6 +1,8 @@
+<div class="flex flex-col gap-4 mb-8 md:px-16 hidden" id="adventures_table"
+    _="on load hedyApp.getForTeacherTable('adventures_table')">
     <div class="flex flex-col gap-4 pb-4 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full lg:w-4/4 p-8">
       <h2 class="m-0 justify-left"> {{_('my_adventures')}} </h2>
-      <div class="overflow-hidden rounded-lg shadow-lg">
+      <div class="overflow-x-auto rounded-lg shadow-lg">
       <table class="w-full border border-gray-400">
         <thead>
           <tr class="bg-blue-300 text-blue-900">
@@ -52,4 +54,5 @@
         </tbody>
       </table>
       </div>
-      </div>
+    </div>
+</div>

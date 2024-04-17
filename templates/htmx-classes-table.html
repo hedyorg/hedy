@@ -1,6 +1,8 @@
-<div class="flex flex-col gap-4 pb-4 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full lg:w-4/4 p-8">
+<div class="flex flex-col gap-4 mb-8 md:px-16 hidden" id="classes_table"
+        _="on load hedyApp.getForTeacherTable('classes_table')">
+  <div class="flex flex-col gap-4 pb-4 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full lg:w-4/4 p-8">
     <h2 class="m-0 justify-left"> {{_('my_classes')}} </h2>
-    <div class="overflow-hidden rounded-lg shadow-lg">
+    <div class="overflow-x-auto rounded-lg shadow-lg">
       <table class="w-full border border-gray-400">
       <thead>
         <tr class="bg-blue-300 text-blue-900">
@@ -38,7 +40,8 @@
                     hx-confirm="{{_('delete_class_prompt')}}"
                     hx-trigger="click"
                     hx-delete="/class/{{class.id}}"
-                    hx-target="#classes_table">
+                    hx-target="#classes_table"
+                    hx-swap="outerHTML">
                   <span class="fas fa-trash block mb-1 text-red-700"></span>
                   <span class="text-red-700">{{_('remove')}}</span>
                 </button>
@@ -49,4 +52,5 @@
       </tbody>
     </table>
     </div>
-    </div>
+  </div>
+</div>

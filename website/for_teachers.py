@@ -1209,7 +1209,7 @@ class ForTeachersModule(WebsiteModule):
                     "levels": adventure.get("levels"),
                 }
             )
-        return render_partial('htmx-my-adventures-table.html', teacher_adventures=teacher_adventures)
+        return render_partial('htmx-adventures-table.html', teacher_adventures=teacher_adventures)
 
     @route("/preview-adventure", methods=["POST"])
     def parse_preview_adventure(self):

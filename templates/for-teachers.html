@@ -22,8 +22,7 @@
         {% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_class')}}</button>
         {% if teacher_classes %}
         <button class="white-btn inline-flex items-center gap-2" id="view_classes"
-        _="on load hedyApp.getForTeacherTable('classes_table') end
-        on click hedyApp.saveForTeacherTable('classes_table') end"
+        _="on click hedyApp.saveForTeacherTable('classes_table')"
         >
         <span>{{_('view_classes')}}</span>
         <svg id="classes_table_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -43,8 +42,7 @@
               data-cy="edit-link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
             {% if teacher_adventures %}
             <button class="white-btn inline-flex" id="view_adventures"
-            _="on load hedyApp.getForTeacherTable('adventures_table') end
-              on click hedyApp.saveForTeacherTable('adventures_table') end">
+            _="on click hedyApp.saveForTeacherTable('adventures_table')">
             <span>{{_('view_adventures')}}</span>
             <svg id="adventures_table_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
@@ -54,12 +52,11 @@
       </div>
     </div>
   </div>
-  <div class="flex flex-col gap-4 mb-8 md:px-16 hidden" id="classes_table">
-    {{ render_partial('htmx-my-classes-table.html', teacher_classes=teacher_classes) }}
-    </div>
-    <div class="flex flex-col gap-4 mb-8 md:px-16 hidden" id="adventures_table">
-    {{ render_partial('htmx-my-adventures-table.html', teacher_adventures=teacher_adventures) }}
-    </div>
+    <!-- classes table -->
+    {{ render_partial('htmx-classes-table.html', teacher_classes=teacher_classes) }}
+    <!-- adventures table -->
+    {{ render_partial('htmx-adventures-table.html', teacher_adventures=teacher_adventures) }}
+
     <div class="flex flex-row gap-4 mb-8 mt-10 md:px-16">
       <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full lg:w-2/4 p-8">
         <h2 class="m-0 basis-1/12"> {{_('slides')}} </h2>

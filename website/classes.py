@@ -105,7 +105,7 @@ class ClassModule(WebsiteModule):
         if achievement:
             utils.add_pending_achievement({"achievement": achievement})
         teacher_classes = self.db.get_teacher_classes(user["username"], True)
-        return render_partial('htmx-my-classes-table.html', teacher_classes=teacher_classes)
+        return render_partial('htmx-classes-table.html', teacher_classes=teacher_classes)
 
     @route("/<class_id>/prejoin/<link>", methods=["GET"])
     def prejoin_class(self, class_id, link):
