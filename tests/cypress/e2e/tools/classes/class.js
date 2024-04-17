@@ -66,7 +66,7 @@ export function addStudents(classname, count) {
       cy.get(`:nth-child(${(index + 2)}) > #password`).type('123456');
     })
     cy.get('#create_accounts_button').click();
-    cy.get('#modal-yes-button').click();
+    cy.get('[data-cy="modal_yes_button"]').click();
 
     return students;
 }
