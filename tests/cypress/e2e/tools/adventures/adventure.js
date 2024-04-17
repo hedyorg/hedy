@@ -34,7 +34,7 @@ export function deleteAdventure(name) {
             cy.get(`tbody :nth-child(${i+1}) [data-cy="delete-adventure"]`).click();
         }
     })
-    cy.get('#modal-yes-button').should('be.enabled').click();
+    cy.get('[data-cy="modal_yes_button"]').should('be.enabled').click();
 }
 
 export default {createAdventure};
