@@ -35,7 +35,7 @@ _IN: _SPACE ("в" | "in") _SPACE
 _NOT_IN: _SPACE ("не в" | "not in") _SPACE
 _IF: ("если" | "if") _SPACE
 _ELSE: "иначе" | "else"
-_AND: _SPACE ("и" | "and") _SPACE
+_AND: _SPACE? ("и" | "and") _SPACE
 _REPEAT: ("повторить" | "repeat") _SPACE
 _TIMES: _SPACE ("раз" | "times")
 _FOR: ("для" | "for") _SPACE
@@ -44,7 +44,7 @@ _TO: _SPACE ("до" | "to") _SPACE
 _STEP: "шаг" | "step"
 _ELIF: _SPACE? ("иначе, если" | "elif") _SPACE
 _INPUT: ("ввод" | "input")
-_OR: _SPACE ("или" | "or") _SPACE
+_OR: _SPACE? ("или" | "or") _SPACE
 _WHILE: ("пока" | "while") _SPACE
 _LENGTH: "длина" | "length"
 _COLOR : ("цвет" | "color") _SPACE?

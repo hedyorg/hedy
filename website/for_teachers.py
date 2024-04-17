@@ -230,10 +230,7 @@ class ForTeachersModule(WebsiteModule):
     @route("/clear-preview-class", methods=["GET"])
     # Note: we explicitly do not need login here, anyone can exit preview mode
     def clear_preview_class(self):
-        try:
-            del session["preview_class"]
-        except KeyError:
-            pass
+        utils.remove_class_preview()
         return redirect("/for-teachers")
 
     @route("/class/<class_id>/programs/<username>", methods=["GET", "POST"])
