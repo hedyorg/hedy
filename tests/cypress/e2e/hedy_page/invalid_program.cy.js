@@ -1,4 +1,4 @@
-import {goToHedyLevel5Page, goToHedyPage} from "../tools/navigation/nav";
+import { goToHedyPage } from "../tools/navigation/nav";
 
 describe('Error code gives correct error', () => {
     describe('Misspelled Keyword', () => {
@@ -31,7 +31,7 @@ describe('Error code gives correct error', () => {
         })
     })
 
-    describe('Missing Command', () => {
+    it('Missing Command', () => {
         const error_code = "hello world"
         const error_message = `It looks like you forgot to use a command on line 1.`;
         goToHedyPage();
@@ -45,7 +45,7 @@ describe('Error code gives correct error', () => {
         cy.get('#errorbox').should('be.visible').should('contain', error_message);
     })
 
-    idescribet('Invalid Argument Type', () => {
+    it('Invalid Argument Type', () => {
         const error_code = "forward lalala"
         const error_message = `You cannot use forward with lalala because it is text. Try changing lalala to a number or input from ask`;
         goToHedyPage();
@@ -59,7 +59,7 @@ describe('Error code gives correct error', () => {
         cy.get('#errorbox').should('be.visible').should('contain', error_message);
     })
 
-    describe('Invalid Argument', () => {
+    it('Invalid Argument', () => {
         const error_code = "turn test"
         const error_message = `You cannot use the command turn`;
         goToHedyPage();
