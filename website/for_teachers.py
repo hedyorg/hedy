@@ -918,9 +918,10 @@ class ForTeachersModule(WebsiteModule):
     @requires_teacher
     def create_accounts(self, user, class_id):
         Class = self.db.get_class(class_id)
-        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
-            return utils.error_page(error=403, ui_message=gettext("no_such_class"))
-        # should this be split up in 403 and 401?
+        if not Class:
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+        if not utils.can_edit_class(user, Class) and not is_admin(user):
+            return utils.error_page(error=401, ui_message=gettext("no_such_class"))
 
         return render_template("create-accounts.html", current_class=Class)
 
@@ -1043,9 +1044,10 @@ class ForTeachersModule(WebsiteModule):
         if not adventure and request.args.get("new_adventure"):
             adventure = session.get("new_adventure", self.create_basic_adventure(user, adventure_id))
 
-        if not adventure or adventure["creator"] != user["username"] and not is_teacher(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_adventure_error"))
-        # should this be split up in 403 and 401?
+        if not adventure:
+            return utils.error_page(error=404, ui_message=gettext("retrieve_adventure_error"))
+        if adventure["creator"] != user["username"] and not is_teacher(user):
+            return utils.error_page(error=401, ui_message=gettext("retrieve_adventure_error"))
 
         # Now it gets a bit complex, we want to get the teacher classes as well as the customizations
         # This is a quite expensive retrieval, but we should be fine as this page is not called often

@@ -982,7 +982,6 @@ def programs_page(user):
     if from_user and not is_admin(user):
         if not is_teacher(user):
             return utils.error_page(error=401, ui_message=gettext('not_teacher'))
-        # should the message be changed?
         students = DATABASE.get_teacher_students(username)
         if from_user not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
