@@ -414,18 +414,17 @@ export function save_customizations(class_id: string) {
 }
 
 export function restore_customization_to_default(prompt: string) {
-    modal.confirm (prompt, function () {
+    modal.confirm (prompt, async function () {
       // We need to know the current level that is selected by the user
       // so we can know which level to draw in the template  
       let active_level_id : string = $('[id^=level-]')[0].id;
       let active_level = active_level_id.split('-')[1]
-      htmx.ajax(
-        'POST',
-        `/for-teachers/restore-customizations?level=${active_level}`,
-        '#adventure-dragger'
-      ).then(() => {
-        // Restore all the options other than the adventures.
-        // The adventures will be restored to the default using an HTMX call to the server
+      try {
+        await htmx.ajax(
+          'POST',
+          `/for-teachers/restore-customizations?level=${active_level}`,
+          '#adventure-dragger'
+        )
         $('.other_settings_checkbox').prop('checked', false);
         // Remove the value from all input fields -> reset to text to show placeholder
         $('.opening_date_input').prop("type", "text")
@@ -443,7 +442,9 @@ export function restore_customization_to_default(prompt: string) {
         $('[id^=enable_level_]').prop('checked', true);                
         setLevelStateIndicator(active_level);
         modal.notifySuccess(ClientMessages.customization_deleted);          
-      })
+      } catch (error) {
+        console.error(error);
+      }
     });
 }
 
