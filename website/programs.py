@@ -96,7 +96,8 @@ class ProgramsLogic:
         program_to_check = copy.deepcopy(program)
         program_to_check['adventure_name'] = short_name
         is_modified = self.statistics.is_program_modified(program_to_check, full_adventures, teacher_adventures)
-        # a program can be saved before but not yet modified, and if it was already modified and now is so again, count should not increase.
+        # a program can be saved before but not yet modified, 
+        # and if it was already modified and now is so again, count should not increase.
         if is_modified and not program['is_modified']:
             self.db.increase_user_program_count(user["username"])
         program['is_modified'] = is_modified
