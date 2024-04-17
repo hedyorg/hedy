@@ -1,3 +1,4 @@
+import copy
 import uuid
 from typing import Optional
 
@@ -51,6 +52,7 @@ class ProgramsLogic:
                            error: bool,
                            program_id: Optional[str] = None,
                            adventure_name: Optional[str] = None,
+                           short_name: Optional[str] = None,
                            set_public: Optional[bool] = None):
         """Store a user program (either new or overwrite an existing one).
 
@@ -86,17 +88,19 @@ class ProgramsLogic:
         else:
             updates['id'] = uuid.uuid4().hex
             program = self.db.store_program(updates)
-        
-        # update if a program is modified or not, this can only be done after a program is stored 
+
+        # update if a program is modified or not, this can only be done after a program is stored
         # because is_program_modified needs a program
         full_adventures = hedy_content.Adventures("en").get_adventures(g.keyword_lang)
         teacher_adventures = self.db.get_teacher_adventures(current_user()["username"])
-        is_modified = self.statistics.is_program_modified(program, full_adventures, teacher_adventures)
+        program_to_check = copy.deepcopy(program)
+        program_to_check['adventure_name'] = short_name
+        is_modified = self.statistics.is_program_modified(program_to_check, full_adventures, teacher_adventures)
         program['is_modified'] = is_modified
         program = self.db.update_program(program['id'], program)
         # only if it is a new program and it's modified, increase the count
         if is_modified and program_id:
-                self.db.increase_user_program_count(user["username"])
+            self.db.increase_user_program_count(user["username"])
 
         self.db.increase_user_save_count(user["username"])
         self.achievements.increase_count("saved")
@@ -216,7 +220,8 @@ class ProgramsModule(WebsiteModule):
             user=user,
             error=error,
             set_public=program_public,
-            adventure_name=body.get('adventure_name'))
+            adventure_name=body.get('adventure_name'),
+            short_name=body.get('short_name'))
 
         return jsonify({
             "message": gettext("save_success_detail"),
