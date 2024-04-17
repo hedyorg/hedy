@@ -592,7 +592,7 @@ class TestAuth(AuthHelper):
         # page load will be a 403. Need to have 'follow_redirects=False' or we won't see
         # the 302 code.
         self.get_data('profile', expect_http_code=302, follow_redirects=False)
-        self.get_data('profile', expect_http_code=403)
+        self.get_data('profile', expect_http_code=401)
 
     def test_destroy_account(self):
         # GIVEN a logged in user
@@ -606,7 +606,7 @@ class TestAuth(AuthHelper):
         # THEN first receive a redirect response response code from the server, and
         # the next page load will be a forbidden
         self.get_data('profile', expect_http_code=302, follow_redirects=False)
-        self.get_data('profile', expect_http_code=403)
+        self.get_data('profile', expect_http_code=401)
 
     def test_invalid_change_password(self):
         # GIVEN a logged in user
@@ -879,7 +879,7 @@ class TestAuth(AuthHelper):
                         'password': '123456',
                         'password_repeat': '123456',
                         'token': 'foobar'},
-                       expect_http_code=403)
+                       expect_http_code=401)
 
     def test_reset_password(self):
         # GIVEN an existing user
@@ -975,7 +975,7 @@ class TestProgram(AuthHelper):
 
         # WHEN retrieving own programs but without sending a cookie
         # THEN receive a forbidden response code from the server
-        self.get_data('programs/list', expect_http_code=403, no_cookie=True)
+        self.get_data('programs/list', expect_http_code=401, no_cookie=True)
 
     def test_get_programs(self):
         # GIVEN a logged in user
@@ -1018,7 +1018,7 @@ class TestProgram(AuthHelper):
                         'name': 'program 1',
                         'level': 1,
                         'shared': False},
-                       expect_http_code=403,
+                       expect_http_code=401,
                        no_cookie=True)
 
     def test_create_program(self):
@@ -1056,7 +1056,7 @@ class TestProgram(AuthHelper):
         # WHEN sharing a program without being logged in
         # THEN receive a forbidden response code from the server
         self.post_data('programs/share/123456/False', {'id': '123456'},
-                       expect_http_code=403,
+                       expect_http_code=401,
                        no_cookie=True)
 
         # WHEN sharing a program that does not exist
@@ -1155,7 +1155,7 @@ class TestClasses(AuthHelper):
 
         # WHEN creating a class without teacher permissions
         # THEN receive a forbidden response code from the server
-        self.post_data('class', {'name': 'class1'}, expect_http_code=403)
+        self.post_data('class', {'name': 'class1'}, expect_http_code=401)
 
         # WHEN marking the user as teacher
         self.make_current_user_teacher()
@@ -1230,7 +1230,7 @@ class TestClasses(AuthHelper):
         # THEN receive a forbidden status code from the server
         self.post_data('class/' + Class['id'],
                        {'name': 'class2'},
-                       expect_http_code=403,
+                       expect_http_code=401,
                        put_data=True,
                        no_cookie=True)
 
@@ -1386,7 +1386,7 @@ class TestCustomizeClasses(AuthHelper):
 
         # WHEN customizing a class without being a teacher
         # THEN receive a forbidden response code from the server
-        self.post_data('for-teachers/customize-class/' + class_id, {}, expect_http_code=403)
+        self.post_data('for-teachers/customize-class/' + class_id, {}, expect_http_code=401)
 
     def test_invalid_customization(self):
         # GIVEN a user with teacher permissions
@@ -1496,7 +1496,7 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to start creating a valid adventure
         # THEN receive a forbidden response code from the server
-        self.get_data('for-teachers/customize-adventure', expect_http_code=403)
+        self.get_data('for-teachers/customize-adventure', expect_http_code=401)
 
     def test_create_adventure(self):
         # GIVEN a new teacher
@@ -1512,7 +1512,7 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to view a custom adventure
         # THEN receive a 403 error from the server
-        self.get_data('for-teachers/customize-adventure/view/123', expect_http_code=403)
+        self.get_data('for-teachers/customize-adventure/view/123', expect_http_code=401)
 
         # GIVEN a new teacher
         self.given_fresh_teacher_is_logged_in()
@@ -1524,7 +1524,7 @@ class TestCustomAdventures(AuthHelper):
     def test_invalid_adventure_id(self):
         # WHEN attempting to view a custom adventure that doesn't exist
         # THEN receive a 404 error from the server
-        self.get_data('for-teachers/customize-adventure/INVALID_NONEXISTING_ID', expect_http_code=403)
+        self.get_data('for-teachers/customize-adventure/INVALID_NONEXISTING_ID', expect_http_code=401)
 
     def test_invalid_update_adventure(self):
         # GIVEN a new teacher
@@ -1626,7 +1626,7 @@ class TestMultipleAccounts(AuthHelper):
 
         # WHEN trying to create multiple accounts
         # THEN receive a forbidden response code from the server
-        self.post_data('for-teachers/create-accounts', {}, expect_http_code=403)
+        self.post_data('for-teachers/create-accounts', {}, expect_http_code=401)
 
     def test_invalid_create_accounts(self):
         # GIVEN a new teacher
