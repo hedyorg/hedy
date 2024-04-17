@@ -660,6 +660,7 @@ def parse():
                 name=body.get('save_name'),
                 program_id=body.get('program_id'),
                 adventure_name=body.get('adventure_name'),
+                short_name=body.get('short_name'),
                 code=code,
                 error=exception is not None)
 

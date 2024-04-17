@@ -539,7 +539,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
           tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
           read_aloud : !!$('#speak_dropdown').val(),
           adventure_name: adventure ? adventure.name : undefined,
-
+          short_name: adventure ? adventure.short_name :undefined,
           // Save under an existing id if this field is set
           program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
           save_name: saveNameFromInput(),
@@ -1973,6 +1973,7 @@ async function saveIfNecessary() {
       program_id: saveInfo?.id,
       // We pass 'public' in here to save the backend a lookup
       share: saveInfo?.public,
+      short_name: adventure.short_name
     });
 
     // Record that we saved successfully
