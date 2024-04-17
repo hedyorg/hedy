@@ -150,7 +150,13 @@ onclick="window.open('/for-teachers', '_self');">
             </div>
             <div class="flex flex-row justify-end gap-2 my-4">
                 <button class="green-btn" id="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">{{_('preview')}}</button>
-                <button type="reset" class="red-btn" id="remove_adventure_button" onclick="hedyApp.delete_adventure('{{ adventure.id }}', '{{_('delete_adventure_prompt')}}')">{{_('remove')}}</button>
+                <button type="reset" class="red-btn" id="remove_adventure_button" 
+                  hx-confirm="{{_('delete_adventure_prompt')}}"
+                  hx-trigger="click"
+                  hx-delete="/for-teachers/customize-adventure/{{adventure.id}}"
+                  hx-swap="none"
+                  _="on htmx:afterRequest if detail.xhr.status == 200 then window.open('/for-teachers', '_self')"
+                  >{{_('remove')}}</button>
             </div>
         </form>
 
