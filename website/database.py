@@ -54,6 +54,9 @@ CLASSES = dynamo.Table(storage, "classes", "id", indexes=[
 ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[
                           dynamo.Index("creator"), dynamo.Index("public"),
                           dynamo.Index("name", sort_key="creator", index_name="name-creator-index")])
+PUBLIC_ADVENTURES_INDEXES = dynamo.Table(storage, "public-adventures-indexes",
+                                         "field#value", sort_key="date#adventure_id")
+PUBLIC_ADVENTURES_FILTERS = dynamo.Table(storage, "public-adventures-filters", "field", sort_key="value")
 INVITATIONS = dynamo.Table(
     storage, "invitations", partition_key="username#class_id",
     indexes=[dynamo.Index("username"), dynamo.Index("class_id")],
@@ -607,6 +610,13 @@ class Database:
         """From a list of adventure ids, return a map of { id -> adventure }."""
         keys = {id: {"id": id} for id in adventure_ids}
         return ADVENTURES.batch_get(keys) if keys else {}
+
+    def get_public_adventures_filters(self, key):
+        return PUBLIC_ADVENTURES_FILTERS.get_all(key)
+
+    def get_public_adventures_indexes(self, key):
+        print("\n\n get indexes", key)
+        return PUBLIC_ADVENTURES_INDEXES.get_all(key)
 
     def get_public_adventures(self):
         return ADVENTURES.get_many({"public": 1})

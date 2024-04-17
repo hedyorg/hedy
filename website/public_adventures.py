@@ -31,60 +31,160 @@ class PublicAdventuresModule(WebsiteModule):
         self.available_languages = set()
         self.available_tags = set()
 
-    def init(self, user):
-        included = {}
-        self.adventures = {}
-        self.available_languages = set()
-        self.available_tags = set()
-
-        public_adventures = self.db.get_public_adventures()
-        public_adventures = sorted(public_adventures, key=lambda a: a["creator"] == user["username"], reverse=True)
-        for adventure in public_adventures:
-            adv_lang = adventure.get("language", g.lang)
-            adv_tags = adventure.get("tags", [])
-            self.available_languages.update([adv_lang])
-            self.available_tags.update(adv_tags)
-            # NOTE: what if another author has an adventure with the same name?
-            # Perhaps we could make this name#creator!
-            if included.get(adventure["name"]):
-                continue
-            public_profile = self.db.get_public_profile_settings(adventure.get('creator'))
-            included[adventure["name"]] = True
-
-            content = safe_format(adventure.get('formatted_content', adventure['content']),
-                                  **hedy_content.KEYWORDS.get(g.keyword_lang))
-            current_adventure = {
-                "id": adventure.get("id"),
-                "name": adventure.get("name"),
-                "short_name": adventure.get("name"),
-                "author": adventure.get("author", adventure["creator"]),
-                "creator": adventure.get("creator"),
-                "creator_public_profile": public_profile,
-                "date": utils.localized_date_format(adventure.get("date")),
-                "level": adventure.get("level"),
-                "levels": adventure.get("levels"),
-                "language": adv_lang,
-                "cloned_times": adventure.get("cloned_times"),
-                "tags": adv_tags,
-                "text": content,
-                "is_teacher_adventure": True,
-            }
-
-            # save adventures for later usage.
-            for _level in adventure.get("levels", [adventure.get("level")]):
-                _level = int(_level)
-                if self.adventures.get(_level):
-                    self.adventures[_level].append(current_adventure)
-                else:
-                    self.adventures[_level] = [current_adventure]
-
-            available_levels = adventure["levels"] if adventure.get("levels") else [adventure["level"]]
-            self.customizations["available_levels"].update([int(adv_level) for adv_level in available_levels])
-
     @route("/", methods=["GET"])
     @route("/filter", methods=["POST"])
     @requires_teacher
-    def filtering(self, user, index_page=False):
+    def filtering(self, user):
+        level = request.args["level"] if request.args.get("level") else "1"
+        language = request.args.get("lang", g.lang)
+        tag = request.args.get("tag", "")
+        search = request.form.get("search", request.args.get("search", ""))
+        print('\n\n\n', level, language, tag, search, '\n\n\n')
+
+        available_languages = set()
+        available_levels = set()
+        available_tags = set()
+
+        # Get all possible filters
+        lang_level_filters = self.db.get_public_adventures_filters({"field": "lang#level", })
+        for record in lang_level_filters:
+            lang, _level = record.get("value", "#").split("#")
+            available_levels.update([_level])
+            if level == _level:
+                available_languages.update([lang])
+        customizations = {"available_levels": available_levels}
+
+        tag_filters = self.db.get_public_adventures_filters({"field": "tag"})
+        for record in tag_filters:
+            _tag = record.get("value")
+            available_tags.update([_tag])
+
+        customizations = {"available_levels": available_levels}
+
+        tags = []
+        if tag:
+            toReset = request.args.get("reset")
+            if toReset:
+                # then it's the current selected tags, so remove current's tag
+                tags = [_tag for _tag in toReset.split(",") if _tag != tag]
+            else:
+                tags = tag.split(",")
+            tags = [t for t in tags if t]
+
+        # Get indexes
+        level_adventure_ids = self.db.get_public_adventures_indexes({"field#value": f"level#{level}"})
+        lang_adventure_ids = self.db.get_public_adventures_indexes({"field#value": f"lang#{language}"})
+        tag_adventure_ids = []
+        for _t in tags:
+            tag_adventure_ids += self.db.get_public_adventures_indexes({"field#value": f"tag#{_t}"})
+
+        level_adventure_ids = [record["date#adventure_id"].split("#")[1] for record in level_adventure_ids]
+        lang_adventure_ids = [record["date#adventure_id"].split("#")[1] for record in lang_adventure_ids]
+        tag_adventure_ids = [record["date#adventure_id"].split("#")[1] for record in tag_adventure_ids]
+
+        # Filter out based on level
+        lang_adventure_ids = [_id for _id in lang_adventure_ids if _id in level_adventure_ids]
+        tag_adventure_ids = [_id for _id in tag_adventure_ids if _id in level_adventure_ids]
+
+        adventure_ids = level_adventure_ids + lang_adventure_ids + tag_adventure_ids
+
+        print("ids all", adventure_ids)
+        adventures = self.db.batch_get_adventures(adventure_ids)
+
+        initial_tab = None
+        initial_adventure = None
+        commands = {}
+        prev_level = None
+        next_level = None
+
+        if adventures:
+            adventures = list(adventures.values())
+            initial_tab = adventures[0]["name"]
+            initial_adventure = adventures[-1]
+
+            # Add the commands to enable the language switcher dropdown
+            commands = hedy.commands_per_level.get(level)
+            print("\n\ncustomiz", customizations)
+            if customizations["available_levels"]:
+                prev_level, next_level = utils.find_prev_next_levels(list(customizations["available_levels"]), level)
+
+            customized_adventures = []
+            for adventure in adventures:
+                if language and adventure.get("language", g.lang) != language:
+                    print("\n\n\nherererere", language, adventure.get("language"))
+                    continue
+                if tags and not any(_t in adventure.get("tags", []) for _t in tags):
+                    print("\n\n\nherererere tags", tag, tags, adventure.get("tags"))
+                    continue
+
+                content = safe_format(adventure.get('formatted_content', adventure['content']),
+                                      **hedy_content.KEYWORDS.get(g.keyword_lang))
+                current_adventure = {
+                    "id": adventure.get("id"),
+                    "name": adventure.get("name"),
+                    "short_name": adventure.get("name"),
+                    "author": adventure.get("author", adventure["creator"]),
+                    "creator": adventure.get("creator"),
+                    "date": utils.localized_date_format(adventure.get("date")),
+                    "level": adventure.get("level"),
+                    "levels": adventure.get("levels"),
+                    "language": adventure.get("language", g.lang),
+                    "cloned_times": adventure.get("cloned_times"),
+                    "tags": adventure.get("tags", []),
+                    "text": content,
+                    "is_teacher_adventure": True,
+                }
+                customized_adventures.append(current_adventure)
+            adventures = customized_adventures
+
+        print("\n\n\nADVENTURES", adventures)
+        js = dict(
+            page='code',
+            lang=g.lang,
+            level=level,
+            adventures=adventures,
+            initial_tab='',
+            current_user_name=user['username'],
+        )
+
+        temp = render_template(
+            f"public-adventures/{'index' if request.method == 'GET' else 'body'}.html",
+            adventures=adventures,
+            teacher_adventures=adventures,
+            available_languages=available_languages,
+            available_tags=available_tags,
+            selectedLevel=level,
+            selectedLang=language,
+            # selectedTag=",".join(self.selectedTag),
+            selectedTag=",".join(tags),
+            currentSearch=search,
+
+            user=user,
+            current_page="public-adventures",
+            page_title=gettext("title_public-adventures"),
+
+            initial_adventure=initial_adventure,
+            initial_tab=initial_tab,
+            commands=commands,
+            level=level,
+            max_level=18,
+            level_nr=str(level),
+            prev_level=prev_level,
+            next_level=next_level,
+
+            customizations=customizations,
+
+            public_adventures_page=True,
+            javascript_page_options=js,
+        )
+
+        response = make_response(temp)
+        response.headers["HX-Trigger"] = json.dumps({"updateTSCode": js})
+        return response
+
+    @route("/filter-old", methods=["POST"])
+    @requires_teacher
+    def filtering_old(self, user, index_page=False):
         index_page = request.method == "GET"
 
         level = int(request.args["level"]) if request.args.get("level") else 1
@@ -92,6 +192,7 @@ class PublicAdventuresModule(WebsiteModule):
         tag = request.args.get("tag", "")
         search = request.form.get("search", request.args.get("search", ""))
         if index_page or not self.adventures or not self.adventures.get(level):
+            print("\n\n\n GET IT MORE TIME!!\n\n", level, language, tag)
             self.init(user)
 
         adventures = self.adventures.get(level, [])
