@@ -96,15 +96,12 @@ class ProgramsLogic:
         program_to_check = copy.deepcopy(program)
         program_to_check['adventure_name'] = short_name
         is_modified = self.statistics.is_program_modified(program_to_check, full_adventures, teacher_adventures)
+        # a program can be saved before but not yet modified, and if it was already modified and now is so again, count should not increase.
+        if is_modified and not program['is_modified']:
+            self.db.increase_user_program_count(user["username"])
         program['is_modified'] = is_modified
         program = self.db.update_program(program['id'], program)
         # only if it is a new program and it's modified, increase the count
-        if is_modified and program_id:
-            self.db.increase_user_program_count(user["username"])
-
-        self.db.increase_user_save_count(user["username"])
-        self.achievements.increase_count("saved")
-        self.achievements.verify_save_achievements(user["username"], adventure_name)
 
         querylog.log_value(program_id=program['id'],
                            adventure_name=adventure_name, error=error, code_lines=len(code.split('\n')))

@@ -1014,6 +1014,8 @@ def programs_page(user):
                 program['adventure_name'] not in adventure_names:
             ids_to_fetch.append(program['adventure_name'])
 
+    all_programs = [program for program in all_programs if program.get('is_modified')]
+
     teacher_adventures = DATABASE.batch_get_adventures(ids_to_fetch)
     for id, teacher_adventure in teacher_adventures.items():
         if teacher_adventure is not None:
