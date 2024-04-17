@@ -64,6 +64,7 @@
                 {% for lang in other_languages() %}
                     <div class="dropdown-item language" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();" data-cy="switch-lang-{{lang.lang}}">{{ lang.sym }}</div>
                 {% endfor %}
+                <a class="add-language-item language" href="https://hosted.weblate.org/new-lang/hedy/adventures/">{{_('help_us_translate')}}</a>
               </div>
           </div>
       </li>

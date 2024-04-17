@@ -118,6 +118,7 @@
                         <option value="{{language.lang}}">{{language.sym}}</option>
                     {% endfor %}
                 </select>
+                <a class="ml-2 px-1 py-1 flex btn-shape green-btn items-center" href="https://hosted.weblate.org/new-lang/hedy/adventures/">{{_('help_us_translate')}}</a>
             </div>
             <div class="flex flex-row items-center mb-2" id="keyword_lang_container"
                  {% if user_data and 'language' in user_data and (user_data['language'] not in keyword_languages_keys() or user_data['language'] == "en") %}style="display: none;"{% endif %}>
@@ -153,7 +154,9 @@
                 </select>
             </div>
         </form>
-        <button class="red-btn" onclick="hedyApp.destroy('{{_('are_you_sure')}}')" id="delete_profile_button">{{_('destroy_profile')}}</button>
+        <div class="flex flex-row gap-2">
+            <button class="red-btn" onclick="hedyApp.destroy('{{_('are_you_sure')}}')" id="delete_profile_button">{{_('destroy_profile')}}</button>
+        </div>
        </div>
       <h1 id="password_toggle" class="section-header" onclick="$ ('#change-password-body').toggle()">{{_('change_password')}}</h1>
         <div class="profile-section-body" id="change-password-body">
