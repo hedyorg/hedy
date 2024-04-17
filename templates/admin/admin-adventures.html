@@ -3,7 +3,7 @@
 {% block regular_content %}
 <div class="flex flex-row items-center justify-between border-b">
     <h1>Adventures overview</h1>
-    <button type="reset" class="green-btn" id="return_to_admin_page_button" onclick="window.open('/admin', '_self');">Return to admin page</button>
+    <button type="reset" class="green-btn" data-cy="return_to_admin_page_button" onclick="window.open('/admin', '_self');">Return to admin page</button>
 </div>
 <h4 class="text-center">Total amount of shown adventures: {{ adventures|length }}</h4>
 <div class="program w-full lg:w-3/4 mx-auto border-solid border-2 border-orange-400 rounded p-4">
@@ -26,7 +26,7 @@
             <td class="students_cell">{{adventure.level}}</td>
             <td class="last_used_cell">{{adventure.date}}</td>
             <td class="public_cell">{{adventure.public}}</td>
-            <td id="statistics_cell"><a href="/for-teachers/customize-adventure/view/{{ adventure.id }}" target="_blank">Click here</a></td>
+            <td data-cy="statistics_cell"><a href="/for-teachers/customize-adventure/view/{{ adventure.id }}" target="_blank">Click here</a></td>
           </tr>
       {% endfor %}
     </tbody>
