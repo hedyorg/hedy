@@ -879,7 +879,7 @@ class TestAuth(AuthHelper):
                         'password': '123456',
                         'password_repeat': '123456',
                         'token': 'foobar'},
-                       expect_http_code=403)
+                       expect_http_code=401)
 
     def test_reset_password(self):
         # GIVEN an existing user
