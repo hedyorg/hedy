@@ -110,25 +110,6 @@ function apiDuplicateClass(id: string, prompt: string, second_teacher: boolean, 
   });
 }
 
-export function delete_class(id: string, prompt: string) {
-  modal.confirm (prompt, function () {
-    $.ajax({
-      type: 'DELETE',
-      url: '/class/' + id,
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-      if (response.achievement) {
-        showAchievements(response.achievement, true, '');
-      } else {
-        location.reload();
-      }
-    }).fail(function(err) {
-      modal.notifyError(err.responseText);
-    });
-  });
-}
-
 export function join_class(id: string, name: string) {
   $.ajax({
       type: 'POST',
@@ -351,21 +332,6 @@ export function preview_adventure() {
     });
 }
 
-export function delete_adventure(adventure_id: string, prompt: string) {
-    modal.confirm(prompt, function () {
-        $.ajax({
-            type: 'DELETE',
-            url: '/for-teachers/customize-adventure/' + adventure_id,
-            contentType: 'application/json',
-            dataType: 'json'
-        }).done(function () {
-            window.location.href = '/for-teachers';
-        }).fail(function (err) {
-            modal.notifyError(err.responseText);
-        });
-    });
-}
-
 export function change_password_student(username: string, enter_password: string, password_prompt: string) {
     modal.prompt ( enter_password + " " + username + ":", '', function (password) {
         modal.confirm (password_prompt, function () {
@@ -457,18 +423,17 @@ export function save_customizations(class_id: string) {
 }
 
 export function restore_customization_to_default(prompt: string) {
-    modal.confirm (prompt, function () {
+    modal.confirm (prompt, async function () {
       // We need to know the current level that is selected by the user
       // so we can know which level to draw in the template  
       let active_level_id : string = $('[id^=level-]')[0].id;
       let active_level = active_level_id.split('-')[1]
-      htmx.ajax(
-        'POST',
-        `/for-teachers/restore-customizations?level=${active_level}`,
-        '#adventure-dragger'
-      ).then(() => {
-        // Restore all the options other than the adventures.
-        // The adventures will be restored to the default using an HTMX call to the server
+      try {
+        await htmx.ajax(
+          'POST',
+          `/for-teachers/restore-customizations?level=${active_level}`,
+          '#adventure-dragger'
+        )
         $('.other_settings_checkbox').prop('checked', false);
         // Remove the value from all input fields -> reset to text to show placeholder
         $('.opening_date_input').prop("type", "text")
@@ -486,7 +451,9 @@ export function restore_customization_to_default(prompt: string) {
         $('[id^=enable_level_]').prop('checked', true);                
         setLevelStateIndicator(active_level);
         modal.notifySuccess(ClientMessages.customization_deleted);          
-      })
+      } catch (error) {
+        console.error(error);
+      }
     });
 }
 

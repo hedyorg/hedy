@@ -22,13 +22,18 @@ export function deleteAdventure(name) {
     goToTeachersPage();
     cy.reload();
     cy.wait(500);
-    cy.get("#adventures_table").then($viewClass => {
-        if (!$viewClass.is(':visible')) {
+    cy.get("#adventures_table").then($viewAdventure => {
+        if (!$viewAdventure.is(':visible')) {
             cy.get("#view_adventures").click();
         }
     });
 
-    cy.get(`[data-cy='delete_${name}']`).click()
+    cy.get("#adventures_table tbody tr")
+    .each(($tr, i) => {
+        if ($tr.text().includes(name)) {
+            cy.get(`tbody :nth-child(${i+1}) [data-cy="delete-adventure"]`).click();
+        }
+    })
     cy.get('#modal-yes-button').should('be.enabled').click();
 }
 
