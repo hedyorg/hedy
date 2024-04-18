@@ -539,6 +539,7 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
           tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
           read_aloud : !!$('#speak_dropdown').val(),
           adventure_name: adventureName,
+          short_name: adventure ? adventure.short_name : undefined,
           raw: raw,
 
           // Save under an existing id if this field is set
@@ -724,9 +725,16 @@ export function viewProgramLink(programId: string) {
 export async function delete_program(id: string, prompt: string) {
   await modal.confirmP(prompt);
   await tryCatchPopup(async () => {
+    $("select[name='level']").each(function()
+    {
+      console.log($(this).text());
+    });
+    return
     const response = await postJsonWithAchievements('/programs/delete', { id });
     showAchievements(response.achievement, true, "");
     $('#program_' + id).remove();
+    // issue request on the Bar component.
+    console.log("resp", response)
     modal.notifySuccess(response.message);
   });
 }
@@ -1971,6 +1979,7 @@ async function saveIfNecessary() {
       program_id: saveInfo?.id,
       // We pass 'public' in here to save the backend a lookup
       share: saveInfo?.public,
+      short_name: adventure.short_name,
     });
 
     // Record that we saved successfully

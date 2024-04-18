@@ -1080,7 +1080,7 @@ def programs_page(user):
         max_level=hedy.HEDY_MAX_LEVEL,
         next_page_url=next_page_url,
         second_teachers_programs=False,
-        user_program_count=user_program_count)
+        user_program_count=len(programs))
 
 
 @app.route('/logs/query', methods=['POST'])

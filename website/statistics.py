@@ -270,14 +270,19 @@ class StatisticsModule(WebsiteModule):
                 for pre in soup.find_all('pre'):
                     adventure_snippets.append(pre.contents[0])
 
-        student_code = program['code']
-        student_code = student_code
+        student_code = program['code'].strip()
         # now we have to calculate the differences between the student code and the code snippets
         can_save = True
         for snippet in adventure_snippets:
+            snippet = snippet.strip()
             seq_match = SequenceMatcher(None, snippet, student_code)
+            matching_ratio = round(seq_match.ratio(), 2)
+            print('\n\n\n\n\n\n')
+            print(matching_ratio, seq_match.ratio())
+            print(snippet, student_code)
+            print('\n\n\n\n\n\n')
             # Allowing a difference of more than 10% or the student filled the placeholders
-            if seq_match.ratio() > 0.95 and (self.has_placeholder(student_code) or not self.has_placeholder(snippet)):
+            if matching_ratio >= 0.95 and (self.has_placeholder(student_code) or not self.has_placeholder(snippet)):
                 can_save = False
         return can_save
 

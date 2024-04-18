@@ -1,8 +1,9 @@
 import copy
 import uuid
 from typing import Optional
+import json
 
-from flask import g, request, jsonify
+from flask import g, request, jsonify, make_response
 from flask_babel import gettext
 import jinja_partials
 import hedy_content
@@ -95,10 +96,11 @@ class ProgramsLogic:
         teacher_adventures = self.db.get_teacher_adventures(current_user()["username"])
         program_to_check = copy.deepcopy(program)
         program_to_check['adventure_name'] = short_name
+
         is_modified = self.statistics.is_program_modified(program_to_check, full_adventures, teacher_adventures)
         # a program can be saved before but not yet modified,
         # and if it was already modified and now is so again, count should not increase.
-        if is_modified and not program['is_modified']:
+        if is_modified and not program.get('is_modified'):
             self.db.increase_user_program_count(user["username"])
         program['is_modified'] = is_modified
         program = self.db.update_program(program['id'], program)
@@ -149,7 +151,9 @@ class ProgramsModule(WebsiteModule):
             self.db.set_favourite_program(user["username"], body["id"], None)
 
         achievement = self.achievements.add_single_achievement(user["username"], "do_you_have_copy")
-        resp = {"message": gettext("delete_success")}
+
+
+        resp = {"message": gettext("delete_success"), "count": 2, "levels": []}
         if achievement:
             resp["achievement"] = achievement
         return jsonify(resp)
@@ -219,7 +223,7 @@ class ProgramsModule(WebsiteModule):
             error=error,
             set_public=program_public,
             adventure_name=body.get('adventure_name'),
-            short_name=body.get('short_name'))
+            short_name=body.get('short_name', body.get('adventure_name')))
 
         return jsonify({
             "message": gettext("save_success_detail"),
