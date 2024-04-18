@@ -1150,8 +1150,28 @@ levels:
                 {else}:
                     {print} 'Better luck next time..'
         4:
-            header: Let's try it out!
-            text: Enjoy the adventures in level 17!
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {define} ask_direction
+                    direction = {ask} 'Where do you want to go?'
+                    {if} direction = 'backwards'
+                        {turn} 180
+                    {else} direction == 'right'
+                        {turn} 90
+                    {else} direction == 'left'
+                        {turn} 270
+                        {forward} 100
+
+                continue = 'yes'
+
+                {while} continue == 'yes'
+                    {print} ask_direction
+                    {sleep}
+                    continue = 'do you want to draw some more?'
+                    {sleep}
+            debug: 'True'
+        5:
     18:
         1:
             header: Welcome to level 18

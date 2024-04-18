@@ -1165,6 +1165,28 @@ levels:
                 {else}:
                      {print} '下次祝你好运..'
         4:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {define} ask_direction
+                    direction = {ask} 'Where do you want to go?'
+                    {if} direction = 'backwards'
+                        {turn} 180
+                    {else} direction == 'right'
+                        {turn} 90
+                    {else} direction == 'left'
+                        {turn} 270
+                        {forward} 100
+
+                continue = 'yes'
+
+                {while} continue == 'yes'
+                    {print} ask_direction
+                    {sleep}
+                    continue = 'do you want to draw some more?'
+                    {sleep}
+            debug: 'True'
+        5:
             header: 我们来试一下！
             text: 享受第17关的冒险吧！
     18:
