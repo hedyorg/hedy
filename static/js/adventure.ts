@@ -28,9 +28,9 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
 
     if (editorContainer) {
         await initializeEditor(lang, editorContainer);
-        showWarningIfMultipleLevels(TRADUCTION)
-        $editor.model.document.on('change:data', () => {            
-            showWarningIfMultipleLevels(TRADUCTION)
+        showWarningIfMultipleKeywords(TRADUCTION)
+        $editor.model.document.on('change:data', () => {
+            showWarningIfMultipleKeywords(TRADUCTION)
         })
     }
 
@@ -63,7 +63,7 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
 
 }
 
-function showWarningIfMultipleLevels(TRADUCTION: Map<string, string>) {
+function showWarningIfMultipleKeywords(TRADUCTION: Map<string, string>) {
     const content = DOMPurify.sanitize($editor.getData())
     const parser = new DOMParser();
     const html = parser.parseFromString(content, 'text/html');

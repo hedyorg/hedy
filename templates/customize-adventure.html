@@ -49,36 +49,34 @@ onclick="window.open('/for-teachers', '_self');">
                         </div>
                     </div>
                     <div class="flex flex-row items-center mb-4">
-                        <label for="custom_adventure_levels" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('available_in')}}</label>
-                                <!-- data-te-class-notch-trailing-normal="!border-gray-200"-->
-                        <div
-                            id="custom_adventure_levels_container"
-                            data-te-input-wrapper-init
-                            class="block appearance-none w-full bg-gray-200 text-gray-700 rounded">
-                            <select 
-                                id="custom_adventure_levels"
-                                name="levels"
-                                required
-                                multiple
-                                data-te-select-init
-                                data-te-select-visible-options="10"
-                                data-te-select-size="lg"
-                                data-te-select-options-selected-label="{{_('selected')}}"
-                                data-te-select-all-label="{{_('select_all')}}"
-                                data-te-class-select-arrow="hidden"
-                                data-te-select-validation="true"
-                                >
-                                {% for i in range(1, (max_level + 1)) %}
-                                    <option value="{{ i }}"
+                        <label for="custom_adventure_levels" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('available_in')}}</label>                        
+                        <div id="levels" class="flex-1">
+                            <div class="dropdown relative" id="tag-select" data-value="">
+                                <button class="toggle-button font-semibold rounded inline-flex justify-between 
+                                                     appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
+                                    onclick="$('#levels_dropdown').slideToggle('medium');">
+                                    <span class="label" data-value="{{_('select_levels')}}">{{_('select_levels')}}</span>
+                                    <svg id="keyword-arrow_tag" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                    </svg>
+                                </button>
+                                <div class="dropdown-menu overflow-auto dropdown-blue z-30 mt-2 w-full h-96" id="levels_dropdown"
+                                    style="display: none; width: 100%;" _="on mutation of @style
+                                                        set arrow to #keyword-arrow_tag
+                                                        if *display == 'none'
+                                                            remove .rotate-180 from arrow
+                                                        else if not arrow.classList.contains('rotate-180')
+                                                            add .rotate-180 to arrow
+                                                        end">
+                                    {% for i in range(1, (max_level + 1)) %}
                                         {% set adv_levels = adventure.levels if adventure.get("levels") else [adventure.level|string] %}
-                                        {% if i|string in adv_levels %}selected{% endif %}>
-                                        {{ i }}
-                                    </option>
-                                {% endfor %}
-                            </select>
+                                        <div class="option {% if i|string in adv_levels %}selected{% endif %}" data-value="{{i}}">{{ i }}</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-
+                    </div>                    
                     <div class="flex flex-row items-center mb-4">
                         <label for="language" class="inline-block w-40 text-xl">{{_('language')}}</label>
                         <select id="language" name="language" required class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
@@ -120,7 +118,27 @@ onclick="window.open('/for-teachers', '_self');">
                         </div>
                     </div>
                     {{ render_partial('htmx-tags-list.html', tags=adventure_tags, adventure_id=adventure.id, creator=adventure.creator) }}                  
-                    <div class="flex flex-col items center mb-4 h-60 overflow-x-auto" id="warnings_container"> </div>
+                    <div class="flex flex-col items center mb-4 h-60 overflow-x-auto" id="warnings_container">
+                        <div id="warningbox"
+                            class="flex-0 z-20 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md"
+                            role="alert" style="display: none;">
+                            <p class="close-dialog" onclick="hedyApp.error.hide ()"><i class="fa-solid fa-xmark"></i></p>
+                            <div class="flex">
+                                <div class="py-1">
+                                    <div id="warningbox_icon">
+                                        <svg class="fill-current h-6 w-6 text-yellow-500 ltr:mr-4 rtl:ml-4"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path
+                                                d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="details text-sm">{{ _('multiple_levels_warning') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="flex flex-col w-full">

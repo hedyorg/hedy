@@ -199,7 +199,11 @@ function update_db_adventure(adventure_id: string) {
   // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
   const adventure_name = $('#custom_adventure_name').val();
   const classes = $('#custom_adventure_classes').val();
-  const levels: string[] = $('#custom_adventure_levels').val() as string[];
+  let levels: string[] = []
+  document.querySelectorAll('#levels_dropdown > .option.selected').forEach((el) => {
+    levels.push(el.getAttribute("data-value") as string)
+  })
+  console.log(levels)
   const content = DOMPurify.sanitize(window.ckEditor.getData());
   
   const parser = new DOMParser();
