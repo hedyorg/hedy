@@ -326,9 +326,11 @@ def code_blocks_from_markdown(markdown):
 
 
 def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None, exception=None):
-    if error not in [400, 403, 404, 500]:
+    if error not in [400, 403, 404, 500, 401]:
         error = 404
     default = gettext('default_404')
+    if error == 401:
+        default = gettext('default_401')
     if error == 403:
         default = gettext('default_403')
     elif error == 500:

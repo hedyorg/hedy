@@ -990,7 +990,7 @@ def programs_page(user):
     # If from_user -> A teacher is trying to view the user programs
     if from_user and not is_admin(user):
         if not is_teacher(user):
-            return utils.error_page(error=403, ui_message=gettext('not_teacher'))
+            return utils.error_page(error=401, ui_message=gettext('not_teacher'))
         students = DATABASE.get_teacher_students(username)
         if from_user not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
@@ -1087,7 +1087,7 @@ def programs_page(user):
 def query_logs():
     user = current_user()
     if not is_admin(user) and not is_teacher(user):
-        return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+        return utils.error_page(error=401, ui_message=gettext('unauthorized'))
 
     body = request.json
     if body is not None and not isinstance(body, dict):
@@ -1097,12 +1097,12 @@ def query_logs():
     if not is_admin(user):
         username_filter = body.get('username')
         if not class_id or not username_filter:
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+            return utils.error_page(error=401, ui_message=gettext('unauthorized'))
 
         class_ = DATABASE.get_class(class_id)
         if not class_ or class_['teacher'] != user['username'] or username_filter not in class_.get('students', [
         ]):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+            return utils.error_page(error=401, ui_message=gettext('unauthorized'))
 
     (exec_id, status) = log_fetcher.query(body)
     response = {'query_status': status, 'query_execution_id': exec_id}
@@ -1117,7 +1117,7 @@ def get_log_results():
 
     user = current_user()
     if not is_admin(user) and not is_teacher(user):
-        return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+        return utils.error_page(error=401, ui_message=gettext('unauthorized'))
 
     data, next_token = log_fetcher.get_query_results(
         query_execution_id, next_token)
@@ -1876,7 +1876,7 @@ def get_cheatsheet_page(level):
 @app.route('/certificate/<username>', methods=['GET'])
 def get_certificate_page(username):
     if not current_user()['username']:
-        return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+        return utils.error_page(error=401, ui_message=gettext('unauthorized'))
     username = username.lower()
     user = DATABASE.user_by_username(username)
     if not user:
@@ -1976,7 +1976,7 @@ def reset_page():
     token = None if token == "null" else token
 
     if not username or not token:
-        return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+        return utils.error_page(error=401, ui_message=gettext('unauthorized'))
     return render_template(
         'reset.html',
         page_title=gettext('title_reset'),
@@ -2621,7 +2621,7 @@ def update_yaml():
 @app.route('/user/<username>')
 def public_user_page(username):
     if not current_user()['username']:
-        return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+        return utils.error_page(error=401, ui_message=gettext('unauthorized'))
     username = username.lower()
     user = DATABASE.user_by_username(username)
     if not user:
