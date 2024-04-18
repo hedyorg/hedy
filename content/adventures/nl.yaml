@@ -5152,6 +5152,7 @@ adventures:
 
                     Straat met huizen van verschillende groottes <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
                     Gekleurde straat <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
+                    Sneeuwstorm <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
                 example_code: |
                     Hint voor de straat met huizen van verschillende groottes
                     ```
@@ -5167,6 +5168,23 @@ adventures:
                     ```
                     {define} teken_een_huis {with} gekozen_kleur
                     _
+                    ```
+
+                    Hint Snow Storm
+                    ```
+                    {define} teken_sneeuwvlok {with} lengte, kleur
+                        _
+
+                    getallen = 10, 20, 30
+                    kleuren = _
+
+                    {for} i {in} {range} 1 {to} 5
+                        random_getal = _
+                        random_kleur = _
+                        {call} teken_sneeuwvlok {with} random_getal, random_kleur
+                        {color} wit
+                        {turn} random_getal * 5
+                        {forward} 80
                     ```
             14:
                 story_text: |
