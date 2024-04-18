@@ -1037,6 +1037,32 @@ levels:
                     answer = {ask} 'Hoeveel is 5 maal 5?'
                 {print} 'Je antwoord is goed'
         3:
+            header: Debugging
+            text: Laten we deze code debuggen!
+            code: |-
+                getallen = 1, 2
+
+                {for} i {in} {range} 3 {to} 50
+                    {add} x {to} getal
+                    i = + 1
+
+                random_getal = getallen {random}
+                gokjes = 10
+
+                {while} guess = 0
+                    antwoord = 'Raad mijn getal:'
+                    {if} antwoord >= random_getal
+                        {print} 'Lager!'
+                        gokjes = gok -1
+                    {if} antwoord > random_getal
+                        {print} 'Hoger!'
+                        gokjes = gokjes
+                    {else} antwoord = random_getal
+                        {print} 'Goedzo! Je hebt het geraden'
+                        gokjes = 10
+
+            debug: 'True'
+        4:
             header: Proberen maar!
             text: Veel plezier met de avonturen in level 15!
     16:
