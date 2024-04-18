@@ -1960,9 +1960,9 @@ adventures:
                     colores = 'rojo', 'azul', 'verde', 'amarillo'
 
                     {define} turno
-                        lado_escogido = sides {at} {random}
-                        miembro_escogido = limbs _
-                        color_escogido = colors _
+                        lado_escogido = lados {at} {random}
+                        miembro_escogido = mimebros _
+                        color_escogido = colores _
                         {print} lado_escogido' ' miembro_escogido' en ' color_escogido
 
                     {print} 'Vamos a jugar al Twister!'
@@ -1972,31 +1972,33 @@ adventures:
                     ```
             13:
                 story_text: |
-                    Now that you've learned how to use functions, you'll learn how to use a function with an argument.
-                    An **argument** is a variable that is used within a function. It is not used outside the function.
+                    Ahora que has aprendido a usar funciones, aprenderás a usar una función con argumento.
+                    Un **argumento** es una variable que se utiliza dentro de una función. Y no se utiliza fuera de la función.
 
-                    For example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.
-                    In this example code the argument `place` is used. Place is a variable that is only used in the function, so an argument.
-                    To use `place` we have programmed the line `define song with place`.
-                    When the function is called, computer will replace the argument `place`, with the piece of text after `call song with`.
+                    Por ejemplo, en este código hemos programado el primer verso de la canción 'Mi Bonnie está sobre el océano'.
+                    En este código de ejemplo se utiliza el argumento `lugar`. El lugar es una variable que solamente se utiliza en la función, es un argumento.
+                    Para utilizar `lugar` hemos programado la línea `{define} canción {with} lugar`.
+                    Cuando se llama la función, la computadora reemplazará el argumento `lugar`, con la pieza de texto después `{call} canción {with}`.
 
-                    ### Exercise
-                    The next verse of this song goes:
+                    ### Ejercicio
+                    El siguiente verso de la canción dice:
 
-                    Last night as I lay on my pillow
-                    Last night as I lay on my bed
-                    Last night as I lay on my pillow
-                    I dreamed that my Bonnie is dead
+                    ```not_hedy_code
+                    Anoche mientras me acostaba en mi almohada
+                    Anoche mientras me acostaba en mi cama
+                    Anoche mientras me acostaba en mi almohada
+                    Soñé que mi Bonnie estaba muerta.
+                    ```
 
-                    Can you program this verse in the same way as the example?
+                    ¿Puedes programar este verso de la misma manera que el ejemplo?
                 example_code: |
                     ```
-                    {define} song {with} place
-                        {print} 'My Bonnie is over the ' place
+                    {define} canción {with} lugar
+                        {print} 'Mi Bonnie está sobre el ' lugar
 
-                    {call} song {with} 'ocean'
-                    {call} song {with} 'sea'
-                    {call} song {with} 'ocean'
+                    {call} canción {with} 'oceano'
+                    {call} canción {with} 'mar'
+                    {call} canción {with} 'oceano'
                     ```
             14:
                 story_text: |
