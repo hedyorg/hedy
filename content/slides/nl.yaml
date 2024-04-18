@@ -1082,6 +1082,39 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                     {print} vrienden[i] 'zijn geluks nummer is ' geluks_nummers[i]
         3:
+            header: Debugging
+            text: Laten we deze code debuggen!
+            code: |-
+                {print} 'Test je vriendschap'
+                {onderwerpen} = ['lied', 'film', 'eten', 'drinken']
+                antwoorden_speler_1 = []
+                antwoorden_speler_2 = []
+                score = 100
+
+                {for} i {in} {range} 1 {to} 4
+                    antwoord = {ask} 'Wat is je favoriete ' onderwerpen[i]
+                {add} answer {to} antwoorden_speler_1
+
+                {print} 'Speler 2, jouw beurt!'
+                {for} i {in} {range} 0 {to} 4
+                    antwoorden_speler_2 = {ask} 'Wat is speler 2s favoriete ' onderwerpen
+                    {add} antwoorden_speler_2 {in} antwoorden_speler_2
+                    {if} antwoorden_speler_2[2] == antwoorden_speler[1]
+                        {print} 'Juist!'
+                    {else}
+                        {print} 'Fout!'
+                    score = score - 25
+
+                {print} 'Je hebt een score van ' score '%'
+
+                {if} score = 100
+                    {print} 'Je bent een geweldige vriend(in)'
+                {if} score < 100 {or} score >= 50
+                    {print} 'Dat kan beter'
+                {else} score < 50
+                    {print} 'Jij noemt jezelf een vriend(in)?!'
+            debug: 'True'
+        4:
             header: Proberen maar!
             text: Veel plezier met de avonturen in level 16!
     17:
