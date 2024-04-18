@@ -611,12 +611,51 @@ class Database:
         keys = {id: {"id": id} for id in adventure_ids}
         return ADVENTURES.batch_get(keys) if keys else {}
 
-    def get_public_adventures_filters(self, key):
-        return PUBLIC_ADVENTURES_FILTERS.get_all(key)
+    def get_public_adventures_filters(self):
+        filters = {}
+        for record in PUBLIC_ADVENTURES_FILTERS.scan():
+            if record.get("field") == "tag":
+                filters["tag"] = filters.get("tag", [])
+                filters["tag"].append(record.get("value"))
+            else:
+                lang, level = record.get("value").split("#")
+                filters["lang"] = filters.get("lang", [])
+                filters["lang"].append(lang)
+                filters["level"] = filters.get("level", [])
+                filters["level"].append(level)
+        return filters
+
+    def update_public_adventure_filters_indexes(self, adventure):
+        """This function adds/updates filters and indexes that we use to retrieve public adventures."""
+        if not adventure.get("public"):
+            return
+        id = adventure.get("id")
+        date = adventure.get("date")
+        lang_value = adventure.get("language", "en")
+        PUBLIC_ADVENTURES_INDEXES.put({"field#value": f"lang#{lang_value}", "date#adventure_id": f"{date}#{id}"})
+
+        levels = adventure.get("levels")
+        if not levels:
+            levels = [adventure.get("level")]
+        for level in levels:
+            PUBLIC_ADVENTURES_INDEXES.put({"field#value": f"level#{level}", "date#adventure_id": f"{date}#{id}"})
+            value = f"{lang_value}#{level}"
+            PUBLIC_ADVENTURES_FILTERS.put({"field": "lang#level", "value": value})
+        tags = adventure.get("tags", [])
+        for tag in tags:
+            PUBLIC_ADVENTURES_INDEXES.put({"field#value": f"tag#{tag}", "date#adventure_id": f"{date}#{id}"})
+            PUBLIC_ADVENTURES_FILTERS.put({"field": "tag", "value": tag})
+
+    def remove_public_adventure_filters_indexes(self, field, value, adventure):
+        PUBLIC_ADVENTURES_FILTERS.delete({"field": field, "value": value})
+        PUBLIC_ADVENTURES_INDEXES.delete({"field#value": f"{field}#{value}",
+                                          "date#adventure_id": f"{adventure['date']}#{adventure['id']}"})
 
     def get_public_adventures_indexes(self, key):
-        print("\n\n get indexes", key)
-        return PUBLIC_ADVENTURES_INDEXES.get_all(key)
+        """This function returns adventure_ids for a specific index.
+        E.g., key={"field#value": "lang#en", "date#adventure_id": "..."}"""
+        result = PUBLIC_ADVENTURES_INDEXES.get_all(key)
+        return set([record["date#adventure_id"].split("#")[1] for record in result])
 
     def get_public_adventures(self):
         return ADVENTURES.get_many({"public": 1})
@@ -627,9 +666,11 @@ class Database:
     def store_adventure(self, adventure):
         """Store an adventure."""
         ADVENTURES.create(adventure)
+        self.update_public_adventure_filters_indexes(adventure)
 
     def update_adventure(self, adventure_id, adventure):
         ADVENTURES.update({"id": adventure_id}, adventure)
+        self.update_public_adventure_filters_indexes(adventure)
 
     def create_tag(self, data):
         return TAGS.create(data)
