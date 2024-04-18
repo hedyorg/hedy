@@ -1137,6 +1137,7 @@ class ForTeachersModule(WebsiteModule):
             return gettext("something_went_wrong_keyword_parsing"), 400
 
         adventure = {
+            "id": body["id"],
             "date": utils.timems(),
             "creator": user["username"],
             "name": body["name"],

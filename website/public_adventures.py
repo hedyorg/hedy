@@ -36,28 +36,20 @@ class PublicAdventuresModule(WebsiteModule):
     @requires_teacher
     def filtering(self, user):
         level = request.args["level"] if request.args.get("level") else "1"
-        language = request.args.get("lang", g.lang)
+        language = request.args.get("lang")  # or g.lang
         tag = request.args.get("tag", "")
         search = request.form.get("search", request.args.get("search", ""))
-        print('\n\n\n', level, language, tag, search, '\n\n\n')
 
         available_languages = set()
         available_levels = set()
         available_tags = set()
 
         # Get all possible filters
-        lang_level_filters = self.db.get_public_adventures_filters({"field": "lang#level", })
-        for record in lang_level_filters:
-            lang, _level = record.get("value", "#").split("#")
-            available_levels.update([_level])
-            if level == _level:
-                available_languages.update([lang])
-        customizations = {"available_levels": available_levels}
+        field_filters = self.db.get_public_adventures_filters()
 
-        tag_filters = self.db.get_public_adventures_filters({"field": "tag"})
-        for record in tag_filters:
-            _tag = record.get("value")
-            available_tags.update([_tag])
+        available_levels.update(field_filters.get("level", []))
+        available_languages.update(field_filters.get("lang", []))
+        available_tags.update(field_filters.get("tag", []))
 
         customizations = {"available_levels": available_levels}
 
@@ -74,21 +66,14 @@ class PublicAdventuresModule(WebsiteModule):
         # Get indexes
         level_adventure_ids = self.db.get_public_adventures_indexes({"field#value": f"level#{level}"})
         lang_adventure_ids = self.db.get_public_adventures_indexes({"field#value": f"lang#{language}"})
-        tag_adventure_ids = []
+        tag_adventure_ids = set()
         for _t in tags:
-            tag_adventure_ids += self.db.get_public_adventures_indexes({"field#value": f"tag#{_t}"})
+            tag_adventure_ids.update(self.db.get_public_adventures_indexes({"field#value": f"tag#{_t}"}))
 
-        level_adventure_ids = [record["date#adventure_id"].split("#")[1] for record in level_adventure_ids]
-        lang_adventure_ids = [record["date#adventure_id"].split("#")[1] for record in lang_adventure_ids]
-        tag_adventure_ids = [record["date#adventure_id"].split("#")[1] for record in tag_adventure_ids]
+        lang_adventure_ids.intersection_update(level_adventure_ids)
+        tag_adventure_ids.intersection_update(level_adventure_ids)
+        adventure_ids = level_adventure_ids.union(lang_adventure_ids, tag_adventure_ids)
 
-        # Filter out based on level
-        lang_adventure_ids = [_id for _id in lang_adventure_ids if _id in level_adventure_ids]
-        tag_adventure_ids = [_id for _id in tag_adventure_ids if _id in level_adventure_ids]
-
-        adventure_ids = level_adventure_ids + lang_adventure_ids + tag_adventure_ids
-
-        print("ids all", adventure_ids)
         adventures = self.db.batch_get_adventures(adventure_ids)
 
         initial_tab = None
@@ -104,17 +89,14 @@ class PublicAdventuresModule(WebsiteModule):
 
             # Add the commands to enable the language switcher dropdown
             commands = hedy.commands_per_level.get(level)
-            print("\n\ncustomiz", customizations)
             if customizations["available_levels"]:
                 prev_level, next_level = utils.find_prev_next_levels(list(customizations["available_levels"]), level)
 
             customized_adventures = []
             for adventure in adventures:
                 if language and adventure.get("language", g.lang) != language:
-                    print("\n\n\nherererere", language, adventure.get("language"))
                     continue
                 if tags and not any(_t in adventure.get("tags", []) for _t in tags):
-                    print("\n\n\nherererere tags", tag, tags, adventure.get("tags"))
                     continue
 
                 content = safe_format(adventure.get('formatted_content', adventure['content']),
@@ -137,7 +119,6 @@ class PublicAdventuresModule(WebsiteModule):
                 customized_adventures.append(current_adventure)
             adventures = customized_adventures
 
-        print("\n\n\nADVENTURES", adventures)
         js = dict(
             page='code',
             lang=g.lang,
@@ -329,6 +310,7 @@ class PublicAdventuresModule(WebsiteModule):
         }
 
         self.db.update_adventure(adventure_id, {"cloned_times": current_adventure.get("cloned_times", 0) + 1})
+        self.db.update_public_adventure_filters_indexes(adventure)
         self.db.store_adventure(adventure)
 
         # update cloned adv. that's saved in this class
