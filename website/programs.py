@@ -152,7 +152,6 @@ class ProgramsModule(WebsiteModule):
 
         achievement = self.achievements.add_single_achievement(user["username"], "do_you_have_copy")
 
-
         resp = {"message": gettext("delete_success"), "count": 2, "levels": []}
         if achievement:
             resp["achievement"] = achievement
