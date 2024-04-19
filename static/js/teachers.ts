@@ -203,7 +203,7 @@ function update_db_adventure(adventure_id: string) {
   document.querySelectorAll('#levels_dropdown > .option.selected').forEach((el) => {
     levels.push(el.getAttribute("data-value") as string)
   })
-  console.log(levels)
+
   const content = DOMPurify.sanitize(window.ckEditor.getData());
   
   const parser = new DOMParser();

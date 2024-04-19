@@ -17,7 +17,11 @@ document.addEventListener("DOMContentLoaded", prepareDropdowns);
 
 function prepareDropdowns() {
     const options = document.querySelectorAll('.option');
-
+    const dropdowns = document.querySelectorAll("[data-dropdown-initialize]");
+    dropdowns.forEach((dropdown) => {
+        updateLabelText(dropdown)
+    })
+    console.log(dropdowns)
     options.forEach(function (option) {
         option.addEventListener('click', function () {
             const dropdown = option.closest(".dropdown") as Element;
@@ -69,7 +73,15 @@ function updateLabelText(dropdown: Element) {
     const relativeOptions = dropdown.querySelectorAll(".option") as NodeListOf<Element>;
     const label = toggleButton.querySelector(".label") as Element;
     const selectedOptions = getSelectedOptions(relativeOptions);
-    label.textContent = selectedOptions.length === 0 ? label.getAttribute("data-value") : selectedOptions.join(', ');
+    let text: string;
+    if (selectedOptions.length === 0) {
+        text = label.getAttribute("data-value")!
+    } else if (selectedOptions.length < 6) {
+        text = selectedOptions.join(', ')
+    } else {
+        text = `${selectedOptions.length} selected`
+    }
+    label.textContent = text;
 }
 
 
