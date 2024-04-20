@@ -303,6 +303,8 @@ class LocatedYamlValue:
         return LocatedYamlValue(ret, self.yaml_path + [key])
 
     def get(self, key, default=None):
+        if self.inner is None:
+            return None
         """Retrieve a single item from the inner value."""
         ret = self.inner.get(key, default)
         if ret is None:
