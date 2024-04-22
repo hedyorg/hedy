@@ -186,6 +186,11 @@ def is_second_teacher(user, class_id=None):
     return is_teacher(user) and class_id in user.get("second_teacher_in", [])
 
 
+def is_super_teacher(user):
+    # the `is_super_teacher` field is either `0`, `1` or not present.
+    return bool(user.get("is_super_teacher", False))
+
+
 def has_public_profile(user):
     if 'username' not in user or user.get('username') == '':
         return False

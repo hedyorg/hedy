@@ -145,6 +145,7 @@
           <td id="experience_header" class="hidden">Experience</td>
           <td id="tags_header" class="text-center">Tags</td>
           <td id="teacher_header" class="text-center">Teacher</td>
+          <td id="teacher_header" class="text-center">Super Teacher</td>
           <td id="verified_header" class="hidden">Verified</td>
       </tr>
     </thead>
@@ -167,7 +168,9 @@
                 <td class="teacher_cell text-center"><span class="fa-solid fa-circle-question cursor-pointer" onclick="hedyApp.markAsTeacher (this, '{{user.username}}', true, true)"></span></td>
             {% else %}
                 <td class="teacher_cell text-center"><input type="checkbox" {% if user.is_teacher %}checked="checked"{% endif %} onclick="hedyApp.markAsTeacher (this, '{{user.username}}', {% if user.is_teacher %}false{% else %}true{% endif %}, false)"></td>
-            {% endif %}<td class="verified_cell hidden">{{user.email_verified}}</td>
+            {% endif %}
+            <td class="teacher_cell text-center"><input type="checkbox" {% if user.is_super_teacher %}checked="checked"{% endif %} onclick="hedyApp.markSuperTeacher (this, '{{user.username}}', {% if user.is_super_teacher %}true{% else %}false{% endif %})"></td>
+            <td class="verified_cell hidden">{{user.email_verified}}</td>
             <td class="third_party_cell hidden text-center"><input type="checkbox" {% if user.third_party %}checked="checked"{% endif %} ></td>
           </tr>
       {% endfor %}

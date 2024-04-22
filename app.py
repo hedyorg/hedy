@@ -47,7 +47,7 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
                      translating, tags, surveys, public_adventures, user_activity, feedback)
-from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, has_public_profile,
+from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, is_super_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
                           forget_current_user)
 from website.log_fetcher import log_fetcher
@@ -435,7 +435,8 @@ def enrich_context_with_user_info():
     user = current_user()
     data = {'username': user.get('username', ''),
             'is_teacher': is_teacher(user), 'is_second_teacher': is_second_teacher(user),
-            'is_admin': is_admin(user), 'has_public_profile': has_public_profile(user)}
+            'is_admin': is_admin(user), 'has_public_profile': has_public_profile(user),
+            'is_super_teacher': is_super_teacher(user), }
     return data
 
 
