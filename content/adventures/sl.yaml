@@ -1417,14 +1417,74 @@ adventures:
                 story_text_2: "Christmas lights <img src=\"https://github.com/hedyorg/hedy/assets/80678586/9637ea6d-6edc-4d88-a6f7-10271bfc5371\" width=\"500\">\n"
                 example_code_2: "Hint Christmas Lights:\n\nStart by moving to the left side of the screen with an invisible white line. Then hang up the Christmas lights!\n```\n{color} white\n{turn} -90\n{forward} 300\n{turn} 90\n\ncolors = red, blue, yellow, purple, green, orange, pink\n{for} chosen_color {in} colors\n_\n```\n"
             11:
-                story_text: "### Exercise\nRecreate the drawings with the turtle!\n\n<div class=\"w-full flex flex-row gap-2\">\nBeehive (6) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec\" width=\"200\">\nFan (5)  <img src=\"https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87\" width=\"200\">\n</div>\n"
-                example_code: "Hint Beehive:\n```\n{for} amount_of_combs {in} {range} 1 {to} _\n    {for} walls_of_one_comb {in} {range} 1 {to} _\n        {forward} _\n        {turn} _\n    {forward} _\n    {turn} _\n```\n\nHint Fan:\nStart out like the fan you made in level 7. Or take a peak at the hint for the beehive, because the codes are very similar.\n"
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    <div class="w-full flex flex-row gap-2">
+                    Beehive (6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="150">
+                    Fan (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="150">
+                    Snowflake (13) <img src="https://github.com/hedyorg/hedy/assets/80678586/90f56bbb-86e5-448d-8aec-16f8c2c05cf2" width="150">
+                    </div>
+                example_code: |
+                    Hint Beehive:
+                    ```
+                    {for} amount_of_combs {in} {range} 1 {to} _
+                        {for} walls_of_one_comb {in} {range} 1 {to} _
+                            {forward} _
+                            {turn} _
+                        {forward} _
+                        {turn} _
+                    ```
+
+                    Hint Fan:
+                    Start out like the fan you made in level 7. Or take a peak at the hint for the beehive, because the codes are very similar.
+
+                    Hint Snowflake: Start by making one 'leg' and repeat it 6 times.
             12:
                 story_text: "### Exercise\nRecreate the drawings with the turtle!\nHint: Bracelet designing program. Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:\n</div>\nBracelet Designing program <img src=\"https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951\" width=\"500\">\n"
                 example_code: "```\n{define} draw_a_square\n_\n\n{color} white\n{turn} -90\n{forward} 300\n{turn} 180\n\n{for} i {in} {range} 1 {to} 5\n    {color} gray\n    {forward} 100\n    shape = {ask} 'What kind of shape would you like next on the bracelet?'\n    chosen_color = {ask} 'In which color?'\n    {color} chosen_color\n    {if} shape = 'square'\n        {call} draw_a_square\n```\n"
             13:
-                story_text: "### Exercise\nRecreate the drawings with the turtle!\n\nStreet in different sizes <img src=\"https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec\" width=\"300\">\nColored street  <img src=\"https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724\" width=\"300\">\n"
-                example_code: "Hint Street in different sizes\n```\n{define} draw_a_house {with} size\n_\n\n{call} draw_a_house {with} 90\n{call} draw_a_house {with} 60\n{call} draw_a_house {with} 30\n```\n\nHint Colored street\n```\n{define} draw_a_house {with} chosen_color\n_\n```\n"
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    Street in different sizes <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
+                    Colored street  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
+                    Snow Storm <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
+                example_code: |
+                    Hint Street in different sizes
+                    ```
+                    {define} draw_a_house {with} size
+                    _
+
+                    {call} draw_a_house {with} 90
+                    {call} draw_a_house {with} 60
+                    {call} draw_a_house {with} 30
+                    ```
+
+                    Hint Colored street
+                    ```
+                    {define} draw_a_house {with} chosen_color
+                    _
+                    ```
+
+                    Hint Snow Storm
+                    ```
+                    {define} draw_snowflake {with} length, color
+                        _
+
+                    numbers = 10, 20, 30
+                    colors = _
+
+                    {for} i {in} {range} 1 {to} 5
+                        random_number = _
+                        random_color = _
+                        {call} draw_snowflake {with} random_number, random_color
+                        {color} white
+                        {turn} random_number * 5
+                        {forward} 80
+                    ```
             14:
                 story_text: "### Exercise\nCreate a program that asks the player how many corners their figure should have and then creates that figure.\nThe figure in the image is the output when the player fills in 10.\n\n<div class=\"w-full flex flex-row gap-2\">\n <img src=\"https://github.com/hedyorg/hedy/assets/80678586/ee32f40e-dea1-4e7c-a813-3ef63671254b\" width=\"300\">\n <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3621bf77-527d-41e8-a44f-c5a21bb4ffd2\" width=\"200\">\n</div>\n"
                 example_code: "```\n{define} calculate_degrees {with} amount_of_corners\n    _ 360 / amount_of_corners\n\n\n{define} draw_figure {with} degrees\n    _\n        {forward} 400/amount_of_corners\n        {turn} _\n\namount_of_corners = {ask} _\ndegrees = {call} _ {with} _\n\n{call} _ {with}\n{call} _ {with}\n```\n"
