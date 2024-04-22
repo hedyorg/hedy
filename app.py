@@ -323,7 +323,7 @@ def initialize_session():
 
     g.user = current_user()
     querylog.log_value(session_id=utils.session_id(), username=g.user['username'],
-                       is_teacher=is_teacher(g.user), is_admin=is_admin(g.user))
+                       is_teacher=is_teacher(g.user), is_admin=is_admin(g.user), is_super_teacher=is_admin(g.user))
 
 
 if os.getenv('IS_PRODUCTION'):

@@ -1,33 +1,60 @@
 {% extends "auth.html" %}
 
 {% block regular_content %}
-    <h1>Feedback Reports (Grouped by Category)</h1>
+    <h1>Feedback Reports</h1>
 
-    {% for category, feedback_list in feedback_by_category.items() %}
-        <h2>{{ category }}</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Message</th>
-                    <th>Page</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for feedback in feedback_list %}
-                <tr>
-                    <td>{{ feedback.username }}</td>
-                    <td>{{ feedback.email }}</td>
-                    <td>{{ feedback.message }}</td>
-                    <td>{{ feedback.page }}</td>
-                    <td>{{ feedback.date|format_date}}</td>
-                </tr>
+    <form>
+        <input type="hidden" name="page" value=""> <!-- Submitting the form resets the page -->
+        <input type="hidden" name="user" value="{{ from_user }}">
+        <div class="flex flex-row px-4 w-full py-2 rounded-lg gap-4">
+            <select id="category-dropdown" name="category" class="block appearance-none w-1/8 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
+                <option selected value="">&mdash; Category &mdash;</option>
+                {% for category, feedback_list in feedback_by_category.items() %}
+                    <option value="{{ category }}" {% if request.args.get('category') == category %}selected{% endif %}>{{ category }}</option>
                 {% endfor %}
-            </tbody>
-        </table>
-        <br>
-    {% endfor %}
+            </select>
+            <select id="page-dropdown" name="page" class="block appearance-none w-1/8 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
+                <option selected value="">&mdash; Page &mdash;</option>
+                {% for page in pages %}
+                    <option value="{{ page }}" {% if request.args.get('page') == page %}selected{% endif %}>{{ name }}</option>
+                {% endfor %}
+            </select>
+            <select id="user-dropdown" name="user" class="block appearance-none w-1/8 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
+                <option selected value="">&mdash; User &mdash;</option>
+                {% for user in users %}
+                    <option value="{{ page }}" {% if request.args.get('page') == page %}selected{% endif %}>{{ name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </form>
+  </div>
 
+{% for category, feedback_list in feedback_by_category.items() %}
+<div class="flex flex-col gap-4 mb-8 md:px-16 " id="classes_table">
+<div class="overflow-x-auto rounded-lg shadow-lg">
+  <table class="w-full border border-gray-400">
+  <thead>
+    <tr class="bg-blue-300 text-blue-900">
+      <th class="px-2 py-2 text-center">Username</th>
+      <th class="px-2 py-2 text-center">Email</th>
+      <th class="px-10 bg-blue-900 text-white">Message</th>
+      <th class="px-10 bg-blue-900 text-white">Page</th>
+      <th class="px-10 bg-blue-900 text-white">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for feedback in feedback_list %}
+      <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
+        <td class="text-center px-4 py-2">{{ feedback.username }}</td>
+        <td id="teacher_cell" class="text-center p-2">{{ feedback.email }}</td>
+        <td class="text-center p-2">{{ feedback.message }}</td>
+        <td class="text-center p-2">{{ feedback.page }}</td>
+        <td class="text-center p-2">{{ feedback.date|format_date }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+</div>
+{% endfor %}
 {% endblock %}

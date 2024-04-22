@@ -52,6 +52,9 @@ class FeedbackModule(WebsiteModule):
     @requires_super_teacher
     def get_feedback(self, user):
         all_feedback = self.db.get_feedback()
+        category = request.args.get('category', default=None, type=str) or None
+        page = request.args.get('page', default=None, type=str) or None
+        user = request.args.get('user', default=None, type=str) or None
         print('\n\n\n')
         print(all_feedback)
         if not all_feedback:
@@ -60,6 +63,6 @@ class FeedbackModule(WebsiteModule):
         feedback_by_category = defaultdict(list)
         for feedback in all_feedback:
             print(feedback)
-            feedback_by_category[feedback.get("category")].append(feedback)
+            feedback_by_category[category].append(feedback)
 
         return render_template('feedback.html', feedback_by_category=feedback_by_category)
