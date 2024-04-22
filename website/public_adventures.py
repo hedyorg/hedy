@@ -55,7 +55,7 @@ class PublicAdventuresModule(WebsiteModule):
         available_languages.update(field_filters.get("lang", []))
         available_tags.update(field_filters.get("tag", []))
 
-        customizations = {"available_levels": sorted(available_levels)}
+        customizations = {"available_levels": sorted(available_levels, key=lambda x: int(x))}
 
         tags = []
         if tag:
@@ -68,11 +68,11 @@ class PublicAdventuresModule(WebsiteModule):
             tags = [t for t in tags if t]
 
         # Get indexes
-        level_adventure_ids = self.db.get_public_adventures_indexes({"field#value": f"level#{level}"})
-        lang_adventure_ids = self.db.get_public_adventures_indexes({"field#value": f"lang#{language}"})
+        level_adventure_ids = self.db.get_public_adventures_indexes({"field_value": f"level_{level}"})
+        lang_adventure_ids = self.db.get_public_adventures_indexes({"field_value": f"lang_{language}"})
         tag_adventure_ids = set()
         for _t in tags:
-            tag_adventure_ids.update(self.db.get_public_adventures_indexes({"field#value": f"tag#{_t}"}))
+            tag_adventure_ids.update(self.db.get_public_adventures_indexes({"field_value": f"tag_{_t}"}))
 
         lang_adventure_ids.intersection_update(level_adventure_ids)
         tag_adventure_ids.intersection_update(level_adventure_ids)
