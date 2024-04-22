@@ -41,28 +41,23 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
     })
     // Autosave customize adventure page
     autoSave("customize_adventure")
-
-    // We wait until Tailwind generates the select
-    const tailwindSelects = await waitForElm('[data-te-select-option-ref]')
-    tailwindSelects.forEach((el) => {
+    
+    showWarningIfMultipleLevels()    
+    document.querySelectorAll('#levels_dropdown > .option').forEach((el) => {
         el.addEventListener('click', () => {
-            // After clicking, it takes some time for the checkbox to change state, so if we want to target the checkboxess 
-            // that are checked after clicking we can't do that inmediately after the click
-            // therofore we wait for 100ms
-            setTimeout(function(){
-                const numberOfLevels = document.querySelectorAll('[aria-selected="true"]').length;
-                const numberOfSnippets = document.querySelectorAll('pre[data-language="Hedy"]').length
-                if(numberOfLevels > 1 && numberOfSnippets > 0) {
-                    $('#warningbox').show()
-                } else if(numberOfLevels <= 1 || numberOfSnippets === 0) {
-                    $('#warningbox').hide()
-                }
-            }, 100);
+            setTimeout(showWarningIfMultipleLevels, 100)            
         })
     })
-
 }
-
+function showWarningIfMultipleLevels() {
+    const numberOfLevels = document.querySelectorAll('#levels_dropdown > .option.selected').length;
+    const numberOfSnippets = document.querySelectorAll('pre[data-language="Hedy"]').length
+    if(numberOfLevels > 1 && numberOfSnippets > 0) {
+        $('#warningbox').show()
+    } else if(numberOfLevels <= 1 || numberOfSnippets === 0) {
+        $('#warningbox').hide()
+    }
+}
 function showWarningIfMultipleKeywords(TRADUCTION: Map<string, string>) {
     const content = DOMPurify.sanitize($editor.getData())
     const parser = new DOMParser();
@@ -222,25 +217,4 @@ export function addCurlyBracesToKeyword(name: string) {
     }
 
     return name;
-}
-
-function waitForElm(selector: string): Promise<NodeListOf<Element>>  {
-    return new Promise(resolve => {
-        if (document.querySelector(selector)) {
-            return resolve(document.querySelectorAll(selector));
-        }
-
-        const observer = new MutationObserver(_mutations => {
-            if (document.querySelector(selector)) {
-                observer.disconnect();
-                resolve(document.querySelectorAll(selector));
-            }
-        });
-
-        // If you get "parameter 1 is not of type 'Node'" error, see https://stackoverflow.com/a/77855838/492336
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
-    });
 }

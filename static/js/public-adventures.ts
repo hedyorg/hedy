@@ -1,3 +1,4 @@
+import { ClientMessages } from "./client-messages";
 import { initialize } from "./initialize";
 
 let levelSelect: HTMLElement;
@@ -34,6 +35,17 @@ function prepareDropdowns() {
                 // Deselect other options within the same dropdown
                 const otherOptions = dropdown.querySelectorAll('.option.selected');
                 otherOptions.forEach(otherOption => otherOption.classList.remove('selected'));
+            }
+
+            if (!isSingleSelect && option.getAttribute("data-value") === "select_all") {
+                const selected = !option.classList.contains("selected")
+                const otherOptions = dropdown.querySelectorAll('.option');
+                otherOptions.forEach(otherOption => {
+                    if (otherOption.getAttribute('data-value') === 'select_all') return
+                    otherOption.classList.toggle('selected', selected)
+                });
+            } else {
+                dropdown.querySelector('.option[data-value="select_all"]')?.classList.remove('selected')
             }
 
             // Update value of the relative select dropdown.
@@ -79,7 +91,7 @@ function updateLabelText(dropdown: Element) {
     } else if (selectedOptions.length < 6) {
         text = selectedOptions.join(', ')
     } else {
-        text = `${selectedOptions.length} selected`
+        text = `${selectedOptions.length} ${ClientMessages['selected']}`
     }
     label.textContent = text;
 }
