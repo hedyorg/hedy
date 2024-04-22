@@ -30,7 +30,7 @@ class AdminModule(WebsiteModule):
     def get_admin_page(self):
         # Todo TB: Why do we check for the testing_request here? (09-22)
         if not utils.is_testing_request(request) and not is_admin(current_user()):
-            return utils.error_page(error=403, ui_message=gettext("unauthorized"))
+            return utils.error_page(error=401, ui_message=gettext("unauthorized"))
         return render_template("admin/admin.html", page_title=gettext("title_admin"), current_page="admin")
 
     @route("/users", methods=["GET"])
@@ -174,7 +174,7 @@ class AdminModule(WebsiteModule):
     def mark_as_teacher(self):
         user = current_user()
         if not is_admin(user) and not utils.is_testing_request(request):
-            return utils.error_page(error=403, ui_message=gettext("unauthorized"))
+            return utils.error_page(error=401, ui_message=gettext("unauthorized"))
 
         body = request.json
 

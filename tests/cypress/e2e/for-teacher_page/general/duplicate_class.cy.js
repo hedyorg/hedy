@@ -53,7 +53,7 @@ describe('Duplicate class tests', () => {
     cy.get("tr") // This class has second teachers.
     cy.get("[data-cy='duplicate_CLASS1']").click();
 
-    cy.get('#modal-yes-button').should('be.enabled').click();
+    cy.get('[data-cy="modal_yes_button"]').should('be.enabled').click();
 
     const duplicate_class = `test class ${Math.random()}`;
     cy.get('#modal-prompt-input').type(duplicate_class);

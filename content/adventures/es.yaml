@@ -1960,9 +1960,9 @@ adventures:
                     colores = 'rojo', 'azul', 'verde', 'amarillo'
 
                     {define} turno
-                        lado_escogido = sides {at} {random}
-                        miembro_escogido = limbs _
-                        color_escogido = colors _
+                        lado_escogido = lados {at} {random}
+                        miembro_escogido = mimebros _
+                        color_escogido = colores _
                         {print} lado_escogido' ' miembro_escogido' en ' color_escogido
 
                     {print} 'Vamos a jugar al Twister!'
@@ -1972,31 +1972,33 @@ adventures:
                     ```
             13:
                 story_text: |
-                    Now that you've learned how to use functions, you'll learn how to use a function with an argument.
-                    An **argument** is a variable that is used within a function. It is not used outside the function.
+                    Ahora que has aprendido a usar funciones, aprenderás a usar una función con argumento.
+                    Un **argumento** es una variable que se utiliza dentro de una función. Y no se utiliza fuera de la función.
 
-                    For example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.
-                    In this example code the argument `place` is used. Place is a variable that is only used in the function, so an argument.
-                    To use `place` we have programmed the line `define song with place`.
-                    When the function is called, computer will replace the argument `place`, with the piece of text after `call song with`.
+                    Por ejemplo, en este código hemos programado el primer verso de la canción 'Mi Bonnie está sobre el océano'.
+                    En este código de ejemplo se utiliza el argumento `lugar`. El lugar es una variable que solamente se utiliza en la función, es un argumento.
+                    Para utilizar `lugar` hemos programado la línea `{define} canción {with} lugar`.
+                    Cuando se llama la función, la computadora reemplazará el argumento `lugar`, con la pieza de texto después `{call} canción {with}`.
 
-                    ### Exercise
-                    The next verse of this song goes:
+                    ### Ejercicio
+                    El siguiente verso de la canción dice:
 
-                    Last night as I lay on my pillow
-                    Last night as I lay on my bed
-                    Last night as I lay on my pillow
-                    I dreamed that my Bonnie is dead
+                    ```not_hedy_code
+                    Anoche mientras me acostaba en mi almohada
+                    Anoche mientras me acostaba en mi cama
+                    Anoche mientras me acostaba en mi almohada
+                    Soñé que mi Bonnie estaba muerta.
+                    ```
 
-                    Can you program this verse in the same way as the example?
+                    ¿Puedes programar este verso de la misma manera que el ejemplo?
                 example_code: |
                     ```
-                    {define} song {with} place
-                        {print} 'My Bonnie is over the ' place
+                    {define} canción {with} lugar
+                        {print} 'Mi Bonnie está sobre el ' lugar
 
-                    {call} song {with} 'ocean'
-                    {call} song {with} 'sea'
-                    {call} song {with} 'ocean'
+                    {call} canción {with} 'oceano'
+                    {call} canción {with} 'mar'
+                    {call} canción {with} 'oceano'
                     ```
             14:
                 story_text: |
@@ -2729,14 +2731,14 @@ adventures:
                     In the next level you'll learn how to play some existing songs.
                 example_code: |-
                     ```
-                    play C4
-                    play D4
-                    play E4
-                    play F4
-                    play G4
-                    play A4
-                    play B4
-                    play C5
+                    {play} C4
+                    {play} D4
+                    {play} E4
+                    {play} F4
+                    {play} G4
+                    {play} A4
+                    {play} B4
+                    {play} C5
                     ```
             2:
                 story_text: |
@@ -5118,8 +5120,9 @@ adventures:
                     ¡Vuelve a crear los dibujos con la tortuga!
 
                     <div class="w-full flex flex-row gap-2">
-                    Colmena (6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="200">
-                    Abanico (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="200">
+                    Colmena (6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="150">
+                    Abanico (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="150">
+                    Copo de nieve (13) <img src="https://github.com/hedyorg/hedy/assets/80678586/90f56bbb-86e5-448d-8aec-16f8c2c05cf2" width="150">
                     </div>
                 example_code: |
                     Sugerencia Colmena:
@@ -5134,6 +5137,8 @@ adventures:
 
                     Sugerencia Ventilador:
                     Empieza como el ventilador que hiciste en el nivel 7. O toma una parte de la sugerencia para la colmena, porque los códigos son muy parecidos.
+
+                    Hint Snowflake: Start by making one 'leg' and repeat it 6 times.
             12:
                 story_text: |
                     ### Ejercicio
@@ -5172,6 +5177,7 @@ adventures:
 
                     Calle en diferentes tamaños <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
                     Calle coloreada  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
+                    Snow Storm <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
                 example_code: |
                     La Calle de la Pista en diferentes tamaños
                     ```
@@ -5188,6 +5194,23 @@ adventures:
                     {define} dibuja_una_casa {with} color_elegido
                     _
                     ```
+                    Hint Snow Storm
+                    ```
+                    {define} draw_snowflake {with} length, color
+                        _
+
+                    numbers = 10, 20, 30
+                    colors = _
+
+                    {for} i {in} {range} 1 {to} 5
+                        random_number = _
+                        random_color = _
+                        {call} draw_snowflake {with} random_number, random_color
+                        {color} white
+                        {turn} random_number * 5
+                        {forward} 80
+                    ```
+
             14:
                 story_text: |
                     ### Ejercicio
