@@ -14,6 +14,7 @@ from website.auth import (
     pick,
     requires_admin,
     send_localized_email_template,
+    refresh_current_user_from_db,
 )
 
 from .database import Database
@@ -220,6 +221,7 @@ class AdminModule(WebsiteModule):
             return "user must be a teacher.", 400
 
         self.db.update_user(user["username"], {"is_super_teacher": 0 if user.get("is_super_teacher") else 1, })
+        refresh_current_user_from_db()
 
         return f"{user['username']} is now a super-teacher.", 200
 
