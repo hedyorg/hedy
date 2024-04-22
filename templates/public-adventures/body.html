@@ -68,7 +68,7 @@
                             add .rotate-180 to arrow
                         end">
                     <div class="option default"
-                        hx-post="/public-adventures/filter?lang=&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}"
+                        hx-post="/public-adventures/filter?lang=reset&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}"
                         hx-target="#public-adventures"
                         value="">{{_('select_lang')}}</div>
                     {% for lang in available_languages %}

@@ -36,7 +36,9 @@ class PublicAdventuresModule(WebsiteModule):
     @requires_teacher
     def filtering(self, user):
         level = request.args["level"] if request.args.get("level") else "1"
-        language = request.args.get("lang")  # or g.lang
+        language = request.args.get("lang") or g.lang
+        if language == "reset":
+            language = ""
         tag = request.args.get("tag", "")
         search = request.form.get("search", request.args.get("search", ""))
 
