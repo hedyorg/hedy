@@ -1,9 +1,8 @@
 import copy
 import uuid
 from typing import Optional
-import json
 
-from flask import g, request, jsonify, make_response
+from flask import g, request, jsonify
 from flask_babel import gettext
 import jinja_partials
 import hedy_content
