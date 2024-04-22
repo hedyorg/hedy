@@ -97,6 +97,7 @@ class PublicAdventuresModule(WebsiteModule):
                 prev_level, next_level = utils.find_prev_next_levels(list(customizations["available_levels"]), level)
 
             customized_adventures = []
+            included = {}
             for adventure in adventures:
                 if language and adventure.get("language", g.lang) != language:
                     continue
@@ -122,7 +123,17 @@ class PublicAdventuresModule(WebsiteModule):
                     "text": content,
                     "is_teacher_adventure": True,
                 }
+                # this happens if teacher1 clones an adventure from teacher2, same name different creator.
+                # show only the cloned ones.
+                adv_name = current_adventure["name"]
+                if included.get(adv_name):
+                    if included[adv_name]["creator"] != user["username"]:
+                        customized_adventures.remove(included[adv_name])
+                    else:
+                        continue
+
                 customized_adventures.append(current_adventure)
+                included[current_adventure["name"]] = current_adventure
             adventures = customized_adventures
 
         js = dict(
