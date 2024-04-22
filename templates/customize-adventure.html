@@ -54,7 +54,7 @@ onclick="window.open('/for-teachers', '_self');">
                     <div class="flex flex-row items-center mb-4">
                         <label for="custom_adventure_levels" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('available_in')}}</label>                        
                         <div id="levels" class="flex-1">
-                            <div class="dropdown dropdown-green rounded relative" id="tag-select" data-value="" data-dropdown-initialize>
+                            <div class="dropdown dropdown-green rounded relative" id="level_select" data-value="" data-dropdown-initialize>
                                 <button class="toggle-button font-semibold rounded inline-flex justify-between 
                                                      appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
                                     onclick="$('#levels_dropdown').slideToggle('medium');">
@@ -72,6 +72,7 @@ onclick="window.open('/for-teachers', '_self');">
                                                         else if not arrow.classList.contains('rotate-180')
                                                             add .rotate-180 to arrow
                                                         end">
+                                    <div class="option" data-value="select_all">{{_('select_all')}}</div>                                    
                                     {% for i in range(1, (max_level + 1)) %}
                                         {% set adv_levels = adventure.levels if adventure.get("levels") else [adventure.level|string] %}
                                         <div class="option {% if i|string in adv_levels %}selected{% endif %}" data-value="{{i}}">{{ i }}</div>
