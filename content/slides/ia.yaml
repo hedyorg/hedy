@@ -1050,6 +1050,32 @@ levels:
                     answer = {ask} 'What is 5 times 5?'
                 {print} 'A correct answer has been given'
         3:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                numbers = 1, 2
+
+                {for} i {in} {range} 3 {to} 50
+                    {add} x {to} numbers
+                    i = + 1
+
+                random_number = numbers {random}
+                guesses = 10
+
+                {while} guess = 0
+                    answer = 'Guess my number:'
+                    {if} answer >= random_number
+                        {print} 'lower'
+                        guesses = guesses -1
+                    {if} answer > random_number
+                        {print} 'higher!'
+                        guesses = guesses
+                    {else} answer = random_number
+                        {print} 'correct'
+                        guesses = 10
+
+            debug: 'True'
+        4:
             header: Let's try it out!
             text: Enjoy the adventures in level 15!
     16:
@@ -1069,8 +1095,41 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                     {print} friends[i] 's lucky number is ' lucky_numbers[i]
         3:
-            header: Let's try it out!
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'Friendship test'
+                {subjects} = ['song', 'movie', 'food', 'drink']
+                answers_player_1 = []
+                answers_player_2 = []
+                score = 100
+
+                {for} i {in} {range} 1 {to} 4
+                    answer = {ask} 'what is your favorite ' subjects[i]
+                {add} answer {to} answers_player_1
+
+                {print} 'Player 2, your turn!'
+                {for} i {in} {range} 0 {to} 4
+                    answer_player_2 = {ask} 'what is player 1s favorite ' subjects
+                    {add} answer_player_2 {in} answers_player_2
+                    {if} answers_player_2[2] == answers_player_1[1]
+                        {print} 'Correct!'
+                    {else}
+                        {print} 'Wrong!'
+                    score = score - 25
+
+                {print} 'Player 2, you've scored ' score '%'
+
+                {if} score = 100
+                    {print} 'You are an amazing friend'
+                {if} score < 100 {or} score >= 50
+                    {print} 'You could do better'
+                {else} score < 50
+                    {print} 'Do you even know this person?!'
+            debug: 'True'
+        4:
             text: Enjoy the adventures in level 16!
+            header: Let's try it out!
     17:
         1:
             header: Welcome to level 17
@@ -1100,6 +1159,28 @@ levels:
                 {else}:
                     {print} 'Better luck next time..'
         4:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {define} ask_direction
+                    direction = {ask} 'Where do you want to go?'
+                    {if} direction = 'backwards'
+                        {turn} 180
+                    {else} direction == 'right'
+                        {turn} 90
+                    {else} direction == 'left'
+                        {turn} 270
+                        {forward} 100
+
+                continue = 'yes'
+
+                {while} continue == 'yes'
+                    {print} ask_direction
+                    {sleep}
+                    continue = 'do you want to draw some more?'
+                    {sleep}
+            debug: 'True'
+        5:
             header: Let's try it out!
             text: Enjoy the adventures in level 17!
     18:

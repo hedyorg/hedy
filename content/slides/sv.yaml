@@ -127,7 +127,7 @@ levels:
                 {print} What song would you like to hear?
                 {ask} I like that song too!
                 {print} Next up... {echo}
-            debug: true
+            debug: 'True'
         13:
             header: Let the programming fun begin!
             text: Enjoy the adventures in level 1!
@@ -196,7 +196,7 @@ levels:
                 {print} I'll go get your donut. {sleep}
                 {print} Here you go! A filling donut with toping!
                 {ask} Have a nice day!
-            debug: true
+            debug: 'True'
         8:
             header: Låt den roliga programmeringen börja!
             text: Ha det kul med äventyren på nivå 2!
@@ -261,7 +261,7 @@ levels:
                 {print} or do you prefer... second_choice {at} {random}
                 {remove} second_choice {to} music_genres
                 {print} I like music_genre {random} best!
-            debug: true
+            debug: 'True'
         8:
             header: Nu sätter vi igång!
             text: Ha det kul med äventyren på nivå 3!
@@ -276,7 +276,7 @@ levels:
             code: |-
                 name {is} Sophie
                 {print} My name is name
-            debug: true
+            debug: 'True'
         3:
             header: Fixa det med citattecken
             text: |-
@@ -314,7 +314,7 @@ levels:
 
                 Försök att skriva ut en sammandragning som engelska "you're" eller "I'm" på skärmen nedan och se vad som händer …
             code: '{print} ''This won''t work!'''
-            debug: true
+            debug: 'True'
         9:
             header: Rensa
             text: |-
@@ -343,7 +343,7 @@ levels:
                 colors {is} 'orange, silver, white, brown'
                 {print} 'I love the colors {at} {random} one!'
                 choice {is} {ask} Which one do you like?
-            debug: true
+            debug: 'True'
         11:
             header: Klara, färdiga, gå!
             text: Ha det kul med äventyren på nivå 4!
@@ -364,7 +364,7 @@ levels:
             header: Glöm inte att skriva ut
             text: Glöm inte att använda kommandot `{print}` när du använder kommandot `{if}`.
             code: '{if} name {is} Hedy ''nice'''
-            debug: true
+            debug: 'True'
         4:
             header: annars
             text: |-
@@ -410,7 +410,7 @@ levels:
                 item_to_declare {is} {ask} 'What would you like to declare'
                 {else} Alright
                 {print} Thank you. Please head to gate A22.'
-            debug: true
+            debug: 'True'
         8:
             header: Nu kör vi!
             text: Ha det kul med äventyren på nivå 5!
@@ -475,7 +475,7 @@ levels:
                 {if} day {is} monday
                 total_price = total_price * 0.25
                 {print} 'That will be total_price please'
-            debug: true
+            debug: 'True'
         10:
             header: Nu sätter vi igång!
             text: Ha det kul med äventyren på nivå 6!
@@ -498,7 +498,7 @@ levels:
             header: Glöm inte kommandot skriv
             text: Glöm inte kommandot `{print}` när du använder kommandot upprepa.
             code: '{repeat} 5 {times} ''Help!'''
-            debug: true
+            debug: 'True'
         4:
             header: Upprepa ett fråga-kommando
             text: Du kan också upprepa ett `{ask}`-, `{if}`- eller `{else}`-kommando flera gånger.
@@ -520,7 +520,7 @@ levels:
                 {if} yes
                 {print} 'Hurray!
                 {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
-            debug: true
+            debug: 'True'
         6:
             header: Klara, färdiga, gå!
             text: Ha det kul med äventyren på nivå 7!
@@ -535,7 +535,7 @@ levels:
 
                 Du kunde bara upprepa en kodrad.
             code: '{repeat} 5 {times} {print} ''Help!'''
-            debug: true
+            debug: 'True'
         3:
             header: '{repeat}-kommandon nu'
             text: |-
@@ -564,7 +564,7 @@ levels:
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
-            debug: true
+            debug: 'True'
         6:
             header: om och annars nu
             text: |-
@@ -607,7 +607,7 @@ levels:
                         {print} You chose a round trip ticket'
                 price * 2
                 {print} 'That will be ' price ' euros please'
-            debug: true
+            debug: 'True'
         10:
             header: Vi kollar in äventyren!
             text: Ha det kul med äventyren på nivå 8!
@@ -699,7 +699,7 @@ levels:
                 {else}
                 {print} 'Fun!'
                 {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
-            debug: true
+            debug: 'True'
         9:
             header: Nu kör vi!
             text: Ha det kul med äventyren på nivå 9!
@@ -736,7 +736,7 @@ levels:
                 {add} chosen_person {from} people
                 {print} 'Come and watch our show tonight!'
                 {print} 'Tickets are only available at the counter
-            debug: true
+            debug: 'True'
         5:
             header: Dags att programmera!
             text: Ha det kul med äventyren på nivå 10!
@@ -773,7 +773,7 @@ levels:
                 {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
                     {print} This is the table of multiplications for factor
                     {print} number ' x ' factor ' = ' i * factor
-            debug: true
+            debug: 'True'
         5:
             header: Låt oss börja programmera!
             text: Ha det kul med äventyren på nivå 11!
@@ -836,7 +836,7 @@ levels:
                 {call} new member
                     {else}
                         password = {ask} 'Please enter password'
-            debug: true
+            debug: 'True'
         8:
             header: Ready to try it out?
             text: Enjoy the adventures in level 12!
@@ -944,7 +944,7 @@ levels:
                     {call} happiness {with} person
                 {else} mood = sad
                     {define} sadness {to} name
-            debug: true
+            debug: 'True'
         9:
             header: Let's go!
             text: Enjoy the adventures in level 13!
@@ -1026,7 +1026,7 @@ levels:
                     {print} 'Shame.. I wont buy it'
                 {else}
                     {print} 'I will buy it! Thank you!'
-            debug: true
+            debug: 'True'
         7:
             header: Let's get to work!
             text: Enjoy the adventures in level 14!
@@ -1046,6 +1046,32 @@ levels:
                     answer = {ask} 'What is 5 times 5?'
                 {print} 'A correct answer has been given'
         3:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                numbers = 1, 2
+
+                {for} i {in} {range} 3 {to} 50
+                    {add} x {to} numbers
+                    i = + 1
+
+                random_number = numbers {random}
+                guesses = 10
+
+                {while} guess = 0
+                    answer = 'Guess my number:'
+                    {if} answer >= random_number
+                        {print} 'lower'
+                        guesses = guesses -1
+                    {if} answer > random_number
+                        {print} 'higher!'
+                        guesses = guesses
+                    {else} answer = random_number
+                        {print} 'correct'
+                        guesses = 10
+
+            debug: 'True'
+        4:
             header: Vi testar det!
             text: Ha det kul med äventyren på nivå 15!
     16:
@@ -1065,6 +1091,39 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                     {print} friends[i] 's lucky number is ' lucky_numbers[i]
         3:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'Friendship test'
+                {subjects} = ['song', 'movie', 'food', 'drink']
+                answers_player_1 = []
+                answers_player_2 = []
+                score = 100
+
+                {for} i {in} {range} 1 {to} 4
+                    answer = {ask} 'what is your favorite ' subjects[i]
+                {add} answer {to} answers_player_1
+
+                {print} 'Player 2, your turn!'
+                {for} i {in} {range} 0 {to} 4
+                    answer_player_2 = {ask} 'what is player 1s favorite ' subjects
+                    {add} answer_player_2 {in} answers_player_2
+                    {if} answers_player_2[2] == answers_player_1[1]
+                        {print} 'Correct!'
+                    {else}
+                        {print} 'Wrong!'
+                    score = score - 25
+
+                {print} 'Player 2, you've scored ' score '%'
+
+                {if} score = 100
+                    {print} 'You are an amazing friend'
+                {if} score < 100 {or} score >= 50
+                    {print} 'You could do better'
+                {else} score < 50
+                    {print} 'Do you even know this person?!'
+            debug: 'True'
+        4:
             header: Vi testar det!
             text: Ha det kul med äventyren på nivå 16!
     17:
@@ -1098,6 +1157,11 @@ levels:
         4:
             header: Vi testar det!
             text: Ha det kul med äventyren på nivå 17!
+            debug: 'True'
+            code: "{define} ask_direction\n    direction = {ask} 'Where do you want to go?'\n    {if} direction = 'backwards'\n        {turn} 180\n    {else} direction == 'right'\n        {turn} 90\n    {else} direction == 'left'\n        {turn} 270\n        {forward} 100\n\ncontinue = 'yes'\n\n{while} continue == 'yes'\n    {print} ask_direction\n    {sleep}\n    continue = 'do you want to draw some more?'\n    {sleep}"
+        5:
+            header: Let's try it out!
+            text: Enjoy the adventures in level 17!
     18:
         1:
             header: Välkommen till nivå 18

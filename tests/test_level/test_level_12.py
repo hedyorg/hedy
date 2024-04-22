@@ -1735,6 +1735,30 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
+    def test_repeat_nested_multi_commands(self):
+        code = textwrap.dedent("""\
+            repeat 3 times
+                print 3
+                repeat 5 times
+                    print 5
+                print 1""")
+
+        expected = textwrap.dedent(f"""\
+            for __i in range({self.int_cast_transpiled(3)}):
+              print(f'''3''')
+              for __i in range({self.int_cast_transpiled(5)}):
+                print(f'''5''')
+                time.sleep(0.1)
+              print(f'''1''')
+              time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=17,
+            skip_faulty=False
+        )
+
     #
     # for list command
     #
