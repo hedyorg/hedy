@@ -1,11 +1,13 @@
 
-from flask import request, make_response
+from flask import request, make_response, render_template
 from flask_babel import gettext
 import json
 import uuid
+from collections import defaultdict
+
 import utils
 
-from website.auth import requires_teacher
+from website.auth import requires_teacher, requires_super_teacher
 
 from .database import Database
 from .website_module import WebsiteModule, route
@@ -45,3 +47,19 @@ class FeedbackModule(WebsiteModule):
         response.headers["HX-Trigger"] = json.dumps({"hideFeedbackModal": True})
 
         return response
+
+    @route("/", methods=["GET"])
+    @requires_super_teacher
+    def get_feedback(self, user):
+        all_feedback = self.db.get_feedback()
+        print('\n\n\n')
+        print(all_feedback)
+        if not all_feedback:
+            return render_template('feedback.html', feedback_by_category={})
+        # Group feedback by category
+        feedback_by_category = defaultdict(list)
+        for feedback in all_feedback:
+            print(feedback)
+            feedback_by_category[feedback.get("category")].append(feedback)
+
+        return render_template('feedback.html', feedback_by_category=feedback_by_category)

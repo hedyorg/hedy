@@ -1,0 +1,33 @@
+{% extends "auth.html" %}
+
+{% block regular_content %}
+    <h1>Feedback Reports (Grouped by Category)</h1>
+
+    {% for category, feedback_list in feedback_by_category.items() %}
+        <h2>{{ category }}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Page</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feedback in feedback_list %}
+                <tr>
+                    <td>{{ feedback.username }}</td>
+                    <td>{{ feedback.email }}</td>
+                    <td>{{ feedback.message }}</td>
+                    <td>{{ feedback.page }}</td>
+                    <td>{{ feedback.date|format_date}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+    {% endfor %}
+
+{% endblock %}
