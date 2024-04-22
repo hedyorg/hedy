@@ -18,7 +18,9 @@ onclick="window.open('/for-teachers', '_self');">
                     <h3 class="text-center mt-0 mb-4">{{_('general_settings')}}</h3>
                     <div class="flex flex-row items-center mb-4">
                         <label for="name" class="inline-block w-40 text-xl">{{_('name')}}</label>
-                        <input id="custom_adventure_name" autofocus required value="{{ adventure.name }}" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"{% if 'AdventureX' in adventure.name %}autofocus{% endif %}>
+                        <div class="flex-1">
+                            <input id="custom_adventure_name" autofocus required value="{{ adventure.name }}" class="w-full border-2 bg-gray-100 text-gray-700 py-2 px-4 ltr:pr-8 rtl:pl-8 rounded"{% if 'AdventureX' in adventure.name %}autofocus{% endif %}>
+                        </div>
                     </div>
                     <div class="flex flex-row items-center mb-4">
                         <label for="custom_adventure_classes" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('used_in')}}</label>
@@ -27,7 +29,7 @@ onclick="window.open('/for-teachers', '_self');">
                                 <button class="toggle-button font-semibold rounded inline-flex justify-between 
                                                      appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
                                     onclick="$('#classes_dropdown').slideToggle('medium');">
-                                    <span class="label" data-value="{{_('select_levels')}}">{{_('select_levels')}}</span>
+                                    <span class="label" data-value="{{_('used_in')}}">{{_('used_in')}}</span>
                                     <svg id="keyword-arrow_tag" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20">
                                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
@@ -92,32 +94,34 @@ onclick="window.open('/for-teachers', '_self');">
 
                     <div class="flex flex-row items-center mb-4">  
                         <label for="search_tags_input" class="inline-block w-40 text-xl">{{_('tags')}}</label>
-                        <div class="flex flex-row w-full relative" id="add_tags">
-                                <input type="text" name="tag" autocomplete="off" placeholder="{{_('tag_input_placeholder')}}" id="search_tags_input"
-                                    data-autosaved="true"
-                                    class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"
-                                    hx-trigger="enter"
-                                    hx-post="/tags/create/{{adventure.id}}" hx-target="#tags-list" hx-swap="outerHTML"
-                                    _="on click event.stopPropagation()
-                                    on keypress if event.keyCode == 13 event.stopPropagation() end
-                                    on htmx:afterRequest focus()" 
-                                    >
-                                <button class="green-btn" id="add_adventure_tags"
-                                    hx-trigger="click"
-                                    hx-post="/tags/create/{{adventure.id}}"
-                                    hx-target="#tags-list"
-                                    hx-swap="outerHTML"
-                                    hx-include="[name='tag']"
-                                    _="on htmx:afterRequest set value of #search_tags_input to ''"
-                                    >{{_('add')}}</button>
-
-                                <div
-                                    id="tags-dropdown"
-                                    hx-trigger="load"
-                                    hx-get="/tags?adventure_id={{adventure.id}}"
-                                    hx-target="#tags-dropdown"
-                                    hx-swap="outerHTML"
-                                ></div>
+                        <div class="flex-1">
+                            <div class="flex flex-row w-full relative" id="add_tags">
+                                    <input type="text" name="tag" autocomplete="off" placeholder="{{_('tag_input_placeholder')}}" id="search_tags_input"
+                                        data-autosaved="true"
+                                        class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"
+                                        hx-trigger="enter"
+                                        hx-post="/tags/create/{{adventure.id}}" hx-target="#tags-list" hx-swap="outerHTML"
+                                        _="on click event.stopPropagation()
+                                        on keypress if event.keyCode == 13 event.stopPropagation() end
+                                        on htmx:afterRequest focus()" 
+                                        >
+                                    <button class="green-btn" id="add_adventure_tags"
+                                        hx-trigger="click"
+                                        hx-post="/tags/create/{{adventure.id}}"
+                                        hx-target="#tags-list"
+                                        hx-swap="outerHTML"
+                                        hx-include="[name='tag']"
+                                        _="on htmx:afterRequest set value of #search_tags_input to ''"
+                                        >{{_('add')}}</button>
+    
+                                    <div
+                                        id="tags-dropdown"
+                                        hx-trigger="load"
+                                        hx-get="/tags?adventure_id={{adventure.id}}"
+                                        hx-target="#tags-dropdown"
+                                        hx-swap="outerHTML"
+                                    ></div>
+                            </div>
                         </div>
                     </div>
                     {{ render_partial('htmx-tags-list.html', tags=adventure_tags, adventure_id=adventure.id, creator=adventure.creator) }}                  
