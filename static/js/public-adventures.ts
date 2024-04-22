@@ -22,7 +22,6 @@ function prepareDropdowns() {
     dropdowns.forEach((dropdown) => {
         updateLabelText(dropdown)
     })
-    console.log(dropdowns)
     options.forEach(function (option) {
         option.addEventListener('click', function () {
             const dropdown = option.closest(".dropdown") as Element;

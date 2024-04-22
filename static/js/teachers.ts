@@ -205,7 +205,7 @@ function update_db_adventure(adventure_id: string) {
     levels.push(el.getAttribute("data-value") as string)
   })
 
-  document.querySelectorAll('#custom_adventure_classes > .option.selected').forEach((el) => {
+  document.querySelectorAll('#classes_dropdown > .option.selected').forEach((el) => {
     classes.push(el.getAttribute("data-value") as string)
   })
 
