@@ -39,6 +39,7 @@
       <th class="px-2 py-2 text-center">Email</th>
       <th class="px-10 bg-blue-900 text-white">Message</th>
       <th class="px-10 bg-blue-900 text-white">Page</th>
+      <th class="px-10 bg-blue-900 text-white">Category</th>
       <th class="px-10 bg-blue-900 text-white">Date</th>
     </tr>
   </thead>
@@ -49,6 +50,7 @@
         <td id="teacher_cell" class="text-center p-2">{{ feedback.email }}</td>
         <td class="text-center p-2">{{ feedback.message }}</td>
         <td class="text-center p-2">{{ feedback.page }}</td>
+        <td class="text-center p-2">{{ feedback.category }}</td>
         <td class="text-center p-2">{{ feedback.date|format_date }}</td>
       </tr>
     {% endfor %}
