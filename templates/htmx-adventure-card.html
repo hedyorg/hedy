@@ -63,7 +63,11 @@
     <div id="actions"
         class="flex items-center px-6 py-4 bg-gray-200 shadow-lg">
         {% if is_super_teacher %}
-            <i class="fa fa-trash p-2 bg-red-600 mr-4 rounded-full cursor-pointer" id="{{adventure.id}}" onclick=""></i>
+            <i class="fa fa-trash p-2 bg-red-500 mr-4 rounded-full cursor-pointer" id="{{adventure.id}}"
+            hx-confirm="{{_('delete_adventure_prompt')}}"
+            hx-trigger="click"
+            hx-delete="/for-teachers/customize-adventure/{{adventure.id}}"
+            hx-swap="none"></i>
         {% endif %}
         {% if is_program %}
             <button class="green-btn" onclick="window.open (hedyApp.viewProgramLink('{{adventure.id}}'))">{{_('view_program')}}</button>
