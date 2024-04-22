@@ -284,7 +284,10 @@ export function update_adventure(adventure_id: string, first_edit: boolean, prom
 function show_preview(content: string) {
     const name = $('#custom_adventure_name').val();
     if (typeof name !== 'string') { throw new Error(`Expected name to be string, got '${name}'`); }
-    const levels = $('#custom_adventure_levels').val();
+    let levels: string[] = []
+    document.querySelectorAll('#levels_dropdown > .option.selected').forEach((el) => {
+      levels.push(el.getAttribute("data-value") as string)
+    })
     if (typeof levels !== 'object') { throw new Error(`Expected level to be a list, got '${levels}'`); }
 
     let container = $('<div>');
