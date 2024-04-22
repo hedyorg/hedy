@@ -1923,10 +1923,12 @@ adventures:
                     ### 练习
                     这首歌的下一节是:
 
+                    ```not_hedy_code
                     昨晚我躺在枕头上的时候
                     昨晚我躺在床上的时候
                     昨晚我躺在枕头上的时候
                     我梦见我的邦妮死去了
+                    ```
 
                     你能用和示例同样的方法编写这段诗句吗?
                 example_code: |
@@ -5040,8 +5042,9 @@ adventures:
                     用小海龟重画图画!
 
                     <div class="w-full flex flex-row gap-2">
-                    蜂巢 (6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="200">
-                    扇形 (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="200">
+                    蜂巢 (6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="150">
+                    扇形 (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="150">
+                    Snowflake (13) <img src="https://github.com/hedyorg/hedy/assets/80678586/90f56bbb-86e5-448d-8aec-16f8c2c05cf2" width="150">
                     </div>
                 example_code: |
                     蜂巢的提示:
@@ -5056,14 +5059,18 @@ adventures:
 
                     扇形的提示:
                     仿照你在第7关制作的扇形开始。或者看一下蜂巢的提示，因为代码非常相似。
+
+                    Hint Snowflake: Start by making one 'leg' and repeat it 6 times.
             12:
                 story_text: |
                     ### 练习
-                    用乌龟重新绘制图纸！
-                    提示：手镯设计程序。首先，为手镯上要使用的每个形状定义一个函数。然后，将形状添加到手镯中，如下所示：
-                    </div>
-                    手镯设计程序 <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
+                    用乌龟重新绘制图画！
+
+                    首先，为您想要在手环上使用的每种形状**定义一个函数。 然后，将形状添加到手镯中，如下所示：
+
+                    手链设计程序 <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500"> 
                 example_code: |
+                    提示手链设计程序
                     ```
                     {define} draw_a_square
                     _
@@ -5089,6 +5096,7 @@ adventures:
 
                     不同大小的街道 <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
                     彩色的街道  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
+                    Snow Storm <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
                 example_code: |
                     不同大小的街道的提示
                     ```
@@ -5105,6 +5113,24 @@ adventures:
                     {define} 画一栋房子 {with} 选定的颜色
                     _
                     ```
+
+                    Hint Snow Storm
+                    ```
+                    {define} draw_snowflake {with} length, color
+                        _
+
+                    numbers = 10, 20, 30
+                    colors = _
+
+                    {for} i {in} {range} 1 {to} 5
+                        random_number = _
+                        random_color = _
+                        {call} draw_snowflake {with} random_number, random_color
+                        {color} white
+                        {turn} random_number * 5
+                        {forward} 80
+                    ```
+
             14:
                 story_text: |
                     ### 练习
