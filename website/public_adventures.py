@@ -36,9 +36,11 @@ class PublicAdventuresModule(WebsiteModule):
     @requires_teacher
     def filtering(self, user):
         level = request.args["level"] if request.args.get("level") else "1"
-        language = request.args.get("lang") or g.lang
+        language = request.args.get("lang")
         if language == "reset":
             language = ""
+        elif not language and request.method == 'GET':
+            language = g.lang
         tag = request.args.get("tag", "")
         search = request.form.get("search", request.args.get("search", ""))
 
@@ -53,7 +55,7 @@ class PublicAdventuresModule(WebsiteModule):
         available_languages.update(field_filters.get("lang", []))
         available_tags.update(field_filters.get("tag", []))
 
-        customizations = {"available_levels": available_levels}
+        customizations = {"available_levels": sorted(available_levels)}
 
         tags = []
         if tag:
@@ -99,6 +101,8 @@ class PublicAdventuresModule(WebsiteModule):
                 if language and adventure.get("language", g.lang) != language:
                     continue
                 if tags and not any(_t in adventure.get("tags", []) for _t in tags):
+                    continue
+                if search and not search.lower() in adventure.get("name").lower():
                     continue
 
                 content = safe_format(adventure.get('formatted_content', adventure['content']),
