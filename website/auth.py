@@ -196,6 +196,7 @@ def has_public_profile(user):
 
 # Thanks to https://stackoverflow.com/a/34499643
 
+
 def hide_explore(user):
     if 'username' not in user or user.get('username') == '':
         return False
