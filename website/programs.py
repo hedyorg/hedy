@@ -98,13 +98,12 @@ class ProgramsLogic:
         program_to_check['adventure_name'] = short_name
 
         is_modified = self.statistics.is_program_modified(program_to_check, full_adventures, teacher_adventures)
-        # a program can be saved before but not yet modified,
+        # a program can be saved already but not yet modified,
         # and if it was already modified and now is so again, count should not increase.
         if is_modified and not program.get('is_modified'):
             self.db.increase_user_program_count(user["username"])
         program['is_modified'] = is_modified
         program = self.db.update_program(program['id'], program)
-        # only if it is a new program and it's modified, increase the count
 
         querylog.log_value(program_id=program['id'],
                            adventure_name=adventure_name, error=error, code_lines=len(code.split('\n')))
@@ -152,7 +151,7 @@ class ProgramsModule(WebsiteModule):
 
         achievement = self.achievements.add_single_achievement(user["username"], "do_you_have_copy")
 
-        resp = {"message": gettext("delete_success"), "count": 2, "levels": []}
+        resp = {"message": gettext("delete_success")}
         if achievement:
             resp["achievement"] = achievement
         return jsonify(resp)

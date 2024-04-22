@@ -1061,12 +1061,6 @@ def programs_page(user):
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
 
-    user = DATABASE.user_by_username(username)
-    if user.get('program_count'):
-        user_program_count = user.get('program_count')
-    else:
-        user_program_count = 0
-
     return render_template(
         'programs.html',
         programs=programs,
