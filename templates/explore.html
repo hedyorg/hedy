@@ -36,7 +36,7 @@
     {% if not filtered_level and not filtered_adventure and favourite_programs %}
         <div class="border rounded-lg border-yellow-500 mb-4 py-2">
             <h2 class="text-center z-10 font-bold pb-0 mb-0 text-3xl">{{_('hedy_choice_title')}}</h2>
-            <div class="flex flex-wrap mx-auto justify-center gap-4 turn-pre-into-ace" id="explore_favourite_programs">
+            <div class="flex flex-wrap mx-auto justify-center gap-4 turn-pre-into-ace" data-cy="explore_favourite_programs">
                 {% for program in favourite_programs %}
                     {{ render_partial('htmx-adventure-card.html', user={}, adventure=program, is_program=true, is_admin=is_admin, is_favorite=true) }}
                 {% endfor %}
@@ -44,7 +44,7 @@
         </div>
     {% endif %}
         <div class="flex flex-col w-full">
-            <div class="flex flex-wrap mx-auto justify-center gap-4 turn-pre-into-ace" id="explore_page_programs">
+            <div class="flex flex-wrap mx-auto justify-center gap-4 turn-pre-into-ace" data-cy="explore_page_programs">
                 {% if programs|length == 0 %}
                     {{_('no_programs')}}
                 {% else %}

@@ -47,7 +47,7 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
                      translating, tags, surveys, public_adventures, user_activity, feedback)
-from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, has_public_profile,
+from website.auth import (current_user, hide_explore, is_admin, is_teacher, is_second_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
                           forget_current_user)
 from website.log_fetcher import log_fetcher
@@ -114,6 +114,7 @@ ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 DATABASE = database.Database()
 ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
 SURVEYS = surveys.SurveysModule(DATABASE)
+STATISTICS = statistics.StatisticsModule(DATABASE)
 
 TAGS = collections.defaultdict(hedy_content.NoSuchAdventure)
 for lang in ALL_LANGUAGES.keys():
@@ -435,7 +436,8 @@ def enrich_context_with_user_info():
     user = current_user()
     data = {'username': user.get('username', ''),
             'is_teacher': is_teacher(user), 'is_second_teacher': is_second_teacher(user),
-            'is_admin': is_admin(user), 'has_public_profile': has_public_profile(user)}
+            'is_admin': is_admin(user), 'has_public_profile': has_public_profile(user),
+            'hide_explore': hide_explore(g.user)}
     return data
 
 
@@ -657,17 +659,20 @@ def parse():
     # Save this program (if the user is logged in)
     if username and body.get('save_name'):
         try:
-            program_logic = programs.ProgramsLogic(DATABASE, ACHIEVEMENTS)
+            program_logic = programs.ProgramsLogic(DATABASE, ACHIEVEMENTS, STATISTICS)
             program = program_logic.store_user_program(
                 user=current_user(),
                 level=level,
                 name=body.get('save_name'),
                 program_id=body.get('program_id'),
                 adventure_name=body.get('adventure_name'),
+                short_name=body.get('short_name'),
                 code=code,
                 error=exception is not None)
 
             response['save_info'] = SaveInfo.from_program(Program.from_database_row(program))
+            if program.get('is_modified'):
+                response['is_modified'] = True
         except programs.NotYourProgramError:
             # No permissions to overwrite, no biggie
             pass
@@ -986,7 +991,7 @@ def programs_page(user):
     # If from_user -> A teacher is trying to view the user programs
     if from_user and not is_admin(user):
         if not is_teacher(user):
-            return utils.error_page(error=403, ui_message=gettext('not_teacher'))
+            return utils.error_page(error=401, ui_message=gettext('not_teacher'))
         students = DATABASE.get_teacher_students(username)
         if from_user not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
@@ -1015,6 +1020,8 @@ def programs_page(user):
                 program['adventure_name'] not in adventure_names:
             ids_to_fetch.append(program['adventure_name'])
 
+    all_programs = [program for program in all_programs if program.get('is_modified')]
+
     teacher_adventures = DATABASE.batch_get_adventures(ids_to_fetch)
     for id, teacher_adventure in teacher_adventures.items():
         if teacher_adventure is not None:
@@ -1032,19 +1039,20 @@ def programs_page(user):
         date = utils.delta_timestamp(item['date'])
         # This way we only keep the first 4 lines to show as preview to the user
         preview_code = "\n".join(item['code'].split("\n")[:4])
-        programs.append(
-            {'id': item['id'],
-             'preview_code': preview_code,
-             'code': item['code'],
-             'date': date,
-             'level': item['level'],
-             'name': item['name'],
-             'adventure_name': item.get('adventure_name'),
-             'submitted': item.get('submitted'),
-             'public': item.get('public'),
-             'number_lines': item['code'].count('\n') + 1
-             }
-        )
+        if item.get('is_modified'):
+            programs.append(
+                {'id': item['id'],
+                 'preview_code': preview_code,
+                 'code': item['code'],
+                 'date': date,
+                 'level': item['level'],
+                 'name': item['name'],
+                 'adventure_name': item.get('adventure_name'),
+                 'submitted': item.get('submitted'),
+                 'public': item.get('public'),
+                 'number_lines': item['code'].count('\n') + 1
+                 }
+            )
 
     sorted_level_programs = hedy_content.Adventures(g.lang) \
         .get_sorted_level_programs(all_programs, adventure_names)
@@ -1066,14 +1074,15 @@ def programs_page(user):
         adventure_names=adventure_names,
         max_level=hedy.HEDY_MAX_LEVEL,
         next_page_url=next_page_url,
-        second_teachers_programs=False)
+        second_teachers_programs=False,
+        user_program_count=len(programs))
 
 
 @app.route('/logs/query', methods=['POST'])
 def query_logs():
     user = current_user()
     if not is_admin(user) and not is_teacher(user):
-        return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+        return utils.error_page(error=401, ui_message=gettext('unauthorized'))
 
     body = request.json
     if body is not None and not isinstance(body, dict):
@@ -1083,12 +1092,12 @@ def query_logs():
     if not is_admin(user):
         username_filter = body.get('username')
         if not class_id or not username_filter:
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+            return utils.error_page(error=401, ui_message=gettext('unauthorized'))
 
         class_ = DATABASE.get_class(class_id)
         if not class_ or class_['teacher'] != user['username'] or username_filter not in class_.get('students', [
         ]):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+            return utils.error_page(error=401, ui_message=gettext('unauthorized'))
 
     (exec_id, status) = log_fetcher.query(body)
     response = {'query_status': status, 'query_execution_id': exec_id}
@@ -1103,7 +1112,7 @@ def get_log_results():
 
     user = current_user()
     if not is_admin(user) and not is_teacher(user):
-        return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+        return utils.error_page(error=401, ui_message=gettext('unauthorized'))
 
     data, next_token = log_fetcher.get_query_results(
         query_execution_id, next_token)
@@ -1862,7 +1871,7 @@ def get_cheatsheet_page(level):
 @app.route('/certificate/<username>', methods=['GET'])
 def get_certificate_page(username):
     if not current_user()['username']:
-        return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+        return utils.error_page(error=401, ui_message=gettext('unauthorized'))
     username = username.lower()
     user = DATABASE.user_by_username(username)
     if not user:
@@ -1962,7 +1971,7 @@ def reset_page():
     token = None if token == "null" else token
 
     if not username or not token:
-        return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+        return utils.error_page(error=401, ui_message=gettext('unauthorized'))
     return render_template(
         'reset.html',
         page_title=gettext('title_reset'),
@@ -2607,7 +2616,7 @@ def update_yaml():
 @app.route('/user/<username>')
 def public_user_page(username):
     if not current_user()['username']:
-        return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+        return utils.error_page(error=401, ui_message=gettext('unauthorized'))
     username = username.lower()
     user = DATABASE.user_by_username(username)
     if not user:
@@ -2657,6 +2666,13 @@ def public_user_page(username):
             'public_user_page',
             username=username, **dict(request.args,
                                       page=next_page_token)) if next_page_token else None
+
+        user = DATABASE.user_by_username(username)
+        if user.get('program_count'):
+            user_program_count = user.get('program_count')
+        else:
+            user_program_count = 0
+
         return render_template(
             'public-page.html',
             user_info=user_public_info,
@@ -2669,7 +2685,8 @@ def public_user_page(username):
             certificate_message=certificate_message,
             next_page_url=next_page_url,
             sorted_level_programs=sorted_level_programs,
-            sorted_adventure_programs=sorted_adventure_programs
+            sorted_adventure_programs=sorted_adventure_programs,
+            user_program_count=user_program_count,
         )
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
@@ -2732,7 +2749,7 @@ def current_user_allowed_to_see_program(program):
 
 app.register_blueprint(auth_pages.AuthModule(DATABASE))
 app.register_blueprint(profile.ProfileModule(DATABASE))
-app.register_blueprint(programs.ProgramsModule(DATABASE, ACHIEVEMENTS))
+app.register_blueprint(programs.ProgramsModule(DATABASE, ACHIEVEMENTS, STATISTICS))
 app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(classes.ClassModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(classes.MiscClassPages(DATABASE, ACHIEVEMENTS))

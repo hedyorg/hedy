@@ -94,3 +94,15 @@ jobs:
         branch: automatic/weblate-conflicts
         delete-branch: true
         base: main
+
+    # After we've created the PR, lock weblate and tell it to forget pending
+    # changes. The changes are now in the PR which will be merged in due time, and
+    # Weblate will be unlocked when the PR is merged.
+    - name: Prevent updates and merge conflicts until merged
+      run: |
+        wlc lock
+        # On our repo, 'wlc reset' consistently times out the TCP connection after waiting
+        # for 5 minutes. The actual reset does seem to work, so we just don't wait for the
+        # command to finish, otherwise all our workflow executions show errors.
+        wlc reset &
+        sleep 10

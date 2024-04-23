@@ -47,8 +47,8 @@ describe('Is able to click on duplicate class', () => {
           
           cy.wait(50)
               //Checks for Second Teachers duplication
-          cy.get('#modal-yes-button').should('be.visible');
-          cy.get('#modal-yes-button').should('be.enabled');
+          cy.get('[data-cy="modal_yes_button"]').should('be.visible');
+          cy.get('[data-cy="modal_yes_button"]').should('be.enabled');
 
           cy.get('#modal-no-button').should('be.visible');
           cy.get('#modal-no-button').should('be.enabled').click();

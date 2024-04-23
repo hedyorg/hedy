@@ -6,6 +6,7 @@ import { makeProfilePublic } from "../tools/profile/profile";
 
 describe("General tests for my programs page (with both custom teacher and built-in adventure)", () => {
     const programName = "myTestProgram";
+    const adventure = 'story'
     beforeEach(() => {
         loginForTeacher();
     }) 
@@ -23,6 +24,34 @@ describe("General tests for my programs page (with both custom teacher and built
         cy.get(".programs").should("contain.text", programName);
 
         deleteAdventure(programName)
+    });
+
+    it("should not be added to my programs when running a program with copied code", () => {
+        cy.visit(`${Cypress.env('hedy_page')}#${adventure}`);
+        // make sure to navigate to the wanted program tab.
+        cy.get(`[data-cy="${adventure}"]`)
+            .click();
+        // Paste example code 
+        cy.get(`[data-cy="paste-example-code-${adventure}"]`).click();
+        cy.get('#runit').click();
+        cy.wait(500);
+        cy.visit(`${Cypress.env('programs_page')}`);
+        cy.get(".programs").should("not.contain.text", adventure);
+    });
+
+    it("should be added to my programs when running a program with modified code", () => {
+        cy.visit(`${Cypress.env('hedy_page')}#${adventure}`);
+        // make sure to navigate to the wanted program tab.
+        cy.get(`[data-cy="${adventure}"]`)
+            .click();
+        // Paste example code and modify code
+        cy.get(`[data-cy="paste-example-code-${adventure}"`).click();
+        cy.get('#editor .cm-content').click();
+        cy.focused().type('print Hello world\nask Hello world?');
+        cy.get('#runit').click();
+        cy.wait(500);
+        cy.visit(`${Cypress.env('programs_page')}`);
+        cy.get(".programs").should("contain.text", adventure);
     });
 
     it('can make program public', () => {
@@ -53,12 +82,12 @@ describe("General tests for my programs page (with both custom teacher and built
                 //favourite a program:
                 cy.get(`#favourite_program_container_${programId}`).click();
                 cy.get(`#modal-confirm-text`).should('contain.text', 'favourite');
-                cy.get('#modal-yes-button').should('be.enabled').click();
+                cy.get('[data-cy="modal_yes_button"]').should('be.enabled').click();
                 //unfavourite a program:
                 cy.wait(500);
                 cy.get(`#favourite_program_container_${programId}`).click();
                 cy.get(`#modal-confirm-text`).should('contain.text', 'unfavourite');
-                cy.get('#modal-yes-button').should('be.enabled').click();
+                cy.get('[data-cy="modal_yes_button"]').should('be.enabled').click();
             })
     });
 

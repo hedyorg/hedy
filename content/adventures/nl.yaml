@@ -2711,14 +2711,14 @@ adventures:
                     In het volgende level leer je enkele bestaande nummer spelen.
                 example_code: |-
                     ```
-                    play C4
-                    play D4
-                    play E4
-                    play F4
-                    play G4
-                    play A4
-                    play B4
-                    play C5
+                    {play} C4
+                    {play} D4
+                    {play} E4
+                    {play} F4
+                    {play} G4
+                    {play} A4
+                    {play} B4
+                    {play} C5
                     ```
             2:
                 story_text: |
@@ -5096,8 +5096,9 @@ adventures:
                     Maak de figuren na met de schildpad!
 
                     <div class="w-full flex flex-row gap-2">
-                    Honingraat (6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="200">
-                    Waaier (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="200">
+                    Honingraat (6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="150">
+                    Waaier (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="150">
+                    Sneeuwvlok (13) <img src="https://github.com/hedyorg/hedy/assets/80678586/90f56bbb-86e5-448d-8aec-16f8c2c05cf2" width="150">
                     </div>
                 example_code: |
                     Hint voor de honingraat:
@@ -5112,6 +5113,8 @@ adventures:
 
                     Hint voor de waaier:
                     Start zoals je deed voor de waaier in level 7. Of kijk naar de hint voor de honingraat, want de code lijkt er erg op.
+
+                    Hint voor de sneeuwvlok: Maak eerst een pootje van de sneeuwvlok en herhaal dat 6 keer.
             12:
                 story_text: |
                     ### Opdracht
@@ -5149,6 +5152,7 @@ adventures:
 
                     Straat met huizen van verschillende groottes <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
                     Gekleurde straat <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
+                    Sneeuwstorm <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
                 example_code: |
                     Hint voor de straat met huizen van verschillende groottes
                     ```
@@ -5164,6 +5168,23 @@ adventures:
                     ```
                     {define} teken_een_huis {with} gekozen_kleur
                     _
+                    ```
+
+                    Hint Snow Storm
+                    ```
+                    {define} teken_sneeuwvlok {with} lengte, kleur
+                        _
+
+                    getallen = 10, 20, 30
+                    kleuren = _
+
+                    {for} i {in} {range} 1 {to} 5
+                        random_getal = _
+                        random_kleur = _
+                        {call} teken_sneeuwvlok {with} random_getal, random_kleur
+                        {color} wit
+                        {turn} random_getal * 5
+                        {forward} 80
                     ```
             14:
                 story_text: |

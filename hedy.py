@@ -812,7 +812,8 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree, type_)
 
     def text_in_quotes(self, tree):
-        return self.to_typed_tree(tree.children[0], HedyType.string)
+        t = tree.children[0] if tree.children else tree
+        return self.to_typed_tree(t, HedyType.string)
 
     def var_access(self, tree):
         return self.to_typed_tree(tree, HedyType.string)
@@ -1252,6 +1253,9 @@ class IsValid(Filter):
             working_level=7,
             tip='no_more_flat_if',
             line_number=meta.line)
+
+    def error_else_no_if(self, meta, args):
+        raise exceptions.ElseWithoutIfException(meta.line)
 
     def error_for_missing_in(self, meta, args):
         raise exceptions.MissingAdditionalCommand(command='for', missing_command='in', line_number=meta.line)
@@ -2425,7 +2429,14 @@ class ConvertToPython_12(ConvertToPython_11):
     def returns(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
         exception = self.make_index_error_check_if_list(args)
-        return exception + f"return f'''{argument_string}'''"
+        return exception + textwrap.dedent(f"""\
+            try:
+              return int(f'''{argument_string}''')
+            except ValueError:
+              try:
+                return float(f'''{argument_string}''')
+              except ValueError:
+                return f'''{argument_string}'''""")
 
     def number(self, meta, args):
         # try all ints? return ints
@@ -2448,7 +2459,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def text_in_quotes(self, meta, args):
         # We need to re-add the quotes, so that the Python code becomes name = 'Jan' or "Jan's"
-        text = args[0]
+        text = args[0] if args else ''
         if "'" in text:
             return f'"{text}"'
         return f"'{text}'"
