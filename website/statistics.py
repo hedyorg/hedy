@@ -2,7 +2,7 @@ from collections import namedtuple
 from enum import Enum
 from difflib import SequenceMatcher
 import re
-from flask import g, jsonify, request
+from flask import g, jsonify, make_response, request
 from flask_babel import gettext
 import utils
 import hedy_content
@@ -817,7 +817,7 @@ class LiveStatisticsModule(WebsiteModule):
                 self.db.update_class_errors(common_errors)
                 break
 
-        return {}, 200
+        return make_response('', 204)
 
     def retrieve_exceptions_per_student(self, class_id):
         """
@@ -951,7 +951,7 @@ class LiveStatisticsModule(WebsiteModule):
 
         self.db.update_class_customizations(class_customization)
 
-        return {}, 200
+        return make_response('', 204)
 
 
 def add(username, action):

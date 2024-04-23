@@ -21,7 +21,7 @@ from os import path
 
 import static_babel_content
 from markupsafe import Markup
-from flask import (Flask, Response, abort, after_this_request, g,
+from flask import (Flask, Response, abort, after_this_request, g, make_response,
                    redirect, request, send_file, url_for, jsonify,
                    send_from_directory, session)
 from flask_babel import Babel, gettext
@@ -712,7 +712,7 @@ def parse_by_id(user):
                 program.get('level'),
                 program.get('lang')
             )
-            return {}, 200
+            return make_response('', 204)
         except BaseException:
             return {"error": "parsing error"}, 200
     else:
