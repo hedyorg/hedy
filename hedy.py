@@ -1141,6 +1141,7 @@ def all_commands(input_string, level, lang='en'):
 
     return AllCommands(level).transform(program_root)
 
+
 def all_variables(input_string, level, lang='en'):
     """Return the commands used in a program string.
 
@@ -1153,10 +1154,11 @@ def all_variables(input_string, level, lang='en'):
     lookup = create_lookup_table(program_root, level, lang, input_string)
     for x in lookup:
         name = str(x.name)
-        if '[' not in name: # we also stor list access but that is not needed here
+        if '[' not in name:  # we also stor list access but that is not needed here
             vars.add(name)
 
     return list(vars)
+
 
 @v_args(meta=True)
 class IsValid(Filter):

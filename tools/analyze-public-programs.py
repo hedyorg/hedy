@@ -38,6 +38,5 @@ for snippet in public_snippets:
             print(snippet.language, all_commands)
             print(snippet.language, all_variables)
 
-
         except Exception as E:
             pass
