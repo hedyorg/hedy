@@ -165,6 +165,27 @@ class TestsLevel17(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
+    def test_for_loop_no_colon_after_pressed_gives_error(self):
+        code = textwrap.dedent("""\
+        for a in range 2 to 4
+            a = 1""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException
+        )
+
+    def test_for_list_without_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        dieren = ['cat', 'dog', 'parrot']
+        for dier in dieren
+            a = 1""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=exceptions.MissingColonException
+        )
+
     def test_if__else(self):
         code = textwrap.dedent("""\
     a is 5
@@ -218,12 +239,23 @@ class TestsLevel17(HedyTester):
 
     def test_while_undefined_var(self):
         code = textwrap.dedent("""\
-      while antwoord != 25:
-          print 'hoera'""")
+        while antwoord != 25:
+            print 'hoera'""")
 
         self.single_level_tester(
             code=code,
             exception=hedy.exceptions.UndefinedVarException
+        )
+
+    def test_while_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        a = 1
+        while a != 5
+            a = a + 1""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException
         )
 
     def test_allow_space_before_colon(self):
@@ -484,15 +516,60 @@ class TestsLevel17(HedyTester):
             extra_check_function=self.is_turtle()
         )
 
-    def test_if_no_colon_after_pressed_gives_parse_error(self):
+    def test_if_pressed_no_colon_gives_error(self):
         code = textwrap.dedent("""\
         if x is pressed
-            print 'no colon!'""")
+            a = 'no colon!'""")
 
-        self.single_level_tester(
+        self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.ParseException,
-            extra_check_function=lambda c: c.exception.error_location[0] == 2 and c.exception.error_location[1] == 31
+            exception=hedy.exceptions.MissingColonException
+        )
+
+    def test_pressed_else_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if x is pressed:
+            a = 'correct'
+        else
+            a = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException
+        )
+
+    def test_if_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if 'a' is 'a'
+            b = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException
+        )
+
+    def test_elif_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if 'a' is 'a':
+            b = 'colon!'
+        elif 'a' is 'b'
+            b = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException
+        )
+
+    def test_else_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if 'a' is 'a':
+            b = 'colon!'
+        else
+            b = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException
         )
 
     def test_if_button_is_pressed_print(self):
@@ -556,6 +633,17 @@ class TestsLevel17(HedyTester):
             code=code,
             expected=expected,
             skipped_mappings=skipped_mappings,
+        )
+
+    def test_define_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+            define simple_function
+                a = 1
+            call simple_function""")
+
+        self.single_level_tester(
+            code=code,
+            exception=exceptions.MissingColonException
         )
 
     def test_source_map(self):
