@@ -1141,6 +1141,22 @@ def all_commands(input_string, level, lang='en'):
 
     return AllCommands(level).transform(program_root)
 
+def all_variables(input_string, level, lang='en'):
+    """Return the commands used in a program string.
+
+    This function is still used in the web frontend, and some tests, but no longer by 'transpile'.
+    """
+    input_string = process_input_string(input_string, level, lang)
+    program_root = parse_input(input_string, level, lang)
+
+    vars = set()
+    lookup = create_lookup_table(program_root, level, lang, input_string)
+    for x in lookup:
+        name = str(x.name)
+        if '[' not in name: # we also stor list access but that is not needed here
+            vars.add(name)
+
+    return list(vars)
 
 @v_args(meta=True)
 class IsValid(Filter):
