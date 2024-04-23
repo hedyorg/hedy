@@ -4,13 +4,18 @@
         <li class="ltr:mr-2 rtl:ml-2"><a href="/" class="inline-block w-10 lg:w-12"><img src="{{static('/images/Hedy-logo-96x96-round.png')}}" height="48px" width="48px" alt="{{_('hedy_logo_alt')}}"></a></li>
         <li class="flex-initial menubar-item{% if current_page == 'start' %} active{% endif %}"><a class="menubar-text" href="/" title="{{_('nav_start')}}">{{_('nav_start')}}</a></li>
         <li class="flex-initial menubar-item{% if current_page == 'hedy' %} active{% endif %}"><a class="menubar-text" id="hedybutton" href="/hedy" title="{{_('nav_hedy')}}">{{_('nav_hedy')}}</a></li>
-        <li class="flex-initial truncate menubar-item{% if current_page == 'explore' %} active{% endif %}"><a class="menubar-text" id="explorebutton" href="/explore" title="{{_('nav_explore')}}">{{_('nav_explore')}}</a></li>
+        {% if not hide_explore %}
+            <li class="flex-initial truncate menubar-item{% if current_page == 'explore' %} active{% endif %}"><a class="menubar-text" id="explorebutton" href="/explore" title="{{_('nav_explore')}}">{{_('nav_explore')}}</a></li>
+        {% endif %}
         {% if is_teacher  or is_second_teacher %}
             <li class="flex-initial truncate menubar-item{% if current_page == 'for-teachers' %} active{% endif %}"><a class="menubar-text" href="/for-teachers" title="{{_('for_teachers')}}">{{_('for_teachers')}}</a></li>
             <li class="flex-initial truncate menubar-item{% if current_page == 'teacher-manual' %} active{% endif %}"><a class="menubar-text" href="/for-teachers/manual" title="{{_('teacher_manual')}}">{{_('teacher_manual')}}</a></li>
         {% endif %}
         {% if is_admin %}
             <li class="flex-initial truncate menubar-item{% if current_page == 'admin' %} active{% endif %}"><a class="menubar-text" href="/admin">Admin</a></li>
+        {% endif %}
+        {% if is_super_teacher %}
+            <li class="flex-initial truncate menubar-item{% if current_page == 'super_teacher' %} active{% endif %}"><a class="menubar-text" href="/feedback">Super Teacher</a></li>
         {% endif %}
         <div class="flex-1"></div><!-- divider -->
     {% if username %}
@@ -35,9 +40,6 @@
                 <a class="dropdown-item" href="/my-achievements"><span class="fas fa-fw fa-list-alt ltr:mr-4 rtl:ml-4"></span>{{_('my_achievements')}}</a>
                 <a class="dropdown-item" href="/my-profile"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span>{{_('my_account')}} {% if get_user_messages() %} ({{ get_user_messages() }}){% endif %}</a>
                 <a class="dropdown-item" {% if not has_public_profile %}style="display: none;"{% endif %} id="public_profile_redirect" href="#" onclick="window.open('/user/{{ username}}')"><span class="fas fa-user ltr:mr-4 rtl:ml-4"></span>{{_('my_public_profile')}}</a>
-                {% if is_super_teacher %}
-                <a class="dropdown-item" id="super_teacher_btn" href="#" onclick="window.open('/feedback')"><span class="fas fa-fw fa-chalkboard-user ltr:mr-4 rtl:ml-4"></span>Super teacher</a>
-                {% endif %}
                 <a class="dropdown-item" id="logout_button" href="#" onclick="hedyApp.logout(); return false;"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span>{{_('logout')}}</a>
             </div>
         </li>

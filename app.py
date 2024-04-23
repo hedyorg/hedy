@@ -49,7 +49,7 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      translating, tags, surveys, public_adventures, user_activity, feedback)
 from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, is_super_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
-                          forget_current_user)
+                          forget_current_user, hide_explore)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 
@@ -436,7 +436,8 @@ def enrich_context_with_user_info():
     data = {'username': user.get('username', ''),
             'is_teacher': is_teacher(user), 'is_second_teacher': is_second_teacher(user),
             'is_admin': is_admin(user), 'has_public_profile': has_public_profile(user),
-            'is_super_teacher': is_super_teacher(user), }
+            'is_super_teacher': is_super_teacher(user),
+            'hide_explore': hide_explore(g.user)}
     return data
 
 
