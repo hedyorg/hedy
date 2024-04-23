@@ -37,11 +37,6 @@ describe("General tests for my programs page (with both custom teacher and built
         cy.wait(500);
         cy.visit(`${Cypress.env('programs_page')}`);
         cy.get(".programs").should("not.contain.text", adventure);
-        cy.wait(500);
-        cy.get('#more_options_1').click(); 
-        cy.get(`[data-cy="delete_non_submitted_program_1"]`).click();
-        cy.getBySel('modal_yes_button').click();
-        cy.wait(500);
     });
 
     it("should be added to my programs when running a program with modified code", () => {
@@ -52,7 +47,7 @@ describe("General tests for my programs page (with both custom teacher and built
         // Paste example code and modify code
         cy.get(`[data-cy="paste-example-code-${adventure}"`).click();
         cy.get('#editor .cm-content').click();
-        cy.focused().type('print Hello world');
+        cy.focused().type('print Hello world\nask Hello world?');
         cy.get('#runit').click();
         cy.wait(500);
         cy.visit(`${Cypress.env('programs_page')}`);

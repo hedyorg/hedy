@@ -268,12 +268,14 @@ class StatisticsModule(WebsiteModule):
                 content = adventure['content']
                 soup = BeautifulSoup(content, features="html.parser")
                 for pre in soup.find_all('pre'):
-                    adventure_snippets.append(pre.contents[0])
+                    adventure_snippets.append(str(pre.contents[0]))
 
         student_code = program['code'].strip()
         # now we have to calculate the differences between the student code and the code snippets
         can_save = True
         for snippet in adventure_snippets:
+            if re.search(r'<code.*?>.*?</code>', snippet):
+                snippet = re.sub(r'<code.*?>(.*?)</code>', r'\1', snippet)
             snippet = snippet.strip()
             seq_match = SequenceMatcher(None, snippet, student_code)
             matching_ratio = round(seq_match.ratio(), 2)
