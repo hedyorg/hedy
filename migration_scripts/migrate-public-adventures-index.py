@@ -1,3 +1,7 @@
+import sys
+# setting path
+sys.path.append('../hedy')
+
 from website.database import PUBLIC_ADVENTURES_INDEXES, ADVENTURES
 
 
