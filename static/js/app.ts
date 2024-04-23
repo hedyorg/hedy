@@ -158,7 +158,8 @@ export function initializeApp(options: InitializeAppOptions) {
           if ($(this).html().toLowerCase().includes(search_query)) {
               $(this).show();
           } else {
-              $(this).hide();
+            $(this).hide();
+            $("#add_language_btn").show();
           }
       });
   });
