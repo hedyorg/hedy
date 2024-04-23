@@ -1190,7 +1190,7 @@ class ForTeachersModule(WebsiteModule):
         elif adventure["creator"] != user["username"]:
             return gettext("unauthorized"), 401
 
-        self.db.delete_adventure(adventure_id)
+        self.db.delete_adventure(adventure)
         tags = self.db.read_tags(adventure.get("tags", []))
         for tag in tags:
             tagged_in = list(filter(lambda t: t["id"] != adventure_id, tag["tagged_in"]))

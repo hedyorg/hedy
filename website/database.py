@@ -646,8 +646,10 @@ class Database:
             PUBLIC_ADVENTURES_INDEXES.put({"field_value": f"tag#{tag}", "date_adventure_id": f"{date}_{id}"})
             PUBLIC_ADVENTURES_FILTERS.put({"field": "tag", "value": tag})
 
-    def remove_public_adventure_filters_indexes(self, field, value, adventure):
+    def remove_public_adventure_filters(self, field, value):
         PUBLIC_ADVENTURES_FILTERS.delete({"field": field, "value": value})
+
+    def remove_public_adventure_indexes(self, field, value, adventure):
         PUBLIC_ADVENTURES_INDEXES.delete({"field_value": f"{field}_{value}",
                                           "date_adventure_id": f"{adventure['date']}_{adventure['id']}"})
 
@@ -660,8 +662,13 @@ class Database:
     def get_public_adventures(self):
         return ADVENTURES.get_many({"public": 1})
 
-    def delete_adventure(self, adventure_id):
-        ADVENTURES.delete({"id": adventure_id})
+    def delete_adventure(self, adventure):
+        ADVENTURES.delete({"id": adventure.get("id")})
+        lang = adventure.get("language", "")
+        for level in adventure.get("levels", []):
+            self.remove_public_adventure_filters("lang#level", f"{lang}#{level}")
+            self.remove_public_adventure_indexes("level", level, adventure)
+        self.remove_public_adventure_indexes("lang", adventure.get("language"), adventure)
 
     def store_adventure(self, adventure):
         """Store an adventure."""
