@@ -30,7 +30,9 @@ PREPROCESS_RULES = {
 
 
 class GrammarRule:
-    """"""
+    """Used to store information about parsed grammar rules when merging grammars.
+    Valid examples of rules: name.-100: _DEFINITION, name<processor>, and name.1<processor argument>."""
+
     def __init__(self, line, name, definition, processor=None, processor_arg=None):
         self.line = line
         self.name_with_priority = name
@@ -177,4 +179,3 @@ def strip_priority_suffix(rule):
     if re.match(r"\w+\.\-?\d+", rule):
         return rule.split('.')[0]
     return rule
-

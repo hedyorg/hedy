@@ -3,31 +3,40 @@
 // The merger will find the appropriate function for this annotation and modify it accordingly.
 // The preprocessor can also accept a parameter via the syntax <rule_name argument>.
 
-command: += if_pressed (if_pressed_elifs)* if_pressed_elses? | if_pressed_no_colon | if_pressed (if_pressed_else_no_colon | if_pressed_elses_no_colon)+ | ifs (elifs)* elses? | ifs_no_colon | ifs (elifs_no_colon | elses_no_colon)+ | for_list_no_colon | for_loop_no_colon | while_loop_no_colon | define_no_colon -= ifs elses?
+command: += (if_pressed | if_pressed_no_colon) (if_pressed_elifs | if_pressed_elifs_no_colon)* (if_pressed_elses | if_pressed_elses_no_colon)? | (ifs | ifs_no_colon) (elifs | elifs_no_colon)* (elses | elses_no_colon)? | for_list_no_colon | for_loop_no_colon | while_loop_no_colon | define_no_colon -= ifs elses?
 
 if_pressed<needs_colon>
-if_pressed_else<needs_colon>
-if_pressed_elses<needs_colon>
-if_pressed_elifs: _EOL _ELIF (LETTER_OR_NUMERAL | NAME) _IS _PRESSED _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
-
 if_pressed_no_colon<old_rule_to_error if_pressed>
-if_pressed_else_no_colon<old_rule_to_error if_pressed_else>
+
+if_pressed_else<needs_colon>
+
+if_pressed_elses<needs_colon>
 if_pressed_elses_no_colon<old_rule_to_error if_pressed_elses>
 
-ifs<needs_colon>
-elses<needs_colon>
-elifs: _EOL _ELIF _conditions _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+if_pressed_elifs: _EOL _ELIF (LETTER_OR_NUMERAL | NAME) _IS _PRESSED _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+if_pressed_elifs_no_colon: _EOL _ELIF (LETTER_OR_NUMERAL | NAME) _IS _PRESSED _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 
+
+
+ifs<needs_colon>
 ifs_no_colon<old_rule_to_error ifs>
+
+elses<needs_colon>
 elses_no_colon<old_rule_to_error elses>
+
+elifs: _EOL _ELIF _conditions _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 elifs_no_colon: _EOL _ELIF _conditions _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 
-for_list<needs_colon>
-for_loop<needs_colon>
-while_loop<needs_colon>
-define<needs_colon>
 
+
+for_list<needs_colon>
 for_list_no_colon<old_rule_to_error for_list>
+
+for_loop<needs_colon>
 for_loop_no_colon<old_rule_to_error for_loop>
+
+while_loop<needs_colon>
 while_loop_no_colon<old_rule_to_error while_loop>
+
+define<needs_colon>
 define_no_colon<old_rule_to_error define>

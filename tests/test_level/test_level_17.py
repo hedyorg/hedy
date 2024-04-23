@@ -172,7 +172,8 @@ class TestsLevel17(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.MissingColonException
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('for in range', 1)
         )
 
     def test_for_list_without_colon_gives_error(self):
@@ -183,7 +184,8 @@ class TestsLevel17(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            exception=exceptions.MissingColonException
+            exception=exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('for in', 2)
         )
 
     def test_if__else(self):
@@ -255,7 +257,8 @@ class TestsLevel17(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.MissingColonException
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('while', 2)
         )
 
     def test_allow_space_before_colon(self):
@@ -523,10 +526,24 @@ class TestsLevel17(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.MissingColonException
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('if', 1)
         )
 
-    def test_pressed_else_no_colon_gives_error(self):
+    def test_pressed_elif_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if x is pressed:
+            a = 'correct'
+        elif m is pressed
+            a = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('elif', 3)
+        )
+
+    def test_pressed_if_else_no_colon_gives_error(self):
         code = textwrap.dedent("""\
         if x is pressed:
             a = 'correct'
@@ -535,7 +552,23 @@ class TestsLevel17(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.MissingColonException
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('else', 3)
+        )
+
+    def test_pressed_if_elif_else_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if x is pressed:
+            a = 'correct'
+        elif m is pressed:
+            a = 'correct'
+        else
+            a = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('else', 5)
         )
 
     def test_if_no_colon_gives_error(self):
@@ -545,7 +578,8 @@ class TestsLevel17(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.MissingColonException
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('if', 1)
         )
 
     def test_elif_no_colon_gives_error(self):
@@ -557,7 +591,8 @@ class TestsLevel17(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.MissingColonException
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('elif', 3)
         )
 
     def test_else_no_colon_gives_error(self):
@@ -569,7 +604,23 @@ class TestsLevel17(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.MissingColonException
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('else', 3)
+        )
+
+    def test_if_elif_else_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if 'a' is 'a':
+            b = 'colon!'
+        elif 'a' is 'b':
+            b = 'colon!'
+        else
+            b = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('else', 5)
         )
 
     def test_if_button_is_pressed_print(self):
@@ -643,7 +694,8 @@ class TestsLevel17(HedyTester):
 
         self.single_level_tester(
             code=code,
-            exception=exceptions.MissingColonException
+            exception=exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('define', 1)
         )
 
     def test_source_map(self):
@@ -670,3 +722,8 @@ class TestsLevel17(HedyTester):
 
         self.single_level_tester(code, expected=excepted_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
+
+def missing_colon_check(command, line_number):
+    return lambda c: (c.exception.arguments['line_number'] == line_number and
+                      c.exception.arguments['command'] == command)

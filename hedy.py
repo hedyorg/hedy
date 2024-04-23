@@ -1267,17 +1267,24 @@ class IsValid(Filter):
     def if_pressed_no_colon(self, meta, args):
         raise exceptions.MissingColonException(command=Command.if_, line_number=meta.line)
 
-    def if_pressed_else_no_colon(self, meta, args):
-        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line)
+    def if_pressed_elifs_no_colon(self, meta, args):
+        # if_pressed_elifs starts with _EOL, so we need to add +1 to its line
+        raise exceptions.MissingColonException(command=Command.elif_, line_number=meta.line+1)
 
     def if_pressed_elses_no_colon(self, meta, args):
-        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line)
+        # if_pressed_elses starts with _EOL, so we need to add +1 to its line
+        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line+1)
 
     def ifs_no_colon(self, meta, args):
         raise exceptions.MissingColonException(command=Command.if_, line_number=meta.line)
 
+    def elifs_no_colon(self, meta, args):
+        # elifs starts with _EOL, so we need to add +1 to its line
+        raise exceptions.MissingColonException(command=Command.elif_, line_number=meta.line+1)
+
     def elses_no_colon(self, meta, args):
-        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line)
+        # elses starts with _EOL, so we need to add +1 to its line
+        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line+1)
 
     def for_list_no_colon(self, meta, args):
         raise exceptions.MissingColonException(command=Command.for_list, line_number=meta.line)
@@ -1290,9 +1297,6 @@ class IsValid(Filter):
 
     def define_no_colon(self, meta, args):
         raise exceptions.MissingColonException(command=Command.define, line_number=meta.line)
-
-    def elifs_no_colon(self, meta, args):
-        raise exceptions.MissingColonException(command=Command.elif_, line_number=meta.line)
 
     # other rules are inherited from Filter
 
