@@ -2257,7 +2257,7 @@ def change_language():
     # Remove 'keyword_lang' from session, it will automatically be renegotiated from 'lang'
     # on the next page load.
     session.pop('keyword_lang')
-    return jsonify({'succes': 200})
+    return make_response('', 204)
 
 
 @app.route('/slides', methods=['GET'], defaults={'level': '1'})
@@ -2339,7 +2339,7 @@ def store_parsons_order():
     }
 
     DATABASE.store_parsons(attempt)
-    return jsonify({}), 200
+    return make_response('', 204)
 
 
 @app.template_global()
