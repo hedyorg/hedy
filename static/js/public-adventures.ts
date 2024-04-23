@@ -65,7 +65,7 @@ function prepareDropdowns() {
             }
             dropdown.setAttribute("data-value", nextValue)
             option.classList.toggle('selected');
-
+            dropdown.dispatchEvent(new Event('change', { bubbles: true }))
             updateLabelText(dropdown);
         });
     });
