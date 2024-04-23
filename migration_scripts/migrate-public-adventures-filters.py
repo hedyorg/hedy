@@ -1,8 +1,8 @@
+from website.database import PUBLIC_ADVENTURES_FILTERS, ADVENTURES
 import sys
 # setting path
 sys.path.append('../hedy')
 
-from website.database import PUBLIC_ADVENTURES_FILTERS, ADVENTURES
 
 def create_filters_table(record):
     lang_value = record.get("language", "en")
