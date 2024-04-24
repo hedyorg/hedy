@@ -965,7 +965,7 @@ class TestAuth(AuthHelper):
 
         # WHEN destroying the public profile
         # THEN receive an OK response from the server
-        self.post_data('auth/destroy_public', public_profile, expect_http_code=200)
+        self.post_data('auth/destroy_public', public_profile, expect_http_code=204)
 
 
 class TestProgram(AuthHelper):
