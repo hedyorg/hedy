@@ -1,0 +1,108 @@
+name: Resolve Weblate conflicts
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  resolve_weblate:
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
+      contents: write
+      # For commenting on a PR
+      pull-requests: write
+
+    steps:
+    - name: Check for presence of GitHub Token
+      id: secret
+      run: |
+        if [ ! -z "${{ secrets.HEDY_BOT_TOKEN }}" ]; then
+          echo "We have a token!"
+          echo "secret=${{ secrets.HEDY_BOT_TOKEN }}" >> $GITHUB_OUTPUT
+        else
+          echo "We do not have a token"
+          echo "secret=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_OUTPUT
+        fi
+
+    #----------------------------------------------------------------------
+    #  Checkout source
+    #
+    # We need to pass the token here -- the commit action below will not overwrite the token to push.
+    # This is necessary to bypass branch protection (which will disallow non-reviewed pushes otherwise)
+    #
+    # Make a distinction between Pull Request checkout and Push checkout. Push checkout
+    # works mostly automatically, but for PRs we must be very explicit to get the right
+    # branch and also support forks.
+    - uses: actions/checkout@v4
+      name: Checkout branch
+      with:
+        fetch-depth: 0
+        token: ${{ steps.secret.outputs.secret }}
+    - name: Configure Git identity
+      run: |
+        git config user.name github-actions[bot]
+        git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
+    #----------------------------------------------------------------------
+    #  Actual build
+
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.12
+    - name: Install Python dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip3 install -r requirements.txt
+
+    #----------------------------------------------------------------------
+    #  Set up cache so that running snippet tests is somewhat cheap
+    - name: Calculate hedy cache key
+      run: "echo value=$(ls -1 hedy.py grammars/* | sort | xargs tail -n 99999999 | sha256sum | cut -f 1 -d ' ') >> $GITHUB_OUTPUT"
+      id: hedy_cache_key
+    - name: Cache hedy test runs
+      uses: actions/cache@v3
+      with:
+        path: .test-cache
+        key: "hedy-test-cache-${{ steps.hedy_cache_key.outputs.value }}"
+
+    - name: Run weblate merge script
+      run: |
+        bash tools/merge-weblate-resolving-conflicts.sh
+
+    # The create-pull-request action wants to commit the changes, and wants to
+    # have them be on the main branch. Hence, move the current working tree to
+    # main (detach HEAD, move working tree, then reattach)
+    - name: Switch back to main
+      run: |
+        git checkout --detach
+        git reset --soft main
+        git checkout main
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v6
+      with:
+        token: ${{ steps.secret.outputs.secret }}
+        commit-message: 'Changes from Weblate repository'
+        title: 'Translations from Hosted Weblate'
+        body: >
+          This PR merges pending commits from the Weblate repository that are conflicting
+          with changes on `main`, while resolving conflicts in favor of the Weblate side.
+        labels: translations
+        branch: automatic/weblate-conflicts
+        delete-branch: true
+        base: main
+
+    # After we've created the PR, lock weblate and tell it to forget pending
+    # changes. The changes are now in the PR which will be merged in due time, and
+    # Weblate will be unlocked when the PR is merged.
+    - name: Prevent updates and merge conflicts until merged
+      run: |
+        wlc lock
+        # On our repo, 'wlc reset' consistently times out the TCP connection after waiting
+        # for 5 minutes. The actual reset does seem to work, so we just don't wait for the
+        # command to finish, otherwise all our workflow executions show errors.
+        wlc reset &
+        sleep 10

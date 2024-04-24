@@ -6,12 +6,13 @@ from flask_babel import gettext
 from config import config
 from safe_format import safe_format
 from hedy_content import ALL_LANGUAGES, COUNTRIES
-from utils import extract_bcrypt_rounds, is_heroku, is_testing_request, timems, times
+from utils import extract_bcrypt_rounds, is_heroku, is_testing_request, timems, times, remove_class_preview
 from website.auth import (
     MAILCHIMP_API_URL,
     RESET_LENGTH,
     SESSION_LENGTH,
     TOKEN_COOKIE_NAME,
+    JUST_LOGGED_OUT,
     check_password,
     create_recover_link,
     create_verify_link,
@@ -245,6 +246,8 @@ class AuthModule(WebsiteModule):
         forget_current_user()
         if request.cookies.get(TOKEN_COOKIE_NAME):
             self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
+        session[JUST_LOGGED_OUT] = True
+        remove_class_preview()
         return "", 200
 
     @ route("/destroy", methods=["POST"])
@@ -253,6 +256,7 @@ class AuthModule(WebsiteModule):
         forget_current_user()
         self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         self.db.forget_user(user["username"])
+        session[JUST_LOGGED_OUT] = True
         return "", 200
 
     @ route("/destroy_public", methods=["POST"])
@@ -385,7 +389,7 @@ class AuthModule(WebsiteModule):
 
         token = self.db.get_token(body["token"])
         if not token or body["token"] != token.get("id") or body["username"] != token.get("username"):
-            return gettext("token_invalid"), 403
+            return gettext("token_invalid"), 401
 
         hashed = password_hash(body["password"], make_salt())
         self.db.update_user(body["username"], {"password": hashed})
@@ -433,6 +437,7 @@ class AuthModule(WebsiteModule):
             "teacher_request": True if account.get("is_teacher") else None,
             "verification_pending": hashed_token,
             "last_login": timems(),
+            "pair_with_teacher": 1 if account.get("pair_with_teacher") else 0,
         }
 
         for field in ["country", "birth_year", "gender", "language", "heard_about", "prog_experience",

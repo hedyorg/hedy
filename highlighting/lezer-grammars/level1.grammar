@@ -1,8 +1,9 @@
 @top Program { eol* (Command eol+)* Command? }
 Command {
-    Print | Ask | Echo | Turtle | ErrorInvalid
+    Print | Ask | Echo | Play | Turtle | ErrorInvalid
 }
 Print { print+ Text+ }
+Play { play+ Text+ }
 Ask { ask+ Text+ }
 Echo { echo+ Text* }
 
@@ -19,6 +20,7 @@ ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
     forward[@name="forward"],
     turn[@name="turn"],
     echo[@name="echo"],
+    play[@name="play"],
     ask[@name="ask"],
     color[@name="color"]
 }

@@ -1,48 +1,108 @@
+"""Data layer for Hedy.
+
+This file defines all DynamoDB tables that make up the Hedy data model,
+as well as the class 'Database' which can be used to access those tables.
+
+THE DATABASE CLASS
+-------------------
+
+The Database class should implement logical operations that make sense
+for the data model, spanning multiple tables if necessary. As much as you
+can, hide the details of how data is stored in and queried from tables so
+that the front-end doesn't have to think about those details.
+
+TYPE ANNOTATIONS
+----------------
+
+The tables below have type annotations. Type annotations will be used
+to validate records that are stored INTO the database; they are not
+used to validate records that are retrieved from the database.
+
+!!! You cannot assume that records retrieved from a table will always have
+    the fields of the types that are listed in the table definition!
+
+The record could be older than the validation that was added. Always
+program defensively!
+"""
+
 import functools
 import operator
 import itertools
 from datetime import date, timedelta
+import sys
+from os import path
 
-from utils import timems, times
+from utils import timems, times, is_debug_mode
 
 from . import dynamo, auth
 from . import querylog
 
-storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage("dev_database.json")
+from .dynamo import Optional, ListOf, SetOf, RecordOf
+
+is_offline = getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
+if is_offline:
+    # Offline mode. Store data 1 directory upwards from `_internal`
+    storage = dynamo.MemoryStorage(path.join(sys._MEIPASS, "..", "database.json"))
+else:
+    # Production or dev: use environment variables or dev storage
+    storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage("dev_database.json")
+
+
+def only_in_dev(x):
+    """Return the argument only in debug mode. In production or offline mode, return None.
+
+    This is intended to be used with validation expressions, so that when testing
+    locally we do validation, but production data that happens to work but doesn't
+    validate doesn't throw exceptions.
+    """
+    return x if is_debug_mode() else None
+
 
 USERS = dynamo.Table(storage, 'users', 'username',
-                     types={
+                     types=only_in_dev({
                          'username': str,
                          'email': str,
                          'epoch': int,
                          'created': int,
-                     },
+                         'classes': Optional(SetOf(str)),
+                         'keyword_language': Optional(str),
+                         'password': str,
+                         'teacher': Optional(str),
+                         'program_count': Optional(int),
+                         'language': Optional(str),
+                         'keyword_language': Optional(str),
+                     }),
                      indexes=[
                          dynamo.Index('email'),
                          dynamo.Index('epoch', sort_key='created')
                      ]
                      )
 TOKENS = dynamo.Table(storage, 'tokens', 'id',
-                      types={
+                      types=only_in_dev({
                           'id': str,
                           'username': str,
-                      },
+                          'ttl': int,
+                      }),
                       indexes=[
-                          dynamo.Index('id'),
                           dynamo.Index('username'),
                       ]
                       )
 PROGRAMS = dynamo.Table(storage, "programs", "id",
-                        types={
+                        types=only_in_dev({
                             'id': str,
                             'username': str,
                             'date': int,
                             'hedy_choice': int,
-                            'public': int,
+                            'public': Optional(int),
                             'lang': str,
                             'level': int,
+                            'code': str,
                             'adventure_name': str,
-                        },
+                            'name': str,
+                            'error': Optional(bool),
+                            # TODO: Should this be optional? Feels like it should be required.
+                            'username_level': Optional(str),
+                        }),
                         indexes=[
                             dynamo.Index('username', sort_key='date', index_name='username-index'),
                             dynamo.Index('hedy_choice', sort_key='date', index_name='hedy_choice-index'),
@@ -57,11 +117,18 @@ PROGRAMS = dynamo.Table(storage, "programs", "id",
                         ]
                         )
 CLASSES = dynamo.Table(storage, "classes", "id",
-                       types={
+                       types=only_in_dev({
                            'id': str,
                            'teacher': str,
                            'link': str,
-                       },
+                           'date': int,
+                           'name': str,
+                           'second_teachers': Optional(ListOf(RecordOf({
+                             'role': str,
+                             'username': str,
+                           }))),
+                           'students': Optional(SetOf(str)),
+                       }),
                        indexes=[
                            dynamo.Index('teacher'),
                            dynamo.Index('link'),
@@ -75,26 +142,26 @@ CLASSES = dynamo.Table(storage, "classes", "id",
 # - date (int): timestamp of last update
 # - level (int | str): level number, sometimes as an int, sometimes as a str
 # - name (str): adventure name
-# - public (bool): whether it can be shared
+# - public (int): 1 or 0 whether it can be shared
 # - tags_id (str): id of tags that describe this adventure.
 ADVENTURES = dynamo.Table(storage, "adventures", "id",
-                          types={
+                          types=only_in_dev({
                               'id': str,
                               'creator': str,
                               'public': bool,
-                          },
+                          }),
                           indexes=[
                               dynamo.Index("creator"),
                               dynamo.Index("public"),
-                          ]
-                          )
+                              dynamo.Index("name", sort_key="creator", index_name="name-creator-index")
+                          ])
 INVITATIONS = dynamo.Table(
     storage, "invitations", partition_key="username#class_id",
-    types={
+    types=only_in_dev({
         'username#class_id': str,
         'username': str,
         'class_id': str,
-    },
+    }),
     indexes=[
         dynamo.Index("username"),
         dynamo.Index("class_id"),
@@ -109,11 +176,11 @@ INVITATIONS = dynamo.Table(
     - popularity (int): # of adventures it's been tagged in.
 """
 TAGS = dynamo.Table(storage, "tags", "id",
-                    types={
+                    types=only_in_dev({
                         'id': str,
                         'name': str,
                         'popularity': int,
-                    },
+                    }),
                     indexes=[
                         dynamo.Index("name", sort_key="popularity")
                     ]
@@ -125,10 +192,12 @@ TAGS = dynamo.Table(storage, "tags", "id",
 # - skip (str): if the survey should never be shown or today date to be reminded later
 
 SURVEYS = dynamo.Table(storage, "surveys", "id",
-                       types={
+                       types=only_in_dev({
                            'id': str,
-                       },
+                       }),
                        )
+
+FEEDBACK = dynamo.Table(storage, "teacher_feedback", "id")
 
 # Class customizations
 #
@@ -156,22 +225,22 @@ SURVEYS = dynamo.Table(storage, "surveys", "id",
 #      available to this class. This list is deprecated, all adventures a teacher created
 #      are now automatically available to all of their classes.
 CUSTOMIZATIONS = dynamo.Table(storage, "class_customizations", partition_key="id",
-                              types={'id': str},
+                              types=only_in_dev({'id': str}),
                               )
 ACHIEVEMENTS = dynamo.Table(storage, "achievements", partition_key="username",
-                            types={'username': str},
+                            types=only_in_dev({'username': str}),
                             )
 PUBLIC_PROFILES = dynamo.Table(storage, "public_profiles", partition_key="username",
-                               types={'username': str},
+                               types=only_in_dev({'username': str}),
                                )
 PARSONS = dynamo.Table(storage, "parsons", "id",
-                       types={'id': str},
+                       types=only_in_dev({'id': str}),
                        )
 STUDENT_ADVENTURES = dynamo.Table(storage, "student_adventures", "id",
-                                  types={'id': str},
+                                  types=only_in_dev({'id': str}),
                                   )
 CLASS_ERRORS = dynamo.Table(storage, "class_errors", "id",
-                            types={'id': str},
+                            types=only_in_dev({'id': str}),
                             )
 # We use the epoch field to make an index on the users table, sorted by a different
 # sort key. In our case, we want to sort by 'created', so that we can make an ordered
@@ -205,10 +274,10 @@ CURRENT_USER_EPOCH = 1
 # by a user. 'level' is padded to 4 characters, then attemptId is added.
 #
 QUIZ_ANSWERS = dynamo.Table(storage, "quizAnswers", partition_key="user", sort_key="levelAttempt",
-                            types={
+                            types=only_in_dev({
                                 'user': str,
                                 'levelAttempt': str,
-                            }
+                            })
                             )
 
 # Holds information about program runs: success/failure and produced exceptions. Entries are created per user per level
@@ -223,21 +292,21 @@ QUIZ_ANSWERS = dynamo.Table(storage, "quizAnswers", partition_key="user", sort_k
 #
 PROGRAM_STATS = dynamo.Table(
     storage, "program-stats", partition_key="id#level", sort_key="week",
-    types={
+    types=only_in_dev({
         'id#level': str,
         'id': str,
         'week': str,
-    },
+    }),
     indexes=[dynamo.Index("id", "week")]
 )
 
 QUIZ_STATS = dynamo.Table(
     storage, "quiz-stats", partition_key="id#level", sort_key="week",
-    types={
+    types=only_in_dev({
         'id#level': str,
         'id': str,
         'week': str,
-    },
+    }),
     indexes=[dynamo.Index("id", "week")]
 )
 
@@ -374,12 +443,12 @@ class Database:
         """
         return PROGRAMS.update({"id": id}, {"public": 1 if public else 0})
 
-    def submit_program_by_id(self, id):
+    def submit_program_by_id(self, id, submit):
         """Switch a program to submitted.
 
         Return the updated program state.
         """
-        return PROGRAMS.update({"id": id}, {"submitted": True, "date": timems()})
+        return PROGRAMS.update({"id": id}, {"submitted": submit, "date": timems()})
 
     def delete_program_by_id(self, id):
         """Delete a program by id."""
@@ -690,6 +759,9 @@ class Database:
         keys = {id: {"id": id} for id in adventure_ids}
         return ADVENTURES.batch_get(keys) if keys else {}
 
+    def get_public_adventures(self):
+        return ADVENTURES.get_many({"public": 1})
+
     def delete_adventure(self, adventure_id):
         ADVENTURES.delete({"id": adventure_id})
 
@@ -753,7 +825,7 @@ class Database:
         return ADVENTURES.scan()
 
     def public_adventures(self):
-        return ADVENTURES.get_many({"public": True})
+        return ADVENTURES.get_many({"public": 1})
 
     def get_student_classes_ids(self, username):
         ids = USERS.get({"username": username}).get("classes")
@@ -779,6 +851,10 @@ class Database:
     def update_class_data(self, id, class_data):
         """Updates a class."""
         CLASSES.update({"id": id}, class_data)
+
+    def store_feedback(self, feedback):
+        """Store a feedback message in the database"""
+        FEEDBACK.create(feedback)
 
     def store_survey(self, survey):
         SURVEYS.create(survey)
@@ -867,16 +943,23 @@ class Database:
         customizations = CUSTOMIZATIONS.get({"id": class_id})
         return customizations
 
-    def get_student_class_customizations(self, user):
+    def get_student_class_customizations(self, user, class_to_preview=None):
         """Return customizations for the very first class this user is part of.
 
         If the user is part of multiple classes, they will only get the customizations
         of the first class.
+
+        Class_to_preview is a mode for teachers to preview a custom class that they own.
         """
         student_classes = self.get_student_classes(user)
         if student_classes:
             class_customizations = self.get_class_customizations(student_classes[0]["id"])
             return class_customizations or {}
+        elif class_to_preview:
+            for Class in self.get_teacher_classes(user):
+                if class_to_preview == Class["id"]:
+                    class_customizations = self.get_class_customizations(class_to_preview)
+                    return class_customizations or {}
         return {}
 
     def progress_by_username(self, username):
@@ -963,11 +1046,11 @@ class Database:
         if data:
             PUBLIC_PROFILES.update({"username": username}, {"country": country})
 
-    def set_favourite_program(self, username, program_id):
+    def set_favourite_program(self, username, program_id, set_favourite):
         # We can only set a favourite program is there is already a public profile
         data = PUBLIC_PROFILES.get({"username": username})
         if data:
-            data["favourite_program"] = program_id
+            data["favourite_program"] = program_id if set_favourite else ''
             self.update_public_profile(username, data)
             return True
         return False

@@ -2,11 +2,12 @@ import json
 import hedy
 from tests.Tester import HedyTester, Snippet
 from parameterized import parameterized
-from app import translate_error, app
+from app import app
+from hedy_error import get_error_text
 from flask_babel import force_locale
 import exceptions
 
-most_recent_file_name = 'tests/test_public_programs/filtered-programs-2023-06-19.json'
+most_recent_file_name = 'tests/test_public_programs/filtered-programs-2023-12-12.json'
 public_snippets = []
 
 # this file tests all public programs in the database
@@ -42,6 +43,7 @@ class TestsPublicPrograms(HedyTester):
                     code=snippet.code,
                     level=int(snippet.level),
                     lang=snippet.language,
+                    unused_allowed=True,
                     translate=False,
                     skip_faulty=False
                 )
@@ -59,6 +61,7 @@ class TestsPublicPrograms(HedyTester):
             except OSError:
                 return None  # programs with ask cannot be tested with output :(
             except exceptions.HedyException as E:
+                # TODO: Can we use 'self.output_test_error' here?
                 try:
                     location = E.error_location
                 except BaseException:
@@ -67,7 +70,7 @@ class TestsPublicPrograms(HedyTester):
                 # Must run this in the context of the Flask app, because FlaskBabel requires that.
                 with app.app_context():
                     with force_locale('en'):
-                        error_message = translate_error(E.error_code, E.arguments, 'en')
+                        error_message = get_error_text(E, 'en')
                         error_message = error_message.replace('<span class="command-highlighted">', '`')
                         error_message = error_message.replace('</span>', '`')
                         print(f'\n----\n{snippet.code}\n----')
@@ -75,13 +78,30 @@ class TestsPublicPrograms(HedyTester):
                         print(f'{error_message} at line {location}')
                         raise E
 
-        # test if we are not validating previously incorrect programs
-        if snippet is not None and len(snippet.code) > 0 and snippet.error:
-            self.single_level_tester(
-                code=snippet.code,
-                level=int(snippet.level),
-                lang=snippet.language,
-                translate=False,
-                exception=exceptions.HedyException,
-                skip_faulty=False
-            )
+        # # test if we are not validating previously incorrect programs
+        # if snippet is not None and len(snippet.code) > 0 and snippet.error:
+        #     self.single_level_tester(
+        #         code=snippet.code,
+        #         level=int(snippet.level),
+        #         lang=snippet.language,
+        #         translate=False,
+        #         exception=exceptions.HedyException,
+        #         skip_faulty=False
+        #     )
+
+        # Use this to test if we are not validating previously incorrect programs
+        # if snippet is not None and len(snippet.code) > 0 and snippet.error:
+        #     try:
+        #         self.single_level_tester(
+        #             code=snippet.code,
+        #             level=int(snippet.level),
+        #             lang=snippet.language,
+        #             translate=False,
+        #             unused_allowed=True,
+        #             exception=exceptions.HedyException,
+        #             skip_faulty=False
+        #         )
+        #     except AssertionError as E:
+        #         print(f'\n----\n{snippet.code}\n----')
+        #         print(f'in language {snippet.language} from level {snippet.level} gives NO error.')
+        #         raise E

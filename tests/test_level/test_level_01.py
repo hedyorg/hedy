@@ -286,6 +286,61 @@ class TestsLevel1(HedyTester):
             translate=False  # we are trying a Dutch keyword in en, can't be translated
         )
 
+    def test_play_no_args(self):
+        code = "play "
+        expected = self.play_transpiled('C4')
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            expected=expected,
+            max_level=2
+        )
+
+    def test_play(self):
+        code = "play A"
+        expected = self.play_transpiled('A')
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            expected=expected
+        )
+
+    def test_print_microbit(self):
+        code = "print a"
+        expected = textwrap.dedent(f"""\
+                display.scroll('a')""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            expected=expected,
+            max_level=3,
+            microbit=True
+        )
+
+    def test_play_lowercase(self):
+        code = "play a"
+        expected = self.play_transpiled('A')
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            expected=expected
+        )
+
+    def test_play_int(self):
+        code = "play 34"
+        expected = self.play_transpiled(34)
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            expected=expected
+        )
+
     def test_mixes_languages_nl_en(self):
         code = textwrap.dedent("""\
         vraag Heb je er zin in?
@@ -478,6 +533,18 @@ class TestsLevel1(HedyTester):
             lang='nl'
         )
 
+    def test_turn_ar(self):
+        # doesn't translate, I don't know why!!
+        code = "استدر يسار"
+        expected = "t.left(90)"
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            lang='ar'
+        )
+
     def test_turn_with_text_gives_error(self):
         code = textwrap.dedent("""\
         turn koekoek
@@ -625,6 +692,29 @@ class TestsLevel1(HedyTester):
             skipped_mappings=skipped_mappings,
             max_level=1)
 
+    def test_lines_with_spaces_english_gives_invalid(self):
+        code = textwrap.dedent("""\
+         print Hallo welkom bij Hedy!
+            print Hallo welkom bij Hedy!""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidSpaceException,
+            skip_faulty=False,
+            max_level=3)
+
+    def test_lines_with_spaces_french_gives_invalid(self):
+        code = textwrap.dedent("""\
+         affiche Bonjour Hedy!
+            affiche Bonjour Hedy!""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidSpaceException,
+            skip_faulty=False,
+            lang='fr',
+            max_level=3)
+
     def test_lines_with_spaces_gives_invalid(self):
         code = " print Hallo welkom bij Hedy!\n print Hallo welkom bij Hedy!"
         expected = "pass\npass"
@@ -691,12 +781,14 @@ class TestsLevel1(HedyTester):
 
     def test_lonely_echo_gives_LonelyEcho(self):
         code = "echo wat dan?"
-        self.single_level_tester(code, exception=hedy.exceptions.LonelyEchoException)
+        self.single_level_tester(
+            code,
+            exception=hedy.exceptions.LonelyEchoException)
 
     def test_echo_before_ask_gives_lonely_echo(self):
         code = textwrap.dedent("""\
         echo what can't we do?
-        ask time travel """)
+        ask time travel""")
         self.single_level_tester(code, exception=hedy.exceptions.LonelyEchoException)
 
     def test_pint_after_empty_line_gives_error_line_3(self):
@@ -755,6 +847,7 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             skipped_mappings=skipped_mappings,
+            translate=False,
             extra_check_function=lambda c: c.arguments['invalid_command'] in ['aks', 'prind'],
             max_level=5,
         )
@@ -771,16 +864,16 @@ class TestsLevel1(HedyTester):
         {HedyTester.indent(
             HedyTester.forward_transpiled(50, self.level),
             8, True)
-        }
+         }
         answer = input('Wat is je lievelingskleur')
         print('je lievelingskleur is '+answer)""")
 
         expected_source_map = {
             '1/1-1/29': '1/1-1/32',
-            '2/1-2/11': '2/1-8/16',
-            '3/1-3/30': '9/1-9/44',
-            '4/1-4/27': '10/1-10/39',
-            '1/1-4/28': '1/1-10/39'
+            '2/1-2/11': '2/1-4/16',
+            '3/1-3/30': '5/1-5/44',
+            '4/1-4/27': '6/1-6/39',
+            '1/1-4/28': '1/1-6/39'
         }
 
         self.single_level_tester(code, expected=expected_code)

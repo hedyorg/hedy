@@ -184,7 +184,8 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(
             max_level=3,
             code=code,
-            expected=expected
+            expected=expected,
+            unused_allowed=True
         )
 
     #
@@ -192,33 +193,33 @@ class TestsLevel2(HedyTester):
     #
     def test_ask(self):
         code = "kleur is ask wat is je lievelingskleur?"
-        expected = "kleur = input('wat is je lievelingskleur?')"
+        expected = "kleur = input(f'wat is je lievelingskleur?')"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=3)
+        self.multi_level_tester(code=code, expected=expected, max_level=3, unused_allowed=True)
 
     def test_ask_single_quoted_text(self):
         code = "name is ask 'Who's that'"
-        expected = """name = input('\\'Who\\'s that\\'')"""
+        expected = """name = input(f'\\'Who\\'s that\\'')"""
 
-        self.multi_level_tester(code=code, expected=expected, max_level=3)
+        self.multi_level_tester(code=code, expected=expected, max_level=3, unused_allowed=True)
 
     def test_ask_double_quoted_text(self):
         code = 'var is ask "Welcome to OceanView"'
-        expected = "var = input('\"Welcome to OceanView\"')"
+        expected = "var = input(f'\"Welcome to OceanView\"')"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=3)
+        self.multi_level_tester(code=code, expected=expected, max_level=3, unused_allowed=True)
 
     def test_ask_text_with_inner_single_quote(self):
         code = "var is ask Welcome to Hedy's game"
-        expected = """var = input('Welcome to Hedy\\'s game')"""
+        expected = """var = input(f'Welcome to Hedy\\'s game')"""
 
-        self.multi_level_tester(code=code, expected=expected, max_level=3)
+        self.multi_level_tester(code=code, expected=expected, max_level=3, unused_allowed=True)
 
     def test_ask_text_with_inner_double_quote(self):
         code = 'var is ask It says "Hedy"'
-        expected = """var = input('It says "Hedy"')"""
+        expected = """var = input(f'It says "Hedy"')"""
 
-        self.multi_level_tester(code=code, expected=expected, max_level=3)
+        self.multi_level_tester(code=code, expected=expected, max_level=3, unused_allowed=True)
 
     def test_ask_with_comma(self):
         code = textwrap.dedent("""\
@@ -226,24 +227,65 @@ class TestsLevel2(HedyTester):
         print dieren""")
 
         expected = textwrap.dedent("""\
-        dieren = input('hond, kat, kangoeroe')
+        dieren = input(f'hond, kat, kangoeroe')
         print(f'{dieren}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
-    def test_ask_es(self):
+    def test_is_ask_without_var_gives_error(self):
+        code = "is ask did you forget a var?"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=3,
+            exception=hedy.exceptions.MissingVariableException
+        )
+
+    def test_ask_with_var(self):
+        code = textwrap.dedent("""\
+            name is Hedy
+            v is ask are you name?""")
+
+        expected = textwrap.dedent("""\
+           name = 'Hedy'
+           v = input(f'are you {name}?')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=3, unused_allowed=True)
+
+    def test_ask_var_with_comma(self):
+        # test for issue 2549
+        code = textwrap.dedent("""\
+           name is Hedy
+           v is ask name, hello!""")
+
+        expected = textwrap.dedent("""\
+           name = 'Hedy'
+           v = input(f'{name}, hello!')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=3, unused_allowed=True)
+
+    def test_ask_using_defined_var_becomes_literal_string(self):
+        code = textwrap.dedent("""\
+            name is ask what is your name?""")
+
+        expected = textwrap.dedent("""\
+            name = input(f'what is your name?')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=3, unused_allowed=True)
+
+    def test_ask_using_defined_var_becomes_literal_string_es(self):
         code = "color is ask ask Cuál es tu color favorito?"
-        expected = "color = input('ask Cuál es tu color favorito?')"
+        expected = "color = input(f'ask Cuál es tu color favorito?')"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=3)
+        self.multi_level_tester(code=code, expected=expected, max_level=3, unused_allowed=True)
 
-    def test_ask_bengali_var(self):
+    def test_ask_using_defined_var_becomes_literal_string_bengali(self):
         code = textwrap.dedent("""\
         রং is ask আপনার প্রিয় রং কি?
         print রং is আপনার প্রিয""")
 
         expected = textwrap.dedent("""\
-        রং = input('আপনার প্রিয় রং কি?')
+        রং = input(f'আপনার প্রিয় রং কি?')
         print(f'{রং} is আপনার প্রিয')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
@@ -331,19 +373,11 @@ class TestsLevel2(HedyTester):
         الزاوية هو ٩٠
         استدر الزاوية
         تقدم ١٠٠""")
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         الزاوية = '٩٠'
-        __trtl = الزاوية
-        try:
-          __trtl = int(__trtl)
-        except ValueError:
-          raise Exception('catch_value_exception')
+        __trtl = int_with_error(الزاوية, {HedyTester.value_exception_transpiled()})
         t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
-        __trtl = 100
-        try:
-          __trtl = int(__trtl)
-        except ValueError:
-          raise Exception('catch_value_exception')
+        __trtl = int_with_error(100, {HedyTester.value_exception_transpiled()})
         t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
         time.sleep(0.1)""")
 
@@ -374,26 +408,28 @@ class TestsLevel2(HedyTester):
             max_level=11
         )
 
-    def test_access_before_assign_not_allowed(self):
+    def test_misspelled_command(self):
+        code = "prind skipping"
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidCommandException,
+            max_level=3,
+        )
+
+    def test_access_before_assign_converts_to_literal_string(self):
         code = textwrap.dedent("""\
         print the name program
-        prind skipping
         name is Hedy""")
 
         expected = textwrap.dedent("""\
-        pass
-        pass
+        print(f'the name program')
         name = 'Hedy'""")
-
-        skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 23), hedy.exceptions.AccessBeforeAssignException),
-            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
-        ]
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            skipped_mappings=skipped_mappings,
+            unused_allowed=True,
             max_level=3,
         )
 
@@ -556,7 +592,7 @@ class TestsLevel2(HedyTester):
             n is ask how long
             sleep n""")
         expected = HedyTester.dedent(
-            "n = input('how long')",
+            "n = input(f'how long')",
             HedyTester.sleep_command_transpiled("n"))
 
         self.multi_level_tester(max_level=3, code=code, expected=expected)
@@ -586,7 +622,7 @@ class TestsLevel2(HedyTester):
         pass""")
 
         skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 14), hedy.exceptions.InvalidSpaceException),
+            SkippedMapping(SourceRange(1, 1, 1, 14), hedy.exceptions.UnusedVariableException),
             SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
         ]
 
@@ -594,6 +630,7 @@ class TestsLevel2(HedyTester):
             code=code,
             expected=expected,
             skipped_mappings=skipped_mappings,
+            unused_allowed=True,
             max_level=5
         )
 
@@ -601,7 +638,7 @@ class TestsLevel2(HedyTester):
         code = "naam is Felienne"
         expected = "naam = 'Felienne'"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_assign_catalan_var_name(self):
         code = textwrap.dedent("""\
@@ -620,31 +657,37 @@ class TestsLevel2(HedyTester):
         code = "naam is 14"
         expected = "naam = '14'"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
+
+    def test_assign_unused(self):
+        code = textwrap.dedent("""\
+            x is 10""")
+
+        self.multi_level_tester(max_level=3, code=code, exception=hedy.exceptions.UnusedVariableException)
 
     def test_assign_single_quoted_text(self):
         code = "naam is 'Felienne'"
         expected = "naam = '\\'Felienne\\''"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_assign_double_quoted_string(self):
         code = 'naam is "Felienne"'
         expected = """naam = '"Felienne"'"""
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_assign_text_with_inner_single_quote(self):
         code = "var is Hedy's"
         expected = "var = 'Hedy\\'s'"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_assign_text_with_inner_double_quote(self):
         code = 'var is It says "Hedy"'
         expected = """var = 'It says "Hedy"'"""
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_assign_text_to_hungarian_var(self):
         code = textwrap.dedent("""\
@@ -662,13 +705,13 @@ class TestsLevel2(HedyTester):
         code = "নাম is হেডি"
         expected = f"{var} = 'হেডি'"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_assign_python_keyword(self):
         code = "for is Hedy"
         expected = "_for = 'Hedy'"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     #
     # markup tests
@@ -688,7 +731,7 @@ class TestsLevel2(HedyTester):
         kleur is ask wat is je lievelingskleur?
         print kleur!""")
         expected = textwrap.dedent("""\
-        kleur = input('wat is je lievelingskleur?')
+        kleur = input(f'wat is je lievelingskleur?')
         print(f'{kleur}!')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
@@ -708,7 +751,7 @@ class TestsLevel2(HedyTester):
             afstand is ask hoe ver dan?
             forward afstand""")
         expected = HedyTester.dedent(
-            "afstand = input('hoe ver dan?')",
+            "afstand = input(f'hoe ver dan?')",
             HedyTester.forward_transpiled('afstand', self.level))
 
         self.multi_level_tester(
@@ -726,7 +769,7 @@ class TestsLevel2(HedyTester):
 
         expected = HedyTester.dedent("""\
         print(f'Turtle race')
-        direction = input('Where to turn?')""",
+        direction = input(f'Where to turn?')""",
                                      HedyTester.turn_transpiled('direction', self.level))
 
         self.multi_level_tester(
@@ -765,7 +808,7 @@ class TestsLevel2(HedyTester):
         naam = 'Felienne'
         print(f'Hallo')""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=3)
+        self.multi_level_tester(code=code, expected=expected, max_level=3, unused_allowed=True)
 
     #
     # negative tests
@@ -819,4 +862,33 @@ class TestsLevel2(HedyTester):
             max_level=17,
             code=code,
             exception=hedy.exceptions.IncompleteCommandException
+        )
+
+# music tests
+
+    def test_play(self):
+        code = textwrap.dedent("""\
+            n is C4
+            play n""")
+
+        expected = HedyTester.dedent(
+            "n = 'C4'",
+            self.play_transpiled('n', quotes=False))
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            expected=expected,
+            max_level=11
+        )
+
+    def test_play_undefined(self):
+        code = textwrap.dedent("""\
+            play n""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            exception=hedy.exceptions.UndefinedVarException,
+            max_level=11
         )

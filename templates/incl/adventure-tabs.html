@@ -6,6 +6,7 @@
                 id="{{ id }}"
                 tabindex="{{ index }}"
                 data-tab="{{ tabname }}"
+                data-cy="{{ title if tab_class == 'teacher_tab' else tabname }}"
                 >
                 {{title}}
             </div>
@@ -19,7 +20,7 @@
                 {% elif adventure.is_command_adventure %}
                     {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'command_tab', loop.index ) }}
                 {% else %}
-                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, '', loop.index) }}                    
+                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, '', loop.index) }}
                 {% endif %}
             {% endfor %}
             <!-- Add the tab for the parsons problem (if it exists) -->
@@ -33,23 +34,26 @@
         </div>
       </div>
       {# PANES #}
-      <div id="adventures-tab" class="w-full overflow-auto bg-white mb-8 shadow-md">
+      <div id="adventures-tab" class="w-full overflow-auto bg-white mb-5 shadow-md">
         {% for adventure in adventures %}
             <div
                 data-tabtarget="{{adventure.short_name}}" class="
                 {% if adventure.short_name != initial_tab %}hidden{% endif %}
                 turn-pre-into-ace show-copy-button p-4 text-adventure-copy"
                 >
-              <div class="lg:flex lg:flex-row">
-                  <div class="{% if adventure.example_code %}lg:w-1/2 {% endif %}w-full p-2 ltr:mr-2 rtl:ml-2">
-                    <div class="max-w-prose">
-                      {{ adventure.text|commonmark }}
+              <div class="lg:flex lg:flex-row {% if adventure.is_teacher_adventure %}teacher-adv{% endif %}">
+                    <div class="w-full {% if adventure.example_code or adventure.is_teacher_adventure %}lg:w-1/2 {% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                        {{ adventure.text|commonmark }}
                     </div>
-                  </div>
                   {% if adventure.example_code %}
                       <div class="border"></div>
                       <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
                           {{ adventure.example_code|commonmark }}
+                      </div>
+                  {% endif %}
+                  {% if public_adventures_page %}
+                      <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
+                        {{ render_partial('htmx-adventure-card.html', user={"username": username}, adventure=adventure, level=level ) }}
                       </div>
                   {% endif %}
               </div>
@@ -71,7 +75,7 @@
           </div>
         {% endfor %}
         {% if parsons %}
-            <div data-tabtarget="parsons" class="hidden turn-pre-into-ace p-4">
+            <div data-tabtarget="parsons" class="hidden p-4">
                 <div>
                     {% include 'incl/parsons.html' %}
                 </div>

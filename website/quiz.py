@@ -146,6 +146,19 @@ class QuizModule(WebsiteModule):
                                next_question=next_question,
                                is_correct=is_correct)
 
+    @route("/previous_question/<question_nr>", methods=["POST"])
+    def previous_question(self, question_nr):
+        progress, _ = self.current_progress_and_question()
+        question = self.get_question(progress.level, int(question_nr))
+
+        return render_template('quiz/partial-question.html',
+                               level=progress.level,
+                               question_count=self.question_count(progress.level),
+                               correct_answers_so_far=progress.correct_answers_so_far,
+                               incorrect_answers_so_far=progress.incorrect_answers_so_far,
+                               progress=progress,
+                               question=question)
+
     @route("/next_question", methods=["POST"])
     def next_question(self):
         """Advance the progress object and redirect to the next question."""

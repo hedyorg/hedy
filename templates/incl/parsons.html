@@ -14,17 +14,6 @@
     {% endif %}
     <div id="parsons_exercise_container" class="pt-2">
         <div class="flex flex-row">
-            <div class="w-1/2 ltr:mr-2 rtl:ml-2">
-                <p id="parsons_explanation_text"></p>
-                <div class="flex flex-col mx-auto gap-2 items-center" id="parsons_code_lines">
-                    {% for i in range(1, 11) %}
-                        <div class="relative w-full p-2 border-4 border-black rounded-lg parsons_start_line_container cursor-grab" style="background-color: #272822;" id="parsons_start_line_container_{{ i }}">
-                            <div index="" draggable="true" id="start_parsons_div_{{ i }}" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
-                            <pre level="{{ level }}" id="start_parsons_{{ i }}" class="no-copy-button parsons text-sm m-0"></pre>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
             <div class="w-1/2 ltr:ml-2 rtl:mr-2">
                 <h2 class="text-center">{{_('what_should_my_code_do')}}</h2>
                 <p id="parsons_explanation_story" class="mx-4 whitespace-pre-wrap"></p>
@@ -33,4 +22,3 @@
         <div class="ltr:clear-right rtl:clear-left"></div>
     </div>
 </div>
-<!-- Todo TB: This is fine for now, but we should move this to app.ts in the near future (05-22) -->

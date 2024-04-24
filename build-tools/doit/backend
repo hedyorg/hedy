@@ -1,0 +1,5 @@
+#!/bin/bash
+# Run the doit backend script immediately
+scriptdir=$(cd $(dirname $0) && pwd)
+cd $scriptdir/../..
+exec doit run backend

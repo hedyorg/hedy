@@ -9,7 +9,7 @@ describe('Is able to type in the editor box', () => {
     it(`Language ${language} should run`, () => {
       cy.visit(`${Cypress.env('hedy_page')}?language=${language}#default`);
 
-      // click on textaread to get focus, then clear it
+      // click on text areas to get focus, then clear it
       codeMirrorContent().click();
       clearViaBackspace();
 
@@ -98,5 +98,5 @@ function clearViaBackspace() {
 }
 
 function codeMirrorContent() {
-  return cy.get('.cm-content');
+  return cy.get('#editor > .cm-editor > .cm-scroller > .cm-content');
 }

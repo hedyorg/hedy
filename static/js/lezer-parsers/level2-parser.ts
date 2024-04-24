@@ -3,20 +3,20 @@ import {LRParser} from "@lezer/lr"
 import {specializeKeyword, extendKeyword} from "./tokens"
 export const parser = LRParser.deserialize({
   version: 14,
-  states: "&fQYQPOOOOQO'#Cq'#CqQYQPOOOqQPO'#CtO!PQPO'#CpOOQO'#Cv'#CvO![QPO'#CjOOQO'#Cw'#CwO!dQPO'#ClOOQO'#Cx'#CxO!lQPO'#CmOOQO'#Cy'#CyO!tQPO'#CnOOQO'#Ck'#CkOOQO'#Cz'#CzO!|QPO'#CoOOQO'#Cf'#CfQlQPO'#CrQ#[QPOOOOQO-E6o-E6oOOQO'#Cs'#CsO#pQPO,59ROOQO'#Ct'#CtOOQO-E6r-E6rO#{QPO,59UOOQO-E6t-E6tOOQO-E6u-E6uOOQO,59W,59WOOQO-E6v-E6vOOQO,59X,59XOOQO-E6w-E6wOOQO,59Y,59YO$WQPO,59ZOOQO-E6x-E6xO$cQPO,59^OOQO-E6p-E6pOOQO-E6q-E6qO$}QPO1G.mOOQO'#Cu'#CuO%YQPO1G.oO%bQPO7+$ZOOQO-E6s-E6s",
-  stateData: "%m~OWOSqOS~OQTORVOSXOTZOU^O[ROrPO~OVdO[hXohXrhX~O[fOodXrdX~OQTO[fO~ORVO[kO~OSXO[mO~OTZO[oO~OU^O[fOocXrcX~OQTORVOSXOTZOU^O[RO~OPvOVdO[fO~O[fOo^ar^a~O[fOocarca~OrPOQfaRfaSfaTfaUfa[faofa~O[fOoZirZi~OPvO[fO~O[fOo]qr]q~O",
-  goto: "$QoPPPPPPPPPPpuPuuuzzzuu!P!Z!b!h#Q#W#`#h#p#xVaOQbV`OQbV]OQbQQOScQrRraSbOQRsbQeRRteUSOQbYgShpuxQhUQp_QueRxwQweRywUUOQbRiUUWOQbRjWUYOQbRlYU[OQbRn[U_OQbRq_",
-  nodeNames: "⚠ ask print forward turn color sleep is Comment Program Command Assign Text Ask Print Turtle Forward Turn Color Sleep ErrorInvalid",
-  maxTerm: 34,
+  states: "'OQYQPOOOOQO'#Cs'#CsQYQPOOOtQPO'#CvO!SQPO'#CrOOQO'#Cx'#CxO!_QPO'#CkOOQO'#Cy'#CyO!gQPO'#ClOOQO'#Cz'#CzO!oQPO'#CnOOQO'#C{'#C{O!wQPO'#CoOOQO'#C|'#C|O#PQPO'#CpOOQO'#Cm'#CmOOQO'#C}'#C}O#XQPO'#CqOOQO'#Cg'#CgQoQPO'#CtQ#gQPOOOOQO-E6q-E6qOOQO'#Cu'#CuO$OQPO,59SOOQO'#Cv'#CvOOQO-E6t-E6tO$ZQPO,59VOOQO-E6v-E6vO$fQPO,59WOOQO-E6w-E6wOOQO-E6x-E6xOOQO,59Y,59YOOQO-E6y-E6yOOQO,59Z,59ZOOQO-E6z-E6zOOQO,59[,59[O$qQPO,59]OOQO-E6{-E6{O$|QPO,59`OOQO-E6r-E6rOOQO-E6s-E6sO%kQPO1G.nOOQO'#Cw'#CwO%vQPO1G.pO&OQPO7+$[OOQO-E6u-E6u",
+  stateData: "&Z~OXOStOS~OQTORXOSZOT]OU`OVVO]ROuPO~OWfO]jXrjXujX~O]hOrfXufX~OQTO]hO~OVVO]hO~ORXO]oO~OSZO]qO~OT]O]sO~OU`O]hOreXueX~OQTORXOSZOT]OU`OVVO]RO~OPzOWfO]hO~O]hOr_au_a~O]hOr`au`a~O]hOreauea~OuPOQhaRhaShaThaUhaVha]harha~O]hOr[iu[i~OPzO]hO~O]hOr^qu^q~O",
+  goto: "$arPPPPPPPPPPPsxPxxxx}}}xx!S!^!e!k#X#_#g#o#w$P$XVcOQdVbOQdV_OQdQQOSeQvRvcSdOQRwdQgRRxgUSOQd[iSjlty|QjUQlWQtaQygR|{Q{gR}{UUOQdRkUUWOQdRmWUYOQdRnYU[OQdRp[U^OQdRr^UaOQdRua",
+  nodeNames: "⚠ ask print forward turn color sleep play is Comment Program Command Assign Text Ask Print Play Turtle Forward Turn Color Sleep ErrorInvalid",
+  maxTerm: 37,
   nodeProps: [
-    ["group", 15,"turtle"]
+    ["group", 17,"turtle"]
   ],
-  skippedNodes: [0,8],
-  repeatNodeCount: 10,
-  tokenData: "#O~RXOYnYZ!]Zpnpq!bqsnst!gt;'Sn;'S;=`!V<%lOn~sU[~OYnZpnqsnt;'Sn;'S;=`!V<%lOn~!YP;=`<%ln~!bOr~~!gOq~~!lSW~OY!gZ;'S!g;'S;=`!x<%lO!g~!{P;=`<%l!g",
+  skippedNodes: [0,9],
+  repeatNodeCount: 11,
+  tokenData: "#O~RXOYnYZ!]Zpnpq!bqsnst!gt;'Sn;'S;=`!V<%lOn~sU]~OYnZpnqsnt;'Sn;'S;=`!V<%lOn~!YP;=`<%ln~!bOu~~!gOt~~!lSX~OY!gZ;'S!g;'S;=`!x<%lO!g~!{P;=`<%l!g",
   tokenizers: [0],
-  topRules: {"Program":[0,9]},
-  dynamicPrecedences: {"20":-10},
-  specialized: [{term: 12, get: (value: any, stack: any) => (specializeKeyword(value, stack) << 1), external: specializeKeyword},{term: 12, get: (value: any, stack: any) => (extendKeyword(value, stack) << 1) | 1, external: extendKeyword, extend: true}],
+  topRules: {"Program":[0,10]},
+  dynamicPrecedences: {"22":-10},
+  specialized: [{term: 13, get: (value: any, stack: any) => (specializeKeyword(value, stack) << 1), external: specializeKeyword},{term: 13, get: (value: any, stack: any) => (extendKeyword(value, stack) << 1) | 1, external: extendKeyword, extend: true}],
   tokenPrec: 0
 })

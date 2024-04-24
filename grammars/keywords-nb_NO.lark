@@ -4,6 +4,7 @@ _WITH: ("with" | "with") _SPACE?
 _DEF: ("def" | "def") _SPACE?
 _RETURN: ("return" | "return") _SPACE?
 _PRINT: ("skriv" | "print") _SPACE?
+_PLAY: ("play" | "play") _SPACE
 _ASK: ("spør" | "ask") _SPACE?
 _ECHO: ("ekko" | "echo") _SPACE?
 _FORWARD: ("frem" | "forward") _SPACE?
@@ -22,6 +23,7 @@ red: ("red" | "red") _SPACE?
 white: ("white" | "white") _SPACE?
 yellow: ("yellow" | "yellow") _SPACE?
 _IS: _SPACE ("er" | "is") _SPACE
+_STANDALONE_IS: ("er" | "is")
 _SLEEP: ("sov" | "sleep") _SPACE?
 _ADD_LIST: ("legg" | "add") _SPACE
 _TO_LIST: _SPACE ("til" | "to") _SPACE
@@ -33,7 +35,7 @@ _IN: _SPACE ("i" | "in") _SPACE
 _NOT_IN: _SPACE ("not in" | "not in") _SPACE
 _IF: ("hvis" | "if") _SPACE
 _ELSE: "ellers" | "else"
-_AND: _SPACE ("og" | "and") _SPACE
+_AND: _SPACE? ("og" | "and") _SPACE
 _REPEAT: ("gjenta" | "repeat") _SPACE
 _TIMES: _SPACE ("ganger" | "times")
 _FOR: ("for" | "for") _SPACE
@@ -42,7 +44,7 @@ _TO: _SPACE ("til" | "to") _SPACE
 _STEP: "steg" | "step"
 _ELIF: _SPACE? ("elhvis" | "elif") _SPACE
 _INPUT: ("inndata" | "input")
-_OR: _SPACE ("eller" | "or") _SPACE
+_OR: _SPACE? ("eller" | "or") _SPACE
 _WHILE: ("mens" | "while") _SPACE
 _LENGTH: "lengde" | "length"
 _COLOR : ("color" | "color") _SPACE?

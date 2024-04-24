@@ -12,7 +12,8 @@ describe('Navigating through the tabs with the buttons', () => {
       // Test when code is changed
       goToHedyPage();
       cy.wait(500)
-      cy.get('#editor').type('hello');
+      cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').click();
+      cy.focused().type('hello');
       cy.get('.next-tab').click();
       cy.wait(500)
       cy.url().should('include', "print_command");

@@ -35,7 +35,7 @@ export interface Adventure {
    *
    * (Either from the loaded program or a default).
    */
-  start_code: string;
+  editor_contents: string;
 
   /**
    * If the current program is from a save, some additional

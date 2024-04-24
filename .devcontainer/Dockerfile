@@ -1,4 +1,4 @@
-FROM python:3.9-slim as main
+FROM python:3.12-slim as main
 
 # use a non-root user (https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user)
 ARG USERNAME=hedy

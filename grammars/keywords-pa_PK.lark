@@ -4,6 +4,7 @@ _WITH: ("with" | "with") _SPACE?
 _DEF: ("def" | "def") _SPACE?
 _RETURN: ("return" | "return") _SPACE?
 _PRINT: ("چپائی" | "print") _SPACE?
+_PLAY: ("play" | "play") _SPACE
 _ASK: ("سوال" | "ask") _SPACE?
 _ECHO: ("فیر" | "echo") _SPACE?
 _FORWARD: ("اگے" | "forward") _SPACE?
@@ -22,6 +23,7 @@ red: ("لال" | "red") _SPACE?
 white: ("چٹا" | "white") _SPACE?
 yellow: ("پیلا" | "yellow") _SPACE?
 _IS: _SPACE ("سمان" | "is") _SPACE
+_STANDALONE_IS: ("سمان" | "is")
 _SLEEP: ("نیند" | "sleep") _SPACE?
 _ADD_LIST: ("دھن" | "add") _SPACE
 _TO_LIST: _SPACE ("منزل" | "to") _SPACE
@@ -33,7 +35,7 @@ _IN: _SPACE ("اندر" | "in") _SPACE
 _NOT_IN: _SPACE ("not in" | "not in") _SPACE
 _IF: ("جے" | "if") _SPACE
 _ELSE: "وکھرا" | "else"
-_AND: _SPACE ("تے" | "and") _SPACE
+_AND: _SPACE? ("تے" | "and") _SPACE
 _REPEAT: ("دہرا" | "repeat") _SPACE
 _TIMES: _SPACE ("ضرب" | "times")
 _FOR: ("جدوں" | "for") _SPACE
@@ -42,7 +44,7 @@ _TO: _SPACE ("منزل" | "to") _SPACE
 _STEP: "سطر" | "step"
 _ELIF: _SPACE? ("ہور" | "elif") _SPACE
 _INPUT: ("اینپٹ" | "input")
-_OR: _SPACE ("یا" | "or") _SPACE
+_OR: _SPACE? ("یا" | "or") _SPACE
 _WHILE: ("جدکہ" | "while") _SPACE
 _LENGTH: "لمبائی" | "length"
 _COLOR : ("رنگ" | "color") _SPACE?

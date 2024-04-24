@@ -1,8 +1,4 @@
 import textwrap
-
-from parameterized import parameterized
-
-import hedy
 import hedy_translation
 from tests.Tester import HedyTester
 
@@ -58,18 +54,9 @@ class TestsTranslationLevel7(HedyTester):
 
         self.assertEqual(code, result)
 
-    @parameterized.expand([('en', 'repeat', 'times'),
-                           ('es', 'repetir', 'veces'),
-                           ('es', 'repetir', 'times'),
-                           ('es', 'repeat', 'veces')])
-    def test_repeat_type_error_translates_command(self, lang, repeat, times):
+    def test_repeat_type_error_translates_command(self):
         code = textwrap.dedent(f"""\
             a is 1, 2, 3
-            {repeat} a {times} print 'n'""")
+            repeat a times print 'n'""")
 
-        self.single_level_tester(
-            lang=lang,
-            code=code,
-            exception=hedy.exceptions.InvalidArgumentTypeException,
-            extra_check_function=self.exception_command(f'{repeat} {times}')
-        )
+        self.verify_translation(code, "en", self.level)

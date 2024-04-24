@@ -12,7 +12,7 @@ import datetime
 import collections
 from abc import ABCMeta
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Optional, Iterable
 
 import boto3
 from boto3.dynamodb.types import TypeDeserializer, TypeSerializer
@@ -223,13 +223,16 @@ class Table:
           string_set, number_set, binary_set (last 3 declared in this module).
     """
 
-    def __init__(self, storage: TableStorage, table_name, partition_key, types, sort_key=None, indexes=None):
+    def __init__(self, storage: TableStorage, table_name, partition_key, types=None, sort_key=None, indexes=None):
         self.key_schema = KeySchema(partition_key, sort_key)
         self.storage = storage
         self.table_name = table_name
         self.indexes = indexes or []
         self.indexed_fields = set()
-        self.types = types or {}
+        if types is not None:
+            self.types = Validator.ensure_all(types)
+        else:
+            self.types = None
 
         all_schemas = [self.key_schema] + [i.key_schema for i in self.indexes]
         for schema in all_schemas:
@@ -243,8 +246,9 @@ class Table:
             raise ValueError(f'Table {self.table_name}: indexes with the same partition key: {duped}')
 
         # Check to make sure all indexed fields have a declared type
-        if undeclared := [f for f in self.indexed_fields if f not in self.types]:
-            raise ValueError(f'Declare the type of these fields which are used as keys: {", ".join(undeclared)}')
+        if self.types:
+            if undeclared := [f for f in self.indexed_fields if f not in self.types]:
+                raise ValueError(f'Declare the type of these fields which are used as keys: {", ".join(undeclared)}')
 
     @querylog.timed_as("db_get")
     def get(self, key):
@@ -357,7 +361,7 @@ class Table:
         if not self.key_schema.fully_matches(data):
             raise ValueError(f"Expecting fields {self.key_schema} in create() call, got: {data}")
         self._validate_indexable_fields(data, False)
-        self._validate_types(data)
+        self._validate_types(data, full=True)
 
         querylog.log_counter(f"db_create:{self.table_name}")
         self.storage.put(self.table_name, self.key_schema.extract(data), data)
@@ -378,7 +382,7 @@ class Table:
         querylog.log_counter(f"db_update:{self.table_name}")
         self._validate_indexable_fields(updates, True)
         self._validate_key(key)
-        self._validate_types(updates)
+        self._validate_types(updates, full=False)
 
         return self.storage.update(self.table_name, key, updates)
 
@@ -477,19 +481,38 @@ class Table:
                              ' or an index, so must be of type string, number or binary.'
                              % ({field: value}, self.table_name, field))
 
-    def _validate_types(self, data):
-        """Validate the types in the record according to the 'self.types' map."""
-        for field, ftype in self.types.items():
-            value = data.get(field)
-            if value is None:
+    def _validate_types(self, data, full):
+        """Validate the types in the record according to the 'self.types' map.
+
+        If 'full=True' we will use the declared keys as a basis (making sure
+        the record is complete). If full=False, we only use the given keys,
+        making sure the updates are valid.
+        """
+        if self.types is None:
+            return
+
+        keys_to_validate = self.types.keys() if full else data.keys()
+
+        for field in keys_to_validate:
+            validator = self.types.get(field)
+            if not validator:
                 continue
 
-            if isinstance(value, DynamoUpdate):
-                ok = value.validate_against_type(ftype)
-            else:
-                ok = isinstance(value, ftype)
-            if not ok:
-                raise ValueError(f'In {data}, value of {field} should be of type {ftype} (got {value}')
+            value = data.get(field)
+            if not validate_value_against_validator(value, validator):
+                raise ValueError(f'In {data}, value of {field} should be {validator} (got {value}')
+
+
+def validate_value_against_validator(value, validator: 'Validator'):
+    """Validate a value against a validator.
+
+    A validator can be a built-in class representing a type, like 'str'
+    or 'int'.
+    """
+    if isinstance(value, DynamoUpdate):
+        return value.validate_against_type(validator)
+    else:
+        return validator.is_valid(value)
 
 
 DDB_SERIALIZER = TypeSerializer()
@@ -802,10 +825,10 @@ class MemoryStorage(TableStorage):
             next_page_key = with_keys[-1][0]
 
         # Do a final filtering to mimic DynamoDB FilterExpression
-        return copy.copy([record
-                          for _, record in with_keys
-                          if self._query_matches(record, filter_eq_conditions, filter_special_conditions)
-                          ]), next_page_key
+        return copy.deepcopy([record
+                              for _, record in with_keys
+                              if self._query_matches(record, filter_eq_conditions, filter_special_conditions)
+                              ]), next_page_key
 
     # NOTE: on purpose not @synchronized here
     def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None,
@@ -835,9 +858,9 @@ class MemoryStorage(TableStorage):
         records = self.tables.setdefault(table_name, [])
         index = self._find_index(records, key)
         if index is None:
-            records.append(copy.copy(data))
+            records.append(copy.deepcopy(data))
         else:
-            records[index] = copy.copy(data)
+            records[index] = copy.deepcopy(data)
         self._flush()
 
     @lock.synchronized
@@ -913,7 +936,7 @@ class MemoryStorage(TableStorage):
             next_page_token = {"offset": start_index + limit}
             items = items[:limit]
 
-        items = copy.copy(items)
+        items = copy.deepcopy(items)
         return items, next_page_token
 
     def _find_index(self, records, key):
@@ -962,7 +985,7 @@ class DynamoUpdate:
     def to_dynamo(self):
         raise NotImplementedError()
 
-    def validate_against_type(self, type):
+    def validate_against_type(self, validator):
         raise NotImplementedError()
 
 
@@ -976,8 +999,8 @@ class DynamoIncrement(DynamoUpdate):
             "Value": {"N": str(self.delta)},
         }
 
-    def validate_against_type(self, type):
-        return isinstance(self.delta, int)
+    def validate_against_type(self, validator):
+        return validate_value_against_validator(self.delta, validator)
 
     def __repr__(self):
         return f'Inc({self.delta})'
@@ -995,8 +1018,8 @@ class DynamoAddToStringSet(DynamoUpdate):
             "Value": {"SS": list(self.elements)},
         }
 
-    def validate_against_type(self, type):
-        return all(isinstance(x, str) for x in self.elements)
+    def validate_against_type(self, validator):
+        return all(validate_value_against_validator(x, validator) for x in self.elements)
 
     def __repr__(self):
         return f'Add({self.elements})'
@@ -1017,8 +1040,8 @@ class DynamoAddToNumberSet(DynamoUpdate):
             "Value": {"NS": [str(x) for x in self.elements]},
         }
 
-    def validate_against_type(self, type):
-        return all(isinstance(x, int) for x in self.elements)
+    def validate_against_type(self, validator):
+        return all(validate_value_against_validator(x, validator) for x in self.elements)
 
     def __repr__(self):
         return f'Add({self.elements})'
@@ -1030,8 +1053,8 @@ class DynamoAddToList(DynamoUpdate):
     def __init__(self, *elements):
         self.elements = elements
 
-    def validate_against_type(self, type):
-        return True
+    def validate_against_type(self, validator):
+        return all(validate_value_against_validator(x, validator) for x in self.elements)
 
     def to_dynamo(self):
         return {
@@ -1055,8 +1078,8 @@ class DynamoRemoveFromStringSet(DynamoUpdate):
             "Value": {"SS": list(self.elements)},
         }
 
-    def validate_against_type(self, type):
-        return all(isinstance(x, str) for x in self.elements)
+    def validate_against_type(self, validator):
+        return all(validate_value_against_validator(x, validator) for x in self.elements)
 
     def __repr__(self):
         return f'Remove({self.elements})'
@@ -1360,25 +1383,112 @@ def reverse_index(xs):
     return ret
 
 
-class string_set:
-    def __instancecheck__(self, obj):
-        try:
-            return all(isinstance(x, str) for x in obj)
-        except Exception:
-            return False
+class Validator(metaclass=ABCMeta):
+    """Base class for validators.
+
+    Subclasses should implement 'is_valid' and '__str__'.
+    """
+
+    @staticmethod
+    def ensure(validator):
+        """Turn the given value into a validator."""
+        if validator == True:
+            return Any()
+        if isinstance(validator, Validator):
+            return validator
+        if type(validator) == type:
+            return InstanceOf(validator)
+        if callable(validator):
+            return Predicate(validator)
+        raise ValueError(f'Not sure how to treat {validator} as a validator')
+
+    @staticmethod
+    def ensure_all(validator_dict):
+        return {k: Validator.ensure(v) for k, v in validator_dict.items()}
+
+    def is_valid(self, value):
+        ...
+
+    def __str__(self, value):
+        ...
 
 
-class number_set:
-    def __instancecheck__(self, obj):
-        try:
-            return all(isinstance(x, int) for x in obj)
-        except Exception:
-            return False
+class Any(Validator):
+    """Validator which allows any type."""
+    def is_valid(self, value):
+        return True
+
+    def __str__(self):
+        return f'any value'
 
 
-class binary_set:
-    def __instancecheck__(self, obj):
-        try:
-            return all(isinstance(x, bytes) for x in obj)
-        except Exception:
-            return False
+class InstanceOf(Validator):
+    """Validator which checks if a value is an instance of a type."""
+    def __init__(self, type):
+        self.type = type
+
+    def is_valid(self, value):
+        return isinstance(value, self.type)
+
+    def __str__(self):
+        return f'instance of {self.type}'
+
+
+class Predicate(Validator):
+    """Validator which calls an arbitrary callback."""
+    def __init__(self, fn):
+        self.fn = fn
+
+    def is_valid(self, value):
+        return self.fn(value)
+
+    def __str__(self):
+        return f'matches {self.fn}'
+
+
+class Optional(Validator):
+    """Validator which matches either None or an inner validator."""
+    def __init__(self, inner):
+        self.inner = Validator.ensure(inner)
+
+    def is_valid(self, value):
+        return value is None or self.inner.is_valid(value)
+
+    def __str__(self):
+        return f'optional {self.inner}'
+
+
+class SetOf(Validator):
+    """Validator which matches a set matching inner validators."""
+    def __init__(self, inner):
+        self.inner = Validator.ensure(inner)
+
+    def is_valid(self, value):
+        return isinstance(value, set) and all(self.inner.is_valid(x) for x in value)
+
+    def __str__(self):
+        return f'set of {self.inner}'
+
+
+class ListOf(Validator):
+    """Validator which matches a list matching inner validators."""
+    def __init__(self, inner):
+        self.inner = Validator.ensure(inner)
+
+    def is_valid(self, value):
+        return isinstance(value, list) and all(self.inner.is_valid(x) for x in value)
+
+    def __str__(self):
+        return f'list of {self.inner}'
+
+
+class RecordOf(Validator):
+    """Validator which matches a record with inner validators."""
+    def __init__(self, inner):
+        self.inner = Validator.ensure_all(inner)
+
+    def is_valid(self, value):
+        return isinstance(value, dict) and all(validator.is_valid(value.get(key)) for key, validator in self.inner.items())
+
+    def __str__(self):
+        return f'{self.inner}'

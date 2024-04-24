@@ -8,6 +8,4 @@ set -eu
 scriptdir=$(cd $(dirname $0) && pwd)
 
 echo "------> Compiling the TypeScript"
-
-cd $scriptdir/../heroku
-./generate-typescript
+doit run typescript

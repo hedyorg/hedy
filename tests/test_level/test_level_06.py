@@ -26,7 +26,7 @@ class TestsLevel6(HedyTester):
         code = "antwoord = ask 'wat is je lievelingskleur?'"
         expected = "antwoord = input(f'wat is je lievelingskleur?')"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
     def test_ask_chained(self):
         code = textwrap.dedent("""\
@@ -64,7 +64,8 @@ class TestsLevel6(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
-            expected=expected
+            expected=expected,
+            unused_allowed=True
         )
 
     def test_assign_with_equals_no_space(self):
@@ -74,6 +75,7 @@ class TestsLevel6(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            unused_allowed=True,
             expected=expected
         )
 
@@ -84,6 +86,7 @@ class TestsLevel6(HedyTester):
         self.multi_level_tester(
             max_level=11,
             code=code,
+            unused_allowed=True,
             expected=expected
         )
 
@@ -117,20 +120,45 @@ class TestsLevel6(HedyTester):
             expected=expected
         )
 
-    def test_assign_substract_negative_number(self):
-
+    def test_assign_subtract_negative_number(self):
         code = textwrap.dedent("""\
-      n = -3-4
-      print n""")
+            n = -3-4
+            print n""")
 
-        expected = textwrap.dedent("""\
-      n = int(-3) - int(4)
-      print(f'{n}')""")
+        expected = textwrap.dedent(f"""\
+            n = {self.int_cast_transpiled('-3', False)} - int(4)
+            print(f'{{n}}')""")
 
         self.multi_level_tester(
             max_level=11,
             code=code,
             expected=expected
+        )
+
+    #
+    # music tests
+    #
+    @parameterized.expand([
+        ('*', '*'),
+        ('/', '//'),
+        ('+', '+'),
+        ('-', '-')
+    ])
+    def test_play_calculation(self, op, expected_op):
+        code = textwrap.dedent(f"""\
+            note is 34
+            play note {op} 1""")
+        expected = HedyTester.dedent(
+            "note = '34'",
+            self.play_transpiled(
+                f'{self.int_cast_transpiled("note", quotes=False)} {expected_op} int(1)', quotes=False
+            ))
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            expected=expected,
+            max_level=11
         )
 
     #
@@ -274,7 +302,7 @@ class TestsLevel6(HedyTester):
         if convert_numerals('Latin', a) == convert_numerals('Latin', b):
           c = '1'""")
 
-        self.multi_level_tester(max_level=7, code=code, expected=expected)
+        self.multi_level_tester(max_level=7, code=code, expected=expected, unused_allowed=True)
 
     def test_if_equality_assign_calc(self):
         code = textwrap.dedent("""\
@@ -283,12 +311,12 @@ class TestsLevel6(HedyTester):
         acu is 0
         if test is cmp acu is acu + 1""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         cmp = '1'
         test = '2'
         acu = '0'
         if convert_numerals('Latin', test) == convert_numerals('Latin', cmp):
-          acu = int(acu) + int(1)""")
+          acu = {self.int_cast_transpiled('acu', False)} + int(1)""")
 
         self.multi_level_tester(max_level=7, code=code, expected=expected)
 
@@ -373,14 +401,14 @@ class TestsLevel6(HedyTester):
         else
         acu is acu + 5""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         cmp = '1'
         test = '2'
         acu = '0'
         if convert_numerals('Latin', test) == convert_numerals('Latin', cmp):
-          acu = int(acu) + int(1)
+          acu = {self.int_cast_transpiled('acu', False)} + int(1)
         else:
-          acu = int(acu) + int(5)""")
+          acu = {self.int_cast_transpiled('acu', False)} + int(5)""")
 
         self.multi_level_tester(max_level=7, code=code, expected=expected)
 
@@ -587,15 +615,15 @@ class TestsLevel6(HedyTester):
         code = "nummer is 4+5"
         expected = "nummer = int(4) + int(5)"
 
-        self.multi_level_tester(max_level=11, code=code, expected=expected)
+        self.multi_level_tester(max_level=11, code=code, expected=expected, unused_allowed=True)
 
     def test_print_calc_with_var(self):
         code = textwrap.dedent("""\
         var is 5
         print var + 5""")
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         var = '5'
-        print(f'{int(var) + int(5)}')""")
+        print(f'{{{self.int_cast_transpiled('var', False)} + int(5)}}')""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
@@ -627,7 +655,7 @@ class TestsLevel6(HedyTester):
         expected = textwrap.dedent(f"""\
         nummer = '8'
         nummertwee = '2'
-        getal = int(nummer) {transpiled_op} int(nummertwee)
+        getal = {self.int_cast_transpiled('nummer', False)} {transpiled_op} {self.int_cast_transpiled('nummertwee', False)}
         print(f'{{getal}}')""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected, output=output)
@@ -644,10 +672,10 @@ class TestsLevel6(HedyTester):
         nummertwee is 2
         print nummer {op} nummertwee""")
 
-        expected = textwrap.dedent(f"""\
+        expected = textwrap.dedent(f'''\
         nummer = '8'
         nummertwee = '2'
-        print(f'{{int(nummer) {transpiled_op} int(nummertwee)}}')""")
+        print(f'{{{self.int_cast_transpiled('nummer', False)} {transpiled_op} {self.int_cast_transpiled('nummertwee', False)}}}')''')
 
         self.multi_level_tester(max_level=11, code=code, expected=expected, output=output)
 
@@ -666,7 +694,7 @@ class TestsLevel6(HedyTester):
         expected = textwrap.dedent(f"""\
             nummer = '٨'
             nummertwee = '٢'
-            print(f'{{int(nummer) {transpiled_op} int(nummertwee)}}')""")
+            print(f'{{{self.int_cast_transpiled('nummer', False)} {transpiled_op} {self.int_cast_transpiled('nummertwee', False)}}}')""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected, output=output)
 
@@ -754,10 +782,10 @@ class TestsLevel6(HedyTester):
         b is a + 1
         print a + b""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         a = '5'
-        b = int(a) + int(1)
-        print(f'{int(a) + int(b)}')""")
+        b = {self.int_cast_transpiled('a', False)} + int(1)
+        print(f'{{{self.int_cast_transpiled('a', False)} + {self.int_cast_transpiled('b', False)}}}')""")
 
         self.multi_level_tester(
             code=code,
@@ -774,11 +802,11 @@ class TestsLevel6(HedyTester):
         b is a + 1
         print a + b""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         a = 'Hello'
         a = '5'
-        b = int(a) + int(1)
-        print(f'{int(a) + int(b)}')""")
+        b = {self.int_cast_transpiled('a', False)} + int(1)
+        print(f'{{{self.int_cast_transpiled('a', False)} + {self.int_cast_transpiled('b', False)}}}')""")
 
         self.multi_level_tester(
             code=code,
@@ -827,12 +855,12 @@ class TestsLevel6(HedyTester):
         punten = '0'""",
                                      HedyTester.list_access_transpiled('random.choice(keuzes)'),
                                      "worp = random.choice(keuzes)",
-                                     """\
+                                     f"""\
         if convert_numerals('Latin', worp) == convert_numerals('Latin', 'regenworm'):
-          punten = int(punten) + int(5)
+          punten = {self.int_cast_transpiled('punten', False)} + int(5)
         else:
-          punten = int(punten) + int(worp)
-        print(f'dat zijn dan {punten}')""")
+          punten = {self.int_cast_transpiled('punten', False)} + {self.int_cast_transpiled('worp', False)}
+        print(f'dat zijn dan {{punten}}')""")
 
         self.multi_level_tester(max_level=7, code=code, expected=expected)
 
@@ -891,7 +919,7 @@ class TestsLevel6(HedyTester):
         drink = 'water'
         print(f'{drink}')""")
 
-        self.multi_level_tester(max_level=7, code=code, expected=expected, translate=False)
+        self.multi_level_tester(max_level=7, code=code, expected=expected, translate=False, unused_allowed=True)
 
     def test_consecutive_if_else_statements(self):
         code = textwrap.dedent("""\
@@ -928,10 +956,10 @@ class TestsLevel6(HedyTester):
         a = -3
         b = a + 3
         print b""")
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         a = '-3'
-        b = int(a) + int(3)
-        print(f'{b}')""")
+        b = {self.int_cast_transpiled('a', False)} + int(3)
+        print(f'{{b}}')""")
         self.multi_level_tester(code=code, expected=expected, output='0', max_level=11)
 
     def test_turtle_with_expression(self):
@@ -941,19 +969,11 @@ class TestsLevel6(HedyTester):
         turn num + 10
         forward 10 + num""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         num = '10'
-        __trtl = int(num) + int(10)
-        try:
-          __trtl = int(__trtl)
-        except ValueError:
-          raise Exception('catch_value_exception')
+        __trtl = {self.int_cast_transpiled(self.int_cast_transpiled('num', False) + ' + int(10)', False)}
         t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
-        __trtl = int(10) + int(num)
-        try:
-          __trtl = int(__trtl)
-        except ValueError:
-          raise Exception('catch_value_exception')
+        __trtl = {self.int_cast_transpiled('int(10) + ' + self.int_cast_transpiled('num', False), False)}
         t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
         time.sleep(0.1)""")
 

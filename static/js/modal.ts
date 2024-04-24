@@ -2,8 +2,6 @@
  * The modal we pop up to have children confirm things
  */
 
-import { HedyEditor } from "./editor";
-
 class Modal {
   constructor() {
     // Just one binding, never needs stat
@@ -34,6 +32,7 @@ class Modal {
     $('#modal-copy').hide();
     $('#modal-repair').hide();
     $('#modal-preview').hide();
+    $('#modal-feedback').hide();
   }
 
   public hide_alert() {
@@ -186,83 +185,64 @@ class Modal {
       }
     });
   }
-}
 
-let editor: HedyEditor | undefined;
+    public feedback(message: string) {
+      this.hide();
+      $('#modal-feedback-message').text(message);
+      this.show();
+      $('#modal-feedback').show();
+      $('#modal-feedback-input').trigger("focus");
+    }
+}
 
 /**
  * The error that appears underneath the code editor
  */
 export const success = {
-  setEditor(e: HedyEditor) {
-    editor = e;
-  },
-
   hide: function () {
     $('#okbox').hide();
-    const height = computeEditorHeight('okbox');
-    editor?.resize(height);
-
   },
 
   showWarning(caption: string, message: string) {
     $('#okbox .caption').text(caption);
     $('#okbox .details').text(message);
     $('#okbox').show();
-    const height = computeEditorHeight('okbox');
-    editor?.resize(height);
   },
 
-  show(caption: string) {
+  show(caption: string, confetti: boolean) {
+    if (confetti){
+      $('#confetti-button').show();
+    }
     $('#okbox .caption').text(caption);
     $('#okbox').show();
-    const height = computeEditorHeight('okbox');
-    editor?.resize(height);
-    setTimeout(function() {     
+    setTimeout(function() {
       $('#okbox').hide();
-      const height = computeEditorHeight('okbox');
-      editor?.resize(height); 
     }, 3000);
   }
 }
 
 export const error = {
-  setEditor(e: HedyEditor) {
-    editor = e;
-  },
-
   hide() {
     $('#errorbox').hide();
     $('#warningbox').hide();
-    const height = computeEditorHeight('errorbox')
-    editor?.resize(height);
   },
   showWarning(caption: string, message: string) {
     this.hide();
     $('#warningbox .caption').text(caption);
     $('#warningbox .details').text(message);
     $('#warningbox').show();
-    const height = computeEditorHeight('warningbox');
-    editor?.resize(height);
   },
 
   show(caption: string, message: string) {
     $('#errorbox .caption').text(caption);
-    $('#errorbox .details').html(message);    
+    $('#errorbox .details').html(message);
     $('#errorbox').show();
-    const height = computeEditorHeight('errorbox');
-    editor?.resize(height);
   },
 
   showFadingWarning(caption: string, message: string) {
-    error.showWarning(caption, message);    
+    error.showWarning(caption, message);
     setTimeout(function(){
-      $('#warningbox').fadeOut({
-        complete: () => {
-          const height = computeEditorHeight('warningbox');
-          editor?.resize(height);
-        }
-      });
+      $('#warningbox').fadeOut();
     }, 10000);
   }
 }
@@ -279,10 +259,4 @@ export async function tryCatchPopup(cb: () => void | Promise<void>) {
     console.log('Error', e);
     modal.notifyError(e.message);
   }
-}
-
-function computeEditorHeight(boxId: string): number {
-  const editorHeight = document.getElementById('editor')!.clientHeight;
-  const boxHeight = document.getElementById(boxId)!.offsetHeight!;
-  return editorHeight - boxHeight;
 }

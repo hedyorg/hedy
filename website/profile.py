@@ -141,7 +141,7 @@ class ProfileModule(WebsiteModule):
         # The user object we got from 'requires_login' is not fully hydrated yet. Look up the database user.
         user = self.db.user_by_username(user["username"])
 
-        output = {"username": user["username"], "email": user["email"], "language": user.get("language", "en")}
+        output = {"username": user["username"], "email": user.get("email", ""), "language": user.get("language", "en")}
         for field in ["birth_year", "country", "gender", "prog_experience", "experience_languages"]:
             if field in user:
                 output[field] = user[field]

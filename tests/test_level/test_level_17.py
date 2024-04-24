@@ -10,6 +10,7 @@ from tests.Tester import HedyTester, SkippedMapping
 
 class TestsLevel17(HedyTester):
     level = 17
+    maxDiff = None
 
     def test_if_with_indent(self):
         code = textwrap.dedent("""\
@@ -126,21 +127,41 @@ class TestsLevel17(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
+    @parameterized.expand(['and', 'or'])
+    def test_if_list_access_lhs_and_or(self, op):
+        code = textwrap.dedent(f"""\
+            colors = ['red', 'green', 'blue']
+            if colors[1] == colors[2] {op} 1 == 1:
+                print 'red'""")
+
+        expected = HedyTester.dedent(
+            "colors = ['red', 'green', 'blue']",
+            self.list_access_transpiled('colors[int(1)-1]'),
+            self.list_access_transpiled('colors[int(2)-1]'),
+            f"""\
+            if convert_numerals('Latin', colors[int(1)-1]) == convert_numerals('Latin', colors[int(2)-1]) {op} convert_numerals('Latin', '1') == convert_numerals('Latin', '1'):
+              print(f'''red''')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+        )
+
     def test_for_loop(self):
         code = textwrap.dedent("""\
-    a is 2
-    b is 3
-    for a in range 2 to 4:
-        a is a + 2
-        b is b + 2""")
-        expected = textwrap.dedent("""\
-    a = 2
-    b = 3
-    step = 1 if 2 < 4 else -1
-    for a in range(2, 4 + step, step):
-      a = a + 2
-      b = b + 2
-      time.sleep(0.1)""")
+            a is 2
+            b is 3
+            for a in range 2 to 4:
+                a is a + 2
+                b is b + 2""")
+        expected = textwrap.dedent(f"""\
+            a = 2
+            b = 3
+            step = 1 if 2 < 4 else -1
+            for a in range(2, 4 + step, step):
+              a = {self.addition_transpiled('a', 2)}
+              b = {self.addition_transpiled('b', 2)}
+              time.sleep(0.1)""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -148,15 +169,15 @@ class TestsLevel17(HedyTester):
         code = textwrap.dedent("""\
     a is 5
     if a is 1:
-        x is 2
+        a is 2
     else:
-        x is 222""")
+        a is 222""")
         expected = textwrap.dedent("""\
     a = 5
     if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
-      x = 2
+      a = 2
     else:
-      x = 222""")
+      a = 222""")
         self.single_level_tester(code=code, expected=expected)
 
     def test_forloop(self):
@@ -264,15 +285,15 @@ class TestsLevel17(HedyTester):
         code = textwrap.dedent("""\
       a is 5
       if a is 1:
-          x is 2
+          a is 2
       elif a is 2:
-          x is 222""")
+          a is 222""")
         expected = textwrap.dedent("""\
       a = 5
       if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
-        x = 2
+        a = 2
       elif convert_numerals('Latin', a) == convert_numerals('Latin', '2'):
-        x = 222""")
+        a = 222""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -280,15 +301,15 @@ class TestsLevel17(HedyTester):
         code = textwrap.dedent("""\
       a est 5
       si a est 1:
-          x est 2
+          a est 2
       sinon si a est 2:
-          x est 222""")
+          a est 222""")
         expected = textwrap.dedent("""\
       a = 5
       if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
-        x = 2
+        a = 2
       elif convert_numerals('Latin', a) == convert_numerals('Latin', '2'):
-        x = 222""")
+        a = 222""")
 
         self.single_level_tester(code=code, expected=expected, lang='fr')
 
@@ -296,19 +317,19 @@ class TestsLevel17(HedyTester):
         code = textwrap.dedent("""\
       a is 5
       if a is 1:
-          x is 2
+          a is 2
       elif a is 4:
-          x is 3
+          a is 3
       elif a is 2:
-          x is 222""")
+          a is 222""")
         expected = textwrap.dedent("""\
       a = 5
       if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
-        x = 2
+        a = 2
       elif convert_numerals('Latin', a) == convert_numerals('Latin', '4'):
-        x = 3
+        a = 3
       elif convert_numerals('Latin', a) == convert_numerals('Latin', '2'):
-        x = 222""")
+        a = 222""")
 
         self.single_level_tester(
             code=code, expected=expected, expected_commands=[
@@ -330,17 +351,18 @@ class TestsLevel17(HedyTester):
       m is [1, 2]
       n is [1, 2]
       if m is n:
-          a is 1""")
+          print 'JA!'""")
 
         expected = textwrap.dedent("""\
       m = [1, 2]
       n = [1, 2]
       if convert_numerals('Latin', m) == convert_numerals('Latin', n):
-        a = 1""")
+        print(f'''JA!''')""")
 
         self.multi_level_tester(
             code=code,
-            expected=expected
+            expected=expected,
+            max_level=17
         )
 
     def test_equality_with_incompatible_types_gives_error(self):
@@ -442,23 +464,23 @@ class TestsLevel17(HedyTester):
       if x is pressed:
           color red""")
 
+        # Need to exgtract this out for now because of an autopep8 bug
+        # https://github.com/hhatto/autopep8/issues/744
+        color_dict = "{'black': 'black', 'blue': 'blue', 'brown': 'brown', 'gray': 'gray', 'green': 'green', 'orange': 'orange', 'pink': 'pink', 'purple': 'purple', 'red': 'red', 'white': 'white', 'yellow': 'yellow'}"
+
         expected = HedyTester.dedent(f"""\
-      pygame_end = False
-      while not pygame_end:
-        pygame.display.update()
-        event = pygame.event.wait()
-        if event.type == pygame.QUIT:
-          pygame_end = True
-          pygame.quit()
-          break
-        if event.type == pygame.KEYDOWN:
-          if event.unicode == 'x':
-            {HedyTester.indent(
-              HedyTester.turtle_color_command_transpiled('red'),
-              12, True)
-            }
-            break
-          # End of PyGame Event Handler""")
+        if_pressed_mapping = {{"else": "if_pressed_default_else"}}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        def if_pressed_x_():
+            __trtl = f'red'
+            color_dict = {color_dict}
+            if __trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
+              raise Exception(f{self.value_exception_transpiled()})
+            else:
+              if not __trtl in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
+                __trtl = color_dict[__trtl]
+            t.pencolor(__trtl)
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(
             code=code,
@@ -484,22 +506,14 @@ class TestsLevel17(HedyTester):
         if PRINT is pressed:
             print 'The button got pressed!'""")
 
-        expected = HedyTester.dedent(f"""\
-        x = 'PRINT'
-        create_button(x)
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'PRINT':
-              print(f'''The button got pressed!''')
-              break
-            # End of PyGame Event Handler""")
+        expected = HedyTester.dedent("""\
+         x = 'PRINT'
+         create_button(x)
+         if_pressed_mapping = {"else": "if_pressed_default_else"}
+         if_pressed_mapping['PRINT'] = 'if_pressed_PRINT_'
+         def if_pressed_PRINT_():
+             print(f'''The button got pressed!''')
+         extensions.if_pressed(if_pressed_mapping)""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -512,28 +526,18 @@ class TestsLevel17(HedyTester):
         else:
             print 'Other'""")
 
-        expected = HedyTester.dedent(f"""\
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'a':
-              print(f'''A''')
-              break
-            # End of PyGame Event Handler
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'b':
-              print(f'''B''')
-              break
-            # End of PyGame Event Handler    
-            else:
-              print(f'''Other''')
-              break""")
+        expected = HedyTester.dedent("""\
+         if_pressed_mapping = {"else": "if_pressed_default_else"}
+         if_pressed_mapping['a'] = 'if_pressed_a_'
+         def if_pressed_a_():
+             print(f'''A''')
+         if_pressed_mapping['b'] = 'if_pressed_b_'
+         def if_pressed_b_():
+             print(f'''B''')
+         if_pressed_mapping['else'] = 'if_pressed_else_'
+         def if_pressed_else_():
+             print(f'''Other''')
+         extensions.if_pressed(if_pressed_mapping)""")
 
         self.single_level_tester(code=code, expected=expected)
 

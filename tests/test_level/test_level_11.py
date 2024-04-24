@@ -26,15 +26,16 @@ class TestsLevel11(HedyTester):
         code = textwrap.dedent("""\
         for i in range 1 to 10
             a is i + 1""")
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         step = 1 if int(1) < int(10) else -1
         for i in range(int(1), int(10) + step, step):
-          a = int(i) + int(1)
+          a = {self.int_cast_transpiled('i', False)} + int(1)
           time.sleep(0.1)""")
 
         self.single_level_tester(
             code=code,
             expected=expected,
+            unused_allowed=True,
             expected_commands=['for', 'is', 'addition'])
 
     def test_for_loop_with_int_vars(self):
@@ -80,6 +81,30 @@ class TestsLevel11(HedyTester):
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
             exception=hedy.exceptions.InvalidArgumentTypeException)
 
+    def test_for_loop_without_in_var_gives_error(self):
+        code = "for no_in range 1 to 5"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            exception=hedy.exceptions.MissingAdditionalCommand)
+
+    def test_for_loop_without_to_var_gives_error(self):
+        code = "for no_to in range 1 5"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            exception=hedy.exceptions.MissingAdditionalCommand)
+
+    def test_for_loop_without_command_var_gives_error(self):
+        code = "for no_command in range 1 to 5"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            exception=hedy.exceptions.IncompleteCommandException)
+
     def test_for_loop_multiline_body(self):
         code = textwrap.dedent("""\
         a is 2
@@ -88,13 +113,13 @@ class TestsLevel11(HedyTester):
             a is a + 2
             b is b + 2""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         a = '2'
         b = '3'
         step = 1 if int(2) < int(4) else -1
         for a in range(int(2), int(4) + step, step):
-          a = int(a) + int(2)
-          b = int(b) + int(2)
+          a = {self.int_cast_transpiled('a', False)} + int(2)
+          b = {self.int_cast_transpiled('b', False)} + int(2)
           time.sleep(0.1)""")
 
         self.single_level_tester(code=code, expected=expected)
@@ -319,22 +344,14 @@ class TestsLevel11(HedyTester):
         expected = textwrap.dedent("""\
         step = 1 if int(1) < int(10) else -1
         for i in range(int(1), int(10) + step, step):
-          pygame_end = False
-          while not pygame_end:
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-              pygame_end = True
-              pygame.quit()
-              break
-            if event.type == pygame.KEYDOWN:
-              if event.unicode == 'p':
-                print(f'press')
-                break
-              # End of PyGame Event Handler    
-              else:
-                print(f'no!')
-                break
+          if_pressed_mapping = {"else": "if_pressed_default_else"}
+          if_pressed_mapping['p'] = 'if_pressed_p_'
+          def if_pressed_p_():
+              print(f'press')
+          if_pressed_mapping['else'] = 'if_pressed_else_'
+          def if_pressed_else_():
+              print(f'no!')
+          extensions.if_pressed(if_pressed_mapping)
           time.sleep(0.1)""")
 
         self.single_level_tester(

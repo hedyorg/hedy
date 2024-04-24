@@ -21,6 +21,10 @@ from website import querylog
 
 TOKEN_COOKIE_NAME = config["session"]["cookie_name"]
 
+# A special value in the session, if this is set and we hit a 403 on the
+# very next page load, we redirect to the front page.
+JUST_LOGGED_OUT = 'just-logged-out'
+
 # The session_length in the session is set to 60 * 24 * 14 (in minutes) config.py#13
 # The reset_length in the session is set to 60 * 4 (in minutes) config.py#14
 # We multiply this by 60 to set the session_length to 14 days and reset_length to 4 hours
@@ -193,6 +197,15 @@ def has_public_profile(user):
 # Thanks to https://stackoverflow.com/a/34499643
 
 
+def hide_explore(user):
+    if 'username' not in user or user.get('username') == '':
+        return False
+    username = user.get('username')
+    customizations = g.db.get_student_class_customizations(username)
+    hide_explore = True if customizations and 'hide_explore' in customizations.get('other_settings') else False
+    return hide_explore
+
+
 def requires_login(f):
     """Decoractor to indicate that a particular route requires the user to be logged in.
 
@@ -213,8 +226,11 @@ def requires_login(f):
 
     @wraps(f)
     def inner(*args, **kws):
+        print('session before', session)
+        just_logged_out = session.pop(JUST_LOGGED_OUT, False)
+        print('session after', session)
         if not is_user_logged_in():
-            return utils.error_page(error=403)
+            return redirect('/') if just_logged_out else utils.error_page(error=401)
         # The reason we pass by keyword argument is to make this
         # work logically both for free-floating functions as well
         # as [unbound] class methods.
@@ -249,8 +265,9 @@ def requires_admin(f):
 
     @wraps(f)
     def inner(*args, **kws):
+        just_logged_out = session.pop(JUST_LOGGED_OUT, False)
         if not is_user_logged_in() or not is_admin(current_user()):
-            return utils.error_page(error=403, ui_message=gettext("unauthorized"))
+            return redirect('/') if just_logged_out else utils.error_page(error=401, ui_message=gettext("unauthorized"))
         return f(*args, user=current_user(), **kws)
 
     return inner
@@ -264,8 +281,9 @@ def requires_teacher(f):
 
     @wraps(f)
     def inner(*args, **kws):
+        just_logged_out = session.pop(JUST_LOGGED_OUT, False)
         if not is_user_logged_in() or not is_teacher(current_user()):
-            return utils.error_page(error=403, ui_message=gettext("unauthorized"))
+            return redirect('/') if just_logged_out else utils.error_page(error=401, ui_message=gettext("unauthorized"))
         return f(*args, user=current_user(), **kws)
 
     return inner
