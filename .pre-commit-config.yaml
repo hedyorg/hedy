@@ -3,6 +3,10 @@ repos:
     rev: v2.1.0
     hooks:
     -   id: autopep8
+        # autopep8 has a bug on Python 3.12 where it may change the contents of f-strings, which
+        # breaks our tests which assert that some string is literally equal to another string.
+        # https://github.com/hhatto/autopep8/issues/712
+        exclude: '^tests/'
   - repo: https://github.com/pycqa/flake8
     rev: 7.0.0
     hooks:
