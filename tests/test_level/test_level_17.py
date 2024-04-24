@@ -464,12 +464,16 @@ class TestsLevel17(HedyTester):
       if x is pressed:
           color red""")
 
+        # Need to exgtract this out for now because of an autopep8 bug
+        # https://github.com/hhatto/autopep8/issues/744
+        color_dict = "{'black': 'black', 'blue': 'blue', 'brown': 'brown', 'gray': 'gray', 'green': 'green', 'orange': 'orange', 'pink': 'pink', 'purple': 'purple', 'red': 'red', 'white': 'white', 'yellow': 'yellow'}"
+
         expected = HedyTester.dedent(f"""\
         if_pressed_mapping = {{"else": "if_pressed_default_else"}}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         def if_pressed_x_():
             __trtl = f'red'
-            color_dict = {{'black': 'black', 'blue': 'blue', 'brown': 'brown', 'gray': 'gray', 'green': 'green', 'orange': 'orange', 'pink': 'pink', 'purple': 'purple', 'red': 'red', 'white': 'white', 'yellow': 'yellow'}}
+            color_dict = {color_dict}
             if __trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
               raise Exception(f{self.value_exception_transpiled()})
             else:
