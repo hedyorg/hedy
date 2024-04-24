@@ -18,6 +18,7 @@ import jinja_partials
 from typing import Optional
 from logging.config import dictConfig as logConfig
 from os import path
+import iso639
 
 import static_babel_content
 from markupsafe import Markup
@@ -2436,7 +2437,18 @@ def all_countries():
 def other_languages(lang_param=None):
     """Return a list of language objects that are NOT the current language."""
     current_lang = lang_param or g.lang
-    return [make_lang_obj(lang) for lang in ALL_LANGUAGES.keys() if lang != current_lang]
+    
+    # get all Hedy supported languages
+    other_langs = [make_lang_obj(lang) for lang in ALL_LANGUAGES.keys() if lang != current_lang]
+
+    # Get English names for all Hedy supported languages using iso639 and their codes
+    for lang_code in other_langs:
+        try:
+            lang_code['english'] = iso639.to_name(lang_code.get('lang'))
+        except iso639.NonExistentLanguageError:
+            pass
+
+    return other_langs
 
 
 @app.template_global()

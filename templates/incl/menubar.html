@@ -64,8 +64,9 @@
               </div>              
               <div class="flex flex-row flex-wrap w-min justify-start content-start items-start" style="max-height: {{((other_languages()|length)//3 + ((other_languages()|length)%3 > 0)*1)*3}}rem; width: 39rem;">
                 {% for lang in other_languages() %}
-                    <div class="dropdown-item language" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();" data-cy="switch-lang-{{lang.lang}}">{{ lang.sym }}</div>
+                    <div class="dropdown-item language" data-english="{{ lang.english }}" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();" data-cy="switch-lang-{{lang.lang}}">{{ lang.sym }}</div>
                 {% endfor %}
+                
                 <a id="add_language_btn" class="add-language-item language" href="https://hosted.weblate.org/new-lang/hedy/adventures/">{{_('add_your_language')}}</a>
               </div>
           </div>

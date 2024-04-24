@@ -153,15 +153,17 @@ export function initializeApp(options: InitializeAppOptions) {
   });
 
   $("#search_language").on('keyup', function() {
-      let search_query = ($("#search_language").val() as string).toLowerCase();
-      $(".language").each(function(){
-          if ($(this).html().toLowerCase().includes(search_query)) {
-              $(this).show();
-          } else {
-            $(this).hide();
-            $("#add_language_btn").show();
-          }
-      });
+    let search_query = ($("#search_language").val() as string).toLowerCase();
+    $(".language").each(function(){
+      let languageName = $(this).html().toLowerCase();
+      let englishName = $(this).attr('data-english');
+      if (englishName !== undefined && (languageName.includes(search_query) || englishName.toLowerCase().includes(search_query))) {
+          $(this).show();
+        } else {
+          $(this).hide();
+          $("#add_language_btn").show();
+        }
+    });
   });
 
   // All input elements with data-autosubmit="true" automatically submit their enclosing form
