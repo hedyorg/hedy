@@ -232,7 +232,7 @@ class AuthHelper(unittest.TestCase):
 
     def destroy_current_user(self):
         assert self.username is not None
-        self.post_data('auth/destroy', '')
+        self.post_data('auth/destroy', '', 204)
         # Remove any records of this user
         USERS.pop(self.username)
 
@@ -585,7 +585,7 @@ class TestAuth(AuthHelper):
 
         # WHEN logging out the user
         # THEN receive an OK response code from the server
-        self.post_data('auth/logout', '')
+        self.post_data('auth/logout', '', 204)
 
         # WHEN retrieving the user profile with the same cookie
         # THEN first receive a redirect response code from the server, and the next
