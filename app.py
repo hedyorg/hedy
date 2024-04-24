@@ -18,7 +18,7 @@ import jinja_partials
 from typing import Optional
 from logging.config import dictConfig as logConfig
 from os import path
-import iso639
+from iso639 import to_name, NonExistentLanguageError
 
 import static_babel_content
 from markupsafe import Markup
@@ -2452,8 +2452,8 @@ def other_languages(lang_param=None):
     # Get English names for all Hedy supported languages using iso639 and their codes
     for lang_code in other_langs:
         try:
-            lang_code['english'] = iso639.to_name(lang_code.get('lang'))
-        except iso639.NonExistentLanguageError:
+            lang_code['english'] = to_name(lang_code.get('lang'))
+        except NonExistentLanguageError:
             pass
 
     return other_langs
