@@ -2265,7 +2265,7 @@ def change_language():
     # Remove 'keyword_lang' from session, it will automatically be renegotiated from 'lang'
     # on the next page load.
     session.pop('keyword_lang')
-    return make_response('', 204)
+    return jsonify({'succes': 204})
 
 
 @app.route('/slides', methods=['GET'], defaults={'level': '1'})
