@@ -45,6 +45,12 @@
                     <input class="signup-input" id="email" name="email" type="email" required>
                 </div>
                 <div class="signup-container">
+                    <div class="hidden" id="phone-number">
+                        <label class="signup-label" for="phone">{{_('phone_number')}}</label>
+                        <input class="signup-input" id="phone" name="phone" type="number" placeholder="{{_('landcode_phone_number')}}" required>
+                    </div>
+                </div>
+                <div class="signup-container">
                     <label class="signup-label" for="password">{{_('password')}}</label>
                     <div class="flex ml-auto items-center justify-end">
                         <input class="signup-input" minlength="6" id="password" name="password" type="password" required>
@@ -202,6 +208,11 @@
                         <div class="flex justify-between items-center">
                             <label for="pair_with_teacher">{{_('pair_with_teacher')}}</label>
                             <input type="checkbox" id="pair_with_teacher" name="pair_with_teacher">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <label for="pair_with_teacher">{{_('connect_guess_teacher')}}</label>
+                            <input type="checkbox" id="pair_with_teacher" name="pair_with_teacher"
+                            _="on click toggle .hidden on #phone-number">
                         </div>
                     {% endif %}
                     <div class="flex justify-between items-center">
