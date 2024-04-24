@@ -228,10 +228,10 @@ class TestsLevel16(HedyTester):
             "lijst = [1, 2, 3]",
             HedyTester.list_access_transpiled('lijst[int(1)-1]'),
             HedyTester.list_access_transpiled('lijst[int(2)-1]'),
-            f"optellen = {self.addition_transpiled('lijst[int(1)-1]', 'lijst[int(2)-1]')}",
+            f"optellen = {self.addition_transpiled('lijst[int(1)-1]','lijst[int(2)-1]')}",
             HedyTester.list_access_transpiled('lijst[int(3)-1]'),
             f"""\
-            optellen = {self.addition_transpiled('optellen', 'lijst[int(3)-1]')}
+            optellen = {self.addition_transpiled('optellen','lijst[int(3)-1]')}
             print(f'''{{optellen}}''')""")
 
         self.multi_level_tester(
