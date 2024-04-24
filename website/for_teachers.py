@@ -19,6 +19,7 @@ from website.flask_helpers import render_template
 from website.auth import (
     is_admin,
     is_teacher,
+    is_super_teacher,
     requires_login,
     requires_teacher,
     store_new_student_account,
@@ -1181,13 +1182,17 @@ class ForTeachersModule(WebsiteModule):
         return {"success": gettext("adventure_updated")}, 200
 
     @route("/customize-adventure/<adventure_id>", methods=["DELETE"])
+    @route("/customize-adventure/<adventure_id>/<owner>", methods=["DELETE"])
     @requires_teacher
-    def delete_adventure(self, user, adventure_id):
+    def delete_adventure(self, user, adventure_id, owner=None):
         adventure = self.db.get_adventure(adventure_id)
         if not adventure:
             return utils.error_page(error=404, ui_message=gettext("retrieve_adventure_error"))
         elif adventure["creator"] != user["username"]:
-            return gettext("unauthorized"), 401
+            # in case the current user is a super teacher, they may delete any adventure.
+            if not (is_super_teacher(user) and adventure["creator"] == owner):
+                print("\n\n\n OWNER", owner, is_super_teacher(user))
+                return gettext("unauthorized"), 401
 
         self.db.delete_adventure(adventure_id)
         tags = self.db.read_tags(adventure.get("tags", []))
