@@ -2445,7 +2445,7 @@ def all_countries():
 def other_languages(lang_param=None):
     """Return a list of language objects that are NOT the current language."""
     current_lang = lang_param or g.lang
-    
+
     # get all Hedy supported languages
     other_langs = [make_lang_obj(lang) for lang in ALL_LANGUAGES.keys() if lang != current_lang]
 
