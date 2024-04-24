@@ -52,17 +52,7 @@
                 {% if achievements %}
                     <div class="mt-auto">
                         <div class="font-semibold bg-blue-600 pb-2 pt-2 text-white w-full flex flex-row gap-2 px-2 justify-between rounded-b-lg items-center">
-                            {% if user_achievements.run_programs %}
-                                <div class="profile-nametag__stats">{{ user_achievements.run_programs }} {{_('amount_created')}}</div>
-                            {% else %}
-                                <div class="profile-nametag__stats">0 {{_('amount_created')}}</div>
-                            {% endif %}
-                            <div class="h-8 w-px border-r border-white relative"></div>
-                            {% if user_achievements.saved_programs %}
-                                <div class="profile-nametag__stats">{{ user_achievements.saved_programs }} {{_('amount_saved')}}</div>
-                            {% else %}
-                                <div class="profile-nametag__stats">0 {{_('amount_saved')}}</div>
-                            {% endif %}
+                            <div class="profile-nametag__stats">{{ user_program_count }} {{_('amount_saved')}}</div>
                             <div class="h-8 w-px border-r border-white relative"></div>
                             {% if user_achievements.submitted_programs %}
                                 <div class="profile-nametag__stats">{{ user_achievements.submitted_programs }} {{_('amount_submitted')}}</div>
