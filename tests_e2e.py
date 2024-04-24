@@ -194,7 +194,7 @@ class AuthHelper(unittest.TestCase):
             self,
             path,
             body,
-            expect_http_code=204,
+            expect_http_code=200,
             no_cookie=False,
             return_headers=False,
             put_data=False):
