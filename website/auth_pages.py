@@ -175,7 +175,7 @@ class AuthModule(WebsiteModule):
             return gettext("exists_email"), 403
 
         # We receive the pre-processed user and response package from the function
-        user, resp = self.store_new_account(body, body["email"].strip().lower(), body["phone"].strip())
+        user, resp = self.store_new_account(body, body["email"].strip().lower())
 
         if not is_testing_request(request) and "subscribe" in body:
             # If we have a Mailchimp API key, we use it to add the subscriber through the API
@@ -425,13 +425,13 @@ class AuthModule(WebsiteModule):
         self.db.update_user(user["username"], {"teacher_request": True})
         return jsonify({"message": gettext("teacher_account_success")}), 200
 
-    def store_new_account(self, account, email, phone):
+    def store_new_account(self, account, email):
         username, hashed, hashed_token = prepare_user_db(account["username"], account["password"])
         user = {
             "username": username,
             "password": hashed,
             "email": email,
-            "phone": phone,
+            "phone": account.get("phone"),
             "language": account["language"],
             "keyword_language": account["keyword_language"],
             "created": timems(),
