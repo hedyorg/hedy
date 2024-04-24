@@ -68,6 +68,7 @@ class PublicAdventuresModule(WebsiteModule):
                 "tags": adv_tags,
                 "text": content,
                 "is_teacher_adventure": True,
+                "flagged": adventure.get("flagged"),
             }
 
             # save adventures for later usage.
@@ -255,3 +256,10 @@ class PublicAdventuresModule(WebsiteModule):
             else:
                 adv_tags = adventure.get("tags", [])
                 self.available_tags.update(adv_tags)
+
+    @route("/flag/<adventure_id>", methods=["POST"])
+    @route("/flag/<adventure_id>/<flagged>", methods=["POST"])
+    @requires_teacher
+    def flag_adventure(self, user, adventure_id, flagged=None):
+        self.db.update_adventure(adventure_id, {"flagged": not flagged})
+        return gettext("adventure_flagged"), 400
