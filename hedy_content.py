@@ -324,6 +324,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'default',
         'print_command',
         'ask_command',
+        'functions',
         'story',
         'songs',
         'debugging'
