@@ -1622,7 +1622,7 @@ export function toggle_blur_code() {
 export async function change_language(lang: string) {
   await tryCatchPopup(async () => {
     const response = await postJsonWithAchievements('/change_language', { lang });
-    if (response.succes) {
+    if (response.success) {
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
 
