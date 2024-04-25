@@ -4,6 +4,7 @@ import unittest
 from unittest import mock
 
 from website import dynamo
+from website.dynamo import Optional
 
 
 class Helpers:
@@ -237,10 +238,10 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
             types={
                 'id': str,
                 'sort': int,
-                'x': int,
-                'y': int,
-                'm': int,
-                'n': int,
+                'x': Optional(int),
+                'y': Optional(int),
+                'm': Optional(int),
+                'n': Optional(int),
             },
             indexes=[
                 dynamo.Index(

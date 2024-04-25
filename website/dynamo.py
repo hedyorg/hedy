@@ -500,7 +500,7 @@ class Table:
 
             value = data.get(field)
             if not validate_value_against_validator(value, validator):
-                raise ValueError(f'In {data}, value of {field} should be {validator} (got {value}')
+                raise ValueError(f'In {data}, value of {field} should be {validator} (got {value})')
 
 
 def validate_value_against_validator(value, validator: 'Validator'):
