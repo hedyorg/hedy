@@ -570,6 +570,35 @@ adventures:
             14:
                 story_text: "V prejšnjih stopnjah ste se naučili ustvarjati funkcije in z njimi uporabljati argumente. Funkcijo lahko uporabite tudi tako, da ji dovolite, da nekaj izračuna namesto vas.\nFunkciji lahko podate formulo za izračun, ona pa vam bo podala odgovor. Ta odgovor se imenuje **vrnjena vrednost**.\n\nV tej kodi bo na primer funkcija izračunaj_novo_ceno izračunala novo ceno kateregakoli predmeta. Vrnjena vrednost bo nova cena.\n\n### Vaja\nDokončajte ta program. Spremenljivko nova_cena smo za vas že ustvarili, vi jo morate le še nastaviti.\nVrstico kode zaključite tako, da pokličete funkcijo, ki izračuna novo ceno.\n"
                 example_code: "```\n{define} izračunaj_novo_ceno {with} znesek, odstotek\n    odstotek = odstotek/ 100\n    znesek_popusta = znesek* odstotek\n    return znesek - znesek_popusta\n\nstara_cena = {ask} 'Kakšna je označena cena?'\npopust = {ask} 'Kakšen je odstotek popusta?'\n\nnova_cena = _ izračunaj_novo_ceno {with} stara_cena, _\n{print} 'Nova cena je ' nova_cena ' Eurov'\n```\n"
+            18:
+                story_text: |
+                    Let's make functions the Pythons way! To define a function, we no longer use:
+
+                    `{define} name_function {with} argument_1, argument_2:`
+
+                    but we use:
+
+                    `{def} name_function(argument_1, argument_2):`.
+
+
+                    If you don't want to use arguments, you just leave the space between the parantheses empty.
+                    To call a function, we don't need the `{call}` command anymore. You just type the name of the function.
+                example_code: |
+                    ```
+                    {def} calculate_score(answer, correct_answer):
+                        {if} answer == correct_answer:
+                            score = 1
+                        {elif} answer == '?':
+                            score = 0
+                        {else}:
+                            score = -1
+                        {return} score
+
+                    answer = {input} ('Where can you find the Eiffel Tower?')
+                    correct_answer = 'Paris'
+                    score = calculate_score(answer, correct_answer)
+                    {print} ('Your score is... ', score)
+                    ```
     guess_my_number:
         name: Guess my number
         default_save_name: guess my number
