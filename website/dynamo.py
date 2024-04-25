@@ -1415,6 +1415,7 @@ class Validator(metaclass=ABCMeta):
 
 class Any(Validator):
     """Validator which allows any type."""
+
     def is_valid(self, value):
         return True
 
@@ -1424,6 +1425,7 @@ class Any(Validator):
 
 class InstanceOf(Validator):
     """Validator which checks if a value is an instance of a type."""
+
     def __init__(self, type):
         self.type = type
 
@@ -1436,6 +1438,7 @@ class InstanceOf(Validator):
 
 class Predicate(Validator):
     """Validator which calls an arbitrary callback."""
+
     def __init__(self, fn):
         self.fn = fn
 
@@ -1448,6 +1451,7 @@ class Predicate(Validator):
 
 class Optional(Validator):
     """Validator which matches either None or an inner validator."""
+
     def __init__(self, inner):
         self.inner = Validator.ensure(inner)
 
@@ -1460,6 +1464,7 @@ class Optional(Validator):
 
 class SetOf(Validator):
     """Validator which matches a set matching inner validators."""
+
     def __init__(self, inner):
         self.inner = Validator.ensure(inner)
 
@@ -1472,6 +1477,7 @@ class SetOf(Validator):
 
 class ListOf(Validator):
     """Validator which matches a list matching inner validators."""
+
     def __init__(self, inner):
         self.inner = Validator.ensure(inner)
 
@@ -1484,6 +1490,7 @@ class ListOf(Validator):
 
 class RecordOf(Validator):
     """Validator which matches a record with inner validators."""
+
     def __init__(self, inner):
         self.inner = Validator.ensure_all(inner)
 
