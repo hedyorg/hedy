@@ -1733,6 +1733,14 @@ adventures:
                         {print} i
                     {print} 'Wie niet weg is, is gezien! Ik kom!'
                     ```
+            18:
+                story_text: |
+                    Tot slot maken we echte Python code van `{for} i {in} {range} 1 to 5` op deze manier:
+                example_code: |
+                    ```
+                    {for} i {in} {range}(1,5):
+                        {print} (i)
+                    ```
     fortune:
         name: Waarzegger
         default_save_name: Waarzegger
@@ -1984,6 +1992,36 @@ adventures:
 
                     nieuwe_prijs = _ bereken_nieuwe_prijs with oude_prijs, _
                     {print} 'De nieuwe prijs is ' nieuwe_prijs ' euro'
+                    ```
+            18:
+                story_text: |
+                    Laten we functies ook op de Pythonmanier maken! Om een functie te maken gebruiken we niet langer:
+
+
+                    `{define} naam_functie {with} argument_1, argument_2:`
+
+                    Maar we gebruiken nu:
+
+                    `{def} naam_functie(argument_1, argument_2):`.
+
+
+                    Als je geen argumenten wil gebruiken dan laat je de ruimte tussen de haakjes leeg.
+                    Om een functie op te roepen hoef je geen `{call}` meer te gebruiken, maar typ je gewoon de naam van de functie.
+                example_code: |
+                    ```
+                    {def} bereken_score(antwoord, goede_antwoord):
+                        {if} antwoord == goede_antwoord:
+                            score = 1
+                        {elif} antwoord == '?':
+                            score = 0
+                        {else}:
+                            score = -1
+                        {return} score
+
+                    antwoord = {input} ('Waar staat de Eiffeltoren?')
+                    goede_antwoord = 'Parijs'
+                    score = bereken_score(antwoord, goede_antwoord)
+                    {print} ('Je score is... ', score)
                     ```
     guess_my_number:
         name: Raad mijn getal
@@ -4092,7 +4130,7 @@ adventures:
                     ***Maak een functie die de simon_reeks toont*** Noem de nieuwe functie `toon_simon_reeks` met `level` als argument. Nu willen we zoveel kleuren laten zien als het level waar we inzitten (in level 1, dus 1 kleur en in level 2, 2 kleuren etc).
                     Dus `simon_reeks[i]` moet `level` keer worden geprint. Elke keer als er een kleur wordt geprint, moet de code even 1 seconde wachten en het scherm daarna wissen.
 
-                    ***Test het programma*** Voordat je doorgaat naar het volgende tabblad, kun je even testen of je fucnties het wel geod doen. Als de functies werken, zou je een willekeurige kleur in beeld moeten krijgen.
+                    ***Test het programma*** Voordat je doorgaat naar het volgende tabblad, kun je even testen of je functies het wel goed doen. Als de functies werken, zou je een willekeurige kleur in beeld moeten krijgen.
                     Verwijder dit testgedeelte van je code zodra je tevreden bent en kopieer de rest van je code om verde te gaan in het volgende tabje.
                 example_code: |
                     ```
