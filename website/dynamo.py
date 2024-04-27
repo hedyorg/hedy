@@ -12,7 +12,7 @@ import datetime
 import collections
 from abc import ABCMeta
 from dataclasses import dataclass
-from typing import List, Optional, Iterable
+from typing import List, Optional
 
 import boto3
 from boto3.dynamodb.types import TypeDeserializer, TypeSerializer
@@ -1392,11 +1392,11 @@ class Validator(metaclass=ABCMeta):
     @staticmethod
     def ensure(validator):
         """Turn the given value into a validator."""
-        if validator == True:
+        if validator is True:
             return Any()
         if isinstance(validator, Validator):
             return validator
-        if type(validator) == type:
+        if type(validator) is type:
             return InstanceOf(validator)
         if callable(validator):
             return Predicate(validator)
@@ -1420,7 +1420,7 @@ class Any(Validator):
         return True
 
     def __str__(self):
-        return f'any value'
+        return 'any value'
 
 
 class InstanceOf(Validator):
@@ -1495,7 +1495,8 @@ class RecordOf(Validator):
         self.inner = Validator.ensure_all(inner)
 
     def is_valid(self, value):
-        return isinstance(value, dict) and all(validator.is_valid(value.get(key)) for key, validator in self.inner.items())
+        return (isinstance(value, dict)
+            and all(validator.is_valid(value.get(key)) for key, validator in self.inner.items()))
 
     def __str__(self):
         return f'{self.inner}'
