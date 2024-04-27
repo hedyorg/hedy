@@ -1496,7 +1496,7 @@ class RecordOf(Validator):
 
     def is_valid(self, value):
         return (isinstance(value, dict)
-            and all(validator.is_valid(value.get(key)) for key, validator in self.inner.items()))
+                and all(validator.is_valid(value.get(key)) for key, validator in self.inner.items()))
 
     def __str__(self):
         return f'{self.inner}'
