@@ -1472,6 +1472,7 @@ export function expandVariableView() {
 
   const variables = $('#variables');
   variables.removeClass('h-24');
+  variables.addClass('h-full');
   const output = $('#output');
   output.hide();
 }
@@ -1486,6 +1487,7 @@ export function closeVariableView() {
 
     const variables = $('#variables');
   variables.addClass('h-24');
+  variables.removeClass('h-full');
     const output = $('#output');
   output.show();
 }
