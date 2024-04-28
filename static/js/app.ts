@@ -9,7 +9,12 @@ import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './type
 import { startIntroTutorial } from './tutorials/tutorial';
 import { get_parsons_code, initializeParsons, loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
-import { incrementDebugLine, initializeDebugger, load_variables, startDebug } from './debugging';
+import {
+    incrementDebugLine,
+    initializeDebugger,
+    load_variables,
+    startDebug
+} from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
 import { postJson, postNoResponse } from './comm';
@@ -474,6 +479,24 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
   // Copy 'currentTab' into a variable, so that our event handlers don't mess up
   // if the user changes tabs while we're waiting for a response
   const adventureName = currentTab;
+
+     if (run_type === 'debug' || run_type === 'continue') {
+          if($('#variables #variable-list li').length == 0){
+            $('#variable_button').hide();
+            $('#variables').hide();
+            $('#variables-expand').hide();
+          }
+          else{
+            $('#variable_button').show();
+            $('#variables').show();
+            $('#variables-expand').show();
+          }
+          setTimeout(() => {
+                $('#variables-expand').hide();
+                $('#variables').hide();
+          }, 5000);
+
+     }
 
   if (askPromptOpen) {
     // If there is no message -> don't show a prompt
@@ -1401,6 +1424,16 @@ export function showVariableView() {
   }
   else {
     variables.hide();
+    const output = $('#output');
+    output.show();
+  }
+  const variablesExpand = $('#variables-expand');
+  if (variablesExpand.is(":hidden")) {
+    variablesExpand.show();
+    $("#variables").trigger("click")
+  }
+  else {
+    variablesExpand.hide();
   }
 }
 
@@ -1429,6 +1462,33 @@ export function getEditorContents() {
   return theGlobalEditor.contents;
 }
 
+export function expandVariableView() {
+  const openVariables = $('#open-variables');
+  openVariables.hide();
+  const closeVariables = $('#close-variables');
+  if(closeVariables.hasClass('hidden')){
+      closeVariables.removeClass('hidden');
+  }
+
+  const variables = $('#variables');
+  variables.removeClass('h-24');
+  const output = $('#output');
+  output.hide();
+}
+
+export function closeVariableView() {
+  const openVariables = $('#open-variables');
+  openVariables.show();
+  const closeVariables = $('#close-variables');
+  if(!closeVariables.hasClass('hidden')){
+      closeVariables.addClass('hidden');
+  }
+
+    const variables = $('#variables');
+  variables.addClass('h-24');
+    const output = $('#output');
+  output.show();
+}
 export function confetti_cannon(){
   const canvas = document.getElementById('confetti');
   if (canvas) {
