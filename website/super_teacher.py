@@ -1,9 +1,8 @@
 
 from flask import render_template, request
-from flask_babel import gettext
 
 
-from website.auth import requires_super_teacher, pick
+from website.auth import requires_super_teacher, pick, is_teacher
 import utils
 
 from .database import Database
@@ -60,12 +59,15 @@ class SuperTeacherModule(WebsiteModule):
             "experience_languages",
             "language",
             "keyword_language",
+            "support_teacher"
         ]
 
         for user in users:
             data = pick(user, *fields)
             data["email_verified"] = not bool(data["verification_pending"])
             data["is_teacher"] = bool(data["is_teacher"])
+            if not data["is_teacher"]:
+                continue
             data["teacher_request"] = True if data["teacher_request"] else None
             data["created"] = utils.timestamp_to_date(data["created"])
             data["last_login"] = utils.timestamp_to_date(data["last_login"]) if data.get("last_login") else None
@@ -98,7 +100,7 @@ class SuperTeacherModule(WebsiteModule):
         return render_template(
             "super-teacher/support.html",
             users=userdata,
-            page_title=gettext("title_admin"),
+            page_title="Support teachers",
             filter=category,
             start_date=start_date,
             end_date=end_date,
@@ -107,5 +109,39 @@ class SuperTeacherModule(WebsiteModule):
             keyword_language_filter=keyword_language,
             next_page_token=users.next_page_token,
             current_page="admin",
-            javascript_page_options=dict(page='admin-users'),
+            javascript_page_options=dict(page='super-teacher'),
         )
+
+    @route("/invite-support", methods=["POST"])
+    @requires_super_teacher
+    def invite_support(self, user):
+        body = request.json
+        if not body.get("sourceUser"):
+            return "Please provide a user who needs help", 400
+        if not body.get("targetUser"):
+            return "Please provide a username", 400
+
+        username = body["sourceUser"]
+        source_user = self.db.user_by_username(username)
+        if not source_user:
+            return f"{username} is not an existing user.", 400
+        elif not is_teacher(source_user):
+            return f"{username} is not a teacher.", 400
+
+        username = body["targetUser"]
+        target_user = self.db.user_by_username(username)
+        if not target_user:
+            return f"{username} is not an existing user.", 400
+        elif not is_teacher(target_user):
+            return f"{username} is not a teacher.", 400
+
+        if source_user["username"] == target_user["username"]:
+            return "Both usernames are the same", 400
+
+        if (source_user.get("support_teacher") and source_user["support_teacher"] == target_user["username"]) \
+                or (target_user.get("support_teacher") and target_user["support_teacher"] == source_user["username"]):
+            return "Not possible to add this support teacher", 400
+
+        # send a request/email instead.
+        self.db.update_user(source_user["username"], {"support_teacher": target_user["username"]})
+        return "Done", 200

@@ -2,50 +2,34 @@
 
 {% block regular_content %}
 <h4 class="text-center">Total amount of shown users: {{ users|length }}</h4>
-<div class="program w-full border-solid border-2 border-orange-400 rounded p-4">
-  <table class="table-auto w-full text-sm">
-    <thead>
-      <tr class="font-bold text-left">
-          <td id="username_header">Username</td>
-          <td id="count_header" class="hidden">Programs</td>
-          <td id="email_header">Email</td>
-          <td id="created_header" class="hidden">Created</td>
-          <td id="last_login_header">Last login</td>
-          <td id="birth_year_header">Birth year</td>
-          <td id="language_header">Language</td>
-          <td id="keyword_language_header">Keyword lang</td>
-          <td id="country_header">Country</td>
-          <td id="gender_header" class="hidden">Gender</td>
-          <td id="experience_header" class="hidden">Experience</td>
-          <td id="tags_header" class="text-center">Tags</td>
-          <td id="teacher_header" class="text-center">Teacher</td>
-          <td id="teacher_header" class="text-center">Super Teacher</td>
-          <td id="verified_header" class="hidden">Verified</td>
+<div class="program w-full ">
+    <table class="w-full border border-gray-400">
+      <thead>
+        <tr class="bg-blue-300 text-blue-900">
+          <td class="px-2 py-2 text-center" id="username_header">Username</td>
+          <td class="px-2 py-2 text-center" id="email_header">Email</td>
+          <td class="px-2 py-2 text-center" id="last_login_header">Last login</td>
+          <td class="px-2 py-2 text-center" id="language_header">Language</td>
+          <td class="px-2 py-2 text-center" id="country_header">Country</td>
+          <td class="px-2 py-2 text-white text-center bg-blue-900" id="">Support Teacher</td>
       </tr>
     </thead>
     <tbody>
       {% for user in users %}
-          <tr>
-            <td class="username_cell cursor-pointer"><a class="no-underline" onclick="window.open('/programs?user={{ user.username }}', '_blank');">{% if user.username|length > 18 %}{{user.username[:15] + "..."}}{% else %}{{user.username}}{% endif %}</a></td>
-            <td class="count_cell hidden">{{user.program_count or 0}}</td>
-            <td class="email_cell cursor-pointer"><a class="no-underline" onclick="hedyApp.changeUserEmail ('{{user.username}}', '{{user.email}}')">{% if user.email and user.email|length > 30 %}{{user.email[:27] + "..."}}{% else %}{{user.email}}{% endif %}</a></td>
-            <td class="created_cell hidden">{{user.created}}</td>
-            <td class="last_login_cell">{{user.last_login}}</td>
-            <td class="birth_year_cell">{{user.birth_year}}</td>
-            <td class="language_cell">{{user.language}}</td>
-            <td class="keyword_language_cell">{{user.keyword_language}}</td>
-            <td class="country_cell">{{user.country}}</td>
-            <td class="gender_cell hidden">{{user.gender}}</td>
-            <td class="experience_cell hidden">{{user.prog_experience}}</td>
-            <td class="tags_cell text-center cursor-pointer"><span onclick="hedyApp.edit_user_tags('{{user.username}}');">✏️</span></td>
-            {% if user.teacher_request %}
-                <td class="teacher_cell text-center"><span class="fa-solid fa-circle-question cursor-pointer" onclick="hedyApp.markAsTeacher (this, '{{user.username}}', true, true)"></span></td>
-            {% else %}
-                <td class="teacher_cell text-center"><input type="checkbox" {% if user.is_teacher %}checked="checked"{% endif %} onclick="hedyApp.markAsTeacher (this, '{{user.username}}', {% if user.is_teacher %}false{% else %}true{% endif %}, false)"></td>
-            {% endif %}
-            <td class="teacher_cell text-center"><input type="checkbox" {% if user.is_super_teacher %}checked="checked"{% endif %} onclick="hedyApp.markSuperTeacher (this, '{{user.username}}', {% if user.is_super_teacher %}true{% else %}false{% endif %})"></td>
-            <td class="verified_cell hidden">{{user.email_verified}}</td>
-            <td class="third_party_cell hidden text-center"><input type="checkbox" {% if user.third_party %}checked="checked"{% endif %} ></td>
+          <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
+            <td class="username_cell cursor-pointer text-center p-2"><a class="no-underline" onclick="window.open('/programs?user={{ user.username }}', '_blank');">{% if user.username|length > 18 %}{{user.username[:15] + "..."}}{% else %}{{user.username}}{% endif %}</a></td>
+            <td class="email_cell cursor-pointer text-center p-2"><a class="no-underline" onclick="hedyApp.changeUserEmail ('{{user.username}}', '{{user.email}}')">{% if user.email and user.email|length > 30 %}{{user.email[:27] + "..."}}{% else %}{{user.email}}{% endif %}</a></td>
+            <td class="last_login_cell text-center p-2">{{user.last_login}}</td>
+            <td class="language_cell text-center p-2">{{user.language}}</td>
+            <td class="country_cell text-center p-2">{{user.country}}</td>
+            <td class="tags_cell text-center cursor-pointer text-center p-2">
+              {% if user.support_teacher %}
+                {{user.support_teacher}}
+              {% else %}
+                <button class="green-btn" id="invite-support-teacher"
+                  onclick='hedyApp.invite_support_teacher("{{user.username}}")'>{{_('invite_by_username')|lower}}</button>
+              {% endif %}
+            </td>
           </tr>
       {% endfor %}
     </tbody>
