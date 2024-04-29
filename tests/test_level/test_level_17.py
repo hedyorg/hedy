@@ -165,6 +165,29 @@ class TestsLevel17(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
+    def test_for_loop_no_colon_after_pressed_gives_error(self):
+        code = textwrap.dedent("""\
+        for a in range 2 to 4
+            a = 1""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('for in range', 1)
+        )
+
+    def test_for_list_without_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        dieren = ['cat', 'dog', 'parrot']
+        for dier in dieren
+            a = 1""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('for in', 2)
+        )
+
     def test_if__else(self):
         code = textwrap.dedent("""\
     a is 5
@@ -218,12 +241,24 @@ class TestsLevel17(HedyTester):
 
     def test_while_undefined_var(self):
         code = textwrap.dedent("""\
-      while antwoord != 25:
-          print 'hoera'""")
+        while antwoord != 25:
+            print 'hoera'""")
 
         self.single_level_tester(
             code=code,
             exception=hedy.exceptions.UndefinedVarException
+        )
+
+    def test_while_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        a = 1
+        while a != 5
+            a = a + 1""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('while', 2)
         )
 
     def test_allow_space_before_colon(self):
@@ -464,13 +499,16 @@ class TestsLevel17(HedyTester):
       if x is pressed:
           color red""")
 
+        # Need to exgtract this out for now because of an autopep8 bug
+        # https://github.com/hhatto/autopep8/issues/744
+        color_dict = "{'black': 'black', 'blue': 'blue', 'brown': 'brown', 'gray': 'gray', 'green': 'green', 'orange': 'orange', 'pink': 'pink', 'purple': 'purple', 'red': 'red', 'white': 'white', 'yellow': 'yellow'}"
+
         expected = HedyTester.dedent(f"""\
         if_pressed_mapping = {{"else": "if_pressed_default_else"}}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         def if_pressed_x_():
             __trtl = f'red'
-            color_dict = {{'black': 'black', 'blue': 'blue', 'brown': 'brown', 'gray': 'gray', 'green': 'green',
-                'orange': 'orange', 'pink': 'pink', 'purple': 'purple', 'red': 'red', 'white': 'white', 'yellow': 'yellow'}}
+            color_dict = {color_dict}
             if __trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
               raise Exception(f{self.value_exception_transpiled()})
             else:
@@ -485,15 +523,108 @@ class TestsLevel17(HedyTester):
             extra_check_function=self.is_turtle()
         )
 
-    def test_if_no_colon_after_pressed_gives_parse_error(self):
+    def test_if_pressed_no_colon_gives_error(self):
         code = textwrap.dedent("""\
         if x is pressed
-            print 'no colon!'""")
+            a = 'no colon!'""")
 
-        self.single_level_tester(
+        self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.ParseException,
-            extra_check_function=lambda c: c.exception.error_location[0] == 2 and c.exception.error_location[1] == 31
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('if', 1)
+        )
+
+    def test_pressed_elif_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if x is pressed:
+            a = 'correct'
+        elif m is pressed
+            a = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('elif', 3)
+        )
+
+    def test_pressed_if_else_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if x is pressed:
+            a = 'correct'
+        else
+            a = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('else', 3)
+        )
+
+    def test_pressed_if_elif_else_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if x is pressed:
+            a = 'correct'
+        elif m is pressed:
+            a = 'correct'
+        else
+            a = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('else', 5)
+        )
+
+    def test_if_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if 'a' is 'a'
+            b = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('if', 1)
+        )
+
+    def test_elif_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if 'a' is 'a':
+            b = 'colon!'
+        elif 'a' is 'b'
+            b = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('elif', 3)
+        )
+
+    def test_else_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if 'a' is 'a':
+            b = 'colon!'
+        else
+            b = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('else', 3)
+        )
+
+    def test_if_elif_else_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if 'a' is 'a':
+            b = 'colon!'
+        elif 'a' is 'b':
+            b = 'colon!'
+        else
+            b = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('else', 5)
         )
 
     def test_if_button_is_pressed_print(self):
@@ -559,6 +690,18 @@ class TestsLevel17(HedyTester):
             skipped_mappings=skipped_mappings,
         )
 
+    def test_define_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+            define simple_function
+                a = 1
+            call simple_function""")
+
+        self.single_level_tester(
+            code=code,
+            exception=exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('define', 1)
+        )
+
     def test_source_map(self):
         code = textwrap.dedent("""\
         for i in range 1 to 10:
@@ -583,3 +726,8 @@ class TestsLevel17(HedyTester):
 
         self.single_level_tester(code, expected=excepted_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
+
+def missing_colon_check(command, line_number):
+    return lambda c: (c.exception.arguments['line_number'] == line_number and
+                      c.exception.arguments['command'] == command)
