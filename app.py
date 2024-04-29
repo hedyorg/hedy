@@ -2447,14 +2447,14 @@ def other_languages(lang_param=None):
     current_lang = lang_param or g.lang
     # these are the languages that iso doesn't have the English translations for
     non_iso_transl = {
-    'kmr': 'Kurdish',
-    'nb_NO': 'Norwegian',
-    'pa_PK': 'Punjabi',
-    'pap': 'Papiamento',
-    'pt_BR': 'Portuguese',
-    'pt_PT': 'Portuguese',
-    'zh_Hans': 'Chinese',
-    'zh_Hant': 'Chinese'
+        'kmr': 'Kurdish',
+        'nb_NO': 'Norwegian',
+        'pa_PK': 'Punjabi',
+        'pap': 'Papiamento',
+        'pt_BR': 'Portuguese',
+        'pt_PT': 'Portuguese',
+        'zh_Hans': 'Chinese',
+        'zh_Hant': 'Chinese'
     }
 
     # get all Hedy supported languages
