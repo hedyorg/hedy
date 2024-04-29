@@ -376,8 +376,8 @@ adventures:
                     Copy your code from the previous tab and make the variables interactive by using `{ask}` commands.
                 example_code_2: |
                     ```
-                    favorite_animals {is} {ask} What is your favorite animal?
-                    {print} I like favorite_animals
+                    favorite_animal {is} {ask} What is your favorite animal?
+                    {print} I like favorite_animal
                     ```
             18:
                 story_text: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
@@ -1787,6 +1787,14 @@ adventures:
                         {print} i
                     {print} 'Ready or not, here I come!'
                     ```
+            18:
+                story_text: |
+                    Lastly, we'll turn `{for} i {in} {range} 1 to 5` into real Python code, like this:
+                example_code: |
+                    ```
+                    {for} i {in} {range}(1,5):
+                        {print} (i)
+                    ```
     fortune:
         name: Fortune teller
         default_save_name: Fortune Teller
@@ -1998,9 +2006,9 @@ adventures:
                     An **argument** is a variable that is used within a function. It is not used outside the function.
 
                     For example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.
-                    In this example code the argument `place` is used. Place is a variable that is only used in the function, so an argument.
-                    To use `place` we have programmed the line `define song with place`.
-                    When the function is called, computer will replace the argument `place`, with the piece of text after `call song with`.
+                    In this example code the argument 'place' is used. Place is a variable that is only used in the function, so an argument.
+                    To use 'place' we have placed `{with} place` after `{define} song` .
+                    When the function is called, computer will replace the argument 'place', with the piece of text after `{call} song {with}`.
 
                     ### Exercise
                     The next verse of this song goes:
@@ -2044,6 +2052,35 @@ adventures:
 
                     new_price = _ calculate_new_price {with} old_price, _
                     {print} 'The new price is ' new_price ' dollar'
+                    ```
+            18:
+                story_text: |
+                    Let's make functions the Pythons way! To define a function, we no longer use:
+
+                    `{define} name_function {with} argument_1, argument_2:`
+
+                    but we use:
+
+                    `{def} name_function(argument_1, argument_2):`.
+
+
+                    If you don't want to use arguments, you just leave the space between the parantheses empty.
+                    To call a function, we don't need the `{call}` command anymore. You just type the name of the function.
+                example_code: |
+                    ```
+                    {def} calculate_score(answer, correct_answer):
+                        {if} answer == correct_answer:
+                            score = 1
+                        {elif} answer == '?':
+                            score = 0
+                        {else}:
+                            score = -1
+                        {return} score
+
+                    answer = {input} ('Where can you find the Eiffel Tower?')
+                    correct_answer = 'Paris'
+                    score = calculate_score(answer, correct_answer)
+                    {print} ('Your score is... ', score)
                     ```
     guess_my_number:
         name: Guess my number
@@ -2595,12 +2632,12 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     Time to make your own variables!
-                    In the example code we made an example of the variable `favorite_animals`. In line 1 the variable is set, and in line 2 we used the variable in a `{print}` command.
+                    In the example code we made an example of the variable `favorite_animal`. In line 1 the variable is set, and in line 2 we used the variable in a `{print}` command.
                     Firstly, finish our example by filling in your favorite animal in the blanks. Then make at least 3 of these codes yourself. Pick a variable, and set the variable with the `{is}` command. Then use it with a `{print}` command, just like we did.
                 example_code_2: |
                     ```
-                    favorite_animals {is} _
-                    {print} I like favorite_animals
+                    favorite_animal {is} _
+                    {print} I like favorite_animal
                     ```
             6:
                 story_text: |
@@ -3515,7 +3552,7 @@ adventures:
                     Level 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times. Like this:
 
                     ### Exercise
-                    Play around with the repeat command. Can you make the happy birthday song in only 3 lines of code instead of 4 now?
+                    Play around with the `{repeat}` command. Can you make the happy birthday song in only 3 lines of code instead of 4 now?
                 example_code: |
                     ```
                     {repeat} 3 {times} {print} 'Hedy is fun!'
@@ -3535,18 +3572,20 @@ adventures:
                     ```
             9:
                 story_text: |
-                    Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...
-                    Good news! In this level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command. Putting a block of code inside another block of code is called nesting.                     ``` Putting a block of code inside another block of code is called nesting.
+                    Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an `{if}` or `{repeat}` command. 
+                    But you can't yet combine the two...
+
+                    Good news! In this level you will be allowed to put an `{if}` inside an `{if}`, `{repeat}` inside a `{repeat}` command and in eachother.
+                    Give it a try!
                 example_code: |
                     ```
-                    answer = {ask} 'Are you ready to learn something new?'
-                    {if} answer {is} yes
-                        {print} 'Great! You can learn to use the repeat command in the if command!'
-                        {print} 'Hooray!'
-                        {print} 'Hooray!'
-                        {print} 'Hooray!'
-                    {else}
-                        {print} 'Maybe you should practice some more in the previous level'
+                    {repeat} 3 {times}
+                        order = {ask} 'What would you like to order?'
+                        {if} order {is} pizza
+                            {print} 'Yammie'
+                        {else}
+                            {print} 'pizza is better!'
+                    ```
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: repeat_command_2
@@ -3665,6 +3704,8 @@ adventures:
                     ```
             4:
                 story_text: |
+                    In the restaurant you have to use quotation marks too when using the `{print}` or `{ask}` command.
+
                     ### Exercise
                     Add the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.
                     Then, use the `{clear}` command to only show one line at a time in your output screen.

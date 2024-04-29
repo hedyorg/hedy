@@ -374,8 +374,8 @@ adventures:
                     이전 탭에서 코드를 복사하고 `{ask}` 명령을 사용하여 변수를 상호작용시킵니다.
                 example_code_2: |
                     ```
-                    favorite_animals {is} {ask} What is your favorite animal?
-                    {print} I like favorite_animals
+                    favorite_animal {is} {ask} What is your favorite animal?
+                    {print} I like favorite_animal
                     ```
             18:
                 story_text: 파이썬 코드를 얻기 위해 우리가 해야 할 마지막 변화는 `{ask}`를 `{input}`으로 바꾸는 것이다.
@@ -1800,6 +1800,14 @@ adventures:
                         {print} i
                     {print} 'Ready or not, here I come!'
                     ```
+            18:
+                story_text: |
+                    Lastly, we'll turn `{for} i {in} {range} 1 to 5` into real Python code, like this:
+                example_code: |
+                    ```
+                    {for} i {in} {range}(1,5):
+                        {print} (i)
+                    ```
     fortune:
         name: 예언가
         default_save_name: 예언가
@@ -2055,6 +2063,35 @@ adventures:
 
                     new_price = _ calculate_new_price {with} old_price, _
                     {print} 'The new price is ' new_price ' dollar'
+                    ```
+            18:
+                story_text: |
+                    Let's make functions the Pythons way! To define a function, we no longer use:
+
+                    `{define} name_function {with} argument_1, argument_2:`
+
+                    but we use:
+
+                    `{def} name_function(argument_1, argument_2):`.
+
+
+                    If you don't want to use arguments, you just leave the space between the parantheses empty.
+                    To call a function, we don't need the `{call}` command anymore. You just type the name of the function.
+                example_code: |
+                    ```
+                    {def} calculate_score(answer, correct_answer):
+                        {if} answer == correct_answer:
+                            score = 1
+                        {elif} answer == '?':
+                            score = 0
+                        {else}:
+                            score = -1
+                        {return} score
+
+                    answer = {input} ('Where can you find the Eiffel Tower?')
+                    correct_answer = 'Paris'
+                    score = calculate_score(answer, correct_answer)
+                    {print} ('Your score is... ', score)
                     ```
     guess_my_number:
         name: Guess my number
@@ -2606,12 +2643,12 @@ adventures:
                 story_text_2: |
                     ### 연습문제
                     변수를 직접 만들어 볼 시간!
-                    예제 코드에서 우리는 `favorite_animals` 변수의 예를 만들었다. 1행에서 변수가 설정되어 있고, 2행에서 우리는 인쇄 명령에 변수를 사용했다.
+                    예제 코드에서 우리는 `favorite_animal` 변수의 예를 만들었다. 1행에서 변수가 설정되어 있고, 2행에서 우리는 인쇄 명령에 변수를 사용했다.
                     먼저 빈칸에 가장 좋아하는 동물을 채우는 것으로 예제를 끝내라. 그런 다음 적어도 3개의 코드를 직접 만들어라. 변수를 골라서, {is} 명령어로 변수를 설정한다. 그런 다음 우리가 했던 것처럼 {print} 명령어로 사용한다.
                 example_code_2: |
                     ```
-                    favorite_animals is _
-                    {print} I like favorite_animals
+                    favorite_animal {is} _
+                    {print} I like favorite_animal
                     ```
             6:
                 story_text: |

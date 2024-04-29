@@ -1787,6 +1787,14 @@ adventures:
                         {print} i
                     {print} "Caché ou pas, j'arrive !"
                     ```
+            18:
+                story_text: |
+                    Lastly, we'll turn `{for} i {in} {range} 1 to 5` into real Python code, like this:
+                example_code: |
+                    ```
+                    {for} i {in} {range}(1,5):
+                        {print} (i)
+                    ```
     fortune:
         name: La voyante
         default_save_name: La voyante
@@ -2042,6 +2050,35 @@ adventures:
 
                     new_price = _ calculate_new_price {with} old_price, _
                     {print} 'The new price is ' new_price ' dollar'
+                    ```
+            18:
+                story_text: |
+                    Let's make functions the Pythons way! To define a function, we no longer use:
+
+                    `{define} name_function {with} argument_1, argument_2:`
+
+                    but we use:
+
+                    `{def} name_function(argument_1, argument_2):`.
+
+
+                    If you don't want to use arguments, you just leave the space between the parantheses empty.
+                    To call a function, we don't need the `{call}` command anymore. You just type the name of the function.
+                example_code: |
+                    ```
+                    {def} calculate_score(answer, correct_answer):
+                        {if} answer == correct_answer:
+                            score = 1
+                        {elif} answer == '?':
+                            score = 0
+                        {else}:
+                            score = -1
+                        {return} score
+
+                    answer = {input} ('Where can you find the Eiffel Tower?')
+                    correct_answer = 'Paris'
+                    score = calculate_score(answer, correct_answer)
+                    {print} ('Your score is... ', score)
                     ```
     guess_my_number:
         name: Devine le nombre
@@ -2615,12 +2652,12 @@ adventures:
                 story_text_2: |
                     ### Exercice
                     Il est temps de faire tes propres variables !
-                    Dans le code d'exemple, nous avons défini la variable `animaux_préférés`. En ligne 1, la variable reçoit une valeur, et en ligne 2 nous avons utilisé la variable dans une commande `{print}`.
+                    Dans le code d'exemple, nous avons défini la variable `animal_préféré`. En ligne 1, la variable reçoit une valeur, et en ligne 2 nous avons utilisé la variable dans une commande `{print}`.
                     Pour commencer, termine notre exemple en remplissant l'espace vide avec le nom de ton animal préféré. Ensuite, essaye d'écrire 3 autres codes toi-même. Choisi un nom de variable, donne-lui une valeur avec la commande `{is}`. Ensuite, utilise ta nouvelle variable dans une commande `{print}`, comme dans l'exemple.
                 example_code_2: |
                     ```
-                    animaux_préférés {is} _
-                    {print} J'aime les animaux_préférés
+                    animal_préféré {is} _
+                    {print} J'aime les animal_préféré
                     ```
             6:
                 story_text: |

@@ -1,6 +1,6 @@
 
 import os
-from flask import request, session
+from flask import make_response, request, session
 
 # import utils
 from config import config
@@ -62,6 +62,6 @@ class UserActivityModule(WebsiteModule):
 
         try:
             logger.log(data)
-            return {}, 200
+            return make_response('', 204)
         except IOError:
             return "Not logged", 400

@@ -282,6 +282,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     15: [
         'default',
         'while_command',
+        'music',
         'turtle_draw_it',
         'restaurant',
         'story',
@@ -298,6 +299,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'haunted',
         'songs',
         'songs_2',
+        'music',
         'language',
         'simon',
         'simon_2',
@@ -309,6 +311,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'default',
         'for_command',
         'elif_command',
+        'music',
         'tic',
         'hangman',
         'hangman_2',
@@ -324,8 +327,11 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'default',
         'print_command',
         'ask_command',
+        'functions',
+        'for_command',
         'story',
         'songs',
+        'music',
         'debugging'
     ]
 }
