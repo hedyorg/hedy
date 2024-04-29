@@ -35,7 +35,7 @@ _IN: _SPACE ("nimistus" | "in") _SPACE
 _NOT_IN: _SPACE ("not in" | "not in") _SPACE
 _IF: ("kui" | "if") _SPACE
 _ELSE: "muidu" | "else"
-_AND: _SPACE ("ja" | "and") _SPACE
+_AND: _SPACE? ("ja" | "and") _SPACE
 _REPEAT: ("korda" | "repeat") _SPACE
 _TIMES: _SPACE ("korda" | "times")
 _FOR: ("jaoks" | "for") _SPACE
@@ -44,7 +44,7 @@ _TO: _SPACE ("kuni" | "to") _SPACE
 _STEP: "sammuga" | "step"
 _ELIF: _SPACE? ("muidukui" | "elif") _SPACE
 _INPUT: ("sisesta" | "input")
-_OR: _SPACE ("või" | "or") _SPACE
+_OR: _SPACE? ("või" | "or") _SPACE
 _WHILE: ("senikui" | "while") _SPACE
 _LENGTH: "pikkus" | "length"
 _COLOR : ("värv" | "color") _SPACE?

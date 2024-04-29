@@ -10,9 +10,9 @@ change_list_item: var_access _LEFT_SQUARE_BRACKET (INT | var_access) _RIGHT_SQUA
 assign_list: var (_IS | _EQUALS) _LEFT_SQUARE_BRACKET ((quoted_text | NUMBER) (_COMMA (quoted_text | NUMBER))*)? _RIGHT_SQUARE_BRACKET
 error_assign_list_missing_brackets: var  (_IS | _EQUALS) (_LEFT_SQUARE_BRACKET)? ((quoted_text | NUMBER) _COMMA (quoted_text | NUMBER) (_COMMA (quoted_text | NUMBER))*)? (_RIGHT_SQUARE_BRACKET)?
 
-error_list_access_at: var_access _AT (INT | random)
+error_list_access_at<old_rule_to_error list_access>
 
-_print_argument: (_SPACE | quoted_text | list_access | error_list_access_at | expression | print_expression)*
+_print_ask_argument: (_SPACE | quoted_text | list_access | error_list_access_at | expression | print_expression)*
 assign: var (_IS| _EQUALS) (list_access | error_list_access_at | atom | expression)
 error_print_no_quotes: _PRINT (textwithoutspaces | list_access | error_list_access_at | var_access) (_SPACE (textwithoutspaces | list_access | var_access))*  -> error_print_nq
 sleep: _SLEEP (INT | list_access | error_list_access_at | var_access | expression)?

@@ -2,7 +2,7 @@ from collections import namedtuple
 from enum import Enum
 from difflib import SequenceMatcher
 import re
-from flask import g, jsonify, request
+from flask import g, jsonify, make_response, request
 from flask_babel import gettext
 import utils
 import hedy_content
@@ -49,7 +49,7 @@ class StatisticsModule(WebsiteModule):
     @requires_login
     def render_class_grid_overview(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
 
         students, class_, class_adventures_formatted, ticked_adventures, \
             adventure_names, student_adventures = self.get_grid_info(
@@ -268,16 +268,19 @@ class StatisticsModule(WebsiteModule):
                 content = adventure['content']
                 soup = BeautifulSoup(content, features="html.parser")
                 for pre in soup.find_all('pre'):
-                    adventure_snippets.append(pre.contents[0])
+                    adventure_snippets.append(str(pre.contents[0]))
 
-        student_code = program['code']
-        student_code = student_code
+        student_code = program['code'].strip()
         # now we have to calculate the differences between the student code and the code snippets
         can_save = True
         for snippet in adventure_snippets:
+            if re.search(r'<code.*?>.*?</code>', snippet):
+                snippet = re.sub(r'<code.*?>(.*?)</code>', r'\1', snippet)
+            snippet = snippet.strip()
             seq_match = SequenceMatcher(None, snippet, student_code)
+            matching_ratio = round(seq_match.ratio(), 2)
             # Allowing a difference of more than 10% or the student filled the placeholders
-            if seq_match.ratio() > 0.95 and (self.has_placeholder(student_code) or not self.has_placeholder(snippet)):
+            if matching_ratio >= 0.95 and (self.has_placeholder(student_code) or not self.has_placeholder(snippet)):
                 can_save = False
         return can_save
 
@@ -418,7 +421,7 @@ class LiveStatisticsModule(WebsiteModule):
     @requires_login
     def render_live_stats(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
 
         class_ = self.db.get_class(class_id)
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
@@ -501,7 +504,7 @@ class LiveStatisticsModule(WebsiteModule):
         Adds or remove the current level from the UI
         """
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
 
         class_ = self.db.get_class(class_id)
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
@@ -558,7 +561,7 @@ class LiveStatisticsModule(WebsiteModule):
         """
 
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
 
         class_ = self.db.get_class(class_id)
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
@@ -575,7 +578,7 @@ class LiveStatisticsModule(WebsiteModule):
         if student:
             class_students = class_.get("students", [])
             if student not in class_students:
-                return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
+                return utils.error_page(error=404, ui_message=gettext('not_enrolled'))
 
             student_programs, graph_data, graph_labels, selected_student = self.get_student_data(student, class_)
 
@@ -637,7 +640,7 @@ class LiveStatisticsModule(WebsiteModule):
         """
 
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
 
         class_ = self.db.get_class(class_id)
         if not class_ or (class_["teacher"] != user["username"] and not is_admin(user)):
@@ -648,7 +651,7 @@ class LiveStatisticsModule(WebsiteModule):
 
         students = class_.get("students", [])
         if student not in students:
-            return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
+            return utils.error_page(error=404, ui_message=gettext('not_enrolled'))
 
         students, common_errors, selected_levels, quiz_info, attempted_adventures, \
             adventures = self.get_class_live_stats(user, class_)
@@ -817,7 +820,7 @@ class LiveStatisticsModule(WebsiteModule):
                 self.db.update_class_errors(common_errors)
                 break
 
-        return {}, 200
+        return make_response('', 204)
 
     def retrieve_exceptions_per_student(self, class_id):
         """
@@ -951,7 +954,7 @@ class LiveStatisticsModule(WebsiteModule):
 
         self.db.update_class_customizations(class_customization)
 
-        return {}, 200
+        return make_response('', 204)
 
 
 def add(username, action):

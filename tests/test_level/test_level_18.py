@@ -353,3 +353,49 @@ class TestsLevel18(HedyTester):
             expected=expected,
             skipped_mappings=skipped_mappings,
         )
+
+    @parameterized.expand(['and', 'or'])
+    def test_if_list_access_lhs_and_or(self, op):
+        code = textwrap.dedent(f"""\
+            colors = ['red', 'green', 'blue']
+            if colors[1] == colors[2] {op} 1 == 1:
+                print('red')""")
+
+        expected = HedyTester.dedent(
+            "colors = ['red', 'green', 'blue']",
+            self.list_access_transpiled('colors[int(1)-1]'),
+            self.list_access_transpiled('colors[int(2)-1]'),
+            f"""\
+                if convert_numerals('Latin', colors[int(1)-1]) == convert_numerals('Latin', colors[int(2)-1]) {op} convert_numerals('Latin', '1') == convert_numerals('Latin', '1'):
+                  print(f'''red''')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+        )
+
+    #
+    # repeat
+    #
+    def test_repeat_nested_multi_commands(self):
+        code = textwrap.dedent("""\
+            repeat 3 times
+                print(3)
+                repeat 5 times
+                    print(5)
+                print(1)""")
+
+        expected = textwrap.dedent(f"""\
+            for __i in range({self.int_cast_transpiled(3)}):
+              print(f'''3''')
+              for __i in range({self.int_cast_transpiled(5)}):
+                print(f'''5''')
+                time.sleep(0.1)
+              print(f'''1''')
+              time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skip_faulty=False
+        )

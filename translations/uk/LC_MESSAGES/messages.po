@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-04-09 14:41+0000\n"
+"PO-Revision-Date: 2024-04-26 06:31+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: uk <LL@li.org>\n"
 "Language: uk\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.1-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -25,6 +25,10 @@ msgstr "You tried to use the variable {name} on line {access_line_number}, but y
 
 msgid "Cyclic Var Definition"
 msgstr "Ім'я `{variable}` повинно бути задане до того, як ви зможете використовувати її в правій частині команди `{is}`."
+
+#, fuzzy
+msgid "Else Without If Error"
+msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
 
 #, fuzzy
 msgid "Function Undefined"
@@ -66,6 +70,10 @@ msgstr "Схоже, що ви забули використати команду
 #, fuzzy
 msgid "Missing Additional Command"
 msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+
+#, fuzzy
+msgid "Missing Colon Error"
+msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
 
 msgid "Missing Command"
 msgstr "Схоже, що ви забули використати команду в рядку {line_number}."
@@ -524,8 +532,12 @@ msgstr "Кастомізація класу"
 msgid "dash"
 msgstr "тире"
 
-msgid "default_403"
+msgid "default_401"
 msgstr "Схоже, ви не уповноважені..."
+
+#, fuzzy
+msgid "default_403"
+msgstr "Looks like this action is forbidden..."
 
 msgid "default_404"
 msgstr "Нам не вдалося знайти цю сторінку..."
@@ -569,6 +581,10 @@ msgstr "Безпосередньо відкрити"
 #, fuzzy
 msgid "disable"
 msgstr "Disable"
+
+#, fuzzy
+msgid "disable_explore_page"
+msgstr "Disable explore page"
 
 #, fuzzy
 msgid "disable_parsons"
@@ -1195,8 +1211,8 @@ msgid "more_options"
 msgstr "More options"
 
 #, fuzzy
-msgid "multiple_levels_warning"
-msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
+msgid "multiple_keywords_warning"
+msgstr "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}"
 
 #, fuzzy
 msgid "my_account"
@@ -2532,4 +2548,7 @@ msgstr "Your program"
 
 #~ msgid "update_profile"
 #~ msgstr "Update profile"
+
+#~ msgid "multiple_levels_warning"
+#~ msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
 

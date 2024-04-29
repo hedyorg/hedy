@@ -3,7 +3,7 @@
 {% block regular_content %}
 <div class="flex flex-row items-center justify-between border-b">
     <h1>Achievements overview</h1>
-    <button type="reset" class="green-btn" id="return_to_admin_page_button" onclick="window.open('/admin', '_self');">Return to admin page</button>
+    <button type="reset" class="green-btn" data-cy="return_to_admin_page_button" onclick="window.open('/admin', '_self');">Return to admin page</button>
 </div>
 <h4 class="text-center">Total amount of users with achievements: {{ total }}</h4>
 <div class="program w-3/4 mx-auto border-solid border-2 border-orange-400 rounded p-4">

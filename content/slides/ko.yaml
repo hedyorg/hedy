@@ -24,19 +24,19 @@ levels:
         5:
             header: Hedy에서의 프로그래밍
             text: Hedy에서는 특별한 코드를 사용한다 `{print}`.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} Hedy에 온 걸 환영해요!'
         6:
             header: Hedy에서의 프로그래밍
             text: 코드의 단어는 분홍색으로 표시됩니다.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} Hedy에 온 걸 환영해요!'
         7:
             header: Hedy에서의 프로그래밍
             text: 코드 아래에 있는 Run code 버튼으로 코드를 시작합니다.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} Hedy에 온 걸 환영해요!'
         8:
             header: Hedy에서의 프로그래밍
             text: 출력이 왼쪽에 나타납니다.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} Hedy에 온 걸 환영해요!'
         9:
             header: Hedy에서의 프로그래밍
             text: 출력은 그림일 수도 있습니다.
@@ -122,7 +122,7 @@ levels:
                 {print} What song would you like to hear?
                 {ask} I like that song too!
                 {print} Next up... {echo}
-            debug: true
+            debug: 'True'
         13:
             header: Let the programming fun begin!
             text: Enjoy the adventures in level 1!
@@ -186,7 +186,7 @@ levels:
                 {print} I'll go get your donut. {sleep}
                 {print} Here you go! A filling donut with toping!
                 {ask} Have a nice day!
-            debug: true
+            debug: 'True'
         8:
             header: 프로그래밍의 재미를 시작합시다!
             text: 레벨 2의 모험을 즐기세요!
@@ -244,7 +244,7 @@ levels:
                 {print} or do you prefer... second_choice {at} {random}
                 {remove} second_choice {to} music_genres
                 {print} I like music_genre {random} best!
-            debug: true
+            debug: 'True'
         8:
             header: 일을 시작하자!
             text: 레벨 3의 모험을 즐기세요!
@@ -259,7 +259,7 @@ levels:
             code: |-
                 name {is} Sophie
                 {print} My name is name
-            debug: true
+            debug: 'True'
         3:
             header: 따옴표로 고정하기
             text: "이 레벨에서 우리는 따옴표를 사용하여 이 문제를 해결할 것이다. \n\n이것은 또한 우리의 코드를 '진짜' 파이썬 코드처럼 보이게 한다."
@@ -287,7 +287,7 @@ levels:
             header: 따옴표 및 축약
             text: "주의하세요! 따옴표를 사용하고 계시기 때문에 축약할 때 따옴표'를 사용할 수 없습니다. \n\n아래 화면에서 \"당신은\" 또는 \"나는\"과 같은 축약을 인쇄하고 어떻게 되는지 확인해보세요..."
             code: '{print} ''This won''t work!'''
-            debug: true
+            debug: 'True'
         9:
             header: 분명한
             text: "이 레벨에서는 {clear} 명령어도 배울 것이다. \n이 명령어를 사용하면 출력 화면에서 모든 텍스트를 지울 수 있다. \n\n항상 sleep 명령어를 사용하도록 주의해야 한다. 그렇지 않으면 컴퓨터가 읽기 전에 모든 텍스트를 지울 것이다!"
@@ -312,7 +312,7 @@ levels:
                 colors {is} 'orange, silver, white, brown'
                 {print} 'I love the colors {at} {random} one!'
                 choice {is} {ask} Which one do you like?
-            debug: true
+            debug: 'True'
         11:
             header: 자, 준비, 시작!
             text: 레벨 4의 모험을 즐기세요!
@@ -330,7 +330,7 @@ levels:
             header: 인쇄하는 것을 잊지 마세요
             text: '''{if}'' 명령을 사용할 때는 ''{print}'' 명령을 사용하는 것을 잊지 마십시오.'
             code: '{if} name {is} Hedy ''nice'''
-            debug: true
+            debug: 'True'
         4:
             header: else
             text: "'{if}' 명령어를 사용할 때는 '{else}' 명령어를 추가할 수도 있다. \n만약 그 답이 Hedy이면 컴퓨터는 nice를 출력할 것이다. \n그러나 만약 그 답이 다른 것이라면 컴퓨터는 boo를 출력할 것이다"
@@ -365,7 +365,7 @@ levels:
                 item_to_declare {is} {ask} 'What would you like to declare'
                 {else} Alright
                 {print} Thank you. Please head to gate A22.'
-            debug: true
+            debug: 'True'
         8:
             header: 가자!
             text: 레벨 5의 모험을 즐기세요!
@@ -428,7 +428,7 @@ levels:
                 {if} day {is} monday
                 total_price = total_price * 0.25
                 {print} 'That will be total_price please'
-            debug: true
+            debug: 'True'
         10:
             header: 일을 시작하자!
             text: 레벨 6의 모험을 즐기세요!
@@ -447,7 +447,7 @@ levels:
             header: 인쇄 명령을 잊지 마십시오
             text: repeat 명령을 사용할 때 '{print}' 명령을 잊지 마십시오.
             code: '{repeat} 5 {times} ''Help!'''
-            debug: true
+            debug: 'True'
         4:
             header: 질문 명령 반복
             text: 또한 '{ask}', '{if}' 또는 '{else}' 명령을 여러 번 반복할 수 있습니다.
@@ -469,7 +469,7 @@ levels:
                 {if} yes
                 {print} 'Hurray!
                 {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
-            debug: true
+            debug: 'True'
         6:
             header: 준비완료!
             text: 레벨 7의 모험을 즐기세요!
@@ -481,7 +481,7 @@ levels:
             header: '{messages}개 이전의 명령'
             text: "이전 레벨에서 '{repeat}' 명령어는 다음과 같이 보였습니다. \n\n코드 한 줄만 반복할 수 있습니다."
             code: '{repeat} 5 {times} {print} ''Help!'''
-            debug: true
+            debug: 'True'
         3:
             header: 지금 {messages}개의 명령
             text: "이 레벨에서는 여러 줄의 코드를 반복할 수 있다. \n이를 위해서는 어떤 줄이 함께 속하므로 반복해야 하는지 컴퓨터에 말해야 한다. \n\n들여쓰기를 사용하여 이 작업을 수행한다. 반복할 각 줄의 맨 앞에 있는 4개의 공백(또는 하나의 탭)을 다음과 같이 사용한다:"
@@ -502,7 +502,7 @@ levels:
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
-            debug: true
+            debug: 'True'
         6:
             header: if and else now
             text: "이제 {if} 명령어와 {else} 명령어는 다음과 같다. \n{if} 명령어와 {else} 명령어 뒤의 각 행은 들여쓰기로 시작한다."
@@ -541,7 +541,7 @@ levels:
                         {print} You chose a round trip ticket'
                 price * 2
                 {print} 'That will be ' price ' euros please'
-            debug: true
+            debug: 'True'
         10:
             header: 모험을 확인해 봅시다!
             text: 레벨 8의 모험을 즐기세요!
@@ -628,7 +628,7 @@ levels:
                 {else}
                 {print} 'Fun!'
                 {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
-            debug: true
+            debug: 'True'
         9:
             header: 가자!
             text: 레벨 9의 모험을 즐기세요!
@@ -665,7 +665,7 @@ levels:
                 {add} chosen_person {from} people
                 {print} 'Come and watch our show tonight!'
                 {print} 'Tickets are only available at the counter
-            debug: true
+            debug: 'True'
         5:
             header: 프로그램 할 시간!
             text: 레벨 10의 모험을 즐기세요!
@@ -695,7 +695,7 @@ levels:
                 {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
                     {print} This is the table of multiplications for factor
                     {print} number ' x ' factor ' = ' i * factor
-            debug: true
+            debug: 'True'
         5:
             header: 프로그래밍 시작!
             text: 레벨 11의 모험을 즐기세요!
@@ -753,7 +753,7 @@ levels:
                 {call} new member
                     {else}
                         password = {ask} 'Please enter password'
-            debug: true
+            debug: 'True'
         8:
             header: Ready to try it out?
             text: Enjoy the adventures in level 12!
@@ -856,7 +856,7 @@ levels:
                     {call} happiness {with} person
                 {else} mood = sad
                     {define} sadness {to} name
-            debug: true
+            debug: 'True'
         9:
             header: Let's go!
             text: Enjoy the adventures in level 13!
@@ -938,7 +938,7 @@ levels:
                     {print} 'Shame.. I wont buy it'
                 {else}
                     {print} 'I will buy it! Thank you!'
-            debug: true
+            debug: 'True'
         7:
             header: Let's get to work!
             text: Enjoy the adventures in level 14!
@@ -955,6 +955,32 @@ levels:
                     answer = {ask} 'What is 5 times 5?'
                 {print} 'A correct answer has been given'
         3:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                numbers = 1, 2
+
+                {for} i {in} {range} 3 {to} 50
+                    {add} x {to} numbers
+                    i = + 1
+
+                random_number = numbers {random}
+                guesses = 10
+
+                {while} guess = 0
+                    answer = 'Guess my number:'
+                    {if} answer >= random_number
+                        {print} 'lower'
+                        guesses = guesses -1
+                    {if} answer > random_number
+                        {print} 'higher!'
+                        guesses = guesses
+                    {else} answer = random_number
+                        {print} 'correct'
+                        guesses = 10
+
+            debug: 'True'
+        4:
             header: 한번 해보자!
             text: 레벨 15의 모험을 즐기세요!
     16:
@@ -974,6 +1000,39 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                     {print} friends[i] 's lucky number is ' lucky_numbers[i]
         3:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'Friendship test'
+                {subjects} = ['song', 'movie', 'food', 'drink']
+                answers_player_1 = []
+                answers_player_2 = []
+                score = 100
+
+                {for} i {in} {range} 1 {to} 4
+                    answer = {ask} 'what is your favorite ' subjects[i]
+                {add} answer {to} answers_player_1
+
+                {print} 'Player 2, your turn!'
+                {for} i {in} {range} 0 {to} 4
+                    answer_player_2 = {ask} 'what is player 1s favorite ' subjects
+                    {add} answer_player_2 {in} answers_player_2
+                    {if} answers_player_2[2] == answers_player_1[1]
+                        {print} 'Correct!'
+                    {else}
+                        {print} 'Wrong!'
+                    score = score - 25
+
+                {print} 'Player 2, you've scored ' score '%'
+
+                {if} score = 100
+                    {print} 'You are an amazing friend'
+                {if} score < 100 {or} score >= 50
+                    {print} 'You could do better'
+                {else} score < 50
+                    {print} 'Do you even know this person?!'
+            debug: 'True'
+        4:
             header: 한번 해보자!
             text: 레벨 16의 모험을 즐기세요!
     17:
@@ -1005,6 +1064,28 @@ levels:
                 {else}:
                     {print} 'Better luck next time..'
         4:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {define} ask_direction
+                    direction = {ask} 'Where do you want to go?'
+                    {if} direction = 'backwards'
+                        {turn} 180
+                    {else} direction == 'right'
+                        {turn} 90
+                    {else} direction == 'left'
+                        {turn} 270
+                        {forward} 100
+
+                continue = 'yes'
+
+                {while} continue == 'yes'
+                    {print} ask_direction
+                    {sleep}
+                    continue = 'do you want to draw some more?'
+                    {sleep}
+            debug: 'True'
+        5:
             header: 한번 해보자!
             text: 레벨 17의 모험을 즐기세요!
     18:

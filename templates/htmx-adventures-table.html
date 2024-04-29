@@ -1,0 +1,58 @@
+<div class="flex flex-col gap-4 mb-8 md:px-16 hidden" id="adventures_table"
+    _="on load hedyApp.getForTeacherTable('adventures_table')">
+    <div class="flex flex-col gap-4 pb-4 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full lg:w-4/4 p-8">
+      <h2 class="m-0 justify-left"> {{_('my_adventures')}} </h2>
+      <div class="overflow-x-auto rounded-lg shadow-lg">
+      <table class="w-full border border-gray-400">
+        <thead>
+          <tr class="bg-blue-300 text-blue-900">
+            <th class="px-10 py-2 text-center">{{_('name')}}</th>
+            <th class="px-10 py-2 text-center">{{_('creator')}}</th>
+            <th class="px-10 py-2 text-center">{{_('owner')}}</th>
+            <th class="p-2">{{_('level')}}</th>
+            <th class="p-2 hidden sm:block">{{_('last_update')}}</th>
+            <th class="px-4 p-2 bg-blue-900 text-white">{{_('actions')}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for adventure in teacher_adventures %}
+            <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
+              <td class="text-center px-4 py-2"><a href="for-teachers/customize-adventure/{{adventure.id}}" class="no-underline" data-cy="edit-link">{{adventure.name|e}}</a></td>
+              <td class="text-center owner_username_cell">{{adventure.author or adventure.creator}}</td>
+              <td class="text-center username_cell">{{adventure.creator}}</td>
+              <td class="text-center p-2">
+                {% if adventure.levels %}
+                    {% for level in adventure.levels %}
+                        {{level}}{% if loop.index != adventure.levels|length %}, {% endif %}
+                    {% endfor %}
+                  {% elif adventure.level %}
+                    {{adventure.level}}
+                  {% else %}
+                      -
+                  {% endif %}
+              </td>
+              <td class="text-center p-4 hidden sm:block">{{adventure.date}}</td>
+              <td class="text-center p-2">
+                <div class="flex justify-center text-blue-900">
+                  <button class="flex flex-col items-center mr-16" data-cy="preview-{{adventure.name}}"
+                  _="on click window.open('/adventure/{{ adventure.name }}/{{ adventure.level }}?creator={{ adventure.creator }}', '_self')">
+                    <span class="fas fa-eye block mb-1"></span>
+                    <span>{{_('preview')}}</span>
+                  </button>
+                  <button id="delete_adventure" class="flex flex-col items-center" data-cy="delete-adventure" 
+                  hx-confirm="{{_('delete_adventure_prompt')}}"
+                  hx-trigger="click"
+                  hx-delete="/for-teachers/customize-adventure/{{adventure.id}}"
+                  hx-target="#adventures_table">
+                    <span class="fas fa-trash block mb-1 text-red-700"></span>
+                    <span class="text-red-700">{{_('remove')}}</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    </div>
+</div>

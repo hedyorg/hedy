@@ -1,6 +1,7 @@
 import uuid
 
-from flask import jsonify, redirect, request, session
+from flask import jsonify, make_response, redirect, request, session
+from jinja_partials import render_partial
 from flask_babel import gettext
 
 import utils
@@ -87,7 +88,7 @@ class ClassModule(WebsiteModule):
         achievement = self.achievements.add_single_achievement(user["username"], "on_second_thoughts")
         if achievement:
             return {"achievement": achievement}, 200
-        return {}, 200
+        return make_response('', 204)
 
     @route("/<class_id>", methods=["DELETE"])
     @requires_login
@@ -96,14 +97,15 @@ class ClassModule(WebsiteModule):
         if not Class:
             return gettext("no_such_class"), 404
         if Class["teacher"] != user["username"]:  # only teachers can remove their classes.
-            return gettext("unauthorized"), 403
+            return gettext("unauthorized"), 401
 
         self.db.delete_class(Class)
 
         achievement = self.achievements.add_single_achievement(user["username"], "end_of_semester")
         if achievement:
-            return {"achievement": achievement}, 200
-        return {}, 200
+            utils.add_pending_achievement({"achievement": achievement})
+        teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        return render_partial('htmx-classes-table.html', teacher_classes=teacher_classes)
 
     @route("/<class_id>/prejoin/<link>", methods=["GET"])
     def prejoin_class(self, class_id, link):
@@ -198,7 +200,7 @@ class ClassModule(WebsiteModule):
         if achievement:
             return {"achievement": achievement}, 200
         else:
-            return {}, 200
+            return make_response('', 204)
 
     @route("/<class_id>/student/<student_id>", methods=["DELETE"])
     @requires_login
@@ -214,7 +216,7 @@ class ClassModule(WebsiteModule):
             achievement = self.achievements.add_single_achievement(user["username"], "detention")
         if achievement:
             return {"achievement": achievement}, 200
-        return {}, 200
+        return make_response('', 204)
 
     @route("/<class_id>/second-teacher/<second_teacher>", methods=["DELETE"])
     @requires_login
@@ -355,7 +357,7 @@ class MiscClassPages(WebsiteModule):
             "invited_as_text": gettext("student"),
         }
         self.db.add_class_invite(data)
-        return {}, 200
+        return make_response('', 204)
 
     @route("/invite-second-teacher", methods=["POST"])
     @requires_teacher
@@ -402,7 +404,7 @@ class MiscClassPages(WebsiteModule):
             "invited_as_text": gettext("second_teacher"),
         }
         self.db.add_class_invite(data)
-        return {}, 200
+        return make_response('', 204)
 
     @route("/remove_student_invite", methods=["POST"])
     @requires_login
@@ -421,13 +423,13 @@ class MiscClassPages(WebsiteModule):
 
         # Fixme TB -> Sure the user is also allowed to remove their invite, but why the 'retrieve_class_error'?
         if not is_teacher(user) and username != user.get("username"):
-            return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and username != user.get("username")):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         self.db.remove_user_class_invite(username, class_id)
-        return {}, 200
+        return make_response('', 204)
 
     @route("/hedy/l/<link_id>", methods=["GET"])
     def resolve_class_link(self, link_id):

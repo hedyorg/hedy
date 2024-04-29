@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-04-09 14:41+0000\n"
+"PO-Revision-Date: 2024-04-26 06:31+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.1-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -24,6 +24,10 @@ msgstr "Spremenljivko {name} ste poskušali uporabiti v vrstici {access_line_num
 
 msgid "Cyclic Var Definition"
 msgstr "Ime `{variable}` je treba nastaviti, preden jo lahko uporabite na desni strani ukaza `{is}`."
+
+#, fuzzy
+msgid "Else Without If Error"
+msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
 
 msgid "Function Undefined"
 msgstr "Poskušali ste uporabiti funkcijo {name}, vendar je niste definirali."
@@ -66,6 +70,10 @@ msgstr "It looks like you forgot to use a command with the text you used in line
 #, fuzzy
 msgid "Missing Additional Command"
 msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}. Try adding `{missing_command}` to your code."
+
+#, fuzzy
+msgid "Missing Colon Error"
+msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
 
 #, fuzzy
 msgid "Missing Command"
@@ -601,8 +609,12 @@ msgid "dash"
 msgstr "a dash"
 
 #, fuzzy
-msgid "default_403"
+msgid "default_401"
 msgstr "Looks like you aren't authorized..."
+
+#, fuzzy
+msgid "default_403"
+msgstr "Looks like this action is forbidden..."
 
 #, fuzzy
 msgid "default_404"
@@ -659,6 +671,10 @@ msgstr "Directly open"
 #, fuzzy
 msgid "disable"
 msgstr "Disable"
+
+#, fuzzy
+msgid "disable_explore_page"
+msgstr "Disable explore page"
 
 #, fuzzy
 msgid "disable_parsons"
@@ -1304,8 +1320,9 @@ msgstr "Mandatory developer's mode"
 msgid "more_options"
 msgstr "More options"
 
-msgid "multiple_levels_warning"
-msgstr "Opazili smo, da ste izbrali več stopenj in v svojo dogodivščino vključili delčke kode, kar lahko povzroči težave s označevalnikom skladnje (sintakse) in samodejnim prevajanjem ključnih besed"
+#, fuzzy
+msgid "multiple_keywords_warning"
+msgstr "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}"
 
 #, fuzzy
 msgid "my_account"
@@ -2519,4 +2536,7 @@ msgstr "Your program"
 
 #~ msgid "pygame_waiting_for_input"
 #~ msgstr "Waiting for a button press..."
+
+#~ msgid "multiple_levels_warning"
+#~ msgstr "Opazili smo, da ste izbrali več stopenj in v svojo dogodivščino vključili delčke kode, kar lahko povzroči težave s označevalnikom skladnje (sintakse) in samodejnim prevajanjem ključnih besed"
 

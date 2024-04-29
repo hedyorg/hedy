@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-04-09 14:41+0000\n"
+"PO-Revision-Date: 2024-04-26 06:30+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: zh_Hans <LL@li.org>\n"
 "Language: zh_Hans\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.1-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -24,6 +24,10 @@ msgstr "您尝试在第 {access_line_number} 行使用变量 {name}，但在第 
 
 msgid "Cyclic Var Definition"
 msgstr "需要先设置名称 `{variable}`，然后才能在 `{is}` 命令的右侧使用它。"
+
+#, fuzzy
+msgid "Else Without If Error"
+msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
 
 msgid "Function Undefined"
 msgstr "您尝试使用函数 {name}，但没有定义它。"
@@ -63,6 +67,10 @@ msgstr "看来你忘记在第{line_number}行的文字里使用指令"
 
 msgid "Missing Additional Command"
 msgstr "似乎忘记在第 {line_number} 行上完成写入 `{command}`。 尝试将 `{missing_command}` 添加到你的代码中。"
+
+#, fuzzy
+msgid "Missing Colon Error"
+msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
 
 msgid "Missing Command"
 msgstr "看上去你忘记在第{line_number}行写命令了。"
@@ -478,8 +486,12 @@ msgstr "定制课室"
 msgid "dash"
 msgstr "横杠"
 
-msgid "default_403"
+msgid "default_401"
 msgstr "看起来您未获得授权..."
+
+#, fuzzy
+msgid "default_403"
+msgstr "Looks like this action is forbidden..."
 
 msgid "default_404"
 msgstr "我们无法找到该页面..."
@@ -522,6 +534,10 @@ msgstr "直接打开"
 
 msgid "disable"
 msgstr "禁用"
+
+#, fuzzy
+msgid "disable_explore_page"
+msgstr "Disable explore page"
 
 msgid "disable_parsons"
 msgstr "禁用所有拼图"
@@ -1028,8 +1044,9 @@ msgstr "强制开发者模式"
 msgid "more_options"
 msgstr "更多选项"
 
-msgid "multiple_levels_warning"
-msgstr "我们注意到您在冒险中选择了多个级别并包含代码片段，这可能会导致语法突出显示和关键字自动翻译出现问题"
+#, fuzzy
+msgid "multiple_keywords_warning"
+msgstr "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}"
 
 msgid "my_account"
 msgstr "我的账户"
@@ -2132,4 +2149,7 @@ msgstr "你的程序"
 
 #~ msgid "update_profile"
 #~ msgstr "更新个人资料"
+
+#~ msgid "multiple_levels_warning"
+#~ msgstr "我们注意到您在冒险中选择了多个级别并包含代码片段，这可能会导致语法突出显示和关键字自动翻译出现问题"
 

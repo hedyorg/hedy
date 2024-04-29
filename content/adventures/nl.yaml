@@ -362,94 +362,188 @@ adventures:
         levels:
             17:
                 story_text: |
-                    Blackjack is een simpel kaartspelletje waarbij je zo dicht mogelijk bij 21 punten moet komen. Je krijgt twee kaarten. Elke kaart is het getal waard dat erop staat, en de kaarten met plaatjes (Boer, Vrouw, Heer) zijn 10 punten waard.\nDe Aas is 1 of 11 punten waard (dat mag je zelf kiezen). De dealer, jouw tegenstander, krijgt ook twee kaarten.\nAls je wil, mag je een derde kaart pakken en die punten worden bij jouw score opgeteld. De dealer mag ook een extra kaart pakken.\nMaar pas op dat je nooit over de 21 punten heengaat, want dan verlies je!\nDe speler die het dichtst bij de 21 punten komt, zonder eroverheen te gaan, wint!
-                    Veel plezier!
+                    Blackjack is een simpel kaartspelletje waarbij je zo dicht mogelijk bij 21 punten moet komen. Je krijgt twee kaarten. Elke kaart is het getal waard dat erop staat, en de kaarten met plaatjes (Boer, Vrouw, Heer) zijn 10 punten waard.
+                    De Aas is 1 of 11 punten waard (dat mag je zelf kiezen). De dealer, jouw tegenstander, krijgt ook twee kaarten.\nAls je wil, mag je een derde kaart pakken en die punten worden bij jouw score opgeteld. De dealer mag ook een extra kaart pakken.
+                    Maar pas op dat je nooit over de 21 punten heengaat, want dan verlies je!
+                    De speler die het dichtst bij de 21 punten komt, zonder eroverheen te gaan, wint!
+
                     ### Opdracht
-                     Dit programma werkt prima, maar de code is verschrikkelijk lang en omslachting. Kun jij de code opruimen en inkorten door functies te gebruiken?
+
+                    In dit avontuur programmeren we het eerste deel van een potje Blackjack. We maken een functie waarmee we kunnen berekenen hoeveel punten een kaart waard is.
+
+                    ***Stel de variabelen in***
+                    Begin met het maken van een lijst met daarin alle kaarten van 2 tot Aas. Maak daarna een lijstje met alle plaatjeskaarten, oftewel Boer, Heer en Vrouw. Kies daarna een willekeurige kaart uit het lijstje kaarten en noem die kaart_1.
+
+                    ***Maak een functie om punten te berekenen***
+                    Maak een functie die berekent hoeveel punten een kaart waard is.
+                    Alle plaatjeskaarten zijn 10 punten waard, de Aas is 11 punten ward en alle andere kaarten zijn evenveel waard als erop staat.
+                    Aan het einde van de geeft de functie je de variabele `punten`.
+
+                    ***Test de functie***
+                    Test of je functie naar behoren werkt. Maak de eerste regel in dit onderdeel af door in te vullen welke kaart er gepakt is. Maak de volgende regel af door de functie op te roepen met `kaart_1`.
+                    Voer de code een aantal keer uit. Ben je blij met het resultaat? Super! Dan kun je dit testgedeelte weer verwijderen en door naar het volgende onderdeel op het volgende tabje.
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
-                    kaarten = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Boer', 'Vrouw','Heer', 'Aas']
-                    punten = 0
-                    dealer_punten = 0
-                    kaart_1 = kaarten[{random}]
-                    kaart_2 = kaarten[{random}]
-                    kaart_3 = kaarten[{random}]
-                    dealer_kaart_1 = kaarten[{random}]
-                    dealer_kaart_2 = kaarten[{random}]
-                    dealer_kaart_3 = kaarten[{random}]
-                    # Punten voor kaart 1
-                    {if} kaart_1 == 'Boer' {or} kaart_1 == 'Vrouw' {or} kaart_1 == 'Heer':
-                        punten = punten + 10
-                    {elif} kaart_1 == 'Aas':
-                        punten = punten + 11
-                    {else}:
-                        punten = punten + kaart_1
-                    # punten voor kaart 2
-                    {if} kaart_2 == 'Boer' {or} kaart_2 == 'Vrouw' {or} kaart_2 == 'Heer':
-                        punten = punten + 10
-                    {elif} kaart_2 == 'Aas':
-                        punten = punten + 11
-                    {else}:
-                        punten = punten + kaart_2
-                    # punten voor dealer kaart 1
-                    {if} dealer_kaart_1 == 'Boer' {or} dealer_kaart_1 == 'Vrouw' {or} dealer_kaart_1 == 'Heer':
-                        dealer_punten = dealer_punten + 10
-                    {elif} dealer_kaart_1 == 'Aas':
-                        dealer_punten = dealer_punten + 11
-                    {else}:
-                        dealer_punten = dealer_punten + dealer_kaart_1
-                    # punten voor dealer kaart 2
-                    {if} dealer_kaart_2 == 'Boer' {or} dealer_kaart_2 == 'Vrouw' {or} dealer_kaart_2 == 'Heer':
-                        dealer_punten = dealer_punten + 10
-                    {elif} dealer_kaart_2 == 'Aas':
-                        dealer_punten = dealer_punten + 11
-                    {else}:
-                        dealer_punten = dealer_punten + dealer_kaart_2
-                    # Twee Azen
-                    {if} kaart_1 == 'Aas' {and} kaart_2 == 'Aas':
-                        punten = 12
-                    {if} dealer_kaart_1 == 'Aas' {and} dealer_kaart_2 == 'Aas':
-                        dealer_punten = 12
-                    # Scorebord
-                    {print} 'Jij hebt een ' kaart_1 ' en een ' kaart_2 ' (' punten ' punten)'
-                    {print} 'De dealer heeft een ' dealer_kaart_1 ' en een ' dealer_kaart_2 ' (' dealer_punten ' punten)'
-                    # Extra kaart voor de speler
-                    hit = {ask} 'Wil je een extra kaart?'
+
+                    # Stel de variabelen in
+                    kaarten = _
+                    plaatjes = _
+                    kaart_1 =
+
+                    # Maak een functie om punten te berekenen
+                    {define} bereken_punten {with} kaart:
+                        {if} kaart {in} plaatjes:
+                            punten = _
+                        {elif} _
+                            _
+                        {else}:
+                            _
+                        _ punten
+
+                    # Test de functie
+                    {print} 'Jouw kaart is een ' _
+                    {print} 'Dat is ' _ ' punten waard'.
+                    ```
+    blackjack_2:
+        name: Blackjack 2
+        default_save_name: Blackjack_2
+        description: Blackjack part 2
+        levels:
+            17:
+                story_text: |
+                    ### Opdracht
+                    In dit avontuur programmeren we het tweede gedeelte van het Blackjack spel.
+
+                    ***Plak je code van het vorige avontuur***
+                    In het vorige tabje heb je een lijstje gemaakt met variabelen en heb je een functie gemaakt om te berekenen hoeveel een kaart waard is. Kopieer die code en plak hem hier. Let op! Je hebt ook een stuk code gemaakt om je functie te testen, dat heb je nu niet nodig. Heb je dat gedeelte nog niet verwijderd, verwijder het dan nu.
+
+                    ***Voeg meer variabelen toe***
+                    Je hebt de lijstjes `kaarten` en `plaatjes` gemaakt en de variabele `kaart_1`. Onder deze variabelen, maak je nog 3 variabelen, namelijk: `kaart_2`, `dealer_kaart_1` en `dealer_kaart_2`. Deze kaarten worden ook random getrokken uit het lijstje `kaarten`.
+
+                    ***Tel de punten op***
+                    Om te berekenen hoeveel punten je hebt behaald, roepen we de functie op met kaart_1 en doen we dat nogmaals met kaart_2. Daarna voeg je die twee scores samen om je totaal aantal punten te krijgen.
+                    Doe daarna hetzelfde voor de punten van de dealer. Let daarbij op dat je wel de kaarten van de dealer gebruikt en niet die van de speler!
+
+                    ***2 Azen***
+                    Lekker bezig! Bijna alle scores kunnen nu berekend worden. Er geldt nog één uitzondering: 2 Azen. Als je 2 Azen trekt, dan is je totaal aantal punten 12 en niet 22 (want bij 22 punten zou je af zijn!). Dit geldt natuurlijk ook voor de dealer.
+
+                    ***Toon de score***
+                    Tot slot wil je dat het programme je vertelt welke kaarten je hebt getrokken en hoeveel punten dat waard is. Toon ook welke kaarten de dealer heeft en hoeveel punten dat is.
+
+                    ***Ga door naar het volgende avontuur***
+                    Super! Je hebt dit gedeelte af! Kopieer je spel en ga door naar het volgende tabje om te leren hoe je een extra kaart kunt krijgen en een winnaar kunt uitroepen.
+                example_code: |
+                    ```
+                    # Plak hier je code van het vorige avontuur
+
+                    # Voeg deze variabelen toe aan het rijtje variabelen
+                    kaart_2 = _
+                    dealer_kaart_1 = _
+                    dealer_kaart_2 = _
+
+                    # Tel jouw punten op
+                    jouw_punten_1 = {call} _ {with} kaart_1
+                    jouw_punten_2 = _
+                    jouw_totaal = _
+
+                    # Tel de punten van de dealer op
+                    dealer_punten_1 = _
+                    _
+                    _
+
+                    # 2 Azen
+                    {if} kart_1 == 'Aas' {and} _
+                        jouw_totaal = 12
+                    {if} dealer_kaart_1 _
+                        dealer_totaal = _
+
+                    # Toon de scores
+                    {print} 'Jij hebt een ' _ ' en een ' _ '. Dat is ' _ ' punten.'
+                    {print} 'De dealer heeft een ' _ ' en een ' _ '. Dat is ' _ ' punten.'
+                    ```
+    blackjack_3:
+        name: Blackjack 3
+        default_save_name: Blackjack_3
+        description: Blackjack part 3
+        levels:
+            17:
+                story_text: |
+                    In het vorige avontuur heb je geleerd om 2 kaarten te trekken voor jezelf en voor de dealer en om de totaalscores te berekenen.
+                    In dit avontuur programmeer je hoe jij en de dealer een extra kaart kunnen krijgen.
+
+                    ### Opdracht
+                    ***Plak je code van het vorige avontuur hier*** Kopieer je code van het vorige avontuur en plek het hier.
+
+                    ***Een extra kaart voor jou*** Als je wil, kun je een extra kaart krijgen om zo dichtbij mogelijk de 21 te komen. Vraag eerst aan de speler of die een extra kaart wil.
+                    Als dat zo is, kies een willekeurige kaart en print welke kaart er getrokken is. Als de kaart geen Aas is, kun je de functie oproepen om de punten te berekenen.
+                    Is de nieuwe kaart wel een Aas, dan kun je deze functie niet gebruiken, gezien de Aas zowel 1 als 11 punten kan zijn (afhankelijk van hoeveel punten je al hebt).
+                    Is je totaal minder dan 11, dan wil je dat de Aas 11 punten waard is (want dan kom je het dichtsbij 21). Dus dan voeg je 11 punten toe aan je totaal.
+                    Is je totaal minder dan of gelijk aan 11, dan wil je dat de Aas maar 1 punt waard is (anders ga je over de 21 punten heen). Dus dan voeg je maar 1 punt toe aan je totaal.
+                    Tot slot wil je je nieuwe totaal printen.
+
+                    ***Extra kaart voor de dealer*** De dealer mag ook een extra kaart pakken. Dat hoef je niet aan de dealer te vragen, want die krijgt altijd een extra kaart als diens puntenaantal minder dan 17 is.
+                    Kopieer het stuk code dat je net hebt gemaakt bij 'extra kaart voor jou' en plak het bij de dealers sectie. Pas het stukje coded daarna aan om het kloppend te maken voor de dealer als die een extra kaart pakt.
+                example_code: |
+                    ```
+                    # Plak je code van het vorige avontuur hier
+
+                    # Extra kaart voor jou
+                    hit = {ask} _
                     {if} hit == 'ja':
-                        {if} kaart_3 == 'Boer' {or} kaart_3 == 'Vrouw' {or} kaart_3 == 'Heer':
-                            punten = punten + 10
-                        {elif} kaart_3 == 'Aas':
-                            {if} punten > 11:
-                                punten = punten + 1
-                            {else}:
-                                punten = punten + 11
+                        kaart_3 = _
+                        {print} _
+                        {if} kaart_3 _ 'Ace':
+                            jouw_punten_3 = _
+                            jouw_totaal = _
                         {else}:
-                            punten = punten + kaart_3
-                        print 'Je krijgt een extra ' kaart_3 ' (' punten ' punten)'
+                           {if} jouw_totaal _
+                                _
+                            {else}:
+                                _
+                        {print} _
+
+                    # Extra kaart voor de dealer
+                    {if} dealer_totaal < 17
+                    _
+                    ```
+    blackjack_4:
+        name: Blackjack 4
+        default_save_name: Blackjack_4
+        description: Blackjack part 4
+        levels:
+            17:
+                story_text: |
+                    In de afgelopen avonturen heb je al bijna een werkend blackjack spel gemakat! Het enige wat we nog nodig hebben is een manier om de winnaar uit te roepen!
+
+                    ### Opdracht
+                    ***Plak je code van het vorige avontuur hier***
+
+                    ***Een winnaar bepalen***
+                    Ten eerste is er sprake van gelijkspel, als jij en de dealer evenveel punten hebben.
+                    Ten tweede ben jij de winnaar, als de dealer meer dan 21 punten heeft en jij niet.
+                    Ten derde moeten we kijken wie het dichtstbij 21 punten is gekomen, als zowel jij als de dealer minder dan 21 punten hebben.  Dat doen we door te vergelijken wie de hoogste score heeft behaald. Is jouw totaal hoger dan dat van de dealer? Dan heb jij gewonnen. Zo niet, dan heeft de dealer gewonnen.
+                    Tot slot heb je in alle andere scenario's verloren. Bijvoorbeeld als je meer dan 21 punetn hebt en de dealer niet, of als jullie allebei meer dan 21 punten hebben.
+
+                    ***Spelen maar!***
+                    Werkt je spel helemaal? Geweldig! Dat heb je fantastisch gedaan! Veel speelplezier!
+                    Werkt het spel nog niet naar behoren? Geen zorgen, waarschijnlijk heb je ergens een foutje gemaakt. Kijk rustig naar je code en debug je code met de lieveheersbeestjesknop.
+                example_code: |
+                    ```
+                    # Plak je code van het vorige avontuur hier
+
+                    # Een winnaar bepalen
+                    {if} _
+                        {print} 'Gelijkspel! Doe nog een potje'
+                    {elif} _
+                        {print} 'Je wint!'
+                    {elif} _ :
+                        {if} _:
+                            {print} _
+                        {else}:
+                            {print} _
                     {else}:
-                        print 'Je krijgt geen extra kaarten'
-                    # Winnaar
-                    {if} punten > 21 {or} dealer_punten > punten {or} dealer_punten == 21:
-                        {print} 'Je verliest'
-                    {elif} dealer_punten < 17:
-                        {print} 'De dealer pakt een extra kaart. Het is een... ' dealer_kaart_3
-                        {if} dealer_kaart_3 == 'Boer' {or} dealer_kaart_3 == 'Vrouw' {or} dealer_kaart_3 == 'Heer':
-                            dealer_punten = dealer_punten + 10
-                        {elif} dealer_kaart_3 == 'Aas':
-                            {if} dealer_punten < 11:
-                                dealer_punten = dealer_punten + 11
-                            {else}:
-                                dealer_punten = dealer_punten + 1
-                        {else}:
-                            dealer_punten = dealer_punten + dealer_kaart_3
-                        {print} 'De dealer heeft nu  ' dealer_punten ' punten'
-                        {if} dealer_punten < 21 {and} dealer_punten > punten:
-                            {print} 'Je verliest'
-                        {else}:
-                            {print} 'Je wint!'
-                    {elif} punten > dealer_punten {and} punten < 21:
-                        {print} 'Je wint!!'
+                        _
                     ```
     calculator:
         name: Rekenmachine
@@ -872,9 +966,6 @@ adventures:
                     prijs = aantal * 6
                     {print} 'Dat wordt dan 'prijs euro' alstublieft'
                     ```
-
-                    prijs = aantal * 6
-                    {print} 'Dat wordt dan 'prijs euro' alstublieft'
             10:
                 story_text: |-
                     ### Opdracht
@@ -885,32 +976,32 @@ adventures:
                     namen = Muad Hasan Samira Noura
                     activiteiten = vliegeren, zwemmen, wandelen, baden in de zon
                     {for} naam {is} namen
-                    {print} Op het strand vindt naam het leuk om to activiteit at random
+                    {print} Op het strand vindt naam het leuk om to activiteit {at} {random}
                     ```
             11:
                 story_text: "### Opdracht\nDebug dit kalender-programma. De uitvoer van het programma moet eruitzien als een lijst van datums.\nBijvoorbeeld:\n\n```\nHedy kalender\nHier zijn alle dagen van november\n1 november \n2 november \n3 november \n```\nEnzovoort.\n\nLet op! Test je code voor de maand februari extra goed, want het aantal dagen in deze maand  verandert in schrikkeljaren."
                 example_code: |
                     **Pas op! Deze code bevat fouten!**
                     ```
-                    print 'Hedy kalender'
+                    {print} 'Hedy kalender'
                     maanden_met_31 dagen = januari, maart, mei, juli, september, october, december
                     maanden_met_30_dagen = april, juni, augustus, november
-                    maand = ask 'Welke maand wil je zien?'
-                    if maand in maanden_met_31_dagen
+                    maand = {ask} 'Welke maand wil je zien?'
+                    {if} maand {in} maanden_met_31_dagen
                         dagen = 31
-                        if maand in maanden_met30_dagen
+                        {if} maand {in} maanden_met30_dagen
                             dagen = 30
-                    if maand = februari
+                    {if} maand = februari
                         schrikkeljaren = 2020, 2024, 2028, 2036, 2040, 2044, 2028
-                        jaar = ask 'Welk jaar is het?'
-                    if jaar in schrikkeljaren
+                        jaar = {ask} 'Welk jaar is het?'
+                    {if} jaar {in} schrikkeljaren
                         dagen = 29
-                    else
+                    {else}
                         dagen = 28
 
-                    print 'Hier zijn alle dagen van ' maand
-                    for i in range 1 to dagen
-                        print i maand
+                    {print} 'Hier zijn alle dagen van ' maand
+                    {for} i {in} {range} 1 {to} dagen
+                        {print} i maand
                     ```
             12:
                 story_text: |-
@@ -919,26 +1010,26 @@ adventures:
                 example_code: |
                     **Pas op! Deze code bevat fouten!**
                     ```
-                    define groet
+                    {define} groet
                     begroetingen = 'Hallo', 'Hoi!', 'Goedenavond'
-                        print begroetingen at random
+                        {print} begroetingen {at} {random}
 
-                    define bestelling
-                        eten = ask 'Wat wil je eten?'
-                        print 'Een eten'
+                    {define} bestelling
+                        eten = {ask} 'Wat wil je eten?'
+                        {print} 'Een eten'
                         drinken = 'Wat wil je drinken?'
-                        print 'Een ' drinken
-                        extra = ask 'Wil je daar nog iets bij?'
-                            if extra is 'nee'
-                        print 'Oke'
-                            else
-                            print 'En ' extra
-                    print 'Dankjewel'
+                        {print} 'Een ' drinken
+                        extra = {ask} 'Wil je daar nog iets bij?'
+                            {if} extra {is} 'nee'
+                        {print} 'Oke'
+                            {else}
+                            {print} 'En ' extra
+                    {print} 'Dankjewel'
 
-                    print 'Welkom bij ons restaurant'
-                    mensen = ask 'Met hoeveel personen bent u?'
-                    for i in range 0 to mensen
-                        call groet_klant
+                    {print} 'Welkom bij ons restaurant'
+                    mensen = {ask} 'Met hoeveel personen bent u?'
+                    {for} i {in} {range} 0 {to} mensen
+                        {call} groet_klant
                     ```
             13:
                 story_text: |-
@@ -947,30 +1038,30 @@ adventures:
                 example_code: |
                     **Pas op! Deze code bevat fouten!**
                     ```
-                    defin film_aanrader with naam
+                    {define} film_aanrader {with} naam
                         actie_films == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'
                         romantische_films = 'Love Actually', 'The Notebook', 'Titanic'
                         grappige_films = 'Mr Bean' 'Barbie''Deadpool'
                         kinder_films = 'Minions', 'Paddington', 'Encanto'
-                        if naam is 'Camila' or naam is 'Manuel'
-                            film_tip = kinder_film at random
-                        if naam is 'Pedro' or 'Gabriella'
-                                stemming = ask 'Waarvoor ben je in de stemming?'
-                            if stemming is 'actie'
-                                film_tip = grappige_films at random
-                            if stemming is 'romantiek'
+                        {if} naam {is} 'Camila' {or} naam {is} 'Manuel'
+                            film_tip = kinder_film {at} {random}
+                        {if} naam {is} 'Pedro' {or} 'Gabriella'
+                                stemming = {ask} 'Waarvoor ben je in de stemming?'
+                            {if} stemming {is} 'actie'
+                                film_tip = grappige_films {at} {random}
+                            {if} stemming {is} 'romantiek'
                                 film_tip = romantische_films
-                        if mood is 'komedie'
-                                film_tip = grappige_films at random
+                        {if} mood {is} 'komedie'
+                                film_tip = grappige_films {at} {random}
 
-                    print 'Ik zou ' film_tip ' aanbevelen aan ' naam
+                    {print} 'Ik zou ' film_tip ' aanbevelen aan ' naam
 
-                    naam = ask 'Wie kijkt er?'
-                    kijktip = ask 'Wil je een kijktip?'
-                    if kijtip is 'ja'
-                    print film_tip with naam
-                    else
-                    print 'Geen probleem!'
+                    naam = {ask} 'Wie kijkt er?'
+                    kijktip = {ask} 'Wil je een kijktip?'
+                    {if} kijtip {is} 'ja'
+                        {print} film_tip {with} naam
+                    {else}
+                        {print} 'Geen probleem!'
                     ```
             14:
                 story_text: |-
@@ -979,48 +1070,28 @@ adventures:
                 example_code: |
                     **Pas op! Deze code bevat fouten!**
                     ```
-                    define bereken_hartslag
-                        print 'Druk je vingers voorzichtig tegen de zijkant van je nek'
-                        print '(net onder je kaaklijn)'
-                        print 'Tel het aantal kloppingen dat je voelt voor 15 seconden'
-                        kloppingen == ask 'Hoeveel kloppingen voelde je in 15 seconden?'
+                    {define} bereken_hartslag
+                        {print} 'Druk je vingers voorzichtig tegen de zijkant van je nek'
+                        {print} '(net onder je kaaklijn)'
+                        {print} 'Tel het aantal kloppingen dat je voelt voor 15 seconden'
+                        kloppingen == {ask} 'Hoeveel kloppingen voelde je in 15 seconden?'
                         hartslag = kloppingen*4
-                        print 'Je hartslag is ' hartslag
-                        if hartslag >= 60 or hartslag <= 100
-                            print 'Je hartslag is normaal'
-                        else
-                            if hartslag > 60
-                                print 'Je hartslag is te laag'
-                            if hartslag < 100
-                                print 'Je hartslag is te hoog'
-                            print 'Misschien moet je naar de dokter'
+                        {print} 'Je hartslag is ' hartslag
+                        {if} hartslag >= 60 {or} hartslag <= 100
+                            {print} 'Je hartslag is normaal'
+                        {else}
+                            {if} hartslag > 60
+                                {print} 'Je hebt een lage hartslag'
+                            {if} hartslag < 100
+                                {print} 'Je hebt een hoge hartslag'
+                            {print} 'Misschien moet je naar de dokter'
 
-                    hartslag_meten = ask 'Wil je je hartslag meten?'
-                    if hartslag_meten = 'ja'
-                        call bereken_hartslag
-                    else
+                    hartslag_meten = {ask} 'Wil je je hartslag meten?'
+                    {if} hartslag_meten = 'ja'
+                        {call} bereken_hartslag
+                    {else}
                         'Geen probleem'
                     ```
-
-                        print '(net onder je kaaklijn)'
-                        print 'Tel het aantal kloppingen dat je voelt voor 15 seconden'
-                        kloppingen == ask 'Hoeveel kloppingen voelde je in 15 seconden?'
-                        hartslag = kloppingen*4
-                        print 'Je hartslag is ' hartslag
-                        if hartslag >= 60 or hartslag <= 100
-                            print 'Je hartslag is normaal'
-                        else
-                            if hartslag > 60
-                                print 'Je hartslag is te laag'
-                            if hartslag < 100
-                                print 'Je hartslag is te hoog'
-                            print 'Misschien moet je naar de dokter'
-
-                    hartslag_meten = ask 'Wil je je hartslag meten?'
-                    if hartslag_meten = 'ja'
-                        call bereken_hartslag
-                    else
-                        'Geen probleem'
             15:
                 story_text: |-
                     ### Opdracht
@@ -1035,28 +1106,28 @@ adventures:
                     geluiden = 'een trompet', 'een auto-ongeluk', 'donder'
                     oorzaken_van_geluid = 'een televisie, 'een kind met vuurwerk', 'een magische olifant', 'een droom'
 
-                    gekozen_ naam = namen at random
-                    gekozen_werkwoord = werkwoorden at random
-                    gekozen_locatie = 'locaties at random'
-                    gekozen_geluiden = geluid at random
-                    gekozen_plek = verstopplekken random
-                    gekozen_oorzaken = oorzaken_van_geluid at random
+                    gekozen_ naam = namen {at} {random}
+                    gekozen_werkwoord = werkwoorden {at} {random}
+                    gekozen_locatie = 'locaties {at} {random}'
+                    gekozen_geluiden = geluid {at} {random}
+                    gekozen_plek = verstopplekken {random}
+                    gekozen_oorzaken = oorzaken_van_geluid {at} {random}
 
-                    print gekozen_naam ' was ' gekozen_werkwoord ' ' gekozen_locatie
-                    print 'toen die ineens het geluid van ' geluiden at random ' hoorde'
-                    print gekozen_naam ' keek om zich heen, maar kon niet uitvogelen waar het geluid vandaan kwam
-                    print gekozen_naam ' verstopte zich ' gekozen_plek'
-                    print 'Hen probeerde rond te kijken, maar kon vanaf 'daar niks zien'
+                    {print} gekozen_naam ' was ' gekozen_werkwoord ' ' gekozen_locatie
+                    {print} 'toen die ineens het geluid van ' geluiden {at} {random} ' hoorde'
+                    {print} gekozen_naam ' keek om zich heen, maar kon niet uitvogelen waar het geluid vandaan kwam
+                    {print} gekozen_naam ' verstopte zich ' gekozen_plek'
+                    {print} 'Hen probeerde rond te kijken, maar kon vanaf 'daar niks zien'
                     verstopt = 'ja'
-                    while verstopt = 'ja'
-                        print gekozen_naam 'zag nog steeds niks
-                    antwoord = ask 'zal ' gekozen_naam ' diens verstopplek verlaten?'
-                        if antwoord = 'ja'
+                    {while} verstopt = 'ja'
+                        {print} gekozen_naam 'zag nog steeds niks
+                    antwoord = {ask} 'zal ' gekozen_naam ' diens verstopplek verlaten?'
+                        {if} antwoord = 'ja'
                             verstopt == 'nee'
-                    print 'gekozen_naam komt' gekozen_plek ' vandaan'
-                    print 'En toen zag die dat het gewoon ' chosen_cause ' was'
-                    print gekozen_naam 'lachte en ging door met hun dag'
-                    print Einde
+                    {print} 'gekozen_naam komt' gekozen_plek ' vandaan'
+                    {print} 'En toen zag die dat het gewoon ' chosen_cause ' was'
+                    {print} gekozen_naam 'lachte en ging door met hun dag'
+                    {print} Einde
                     ```
             16:
                 story_text: |-
@@ -1069,15 +1140,15 @@ adventures:
                     land = ['Nederland', 'Polen', 'Turkije', 'Zimbabwe', 'Thailand', 'Brazilië', 'Peru', 'Australië', 'India', 'Roemenië' ]
                     hoofdsteden = 'Amsterdam', 'Warschau' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Boekarest'
                     score = 0
-                    for i in range 0 to 10
-                        antwoord = ask 'Wat 'is de hoofdstad van ' landen[i]
+                    {for} i {in} {range} 0 {to} 10
+                        antwoord = {ask} 'Wat 'is de hoofdstad van ' landen[i]
                         correct = hoofdstad[i]
-                        if antwoord = correct
-                            print 'Correct!'
+                        {if} antwoord = correct
+                            {print} 'Correct!'
                         score = score + 1
-                        else
-                            print 'Fout,' hoofdsteden[i] 'is de hoofdstad van ' landen[i]
-                        print 'Jij had ' score ' van de 10 goed'
+                        {else}
+                            {print} 'Fout,' hoofdsteden[i] 'is de hoofdstad van ' landen[i]
+                        {print} 'Jij had ' score ' van de 10 goed'
 
                     ```
             17:
@@ -1087,33 +1158,33 @@ adventures:
                 example_code: |
                     **Pas op! Deze code bevat fouten!**
                     ```
-                    define eten_bestelling
-                        toppings = ask 'pepperoni, tonijn, groenten of kaas?'
-                        formaat = ask 'groot, medium of klein?'
-                        hoeveel_pizza = ask 'Hoeveel van deze pizzas wil je?'
+                    {define} eten_bestelling
+                        toppings = {ask} 'pepperoni, tonijn, groenten of kaas?'
+                        formaat = {ask} 'groot, medium of klein?'
+                        hoeveel_pizza = {ask} 'Hoeveel van deze pizzas wil je?'
 
-                        print 'JE BESTELLING'
-                        print hoeveel_pizzas ' formaat  ' topping ' pizza'
+                        {print} 'JE BESTELLING'
+                        {print} hoeveel_pizzas ' formaat  ' topping ' pizza'
 
-                    define drinken_bestelling
-                        drinken = ask 'water, cola, ijsthee, limonade of koffie?'
-                        hoeveel_drinken = ask 'Hoeveel drankjes wilt u?'
+                    {define} drinken_bestelling
+                        drinken = {ask} 'water, cola, ijsthee, limonade of koffie?'
+                        hoeveel_drinken = {ask} 'Hoeveel drankjes wilt u?'
 
-                        print 'JE BESTELLING'
-                        print hoeveel_drinken ' ' drankje
+                        {print} 'JE BESTELLING'
+                        {print} hoeveel_drinken ' ' drankje
 
                     'Welkom bij Hedy pizza'
-                    meer_eten = ask 'Wil je een pizza bestellen?'
-                    while meer_eten = 'ja'
-                        return eten_bestelling
-                        meer_eten = ask 'Wil je een pizza bestellen?'
-                    meer_drinken = ask 'Wil je wat te drinken bestellen?'
-                    while meer_drinken == 'ja'
-                        call drinken_bestelling
-                        meer_drinken == ask 'Wil je meer drankjes bestellen?'
+                    meer_eten = {ask} 'Wil je een pizza bestellen?'
+                    {while} meer_eten = 'ja'
+                        {return} eten_bestelling
+                        meer_eten = {ask} 'Wil je een pizza bestellen?'
+                    meer_drinken = {ask} 'Wil je wat te drinken bestellen?'
+                    {while} meer_drinken == 'ja'
+                        {call} drinken_bestelling
+                        meer_drinken == {ask} 'Wil je meer drankjes bestellen?'
 
 
-                    print 'Bedankt voor je bestelling!'
+                    {print} 'Bedankt voor je bestelling!'
                     ```
             18:
                 story_text: |-
@@ -1144,7 +1215,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    Welkom bij Hedy! In Level 1 ga je je eerste codes leren maken.
+                    Welkom bij Hedy! Hier kun je stap voor stap leren programmeren.
 
                     Als je een code hebt getypt in het invoerscherm, kun je op de knop 'Voer de code uit' klikken. Je programma wordt dan uitgevoerd in het uitvoerscherm.
                     Je kan ook de voorbeeldcode naar je invoerscherm kopiëren door op de gele knop te klikken.
@@ -1371,7 +1442,7 @@ adventures:
                 story_text: |
                     Nu maken we nog een kleine verandering bij het inspringen. Elke keer als we moeten inspringen, gebruiken we een `:` bij de regel erboven.
 
-                    In dit level leer je ook een nieuw commando `{elif}`. `{elif}` is  een samentrekking van {else} en {if} voor als je 3 of meer opties wilt programmeren.
+                    In dit level leer je ook een nieuw commando `{elif}`. `{elif}` is  een samentrekking van `{else} {if}` voor als je 3 of meer opties wilt programmeren.
                     Kijk maar in het volgende avontuur!
             18:
                 story_text: |
@@ -1593,7 +1664,7 @@ adventures:
     elif_command:
         name: '{elif}'
         default_save_name: alsanders
-        description: introduceert het alsanders commando
+        description: '{elif}'
         levels:
             17:
                 story_text: |-
@@ -1614,7 +1685,7 @@ adventures:
     for_command:
         name: '{for}'
         default_save_name: voor
-        description: introduceert het voor commando
+        description: '{for} commando'
         levels:
             10:
                 story_text: |-
@@ -1661,6 +1732,14 @@ adventures:
                     {for} i {in} {range} 1 {to} 10:
                         {print} i
                     {print} 'Wie niet weg is, is gezien! Ik kom!'
+                    ```
+            18:
+                story_text: |
+                    Tot slot maken we echte Python code van `{for} i {in} {range} 1 to 5` op deze manier:
+                example_code: |
+                    ```
+                    {for} i {in} {range}(1,5):
+                        {print} (i)
                     ```
     fortune:
         name: Waarzegger
@@ -1830,10 +1909,11 @@ adventures:
             12:
                 story_text: |
                     In dit level leer je hoe je **functies** gebruikt. Een functie is een blokje code dat je meerdere keren kunt gebruiken. Functies helpen je de code te ordenen.
-                    Om een functie te maken, gebruik je `{define}` en geef je de functie een naam. Daarna zet je er regels code onder in een ingesprongen blokje.
+                    Om een functie te maken, gebruik je `{define}` en geef je de functie een naam. Daarna zet je er regels code onder in een ingesprongen blokje onder de {define} regel.
                     Sla daarna een regel over om je code mooi en overzichtelijk te houden. Goed werk! Je hebt een functie gemaakt!
 
                     Als je nu dit blokje wil gebruiken, dan gebruik je  <code>{call}</code>  en de naam van de functie. Zo hoeven we de code niet vaker te typen.
+
                     Kijk maar eens naar ons Twistervoorbeeld. De functie 'draai' bevat een blok code dat een kleur en een ledemaat kiest.
 
                     ### Opdracht
@@ -1867,16 +1947,18 @@ adventures:
 
                     In deze code hebben we bijvoorbeeld het eerste stukje van het liedje 'My Bonnie is over the ocean' geprogrammeerd.
                     In dit voorbeeld hebben we het argument 'plaats' gebruikt. plaats is een variabele die alleen in de functie gebruikt wordt, een argument dus.
-                    Om 'plaats' te gebruiken hebben zetten we `{with} place` achter `{define} lied`.
+                    Om 'plaats' te gebruiken hebben we `{with} place` achter `{define} lied` gezet.
                     Als de functie geroepen wordt vervangt de computer het argument 'plaats' met de text die na `{call} song {with}` staat.
 
                     ### Opdracht
                     Het volgende couplet gaat zo:
 
+                    ```not_hedy_code
                     Last night as I lay on my pillow
                     Last night as I lay on my bed
                     Last night as I lay on my pillow
                     I dreamed that my Bonnie is dead
+                    ```
 
                     Kun jij dat programmeren?
                 example_code: |
@@ -1895,7 +1977,7 @@ adventures:
 
                     Bijboorbeeld, in deze code geeft de functie bereken_nieuwe_prijd de nieuwe prijs van een item. Het geeft je de nieuwe prijs als return value.
 
-                    ## Opdracht
+                    ### Opdracht
                     Maak deze code af. We hebben de nieuwe variabele nieuwe_prijs al voor je gemaakt, maar jij moet hem nog instellen.
                     Maak de regel af door de functie te roepen en de nieuwe prijs te berekenen.
                 example_code: |
@@ -1910,6 +1992,36 @@ adventures:
 
                     nieuwe_prijs = _ bereken_nieuwe_prijs with oude_prijs, _
                     {print} 'De nieuwe prijs is ' nieuwe_prijs ' euro'
+                    ```
+            18:
+                story_text: |
+                    Laten we functies ook op de Pythonmanier maken! Om een functie te maken gebruiken we niet langer:
+
+
+                    `{define} naam_functie {with} argument_1, argument_2:`
+
+                    Maar we gebruiken nu:
+
+                    `{def} naam_functie(argument_1, argument_2):`.
+
+
+                    Als je geen argumenten wil gebruiken dan laat je de ruimte tussen de haakjes leeg.
+                    Om een functie op te roepen hoef je geen `{call}` meer te gebruiken, maar typ je gewoon de naam van de functie.
+                example_code: |
+                    ```
+                    {def} bereken_score(antwoord, goede_antwoord):
+                        {if} antwoord == goede_antwoord:
+                            score = 1
+                        {elif} antwoord == '?':
+                            score = 0
+                        {else}:
+                            score = -1
+                        {return} score
+
+                    antwoord = {input} ('Waar staat de Eiffeltoren?')
+                    goede_antwoord = 'Parijs'
+                    score = bereken_score(antwoord, goede_antwoord)
+                    {print} ('Je score is... ', score)
                     ```
     guess_my_number:
         name: Raad mijn getal
@@ -2232,11 +2344,9 @@ adventures:
                     monsters = zombie, vampier, mummy, reuzespin
                     {repeat} 3 {times}
                         {if} speler {is} levend
-                            goede_deur = deuren {at} {random}
+                            goede_deur {is} deuren {at} {random}
                             {print} 'Voor je staan drie deuren...'
                             gekozen_deur = {ask} 'Welke deur kies je?'
-                            {print} 'Jij kiest deur...' gekozen_deur
-                            {sleep}
                             {if} gekozen_deur {is} goede_deur
                                 {print} 'Gelukkig! Geen monster!'
                             {else}
@@ -2370,7 +2480,7 @@ adventures:
     if_command:
         name: '{if} & {else}'
         default_save_name: als
-        description: introduceert het als commando
+        description: introduceert het {if} commando
         levels:
             5:
                 story_text: |
@@ -2415,7 +2525,7 @@ adventures:
                     ```
             9:
                 story_text: |
-                    In dit level kun je een {if} commando in een ander {if} commando stoppen.
+                    In dit level kun je een `{if}` commando in een ander `{if}` commando stoppen.
                 example_code: |
                     ```
                     doorgaan = {ask} 'Wil je doorgaan?'
@@ -2431,7 +2541,7 @@ adventures:
     in_command:
         name: '{in}'
         default_save_name: in
-        description: introduceert het in commando
+        description: introduceert het {in} commando
         levels:
             5:
                 story_text: |
@@ -2451,15 +2561,15 @@ adventures:
                     Ben je klaar? Probeer dan een eigen code te verzinnen.
                 example_code_2: |
                     ```
-                    dieren is koe, schaap, varken
-                    antwoord is ask 'Wat is je lieverlingsdier?'
+                    dieren {is} koe, schaap, varken
+                    antwoord {is} {ask} 'Wat is je lieverlingsdier?'
                     _ antwoord _ dieren _ 'Mijne ook!'
                     _ _ 'Mijn lievelingsdieren zijn koeien, schapen en varkens'
                     ```
     is_command:
         name: '{is}'
         default_save_name: is_command
-        description: introducing is command
+        description: introducing {is} command
         levels:
             2:
                 story_text: |
@@ -2503,6 +2613,13 @@ adventures:
                     {if} leeftijd < 12
                             {print} 'Dan ben je jonger dan ik!'
                     ```
+                    ```
+                    leeftijd = {ask} 'Hoe oud ben jij?'
+                    {if} leeftijd < 12
+                            {print} 'Dan ben je jonger dan ik!'
+                    {else}
+                            {print} 'Dan ben je ouder dan ik!'
+                    ```
                 story_text_2: |
                     Als je iets precies wilt vergelijken, mag je dat nu doen met twee isgelijktekentjes. Zo doen de meeste programmeertalen dat:
                 example_code_2: |
@@ -2519,11 +2636,6 @@ adventures:
                     {if} name != 'Hedy'
                         {print} 'Jij bent Hedy niet'
                     ```
-
-                    {if} leeftijd < 13
-                        {print} 'Dan ben je jonger dan ik!'
-                    {else}
-                        {print} 'Dan ben je ouder dan ik!'
     language:
         name: Woordjes leren
         default_save_name: Woordjes leren
@@ -2596,12 +2708,10 @@ adventures:
                     b = 'wereld!'
                     {print} a + b
                     ```
-
-                    {print} 2.5 + 2.5
     music:
         name: Muziek
-        default_save_name: music
-        description: Play a tune!
+        default_save_name: muziek
+        description: Speel een deuntje
         levels:
             1:
                 story_text: |-
@@ -2617,14 +2727,14 @@ adventures:
                     In het volgende level leer je enkele bestaande nummer spelen.
                 example_code: |-
                     ```
-                    play C4
-                    play D4
-                    play E4
-                    play F4
-                    play G4
-                    play A4
-                    play B4
-                    play C5
+                    {play} C4
+                    {play} D4
+                    {play} E4
+                    {play} F4
+                    {play} G4
+                    {play} A4
+                    {play} B4
+                    {play} C5
                     ```
             2:
                 story_text: |
@@ -3147,10 +3257,12 @@ adventures:
                     ```
             7:
                 story_text: |
-                    Nu je `{repeat}` hebt geleerd kunnen we meerdere keren kijken of er een toets is ingedrukt. Dat kan je gebruiken om de schildpad te besturen.
+                    Nu je `{repeat}` hebt geleerd kunnen we meerdere keren kijken of er een toets is ingedrukt. 
+                    Je kunt dit gebruiken om de schildpad te besturen.
 
                     ### Opdracht
-                    De voorbeeldcode kijkt één keer of er een toets is ingedrukt. Pas de code aan zodat dat vaker gebeurt en maak er dan een mooie tekening mee.
+                    De voorbeeldcode kijkt één keer of er een toets is ingedrukt. 
+                    Pas de code aan door {repeat} toe te voegen en maak daar een mooie tekening mee.
                 example_code: |
                     ```
                     {if} x {is} {pressed} {forward} 15 {else} {turn} 90
@@ -3212,11 +3324,13 @@ adventures:
                 story_text_2: Als je meer dan één regel wilt printen, dan moet je die scheiden met een komma.
                 example_code_2: |
                     ```
-                    temperatuur = 25
-                    {print}('Het is ', temperatuur, ' graden buiten')
+                    temperature = 25
+                    {print}('It is ', temperature, ' degrees outside')
                     ```
-
+                    ```
+                    naam = 'Hedy'
                     {print}('Mijn naam is ', naam)
+                    ```
     quizmaster:
         name: Quizmaster
         default_save_name: Quizmaster
@@ -3375,7 +3489,7 @@ adventures:
     repeat_command:
         name: '{repeat}'
         default_save_name: herhaal
-        description: introduceert het herhaal commando
+        description: '{repeat} commando'
         levels:
             7:
                 story_text: |
@@ -3414,9 +3528,9 @@ adventures:
             9:
                 story_text: |
                     In dit level kun je niet alleen meerdere regels gebruiken bij `{if}` en `{repeat}`, maar je kunt ze ook nog eens in elkaar zetten!
-                    In het voorbeeldje zie je een `{if}` commando in een `{repeat}` commando staan.
+                    Hiernaast zie je evoorbeeldje.
 
-                    Andersom mag het ook en een `{if}` mag ook in een `{if}` en een `{repeat}` in een `{repeat}`.
+                    Je mag het ook en een `{if}` in een `{if}` en een `{repeat}` in een `{repeat}` plaatsen.
                     Probeer het maar eens!
                 example_code: |
                     ```
@@ -3430,7 +3544,7 @@ adventures:
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: herhaal2
-        description: herhaal
+        description: '{repeat} commando 2'
         levels:
             7:
                 story_text: |
@@ -3958,7 +4072,7 @@ adventures:
                 example_code: |
                     ```
                     naam = {ask} 'Hoe heet je?'
-                    {if} naam {is} '_'
+                    {if} naam {is} _
                         plek = 'Ga naar het vliegveld '
                     {else}
                         plek = 'Ga naar het treinstation '
@@ -3971,12 +4085,13 @@ adventures:
                     ```
             13:
                 story_text: |
-                    We kunnen nu met maar één `{if}` bekijken of het programma gebruikt wordt door de geheim agent.
+                    We kunnen door `{and}` te gebruiken, nu met maar één `{if}` bekijken of het programma gebruikt wordt door de geheim agent.
+
                     ### Opdracht 1
                     Maak de code af door het lege stukje te vullen. Let op: de superspion moet beide antwoorden goed hebben, voordat hij de juiste geheime informatie krijgt.
+
                     ### Opdracht 2
-                    We willen de vijand extra verwarren! Maak een lijst met nepantwoorden en kies, bij een fout antwoord, iets uit de lijst.
-                    **(extra)** Voeg een extra vraag toe zoals in level 12.
+                    We willen de vijand extra verwarren! Maak een lijst met nepantwoorden en kies, bij een fout antwoord, iets uit de lijst. (**(extra)** Voeg een extra vraag toe zoals in level 12)
                 example_code: |
                     ```
                     naam = {ask} 'Hoe heet je?'
@@ -3986,10 +4101,141 @@ adventures:
                     {else}
                         {print} 'Ga naar het treinstation om 10:00'
                     ```
+    simon:
+        name: Simon Says
+        default_save_name: Simon
+        description: Make a game of Simon Says
+        levels:
+            16:
+                story_text: |
+                    Tijd voor een potje 'Simon Says'! Simon Says is een geheugenspelletje waarbij de speler een kleur krijgt te zien. De speler moet de juiste kleur terugzeggen.
+                    Doe je het goed? Dan komt er steeds een kleur bij en wordt de reeks die je moet onthouden dus steeds langer. Het spel stopt zodra je een fout maakt.
+
+                    ### Opdracht
+                    In dit eerste deel van het Simon Says avontuur laten we de computer een random kleur kiezen en zetten we die op een lijstje.
+
+                    ***Maak 2 lijstjes***
+                    We maken eerst het lijstje `kleuren` en vullen dat lijstje met de kleuren rood, geel, groen en blauw.
+                    Dan maken we een lijstje genaamd `simon_reeks`. Dit lijstje wordt het lijstje met het goede antwoord.
+                    Aan het begin van het spel is het lijstje nog leeg. Helaas kunnen we (nog) geen lege lijstje maken, dus vullen we het lijstje met 'leeg' en 'lijstje' en halen we die twee woorden daarna meteen weer van het lijstje af.
+
+                    ***Maak een functie die en kleur toevoegt aan de reeks*** Nu we een leeg lijstje hebben voor het goede antwoord, kunnen we het lijstje gaan vullen met random kleuren.
+                    Dit doen we met een functie. Zo kunnen we de functie elk keer als er een nieuw level is weer gebruiken om weer een nieuwe kleur toe te voegen. Noem je functie `random_kleur_toevoegen`
+                    Maak daarna de variabele `random_kleur` en kies een willekeurige kleur. Voeg de gekozen random kleur toe aan de simon_reeks.
+
+                    ***Maak een functie die de simon_reeks toont*** Noem de nieuwe functie `toon_simon_reeks` met `level` als argument. Nu willen we zoveel kleuren laten zien als het level waar we inzitten (in level 1, dus 1 kleur en in level 2, 2 kleuren etc).
+                    Dus `simon_reeks[i]` moet `level` keer worden geprint. Elke keer als er een kleur wordt geprint, moet de code even 1 seconde wachten en het scherm daarna wissen.
+
+                    ***Test het programma*** Voordat je doorgaat naar het volgende tabblad, kun je even testen of je functies het wel goed doen. Als de functies werken, zou je een willekeurige kleur in beeld moeten krijgen.
+                    Verwijder dit testgedeelte van je code zodra je tevreden bent en kopieer de rest van je code om verde te gaan in het volgende tabje.
+                example_code: |
+                    ```
+                    # Maak 2 lijstjes
+                    kleuren = _
+                    _ = ['leeg', 'lijstje']
+                    {remove} _ {from} simon_reeks
+                    {remove} _
+
+                    # Maak een functie die een kleur toevoegt aan de reeks
+                    _ random_kleur_toevoegen
+                        _
+                        {add} _
+
+                    # Maak een functie die de simon_reeks toont
+                    {define} _
+                        {for} i {in} {range} 1 {to} _
+                            {print} _
+                            _
+                            _
+
+                    # Test het programma
+                    {call} _
+                    {call} toon_simon_reeks {with} 1
+                    ```
+    simon_2:
+        name: Simon Says 2
+        default_save_name: Simon
+        description: Make a game of Simon Says
+        levels:
+            16:
+                story_text: |
+                    We werken verder aan de Simon Says game!
+
+                    ### Opdracht
+                    ***Plak je code hier*** Plak hier je code vanuit het voorgaande tabje. Vergeet niet om het testgedeelte te verwijderen, dat heb je nu namelijk niet nodig.
+
+                    ***Maak een functie voor de speler_reeks***  De lijst `speler_reeks` gebruiken we om de antwoorden van de speler in op te slaan. Allereerst definieren we de functie met het argument level.
+                    Daarna vragen we level keer welke kleur de speler wil kiezen. Die variabele noemen we `antwoord`. Vervolgens voegen we de variabele `antwoord` toe aan het lijstje speler_reeks.
+
+                    ***Voorbereidingen voor het spel*** Voordat we het spel programmeren in het volgende tabblad, moeten we nog wat startvariabelen maken. Eerst zetten we de variabele `level` op 1 en game_over op False (false betekent niet waar).
+                    Daarna introduceren we ons spelletje. We printen 'Welkom bij Simon Says' en wissen het scherm weer na 1 seconde.
+
+                    ***Ga door naar het volgende tabje om het spel af te maken!*** Vergeet niet eerst je code te kopiëren.
+                example_code: |
+                    ```
+                    # Plak je code hier
+
+                    # Maak een functie voor de speler_reeks
+                    {define} _
+                        {for} _
+                            _ 'Wat is kleur ' i '?'
+                            {add} antwoord {to} _
+
+                    # Voorbereidingen voor het spel
+                    level = _
+                    game_over = _
+                    {print} _
+                    _ 1
+                    _
+                    ```
+    simon_3:
+        name: Simon Says 3
+        default_save_name: Simon
+        description: Make a game of Simon Says
+        levels:
+            16:
+                story_text: |
+                    In dit tabje maken we het spel af!
+
+                    ### Opdracht
+                    ***Plak je code hier*** Kopieer je code van het vorige tabblad en plak het hier.
+
+                    ***Programmeer het spel*** Eerst programmeren we dat het spel door blijft gaan zolang je niet game over bent. Daarna printen we op welk level de speler nu is, waarvoor we de variabele level natuurlijk gebruiken. Na één seconde wissen we het scherm weer.
+                    Nu moeten we de lijst speler_reeks maken. We hebben net al een functie gemaakt om die lijst te vullen, maar we hadden het lijstje zelf nog niet gemaakt.
+                    We maken weer een lege lijst met hetzelfde trucje als eerst. We maken een lijst met 'leeg' en 'lijstje' in de lijst en verwijderen deze twee woorden daarna weer meteen van de lijst.
+                    Daarna roepen we alle drie de functies op die we net gemaakt hebben.
+                    Tot slot checken we of de speler de juiste antwoorden geeft of niet (dus of het lijstje speler_reeks overeenkomt met simon_reeks).
+                    Als dat zo is, dan geven we een compliment aan de speler. De wachten 1 seconde en verhogen het level met 1.
+                    Had de speler een fout antwoordn, dan beëindigen we het spel door de variabele game_over op True (dat betekent waar) te zetten.
+
+                    ***Veel speelplezier!*** Goed gedaan! Werkt je spel toch niet helemaal zoals het zou moeten? Debug je code dan met de lieveheersbeestjesknop.
+                example_code: |
+                    ```
+                    # Plak je code hier
+
+                    # Het spel
+                    {while} game_over _
+                        {print} _
+                        _
+                        _
+                        _ = ['leeg', 'lijstje']
+                        {remove} _
+                        {remove} _
+                        {call} _
+                        {call} _ {with} _
+                        {call} _ {with} _
+                        {if} speler_reeks == _
+                            _
+                            _
+                            _
+                        {else}
+                            _
+                            game_over = _
+                    ```
     sleep_command:
         name: '{sleep}'
         default_save_name: slaap
-        description: introduceert het slaap commando
+        description: introduceert het {sleep} commando
         levels:
             2:
                 story_text: |
@@ -4283,6 +4529,7 @@ adventures:
 
                     # Roep de functie op
                     ```
+
             17:
                 story_text: |
                     In het vorige level heb je geleerd om een spelletje boter-kaas-en-eieren te programmeren. Het spel werkt wel, maar het heeft de irritante eigenschap je steeds te vragen of je al gewonnen hebt.
@@ -4400,6 +4647,7 @@ adventures:
                     vierkant maken of een trapje.
 
                     Met `{forward}` ga je naar voren. Het getal erna bepaalt hoe ver naar voren. Met `{turn} {right}` draai je een kwartslag, met de klok mee. `{turn} {left}` draait tegen de klok in.
+
                     Wil je naar achteren? Gebruik dan het `{forward} ` commando met een negatief getal. Dus bijvoorbeeld `{forward} -100`.
                 example_code: |
                     ```
@@ -4577,7 +4825,6 @@ adventures:
                     afstanden = 10, 20, 30, 40, 50, 60
                     {for} afstand {in} afstanden
                         {forward} afstand
-                    ```
                     ```
             12:
                 story_text: |
@@ -4790,8 +5037,9 @@ adventures:
                     Maak de figuren na met de schildpad!
 
                     <div class="w-full flex flex-row gap-2">
-                    Honingraat (6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="200">
-                    Waaier (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="200">
+                    Honingraat (6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="150">
+                    Waaier (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="150">
+                    Sneeuwvlok (13) <img src="https://github.com/hedyorg/hedy/assets/80678586/90f56bbb-86e5-448d-8aec-16f8c2c05cf2" width="150">
                     </div>
                 example_code: |
                     Hint voor de honingraat:
@@ -4806,15 +5054,16 @@ adventures:
 
                     Hint voor de waaier:
                     Start zoals je deed voor de waaier in level 7. Of kijk naar de hint voor de honingraat, want de code lijkt er erg op.
+
+                    Hint voor de sneeuwvlok: Maak eerst een pootje van de sneeuwvlok en herhaal dat 6 keer.
             12:
                 story_text: |
                     ### Opdracht
                     Maak een code om armbanden te ontwerpen!
-                    </div>
-                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
+
+                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500"> 
                 example_code: |
                     Hint voor het ontwerpen van armbanden:
-
 
                     Definieer eerst een functie **voor elke vorm** die je wilt gebruiken op de armband. Voeg daarna op deze manier vormen aan de armband toe:
 
@@ -4843,6 +5092,7 @@ adventures:
 
                     Straat met huizen van verschillende groottes <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
                     Gekleurde straat <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
+                    Sneeuwstorm <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
                 example_code: |
                     Hint voor de straat met huizen van verschillende groottes
                     ```
@@ -4858,6 +5108,23 @@ adventures:
                     ```
                     {define} teken_een_huis {with} gekozen_kleur
                     _
+                    ```
+
+                    Hint Snow Storm
+                    ```
+                    {define} teken_sneeuwvlok {with} lengte, kleur
+                        _
+
+                    getallen = 10, 20, 30
+                    kleuren = _
+
+                    {for} i {in} {range} 1 {to} 5
+                        random_getal = _
+                        random_kleur = _
+                        {call} teken_sneeuwvlok {with} random_getal, random_kleur
+                        {color} wit
+                        {turn} random_getal * 5
+                        {forward} 80
                     ```
             14:
                 story_text: |
@@ -4921,7 +5188,7 @@ adventures:
     while_command:
         name: '{while}'
         default_save_name: zolang
-        description: introduceert het zolang commando
+        description: '{while} commando'
         levels:
             15:
                 story_text: |-
@@ -4954,5 +5221,6 @@ adventures:
                     ```
                     {for} getal {in} {range} _ {to} _
                         {print} getal
+                        {sleep}
                     {print} 'Gelukkig Nieuwjaar!'
                     ```
