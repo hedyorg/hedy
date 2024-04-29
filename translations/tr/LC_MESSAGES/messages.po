@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-04-01 11:41+0000\n"
+"PO-Revision-Date: 2024-04-26 06:30+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: tr <LL@li.org>\n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.1-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -24,6 +24,10 @@ msgstr "{name} değişkenini {access_line_number} numaralı satırda kullanmaya 
 
 msgid "Cyclic Var Definition"
 msgstr "`{is}` komutunun sağ tarafında kullanabilmeniz için `{variable}` adının daha önceden ayarlanması gerekir."
+
+#, fuzzy
+msgid "Else Without If Error"
+msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
 
 #, fuzzy
 msgid "Function Undefined"
@@ -65,6 +69,10 @@ msgstr "Görünüşe göre {line_number} numaralı satırda kullandığınız me
 #, fuzzy
 msgid "Missing Additional Command"
 msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+
+#, fuzzy
+msgid "Missing Colon Error"
+msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
 
 msgid "Missing Command"
 msgstr "Görünüşe göre {line_number} numaralı satırda bir komut kullanmayı unutmuşsunuz."
@@ -179,7 +187,7 @@ msgstr "Başarım logosu"
 
 #, fuzzy
 msgid "actions"
-msgstr ""
+msgstr "Actions"
 
 #, fuzzy
 msgid "add"
@@ -187,6 +195,9 @@ msgstr "Add"
 
 msgid "add_students"
 msgstr "Öğrenci ekleyin"
+
+msgid "add_students_options"
+msgstr "Öğrenci seçenekleri ekleyin"
 
 msgid "admin"
 msgstr "Yönetici"
@@ -301,9 +312,6 @@ msgstr "2. seviyeden itibaren, `{ask}` bir değişkenle birlikte kullanılmalıd
 msgid "available_in"
 msgstr "Available in:"
 
-msgid "back_to_class"
-msgstr ""
-
 msgid "become_a_sponsor"
 msgstr "Sponsor olun"
 
@@ -341,6 +349,9 @@ msgstr "Siz zaten bir sınıfın öğrencisisiniz"
 msgid "class_customize_success"
 msgstr "Sınıf başarıyla özelleştirildi."
 
+msgid "class_live"
+msgstr "Canlı istatistikler"
+
 msgid "class_name_duplicate"
 msgstr "Bu isimde bir sınıfınız zaten var."
 
@@ -352,6 +363,9 @@ msgstr "Bu sınıf ismi geçersiz."
 
 msgid "class_name_prompt"
 msgstr "Lütfen yeni sınıfın ismini girin"
+
+msgid "class_overview"
+msgstr "Sınıfa genel bakış"
 
 #, fuzzy
 msgid "class_survey_description"
@@ -426,6 +440,12 @@ msgstr "Panoya başarıyla kopyalandı"
 #, fuzzy
 msgid "copy_code"
 msgstr "Copy code"
+
+msgid "copy_join_link"
+msgstr "Katılma bağlantısını kopyala"
+
+msgid "copy_link_success"
+msgstr "Katılma bağlantısı panoya başarıyla kopyalandı"
 
 msgid "copy_link_to_share"
 msgstr "Paylaşmak için bağlantıyı kopyalayın"
@@ -503,8 +523,12 @@ msgstr "Sınıfı özelleştirin"
 msgid "dash"
 msgstr "bir çizgi"
 
-msgid "default_403"
+msgid "default_401"
 msgstr "Görünüşe göre yetkiniz yok..."
+
+#, fuzzy
+msgid "default_403"
+msgstr "Looks like this action is forbidden..."
 
 msgid "default_404"
 msgstr "O sayfayı bulamadık..."
@@ -547,6 +571,10 @@ msgstr "Doğrudan açın"
 
 msgid "disable"
 msgstr "Devre dışı bırak"
+
+#, fuzzy
+msgid "disable_explore_page"
+msgstr "Disable explore page"
 
 #, fuzzy
 msgid "disable_parsons"
@@ -638,6 +666,9 @@ msgstr "Exit preview mode"
 
 msgid "experience_invalid"
 msgstr "Lütfen geçerli bir deneyim seçin, (Evet, Hayır) seçeneğini işaretleyin."
+
+msgid "expiration_date"
+msgstr "Son kullanma tarihi"
 
 msgid "explore_explanation"
 msgstr "Bu sayfada diğer Hedy kullanıcıları tarafından oluşturulan programlara bakabilirsiniz. Hem Hedy seviyesine hem de maceraya göre filtreleme yapabilirsiniz. Bir programı açmak ve çalıştırmak için \"Programı görüntüle \"ye tıklayın. Kırmızı başlıklı programlar bir hata içerir. Programı yine de açabilirsiniz, ancak çalıştırmak bir hatayla sonuçlanacaktır. Elbette düzeltmeyi deneyebilirsiniz! Oluşturan kişinin herkese açık bir profili varsa, profilini ziyaret etmek için kullanıcı adına tıklayabilirsiniz. Orada tüm paylaşılan programlarını ve çok daha fazlasını bulacaksınız!"
@@ -863,8 +894,17 @@ msgstr "Geçersiz eğitici adımı"
 msgid "invalid_username_password"
 msgstr "Geçersiz kullanıcı adı/şifre."
 
+msgid "invite_by_username"
+msgstr "Kullanıcı adına göre davet et"
+
+msgid "invite_date"
+msgstr "Davet tarihi"
+
 msgid "invite_message"
 msgstr "Sınıfa katılmak için bir davetiye aldınız"
+
+msgid "invite_prompt"
+msgstr "Bir kullanıcı adı girin"
 
 #, fuzzy
 msgid "invite_teacher"
@@ -899,6 +939,9 @@ msgstr "Son düzenleme"
 
 msgid "last_error"
 msgstr "Son hata"
+
+msgid "last_login"
+msgstr "Son giriş"
 
 msgid "last_program"
 msgstr "Son program"
@@ -1055,8 +1098,8 @@ msgid "more_options"
 msgstr "More options"
 
 #, fuzzy
-msgid "multiple_levels_warning"
-msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
+msgid "multiple_keywords_warning"
+msgstr "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}"
 
 msgid "my_account"
 msgstr "Hesabım"
@@ -1227,6 +1270,9 @@ msgstr "Bu isimde bir programınız zaten var, bu programı kaydederseniz eskisi
 msgid "owner"
 msgstr "Owner"
 
+msgid "page"
+msgstr "sayfa"
+
 msgid "page_not_found"
 msgstr "Aradığın sayfayı bulamadık!"
 
@@ -1266,6 +1312,9 @@ msgstr "Şifre güncellendi."
 
 msgid "passwords_six"
 msgstr "Tüm parolaların altı karakter veya daha uzun olması gerekir."
+
+msgid "pending_invites"
+msgstr "Bekleyen davetler"
 
 msgid "people_with_a_link"
 msgstr "Bağlantıya sahip olan diğer kişiler bu programı doğrudan görebilir. Ayrıca \"Keşfet\" sayfasında da aranıp bulunabilir."
@@ -1421,6 +1470,13 @@ msgstr "Özelleştirmeyi kaldırın"
 msgid "remove_customizations_prompt"
 msgstr "Bu sınıfın özelleştirmelerini kaldırmak istediğinizden emin misiniz?"
 
+msgid "remove_student_prompt"
+msgstr "Öğrenciyi bu sınıftan çıkarmak istediğinize emin misiniz?"
+
+#, fuzzy
+msgid "remove_user_prompt"
+msgstr "Confirm removing this user from the class."
+
 msgid "repair_program_logo_alt"
 msgstr "Program onarım simgesi"
 
@@ -1487,9 +1543,6 @@ msgstr "Kodu çalıştır"
 msgid "runs_over_time"
 msgstr "Şimdiye kadar ki çalıştırmalar"
 
-msgid "save"
-msgstr "Kaydet"
-
 msgid "save_parse_warning"
 msgstr "Bu program bir hata içeriyor, kaydetmek istediğinizden emin misiniz?"
 
@@ -1519,6 +1572,10 @@ msgstr "Are you sure you want to copy this teacher?"
 #, fuzzy
 msgid "second_teacher_prompt"
 msgstr "Enter a teacher username to invite them."
+
+#, fuzzy
+msgid "second_teacher_warning"
+msgstr "All teachers in this class can customize it."
 
 msgid "see_certificate"
 msgstr "{username} sertifikasına bakın!"
@@ -1652,6 +1709,9 @@ msgstr "Bu öğrencinin zaten bekleyen bir daveti var."
 msgid "student_details"
 msgstr "Student details"
 
+msgid "student_list"
+msgstr "Öğrenci listesi"
+
 #, fuzzy
 msgid "student_not_allowed_in_class"
 msgstr "Student not allowed in class"
@@ -1761,6 +1821,10 @@ msgstr "Öğretmen öğretici simgesi"
 
 msgid "teacher_welcome"
 msgstr "Hedy'ye hoş geldiniz! Artık sınıflar oluşturmanıza ve öğrencileri davet etmenize olanak tanıyan bir öğretmen hesabının gururlu sahibisiniz."
+
+#, fuzzy
+msgid "teachers"
+msgstr "Teachers"
 
 msgid "template_code"
 msgstr ""
@@ -1880,6 +1944,14 @@ msgstr "Öğretici adım bulunamadı"
 msgid "unauthorized"
 msgstr "Bu sayfa için erişim izniniz yok"
 
+#, fuzzy
+msgid "unfavourite_confirm"
+msgstr "Are you sure you want to unfavourite this program?"
+
+#, fuzzy
+msgid "unfavourite_success"
+msgstr "Your program is unfavourited."
+
 msgid "unique_usernames"
 msgstr "Tüm kullanıcı adlarının benzersiz olması gerekir."
 
@@ -1903,9 +1975,6 @@ msgstr "Unsubmitted"
 
 msgid "update_adventure_prompt"
 msgstr "Bu macerayı güncellemek istediğinize emin misiniz?"
-
-msgid "update_profile"
-msgstr "Profili güncelle"
 
 msgid "update_public"
 msgstr "Herkese açık profili güncelle"
@@ -1970,9 +2039,6 @@ msgstr "Programı görüntüle"
 #, fuzzy
 msgid "view_slides"
 msgstr "View slides"
-
-msgid "waiting_for_submit"
-msgstr ""
 
 msgid "welcome"
 msgstr "Hoş geldiniz"
@@ -2175,54 +2241,12 @@ msgstr "Programınız"
 #~ msgid "nested blocks"
 #~ msgstr "bir blok içinde bir blok"
 
-#~ msgid "add_students_options"
-#~ msgstr "Öğrenci seçenekleri ekleyin"
+#~ msgid "save"
+#~ msgstr "Kaydet"
 
-#~ msgid "class_live"
-#~ msgstr "Canlı istatistikler"
+#~ msgid "update_profile"
+#~ msgstr "Profili güncelle"
 
-#~ msgid "class_overview"
-#~ msgstr "Sınıfa genel bakış"
-
-#~ msgid "copy_join_link"
-#~ msgstr "Katılma bağlantısını kopyala"
-
-#~ msgid "copy_link_success"
-#~ msgstr "Katılma bağlantısı panoya başarıyla kopyalandı"
-
-#~ msgid "expiration_date"
-#~ msgstr "Son kullanma tarihi"
-
-#~ msgid "invite_by_username"
-#~ msgstr "Kullanıcı adına göre davet et"
-
-#~ msgid "invite_date"
-#~ msgstr "Davet tarihi"
-
-#~ msgid "invite_prompt"
-#~ msgstr "Bir kullanıcı adı girin"
-
-#~ msgid "last_login"
-#~ msgstr "Son giriş"
-
-#~ msgid "page"
-#~ msgstr "sayfa"
-
-#~ msgid "pending_invites"
-#~ msgstr "Bekleyen davetler"
-
-#~ msgid "remove_student_prompt"
-#~ msgstr "Öğrenciyi bu sınıftan çıkarmak istediğinize emin misiniz?"
-
-#~ msgid "remove_user_prompt"
-#~ msgstr "Confirm removing this user from the class."
-
-#~ msgid "second_teacher_warning"
-#~ msgstr "All teachers in this class can customize it."
-
-#~ msgid "student_list"
-#~ msgstr "Öğrenci listesi"
-
-#~ msgid "teachers"
-#~ msgstr "Teachers"
+#~ msgid "multiple_levels_warning"
+#~ msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
 

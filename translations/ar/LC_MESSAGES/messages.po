@@ -8,16 +8,15 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-04-01 11:41+0000\n"
+"PO-Revision-Date: 2024-04-26 06:30+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: ar <LL@li.org>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=0 && n%100<=2 ? 4 : 5);\n"
-"X-Generator: Weblate 5.5-dev\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=0 && n%100<=2 ? 4 : 5);\n"
+"X-Generator: Weblate 5.5.1-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -26,6 +25,10 @@ msgstr "لقد حاولت استخدام المتغير {name} في السطر {
 
 msgid "Cyclic Var Definition"
 msgstr "يجب أن تضبط قيمة المتغير `{variable}` قبل أن تستعمله على الجانب الأيسر من من الأمر هو."
+
+#, fuzzy
+msgid "Else Without If Error"
+msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
 
 #, fuzzy
 msgid "Function Undefined"
@@ -71,6 +74,10 @@ msgstr "It looks like you forgot to use a command with the text you put in line 
 #, fuzzy
 msgid "Missing Additional Command"
 msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+
+#, fuzzy
+msgid "Missing Colon Error"
+msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
 
 msgid "Missing Command"
 msgstr "يبدو أنك نسيت استخدام أمر برمجي في السطر رقم {line_number}."
@@ -199,6 +206,10 @@ msgid "add_students"
 msgstr "تلاميذ"
 
 #, fuzzy
+msgid "add_students_options"
+msgstr "انشاء حسابات للتلاميذ"
+
+#, fuzzy
 msgid "admin"
 msgstr "Admin"
 
@@ -316,9 +327,6 @@ msgstr "ابتداء من المستوى الثاني، نستخدم الأمر 
 msgid "available_in"
 msgstr "Available in:"
 
-msgid "back_to_class"
-msgstr ""
-
 #, fuzzy
 msgid "become_a_sponsor"
 msgstr "Become a sponsor"
@@ -360,6 +368,10 @@ msgstr "أنت بالفعل تلميذ في صف"
 msgid "class_customize_success"
 msgstr "تم انشاء التخصيصات للصف بنجاح."
 
+#, fuzzy
+msgid "class_live"
+msgstr "Live statistics"
+
 msgid "class_name_duplicate"
 msgstr "لديك بالفعل صف بهذا الإسم."
 
@@ -371,6 +383,10 @@ msgstr "اسم هذا الصف غير صالح."
 
 msgid "class_name_prompt"
 msgstr "أدخل اسم الصف رجاء"
+
+#, fuzzy
+msgid "class_overview"
+msgstr "Class overview"
 
 #, fuzzy
 msgid "class_survey_description"
@@ -450,6 +466,14 @@ msgstr "تم النسخ الى الحافظة (ذاكرة التخزين الم�
 #, fuzzy
 msgid "copy_code"
 msgstr "Copy code"
+
+#, fuzzy
+msgid "copy_join_link"
+msgstr "الرجاء نسخ هذا الرابط ولصقه في تبويبة جديدة:"
+
+#, fuzzy
+msgid "copy_link_success"
+msgstr "انسخ الرابط لمشاركته"
 
 msgid "copy_link_to_share"
 msgstr "انسخ الرابط لمشاركته"
@@ -535,8 +559,12 @@ msgstr "تخصيص الصف"
 msgid "dash"
 msgstr "علامة الشرطة"
 
-msgid "default_403"
+msgid "default_401"
 msgstr "ليس مصرحاً لك الوصول على ما يبدو..."
+
+#, fuzzy
+msgid "default_403"
+msgstr "Looks like this action is forbidden..."
 
 msgid "default_404"
 msgstr "لم نستطع إيجاد تلك الصفحة..."
@@ -580,6 +608,10 @@ msgstr "افتتح مباشرة"
 #, fuzzy
 msgid "disable"
 msgstr "Disable"
+
+#, fuzzy
+msgid "disable_explore_page"
+msgstr "Disable explore page"
 
 msgid "disable_parsons"
 msgstr "عطل كل الأحجيات"
@@ -679,6 +711,9 @@ msgstr "Exit preview mode"
 
 msgid "experience_invalid"
 msgstr "الرجاء اختيار الخبرة بشكل صحيح (نعم ، لا)."
+
+msgid "expiration_date"
+msgstr "تاريخ انتهاء الصلاحية"
 
 msgid "explore_explanation"
 msgstr "في هذه الصفحة يمكنك البحث في البرامج التي تم إنشاؤها بواسطة مستخدمي هيدي الآخرين. يمكنك الإختيار بناء على مستوى هيدي والمغامرة. انقر فوق \"عرض البرنامج\" لفتح البرنامج وتشغيله. البرامج ذات الرأس الأحمر تحتوي على خطأ. لا يزال بإمكانك فتح البرنامج ، ولكن تشغيله سيؤدي إلى حدوث خطأ. يمكنك بالطبع محاولة إصلاحه! إذا كان المستخدم الذي أنشأ البرنامج لديه ملف تعريف عام ، فيمكنك النقر فوق اسم المستخدم الخاص به لزيارة ملفه الشخصي. ستجد هناك جميع برامجهم التي تم مشاركتها وأكثر من ذلك بكثير!"
@@ -938,8 +973,18 @@ msgstr "Invalid tutorial step"
 msgid "invalid_username_password"
 msgstr "اسم المستخدم/كلمة المرور غير صحيحة."
 
+#, fuzzy
+msgid "invite_by_username"
+msgstr "يجب أن تكون جميع أسماء المستخدمين لا نظير لها."
+
+msgid "invite_date"
+msgstr "تاريخ الدعوة"
+
 msgid "invite_message"
 msgstr "لقد تلقيت دعوة للإنضمام إلى الصف"
+
+msgid "invite_prompt"
+msgstr "أدخل اسم مستخدم"
 
 msgid "invite_teacher"
 msgstr "دعوة معلم"
@@ -976,6 +1021,9 @@ msgstr "تاريخ آخر تعديل"
 #, fuzzy
 msgid "last_error"
 msgstr "Last error"
+
+msgid "last_login"
+msgstr "اخر تسجيل دخول"
 
 #, fuzzy
 msgid "last_program"
@@ -1137,8 +1185,8 @@ msgid "more_options"
 msgstr "More options"
 
 #, fuzzy
-msgid "multiple_levels_warning"
-msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
+msgid "multiple_keywords_warning"
+msgstr "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}"
 
 msgid "my_account"
 msgstr "حسابي"
@@ -1321,6 +1369,9 @@ msgstr "لديك برنامج بهذا اإسم بالفعل، سيؤدي حفظ
 msgid "owner"
 msgstr "Owner"
 
+msgid "page"
+msgstr "صفحة"
+
 msgid "page_not_found"
 msgstr "لم نستطع ايجاد تلك الصفحة!"
 
@@ -1360,6 +1411,9 @@ msgstr "تم تحديث كلمة المرور."
 
 msgid "passwords_six"
 msgstr "كلمة المرور يجب أن تتكون من ستة أحرف أو أكثر."
+
+msgid "pending_invites"
+msgstr "الدعوات قيد الإنتظار"
 
 #, fuzzy
 msgid "people_with_a_link"
@@ -1525,6 +1579,12 @@ msgstr "إزالة التخصيصات"
 msgid "remove_customizations_prompt"
 msgstr "هل أنت متأكد أنك تريد إزالة التخصيصات المتعلقة بهذا الصف؟"
 
+msgid "remove_student_prompt"
+msgstr "هل أنت متأكد أنك تريد ازالة التلميذ من الصف؟"
+
+msgid "remove_user_prompt"
+msgstr "هل تأكد حذف هذا المستخدم؟"
+
 #, fuzzy
 msgid "repair_program_logo_alt"
 msgstr "Repair program icon"
@@ -1597,9 +1657,6 @@ msgstr "تنفيذ البرنامج"
 msgid "runs_over_time"
 msgstr "Runs over time"
 
-msgid "save"
-msgstr "حفظ"
-
 msgid "save_parse_warning"
 msgstr "هذا البرنامج يحتوي على خطأ، هل أنت متأكد أنك تريد حفظه؟"
 
@@ -1627,6 +1684,9 @@ msgstr "Are you sure you want to copy this teacher?"
 
 msgid "second_teacher_prompt"
 msgstr "أدخل إسم المعلم لدعوته"
+
+msgid "second_teacher_warning"
+msgstr "كل معلم بهذا الصف يمكنه تعديل الخصائص جميعها."
 
 #, fuzzy
 msgid "see_certificate"
@@ -1765,6 +1825,10 @@ msgid "student_details"
 msgstr "Student details"
 
 #, fuzzy
+msgid "student_list"
+msgstr "Student list"
+
+#, fuzzy
 msgid "student_not_allowed_in_class"
 msgstr "Student not allowed in class"
 
@@ -1879,6 +1943,9 @@ msgstr "اضغط على \"الخطوة التالية\" لتبدأ كمعلم أ
 
 msgid "teacher_welcome"
 msgstr "مرحباً في هيدي! بكل فخر أنت الآن تمتلك حساباً كمعلم وذا يسمح لك بانشاء صفوف ودعوة تلاميذ."
+
+msgid "teachers"
+msgstr "المعلمون"
 
 #, fuzzy
 msgid "template_code"
@@ -2006,6 +2073,14 @@ msgstr "We could not find that page!"
 msgid "unauthorized"
 msgstr "ليس لديك الصلاحيات اللازمة للوصول إلى هذه الصفحة"
 
+#, fuzzy
+msgid "unfavourite_confirm"
+msgstr "Are you sure you want to unfavourite this program?"
+
+#, fuzzy
+msgid "unfavourite_success"
+msgstr "Your program is unfavourited."
+
 msgid "unique_usernames"
 msgstr "يجب أن تكون جميع أسماء المستخدمين لا نظير لها."
 
@@ -2031,9 +2106,6 @@ msgstr "Unsubmitted"
 
 msgid "update_adventure_prompt"
 msgstr "هل أنت متأكد أنك تريد تعديل هذه المغامرة؟"
-
-msgid "update_profile"
-msgstr "تحديث الملف الشخصي"
 
 msgid "update_public"
 msgstr "تحديث الملف العام"
@@ -2103,9 +2175,6 @@ msgstr "عرض البرنامج"
 #, fuzzy
 msgid "view_slides"
 msgstr "View slides"
-
-msgid "waiting_for_submit"
-msgstr ""
 
 msgid "welcome"
 msgstr "مرحباً"
@@ -2315,54 +2384,12 @@ msgstr "Your program"
 #~ msgid "nested blocks"
 #~ msgstr "مجموعة ضمن مجموعة"
 
-#~ msgid "add_students_options"
-#~ msgstr "انشاء حسابات للتلاميذ"
+#~ msgid "save"
+#~ msgstr "حفظ"
 
-#~ msgid "class_live"
-#~ msgstr "Live statistics"
+#~ msgid "update_profile"
+#~ msgstr "تحديث الملف الشخصي"
 
-#~ msgid "class_overview"
-#~ msgstr "Class overview"
-
-#~ msgid "copy_join_link"
-#~ msgstr "الرجاء نسخ هذا الرابط ولصقه في تبويبة جديدة:"
-
-#~ msgid "copy_link_success"
-#~ msgstr "انسخ الرابط لمشاركته"
-
-#~ msgid "expiration_date"
-#~ msgstr "تاريخ انتهاء الصلاحية"
-
-#~ msgid "invite_by_username"
-#~ msgstr "يجب أن تكون جميع أسماء المستخدمين لا نظير لها."
-
-#~ msgid "invite_date"
-#~ msgstr "تاريخ الدعوة"
-
-#~ msgid "invite_prompt"
-#~ msgstr "أدخل اسم مستخدم"
-
-#~ msgid "last_login"
-#~ msgstr "اخر تسجيل دخول"
-
-#~ msgid "page"
-#~ msgstr "صفحة"
-
-#~ msgid "pending_invites"
-#~ msgstr "الدعوات قيد الإنتظار"
-
-#~ msgid "remove_student_prompt"
-#~ msgstr "هل أنت متأكد أنك تريد ازالة التلميذ من الصف؟"
-
-#~ msgid "remove_user_prompt"
-#~ msgstr "هل تأكد حذف هذا المستخدم؟"
-
-#~ msgid "second_teacher_warning"
-#~ msgstr "كل معلم بهذا الصف يمكنه تعديل الخصائص جميعها."
-
-#~ msgid "student_list"
-#~ msgstr "Student list"
-
-#~ msgid "teachers"
-#~ msgstr "المعلمون"
+#~ msgid "multiple_levels_warning"
+#~ msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
 

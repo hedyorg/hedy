@@ -228,10 +228,10 @@ class TestsLevel16(HedyTester):
             "lijst = [1, 2, 3]",
             HedyTester.list_access_transpiled('lijst[int(1)-1]'),
             HedyTester.list_access_transpiled('lijst[int(2)-1]'),
-            f"optellen = {self.addition_transpiled('lijst[int(1)-1]','lijst[int(2)-1]')}",
+            f"optellen = {self.addition_transpiled('lijst[int(1)-1]', 'lijst[int(2)-1]')}",
             HedyTester.list_access_transpiled('lijst[int(3)-1]'),
             f"""\
-            optellen = {self.addition_transpiled('optellen','lijst[int(3)-1]')}
+            optellen = {self.addition_transpiled('optellen', 'lijst[int(3)-1]')}
             print(f'''{{optellen}}''')""")
 
         self.multi_level_tester(
@@ -305,19 +305,22 @@ class TestsLevel16(HedyTester):
     # ask tests
     def test_ask_with_list_var(self):
         code = textwrap.dedent("""\
-        colors is ['orange', 'blue', 'green']
-        favorite is ask 'Is your fav color' colors[1]""")
+            colors is ['orange', 'blue', 'green']
+            favorite is ask 'Is your fav color' colors[1]""")
 
-        expected = textwrap.dedent("""\
-        colors = ['orange', 'blue', 'green']
-        favorite = input(f'''Is your fav color{colors[int(1)-1]}''')
-        try:
-          favorite = int(favorite)
-        except ValueError:
-          try:
-            favorite = float(favorite)
-          except ValueError:
-            pass""")
+        expected = self.dedent(
+            "colors = ['orange', 'blue', 'green']",
+            self.list_access_transpiled('colors[int(1)-1]'),
+            """\
+            favorite = input(f'''Is your fav color{colors[int(1)-1]}''')
+            try:
+              favorite = int(favorite)
+            except ValueError:
+              try:
+                favorite = float(favorite)
+              except ValueError:
+                pass"""
+        )
 
         self.multi_level_tester(
             code=code,
@@ -567,15 +570,20 @@ class TestsLevel16(HedyTester):
 
         self.single_level_tester(code, exception=exceptions.InvalidTypeCombinationException)
 
-    def test_color_with_list_variable_gives_error(self):
+    def test_color_with_list_variable_runtime_gives_error(self):
         code = textwrap.dedent("""\
-        c = ['red', 'green', 'blue']
-        color c""")
+            c = ['red', 'green', 'blue']
+            color c""")
+
+        expected = HedyTester.dedent(
+            "c = ['red', 'green', 'blue']",
+            HedyTester.turtle_color_command_transpiled('{c}')
+        )
 
         self.multi_level_tester(
             code=code,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
-            exception=hedy.exceptions.InvalidArgumentTypeException
+            expected=expected,
         )
 
     def test_color_with_list_access_random(self):
@@ -583,14 +591,38 @@ class TestsLevel16(HedyTester):
         colors = ['red', 'green', 'blue']
         color colors[random]""")
 
-        expected = HedyTester.dedent("""\
-        colors = ['red', 'green', 'blue']""",
-                                     HedyTester.turtle_color_command_transpiled('{random.choice(colors)}'))
+        expected = HedyTester.dedent(
+            "colors = ['red', 'green', 'blue']",
+            HedyTester.turtle_color_command_transpiled('{random.choice(colors)}')
+        )
 
         self.multi_level_tester(
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
+        )
+
+    #
+    # and/or commands
+    #
+    @parameterized.expand(['and', 'or'])
+    def test_if_list_access_lhs_and_or(self, op):
+        code = textwrap.dedent(f"""\
+            colors = ['red', 'green', 'blue']
+            if colors[1] == colors[2] {op} 1 == 1
+                print 'red'""")
+
+        expected = HedyTester.dedent(
+            "colors = ['red', 'green', 'blue']",
+            self.list_access_transpiled('colors[int(1)-1]'),
+            self.list_access_transpiled('colors[int(2)-1]'),
+            f"""\
+            if convert_numerals('Latin', colors[int(1)-1]) == convert_numerals('Latin', colors[int(2)-1]) {op} convert_numerals('Latin', '1') == convert_numerals('Latin', '1'):
+              print(f'''red''')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
         )
 
     #

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-04-01 11:41+0000\n"
+"PO-Revision-Date: 2024-04-26 06:30+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: nl <LL@li.org>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.1-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -24,6 +24,10 @@ msgstr "Je probeerde de variabele {name} te gebruiken op regel {access_line_numb
 
 msgid "Cyclic Var Definition"
 msgstr "De variabele `{variable}` moet worden ingesteld voor je die aan de rechterkant van een `{is}` mag gebruiken."
+
+#, fuzzy
+msgid "Else Without If Error"
+msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
 
 msgid "Function Undefined"
 msgstr "Je gebruikt de functie {name} te gebruiken, maar je hebt die niet gedefinieerd."
@@ -63,6 +67,10 @@ msgstr "Het lijkt erop dat je bent vergeten bent een commando te gebruiken in de
 
 msgid "Missing Additional Command"
 msgstr "Het lijkt erop dat je `{command}` niet volledig hebt geschreven op regel {line_number}. Probeer `{missing_command}` toe te voegen aan je code."
+
+#, fuzzy
+msgid "Missing Colon Error"
+msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
 
 msgid "Missing Command"
 msgstr "Het lijkt erop dat je vergeten bent om een commando te gebruiken op regel {line_number}."
@@ -177,6 +185,9 @@ msgstr "Toevoegen"
 msgid "add_students"
 msgstr "Leerlingen toevoegen"
 
+msgid "add_students_options"
+msgstr "Voeg leerlingopties toe"
+
 msgid "admin"
 msgstr "Admin"
 
@@ -288,9 +299,6 @@ msgstr "Vanaf level 2 hoort `{ask}` met een variabele ervoor. Bijv: naam `{is}` 
 msgid "available_in"
 msgstr "Available in:"
 
-msgid "back_to_class"
-msgstr ""
-
 msgid "become_a_sponsor"
 msgstr "Word sponsor"
 
@@ -328,6 +336,9 @@ msgstr "Je zit al in deze klas"
 msgid "class_customize_success"
 msgstr "Klas succesvol gepersonaliseerd."
 
+msgid "class_live"
+msgstr "Live Statistieken"
+
 msgid "class_name_duplicate"
 msgstr "Je hebt al een klas met deze naam."
 
@@ -339,6 +350,9 @@ msgstr "Deze klasnaam is ongeldig."
 
 msgid "class_name_prompt"
 msgstr "Vul de naam in van de nieuwe klas"
+
+msgid "class_overview"
+msgstr "Klas overzicht"
 
 msgid "class_survey_description"
 msgstr "Wij willen graag een beter inzicht hebben van onze Hedy gebruikers. Door het beantwoorden van de volgende vragen, help je ons om Hedy nog beter te maken. Alvast dank!"
@@ -403,6 +417,12 @@ msgstr "De link is gekopieerd"
 
 msgid "copy_code"
 msgstr "Kopieer de code"
+
+msgid "copy_join_link"
+msgstr "Kopieer inschrijflink"
+
+msgid "copy_link_success"
+msgstr "Inschrijflink succesvol gekopieerd naar klembord"
 
 msgid "copy_link_to_share"
 msgstr "Kopieer link voor delen"
@@ -480,8 +500,12 @@ msgstr "Klas personaliseren"
 msgid "dash"
 msgstr "een streepje"
 
-msgid "default_403"
+msgid "default_401"
 msgstr "Jij mag niet bij deze pagina."
+
+#, fuzzy
+msgid "default_403"
+msgstr "Looks like this action is forbidden..."
 
 msgid "default_404"
 msgstr "We konden deze pagina niet vinden."
@@ -524,6 +548,10 @@ msgstr "Gelijk open"
 
 msgid "disable"
 msgstr "Deactiveren"
+
+#, fuzzy
+msgid "disable_explore_page"
+msgstr "Disable explore page"
 
 #, fuzzy
 msgid "disable_parsons"
@@ -613,6 +641,9 @@ msgstr "Beëindig de preview modus"
 
 msgid "experience_invalid"
 msgstr "Dit is geen geldige programmeerervaring, kies uit (Ja, Nee)."
+
+msgid "expiration_date"
+msgstr "Vervaldatum"
 
 msgid "explore_explanation"
 msgstr "Op deze pagina kun je kijken naar programma's gemaakt door andere Hedy gebruikers. Je kunt filteren op Hedy level en avontuur. Klik op Bekijk programma om het programma te open en te proberen, Programma's met een rode titel hebben een foutje. Je kunt deze nog steeds openen, maar proberen geeft een error. Je kunt natuurlijk proberen het foutje zelf op te lossen! Als de maker van het programma een openbaar profiel heeft kun je op de gebruikersnaam klikken om die te bezoeken. Daar kun je al hen gedeelde programma's zien en nog veel meer!"
@@ -837,8 +868,17 @@ msgstr "Dit is geen geldige tutorial stap, probeer het opnieuw"
 msgid "invalid_username_password"
 msgstr "Ongeldige gebruikersnaam/wachtwoord combinatie."
 
+msgid "invite_by_username"
+msgstr "Uitnodigen met een gebruikersnaam"
+
+msgid "invite_date"
+msgstr "Uitnodigingsdatum"
+
 msgid "invite_message"
 msgstr "Je hebt een uitnodiging ontvangen voor de klas"
+
+msgid "invite_prompt"
+msgstr "Vul een gebruikersnaam in"
 
 msgid "invite_teacher"
 msgstr "Nodig een leraar/lerares uit"
@@ -872,6 +912,9 @@ msgstr "Laatst bewerkt"
 
 msgid "last_error"
 msgstr "Laatste fout"
+
+msgid "last_login"
+msgstr "Laatste login"
 
 msgid "last_program"
 msgstr "Laatste programma"
@@ -1025,8 +1068,8 @@ msgid "more_options"
 msgstr "More options"
 
 #, fuzzy
-msgid "multiple_levels_warning"
-msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
+msgid "multiple_keywords_warning"
+msgstr "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}"
 
 msgid "my_account"
 msgstr "Mijn account"
@@ -1193,6 +1236,9 @@ msgstr "Je hebt al een programma met deze naam, opslaan met deze naam overschrij
 msgid "owner"
 msgstr "Eigenaar"
 
+msgid "page"
+msgstr "pagina"
+
 msgid "page_not_found"
 msgstr "We konden deze pagina niet vinden!"
 
@@ -1231,6 +1277,9 @@ msgstr "Je wachtwoord is aangepast."
 
 msgid "passwords_six"
 msgstr "Alle wachtwoorden moeten 6 of meer karakters zijn."
+
+msgid "pending_invites"
+msgstr "Openstaande uitnodigingen"
 
 msgid "people_with_a_link"
 msgstr "Andere mensen met de link kunnen dit programma zien. Het kan ook gevonden worden op de Ontdekken pagina."
@@ -1384,6 +1433,12 @@ msgstr "Verwijder Personalisatie"
 msgid "remove_customizations_prompt"
 msgstr "Weet je zeker dat je de personalisatie van deze klas wilt verwijderen?"
 
+msgid "remove_student_prompt"
+msgstr "Weet je zeker dat je deze leerling uit de klas wilt verwijderen?"
+
+msgid "remove_user_prompt"
+msgstr "Bevestig de verwijdering van deze gebruiker (user) van deze klas."
+
 msgid "repair_program_logo_alt"
 msgstr "Repareer programma icon"
 
@@ -1447,9 +1502,6 @@ msgstr "Voer de code uit"
 msgid "runs_over_time"
 msgstr "Programma duur te lang"
 
-msgid "save"
-msgstr "Opslaan"
-
 msgid "save_parse_warning"
 msgstr "Dit programma bevat een foutje, weet je zeker dat je het wilt opslaan?"
 
@@ -1476,6 +1528,9 @@ msgstr "Weet je zeker dat je deze leraar/lerares wilt kopiëren?"
 
 msgid "second_teacher_prompt"
 msgstr "Geef een naam van een leraar/lerares om uit te nodigen."
+
+msgid "second_teacher_warning"
+msgstr "Alle leraren/leraressen in deze klas kunnen het aanpassen."
 
 msgid "see_certificate"
 msgstr "Zie {username} certificaat!"
@@ -1599,6 +1654,9 @@ msgstr "Deze leerling heeft al een openstaande uitnodiging."
 msgid "student_details"
 msgstr "Leerling details"
 
+msgid "student_list"
+msgstr "Studenten lijst"
+
 msgid "student_not_allowed_in_class"
 msgstr "Leerling is niet toegestaan in de klas"
 
@@ -1697,6 +1755,9 @@ msgstr "Leraren tutorial icon"
 
 msgid "teacher_welcome"
 msgstr "Welkom bij Hedy! Jouw account is omgezet naar een lerarenaccount. Je kan nu klassen maken en er leerlingen in uitnodigen."
+
+msgid "teachers"
+msgstr "Leraren"
 
 msgid "template_code"
 msgstr ""
@@ -1814,6 +1875,14 @@ msgstr "Oeps, Tutorial stap niet gevonden"
 msgid "unauthorized"
 msgstr "Jij hebt geen rechten voor deze pagina"
 
+#, fuzzy
+msgid "unfavourite_confirm"
+msgstr "Are you sure you want to unfavourite this program?"
+
+#, fuzzy
+msgid "unfavourite_success"
+msgstr "Your program is unfavourited."
+
 msgid "unique_usernames"
 msgstr "Alle gebruikersnamen moeten uniek zijn."
 
@@ -1837,9 +1906,6 @@ msgstr "Unsubmitted"
 
 msgid "update_adventure_prompt"
 msgstr "Weet je zeker dat je dit avontuur wilt bijwerken?"
-
-msgid "update_profile"
-msgstr "Update je profiel"
 
 msgid "update_public"
 msgstr "Openbaar profiel opslaan"
@@ -1904,9 +1970,6 @@ msgstr "Bekijk programma"
 #, fuzzy
 msgid "view_slides"
 msgstr "View slides"
-
-msgid "waiting_for_submit"
-msgstr ""
 
 msgid "welcome"
 msgstr "Welkom"
@@ -2115,54 +2178,12 @@ msgstr "Jouw programma"
 #~ msgid "nested blocks"
 #~ msgstr "een blok in een blok"
 
-#~ msgid "add_students_options"
-#~ msgstr "Voeg leerlingopties toe"
+#~ msgid "save"
+#~ msgstr "Opslaan"
 
-#~ msgid "class_live"
-#~ msgstr "Live Statistieken"
+#~ msgid "update_profile"
+#~ msgstr "Update je profiel"
 
-#~ msgid "class_overview"
-#~ msgstr "Klas overzicht"
-
-#~ msgid "copy_join_link"
-#~ msgstr "Kopieer inschrijflink"
-
-#~ msgid "copy_link_success"
-#~ msgstr "Inschrijflink succesvol gekopieerd naar klembord"
-
-#~ msgid "expiration_date"
-#~ msgstr "Vervaldatum"
-
-#~ msgid "invite_by_username"
-#~ msgstr "Uitnodigen met een gebruikersnaam"
-
-#~ msgid "invite_date"
-#~ msgstr "Uitnodigingsdatum"
-
-#~ msgid "invite_prompt"
-#~ msgstr "Vul een gebruikersnaam in"
-
-#~ msgid "last_login"
-#~ msgstr "Laatste login"
-
-#~ msgid "page"
-#~ msgstr "pagina"
-
-#~ msgid "pending_invites"
-#~ msgstr "Openstaande uitnodigingen"
-
-#~ msgid "remove_student_prompt"
-#~ msgstr "Weet je zeker dat je deze leerling uit de klas wilt verwijderen?"
-
-#~ msgid "remove_user_prompt"
-#~ msgstr "Bevestig de verwijdering van deze gebruiker (user) van deze klas."
-
-#~ msgid "second_teacher_warning"
-#~ msgstr "Alle leraren/leraressen in deze klas kunnen het aanpassen."
-
-#~ msgid "student_list"
-#~ msgstr "Studenten lijst"
-
-#~ msgid "teachers"
-#~ msgstr "Leraren"
+#~ msgid "multiple_levels_warning"
+#~ msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
 

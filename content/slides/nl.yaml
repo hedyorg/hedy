@@ -98,7 +98,7 @@ levels:
             editor: /hedy/1
         7:
             header: Programmeren maar!
-            text: Je kan de gele knopjes gebruiken om voorbeeldcodes te kopiëren.
+            text: Avonturen worden in tabjes getoond.
             editor: /hedy#print_command
         8:
             header: Programmeren!
@@ -1037,6 +1037,32 @@ levels:
                     answer = {ask} 'Hoeveel is 5 maal 5?'
                 {print} 'Je antwoord is goed'
         3:
+            header: Debugging
+            text: Laten we deze code debuggen!
+            code: |-
+                getallen = 1, 2
+
+                {for} i {in} {range} 3 {to} 50
+                    {add} x {to} getal
+                    i = + 1
+
+                random_getal = getallen {random}
+                gokjes = 10
+
+                {while} guess = 0
+                    antwoord = 'Raad mijn getal:'
+                    {if} antwoord >= random_getal
+                        {print} 'Lager!'
+                        gokjes = gok -1
+                    {if} antwoord > random_getal
+                        {print} 'Hoger!'
+                        gokjes = gokjes
+                    {else} antwoord = random_getal
+                        {print} 'Goedzo! Je hebt het geraden'
+                        gokjes = 10
+
+            debug: 'True'
+        4:
             header: Proberen maar!
             text: Veel plezier met de avonturen in level 15!
     16:
@@ -1056,6 +1082,39 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                     {print} vrienden[i] 'zijn geluks nummer is ' geluks_nummers[i]
         3:
+            header: Debugging
+            text: Laten we deze code debuggen!
+            code: |-
+                {print} 'Test je vriendschap'
+                {onderwerpen} = ['lied', 'film', 'eten', 'drinken']
+                antwoorden_speler_1 = []
+                antwoorden_speler_2 = []
+                score = 100
+
+                {for} i {in} {range} 1 {to} 4
+                    antwoord = {ask} 'Wat is je favoriete ' onderwerpen[i]
+                {add} answer {to} antwoorden_speler_1
+
+                {print} 'Speler 2, jouw beurt!'
+                {for} i {in} {range} 0 {to} 4
+                    antwoorden_speler_2 = {ask} 'Wat is speler 2s favoriete ' onderwerpen
+                    {add} antwoorden_speler_2 {in} antwoorden_speler_2
+                    {if} antwoorden_speler_2[2] == antwoorden_speler[1]
+                        {print} 'Juist!'
+                    {else}
+                        {print} 'Fout!'
+                    score = score - 25
+
+                {print} 'Je hebt een score van ' score '%'
+
+                {if} score = 100
+                    {print} 'Je bent een geweldige vriend(in)'
+                {if} score < 100 {or} score >= 50
+                    {print} 'Dat kan beter'
+                {else} score < 50
+                    {print} 'Jij noemt jezelf een vriend(in)?!'
+            debug: 'True'
+        4:
             header: Proberen maar!
             text: Veel plezier met de avonturen in level 16!
     17:
@@ -1087,6 +1146,28 @@ levels:
                 {else}:
                     {print} 'Meer geluk volgende keer..'
         4:
+            header: Debugging
+            text: Laten we deze code debuggen!
+            code: |-
+                {define} vraag_richting
+                    richting = {ask} 'Waar wil je heen?'
+                    {if} richting = 'terug'
+                        {turn} 180
+                    {else} richting == 'rechts'
+                        {turn} 90
+                    {else} richting == 'links'
+                        {turn} 270
+                        {forward} 100
+
+                doorspelen = 'yes'
+
+                {while} doorspelen == 'yes'
+                    {print} vraag_richting
+                    {sleep}
+                    doorspelen = 'Wil je nog iets tekenen?'
+                    {sleep}
+            debug: 'True'
+        5:
             header: Aan het werk!
             text: Veel plezier met de avonturen in level 17!
     18:

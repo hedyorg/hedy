@@ -1,0 +1,56 @@
+<div class="flex flex-col gap-4 mb-8 md:px-16 hidden" id="classes_table"
+        _="on load hedyApp.getForTeacherTable('classes_table')">
+  <div class="flex flex-col gap-4 pb-4 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full lg:w-4/4 p-8">
+    <h2 class="m-0 justify-left"> {{_('my_classes')}} </h2>
+    <div class="overflow-x-auto rounded-lg shadow-lg">
+      <table class="w-full border border-gray-400">
+      <thead>
+        <tr class="bg-blue-300 text-blue-900">
+          <th class="px-10 py-2 text-center">{{_('name')}}</th>
+          <th class="px-10 py-2 text-center">{{_('teacher')}}</th>
+          <th class="px-10 py-2">{{_('students')[0]|upper}}{{_('students')[1:]}}</th>
+          <th class="px-4 p-2 bg-blue-900 text-white">{{_('actions')}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for class in teacher_classes %}
+          <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
+            <td class="text-center px-4 py-2"><a href="for-teachers/class/{{class.id}}" class="view_class" data-cy="view_class_link">{{class.name|e}}</a></td>
+            <td id="teacher_cell" class="text-center p-2">{{class.teacher}}</td>
+            <td class="text-center p-2">{{class.students|length}}</td>
+            <td class="text-center p-2">
+              <div class="flex justify-center text-blue-900">
+                <button class="flex flex-col items-center mr-16"
+                _="on click window.open('/for-teachers/customize-class/{{class.id}}', '_self')">
+                  <span class="fas fa-pen block mb-1"></span>
+                  <span>{{_('customize')}}</span>
+                </button>
+                <button class="flex flex-col items-center mr-16" id="duplicate_class"
+                  data-cy="duplicate_{{class.name}}"
+                  onclick='hedyApp.duplicate_class("{{class.id}}", "{{class.second_teachers}}", {{_('second_teacher_copy_prompt')|default(None)|tojson}}, {{_('class_name_prompt')|default(None)|tojson}}, {% if class.teacher != username %}"{{class.name}}"{% else %}" "{% endif %})'>
+                  <span class="fas fa-copy block mb-1"></span>
+                  <span>{{_('duplicate')}}</span>
+                </button>
+                <button class="flex flex-col items-center mr-16"
+                _="on click window.open('/for-teachers/class/{{class.id}}/preview', '_self')">
+                  <span class="fas fa-eye block mb-1"></span>
+                  <span>{{_('preview')}}</span>
+                </button>
+                <button id="remove-class" class="flex flex-col items-center"
+                    hx-confirm="{{_('delete_class_prompt')}}"
+                    hx-trigger="click"
+                    hx-delete="/class/{{class.id}}"
+                    hx-target="#classes_table"
+                    hx-swap="outerHTML">
+                  <span class="fas fa-trash block mb-1 text-red-700"></span>
+                  <span class="text-red-700">{{_('remove')}}</span>
+                </button>
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>

@@ -2,12 +2,13 @@ levels:
     1:
         1:
             story: |-
-                Puzzels are exercises in which the lines of code are already written for you. You only have to place the lines in the correct order. Drag the lines of code into the input screen and run the code. Can you get the program to work?
-                You're a customer at bakery Hedy.
-                You walk into the bakery and are welcomed by the baker.
-                He asks what type of pie you want to order.
-                Then he repeats your answer back to you.
-                Lastly, your order is being prepared.
+                Puzzels são exercícios onde as linhas de código já estão escritas. Tu só tens que colocá-las na ordem correcta. Arrasta as linhas de código para o ecrã de input e corre o código. Consegues fazer o programa funcionar?
+
+                Tu és um cliente na pastelaria da Hedy.
+                Tu entras na pastelaria e és recebido(a) pelo pasteleiro(a).
+                Ele(a) pergunta que torta queres pedir.
+                E depois repete a tua resposta de volta para ti.
+                Finalmente, o teu pedido está a ser preparado.
             code: |-
                 {print} Welcome to bakery Hedy!
                 {ask} What type of pie do you want to order?
@@ -53,11 +54,11 @@ levels:
         2:
             story: Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
             code: |-
-                food {is} pizza, icecream, salad, sandwich
-                toppings {is} chocolate, cheese, tuna, sprinkles
-                {print} Your random meal for today is...
-                sleep 2
-                {print} food at random with toppings at random
+                comida {is} pizza, gelado, salada, sandwich
+                coberturas {is} chocolate, queijo, atum, sprinkles
+                {print} A tua refeição aleatória do dia é...
+                {sleep} 2
+                {print} comida {at}{random} com cobertura de {at}{random}
         3:
             story: |-
                 In a chess tournament there are three players left.
@@ -103,10 +104,10 @@ levels:
         2:
             story: Create a maths game.
             code: |-
-                {print} 'Solve this problem'
-                answer {is} {ask} '88 - 16 = ?'
-                {if} answer {is} 72 {print} 'Correct!'
-                {else} print 'Wrong! The answer was 72'
+                {print} 'Resolve o problema'
+                resposta {is} {ask} '88 - 16 = ?'
+                {if} resposta {is} 72 {print} 'Correcto!'
+                {else} {print} 'Incorrecto! A resposta era 72'
     6:
         1:
             story: |-

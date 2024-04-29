@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-04-01 11:41+0000\n"
+"PO-Revision-Date: 2024-04-26 06:30+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.1-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -24,6 +24,10 @@ msgstr "Du hast versucht die Variable {name} in Zeile {access_line_number} zu be
 
 msgid "Cyclic Var Definition"
 msgstr "Der Name `{variable}` muss gesetzt werden, bevor du ihn auf der rechten Seite des `{is}` Befehls verwenden kannst."
+
+#, fuzzy
+msgid "Else Without If Error"
+msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
 
 #, fuzzy
 msgid "Function Undefined"
@@ -65,6 +69,10 @@ msgstr "Es sieht so aus als ob du vergessen hast einen Befehl für deinen Text i
 #, fuzzy
 msgid "Missing Additional Command"
 msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+
+#, fuzzy
+msgid "Missing Colon Error"
+msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
 
 msgid "Missing Command"
 msgstr "Es sieht so aus als hättest du einen Befehl in Zeile {line_number} vergessen."
@@ -177,7 +185,7 @@ msgstr "Errungenschaften Logo"
 
 #, fuzzy
 msgid "actions"
-msgstr ""
+msgstr "Actions"
 
 #, fuzzy
 msgid "add"
@@ -185,6 +193,9 @@ msgstr "Add"
 
 msgid "add_students"
 msgstr "Schüler*innen hinzufügen"
+
+msgid "add_students_options"
+msgstr "Schüleroptionen hinzufügen"
 
 msgid "admin"
 msgstr "Administrator"
@@ -299,9 +310,6 @@ msgstr "Ab Level 2 muss `{ask}` mit einer Variable benutzt werden. Beispiel: Nam
 msgid "available_in"
 msgstr "Available in:"
 
-msgid "back_to_class"
-msgstr ""
-
 msgid "become_a_sponsor"
 msgstr "Werde ein Sponsor"
 
@@ -339,6 +347,9 @@ msgstr "Du bist schon in dieser Klasse"
 msgid "class_customize_success"
 msgstr "Klasse erfolgreich angepasst."
 
+msgid "class_live"
+msgstr "Live-Statistiken"
+
 msgid "class_name_duplicate"
 msgstr "Du hast bereits eine Klasse mit diesem Namen."
 
@@ -350,6 +361,9 @@ msgstr "Dieser Klassenname ist ungültig."
 
 msgid "class_name_prompt"
 msgstr "Bitte gib den Namen der Klasse ein"
+
+msgid "class_overview"
+msgstr "Kursübersicht"
 
 #, fuzzy
 msgid "class_survey_description"
@@ -424,6 +438,12 @@ msgstr "Erfolgreich in die Zwischenablage kopiert"
 #, fuzzy
 msgid "copy_code"
 msgstr "Copy code"
+
+msgid "copy_join_link"
+msgstr "Einladungslink kopieren"
+
+msgid "copy_link_success"
+msgstr "Beitrittslink wurde kopiert"
 
 msgid "copy_link_to_share"
 msgstr "Kopiere Link zum Weitergeben"
@@ -501,8 +521,12 @@ msgstr "Passe eine Klasse an"
 msgid "dash"
 msgstr "ein Gedankenstrich"
 
-msgid "default_403"
+msgid "default_401"
 msgstr "Du bist anscheinend nicht authorisiert..."
+
+#, fuzzy
+msgid "default_403"
+msgstr "Looks like this action is forbidden..."
 
 msgid "default_404"
 msgstr "Diese Seite konnten wir nicht finden…"
@@ -545,6 +569,10 @@ msgstr "Direkt öffnen"
 
 msgid "disable"
 msgstr "Deaktivieren"
+
+#, fuzzy
+msgid "disable_explore_page"
+msgstr "Disable explore page"
 
 #, fuzzy
 msgid "disable_parsons"
@@ -637,6 +665,9 @@ msgstr "Exit preview mode"
 
 msgid "experience_invalid"
 msgstr "Bitte wähle eine gültige Erfahrung, nutze (Ja, Nein)."
+
+msgid "expiration_date"
+msgstr "Ablaufdatum"
 
 msgid "explore_explanation"
 msgstr "Auf dieser Seite kannst du Programme sehen, die andere Hedy-Nutzer erstellt haben. Du kannst nach Hedy-Level und Abenteuer filtern. Klicke auf \"Programm ansehen\" um ein Programm zu öffnen und auszuführen. Programme mit einer roten Kopfzeile enthalten einen Fehler. Du kannst das Programm dennoch öffnen, es auszuführen führt jedoch zu einer Fehlermeldung. Du kannst natürlich versuchen es zu korrigieren! Wenn der Ersteller ein öffentliches Profil hat, kannst du den Nutzernamen anklicken, um das Profil zu besuchen. Dort findest du alle geteilten Programme und vieles mehr!"
@@ -869,8 +900,17 @@ msgstr "Ungültiger Schritt im Tutorial"
 msgid "invalid_username_password"
 msgstr "Benutzername/Passwort ist ungültig."
 
+msgid "invite_by_username"
+msgstr "Einladen mit Benutzername"
+
+msgid "invite_date"
+msgstr "Einladungsdatum"
+
 msgid "invite_message"
 msgstr "Du hast eine Einladung zu einer Klasse erhalten"
+
+msgid "invite_prompt"
+msgstr "Nutzernamen eingeben"
 
 #, fuzzy
 msgid "invite_teacher"
@@ -905,6 +945,9 @@ msgstr "Zuletzt geändert"
 
 msgid "last_error"
 msgstr "Letzter Fehler"
+
+msgid "last_login"
+msgstr "Zuletzt eingeloggt"
 
 msgid "last_program"
 msgstr "Letztes Programm"
@@ -1062,8 +1105,8 @@ msgid "more_options"
 msgstr "More options"
 
 #, fuzzy
-msgid "multiple_levels_warning"
-msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
+msgid "multiple_keywords_warning"
+msgstr "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}"
 
 msgid "my_account"
 msgstr "Mein Konto"
@@ -1234,6 +1277,9 @@ msgstr "Du hast bereits eine Programm mit diesem Namen, wenn du jetzt speicherst
 msgid "owner"
 msgstr "Owner"
 
+msgid "page"
+msgstr "Seite"
+
 msgid "page_not_found"
 msgstr "Die Seite konnte nicht gefunden werden!"
 
@@ -1273,6 +1319,9 @@ msgstr "Das Passwort wurde aktualisiert."
 
 msgid "passwords_six"
 msgstr "Das Passwort muss aus mindestens sechs Zeichen bestehen."
+
+msgid "pending_invites"
+msgstr "Ausstehende Einladungen"
 
 msgid "people_with_a_link"
 msgstr "Andere, die einen Link haben, können dieses Programm sehen. Es kann auch auf der Entdecke-Seite gefunden werden."
@@ -1428,6 +1477,13 @@ msgstr "Modifikationen entfernen"
 msgid "remove_customizations_prompt"
 msgstr "Bist du dir sicher, dass du die Modifikationen dieser Klasse entfernen möchtest?"
 
+msgid "remove_student_prompt"
+msgstr "Soll der/die Schüler*in aus der Klasse entfernt werden?"
+
+#, fuzzy
+msgid "remove_user_prompt"
+msgstr "Confirm removing this user from the class."
+
 msgid "repair_program_logo_alt"
 msgstr "Repariere Programm Symbol"
 
@@ -1495,9 +1551,6 @@ msgstr "Programm ausführen"
 msgid "runs_over_time"
 msgstr "Runs over time"
 
-msgid "save"
-msgstr "Speichern"
-
 msgid "save_parse_warning"
 msgstr "Dieses Programm enthält einen Fehler, bist du dir sicher, dass du es speichern möchtest?"
 
@@ -1527,6 +1580,10 @@ msgstr "Are you sure you want to copy this teacher?"
 #, fuzzy
 msgid "second_teacher_prompt"
 msgstr "Enter a teacher username to invite them."
+
+#, fuzzy
+msgid "second_teacher_warning"
+msgstr "All teachers in this class can customize it."
 
 msgid "see_certificate"
 msgstr "Zertifikat für {username} ansehen!"
@@ -1660,6 +1717,9 @@ msgstr "Diese(r) Schüler(in) hat bereits eine ausstehende Einladung."
 msgid "student_details"
 msgstr "Student details"
 
+msgid "student_list"
+msgstr "Studentenliste"
+
 #, fuzzy
 msgid "student_not_allowed_in_class"
 msgstr "Student not allowed in class"
@@ -1769,6 +1829,10 @@ msgstr "Lehranleitung-Symbol"
 
 msgid "teacher_welcome"
 msgstr "Willkommen bei Hedy! Du bist nun eine stolze BesitzerIn eines LehrerIn Kontos, welches dir erlaubt Klassen zu erstellen und Schüler einzuladen."
+
+#, fuzzy
+msgid "teachers"
+msgstr "Teachers"
 
 msgid "template_code"
 msgstr ""
@@ -1888,6 +1952,14 @@ msgstr "Tutorial-Schritt nicht gefunden"
 msgid "unauthorized"
 msgstr "Du hast keine Zugriffsrechte für diese Seite"
 
+#, fuzzy
+msgid "unfavourite_confirm"
+msgstr "Are you sure you want to unfavourite this program?"
+
+#, fuzzy
+msgid "unfavourite_success"
+msgstr "Your program is unfavourited."
+
 msgid "unique_usernames"
 msgstr "Alle Nutzernamen müssen einzigartig sein."
 
@@ -1911,9 +1983,6 @@ msgstr "Unsubmitted"
 
 msgid "update_adventure_prompt"
 msgstr "Bist du sicher, dass du dieses Abenteuer updaten möchtest?"
-
-msgid "update_profile"
-msgstr "Aktualisiere dein Profil"
 
 msgid "update_public"
 msgstr "Öffentliches Profil-Update"
@@ -1979,9 +2048,6 @@ msgstr "Programm ansehen"
 #, fuzzy
 msgid "view_slides"
 msgstr "View slides"
-
-msgid "waiting_for_submit"
-msgstr ""
 
 msgid "welcome"
 msgstr "Willkommen"
@@ -2190,54 +2256,12 @@ msgstr "Dein Programm"
 #~ msgid "nested blocks"
 #~ msgstr "ein Block in einem Block"
 
-#~ msgid "add_students_options"
-#~ msgstr "Schüleroptionen hinzufügen"
+#~ msgid "save"
+#~ msgstr "Speichern"
 
-#~ msgid "class_live"
-#~ msgstr "Live-Statistiken"
+#~ msgid "update_profile"
+#~ msgstr "Aktualisiere dein Profil"
 
-#~ msgid "class_overview"
-#~ msgstr "Kursübersicht"
-
-#~ msgid "copy_join_link"
-#~ msgstr "Einladungslink kopieren"
-
-#~ msgid "copy_link_success"
-#~ msgstr "Beitrittslink wurde kopiert"
-
-#~ msgid "expiration_date"
-#~ msgstr "Ablaufdatum"
-
-#~ msgid "invite_by_username"
-#~ msgstr "Einladen mit Benutzername"
-
-#~ msgid "invite_date"
-#~ msgstr "Einladungsdatum"
-
-#~ msgid "invite_prompt"
-#~ msgstr "Nutzernamen eingeben"
-
-#~ msgid "last_login"
-#~ msgstr "Zuletzt eingeloggt"
-
-#~ msgid "page"
-#~ msgstr "Seite"
-
-#~ msgid "pending_invites"
-#~ msgstr "Ausstehende Einladungen"
-
-#~ msgid "remove_student_prompt"
-#~ msgstr "Soll der/die Schüler*in aus der Klasse entfernt werden?"
-
-#~ msgid "remove_user_prompt"
-#~ msgstr "Confirm removing this user from the class."
-
-#~ msgid "second_teacher_warning"
-#~ msgstr "All teachers in this class can customize it."
-
-#~ msgid "student_list"
-#~ msgstr "Studentenliste"
-
-#~ msgid "teachers"
-#~ msgstr "Teachers"
+#~ msgid "multiple_levels_warning"
+#~ msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
 

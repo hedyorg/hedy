@@ -10,14 +10,15 @@ onclick="window.open('/for-teachers', '_self');">
 <div class="flex flex-col gap-2">
     <h2>{{_('customize_adventure')}}</h2>
     <div class="border-gray-400 border rounded-lg p-4">
-        <form onsubmit="event.preventDefault (); hedyApp.update_adventure('{{ adventure.id }}', {% if adventure.content|length > 0 %}false{% else %}true{% endif %}, '{{_('update_adventure_prompt')}}')"
+        <form onsubmit="event.preventDefault (); hedyApp.update_adventure('{{ adventure.id }}', true, '{{_('update_adventure_prompt')}}')"
+            id="customize_adventure"
             data-te-validation-init>
             <div class="flex  gap-4">
                 <div class="flex flex-col w-full">
                     <h3 class="text-center mt-0 mb-4">{{_('general_settings')}}</h3>
                     <div class="flex flex-row items-center mb-4">
                         <label for="name" class="inline-block w-40 text-xl">{{_('name')}}</label>
-                        <input id="custom_adventure_name" required value="{{ adventure.name }}" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"{% if 'AdventureX' in adventure.name %}autofocus{% endif %}>
+                        <input id="custom_adventure_name" autofocus required value="{{ adventure.name }}" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"{% if 'AdventureX' in adventure.name %}autofocus{% endif %}>
                     </div>
                     <div class="flex flex-row items-center mb-4">
                         <label for="custom_adventure_classes" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('used_in')}}</label>
@@ -92,6 +93,7 @@ onclick="window.open('/for-teachers', '_self');">
                         <label for="search_tags_input" class="inline-block w-40 text-xl">{{_('tags')}}</label>
                         <div class="flex flex-row w-full relative" id="add_tags">
                                 <input type="text" name="tag" autocomplete="off" placeholder="{{_('tag_input_placeholder')}}" id="search_tags_input"
+                                    data-autosaved="true"
                                     class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"
                                     hx-trigger="enter"
                                     hx-post="/tags/create/{{adventure.id}}" hx-target="#tags-list" hx-swap="outerHTML"
@@ -117,27 +119,8 @@ onclick="window.open('/for-teachers', '_self');">
                                 ></div>
                         </div>
                     </div>
-                    {{ render_partial('htmx-tags-list.html', tags=adventure_tags, adventure_id=adventure.id, creator=adventure.creator) }}
-
-                    <div id="warningbox"
-                        class="flex-0 z-20 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md"
-                        role="alert" style="display: none;">
-                        <p class="close-dialog" onclick="hedyApp.error.hide ()"><i class="fa-solid fa-xmark"></i></p>
-                        <div class="flex">
-                            <div class="py-1">
-                                <div id="warningbox_icon">
-                                    <svg class="fill-current h-6 w-6 text-yellow-500 ltr:mr-4 rtl:ml-4" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20">
-                                        <path
-                                            d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="details text-sm">{{ _('multiple_levels_warning') }}</p>
-                            </div>
-                        </div>
-                    </div>                    
+                    {{ render_partial('htmx-tags-list.html', tags=adventure_tags, adventure_id=adventure.id, creator=adventure.creator) }}                  
+                    <div class="flex flex-col items center mb-4 h-60 overflow-x-auto" id="warnings_container"> </div>
                 </div>
 
                 <div class="flex flex-col w-full">
@@ -166,9 +149,14 @@ onclick="window.open('/for-teachers', '_self');">
                 </div>
             </div>
             <div class="flex flex-row justify-end gap-2 my-4">
-                <button class="blue-btn" id="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">{{_('preview')}}</button>
-                <button type="submit" class="green-btn" id="save_adventure_button" data-te-submit-btn-ref>{{_('save')}}</button>
-                <button type="reset" class="red-btn" id="remove_adventure_button" onclick="hedyApp.delete_adventure('{{ adventure.id }}', '{{_('delete_adventure_prompt')}}')">{{_('remove')}}</button>
+                <button class="green-btn" id="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">{{_('preview')}}</button>
+                <button type="reset" class="red-btn" id="remove_adventure_button" 
+                  hx-confirm="{{_('delete_adventure_prompt')}}"
+                  hx-trigger="click"
+                  hx-delete="/for-teachers/customize-adventure/{{adventure.id}}"
+                  hx-swap="none"
+                  _="on htmx:afterRequest if detail.xhr.status == 200 then window.open('/for-teachers', '_self')"
+                  >{{_('remove')}}</button>
             </div>
         </form>
 
@@ -209,4 +197,26 @@ onclick="window.open('/for-teachers', '_self');">
         </div>
     </div>
 </div>
+
+<template id="warning_template">
+    <div data-cy="test_warning_message"
+        class="flex-0 z-20 mt-4 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md relative"
+        role="alert">
+        <p class="close-dialog"><i class="fa-solid fa-xmark"></i></p>
+        <div class="flex">
+            <div class="py-1">
+                <div id="warningbox_icon">
+                    <svg class="fill-current h-6 w-6 text-yellow-500 ltr:mr-4 rtl:ml-4"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path
+                            d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+                    </svg>
+                </div>
+            </div>
+            <div>
+                <p class="details text-sm"></p>
+            </div>
+        </div>
+    </div>
+</template>
 {% endblock %}

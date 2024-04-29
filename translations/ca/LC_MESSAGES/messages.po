@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-04-01 11:42+0000\n"
+"PO-Revision-Date: 2024-04-26 06:31+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: ca <LL@li.org>\n"
 "Language: ca\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.1-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -24,6 +24,10 @@ msgstr "Has intentat utilitzar la variable {name} a la línia {access_line_numbe
 
 msgid "Cyclic Var Definition"
 msgstr "El nom `{variable}` ha de ser definit abans d'utilitzar-lo a la dreta de la comanda `{is}`."
+
+#, fuzzy
+msgid "Else Without If Error"
+msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
 
 #, fuzzy
 msgid "Function Undefined"
@@ -65,6 +69,10 @@ msgstr "Sembla que t'has oblidat d'utilitzar una comanda al text de la línia {l
 #, fuzzy
 msgid "Missing Additional Command"
 msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+
+#, fuzzy
+msgid "Missing Colon Error"
+msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
 
 msgid "Missing Command"
 msgstr "Sembla que t'has oblidat d'usar una comanda a la línia {line_number}."
@@ -177,7 +185,7 @@ msgstr "Icona d'assoliments"
 
 #, fuzzy
 msgid "actions"
-msgstr ""
+msgstr "Actions"
 
 #, fuzzy
 msgid "add"
@@ -185,6 +193,9 @@ msgstr "Add"
 
 msgid "add_students"
 msgstr "Afegeix estudiants"
+
+msgid "add_students_options"
+msgstr "Afegeix opcions d'estudiants"
 
 msgid "admin"
 msgstr "Administrador"
@@ -299,9 +310,6 @@ msgstr "A partir del nivell 2, cal utilitzar `{ask}` amb una variable. Exemple: 
 msgid "available_in"
 msgstr "Available in:"
 
-msgid "back_to_class"
-msgstr ""
-
 msgid "become_a_sponsor"
 msgstr "Fes-te patrocinador"
 
@@ -339,6 +347,9 @@ msgstr "Ja ets alumne de la classe"
 msgid "class_customize_success"
 msgstr "Classe personalitzada amb èxit."
 
+msgid "class_live"
+msgstr "Estadístiques en viu"
+
 msgid "class_name_duplicate"
 msgstr "Ja teniu una classe amb aquest nom."
 
@@ -350,6 +361,9 @@ msgstr "Aquest nom de la classe no és vàlid."
 
 msgid "class_name_prompt"
 msgstr "Si us plau, introdueix el nom de la nova classe"
+
+msgid "class_overview"
+msgstr "Visió general de la classe"
 
 #, fuzzy
 msgid "class_survey_description"
@@ -424,6 +438,12 @@ msgstr "Copiat amb èxit al porta-retalls"
 #, fuzzy
 msgid "copy_code"
 msgstr "Copy code"
+
+msgid "copy_join_link"
+msgstr "Copia l'enllaç d'unió"
+
+msgid "copy_link_success"
+msgstr "Enllaç d'unió copiat amb èxit al porta-retalls"
 
 msgid "copy_link_to_share"
 msgstr "Copia l'enllaç per compartir"
@@ -501,8 +521,12 @@ msgstr "Personalitza la classe"
 msgid "dash"
 msgstr "un guió"
 
-msgid "default_403"
+msgid "default_401"
 msgstr "Sembla no estàs autoritzat..."
+
+#, fuzzy
+msgid "default_403"
+msgstr "Looks like this action is forbidden..."
 
 msgid "default_404"
 msgstr "No hem pogut trobar aquesta pàgina..."
@@ -545,6 +569,10 @@ msgstr "Obrir directament"
 
 msgid "disable"
 msgstr "Desactiva"
+
+#, fuzzy
+msgid "disable_explore_page"
+msgstr "Disable explore page"
 
 #, fuzzy
 msgid "disable_parsons"
@@ -637,6 +665,9 @@ msgstr "Exit preview mode"
 
 msgid "experience_invalid"
 msgstr "Si us plau, selecciona una experiència vàlida, escull (Sí, No)."
+
+msgid "expiration_date"
+msgstr "Data de caducitat"
 
 msgid "explore_explanation"
 msgstr "En aquesta pàgina pots consultar els programes creats per altres usuaris de Hedy. Pots filtrar tant a nivell Hedy com a aventura. Feu clic a \"Veure programa\" per obrir un programa i executar-lo. Els programes amb una capçalera vermella contenen un error. Encara podràs obrir-lo, però en executar-lo provocarà un error. Si vols pots intentar arreglar-ho! Si el creador té un perfil públic, pots fer clic al seu nom d'usuari per visitar el seu perfil. Allà trobaràs tots els seus programes compartits i molt més!"
@@ -878,8 +909,20 @@ msgid "invalid_username_password"
 msgstr "Invalid username/password."
 
 #, fuzzy
+msgid "invite_by_username"
+msgstr "Invite by username"
+
+#, fuzzy
+msgid "invite_date"
+msgstr "Invite date"
+
+#, fuzzy
 msgid "invite_message"
 msgstr "You have received an invitation to join class"
+
+#, fuzzy
+msgid "invite_prompt"
+msgstr "Enter a username"
 
 #, fuzzy
 msgid "invite_teacher"
@@ -924,6 +967,10 @@ msgstr "Last edited"
 #, fuzzy
 msgid "last_error"
 msgstr "Last error"
+
+#, fuzzy
+msgid "last_login"
+msgstr "Last login"
 
 #, fuzzy
 msgid "last_program"
@@ -1106,8 +1153,8 @@ msgid "more_options"
 msgstr "More options"
 
 #, fuzzy
-msgid "multiple_levels_warning"
-msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
+msgid "multiple_keywords_warning"
+msgstr "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}"
 
 #, fuzzy
 msgid "my_account"
@@ -1325,6 +1372,10 @@ msgid "owner"
 msgstr "Owner"
 
 #, fuzzy
+msgid "page"
+msgstr "page"
+
+#, fuzzy
 msgid "page_not_found"
 msgstr "We couldn't find that page!"
 
@@ -1375,6 +1426,10 @@ msgstr "Password updated."
 #, fuzzy
 msgid "passwords_six"
 msgstr "All passwords need to be six characters or longer."
+
+#, fuzzy
+msgid "pending_invites"
+msgstr "Pending invites"
 
 #, fuzzy
 msgid "people_with_a_link"
@@ -1570,6 +1625,14 @@ msgid "remove_customizations_prompt"
 msgstr "Are you sure you want to remove this class's customizations?"
 
 #, fuzzy
+msgid "remove_student_prompt"
+msgstr "Are you sure you want to remove the student from the class?"
+
+#, fuzzy
+msgid "remove_user_prompt"
+msgstr "Confirm removing this user from the class."
+
+#, fuzzy
 msgid "repair_program_logo_alt"
 msgstr "Repair program icon"
 
@@ -1651,9 +1714,6 @@ msgstr "Executa"
 msgid "runs_over_time"
 msgstr "S'executa en el temps"
 
-msgid "save"
-msgstr "Guarda"
-
 msgid "save_parse_warning"
 msgstr "Aquest programa conté un error, segur que el vols guardar?"
 
@@ -1683,6 +1743,10 @@ msgstr "Are you sure you want to copy this teacher?"
 #, fuzzy
 msgid "second_teacher_prompt"
 msgstr "Enter a teacher username to invite them."
+
+#, fuzzy
+msgid "second_teacher_warning"
+msgstr "All teachers in this class can customize it."
 
 msgid "see_certificate"
 msgstr "Veure certificat de {username}!"
@@ -1816,6 +1880,9 @@ msgstr "Aquest alumne ja té una invitació pendent."
 msgid "student_details"
 msgstr "Student details"
 
+msgid "student_list"
+msgstr "Llistat d'alumnes"
+
 #, fuzzy
 msgid "student_not_allowed_in_class"
 msgstr "Student not allowed in class"
@@ -1925,6 +1992,10 @@ msgstr "Icona del tutorial del professor"
 
 msgid "teacher_welcome"
 msgstr "Benvinguda a Hedy! El teu compte s'ha actualitzat a compte de professorat. Això et permetrà crear classes i convidar alumnes."
+
+#, fuzzy
+msgid "teachers"
+msgstr "Teachers"
 
 msgid "template_code"
 msgstr ""
@@ -2044,6 +2115,14 @@ msgstr "Pas del tutorial no trobat"
 msgid "unauthorized"
 msgstr "No tens permisos per accedir a aquesta pàgina"
 
+#, fuzzy
+msgid "unfavourite_confirm"
+msgstr "Are you sure you want to unfavourite this program?"
+
+#, fuzzy
+msgid "unfavourite_success"
+msgstr "Your program is unfavourited."
+
 msgid "unique_usernames"
 msgstr "Tots els noms d'usuari han de ser únics."
 
@@ -2067,9 +2146,6 @@ msgstr "Unsubmitted"
 
 msgid "update_adventure_prompt"
 msgstr "Estàs segur que vols actualitzar aquesta aventura?"
-
-msgid "update_profile"
-msgstr "Actualitza el perfil"
 
 msgid "update_public"
 msgstr "Actualitza el perfil públic"
@@ -2134,9 +2210,6 @@ msgstr "Veure el programa"
 #, fuzzy
 msgid "view_slides"
 msgstr "View slides"
-
-msgid "waiting_for_submit"
-msgstr ""
 
 msgid "welcome"
 msgstr "Benvinguda"
@@ -2324,54 +2397,12 @@ msgstr "El teu programa"
 #~ msgid "nested blocks"
 #~ msgstr "a block in a block"
 
-#~ msgid "add_students_options"
-#~ msgstr "Afegeix opcions d'estudiants"
+#~ msgid "save"
+#~ msgstr "Guarda"
 
-#~ msgid "class_live"
-#~ msgstr "Estadístiques en viu"
+#~ msgid "update_profile"
+#~ msgstr "Actualitza el perfil"
 
-#~ msgid "class_overview"
-#~ msgstr "Visió general de la classe"
-
-#~ msgid "copy_join_link"
-#~ msgstr "Copia l'enllaç d'unió"
-
-#~ msgid "copy_link_success"
-#~ msgstr "Enllaç d'unió copiat amb èxit al porta-retalls"
-
-#~ msgid "expiration_date"
-#~ msgstr "Data de caducitat"
-
-#~ msgid "invite_by_username"
-#~ msgstr "Invite by username"
-
-#~ msgid "invite_date"
-#~ msgstr "Invite date"
-
-#~ msgid "invite_prompt"
-#~ msgstr "Enter a username"
-
-#~ msgid "last_login"
-#~ msgstr "Last login"
-
-#~ msgid "page"
-#~ msgstr "page"
-
-#~ msgid "pending_invites"
-#~ msgstr "Pending invites"
-
-#~ msgid "remove_student_prompt"
-#~ msgstr "Are you sure you want to remove the student from the class?"
-
-#~ msgid "remove_user_prompt"
-#~ msgstr "Confirm removing this user from the class."
-
-#~ msgid "second_teacher_warning"
-#~ msgstr "All teachers in this class can customize it."
-
-#~ msgid "student_list"
-#~ msgstr "Llistat d'alumnes"
-
-#~ msgid "teachers"
-#~ msgstr "Teachers"
+#~ msgid "multiple_levels_warning"
+#~ msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
 

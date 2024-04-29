@@ -35,7 +35,7 @@ _IN: _SPACE ("อยู่ใน" | "in") _SPACE
 _NOT_IN: _SPACE ("ไม่อยู่ใน" | "not in") _SPACE
 _IF: ("ถ้า" | "if") _SPACE
 _ELSE: "ไม่อย่างนั้น" | "else"
-_AND: _SPACE ("และ" | "and") _SPACE
+_AND: _SPACE? ("และ" | "and") _SPACE
 _REPEAT: ("ทำซ้ำ" | "repeat") _SPACE
 _TIMES: _SPACE ("ครั้ง" | "times")
 _FOR: ("ให้" | "for") _SPACE
@@ -44,7 +44,7 @@ _TO: _SPACE ("จนถึง" | "to") _SPACE
 _STEP: "เดิน" | "step"
 _ELIF: _SPACE? ("หรือถ้า" | "elif") _SPACE
 _INPUT: ("รับข้อมูล" | "input")
-_OR: _SPACE ("หรือ" | "or") _SPACE
+_OR: _SPACE? ("หรือ" | "or") _SPACE
 _WHILE: ("เมื่อไหร่ก็ตามที่" | "while") _SPACE
 _LENGTH: "ความยาว" | "length"
 _COLOR : ("สี" | "color") _SPACE?

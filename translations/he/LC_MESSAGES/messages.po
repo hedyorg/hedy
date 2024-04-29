@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-04-01 11:41+0000\n"
+"PO-Revision-Date: 2024-04-26 06:30+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: he <LL@li.org>\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.1-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -26,6 +26,10 @@ msgstr "ניסיתם להשתמש במשתנה {name} בשורה {access_line_nu
 #, fuzzy
 msgid "Cyclic Var Definition"
 msgstr "The name `{variable}` needs to be set before you can use it on the right-hand side of the is command."
+
+#, fuzzy
+msgid "Else Without If Error"
+msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
 
 #, fuzzy
 msgid "Function Undefined"
@@ -73,6 +77,10 @@ msgstr "It looks like you forgot to use a command with the text you put in line 
 #, fuzzy
 msgid "Missing Additional Command"
 msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+
+#, fuzzy
+msgid "Missing Colon Error"
+msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
 
 msgid "Missing Command"
 msgstr "נראה ששכחתם לכתוב פקודה בשורה {line_number}."
@@ -195,7 +203,7 @@ msgstr "לוגו הישגים"
 
 #, fuzzy
 msgid "actions"
-msgstr ""
+msgstr "Actions"
 
 #, fuzzy
 msgid "add"
@@ -204,6 +212,10 @@ msgstr "Add"
 #, fuzzy
 msgid "add_students"
 msgstr "Add students"
+
+#, fuzzy
+msgid "add_students_options"
+msgstr "Add students options"
 
 #, fuzzy
 msgid "admin"
@@ -344,9 +356,6 @@ msgstr "Starting in level 2, ask needs to be used with a variable. Example: name
 msgid "available_in"
 msgstr "Available in:"
 
-msgid "back_to_class"
-msgstr ""
-
 #, fuzzy
 msgid "become_a_sponsor"
 msgstr "Become a sponsor"
@@ -395,6 +404,10 @@ msgid "class_customize_success"
 msgstr "Class successfully customized."
 
 #, fuzzy
+msgid "class_live"
+msgstr "Live statistics"
+
+#, fuzzy
 msgid "class_name_duplicate"
 msgstr "You already have a class with this name."
 
@@ -409,6 +422,10 @@ msgstr "This class name is invalid."
 #, fuzzy
 msgid "class_name_prompt"
 msgstr "Please enter the name of the class"
+
+#, fuzzy
+msgid "class_overview"
+msgstr "Class overview"
 
 #, fuzzy
 msgid "class_survey_description"
@@ -491,6 +508,14 @@ msgstr "Successfully copied to clipboard"
 #, fuzzy
 msgid "copy_code"
 msgstr "Copy code"
+
+#, fuzzy
+msgid "copy_join_link"
+msgstr "Copy join link"
+
+#, fuzzy
+msgid "copy_link_success"
+msgstr "Join link successfully copied to clipboard"
 
 #, fuzzy
 msgid "copy_link_to_share"
@@ -591,8 +616,12 @@ msgstr "Customize class"
 msgid "dash"
 msgstr "מקף"
 
-msgid "default_403"
+msgid "default_401"
 msgstr "נראה שאין לכם הרשאה..."
+
+#, fuzzy
+msgid "default_403"
+msgstr "Looks like this action is forbidden..."
 
 msgid "default_404"
 msgstr "לא מצאנו את הדף הזה..."
@@ -646,6 +675,10 @@ msgstr "Directly open"
 #, fuzzy
 msgid "disable"
 msgstr "Disable"
+
+#, fuzzy
+msgid "disable_explore_page"
+msgstr "Disable explore page"
 
 #, fuzzy
 msgid "disable_parsons"
@@ -759,6 +792,10 @@ msgstr "Exit preview mode"
 #, fuzzy
 msgid "experience_invalid"
 msgstr "Please select a valid experience, choose (Yes, No)."
+
+#, fuzzy
+msgid "expiration_date"
+msgstr "Expiration date"
 
 #, fuzzy
 msgid "explore_explanation"
@@ -1042,8 +1079,20 @@ msgid "invalid_username_password"
 msgstr "Invalid username/password."
 
 #, fuzzy
+msgid "invite_by_username"
+msgstr "Invite by username"
+
+#, fuzzy
+msgid "invite_date"
+msgstr "Invite date"
+
+#, fuzzy
 msgid "invite_message"
 msgstr "You have received an invitation to join class"
+
+#, fuzzy
+msgid "invite_prompt"
+msgstr "Enter a username"
 
 #, fuzzy
 msgid "invite_teacher"
@@ -1088,6 +1137,10 @@ msgstr "Last edited"
 #, fuzzy
 msgid "last_error"
 msgstr "Last error"
+
+#, fuzzy
+msgid "last_login"
+msgstr "Last login"
 
 #, fuzzy
 msgid "last_program"
@@ -1274,8 +1327,8 @@ msgid "more_options"
 msgstr "More options"
 
 #, fuzzy
-msgid "multiple_levels_warning"
-msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
+msgid "multiple_keywords_warning"
+msgstr "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}"
 
 #, fuzzy
 msgid "my_account"
@@ -1490,6 +1543,9 @@ msgstr "You already have a program with this name, saving this program will repl
 msgid "owner"
 msgstr "Owner"
 
+msgid "page"
+msgstr "דף"
+
 #, fuzzy
 msgid "page_not_found"
 msgstr "לא מצאנו את הדף הזה!"
@@ -1540,6 +1596,10 @@ msgstr "Password updated."
 #, fuzzy
 msgid "passwords_six"
 msgstr "All passwords need to be six characters or longer."
+
+#, fuzzy
+msgid "pending_invites"
+msgstr "Pending invites"
 
 #, fuzzy
 msgid "people_with_a_link"
@@ -1734,6 +1794,14 @@ msgid "remove_customizations_prompt"
 msgstr "Are you sure you want to remove this class's customizations?"
 
 #, fuzzy
+msgid "remove_student_prompt"
+msgstr "Are you sure you want to remove the student from the class?"
+
+#, fuzzy
+msgid "remove_user_prompt"
+msgstr "Confirm removing this user from the class."
+
+#, fuzzy
 msgid "repair_program_logo_alt"
 msgstr "Repair program icon"
 
@@ -1817,10 +1885,6 @@ msgid "runs_over_time"
 msgstr "Runs over time"
 
 #, fuzzy
-msgid "save"
-msgstr "Save"
-
-#, fuzzy
 msgid "save_parse_warning"
 msgstr "This program contains an error, are you sure you want to save it?"
 
@@ -1855,6 +1919,10 @@ msgstr "Are you sure you want to copy this teacher?"
 #, fuzzy
 msgid "second_teacher_prompt"
 msgstr "Enter a teacher username to invite them."
+
+#, fuzzy
+msgid "second_teacher_warning"
+msgstr "All teachers in this class can customize it."
 
 #, fuzzy
 msgid "see_certificate"
@@ -2012,6 +2080,10 @@ msgid "student_details"
 msgstr "Student details"
 
 #, fuzzy
+msgid "student_list"
+msgstr "Student list"
+
+#, fuzzy
 msgid "student_not_allowed_in_class"
 msgstr "Student not allowed in class"
 
@@ -2140,6 +2212,10 @@ msgstr "Teacher tutorial icon"
 #, fuzzy
 msgid "teacher_welcome"
 msgstr "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students."
+
+#, fuzzy
+msgid "teachers"
+msgstr "Teachers"
 
 #, fuzzy
 msgid "template_code"
@@ -2280,6 +2356,14 @@ msgid "unauthorized"
 msgstr "אין לכם הרשאות גישה לדף הזה"
 
 #, fuzzy
+msgid "unfavourite_confirm"
+msgstr "Are you sure you want to unfavourite this program?"
+
+#, fuzzy
+msgid "unfavourite_success"
+msgstr "Your program is unfavourited."
+
+#, fuzzy
 msgid "unique_usernames"
 msgstr "All usernames need to be unique."
 
@@ -2306,10 +2390,6 @@ msgstr "Unsubmitted"
 #, fuzzy
 msgid "update_adventure_prompt"
 msgstr "Are you sure you want to update this adventure?"
-
-#, fuzzy
-msgid "update_profile"
-msgstr "Update profile"
 
 #, fuzzy
 msgid "update_public"
@@ -2388,9 +2468,6 @@ msgstr "View program"
 #, fuzzy
 msgid "view_slides"
 msgstr "View slides"
-
-msgid "waiting_for_submit"
-msgstr ""
 
 #, fuzzy
 msgid "welcome"
@@ -2614,54 +2691,12 @@ msgstr "Your program"
 #~ msgid "nested blocks"
 #~ msgstr "בלוק בתוך בלוק"
 
-#~ msgid "add_students_options"
-#~ msgstr "Add students options"
+#~ msgid "save"
+#~ msgstr "Save"
 
-#~ msgid "class_live"
-#~ msgstr "Live statistics"
+#~ msgid "update_profile"
+#~ msgstr "Update profile"
 
-#~ msgid "class_overview"
-#~ msgstr "Class overview"
-
-#~ msgid "copy_join_link"
-#~ msgstr "Copy join link"
-
-#~ msgid "copy_link_success"
-#~ msgstr "Join link successfully copied to clipboard"
-
-#~ msgid "expiration_date"
-#~ msgstr "Expiration date"
-
-#~ msgid "invite_by_username"
-#~ msgstr "Invite by username"
-
-#~ msgid "invite_date"
-#~ msgstr "Invite date"
-
-#~ msgid "invite_prompt"
-#~ msgstr "Enter a username"
-
-#~ msgid "last_login"
-#~ msgstr "Last login"
-
-#~ msgid "page"
-#~ msgstr "דף"
-
-#~ msgid "pending_invites"
-#~ msgstr "Pending invites"
-
-#~ msgid "remove_student_prompt"
-#~ msgstr "Are you sure you want to remove the student from the class?"
-
-#~ msgid "remove_user_prompt"
-#~ msgstr "Confirm removing this user from the class."
-
-#~ msgid "second_teacher_warning"
-#~ msgstr "All teachers in this class can customize it."
-
-#~ msgid "student_list"
-#~ msgstr "Student list"
-
-#~ msgid "teachers"
-#~ msgstr "Teachers"
+#~ msgid "multiple_levels_warning"
+#~ msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
 

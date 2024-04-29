@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-04-01 11:41+0000\n"
+"PO-Revision-Date: 2024-04-26 06:30+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: eo <LL@li.org>\n"
 "Language: eo\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.1-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -24,6 +24,10 @@ msgstr "Vi provis uzi la variablon {name} je la linio {access_line_number}, sed 
 
 msgid "Cyclic Var Definition"
 msgstr "La nomo `{variable}` bezonas ricevi valoron antaŭ vi povas uzi ĝin maldekstre de la komando `{is}`."
+
+#, fuzzy
+msgid "Else Without If Error"
+msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
 
 msgid "Function Undefined"
 msgstr "Vi provis uzi la funkcion {name}, sed vi ne difinis ĝin."
@@ -69,6 +73,10 @@ msgstr "It looks like you forgot to use a command with the text you put in line 
 #, fuzzy
 msgid "Missing Additional Command"
 msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+
+#, fuzzy
+msgid "Missing Colon Error"
+msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
 
 #, fuzzy
 msgid "Missing Command"
@@ -196,7 +204,7 @@ msgstr "Emblemo pri premioj"
 
 #, fuzzy
 msgid "actions"
-msgstr ""
+msgstr "Actions"
 
 #, fuzzy
 msgid "add"
@@ -204,6 +212,9 @@ msgstr "Add"
 
 msgid "add_students"
 msgstr "Aldoni lernantojn"
+
+msgid "add_students_options"
+msgstr "Krei kontojn de lernantoj"
 
 #, fuzzy
 msgid "admin"
@@ -330,9 +341,6 @@ msgstr "Starting in level 2, ask needs to be used with a variable. Example: name
 msgid "available_in"
 msgstr "Available in:"
 
-msgid "back_to_class"
-msgstr ""
-
 #, fuzzy
 msgid "become_a_sponsor"
 msgstr "Become a sponsor"
@@ -376,6 +384,10 @@ msgid "class_customize_success"
 msgstr "Class successfully customized."
 
 #, fuzzy
+msgid "class_live"
+msgstr "Live statistics"
+
+#, fuzzy
 msgid "class_name_duplicate"
 msgstr "You already have a class with this name."
 
@@ -387,6 +399,10 @@ msgstr "Jen nevalida nomo de klaso."
 
 msgid "class_name_prompt"
 msgstr "Bonvolu tajpi la nomon de la klaso"
+
+#, fuzzy
+msgid "class_overview"
+msgstr "Class overview"
 
 #, fuzzy
 msgid "class_survey_description"
@@ -469,6 +485,14 @@ msgstr "Successfully copied to clipboard"
 #, fuzzy
 msgid "copy_code"
 msgstr "Copy code"
+
+#, fuzzy
+msgid "copy_join_link"
+msgstr "Please copy and paste this link into a new tab:"
+
+#, fuzzy
+msgid "copy_link_success"
+msgstr "Copy link to share"
 
 #, fuzzy
 msgid "copy_link_to_share"
@@ -555,8 +579,12 @@ msgstr "Adapti klason"
 msgid "dash"
 msgstr "streketo"
 
-msgid "default_403"
+msgid "default_401"
 msgstr "Ŝajnas, ke vi ne estas rajtigita…"
+
+#, fuzzy
+msgid "default_403"
+msgstr "Looks like this action is forbidden..."
 
 msgid "default_404"
 msgstr "La paĝo ne troviĝis…"
@@ -602,6 +630,10 @@ msgstr "Rekte malfermi"
 #, fuzzy
 msgid "disable"
 msgstr "Disable"
+
+#, fuzzy
+msgid "disable_explore_page"
+msgstr "Disable explore page"
 
 #, fuzzy
 msgid "disable_parsons"
@@ -707,6 +739,9 @@ msgstr "Exit preview mode"
 #, fuzzy
 msgid "experience_invalid"
 msgstr "Please select a valid experience, choose (Yes, No)."
+
+msgid "expiration_date"
+msgstr "Dato de eksvalidiĝo"
 
 #, fuzzy
 msgid "explore_explanation"
@@ -972,9 +1007,18 @@ msgstr "Invalid tutorial step"
 msgid "invalid_username_password"
 msgstr "Nevalida salutnomo aŭ pasvorto."
 
+msgid "invite_by_username"
+msgstr "Inviti per salutnomo"
+
+msgid "invite_date"
+msgstr "Dato de invito"
+
 #, fuzzy
 msgid "invite_message"
 msgstr "You have received an invitation to join class"
+
+msgid "invite_prompt"
+msgstr "Tajpu salutnomon"
 
 #, fuzzy
 msgid "invite_teacher"
@@ -1015,6 +1059,9 @@ msgstr "Last edited"
 #, fuzzy
 msgid "last_error"
 msgstr "Last error"
+
+msgid "last_login"
+msgstr "Lasta saluto"
 
 #, fuzzy
 msgid "last_program"
@@ -1185,8 +1232,8 @@ msgid "more_options"
 msgstr "More options"
 
 #, fuzzy
-msgid "multiple_levels_warning"
-msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
+msgid "multiple_keywords_warning"
+msgstr "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}"
 
 msgid "my_account"
 msgstr "Mia konto"
@@ -1373,6 +1420,9 @@ msgstr "You already have a program with this name, saving this program will repl
 msgid "owner"
 msgstr "Owner"
 
+msgid "page"
+msgstr "paĝo"
+
 msgid "page_not_found"
 msgstr "Paĝo ne ekzistas!"
 
@@ -1418,6 +1468,10 @@ msgstr "Pasvorto ŝanĝiĝis."
 #, fuzzy
 msgid "passwords_six"
 msgstr "All passwords need to be six characters or longer."
+
+#, fuzzy
+msgid "pending_invites"
+msgstr "Pending invites"
 
 #, fuzzy
 msgid "people_with_a_link"
@@ -1590,6 +1644,14 @@ msgstr "Remove customization"
 msgid "remove_customizations_prompt"
 msgstr "Are you sure you want to remove this class's customizations?"
 
+#, fuzzy
+msgid "remove_student_prompt"
+msgstr "Are you sure you want to remove the student from the class?"
+
+#, fuzzy
+msgid "remove_user_prompt"
+msgstr "Confirm removing this user from the class."
+
 msgid "repair_program_logo_alt"
 msgstr "Piktogramo pri riparado de programo"
 
@@ -1663,9 +1725,6 @@ msgstr "Ruli kodon"
 msgid "runs_over_time"
 msgstr "Runs over time"
 
-msgid "save"
-msgstr "Konservi"
-
 msgid "save_parse_warning"
 msgstr "Ĉi tiu programaĵo enhavas eraron, ĉu vi certas voli konservi ĝin?"
 
@@ -1695,6 +1754,10 @@ msgstr "Are you sure you want to copy this teacher?"
 #, fuzzy
 msgid "second_teacher_prompt"
 msgstr "Enter a teacher username to invite them."
+
+#, fuzzy
+msgid "second_teacher_warning"
+msgstr "All teachers in this class can customize it."
 
 msgid "see_certificate"
 msgstr "Vidi la atestilon de {username}!"
@@ -1835,6 +1898,10 @@ msgid "student_details"
 msgstr "Student details"
 
 #, fuzzy
+msgid "student_list"
+msgstr "Student list"
+
+#, fuzzy
 msgid "student_not_allowed_in_class"
 msgstr "Student not allowed in class"
 
@@ -1956,6 +2023,10 @@ msgstr "Click on 'next step' to get started as a Hedy teacher!"
 #, fuzzy
 msgid "teacher_welcome"
 msgstr "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students."
+
+#, fuzzy
+msgid "teachers"
+msgstr "Teachers"
 
 #, fuzzy
 msgid "template_code"
@@ -2085,6 +2156,14 @@ msgid "unauthorized"
 msgstr "Al vi mankas la rajto atingi ĉi tiun paĝon"
 
 #, fuzzy
+msgid "unfavourite_confirm"
+msgstr "Are you sure you want to unfavourite this program?"
+
+#, fuzzy
+msgid "unfavourite_success"
+msgstr "Your program is unfavourited."
+
+#, fuzzy
 msgid "unique_usernames"
 msgstr "All usernames need to be unique."
 
@@ -2110,9 +2189,6 @@ msgstr "Unsubmitted"
 
 msgid "update_adventure_prompt"
 msgstr "Ĉu vi certas, ke vi volas modifi ĉi tiun aventuron?"
-
-msgid "update_profile"
-msgstr "Modifi profilon"
 
 msgid "update_public"
 msgstr "Ĝisdatigi publikan profilon"
@@ -2185,9 +2261,6 @@ msgstr "Vidi programon"
 #, fuzzy
 msgid "view_slides"
 msgstr "View slides"
-
-msgid "waiting_for_submit"
-msgstr ""
 
 msgid "welcome"
 msgstr "Bonveno"
@@ -2400,54 +2473,12 @@ msgstr "Your program"
 #~ msgid "nested blocks"
 #~ msgstr "bloko en bloko"
 
-#~ msgid "add_students_options"
-#~ msgstr "Krei kontojn de lernantoj"
+#~ msgid "save"
+#~ msgstr "Konservi"
 
-#~ msgid "class_live"
-#~ msgstr "Live statistics"
+#~ msgid "update_profile"
+#~ msgstr "Modifi profilon"
 
-#~ msgid "class_overview"
-#~ msgstr "Class overview"
-
-#~ msgid "copy_join_link"
-#~ msgstr "Please copy and paste this link into a new tab:"
-
-#~ msgid "copy_link_success"
-#~ msgstr "Copy link to share"
-
-#~ msgid "expiration_date"
-#~ msgstr "Dato de eksvalidiĝo"
-
-#~ msgid "invite_by_username"
-#~ msgstr "Inviti per salutnomo"
-
-#~ msgid "invite_date"
-#~ msgstr "Dato de invito"
-
-#~ msgid "invite_prompt"
-#~ msgstr "Tajpu salutnomon"
-
-#~ msgid "last_login"
-#~ msgstr "Lasta saluto"
-
-#~ msgid "page"
-#~ msgstr "paĝo"
-
-#~ msgid "pending_invites"
-#~ msgstr "Pending invites"
-
-#~ msgid "remove_student_prompt"
-#~ msgstr "Are you sure you want to remove the student from the class?"
-
-#~ msgid "remove_user_prompt"
-#~ msgstr "Confirm removing this user from the class."
-
-#~ msgid "second_teacher_warning"
-#~ msgstr "All teachers in this class can customize it."
-
-#~ msgid "student_list"
-#~ msgstr "Student list"
-
-#~ msgid "teachers"
-#~ msgstr "Teachers"
+#~ msgid "multiple_levels_warning"
+#~ msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
 

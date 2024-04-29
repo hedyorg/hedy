@@ -1,5 +1,5 @@
-<div id="program_{{ loop_index }}" class="program w-full border-solid border-2 {% if program.submitted %} border-gray-400 bg-gray-400 {% else %} border-orange-400 {% endif %} rounded p-4 mb-4">
-    <h3 id="submitted_header_{{ loop_index }}" class="mt-0 mb-4 text-red-500 text-center {% if not program.submitted %} hidden{% endif %}">{{_('submitted_header')}}</h3>
+<div id="program_{{ program.id }}" data-name="{{program.name}}" data-id="{{program.id}}" class="program w-full border-solid border-2 {% if program.submitted %} border-gray-400 bg-gray-400 {% else %} border-orange-400 {% endif %} rounded p-4 mb-4">
+    <h3 id="submitted_header_{{ program.id }}" class="mt-0 mb-4 text-red-500 text-center {% if not program.submitted %} hidden{% endif %}">{{_('submitted_header')}}</h3>
     <div class="flex flex-row">
         <table class="table-auto mb-4">
         <thead>
@@ -14,9 +14,9 @@
         <tbody>
             <tr>
                 <td>{{program.name|truncate(30)}}</td>
-                <td>{{_('level')}} {{ program.level }}</td>
+                <td id="program_level">{{_('level')}} {{ program.level }}</td>
                 {% if program.adventure_name %}
-                    <td>{{adventure_names.get(program.adventure_name, program.adventure_name)}}</td>
+                    <td id="program_adventure">{{adventure_names.get(program.adventure_name, program.adventure_name)}}</td>
                 {% else %}
                     <td>-</td>
                 {% endif %}
@@ -26,16 +26,21 @@
         </tbody>
         </table>
         {% if public_profile and not second_teachers_programs %}
-            <div class="ml-36 favourite_program_container {% if public_profile.favourite_program and public_profile.favourite_program == program.id %}text-yellow-400{% else %}text-white{% endif %} text-2xl{% if not program.public %} hidden{% endif %}" id="favourite_program_container_{{ loop_index }}">
-                <i class="fa fa-star p-4 bg-blue-300 rounded-full cursor-pointer hover:bg-blue-600" onclick="hedyApp.set_favourite_program('{{ program.id }}', {{ loop_index }}, '{{_('favourite_confirm')}}');" aria-hidden="true"></i>
+            {% set favourite_program = public_profile.favourite_program == program.id %}
+            <div
+                id="favourite_program_container_{{ program.id }}"
+                data-starred="{{favourite_program}}"
+                class="ml-auto mb-10 favourite_program_container {% if favourite_program %}text-yellow-400{% else %}text-white{% endif %} text-2xl{% if not program.public %} hidden{% endif %}">
+                <i class="fa fa-star p-4 bg-blue-300 rounded-full cursor-pointer hover:bg-blue-600"
+                    onclick="hedyApp.set_favourite_program('{{ program.id }}', '{{_('favourite_confirm')}}', '{{_('unfavourite_confirm')}}');" aria-hidden="true"></i>
             </div>
         {% endif %}
           <div class="ml-auto dropdown relative">
-            <button class="gray-btn text-gray-500 border border-gray-600 font-semibold rounded inline-flex items-center gap-2" id="more_options_{{ loop_index }}"
-              onclick="$('#program_options_dropdown_{{ loop_index }}').slideToggle('medium');">
+            <button class="gray-btn text-gray-500 border border-gray-600 font-semibold rounded inline-flex items-center gap-2" id="more_options_{{ program.id }}"
+              onclick="$('#program_options_dropdown_{{ program.id }}').slideToggle('medium');">
               <span>{{_('more_options')}}</span>
             </button>
-            <div class="dropdown-menu z-30 min-w-full" id="program_options_dropdown_{{ loop_index }}"
+            <div class="dropdown-menu z-30 min-w-full" id="program_options_dropdown_{{ program.id }}"
               style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;">
                 <button class="gray-btn text-blue-500 min-w-full flex justify-between items-center gap-2 border-b border-gray-500" onclick="hedyApp.copy_to_clipboard(`{{program.code}}`, '{{_('copy_clipboard')}}')">{{_('copy_code')}}</button>
                 {% if program.public %}
@@ -43,9 +48,9 @@
                 {% endif %}
                 {% if not second_teachers_programs %}
                     {% if not program.submitted %}
-                    <button class="gray-btn text-red-500 min-w-full flex justify-between items-center gap-2" data-cy="delete_non_submitted_program_{{ loop_index }}" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop_index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
+                    <button class="gray-btn text-red-500 min-w-full flex justify-between items-center gap-2" data-cy="delete_non_submitted_program_{{ program.id }}" onclick="hedyApp.delete_program('{{ program.id }}', '{{_('delete_confirm')}}')">{{_('delete')}}</button>
                     {% else %}
-                        <button class="gray-btn text-red-500 min-w-full flex justify-between items-center gap-2" data-cy="delete_submitted_program_{{ loop_index }}" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop_index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
+                        <button class="gray-btn text-red-500 min-w-full flex justify-between items-center gap-2" data-cy="delete_submitted_program_{{ program.id }}" onclick="hedyApp.delete_program('{{ program.id }}', '{{_('delete_confirm')}}')">{{_('delete')}}</button>
                     {% endif %}
                 {% endif %}
             </div>
@@ -54,36 +59,36 @@
     <div class="w-3/4 turn-pre-into-ace mb-4">
       <pre level="{{ program.level }}">{{program.preview_code }}</pre>
     </div>
-    <div id="submitted_button_container_{{ loop_index }}" class="flex flex-row gap-2" {% if not program.submitted %} style="display: none;" {% endif %}>
+    <div id="submitted_button_container_{{ program.id }}" class="flex flex-row gap-2" {% if not program.submitted %} style="display: none;" {% endif %}>
         <button class="blue-btn" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('open')}}</button>
     </div>
-    <div id="non_submitted_button_container_{{ loop_index }}" class="flex flex-row w-full gap-2 {% if program.submitted %} hidden {% endif %}">
+    <div id="non_submitted_button_container_{{ program.id }}" class="flex flex-row w-full gap-2 {% if program.submitted %} hidden {% endif %}">
         <a href="/hedy/{{program.level|string}}/{{program.id}}"><button class="blue-btn">{{_('open')}}</button></a>
-        <button class="green-btn" data-cy="submit-btn" {% if not program.public or second_teachers_programs %} style="display: none;" {% endif %} onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}', {{ loop_index }})})">{{_('submit_program')}}</button>
+        <button class="green-btn" data-cy="submit-btn" {% if not program.public or second_teachers_programs %} style="display: none;" {% endif %} onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}')})">{{_('submit_program')}}</button>
         {% if not second_teachers_programs %}
         <div class="dropdown relative">
-            <button class="white-btn inline-flex items-center gap-2" id="share_option_dropdown_{{ loop_index }}"
-            onclick="$('#share_dropdown_{{ loop_index }}').slideToggle('medium');">
+            <button class="white-btn inline-flex items-center gap-2" id="share_option_dropdown_{{ program.id }}"
+            onclick="$('#share_dropdown_{{ program.id }}').slideToggle('medium');">
             <span class="fa fa-{% if program.public %}globe{% else %}lock{% endif %}"></span>
             <span>{% if program.public %}{{_('public')}}{% else %}{{_('private')}}{% endif %}</span>
-            <svg id="share-arrow_{{ loop_index }}" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <svg id="share-arrow_{{ program.id }}" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                 <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
             </svg>
             </button>
-            <div class="dropdown-menu z-30 min-w-full" id="share_dropdown_{{ loop_index }}"
+            <div class="dropdown-menu z-30 min-w-full" id="share_dropdown_{{ program.id }}"
             style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
             _="on mutation of @style
-                set arrow to #share-arrow_{{ loop_index }}
+                set arrow to #share-arrow_{{ program.id }}
                 if *display == 'none'
                     remove .rotate-180 from arrow
                 else if not arrow.classList.contains('rotate-180')
                     add .rotate-180 to arrow
                 end">
-                <button id="share_button_{{ loop_index }}" class="gray-btn text-blue-500 min-w-full inline-flex items-center gap-2"
-                hx-post="/programs/share/{{program.id}}/{{loop_index}}/{{second_teachers_programs}}"
-                data-cy="unshare_program_{{ loop_index }}"
+                <button id="share_button_{{ program.id }}" class="gray-btn text-blue-500 min-w-full inline-flex items-center gap-2"
+                hx-post="/programs/share/{{program.id}}/{{second_teachers_programs}}"
+                data-cy="unshare_program_{{ program.id }}"
                 hx-swap="outerHTML"
-                hx-target="#program_{{ loop_index }}"
+                hx-target="#program_{{ program.id }}"
                 >
                 <span class="fa fa-{% if program.public %}lock{% else %}globe{% endif %}"></span>
                 <div class="mr-auto" tabindex=0>

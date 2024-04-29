@@ -35,7 +35,7 @@ _IN: _SPACE ("eleme" | "in") _SPACE
 _NOT_IN: _SPACE ("nem eleme" | "not in") _SPACE
 _IF: ("ha" | "if") _SPACE
 _ELSE: "egyébként" | "else"
-_AND: _SPACE ("és" | "and") _SPACE
+_AND: _SPACE? ("és" | "and") _SPACE
 _REPEAT: ("ismételd" | "repeat") _SPACE
 _TIMES: _SPACE ("alkalommal" | "times")
 _FOR: ("minden" | "for") _SPACE
@@ -44,7 +44,7 @@ _TO: _SPACE ("től" | "to") _SPACE
 _STEP: "lépésenként" | "step"
 _ELIF: _SPACE? ("egybk-ha" | "elif") _SPACE
 _INPUT: ("bekér" | "input")
-_OR: _SPACE ("vagy" | "or") _SPACE
+_OR: _SPACE? ("vagy" | "or") _SPACE
 _WHILE: ("amíg" | "while") _SPACE
 _LENGTH: "hossz" | "length"
 _COLOR : ("szín" | "color") _SPACE?

@@ -864,7 +864,7 @@ class TestsLevel1(HedyTester):
         {HedyTester.indent(
             HedyTester.forward_transpiled(50, self.level),
             8, True)
-        }
+         }
         answer = input('Wat is je lievelingskleur')
         print('je lievelingskleur is '+answer)""")
 
