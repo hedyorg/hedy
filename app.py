@@ -2462,12 +2462,12 @@ def other_languages(lang_param=None):
 
     # Get English names for all Hedy supported languages using iso639 and their codes
     for lang_code in other_langs:
-        try:
-            language = languages.get(part1=lang_code.get('lang'))
+        lang = lang_code.get('lang')
+        if lang in languages.part1:
+            language = languages.get(part1=lang)
             lang_code['english'] = language.name
-        except:
-            lang_code['english'] = non_iso_transl.get(lang_code['lang'], '')
-            pass
+        else:
+            lang_code['english'] = non_iso_transl.get(lang, '')
 
     return other_langs
 
