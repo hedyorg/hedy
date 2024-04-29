@@ -18,7 +18,7 @@ import jinja_partials
 from typing import Optional
 from logging.config import dictConfig as logConfig
 from os import path
-from iso639 import to_name, NonExistentLanguageError
+from iso639 import languages
 
 import static_babel_content
 from markupsafe import Markup
