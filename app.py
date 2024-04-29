@@ -2445,6 +2445,17 @@ def all_countries():
 def other_languages(lang_param=None):
     """Return a list of language objects that are NOT the current language."""
     current_lang = lang_param or g.lang
+    # these are the languages that iso doesn't have the English translations for
+    non_iso_transl = {
+    'kmr': 'Kurdish',
+    'nb_NO': 'Norwegian',
+    'pa_PK': 'Punjabi',
+    'pap': 'Papiamento',
+    'pt_BR': 'Portuguese',
+    'pt_PT': 'Portuguese',
+    'zh_Hans': 'Chinese',
+    'zh_Hant': 'Chinese'
+    }
 
     # get all Hedy supported languages
     other_langs = [make_lang_obj(lang) for lang in ALL_LANGUAGES.keys() if lang != current_lang]
@@ -2455,6 +2466,7 @@ def other_languages(lang_param=None):
             language = languages.get(part1=lang_code.get('lang'))
             lang_code['english'] = language.name
         except:
+            lang_code['english'] = non_iso_transl.get(lang_code['lang'], '')
             pass
 
     return other_langs
