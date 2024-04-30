@@ -17,13 +17,18 @@ ALL_LANGUAGES = {}
 ALL_KEYWORD_LANGUAGES = {}
 
 # Babel has a different naming convention than Weblate and doesn't support some languages -> fix this manually
+# Map our langauge code to the language code recognized by Babel, or 'en' if Babel doesn't support this locale
+# at all.
 CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK',
                           'kmr': 'ku_TR',
-                          'tl': 'en'}
+                          'tl': 'en',
+                          'iba': 'en'
+                          }
 
 # For the non-existing language manually overwrite the display language to make sure it is displayed correctly
 CUSTOM_LANGUAGE_TRANSLATIONS = {'kmr': 'Kurdî (Tirkiye)',
-                                'tl': 'ᜆᜄᜎᜓᜄ᜔'}
+                                'tl': 'ᜆᜄᜎᜓᜄ᜔',
+                                'iba': 'Iban'}
 
 customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
 
@@ -258,7 +263,6 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle_draw_it',
         'restaurant',
         'calculator',
-        'tic',
         'debugging',
         'quiz',
     ],
@@ -275,7 +279,6 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'calculator_2',
         'piggybank',
         'quizmaster',
-        'tic',
         'debugging',
         'quiz',
     ],
@@ -289,7 +292,6 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dice',
         'rock',
         'calculator',
-        'tic',
         'debugging',
         'quiz',
     ],
@@ -301,6 +303,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'songs_2',
         'music',
         'language',
+        'tic',
+        'tic_2',
+        'tic_3',
         'simon',
         'simon_2',
         'simon_3',
@@ -327,6 +332,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'default',
         'print_command',
         'ask_command',
+        'functions',
+        'for_command',
         'story',
         'songs',
         'music',
