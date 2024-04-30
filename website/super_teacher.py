@@ -1,6 +1,6 @@
 
 from flask import render_template, request
-from website.auth import requires_super_teacher, pick, is_teacher, send_email
+from website.auth import requires_super_teacher, pick, is_teacher
 import utils
 
 from .database import Database
@@ -140,12 +140,5 @@ class SuperTeacherModule(WebsiteModule):
                 or (target_user.get("support_teacher") and target_user["support_teacher"] == source_user["username"]):
             return "Not possible to add this support teacher", 400
 
-        # send a request/email instead.
-        send_email(
-            source_user.get("email"),
-            "Other Hedy teachers need your help?",
-            target_user.get("email"),
-            f"<p>{source_user['username']} has requested your help as a support teacher.</p>",
-        )
         self.db.update_user(source_user["username"], {"support_teacher": target_user["username"]})
         return "Done", 200
