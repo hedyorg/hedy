@@ -20,7 +20,8 @@ else:
 
 USERS = dynamo.Table(storage, "users", "username", indexes=[
     dynamo.Index("email"),
-    dynamo.Index("epoch", sort_key="created")
+    dynamo.Index("epoch", sort_key="created"),
+    dynamo.Index("pair_with_teacher"),
 ])
 TOKENS = dynamo.Table(storage, "tokens", "id", indexes=[
     dynamo.Index('id'),
@@ -340,6 +341,10 @@ class Database:
     def user_by_email(self, email):
         """Return a user object from the email address."""
         return USERS.get({"email": email.strip().lower()})
+
+    def user_by_pair_with_teacher(self, pair_with_teacher=1):
+        """Return a user who needs pairing with other teachers."""
+        return USERS.get_all({"pair_with_teacher": pair_with_teacher}) or []
 
     def get_token(self, token_id):
         """Load a token from the database."""
