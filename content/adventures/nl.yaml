@@ -4529,23 +4529,6 @@ adventures:
 
                     # Roep de functie op
                     ```
-            14:
-                story_text: "In de vorige levels heb je het spel \"boter, kaas en eieren\" kunnen maken. Nu heb je het `=` teken, het `==` teken en het `!=` teken geleerd. \nJe kunt deze kennis toepassen in het \"boter, kaas en eieren\" spel op deze manier:\n"
-                example_code: |
-                    ```
-                    # Plak je code hier en pas het aan naar level 17
-
-                    # Maak een functie die een winaar uitroepen
-                    {define} winnaar_uitroepen {with} veld, teken:
-                        {if} veld[1] == veld[2] {and} veld[2] == veld[3] {and} veld[1] != '.':
-                            game_over = 'ja'
-                            {print} 'Speler ' teken 'wint!'
-                        {elif}:
-                            _
-                        {else}:
-                            game_over = 'nee'
-                    {return} _
-                    ```
     tic_2:
         name: Boter-kaas-en-eieren 2
         default_save_name: Tic
