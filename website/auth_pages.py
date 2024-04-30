@@ -431,6 +431,7 @@ class AuthModule(WebsiteModule):
             "username": username,
             "password": hashed,
             "email": email,
+            "phone": account.get("phone"),
             "language": account["language"],
             "keyword_language": account["keyword_language"],
             "created": timems(),
@@ -438,6 +439,7 @@ class AuthModule(WebsiteModule):
             "verification_pending": hashed_token,
             "last_login": timems(),
             "pair_with_teacher": 1 if account.get("pair_with_teacher") else 0,
+            "connect_guest_teacher": 1 if account.get("connect_guest_teacher") else 0,
         }
 
         for field in ["country", "birth_year", "gender", "language", "heard_about", "prog_experience",
