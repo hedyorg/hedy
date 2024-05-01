@@ -46,4 +46,4 @@ for snippet in snippets:
             print(snippet.language, all_variables)
 
         except Exception as E:
-            pass
+            print(E)
