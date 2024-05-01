@@ -20,6 +20,7 @@ def get_column_number_by_name(name):
     level_row = [x for x in columns if x['displayName'] == name][0]
     return columns.index(level_row)
 
+
 level_id = get_column_number_by_name('level')
 code_id = get_column_number_by_name('code')
 language_id = get_column_number_by_name('lang')
