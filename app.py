@@ -603,6 +603,8 @@ def parse():
             if transpile_result.has_music:
                 response['has_music'] = True
 
+            response['variables'] = {'name': 'constant', 'age': 'constant'}
+
         except Exception:
             pass
 
