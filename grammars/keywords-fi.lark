@@ -35,7 +35,7 @@ _IN: _SPACE ("listassa" | "in") _SPACE
 _NOT_IN: _SPACE ("ei kohteessa" | "not in") _SPACE
 _IF: ("jos" | "if") _SPACE
 _ELSE: "muuten" | "else"
-_AND: _SPACE ("ja" | "and") _SPACE
+_AND: _SPACE? ("ja" | "and") _SPACE
 _REPEAT: ("toista" | "repeat") _SPACE
 _TIMES: _SPACE ("kertaa" | "times")
 _FOR: ("jokaiselle" | "for") _SPACE
@@ -44,7 +44,7 @@ _TO: _SPACE ("asti" | "to") _SPACE
 _STEP: "askel" | "step"
 _ELIF: _SPACE? ("muutenjos" | "elif") _SPACE
 _INPUT: ("syöte" | "input")
-_OR: _SPACE ("tai" | "or") _SPACE
+_OR: _SPACE? ("tai" | "or") _SPACE
 _WHILE: ("kun" | "while") _SPACE
 _LENGTH: "pituus" | "length"
 _COLOR : ("väri" | "color") _SPACE?

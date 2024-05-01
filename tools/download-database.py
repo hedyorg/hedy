@@ -17,21 +17,22 @@ DDB_DESERIALIZER = TypeDeserializer()
 def main():
 
     REGION = 'eu-west-1'
+    database_name = 'alpha'
 
     defs = TableDefinitions()
-    defs.add('hedy-beta-achievements')
-    defs.add('hedy-beta-adventures')
-    defs.add('hedy-beta-classes')
-    defs.add('hedy-beta-class_customizations')
-    defs.add('hedy-beta-invitations')
-    defs.add('hedy-beta-parsons')
-    defs.add('hedy-beta-program-stats')
-    defs.add('hedy-beta-programs')
-    defs.add('hedy-beta-public_profiles')
-    defs.add('hedy-beta-quiz-stats')
-    defs.add('hedy-beta-quizAnswers')
-    defs.add('hedy-beta-tokens')
-    defs.add('hedy-beta-users')
+    defs.add(f'hedy-{database_name}-achievements')
+    defs.add(f'hedy-{database_name}-adventures')
+    defs.add(f'hedy-{database_name}-classes')
+    defs.add(f'hedy-{database_name}-class_customizations')
+    defs.add(f'hedy-{database_name}-invitations')
+    defs.add(f'hedy-{database_name}-parsons')
+    defs.add(f'hedy-{database_name}-program-stats')
+    defs.add(f'hedy-{database_name}-programs')
+    defs.add(f'hedy-{database_name}-public_profiles')
+    defs.add(f'hedy-{database_name}-quiz-stats')
+    defs.add(f'hedy-{database_name}-quizAnswers')
+    defs.add(f'hedy-{database_name}-tokens')
+    defs.add(f'hedy-{database_name}-users')
 
     parser = argparse.ArgumentParser(description='Download DDB into SQLite')
     subparsers = parser.add_subparsers()
@@ -96,7 +97,13 @@ class TableInserter:
                 table.key_columns + [onetomanycol] if listcol.type.is_set else [])
             print(onetomanytable.table_name)
             cursor.execute(onetomanytable.drop_statement)
-            cursor.execute(onetomanytable.create_statement)
+            try:
+                # The `classes` table contains a list of objects, which this script can't
+                # deal with. Catch the error, but continue.
+                cursor.execute(onetomanytable.create_statement)
+            except Exception as e:
+                print(f'Dropping column {listcol.name} (running \'{onetomanytable.create_statement}\' leads to {e})')
+                continue
 
             one_to_many_data = []
             for row in table_data['rows']:
@@ -110,7 +117,7 @@ class TableInserter:
 
         # Maps (not implemented yet)
         for mapcol in (col for col in columns if col.type.is_map):
-            print(f'Dropping column: {table.original_name}.{mapcol.original_name}')
+            print(f'Dropping column: {table.original_name}.{mapcol.original_name} (no support for map columns)')
 
         self.db.commit()
 
@@ -173,7 +180,10 @@ def determine_columns(rows):
         for key, value in row.items():
             existing_col = columns.get(key)
             if existing_col:
-                existing_col.widen_type(SqlType.of(value))
+                try:
+                    existing_col.widen_type(SqlType.of(value))
+                except RuntimeError:
+                    print(f'Issue in widening {existing_col.name}')
             else:
                 columns[key] = SqlColumn(key, SqlType.of(value))
     return list(columns.values())

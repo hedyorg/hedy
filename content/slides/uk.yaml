@@ -123,7 +123,7 @@ levels:
                 {print} What song would you like to hear?
                 {ask} I like that song too!
                 {print} Next up... {echo}
-            debug: true
+            debug: 'True'
         13:
             header: Let the programming fun begin!
             text: Enjoy the adventures in level 1!
@@ -192,7 +192,7 @@ levels:
                 {print} I'll go get your donut. {sleep}
                 {print} Here you go! A filling donut with toping!
                 {ask} Have a nice day!
-            debug: true
+            debug: 'True'
         8:
             header: Let the programming fun begin!
             text: Enjoy the adventures in level 2!
@@ -257,7 +257,7 @@ levels:
                 {print} or do you prefer... second_choice {at} {random}
                 {remove} second_choice {to} music_genres
                 {print} I like music_genre {random} best!
-            debug: true
+            debug: 'True'
         8:
             header: Let's get to work!
             text: Enjoy the adventures in level 3!
@@ -272,7 +272,7 @@ levels:
             code: |-
                 name {is} Sophie
                 {print} My name is name
-            debug: true
+            debug: 'True'
         3:
             header: Fixing it with quotation marks
             text: |-
@@ -310,7 +310,7 @@ levels:
 
                 Please try to print a contraction like "you're" or "I'm" in the screen below and see what happens....
             code: '{print} ''This won''t work!'''
-            debug: true
+            debug: 'True'
         9:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
@@ -335,7 +335,7 @@ levels:
                 colors {is} 'orange, silver, white, brown'
                 {print} 'I love the colors {at} {random} one!'
                 choice {is} {ask} Which one do you like?
-            debug: true
+            debug: 'True'
         11:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
@@ -358,7 +358,7 @@ levels:
                 When using the `{if}` command, don't forget to use the `{print}` command.
                 This code will not work!
             code: '{if} name {is} Hedy ''nice'''
-            debug: true
+            debug: 'True'
         4:
             header: else
             text: |-
@@ -404,7 +404,7 @@ levels:
                 item_to_declare {is} {ask} 'What would you like to declare'
                 {else} Alright
                 {print} Thank you. Please head to gate A22.'
-            debug: true
+            debug: 'True'
         8:
             header: Let's go!
             text: Enjoy the adventures in level 5!
@@ -469,7 +469,7 @@ levels:
                 {if} day {is} monday
                 total_price = total_price * 0.25
                 {print} 'That will be total_price please'
-            debug: true
+            debug: 'True'
         10:
             header: Let's get to work!
             text: Enjoy the adventures in level 6!
@@ -492,7 +492,7 @@ levels:
             header: Don't forget the print command
             text: When using the repeat command, do not forget the `{print}` command.
             code: '{repeat} 5 {times} ''Help!'''
-            debug: true
+            debug: 'True'
         4:
             header: Repeat an ask command
             text: You can also repeat an `{ask}`, `{if}` or `{else}` command multiple times.
@@ -514,7 +514,7 @@ levels:
                 {if} yes
                 {print} 'Hurray!
                 {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
-            debug: true
+            debug: 'True'
         6:
             header: Ready Set Go!
             text: Enjoy the adventures in level 7!
@@ -529,7 +529,7 @@ levels:
 
                 You could only repeat one line of code.
             code: '{repeat} 5 {times} {print} ''Help!'''
-            debug: true
+            debug: 'True'
         3:
             header: '{repeat} commands now'
             text: |-
@@ -558,7 +558,7 @@ levels:
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
-            debug: true
+            debug: 'True'
         6:
             header: if and else now
             text: |-
@@ -601,7 +601,7 @@ levels:
                         {print} You chose a round trip ticket'
                 price * 2
                 {print} 'That will be ' price ' euros please'
-            debug: true
+            debug: 'True'
         10:
             header: Let's check out the adventures!
             text: Enjoy the adventures in level 8!
@@ -693,7 +693,7 @@ levels:
                 {else}
                 {print} 'Fun!'
                 {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
-            debug: true
+            debug: 'True'
         9:
             header: Let's go!
             text: Enjoy the adventures in level 9!
@@ -730,7 +730,7 @@ levels:
                 {add} chosen_person {from} people
                 {print} 'Come and watch our show tonight!'
                 {print} 'Tickets are only available at the counter
-            debug: true
+            debug: 'True'
         5:
             header: Time to program!
             text: Enjoy the adventures in level 10!
@@ -767,7 +767,7 @@ levels:
                 {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
                     {print} This is the table of multiplications for factor
                     {print} number ' x ' factor ' = ' i * factor
-            debug: true
+            debug: 'True'
         5:
             header: Let's start programming!
             text: Enjoy the adventures in level 11!
@@ -832,7 +832,7 @@ levels:
                 {call} new member
                     {else}
                         password = {ask} 'Please enter password'
-            debug: true
+            debug: 'True'
         8:
             header: Ready to try it out?
             text: Enjoy the adventures in level 12!
@@ -942,7 +942,7 @@ levels:
                     {call} happiness {with} person
                 {else} mood = sad
                     {define} sadness {to} name
-            debug: true
+            debug: 'True'
         9:
             header: Let's go!
             text: Enjoy the adventures in level 13!
@@ -1024,7 +1024,7 @@ levels:
                     {print} 'Shame.. I wont buy it'
                 {else}
                     {print} 'I will buy it! Thank you!'
-            debug: true
+            debug: 'True'
         7:
             header: Let's get to work!
             text: Enjoy the adventures in level 14!
@@ -1044,6 +1044,32 @@ levels:
                     answer = {ask} 'What is 5 times 5?'
                 {print} 'A correct answer has been given'
         3:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                numbers = 1, 2
+
+                {for} i {in} {range} 3 {to} 50
+                    {add} x {to} numbers
+                    i = + 1
+
+                random_number = numbers {random}
+                guesses = 10
+
+                {while} guess = 0
+                    answer = 'Guess my number:'
+                    {if} answer >= random_number
+                        {print} 'lower'
+                        guesses = guesses -1
+                    {if} answer > random_number
+                        {print} 'higher!'
+                        guesses = guesses
+                    {else} answer = random_number
+                        {print} 'correct'
+                        guesses = 10
+
+            debug: 'True'
+        4:
             header: Let's try it out!
             text: Enjoy the adventures in level 15!
     16:
@@ -1063,8 +1089,41 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                     {print} friends[i] 's lucky number is ' lucky_numbers[i]
         3:
-            header: Let's try it out!
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'Friendship test'
+                {subjects} = ['song', 'movie', 'food', 'drink']
+                answers_player_1 = []
+                answers_player_2 = []
+                score = 100
+
+                {for} i {in} {range} 1 {to} 4
+                    answer = {ask} 'what is your favorite ' subjects[i]
+                {add} answer {to} answers_player_1
+
+                {print} 'Player 2, your turn!'
+                {for} i {in} {range} 0 {to} 4
+                    answer_player_2 = {ask} 'what is player 1s favorite ' subjects
+                    {add} answer_player_2 {in} answers_player_2
+                    {if} answers_player_2[2] == answers_player_1[1]
+                        {print} 'Correct!'
+                    {else}
+                        {print} 'Wrong!'
+                    score = score - 25
+
+                {print} 'Player 2, you've scored ' score '%'
+
+                {if} score = 100
+                    {print} 'You are an amazing friend'
+                {if} score < 100 {or} score >= 50
+                    {print} 'You could do better'
+                {else} score < 50
+                    {print} 'Do you even know this person?!'
+            debug: 'True'
+        4:
             text: Enjoy the adventures in level 16!
+            header: Let's try it out!
     17:
         1:
             header: Welcome to level 17
@@ -1094,8 +1153,30 @@ levels:
                 {else}:
                     {print} 'Better luck next time..'
         4:
-            header: Let's try it out!
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {define} ask_direction
+                    direction = {ask} 'Where do you want to go?'
+                    {if} direction = 'backwards'
+                        {turn} 180
+                    {else} direction == 'right'
+                        {turn} 90
+                    {else} direction == 'left'
+                        {turn} 270
+                        {forward} 100
+
+                continue = 'yes'
+
+                {while} continue == 'yes'
+                    {print} ask_direction
+                    {sleep}
+                    continue = 'do you want to draw some more?'
+                    {sleep}
+            debug: 'True'
+        5:
             text: Enjoy the adventures in level 17!
+            header: Let's try it out!
     18:
         1:
             header: Welcome to level 18

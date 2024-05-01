@@ -8,16 +8,15 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-04-01 11:42+0000\n"
+"PO-Revision-Date: 2024-05-01 06:30+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: uk <LL@li.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.5-dev\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.5.3-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -26,6 +25,10 @@ msgstr "You tried to use the variable {name} on line {access_line_number}, but y
 
 msgid "Cyclic Var Definition"
 msgstr "Ім'я `{variable}` повинно бути задане до того, як ви зможете використовувати її в правій частині команди `{is}`."
+
+#, fuzzy
+msgid "Else Without If Error"
+msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
 
 #, fuzzy
 msgid "Function Undefined"
@@ -67,6 +70,10 @@ msgstr "Схоже, що ви забули використати команду
 #, fuzzy
 msgid "Missing Additional Command"
 msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+
+#, fuzzy
+msgid "Missing Colon Error"
+msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
 
 msgid "Missing Command"
 msgstr "Схоже, що ви забули використати команду в рядку {line_number}."
@@ -429,6 +436,10 @@ msgstr "Common errors"
 msgid "congrats_message"
 msgstr "Вітаємо, {username}, ви успішно прошли курс Hedy!"
 
+#, fuzzy
+msgid "connect_guest_teacher"
+msgstr "I would like to be connected with a guest teacher who can give a few lessons"
+
 msgid "content_invalid"
 msgstr "Ця пригода є недійсною."
 
@@ -525,8 +536,12 @@ msgstr "Кастомізація класу"
 msgid "dash"
 msgstr "тире"
 
-msgid "default_403"
+msgid "default_401"
 msgstr "Схоже, ви не уповноважені..."
+
+#, fuzzy
+msgid "default_403"
+msgstr "Looks like this action is forbidden..."
 
 msgid "default_404"
 msgstr "Нам не вдалося знайти цю сторінку..."
@@ -570,6 +585,10 @@ msgstr "Безпосередньо відкрити"
 #, fuzzy
 msgid "disable"
 msgstr "Disable"
+
+#, fuzzy
+msgid "disable_explore_page"
+msgstr "Disable explore page"
 
 #, fuzzy
 msgid "disable_parsons"
@@ -985,6 +1004,10 @@ msgid "keyword_language_invalid"
 msgstr "Please select a valid keyword language (select English or your own language)."
 
 #, fuzzy
+msgid "landcode_phone_number"
+msgstr "Please also add your country's landcode"
+
+#, fuzzy
 msgid "language"
 msgstr "Language"
 
@@ -1196,8 +1219,8 @@ msgid "more_options"
 msgstr "More options"
 
 #, fuzzy
-msgid "multiple_levels_warning"
-msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
+msgid "multiple_keywords_warning"
+msgstr "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}"
 
 #, fuzzy
 msgid "my_account"
@@ -1485,6 +1508,10 @@ msgid "personal_text_invalid"
 msgstr "Ваш особистий текст є недійсним."
 
 #, fuzzy
+msgid "phone_number"
+msgstr "Phone number"
+
+#, fuzzy
 msgid "postfix_classname"
 msgstr "Postfix classname"
 
@@ -1736,9 +1763,6 @@ msgstr "Run code"
 #, fuzzy
 msgid "runs_over_time"
 msgstr "Runs over time"
-
-msgid "save"
-msgstr "Зберегти"
 
 #, fuzzy
 msgid "save_parse_warning"
@@ -2204,6 +2228,14 @@ msgid "unauthorized"
 msgstr "У вас немає прав доступу до цієї сторінки"
 
 #, fuzzy
+msgid "unfavourite_confirm"
+msgstr "Are you sure you want to unfavourite this program?"
+
+#, fuzzy
+msgid "unfavourite_success"
+msgstr "Your program is unfavourited."
+
+#, fuzzy
 msgid "unique_usernames"
 msgstr "All usernames need to be unique."
 
@@ -2230,10 +2262,6 @@ msgstr "Unsubmitted"
 #, fuzzy
 msgid "update_adventure_prompt"
 msgstr "Are you sure you want to update this adventure?"
-
-#, fuzzy
-msgid "update_profile"
-msgstr "Update profile"
 
 #, fuzzy
 msgid "update_public"
@@ -2526,4 +2554,13 @@ msgstr "Your program"
 
 #~ msgid "nested blocks"
 #~ msgstr "блок в блоці"
+
+#~ msgid "save"
+#~ msgstr "Зберегти"
+
+#~ msgid "update_profile"
+#~ msgstr "Update profile"
+
+#~ msgid "multiple_levels_warning"
+#~ msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
 

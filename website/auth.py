@@ -197,6 +197,15 @@ def has_public_profile(user):
 # Thanks to https://stackoverflow.com/a/34499643
 
 
+def hide_explore(user):
+    if 'username' not in user or user.get('username') == '':
+        return False
+    username = user.get('username')
+    customizations = g.db.get_student_class_customizations(username)
+    hide_explore = True if customizations and 'hide_explore' in customizations.get('other_settings') else False
+    return hide_explore
+
+
 def requires_login(f):
     """Decoractor to indicate that a particular route requires the user to be logged in.
 
@@ -221,7 +230,7 @@ def requires_login(f):
         just_logged_out = session.pop(JUST_LOGGED_OUT, False)
         print('session after', session)
         if not is_user_logged_in():
-            return redirect('/') if just_logged_out else utils.error_page(error=403)
+            return redirect('/') if just_logged_out else utils.error_page(error=401)
         # The reason we pass by keyword argument is to make this
         # work logically both for free-floating functions as well
         # as [unbound] class methods.
@@ -258,7 +267,7 @@ def requires_admin(f):
     def inner(*args, **kws):
         just_logged_out = session.pop(JUST_LOGGED_OUT, False)
         if not is_user_logged_in() or not is_admin(current_user()):
-            return redirect('/') if just_logged_out else utils.error_page(error=403, ui_message=gettext("unauthorized"))
+            return redirect('/') if just_logged_out else utils.error_page(error=401, ui_message=gettext("unauthorized"))
         return f(*args, user=current_user(), **kws)
 
     return inner
@@ -274,7 +283,7 @@ def requires_teacher(f):
     def inner(*args, **kws):
         just_logged_out = session.pop(JUST_LOGGED_OUT, False)
         if not is_user_logged_in() or not is_teacher(current_user()):
-            return redirect('/') if just_logged_out else utils.error_page(error=403, ui_message=gettext("unauthorized"))
+            return redirect('/') if just_logged_out else utils.error_page(error=401, ui_message=gettext("unauthorized"))
         return f(*args, user=current_user(), **kws)
 
     return inner

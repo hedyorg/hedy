@@ -7,7 +7,8 @@ import { startTeacherTutorial } from './tutorials/tutorial';
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
 import { CustomWindow } from './custom-window';
-import { addCurlyBracesToCode } from './adventure';
+import { addCurlyBracesToCode, addCurlyBracesToKeyword } from './adventure';
+import { autoSave } from './autosave';
 
 declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
@@ -109,25 +110,6 @@ function apiDuplicateClass(id: string, prompt: string, second_teacher: boolean, 
   });
 }
 
-export function delete_class(id: string, prompt: string) {
-  modal.confirm (prompt, function () {
-    $.ajax({
-      type: 'DELETE',
-      url: '/class/' + id,
-      contentType: 'application/json',
-      dataType: 'json'
-    }).done(function(response) {
-      if (response.achievement) {
-        showAchievements(response.achievement, true, '');
-      } else {
-        location.reload();
-      }
-    }).fail(function(err) {
-      modal.notifyError(err.responseText);
-    });
-  });
-}
-
 export function join_class(id: string, name: string) {
   $.ajax({
       type: 'POST',
@@ -225,10 +207,14 @@ function update_db_adventure(adventure_id: string) {
   const minLevel = Math.min(...levels.map((el) => Number(el)));
   let snippets: string[] = [] ;
   let snippetsFormatted: string[] = [];
+  let keywords: string[] = []
+  let keywordsFormatted: string[] = []
 
   for (const tag of html.getElementsByTagName('code')) {
     if (tag.className === "language-python") {
       snippets.push(tag.innerText);
+    } else {
+      keywords.push(tag.innerText);
     }
   }
 
@@ -236,12 +222,17 @@ function update_db_adventure(adventure_id: string) {
     snippetsFormatted.push(addCurlyBracesToCode(snippet, minLevel, $('#language').val() as string || 'en'));
   }
 
+  for (const keyword of keywords) {
+    keywordsFormatted.push(addCurlyBracesToKeyword(keyword))
+  }
+
   let i = 0;
+  let j = 0;
   for (const tag of html.getElementsByTagName('code')) {
     if (tag.className === "language-python") {
-      tag.innerText = snippetsFormatted[i]
-      console.log(tag.outerHTML)
-      i++;
+      tag.innerText = snippetsFormatted[i++]
+    } else {
+      tag.innerText = keywordsFormatted[j++]
     }
   }
   // We have to replace <br> for newlines, because the serializer swithces them around
@@ -341,21 +332,6 @@ export function preview_adventure() {
     });
 }
 
-export function delete_adventure(adventure_id: string, prompt: string) {
-    modal.confirm(prompt, function () {
-        $.ajax({
-            type: 'DELETE',
-            url: '/for-teachers/customize-adventure/' + adventure_id,
-            contentType: 'application/json',
-            dataType: 'json'
-        }).done(function () {
-            window.location.href = '/for-teachers';
-        }).fail(function (err) {
-            modal.notifyError(err.responseText);
-        });
-    });
-}
-
 export function change_password_student(username: string, enter_password: string, password_prompt: string) {
     modal.prompt ( enter_password + " " + username + ":", '', function (password) {
         modal.confirm (password_prompt, function () {
@@ -447,18 +423,17 @@ export function save_customizations(class_id: string) {
 }
 
 export function restore_customization_to_default(prompt: string) {
-    modal.confirm (prompt, function () {
+    modal.confirm (prompt, async function () {
       // We need to know the current level that is selected by the user
       // so we can know which level to draw in the template  
       let active_level_id : string = $('[id^=level-]')[0].id;
       let active_level = active_level_id.split('-')[1]
-      htmx.ajax(
-        'POST',
-        `/for-teachers/restore-customizations?level=${active_level}`,
-        '#adventure-dragger'
-      ).then(() => {
-        // Restore all the options other than the adventures.
-        // The adventures will be restored to the default using an HTMX call to the server
+      try {
+        await htmx.ajax(
+          'POST',
+          `/for-teachers/restore-customizations?level=${active_level}`,
+          '#adventure-dragger'
+        )
         $('.other_settings_checkbox').prop('checked', false);
         // Remove the value from all input fields -> reset to text to show placeholder
         $('.opening_date_input').prop("type", "text")
@@ -476,7 +451,9 @@ export function restore_customization_to_default(prompt: string) {
         $('[id^=enable_level_]').prop('checked', true);                
         setLevelStateIndicator(active_level);
         modal.notifySuccess(ClientMessages.customization_deleted);          
-      })
+      } catch (error) {
+        console.error(error);
+      }
     });
 }
 
@@ -731,6 +708,12 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
           var level = $(this).val() as string;
           setLevelStateIndicator(level);
       });
+
+      // Autosave customize class page
+      // the third argument is used to trigger a GET request on the specified element
+      // if the trigger (input in this case) is changed.
+      autoSave("customize_class", null, {elementId: "levels-dropdown", trigger: "input"});
+
   });
 }
 

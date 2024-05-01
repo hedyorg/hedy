@@ -1,4 +1,4 @@
-from flask import request, g
+from flask import make_response, request, g
 from flask_babel import gettext
 import jinja_partials
 import uuid
@@ -28,7 +28,8 @@ class TagsModule(WebsiteModule):
     def get_public_tags(self, user, adventure_id):
         public_tags = self.db.read_public_tags()
         adventure_id = request.args.get("adventure_id")
-        if adventure_id:
+        adventure = self.db.get_adventure(adventure_id)
+        if adventure:
             adventure = self.db.get_adventure(adventure_id)
             # exclude current adventure's tags
             public_tags = list(filter(lambda t: t["name"] not in adventure.get("tags", []), public_tags))
@@ -88,7 +89,8 @@ class TagsModule(WebsiteModule):
         # This only deletes a tag from an adventure.
         # TODO: perhaps allow admin to permanently delete a tag.
         if not tag or not adventure_id:
-            return {}, 200
+            # is this not suppossed to be an error response?
+            return make_response('', 204)
 
         tag_name = tag.strip()
         db_tag = self.db.read_tag(tag_name)

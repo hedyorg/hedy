@@ -8,9 +8,9 @@ from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
 from os import path, getenv
 
-import warnings
 import hedy
 import hedy_error
+import hedy_grammar
 import hedy_translation
 from utils import atomic_write_file
 from hedy_content import ALL_KEYWORD_LANGUAGES
@@ -169,22 +169,6 @@ for lang_, keywords in KEYWORDS.items():
         indent_keywords[lang_].append(keywords.get(keyword))
 
 
-# These are the preprocessor rules that we use to specify changes in the rules that
-# are expected to work across several rules
-# Example
-# for<needs_colon> instead of defining the whole rule again.
-
-
-def needs_colon(rule):
-    pos = rule.find('_EOL (_SPACE command)')
-    return f'{rule[0:pos]} _COLON {rule[pos:]}'
-
-
-PREPROCESS_RULES = {
-    'needs_colon': needs_colon
-}
-
-
 def make_value_error(command, tip, lang, value='{}'):
     return make_error_text(exceptions.RuntimeValueException(command=command, value=value, tip=tip), lang)
 
@@ -229,6 +213,9 @@ class Command:
     repeat = 'repeat'
     for_list = 'for in'
     for_loop = 'for in range'
+    if_ = 'if'
+    else_ = 'else'
+    elif_ = 'elif'
     addition = '+'
     subtraction = '-'
     multiplication = '*'
@@ -244,6 +231,7 @@ class Command:
     call = 'call'
     returns = 'return'
     play = 'play'
+    while_ = 'while'
 
 
 translatable_commands = {Command.print: ['print'],
@@ -345,12 +333,14 @@ def command_make_color_local(language):
 # Commands and their types per level (only partially filled!)
 commands_and_types_per_level = {
     Command.print: {
-        1: [HedyType.string, HedyType.integer, HedyType.input],
+        1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.list],
+        4: [HedyType.string, HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
         16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]
     },
     Command.ask: {
-        1: [HedyType.string, HedyType.integer, HedyType.input],
+        1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.list],
+        4: [HedyType.string, HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
         16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]
     },
@@ -358,8 +348,8 @@ commands_and_types_per_level = {
                    2: [HedyType.integer, HedyType.input],
                    12: [HedyType.integer, HedyType.input, HedyType.float]
                    },
-    Command.color: {1: english_colors,
-                    2: [english_colors, HedyType.string, HedyType.input]},
+    Command.color: {1: [english_colors, HedyType.list],
+                    2: [english_colors, HedyType.string, HedyType.input, HedyType.list]},
     Command.forward: {1: [HedyType.integer, HedyType.input],
                       12: [HedyType.integer, HedyType.input, HedyType.float]
                       },
@@ -810,7 +800,8 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree, type_)
 
     def text_in_quotes(self, tree):
-        return self.to_typed_tree(tree.children[0], HedyType.string)
+        t = tree.children[0] if tree.children else tree
+        return self.to_typed_tree(t, HedyType.string)
 
     def var_access(self, tree):
         return self.to_typed_tree(tree, HedyType.string)
@@ -1269,6 +1260,9 @@ class IsValid(Filter):
             tip='no_more_flat_if',
             line_number=meta.line)
 
+    def error_else_no_if(self, meta, args):
+        raise exceptions.ElseWithoutIfException(meta.line)
+
     def error_for_missing_in(self, meta, args):
         raise exceptions.MissingAdditionalCommand(command='for', missing_command='in', line_number=meta.line)
 
@@ -1287,6 +1281,40 @@ class IsValid(Filter):
     def error_if_pressed_missing_else(self, meta, args):
         raise exceptions.MissingElseForPressitException(
             command='ifpressed_else', level=self.level, line_number=meta.line)
+
+    def if_pressed_no_colon(self, meta, args):
+        raise exceptions.MissingColonException(command=Command.if_, line_number=meta.line)
+
+    def if_pressed_elifs_no_colon(self, meta, args):
+        # if_pressed_elifs starts with _EOL, so we need to add +1 to its line
+        raise exceptions.MissingColonException(command=Command.elif_, line_number=meta.line+1)
+
+    def if_pressed_elses_no_colon(self, meta, args):
+        # if_pressed_elses starts with _EOL, so we need to add +1 to its line
+        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line+1)
+
+    def ifs_no_colon(self, meta, args):
+        raise exceptions.MissingColonException(command=Command.if_, line_number=meta.line)
+
+    def elifs_no_colon(self, meta, args):
+        # elifs starts with _EOL, so we need to add +1 to its line
+        raise exceptions.MissingColonException(command=Command.elif_, line_number=meta.line+1)
+
+    def elses_no_colon(self, meta, args):
+        # elses starts with _EOL, so we need to add +1 to its line
+        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line+1)
+
+    def for_list_no_colon(self, meta, args):
+        raise exceptions.MissingColonException(command=Command.for_list, line_number=meta.line)
+
+    def for_loop_no_colon(self, meta, args):
+        raise exceptions.MissingColonException(command=Command.for_loop, line_number=meta.line)
+
+    def while_loop_no_colon(self, meta, args):
+        raise exceptions.MissingColonException(command=Command.while_, line_number=meta.line)
+
+    def define_no_colon(self, meta, args):
+        raise exceptions.MissingColonException(command=Command.define, line_number=meta.line)
 
     # other rules are inherited from Filter
 
@@ -1385,13 +1413,27 @@ class ConvertToPython(Transformer):
         else:
             return ""
 
-    def is_var_defined_before_access(self, variable_name, access_line_number):
-        all_names_before_access_line = [a.name for a in self.lookup if a.definition_line <= access_line_number]
-        return variable_name in all_names_before_access_line
-
     def is_var_in_lookup(self, variable_name):
         all_names = [a.name for a in self.lookup]
         return variable_name in all_names
+
+    # The var_to_escape parameter allows the ask command to force the variable defined
+    # by itself, i.e. the left-hand-side var, to not be defined on the same line
+    def is_var_defined_before_access(self, variable_name, access_line_number, var_to_escape=''):
+        def is_before(entry, line):
+            return entry.definition_line <= line if entry.name != var_to_escape else entry.definition_line < line
+
+        all_names_before_access_line = [entry.name for entry in self.lookup if is_before(entry, access_line_number)]
+        return variable_name in all_names_before_access_line
+
+    # In level 3, a list name without index or random should be treated as a literal string, e.g.
+    #   color = red, blue, yellow
+    #   print What is your favorite color? <- color is not a var reference here, but the text 'color'
+    def is_unreferenced_list(self, variable_name):
+        for entry in self.lookup:
+            if entry.name == escape_var(variable_name):
+                return entry.type_ == HedyType.list and '[' not in variable_name
+        return False
 
     # default for line number is max lines so if it is not given, there
     # is no check on whether the var is defined
@@ -1436,9 +1478,10 @@ class ConvertToPython(Transformer):
             return escape_var(arg)
         return arg
 
-    def process_variable_for_fstring(self, variable_name, access_line_number=100):
-        if self.is_var_in_lookup(variable_name) and self.is_var_defined_before_access(variable_name,
-                                                                                      access_line_number):
+    def process_variable_for_fstring(self, variable_name, access_line_number=100, var_to_escape=''):
+
+        if (self.is_var_defined_before_access(variable_name, access_line_number, var_to_escape) and
+                not self.is_unreferenced_list(variable_name)):
             self.add_variable_access_location(variable_name, access_line_number)
             return "{" + escape_var(variable_name) + "}"
         else:
@@ -1787,34 +1830,35 @@ class ConvertToPython_2(ConvertToPython_1):
         return self.var_access(meta, args)
 
     def print(self, meta, args):
-        args_new = []
-        for a in args:
-            # list access has been already rewritten since it occurs lower in the tree
-            # so when we encounter it as a child of print it will not be a subtree, but
-            # transpiled code (for example: random.choice(dieren))
-            # therefore we should not process it anymore and thread it as a variable:
-            # we set the line number to 100 so there is never an issue with variable access before
-            # assignment (regular code will not work since random.choice(dieren) is never defined as var as such)
-            if "random.choice" in a or "[" in a:
-                args_new.append(self.process_variable_for_fstring(a, meta.line))
-            else:
-                # this regex splits words from non-letter characters, such that name! becomes [name, !]
-                res = regex.findall(
-                    r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+",
-                    a)
-                args_new.append(''.join([self.process_variable_for_fstring(x, meta.line) for x in res]))
-        exception = self.make_index_error_check_if_list(args)
+        args_new = [self.make_print_ask_arg(a, meta) for a in args]
         argument_string = ' '.join(args_new)
         if not self.microbit:
+            exception = self.make_index_error_check_if_list(args)
             return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
         else:
-            return textwrap.dedent(f"""\
-                    display.scroll('{argument_string}')""")
+            return f"""display.scroll('{argument_string}')"""
 
     def ask(self, meta, args):
         var = args[0]
-        all_parameters = ["'" + process_characters_needing_escape(a) + "'" for a in args[1:]]
-        return f'{var} = input(' + '+'.join(all_parameters) + ")" + self.add_debug_breakpoint()
+        args_new = [self.make_print_ask_arg(a, meta, var) for a in args[1:]]
+        argument_string = ' '.join(args_new)
+        exception = self.make_index_error_check_if_list(args)
+        return exception + f"{var} = input(f'{argument_string}'){self.add_debug_breakpoint()}"
+
+    def make_print_ask_arg(self, arg, meta, var_to_escape=''):
+        # list access has been already rewritten since it occurs lower in the tree
+        # so when we encounter it as a child of print it will not be a subtree, but
+        # transpiled code (for example: random.choice(dieren))
+        # therefore we should not process it anymore and thread it as a variable:
+        # we set the line number to 100 so there is never an issue with variable access before
+        # assignment (regular code will not work since random.choice(dieren) is never defined as var as such)
+        if "random.choice" in arg or "[" in arg:
+            return self.process_variable_for_fstring(arg, meta.line, var_to_escape)
+
+        # this regex splits words from non-letter characters, such that name! becomes [name, !]
+        p = r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+"
+        res = regex.findall(p, arg)
+        return ''.join([self.process_variable_for_fstring(x, meta.line, var_to_escape) for x in res])
 
     def forward(self, meta, args):
         if len(args) == 0:
@@ -1986,7 +2030,8 @@ class ConvertToPython_4(ConvertToPython_3):
     def ask(self, meta, args):
         var = args[0]
         argument_string = self.print_ask_args(meta, args[1:])
-        return f"{var} = input(f'{argument_string}'){self.add_debug_breakpoint()}"
+        index_check = self.make_index_error_check_if_list(args)
+        return index_check + f"{var} = input(f'{argument_string}'){self.add_debug_breakpoint()}"
 
     def error_print_nq(self, meta, args):
         return ConvertToPython_2.print(self, meta, args)
@@ -2424,7 +2469,14 @@ class ConvertToPython_12(ConvertToPython_11):
     def returns(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
         exception = self.make_index_error_check_if_list(args)
-        return exception + f"return f'''{argument_string}'''"
+        return exception + textwrap.dedent(f"""\
+            try:
+              return int(f'''{argument_string}''')
+            except ValueError:
+              try:
+                return float(f'''{argument_string}''')
+              except ValueError:
+                return f'''{argument_string}'''""")
 
     def number(self, meta, args):
         # try all ints? return ints
@@ -2447,7 +2499,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def text_in_quotes(self, meta, args):
         # We need to re-add the quotes, so that the Python code becomes name = 'Jan' or "Jan's"
-        text = args[0]
+        text = args[0] if args else ''
         if "'" in text:
             return f'"{text}"'
         return f"'{text}'"
@@ -2470,17 +2522,16 @@ class ConvertToPython_12(ConvertToPython_11):
     def ask(self, meta, args):
         var = args[0]
         argument_string = self.print_ask_args(meta, args[1:])
-        assign = f"{var} = input(f'''{argument_string}''')" + self.add_debug_breakpoint()
-
-        return textwrap.dedent(f"""\
-        {assign}
-        try:
-          {var} = int({var})
-        except ValueError:
-          try:
-            {var} = float({var})
-          except ValueError:
-            pass""")  # no number? leave as string
+        exception = self.make_index_error_check_if_list(args)
+        return exception + textwrap.dedent(f"""\
+            {var} = input(f'''{argument_string}'''){self.add_debug_breakpoint()}
+            try:
+              {var} = int({var})
+            except ValueError:
+              try:
+                {var} = float({var})
+              except ValueError:
+                pass""")  # no number? leave as string
 
     def assign_list(self, meta, args):
         parameter = args[0]
@@ -2731,129 +2782,6 @@ class ConvertToPython_18(ConvertToPython_17):
         return self.print(meta, args)
 
 
-def get_rule_from_string(s):
-    parts = s.split(':')
-    # get part before and after : (this is a join because there can be : in the rule)
-    if len(parts) <= 1:
-        return s, s
-    return parts[0], ''.join(parts[1])
-
-
-def merge_grammars(grammar_text_1, grammar_text_2):
-    # this function takes two grammar files and merges them into one
-    # rules that are redefined in the second file are overridden
-    # rules that are new in the second file are added (remaining_rules_grammar_2)
-    merged_grammar = []
-
-    deletables = []
-    # this list collects rules we no longer need,
-    # they will be removed when we encounter them
-
-    rules_grammar_1 = grammar_text_1.split('\n')
-    remaining_rules_grammar_2 = grammar_text_2.split('\n')
-    for line_1 in rules_grammar_1:
-        if line_1 == '' or line_1[0] == '/':  # skip comments and empty lines:
-            continue
-
-        name_1, definition_1 = get_rule_from_string(line_1)
-
-        rules_grammar_2 = grammar_text_2.split('\n')
-        override_found = False
-        for line_2 in rules_grammar_2:
-            if line_2 == '' or line_2[0] == '/':  # skip comments and empty lines:
-                continue
-
-            needs_preprocessing = re.match(r'((\w|_)+)<((\w|_)+)>', line_2)
-            if needs_preprocessing:
-                name_2 = f'{needs_preprocessing.group(1)}'
-                processor = needs_preprocessing.group(3)
-            else:
-                name_2, definition_2 = get_rule_from_string(line_2)
-
-            if name_1 == name_2:
-                override_found = True
-                if needs_preprocessing:
-                    definition_2 = PREPROCESS_RULES[processor](definition_1)
-                    line_2_processed = f'{name_2}: {definition_2}'
-                else:
-                    line_2_processed = line_2
-                if definition_1.strip() == definition_2.strip():
-                    warn_message = f"The rule {name_1} is duplicated: {definition_1} and {definition_2}. Please check!"
-                    warnings.warn(warn_message)
-                # Used to compute the rules that use the merge operators in the grammar, namely +=, -= and >>
-                new_rule, new_deletables = merge_rules_operator(definition_1, definition_2, name_1, line_2_processed)
-                if new_deletables:
-                    deletables += new_deletables
-                # Already processed, so remove it
-                remaining_rules_grammar_2.remove(line_2)
-                break
-
-        # new rule found? print that. nothing found? print org rule
-        if override_found:
-            merged_grammar.append(new_rule)
-        else:
-            merged_grammar.append(line_1)
-
-    # all rules that were not overlapping are new in the grammar, add these too
-    for rule in remaining_rules_grammar_2:
-        if not (rule == '' or rule[0] == '/'):
-            merged_grammar.append(rule)
-
-    merged_grammar = sorted(merged_grammar)
-    # filter deletable rules
-    rules_to_keep = [rule for rule in merged_grammar if get_rule_from_string(rule)[0] not in deletables]
-    return '\n'.join(rules_to_keep)
-
-
-ADD_GRAMMAR_MERGE_OP = '+='
-REMOVE_GRAMMAR_MERGE_OP = '-='
-LAST_GRAMMAR_MERGE_OP = '>>'
-GRAMMAR_MERGE_OPERATORS = [ADD_GRAMMAR_MERGE_OP, REMOVE_GRAMMAR_MERGE_OP, LAST_GRAMMAR_MERGE_OP]
-
-
-def merge_rules_operator(prev_definition, new_definition, name, complete_line):
-    op_to_arg = get_operator_to_argument(new_definition)
-
-    add_arg = op_to_arg.get(ADD_GRAMMAR_MERGE_OP, '')
-    remove_arg = op_to_arg.get(REMOVE_GRAMMAR_MERGE_OP, '')
-    last_arg = op_to_arg.get(LAST_GRAMMAR_MERGE_OP, '')
-    remaining_commands = get_remaining_rules(prev_definition, remove_arg, last_arg)
-    ordered_commands = split_rule(remaining_commands, add_arg, last_arg)
-
-    new_rule = f"{name}: {' | '.join(ordered_commands)}" if bool(op_to_arg) else complete_line
-    deletable = split_rule(remove_arg)
-    return new_rule, deletable
-
-
-def get_operator_to_argument(definition):
-    # Creates a map of all used operators and their respective arguments e.g. {'+=': 'print | play', '>>': 'echo'}
-    operator_to_index = [(op, definition.find(op)) for op in GRAMMAR_MERGE_OPERATORS if op in definition]
-    result = {}
-    for i, (op, index) in enumerate(operator_to_index):
-        start_index = index + len(op)
-        if i + 1 < len(operator_to_index):
-            _, next_index = operator_to_index[i + 1]
-            result[op] = definition[start_index:next_index].strip()
-        else:
-            result[op] = definition[start_index:].strip()
-    return result
-
-
-def get_remaining_rules(orig_def, *sub_def):
-    original_commands = split_rule(orig_def)
-    commands_after_minus = split_rule(*sub_def)
-    misses = [c for c in commands_after_minus if c not in original_commands]
-    if misses:
-        raise Exception(f"Command(s) {'|'.join(misses)} do not exist in the previous definition")
-    remaining_commands = [cmd for cmd in original_commands if cmd not in commands_after_minus]
-    remaining_commands = ' | '.join(remaining_commands)  # turn the result list into a string
-    return remaining_commands
-
-
-def split_rule(*rules):
-    return [c.strip() for rule in rules for c in rule.split('|') if c.strip() != '']
-
-
 # this is only a couple of MB in total, safe to cache
 @cache
 def create_grammar(level, lang, skip_faulty):
@@ -2863,7 +2791,7 @@ def create_grammar(level, lang, skip_faulty):
     # then keep merging new grammars in
     for i in range(2, level + 1):
         grammar_text_i = get_additional_rules_for_level(i)
-        merged_grammars = merge_grammars(merged_grammars, grammar_text_i)
+        merged_grammars = hedy_grammar.merge_grammars(merged_grammars, grammar_text_i)
 
     # keyword and other terminals never have mergable rules, so we can just add them at the end
     keywords = get_keywords_for_language(lang)

@@ -21,7 +21,7 @@ describe('Is able to add student by name', () => {
 
         if ($div.text().includes('student5')){
           cy.get('#remove-student').click();
-          cy.get('#modal-yes-button').click();
+          cy.get('[data-cy="modal_yes_button"]').click();
         }
     })
 

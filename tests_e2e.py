@@ -232,7 +232,7 @@ class AuthHelper(unittest.TestCase):
 
     def destroy_current_user(self):
         assert self.username is not None
-        self.post_data('auth/destroy', '')
+        self.post_data('auth/destroy', '', 204)
         # Remove any records of this user
         USERS.pop(self.username)
 
@@ -585,14 +585,14 @@ class TestAuth(AuthHelper):
 
         # WHEN logging out the user
         # THEN receive an OK response code from the server
-        self.post_data('auth/logout', '')
+        self.post_data('auth/logout', '', 204)
 
         # WHEN retrieving the user profile with the same cookie
         # THEN first receive a redirect response code from the server, and the next
         # page load will be a 403. Need to have 'follow_redirects=False' or we won't see
         # the 302 code.
         self.get_data('profile', expect_http_code=302, follow_redirects=False)
-        self.get_data('profile', expect_http_code=403)
+        self.get_data('profile', expect_http_code=401)
 
     def test_destroy_account(self):
         # GIVEN a logged in user
@@ -606,7 +606,7 @@ class TestAuth(AuthHelper):
         # THEN first receive a redirect response response code from the server, and
         # the next page load will be a forbidden
         self.get_data('profile', expect_http_code=302, follow_redirects=False)
-        self.get_data('profile', expect_http_code=403)
+        self.get_data('profile', expect_http_code=401)
 
     def test_invalid_change_password(self):
         # GIVEN a logged in user
@@ -879,7 +879,7 @@ class TestAuth(AuthHelper):
                         'password': '123456',
                         'password_repeat': '123456',
                         'token': 'foobar'},
-                       expect_http_code=403)
+                       expect_http_code=401)
 
     def test_reset_password(self):
         # GIVEN an existing user
@@ -965,7 +965,7 @@ class TestAuth(AuthHelper):
 
         # WHEN destroying the public profile
         # THEN receive an OK response from the server
-        self.post_data('auth/destroy_public', public_profile, expect_http_code=200)
+        self.post_data('auth/destroy_public', public_profile, expect_http_code=204)
 
 
 class TestProgram(AuthHelper):
@@ -975,7 +975,7 @@ class TestProgram(AuthHelper):
 
         # WHEN retrieving own programs but without sending a cookie
         # THEN receive a forbidden response code from the server
-        self.get_data('programs/list', expect_http_code=403, no_cookie=True)
+        self.get_data('programs/list', expect_http_code=401, no_cookie=True)
 
     def test_get_programs(self):
         # GIVEN a logged in user
@@ -1018,7 +1018,7 @@ class TestProgram(AuthHelper):
                         'name': 'program 1',
                         'level': 1,
                         'shared': False},
-                       expect_http_code=403,
+                       expect_http_code=401,
                        no_cookie=True)
 
     def test_create_program(self):
@@ -1055,13 +1055,13 @@ class TestProgram(AuthHelper):
 
         # WHEN sharing a program without being logged in
         # THEN receive a forbidden response code from the server
-        self.post_data('programs/share/123456/1/False', {'id': '123456'},
-                       expect_http_code=403,
+        self.post_data('programs/share/123456/False', {'id': '123456'},
+                       expect_http_code=401,
                        no_cookie=True)
 
         # WHEN sharing a program that does not exist
         # THEN receive a not found response code from the server
-        self.post_data('programs/share/123456/1/0', {'id': '123456'}, expect_http_code=404)
+        self.post_data('programs/share/123456/0', {'id': '123456'}, expect_http_code=404)
 
     def test_valid_make_program_public(self):
         # GIVEN a logged in user with at least one program
@@ -1071,7 +1071,7 @@ class TestProgram(AuthHelper):
 
         # WHEN making a program public
         # THEN receive an OK response code from the server
-        self.post_data('programs/share/' + program_id + '/1' + '/False', {'id': program_id})
+        self.post_data('programs/share/' + program_id + '/False', {'id': program_id})
 
         saved_programs = self.get_data('programs/list')['programs']
         for program in saved_programs:
@@ -1091,11 +1091,11 @@ class TestProgram(AuthHelper):
         self.given_user_is_logged_in()
         program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         program_id = self.post_data('programs', program)['id']
-        self.post_data('programs/share/' + program_id + '/1' + '/0', {'id': program_id})
+        self.post_data('programs/share/' + program_id + '/0', {'id': program_id})
 
         # WHEN making a program private
         # THEN receive an OK response code from the server
-        self.post_data('programs/share/' + program_id + '/1' + '/False', {'id': program_id})
+        self.post_data('programs/share/' + program_id + '/False', {'id': program_id})
 
         saved_programs = self.get_data('programs/list')['programs']
         for program in saved_programs:
@@ -1155,7 +1155,7 @@ class TestClasses(AuthHelper):
 
         # WHEN creating a class without teacher permissions
         # THEN receive a forbidden response code from the server
-        self.post_data('class', {'name': 'class1'}, expect_http_code=403)
+        self.post_data('class', {'name': 'class1'}, expect_http_code=401)
 
         # WHEN marking the user as teacher
         self.make_current_user_teacher()
@@ -1230,7 +1230,7 @@ class TestClasses(AuthHelper):
         # THEN receive a forbidden status code from the server
         self.post_data('class/' + Class['id'],
                        {'name': 'class2'},
-                       expect_http_code=403,
+                       expect_http_code=401,
                        put_data=True,
                        no_cookie=True)
 
@@ -1362,7 +1362,7 @@ class TestClasses(AuthHelper):
         # GIVEN a student with two programs, one public and one private
         public_program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
         public_program_id = self.post_data('programs', public_program)['id']
-        self.post_data('programs/share/' + public_program_id + '/1' + '/False', {'id': public_program_id})
+        self.post_data('programs/share/' + public_program_id + '/False', {'id': public_program_id})
         private_program = {'code': 'hello world', 'name': 'program 2', 'level': 2, 'shared': False}
         self.post_data('programs', private_program)['id']
 
@@ -1386,7 +1386,7 @@ class TestCustomizeClasses(AuthHelper):
 
         # WHEN customizing a class without being a teacher
         # THEN receive a forbidden response code from the server
-        self.post_data('for-teachers/customize-class/' + class_id, {}, expect_http_code=403)
+        self.post_data('for-teachers/customize-class/' + class_id, {}, expect_http_code=401)
 
     def test_invalid_customization(self):
         # GIVEN a user with teacher permissions
@@ -1494,17 +1494,17 @@ class TestCustomAdventures(AuthHelper):
         # GIVEN a new user without teacher permissions
         self.given_fresh_user_is_logged_in()
 
-        # WHEN trying to create a custom adventure
+        # WHEN attempting to start creating a valid adventure
         # THEN receive a forbidden response code from the server
-        self.post_data('for-teachers/create-adventure', {}, expect_http_code=403)
+        self.get_data('for-teachers/customize-adventure', expect_http_code=401)
 
     def test_create_adventure(self):
         # GIVEN a new teacher
         self.given_fresh_teacher_is_logged_in()
 
-        # WHEN attempting to create a valid adventure
+        # WHEN attempting to start creating a valid adventure
         # THEN receive an OK response with the server
-        self.post_data('for-teachers/create-adventure', {}, expect_http_code=200)
+        self.get_data('for-teachers/customize-adventure', expect_http_code=302)
 
     def test_invalid_view_adventure(self):
         # GIVEN a new user
@@ -1512,7 +1512,7 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to view a custom adventure
         # THEN receive a 403 error from the server
-        self.get_data('for-teachers/customize-adventure/view/123', expect_http_code=403)
+        self.get_data('for-teachers/customize-adventure/view/123', expect_http_code=401)
 
         # GIVEN a new teacher
         self.given_fresh_teacher_is_logged_in()
@@ -1521,25 +1521,14 @@ class TestCustomAdventures(AuthHelper):
         # THEN receive a 404 error from the server
         self.get_data('for-teachers/customize-adventure/view/123', expect_http_code=404)
 
-    def test_valid_view_adventure(self):
-        # GIVEN a new teacher
-        self.given_fresh_teacher_is_logged_in()
-
-        # WHEN attempting to create a valid adventure
-        # THEN receive an OK response with the server
-        adventure_id = self.post_data('for-teachers/create-adventure', {}, expect_http_code=200)
-
-        # WHEN attempting to view the adventure using the id from the returned body
-        # THEN receive an OK response with the server
-        self.get_data('for-teachers/customize-adventure/view/' + adventure_id)
+    def test_invalid_adventure_id(self):
+        # WHEN attempting to view a custom adventure that doesn't exist
+        # THEN receive a 404 error from the server
+        self.get_data('for-teachers/customize-adventure/INVALID_NONEXISTING_ID', expect_http_code=401)
 
     def test_invalid_update_adventure(self):
         # GIVEN a new teacher
         self.given_fresh_teacher_is_logged_in()
-
-        # WHEN attempting to create a valid adventure
-        # THEN receive an OK response with the server
-        adventure_id = self.post_data('for-teachers/create-adventure', {}, expect_http_code=200)
 
         # WHEN attempting to updating an adventure with invalid data
         invalid_bodies = [
@@ -1576,14 +1565,14 @@ class TestCustomAdventures(AuthHelper):
                 'content': 123
             },
             {
-                'id': adventure_id,
+                'id': "some id",
                 'name': 'panda',
                 'classes': ['Class1'],
                 'level': '5',
                 'content': 'too short!'
             },
             {
-                'id': adventure_id,
+                'id': "some id",
                 'name': 'panda',
                 'classes': ['Class1'],
                 'level': '5',
@@ -1597,63 +1586,22 @@ class TestCustomAdventures(AuthHelper):
         for invalid_body in invalid_bodies:
             self.post_data('for-teachers/customize-adventure', invalid_body, expect_http_code=400)
 
-        # WHEN attempting to update a non-existing adventure
-        # THEN receive a 404 error from the server
-        body = {
-            'id': '123',
-            'name': 'panda',
-            'classes': ['Class1'],
-            'levels': ['5'],
-            'content': 'This is just long enough!',
-            'public': True,
-            'language': 'en', }
-        self.post_data('for-teachers/customize-adventure', body, expect_http_code=404)
-
     def test_valid_update_adventure(self):
         # GIVEN a new teacher
         self.given_fresh_teacher_is_logged_in()
 
-        # WHEN attempting to create a valid adventure
-        # THEN receive an OK response from the server
-        adventure_id = self.post_data('for-teachers/create-adventure', {}, expect_http_code=200)
-
+        self.post_data('class', {'name': 'class1'})
+        class_id = self.get_data('classes')[0].get('id')
         # WHEN attempting to update an adventure with a valid body
         # THEN receive an OK response from the server
         body = {
-            'id': adventure_id,
+            'id': "123",
             'name': 'test_adventure',
-            'classes': [],
-            'levels': ['5'],
+            'classes': [class_id],
+            'levels': ['1', ],
             'content': 'This is just long enough!',
             'public': 1,
             'language': 'en', }
-        self.post_data('for-teachers/customize-adventure', body, expect_http_code=200)
-
-    def test_valid_update_adventure_with_class(self):
-        # GIVEN a new teacher
-        self.given_fresh_teacher_is_logged_in()
-
-        # WHEN attempting to create a valid adventure
-        # THEN receive an OK response from the server
-        adventure_id = self.post_data('for-teachers/create-adventure', {}, expect_http_code=200)
-
-        # WHEN attempting to create a valid adventure
-        # THEN receive an OK response from the server AND retrieve the class_id
-        self.post_data('class', {'name': 'class1'})
-        class_id = self.get_data('classes')[0].get('id')
-
-        # WHEN attempting to update an adventure with a valid body
-        # THEN receive an OK response from the server
-        body = {
-            'id': adventure_id,
-            'name': 'test_adventure',
-            'classes': [class_id],
-            'levels': ['5'],
-            'content': 'This is just long enough!',
-            'public': 1,
-            'language': 'en',
-        }
-
         self.post_data('for-teachers/customize-adventure', body, expect_http_code=200)
 
     def test_destroy_adventure(self):
@@ -1678,7 +1626,7 @@ class TestMultipleAccounts(AuthHelper):
 
         # WHEN trying to create multiple accounts
         # THEN receive a forbidden response code from the server
-        self.post_data('for-teachers/create-accounts', {}, expect_http_code=403)
+        self.post_data('for-teachers/create-accounts', {}, expect_http_code=401)
 
     def test_invalid_create_accounts(self):
         # GIVEN a new teacher

@@ -87,13 +87,12 @@ class PublicAdventuresModule(WebsiteModule):
     def filtering(self, user, index_page=False):
         index_page = request.method == "GET"
 
-        if index_page:
-            self.init(user)
-
         level = int(request.args["level"]) if request.args.get("level") else 1
         language = request.args.get("lang", "")
         tag = request.args.get("tag", "")
         search = request.form.get("search", request.args.get("search", ""))
+        if index_page or not self.adventures or not self.adventures.get(level):
+            self.init(user)
 
         adventures = self.adventures.get(level, [])
         # adjust available filters for the selected level.

@@ -8,16 +8,15 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-04-01 11:41+0000\n"
+"PO-Revision-Date: 2024-05-01 06:30+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: ar <LL@li.org>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=0 && n%100<=2 ? 4 : 5);\n"
-"X-Generator: Weblate 5.5-dev\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=0 && n%100<=2 ? 4 : 5);\n"
+"X-Generator: Weblate 5.5.3-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -26,6 +25,10 @@ msgstr "لقد حاولت استخدام المتغير {name} في السطر {
 
 msgid "Cyclic Var Definition"
 msgstr "يجب أن تضبط قيمة المتغير `{variable}` قبل أن تستعمله على الجانب الأيسر من من الأمر هو."
+
+#, fuzzy
+msgid "Else Without If Error"
+msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
 
 #, fuzzy
 msgid "Function Undefined"
@@ -71,6 +74,10 @@ msgstr "It looks like you forgot to use a command with the text you put in line 
 #, fuzzy
 msgid "Missing Additional Command"
 msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+
+#, fuzzy
+msgid "Missing Colon Error"
+msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
 
 msgid "Missing Command"
 msgstr "يبدو أنك نسيت استخدام أمر برمجي في السطر رقم {line_number}."
@@ -446,6 +453,10 @@ msgstr "Common errors"
 msgid "congrats_message"
 msgstr "Congratulations, {username}, you have completed Hedy!"
 
+#, fuzzy
+msgid "connect_guest_teacher"
+msgstr "I would like to be connected with a guest teacher who can give a few lessons"
+
 msgid "content_invalid"
 msgstr "هذه المغامرة غير صالحة"
 
@@ -552,8 +563,12 @@ msgstr "تخصيص الصف"
 msgid "dash"
 msgstr "علامة الشرطة"
 
-msgid "default_403"
+msgid "default_401"
 msgstr "ليس مصرحاً لك الوصول على ما يبدو..."
+
+#, fuzzy
+msgid "default_403"
+msgstr "Looks like this action is forbidden..."
 
 msgid "default_404"
 msgstr "لم نستطع إيجاد تلك الصفحة..."
@@ -597,6 +612,10 @@ msgstr "افتتح مباشرة"
 #, fuzzy
 msgid "disable"
 msgstr "Disable"
+
+#, fuzzy
+msgid "disable_explore_page"
+msgstr "Disable explore page"
 
 msgid "disable_parsons"
 msgstr "عطل كل الأحجيات"
@@ -988,6 +1007,10 @@ msgid "keyword_language_invalid"
 msgstr "الرجاء اختيار لغة صحيحة للكلمات المفتاحية (الأوامر البرمجية). اختر اللغة الإنجليزية أو لغتك الخاصة."
 
 #, fuzzy
+msgid "landcode_phone_number"
+msgstr "Please also add your country's landcode"
+
+#, fuzzy
 msgid "language"
 msgstr "Language"
 
@@ -1170,8 +1193,8 @@ msgid "more_options"
 msgstr "More options"
 
 #, fuzzy
-msgid "multiple_levels_warning"
-msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
+msgid "multiple_keywords_warning"
+msgstr "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}"
 
 msgid "my_account"
 msgstr "حسابي"
@@ -1421,6 +1444,10 @@ msgid "personal_text_invalid"
 msgstr "النص الشخصي غير صالح."
 
 #, fuzzy
+msgid "phone_number"
+msgstr "Phone number"
+
+#, fuzzy
 msgid "postfix_classname"
 msgstr "Postfix classname"
 
@@ -1641,9 +1668,6 @@ msgstr "تنفيذ البرنامج"
 #, fuzzy
 msgid "runs_over_time"
 msgstr "Runs over time"
-
-msgid "save"
-msgstr "حفظ"
 
 msgid "save_parse_warning"
 msgstr "هذا البرنامج يحتوي على خطأ، هل أنت متأكد أنك تريد حفظه؟"
@@ -2061,6 +2085,14 @@ msgstr "We could not find that page!"
 msgid "unauthorized"
 msgstr "ليس لديك الصلاحيات اللازمة للوصول إلى هذه الصفحة"
 
+#, fuzzy
+msgid "unfavourite_confirm"
+msgstr "Are you sure you want to unfavourite this program?"
+
+#, fuzzy
+msgid "unfavourite_success"
+msgstr "Your program is unfavourited."
+
 msgid "unique_usernames"
 msgstr "يجب أن تكون جميع أسماء المستخدمين لا نظير لها."
 
@@ -2086,9 +2118,6 @@ msgstr "Unsubmitted"
 
 msgid "update_adventure_prompt"
 msgstr "هل أنت متأكد أنك تريد تعديل هذه المغامرة؟"
-
-msgid "update_profile"
-msgstr "تحديث الملف الشخصي"
 
 msgid "update_public"
 msgstr "تحديث الملف العام"
@@ -2366,4 +2395,13 @@ msgstr "Your program"
 
 #~ msgid "nested blocks"
 #~ msgstr "مجموعة ضمن مجموعة"
+
+#~ msgid "save"
+#~ msgstr "حفظ"
+
+#~ msgid "update_profile"
+#~ msgstr "تحديث الملف الشخصي"
+
+#~ msgid "multiple_levels_warning"
+#~ msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
 

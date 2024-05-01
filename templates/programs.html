@@ -4,12 +4,15 @@
 <div class="px-8 py-12 max-w-screen-xl mx-auto">
   {% if from_user %}<h2>{{from_user}}'s recent programs</h2>
   {% else %}<h2>{{_('recent')}}</h2>{% endif %}
-  <div class="w-full mb-8" id="program_filter">
+  <div class="w-full mb-8 flex items-center justify-between" id="program_filter">
+        <div id="program_count" class="pt-2 pb-1 px-4 border rounded no-underline bg-blue-700 text-white font-slab leading-6 font-normal tracking-wide"
+            data-count="{{user_program_count}}"
+        >{{user_program_count}} {{_('amount_saved')}}</div>
     <form>
         <input type="hidden" name="page" value=""> <!-- Submitting the form resets the page -->
         <input type="hidden" name="user" value="{{ from_user }}">
-        <div class="flex flex-row px-4 w-full items-center border border-gray-400 py-2 rounded-lg gap-4">
-            <select name="level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
+        <div class="flex flex-row px-4 w-full justify-end py-2 rounded-lg gap-4">
+            <select id="levels-dropdown" name="level" class="block appearance-none w-1/8 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
                 <option selected value="">&mdash; {{_('level')}} &mdash;</option>
                 {% if not request.args.get('adventure') %}
                     {% for i in sorted_level_programs %}
@@ -21,8 +24,8 @@
                     {% endfor %}
                 {% endif %}
             </select>
-            <select name="adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
-                <option selected value="">&mdash; {{ _('adventure') }} &mdash;</option>
+            <select name="adventure" class="block appearance-none w-4/8 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
+                <option class="text-center" selected value="">&mdash; {{ _('adventure') }} &mdash;</option>
                 {% if request.args.get('level') %}
                     {% for name in sorted_level_programs[request.args.get('level')|int] %}
                         <option value="{{ name }}" {% if request.args.get('adventure') == name %}selected{% endif %}>{{ name }}</option>
@@ -43,13 +46,12 @@
                     <label for="submitted">{{_('submitted')}}</label>
                 </div>
             </div>
-            <button type="submit" class="green-btn">{{_('search_button')}}</button>
         </div>
     </form>
   </div>
   <div class="programs w-full">
     {% for program in programs %}
-        {{ render_partial('htmx-program.html', program=program, adventure_names=adventure_names, public_profile=public_profile, loop_index=loop.index, second_teachers_programs=second_teachers_programs) }}
+        {{ render_partial('htmx-program.html', program=program, adventure_names=adventure_names, public_profile=public_profile, second_teachers_programs=second_teachers_programs) }}
     {% endfor %}
 
     {% if programs|length == 0 %}

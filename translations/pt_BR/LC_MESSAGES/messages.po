@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-04-01 11:41+0000\n"
+"PO-Revision-Date: 2024-05-01 06:30+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: pt_BR <LL@li.org>\n"
 "Language: pt_BR\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.3-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -24,6 +24,10 @@ msgstr "Você tentou utilizar a variável {name} na linha {access_line_number}, 
 
 msgid "Cyclic Var Definition"
 msgstr "O nome `{variable}` precisa ser definido antes que voce possa utiliza-lo do lado direito do comando `{is}`."
+
+#, fuzzy
+msgid "Else Without If Error"
+msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
 
 msgid "Function Undefined"
 msgstr "Você tentou usar a função {name}, mas você não a definiu."
@@ -63,6 +67,10 @@ msgstr "Parece que você esqueceu de usar um comando com o texto que você usou 
 
 msgid "Missing Additional Command"
 msgstr "Parece que você esqueceu de terminar de escrever `{command}` na linha {line_number}. Tente adicionar `{missing_command}` a seu código."
+
+#, fuzzy
+msgid "Missing Colon Error"
+msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
 
 msgid "Missing Command"
 msgstr "Parece que você esqueceu de usar um comando na linha {line_number}."
@@ -410,6 +418,10 @@ msgstr "Erros comuns"
 msgid "congrats_message"
 msgstr "Parabéns, {username}, você alcançou os seguintes resultados com Hedy!"
 
+#, fuzzy
+msgid "connect_guest_teacher"
+msgstr "I would like to be connected with a guest teacher who can give a few lessons"
+
 msgid "content_invalid"
 msgstr "Esta aventura é inválida."
 
@@ -505,8 +517,12 @@ msgstr "Customize class"
 msgid "dash"
 msgstr "um traço"
 
-msgid "default_403"
+msgid "default_401"
 msgstr "Parece que você não tem autorização..."
+
+#, fuzzy
+msgid "default_403"
+msgstr "Looks like this action is forbidden..."
 
 msgid "default_404"
 msgstr "Não conseguimos achar essa página..."
@@ -551,6 +567,10 @@ msgstr "Directly open"
 
 msgid "disable"
 msgstr "Desativar"
+
+#, fuzzy
+msgid "disable_explore_page"
+msgstr "Disable explore page"
 
 msgid "disable_parsons"
 msgstr "Desativar todos os desafios"
@@ -908,6 +928,10 @@ msgstr "Waiting for a button press..."
 msgid "keyword_language_invalid"
 msgstr "Por favor, selecione um idioma de comandos válido (selecione Inglês ou o seu próprio idioma)."
 
+#, fuzzy
+msgid "landcode_phone_number"
+msgstr "Please also add your country's landcode"
+
 msgid "language"
 msgstr "Idioma"
 
@@ -1079,8 +1103,8 @@ msgid "more_options"
 msgstr "Mais opções"
 
 #, fuzzy
-msgid "multiple_levels_warning"
-msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
+msgid "multiple_keywords_warning"
+msgstr "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}"
 
 msgid "my_account"
 msgstr "Minha conta"
@@ -1319,6 +1343,10 @@ msgid "personal_text_invalid"
 msgstr "Seu texto pessoal é inválido."
 
 #, fuzzy
+msgid "phone_number"
+msgstr "Phone number"
+
+#, fuzzy
 msgid "postfix_classname"
 msgstr "Postfix classname"
 
@@ -1538,9 +1566,6 @@ msgstr "Executar código"
 #, fuzzy
 msgid "runs_over_time"
 msgstr "Runs over time"
-
-msgid "save"
-msgstr "Salvar"
 
 msgid "save_parse_warning"
 msgstr "Esse programa contém um erro, tem certeza de que deseja salvá-lo?"
@@ -1958,6 +1983,14 @@ msgstr "Passo de tutorial não encontrado"
 msgid "unauthorized"
 msgstr "Você não tem permissão para acessar esta página"
 
+#, fuzzy
+msgid "unfavourite_confirm"
+msgstr "Are you sure you want to unfavourite this program?"
+
+#, fuzzy
+msgid "unfavourite_success"
+msgstr "Your program is unfavourited."
+
 msgid "unique_usernames"
 msgstr "Todos os nomes de usuário devem ser únicos."
 
@@ -1982,9 +2015,6 @@ msgstr "Unsubmitted"
 
 msgid "update_adventure_prompt"
 msgstr "Tem certeza de que deseja atualizar essa aventura?"
-
-msgid "update_profile"
-msgstr "Atualizar perfil"
 
 msgid "update_public"
 msgstr "Atualizar perfil público"
@@ -2265,4 +2295,13 @@ msgstr "Seu programa"
 
 #~ msgid "nested blocks"
 #~ msgstr "um bloco em um bloco"
+
+#~ msgid "save"
+#~ msgstr "Salvar"
+
+#~ msgid "update_profile"
+#~ msgstr "Atualizar perfil"
+
+#~ msgid "multiple_levels_warning"
+#~ msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
 

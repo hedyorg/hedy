@@ -56,12 +56,12 @@ def listify(fn):
 def collect_adventures_snippets():
     """Find the snippets for adventures."""
     for filename, language, yaml in find_yaml_files('content/adventures'):
-        for adventure_key, adventure in yaml['adventures'].items():
+        for adventure_key, adventure in yaml.get('adventures', {}).items():
             # the default tab sometimes contains broken code to make a point to learners about changing syntax.
             if adventure_key in ['default', 'debugging']:
                 continue
 
-            for level_number, level in adventure['levels'].items():
+            for level_number, level in adventure.get('levels', {}).items():
                 for markdown_text in level.values():
                     for code in markdown_code_blocks(markdown_text.as_string()):
                         yield YamlSnippet(
@@ -91,7 +91,7 @@ def collect_cheatsheet_snippets():
 def collect_parsons_snippets():
     """Find the snippets in Parsons YAMLs."""
     for filename, language, yaml in find_yaml_files('content/parsons'):
-        for level_number, level in yaml['levels'].items():
+        for level_number, level in yaml.get('levels', {}).items():
             for exercise in level:
                 code = exercise['code']
                 yield YamlSnippet(
@@ -106,7 +106,7 @@ def collect_parsons_snippets():
 def collect_slides_snippets():
     """Find the snippets in slides YAMLs."""
     for filename, language, yaml in find_yaml_files('content/slides'):
-        for level_number, level in yaml['levels'].items():
+        for level_number, level in yaml.get('levels', {}).items():
             for slide in level:
                 # Some slides have code that is designed to fail
                 if slide.get('debug'):
@@ -142,10 +142,13 @@ def find_yaml_files(repository_path):
 
 
 def markdown_code_blocks(text):
-    """Parse the text as MarkDown and return all code blocks in here."""
-    return [tag.contents[0].contents[0]
-            for tag in utils.markdown_to_html_tags(text)
-            if tag.name == 'pre' and tag.contents and tag.contents[0].contents]
+    """Parse the text as MarkDown and return all code blocks in here.
+
+    Returns all code blocks, except those tagged as 'not_hedy_code'.
+    """
+    return [c.code
+            for c in utils.code_blocks_from_markdown(text)
+            if c.info != 'not_hedy_code']
 
 
 def filter_snippets(snippets, level=None, lang=None):
@@ -300,6 +303,8 @@ class LocatedYamlValue:
         return LocatedYamlValue(ret, self.yaml_path + [key])
 
     def get(self, key, default=None):
+        if self.inner is None:
+            return None
         """Retrieve a single item from the inner value."""
         ret = self.inner.get(key, default)
         if ret is None:

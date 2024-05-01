@@ -35,7 +35,7 @@ _IN: _SPACE ("मेలో" | "in") _SPACE
 _NOT_IN: _SPACE ("not in" | "not in") _SPACE
 _IF: ("ఉంటే" | "if") _SPACE
 _ELSE: "లేకపోతే" | "else"
-_AND: _SPACE ("మరియు" | "and") _SPACE
+_AND: _SPACE? ("మరియు" | "and") _SPACE
 _REPEAT: ("పునరావృతం" | "repeat") _SPACE
 _TIMES: _SPACE ("సార్లు" | "times")
 _FOR: ("కోసం" | "for") _SPACE
@@ -44,7 +44,7 @@ _TO: _SPACE ("కు" | "to") _SPACE
 _STEP: "అడుగు" | "step"
 _ELIF: _SPACE? ("మరొకటి ఉంటే" | "elif") _SPACE
 _INPUT: ("ఇన్పుట్" | "input")
-_OR: _SPACE ("లేదా" | "or") _SPACE
+_OR: _SPACE? ("లేదా" | "or") _SPACE
 _WHILE: ("అయితే" | "while") _SPACE
 _LENGTH: "పొడవు" | "length"
 _COLOR : ("color" | "color") _SPACE?

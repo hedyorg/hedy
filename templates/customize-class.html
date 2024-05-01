@@ -19,6 +19,9 @@
                         available_adventures=available_adventures)
     }}
 
+    <form onsubmit="event.preventDefault(); hedyApp.save_customizations('{{class_info.id}}')"
+        id="customize_class">
+
     <div class="flex flex-col lg:flex-row gap-4">
         <div class="flex flex-col gap- w-full"> 
             <div class="flex flex-col">
@@ -104,6 +107,13 @@
                                         if "hide_parsons" in customizations['other_settings'] %}checked{% endif %}>
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="text-left border-t border-r border-gray-400">{{_('disable_explore_page')}}</td>
+                                <td class="border-t border-gray-400">
+                                    <input class="other_settings_checkbox" id="hide_explore" type="checkbox" {%
+                                        if "hide_explore" in customizations['other_settings'] %}checked{% endif %}>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -176,24 +186,17 @@
                 </div>
             </div>
             {% if not (is_admin and class_info.teacher != username) %}
-            <div class="flex flex-col gap-2 mt-4">
                 <div class="flex ml-auto gap-2">
-                    <button data-cy="save_customizations" class="blue-btn"
-                            onclick="hedyApp.save_customizations('{{class_info.id}}')">
-                                {{_('save')}}
-                    </button>
                     <a href="/for-teachers/class/{{class_info.id}}/preview" class="green-btn" data-cy="preview_class_link">{{_('preview')}}</a>
-                </div>
-                <div class="flex ml-auto gap-2">
                     <button class="red-btn {% if not customizations %}hidden{% endif %}"
-                        id="remove_customizations_button" data-cy="remove_customizations_button"
+                        id="remove_customizations_button" type="button" data-cy="remove_customizations_button"
                         onclick='hedyApp.restore_customization_to_default({{_('remove_customizations_prompt')|default(None)|tojson}})'>
                             {{_('remove_customization')}}
                     </button>
                 </div>
-            </div>
             {% endif %}
         </div>
     </div>
+    </form>
 </div>
 {% endblock %}

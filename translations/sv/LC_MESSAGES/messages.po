@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-04-01 11:41+0000\n"
+"PO-Revision-Date: 2024-05-01 06:30+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: sv <LL@li.org>\n"
 "Language: sv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.3-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -24,6 +24,10 @@ msgstr "Du försökte använda variabeln {name} på rad {access_line_number}, me
 
 msgid "Cyclic Var Definition"
 msgstr "Namnet `{variable}` måste ges ett värde innan du kan använda det på höger sida av `{is}`-kommandot."
+
+#, fuzzy
+msgid "Else Without If Error"
+msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
 
 #, fuzzy
 msgid "Function Undefined"
@@ -65,6 +69,10 @@ msgstr "Du verkar ha glömt att använda ett kommando ihop med texten du använd
 #, fuzzy
 msgid "Missing Additional Command"
 msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+
+#, fuzzy
+msgid "Missing Colon Error"
+msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
 
 msgid "Missing Command"
 msgstr "Du verkar ha glömt att använda ett kommando på rad {line_number}."
@@ -418,6 +426,10 @@ msgstr "Vanliga fel"
 msgid "congrats_message"
 msgstr "Grattis, {username}, du har nått följande resultat med Hedy!"
 
+#, fuzzy
+msgid "connect_guest_teacher"
+msgstr "I would like to be connected with a guest teacher who can give a few lessons"
+
 msgid "content_invalid"
 msgstr "Äventyret är ogiltigt."
 
@@ -513,8 +525,12 @@ msgstr "Anpassa lektionen"
 msgid "dash"
 msgstr "ett tankstreck"
 
-msgid "default_403"
+msgid "default_401"
 msgstr "Det ser ut som om du inte är behörig ..."
+
+#, fuzzy
+msgid "default_403"
+msgstr "Looks like this action is forbidden..."
 
 msgid "default_404"
 msgstr "Vi kunde inte hitta den sidan ..."
@@ -557,6 +573,10 @@ msgstr "Öppna direkt"
 
 msgid "disable"
 msgstr "Inaktivera"
+
+#, fuzzy
+msgid "disable_explore_page"
+msgstr "Disable explore page"
 
 #, fuzzy
 msgid "disable_parsons"
@@ -915,6 +935,10 @@ msgstr "Väntar på en knapptryckning ..."
 msgid "keyword_language_invalid"
 msgstr "Välj ett giltigt språk för nyckelord (välj engelska eller ditt eget språk)."
 
+#, fuzzy
+msgid "landcode_phone_number"
+msgstr "Please also add your country's landcode"
+
 msgid "language"
 msgstr "Språk"
 
@@ -1094,8 +1118,8 @@ msgid "more_options"
 msgstr "More options"
 
 #, fuzzy
-msgid "multiple_levels_warning"
-msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
+msgid "multiple_keywords_warning"
+msgstr "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}"
 
 msgid "my_account"
 msgstr "Mitt konto"
@@ -1332,6 +1356,10 @@ msgstr "Personlig text"
 msgid "personal_text_invalid"
 msgstr "Din personliga text är ogiltig."
 
+#, fuzzy
+msgid "phone_number"
+msgstr "Phone number"
+
 msgid "postfix_classname"
 msgstr "Postfix till lektionsnamnet"
 
@@ -1542,9 +1570,6 @@ msgstr "Kör kod"
 #, fuzzy
 msgid "runs_over_time"
 msgstr "Runs over time"
-
-msgid "save"
-msgstr "Spara"
 
 msgid "save_parse_warning"
 msgstr "Programmet har ett fel; är du säker på att du vill spara det?"
@@ -1950,6 +1975,14 @@ msgstr "Handledningssteget hittades inte"
 msgid "unauthorized"
 msgstr "Du har inte åtkomst till den här sidan"
 
+#, fuzzy
+msgid "unfavourite_confirm"
+msgstr "Are you sure you want to unfavourite this program?"
+
+#, fuzzy
+msgid "unfavourite_success"
+msgstr "Your program is unfavourited."
+
 msgid "unique_usernames"
 msgstr "Alla användarnamn måste vara unika."
 
@@ -1973,9 +2006,6 @@ msgstr "Unsubmitted"
 
 msgid "update_adventure_prompt"
 msgstr "Är du säker på att du vill uppdatera det här äventyret?"
-
-msgid "update_profile"
-msgstr "Uppdatera profil"
 
 msgid "update_public"
 msgstr "Uppdatera offentlig profil"
@@ -2250,4 +2280,13 @@ msgstr "Ditt program"
 
 #~ msgid "nested blocks"
 #~ msgstr "ett block inuti ett block"
+
+#~ msgid "save"
+#~ msgstr "Spara"
+
+#~ msgid "update_profile"
+#~ msgstr "Uppdatera profil"
+
+#~ msgid "multiple_levels_warning"
+#~ msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
 

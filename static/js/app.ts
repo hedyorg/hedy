@@ -312,7 +312,7 @@ function attachMainEditorEvents(editor: HedyEditor) {
       if (!theLevel || !theLanguage) {
         throw new Error('Oh no');
       }
-      runit (theLevel, theLanguage, "", "run",function () {
+      runit (theLevel, theLanguage, false, "", "run",function () {
         $ ('#output').focus ();
       });
     }
@@ -405,7 +405,8 @@ export function initializeHighlightedCodeBlocks(where: Element) {
           if (dir === "rtl") {
             symbol = "⇤";
           }
-          $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
+          const adventure = container.getAttribute('data-tabtarget')
+          $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').attr('data-cy', `paste-example-code-${adventure}`).text(symbol).appendTo(buttonContainer).click(function() {
             if (!theGlobalEditor?.isReadOnly) {
               theGlobalEditor.contents = exampleEditor.contents + '\n';
             }
@@ -469,7 +470,7 @@ function clearOutput() {
   buttonsDiv.hide();
 }
 
-export async function runit(level: number, lang: string, disabled_prompt: string, run_type: "run" | "debug" | "continue", cb: () => void) {
+export async function runit(level: number, lang: string, raw: boolean, disabled_prompt: string, run_type: "run" | "debug" | "continue", cb: () => void) {
   // Copy 'currentTab' into a variable, so that our event handlers don't mess up
   // if the user changes tabs while we're waiting for a response
   const adventureName = currentTab;
@@ -537,7 +538,9 @@ export async function runit(level: number, lang: string, disabled_prompt: string
           is_debug: run_type === 'debug',
           tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
           read_aloud : !!$('#speak_dropdown').val(),
-          adventure_name: adventure ? adventure.name : undefined,
+          adventure_name: adventureName,
+          short_name: adventure ? adventure.short_name : undefined,
+          raw: raw,
 
           // Save under an existing id if this field is set
           program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
@@ -583,7 +586,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
       program_data = theGlobalDebugger.get_program_data();
     }
 
-    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pressed, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, cb, run_type).catch(function(err: any) {
+    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pressed, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, program_data.is_modified ,cb, run_type).catch(function(err: any) {
       // The err is null if we don't understand it -> don't show anything
       if (err != null) {
         error.show(ClientMessages['Execute_error'], err.message);
@@ -719,47 +722,106 @@ export function viewProgramLink(programId: string) {
   return window.location.origin + '/hedy/' + programId + '/view';
 }
 
-export async function delete_program(id: string, index: number, prompt: string) {
+function updateProgramCount() {
+  const programCountDiv = $('#program_count');
+  const countText = programCountDiv.text();
+  const regex = /(\d+)/;
+  const match = countText.match(regex);
+  
+  if (match && match.length > 0) {
+    const currentCount = parseInt(match[0]);
+    const newCount = currentCount - 1;
+    const newText = countText.replace(regex, newCount.toString());
+    programCountDiv.text(newText);
+  }
+}
+
+function updateSelectOptions(selectName: string) {
+  let optionsArray: string[] = [];
+  const select = $(`select[name='${selectName}']`);
+  
+  // grabs all the levels and names from the remaining adventures
+  $(`[id="program_${selectName}"]`).each(function() {
+      const text = $(this).text().trim();
+        if (selectName == 'level'){
+          const number = text.match(/\d+/)
+          if (number && !optionsArray.includes(number[0])) {
+            optionsArray.push(number[0]);
+          }
+        } else if (!optionsArray.includes(text)){
+          optionsArray.push(text);
+          }
+      console.log(optionsArray);
+  });
+
+  if (selectName == 'level'){
+    optionsArray.sort();
+  }
+  // grabs the -- level -- or -- adventure -- from the options
+  const firstOption = select.find('option:first').text().trim();
+  optionsArray.unshift(firstOption);
+
+  select.empty();
+  optionsArray.forEach(optionText => {
+    const option = $('<option></option>').text(optionText);
+    select.append(option);
+  });
+}
+
+export async function delete_program(id: string, prompt: string) {
   await modal.confirmP(prompt);
   await tryCatchPopup(async () => {
+    $('#program_' + id).remove();
+    // only shows the remaining levels and programs in the options
+    updateSelectOptions('level');
+    updateSelectOptions('adventure');
+    // this function decreases the total programs saved
+    updateProgramCount();
     const response = await postJsonWithAchievements('/programs/delete', { id });
     showAchievements(response.achievement, true, "");
-    $('#program_' + index).remove();
+    // issue request on the Bar component.
+    console.log("resp", response)
     modal.notifySuccess(response.message);
   });
 }
 
-function set_favourite(index: number) {
+function set_favourite(id: string, set: boolean) {
     $('.favourite_program_container').removeClass('text-yellow-400');
     $('.favourite_program_container').addClass('text-white');
+    $('.favourite_program_container').attr("data-starred", "false");
 
-    $('#favourite_program_container_' + index).removeClass('text-white');
-    $('#favourite_program_container_' + index).addClass('text-yellow-400');
+    if (set) {
+        $('#favourite_program_container_' + id).removeClass('text-white');
+        $('#favourite_program_container_' + id).addClass('text-yellow-400');
+    }
+    $('#favourite_program_container_' + id).attr("data-starred", JSON.stringify(set));
 }
 
-export async function set_favourite_program(id: string, index: number, prompt: string) {
-  await modal.confirmP(prompt);
+export async function set_favourite_program(id: string, promptSet: string, promptUnset: string) {
+  let set = JSON.parse($('#favourite_program_container_' + id).attr("data-starred")?.toLowerCase() || "");
+  await modal.confirmP(set ? promptUnset : promptSet);
   await tryCatchPopup(async () => {
-    const response = await postJsonWithAchievements('/programs/set_favourite', { id });
-    set_favourite(index)
+    const response = await postJsonWithAchievements('/programs/set_favourite', { id, set: !set });
+    // TODO: response with 200, assumed.
+    set_favourite(id, !set)
     modal.notifySuccess(response.message);
   });
 }
 
-function change_to_submitted (index: number) {
+function change_to_submitted (id: string) {
     // Index is a front-end unique given to each program container and children
     // This value enables us to remove, hide or show specific element without connecting to the server (again)
-    $('#non_submitted_button_container_' + index).remove();
-    $('#submitted_button_container_' + index).show();
-    $('#submitted_header_' + index).show();
-    $('#program_' + index).removeClass("border-orange-400");
-    $('#program_' + index).addClass("border-gray-400 bg-gray-400");
+    $('#non_submitted_button_container_' + id).remove();
+    $('#submitted_button_container_' + id).show();
+    $('#submitted_header_' + id).show();
+    $('#program_' + id).removeClass("border-orange-400");
+    $('#program_' + id).addClass("border-gray-400 bg-gray-400");
 }
 
-export function submit_program (id: string, index: number) {
+export function submit_program (id: string) {
   tryCatchPopup(async () => {
     await postJsonWithAchievements('/programs/submit', { id });
-    change_to_submitted(index);
+    change_to_submitted(id);
   });
 }
 
@@ -846,7 +908,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPressed: boolean, hasSleep: number[], hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPressed: boolean, hasSleep: number[], hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, isModified: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
   let skip_faulty_found_errors = false;
@@ -1035,13 +1097,13 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       }
 
       // Check if the program was correct but the output window is empty: Return a warning
-      if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
+      if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty') && !hasMusic) {
         pushAchievement("error_or_empty");
         error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);
         return;
       }
       if (!hasWarnings && code !== last_code) {
-          showSuccesMessage(); //FH nov 2023: typo in success :)
+          showSuccessMessage(isModified);
           last_code = code;
       }
       if (cb) cb ();
@@ -1191,7 +1253,6 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     var debug = storage.getItem("debugLine")
     if (storage.getItem("prompt-" + prompt) == null) {
     Sk.execStart = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
-    $('#turtlecanvas').hide();
     document.onkeydown = null;
     $('#keybinding-modal').hide();
 
@@ -1424,11 +1485,11 @@ export function modalStepOne(level: number){
   }
 }
 
-function showSuccesMessage(){
+function showSuccessMessage(isModified: boolean){
   removeBulb();
   var allsuccessmessages = ClientMessages['Transpile_success'].split('\n');
   var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
-  success.show(allsuccessmessages[randomnum]);
+  success.show(allsuccessmessages[randomnum], isModified);
 }
 
 function createModal(level:number ){
@@ -1515,23 +1576,29 @@ export function toggle_keyword_language(current_lang: string, new_lang: string) 
       level: theLevel,
     });
 
-  if (response.success) {
-    const code = response.code
-    theGlobalEditor.contents = code;
-    const saveName = saveNameFromInput();
+    if (response.success) {
+      const code = response.code
+      theGlobalEditor.contents = code;
+      const saveName = saveNameFromInput();
 
-    // save translated code to local storage
-    // such that it can be fetched after reload
-    localSave(currentTabLsKey(), { saveName, code });
-    $('#editor').attr('lang', new_lang);
+      // save translated code to local storage
+      // such that it can be fetched after reload
+      localSave(currentTabLsKey(), { saveName, code });
+      $('#editor').attr('lang', new_lang);
 
-    // update the whole page (example codes)
-    const hash = window.location.hash;
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    urlParams.set('keyword_language', new_lang)
-    window.location.search = urlParams.toString()
-    window.open(hash, "_self");
+      // update the whole page (example codes)
+      const hash = window.location.hash;
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      urlParams.set('keyword_language', new_lang)
+      window.location.search = urlParams.toString()
+      window.open(hash, "_self");
+
+      // if in iframe, reload the topper window level.
+      if (window.top && !(window as any).Cypress) {
+        window.top.location.reload();
+      }
+
     }
   });
 }
@@ -1555,7 +1622,7 @@ export function toggle_blur_code() {
 export async function change_language(lang: string) {
   await tryCatchPopup(async () => {
     const response = await postJsonWithAchievements('/change_language', { lang });
-    if (response.succes) {
+    if (response.success) {
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
 
@@ -1958,6 +2025,7 @@ async function saveIfNecessary() {
       program_id: saveInfo?.id,
       // We pass 'public' in here to save the backend a lookup
       share: saveInfo?.public,
+      short_name: adventure.short_name,
     });
 
     // Record that we saved successfully
