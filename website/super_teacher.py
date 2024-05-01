@@ -1,10 +1,12 @@
 
 from flask import render_template, request
+from flask_babel import gettext
 from website.auth import requires_super_teacher, pick, is_teacher
 import utils
 
 from .database import Database
 from .website_module import WebsiteModule, route
+from .admin import update_is_teacher
 
 
 class SuperTeacherModule(WebsiteModule):
@@ -57,14 +59,15 @@ class SuperTeacherModule(WebsiteModule):
             "experience_languages",
             "language",
             "keyword_language",
-            "support_teacher"
+            "support_teacher",
+            "pair_with_teacher",
         ]
 
         for user in users:
             data = pick(user, *fields)
             data["email_verified"] = not bool(data["verification_pending"])
             data["is_teacher"] = bool(data["is_teacher"])
-            if not data["is_teacher"]:
+            if not data["is_teacher"] and not data["teacher_request"]:
                 continue
             data["teacher_request"] = True if data["teacher_request"] else None
             data["created"] = utils.timestamp_to_date(data["created"])
@@ -142,3 +145,26 @@ class SuperTeacherModule(WebsiteModule):
 
         self.db.update_user(source_user["username"], {"support_teacher": target_user["username"]})
         return "Done", 200
+
+    @route("/markAsTeacher", methods=["POST"])
+    @requires_super_teacher
+    def mark_as_teacher(self, user):
+
+        body = request.json
+
+        if not isinstance(body, dict):
+            return gettext("ajax_error"), 400
+        if not isinstance(body.get("username"), str):
+            return gettext("username_invalid"), 400
+        if not isinstance(body.get("is_teacher"), bool):
+            return gettext("teacher_invalid"), 400
+
+        user = self.db.user_by_username(body["username"].strip().lower())
+
+        if not user:
+            return gettext("username_invalid"), 400
+
+        is_teacher_value = 1 if body["is_teacher"] else 0
+        update_is_teacher(self.db, user, is_teacher_value)
+
+        return "Done!", 200

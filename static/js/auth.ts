@@ -184,7 +184,7 @@ export function initializeFormSubmits() {
 
 // *** Admin functionality ***
 
-export function markAsTeacher(checkbox: any, username: string, is_teacher: boolean, pending_request: boolean) {
+export function markAsTeacher(checkbox: any, username: string, is_teacher: boolean, pending_request: boolean, by_super_teacher = false) {
   $(checkbox).prop('checked', false);
   let text = "Are you sure you want to remove " + username + " as a teacher?";
   if (is_teacher) {
@@ -192,7 +192,7 @@ export function markAsTeacher(checkbox: any, username: string, is_teacher: boole
   }
   modal.confirm (text, async () => {
     try {
-      await postNoResponse('/admin/markAsTeacher', {
+      await postNoResponse(by_super_teacher ? '/super-teacher/markAsTeacher' : '/admin/markAsTeacher', {
         username: username,
         is_teacher: is_teacher,
       });

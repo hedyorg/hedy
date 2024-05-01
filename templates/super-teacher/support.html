@@ -11,7 +11,7 @@
           <td class="px-2 py-2 text-center" id="last_login_header">Last login</td>
           <td class="px-2 py-2 text-center" id="language_header">Language</td>
           <td class="px-2 py-2 text-center" id="country_header">Country</td>
-          <td class="px-2 py-2 text-white text-center bg-blue-900" id="">Support Teacher</td>
+          <td class="px-2 py-2 text-white text-center bg-blue-900" id="">Actions</td>
       </tr>
     </thead>
     <tbody>
@@ -23,12 +23,16 @@
             <td class="language_cell text-center p-2">{{user.language}}</td>
             <td class="country_cell text-center p-2">{{user.country}}</td>
             <td class="tags_cell text-center cursor-pointer text-center p-2">
+            {% if user.teacher_request %}
+                <button class="blue-btn" onclick="hedyApp.markAsTeacher (this, '{{user.username}}', true, true, true)">Make teacher</button>
+            {% else %}
               {% if user.support_teacher %}
                 {{user.support_teacher}}
               {% else %}
                 <button class="green-btn" id="invite-support-teacher"
-                  onclick='hedyApp.invite_support_teacher("{{user.username}}")'>{{_('invite_by_username')|lower}}</button>
+                  onclick='hedyApp.invite_support_teacher("{{user.username}}")'>Pair support teacher</button>
               {% endif %}
+            {% endif %}
             </td>
           </tr>
       {% endfor %}
