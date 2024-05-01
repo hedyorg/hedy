@@ -4529,23 +4529,9 @@ adventures:
 
                     # Roep de functie op
                     ```
-            14:
-                story_text: "In de vorige levels heb je het spel \"boter, kaas en eieren\" kunnen maken. Nu heb je het `=` teken, het `==` teken en het `!=` teken geleerd. \nJe kunt deze kennis toepassen in het \"boter, kaas en eieren\" spel op deze manier:\n"
-                example_code: |
-                    ```
-                    # Plak je code hier en pas het aan naar level 17
-
-                    # Maak een functie die een winaar uitroepen
-                    {define} winnaar_uitroepen {with} veld, teken:
-                        {if} veld[1] == veld[2] {and} veld[2] == veld[3] {and} veld[1] != '.':
-                            game_over = 'ja'
-                            {print} 'Speler ' teken 'wint!'
-                        {elif}:
-                            _
-                        {else}:
-                            game_over = 'nee'
-                    {return} _
-                    ```
+            17:
+                example_code: "```\n# Paste your code here and make it level 17 proof\n\n# Create a function that detects if someone has won\n{define} detect_winner {with} field, sign:\n    {if} field[1] == field[2] {and} field[2] == field[3] {and} field[1] != '.':\n        game_over = 'yes'\n        {print} 'Player ' sign 'wins!'\n    {elif}:\n        _\n    {else}:\n        game_over = 'no'\n{return} _\n```\n"
+                story_text: "In the previous level you've learned how to make a tic-tac-toe game. The game works, but is quite annoying as it keeps asking you if you've won yet.\nNow that we have the {elif} command, we can let the game decide if someone has won and it can stop asking us!\n\n### Exercise\n***Paste your code*** Paste your code from the previous level here and make it level 17 proof. In this level you've learned to use a colon everytime you create a block of code. Please add the colons in the correct spots.\n\n***Create a function that detects if someone's won*** We have started the function for you, paste it under the function `print_field` and finish the function. You can see that this first piece of code checks to see if spot 1, 2 and 3 are the same, because if they are you have 3 in a row.\nIt also checks if they are not a dot, because if they are, the line might have the same symbols on them, but that's just because it's still empty.\nIf all these conditions are met, the game is over and the winner is printed.\nFinish this function with all possible ways to win. This means you have to make this for the other 2 rows, 3 columns and 2 diagonals.\nIf you've finished all the other options, the function should return the variable `game_over` so we can use it in our game.\n\n***Call the function in the game*** Go to the line `game_over = {ask} 'Did you win?'` and change it to `game_over = {call} detect_winner {with} field, sign`. Now the function will check if there's a winner and the game doesn't need to keep asking anymore!\n\n***Enjoy your game!*** Great job! You have finished the game! Enjoy playing it!\n"
     tic_2:
         name: Boter-kaas-en-eieren 2
         default_save_name: Tic
