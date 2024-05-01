@@ -35,7 +35,9 @@ class SuperTeacherModule(WebsiteModule):
         language = None if language == "null" else language
         keyword_language = None if keyword_language == "null" else keyword_language
 
-        users = self.db.user_by_pair_with_teacher()
+        pagination_token = request.args.get("page", default=None, type=str)
+
+        users = self.db.all_users(pagination_token)
 
         userdata = []
         fields = [
@@ -103,6 +105,7 @@ class SuperTeacherModule(WebsiteModule):
             text_filter=substring,
             language_filter=language,
             keyword_language_filter=keyword_language,
+            next_page_token=users.next_page_token,
             current_page="admin",
             javascript_page_options=dict(page='super-teacher'),
         )
