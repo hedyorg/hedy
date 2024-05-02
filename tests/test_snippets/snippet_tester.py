@@ -56,12 +56,12 @@ def listify(fn):
 def collect_adventures_snippets():
     """Find the snippets for adventures."""
     for filename, language, yaml in find_yaml_files('content/adventures'):
-        for adventure_key, adventure in yaml['adventures'].items():
+        for adventure_key, adventure in yaml.get('adventures', {}).items():
             # the default tab sometimes contains broken code to make a point to learners about changing syntax.
             if adventure_key in ['default', 'debugging']:
                 continue
 
-            for level_number, level in adventure['levels'].items():
+            for level_number, level in adventure.get('levels', {}).items():
                 for markdown_text in level.values():
                     for code in markdown_code_blocks(markdown_text.as_string()):
                         yield YamlSnippet(
@@ -91,7 +91,7 @@ def collect_cheatsheet_snippets():
 def collect_parsons_snippets():
     """Find the snippets in Parsons YAMLs."""
     for filename, language, yaml in find_yaml_files('content/parsons'):
-        for level_number, level in yaml['levels'].items():
+        for level_number, level in yaml.get('levels', {}).items():
             for exercise in level:
                 code = exercise['code']
                 yield YamlSnippet(
@@ -106,7 +106,7 @@ def collect_parsons_snippets():
 def collect_slides_snippets():
     """Find the snippets in slides YAMLs."""
     for filename, language, yaml in find_yaml_files('content/slides'):
-        for level_number, level in yaml['levels'].items():
+        for level_number, level in yaml.get('levels', {}).items():
             for slide in level:
                 # Some slides have code that is designed to fail
                 if slide.get('debug'):
