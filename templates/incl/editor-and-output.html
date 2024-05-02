@@ -1,230 +1,180 @@
 {% set editor_height='22rem' %}
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
-<div id="editor-area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4">
+    <div id="editor-area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4">
 
-    <div id="fold_out_toggle_container" class="hidden absolute z-10 top-16 ltr:-left-2 rtl:-right-2 cursor-pointer"
-         onclick="hedyApp.show_editor();">
-        <div class="bg-green-500 text-white py-3 rounded-lg text-sm">
-            <span>→</span>
-        </div>
+    <div id="fold_out_toggle_container" class="hidden absolute z-10 top-16 ltr:-left-2 rtl:-right-2 cursor-pointer" onclick="hedyApp.show_editor();">
+     <div class="bg-green-500 text-white py-3 rounded-lg text-sm">
+         <span>→</span>
+     </div>
     </div>
     <!-- Row 1: editor, output pane -->
-    <div data-devmodeheight="{{ editor_height }},36rem" class="flex flex-col order-1 relative" id="code_editor"
-         style="height: {{ editor_height }}">
-        <div id="fold_in_toggle_container"
-             class="hidden md:flex absolute z-10 top-16 ltr:-right-1 rtl:-left-1 cursor-pointer"
-             onclick="hedyApp.hide_editor();">
-            <div id="text_field" class="bg-green-500 text-white py-3 rounded-lg text-sm">
-                <span>←</span>
-            </div>
+    <div data-devmodeheight="{{editor_height}},36rem" class="flex flex-col order-1 relative" id="code_editor" style="height: {{editor_height}}">
+        <div id="fold_in_toggle_container" class="hidden md:flex absolute z-10 top-16 ltr:-right-1 rtl:-left-1 cursor-pointer" onclick="hedyApp.hide_editor();">
+         <div id="text_field" class="bg-green-500 text-white py-3 rounded-lg text-sm">
+             <span>←</span>
+         </div>
         </div>
         <!--The div below is used to send translation of search to Ace through the frontend-->
-        <div id="search_placeholder" style="display: none" :>{{ _('search') }}</div>
+        <div id="search_placeholder" style="display: none":>{{_('search')}}</div>
         <!-- Status warning -->
         <div data-view="if-submitted"
-             class="hidden flex-0 z-20 mt-0 bg-yellow-100 border-b-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md">
-            {{ _('submitted_header') }}
+          class="hidden flex-0 z-20 mt-0 bg-yellow-100 border-b-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md">
+          {{_('submitted_header')}}
         </div>
 
         <!-- The actual editor -->
-        <div id="editor" style="background: #272822; font-size:0.95em; color: white; direction: {{ g.dir }};" lang="en"
-             blurred='false'
-             {% if editor_readonly %}data-readonly="true"{% endif %}
-             class="w-full flex-1 text-lg rounded min-h-0 overflow-hidden fixed-editor-height"></div>
-        <div id="parsons_code_container" class="w-full flex flex-col mx-auto gap-2 items-center hover:cursor"
-             style="display: none;">
+        <div id="editor" style="background: #272822; font-size:0.95em; color: white; direction: {{ g.dir }};" lang="en" blurred='false'
+          {% if editor_readonly %}data-readonly="true"{% endif %}
+          class="w-full flex-1 text-lg rounded min-h-0 overflow-hidden fixed-editor-height"></div>
+        <div id="parsons_code_container" class="w-full flex flex-col mx-auto gap-2 items-center hover:cursor" style="display: none;">
             {% for i in range(1, 11) %}
-                <div class="relative w-full p-2 border-4 border-black rounded-lg parsons_goal_line_container cursor-grab"
-                     style="background-color: #272822;" id="parsons_line_{{ i }}">
-                    <div id="parsons_line_data_{{ i }}" data-index="" data-code="" draggable="true"
-                         class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                <div class="relative w-full p-2 border-4 border-black rounded-lg parsons_goal_line_container cursor-grab" style="background-color: #272822;" id="parsons_line_{{ i }}">
+                    <div id="parsons_line_data_{{ i }}" data-index="" data-code="" draggable="true" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
                     <pre level="{{ level }}" id="goal_parsons_{{ i }}" class="goal_parsons parsons text-sm m-0"></pre>
                 </div>
             {% endfor %}
         </div>
         <!-- errorbox -->
         <div id="errorbox"
-             class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md"
-             role="alert"
-             style="display: none;">
-            <p class="close-dialog" onclick="hedyApp.error.hide ()"><i class="fa-solid fa-xmark"></i></p>
-            <div class="flex">
-                <div class="py-1">
-                    <svg class="fill-current h-6 w-6 text-red-500 ltr:mr-4 rtl:ml-4" xmlns="http://www.w3.org/2000/svg"
-                         viewBox="0 0 20 20">
-                        <path
-                                d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/>
-                    </svg>
-                </div>
-                <div>
-                    <p class="caption font-bold">Oops</p>
-                    <p class="details text-sm" data-cy="error_details">An error occurred.</p>
-                </div>
+          class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
+          style="display: none;">
+          <p class="close-dialog" onclick="hedyApp.error.hide ()"><i class="fa-solid fa-xmark"></i></p>
+          <div class="flex">
+            <div class="py-1">
+              <svg class="fill-current h-6 w-6 text-red-500 ltr:mr-4 rtl:ml-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path
+                  d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+              </svg>
             </div>
+            <div>
+              <p class="caption font-bold">Oops</p>
+              <p class="details text-sm" data-cy="error_details">An error occurred.</p>
+            </div>
+          </div>
         </div>
         <!-- warningbox -->
         <div id="warningbox"
-             class="flex-0 z-20 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md"
-             role="alert" style="display: none;">
-            <p class="close-dialog" onclick="hedyApp.error.hide ()"><i class="fa-solid fa-xmark"></i></p>
-            <div class="flex">
-                <div class="py-1">
-                    <div id="warningbox_icon">
-                        <svg class="fill-current h-6 w-6 text-yellow-500 ltr:mr-4 rtl:ml-4"
-                             xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 20 20">
-                            <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/>
-                        </svg>
-                    </div>
-                </div>
-                <div>
-                    <p class="caption font-bold">Oops</p>
-                    <p class="details text-sm">An error occurred.</p>
+          class="flex-0 z-20 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md"
+          role="alert" style="display: none;">
+          <p class="close-dialog" onclick="hedyApp.error.hide ()"><i class="fa-solid fa-xmark"></i></p>
+          <div class="flex">
+            <div class="py-1">
+                <div id="warningbox_icon">
+                    <svg class="fill-current h-6 w-6 text-yellow-500 ltr:mr-4 rtl:ml-4" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20">
+                <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+              </svg>
                 </div>
             </div>
+            <div>
+              <p class="caption font-bold">Oops</p>
+              <p class="details text-sm">An error occurred.</p>
+            </div>
+          </div>
         </div>
         <!-- okbox -->
         <div id="okbox"
-             class="flex-0 z-20 mt-0 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md"
-             role="alert" style="display: none;">
-            <div class="flex">
-                <div class="flex w-full justify-between items-center">
-                    <p class="caption font-bold">Success</p>
-                    <button class="hidden" id="confetti-button" onclick="hedyApp.confetti_cannon()">🎉</button>
-                    <!-- <p class="details text-sm">Something went according to plan.</p> -->
-                </div>
+          class="flex-0 z-20 mt-0 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md"
+          role="alert" style="display: none;">
+          <div class="flex">
+            <div class="flex w-full justify-between items-center">
+              <p class="caption font-bold">Success</p>
+              <button class="hidden" id="confetti-button" onclick="hedyApp.confetti_cannon()">🎉</button>
+              <!-- <p class="details text-sm">Something went according to plan.</p> -->
             </div>
+          </div>
         </div>
     </div>
-    <div data-devmodeheight="{{ editor_height }},36rem" data-origheight="{{ editor_height }}"
-         class="w-full flex flex-col order-3 relative min-h-0 overflow-hidden" id="code_output"
-         style="height: {{ editor_height }}">
-        <!-- tabindex=0 makes the div focusable -->
-        <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto"
-             style="min-height: 3rem;"></div>
-                <div id="variables-expand" class="my-3">
-            <div id="open-variables" onclick='hedyApp.expandVariableView()'
-                 class="h-2 z-10 bg-blue-500 content-center justify-center grid text-center">
-                <div class="w-fit bg-blue-500 text-white px-5 rounded-lg text-sm">
-                    <span>↑</span>
-                </div>
-            </div>
-            <div id="close-variables" onclick='hedyApp.closeVariableView()'
-                 class="hidden h-2 z-10 bg-blue-500 content-center justify-center grid text-center">
-                <div class="w-fit bg-blue-500 text-white px-5 rounded-lg text-sm">
-                    <span>↓</span>
-                </div>
+    <div data-devmodeheight="{{editor_height}},36rem" data-origheight="{{editor_height}}" class="w-full flex flex-col order-3 relative min-h-0 overflow-hidden" id="code_output" style="height: {{editor_height}}">
+        <div class="inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 text-white" id="variables_container">
+            <button id="variable_button" class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" onclick="hedyApp.showVariableView()">
+                🏷<svg class="float-right w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round"  d="M19 9l-7 7-7-7"></path>
+                    </svg>
+            </button>
+            <div class="absolute hidden inline-block flex ltr:right-0 rtl:left-0 z-10 text-white bg-blue-600 rounded-lg ltr:mr-1 rtl:ml-1 mt-2" id="variables">
+                <div id="variables_header" class="text-center text-lg font-bold px-4">{{_('variables')}}</div>
+                <ul id="variable-list" class="px-4 whitespace-nowrap list-none mt-0" style="margin-left: 0px;"></ul> <!-- For some reason the Tailwind ml-0 doesn't do the trick here -->
             </div>
         </div>
+      <!-- tabindex=0 makes the div focusable -->
+      <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto" style="min-height: 3rem;"></div>
 
-        <div class="h-24 overflow-auto hidden inline-block flex z-10 text-white bg-blue-100 rounded-lg"
-             id="variables">
-            <div id="variables_header"
-                 class="text-center text-lg font-bold px-4 bg-blue-100 text-blue-500">{{ _('variables') }}</div>
-            <ul id="variable-list" class="bg-blue-100 text-blue-500 px-4 whitespace-nowrap list-none mt-0"
-                style="margin-left: 0px;"></ul>
-            <!-- For some reason the Tailwind ml-0 doesn't do the trick here -->
-        </div>
-        <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
-        <div id="inline-modal" class="flex-0 absolute bottom-0 w-full z-20">
-            <div id="ask-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100"
-                 style="display: none">
-                <!--Title-->
-                <div class="flex justify-between items-center">
-                    <p class="text-2xl font-bold caption">Header</p>
-                </div>
-                <!--Body-->
-                <!--Body-->
-                <form>
-                    <div class="my-2 flex">
-                        <input type="text" class="border border-green-400 rounded p-2 px-3 flex-1"
-                               placeholder="{{ _('enter_text') }}">
-                        <input type="submit" class="flex-0 green-btn ltr:ml-3 rtl:mr-3" value="{{ _('enter') }}"></p>
-                    </div>
-                </form>
+      <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
+      <div id="inline-modal" class="flex-0 absolute bottom-0 w-full z-20">
+        <div id="ask-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none">
+          <!--Title-->
+          <div class="flex justify-between items-center">
+            <p class="text-2xl font-bold caption">Header</p>
+          </div>
+          <!--Body-->
+          <!--Body-->
+          <form>
+            <div class="my-2 flex">
+              <input type="text" class="border border-green-400 rounded p-2 px-3 flex-1" placeholder="{{_('enter_text')}}">
+              <input type="submit" class="flex-0 green-btn ltr:ml-3 rtl:mr-3" value="{{_('enter')}}"></p>
             </div>
-            <div id="keybinding-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100"
-                 style="display: none;z-index: 99; position: absolute; bottom: 0; width: 100%;">
-                <!--Title-->
-                <div class="flex justify-between items-center">
-                    <p class="text-2xl font-bold caption">{{ _('keybinding_waiting_for_keypress') }}</p>
-                </div>
-            </div>
-            <div id="sleep-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100"
-                 style="display: none;z-index: 99;">
-                <!--Title-->
-                <div class="flex justify-between items-center">
-                    <p class="text-2xl font-bold caption">{{ _('sleeping') }}</p>
-                </div>
-            </div>
+          </form>
         </div>
-        <div id="dynamic-buttons"
-             class="flex mt-3 gap-2 overflow-auto border-4 border-blue-600 rounded bg-blue-300 py-2 px-3"
-             style="display: none">
+        <div id="keybinding-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99; position: absolute; bottom: 0; width: 100%;">
+          <!--Title-->
+          <div class="flex justify-between items-center">
+            <p class="text-2xl font-bold caption">{{_('keybinding_waiting_for_keypress')}}</p>
+          </div>
         </div>
+        <div id="sleep-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99;">
+          <!--Title-->
+          <div class="flex justify-between items-center">
+            <p class="text-2xl font-bold caption">{{_('sleeping')}}</p>
+          </div>
+        </div>
+      </div>
+      <div id="dynamic-buttons" class="flex mt-3 gap-2 overflow-auto border-4 border-blue-600 rounded bg-blue-300 py-2 px-3" style="display: none">
+      </div>
     </div>
     <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
     <div class="order-2 md:order-4" id="code_related_buttons">
-        {% if not raw %}
-            <div id="not-logged-in-warning"
-                 class="hidden bg-yellow-200 text-sm px-4 py-1 border-2 border-yellow-400 mb-4">
-                {{ _('not_logged_in_cantsave') }}. <a href="/login"
-                                                      class="text-black">{{ _('login_to_save_your_work') }}</a>
-            </div>
-        {% endif %}
-        <div class="flex justify-between gap-2 items-start h-12 overflow-visible">
-            <div id="runButtonContainer">
-                <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}",
-                        {% if raw %}{{ raw | lower }}{% else %}false{% endif %}, {{ _('already_program_running')|default(None)|tojson }}, "run")'>{{ _('run_code_button') }} </button>
-                <button id="stopit" class="red-btn" onclick="hedyApp.stopit()"
-                        style="display: none;">{{ _('stop_code_button') }}</button>
-            </div>
-            <div id="saveMicrobitFilesContainer" {% if not microbit_feature %} class="hidden" {% endif %} >
-                <button id="runMicrobit" class="green-btn"
-                        onclick="hedyApp.saveMicrobit({{ level }});"> {{ _('Save Microbit code ') }}
-                    <img src="{{ static('/images/microbit_logo_icon_248480.png') }}"
-                         style="width: 25px; height: 25px; margin-left: 1px; display: inline;" alt=""/>
-                </button>
-            </div>
-            <div id="saveFilesContainer" class="hidden">
-                <button id="saveFiles" class="green-btn" onclick="hedyApp.saveMachineFiles();">💾</button>
-            </div>
-            <div id="debug_container" class="ltr:ml-auto rtl:mr-auto">
-                <button id="debug_button" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}",
-                        {% if raw %}{{ raw | lower }}{% else %}false{% endif %}, {{ _('already_program_running')|default(None)|tojson }}, "debug")'>
-                    🐞
-                </button>
-                <button id="debug_restart" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}",
-                        {% if raw %}{{ raw | lower }}{% else %}false{% endif %}, {{ _('already_program_running')|default(None)|tojson }}, "debug")'>
-                    🔄
-                </button>
-                <button id="debug_stop" class="green-btn hidden" onclick="hedyApp.stopDebug()">🛑</button>
-                <button id="debug_continue" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}",
-                        {% if raw %}{{ raw | lower }}{% else %}false{% endif %}, {{ _('already_program_running')|default(None)|tojson }}, "continue")'>
-                    <div class="{% if g.dir == "rtl" %}rotate-180{% endif %}">⏩</div>
-                </button>
-            </div>
-            <button id="next_parson_button" max_exercise="{{ parsons_exercises }}"
-                    class="green-btn ltr:ml-auto rtl:mr-auto" style="display: none;">{{ _('next_exercise') }}</button>
-            {% if show_edit_button %}
-                <button onclick="window.location = '/hedy/{{ level }}/{{ program_id }}'"
-                        class="blue-btn ltr:ml-4 rtl:mr-4">{{ _('edit_code_button') }}</button>
-            {% else %}
-                <img src="{{ static('/images/Hedylightbulb_1.svg') }}" onclick="hedyApp.modalStepOne()"
-                     class="hidden h-28 -mt-2" id="repair_button" alt="{{ _('repair_program_logo_alt') }}">
-            {% endif %}
-            {% if editor_readonly and is_admin %}
-                <button onclick="hedyApp.delete_program('{{ program_id }}', {{ 0 }}, '{{ _('delete_confirm') }}')"
-                        class="red-btn">{{ _('delete') }}</button>
-            {% endif %}
+      {% if not raw %}
+      <div id="not-logged-in-warning" class="hidden bg-yellow-200 text-sm px-4 py-1 border-2 border-yellow-400 mb-4">
+        {{ _('not_logged_in_cantsave') }}. <a href="/login" class="text-black">{{_('login_to_save_your_work')}}</a>
+      </div>
+      {% endif %}
+      <div class="flex justify-between gap-2 items-start h-12 overflow-visible">
+        <div id="runButtonContainer">
+          <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>{{_('run_code_button')}} </button>
+          <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
         </div>
+      <div id="saveMicrobitFilesContainer" {% if not microbit_feature %} class="hidden" {% endif %} >
+        <button id="runMicrobit" class="green-btn" onclick="hedyApp.saveMicrobit({{ level }});" > {{ _('Save Microbit code ') }}
+            <img src="{{ static('/images/microbit_logo_icon_248480.png') }}" style="width: 25px; height: 25px; margin-left: 1px; display: inline;" alt=""/>
+        </button>
+      </div>
+        <div id="saveFilesContainer" class="hidden">
+          <button id="saveFiles" class="green-btn" onclick="hedyApp.saveMachineFiles();">💾</button>
+        </div>
+        <div id="debug_container" class="ltr:ml-auto rtl:mr-auto">
+          <button id="debug_button" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>🐞</button>
+          <button id="debug_restart" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>🔄</button>
+          <button id="debug_stop" class="green-btn hidden" onclick="hedyApp.stopDebug()">🛑</button>
+          <button id="debug_continue" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "continue")'><div class="{% if g.dir == "rtl" %}rotate-180{% endif %}">⏩</div></button>
+        </div>
+        <button id="next_parson_button" max_exercise="{{ parsons_exercises }}" class="green-btn ltr:ml-auto rtl:mr-auto" style="display: none;">{{_('next_exercise')}}</button>
+        {% if show_edit_button %}
+            <button onclick="window.location = '/hedy/{{level}}/{{program_id}}'" class="blue-btn ltr:ml-4 rtl:mr-4">{{_('edit_code_button')}}</button>
+        {% else %}
+            <img src="{{static('/images/Hedylightbulb_1.svg')}}" onclick="hedyApp.modalStepOne()" class="hidden h-28 -mt-2" id="repair_button" alt="{{_('repair_program_logo_alt')}}">
+        {% endif %}
+        {% if editor_readonly and is_admin %}
+                <button onclick="hedyApp.delete_program('{{ program_id }}', {{ 0 }}, '{{_('delete_confirm')}}')" class="red-btn">{{_('delete')}}</button>
+        {% endif %}
+      </div>
     </div>
     {% if not public_adventures_page %}
-        <div class="order-5">
-            <div class="flex justify-between" id="pagination_container">
-                <button class="green-btn previous-tab ltr:ml-1 rtl:mr-1"
-                        href="#"
-                        _="on load or click from .tab
+    <div class="order-5">
+          <div class="flex justify-between" id="pagination_container">
+            <button class="green-btn previous-tab ltr:ml-1 rtl:mr-1"
+              href="#"
+              _="on load or click from .tab
                 set :els to hedyApp.getPreviousAndNext()
                 if :els[0]
                   set *display to 'block'
@@ -241,41 +191,29 @@
                 end
                 put arrow + prevContent into my innerHTML
                 on click call :els[0].click()"></button>
-                <!--
-                  TODO:
-                  investigate why next_level is always incremented instead of assigned to the level that's actually next.
-                  For instance, disable level 2, but leave the rest enabled; now next_level is 2 but should be 3.
-                 -->
-                {% if prev_level and (not customizations or prev_level in customizations['available_levels']) %}
-                    <div class="flex-1 text-center content-center">
-                        <div class="inline-block z-10 mx-2 text-white"
-                             id="variables_container">
-                            <button id="variable_button"
-                                    class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg"
-                                    onclick="hedyApp.showVariableView()">
-                                🏷
-                                <svg class="float-right w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <a id="prev_level_button"
-                           class="green-btn ltr:ml-1 rtl:mr-1 hidden"
-                           href="#"
-                           _="on load or click from .tab
+            <!--
+              TODO:
+              investigate why next_level is always incremented instead of assigned to the level that's actually next.
+              For instance, disable level 2, but leave the rest enabled; now next_level is 2 but should be 3.
+             -->
+            {% if prev_level and (not customizations or prev_level in customizations['available_levels']) %}
+              <div class="flex-1">
+                <a id="prev_level_button"
+                  class="green-btn ltr:ml-1 rtl:mr-1 hidden"
+                  href="#"
+                  _="on load or click from .tab
                       if the *display of .previous-tab is 'none'
                         toggle .hidden on me
                       else
                         add .hidden to me
                       end
-                      on click hedyApp.goToLevel({{ prev_level }})">{{ _('regress_button')|replace("{level}", prev_level) }}</a>
-                    </div>
-                {% endif %}
+                      on click hedyApp.goToLevel({{prev_level}})">{{_('regress_button')|replace("{level}", prev_level)}}</a>
+              </div>
+            {% endif %}
 
-                <button class="green-btn next-tab ltr:ml-1 rtl:mr-1"
-                        href="#"
-                        _="on load or click from .tab
+            <button class="green-btn next-tab ltr:ml-1 rtl:mr-1"
+              href="#"
+              _="on load or click from .tab
                 set :els to hedyApp.getPreviousAndNext()
                 if :els[1]
                   set *display to 'block'
@@ -290,50 +228,48 @@
                 end
                 put nextContent + arrow into my innerHTML
                 on click call :els[1].click()"></button>
-                {% if not quiz and not parsons and next_level and (not customizations or next_level in customizations['available_levels']) %}
-                    <a id="next_level_button"
-                       class="green-btn ltr:ml-1 rtl:mr-1 hidden"
-                       href="#"
-                       _="on load or click from .tab
+            {% if not quiz and not parsons and next_level and (not customizations or next_level in customizations['available_levels']) %}
+              <a id="next_level_button"
+                class="green-btn ltr:ml-1 rtl:mr-1 hidden"
+                href="#"
+                _="on load or click from .tab
                     if the *display of .next-tab is 'none'
                       toggle .hidden on me
                     else
                       add .hidden to me
                     end
-                    on click hedyApp.goToLevel({{ next_level }})">{{ _('advance_button')|replace("{level}", next_level) }}</a>
-                {% endif %}
-            </div>
-        </div>
-    {% endif %}
-</div>
-{% if not raw %}
-    <div id="speak_container" class="hidden mt-4 flex flex-row items-center w-max overflow-visible">
-        <label for="speak_dropdown" id="speak_aloud_label" class="ltr:mr-2 rtl:ml-2">{{ _('read_code_label') }}:</label>
-        <select id="speak_dropdown"
-                class="appearance-none w-40 bg-gray-200 border border-gray-600 text-gray-700 py-1 px-4 rounded">
-            <option value="">🤫</option>
-        </select>
+                    on click hedyApp.goToLevel({{next_level}})">{{_('advance_button')|replace("{level}", next_level)}}</a>
+            {% endif %}
+          </div>
     </div>
-{% endif %}
+    {% endif %}
+  </div>
+  {% if not raw %}
+  <div id="speak_container" class="hidden mt-4 flex flex-row items-center w-max overflow-visible">
+      <label for="speak_dropdown" id="speak_aloud_label" class="ltr:mr-2 rtl:ml-2">{{_('read_code_label')}}:</label>
+      <select id="speak_dropdown" class="appearance-none w-40 bg-gray-200 border border-gray-600 text-gray-700 py-1 px-4 rounded">
+        <option value="">🤫</option>
+      </select>
+  </div>
+  {% endif %}
 <!-- developer mode toggle -->
 {% if raw or public_adventures_page %}
-    <div _="on load hedyApp.toggleDevelopersMode('load', false)"></div>
+  <div _="on load hedyApp.toggleDevelopersMode('load', false)"></div>
 {% elif not enforce_developers_mode and not editor_readonly %}
-    <div class="mx-auto mt-4 w-64 border-gray-400 border-2 rounded-full py-2 px-4" id="developers_toggle_container">
-        <label for="developers_toggle" class="flex flex-row items-center justify-center cursor-pointer">
-            <div class="relative">
-                <input id="developers_toggle" type="checkbox" class="sr-only"
-                       _="on load hedyApp.toggleDevelopersMode('load', false)
+  <div class="mx-auto mt-4 w-64 border-gray-400 border-2 rounded-full py-2 px-4" id="developers_toggle_container">
+    <label for="developers_toggle" class="flex flex-row items-center justify-center cursor-pointer">
+      <div class="relative">
+        <input id="developers_toggle" type="checkbox" class="sr-only"
+        _="on load hedyApp.toggleDevelopersMode('load', false)
           on click hedyApp.toggleDevelopersMode('click', false)">
-                <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner" id="dev_toggle"></div>
-                <div
-                        id="toggle_circle"
-                        class="toggle-circle absolute w-6 h-6 bg-white rounded-full shadow ltr:-left-1 rtl:-right-1 -top-1 transition"
-                        style="top: -5px;"></div>
-            </div>
-            <div class="ltr:ml-3 rtl:mr-3">{{ _('developers_mode') }}</div>
-        </label>
-    </div>
+        <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner" id="dev_toggle"></div>
+        <div
+          id="toggle_circle"
+          class="toggle-circle absolute w-6 h-6 bg-white rounded-full shadow ltr:-left-1 rtl:-right-1 -top-1 transition" style="top: -5px;"></div>
+      </div>
+      <div class="ltr:ml-3 rtl:mr-3">{{_('developers_mode')}}</div>
+    </label>
+  </div>
 {% else %}
-    <div _="on load hedyApp.toggleDevelopersMode('load', true)"></div>
+  <div _="on load hedyApp.toggleDevelopersMode('load', true)"></div>
 {% endif %}
