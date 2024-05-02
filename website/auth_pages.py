@@ -248,7 +248,7 @@ class AuthModule(WebsiteModule):
             self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         session[JUST_LOGGED_OUT] = True
         remove_class_preview()
-        return "", 200
+        return make_response('', 204)
 
     @ route("/destroy", methods=["POST"])
     @ requires_login
@@ -257,14 +257,14 @@ class AuthModule(WebsiteModule):
         self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         self.db.forget_user(user["username"])
         session[JUST_LOGGED_OUT] = True
-        return "", 200
+        return make_response('', 204)
 
     @ route("/destroy_public", methods=["POST"])
     @ requires_login
     def destroy_public(self, user):
         self.db.forget_public_profile(user["username"])
         session.pop("profile_image", None)  # Delete profile image id if existing
-        return "", 200
+        return make_response('', 204)
 
     @ route("/change_student_password", methods=["POST"])
     @ requires_login
@@ -431,6 +431,7 @@ class AuthModule(WebsiteModule):
             "username": username,
             "password": hashed,
             "email": email,
+            "phone": account.get("phone"),
             "language": account["language"],
             "keyword_language": account["keyword_language"],
             "created": timems(),
@@ -438,6 +439,7 @@ class AuthModule(WebsiteModule):
             "verification_pending": hashed_token,
             "last_login": timems(),
             "pair_with_teacher": 1 if account.get("pair_with_teacher") else 0,
+            "connect_guest_teacher": 1 if account.get("connect_guest_teacher") else 0,
         }
 
         for field in ["country", "birth_year", "gender", "language", "heard_about", "prog_experience",

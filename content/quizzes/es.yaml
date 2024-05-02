@@ -3813,11 +3813,11 @@ levels:
             code: |-
                 {print} 'El sorteo de libros va a empezar pronto'
                 {print} '¡Compra tus boletos ahora!'
-                {books} = ['Narnia', 'El Hobbit', 'Oliver Twist', 'Harry Potter', 'Huevos verdes con jamón']
+                books = ['Narnia', 'El Hobbit', 'Oliver Twist', 'Harry Potter', 'Huevos verdes con jamón']
                 gente = {ask} '¿Cuántos tickets has vendido?'
-                lista_numeros_sorteo = [1, 2]
+                lista_de_numeros = [1, 2]
                 {for} i {in} {range} 3 {to} gente
-                    {add} i {to} lista_numeros_sorteo
+                    {add} i {to} lista_de_numeros
                 {for} i {in} {range} 1 {to} 5
             mp_choice_options:
             -   option: |-
@@ -4047,7 +4047,7 @@ levels:
             code: |-
                 nombre = {ask} 'Cuál es tu nombre?'
                 {if} nombre == 'Hedy':
-                contraseña = {ask} 'Cuál es tu contraseña?'
+                    contraseña = {ask} 'Cuál es tu contraseña?'
                     {if} contraseña =='tortuga123':
                         {print} 'Yeah'
                     {else}:

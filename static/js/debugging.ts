@@ -54,17 +54,15 @@ interface GutterMouseDownEvent {
   stop(): void;
 }
 
-function hide_if_no_variables(){ //this shows just the button, not the list itself
+//this shows just the button, not the list itself
+export function hide_if_no_variables(){
   if($('#variables #variable-list li').length == 0){
     $('#variable_button').hide();
     $('#variables').hide();
+    $('#variables-expand'). hide();
   }
   else{
     $('#variable_button').show();
-    if(variable_view){
-      $('#variables').show();
-    }
-    
   }
 }
 
@@ -101,20 +99,19 @@ function special_style_for_variable(variable: Variable) {
   let result = '';
   let parsedVariable = parseInt(variable.v as string);
   if (typeof parsedVariable == 'number' && !isNaN(parsedVariable)){
-     result =  "#ffffff";
+     result =  "#4299e1";
    }
    if(typeof variable.v == 'string' && isNaN(parsedVariable)){
-     result = "#ffffff";
+     result = "#4299e1";
    }
    if(typeof variable.v == 'boolean'){
-     result = "#ffffff";
+     result = "#4299e1";
    }
    if (variable.tp$name == 'list'){
-    result =  "#ffffff";
+    result =  "#4299e1";
    }
    return result;
 }
-
 //hiding certain variables from the list unwanted for users
 function clean_variables(variables: Record<string, Variable>) {
   const new_variables = [];
@@ -151,7 +148,6 @@ export function initializeDebugger(options: InitializeDebuggerOptions) {
   theGlobalEditor = options.editor;
   theLevel = options.level;
   theLanguage = options.language;
-  
   let TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;
   let lang = options.keywordLanguage;
   if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
@@ -181,7 +177,6 @@ export function initializeDebugger(options: InitializeDebuggerOptions) {
     show_variables();
     hide_if_no_variables();
   }
-
   initializeBreakpoints(options.editor);
 }
 

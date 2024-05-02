@@ -1,4 +1,4 @@
-from flask import jsonify, request, session
+from flask import jsonify, make_response, request, session
 from flask_babel import gettext
 
 import hedy
@@ -280,4 +280,4 @@ class AchievementsModule(WebsiteModule):
                         )
                     }
                 )
-        return jsonify({})
+        return make_response('', 204)
