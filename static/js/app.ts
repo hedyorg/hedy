@@ -1471,10 +1471,9 @@ export function expandVariableView() {
   }
 
   const variables = $('#variables');
-  variables.removeClass('h-24');
-  variables.addClass('h-full');
   const output = $('#output');
-  output.hide();
+  variables.addClass('h-1/2');
+  output.addClass('h-1/2');
 }
 
 export function closeVariableView() {
@@ -1485,12 +1484,12 @@ export function closeVariableView() {
       closeVariables.addClass('hidden');
   }
 
-    const variables = $('#variables');
-  variables.addClass('h-24');
-  variables.removeClass('h-full');
-    const output = $('#output');
-  output.show();
+  const variables = $('#variables');
+  const output = $('#output');
+  variables.removeClass('h-1/2');
+  output.removeClass('h-1/2');
 }
+
 export function confetti_cannon(){
   const canvas = document.getElementById('confetti');
   if (canvas) {
