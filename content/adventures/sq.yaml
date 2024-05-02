@@ -4469,280 +4469,148 @@ adventures:
                     movement = [ 'round and round', 'open and shut', _]
                     ```
     tic:
-        name: Tik tak tou
-        default_save_name: Tik
-        description: Luani lojën e Tik tak tou!
+        name: Tic-Tac-Toe
+        default_save_name: Tic
+        description: Play a game of Tic Tac Toe!
         levels:
-            13:
+            16:
                 story_text: |
-                    Në këtë aventurë ju mund të programoni një lojë të Tik tak tou. Mund të luani me dy persona. Me radhë, ju zgjidhni një numër të vendit (1 - 9) ku dëshironi të vendosni shenjën tuaj (x ose o).
-                    Lojtari i parë që merr 3 me radhë (horizontalisht, vertikalisht ose diagonalisht) fiton!
+                    Let's program a game of tic-tac-toe!
+
+                    ### Exercise
+                    In this adventure we'll start with creating an empty field.
+
+                    ***Create a list called field*** This list will be our playing field. This list is filled with 9 dots, since there are no x's and o's yet at the start of our game.
+
+                    ***Create a function that prints the field*** Firstly, clear the screen so the old playing fields will be removed. Then we print the first line of our Tic Tac Toe field. This line constists of the first 3 spots in our list field.
+                    We have already programmed this line for you. Now finish the field by printing spot 4, 5, and 6 on the second row and spot 7, 8 and 9 in the third row.
+
+                    ***Call the function that prints the field*** Now call the function.
+                    <div class="w-full flex flex-row gap-2">
+                        Run the code. Your output should look like this: <img src="https://github.com/hedyorg/hedy/assets/80678586/bcbd156e-4b48-4e82-84ae-f86d21b0cbcc" width="100">
+                    </div>
+
+                    ***Continue in the next tab*** In the next tab you'll learn how to program the game itself.
                 example_code: |
                     ```
-                    shenja = 'x'
-                    pika_të_hapura = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    loja = 'ndezur'
-                    vendi_1 = '.'
-                    vendi_2 = '.'
-                    vendi_3 = '.'
-                    vendi_4 = '.'
-                    vendi_5 = '.'
-                    vendi_6 = '.'
-                    vendi_7 = '.'
-                    vendi_8 = '.'
-                    vendi_9 = '.'
-                    {print} 'Tik tak tou!'
-                    {print} vendi_1 vendi_2 vendi_3
-                    {print} vendi_4 vendi_5 vendi_6
-                    {print} vendi_7 vendi_8 vendi_9
-                    {print} " "
-                    {for} i {in} {range} 1 {to} 9
-                        {if} loja {is} 'ndezur'
-                            zgjedhje = {ask} 'Lojtari ' shenja', cili vend?'
-                            {if} zgjedhje {in} pika_të_hapura
-                                {remove} zgjedhje {from} pika_të_hapura
-                                {if} zgjedhje {is} 1
-                                    vendi_1 = shenja
-                                {if} zgjedhje {is} 2
-                                    vendi_2 = shenja
-                                {if} zgjedhje {is} 3
-                                    vendi_3 = shenja
-                                {if} zgjedhje {is} 4
-                                    vendi_4 = shenja
-                                {if} zgjedhje {is} 5
-                                    vendi_5 = shenja
-                                {if} zgjedhje {is} 6
-                                    vendi_6 = shenja
-                                {if} zgjedhje {is} 7
-                                    vendi_7 = shenja
-                                {if} zgjedhje {is} 8
-                                    vendi_8 = shenja
-                                {if} zgjedhje {is} 9
-                                    vendi_9 = shenja
-                            {else}
-                                {print} 'Ai vend ishte zënë tashmë'
-                            {print} vendi_1 vendi_2 vendi_3
-                            {print} vendi_4 vendi_5 vendi_6
-                            {print} vendi_7 vendi_8 vendi_9
-                            {print} " "
-                            fitues = {ask} 'A fitove?'
-                            {if} fitues {is} 'po'
-                                {print} 'Punë e mirë, lojtari 'shenja'!'
-                                loja = 'mbaruar'
-                            {else}
-                                {if} shenja {is} 'x'
-                                    shenja = 'o'
-                                {else}
-                                    shenja = 'x'
-                    ```
-            14:
-                story_text: |
-                    Në nivelet e mëparshme ju keni bërë një lojë Tik tak tou. Tani keni mësuar se si të përdorni shenjën =, shenjën == dhe shenjën !=.
-                    Ju mund ta përdorni këtë njohuri në lojën tuaj të re Tik tak tou, si kjo:
-                example_code: |
-                    ```
-                    shenja = 'x'
-                    pika_të_hapura = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    loja = 'ndezur'
-                    vendi_1 = '.'
-                    vendi_2 = '.'
-                    vendi_3 = '.'
-                    vendi_4 = '.'
-                    vendi_5 = '.'
-                    vendi_6 = '.'
-                    vendi_7 = '.'
-                    vendi_8 = '.'
-                    vendi_9 = '.'
-                    {print} 'TIK TAK TOU!'
-                    {print} vendi_1 vendi_2 vendi_3
-                    {print} vendi_4 vendi_5 vendi_6
-                    {print} vendi_7 vendi_8 vendi_9
-                    {print} " "
-                    {for} i {in} {range} 1 {to} 9
-                        {if} loja != 'mbaruar'
-                            zgjedhje = {ask} 'Lojtari ' shenja ', cili vend?'
-                            {if} zgjedhje {in} pika_të_hapura
-                                {remove} zgjedhje {from} pika_të_hapura
-                                {if} zgjedhje == 1
-                                    vendi_1 = shenja
-                                {if} zgjedhje == 2
-                                    vendi_2 = shenja
-                                {if} zgjedhje == 3
-                                    vendi_3 = shenja
-                                {if} zgjedhje == 4
-                                    vendi_4 = shenja
-                                {if} zgjedhje == 5
-                                    vendi_5 = shenja
-                                {if} zgjedhje == 6
-                                    vendi_6 = shenja
-                                {if} zgjedhje == 7
-                                    vendi_7 = shenja
-                                {if} zgjedhje == 8
-                                    vendi_8 = shenja
-                                {if} zgjedhje == 9
-                                    vendi_9 = shenja
-                            {else}
-                                {print} 'Ai vend ishte zënë tashmë'
-                            {print} vendi_1 vendi_2 vendi_3
-                            {print} vendi_4 vendi_5 vendi_6
-                            {print} vendi_7 vendi_8 vendi_9
-                            {print} " "
-                            fitues = {ask} 'A fitove?'
-                            {if} fitues == 'po'
-                                {print} 'Punën e mirë, lojtari 'shenja'!'
-                                loja = 'mbaruar'
-                            {else}
-                                {if} shenja == 'x'
-                                    shenja = 'o'
-                                {else}
-                                    shenja = 'x'
-                    ```
-            15:
-                story_text: |
-                    Në këtë nivel ju mund të përmirësoni lojën tuaj Tik Tak Tou me komandën {while}. Me këtë lak ju mund të kombinoni lojën `{if} game != 'over'` dhe `{for} i {in} {range} 1 to 9` në një rresht të thjeshtë.
-                    Kontrolloje:
-                example_code: |
-                    ```
-                    shenja = 'x'
-                    pika_të_hapura = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    loja = 'ndezur'
-                    vendi_1 = '.'
-                    vendi_2 = '.'
-                    vendi_3 = '.'
-                    vendi_4 = '.'
-                    vendi_5 = '.'
-                    vendi_6 = '.'
-                    vendi_7 = '.'
-                    vendi_8 = '.'
-                    vendi_9 = '.'
-                    {print} 'TIK TAK TOU!'
-                    {print} vendi_1 vendi_2 vendi_3
-                    {print} vendi_4 vendi_5 vendi_6
-                    {print} vendi_7 vendi_8 vendi_9
-                    {print} " "
-                    {while} loja != 'mbaruar'
-                        zgjedhje = {ask} 'Shenja e lojtarit , cili vend?'
-                        {if} zgjedhje {in} pika_të_hapura
-                            {remove} zgjedhje {from} pika_të_hapura
-                            {if} zgjedhje == 1
-                                vendi_1 = shenja
-                            {if} zgjedhje == 2
-                                vendi_2 = shenja
-                            {if} zgjedhje == 3
-                                vendi_3 = shenja
-                            {if} zgjedhje == 4
-                                vendi_4 = shenja
-                            {if} zgjedhje == 5
-                                vendi_5 = shenja
-                            {if} zgjedhje == 6
-                                vendi_6 = shenja
-                            {if} zgjedhje == 7
-                                vendi_7 = shenja
-                            {if} zgjedhje == 8
-                                vendi_8 = shenja
-                            {if} zgjedhje == 9
-                                vendi_9 = shenja
-                        {else}
-                            {print} 'Ai vend ishte zënë tashmë'
-                        {print} vendi_1 vendi_2 vendi_3
-                        {print} vendi_4 vendi_5 vendi_6
-                        {print} vendi_7 vendi_8 vendi_9
-                        {print} " "
-                        fitues = {ask} 'A fitove?'
-                        {if} fitues == 'po'
-                            {print} 'Punë e mirë, lojtari ' shenja'!'
-                            loja = 'mbaruar'
-                        {else}
-                            {if} shenja == 'x'
-                                shenja = 'o'
-                            {else}
-                                shenja = 'x'
+                    # Create a list called field
+                    _ = ['.', '.', '.', '.', '.', '.', '.', '.', '.']
+
+                    # Create a function that prints the field
+                    {define} print_field
+                        _
+                        {print} 'TIC TAC TOE'
+                        {print} field[1] field[2] field[3]
+                        _
+                        _
+
+                    # Call the function
                     ```
             17:
                 story_text: |
-                    Në nivelet e mëparshme loja tik tak tou kishte një veçori të bezdisshme. Pas çdo lëvizjeje, duhej të plotësoje veten nëse kishe fituar apo jo.
-                    Kjo e bëri lojën të luajtshme, por edhe mjaft të ngadaltë. Në këtë nivel kemi mësuar komandën `{elif}`, që mund ta zgjidhë atë problem.
-                    Të përdorësh {elif} për të lejuar Hedy-n të kontrollojë nëse një lojtar ka fituar apo jo është argëtuese, por kërkon gjithashtu një sasi të mjaftueshme linjash shtesë.
+                    In the previous level you've learned how to make a tic-tac-toe game. The game works, but is quite annoying as it keeps asking you if you've won yet.
+                    Now that we have the {elif} command, we can let the game decide if someone has won and it can stop asking us!
 
-                    Në kodin e shembullit shihni se kemi shtuar kërkesat për të fituar (3 pika rresht horizontalisht, vertikalisht ose diagonalisht).
-                    Mund t'i gjeni në rreshtat 46 deri në 69. Mund të shihni se sa herë që plotësohet kërkesa (pra nëse një lojtar ka fituar) variabla 'loja' bëhet në 'mbaruar'.
-                    Kjo do të thotë që cikli {while} do të ndalet dhe loja përfundon.
+                    ### Exercise
+                    ***Paste your code*** Paste your code from the previous level here and make it level 17 proof. In this level you've learned to use a colon everytime you create a block of code. Please add the colons in the correct spots.
+
+                    ***Create a function that detects if someone's won*** We have started the function for you, paste it under the function `print_field` and finish the function. You can see that this first piece of code checks to see if spot 1, 2 and 3 are the same, because if they are you have 3 in a row.
+                    It also checks if they are not a dot, because if they are, the line might have the same symbols on them, but that's just because it's still empty.
+                    If all these conditions are met, the game is over and the winner is printed.
+                    Finish this function with all possible ways to win. This means you have to make this for the other 2 rows, 3 columns and 2 diagonals.
+                    If you've finished all the other options, the function should return the variable `game_over` so we can use it in our game.
+
+                    ***Call the function in the game*** Go to the line `game_over = {ask} 'Did you win?'` and change it to `game_over = {call} detect_winner {with} field, sign`. Now the function will check if there's a winner and the game doesn't need to keep asking anymore!
+
+                    ***Enjoy your game!*** Great job! You have finished the game! Enjoy playing it!
+
                 example_code: |
                     ```
-                    shenja = 'x'
-                    pika_të_hapura = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-                    loja = 'ndezur'
-                    vendi_1 = '.'
-                    vendi_2 = '.'
-                    vendi_3 = '.'
-                    vendi_4 = '.'
-                    vendi_5 = '.'
-                    vendi_6 = '.'
-                    vendi_7 = '.'
-                    vendi_8 = '.'
-                    vendi_9 = '.'
-                    {print} 'TIK TAK TOU!'
-                    {print} vendi_1 vendi_2 vendi_3
-                    {print} vendi_4 vendi_5 vendi_6
-                    {print} vendi_7 vendi_8 vendi_9
-                    {print} " "
-                    {while} loja != 'mbaroi':
-                        zgjedhje = {ask} 'Lojtari 'shenja ', cili vend?'
-                        {if} zgjedhje {in} pika_të_hapura:
-                            {remove} zgjedhje {from} pika_të_hapura
-                            {if} zgjedhje == 1:
-                                vendi_1 = shenja
-                            {if} zgjedhje == 2:
-                                vendi_2 = shenja
-                            {if} zgjedhje == 3:
-                                vendi_3 = shenja
-                            {if} zgjedhje == 4:
-                                vendi_4 = shenja
-                            {if} zgjedhje == 5:
-                                vendi_5 = shenja
-                            {if} zgjedhje == 6:
-                                vendi_6 = shenja
-                            {if} zgjedhje == 7:
-                                vendi_7 = shenja
-                            {if} zgjedhje == 8:
-                                vendi_8 = shenja
-                            {if} zgjedhje == 9:
-                                vendi_9 = shenja
+                    # Paste your code here and make it level 17 proof
+
+                    # Create a function that detects if someone has won
+                    {define} detect_winner {with} field, sign:
+                        {if} field[1] == field[2] {and} field[2] == field[3] {and} field[1] != '.':
+                            game_over = 'yes'
+                            {print} 'Player ' sign 'wins!'
+                        {elif}:
+                            _
                         {else}:
-                            {print} 'Ai vend ishte zënë tashmë'
-                        {print} vendi_1 vendi_2 vendi_3
-                        {print} vendi_4 vendi_5 vendi_6
-                        {print} vendi_7 vendi_8 vendi_9
-                        {print} " "
-                        {if} vendi_1 == vendi_2 {and} vendi_2 == vendi_3 {and} vendi_1 != '.':
-                            {print} 'Lojtari ' shenja ' fiton!'
-                            loja = 'mbaruar'
-                        {elif} vendi_4 == vendi_5 {and} vendi_5 == vendi_6 {and} vendi_4 != '.':
-                            {print} 'Lojtari ' shenja ' fiton!'
-                            loja = 'mbaruar'
-                        {elif} vendi_7 == vendi_8 {and} vendi_8 == vendi_9 {and} vendi_7 != '.':
-                            {print} 'Lojtari ' shenja ' fiton!'
-                            loja = 'mbaruar'
-                        {elif} vendi_1 == vendi_4 {and} vendi_4 == vendi_7 {and} vendi_1 != '.':
-                            {print} 'Lojtari ' shenja ' fiton!'
-                            loja = 'mbaruar'
-                        {elif} vendi_2 == vendi_5 {and} vendi_5 == vendi_8 {and} vendi_2 != '.':
-                            {print} 'Lojtari ' shenja ' fiton!'
-                            loja = 'mbaruar'
-                        {elif} vendi_3 == vendi_6 {and} vendi_6 == vendi_9 {and} vendi_3 != '.':
-                            {print} 'Lojtari ' shenja ' fiton!'
-                            loja = 'mbaruar'
-                        {elif} vendi_1 == vendi_5 {and} vendi_5 == vendi_9 {and} vendi_1 != '.':
-                            {print} 'Lojtari ' shenja ' fiton!'
-                            loja = 'mbaruar'
-                        {elif} vendi_3 == vendi_5 {and} vendi_5 == vendi_7 {and} vendi_3 != '.':
-                            {print} 'Lojtari ' shenja ' fiton!'
-                            loja = 'mbaruar'
-                        {else}:
-                            {if} shenja == 'x':
-                                shenja = 'o'
-                            {else}:
-                                shenja = 'x'
+                            game_over = 'no'
+                    {return} _
+                    ```
+    tic_2:
+        name: Tic-Tac-Toe 2
+        default_save_name: Tic
+        description: Play a game of Tic Tac Toe!
+        levels:
+            16:
+                story_text: |
+                    In the previous adventure you've learned how to create a playing field. Now you'll learn how to create the game!
+
+                    ### Exercise
+                    ***Paste your code*** Start by pasting your code from the previous adventure here.
+
+                    ***Add variables*** Underneath your list called `field` we'll add 2 more variables that we'll need to program the game.
+                    The variable `game_over` tells us if the game is over, and should be 'no' at the start of the game.
+                    The variable `sign` tells us if it's the turn of player x or player o. Set the variable to 'x'.
+
+                    ***The game*** First use a {while} command, to make sure the game keeps on playing the variable while game_over is set to no.
+                    During the game, we first ask the player which spot they choose. Then we change the field with the number they chose into their sign.
+                    Then we print the field again and we ask the player if they've won yet. Lastly we want to switch whose turn it is, so if the sign is 'x' it should be 'o' and the other way around.
+
+                    ***Test your game*** Does your game work? Great, have fun playing the game! If not, use the ladybug button to debug your code.
+                    You might have noticed one mistake in the code though, you can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and steal their spot.
+                    That's not fair! Go to the next tab to learn how to fix this problem.
+                example_code: |
+                    ```
+                    # Paste your code from the previous adventure here
+
+                    # Add variables
+                    game_over = _
+                    sign = _
+
+                    # The game
+                    {while} _
+                        choice = _ 'Player ' sign '_?'
+                        field[choice] = _
+                        _ print_field
+                        game_over = {ask} _
+                        {if} sign = 'o'
+                            sign = _
+                        _
+                            sign = _
+                    ```
+    tic_3:
+        name: Tic-Tac-Toe 3
+        default_save_name: Tic
+        description: Play a game of Tic Tac Toe!
+        levels:
+            16:
+                story_text: |
+                    You might have noticed one mistake in the code you've made in the previous adventure. You can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and steal their spot.
+                    That's not fair! In this tab we'll fix that mistake.
+
+                    ### Exercise
+                    ***Paste your code here*** Paste your code from the previous adventure here.
+
+                    ***Fix the mistake*** To fix the mistake we replace the line that says `field[choice] = sign`. This turns any spot that the player has chosen into their sign.
+                    Go to the header that says 'Use this to fix the mistake' and finish the code. We first want to check if the chosen spot is still empty, so `if field[choice] = '.'`. If that is the case, you are allowed to take it.
+                    Then we make an else command and print 'Sorry, this spot is already taken' if the spot is not empty. Lastly, we add a {sleep} command, so the players can actually read the text before it gets cleared again.
+                    Now copy this piece of code and replace the line `field[choice] = sign` with this new piece of code.
+
+                    ***Play your game!*** Now the game should work properly! Good job!
+                    The only flaw is that you can get a bit annoyed that the game keeps asking you if you've won yet. Do you want to fix that? Go to level 17 and we'll fix it!
+                example_code: |
+                    ```
+                    # Paste your code here
+
+                    # Use this to fix the mistake
+                    {if} _ = '.'
+                        field[choice] = sign
+                    {else}
+                        {print} _
+                        _
                     ```
     turtle:
         name: Breshka

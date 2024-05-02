@@ -4529,248 +4529,148 @@ adventures:
                     movement = [ 'round and round', 'open and shut', _]
                     ```
     tic:
-        name: Tic Tac Toe
+        name: Tic-Tac-Toe
         default_save_name: Tic
-        description: Tic Tac Toe 를 해보자!
+        description: Play a game of Tic Tac Toe!
         levels:
-            13:
+            16:
                 story_text: |
-                    이 모험에서 당신은 Tic Tac Toe 게임을 프로그래밍 할 수 있습니다. 당신은 두명과 함께 게임을 할 수 있습니다. 교대로 기호(x 또는 o)를 달고 싶은 점(1 - 9)의 번호를 선택합니다.
-                    3개(가로, 세로, 대각선) 연속으로 획득한 첫 번째 플레이어가 승리합니다!
+                    Let's program a game of tic-tac-toe!
 
-                    ### 연습문제 1
-                    게임은 작동하지만 몇 가지 문제가 있습니다. 예를 들어, 어떤 플레이어든 이미 선택된 필드라도 선택할 수 있습니다! 자리를 잡았는지 아닌지 `{if}`를 사용하고, 만약 그렇다면 플레이어에게 경고하십시오.
+                    ### Exercise
+                    In this adventure we'll start with creating an empty field.
 
-                    ### 연습문제 2
-                    게임 또한 누가 이겼는지를 결정하지 않습니다. 3개의 자리가 같은 기호인지 확인하여 추가해야 합니다.
+                    ***Create a list called field*** This list will be our playing field. This list is filled with 9 dots, since there are no x's and o's yet at the start of our game.
 
-                    ### 연습문제 3 Extra
-                    당신은 항상 같이 놀 친구가 있는 것은 아닙니다. 당신은 컴퓨터 상대를 만들 수 있습니까?
+                    ***Create a function that prints the field*** Firstly, clear the screen so the old playing fields will be removed. Then we print the first line of our Tic Tac Toe field. This line constists of the first 3 spots in our list field.
+                    We have already programmed this line for you. Now finish the field by printing spot 4, 5, and 6 on the second row and spot 7, 8 and 9 in the third row.
+
+                    ***Call the function that prints the field*** Now call the function.
+                    <div class="w-full flex flex-row gap-2">
+                        Run the code. Your output should look like this: <img src="https://github.com/hedyorg/hedy/assets/80678586/bcbd156e-4b48-4e82-84ae-f86d21b0cbcc" width="100">
+                    </div>
+
+                    ***Continue in the next tab*** In the next tab you'll learn how to program the game itself.
                 example_code: |
                     ```
-                    player = 'x'
-                    field = '.', '.', '.', '.', '.', '.', '.', '.', '.'
+                    # Create a list called field
+                    _ = ['.', '.', '.', '.', '.', '.', '.', '.', '.']
 
-                    {for} i {in} {range} 1 {to} 9
-                        choice = {ask} 'Player ' player ' what spot do you choose?'
-                        field {at} choice = player
-                        {clear}
-                        {print} field {at} 1 field {at} 2 field {at} 3
-                        {print} field {at} 4 field {at} 5 field {at} 6
-                        {print} field {at} 7 field {at} 8 field {at} 9
-                        {if} player = 'x'
-                            player = 'o'
-                        {else}
-                            player = 'x'
-                    ```
-            14:
-                story_text: |
-                    이전 레벨에서는 Tic Tac Toe 게임을 만들었지만 이제 = 기호, == 기호 및 != 기호를 사용하는 방법에 대해 배웠습니다.
-                    이 지식을 당신의 새로운 틱택토 게임에 사용할 수 있습니다, 이렇게요:
-                example_code: |
-                    ```
-                    sign = 'x'
-                    open_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    game = 'on'
-                    spot_1 = '.'
-                    spot_2 = '.'
-                    spot_3 = '.'
-                    spot_4 = '.'
-                    spot_5 = '.'
-                    spot_6 = '.'
-                    spot_7 = '.'
-                    spot_8 = '.'
-                    spot_9 = '.'
-                    {print} 'TIC TAC TOE!'
-                    {print} spot_1 spot_2 spot_3
-                    {print} spot_4 spot_5 spot_6
-                    {print} spot_7 spot_8 spot_9
-                    {print} ' '
-                    {for} i {in} {range} 1 {to} 9
-                        {if} game != 'over'
-                            choice = {ask} 'Player ' sign ', which spot?'
-                            {if} choice {in} open_spots
-                                {remove} choice {from} open_spots
-                                {if} choice == 1
-                                    spot_1 = sign
-                                {if} choice == 2
-                                    spot_2 = sign
-                                {if} choice == 3
-                                    spot_3 = sign
-                                {if} choice == 4
-                                    spot_4 = sign
-                                {if} choice == 5
-                                    spot_5 = sign
-                                {if} choice == 6
-                                    spot_6 = sign
-                                {if} choice == 7
-                                    spot_7 = sign
-                                {if} choice == 8
-                                    spot_8 = sign
-                                {if} choice == 9
-                                    spot_9 = sign
-                            {else}
-                                {print} 'That spot was already taken'
-                            {print} spot_1 spot_2 spot_3
-                            {print} spot_4 spot_5 spot_6
-                            {print} spot_7 spot_8 spot_9
-                            {print} ' '
-                            winner = {ask} 'Did you win?'
-                            {if} winner == 'yes'
-                                {print} 'Good job, player ' sign '!'
-                                game = 'over'
-                            {else}
-                                {if} sign == 'x'
-                                    sign = 'o'
-                                {else}
-                                    sign = 'x'
-                    ```
-            15:
-                story_text: |
-                    이 레벨에서 {while} 루프로 Tic Tac Toe 게임을 향상시킬 수 있다. 이 루프로 `{if} game != 'over'`와 `{for} i {in} {range} 1 {to} 9`를 하나의 간단한 행으로 결합할 수 있다.
-                    확인해보세요:
-                example_code: |
-                    ```
-                    sign = 'x'
-                    open_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    game = 'on'
-                    spot_1 = '.'
-                    spot_2 = '.'
-                    spot_3 = '.'
-                    spot_4 = '.'
-                    spot_5 = '.'
-                    spot_6 = '.'
-                    spot_7 = '.'
-                    spot_8 = '.'
-                    spot_9 = '.'
-                    {print} 'TIC TAC TOE!'
-                    {print} spot_1 spot_2 spot_3
-                    {print} spot_4 spot_5 spot_6
-                    {print} spot_7 spot_8 spot_9
-                    {print} ' '
-                    {while} game != 'over'
-                        choice = {ask} 'Player ' sign ', which spot?'
-                        {if} choice {in} open_spots
-                            {remove} choice {from} open_spots
-                            {if} choice == 1
-                                spot_1 = sign
-                            {if} choice == 2
-                                spot_2 = sign
-                            {if} choice == 3
-                                spot_3 = sign
-                            {if} choice == 4
-                                spot_4 = sign
-                            {if} choice == 5
-                                spot_5 = sign
-                            {if} choice == 6
-                                spot_6 = sign
-                            {if} choice == 7
-                                spot_7 = sign
-                            {if} choice == 8
-                                spot_8 = sign
-                            {if} choice == 9
-                                spot_9 = sign
-                        {else}
-                            {print} 'That spot was already taken'
-                        {print} spot_1 spot_2 spot_3
-                        {print} spot_4 spot_5 spot_6
-                        {print} spot_7 spot_8 spot_9
-                        {print} ' '
-                        winner = {ask} 'Did you win?'
-                        {if} winner == 'yes'
-                            {print} 'Good job, player ' sign '!'
-                            game = 'over'
-                        {else}
-                            {if} sign == 'x'
-                                sign = 'o'
-                            {else}
-                                sign = 'x'
+                    # Create a function that prints the field
+                    {define} print_field
+                        _
+                        {print} 'TIC TAC TOE'
+                        {print} field[1] field[2] field[3]
+                        _
+                        _
+
+                    # Call the function
                     ```
             17:
                 story_text: |
-                    이전 레벨에서 Tic Tac Toe 게임은 짜증나는 특징을 가지고 있었다. 모든 동작이 끝난 후, 당신이 이기거나 그렇지 않으면 당신은 자신을 채워야 했다.
-                    이것은 게임을 플레이할 수 있게 해주었지만, 또한 매우 느렸다. 이 레벨에서 우리는 이 문제를 해결할 수 있는 `{elif}` 명령어를 배웠다.
-                    Hedy가 승리 여부를 확인할 수 있도록 `{elif}`를 사용하는 것도 재미있지만 상당한 추가 라인이 필요하다.
+                    In the previous level you've learned how to make a tic-tac-toe game. The game works, but is quite annoying as it keeps asking you if you've won yet.
+                    Now that we have the {elif} command, we can let the game decide if someone has won and it can stop asking us!
 
-                    예제 코드에서는 우승을 위한 요건(가로, 세로, 대각선으로 연속으로 3개 지점)을 추가했습니다.
-                    46번부터 69번 행까지에서 찾을 수 있다. 조건이 충족될 때마다(그러므로 플레이어가 승리한 경우) 가변 게임이 '오버'로 설정되는 것을 볼 수 있다.
-                    이는 `{while}` 루프가 중단되고 게임이 종료된다는 것을 의미한다.
+                    ### Exercise
+                    ***Paste your code*** Paste your code from the previous level here and make it level 17 proof. In this level you've learned to use a colon everytime you create a block of code. Please add the colons in the correct spots.
+
+                    ***Create a function that detects if someone's won*** We have started the function for you, paste it under the function `print_field` and finish the function. You can see that this first piece of code checks to see if spot 1, 2 and 3 are the same, because if they are you have 3 in a row.
+                    It also checks if they are not a dot, because if they are, the line might have the same symbols on them, but that's just because it's still empty.
+                    If all these conditions are met, the game is over and the winner is printed.
+                    Finish this function with all possible ways to win. This means you have to make this for the other 2 rows, 3 columns and 2 diagonals.
+                    If you've finished all the other options, the function should return the variable `game_over` so we can use it in our game.
+
+                    ***Call the function in the game*** Go to the line `game_over = {ask} 'Did you win?'` and change it to `game_over = {call} detect_winner {with} field, sign`. Now the function will check if there's a winner and the game doesn't need to keep asking anymore!
+
+                    ***Enjoy your game!*** Great job! You have finished the game! Enjoy playing it!
+
                 example_code: |
                     ```
-                    sign = 'x'
-                    open_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-                    game = 'on'
-                    spot_1 = '.'
-                    spot_2 = '.'
-                    spot_3 = '.'
-                    spot_4 = '.'
-                    spot_5 = '.'
-                    spot_6 = '.'
-                    spot_7 = '.'
-                    spot_8 = '.'
-                    spot_9 = '.'
-                    {print} 'TIC TAC TOE!'
-                    {print} spot_1 spot_2 spot_3
-                    {print} spot_4 spot_5 spot_6
-                    {print} spot_7 spot_8 spot_9
-                    {print} ' '
-                    {while} game != 'over':
-                        choice = {ask} 'Player ' sign ', which spot?'
-                        {if} choice {in} open_spots:
-                            {remove} choice {from} open_spots
-                            {if} choice == 1:
-                                spot_1 = sign
-                            {if} choice == 2:
-                                spot_2 = sign
-                            {if} choice == 3:
-                                spot_3 = sign
-                            {if} choice == 4:
-                                spot_4 = sign
-                            {if} choice == 5:
-                                spot_5 = sign
-                            {if} choice == 6:
-                                spot_6 = sign
-                            {if} choice == 7:
-                                spot_7 = sign
-                            {if} choice == 8:
-                                spot_8 = sign
-                            {if} choice == 9:
-                                spot_9 = sign
+                    # Paste your code here and make it level 17 proof
+
+                    # Create a function that detects if someone has won
+                    {define} detect_winner {with} field, sign:
+                        {if} field[1] == field[2] {and} field[2] == field[3] {and} field[1] != '.':
+                            game_over = 'yes'
+                            {print} 'Player ' sign 'wins!'
+                        {elif}:
+                            _
                         {else}:
-                            {print} 'That spot was already taken'
-                        {print} spot_1 spot_2 spot_3
-                        {print} spot_4 spot_5 spot_6
-                        {print} spot_7 spot_8 spot_9
-                        {print} ' '
-                        {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {else}:
-                            {if} sign == 'x':
-                                sign = 'o'
-                            {else}:
-                                sign = 'x'
+                            game_over = 'no'
+                    {return} _
+                    ```
+    tic_2:
+        name: Tic-Tac-Toe 2
+        default_save_name: Tic
+        description: Play a game of Tic Tac Toe!
+        levels:
+            16:
+                story_text: |
+                    In the previous adventure you've learned how to create a playing field. Now you'll learn how to create the game!
+
+                    ### Exercise
+                    ***Paste your code*** Start by pasting your code from the previous adventure here.
+
+                    ***Add variables*** Underneath your list called `field` we'll add 2 more variables that we'll need to program the game.
+                    The variable `game_over` tells us if the game is over, and should be 'no' at the start of the game.
+                    The variable `sign` tells us if it's the turn of player x or player o. Set the variable to 'x'.
+
+                    ***The game*** First use a {while} command, to make sure the game keeps on playing the variable while game_over is set to no.
+                    During the game, we first ask the player which spot they choose. Then we change the field with the number they chose into their sign.
+                    Then we print the field again and we ask the player if they've won yet. Lastly we want to switch whose turn it is, so if the sign is 'x' it should be 'o' and the other way around.
+
+                    ***Test your game*** Does your game work? Great, have fun playing the game! If not, use the ladybug button to debug your code.
+                    You might have noticed one mistake in the code though, you can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and steal their spot.
+                    That's not fair! Go to the next tab to learn how to fix this problem.
+                example_code: |
+                    ```
+                    # Paste your code from the previous adventure here
+
+                    # Add variables
+                    game_over = _
+                    sign = _
+
+                    # The game
+                    {while} _
+                        choice = _ 'Player ' sign '_?'
+                        field[choice] = _
+                        _ print_field
+                        game_over = {ask} _
+                        {if} sign = 'o'
+                            sign = _
+                        _
+                            sign = _
+                    ```
+    tic_3:
+        name: Tic-Tac-Toe 3
+        default_save_name: Tic
+        description: Play a game of Tic Tac Toe!
+        levels:
+            16:
+                story_text: |
+                    You might have noticed one mistake in the code you've made in the previous adventure. You can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and steal their spot.
+                    That's not fair! In this tab we'll fix that mistake.
+
+                    ### Exercise
+                    ***Paste your code here*** Paste your code from the previous adventure here.
+
+                    ***Fix the mistake*** To fix the mistake we replace the line that says `field[choice] = sign`. This turns any spot that the player has chosen into their sign.
+                    Go to the header that says 'Use this to fix the mistake' and finish the code. We first want to check if the chosen spot is still empty, so `if field[choice] = '.'`. If that is the case, you are allowed to take it.
+                    Then we make an else command and print 'Sorry, this spot is already taken' if the spot is not empty. Lastly, we add a {sleep} command, so the players can actually read the text before it gets cleared again.
+                    Now copy this piece of code and replace the line `field[choice] = sign` with this new piece of code.
+
+                    ***Play your game!*** Now the game should work properly! Good job!
+                    The only flaw is that you can get a bit annoyed that the game keeps asking you if you've won yet. Do you want to fix that? Go to level 17 and we'll fix it!
+                example_code: |
+                    ```
+                    # Paste your code here
+
+                    # Use this to fix the mistake
+                    {if} _ = '.'
+                        field[choice] = sign
+                    {else}
+                        {print} _
+                        _
                     ```
     turtle:
         name: 거북이
