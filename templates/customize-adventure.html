@@ -52,7 +52,7 @@ onclick="window.open('/for-teachers', '_self');">
                         
                     </div>
                     <div class="flex flex-row items-center mb-4">
-                        <label for="custom_adventure_levels" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('available_in')}}</label>                        
+                        <label for="custom_adventure_levels" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('available_in')}}</label>
                         <div class="flex-1">
                             <div class="dropdown dropdown-green rounded relative" id="level_select" data-value="" data-dropdown-initialize>
                                 <button type="button" class="toggle-button font-semibold rounded inline-flex justify-between 
@@ -80,18 +80,41 @@ onclick="window.open('/for-teachers', '_self');">
                                 </div>
                             </div>
                         </div>
-                    </div>                    
-                    <div class="flex flex-row items-center mb-4">
-                        <label for="language" class="inline-block w-40 text-xl">{{_('language')}}</label>
-                        <div class="flex-1">
-                            <select id="language" name="language" required class="toggle-button font-semibold rounded inline-flex justify-between appearance-none w-full border-2 bg-gray-100 text-gray-700 p-2 rounded">
-                                <option value="{{ adventure['language'] or current_language().lang }}" selected>{{ lang_to_sym(adventure['language'] or current_language().lang) }}</option>
-                                {% for language in other_languages(adventure["language"]) %}
-                                    <option value="{{language.lang}}">{{language.sym}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
                     </div>
+                    <div class="flex flex-row items-center mb-4">
+                        <label class="inline-block w-40 text-xl" for="language" data-te-select-label-ref>{{_('language')}}</label>
+                        <div class="flex-1">
+                            <div class="dropdown dropdown-green rounded relative"
+                                 id="language" 
+                                 data-value="" 
+                                 data-type="single" 
+                                 data-dropdown-initialize>
+                                
+                                 <button type="button" class="toggle-button font-semibold rounded inline-flex justify-between 
+                                                     appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
+                                    onclick="$('#languages_dropdown').slideToggle('medium');">
+                                    <span class="label" data-value="{{_('select_levels')}}">{{_('select_levels')}}</span>
+                                    <svg id="keyword-arrow_tag" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                    </svg>
+                                </button>
+                                <div class="dropdown-menu overflow-auto dropdown-blue z-30 mt-2 w-full h-96" id="languages_dropdown"
+                                    style="display: none; width: 100%;" _="on mutation of @style
+                                                        set arrow to #keyword-arrow_tag
+                                                        if *display == 'none'
+                                                            remove .rotate-180 from arrow
+                                                        else if not arrow.classList.contains('rotate-180')
+                                                            add .rotate-180 to arrow
+                                                        end">                                    
+                                    <div data-value="{{ adventure['language'] or current_language().lang }}" class="option selected">{{ lang_to_sym(adventure['language'] or current_language().lang) }}</div>                                    
+                                    {% for language in other_languages(adventure["language"]) %}
+                                        <div class="option" data-value="{{ language.lang }}">{{ language.sym }}</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
 
                     <div class="flex flex-row items-center mb-4">  
                         <label for="search_tags_input" class="inline-block w-40 text-xl">{{_('tags')}}</label>

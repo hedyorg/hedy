@@ -209,6 +209,8 @@ function update_db_adventure(adventure_id: string) {
     classes.push(el.getAttribute("data-value") as string)
   })
 
+  const language = document.querySelector('#languages_dropdown> .option.selected')!.getAttribute('data-value') as string
+
   const content = DOMPurify.sanitize(window.ckEditor.getData());
   
   const parser = new DOMParser();
@@ -228,7 +230,7 @@ function update_db_adventure(adventure_id: string) {
   }
 
   for (const snippet of snippets) {
-    snippetsFormatted.push(addCurlyBracesToCode(snippet, minLevel, $('#language').val() as string || 'en'));
+    snippetsFormatted.push(addCurlyBracesToCode(snippet, minLevel, language || 'en'));
   }
 
   for (const keyword of keywords) {
@@ -247,7 +249,6 @@ function update_db_adventure(adventure_id: string) {
   // We have to replace <br> for newlines, because the serializer swithces them around
   const formatted_content = html.getElementsByTagName('body')[0].outerHTML.replace(/<br>/g, '\n');
   const agree_public = $('#agree_public').prop('checked');
-  const language = $('#language').val();
 
   $.ajax({
     type: 'POST',

@@ -21,7 +21,7 @@ let keywordHasAlert: Map<string, boolean> = new Map()
 export async function initializeCustomAdventurePage(_options: InitializeCustomizeAdventurePage) {
     const editorContainer = document.querySelector('#adventure-editor') as HTMLElement;
     // Initialize the editor with the default language
-    let lang =  $('#language').val() as string || 'en'
+    let lang =  document.querySelector('#languages_dropdown> .option.selected')!.getAttribute('data-value') as string
     const TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;    
     if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
     let TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
@@ -35,7 +35,7 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
     }
 
     $('#language').on('change', () => {
-        let lang = $('#language').val() as string || 'en'
+        let lang = document.querySelector('#languages_dropdown> .option.selected')!.getAttribute('data-value') as string
         if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
         TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
     })
@@ -205,7 +205,7 @@ export function addCurlyBracesToCode(code: string, level: number, language: stri
 }
 
 export function addCurlyBracesToKeyword(name: string) {
-    let lang =  $('#language').val() as string || 'en'
+    let lang =  document.querySelector('#languages_dropdown> .option.selected')!.getAttribute('data-value') as string
     const TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;    
     if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
     let TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
