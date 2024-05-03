@@ -8,6 +8,7 @@ let TRADUCTION: Map<string,string>;
 
 //Feature flag for variable and values view
 let variable_view = true;
+let showRoles = false;
 let step_debugger = false;
 const fullLineCommands = [
   'print',
@@ -75,6 +76,8 @@ export function show_variables() {
   }
 }
 
+
+
 export function load_variables(variables: any) {
   if (variable_view === true) {
     const programData = theGlobalDebugger.get_program_data();
@@ -86,7 +89,11 @@ export function load_variables(variables: any) {
       if (variables[i][1]) {
         const variableName = variables[i][0].replace(/^_/, '');
         const role = programData.variables[variableName];
-        variableList.append(`<li style=color:${variables[i][2]}>${variableName}: ${variables[i][1]} (${role})</li>`);
+        if (showRoles) {
+          variableList.append(`<li style=color:${variables[i][2]}>${variableName}: ${variables[i][1]} (${role})</li>`);
+        } else {
+          variableList.append(`<li style=color:${variables[i][2]}>${variableName}: ${variables[i][1]}</li>`);
+        }
       }
     }
     show_variables();
