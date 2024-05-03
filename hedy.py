@@ -3519,9 +3519,13 @@ def determine_roles(lookup, input_string, level, lang):
     roles_dictionary = {}
     for var in all_vars:
         assignments = [x for x in lookup if x.name == var]
-        roles_dictionary[var] = 'constant' if len(assignments) == 1 else 'not constant'
-        if (roles_dictionary[var] == 'not constant'):
-            roles_dictionary[var] = 'walker' if assignments[0].tree.data == 'for_list' else 'not constant and not walker'
+        if (len(assignments) == 1):
+            if (assignments[0].type_ == 'input'):
+                roles_dictionary[var] = 'input constant'
+            else:
+                roles_dictionary[var] = 'constant'
+        else:
+            roles_dictionary[var] = 'walker' if assignments[0].tree.data == 'for_list' else 'unknown'
 
         # type = [x for x in lookup if x.name == var]
         # roles_dictionary[var] = 'walker' if type[0].tree.data == 'for_list' else 'not walker'
