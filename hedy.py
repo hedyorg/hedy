@@ -3513,7 +3513,7 @@ def create_AST(input_string, level, lang="en"):
 
     return abstract_syntax_tree, lookup_table, commands
 
-def determine_roles(AST, lookup, input_string, level, lang):
+def determine_roles(lookup, input_string, level, lang):
     all_vars = all_variables(input_string, level, lang)
     roles_dictionary = {}
     for var in all_vars:
@@ -3562,7 +3562,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         has_pressed = "if_pressed" in commands or "if_pressed_else" in commands or "assign_button" in commands
         has_music = "play" in commands
 
-        roles_of_variables = determine_roles(abstract_syntax_tree, lookup_table, input_string, level, lang)
+        roles_of_variables = determine_roles(lookup_table, input_string, level, lang)
 
         parse_result = ParseResult(python, source_map, has_turtle, has_pressed, has_clear, has_music, commands, roles_of_variables)
 
