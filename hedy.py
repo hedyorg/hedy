@@ -3527,9 +3527,6 @@ def determine_roles(lookup, input_string, level, lang):
         else:
             roles_dictionary[var] = 'walker' if assignments[0].tree.data == 'for_list' else 'unknown'
 
-        # type = [x for x in lookup if x.name == var]
-        # roles_dictionary[var] = 'walker' if type[0].tree.data == 'for_list' else 'not walker'
-
     return roles_dictionary
 
 
