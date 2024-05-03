@@ -3520,9 +3520,11 @@ def determine_roles(lookup, input_string, level, lang):
     for var in all_vars:
         assignments = [x for x in lookup if x.name == var]
         roles_dictionary[var] = 'constant' if len(assignments) == 1 else 'not constant'
+        if (roles_dictionary[var] == 'not constant'):
+            roles_dictionary[var] = 'walker' if assignments[0].tree.data == 'for_list' else 'not constant and not walker'
 
-        type = [x for x in lookup if x.name == var]
-        roles_dictionary[var] = 'walker' if type[0].tree.data == 'for_list' else 'not walker'
+        # type = [x for x in lookup if x.name == var]
+        # roles_dictionary[var] = 'walker' if type[0].tree.data == 'for_list' else 'not walker'
 
     return roles_dictionary
 
