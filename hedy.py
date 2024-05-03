@@ -3513,6 +3513,7 @@ def create_AST(input_string, level, lang="en"):
 
     return abstract_syntax_tree, lookup_table, commands
 
+
 def determine_roles(lookup, input_string, level, lang):
     all_vars = all_variables(input_string, level, lang)
     roles_dictionary = {}
