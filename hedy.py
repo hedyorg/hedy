@@ -3025,7 +3025,7 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
 
 
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle',
-                                         'has_pressed', 'has_clear', 'has_music', 'commands'])
+                                         'has_pressed', 'has_clear', 'has_music', 'commands', 'roles_of_variables'])
 
 
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en", unused_allowed=True):
@@ -3513,6 +3513,18 @@ def create_AST(input_string, level, lang="en"):
 
     return abstract_syntax_tree, lookup_table, commands
 
+def determine_roles(AST, lookup, input_string, level, lang):
+    all_vars = all_variables(input_string, level, lang)
+    roles_dictionary = {}
+    for var in all_vars:
+        assignments = [x for x in lookup if x.name == var]
+        roles_dictionary[var] = 'constant' if len(assignments)==1 else 'not constant'
+
+        type = [x for x in lookup if x.name == var]
+        roles_dictionary[var] = 'walker' if type[0].tree.data == 'for_list' else 'not walker'
+
+
+    return roles_dictionary
 
 def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False, unused_allowed=False,
                     microbit=False):
@@ -3550,7 +3562,9 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         has_pressed = "if_pressed" in commands or "if_pressed_else" in commands or "assign_button" in commands
         has_music = "play" in commands
 
-        parse_result = ParseResult(python, source_map, has_turtle, has_pressed, has_clear, has_music, commands)
+        roles_of_variables = determine_roles(abstract_syntax_tree, lookup_table, input_string, level, lang)
+
+        parse_result = ParseResult(python, source_map, has_turtle, has_pressed, has_clear, has_music, commands, roles_of_variables)
 
         if populate_source_map:
             source_map.set_python_output(python)

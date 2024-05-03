@@ -77,6 +77,7 @@ export function show_variables() {
 
 export function load_variables(variables: any) {
   if (variable_view === true) {
+    const programData = theGlobalDebugger.get_program_data();
     variables = clean_variables(variables);
     const variableList = $('#variable-list');
     variableList.empty();
@@ -84,7 +85,8 @@ export function load_variables(variables: any) {
       // Only append if the variable contains any data (and is not undefined)
       if (variables[i][1]) {
         const variableName = variables[i][0].replace(/^_/, '');
-        variableList.append(`<li style=color:${variables[i][2]}>${variableName}: ${variables[i][1]}</li>`);
+        const role = programData.variables[variableName];
+        variableList.append(`<li style=color:${variables[i][2]}>${variableName}: ${variables[i][1]} (${role})</li>`);
       }
     }
     show_variables();
