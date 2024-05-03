@@ -74,7 +74,11 @@ def get_target_keyword(keyword_dict, keyword):
 
 
 def translate(string):
-    return 'Hallo welkom bij Hedy!'  # clearly we need to call a real translation api here!
+    from googletrans import Translator
+    translator = Translator()
+    result = translator.translate(string, src='en', dest='nl')
+    return result.text
+    #return 'Hallo welkom bij Hedy!'  # clearly we need to call a real translation api here!
 
 
 def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1, translate_strings=False):
