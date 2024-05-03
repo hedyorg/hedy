@@ -1,0 +1,36 @@
+# Weblate is locked when a daily translations PR is created. Unlock Weblate
+# when that PR gets closed (either as merged or rejected).
+#
+# We do this to avoid conflicts.
+name: Unlock Weblate when PR is closed
+on:
+  pull_request_target:
+    types:
+      - closed
+
+jobs:
+  if_merged:
+    if:
+        github.event.pull_request.user.login == 'weblate' ||
+        contains(github.event.pull_request.labels.*.name, 'translations')
+    runs-on: ubuntu-latest
+    steps:
+    # These are all the same as in 'update-weblate.yml'
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.12
+    - name: Install Weblate Client
+      run: pip install wlc
+    - name: Prepare client config
+      run: |
+        echo '[weblate]' >> .weblate
+        echo 'url = https://hosted.weblate.org/api/' >> .weblate
+        echo 'translation = hedy' >> .weblate
+        echo '[keys]' >> .weblate
+        echo 'https://hosted.weblate.org/api/ = ${{ secrets.WEBLATE_API_KEY }}' >> .weblate
+    - run: |
+        # Have to lock each component individually. Not in the UI, but using the CLI we do.
+        for component in glossary adventures keywords achievements quizzes commands client-messages web-texts webpages parsons tutorials slides; do
+          wlc unlock hedy/$component
+        done

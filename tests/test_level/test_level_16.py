@@ -36,20 +36,51 @@ class TestsLevel16(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            max_level=17,
             unused_allowed=True,
             expected=expected
         )
 
-    def test_create_with_single_item(self):
-        code = "friends = ['Ashli']"
-        expected = "friends = ['Ashli']"
+    @parameterized.expand([
+        ("'Ashli'", 'Ashli'),
+        ("'\"Ashli\"'", '"Ashli"'),
+        ('"Ashli"', 'Ashli'),
+        ('"Ashli\'s"', 'Ashli\'s'),
+        ('42', 42),
+        ('-1', -1),
+        ('1.5', 1.5),
+        ('-0.7', -0.7)
+    ])
+    def test_create_list_single_item(self, item_code, expected_value):
+        code = f"friends = [{item_code}]"
+        expected = f"friends = [{item_code}]"
 
-        check_in_list = (lambda x: HedyTester.run_code(x) == 'Ashli')
+        check_in_list = (lambda x: HedyTester.run_code(x) == expected_value)
 
         self.multi_level_tester(
             code=code,
-            max_level=17,
+            expected=expected,
+            unused_allowed=True,
+            extra_check_function=check_in_list
+        )
+
+    @parameterized.expand([
+        ("'Alice', 'Ben'", ['Alice', 'Ben']),
+        ("'\"a\"', '\"Ben\"'", ['"Alice"', '"Ben"']),
+        ('"Alice", "Ben"', ['Alice', 'Ben']),
+        ('"Alice\'s", "Ben\'s"', ["Alice's", "Ben's"]),
+        ('1, 3, 5', [1, 3, 5]),
+        ('-1, -2, -5', [-1, -2, -5]),
+        ('1.5, 2.6, 3.7', [1.5, 2.6, 3.7]),
+        ('-0.1, -5.6', [-0.1, -5.6])
+    ])
+    def test_create_list_multi_items(self, items_code, expected_items):
+        code = f"friends = [{items_code}]"
+        expected = f"friends = [{items_code}]"
+
+        check_in_list = (lambda x: HedyTester.run_code(x) in expected_items)
+
+        self.multi_level_tester(
+            code=code,
             expected=expected,
             unused_allowed=True,
             extra_check_function=check_in_list
@@ -197,11 +228,11 @@ class TestsLevel16(HedyTester):
             "lijst = [1, 2, 3]",
             HedyTester.list_access_transpiled('lijst[int(1)-1]'),
             HedyTester.list_access_transpiled('lijst[int(2)-1]'),
-            "optellen = lijst[int(1)-1] + lijst[int(2)-1]",
+            f"optellen = {self.addition_transpiled('lijst[int(1)-1]', 'lijst[int(2)-1]')}",
             HedyTester.list_access_transpiled('lijst[int(3)-1]'),
-            """\
-            optellen = optellen + lijst[int(3)-1]
-            print(f'''{optellen}''')""")
+            f"""\
+            optellen = {self.addition_transpiled('optellen', 'lijst[int(3)-1]')}
+            print(f'''{{optellen}}''')""")
 
         self.multi_level_tester(
             code=code,
@@ -274,19 +305,22 @@ class TestsLevel16(HedyTester):
     # ask tests
     def test_ask_with_list_var(self):
         code = textwrap.dedent("""\
-        colors is ['orange', 'blue', 'green']
-        favorite is ask 'Is your fav color' colors[1]""")
+            colors is ['orange', 'blue', 'green']
+            favorite is ask 'Is your fav color' colors[1]""")
 
-        expected = textwrap.dedent("""\
-        colors = ['orange', 'blue', 'green']
-        favorite = input(f'''Is your fav color{colors[int(1)-1]}''')
-        try:
-          favorite = int(favorite)
-        except ValueError:
-          try:
-            favorite = float(favorite)
-          except ValueError:
-            pass""")
+        expected = self.dedent(
+            "colors = ['orange', 'blue', 'green']",
+            self.list_access_transpiled('colors[int(1)-1]'),
+            """\
+            favorite = input(f'''Is your fav color{colors[int(1)-1]}''')
+            try:
+              favorite = int(favorite)
+            except ValueError:
+              try:
+                favorite = float(favorite)
+              except ValueError:
+                pass"""
+        )
 
         self.multi_level_tester(
             code=code,
@@ -471,6 +505,28 @@ class TestsLevel16(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
+    def test_assign_list_missing_brackets_gives_error(self):
+        code = textwrap.dedent("""\
+        animals = 'chicken', 'horse', 'cow'
+        print animals[random]""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingBracketsException,
+            max_level=17
+        )
+
+    def test_assign_list_missing_bracket_gives_error(self):
+        code = textwrap.dedent("""\
+        animals = ['chicken', 'horse', 'cow'
+        print animals[random]""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingBracketsException,
+            max_level=17
+        )
+
     def test_equality_with_number_and_list_gives_error(self):
         code = textwrap.dedent("""\
         color is [5, 6, 7]
@@ -514,15 +570,20 @@ class TestsLevel16(HedyTester):
 
         self.single_level_tester(code, exception=exceptions.InvalidTypeCombinationException)
 
-    def test_color_with_list_variable_gives_error(self):
+    def test_color_with_list_variable_runtime_gives_error(self):
         code = textwrap.dedent("""\
-        c = ['red', 'green', 'blue']
-        color c""")
+            c = ['red', 'green', 'blue']
+            color c""")
+
+        expected = HedyTester.dedent(
+            "c = ['red', 'green', 'blue']",
+            HedyTester.turtle_color_command_transpiled('{c}')
+        )
 
         self.multi_level_tester(
             code=code,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
-            exception=hedy.exceptions.InvalidArgumentTypeException
+            expected=expected,
         )
 
     def test_color_with_list_access_random(self):
@@ -530,14 +591,143 @@ class TestsLevel16(HedyTester):
         colors = ['red', 'green', 'blue']
         color colors[random]""")
 
-        expected = HedyTester.dedent("""\
-        colors = ['red', 'green', 'blue']""",
-                                     HedyTester.turtle_color_command_transpiled('{random.choice(colors)}'))
+        expected = HedyTester.dedent(
+            "colors = ['red', 'green', 'blue']",
+            HedyTester.turtle_color_command_transpiled('{random.choice(colors)}')
+        )
 
         self.multi_level_tester(
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
+        )
+
+    #
+    # and/or commands
+    #
+    @parameterized.expand(['and', 'or'])
+    def test_if_list_access_lhs_and_or(self, op):
+        code = textwrap.dedent(f"""\
+            colors = ['red', 'green', 'blue']
+            if colors[1] == colors[2] {op} 1 == 1
+                print 'red'""")
+
+        expected = HedyTester.dedent(
+            "colors = ['red', 'green', 'blue']",
+            self.list_access_transpiled('colors[int(1)-1]'),
+            self.list_access_transpiled('colors[int(2)-1]'),
+            f"""\
+            if convert_numerals('Latin', colors[int(1)-1]) == convert_numerals('Latin', colors[int(2)-1]) {op} convert_numerals('Latin', '1') == convert_numerals('Latin', '1'):
+              print(f'''red''')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+        )
+
+    #
+    # in/not-in list commands
+    #
+    @parameterized.expand([
+        ('in', 'Found'),
+        ('not in', 'Not found')
+    ])
+    def test_if_in_not_in_list_with_strings(self, command, expected_output):
+        code = textwrap.dedent(f"""\
+            letters = ['a', 'b', 'c']
+            if 'a' {command} letters
+              print 'Found'
+            else
+              print 'Not found'""")
+
+        expected = textwrap.dedent(f"""\
+            letters = ['a', 'b', 'c']
+            if 'a' {command} letters:
+              print(f'''Found''')
+            else:
+              print(f'''Not found''')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output=expected_output
+        )
+
+    @parameterized.expand([
+        ('in', 'True'),
+        ('not in', 'False')
+    ])
+    def test_if_number_in_not_in_list_with_numbers(self, operator, expected_output):
+        code = textwrap.dedent(f"""\
+        items is [1, 2, 3]
+        if 1 {operator} items
+          print 'True'
+        else
+          print 'False'""")
+
+        expected = textwrap.dedent(f"""\
+        items = [1, 2, 3]
+        if 1 {operator} items:
+          print(f'''True''')
+        else:
+          print(f'''False''')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output=expected_output
+        )
+
+    @parameterized.expand([
+        ('in', 'False'),
+        ('not in', 'True')
+    ])
+    def test_if_text_in_not_in_list_with_numbers(self, operator, expected_output):
+        code = textwrap.dedent(f"""\
+            items is [1, 2, 3]
+            if '1' {operator} items
+              print 'True'
+            else
+              print 'False'""")
+
+        expected = textwrap.dedent(f"""\
+            items = [1, 2, 3]
+            if '1' {operator} items:
+              print(f'''True''')
+            else:
+              print(f'''False''')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output=expected_output
+        )
+
+    @parameterized.expand(['in', 'not in'])
+    def test_unquoted_lhs_in_not_in_list_gives_error(self, operator):
+        code = textwrap.dedent(f"""\
+            items is [1, 2, 3]
+            if a {operator} items
+              print 'True'""")
+
+        self.single_level_tester(
+            code=code,
+            skip_faulty=False,
+            exception=hedy.exceptions.UnquotedAssignTextException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2
+        )
+
+    @parameterized.expand(['in', 'not in'])
+    def test_undefined_rhs_in_not_in_list_gives_error(self, operator):
+        code = textwrap.dedent(f"""\
+            items is [1, 2, 3]
+            if 1 {operator} list
+              print 'True'""")
+
+        self.single_level_tester(
+            code=code,
+            exception=hedy.exceptions.UndefinedVarException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2
         )
 
     #
@@ -609,21 +799,13 @@ class TestsLevel16(HedyTester):
 
         expected = HedyTester.dedent("""\
         lijstje = ['kip', 'haan', 'kuiken']
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'x':
-              for dier in lijstje:
-                print(f'''dier''')
-                time.sleep(0.1)
-              break
-            # End of PyGame Event Handler""")
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        def if_pressed_x_():
+            for dier in lijstje:
+              print(f'''dier''')
+              time.sleep(0.1)
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -662,13 +844,10 @@ class TestsLevel16(HedyTester):
         notes = ['C4', 'E4', 'D4', 'F4', 'G4']
         play notes[random]""")
 
-        expected = textwrap.dedent("""\
-        notes = ['C4', 'E4', 'D4', 'F4', 'G4']
-        chosen_note = random.choice(notes).upper()
-        if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
-            raise Exception('catch_value_exception')
-        play(notes_mapping.get(str(chosen_note), str(chosen_note)))
-        time.sleep(0.5)""")
+        expected = HedyTester.dedent(
+            "notes = ['C4', 'E4', 'D4', 'F4', 'G4']",
+            self.play_transpiled('random.choice(notes)', quotes=False)
+        )
 
         self.multi_level_tester(
             code=code,

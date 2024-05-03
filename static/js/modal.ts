@@ -32,6 +32,7 @@ class Modal {
     $('#modal-copy').hide();
     $('#modal-repair').hide();
     $('#modal-preview').hide();
+    $('#modal-feedback').hide();
   }
 
   public hide_alert() {
@@ -184,6 +185,14 @@ class Modal {
       }
     });
   }
+
+    public feedback(message: string) {
+      this.hide();
+      $('#modal-feedback-message').text(message);
+      this.show();
+      $('#modal-feedback').show();
+      $('#modal-feedback-input').trigger("focus");
+    }
 }
 
 /**
@@ -200,7 +209,10 @@ export const success = {
     $('#okbox').show();
   },
 
-  show(caption: string) {
+  show(caption: string, confetti: boolean) {
+    if (confetti){
+      $('#confetti-button').show();
+    }
     $('#okbox .caption').text(caption);
     $('#okbox').show();
     setTimeout(function() {

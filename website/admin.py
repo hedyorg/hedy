@@ -1,4 +1,4 @@
-from flask import request
+from flask import make_response, request
 from flask_babel import gettext
 
 import hedyweb
@@ -30,7 +30,7 @@ class AdminModule(WebsiteModule):
     def get_admin_page(self):
         # Todo TB: Why do we check for the testing_request here? (09-22)
         if not utils.is_testing_request(request) and not is_admin(current_user()):
-            return utils.error_page(error=403, ui_message=gettext("unauthorized"))
+            return utils.error_page(error=401, ui_message=gettext("unauthorized"))
         return render_template("admin/admin.html", page_title=gettext("title_admin"), current_page="admin")
 
     @route("/users", methods=["GET"])
@@ -174,7 +174,7 @@ class AdminModule(WebsiteModule):
     def mark_as_teacher(self):
         user = current_user()
         if not is_admin(user) and not utils.is_testing_request(request):
-            return utils.error_page(error=403, ui_message=gettext("unauthorized"))
+            return utils.error_page(error=401, ui_message=gettext("unauthorized"))
 
         body = request.json
 
@@ -237,7 +237,7 @@ class AdminModule(WebsiteModule):
             except BaseException:
                 return gettext("mail_error_change_processed"), 400
 
-        return {}, 200
+        return make_response('', 204)
 
     @route("/getUserTags", methods=["POST"])
     @requires_admin
@@ -273,7 +273,7 @@ class AdminModule(WebsiteModule):
         db_user["tags"] = tags
 
         self.db.update_public_profile(username, db_user)
-        return {}, 200
+        return make_response('', 204)
 
 
 def update_is_teacher(db: Database, user, is_teacher_value=1):

@@ -50,6 +50,11 @@ export function addStudents(classname, count) {
     goToTeachersPage();
     cy.wait(500);
 
+    cy.get(".view_class").then($viewClass => {
+        if (!$viewClass.is(':visible')) {
+            cy.get("#view_classes").click();
+        }
+    });
     cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
     cy.wait(500);
 
@@ -61,18 +66,30 @@ export function addStudents(classname, count) {
       cy.get(`:nth-child(${(index + 2)}) > #password`).type('123456');
     })
     cy.get('#create_accounts_button').click();
-    cy.get('#modal-yes-button').click();
+    cy.get('[data-cy="modal_yes_button"]').click();
 
     return students;
 }
 
 export function addCustomizations(classname){
+    cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
     goToTeachersPage();
 
+    cy.get(".view_class").then($viewClass => {
+        if (!$viewClass.is(':visible')) {
+            cy.get("#view_classes").click();
+        }
+    });
     cy.get(".view_class").contains(classname).click();
     cy.get('#customize-class-button').click();
+    cy.get("#opening_date_container").should("not.be.visible")
+    cy.get("#opening_date_label").click();
+    cy.get("#opening_date_container").should("be.visible")
     cy.get('#enable_level_7').parent('.switch').click();
-    cy.getBySel("save_customizations").click();
+
+    cy.wait(1000)
+    cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
+
     cy.get("#back_to_class").click();
 }
 
@@ -85,6 +102,11 @@ export function createClassAndAddStudents(){
 export function navigateToClass(classname) {
     goToTeachersPage();
     cy.wait(500);
+    cy.get(".view_class").then($viewClass => {
+        if (!$viewClass.is(':visible')) {
+            cy.get("#view_classes").click();
+        }
+    });
     cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
     cy.wait(500);
     cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())

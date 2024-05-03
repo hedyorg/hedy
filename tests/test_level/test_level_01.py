@@ -286,34 +286,59 @@ class TestsLevel1(HedyTester):
             translate=False  # we are trying a Dutch keyword in en, can't be translated
         )
 
-    def test_play(self):
-        code = "play A"
-        expected = textwrap.dedent("""\
-        if 'A' not in notes_mapping.keys() and 'A' not in notes_mapping.values():
-            raise Exception('catch_value_exception')
-        play(notes_mapping.get(str('A'), str('A')))
-        time.sleep(0.5)""")
+    def test_play_no_args(self):
+        code = "play "
+        expected = self.play_transpiled('C4')
 
         self.multi_level_tester(
             code=code,
             translate=False,
             expected=expected,
-            max_level=17
+            max_level=2
+        )
+
+    def test_play(self):
+        code = "play A"
+        expected = self.play_transpiled('A')
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            expected=expected
+        )
+
+    def test_print_microbit(self):
+        code = "print a"
+        expected = textwrap.dedent(f"""\
+                display.scroll('a')""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            expected=expected,
+            max_level=3,
+            microbit=True
         )
 
     def test_play_lowercase(self):
         code = "play a"
-        expected = textwrap.dedent("""\
-        if 'A' not in notes_mapping.keys() and 'A' not in notes_mapping.values():
-            raise Exception('catch_value_exception')
-        play(notes_mapping.get(str('A'), str('A')))
-        time.sleep(0.5)""")
+        expected = self.play_transpiled('A')
 
         self.multi_level_tester(
             code=code,
             translate=False,
-            expected=expected,
-            max_level=17
+            expected=expected
+        )
+
+    def test_play_int(self):
+        code = "play 34"
+        expected = self.play_transpiled(34)
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            expected=expected
         )
 
     def test_mixes_languages_nl_en(self):
@@ -839,16 +864,16 @@ class TestsLevel1(HedyTester):
         {HedyTester.indent(
             HedyTester.forward_transpiled(50, self.level),
             8, True)
-        }
+         }
         answer = input('Wat is je lievelingskleur')
         print('je lievelingskleur is '+answer)""")
 
         expected_source_map = {
             '1/1-1/29': '1/1-1/32',
-            '2/1-2/11': '2/1-8/16',
-            '3/1-3/30': '9/1-9/44',
-            '4/1-4/27': '10/1-10/39',
-            '1/1-4/28': '1/1-10/39'
+            '2/1-2/11': '2/1-4/16',
+            '3/1-3/30': '5/1-5/44',
+            '4/1-4/27': '6/1-6/39',
+            '1/1-4/28': '1/1-6/39'
         }
 
         self.single_level_tester(code, expected=expected_code)

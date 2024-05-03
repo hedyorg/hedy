@@ -6,12 +6,16 @@ import datetime
 import time
 import functools
 import os
+from io import StringIO
+from os import path
 import re
 import string
 import random
 import uuid
 import unicodedata
+import sys
 import traceback
+import collections
 
 from email_validator import EmailNotValidError, validate_email
 from flask_babel import gettext, format_date, format_datetime, format_timedelta
@@ -23,21 +27,23 @@ commonmark_renderer = commonmark.HtmlRenderer()
 
 IS_WINDOWS = os.name == 'nt'
 
+prefixes_dir = path.join(path.dirname(__file__), 'prefixes')
+
 # Define code that will be used if some turtle command is present
-with open('prefixes/turtle.py', encoding='utf-8') as f:
+with open(f'{prefixes_dir}/turtle.py', encoding='utf-8') as f:
     TURTLE_PREFIX_CODE = f.read()
 
 # Preamble that will be used for non-Turtle programs
 # numerals list generated from: https://replit.com/@mevrHermans/multilangnumerals
-with open('prefixes/normal.py', encoding='utf-8') as f:
+with open(f'{prefixes_dir}/normal.py', encoding='utf-8') as f:
     NORMAL_PREFIX_CODE = f.read()
 
 # Define code that will be used if a pressed command is used
-with open('prefixes/pygame.py', encoding='utf-8') as f:
-    PYGAME_PREFIX_CODE = f.read()
+with open(f'{prefixes_dir}/pressed.py', encoding='utf-8') as f:
+    PRESSSED_PREFIX_CODE = f.read()
 
 # Define code that will be used if music code is used
-with open('prefixes/music.py', encoding='utf-8') as f:
+with open(f'{prefixes_dir}/music.py', encoding='utf-8') as f:
     MUSIC_PREFIX_CODE = f.read()
 
 
@@ -93,24 +99,50 @@ def is_debug_mode():
     return DEBUG_MODE
 
 
+def is_offline_mode():
+    """Return whether or not we're in offline mode.
+
+    Offline mode is a special build of Hedy that teachers can download and run
+    on their own computers.
+    """
+    return getattr(sys, 'frozen', False) and offline_data_dir() is not None
+
+
+def offline_data_dir():
+    """Return the data directory in offline mode."""
+    return getattr(sys, '_MEIPASS')
+
+
 def set_debug_mode(debug_mode):
     """Switch debug mode to given value."""
     global DEBUG_MODE
     DEBUG_MODE = debug_mode
 
 
+def rt_yaml():
+    y = yaml.YAML(typ='rt')
+    # Needs to match the Weblate YAML settings for all components
+    y.indent = 4
+    y.preserve_quotes = True
+    y.width = 30000
+    return y
+
+
 def load_yaml_rt(filename):
     """Load YAML with the round trip loader."""
     try:
+        rt = rt_yaml()
         with open(filename, 'r', encoding='utf-8') as f:
-            return yaml.round_trip_load(f, preserve_quotes=True)
+            return rt.load(f)
     except IOError:
         return {}
 
 
 def dump_yaml_rt(data):
     """Dump round-tripped YAML."""
-    return yaml.round_trip_dump(data, indent=4, width=999)
+    out = StringIO()
+    rt_yaml().dump(data, out)
+    return out.getvalue()
 
 
 def slash_join(*args):
@@ -266,20 +298,39 @@ def random_id_generator(
     return ''.join(random.choice(chars) for _ in range(size))
 
 
-# This function takes a Markdown string and returns a list with each of the HTML elements obtained
-# by rendering the Markdown into HTML.
-
-
 def markdown_to_html_tags(markdown):
+    """
+    This function takes a Markdown string and returns a list with each of the HTML elements obtained
+    by rendering the Markdown into HTML.
+    """
     _html = commonmark_renderer.render(commonmark_parser.parse(markdown))
     soup = BeautifulSoup(_html, 'html.parser')
     return soup.find_all()
 
 
+MarkdownCode = collections.namedtuple('MarkdownCode', ('code', 'info'))
+
+
+def code_blocks_from_markdown(markdown):
+    """
+    Takes a MarkDown string and returns a list of code blocks, along with their metadata.
+
+    Returns pairs of `(code, info)`, where 'info' is the text that appears after the three
+    backticks (usually used to indicate the programming language).
+    """
+    md = commonmark_parser.parse(markdown)
+    for node, _ in md.walker():
+        # We will only ever see '_entered == True' for CodeBlock nodes.
+        if node.t == 'code_block':
+            yield MarkdownCode(node.literal.strip(), node.info)
+
+
 def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None, exception=None):
-    if error not in [400, 403, 404, 500]:
+    if error not in [400, 403, 404, 500, 401]:
         error = 404
     default = gettext('default_404')
+    if error == 401:
+        default = gettext('default_401')
     if error == 403:
         default = gettext('default_403')
     elif error == 500:
@@ -393,3 +444,67 @@ def find_prev_next_levels(level_list, target_level):
     next_level = sorted_levels[index + 1] if index < len(sorted_levels) - 1 else None
 
     return prev_level, next_level
+
+
+def preserve_html_tags(content):
+    """
+    Transforms HTML tags in the content.
+    """
+    # Define patterns to match target tags
+    tag_pattern = r"&lt;(?P<tag_name>[^>]+)(?P<attributes>.*?)&gt;(?P<inner_content>.*?)&lt;/(?P=tag_name)&gt;"
+
+    def replace(match):
+        tag_name = match.group("tag_name")
+        attributes = match.group("attributes")
+        inner_content = match.group("inner_content")
+        return f"<{tag_name}{attributes}>{inner_content}</{tag_name}>"
+
+    return re.sub(tag_pattern, replace, content, flags=re.DOTALL)
+
+
+def transform_encoded_tags_secure(content):
+    """
+    Transforms encoded HTML tags in adventure content, removing any script tags.
+    This is an extra step on top of the DOMPurify when saving an adventure.
+    """
+
+    def pre_process(content):
+        # Remove script tags and their content using regular expression
+        script_pattern = r"<script(?:\s[^>]*?)?>(?P<content>.*?)</script>"
+        return re.sub(script_pattern, "", content, flags=re.DOTALL)
+
+    # Pre-process the input to remove scripts
+    processed_content = pre_process(content)
+
+    transformed_content = preserve_html_tags(processed_content)
+
+    return transformed_content
+
+
+def prepare_content_for_ckeditor(content):
+    """
+    Adds code tags to pre blocks that don't have them, reserving existing attributes as well.
+    """
+    pattern = r"<pre(?P<attributes>.*?)>(?P<inner_content>.*?)</pre>"
+
+    def replace(match):
+        attributes = match.group("attributes")
+        inner_content = match.group("inner_content").strip()  # Strip leading/trailing whitespaces
+        if not inner_content.startswith("<code>"):
+            inner_content = f"<code>{inner_content}</code>"
+        return f"<pre{attributes}>{inner_content}</pre>"
+
+    content = transform_encoded_tags_secure(content)
+    content = re.sub(pattern, replace, content, flags=re.DOTALL)
+    # Add "<p>&nbsp;</p>" (an extra line) if not exists
+    if len(content) and not content.endswith("<p>&nbsp;</p>"):
+        content += "<p>&nbsp;</p>"
+
+    return content
+
+
+def remove_class_preview():
+    try:
+        del session["preview_class"]
+    except KeyError:
+        pass

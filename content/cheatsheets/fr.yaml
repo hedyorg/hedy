@@ -98,13 +98,13 @@
         réponse {is} {ask} "Jusqu'où dois-je marcher ?"
         {if} réponse {is} loin {forward} 100 {else} {forward} 5
 -   name: '{in}'
-    explanation: Check elements with `{in}`.
+    explanation: Reconnaitre des éléments avec `{in}`.
     demo_code: |-
         jolies_couleurs {is} vert, jaune
         couleur {is} {ask} "Quelle est ta couleur préférée ?"
         {if} couleur {in} jolies_couleurs {print} "joli !" {else} {print} "moche"
 -   name: '{pressed}'
-    explanation: Vérifiez si une touche donnée du clavier est `{pressed}`.
+    explanation: Vérifier si une touche donnée du clavier est `{pressed}`.
     demo_code: '{if} a {is} {pressed} {print} "Vous avez appuyé sur A !" {else} {print} "Vous avez appuyé sur une autre touche !"'
 6:
 -   name: '{print}'
@@ -143,7 +143,7 @@
     explanation: Affiche quelque chose. N’oublies pas les guillemets pour afficher exactement ce qui est saisi.
     demo_code: '{print} "5 fois 5 font " 5 * 5'
 -   name: '{ask}'
-    explanation: Demandes le résultat d’une addition et vérifies si elle est correcte. Tu peux désormais imprimer sur 2 lignes.
+    explanation: Demandes le résultat d’une addition et vérifies si elle est correcte. Tu peux désormais afficher 2 lignes.
     demo_code: |-
         reponse = {ask} "Combien font 5 plus 5 ?"
         {if} reponse {is} 10
@@ -199,7 +199,7 @@
         {for} counter {in} {range} 1 {to} 5
             {print} counter
 -   name: '{ask}'
-    explanation: Demandes le résultat d’une addition et vérifies si elle est correcte. Tu peux désormais imprimer sur 2 lignes.
+    explanation: Demandes le résultat d’une addition et vérifies si elle est correcte. Tu peux désormais afficher 2 lignes.
     demo_code: |-
         reponse = {ask} "Combien font 5 plus 5 ?"
         {if} reponse {is} 10
@@ -316,7 +316,7 @@
         premier_fruit = fruits[1]
         {print} premier_fruit
 -   name: Obtenir un élément au hasard dans une liste
-    explanation: 'Pour obtenir un élément au hasard dans une liste, on utilise [{random}] donc fruits[{random}] signifie : obtenir un fruit au hasard de la liste !'
+    explanation: 'Pour obtenir un élément au hasard dans une liste, on utilise [{random}] donc fruits[{random}] signifie : obtenir un fruit au hasard de la liste !'
     demo_code: |-
         fruits = ["banane", "pomme", "cerise"]
         fruit_aléatoire = fruits[{random}]

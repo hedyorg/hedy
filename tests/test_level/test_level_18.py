@@ -162,19 +162,19 @@ class TestsLevel18(HedyTester):
 
     def test_for_loop(self):
         code = textwrap.dedent("""\
-      a is 2
-      b is 3
-      for a in range(2, 4):
-          a is a + 2
-          b is b + 2""")
-        expected = textwrap.dedent("""\
-      a = 2
-      b = 3
-      step = 1 if 2 < 4 else -1
-      for a in range(2, 4 + step, step):
-        a = a + 2
-        b = b + 2
-        time.sleep(0.1)""")
+            a is 2
+            b is 3
+            for a in range(2, 4):
+                a is a + 2
+                b is b + 2""")
+        expected = textwrap.dedent(f"""\
+            a = 2
+            b = 3
+            step = 1 if 2 < 4 else -1
+            for a in range(2, 4 + step, step):
+              a = {self.addition_transpiled('a', 2)}
+              b = {self.addition_transpiled('b', 2)}
+              time.sleep(0.1)""")
 
         self.multi_level_tester(
             code=code,
@@ -322,22 +322,14 @@ class TestsLevel18(HedyTester):
         if PRINT is pressed:
             print('The button got pressed!')""")
 
-        expected = HedyTester.dedent(f"""\
+        expected = HedyTester.dedent("""\
         x = 'PRINT'
         create_button(x)
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'PRINT':
-              print(f'''The button got pressed!''')
-              break
-            # End of PyGame Event Handler""")
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['PRINT'] = 'if_pressed_PRINT_'
+        def if_pressed_PRINT_():
+            print(f'''The button got pressed!''')
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -360,4 +352,50 @@ class TestsLevel18(HedyTester):
             code=code,
             expected=expected,
             skipped_mappings=skipped_mappings,
+        )
+
+    @parameterized.expand(['and', 'or'])
+    def test_if_list_access_lhs_and_or(self, op):
+        code = textwrap.dedent(f"""\
+            colors = ['red', 'green', 'blue']
+            if colors[1] == colors[2] {op} 1 == 1:
+                print('red')""")
+
+        expected = HedyTester.dedent(
+            "colors = ['red', 'green', 'blue']",
+            self.list_access_transpiled('colors[int(1)-1]'),
+            self.list_access_transpiled('colors[int(2)-1]'),
+            f"""\
+                if convert_numerals('Latin', colors[int(1)-1]) == convert_numerals('Latin', colors[int(2)-1]) {op} convert_numerals('Latin', '1') == convert_numerals('Latin', '1'):
+                  print(f'''red''')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+        )
+
+    #
+    # repeat
+    #
+    def test_repeat_nested_multi_commands(self):
+        code = textwrap.dedent("""\
+            repeat 3 times
+                print(3)
+                repeat 5 times
+                    print(5)
+                print(1)""")
+
+        expected = textwrap.dedent(f"""\
+            for __i in range({self.int_cast_transpiled(3)}):
+              print(f'''3''')
+              for __i in range({self.int_cast_transpiled(5)}):
+                print(f'''5''')
+                time.sleep(0.1)
+              print(f'''1''')
+              time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skip_faulty=False
         )

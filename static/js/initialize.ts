@@ -1,4 +1,6 @@
 import { initializeAdminUserPage, InitializeAdminUsersPageOptions } from './admin';
+import { initializeCustomAdventurePage, InitializeCustomizeAdventurePage } from './adventure';
+import { initializeMyProfilePage, InitializeMyProfilePage } from './profile';
 import { initializeApp, initializeCodePage, InitializeCodePageOptions, initializeViewProgramPage, InitializeViewProgramPageOptions } from './app';
 import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
@@ -53,6 +55,8 @@ type InitializePageOptions =
   | InitializeViewProgramPageOptions
   | InitializeClassOverviewPageOptions
   | InitializeAdminUsersPageOptions
+  | InitializeCustomizeAdventurePage
+  | InitializeMyProfilePage
   ;
 
 
@@ -95,6 +99,15 @@ export function initialize(options: InitializeOptions) {
     case 'admin-users':
       initializeAdminUserPage(options.javascriptPageOptions);
       break;
+    
+    case 'customize-adventure':
+      initializeCustomAdventurePage(options.javascriptPageOptions);
+      break;
+
+    case 'my-profile':
+      initializeMyProfilePage(options.javascriptPageOptions);
+      break;
+
   }
 
   // FIXME: I think this might also be page-specific

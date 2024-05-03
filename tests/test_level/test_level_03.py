@@ -25,17 +25,40 @@ class TestsLevel3(HedyTester):
     # print tests
     #
 
-    # issue #745
-    def test_print_list_gives_type_error(self):
+    def test_print_list_converts_to_literal_string(self):
         code = textwrap.dedent("""\
         plaatsen is een stad, een  dorp, een strand
         print plaatsen""")
 
-        self.multi_level_tester(
+        expected = textwrap.dedent("""\
+            plaatsen = ['een stad', 'een  dorp', 'een strand']
+            print(f'plaatsen')""")
+
+        check_in_list = (lambda x: HedyTester.run_code(x) in ['een stad', 'een  dorp', 'een strand'])
+
+        self.single_level_tester(
             code=code,
-            max_level=11,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
-            exception=hedy.exceptions.InvalidArgumentTypeException
+            expected=expected,
+            extra_check_function=check_in_list,
+            unused_allowed=True
+        )
+
+    def test_list_access_misspelled_at_converts_to_literal_string(self):
+        code = textwrap.dedent("""\
+        dieren is Hond, Kat, Kangoeroe
+        print dieren ad random""")
+
+        expected = textwrap.dedent("""\
+            dieren = ['Hond', 'Kat', 'Kangoeroe']
+            print(f'dieren ad random')""")
+
+        check_in_list = (lambda x: HedyTester.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=check_in_list,
+            unused_allowed=True
         )
 
     def test_print_list_random(self):
@@ -162,16 +185,111 @@ class TestsLevel3(HedyTester):
     #
     # ask tests
     #
-    def test_ask_list_gives_type_error(self):
+    def test_ask_list_converts_to_literal_string(self):
         code = textwrap.dedent("""\
-        plaatsen is een stad, een  dorp, een strand
-        var is ask plaatsen""")
+            dieren is Hond, Kat, Kangoeroe
+            a is ask dieren""")
+
+        expected = textwrap.dedent("""\
+            dieren = ['Hond', 'Kat', 'Kangoeroe']
+            a = input(f'dieren')""")
+
+        check_in_list = (lambda x: HedyTester.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=check_in_list,
+            unused_allowed=True
+        )
+
+    def test_ask_list_random(self):
+        code = textwrap.dedent("""\
+            dieren is Hond, Kat, Kangoeroe
+            a is ask dieren at random""")
+
+        expected = HedyTester.dedent(
+            "dieren = ['Hond', 'Kat', 'Kangoeroe']",
+            HedyTester.list_access_transpiled("random.choice(dieren)"),
+            "a = input(f'{random.choice(dieren)}')"
+        )
 
         self.multi_level_tester(
-            code=code,
             max_level=11,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
-            exception=hedy.exceptions.InvalidArgumentTypeException
+            code=code,
+            expected=expected,
+            unused_allowed=True
+        )
+
+    def test_ask_list_random_punctuation(self):
+        code = textwrap.dedent("""\
+            gerechten is spaghetti, spruitjes, hamburgers
+            answer is ask Jij eet vanavond gerechten at random!""")
+
+        expected = HedyTester.dedent(
+            "gerechten = ['spaghetti', 'spruitjes', 'hamburgers']",
+            HedyTester.list_access_transpiled("random.choice(gerechten)"),
+            "answer = input(f'Jij eet vanavond {random.choice(gerechten)} !')"
+        )
+
+        self.multi_level_tester(
+            max_level=3,
+            code=code,
+            expected=expected,
+            unused_allowed=True
+        )
+
+    def test_ask_list_random_punctuation_2(self):
+        code = textwrap.dedent("""\
+            prijzen is 1 euro, 10 euro, 100 euro
+            answer is ask Dat wordt dan prijzen at random, alstublieft.""")
+
+        expected = HedyTester.dedent(
+            "prijzen = ['1 euro', '10 euro', '100 euro']",
+            HedyTester.list_access_transpiled("random.choice(prijzen)"),
+            "answer = input(f'Dat wordt dan {random.choice(prijzen)} , alstublieft.')"
+        )
+
+        self.multi_level_tester(
+            max_level=3,
+            code=code,
+            expected=expected,
+            unused_allowed=True
+        )
+
+    def test_ask_list_access_index(self):
+        code = textwrap.dedent("""\
+        dieren is Hond, Kat, Kangoeroe
+        answer is ask dieren at 1""")
+
+        expected = HedyTester.dedent("dieren = ['Hond', 'Kat', 'Kangoeroe']",
+                                     HedyTester.list_access_transpiled('dieren[int(1)-1]'),
+                                     "answer = input(f'{dieren[int(1)-1]}')")
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            expected=expected,
+            unused_allowed=True
+        )
+
+    def test_asl_list_random_fr(self):
+        code = textwrap.dedent("""\
+            animaux est chien, chat, kangourou
+            a est demande animaux au hasard""")
+
+        expected = HedyTester.dedent(
+            "animaux = ['chien', 'chat', 'kangourou']",
+            HedyTester.list_access_transpiled('random.choice(animaux)'),
+            "a = input(f'{random.choice(animaux)}')"
+        )
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            expected=expected,
+            lang='fr',
+            unused_allowed=True
         )
 
     #
@@ -181,16 +299,13 @@ class TestsLevel3(HedyTester):
         code = textwrap.dedent("""\
             n is 1, 2, 3
             sleep n at 1""")
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         n = ['1', '2', '3']
         try:
-          try:
-            n[int(1)-1]
-          except IndexError:
-            raise Exception('catch_index_exception')
-          time.sleep(int(n[int(1)-1]))
-        except ValueError:
-          raise Exception('catch_value_exception')""")
+          n[int(1)-1]
+        except IndexError:
+          raise Exception({self.index_exception_transpiled()})
+        time.sleep(int_with_error(n[int(1)-1], {self.value_exception_transpiled()}))""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
@@ -199,10 +314,9 @@ class TestsLevel3(HedyTester):
             time is 10
             sleep time""")
 
-        expected = HedyTester.dedent("""\
-            _time = '10'""",
-                                     HedyTester.sleep_command_transpiled('_time')
-                                     )
+        expected = HedyTester.dedent(
+            "_time = '10'",
+            HedyTester.sleep_command_transpiled('_time'))
 
         self.multi_level_tester(
             code=code,
@@ -214,16 +328,13 @@ class TestsLevel3(HedyTester):
         code = textwrap.dedent("""\
             n is 1, 2, 3
             sleep n at random""")
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         n = ['1', '2', '3']
         try:
-          try:
-            random.choice(n)
-          except IndexError:
-            raise Exception('catch_index_exception')
-          time.sleep(int(random.choice(n)))
-        except ValueError:
-          raise Exception('catch_value_exception')""")
+          random.choice(n)
+        except IndexError:
+          raise Exception({self.index_exception_transpiled()})
+        time.sleep(int_with_error(random.choice(n), {self.value_exception_transpiled()}))""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
@@ -461,16 +572,36 @@ class TestsLevel3(HedyTester):
     #
     # color tests
     #
-    def test_color_with_list_variable_gives_error(self):
+    def test_color_with_list_variable_gives_runtime_error(self):
         code = textwrap.dedent("""\
-        c is red, green, blue
-        color c""")
+            c is red, green, blue
+            color c""")
 
-        self.multi_level_tester(
-            max_level=10,
+        expected = HedyTester.dedent(
+            "c = ['red', 'green', 'blue']",
+            self.turtle_color_command_transpiled('c')
+        )
+
+        self.single_level_tester(
             code=code,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
-            exception=hedy.exceptions.InvalidArgumentTypeException
+            expected=expected,
+            unused_allowed=True
+        )
+
+    def test_color_with_list_color_variable(self):
+        code = textwrap.dedent("""\
+            red is light, dark
+            color red""")
+
+        expected = HedyTester.dedent(
+            "red = ['light', 'dark']",
+            self.turtle_color_command_transpiled('red')
+        )
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            unused_allowed=True
         )
 
     def test_color_with_list_access_random(self):
@@ -478,30 +609,16 @@ class TestsLevel3(HedyTester):
         colors is red, green, blue
         color colors at random""")
 
-        expected = HedyTester.dedent("""\
-        colors = ['red', 'green', 'blue']""",
-                                     HedyTester.turtle_color_command_transpiled('{random.choice(colors)}'))
+        expected = HedyTester.dedent(
+            "colors = ['red', 'green', 'blue']",
+            self.turtle_color_command_transpiled('{random.choice(colors)}')
+        )
 
         self.multi_level_tester(
             max_level=10,
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-        )
-
-    #
-    # combined tests
-    #
-    def test_list_access_misspelled_at_gives_error(self):
-        code = textwrap.dedent("""\
-        dieren is Hond, Kat, Kangoeroe
-        print dieren ad random""")
-
-        self.multi_level_tester(
-            max_level=3,
-            code=code,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
-            exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
     #
@@ -694,6 +811,19 @@ class TestsLevel3(HedyTester):
             skipped_mappings=skipped_mappings,
         )
 
+    def test_random_ask(self):
+        code = textwrap.dedent("""\
+           colors is green, red, blue
+           answer is ask Do you like colors at random?""")
+
+        expected = HedyTester.dedent(
+            "colors = ['green', 'red', 'blue']",
+            HedyTester.list_access_transpiled("random.choice(colors)"),
+            "answer = input(f'Do you like {random.choice(colors)} ?')"
+        )
+
+        self.single_level_tester(code=code, expected=expected, unused_allowed=True)
+
     def test_add_ask_to_list(self):
         code = textwrap.dedent("""\
         color is ask what is your favorite color?
@@ -701,7 +831,7 @@ class TestsLevel3(HedyTester):
         add color to colors
         print colors at random""")
 
-        expected = HedyTester.dedent("color = input('what is your favorite color?')",
+        expected = HedyTester.dedent("color = input(f'what is your favorite color?')",
                                      "colors = ['green', 'red', 'blue']",
                                      "colors.append(color)",
                                      HedyTester.list_access_transpiled("random.choice(colors)"),
@@ -717,7 +847,7 @@ class TestsLevel3(HedyTester):
         print colors at random""")
 
         expected = HedyTester.dedent("colors = ['green', 'red', 'blue']",
-                                     "color = input('what color to remove?')",
+                                     "color = input(f'what color to remove?')",
                                      HedyTester.remove_transpiled('colors', 'color'),
                                      HedyTester.list_access_transpiled('random.choice(colors)'),
                                      "print(f'{random.choice(colors)}')")
@@ -869,13 +999,9 @@ class TestsLevel3(HedyTester):
         notes is C4, E4, D4, F4, G4
         play notes at random""")
 
-        expected = textwrap.dedent("""\
-        notes = ['C4', 'E4', 'D4', 'F4', 'G4']
-        chosen_note = random.choice(notes).upper()
-        if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
-            raise Exception('catch_value_exception')
-        play(notes_mapping.get(str(chosen_note), str(chosen_note)))
-        time.sleep(0.5)""")
+        expected = HedyTester.dedent(
+            "notes = ['C4', 'E4', 'D4', 'F4', 'G4']",
+            self.play_transpiled('random.choice(notes)', quotes=False))
 
         self.multi_level_tester(
             code=code,

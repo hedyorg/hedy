@@ -13,6 +13,7 @@ on every object so that method of accessing also works.
 import functools
 from typing import Optional, List
 from dataclasses import dataclass, field
+from bs4 import BeautifulSoup
 import utils
 
 
@@ -99,6 +100,24 @@ class SaveInfo:
         )
 
 
+def halve_adventure_content(content, max_char_length=750):
+    """Splits content if its length exceeds the max_length characters (excluding tags) and sets example_code."""
+    soup = BeautifulSoup(content, 'html.parser')
+    text_without_tags = soup.get_text(separator='')
+    text = content
+    example_code = ""
+    if len(text_without_tags) > max_char_length:
+        # Split text at a suitable breaking point
+        split_index = content.find('</p>', len(text_without_tags)//2)  # Find a closing paragraph tag.
+        if split_index > -1:
+            text = content[:split_index]
+            example_code = content[split_index:]
+        else:
+            # If no suitable split point found, don't truncate content
+            text = content
+    return text, example_code
+
+
 @require_kwargs
 @dataclass
 class Adventure:
@@ -124,11 +143,13 @@ class Adventure:
 
     @staticmethod
     def from_teacher_adventure_database_row(row):
+        text, example_code = halve_adventure_content(row.get("formatted_content", row["content"]))
         return Adventure(
             short_name=row['id'],
             name=row['name'],
             save_name=row['name'],
             editor_contents='',  # Teacher adventures don't seem to have this
-            text=row['content'],
+            text=text,
+            example_code=example_code,
             is_teacher_adventure=True,
             is_command_adventure=False)

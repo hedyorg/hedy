@@ -2,32 +2,33 @@ levels:
     0:
         1:
             header: مرحباً بكم في هيدي!
-            text: Hedy is a programming language.
+            text: هيدي هي لغة برمجة.
         2:
             header: البرمجة
             text: |-
-                Programming is giving instructions to a computer, using the language of the computer.
+                البرمجة هي إعطاء تعليمات للكمبيوتر باستخدام لغة الكمبيوتر. 
 
-                Such a language is called a "programming language".
+                مثل هذه اللغة تسمى "لغة برمجة".
         3:
             header: لغة برمجة
             text: |-
-                Maybe you already know some programming languages?
-                Some examples are:
+                ربما تعرف بالفعل بعض لغات البرمجة؟
+                بعض الأمثلة تشمل:
                 * Scratch
                 * Python
                 * HTML
         4:
             header: برمجة
             text: |-
-                If you can program, you can do many cool things:
-                * Build interactive stories
-                * Create computer drawings and draw these on paper or fabric
-                * Build your own apps to use on your phone
+                ذا كنت تستطيع البرمجة، يمكنك فعل العديد من الأشياء الرائعة:
+
+                *إنشاء قصص تفاعلية
+                *إنشاء رسومات على الكمبيوتر ورسمها على الورق أو النسيج
+                *بناء تطبيقاتك الخاصة لاستخدامها على هاتفك
         5:
-            header: Programming in Hedy
-            text: In Hedy we use special codes, like `{print}`.
-            code: '{print} Welcome to Hedy!'
+            header: البرمجة باستخدام هيدي
+            text: في هيدي نستخدم كود خاصة، مثل `{print}`.
+            code: '{print}مرحبًا بك في هيدي!'
         6:
             header: Programming in Hedy
             text: Code words will be shown in pink.
@@ -121,6 +122,7 @@ levels:
                 {print} What song would you like to hear?
                 {ask} I like that song too!
                 {print} Next up... {echo}
+            debug: 'True'
         13:
             header: Let the programming fun begin!
             text: Enjoy the adventures in level 1!
@@ -189,6 +191,7 @@ levels:
                 {print} I'll go get your donut. {sleep}
                 {print} Here you go! A filling donut with toping!
                 {ask} Have a nice day!
+            debug: 'True'
         8:
             header: Let the programming fun begin!
             text: Enjoy the adventures in level 2!
@@ -202,9 +205,7 @@ levels:
                 You make a list with `{is}`.
 
                 Separate the items on your list with a comma.
-            code: |-
-                animals {is} dogs, cats, kangaroos
-                ```
+            code: animals {is} dogs, cats, kangaroos
         3:
             header: At random
             text: |-
@@ -214,14 +215,12 @@ levels:
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} animals {at} {random}
-                ```
         4:
             header: At random in a sentence
             text: You can use the `{at}` `{random}` command in a sentence as well.
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} My favorite animal is animals {at} {random}
-                ```
         5:
             header: Add to
             text: |-
@@ -257,6 +256,7 @@ levels:
                 {print} or do you prefer... second_choice {at} {random}
                 {remove} second_choice {to} music_genres
                 {print} I like music_genre {random} best!
+            debug: 'True'
         8:
             header: Let's get to work!
             text: Enjoy the adventures in level 3!
@@ -271,6 +271,7 @@ levels:
             code: |-
                 name {is} Sophie
                 {print} My name is name
+            debug: 'True'
         3:
             header: Fixing it with quotation marks
             text: |-
@@ -308,6 +309,7 @@ levels:
 
                 Please try to print a contraction like "you're" or "I'm" in the screen below and see what happens....
             code: '{print} ''This won''t work!'''
+            debug: 'True'
         9:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
@@ -332,6 +334,7 @@ levels:
                 colors {is} 'orange, silver, white, brown'
                 {print} 'I love the colors {at} {random} one!'
                 choice {is} {ask} Which one do you like?
+            debug: 'True'
         11:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
@@ -354,6 +357,7 @@ levels:
                 When using the `{if}` command, don't forget to use the `{print}` command.
                 This code will not work!
             code: '{if} name {is} Hedy ''nice'''
+            debug: 'True'
         4:
             header: else
             text: |-
@@ -399,6 +403,7 @@ levels:
                 item_to_declare {is} {ask} 'What would you like to declare'
                 {else} Alright
                 {print} Thank you. Please head to gate A22.'
+            debug: 'True'
         8:
             header: Let's go!
             text: Enjoy the adventures in level 5!
@@ -463,6 +468,7 @@ levels:
                 {if} day {is} monday
                 total_price = total_price * 0.25
                 {print} 'That will be total_price please'
+            debug: 'True'
         10:
             header: Let's get to work!
             text: Enjoy the adventures in level 6!
@@ -485,6 +491,7 @@ levels:
             header: Don't forget the print command
             text: When using the repeat command, do not forget the `{print}` command.
             code: '{repeat} 5 {times} ''Help!'''
+            debug: 'True'
         4:
             header: Repeat an ask command
             text: You can also repeat an `{ask}`, `{if}` or `{else}` command multiple times.
@@ -506,6 +513,7 @@ levels:
                 {if} yes
                 {print} 'Hurray!
                 {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
+            debug: 'True'
         6:
             header: Ready Set Go!
             text: Enjoy the adventures in level 7!
@@ -520,6 +528,7 @@ levels:
 
                 You could only repeat one line of code.
             code: '{repeat} 5 {times} {print} ''Help!'''
+            debug: 'True'
         3:
             header: '{repeat} commands now'
             text: |-
@@ -548,6 +557,7 @@ levels:
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
+            debug: 'True'
         6:
             header: if and else now
             text: |-
@@ -569,6 +579,29 @@ levels:
                 You might have thought of trying to put an if command inside a repeat command, or inside another if command.
                 For now, this is not possible yet. In the higher levels, it will be allowed, but for now let's focus on practising the `{if}` `{else}` and `{repeat}` commands with proper indentation first.
         9:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'HedyWheels bus tickets machine'
+                zone_1 = Town Hall, Library, Campus, Market Place
+                zone_2 = Swimming Pool, Skate Park, Mall, Airport
+                destination = 'Where do you want to go?'
+                {if} destination {in} zone 1
+                {print} destination 'is in zone 1'
+                price = 3 euros
+                    {if} destination {is} zone_2
+                {print} destination 'is in zone 2'
+                price = 6
+                ticket_types = {ask} 'Press 1 for a single use ticket.
+                Press 2 for a round trip ticket:'
+                {if} ticket_type = 1
+                {print} 'You chose a single use ticket'
+                {else}
+                        {print} You chose a round trip ticket'
+                price * 2
+                {print} 'That will be ' price ' euros please'
+            debug: 'True'
+        10:
             header: Let's check out the adventures!
             text: Enjoy the adventures in level 8!
     9:
@@ -643,6 +676,24 @@ levels:
                     {else}
                         {print} 'pizza is better'
         8:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'Welcome to HedyJumps, your parachute jump adventure!'
+                people = {ask} 'How many people are you jumping with today?
+                {print} 'We'll ask all of you some questions for safety reasons.'
+                extra_instructions_people = a, b
+                {repeat} 3 {times}
+                    name = {ask} 'What is your name?'
+                jumped_before = 'Have you ever done a parachute jump before, ' name '?'
+                {if} jumped_before  no
+                {print} 'No worries, you'll get an extra safety instruction in room 13'
+                {add} name {to} extra_instructions_people
+                {else}
+                {print} 'Fun!'
+                {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
+            debug: 'True'
+        9:
             header: Let's go!
             text: Enjoy the adventures in level 9!
     10:
@@ -665,6 +716,21 @@ levels:
                 {for} day {in} days
                     {print} names {at} {random} ' does the dishes on ' day
         4:
+            header: Debugging
+            text: Let's debug this code
+            code: |-
+                {print} 'Ladies and gentlemen!'
+                {print} 'For one night and one night only in circus Hedy!'
+                acts = shoot out of a canon, walk the tightrope, pack themself in a suitcase,
+                people = Iris the Incredible Achmed the Amazing Francis the Fantastic
+                    {for} people {in} acts
+                chosen_person {is} people {random}
+                    chosen_person ' will ' act
+                {add} chosen_person {from} people
+                {print} 'Come and watch our show tonight!'
+                {print} 'Tickets are only available at the counter
+            debug: 'True'
+        5:
             header: Time to program!
             text: Enjoy the adventures in level 10!
     11:
@@ -693,6 +759,15 @@ levels:
                 {for} i {in} {range} 1 {to} 10
                     {print} i * number
         4:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                factor {is} {ask} 'Which table of multiplication do you need?'
+                {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
+                    {print} This is the table of multiplications for factor
+                    {print} number ' x ' factor ' = ' i * factor
+            debug: 'True'
+        5:
             header: Let's start programming!
             text: Enjoy the adventures in level 11!
     12:
@@ -734,14 +809,30 @@ levels:
                      {print} 'Twinkle'
                      {print} '...'
 
-                 {call} twinkle
-                 {print} 'Up above the world so high'
-                 {print} 'Like a diamond in the sky'
-                 {call} twinkle
+                {call} twinkle
+                {print} 'Up above the world so high'
+                {print} 'Like a diamond in the sky'
+                {call} twinkle
         6:
             header: Functions
             text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
         7:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {call} new_member
+                {print} 'Hi new member!'
+                username = {ask} 'What is your username?'
+                password = 'What is your password?'
+                {print} 'Welcome to our club!'
+
+                username = {ask} 'Please enter your username. Are you a new member? Type New Member'
+                {if} username = New Member
+                {call} new member
+                    {else}
+                        password = {ask} 'Please enter password'
+            debug: 'True'
+        8:
             header: Ready to try it out?
             text: Enjoy the adventures in level 12!
     13:
@@ -828,6 +919,30 @@ levels:
                 {call} song {with} 'sea'
                 {call} song {with} 'ocean'
         8:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {define} happiness {with} name
+                    {print} '🥳'
+                {play} G
+                {play} A
+                {play} B
+                {print} 'Party on, ' name
+                {define} sadness
+                {print} '😞'
+                {play} E
+                {play} D
+                {play} C
+                {print} 'Hope you feel better, ' name
+
+                name = {ask} 'What is your' name '?'
+                mood = {ask} 'Are you happy or sad?'
+                {if} mood = happy
+                    {call} happiness {with} person
+                {else} mood = sad
+                    {define} sadness {to} name
+            debug: 'True'
+        9:
             header: Let's go!
             text: Enjoy the adventures in level 13!
     14:
@@ -872,8 +987,7 @@ levels:
                     {print} 'That is a shame!'
         4:
             header: Return value
-            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return
-                value**.
+            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
         5:
             header: Return value
             text: For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
@@ -881,7 +995,7 @@ levels:
                 {define} calculate_new_price {with} amount, percentage
                     percentage = percentage / 100
                     discount_amount = amount * percentage
-                    return amount - discount_amount
+                    {return} amount - discount_amount
 
                 old_price = {ask} 'How much is on the price tag?'
                 discount = {ask} 'What percentage is the discount?'
@@ -889,6 +1003,28 @@ levels:
                 new_price = {call} calculate_new_price {with} old_price, discount
                 {print} 'The new price is ' new_price ' dollar'
         6:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                item = 'not bought'
+                {print} 'I would like to buy this item'
+                price == {ask} 'What is the price?'
+                {if} price less than or the same as 10
+                    {print} 'Thats a great deal!'
+                    item = 'bought'
+                {if} price is more than 10 {and} less than or the same as 20
+                    {print} 'Alright'
+                    item = 'bought'
+                {if} price is more than 20 {and} less than 50
+                    {print} 'That is a bit much!'
+                {if} price is more than or the same as 50
+                    {print} 'No way!'
+                {if} item =! bought
+                    {print} 'Shame.. I wont buy it'
+                {else}
+                    {print} 'I will buy it! Thank you!'
+            debug: 'True'
+        7:
             header: Let's get to work!
             text: Enjoy the adventures in level 14!
     15:
@@ -907,6 +1043,32 @@ levels:
                     answer = {ask} 'What is 5 times 5?'
                 {print} 'A correct answer has been given'
         3:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                numbers = 1, 2
+
+                {for} i {in} {range} 3 {to} 50
+                    {add} x {to} numbers
+                    i = + 1
+
+                random_number = numbers {random}
+                guesses = 10
+
+                {while} guess = 0
+                    answer = 'Guess my number:'
+                    {if} answer >= random_number
+                        {print} 'lower'
+                        guesses = guesses -1
+                    {if} answer > random_number
+                        {print} 'higher!'
+                        guesses = guesses
+                    {else} answer = random_number
+                        {print} 'correct'
+                        guesses = 10
+
+            debug: 'True'
+        4:
             header: Let's try it out!
             text: Enjoy the adventures in level 15!
     16:
@@ -926,6 +1088,39 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                     {print} friends[i] 's lucky number is ' lucky_numbers[i]
         3:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'Friendship test'
+                {subjects} = ['song', 'movie', 'food', 'drink']
+                answers_player_1 = []
+                answers_player_2 = []
+                score = 100
+
+                {for} i {in} {range} 1 {to} 4
+                    answer = {ask} 'what is your favorite ' subjects[i]
+                {add} answer {to} answers_player_1
+
+                {print} 'Player 2, your turn!'
+                {for} i {in} {range} 0 {to} 4
+                    answer_player_2 = {ask} 'what is player 1s favorite ' subjects
+                    {add} answer_player_2 {in} answers_player_2
+                    {if} answers_player_2[2] == answers_player_1[1]
+                        {print} 'Correct!'
+                    {else}
+                        {print} 'Wrong!'
+                    score = score - 25
+
+                {print} 'Player 2, you've scored ' score '%'
+
+                {if} score = 100
+                    {print} 'You are an amazing friend'
+                {if} score < 100 {or} score >= 50
+                    {print} 'You could do better'
+                {else} score < 50
+                    {print} 'Do you even know this person?!'
+            debug: 'True'
+        4:
             header: Let's try it out!
             text: Enjoy the adventures in level 16!
     17:
@@ -957,13 +1152,34 @@ levels:
                 {else}:
                     {print} 'Better luck next time..'
         4:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {define} ask_direction
+                    direction = {ask} 'Where do you want to go?'
+                    {if} direction = 'backwards'
+                        {turn} 180
+                    {else} direction == 'right'
+                        {turn} 90
+                    {else} direction == 'left'
+                        {turn} 270
+                        {forward} 100
+
+                continue = 'yes'
+
+                {while} continue == 'yes'
+                    {print} ask_direction
+                    {sleep}
+                    continue = 'do you want to draw some more?'
+                    {sleep}
+            debug: 'True'
+        5:
             header: Let's try it out!
             text: Enjoy the adventures in level 17!
     18:
         1:
             header: Welcome to level 18
-            text: Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages,
-                you will need to switch to English now.
+            text: Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.
         2:
             header: The Python way
             text: |-

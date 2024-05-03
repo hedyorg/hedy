@@ -4,7 +4,9 @@
         <li class="ltr:mr-2 rtl:ml-2"><a href="/" class="inline-block w-10 lg:w-12"><img src="{{static('/images/Hedy-logo-96x96-round.png')}}" height="48px" width="48px" alt="{{_('hedy_logo_alt')}}"></a></li>
         <li class="flex-initial menubar-item{% if current_page == 'start' %} active{% endif %}"><a class="menubar-text" href="/" title="{{_('nav_start')}}">{{_('nav_start')}}</a></li>
         <li class="flex-initial menubar-item{% if current_page == 'hedy' %} active{% endif %}"><a class="menubar-text" id="hedybutton" href="/hedy" title="{{_('nav_hedy')}}">{{_('nav_hedy')}}</a></li>
-        <li class="flex-initial truncate menubar-item{% if current_page == 'explore' %} active{% endif %}"><a class="menubar-text" id="explorebutton" href="/explore" title="{{_('nav_explore')}}">{{_('nav_explore')}}</a></li>
+        {% if not hide_explore %}
+            <li class="flex-initial truncate menubar-item{% if current_page == 'explore' %} active{% endif %}"><a class="menubar-text" id="explorebutton" href="/explore" title="{{_('nav_explore')}}">{{_('nav_explore')}}</a></li>
+        {% endif %}
         {% if is_teacher  or is_second_teacher %}
             <li class="flex-initial truncate menubar-item{% if current_page == 'for-teachers' %} active{% endif %}"><a class="menubar-text" href="/for-teachers" title="{{_('for_teachers')}}">{{_('for_teachers')}}</a></li>
             <li class="flex-initial truncate menubar-item{% if current_page == 'teacher-manual' %} active{% endif %}"><a class="menubar-text" href="/for-teachers/manual" title="{{_('teacher_manual')}}">{{_('teacher_manual')}}</a></li>
@@ -67,7 +69,7 @@
               </div>
           </div>
       </li>
-      <a class="blue-btn" href="/login">{{_('login')}}</a>
+      <a class="blue-btn mr-3" href="/login">{{_('login')}}</a>
     {% endif %}
     {% endblock %}
     </ul>

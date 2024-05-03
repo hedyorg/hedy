@@ -6,6 +6,9 @@ let classname;
 let students;
 
 describe('Developers mode', () => {
+    beforeEach(() => {
+      loginForTeacher();
+    })
     it('Should toggle on and off', () => {
       goToHedyPage();
       
@@ -17,14 +20,21 @@ describe('Developers mode', () => {
     })
 
     it('Should be enforced developer mode', () => {
-      goToHedyPage();
-      loginForTeacher();
+      cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
+
       ({classname, students} = createClassAndAddStudents());
       navigateToClass(classname);
 
       cy.get("#customize-class-button").click();
-      cy.get("#developers_mode").click(); // Enforced developer mode is switched on
-      cy.getBySel("save_customizations").click();
+      cy.get("#developers_mode")
+        .should("not.be.checked")
+        .click()
+
+      cy.get("#developers_mode")
+        .should("be.checked")
+      
+      cy.wait(1000)
+      cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
 
       logout();
       loginForStudent(students[0]);

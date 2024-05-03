@@ -6,27 +6,24 @@ levels:
             -   option: Hedy
                 feedback: Bonege!
             -   option: Heddy
-                feedback: Not this one!
+                feedback: Ne ĉi tiu!
             -   option: Haydie
-                feedback: Not this one!
+                feedback: Ne estas tio!
             -   option: Heidi
-                feedback: Not this one!
+                feedback: Ne, ne estas tio!
             hint: Ĝi estas nomita laŭ Hedy Lamarr.
             correct_answer: A
             question_score: '10'
         2:
-            question_text: Which command makes text appear?
+            question_text: Kion bezonas esti skribita en la spaco por aperigi la tekston «Hello!»?
             code: ___ Hello!
             mp_choice_options:
             -   option: |-
                     ```
                     {echo}
                     ```
-                feedback: '`{echo}` repeats a given answer.'
-            -   option: |-
-                    ```
-                    {print}
-                    ```
+                feedback: '`{echo}` reskribas la respondon de la uzanto.'
+            -   option: '`{print}`'
                 feedback: Ĝuste!
             -   option: |-
                     ```
@@ -37,18 +34,18 @@ levels:
                     ```
                     {ask}
                     ```
-                feedback: With `{ask}`, you can ask a question.
-            hint: _?_ Saluton mondo!
+                feedback: Per `{ask}`, vi povas fari demandon.
+            hint: _ Saluton mondo!
             correct_answer: B
             question_score: '10'
         3:
-            question_text: How do you ask what someone's favorite color is?
+            question_text: Kiel vi demandas kio estas ies plej ŝatata koloro?
             mp_choice_options:
             -   option: |-
                     ```
                     {print} Kio estas via plej ŝatata koloro?
                     ```
-                feedback: '`{print}` prints text, but it doesn''t ask questions.'
+                feedback: '`{print}` afiŝas tekston, sed ne demandas ion ajn.'
             -   option: |-
                     ```
                     {ask} {print} Kio estas via plej ŝatata koloro?
@@ -63,8 +60,8 @@ levels:
                     ```
                     {echo} Kio estas via plej ŝatata koloro?
                     ```
-                feedback: '`{echo}` repeats your answer back to you.'
-            hint: You can ask something with the `{ask}` command
+                feedback: '`{echo}` reskribas vian respondon al vi.'
+            hint: Vi povas demandi ion per la komando `{ask}`
             correct_answer: C
             question_score: '10'
         4:
@@ -76,26 +73,26 @@ levels:
             mp_choice_options:
             -   option: '`{print}` en linio 1 mankas.'
                 feedback: Ĝuste!
-            -   option: Apostrofo mankas en linio 1.
-                feedback: La apostrofo intence mankas; Hedy ankoraŭ ne komprenas apostrofojn.
+            -   option: La komando en la linio 2 estas misortografita.
+                feedback: La komando estas bone ortografita.
             -   option: '`{echo}` ne estas komando.'
                 feedback: '`{echo}` ja estas komando.'
             -   option: Nenio! Jen perfekta kodo!
                 feedback: Malĝuste, rigardu atente!
-            hint: Line 1 doesn't seem right
+            hint: La linio 1 ne ŝajnas korekta
             correct_answer: A
             question_score: '10'
         5:
-            question_text: Which command is missing in line 2?
+            question_text: Kiu komando mankas en la linio 2?
             code: |-
-                {ask} What is your favorite pet?
-                _?_ So your favorite pet is...
+                {ask} Kio estas via plej ŝatata dorlotbesto?
+                _ Do via plej ŝatata dorlotbesto estas…
             mp_choice_options:
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: No, you would like the answer to be repeated back to you.
+                feedback: Ne, vi ŝatus ke Hedy ripetu la respondon.
             -   option: |-
                     ```
                     Hedy
@@ -111,7 +108,7 @@ levels:
                     {echo}
                     ```
                 feedback: Ĝuste!
-            hint: You want to see the answer at the end of line 2...
+            hint: Vi volas vidi la respondon je la fino de la linio 2…
             correct_answer: D
             question_score: '10'
         6:
@@ -125,12 +122,12 @@ levels:
             -   option: En linio 1, `{print}` estu anstataŭigita per `{ask}`.
                 feedback: '`{print}` en linio 1 estas ĝusta.'
             -   option: En linio 2, `{print}` estu anstataŭigita per `{ask}`.
-                feedback: Bonege! You paid attention!
+                feedback: Bonege! Vi atentis!
             -   option: Linio 3 devas komenci per `{print}` anstataŭ `{echo}`.
                 feedback: '`{echo}` estas ĝusta.'
             -   option: En linio 4, `{print}` estas skribita malĝuste.
                 feedback: Ne, estas eraro ie aliloke
-            hint: Check the `{print}` commands.
+            hint: Kontrolu la komandojn `{print}`.
             correct_answer: B
             question_score: '10'
         7:

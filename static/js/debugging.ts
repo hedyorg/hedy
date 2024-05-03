@@ -1,15 +1,13 @@
-import { HedyAceEditor } from "./ace-editor";
 import { runit, theGlobalDebugger,theGlobalSourcemap } from "./app";
 import { HedyEditor, Breakpoints } from "./editor";
 import  TRADUCTION_IMPORT  from '../../highlighting/highlighting-trad.json'
-import { convert } from './syntaxModesRules'
 let theGlobalEditor: HedyEditor;
 let theLevel: number;
 let theLanguage: string;
 let TRADUCTION: Map<string,string>;
 
 //Feature flag for variable and values view
-let variable_view = false;
+let variable_view = true;
 let step_debugger = false;
 const fullLineCommands = [
   'print',
@@ -20,22 +18,23 @@ const fullLineCommands = [
   'add',
   'remove',
   'ask',
+  'play',
   'command', // the turtle and clear commands get put in the source map as 'command'
 ]
 
 const blockCommands = [
   'ifs',
   'ifelse',
-  'ifpressed_else',
+  'if_pressed_else',
   'repeat',
-  'ifpressed',
+  'if_pressed',
   'elses',
-  'ifpressed_elses',
+  'if_pressed_elses',
   'for_list',
   'for_loop',
   'while_loop',
   'elifs',
-  'ifpressed_elifs',
+  'if_pressed_elifs',
 ]
 
 const ifRegex = "((__if__) *[^\n ]+ *((__is__)|(__in__)) *[^\n ]+) *.*";
@@ -55,12 +54,17 @@ interface GutterMouseDownEvent {
   stop(): void;
 }
 
-function hide_if_no_variables(){
+function hide_if_no_variables(){ //this shows just the button, not the list itself
   if($('#variables #variable-list li').length == 0){
     $('#variable_button').hide();
+    $('#variables').hide();
   }
   else{
     $('#variable_button').show();
+    if(variable_view){
+      $('#variables').show();
+    }
+    
   }
 }
 
@@ -81,9 +85,11 @@ export function load_variables(variables: any) {
     for (const i in variables) {
       // Only append if the variable contains any data (and is not undefined)
       if (variables[i][1]) {
-        variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
+        const variableName = variables[i][0].replace(/^_/, '');
+        variableList.append(`<li style=color:${variables[i][2]}>${variableName}: ${variables[i][1]}</li>`);
       }
     }
+    show_variables();
     hide_if_no_variables();
   }
 }
@@ -112,7 +118,7 @@ function special_style_for_variable(variable: Variable) {
 //hiding certain variables from the list unwanted for users
 function clean_variables(variables: Record<string, Variable>) {
   const new_variables = [];
-  const unwanted_variables = ["random", "time", "int_saver", "int_$rw$", "turtle", "t"];
+  const unwanted_variables = ["random", "time", "int_saver", "int_$rw$", "turtle", "t", "chosen_note"];
   for (const variable in variables) {
     if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
       let extraStyle = special_style_for_variable(variables[variable]);
@@ -172,6 +178,7 @@ export function initializeDebugger(options: InitializeDebuggerOptions) {
   if(options.level != 0){
     let level = options.level;
     variable_view = level >= 2;
+    show_variables();
     hide_if_no_variables();
   }
 
@@ -218,23 +225,6 @@ function initializeBreakpoints(editor: HedyEditor) {
     }
     e.stop();
   });
-
-  /**
- * Render markers for all lines that have breakpoints
- * 
- * (Breakpoints mean "disabled lines" in Hedy).
- * */
-  editor.on('changeBreakpoint', function() {
-    if (theGlobalEditor instanceof HedyAceEditor) {
-      const breakpoints = theGlobalEditor.getDeactivatedLines();
-      const disabledLines = Object.entries(breakpoints)
-        .filter(([_, bpClass]) => bpClass === BP_DISABLED_LINE)
-        .map(([line, _]) => line)
-        .map(x => parseInt(x, 10));
-      
-      theGlobalEditor.strikethroughLines(disabledLines);
-    }
-  });
 }
 
 function get_shift_key(event: Event | undefined) {
@@ -246,7 +236,7 @@ function get_shift_key(event: Event | undefined) {
 
 function debugRun() {
   if (theLevel && theLanguage) {
-    runit(theLevel, theLanguage, "", "run", function () {
+    runit(theLevel, theLanguage, false, "", "run", function () {
       $('#output').focus();
     });
   }
@@ -411,4 +401,20 @@ function markCurrentDebuggerLine() {
  */
 function getBreakpoints(editor: AceAjax.Editor): Breakpoints {
   return editor.session.getBreakpoints() as unknown as Breakpoints;
+}
+
+export function convert(o:(object|undefined)) {
+  if (typeof o === 'object') {
+    let tmp:Map<string, object> = new Map(Object.entries(o));
+
+    let ret:Map<string, (undefined|object)> = new Map();
+
+    tmp.forEach((value, key) => {
+      ret.set(key, convert(value));
+    });
+
+    return ret;
+  } else {
+    return o;
+  }
 }

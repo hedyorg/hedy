@@ -7,6 +7,11 @@ describe('Is able to add student by name', () => {
 
     cy.wait(500);
 
+    cy.get(".view_class").then($viewClass => {
+      if (!$viewClass.is(':visible')) {
+          cy.get("#view_classes").click();
+      }
+    });
     cy.get(".view_class").first().click();
     cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
 
@@ -16,7 +21,7 @@ describe('Is able to add student by name', () => {
 
         if ($div.text().includes('student5')){
           cy.get('#remove-student').click();
-          cy.get('#modal-yes-button').click();
+          cy.get('[data-cy="modal_yes_button"]').click();
         }
     })
 
