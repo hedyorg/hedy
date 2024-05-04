@@ -3519,16 +3519,20 @@ def determine_roles(lookup, input_string, level, lang):
     roles_dictionary = {}
     for var in all_vars:
         assignments = [x for x in lookup if x.name == var]
-        if (len(assignments) == 1):
+
+        if (assignments[0].tree.data == 'for_list'):
+            roles_dictionary[var] = 'walker'
+        elif (assignments[0].type_ == 'list'):
+            roles_dictionary[var] = 'container'
+        elif (len(assignments) == 1):
             if (assignments[0].type_ == 'input'):
                 roles_dictionary[var] = 'input constant'
             else:
                 roles_dictionary[var] = 'constant'
         else:
-            roles_dictionary[var] = 'walker' if assignments[0].tree.data == 'for_list' else 'unknown'
+            roles_dictionary[var] = 'unknown'
 
     return roles_dictionary
-
 
 def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False, unused_allowed=False,
                     microbit=False):
