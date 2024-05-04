@@ -3534,6 +3534,7 @@ def determine_roles(lookup, input_string, level, lang):
 
     return roles_dictionary
 
+
 def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False, unused_allowed=False,
                     microbit=False):
     check_program_size_is_valid(input_string)
