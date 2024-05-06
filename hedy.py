@@ -1140,9 +1140,9 @@ def all_variables(input_string, level, lang='en'):
     """
     input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
-
+    abstract_syntax_tree = ExtractAST().transform(program_root)
     vars = set()
-    lookup = create_lookup_table(program_root, level, lang, input_string)
+    lookup = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
     for x in lookup:
         name = str(x.name)
         if '[' not in name:  # we also stor list access but that is not needed here
