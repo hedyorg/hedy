@@ -21,49 +21,44 @@ let keywordHasAlert: Map<string, boolean> = new Map()
 export async function initializeCustomAdventurePage(_options: InitializeCustomizeAdventurePage) {
     const editorContainer = document.querySelector('#adventure-editor') as HTMLElement;
     // Initialize the editor with the default language
-    let lang =  $('#language').val() as string || 'en'
+    let lang =  document.querySelector('#languages_dropdown> .option.selected')!.getAttribute('data-value') as string
     const TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;    
     if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
     let TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
 
     if (editorContainer) {
         await initializeEditor(lang, editorContainer);
-        showWarningIfMultipleLevels(TRADUCTION)
-        $editor.model.document.on('change:data', () => {            
-            showWarningIfMultipleLevels(TRADUCTION)
+        showWarningIfMultipleKeywords(TRADUCTION)
+        $editor.model.document.on('change:data', () => {
+            showWarningIfMultipleKeywords(TRADUCTION)
         })
     }
 
     $('#language').on('change', () => {
-        let lang = $('#language').val() as string || 'en'
+        let lang = document.querySelector('#languages_dropdown> .option.selected')!.getAttribute('data-value') as string
         if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
         TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
     })
     // Autosave customize adventure page
     autoSave("customize_adventure")
-
-    // We wait until Tailwind generates the select
-    const tailwindSelects = await waitForElm('[data-te-select-option-ref]')
-    tailwindSelects.forEach((el) => {
+    
+    showWarningIfMultipleLevels()    
+    document.querySelectorAll('#levels_dropdown > .option').forEach((el) => {
         el.addEventListener('click', () => {
-            // After clicking, it takes some time for the checkbox to change state, so if we want to target the checkboxess 
-            // that are checked after clicking we can't do that inmediately after the click
-            // therofore we wait for 100ms
-            setTimeout(function(){
-                const numberOfLevels = document.querySelectorAll('[aria-selected="true"]').length;
-                const numberOfSnippets = document.querySelectorAll('pre[data-language="Hedy"]').length
-                if(numberOfLevels > 1 && numberOfSnippets > 0) {
-                    $('#warningbox').show()
-                } else if(numberOfLevels <= 1 || numberOfSnippets === 0) {
-                    $('#warningbox').hide()
-                }
-            }, 100);
+            setTimeout(showWarningIfMultipleLevels, 100)            
         })
     })
-
 }
-
-function showWarningIfMultipleLevels(TRADUCTION: Map<string, string>) {
+function showWarningIfMultipleLevels() {
+    const numberOfLevels = document.querySelectorAll('#levels_dropdown > .option.selected').length;
+    const numberOfSnippets = document.querySelectorAll('pre[data-language="Hedy"]').length
+    if(numberOfLevels > 1 && numberOfSnippets > 0) {
+        $('#warningbox').show()
+    } else if(numberOfLevels <= 1 || numberOfSnippets === 0) {
+        $('#warningbox').hide()
+    }
+}
+function showWarningIfMultipleKeywords(TRADUCTION: Map<string, string>) {
     const content = DOMPurify.sanitize($editor.getData())
     const parser = new DOMParser();
     const html = parser.parseFromString(content, 'text/html');
@@ -210,7 +205,7 @@ export function addCurlyBracesToCode(code: string, level: number, language: stri
 }
 
 export function addCurlyBracesToKeyword(name: string) {
-    let lang =  $('#language').val() as string || 'en'
+    let lang =  document.querySelector('#languages_dropdown> .option.selected')!.getAttribute('data-value') as string
     const TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;    
     if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
     let TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
@@ -222,25 +217,4 @@ export function addCurlyBracesToKeyword(name: string) {
     }
 
     return name;
-}
-
-function waitForElm(selector: string): Promise<NodeListOf<Element>>  {
-    return new Promise(resolve => {
-        if (document.querySelector(selector)) {
-            return resolve(document.querySelectorAll(selector));
-        }
-
-        const observer = new MutationObserver(_mutations => {
-            if (document.querySelector(selector)) {
-                observer.disconnect();
-                resolve(document.querySelectorAll(selector));
-            }
-        });
-
-        // If you get "parameter 1 is not of type 'Node'" error, see https://stackoverflow.com/a/77855838/492336
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
-    });
 }
