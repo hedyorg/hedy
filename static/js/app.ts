@@ -9,7 +9,12 @@ import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './type
 import { startIntroTutorial } from './tutorials/tutorial';
 import { get_parsons_code, initializeParsons, loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
-import { incrementDebugLine, initializeDebugger, load_variables, startDebug } from './debugging';
+import {
+    incrementDebugLine,
+    initializeDebugger,
+    load_variables,
+    startDebug
+} from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
 import { postJson, postNoResponse } from './comm';
@@ -405,7 +410,8 @@ export function initializeHighlightedCodeBlocks(where: Element) {
           if (dir === "rtl") {
             symbol = "⇤";
           }
-          $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
+          const adventure = container.getAttribute('data-tabtarget')
+          $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').attr('data-cy', `paste-example-code-${adventure}`).text(symbol).appendTo(buttonContainer).click(function() {
             if (!theGlobalEditor?.isReadOnly) {
               theGlobalEditor.contents = exampleEditor.contents + '\n';
             }
@@ -474,6 +480,24 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
   // if the user changes tabs while we're waiting for a response
   const adventureName = currentTab;
 
+     if (run_type === 'debug' || run_type === 'continue') {
+          if($('#variables #variable-list li').length == 0){
+            $('#variable_button').hide();
+            $('#variables').hide();
+            $('#variables-expand').hide();
+          }
+          else{
+            $('#variable_button').show();
+            $('#variables').show();
+            $('#variables-expand').show();
+          }
+          setTimeout(() => {
+                $('#variables-expand').hide();
+                $('#variables').hide();
+          }, 5000);
+
+     }
+
   if (askPromptOpen) {
     // If there is no message -> don't show a prompt
     if (disabled_prompt) {
@@ -538,6 +562,7 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
           tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
           read_aloud : !!$('#speak_dropdown').val(),
           adventure_name: adventureName,
+          short_name: adventure ? adventure.short_name : undefined,
           raw: raw,
 
           // Save under an existing id if this field is set
@@ -584,7 +609,7 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
       program_data = theGlobalDebugger.get_program_data();
     }
 
-    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pressed, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, cb, run_type).catch(function(err: any) {
+    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pressed, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, program_data.is_modified ,cb, run_type).catch(function(err: any) {
       // The err is null if we don't understand it -> don't show anything
       if (err != null) {
         error.show(ClientMessages['Execute_error'], err.message);
@@ -720,12 +745,65 @@ export function viewProgramLink(programId: string) {
   return window.location.origin + '/hedy/' + programId + '/view';
 }
 
+function updateProgramCount() {
+  const programCountDiv = $('#program_count');
+  const countText = programCountDiv.text();
+  const regex = /(\d+)/;
+  const match = countText.match(regex);
+  
+  if (match && match.length > 0) {
+    const currentCount = parseInt(match[0]);
+    const newCount = currentCount - 1;
+    const newText = countText.replace(regex, newCount.toString());
+    programCountDiv.text(newText);
+  }
+}
+
+function updateSelectOptions(selectName: string) {
+  let optionsArray: string[] = [];
+  const select = $(`select[name='${selectName}']`);
+  
+  // grabs all the levels and names from the remaining adventures
+  $(`[id="program_${selectName}"]`).each(function() {
+      const text = $(this).text().trim();
+        if (selectName == 'level'){
+          const number = text.match(/\d+/)
+          if (number && !optionsArray.includes(number[0])) {
+            optionsArray.push(number[0]);
+          }
+        } else if (!optionsArray.includes(text)){
+          optionsArray.push(text);
+          }
+      console.log(optionsArray);
+  });
+
+  if (selectName == 'level'){
+    optionsArray.sort();
+  }
+  // grabs the -- level -- or -- adventure -- from the options
+  const firstOption = select.find('option:first').text().trim();
+  optionsArray.unshift(firstOption);
+
+  select.empty();
+  optionsArray.forEach(optionText => {
+    const option = $('<option></option>').text(optionText);
+    select.append(option);
+  });
+}
+
 export async function delete_program(id: string, prompt: string) {
   await modal.confirmP(prompt);
   await tryCatchPopup(async () => {
+    $('#program_' + id).remove();
+    // only shows the remaining levels and programs in the options
+    updateSelectOptions('level');
+    updateSelectOptions('adventure');
+    // this function decreases the total programs saved
+    updateProgramCount();
     const response = await postJsonWithAchievements('/programs/delete', { id });
     showAchievements(response.achievement, true, "");
-    $('#program_' + id).remove();
+    // issue request on the Bar component.
+    console.log("resp", response)
     modal.notifySuccess(response.message);
   });
 }
@@ -853,7 +931,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPressed: boolean, hasSleep: number[], hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPressed: boolean, hasSleep: number[], hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, isModified: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
   let skip_faulty_found_errors = false;
@@ -1042,13 +1120,13 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       }
 
       // Check if the program was correct but the output window is empty: Return a warning
-      if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
+      if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty') && !hasMusic) {
         pushAchievement("error_or_empty");
         error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);
         return;
       }
       if (!hasWarnings && code !== last_code) {
-          showSuccesMessage(); //FH nov 2023: typo in success :)
+          showSuccessMessage(isModified);
           last_code = code;
       }
       if (cb) cb ();
@@ -1346,6 +1424,16 @@ export function showVariableView() {
   }
   else {
     variables.hide();
+    const output = $('#output');
+    output.show();
+  }
+  const variablesExpand = $('#variables-expand');
+  if (variablesExpand.is(":hidden")) {
+    variablesExpand.show();
+    $("#variables").trigger("click")
+  }
+  else {
+    variablesExpand.hide();
   }
 }
 
@@ -1372,6 +1460,34 @@ export function get_active_and_trimmed_code() {
 
 export function getEditorContents() {
   return theGlobalEditor.contents;
+}
+
+export function expandVariableView() {
+  const openVariables = $('#open-variables');
+  openVariables.hide();
+  const closeVariables = $('#close-variables');
+  if(closeVariables.hasClass('hidden')){
+      closeVariables.removeClass('hidden');
+  }
+
+  const variables = $('#variables');
+  const output = $('#output');
+  variables.addClass('h-1/2');
+  output.addClass('h-1/2');
+}
+
+export function closeVariableView() {
+  const openVariables = $('#open-variables');
+  openVariables.show();
+  const closeVariables = $('#close-variables');
+  if(!closeVariables.hasClass('hidden')){
+      closeVariables.addClass('hidden');
+  }
+
+  const variables = $('#variables');
+  const output = $('#output');
+  variables.removeClass('h-1/2');
+  output.removeClass('h-1/2');
 }
 
 export function confetti_cannon(){
@@ -1430,11 +1546,11 @@ export function modalStepOne(level: number){
   }
 }
 
-function showSuccesMessage(){
+function showSuccessMessage(isModified: boolean){
   removeBulb();
   var allsuccessmessages = ClientMessages['Transpile_success'].split('\n');
   var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
-  success.show(allsuccessmessages[randomnum]);
+  success.show(allsuccessmessages[randomnum], isModified);
 }
 
 function createModal(level:number ){
@@ -1567,7 +1683,7 @@ export function toggle_blur_code() {
 export async function change_language(lang: string) {
   await tryCatchPopup(async () => {
     const response = await postJsonWithAchievements('/change_language', { lang });
-    if (response.succes) {
+    if (response.success) {
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
 
@@ -1970,6 +2086,7 @@ async function saveIfNecessary() {
       program_id: saveInfo?.id,
       // We pass 'public' in here to save the backend a lookup
       share: saveInfo?.public,
+      short_name: adventure.short_name,
     });
 
     // Record that we saved successfully

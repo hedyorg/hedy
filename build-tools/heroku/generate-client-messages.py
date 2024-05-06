@@ -24,7 +24,8 @@ ADDITIONAL_GETTEXT_KEYS = [
     'directly_available',
     'disabled',
     'adventures_restored',
-    'multiple_keywords_warning'
+    'multiple_keywords_warning',
+    'selected'
 ]
 
 

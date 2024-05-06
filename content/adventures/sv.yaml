@@ -1816,6 +1816,14 @@ adventures:
                         {print} i
                     {print} 'Klar eller inte, här kommer jag!'
                     ```
+            18:
+                story_text: |
+                    Lastly, we'll turn `{for} i {in} {range} 1 to 5` into real Python code, like this:
+                example_code: |
+                    ```
+                    {for} i {in} {range}(1,5):
+                        {print} (i)
+                    ```
     fortune:
         name: Spådam
         default_save_name: Spådam
@@ -2071,6 +2079,35 @@ adventures:
 
                     new_price = _ calculate_new_price {with} old_price, _
                     {print} 'The new price is ' new_price ' dollar'
+                    ```
+            18:
+                story_text: |
+                    Let's make functions the Pythons way! To define a function, we no longer use:
+
+                    `{define} name_function {with} argument_1, argument_2:`
+
+                    but we use:
+
+                    `{def} name_function(argument_1, argument_2):`.
+
+
+                    If you don't want to use arguments, you just leave the space between the parantheses empty.
+                    To call a function, we don't need the `{call}` command anymore. You just type the name of the function.
+                example_code: |
+                    ```
+                    {def} calculate_score(answer, correct_answer):
+                        {if} answer == correct_answer:
+                            score = 1
+                        {elif} answer == '?':
+                            score = 0
+                        {else}:
+                            score = -1
+                        {return} score
+
+                    answer = {input} ('Where can you find the Eiffel Tower?')
+                    correct_answer = 'Paris'
+                    score = calculate_score(answer, correct_answer)
+                    {print} ('Your score is... ', score)
                     ```
     guess_my_number:
         name: Guess my number
@@ -2618,7 +2655,7 @@ adventures:
                 story_text_2: |
                     ### Övning
                     Dags att göra dina egna variabler!
-                    I exempelkoden gjorde vi ett exempel på variabeln `favorite_animals`. På rad 1 sätts (tilldelas) variabeln och på rad 2 har vi använt variabeln i ett skriv-kommando.
+                    I exempelkoden gjorde vi ett exempel på variabeln `favoritdjur`. På rad 1 sätts (tilldelas) variabeln och på rad 2 har vi använt variabeln i ett skriv-kommando.
                     Avsluta först vårt exempel genom att fylla i ditt favoritdjur i de tomma fälten. Gör sedan minst tre av dessa koder själv. Välj en variabel och sätt variabeln med kommandot {is}. Använd den sedan med ett {print}-kommando, precis som vi gjorde.
                 example_code_2: |
                     ```
@@ -4511,248 +4548,148 @@ adventures:
                     movement = [ 'round and round', 'open and shut', _]
                     ```
     tic:
-        name: Luffarschack
-        default_save_name: Tripp
-        description: Spela en omgång Luffarschack!
+        name: Tic-Tac-Toe
+        default_save_name: Tic
+        description: Play a game of Tic Tac Toe!
         levels:
-            13:
+            16:
                 story_text: |
-                    I det här äventyetr kan du programmera en omgång Luffarschack. Två personer kan spela. I tur och ordning väljer du ett nummer på den plats (1–9) du vill sätta ditt tecken (x eller o) på.
-                    Den första spelaren som får tre i rad (horisontellt, vertikalt eller diagonalt) vinner!
+                    Let's program a game of tic-tac-toe!
 
-                    ### Övning 1
-                    Spelet fungerar, men det har några problem. Till exempel kan alla spelare välja vilket fält som helst, även ett som redan tagits! Använd en `{if}` om platsen är tagen, och varna isåfall spelaren.
+                    ### Exercise
+                    In this adventure we'll start with creating an empty field.
 
-                    ### Övning 2
-                    Spelet avgör inte heller vem som har vunnit. Du behöver lägga till detta genom att kontrollera om tre rutor på rad har samma symbol.
+                    ***Create a list called field*** This list will be our playing field. This list is filled with 9 dots, since there are no x's and o's yet at the start of our game.
 
-                    ### Övning 3 Extrauppgift
-                    Man har inte alltid en kompis att spela med. Kan du skapa en datormotståndare?
+                    ***Create a function that prints the field*** Firstly, clear the screen so the old playing fields will be removed. Then we print the first line of our Tic Tac Toe field. This line constists of the first 3 spots in our list field.
+                    We have already programmed this line for you. Now finish the field by printing spot 4, 5, and 6 on the second row and spot 7, 8 and 9 in the third row.
+
+                    ***Call the function that prints the field*** Now call the function.
+                    <div class="w-full flex flex-row gap-2">
+                        Run the code. Your output should look like this: <img src="https://github.com/hedyorg/hedy/assets/80678586/bcbd156e-4b48-4e82-84ae-f86d21b0cbcc" width="100">
+                    </div>
+
+                    ***Continue in the next tab*** In the next tab you'll learn how to program the game itself.
                 example_code: |
                     ```
-                    spelare = 'x'
-                    ruta = '.', '.', '.', '.', '.', '.', '.', '.', '.'
+                    # Create a list called field
+                    _ = ['.', '.', '.', '.', '.', '.', '.', '.', '.']
 
-                    {for} i {in} {range} 1 {to} 9
-                        val = {ask} 'Spelare ' spelare ', vilken plats väljer du?'
-                        ruta {at} val = spelare
-                        {clear}
-                        print ruta {at} 1 ruta {at} 2 ruta {at} 3
-                        print ruta {at} 4 ruta {at} 5 ruta {at} 6
-                        print ruta {at} 7 ruta {at} 8 ruta {at} 9
-                        {if} spelare = 'x'
-                            spelare = 'o'
-                        {else}
-                            spelare = 'x'
-                    ```
-            14:
-                story_text: |
-                    På de tidigare nivåerna har du gjort ett tripp-trapp-trull-spel. Nu har du lärt dig hur du använder =-tecknet, ==-tecknet och !=-tecknet.
-                    Du kan använda den kunskapen i ditt nya Tripp Trapp Trull, så här:
-                example_code: |
-                    ```
-                    tecken = 'x'
-                    lediga_rutor = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    spel = 'pågår'
-                    ruta_1 = '.'
-                    ruta_2 = '.'
-                    ruta_3 = '.'
-                    ruta_4 = '.'
-                    ruta_5 = '.'
-                    ruta_6 = '.'
-                    ruta_7 = '.'
-                    ruta_8 = '.'
-                    ruta_9 = '.'
-                    {print} 'LUFFARSCHACK!'
-                    {print} ruta_1 ruta_2 ruta_3
-                    {print} ruta_4 ruta_5 ruta_6
-                    {print} ruta_7 ruta_8 ruta_9
-                    {print} ' '
-                    {for} i {in} {range} 1 {to} 9
-                        {if} spel != 'över'
-                            val = {ask} 'Spelare ' tecken ', vilken ruta?'
-                            {if} val {in} lediga_rutor
-                                {remove} val {from} lediga_rutor
-                                {if} val == 1
-                                    ruta_1 = tecken
-                                {if} val == 2
-                                    ruta_2 = tecken
-                                {if} val == 3
-                                    ruta_3 = tecken
-                                {if} val == 4
-                                    ruta_4 = tecken
-                                {if} val == 5
-                                    ruta_5 = tecken
-                                {if} val == 6
-                                    ruta_6 = tecken
-                                {if} val == 7
-                                    ruta_7 = tecken
-                                {if} val == 8
-                                    ruta_8 = tecken
-                                {if} val == 9
-                                    ruta_9 = tecken
-                            {else}
-                                {print} 'Den rutan är redan tagen'
-                            {print} ruta_1 ruta_2 ruta_3
-                            {print} ruta_4 ruta_5 ruta_6
-                            {print} ruta_7 ruta_8 ruta_9
-                            {print} ' '
-                            vinnare = {ask} 'Vann du?'
-                            {if} vinnare == 'ja'
-                                {print} 'Bra jobbat, spelare ' tecken '!'
-                                spel = 'över'
-                            {else}
-                                {if} tecken == 'x'
-                                    tecken = 'o'
-                                {else}
-                                    tecken = 'x'
-                    ```
-            15:
-                story_text: |
-                    På den här nivån kan du förbättra ditt tripp-trapp-trull-spel med {while}-loopen. Med den loopen kan du kombinera `{if} game != 'over'` och `{for} i {in} {range} 1 {to} 9` till bara en kodrad.
-                    Kolla själv:
-                example_code: |
-                    ```
-                    tecken = 'x'
-                    lediga_rutor = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    spel = 'pågår'
-                    ruta_1 = '.'
-                    ruta_2 = '.'
-                    ruta_3 = '.'
-                    ruta_4 = '.'
-                    ruta_5 = '.'
-                    ruta_6 = '.'
-                    ruta_7 = '.'
-                    ruta_8 = '.'
-                    ruta_9 = '.'
-                    {print} 'LUFFARSCHACK!'
-                    {print} ruta_1 ruta_2 ruta_3
-                    {print} ruta_4 ruta_5 ruta_6
-                    {print} ruta_7 ruta_8 ruta_9
-                    {print} ' '
-                    {while} spel != 'över'
-                        val = {ask} 'Spelare ' tecken ', vilken ruta?'
-                        {if} val {in} lediga_rutor
-                            {remove} val {from} lediga_rutor
-                            {if} val == 1
-                                ruta_1 = tecken
-                            {if} val == 2
-                                ruta_2 = tecken
-                            {if} val == 3
-                                ruta_3 = tecken
-                            {if} val == 4
-                                ruta_4 = tecken
-                            {if} val == 5
-                                ruta_5 = tecken
-                            {if} val == 6
-                                ruta_6 = tecken
-                            {if} val == 7
-                                ruta_7 = tecken
-                            {if} val == 8
-                                ruta_8 = tecken
-                            {if} val == 9
-                                ruta_9 = tecken
-                        {else}
-                            {print} 'Den rutan var redan tagen'
-                        {print} ruta_1 ruta_2 ruta_3
-                        {print} ruta_4 ruta_5 ruta_6
-                        {print} ruta_7 ruta_8 ruta_9
-                        {print} ' '
-                        vinnare = {ask} 'Vann du?'
-                        {if} vinnare == 'ja'
-                            {print} 'Bra jobbat, spelare ' tecken '!'
-                            spel = 'över'
-                        {else}
-                            {if} tecken == 'x'
-                                tecken = 'o'
-                            {else}
-                                tecken = 'x'
+                    # Create a function that prints the field
+                    {define} print_field
+                        _
+                        {print} 'TIC TAC TOE'
+                        {print} field[1] field[2] field[3]
+                        _
+                        _
+
+                    # Call the function
                     ```
             17:
                 story_text: |
-                    På de tidigare nivåerna hade tripp-trapp-trull-spelet en irriterande funktion. Efter varje drag var man tvungen att själv fylla i om man hade vunnit eller inte.
-                    Detta gjorde spelet spelbart, men också ganska långsamt. På den här nivån har vi lärt oss kommandot `{elif}`, som kan lösa det problemet.
-                    Att använda `{elif}` för att låta Hedy kontrollera om en spelare har vunnit eller inte är kul, men det kräver också en hel del extra rader.
+                    In the previous level you've learned how to make a tic-tac-toe game. The game works, but is quite annoying as it keeps asking you if you've won yet.
+                    Now that we have the {elif} command, we can let the game decide if someone has won and it can stop asking us!
 
-                    I exempelkoden ser du att vi lagt till kraven för att vinna (tre rutor på rad horisontellt, vertikalt eller diagonalt).
-                    Du hittar dem på rad 46 till 69. Du kan se att varje gång kravet är uppfyllt (alltså om en spelare har vunnit) sätts variabeln spel till 'over'.
-                    Detta innebär att `{while}`-slingan stoppas och att spelet avslutas.
+                    ### Exercise
+                    ***Paste your code*** Paste your code from the previous level here and make it level 17 proof. In this level you've learned to use a colon everytime you create a block of code. Please add the colons in the correct spots.
+
+                    ***Create a function that detects if someone's won*** We have started the function for you, paste it under the function `print_field` and finish the function. You can see that this first piece of code checks to see if spot 1, 2 and 3 are the same, because if they are you have 3 in a row.
+                    It also checks if they are not a dot, because if they are, the line might have the same symbols on them, but that's just because it's still empty.
+                    If all these conditions are met, the game is over and the winner is printed.
+                    Finish this function with all possible ways to win. This means you have to make this for the other 2 rows, 3 columns and 2 diagonals.
+                    If you've finished all the other options, the function should return the variable `game_over` so we can use it in our game.
+
+                    ***Call the function in the game*** Go to the line `game_over = {ask} 'Did you win?'` and change it to `game_over = {call} detect_winner {with} field, sign`. Now the function will check if there's a winner and the game doesn't need to keep asking anymore!
+
+                    ***Enjoy your game!*** Great job! You have finished the game! Enjoy playing it!
+
                 example_code: |
                     ```
-                    tecken = 'x'
-                    lediga_rutor = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-                    spel = 'på'
-                    ruta_1 = '.'
-                    ruta_2 = '.'
-                    ruta_3 = '.'
-                    ruta_4 = '.'
-                    ruta_5 = '.'
-                    ruta_6 = '.'
-                    ruta_7 = '.'
-                    ruta_8 = '.'
-                    ruta_9 = '.'
-                    {print} 'LUFFARSCHACK!'
-                    {print} ruta_1 ruta_2 ruta_3
-                    {print} ruta_4 ruta_5 ruta_6
-                    {print} ruta_7 ruta_8 ruta_9
-                    {print} ' '
-                    {while} spel != 'över':
-                        val = {ask} 'Spelare ' tecken ', vilken ruta?'
-                        {if} val {in} lediga_rutor:
-                            {remove} val {from} lediga_rutor
-                            {if} val == 1:
-                                ruta_1 = tecken
-                            {if} val == 2:
-                                ruta_2 = tecken
-                            {if} val == 3:
-                                ruta_3 = tecken
-                            {if} val == 4:
-                                ruta_4 = tecken
-                            {if} val == 5:
-                                ruta_5 = tecken
-                            {if} val == 6:
-                                ruta_6 = tecken
-                            {if} val == 7:
-                                ruta_7 = tecken
-                            {if} val == 8:
-                                ruta_8 = tecken
-                            {if} val == 9:
-                                ruta_9 = tecken
+                    # Paste your code here and make it level 17 proof
+
+                    # Create a function that detects if someone has won
+                    {define} detect_winner {with} field, sign:
+                        {if} field[1] == field[2] {and} field[2] == field[3] {and} field[1] != '.':
+                            game_over = 'yes'
+                            {print} 'Player ' sign 'wins!'
+                        {elif}:
+                            _
                         {else}:
-                            {print} ‘Den rutan var redan tagen’
-                        {print} ruta_1 ruta_2 ruta_3
-                        {print} ruta_4 ruta_5 ruta_6
-                        {print} ruta_7 ruta_8 ruta_9
-                        {print} ' '
-                        {if} ruta_1 == ruta_2 {and} ruta_2 == ruta_3 {and} ruta_1 != '.':
-                            {print} 'Spelare ' tecken ' vinner!'
-                            spel = 'över'
-                        {elif} ruta_4 == ruta_5 {and} ruta_5 == ruta_6 {and} ruta_4 != '.':
-                            {print} 'Spelare ' tecken ' vinner!'
-                            spel = 'över'
-                        {elif} ruta_7 == ruta_8 {and} ruta_8 == ruta_9 {and} ruta_7 != '.':
-                            {print} 'Spelare ' tecken ' vinner!'
-                            spel = 'över'
-                        {elif} ruta_1 == ruta_4 {and} ruta_4 == ruta_7 {and} ruta_1 != '.':
-                            {print} 'Spelare ' tecken ' vinner!'
-                            spel = 'över'
-                        {elif} ruta_2 == ruta_5 {and} ruta_5 == ruta_8 {and} ruta_2 != '.':
-                            {print} 'Spelare ' tecken ' vinner!'
-                            spel = 'över'
-                        {elif} ruta_3 == ruta_6 {and} ruta_6 == ruta_9 {and} ruta_3 != '.':
-                            {print} 'Spelare ' tecken ' vinner!'
-                            spel = 'över'
-                        {elif} ruta_1 == ruta_5 {and} ruta_5 == ruta_9 {and} ruta_1 != '.':
-                            {print} 'Spelare ' tecken ' vinner!'
-                            spel = 'över'
-                        {elif} ruta_3 == ruta_5 {and} ruta_5 == ruta_7 {and} ruta_3 != '.':
-                            {print} 'Spelare ' tecken ' vinner!'
-                            spel = 'över'
-                        {else}:
-                            {if} tecken == 'x':
-                                tecken = 'o'
-                            {else}:
-                                tecken = 'x'
+                            game_over = 'no'
+                    {return} _
+                    ```
+    tic_2:
+        name: Tic-Tac-Toe 2
+        default_save_name: Tic
+        description: Play a game of Tic Tac Toe!
+        levels:
+            16:
+                story_text: |
+                    In the previous adventure you've learned how to create a playing field. Now you'll learn how to create the game!
+
+                    ### Exercise
+                    ***Paste your code*** Start by pasting your code from the previous adventure here.
+
+                    ***Add variables*** Underneath your list called `field` we'll add 2 more variables that we'll need to program the game.
+                    The variable `game_over` tells us if the game is over, and should be 'no' at the start of the game.
+                    The variable `sign` tells us if it's the turn of player x or player o. Set the variable to 'x'.
+
+                    ***The game*** First use a {while} command, to make sure the game keeps on playing the variable while game_over is set to no.
+                    During the game, we first ask the player which spot they choose. Then we change the field with the number they chose into their sign.
+                    Then we print the field again and we ask the player if they've won yet. Lastly we want to switch whose turn it is, so if the sign is 'x' it should be 'o' and the other way around.
+
+                    ***Test your game*** Does your game work? Great, have fun playing the game! If not, use the ladybug button to debug your code.
+                    You might have noticed one mistake in the code though, you can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and steal their spot.
+                    That's not fair! Go to the next tab to learn how to fix this problem.
+                example_code: |
+                    ```
+                    # Paste your code from the previous adventure here
+
+                    # Add variables
+                    game_over = _
+                    sign = _
+
+                    # The game
+                    {while} _
+                        choice = _ 'Player ' sign '_?'
+                        field[choice] = _
+                        _ print_field
+                        game_over = {ask} _
+                        {if} sign = 'o'
+                            sign = _
+                        _
+                            sign = _
+                    ```
+    tic_3:
+        name: Tic-Tac-Toe 3
+        default_save_name: Tic
+        description: Play a game of Tic Tac Toe!
+        levels:
+            16:
+                story_text: |
+                    You might have noticed one mistake in the code you've made in the previous adventure. You can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and steal their spot.
+                    That's not fair! In this tab we'll fix that mistake.
+
+                    ### Exercise
+                    ***Paste your code here*** Paste your code from the previous adventure here.
+
+                    ***Fix the mistake*** To fix the mistake we replace the line that says `field[choice] = sign`. This turns any spot that the player has chosen into their sign.
+                    Go to the header that says 'Use this to fix the mistake' and finish the code. We first want to check if the chosen spot is still empty, so `if field[choice] = '.'`. If that is the case, you are allowed to take it.
+                    Then we make an else command and print 'Sorry, this spot is already taken' if the spot is not empty. Lastly, we add a {sleep} command, so the players can actually read the text before it gets cleared again.
+                    Now copy this piece of code and replace the line `field[choice] = sign` with this new piece of code.
+
+                    ***Play your game!*** Now the game should work properly! Good job!
+                    The only flaw is that you can get a bit annoyed that the game keeps asking you if you've won yet. Do you want to fix that? Go to level 17 and we'll fix it!
+                example_code: |
+                    ```
+                    # Paste your code here
+
+                    # Use this to fix the mistake
+                    {if} _ = '.'
+                        field[choice] = sign
+                    {else}
+                        {print} _
+                        _
                     ```
     turtle:
         name: Sköldpadda
