@@ -143,24 +143,46 @@ class ForTeachersModule(WebsiteModule):
         questions = []
         survey_later = ""
         total_questions = ""
+        level = 1
 
         if Class.get("students"):
             survey_id, description, questions, total_questions, survey_later = self.class_survey(class_id)
 
         for student_username in Class.get("students", []):
             student = self.db.user_by_username(student_username)
-            programs = self.db.programs_for_user(student_username)
+            programs = self.db.filtered_programs_for_user(student_username, level=level)
+            program_stats = self.db.get_program_stats([student_username])
+
             # Fixme: The get_quiz_stats function requires a list of ids -> doesn't work on single string
             quiz_scores = self.db.get_quiz_stats([student_username])
             # Verify if the user did finish any quiz before getting the max() of the finished levels
             finished_quizzes = any("finished" in x for x in quiz_scores)
             highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+            adventures_tried = set()
+
+            for program in programs:
+                if 'adventure_name' in program:
+                    adventures_tried.add(program['adventure_name'])
+
+            number_of_errors = 0
+            successful_runs = 0
+
+            for stat in program_stats:
+                if stat.get('level') != level:
+                    continue
+                successful_runs += stat.get('successful_runs', 0)
+                for key in stat:
+                    if "Exception" in key:
+                        number_of_errors += stat[key]
             students.append(
                 {
                     "username": student_username,
                     "last_login": student["last_login"],
                     "programs": len(programs),
                     "highest_level": highest_quiz,
+                    "successful_runs": successful_runs,
+                    'adventures_tried': len(adventures_tried),
+                    'number_of_errors': number_of_errors
                 }
             )
 
@@ -210,7 +232,11 @@ class ForTeachersModule(WebsiteModule):
                 "name": Class["name"],
                 "id": Class["id"],
             },
-            javascript_page_options=dict(page="class-overview"),
+            javascript_page_options=dict(
+                page="class-overview",
+                graph_students=students,
+                level=level
+            ),
             survey_id=survey_id,
             description=description,
             questions=questions,
@@ -220,7 +246,10 @@ class ForTeachersModule(WebsiteModule):
                 'students': student_overview_table,
                 'adventures': class_adventures_formatted,
                 'student_adventures': student_adventures,
-                'level': '1'
+                'graph_options': {
+                    'level': level,
+                    'graph_students': students
+                }
             }
         )
 
@@ -251,7 +280,7 @@ class ForTeachersModule(WebsiteModule):
             for adventure in value:
                 # if the adventure is not in adventure names it means that the data in the customizations is bad
                 if not adventure['name'] == 'next' and adventure['name'] in adventure_names:
-                    adventure_list.append(adventure_names[adventure['name']])
+                    adventure_list.append({'name': adventure_names[adventure['name']], 'id': adventure['name']})
             class_adventures_formatted[key] = adventure_list
 
         student_adventures = {}
@@ -266,7 +295,7 @@ class ForTeachersModule(WebsiteModule):
                         continue
                     name = adventure_names.get(program['adventure_name'], program['adventure_name'])
                     customized_level = class_adventures_formatted.get(str(program['level']))
-                    if name in customized_level:
+                    if next((adventure for adventure in customized_level if adventure["name"] == name), False):
                         student_adventure_id = f"{student}-{program['adventure_name']}-{level}"
                         current_adventure = self.db.student_adventure_by_id(student_adventure_id)
                         if not current_adventure:
@@ -337,6 +366,49 @@ class ForTeachersModule(WebsiteModule):
                                                  'student_adventures': student_adventures,
                                                  'level': level
                                              }
+                                             )
+
+    @route("/get_student_programs/<student>", methods=["GET"])
+    @requires_teacher
+    def show_students_programs(self, user, student):
+        result = self.db.programs_for_user(student)
+
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+
+        adventure_names = {}
+        for adv_key, adv_dic in adventures.items():
+            for name, _ in adv_dic.items():
+                adventure_names[adv_key] = hedy_content.get_localized_name(name, g.keyword_lang)
+
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        for adventure in teacher_adventures:
+            adventure_names[adventure['id']] = adventure['name']
+        programs = []
+        for item in result:
+            date = utils.delta_timestamp(item['date'])
+            # This way we only keep the first 4 lines to show as preview to the user
+            preview_code = "\n".join(item['code'].split("\n")[:4])
+            if item.get('is_modified', True):
+                programs.append(
+                    {'id': item['id'],
+                     'preview_code': preview_code,
+                     'code': item['code'],
+                     'date': date,
+                     'level': item['level'],
+                     'name': item['name'],
+                     'adventure_name': item.get('adventure_name'),
+                     'submitted': item.get('submitted'),
+                     'public': item.get('public'),
+                     'number_lines': item['code'].count('\n') + 1
+                     }
+                )
+        return jinja_partials.render_partial("incl/programs_loop.html",
+                                             programs=programs,
+                                             adventure_names=adventure_names,
+                                             student=student
                                              )
 
     @route("/class/<class_id>/preview", methods=["GET"])

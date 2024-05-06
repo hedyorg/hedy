@@ -5,7 +5,7 @@
       <span>{{ _('level_title') }} {{ adventure_table.level }}</span> <i id="level-arrow"
         class="fa-solid fa-angle-down"></i>
     </button>
-    <div class="dropdown-menu dropdown-blue ltr:left-0 rtl:right-0 !w-40 z-20" id="level_dropdown"
+    <div class="absolute overflow-hidden block rounded-md ltr:left-0 rtl:right-0 w-40 ltr:mr-1 rtl:ml-1 cursor-auto p-4 shadow-lg dropdown-blue z-20" id="level_dropdown"
       style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;" _="on mutation of @style
         set arrow to #level-arrow
         if *display == 'none'
@@ -14,12 +14,13 @@
         add .rotate-180 to arrow
         end">
       {% for dropdown_level in range(1, 19) %}
-      <button id="level_button_{{dropdown_level}}"
-        class="flex-row flex justify-between items-center px-2 py-2 border-b border-dashed border-blue-500
-          {% if dropdown_level == adventure_table.level %}bg-white{% else %}hover:bg-blue-100 bg-blue-200{% endif %}" {% if
-        dropdown_level==adventure_table.level %}disabled{% endif %} style="width: 100%;"
+      <button id="level_button_{{dropdown_level}}" class="flex-row flex justify-between items-center px-2 py-2 border-b border-dashed border-blue-500
+          {% if dropdown_level == adventure_table.level %}bg-white{% else %}hover:bg-blue-100 bg-blue-200{% endif %}"
+        {% if dropdown_level==adventure_table.level %}disabled{% endif %} style="width: 100%;"
         hx-get="/for-teachers/grid_overview/{{ class_info.id }}/level?level={{dropdown_level}}"
-        hx-target="#adventure_overview" hx-swap="outerHTML">
+        hx-target="#adventure_overview" 
+        hx-swap="outerHTML"
+        _='on htmx:afterRequest hedyApp.initializeGraph()'>
         <div class="flex-grow h-min min-w-80" tabindex=0>
           {{ _('level_title') }} {{ dropdown_level }}
         </div>
@@ -27,140 +28,87 @@
       {% endfor %}
     </div>
   </div>
-  {# The header of the table #}
-  
+
   {# The actual table that holds the data #}
   <div class="w-full overflow-x-auto border rounded-lg">
-        <table class="w-full">
-        <thead>
-          <tr class="bg-blue-300 text-blue-900">
-            <th class="px-2 py-2 text-center">{{_('students')}}</th>
-            {% for adventure in adventure_table['adventures'][level] %}
-            <th class="px-2 py-2 text-center">{{ adventure }}</th>
-            {% endfor %}
-            <th class="px-2 p-2 bg-blue-900 text-white">{{_('actions')}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for student in adventure_table['students'] %}
-            <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
-              <td id="teacher_cell" class="text-center font-medium text-blue-900">{{student}}</td>
-              {% for adventure in adventure_table['adventures'][level] %}
-                {% set student_adventure_id = (student ~ '-' ~ adventure ~ '-' ~ level) | lower %}
-                {% set student_adventure = adventure_table.student_adventures[student_adventure_id] %}
-                {% if student_adventure_id in adventure_table['student_adventures'] %}
-                  <td id="teacher_cell" class="text-center">
-                    <div class="flex justify-center gap-3 mt-1">
-                    <input type="checkbox"
-                          class="student_adventure_checkbox text-green-700 text-center text-sm cursor-pointer {% if student_adventure.ticked %}fa-solid fa-check{% endif %}"
-                          {% if student_adventure.ticked %}checked{% endif %}
-                          hx-post="/for-teachers/grid_overview/{{ class_info.id }}/change_checkbox?level={{level}}&student={{student}}&adventure={{adventure|lower}}"
-                          hx-target="#adventure_overview" hx-swap="outerHTML" hx-trigger="change">
-                          <div>
-                            <a class="no-underline cursor-pointer text-gray-800 hover:bg-gray-400/50 hover:rounded-full"
-                            href='/hedy/{{student_adventure.program}}/view'><i class="fa-regular fa-eye"></i></a>
-                          </div>
-                    </div>
-                  </td>
-                  {% else %}
-                  <td id="teacher_cell" class="text-center">
+    <table class="w-full">
+      <thead>
+        <tr class="bg-blue-300 text-blue-900">
+          <th class="px-2 py-2 text-center">{{_('students')}}</th>
+          {% for adventure in adventure_table['adventures'][level] %}
+          <th class="px-2 py-2 text-center">{{ adventure.name }}</th>
+          {% endfor %}
+          <th class="px-2 p-2 bg-blue-900 text-white">{{_('actions')}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in adventure_table['students'] %}
+        <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
+          <td id="teacher_cell" class="text-center font-medium text-blue-900">{{student}}</td>
+          {% for adventure in adventure_table['adventures'][level] %}
+          {% set student_adventure_id = (student ~ '-' ~ adventure.id ~ '-' ~ level) | lower %}
+          {% set student_adventure = adventure_table.student_adventures[student_adventure_id] %}
+          {% if student_adventure_id in adventure_table['student_adventures'] %}
+          <td id="teacher_cell" class="text-center">
+            <div class="flex justify-center gap-3 mt-1">
+              <input type="checkbox"
+                class="student_adventure_checkbox text-green-700 text-center text-sm cursor-pointer {% if student_adventure.ticked %}fa-solid fa-check{% endif %}"
+                {% if student_adventure.ticked %}checked{% endif %}
+                hx-post="/for-teachers/grid_overview/{{ class_info.id }}/change_checkbox?level={{level}}&student={{student}}&adventure={{adventure.id|lower}}"
+                hx-target="#adventure_overview" hx-swap="outerHTML" hx-trigger="change">
+              <div>
+                <a class="no-underline cursor-pointer text-gray-800 hover:bg-gray-400/50 hover:rounded-full"
+                  href='/hedy/{{student_adventure.program}}/view'><i class="fa-regular fa-eye"></i></a>
+              </div>
+            </div>
+          </td>
+          {% else %}
+          <td id="teacher_cell" class="text-center">
+            <!-- TODO: Fix these tooltips  They're getting mixed up with the  graph for some reason
                     <div class="text-center opacity-0 hover:opacity-100 duration-300 z-10">
                       <span class="tooltiptext bg-white text-xs font-medium absolute rounded shadow-lg !fixed p-2" style="inset: auto; margin-left: -50px; margin-top: 10px; color:black; ">
                         {{ _('waiting_for_submit') }}
                       </span>
                     </div>
-                    <span class="fa-regular fa-hourglass text-gray-600"></span>
-                  </td>
-                {% endif %}
-              {% endfor %}
-              <td class="text-center text-blue-900">
-                <div class="flex justify-center gap-6">
-                  <button class="flex flex-col items-center" onclick='hedyApp.change_password_student("{{student}}", {{_('enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})'>
-                    <span class="fas fa-pen block mb-4 mt-4"></span>
-                    <div class="text-center opacity-0 hover:opacity-100 duration-300 z-10">
+                  -->
+            <span class="fa-regular fa-hourglass text-gray-600"></span>
+          </td>
+          {% endif %}
+          {% endfor %}
+          <td class="text-center text-blue-900">
+            <div class="flex justify-center gap-6">
+              <button class="flex flex-col items-center" onclick='hedyApp.change_password_student("{{student}}", {{_('
+                enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})'>
+                <span class="fas fa-pen block mb-4 mt-4"></span>
+                <!-- <div class="text-center opacity-0 hover:opacity-100 duration-300 z-10">
                       <span class="tooltiptext bg-white text-xs font-medium absolute rounded shadow-lg !fixed p-2" style="inset: auto; margin-left: -60px; margin-top: -20px; color:black; ">
                         {{ _('change_password') }}
                       </span>
                     </div>
-                  </button>
-                  <button class="flex flex-col items-center" onclick=window.open('/programs?user={{student}}') id="duplicate_class">
-                    <span class="fas fa-code block mb-4 mt-4"></span>
-                    <div class="text-center opacity-0 hover:opacity-100 duration-300 z-10">
+                  -->
+              </button>
+              <button class="flex flex-col items-center" onclick=window.open('/programs?user={{student}}')
+                id="duplicate_class">
+                <span class="fas fa-code block mb-4 mt-4"></span>
+                <!-- <div class="text-center opacity-0 hover:opacity-100 duration-300 z-10">
                       <span class="tooltiptext bg-white text-xs font-medium absolute rounded shadow-lg !fixed p-2" style="inset: auto; margin-left: -30px; margin-top: -20px; color:black; ">
                         {{ _('programs') }}
                       </span>
                     </div>
-                  </button>
-                </div>
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    <table class="hidden table-auto text-center w-full pt-5" id="adventure_table">
-      <thead>
-        <colgroup>
-          <col>
-          <col span="2">
-          <col span="{{adventure_table.adventures|length}}">
-        </colgroup>
-        <tr>
-          <td></td>
-          <th class="border-r border-l border-b border-gray-400 p-2" colspan="2" scope="colgroup">Options</th>
-          <th colspan="{{ adventure_table.adventures|length }}" class="border-b border-gray-400 p-2" scope="colgroup">Adventures</th>
-        </tr>
-        <tr>
-          <th class="border-r border-b border-gray-400 p-2">Students</th>
-          <th class="border-r border-b border-gray-400 p-2">Programs</th>
-          <th class="border-r border-b border-gray-400 p-2">Password</th>
-          {% for adventure in adventure_table['adventures'] %}
-            <th class="border-b border-gray-400 p-2 {%if not loop.last %}border-r{% endif %}">{{ adventure['name'] }}</th>
-          {% endfor %}
-        </tr>
-      </thead>
-      <tbody>
-        {% for student in adventure_table['students'] %}
-        <tr>
-          {% set is_last_student = loop.last %}           
-          <td class="border-gray-400 p-2 border-r {% if not is_last_student %}border-b{% endif %}">{{ student }}</td>
-          <td class="border-gray-400 p-2 border-r {% if not is_last_student %}border-b{% endif %} text-center"><a href="/programs?user={{student}}"><i class="fa-solid fa-code"></i></a></td>
-          <td class="border-gray-400 p-2 border-r {% if not is_last_student %}border-b{% endif %} text-center"><a href="#" class="no-underline" onclick='hedyApp.change_password_student("{{student}}", {{_('enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})'>✏️</a></td>
-          {% for adventure in adventure_table['adventures'] %}
-          {% set student_adventure_id = student ~ '-' ~ adventure.id ~ '-' ~ adventure_table.level %}
-          {% if student_adventure_id in adventure_table.student_adventures %}
-              {% set student_adventure = adventure_table.student_adventures[student_adventure_id] %}
-              <td
-                class="p-2 border-gray-400
-                       {% if not loop.last %}border-r{% endif %}
-                       {% if not is_last_student %}border-b{% endif %}"
-                >
-                <div class="grid grid grid-cols-[repeat(3,_minmax(25px,_1fr))] gap-3">
-                  {# Empty div so there's  gap to the middle and then the eye #}
-                  <div></div>
-                  <div>
-                    <input type="checkbox"
-                      class="student_adventure_checkbox min-w-fit place-self-center text-green-700 text-center text-sm cursor-pointer {% if student_adventure.ticked %}fa-solid fa-check{% endif %}"
-                      {% if student_adventure.ticked%}checked{% endif %}
-                      hx-post="/for-teachers/grid_overview/{{ class_info.id }}/change_checkbox?level={{ adventure_table.level }}&student={{ student }}&adventure={{ adventure.id }}"
-                      hx-target="#adventure_overview" hx-swap="outerHTML" hx-trigger="change">
-                  </div>
-                  <div>
-                    <a class="no-underline cursor-pointer text-gray-800 hover:bg-gray-400/50 hover:rounded-full"
-                      href='/hedy/{{student_adventure.program}}/view'><i class="fa-regular fa-eye"></i></a>
-                  </div>
-                </div>
-              </td>
-              {% else %}
-              <td
-                class="border-gray-400 p-2 {% if not loop.last %}border-r{% endif %} {% if not is_last_student %}border-b{% endif %}">
-                <input type="checkbox"
-                  class="student_adventure_checkbox align-middle fa-solid fa-xmark text-center text-sm text-orange-600"
-                  disabled="true">
-              </td>
-            {% endif %}
-          {% endfor %}
+                  -->
+              </button>
+            </div>
+          </td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
+  </div>
+
+  <div class="mt-4">
+    <div class="flex flex-row relative justify-center items-center">
+        <div id="graph" class="w-2/3"><canvas data-graph='{{ adventure_table["graph_options"]|tojson|safe }}' id="adventure_bubble"></canvas></div>
+        <div class="w-1/3 overflow-auto hidden" style="height: 32rem;" id="programs_container"></div>
+    </div>
+  </div>
 </div>

@@ -2,74 +2,75 @@
 
 {% block regular_content %}
 <div>
-  {% if achievement %}
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      hedyApp.showAchievements({{ achievement| safe }}, false, "");
+    {% if achievement %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            hedyApp.showAchievements({{ achievement| safe }}, false, "");
         });
-  </script>
-  {% endif %}
-  <div class="flex flex-col gap-4">
-    <button class="back-btn" id="go_back_button" onclick="window.location.href = '/for-teachers'">
-      <span class="fa fa-arrow-{% if g.dir == " ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
-      {{_('go_back')}}
-    </button>
-    <div id="survey" class="hidden"></div>
-    {% if second_teacher %}<h1>{{_('role')}}: {{role}}</h1>{% endif %}
-    <div class="flex flex-row items-center justify-between">
-      <h1>{{ class_info.name }}</h1>
-      <div class="flex gap-2">
-        <div id="more_options_button" class="dropdown relative">
-          <button class="white-btn rounded gap-2" id="dropdown_options_button"
-            onclick="$('#options_dropdown').slideToggle('medium');">
-            <span>{{ _('more_options') }}</span> <i id="options-arrow" class="fa-solid fa-angle-down"></i>
-          </button>
-          <div class="w-40">
-            <div class="dropdown-menu !w-40 z-20 ltr:left-0 rtl:right-0" id="options_dropdown"
-              style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;" _="on mutation of @style
-              set arrow to #options-arrow
-              if *display == 'none'
-              remove .rotate-180 from arrow
-              else if not arrow.classList.contains('rotate-180')
-              add .rotate-180 to arrow
-              end">
-              {% if class_info.teacher == username %}
-              <button class="white-btn flex-row flex justify-between items-center gap-2 px-2 py-2 w-full"
-                id="add-second-teacher"
-                _="on click call hedyApp.invite_student('{{class_info.id}}', {{_('second_teacher_prompt')|default(None)|tojson}}, '/invite-second-teacher')">{{_('invite_teacher')}}</button>
-              {% endif %}
-              <button class="white-btn flex-row flex justify-between items-center gap-2 px-2 py-2 w-full"
-                id="add-student"
-                _="on click toggle the *display of #add_students_options then toggle between .green-btn and .blue-btn on me">{{_('add_students')}}</button>
-            </div>
-          </div>
-        </div>
-        <button class="green-btn" id="customize-class-button" data-cy="customize_class_button"
-          onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">
-          <i class="fa-solid fa-gear"></i>
+    </script>
+    {% endif %}
+    <div class="flex flex-col gap-4">
+        <button class="back-btn" id="go_back_button" onclick="window.location.href = '/for-teachers'">
+            <span class="fa fa-arrow-{% if g.dir == " ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
+            {{_('go_back')}}
         </button>
-      </div>
-    </div>
-    <div class="flex flex-row items-center gap-2">
-      {% if class_info.students|length > 0 %}
-      <h2 id="survey_status_button" class="flex ml-4">
-        {% if questions|length == 0 %}
-        {{_('survey_completed')}} ✅
-        {% else %}
-        <a class="cursor-pointer" hx-post="/for-teachers/load-survey/{{class_info.id}}" hx-target="#survey"
-          hx-swap="outerHTML">{{_('survey')}} {{total_questions - questions|length}}/{{total_questions}}</a>
-        {% endif %}
-      </h2>
-      {% endif %}
-    </div>
-    {{ render_partial('customize-grid/partial-grid-levels.html',
-    class_info=class_info,
-    max_level=max_level,
-    adventure_names=adventure_names,
-    adventures_default_order=adventures_default_order,
-    class_id=class_id,
-    level='1',
-    class_adventures=class_adventures,
-    adventure_table=adventure_table)
-    }}
-    {% endblock %}
+        <div id="survey" class="hidden"></div>
+        {% if second_teacher %}<h1>{{_('role')}}: {{role}}</h1>{% endif %}
+        <div class="flex flex-row items-center justify-between">
+            <h1>{{ class_info.name }}</h1>
+            <div class="flex gap-2">
+                <div class="flex flex-row items-center gap-2 ml-4 mr-4">
+                    {% if class_info.students|length > 0 %}
+                    <h2 id="survey_status_button" class="flex ml-4">
+                        {% if questions|length == 0 %}
+                        {{_('survey_completed')}} ✅
+                        {% else %}
+                        <a class="cursor-pointer" hx-post="/for-teachers/load-survey/{{class_info.id}}" hx-target="#survey"
+                            hx-swap="outerHTML">{{_('survey')}} {{total_questions - questions|length}}/{{total_questions}}</a>
+                        {% endif %}
+                    </h2>
+                    {% endif %}
+                </div>
+                <div id="more_options_button" class="dropdown relative">
+                    <button class="white-btn rounded gap-2" id="dropdown_options_button"
+                        onclick="$('#options_dropdown').slideToggle('medium');">
+                        <span>{{ _('more_options') }}</span> <i id="options-arrow" class="fa-solid fa-angle-down"></i>
+                    </button>
+                    <div class="w-40">
+                        
+                        <div class="dropdown-menu !w-40 z-20 ltr:left-0 rtl:right-0" id="options_dropdown"
+                            style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;" _="on mutation of @style
+                                set arrow to #options-arrow
+                                if *display == 'none'
+                                remove .rotate-180 from arrow
+                                else if not arrow.classList.contains('rotate-180')
+                                add .rotate-180 to arrow
+                                end">
+                            {% if class_info.teacher == username %}
+                            <button class="white-btn flex-row flex justify-between items-center gap-2 px-2 py-2 w-full"
+                                id="add-second-teacher"
+                                _="on click call hedyApp.invite_student('{{class_info.id}}', {{_('second_teacher_prompt')|default(None)|tojson}}, '/invite-second-teacher')">{{_('invite_teacher')}}</button>
+                            {% endif %}
+                            <button class="white-btn flex-row flex justify-between items-center gap-2 px-2 py-2 w-full"
+                                id="add-student"
+                                _="on click toggle the *display of #add_students_options then toggle between .green-btn and .blue-btn on me">{{_('add_students')}}</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="green-btn" id="customize-class-button" data-cy="customize_class_button"
+                    onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">
+                    {{_('customize_class')}}
+                </button>                
+            </div>
+        </div>
+        {{ render_partial('customize-grid/partial-grid-levels.html',
+                            class_info=class_info,
+                            max_level=max_level,
+                            adventure_names=adventure_names,
+                            adventures_default_order=adventures_default_order,
+                            class_id=class_id,
+                            level='1',
+                            class_adventures=class_adventures,
+                            adventure_table=adventure_table)
+        }}
+        {% endblock %}

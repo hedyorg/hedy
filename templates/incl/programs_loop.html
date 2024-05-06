@@ -1,0 +1,16 @@
+<div id="programs_htmx_container">
+    <div class="flex flex-row relative justify-center items-center">
+        <p class="text-2xl text-blue-600 mt-4 mb-4">{{ student }} programs</p>
+        <span class="absolute ltr:right-0 rtl:left-0 cursor-pointer text-gray-600 hover:text-red-400 m-4 fa-regular fa-circle-xmark" 
+              data-cy="hide"
+              _="on click remove #programs_htmx_container
+                 then add .hidden to #programs_container"></span>
+    </div>
+    {% for program in programs %}
+        {{ render_partial('htmx-program.html', program=program, adventure_names=adventure_names, public_profile=public_profile, second_teachers_programs=second_teachers_programs, graph_view=True) }}
+    {% endfor %}
+
+    {% if programs|length == 0 %}    
+        <p class="text-xl text-center" data-cy="no-programs">{{_('no_programs')}}</p>
+    {% endif %}
+</div>
