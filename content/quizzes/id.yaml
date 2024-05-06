@@ -3807,37 +3807,37 @@ levels:
             code: |-
                 {print} 'Undian buku akan segera dimulai'
                 {print} 'Dapatkan tiket Anda sekarang!'
-                {books} = ['Narnia', 'The Hobbit', 'Oliver Twist', 'Harry Potter', 'Telur hijau dan ham']
+                buku = ['Narnia', 'The Hobbit', 'Oliver Twist', 'Harry Potter', 'Telur hijau dan ham']
                 orang = {ask} 'Berapa tiket undian yang terjual?'
-                daftar_nomor_undian = [1, 2]
+                daftar_nomor = [1, 2]
                 {for} saya {in} {range} 3 {to} orang
-                    {add} saya {to} daftar_angka_undian
+                    {add} saya {to} daftar_nomor
                 {for} i {in} {range} 1 {to} 5
             mp_choice_options:
             -   option: |-
                     ```
-                    angka_yang dipilih = daftar_angka_secara acak
-                    cetak buku[i] ' akan menuju ke nomor orang ' nomor_yang dipilih
-                    {add} nomor_yang dipilih {to} daftar_nomor_
+                    angka_yang_dipilih = daftar_nomor secara acak
+                    {print} buku[i] ' akan menuju ke nomor orang ' nomor_yang_dipilih
+                    {add} nomor_yang dipilih {to} daftar_nomor
                     ```
                 feedback: Hampir sampai... tetapi menambahkan pemenang ke dalam daftar membuat undian ini tidak adil
             -   option: |-
                     ```
-                    cetak orang[i] ' menang ' buku[i]
+                    {print} orang[i] ' menang ' buku[i]
                     ```
                 feedback: Tidak ada daftar yang disebut 'orang'
             -   option: |-
                     ```
-                    angka_yang _dipilih = daftar_angka_[orang]
-                    cetak buku[orang] ' akan menuju ke nomor orang ' nomor_yang dipilih
-                    {remove} nomor_yang dipilih {from} daftar_nomor_
+                    angka_yang_dipilih = daftar_nomor[orang]
+                    {print} buku[orang] ' akan menuju ke nomor orang ' nomor_yang_dipilih
+                    {remove} nomor_yang_dipilih {from} daftar_nomor
                     ```
                 feedback: Ini bukan itu.
             -   option: |-
                     ```
-                    angka_yang dipilih = daftar_angka_[random]
-                    cetak buku[i] ' akan menuju ke nomor orang ' nomor_yang dipilih
-                    {remove} nomor_yang dipilih {from} daftar_nomor_
+                    angka_yang_dipilih = daftar_nomor[random]
+                    {print} buku[i] ' akan menuju ke nomor orang ' nomor_yang_dipilih
+                    {remove} nomor_yang_dipilih {from} daftar_nomor
                     ```
                 feedback: Fantastis!
             hint: Anda perlu menggunakan perintah {remove}
@@ -4041,7 +4041,7 @@ levels:
             code: |-
                 name = {ask} 'What is your name?'
                 {if} name == 'Hedy':
-                password = {ask} 'What is your password?'
+                    password = {ask} 'What is your password?'
                     {if} password =='turtle123':
                         {print} 'Yey'
                     {else}:
