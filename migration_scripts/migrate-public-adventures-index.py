@@ -1,7 +1,8 @@
-from website.database import PUBLIC_ADVENTURES_INDEXES, ADVENTURES
 import sys
 # setting path
 sys.path.append('../hedy')
+
+from website.database import PUBLIC_ADVENTURES_INDEXES, ADVENTURES
 
 
 def create_multi_index_table(record):
@@ -13,6 +14,8 @@ def create_multi_index_table(record):
     if not levels:
         levels = [record.get("level")]
     for level in levels:
+        PUBLIC_ADVENTURES_INDEXES.put({"field_value": f"level_lang_{level}_{lang_value}",
+                                       "date_adventure_id": f"{date}_{id}"})
         PUBLIC_ADVENTURES_INDEXES.put({"field_value": f"level_{level}", "date_adventure_id": f"{date}_{id}"})
     tags = record.get("tags", [])
     for tag in tags:

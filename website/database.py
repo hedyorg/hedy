@@ -659,6 +659,12 @@ class Database:
         result = PUBLIC_ADVENTURES_INDEXES.get_all(key)
         return set([record["date_adventure_id"].split("_")[1] for record in result])
 
+    def get_paginated_indexes(sefl, key, pagination_token=None, limit=None):
+        """This function returns adventure_ids for a specific index paginated.
+        E.g., key={"field_value": "level_lang_1_en", "date_adventure_id": "..."}"""
+        result = PUBLIC_ADVENTURES_INDEXES.get_many(key, limit=limit, pagination_token=pagination_token)
+        return set([record["date_adventure_id"].split("_")[1] for record in result]), result.next_page_token
+
     def get_public_adventures(self):
         return ADVENTURES.get_many({"public": 1})
 

@@ -1,5 +1,5 @@
 import uuid
-from flask import g, request, make_response
+from flask import g, request, make_response, url_for
 from flask_babel import gettext
 import json
 
@@ -32,10 +32,11 @@ class PublicAdventuresModule(WebsiteModule):
         self.available_tags = set()
 
     @route("/", methods=["GET"])
-    @route("/filter", methods=["POST"])
+    @route("/filter", methods=["PUT"])
     @requires_teacher
     def filtering(self, user):
         level = request.args["level"] if request.args.get("level") else "1"
+        page = request.args.get('page')
         language = request.args.get("lang")
         if language == "reset":
             language = ""
@@ -68,15 +69,19 @@ class PublicAdventuresModule(WebsiteModule):
             tags = [t for t in tags if t]
 
         # Get indexes
-        level_adventure_ids = self.db.get_public_adventures_indexes({"field_value": f"level_{level}"})
-        lang_adventure_ids = self.db.get_public_adventures_indexes({"field_value": f"lang_{language}"})
+        level_lang_adventure_ids, next_page_token = self.db.get_paginated_indexes({"field_value": f"level_lang_{level}_{language}"},
+                                                                                  pagination_token=page, limit=20)
+        # In case we need want any language, we retrieve by the main level index.
+        if not level_lang_adventure_ids:
+            level_lang_adventure_ids, next_page_token = self.db.get_paginated_indexes({"field_value": f"level_{level}"},
+                                                                                      pagination_token=page, limit=20)
+
         tag_adventure_ids = set()
         for _t in tags:
             tag_adventure_ids.update(self.db.get_public_adventures_indexes({"field_value": f"tag_{_t}"}))
 
-        lang_adventure_ids.intersection_update(level_adventure_ids)
-        tag_adventure_ids.intersection_update(level_adventure_ids)
-        adventure_ids = level_adventure_ids.union(lang_adventure_ids, tag_adventure_ids)
+        tag_adventure_ids.intersection_update(level_lang_adventure_ids)
+        adventure_ids = level_lang_adventure_ids.union(level_lang_adventure_ids, tag_adventure_ids)
 
         adventures = self.db.batch_get_adventures(adventure_ids)
 
@@ -171,6 +176,7 @@ class PublicAdventuresModule(WebsiteModule):
             level_nr=str(level),
             prev_level=prev_level,
             next_level=next_level,
+            next_page_token=next_page_token,
 
             customizations=customizations,
 
@@ -179,7 +185,7 @@ class PublicAdventuresModule(WebsiteModule):
         )
 
         response = make_response(temp)
-        response.headers["HX-Trigger"] = json.dumps({"updateTSCode": js})
+        response.headers["HX-Trigger-After-Settle"] = json.dumps({"updateTSCode": js})
         return response
 
     @route("/clone/<adventure_id>", methods=["POST"])
