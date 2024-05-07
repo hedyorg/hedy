@@ -1138,7 +1138,6 @@ def all_variables(input_string, level, lang='en'):
 
     This function is still used in the web frontend, and some tests, but no longer by 'transpile'.
     """
-    input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
     abstract_syntax_tree = ExtractAST().transform(program_root)
     vars = set()
