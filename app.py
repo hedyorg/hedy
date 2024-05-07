@@ -1748,18 +1748,12 @@ def get_specific_adventure(name, level, mode):
             return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
         adventure["content"] = safe_format(adventure.get("content", ""), **hedy_content.KEYWORDS.get(g.keyword_lang))
+        if "formatted_content" in adventure:
+            adventure['formatted_content'] = safe_format(adventure['formatted_content'],
+                                                         **hedy_content.KEYWORDS.get(g.keyword_lang))
         customizations["teachers_adventure"] = True
 
-        current_adventure = Adventure(
-            id=adventure["id"],
-            author=adventure["creator"],
-            short_name="level",
-            name=adventure["name"],
-            image=adventure.get("image", None),
-            text=adventure["content"],
-            is_teacher_adventure=True,
-            is_command_adventure=False,
-            save_name=f"{name} {level}")
+        current_adventure = Adventure.from_teacher_adventure_database_row(adventure)
 
         adventures.append(current_adventure)
         prev_level, next_level = utils.find_prev_next_levels(customizations["available_levels"], level)
