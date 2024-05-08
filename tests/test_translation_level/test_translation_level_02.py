@@ -78,7 +78,6 @@ class TestsTranslationLevel2(HedyTester):
 
         self.assertEqual(expected, result)
 
-
     def test_ask_kewords(self):
         code = "hedy is vraag print ask echo"
 

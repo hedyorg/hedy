@@ -10,13 +10,14 @@ import copy
 from googletrans import Translator
 
 
-
 # Holds the token that needs to be translated, its line number, start and
 # end indexes and its value (e.g. ", ").
 Rule = namedtuple("Rule", "keyword line start end value")
 
 # stores the connection to Google Translate
 translator = Translator()
+
+
 def keywords_to_dict(lang="nl"):
     """ "Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
     base = path.abspath(path.dirname(__file__))
@@ -80,6 +81,7 @@ def get_target_keyword(keyword_dict, keyword):
 def translate_string(string, from_lang, to_lang):
     result = translator.translate(string, src=from_lang, dest=to_lang)
     return result.text
+
 
 def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1, translate_strings=False):
     """ "Return code with keywords translated to language of choice in level of choice"""
@@ -247,7 +249,6 @@ class Translator(Visitor):
                     if type(argument) is Tree and argument.data == 'text':
                         self.add_rule("text", "text", argument)  # this of course only support 1 string
 
-
     def print_empty_brackets(self, tree):
         self.print(tree)
 
@@ -255,7 +256,7 @@ class Translator(Visitor):
         self.add_rule("_IS", "is", tree)
         self.add_rule("_ASK", "ask", tree)
 
-        if self.translate_strings: #it'd be nicer of course if this was not copy-paste from PRINT!
+        if self.translate_strings:  # it'd be nicer of course if this was not copy-paste from PRINT!
             # in addition to keywords, we are now also adding plain text strings
             # like ask arguments to the list of things that need to be translated
             if len(tree.children) > 1:
