@@ -1,3 +1,4 @@
+import csv
 import json
 import hedy
 from tests.Tester import Snippet
@@ -36,16 +37,17 @@ for p in public_programs['rows']:
                 code=p[code_id],
                 username=p[username],
                 language=p[language],
-                adventure_name=p[adventure_name], #storing the classname in adventurename so I don't have to add one more field
+                # storing the classname in adventurename so I don't have to add one more field
+                adventure_name=p[adventure_name],
                 experiment_language=p[experiment_language],
                 error=p[error_id]
                 )
     snippets.append(s)
 
-import csv
 with open('analysis.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
-    writer.writerow(['program_id', 'username', 'language', 'experiment_language', 'class', 'number of lines', 'number of variables', 'number of commands', 'number of distinct commands', 'level', 'error_message'])
+    writer.writerow(['program_id', 'username', 'language', 'experiment_language', 'class', 'number of lines',
+                    'number of variables', 'number of commands', 'number of distinct commands', 'level', 'error_message'])
 
 
 program_id = 0
@@ -65,10 +67,10 @@ for snippet in snippets:
 
             with open('analysis.csv', 'a', newline='') as csvfile:
                 writer = csv.writer(csvfile)
-                writer.writerow([program_id, snippet.username, snippet.language, snippet.experiment_language, snippet.adventure_name, lines, len(all_variables), len(all_commands), len(set(all_commands)), snippet.level, ''])
+                writer.writerow([program_id, snippet.username, snippet.language, snippet.experiment_language, snippet.adventure_name, lines, len(
+                    all_variables), len(all_commands), len(set(all_commands)), snippet.level, ''])
 
             print(program_id, len(snippets), round(100 * program_id / len(snippets), 2))
-
 
         except Exception as E:
             with open('analysis.csv', 'a', newline='') as csvfile:
@@ -83,5 +85,3 @@ for snippet in snippets:
             writer.writerow(
                 [program_id, snippet.username, snippet.language, snippet.experiment_language, snippet.adventure_name,
                  0, 0, 0, 0, snippet.level, snippet.error])
-
-
