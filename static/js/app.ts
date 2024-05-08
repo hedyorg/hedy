@@ -223,6 +223,8 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
       keywordLanguage: theKeywordLanguage,
     });
   }
+  
+  initializeHighlightedCodeBlocks(document.body);
 
   const anchor = window.location.hash.substring(1);
 
@@ -240,7 +242,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   });
 
   tabs.on('afterSwitch', (ev) => {
-    currentTab = ev.newTab;
+    currentTab = decodeURIComponent(ev.newTab);
     const adventure = theAdventures[currentTab];
 
     if (!options.suppress_save_and_load_for_slides) {
@@ -423,7 +425,7 @@ export function initializeHighlightedCodeBlocks(where: Element) {
             clearOutput();
           });
         }
-        const levelStr = $(preview).attr('level');
+        const levelStr = $(preview).attr('level') || theLevel.toString();
         const lang = $(preview).attr('lang');
         if (levelStr && lang) {
           initializeTranslation({
@@ -570,7 +572,7 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
 
           // Save under an existing id if this field is set
           program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
-          save_name: saveNameFromInput(),
+          save_name: saveNameFromInput() || currentTab,
         };
 
         let response = await postJsonWithAchievements('/parse', data);
@@ -587,6 +589,7 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
         if (adventure && response.save_info) {
           adventure.save_info = response.save_info;
           adventure.editor_contents = code;
+          await saveIfNecessary();
         }
 
         if (response.Error) {
@@ -2023,7 +2026,8 @@ function programNeedsSaving(adventureName: string) {
   // save a program that was loaded from local storage to the server.
   // (Submitted programs are never saved again).
   const programChanged = theGlobalEditor.contents !== adventure.editor_contents;
-  const nameChanged = $('#program_name').val() !== adventure.save_name;
+  const programName = $('#program_name').val() || currentTab;
+  const nameChanged = programName !== adventure.save_name;
   const localStorageCanBeSavedToServer = theUserIsLoggedIn && adventure.save_info === 'local-storage';
   const isUnchangeable = isServerSaveInfo(adventure.save_info) ? adventure.save_info.submitted : false;
 
