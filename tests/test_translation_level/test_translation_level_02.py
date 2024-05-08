@@ -106,6 +106,28 @@ class TestsTranslationLevel2(HedyTester):
 
         self.assertEqual(expected, result)
 
+    def test_ask_assign_dutch_english_including_string(self):
+        code = textwrap.dedent("""\
+            naam is vraag Hoe heet jij?
+            print Dus het is naam""")
+
+        result = hedy_translation.translate_keywords(
+            code, "nl", "en", self.level, translate_strings=True)
+
+        expected = textwrap.dedent("""\
+            naam is ask How is called you?
+            print So It is name""")
+
+        # the result sounds silly because all words are translated separately
+        # in levels 2 and 3, this is needed because words in between can be vars
+        # in level 4 it will magically be better
+
+        # we should, of course, changed but that' not easy, and for now it is better than what we have
+        # also: result is naam because ask vars are not yet translated!
+
+        self.assertEqual(expected, result)
+
+
     def test_translate_back(self):
         code = "print welkom bij Hedy\nnaam is ask what is your name\nprint naam"
 
