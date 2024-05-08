@@ -105,7 +105,7 @@ function updateURL() {
     const level = levelSelect.getAttribute("data-value") || "";
     const lanugage = languageSelect.getAttribute("data-value") || "";
     const tags = tagsSelect.getAttribute("data-value") || "";
-    const nextPageToken = nextPage.getAttribute("data-value") || "";
+    const nextPageToken = nextPage?.getAttribute("data-value") || "";
 
     urlParams.set('level', level)
     urlParams.set('lang', lanugage)
