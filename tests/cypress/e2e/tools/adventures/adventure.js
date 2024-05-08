@@ -35,6 +35,8 @@ export function deleteAdventure(name) {
         }
     })
     cy.get('[data-cy="modal_yes_button"]').should('be.enabled').click();
+    cy.get("#adventures_table")
+        .should("be.visible");
 }
 
 export default {createAdventure};

@@ -4492,229 +4492,118 @@ adventures:
                     movement = [ 'rond en rond', 'open en dicht', _]
                     ```
     tic:
-        name: Boter Kaas en Eieren
-        default_save_name: Boter
-        description: Speel een potje Boter Kaas en Eieren!
+        name: Boter-kaas-en-eieren
+        default_save_name: Tic
+        description: Play a game of Tic Tac Toe!
         levels:
-            13:
-                story_text: "In dit avontuur kun je het spelletje Boter Kaas en Eieren programmeren. \nJe speelt met twee personen. Kies om de beurt een plekje op het speelbord (1 - 9) waar je jouw teken op wil zetten (x of o). \nDe speler die als eerst 3 op een rij heeft (horizontaal, verticaal of diagonaal) wint!\n\n### Opdracht 1\nDit spel doet het wel maar er zijn een paar problemen! Je kan zomaar een veld van de andere speler pakken. Kijk eerst met een `{if}` of er wel een punt staat in het gekozen veld. Zo niet, waarschuw de speler dan.\n\n ### Opdracht 2\nHet spel kan ook niet zelf besluiten of er al een winnaar is. Kijk steeds of er al drie dezelfde tekens op een rij zijn en vertel dan wie er gewonnen heeft.\n\n### Opdracht 3 (extra)\nSpelen met een vriend(innet)je kan niet altijd! Programmeer jij een computertegenstander om tegen te spelen?\n"
-                example_code: |
-                    ```
-                    speler = 'x'
-                    veld = '.', '.', '.', '.', '.', '.', '.', '.', '.'
-
-                    {for} i {in} {range} 1 {to} 9
-                        keuze = {ask} 'Speler ' speler ' welke plek kies jij?'
-                        veld {at} keuze = speler
-                        {clear}
-                        {print} veld {at} 1 veld {at} 2 veld {at} 3
-                        {print} veld {at} 4 veld {at} 5 veld {at} 6
-                        {print} veld {at} 7 veld {at} 8 veld {at} 9
-                        {if} speler = 'x'
-                            speler = 'o'
-                        {else}
-                            speler = 'x'
-                    ```
-            14:
-                story_text: "In de vorige levels heb je het spel \"boter, kaas en eieren\" kunnen maken. Nu heb je het `=` teken, het `==` teken en het `!=` teken geleerd. \nJe kunt deze kennis toepassen in het \"boter, kaas en eieren\" spel op deze manier:\n"
-                example_code: |
-                    ```
-                    teken = 'x'
-                    open_plekken = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    spel = 'aan'
-                    plek_1 = '.'
-                    plek_2 = '.'
-                    plek_3 = '.'
-                    plek_4 = '.'
-                    plek_5 = '.'
-                    plek_6 = '.'
-                    plek_7 = '.'
-                    plek_8 = '.'
-                    plek_9 = '.'
-                    {print} 'BOTER KAAS EN EIEREN!'
-                    {print} plek_1 plek_2 plek_3
-                    {print} plek_4 plek_5 plek_6
-                    {print} plek_7 plek_8 plek_9
-                    {print} ' '
-                    {for} i {in} {range} 1 {to} 9
-                        {if} spel != 'uit'
-                            keuze = {ask} 'Speler ' teken ', Welke plek kies jij?'
-                            {if} keuze {in} open_plekken
-                                {remove} keuze {from} open_plekken
-                                {if} keuze == 1
-                                    plek_1 = teken
-                                {if} keuze == 2
-                                    plek_2 = teken
-                                {if} keuze == 3
-                                    plek_3 = teken
-                                {if} keuze == 4
-                                    plek_4 = teken
-                                {if} keuze == 5
-                                    plek_5 = teken
-                                {if} keuze == 6
-                                    plek_6 = teken
-                                {if} keuze == 7
-                                    plek_7 = teken
-                                {if} keuze == 8
-                                    plek_8 = teken
-                                {if} keuze == 9
-                                    plek_9 = teken
-                            {else}
-                                {print} 'Die plek was al bezet!'
-                            {print} plek_1 plek_2 plek_3
-                            {print} plek_4 plek_5 plek_6
-                            {print} plek_7 plek_8 plek_9
-                            {print} ' '
-                            winnaar = {ask} 'Heb je gewonnen?'
-                            {if} winnaar == 'ja'
-                                {print} 'Goed gedaan, speler ' teken '!'
-                                spel = 'uit'
-                            {else}
-                                {if} teken == 'x'
-                                    teken = 'o'
-                                {else}
-                                    teken = 'x'
-                    ```
-            15:
+            16:
                 story_text: |
-                    In dit level kun je jouw spel nog meer verbeteren door gebruik te maken van de {while} lus. Met deze lus kun je de twee regels `{if} game != 'over'` en `{for} i {in} {range} 1 to 9`  combineren tot één simpele regel.
+                    Tijd voor een potje boter-kaas-en-eieren!
 
-                    Kijk maar:
+                    ### Opdracht
+                    In dit avontuur leren we eerst een leeg speelveld programmeren.
+
+                    ***Maak een lijst genaamd veld*** Deze lijst wordt ons speelveld. De lijst bestaat uit 9 lege plekken, punten, aangezien er aan het begin van het spel nog geen plekken gevuld zijn met rondjes of kruisjes.
+
+                    ***Maak een functie die het veld print*** Begin met een {clear} commando, zodat de oude speeldvelden verwijderd worden. Daarna printen we de eerste regel van ons boter-kaas-en-eieren veld. Deze regeld bestaat uit de eerste drie plekken van de lijst.
+                    We hebben deze regel alvast voor je geprogrammeerd. Maak nu zelf de tweede regel (plek 4, 5, en 6) en derde regel (plek 7, 8 en 9) af.
+
+                    ***Roep de functie op die het veld print*** Roep de functie nu op.
+                    <div class="w-full flex flex-row gap-2">
+                        Voer de code uit. Je uitvoer zou er zo uit moeten zien (al staat er bij jou boter-kaas-en-eieren in plaats van het Engelse TIC TAC TOE): <img src="https://github.com/hedyorg/hedy/assets/80678586/bcbd156e-4b48-4e82-84ae-f86d21b0cbcc" width="100">
+                    </div>
+
+                    ***Ga door naar het volgende tabje*** In het volgende avontuur leer je het spelletje programmeren.
                 example_code: |
                     ```
-                    teken = 'x'
-                    open_plekken = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    spel = 'aan'
-                    plek_1 = '.'
-                    plek_2 = '.'
-                    plek_3 = '.'
-                    plek_4 = '.'
-                    plek_5 = '.'
-                    plek_6 = '.'
-                    plek_7 = '.'
-                    plek_8 = '.'
-                    plek_9 = '.'
-                    {print} 'BOTER KAAS EN EIEREN!'
-                    {print} plek_1 plek_2 plek_3
-                    {print} plek_4 plek_5 plek_6
-                    {print} plek_7 plek_8 plek_9
-                    {print} ' '
-                    {while} spel != 'uit'
-                        keuze = {ask} 'Speler ' teken ', welke plek kies jij?'
-                        {if} keuze {in} open_plekken
-                            {remove} keuze {from} open_plekken
-                            {if} keuze == 1
-                                plek_1 = teken
-                            {if} keuze == 2
-                                plek_2 = teken
-                            {if} keuze == 3
-                                plek_3 = teken
-                            {if} keuze == 4
-                                plek_4 = teken
-                            {if} keuze == 5
-                                plek_5 = teken
-                            {if} keuze == 6
-                                plek_6 = teken
-                            {if} keuze == 7
-                                plek_7 = teken
-                            {if} keuze == 8
-                                plek_8 = teken
-                            {if} keuze == 9
-                                plek_9 = teken
-                        {else}
-                            {print} 'Die plek was al bezet'
-                        {print} plek_1 plek_2 plek_3
-                        {print} plek_4 plek_5 plek_6
-                        {print} plek_7 plek_8 plek_9
-                        {print} ' '
-                        winnaar = {ask} 'Heb je gewonnen'
-                        {if} winnaar == 'ja'
-                            {print} 'Goed gedaan, speler' teken '!'
-                            spel = 'uit'
-                        {else}
-                            {if} teken == 'x'
-                                teken = 'o'
-                            {else}
-                                teken = 'x'
+                    # Maak een lijst genaamd veld
+                    _ = ['.', '.', '.', '.', '.', '.', '.', '.', '.']
+
+                    # Maak een functie die het veld print
+                    {define} print_veld
+                        _
+                        {print} 'Boter-kaas-en-eieren'
+                        {print} veld[1] veld[2] veld[3]
+                        _
+                        _
+
+                    # Roep de functie op
                     ```
             17:
-                story_text: "In de vorige levels was je boter kaas en eieren spel nog vervelend om te spelen. Na elke x of o die je zette vroeg het spel namelijk of je gewonnen had of niet. \nDit maakte het spel wel speelbaar, maar erg traag. In dit level heb je het `{elif}` commando geleerd, dat dit probleem kan oplossen. \nMet `{elif}` kun je Hedy laten checken of er een speler gewonnen heeft. Hiervoor heb je wel wat extra regels nodig.\n\nIn de voorbeeld code zie je dat we de voorwaarden om te winnen (3 op een rij) hebben toegevoegd. \nJe vindt ze op regel 46 tot 69. Je kunt zien dat elke keer als een speler 3 op een rij heeft, het spel de variabele spel op 'uit' zet. \nDit betekent dat de `{while}` lus wordt gestopt en dat het spel stopgezet wordt.\n"
+                example_code: "```\n# Paste your code here and make it level 17 proof\n\n# Create a function that detects if someone has won\n{define} detect_winner {with} field, sign:\n    {if} field[1] == field[2] {and} field[2] == field[3] {and} field[1] != '.':\n        game_over = 'yes'\n        {print} 'Player ' sign 'wins!'\n    {elif}:\n        _\n    {else}:\n        game_over = 'no'\n{return} _\n```\n"
+                story_text: "In the previous level you've learned how to make a tic-tac-toe game. The game works, but is quite annoying as it keeps asking you if you've won yet.\nNow that we have the {elif} command, we can let the game decide if someone has won and it can stop asking us!\n\n### Exercise\n***Paste your code*** Paste your code from the previous level here and make it level 17 proof. In this level you've learned to use a colon everytime you create a block of code. Please add the colons in the correct spots.\n\n***Create a function that detects if someone's won*** We have started the function for you, paste it under the function `print_field` and finish the function. You can see that this first piece of code checks to see if spot 1, 2 and 3 are the same, because if they are you have 3 in a row.\nIt also checks if they are not a dot, because if they are, the line might have the same symbols on them, but that's just because it's still empty.\nIf all these conditions are met, the game is over and the winner is printed.\nFinish this function with all possible ways to win. This means you have to make this for the other 2 rows, 3 columns and 2 diagonals.\nIf you've finished all the other options, the function should return the variable `game_over` so we can use it in our game.\n\n***Call the function in the game*** Go to the line `game_over = {ask} 'Did you win?'` and change it to `game_over = {call} detect_winner {with} field, sign`. Now the function will check if there's a winner and the game doesn't need to keep asking anymore!\n\n***Enjoy your game!*** Great job! You have finished the game! Enjoy playing it!\n"
+    tic_2:
+        name: Boter-kaas-en-eieren 2
+        default_save_name: Tic
+        description: Play a game of Tic Tac Toe!
+        levels:
+            16:
+                story_text: |
+                    In het vorige avontuur heb je geleerd om het speelveld te printen. Nu leer het het spelletje te programmeren!
+
+                    ### Opdracht
+                    ***Plak je code hier*** Plak je code van het vorige avontuur hier.
+
+                    ***Voeg meer variabelen toe*** Onder je lijstje `veld` moeten nog 2 variabelen toegevoegd worden.
+                    De variabele `game_over` vertelt je of het spel al over is. Stel deze variabele in op 'nee'.
+                    De variabele `teken` vertelt je of het rondje of het kruisje aan de beurt is. Stel deze variabele in op 'x'.
+
+                    ***Het spel*** Gebruik een {while} commando om te zorgen dat het spel door blijft gaan, totdat de speler game over is. Dus `{while} game_over = 'no'. `
+                    Tijdens het spelen laten we de speler kiezen welk op welk plekje ze hun teken willen plaatsen. Dan veranderen we dat plekje in hun teken.
+                    Vervolgens printen we het speelveld opnieuw en vragen we de speler of die al gewonnen heeft. Tot slot is het de beurt van de ander, dus veranderen we het teken van 'x' naar 'o' of andersom.
+
+                    ***Test je spel*** Werkt alles? Geweldig, veel speelplezier! Is er nog iets mis? Gebruik dat de knop met het lieveheersbeetje om je code te debuggen.
+                    Je hebt misschien ook wel gemerkt dat je er een fout in het spel zit: Je mag namelijk het plekje van de andere speler stelen! Als de ene speler plek 1 heeft gekozen, mag de tweede speler daarna ook gewoon plekje 1 inpikken.
+                    Dat is natuurlijk niet eerlijk! Wil je dit oplossen, ga dan naar het volgende tabblad.
                 example_code: |
                     ```
-                    teken = 'x'
-                    open_plekken = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-                    spel = 'aan'
-                    plek_1 = '.'
-                    plek_2 = '.'
-                    plek_3 = '.'
-                    plek_4 = '.'
-                    plek_5 = '.'
-                    plek_6 = '.'
-                    plek_7 = '.'
-                    plek_8 = '.'
-                    plek_9 = '.'
-                    {print} 'BOTER KAAS EN EIEREN!'
-                    {print} plek_1 plek_2 plek_3
-                    {print} plek_4 plek_5 plek_6
-                    {print} plek_7 plek_8 plek_9
-                    {print} ' '
-                    {while} spel != 'uit':
-                        keuze = {ask} 'Speler ' teken ', welke plek kies jij?'
-                        {if} keuze {in} open_plekken:
-                            {remove} keuze {from} open_plekken
-                            {if} keuze == 1:
-                                plek_1 = teken
-                            {if} keuze == 2:
-                                plek_2 = teken
-                            {if} keuze == 3:
-                                plek_3 = teken
-                            {if} keuze == 4:
-                                plek_4 = teken
-                            {if} keuze == 5:
-                                plek_5 = teken
-                            {if} keuze == 6:
-                                plek_6 = teken
-                            {if} keuze == 7:
-                                plek_7 = teken
-                            {if} keuze == 8:
-                                plek_8 = teken
-                            {if} keuze == 9:
-                                plek_9 = teken
-                        {else}:
-                            {print} 'Die plek was al bezet'
-                        {print} plek_1 plek_2 plek_3
-                        {print} plek_4 plek_5 plek_6
-                        {print} plek_7 plek_8 plek_9
-                        {print} ' '
-                        {if} plek_1 == plek_2 {and} plek_2 == plek_3 {and} plek_1 != '.':
-                            {print} 'Speler ' teken ' wint!'
-                            spel = 'uit'
-                        {elif} plek_4 == plek_5 {and} plek_5 == plek_6 {and} plek_4 != '.':
-                            {print} 'Speler ' teken ' wint!'
-                            spel = 'uit'
-                        {elif} plek_7 == plek_8 {and} plek_8 == plek_9 {and} plek_7 != '.':
-                            {print} 'Speler ' teken ' wint!'
-                            spel = 'uit'
-                        {elif} plek_1 == plek_4 {and} plek_4 == plek_7 {and} plek_1 != '.':
-                            {print} 'Speler ' teken ' wint!'
-                            spel = 'uit'
-                        {elif} plek_2 == plek_5 {and} plek_5 == plek_8 {and} plek_2 != '.':
-                            {print} 'Speler ' teken ' wint!'
-                            spel = 'uit'
-                        {elif} plek_3 == plek_6 {and} plek_6 == plek_9 {and} plek_3 != '.':
-                            {print} 'Speler ' teken ' wint!'
-                            spel = 'uit'
-                        {elif} plek_1 == plek_5 {and} plek_5 == plek_9 {and} plek_1 != '.':
-                            {print} 'Speler ' teken ' wint!'
-                            spel = 'uit'
-                        {elif} plek_3 == plek_5 {and} plek_5 == plek_7 {and} plek_3 != '.':
-                            {print} 'Speler ' teken ' wint!'
-                            spel = 'uit'
-                        {else}:
-                            {if} teken == 'x':
-                                teken = 'o'
-                            {else}:
-                                teken = 'x'
+                    # Plak je code hier
+
+                    # Voeg meer variabelen toe
+                    game_over = _
+                    teken = _
+
+                    # Het spel
+                    {while} _
+                        keuze = _ 'Speler ' teken '_?'
+                        veld[keuze] = _
+                        _ print_veld
+                        game_over = {ask} _
+                        {if} teken = 'o'
+                            teken = _
+                        _
+                            teken = _
+                    ```
+    tic_3:
+        name: Boter-kaas-en-eieren 3
+        default_save_name: Tic
+        description: Play a game of Tic Tac Toe!
+        levels:
+            16:
+                story_text: |
+                    Je hebt misschien al gemerkt dat je er een fout in het spel zit: Je mag namelijk het plekje van de andere speler stelen! Als de ene speler plek 1 heeft gekozen, mag de tweede speler daarna ook gewoon plekje 1 inpikken.
+                    Dat is natuurlijk niet eerlijk! Wil je dit nu oplossen.
+
+                    ### Opdracht
+                    ***Plak je code hier*** Plak je code van het vorige avontuur hier.
+
+                    ***Los het probleem op*** Om het probleem op te lossen moet je de regel `veld[keuze] = teken` aanpassen. Deze regel verandert namelijk het gekozen plekje in het teken van de speler, zonder te controleren of dat wel mag.
+                    Ga naar het kopje 'Gebruik dit om het probleem op te lossen' en maak de code af. We willen eerst checken of het plekje wel leeg is, voordat iemand het in mag nemen, dus we programmeren `{if} veld[keuze] = '.'`. Is het plekje nog leeg, dan mag de speler het innemen.
+                    Vervolgens maken we een {else} commando, voor als het plekje al bezet is, en we printen daar 'Sorry, deze plek is al bezet'. Om te zorgen dat de spelers ook de kans krijgen om deze tekst te lezen, voordat hij gewist wordt, voegen we een {sleep} commando toe.
+                    Vervang nu de regel `veld[keuze] = teken` in je spel met dit nieuwe stukje code.
+
+                    ***Speel je spel!*** Hoera! Nu werkt het spel helemaal zoals het hoort! Goed gedaan!
+                    Het enige onhandige aan dit spel is dat je steeds moet invullen of je gewonnen hebt of niet. Wil je dat verhelpen? Neem dan een kijkje in het volgende level!
+                example_code: |
+                    ```
+                    # Plak je code hier
+
+                    # Gebruik dit om het probleem op te lossen
+                    {if} _ = '.'
+                        veld[keuze] = teken
+                    {else}
+                        {print} _
+                        _
                     ```
     turtle:
         name: Tekenen
