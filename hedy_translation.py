@@ -7,12 +7,16 @@ from os import path
 import hedy_content
 from website.yaml_file import YamlFile
 import copy
+from googletrans import Translator
+
+
 
 # Holds the token that needs to be translated, its line number, start and
 # end indexes and its value (e.g. ", ").
 Rule = namedtuple("Rule", "keyword line start end value")
 
-
+# stores the connection to Google Translate
+translator = Translator()
 def keywords_to_dict(lang="nl"):
     """ "Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
     base = path.abspath(path.dirname(__file__))
@@ -73,13 +77,9 @@ def get_target_keyword(keyword_dict, keyword):
         return keyword
 
 
-def translate(string):
-    from googletrans import Translator
-    translator = Translator()
-    result = translator.translate(string, src='en', dest='nl')
+def translate_string(string, from_lang, to_lang):
+    result = translator.translate(string, src=from_lang, dest=to_lang)
     return result.text
-    # return 'Hallo welkom bij Hedy!'  # clearly we need to call a real translation api here!
-
 
 def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1, translate_strings=False):
     """ "Return code with keywords translated to language of choice in level of choice"""
@@ -122,11 +122,11 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1, tran
                 result = replace_line(lines, rule.line - 1, replaced_line)
             else:
                 if translate_strings:
-                    # this is a text string that needs to be translated
+                    # this is not a keyword, so (for now) that means a text string that needs to be translated
                     lines = result.splitlines()  # do we need to do this for each rule??
                     line = lines[rule.line - 1]
                     original = rule.value
-                    target = translate(original)
+                    target = translate_string(original, from_lang, to_lang)
                     replaced_line = replace_token_in_line(line, rule, original, target)
                     result = replace_line(lines, rule.line - 1, replaced_line)
 
@@ -163,11 +163,15 @@ def replace_line(lines, index, line):
 
 def replace_token_in_line(line, rule, original, target):
     """Replaces a token in a line from the user input with its translated equivalent"""
-    before = "" if rule.start == 0 else line[0: rule.start]
-    after = "" if rule.end == len(line) - 1 else line[rule.end + 1:]
-    # Note that we need to replace the target value in the original value because some
-    # grammar rules have ambiguous length and value, e.g. _COMMA: _SPACES*
-    # (latin_comma | arabic_comma) _SPACES*
+    if rule.keyword == 'text':
+        before = line[:rule.start]
+        after = line[rule.end-1:]
+    else:
+        before = "" if rule.start == 0 else line[0: rule.start]
+        after = "" if rule.end == len(line) - 1 else line[rule.end + 1:]
+        # Note that we need to replace the target value in the original value because some
+        # grammar rules have ambiguous length and value, e.g. _COMMA: _SPACES*
+        # (latin_comma | arabic_comma) _SPACES*
     return before + rule.value.replace(original, target) + after
 
 
@@ -235,12 +239,14 @@ class Translator(Visitor):
         self.add_rule("_PRINT", "print", tree)
 
         if self.translate_strings:
-            # in addition to keywords, we atr now also adding plain text strings
+            # in addition to keywords, we are now also adding plain text strings
             # like print arguments to the list of things that need to be translated
             if len(tree.children) > 1:
-                argument = str(tree.children[1].children[0])
-                self.add_rule("text1", argument, tree)  # this of course only support 1 string
-                # you will have to introduce a counter in the class that increases when we see a string
+                # argument = str(tree.children[1].children[0])
+                for argument in tree.children:
+                    if type(argument) is Tree and argument.data == 'text':
+                        self.add_rule("text", "text", argument)  # this of course only support 1 string
+
 
     def print_empty_brackets(self, tree):
         self.print(tree)
@@ -248,6 +254,15 @@ class Translator(Visitor):
     def ask(self, tree):
         self.add_rule("_IS", "is", tree)
         self.add_rule("_ASK", "ask", tree)
+
+        if self.translate_strings: #it'd be nicer of course if this was not copy-paste from PRINT!
+            # in addition to keywords, we are now also adding plain text strings
+            # like ask arguments to the list of things that need to be translated
+            if len(tree.children) > 1:
+                # argument = str(tree.children[1].children[0])
+                for argument in tree.children:
+                    if type(argument) is Tree and argument.data == 'text':
+                        self.add_rule("text", "text", argument)  # this of course only support 1 string
 
     def echo(self, tree):
         self.add_rule("_ECHO", "echo", tree)
@@ -380,8 +395,8 @@ class Translator(Visitor):
         self.add_rule("_PRESSED", "pressed", tree)
 
     def add_rule(self, token_name, token_keyword, tree):
-        if token_name[:4] == "text":  # this is not superduper pretty but for now it works!
-            token = self.get_keyword_token('text', tree)
+        if token_name == "text":  # this is not superduper pretty but for now it works!
+            token = tree.children[0]
             if token:
                 rule = Rule(
                     token_name, token.line, token.column - 1, token.end_column, token.value

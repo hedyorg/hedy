@@ -15,12 +15,12 @@ class TestsTranslationLevel2(HedyTester):
     level = 2
     all_keywords = hedy_translation.all_keywords_to_dict()
 
-    def test_print(self):
-        code = "print Hallo welkom bij Hedy!"
+    def test_print_including_string(self):
+        code = "print Hallo, welkom Hedy!"
 
         result = hedy_translation.translate_keywords(
-            code, "nl", "en", self.level)
-        expected = "print Hallo welkom bij Hedy!"
+            code, "nl", "en", self.level, translate_strings=True)
+        expected = "print Hello, welcome Hedy!"
 
         self.assertEqual(expected, result)
 
@@ -68,6 +68,16 @@ class TestsTranslationLevel2(HedyTester):
         expected = "welkom is Hallo welkom bij Hedy\nprint welkom Veel plezier"
 
         self.assertEqual(expected, result)
+
+    # def test_print_var_text_including_string(self):
+    #     code = "welcome is Hi welcome to Hedy\nprint welcome Enjoy!"
+    #
+    #     result = hedy_translation.translate_keywords(
+    #         code, "en", "nl", self.level, translate_strings=True)
+    #     expected = "welkom is Hallo welkom bij Hedy\nprint welkom Veel plezier"
+
+        self.assertEqual(expected, result)
+
 
     def test_ask_kewords(self):
         code = "hedy is vraag print ask echo"
