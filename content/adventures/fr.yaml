@@ -713,17 +713,17 @@ adventures:
                     ```
             13:
                 story_text: |
-                    ### Exercise 1
-                    Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
+                    ### Exercice 1
+                    Rendons le programme d'entrainement un petit peu plus difficile. Le joueur doit maintenant répondre à deux questions correctement. Complète les espaces vide pour terminer le programme.
 
-                    ### Exercise 2 (extra)
-                    Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
-                    Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
-                    Empty the programming field and create your own solution.
+                    ### Exercice 2
+                    Parfois, les calculs peuvent avoir plusieurs réponses correctes. Par exemple, 10 peut-être divisé par 5 et par 2. Donc la question « Quel nombre divise 10 ? » peut être répondu par 2 ou par 5.
+                    Pour chaque calcul qui peut avoir plusieurs réponses correctes, demande au joueur de répondre, et détermine si sa réponse est correcte en utilisant `{or}`.
+                    Efface la zone de programmation et cré ta propre solution à partir de zéro.
                 example_code: |
                     ```
-                    réponse1 = {ask} 'Combien font 10 fois 7'
-                    réponse2 = {ask} 'Combien font 6 fois 7?'
+                    réponse1 = {ask} "Combien font 10 fois 7 ?"
+                    réponse2 = {ask} "Combien font 6 fois 7 ?"
                     {if} _ _ _ _ _ _ _
                         {print} _
                     ```
@@ -2002,23 +2002,25 @@ adventures:
                     ```
             13:
                 story_text: |
-                    Now that you've learned how to use functions, you'll learn how to use a function with an argument.
-                    An **argument** is a variable that is used within a function. It is not used outside the function.
+                    Maintenant que tu as appris à utiliser les fonctions, tu peux apprendre à utiliser une fonction avec un paramètre.
+                    Un **paramètre** est une variable utilisable dans la fonction dont la valeur est définie au moment de l'appel de la fonction. Cette variable ne peut pas être utilisée en dehors de la fonction.
 
-                    For example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.
-                    In this example code the argument `place` is used. Place is a variable that is only used in the function, so an argument.
-                    To use `place` we have programmed the line `define song with place`.
-                    When the function is called, computer will replace the argument `place`, with the piece of text after `call song with`.
+                    Par exemple, dans ce code, nous avons programmé le premier couplet de la chanson « My Bonnie is over the ocean ».
+                    Dans cet exemple de code, nous utilisons le paramètre « place ». « place » est une variable qui n'est utilisée que dans la fonction.
+                    Le nom de la variable, « place », est déclarée après le mot clé `{with}` de la déclaration de la fonction (la ligne qui commence par `{define}`).
+                    La valeur de la variable est définie après le mot clé `{with}` de l'appel de la fonction (la ligne qui commence par `{call}`).
 
-                    ### Exercise
-                    The next verse of this song goes:
+                    ### Exercice
+                    Le couplet suivant de cette chanson est comme suit :
 
+                    ```not_hedy_code
                     Last night as I lay on my pillow
                     Last night as I lay on my bed
                     Last night as I lay on my pillow
                     I dreamed that my Bonnie is dead
+                    ```
 
-                    Can you program this verse in the same way as the example?
+                    Pouvez-vous programmer ce couplet de la même manière que dans l’exemple ?
                 example_code: |
                     ```
                     {define} chanson {with} place
@@ -3922,17 +3924,25 @@ adventures:
                     ```
             13:
                 story_text: |
-                    In this level we can use the new commands to upgrade our restaurant.
-                    We use `{and}` to see {if} two things are both the case.
+                    À ce niveau, tu vas apprendre de nouvelles commandes pour ajouter encore plus de code.
+
+                    ### Exercice 1
+                    Mets un `{and}` et un `{or}` à l'endroit logique dans le programme.
+
+                    ### Exercice 2
+                    Agrandis ton restaurant avec au moins un `{and}` et un `{or}`.
+                    Par exemple, crée un coupon de réduction spécial qui ne s'applique que pour les pizzas, ou donne à tes clients une boisson gratuite s'il prend des frites et des pancakes. Ou quelque chose de complètement différent, ça marche aussi !
                 example_code: |
                     ```
-                    price = 10
-                    food = {ask} 'What would you like to eat?'
-                    drinks = {ask} 'What would you like to drink?'
-                    {if} food {is} 'sandwich' {and} drinks {is} 'juice'
-                        {print} 'Thats our discount menu'
-                        price = price - 3
-                    {print} 'That will be ' price ' dollars'
+                    prix = 10
+                    plat = {ask} "Que voulez-vous manger ?"
+                    boisson = {ask} "Que voulez-vous boire ?"
+                    {if} plat {is} "sandwich" _ boisson {is} "jus"
+                        {print} "C'est notre menu en promotion"
+                        prix = prix - 3
+                    {if} boisson {is} "eau" _ boisson {is} "jus"
+                        {print} "Cette boisson est bonne pour la santé"
+                    {print} "Ça vous fera " prix " euros"
                     ```
             15:
                 story_text: |
@@ -4073,20 +4083,23 @@ adventures:
                     ```
             13:
                 story_text: |
-                    With the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.
+                    Avec la commande `{and}`, tu peux raccourcir code de ton pierre, papier, ciseaux ! Regarde code d'exemple.
+
+                    ### Exercice
+                    Termine le code pour qu'il y ait un résultat dans tous les cas. Exécute ton code plusieurs fois pour vérifier que le résultat s'affiche bien à chaque fois.
                 example_code: |
                     ```
-                    options = 'rock', 'paper', 'scissors'
-                    your_choice = {ask} 'What do you choose?'
-                    computer_choice = options {at} {random}
-                    {print} 'You choose ' your_choice
-                    {print} 'The computer chooses ' computer_choice
-                    {if} computer_choice {is} your_choice
-                        {print} 'Tie'
-                    {if} computer_choice {is} 'rock' {and} your_choice {is} 'paper'
-                        {print} 'You win!'
-                    {if} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'
-                        {print} 'The computer wins!'
+                    options = "pierre", "papier", "ciseaux"
+                    ton_choix = {ask} "Que choisis-tu ?"
+                    choix_ordinateur = options {at} {random}
+                    {print} "Tu as choisis " ton_choice
+                    {print} "L'ordinateur a choisi " choix_ordinateur
+                    {if} choix_ordinateur {is} ton_choice
+                        {print} "Match nul"
+                    {if} choix_ordinateur {is} "rock" {and} ton_choice {is} "papier"
+                        {print} "Tu gagne !"
+                    {if} choix_ordinateur {is} "rock" {and} ton_choice {is} "ciseaux"
+                        {print} "L'ordinateur gagne !"
                     ```
             15:
                 story_text: |
@@ -5184,40 +5197,40 @@ adventures:
                     ### Exercice
                     Refait les dessins avec la tortue !
 
-                    Street in different sizes <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
-                    Colored street  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
-                    Snow Storm <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
+                    Une rue avec des maisons de toutes les tailles <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
+                    Une rue colorée  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
+                    Un orage de flocons <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
                 example_code: |
-                    Hint Street in different sizes
+                    Aide pour la rue avec les maisons de toutes les tailles
                     ```
-                    {define} draw_a_house {with} size
+                    {define} dessine_une_maison {with} taille
                     _
 
-                    {call} draw_a_house {with} 90
-                    {call} draw_a_house {with} 60
-                    {call} draw_a_house {with} 30
+                    {call} dessine_une_maison {with} 90
+                    {call} dessine_une_maison {with} 60
+                    {call} dessine_une_maison {with} 30
                     ```
 
-                    Hint Colored street
+                    Aide pour la rue colorée
                     ```
-                    {define} draw_a_house {with} chosen_color
+                    {define} dessine_une_maison {with} couleur
                     _
                     ```
 
-                    Hint Snow Storm
+                    Aide pour l'orage de flocons
                     ```
-                    {define} draw_snowflake {with} length, color
+                    {define} dessine_flocon {with} longueur, couleur
                         _
 
-                    numbers = 10, 20, 30
-                    colors = _
+                    longueurs = 10, 20, 30
+                    couleurs = _
 
                     {for} i {in} {range} 1 {to} 5
-                        random_number = _
-                        random_color = _
-                        {call} draw_snowflake {with} random_number, random_color
-                        {color} white
-                        {turn} random_number * 5
+                        longueur_au_hasard = _
+                        couleur_au_hasard = _
+                        {call} dessine_flocon {with} longueur_au_hasard, couleur_au_hasard
+                        {color} blanc
+                        {turn} longueur_au_hasard * 5
                         {forward} 80
                     ```
             14:
