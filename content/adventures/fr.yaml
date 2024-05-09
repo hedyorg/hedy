@@ -4089,17 +4089,18 @@ adventures:
                     Termine le code pour qu'il y ait un résultat dans tous les cas. Exécute ton code plusieurs fois pour vérifier que le résultat s'affiche bien à chaque fois.
                 example_code: |
                     ```
-                    options = "pierre", "papier", "ciseaux"
-                    ton_choix = {ask} "Que choisis-tu ?"
-                    choix_ordinateur = options {at} {random}
-                    {print} "Tu as choisis " ton_choice
-                    {print} "L'ordinateur a choisi " choix_ordinateur
-                    {if} choix_ordinateur {is} ton_choice
-                        {print} "Match nul"
-                    {if} choix_ordinateur {is} "rock" {and} ton_choice {is} "papier"
-                        {print} "Tu gagne !"
-                    {if} choix_ordinateur {is} "rock" {and} ton_choice {is} "ciseaux"
-                        {print} "L'ordinateur gagne !"
+                    options = 'rock', 'paper', 'scissors'
+                    your_choice = {ask} 'What do you choose?'
+                    computer_choice = options {at} {random}
+                    {print} 'You choose ' your_choice
+                    {print} 'The computer chooses ' computer_choice
+                    {if} computer_choice {is} your_choice
+                        {print} 'Tie'
+                    {if} computer_choice {is} 'rock' {and} your_choice {is} 'paper'
+                        {print} 'You win!'
+                    {if} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'
+                        {print} 'The computer wins!'
+                    _
                     ```
             15:
                 story_text: |
