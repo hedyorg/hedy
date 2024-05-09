@@ -126,7 +126,6 @@ class TestsTranslationLevel2(HedyTester):
 
         self.assertEqual(expected, result)
 
-
     def test_translate_back(self):
         code = "print welkom bij Hedy\nnaam is ask what is your name\nprint naam"
 
