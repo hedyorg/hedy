@@ -1852,7 +1852,7 @@ adventures:
                     {print} 'Eu posso prever quantos filhos/filhas você terá quando crescer!'
                     idade = {ask} 'Quantos anos você tem?'
                     irmãos = {ask} 'Quantos irmãos/irmãs você tem?'
-                    altura = {ask} 'Qual a sua altura em centímetros?'
+                    altura = {ask} 'Qual é a sua altura em centímetros?'
                     filhos = altura / idade
                     filhos = filhos - irmãos
                     {print} 'Você terá...'
@@ -1886,7 +1886,7 @@ adventures:
                        pergunta = {ask} 'O que você quer saber?'
                        {print} pergunta
                        {sleep}
-                       {print} 'Minha bola de cristal diz... ' answers {at} {random}
+                       {print} 'Minha bola de cristal diz... ' respostas {at} {random}
                     ```
             10:
                 story_text: |
@@ -1921,36 +1921,36 @@ adventures:
         levels:
             12:
                 story_text: |
-                    In this level you'll learn how to use **functions**. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again.
-                    To create a function, use `{define}` and give the function a name. Then put all the lines you want in the function in a indented block under the `{define}` line.
-                    Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
+                    Neste nível, você vai aprender a usar **funções**. Uma função é um bloco de código que você pode facilmente usar várias vezes. Funções podem nos ajudar a organizar pedaços de código que podemos usar de novo e de novo.
+                    Para criar uma função, use `{define}` e a dê um nome. Depois, coloque todas as linhas que você quer que estejam na função em um bloco indentado abaixo da linha do `{define}`.
+                    Deixe uma linha em branco no seu código para que ele fique mais elegante. Ótimo trabalho! Você criou uma função!
 
-                    Now, whenever we need that block of code, we just use <code>{call}</code> with the function's name to call it up! We don't have to type that block of code again.
+                    Agora, sempre que precisarmos daquele bloco de código, vamos simplesmente usar <code>{call}</code> com o nome da função para executá-lo! Não teremos de digitar aquele bloco novamente.
 
-                    Check out this example code of a game of Twister. The function 'turn' contains a block of code that chooses which limb should go where.
+                    Veja este código exemplo de um jogo chamado Twister. A função 'giro' contém um bloco de código que escolhe qual membro do corpo deve ir aonde.
 
-                    ### Exercise
-                    Finish this code by setting the 2 variables chosen_limb and chosen_color.
-                    Then, choose how many times you want to call the function to give the twister spinner a spin.
+                    ### Exercício
+                    Termine o código definindo as duas variáveis membro_escolhido e cor_escolhida.
+                    Então, escolha quantas vezes você quer chamar a função de girar a roda do Twister.
 
-                    ### Exercise 2
-                    Improve your code by adding a variable called 'people'. Use the variable to give all the players their own command in the game.
-                    For example: 'Ahmed, right hand on green' or 'Jessica, left foot on yellow'.
+                    ### Exercício 2
+                    Melhore seu código adicionando uma variável chamada "pessoas". Use-a para dar um comando próprio a cada um dos jogadores.
+                    Por exemplo: 'Ahmed, mão direita no verde' ou 'Jéssica, pé esquerdo no amarelo'.
                 example_code: |
                     ```
-                    sides = 'left', 'right'
-                    limbs = 'hand', 'foot'
-                    colors = 'red', 'blue', 'green', 'yellow'
+                    lados = 'esquerdo', 'direito'
+                    membros = 'mão', 'pé'
+                    cores = 'vermelho', 'azul', 'verde', 'amarelo'
 
-                    {define} turn
-                        chosen_side = sides {at} {random}
-                        chosen_limb = limbs _
-                        chosen_color = colors _
-                        {print} chosen_side ' ' chosen_limb ' on ' chosen_color
+                    {define} giro
+                        lado_escolhido = lados {at} {random}
+                        membro_escolhido = membros _
+                        cor_escolhida = cores _
+                        {print} lado_escolhido < ' ' membro_escolhido ' no ' cor_escolhida
 
-                    {print} 'Lets play a game of Twister!'
-                    {for} i {in} {range} 1 to _
-                        {call} turn
+                    {print} 'Vamos jogar uma partida de Twister!'
+                    {for} i {in} {range} 1 {to} _
+                        {call} giro
                         {sleep} 2
                     ```
             13:
