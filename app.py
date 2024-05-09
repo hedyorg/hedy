@@ -2289,7 +2289,7 @@ def translate_keywords():
     body = request.json
     try:
         translated_code = hedy_translation.translate_keywords(body.get('code'), body.get(
-            'start_lang'), body.get('goal_lang'), level=int(body.get('level', 1)))
+            'start_lang'), body.get('goal_lang'), level=int(body.get('level', 1)), translate_strings=True)
         if translated_code or translated_code == '':  # empty string is False, so explicitly allow it
             session["previous_keyword_lang"] = body.get("start_lang")
             session["keyword_lang"] = body.get("goal_lang")

@@ -121,7 +121,7 @@ class TestsTranslationLevel2(HedyTester):
         # in levels 2 and 3, this is needed because words in between can be vars
         # in level 4 it will magically be better
 
-        # we should, of course, changed but that' not easy, and for now it is better than what we have
+        # we should, of course, changed but that's not easy, and for now it is better than what we have
         # also: result is naam because ask vars are not yet translated!
 
         self.assertEqual(expected, result)
