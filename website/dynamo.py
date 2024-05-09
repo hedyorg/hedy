@@ -369,6 +369,10 @@ class Table:
         self._validate_indexable_fields(updates, True)
         self._validate_key(key)
 
+        updating_keys = set(updates.keys()) & set(self.key_schema.key_names)
+        if updating_keys:
+            raise RuntimeError(f'update() may not include a key field in the \'updates\' field ({updating_keys} may not be part of {updates}; did you accidentally pass an entire record to update()?)')
+
         return self.storage.update(self.table_name, key, updates)
 
     @querylog.timed_as("db_del")
