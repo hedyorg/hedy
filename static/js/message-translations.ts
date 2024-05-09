@@ -378,7 +378,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "fortune": "🔮, ✨",
     "haunted": "🦇, 👻, 🎃",
     "level_title": "Nivel",
-    "multiple_keywords_warning": "Está intentando usar la palabra clave {orig_keyword}, pero esta palabra clave puede tener varios significados. Por favor, elija el que está intentando usar de esta lista y cópielo y péguelo en su código, incluyendo corchetes: {keyword_list}",
+    "multiple_keywords_warning": "Está intentando utilizar la palabra clave {orig_keyword}, pero esta palabra clave puede tener varios significados. Por favor, elija la que está intentando utilizar de esta lista y cópiela y péguela en su código, llaves incluidas: {keyword_list}",
     "restaurant": "🍣, 🍕, 🍔",
     "rock": "✂️, 📜, 🗻",
     "selected": "Seleccionado",
