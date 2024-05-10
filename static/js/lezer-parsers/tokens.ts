@@ -114,7 +114,8 @@ import {
     elses as else15, ins as in15, pressed as pressed15, not_in as not_in15,
     repeat as repeat15, times as times15, fors as for15, to as to15, range as range15,
     define as define15, returns as returns15, _with as with15, call as call15,
-    and as and15, or as or15, _while as while15
+    and as and15, or as or15, _while as while15, low_true as true15, low_false as false15,
+    cap_true as True15, cap_false as False15
 } from "./level15-parser.terms"
 
 import {
@@ -125,7 +126,8 @@ import {
     elses as else16, ins as in16, pressed as pressed16, not_in as not_in16,
     repeat as repeat16, times as times16, fors as for16, to as to16, range as range16,
     define as define16, returns as returns16, _with as with16, call as call16,
-    and as and16, or as or16, _while as while16
+    and as and16, or as or16, _while as while16, low_true as true16, low_false as false16,
+    cap_true as True16, cap_false as False16
 } from "./level16-parser.terms"
 
 import {
@@ -136,7 +138,8 @@ import {
     elses as else17, ins as in17, pressed as pressed17, not_in as not_in17,
     repeat as repeat17, times as times17, fors as for17, to as to17, range as range17,
     define as define17, returns as returns17, _with as with17, call as call17,
-    and as and17, or as or17, _while as while17, elif as elif17
+    and as and17, or as or17, _while as while17, elif as elif17, low_true as true17, low_false as false17,
+    cap_true as True17, cap_false as False17
 } from "./level17-parser.terms"
 
 import {
@@ -145,7 +148,8 @@ import {
     remove as remove18, from as from18, clear as clear18, ifs as ifs18,
     elses as elses18, and as and18, or as or18, pressed as pressed18, notIn as notIn18, ins as ins18,
     repeat as repeat18, times as times18, range as range18, whiles as whiles18,
-    def as def18, returns as returns18, fors as fors18, toList as toList18, elif as elif18
+    def as def18, returns as returns18, fors as fors18, toList as toList18, elif as elif18,
+    low_true as true18, low_false as false18, cap_true as True18, cap_false as False18
 }  from "./level18-parser.terms";
 
 import TRADUCTION_IMPORT from '../../../highlighting/highlighting-trad.json';
@@ -557,7 +561,11 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "to": to15,
             "range": range15,
             "return": returns15,
-            "define": define15            
+            "define": define15,
+            "true": true15,
+            "false": false15,
+            "True": True15,
+            "False": False15
         },
         specialize: {
             "if": if15,
@@ -596,7 +604,11 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "to": to16,
             "range": range16,
             "return": returns16,
-            "define": define16            
+            "define": define16,
+            "low_true": true16,
+            "low_false": false16,
+            "cap_true": True16,
+            "cap_false": False16
         },
         specialize: {
             "if": if16,
@@ -634,7 +646,11 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "to": to17,
             "range": range17,
             "return": returns17,
-            "define": define17
+            "define": define17,
+            "low_true": true17,
+            "low_false": false17,
+            "cap_true": True17,
+            "cap_false": False17
         },
         specialize: {
             "if": if17,
@@ -682,7 +698,11 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "while": whiles18,
             "return": returns18,
             "for": fors18,
-            "elif": elif18
+            "elif": elif18,
+            "low_true": true18,
+            "low_false": false18,
+            "cap_true": True18,
+            "cap_false": False18
         },
         extend: {}
     }

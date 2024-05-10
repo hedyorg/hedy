@@ -336,33 +336,42 @@ commands_and_types_per_level = {
         1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.list],
         4: [HedyType.string, HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
-        16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]
+        15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean],
+        16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean, HedyType.list]
     },
     Command.ask: {
         1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.list],
         4: [HedyType.string, HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
-        16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]
+        15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean],
+        16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean, HedyType.list]
     },
-    Command.turn: {1: command_turn_literals,
-                   2: [HedyType.integer, HedyType.input],
-                   12: [HedyType.integer, HedyType.input, HedyType.float]
-                   },
-    Command.color: {1: [english_colors, HedyType.list],
-                    2: [english_colors, HedyType.string, HedyType.input, HedyType.list]},
-    Command.forward: {1: [HedyType.integer, HedyType.input],
-                      12: [HedyType.integer, HedyType.input, HedyType.float]
-                      },
-    Command.sleep: {1: [HedyType.integer, HedyType.input],
-                    12: [HedyType.integer, HedyType.input, HedyType.float]
-                    },
+    Command.turn: {
+        1: command_turn_literals,
+        2: [HedyType.integer, HedyType.input],
+        12: [HedyType.integer, HedyType.input, HedyType.float]
+    },
+    Command.color: {
+        1: [english_colors, HedyType.list],
+        2: [english_colors, HedyType.string, HedyType.input, HedyType.list]},
+    Command.forward: {
+        1: [HedyType.integer, HedyType.input],
+        12: [HedyType.integer, HedyType.input, HedyType.float]
+    },
+    Command.sleep: {
+        1: [HedyType.integer, HedyType.input],
+        12: [HedyType.integer, HedyType.input, HedyType.float]
+    },
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
     Command.not_in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
     Command.remove_from_list: {1: [HedyType.list]},
-    Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
-                       14: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]},
+    Command.equality: {
+        1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
+        14: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list],
+        15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list, HedyType.boolean]
+    },
     Command.addition: {
         6: [HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]
@@ -386,7 +395,9 @@ commands_and_types_per_level = {
     Command.smaller_equal: {14: [HedyType.integer, HedyType.float, HedyType.input]},
     Command.bigger: {14: [HedyType.integer, HedyType.float, HedyType.input]},
     Command.bigger_equal: {14: [HedyType.integer, HedyType.float, HedyType.input]},
-    Command.not_equal: {14: [HedyType.integer, HedyType.float, HedyType.string, HedyType.input, HedyType.list]},
+    Command.not_equal: {
+        14: [HedyType.integer, HedyType.float, HedyType.string, HedyType.input, HedyType.list, HedyType.boolean]
+    },
     Command.pressed: {5: [HedyType.string]}  # TODO: maybe use a seperate type character in the future.
 }
 
@@ -538,6 +549,15 @@ class ExtractAST(Transformer):
 
     def NEGATIVE_NUMBER(self, args):
         return Tree('number', [str(args)])
+
+    def TRUE(self, args):
+        return Tree('true', [str(args)])
+
+    def FALSE(self, args):
+        return Tree('false', [str(args)])
+
+    def boolean(self, meta, args):
+        return args[0]
 
     # level 2
     def var(self, meta, args):
@@ -821,6 +841,12 @@ class TypeValidator(Transformer):
         # We managed to parse a number that cannot be parsed by python
         raise exceptions.ParseException(level=self.level, location='', found=number)
 
+    def true(self, tree):
+        return self.to_typed_tree(tree, HedyType.boolean)
+
+    def false(self, tree):
+        return self.to_typed_tree(tree, HedyType.boolean)
+
     def subtraction(self, tree):
         return self.to_sum_typed_tree(tree, Command.subtraction)
 
@@ -1041,6 +1067,12 @@ class Filter(Transformer):
 
     def NEGATIVE_NUMBER(self, args):
         return True, ''.join([c for c in args]), None
+
+    def true(self, meta, args):
+        return True, args[0], meta
+
+    def false(self, meta, args):
+        return True, args[0], meta
 
     def text(self, meta, args):
         return all(args), ''.join([c for c in args]), meta
@@ -1501,7 +1533,7 @@ class ConvertToPython(Transformer):
             return f"convert_numerals('{self.numerals_language}', {escape_var(name)})"
         elif ConvertToPython.is_float(name):
             return f"convert_numerals('{self.numerals_language}', {name})"
-        elif ConvertToPython.is_quoted(name):
+        elif ConvertToPython.is_quoted(name) or self.is_bool(name):
             return f"{name}"
 
     def get_fresh_var(self, name):
@@ -1516,8 +1548,9 @@ class ConvertToPython(Transformer):
 
         def is_var_candidate(arg) -> bool:
             return not isinstance(arg, Tree) and \
-                not ConvertToPython.is_int(arg) and \
-                not ConvertToPython.is_float(arg)
+                not self.is_int(arg) and \
+                not self.is_float(arg) and \
+                not self.is_bool(arg)
 
         args_to_process = [a for a in args if is_var_candidate(a)]  # we do not check trees (calcs) they are always ok
 
@@ -1547,9 +1580,10 @@ class ConvertToPython(Transformer):
         try:
             self.check_var_usage([arg], meta.line)
         except exceptions.UndefinedVarException:
-            if not (ConvertToPython.is_int(arg) or
-                    ConvertToPython.is_float(arg) or
-                    ConvertToPython.is_random(arg)):
+            if not (self.is_int(arg) or
+                    self.is_float(arg) or
+                    self.is_random(arg) or
+                    self.is_bool(arg)):
                 raise exceptions.UnquotedAssignTextException(text=arg, line_number=meta.line)
 
     # static methods
@@ -1583,6 +1617,10 @@ class ConvertToPython(Transformer):
     @staticmethod
     def is_random(s):
         return 'random.choice' in s
+
+    @staticmethod
+    def is_bool(s):
+        return s in ['True', 'False']
 
     @staticmethod
     def is_list(s):
@@ -1625,6 +1663,12 @@ class ConvertToPython_1(ConvertToPython):
 
     def NEGATIVE_NUMBER(self, meta, args):
         return str(int(args[0]))
+
+    def true(self, meta, args):
+        return str(bool(args[0]))
+
+    def false(self, meta, args):
+        return str(bool(args[0]))
 
     def print(self, meta, args):
         # escape needed characters
@@ -2495,6 +2539,14 @@ class ConvertToPython_12(ConvertToPython_11):
     def NEGATIVE_NUMBER(self, meta, args):
         numbers = [str(float(x)) for x in args]
         return ''.join(numbers)
+
+    def true(self, meta, args):
+        # The args contain the actual parse value that was used
+        return str(True)
+
+    def false(self, meta, args):
+        # The args contain the actual parse value that was used
+        return str(False)
 
     def text_in_quotes(self, meta, args):
         # We need to re-add the quotes, so that the Python code becomes name = 'Jan' or "Jan's"

@@ -333,6 +333,10 @@ class Translator(Visitor):
         self.add_rule("_RANGE", "range", tree)
         self.add_rule("_TO", "to", tree)
 
+    def boolean(self, tree):
+        self.add_rule('TRUE', "true", tree)
+        self.add_rule('FALSE', "false", tree)
+
     def while_loop(self, tree):
         self.add_rule("_WHILE", "while", tree)
 

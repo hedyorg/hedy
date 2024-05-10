@@ -1,6 +1,13 @@
 command: += while_loop | if_pressed -= error_if_pressed_missing_else >> error_ifelse | ifs
 
-// new : while loop
-while_loop: _WHILE (_conditions) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+// new: boolean type and while loop
+boolean: TRUE | FALSE
 
+?atom: NUMBER | _MINUS NUMBER | boolean | text_in_quotes | var_access
+//assign: (list_access | var) (_IS| _EQUALS) (boolean | list_access | atom | expression)
+assign_list: var (_IS| _EQUALS) (text_in_quotes|NUMBER|boolean) (_COMMA (text_in_quotes|NUMBER|boolean))+
+?comparison_arg: += boolean >> var_access
+?print_expression: += boolean >> var_access_print
+
+while_loop: _WHILE (_conditions) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 

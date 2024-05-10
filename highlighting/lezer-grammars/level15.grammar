@@ -28,7 +28,7 @@ String { doubleQuotedString | singleQuotedString }
 Print { print+ ( ListAccess | Expression )+ }
 Ask { Text (is+ | Op<"=">) ask+ ( ListAccess | Expression )+ }
 
-AssignList { Text (is+ | Op<"=">) (Text+ | Number ) ~ambig  (Comma (Text+ | Number ))+ }
+AssignList { Text (is+ | Op<"=">) (boolean | Text+ | Number ) ~ambig  (Comma (boolean | Text+ | Number ))+ }
 Assign { (Text | ListAccess) (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
 Sleep { sleep+ (Expression | ListAccess )? }
 ListAccess { Text at+ (random+ | Text | Number) }
@@ -77,8 +77,11 @@ binaryExpression {
     Expression !plus Op<"+" | "-"> Expression
 }
 
+boolean { low_true | low_false | cap_true | cap_false }
+
 Expression {
     Number |
+    boolean |
     Text |
     String |
     Call |
@@ -103,7 +106,11 @@ Expression {
     is[@name="is"],
     while[@name="while"],
     define[@name="define"],
-    with[@name="with"]
+    with[@name="with"],
+    low_true[@name="true"],
+    low_false[@name="false"],
+    cap_true[@name="True"],
+    cap_false[@name="False"]
 }
 
 @external extend { Text } extendKeyword from "./tokens" {
@@ -126,7 +133,7 @@ Expression {
     to[@name="to"],
     range[@name="range"],
     call[@name="call"],
-    returns[@name="return"]  
+    returns[@name="return"]
 }
 
 @tokens {
