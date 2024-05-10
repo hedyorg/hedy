@@ -36,7 +36,7 @@ adventures:
                     Tu peux ensuite mettre ce nom n'importe où dans une phrase.
                 example_code: |-
                     ```
-                    nom {is} {ask} Quel est le nom du personnage principal ?
+                    nom {is} {ask} Quel est le nom du personnage principal ?
                     {print} nom va courir dans les bois
                     {print} nom a un peu peur
                     {print} Soudain, il entend un bruit étrange…
@@ -66,7 +66,7 @@ adventures:
                     ```
                     {print} Il entend un bruit
                     animaux {is} un 🐿, un 🦔, une 🦇, une 🦉
-                    animal {is} {ask} C'est quoi à ton avis ?
+                    animal {is} {ask} C'est quoi à ton avis ?
                     {add} animal {to_list} animaux
                     {print} C'était animaux {at} {random}
                     ```
@@ -216,19 +216,19 @@ adventures:
                     ```
             13:
                 story_text: |
-                    En utilisant les commandes `{and}` et `{or}` , vous pouvez rendre vos histoires plus complètes. Vous pouvez poser deux question combiner vos réponses.
+                    En utilisant les commandes `{and}` et `{or}`, vous pouvez rendre vos histoires plus complètes. Vous pouvez poser deux questions combiner vos réponses.
 
                     ### Exercice 1
-                    Regardez le code d'exemple et complétez-le. Puis, ajoutez au moins 2 `{if}`  de plus  avec `{and}` ou `{or}`.
+                    Regardez le code d'exemple et complétez-le. Puis, ajoutez au moins 2 `{if}`  de plus avec `{and}` ou `{or}`.
 
                     ### Exercice 2
                     Prenez une histoire des niveaux précédents et ajoutez un `{and}` ou un `{or}` de plus.
                 example_code: |
                     ```
-                    {print} "Notre hero se promène en forêt"
+                    {print} "Notre heroïne se promène en forêt"
                     {print} "Le chemin se sépare en deux"
-                    chemin = {ask} "Quel chemin doit-elle choisir ?"
-                    arme = {ask} "Quelle arme doit-elle prendre ?"
+                    chemin = {ask} "Quel chemin doit-elle choisir ?"
+                    arme = {ask} "Quelle arme doit-elle prendre ?"
                     {if} chemin {is} "gauche" {and} arme {is} "épée"
                         _
                     ```
@@ -627,22 +627,22 @@ adventures:
                     ```
             9:
                 story_text: |
-                    Au niveau 6 tu as créé une calculatrice, à ce niveau, tu peux étendre ce code pour qu'il pose plusieurs questions.
+                    Au niveau précédent, tu as créé une calculatrice. À ce niveau, tu peux étendre ce code pour qu'il pose plusieurs questions.
 
                     ### Exercice
-                    Peux-tu terminer la ligne 10 pour faire fonctionner le programme ?
+                    Peux-tu terminer la ligne 10 pour faire fonctionner le programme ?
 
                     ### Exercice 2
-                    Donne au joueur ou à la joueuse un retour quand il ou elle répond bien ou mal. Pour y parvenir, étant ton programme avec un `{else}`.
+                    Donne au joueur ou à la joueuse un retour quand il ou elle répond. Comme par exemple, `{print} "Correct !"` ou `{print} "Faux ! La réponse correcte est " réponse_correcte`.
                 example_code: |
                     ```
                     score = 0
                     {repeat} 10 {times}
                         nombres = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        nombre1 = nombres {at} {random}
-                        nombre2 = nombres {at} {random}
-                        bonne_réponse = nombre1 * nombre2
-                        {print}"Combien font " nombre1 " fois " nombre2 " ?"
+                        nombre_1 = nombres {at} {random}
+                        nombre_2 = nombres {at} {random}
+                        bonne_réponse = nombre_1 * nombre_2
+                        {print}"Combien font " nombre_1 " fois " nombre_2 " ?"
                         tentative = {ask} "Quel est ta réponse ?"
                         {print} "Ta réponse est " tentative
                         {if} _ {is} _
@@ -741,20 +741,15 @@ adventures:
                     Tu y arrives ? Génial ! Veux-tu ajouter davantage de fonctions à ta calculatrice ? **Cette aventure se poursuit dans l'onglet suivant !**
                 example_code: |
                     ```
-                    {print} 'Guess which number'
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    number = numbers {at} {random}
-                    game = 'on'
-                    {for} i {in} {range} 1 {to} 10
-                        {if} game == 'on'
-                            guess = {ask} 'Which number do you think it is?'
-                            {if} guess > number
-                                {print} 'Lower!'
-                            {if} guess < number
-                                {print} 'Higher!'
-                            {if} guess == number
-                                {print} 'You win!'
-                                game = 'over'
+                    {define} calculate_mean_grade
+                        total = 0
+                        {for} i {in} {range} 1 {to} 4
+                            grade = {ask} _
+                            total = total + _
+                            return _ / 4
+
+                    mean_grade = {call} _
+                    {print} 'Your mean grade is ' mean_grade
                     ```
             15:
                 story_text: |
@@ -1090,7 +1085,7 @@ adventures:
                 story_text: |-
                     ### Exercice
                     Déboguez ce code. Bonne chance !
-                example_code: "**Attention ! Ce code doit être débogué !**\n```\n{define}movie_recommendation {with} name\n\taction_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'\n\tromance_movies = 'Love Actually', 'The Notebook', 'Titanic'\n\tcomedy_movies = 'Mr Bean' 'Barbie''Deadpool'\n\tkids_movies = 'Minions', 'Paddington', 'Encanto'\n\t{if} name {is} 'Camila' {or} name {is} 'Manuel'\n\t\trecommended_movie = kids_movie {at} {random}\n\t{if} name {is} 'Pedro' {or} 'Gabriella'\n\t\tmood = {ask} 'What you in the mood for?'\n\t{if} mood {is} 'action'\n\t\trecommended_movie = comedy_movies {at} {random}\n\t{if} mood {is} 'romance'\n\t\trecommended_movie = romance_movies\n\t{if} mood {is} 'comedy'\n\t\trecommended_movie = comedy_movies {at} {random}\n\n{print} 'Je recommande ' recommended_movie ' pour ' name\n\nname = {ask} 'Qui regarde ?'\nrecommendation = {ask} 'Voulez-vous une recommandation?'\n{if} recommendation {is} 'yes'\n\t{print} movie_recommendation {with} name\n{else}\n\t{print} 'Pas de problème!'\n```\n"
+                example_code: "**Attention ! Ce code doit être débogué !**\n```\n{define}movie_recommendation {with} name\n    action_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'\n    romance_movies = 'Love Actually', 'The Notebook', 'Titanic'\n    comedy_movies = 'Mr Bean' 'Barbie''Deadpool'\n    kids_movies = 'Minions', 'Paddington', 'Encanto'\n    {if} name {is} 'Camila' {or} name {is} 'Manuel'\n        recommended_movie = kids_movie {at} {random}\n    {if} name {is} 'Pedro' {or} 'Gabriella'\n            mood = {ask} 'What you in the mood for?'\n        {if} mood {is} 'action'\n            recommended_movie = comedy_movies {at} {random}\n        {if} mood {is} 'romance'\n            recommended_movie = romance_movies\n    {if} mood {is} 'comedy'\n            recommended_movie = comedy_movies {at} {random}\n\n{print} 'Je recommande ' recommended_movie ' pour ' name\n\nname = {ask} 'Qui regarde ?'\nrecommendation = {ask} 'Voulez-vous une recommandation?'\n{if} recommendation {is} 'yes'\n{print} movie_recommendation {with} name\n{else}\n{print} 'Pas de problème!'\n```\n"
             14:
                 story_text: |-
                     ### Exercice
@@ -1436,9 +1431,9 @@ adventures:
                     ```
             14:
                 story_text: |
-                    Avec le programme ci-dessous, tu peux calculer si tu as réussi une matière à l'école (c'est-à-dire si tu as obtenu une note de 6 ou plus).
+                    Avec le code d'exemple, tu peux calculer si tu as réussi une matière à l'école (c'est-à-dire si tu as obtenu une note de six ou plus).
                     Tu peux voir que ce code est extrêmement inefficace en raison de la longueur excessive du code dans la ligne 5.
-                    Toutes les différentes notes de 1 à 5 doivent être programmées séparément. Heureusement pour toi, dans ce niveau, tu vas apprendre comment le faire sans avoir à écrire ce code extrêmement long !
+                    Toutes les différentes notes de 1 à 5 doivent être programmées séparément. Heureusement pour toi, dans ce niveau, tu vas apprendre comment le faire sans avoir à écrire ce code extrêmement long !
                 example_code: |
                     ```
                     premiere_note = {ask} "Quelle note as-tu eu à ton premier test ?"
@@ -1458,13 +1453,13 @@ adventures:
                     Dans ce niveau, tu vas apprendre une commande qui rendra tout cela beaucoup plus facile !
                 example_code: |
                     ```
-                    jeu {is} "en cours"
+                    jeu = "en cours"
                     {for} i {in} {range} 1 {to} 100
-                        {if} jeu {is} "en cours"
-                            réponse = {ask} "Est-ce que tu veux continuer ?"
-                            {if} réponse {is} "non"
-                                jeu {is} "fini"
-                            {if} réponse {is} "oui"
+                        {if} jeu == "en cours"
+                            réponse = {ask} "Est-ce que tu veux continuer ?"
+                            {if} réponse == "non"
+                                jeu = "fini"
+                            {if} réponse == "oui"
                                 {print} "Ok on continue"
                     ```
             16:
@@ -1548,11 +1543,11 @@ adventures:
             6:
                 story_text: |
                     Tu peux aussi faire à nouveau un dé Earthworm a ce niveau-ci, mais maintenant tu peux aussi calculer combien de points tu as obtenu.
-                    Tu sais peut-être que le ver vaut pour 5 points. Donc, après un lancé, tu peux immédiatement calculer combien de points tu as totalisé.
-                    Voici le code pour calculer les points avec un seul dé :
+                    Tu sais peut-être que le ver vaut pour 5 points. Donc, après un lancer, tu peux immédiatement calculer combien de points tu as totalisé.
+                    Voici le code pour calculer les points avec un seul dé :
 
                     ### Exercice
-                    Peux-tu faire le code pour totaliser le score de 8 dés ? Pour faire ça, tu dois copier et coller certaines des lignes de code.
+                    Peux-tu faire le code pour totaliser le score de 8 dés ? Pour faire ça, tu dois copier et coller certaines des lignes de code.
                 example_code: |
                     ```
                     choix = 1, 2, 3, 4, 5, ver
@@ -1563,7 +1558,7 @@ adventures:
                     {print} "Cela fait un total de " points " points"
                     ```
                 example_code_2: |
-                    As-tu réussi à calculer le score pour 8 dés ? Cela nécessite beaucoup de copier-coller, n'est-ce pas ? Nous allons rendre ça plus facile au niveau 7 !
+                    As-tu réussi à calculer le score pour 8 dés ? Cela nécessite beaucoup de copier-coller, n'est-ce pas ? Nous allons rendre ça plus facile au niveau 7 !
             7:
                 story_text: |
                     Tu peux aussi faire encore un dé à ce niveau. Avec le code `{repeat}` tu peux facilement jeter une pleine poignée de dés.
@@ -1579,7 +1574,7 @@ adventures:
                 story_text: |
                     ### Exercice
                     Est-ce que quelqu'un met trop de temps pour lancer les dés ? À ce niveau, tu peux demander à Hedy de lancer tous les dés en même temps !
-                    Change les noms par les noms de tes amis ou de ta famille, et termine le code pour qu'ils fassent tous un lancer.
+                    Change les noms par les noms de tes amis ou de ta famille, et termine le code.
                 example_code: |
                     ```
                     joueurs = Anne, Jean, Jeanne
@@ -1675,11 +1670,11 @@ adventures:
                     Maintenant, tu peux copier les lignes 3 à 5 quelques fois (e.g. 7 fois) pour calculer pour la semaine entière.
                     As-tu fait le code pour la semaine entière ?
                 story_text_2: |
-                    Si tu as vraiment beaucoup de malchance, le programme précédent pourrait te choisir pour toute la semaine ! Ce n'est pas juste !
-                    Pour faire un système équitable, tu peux utiliser la commande `{remove}` pour supprimer la personne choisie de la liste. De cette façon tu ne seras pas obligé de faire la vaisselle une fois de plus tant que tout le monde n'aura pas eu son tour.
+                    Si tu as vraiment beaucoup de malchance, le programme précédent pourrait te choisir pour toute la semaine ! Ce n'est pas juste !
+                    Pour faire un système équitable, tu peux utiliser la commande `{remove}` pour supprimer la personne choisie de la liste. De cette façon, tu ne seras pas obligé de faire la vaisselle à nouveau tant que tout le monde n'aura pas eu son tour.
 
-                    Lundi et mardi ont déjà été faits pour toi ! Peux-tu ajouter le reste de la semaine ?
-                    Et… peux-tu trouver la solution pour quand la liste est vide ?
+                    Lundi et mardi ont déjà été faits pour toi ! Peux-tu ajouter le reste de la semaine ?
+                    Et… peux-tu trouver la solution pour quand la liste est vide ?
                 example_code_2: |
                     ```
                     personnes = maman, papa, Emma, Sophie
@@ -1920,11 +1915,11 @@ adventures:
                     Peux-tu remplire les espaces vides avec les bonnes commande ?
                 example_code: |
                     ```
-                    {print} "Je suis Hedy la voyante !"
+                    {print} "Je suis Hedy la voyante !"
                     {print} "Tu peux me poser 3 questions."
                     réponses = oui, non, peut-être
                     _ _ _
-                        question = {ask} "Que veux-tu savoir ?"
+                        question = {ask} "Que veux-tu savoir ?"
                         {print} question
                         {sleep}
                         {print} "Ma boule de cristal dit… " réponses {at} {random}
@@ -1972,7 +1967,7 @@ adventures:
                     Pour créer une fonction, utilise `{define}` et donne un nom à la fonction. Ensuite, ajoute toutes les lignes que tu veux dans la fonction dans un bloc indenté, sous la ligne du `{define}`.
                     Laisse une ligne vide après le bloc pour rendre ton code beau et propre. Bon travail ! tu as créé une fonction !
 
-                    Maintenant, quand nous aurons besoin de ce bloc de code, nous pourrons juste appeler la fonction avec `{call}` suivi du nom de la fonction ! Nous n'aurons plus besoins d'écrire ce bloc a nouveau.
+                    Maintenant, quand nous aurons besoin de ce bloc de code, nous pourrons juste appeler la fonction avec `{call}` suivi du nom de la fonction ! Nous n'aurons plus besoins d'écrire ce bloc à nouveau.
 
                     Regarde cet exemple de code du jeu Twister. La fonction « joue_un_tour » contient un bloc de code qui choisi quel membre doit aller où.
 
@@ -1982,7 +1977,7 @@ adventures:
 
                     ### Exercice 2
                     Améliore ton code en ajoutant une variable « personnes ». Utilise la variable pour distribuer aux joueurs et joueuses leur instruction de jeu personnelle.
-                    Par exemple : « Ahmed, main droit`{define}`e sur vert » ou « Jessica, pied gauche sur jaune ».
+                    Par exemple : « Ahmed, main droite sur vert » ou « Jessica, pied gauche sur jaune ».
                 example_code: |
                     ```
                     cotés = "gauche", "droit(e)"
@@ -2005,10 +2000,10 @@ adventures:
                     Maintenant que tu as appris à utiliser les fonctions, tu peux apprendre à utiliser une fonction avec un paramètre.
                     Un **paramètre** est une variable utilisable dans la fonction dont la valeur est définie au moment de l'appel de la fonction. Cette variable ne peut pas être utilisée en dehors de la fonction.
 
-                    Par exemple, dans ce code, nous avons programmé le premier couplet de la chanson « My Bonnie is over the ocean ».
-                    Dans cet exemple de code, nous utilisons le paramètre « place ». « place » est une variable qui n'est utilisée que dans la fonction.
-                    Le nom de la variable, « place », est déclarée après le mot clé `{with}` de la déclaration de la fonction (la ligne qui commence par `{define}`).
-                    La valeur de la variable est définie après le mot clé `{with}` de l'appel de la fonction (la ligne qui commence par `{call}`).
+                    For example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.
+                    In this example code the argument 'place' is used. Place is a variable that is only used in the function, so an argument.
+                    To use 'place' we have placed `{with} place` after `{define} song`.
+                    When the function is called, the computer will replace the argument 'place', with the piece of text after `{call} song {with}`.
 
                     ### Exercice
                     Le couplet suivant de cette chanson est comme suit :
@@ -2098,14 +2093,14 @@ adventures:
                     {print} "Devine le nombre"
                     nombres = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                     nombre = nombres {at} {random}
-                    jeu = "commencer"
+                    jeu = "en cours"
                     {for} i {in} {range} 1 {to} 10
-                        {if} jeu == "commencer"
+                        {if} jeu == "en cours"
                             nombre_deviner = {ask} "De quel nombre pensez-vous qu'il s'agit ?"
                             {if} nombre_deviner > nombre
-                                {print} "Moins!"
+                                {print} "Moins !"
                             {if} nombre_deviner < nombre
-                                {print} "Plus!"
+                                {print} "Plus !"
                             {if} nombre_deviner == nombre
                                 {print} "C'est gagné !"
                                 jeu = "fini"
@@ -2679,9 +2674,16 @@ adventures:
                     Ces comparaisons s'utilisent avec `{if}`, comme ceci :
                 example_code: |
                     ```
-                    âge = {ask} "Quel âge as-tu ?"
-                    {if} âge > 12
-                         {print} "Tu es plus agé que moi !"
+                    age = {ask} 'How old are you?'
+                    {if} age > 12
+                        {print} 'You are older than I am!'
+                    ```
+                    ```
+                    age = {ask} 'How old are you?'
+                    {if} age < 12
+                        {print} 'You are younger than me!'
+                    {else}
+                        {print} 'You are older than me!'
                     ```
                 story_text_2: |
                     A parti de ce niveau et pour les suivants, si tu veux comparer l'égalité, tu dois utiliser deux fois le signe égale. C'est ainsi que font la plupart des langages de programmation.
@@ -2891,12 +2893,12 @@ adventures:
                     Then think of 3 more questions to add to this quiz.
                 example_code: |
                     ```
-                    answer {is} {ask} 'What is the capital of Zimbabwe?'
-                    {if} answer {is} Harare {play} C6
+                    réponse {is} {ask} "Quelle est la capital du Zimbabwe ?"
+                    {if} réponse {is} Harare {play} C6
                     _
                     ```
             6:
-                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting numbers. \nThen, see if you can compose a song using the numbers.\n"
+                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\nThis calls for musical maths! Try out the example code a couple of times with different starting numbers.\nThen, see if you can compose a song using the numbers.\n"
                 example_code: |
                     ```
                     number = {ask} 'Say a starting number between 1 and 67'
@@ -3307,8 +3309,8 @@ adventures:
                     ```
     pressit:
         name: Presse une touche
-        default_save_name: Pressed
-        description: Try linking a keyboard key to a command!
+        default_save_name: Pressé
+        description: Essaie d'associer une touche du clavier à une commande !
         levels:
             5:
                 story_text: |
@@ -3378,11 +3380,11 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercice
-                    Dans Hedy tu as des exercices pour chaque aventure. Un exercice te permet de t'entraîner aux nouvelles commandes et concepts, et te permet de jouer avec les codes d'exemple.
+                    Dans Hedy, tu as des exercices pour chaque aventure. Un exercice te permet de t'entraîner aux nouvelles commandes et concepts, et te permet de jouer avec les codes d'exemple.
                     Dans cet exercice, tu verras un espace vide rose. Tu dois écrire quelque chose à la place de cet espace vide pour que ton code fonctionne.
 
                     Complète l'espace vide en écrivant la commande `{print}` et ajoute cinq autres lignes de code. Chaque ligne doit commencer par la commande `{print}`.
-                    Amuse-toi !
+                    Amuse-toi !
                 example_code_2: |
                     ```
                     _ Salut !
@@ -3403,10 +3405,14 @@ adventures:
                     temperature = 25
                     {print}("Il fait ", temperature, " degrés dehors")
                     ```
+                    ```
+                    nom = "Hedy"
+                    {print}("Mon nom est ", nom)
+                    ```
     quizmaster:
         name: Quizmaster
         default_save_name: Quizmaster
-        description: Make your own quiz!
+        description: Fabrique ton propre quiz !
         levels:
             14:
                 story_text: |
@@ -3460,9 +3466,9 @@ adventures:
                     L'exemple montre le problème si tu entoures ton texte avec les apostrophes. Peux-tu le corriger en remplaçant par des guillemets ?
                 example_code_2: |
                     ```
-                    {print} _ Voici comment ça ne marche pas avec les apostrophes : _
+                    {print} _ Voici comment ça ne marche pas avec les apostrophes : _
                     {print} 'aujourd'hui je fais du babysitting avec les enfants de ma sœur'
-                    {print} 'qu'y a-t-il de plus amusant que ça ?'
+                    {print} 'qu'y a-t-il de plus amusant que ça ?'
                     ```
             12:
                 story_text: |
@@ -3562,11 +3568,11 @@ adventures:
         levels:
             7:
                 story_text: |
-                    ## Répète ! Répète ! Répète !
-                    Le niveau 7 ajoute la commande `{repeat}`. `{repeat}` peut être utilisée pour exécuter une ligne de code plusieurs fois. Comme ceci :
+                    ## Répète ! Répète ! Répète !
+                    Le niveau 7 ajoute la commande `{repeat}`. `{repeat}` peut être utilisée pour exécuter une ligne de code plusieurs fois. Comme ceci :
 
                     ### Exercice
-                    Joue avec la commande `{repeat}`. Peux-tu faire la chanson d'anniversaire avec seulement 3 lignes de code à la place de 4 maintenant ?
+                    Joue avec la commande `{repeat}`. Peux-tu faire la chanson d'anniversaire avec seulement 3 lignes de code à la place de 4 maintenant ?
                 example_code: |
                     ```
                     {repeat} 3 {times} {print} "Hedy est amusante !"
