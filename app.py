@@ -1042,7 +1042,9 @@ def programs_page(user):
         date = utils.delta_timestamp(item['date'])
         # This way we only keep the first 4 lines to show as preview to the user
         preview_code = "\n".join(item['code'].split("\n")[:4])
-        if item.get('is_modified'):
+        # When saving a program, 'is_modified' is set to True or False
+        # But for older programs, 'is_modified' doesn't exist yet, therefore the check
+        if item.get('is_modified') or 'is_modified' not in item:
             programs.append(
                 {'id': item['id'],
                  'preview_code': preview_code,
