@@ -103,7 +103,7 @@ class ProgramsLogic:
         # and if it was already modified and now is so again, count should not increase.
         if is_modified and not program.get('is_modified'):
             self.db.increase_user_program_count(user["username"])
-            program = self.db.update_program(program['id'], {'is_modified': True})
+        program = self.db.update_program(program['id'], {'is_modified': is_modified})
 
         querylog.log_value(program_id=program['id'],
                            adventure_name=adventure_name, error=error, code_lines=len(code.split('\n')))
