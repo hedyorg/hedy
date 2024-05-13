@@ -682,6 +682,8 @@ class Database:
         self.update_public_adventure_filters_indexes(adventure)
 
     def update_adventure(self, adventure_id, adventure):
+        if "id" in adventure:
+            del adventure["id"]
         ADVENTURES.update({"id": adventure_id}, adventure)
         self.update_public_adventure_filters_indexes(adventure)
 
