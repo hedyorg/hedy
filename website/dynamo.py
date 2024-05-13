@@ -764,7 +764,6 @@ class AwsDynamoStorage(TableStorage):
         return {k: replace_decimals(DDB_DESERIALIZER.deserialize(v)) for k, v in data.items()}
 
 
-
 class PaginationKey:
     @staticmethod
     def from_table(table_key_schema: KeySchema):
@@ -790,7 +789,6 @@ class PaginationKey:
     def extract_dict(self, row):
         """Extract all fields in the key from a row, returning them as a dict."""
         return {k: row[k] for k in self.key_names}
-
 
 
 class Lock:
@@ -860,6 +858,7 @@ class MemoryStorage(TableStorage):
             filtered.reverse()
 
         ordered_pagination_token = pagination_key.extract_ordered(pagination_token) if pagination_token else None
+
         def before_pagination_token(row):
             candidate = pagination_key.extract_ordered(row)
             if reverse:
@@ -985,6 +984,7 @@ class MemoryStorage(TableStorage):
         items = self.tables.get(table_name, [])[:]
 
         ordered_pagination_token = pagination_key.extract_ordered(pagination_token) if pagination_token else None
+
         def before_pagination_token(row):
             candidate = pagination_key.extract_ordered(row)
             return candidate <= ordered_pagination_token
