@@ -605,6 +605,7 @@ def parse():
             if transpile_result.has_music:
                 response['has_music'] = True
 
+            response['variables'] = transpile_result.roles_of_variables
         except Exception:
             pass
 

@@ -1138,11 +1138,10 @@ def all_variables(input_string, level, lang='en'):
 
     This function is still used in the web frontend, and some tests, but no longer by 'transpile'.
     """
-    input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
-
+    abstract_syntax_tree = ExtractAST().transform(program_root)
     vars = set()
-    lookup = create_lookup_table(program_root, level, lang, input_string)
+    lookup = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
     for x in lookup:
         name = str(x.name)
         if '[' not in name:  # we also stor list access but that is not needed here
@@ -3025,7 +3024,7 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
 
 
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle',
-                                         'has_pressed', 'has_clear', 'has_music', 'commands'])
+                                         'has_pressed', 'has_clear', 'has_music', 'commands', 'roles_of_variables'])
 
 
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en", unused_allowed=True):
@@ -3514,6 +3513,27 @@ def create_AST(input_string, level, lang="en"):
     return abstract_syntax_tree, lookup_table, commands
 
 
+def determine_roles(lookup, input_string, level, lang):
+    all_vars = all_variables(input_string, level, lang)
+    roles_dictionary = {}
+    for var in all_vars:
+        assignments = [x for x in lookup if x.name == var]
+
+        if (assignments[0].tree.data == 'for_list'):
+            roles_dictionary[var] = 'walker'
+        elif (assignments[0].type_ == 'list'):
+            roles_dictionary[var] = 'container'
+        elif (len(assignments) == 1):
+            if (assignments[0].type_ == 'input'):
+                roles_dictionary[var] = 'input constant'
+            else:
+                roles_dictionary[var] = 'constant'
+        else:
+            roles_dictionary[var] = 'unknown'
+
+    return roles_dictionary
+
+
 def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False, unused_allowed=False,
                     microbit=False):
     check_program_size_is_valid(input_string)
@@ -3550,7 +3570,10 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         has_pressed = "if_pressed" in commands or "if_pressed_else" in commands or "assign_button" in commands
         has_music = "play" in commands
 
-        parse_result = ParseResult(python, source_map, has_turtle, has_pressed, has_clear, has_music, commands)
+        roles_of_variables = determine_roles(lookup_table, input_string, level, lang)
+
+        parse_result = ParseResult(python, source_map, has_turtle, has_pressed,
+                                   has_clear, has_music, commands, roles_of_variables)
 
         if populate_source_map:
             source_map.set_python_output(python)
