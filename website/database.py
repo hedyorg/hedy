@@ -425,11 +425,13 @@ class Database:
             next_epoch_page = USERS.get_many(dict(epoch=epoch), reverse=True, limit=limit)
 
             # Build a new result page with both sets of records, ending with the next "next page" token
-            page = dynamo.ResultPage(list(page) + list(next_epoch_page), next_epoch_page.next_page_token)
+            page = dynamo.ResultPage(list(page) + list(next_epoch_page), next_epoch_page.next_page_token, page.prev_page_token)
 
-        # Prepend the epoch to the next pagination token
+        # Prepend the epoch to the pagination tokens
         if page.next_page_token:
             page.next_page_token = f"{epoch}:{page.next_page_token}"
+        if page.prev_page_token:
+            page.prev_page_token = f"{epoch}:{page.prev_page_token}"
         return page
 
     def get_all_public_programs(self):

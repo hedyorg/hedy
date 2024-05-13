@@ -154,10 +154,31 @@ class ResultPage:
 
     records: List[dict]
     next_page_token: Optional[str]
+    prev_page_token: Optional[str] = None
+
+    # Holds a reference to a PaginationKey object, which can be used to calculate
+    # pagination keys for arbitrary elements from the result set if desired.
+    pagination_key: Optional['PaginationKey'] = None
+
+    def forward_token_from(self, row):
+        """Returns a forward pagination token from a given row."""
+        if not self.pagination_key:
+            raise RuntimeError('forward_token_from: ResultPage has not been created with a pagination_key')
+        return encode_page_token(self.pagination_key.extract_dict(row), False)
+
+    def inverse_token_from(self, row):
+        """Returns a reverse pagination token from a given row."""
+        if not self.pagination_key:
+            raise RuntimeError('inverse_token_from: ResultPage has not been created with a pagination_key')
+        return encode_page_token(self.pagination_key.extract_dict(row), True)
 
     @property
     def has_next_page(self):
         return bool(self.next_page_token)
+
+    @property
+    def has_prev_page(self):
+        return bool(self.prev_page_token)
 
     def __iter__(self):
         return iter(self.records)
@@ -303,29 +324,42 @@ class Table:
         After reading, the items can be filtered by passing conditions in 'filter'.
         Filtering happens after reading, and saves bytes sent over the wire. It is still
         important to pick a good key to read.
+
+        If 'limit' is given, there looks to be a desire to do proper pagination.
+        To make the 'next_page_token' behavior more nice for user code, we query
+        1 record more than expected, and use that to make sure we don't return a
+        'next_page_token' if the page would have been empty anyway.
         """
         querylog.log_counter(f"db_get_many:{self.table_name}")
 
+        inverse_page, pagination_token = decode_page_token(pagination_token)
+        if inverse_page:
+            reverse = not reverse
+
         lookup = self._determine_lookup(key, many=True)
         if isinstance(lookup, TableLookup):
+            pagination_key = PaginationKey.from_table(self.key_schema)
             items, next_page_token = self.storage.query(
                 lookup.table_name,
                 lookup.key,
                 sort_key=self.key_schema.sort_key,
                 reverse=reverse,
-                limit=limit,
-                pagination_token=decode_page_token(pagination_token),
+                limit=limit + 1 if limit else None,
+                pagination_key=pagination_key,
+                pagination_token=pagination_token,
                 filter=filter
             )
         elif isinstance(lookup, IndexLookup):
+            pagination_key = PaginationKey.from_index(lookup.key.keys(), lookup.sort_key, self.key_schema)
             items, next_page_token = self.storage.query_index(
                 lookup.table_name,
                 lookup.index_name,
                 lookup.key,
                 sort_key=lookup.sort_key,
                 reverse=reverse,
-                limit=limit,
-                pagination_token=decode_page_token(pagination_token),
+                limit=limit + 1 if limit else None,
+                pagination_key=pagination_key,
+                pagination_token=pagination_token,
                 keys_only=lookup.keys_only,
                 table_key_names=self.key_schema.key_names,
                 filter=filter,
@@ -333,7 +367,27 @@ class Table:
         else:
             assert False
         querylog.log_counter(f"db_get_many_items:{self.table_name}", len(items))
-        return ResultPage(items, encode_page_token(next_page_token))
+
+        if inverse_page:
+            # We retrieved the page backwards using a "prev page" token, but reverse the items
+            # again to put them in the right order.
+
+            if limit:
+                # Set the next_page_token only if we retrieved N+1 items (there is an actual next page).
+                has_more_items = len(items) > limit
+                items = items[:limit]
+                prev_page_token = pagination_key.extract_dict(items[-1]) if has_more_items else None
+            next_page_token = pagination_key.extract_dict(items[0]) if items and pagination_token else None
+            items.reverse()
+        else:
+            if limit:
+                # Set the next_page_token only if we retrieved N+1 items (there is an actual next page).
+                has_more_items = len(items) > limit
+                items = items[:limit]
+                next_page_token = pagination_key.extract_dict(items[-1]) if has_more_items else None
+            prev_page_token = pagination_key.extract_dict(items[0]) if items and pagination_token else None
+
+        return ResultPage(items, encode_page_token(next_page_token, False), encode_page_token(prev_page_token, True), pagination_key=pagination_key)
 
     def get_all(self, key, reverse=False, batch_size=None):
         """Return an iterator that will iterate over all elements in the table matching the query.
@@ -411,12 +465,33 @@ class Table:
 
     @querylog.timed_as("db_scan")
     def scan(self, limit=None, pagination_token=None):
-        """Reads the entire table into memory."""
+        """Reads the entire table into memory.
+
+        If 'limit' is given, there looks to be a desire to do proper pagination.
+        To make the 'next_page_token' behavior more nicely for user code, we
+        query 1 record more than expected, and use that to make sure we don't
+        return a 'next_page_token' if the page would have been empty anyway.
+        """
         querylog.log_counter("db_scan:" + self.table_name)
+        pagination_key = PaginationKey.from_table(self.key_schema)
+        inverse_page, pagination_token = decode_page_token(pagination_token)
+        if inverse_page:
+            raise ValueError('Scanning in reverse is not possible')
+
         items, next_page_token = self.storage.scan(
-            self.table_name, limit=limit, pagination_token=decode_page_token(pagination_token)
+            self.table_name,
+            limit=limit + 1 if limit else None,
+            pagination_token=pagination_token,
+            pagination_key=pagination_key,
         )
-        return ResultPage(items, encode_page_token(next_page_token))
+
+        if limit:
+            # Set the next_page_token only if we retrieved N+1 items (there is an actual next page).
+            has_more_items = len(items) > limit
+            items = items[:limit]
+            next_page_token = pagination_key.extract_dict(items[-1]) if has_more_items else None
+
+        return ResultPage(items, encode_page_token(next_page_token, False), None, pagination_key=pagination_key)
 
     @querylog.timed_as("db_describe")
     def item_count(self):
@@ -540,7 +615,7 @@ class AwsDynamoStorage(TableStorage):
 
         return ret
 
-    def query(self, table_name, key, sort_key, reverse, limit, pagination_token, filter=None):
+    def query(self, table_name, key, sort_key, reverse, limit, pagination_token, pagination_key, filter=None):
         key_expression, attr_values, attr_names = self._prep_query_data(key, sort_key)
 
         if filter:
@@ -571,7 +646,7 @@ class AwsDynamoStorage(TableStorage):
         return items, next_page_token
 
     def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None,
-                    keys_only=None, table_key_names=None, filter=None):
+                    pagination_key=None, keys_only=None, table_key_names=None, filter=None):
         # keys_only is ignored here -- that's only necessary for the in-memory implementation.
         # In an actual DDB table, that's an attribute of the index itself
 
@@ -655,7 +730,7 @@ class AwsDynamoStorage(TableStorage):
         result = self.db.describe_table(TableName=make_table_name(self.db_prefix, table_name))
         return result["Table"]["ItemCount"]
 
-    def scan(self, table_name, limit, pagination_token):
+    def scan(self, table_name, limit, pagination_token, pagination_key):
         result = self.db.scan(
             **notnone(
                 TableName=make_table_name(self.db_prefix, table_name),
@@ -687,6 +762,35 @@ class AwsDynamoStorage(TableStorage):
             return None
 
         return {k: replace_decimals(DDB_DESERIALIZER.deserialize(v)) for k, v in data.items()}
+
+
+
+class PaginationKey:
+    @staticmethod
+    def from_table(table_key_schema: KeySchema):
+        return PaginationKey(table_key_schema.key_names)
+
+    @staticmethod
+    def from_index(index_key_names, index_sort_key_name, table_key_schema: KeySchema):
+        keys = [q for q in index_key_names if q != index_sort_key_name]
+        if index_sort_key_name is not None:
+            keys.append(index_sort_key_name)
+        for t in table_key_schema.key_names:
+            if t not in keys:
+                keys.append(t)
+        return PaginationKey(keys)
+
+    def __init__(self, key_names):
+        self.key_names = key_names
+
+    def extract_ordered(self, row):
+        """Extract all fields in the key from a row, returning them ordered."""
+        return [row[k] for k in self.key_names]
+
+    def extract_dict(self, row):
+        """Extract all fields in the key from a row, returning them as a dict."""
+        return {k: row[k] for k in self.key_names}
+
 
 
 class Lock:
@@ -737,7 +841,7 @@ class MemoryStorage(TableStorage):
         return {k: self.get_item(table_name, key) for k, key in keys_map.items()}
 
     @lock.synchronized
-    def query(self, table_name, key, sort_key, reverse, limit, pagination_token, filter=None):
+    def query(self, table_name, key, sort_key, reverse, limit, pagination_token, filter=None, pagination_key=None):
         eq_conditions, special_conditions = DynamoCondition.partition(key)
         validate_only_sort_key(special_conditions, sort_key)
 
@@ -755,52 +859,44 @@ class MemoryStorage(TableStorage):
         if reverse:
             filtered.reverse()
 
-        # Pagination token
-        def extract_key(i, record):
-            ret = {k: record[k] for k in key.keys()}
-            if sort_key is None:
-                ret["offset"] = i
+        ordered_pagination_token = pagination_key.extract_ordered(pagination_token) if pagination_token else None
+        def before_pagination_token(row):
+            candidate = pagination_key.extract_ordered(row)
+            if reverse:
+                return candidate >= ordered_pagination_token
             else:
-                ret[sort_key] = record[sort_key]
-            return ret
+                return candidate <= ordered_pagination_token
 
-        def orderable(key):
-            partition_key = [k for k in key.keys() if k != sort_key][0]
-            second_key = [k for k in key.keys() if k != partition_key][0]
-            return (key[partition_key], key[second_key])
-
-        def before_or_equal(key0, key1):
-            k0 = orderable(key0)
-            k1 = orderable(key1)
-            return k0 <= k1 if not reverse or not sort_key else k1 <= k0
-
-        with_keys = [(extract_key(i, r), r) for i, r in enumerate(filtered)]
-        while pagination_token and with_keys and before_or_equal(with_keys[0][0], pagination_token):
-            with_keys.pop(0)
+        while ordered_pagination_token and filtered and before_pagination_token(filtered[0]):
+            filtered.pop(0)
 
         next_page_key = None
-        if limit and limit < len(with_keys):
-            with_keys = with_keys[:limit]
-            next_page_key = with_keys[-1][0]
+        # DynamoDB will return a 'next_page_key' if there are exactly as many items in the table as requested
+        if limit and limit <= len(filtered):
+            filtered = filtered[:limit]
+            next_page_key = pagination_key.extract_dict(filtered[-1])
 
         # Do a final filtering to mimic DynamoDB FilterExpression
         return copy.deepcopy([record
-                              for _, record in with_keys
+                              for record in filtered
                               if self._query_matches(record, filter_eq_conditions, filter_special_conditions)
                               ]), next_page_key
 
     # NOTE: on purpose not @synchronized here
     def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None,
-                    keys_only=None, table_key_names=None, query_index=None, filter=None):
-        # If keys_only, we project down to the index + table keys
-        # In a REAL dynamo table, the index just wouldn't have more data. The in-memory table has everything,
-        # so we need to drop some data so programmers don't accidentally rely on it.
+                    pagination_key=None, keys_only=None, table_key_names=None, query_index=None, filter=None):
+        """Query an index.
 
+        - keys: the key values. This may or may not contain the sort key, but it must at least contain the partition key.
+        - sort_key: the field name of the sort key.
+        - table_key_names: the keys in the table key, in order [partition, sort].
+        """
         records, next_page_token = self.query(
             table_name, keys,
             sort_key=sort_key,
             reverse=reverse,
             limit=limit,
+            pagination_key=pagination_key,
             pagination_token=pagination_token,
             filter=filter,
         )
@@ -809,6 +905,9 @@ class MemoryStorage(TableStorage):
             return records, next_page_token
 
         # In a keys_only index, we retain all fields that are in either a table or index key
+        # If keys_only, we project down to the index + table keys
+        # In a REAL dynamo table, the index just wouldn't have more data. The in-memory table has everything,
+        # so we need to drop some data so programmers don't accidentally rely on it.
         keys_to_retain = set(list(keys.keys()) + ([sort_key] if sort_key else []) + table_key_names)
         return [{key: record[key] for key in keys_to_retain} for record in records], next_page_token
 
@@ -882,21 +981,25 @@ class MemoryStorage(TableStorage):
         return len(self.tables.get(table_name, []))
 
     @lock.synchronized
-    def scan(self, table_name, limit, pagination_token):
+    def scan(self, table_name, limit, pagination_token, pagination_key):
         items = self.tables.get(table_name, [])[:]
 
-        start_index = 0
-        if pagination_token:
-            start_index = pagination_token["offset"]
-            items = items[pagination_token["offset"]:]
+        ordered_pagination_token = pagination_key.extract_ordered(pagination_token) if pagination_token else None
+        def before_pagination_token(row):
+            candidate = pagination_key.extract_ordered(row)
+            return candidate <= ordered_pagination_token
 
-        next_page_token = None
-        if limit and limit < len(items):
-            next_page_token = {"offset": start_index + limit}
+        while ordered_pagination_token and items and before_pagination_token(items[0]):
+            items.pop(0)
+
+        next_page_key = None
+        # DynamoDB will return a 'next_page_key' if there are exactly as many items in the table as requested
+        if limit and limit <= len(items):
             items = items[:limit]
+            next_page_key = pagination_key.extract_dict(items[-1])
 
         items = copy.deepcopy(items)
-        return items, next_page_token
+        return items, next_page_key
 
     def _find_index(self, records, key):
         for i, v in enumerate(records):
@@ -1113,18 +1216,29 @@ def validate_only_sort_key(conds, sort_key):
         raise RuntimeError(f"Conditions only allowed on sort key {sort_key}, got: {list(conds)}")
 
 
-def encode_page_token(x):
-    """Encode a compound key page token (dict) to a string."""
+def encode_page_token(x, inverted):
+    """Encode a compound key page token (dict) to a string.
+
+    'inverted' indicates whether the page token goes in the other direction
+    than the normally accepted query direction. If the query normally goes
+    forward, a query with an inverted page token would go backwards; but if the
+    query normally goes backwards (reverse=True), a query with an inverted page token
+    would go forward.
+    """
     if x is None:
         return None
-    return base64.urlsafe_b64encode(json.dumps(x).encode("utf-8")).decode("ascii")
+    return ('-' if inverted else '') + base64.urlsafe_b64encode(json.dumps(x).encode("utf-8")).decode("ascii")
 
 
 def decode_page_token(x):
-    """Decode string page token to compound key (dict)."""
+    """Decode string page token to compound key (dict), and its inversion bit."""
     if x is None:
-        return None
-    return json.loads(base64.urlsafe_b64decode(x.encode("ascii")).decode("utf-8"))
+        return False, None
+    inverted = False
+    if x.startswith('-'):
+        inverted = True
+        x = x[1:]
+    return inverted, json.loads(base64.urlsafe_b64decode(x.encode("ascii")).decode("utf-8"))
 
 
 def notnone(**kwargs):

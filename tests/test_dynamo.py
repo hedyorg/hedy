@@ -21,6 +21,10 @@ class Helpers:
             dict(id='key', sort=2, x=1, y=3, m=9),
             dict(id='key', sort=3, x=1, y=2, m=8))
 
+    def insert_many_sample_datas(self, n):
+        self.insert(*(
+            dict(id='key', sort=i + 1, x=1) for i in range(n)))
+
     def get_pages(self, key, **kwargs):
         ret = []
 
@@ -354,6 +358,34 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
             [dict(id='key', sort=3, x=1, y=2, m=8)],
         ])
 
+    def test_paginated_query_and_back(self):
+        self.insert_many_sample_datas(5)
+        key = {'id': 'key'}
+        kwargs = {'limit': 2}
+        p1 = self.table.get_many(key, **kwargs)
+        p12 = self.table.get_many(key, **kwargs, pagination_token=p1.next_page_token)
+        p123 = self.table.get_many(key, **kwargs, pagination_token=p12.next_page_token)
+
+        p121 = self.table.get_many(key, **kwargs, pagination_token=p12.prev_page_token)
+        p1212 = self.table.get_many(key, **kwargs, pagination_token=p121.next_page_token)
+        p12123 = self.table.get_many(key, **kwargs, pagination_token=p1212.next_page_token)
+
+        p1232 = self.table.get_many(key, **kwargs, pagination_token=p123.prev_page_token)
+        p12321 = self.table.get_many(key, **kwargs, pagination_token=p1232.prev_page_token)
+
+        for p in [p121, p12321]:
+            self.assertEqual(list(p1), list(p))
+        for p in [p1212, p1232]:
+            self.assertEqual(list(p12), list(p))
+        for p in [p12123]:
+            self.assertEqual(list(p123), list(p))
+
+        self.assertEqual(p1.prev_page_token, None)
+        self.assertEqual(p121.prev_page_token, None)
+        self.assertEqual(p12321.prev_page_token, None)
+        self.assertEqual(p123.next_page_token, None)
+        self.assertEqual(p12123.next_page_token, None)
+
     def test_paginated_query_reverse(self):
         self.insert_sample_data()
         pages = self.get_pages({'id': 'key'}, limit=1, reverse=True)
@@ -418,6 +450,14 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
         self.assertEqual(ret[0], {'id': 'key', 'sort': 3, 'y': 6})
 
         self.assertIsNone(ret.next_page_token)
+
+    def test_scan_all_items_doesnt_return_pagination_key(self):
+        self.insert(
+            dict(id='key', sort=1, y=1),
+            dict(id='key', sort=2, y=3),
+            dict(id='key', sort=3, y=6))
+        page = self.table.scan(limit=3)
+        self.assertIsNone(page.next_page_token)
 
     def test_keys_only_index(self):
         self.insert(
