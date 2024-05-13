@@ -2668,11 +2668,16 @@ def public_user_page(username):
         all_programs = DATABASE.filtered_programs_for_user(username,
                                                            public=True,
                                                            pagination_token=page)
+        
+        modified_programs = []
+        for program in all_programs:
+            if program.get('is_modified') or 'is_modified' not in program:
+                modified_programs.append(program)
 
         sorted_level_programs = hedy_content.Adventures(
-            g.lang).get_sorted_level_programs(all_programs, adventure_names)
+            g.lang).get_sorted_level_programs(modified_programs, adventure_names)
         sorted_adventure_programs = hedy_content.Adventures(
-            g.lang).get_sorted_adventure_programs(all_programs, adventure_names)
+            g.lang).get_sorted_adventure_programs(modified_programs, adventure_names)
 
         favorite_program = None
         if 'favourite_program' in user_public_info and user_public_info['favourite_program']:
