@@ -1,5 +1,5 @@
 import uuid
-from flask import g, request, make_response, url_for
+from flask import g, request, make_response
 from flask_babel import gettext
 import json
 
@@ -69,8 +69,9 @@ class PublicAdventuresModule(WebsiteModule):
             tags = [t for t in tags if t]
 
         # Get indexes
-        level_lang_adventure_ids, next_page_token = self.db.get_paginated_indexes({"field_value": f"level_lang_{level}_{language}"},
-                                                                                  pagination_token=page, limit=20)
+        level_lang_adventure_ids, next_page_token = self.db.get_paginated_indexes(
+            {"field_value": f"level_lang_{level}_{language}"},
+            pagination_token=page, limit=20)
         # In case we need want any language, we retrieve by the main level index.
         if not level_lang_adventure_ids:
             level_lang_adventure_ids, next_page_token = self.db.get_paginated_indexes({"field_value": f"level_{level}"},
