@@ -66,10 +66,10 @@ describe("Tags of adventures", () => {
     }).as("deleteTag")
 
     cy.wait(500)
-    cy.get("#tag_2")
+    cy.get("#tag_1")
       .should("be.visible")
       .should("include.text", "statements")
-    cy.get("#tag_2 .fa-circle-xmark")
+    cy.get("#tag_1 .fa-circle-xmark")
       .click()
     cy.wait("@deleteTag").should('have.nested.property', 'response.statusCode', 200)
     cy.get("#tags-list li")

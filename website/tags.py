@@ -108,6 +108,5 @@ class TagsModule(WebsiteModule):
         adventure_tags = db_adventure.get("tags", [])
         adventure_tags = list(filter(lambda name: name != tag_name, adventure_tags))
         self.db.update_adventure(adventure_id, {"tags": adventure_tags})
-        self.db.remove_public_adventure_filters_indexes("tag", tag_name, db_adventure)
 
         return jinja_partials.render_partial('htmx-tags-dropdown-item.html', tag=db_tag, adventure_id=adventure_id)
