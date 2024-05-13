@@ -2668,7 +2668,7 @@ def public_user_page(username):
         all_programs = DATABASE.filtered_programs_for_user(username,
                                                            public=True,
                                                            pagination_token=page)
-        
+
         modified_programs = []
         for program in all_programs:
             if program.get('is_modified') or 'is_modified' not in program:
