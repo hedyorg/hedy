@@ -369,25 +369,18 @@ class Table:
             assert False
         querylog.log_counter(f"db_get_many_items:{self.table_name}", len(items))
 
-        if inverse_page:
-            # We retrieved the page backwards using a "prev page" token, but reverse the items
-            # again to put them in the right order.
+        # If we had a limit, we added 1 to it just to see if we didn't accidentally fetch exactly
+        # as many items as the database had available. Slice back to the exactly requested amount.
+        if limit and len(items) > limit:
+            items = items[:limit]
+            next_page_token = pagination_key.extract_dict(items[-1])
+        prev_page_token = pagination_key.extract_dict(items[0]) if items and pagination_token else None
 
-            prev_page_token = next_page_token
-            next_page_token = pagination_key.extract_dict(items[0]) if items and pagination_token else None
-            if limit:
-                # Set the next_page_token only if we retrieved N+1 items (there is an actual next page).
-                has_more_items = len(items) > limit
-                items = items[:limit]
-                prev_page_token = pagination_key.extract_dict(items[-1]) if has_more_items else None
+        # If we fetched a "previous page", we did a query using reverse=True. reverse again to get
+        # the items back in the original order, and swap the prev and next page tokens.
+        if inverse_page:
             items.reverse()
-        else:
-            if limit:
-                # Set the next_page_token only if we retrieved N+1 items (there is an actual next page).
-                has_more_items = len(items) > limit
-                items = items[:limit]
-                next_page_token = pagination_key.extract_dict(items[-1]) if has_more_items else None
-            prev_page_token = pagination_key.extract_dict(items[0]) if items and pagination_token else None
+            next_page_token, prev_page_token = prev_page_token, next_page_token
 
         return ResultPage(items, encode_page_token(next_page_token, False), encode_page_token(prev_page_token, True), pagination_key=pagination_key)
 
