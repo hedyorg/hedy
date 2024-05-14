@@ -9,7 +9,12 @@ import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './type
 import { startIntroTutorial } from './tutorials/tutorial';
 import { get_parsons_code, initializeParsons, loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
-import { incrementDebugLine, initializeDebugger, load_variables, startDebug } from './debugging';
+import {
+    incrementDebugLine,
+    initializeDebugger,
+    load_variables,
+    startDebug
+} from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
 import { postJson, postNoResponse } from './comm';
@@ -153,14 +158,17 @@ export function initializeApp(options: InitializeAppOptions) {
   });
 
   $("#search_language").on('keyup', function() {
-      let search_query = ($("#search_language").val() as string).toLowerCase();
-      $(".language").each(function(){
-          if ($(this).html().toLowerCase().includes(search_query)) {
-              $(this).show();
-          } else {
-              $(this).hide();
-          }
-      });
+    let search_query = ($("#search_language").val() as string).toLowerCase();
+    $(".language").each(function(){
+      let languageName = $(this).html().toLowerCase();
+      let englishName = $(this).attr('data-english');
+      if (englishName !== undefined && (languageName.includes(search_query) || englishName.toLowerCase().includes(search_query))) {
+          $(this).show();
+        } else {
+          $(this).hide();
+          $("#add_language_btn").show();
+        }
+    });
   });
 
   // All input elements with data-autosubmit="true" automatically submit their enclosing form
@@ -475,6 +483,24 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
   // if the user changes tabs while we're waiting for a response
   const adventureName = currentTab;
 
+     if (run_type === 'debug' || run_type === 'continue') {
+          if($('#variables #variable-list li').length == 0){
+            $('#variable_button').hide();
+            $('#variables').hide();
+            $('#variables-expand').hide();
+          }
+          else{
+            $('#variable_button').show();
+            $('#variables').show();
+            $('#variables-expand').show();
+          }
+          setTimeout(() => {
+                $('#variables-expand').hide();
+                $('#variables').hide();
+          }, 5000);
+
+     }
+
   if (askPromptOpen) {
     // If there is no message -> don't show a prompt
     if (disabled_prompt) {
@@ -548,7 +574,6 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
         };
 
         let response = await postJsonWithAchievements('/parse', data);
-
         program_data = response;
         console.log('Response', response);
 
@@ -586,7 +611,7 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
       program_data = theGlobalDebugger.get_program_data();
     }
 
-    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pressed, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, program_data.is_modified ,cb, run_type).catch(function(err: any) {
+    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pressed, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, program_data.variables, program_data.is_modified ,cb, run_type).catch(function(err: any) {
       // The err is null if we don't understand it -> don't show anything
       if (err != null) {
         error.show(ClientMessages['Execute_error'], err.message);
@@ -908,7 +933,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPressed: boolean, hasSleep: number[], hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, isModified: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPressed: boolean, hasSleep: number[], hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, variables: any, isModified: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
   let skip_faulty_found_errors = false;
@@ -1153,7 +1178,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       has_turtle: hasTurtle,
       has_clear: hasClear,
       has_music: hasMusic,
-      Warning: hasWarnings
+      Warning: hasWarnings,
+      variables: variables
     });
 
     startDebug();
@@ -1401,6 +1427,16 @@ export function showVariableView() {
   }
   else {
     variables.hide();
+    const output = $('#output');
+    output.show();
+  }
+  const variablesExpand = $('#variables-expand');
+  if (variablesExpand.is(":hidden")) {
+    variablesExpand.show();
+    $("#variables").trigger("click")
+  }
+  else {
+    variablesExpand.hide();
   }
 }
 
@@ -1427,6 +1463,34 @@ export function get_active_and_trimmed_code() {
 
 export function getEditorContents() {
   return theGlobalEditor.contents;
+}
+
+export function expandVariableView() {
+  const openVariables = $('#open-variables');
+  openVariables.hide();
+  const closeVariables = $('#close-variables');
+  if(closeVariables.hasClass('hidden')){
+      closeVariables.removeClass('hidden');
+  }
+
+  const variables = $('#variables');
+  const output = $('#output');
+  variables.addClass('h-1/2');
+  output.addClass('h-1/2');
+}
+
+export function closeVariableView() {
+  const openVariables = $('#open-variables');
+  openVariables.show();
+  const closeVariables = $('#close-variables');
+  if(!closeVariables.hasClass('hidden')){
+      closeVariables.addClass('hidden');
+  }
+
+  const variables = $('#variables');
+  const output = $('#output');
+  variables.removeClass('h-1/2');
+  output.removeClass('h-1/2');
 }
 
 export function confetti_cannon(){

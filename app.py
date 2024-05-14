@@ -8,6 +8,7 @@ import json
 import datetime
 import os
 import re
+# TEST
 import subprocess
 import sys
 import traceback
@@ -18,6 +19,7 @@ import jinja_partials
 from typing import Optional
 from logging.config import dictConfig as logConfig
 from os import path
+from iso639 import languages
 
 import static_babel_content
 from markupsafe import Markup
@@ -603,6 +605,7 @@ def parse():
             if transpile_result.has_music:
                 response['has_music'] = True
 
+            response['variables'] = transpile_result.roles_of_variables
         except Exception:
             pass
 
@@ -1039,7 +1042,9 @@ def programs_page(user):
         date = utils.delta_timestamp(item['date'])
         # This way we only keep the first 4 lines to show as preview to the user
         preview_code = "\n".join(item['code'].split("\n")[:4])
-        if item.get('is_modified'):
+        # When saving a program, 'is_modified' is set to True or False
+        # But for older programs, 'is_modified' doesn't exist yet, therefore the check
+        if item.get('is_modified') or 'is_modified' not in item:
             programs.append(
                 {'id': item['id'],
                  'preview_code': preview_code,
@@ -1746,18 +1751,12 @@ def get_specific_adventure(name, level, mode):
             return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
         adventure["content"] = safe_format(adventure.get("content", ""), **hedy_content.KEYWORDS.get(g.keyword_lang))
+        if "formatted_content" in adventure:
+            adventure['formatted_content'] = safe_format(adventure['formatted_content'],
+                                                         **hedy_content.KEYWORDS.get(g.keyword_lang))
         customizations["teachers_adventure"] = True
 
-        current_adventure = Adventure(
-            id=adventure["id"],
-            author=adventure["creator"],
-            short_name="level",
-            name=adventure["name"],
-            image=adventure.get("image", None),
-            text=adventure["content"],
-            is_teacher_adventure=True,
-            is_command_adventure=False,
-            save_name=f"{name} {level}")
+        current_adventure = Adventure.from_teacher_adventure_database_row(adventure)
 
         adventures.append(current_adventure)
         prev_level, next_level = utils.find_prev_next_levels(customizations["available_levels"], level)
@@ -2444,7 +2443,31 @@ def all_countries():
 def other_languages(lang_param=None):
     """Return a list of language objects that are NOT the current language."""
     current_lang = lang_param or g.lang
-    return [make_lang_obj(lang) for lang in ALL_LANGUAGES.keys() if lang != current_lang]
+    # these are the languages that iso doesn't have the English translations for
+    non_iso_transl = {
+        'kmr': 'Kurdish',
+        'nb_NO': 'Norwegian',
+        'pa_PK': 'Punjabi',
+        'pap': 'Papiamento',
+        'pt_BR': 'Portuguese',
+        'pt_PT': 'Portuguese',
+        'zh_Hans': 'Chinese',
+        'zh_Hant': 'Chinese'
+    }
+
+    # get all Hedy supported languages
+    other_langs = [make_lang_obj(lang) for lang in ALL_LANGUAGES.keys() if lang != current_lang]
+
+    # Get English names for all Hedy supported languages using iso639 and their codes
+    for lang_code in other_langs:
+        lang = lang_code.get('lang')
+        if lang in languages.part1:
+            language = languages.get(part1=lang)
+            lang_code['english'] = language.name
+        else:
+            lang_code['english'] = non_iso_transl.get(lang, '')
+
+    return other_langs
 
 
 @app.template_global()
@@ -2646,10 +2669,15 @@ def public_user_page(username):
                                                            public=True,
                                                            pagination_token=page)
 
+        modified_programs = []
+        for program in all_programs:
+            if program.get('is_modified') or 'is_modified' not in program:
+                modified_programs.append(program)
+
         sorted_level_programs = hedy_content.Adventures(
-            g.lang).get_sorted_level_programs(all_programs, adventure_names)
+            g.lang).get_sorted_level_programs(modified_programs, adventure_names)
         sorted_adventure_programs = hedy_content.Adventures(
-            g.lang).get_sorted_adventure_programs(all_programs, adventure_names)
+            g.lang).get_sorted_adventure_programs(modified_programs, adventure_names)
 
         favorite_program = None
         if 'favourite_program' in user_public_info and user_public_info['favourite_program']:

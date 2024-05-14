@@ -9,7 +9,7 @@ describe("General tests for my programs page (with both custom teacher and built
     const adventure = 'story'
     beforeEach(() => {
         loginForTeacher();
-    }) 
+    })
 
     it("create adventure, run its code, and see it in my programs", () => {
         createAdventure(programName);
@@ -31,7 +31,7 @@ describe("General tests for my programs page (with both custom teacher and built
         // make sure to navigate to the wanted program tab.
         cy.get(`[data-cy="${adventure}"]`)
             .click();
-        // Paste example code 
+        // Paste example code
         cy.get(`[data-cy="paste-example-code-${adventure}"]`).click();
         cy.get('#runit').click();
         cy.wait(500);

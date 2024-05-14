@@ -43,7 +43,8 @@
                   hx-confirm="{{_('delete_adventure_prompt')}}"
                   hx-trigger="click"
                   hx-delete="/for-teachers/customize-adventure/{{adventure.id}}"
-                  hx-target="#adventures_table">
+                  hx-target="#adventures_table"
+                  hx-swap="outerHTML">
                     <span class="fas fa-trash block mb-1 text-red-700"></span>
                     <span class="text-red-700">{{_('remove')}}</span>
                   </button>
