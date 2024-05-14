@@ -373,12 +373,13 @@ class Table:
             # We retrieved the page backwards using a "prev page" token, but reverse the items
             # again to put them in the right order.
 
+            prev_page_token = next_page_token
+            next_page_token = pagination_key.extract_dict(items[0]) if items and pagination_token else None
             if limit:
                 # Set the next_page_token only if we retrieved N+1 items (there is an actual next page).
                 has_more_items = len(items) > limit
                 items = items[:limit]
                 prev_page_token = pagination_key.extract_dict(items[-1]) if has_more_items else None
-            next_page_token = pagination_key.extract_dict(items[0]) if items and pagination_token else None
             items.reverse()
         else:
             if limit:
@@ -766,6 +767,26 @@ class AwsDynamoStorage(TableStorage):
 
 
 class PaginationKey:
+    """The fields that are involved in pagination for a table or index.
+
+    A pagination key in Dynamo is a dictionary involving the keys of the "last
+    evaluated item" in a result set; by passing it to a query, the query will
+    continue up *just after* that element.
+
+    This holds an ordered list of the partition and sort keys, in the order
+    `[index_pk, index_sk, table_pk, table_sk]` (duplicates and unused keys
+    will be removed).
+
+    This class is used for 2 purposes:
+
+    1. To extract pagination keys (dicts) from DynamoDB records: the prev_page_token
+       will be extracted from first element in a page, and the next_page_token
+       will be extracted from the last element in a page.
+    2. To extract key values in an ordered list from in-memory database records.
+       By extracting the values in order into a Python list, we can use the `<`
+       operation to compare elements. This is used for the in-memory implementation
+       of pagination.
+    """
     @staticmethod
     def from_table(table_key_schema: KeySchema):
         return PaginationKey(table_key_schema.key_names)
