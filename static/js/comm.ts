@@ -48,7 +48,7 @@ async function postJsonUsingFetch(url: string, data?: any): Promise<any> {
     });
   }
 
-  if (response.status !== 200) {
+  if (response.status >= 400) {
     // The error message is:
     // - response.error, if the response can be parsed as JSON
     // - A generic error message if the response is too big (indicating we're probably getting an HTML page back here)
