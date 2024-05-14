@@ -7,12 +7,12 @@ let className = "CLASS1"
 beforeEach(() => {
     loginForTeacher("teacher4");
     goToTeachersPage();
-    cy.get(".view_class").then($viewClass => {
+    cy.get('[data-cy="view_class_link"]').then($viewClass => {
       if (!$viewClass.is(':visible')) {
-          cy.get("#view_classes").click();
+          cy.get('[data-cy="view_classes"]').click();
       }
     });
-    cy.get(".view_class").contains(new RegExp(`^${className}$`)).click();
+    cy.get('[data-cy="view_class_link"]').contains(new RegExp(`^${className}$`)).click();
     cy.get("#survey_status_button").click();
 })
 
@@ -45,14 +45,14 @@ describe('Class Survey View', () => {
   // it('Can be skipped and survey is not shown after', () => {
   //   cy.get("#skip").click();
   //   goToTeachersPage();
-  //   cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
+  //   cy.get('[data-cy="view_class_link"]').contains(new RegExp(`^${classname}$`)).click();
   //   cy.get("#survey").should('not.exist');
   // })
 
   // it('Can be skipped and survey is not shown after', () => {
   //   cy.get("#remind_later").click();
   //   goToTeachersPage();
-  //   cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
+  //   cy.get('[data-cy="view_class_link"]').contains(new RegExp(`^${classname}$`)).click();
   //   cy.get("#survey").should('not.exist');
   // })
 })

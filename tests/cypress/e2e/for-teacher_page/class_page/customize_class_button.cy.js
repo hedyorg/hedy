@@ -7,17 +7,17 @@ describe('Is able to go to logs page', () => {
     loginForTeacher();
     cy.wait(500);
 
-    cy.get(".view_class").then($viewClass => {
+    cy.get('[data-cy="view_class_link"]').then($viewClass => {
       if (!$viewClass.is(':visible')) {
-          cy.get("#view_classes").click();
+          cy.get('[data-cy="view_classes"]').click();
       }
     });
-    cy.get(".view_class").first().click(); // Press view class button
+    cy.get('[data-cy="view_class_link"]').first().click(); // Press view class button
 
     var currentUrl = '';
     cy.url().then(url => {
       currentUrl = url;
-      cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
+     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide()).then($s => $s.length && $s.hide())
       cy.get('#customize-class-button').click(); // Press logs button
 
       let statsUrl = Cypress.env('customize_class_page') + currentUrl.substring(currentUrl.indexOf('class/')+6);

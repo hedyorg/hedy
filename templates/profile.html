@@ -20,7 +20,7 @@
                      {{_('invite_message')}} "<span class="font-bold italic">{{ invite_data['class_name'] }}</span>".<br>
                      {{_('sent_by')}} "<span class="font-bold italic">{{ invite_data['teacher'] }}</span>". {{_('prompt_join_class')}}
                      <div class="flex flex-row mt-4">
-                            <button type="reset" class="green-btn" id="join" 
+                            <button type="reset" class="green-btn" id="join" data-cy="join_link"
                                 hx-post="/class/join/{{invite_data['class_id']}}"
                                 hx-swap="none"
                                 _="on htmx:afterRequest

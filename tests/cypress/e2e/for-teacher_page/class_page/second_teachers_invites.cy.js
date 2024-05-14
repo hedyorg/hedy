@@ -21,8 +21,8 @@ describe("Second teachers: invitations", () => {
 
     for (const teacher of secondTeachers) {
       cy.get("#add-second-teacher").click();
-      cy.get("#modal-prompt-input").type(teacher);
-      cy.get("#modal-ok-button").click();
+      cy.get('[data-cy="modal_prompt_input"]').type(teacher);
+      cy.get('[data-cy="modal_ok_button"]').click();
     }
 
     // Check that both invited teachers are in the table
@@ -37,8 +37,8 @@ describe("Second teachers: invitations", () => {
     navigateToClass(className);
 
     cy.get("#add-second-teacher").click();
-    cy.get("#modal-prompt-input").type(secondTeachers[0]);
-    cy.get("#modal-ok-button").click();
+    cy.get('[data-cy="modal_prompt_input"]').type(secondTeachers[0]);
+    cy.get('[data-cy="modal_ok_button"]').click();
 
     cy.get("#modal_alert_container")
       .contains('pending invitation')
