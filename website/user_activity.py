@@ -37,7 +37,6 @@ class UserActivityModule(WebsiteModule):
         user = self.db.user_by_username(user["username"])
         if not user:
             return {}, 304
-        print("\n\n TRACKING index \n\n")
         body = request.json
         data = []
 
@@ -57,8 +56,6 @@ class UserActivityModule(WebsiteModule):
             }
 
             data.append(data_row)
-
-        print(data)
 
         try:
             logger.log(data)
