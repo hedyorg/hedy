@@ -1064,6 +1064,8 @@ def programs_page(user):
 
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
+    prev_page_url = url_for('programs_page', **dict(request.args, page=result.prev_page_token)
+                            ) if result.prev_page_token else None
 
     return render_template(
         'programs.html',
@@ -1077,6 +1079,7 @@ def programs_page(user):
         adventure_names=adventure_names,
         max_level=hedy.HEDY_MAX_LEVEL,
         next_page_url=next_page_url,
+        prev_page_url=prev_page_url,
         second_teachers_programs=False,
         user_program_count=len(programs))
 
@@ -2136,6 +2139,7 @@ def explore():
 
     level = try_parse_int(request.args.get('level', default=None, type=str))
     adventure = request.args.get('adventure', default=None, type=str)
+    page = request.args.get('page', default=None, type=str)
     language = g.lang
 
     achievement = None
@@ -2143,16 +2147,22 @@ def explore():
         achievement = ACHIEVEMENTS.add_single_achievement(
             current_user()['username'], "indiana_jones")
 
-    programs = DATABASE.get_public_programs(
+    result = DATABASE.get_public_programs(
         limit=40,
         level_filter=level,
         language_filter=language,
-        adventure_filter=adventure)
+        adventure_filter=adventure,
+        pagination_token=page)
+    next_page_url = url_for('explore', **dict(request.args, page=result.next_page_token)
+                            ) if result.next_page_token else None
+    prev_page_url = url_for('explore', **dict(request.args, page=result.prev_page_token)
+                            ) if result.prev_page_token else None
+
     favourite_programs = DATABASE.get_hedy_choices()
 
     # Do 'normalize_public_programs' on both sets at once, to save database calls
-    normalized = normalize_public_programs(list(programs) + list(favourite_programs.records))
-    programs, favourite_programs = split_at(len(programs), normalized)
+    normalized = normalize_public_programs(list(result) + list(favourite_programs.records))
+    programs, favourite_programs = split_at(len(result), normalized)
 
     # Filter out programs that are Hedy favorite choice.
     programs = [program for program in programs if program['id'] not in {fav['id'] for fav in favourite_programs}]
@@ -2165,6 +2175,8 @@ def explore():
         programs=programs,
         favourite_programs=favourite_programs,
         filtered_level=str(level) if level else None,
+        next_page_url=next_page_url,
+        prev_page_url=prev_page_url,
         achievement=achievement,
         filtered_adventure=adventure,
         filtered_lang=language,

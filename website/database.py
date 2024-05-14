@@ -1,7 +1,7 @@
 import functools
 import operator
 import itertools
-from datetime import date, timedelta
+from datetime import date
 import sys
 from os import path
 
@@ -234,8 +234,10 @@ class Database:
 
         # FIXME: Query by index, the current behavior is slow for many programs
         # (See https://github.com/hedyorg/hedy/issues/4121)
-        programs = dynamo.GetManyIterator(PROGRAMS, {"username": username},
-                                          reverse=True, batch_size=limit, pagination_token=pagination_token)
+        programs = PROGRAMS.get_many({"username": username},
+                                     reverse=True, limit=limit, pagination_token=pagination_token)
+        # programs = dynamo.GetManyIterator(PROGRAMS, {"username": username},
+        #                                   reverse=True, batch_size=limit, pagination_token=pagination_token)
 
         for program in programs:
             if level and program.get('level') != int(level):
@@ -256,7 +258,7 @@ class Database:
             if limit and len(ret) >= limit:
                 break
 
-        return dynamo.ResultPage(ret, programs.next_page_token)
+        return dynamo.ResultPage(ret, programs.next_page_token, programs.prev_page_token, pagination_token)
 
     def program_by_id(self, id):
         """Get program by ID.
@@ -401,7 +403,7 @@ class Database:
         for Class in self.get_teacher_classes(username, False):
             self.delete_class(Class)
 
-    def all_users(self, page_token=None):
+    def all_users(self, page_token=None, limit=5):
         """Return a page from the users table.
 
         There may be more users to retrieve. If so, the returned page object
@@ -409,7 +411,6 @@ class Database:
 
         The pagination token will be of the form '<epoch>:<pagination_token>'
         """
-        limit = 500
 
         epoch, pagination_token = (
             page_token.split(":", maxsplit=1) if page_token is not None else (CURRENT_USER_EPOCH, None)
@@ -440,7 +441,8 @@ class Database:
         return [x for x in programs if not x.get("submitted", False)]
 
     @querylog.timed_as("get_public_programs")
-    def get_public_programs(self, level_filter=None, language_filter=None, adventure_filter=None, limit=40):
+    def get_public_programs(self, level_filter=None, language_filter=None, adventure_filter=None,
+                            limit=40, pagination_token=None):
         """Return the most recent N public programs, optionally filtered by attributes.
 
         The 'public' index is the most discriminatory: fetch public programs, then evaluate them against
@@ -455,23 +457,9 @@ class Database:
         if adventure_filter:
             filter['adventure_name'] = adventure_filter
 
-        timeout = dynamo.Cancel.after_timeout(timedelta(seconds=3))
-        id_batch_size = 200
-
-        found_program_ids = []
-        pagination_token = None
-        while len(found_program_ids) < limit and not timeout.is_cancelled():
-            page = PROGRAMS.get_many({'public': 1}, reverse=True, limit=id_batch_size,
-                                     pagination_token=pagination_token, filter=filter)
-            found_program_ids.extend([{'id': r['id']} for r in page])
-            pagination_token = page.next_page_token
-            if pagination_token is None:
-                break
-        del found_program_ids[limit:]  # Cap off in case we found too much
-
-        # Now retrieve all programs we found with a batch-get
-        found_programs = PROGRAMS.batch_get(found_program_ids)
-        return found_programs
+        page = PROGRAMS.get_many({'public': 1}, reverse=True, limit=limit,
+                                 pagination_token=pagination_token,)
+        return page
 
     def add_public_profile_information(self, programs):
         """For each program in a list, note whether the author has a public profile or not.
