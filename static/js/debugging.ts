@@ -8,6 +8,7 @@ let TRADUCTION: Map<string,string>;
 
 //Feature flag for variable and values view
 let variable_view = true;
+let showRoles = false;
 let step_debugger = false;
 const fullLineCommands = [
   'print',
@@ -54,17 +55,15 @@ interface GutterMouseDownEvent {
   stop(): void;
 }
 
-function hide_if_no_variables(){ //this shows just the button, not the list itself
+//this shows just the button, not the list itself
+export function hide_if_no_variables(){
   if($('#variables #variable-list li').length == 0){
     $('#variable_button').hide();
     $('#variables').hide();
+    $('#variables-expand'). hide();
   }
   else{
     $('#variable_button').show();
-    if(variable_view){
-      $('#variables').show();
-    }
-    
   }
 }
 
@@ -77,8 +76,11 @@ export function show_variables() {
   }
 }
 
+
+
 export function load_variables(variables: any) {
   if (variable_view === true) {
+    const programData = theGlobalDebugger.get_program_data();
     variables = clean_variables(variables);
     const variableList = $('#variable-list');
     variableList.empty();
@@ -86,7 +88,12 @@ export function load_variables(variables: any) {
       // Only append if the variable contains any data (and is not undefined)
       if (variables[i][1]) {
         const variableName = variables[i][0].replace(/^_/, '');
-        variableList.append(`<li style=color:${variables[i][2]}>${variableName}: ${variables[i][1]}</li>`);
+        const role = programData.variables[variableName];
+        if (showRoles) {
+          variableList.append(`<li style=color:${variables[i][2]}>${variableName}: ${variables[i][1]} (${role})</li>`);
+        } else {
+          variableList.append(`<li style=color:${variables[i][2]}>${variableName}: ${variables[i][1]}</li>`);
+        }
       }
     }
     show_variables();
@@ -101,20 +108,19 @@ function special_style_for_variable(variable: Variable) {
   let result = '';
   let parsedVariable = parseInt(variable.v as string);
   if (typeof parsedVariable == 'number' && !isNaN(parsedVariable)){
-     result =  "#ffffff";
+     result =  "#4299e1";
    }
    if(typeof variable.v == 'string' && isNaN(parsedVariable)){
-     result = "#ffffff";
+     result = "#4299e1";
    }
    if(typeof variable.v == 'boolean'){
-     result = "#ffffff";
+     result = "#4299e1";
    }
    if (variable.tp$name == 'list'){
-    result =  "#ffffff";
+    result =  "#4299e1";
    }
    return result;
 }
-
 //hiding certain variables from the list unwanted for users
 function clean_variables(variables: Record<string, Variable>) {
   const new_variables = [];
@@ -151,7 +157,6 @@ export function initializeDebugger(options: InitializeDebuggerOptions) {
   theGlobalEditor = options.editor;
   theLevel = options.level;
   theLanguage = options.language;
-  
   let TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;
   let lang = options.keywordLanguage;
   if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
@@ -181,7 +186,6 @@ export function initializeDebugger(options: InitializeDebuggerOptions) {
     show_variables();
     hide_if_no_variables();
   }
-
   initializeBreakpoints(options.editor);
 }
 
