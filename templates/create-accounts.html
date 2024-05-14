@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-                <svg class="fill-current w-8 h-8 ltr:ml-auto rtl:mr-auto mb-2 text-green-500 cursor-pointer" id="add_multiple_rows" xmlns="http://www.w3.org/2000/svg" onclick="hedyApp.add_account_placeholder();" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"/></svg>
+                <svg class="fill-current w-8 h-8 ltr:ml-auto rtl:mr-auto mb-2 text-green-500 cursor-pointer" data-cy="add_multiple_rows" xmlns="http://www.w3.org/2000/svg" onclick="hedyApp.add_account_placeholder();" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"/></svg>
             </div>
         </div>
         <div class="flex flex-row mt-4">
@@ -59,7 +59,7 @@
                   </label>
                 </div>
                 <button class="yellow-btn text-white" onclick="hedyApp.append_classname();">{{_('postfix_classname')}}</button>
-                <button type="reset" id="reset_button" class="red-btn" onclick="window.open('/for-teachers/create-accounts/{{ current_class.id }}', '_self');">
+                <button type="reset" data-cy="reset_button" class="red-btn" onclick="window.open('/for-teachers/create-accounts/{{ current_class.id }}', '_self');">
                     {{_('reset_view')}}</button>
                 <button type="submit" id="create_accounts_button" class="blue-btn px-4">{{_('create_accounts')}}</button>
             </div>

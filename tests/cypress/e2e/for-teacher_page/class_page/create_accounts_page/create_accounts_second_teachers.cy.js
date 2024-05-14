@@ -14,7 +14,7 @@ before(() => {
   students = addStudents(classname, 4);
 })
 
-describe('Testing second teacher accouns', () => {
+describe('Testing second teacher accounts', () => {
   it('Is able to create new accounts for class', () => {
     navigateToClass(classname);
     cy.get('[data-cy="student_username_cell"]').should(($div) => {
@@ -75,7 +75,7 @@ describe('Testing second teacher accouns', () => {
     cy.get(':nth-child(2) > [data-cy="password"]').type("123456");
     cy.wait(1000);
     cy.get(':nth-child(2) > [data-cy="username"]').should('have.value', 'student10');
-    cy.get('#reset_button').click();
+    cy.get('[data-cy="reset_button"]').click();
     cy.wait(1000);
     cy.get(':nth-child(2) > [data-cy="username"]').should('have.value', '');
   })
