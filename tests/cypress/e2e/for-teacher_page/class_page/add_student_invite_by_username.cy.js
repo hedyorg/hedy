@@ -27,7 +27,7 @@ describe('Is able to add student by name', () => {
 
     cy.wait(500);
 
-    cy.get('#add-student').click();
+    cy.get('[data-cy="add_student"]').click();
 
     cy.get('#invite-student').click();
     cy.wait(2000)

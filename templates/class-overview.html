@@ -48,7 +48,7 @@
           <tbody id="class-user-table">
             {% for student in class_info.students %}
               <tr>
-                <td class="username_cell">{{student.username}}</td>
+                <td class="username_cell" data-cy="student_username_cell">{{student.username}}</td>
                 <td class="last_login_cell">{{student.last_login}}</td>
                 <td class="highest_level_cell">{{student.highest_level}}</td>
                 <td class="amount_programs_cell">{{student.programs}}</td>
@@ -113,7 +113,7 @@
               <button class="green-btn" id="add-second-teacher" _="on click call hedyApp.invite_student('{{class_info.id}}', {{_('second_teacher_prompt')|default(None)|tojson}}, '/invite-second-teacher')">{{_('invite_teacher')}}</button>
             {% endif %}
 
-                <button class="green-btn" id="add-student" _="on click toggle the *display of #add_students_options then toggle between .green-btn and .blue-btn on me">{{_('add_students')}}</button>
+                <button class="green-btn" data-cy="add_student" _="on click toggle the *display of #add_students_options then toggle between .green-btn and .blue-btn on me">{{_('add_students')}}</button>
                 <button class="green-btn" id="customize-class-button" data-cy="customize_class_button" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{_('customize_class')}}</button>
             {% endif %}
             <button class="green-btn" id="live_stats_button" onclick="window.location.href = '/live_stats/class/{{class_info.id}}'">{{_('class_live')}}</button>
@@ -129,7 +129,7 @@
           <div class="flex flex-row gap-2">
             <button class="green-btn" id="copy-join-link" onclick='hedyApp.copy_join_link("{{class_info.link}}", {{_('copy_link_success')|default(None)|tojson}})'>{{_('copy_join_link')}}</button>
             <button class="green-btn" id="invite-student" onclick='hedyApp.invite_student("{{class_info.id}}", {{_('invite_prompt')|default(None)|tojson}})'>{{_('invite_by_username')}}</button>
-            <button class="green-btn" id="create-accounts" onclick="window.open('/for-teachers/create-accounts/{{ class_info.id }}', '_self')">{{_('create_accounts')}}</button>
+            <button class="green-btn" data-cy="create_accounts" onclick="window.open('/for-teachers/create-accounts/{{ class_info.id }}', '_self')">{{_('create_accounts')}}</button>
           </div>
       </div>
       {% if invites %}
