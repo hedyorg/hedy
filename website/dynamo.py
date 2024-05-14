@@ -270,10 +270,11 @@ class Table:
         if isinstance(lookup, TableLookup):
             return self.storage.get_item(lookup.table_name, lookup.key)
         if isinstance(lookup, IndexLookup):
+            pagination_key = PaginationKey.from_index(lookup.key.keys(), lookup.sort_key, self.key_schema)
             return first_or_none(
                 self.storage.query_index(
                     lookup.table_name, lookup.index_name, lookup.key, sort_key=lookup.sort_key, limit=1,
-                    keys_only=lookup.keys_only, table_key_names=self.key_schema.key_names,
+                    keys_only=lookup.keys_only, table_key_names=self.key_schema.key_names, pagination_key=pagination_key,
                 )[0]
             )
         assert False
