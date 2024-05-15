@@ -2150,7 +2150,7 @@ def explore():
             current_user()['username'], "indiana_jones")
 
     result = DATABASE.get_public_programs(
-        limit=40,
+        limit=42,  # 3 columns so make it a multiple of 3
         level_filter=level,
         language_filter=language,
         adventure_filter=adventure,
@@ -2204,10 +2204,13 @@ def normalize_public_programs(programs):
     for program in programs:
         program = pre_process_explore_program(program)
 
+        # There is a record somewhere that doesn't have a code field, guard against that
+        code = program.get('code', '')
+
         ret.append(dict(program,
                         hedy_choice=True if program.get('hedy_choice') == 1 else False,
-                        code="\n".join(program['code'].split("\n")[:4]),
-                        number_lines=program['code'].count('\n') + 1))
+                        code="\n".join(code.split("\n")[:4]),
+                        number_lines=code.count('\n') + 1))
     DATABASE.add_public_profile_information(ret)
     return ret
 

@@ -57,7 +57,7 @@
 
         {% if adventure["code"] %}
             <p class="text-gray-600 mt-1"><strong>{{_('number_lines')}}:</strong> {{ adventure.number_lines }}</p>
-            <pre level="{{ adventure.level }}">{{ adventure.code }}</pre>
+            <pre level="{{ adventure.level }}" class="text-xs">{{ adventure.code }}</pre>
         {%endif%}
     </div>
     <div id="actions"
@@ -70,7 +70,7 @@
             {% endif %}
         {% else %}
             {% if user["username"] != adventure["creator"] %}
-                <button class="green-btn" 
+                <button class="green-btn"
                     hx-post="/public-adventures/clone/{{adventure.id}}"
                     hx-target="#adventure_{{adventure.id}}"
                     hx-swap="outerHTML"

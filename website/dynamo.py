@@ -93,7 +93,7 @@ class KeySchema:
                     or (self.partition_key == names[1] and self.sort_key == names[0]))
         return False
 
-    def fully_matches(self, data):
+    def contains_both_keys(self, data):
         """Return whether all keys in are in the data."""
         return (self.partition_key in data and
                 (not self.sort_key or self.sort_key in data))
@@ -296,12 +296,22 @@ class Table:
     def batch_get(self, keys):
         """Return a number of items by (primary+sort) key from the database.
 
-        Keys can be either:
-            - A dictionary, mapping some identifier to a database (dictionary) key
-            - A list of database keys
+        The 'keys' argument can be one of 3 different types. Depending on the type
+        of the input, a different output will be returned. The supported types are:
 
-        Depending on the input, returns either a dictionary with the same keys,
-        or a list in the same order as the input list.
+        - Input: a list of database keys
+          Example Input: `[{ 'id': 'a' }, { 'id': 'b' }]`
+          Response: a list with the actual records
+          Example Output: `[{ 'id': 'a', 'field': 'b', 'more': 'c', ... }, ...]`.
+
+        - Input: a dictionary, mapping some chosen identifier to a database (dictionary) key.
+          Example Input: `{ 'record1': { 'id': 'a' }, 'record2': { 'id': 'b' }`
+          Response: a dictionary with the same keys and the actual records as values.
+          Example Output: `{ 'record1': { 'id': 'a', 'field': 'b', 'more': 'c', ... }, ... }`.
+
+        - Input: a ResultPage obtained from `get_many()`.
+          Response: behaves like the "list" input case, but returns a `ResultPage` with
+          the `prev_page_token` and `next_page_token` fields populated.
 
         Each key must be a dict with a single entry which references the
         partition key. This is currently not supporting index lookups.
@@ -309,21 +319,23 @@ class Table:
         querylog.log_counter(f"db_batch_get:{self.table_name}")
         input_is_dict = isinstance(keys, dict)
 
+        # We normalize to a dict here, then maybe pull it out again to a list later
         keys_dict = keys if input_is_dict else {f'k{i}': k for i, k in enumerate(keys)}
 
-        lookups = {k: self._determine_lookup(key, many=False) for k, key in keys_dict.items()}
-        if any(not isinstance(lookup, TableLookup) for lookup in lookups.values()):
-            raise RuntimeError(f'batch_get must query table, not indexes, in: {keys}')
-        if not lookups:
-            return {} if input_is_dict else []
-        first_lookup = next(iter(lookups.values()))
+        # We only try a table lookup
+        non_matching_keys = [k for k in keys_dict.values() if not self.key_schema.contains_both_keys(k)]
+        if non_matching_keys:
+            raise ValueError(f'batch_get keys must contain {self.key_schema}, found: {non_matching_keys}')
 
         resp_dict = self.storage.batch_get_item(
-            first_lookup.table_name, {k: l.key for k, l in lookups.items()}, table_key_names=self.key_schema.key_names)
+            self.table_name, {k: self.key_schema.extract(l) for k, l in keys_dict.items()}, table_key_names=self.key_schema.key_names)
         if input_is_dict:
             return {k: resp_dict.get(k) for k in keys.keys()}
         else:
-            return [resp_dict.get(f'k{i}') for i in range(len(keys))]
+            items = [resp_dict.get(f'k{i}') for i in range(len(keys))]
+            if isinstance(keys, ResultPage):
+                return ResultPage(items, keys.next_page_token, keys.prev_page_token)
+            return items
 
     @querylog.timed_as("db_get_many")
     def get_many(self, key, reverse=False, limit=None, pagination_token=None, filter=None):
@@ -438,7 +450,7 @@ class Table:
         batch_size = math.ceil(limit * max(1.0, fetch_factor))
 
         # We need to know if we're doing a prevpage query or not.
-        inverse_page, _ = decode_page_token(pagination_token)
+        inverse_page, initial_pagination_token = decode_page_token(pagination_token)
 
         curr_pagination_token = pagination_token
         dropped_remaining_in_this_page = False
@@ -470,8 +482,11 @@ class Table:
                 # Need to decode because it will be re-encoded below
                 prev_page_token = decode_page_token(page.prev_page_token)[1] if page.prev_page_token else None
 
-            # The last element of the first page marks our next_page_token
-            next_page_token = page.pagination_key.extract_dict(first_page[-1]) if first_page else None
+            # The last element of the first page marks our next_page_token. If this page is empty for
+            # some reason, we just pretend that the initial pagination token is our forward pagination token.
+            # Not entirely correct (we'll drop 1 element) but at least it gets us back into the flow.
+            next_page_token = page.pagination_key.extract_dict(
+                first_page[-1]) if first_page else initial_pagination_token
         else:
             if dropped_remaining_in_this_page:
                 next_page_token = page.pagination_key.extract_dict(items[-1])
@@ -498,7 +513,7 @@ class Table:
     @querylog.timed_as("db_create")
     def create(self, data):
         """Put a single complete record into the database."""
-        if not self.key_schema.fully_matches(data):
+        if not self.key_schema.contains_both_keys(data):
             raise ValueError(f"Expecting fields {self.key_schema} in create() call, got: {data}")
         self._validate_indexable_fields(data, False)
 
@@ -604,7 +619,7 @@ class Table:
         # We do a regular table lookup if both the table partition and sort keys occur in the given key.
         if self.key_schema.matches(key_data):
             # Sanity check that if we expect to query 1 element, we must pass a sort key if defined
-            if not many and not self.key_schema.fully_matches(key_data):
+            if not many and not self.key_schema.contains_both_keys(key_data):
                 raise RuntimeError(
                     f"Looking up one value, but missing sort key: {self.key_schema.sort_key} in {key_data}")
 
@@ -622,7 +637,7 @@ class Table:
             f"Table {self.table_name} can be queried using one of {str_schemas}. Got {tuple(key_data.keys())}")
 
     def _validate_key(self, key):
-        if not self.key_schema.fully_matches(key):
+        if not self.key_schema.contains_both_keys(key):
             raise ValueError(f"key fields incorrect: {key} not containing {self.key_schema}")
         if any(not v for v in key.values()):
             raise ValueError(f"key fields cannot be empty: {key}")

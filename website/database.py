@@ -421,7 +421,7 @@ class Database:
         the filters (on the server). The index we're using here has the 'lang', 'adventure_name' and
         'level' columns.
         """
-        # This index contains all fields so we can immediately filter on them
+        # This index contains relevant filterable fields, but doesn't contain the actual code
         filter = {}
         if level_filter:
             filter['level'] = int(level_filter)
@@ -430,9 +430,11 @@ class Database:
         if adventure_filter:
             filter['adventure_name'] = adventure_filter
 
-        return PROGRAMS.get_page({'public': 1}, reverse=True, limit=limit,
+        ids = PROGRAMS.get_page({'public': 1}, reverse=True, limit=limit,
                                  server_side_filter=filter, pagination_token=pagination_token,
                                  timeout=3, fetch_factor=2.0)
+        ret = PROGRAMS.batch_get(ids)
+        return ret
 
     def add_public_profile_information(self, programs):
         """For each program in a list, note whether the author has a public profile or not.
@@ -441,11 +443,11 @@ class Database:
 
         Modifies the records in the list in-place.
         """
-        queries = {p['id']: {'username': p['username'].strip().lower()} for p in programs}
+        queries = {p['id']: {'username': p['username'].strip().lower()} for p in programs if 'username' in p}
         profiles = PUBLIC_PROFILES.batch_get(queries)
 
         for program in programs:
-            program['public_user'] = True if profiles[program['id']] else None
+            program['public_user'] = True if profiles.get(program['id']) else None
 
     def get_highscores(self, username, filter, filter_value=None):
         profiles = []
