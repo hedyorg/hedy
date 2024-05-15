@@ -405,7 +405,7 @@ class Database:
         far from 30M users. Once we start to get in that neighbourhood, we should
         update this code.
         """
-        return USERS.get_page(dict(epoch=CURRENT_USER_EPOCH), pagination_token=pagination_token,
+        return USERS.get_page(dict(epoch=CURRENT_USER_EPOCH), pagination_token=page_token,
                               limit=limit, reverse=True)
 
     def get_all_public_programs(self):
@@ -431,7 +431,8 @@ class Database:
             filter['adventure_name'] = adventure_filter
 
         return PROGRAMS.get_page({'public': 1}, reverse=True, limit=limit,
-                                 pagination_token=pagination_token, timeout=3, fetch_factor=2.0)
+                                 server_side_filter=filter, pagination_token=pagination_token,
+                                 timeout=3, fetch_factor=2.0)
 
     def add_public_profile_information(self, programs):
         """For each program in a list, note whether the author has a public profile or not.
