@@ -3,6 +3,7 @@ import copy
 import functools
 import json
 import logging
+import math
 import numbers
 import os
 import threading
@@ -405,7 +406,7 @@ class Table:
             pagination_key=pagination_key)
 
     def get_page(self, key, limit, reverse=False, pagination_token=None, server_side_filter=None,
-                 client_side_filter=None, timeout=5):
+                 client_side_filter=None, timeout=5, fetch_factor=1.0):
         """Like `get_many()`, but may do multiple calls to the server to try and fill up the page to 'limit'.
 
         `get_many()` does one call, and may return up to 'limit' items. If that happens, `get_page()`
@@ -421,12 +422,19 @@ class Table:
         for every row. If it is a dictionary, the values in the dictionary must match the values
         in the records; if it is a callable, it will be invoked for every row and the callable
         should return True or False to indicate whether that row should be included.
+
+        'fetch_factor' controls how many items are fetched per batch in order to try and fill
+        'limit' items. Combination with an estimate of how many rows would be
+        rejected due to filtering, this can be used to reduce the amount of individual queries
+        necessary in order to come up with a given set of items (reducing latency slightly).
         """
         if limit <= 0:
             raise ValueError('limit must be positive')
         items = []
         cancel = Cancel.after_seconds(timeout) if not isinstance(timeout, Cancel) else timeout
         predicate = make_predicate(client_side_filter)
+
+        batch_size = math.ceil(limit * max(1.0, fetch_factor))
 
         # We need to know if we're doing a prevpage query or not.
         inverse_page, initial_pagination_token_dict = decode_page_token(pagination_token)
@@ -438,7 +446,7 @@ class Table:
         while len(items) < limit:
             space_remaining = limit - len(items)
 
-            page = self.get_many(key, reverse=reverse, limit=limit, pagination_token=curr_pagination_token, filter=server_side_filter)
+            page = self.get_many(key, reverse=reverse, limit=batch_size, pagination_token=curr_pagination_token, filter=server_side_filter)
             if not first_page:
                 first_page = page
             selected_in_this_page = [row for row in page if predicate(row)]

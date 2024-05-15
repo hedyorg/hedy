@@ -115,9 +115,10 @@ CLASS_ERRORS = dynamo.Table(storage, "class_errors", "id")
 # We add an 'epoch' field so that we can make an index of (PK: epoch, SK: created).
 # It doesn't matter what the 'epoch' field is, it just needs to have a predictable value
 # that we know so we can query on it again.
-# Once the users table starts to hit 10GB, we need to increase this number to make sure
-# the new users to to separate partition, and at that point we need to query both
-# partitions in the index (but that will most likely not happen any time soon...)
+# Once the users table starts to hit 10GB (~30M users), we need to increase this
+# number to make sure the new users to to separate partition, and at that point
+# we need to query both partitions in the index (but that will most likely not
+# happen any time soon...)
 CURRENT_USER_EPOCH = 1
 
 # Information on quizzes. We will update this record in-place as the user completes
@@ -230,35 +231,26 @@ class Database:
 
     def filtered_programs_for_user(self, username, level=None, adventure=None, submitted=None, public=None,
                                    limit=None, pagination_token=None):
-        ret = []
+        def client_side_filter(program):
+            if level and int(program.get('level', 0)) != int(level):
+                return False
+            if adventure:
+                if adventure == 'default' and program.get('adventure_name') != '':
+                    return False
+                if adventure != 'default' and program.get('adventure_name') != adventure:
+                    return False
+            if submitted is not None:
+                if program.get('submitted') != submitted:
+                    return False
+            if public is not None and bool(program.get('public')) != public:
+                return False
+            return True
 
         # FIXME: Query by index, the current behavior is slow for many programs
         # (See https://github.com/hedyorg/hedy/issues/4121)
-        programs = PROGRAMS.get_many({"username": username},
-                                     reverse=True, limit=limit, pagination_token=pagination_token)
-        # programs = dynamo.GetManyIterator(PROGRAMS, {"username": username},
-        #                                   reverse=True, batch_size=limit, pagination_token=pagination_token)
-
-        for program in programs:
-            if level and program.get('level') != int(level):
-                continue
-            if adventure:
-                if adventure == 'default' and program.get('adventure_name') != '':
-                    continue
-                if adventure != 'default' and program.get('adventure_name') != adventure:
-                    continue
-            if submitted is not None:
-                if program.get('submitted') != submitted:
-                    continue
-            if public is not None and bool(program.get('public')) != public:
-                continue
-
-            ret.append(program)
-
-            if limit and len(ret) >= limit:
-                break
-
-        return dynamo.ResultPage(ret, programs.next_page_token, programs.prev_page_token, pagination_token)
+        return PROGRAMS.get_page({"username": username},
+                                 reverse=True, limit=limit or 50, pagination_token=pagination_token,
+                                 client_side_filter=client_side_filter)
 
     def program_by_id(self, id):
         """Get program by ID.
@@ -403,38 +395,18 @@ class Database:
         for Class in self.get_teacher_classes(username, False):
             self.delete_class(Class)
 
-    def all_users(self, page_token=None, limit=5):
+    def all_users(self, page_token=None, limit=500):
         """Return a page from the users table.
 
         There may be more users to retrieve. If so, the returned page object
         will have a 'next_page_token' attribute to continue retrieval.
 
-        The pagination token will be of the form '<epoch>:<pagination_token>'
+        Right now, we will only ever query the current epoch, since we are very
+        far from 30M users. Once we start to get in that neighbourhood, we should
+        update this code.
         """
-
-        epoch, pagination_token = (
-            page_token.split(":", maxsplit=1) if page_token is not None else (CURRENT_USER_EPOCH, None)
-        )
-        epoch = int(epoch)
-
-        page = USERS.get_many(dict(epoch=epoch), pagination_token=pagination_token, limit=limit, reverse=True)
-
-        # If we are not currently at epoch > 1 and there are no more records in the current
-        # epoch, also include the first page of the next epoch.
-        if not page.next_page_token and epoch > 1:
-            epoch -= 1
-            next_epoch_page = USERS.get_many(dict(epoch=epoch), reverse=True, limit=limit)
-
-            # Build a new result page with both sets of records, ending with the next "next page" token
-            page = dynamo.ResultPage(list(page) + list(next_epoch_page),
-                                     next_epoch_page.next_page_token, page.prev_page_token)
-
-        # Prepend the epoch to the pagination tokens
-        if page.next_page_token:
-            page.next_page_token = f"{epoch}:{page.next_page_token}"
-        if page.prev_page_token:
-            page.prev_page_token = f"{epoch}:{page.prev_page_token}"
-        return page
+        return USERS.get_page(dict(epoch=CURRENT_USER_EPOCH), pagination_token=pagination_token,
+                              limit=limit, reverse=True)
 
     def get_all_public_programs(self):
         programs = PROGRAMS.get_many({"public": 1}, reverse=True)
@@ -449,6 +421,7 @@ class Database:
         the filters (on the server). The index we're using here has the 'lang', 'adventure_name' and
         'level' columns.
         """
+        # This index contains all fields so we can immediately filter on them
         filter = {}
         if level_filter:
             filter['level'] = int(level_filter)
@@ -457,9 +430,8 @@ class Database:
         if adventure_filter:
             filter['adventure_name'] = adventure_filter
 
-        page = PROGRAMS.get_many({'public': 1}, reverse=True, limit=limit,
-                                 pagination_token=pagination_token,)
-        return page
+        return PROGRAMS.get_page({'public': 1}, reverse=True, limit=limit,
+                                 pagination_token=pagination_token, timeout=3, fetch_factor=2.0)
 
     def add_public_profile_information(self, programs):
         """For each program in a list, note whether the author has a public profile or not.
