@@ -1914,25 +1914,25 @@ adventures:
                     ```
             13:
                 story_text: |
-                    现在您已经学习了如何使用函数，接下来您将学习如何使用带有参数的函数。
-                    **参数**是在函数内使用的变量。 它不在函数之外使用。
+                    Now that you've learned how to use functions, you'll learn how to use a function with an argument.
+                    An **argument** is a variable that is used within a function. It is not used outside the function.
 
-                    例如，在这段代码中，我们编写了歌曲“My Bonnie is over the ocean”的第一节。
-                    在此示例代码中使用了参数“place”。 Place 是一个仅在函数中使用的变量，因此是一个参数。
-                    为了使用“place”，我们在“{define} Song”之后放置了“{with} place”。
-                    当调用该函数时，计算机将用“{call} Song {with}”之后的文本替换参数“place”。
+                    For example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.
+                    In this example code the argument 'place' is used. Place is a variable that is only used in the function, so an argument.
+                    To use 'place' we have placed `{with} place` after `{define} song`.
+                    When the function is called, the computer will replace the argument 'place', with the piece of text after `{call} song {with}`.
 
-                    ＃＃＃ 锻炼
-                    这首歌的下一句是：
+                    ### Exercise
+                    The next verse of this song goes:
 
-                    ``not_hedy_code
-                    昨晚当我躺在枕头上
-                    昨晚当我躺在床上时
-                    昨晚当我躺在枕头上
-                    我梦见我的邦妮死了
-                    ````
+                    ```not_hedy_code
+                    Last night as I lay on my pillow
+                    Last night as I lay on my bed
+                    Last night as I lay on my pillow
+                    I dreamed that my Bonnie is dead
+                    ```
 
-                    你能用与示例相同的方式来编写这节经文吗？
+                    Can you program this verse in the same way as the example?
                 example_code: |
                     ```
                     {define} song {with} place
