@@ -126,3 +126,52 @@ document.addEventListener("updateTSCode", (e: any) => {
             });
     }, 1000);
 })
+
+class Dropdown extends HTMLElement {
+    constructor() {
+     super();
+    }
+    
+    connectedCallback() {
+      const template = document.getElementById('dropdown') as HTMLTemplateElement;
+      const clone = template.content.cloneNode(true) as HTMLElement;
+      this.appendChild(clone);
+      const select = this.querySelector('select');
+      if (select === null) {
+        throw new Error('Expected an inner select to go with the hedy-dropdown component!')
+      }
+      select.hidden = true;
+      const options = select.querySelectorAll('option');
+      const dropdownMenu = this.querySelector('.dropdown-menu')!;
+      if (select.multiple) {
+          const newDiv = document.createElement('div');
+          newDiv.classList.add('option');
+          newDiv.innerHTML = 'Select all';
+          newDiv.dataset['value'] = 'select_all';
+          dropdownMenu.appendChild(newDiv)
+      }
+      for (const option of options) {
+        const newDiv = document.createElement('div');
+        newDiv.classList.add('option');
+        newDiv.innerHTML = option.innerText;
+        newDiv.dataset['value'] = option.value;
+        newDiv.classList.toggle('selected', option.selected);
+        dropdownMenu.appendChild(newDiv)
+      }
+    }    
+  }
+  
+customElements.define('hedy-dropdown', Dropdown)
+
+
+export function toggleDropdown(event: Event) {
+    let element = event.target as HTMLElement;
+    if (element.tagName === 'SPAN') {
+        element = element.parentElement!
+    }    
+    const dropdown = element.parentElement?.querySelector('.dropdown-menu');    
+    if (dropdown === undefined || dropdown === null) {
+        throw new Error('Unexpected error!');
+    }
+    $(dropdown).slideToggle('medium');
+}
