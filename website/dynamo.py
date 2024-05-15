@@ -339,6 +339,11 @@ class Table:
         money, and may lead in receiving nearly no records. It is still
         important to pick a good key/index to read.
 
+        'filter' is a dictionary with a set of values that will be applied as a server-side
+        filter. The values should be either literal strings, ints or bools that are compared to the
+        values in the database literally, or instances of subclasses of `DynamoCondition`; currently
+        only `Between` exists as a Condition class.
+
         The result object will have `next_page_token` and `prev_page_token` members
         which can be used to paginate through the result set.
         """
@@ -408,10 +413,14 @@ class Table:
         or the timeout is hit.
 
         'server_side_filter' is a dictionary with a set of values that will be applied as a server-side
-        filter.
+        filter. The values should be either literal strings, ints or bools that are compared to the
+        values in the database literally, or instances of subclasses of `DynamoCondition`; currently
+        only `Between` exists as a Condition class.
 
-        'client_side_filter' is either a dictionary of values, or a callable that will be called
-        for every row, and should return `true` to include that row in the result set.
+        'client_side_filter' should be either a dictionary of values, or a callable that will be called
+        for every row. If it is a dictionary, the values in the dictionary must match the values
+        in the records; if it is a callable, it will be invoked for every row and the callable
+        should return True or False to indicate whether that row should be included.
         """
         if limit <= 0:
             raise ValueError('limit must be positive')
@@ -468,9 +477,6 @@ class Table:
             items,
             encode_page_token(next_page_token, False),
             encode_page_token(prev_page_token, True))
-
-
-
 
     def get_all(self, key, reverse=False, batch_size=None):
         """Return an iterator that will iterate over all elements in the table matching the query.
