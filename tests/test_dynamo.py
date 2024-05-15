@@ -396,6 +396,52 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
             [dict(id='key', sort=1, x=1, y=1, m=9)],
         ])
 
+    def test_get_page_and_back(self):
+        self.insert_many_sample_datas(40)
+
+        def even_only(row):
+            return row['sort'] % 2 == 0
+
+        key = dict(id='key')
+
+        # Get everything forward
+        pages = []
+        pagination_token = None
+        prev_page_token = None
+        while True:
+            page = self.table.get_page(key, 5, pagination_token=pagination_token, client_side_filter=even_only)
+            pages.append(list(page))
+            pagination_token, prev_page_token = page.next_page_token, page.prev_page_token
+            if not pagination_token:
+                break
+
+        # Then get everything backwards
+        prev_pages = []
+        while prev_page_token:
+            page = self.table.get_page(key, 5, pagination_token=prev_page_token, client_side_filter=even_only)
+            prev_pages.insert(0, list(page))
+            prev_page_token = page.prev_page_token
+
+        # Everything except the last page should be the same
+        self.assertGreater(len(pages), 3)
+        self.assertNotIn([], pages)
+        self.assertEqual(pages[:-1], prev_pages)
+
+    def test_get_page_pagination_makes_progress_even_if_cancelled(self):
+        """Even if all elements from a page are rejected and the query is cancelled, next_page_token still makes progress."""
+        self.insert_many_sample_datas(40)
+        key = dict(id='key')
+
+        rows = []
+        pagination_token = None
+        while True:
+            page = self.table.get_page(key, 5, pagination_token=pagination_token, client_side_filter=lambda row: row['sort'] > 20, timeout=dynamo.Cancel.immediate())
+            rows.extend(page)
+            pagination_token = page.next_page_token
+            if not pagination_token:
+                break
+        self.assertEqual(20, len(rows))
+
     def test_paginated_query_on_sortkey_index(self):
         self.insert_sample_data()
         pages = self.get_pages({'x': 1}, limit=1)

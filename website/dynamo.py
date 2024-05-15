@@ -202,8 +202,16 @@ class Cancel(metaclass=ABCMeta):
         return TimeoutCancellation(datetime.datetime.now() + duration)
 
     @staticmethod
+    def after_seconds(seconds):
+        return TimeoutCancellation(datetime.datetime.now() + datetime.timedelta(seconds=seconds))
+
+    @staticmethod
     def never():
-        return NeverCancellation()
+        return CallableCancellation(lambda: False)
+
+    @staticmethod
+    def immediate():
+        return CallableCancellation(lambda: True)
 
     def is_cancelled(self):
         ...
@@ -219,11 +227,13 @@ class TimeoutCancellation(Cancel):
         return datetime.datetime.now() >= self.deadline
 
 
-class NeverCancellation(Cancel):
-    """Never cancellation."""
+class CallableCancellation(Cancel):
+    """Use a callable as a cancellation token."""
+    def __init__(self, cb):
+        self.cb = cb
 
     def is_cancelled(self):
-        return False
+        return self.cb()
 
 
 class Table:
@@ -274,7 +284,8 @@ class Table:
             return first_or_none(
                 self.storage.query_index(
                     lookup.table_name, lookup.index_name, lookup.key, sort_key=lookup.sort_key, limit=1,
-                    keys_only=lookup.keys_only, table_key_names=self.key_schema.key_names, pagination_key=pagination_key,
+                    keys_only=lookup.keys_only, table_key_names=self.key_schema.key_names,
+                    pagination_key=pagination_key,
                 )[0]
             )
         assert False
@@ -320,16 +331,16 @@ class Table:
         partition key or an index key.
 
         `get_many` reads up to 1MB of data from the database, or a maximum of `limit`
-        records, whichever one is hit first.
+        records, whichever one is hit first. 'filter' is a dictionary of values
+        that will be applied server-side after reading. The response may contain
+        less than `limit` rows if 'filter' is used.
 
-        After reading, the items can be filtered by passing conditions in 'filter'.
-        Filtering happens after reading, and saves bytes sent over the wire. It is still
-        important to pick a good key to read.
+        Filtering saves bytes sent over the wire, but still costs time and
+        money, and may lead in receiving nearly no records. It is still
+        important to pick a good key/index to read.
 
-        If 'limit' is given, there looks to be a desire to do proper pagination.
-        To make the 'next_page_token' behavior more nice for user code, we query
-        1 record more than expected, and use that to make sure we don't return a
-        'next_page_token' if the page would have been empty anyway.
+        The result object will have `next_page_token` and `prev_page_token` members
+        which can be used to paginate through the result set.
         """
         querylog.log_counter(f"db_get_many:{self.table_name}")
 
@@ -382,7 +393,84 @@ class Table:
             items.reverse()
             next_page_token, prev_page_token = prev_page_token, next_page_token
 
-        return ResultPage(items, encode_page_token(next_page_token, False), encode_page_token(prev_page_token, True), pagination_key=pagination_key)
+        return ResultPage(
+            items,
+            encode_page_token(next_page_token, False),
+            encode_page_token(prev_page_token, True),
+            pagination_key=pagination_key)
+
+    def get_page(self, key, limit, reverse=False, pagination_token=None, server_side_filter=None,
+                 client_side_filter=None, timeout=5):
+        """Like `get_many()`, but may do multiple calls to the server to try and fill up the page to 'limit'.
+
+        `get_many()` does one call, and may return up to 'limit' items. If that happens, `get_page()`
+        will continue to make calls to fetch more items in order to return exactly 'limit' items,
+        or the timeout is hit.
+
+        'server_side_filter' is a dictionary with a set of values that will be applied as a server-side
+        filter.
+
+        'client_side_filter' is either a dictionary of values, or a callable that will be called
+        for every row, and should return `true` to include that row in the result set.
+        """
+        if limit <= 0:
+            raise ValueError('limit must be positive')
+        items = []
+        cancel = Cancel.after_seconds(timeout) if not isinstance(timeout, Cancel) else timeout
+        predicate = make_predicate(client_side_filter)
+
+        # We need to know if we're doing a prevpage query or not.
+        inverse_page, initial_pagination_token_dict = decode_page_token(pagination_token)
+
+        curr_pagination_token = pagination_token
+        more_items_remaining = False
+        dropped_remaining_in_this_page = False
+        first_page = None
+        while len(items) < limit:
+            space_remaining = limit - len(items)
+
+            page = self.get_many(key, reverse=reverse, limit=limit, pagination_token=curr_pagination_token, filter=server_side_filter)
+            if not first_page:
+                first_page = page
+            selected_in_this_page = [row for row in page if predicate(row)]
+
+            if inverse_page:
+                # They're already in the right order, but they need to go in the right place as well
+                items = selected_in_this_page[-space_remaining:] + items
+            else: # Forward
+                items.extend(selected_in_this_page[:space_remaining])
+            dropped_remaining_in_this_page = len(selected_in_this_page) > space_remaining
+
+            curr_pagination_token = page.next_page_token if not inverse_page else page.prev_page_token
+            if not curr_pagination_token or cancel.is_cancelled():
+                break
+
+        if inverse_page:
+            if dropped_remaining_in_this_page:
+                prev_page_token = page.pagination_key.extract_dict(items[0])
+            else:
+                # Need to decode because it will be re-encoded below
+                prev_page_token = decode_page_token(page.prev_page_token)[1] if page.prev_page_token else None
+
+            # The last element of the first page marks our next_page_token
+            next_page_token = page.pagination_key.extract_dict(first_page[-1]) if first_page else None
+        else:
+            if dropped_remaining_in_this_page:
+                next_page_token = page.pagination_key.extract_dict(items[-1])
+            else:
+                # Need to decode because it will be re-encoded below
+                next_page_token = decode_page_token(curr_pagination_token)[1] if curr_pagination_token else None
+
+            # The first element of the first page marks our prev_page_token
+            prev_page_token = page.pagination_key.extract_dict(first_page[0]) if first_page and pagination_token else None
+
+        return ResultPage(
+            items,
+            encode_page_token(next_page_token, False),
+            encode_page_token(prev_page_token, True))
+
+
+
 
     def get_all(self, key, reverse=False, batch_size=None):
         """Return an iterator that will iterate over all elements in the table matching the query.
@@ -901,7 +989,7 @@ class MemoryStorage(TableStorage):
                     pagination_key=None, keys_only=None, table_key_names=None, query_index=None, filter=None):
         """Query an index.
 
-        - keys: the key values. This may or may not contain the sort key, but it must at least contain the partition key.
+        - keys: the key values. May or may not contain the sort key, but it must at least contain the partition key.
         - sort_key: the field name of the sort key.
         - table_key_names: the keys in the table key, in order [partition, sort].
         """
@@ -1246,7 +1334,12 @@ def encode_page_token(x, inverted):
 
 
 def decode_page_token(x):
-    """Decode string page token to compound key (dict), and its inversion bit."""
+    """Decode string page token to compound key (dict), and its inversion bit.
+
+    'inverse' is not the same as 'reverse'. 'reverse' is the order the user wants
+    the rows from Dynamo in. 'inverse' is whether the order we're currently querying in
+    is the opposite of the desired 'reverse' order or not.
+    """
     if x is None:
         return False, None
     inverted = False
@@ -1436,3 +1529,14 @@ def reverse_index(xs):
     for key, value in xs:
         ret[value].append(key)
     return ret
+
+
+def make_predicate(obj):
+    if obj is None:
+        return lambda row: True
+    if callable(obj):
+        return obj
+    if isinstance(obj, dict):
+        return lambda row: all(row.get(key) == value for key, value in obj.items())
+    raise ValueError(f'Not a valid client_side_filter: {obj}')
+
