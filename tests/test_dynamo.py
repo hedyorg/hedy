@@ -435,7 +435,8 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
         rows = []
         pagination_token = None
         while True:
-            page = self.table.get_page(key, 5, pagination_token=pagination_token, client_side_filter=lambda row: row['sort'] > 20, timeout=dynamo.Cancel.immediate())
+            page = self.table.get_page(key, 5, pagination_token=pagination_token,
+                                       client_side_filter=lambda row: row['sort'] > 20, timeout=dynamo.Cancel.immediate())
             rows.extend(page)
             pagination_token = page.next_page_token
             if not pagination_token:
