@@ -437,10 +437,9 @@ class Table:
         batch_size = math.ceil(limit * max(1.0, fetch_factor))
 
         # We need to know if we're doing a prevpage query or not.
-        inverse_page, initial_pagination_token_dict = decode_page_token(pagination_token)
+        inverse_page, _ = decode_page_token(pagination_token)
 
         curr_pagination_token = pagination_token
-        more_items_remaining = False
         dropped_remaining_in_this_page = False
         first_page = None
         while len(items) < limit:
