@@ -230,6 +230,7 @@ class TimeoutCancellation(Cancel):
 
 class CallableCancellation(Cancel):
     """Use a callable as a cancellation token."""
+
     def __init__(self, cb):
         self.cb = cb
 
@@ -446,7 +447,8 @@ class Table:
         while len(items) < limit:
             space_remaining = limit - len(items)
 
-            page = self.get_many(key, reverse=reverse, limit=batch_size, pagination_token=curr_pagination_token, filter=server_side_filter)
+            page = self.get_many(key, reverse=reverse, limit=batch_size,
+                                 pagination_token=curr_pagination_token, filter=server_side_filter)
             if not first_page:
                 first_page = page
             selected_in_this_page = [row for row in page if predicate(row)]
@@ -454,7 +456,7 @@ class Table:
             if inverse_page:
                 # They're already in the right order, but they need to go in the right place as well
                 items = selected_in_this_page[-space_remaining:] + items
-            else: # Forward
+            else:  # Forward
                 items.extend(selected_in_this_page[:space_remaining])
             dropped_remaining_in_this_page = len(selected_in_this_page) > space_remaining
 
@@ -479,7 +481,8 @@ class Table:
                 next_page_token = decode_page_token(page.next_page_token)[1] if page.next_page_token else None
 
             # The first element of the first page marks our prev_page_token
-            prev_page_token = page.pagination_key.extract_dict(first_page[0]) if first_page and pagination_token else None
+            prev_page_token = page.pagination_key.extract_dict(
+                first_page[0]) if first_page and pagination_token else None
 
         return ResultPage(
             items,
@@ -1553,4 +1556,3 @@ def make_predicate(obj):
     if isinstance(obj, dict):
         return lambda row: all(row.get(key) == value for key, value in obj.items())
     raise ValueError(f'Not a valid client_side_filter: {obj}')
-
