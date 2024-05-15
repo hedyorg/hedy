@@ -468,7 +468,7 @@ class Table:
                 next_page_token = page.pagination_key.extract_dict(items[-1])
             else:
                 # Need to decode because it will be re-encoded below
-                next_page_token = decode_page_token(curr_pagination_token)[1] if curr_pagination_token else None
+                next_page_token = decode_page_token(page.next_page_token)[1] if page.next_page_token else None
 
             # The first element of the first page marks our prev_page_token
             prev_page_token = page.pagination_key.extract_dict(first_page[0]) if first_page and pagination_token else None
