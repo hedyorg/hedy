@@ -66,8 +66,9 @@ type InitializePageOptions =
 export function initialize(options: InitializeOptions) {
   setClientMessageLanguage(options.lang);
 
+  const level = options.level || (options.javascriptPageOptions as any).level
   initializeApp({
-    level: options.level,
+    level: level,
     keywordLanguage: options.keyword_language,
     staticRoot: options.staticRoot,
   });
