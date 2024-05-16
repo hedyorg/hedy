@@ -1080,7 +1080,12 @@ class ForTeachersModule(WebsiteModule):
                 lang=g.lang,
             ),
             javascript_page_options=dict(
-                page='customize-adventure'
+                page='customize-adventure',
+                lang=g.lang,
+                level=adventure.get("level"),
+                adventures=[adventure],
+                initial_tab='',
+                current_user_name=user['username'],
             )
         )
 

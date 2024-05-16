@@ -15,7 +15,7 @@ onclick="window.open('/for-teachers', '_self');">
             data-cy="settings"
             _="on click remove .tab-selected from .tab
                 add .tab-selected to me
-                toggle .hidden on .tab_content
+                add .hidden to .tab_content
                 remove .hidden from .settings"
             >
             {{_('general_settings')}}
@@ -43,6 +43,7 @@ onclick="window.open('/for-teachers', '_self');">
                 add .tab-selected to me
                 add .hidden to .tab_content
                 remove .hidden from .preview"
+            onclick="hedyApp.initializeCodePage({{javascript_page_options}});"
             >
             {{_('preview')}}
         </div>
@@ -67,14 +68,13 @@ onclick="window.open('/for-teachers', '_self');">
             {{_('tips')}}
         </div>
     </div>
-
     <div class="p-6 w-full overflow-auto bg-white mb-5 shadow-md">
 
-        <div class="tab_content settings">
+        <div class="tab_content px-10 settings">
             <form onsubmit="event.preventDefault (); hedyApp.update_adventure('{{ adventure.id }}', true, '{{_('update_adventure_prompt')}}')"
                 id="customize_adventure"
                 data-te-validation-init>
-                <div class="flex  gap-4">
+                <div class="flex gap-4">
                     <div class="flex flex-col w-full">
                         <div class="flex flex-row items-center mb-4">
                             <label for="name" class="inline-block w-40 text-xl">{{_('name')}}</label>
@@ -176,42 +176,44 @@ onclick="window.open('/for-teachers', '_self');">
                             </div>
                         </div> 
 
-                        <div class="flex flex-row items-center mb-4">  
-                            <label for="search_tags_input" class="inline-block w-40 text-xl">{{_('tags')}}</label>
-                            <div class="flex-1">
-                                <div class="flex flex-row w-full relative" id="add_tags">
-                                        <input type="text" name="tag" autocomplete="off" placeholder="{{_('tag_input_placeholder')}}" id="search_tags_input"
-                                            class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"
-                                            hx-trigger="keyup[keyCode == 13]"
-                                            data-autosaved="true"
-                                            hx-post="/tags/create/{{ adventure.id }}" 
-                                            hx-target="#tags-list"
-                                            hx-swap="outerHTML"
-                                            _="on click event.stopPropagation()
-                                                on keypress if event.keyCode == 13 event.stopPropagation() end
-                                                on htmx:beforeRequest event.preventDefault() then if my value == '' then detail.xhr.abort() end
-                                                on htmx:afterRequest set my value to '' then focus()" 
-                                            >
-                                        <button class="green-btn" id="add_adventure_tags"
-                                            hx-trigger="click"
-                                            hx-post="/tags/create/{{adventure.id}}"
-                                            hx-target="#tags-list"
-                                            hx-swap="outerHTML"
-                                            hx-include="[name='tag']"                                        
-                                            _="on htmx:afterRequest set value of #search_tags_input to ''"
-                                            >{{_('add')}}</button>
-        
-                                        <div
-                                            id="tags-dropdown"
-                                            hx-trigger="load"
-                                            hx-get="/tags?adventure_id={{adventure.id}}"
-                                            hx-target="#tags-dropdown"
-                                            hx-swap="outerHTML"
-                                        ></div>
+                        <div class="flex flex-row items-start mb-4">  
+                                <div class="flex flex-1">
+                                    <label for="search_tags_input" class="inline-block w-40 text-xl">{{_('tags')}}</label>
+                                    <div class="flex flex-1 flex-row w-full relative" id="add_tags">
+                                            <input type="text" name="tag" autocomplete="off" placeholder="{{_('tag_input_placeholder')}}" id="search_tags_input"
+                                                class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"
+                                                hx-trigger="keyup[keyCode == 13]"
+                                                data-autosaved="true"
+                                                hx-post="/tags/create/{{ adventure.id }}" 
+                                                hx-target="#tags-list"
+                                                hx-swap="outerHTML"
+                                                _="on click event.stopPropagation()
+                                                    on keypress if event.keyCode == 13 event.stopPropagation() end
+                                                    on htmx:beforeRequest event.preventDefault() then if my value == '' then detail.xhr.abort() end
+                                                    on htmx:afterRequest set my value to '' then focus()" 
+                                                >
+                                            <button class="green-btn" id="add_adventure_tags"
+                                                hx-trigger="click"
+                                                hx-post="/tags/create/{{adventure.id}}"
+                                                hx-target="#tags-list"
+                                                hx-swap="outerHTML"
+                                                hx-include="[name='tag']"                                        
+                                                _="on htmx:afterRequest set value of #search_tags_input to ''"
+                                                >{{_('add')}}</button>
+            
+                                            <div
+                                                id="tags-dropdown"
+                                                hx-trigger="load"
+                                                hx-get="/tags?adventure_id={{adventure.id}}"
+                                                hx-target="#tags-dropdown"
+                                                hx-swap="outerHTML"
+                                            ></div>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="flex-1">
+                                    {{ render_partial('htmx-tags-list.html', tags=adventure_tags, adventure_id=adventure.id, creator=adventure.creator) }}                  
+                                </div>
                         </div>
-                        {{ render_partial('htmx-tags-list.html', tags=adventure_tags, adventure_id=adventure.id, creator=adventure.creator) }}                  
                         <div class="flex flex-col items center mb-4 overflow-x-auto" id="warnings_container">
                             <div id="warningbox"
                                 class="flex-0 z-20 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md"
@@ -235,25 +237,25 @@ onclick="window.open('/for-teachers', '_self');">
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-row justify-end gap-2 my-4">
-                    <button type="button" class="green-btn" id="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">{{_('preview')}}</button>
-                    <button type="reset" class="red-btn" id="remove_adventure_button" 
-                    hx-confirm="{{_('delete_adventure_prompt')}}"
-                    hx-trigger="click"
-                    hx-delete="/for-teachers/customize-adventure/{{adventure.id}}"
-                    hx-swap="none"
-                    _="on htmx:afterRequest if detail.xhr.status == 200 then window.open('/for-teachers', '_self')"
-                    >{{_('remove')}}</button>
-                </div>
             </form>
-            <div>
-                <hr
-                class="my-12 mx-16 h-2 border-t-4 bg-neutral-100" />
+            <div class="flex gap-2">
+                <button type="button" class="green-btn" id="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">{{_('preview')}}</button>
+                <button type="reset" class="red-btn" id="remove_adventure_button" 
+                hx-confirm="{{_('delete_adventure_prompt')}}"
+                hx-trigger="click"
+                hx-delete="/for-teachers/customize-adventure/{{adventure.id}}"
+                hx-swap="none"
+                _="on htmx:afterRequest if detail.xhr.status == 200 then window.open('/for-teachers', '_self')"
+                >{{_('remove')}}</button>
+            </div>
 
+            
+                            <hr
+                            class="my-12 mx-16 h-2 border-t-4 bg-neutral-100" />
                 <div class="flex">
                     {% set usedInClasses = adventure_classes|length %}
                     {% if usedInClasses > 0 %}
-                        <div class="w-1/2">
+                        <div class="flex flex-col">
                             <h3>{{_('adventure_exp_classes')}}</h3>
                             
                             <div class="flex gap-2 flex-wrap">
@@ -265,7 +267,6 @@ onclick="window.open('/for-teachers', '_self');">
                         </div>
                     {% endif %}
                 </div>
-            </div>
         </div>
             
     <div class="tab_content editor hidden">
@@ -299,8 +300,29 @@ onclick="window.open('/for-teachers', '_self');">
         </div>
     </div>
 
-    <div class="tab_content preview">
+    {{adventure.example_code}}
+    <div class="tab_content preview hidden">
+              <div class="lg:flex lg:flex-row turn-pre-into-ace show-copy-button {% if adventure.is_teacher_adventure %}teacher-adv{% endif %}">
+                    <div class="w-full {% if adventure.example_code or adventure.is_teacher_adventure %}lg:w-1/2 {% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                        {{ adventure.content|commonmark }}
+                    </div>
+                  {% if adventure.example_code %}
+                      <div class="border"></div>
+                      <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
+                        {% if adventure.is_teacher_adventure %}{{ adventure.example_code|safe }}{% else %}{{ adventure.example_code|commonmark }}{% endif %}
+                      </div>
+                  {% endif %}
+                  {% if public_adventures_page %}
+                      <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
+                        {{ render_partial('htmx-adventure-card.html', user={"username": username}, adventure=adventure, level=level ) }}
+                      </div>
+                  {% endif %}
+              </div>
         {% include "incl/editor-and-output.html" %}
+    </div>
+
+    <div class="tab_content tips hidden">
+        tips here
     </div>
 
 </div>
