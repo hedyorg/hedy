@@ -21,7 +21,7 @@ describe('Go to level dropdown', () => {
       }
     });
     cy.get('[data-cy="view_class_link"]').contains(new RegExp(`^${classname}$`)).click();
-   cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide()).then($s => $s.length && $s.hide());
+   cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide());
     cy.getBySel('customize_class_button').click();
     cy.get("#opening_date_container").should("not.be.visible")
     cy.get("#opening_date_label").click();

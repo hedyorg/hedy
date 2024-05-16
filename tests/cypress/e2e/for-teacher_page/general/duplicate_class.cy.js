@@ -33,7 +33,7 @@ describe('Duplicate class tests', () => {
       }
     });
     cy.get('[data-cy="view_class_link"]').contains(duplicate_class).click();
-    cy.get("#customize-class-button").click();
+    cy.get('[data-cy="customize_class_button"]').click();
     cy.get("#opening_date_container").should("not.be.visible")
     cy.get("#opening_date_label").click();
     cy.get("#opening_date_container").should("be.visible")
@@ -69,7 +69,7 @@ describe('Duplicate class tests', () => {
     });
     cy.get('[data-cy="view_class_link"]').contains(duplicate_class).click();
     cy.get("#invites-block").should('be.visible');
-    cy.get("#customize-class-button").click();
+    cy.get('[data-cy="customize_class_button"]').click();
     cy.get("#opening_date_container").should("not.be.visible")
     cy.get("#opening_date_label").click();
     cy.get("#opening_date_container").should("be.visible")

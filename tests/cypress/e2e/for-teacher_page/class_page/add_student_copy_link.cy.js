@@ -1,4 +1,4 @@
-import {loginForTeacher, logout} from '../../tools/login/login.js'
+import {loginForTeacher} from '../../tools/login/login.js'
 
 it('Is able to see copy link to add student to class', () => {
     loginForTeacher();

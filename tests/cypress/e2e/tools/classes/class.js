@@ -58,7 +58,7 @@ export function addStudents(classname, count) {
     cy.get('[data-cy="view_class_link"]').contains(new RegExp(`^${classname}$`)).click();
     cy.wait(500);
 
-   cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide()).then($s => $s.length && $s.hide())
+   cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
     cy.get('[data-cy="add_student"]').click();
     cy.get('[data-cy="create_accounts"]').click();
     cy.wrap(students).each((student, index) => {
@@ -109,7 +109,7 @@ export function navigateToClass(classname) {
     });
     cy.get('[data-cy="view_class_link"]').contains(new RegExp(`^${classname}$`)).click();
     cy.wait(500);
-   cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide()).then($s => $s.length && $s.hide())
+   cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
 }
 
 export default {createClassAndAddStudents};

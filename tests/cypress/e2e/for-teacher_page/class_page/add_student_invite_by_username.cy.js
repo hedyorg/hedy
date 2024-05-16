@@ -10,7 +10,7 @@ it('Is able to add student by name', () => {
       }
     });
     cy.get('[data-cy="view_class_link"]').first().click();
-    cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide()).then($s => $s.length && $s.hide())
+    cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
 
     // delete student if in class
     cy.get('[data-cy="class_user_table"]').then(($div) => {

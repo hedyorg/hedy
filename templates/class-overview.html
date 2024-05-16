@@ -19,13 +19,13 @@
         <div class="flex flex-row items-center gap-2">
             <h1>{{ class_info.name }}</h1><span class="cursor-pointer" onclick='hedyApp.rename_class("{{class_info.id}}", {{_('class_name_prompt')|default(None)|tojson}})'>✏️</span>
             {% if class_info.students|length > 0 %}
-              <h2 id="survey_status_button" class="flex ltr:ml-auto rtl:mr-auto">
+              <h2 id="survey_status_button" data-cy="survey_status_button" class="flex ltr:ml-auto rtl:mr-auto">
                 {% if questions|length == 0 %}
                   {{_('survey_completed')}} ✅
                 {% else %}
                   <a class="cursor-pointer"
                     hx-post="/for-teachers/load-survey/{{class_info.id}}"
-                    hx-target="#survey"
+                    hx-target='[data-cy="survey"]'
                     hx-swap="outerHTML"
                   >{{_('survey')}} {{total_questions - questions|length}}/{{total_questions}}</a>
                 {% endif %}

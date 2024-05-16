@@ -36,7 +36,7 @@ describe('Is able to preview class', () => {
       }
     });
     cy.get("a.view_class").contains(className).click();
-    cy.get("button#customize-class-button").click();
+    cy.get('[data-cy="customize_class_button"]').click();
     cy.get("#levels-dropdown").select("1");
     // we remove the print command from our custom class
     cy.get("div[data-cy='print_command'] span").click();

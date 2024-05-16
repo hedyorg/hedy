@@ -1,5 +1,5 @@
 import {loginForTeacher} from '../../../tools/login/login.js'
-import {addStudents, createClassAndAddStudents, navigateToClass} from '../../../tools/classes/class.js'
+import {addStudents, navigateToClass} from '../../../tools/classes/class.js'
 
 let classname = "CLASS1";
 let students;

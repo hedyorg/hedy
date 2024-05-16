@@ -11,7 +11,7 @@ describe('customize class page', () => {
         }
       });
       cy.getBySel('view_class_link').first().click(); // Press on view class button
-     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide()).then($s => $s.length && $s.hide())
+     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
       cy.getBySel('customize_class_button').click(); // Press customize class button
       cy.get("#opening_date_container").should("not.be.visible")
       cy.get("#opening_date_label").click();
