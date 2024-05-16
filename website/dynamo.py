@@ -154,24 +154,15 @@ class ResultPage:
     """
 
     records: List[dict]
-    next_page_token: Optional[str]
     prev_page_token: Optional[str] = None
+    next_page_token: Optional[str] = None
 
     # Holds a reference to a PaginationKey object, which can be used to calculate
     # pagination keys for arbitrary elements from the result set if desired.
+    #
+    # This object may not always be present; it mostly exists for `get_page()` to
+    # be able to use the same pagination key as expected by `get_many()`.
     pagination_key: Optional['PaginationKey'] = None
-
-    def forward_token_from(self, row):
-        """Returns a forward pagination token from a given row."""
-        if not self.pagination_key:
-            raise RuntimeError('forward_token_from: ResultPage has not been created with a pagination_key')
-        return encode_page_token(self.pagination_key.extract_dict(row), False)
-
-    def inverse_token_from(self, row):
-        """Returns a reverse pagination token from a given row."""
-        if not self.pagination_key:
-            raise RuntimeError('inverse_token_from: ResultPage has not been created with a pagination_key')
-        return encode_page_token(self.pagination_key.extract_dict(row), True)
 
     @property
     def has_next_page(self):
@@ -337,7 +328,7 @@ class Table:
         else:
             items = [resp_dict.get(f'k{i}') for i in range(len(keys))]
             if isinstance(keys, ResultPage):
-                return ResultPage(items, keys.next_page_token, keys.prev_page_token)
+                return ResultPage(items, keys.prev_page_token, keys.next_page_token)
             return items
 
     @querylog.timed_as("db_get_many")
@@ -417,8 +408,8 @@ class Table:
 
         return ResultPage(
             items,
-            encode_page_token(next_page_token, False),
             encode_page_token(prev_page_token, True),
+            encode_page_token(next_page_token, False),
             pagination_key=pagination_key)
 
     def get_page(self, key, limit, reverse=False, pagination_token=None, server_side_filter=None,
@@ -503,8 +494,8 @@ class Table:
 
         return ResultPage(
             items,
-            encode_page_token(next_page_token, False),
-            encode_page_token(prev_page_token, True))
+            encode_page_token(prev_page_token, True),
+            encode_page_token(next_page_token, False))
 
     def get_all(self, key, reverse=False, batch_size=None):
         """Return an iterator that will iterate over all elements in the table matching the query.
@@ -608,7 +599,9 @@ class Table:
             items = items[:limit]
             next_page_token = pagination_key.extract_dict(items[-1]) if has_more_items else None
 
-        return ResultPage(items, encode_page_token(next_page_token, False), None, pagination_key=pagination_key)
+        return ResultPage(items,
+                          next_page_token=encode_page_token(next_page_token, False),
+                          pagination_key=pagination_key)
 
     @querylog.timed_as("db_describe")
     def item_count(self):
