@@ -328,7 +328,10 @@ class Table:
             raise ValueError(f'batch_get keys must contain {self.key_schema}, found: {non_matching_keys}')
 
         resp_dict = self.storage.batch_get_item(
-            self.table_name, {k: self.key_schema.extract(l) for k, l in keys_dict.items()}, table_key_names=self.key_schema.key_names)
+            self.table_name,
+            {k: self.key_schema.extract(l) for k, l in keys_dict.items()},
+            table_key_names=self.key_schema.key_names)
+
         if input_is_dict:
             return {k: resp_dict.get(k) for k in keys.keys()}
         else:
