@@ -14,7 +14,7 @@ function initializeVariables() {
     searchInput = document.getElementById('search_adventure') as HTMLInputElement;
 }
 
-document.addEventListener("DOMContentLoaded", prepareDropdowns);
+// document.addEventListener("DOMContentLoaded", prepareDropdowns);
 
 function prepareDropdowns() {
     const options = document.querySelectorAll('.option');
@@ -61,7 +61,7 @@ function prepareDropdowns() {
                 const currentValue = dropdown.getAttribute("data-value") || "";
                 nextValue = [currentValue, option.getAttribute("data-value") || ""].filter(v => v).join(",");
             } else {
-                nextValue =  option.getAttribute("data-value") || "";
+                nextValue = option.getAttribute("data-value") || "";
             }
             dropdown.setAttribute("data-value", nextValue)
             option.classList.toggle('selected');
@@ -70,29 +70,12 @@ function prepareDropdowns() {
         });
     });
 }
-    
 
-function getSelectedOptions(_options: NodeListOf<Element>) {
+
+function getSelectedOptions(_options: NodeListOf<HTMLElement>) {
     return Array.from(_options)
-        .filter(option => option.classList.contains('selected'))
+        .filter(option => option.classList.contains('selected') && option.dataset['value'] !== 'select_all')
         .map(option => option.textContent?.trim());
-}
-
-
-function updateLabelText(dropdown: Element) {
-    const toggleButton = dropdown.querySelector('.toggle-button') as Element;
-    const relativeOptions = dropdown.querySelectorAll(".option") as NodeListOf<Element>;
-    const label = toggleButton.querySelector(".label") as Element;
-    const selectedOptions = getSelectedOptions(relativeOptions);
-    let text: string;
-    if (selectedOptions.length === 0) {
-        text = label.getAttribute("data-value")!
-    } else if (selectedOptions.length < 6) {
-        text = selectedOptions.join(', ')
-    } else {
-        text = `${selectedOptions.length} ${ClientMessages['selected']}`
-    }
-    label.textContent = text;
 }
 
 
@@ -118,49 +101,111 @@ document.addEventListener("updateTSCode", (e: any) => {
     setTimeout(() => {
         initializeVariables();
         const js = e.detail;
-    
+
         updateURL();
         prepareDropdowns();
-        initialize({lang: js.lang, level: parseInt(js.level), keyword_language: js.lang,
+        initialize({
+            lang: js.lang, level: parseInt(js.level), keyword_language: js.lang,
             javascriptPageOptions: js
-            });
+        });
     }, 1000);
 })
 
-class Dropdown extends HTMLElement {
-    constructor() {
-     super();
-    }
+export class Dropdown extends HTMLElement {
+    multiple: boolean = false;
     
+    constructor() {
+        super();
+    }
     connectedCallback() {
-      const template = document.getElementById('dropdown') as HTMLTemplateElement;
-      const clone = template.content.cloneNode(true) as HTMLElement;
-      this.appendChild(clone);
-      const select = this.querySelector('select');
-      if (select === null) {
-        throw new Error('Expected an inner select to go with the hedy-dropdown component!')
-      }
-      select.hidden = true;
-      const options = select.querySelectorAll('option');
-      const dropdownMenu = this.querySelector('.dropdown-menu')!;
-      if (select.multiple) {
-          const newDiv = document.createElement('div');
-          newDiv.classList.add('option');
-          newDiv.innerHTML = 'Select all';
-          newDiv.dataset['value'] = 'select_all';
-          dropdownMenu.appendChild(newDiv)
-      }
-      for (const option of options) {
-        const newDiv = document.createElement('div');
-        newDiv.classList.add('option');
-        newDiv.innerHTML = option.innerText;
-        newDiv.dataset['value'] = option.value;
-        newDiv.classList.toggle('selected', option.selected);
-        dropdownMenu.appendChild(newDiv)
-      }
-    }    
-  }
-  
+        const template = document.getElementById('dropdown') as HTMLTemplateElement;
+        const clone = template.content.cloneNode(true) as HTMLElement;
+        this.appendChild(clone);
+        const select = this.querySelector('select');
+
+        if (select === null) {
+            throw new Error('Expected an inner select to go with the hedy-dropdown component!')
+        }
+
+        select.hidden = true;
+        const options = select.querySelectorAll('option');
+        const dropdownMenu = this.querySelector('.dropdown-menu')!;
+        this.multiple = select.multiple;
+        this.dataset['type'] = select.multiple ? 'multiple' : 'single';
+        if (select.multiple) {
+            const newDiv = document.createElement('div');
+            newDiv.classList.add('option');
+            newDiv.innerHTML = ClientMessages['select_all'];
+            newDiv.dataset['value'] = 'select_all';
+            dropdownMenu.appendChild(newDiv)
+            newDiv.addEventListener('click', this.onOptionClick)
+        }
+
+        for (const option of options) {
+            const newDiv = document.createElement('div');
+            newDiv.classList.add('option');
+            newDiv.innerHTML = option.innerText;
+            newDiv.dataset['value'] = option.value;
+            newDiv.classList.toggle('selected', option.selected);
+            dropdownMenu.appendChild(newDiv)
+            newDiv.addEventListener('click', this.onOptionClick)
+        }
+        updateLabelText(this.querySelector('.dropdown')!)
+    }
+
+    onOptionClick(this: HTMLDivElement, _event: MouseEvent) {        
+        const dropdown = this.closest("hedy-dropdown") as Element;
+        if (!dropdown) {
+            return;
+        }
+        const isSingleSelect = dropdown?.getAttribute('data-type') === 'single';
+    
+        if (isSingleSelect && !this.classList.contains('selected')) {
+            // Deselect other options within the same dropdown
+            const otherOptions = dropdown.querySelectorAll('.option.selected');
+            otherOptions.forEach(otherOption => otherOption.classList.remove('selected'));
+        }
+    
+        if (!isSingleSelect && this.getAttribute("data-value") === "select_all") {
+            const selected = !this.classList.contains("selected")
+            const otherOptions = dropdown.querySelectorAll('.option');
+            otherOptions.forEach(otherOption => {
+                if (otherOption.getAttribute('data-value') === 'select_all') return
+                otherOption.classList.toggle('selected', selected)
+            });
+        } else {
+            dropdown.querySelector('.option[data-value="select_all"]')?.classList.remove('selected')
+        }
+        this.classList.toggle('selected');
+        dropdown.dispatchEvent(new Event('change', { bubbles: true }))
+        updateLabelText(dropdown);
+        return;
+    }
+
+    get selected() {
+        let selected: string[] = []
+        this.querySelectorAll('.option.selected').forEach((el) => {
+            selected.push(el.getAttribute("data-value") as string)
+        })
+        return selected;
+    }
+}
+
+function updateLabelText(dropdown: Element) {
+    const toggleButton = dropdown.querySelector('.toggle-button') as Element;
+    const relativeOptions = dropdown.querySelectorAll(".option") as NodeListOf<HTMLElement>;
+    const label = toggleButton.querySelector(".label") as Element;
+    const selectedOptions = getSelectedOptions(relativeOptions);
+    let text: string;
+    if (selectedOptions.length === 0) {
+        text = label.getAttribute("data-value")!
+    } else if (selectedOptions.length < 6) {
+        text = selectedOptions.join(', ')
+    } else {
+        text = `${selectedOptions.length} ${ClientMessages['selected']}`
+    }
+    label.textContent = text;
+}
 customElements.define('hedy-dropdown', Dropdown)
 
 
@@ -168,8 +213,8 @@ export function toggleDropdown(event: Event) {
     let element = event.target as HTMLElement;
     if (element.tagName === 'SPAN') {
         element = element.parentElement!
-    }    
-    const dropdown = element.parentElement?.querySelector('.dropdown-menu');    
+    }
+    const dropdown = element.parentElement?.querySelector('.dropdown-menu');
     if (dropdown === undefined || dropdown === null) {
         throw new Error('Unexpected error!');
     }

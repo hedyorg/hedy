@@ -9,6 +9,7 @@ import { initializeTranslation } from './lezer-parsers/tokens';
 import { CustomWindow } from './custom-window';
 import { addCurlyBracesToCode, addCurlyBracesToKeyword } from './adventure';
 import { autoSave } from './autosave';
+import { Dropdown } from './public-adventures';
 
 declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
@@ -201,13 +202,8 @@ function update_db_adventure(adventure_id: string) {
   let classes: string[] = [];
   let levels: string[] = []
 
-  document.querySelectorAll('#levels_dropdown > .option.selected').forEach((el) => {
-    levels.push(el.getAttribute("data-value") as string)
-  })
-
-  document.querySelectorAll('#classes_dropdown > .option.selected').forEach((el) => {
-    classes.push(el.getAttribute("data-value") as string)
-  })
+  levels = (document.querySelector('#levels_dropdown') as Dropdown).selected
+  classes = (document.querySelector('#classes_dropdown') as Dropdown).selected
 
   const language = document.querySelector('#languages_dropdown> .option.selected')!.getAttribute('data-value') as string
 
