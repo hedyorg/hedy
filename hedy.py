@@ -3521,6 +3521,8 @@ def determine_roles(lookup, input_string, level, lang):
 
         if (assignments[0].tree.data == 'for_list'):
             roles_dictionary[var] = 'walker'
+        elif (assignments[0].tree.data == 'for_loop'):
+            roles_dictionary[var] = 'stepper'
         elif (assignments[0].type_ == 'list'):
             roles_dictionary[var] = 'container'
         elif (len(assignments) == 1):
