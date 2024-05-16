@@ -8,7 +8,7 @@ import TRADUCTION_IMPORT from '../../highlighting/highlighting-trad.json';
 import { convert } from "./utils";
 import { ClientMessages } from "./client-messages";
 import { autoSave } from "./autosave";
-import { HedySelect } from "./public-adventures";
+import { HedySelect } from "./custom-elements";
 
 declare let window: CustomWindow;
 

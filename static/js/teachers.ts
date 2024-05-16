@@ -9,7 +9,7 @@ import { initializeTranslation } from './lezer-parsers/tokens';
 import { CustomWindow } from './custom-window';
 import { addCurlyBracesToCode, addCurlyBracesToKeyword } from './adventure';
 import { autoSave } from './autosave';
-import { HedySelect } from './public-adventures';
+import { HedySelect } from './custom-elements';
 
 declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
