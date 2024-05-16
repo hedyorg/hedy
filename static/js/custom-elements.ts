@@ -38,6 +38,11 @@ export class HedySelect extends HTMLElement {
             newDiv.classList.toggle('selected', option.selected);
             dropdownMenu.appendChild(newDiv)
             newDiv.addEventListener('click', this.onOptionClick)
+            for(const attribute of option.attributes) {
+                if(attribute.name.includes('hx-')) {
+                    newDiv.setAttribute(attribute.name, attribute.value);
+                }
+            }
         }
         updateLabelText(this.querySelector('.dropdown')!)
     }
@@ -102,18 +107,3 @@ function updateLabelText(dropdown: Element) {
     }
     label.textContent = text;
 }
-
-export function toggleDropdown(event: Event) {
-    let element = event.target as HTMLElement;
-    if (element.tagName === 'SPAN') {
-        element = element.parentElement!
-    }
-    const dropdown = element.parentElement?.querySelector('.dropdown-menu');
-    if (dropdown === undefined || dropdown === null) {
-        throw new Error('Unexpected error!');
-    }
-    $(dropdown).slideToggle('medium');
-}
-
-customElements.define('hedy-select', HedySelect)
-

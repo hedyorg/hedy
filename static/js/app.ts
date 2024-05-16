@@ -24,6 +24,7 @@ import { stopDebug } from "./debugging";
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
 import { initializeActivity } from './user-activity';
+import { HedySelect } from './custom-elements';
 
 export let theGlobalDebugger: any;
 export let theGlobalEditor: HedyEditor;
@@ -116,6 +117,8 @@ const slides_template = `
 </body>
 </html>
 `;
+
+customElements.define('hedy-select', HedySelect)
 
 export interface InitializeAppOptions {
   readonly level: number;
@@ -2116,4 +2119,16 @@ export function goToLevel(level: any) {
   }
   window.location.pathname = newPath
   window.location.hash = hash
+}
+
+export function toggleDropdown(event: Event) {
+  let element = event.target as HTMLElement;
+  if (element.tagName === 'SPAN') {
+      element = element.parentElement!
+  }
+  const dropdown = element.parentElement?.querySelector('.dropdown-menu');
+  if (dropdown === undefined || dropdown === null) {
+      throw new Error('Unexpected error!');
+  }
+  $(dropdown).slideToggle('medium');
 }
