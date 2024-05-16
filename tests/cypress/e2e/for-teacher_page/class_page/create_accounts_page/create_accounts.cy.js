@@ -8,13 +8,9 @@ beforeEach(() => {
   loginForTeacher();
 })
 
-before(() => {
-  loginForTeacher();
-  ({classname, students} = createClassAndAddStudents());
-})
-
 describe('Testing a teacher account', () => {
   it('Is able to add rows to create more accounts', () => {
+    ({classname, students} = createClassAndAddStudents());
     cy.get('[data-cy="add_multiple_rows"]').click();
     cy.get(':nth-child(6) > [data-cy="username"]').should('have.value', '');
   })
@@ -28,6 +24,7 @@ describe('Testing a teacher account', () => {
   })
 
   it('Is able to download login credentials', () => {
+    ({classname, students} = createClassAndAddStudents());
     cy.readFile('cypress/downloads/accounts.csv');
   })
 
