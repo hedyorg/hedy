@@ -431,8 +431,8 @@ class Database:
             filter['adventure_name'] = adventure_filter
 
         ids = PROGRAMS.get_page({'public': 1}, reverse=True, limit=limit,
-                                 server_side_filter=filter, pagination_token=pagination_token,
-                                 timeout=3, fetch_factor=2.0)
+                                server_side_filter=filter, pagination_token=pagination_token,
+                                timeout=3, fetch_factor=2.0)
         ret = PROGRAMS.batch_get(ids)
         return ret
 
