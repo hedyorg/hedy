@@ -30,7 +30,7 @@ it('Is able to add student by name', () => {
 
     login(student, "123456");
 
-    cy.get('.dropdown > .menubar-text').click();
+    cy.get('[data-cy="user-dropdown"]').click();
     cy.get('[data-cy="my_account_button"]').click();
     cy.get('[data-cy="join_link"]').click();
 
@@ -44,7 +44,7 @@ it('Is able to add student by name', () => {
     });
     cy.get('[data-cy="view_class_link"]').first().click();
 
-    cy.get('.username_cell').should(($div) => {
+    cy.get('[data-cy="student_username_cell"]').should(($div) => {
       const text = $div.text()
       expect(text).include('student5');
     })
