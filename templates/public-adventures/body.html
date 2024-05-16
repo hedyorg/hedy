@@ -47,7 +47,19 @@
                   </div>
                 </div>
             </div>
-
+            <div id="levels_test" class="flex-1">
+              <hedy-select>
+                <select>
+                  {% for level in customizations["available_levels"] %}
+                      <option {% if selectedLevel|string == level|string %}selected{% endif %}
+                          hx-post="/public-adventures/filter?level={{level}}&lang={{selectedLang}}&tag={{selectedTag}}&search={{currentSearch}}"
+                          hx-target="#public-adventures"
+                          value="{{level}}"
+                      >{{ level }}</option>
+                  {% endfor %}
+                </select>
+              </hedy-select>
+            </div>              
             <div id="languages" class="flex-1">
                 <div class="dropdown relative" data-type="single" id="language-select" data-value="{{selectedLang}}">
                   <button class="toggle-button font-semibold rounded inline-flex justify-between 
