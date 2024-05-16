@@ -9,7 +9,7 @@ import { initializeTranslation } from './lezer-parsers/tokens';
 import { CustomWindow } from './custom-window';
 import { addCurlyBracesToCode, addCurlyBracesToKeyword } from './adventure';
 import { autoSave } from './autosave';
-import { Dropdown } from './public-adventures';
+import { HedySelect } from './public-adventures';
 
 declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
@@ -199,18 +199,19 @@ export function remove_student(class_id: string, student_id: string, prompt: str
 function update_db_adventure(adventure_id: string) {
   // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
   const adventure_name = $('#custom_adventure_name').val();
-  let classes: string[] = [];
-  let levels: string[] = []
 
-  levels = (document.querySelector('#levels_dropdown') as Dropdown).selected
-  classes = (document.querySelector('#classes_dropdown') as Dropdown).selected
-
-  const language = document.querySelector('#languages_dropdown> .option.selected')!.getAttribute('data-value') as string
+  const levels = (document.querySelector('#levels_dropdown') as HedySelect).selected
+  const classes = (document.querySelector('#classes_dropdown') as HedySelect).selected
+  const language = (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
 
   const content = DOMPurify.sanitize(window.ckEditor.getData());
   
   const parser = new DOMParser();
   const html = parser.parseFromString(content, 'text/html');
+  if(levels.length === 0) {
+    modal.notifyError('You have to select at least one level');
+    return;
+  }
   const minLevel = Math.min(...levels.map((el) => Number(el)));
   let snippets: string[] = [] ;
   let snippetsFormatted: string[] = [];

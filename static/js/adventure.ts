@@ -8,7 +8,7 @@ import TRADUCTION_IMPORT from '../../highlighting/highlighting-trad.json';
 import { convert } from "./utils";
 import { ClientMessages } from "./client-messages";
 import { autoSave } from "./autosave";
-import { Dropdown } from "./public-adventures";
+import { HedySelect } from "./public-adventures";
 
 declare let window: CustomWindow;
 
@@ -22,7 +22,7 @@ let keywordHasAlert: Map<string, boolean> = new Map()
 export async function initializeCustomAdventurePage(_options: InitializeCustomizeAdventurePage) {
     const editorContainer = document.querySelector('#adventure-editor') as HTMLElement;
     // Initialize the editor with the default language
-    let lang = (document.querySelector('#languages_dropdown') as Dropdown).selected[0]
+    let lang = (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
     const TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;    
     if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
     let TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
@@ -36,10 +36,11 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
     }
 
     $('#language').on('change', () => {
-        let lang = (document.querySelector('#languages_dropdown') as Dropdown).selected[0]
+        let lang = (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
         if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
         TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
     })
+
     // Autosave customize adventure page
     autoSave("customize_adventure")
     
@@ -51,7 +52,7 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
     })
 }
 function showWarningIfMultipleLevels() {
-    const numberOfLevels = (document.querySelector('#levels_dropdown') as Dropdown).selected.length;
+    const numberOfLevels = (document.querySelector('#levels_dropdown') as HedySelect).selected.length;
     const numberOfSnippets = document.querySelectorAll('pre[data-language="Hedy"]').length
     if(numberOfLevels > 1 && numberOfSnippets > 0) {
         $('#warningbox').show()
@@ -206,7 +207,7 @@ export function addCurlyBracesToCode(code: string, level: number, language: stri
 }
 
 export function addCurlyBracesToKeyword(name: string) {
-    let lang =  document.querySelector('#languages_dropdown> .option.selected')!.getAttribute('data-value') as string
+    let lang =  (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
     const TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;    
     if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
     let TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;

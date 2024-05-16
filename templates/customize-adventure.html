@@ -25,39 +25,39 @@ onclick="window.open('/for-teachers', '_self');">
                     <div class="flex flex-row items-center mb-4">
                         <label for="custom_adventure_classes" class="inline-block w-40 text-xl">{{_('used_in')}}</label>
                         <div class="flex-1">
-                            <hedy-dropdown id="classes_dropdown">
+                            <hedy-select id="classes_dropdown">
                                 <select multiple>
                                     {% for class in all_classes %}
                                         <option {% if class.id in adventure.classes %}selected{% endif %} value="{{class.id}}">{{ class.name }}</option>
                                     {% endfor %}
                                 </select>
-                            </hedy-dropdown>
+                            </hedy-select>
                         </div>
                     </div>
                     <div class="flex flex-row items-center mb-4">
                         <label for="custom_adventure_levels" class="inline-block w-40 text-xl">{{_('available_in')}}</label>
                         <div class="flex-1">
-                            <hedy-dropdown id="levels_dropdown">
+                            <hedy-select id="levels_dropdown">
                                 <select multiple>
                                     {% for i in range(1, (max_level + 1)) %}
                                         {% set adv_levels = adventure.levels if adventure.get("levels") else [adventure.level|string] %}
                                         <option {% if i|string in adv_levels %}selected{% endif %} data-value="{{i}}">{{ i }}</option>
                                     {% endfor %}
                                 </select>
-                            </hedy-dropdown>
+                            </hedy-select>
                         </div>
                     </div>
                     <div class="flex flex-row items-center mb-4">
                         <label class="inline-block w-40 text-xl" for="language">{{_('language')}}</label>
                         <div class="flex-1">
-                            <hedy-dropdown id="languages_dropdown">
+                            <hedy-select id="languages_dropdown">
                                 <select>
                                     <option value="{{ adventure['language'] or current_language().lang }}" selected>{{ lang_to_sym(adventure['language'] or current_language().lang) }}</option>
                                     {% for language in other_languages(adventure["language"]) %}
                                         <option value="{{ language.lang }}">{{ language.sym }}</option>
                                     {% endfor %}
                                 </select>
-                            </hedy-dropdown>
+                            </hedy-select>
                         </div>
                     </div>
 
@@ -217,8 +217,8 @@ onclick="window.open('/for-teachers', '_self');">
     </div>
 </template>
 
-<template id="dropdown">
-    <div class="dropdown dropdown-green rounded relative" id="custom_adventure_classes" data-value="" data-dropdown-initialize>
+<template id="hedy_select">
+    <div class="dropdown dropdown-green rounded relative">
         <button type="button" class="toggle-button font-semibold rounded inline-flex justify-between
                             appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
             onclick="hedyApp.toggleDropdown(event)">
@@ -238,8 +238,5 @@ onclick="window.open('/for-teachers', '_self');">
                                 end">
         </div>
     </div>
-</template>
-<template id="option">
-    <div class="option"></div>
 </template>
 {% endblock %}

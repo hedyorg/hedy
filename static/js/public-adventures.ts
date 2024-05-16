@@ -111,20 +111,20 @@ document.addEventListener("updateTSCode", (e: any) => {
     }, 1000);
 })
 
-export class Dropdown extends HTMLElement {
+export class HedySelect extends HTMLElement {
     multiple: boolean = false;
     
     constructor() {
         super();
     }
     connectedCallback() {
-        const template = document.getElementById('dropdown') as HTMLTemplateElement;
+        const template = document.getElementById('hedy_select') as HTMLTemplateElement;
         const clone = template.content.cloneNode(true) as HTMLElement;
         this.appendChild(clone);
         const select = this.querySelector('select');
 
         if (select === null) {
-            throw new Error('Expected an inner select to go with the hedy-dropdown component!')
+            throw new Error('Expected an inner select to go with the hedy-select component!')
         }
 
         select.hidden = true;
@@ -154,38 +154,40 @@ export class Dropdown extends HTMLElement {
     }
 
     onOptionClick(this: HTMLDivElement, _event: MouseEvent) {        
-        const dropdown = this.closest("hedy-dropdown") as Element;
-        if (!dropdown) {
+        const select = this.closest("hedy-select") as Element;
+        if (!select) {
             return;
         }
-        const isSingleSelect = dropdown?.getAttribute('data-type') === 'single';
+        const isSingleSelect = select?.getAttribute('data-type') === 'single';
     
         if (isSingleSelect && !this.classList.contains('selected')) {
             // Deselect other options within the same dropdown
-            const otherOptions = dropdown.querySelectorAll('.option.selected');
+            const otherOptions = select.querySelectorAll('.option.selected');
             otherOptions.forEach(otherOption => otherOption.classList.remove('selected'));
         }
     
         if (!isSingleSelect && this.getAttribute("data-value") === "select_all") {
             const selected = !this.classList.contains("selected")
-            const otherOptions = dropdown.querySelectorAll('.option');
+            const otherOptions = select.querySelectorAll('.option');
             otherOptions.forEach(otherOption => {
                 if (otherOption.getAttribute('data-value') === 'select_all') return
                 otherOption.classList.toggle('selected', selected)
             });
         } else {
-            dropdown.querySelector('.option[data-value="select_all"]')?.classList.remove('selected')
+            select.querySelector('.option[data-value="select_all"]')?.classList.remove('selected')
         }
         this.classList.toggle('selected');
-        dropdown.dispatchEvent(new Event('change', { bubbles: true }))
-        updateLabelText(dropdown);
+        select.dispatchEvent(new Event('change', { bubbles: true }))
+        updateLabelText(select);
         return;
     }
 
     get selected() {
         let selected: string[] = []
         this.querySelectorAll('.option.selected').forEach((el) => {
-            selected.push(el.getAttribute("data-value") as string)
+            if (el.getAttribute("data-value") !== 'select_all') {
+                selected.push(el.getAttribute("data-value") as string)
+            }
         })
         return selected;
     }
@@ -206,7 +208,7 @@ function updateLabelText(dropdown: Element) {
     }
     label.textContent = text;
 }
-customElements.define('hedy-dropdown', Dropdown)
+customElements.define('hedy-select', HedySelect)
 
 
 export function toggleDropdown(event: Event) {
