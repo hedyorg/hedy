@@ -235,7 +235,7 @@ class ForTeachersModule(WebsiteModule):
 
     @route("/class/<class_id>/programs/<username>", methods=["GET", "POST"])
     @requires_teacher
-    def public_programs(self, user, class_id, username): 
+    def public_programs(self, user, class_id, username):
         Class = self.db.get_class(class_id)
         if not Class:
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
