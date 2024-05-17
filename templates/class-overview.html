@@ -61,7 +61,7 @@
           </table>
       </div>
       {% if is_teacher and class_info.second_teachers %}
-        <div id="second_teachers_container" class="border-t border-gray-500 pt-4">
+        <div id="second_teachers_container" data-cy="second_teachers_container" class="border-t border-gray-500 pt-4">
           <h2>{{ _('teachers')}}</h2>
           {% if class_info.teacher == username and class_info.second_teachers|length > 1 %}<p class="text-red-500 mt-0 mb-2">{{_('second_teacher_warning')}}</p>{% endif %}
           <div class="border-solid border-2 border-orange-400 rounded p-4">
@@ -77,7 +77,7 @@
             <tbody id="class-user-table">
               {% for second_teacher in class_info.second_teachers %}
               <tr>
-                <td class="username_cell">{{second_teacher.username}}</td>
+                <td class="username_cell" data-cy="second_teacher_username_cell">{{second_teacher.username}}</td>
                 <td id="role_cell">{% if second_teacher.username == class_info.teacher %}{{_('creator').lower()}}{% else %}{{second_teacher.role}}{% endif %}</td>
                 {% if second_teacher.username != username %}
                   <td class="overview_cell"><a href="/for-teachers/class/{{class_info.id}}/programs/{{second_teacher.username}}" data-cy="programs"
@@ -110,7 +110,7 @@
                 <button class="green-btn" id="customize-class-button" data-cy="customize_class_button" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">View customizations</button>
             {% else %}
             {% if class_info.teacher == username %}
-              <button class="green-btn" id="add-second-teacher" _="on click call hedyApp.invite_student('{{class_info.id}}', {{_('second_teacher_prompt')|default(None)|tojson}}, '/invite-second-teacher')">{{_('invite_teacher')}}</button>
+              <button class="green-btn" data-cy="add_second_teacher" _="on click call hedyApp.invite_student('{{class_info.id}}', {{_('second_teacher_prompt')|default(None)|tojson}}, '/invite-second-teacher')">{{_('invite_teacher')}}</button>
             {% endif %}
 
                 <button class="green-btn" data-cy="add_student" _="on click toggle the *display of #add_students_options then toggle between .green-btn and .blue-btn on me">{{_('add_students')}}</button>
@@ -133,7 +133,7 @@
           </div>
       </div>
       {% if invites %}
-        <div id="invites-block" class="border-t border-gray-500 pt-4">
+        <div data-cy="invites_block" class="border-t border-gray-500 pt-4">
           <h2>{{_('pending_invites')}}</h2>
           <div class="inline-block border-solid border-2 border-orange-400 rounded mt-2 mb-4 p-4">
             <table class="table-auto text-sm">
@@ -149,11 +149,11 @@
             <tbody>
             {% for invite in invites %}
                 <tr>
-                    <td class="username_cell">{{invite.username}}</td>
+                    <td class="username_cell" data-cy="invite_username_cell">{{invite.username}}</td>
                     <td>{{invite.invited_as_text}}</td>
                     <td>{{invite.timestamp}}</td>
                     <td>{{invite.expire_timestamp}}</td>
-                    {% if not is_second_teacher %}<td class="remove_user_invitation text-center"><a href="#" onclick='hedyApp.remove_student_invite("{{invite.username}}", "{{ class_info.id }}", {{_('delete_invite_prompt')|default(None)|tojson}})'>🗑️</a></td>{% endif %}
+                    {% if not is_second_teacher %}<td class="remove_user_invitation text-center" data-cy="remove_user_invitation"><a href="#" onclick='hedyApp.remove_student_invite("{{invite.username}}", "{{ class_info.id }}", {{_('delete_invite_prompt')|default(None)|tojson}})'>🗑️</a></td>{% endif %}
                 </tr>
             {% endfor %}
             </tbody>

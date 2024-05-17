@@ -13,7 +13,7 @@
    <div class="flex flex-col gap-4 mx-4 lg:mx-16">
        {% if invitations %}
            <h1 class="section-header" id="my-messages" onclick="$ ('#messages').toggle()">{{_('my_messages')}}</h1>
-           <div id="messages" class="profile-section-body" style="display: block;">
+           <div id="messages" data-cy="messages" class="profile-section-body" style="display: block;">
              <h2 class="profile-section-body-header">{{_('my_messages')}}</h2>
              {% for invite_data in invitations %}
                  <div class="[&:not(:last-child)]:mb-4" id="invitation_{{loop.index}}">
