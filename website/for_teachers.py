@@ -245,6 +245,7 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_programs"))
 
         allowed_to_edit = session.get("class_id", False) and utils.can_edit_class(user, Class)
+
         if from_user and not utils.can_edit_class(user, Class):
             return utils.error_page(error=401, ui_message=gettext('not_teacher'))
 
