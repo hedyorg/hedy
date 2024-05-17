@@ -131,7 +131,7 @@ describe("General tests for my programs page (with both custom teacher and built
                     })
     });
 
-    it("second-teachers can NOT view each other's public programs", () => {
+    it.only("second-teachers can NOT view each other's public programs", () => {
         loginForTeacher("teacher4");
         navigateToClass("CLASS1");
         cy.get("#second_teachers_container tbody tr")

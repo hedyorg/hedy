@@ -236,6 +236,10 @@ class ForTeachersModule(WebsiteModule):
     @route("/class/<class_id>/programs/<username>", methods=["GET", "POST"])
     @requires_teacher
     def public_programs(self, user, class_id, username):
+        print("HELLO")
+        print(user)
+        print(class_id)
+        print(username)
         Class = self.db.get_class(class_id)
         if not Class:
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
@@ -245,7 +249,7 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_programs"))
 
         allowed_to_edit = session.get("class_id", False) and utils.can_edit_class(user, Class)
-
+        print(allowed_to_edit)
         if from_user and not utils.can_edit_class(user, Class):
             return utils.error_page(error=401, ui_message=gettext('not_teacher'))
 
