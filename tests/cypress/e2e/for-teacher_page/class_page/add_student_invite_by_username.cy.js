@@ -30,7 +30,7 @@ it('Is able to add student by name', () => {
 
     login(student, "123456");
 
-    cy.get('[data-cy="user-dropdown"]').click();
+    cy.get('[data-cy="user_dropdown"]').click();
     cy.get('[data-cy="my_account_button"]').click();
     cy.get('[data-cy="join_link"]').click();
 
