@@ -3534,8 +3534,10 @@ def determine_roles(lookup, input_string, level, lang):
     return roles_dictionary
 
 # This function strips the raw input_string so that info can be extracted to generate QLCs
+
+
 def analyze_code(input_string):
-    #Initialize the counters
+    # Initialize the counters
     num_ask = 0
     num_print = 0
     num_echo = 0
@@ -3543,20 +3545,20 @@ def analyze_code(input_string):
     num_forward = 0
     num_turn = 0
     variables = set()
-    
+
     commands = ['ask', 'print', 'echo', 'play', 'forward', 'turn']
-    
+
     # Splits the input string into lines
     raw_lines = input_string.split('\n')
     num_lines = len(raw_lines)
-    
-    lines = []  
-    
+
+    lines = []
+
     for raw_line in raw_lines:
-    
+
         line = raw_line.strip()
-        lines.append(line)  
-        
+        lines.append(line)
+
         # Checks for commands in each line
         if any(line.startswith(command) for command in commands):
             if line.startswith('ask'):
@@ -3572,12 +3574,12 @@ def analyze_code(input_string):
             elif line.startswith('turn'):
                 num_turn += 1
         else:
-            # Checks for variables 
+            # Checks for variables
             if ' is ' in line or ' = ' in line:
                 parts = line.split(' is ') if ' is ' in line else line.split(' = ')
                 variable = parts[0].strip()
                 variables.add(variable)
-                
+
     # Dictionary to store the extracted information
     info = {
         'num_lines': num_lines,
@@ -3594,9 +3596,10 @@ def analyze_code(input_string):
     print(info)
     return info
 
-#The generate_question function analyzes a given input string representing a student's code, 
-#collects relevant questions based on the commands found in the code, 
-#and then randomly selects one question to return. 
+# The generate_question function analyzes a given input string representing a student's code,
+# collects relevant questions based on the commands found in the code,
+# and then randomly selects one question to return.
+
 
 def generate_question(input_string):
     info = analyze_code(input_string)
@@ -3608,7 +3611,8 @@ def generate_question(input_string):
         question_list.extend([
             f"Which line in your code prints the message \"{message}\"? (Answer: Line {i})",
             f"Identify the text printed by the print statement in line {i}. (Answer: {message})",
-            f"What happens if you remove the print command from line {i} in your code? (Answer: The message \"{message}\" will not be printed.)",
+            f"What happens if you remove the print command from line {
+                i} in your code? (Answer: The message \"{message}\" will not be printed.)",
             "How would you modify your code to print \"Hedy is fun!\""
         ])
 
@@ -3621,7 +3625,8 @@ def generate_question(input_string):
 
     # Function to add echo-related questions
     def add_echo_questions():
-        question_list.append(f"What would happen if you wrote echo after the first echo command? (Answer: The message following the echo command will be printed twice.)")
+        question_list.append(
+            f"What would happen if you wrote echo after the first echo command? (Answer: The message following the echo command will be printed twice.)")
 
     # Function to add play-related questions
     def add_play_questions(line, i):
@@ -3635,7 +3640,8 @@ def generate_question(input_string):
     def add_forward_questions(line, i):
         question_list.extend([
             f"How many forward commands are in your code? (Answer: {info['num_forward']})",
-            f"How many steps does the turtle move forward in your step command in line {i}? (Answer: {line[len('forward '):]})",
+            f"How many steps does the turtle move forward in your step command in line {
+                i}? (Answer: {line[len('forward '):]})",
             "How would you modify your code to move the turtle forward by 200 steps?"
         ])
 
@@ -3650,10 +3656,10 @@ def generate_question(input_string):
     # Collect questions based on the commands found in the code
     for i, line in enumerate(info['lines'], 1):
         stripped_line = line.strip()
-        
+
         if stripped_line.startswith('print'):
             add_print_questions(stripped_line, i)
-        
+
         if stripped_line.startswith('ask'):
             add_ask_questions()
 
@@ -3678,6 +3684,7 @@ def generate_question(input_string):
 
     return selected_question
 
+
 # Example input_string
 input_string = """ask The main character of this story is
 print The main character is now going to walk in the forest
@@ -3686,7 +3693,6 @@ print They hear crazy noises everywhere
 print They're afraid this is a haunted forest"""
 question = generate_question(input_string)
 print(question)
-
 
 
 def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False, unused_allowed=False,
