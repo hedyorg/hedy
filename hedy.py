@@ -3533,6 +3533,161 @@ def determine_roles(lookup, input_string, level, lang):
 
     return roles_dictionary
 
+# This function strips the raw input_string so that info can be extracted to generate QLCs
+def analyze_code(input_string):
+    #Initialize the counters
+    num_ask = 0
+    num_print = 0
+    num_echo = 0
+    num_play = 0
+    num_forward = 0
+    num_turn = 0
+    variables = set()
+    
+    commands = ['ask', 'print', 'echo', 'play', 'forward', 'turn']
+    
+    # Splits the input string into lines
+    raw_lines = input_string.split('\n')
+    num_lines = len(raw_lines)
+    
+    lines = []  
+    
+    for raw_line in raw_lines:
+    
+        line = raw_line.strip()
+        lines.append(line)  
+        
+        # Checks for commands in each line
+        if any(line.startswith(command) for command in commands):
+            if line.startswith('ask'):
+                num_ask += 1
+            elif line.startswith('print'):
+                num_print += 1
+            elif line.startswith('echo'):
+                num_echo += 1
+            elif line.startswith('play'):
+                num_play += 1
+            elif line.startswith('forward'):
+                num_forward += 1
+            elif line.startswith('turn'):
+                num_turn += 1
+        else:
+            # Checks for variables 
+            if ' is ' in line or ' = ' in line:
+                parts = line.split(' is ') if ' is ' in line else line.split(' = ')
+                variable = parts[0].strip()
+                variables.add(variable)
+                
+    # Dictionary to store the extracted information
+    info = {
+        'num_lines': num_lines,
+        'num_ask': num_ask,
+        'num_print': num_print,
+        'num_echo': num_echo,
+        'num_play': num_play,
+        'num_forward': num_forward,
+        'num_turn': num_turn,
+        'num_variables': len(variables),
+        'variables': list(variables),
+        'lines': lines
+    }
+    print(info)
+    return info
+
+#The generate_question function analyzes a given input string representing a student's code, 
+#collects relevant questions based on the commands found in the code, 
+#and then randomly selects one question to return. 
+
+def generate_question(input_string):
+    info = analyze_code(input_string)
+    question_list = []
+
+    # Function to add print-related questions
+    def add_print_questions(line, i):
+        message = line[len('print '):]  # Remove the "print " part
+        question_list.extend([
+            f"Which line in your code prints the message \"{message}\"? (Answer: Line {i})",
+            f"Identify the text printed by the print statement in line {i}. (Answer: {message})",
+            f"What happens if you remove the print command from line {i} in your code? (Answer: The message \"{message}\" will not be printed.)",
+            "How would you modify your code to print \"Hedy is fun!\""
+        ])
+
+    # Function to add ask-related questions
+    def add_ask_questions():
+        question_list.extend([
+            f"How many ask commands are in your code? (Answer: {info['num_ask']})",
+            "How would you modify your code to also ask for your age?"
+        ])
+
+    # Function to add echo-related questions
+    def add_echo_questions():
+        question_list.append(f"What would happen if you wrote echo after the first echo command? (Answer: The message following the echo command will be printed twice.)")
+
+    # Function to add play-related questions
+    def add_play_questions(line, i):
+        question_list.extend([
+            f"How many play commands are in your code? (Answer: {info['num_play']})",
+            "How would you modify your code to play the note \"C5\"?",
+            f"Identify the note played by the play command in line {i}. (Answer: {line[len('play '):]})"
+        ])
+
+    # Function to add forward-related questions
+    def add_forward_questions(line, i):
+        question_list.extend([
+            f"How many forward commands are in your code? (Answer: {info['num_forward']})",
+            f"How many steps does the turtle move forward in your step command in line {i}? (Answer: {line[len('forward '):]})",
+            "How would you modify your code to move the turtle forward by 200 steps?"
+        ])
+
+    # Function to add turn-related questions
+    def add_turn_questions(line, i):
+        question_list.extend([
+            f"How many turn commands are in your code? (Answer: {info['num_turn']})",
+            f"Identify the direction of the turn command in line {i}. (Answer: {line[len('turn '):]})",
+            "How would you modify your code to end up with the turtle looking to the left?"
+        ])
+
+    # Collect questions based on the commands found in the code
+    for i, line in enumerate(info['lines'], 1):
+        stripped_line = line.strip()
+        
+        if stripped_line.startswith('print'):
+            add_print_questions(stripped_line, i)
+        
+        if stripped_line.startswith('ask'):
+            add_ask_questions()
+
+        if stripped_line.startswith('echo'):
+            add_echo_questions()
+
+        if stripped_line.startswith('play'):
+            add_play_questions(stripped_line, i)
+
+        if stripped_line.startswith('forward'):
+            add_forward_questions(stripped_line, i)
+
+        if stripped_line.startswith('turn'):
+            add_turn_questions(stripped_line, i)
+
+    # General questions about variables
+    for var in info['variables']:
+        question_list.append(f"What does the variable {var} represent in your code?")
+
+    # Randomly select one question from the list
+    selected_question = random.choice(question_list) if question_list else "No relevant questions generated."
+
+    return selected_question
+
+# Example input_string
+input_string = """ask The main character of this story is
+print The main character is now going to walk in the forest
+echo They're a bit scared,
+print They hear crazy noises everywhere
+print They're afraid this is a haunted forest"""
+question = generate_question(input_string)
+print(question)
+
+
 
 def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False, unused_allowed=False,
                     microbit=False):
