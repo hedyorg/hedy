@@ -15,12 +15,12 @@ class TestsTranslationLevel2(HedyTester):
     level = 2
     all_keywords = hedy_translation.all_keywords_to_dict()
 
-    def test_print(self):
-        code = "print Hallo welkom bij Hedy!"
+    def test_print_including_string(self):
+        code = "print Hallo, welkom Hedy!"
 
         result = hedy_translation.translate_keywords(
-            code, "nl", "en", self.level)
-        expected = "print Hallo welkom bij Hedy!"
+            code, "nl", "en", self.level, translate_strings=True)
+        expected = "print Hello, welcome Hedy!"
 
         self.assertEqual(expected, result)
 
@@ -69,6 +69,15 @@ class TestsTranslationLevel2(HedyTester):
 
         self.assertEqual(expected, result)
 
+    # def test_print_var_text_including_string(self):
+    #     code = "welcome is Hi welcome to Hedy\nprint welcome Enjoy!"
+    #
+    #     result = hedy_translation.translate_keywords(
+    #         code, "en", "nl", self.level, translate_strings=True)
+    #     expected = "welkom is Hallo welkom bij Hedy\nprint welkom Veel plezier"
+
+        self.assertEqual(expected, result)
+
     def test_ask_kewords(self):
         code = "hedy is vraag print ask echo"
 
@@ -93,6 +102,27 @@ class TestsTranslationLevel2(HedyTester):
         result = hedy_translation.translate_keywords(
             code, "nl", "en", self.level)
         expected = "mens is ask Hallo welkom bij Hedy!"
+
+        self.assertEqual(expected, result)
+
+    def test_ask_assign_dutch_english_including_string(self):
+        code = textwrap.dedent("""\
+            naam is vraag Hoe heet jij?
+            print Dus het is naam""")
+
+        result = hedy_translation.translate_keywords(
+            code, "nl", "en", self.level, translate_strings=True)
+
+        expected = textwrap.dedent("""\
+            naam is ask How is called you?
+            print So It is name""")
+
+        # the result sounds silly because all words are translated separately
+        # in levels 2 and 3, this is needed because words in between can be vars
+        # in level 4 it will magically be better
+
+        # we should, of course, changed but that's not easy, and for now it is better than what we have
+        # also: result is naam because ask vars are not yet translated!
 
         self.assertEqual(expected, result)
 

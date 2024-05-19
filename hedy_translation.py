@@ -1,5 +1,5 @@
 from collections import namedtuple
-from lark import Token, Visitor
+from lark import Token, Visitor, Tree
 from lark.exceptions import VisitError
 import hedy
 import operator
@@ -7,10 +7,15 @@ from os import path
 import hedy_content
 from website.yaml_file import YamlFile
 import copy
+from googletrans import Translator
+
 
 # Holds the token that needs to be translated, its line number, start and
 # end indexes and its value (e.g. ", ").
 Rule = namedtuple("Rule", "keyword line start end value")
+
+# stores the connection to Google Translate
+translator = Translator()
 
 
 def keywords_to_dict(lang="nl"):
@@ -73,7 +78,12 @@ def get_target_keyword(keyword_dict, keyword):
         return keyword
 
 
-def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
+def translate_string(string, from_lang, to_lang):
+    result = translator.translate(string, src=from_lang, dest=to_lang)
+    return result.text
+
+
+def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1, translate_strings=False):
     """ "Return code with keywords translated to language of choice in level of choice"""
 
     if input_string == "":
@@ -96,7 +106,7 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
 
         program_root = parser.parse(processed_input + "\n").children[0]
 
-        translator = Translator(processed_input)
+        translator = Translator(processed_input, translate_strings)
         translator.visit(program_root)
         ordered_rules = reversed(sorted(translator.rules, key=operator.attrgetter("line", "start")))
 
@@ -112,8 +122,17 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
                 target = get_target_keyword(keyword_dict_to, rule.keyword)
                 replaced_line = replace_token_in_line(line, rule, original, target)
                 result = replace_line(lines, rule.line - 1, replaced_line)
+            else:
+                if translate_strings:
+                    # this is not a keyword, so (for now) that means a text string that needs to be translated
+                    lines = result.splitlines()  # do we need to do this for each rule??
+                    line = lines[rule.line - 1]
+                    original = rule.value
+                    target = translate_string(original, from_lang, to_lang)
+                    replaced_line = replace_token_in_line(line, rule, original, target)
+                    result = replace_line(lines, rule.line - 1, replaced_line)
 
-        # For now the needed post processing is only removing the 'end-block's added during pre-processing
+                # For now the needed post processing is only removing the 'end-block's added during pre-processing
         result = "\n".join([line for line in result.splitlines()])
         result = result.replace("#ENDBLOCK", "")
 
@@ -146,11 +165,15 @@ def replace_line(lines, index, line):
 
 def replace_token_in_line(line, rule, original, target):
     """Replaces a token in a line from the user input with its translated equivalent"""
-    before = "" if rule.start == 0 else line[0: rule.start]
-    after = "" if rule.end == len(line) - 1 else line[rule.end + 1:]
-    # Note that we need to replace the target value in the original value because some
-    # grammar rules have ambiguous length and value, e.g. _COMMA: _SPACES*
-    # (latin_comma | arabic_comma) _SPACES*
+    if rule.keyword == 'text':
+        before = line[:rule.start]
+        after = line[rule.end-1:]
+    else:
+        before = "" if rule.start == 0 else line[0: rule.start]
+        after = "" if rule.end == len(line) - 1 else line[rule.end + 1:]
+        # Note that we need to replace the target value in the original value because some
+        # grammar rules have ambiguous length and value, e.g. _COMMA: _SPACES*
+        # (latin_comma | arabic_comma) _SPACES*
     return before + rule.value.replace(original, target) + after
 
 
@@ -194,9 +217,10 @@ class Translator(Visitor):
     in the user input string and original value. The information is later used to replace the token in
     the original user input with the translated token value."""
 
-    def __init__(self, input_string):
+    def __init__(self, input_string, translate_strings=False):
         self.input_string = input_string
         self.rules = []
+        self.translate_strings = translate_strings
 
     def define(self, tree):
         self.add_rule("_DEFINE", "define", tree)
@@ -216,12 +240,30 @@ class Translator(Visitor):
     def print(self, tree):
         self.add_rule("_PRINT", "print", tree)
 
+        if self.translate_strings:
+            # in addition to keywords, we are now also adding plain text strings
+            # like print arguments to the list of things that need to be translated
+            if len(tree.children) > 1:
+                # argument = str(tree.children[1].children[0])
+                for argument in tree.children:
+                    if type(argument) is Tree and argument.data == 'text':
+                        self.add_rule("text", "text", argument)  # this of course only support 1 string
+
     def print_empty_brackets(self, tree):
         self.print(tree)
 
     def ask(self, tree):
         self.add_rule("_IS", "is", tree)
         self.add_rule("_ASK", "ask", tree)
+
+        if self.translate_strings:  # it'd be nicer of course if this was not copy-paste from PRINT!
+            # in addition to keywords, we are now also adding plain text strings
+            # like ask arguments to the list of things that need to be translated
+            if len(tree.children) > 1:
+                # argument = str(tree.children[1].children[0])
+                for argument in tree.children:
+                    if type(argument) is Tree and argument.data == 'text':
+                        self.add_rule("text", "text", argument)  # this of course only support 1 string
 
     def echo(self, tree):
         self.add_rule("_ECHO", "echo", tree)
@@ -354,17 +396,27 @@ class Translator(Visitor):
         self.add_rule("_PRESSED", "pressed", tree)
 
     def add_rule(self, token_name, token_keyword, tree):
-        token = self.get_keyword_token(token_name, tree)
-        if token:
-            rule = Rule(
-                token_keyword, token.line, token.column - 1, token.end_column - 2, token.value
-            )
-            self.rules.append(rule)
+        if token_name == "text":  # this is not superduper pretty but for now it works!
+            token = tree.children[0]
+            if token:
+                rule = Rule(
+                    token_name, token.line, token.column - 1, token.end_column, token.value
+                )
+                self.rules.append(rule)
+        else:
+            token = self.get_keyword_token(token_name, tree)
+            if token:
+                rule = Rule(
+                    token_keyword, token.line, token.column - 1, token.end_column - 2, token.value
+                )
+                self.rules.append(rule)
 
-    def get_keyword_token(self, token_type, node):
-        for c in node.children:
+    def get_keyword_token(self, token_type, tree):
+        for c in tree.children:
             if type(c) is Token and c.type == token_type:
                 return c
+            if type(c) is Tree and c.data == token_type:
+                return c.children[0]
         return None
 
     def get_keyword_tokens(self, token_type, node):
