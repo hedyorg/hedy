@@ -27,7 +27,7 @@ code_id = get_column_number_by_name('code')
 experiment_language = get_column_number_by_name('Botswana_language')
 error_id = get_column_number_by_name('server_error')
 language = get_column_number_by_name('lang')
-adventure_name = get_column_number_by_name('name')
+class_name = get_column_number_by_name('name')
 username = get_column_number_by_name('username')
 
 for p in public_programs['rows']:
@@ -38,7 +38,7 @@ for p in public_programs['rows']:
                 username=p[username],
                 language=p[language],
                 # storing the classname in adventurename so I don't have to add one more field
-                adventure_name=p[adventure_name],
+                adventure_name=p[class_name],
                 experiment_language=p[experiment_language],
                 error=p[error_id]
                 )
@@ -49,7 +49,8 @@ with open('analysis.csv', 'w', newline='') as csvfile:
     writer.writerow(['program_id', 'username', 'language', 'experiment_language', 'class', 'number of lines',
                     'number of variables', 'number of commands', 'number of distinct commands', 'level', 'error_message'])
 
-
+analysis = False
+variables = True
 program_id = 0
 
 for snippet in snippets:
@@ -65,23 +66,33 @@ for snippet in snippets:
 
             lines = len(snippet.code.split('\n'))
 
-            with open('analysis.csv', 'a', newline='') as csvfile:
-                writer = csv.writer(csvfile)
-                writer.writerow([program_id, snippet.username, snippet.language, snippet.experiment_language, snippet.adventure_name, lines, len(
-                    all_variables), len(all_commands), len(set(all_commands)), snippet.level, ''])
+            if variables:
+                with open('variables.csv', 'a', newline='') as csvfile:
+                    writer = csv.writer(csvfile)
+                    for v in all_variables:
+                        writer.writerow([program_id, snippet.username, snippet.language, snippet.experiment_language, snippet.level, v])
+
+
+            if analysis:
+                with open('analysis.csv', 'a', newline='') as csvfile:
+                    writer = csv.writer(csvfile)
+                    writer.writerow([program_id, snippet.username, snippet.language, snippet.experiment_language, snippet.adventure_name, lines, len(
+                        all_variables), len(all_commands), len(set(all_commands)), snippet.level, ''])
 
             print(program_id, len(snippets), round(100 * program_id / len(snippets), 2))
 
         except Exception as E:
+            if analysis:
+                with open('analysis.csv', 'a', newline='') as csvfile:
+                    writer = csv.writer(csvfile)
+                    writer.writerow(
+                        [program_id, snippet.username, snippet.language, snippet.experiment_language,
+                         snippet.adventure_name,
+                         0, 0, 0, 0, snippet.level, str(E)])
+    else:
+        if analysis:
             with open('analysis.csv', 'a', newline='') as csvfile:
                 writer = csv.writer(csvfile)
                 writer.writerow(
-                    [program_id, snippet.username, snippet.language, snippet.experiment_language,
-                     snippet.adventure_name,
-                     0, 0, 0, 0, snippet.level, str(E)])
-    else:
-        with open('analysis.csv', 'a', newline='') as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow(
-                [program_id, snippet.username, snippet.language, snippet.experiment_language, snippet.adventure_name,
-                 0, 0, 0, 0, snippet.level, snippet.error])
+                    [program_id, snippet.username, snippet.language, snippet.experiment_language, snippet.adventure_name,
+                     0, 0, 0, 0, snippet.level, snippet.error])
