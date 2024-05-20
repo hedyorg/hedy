@@ -2703,7 +2703,6 @@ def public_user_page(username):
         if user_achievements.get('achieved'):
             last_achieved = user_achievements['achieved'][-1]
         certificate_message = safe_format(gettext('see_certificate'), username=username)
-        print(user_programs)
         # Todo: TB -> In the near future: add achievement for user visiting their own profile
         next_page_url = url_for(
             'public_user_page',
