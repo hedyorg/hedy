@@ -562,10 +562,6 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "range": range15,
             "return": returns15,
             "define": define15,
-            "true": true15,
-            "false": false15,
-            "True": True15,
-            "False": False15
         },
         specialize: {
             "if": if15,
@@ -580,7 +576,11 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "is": is15,
             "while": while15,
             "call": call15,
-            "with": with15
+            "with": with15,
+            "true": true15,
+            "false": false15,
+            "True": True15,
+            "False": False15
         },
     },
     16: {
