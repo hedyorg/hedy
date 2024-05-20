@@ -46,9 +46,9 @@ export class HedySelect extends HTMLElement {
         const span = this.getElementsByTagName('span')
         if (span.length !== 1) {
             throw new Error('HedySelect should only have one span element!');
-        }
+        }        
         span[0].dataset['value'] = label;
-        span[0].innerHTML = label;
+        span[0].textContent = label;
         updateLabelText(this.querySelector('.dropdown')!)
     }
 
