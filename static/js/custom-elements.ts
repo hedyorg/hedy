@@ -11,7 +11,7 @@ export class HedySelect extends HTMLElement {
         const clone = template.content.cloneNode(true) as HTMLElement;
         this.appendChild(clone);
         const select = this.querySelector('select');
-
+        const label = this.dataset['label'] || '';
         if (select === null) {
             throw new Error('Expected an inner select to go with the hedy-select component!')
         }
@@ -29,7 +29,6 @@ export class HedySelect extends HTMLElement {
             dropdownMenu.appendChild(newDiv)
             newDiv.addEventListener('click', this.onOptionClick)
         }
-
         for (const option of options) {
             const newDiv = document.createElement('div');
             newDiv.classList.add('option');
@@ -44,6 +43,12 @@ export class HedySelect extends HTMLElement {
                 }
             }
         }
+        const span = this.getElementsByTagName('span')
+        if (span.length !== 1) {
+            throw new Error('HedySelect should only have one span element!');
+        }
+        span[0].dataset['value'] = label;
+        span[0].innerHTML = label;
         updateLabelText(this.querySelector('.dropdown')!)
     }
 
