@@ -70,8 +70,8 @@ for snippet in snippets:
                 with open('variables.csv', 'a', newline='') as csvfile:
                     writer = csv.writer(csvfile)
                     for v in all_variables:
-                        writer.writerow([program_id, snippet.username, snippet.language, snippet.experiment_language, snippet.level, v])
-
+                        writer.writerow([program_id, snippet.username, snippet.language,
+                                        snippet.experiment_language, snippet.level, v])
 
             if analysis:
                 with open('analysis.csv', 'a', newline='') as csvfile:
