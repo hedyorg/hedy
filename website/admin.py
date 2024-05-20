@@ -117,6 +117,7 @@ class AdminModule(WebsiteModule):
             text_filter=substring,
             language_filter=language,
             keyword_language_filter=keyword_language,
+            prev_page_token=users.prev_page_token,
             next_page_token=users.next_page_token,
             current_page="admin",
             javascript_page_options=dict(page='admin-users'),

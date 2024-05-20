@@ -1742,7 +1742,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "fortune": "🔮, ✨",
     "haunted": "🦇, 👻, 🎃",
     "level_title": "级别",
-    "multiple_keywords_warning": "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}",
+    "multiple_keywords_warning": "您正在尝试使用关键字 {orig_keyword}，但该关键字可能有多种含义。 请从此列表中选择您要使用的一个，然后将其复制粘贴到您的代码中，包括大括号：{keyword_list}",
     "restaurant": "🍣, 🍕, 🍔",
     "rock": "✂️, 📜, 🗻",
     "select_all": "全选",

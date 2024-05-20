@@ -1066,6 +1066,8 @@ def programs_page(user):
 
     next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
+    prev_page_url = url_for('programs_page', **dict(request.args, page=result.prev_page_token)
+                            ) if result.prev_page_token else None
 
     return render_template(
         'programs.html',
@@ -1079,6 +1081,7 @@ def programs_page(user):
         adventure_names=adventure_names,
         max_level=hedy.HEDY_MAX_LEVEL,
         next_page_url=next_page_url,
+        prev_page_url=prev_page_url,
         second_teachers_programs=False,
         user_program_count=len(programs))
 
@@ -2138,6 +2141,7 @@ def explore():
 
     level = try_parse_int(request.args.get('level', default=None, type=str))
     adventure = request.args.get('adventure', default=None, type=str)
+    page = request.args.get('page', default=None, type=str)
     language = g.lang
 
     achievement = None
@@ -2145,16 +2149,22 @@ def explore():
         achievement = ACHIEVEMENTS.add_single_achievement(
             current_user()['username'], "indiana_jones")
 
-    programs = DATABASE.get_public_programs(
-        limit=40,
+    result = DATABASE.get_public_programs(
+        limit=42,  # 3 columns so make it a multiple of 3
         level_filter=level,
         language_filter=language,
-        adventure_filter=adventure)
+        adventure_filter=adventure,
+        pagination_token=page)
+    next_page_url = url_for('explore', **dict(request.args, page=result.next_page_token)
+                            ) if result.next_page_token else None
+    prev_page_url = url_for('explore', **dict(request.args, page=result.prev_page_token)
+                            ) if result.prev_page_token else None
+
     favourite_programs = DATABASE.get_hedy_choices()
 
     # Do 'normalize_public_programs' on both sets at once, to save database calls
-    normalized = normalize_public_programs(list(programs) + list(favourite_programs.records))
-    programs, favourite_programs = split_at(len(programs), normalized)
+    normalized = normalize_public_programs(list(result) + list(favourite_programs.records))
+    programs, favourite_programs = split_at(len(result), normalized)
 
     # Filter out programs that are Hedy favorite choice.
     programs = [program for program in programs if program['id'] not in {fav['id'] for fav in favourite_programs}]
@@ -2167,6 +2177,8 @@ def explore():
         programs=programs,
         favourite_programs=favourite_programs,
         filtered_level=str(level) if level else None,
+        next_page_url=next_page_url,
+        prev_page_url=prev_page_url,
         achievement=achievement,
         filtered_adventure=adventure,
         filtered_lang=language,
@@ -2192,10 +2204,13 @@ def normalize_public_programs(programs):
     for program in programs:
         program = pre_process_explore_program(program)
 
+        # There is a record somewhere that doesn't have a code field, guard against that
+        code = program.get('code', '')
+
         ret.append(dict(program,
                         hedy_choice=True if program.get('hedy_choice') == 1 else False,
-                        code="\n".join(program['code'].split("\n")[:4]),
-                        number_lines=program['code'].count('\n') + 1))
+                        code="\n".join(code.split("\n")[:4]),
+                        number_lines=code.count('\n') + 1))
     DATABASE.add_public_profile_information(ret)
     return ret
 
@@ -2688,7 +2703,6 @@ def public_user_page(username):
         if user_achievements.get('achieved'):
             last_achieved = user_achievements['achieved'][-1]
         certificate_message = safe_format(gettext('see_certificate'), username=username)
-        print(user_programs)
         # Todo: TB -> In the near future: add achievement for user visiting their own profile
         next_page_url = url_for(
             'public_user_page',
