@@ -195,24 +195,7 @@ export function remove_student(class_id: string, student_id: string, prompt: str
   });
 }
 
-function update_db_adventure(adventure_id: string) {
-  // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
-  const adventure_name = $('#custom_adventure_name').val();
-  let classes: string[] = [];
-  let levels: string[] = []
-
-  document.querySelectorAll('#levels_dropdown > .option.selected').forEach((el) => {
-    levels.push(el.getAttribute("data-value") as string)
-  })
-
-  document.querySelectorAll('#classes_dropdown > .option.selected').forEach((el) => {
-    classes.push(el.getAttribute("data-value") as string)
-  })
-
-  const language = document.querySelector('#languages_dropdown> .option.selected')!.getAttribute('data-value') as string
-
-  const content = DOMPurify.sanitize(window.ckEditor.getData());
-  
+function get_formatted_content(content: string, levels: string[], language: string) {
   const parser = new DOMParser();
   const html = parser.parseFromString(content, 'text/html');
   const minLevel = Math.min(...levels.map((el) => Number(el)));
@@ -248,6 +231,30 @@ function update_db_adventure(adventure_id: string) {
   }
   // We have to replace <br> for newlines, because the serializer swithces them around
   const formatted_content = html.getElementsByTagName('body')[0].outerHTML.replace(/<br>/g, '\n');
+  return formatted_content
+}
+
+function update_db_adventure(adventure_id: string) {
+  // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
+  const adventure_name = $('#custom_adventure_name').val();
+  let classes: string[] = [];
+  let levels: string[] = []
+
+  document.querySelectorAll('#levels_dropdown > .option.selected').forEach((el) => {
+    levels.push(el.getAttribute("data-value") as string)
+  })
+
+  document.querySelectorAll('#classes_dropdown > .option.selected').forEach((el) => {
+    classes.push(el.getAttribute("data-value") as string)
+  })
+
+  const language = document.querySelector('#languages_dropdown> .option.selected')!.getAttribute('data-value') as string
+
+  const content = DOMPurify.sanitize(window.ckEditor.getData());
+  const solutionExampleCode = DOMPurify.sanitize(window.ckSolutionEditor.getData());
+  
+  const formatted_content = get_formatted_content(content, levels, language);
+  const formatted_solution_code = get_formatted_content(solutionExampleCode, levels, language);
   const agree_public = $('#agree_public').prop('checked');
 
   $.ajax({
@@ -258,6 +265,7 @@ function update_db_adventure(adventure_id: string) {
       name: adventure_name,
       content: content,
       formatted_content: formatted_content,
+      formatted_solution_code: formatted_solution_code,
       public: agree_public,
       language,
       classes,

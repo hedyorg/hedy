@@ -1111,6 +1111,8 @@ class ForTeachersModule(WebsiteModule):
             return gettext("public_invalid"), 400
         if 'formatted_content' in body and not isinstance(body.get("formatted_content"), str):
             return gettext("content_invalid"), 400
+        if 'formatted_solution_code' in body and not isinstance(body.get("formatted_solution_code"), str):
+            return gettext("content_invalid"), 400
         if not isinstance(body.get("language"), str) or body.get("language") not in hedy_content.ALL_LANGUAGES.keys():
             # we're incrementally integrating language into adventures; i.e., not all adventures have a language field.
             body["language"] = g.lang
@@ -1142,6 +1144,8 @@ class ForTeachersModule(WebsiteModule):
             body["content"].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
             if 'formatted_content' in body:
                 body['formatted_content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
+            if 'formatted_solution_code' in body:
+                body['formatted_solution_code'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
         except BaseException:
             return gettext("something_went_wrong_keyword_parsing"), 400
 
@@ -1155,6 +1159,7 @@ class ForTeachersModule(WebsiteModule):
             "content": body["content"],
             "public": 1 if body["public"] else 0,
             "language": body["language"],
+            "solution_example": body["formatted_solution_code"],
         }
 
         if 'formatted_content' in body:

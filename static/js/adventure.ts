@@ -20,6 +20,7 @@ let keywordHasAlert: Map<string, boolean> = new Map()
 
 export async function initializeCustomAdventurePage(_options: InitializeCustomizeAdventurePage) {
     const editorContainer = document.querySelector('#adventure-editor') as HTMLElement;
+    const editorSolutionExampleContainer = document.querySelector('#adventure-solution-editor') as HTMLElement;
     // Initialize the editor with the default language
     let lang =  document.querySelector('#languages_dropdown> .option.selected')!.getAttribute('data-value') as string
     const TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;    
@@ -28,6 +29,7 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
 
     if (editorContainer) {
         await initializeEditor(lang, editorContainer);
+        await initializeEditor(lang, editorSolutionExampleContainer, true);
         showWarningIfMultipleKeywords(TRADUCTION)
         $editor.model.document.on('change:data', () => {
             showWarningIfMultipleKeywords(TRADUCTION)
@@ -107,12 +109,8 @@ function findCoincidences(name: string, TRADUCTION: Map<string, string>) {
     return coincidences;
 }
 
-function initializeEditor(language: string, editorContainer: HTMLElement): Promise<void> {
+function initializeEditor(language: string, editorContainer: HTMLElement, solutionExample=false): Promise<void> {
     return new Promise((resolve, reject) => {
-        if ($editor) {
-            $editor.destroy();
-        }
-
         ClassicEditor
             .create(editorContainer, {
                 codeBlock: {
@@ -123,9 +121,13 @@ function initializeEditor(language: string, editorContainer: HTMLElement): Promi
                 language,
             })
             .then(editor => {
-                window.ckEditor = editor;
-                $editor = editor;
-                $editor.model.document.on("change:data", e => autoSave("customize_adventure", e))
+                if (solutionExample) {
+                    window.ckSolutionEditor = editor;
+                } else {
+                    window.ckEditor = editor;
+                    $editor = editor;
+                }
+                editor.model.document.on("change:data", e => autoSave("customize_adventure", e))
                 resolve();
             })
             .catch(error => {
