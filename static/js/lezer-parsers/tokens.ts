@@ -580,7 +580,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "true": true15,
             "false": false15,
             "True": True15,
-            "False": False15
+            "False": False15,
         },
     },
     16: {
@@ -605,10 +605,6 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "range": range16,
             "return": returns16,
             "define": define16,
-            "low_true": true16,
-            "low_false": false16,
-            "cap_true": True16,
-            "cap_false": False16
         },
         specialize: {
             "if": if16,
@@ -622,7 +618,11 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "is": is16,
             "while": while16,
             "call": call16,
-            "with": with16
+            "with": with16,
+            "true": true16,
+            "false": false16,
+            "True": True16,
+            "False": False16,
         },
     },
     17: {
@@ -647,10 +647,6 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "range": range17,
             "return": returns17,
             "define": define17,
-            "low_true": true17,
-            "low_false": false17,
-            "cap_true": True17,
-            "cap_false": False17
         },
         specialize: {
             "if": if17,
@@ -665,7 +661,11 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "while": while17,
             "elif": elif17,
             "call": call17,
-            "with": with17
+            "with": with17,
+            "true": true17,
+            "false": false17,
+            "True": True17,
+            "False": False17,
         },
     },
     18 : {
@@ -699,10 +699,10 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "return": returns18,
             "for": fors18,
             "elif": elif18,
-            "low_true": true18,
-            "low_false": false18,
-            "cap_true": True18,
-            "cap_false": False18
+            "true": true18,
+            "false": false18,
+            "True": True18,
+            "False": False18,
         },
         extend: {}
     }

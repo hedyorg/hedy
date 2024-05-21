@@ -77,11 +77,11 @@ binaryExpression {
     Expression !plus Op<"+" | "-"> Expression
 }
 
-boolean { low_true | low_false | cap_true | cap_false }
+boolean[@dynamicPrecedence=10] { low_true | low_false | cap_true | cap_false }
 
 Expression {
-    Number |
     boolean |
+    Number |
     Text |
     String |
     Call |
