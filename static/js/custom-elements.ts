@@ -91,6 +91,7 @@ export class HedySelect extends HTMLElement {
         return selected;
     }
 }
+
 function getSelectedOptions(_options: NodeListOf<HTMLElement>) {
     return Array.from(_options)
         .filter(option => option.classList.contains('selected') && option.dataset['value'] !== 'select_all')
@@ -112,3 +113,17 @@ function updateLabelText(dropdown: Element) {
     }
     label.textContent = text;
 }
+
+export function toggleDropdown(event: Event) {
+    let element = event.target as HTMLElement;
+    if (element.tagName === 'SPAN') {
+        element = element.parentElement!
+    }
+    const dropdown = element.parentElement?.querySelector('.dropdown-menu');
+    if (dropdown === undefined || dropdown === null) {
+        throw new Error('Unexpected error!');
+    }
+    $(dropdown).slideToggle('medium');
+}
+
+customElements.define('hedy-select', HedySelect)

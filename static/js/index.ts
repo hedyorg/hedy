@@ -30,3 +30,4 @@ export * from './user-activity';
 export * from './adventure';
 export * from './microbit';
 export * from './autosave';
+export * from './custom-elements';

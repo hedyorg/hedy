@@ -2120,15 +2120,3 @@ export function goToLevel(level: any) {
   window.location.pathname = newPath
   window.location.hash = hash
 }
-
-export function toggleDropdown(event: Event) {
-  let element = event.target as HTMLElement;
-  if (element.tagName === 'SPAN') {
-      element = element.parentElement!
-  }
-  const dropdown = element.parentElement?.querySelector('.dropdown-menu');
-  if (dropdown === undefined || dropdown === null) {
-      throw new Error('Unexpected error!');
-  }
-  $(dropdown).slideToggle('medium');
-}
