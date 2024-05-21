@@ -1664,12 +1664,6 @@ class ConvertToPython_1(ConvertToPython):
     def NEGATIVE_NUMBER(self, meta, args):
         return str(int(args[0]))
 
-    def true(self, meta, args):
-        return str(bool(args[0]))
-
-    def false(self, meta, args):
-        return str(bool(args[0]))
-
     def print(self, meta, args):
         # escape needed characters
         argument = process_characters_needing_escape(args[0])
