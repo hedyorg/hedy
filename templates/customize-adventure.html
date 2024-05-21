@@ -26,39 +26,33 @@ onclick="window.open('/for-teachers', '_self');">
                     <div class="flex flex-row items-center mb-4">
                         <label for="custom_adventure_classes" class="inline-block w-40 text-xl">{{_('used_in')}}</label>
                         <div class="flex-1">
-                            <hedy-select id="classes_dropdown" data-label="{{_('used_in')}}">
-                                <select multiple>
-                                    {% for class in all_classes %}
-                                        <option {% if class.id in adventure.classes %}selected{% endif %} value="{{class.id}}">{{ class.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </hedy-select>
+                            <custom-select data-type="multiple" id="classes_dropdown" data-label="{{_('used_in')}}">
+                                {% for class in all_classes %}
+                                    <option {% if class.id in adventure.classes %}selected{% endif %} value="{{class.id}}">{{ class.name }}</option>
+                                {% endfor %}
+                            </custom-select>
                         </div>
                     </div>
                     <div class="flex flex-row items-center mb-4">
                         <label for="custom_adventure_levels" class="inline-block w-40 text-xl">{{_('available_in')}}</label>
                         <div class="flex-1">
-                            <hedy-select id="levels_dropdown" data-label="{{_('select_levels')}}">
-                                <select multiple>
-                                    {% for i in range(1, (max_level + 1)) %}
-                                        {% set adv_levels = adventure.levels if adventure.get("levels") else [adventure.level|string] %}
-                                        <option {% if i|string in adv_levels %}selected{% endif %} data-value="{{i}}">{{ i }}</option>
-                                    {% endfor %}
-                                </select>
-                            </hedy-select>
+                            <custom-select data-type="multiple" id="levels_dropdown" data-label="{{_('select_levels')}}">
+                                {% for i in range(1, (max_level + 1)) %}
+                                    {% set adv_levels = adventure.levels if adventure.get("levels") else [adventure.level|string] %}
+                                    <option {% if i|string in adv_levels %}selected{% endif %} data-value="{{i}}">{{ i }}</option>
+                                {% endfor %}
+                            </custom-select>
                         </div>
                     </div>
                     <div class="flex flex-row items-center mb-4">
                         <label class="inline-block w-40 text-xl" for="language">{{_('language')}}</label>
                         <div class="flex-1">
-                            <hedy-select id="languages_dropdown" data-label="{{_('select_lang')}}">
-                                <select>
-                                    <option value="{{ adventure['language'] or current_language().lang }}" selected>{{ lang_to_sym(adventure['language'] or current_language().lang) }}</option>
-                                    {% for language in other_languages(adventure["language"]) %}
-                                        <option value="{{ language.lang }}">{{ language.sym }}</option>
-                                    {% endfor %}
-                                </select>
-                            </hedy-select>
+                            <custom-select data-type="single" id="languages_dropdown" data-label="{{_('select_lang')}}">
+                                <option value="{{ adventure['language'] or current_language().lang }}" selected>{{ lang_to_sym(adventure['language'] or current_language().lang) }}</option>
+                                {% for language in other_languages(adventure["language"]) %}
+                                    <option value="{{ language.lang }}">{{ language.sym }}</option>
+                                {% endfor %}
+                            </custom-select>
                         </div>
                     </div>
 

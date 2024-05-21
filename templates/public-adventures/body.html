@@ -19,50 +19,44 @@
         </div>
         <div class="flex w-full sm:basis-1/2 gap-2">
             <div id="levels" class="flex-1">
-              <hedy-select id="level-select" data-label="{{_('select_levels')}}">
-                <select>
-                  {% for level in customizations["available_levels"] %}
-                      <option {% if selectedLevel|string == level|string %}selected{% endif %}
-                          hx-post="/public-adventures/filter?level={{level}}&lang={{selectedLang}}&tag={{selectedTag}}&search={{currentSearch}}"
-                          hx-target="#public-adventures"
-                          value="{{level}}"
-                      >{{ level }}</option>
-                  {% endfor %}
-                </select>
-              </hedy-select>
+              <custom-select id="level-select" data-label="{{_('select_levels')}}">
+                {% for level in customizations["available_levels"] %}
+                    <option {% if selectedLevel|string == level|string %}selected{% endif %}
+                        hx-post="/public-adventures/filter?level={{level}}&lang={{selectedLang}}&tag={{selectedTag}}&search={{currentSearch}}"
+                        hx-target="#public-adventures"
+                        value="{{level}}"
+                    >{{ level }}</option>
+                {% endfor %}
+              </custom-select>
             </div>              
             <div id="languages" class="flex-1">
-              <hedy-select id="language-select" data-label="{{ lang_to_sym(selectedLang) if selectedLang else _('select_lang') }}">
-                <select>
-                  <option
-                          hx-post="/public-adventures/filter?lang=reset&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}"
-                          hx-target="#public-adventures"
-                          value="">{{_('select_lang')}}</option>
-                      {% for lang in available_languages %}
-                          <option {% if lang == selectedLang %}selected{% endif %}
-                              hx-post="/public-adventures/filter?lang={{lang}}&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}"
-                              hx-target="#public-adventures"
-                              data-value="{{lang}}">{{lang_to_sym(lang)}}</option>
-                      {% endfor %}
-                </select>
-              </hedy-select>
+              <custom-select id="language-select" data-label="{{ lang_to_sym(selectedLang) if selectedLang else _('select_lang') }}">
+                <option
+                        hx-post="/public-adventures/filter?lang=reset&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}"
+                        hx-target="#public-adventures"
+                        value="">{{_('select_lang')}}</option>
+                    {% for lang in available_languages %}
+                        <option {% if lang == selectedLang %}selected{% endif %}
+                            hx-post="/public-adventures/filter?lang={{lang}}&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}"
+                            hx-target="#public-adventures"
+                            data-value="{{lang}}">{{lang_to_sym(lang)}}</option>
+                    {% endfor %}
+              </custom-select>
             </div>
                 
             <div id="tags" class="flex-1">
-              <hedy-select id="tag-select" data-label="{{ _('select_tag') }}">
-                <select multiple>
-                  {% for tag in available_tags %}
-                    {% set selected = tag in selectedTag %}
-                    <option {% if selected %}selected{% endif %} 
-                    {% if selected %}
-                        hx-post="/public-adventures/filter?tag={{tag}}&reset={{selectedTag}}&level={{selectedLevel}}&lang={{selectedLang}}&search={{currentSearch}}"
-                      {% else %}
-                        hx-post="/public-adventures/filter?tag={{tag + ',' +  selectedTag}}&level={{selectedLevel}}&lang={{selectedLang}}&search={{currentSearch}}"
-                      {% endif %} 
-                      hx-target="#public-adventures" value="{{tag}}">{{tag}}</option>
-                  {% endfor %}
-                </select>
-              </hedy-select>
+              <custom-select data-type="multiple" id="tag-select" data-label="{{ _('select_tag') }}">
+                {% for tag in available_tags %}
+                  {% set selected = tag in selectedTag %}
+                  <option {% if selected %}selected{% endif %} 
+                  {% if selected %}
+                      hx-post="/public-adventures/filter?tag={{tag}}&reset={{selectedTag}}&level={{selectedLevel}}&lang={{selectedLang}}&search={{currentSearch}}"
+                    {% else %}
+                      hx-post="/public-adventures/filter?tag={{tag + ',' +  selectedTag}}&level={{selectedLevel}}&lang={{selectedLang}}&search={{currentSearch}}"
+                    {% endif %} 
+                    hx-target="#public-adventures" value="{{tag}}">{{tag}}</option>
+                {% endfor %}
+              </custom-select>
             </div>
 
         </div>

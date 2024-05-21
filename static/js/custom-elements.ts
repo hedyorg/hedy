@@ -1,8 +1,6 @@
 import { ClientMessages } from "./client-messages";
 
 export class HedySelect extends HTMLElement {
-    multiple: boolean = false;
-    
     constructor() {
         super();
     }
@@ -10,18 +8,10 @@ export class HedySelect extends HTMLElement {
         const template = document.getElementById('hedy_select') as HTMLTemplateElement;
         const clone = template.content.cloneNode(true) as HTMLElement;
         this.appendChild(clone);
-        const select = this.querySelector('select');
-        const label = this.dataset['label'] || '';
-        if (select === null) {
-            throw new Error('Expected an inner select to go with the hedy-select component!')
-        }
-
-        select.hidden = true;
-        const options = select.querySelectorAll('option');
-        const dropdownMenu = this.querySelector('.dropdown-menu')!;
-        this.multiple = select.multiple;
-        this.dataset['type'] = select.multiple ? 'multiple' : 'single';
-        if (select.multiple) {
+        const options = this.querySelectorAll('option');
+        const label = this.dataset['label'] || '';       
+        const dropdownMenu = this.querySelector('.dropdown-menu')!;                
+        if (this.dataset['type'] === 'multiple') {
             const newDiv = document.createElement('div');
             newDiv.classList.add('option');
             newDiv.innerHTML = ClientMessages['select_all'];
@@ -30,6 +20,7 @@ export class HedySelect extends HTMLElement {
             newDiv.addEventListener('click', this.onOptionClick)
         }
         for (const option of options) {
+            option.hidden = true;
             const newDiv = document.createElement('div');
             newDiv.classList.add('option');
             newDiv.innerHTML = option.innerText;
@@ -53,7 +44,7 @@ export class HedySelect extends HTMLElement {
     }
 
     onOptionClick(this: HTMLDivElement, _event: MouseEvent) {        
-        const select = this.closest("hedy-select") as Element;
+        const select = this.closest("custom-select") as Element;
         if (!select) {
             return;
         }
@@ -126,4 +117,4 @@ export function toggleDropdown(event: Event) {
     $(dropdown).slideToggle('medium');
 }
 
-customElements.define('hedy-select', HedySelect)
+customElements.define('custom-select', HedySelect)
