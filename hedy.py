@@ -3520,18 +3520,18 @@ def determine_roles(lookup, input_string, level, lang):
         assignments = [x for x in lookup if x.name == var]
 
         if (assignments[0].tree.data == 'for_list'):
-            roles_dictionary[var] = 'walker'
+            roles_dictionary[var] = gettext('walker_variable_role')
         elif (assignments[0].tree.data == 'for_loop'):
-            roles_dictionary[var] = 'stepper'
+            roles_dictionary[var] = gettext('stepper_variable_role')
         elif (assignments[0].type_ == 'list'):
-            roles_dictionary[var] = 'container'
+            roles_dictionary[var] = gettext('container_variable_role')
         elif (len(assignments) == 1):
             if (assignments[0].type_ == 'input'):
-                roles_dictionary[var] = 'input constant'
+                roles_dictionary[var] = gettext('input_constant_variable_role')
             else:
-                roles_dictionary[var] = 'constant'
+                roles_dictionary[var] = gettext('constant_variable_role')
         else:
-            roles_dictionary[var] = 'unknown'
+            roles_dictionary[var] = gettext('unknown_variable_role')
 
     return roles_dictionary
 
