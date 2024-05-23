@@ -53,7 +53,7 @@ onclick="window.open('/for-teachers', '_self');">
                 add .tab-selected to me
                 add .hidden to .tab_content
                 remove .hidden from .preview"
-            onclick="hedyApp.initializeCodePage({{javascript_page_options}});"
+            onclick="hedyApp.initializeCodePage({{javascript_page_options|tojson}});"
             >
             {{_('preview')}}
         </div>

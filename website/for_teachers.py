@@ -1046,6 +1046,10 @@ class ForTeachersModule(WebsiteModule):
         if adventure["creator"] != user["username"] and not is_teacher(user):
             return utils.error_page(error=401, ui_message=gettext("retrieve_adventure_error"))
 
+        adventure['content'] = safe_format(adventure['content'],
+                                           **hedy_content.KEYWORDS.get(g.keyword_lang))
+        adventure['solution_example'] = safe_format(adventure.get('solution_example', ''),
+                                                    **hedy_content.KEYWORDS.get(g.keyword_lang))
         # Now it gets a bit complex, we want to get the teacher classes as well as the customizations
         # This is a quite expensive retrieval, but we should be fine as this page is not called often
         # We only need the name, id and if it already has the adventure set as data to the front-end
@@ -1104,14 +1108,14 @@ class ForTeachersModule(WebsiteModule):
             return gettext("adventure_name_invalid"), 400
         if not isinstance(body.get("levels"), list) or (isinstance(body.get("levels"), list) and not body["levels"]):
             return gettext("level_invalid"), 400
-        if not isinstance(body.get("content"), str):
-            return gettext("content_invalid"), 400
-        if len(body.get("content")) < 20:
-            return gettext("adventure_length"), 400
         if not isinstance(body.get("public"), bool) and not isinstance(body.get("public"), int):
             return gettext("public_invalid"), 400
         if 'formatted_content' in body and not isinstance(body.get("formatted_content"), str):
             return gettext("content_invalid"), 400
+        if not isinstance(body.get("formatted_content"), str):
+            return gettext("content_invalid"), 400
+        if len(body.get("formatted_content")) < 20:
+            return gettext("adventure_length"), 400
         if 'formatted_solution_code' in body and not isinstance(body.get("formatted_solution_code"), str):
             return gettext("content_invalid"), 400
         if not isinstance(body.get("language"), str) or body.get("language") not in hedy_content.ALL_LANGUAGES.keys():
@@ -1142,9 +1146,7 @@ class ForTeachersModule(WebsiteModule):
         # Try to parse with our current language, if it fails -> return an error to the user
         # NOTE: format() instead of safe_format() on purpose!
         try:
-            body["content"].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
-            if 'formatted_content' in body:
-                body['formatted_content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
+            body['formatted_content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
             if 'formatted_solution_code' in body:
                 body['formatted_solution_code'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
         except BaseException:
@@ -1157,14 +1159,11 @@ class ForTeachersModule(WebsiteModule):
             "classes": body["classes"],
             "level": body["levels"][0],  # TODO: this should be removed gradually.
             "levels": body["levels"],
-            "content": body["content"],
             "public": 1 if body["public"] else 0,
             "language": body["language"],
-            "solution_example": body["formatted_solution_code"],
+            "content": body["formatted_content"],
+            "solution_example": body.get("formatted_solution_code"),
         }
-
-        if 'formatted_content' in body:
-            adventure['formatted_content'] = body['formatted_content']
 
         self.db.update_adventure(body["id"], adventure)
 

@@ -13,6 +13,7 @@ declare let window: CustomWindow;
 
 export interface InitializeCustomizeAdventurePage {
     readonly page: 'customize-adventure';
+    readonly level: number;
 }
 
 let $editor: ClassicEditor;
