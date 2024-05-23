@@ -516,7 +516,7 @@ def echo_session_vars_main():
     if not utils.is_testing_request(request):
         return make_response(gettext("request_invalid"), 400)
     return make_response({'session': dict(session),
-                    'proxy_enabled': bool(os.getenv('PROXY_TO_TEST_HOST'))}, 204)
+                          'proxy_enabled': bool(os.getenv('PROXY_TO_TEST_HOST'))}, 204)
 
 
 @app.route('/parse', methods=['POST'])
@@ -737,7 +737,7 @@ def parse_tutorial(user):
     level = try_parse_int(body['level'])
     try:
         result = hedy.transpile(code, level, "en")
-        #this is not a return, is this code needed?
+        # this is not a return, is this code needed?
         jsonify({'code': result.code}), 200
     except BaseException:
         return make_response(gettext("request_invalid"), 400)
@@ -817,7 +817,7 @@ def generate_microbit_file():
         save_transpiled_code_for_microbit(transpile_result)
         return make_response({'filename': 'Micro-bit.py', 'microbit': True}, 200)
     else:
-        #TODO
+        # TODO
         return make_response({'message': 'Microbit feature is disabled'}, 403)
 
 
@@ -856,7 +856,7 @@ def convert_to_hex_and_download():
 
         return send_file(os.path.join(micro_bit_directory, "micropython.hex"), as_attachment=True)
     else:
-        #TODO
+        # TODO
         return make_response({'message': 'Microbit feature is disabled'}, 403)
 
 
