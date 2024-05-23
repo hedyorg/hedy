@@ -7,6 +7,9 @@ describe('Agree public checkbox test', () => {
       loginForTeacher(teacher);
       goToEditAdventure();
 
+      // navigate to the editor's view
+      cy.getBySel("adventure").click();
+
       cy.get('#agree_public')
         .should('be.visible')
         .should('not.be.disabled')

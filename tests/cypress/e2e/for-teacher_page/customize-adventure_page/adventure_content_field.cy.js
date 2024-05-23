@@ -8,6 +8,8 @@ describe('Adventure content Field test', () => {
       loginForTeacher(teacher);
       goToEditAdventure();
 
+      // navigate to the editor's view
+      cy.getBySel("adventure").click();
       cy.window().then(win => {
         const editor = win.ckEditor;
 

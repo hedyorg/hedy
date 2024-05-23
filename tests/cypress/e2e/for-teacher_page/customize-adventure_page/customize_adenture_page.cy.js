@@ -9,6 +9,8 @@ describe('Test for the Customize Adventure Page', () => {
     })
     
     it('Writing an word with several possible keywords should show an alert message, that can be closed', () => {
+        // navigate to the editor's view
+        cy.getBySel("adventure").click();
         cy.window().then(win => {
             const editor = win.ckEditor;
             cy.get('.ck-editor__editable')
