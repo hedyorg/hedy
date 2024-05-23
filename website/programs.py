@@ -2,7 +2,7 @@ import copy
 import uuid
 from typing import Optional
 
-from flask import g, request, jsonify
+from flask import g, make_response, request, jsonify
 from flask_babel import gettext
 import jinja_partials
 import hedy_content
@@ -335,7 +335,7 @@ class ProgramsModule(WebsiteModule):
             message = gettext("favourite_success") if body["set"] else gettext("unfavourite_success")
             return jsonify({"message": message})
         else:
-            return "You can't set a favourite program without a public profile", 400
+            return make_response(gettext("request_invalid"), 400)
 
     @route("/set_hedy_choice", methods=["POST"])
     @requires_admin
@@ -356,8 +356,8 @@ class ProgramsModule(WebsiteModule):
 
         self.db.set_program_as_hedy_choice(body["id"], favourite)
         if favourite:
-            return jsonify({"message": 'Program successfully set as a "Hedy choice" program.'}), 200
-        return jsonify({"message": 'Program successfully removed as a "Hedy choice" program.'}), 200
+            return jsonify({"message": gettext("favourite_success")}), 200
+        return jsonify({"message": gettext("unfavourite_success")}), 200
 
     @route("/report", methods=["POST"])
     @requires_login

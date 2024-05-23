@@ -507,14 +507,14 @@ if os.getenv('PROXY_TO_TEST_HOST') and not os.getenv('IS_TEST_ENV'):
 @app.route('/session_test', methods=['GET'])
 def echo_session_vars_test():
     if not utils.is_testing_request(request):
-        return 'This endpoint is only meant for E2E tests', 400
-    return jsonify({'session': dict(session)})
+        return make_response(gettext("request_invalid"), 400)
+    return make_response({'session': dict(session)})
 
 
 @app.route('/session_main', methods=['GET'])
 def echo_session_vars_main():
     if not utils.is_testing_request(request):
-        return 'This endpoint is only meant for E2E tests', 400
+        return make_response(gettext("request_invalid"), 400)
     return jsonify({'session': dict(session),
                     'proxy_enabled': bool(os.getenv('PROXY_TO_TEST_HOST'))})
 
@@ -814,6 +814,7 @@ def generate_microbit_file():
         save_transpiled_code_for_microbit(transpile_result)
         return jsonify({'filename': 'Micro-bit.py', 'microbit': True}), 200
     else:
+        #TODO
         return jsonify({'message': 'Microbit feature is disabled'}), 403
 
 
@@ -852,6 +853,7 @@ def convert_to_hex_and_download():
 
         return send_file(os.path.join(micro_bit_directory, "micropython.hex"), as_attachment=True)
     else:
+        #TODO
         return jsonify({'message': 'Microbit feature is disabled'}), 403
 
 
