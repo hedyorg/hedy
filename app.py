@@ -515,8 +515,8 @@ def echo_session_vars_test():
 def echo_session_vars_main():
     if not utils.is_testing_request(request):
         return make_response(gettext("request_invalid"), 400)
-    return make_response({'session': dict(session),
-                          'proxy_enabled': bool(os.getenv('PROXY_TO_TEST_HOST'))}, 204)
+    return jsonify({'session': dict(session),
+                    'proxy_enabled': bool(os.getenv('PROXY_TO_TEST_HOST'))})
 
 
 @app.route('/parse', methods=['POST'])
