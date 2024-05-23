@@ -508,7 +508,7 @@ if os.getenv('PROXY_TO_TEST_HOST') and not os.getenv('IS_TEST_ENV'):
 def echo_session_vars_test():
     if not utils.is_testing_request(request):
         return make_response(gettext("request_invalid"), 400)
-    return make_response({'session': dict(session)}, 204)
+    return jsonify({'session': dict(session)})
 
 
 @app.route('/session_main', methods=['GET'])
