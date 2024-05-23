@@ -1110,11 +1110,10 @@ class ForTeachersModule(WebsiteModule):
             return gettext("level_invalid"), 400
         if not isinstance(body.get("public"), bool) and not isinstance(body.get("public"), int):
             return gettext("public_invalid"), 400
-        if 'formatted_content' in body and not isinstance(body.get("formatted_content"), str):
+        body["content"] = body.get("formatted_content", body.get("content"))
+        if 'content' in body and not isinstance(body.get("content"), str):
             return gettext("content_invalid"), 400
-        if not isinstance(body.get("formatted_content"), str):
-            return gettext("content_invalid"), 400
-        if len(body.get("formatted_content")) < 20:
+        if len(body.get("content")) < 20:
             return gettext("adventure_length"), 400
         if 'formatted_solution_code' in body and not isinstance(body.get("formatted_solution_code"), str):
             return gettext("content_invalid"), 400
@@ -1146,7 +1145,7 @@ class ForTeachersModule(WebsiteModule):
         # Try to parse with our current language, if it fails -> return an error to the user
         # NOTE: format() instead of safe_format() on purpose!
         try:
-            body['formatted_content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
+            body['content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
             if 'formatted_solution_code' in body:
                 body['formatted_solution_code'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
         except BaseException:
@@ -1161,7 +1160,7 @@ class ForTeachersModule(WebsiteModule):
             "levels": body["levels"],
             "public": 1 if body["public"] else 0,
             "language": body["language"],
-            "content": body["formatted_content"],
+            "content": body["content"],
             "solution_example": body.get("formatted_solution_code"),
         }
 
