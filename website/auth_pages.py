@@ -322,7 +322,7 @@ class AuthModule(WebsiteModule):
             except BaseException:
                 return gettext("mail_error_change_processed"), 400
 
-        return jsonify({"message": gettext("password_updated")}), 200
+        return make_response({"message": gettext("password_updated")}, 200)
 
     @ route("/recover", methods=["POST"])
     def recover(self):
@@ -356,7 +356,7 @@ class AuthModule(WebsiteModule):
 
         if is_testing_request(request):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
-            return jsonify({"username": user["username"], "token": token}), 200
+            return make_response({"username": user["username"], "token": token}, 200)
         else:
             try:
                 send_email_template(
@@ -368,7 +368,7 @@ class AuthModule(WebsiteModule):
             except BaseException:
                 return gettext("mail_error_change_processed"), 400
 
-            return jsonify({"message": gettext("sent_password_recovery")}), 200
+            return make_response({"message": gettext("sent_password_recovery")}, 200)
 
     @ route("/reset", methods=["POST"])
     def reset(self):
@@ -411,7 +411,7 @@ class AuthModule(WebsiteModule):
             except BaseException:
                 return gettext("mail_error_change_processed"), 400
 
-        return jsonify({"message": gettext("password_resetted")}), 200
+        return make_response({"message": gettext("password_resetted")}, 200)
 
     @route("/request_teacher", methods=["POST"])
     @requires_login
@@ -423,7 +423,7 @@ class AuthModule(WebsiteModule):
             return gettext("already_teacher_request"), 400
 
         self.db.update_user(user["username"], {"teacher_request": True})
-        return jsonify({"message": gettext("teacher_account_success")}), 200
+        return make_response({"message": gettext("teacher_account_success")}, 200)
 
     def store_new_account(self, account, email):
         username, hashed, hashed_token = prepare_user_db(account["username"], account["password"])

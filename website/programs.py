@@ -170,8 +170,8 @@ class ProgramsModule(WebsiteModule):
         programs = self.db.programs_for_user(current_user()["username"])
         for program in programs:
             if program["name"] == body["name"]:
-                return jsonify({"duplicate": True, "message": gettext("overwrite_warning")})
-        return jsonify({"duplicate": False})
+                return make_response({"duplicate": True, "message": gettext("overwrite_warning")})
+        return make_response({"duplicate": False})
 
     @route("/", methods=["POST"])
     @requires_login
@@ -210,7 +210,7 @@ class ProgramsModule(WebsiteModule):
             except BaseException:
                 error = True
                 if not body.get("force_save", True):
-                    return jsonify({"parse_error": True, "message": gettext("save_parse_warning")})
+                    return make_response({"parse_error": True, "message": gettext("save_parse_warning")})
 
         program = self.logic.store_user_program(
             program_id=program_id,
@@ -223,7 +223,7 @@ class ProgramsModule(WebsiteModule):
             adventure_name=body.get('adventure_name'),
             short_name=body.get('short_name', body.get('adventure_name')))
 
-        return jsonify({
+        return make_response({
             "message": gettext("save_success_detail"),
             "share_message": gettext("copy_clipboard"),
             "name": program["name"],
@@ -333,7 +333,7 @@ class ProgramsModule(WebsiteModule):
 
         if self.db.set_favourite_program(user["username"], body["id"], body["set"]):
             message = gettext("favourite_success") if body["set"] else gettext("unfavourite_success")
-            return jsonify({"message": message})
+            return make_response({"message": message})
         else:
             return make_response(gettext("request_invalid"), 400)
 
@@ -356,8 +356,8 @@ class ProgramsModule(WebsiteModule):
 
         self.db.set_program_as_hedy_choice(body["id"], favourite)
         if favourite:
-            return jsonify({"message": gettext("favourite_success")}), 200
-        return jsonify({"message": gettext("unfavourite_success")}), 200
+            return make_response({"message": gettext("favourite_success")}, 200)
+        return make_response({"message": gettext("unfavourite_success")}, 200)
 
     @route("/report", methods=["POST"])
     @requires_login

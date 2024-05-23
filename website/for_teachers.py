@@ -3,7 +3,7 @@ import json
 import os
 import uuid
 
-from flask import g, jsonify, request, session, url_for, redirect
+from flask import g, jsonify, make_response, request, session, url_for, redirect
 from jinja_partials import render_partial
 from flask_babel import gettext
 
@@ -170,7 +170,7 @@ class ForTeachersModule(WebsiteModule):
             student["last_login"] = utils.localized_date_format(student.get("last_login", 0))
 
         if utils.is_testing_request(request):
-            return jsonify({"students": students, "link": Class["link"], "name": Class["name"], "id": Class["id"]})
+            return make_response({"students": students, "link": Class["link"], "name": Class["name"], "id": Class["id"]})
 
         achievement = None
         if len(students) > 20:

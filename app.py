@@ -515,7 +515,7 @@ def echo_session_vars_test():
 def echo_session_vars_main():
     if not utils.is_testing_request(request):
         return make_response(gettext("request_invalid"), 400)
-    return jsonify({'session': dict(session),
+    return make_response({'session': dict(session),
                     'proxy_enabled': bool(os.getenv('PROXY_TO_TEST_HOST'))})
 
 
@@ -723,7 +723,7 @@ def parse_by_id(user):
         except BaseException:
             return {"error": "parsing error"}, 200
     else:
-        return 'this is not your program!', 400
+        return make_response(gettext("request_invalid"), 400)
 
 
 @app.route('/parse_tutorial', methods=['POST'])
@@ -778,7 +778,7 @@ def prepare_files():
             zip_file.write('machine_files/' + file)
     zip_file.close()
 
-    return jsonify({'filename': filename}), 200
+    return make_response({'filename': filename}, 200)
 
 
 @app.route("/download_machine_files/<filename>", methods=['GET'])
@@ -812,10 +812,10 @@ def generate_microbit_file():
 
         transpile_result = hedy.transpile_and_return_python(code, level)
         save_transpiled_code_for_microbit(transpile_result)
-        return jsonify({'filename': 'Micro-bit.py', 'microbit': True}), 200
+        return make_response({'filename': 'Micro-bit.py', 'microbit': True}, 200)
     else:
         #TODO
-        return jsonify({'message': 'Microbit feature is disabled'}), 403
+        return make_response({'message': 'Microbit feature is disabled'}, 403)
 
 
 def save_transpiled_code_for_microbit(transpiled_python_code):
@@ -854,7 +854,7 @@ def convert_to_hex_and_download():
         return send_file(os.path.join(micro_bit_directory, "micropython.hex"), as_attachment=True)
     else:
         #TODO
-        return jsonify({'message': 'Microbit feature is disabled'}), 403
+        return make_response({'message': 'Microbit feature is disabled'}, 403)
 
 
 def flash_micro_bit():
@@ -2313,7 +2313,7 @@ def translate_keywords():
         if translated_code or translated_code == '':  # empty string is False, so explicitly allow it
             session["previous_keyword_lang"] = body.get("start_lang")
             session["keyword_lang"] = body.get("goal_lang")
-            return jsonify({'success': 200, 'code': translated_code})
+            return make_response({'success': 200, 'code': translated_code})
         else:
             return gettext('translate_error'), 400
     except BaseException:
@@ -2326,7 +2326,7 @@ def get_tutorial_translation(level, step):
     # Keep this structure temporary until we decide on a nice code / parse structure
     if step == "code_snippet":
         code = hedy_content.deep_translate_keywords(gettext('tutorial_code_snippet'), g.keyword_lang)
-        return jsonify({'code': code}), 200
+        return make_response({'code': code}, 200)
     try:
         step = int(step)
     except ValueError:
