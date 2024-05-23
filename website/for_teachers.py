@@ -170,7 +170,13 @@ class ForTeachersModule(WebsiteModule):
             student["last_login"] = utils.localized_date_format(student.get("last_login", 0))
 
         if utils.is_testing_request(request):
-            return make_response({"students": students, "link": Class["link"], "name": Class["name"], "id": Class["id"]}, 200)
+            return make_response(
+                {
+                    "students": students,
+                    "link": Class["link"],
+                    "name": Class["name"],
+                    "id": Class["id"]
+                }, 200)
 
         achievement = None
         if len(students) > 20:
