@@ -13,7 +13,8 @@ import {
     incrementDebugLine,
     initializeDebugger,
     load_variables,
-    startDebug
+    startDebug,
+    toggleVariableView
 } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
@@ -482,24 +483,6 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
   // Copy 'currentTab' into a variable, so that our event handlers don't mess up
   // if the user changes tabs while we're waiting for a response
   const adventureName = currentTab;
-
-     if (run_type === 'debug' || run_type === 'continue') {
-          if($('#variables #variable-list li').length == 0){
-            $('#variable_button').hide();
-            $('#variables').hide();
-            $('#variables-expand').hide();
-          }
-          else{
-            $('#variable_button').show();
-            $('#variables').show();
-            $('#variables-expand').show();
-          }
-          setTimeout(() => {
-                $('#variables-expand').hide();
-                $('#variables').hide();
-          }, 5000);
-
-     }
 
   if (askPromptOpen) {
     // If there is no message -> don't show a prompt
@@ -1058,8 +1041,9 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     synth.triggerAttackRelease(note_name, "16n");
 
   });
-
   if (run_type === "run") {
+    $('#variable-list').empty();
+    toggleVariableView();
     Sk.configure({
       output: outf,
       read: builtinRead,
@@ -1418,28 +1402,6 @@ export function load_quiz(level: string) {
   $('*[data-tabtarget="quiz"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
 }
 
-export function showVariableView() {
-// When blue label button is clicked, the view will appear or hide
-  const variables = $('#variables');
-  if (variables.is(":hidden")) {
-    variables.show();
-    $("#variables").trigger("click")
-  }
-  else {
-    variables.hide();
-    const output = $('#output');
-    output.show();
-  }
-  const variablesExpand = $('#variables-expand');
-  if (variablesExpand.is(":hidden")) {
-    variablesExpand.show();
-    $("#variables").trigger("click")
-  }
-  else {
-    variablesExpand.hide();
-  }
-}
-
 export async function store_parsons_attempt(order: Array<string>, correct: boolean) {
   try {
     await postJsonWithAchievements('/store_parsons_order', {
@@ -1463,34 +1425,6 @@ export function get_active_and_trimmed_code() {
 
 export function getEditorContents() {
   return theGlobalEditor.contents;
-}
-
-export function expandVariableView() {
-  const openVariables = $('#open-variables');
-  openVariables.hide();
-  const closeVariables = $('#close-variables');
-  if(closeVariables.hasClass('hidden')){
-      closeVariables.removeClass('hidden');
-  }
-
-  const variables = $('#variables');
-  const output = $('#output');
-  variables.addClass('h-1/2');
-  output.addClass('h-1/2');
-}
-
-export function closeVariableView() {
-  const openVariables = $('#open-variables');
-  openVariables.show();
-  const closeVariables = $('#close-variables');
-  if(!closeVariables.hasClass('hidden')){
-      closeVariables.addClass('hidden');
-  }
-
-  const variables = $('#variables');
-  const output = $('#output');
-  variables.removeClass('h-1/2');
-  output.removeClass('h-1/2');
 }
 
 export function confetti_cannon(){
