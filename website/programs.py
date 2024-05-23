@@ -2,7 +2,7 @@ import copy
 import uuid
 from typing import Optional
 
-from flask import g, make_response, request, jsonify
+from flask import g, make_response, request
 from flask_babel import gettext
 import jinja_partials
 import hedy_content
@@ -154,7 +154,7 @@ class ProgramsModule(WebsiteModule):
         resp = {"message": gettext("delete_success")}
         if achievement:
             resp["achievement"] = achievement
-        return jsonify(resp)
+        return make_response(resp, 200)
 
     @route("/duplicate-check", methods=["POST"])
     def check_duplicate_program(self):
@@ -171,7 +171,7 @@ class ProgramsModule(WebsiteModule):
         for program in programs:
             if program["name"] == body["name"]:
                 return make_response({"duplicate": True, "message": gettext("overwrite_warning")})
-        return make_response({"duplicate": False})
+        return make_response({"duplicate": False}, 200)
 
     @route("/", methods=["POST"])
     @requires_login
@@ -230,7 +230,7 @@ class ProgramsModule(WebsiteModule):
             "id": program['id'],
             "save_info": SaveInfo.from_program(Program.from_database_row(program)),
             "achievements": self.achievements.get_earned_achievements(),
-        })
+        }, 200)
 
     @route("/share/<program_id>", methods=['POST'], defaults={'second_teachers_programs': False})
     @route("/share/<program_id>/<second_teachers_programs>", methods=["POST"])
@@ -292,7 +292,7 @@ class ProgramsModule(WebsiteModule):
             "save_info": SaveInfo.from_program(Program.from_database_row(program)),
             "achievements": self.achievements.get_earned_achievements(),
         }
-        return jsonify(response)
+        return make_response(response, 200)
 
     @route("/unsubmit", methods=["POST"])
     @requires_teacher
@@ -314,7 +314,7 @@ class ProgramsModule(WebsiteModule):
             "save_info": SaveInfo.from_program(Program.from_database_row(program)),
             "achievements": self.achievements.get_earned_achievements(),
         }
-        return jsonify(response)
+        return make_response(response, 200)
 
     @route("/set_favourite", methods=["POST"])
     @requires_login
@@ -333,7 +333,7 @@ class ProgramsModule(WebsiteModule):
 
         if self.db.set_favourite_program(user["username"], body["id"], body["set"]):
             message = gettext("favourite_success") if body["set"] else gettext("unfavourite_success")
-            return make_response({"message": message})
+            return make_response({"message": message}, 200)
         else:
             return make_response(gettext("request_invalid"), 400)
 

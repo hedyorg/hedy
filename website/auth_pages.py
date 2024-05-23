@@ -1,6 +1,6 @@
 import datetime
 
-from flask import jsonify, make_response, redirect, request, session
+from flask import make_response, redirect, request, session
 from flask_babel import gettext
 
 from config import config
@@ -455,7 +455,7 @@ class AuthModule(WebsiteModule):
 
         # If this is an e2e test, we return the email verification token directly instead of emailing it.
         if is_testing_request(request):
-            resp = make_response({"username": username, "token": hashed_token})
+            resp = make_response({"username": username, "token": hashed_token}, 200)
         # Otherwise, we send an email with a verification link and we return an empty body
         else:
             try:
@@ -467,5 +467,5 @@ class AuthModule(WebsiteModule):
                 )
             except BaseException:
                 return user, make_response({gettext("mail_error_change_processed")}, 400)
-            resp = make_response({})
+            resp = make_response('', 204)
         return user, resp

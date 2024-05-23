@@ -2,7 +2,7 @@ import datetime
 import hashlib
 
 import requests
-from flask import jsonify, request, session
+from flask import make_response, request, session
 from flask_babel import gettext
 
 from safe_format import safe_format
@@ -133,7 +133,7 @@ class ProfileModule(WebsiteModule):
             resp["message"] = gettext("profile_updated")
 
         remember_current_user(self.db.user_by_username(user["username"]))
-        return jsonify(resp)
+        return make_response(resp, 200)
 
     @route("/", methods=["GET"])
     @requires_login
@@ -152,4 +152,4 @@ class ProfileModule(WebsiteModule):
 
         output["session_expires_at"] = timems() + SESSION_LENGTH * 1000
 
-        return jsonify(output), 200
+        return make_response((output), 200)

@@ -508,7 +508,7 @@ if os.getenv('PROXY_TO_TEST_HOST') and not os.getenv('IS_TEST_ENV'):
 def echo_session_vars_test():
     if not utils.is_testing_request(request):
         return make_response(gettext("request_invalid"), 400)
-    return make_response({'session': dict(session)})
+    return make_response({'session': dict(session)}, 204)
 
 
 @app.route('/session_main', methods=['GET'])
@@ -516,7 +516,7 @@ def echo_session_vars_main():
     if not utils.is_testing_request(request):
         return make_response(gettext("request_invalid"), 400)
     return make_response({'session': dict(session),
-                    'proxy_enabled': bool(os.getenv('PROXY_TO_TEST_HOST'))})
+                    'proxy_enabled': bool(os.getenv('PROXY_TO_TEST_HOST'))}, 204)
 
 
 @app.route('/parse', methods=['POST'])
@@ -698,7 +698,8 @@ def parse():
 
     if "Error" in response and error_check:
         response["message"] = gettext('program_contains_error')
-    return jsonify(response)
+    # is this a 200?
+    return make_response(response, 200)
 
 
 @app.route('/parse-by-id', methods=['POST'])
@@ -721,6 +722,7 @@ def parse_by_id(user):
             )
             return make_response('', 204)
         except BaseException:
+            # this is a 200 but it's an error?
             return {"error": "parsing error"}, 200
     else:
         return make_response(gettext("request_invalid"), 400)
@@ -735,9 +737,10 @@ def parse_tutorial(user):
     level = try_parse_int(body['level'])
     try:
         result = hedy.transpile(code, level, "en")
+        #this is not a return, is this code needed?
         jsonify({'code': result.code}), 200
     except BaseException:
-        return "error", 400
+        return make_response(gettext("request_invalid"), 400)
 
 
 @app.route("/generate_machine_files", methods=['POST'])
@@ -1111,7 +1114,7 @@ def query_logs():
 
     (exec_id, status) = log_fetcher.query(body)
     response = {'query_status': status, 'query_execution_id': exec_id}
-    return jsonify(response)
+    return make_response(response, 200)
 
 
 @app.route('/logs/results', methods=['GET'])
@@ -1127,7 +1130,7 @@ def get_log_results():
     data, next_token = log_fetcher.get_query_results(
         query_execution_id, next_token)
     response = {'data': data, 'next_token': next_token}
-    return jsonify(response)
+    return make_response(response, 200)
 
 
 @app.route('/tutorial', methods=['GET'])
@@ -2313,7 +2316,7 @@ def translate_keywords():
         if translated_code or translated_code == '':  # empty string is False, so explicitly allow it
             session["previous_keyword_lang"] = body.get("start_lang")
             session["keyword_lang"] = body.get("goal_lang")
-            return make_response({'success': 200, 'code': translated_code})
+            return make_response({'code': translated_code}, 200)
         else:
             return gettext('translate_error'), 400
     except BaseException:
@@ -2336,7 +2339,7 @@ def get_tutorial_translation(level, step):
     if not data:
         data = {'title': gettext('tutorial_title_not_found'),
                 'text': gettext('tutorial_message_not_found')}
-    return jsonify(data), 200
+    return make_response((data), 200)
 
 
 @app.route('/store_parsons_order', methods=['POST'])

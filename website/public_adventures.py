@@ -189,7 +189,7 @@ class PublicAdventuresModule(WebsiteModule):
             javascript_page_options=js,
         )
 
-        response = make_response(temp)
+        response = make_response(temp, 200)
         response.headers["HX-Trigger"] = json.dumps({"updateTSCode": js})
         return response
 

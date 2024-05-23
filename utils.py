@@ -1,4 +1,4 @@
-from flask import session, request, jsonify, make_response
+from flask import session, request, make_response
 from website.flask_helpers import render_template
 from bs4 import BeautifulSoup
 import contextlib

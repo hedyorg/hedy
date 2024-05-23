@@ -1,4 +1,4 @@
-from flask import g, jsonify
+from flask import g, make_response
 from flask_babel import gettext
 
 from .website_module import WebsiteModule, route
@@ -19,4 +19,4 @@ class ParsonsModule(WebsiteModule):
             exercise = self.parsons[g.lang].get_parsons_data_for_level_exercise(level, exercise, keyword_lang)
         else:
             exercise = self.parsons[g.lang].get_parsons_data_for_level_exercise(level, exercise, g.keyword_lang)
-        return jsonify(exercise), 200
+        return make_response((exercise), 200)

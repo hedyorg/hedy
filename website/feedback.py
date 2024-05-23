@@ -40,7 +40,7 @@ class FeedbackModule(WebsiteModule):
             print(e)
             return gettext('feedback_message_error'), 500
 
-        response = make_response("")
+        response = make_response('', 204)
         response.headers["HX-Push-URL"] = 'false'
         response.headers["HX-Trigger"] = json.dumps({"hideFeedbackModal": True})
 
