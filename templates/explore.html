@@ -53,13 +53,14 @@
                     {% endfor %}
                 {% endif %}
             </div>
-            {% if next_page_url %}
-                <div class="flex w-1/3 mx-16 mt-4 align-self-right">
-                        <div>
-                            <a href="{{next_page_url}}" class="green-btn">{{_('next_page')}}</a>
-                        </div>
-                </div>
-            {% endif %}
+            <div class="flex w-1/3 gap-4 align-self-right">
+                {% if prev_page_url %}
+                        <a href="{{prev_page_url}}" class="btn green-btn">{{_('previous_page')}}</a>
+                {% endif %}
+                {% if next_page_url %}
+                        <a href="{{next_page_url}}" class="btn green-btn">{{_('next_page')}}</a>
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>
