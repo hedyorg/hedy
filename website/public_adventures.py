@@ -69,13 +69,15 @@ class PublicAdventuresModule(WebsiteModule):
             tags = [t for t in tags if t]
 
         # Get indexes
-        level_lang_adventure_ids, next_page_token = self.db.get_paginated_indexes(
+        level_lang_adventure_ids, result = self.db.get_paginated_indexes(
             {"field_value": f"level_lang_{level}_{language}"},
             pagination_token=page, limit=20)
         # In case we need want any language, we retrieve by the main level index.
         if not level_lang_adventure_ids:
-            level_lang_adventure_ids, next_page_token = self.db.get_paginated_indexes({"field_value": f"level_{level}"},
-                                                                                      pagination_token=page, limit=20)
+            level_lang_adventure_ids, result = self.db.get_paginated_indexes({"field_value": f"level_{level}"},
+                                                                             pagination_token=page, limit=20)
+        prev_page_token = result.prev_page_token
+        next_page_token = result.next_page_token
 
         tag_adventure_ids = set()
         for _t in tags:
@@ -134,7 +136,7 @@ class PublicAdventuresModule(WebsiteModule):
             customized_adventures.append(current_adventure)
             included[current_adventure["name"]] = current_adventure
 
-        adventures = customized_adventures
+        adventures = sorted(customized_adventures, key=lambda adv: adv["name"])
         if adventures:
             initial_tab = adventures[0]["name"]
             initial_adventure = adventures[-1]
@@ -177,6 +179,7 @@ class PublicAdventuresModule(WebsiteModule):
             level_nr=str(level),
             prev_level=prev_level,
             next_level=next_level,
+            prev_page_token=prev_page_token,
             next_page_token=next_page_token,
 
             customizations=customizations,
