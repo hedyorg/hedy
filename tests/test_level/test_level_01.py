@@ -534,7 +534,6 @@ class TestsLevel1(HedyTester):
         )
 
     def test_turn_ar(self):
-        # doesn't translate, I don't know why!!
         code = "استدر يسار"
         expected = "t.left(90)"
 
