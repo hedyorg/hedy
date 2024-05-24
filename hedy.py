@@ -28,6 +28,8 @@ import sys
 import tempfile
 import utils
 
+import random
+
 # Some useful constants
 from hedy_content import KEYWORDS
 from hedy_sourcemap import SourceMap, source_map_transformer
