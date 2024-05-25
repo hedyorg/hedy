@@ -184,7 +184,8 @@ export function remove_student(class_id: string, student_id: string, prompt: str
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      if (response.achievement) {
+      // the check for response is necessary because of make_response() but I'm not sure why
+      if (response && response.achievement) {
           showAchievements(response.achievement, true, "");
       } else {
           location.reload();
