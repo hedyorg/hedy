@@ -214,6 +214,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             "at random remove from add to if else in not_in Op": t.keyword,
             "repeat times for range with return and or while": t.keyword,
             "elif def input toList": t.keyword,
+            "true false True False": t.number,
             Comment: t.lineComment,
             "Text": t.name,
             "String": t.string,

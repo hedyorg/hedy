@@ -355,6 +355,10 @@ class Translator(Visitor):
         self.add_rule_for_grammar_token("_RANGE", "range", tree)
         self.add_rule_for_grammar_token("_TO", "to", tree)
 
+    def boolean(self, tree):
+        self.add_rule('TRUE', "true", tree)
+        self.add_rule('FALSE', "false", tree)
+
     def while_loop(self, tree):
         self.add_rule_for_grammar_token("_WHILE", "while", tree)
 

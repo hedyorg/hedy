@@ -65,24 +65,69 @@ class TestsLevel17(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
-    def test_if_else_boolean(self):
+    #
+    # boolean values
+    #
+
+    def test_cond_boolean(self):
+        # this one fails, fix it
         code = textwrap.dedent("""\
-    computerc = 'PC'
-    userc = 'Hedy'
-    print 'Pilihan komputer: ' computerc
-    if userc is computerc and userc is 'Hedy':
-        print 'SERI'
-    else:
-        print 'Komputer'""")
+            cond = False
+            if cond is True:
+                sleep""")
+        expected = textwrap.dedent("""\
+            cond = False
+            if convert_numerals('Latin', cond) == convert_numerals('Latin', 'True'):
+              time.sleep(1)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected
+        )
+
+    def test_if_elif_boolean(self):
+        code = textwrap.dedent("""\
+            computerc = 'PC'
+            userc = 'Hedy'
+            print 'Pilihan komputer: ' computerc
+            if userc is computerc and userc is 'Hedy':
+                print 'SERI'
+            elif userc is 'PC' and userc is 'Hedy':
+                print 'HARI'
+            else:
+                print 'Komputer'""")
 
         expected = textwrap.dedent("""\
-    computerc = 'PC'
-    userc = 'Hedy'
-    print(f'''Pilihan komputer: {computerc}''')
-    if convert_numerals('Latin', userc) == convert_numerals('Latin', computerc) and convert_numerals('Latin', userc) == convert_numerals('Latin', 'Hedy'):
-      print(f'''SERI''')
-    else:
-      print(f'''Komputer''')""")
+            computerc = 'PC'
+            userc = 'Hedy'
+            print(f'''Pilihan komputer: {computerc}''')
+            if convert_numerals('Latin', userc) == convert_numerals('Latin', computerc) and convert_numerals('Latin', userc) == convert_numerals('Latin', 'Hedy'):
+              print(f'''SERI''')
+            elif convert_numerals('Latin', userc) == convert_numerals('Latin', 'PC') and convert_numerals('Latin', userc) == convert_numerals('Latin', 'Hedy'):
+              print(f'''HARI''')
+            else:
+              print(f'''Komputer''')""")
+
+        self.single_level_tester(code=code, expected=expected)
+
+    def test_if_else_boolean(self):
+        code = textwrap.dedent("""\
+            computerc = 'PC'
+            userc = 'Hedy'
+            print 'Pilihan komputer: ' computerc
+            if userc is computerc and userc is 'Hedy':
+                print 'SERI'
+            else:
+                print 'Komputer'""")
+
+        expected = textwrap.dedent("""\
+            computerc = 'PC'
+            userc = 'Hedy'
+            print(f'''Pilihan komputer: {computerc}''')
+            if convert_numerals('Latin', userc) == convert_numerals('Latin', computerc) and convert_numerals('Latin', userc) == convert_numerals('Latin', 'Hedy'):
+              print(f'''SERI''')
+            else:
+              print(f'''Komputer''')""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -101,31 +146,6 @@ class TestsLevel17(HedyTester):
             code=code,
             expected=expected,
             expected_commands=['for', 'print'])
-
-    def test_if_elif_boolean(self):
-        code = textwrap.dedent("""\
-    computerc = 'PC'
-    userc = 'Hedy'
-    print 'Pilihan komputer: ' computerc
-    if userc is computerc and userc is 'Hedy':
-        print 'SERI'
-    elif userc is 'PC' and userc is 'Hedy':
-        print 'HARI'
-    else:
-        print 'Komputer'""")
-
-        expected = textwrap.dedent("""\
-    computerc = 'PC'
-    userc = 'Hedy'
-    print(f'''Pilihan komputer: {computerc}''')
-    if convert_numerals('Latin', userc) == convert_numerals('Latin', computerc) and convert_numerals('Latin', userc) == convert_numerals('Latin', 'Hedy'):
-      print(f'''SERI''')
-    elif convert_numerals('Latin', userc) == convert_numerals('Latin', 'PC') and convert_numerals('Latin', userc) == convert_numerals('Latin', 'Hedy'):
-      print(f'''HARI''')
-    else:
-      print(f'''Komputer''')""")
-
-        self.single_level_tester(code=code, expected=expected)
 
     @parameterized.expand(['and', 'or'])
     def test_if_list_access_lhs_and_or(self, op):
@@ -239,6 +259,10 @@ class TestsLevel17(HedyTester):
             expected_commands=['is', 'if', 'print', 'print']
         )
 
+    #
+    # while loop
+    #
+
     def test_while_undefined_var(self):
         code = textwrap.dedent("""\
         while antwoord != 25:
@@ -259,6 +283,23 @@ class TestsLevel17(HedyTester):
             code=code,
             exception=hedy.exceptions.MissingColonException,
             extra_check_function=missing_colon_check('while', 2)
+        )
+
+    def test_while_equals_boolean(self):
+        code = textwrap.dedent("""\
+            cond is True
+            while cond != False:
+              cond is False""")
+        expected = textwrap.dedent("""\
+            cond = True
+            while convert_numerals('Latin', cond)!=False:
+              cond = False
+              time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skip_faulty=False
         )
 
     def test_allow_space_before_colon(self):
