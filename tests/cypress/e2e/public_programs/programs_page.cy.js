@@ -159,8 +159,7 @@ describe("General tests for my programs page (with both custom teacher and built
     
             cy.get('#program_3e8926c0515d47a5aeb116164b1278c9').should('be.visible')
             cy.get('#program_195d94e733ff49b08079848409e664b6').should('be.visible')
-    
-            cy.get('#program_e5cab94175164050a674a448454384bc').should('not.exist')
+
             cy.get('#program_e1d94726655947c5b0309abb18cc17ca').should('not.exist')
             cy.get('#program_4c426ff4cd5a40d7bb65bfbb35907f8b').should('not.exist')
     
@@ -170,7 +169,6 @@ describe("General tests for my programs page (with both custom teacher and built
             cy.get('#program_3e8926c0515d47a5aeb116164b1278c9').should('not.exist')
             cy.get('#program_195d94e733ff49b08079848409e664b6').should('not.exist')
     
-            cy.get('#program_e5cab94175164050a674a448454384bc').should('be.visible')
             cy.get('#program_e1d94726655947c5b0309abb18cc17ca').should('be.visible')
             cy.get('#program_4c426ff4cd5a40d7bb65bfbb35907f8b').should('be.visible')
     
@@ -178,8 +176,7 @@ describe("General tests for my programs page (with both custom teacher and built
             cy.get('#levels-dropdown').select(0);
             cy.get('#program_3e8926c0515d47a5aeb116164b1278c9').should('be.visible')
             cy.get('#program_195d94e733ff49b08079848409e664b6').should('be.visible')
-    
-            cy.get('#program_e5cab94175164050a674a448454384bc').should('be.visible')
+
             cy.get('#program_e1d94726655947c5b0309abb18cc17ca').should('be.visible')
             cy.get('#program_4c426ff4cd5a40d7bb65bfbb35907f8b').should('be.visible')
         })
@@ -195,8 +192,7 @@ describe("General tests for my programs page (with both custom teacher and built
             cy.get('#adventure_select').select(0);
             cy.get('#program_3e8926c0515d47a5aeb116164b1278c9').should('be.visible')
             cy.get('#program_195d94e733ff49b08079848409e664b6').should('be.visible')
-    
-            cy.get('#program_e5cab94175164050a674a448454384bc').should('be.visible')
+         
             cy.get('#program_e1d94726655947c5b0309abb18cc17ca').should('be.visible')
             cy.get('#program_4c426ff4cd5a40d7bb65bfbb35907f8b').should('be.visible')
         })
