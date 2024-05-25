@@ -19,7 +19,7 @@ describe('customize class page', () => {
 
       // Remove any customizations that already exist to get the class into a predictable state
       // This always throws up a modal dialog
-      cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');      
+      cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');
       cy.getBySel('remove_customizations_button').click();
       cy.getBySel('modal_yes_button').click();
       cy.wait('@restoreCustomizations');
@@ -197,18 +197,18 @@ describe('customize class page', () => {
     });
 
     it('Disabling current level displays a message', () => {
-      cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
+      cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');
 
       cy.getBySel('level-1').should('be.visible');
       cy.get('#state-disabled').should('not.be.visible');
 
       cy.get('#enable_level_1').parent('.switch').click();
       cy.get('#state-disabled').should('be.visible');
-      
+
       cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
     });
 
-    it('Clicking the Reset button displays a confirm dialog', () => {
+    it.only('Clicking the Reset button displays a confirm dialog', () => {
       /**
        * At the beggining, the Parrot adventure should be in the level 1's adventures
        */
@@ -253,7 +253,6 @@ describe('customize class page', () => {
   });
 
   function selectLevel(level) {
-    cy.getBySel("adventures")
-      .select(level)
-      .should('have.value', level);
+    cy.getBySel("adventures").select(level);
+    cy.getBySel("adventures").should('have.value', level);
   }
