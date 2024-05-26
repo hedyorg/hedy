@@ -1012,7 +1012,8 @@ def programs_page(user):
     page = request.args.get('page', default=None, type=str)
     filter = request.args.get('filter', default=None, type=str)
     submitted = True if filter == 'submitted' else None
-
+    if page == '':
+        page = None
     all_programs = DATABASE.filtered_programs_for_user(from_user or username,
                                                        submitted=submitted,
                                                        pagination_token=page)
