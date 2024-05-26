@@ -8,7 +8,7 @@ describe('Preview button test', () => {
     goToEditAdventure();
 
     // Initially this should not be visible
-    cy.get('#modal-confirm')
+    cy.get('[data-cy="modal_confirm"]')
       .should('not.be.visible');
     cy.get('#modal-no-button')
       .should('not.be.visible');
@@ -22,7 +22,7 @@ describe('Preview button test', () => {
       .should('have.attr', 'type', 'reset')
       .click();
 
-    cy.get('#modal-confirm')
+    cy.get('[data-cy="modal_confirm"]')
       .should('be.visible');
 
     cy.get('#modal-no-button')
@@ -32,7 +32,7 @@ describe('Preview button test', () => {
 
     cy.wait(500);
 
-    cy.get('#modal-confirm')
+    cy.get('[data-cy="modal_confirm"]')
       .should('not.be.visible');
     cy.get('#modal-no-button')
       .should('not.be.visible');

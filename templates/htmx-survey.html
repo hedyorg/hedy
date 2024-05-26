@@ -1,5 +1,5 @@
 {% block regular_content %}
-<div id="survey" class="flex absolute inset-0 z-50 items-center justify-center" style="background-color: #80808057;">
+<div id="survey" data-cy="survey" class="flex absolute inset-0 z-50 items-center justify-center" style="background-color: #80808057;">
     <div class="bg-blue-500 border border-black rounded-lg px-8 py-4 text-center">
         <div id="description" class="text-white mb-8 text-xl">{{ _(description) }}</div>
         <form id="survey-form">
@@ -12,7 +12,7 @@
                 </div>
             {% endfor %}
             <div class="mt-4 flex flex-row gap-4 justify-center">
-                <button id="submit" class="green-btn block w-40 pb-4 pt-4"
+                <button id="submit" data-cy="submit" class="green-btn block w-40 pb-4 pt-4"
                     hx-trigger="click"
                     hx-post="/surveys/submit-survey/{{ survey_id }}"
                     hx-include="[name='question']"
@@ -28,7 +28,7 @@
                         _="on click toggle .hidden on #survey">
                         {{_(survey_later)}}</button>
                 {% else %}
-                    <button id="cancel_survey" class="red-btn block w-40 pb-4 pt-4"
+                    <button id="cancel_survey" data-cy="cancel_survey" class="red-btn block w-40 pb-4 pt-4"
                         _="on click toggle .hidden on #survey">
                         {{_('cancel')}}</button>
                 {% endif %}
