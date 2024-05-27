@@ -957,7 +957,7 @@ class ForTeachersModule(WebsiteModule):
         classes = self.db.get_teacher_classes(user["username"], False)
         for account in body.get("accounts", []):
             if account.get("class") and account["class"] not in [i.get("name") for i in classes]:
-                return make_response(gettext("request_invalid"), 400)
+                return make_response(gettext("request_invalid"), 404)
             if self.db.user_by_username(account.get("username").strip().lower()):
                 return make_response(
                     {"error": gettext("usernames_exist"), "value": account.get("username").strip().lower()}

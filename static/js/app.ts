@@ -1093,11 +1093,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       currentProgram
      ).then(function(_mod) {
       console.log('Program executed');
-      console.log("pythonVariables")
       const pythonVariables = Sk.globals;
-      console.log(pythonVariables)
       load_variables(pythonVariables);
-      console.log("passed load_variables function!")
       $('#stopit').hide();
       $('#runit').show();
 

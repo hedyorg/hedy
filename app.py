@@ -698,7 +698,6 @@ def parse():
 
     if "Error" in response and error_check:
         response["message"] = gettext('program_contains_error')
-    # is this a 200?
     return make_response(response, 200)
 
 
@@ -722,7 +721,6 @@ def parse_by_id(user):
             )
             return make_response('', 204)
         except BaseException:
-            # this is a 200 but it's an error?
             make_response(gettext("request_invalid"), 200)
     else:
         return make_response(gettext("request_invalid"), 400)

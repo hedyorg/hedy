@@ -152,4 +152,4 @@ class ProfileModule(WebsiteModule):
 
         output["session_expires_at"] = timems() + SESSION_LENGTH * 1000
 
-        return make_response((output), 200)
+        return make_response(output, 200)

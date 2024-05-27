@@ -57,7 +57,7 @@ class ClassModule(WebsiteModule):
         achievement = self.achievements.add_single_achievement(user["username"], "ready_set_education")
         if achievement:
             utils.add_pending_achievement({"achievement": achievement})
-        return make_response('', 200)
+        return make_response({"id": Class["id"]}, 200)
 
     @route("/<class_id>", methods=["PUT"])
     @requires_teacher
@@ -231,7 +231,7 @@ class ClassModule(WebsiteModule):
             achievement = self.achievements.add_single_achievement(user["username"], "detention")
         if achievement:
             utils.add_pending_achievement({"achievement": achievement, "reload": True})
-        return make_response('', 204)
+        return make_response('', 205)
 
 
 class MiscClassPages(WebsiteModule):
