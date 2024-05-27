@@ -25,7 +25,7 @@ describe('Developers mode', () => {
       ({classname, students} = createClassAndAddStudents());
       navigateToClass(classname);
 
-      cy.get("#customize-class-button").click();
+      cy.get('[data-cy="customize_class_button"]').click();
       cy.get("#developers_mode")
         .should("not.be.checked")
         .click()
