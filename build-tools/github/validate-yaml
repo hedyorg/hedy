@@ -23,7 +23,7 @@ echo "------> Validating YAML"
 # 'npx pajv validate' just hangs. Running the 'pajv' binary directly without the use of
 # 'npx' does work... so we're just going to ¯\_(ツ)_/¯ and do that.
 
-pajv=node_modules/.bin/pajv
+pajv=node_modules/.bin/ajv
 
 all_schemas=$(find content -name \*.schema.json)
 
@@ -43,6 +43,7 @@ for schema in $all_schemas; do
 done
 
 # Also run the structure validator which compares en.yaml to the other languages
+echo "------> Checking data completeness w.r.t en.yaml"
 python tools/check-yaml-structure.py
 
 if $failures; then
