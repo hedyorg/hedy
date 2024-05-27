@@ -959,7 +959,9 @@ class ForTeachersModule(WebsiteModule):
             if account.get("class") and account["class"] not in [i.get("name") for i in classes]:
                 return make_response(gettext("request_invalid"), 400)
             if self.db.user_by_username(account.get("username").strip().lower()):
-                return make_response({"error": gettext("usernames_exist"), "value": account.get("username").strip().lower()}, 200)
+                return make_response(
+                    {"error": gettext("usernames_exist"), "value": account.get("username").strip().lower()}
+                    , 200)
 
         # the following is due to the fact that the current user may be a second user.
         teacher = classes[0].get("teacher") if len(classes) else user["username"]
