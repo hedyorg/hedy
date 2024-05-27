@@ -2664,6 +2664,8 @@ def public_user_page(username):
         return utils.error_page(error=404, ui_message=gettext('user_not_private'))
     user_public_info = DATABASE.get_public_profile_settings(username)
     page = request.args.get('page', default=None, type=str)
+    if page == '':
+        page = None
 
     keyword_lang = g.keyword_lang
     adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
