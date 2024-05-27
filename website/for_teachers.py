@@ -213,7 +213,7 @@ class ForTeachersModule(WebsiteModule):
             )
 
         student_overview_table, _, class_adventures_formatted, \
-            _, student_adventures = self.get_grid_info(user, class_id, 1)
+            _, student_adventures, graph_students = self.get_grid_info(user, class_id, 1)
 
         teacher = user if Class["teacher"] == user["username"] else self.db.user_by_username(Class["teacher"])
         second_teachers = [teacher] + Class.get("second_teachers", [])
@@ -248,7 +248,7 @@ class ForTeachersModule(WebsiteModule):
                 'student_adventures': student_adventures,
                 'graph_options': {
                     'level': level,
-                    'graph_students': students
+                    'graph_students': graph_students
                 }
             }
         )
@@ -284,31 +284,51 @@ class ForTeachersModule(WebsiteModule):
             class_adventures_formatted[key] = adventure_list
 
         student_adventures = {}
+        graph_students = []
         for student in students:
             programs = self.db.last_level_programs_for_user(student, level)
-            if programs:
-                current_program = {}
-                for _, program in programs.items():
-                    # Old programs sometimes don't have adventures associated to them
-                    # So skip them
-                    if 'adventure_name' not in program:
-                        continue
-                    name = adventure_names.get(program['adventure_name'], program['adventure_name'])
-                    customized_level = class_adventures_formatted.get(str(program['level']))
-                    if next((adventure for adventure in customized_level if adventure["name"] == name), False):
-                        student_adventure_id = f"{student}-{program['adventure_name']}-{level}"
-                        current_adventure = self.db.student_adventure_by_id(student_adventure_id)
-                        if not current_adventure:
-                            # store the adventure in case it's not in the table
-                            current_adventure = self.db.store_student_adventure(
-                                dict(id=f"{student_adventure_id}", ticked=False, program_id=program['id']))
+            program_stats = self.db.get_program_stats_per_level(student, level)
+            adventures_tried = 0
+            number_of_errors = 0
+            successful_runs = 0
+            # We use the program stats to get the number of errors, and successful runs in this level
+            if program_stats:
+                successful_runs = program_stats.get('successful_runs', 0)
+                for key in program_stats:
+                    if "Exception" in key:
+                        number_of_errors += program_stats[key]
+            # and we use the stored programs to get the numbers of adventures tried by the student
+            # and also to populate the table
+            for _, program in programs.items():
+                # Old programs sometimes don't have adventures associated to them
+                # So skip them
+                if 'adventure_name' not in program:
+                    continue
+                adventures_tried += 1
+                name = adventure_names.get(program['adventure_name'], program['adventure_name'])
+                customized_level = class_adventures_formatted.get(str(program['level']))
+                if next((adventure for adventure in customized_level if adventure["name"] == name), False):
+                    student_adventure_id = f"{student}-{program['adventure_name']}-{level}"
+                    current_adventure = self.db.student_adventure_by_id(student_adventure_id)
+                    if not current_adventure:
+                        # store the adventure in case it's not in the table
+                        current_adventure = self.db.store_student_adventure(
+                            dict(id=f"{student_adventure_id}", ticked=False, program_id=program['id']))
 
-                        current_program = dict(level=str(program['level']), name=name,
-                                               program=program['id'], ticked=current_adventure['ticked'])
+                    current_program = dict(level=str(program['level']), name=name,
+                                           program=program['id'], ticked=current_adventure['ticked'])
 
-                        student_adventures[student_adventure_id] = current_program
-
-        return students, class_, class_adventures_formatted, adventure_names, student_adventures
+                    student_adventures[student_adventure_id] = current_program
+            graph_students.append(
+                {
+                    "username": student,
+                    "programs": len(programs),
+                    "adventures_tried": adventures_tried,
+                    "number_of_errors": number_of_errors,
+                    "successful_runs": successful_runs
+                }
+            )
+        return students, class_, class_adventures_formatted, adventure_names, student_adventures, graph_students
 
     @route("/grid_overview/<class_id>/change_checkbox", methods=["POST"])
     @requires_login
@@ -350,7 +370,7 @@ class ForTeachersModule(WebsiteModule):
     def change_dropdown_level_class_overview(self, user, class_id):
         level = request.args.get('level')
         students, class_, class_adventures_formatted, \
-            adventure_names, student_adventures = self.get_grid_info(user, class_id, level)
+            adventure_names, student_adventures, graph_students = self.get_grid_info(user, class_id, level)
         adventure_names = {value: key for key, value in adventure_names.items()}
 
         return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
@@ -364,7 +384,10 @@ class ForTeachersModule(WebsiteModule):
                                                  'students': students,
                                                  'adventures': class_adventures_formatted,
                                                  'student_adventures': student_adventures,
-                                                 'level': level
+                                                 'graph_options': {
+                                                     'level': level,
+                                                     'graph_students': graph_students
+                                                 }
                                              }
                                              )
 
