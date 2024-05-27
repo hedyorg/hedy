@@ -413,7 +413,7 @@ class MiscClassPages(WebsiteModule):
         if not isinstance(body.get("username"), str):
             return make_response(gettext("username_invalid"), 400)
         if not isinstance(body.get("class_id"), str):
-           return make_response(gettext("request_invalid"), 400)
+            return make_response(gettext("request_invalid"), 400)
 
         username = body.get("username")
         class_id = body.get("class_id")
