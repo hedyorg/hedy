@@ -939,7 +939,7 @@ class Database:
     def get_program_stats_per_level(self, id, level, start=None, end=None):
         start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
         end_week = self.to_year_week(self.parse_date(end, date.today()))
-        data = PROGRAM_STATS.get({'id#level': id + '#' + str(level), "week": dynamo.Between(start_week, end_week)})
+        data = PROGRAM_STATS.get_many({'id#level': id + '#' + str(level), "week": dynamo.Between(start_week, end_week)})
         return data
 
     def parse_date(self, d, default):

@@ -246,11 +246,12 @@ class ForTeachersModule(WebsiteModule):
             number_of_errors = 0
             successful_runs = 0
             # We use the program stats to get the number of errors, and successful runs in this level
-            if program_stats:
-                successful_runs = program_stats.get('successful_runs', 0)
-                for key in program_stats:
+            for stat in program_stats:
+                successful_runs += stat.get('successful_runs', 0)
+                for key in stat:
                     if "Exception" in key:
-                        number_of_errors += program_stats[key]
+                        number_of_errors += stat[key]
+
             # and we use the stored programs to get the numbers of adventures tried by the student
             # and also to populate the table
             for _, program in programs.items():

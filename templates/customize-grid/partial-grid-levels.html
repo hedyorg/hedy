@@ -2,7 +2,7 @@
   <div id="level_button" class="dropdown relative mb-4">
     <button class="white-btn rounded inline-flex gap-2 text-xl" id="dropdown_level_button"
       onclick="$('#level_dropdown').slideToggle('medium');">
-      <span>{{ _('level_title') }} {{ adventure_table.level }}</span> <i id="level-arrow"
+      <span>{{ _('level_title') }} {{ adventure_table.graph_options.level }}</span> <i id="level-arrow"
         class="fa-solid fa-angle-down"></i>
     </button>
     <div class="absolute overflow-hidden block rounded-md ltr:left-0 rtl:right-0 w-40 ltr:mr-1 rtl:ml-1 cursor-auto p-4 shadow-lg dropdown-blue z-20" id="level_dropdown"
