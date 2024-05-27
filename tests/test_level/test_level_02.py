@@ -494,6 +494,7 @@ class TestsLevel2(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
+            max_level=3
         )
 
     def test_color_red_ar(self):
@@ -504,6 +505,7 @@ class TestsLevel2(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
+            max_level=3,
             lang='ar'
         )
 
@@ -533,7 +535,7 @@ class TestsLevel2(HedyTester):
             expected=expected,
             extra_check_function=self.is_turtle(),
             lang=lang,
-            max_level=10
+            max_level=3
         )
 
     def test_color_with_number_gives_type_error(self):

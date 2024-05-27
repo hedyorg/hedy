@@ -2032,12 +2032,15 @@ class ConvertToPython_4(ConvertToPython_3):
             if self.numerals_language == "Latin":
                 converted = escape_var(name)
             else:
-                converted = f'convert_numerals("{self.numerals_language}",{escape_var(name)})'
+                converted = f'convert_numerals("{self.numerals_language}", {escape_var(name)})'
             return "{" + converted + "}"
         else:
+            # at level 4 backslashes are escaped in preprocessing, so we escape only '
             if self.is_quoted(name):
                 name = name[1:-1]
-            return name.replace("'", "\\'")  # at level 4 backslashes are escaped in preprocessing, so we escape only '
+                return name.replace("'", "\\'")
+            name = name.replace("'", "\\'")
+            return f'{{convert_numerals("{self.numerals_language}", {escape_var(name)})}}'
 
     def var_access(self, meta, args):
         name = args[0]
