@@ -846,6 +846,7 @@ export function initializeGraph() {
           mode: 'point'
         },
         onClick: (_e, activePoints, chart) => {
+          if (activePoints.length === 0) return;
           const item: dataPoint = chart.data.datasets[0].data[activePoints[0].index] as dataPoint
           for(const point of activePoints) {
             console.log(chart.data.datasets[0].data[point.index])
