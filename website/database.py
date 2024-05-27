@@ -936,6 +936,12 @@ class Database:
         data = [PROGRAM_STATS.get_many({"id": i, "week": dynamo.Between(start_week, end_week)}) for i in ids]
         return functools.reduce(operator.iconcat, data, [])
 
+    def get_program_stats_per_level(self, id, level, start=None, end=None):
+        start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
+        end_week = self.to_year_week(self.parse_date(end, date.today()))
+        data = PROGRAM_STATS.get({'id#level': id + '#' + str(level), "week": dynamo.Between(start_week, end_week)})
+        return data
+
     def parse_date(self, d, default):
         return date(*map(int, d.split("-"))) if d else default
 
