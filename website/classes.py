@@ -198,7 +198,7 @@ class ClassModule(WebsiteModule):
 
         if achievement:
             utils.add_pending_achievement({"achievement": achievement})
-        return make_response('', 204)
+        return make_response('', 200)
 
     @route("/<class_id>/student/<student_id>", methods=["DELETE"])
     @requires_login

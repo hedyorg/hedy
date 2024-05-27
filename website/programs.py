@@ -136,7 +136,7 @@ class ProgramsModule(WebsiteModule):
         result = self.db.program_by_id(body["id"])
 
         if not result or (result["username"] != user["username"] and not is_admin(user)):
-            return make_response(gettext("request_invalid"), 400)
+            return make_response(gettext("request_invalid"), 404)
         self.db.delete_program_by_id(body["id"])
         self.db.increase_user_program_count(user["username"], -1)
 
@@ -238,7 +238,7 @@ class ProgramsModule(WebsiteModule):
     def share_unshare_program(self, user, program_id, second_teachers_programs):
         program = self.db.program_by_id(program_id)
         if not program or program["username"] != user["username"]:
-            return make_response(gettext("request_invalid"), 400)
+            return make_response(gettext("request_invalid"), 404)
 
         # This only happens in the situation were a user un-shares their favourite program -> Delete from public profile
         public_profile = self.db.get_public_profile_settings(current_user()["username"])
