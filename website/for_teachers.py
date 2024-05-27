@@ -1229,7 +1229,7 @@ class ForTeachersModule(WebsiteModule):
             code = safe_format(body.get("code"), **hedy_content.KEYWORDS.get(g.keyword_lang))
         except BaseException:
             return make_response(gettext("something_went_wrong_keyword_parsing"), 400)
-        return make_response(code, 200)
+        return make_response({"code": code}, 200)
 
     def add_adventure_to_class_level(self, user, class_id, adventure_id, level, remove_adv):
         Class = self.db.get_class(class_id)
