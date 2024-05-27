@@ -28,6 +28,7 @@ from website.auth import (
 from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
+from website.frontend_types import halve_adventure_content
 
 SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
 for lang in hedy_content.ALL_LANGUAGES.keys():
@@ -1050,6 +1051,10 @@ class ForTeachersModule(WebsiteModule):
                                            **hedy_content.KEYWORDS.get(g.keyword_lang))
         adventure['solution_example'] = safe_format(adventure.get('solution_example', ''),
                                                     **hedy_content.KEYWORDS.get(g.keyword_lang))
+
+        # We don't change adventure["content"] because it's used in the editor, while this is for previwing only.
+        preview_content, adventure["example_code"] = halve_adventure_content(adventure["content"])
+
         # Now it gets a bit complex, we want to get the teacher classes as well as the customizations
         # This is a quite expensive retrieval, but we should be fine as this page is not called often
         # We only need the name, id and if it already has the adventure set as data to the front-end
@@ -1080,6 +1085,7 @@ class ForTeachersModule(WebsiteModule):
             # TODO: update tags to be {name, canEdit} where canEdit is true if currentUser is the creator.
             adventure_tags=adventure.get("tags", []),
             level=adventure.get("level"),
+            content=preview_content,
             js=dict(
                 content=adventure.get("content"),
                 lang=g.lang,
