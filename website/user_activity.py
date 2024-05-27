@@ -36,7 +36,7 @@ class UserActivityModule(WebsiteModule):
         # /tracking activity/
         user = self.db.user_by_username(user["username"])
         if not user:
-            return {}, 304
+            return make_response('', 304)
         body = request.json
         data = []
 
@@ -61,4 +61,4 @@ class UserActivityModule(WebsiteModule):
             logger.log(data)
             return make_response('', 204)
         except IOError:
-            return "Not logged", 400
+            return make_response(gettext("request_invalid"), 400)

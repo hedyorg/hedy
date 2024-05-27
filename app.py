@@ -423,7 +423,7 @@ def setup_language():
 
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
-        return "Language " + g.lang + " not supported", 404
+        return make_response(gettext("request_invalid"), 404)
 
 
 if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
@@ -524,17 +524,17 @@ def echo_session_vars_main():
 def parse():
     body = request.json
     if not body:
-        return "body must be an object", 400
+        return make_response(gettext("request_invalid"), 400)
     if 'code' not in body:
-        return "body.code must be a string", 400
+        return make_response(gettext("request_invalid"), 400)
     if 'level' not in body:
-        return "body.level must be a string", 400
+        return make_response(gettext("request_invalid"), 400)
     if 'adventure_name' in body and not isinstance(body['adventure_name'], str):
-        return "if present, body.adventure_name must be a string", 400
+        return make_response(gettext("request_invalid"), 400)
     if 'is_debug' not in body:
-        return "body.is_debug must be a boolean", 400
+        return make_response(gettext("request_invalid"), 400)
     if 'raw' not in body:
-        return "body.raw is missing", 400
+        return make_response(gettext("request_invalid"), 400)
     error_check = False
     if 'error_check' in body:
         error_check = True
@@ -723,7 +723,7 @@ def parse_by_id(user):
             return make_response('', 204)
         except BaseException:
             # this is a 200 but it's an error?
-            return {"error": "parsing error"}, 200
+            make_response(gettext("request_invalid"), 200)
     else:
         return make_response(gettext("request_invalid"), 400)
 
@@ -2320,9 +2320,9 @@ def translate_keywords():
             session["keyword_lang"] = body.get("goal_lang")
             return make_response({'code': translated_code}, 200)
         else:
-            return gettext('translate_error'), 400
+            return make_response(gettext("translate_error"), 400)
     except BaseException:
-        return gettext('translate_error'), 400
+        return make_response(gettext('translate_error'), 400)
 
 
 # TODO TB: Think about changing this to sending all steps to the front-end at once
@@ -2335,7 +2335,7 @@ def get_tutorial_translation(level, step):
     try:
         step = int(step)
     except ValueError:
-        return gettext('invalid_tutorial_step'), 400
+        return make_response(gettext('invalid_tutorial_step'), 400)
 
     data = TUTORIALS[g.lang].get_tutorial_for_level_step(level, step, g.keyword_lang)
     if not data:
@@ -2589,20 +2589,20 @@ def update_public_profile(user):
 
     # Validations
     if not isinstance(body, dict):
-        return gettext('ajax_error'), 400
+        return make_response(gettext('ajax_error'), 400)
     # The images are given as a "picture id" from 1 till 12
     if not isinstance(body.get('image'), str) or int(body.get('image'), 0) not in [*range(1, 13)]:
-        return gettext('image_invalid'), 400
+        return make_response(gettext('image_invalid'), 400)
     if not isinstance(body.get('personal_text'), str):
-        return gettext('personal_text_invalid'), 400
+        return make_response(gettext('personal_text_invalid'), 400)
     if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
-        return gettext('favourite_program_invalid'), 400
+        return make_response(gettext('favourite_program_invalid'), 400)
 
     # Verify that the set favourite program is actually from the user (and public)!
     if 'favourite_program' in body:
         program = DATABASE.program_by_id(body.get('favourite_program'))
         if not program or program.get('username') != user['username'] or not program.get('public'):
-            return gettext('favourite_program_invalid'), 400
+            return make_response(gettext('favourite_program_invalid'), 400)
 
     achievement = None
     current_profile = DATABASE.get_public_profile_settings(user['username'])
@@ -2626,10 +2626,7 @@ def update_public_profile(user):
             body['tags'].append('admin')
 
     DATABASE.update_public_profile(user['username'], body)
-    if achievement:
-        # Todo TB -> Check if we require message or success on front-end
-        return {'message': gettext('public_profile_updated'), 'achievement': achievement}, 200
-    return {'message': gettext('public_profile_updated')}, 200
+    return make_response(gettext("public_profile_updated"), 200)
 
 
 @app.route('/translating')

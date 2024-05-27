@@ -124,19 +124,19 @@ class ProgramsModule(WebsiteModule):
     @requires_login
     def list_programs(self, user):
         # Filter by level, adventure, submitted, paginated.
-        return {"programs": self.db.programs_for_user(user["username"]).records}
+        return make_response({"programs": self.db.programs_for_user(user["username"]).records})
 
     @route("/delete/", methods=["POST"])
     @requires_login
     def delete_program(self, user):
         body = request.json
         if not isinstance(body.get("id"), str):
-            return "program id must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
 
         result = self.db.program_by_id(body["id"])
 
         if not result or (result["username"] != user["username"] and not is_admin(user)):
-            return "", 404
+            return make_response(gettext("request_invalid"), 400)
         self.db.delete_program_by_id(body["id"])
         self.db.increase_user_program_count(user["username"], -1)
 
@@ -160,12 +160,12 @@ class ProgramsModule(WebsiteModule):
     def check_duplicate_program(self):
         body = request.json
         if not isinstance(body, dict):
-            return "body must be an object", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("name"), str):
-            return "name must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
 
         if not current_user()["username"]:
-            return gettext("save_prompt"), 403
+            return make_response(gettext("save_prompt"), 403)
 
         programs = self.db.programs_for_user(current_user()["username"])
         for program in programs:
@@ -178,20 +178,20 @@ class ProgramsModule(WebsiteModule):
     def save_program(self, user):
         body = request.json
         if not isinstance(body, dict):
-            return "body must be an object", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("code"), str):
-            return "code must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("name"), str):
-            return "name must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("level"), int):
-            return "level must be an integer", 400
+            return make_response(gettext("request_invalid"), 400)
         if 'program_id' in body and not isinstance(body.get("program_id"), str):
-            return "program_id must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
         if 'shared' in body and not isinstance(body.get("shared"), bool):
-            return "shared must be a boolean", 400
+            return make_response(gettext("request_invalid"), 400)
         if "adventure_name" in body:
             if not isinstance(body.get("adventure_name"), str):
-                return "if present, adventure_name must be a string", 400
+                return make_response(gettext("request_invalid"), 400)
 
         error = None
         program_id = body.get('program_id')
@@ -238,7 +238,7 @@ class ProgramsModule(WebsiteModule):
     def share_unshare_program(self, user, program_id, second_teachers_programs):
         program = self.db.program_by_id(program_id)
         if not program or program["username"] != user["username"]:
-            return "No such program!", 404
+            return make_response(gettext("request_invalid"), 400)
 
         # This only happens in the situation were a user un-shares their favourite program -> Delete from public profile
         public_profile = self.db.get_public_profile_settings(current_user()["username"])
@@ -274,13 +274,13 @@ class ProgramsModule(WebsiteModule):
     def submit_program(self, user):
         body = request.json
         if not isinstance(body, dict):
-            return "body must be an object", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("id"), str):
-            return "id must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
 
         result = self.db.program_by_id(body["id"])
         if not result or result["username"] != user["username"]:
-            return "No such program!", 404
+            return make_response(gettext("request_invalid"), 400)
 
         program = self.db.submit_program_by_id(body["id"], True)
         self.db.increase_user_submit_count(user["username"])
@@ -299,13 +299,13 @@ class ProgramsModule(WebsiteModule):
     def unsubmit_program(self, user):
         body = request.json
         if not isinstance(body, dict):
-            return "body must be an object", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("id"), str):
-            return "id must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
 
         result = self.db.program_by_id(body["id"])
         if not result:
-            return "No such program!", 404
+            return make_response(gettext("request_invalid"), 400)
 
         program = self.db.submit_program_by_id(body["id"], False)
 
@@ -321,15 +321,15 @@ class ProgramsModule(WebsiteModule):
     def set_favourite_program(self, user):
         body = request.json
         if not isinstance(body, dict):
-            return "body must be an object", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("id"), str):
-            return "id must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("set"), bool):
-            return "set must be a bool", 400
+            return make_response(gettext("request_invalid"), 400)
 
         result = self.db.program_by_id(body["id"])
         if not result or result["username"] != user["username"]:
-            return "No such program!", 404
+            return make_response(gettext("request_invalid"), 400)
 
         if self.db.set_favourite_program(user["username"], body["id"], body["set"]):
             message = gettext("favourite_success") if body["set"] else gettext("unfavourite_success")
@@ -342,17 +342,17 @@ class ProgramsModule(WebsiteModule):
     def set_hedy_choice(self, user):
         body = request.json
         if not isinstance(body, dict):
-            return "body must be an object", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("id"), str):
-            return "id must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("favourite"), int):
-            return "favourite must be a integer", 400
+            return make_response(gettext("request_invalid"), 400)
 
         favourite = True if body.get("favourite") == 1 else False
 
         result = self.db.program_by_id(body["id"])
         if not result:
-            return "No such program!", 404
+            return make_response(gettext("request_invalid"), 400)
 
         self.db.set_program_as_hedy_choice(body["id"], favourite)
         if favourite:
@@ -367,7 +367,7 @@ class ProgramsModule(WebsiteModule):
         # Make sure the program actually exists and is public
         program = self.db.program_by_id(body.get("id"))
         if not program or program.get("public") != 1:
-            return gettext("report_failure"), 400
+            return make_response(gettext("report_failure"), 400)
 
         link = email_base_url() + "/hedy/" + body.get("id") + "/view"
         send_email(
@@ -377,7 +377,7 @@ class ProgramsModule(WebsiteModule):
             '<a href="' + link + '">Program link</a>',
         )
 
-        return {"message": gettext("report_success")}, 200
+        return make_response(gettext("report_success"), 200)
 
 
 class NotYourProgramError(RuntimeError):

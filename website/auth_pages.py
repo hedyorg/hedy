@@ -45,11 +45,11 @@ class AuthModule(WebsiteModule):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("username"), str):
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
         if not isinstance(body.get("password"), str):
-            return gettext("password_invalid"), 400
+            return make_response(gettext("password_invalid"), 400)
 
         # If username has an @-sign, then it's an email
         if "@" in body["username"]:
@@ -58,7 +58,7 @@ class AuthModule(WebsiteModule):
             user = self.db.user_by_username(body["username"])
 
         if not user or not check_password(body["password"], user["password"]):
-            return gettext("invalid_username_password") + " " + gettext("no_account"), 403
+            return make_response(gettext("invalid_username_password") + " " + gettext("no_account"), 403)
 
         # If the number of bcrypt rounds has changed, create a new hash.
         new_hash = None
@@ -114,7 +114,7 @@ class AuthModule(WebsiteModule):
         body = request.json
         # Validations, mandatory fields
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
 
         # Validate the essential data using a function -> also used for multiple account creation
         validation = validate_signup_data(body)
@@ -123,16 +123,16 @@ class AuthModule(WebsiteModule):
 
         # Validate fields only relevant when creating a single user account
         if not isinstance(body.get("password_repeat"), str) or body["password"] != body["password_repeat"]:
-            return gettext("repeat_match_password"), 400
+            return make_response(gettext("repeat_match_password"), 400)
         if not isinstance(body.get("language"), str) or body.get("language") not in ALL_LANGUAGES.keys():
-            return gettext("language_invalid"), 400
+            return make_response(gettext("language_invalid"), 400)
         if not isinstance(body.get("agree_terms"), str) or not body.get("agree_terms"):
-            return gettext("agree_invalid"), 400
+            return make_response(gettext("agree_invalid"), 400)
         if not isinstance(body.get("keyword_language"), str) or body.get("keyword_language") not in [
             "en",
             body.get("language"),
         ]:
-            return gettext("keyword_language_invalid"), 400
+            return make_response(gettext("keyword_language_invalid"), 400)
 
         # Validations, optional fields
         if "birth_year" in body:
@@ -145,34 +145,34 @@ class AuthModule(WebsiteModule):
                 return safe_format(gettext("year_invalid"), current_year=str(year)), 400
         if "gender" in body:
             if body["gender"] != "m" and body["gender"] != "f" and body["gender"] != "o":
-                return gettext("gender_invalid"), 400
+                return make_response(gettext("gender_invalid"), 400)
         if "country" in body:
             if not body["country"] in COUNTRIES:
-                return gettext("country_invalid"), 400
+                return make_response(gettext("country_invalid"), 400)
         if "heard_about" in body:
             if isinstance(body["heard_about"], str):
                 body["heard_about"] = [body["heard_about"]]
             if not isinstance(body["heard_about"], list):
-                return gettext("heard_about_invalid"), 400
+                return make_response(gettext("heard_about_invalid"), 400)
             for option in body["heard_about"]:
                 if option not in ["from_another_teacher", "social_media", "from_video", "from_magazine_website",
                                   "other_source"]:
-                    return gettext("heard_about_invalid"), 400
+                    return make_response(gettext("heard_about_invalid"), 400)
         if "prog_experience" in body and body["prog_experience"] not in ["yes", "no"]:
-            return gettext("experience_invalid"), 400
+            return make_response(gettext("experience_invalid"), 400)
         if "experience_languages" in body:
             if isinstance(body["experience_languages"], str):
                 body["experience_languages"] = [body["experience_languages"]]
             if not isinstance(body["experience_languages"], list):
-                return gettext("experience_invalid"), 400
+                return make_response(gettext("experience_invalid"), 400)
             for language in body["experience_languages"]:
                 if language not in ["scratch", "other_block", "python", "other_text"]:
-                    return gettext("programming_invalid"), 400
+                    return make_response(gettext("programming_invalid"), 400)
 
         if self.db.user_by_username(body["username"].strip().lower()):
-            return gettext("exists_username"), 403
+            return make_response(gettext("exists_username"), 403)
         if self.db.user_by_email(body["email"].strip().lower()):
-            return gettext("exists_email"), 403
+            return make_response(gettext("exists_email"), 403)
 
         # We receive the pre-processed user and response package from the function
         user, resp = self.store_new_account(body, body["email"].strip().lower())
@@ -214,14 +214,14 @@ class AuthModule(WebsiteModule):
         username = request.args.get("username", None)
         token = request.args.get("token", None)
         if not token:
-            return gettext("token_invalid"), 400
+            return make_response(gettext("token_invalid"), 400)
         if not username:
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
 
         # Verify that user actually exists
         user = self.db.user_by_username(username)
         if not user:
-            return gettext("username_invalid"), 403
+            return make_response(gettext("username_invalid"), 403)
 
         # If user is already verified -> re-direct to landing-page anyway
         if "verification_pending" not in user:
@@ -229,7 +229,7 @@ class AuthModule(WebsiteModule):
 
         # Verify the token
         if token != user["verification_pending"]:
-            return gettext("token_invalid"), 403
+            return make_response(gettext("token_invalid"), 403)
 
         # Remove the token from the user
         self.db.update_user(username, {"verification_pending": None})
@@ -271,24 +271,24 @@ class AuthModule(WebsiteModule):
     def change_student_password(self, user):
         body = request.json
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("username"), str):
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
         if not isinstance(body.get("password"), str):
-            return gettext("password_invalid"), 400
+            return make_response(gettext("password_invalid"), 400)
         if len(body["password"]) < 6:
-            return gettext("password_six"), 400
+            return make_response(gettext("password_six"), 400)
 
         if not is_teacher(user):
-            return gettext("password_change_not_allowed"), 400
+            return make_response(gettext("password_change_not_allowed"), 400)
         students = self.db.get_teacher_students(user["username"])
         if body["username"] not in students:
-            return gettext("password_change_not_allowed"), 400
+            return make_response(gettext("password_change_not_allowed"), 400)
 
         hashed = password_hash(body["password"], make_salt())
         self.db.update_user(body["username"], {"password": hashed})
 
-        return {"success": gettext("password_change_success")}, 200
+        return make_response(gettext("password_change_success"), 200)
 
     @ route("/change_password", methods=["POST"])
     @ requires_login
@@ -296,21 +296,21 @@ class AuthModule(WebsiteModule):
         body = request.json
 
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("old_password"), str) or not isinstance(body.get("new-password"), str):
-            return gettext("password_invalid"), 400
+            return make_response(gettext("password_invalid"), 400)
         if not isinstance(body.get("password_repeat"), str):
-            return gettext("repeat_match_password"), 400
+            return make_response(gettext("repeat_match_password"), 400)
         if len(body["new-password"]) < 6:
-            return gettext("password_six"), 400
+            return make_response(gettext("password_six"), 400)
         if body["new-password"] != body["password_repeat"]:
-            return gettext("repeat_match_password"), 400
+            return make_response(gettext("repeat_match_password"), 400)
 
         # The user object we got from 'requires_login' doesn't have the password, so look that up in the database
         user = self.db.user_by_username(user["username"])
 
         if not check_password(body["old_password"], user["password"]):
-            return gettext("password_invalid"), 403
+            return make_response(gettext("password_invalid"), 403)
 
         hashed = password_hash(body["new-password"], make_salt())
 
@@ -320,7 +320,7 @@ class AuthModule(WebsiteModule):
             try:
                 send_email_template(template="change_password", email=user["email"], username=user["username"])
             except BaseException:
-                return gettext("mail_error_change_processed"), 400
+                return make_response(gettext("mail_error_change_processed"), 400)
 
         return make_response({"message": gettext("password_updated")}, 200)
 
@@ -329,9 +329,9 @@ class AuthModule(WebsiteModule):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("username"), str):
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
 
         # If username has an @-sign, then it's an email
         if "@" in body["username"]:
@@ -340,7 +340,7 @@ class AuthModule(WebsiteModule):
             user = self.db.user_by_username(body["username"].strip().lower())
 
         if not user:
-            return gettext("username_invalid"), 403
+            return make_response(gettext("username_invalid"), 403)
 
         # In this case -> account has a related teacher (and is a student)
         # We still store the token, but sent the mail to the teacher instead
@@ -366,7 +366,7 @@ class AuthModule(WebsiteModule):
                     username=user["username"],
                 )
             except BaseException:
-                return gettext("mail_error_change_processed"), 400
+                return make_response(gettext("mail_error_change_processed"), 400)
 
             return make_response({"message": gettext("sent_password_recovery")}, 200)
 
@@ -375,21 +375,21 @@ class AuthModule(WebsiteModule):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("username"), str):
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
         if not isinstance(body.get("token"), str):
-            return gettext("token_invalid"), 400
+            return make_response(gettext("token_invalid"), 400)
         if not isinstance(body.get("password"), str):
-            return gettext("password_invalid"), 400
+            return make_response(gettext("password_invalid"), 400)
         if len(body["password"]) < 6:
-            return gettext("password_six"), 400
+            return make_response(gettext("password_six"), 400)
         if not isinstance(body.get("password_repeat"), str) or body["password"] != body["password_repeat"]:
-            return gettext("repeat_match_password"), 400
+            return make_response(gettext("repeat_match_password"), 400)
 
         token = self.db.get_token(body["token"])
         if not token or body["token"] != token.get("id") or body["username"] != token.get("username"):
-            return gettext("token_invalid"), 401
+            return make_response(gettext("token_invalid"), 401)
 
         hashed = password_hash(body["password"], make_salt())
         self.db.update_user(body["username"], {"password": hashed})
@@ -409,7 +409,7 @@ class AuthModule(WebsiteModule):
             try:
                 send_email_template(template="reset_password", email=email, username=user["username"])
             except BaseException:
-                return gettext("mail_error_change_processed"), 400
+                return make_response(gettext("mail_error_change_processed"), 400)
 
         return make_response({"message": gettext("password_resetted")}, 200)
 
@@ -418,9 +418,9 @@ class AuthModule(WebsiteModule):
     def request_teacher_account(self, user):
         account = self.db.user_by_username(user["username"])
         if account.get("is_teacher"):
-            return gettext("already_teacher"), 400
+            return make_response(gettext("already_teacher"), 400)
         if account.get("teacher_request"):
-            return gettext("already_teacher_request"), 400
+            return make_response(gettext("already_teacher_request"), 400)
 
         self.db.update_user(user["username"], {"teacher_request": True})
         return make_response({"message": gettext("teacher_account_success")}, 200)
