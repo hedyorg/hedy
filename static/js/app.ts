@@ -1618,18 +1618,16 @@ export function toggle_blur_code() {
 
 export async function change_language(lang: string) {
   await tryCatchPopup(async () => {
-    const response = await postJsonWithAchievements('/change_language', { lang });
-    if (response.success) {
-      const queryString = window.location.search;
-      const urlParams = new URLSearchParams(queryString);
+    await postJsonWithAchievements('/change_language', { lang });
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
 
-      if (lang === 'en' || urlParams.get("language") !== null) {
-        urlParams.set("language", lang)
-        urlParams.set('keyword_language', lang);
-        window.location.search = urlParams.toString();
-      } else {
-        location.reload();
-      }
+    if (lang === 'en' || urlParams.get("language") !== null) {
+      urlParams.set("language", lang)
+      urlParams.set('keyword_language', lang);
+      window.location.search = urlParams.toString();
+    } else {
+      location.reload();
     }
   });
 }

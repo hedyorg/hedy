@@ -1,6 +1,6 @@
 import uuid
 
-from flask import jsonify, make_response, redirect, request, session
+from flask import make_response, redirect, request, session
 from jinja_partials import render_partial
 from flask_babel import gettext
 
@@ -248,7 +248,7 @@ class MiscClassPages(WebsiteModule):
     @route("/classes", methods=["GET"])
     @requires_teacher
     def get_classes(self, user):
-        return jsonify(self.db.get_teacher_classes(user["username"], True))
+        return make_response(self.db.get_teacher_classes(user["username"], True))
 
     @route("/duplicate_class", methods=["POST"])
     @requires_teacher

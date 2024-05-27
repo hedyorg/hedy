@@ -24,7 +24,7 @@ from iso639 import languages
 import static_babel_content
 from markupsafe import Markup
 from flask import (Flask, Response, abort, after_this_request, g, make_response,
-                   redirect, request, send_file, url_for, jsonify,
+                   redirect, request, send_file, url_for,
                    send_from_directory, session)
 from flask_babel import Babel, gettext
 from website.flask_commonmark import Commonmark
@@ -508,14 +508,14 @@ if os.getenv('PROXY_TO_TEST_HOST') and not os.getenv('IS_TEST_ENV'):
 def echo_session_vars_test():
     if not utils.is_testing_request(request):
         return make_response(gettext("request_invalid"), 400)
-    return jsonify({'session': dict(session)})
+    return make_response({'session': dict(session)})
 
 
 @app.route('/session_main', methods=['GET'])
 def echo_session_vars_main():
     if not utils.is_testing_request(request):
         return make_response(gettext("request_invalid"), 400)
-    return jsonify({'session': dict(session),
+    return make_response({'session': dict(session),
                     'proxy_enabled': bool(os.getenv('PROXY_TO_TEST_HOST'))})
 
 
@@ -736,7 +736,7 @@ def parse_tutorial(user):
     try:
         result = hedy.transpile(code, level, "en")
         # this is not a return, is this code needed?
-        jsonify({'code': result.code}), 200
+        make_response(({'code': result.code}), 200)
     except BaseException:
         return make_response(gettext("request_invalid"), 400)
 
@@ -2285,7 +2285,7 @@ def change_language():
     # Remove 'keyword_lang' from session, it will automatically be renegotiated from 'lang'
     # on the next page load.
     session.pop('keyword_lang')
-    return jsonify({'success': 204})
+    return make_response('', 204)
 
 
 @app.route('/slides', methods=['GET'], defaults={'level': '1'})
