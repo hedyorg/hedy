@@ -361,7 +361,7 @@ code {
 }
 
 .dropdown-menu {
-  @apply absolute overflow-hidden block rounded-md ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max p-4 shadow-lg;;
+  @apply absolute block rounded-md ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max p-4 shadow-lg;;
   top: 40px;
   @apply cursor-auto; /* Undo cursor-pointer we inherit from the menu */
 }
@@ -380,6 +380,12 @@ code {
 
 .dropdown-green h2 {
   @apply text-green-600;
+}
+
+.add-language-item {
+  @apply text-gray-800 bg-green-400 no-underline hover:bg-green-500 hover:text-white py-2 px-4 block whitespace-nowrap;
+  @apply cursor-pointer w-52 font-medium rounded-md;
+  @apply grow-0;
 }
 
 .dropdown-item {

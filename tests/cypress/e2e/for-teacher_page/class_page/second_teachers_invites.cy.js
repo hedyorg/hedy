@@ -1,4 +1,4 @@
-import {loginForTeacher, logout} from "../../tools/login/login.js"
+import { loginForTeacher } from "../../tools/login/login.js"
 import { goToProfilePage } from "../../tools/navigation/nav";
 import { createClass, navigateToClass } from "../../tools/classes/class";
 
@@ -20,14 +20,14 @@ describe("Second teachers: invitations", () => {
     navigateToClass(className);
 
     for (const teacher of secondTeachers) {
-      cy.get("#add-second-teacher").click();
-      cy.get("#modal-prompt-input").type(teacher);
-      cy.get("#modal-ok-button").click();
+      cy.get('[data-cy="add_second_teacher"]').click();
+      cy.get('[data-cy="modal_prompt_input"]').type(teacher);
+      cy.get('[data-cy="modal_ok_button"]').click();
     }
 
     // Check that both invited teachers are in the table
     for (const teacher of secondTeachers) {
-      cy.get("#invites-block table")
+      cy.get('[data-cy="invites_block"]')
         .contains(teacher);
     }
   })
@@ -36,11 +36,11 @@ describe("Second teachers: invitations", () => {
     loginForTeacher();
     navigateToClass(className);
 
-    cy.get("#add-second-teacher").click();
-    cy.get("#modal-prompt-input").type(secondTeachers[0]);
-    cy.get("#modal-ok-button").click();
+    cy.get('[data-cy="add_second_teacher"]').click();
+    cy.get('[data-cy="modal_prompt_input"]').type(secondTeachers[0]);
+    cy.get('[data-cy="modal_ok_button"]').click();
 
-    cy.get("#modal_alert_container")
+    cy.get('[data-cy="modal_alert_container"]')
       .contains('pending invitation')
   })
 
@@ -48,18 +48,18 @@ describe("Second teachers: invitations", () => {
     loginForTeacher();
     navigateToClass(className);
 
-    cy.get("#invites-block table")
-      .get('.username_cell')
+    cy.get('[data-cy="invites_block"]')
+      .get('[data-cy="invite_username_cell"]')
       .contains(secondTeachers[1])
       .parent('tr')
-      .find('.remove_user_invitation a')
+      .find('[data-cy="remove_user_invitation"]')
       .click();
 
-    cy.get('#modal-confirm #modal-yes-button').click();
+    cy.get('[data-cy="modal_confirm"] [data-cy="modal_yes_button"]').click();
 
     // This needs to come before we accept teacher2's invitation, otherwise
     // after this there are no invites and so this table isn't rendered at all.
-    cy.get("#invites-block table")
+    cy.get('[data-cy="invites_block"]')
       .should("not.contain", secondTeachers[1]);
   });
 
@@ -67,7 +67,7 @@ describe("Second teachers: invitations", () => {
     cy.intercept('class/join/**').as('join');
     loginForTeacher(secondTeachers[0]);
     goToProfilePage();
-    cy.get("#messages #join").click();
+    cy.get('[data-cy="join_link"]').click();
     // Give the Ajax request that gets sent as a result of the click enough time to complete
     cy.wait('@join');
   })
@@ -76,6 +76,6 @@ describe("Second teachers: invitations", () => {
     loginForTeacher();
     navigateToClass(className);
 
-    cy.get("#second_teachers_container .username_cell").contains(secondTeachers[0]);
+    cy.get('[data-cy="second_teacher_username_cell"]').contains(secondTeachers[0]);
   })
 })

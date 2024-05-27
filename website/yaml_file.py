@@ -114,7 +114,7 @@ class YamlFile:
         yaml_ts = self._file_timestamp(self.filename)
         pickle_ts = self._file_timestamp(self.pickle_filename)
 
-        if pickle_ts and pickle_ts > yaml_ts:
+        if pickle_ts and yaml_ts and pickle_ts > yaml_ts:
             # Pickle file is newer than the YAML, just read that
             return self.load_pickle()
 

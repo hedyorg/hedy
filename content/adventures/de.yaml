@@ -858,15 +858,15 @@ adventures:
                     ### Übung
                     Debugge den Code. Viel Glück!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Achtung! Dieser Code muss debugged werden!**
                     ```
-                    destination {ask} Where are you going on holidays?
-                    {print} The flight to dstination leaves at 3 pm.
-                    {ask} Did you check in your luggage yet?
+                    reiseziel {ask} Wohin willst du in den Urlaub?
+                    {print} Der Flug nach reseziel hebt um 13 Uhr ab.
+                    {ask} Hast du schon dein Gepäck abgegeben?
                     {echo}
-                    {print} Let me print your boarding pass for you.
+                    {print} Lass mich deine Boardkarten für dich ausdrucken.
                     {sleep}
-                    Here you go! Have a nice trip!
+                    Bitte schön! Gute Reise!
                     ```
             3:
                 story_text: |-
@@ -877,17 +877,17 @@ adventures:
                     ### Übung
                     Debugge den Code. Viel Glück!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Achtung! Dieser Code muss debugged werden!**
                     ```
-                    movie_choices {is} dracula, fast and furious, home alone, barbie
-                    chosen_movie {is} movies {at} {random}
-                    {print} Tonight we will watch chosen _movies
-                    like {ask} Do you like that movie?
-                    {print} Tomorrow we will watch something else.
-                    {add} chosen_movie {to} movie_choices
-                    {print} Tomorrow we will watch tomorrows_movie
-                    tomorrows_movie {is} movie_choices {at} {random}
-                    I'll go get the popcorn! {print}
+                    film_auswahl {is} Dracula, Harry Potter, Shrek, Barbie
+                    film_wahl {is} filme {at} {random}
+                    {print} Heute schau wir uns film _wahl an
+                    Magst {ask} Magst du den Film?
+                    {print} Morgen schauen wir etwas anderes.
+                    {add} film_wahl {to} film_auswahl
+                    {print} Morgen schauen wir  morgige_filme
+                    morgige_filme {is} film_auswahl {at} {random}
+                    I hole uns mal das Popcorn! {print}
                     ```
             4:
                 story_text: |-
@@ -1514,8 +1514,8 @@ adventures:
             3:
                 story_text: |
                     In diesem Level können wir von einer Liste wählen. Damit können wir den Computer eine Seite des Würfels wählen lassen.
-                    Schaut mal in die Brettspiele in Eurem Schrank zu Hause.
-                    Haben einige davon (besondere) Würfel? Die kannst Du auch mit diesem Code nachbauen.
+                    Schaut mal in die Brettspiele in eurem Schrank zu Hause.
+                    Haben einige davon (besondere) Würfel? Die kannst du auch mit diesem Code nachbauen.
                     Zum Beispiel den Würfel aus "Heckmeck am Bratwurmeck" mit den Zahlen 1 bis 5 und einem Regenwurm darauf.
 
                     ![Würfel aus "Heckmeck am Bratwurmeck" mit den Zahlen 1 bis 5 und einem Regenwurm darauf](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
@@ -1833,7 +1833,7 @@ adventures:
                     **Extra** Ändere den Code und lasse die Wahrsagerin nicht nur deinen Namen vorhersagen, sondern auch dein Alter, dein Lieblingssport-Team oder etwas anderes über dich.
             3:
                 story_text: |
-                    Im vorigen Level hast du deine erste Wahrsagemaschine erstellt, aber Hedy konnte nichts wirklich vorhersagen, sonder nur `{echo}`.
+                    Im vorigen Level hast du deine erste Wahrsagemaschine erstellt, aber Hedy konnte nichts wirklich vorhersagen, sondern nur `{echo}`.
                     In diesem Level kannst du Variablen und den `{at} {random}` Befehl benutzen, um Hedy wirklich eine Antwort für dich auswählen zu lassen. Schau dir zum Beispiel diesen Code an:
                 example_code: |
                     ```
@@ -2344,12 +2344,12 @@ adventures:
                     Lass Hedy zufällig entscheiden!
                 example_code: |
                     ```
-                    _ Escape from the haunted house!
-                    _ There are 3 doors in front of you...
-                    _ _ _ Which door do you choose?
-                    _ You picked door ... choice
-                    monsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    _ You see...
+                    _ Entfliehe dem Spukhaus!
+                    _ Vor dir gibt es 3 Türen...
+                    _ _ _ Welche Tür wählst du?
+                    _ Du wählst Tür ... tür_wahl
+                    monster _ ein Zombie, ein Vampir, NICHTS DU BIST ENTFLOHEN
+                    _ Du siehst...
                     {sleep}
                     _ _ _ _
                     ```
@@ -2816,8 +2816,8 @@ adventures:
                     ```
             2:
                 story_text: |
-                    ### Exercise
-                    Finish the songs! We have started the codes for some melodies.
+                    ### Übung
+                    Beende die Lieder! Wir haben mit dem Code für einige Melodien begonnen.
                 example_code: |
                     ```
                     {print} Old Mac Donald had a farm
@@ -2829,7 +2829,7 @@ adventures:
                     {play} A4
                     {play} G4
                     ```
-                story_text_2: As you can see, you can also use the `{sleep}` command to add a little pause in the song.
+                story_text_2: Wie du siehst, kannst du den `{sleep}` Befehl auch nutzen, um eine kleine Pause im Lied einzubauen.
                 example_code_2: |
                     ```
                     {print} Twinkle Twinkle Little Star
@@ -2846,11 +2846,11 @@ adventures:
                     ```
             3:
                 story_text: |
-                    Create a random melody!
+                    Erfinde eine zufällige Melodie!
 
-                    ### Exercise
-                    The example code creates a random melody, but it's very short and not many notes are used.
-                    Add more notes to the list and create a longer melody by copying the last line a couple more times.
+                    ### Übung
+                    Der Beispielcode erstellt eine zufällige Melodie, die jedoch sehr kurz ist und nicht viele Noten verwendet.
+                    Füge der Liste weitere Noten hinzu und erstellen Sie eine längere Melodie, indem du die letzte Zeile noch ein paar Mal kopierst.
                 example_code: |
                     ```
                     notes {is} A4, B4, C4
@@ -3493,8 +3493,8 @@ adventures:
                     In diesem Level kannst du eine Liste mit dem `{is}` Befehl erstellen. Du kannst den Computer einen zufälligen Eintrag aus dieser Liste auswählen lassen. Das machst du mit `{at} {random}`.
                 example_code: |
                     ```
-                    animals {is} dogs, cats, kangaroos
-                    {print} animals {at} {random}
+                    tiere {is} Hunde, Katzen, Kängurus
+                    {print} tiere {at} {random}
                     ```
                 story_text_2: |
                     You can use the `{at} {random}` command in a sentence as well.
@@ -3505,14 +3505,14 @@ adventures:
                     ```
                 story_text_3: |
                     ### Übung
-                    Probiere den `{at} {random}` Befehl aus und erschaffe deine eigene Spielesendung (wie die im Fernsehen), wo du eine Tür order einen Koffer auswählst und sich dort ein großer Preis versteckt!
-                    Kannst du es tun? Wir haben schon mal die ersten Zeilen in den Beispielcode eingefügt.
+                    Probiere den `{at} {random}` Befehl aus und erschaffe deine eigene Spielesendung (wie die im Fernsehen), wo du eine Tür oder einen Koffer auswählst und sich dort ein grosser Preis versteckt!
+                    Schaffst du das? Wir haben schon mal die ersten Zeilen in den Beispielcode eingefügt.
                 example_code_3: |
                     ```
-                    {print} The big gameshow!
-                    {print} There are 3 suitcases in front of you...
-                    chosen {is} {ask} Which suitcase do you choose?
-                    prices {is} _
+                    {print} Die große Spielshow!
+                    {print} Vor die stehen drei Koffer ...
+                    auswahl {is} {ask} Welchen Koffer wählst du?
+                    preis {is} _
                     _
                     ```
             16:
@@ -3903,13 +3903,13 @@ adventures:
                     {print} 'Dankeschön!'
                     ```
     rock:
-        name: Schere, Stein, Papier
+        name: Stein, Schere, Papier
         default_save_name: Stein
-        description: Mache dein eigenes Schere, Stein, Papier-Spiel
+        description: Mache dein eigenes Stein, Schere, Papier-Spiel
         levels:
             1:
                 story_text: |
-                    In Level 1 kannst du mit einem Schere, Stein, Papier-Spiel beginnen.
+                    In Level 1 kannst du mit einem Stein, Schere, Papier-Spiel beginnen.
 
                     Mit `{ask}` kannst du eine Wahl treffen und mit `{echo}` kannst du diese Wahl wiederholen.
                 example_code: |
@@ -3944,8 +3944,8 @@ adventures:
                     Vervollständige den Code, in dem du den `{at} {random}` Befehl verwendest.
                 example_code: |
                     ```
-                    choices {is} rock, paper, scissors
-                    {print} choices {at} {random}
+                    Auswahlmöglichkeiten {is} Stein, Schere, Papier
+                    {print} Auswahlmöglichkeiten {at} {random}
                     ```
                 story_text_2: |
                     ### Übung
@@ -3961,13 +3961,13 @@ adventures:
                     ```
             4:
                 story_text: |
-                    In diesem Level können wir Stein Schere Papier weiter programmieren. Aber wenn du Text hinzufügen möchtest, musst du auch hier Anführungszeichen verwenden.
+                    In diesem Level können wir Stein, Schere, Papier weiter programmieren. Aber wenn du Text hinzufügen möchtest, musst du auch hier Anführungszeichen verwenden.
                     ### Übung
-                    Fill in quotation marks on the blanks. Mind that the variable `choices` should be outside the quotes.
+                    Fülle die Lücken in Anführungszeichen aus. Beachte, dass die `choices` Variable ausserhalb der Anführungszeichen stehen sollte.
                 example_code: |
                     ```
-                    choices {is} rock, paper, scissors
-                    {print} _The computer chooses..._ choices {at} {random}
+                    Auswahlmöglichkeiten {is} Stein, Schere, Papier
+                    {print} _Der Computer wählt..._ Auswahlmöglichkeiten {at} {random}
                     ```
             5:
                 story_text: |
@@ -4077,9 +4077,9 @@ adventures:
                     _
                     ```
     rock_2:
-        name: Rock, paper, scissors 2
+        name: Stein, Schere, Papier 2
         default_save_name: rock_2
-        description: Part 2 of rock, paper, scissors
+        description: Teil 2 von Stein, Schere, Papier
         levels:
             2:
                 story_text: |

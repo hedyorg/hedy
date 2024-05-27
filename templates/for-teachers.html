@@ -21,7 +21,7 @@
         <button class="green-btn inline-flex items-center" id="create_class_button" onclick='hedyApp.create_class ({{_('class_name_prompt')|default(None)|tojson}})'
         {% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_class')}}</button>
         {% if teacher_classes %}
-        <button class="white-btn inline-flex items-center gap-2" id="view_classes"
+        <button class="white-btn inline-flex items-center gap-2" data-cy="view_classes"
         _="on click hedyApp.saveForTeacherTable('classes_table')"
         >
         <span>{{_('view_classes')}}</span>

@@ -9,7 +9,13 @@ import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './type
 import { startIntroTutorial } from './tutorials/tutorial';
 import { get_parsons_code, initializeParsons, loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
-import { incrementDebugLine, initializeDebugger, load_variables, startDebug } from './debugging';
+import {
+    incrementDebugLine,
+    initializeDebugger,
+    load_variables,
+    startDebug,
+    toggleVariableView
+} from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
 import { postJson, postNoResponse } from './comm';
@@ -153,14 +159,17 @@ export function initializeApp(options: InitializeAppOptions) {
   });
 
   $("#search_language").on('keyup', function() {
-      let search_query = ($("#search_language").val() as string).toLowerCase();
-      $(".language").each(function(){
-          if ($(this).html().toLowerCase().includes(search_query)) {
-              $(this).show();
-          } else {
-              $(this).hide();
-          }
-      });
+    let search_query = ($("#search_language").val() as string).toLowerCase();
+    $(".language").each(function(){
+      let languageName = $(this).html().toLowerCase();
+      let englishName = $(this).attr('data-english');
+      if (englishName !== undefined && (languageName.includes(search_query) || englishName.toLowerCase().includes(search_query))) {
+          $(this).show();
+        } else {
+          $(this).hide();
+          $("#add_language_btn").show();
+        }
+    });
   });
 
   // All input elements with data-autosubmit="true" automatically submit their enclosing form
@@ -556,7 +565,6 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
         };
 
         let response = await postJsonWithAchievements('/parse', data);
-
         program_data = response;
         console.log('Response', response);
 
@@ -594,7 +602,7 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
       program_data = theGlobalDebugger.get_program_data();
     }
 
-    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pressed, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, program_data.is_modified ,cb, run_type).catch(function(err: any) {
+    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pressed, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, program_data.variables, program_data.is_modified ,cb, run_type).catch(function(err: any) {
       // The err is null if we don't understand it -> don't show anything
       if (err != null) {
         error.show(ClientMessages['Execute_error'], err.message);
@@ -916,7 +924,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPressed: boolean, hasSleep: number[], hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, isModified: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPressed: boolean, hasSleep: number[], hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, variables: any, isModified: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
   let skip_faulty_found_errors = false;
@@ -1041,8 +1049,9 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     synth.triggerAttackRelease(note_name, "16n");
 
   });
-
   if (run_type === "run") {
+    $('#variable-list').empty();
+    toggleVariableView();
     Sk.configure({
       output: outf,
       read: builtinRead,
@@ -1105,7 +1114,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       }
 
       // Check if the program was correct but the output window is empty: Return a warning
-      if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
+      if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty') && !hasMusic) {
         pushAchievement("error_or_empty");
         error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);
         return;
@@ -1161,7 +1170,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       has_turtle: hasTurtle,
       has_clear: hasClear,
       has_music: hasMusic,
-      Warning: hasWarnings
+      Warning: hasWarnings,
+      variables: variables
     });
 
     startDebug();
@@ -1398,18 +1408,6 @@ function initializeSpeech() {
 
 export function load_quiz(level: string) {
   $('*[data-tabtarget="quiz"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
-}
-
-export function showVariableView() {
-// When blue label button is clicked, the view will appear or hide
-  const variables = $('#variables');
-  if (variables.is(":hidden")) {
-    variables.show();
-    $("#variables").trigger("click")
-  }
-  else {
-    variables.hide();
-  }
 }
 
 export async function store_parsons_attempt(order: Array<string>, correct: boolean) {

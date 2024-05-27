@@ -317,7 +317,7 @@ adventures:
                 example_code: |
                     ```
                     {print} 你好!
-                    {ask}你叫什么名字?
+                    {ask} 你叫什么名字?
                     ```
                 story_text_2: |
                     ##  `{echo}` 指令
@@ -603,7 +603,7 @@ adventures:
                     ```
             9:
                 story_text: |
-                    在上一个级别中，您创建了一个计算器，在此级别中，可以扩展该代码，以便它询问多个问题。
+                    在上一个级别中，您创建了一个计算器。在此级别中，可以扩展该代码，以便它询问多个问题。
 
                     ### 练习1
                     您可以完成第10行以使代码工作吗？
@@ -725,14 +725,8 @@ adventures:
                             return _ / 4
 
                     mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
+                    {print} '你的平均成绩是' mean_grade
                     ```
-
-                            total = total + _
-                            return _ / 4
-
-                    mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
             15:
                 story_text: |
                     您可以添加 `{while}` 循环到您已经在上一级中学过的计算器游戏中去。 
@@ -1907,38 +1901,38 @@ adventures:
                     limbs = '手', '足'
                     colors = '红', '蓝', '绿', '黄'
 
-                    {define} 转
+                    {define} turn
                         chosen_side = sides {at} {random}
                         chosen_limb = limbs _
                         chosen_color = colors _
                         {print} chosen_side ' ' chosen_limb ' 在' chosen_color
 
                     {print} '让我们来玩扭扭游戏!'
-                    {for} i {in} {range} 1 to _
-                        {call} 转
+                    {for} i {in} {range} 1 {to} _
+                        {call} turn
                         {sleep} 2
                     ```
             13:
                 story_text: |
-                    现在您已经学习了如何使用函数，您将学习如何使用带参数的函数。
-                    **参数**是在函数中使用的变量。它不会在函数之外使用。
+                    Now that you've learned how to use functions, you'll learn how to use a function with an argument.
+                    An **argument** is a variable that is used within a function. It is not used outside the function.
 
-                    例如，在这个代码中，我们编写了歌曲“My Bonnie is over the ocean”的第一节。
-                    在这个示例代码中使用了参数`place`。place是一个只在函数中使用的变量，所以是一个参数。
-                    为了使用`place`，我们编写了一行`define song with place`。
-                    当函数被调用时，计算机将用`call song with`后的一段文本替换参数`place`。
+                    For example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.
+                    In this example code the argument 'place' is used. Place is a variable that is only used in the function, so an argument.
+                    To use 'place' we have placed `{with} place` after `{define} song`.
+                    When the function is called, the computer will replace the argument 'place', with the piece of text after `{call} song {with}`.
 
-                    ### 练习
-                    这首歌的下一节是:
+                    ### Exercise
+                    The next verse of this song goes:
 
                     ```not_hedy_code
-                    昨晚我躺在枕头上的时候
-                    昨晚我躺在床上的时候
-                    昨晚我躺在枕头上的时候
-                    我梦见我的邦妮死去了
+                    Last night as I lay on my pillow
+                    Last night as I lay on my bed
+                    Last night as I lay on my pillow
+                    I dreamed that my Bonnie is dead
                     ```
 
-                    你能用和示例同样的方法编写这段诗句吗?
+                    Can you program this verse in the same way as the example?
                 example_code: |
                     ```
                     {define} song {with} place
@@ -4918,20 +4912,20 @@ adventures:
                     旗子 <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
                     </div>
                 example_code: |
-                    Hint for the nested squares:
+                    嵌套方块的提示:
                     ```
-                    colors = red, blue, orange, yellow, pink, purple, green, brown, black
-                    distance = 120
-                    repeat 5 times
+                    colord = 红色, 蓝色, 橙色, 黄色, 粉色, 紫色, 绿色, 棕色,黑色
+                    距离 = 120
+                    {repeat} 5 {times}
                     _
                     ```
-                    Hint for the flags:
+                    标志提示:
                     ```
-                    country = ask 'which country would you like to see the flag of?'
-                    if country is 'the Netherlands'
-                        color_1 = red
-                        color_2 = white
-                        color_3 = blue
+                    country = {ask} '您想看到哪个国家的国旗?'
+                    {if} country {is} '荷兰'
+                         coler_1 = 红色
+                         coler_1 = 白色
+                         coler_1 = 蓝色
                     ```
             10:
                 story_text: |

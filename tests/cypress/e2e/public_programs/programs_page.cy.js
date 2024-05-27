@@ -9,7 +9,7 @@ describe("General tests for my programs page (with both custom teacher and built
     const adventure = 'story'
     beforeEach(() => {
         loginForTeacher();
-    }) 
+    })
 
     it("create adventure, run its code, and see it in my programs", () => {
         createAdventure(programName);
@@ -31,7 +31,7 @@ describe("General tests for my programs page (with both custom teacher and built
         // make sure to navigate to the wanted program tab.
         cy.get(`[data-cy="${adventure}"]`)
             .click();
-        // Paste example code 
+        // Paste example code
         cy.get(`[data-cy="paste-example-code-${adventure}"]`).click();
         cy.get('#runit').click();
         cy.wait(500);
@@ -147,5 +147,55 @@ describe("General tests for my programs page (with both custom teacher and built
     it("delete created program", () => {
         deleteProgram(programName);
     });
+
+    describe('Test filters', () => {
+        beforeEach(() => {
+            loginForTeacher()
+            cy.visit(`${Cypress.env('programs_page')}`);
+        })
+        it("The level filter should show the appropiate programs", ()=>{        
+            // After selecting level 2 only the programs from level 2 should ve visible
+            cy.get('#levels-dropdown').select('2')
+    
+            cy.get('#program_3e8926c0515d47a5aeb116164b1278c9').should('be.visible')
+            cy.get('#program_195d94e733ff49b08079848409e664b6').should('be.visible')
+
+            cy.get('#program_e1d94726655947c5b0309abb18cc17ca').should('not.exist')
+            cy.get('#program_4c426ff4cd5a40d7bb65bfbb35907f8b').should('not.exist')
+    
+            // After selecting level 1 only the programs from level 1 should ve visible
+            cy.get('#levels-dropdown').select('1')
+    
+            cy.get('#program_3e8926c0515d47a5aeb116164b1278c9').should('not.exist')
+            cy.get('#program_195d94e733ff49b08079848409e664b6').should('not.exist')
+    
+            cy.get('#program_e1d94726655947c5b0309abb18cc17ca').should('be.visible')
+            cy.get('#program_4c426ff4cd5a40d7bb65bfbb35907f8b').should('be.visible')
+    
+            // Selecting the - Level - options should show every program
+            cy.get('#levels-dropdown').select(0);
+            cy.get('#program_3e8926c0515d47a5aeb116164b1278c9').should('be.visible')
+            cy.get('#program_195d94e733ff49b08079848409e664b6').should('be.visible')
+
+            cy.get('#program_e1d94726655947c5b0309abb18cc17ca').should('be.visible')
+            cy.get('#program_4c426ff4cd5a40d7bb65bfbb35907f8b').should('be.visible')
+        })
+    
+        it('The adventure filter show the appropiate programs', () => {
+            cy.get('#adventure_select').select('ask')
+            cy.get('#program_e1d94726655947c5b0309abb18cc17ca').should('be.visible');
+            cy.wait(300)
+            cy.get('#adventure_select').select('print')
+            cy.get('#program_4c426ff4cd5a40d7bb65bfbb35907f8b').should('be.visible');
+    
+            // Selecting the - Adventure - options should show every program
+            cy.get('#adventure_select').select(0);
+            cy.get('#program_3e8926c0515d47a5aeb116164b1278c9').should('be.visible')
+            cy.get('#program_195d94e733ff49b08079848409e664b6').should('be.visible')
+         
+            cy.get('#program_e1d94726655947c5b0309abb18cc17ca').should('be.visible')
+            cy.get('#program_4c426ff4cd5a40d7bb65bfbb35907f8b').should('be.visible')
+        })
+    })
 
 });

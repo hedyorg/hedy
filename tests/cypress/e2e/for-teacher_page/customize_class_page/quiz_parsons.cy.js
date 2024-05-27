@@ -5,13 +5,13 @@ describe('customize class page', () => {
     beforeEach(() => {
       loginForTeacher();
       ensureClass();
-      cy.get(".view_class").then($viewClass => {
+      cy.get('[data-cy="view_class_link"]').then($viewClass => {
         if (!$viewClass.is(':visible')) {
-            cy.get("#view_classes").click();
+            cy.get('[data-cy="view_classes"]').click();
         }
       });
       cy.getBySel('view_class_link').first().click(); // Press on view class button
-      cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
+     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
       cy.getBySel('customize_class_button').click(); // Press customize class button
 
       // Remove any customizations that already exist to get the class into a predictable state

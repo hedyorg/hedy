@@ -77,6 +77,7 @@ class ProgramsLogic:
             updates['public'] = 1 if set_public else 0
 
         if program_id:
+            # Updates an existing program
             # FIXME: This should turn into a conditional update
             current_prog = self.db.program_by_id(program_id)
             if not current_prog:
@@ -86,6 +87,7 @@ class ProgramsLogic:
 
             program = self.db.update_program(program_id, updates)
         else:
+            # Creates a new program
             updates['id'] = uuid.uuid4().hex
             program = self.db.store_program(updates)
 
@@ -101,8 +103,7 @@ class ProgramsLogic:
         # and if it was already modified and now is so again, count should not increase.
         if is_modified and not program.get('is_modified'):
             self.db.increase_user_program_count(user["username"])
-        program['is_modified'] = is_modified
-        program = self.db.update_program(program['id'], program)
+        program = self.db.update_program(program['id'], {'is_modified': is_modified})
 
         querylog.log_value(program_id=program['id'],
                            adventure_name=adventure_name, error=error, code_lines=len(code.split('\n')))

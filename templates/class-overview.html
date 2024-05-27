@@ -10,18 +10,18 @@
     </script>
     {% endif %}
     <div class="flex flex-col gap-4">
-        <button class="back-btn" id="go_back_button" onclick="window.location.href = '/for-teachers'">
+        <button class="back-btn" id="go_back_button" data-cy="go_back_button" onclick="window.location.href = '/for-teachers'">
             <span class="fa fa-arrow-{% if g.dir == " ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
             {{_('go_back')}}
         </button>
-        <div id="survey" class="hidden"></div>
+        <div id="survey" data-cy="survey" class="hidden"></div>
         {% if second_teacher %}<h1>{{_('role')}}: {{role}}</h1>{% endif %}
         <div class="flex flex-row items-center justify-between">
             <h1>{{ class_info.name }}</h1>
             <div class="flex gap-2">
                 <div class="flex flex-row items-center gap-2 ml-4 mr-4">
                     {% if class_info.students|length > 0 %}
-                    <h2 id="survey_status_button" class="flex ml-4">
+                    <h2 id="survey_status_button" data-cy="survey_status_button" class="flex ml-4">
                         {% if questions|length == 0 %}
                         {{_('survey_completed')}} ✅
                         {% else %}
@@ -48,11 +48,11 @@
                                 end">
                             {% if class_info.teacher == username %}
                             <button class="white-btn flex-row flex justify-between items-center gap-2 px-2 py-2 w-full"
-                                id="add-second-teacher"
+                              data-cy="add_second_teacher"
                                 _="on click call hedyApp.invite_student('{{class_info.id}}', {{_('second_teacher_prompt')|default(None)|tojson}}, '/invite-second-teacher')">{{_('invite_teacher')}}</button>
                             {% endif %}
                             <button class="white-btn flex-row flex justify-between items-center gap-2 px-2 py-2 w-full"
-                                id="add-student"
+                                data-cy="add_student"
                                 _="on click toggle the *display of #add_students_options then toggle between .green-btn and .blue-btn on me">{{_('add_students')}}</button>
                         </div>
                     </div>

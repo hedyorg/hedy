@@ -5,13 +5,13 @@ describe('customize class page', () => {
       loginForTeacher("teacher4");
       // ensureIsSecondTeacher("teacher1", "teacher2")
       // await ensureClass();
-      cy.get(".view_class").then($viewClass => {
+      cy.get('[data-cy="view_class_link"]').then($viewClass => {
         if (!$viewClass.is(':visible')) {
-            cy.get("#view_classes").click();
+            cy.get('[data-cy="view_classes"]').click();
         }
       });
       cy.getBySel('view_class_link').first().click(); // Press on view class button
-      cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
+     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
       cy.getBySel('customize_class_button').click(); // Press customize class button
       cy.get("#opening_date_container").should("not.be.visible")
       cy.get("#opening_date_label").click();
