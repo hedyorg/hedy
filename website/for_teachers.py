@@ -137,7 +137,6 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         session['class_id'] = class_id
-        students = []
         survey_id = ""
         description = ""
         questions = []
@@ -148,50 +147,7 @@ class ForTeachersModule(WebsiteModule):
         if Class.get("students"):
             survey_id, description, questions, total_questions, survey_later = self.class_survey(class_id)
 
-        for student_username in Class.get("students", []):
-            student = self.db.user_by_username(student_username)
-            programs = self.db.filtered_programs_for_user(student_username, level=level)
-            program_stats = self.db.get_program_stats([student_username])
-
-            # Fixme: The get_quiz_stats function requires a list of ids -> doesn't work on single string
-            quiz_scores = self.db.get_quiz_stats([student_username])
-            # Verify if the user did finish any quiz before getting the max() of the finished levels
-            finished_quizzes = any("finished" in x for x in quiz_scores)
-            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
-            adventures_tried = set()
-
-            for program in programs:
-                if 'adventure_name' in program:
-                    adventures_tried.add(program['adventure_name'])
-
-            number_of_errors = 0
-            successful_runs = 0
-
-            for stat in program_stats:
-                if stat.get('level') != level:
-                    continue
-                successful_runs += stat.get('successful_runs', 0)
-                for key in stat:
-                    if "Exception" in key:
-                        number_of_errors += stat[key]
-            students.append(
-                {
-                    "username": student_username,
-                    "last_login": student["last_login"],
-                    "programs": len(programs),
-                    "highest_level": highest_quiz,
-                    "successful_runs": successful_runs,
-                    'adventures_tried': len(adventures_tried),
-                    'number_of_errors': number_of_errors
-                }
-            )
-
-        # Sort the students by their last login
-        students = sorted(students, key=lambda d: d.get("last_login", 0), reverse=True)
-        # After sorting: replace the number value by a string format date
-        for student in students:
-            student["last_login"] = utils.localized_date_format(student.get("last_login", 0))
-
+        students = Class.get("students", [])
         if utils.is_testing_request(request):
             return jsonify({"students": students, "link": Class["link"], "name": Class["name"], "id": Class["id"]})
 
@@ -225,7 +181,7 @@ class ForTeachersModule(WebsiteModule):
             achievement=achievement,
             invites=invites,
             class_info={
-                "students": students,
+                "students": len(students),
                 "link": os.getenv("BASE_URL", "") + "/hedy/l/" + Class["link"],
                 "teacher": Class["teacher"],
                 "second_teachers": second_teachers,
@@ -233,9 +189,7 @@ class ForTeachersModule(WebsiteModule):
                 "id": Class["id"],
             },
             javascript_page_options=dict(
-                page="class-overview",
-                graph_students=students,
-                level=level
+                page="class-overview"
             ),
             survey_id=survey_id,
             description=description,

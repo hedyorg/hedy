@@ -20,7 +20,7 @@
             <h1>{{ class_info.name }}</h1>
             <div class="flex gap-2">
                 <div class="flex flex-row items-center gap-2 ml-4 mr-4">
-                    {% if class_info.students|length > 0 %}
+                    {% if class_info.students > 0 %}
                     <h2 id="survey_status_button" data-cy="survey_status_button" class="flex ml-4">
                         {% if questions|length == 0 %}
                         {{_('survey_completed')}} ✅
