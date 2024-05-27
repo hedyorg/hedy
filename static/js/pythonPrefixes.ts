@@ -91,6 +91,13 @@ def convert_numerals(alphabet, number):
     if number is None or number == '':
         return ''
 
+    if bool == type(number):
+        return number
+    if number == 'True':
+        return True
+    if number == 'False':
+        return False
+
     numerals_dict_return = {
         'Latin': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
         'Brahmi': ['𑁦', '𑁧', '𑁨', '𑁩', '𑁪', '𑁫', '𑁬', '𑁭', '𑁮', '𑁯'],

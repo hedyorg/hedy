@@ -158,7 +158,7 @@ class TestsTranslationLevel2(HedyTester):
 
         self.assertEqual(expected, result)
 
-    def no_argument_ask_english(self):
+    def test_no_argument_ask_english(self):
         code = "ask"
 
         result = hedy_translation.translate_keywords(
@@ -167,11 +167,32 @@ class TestsTranslationLevel2(HedyTester):
 
         self.assertEqual(expected, result)
 
-    def no_argument_ask_dutch(self):
+    def test_no_argument_ask_dutch(self):
         code = "vraag"
 
         result = hedy_translation.translate_keywords(
             code, "nl", "en", self.level)
         expected = "ask"
+
+        self.assertEqual(expected, result)
+
+    @parameterized.expand([
+        ('black', 'اسود'),
+        ('blue', 'ازرق'),
+        ('brown', 'بني'),
+        ('gray', 'رمادي'),
+        ('green', 'اخضر'),
+        ('orange', 'برتقالي'),
+        ('pink', 'زهري'),
+        ('purple', 'بنفسجي'),
+        ('red', 'احمر'),
+        ('white', 'ابيض'),
+        ('yellow', 'اصفر')
+    ])
+    def test_color_english_arabic(self, en, ar):
+        code = f"color {en}"
+
+        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="ar", level=self.level)
+        expected = f'لون {ar}'
 
         self.assertEqual(expected, result)
