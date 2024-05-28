@@ -18,7 +18,7 @@ describe("General tests for my programs page (with both custom teacher and built
         cy.getBySel("available_adventures_current_level").select(`${programName}`);
 
         // Now preview it and run the program
-        cy.get('[data-cy="preview_class_link"]')
+        cy.getBySel('preview_class_link')
             .click();
         executeHelloWorldProgram(programName)
         cy.get(".programs").should("contain.text", programName);
@@ -82,12 +82,12 @@ describe("General tests for my programs page (with both custom teacher and built
                 //favourite a program:
                 cy.get(`#favourite_program_container_${programId}`).click();
                 cy.get(`#modal-confirm-text`).should('contain.text', 'favourite');
-                cy.get('[data-cy="modal_yes_button"]').should('be.enabled').click();
+                cy.getBySel('modal_yes_button').should('be.enabled').click();
                 //unfavourite a program:
                 cy.wait(500);
                 cy.get(`#favourite_program_container_${programId}`).click();
                 cy.get(`#modal-confirm-text`).should('contain.text', 'unfavourite');
-                cy.get('[data-cy="modal_yes_button"]').should('be.enabled').click();
+                cy.getBySel('modal_yes_button').should('be.enabled').click();
             })
     });
 

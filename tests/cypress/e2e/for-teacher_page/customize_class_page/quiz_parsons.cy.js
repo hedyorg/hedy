@@ -5,9 +5,9 @@ describe('customize class page', () => {
     beforeEach(() => {
       loginForTeacher();
       ensureClass();
-      cy.get('[data-cy="view_class_link"]').then($viewClass => {
+      cy.getBySel('view_class_link').then($viewClass => {
         if (!$viewClass.is(':visible')) {
-            cy.get('[data-cy="view_classes"]').click();
+            cy.getBySel('view_classes').click();
         }
       });
       cy.getBySel('view_class_link').first().click(); // Press on view class button

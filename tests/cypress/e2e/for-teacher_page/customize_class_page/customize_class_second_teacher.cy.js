@@ -5,9 +5,9 @@ describe('customize class page', () => {
       loginForTeacher("teacher4");
       // ensureIsSecondTeacher("teacher1", "teacher2")
       // await ensureClass();
-      cy.get('[data-cy="view_class_link"]').then($viewClass => {
+      cy.getBySel('view_class_link').then($viewClass => {
         if (!$viewClass.is(':visible')) {
-            cy.get('[data-cy="view_classes"]').click();
+            cy.getBySel('view_classes').click();
         }
       });
       cy.getBySel('view_class_link').first().click(); // Press on view class button
@@ -95,7 +95,7 @@ describe('customize class page', () => {
         .should('have.value', '2');
 
       // Finding this makes sure that level-2 has been loaded
-      cy.get('[data-cy="level-2"]');
+      cy.getBySel('level-2');
 
       // The available adventures dropdown should only include the default option
       // but it may also have teacher-specific adventures

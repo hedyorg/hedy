@@ -5,7 +5,7 @@ it('should return to admin page button', () => {
   loginForAdmin();
   goToAdminAchievementsPage();
 
-  cy.get('[data-cy="return_to_admin_page_button"]')
+  cy.getBySel('return_to_admin_page_button')
     .should('be.visible')
     .should('be.not.disabled')
     .click();

@@ -30,13 +30,13 @@ describe('Is able to preview class', () => {
     goToTeachersPage();
     // we navigate to our custom class
     // if this ever fails, it might be due to pagination
-    cy.get('[data-cy="view_class_link"]').then($viewClass => {
+    cy.getBySel('view_class_link').then($viewClass => {
       if (!$viewClass.is(':visible')) {
-          cy.get('[data-cy="view_classes"]').click();
+          cy.getBySel('view_classes').click();
       }
     });
     cy.get("a.view_class").contains(className).click();
-    cy.get('[data-cy="customize_class_button"]').click();
+    cy.getBySel('customize_class_button').click();
     cy.get("#levels-dropdown").select("1");
     // we remove the print command from our custom class
     cy.get("div[data-cy='print_command'] span").click();
