@@ -23,7 +23,7 @@ from iso639 import languages
 
 import static_babel_content
 from markupsafe import Markup
-from flask import (Flask, Response, abort, after_this_request, g, make_response,
+from flask import (Flask, Response, abort, after_this_request, g, jsonify, make_response,
                    redirect, request, send_file, url_for,
                    send_from_directory, session)
 from flask_babel import Babel, gettext
@@ -2285,7 +2285,8 @@ def change_language():
     # Remove 'keyword_lang' from session, it will automatically be renegotiated from 'lang'
     # on the next page load.
     session.pop('keyword_lang')
-    return make_response('', 204)
+    # if this is changed to make_response(), it gives an error, I don't know why
+    return jsonify({'success': 204})
 
 
 @app.route('/slides', methods=['GET'], defaults={'level': '1'})
