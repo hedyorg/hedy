@@ -1159,7 +1159,9 @@ class ForTeachersModule(WebsiteModule):
 
         tags = self.db.read_tags(current_adventure.get("tags", []))
         for tag in tags:
-            for tag_adventure in tag.get("tagged_in", []):
+            if tag is None:
+                continue
+            for tag_adventure in tag["tagged_in"]:
                 if tag_adventure["id"] == current_adventure["id"]:
                     tag_adventure["public"] = body["public"]
                     tag_adventure["language"] = body["language"]
