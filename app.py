@@ -611,6 +611,8 @@ def parse():
 
         with querylog.log_time('detect_sleep'):
             try:
+                # FH, Nov 2023: hmmm I don't love that this is not done in the same place as the other "has"es
+                # FH, May 2024: Ok this shows I should clean up haha, thatw ould have prevented an error. But Could still be moved to the parser?
                 response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
             except BaseException:
                 pass
