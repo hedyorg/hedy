@@ -612,7 +612,6 @@ def parse():
         except Exception:
             pass
 
-
         if not raw:
             try:
                 if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
