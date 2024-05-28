@@ -10,18 +10,18 @@ describe('customize class page', () => {
             cy.get('[data-cy="view_classes"]').click();
         }
       });
-      cy.getBySel('view_class_link').first().click(); // Press on view class button
-     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
-      cy.getBySel('customize_class_button').click(); // Press customize class button
-      cy.get("#opening_date_container").should("not.be.visible")
-      cy.get("#opening_date_label").click();
-      cy.get("#opening_date_container").should("be.visible")
+      cy.get('[data-cy="view_class_link"]').first().click(); // Press on view class button
+      cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
+      cy.get('[data-cy="customize_class_button"]').click();; // Press customize class button
+      cy.get('[data-cy="opening_date_container"]').should("not.be.visible")
+      cy.get('[data-cy="opening_date_label"]').click();
+      cy.get('[data-cy="opening_date_container"]').should("be.visible")
 
       // Remove any customizations that already exist to get the class into a predictable state
       // This always throws up a modal dialog
       cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');
-      cy.getBySel('remove_customizations_button').click();
-      cy.getBySel('modal_yes_button').click();
+      cy.getBySel('[data-cy="remove_customizations_button"]').click();
+      cy.get('[data-cy="modal_yes_button"]').click();
       cy.wait('@restoreCustomizations');
     });
 

@@ -33,7 +33,7 @@ export function ensureClass()
     let classname = `test class ${Math.random()}`;
     goToTeachersPage();
 
-    cy.getBySel('view_class_link').then(viewClassLink => {
+    cy.get('[data-cy="view_class_link"]').then(viewClassLink => {
         if (viewClassLink.length === 0) {
             createClass();
         } else {
@@ -82,9 +82,9 @@ export function addCustomizations(classname){
     });
     cy.get('[data-cy="view_class_link"]').contains(classname).click();
     cy.get('#customize-class-button').click();
-    cy.get("#opening_date_container").should("not.be.visible")
-    cy.get("#opening_date_label").click();
-    cy.get("#opening_date_container").should("be.visible")
+    cy.get('[data-cy="opening_date_container"]').should("not.be.visible")
+    cy.get('[data-cy="opening_date_label"]').click();
+    cy.get('[data-cy="opening_date_container"]').should("be.visible")
     cy.get('#enable_level_7').parent('.switch').click();
 
     cy.wait(1000)
