@@ -7,8 +7,6 @@ export function goToPage(page)
         if(page != "")
         {
             cy.visit(page);
-            cy.location('pathname')
-              .should('include', page)
         }
 
     }

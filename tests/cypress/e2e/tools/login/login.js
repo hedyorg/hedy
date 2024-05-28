@@ -21,7 +21,9 @@ export function login(username, password) {
     cy.clearCookies();
     cy.clearAllLocalStorage()
     cy.clearAllSessionStorage();
-    goToLogin();
+    goToLogin();    
+    cy.location('pathname')
+      .should('include', Cypress.env('login_page'))
     cy.get('#username').type(username);
     cy.get('#password').type(password);
     cy.get('#login_button').click();
