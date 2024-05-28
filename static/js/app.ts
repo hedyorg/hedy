@@ -996,7 +996,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     $('#turtlecanvas').show();
   }
 
-  if (hasSleep) {
+  if (hasSleep && theLevel < 7) {
     function executeWithDelay(index: number) {
       return new Promise((resolve, reject) => {
         if (index >= hasSleep.length) {
