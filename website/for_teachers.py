@@ -292,7 +292,7 @@ class ForTeachersModule(WebsiteModule):
         student_name = request.args.get('student', type=str)
         adventure_name = request.args.get('adventure', type=str)
 
-        students, class_, class_adventures_formatted, adventure_names, _ = self.get_grid_info(
+        students, class_, class_adventures_formatted, adventure_names, _, _ = self.get_grid_info(
             user, class_id, level)
 
         adventure_names = {value: key for key, value in adventure_names.items()}
@@ -303,7 +303,7 @@ class ForTeachersModule(WebsiteModule):
 
         self.db.update_student_adventure(student_adventure_id, current_adventure['ticked'])
         student_overview_table, class_, class_adventures_formatted, \
-            adventure_names, student_adventures = self.get_grid_info(user, class_id, level)
+            adventure_names, student_adventures, _ = self.get_grid_info(user, class_id, level)
 
         return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
                                              level=level,
@@ -316,7 +316,10 @@ class ForTeachersModule(WebsiteModule):
                                                  'students': student_overview_table,
                                                  'adventures': class_adventures_formatted,
                                                  'student_adventures': student_adventures,
-                                                 'level': level
+                                                 'level': level,
+                                                 "graph_options": {
+                                                     "level": level
+                                                 }
                                              }
                                              )
 
