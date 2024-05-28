@@ -973,7 +973,7 @@ class ForTeachersModule(WebsiteModule):
             if account.get("class"):
                 class_id = [i.get("id") for i in classes if i.get("name") == account.get("class")][0]
                 self.db.add_student_to_class(class_id, account.get("username").strip().lower())
-        return make_response(gettext("accounts_created"), 200)
+        return make_response({"success": gettext("accounts_created")}, 200)
 
     @route("/customize-adventure/view/<adventure_id>", methods=["GET"])
     @requires_login
