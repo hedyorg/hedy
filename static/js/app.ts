@@ -996,7 +996,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     $('#turtlecanvas').show();
   }
 
-  if (hasSleep) {
+  if (hasSleep && theLevel < 7) {
     function executeWithDelay(index: number) {
       return new Promise((resolve, reject) => {
         if (index >= hasSleep.length) {
@@ -1076,8 +1076,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
           // Also on a level < 7 (as we don't support loops yet), a timeout is redundant -> just set one for 5 minutes
           return (3000000);
         }
-        // Set a time-out of either 20 seconds when having a sleep and 5 seconds when not
-        return ((hasSleep) ? 20000 : 5000);
+        // Set a time-out of either 30 seconds when having a sleep and 10 seconds when not
+        return ((hasSleep) ? 30000 : 10000);
       }) ()
     });
 
