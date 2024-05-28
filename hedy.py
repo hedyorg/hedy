@@ -3073,7 +3073,7 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
 
 
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle',
-                                         'has_pressed', 'has_clear', 'has_music', 'commands', 'roles_of_variables'])
+                                         'has_pressed', 'has_clear', 'has_music', 'has_sleep', 'commands', 'roles_of_variables'])
 
 
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en", unused_allowed=True):
@@ -3618,11 +3618,12 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         has_turtle = "forward" in commands or "turn" in commands or "color" in commands
         has_pressed = "if_pressed" in commands or "if_pressed_else" in commands or "assign_button" in commands
         has_music = "play" in commands
+        has_sleep = "sleep" in commands
 
         roles_of_variables = determine_roles(lookup_table, input_string, level, lang)
 
         parse_result = ParseResult(python, source_map, has_turtle, has_pressed,
-                                   has_clear, has_music, commands, roles_of_variables)
+                                   has_clear, has_music, has_sleep, commands, roles_of_variables)
 
         if populate_source_map:
             source_map.set_python_output(python)

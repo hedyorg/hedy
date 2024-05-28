@@ -605,17 +605,13 @@ def parse():
             if transpile_result.has_music:
                 response['has_music'] = True
 
+            if transpile_result.has_sleep:
+                response['has_sleep'] = True
+
             response['variables'] = transpile_result.roles_of_variables
         except Exception:
             pass
 
-        with querylog.log_time('detect_sleep'):
-            try:
-                # FH, Nov 2023: hmmm I don't love that this is not done in the same place as the other "has"es
-                # FH, May 2024: Ok this shows I should clean up haha, thatw ould have prevented an error. But Could still be moved to the parser?
-                response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
-            except BaseException:
-                pass
 
         if not raw:
             try:
