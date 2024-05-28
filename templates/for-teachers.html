@@ -53,9 +53,13 @@
     </div>
   </div>
     <!-- classes table -->
-    {{ render_partial('htmx-classes-table.html', teacher_classes=teacher_classes) }}
+    {% if teacher_classes %}
+      {{ render_partial('htmx-classes-table.html', teacher_classes=teacher_classes) }}
+    {% endif %}
     <!-- adventures table -->
-    {{ render_partial('htmx-adventures-table.html', teacher_adventures=teacher_adventures) }}
+    {% if teacher_adventures %}
+      {{ render_partial('htmx-adventures-table.html', teacher_adventures=teacher_adventures) }}
+    {% endif %}
 
     <div class="flex flex-row gap-4 mb-8 mt-10 md:px-16">
       <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full lg:w-2/4 p-8">
