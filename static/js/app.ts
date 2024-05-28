@@ -1573,7 +1573,7 @@ export function toggle_keyword_language(current_lang: string, new_lang: string) 
       goal_lang: new_lang,
       level: theLevel,
     });
-    if (response.code) {
+    if (response) {
       const code = response.code
       theGlobalEditor.contents = code;
       const saveName = saveNameFromInput();
