@@ -1166,9 +1166,9 @@ def all_commands(input_string, level, lang='en'):
 
 
 def all_variables(input_string, level, lang='en'):
-    """Return the commands used in a program string.
+    """Return all variables used in a program string.
 
-    This function is still used in the web frontend, and some tests, but no longer by 'transpile'.
+    This function is still used by the roles of variables detection
     """
     program_root = parse_input(input_string, level, lang)
     abstract_syntax_tree = ExtractAST().transform(program_root)
