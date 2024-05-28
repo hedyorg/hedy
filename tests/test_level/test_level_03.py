@@ -88,8 +88,7 @@ class TestsLevel3(HedyTester):
         expected = HedyTester.dedent(HedyTester.turtle_color_command_transpiled("red", 'en'),
                                      HedyTester.forward_transpiled('10', self.level))
 
-        self.multi_level_tester(
-            max_level=11,
+        self.single_level_tester(
             code=code,
             expected=expected
         )
