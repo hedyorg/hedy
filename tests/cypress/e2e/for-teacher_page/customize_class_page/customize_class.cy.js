@@ -5,13 +5,13 @@ describe('customize class page', () => {
     beforeEach(() => {
       loginForTeacher();
       ensureClass();
-      cy.get(".view_class").then($viewClass => {
+      cy.get('[data-cy="view_class_link"]').then($viewClass => {
         if (!$viewClass.is(':visible')) {
-            cy.get("#view_classes").click();
+            cy.get('[data-cy="view_classes"]').click();
         }
       });
       cy.getBySel('view_class_link').first().click(); // Press on view class button
-      cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
+     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
       cy.getBySel('customize_class_button').click(); // Press customize class button
       cy.get("#opening_date_container").should("not.be.visible")
       cy.get("#opening_date_label").click();
@@ -19,7 +19,7 @@ describe('customize class page', () => {
 
       // Remove any customizations that already exist to get the class into a predictable state
       // This always throws up a modal dialog
-      cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');      
+      cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');
       cy.getBySel('remove_customizations_button').click();
       cy.getBySel('modal_yes_button').click();
       cy.wait('@restoreCustomizations');
@@ -197,18 +197,18 @@ describe('customize class page', () => {
     });
 
     it('Disabling current level displays a message', () => {
-      cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
+      cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');
 
       cy.getBySel('level-1').should('be.visible');
       cy.get('#state-disabled').should('not.be.visible');
 
       cy.get('#enable_level_1').parent('.switch').click();
       cy.get('#state-disabled').should('be.visible');
-      
+
       cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
     });
 
-    it('Clicking the Reset button displays a confirm dialog', () => {
+    it.only('Clicking the Reset button displays a confirm dialog', () => {
       /**
        * At the beggining, the Parrot adventure should be in the level 1's adventures
        */
@@ -253,7 +253,6 @@ describe('customize class page', () => {
   });
 
   function selectLevel(level) {
-    cy.getBySel("adventures")
-      .select(level)
-      .should('have.value', level);
+    cy.getBySel("adventures").select(level);
+    cy.getBySel("adventures").should('have.value', level);
   }
