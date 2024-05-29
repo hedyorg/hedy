@@ -26,10 +26,6 @@ class PublicAdventuresModule(WebsiteModule):
 
         self.db = db
         self.achievements = achievements
-        self.adventures = {}
-        self.customizations = {"available_levels": set()}
-        self.available_languages = set()
-        self.available_tags = set()
 
     @route("/", methods=["GET"])
     @route("/filter", methods=["PUT"])
@@ -230,28 +226,5 @@ class PublicAdventuresModule(WebsiteModule):
         self.db.update_public_adventure_filters_indexes(adventure)
         self.db.store_adventure(adventure)
 
-        # update cloned adv. that's saved in this class
-        for _level in current_adventure.get("levels", [level]):
-            _level = int(_level)
-            for i, adv in enumerate(self.adventures.get(_level, [])):
-                if adv.get("id") == current_adventure.get("id"):
-                    adventure["short_name"] = adventure.get("name")
-                    adventure["text"] = adventure.get("content")
-                    # Replace the old adventure with the new adventure
-                    self.adventures[_level][i] = adventure
-                    break
         # TODO: add achievement
         return render_partial('htmx-adventure-card.html', user=user, adventure=adventure, level=level,)
-
-    def update_filters(self, adventures,  to_filter):
-        if to_filter == 'lang':
-            self.available_languages = set()
-        else:
-            self.available_tags = set()
-        for adventure in adventures:
-            if to_filter == 'lang':
-                adv_lang = adventure.get("language", g.lang)
-                self.available_languages.update([adv_lang])
-            else:
-                adv_tags = adventure.get("tags", [])
-                self.available_tags.update(adv_tags)
