@@ -605,40 +605,12 @@ def parse():
             if transpile_result.has_music:
                 response['has_music'] = True
 
+            if transpile_result.has_sleep:
+                response['has_sleep'] = True
+
             response['variables'] = transpile_result.roles_of_variables
         except Exception:
             pass
-
-        if level < 7:
-            with querylog.log_time('detect_sleep'):
-                try:
-                    # FH, Nov 2023: hmmm I don't love that this is not done in the same place as the other "has"es
-                    sleep_list = []
-                    pattern = (
-                        r'time\.sleep\((?P<time>\d+)\)'
-                        r'|time\.sleep\(int\("(?P<sleep_time>\d+)"\)\)'
-                        r'|time\.sleep\(int\((?P<variable>\w+)\)\)')
-                    matches = re.finditer(
-                        pattern,
-                        response['Code'])
-                    for i, match in enumerate(matches, start=1):
-                        time = match.group('time')
-                        sleep_time = match.group('sleep_time')
-                        variable = match.group('variable')
-                        if sleep_time:
-                            sleep_list.append(int(sleep_time))
-                        elif time:
-                            sleep_list.append(int(time))
-                        elif variable:
-                            assignment_match = re.search(r'{} = (.+?)\n'.format(variable), response['Code'])
-                            if assignment_match:
-                                assignment_code = assignment_match.group(1)
-                                variable_value = eval(assignment_code)
-                                sleep_list.append(int(variable_value))
-                    if sleep_list:
-                        response['has_sleep'] = sleep_list
-                except BaseException:
-                    pass
 
         if not raw:
             try:
