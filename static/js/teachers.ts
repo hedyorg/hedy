@@ -807,7 +807,6 @@ export function initializeGraph() {
   const graphElement = document.getElementById('adventure_bubble') as HTMLCanvasElement
   const graphData: InitializeGraphOptions = JSON.parse(graphElement.dataset['graph'] || '') ;
   
-  console.log('Calling initialize graph')
   const students = graphData.graph_students
   let data: dataPoint[] = students.map((student: student) => {    
     let radius;
