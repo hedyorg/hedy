@@ -6,7 +6,6 @@ describe("Test the feedback feature", () => {
         loginForTeacher();
     })
     it("should be able to open the modal", () => {
-        cy.wait(500)
         goToHedyPage();
         cy.get('[data-cy="feedback_button"]')
             .should("be.visible")
@@ -17,7 +16,6 @@ describe("Test the feedback feature", () => {
     });
 
     it("should not submit if the message or category is empty/not selected", () => {
-        cy.wait(500)        
         goToTeachersPage();
 
         cy.get('[data-cy="feedback_button"]')
