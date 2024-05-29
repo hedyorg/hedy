@@ -20,7 +20,7 @@
         hx-get="/for-teachers/grid_overview/{{ class_info.id }}/level?level={{dropdown_level}}"
         hx-target="#adventure_overview" 
         hx-swap="outerHTML"
-        _='on htmx:afterRequest hedyApp.initializeGraph()'>
+        _='on htmx:afterRequest wait 150ms then hedyApp.initializeGraph()'>
         <div class="flex-grow h-min min-w-80" tabindex=0>
           {{ _('level_title') }} {{ dropdown_level }}
         </div>
@@ -107,7 +107,7 @@
 
   <div class="mt-4">
     <div class="flex flex-row relative justify-center items-center">
-        <div id="graph" class="w-2/3"><canvas data-graph='{{ adventure_table["graph_options"]|tojson|safe }}' id="adventure_bubble"></canvas></div>
+        <div id="graph" class="w-2/3 relative h-[32rem]"><canvas data-graph='{{ adventure_table["graph_options"]|tojson|safe }}' id="adventure_bubble"></canvas></div>
         <div class="w-1/3 overflow-auto hidden" style="height: 32rem;" id="programs_container"></div>
     </div>
   </div>

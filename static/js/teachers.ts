@@ -807,7 +807,7 @@ export function initializeGraph() {
   const graphElement = document.getElementById('adventure_bubble') as HTMLCanvasElement
   const graphData: InitializeGraphOptions = JSON.parse(graphElement.dataset['graph'] || '') ;
   
-
+  console.log('Calling initialize graph')
   const students = graphData.graph_students
   let data: dataPoint[] = students.map((student: student) => {    
     let radius;
@@ -838,6 +838,8 @@ export function initializeGraph() {
         ]
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         onHover: (event, chartElement) => {
           //@ts-ignore
           event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default'
@@ -858,7 +860,6 @@ export function initializeGraph() {
             '#programs_container'
           )
         },
-        responsive: true,
         scales: {
           x: {
             title: {
