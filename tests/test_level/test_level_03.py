@@ -90,7 +90,6 @@ class TestsLevel3(HedyTester):
 
         self.single_level_tester(
             code=code,
-            translate=False,
             expected=expected
         )
 
