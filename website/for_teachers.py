@@ -1159,8 +1159,6 @@ class ForTeachersModule(WebsiteModule):
 
         tags = self.db.read_tags(current_adventure.get("tags", []))
         for tag in tags:
-            if tag is None:
-                continue
             for tag_adventure in tag["tagged_in"]:
                 if tag_adventure["id"] == current_adventure["id"]:
                     tag_adventure["public"] = body["public"]
