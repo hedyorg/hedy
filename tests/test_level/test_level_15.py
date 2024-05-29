@@ -10,6 +10,92 @@ from tests.Tester import HedyTester
 class TestsLevel15(HedyTester):
     level = 15
 
+    #
+    # boolean values
+    #
+    @parameterized.expand(HedyTester.booleans)
+    def test_assign_var_boolean(self, value, expected):
+        code = f"cond = {value}"
+        expected = f"cond = {expected}"
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            unused_allowed=True,
+            translate=False
+        )
+
+    def test_assign_list_var_boolean(self):
+        code = "cond = True, False, true, false"
+        expected = "cond = [True, False, True, False]"
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            unused_allowed=True
+        )
+
+    @parameterized.expand(HedyTester.booleans)
+    def test_print_boolean(self, value, expected):
+        code = f"print 'variable is ' {value}"
+        expected = f"print(f'''variable is {expected}''')"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected,
+            translate=False
+        )
+
+    @parameterized.expand([('вярно', True), ('Вярно', True), ('невярно', False), ('Невярно', False)])
+    def test_print_boolean_bulgarian(self, value, exp):
+        code = f"принтирай 'Това е ' {value}"
+        expected = f"print(f'''Това е {exp}''')"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected,
+            lang='bg'
+        )
+
+    @parameterized.expand(HedyTester.booleans)
+    def test_print_boolean_var(self, value, expected):
+        code = textwrap.dedent(f"""\
+            cond = {value}
+            print 'variable is ' cond""")
+        expected = textwrap.dedent(f"""\
+            cond = {expected}
+            print(f'''variable is {{cond}}''')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected,
+            translate=False
+        )
+
+    @parameterized.expand(HedyTester.booleans)
+    def test_cond_boolean(self, value, expected):
+        code = textwrap.dedent(f"""\
+            cond = {value}
+            if cond is {value}
+                sleep""")
+        expected = textwrap.dedent(f"""\
+            cond = {expected}
+            if convert_numerals('Latin', cond) == convert_numerals('Latin', '{expected}'):
+              time.sleep(1)""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            expected=expected,
+            translate=False
+        )
+
+    #
+    # while
+    #
     def test_while_equals(self):
         code = textwrap.dedent("""\
       antwoord is 0
@@ -35,6 +121,26 @@ class TestsLevel15(HedyTester):
             max_level=16,
             expected=expected,
             expected_commands=['is', 'while', 'ask', 'print']
+        )
+
+    @parameterized.expand(HedyTester.booleans)
+    def test_while_equals_boolean(self, value, expected):
+        code = textwrap.dedent(f"""\
+            cond is {value}
+            while cond != {value}
+              cond is {value}""")
+        expected = textwrap.dedent(f"""\
+            cond = {expected}
+            while convert_numerals('Latin', cond)!={expected}:
+              cond = {expected}
+              time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            expected=expected,
+            skip_faulty=False,
+            translate=False
         )
 
     @parameterized.expand(['and', 'or'])

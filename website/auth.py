@@ -197,6 +197,15 @@ def has_public_profile(user):
 # Thanks to https://stackoverflow.com/a/34499643
 
 
+def hide_explore(user):
+    if 'username' not in user or user.get('username') == '':
+        return False
+    username = user.get('username')
+    customizations = g.db.get_student_class_customizations(username)
+    hide_explore = True if customizations and 'hide_explore' in customizations.get('other_settings') else False
+    return hide_explore
+
+
 def requires_login(f):
     """Decoractor to indicate that a particular route requires the user to be logged in.
 
@@ -217,9 +226,7 @@ def requires_login(f):
 
     @wraps(f)
     def inner(*args, **kws):
-        print('session before', session)
         just_logged_out = session.pop(JUST_LOGGED_OUT, False)
-        print('session after', session)
         if not is_user_logged_in():
             return redirect('/') if just_logged_out else utils.error_page(error=401)
         # The reason we pass by keyword argument is to make this

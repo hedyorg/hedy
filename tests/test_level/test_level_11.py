@@ -204,7 +204,7 @@ class TestsLevel11(HedyTester):
         expected = textwrap.dedent("""\
         step = 1 if int(1) < int(5) else -1
         for دورة in range(int(1), int(5) + step, step):
-          print(f'{convert_numerals("Arabic",دورة)}')
+          print(f'{convert_numerals("Arabic", دورة)}')
           time.sleep(0.1)""")
 
         output = textwrap.dedent("""\

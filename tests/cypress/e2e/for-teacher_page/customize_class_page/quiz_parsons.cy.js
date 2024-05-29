@@ -1,17 +1,17 @@
-import { loginForTeacher } from '../../tools/login/login.js'
+import { loginForStudent, loginForTeacher } from '../../tools/login/login.js'
 import { ensureClass } from "../../tools/classes/class";
 
 describe('customize class page', () => {
     beforeEach(() => {
       loginForTeacher();
       ensureClass();
-      cy.get(".view_class").then($viewClass => {
+      cy.get('[data-cy="view_class_link"]').then($viewClass => {
         if (!$viewClass.is(':visible')) {
-            cy.get("#view_classes").click();
+            cy.get('[data-cy="view_classes"]').click();
         }
       });
       cy.getBySel('view_class_link').first().click(); // Press on view class button
-      cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
+     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
       cy.getBySel('customize_class_button').click(); // Press customize class button
 
       // Remove any customizations that already exist to get the class into a predictable state
@@ -95,7 +95,7 @@ describe('customize class page', () => {
         .should('have.value', 'quiz')
     });
 
-    it.only('disblae all quizes', () => {
+    it.only('disable all quizes', () => {
       cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
 
       cy.get("#hide_quiz")
@@ -114,7 +114,7 @@ describe('customize class page', () => {
         .should("not.exist")
     });
 
-    it('disblae all parsons', () => {
+    it('disable all parsons', () => {
       cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
 
       cy.get("#hide_parsons")
@@ -131,5 +131,21 @@ describe('customize class page', () => {
 
       cy.get('[data-cy="level-1"] [data-cy="parsons"]')
         .should("not.exist")
+    });
+
+    it('hide explore page', () => {
+      cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
+
+      cy.get("#hide_explore")
+          .should("not.be.checked")
+          .click()
+
+      cy.get("#hide_explore")
+          .should("be.checked")
+
+      cy.wait(1000)
+      cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
+      loginForStudent();
+      cy.get("#explorebutton").should("not.exist")
     });
 });

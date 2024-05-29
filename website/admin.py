@@ -1,4 +1,4 @@
-from flask import request
+from flask import make_response, request
 from flask_babel import gettext
 
 import hedyweb
@@ -117,6 +117,7 @@ class AdminModule(WebsiteModule):
             text_filter=substring,
             language_filter=language,
             keyword_language_filter=keyword_language,
+            prev_page_token=users.prev_page_token,
             next_page_token=users.next_page_token,
             current_page="admin",
             javascript_page_options=dict(page='admin-users'),
@@ -237,7 +238,7 @@ class AdminModule(WebsiteModule):
             except BaseException:
                 return gettext("mail_error_change_processed"), 400
 
-        return {}, 200
+        return make_response('', 204)
 
     @route("/getUserTags", methods=["POST"])
     @requires_admin
@@ -273,7 +274,7 @@ class AdminModule(WebsiteModule):
         db_user["tags"] = tags
 
         self.db.update_public_profile(username, db_user)
-        return {}, 200
+        return make_response('', 204)
 
 
 def update_is_teacher(db: Database, user, is_teacher_value=1):

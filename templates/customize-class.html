@@ -107,6 +107,13 @@
                                         if "hide_parsons" in customizations['other_settings'] %}checked{% endif %}>
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="text-left border-t border-r border-gray-400">{{_('disable_explore_page')}}</td>
+                                <td class="border-t border-gray-400">
+                                    <input class="other_settings_checkbox" id="hide_explore" type="checkbox" {%
+                                        if "hide_explore" in customizations['other_settings'] %}checked{% endif %}>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

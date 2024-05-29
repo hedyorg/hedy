@@ -8,9 +8,9 @@ from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
 from os import path, getenv
 
-import warnings
 import hedy
 import hedy_error
+import hedy_grammar
 import hedy_translation
 from utils import atomic_write_file
 from hedy_content import ALL_KEYWORD_LANGUAGES
@@ -169,22 +169,6 @@ for lang_, keywords in KEYWORDS.items():
         indent_keywords[lang_].append(keywords.get(keyword))
 
 
-# These are the preprocessor rules that we use to specify changes in the rules that
-# are expected to work across several rules
-# Example
-# for<needs_colon> instead of defining the whole rule again.
-
-
-def needs_colon(rule):
-    pos = rule.find('_EOL (_SPACE command)')
-    return f'{rule[0:pos]} _COLON {rule[pos:]}'
-
-
-PREPROCESS_RULES = {
-    'needs_colon': needs_colon
-}
-
-
 def make_value_error(command, tip, lang, value='{}'):
     return make_error_text(exceptions.RuntimeValueException(command=command, value=value, tip=tip), lang)
 
@@ -229,6 +213,9 @@ class Command:
     repeat = 'repeat'
     for_list = 'for in'
     for_loop = 'for in range'
+    if_ = 'if'
+    else_ = 'else'
+    elif_ = 'elif'
     addition = '+'
     subtraction = '-'
     multiplication = '*'
@@ -244,6 +231,7 @@ class Command:
     call = 'call'
     returns = 'return'
     play = 'play'
+    while_ = 'while'
 
 
 translatable_commands = {Command.print: ['print'],
@@ -348,33 +336,42 @@ commands_and_types_per_level = {
         1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.list],
         4: [HedyType.string, HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
-        16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]
+        15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean],
+        16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean, HedyType.list]
     },
     Command.ask: {
         1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.list],
         4: [HedyType.string, HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
-        16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]
+        15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean],
+        16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean, HedyType.list]
     },
-    Command.turn: {1: command_turn_literals,
-                   2: [HedyType.integer, HedyType.input],
-                   12: [HedyType.integer, HedyType.input, HedyType.float]
-                   },
-    Command.color: {1: [english_colors, HedyType.list],
-                    2: [english_colors, HedyType.string, HedyType.input, HedyType.list]},
-    Command.forward: {1: [HedyType.integer, HedyType.input],
-                      12: [HedyType.integer, HedyType.input, HedyType.float]
-                      },
-    Command.sleep: {1: [HedyType.integer, HedyType.input],
-                    12: [HedyType.integer, HedyType.input, HedyType.float]
-                    },
+    Command.turn: {
+        1: command_turn_literals,
+        2: [HedyType.integer, HedyType.input],
+        12: [HedyType.integer, HedyType.input, HedyType.float]
+    },
+    Command.color: {
+        1: [english_colors, HedyType.list],
+        2: [english_colors, HedyType.string, HedyType.input, HedyType.list]},
+    Command.forward: {
+        1: [HedyType.integer, HedyType.input],
+        12: [HedyType.integer, HedyType.input, HedyType.float]
+    },
+    Command.sleep: {
+        1: [HedyType.integer, HedyType.input],
+        12: [HedyType.integer, HedyType.input, HedyType.float]
+    },
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
     Command.not_in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
     Command.remove_from_list: {1: [HedyType.list]},
-    Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
-                       14: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]},
+    Command.equality: {
+        1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
+        14: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list],
+        15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list, HedyType.boolean]
+    },
     Command.addition: {
         6: [HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]
@@ -398,7 +395,9 @@ commands_and_types_per_level = {
     Command.smaller_equal: {14: [HedyType.integer, HedyType.float, HedyType.input]},
     Command.bigger: {14: [HedyType.integer, HedyType.float, HedyType.input]},
     Command.bigger_equal: {14: [HedyType.integer, HedyType.float, HedyType.input]},
-    Command.not_equal: {14: [HedyType.integer, HedyType.float, HedyType.string, HedyType.input, HedyType.list]},
+    Command.not_equal: {
+        14: [HedyType.integer, HedyType.float, HedyType.string, HedyType.input, HedyType.list, HedyType.boolean]
+    },
     Command.pressed: {5: [HedyType.string]}  # TODO: maybe use a seperate type character in the future.
 }
 
@@ -550,6 +549,15 @@ class ExtractAST(Transformer):
 
     def NEGATIVE_NUMBER(self, args):
         return Tree('number', [str(args)])
+
+    def TRUE(self, args):
+        return Tree('true', [str(args)])
+
+    def FALSE(self, args):
+        return Tree('false', [str(args)])
+
+    def boolean(self, meta, args):
+        return args[0]
 
     # level 2
     def var(self, meta, args):
@@ -833,6 +841,12 @@ class TypeValidator(Transformer):
         # We managed to parse a number that cannot be parsed by python
         raise exceptions.ParseException(level=self.level, location='', found=number)
 
+    def true(self, tree):
+        return self.to_typed_tree(tree, HedyType.boolean)
+
+    def false(self, tree):
+        return self.to_typed_tree(tree, HedyType.boolean)
+
     def subtraction(self, tree):
         return self.to_sum_typed_tree(tree, Command.subtraction)
 
@@ -1054,6 +1068,12 @@ class Filter(Transformer):
     def NEGATIVE_NUMBER(self, args):
         return True, ''.join([c for c in args]), None
 
+    def true(self, meta, args):
+        return True, args[0], meta
+
+    def false(self, meta, args):
+        return True, args[0], meta
+
     def text(self, meta, args):
         return all(args), ''.join([c for c in args]), meta
 
@@ -1143,6 +1163,23 @@ def all_commands(input_string, level, lang='en'):
     program_root = parse_input(input_string, level, lang)
 
     return AllCommands(level).transform(program_root)
+
+
+def all_variables(input_string, level, lang='en'):
+    """Return all variables used in a program string.
+
+    This function is still used by the roles of variables detection
+    """
+    program_root = parse_input(input_string, level, lang)
+    abstract_syntax_tree = ExtractAST().transform(program_root)
+    vars = set()
+    lookup = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
+    for x in lookup:
+        name = str(x.name)
+        if '[' not in name:  # we also stor list access but that is not needed here
+            vars.add(name)
+
+    return list(vars)
 
 
 @v_args(meta=True)
@@ -1275,6 +1312,40 @@ class IsValid(Filter):
     def error_if_pressed_missing_else(self, meta, args):
         raise exceptions.MissingElseForPressitException(
             command='ifpressed_else', level=self.level, line_number=meta.line)
+
+    def if_pressed_no_colon(self, meta, args):
+        raise exceptions.MissingColonException(command=Command.if_, line_number=meta.line)
+
+    def if_pressed_elifs_no_colon(self, meta, args):
+        # if_pressed_elifs starts with _EOL, so we need to add +1 to its line
+        raise exceptions.MissingColonException(command=Command.elif_, line_number=meta.line+1)
+
+    def if_pressed_elses_no_colon(self, meta, args):
+        # if_pressed_elses starts with _EOL, so we need to add +1 to its line
+        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line+1)
+
+    def ifs_no_colon(self, meta, args):
+        raise exceptions.MissingColonException(command=Command.if_, line_number=meta.line)
+
+    def elifs_no_colon(self, meta, args):
+        # elifs starts with _EOL, so we need to add +1 to its line
+        raise exceptions.MissingColonException(command=Command.elif_, line_number=meta.line+1)
+
+    def elses_no_colon(self, meta, args):
+        # elses starts with _EOL, so we need to add +1 to its line
+        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line+1)
+
+    def for_list_no_colon(self, meta, args):
+        raise exceptions.MissingColonException(command=Command.for_list, line_number=meta.line)
+
+    def for_loop_no_colon(self, meta, args):
+        raise exceptions.MissingColonException(command=Command.for_loop, line_number=meta.line)
+
+    def while_loop_no_colon(self, meta, args):
+        raise exceptions.MissingColonException(command=Command.while_, line_number=meta.line)
+
+    def define_no_colon(self, meta, args):
+        raise exceptions.MissingColonException(command=Command.define, line_number=meta.line)
 
     # other rules are inherited from Filter
 
@@ -1462,7 +1533,7 @@ class ConvertToPython(Transformer):
             return f"convert_numerals('{self.numerals_language}', {escape_var(name)})"
         elif ConvertToPython.is_float(name):
             return f"convert_numerals('{self.numerals_language}', {name})"
-        elif ConvertToPython.is_quoted(name):
+        elif ConvertToPython.is_quoted(name) or self.is_bool(name):
             return f"{name}"
 
     def get_fresh_var(self, name):
@@ -1477,8 +1548,9 @@ class ConvertToPython(Transformer):
 
         def is_var_candidate(arg) -> bool:
             return not isinstance(arg, Tree) and \
-                not ConvertToPython.is_int(arg) and \
-                not ConvertToPython.is_float(arg)
+                not self.is_int(arg) and \
+                not self.is_float(arg) and \
+                not self.is_bool(arg)
 
         args_to_process = [a for a in args if is_var_candidate(a)]  # we do not check trees (calcs) they are always ok
 
@@ -1508,9 +1580,10 @@ class ConvertToPython(Transformer):
         try:
             self.check_var_usage([arg], meta.line)
         except exceptions.UndefinedVarException:
-            if not (ConvertToPython.is_int(arg) or
-                    ConvertToPython.is_float(arg) or
-                    ConvertToPython.is_random(arg)):
+            if not (self.is_int(arg) or
+                    self.is_float(arg) or
+                    self.is_random(arg) or
+                    self.is_bool(arg)):
                 raise exceptions.UnquotedAssignTextException(text=arg, line_number=meta.line)
 
     # static methods
@@ -1544,6 +1617,10 @@ class ConvertToPython(Transformer):
     @staticmethod
     def is_random(s):
         return 'random.choice' in s
+
+    @staticmethod
+    def is_bool(s):
+        return s in ['True', 'False']
 
     @staticmethod
     def is_list(s):
@@ -1955,12 +2032,15 @@ class ConvertToPython_4(ConvertToPython_3):
             if self.numerals_language == "Latin":
                 converted = escape_var(name)
             else:
-                converted = f'convert_numerals("{self.numerals_language}",{escape_var(name)})'
+                converted = f'convert_numerals("{self.numerals_language}", {escape_var(name)})'
             return "{" + converted + "}"
         else:
+            # at level 4 backslashes are escaped in preprocessing, so we escape only '
             if self.is_quoted(name):
                 name = name[1:-1]
-            return name.replace("'", "\\'")  # at level 4 backslashes are escaped in preprocessing, so we escape only '
+                return name.replace("'", "\\'")
+            name = name.replace("'", "\\'")
+            return f'{{convert_numerals("{self.numerals_language}", {escape_var(name)})}}'
 
     def var_access(self, meta, args):
         name = args[0]
@@ -2457,6 +2537,14 @@ class ConvertToPython_12(ConvertToPython_11):
         numbers = [str(float(x)) for x in args]
         return ''.join(numbers)
 
+    def true(self, meta, args):
+        # The args contain the actual parse value that was used
+        return str(True)
+
+    def false(self, meta, args):
+        # The args contain the actual parse value that was used
+        return str(False)
+
     def text_in_quotes(self, meta, args):
         # We need to re-add the quotes, so that the Python code becomes name = 'Jan' or "Jan's"
         text = args[0] if args else ''
@@ -2742,129 +2830,6 @@ class ConvertToPython_18(ConvertToPython_17):
         return self.print(meta, args)
 
 
-def get_rule_from_string(s):
-    parts = s.split(':')
-    # get part before and after : (this is a join because there can be : in the rule)
-    if len(parts) <= 1:
-        return s, s
-    return parts[0], ''.join(parts[1])
-
-
-def merge_grammars(grammar_text_1, grammar_text_2):
-    # this function takes two grammar files and merges them into one
-    # rules that are redefined in the second file are overridden
-    # rules that are new in the second file are added (remaining_rules_grammar_2)
-    merged_grammar = []
-
-    deletables = []
-    # this list collects rules we no longer need,
-    # they will be removed when we encounter them
-
-    rules_grammar_1 = grammar_text_1.split('\n')
-    remaining_rules_grammar_2 = grammar_text_2.split('\n')
-    for line_1 in rules_grammar_1:
-        if line_1 == '' or line_1[0] == '/':  # skip comments and empty lines:
-            continue
-
-        name_1, definition_1 = get_rule_from_string(line_1)
-
-        rules_grammar_2 = grammar_text_2.split('\n')
-        override_found = False
-        for line_2 in rules_grammar_2:
-            if line_2 == '' or line_2[0] == '/':  # skip comments and empty lines:
-                continue
-
-            needs_preprocessing = re.match(r'((\w|_)+)<((\w|_)+)>', line_2)
-            if needs_preprocessing:
-                name_2 = f'{needs_preprocessing.group(1)}'
-                processor = needs_preprocessing.group(3)
-            else:
-                name_2, definition_2 = get_rule_from_string(line_2)
-
-            if name_1 == name_2:
-                override_found = True
-                if needs_preprocessing:
-                    definition_2 = PREPROCESS_RULES[processor](definition_1)
-                    line_2_processed = f'{name_2}: {definition_2}'
-                else:
-                    line_2_processed = line_2
-                if definition_1.strip() == definition_2.strip():
-                    warn_message = f"The rule {name_1} is duplicated: {definition_1} and {definition_2}. Please check!"
-                    warnings.warn(warn_message)
-                # Used to compute the rules that use the merge operators in the grammar, namely +=, -= and >>
-                new_rule, new_deletables = merge_rules_operator(definition_1, definition_2, name_1, line_2_processed)
-                if new_deletables:
-                    deletables += new_deletables
-                # Already processed, so remove it
-                remaining_rules_grammar_2.remove(line_2)
-                break
-
-        # new rule found? print that. nothing found? print org rule
-        if override_found:
-            merged_grammar.append(new_rule)
-        else:
-            merged_grammar.append(line_1)
-
-    # all rules that were not overlapping are new in the grammar, add these too
-    for rule in remaining_rules_grammar_2:
-        if not (rule == '' or rule[0] == '/'):
-            merged_grammar.append(rule)
-
-    merged_grammar = sorted(merged_grammar)
-    # filter deletable rules
-    rules_to_keep = [rule for rule in merged_grammar if get_rule_from_string(rule)[0] not in deletables]
-    return '\n'.join(rules_to_keep)
-
-
-ADD_GRAMMAR_MERGE_OP = '+='
-REMOVE_GRAMMAR_MERGE_OP = '-='
-LAST_GRAMMAR_MERGE_OP = '>>'
-GRAMMAR_MERGE_OPERATORS = [ADD_GRAMMAR_MERGE_OP, REMOVE_GRAMMAR_MERGE_OP, LAST_GRAMMAR_MERGE_OP]
-
-
-def merge_rules_operator(prev_definition, new_definition, name, complete_line):
-    op_to_arg = get_operator_to_argument(new_definition)
-
-    add_arg = op_to_arg.get(ADD_GRAMMAR_MERGE_OP, '')
-    remove_arg = op_to_arg.get(REMOVE_GRAMMAR_MERGE_OP, '')
-    last_arg = op_to_arg.get(LAST_GRAMMAR_MERGE_OP, '')
-    remaining_commands = get_remaining_rules(prev_definition, remove_arg, last_arg)
-    ordered_commands = split_rule(remaining_commands, add_arg, last_arg)
-
-    new_rule = f"{name}: {' | '.join(ordered_commands)}" if bool(op_to_arg) else complete_line
-    deletable = split_rule(remove_arg)
-    return new_rule, deletable
-
-
-def get_operator_to_argument(definition):
-    # Creates a map of all used operators and their respective arguments e.g. {'+=': 'print | play', '>>': 'echo'}
-    operator_to_index = [(op, definition.find(op)) for op in GRAMMAR_MERGE_OPERATORS if op in definition]
-    result = {}
-    for i, (op, index) in enumerate(operator_to_index):
-        start_index = index + len(op)
-        if i + 1 < len(operator_to_index):
-            _, next_index = operator_to_index[i + 1]
-            result[op] = definition[start_index:next_index].strip()
-        else:
-            result[op] = definition[start_index:].strip()
-    return result
-
-
-def get_remaining_rules(orig_def, *sub_def):
-    original_commands = split_rule(orig_def)
-    commands_after_minus = split_rule(*sub_def)
-    misses = [c for c in commands_after_minus if c not in original_commands]
-    if misses:
-        raise Exception(f"Command(s) {'|'.join(misses)} do not exist in the previous definition")
-    remaining_commands = [cmd for cmd in original_commands if cmd not in commands_after_minus]
-    remaining_commands = ' | '.join(remaining_commands)  # turn the result list into a string
-    return remaining_commands
-
-
-def split_rule(*rules):
-    return [c.strip() for rule in rules for c in rule.split('|') if c.strip() != '']
-
-
 # this is only a couple of MB in total, safe to cache
 @cache
 def create_grammar(level, lang, skip_faulty):
@@ -2874,7 +2839,7 @@ def create_grammar(level, lang, skip_faulty):
     # then keep merging new grammars in
     for i in range(2, level + 1):
         grammar_text_i = get_additional_rules_for_level(i)
-        merged_grammars = merge_grammars(merged_grammars, grammar_text_i)
+        merged_grammars = hedy_grammar.merge_grammars(merged_grammars, grammar_text_i)
 
     # keyword and other terminals never have mergable rules, so we can just add them at the end
     keywords = get_keywords_for_language(lang)
@@ -3108,7 +3073,7 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
 
 
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle',
-                                         'has_pressed', 'has_clear', 'has_music', 'commands'])
+                                         'has_pressed', 'has_clear', 'has_music', 'has_sleep', 'commands', 'roles_of_variables'])
 
 
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en", unused_allowed=True):
@@ -3597,6 +3562,27 @@ def create_AST(input_string, level, lang="en"):
     return abstract_syntax_tree, lookup_table, commands
 
 
+def determine_roles(lookup, input_string, level, lang):
+    all_vars = all_variables(input_string, level, lang)
+    roles_dictionary = {}
+    for var in all_vars:
+        assignments = [x for x in lookup if x.name == var]
+
+        if (assignments[0].tree.data == 'for_list'):
+            roles_dictionary[var] = 'walker'
+        elif (assignments[0].type_ == 'list'):
+            roles_dictionary[var] = 'container'
+        elif (len(assignments) == 1):
+            if (assignments[0].type_ == 'input'):
+                roles_dictionary[var] = 'input constant'
+            else:
+                roles_dictionary[var] = 'constant'
+        else:
+            roles_dictionary[var] = 'unknown'
+
+    return roles_dictionary
+
+
 def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False, unused_allowed=False,
                     microbit=False):
     check_program_size_is_valid(input_string)
@@ -3632,8 +3618,12 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         has_turtle = "forward" in commands or "turn" in commands or "color" in commands
         has_pressed = "if_pressed" in commands or "if_pressed_else" in commands or "assign_button" in commands
         has_music = "play" in commands
+        has_sleep = "sleep" in commands
 
-        parse_result = ParseResult(python, source_map, has_turtle, has_pressed, has_clear, has_music, commands)
+        roles_of_variables = determine_roles(lookup_table, input_string, level, lang)
+
+        parse_result = ParseResult(python, source_map, has_turtle, has_pressed,
+                                   has_clear, has_music, has_sleep, commands, roles_of_variables)
 
         if populate_source_map:
             source_map.set_python_output(python)

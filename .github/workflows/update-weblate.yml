@@ -45,9 +45,24 @@ jobs:
       # commits that Weblate pushes, and if the bytes aren't exactly equivalent (for example
       # if we wrap or we revert a broken bit of code) it will trigger a merge
       # conflict.
+      #
+      # To prevent merge conflicts, lock the repository while we're merging this; otherwise,
+      # any translations in the merge window will cause merge conflicts. Only lock if we're
+      # going to create a Pull Request while doing this, since unlocking will
+      # only happen as the result of a PR being merged.
       run: |
         set -x
-        wlc repo
+        wlc repo | tee repo.txt
+        if grep -q "needs_commit: False" repo.txt && grep -q "needs_push: False" repo.txt; then
+          echo "Nothing to do"
+          exit 0
+        fi
+
+        # Have to lock each component individually. Not in the UI, but using the CLI we do.
+        for component in glossary adventures keywords achievements quizzes commands client-messages web-texts webpages parsons tutorials slides; do
+          wlc lock hedy/$component
+        done
+
         wlc pull
         wlc commit
         wlc push

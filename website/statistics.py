@@ -2,7 +2,7 @@ from collections import namedtuple
 from enum import Enum
 from difflib import SequenceMatcher
 import re
-from flask import g, jsonify, request
+from flask import g, jsonify, make_response, request
 from flask_babel import gettext
 import utils
 import hedy_content
@@ -268,16 +268,19 @@ class StatisticsModule(WebsiteModule):
                 content = adventure['content']
                 soup = BeautifulSoup(content, features="html.parser")
                 for pre in soup.find_all('pre'):
-                    adventure_snippets.append(pre.contents[0])
+                    adventure_snippets.append(str(pre.contents[0]))
 
-        student_code = program['code']
-        student_code = student_code
+        student_code = program['code'].strip()
         # now we have to calculate the differences between the student code and the code snippets
         can_save = True
         for snippet in adventure_snippets:
+            if re.search(r'<code.*?>.*?</code>', snippet):
+                snippet = re.sub(r'<code.*?>(.*?)</code>', r'\1', snippet)
+            snippet = snippet.strip()
             seq_match = SequenceMatcher(None, snippet, student_code)
+            matching_ratio = round(seq_match.ratio(), 2)
             # Allowing a difference of more than 10% or the student filled the placeholders
-            if seq_match.ratio() > 0.95 and (self.has_placeholder(student_code) or not self.has_placeholder(snippet)):
+            if matching_ratio >= 0.95 and (self.has_placeholder(student_code) or not self.has_placeholder(snippet)):
                 can_save = False
         return can_save
 
@@ -817,7 +820,7 @@ class LiveStatisticsModule(WebsiteModule):
                 self.db.update_class_errors(common_errors)
                 break
 
-        return {}, 200
+        return make_response('', 204)
 
     def retrieve_exceptions_per_student(self, class_id):
         """
@@ -951,7 +954,7 @@ class LiveStatisticsModule(WebsiteModule):
 
         self.db.update_class_customizations(class_customization)
 
-        return {}, 200
+        return make_response('', 204)
 
 
 def add(username, action):

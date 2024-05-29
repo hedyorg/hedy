@@ -484,15 +484,29 @@ class TestsLevel2(HedyTester):
         )
 
     # color tests
-    def test_color_red(self):
-        code = "color red"
-        expected = HedyTester.turtle_color_command_transpiled('red')
+
+    @parameterized.expand(hedy.english_colors)
+    def test_all_colors(self, color):
+        code = f'color {color}'
+        expected = HedyTester.turtle_color_command_transpiled(color)
 
         self.multi_level_tester(
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            max_level=10
+            max_level=3
+        )
+
+    def test_color_red_ar(self):
+        code = 'لون احمر'
+        expected = HedyTester.turtle_color_command_transpiled('red', lang='ar')
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            max_level=3,
+            lang='ar'
         )
 
     def test_color_with_var(self):
@@ -521,7 +535,7 @@ class TestsLevel2(HedyTester):
             expected=expected,
             extra_check_function=self.is_turtle(),
             lang=lang,
-            max_level=10
+            max_level=3
         )
 
     def test_color_with_number_gives_type_error(self):

@@ -1,3 +1,4 @@
+import copy
 import uuid
 from typing import Optional
 
@@ -21,6 +22,7 @@ from website.auth import (
 
 from .achievements import Achievements
 from .database import Database
+from .statistics import StatisticsModule
 from .website_module import WebsiteModule, route
 from .frontend_types import SaveInfo, Program
 from . import querylog
@@ -36,9 +38,10 @@ class ProgramsLogic:
     Achievements and stuff.
     """
 
-    def __init__(self, db: Database, achievements: Achievements):
+    def __init__(self, db: Database, achievements: Achievements, statistics: StatisticsModule):
         self.db = db
         self.achievements = achievements
+        self.statistics = statistics
 
     @querylog.timed
     def store_user_program(self,
@@ -49,6 +52,7 @@ class ProgramsLogic:
                            error: bool,
                            program_id: Optional[str] = None,
                            adventure_name: Optional[str] = None,
+                           short_name: Optional[str] = None,
                            set_public: Optional[bool] = None):
         """Store a user program (either new or overwrite an existing one).
 
@@ -73,6 +77,7 @@ class ProgramsLogic:
             updates['public'] = 1 if set_public else 0
 
         if program_id:
+            # Updates an existing program
             # FIXME: This should turn into a conditional update
             current_prog = self.db.program_by_id(program_id)
             if not current_prog:
@@ -82,13 +87,23 @@ class ProgramsLogic:
 
             program = self.db.update_program(program_id, updates)
         else:
+            # Creates a new program
             updates['id'] = uuid.uuid4().hex
             program = self.db.store_program(updates)
-            self.db.increase_user_program_count(user["username"])
 
-        self.db.increase_user_save_count(user["username"])
-        self.achievements.increase_count("saved")
-        self.achievements.verify_save_achievements(user["username"], adventure_name)
+        # update if a program is modified or not, this can only be done after a program is stored
+        # because is_program_modified needs a program
+        full_adventures = hedy_content.Adventures("en").get_adventures(g.keyword_lang)
+        teacher_adventures = self.db.get_teacher_adventures(current_user()["username"])
+        program_to_check = copy.deepcopy(program)
+        program_to_check['adventure_name'] = short_name
+
+        is_modified = self.statistics.is_program_modified(program_to_check, full_adventures, teacher_adventures)
+        # a program can be saved already but not yet modified,
+        # and if it was already modified and now is so again, count should not increase.
+        if is_modified and not program.get('is_modified'):
+            self.db.increase_user_program_count(user["username"])
+        program = self.db.update_program(program['id'], {'is_modified': is_modified})
 
         querylog.log_value(program_id=program['id'],
                            adventure_name=adventure_name, error=error, code_lines=len(code.split('\n')))
@@ -99,9 +114,9 @@ class ProgramsLogic:
 class ProgramsModule(WebsiteModule):
     """Flask routes that deal with manipulating programs."""
 
-    def __init__(self, db: Database, achievements: Achievements):
+    def __init__(self, db: Database, achievements: Achievements, statistics: StatisticsModule):
         super().__init__("programs", __name__, url_prefix="/programs")
-        self.logic = ProgramsLogic(db, achievements)
+        self.logic = ProgramsLogic(db, achievements, statistics)
         self.db = db
         self.achievements = achievements
 
@@ -135,6 +150,7 @@ class ProgramsModule(WebsiteModule):
             self.db.set_favourite_program(user["username"], body["id"], None)
 
         achievement = self.achievements.add_single_achievement(user["username"], "do_you_have_copy")
+
         resp = {"message": gettext("delete_success")}
         if achievement:
             resp["achievement"] = achievement
@@ -204,7 +220,8 @@ class ProgramsModule(WebsiteModule):
             user=user,
             error=error,
             set_public=program_public,
-            adventure_name=body.get('adventure_name'))
+            adventure_name=body.get('adventure_name'),
+            short_name=body.get('short_name', body.get('adventure_name')))
 
         return jsonify({
             "message": gettext("save_success_detail"),
