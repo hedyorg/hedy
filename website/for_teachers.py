@@ -305,21 +305,14 @@ class ForTeachersModule(WebsiteModule):
         student_overview_table, class_, class_adventures_formatted, \
             adventure_names, student_adventures, _ = self.get_grid_info(user, class_id, level)
 
-        return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
+        return jinja_partials.render_partial("customize-grid/partial-grid-table.html",
                                              level=level,
                                              class_info={"id": class_id, "students": students, "name": class_["name"]},
-                                             max_level=hedy.HEDY_MAX_LEVEL,
-                                             class_adventures=class_adventures_formatted,
-                                             adventure_names=adventure_names,
-                                             student_adventures=student_adventures,
                                              adventure_table={
                                                  'students': student_overview_table,
                                                  'adventures': class_adventures_formatted,
                                                  'student_adventures': student_adventures,
                                                  'level': level,
-                                                 "graph_options": {
-                                                     "level": level
-                                                 }
                                              }
                                              )
 
