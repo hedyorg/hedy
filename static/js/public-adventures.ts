@@ -122,14 +122,12 @@ function updateURL() {
 
 
 document.addEventListener("updateTSCode", (e: any) => {
-    setTimeout(() => {
-        initializeVariables();
-        const js = e.detail;
-    
-        updateURL();
-        prepareDropdowns();
-        initialize({lang: js.lang, level: parseInt(js.level), keyword_language: js.lang,
-            javascriptPageOptions: js
-            });
-    }, 500);
+    initializeVariables();
+    const js = e.detail;
+
+    updateURL();
+    prepareDropdowns();
+    initialize({lang: js.lang, level: parseInt(js.level), keyword_language: js.lang,
+        javascriptPageOptions: js
+        });
 })
