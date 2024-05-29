@@ -605,40 +605,12 @@ def parse():
             if transpile_result.has_music:
                 response['has_music'] = True
 
+            if transpile_result.has_sleep:
+                response['has_sleep'] = True
+
             response['variables'] = transpile_result.roles_of_variables
         except Exception:
             pass
-
-        if level < 7:
-            with querylog.log_time('detect_sleep'):
-                try:
-                    # FH, Nov 2023: hmmm I don't love that this is not done in the same place as the other "has"es
-                    sleep_list = []
-                    pattern = (
-                        r'time\.sleep\((?P<time>\d+)\)'
-                        r'|time\.sleep\(int\("(?P<sleep_time>\d+)"\)\)'
-                        r'|time\.sleep\(int\((?P<variable>\w+)\)\)')
-                    matches = re.finditer(
-                        pattern,
-                        response['Code'])
-                    for i, match in enumerate(matches, start=1):
-                        time = match.group('time')
-                        sleep_time = match.group('sleep_time')
-                        variable = match.group('variable')
-                        if sleep_time:
-                            sleep_list.append(int(sleep_time))
-                        elif time:
-                            sleep_list.append(int(time))
-                        elif variable:
-                            assignment_match = re.search(r'{} = (.+?)\n'.format(variable), response['Code'])
-                            if assignment_match:
-                                assignment_code = assignment_match.group(1)
-                                variable_value = eval(assignment_code)
-                                sleep_list.append(int(variable_value))
-                    if sleep_list:
-                        response['has_sleep'] = sleep_list
-                except BaseException:
-                    pass
 
         if not raw:
             try:
@@ -1012,7 +984,8 @@ def programs_page(user):
     page = request.args.get('page', default=None, type=str)
     filter = request.args.get('filter', default=None, type=str)
     submitted = True if filter == 'submitted' else None
-
+    if page == '':
+        page = None
     all_programs = DATABASE.filtered_programs_for_user(from_user or username,
                                                        submitted=submitted,
                                                        pagination_token=page)
@@ -1023,7 +996,9 @@ def programs_page(user):
                 program['adventure_name'] not in adventure_names:
             ids_to_fetch.append(program['adventure_name'])
 
-    all_programs = [program for program in all_programs if program.get('is_modified')]
+    # When saving a program, 'is_modified' is set to True or False
+    # But for older programs, 'is_modified' doesn't exist yet, therefore the check
+    all_programs = [program for program in all_programs if program.get('is_modified') or 'is_modified' not in program]
 
     teacher_adventures = DATABASE.batch_get_adventures(ids_to_fetch)
     for id, teacher_adventure in teacher_adventures.items():
@@ -2661,6 +2636,8 @@ def public_user_page(username):
         return utils.error_page(error=404, ui_message=gettext('user_not_private'))
     user_public_info = DATABASE.get_public_profile_settings(username)
     page = request.args.get('page', default=None, type=str)
+    if page == '':
+        page = None
 
     keyword_lang = g.keyword_lang
     adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)

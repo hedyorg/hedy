@@ -56,31 +56,21 @@ interface GutterMouseDownEvent {
 }
 
 //this shows just the button, not the list itself
-export function hide_if_no_variables(){
+export function toggleVariableView(){
   if($('#variables #variable-list li').length == 0){
     $('#variable_button').hide();
-    $('#variables').hide();
-    $('#variables-expand'). hide();
   }
-  else{
+  else{    
     $('#variable_button').show();
+    $('#variable-list').show();
+    document.getElementById('variables_arrow')!.classList.remove('fa-angle-up');
+    document.getElementById('variables_arrow')!.classList.add('fa-angle-down');
   }
 }
-
-export function show_variables() {
-  if (variable_view === true) {
-    const variableList = $('#variable-list');
-    if (variableList.hasClass('hidden')) {
-      variableList.removeClass('hidden');
-    }
-  }
-}
-
-
 
 export function load_variables(variables: any) {
   if (variable_view === true) {
-    const programData = theGlobalDebugger.get_program_data();
+    const programData = theGlobalDebugger?.get_program_data();
     variables = clean_variables(variables);
     const variableList = $('#variable-list');
     variableList.empty();
@@ -88,7 +78,7 @@ export function load_variables(variables: any) {
       // Only append if the variable contains any data (and is not undefined)
       if (variables[i][1]) {
         const variableName = variables[i][0].replace(/^_/, '');
-        const role = programData.variables[variableName];
+        const role = programData?.variables[variableName];
         if (showRoles) {
           variableList.append(`<li style=color:${variables[i][2]}>${variableName}: ${variables[i][1]} (${role})</li>`);
         } else {
@@ -96,8 +86,7 @@ export function load_variables(variables: any) {
         }
       }
     }
-    show_variables();
-    hide_if_no_variables();
+    toggleVariableView();
   }
 }
 
@@ -182,9 +171,7 @@ export function initializeDebugger(options: InitializeDebuggerOptions) {
 
   if(options.level != 0){
     let level = options.level;
-    variable_view = level >= 2;
-    show_variables();
-    hide_if_no_variables();
+    variable_view = level >= 2;  
   }
   initializeBreakpoints(options.editor);
 }

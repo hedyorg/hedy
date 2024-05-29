@@ -10,12 +10,12 @@ describe('Is able to click on create new class', () => {
     // Assert that the input field is empty,
     // the ok button is visible and
     // the cancel button is visible
-    cy.get('#modal-prompt-input').should('be.empty');
-    cy.get('#modal-prompt-input').should('be.visible');
-    cy.get('#modal-prompt-input').should('be.enabled');
+    cy.get('[data-cy="modal_prompt_input"]').should('be.empty');
+    cy.get('[data-cy="modal_prompt_input"]').should('be.visible');
+    cy.get('[data-cy="modal_prompt_input"]').should('be.enabled');
 
-    cy.get('#modal-ok-button').should('be.visible');
-    cy.get('#modal-ok-button').should('be.enabled');
+    cy.get('[data-cy="modal_ok_button"]').should('be.visible');
+    cy.get('[data-cy="modal_ok_button"]').should('be.enabled');
 
     cy.get('#modal-cancel-button').should('be.visible');
     cy.get('#modal-cancel-button').should('be.enabled');

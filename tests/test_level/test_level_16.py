@@ -857,3 +857,33 @@ class TestsLevel16(HedyTester):
             expected=expected,
             max_level=17
         )
+
+    #
+    # boolean values
+    #
+    def test_assign_list_var_boolean(self):
+        code = "cond = [True, False, true, false]"
+        expected = "cond = [True, False, True, False]"
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            unused_allowed=True
+        )
+
+    @parameterized.expand(HedyTester.booleans)
+    def test_cond_boolean(self, value, expected):
+        code = textwrap.dedent(f"""\
+            cond = {value}
+            if cond is {value}
+                sleep""")
+        expected = textwrap.dedent(f"""\
+            cond = {expected}
+            if convert_numerals('Latin', cond) == convert_numerals('Latin', '{expected}'):
+              time.sleep(1)""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            translate=False
+        )
