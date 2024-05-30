@@ -5,20 +5,20 @@ describe('customize class page', () => {
     beforeEach(() => {
       loginForTeacher();
       ensureClass();
-      cy.get('[data-cy="view_class_link"]').then($viewClass => {
+      cy.getBySel('view_class_link').then($viewClass => {
         if (!$viewClass.is(':visible')) {
             cy.get('[data-cy="view_classes"]').click();
         }
       });
-      cy.get('[data-cy="view_class_link"]').first().click(); // Press on view class button
+      cy.getBySel('view_class_link').first().click(); // Press on view class button
       cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
-      cy.get('[data-cy="customize_class_button"]').click(); // Press customize class button
+      cy.getBySel('customize_class_button').click(); // Press customize class button
 
       // Remove any customizations that already exist to get the class into a predictable state
       // This always throws up a modal dialog
       cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');      
-      cy.getBySel('[data-cy="remove_customizations_button"]').click();
-      cy.get('[data-cy="modal_yes_button"]').click();
+      cy.getBySel('remove_customizations_button').click();
+      cy.getBySel('modal_yes_button').click();
       cy.wait('@restoreCustomizations');
     });
 

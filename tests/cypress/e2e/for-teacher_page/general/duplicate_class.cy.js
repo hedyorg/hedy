@@ -13,7 +13,7 @@ describe('Duplicate class tests', () => {
     // Click on duplicate icon
     cy.reload();
     cy.wait(500);
-    cy.get('[data-cy="view_class_link"]').then($viewClass => {
+    cy.getBySel('view_class_link').then($viewClass => {
       if (!$viewClass.is(':visible')) {
           cy.get('[data-cy="view_classes"]').click();
       }
@@ -27,16 +27,16 @@ describe('Duplicate class tests', () => {
     cy.reload();
     cy.wait(500);
 
-    cy.get('[data-cy="view_class_link"]').then($viewClass => {
+    cy.getBySel('view_class_link').then($viewClass => {
       if (!$viewClass.is(':visible')) {
           cy.get('[data-cy="view_classes"]').click();
       }
     });
-    cy.get('[data-cy="view_class_link"]').contains(duplicate_class).click();
-    cy.get('[data-cy="customize_class_button"]').click();
-    cy.get('[data-cy="opening_date_container"]').should("not.be.visible")
-    cy.get('[data-cy="opening_date_label"]').click();
-    cy.get('[data-cy="opening_date_container"]').should("be.visible")
+    cy.getBySel('view_class_link').contains(duplicate_class).click();
+    cy.getBySel('customize_class_button').click();
+    cy.getBySel('opening_date_container').should("not.be.visible")
+    cy.getBySel('opening_date_label').click();
+    cy.getBySel('opening_date_container').should("be.visible")
     cy.get("#enable_level_7").should('be.enabled');
     logout();
   })
@@ -45,7 +45,7 @@ describe('Duplicate class tests', () => {
     loginForTeacher();
     goToTeachersPage();
 
-    cy.get('[data-cy="view_class_link"]').then($viewClass => {
+    cy.getBySel('view_class_link').then($viewClass => {
       if (!$viewClass.is(':visible')) {
           cy.get('[data-cy="view_classes"]').click();
       }
@@ -62,17 +62,17 @@ describe('Duplicate class tests', () => {
     cy.reload();
     cy.wait(500);
 
-    cy.get('[data-cy="view_class_link"]').then($viewClass => {
+    cy.getBySel('view_class_link').then($viewClass => {
       if (!$viewClass.is(':visible')) {
           cy.get('[data-cy="view_classes"]').click();
       }
     });
-    cy.get('[data-cy="view_class_link"]').contains(duplicate_class).click();
-    cy.get('[data-cy="invites_block"]').should('be.visible');
-    cy.get('[data-cy="customize_class_button"]').click();
-    cy.get('[data-cy="opening_date_container"]').should("not.be.visible")
-    cy.get('[data-cy="opening_date_label"]').click();
-    cy.get('[data-cy="opening_date_container"]').should("be.visible")
+    cy.getBySel('view_class_link').contains(duplicate_class).click();
+    cy.getBySel('invites_block').should('be.visible');
+    cy.getBySel('customize_class_button').click();
+    cy.getBySel('opening_date_container').should("not.be.visible")
+    cy.getBySel('opening_date_label').click();
+    cy.getBySel('opening_date_container').should("be.visible")
     cy.get("#enable_level_7").should('be.enabled');
   })
 })

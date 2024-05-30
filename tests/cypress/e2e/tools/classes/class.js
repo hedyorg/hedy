@@ -66,7 +66,7 @@ export function addStudents(classname, count) {
       cy.get(`:nth-child(${(index + 2)}) > #password`).type('123456');
     })
     cy.get('#create_accounts_button').click();
-    cy.get('[data-cy="modal_yes_button"]').click();
+    cy.getBySel('modal_yes_button').click();
 
     return students;
 }
@@ -82,9 +82,9 @@ export function addCustomizations(classname){
     });
     cy.get('[data-cy="view_class_link"]').contains(classname).click();
     cy.get('#customize-class-button').click();
-    cy.get('[data-cy="opening_date_container"]').should("not.be.visible")
-    cy.get('[data-cy="opening_date_label"]').click();
-    cy.get('[data-cy="opening_date_container"]').should("be.visible")
+    cy.getBySel('opening_date_container').should("not.be.visible")
+    cy.getBySel('opening_date_label').click();
+    cy.getBySel('opening_date_container').should("be.visible")
     cy.get('#enable_level_7').parent('.switch').click();
 
     cy.wait(1000)
