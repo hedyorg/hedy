@@ -818,7 +818,7 @@ class ForTeachersModule(WebsiteModule):
         htmx_target = "#adventure-dragger"
         htmx_swap = "outerHTML"
         htmx_indicator = "#indicator"
-        return render_partial('modal/htmx-modal-confirm.html',
+        return render_partial('modal/htmx_modal-confirm.html',
                               modal_text=modal_text,
                               htmx_endpoint=htmx_endpoint,
                               htmx_target=htmx_target,

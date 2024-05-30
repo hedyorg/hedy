@@ -155,7 +155,7 @@ describe('customize class page', () => {
        * At the beggining, the Parrot adventure should be in the level 1's adventures
        */
       selectLevel('1');
-      cy.get('#htmx-modal').should('not.exist');
+      cy.get('#htmx_modal').should('not.exist');
       cy.get(`*[data-cy="level-1"] div[data-cy='parrot'] *[data-cy="hide"]`).click();
       cy.getBySel('parrot').should('not.exist');
 
