@@ -28,7 +28,6 @@ class PublicAdventuresModule(WebsiteModule):
         self.achievements = achievements
 
     @route("/", methods=["GET"])
-    @route("/filter", methods=["PUT"])
     @requires_teacher
     def filtering(self, user):
         level = request.args["level"] if request.args.get("level") else "1"

@@ -11,7 +11,7 @@
                 value="{{currentSearch}}"
                 {% if currentSearch %}autofocus{% endif %}
                 hx-trigger="input changed delay:500ms, search" 
-                hx-put="/public-adventures/filter?level={{level}}&lang={{selectedLang}}&tag={{selectedTag}}&search={{currentSearch}}"
+                hx-get="/public-adventures?level={{level}}&lang={{selectedLang}}&tag={{selectedTag}}&search={{currentSearch}}"
                 hx-target="#public-adventures"
                 placeholder="{{_('search')}}"
                 class="border text-black border-gray-500 rounded h-8 px-2 w-full"
@@ -39,7 +39,7 @@
                         end">
                     {% for level in customizations["available_levels"] %}
                         <div class="option {% if selectedLevel|string == level|string %}selected{% endif %}"
-                            hx-put="/public-adventures/filter?level={{level}}&lang={{selectedLang}}&tag={{selectedTag}}&search={{currentSearch}}"
+                            hx-get="/public-adventures?level={{level}}&lang={{selectedLang}}&tag={{selectedTag}}&search={{currentSearch}}"
                             hx-target="#public-adventures"
                             data-value="{{level}}"
                         >{{ level }}</div>
@@ -68,12 +68,12 @@
                             add .rotate-180 to arrow
                         end">
                     <div class="option default"
-                        hx-put="/public-adventures/filter?lang=reset&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}"
+                        hx-get="/public-adventures?lang=reset&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}"
                         hx-target="#public-adventures"
                         data-value="">{{_('select_lang')}}</div>
                     {% for lang in available_languages %}
                         <div class="option {% if lang == selectedLang %}selected{% endif %}"
-                            hx-put="/public-adventures/filter?lang={{lang}}&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}"
+                            hx-get="/public-adventures?lang={{lang}}&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}"
                             hx-target="#public-adventures"
                             data-value="{{lang}}">{{lang_to_sym(lang)}}</div>
                     {% endfor %}
@@ -104,9 +104,9 @@
                           {% set selected = tag in selectedTag %}
                           <div class="option {% if selected %}selected{% endif %}"
                             {% if selected %}
-                              hx-put="/public-adventures/filter?tag={{tag}}&reset={{selectedTag}}&level={{selectedLevel}}&lang={{selectedLang}}&search={{currentSearch}}"
+                              hx-get="/public-adventures?tag={{tag}}&reset={{selectedTag}}&level={{selectedLevel}}&lang={{selectedLang}}&search={{currentSearch}}"
                             {% else %}
-                              hx-put="/public-adventures/filter?tag={{tag + ',' +  selectedTag}}&level={{selectedLevel}}&lang={{selectedLang}}&search={{currentSearch}}"
+                              hx-get="/public-adventures?tag={{tag + ',' +  selectedTag}}&level={{selectedLevel}}&lang={{selectedLang}}&search={{currentSearch}}"
                             {% endif %}
                             hx-target="#public-adventures"
                             data-value="{{tag}}">{{tag}}</div>
@@ -135,13 +135,13 @@
       <p>
         {% if prev_page_token %}
           <button class="btn green-btn cursor-pointer" id="prev_page_token"
-            hx-put="/public-adventures/filter?lang={{selectedLang}}&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}&page={{prev_page_token}}"
+            hx-get="/public-adventures?lang={{selectedLang}}&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}&page={{prev_page_token}}"
             hx-target="#public-adventures"
             data-value="{{prev_page_token}}">{{_('previous_page')}}</button>
         {% endif %}
         {% if next_page_token %}
           <button class="btn green-btn cursor-pointer" id="next_page_token"
-            hx-put="/public-adventures/filter?lang={{selectedLang}}&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}&page={{next_page_token}}"
+            hx-get="/public-adventures?lang={{selectedLang}}&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}&page={{next_page_token}}"
             hx-target="#public-adventures"
             data-value="{{next_page_token}}">{{_('next_page')}}</button>
         {% endif %}
