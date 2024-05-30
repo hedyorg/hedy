@@ -1,8 +1,11 @@
 import collections
+from difflib import SequenceMatcher
 import json
 import os
+import re
 import uuid
 
+from bs4 import BeautifulSoup
 from flask import g, jsonify, request, session, url_for, redirect
 from jinja_partials import render_partial
 from flask_babel import gettext
@@ -262,7 +265,8 @@ class ForTeachersModule(WebsiteModule):
                 adventures_tried += 1
                 name = adventure_names.get(program['adventure_name'], program['adventure_name'])
                 customized_level = class_adventures_formatted.get(str(program['level']))
-                if next((adventure for adventure in customized_level if adventure["name"] == name), False):
+                if next((adventure for adventure in customized_level if adventure["name"] == name), False)\
+                        and self.is_program_modified(program, adventures, teacher_adventures):
                     student_adventure_id = f"{student}-{program['adventure_name']}-{level}"
                     current_adventure = self.db.student_adventure_by_id(student_adventure_id)
                     if not current_adventure:
@@ -284,6 +288,73 @@ class ForTeachersModule(WebsiteModule):
                 }
             )
         return students, class_, class_adventures_formatted, adventure_names, student_adventures, graph_students
+
+    def is_program_modified(self, program, full_adventures, teacher_adventures):
+        # a single adventure migh have several code snippets, formatted using markdown
+        # we need to get them individually
+        adventure_info = full_adventures.get(program['adventure_name'], {})\
+            .get('levels', {})\
+            .get(program['level'], {})
+
+        example_codes = []
+        # for what I can see the examples codes start with no index, and then jump to two
+        # e.g: example_code, example_code_2, etc.
+        example_codes.append(adventure_info.get('example_code', ''))
+        i = 2
+        while adventure_info.get(f'example_code_{i}') is not None:
+            example_codes.append(adventure_info[f'example_code_{i}'])
+            i += 1
+        # Examples codes sometimes are not single code sections
+        # but actually can be several code sections mixed with text
+        # formatted using markdown.
+        adventure_snippets = []
+        for code in example_codes:
+            consecutive_backticks = 0
+            inside_code = False
+            previous_char = ''
+            code_start = -1
+            for index, char in enumerate(code):
+                if char == '`':
+                    consecutive_backticks += 1
+                    if consecutive_backticks == 3:
+                        # We've already finished the code section, which means
+                        # we can add it to the example_codes array
+                        if inside_code:
+                            adventure_snippets.append(code[code_start:index-3])
+                            inside_code = False
+                        # We are starting a code section, therefore we need to save this index
+                        else:
+                            code_start = index + 1
+                            inside_code = True
+                # if we find a char before 3 consecutive backticks it's either inline code
+                # or a malformed code section
+                elif char != '`' and previous_char == '`':
+                    consecutive_backticks = 0
+                previous_char = char
+        # now we have to get the snippets of the teacher adventures
+        for adventure in teacher_adventures:
+            if program['adventure_name'] == adventure["id"]:
+                content = adventure['content']
+                soup = BeautifulSoup(content, features="html.parser")
+                for pre in soup.find_all('pre'):
+                    adventure_snippets.append(str(pre.contents[0]))
+
+        student_code = program['code'].strip()
+        # now we have to calculate the differences between the student code and the code snippets
+        can_save = True
+        for snippet in adventure_snippets:
+            if re.search(r'<code.*?>.*?</code>', snippet):
+                snippet = re.sub(r'<code.*?>(.*?)</code>', r'\1', snippet)
+            snippet = snippet.strip()
+            seq_match = SequenceMatcher(None, snippet, student_code)
+            matching_ratio = round(seq_match.ratio(), 2)
+            # Allowing a difference of more than 10% or the student filled the placeholders
+            if matching_ratio >= 0.95 and (self.has_placeholder(student_code) or not self.has_placeholder(snippet)):
+                can_save = False
+        return can_save
+
+    def has_placeholder(self, code):
+        return re.search(r'(?<![^ \n])(_)(?= |$)', code, re.M) is not None
 
     @route("/grid_overview/<class_id>/change_checkbox", methods=["POST"])
     @requires_login
