@@ -1,6 +1,5 @@
 import { ClientMessages } from "./client-messages";
 import { initialize } from "./initialize";
-declare const htmx: typeof import('./htmx');
 
 let levelSelect: HTMLElement;
 let languageSelect: HTMLElement;
