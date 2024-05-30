@@ -29,10 +29,10 @@ describe("General tests for my programs page (with both custom teacher and built
     it("should not be added to my programs when running a program with copied code", () => {
         cy.visit(`${Cypress.env('hedy_page')}#${adventure}`);
         // make sure to navigate to the wanted program tab.
-        cy.get(`[data-cy="${adventure}"]`)
+        cy.getDataCy(adventure)
             .click();
         // Paste example code
-        cy.get(`[data-cy="paste-example-code-${adventure}"]`).click();
+        cy.getDataCy(`paste-example-code-${adventure}`).click();
         cy.get('#runit').click();
         cy.wait(500);
         cy.visit(`${Cypress.env('programs_page')}`);
@@ -42,10 +42,10 @@ describe("General tests for my programs page (with both custom teacher and built
     it("should be added to my programs when running a program with modified code", () => {
         cy.visit(`${Cypress.env('hedy_page')}#${adventure}`);
         // make sure to navigate to the wanted program tab.
-        cy.get(`[data-cy="${adventure}"]`)
+        cy.getDataCy(adventure)
             .click();
         // Paste example code and modify code
-        cy.get(`[data-cy="paste-example-code-${adventure}"`).click();
+        cy.getDataCy(`paste-example-code-${adventure}`).click();
         cy.get('#editor .cm-content').click();
         cy.focused().type('print Hello world\nask Hello world?');
         cy.get('#runit').click();

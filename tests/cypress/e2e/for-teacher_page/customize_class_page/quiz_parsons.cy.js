@@ -24,10 +24,10 @@ describe('customize class page', () => {
 
     it('checks that puzzle and quiz exist in list', () => {
       // validate and then remove the quiz
-      cy.get('[data-cy="level-1"] [data-cy="quiz"]')
+      cy.getDataCy('level-1 quiz')
         .should("exist")
 
-      cy.get('[data-cy="level-1"] [data-cy="parsons"]')
+      cy.getDataCy('level-1 parsons')
         .should("exist")
 
     });
@@ -45,7 +45,7 @@ describe('customize class page', () => {
       cy.get('[data-cy="level-2"] div:last [data-cy="hide"]')
         .click();
 
-      cy.get('[data-cy="level-2"] [data-cy="quiz"]')
+      cy.getDataCy('level-2 quiz')
         .should("not.exist")
 
       // validate and then remove the puzzle
@@ -55,7 +55,7 @@ describe('customize class page', () => {
       cy.get('[data-cy="level-2"] div:last [data-cy="hide"]')
         .click();
 
-      cy.get('[data-cy="level-2"] [data-cy="parsons"]')
+      cy.getDataCy('level-2 parsons')
         .should("not.exist")
     });
 
@@ -67,7 +67,7 @@ describe('customize class page', () => {
       cy.get('[data-cy="level-1"] div:last [data-cy="hide"]')
         .click();
 
-      cy.get('[data-cy="level-1"] [data-cy="quiz"]')
+      cy.getDataCy('level-1 quiz')
         .should("not.exist")
 
       // validate and then remove the puzzle
@@ -77,7 +77,7 @@ describe('customize class page', () => {
       cy.get('[data-cy="level-1"] div:last [data-cy="hide"]')
         .click();
 
-      cy.get('[data-cy="level-1"] [data-cy="parsons"]')
+      cy.getDataCy('level-1 parsons')
         .should("not.exist")
 
       // add them from available list
@@ -88,7 +88,7 @@ describe('customize class page', () => {
         .select("parsons")
 
       // Now the order should be quiz as last, then parsons.
-      cy.get('[data-cy="level-1"] [data-cy="parsons"]')
+      cy.getDataCy('level-1 parsons')
         .should("not.exist")
 
       cy.get('[data-cy="level-1"] div:last input')
@@ -110,7 +110,7 @@ describe('customize class page', () => {
 
       cy.reload();
 
-      cy.get('[data-cy="level-1"] [data-cy="quiz"]')
+      cy.getDataCy('level-1 quiz')
         .should("not.exist")
     });
 
@@ -129,7 +129,7 @@ describe('customize class page', () => {
 
       cy.reload();
 
-      cy.get('[data-cy="level-1"] [data-cy="parsons"]')
+      cy.getDataCy('level-1 parsons')
         .should("not.exist")
     });
 

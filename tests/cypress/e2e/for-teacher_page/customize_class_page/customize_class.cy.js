@@ -60,10 +60,10 @@ describe('customize class page', () => {
         .select('2')
         .should('have.value', '2');
 
-      cy.get("*[data-cy='level-2']")
+      cy.getDataCy("*level-2")
         .should('be.visible');
 
-        cy.get("*[data-cy='level-1']")
+        cy.getDataCy("*level-1")
         .should('not.exist');
     });
 
@@ -131,7 +131,7 @@ describe('customize class page', () => {
                 .should('have.length', startLength);
 
               // the adventure should now be last
-              cy.get(`[data-cy="level-2"] div[data-cy="${adventure}"`)
+              cy.getDataCy(`level-2 ${adventure}`)
                 .should("exist")
           });
       });
@@ -208,13 +208,13 @@ describe('customize class page', () => {
       cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
     });
 
-    it.only('Clicking the Reset button displays a confirm dialog', () => {
+    it('Clicking the Reset button displays a confirm dialog', () => {
       /**
        * At the beggining, the Parrot adventure should be in the level 1's adventures
        */
       selectLevel('1');
       cy.get('#htmx-modal').should('not.exist');
-      cy.get(`*[data-cy="level-1"] div[data-cy='parrot'] *[data-cy="hide"]`).click();
+      cy.getDataCy(`*level-1 parrot *hide`).click();
       cy.getDataCy('parrot').should('not.exist');
 
       cy.getDataCy('reset_adventures').click();
@@ -228,7 +228,7 @@ describe('customize class page', () => {
 
       beforeEach(() => {
         selectLevel('1');
-        cy.get(`*[data-cy="level-1"] div[data-cy='${hiddenAdventure}'] *[data-cy="hide"]`).click();
+        cy.getDataCy(`*level-1 ${hiddenAdventure} *hide`).click();
       });
 
       it('disappears from the tab list', () => {
@@ -240,7 +240,7 @@ describe('customize class page', () => {
 
         cy.getDataCy('available_adventures_current_level').select(`${hiddenAdventure}`);
 
-        cy.get(`div[data-cy="${hiddenAdventure}"]`).should('exist');
+        cy.getDataCy(hiddenAdventure).should('exist');
       });
 
       it('becomes invisible for the student', () => {

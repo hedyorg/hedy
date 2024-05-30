@@ -48,14 +48,13 @@ describe("Second teachers: invitations", () => {
     loginForTeacher();
     navigateToClass(className);
 
-    cy.getDataCy('invites_block')
-      .get('[data-cy="invite_username_cell"]')
+    cy.getDataCy('invites_block invite_username_cell invite_username_cell')
       .contains(secondTeachers[1])
       .parent('tr')
-      .find('[data-cy="remove_user_invitation"]')
+      .getDataCy('remove_user_invitation')
       .click();
 
-    cy.get('[data-cy="modal_confirm"] [data-cy="modal_yes_button"]').click();
+    cy.getDataCy('modal_confirm modal_yes_button').click();
 
     // This needs to come before we accept teacher2's invitation, otherwise
     // after this there are no invites and so this table isn't rendered at all.

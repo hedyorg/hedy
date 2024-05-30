@@ -51,7 +51,7 @@ describe('Duplicate class tests', () => {
       }
     });
     cy.get("tr") // This class has second teachers.
-    cy.get("[data-cy='duplicate_CLASS1']").click();
+    cy.getDataCy("duplicate_CLASS1").click();
 
     cy.getDataCy('modal_yes_button').should('be.enabled').click();
 
