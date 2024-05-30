@@ -52,28 +52,55 @@ def main():
         inserter.insert_all(defs)
 
 
+# Extract DBML:
+#
+# Table NAME {
+#   following_user_id integer
+#   followed_user_id integer
+#   created_at timestamp
+# }
+
+export_DBML = True
+
 class TableInserter:
     def __init__(self, dbfile, jsondirectory):
         self.db = sqlite3.connect(dbfile)
         self.jsondirectory = jsondirectory
 
     def insert_all(self, defs: 'TableDefinitions'):
+        if export_DBML:
+            print("\n\n\n\n----------\n")
         for table_name in defs.table_names:
-            self.insert_table(table_name)
+            self.insert_table(table_name, export_DBML)
 
-    def insert_table(self, table_name):
-        print(table_name)
+    def insert_table(self, table_name, export_DBML):
+
+        if not export_DBML:
+            print(table_name)
+
         with open(path.join(self.jsondirectory, f'{table_name}.json'), 'r', encoding='utf-8') as f:
             table_data = json.load(f)
         if not table_data['rows']:
             return
 
         table_data['rows'] = restore_types(table_data['rows'])
-
         columns = determine_columns(table_data['rows'])
 
         scalar_columns = [col for col in columns if not col.type.is_collection]
         keycolumns = [find_col(scalar_columns, k) for k in table_data['key']]
+
+        if export_DBML:
+            if not len(scalar_columns) == 0:
+                print(f"Table {table_name.replace('-', '_')}" + "{") #DBML does not like dashes!
+
+            for c in columns:
+                if not c.type.is_collection:
+                     print("    " + c.name, c.type.sql_def)
+
+            print("}")
+
+
+
 
         table = SqlTableDef(table_name, scalar_columns, keycolumns)
 
@@ -95,14 +122,18 @@ class TableInserter:
                 f'{table.table_name}_{onetomanycol.name}',
                 table.key_columns + [onetomanycol],
                 table.key_columns + [onetomanycol] if listcol.type.is_set else [])
-            print(onetomanytable.table_name)
+
+            if not export_DBML:
+                print(onetomanytable.table_name)
+
             cursor.execute(onetomanytable.drop_statement)
             try:
                 # The `classes` table contains a list of objects, which this script can't
                 # deal with. Catch the error, but continue.
                 cursor.execute(onetomanytable.create_statement)
             except Exception as e:
-                print(f'Dropping column {listcol.name} (running \'{onetomanytable.create_statement}\' leads to {e})')
+                if not export_DBML:
+                    print(f'Dropping column {listcol.name} (running \'{onetomanytable.create_statement}\' leads to {e})')
                 continue
 
             one_to_many_data = []
@@ -117,7 +148,8 @@ class TableInserter:
 
         # Maps (not implemented yet)
         for mapcol in (col for col in columns if col.type.is_map):
-            print(f'Dropping column: {table.original_name}.{mapcol.original_name} (no support for map columns)')
+            if not export_DBML:
+                print(f'Dropping column: {table.original_name}.{mapcol.original_name} (no support for map columns)')
 
         self.db.commit()
 
@@ -183,7 +215,8 @@ def determine_columns(rows):
                 try:
                     existing_col.widen_type(SqlType.of(value))
                 except RuntimeError:
-                    print(f'Issue in widening {existing_col.name}')
+                    if not export_DBML:
+                        print(f'Issue in widening {existing_col.name}')
             else:
                 columns[key] = SqlColumn(key, SqlType.of(value))
     return list(columns.values())
