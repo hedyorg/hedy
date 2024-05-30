@@ -23,7 +23,7 @@
               {% if student_adventure.ticked %}checked{% endif %}
               hx-post="/for-teachers/grid_overview/{{ class_info.id }}/change_checkbox?level={{level}}&student={{student}}&adventure={{adventure.id|lower}}"
               hx-target="#adventure_table" hx-swap="outerHTML" hx-trigger="change">
-            <div>
+            <div title="{{ _('view_program') }}">
               <a class="no-underline cursor-pointer text-gray-800 hover:bg-gray-400/50 hover:rounded-full"
                 href='/hedy/{{student_adventure.program}}/view'><i class="fa-regular fa-eye"></i></a>
             </div>
