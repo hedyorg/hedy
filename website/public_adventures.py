@@ -46,7 +46,7 @@ class PublicAdventuresModule(WebsiteModule):
         available_tags = set()
 
         # Get all possible filters
-        field_filters = self.db.get_public_adventures_filters()
+        field_filters = self.db.get_public_adventure_filters()
 
         available_levels.update(field_filters.get("level", []))
         available_languages.update(field_filters.get("lang", []))
@@ -223,7 +223,6 @@ class PublicAdventuresModule(WebsiteModule):
         }
 
         self.db.update_adventure(adventure_id, {"cloned_times": current_adventure.get("cloned_times", 0) + 1})
-        self.db.update_public_adventure_filters_indexes(adventure)
         self.db.store_adventure(adventure)
 
         # TODO: add achievement

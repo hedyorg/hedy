@@ -57,8 +57,6 @@ class TagsModule(WebsiteModule):
             adventure_tags.append(tag_name)
             adventure_tags = sorted(adventure_tags, key=lambda tag: tag)
             self.db.update_adventure(adventure_id, {"tags": adventure_tags})
-            if db_adventure.get("public"):
-                self.db.update_public_adventure_filters_indexes(db_adventure)
         else:
             return gettext("tag_in_adventure"), 400
 

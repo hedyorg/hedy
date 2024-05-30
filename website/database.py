@@ -577,7 +577,8 @@ class Database:
         keys = {id: {"id": id} for id in adventure_ids}
         return ADVENTURES.batch_get(keys) if keys else {}
 
-    def get_public_adventures_filters(self):
+    def get_public_adventure_filters(self):
+        """Retrieve public adventure filters; i.e., tags, languages, and levels."""
         filters = {}
         for record in PUBLIC_ADVENTURES_FILTERS.scan():
             if record.get("field") == "tag":
