@@ -38,7 +38,7 @@ class TestsLevel15(HedyTester):
     @parameterized.expand(HedyTester.booleans)
     def test_print_boolean(self, value, expected):
         code = f"print 'variable is ' {value}"
-        expected = f"print(f'''variable is {expected}''')"
+        expected = f"print(f'''variable is {{convert_numerals(\"Latin\", {expected})}}''')"
 
         self.multi_level_tester(
             code=code,
@@ -50,7 +50,7 @@ class TestsLevel15(HedyTester):
     @parameterized.expand([('вярно', True), ('Вярно', True), ('невярно', False), ('Невярно', False)])
     def test_print_boolean_bulgarian(self, value, exp):
         code = f"принтирай 'Това е ' {value}"
-        expected = f"print(f'''Това е {exp}''')"
+        expected = f"print(f'''Това е {{convert_numerals(\"Latin\", {exp})}}''')"
 
         self.multi_level_tester(
             code=code,
