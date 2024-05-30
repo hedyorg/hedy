@@ -8,8 +8,8 @@ export function createClass()
     cy.wait(500);
 
     cy.get('#create_class_button').click();
-    cy.get('#modal-prompt-input').type(classname);
-    cy.get('#modal-ok-button').click();
+    cy.get('[data-cy="modal_prompt_input"]').type(classname);
+    cy.get('[data-cy="modal_ok_button"]').click();
 
     goToTeachersPage();
     cy.wait(500);
@@ -50,17 +50,17 @@ export function addStudents(classname, count) {
     goToTeachersPage();
     cy.wait(500);
 
-    cy.get(".view_class").then($viewClass => {
+    cy.get('[data-cy="view_class_link"]').then($viewClass => {
         if (!$viewClass.is(':visible')) {
-            cy.get("#view_classes").click();
+            cy.get('[data-cy="view_classes"]').click();
         }
     });
-    cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
+    cy.get('[data-cy="view_class_link"]').contains(new RegExp(`^${classname}$`)).click();
     cy.wait(500);
 
-    cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
-    cy.get('#add-student').click();
-    cy.get('#create-accounts').click();
+   cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
+    cy.get('[data-cy="add_student"]').click();
+    cy.get('[data-cy="create_accounts"]').click();
     cy.wrap(students).each((student, index) => {
       cy.get(`:nth-child(${(index + 2)}) > #username`).type(student);
       cy.get(`:nth-child(${(index + 2)}) > #password`).type('123456');
@@ -75,12 +75,12 @@ export function addCustomizations(classname){
     cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
     goToTeachersPage();
 
-    cy.get(".view_class").then($viewClass => {
+    cy.get('[data-cy="view_class_link"]').then($viewClass => {
         if (!$viewClass.is(':visible')) {
-            cy.get("#view_classes").click();
+            cy.get('[data-cy="view_classes"]').click();
         }
     });
-    cy.get(".view_class").contains(classname).click();
+    cy.get('[data-cy="view_class_link"]').contains(classname).click();
     cy.get('#customize-class-button').click();
     cy.get("#opening_date_container").should("not.be.visible")
     cy.get("#opening_date_label").click();
@@ -102,14 +102,14 @@ export function createClassAndAddStudents(){
 export function navigateToClass(classname) {
     goToTeachersPage();
     cy.wait(500);
-    cy.get(".view_class").then($viewClass => {
+    cy.get('[data-cy="view_class_link"]').then($viewClass => {
         if (!$viewClass.is(':visible')) {
-            cy.get("#view_classes").click();
+            cy.get('[data-cy="view_classes"]').click();
         }
     });
-    cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
+    cy.get('[data-cy="view_class_link"]').contains(new RegExp(`^${classname}$`)).click();
     cy.wait(500);
-    cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
+   cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
 }
 
 export default {createClassAndAddStudents};

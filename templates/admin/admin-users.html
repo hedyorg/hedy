@@ -173,8 +173,11 @@
       {% endfor %}
     </tbody>
   </table>
+  {% if prev_page_token %}
+  <button data-page_token="{{prev_page_token}}" class="admin-pagination-btn green-btn mt-4">« Prev page</button>
+  {% endif %}
   {% if next_page_token %}
-  <button id="next_page_btn" data-page_token="{{next_page_token}}" class="green-btn mt-4">Next page »</button>
+  <button data-page_token="{{next_page_token}}" class="admin-pagination-btn green-btn mt-4">Next page »</button>
   {% endif %}
 </div>
 {% endblock %}
