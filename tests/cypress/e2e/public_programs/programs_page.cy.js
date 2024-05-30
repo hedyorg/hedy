@@ -150,7 +150,6 @@ describe("General tests for my programs page (with both custom teacher and built
 
     describe('Test filters', () => {
         beforeEach(() => {
-            loginForTeacher()
             cy.visit(`${Cypress.env('programs_page')}`);
         })
         it("The level filter should show the appropiate programs", ()=>{        
