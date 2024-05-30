@@ -62,6 +62,7 @@ def main():
 
 export_DBML = True
 
+
 class TableInserter:
     def __init__(self, dbfile, jsondirectory):
         self.db = sqlite3.connect(dbfile)
@@ -91,16 +92,13 @@ class TableInserter:
 
         if export_DBML:
             if not len(scalar_columns) == 0:
-                print(f"Table {table_name.replace('-', '_')}" + "{") #DBML does not like dashes!
+                print(f"Table {table_name.replace('-', '_')}" + "{")  # DBML does not like dashes!
 
             for c in columns:
                 if not c.type.is_collection:
-                     print("    " + c.name, c.type.sql_def)
+                    print("    " + c.name, c.type.sql_def)
 
             print("}")
-
-
-
 
         table = SqlTableDef(table_name, scalar_columns, keycolumns)
 
@@ -133,7 +131,8 @@ class TableInserter:
                 cursor.execute(onetomanytable.create_statement)
             except Exception as e:
                 if not export_DBML:
-                    print(f'Dropping column {listcol.name} (running \'{onetomanytable.create_statement}\' leads to {e})')
+                    print(f'Dropping column {listcol.name} (running \'{
+                          onetomanytable.create_statement}\' leads to {e})')
                 continue
 
             one_to_many_data = []
