@@ -1399,7 +1399,7 @@ function initializeSpeech() {
 }
 
 export function load_quiz(level: string) {
-  $('*[data-tabtarget="quiz"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
+  $('*[data-tabtarget="quiz"]').html ('<iframe id="quiz_iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
 }
 
 export async function store_parsons_attempt(order: Array<string>, correct: boolean) {

@@ -2,7 +2,7 @@
 
   <div class="justify-center pt-10 min-h-full">
       <h2 class="text-center">{{_('student_details')}}</h2>
-      <div class="w-full max-w-8xl rounded-lg bg-blue-200 shadow-lg" id="card-student-details">
+      <div class="w-full max-w-8xl rounded-lg bg-blue-200 shadow-lg" id="card_student_details">
         <a class="red-btn float-right cursor-pointer text-sm pt-0.5 pb-0 px-2 mr-2 mt-2"
           hx-get="/live_stats/class/{{class_info.id}}/refresh?{{dashboard_options_args | replace('student='~student.username, 'student=None')}}"
           hx-target="#main_content">
@@ -60,11 +60,11 @@
             </div>
 
             <!-- Last error message  -->
-            <div class="w-full text-center ml-2" id="last-error">
+            <div class="w-full text-center ml-2" id="last_error">
                 <h5 class="font-normal pb-1">{{_('last_error')}}</h5>
                 <div class="flex justify-center">
                 {% if student_programs and student_programs[0].error_message %}
-                    <div id="errorbox-info"
+                    <div id="errorbox_info"
                       class="flex-0 z-20 m-2 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert">
                       <div class="flex">
                         <div class="py-1">
