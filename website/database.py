@@ -594,7 +594,11 @@ class Database:
         return TAGS.get({"name": tag_name})
 
     def read_tags(self, tags):
-        return [self.read_tag(name) for name in tags]
+        db_tags = []
+        for name in tags:
+            if (db_tag := self.read_tag(name)) is not None:
+                db_tags.append(db_tag)
+        return db_tags
 
     def read_public_tags(self):
         """Public tags are tagged within one or more public adventure or those that aren't in use."""

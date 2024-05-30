@@ -1,5 +1,5 @@
 from collections import namedtuple
-from lark import Token, Visitor
+from lark import Token, Transformer, v_args
 from lark.exceptions import VisitError
 import hedy
 import operator
@@ -97,7 +97,7 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
         program_root = parser.parse(processed_input + "\n").children[0]
 
         translator = Translator(processed_input)
-        translator.visit(program_root)
+        translator.transform(program_root)
         ordered_rules = reversed(sorted(translator.rules, key=operator.attrgetter("line", "start")))
 
         # checks whether any error production nodes are present in the parse tree
@@ -161,7 +161,7 @@ def find_command_keywords(
     program_root = parser.parse(input_string).children[0]
 
     translator = Translator(input_string)
-    translator.visit(program_root)
+    translator.transform(program_root)
 
     return {
         k: find_keyword_in_rules(
@@ -189,12 +189,15 @@ def get_original_keyword(keyword_dict, keyword, line):
     return keyword
 
 
-class Translator(Visitor):
-    """The visitor finds tokens that must be translated and stores information about their exact position
+@v_args(tree=True)
+class Translator(Transformer):
+    """The translator finds tokens that must be translated and stores information about their exact position
     in the user input string and original value. The information is later used to replace the token in
-    the original user input with the translated token value."""
+    the original user input with the translated token value. Please note that it is a transformer
+    instead of a visitor because we need tokens to be visited too."""
 
     def __init__(self, input_string):
+        super().__init__()
         self.input_string = input_string
         self.rules = []
 
@@ -277,6 +280,16 @@ class Translator(Visitor):
     def clear(self, tree):
         self.add_rule_for_grammar_rule("clear", tree)
 
+    def TRUE(self, token):
+        name = 'True' if token and token[0].isupper() else 'true'
+        rule = Rule(name, token.line, token.column - 1, token.end_column - 2, token)
+        self.rules.append(rule)
+
+    def FALSE(self, token):
+        name = 'False' if token and token[0].isupper() else 'false'
+        rule = Rule(name, token.line, token.column - 1, token.end_column - 2, token)
+        self.rules.append(rule)
+
     def assign_list(self, tree):
         self.add_rule_for_grammar_token("_IS", "is", tree)
         commas = self.get_keyword_tokens("_COMMA", tree)
@@ -354,10 +367,6 @@ class Translator(Visitor):
         self.add_rule_for_grammar_token("_IN", "in", tree)
         self.add_rule_for_grammar_token("_RANGE", "range", tree)
         self.add_rule_for_grammar_token("_TO", "to", tree)
-
-    def boolean(self, tree):
-        self.add_rule('TRUE', "true", tree)
-        self.add_rule('FALSE', "false", tree)
 
     def while_loop(self, tree):
         self.add_rule_for_grammar_token("_WHILE", "while", tree)

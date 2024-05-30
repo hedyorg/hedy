@@ -537,8 +537,8 @@ class TestsLevel17(HedyTester):
 
     def test_if_pressed_with_turtlecolor(self):
         code = textwrap.dedent("""\
-      if x is pressed:
-          color red""")
+        if x is pressed:
+            color red""")
 
         # Need to exgtract this out for now because of an autopep8 bug
         # https://github.com/hhatto/autopep8/issues/744
@@ -548,7 +548,7 @@ class TestsLevel17(HedyTester):
         if_pressed_mapping = {{"else": "if_pressed_default_else"}}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         def if_pressed_x_():
-            __trtl = f'red'
+            __trtl = f'{{convert_numerals("Latin", red)}}'
             color_dict = {color_dict}
             if __trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
               raise Exception(f{self.value_exception_transpiled()})
