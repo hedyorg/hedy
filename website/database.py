@@ -590,7 +590,7 @@ class Database:
                 filters["lang"].append(lang)
                 filters["level"] = filters.get("level", [])
                 filters["level"].append(level)
-        return filters
+        return set(filters["level"]), set(filters["lang"]), set(filters["tag"])
 
     def update_public_adventure_filters_indexes(self, adventure):
         """This function adds/updates filters and indexes that we use to retrieve public adventures."""
@@ -626,14 +626,31 @@ class Database:
         result = PUBLIC_ADVENTURES_INDEXES.get_all(key)
         return set([record["date_adventure_id"].split("_")[1] for record in result])
 
-    def get_paginated_indexes(sefl, key, pagination_token=None, limit=None):
-        """This function returns adventure_ids for a specific index paginated.
+    def get_public_adventures(self, level, language, tags, pagination_token=None, limit=20):
+        """This function returns adventures for given indexes, paginated.
         E.g., key={"field_value": "level_lang_1_en", "date_adventure_id": "..."}"""
-        result = PUBLIC_ADVENTURES_INDEXES.get_page(key, limit=limit, pagination_token=pagination_token)
-        return set([record["date_adventure_id"].split("_")[1] for record in result]), result
 
-    def get_public_adventures(self):
-        return ADVENTURES.get_many({"public": 1})
+        # Helper function to get indexes and extract adventure IDs from its records.
+        def retrieve_and_extract_ids(key):
+            result = PUBLIC_ADVENTURES_INDEXES.get_page(key, limit=limit, pagination_token=pagination_token)
+            retrieved_ids = set([record["date_adventure_id"].split("_")[1] for record in result])
+            return retrieved_ids, result
+
+        # Prepare fields and fetch adventure IDs.
+        field_level_lang = {"field_value": f"level_lang_{level}_{language}" if language else f"level_{level}"}
+        level_lang_adventure_ids, result = retrieve_and_extract_ids(field_level_lang)
+
+        tag_adventure_ids = set()
+        for _t in tags:
+            tag_adv_ids, _ = retrieve_and_extract_ids({"field_value": f"tag_{_t}"})
+            tag_adventure_ids.update(tag_adv_ids)
+
+        # Combine all adventure IDs.
+        adventure_ids = level_lang_adventure_ids.intersection(
+            tag_adventure_ids) if tag_adventure_ids else level_lang_adventure_ids
+
+        # Fetch and return all adventures batched.
+        return self.batch_get_adventures(adventure_ids), result.prev_page_token, result.next_page_token
 
     def delete_adventure(self, adventure):
         ADVENTURES.delete({"id": adventure.get("id")})

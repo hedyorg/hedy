@@ -41,19 +41,6 @@ class PublicAdventuresModule(WebsiteModule):
         tag = request.args.get("tag", "")
         search = request.form.get("search", request.args.get("search", ""))
 
-        available_languages = set()
-        available_levels = set()
-        available_tags = set()
-
-        # Get all possible filters
-        field_filters = self.db.get_public_adventure_filters()
-
-        available_levels.update(field_filters.get("level", []))
-        available_languages.update(field_filters.get("lang", []))
-        available_tags.update(field_filters.get("tag", []))
-
-        customizations = {"available_levels": sorted(available_levels, key=lambda x: int(x))}
-
         tags = []
         if tag:
             toReset = request.args.get("reset")
@@ -64,25 +51,13 @@ class PublicAdventuresModule(WebsiteModule):
                 tags = tag.split(",")
             tags = [t for t in tags if t]
 
-        # Get indexes
-        level_lang_adventure_ids, result = self.db.get_paginated_indexes(
-            {"field_value": f"level_lang_{level}_{language}"},
-            pagination_token=page, limit=20)
-        # In case we need want any language, we retrieve by the main level index.
-        if not level_lang_adventure_ids:
-            level_lang_adventure_ids, result = self.db.get_paginated_indexes({"field_value": f"level_{level}"},
-                                                                             pagination_token=page, limit=20)
-        prev_page_token = result.prev_page_token
-        next_page_token = result.next_page_token
+        # Get all possible filters
+        available_levels, available_languages, available_tags = self.db.get_public_adventure_filters()
 
-        tag_adventure_ids = set()
-        for _t in tags:
-            tag_adventure_ids.update(self.db.get_public_adventures_indexes({"field_value": f"tag_{_t}"}))
+        customizations = {"available_levels": sorted(available_levels, key=lambda x: int(x))}
 
-        tag_adventure_ids.intersection_update(level_lang_adventure_ids)
-        adventure_ids = level_lang_adventure_ids.union(level_lang_adventure_ids, tag_adventure_ids)
-
-        adventures = self.db.batch_get_adventures(adventure_ids)
+        # Get public adventures.
+        adventures, prev_page_token, next_page_token = self.db.get_public_adventures(level, language, tags, page)
 
         initial_tab = None
         initial_adventure = None
@@ -92,17 +67,7 @@ class PublicAdventuresModule(WebsiteModule):
 
         customized_adventures = []
         included = {}
-        adventures = list(adventures.values())
-        for adventure in adventures:
-            if not adventure:
-                continue
-            if language and adventure.get("language", g.lang) != language:
-                continue
-            if tags and not any(_t in adventure.get("tags", []) for _t in tags):
-                continue
-            if search and not search.lower() in adventure.get("name").lower():
-                continue
-
+        for adventure in adventures.values():
             content = safe_format(adventure.get('formatted_content', adventure['content']),
                                   **hedy_content.KEYWORDS.get(g.keyword_lang))
             current_adventure = {
