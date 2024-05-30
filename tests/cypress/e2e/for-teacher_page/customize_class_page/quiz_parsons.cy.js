@@ -5,20 +5,20 @@ describe('customize class page', () => {
     beforeEach(() => {
       loginForTeacher();
       ensureClass();
-      cy.getBySel('view_class_link').then($viewClass => {
+      cy.getDataCy('view_class_link').then($viewClass => {
         if (!$viewClass.is(':visible')) {
-            cy.getBySel('view_classes').click();
+            cy.getDataCy('view_classes').click();
         }
       });
-      cy.getBySel('view_class_link').first().click(); // Press on view class button
+      cy.getDataCy('view_class_link').first().click(); // Press on view class button
      cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
-      cy.getBySel('customize_class_button').click(); // Press customize class button
+      cy.getDataCy('customize_class_button').click(); // Press customize class button
 
       // Remove any customizations that already exist to get the class into a predictable state
       // This always throws up a modal dialog
       cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');      
-      cy.getBySel('remove_customizations_button').click();
-      cy.getBySel('modal_yes_button').click();
+      cy.getDataCy('remove_customizations_button').click();
+      cy.getDataCy('modal_yes_button').click();
       cy.wait('@restoreCustomizations');
     });
 
@@ -34,7 +34,7 @@ describe('customize class page', () => {
 
     it('removes the puzzle and quiz from level 2', () => {
       // Click on level 2
-      cy.getBySel("adventures")
+      cy.getDataCy("adventures")
         .select('2')
         .should('have.value', '2');
 
@@ -81,10 +81,10 @@ describe('customize class page', () => {
         .should("not.exist")
 
       // add them from available list
-      cy.getBySel("available_adventures_current_level")
+      cy.getDataCy("available_adventures_current_level")
         .select("quiz")
 
-      cy.getBySel("available_adventures_current_level")
+      cy.getDataCy("available_adventures_current_level")
         .select("parsons")
 
       // Now the order should be quiz as last, then parsons.

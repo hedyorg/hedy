@@ -44,7 +44,7 @@ describe('Username field test', () => {
        goToProfilePage();
        cy.get('#personal_settings').click()
        cy.get('#delete_profile_button').click()
-       cy.getBySel('modal_yes_button').click()
+       cy.getDataCy('modal_yes_button').click()
 
 
 })

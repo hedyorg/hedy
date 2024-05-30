@@ -20,14 +20,14 @@ describe("Second teachers: invitations", () => {
     navigateToClass(className);
 
     for (const teacher of secondTeachers) {
-      cy.getBySel('add_second_teacher').click();
-      cy.getBySel('modal_prompt_input').type(teacher);
-      cy.getBySel('modal_ok_button').click();
+      cy.getDataCy('add_second_teacher').click();
+      cy.getDataCy('modal_prompt_input').type(teacher);
+      cy.getDataCy('modal_ok_button').click();
     }
 
     // Check that both invited teachers are in the table
     for (const teacher of secondTeachers) {
-      cy.getBySel('invites_block')
+      cy.getDataCy('invites_block')
         .contains(teacher);
     }
   })
@@ -36,11 +36,11 @@ describe("Second teachers: invitations", () => {
     loginForTeacher();
     navigateToClass(className);
 
-    cy.getBySel('add_second_teacher').click();
-    cy.getBySel('modal_prompt_input').type(secondTeachers[0]);
-    cy.getBySel('modal_ok_button').click();
+    cy.getDataCy('add_second_teacher').click();
+    cy.getDataCy('modal_prompt_input').type(secondTeachers[0]);
+    cy.getDataCy('modal_ok_button').click();
 
-    cy.getBySel('modal_alert_container')
+    cy.getDataCy('modal_alert_container')
       .contains('pending invitation')
   })
 
@@ -48,7 +48,7 @@ describe("Second teachers: invitations", () => {
     loginForTeacher();
     navigateToClass(className);
 
-    cy.getBySel('invites_block')
+    cy.getDataCy('invites_block')
       .get('[data-cy="invite_username_cell"]')
       .contains(secondTeachers[1])
       .parent('tr')
@@ -59,7 +59,7 @@ describe("Second teachers: invitations", () => {
 
     // This needs to come before we accept teacher2's invitation, otherwise
     // after this there are no invites and so this table isn't rendered at all.
-    cy.getBySel('invites_block')
+    cy.getDataCy('invites_block')
       .should("not.contain", secondTeachers[1]);
   });
 
@@ -67,7 +67,7 @@ describe("Second teachers: invitations", () => {
     cy.intercept('class/join/**').as('join');
     loginForTeacher(secondTeachers[0]);
     goToProfilePage();
-    cy.getBySel('join_link').click();
+    cy.getDataCy('join_link').click();
     // Give the Ajax request that gets sent as a result of the click enough time to complete
     cy.wait('@join');
   })
@@ -76,6 +76,6 @@ describe("Second teachers: invitations", () => {
     loginForTeacher();
     navigateToClass(className);
 
-    cy.getBySel('second_teacher_username_cell').contains(secondTeachers[0]);
+    cy.getDataCy('second_teacher_username_cell').contains(secondTeachers[0]);
   })
 })

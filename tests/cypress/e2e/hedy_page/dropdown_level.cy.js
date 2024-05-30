@@ -15,14 +15,14 @@ describe('Go to level dropdown', () => {
     goToTeachersPage();
 
     cy.wait(500);
-    cy.getBySel('view_class_link').then($viewClass => {
+    cy.getDataCy('view_class_link').then($viewClass => {
       if (!$viewClass.is(':visible')) {
-          cy.getBySel('view_classes').click();
+          cy.getDataCy('view_classes').click();
       }
     });
-    cy.getBySel('view_class_link').contains(new RegExp(`^${classname}$`)).click();
+    cy.getDataCy('view_class_link').contains(new RegExp(`^${classname}$`)).click();
    cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide());
-    cy.getBySel('customize_class_button').click();
+    cy.getDataCy('customize_class_button').click();
     cy.get("#opening_date_container").should("not.be.visible")
     cy.get("#opening_date_label").click();
     cy.get("#opening_date_container").should("be.visible")

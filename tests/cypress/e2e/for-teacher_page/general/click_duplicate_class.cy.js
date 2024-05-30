@@ -9,20 +9,20 @@ describe('Is able to click on duplicate class', () => {
     createClass();
 
     // Click on duplicate icon
-    cy.getBySel('view_class_link').then($viewClass => {
+    cy.getDataCy('view_class_link').then($viewClass => {
       if (!$viewClass.is(':visible')) {
-          cy.getBySel('view_classes').click();
+          cy.getDataCy('view_classes').click();
       }
     });
     cy.get('#duplicate_class').first().click();
 
     // Checks for duplicate class name
-    cy.getBySel('modal_prompt_input').should('be.empty');
-    cy.getBySel('modal_prompt_input').should('be.visible');
-    cy.getBySel('modal_prompt_input').should('be.enabled');
+    cy.getDataCy('modal_prompt_input').should('be.empty');
+    cy.getDataCy('modal_prompt_input').should('be.visible');
+    cy.getDataCy('modal_prompt_input').should('be.enabled');
 
-    cy.getBySel('modal_ok_button').should('be.visible');
-    cy.getBySel('modal_ok_button').should('be.enabled');
+    cy.getDataCy('modal_ok_button').should('be.visible');
+    cy.getDataCy('modal_ok_button').should('be.enabled');
 
     cy.get('#modal-cancel-button').should('be.visible');
     cy.get('#modal-cancel-button').should('be.enabled');
@@ -34,9 +34,9 @@ describe('Is able to click on duplicate class', () => {
     goToTeachersPage();
 
     // Take actions only when teacher2 is a second teacher; i.e., having teacher1 as a teacher.
-    cy.getBySel('view_class_link').then($viewClass => {
+    cy.getDataCy('view_class_link').then($viewClass => {
       if (!$viewClass.is(':visible')) {
-          cy.getBySel('view_classes').click();
+          cy.getDataCy('view_classes').click();
       }
     });
     cy.get("#classes_table tbody #teacher_cell")
@@ -47,20 +47,20 @@ describe('Is able to click on duplicate class', () => {
           
           cy.wait(50)
               //Checks for Second Teachers duplication
-          cy.getBySel('modal_yes_button').should('be.visible');
-          cy.getBySel('modal_yes_button').should('be.enabled');
+          cy.getDataCy('modal_yes_button').should('be.visible');
+          cy.getDataCy('modal_yes_button').should('be.enabled');
 
           cy.get('#modal-no-button').should('be.visible');
           cy.get('#modal-no-button').should('be.enabled').click();
 
           // Checks for input field
-          cy.getBySel('modal_prompt_input').should('not.have.value', '');
-          cy.getBySel('modal_prompt_input').should('be.visible');
-          cy.getBySel('modal_prompt_input').should('be.enabled');
+          cy.getDataCy('modal_prompt_input').should('not.have.value', '');
+          cy.getDataCy('modal_prompt_input').should('be.visible');
+          cy.getDataCy('modal_prompt_input').should('be.enabled');
           
           // Checks for ok button
-          cy.getBySel('modal_ok_button').should('be.visible');
-          cy.getBySel('modal_ok_button').should('be.enabled');
+          cy.getDataCy('modal_ok_button').should('be.visible');
+          cy.getDataCy('modal_ok_button').should('be.enabled');
           
           // Checks for cancel button
           cy.get('#modal-cancel-button').should('be.visible');

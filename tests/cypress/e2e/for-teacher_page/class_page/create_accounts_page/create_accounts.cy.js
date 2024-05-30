@@ -11,13 +11,13 @@ beforeEach(() => {
 describe('Testing a teacher account', () => {
   it('Is able to add rows to create more accounts', () => {
     ({classname, students} = createClassAndAddStudents());
-    cy.getBySel('add_multiple_rows').click();
+    cy.getDataCy('add_multiple_rows').click();
     cy.get(':nth-child(6) > [data-cy="username"]').should('have.value', '');
   })
 
   it('Is able to create new accounts for class', () => {
     navigateToClass(classname);
-    cy.getBySel('student_username_cell').should(($div) => {
+    cy.getDataCy('student_username_cell').should(($div) => {
       const text = $div.text();
       expect(text).include(students[0]);
     }) 
@@ -30,9 +30,9 @@ describe('Testing a teacher account', () => {
 
   it('Is able to generate passwords', () => {
     navigateToClass(classname);
-    cy.getBySel('add_student').click();
-    cy.getBySel('create_accounts').click();
-    cy.getBySel('toggle_circle').click(); //switches the toggle on so that passwords are generated
+    cy.getDataCy('add_student').click();
+    cy.getDataCy('create_accounts').click();
+    cy.getDataCy('toggle_circle').click(); //switches the toggle on so that passwords are generated
     cy.wait(1000);
     cy.get(':nth-child(2) > [data-cy="password"]').should('have.length.greaterThan', 0);
   })
@@ -42,9 +42,9 @@ describe('Testing a teacher account', () => {
     navigateToClass(classname);
     cy.url().then(url => {
       currentUrl = url;
-      cy.getBySel('add_student').click();
-      cy.getBySel('create_accounts').click();
-      cy.getBySel('go_back_button').click();
+      cy.getDataCy('add_student').click();
+      cy.getDataCy('create_accounts').click();
+      cy.getDataCy('go_back_button').click();
       cy.wait(1000);
       let statsUrl = Cypress.env('class_page') + currentUrl.substring(currentUrl.indexOf('class/')+6);
       cy.url().should('include', statsUrl); 
@@ -53,8 +53,8 @@ describe('Testing a teacher account', () => {
 
   it('Is able to remove row', () => {
     navigateToClass(classname);
-    cy.getBySel('add_student').click();
-    cy.getBySel('create_accounts').click();
+    cy.getDataCy('add_student').click();
+    cy.getDataCy('create_accounts').click();
     //fills in first row
     cy.get(':nth-child(2) > [data-cy="username"]').type("student10");
     cy.get(':nth-child(2) > [data-cy="password"]').type("123456");
@@ -70,13 +70,13 @@ describe('Testing a teacher account', () => {
 
   it('Is able to use the reset button', () => {
     navigateToClass(classname);
-    cy.getBySel('add_student').click();
-    cy.getBySel('create_accounts').click();
+    cy.getDataCy('add_student').click();
+    cy.getDataCy('create_accounts').click();
     cy.get(':nth-child(2) > [data-cy="username"]').type("student10");
     cy.get(':nth-child(2) > [data-cy="password"]').type("123456");
     cy.wait(1000);
     cy.get(':nth-child(2) > [data-cy="username"]').should('have.value', 'student10');
-    cy.getBySel('reset_button').click();
+    cy.getDataCy('reset_button').click();
     cy.wait(1000);
     cy.get(':nth-child(2) > [data-cy="username"]').should('have.value', '');
   })

@@ -7,32 +7,32 @@ describe("Test the feedback feature", () => {
     })
     it("should be able to open the modal", () => {
         goToHedyPage();
-        cy.getBySel('feedback_button')
+        cy.getDataCy('feedback_button')
             .should("be.visible")
             .click()
         
-        cy.getBySel('modal-feedback')
+        cy.getDataCy('modal-feedback')
             .should("be.visible")
     });
 
     it("should not submit if the message or category is empty/not selected", () => {
         goToTeachersPage();
 
-        cy.getBySel('feedback_button')
+        cy.getDataCy('feedback_button')
             .should("be.visible")
             .click()
         
-        cy.getBySel('modal-feedback-input')
+        cy.getDataCy('modal-feedback-input')
             .type("should not work without a category")
 
         
-        cy.getBySel('modal-feedback-input')
+        cy.getDataCy('modal-feedback-input')
             .should("be.visible")
         
-        cy.getBySel('modal-feedback-cancel')
+        cy.getDataCy('modal-feedback-cancel')
             .click()
             
-        cy.getBySel('modal-feedback-input')
+        cy.getDataCy('modal-feedback-input')
             .should("not.be.visible")
     });
 
@@ -45,20 +45,20 @@ describe("Test the feedback feature", () => {
 
         goToProfilePage();
 
-        cy.getBySel('feedback_button')
+        cy.getDataCy('feedback_button')
             .should("be.visible")
             .click()
         
-        cy.getBySel('modal-feedback-input')
+        cy.getDataCy('modal-feedback-input')
             .type("This feature is wonderful! Thanks a lot for making it happen ;)")
 
         cy.get("#feedback")
             .click()
 
-        cy.getBySel('modal-feedback-submit')
+        cy.getDataCy('modal-feedback-submit')
             .click()
         
-        cy.getBySel('modal-feedback-input')
+        cy.getDataCy('modal-feedback-input')
             .should("not.be.visible")
 
         cy.wait("@postFeedback").should('have.nested.property', 'response.statusCode', 200)

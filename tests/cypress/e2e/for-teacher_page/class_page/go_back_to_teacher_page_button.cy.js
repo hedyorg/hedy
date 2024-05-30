@@ -4,15 +4,15 @@ it('Is able to go to logs page', () => {
   loginForTeacher();
   cy.wait(500);
 
-  cy.getBySel('view_class_link').then($viewClass => {
+  cy.getDataCy('view_class_link').then($viewClass => {
     if (!$viewClass.is(':visible')) {
-        cy.getBySel('view_classes').click();
+        cy.getDataCy('view_classes').click();
     }
   });
-  cy.getBySel('view_class_link').first().click(); // Press view class button
+  cy.getDataCy('view_class_link').first().click(); // Press view class button
   cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
 
-  cy.getBySel('go_back_button')
+  cy.getDataCy('go_back_button')
     .should('be.visible')
     .should('not.be.disabled')
     .click();   

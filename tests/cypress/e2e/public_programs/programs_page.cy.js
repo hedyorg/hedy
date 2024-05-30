@@ -14,11 +14,11 @@ describe("General tests for my programs page (with both custom teacher and built
     it("create adventure, run its code, and see it in my programs", () => {
         createAdventure(programName);
         navigateToClass("CLASS1");
-        cy.getBySel("customize_class_button").click(); // Press customize class button
-        cy.getBySel("available_adventures_current_level").select(`${programName}`);
+        cy.getDataCy("customize_class_button").click(); // Press customize class button
+        cy.getDataCy("available_adventures_current_level").select(`${programName}`);
 
         // Now preview it and run the program
-        cy.getBySel('preview_class_link')
+        cy.getDataCy('preview_class_link')
             .click();
         executeHelloWorldProgram(programName)
         cy.get(".programs").should("contain.text", programName);
@@ -82,12 +82,12 @@ describe("General tests for my programs page (with both custom teacher and built
                 //favourite a program:
                 cy.get(`#favourite_program_container_${programId}`).click();
                 cy.get(`#modal-confirm-text`).should('contain.text', 'favourite');
-                cy.getBySel('modal_yes_button').should('be.enabled').click();
+                cy.getDataCy('modal_yes_button').should('be.enabled').click();
                 //unfavourite a program:
                 cy.wait(500);
                 cy.get(`#favourite_program_container_${programId}`).click();
                 cy.get(`#modal-confirm-text`).should('contain.text', 'unfavourite');
-                cy.getBySel('modal_yes_button').should('be.enabled').click();
+                cy.getDataCy('modal_yes_button').should('be.enabled').click();
             })
     });
 
@@ -110,7 +110,7 @@ describe("General tests for my programs page (with both custom teacher and built
                             .should('not.be.visible');
                         cy.get(`#more_options_${programId}`).click();
                         cy.get(`#program_options_dropdown_${programId}`).should("be.visible");
-                        cy.getBySel(`delete_non_submitted_program_${programId}`).should("not.exist");
+                        cy.getDataCy(`delete_non_submitted_program_${programId}`).should("not.exist");
                     })
                 }
             })
@@ -138,7 +138,7 @@ describe("General tests for my programs page (with both custom teacher and built
             .each(($tr, i) => {
                 if ($tr.text().includes("teacher1")) {
                     cy.get(`#second_teachers_container tbody :nth-child(${i+1}) [data-cy="programs"]`).click();
-                    cy.getBySel("no-programs").should("be.visible");
+                    cy.getDataCy("no-programs").should("be.visible");
                 }
             })
 

@@ -20,7 +20,7 @@ describe('auto save', () => {
     cy.wait(1000)
     cy.wait("@customizeAdventure").should('have.nested.property', 'response.statusCode', 200)
 
-    cy.getBySel('modal_alert_container')
+    cy.getDataCy('modal_alert_container')
       .should('be.visible');
     cy.get('#modal_alert_text')
       .should('be.visible')
