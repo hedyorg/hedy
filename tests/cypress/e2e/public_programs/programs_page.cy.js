@@ -154,7 +154,7 @@ describe("General tests for my programs page (with both custom teacher and built
         })
         it("The level filter should show the appropiate programs", ()=>{        
             // After selecting level 2 only the programs from level 2 should ve visible
-            cy.get('#levels-dropdown').select('2')
+            cy.get('#levels_dropdown').select('2')
     
             cy.get('#program_3e8926c0515d47a5aeb116164b1278c9').should('be.visible')
             cy.get('#program_195d94e733ff49b08079848409e664b6').should('be.visible')
@@ -163,7 +163,7 @@ describe("General tests for my programs page (with both custom teacher and built
             cy.get('#program_4c426ff4cd5a40d7bb65bfbb35907f8b').should('not.exist')
     
             // After selecting level 1 only the programs from level 1 should ve visible
-            cy.get('#levels-dropdown').select('1')
+            cy.get('#levels_dropdown').select('1')
     
             cy.get('#program_3e8926c0515d47a5aeb116164b1278c9').should('not.exist')
             cy.get('#program_195d94e733ff49b08079848409e664b6').should('not.exist')
@@ -172,7 +172,7 @@ describe("General tests for my programs page (with both custom teacher and built
             cy.get('#program_4c426ff4cd5a40d7bb65bfbb35907f8b').should('be.visible')
     
             // Selecting the - Level - options should show every program
-            cy.get('#levels-dropdown').select(0);
+            cy.get('#levels_dropdown').select(0);
             cy.get('#program_3e8926c0515d47a5aeb116164b1278c9').should('be.visible')
             cy.get('#program_195d94e733ff49b08079848409e664b6').should('be.visible')
 

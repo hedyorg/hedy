@@ -17,7 +17,7 @@ describe('Is able to click on create new class', () => {
     cy.get('[data-cy="modal_ok_button"]').should('be.visible');
     cy.get('[data-cy="modal_ok_button"]').should('be.enabled');
 
-    cy.get('#modal-cancel-button').should('be.visible');
-    cy.get('#modal-cancel-button').should('be.enabled');
+    cy.get('#modal_cancel_button').should('be.visible');
+    cy.get('#modal_cancel_button').should('be.enabled');
   })
 })

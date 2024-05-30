@@ -142,10 +142,10 @@ describe('customize class page', () => {
       cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
 
       cy.getBySel('level-1').should('be.visible');
-      cy.get('#state-disabled').should('not.be.visible');
+      cy.get('#state_disabled').should('not.be.visible');
 
       cy.get('#enable_level_1').parent('.switch').click();
-      cy.get('#state-disabled').should('be.visible');
+      cy.get('#state_disabled').should('be.visible');
 
       cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
     });

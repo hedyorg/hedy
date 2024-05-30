@@ -37,7 +37,7 @@ describe('Is able to run code', () => {
       }
 
       function expectWarning() {
-        cy.get('#not-logged-in-warning').should('be.visible');
+        cy.get('#not_logged_in_warning').should('be.visible');
       }
     })
 
@@ -48,7 +48,7 @@ describe('Is able to run code', () => {
       
       const program_1 = "for i in range 1 to 10\n  choice = ask 'What is your choice?'"
       cy.intercept('/parse').as('parse')
-      cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').clear()
+      cy.get('#editor > .cm_editor > .cm-scroller > .cm-content').clear()
       cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').type(program_1)      
       cy.get('#runit').click()
       cy.wait('@parse')
@@ -59,10 +59,10 @@ describe('Is able to run code', () => {
       cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').type(program_2)
       cy.get('#runit').click()
       cy.wait('@parse')
-      cy.get('#ask-modal').type('Hedy')
-      cy.get('#ask-modal > form').submit()
+      cy.get('#ask_modal').type('Hedy')
+      cy.get('#ask_modal > form').submit()
 
-      cy.get('#ask-modal').should('not.be.visible')
+      cy.get('#ask_modal').should('not.be.visible')
     })
 
     it("After successfully executing a program, the stop program button is hidden", () => {

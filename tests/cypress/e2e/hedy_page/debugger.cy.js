@@ -23,9 +23,9 @@ describe('Test editor box functionality', () => {
       .should('have.class', 'cm-debugger-current-line');
 
     cy.get('#debug_continue').click();
-    cy.get('#ask-modal').should('be.visible');
-    cy.get('#ask-modal > form > div > input[type="text"]').type('Hedy!');
-    cy.get('#ask-modal > form > div > input[type="submit"]').click();
+    cy.get('#ask_modal').should('be.visible');
+    cy.get('#ask_modal > form > div > input[type="text"]').type('Hedy!');
+    cy.get('#ask_modal > form > div > input[type="submit"]').click();
 
     codeMirrorLines()
       .eq(2)
@@ -50,9 +50,9 @@ describe('Test editor box functionality', () => {
       .should('have.class', 'cm-debugger-current-line');
 
     cy.get('#debug_continue').click();
-    cy.get('#ask-modal').should('be.visible');
-    cy.get('#ask-modal > form > div > input[type="text"]').type('Hedy');
-    cy.get('#ask-modal > form > div > input[type="submit"]').click();
+    cy.get('#ask_modal').should('be.visible');
+    cy.get('#ask_modal > form > div > input[type="text"]').type('Hedy');
+    cy.get('#ask_modal > form > div > input[type="submit"]').click();
 
     codeMirrorLines()
       .eq(1)
@@ -540,7 +540,7 @@ function clearViaBackspace() {
 }
 
 function codeMirrorContent() {
-  return cy.get('#editor > .cm-editor > .cm-scroller > .cm-content');
+  return cy.get('#editor > .cm_editor > .cm-scroller > .cm-content');
 }
 
 function codeMirrorLines() {
