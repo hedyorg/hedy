@@ -38,7 +38,7 @@ onclick="window.open('/for-teachers', '_self');">
                                 </button>
                                 <div class="dropdown-menu overflow-auto dropdown-blue z-30 mt-2 w-full max-h-96" id="classes_dropdown"
                                     style="display: none; width: 100%;" _="on mutation of @style
-                                                        set arrow to #keyword-arrow_tag
+                                                        set arrow to #keyword_arrow_tag
                                                         if *display == 'none'
                                                             remove .rotate-180 from arrow
                                                         else if not arrow.classList.contains('rotate-180')
@@ -67,7 +67,7 @@ onclick="window.open('/for-teachers', '_self');">
                                 </button>
                                 <div class="dropdown-menu overflow-auto dropdown-blue z-30 mt-2 w-full max-h-96" id="levels_dropdown"
                                     style="display: none; width: 100%;" _="on mutation of @style
-                                                        set arrow to #keyword-arrow_tag
+                                                        set arrow to #keyword_arrow_tag
                                                         if *display == 'none'
                                                             remove .rotate-180 from arrow
                                                         else if not arrow.classList.contains('rotate-180')
@@ -102,7 +102,7 @@ onclick="window.open('/for-teachers', '_self');">
                                 </button>
                                 <div class="dropdown-menu overflow-auto dropdown-blue z-30 mt-2 w-full max-h-96" id="languages_dropdown"
                                     style="display: none; width: 100%;" _="on mutation of @style
-                                                        set arrow to #keyword-arrow_tag
+                                                        set arrow to #keyword_arrow_tag
                                                         if *display == 'none'
                                                             remove .rotate-180 from arrow
                                                         else if not arrow.classList.contains('rotate-180')
@@ -146,7 +146,7 @@ onclick="window.open('/for-teachers', '_self');">
                                         id="tags_dropdown"
                                         hx-trigger="load"
                                         hx-get="/tags?adventure_id={{adventure.id}}"
-                                        hx-target="#tags-dropdown"
+                                        hx-target="#tags_dropdown"
                                         hx-swap="outerHTML"
                                     ></div>
                             </div>

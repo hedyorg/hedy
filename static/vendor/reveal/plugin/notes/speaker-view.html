@@ -13,30 +13,30 @@
 				font-size: 18px;
 			}
 
-			#current-slide,
-			#upcoming-slide,
-			#speaker-controls {
+			#current_slide,
+			#upcoming_slide,
+			#speaker_controls {
 				padding: 6px;
 				box-sizing: border-box;
 				-moz-box-sizing: border-box;
 			}
 
-			#current-slide iframe,
-			#upcoming-slide iframe {
+			#current_slide iframe,
+			#upcoming_slide iframe {
 				width: 100%;
 				height: 100%;
 				border: 1px solid #ddd;
 			}
 
-			#current-slide .label,
-			#upcoming-slide .label {
+			#current_slide .label,
+			#upcoming_slide .label {
 				position: absolute;
 				top: 10px;
 				left: 10px;
 				z-index: 2;
 			}
 
-			#connection-status {
+			#connection_status {
 				position: absolute;
 				top: 0;
 				left: 0;
@@ -66,7 +66,7 @@
 				background: rgba( 220, 220, 220, 1 );
 			}
 
-			#current-slide {
+			#current_slide {
 				position: absolute;
 				width: 60%;
 				height: 100%;
@@ -75,7 +75,7 @@
 				padding-right: 0;
 			}
 
-			#upcoming-slide {
+			#upcoming_slide {
 				position: absolute;
 				width: 40%;
 				height: 40%;
@@ -84,7 +84,7 @@
 			}
 
 			/* Speaker controls */
-			#speaker-controls {
+			#speaker_controls {
 				position: absolute;
 				top: 40%;
 				right: 0;
@@ -94,14 +94,14 @@
 				font-size: 18px;
 			}
 
-				.speaker-controls-time.hidden,
-				.speaker-controls-notes.hidden {
+				.speaker_controls-time.hidden,
+				.speaker_controls-notes.hidden {
 					display: none;
 				}
 
-				.speaker-controls-time .label,
-				.speaker-controls-pace .label,
-				.speaker-controls-notes .label {
+				.speaker_controls-time .label,
+				.speaker_controls-pace .label,
+				.speaker_controls-notes .label {
 					text-transform: uppercase;
 					font-weight: normal;
 					font-size: 0.66em;
@@ -109,7 +109,7 @@
 					margin: 0;
 				}
 
-				.speaker-controls-time, .speaker-controls-pace {
+				.speaker_controls-time, .speaker_controls-pace {
 					border-bottom: 1px solid rgba( 200, 200, 200, 0.5 );
 					margin-bottom: 10px;
 					padding: 10px 16px;
@@ -117,77 +117,77 @@
 					cursor: pointer;
 				}
 
-				.speaker-controls-time .reset-button {
+				.speaker_controls-time .reset-button {
 					opacity: 0;
 					float: right;
 					color: #666;
 					text-decoration: none;
 				}
-				.speaker-controls-time:hover .reset-button {
+				.speaker_controls-time:hover .reset-button {
 					opacity: 1;
 				}
 
-				.speaker-controls-time .timer,
-				.speaker-controls-time .clock {
+				.speaker_controls-time .timer,
+				.speaker_controls-time .clock {
 					width: 50%;
 				}
 
-				.speaker-controls-time .timer,
-				.speaker-controls-time .clock,
-				.speaker-controls-time .pacing .hours-value,
-				.speaker-controls-time .pacing .minutes-value,
-				.speaker-controls-time .pacing .seconds-value {
+				.speaker_controls-time .timer,
+				.speaker_controls-time .clock,
+				.speaker_controls-time .pacing .hours-value,
+				.speaker_controls-time .pacing .minutes-value,
+				.speaker_controls-time .pacing .seconds-value {
 					font-size: 1.9em;
 				}
 
-				.speaker-controls-time .timer {
+				.speaker_controls-time .timer {
 					float: left;
 				}
 
-				.speaker-controls-time .clock {
+				.speaker_controls-time .clock {
 					float: right;
 					text-align: right;
 				}
 
-				.speaker-controls-time span.mute {
+				.speaker_controls-time span.mute {
 					opacity: 0.3;
 				}
 
-				.speaker-controls-time .pacing-title {
+				.speaker_controls-time .pacing-title {
 					margin-top: 5px;
 				}
 
-				.speaker-controls-time .pacing.ahead {
+				.speaker_controls-time .pacing.ahead {
 					color: blue;
 				}
 
-				.speaker-controls-time .pacing.on-track {
+				.speaker_controls-time .pacing.on-track {
 					color: green;
 				}
 
-				.speaker-controls-time .pacing.behind {
+				.speaker_controls-time .pacing.behind {
 					color: red;
 				}
 
-				.speaker-controls-notes {
+				.speaker_controls-notes {
 					padding: 10px 16px;
 				}
 
-				.speaker-controls-notes .value {
+				.speaker_controls-notes .value {
 					margin-top: 5px;
 					line-height: 1.4;
 					font-size: 1.2em;
 				}
 
 			/* Layout selector */
-			#speaker-layout {
+			#speaker_layout {
 				position: absolute;
 				top: 10px;
 				right: 10px;
 				color: #222;
 				z-index: 10;
 			}
-				#speaker-layout select {
+				#speaker_layout select {
 					position: absolute;
 					width: 100%;
 					height: 100%;
@@ -206,7 +206,7 @@
 					-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 				}
 
-				#speaker-layout select:focus {
+				#speaker_layout select:focus {
 					outline: none;
 					box-shadow: none;
 				}
@@ -216,24 +216,24 @@
 			}
 
 			/* Speaker layout: Wide */
-			body[data-speaker-layout="wide"] #current-slide,
-			body[data-speaker-layout="wide"] #upcoming-slide {
+			body[data-speaker-layout="wide"] #current_slide,
+			body[data-speaker-layout="wide"] #upcoming_slide {
 				width: 50%;
 				height: 45%;
 				padding: 6px;
 			}
 
-			body[data-speaker-layout="wide"] #current-slide {
+			body[data-speaker-layout="wide"] #current_slide {
 				top: 0;
 				left: 0;
 			}
 
-			body[data-speaker-layout="wide"] #upcoming-slide {
+			body[data-speaker-layout="wide"] #upcoming_slide {
 				top: 0;
 				left: 50%;
 			}
 
-			body[data-speaker-layout="wide"] #speaker-controls {
+			body[data-speaker-layout="wide"] #speaker_controls {
 				top: 45%;
 				left: 0;
 				width: 100%;
@@ -242,24 +242,24 @@
 			}
 
 			/* Speaker layout: Tall */
-			body[data-speaker-layout="tall"] #current-slide,
-			body[data-speaker-layout="tall"] #upcoming-slide {
+			body[data-speaker-layout="tall"] #current_slide,
+			body[data-speaker-layout="tall"] #upcoming_slide {
 				width: 45%;
 				height: 50%;
 				padding: 6px;
 			}
 
-			body[data-speaker-layout="tall"] #current-slide {
+			body[data-speaker-layout="tall"] #current_slide {
 				top: 0;
 				left: 0;
 			}
 
-			body[data-speaker-layout="tall"] #upcoming-slide {
+			body[data-speaker-layout="tall"] #upcoming_slide {
 				top: 50%;
 				left: 0;
 			}
 
-			body[data-speaker-layout="tall"] #speaker-controls {
+			body[data-speaker-layout="tall"] #speaker_controls {
 				padding-top: 40px;
 				top: 0;
 				left: 45%;
@@ -269,12 +269,12 @@
 			}
 
 			/* Speaker layout: Notes only */
-			body[data-speaker-layout="notes-only"] #current-slide,
-			body[data-speaker-layout="notes-only"] #upcoming-slide {
+			body[data-speaker-layout="notes-only"] #current_slide,
+			body[data-speaker-layout="notes-only"] #upcoming_slide {
 				display: none;
 			}
 
-			body[data-speaker-layout="notes-only"] #speaker-controls {
+			body[data-speaker-layout="notes-only"] #speaker_controls {
 				padding-top: 40px;
 				top: 0;
 				left: 0;
@@ -284,19 +284,19 @@
 			}
 
 			@media screen and (max-width: 1080px) {
-				body[data-speaker-layout="default"] #speaker-controls {
+				body[data-speaker-layout="default"] #speaker_controls {
 					font-size: 16px;
 				}
 			}
 
 			@media screen and (max-width: 900px) {
-				body[data-speaker-layout="default"] #speaker-controls {
+				body[data-speaker-layout="default"] #speaker_controls {
 					font-size: 14px;
 				}
 			}
 
 			@media screen and (max-width: 800px) {
-				body[data-speaker-layout="default"] #speaker-controls {
+				body[data-speaker-layout="default"] #speaker_controls {
 					font-size: 12px;
 				}
 			}
@@ -311,7 +311,7 @@
 		<div id="current_slide"></div>
 		<div id="upcoming_slide"><span class="overlay-element label">Upcoming</span></div>
 		<div id="speaker_controls">
-			<div class="speaker-controls-time">
+			<div class="speaker_controls-time">
 				<h4 class="label">Time <span class="reset-button">Click to Reset</span></h4>
 				<div class="clock">
 					<span class="clock-value">0:00 AM</span>
@@ -327,7 +327,7 @@
 				</div>
 			</div>
 
-			<div class="speaker-controls-notes hidden">
+			<div class="speaker_controls-notes hidden">
 				<h4 class="label">Notes</h4>
 				<div class="value"></div>
 			</div>
@@ -352,7 +352,7 @@
 					lastRevealApiCallId = 0,
 					connected = false
 
-				var connectionStatus = document.querySelector( '#connection-status' );
+				var connectionStatus = document.querySelector( '#connection_status' );
 
 				var SPEAKER_LAYOUTS = {
 					'default': 'Default',
@@ -540,13 +540,13 @@
 					currentSlide.setAttribute( 'width', 1280 );
 					currentSlide.setAttribute( 'height', 1024 );
 					currentSlide.setAttribute( 'src', currentURL );
-					document.querySelector( '#current-slide' ).appendChild( currentSlide );
+					document.querySelector( '#current_slide' ).appendChild( currentSlide );
 
 					upcomingSlide = document.createElement( 'iframe' );
 					upcomingSlide.setAttribute( 'width', 640 );
 					upcomingSlide.setAttribute( 'height', 512 );
 					upcomingSlide.setAttribute( 'src', upcomingURL );
-					document.querySelector( '#upcoming-slide' ).appendChild( upcomingSlide );
+					document.querySelector( '#upcoming_slide' ).appendChild( upcomingSlide );
 
 				}
 
@@ -555,8 +555,8 @@
 				 */
 				function setupNotes() {
 
-					notes = document.querySelector( '.speaker-controls-notes' );
-					notesValue = document.querySelector( '.speaker-controls-notes .value' );
+					notes = document.querySelector( '.speaker_controls-notes' );
+					notesValue = document.querySelector( '.speaker_controls-notes .value' );
 
 				}
 
@@ -646,7 +646,7 @@
 				function setupTimer() {
 
 					var start = new Date(),
-					timeEl = document.querySelector( '.speaker-controls-time' ),
+					timeEl = document.querySelector( '.speaker_controls-time' ),
 					clockEl = timeEl.querySelector( '.clock-value' ),
 					hoursEl = timeEl.querySelector( '.hours-value' ),
 					minutesEl = timeEl.querySelector( '.minutes-value' ),
