@@ -25,7 +25,13 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('getBySel', (selector, ...args) => {
-  return cy.get(`[data-cy=${selector}]`, ...args)
+  let dataSelector = "";
+  const selectors = selector.split(" ");
+  for (let s of selectors) {
+    dataSelector += `[data-cy=${s}] `
+  }
+
+  return cy.get(dataSelector, ...args)
 })
 
 Cypress.Commands.add('getBySelLike', (selector, ...args) => {
