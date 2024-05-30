@@ -30,39 +30,20 @@
           </div>
         </td>
         {% else %}
-        <td id="teacher_cell" class="text-center">
-          <!-- TODO: Fix these tooltips  They're getting mixed up with the  graph for some reason
-                  <div class="text-center opacity-0 hover:opacity-100 duration-300 z-10">
-                    <span class="tooltiptext bg-white text-xs font-medium absolute rounded shadow-lg !fixed p-2" style="inset: auto; margin-left: -50px; margin-top: 10px; color:black; ">
-                      {{ _('waiting_for_submit') }}
-                    </span>
-                  </div>
-                -->
+        <td id="teacher_cell" class="text-center" title="{{ _('waiting_for_submit') }}">
           <span class="fa-regular fa-hourglass text-gray-600"></span>
         </td>
         {% endif %}
         {% endfor %}
         <td class="text-center text-blue-900">
           <div class="flex justify-center gap-6">
-            <button class="flex flex-col items-center" onclick='hedyApp.change_password_student("{{student}}", {{_('
+            <button title="{{ _('change_password') }}" class="flex flex-col items-center" onclick='hedyApp.change_password_student("{{student}}", {{_('
               enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})'>
               <span class="fas fa-pen block mb-4 mt-4"></span>
-              <!-- <div class="text-center opacity-0 hover:opacity-100 duration-300 z-10">
-                    <span class="tooltiptext bg-white text-xs font-medium absolute rounded shadow-lg !fixed p-2" style="inset: auto; margin-left: -60px; margin-top: -20px; color:black; ">
-                      {{ _('change_password') }}
-                    </span>
-                  </div>
-                -->
             </button>
-            <button class="flex flex-col items-center" onclick=window.open('/programs?user={{student}}')
+            <button title="{{ _('programs') }}" class="flex flex-col items-center" onclick=window.open('/programs?user={{student}}')
               id="duplicate_class">
               <span class="fas fa-code block mb-4 mt-4"></span>
-              <!-- <div class="text-center opacity-0 hover:opacity-100 duration-300 z-10">
-                    <span class="tooltiptext bg-white text-xs font-medium absolute rounded shadow-lg !fixed p-2" style="inset: auto; margin-left: -30px; margin-top: -20px; color:black; ">
-                      {{ _('programs') }}
-                    </span>
-                  </div>
-                -->
             </button>
           </div>
         </td>
