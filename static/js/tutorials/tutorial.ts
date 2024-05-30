@@ -9,7 +9,7 @@ let current_level = "";
 // We call this function on load -> customize click event of the tutorial button
 export function initializeTutorial() {
   $('#tutorial_next_button').off('click').on('click', () => {
-    $('#tutorial-pop-up').hide();
+    $('#tutorial_pop_up').hide();
     // If we are a student -> call the next student tutorial step, otherwise call the teacher step
     if (current_level == "intro") {
       return callNextIntroStep();
@@ -21,19 +21,19 @@ export function initializeTutorial() {
 }
 
 export function startIntroTutorial() {
-  $('#tutorial-mask').show();
+  $('#tutorial_mask').show();
   current_level = "intro";
   startIntro();
 }
 
 export function startLevelTutorial(level: string) {
-  $('#tutorial-mask').show();
+  $('#tutorial_mask').show();
   current_level = level;
   startLevel(level);
 }
 
 export function startTeacherTutorial() {
-  $('#tutorial-mask').show();
+  $('#tutorial_mask').show();
   current_level = "teacher";
   startTeacher();
 }

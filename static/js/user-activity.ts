@@ -19,7 +19,7 @@ const ELEMENT_TO_TRACK = [
 
     // Dropdowns and Toggles
     "speak_dropdown",
-    "language-dropdown",
+    "language_dropdown",
     "commands_dropdown",
     "keyword_toggle",
 

@@ -13,7 +13,7 @@
         {% endmacro %}
 
         <div class="overflow-x-auto overflow-y-hidden px-2 pt-2">
-        <div class="flex flex-row w-min" id="adventures-buttons">
+        <div class="flex flex-row w-min" id="adventures_buttons">
             {% for adventure in adventures %}
                 {% if adventure.is_teacher_adventure %}
                     {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'teacher_tab', loop.index ) }}

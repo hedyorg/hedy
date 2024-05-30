@@ -2,7 +2,7 @@
         <div class="flex w-full overflow-x-auto my-2">
             <h3 class="flex-1">{{_('select_adventures')}}</h3>
             <div class="flex items-center gap-2">
-                <select class="py-2 px-1 h-10 text-center " name="level" id="levels-dropdown"
+                <select class="py-2 px-1 h-10 text-center " name="level" id="levels_dropdown"
                         data-cy="adventures"
                         hx-get="/for-teachers/get-customization-level"
                         hx-target="#adventure-dragger"
@@ -32,7 +32,7 @@
 
                 <button data-cy="reset_adventures" title="{{_('reset_adventures')}}" class="yellow-btn text-white place-self-center"
                     hx-get="/for-teachers/restore-adventures-modal/level/{{ level }}"
-                    hx-target="#modal-target"
+                    hx-target="#modal_target"
                     >
                     {{_('reset_button')}}
                 </button>

@@ -79,6 +79,6 @@ describe('Is able to run code', () => {
       cy.wait(500)
       cy.get('#stopit').should('not.be.visible')
       cy.get('#runit').should('be.visible')
-      cy.get('#variable-list').should('be.visible').and('have.text', 'var1: 1var2: 2var3: 3var4: 4')
+      cy.get('#variable_list').should('be.visible').and('have.text', 'var1: 1var2: 2var3: 3var4: 4')
     })
   })

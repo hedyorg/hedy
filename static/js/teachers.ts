@@ -383,7 +383,7 @@ export function show_doc_section(section_key: string) {
      $("#button-" + section_key).removeClass("green-btn");
      $("#button-" + section_key).addClass("blue-btn");
      $('.section').hide();
-     $ ('.common-mistakes-section').hide ();
+     $ ('.common_mistakes_section').hide ();
      $('#section-' + section_key).toggle();
    }
 }
@@ -510,7 +510,7 @@ export function setDateLevelInputColor(level: string) {
 }
 
 export function add_account_placeholder() {
-    let row = $("#account_row_unique").clone();
+    let row = $('#account_row_unique').clone();
     row.removeClass('hidden');
     row.attr('id', "");
     // Set all inputs except class to required
@@ -718,7 +718,7 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
         setDateLevelInputColor($(this).attr('level')!);
       })
 
-      $('#levels-dropdown').on('change', function(){
+      $('#levels_dropdown').on('change', function(){
           var level = $(this).val() as string;
           setLevelStateIndicator(level);
       });
@@ -726,7 +726,7 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
       // Autosave customize class page
       // the third argument is used to trigger a GET request on the specified element
       // if the trigger (input in this case) is changed.
-      autoSave("customize_class", null, {elementId: "levels-dropdown", trigger: "input"});
+      autoSave("customize_class", null, {elementId: "levels_dropdown", trigger: "input"});
 
   });
 }

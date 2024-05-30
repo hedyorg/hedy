@@ -498,7 +498,7 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
   Sk.execLimit = 1;
   $('#runit').hide();
   $('#stopit').show();
-  $('#saveFilesContainer').hide();
+  $('#save_files_container').hide();
 
   if (run_type !== 'continue') {
     clearOutput();
@@ -1102,7 +1102,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       $('#keybinding_modal').hide();
 
       if (hasTurtle) {
-        $('#saveFilesContainer').show();
+        $('#save_files_container').show();
       }
 
       // Check if the program was correct but the output window is empty: Return a warning
@@ -1184,7 +1184,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         $('#keybinding_modal').hide();
 
         if (hasTurtle) {
-          $('#saveFilesContainer').show();
+          $('#save_files_container').show();
         }
 
         if (cb) cb ();
@@ -1452,7 +1452,7 @@ export function confetti_cannon(){
       jsConfetti.addConfetti();
     }
 
-    const confettiButton = document.getElementById('confetti-button');
+    const confettiButton = document.getElementById('confetti_button');
     if (confettiButton) {
       confettiButton.classList.add('hidden');
     }
@@ -1491,7 +1491,7 @@ function showSuccessMessage(isModified: boolean){
 }
 
 function createModal(level:number ){
-  let editor = "<div id='modal-editor' class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
+  let editor = "<div id='modal_editor' class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
   let title = ClientMessages['Program_repair'];
   modal.repair(editor, 0, title);
 }
