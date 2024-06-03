@@ -83,21 +83,21 @@ describe("Able to browse all public adventures and use filters", () => {
         // disselect default language
         resetLang()
 
-        cy.getBySel("adventure2")
+        cy.getDataCy("adventure2")
             .click()
 
-        cy.getBySel("adventure2").should("have.class", "tab-selected")
-        cy.getBySel("adventure1").should("not.have.class", "tab-selected")
+        cy.getDataCy("adventure2").should("have.class", "tab-selected")
+        cy.getDataCy("adventure1").should("not.have.class", "tab-selected")
 
-        cy.getBySel("clone_adventure2")
+        cy.getDataCy("clone_adventure2")
             .should("be.visible")
             .click()
 
         cy.reload()
         resetLang()
-        cy.getBySel("adventure2")
+        cy.getDataCy("adventure2")
             .click()
-        cy.getBySel("edit_adventure2").should("be.visible")
+        cy.getDataCy("edit_adventure2").should("be.visible")
     })
 });
 
