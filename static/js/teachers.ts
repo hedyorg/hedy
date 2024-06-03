@@ -812,6 +812,7 @@ interface dataPoint {
 
 export function initializeGraph() {
   const graphElement = document.getElementById('adventure_bubble') as HTMLCanvasElement
+  if (graphElement === undefined || graphElement === null) return;
   const graphData: InitializeGraphOptions = JSON.parse(graphElement.dataset['graph'] || '') ;
   
   const students = graphData.graph_students
