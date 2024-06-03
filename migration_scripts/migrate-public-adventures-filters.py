@@ -1,7 +1,7 @@
-from website.database import PUBLIC_ADVENTURES_FILTERS, ADVENTURES
-import sys
 # setting path
+import sys
 sys.path.append('../hedy')
+from website.database import PUBLIC_ADVENTURE_FILTERS, ADVENTURES
 
 
 def create_filters_table(record):
@@ -10,23 +10,16 @@ def create_filters_table(record):
     if not levels:
         levels = [record.get("level")]
     for level in levels:
-        value = f"{lang_value}#{level}"
-        PUBLIC_ADVENTURES_FILTERS.put({"field": "lang#level", "value": value})
+        value = f"{lang_value}_{level}"
+        PUBLIC_ADVENTURE_FILTERS.put({"field": "lang_level", "value": value})
     tags = record.get("tags", [])
     for tag in tags:
-        PUBLIC_ADVENTURES_FILTERS.put({"field": "tag", "value": tag})
-
-
-def get_filters():
-    filters = PUBLIC_ADVENTURES_FILTERS.get_all({"field": "lang#level"})
-    for f in filters:
-        print(f)
+        PUBLIC_ADVENTURE_FILTERS.put({"field": "tag", "value": tag})
 
 
 def main():
     for record in ADVENTURES.get_all({"public": 1}):
         create_filters_table(record)
-    get_filters()
 
 
 if __name__ == "__main__":
