@@ -5,7 +5,7 @@
                 <select class="py-2 px-1 h-10 text-center " name="level" id="levels_dropdown"
                         data-cy="adventures"
                         hx-get="/for-teachers/get-customization-level"
-                        hx-target="#adventure-dragger"
+                        hx-target="#adventure_dragger"
                         hx-swap="outerHTML"
                         hx-trigger="input"
                         hx-indicator="#indicator">
@@ -18,7 +18,7 @@
                 <select class="py-2 px-1 h-10 text-center min-w-[200px]" name="adventure_id" id="available"
                         data-cy="available_adventures_current_level"
                         hx-post="/for-teachers/add-adventure/level/{{ level }}"
-                        hx-target="#adventure-dragger"
+                        hx-target="#adventure_dragger"
                         hx-swap="outerHTML"
                         hx-trigger="change"
                         hx-indicator="#indicator">
@@ -64,7 +64,7 @@
             style="min-width: fit-content;"
             hx-trigger="end"
             hx-post="/for-teachers/sort-adventures?level={{ level }}"
-            hx-target="#adventure-dragger" 
+            hx-target="#adventure_dragger" 
             hx-swap="outerHTML"
             hx-include="[name='adventure']"
             hx-indicator="#indicator">
@@ -75,7 +75,7 @@
                         z-10 whitespace-nowrap flex items-center justify-left relative" data-cy="{{ adventure.short_name }}">
                         <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"
                             hx-post="/for-teachers/remove-adventure?adventure_id={{ adventure.short_name }}&level={{ level }}" 
-                            hx-target="#adventure-dragger"
+                            hx-target="#adventure_dragger"
                             hx-indicator="#indicator"></span>
                             {{ adventure.long_name }}
                         {# Hidden input so we can send the adventures names in the request to the server #}
