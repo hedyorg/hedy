@@ -1967,7 +1967,6 @@ class ConvertToPython_2(ConvertToPython_1):
                     print(3)
                     return "    " + str(variable_name) + " = '" + value + "'" + self.add_debug_breakpoint()
 
-
     def sleep(self, meta, args):
         if not args:
             return f"time.sleep(1){self.add_debug_breakpoint()}"
