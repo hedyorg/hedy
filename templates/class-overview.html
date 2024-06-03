@@ -11,7 +11,7 @@
     {% endif %}
     <div class="flex flex-col gap-4">
         <button class="back-btn" id="go_back_button" data-cy="go_back_button" onclick="window.location.href = '/for-teachers'">
-            <span class="fa fa-arrow-{% if g.dir == " ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
+            <span class="fa fa-arrow-{% if g.dir == " ltr" %}right{% else %}left{% endif %}">&nbsp;</span>
             {{_('go_back')}}
         </button>
         <div id="survey" data-cy="survey" class="hidden"></div>
@@ -93,7 +93,7 @@
         </div>
       {% endif %}
       {% if class_info.teacher == username %}
-              <button class="green-btn w-40" data-cy="add_second_teacher" _="on click call hedyApp.invite_student('{{class_info.id}}', {{_('second_teacher_prompt')|default(None)|tojson}}, '/invite-second-teacher')">{{_('invite_teacher')}}</button>
+              <button class="green-btn w-40 mt-4" data-cy="add_second_teacher" _="on click call hedyApp.invite_student('{{class_info.id}}', {{_('second_teacher_prompt')|default(None)|tojson}}, '/invite-second-teacher')">{{_('invite_teacher')}}</button>
       {% endif %}
       {% if invites %}
       <div data-cy="invites_block" class="pt-4">
