@@ -2078,27 +2078,47 @@ class ConvertToPython_3(ConvertToPython_2):
             return "\n".join(display_scrolls)
 
     def add(self, meta, args):
-        value = self.process_argument(meta, args[0])
-        list_var = args[1]
+        if not self.microbit:
+            value = self.process_argument(meta, args[0])
+            list_var = args[1]
 
-        # both sides have been used now
-        self.add_variable_access_location(value, meta.line)
-        self.add_variable_access_location(list_var, meta.line)
-        return f"{list_var}.append({value}){self.add_debug_breakpoint()}"
+            # both sides have been used now
+            self.add_variable_access_location(value, meta.line)
+            self.add_variable_access_location(list_var, meta.line)
+            return f"{list_var}.append({value}){self.add_debug_breakpoint()}"
+        else:
+            value = self.process_argument(meta, args[0])
+            list_var = args[1]
+
+            # both sides have been used now
+            self.add_variable_access_location(value, meta.line)
+            self.add_variable_access_location(list_var, meta.line)
+            return f"    {list_var}.append({value}){self.add_debug_breakpoint()}"
 
     def remove(self, meta, args):
-        value = self.process_argument(meta, args[0])
-        list_var = args[1]
+        if not self.microbit:
+            value = self.process_argument(meta, args[0])
+            list_var = args[1]
 
-        # both sides have been used now
-        self.add_variable_access_location(value, meta.line)
-        self.add_variable_access_location(list_var, meta.line)
+            # both sides have been used now
+            self.add_variable_access_location(value, meta.line)
+            self.add_variable_access_location(list_var, meta.line)
 
-        return textwrap.dedent(f"""\
-        try:
-          {list_var}.remove({value}){self.add_debug_breakpoint()}
-        except:
-          pass""")
+            return textwrap.dedent(f"""\
+            try:
+              {list_var}.remove({value}){self.add_debug_breakpoint()}
+            except:
+              pass""")
+        else:
+            value = self.process_argument(meta, args[0])
+            list_var = args[1]
+
+            # both sides have been used now
+            self.add_variable_access_location(value, meta.line)
+            self.add_variable_access_location(list_var, meta.line)
+
+            return f"    {list_var}.remove({value})"
+
 
 
 @v_args(meta=True)
