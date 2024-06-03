@@ -24,14 +24,14 @@ beforeEach(() => {
  * or click a random answer).
  */
 it('can complete the quiz by randomly clicking buttons', () => {
-  cy.get('*[data-cy="start-quiz"]').click();
+  cy.getDataCy('*start-quiz').click();
 
   randomlyClickThroughUntilFinished(0);
 
   // We must use a recursive function to loop, because of the async nature of cypress
   function randomlyClickThroughUntilFinished(expectedCounter) {
     // This will wait until the page with the counter value has loaded
-    cy.get(`input[data-cy="ctr:${expectedCounter}"]`);
+    cy.getDataCy(`ctr:${expectedCounter}`);
 
     // Now that the page has loaded, it's safe to inspect it and do a conditional thing
     // depending on what it looks like.
@@ -43,7 +43,7 @@ it('can complete the quiz by randomly clicking buttons', () => {
 
       if ($quizpane.find('*[data-cy="advance-quiz"]').length) {
         // Click "next question" button"
-        cy.get('*[data-cy="advance-quiz"]').click();
+        cy.getDataCy('*advance-quiz').click();
         randomlyClickThroughUntilFinished(expectedCounter + 1);
         return;
       }
