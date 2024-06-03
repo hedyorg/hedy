@@ -53,7 +53,7 @@ describe('Is able to run code', () => {
       cy.get('#runit').click()
       cy.wait('@parse')
 
-      cy.getBySel('quizmaster').click()
+      cy.getDataCy('quizmaster').click()
       const program_2 = "name = ask 'what is your name?'"
       cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').clear()
       cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').type(program_2)

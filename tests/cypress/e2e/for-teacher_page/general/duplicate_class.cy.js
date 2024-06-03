@@ -13,27 +13,27 @@ describe('Duplicate class tests', () => {
     // Click on duplicate icon
     cy.reload();
     cy.wait(500);
-    cy.get('[data-cy="view_class_link"]').then($viewClass => {
+    cy.getDataCy('view_class_link').then($viewClass => {
       if (!$viewClass.is(':visible')) {
-          cy.get('[data-cy="view_classes"]').click();
+          cy.getDataCy('view_classes').click();
       }
     });
     cy.get('#duplicate_class').first().click();
 
     // Checks for input field
-    cy.get('[data-cy="modal_prompt_input"]').type(duplicate_class);
-    cy.get('[data-cy="modal_ok_button"]').click();
+    cy.getDataCy('modal_prompt_input').type(duplicate_class);
+    cy.getDataCy('modal_ok_button').click();
 
     cy.reload();
     cy.wait(500);
 
-    cy.get('[data-cy="view_class_link"]').then($viewClass => {
+    cy.getDataCy('view_class_link').then($viewClass => {
       if (!$viewClass.is(':visible')) {
-          cy.get('[data-cy="view_classes"]').click();
+          cy.getDataCy('view_classes').click();
       }
     });
-    cy.get('[data-cy="view_class_link"]').contains(duplicate_class).click();
-    cy.get('[data-cy="customize_class_button"]').click();
+    cy.getDataCy('view_class_link').contains(duplicate_class).click();
+    cy.getDataCy('customize_class_button').click();
     cy.get("#opening_date_container").should("not.be.visible")
     cy.get("#opening_date_label").click();
     cy.get("#opening_date_container").should("be.visible")
@@ -45,31 +45,31 @@ describe('Duplicate class tests', () => {
     loginForTeacher();
     goToTeachersPage();
 
-    cy.get('[data-cy="view_class_link"]').then($viewClass => {
+    cy.getDataCy('view_class_link').then($viewClass => {
       if (!$viewClass.is(':visible')) {
-          cy.get('[data-cy="view_classes"]').click();
+          cy.getDataCy('view_classes').click();
       }
     });
     cy.get("tr") // This class has second teachers.
-    cy.get("[data-cy='duplicate_CLASS1']").click();
+    cy.getDataCy("duplicate_CLASS1").click();
 
-    cy.get('[data-cy="modal_yes_button"]').should('be.enabled').click();
+    cy.getDataCy('modal_yes_button').should('be.enabled').click();
 
     const duplicate_class = `test class ${Math.random()}`;
-    cy.get('[data-cy="modal_prompt_input"]').type(duplicate_class);
-    cy.get('[data-cy="modal_ok_button"]').click();
+    cy.getDataCy('modal_prompt_input').type(duplicate_class);
+    cy.getDataCy('modal_ok_button').click();
 
     cy.reload();
     cy.wait(500);
 
-    cy.get('[data-cy="view_class_link"]').then($viewClass => {
+    cy.getDataCy('view_class_link').then($viewClass => {
       if (!$viewClass.is(':visible')) {
-          cy.get('[data-cy="view_classes"]').click();
+          cy.getDataCy('view_classes').click();
       }
     });
-    cy.get('[data-cy="view_class_link"]').contains(duplicate_class).click();
-    cy.get('[data-cy="invites_block"]').should('be.visible');
-    cy.get('[data-cy="customize_class_button"]').click();
+    cy.getDataCy('view_class_link').contains(duplicate_class).click();
+    cy.getDataCy('invites_block').should('be.visible');
+    cy.getDataCy('customize_class_button').click();
     cy.get("#opening_date_container").should("not.be.visible")
     cy.get("#opening_date_label").click();
     cy.get("#opening_date_container").should("be.visible")
