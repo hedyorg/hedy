@@ -16,7 +16,10 @@ function initializeVariables() {
     nextPage = document.getElementById('next_page_token') as HTMLInputElement;
 }
 
-document.addEventListener("DOMContentLoaded", prepareDropdowns);
+document.addEventListener("DOMContentLoaded", () => {
+    prepareDropdowns();
+    initializeVariables();
+});
 
 function prepareDropdowns() {
     const options = document.querySelectorAll('.option');
@@ -129,4 +132,9 @@ document.addEventListener("updateTSCode", (e: any) => {
     initialize({lang: js.lang, level: parseInt(js.level), keyword_language: js.lang,
         javascriptPageOptions: js
         });
+})
+
+document.addEventListener("htmx:configRequest", (ev) => {
+    const event = ev as any;
+    event.detail.headers["search-value"] = searchInput.value;
 })

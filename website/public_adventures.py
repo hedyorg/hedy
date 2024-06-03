@@ -43,7 +43,7 @@ class PublicAdventuresModule(WebsiteModule):
         elif not language and not filtering:
             language = g.lang
         tag = request.args.get("tag", "")
-        search = request.form.get("search", request.args.get("search", ""))
+        search = request.headers.get("search-value", request.args.get("search", ""))
 
         tags = []
         if tag:
@@ -72,6 +72,8 @@ class PublicAdventuresModule(WebsiteModule):
         customized_adventures = []
         included = {}
         for adventure in adventures.values():
+            if search and not search.lower() in adventure.get("name").lower():
+                continue
             content = safe_format(adventure.get('formatted_content', adventure['content']),
                                   **hedy_content.KEYWORDS.get(g.keyword_lang))
             current_adventure = {
