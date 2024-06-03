@@ -50,7 +50,7 @@ describe('Is able to preview class', () => {
     cy.get("#adventures-buttons [data-tab='print_command']").should("not.exist");
 
     // exit preview mode
-    cy.getDataCy("preview_class_banner a").click();
+    cy.get('[data-cy="preview_class_banner"] a').click();
 
     // we now expect the normal situation to be restored
     cy.get("#hedybutton").click();

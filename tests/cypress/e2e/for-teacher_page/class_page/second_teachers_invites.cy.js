@@ -48,10 +48,10 @@ describe("Second teachers: invitations", () => {
     loginForTeacher();
     navigateToClass(className);
 
-    cy.getDataCy('invites_block invite_username_cell invite_username_cell')
+    cy.getDataCy('invites_block invite_username_cell')
       .contains(secondTeachers[1])
       .parent('tr')
-      .getDataCy('remove_user_invitation')
+      .find('[data-cy="remove_user_invitation"]')
       .click();
 
     cy.getDataCy('modal_confirm modal_yes_button').click();

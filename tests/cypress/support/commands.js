@@ -30,9 +30,9 @@ Cypress.Commands.add('getDataCy', (selector, ...args) => {
   for (let s of selectors) {
     if (s.startsWith("*")) {
       s = s.slice(1);
-      dataSelector += `*[data-cy=${s}] `
+      dataSelector += `*[data-cy="${s}"] `
     } else {
-      dataSelector += `[data-cy=${s}] `
+      dataSelector += `[data-cy="${s}"] `
     }
   }
 

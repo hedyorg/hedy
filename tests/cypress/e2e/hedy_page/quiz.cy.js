@@ -43,7 +43,7 @@ it('can complete the quiz by randomly clicking buttons', () => {
 
       if ($quizpane.find('*[data-cy="advance-quiz"]').length) {
         // Click "next question" button"
-        cy.get('*[data-cy="advance-quiz"]').click();
+        cy.getDataCy('*advance-quiz').click();
         randomlyClickThroughUntilFinished(expectedCounter + 1);
         return;
       }
