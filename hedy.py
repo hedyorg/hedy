@@ -1873,7 +1873,8 @@ class ConvertToPython_2(ConvertToPython_1):
             exception = self.make_index_error_check_if_list(args)
             return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
         else:
-            return f"""display.scroll('{argument_string}')"""
+            argument_string = ' '.join(args_new)
+            return f"display.scroll({argument_string})"
 
     def ask(self, meta, args):
         var = args[0]
@@ -1889,13 +1890,19 @@ class ConvertToPython_2(ConvertToPython_1):
         # therefore we should not process it anymore and thread it as a variable:
         # we set the line number to 100 so there is never an issue with variable access before
         # assignment (regular code will not work since random.choice(dieren) is never defined as var as such)
-        if "random.choice" in arg or "[" in arg:
-            return self.process_variable_for_fstring(arg, meta.line, var_to_escape)
-
+        if not self.microbit:
+            if "random.choice" in arg or "[" in arg:
+                return self.process_variable_for_fstring(arg, meta.line, var_to_escape)
         # this regex splits words from non-letter characters, such that name! becomes [name, !]
-        p = r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+"
-        res = regex.findall(p, arg)
-        return ''.join([self.process_variable_for_fstring(x, meta.line, var_to_escape) for x in res])
+            p = r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+"
+            res = regex.findall(p, arg)
+            return ''.join([self.process_variable_for_fstring(x, meta.line, var_to_escape) for x in res])
+        else:
+            if self.is_variable(arg, meta.line):
+                return arg
+            else:
+                # If the argument is not a variable, return it as a string literal with quotes
+                return f"'{arg}'"
 
     def forward(self, meta, args):
         if len(args) == 0:
@@ -1932,18 +1939,34 @@ class ConvertToPython_2(ConvertToPython_1):
     def assign(self, meta, args):
         variable_name = args[0]
         value = args[1]
-
-        if self.is_random(value) or self.is_list(value):
-            exception = self.make_index_error_check_if_list([value])
-            return exception + variable_name + " = " + value + self.add_debug_breakpoint()
-        else:
-            if self.is_variable(value, meta.line):  # if the value is a variable, this is a reassign
-                value = self.process_variable(value, meta.line)
-                return variable_name + " = " + value + self.add_debug_breakpoint()
+        if not self.microbit:
+            if self.is_random(value) or self.is_list(value):
+                exception = self.make_index_error_check_if_list([value])
+                return exception + variable_name + " = " + value + self.add_debug_breakpoint()
             else:
-                # if the assigned value is not a variable and contains single quotes, escape them
-                value = process_characters_needing_escape(value)
-                return variable_name + " = '" + value + "'" + self.add_debug_breakpoint()
+                if self.is_variable(value, meta.line):  # if the value is a variable, this is a reassign
+                    value = self.process_variable(value, meta.line)
+                    return variable_name + " = " + value + self.add_debug_breakpoint()
+                else:
+                    # if the assigned value is not a variable and contains single quotes, escape them
+                    value = process_characters_needing_escape(value)
+                    return variable_name + " = '" + value + "'" + self.add_debug_breakpoint()
+        else:
+            if self.is_random(value) or self.is_list(value):
+                exception = self.make_index_error_check_if_list([value])
+                print(1)
+                return "    " + exception + str(variable_name) + " = " + value + self.add_debug_breakpoint()
+            else:
+                if self.is_variable(value, meta.line):  # if the value is a variable, this is a reassign
+                    value = self.process_variable(value, meta.line)
+                    print(2)
+                    return "    " + str(variable_name) + " = " + value + self.add_debug_breakpoint()
+                else:
+                    # if the assigned value is not a variable and contains single quotes, escape them
+                    value = process_characters_needing_escape(value)
+                    print(3)
+                    return "    " + str(variable_name) + " = '" + value + "'" + self.add_debug_breakpoint()
+
 
     def sleep(self, meta, args):
         if not args:
