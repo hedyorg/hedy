@@ -13,9 +13,9 @@ it('Is able to add student by name', () => {
     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
 
     // delete student if in class
-    cy.getDataCy('class_user_table').then(($div) => {
+    cy.getDataCy('adventure_table').then(($div) => {
         if ($div.text().includes(student)){
-          cy.getDataCy('remove_student').first().click();
+          cy.getDataCy(`remove_student_${student}`).click();
           cy.getDataCy('modal_yes_button').click();
         }
     })
@@ -44,8 +44,8 @@ it('Is able to add student by name', () => {
     });
     cy.getDataCy('view_class_link').first().click();
 
-    cy.getDataCy('student_username_cell').should(($div) => {
+    cy.getDataCy(`student_${student}`).should(($div) => {
       const text = $div.text()
-      expect(text).include('student5');
+      expect(text).include(student);
     })
 })

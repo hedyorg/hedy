@@ -1,4 +1,4 @@
-<table class="w-full" id="adventure_table">
+<table class="w-full" id="adventure_table" data-cy="adventure_table">
     <thead>
       <tr class="bg-blue-300 text-blue-900">
         <th class="px-2 py-2 text-center">{{_('students')}}</th>
@@ -11,12 +11,12 @@
     <tbody>
       {% for student in adventure_table['students'] %}
       <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
-        <td id="teacher_cell" class="text-center font-medium text-blue-900">{{student}}</td>
+        <td data-cy="student_{{ student }}" class="text-center font-medium text-blue-900">{{student}}</td>
         {% for adventure in adventure_table['adventures'][level] %}
         {% set student_adventure_id = (student ~ '-' ~ adventure.id ~ '-' ~ level) | lower %}
         {% set student_adventure = adventure_table.student_adventures[student_adventure_id] %}
         {% if student_adventure_id in adventure_table['student_adventures'] %}
-        <td id="teacher_cell" class="text-center">
+        <td class="text-center">
           <div class="flex justify-center gap-3 mt-1">
             <input type="checkbox"
               class="student_adventure_checkbox text-green-700 text-center text-sm cursor-pointer {% if student_adventure.ticked %}fa-solid fa-check{% endif %}"
@@ -30,21 +30,23 @@
           </div>
         </td>
         {% else %}
-        <td id="teacher_cell" class="text-center" title="{{ _('waiting_for_submit') }}">
+        <td class="text-center" title="{{ _('waiting_for_submit') }}">
           <span class="fa-regular fa-hourglass text-gray-600"></span>
         </td>
         {% endif %}
         {% endfor %}
         <td class="text-center text-blue-900">
           <div class="flex justify-center gap-6">
-            <button title="{{ _('change_password') }}" class="flex flex-col items-center" onclick='hedyApp.change_password_student("{{student}}", {{_('
-              enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})'>
+            <button title="{{ _('change_password') }}" class="flex flex-col items-center" onclick='hedyApp.change_password_student("{{student}}", {{_('enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})'>
               <span class="fas fa-pen block mb-4 mt-4"></span>
             </button>
-            <button title="{{ _('programs') }}" class="flex flex-col items-center" onclick=window.open('/programs?user={{student}}')
-              id="duplicate_class">
+            <button title="{{ _('programs') }}" class="flex flex-col items-center" onclick=window.open('/programs?user={{student}}')>
               <span class="fas fa-code block mb-4 mt-4"></span>
             </button>
+            <button title="{{ _('remove') }}" class="flex flex-col items-center" onclick='hedyApp.remove_student("{{class_info.id}}", "{{student}}", {{_('remove_student_prompt')|default(None)|tojson}})'
+                id="duplicate_class" data-cy="remove_student_{{ student }}">
+                <span class="fa-solid fa-trash text-red-500 block mb-4 mt-4 ltr:mr-4 rtl:ml-4"></span>
+          </button>
           </div>
         </td>
       </tr>
