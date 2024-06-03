@@ -173,14 +173,14 @@
                                             <a hx-get="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student='~dashboard_options.student, 'student='~student.username)}}"
                                             hx-target="#main_content"
                                             class="text-gray-700 no-underline hover:underline cursor-pointer" 
-                                            id="show-student">
+                                            id="show_student">
                                                 {{student.username}}
                                             </a>
                                         {% else %}
                                             <a hx-get="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student=None', 'student='~student.username)}}"
                                             hx-target="#main_content"                                          
                                             class="text-gray-700 no-underline hover:underline underline-offset-2 cursor-pointer"
-                                            id="show-student">
+                                            id="show_student">
                                                 {{student.username}}
                                             </a>
                                         {% endif %}
@@ -263,7 +263,7 @@
                                                 {{_(error_entry.label)}} ({{error_entry.students|length}})
                                                 </h3>
                                             </a>
-                                            <button class="btn-shape tiny-btn bg-green-500  p-1 border-0 text-white self-end" id="resolve-student" 
+                                            <button class="btn-shape tiny-btn bg-green-500  p-1 border-0 text-white self-end" id="resolve_student" 
                                                 onclick='hedyApp.resolve_student("{{ class_info.id }}", "{{ error_entry.id }}", {{('resolve_student_prompt')|default(None)|tojson}})'>
                                                 Resolve <i class="fa-regular fa-circle-check"></i>
                                             </button>

@@ -21,10 +21,10 @@ describe("Tags of adventures", () => {
       .should("be.empty")
       .type("statements{enter}")
     cy.wait(500)
-    cy.get("#tags-list")
+    cy.get("#tags_list")
       .should("be.visible")
 
-    cy.get("#tags-list li")
+    cy.get("#tags_list li")
       .should("include.text", "statements")
   })
 
@@ -36,10 +36,10 @@ describe("Tags of adventures", () => {
       .should("be.visible")
       .click()
     cy.wait(500)
-    cy.get("#tags-list")
+    cy.get("#tags_list")
       .should("be.visible")
 
-    cy.get("#tags-list li")
+    cy.get("#tags_list li")
       .should("include.text", "training")
   })
 
@@ -54,7 +54,7 @@ describe("Tags of adventures", () => {
       .should("be.empty")
       .type("training{enter}")
     cy.wait("@createTag").should('have.nested.property', 'response.statusCode', 400)
-    cy.get("#tags-list li")
+    cy.get("#tags_list li")
       .should("include.text", "training")
   })
 
@@ -69,10 +69,10 @@ describe("Tags of adventures", () => {
     cy.get("#tag_2")
       .should("be.visible")
       .should("include.text", "statements")
-    cy.get("#tag_2 .fa-circle-xmark")
+    cy.get("#tag_2 .fa-circle_xmark")
       .click()
     cy.wait("@deleteTag").should('have.nested.property', 'response.statusCode', 200)
-    cy.get("#tags-list li")
+    cy.get("#tags_list li")
       .should("not.include.text", "statements")
   })
 

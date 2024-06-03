@@ -24,10 +24,10 @@ describe('customize class page', () => {
 
     it('checks that puzzle and quiz exist in list', () => {
       // validate and then remove the quiz
-      cy.getDataCy('level-1 quiz')
+      cy.getDataCy('level_1 quiz')
         .should("exist")
 
-      cy.getDataCy('level-1 parsons')
+      cy.getDataCy('level_1 parsons')
         .should("exist")
 
     });
@@ -39,45 +39,45 @@ describe('customize class page', () => {
         .should('have.value', '2');
 
       // validate and then remove the quiz
-      cy.get('[data-cy="level-2"] div:last input')
+      cy.get('[data-cy="level_2"] div:last input')
         .should('have.value', 'quiz')
 
-      cy.get('[data-cy="level-2"] div:last [data-cy="hide"]')
+      cy.get('[data-cy="level_2"] div:last [data-cy="hide"]')
         .click();
 
-      cy.getDataCy('level-2 quiz')
+      cy.getDataCy('level_2 quiz')
         .should("not.exist")
 
       // validate and then remove the puzzle
-      cy.get('[data-cy="level-2"] div:last input')
+      cy.get('[data-cy="level_2"] div:last input')
         .should('have.value', 'parsons')
 
-      cy.get('[data-cy="level-2"] div:last [data-cy="hide"]')
+      cy.get('[data-cy="level_2"] div:last [data-cy="hide"]')
         .click();
 
-      cy.getDataCy('level-2 parsons')
+      cy.getDataCy('level_2 parsons')
         .should("not.exist")
     });
 
     it('remove and add puzzle and quiz (with order)', () => {
       // validate and then remove the quiz
-      cy.get('[data-cy="level-1"] div:last input')
+      cy.get('[data-cy="level_1"] div:last input')
         .should('have.value', 'quiz')
 
-      cy.get('[data-cy="level-1"] div:last [data-cy="hide"]')
+      cy.get('[data-cy="level_1"] div:last [data-cy="hide"]')
         .click();
 
-      cy.getDataCy('level-1 quiz')
+      cy.getDataCy('level_1 quiz')
         .should("not.exist")
 
       // validate and then remove the puzzle
-      cy.get('[data-cy="level-1"] div:last input')
+      cy.get('[data-cy="level_1"] div:last input')
         .should('have.value', 'parsons')
 
-      cy.get('[data-cy="level-1"] div:last [data-cy="hide"]')
+      cy.get('[data-cy="level_1"] div:last [data-cy="hide"]')
         .click();
 
-      cy.getDataCy('level-1 parsons')
+      cy.getDataCy('level_1 parsons')
         .should("not.exist")
 
       // add them from available list
@@ -88,10 +88,10 @@ describe('customize class page', () => {
         .select("parsons")
 
       // Now the order should be quiz as last, then parsons.
-      cy.getDataCy('level-1 parsons')
+      cy.getDataCy('level_1 parsons')
         .should("not.exist")
 
-      cy.get('[data-cy="level-1"] div:last input')
+      cy.get('[data-cy="level_1"] div:last input')
         .should('have.value', 'quiz')
     });
 
@@ -110,7 +110,7 @@ describe('customize class page', () => {
 
       cy.reload();
 
-      cy.getDataCy('level-1 quiz')
+      cy.getDataCy('level_1 quiz')
         .should("not.exist")
     });
 
@@ -129,7 +129,7 @@ describe('customize class page', () => {
 
       cy.reload();
 
-      cy.getDataCy('level-1 parsons')
+      cy.getDataCy('level_1 parsons')
         .should("not.exist")
     });
 

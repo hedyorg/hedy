@@ -1,6 +1,6 @@
 {% set editor_height='22rem' %}
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
-    <div id="editor-area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4">
+    <div id="editor_area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4">
 
     <div id="fold_out_toggle_container" class="hidden absolute z-10 top-16 ltr:-left-2 rtl:-right-2 cursor-pointer" onclick="hedyApp.show_editor();">
      <div class="bg-green-500 text-white py-3 rounded-lg text-sm">
@@ -114,8 +114,8 @@
         </div>
 
       <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
-      <div id="inline-modal" class="flex-0 absolute bottom-0 w-full z-20">
-        <div id="ask-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none">
+      <div id="inline_modal" class="flex-0 absolute bottom-0 w-full z-20">
+        <div id="ask_modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none">
           <!--Title-->
           <div class="flex justify-between items-center">
             <p class="text-2xl font-bold caption">Header</p>
@@ -129,20 +129,20 @@
             </div>
           </form>
         </div>
-        <div id="keybinding-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99; position: absolute; bottom: 0; width: 100%;">
+        <div id="keybinding_modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99; position: absolute; bottom: 0; width: 100%;">
           <!--Title-->
           <div class="flex justify-between items-center">
             <p class="text-2xl font-bold caption">{{_('keybinding_waiting_for_keypress')}}</p>
           </div>
         </div>
-        <div id="sleep-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99;">
+        <div id="sleep_modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99;">
           <!--Title-->
           <div class="flex justify-between items-center">
             <p class="text-2xl font-bold caption">{{_('sleeping')}}</p>
           </div>
         </div>
       </div>
-      <div id="dynamic-buttons" class="flex mt-3 gap-2 overflow-auto border-4 border-blue-600 rounded bg-blue-300 py-2 px-3" style="display: none">
+      <div id="dynamic_buttons" class="flex mt-3 gap-2 overflow-auto border-4 border-blue-600 rounded bg-blue-300 py-2 px-3" style="display: none">
       </div>
     </div>
     <!-- Col 2: run button (move below editor in single-column layout), level buttons -->

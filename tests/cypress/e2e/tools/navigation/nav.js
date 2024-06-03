@@ -105,7 +105,7 @@ export function goToEditAdventure()
             cy.get("#view_adventures").click();
         }
     });
-    cy.get('#adventures_table tbody > :nth_child(1) [data_cy="edit-link"]')
+    cy.get('#adventures_table tbody > :nth_child(1) [data_cy="edit_link"]')
       .click();
 }
 

@@ -32,7 +32,7 @@ describe("General tests for my programs page (with both custom teacher and built
         cy.getDataCy(adventure)
             .click();
         // Paste example code
-        cy.getDataCy(`paste-example-code-${adventure}`).click();
+        cy.getDataCy(`paste_example_code_${adventure}`).click();
         cy.get('#runit').click();
         cy.wait(500);
         cy.visit(`${Cypress.env('programs_page')}`);
@@ -45,7 +45,7 @@ describe("General tests for my programs page (with both custom teacher and built
         cy.getDataCy(adventure)
             .click();
         // Paste example code and modify code
-        cy.getDataCy(`paste-example-code-${adventure}`).click();
+        cy.getDataCy(`paste_example_code_${adventure}`).click();
         cy.get('#editor .cm-content').click();
         cy.focused().type('print Hello world\nask Hello world?');
         cy.get('#runit').click();
@@ -63,7 +63,7 @@ describe("General tests for my programs page (with both custom teacher and built
                 cy.get(`#share_option_dropdown_${programId}`).click();
                 cy.get(`#share_button_${programId}`).click();
                 cy.get(`#share_option_dropdown_${programId}`).should('contain.text', 'Public');
-                cy.get(`#non_submitted_button_container_${programId} [data-cy="submit-btn"]`).should('be.visible');
+                cy.get(`#non_submitted_button_container_${programId} [data-cy="submit_btn"]`).should('be.visible');
             })
     });
 
@@ -81,12 +81,12 @@ describe("General tests for my programs page (with both custom teacher and built
                 const programId = $el[0].getAttribute("data-id");
                 //favourite a program:
                 cy.get(`#favourite_program_container_${programId}`).click();
-                cy.get(`#modal-confirm-text`).should('contain.text', 'favourite');
+                cy.get(`#modal_confirm_text`).should('contain.text', 'favourite');
                 cy.getDataCy('modal_yes_button').should('be.enabled').click();
                 //unfavourite a program:
                 cy.wait(500);
                 cy.get(`#favourite_program_container_${programId}`).click();
-                cy.get(`#modal-confirm-text`).should('contain.text', 'unfavourite');
+                cy.get(`#modal_confirm_text`).should('contain.text', 'unfavourite');
                 cy.getDataCy('modal_yes_button').should('be.enabled').click();
             })
     });
@@ -106,7 +106,7 @@ describe("General tests for my programs page (with both custom teacher and built
                     .first()
                     .then($el => {
                         const programId = $el[0].getAttribute("data-id");
-                        cy.get(`#non_submitted_button_container_${programId} [data-cy="submit-btn"]`)
+                        cy.get(`#non_submitted_button_container_${programId} [data-cy="submit_btn"]`)
                             .should('not.be.visible');
                         cy.get(`#more_options_${programId}`).click();
                         cy.get(`#program_options_dropdown_${programId}`).should("be.visible");
@@ -127,7 +127,7 @@ describe("General tests for my programs page (with both custom teacher and built
                         cy.get(`#share_option_dropdown_${programId}`).click();
                         cy.get(`#share_button_${programId}`).click();
                         cy.get(`#share_option_dropdown_${programId}`).should('contain.text', 'Private');
-                        cy.get(`#non_submitted_button_container_${programId} [data-cy="submit-btn"]`).should('not.be.visible');
+                        cy.get(`#non_submitted_button_container_${programId} [data-cy="submit_btn"]`).should('not.be.visible');
                     })
     });
 
@@ -138,7 +138,7 @@ describe("General tests for my programs page (with both custom teacher and built
             .each(($tr, i) => {
                 if ($tr.text().includes("teacher1")) {
                     cy.get(`#second_teachers_container tbody :nth-child(${i+1}) [data-cy="programs"]`).click();
-                    cy.getDataCy("no-programs").should("be.visible");
+                    cy.getDataCy("no_programs").should("be.visible");
                 }
             })
 

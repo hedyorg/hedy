@@ -44,11 +44,11 @@
 
 <div class="flex py-4 px-4 bg-blue-200 justify-end border-t-4 border-blue-400">
     {% if next_question %}
-    <button class="green-btn text-2xl px-8 py-4" hx-post="/quiz/next_question" data-cy="advance-quiz">
+    <button class="green-btn text-2xl px-8 py-4" hx-post="/quiz/next_question" data-cy="advance_quiz">
         {{ _('go_to_question') }} {{ next_question }}
     </button>
     {% else %}
-    <button class="green-btn text-2xl px-8 py-4" hx-post="/quiz/next_question" data-cy="advance-quiz">
+    <button class="green-btn text-2xl px-8 py-4" hx-post="/quiz/next_question" data-cy="advance_quiz">
         {{ _('go_to_quiz_result') }}
     </button>
     {% endif %}
