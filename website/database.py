@@ -933,6 +933,12 @@ class Database:
 
         return PROGRAM_STATS.update(key, add_attributes)
 
+    def get_program_stats_per_level(self, id, level, start=None, end=None):
+        start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
+        end_week = self.to_year_week(self.parse_date(end, date.today()))
+        data = PROGRAM_STATS.get_many({'id#level': id + '#' + str(level), "week": dynamo.Between(start_week, end_week)})
+        return data
+
     def get_program_stats(self, ids, start=None, end=None):
         start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
         end_week = self.to_year_week(self.parse_date(end, date.today()))
