@@ -2117,7 +2117,12 @@ class ConvertToPython_3(ConvertToPython_2):
             self.add_variable_access_location(value, meta.line)
             self.add_variable_access_location(list_var, meta.line)
 
-            return f"    {list_var}.remove({value})"
+            code = textwrap.dedent(f"""\
+                   try:
+                       {list_var}.remove({value})
+                   except:
+                       pass""")
+            return textwrap.indent(code, "    ")
 
 
 

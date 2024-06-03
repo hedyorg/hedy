@@ -640,6 +640,24 @@ class TestsLevel3(HedyTester):
             extra_check_function=self.result_in(['koe', 'kiep', 'muis']),
         )
 
+    # def test_add_text_to_list_microbit(self):
+    #     code = textwrap.dedent("""\
+    #     dieren is koe, kiep
+    #     add muis to dieren
+    #     print dieren at random""")
+    #
+    #     expected = HedyTester.dedent("dieren = ['koe', 'kiep']",
+    #                                  "dieren.append('muis')",
+    #                                  HedyTester.list_access_transpiled("random.choice(dieren)"),
+    #                                  "print(f'{random.choice(dieren)}')")
+    #
+    #     self.multi_level_tester(
+    #         code=code,
+    #         expected=expected,
+    #         max_level=11,
+    #         microbit=True
+    #     )
+
     # add/remove tests (IMAN)
     #
     def test_add_text_to_list_numerical(self):
