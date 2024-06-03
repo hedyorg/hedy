@@ -22,7 +22,7 @@ from website.auth import (
 
 from .achievements import Achievements
 from .database import Database
-from .statistics import StatisticsModule
+from .for_teachers import ForTeachersModule
 from .website_module import WebsiteModule, route
 from .frontend_types import SaveInfo, Program
 from . import querylog
@@ -38,10 +38,10 @@ class ProgramsLogic:
     Achievements and stuff.
     """
 
-    def __init__(self, db: Database, achievements: Achievements, statistics: StatisticsModule):
+    def __init__(self, db: Database, achievements: Achievements, for_teachers: ForTeachersModule):
         self.db = db
         self.achievements = achievements
-        self.statistics = statistics
+        self.for_teachers = for_teachers
 
     @querylog.timed
     def store_user_program(self,
@@ -98,7 +98,7 @@ class ProgramsLogic:
         program_to_check = copy.deepcopy(program)
         program_to_check['adventure_name'] = short_name
 
-        is_modified = self.statistics.is_program_modified(program_to_check, full_adventures, teacher_adventures)
+        is_modified = self.for_teachers.is_program_modified(program_to_check, full_adventures, teacher_adventures)
         # a program can be saved already but not yet modified,
         # and if it was already modified and now is so again, count should not increase.
         if is_modified and not program.get('is_modified'):
@@ -114,9 +114,9 @@ class ProgramsLogic:
 class ProgramsModule(WebsiteModule):
     """Flask routes that deal with manipulating programs."""
 
-    def __init__(self, db: Database, achievements: Achievements, statistics: StatisticsModule):
+    def __init__(self, db: Database, achievements: Achievements, for_teachers: ForTeachersModule):
         super().__init__("programs", __name__, url_prefix="/programs")
-        self.logic = ProgramsLogic(db, achievements, statistics)
+        self.logic = ProgramsLogic(db, achievements, for_teachers)
         self.db = db
         self.achievements = achievements
 

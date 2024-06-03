@@ -117,7 +117,7 @@ DATABASE = database.Database()
 ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
 SURVEYS = surveys.SurveysModule(DATABASE)
 STATISTICS = statistics.StatisticsModule(DATABASE)
-
+FOR_TEACHERS = for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS)
 TAGS = collections.defaultdict(hedy_content.NoSuchAdventure)
 for lang in ALL_LANGUAGES.keys():
     TAGS[lang] = hedy_content.Tags(lang)
@@ -634,7 +634,7 @@ def parse():
     # Save this program (if the user is logged in)
     if username and body.get('save_name'):
         try:
-            program_logic = programs.ProgramsLogic(DATABASE, ACHIEVEMENTS, STATISTICS)
+            program_logic = programs.ProgramsLogic(DATABASE, ACHIEVEMENTS, FOR_TEACHERS)
             program = program_logic.store_user_program(
                 user=current_user(),
                 level=level,
@@ -2768,7 +2768,7 @@ def current_user_allowed_to_see_program(program):
 
 app.register_blueprint(auth_pages.AuthModule(DATABASE))
 app.register_blueprint(profile.ProfileModule(DATABASE))
-app.register_blueprint(programs.ProgramsModule(DATABASE, ACHIEVEMENTS, STATISTICS))
+app.register_blueprint(programs.ProgramsModule(DATABASE, ACHIEVEMENTS, FOR_TEACHERS))
 app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(classes.ClassModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(classes.MiscClassPages(DATABASE, ACHIEVEMENTS))
