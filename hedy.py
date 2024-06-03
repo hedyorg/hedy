@@ -2120,7 +2120,6 @@ class ConvertToPython_3(ConvertToPython_2):
             return f"    {list_var}.remove({value})"
 
 
-
 @v_args(meta=True)
 @hedy_transpiler(level=4)
 @source_map_transformer(source_map)
