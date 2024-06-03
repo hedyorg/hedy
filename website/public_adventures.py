@@ -28,14 +28,19 @@ class PublicAdventuresModule(WebsiteModule):
         self.achievements = achievements
 
     @route("/", methods=["GET"])
+    @route("/filter", methods=["GET"])
     @requires_teacher
     def filtering(self, user):
         level = request.args["level"] if request.args.get("level") else "1"
         page = request.args.get('page')
         language = request.args.get("lang")
+        # This is needed to differentiate between getting the PA page,
+        # or merely filtering, since we only update the filters and content
+        # and not the whole page.
+        filtering = request.path.split("/")[-1] == "filter"
         if language == "reset":
             language = ""
-        elif not language and request.method == 'GET':
+        elif not language and not filtering:
             language = g.lang
         tag = request.args.get("tag", "")
         search = request.form.get("search", request.args.get("search", ""))
@@ -116,7 +121,7 @@ class PublicAdventuresModule(WebsiteModule):
         )
 
         temp = render_template(
-            f"public-adventures/{'index' if request.method == 'GET' else 'body'}.html",
+            f"public-adventures/{'index' if filtering else 'index'}.html",
             adventures=adventures,
             teacher_adventures=adventures,
             available_languages=available_languages,
