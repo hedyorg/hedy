@@ -30,6 +30,7 @@ export function deleteProgram(name) {
                     cy.get(`#more_options_${programId}`).should("be.visible");
                     cy.getDataCy(`delete_non_submitted_program_${programId}`).click();
                     cy.getDataCy('modal_yes_button').click();
+                    cy.wait(500);
             })
             }
         })
