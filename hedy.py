@@ -290,7 +290,7 @@ def add_level(commands, level, add=None, remove=None):
         add = []
     if not remove:
         remove = []
-    commands[level] = [c for c in commands[level-1] if c not in remove] + add
+    commands[level] = [c for c in commands[level - 1] if c not in remove] + add
 
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
@@ -312,7 +312,6 @@ add_level(commands_per_level, level=15, add=['while'])
 add_level(commands_per_level, level=16)
 add_level(commands_per_level, level=17, add=['elif'])
 add_level(commands_per_level, level=18, add=['input'], remove=['ask'])
-
 
 command_turn_literals = ['right', 'left']
 english_colors = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
@@ -1022,8 +1021,8 @@ def flatten_list_of_lists_to_list(args):
     flat_list = []
     for element in args:
         if isinstance(
-                element,
-                str):  # str needs a special case before list because a str is also a list and we don't want to split all letters out
+            element,
+            str):  # str needs a special case before list because a str is also a list and we don't want to split all letters out
             flat_list.append(element)
         elif isinstance(element, list):
             flat_list += flatten_list_of_lists_to_list(element)
@@ -1119,7 +1118,8 @@ class AllCommands(Transformer):
         # for the achievements we want to be able to also detect which operators were used by a kid
         operators = ['addition', 'subtraction', 'multiplication', 'division']
 
-        if production_rule_name in commands_per_level[self.level] or production_rule_name in operators or production_rule_name == 'if_pressed_else':
+        if production_rule_name in commands_per_level[
+            self.level] or production_rule_name in operators or production_rule_name == 'if_pressed_else':
             # if_pressed_else is not in the yamls, upsetting lookup code to get an alternative later
             # lookup should be fixed instead, making a special case for now
             if production_rule_name == 'else':  # use of else also has an if
@@ -1318,22 +1318,22 @@ class IsValid(Filter):
 
     def if_pressed_elifs_no_colon(self, meta, args):
         # if_pressed_elifs starts with _EOL, so we need to add +1 to its line
-        raise exceptions.MissingColonException(command=Command.elif_, line_number=meta.line+1)
+        raise exceptions.MissingColonException(command=Command.elif_, line_number=meta.line + 1)
 
     def if_pressed_elses_no_colon(self, meta, args):
         # if_pressed_elses starts with _EOL, so we need to add +1 to its line
-        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line+1)
+        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line + 1)
 
     def ifs_no_colon(self, meta, args):
         raise exceptions.MissingColonException(command=Command.if_, line_number=meta.line)
 
     def elifs_no_colon(self, meta, args):
         # elifs starts with _EOL, so we need to add +1 to its line
-        raise exceptions.MissingColonException(command=Command.elif_, line_number=meta.line+1)
+        raise exceptions.MissingColonException(command=Command.elif_, line_number=meta.line + 1)
 
     def elses_no_colon(self, meta, args):
         # elses starts with _EOL, so we need to add +1 to its line
-        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line+1)
+        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line + 1)
 
     def for_list_no_colon(self, meta, args):
         raise exceptions.MissingColonException(command=Command.for_list, line_number=meta.line)
@@ -1512,7 +1512,7 @@ class ConvertToPython(Transformer):
     def process_variable_for_fstring(self, variable_name, access_line_number=100, var_to_escape=''):
 
         if (self.is_var_defined_before_access(variable_name, access_line_number, var_to_escape) and
-                not self.is_unreferenced_list(variable_name)):
+            not self.is_unreferenced_list(variable_name)):
             self.add_variable_access_location(variable_name, access_line_number)
             return "{" + escape_var(variable_name) + "}"
         else:
@@ -1893,7 +1893,7 @@ class ConvertToPython_2(ConvertToPython_1):
         if not self.microbit:
             if "random.choice" in arg or "[" in arg:
                 return self.process_variable_for_fstring(arg, meta.line, var_to_escape)
-        # this regex splits words from non-letter characters, such that name! becomes [name, !]
+            # this regex splits words from non-letter characters, such that name! becomes [name, !]
             p = r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+"
             res = regex.findall(p, arg)
             return ''.join([self.process_variable_for_fstring(x, meta.line, var_to_escape) for x in res])
@@ -1954,32 +1954,41 @@ class ConvertToPython_2(ConvertToPython_1):
         else:
             if self.is_random(value) or self.is_list(value):
                 exception = self.make_index_error_check_if_list([value])
-                print(1)
                 return "    " + exception + str(variable_name) + " = " + value + self.add_debug_breakpoint()
             else:
                 if self.is_variable(value, meta.line):  # if the value is a variable, this is a reassign
                     value = self.process_variable(value, meta.line)
-                    print(2)
                     return "    " + str(variable_name) + " = " + value + self.add_debug_breakpoint()
                 else:
                     # if the assigned value is not a variable and contains single quotes, escape them
                     value = process_characters_needing_escape(value)
-                    print(3)
                     return "    " + str(variable_name) + " = '" + value + "'" + self.add_debug_breakpoint()
 
-
     def sleep(self, meta, args):
-        if not args:
-            return f"time.sleep(1){self.add_debug_breakpoint()}"
+        if not self.microbit:
+            if not args:
+                return f"time.sleep(1){self.add_debug_breakpoint()}"
+            else:
+                value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
+                if not self.is_int(args[0]):
+                    self.add_variable_access_location(value, meta.line)
+                index_exception = self.make_index_error_check_if_list(args)
+                ex = make_value_error(Command.sleep, 'suggestion_number', self.language)
+                code = index_exception + \
+                       textwrap.dedent(f"time.sleep(int_with_error({value}, {ex})){self.add_debug_breakpoint()}")
+                return code
         else:
-            value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
-            if not self.is_int(args[0]):
-                self.add_variable_access_location(value, meta.line)
-            index_exception = self.make_index_error_check_if_list(args)
-            ex = make_value_error(Command.sleep, 'suggestion_number', self.language)
-            code = index_exception + \
-                textwrap.dedent(f"time.sleep(int_with_error({value}, {ex})){self.add_debug_breakpoint()}")
-            return code
+            if not args:
+                return f"sleep(1000){self.add_debug_breakpoint()}"  # Default 1 second sleep in milliseconds
+            else:
+                value = args[0]
+                if self.is_int(value):
+                    # Direct conversion of seconds to milliseconds
+                    milliseconds = int(value) * 1000
+                else:
+                    # If the value is a variable, ensure it's used correctly
+                    milliseconds = f"{value} * 1000"
+                return f"    sleep({milliseconds}){self.add_debug_breakpoint()}"
 
 
 @v_args(meta=True)
@@ -3096,7 +3105,8 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
 
 
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle',
-                                         'has_pressed', 'has_clear', 'has_music', 'has_sleep', 'commands', 'roles_of_variables'])
+                                         'has_pressed', 'has_clear', 'has_music', 'has_sleep', 'commands',
+                                         'roles_of_variables'])
 
 
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en", unused_allowed=True):
@@ -3369,7 +3379,7 @@ def preprocess_ifs(code, lang='en'):
         times_plus_translated = ['times', keywords_in_lang.get('times')]
 
         if len(elements_in_line) > 2 and elements_in_line[0] in repeat_plus_translated and elements_in_line[
-                2] in times_plus_translated:
+            2] in times_plus_translated:
             line = ' '.join(elements_in_line[3:])
 
         if lang in ALL_KEYWORD_LANGUAGES:
@@ -3400,7 +3410,7 @@ def preprocess_ifs(code, lang='en'):
             command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
             for c in command_plus_translated_command:
                 if line.count(
-                        ' ' + c + ' ') >= 2:  # surround in spaces since we dont want to mathc something like 'dishwasher is sophie'
+                    ' ' + c + ' ') >= 2:  # surround in spaces since we dont want to mathc something like 'dishwasher is sophie'
                     return True
             return False
 
@@ -3434,7 +3444,7 @@ def preprocess_ifs(code, lang='en'):
 
         # if this line starts with if but does not contain an else, and the next non-empty line too is not an else.
         if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (
-                not starts_with('else', next_non_empty_line(lines, i))) and (not contains('else', line)):
+            not starts_with('else', next_non_empty_line(lines, i))) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
             commands = ["print", "ask", "forward", "turn", "play"]
             excluded_commands = ["pressed"]
