@@ -773,6 +773,7 @@ def download_machine_file(filename, extension="zip"):
 
 MICROBIT_FEATURE = True
 
+
 @app.route('/generate_microbit_files', methods=['POST'])
 def generate_microbit_file():
     if MICROBIT_FEATURE:
