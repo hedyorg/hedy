@@ -369,7 +369,7 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
   });
 }
 
-export function initializeHighlightedCodeBlocks(where: Element) {
+export function initializeHighlightedCodeBlocks(where: Element, initializeAll?: boolean) {
   const dir = $("body").attr("dir");
   initializeParsons();
   if (theLevel) {
@@ -386,55 +386,63 @@ export function initializeHighlightedCodeBlocks(where: Element) {
         .addClass('relative text-lg rounded overflow-x-hidden')
         // We set the language of the editor to the current keyword_language -> needed when copying to main editor
         .attr('lang', theKeywordLanguage);
-
-      // Only turn into an editor if the editor scrolls into view
-      // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
-      onElementBecomesVisible(preview, () => {
-        const codeNode = preview.querySelector('code')
-        let code: string;
-        // In case it has a child <code> node
-        if(codeNode) {
-          codeNode.hidden = true
-          code = codeNode.innerText
+      // If the request comes from HTMX initialize all directly
+        if (initializeAll) {
+          convertPreviewToEditor(preview, container, dir)
         } else {
-          code = preview.textContent || "";
-          preview.textContent = "";
-        }
-
-        // Create this example editor
-        const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
-        // Strip trailing newline, it renders better
-        exampleEditor.contents = code;
-        exampleEditor.contents = exampleEditor.contents.trimEnd();
-        // And add an overlay button to the editor if requested via a show-copy-button class, either
-        // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
-        if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
-          const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
-          let symbol = "⇥";
-          if (dir === "rtl") {
-            symbol = "⇤";
-          }
-          const adventure = container.getAttribute('data-tabtarget')
-          $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').attr('data-cy', `paste-example-code-${adventure}`).text(symbol).appendTo(buttonContainer).click(function() {
-            if (!theGlobalEditor?.isReadOnly) {
-              theGlobalEditor.contents = exampleEditor.contents + '\n';
-            }
-            update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
-            stopit();
-            clearOutput();
-          });
-        }
-        const levelStr = $(preview).attr('level');
-        const lang = $(preview).attr('lang');
-        if (levelStr && lang) {
-          initializeTranslation({
-            keywordLanguage: lang,
-            level: parseInt(levelStr, 10),
-          })
-          exampleEditor.setHighlighterForLevel(parseInt(levelStr, 10));
-        }
-      });
+        // Only turn into an editor if the editor scrolls into view
+        // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
+        onElementBecomesVisible(preview, () => {
+          convertPreviewToEditor(preview, container, dir)
+        });
+      }
     }
+  }
+}
+
+function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement, dir?: string) {
+  const codeNode = preview.querySelector('code')
+  let code: string;
+  // In case it has a child <code> node
+  if (codeNode) {
+    codeNode.hidden = true
+    code = codeNode.innerText
+  } else {
+    code = preview.textContent || "";
+    preview.textContent = "";
+  }
+
+  // Create this example editor
+  const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
+  // Strip trailing newline, it renders better
+  exampleEditor.contents = code;
+  exampleEditor.contents = exampleEditor.contents.trimEnd();
+  // And add an overlay button to the editor if requested via a show-copy-button class, either
+  // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
+  if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
+    const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
+    let symbol = "⇥";
+    if (dir === "rtl") {
+      symbol = "⇤";
+    }
+    const adventure = container.getAttribute('data-tabtarget')
+    $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').attr('data-cy', `paste-example-code-${adventure}`).text(symbol).appendTo(buttonContainer).click(function () {
+      if (!theGlobalEditor?.isReadOnly) {
+        theGlobalEditor.contents = exampleEditor.contents + '\n';
+      }
+      update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
+      stopit();
+      clearOutput();
+    });
+  }
+  const levelStr = $(preview).attr('level');
+  const lang = $(preview).attr('lang');
+  if (levelStr && lang) {
+    initializeTranslation({
+      keywordLanguage: lang,
+      level: parseInt(levelStr, 10),
+    })
+    exampleEditor.setHighlighterForLevel(parseInt(levelStr, 10));
   }
 }
 
