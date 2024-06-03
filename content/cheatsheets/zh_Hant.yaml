@@ -1,23 +1,23 @@
 1:
 -   name: '{print}'
-    explanation: Print something with `{print}`.
-    demo_code: '{print} Hello welcome to Hedy!'
+    explanation: 使用 `{print}` 列印一些內容。
+    demo_code: '{print} 你好，歡迎來到 Hedy！'
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
-    demo_code: '{ask} What is your favorite color?'
+    explanation: 使用 `{ask}` 詢問一些事情。
+    demo_code: '{ask} 你最喜歡甚麼顏色？'
 -   name: '{echo}'
-    explanation: Repeat something using `{echo}`.
+    explanation: 使用`{echo}`重複某些內容。
     demo_code: |-
-        {ask} What is your favorite color?
-        {echo} so your favorite color is
--   name: '{print} emojis'
-    explanation: Print an emoji with `{print}`.
+        {ask} 你最喜歡甚麼顏色？
+        {echo} 所以你最喜歡的顏色是
+-   name: '{print} 表情符號'
+    explanation: 使用 `{print}` 列印一個表情符號。
     demo_code: '{print} 🙋 🌍 ❗'
 -   name: '{forward}'
-    explanation: Draw a line with `{forward}`.
+    explanation: 使用 `{forward}` 畫一條線。
     demo_code: '{forward} 100'
 -   name: '{turn}'
-    explanation: Turn the drawing turtle with `{turn}`.
+    explanation: 使用 `{turn}` 轉動繪圖烏龜。
     demo_code: |-
         {forward} 25
         {turn} {left}
@@ -25,17 +25,17 @@
         {turn} {right}
 2:
 -   name: '{is}'
-    explanation: Give a word a name to use in the program using `{is}`. You can choose the name yourself.
+    explanation: 使用 `{is}` 為一個詞命名以便在程式中使用這個詞。你可以自己選擇名稱。
     demo_code: |-
         name {is} Hedy
-        {print} welcome name
+        {print} 歡迎 name
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`.
+    explanation: 使用 `{ask}` 詢問一些事情。謹防！你需要使用 `{is}` 為答案命名。
     demo_code: |-
-        color {is} {ask} What is your favorite color?
-        {print} color is your favorite!
+        color {is} {ask} 你最喜歡甚麼顏色？
+        {print} color 是你最喜歡的顏色！
 -   name: '{sleep}'
-    explanation: '`{sleep}` let Hedy pause for a (couple of) second(s).'
+    explanation: '使用 `{sleep}`，你可以讓 Hedy 暫停數秒。'
     demo_code: |-
         {print} Let me think for one second...
         {sleep}
@@ -49,7 +49,7 @@
         {turn} angle
         {forward} 100
 3:
--   name: Choose random
+-   name: 選擇隨機
     explanation: Choose a random word from a group with `{at}` and `{random}`.
     demo_code: |-
         animals {is} dog, cat, kangaroo
@@ -66,24 +66,24 @@
         {remove} dog {from} animals
 4:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: '{print} ''Hello welcome to Hedy.'''
+    explanation: 使用引號以準確列印。
+    demo_code: '{print} ''你好歡迎來到 Hedy。'''
 -   name: '{is}'
     explanation: Give a name to some text and `{print}` without quotation marks.
     demo_code: |-
         name {is} Hedy
         {print} 'my name is ' name
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
+    explanation: 使用 `{ask}` 詢問一些事情。
     demo_code: |-
         color {is} {ask} 'What is your favorite color?'
         {print} color ' is your favorite!'
 5:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: '{print} ''Hello welcome to Hedy.'''
+    explanation: 使用引號以準確列印。
+    demo_code: '{print} ''你好歡迎來到 Hedy。'''
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
+    explanation: 使用 `{ask}` 詢問一些事情。
     demo_code: |-
         color {is} {ask} 'What is your favorite color?'
         {print} color ' is your favorite!'
