@@ -121,7 +121,7 @@ class PublicAdventuresModule(WebsiteModule):
         )
 
         temp = render_template(
-            f"public-adventures/{'index' if filtering else 'index'}.html",
+            f"public-adventures/{'body' if filtering else 'index'}.html",
             adventures=adventures,
             teacher_adventures=adventures,
             available_languages=available_languages,
