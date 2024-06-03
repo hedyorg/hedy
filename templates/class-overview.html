@@ -96,7 +96,7 @@
               <button class="green-btn w-40 mt-4" data-cy="add_second_teacher" _="on click call hedyApp.invite_student('{{class_info.id}}', {{_('second_teacher_prompt')|default(None)|tojson}}, '/invite-second-teacher')">{{_('invite_teacher')}}</button>
       {% endif %}
       {% if invites %}
-      <div data-cy="invites_block" class="pt-4">
+      <div data-cy="invites_block" class="pt-4 mb-6">
         <h2>{{_('pending_invites')}}</h2>
         <div class="w-full overflow-x-auto border rounded-lg">
           <table class="w-full">
@@ -116,7 +116,7 @@
                   <td class="p-2 text-center font-medium text-blue-900">{{invite.invited_as_text}}</td>
                   <td class="p-2 text-center font-medium text-blue-900">{{invite.timestamp}}</td>
                   <td class="p-2 text-center font-medium text-blue-900">{{invite.expire_timestamp}}</td>
-                  {% if not is_second_teacher %}<td class="p-2 text-center font-medium text-blue-900" data-y="remove_user_invitation"><a href="#" onclick='hedyApp.remove_student_invite("{{invite.username}}", "{{ class_info.id }}", {{_('delete_invite_prompt')|default(None)|tojson}})'><i class="fa-solid fa-trash text-red-500"></a></td>{% endif %}
+                  {% if not is_second_teacher %}<td class="p-2 text-center font-medium text-blue-900"><a href="#" data-cy="remove_user_invitation" onclick='hedyApp.remove_student_invite("{{invite.username}}", "{{ class_info.id }}", {{_('delete_invite_prompt')|default(None)|tojson}})'><i class="fa-solid fa-trash text-red-500"></a></td>{% endif %}
               </tr>
           {% endfor %}
           </tbody>
