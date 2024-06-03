@@ -1021,8 +1021,8 @@ def flatten_list_of_lists_to_list(args):
     flat_list = []
     for element in args:
         if isinstance(
-                element,
-                str):  # str needs a special case before list because a str is also a list and we don't want to split all letters out
+            element,
+            str):  # str needs a special case before list because a str is also a list and we don't want to split all letters out
             flat_list.append(element)
         elif isinstance(element, list):
             flat_list += flatten_list_of_lists_to_list(element)
@@ -1119,7 +1119,7 @@ class AllCommands(Transformer):
         operators = ['addition', 'subtraction', 'multiplication', 'division']
 
         if production_rule_name in commands_per_level[
-                self.level] or production_rule_name in operators or production_rule_name == 'if_pressed_else':
+            self.level] or production_rule_name in operators or production_rule_name == 'if_pressed_else':
             # if_pressed_else is not in the yamls, upsetting lookup code to get an alternative later
             # lookup should be fixed instead, making a special case for now
             if production_rule_name == 'else':  # use of else also has an if
@@ -1512,7 +1512,7 @@ class ConvertToPython(Transformer):
     def process_variable_for_fstring(self, variable_name, access_line_number=100, var_to_escape=''):
 
         if (self.is_var_defined_before_access(variable_name, access_line_number, var_to_escape) and
-                not self.is_unreferenced_list(variable_name)):
+            not self.is_unreferenced_list(variable_name)):
             self.add_variable_access_location(variable_name, access_line_number)
             return "{" + escape_var(variable_name) + "}"
         else:
@@ -1975,7 +1975,7 @@ class ConvertToPython_2(ConvertToPython_1):
                 index_exception = self.make_index_error_check_if_list(args)
                 ex = make_value_error(Command.sleep, 'suggestion_number', self.language)
                 code = index_exception + \
-                    textwrap.dedent(f"time.sleep(int_with_error({value}, {ex})){self.add_debug_breakpoint()}")
+                       textwrap.dedent(f"time.sleep(int_with_error({value}, {ex})){self.add_debug_breakpoint()}")
                 return code
         else:
             if not args:
@@ -1995,40 +1995,87 @@ class ConvertToPython_2(ConvertToPython_1):
 @hedy_transpiler(level=3)
 @source_map_transformer(source_map)
 class ConvertToPython_3(ConvertToPython_2):
+
     def assign_list(self, meta, args):
-        parameter = args[0]
-        values = [f"'{process_characters_needing_escape(a)}'" for a in args[1:]]
-        return f"{parameter} = [{', '.join(values)}]{self.add_debug_breakpoint()}"
+        if not self.microbit:
+            parameter = args[0]
+            values = [f"'{process_characters_needing_escape(a)}'" for a in args[1:]]
+            return f"{parameter} = [{', '.join(values)}]{self.add_debug_breakpoint()}"
+        else:
+            parameter = args[0]
+            values = [f"'{process_characters_needing_escape(a)}'" for a in args[1:]]
+            return f'    {parameter} = [{", ".join(values)}]{self.add_debug_breakpoint()}'
 
     def list_access(self, meta, args):
-        args = [escape_var(a) for a in args]
-        listname = str(args[0])
-        location = str(args[0])
+        if not self.microbit:
+            args = [escape_var(a) for a in args]
+            listname = str(args[0])
+            location = str(args[0])
 
-        # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
-        self.check_var_usage([a for a in args if a != 'random' and not a.isnumeric()], meta.line)
+            # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
+            self.check_var_usage([a for a in args if a != 'random' and not a.isnumeric()], meta.line)
 
-        # store locations of both parts (can be list at var)
-        self.add_variable_access_location(listname, meta.line)
-        self.add_variable_access_location(location, meta.line)
+            # store locations of both parts (can be list at var)
+            self.add_variable_access_location(listname, meta.line)
+            self.add_variable_access_location(location, meta.line)
 
-        if args[1] == 'random':
-            return 'random.choice(' + listname + ')'
+            if args[1] == 'random':
+                return 'random.choice(' + listname + ')'
+            else:
+                return listname + '[int(' + args[1] + ')-1]'
         else:
-            return listname + '[int(' + args[1] + ')-1]'
+            args = [escape_var(a) for a in args]
+            listname = str(args[0])
+            location = str(args[1])
+
+            # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
+            self.check_var_usage([a for a in args if a != 'random' and not a.isnumeric()], meta.line)
+
+            # store locations of both parts (can be list at var)
+            self.add_variable_access_location(listname, meta.line)
+            self.add_variable_access_location(location, meta.line)
+
+            if args[1] == 'random':
+                return 'random.choice(' + listname + ')'
+            else:
+                return f"({listname}[int({args[1]})-1])"
 
     def process_argument(self, meta, arg):
         # only call process_variable if arg is a string, else keep as is (ie.
         # don't change 5 into '5', my_list[1] into 'my_list[1]')
         if arg.isnumeric() and isinstance(arg, int):  # is int/float
             return arg
-        elif (self.is_list(arg)):  # is list indexing
+        elif self.is_list(arg):  # is list indexing
             list_name = arg.split('[')[0]
             self.add_variable_access_location(list_name, meta.line)
             before_index, after_index = arg.split(']', 1)
             return before_index + '-1' + ']' + after_index  # account for 1-based indexing
         else:
             return self.process_variable(arg, meta.line)
+
+    def print(self, meta, args):
+        args_new = [self.make_print_ask_arg(a, meta) for a in args]
+        if not self.microbit:
+            argument_string = ' '.join(args_new)
+            exception = self.make_index_error_check_if_list(args)
+            return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
+        else:
+            parts = []
+            current_part = []
+            for arg in args_new:
+                if 'random.choice' in arg:
+                    if current_part:
+                        parts.append(" ".join(current_part))
+                        current_part = []
+                    parts.append(arg)
+                else:
+                    current_part.append(arg)
+            if current_part:
+                parts.append(" ".join(current_part))
+
+            display_scrolls = [f"display.scroll({part})" if 'random.choice' in part else f"display.scroll({part})" for
+                               part in parts]
+            return "\n".join(display_scrolls)
 
     def add(self, meta, args):
         value = self.process_argument(meta, args[0])
@@ -3379,7 +3426,7 @@ def preprocess_ifs(code, lang='en'):
         times_plus_translated = ['times', keywords_in_lang.get('times')]
 
         if len(elements_in_line) > 2 and elements_in_line[0] in repeat_plus_translated and elements_in_line[
-                2] in times_plus_translated:
+            2] in times_plus_translated:
             line = ' '.join(elements_in_line[3:])
 
         if lang in ALL_KEYWORD_LANGUAGES:
@@ -3410,7 +3457,7 @@ def preprocess_ifs(code, lang='en'):
             command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
             for c in command_plus_translated_command:
                 if line.count(
-                        ' ' + c + ' ') >= 2:  # surround in spaces since we dont want to mathc something like 'dishwasher is sophie'
+                    ' ' + c + ' ') >= 2:  # surround in spaces since we dont want to mathc something like 'dishwasher is sophie'
                     return True
             return False
 
@@ -3444,7 +3491,7 @@ def preprocess_ifs(code, lang='en'):
 
         # if this line starts with if but does not contain an else, and the next non-empty line too is not an else.
         if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (
-                not starts_with('else', next_non_empty_line(lines, i))) and (not contains('else', line)):
+            not starts_with('else', next_non_empty_line(lines, i))) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
             commands = ["print", "ask", "forward", "turn", "play"]
             excluded_commands = ["pressed"]

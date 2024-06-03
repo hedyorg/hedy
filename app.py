@@ -771,8 +771,7 @@ def download_machine_file(filename, extension="zip"):
     return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
-MICROBIT_FEATURE = False
-
+MICROBIT_FEATURE = True
 
 @app.route('/generate_microbit_files', methods=['POST'])
 def generate_microbit_file():
@@ -796,7 +795,7 @@ def save_transpiled_code_for_microbit(transpiled_python_code):
     if not os.path.exists(folder):
         os.makedirs(folder)
     with open(filepath, 'w') as file:
-        custom_string = "from microbit import *\nwhile True:"
+        custom_string = "from microbit import *\nimport random\nwhile True:"
         file.write(custom_string + "\n")
 
         # Add space before every display.scroll call
