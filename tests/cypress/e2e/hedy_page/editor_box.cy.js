@@ -68,7 +68,7 @@ describe('Test editor box functionality', () => {
 
     cy.get('#errorbox').should('be.visible');
     // The error should be about the lonely echo
-    cy.getBySel('error_details').should('contain.text', 'echo');
+    cy.getDataCy('error_details').should('contain.text', 'echo');
   });
 
   it ('When making an error the keywords must be highligted', () => {
@@ -78,7 +78,7 @@ describe('Test editor box functionality', () => {
 
     cy.get('#errorbox').should('be.visible');
     // The error should be about the lonely echo
-    cy.getBySel('error_details').should('contain.text', 'prin');
+    cy.getDataCy('error_details').should('contain.text', 'prin');
     cy.get('[data-cy="error_details"] span').should('have.class', 'command-highlighted');
 
   });
