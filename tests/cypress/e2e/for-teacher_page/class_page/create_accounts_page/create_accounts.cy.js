@@ -17,10 +17,7 @@ describe('Testing a teacher account', () => {
 
   it('Is able to create new accounts for class', () => {
     navigateToClass(classname);
-    cy.getDataCy('student_username_cell').should(($div) => {
-      const text = $div.text();
-      expect(text).include(students[0]);
-    }) 
+    cy.getDataCy(`student_${students[0]}`).should('include.text', students[0])
   })
 
   it('Is able to download login credentials', () => {
