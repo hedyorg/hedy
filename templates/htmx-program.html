@@ -1,30 +1,32 @@
 <div id="program_{{ program.id }}" data-name="{{program.name}}" data-id="{{program.id}}" class="program w-full border-solid border-2 {% if program.submitted %} border-gray-400 bg-gray-400 {% else %} border-orange-400 {% endif %} rounded p-4 mb-4">
     <h3 id="submitted_header_{{ program.id }}" class="mt-0 mb-4 text-red-500 text-center {% if not program.submitted %} hidden{% endif %}">{{_('submitted_header')}}</h3>
     <div class="flex flex-row">
-        <table class="table-auto mb-4">
-        <thead>
-            <tr class="text-left">
-                <th class="w-64 text-blue-600">{{_('title')}}</th>
-                <th class="w-24 text-blue-600">{{_('level')}}</th>
-                <th class="w-32 text-blue-600">{{_('adventure')}}</th>
-                <th class="w-64 text-blue-600">{{_('number_lines')}}</th>
-                <th class="text-blue-600">{{_('last_edited')}}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{program.name|truncate(30)}}</td>
-                <td id="program_level">{{_('level')}} {{ program.level }}</td>
+        <div class="flex flex-row flex-wrap justify-between">
+            <div class="flex flex-col mb-4">
+                <p class="w-32 text-blue-600">{{_('title')}}</p>
+                <p class="mt-1">{{program.name|truncate(30)}}</p>
+            </div>
+            <div class="flex flex-col mb-4">
+                <p class="w-32 text-blue-600">{{_('level')}}</p>
+                <p class="mt-1">{{_('level')}} {{ program.level }}</p>
+            </div>
+            <div class="flex flex-col mb-4">
+                <p class="w-32 text-blue-600">{{_('adventure')}}</p>
                 {% if program.adventure_name %}
-                    <td id="program_adventure">{{adventure_names.get(program.adventure_name, program.adventure_name)}}</td>
+                <p class="mt-1">{{adventure_names.get(program.adventure_name, program.adventure_name)}}</p>
                 {% else %}
-                    <td>-</td>
+                <p class="mt-1">-</p>
                 {% endif %}
-                <td>{{ program.number_lines }}</td>
-                <td>{{_('ago')|replace("{timestamp}", program.date)}}</td>
-            </tr>
-        </tbody>
-        </table>
+            </div>
+            <div class="flex flex-col mb-4">
+                <p class="w-32 text-blue-600">{{_('number_lines')}}</p>
+                <p class="mt-1">{{ program.number_lines }}</p>
+            </div>
+            <div class="flex flex-col mb-4">
+                <p class="w-32 text-blue-600">{{_('last_edited')}}</p>
+                <p class="mt-1">{{_('ago')|replace("{timestamp}", program.date)}}</p>
+            </div>
+        </div>
         {% if public_profile and not second_teachers_programs %}
             {% set favourite_program = public_profile.favourite_program == program.id %}
             <div
@@ -35,6 +37,7 @@
                     onclick="hedyApp.set_favourite_program('{{ program.id }}', '{{_('favourite_confirm')}}', '{{_('unfavourite_confirm')}}');" aria-hidden="true"></i>
             </div>
         {% endif %}
+        {% if not graph_view %}
           <div class="ml-auto dropdown relative">
             <button class="gray-btn text-gray-500 border border-gray-600 font-semibold rounded inline-flex items-center gap-2" id="more_options_{{ program.id }}"
               onclick="$('#program_options_dropdown_{{ program.id }}').slideToggle('medium');">
@@ -55,6 +58,7 @@
                 {% endif %}
             </div>
           </div>
+        {% endif %}
     </div>
     <div class="w-3/4 turn-pre-into-ace mb-4">
       <pre level="{{ program.level }}" class="text-sm">{{program.preview_code }}</pre>
@@ -63,40 +67,42 @@
         <button class="blue-btn" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('open')}}</button>
     </div>
     <div id="non_submitted_button_container_{{ program.id }}" class="flex flex-row w-full gap-2 {% if program.submitted %} hidden {% endif %}">
-        <a href="/hedy/{{program.level|string}}/{{program.id}}"><button class="blue-btn">{{_('open')}}</button></a>
-        <button class="green-btn" data-cy="submit-btn" {% if not program.public or second_teachers_programs %} style="display: none;" {% endif %} onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}')})">{{_('submit_program')}}</button>
-        {% if not second_teachers_programs %}
-        <div class="dropdown relative">
-            <button class="white-btn inline-flex items-center gap-2" id="share_option_dropdown_{{ program.id }}"
-            onclick="$('#share_dropdown_{{ program.id }}').slideToggle('medium');">
-            <span class="fa fa-{% if program.public %}globe{% else %}lock{% endif %}"></span>
-            <span>{% if program.public %}{{_('public')}}{% else %}{{_('private')}}{% endif %}</span>
-            <svg id="share-arrow_{{ program.id }}" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-            </svg>
-            </button>
-            <div class="dropdown-menu z-30 min-w-full" id="share_dropdown_{{ program.id }}"
-            style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
-            _="on mutation of @style
-                set arrow to #share-arrow_{{ program.id }}
-                if *display == 'none'
-                    remove .rotate-180 from arrow
-                else if not arrow.classList.contains('rotate-180')
-                    add .rotate-180 to arrow
-                end">
-                <button id="share_button_{{ program.id }}" class="gray-btn text-blue-500 min-w-full inline-flex items-center gap-2"
-                hx-post="/programs/share/{{program.id}}/{{second_teachers_programs}}"
-                data-cy="unshare_program_{{ program.id }}"
-                hx-swap="outerHTML"
-                hx-target="#program_{{ program.id }}"
-                >
-                <span class="fa fa-{% if program.public %}lock{% else %}globe{% endif %}"></span>
-                <div class="mr-auto" tabindex=0>
-                    {% if program.public %}{{_('private')}}{% else %}{{_('public')}}{% endif %}
-                </div>
+        <a href="/hedy/{{program.level|string}}/{{program.id}}" target="_blank"><button class="blue-btn">{{_('open')}}</button></a>
+        {% if not graph_view %}
+            <button class="green-btn" data-cy="submit-btn" {% if not program.public or second_teachers_programs %} style="display: none;" {% endif %} onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}')})">{{_('submit_program')}}</button>
+            {% if not second_teachers_programs %}
+            <div class="dropdown relative">
+                <button class="white-btn inline-flex items-center gap-2" id="share_option_dropdown_{{ program.id }}"
+                onclick="$('#share_dropdown_{{ program.id }}').slideToggle('medium');">
+                <span class="fa fa-{% if program.public %}globe{% else %}lock{% endif %}"></span>
+                <span>{% if program.public %}{{_('public')}}{% else %}{{_('private')}}{% endif %}</span>
+                <svg id="share-arrow_{{ program.id }}" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
                 </button>
+                <div class="dropdown-menu z-30 min-w-full" id="share_dropdown_{{ program.id }}"
+                style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
+                _="on mutation of @style
+                    set arrow to #share-arrow_{{ program.id }}
+                    if *display == 'none'
+                        remove .rotate-180 from arrow
+                    else if not arrow.classList.contains('rotate-180')
+                        add .rotate-180 to arrow
+                    end">
+                    <button id="share_button_{{ program.id }}" class="gray-btn text-blue-500 min-w-full inline-flex items-center gap-2"
+                    hx-post="/programs/share/{{program.id}}/{{second_teachers_programs}}"
+                    data-cy="unshare_program_{{ program.id }}"
+                    hx-swap="outerHTML"
+                    hx-target="#program_{{ program.id }}"
+                    >
+                    <span class="fa fa-{% if program.public %}lock{% else %}globe{% endif %}"></span>
+                    <div class="mr-auto" tabindex=0>
+                        {% if program.public %}{{_('private')}}{% else %}{{_('public')}}{% endif %}
+                    </div>
+                    </button>
+                </div>
             </div>
-        </div>
+            {% endif %}
         {% endif %}
     </div>
 </div>
