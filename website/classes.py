@@ -1,6 +1,6 @@
 import uuid
 
-from flask import jsonify, make_response, redirect, request, session
+from flask import make_response, redirect, request, session
 from jinja_partials import render_partial
 from flask_babel import gettext
 
@@ -33,17 +33,17 @@ class ClassModule(WebsiteModule):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("name"), str):
-            return gettext("class_name_invalid"), 400
+            return make_response(gettext("class_name_invalid"), 400)
         if len(body.get("name")) < 1:
-            return gettext("class_name_empty"), 400
+            return make_response(gettext("class_name_empty"), 400)
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
         Classes = self.db.get_teacher_classes(user["username"], True, teacher_only=True)
         for Class in Classes:
             if Class["name"] == body["name"]:
-                return gettext("class_name_duplicate"), 200
+                return make_response(gettext("class_name_duplicate"), 200)
 
         Class = {
             "id": uuid.uuid4().hex,
@@ -56,8 +56,8 @@ class ClassModule(WebsiteModule):
         self.db.store_class(Class)
         achievement = self.achievements.add_single_achievement(user["username"], "ready_set_education")
         if achievement:
-            return {"id": Class["id"], "achievement": achievement}, 200
-        return {"id": Class["id"]}, 200
+            utils.add_pending_achievement({"achievement": achievement})
+        return make_response({"id": Class["id"]}, 200)
 
     @route("/<class_id>", methods=["PUT"])
     @requires_teacher
@@ -65,15 +65,15 @@ class ClassModule(WebsiteModule):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("name"), str):
-            return gettext("class_name_invalid"), 400
+            return make_response(gettext("class_name_invalid"), 400)
         if len(body.get("name")) < 1:
-            return gettext("class_name_empty"), 400
+            return make_response(gettext("class_name_empty"), 400)
 
         Class = self.db.get_class(class_id)
         if not Class or not (utils.can_edit_class(user, Class)):
-            return gettext("no_such_class"), 404
+            return make_response(gettext("no_such_class"), 404)
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
         username = user["username"]
@@ -82,12 +82,12 @@ class ClassModule(WebsiteModule):
         Classes = self.db.get_teacher_classes(username, True, teacher_only=True)
         for Class in Classes:
             if Class["name"] == body["name"]:
-                return gettext("class_name_duplicate"), 200
+                return make_response(gettext("class_name_duplicate"), 200)
 
         self.db.update_class(class_id, body["name"])
         achievement = self.achievements.add_single_achievement(user["username"], "on_second_thoughts")
         if achievement:
-            return {"achievement": achievement}, 200
+            utils.add_pending_achievement({"achievement": achievement})
         return make_response('', 204)
 
     @route("/<class_id>", methods=["DELETE"])
@@ -95,9 +95,9 @@ class ClassModule(WebsiteModule):
     def delete_class(self, user, class_id):
         Class = self.db.get_class(class_id)
         if not Class:
-            return gettext("no_such_class"), 404
+            return make_response(gettext("no_such_class"), 404)
         if Class["teacher"] != user["username"]:  # only teachers can remove their classes.
-            return gettext("unauthorized"), 401
+            return make_response(gettext("unauthorized"), 401)
 
         self.db.delete_class(Class)
 
@@ -140,7 +140,7 @@ class ClassModule(WebsiteModule):
 
         username = user['username']
         if not username:
-            return gettext("join_prompt"), 403
+            return make_response(gettext("join_prompt"), 403)
 
         # We only want to remove the invite if the user joins the class with an actual pending invite
         invite = self.db.get_user_class_invite(username, class_id)
@@ -152,7 +152,7 @@ class ClassModule(WebsiteModule):
             elif invited_as == "student":
                 student_classes = self.db.get_student_classes(username)
                 if len(student_classes):
-                    return gettext("student_not_allowed_in_class"), 400
+                    return make_response(gettext("student_not_allowed_in_class"), 400)
                 self.db.add_student_to_class(Class["id"], username)
 
             refresh_current_user_from_db()
@@ -163,10 +163,9 @@ class ClassModule(WebsiteModule):
         achievement = self.achievements.add_single_achievement(username, "epic_education")
         if achievement:
             utils.add_pending_achievement({"achievement": achievement, "redirect": "/programs"})
-            return {"achievement": achievement}, 200
         # request.url = re.sub(r'/class/.*', '/programs', request.url)
         # return redirect(request.url, code=302)
-        return {}, 302
+        return make_response('', 302)
 
     # Legacy function; will be gradually replaced by the join_class_id
     @route("/join", methods=["POST"])
@@ -180,11 +179,11 @@ class ClassModule(WebsiteModule):
 
         username = current_user()["username"]
         if not username:
-            return gettext("join_prompt"), 403
+            return make_response(gettext("join_prompt"), 403)
 
         student_classes = self.db.get_student_classes(username)
         if len(student_classes):
-            return gettext("student_not_allowed_in_class"), 400
+            return make_response(gettext("student_not_allowed_in_class"), 400)
 
         self.db.add_student_to_class(Class["id"], username)
         refresh_current_user_from_db()
@@ -198,16 +197,15 @@ class ClassModule(WebsiteModule):
             session["messages"] = session["messages"] - 1 if session["messages"] else 0
 
         if achievement:
-            return {"achievement": achievement}, 200
-        else:
-            return make_response('', 204)
+            utils.add_pending_achievement({"achievement": achievement})
+        return make_response('', 200)
 
     @route("/<class_id>/student/<student_id>", methods=["DELETE"])
     @requires_login
     def leave_class(self, user, class_id, student_id):
         Class = self.db.get_class(class_id)
         if not Class or not (utils.can_edit_class(user, Class)):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
 
         self.db.remove_student_from_class(Class["id"], student_id)
         refresh_current_user_from_db()
@@ -215,7 +213,7 @@ class ClassModule(WebsiteModule):
         if Class["teacher"] == user["username"]:
             achievement = self.achievements.add_single_achievement(user["username"], "detention")
         if achievement:
-            return {"achievement": achievement}, 200
+            utils.add_pending_achievement({"achievement": achievement})
         return make_response('', 204)
 
     @route("/<class_id>/second-teacher/<second_teacher>", methods=["DELETE"])
@@ -223,7 +221,7 @@ class ClassModule(WebsiteModule):
     def remove_second_teacher(self, user, class_id, second_teacher):
         Class = self.db.get_class(class_id)
         if not Class or Class["teacher"] != user["username"]:  # only teachers can remove second teachers.
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         second_teacher = self.db.user_by_username(second_teacher)
         self.db.remove_second_teacher_from_class(Class, second_teacher)
 
@@ -233,8 +231,7 @@ class ClassModule(WebsiteModule):
             achievement = self.achievements.add_single_achievement(user["username"], "detention")
         if achievement:
             utils.add_pending_achievement({"achievement": achievement, "reload": True})
-            return {"achievement": achievement}, 200
-        return {}, 205
+        return make_response('', 205)
 
 
 class MiscClassPages(WebsiteModule):
@@ -251,7 +248,7 @@ class MiscClassPages(WebsiteModule):
     @route("/classes", methods=["GET"])
     @requires_teacher
     def get_classes(self, user):
-        return jsonify(self.db.get_teacher_classes(user["username"], True))
+        return make_response(self.db.get_teacher_classes(user["username"], True))
 
     @route("/duplicate_class", methods=["POST"])
     @requires_teacher
@@ -259,15 +256,15 @@ class MiscClassPages(WebsiteModule):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("name"), str):
-            return gettext("class_name_invalid"), 400
+            return make_response(gettext("class_name_invalid"), 400)
         if len(body.get("name")) < 1:
-            return gettext("class_name_empty"), 400
+            return make_response(gettext("class_name_empty"), 400)
 
         Class = self.db.get_class(body.get("id"))
         if not Class or not utils.can_edit_class(user, Class):  # only teachers can duplicate a class
-            return gettext("no_such_class"), 404
+            return make_response(gettext("no_such_class"), 404)
 
         # second_teachers = Class.get("second_teachers")
 
@@ -276,7 +273,7 @@ class MiscClassPages(WebsiteModule):
         Classes = self.db.get_teacher_classes(user["username"], True, teacher_only=True)
         for Class in Classes:
             if Class["name"] == body.get("name"):
-                return gettext("class_name_duplicate"), 400
+                return make_response(gettext("class_name_duplicate"), 400)
 
         # All the class settings are still unique, we are only concerned with copying the customizations
         # Shortly: Create a class like normal: concern with copying the customizations
@@ -309,10 +306,10 @@ class MiscClassPages(WebsiteModule):
 
         achievement = self.achievements.add_single_achievement(current_user()["username"], "one_for_money")
         if achievement:
-            return {"achievement": achievement}, 200
+            utils.add_pending_achievement({"achievement": achievement})
         if new_second_teachers:
-            return {"id": new_class["id"], "second_teachers": new_second_teachers}, 200
-        return {"id": new_class["id"]}, 200
+            return make_response({"id": new_class["id"], "second_teachers": new_second_teachers}, 200)
+        return make_response({"id": new_class["id"]}, 200)
 
     @route("/invite-student", methods=["POST"])
     @requires_teacher
@@ -320,13 +317,13 @@ class MiscClassPages(WebsiteModule):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("username"), str):
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
         if not isinstance(body.get("class_id"), str):
-            return "class id must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
         if len(body.get("username")) < 1:
-            return gettext("username_empty"), 400
+            return make_response(gettext("username_empty"), 400)
 
         username = body.get("username").lower()
         class_id = body.get("class_id")
@@ -337,15 +334,15 @@ class MiscClassPages(WebsiteModule):
 
         user = self.db.user_by_username(username)
         if not user:
-            return gettext("student_not_existing"), 400
+            return make_response(gettext("student_not_existing"), 400)
         if "students" in Class and user["username"] in Class["students"]:
-            return gettext("student_already_in_class"), 400
+            return make_response(gettext("student_already_in_class"), 400)
         else:
             student_classes = self.db.get_student_classes(username)
             if len(student_classes):
-                return gettext("student_not_allowed_in_class"), 400
+                return make_response(gettext("student_not_allowed_in_class"), 400)
         if self.db.get_user_invitations(user["username"]):
-            return gettext("student_already_invite"), 400
+            return make_response(gettext("student_already_invite"), 400)
 
         # So: The class and student exist and are currently not a combination -> invite!
         data = {
@@ -366,34 +363,34 @@ class MiscClassPages(WebsiteModule):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("username"), str):
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
         if not isinstance(body.get("class_id"), str):
-            return "class id must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
         if len(body.get("username")) < 1:
-            return gettext("username_empty"), 400
+            return make_response(gettext("username_empty"), 400)
 
         username = body.get("username").lower()
         class_id = body.get("class_id")
 
         user = self.db.user_by_username(username)
         if not user:
-            return gettext("teacher_invalid"), 400  # TODO: change to teacher not existing
+            return make_response(gettext("teacher_invalid"), 400)  # TODO: change to teacher not existing
         # existing_invitation = self.db.get_user_invitations(user["username"])
         invite = self.db.get_user_class_invite(username, class_id)
         if invite:
-            return gettext("student_already_invite"), 400
+            return make_response(gettext("student_already_invite"), 400)
         if is_second_teacher(user, class_id):
-            return "Already a second teacher.", 400
+            return make_response(gettext("request_invalid"), 400)
 
         Class = self.db.get_class(class_id)
         if not Class:
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
         elif Class["teacher"] != teacher["username"] or not is_teacher(user):
-            return gettext("teacher_invalid"), 400
+            return make_response(gettext("teacher_invalid"), 400)
         elif Class["teacher"] == username:  # this check is almost never the case; but just in case.
-            return "You cannot add yourself as a second teacher!", 400
+            return make_response(gettext("request_invalid"), 400)
 
         data = {
             "username": username,
@@ -412,11 +409,11 @@ class MiscClassPages(WebsiteModule):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("username"), str):
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
         if not isinstance(body.get("class_id"), str):
-            return "class id must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
 
         username = body.get("username")
         class_id = body.get("class_id")

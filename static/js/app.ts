@@ -1573,8 +1573,7 @@ export function toggle_keyword_language(current_lang: string, new_lang: string) 
       goal_lang: new_lang,
       level: theLevel,
     });
-
-    if (response.success) {
+    if (response) {
       const code = response.code
       theGlobalEditor.contents = code;
       const saveName = saveNameFromInput();
@@ -1620,7 +1619,7 @@ export function toggle_blur_code() {
 export async function change_language(lang: string) {
   await tryCatchPopup(async () => {
     const response = await postJsonWithAchievements('/change_language', { lang });
-    if (response.success) {
+    if (response) {
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
 

@@ -61,6 +61,6 @@ describe("Test the feedback feature", () => {
         cy.getDataCy('modal_feedback_input')
             .should("not.be.visible")
 
-        cy.wait("@postFeedback").should('have.nested.property', 'response.statusCode', 200)
+        cy.wait("@postFeedback").should('have.nested.property', 'response.statusCode', 204)
     });
 });
