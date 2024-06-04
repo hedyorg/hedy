@@ -50,20 +50,20 @@ describe('customize class page', () => {
         .should('have.value', '1');
 
       // level 1 should be visible and level 2 shouldn't exist
-      cy.getDataCy("level-1")
+      cy.getDataCy("level_1")
         .should('be.visible');
 
-      cy.getDataCy("level-2")
+      cy.getDataCy("level_2")
         .should('not.exist');
 
       cy.getDataCy('adventures')
         .select('2')
         .should('have.value', '2');
 
-      cy.getDataCy("*level-2")
+      cy.getDataCy("*level_2")
         .should('be.visible');
 
-        cy.getDataCy("*level-1")
+        cy.getDataCy("*level_1")
         .should('not.exist');
     });
 
@@ -95,7 +95,7 @@ describe('customize class page', () => {
         .should('have.value', '2');
 
       // Finding this makes sure that level-2 has been loaded
-      cy.getDataCy('level-2');
+      cy.getDataCy('level_2');
 
       // The available adventures dropdown should only include the default option
       // but it may also have teacher-specific adventures
@@ -105,12 +105,12 @@ describe('customize class page', () => {
         .as('startLength')
         .then(startLength => {
           // store the name of the adventure we're going to delete
-          cy.get('[data-cy="level-2"] div:first input')
+          cy.get('[data-cy="level_2"] div:first input')
             .invoke('attr', 'value')
             .as('adventure')
             .then(adventure => {
               // Get the first adventure, and click its remove button
-              cy.get('[data-cy="level-2"] div:first [data-cy="hide"]')
+              cy.get('[data-cy="level_2"] div:first [data-cy="hide"]')
                 .click();
 
               // The available adventures dropdown should now include the new adventure
@@ -131,7 +131,7 @@ describe('customize class page', () => {
                 .should('have.length', startLength);
 
               // the adventure should now be last
-              cy.getDataCy(`level-2 ${adventure}`)
+              cy.getDataCy(`level_2 ${adventure}`)
                 .should("exist")
           });
       });
@@ -141,11 +141,11 @@ describe('customize class page', () => {
     it('Disabling current level displays a message', () => {
       cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
 
-      cy.getDataCy('level-1').should('be.visible');
-      cy.get('#state-disabled').should('not.be.visible');
+      cy.getDataCy('level_1').should('be.visible');
+      cy.get('#state_disabled').should('not.be.visible');
 
       cy.get('#enable_level_1').parent('.switch').click();
-      cy.get('#state-disabled').should('be.visible');
+      cy.get('#state_disabled').should('be.visible');
 
       cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
     });
@@ -155,8 +155,8 @@ describe('customize class page', () => {
        * At the beggining, the Parrot adventure should be in the level 1's adventures
        */
       selectLevel('1');
-      cy.get('#htmx-modal').should('not.exist');
-      cy.getDataCy(`*level-1 parrot *hide`).click();
+      cy.get('#htmx_modal').should('not.exist');
+      cy.getDataCy(`*level_1 parrot *hide`).click();
       cy.getDataCy('parrot').should('not.exist');
 
       cy.getDataCy('reset_adventures').click();
@@ -170,7 +170,7 @@ describe('customize class page', () => {
 
       beforeEach(() => {
         selectLevel('1');
-        cy.getDataCy(`*level-1 ${hiddenAdventure} *hide`).click();
+        cy.getDataCy(`*level_1 ${hiddenAdventure} *hide`).click();
       });
 
       it('disappears from the tab list', () => {
