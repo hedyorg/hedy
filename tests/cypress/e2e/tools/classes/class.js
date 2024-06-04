@@ -82,9 +82,9 @@ export function addCustomizations(classname){
     });
     cy.get('[data-cy="view_class_link"]').contains(classname).click();
     cy.get('#customize-class-button').click();
-    cy.getBySel('opening_date_container').should("not.be.visible")
-    cy.getBySel('opening_date_label').click();
-    cy.getBySel('opening_date_container').should("be.visible")
+    cy.getDataCy('opening_date_container').should("not.be.visible")
+    cy.getDataCy('opening_date_label').click();
+    cy.getDataCy('opening_date_container').should("be.visible")
     cy.get('#enable_level_7').parent('.switch').click();
 
     cy.wait(1000)

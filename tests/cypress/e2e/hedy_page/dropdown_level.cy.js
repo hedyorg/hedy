@@ -20,12 +20,12 @@ describe('Go to level dropdown', () => {
           cy.getDataCy('view_classes').click();
       }
     });
-    cy.getBySel('view_class_link').contains(new RegExp(`^${classname}$`)).click();
+    cy.getDataCy('view_class_link').contains(new RegExp(`^${classname}$`)).click();
     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide());
-    cy.getBySel('customize_class_button').click();
-    cy.getBySel('opening_date_container').should("not.be.visible")
-    cy.getBySel('opening_date_label').click();
-    cy.getBySel('opening_date_container').should("be.visible")
+    cy.getDataCy('customize_class_button').click();
+    cy.getDataCy('opening_date_container').should("not.be.visible")
+    cy.getDataCy('opening_date_label').click();
+    cy.getDataCy('opening_date_container').should("be.visible")
     cy.get('#enable_level_5').parent('.switch').click();
     
     cy.wait(1000)

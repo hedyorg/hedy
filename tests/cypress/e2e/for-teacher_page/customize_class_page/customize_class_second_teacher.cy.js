@@ -13,9 +13,9 @@ describe('customize class page', () => {
       cy.getDataCy('view_class_link').first().click(); // Press on view class button
       cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
       cy.getDataCy('customize_class_button').click(); // Press customize class button
-      cy.getBySel('opening_date_container').should("not.be.visible")
-      cy.getBySel('opening_date_label').click();
-      cy.getBySel('opening_date_container').should("be.visible")
+      cy.getDataCy('opening_date_container').should("not.be.visible")
+      cy.getDataCy('opening_date_label').click();
+      cy.getDataCy('opening_date_container').should("be.visible")
 
       // Remove any customizations that already exist to get the class into a predictable state
       // This always throws up a modal dialog
