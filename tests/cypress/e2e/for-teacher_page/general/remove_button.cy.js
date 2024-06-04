@@ -14,7 +14,7 @@ describe('Remove class test', () => {
           cy.getDataCy('view_classes').click();
       }
     });
-    cy.get("#remove-class").first().click()
+    cy.get("#remove_class").first().click()
   })
 })
   

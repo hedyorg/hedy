@@ -72,6 +72,6 @@ export class LocalSaveWarning {
       // Never do it if user is logged in
       return;
     }
-    $('#not-logged-in-warning').toggle(show);
+    $('#not_logged_in_warning').toggle(show);
   }
 }

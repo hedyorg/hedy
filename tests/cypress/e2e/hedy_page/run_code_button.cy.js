@@ -37,7 +37,7 @@ describe('Is able to run code', () => {
       }
 
       function expectWarning() {
-        cy.get('#not-logged-in-warning').should('be.visible');
+        cy.get('#not_logged_in_warning').should('be.visible');
       }
     })
 
@@ -59,10 +59,10 @@ describe('Is able to run code', () => {
       cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').type(program_2)
       cy.get('#runit').click()
       cy.wait('@parse')
-      cy.get('#ask-modal').type('Hedy')
-      cy.get('#ask-modal > form').submit()
+      cy.get('#ask_modal').type('Hedy')
+      cy.get('#ask_modal > form').submit()
 
-      cy.get('#ask-modal').should('not.be.visible')
+      cy.get('#ask_modal').should('not.be.visible')
     })
 
     it("After successfully executing a program, the stop program button is hidden", () => {
@@ -79,6 +79,6 @@ describe('Is able to run code', () => {
       cy.wait(500)
       cy.get('#stopit').should('not.be.visible')
       cy.get('#runit').should('be.visible')
-      cy.get('#variable-list').should('be.visible').and('have.text', 'var1: 1var2: 2var3: 3var4: 4')
+      cy.get('#variable_list').should('be.visible').and('have.text', 'var1: 1var2: 2var3: 3var4: 4')
     })
   })

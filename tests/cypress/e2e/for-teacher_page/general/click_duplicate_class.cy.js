@@ -24,8 +24,8 @@ describe('Is able to click on duplicate class', () => {
     cy.getDataCy('modal_ok_button').should('be.visible');
     cy.getDataCy('modal_ok_button').should('be.enabled');
 
-    cy.get('#modal-cancel-button').should('be.visible');
-    cy.get('#modal-cancel-button').should('be.enabled');
+    cy.get('#modal_cancel_button').should('be.visible');
+    cy.get('#modal_cancel_button').should('be.enabled');
     logout();
   })
 
@@ -50,8 +50,8 @@ describe('Is able to click on duplicate class', () => {
           cy.getDataCy('modal_yes_button').should('be.visible');
           cy.getDataCy('modal_yes_button').should('be.enabled');
 
-          cy.get('#modal-no-button').should('be.visible');
-          cy.get('#modal-no-button').should('be.enabled').click();
+          cy.get('#modal_no_button').should('be.visible');
+          cy.get('#modal_no_button').should('be.enabled').click();
 
           // Checks for input field
           cy.getDataCy('modal_prompt_input').should('not.have.value', '');
@@ -63,8 +63,8 @@ describe('Is able to click on duplicate class', () => {
           cy.getDataCy('modal_ok_button').should('be.enabled');
           
           // Checks for cancel button
-          cy.get('#modal-cancel-button').should('be.visible');
-          cy.get('#modal-cancel-button').should('be.enabled');
+          cy.get('#modal_cancel_button').should('be.visible');
+          cy.get('#modal_cancel_button').should('be.enabled');
         }
       })
   })
