@@ -17,6 +17,12 @@ it('When selecting a program as Hedys choice, it should be shown', ()=>{
         cy.getDataCy('modal_yes_button').click();
         // reload the page to see the changes
         cy.reload();
-        cy.get(`[data-cy="explore_favourite_programs"] > [data-cy=${program_id}]`).should('be.visible');
+        cy.getDataCy('explore_favourite_programs')
+        .should('be.visible')  // Optionally, ensure the parent is visible
+        // Then, within that element, get the child with data-cy=program_id
+        .within(() => {
+            cy.getDataCy(`${program_id}`)
+            .should('be.visible');
+        });
     });
 });

@@ -24,7 +24,7 @@ beforeEach(() => {
  * or click a random answer).
  */
 it('can complete the quiz by randomly clicking buttons', () => {
-  cy.getDataCy('*start-quiz').click();
+  cy.getDataCy('*start_quiz').click();
 
   randomlyClickThroughUntilFinished(0);
 
@@ -36,20 +36,20 @@ it('can complete the quiz by randomly clicking buttons', () => {
     // Now that the page has loaded, it's safe to inspect it and do a conditional thing
     // depending on what it looks like.
     cy.get('*[data-tabtarget="quiz"]').then(($quizpane) => {
-      if ($quizpane.find('*[data-cy="quiz-done"]').length) {
+      if ($quizpane.find('*[data-cy="quiz_done"]').length) {
         // Yay, finished!
         return;
       }
 
-      if ($quizpane.find('*[data-cy="advance-quiz"]').length) {
+      if ($quizpane.find('*[data-cy="advance_quiz"]').length) {
         // Click "next question" button"
-        cy.getDataCy('*advance-quiz').click();
+        cy.getDataCy('*advance_quiz').click();
         randomlyClickThroughUntilFinished(expectedCounter + 1);
         return;
       }
 
       // Otherwise click a random answer
-      cy.get('*[data-cy="quiz-choice"]:not(.incorrect-option)').then(($buttons) => {
+      cy.get('*[data-cy="quiz_choice"]:not(.incorrect-option)').then(($buttons) => {
         return Cypress._.sample($buttons.toArray());
       }).click();
       cy.get('button.pick-answer-button:visible').click();

@@ -10,7 +10,7 @@ describe('Preview button test', () => {
     // Initially this should not be visible
     cy.getDataCy('modal_confirm')
       .should('not.be.visible');
-    cy.get('#modal-no-button')
+    cy.get('#modal_no_button')
       .should('not.be.visible');
     cy.getDataCy('modal_yes_button')
       .should('not.be.visible');
@@ -25,7 +25,7 @@ describe('Preview button test', () => {
     cy.getDataCy('modal_confirm')
       .should('be.visible');
 
-    cy.get('#modal-no-button')
+    cy.get('#modal_no_button')
       .should('be.visible')
       .should('not.be.disabled')
       .click();
@@ -34,7 +34,7 @@ describe('Preview button test', () => {
 
     cy.getDataCy('modal_confirm')
       .should('not.be.visible');
-    cy.get('#modal-no-button')
+    cy.get('#modal_no_button')
       .should('not.be.visible');
 
     // Creating a new adventure to remove
