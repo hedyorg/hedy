@@ -16,11 +16,11 @@ describe('Test for the Customize Adventure Page', () => {
               .should('not.be.disabled');
             const data = "<code>to</code>";
             editor.setData(data);
-            cy.getBySel('test_warning_message').should('be.visible').and('contain.text', 'to, to_list')
+            cy.getDataCy('test_warning_message').should('be.visible').and('contain.text', 'to, to_list')
             // Once we click the close button
             cy.get('div[data-cy="test_warning_message"] > p[class="close-dialog"]').click()
             // The alert should not exist anymore
-            cy.getBySel('test_warning_message').should('not.exist')
+            cy.getDataCy('test_warning_message').should('not.exist')
           })
     })   
 })
