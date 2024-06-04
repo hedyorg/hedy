@@ -131,17 +131,16 @@ describe("General tests for my programs page (with both custom teacher and built
                     })
     });
 
-    it("second-teachers can NOT view each other's public programs", () => {
+    it("second-teachers can NOT view each other's public programs after making them private", () => {
         loginForTeacher("teacher4");
         navigateToClass("CLASS1");
         cy.get("#second_teachers_container tbody tr")
             .each(($tr, i) => {
                 if ($tr.text().includes("teacher1")) {
                     cy.get(`#second_teachers_container tbody :nth-child(${i+1}) [data-cy="programs"]`).click();
-                    cy.getDataCy("no_programs").should("be.visible");
+                    cy.getDataCy("no-programs").should("not.exist");
                 }
             })
-
     });
 
     it("delete created program", () => {
