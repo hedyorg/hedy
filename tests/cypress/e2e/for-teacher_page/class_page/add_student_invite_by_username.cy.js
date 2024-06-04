@@ -1,7 +1,6 @@
 import {loginForTeacher, logout, login} from '../../tools/login/login.js'
 
-it('Is able to add student by name', () => {
-    cy.intercept('/invite-student').as('invite')    
+it('Is able to add student by name', () => {       
     loginForTeacher();
     let student = 'student5'
 
@@ -28,7 +27,7 @@ it('Is able to add student by name', () => {
     cy.getDataCy('invite_student').click();
     cy.getDataCy('modal_prompt_input').type(student);
     cy.getDataCy('modal_ok_button').click();
-    cy.wait('@invite')
+    cy.wait('500')
     
     login(student, "123456");
 
