@@ -26,7 +26,7 @@ export function resolve_student(class_id: string, error_id: string, prompt: stri
 }
 
 export function InitLineChart(data: any[], labels: any[]){
-  const ctx = document.getElementById("runs-over-time") as HTMLCanvasElement;
+  const ctx = document.getElementById("runs_over_time") as HTMLCanvasElement;
   new Chart(ctx, {
     type: 'line',
     data: {
