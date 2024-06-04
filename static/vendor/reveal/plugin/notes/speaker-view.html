@@ -94,14 +94,14 @@
 				font-size: 18px;
 			}
 
-				.speaker_controls-time.hidden,
-				.speaker_controls-notes.hidden {
+				.speaker-controls-time.hidden,
+				.speaker-controls-notes.hidden {
 					display: none;
 				}
 
-				.speaker_controls-time .label,
-				.speaker_controls-pace .label,
-				.speaker_controls-notes .label {
+				.speaker-controls-time .label,
+				.speaker-controls-pace .label,
+				.speaker-controls-notes .label {
 					text-transform: uppercase;
 					font-weight: normal;
 					font-size: 0.66em;
@@ -109,7 +109,7 @@
 					margin: 0;
 				}
 
-				.speaker_controls-time, .speaker_controls-pace {
+				.speaker-controls-time, .speaker-controls-pace {
 					border-bottom: 1px solid rgba( 200, 200, 200, 0.5 );
 					margin-bottom: 10px;
 					padding: 10px 16px;
@@ -117,63 +117,63 @@
 					cursor: pointer;
 				}
 
-				.speaker_controls-time .reset-button {
+				.speaker-controls-time .reset-button {
 					opacity: 0;
 					float: right;
 					color: #666;
 					text-decoration: none;
 				}
-				.speaker_controls-time:hover .reset-button {
+				.speaker-controls-time:hover .reset-button {
 					opacity: 1;
 				}
 
-				.speaker_controls-time .timer,
-				.speaker_controls-time .clock {
+				.speaker-controls-time .timer,
+				.speaker-controls-time .clock {
 					width: 50%;
 				}
 
-				.speaker_controls-time .timer,
-				.speaker_controls-time .clock,
-				.speaker_controls-time .pacing .hours-value,
-				.speaker_controls-time .pacing .minutes-value,
-				.speaker_controls-time .pacing .seconds-value {
+				.speaker-controls-time .timer,
+				.speaker-controls-time .clock,
+				.speaker-controls-time .pacing .hours-value,
+				.speaker-controls-time .pacing .minutes-value,
+				.speaker-controls-time .pacing .seconds-value {
 					font-size: 1.9em;
 				}
 
-				.speaker_controls-time .timer {
+				.speaker-controls-time .timer {
 					float: left;
 				}
 
-				.speaker_controls-time .clock {
+				.speaker-controls-time .clock {
 					float: right;
 					text-align: right;
 				}
 
-				.speaker_controls-time span.mute {
+				.speaker-controls-time span.mute {
 					opacity: 0.3;
 				}
 
-				.speaker_controls-time .pacing-title {
+				.speaker-controls-time .pacing-title {
 					margin-top: 5px;
 				}
 
-				.speaker_controls-time .pacing.ahead {
+				.speaker-controls-time .pacing.ahead {
 					color: blue;
 				}
 
-				.speaker_controls-time .pacing.on-track {
+				.speaker-controls-time .pacing.on-track {
 					color: green;
 				}
 
-				.speaker_controls-time .pacing.behind {
+				.speaker-controls-time .pacing.behind {
 					color: red;
 				}
 
-				.speaker_controls-notes {
+				.speaker-controls-notes {
 					padding: 10px 16px;
 				}
 
-				.speaker_controls-notes .value {
+				.speaker-controls-notes .value {
 					margin-top: 5px;
 					line-height: 1.4;
 					font-size: 1.2em;
@@ -555,8 +555,8 @@
 				 */
 				function setupNotes() {
 
-					notes = document.querySelector( '.speaker_controls-notes' );
-					notesValue = document.querySelector( '.speaker_controls-notes .value' );
+					notes = document.querySelector( '.speaker-controls-notes' );
+					notesValue = document.querySelector( '.speaker-controls-notes .value' );
 
 				}
 
@@ -646,7 +646,7 @@
 				function setupTimer() {
 
 					var start = new Date(),
-					timeEl = document.querySelector( '.speaker_controls-time' ),
+					timeEl = document.querySelector( '.speaker-controls-time' ),
 					clockEl = timeEl.querySelector( '.clock-value' ),
 					hoursEl = timeEl.querySelector( '.hours-value' ),
 					minutesEl = timeEl.querySelector( '.minutes-value' ),
