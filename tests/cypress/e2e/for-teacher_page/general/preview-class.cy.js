@@ -30,11 +30,7 @@ describe('Is able to preview class', () => {
     goToTeachersPage();
     // we navigate to our custom class
     // if this ever fails, it might be due to pagination
-    cy.getDataCy('view_class_link').then($viewClass => {
-      if (!$viewClass.is(':visible')) {
-          cy.getDataCy('view_classes').click();
-      }
-    });
+    openClassView();
     cy.get("a.view_class").contains(className).click();
     cy.getDataCy('customize_class_button').click();
     cy.get("#levels_dropdown").select("1");

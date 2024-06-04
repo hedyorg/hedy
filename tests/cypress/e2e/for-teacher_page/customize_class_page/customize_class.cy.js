@@ -1,32 +1,32 @@
-import { loginForTeacher, loginForStudent } from '../../tools/login/login.js'
-import { ensureClass } from "../../tools/classes/class";
+import { loginForTeacher } from '../../tools/login/login.js'
+import { ensureClass, openClassView, removeCustomizations } from "../../tools/classes/class";
 
-describe('customize class page', () => {
+const teachers = ["teacher1", "teacher4"];
+
+// test a first teacher and a second teacher
+teachers.forEach((teacher) => {
+  describe(`customize class page for ${teacher}`, () => {
     beforeEach(() => {
-      loginForTeacher();
+      loginForTeacher(teacher);
       ensureClass();
-      cy.getDataCy('view_class_link').then($viewClass => {
-        if (!$viewClass.is(':visible')) {
-            cy.getDataCy('view_classes').click();
-        }
-      });
+      openClassView();
       cy.getDataCy('view_class_link').first().click(); // Press on view class button
       cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
-      cy.getDataCy('customize_class_button').click(); // Press customize class button
-      cy.getDataCy('opening_date_container').should("not.be.visible")
-      cy.getDataCy('opening_date_label').click();
-      cy.getDataCy('opening_date_container').should("be.visible")
 
       // Remove any customizations that already exist to get the class into a predictable state
       // This always throws up a modal dialog
-      cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');
-      cy.getDataCy('remove_customizations_button').click();
-      cy.getDataCy('modal_yes_button').click();
-      cy.wait('@restoreCustomizations');
+      removeCustomizations();
+    });
+
+    it('checks the opening date container', () => {
+      cy.getDataCy('opening_date_container').should("not.be.visible")
+      cy.getDataCy('opening_date_label').click();
+      cy.getDataCy('opening_date_container').should("be.visible")
     });
 
     it('checks the option checkboxes', () => {
       // following code checks every single checkbox on the current page:
+      cy.getDataCy('opening_date_label').click();
       cy.get('[type="checkbox"]').parent('.switch').click({ multiple: true });
       cy.get('[type="checkbox"]').should('be.not.checked')
       cy.get('[type="checkbox"]').parent('.switch').click({ multiple: true });
@@ -63,7 +63,7 @@ describe('customize class page', () => {
       cy.getDataCy("*level_2")
         .should('be.visible');
 
-        cy.getDataCy("*level_1")
+      cy.getDataCy("*level_1")
         .should('not.exist');
     });
 
@@ -137,67 +137,9 @@ describe('customize class page', () => {
       });
     });
 
-    it('FIXME: selects two adventures and swaps them using drag and drop', () => {
-      /**
-       * FIXME: Since We changed the library that handles the drag and drop,
-       * this test is harder to make into work, since the Cypress documentation,
-       * and the documentation of the library are no use.
-       */
-
-      /*
-
-      // Click on level 1
-      selectLevel('1');
-
-      // Now it should be visible
-      cy.getDataCy('level_1').should('be.visible');
-
-      // Get the first and second adventure
-      cy.getDataCy('level_1')
-        .children()
-        .eq(0)
-        .invoke('attr', 'value')
-        .as('first_adventure');
-
-      cy.getDataCy('level_1')
-        .children()
-        .eq(1)
-        .invoke('attr', 'value')
-        .as('second_adventure');
-
-      // Getting their values first, and then moving them around
-      cy.get('@first_adventure').then(first_adventure => {
-        cy.get('@second_adventure').then(second_adventure => {
-
-          // Move the second adventure to the first place
-          cy.getDataCy('level_1')
-            .children()
-            .eq(1)
-            .trigger('dragstart')
-
-          cy.getDataCy('level_1')
-            .children()
-            .eq(0)
-            .trigger('drop')
-            .trigger('dragend');
-
-          // they should be inverted now
-          cy.getDataCy('level_1')
-            .children()
-            .eq(0)
-            .should('have.value', second_adventure);
-
-          cy.getDataCy('level_1')
-            .children()
-            .eq(1)
-            .should('have.value', first_adventure);
-        })
-      })
-    */
-    });
 
     it('Disabling current level displays a message', () => {
-      cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');
+      cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
 
       cy.getDataCy('level_1').should('be.visible');
       cy.get('#state_disabled').should('not.be.visible');
@@ -210,7 +152,7 @@ describe('customize class page', () => {
 
     it('Clicking the Reset button displays a confirm dialog', () => {
       /**
-       * At the beggining, the Parrot adventure should be in the level 1's adventures
+       * At the beginning, the Parrot adventure should be in the level 1's adventures
        */
       selectLevel('1');
       cy.get('#htmx_modal').should('not.exist');
@@ -240,19 +182,15 @@ describe('customize class page', () => {
 
         cy.getDataCy('available_adventures_current_level').select(`${hiddenAdventure}`);
 
-        cy.getDataCy(hiddenAdventure).should('exist');
+        cy.getDataCy(`${hiddenAdventure}`).should('exist');
       });
 
-      it('becomes invisible for the student', () => {
-        // FIXME: This test is hard to write, as I'd like to invite `student1`
-        // to the class, but inviting existing students takes a lot of steps...
-
-        // loginForStudent();
-      });
     });
   });
 
   function selectLevel(level) {
-    cy.getDataCy("adventures").select(level);
-    cy.getDataCy("adventures").should('have.value', level);
+    cy.getDataCy("adventures")
+      .select(level)
+      .should('have.value', level);
   }
+});

@@ -9,11 +9,7 @@ describe('Remove class test', () => {
     goToTeachersPage();
     cy.reload();
     cy.wait(500);
-    cy.getDataCy('view_class_link').then($viewClass => {
-      if (!$viewClass.is(':visible')) {
-          cy.getDataCy('view_classes').click();
-      }
-    });
+    openClassView();
     cy.get("#remove_class").first().click()
   })
 })

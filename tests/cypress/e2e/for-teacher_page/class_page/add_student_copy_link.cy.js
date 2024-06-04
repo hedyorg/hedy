@@ -4,11 +4,7 @@ it('Is able to see copy link to add student to class', () => {
     loginForTeacher();
     cy.wait(500);
     
-    cy.getDataCy('view_class_link').then($viewClass => {
-      if (!$viewClass.is(':visible')) {
-          cy.getDataCy('view_classes').click();
-      }
-    });
+    openClassView();
     cy.getDataCy('view_class_link').first().click();
     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
     cy.getDataCy('add_student').click();

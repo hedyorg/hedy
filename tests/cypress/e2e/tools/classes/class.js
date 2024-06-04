@@ -50,11 +50,7 @@ export function addStudents(classname, count) {
     goToTeachersPage();
     cy.wait(500);
 
-    cy.getDataCy('view_class_link').then($viewClass => {
-        if (!$viewClass.is(':visible')) {
-            cy.getDataCy('view_classes').click();
-        }
-    });
+    openClassView();
     cy.getDataCy('view_class_link').contains(new RegExp(`^${classname}$`)).click();
     cy.wait(500);
 
@@ -71,17 +67,29 @@ export function addStudents(classname, count) {
     return students;
 }
 
-export function addCustomizations(classname){
-    cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
-    goToTeachersPage();
-
+export function openClassView(){
     cy.getDataCy('view_class_link').then($viewClass => {
         if (!$viewClass.is(':visible')) {
             cy.getDataCy('view_classes').click();
         }
-    });
-    cy.get('[data-cy="view_class_link"]').contains(classname).click();
-    cy.get('#customize-class-button').click();
+      });
+}
+
+export function removeCustomizations(){
+    cy.getDataCy('customize_class_button').click();
+    cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');      
+    cy.getDataCy('remove_customizations_button').click();
+    cy.getDataCy('modal_yes_button').click();
+    cy.wait('@restoreCustomizations');
+}
+
+export function addCustomizations(classname){
+    cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
+    goToTeachersPage();
+
+    openClassView();
+    cy.getDataCy('view_class_link').contains(classname).click();
+    cy.getDataCy('customize_class_button').click();
     cy.getDataCy('opening_date_container').should("not.be.visible")
     cy.getDataCy('opening_date_label').click();
     cy.getDataCy('opening_date_container').should("be.visible")
@@ -102,14 +110,10 @@ export function createClassAndAddStudents(){
 export function navigateToClass(classname) {
     goToTeachersPage();
     cy.wait(500);
-    cy.getDataCy('view_class_link').then($viewClass => {
-        if (!$viewClass.is(':visible')) {
-            cy.getDataCy('view_classes').click();
-        }
-    });
+    openClassView();
     cy.getDataCy('view_class_link').contains(new RegExp(`^${classname}$`)).click();
     cy.wait(500);
-   cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
+    cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
 }
 
 export default {createClassAndAddStudents};

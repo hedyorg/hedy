@@ -6,11 +6,7 @@ let className = "CLASS1"
 beforeEach(() => {
     loginForTeacher("teacher4");
     goToTeachersPage();
-    cy.getDataCy('view_class_link').then($viewClass => {
-      if (!$viewClass.is(':visible')) {
-          cy.getDataCy('view_classes').click();
-      }
-    });
+    openClassView();
     cy.getDataCy('view_class_link').contains(new RegExp(`^${className}$`)).click();
     cy.getDataCy('survey_status_button').click();
 })

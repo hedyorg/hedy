@@ -9,11 +9,7 @@ describe('Is able to click on duplicate class', () => {
     createClass();
 
     // Click on duplicate icon
-    cy.getDataCy('view_class_link').then($viewClass => {
-      if (!$viewClass.is(':visible')) {
-          cy.getDataCy('view_classes').click();
-      }
-    });
+    openClassView();
     cy.get('#duplicate_class').first().click();
 
     // Checks for duplicate class name
@@ -34,11 +30,7 @@ describe('Is able to click on duplicate class', () => {
     goToTeachersPage();
 
     // Take actions only when teacher2 is a second teacher; i.e., having teacher1 as a teacher.
-    cy.getDataCy('view_class_link').then($viewClass => {
-      if (!$viewClass.is(':visible')) {
-          cy.getDataCy('view_classes').click();
-      }
-    });
+    openClassView();
     cy.get("#classes_table tbody #teacher_cell")
       .each(($username, i) => {
         if ($username.text().includes("teacher1")) {

@@ -4,11 +4,7 @@ it('Is able to go to customize class page', () => {
   loginForTeacher();
   cy.wait(500);
 
-  cy.getDataCy('view_class_link').then($viewClass => {
-    if (!$viewClass.is(':visible')) {
-        cy.getDataCy('view_classes').click();
-    }
-  });
+  openClassView();
   cy.getDataCy('view_class_link').first().click(); // Press view class button
 
   var currentUrl = '';

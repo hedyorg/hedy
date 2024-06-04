@@ -4,11 +4,7 @@ it('Is able to add student by name', () => {
     loginForTeacher();
     let student = 'student5'
 
-    cy.getDataCy('view_class_link').then($viewClass => {
-      if (!$viewClass.is(':visible')) {
-          cy.getDataCy('view_classes').click();
-      }
-    });
+    openClassView();
     cy.getDataCy('view_class_link').first().click();
     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
 
@@ -37,11 +33,7 @@ it('Is able to add student by name', () => {
     logout();
     loginForTeacher();
 
-    cy.getDataCy('view_class_link').then($viewClass => {
-      if (!$viewClass.is(':visible')) {
-          cy.getDataCy('view_classes').click();
-      }
-    });
+    openClassView();
     cy.getDataCy('view_class_link').first().click();
 
     cy.getDataCy('student_username_cell').should(($div) => {

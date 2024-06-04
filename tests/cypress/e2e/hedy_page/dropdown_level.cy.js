@@ -15,11 +15,7 @@ describe('Go to level dropdown', () => {
     goToTeachersPage();
 
     cy.wait(500);
-    cy.getDataCy('view_class_link').then($viewClass => {
-      if (!$viewClass.is(':visible')) {
-          cy.getDataCy('view_classes').click();
-      }
-    });
+    openClassView();
     cy.getDataCy('view_class_link').contains(new RegExp(`^${classname}$`)).click();
     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide());
     cy.getDataCy('customize_class_button').click();
