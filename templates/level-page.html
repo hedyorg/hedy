@@ -18,7 +18,7 @@
       </div>
   </div>
 {% endif %}
-<div id="level-header" class="bg-blue-200">
+<div id="level_header" class="bg-blue-200">
   <div class="ltr:pl-8 rtl:pr-8 py-2 flex gap-2 px-4 items-center justify-between w-full max-w-screen-2xl mx-auto">
     {% if customizations and customizations["available_levels"]%}
       <div class="dropdown relative">
@@ -27,14 +27,14 @@
           <span>{{ _('level_title') }} {{ level_nr }}
             &nbsp;
             {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}</span>
-          <svg id="level-arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <svg id="level_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
           </svg>
         </button>
         <div class="dropdown-menu dropdown-blue z-30 min-w-full" id="level_dropdown"
           style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
           _="on mutation of @style
-              set arrow to #level-arrow
+              set arrow to #level_arrow
               if *display == 'none'
                   remove .rotate-180 from arrow
               else if not arrow.classList.contains('rotate-180')
@@ -87,14 +87,14 @@
       <button class="green-btn font-semibold rounded inline-flex items-center gap-2 mr-2" id="dropdown_cheatsheet_button"
         onclick="$('#cheatsheet_dropdown').slideToggle('medium');">
         <span>{{ "🤔" }}</span>
-        <svg id="cheatsheet-arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+        <svg id="cheatsheet_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
           <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
         </svg>
       </button>
       <div class="dropdown-menu dropdown-green z-30 mt-2" id="cheatsheet_dropdown"
         style="display: none; padding: 0px !important;"
         _="on mutation of @style
-            set arrow to #cheatsheet-arrow
+            set arrow to #cheatsheet_arrow
             if *display == 'none'
                 remove .rotate-180 from arrow
             else if not arrow.classList.contains('rotate-180')

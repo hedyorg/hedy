@@ -1166,9 +1166,9 @@ def all_commands(input_string, level, lang='en'):
 
 
 def all_variables(input_string, level, lang='en'):
-    """Return the commands used in a program string.
+    """Return all variables used in a program string.
 
-    This function is still used in the web frontend, and some tests, but no longer by 'transpile'.
+    This function is still used by the roles of variables detection
     """
     program_root = parse_input(input_string, level, lang)
     abstract_syntax_tree = ExtractAST().transform(program_root)
@@ -2032,12 +2032,15 @@ class ConvertToPython_4(ConvertToPython_3):
             if self.numerals_language == "Latin":
                 converted = escape_var(name)
             else:
-                converted = f'convert_numerals("{self.numerals_language}",{escape_var(name)})'
+                converted = f'convert_numerals("{self.numerals_language}", {escape_var(name)})'
             return "{" + converted + "}"
         else:
+            # at level 4 backslashes are escaped in preprocessing, so we escape only '
             if self.is_quoted(name):
                 name = name[1:-1]
-            return name.replace("'", "\\'")  # at level 4 backslashes are escaped in preprocessing, so we escape only '
+                return name.replace("'", "\\'")
+            name = name if self.is_bool(name) else escape_var(name.replace("'", "\\'"))
+            return f'{{convert_numerals("{self.numerals_language}", {name})}}'
 
     def var_access(self, meta, args):
         name = args[0]
@@ -3070,7 +3073,7 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
 
 
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle',
-                                         'has_pressed', 'has_clear', 'has_music', 'commands', 'roles_of_variables'])
+                                         'has_pressed', 'has_clear', 'has_music', 'has_sleep', 'commands', 'roles_of_variables'])
 
 
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en", unused_allowed=True):
@@ -3566,16 +3569,18 @@ def determine_roles(lookup, input_string, level, lang):
         assignments = [x for x in lookup if x.name == var]
 
         if (assignments[0].tree.data == 'for_list'):
-            roles_dictionary[var] = 'walker'
+            roles_dictionary[var] = gettext('walker_variable_role')
+        elif (assignments[0].tree.data == 'for_loop'):
+            roles_dictionary[var] = gettext('stepper_variable_role')
         elif (assignments[0].type_ == 'list'):
-            roles_dictionary[var] = 'container'
+            roles_dictionary[var] = gettext('list_variable_role')
         elif (len(assignments) == 1):
             if (assignments[0].type_ == 'input'):
-                roles_dictionary[var] = 'input constant'
+                roles_dictionary[var] = gettext('input_variable_role')
             else:
-                roles_dictionary[var] = 'constant'
+                roles_dictionary[var] = gettext('constant_variable_role')
         else:
-            roles_dictionary[var] = 'unknown'
+            roles_dictionary[var] = gettext('unknown_variable_role')
 
     return roles_dictionary
 
@@ -3615,11 +3620,12 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         has_turtle = "forward" in commands or "turn" in commands or "color" in commands
         has_pressed = "if_pressed" in commands or "if_pressed_else" in commands or "assign_button" in commands
         has_music = "play" in commands
+        has_sleep = "sleep" in commands
 
         roles_of_variables = determine_roles(lookup_table, input_string, level, lang)
 
         parse_result = ParseResult(python, source_map, has_turtle, has_pressed,
-                                   has_clear, has_music, commands, roles_of_variables)
+                                   has_clear, has_music, has_sleep, commands, roles_of_variables)
 
         if populate_source_map:
             source_map.set_python_output(python)

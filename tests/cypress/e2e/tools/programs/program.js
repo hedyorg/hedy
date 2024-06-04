@@ -28,8 +28,9 @@ export function deleteProgram(name) {
                     const programId = $el[0].getAttribute("data-id");
                     cy.get(`#more_options_${programId}`).click();
                     cy.get(`#more_options_${programId}`).should("be.visible");
-                    cy.getBySel(`delete_non_submitted_program_${programId}`).click();
-                    cy.get('[data-cy="modal_yes_button"]').click();
+                    cy.getDataCy(`delete_non_submitted_program_${programId}`).click();
+                    cy.getDataCy('modal_yes_button').click();
+                    cy.wait(500);
             })
             }
         })

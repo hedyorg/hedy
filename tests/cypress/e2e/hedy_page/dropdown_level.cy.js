@@ -15,9 +15,9 @@ describe('Go to level dropdown', () => {
     goToTeachersPage();
 
     cy.wait(500);
-    cy.getBySel('view_class_link').then($viewClass => {
+    cy.getDataCy('view_class_link').then($viewClass => {
       if (!$viewClass.is(':visible')) {
-          cy.get('[data-cy="view_classes"]').click();
+          cy.getDataCy('view_classes').click();
       }
     });
     cy.getBySel('view_class_link').contains(new RegExp(`^${classname}$`)).click();

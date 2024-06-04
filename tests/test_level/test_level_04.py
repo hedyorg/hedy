@@ -1037,3 +1037,57 @@ class TestsLevel4(HedyTester):
                                 exception=hedy.exceptions.UndefinedVarException,
                                 skip_faulty=False,
                                 max_level=11)
+
+    #
+    # color
+    #
+    @parameterized.expand(hedy.english_colors)
+    def test_all_colors(self, color):
+        code = f'color {color}'
+        expected = HedyTester.turtle_color_command_transpiled(f'{{convert_numerals("Latin", {color})}}')
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle()
+        )
+
+    def test_color_red(self):
+        code = "color red"
+        expected = HedyTester.turtle_color_command_transpiled('{convert_numerals("Latin", red)}')
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            max_level=10
+        )
+
+    def test_color_translated(self):
+        lang = 'nl'
+        code = "kleur blauw"
+        expected = HedyTester.turtle_color_command_transpiled('{convert_numerals("Latin", blue)}', lang)
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            lang=lang,
+            max_level=10
+        )
+
+    def test_color_basic(self):
+        code = textwrap.dedent("""\
+        color red
+        forward 10""")
+
+        expected = HedyTester.dedent(
+            HedyTester.turtle_color_command_transpiled('{convert_numerals("Latin", red)}', 'en'),
+            HedyTester.forward_transpiled('10', self.level))
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            translate=False,
+            expected=expected
+        )
