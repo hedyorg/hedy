@@ -58,7 +58,7 @@ class TagsModule(WebsiteModule):
             adventure_tags.append(tag_name)
             self.db.update_adventure(adventure_id, {"tags": adventure_tags})
         else:
-            return gettext("tag_in_adventure"), 400
+            return make_response(gettext("tag_in_adventure"), 400)
 
         db_tag = self.db.read_tag(tag_name)
         if not db_tag:
