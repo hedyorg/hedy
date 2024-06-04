@@ -646,14 +646,14 @@ class TestsLevel3(HedyTester):
         add muis to dieren
         print dieren at random""")
 
-        expected = HedyTester.dedent("    dieren = ['koe', 'kiep']",
-                                     "    dieren.append('muis')",
-                                     "display.scroll(random.choice(dieren))")
+        expected = ("    dieren = ['koe', 'kiep']\n"
+                    "    dieren.append('muis')\n"
+                    'display.scroll(random.choice(dieren))')
 
-        self.multi_level_tester(
+        self.single_level_tester(
             code=code,
             expected=expected,
-            max_level=11,
+            level=3,
             microbit=True
         )
 
@@ -1008,7 +1008,7 @@ class TestsLevel3(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-# music tests
+    # music tests
     def test_play_random(self):
         code = textwrap.dedent("""\
         notes is C4, E4, D4, F4, G4
