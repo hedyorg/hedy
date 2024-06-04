@@ -504,7 +504,7 @@ export function setDateLevelInputColor(level: string) {
                                      .addClass('bg-gray-200')
   }
 
-  if ($('#level-' +  level).is(':visible')) {
+  if ($('#level_' +  level).is(':visible')) {
     setLevelStateIndicator(level);
   }
 }
