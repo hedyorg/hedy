@@ -68,6 +68,7 @@ teachers.forEach((teacher) => {
     });
 
     it('tests if the opening tests are not empty', () => {
+      cy.getDataCy('opening_date_label').click();
       // The following line has a bug in cypress:
       // cy.getDataCy("opening_date_level_" + index).type("2023-01-01").should("have.value", "2023-01-01")
       // The following tests only checks if the field is not empty using a for loop:
@@ -139,13 +140,14 @@ teachers.forEach((teacher) => {
 
 
     it('Disabling current level displays a message', () => {
+      cy.getDataCy('opening_date_label').click();
       cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
 
       cy.getDataCy('level_1').should('be.visible');
-      cy.get('#state_disabled').should('not.be.visible');
+      cy.getDataCy('state_disabled').should('not.be.visible');
 
-      cy.get('#enable_level_1').parent('.switch').click();
-      cy.get('#state_disabled').should('be.visible');
+      cy.getDataCy('enable_level_1').parent('.switch').click();
+      cy.getDataCy('state_disabled').should('be.visible');
 
       cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
     });
@@ -155,7 +157,7 @@ teachers.forEach((teacher) => {
        * At the beginning, the Parrot adventure should be in the level 1's adventures
        */
       selectLevel('1');
-      cy.get('#htmx_modal').should('not.exist');
+      cy.getDataCy('htmx_modal').should('not.exist');
       cy.getDataCy(`*level_1 parrot *hide`).click();
       cy.getDataCy('parrot').should('not.exist');
 
@@ -165,7 +167,7 @@ teachers.forEach((teacher) => {
       cy.getDataCy('parrot').should('be.visible');
     });
 
-    describe('an adventure that is hidden', () => {
+    it('an adventure that is hidden', () => {
       const hiddenAdventure = 'parrot';
 
       beforeEach(() => {
