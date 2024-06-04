@@ -12,7 +12,7 @@
    <h2 class="mx-4 lg:mx-16 px-2 mb-4">{{_('account_overview')}}</h2>
    <div class="flex flex-col gap-4 mx-4 lg:mx-16">
        {% if invitations %}
-           <h1 class="section-header" id="my-messages" onclick="$ ('#messages').toggle()">{{_('my_messages')}}</h1>
+           <h1 class="section-header" id="my_messages" onclick="$ ('#messages').toggle()">{{_('my_messages')}}</h1>
            <div id="messages" data-cy="messages" class="profile-section-body" style="display: block;">
              <h2 class="profile-section-body-header">{{_('my_messages')}}</h2>
              {% for invite_data in invitations %}
@@ -96,8 +96,8 @@
                 </div>
            </div>
        {% endif %}
-       <h1 class="section-header" onclick="$('#profile-change-body').toggle();" id="personal_settings">{{_('settings')}}</h1>
-       <div class="profile-section-body" id="profile-change-body">
+       <h1 class="section-header" onclick="$('#profile_change_body').toggle();" id="personal_settings">{{_('settings')}}</h1>
+       <div class="profile-section-body" id="profile_change_body">
         <form id="profile">
             <h2 class="profile-section-body-header">{{_('settings')}}</h2>
             <div class="flex flex-row items-center mb-2">
@@ -155,8 +155,8 @@
         </form>
         <button class="red-btn" onclick="hedyApp.destroy('{{_('are_you_sure')}}')" id="delete_profile_button">{{_('destroy_profile')}}</button>
        </div>
-      <h1 id="password_toggle" class="section-header" onclick="$ ('#change-password-body').toggle()">{{_('change_password')}}</h1>
-        <div class="profile-section-body" id="change-password-body">
+      <h1 id="password_toggle" class="section-header" onclick="$ ('#change_password_body').toggle()">{{_('change_password')}}</h1>
+        <div class="profile-section-body" id="change_password_body">
             <form id="change_password">
                 <h2 class="profile-section-body-header">{{_('change_password')}}</h2>
                 <div class="flex flex-row items-center mb-2">
@@ -165,7 +165,7 @@
                 </div>
                 <div class="flex flex-row items-center mb-2">
                     <label for="new-password" class="inline-block w-72">{{_('new_password')}}</label>
-                    <input id="new-password" name="new-password" class="personal-input" minlength="6" type=password role="presentation" autocomplete="new-password" required>
+                    <input id="new_password" name="new-password" class="personal-input" minlength="6" type=password role="presentation" autocomplete="new-password" required>
                 </div>
                 <div class="flex flex-row items-center mb-2">
                     <label for="password_repeat" class="inline-block w-72">{{_('repeat_new_password')}}</label>
@@ -176,7 +176,7 @@
         </div>
         {% if not is_teacher and not user_data['teacher_request'] %}
           <h1 id="teacher_toggle" class="section-header" onclick="$ ('#request-teacher-body').toggle()">{{_('request_teacher')}}</h1>
-            <div class="profile-section-body text-center" id="request-teacher-body">
+            <div class="profile-section-body text-center" id="request_teacher_body">
                 <button class="blue-btn" onclick="hedyApp.request_teacher_account();">{{_('request_teacher_account')}}</button>
             </div>
         {% endif %}

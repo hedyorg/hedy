@@ -383,7 +383,7 @@ export function show_doc_section(section_key: string) {
      $("#button-" + section_key).removeClass("green-btn");
      $("#button-" + section_key).addClass("blue-btn");
      $('.section').hide();
-     $ ('.common-mistakes-section').hide ();
+     $ ('.common_mistakes_section').hide ();
      $('#section-' + section_key).toggle();
    }
 }
@@ -440,13 +440,13 @@ export function restore_customization_to_default(prompt: string) {
     modal.confirm (prompt, async function () {
       // We need to know the current level that is selected by the user
       // so we can know which level to draw in the template  
-      let active_level_id : string = $('[id^=level-]')[0].id;
-      let active_level = active_level_id.split('-')[1]
+      let active_level_id : string = $('[id^=level_]')[0].id;
+      let active_level = active_level_id.split('_')[1]
       try {
         await htmx.ajax(
           'POST',
           `/for-teachers/restore-customizations?level=${active_level}`,
-          '#adventure-dragger'
+          '#adventure_dragger'
         )
         $('.other_settings_checkbox').prop('checked', false);
         // Remove the value from all input fields -> reset to text to show placeholder
@@ -486,7 +486,7 @@ export function enable_level(level: string) {
                                        .val('');
     }
 
-    if ($('#level-' + level).is(':visible')) {
+    if ($('#level_' + level).is(':visible')) {
       setLevelStateIndicator(level);
     }
 }
@@ -504,13 +504,13 @@ export function setDateLevelInputColor(level: string) {
                                      .addClass('bg-gray-200')
   }
 
-  if ($('#level-' +  level).is(':visible')) {
+  if ($('#level_' +  level).is(':visible')) {
     setLevelStateIndicator(level);
   }
 }
 
 export function add_account_placeholder() {
-    let row = $("#account_row_unique").clone();
+    let row = $('#account_row_unique').clone();
     row.removeClass('hidden');
     row.attr('id', "");
     // Set all inputs except class to required
@@ -668,21 +668,21 @@ export function initializeTeacherPage(options: InitializeTeacherPageOptions) {
 }
 
 function setLevelStateIndicator(level: string) {
-  $('[id^=state-]').addClass('hidden');
+  $('[id^=state_]').addClass('hidden');
 
   if ($('#opening_date_level_' + level).is(':disabled')) {
-    $('#state-disabled').removeClass('hidden');
+    $('#state_disabled').removeClass('hidden');
   } else if($('#opening_date_level_' + level).val() === ''){
-    $('#state-accessible').removeClass('hidden');
+    $('#state_accessible').removeClass('hidden');
   } else {
     var date_string : string = $('#opening_date_level_' + level).val() as string;
     var input_date = new Date(date_string);
     var today_date = new Date();
     if (input_date > today_date) {
       $('#opening_date').text(date_string);
-      $('#state-future').removeClass('hidden');
+      $('#state_future').removeClass('hidden');
     } else {
-      $('#state-accessible').removeClass('hidden');
+      $('#state_accessible').removeClass('hidden');
     }
   }
 }
@@ -718,7 +718,7 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
         setDateLevelInputColor($(this).attr('level')!);
       })
 
-      $('#levels-dropdown').on('change', function(){
+      $('#levels_dropdown').on('change', function(){
           var level = $(this).val() as string;
           setLevelStateIndicator(level);
       });
@@ -726,7 +726,7 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
       // Autosave customize class page
       // the third argument is used to trigger a GET request on the specified element
       // if the trigger (input in this case) is changed.
-      autoSave("customize_class", null, {elementId: "levels-dropdown", trigger: "input"});
+      autoSave("customize_class", null, {elementId: "levels_dropdown", trigger: "input"});
 
   });
 }
