@@ -34,9 +34,9 @@ describe('Test editor box functionality', () => {
     codeMirrorContent().should('have.text', 'print Hello worldask Hello!echo');
     cy.get('#runit').click();
     cy.get('#output').should('contain.text', 'Hello world');
-    cy.get('#ask-modal').should('be.visible');
-    cy.get('#ask-modal > form > div > input[type="text"]').type('Hedy!');
-    cy.get('#ask-modal > form > div > input[type="submit"]').click();
+    cy.get('#ask_modal').should('be.visible');
+    cy.get('#ask_modal > form > div > input[type="text"]').type('Hedy!');
+    cy.get('#ask_modal > form > div > input[type="submit"]').click();
     cy.get('#output').should('contain.text', 'Hedy!');
   });
 
@@ -47,18 +47,18 @@ describe('Test editor box functionality', () => {
     codeMirrorContent().should('have.text', 'print Hello worldask Hello!');
     cy.get('#runit').click();
     cy.get('#output').should('contain.text', 'Hello world');
-    cy.get('#ask-modal').should('be.visible');
+    cy.get('#ask_modal').should('be.visible');
 
     // Now we edit the program and the ask modal should be hidden
     codeMirrorContent().click();
     cy.focused().type('!');
 
-    cy.get('#ask-modal').should('not.be.visible');
+    cy.get('#ask_modal').should('not.be.visible');
 
     // Running program again and it should show the modal
     cy.get('#runit').click();
     cy.get('#output').should('contain.text', 'Hello world');
-    cy.get('#ask-modal').should('be.visible');
+    cy.get('#ask_modal').should('be.visible');
   });
 
   it ('When making an error the error modal should be shown', () => {
