@@ -486,7 +486,7 @@ export function enable_level(level: string) {
                                        .val('');
     }
 
-    if ($('#level-' + level).is(':visible')) {
+    if ($('#level_' + level).is(':visible')) {
       setLevelStateIndicator(level);
     }
 }

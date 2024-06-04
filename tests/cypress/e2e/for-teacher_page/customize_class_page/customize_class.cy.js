@@ -22,7 +22,7 @@ describe('customize class page', () => {
       cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');
       cy.getDataCy('remove_customizations_button').click();
       cy.getDataCy('modal_yes_button').click();
-      // cy.wait('@restoreCustomizations');
+      cy.wait('@restoreCustomizations');
     });
 
     it('checks the option checkboxes', () => {
