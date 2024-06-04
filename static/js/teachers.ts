@@ -440,13 +440,13 @@ export function restore_customization_to_default(prompt: string) {
     modal.confirm (prompt, async function () {
       // We need to know the current level that is selected by the user
       // so we can know which level to draw in the template  
-      let active_level_id : string = $('[id^=level-]')[0].id;
-      let active_level = active_level_id.split('-')[1]
+      let active_level_id : string = $('[id^=level_]')[0].id;
+      let active_level = active_level_id.split('_')[1]
       try {
         await htmx.ajax(
           'POST',
           `/for-teachers/restore-customizations?level=${active_level}`,
-          '#adventure-dragger'
+          '#adventure_dragger'
         )
         $('.other_settings_checkbox').prop('checked', false);
         // Remove the value from all input fields -> reset to text to show placeholder
@@ -668,21 +668,21 @@ export function initializeTeacherPage(options: InitializeTeacherPageOptions) {
 }
 
 function setLevelStateIndicator(level: string) {
-  $('[id^=state-]').addClass('hidden');
+  $('[id^=state_]').addClass('hidden');
 
   if ($('#opening_date_level_' + level).is(':disabled')) {
-    $('#state-disabled').removeClass('hidden');
+    $('#state_disabled').removeClass('hidden');
   } else if($('#opening_date_level_' + level).val() === ''){
-    $('#state-accessible').removeClass('hidden');
+    $('#state_accessible').removeClass('hidden');
   } else {
     var date_string : string = $('#opening_date_level_' + level).val() as string;
     var input_date = new Date(date_string);
     var today_date = new Date();
     if (input_date > today_date) {
       $('#opening_date').text(date_string);
-      $('#state-future').removeClass('hidden');
+      $('#state_future').removeClass('hidden');
     } else {
-      $('#state-accessible').removeClass('hidden');
+      $('#state_accessible').removeClass('hidden');
     }
   }
 }

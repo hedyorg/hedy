@@ -80,7 +80,7 @@ export function addCustomizations(classname){
             cy.getDataCy('view_classes').click();
         }
     });
-    cy.getData('[data-cy="view_class_link"]').contains(classname).click();
+    cy.getDataCy('view_class_link').contains(classname).click();
     cy.get('#customize_class_button').click();
     cy.get("#opening_date_container").should("not.be.visible")
     cy.get("#opening_date_label").click();

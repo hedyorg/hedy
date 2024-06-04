@@ -36,7 +36,7 @@ it('can complete the quiz by randomly clicking buttons', () => {
     // Now that the page has loaded, it's safe to inspect it and do a conditional thing
     // depending on what it looks like.
     cy.get('*[data-tabtarget="quiz"]').then(($quizpane) => {
-      if ($quizpane.find('*[data-cy="qui_done"]').length) {
+      if ($quizpane.find('*[data-cy="quiz_done"]').length) {
         // Yay, finished!
         return;
       }
@@ -49,7 +49,7 @@ it('can complete the quiz by randomly clicking buttons', () => {
       }
 
       // Otherwise click a random answer
-      cy.get('*[data-cy="quiz_choice"]:not(.incorrect_option)').then(($buttons) => {
+      cy.get('*[data-cy="quiz_choice"]:not(.incorrect-option)').then(($buttons) => {
         return Cypress._.sample($buttons.toArray());
       }).click();
       cy.get('button.pick-answer-button:visible').click();

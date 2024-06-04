@@ -58,7 +58,7 @@ describe("Tags of adventures", () => {
       .should("include.text", "training")
   })
 
-  it("remvoes a tag", () => {
+  it("removes a tag", () => {
     cy.intercept({
       method: "DELETE",
       url: "*",
@@ -69,7 +69,7 @@ describe("Tags of adventures", () => {
     cy.get("#tag_2")
       .should("be.visible")
       .should("include.text", "statements")
-    cy.get("#tag_2 .fa-circle_xmark")
+    cy.get("#tag_2 .fa-circle-xmark")
       .click()
     cy.wait("@deleteTag").should('have.nested.property', 'response.statusCode', 200)
     cy.get("#tags_list li")

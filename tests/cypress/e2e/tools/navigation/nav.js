@@ -105,7 +105,7 @@ export function goToEditAdventure()
             cy.get("#view_adventures").click();
         }
     });
-    cy.getDataCy("edit_link").first().click();
+    cy.getDataCy("edit_link_adventure").first().click();
 }
 
 export function goToExploreProgramsPage()

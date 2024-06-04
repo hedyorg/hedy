@@ -48,7 +48,7 @@ describe('Is able to run code', () => {
       
       const program_1 = "for i in range 1 to 10\n  choice = ask 'What is your choice?'"
       cy.intercept('/parse').as('parse')
-      cy.get('#editor > .cm_editor > .cm-scroller > .cm-content').clear()
+      cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').clear()
       cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').type(program_1)      
       cy.get('#runit').click()
       cy.wait('@parse')

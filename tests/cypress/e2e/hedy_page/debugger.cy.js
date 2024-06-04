@@ -540,7 +540,7 @@ function clearViaBackspace() {
 }
 
 function codeMirrorContent() {
-  return cy.get('#editor > .cm_editor > .cm-scroller > .cm-content');
+  return cy.get('#editor > .cm-editor > .cm-scroller > .cm-content');
 }
 
 function codeMirrorLines() {

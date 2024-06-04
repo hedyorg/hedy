@@ -5,7 +5,7 @@ describe('Navigating through the tabs with the buttons', () => {
       // Test when code is unchanged
       goToHedyPage();
       cy.wait(500)
-      cy.get('.next_tab').click();
+      cy.get('.next-tab').click();
       cy.wait(500)
       cy.url().should('include', "print_command");
 
@@ -14,13 +14,13 @@ describe('Navigating through the tabs with the buttons', () => {
       cy.wait(500)
       cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').click();
       cy.focused().type('hello');
-      cy.get('.next_tab').click();
+      cy.get('.next-tab').click();
       cy.wait(500)
       cy.url().should('include', "print_command");
 
 
       // Now go back to #default
-      cy.get('.previous_tab').click();
+      cy.get('.previous-tab').click();
       cy.wait(500)
       cy.url().should('include', "default");
     })
