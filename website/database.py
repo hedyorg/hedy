@@ -156,11 +156,21 @@ CLASSES = dynamo.Table(storage, "classes", "id",
 # - name (str): adventure name
 # - public (int): 1 or 0 whether it can be shared
 # - tags_id (str): id of tags that describe this adventure.
+
+
 ADVENTURES = dynamo.Table(storage, "adventures", "id",
                           types=only_in_dev({
                               'id': str,
+                              'date': int,
                               'creator': str,
+                              'name': str,
+                              'classes': ListOf(str),
+                              'level': str,
+                              'levels': ListOf(str),
+                              'content': str,
                               'public': bool,
+                              'language': str,
+                              'formatted_content': Optional(str)
                           }),
                           indexes=[
                               dynamo.Index("creator"),
