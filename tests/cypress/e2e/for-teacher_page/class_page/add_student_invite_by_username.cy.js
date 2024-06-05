@@ -1,4 +1,5 @@
 import {loginForTeacher, logout, login} from '../../tools/login/login.js'
+import { openClassView } from "../../tools/classes/class";
 
 it('Is able to add student by name', () => {
     loginForTeacher();

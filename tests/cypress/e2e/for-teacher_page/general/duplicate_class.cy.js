@@ -1,4 +1,4 @@
-import { createClass, addCustomizations } from '../../tools/classes/class.js';
+import { createClass, addCustomizations, openClassView } from '../../tools/classes/class.js';
 import { loginForTeacher, logout} from '../../tools/login/login.js'
 import { goToTeachersPage } from '../../tools/navigation/nav.js';
 

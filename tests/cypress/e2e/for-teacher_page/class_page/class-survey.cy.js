@@ -1,5 +1,6 @@
 import {loginForTeacher} from '../../tools/login/login.js'
 import { goToTeachersPage } from '../../tools/navigation/nav.js';
+import { openClassView } from "../../tools/classes/class";
 
 let className = "CLASS1"
 

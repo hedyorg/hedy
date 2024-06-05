@@ -1,6 +1,6 @@
 import { loginForStudent, loginForTeacher, logout } from "../tools/login/login";
-import {goToHedyLevel2Page, goToTeachersPage} from "../tools/navigation/nav";
-import {createClassAndAddStudents} from '../tools/classes/class.js'
+import  {goToHedyLevel2Page, goToTeachersPage } from "../tools/navigation/nav";
+import { createClassAndAddStudents, openClassView } from '../tools/classes/class.js'
 
 describe('Go to level dropdown', () => {
   it('Is not able to go to disabled level 5', () => {  

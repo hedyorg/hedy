@@ -1,5 +1,5 @@
-import { createClass } from '../../tools/classes/class.js';
-import {loginForTeacher} from '../../tools/login/login.js'
+import { createClass, openClassView } from '../../tools/classes/class.js';
+import { loginForTeacher } from '../../tools/login/login.js'
 import { goToTeachersPage } from '../../tools/navigation/nav.js';
 
 function goToLevel(targetLevel) {

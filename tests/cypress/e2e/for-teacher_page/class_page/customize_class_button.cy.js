@@ -1,4 +1,5 @@
 import {loginForTeacher} from '../../tools/login/login.js'
+import { openClassView } from "../../tools/classes/class";
 
 it('Is able to go to customize class page', () => {
   loginForTeacher();

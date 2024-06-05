@@ -1,6 +1,6 @@
-import {loginForTeacher} from '../../tools/login/login.js'
+import { loginForTeacher } from '../../tools/login/login.js'
 import { goToTeachersPage } from '../../tools/navigation/nav.js';
-import { createClass } from '../../tools/classes/class.js';
+import { createClass, openClassView } from '../../tools/classes/class.js';
 
 describe('Remove class test', () => {
   it('passes', () => {
