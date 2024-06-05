@@ -916,7 +916,7 @@ class ForTeachersModule(WebsiteModule):
         achievement = self.achievements.add_single_achievement(user["username"], "my_class_my_rules")
         if achievement:
             utils.add_pending_achievement({"achievement": achievement})
-        return make_response(gettext("class_customize_success"), 200)
+        return make_response({"success": gettext("class_customize_success")}, 200)
 
     @route("/create-accounts/<class_id>", methods=["GET"])
     @requires_teacher
