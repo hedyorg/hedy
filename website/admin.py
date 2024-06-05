@@ -119,6 +119,7 @@ class AdminModule(WebsiteModule):
             text_filter=substring,
             language_filter=language,
             keyword_language_filter=keyword_language,
+            prev_page_token=users.prev_page_token,
             next_page_token=users.next_page_token,
             current_page="admin",
             javascript_page_options=dict(page='admin-users'),
@@ -182,16 +183,16 @@ class AdminModule(WebsiteModule):
 
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("username"), str):
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
         if not isinstance(body.get("is_teacher"), bool):
-            return gettext("teacher_invalid"), 400
+            return make_response(gettext("teacher_invalid"), 400)
 
         user = self.db.user_by_username(body["username"].strip().lower())
 
         if not user:
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
 
         is_teacher_value = 1 if body["is_teacher"] else 0
         update_is_teacher(self.db, user, is_teacher_value)
@@ -232,16 +233,16 @@ class AdminModule(WebsiteModule):
 
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("username"), str):
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
         if not isinstance(body.get("email"), str) or not utils.valid_email(body["email"]):
-            return gettext("email_invalid"), 400
+            return make_response(gettext("email_invalid"), 400)
 
         user = self.db.user_by_username(body["username"].strip().lower())
 
         if not user:
-            return gettext("email_invalid"), 400
+            return make_response(gettext("email_invalid"), 400)
 
         token = make_salt()
         hashed_token = password_hash(token, make_salt())
@@ -252,7 +253,7 @@ class AdminModule(WebsiteModule):
 
         # If this is an e2e test, we return the email verification token directly instead of emailing it.
         if utils.is_testing_request(request):
-            return {"username": user["username"], "token": hashed_token}, 200
+            return make_response({"username": user["username"], "token": hashed_token}, 200)
         else:
             try:
                 send_localized_email_template(
@@ -263,7 +264,7 @@ class AdminModule(WebsiteModule):
                     username=user["username"],
                 )
             except BaseException:
-                return gettext("mail_error_change_processed"), 400
+                return make_response(gettext("mail_error_change_processed"), 400)
 
         return make_response('', 204)
 
@@ -273,8 +274,8 @@ class AdminModule(WebsiteModule):
         body = request.json
         user = self.db.get_public_profile_settings(body["username"].strip().lower())
         if not user:
-            return "User doesn't have a public profile", 400
-        return {"tags": user.get("tags", [])}, 200
+            return make_response(gettext("request_invalid"), 400)
+        return make_response({"tags": user.get("tags", [])}, 200)
 
     @route("/updateUserTags", methods=["POST"])
     @requires_admin
@@ -282,7 +283,7 @@ class AdminModule(WebsiteModule):
         body = request.json
         db_user = self.db.get_public_profile_settings(body["username"].strip().lower())
         if not user:
-            return "User doesn't have a public profile", 400
+            return make_response(gettext("request_invalid"), 400)
 
         tags = []
         if "admin" in user.get("tags", []):

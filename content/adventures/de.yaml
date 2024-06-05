@@ -877,17 +877,17 @@ adventures:
                     ### Übung
                     Debugge den Code. Viel Glück!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Achtung! Dieser Code muss debugged werden!**
                     ```
-                    movie_choices {is} dracula, fast and furious, home alone, barbie
-                    chosen_movie {is} movies {at} {random}
-                    {print} Tonight we will watch chosen _movies
-                    like {ask} Do you like that movie?
-                    {print} Tomorrow we will watch something else.
-                    {add} chosen_movie {to} movie_choices
-                    {print} Tomorrow we will watch tomorrows_movie
-                    tomorrows_movie {is} movie_choices {at} {random}
-                    I'll go get the popcorn! {print}
+                    film_auswahl {is} Dracula, Harry Potter, Shrek, Barbie
+                    film_wahl {is} filme {at} {random}
+                    {print} Heute schau wir uns film _wahl an
+                    Magst {ask} Magst du den Film?
+                    {print} Morgen schauen wir etwas anderes.
+                    {add} film_wahl {to} film_auswahl
+                    {print} Morgen schauen wir  morgige_filme
+                    morgige_filme {is} film_auswahl {at} {random}
+                    I hole uns mal das Popcorn! {print}
                     ```
             4:
                 story_text: |-
@@ -2344,12 +2344,12 @@ adventures:
                     Lass Hedy zufällig entscheiden!
                 example_code: |
                     ```
-                    _ Escape from the haunted house!
-                    _ There are 3 doors in front of you...
-                    _ _ _ Which door do you choose?
-                    _ You picked door ... choice
-                    monsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    _ You see...
+                    _ Entfliehe dem Spukhaus!
+                    _ Vor dir gibt es 3 Türen...
+                    _ _ _ Welche Tür wählst du?
+                    _ Du wählst Tür ... tür_wahl
+                    monster _ ein Zombie, ein Vampir, NICHTS DU BIST ENTFLOHEN
+                    _ Du siehst...
                     {sleep}
                     _ _ _ _
                     ```

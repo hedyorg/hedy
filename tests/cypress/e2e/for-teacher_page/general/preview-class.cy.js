@@ -20,42 +20,42 @@ describe('Is able to preview class', () => {
 
     goToLevel(1);
     // we expect a "print_command" and an "ask_command" tab
-    cy.get("#adventures-buttons [data-tab='print_command']");
-    cy.get("#adventures-buttons [data-tab='ask_command']");
+    cy.get("#adventures_buttons [data-tab='print_command']");
+    cy.get("#adventures_buttons [data-tab='ask_command']");
     // assert that no preview_class_banner is shown right now
-    cy.get("[data-cy='preview_class_banner']").should("not.exist");
+    cy.getDataCy("preview_class_banner").should("not.exist");
 
     // now we create a custom class
     let className = createClass();
     goToTeachersPage();
     // we navigate to our custom class
     // if this ever fails, it might be due to pagination
-    cy.get(".view_class").then($viewClass => {
+    cy.getDataCy('view_class_link').then($viewClass => {
       if (!$viewClass.is(':visible')) {
-          cy.get("#view_classes").click();
+          cy.getDataCy('view_classes').click();
       }
     });
     cy.get("a.view_class").contains(className).click();
-    cy.get("button#customize-class-button").click();
-    cy.get("#levels-dropdown").select("1");
+    cy.getDataCy('customize_class_button').click();
+    cy.get("#levels_dropdown").select("1");
     // we remove the print command from our custom class
     cy.get("div[data-cy='print_command'] span").click();
     // we preview the class without the print command
-    cy.get("a[data-cy='preview_class_link']").click();
+    cy.getDataCy("preview_class_link").click();
     // check the banner is there
-    cy.get("[data-cy='preview_class_banner']");
+    cy.getDataCy("preview_class_banner");
     // check the is_command is there
-    cy.get("#adventures-buttons [data-tab='ask_command']");
+    cy.get("#adventures_buttons [data-tab='ask_command']");
     // check that the print_command is absent
-    cy.get("#adventures-buttons [data-tab='print_command']").should("not.exist");
+    cy.get("#adventures_buttons [data-tab='print_command']").should("not.exist");
 
     // exit preview mode
-    cy.get("[data-cy='preview_class_banner'] a").click();
+    cy.get('[data-cy="preview_class_banner"] a').click();
 
     // we now expect the normal situation to be restored
     cy.get("#hedybutton").click();
     goToLevel(1);
-    cy.get("#adventures-buttons [data-tab='print_command']");
-    cy.get("[data-cy='preview_class_banner']").should("not.exist");
+    cy.get("#adventures_buttons [data-tab='print_command']");
+    cy.getDataCy("preview_class_banner").should("not.exist");
   })
 })

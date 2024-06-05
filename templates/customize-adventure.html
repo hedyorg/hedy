@@ -9,6 +9,7 @@ onclick="window.open('/for-teachers', '_self');">
 <br><br>
 <div class="flex flex-col gap-2">
     <h2>{{_('customize_adventure')}}</h2>
+    <div class="flex flex-row gap-2">
     <div class="border-gray-400 border rounded-lg p-4">
         <form onsubmit="event.preventDefault (); hedyApp.update_adventure('{{ adventure.id }}', true, '{{_('update_adventure_prompt')}}')"
             id="customize_adventure"
@@ -30,14 +31,14 @@ onclick="window.open('/for-teachers', '_self');">
                                                      appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
                                     onclick="$('#classes_dropdown').slideToggle('medium');">
                                     <span class="label" data-value="{{_('used_in')}}">{{_('used_in')}}</span>
-                                    <svg id="keyword-arrow_tag" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg"
+                                    <svg id="keyword_arrow_tag" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20">
                                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                                     </svg>
                                 </button>
                                 <div class="dropdown-menu overflow-auto dropdown-blue z-30 mt-2 w-full max-h-96" id="classes_dropdown"
                                     style="display: none; width: 100%;" _="on mutation of @style
-                                                        set arrow to #keyword-arrow_tag
+                                                        set arrow to #keyword_arrow_tag
                                                         if *display == 'none'
                                                             remove .rotate-180 from arrow
                                                         else if not arrow.classList.contains('rotate-180')
@@ -59,14 +60,14 @@ onclick="window.open('/for-teachers', '_self');">
                                                      appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
                                     onclick="$('#levels_dropdown').slideToggle('medium');">
                                     <span class="label" data-value="{{_('select_levels')}}">{{_('select_levels')}}</span>
-                                    <svg id="keyword-arrow_tag" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg"
+                                    <svg id="keyword_arrow_tag" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20">
                                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                                     </svg>
                                 </button>
                                 <div class="dropdown-menu overflow-auto dropdown-blue z-30 mt-2 w-full max-h-96" id="levels_dropdown"
                                     style="display: none; width: 100%;" _="on mutation of @style
-                                                        set arrow to #keyword-arrow_tag
+                                                        set arrow to #keyword_arrow_tag
                                                         if *display == 'none'
                                                             remove .rotate-180 from arrow
                                                         else if not arrow.classList.contains('rotate-180')
@@ -94,14 +95,14 @@ onclick="window.open('/for-teachers', '_self');">
                                                      appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
                                     onclick="$('#languages_dropdown').slideToggle('medium');">
                                     <span class="label" data-value="{{_('select_lang')}}">{{_('select_lang')}}</span>
-                                    <svg id="keyword-arrow_tag" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg"
+                                    <svg id="keyword_arrow_tag" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20">
                                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                                     </svg>
                                 </button>
                                 <div class="dropdown-menu overflow-auto dropdown-blue z-30 mt-2 w-full max-h-96" id="languages_dropdown"
                                     style="display: none; width: 100%;" _="on mutation of @style
-                                                        set arrow to #keyword-arrow_tag
+                                                        set arrow to #keyword_arrow_tag
                                                         if *display == 'none'
                                                             remove .rotate-180 from arrow
                                                         else if not arrow.classList.contains('rotate-180')
@@ -125,7 +126,7 @@ onclick="window.open('/for-teachers', '_self');">
                                         hx-trigger="keyup[keyCode == 13]"
                                         data-autosaved="true"
                                         hx-post="/tags/create/{{ adventure.id }}" 
-                                        hx-target="#tags-list"
+                                        hx-target="#tags_list"
                                         hx-swap="outerHTML"
                                         _="on click event.stopPropagation()
                                             on keypress if event.keyCode == 13 event.stopPropagation() end
@@ -135,17 +136,17 @@ onclick="window.open('/for-teachers', '_self');">
                                     <button class="green-btn" id="add_adventure_tags"
                                         hx-trigger="click"
                                         hx-post="/tags/create/{{adventure.id}}"
-                                        hx-target="#tags-list"
+                                        hx-target="#tags_list"
                                         hx-swap="outerHTML"
                                         hx-include="[name='tag']"                                        
                                         _="on htmx:afterRequest set value of #search_tags_input to ''"
                                         >{{_('add')}}</button>
     
                                     <div
-                                        id="tags-dropdown"
+                                        id="tags_dropdown"
                                         hx-trigger="load"
                                         hx-get="/tags?adventure_id={{adventure.id}}"
-                                        hx-target="#tags-dropdown"
+                                        hx-target="#tags_dropdown"
                                         hx-swap="outerHTML"
                                     ></div>
                             </div>
@@ -177,11 +178,7 @@ onclick="window.open('/for-teachers', '_self');">
 
                 <div class="flex flex-col w-full">
                     <h3 class="text-center mt-0 mb-4">{{ _('adventure') }}
-                        <button type="button" _="on click event.stopPropagation()
-                            go to the top of #explanation
-                            add .animate-pulse to #explanation
-                            wait 5s
-                            remove .animate-pulse from #explanation
+                        <button type="button" _="on click toggle .hidden on #explanation
                             ">
                             <svg class="fill-current h-4 w-4 text-blue-500 cursor-pointer !m-0 !p-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <path
@@ -191,7 +188,7 @@ onclick="window.open('/for-teachers', '_self');">
                     </h3>
                     <div class="flex">
                         {% set content = prepare_content_for_ckeditor(adventure.content) if adventure.content|length > 0 else prepare_content_for_ckeditor(_('template_code')) %}
-                        <textarea id="adventure-editor" class="hidden">{{content}}</textarea>
+                        <textarea id="adventure_editor" class="hidden">{{content}}</textarea>
                     </div>
                     
                     <div class="mt-2 mb-0 flex flex-row items-center text-center border-gray-500 border p-4 rounded-lg">
@@ -231,20 +228,21 @@ onclick="window.open('/for-teachers', '_self');">
                         
                     </div>
                 {% endif %}
-                <div id="explanation" class="flex flex-col gap-2 border border-black rounded-lg p-4 text-sm h-full w-1/2">
-                    <div>
-                        <button class="ck ck-button ck-off" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e0626e093592188450d58a9d030a1430d" aria-pressed="false" data-cke-tooltip-text="Code" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20"><path d="m12.5 5.7 5.2 3.9v1.3l-5.6 4c-.1.2-.3.2-.5.2-.3-.1-.6-.7-.6-1l.3-.4 4.7-3.5L11.5 7l-.2-.2c-.1-.3-.1-.6 0-.8.2-.2.5-.4.8-.4a.8.8 0 0 1 .4.1zm-5.2 0L2 9.6v1.3l5.6 4c.1.2.3.2.5.2.3-.1.7-.7.6-1 0-.1 0-.3-.2-.4l-5-3.5L8.2 7l.2-.2c.1-.3.1-.6 0-.8-.2-.2-.5-.4-.8-.4a.8.8 0 0 0-.3.1z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e0626e093592188450d58a9d030a1430d">Code</span></button>
-                        {{_('adventure_code_button')}}
-                    </div>
+            </div>
+        </div>
+    </div>
+        <div id="explanation" class="hidden flex flex-col gap-2 border border-black rounded-lg p-4 text-sm h-full w-1/4">
+            <div>
+                <button class="ck ck-button ck-off" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e0626e093592188450d58a9d030a1430d" aria-pressed="false" data-cke-tooltip-text="Code" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20"><path d="m12.5 5.7 5.2 3.9v1.3l-5.6 4c-.1.2-.3.2-.5.2-.3-.1-.6-.7-.6-1l.3-.4 4.7-3.5L11.5 7l-.2-.2c-.1-.3-.1-.6 0-.8.2-.2.5-.4.8-.4a.8.8 0 0 1 .4.1zm-5.2 0L2 9.6v1.3l5.6 4c.1.2.3.2.5.2.3-.1.7-.7.6-1 0-.1 0-.3-.2-.4l-5-3.5L8.2 7l.2-.2c.1-.3.1-.6 0-.8-.2-.2-.5-.4-.8-.4a.8.8 0 0 0-.3.1z"></path></svg><span class="ck ck-button__label" id="ck-editor__aria-label_e0626e093592188450d58a9d030a1430d">Code</span></button>
+                {{_('adventure_code_button')}}
+            </div>
 
-                    <div>
-                        <button class="ck ck-button ck-off ck-splitbutton__action" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e0cf21e456f5ca9fde674c9cbb2192bef" aria-pressed="false" data-cke-tooltip-text="Insert code block" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20"><path d="M12.87 12.61a.75.75 0 0 1-.089.976l-.085.07-3.154 2.254 3.412 2.414a.75.75 0 0 1 .237.95l-.057.095a.75.75 0 0 1-.95.237l-.096-.058-4.272-3.022-.003-1.223 4.01-2.867a.75.75 0 0 1 1.047.174zm2.795-.231.095.057 4.011 2.867-.003 1.223-4.272 3.022-.095.058a.75.75 0 0 1-.88-.151l-.07-.086-.058-.095a.75.75 0 0 1 .15-.88l.087-.07 3.412-2.414-3.154-2.253-.085-.071a.75.75 0 0 1 .862-1.207zM16 0a2 2 0 0 1 2 2v9.354l-.663-.492-.837-.001V2a.5.5 0 0 0-.5-.5H2a.5.5 0 0 0-.5.5v15a.5.5 0 0 0 .5.5h3.118L7.156 19H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h14zM5.009 15l.003 1H3v-1h2.009zm2.188-2-1.471 1H5v-1h2.197zM10 11v.095L8.668 12H7v-1h3zm4-2v1H7V9h7zm0-2v1H7V7h7zm-4-2v1H5V5h5zM6 3v1H3V3h3z"></path></svg></button>
-                        {{_('adventure_codeblock_button')}}
-                    </div>
-                    <div class="flex flex-row items-center">
-                        {{_('adventure_exp_3')}}
-                    </div>
-                </div>
+            <div>
+                <button class="ck ck-button ck-off ck-splitbutton__action" type="button" tabindex="-1" aria-labelledby="ck-editor__aria-label_e0cf21e456f5ca9fde674c9cbb2192bef" aria-pressed="false" data-cke-tooltip-text="Insert code block" data-cke-tooltip-position="s"><svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 20 20"><path d="M12.87 12.61a.75.75 0 0 1-.089.976l-.085.07-3.154 2.254 3.412 2.414a.75.75 0 0 1 .237.95l-.057.095a.75.75 0 0 1-.95.237l-.096-.058-4.272-3.022-.003-1.223 4.01-2.867a.75.75 0 0 1 1.047.174zm2.795-.231.095.057 4.011 2.867-.003 1.223-4.272 3.022-.095.058a.75.75 0 0 1-.88-.151l-.07-.086-.058-.095a.75.75 0 0 1 .15-.88l.087-.07 3.412-2.414-3.154-2.253-.085-.071a.75.75 0 0 1 .862-1.207zM16 0a2 2 0 0 1 2 2v9.354l-.663-.492-.837-.001V2a.5.5 0 0 0-.5-.5H2a.5.5 0 0 0-.5.5v15a.5.5 0 0 0 .5.5h3.118L7.156 19H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h14zM5.009 15l.003 1H3v-1h2.009zm2.188-2-1.471 1H5v-1h2.197zM10 11v.095L8.668 12H7v-1h3zm4-2v1H7V9h7zm0-2v1H7V7h7zm-4-2v1H5V5h5zM6 3v1H3V3h3z"></path></svg></button>
+                {{_('adventure_codeblock_button')}}
+            </div>
+            <div class="flex flex-row items-center">
+                {{_('adventure_exp_3')}}
             </div>
         </div>
     </div>

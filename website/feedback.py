@@ -28,7 +28,7 @@ class FeedbackModule(WebsiteModule):
         body = request.form
         # Request validation
         if not body.get("message") or not body.get("category"):
-            return gettext('feedback_message_error'), 400
+            return make_response(gettext('feedback_message_error'), 400)
 
         feedback = {
             "id": uuid.uuid4().hex,
@@ -44,9 +44,9 @@ class FeedbackModule(WebsiteModule):
             self.db.store_feedback(feedback)
         except Exception as e:
             print(e)
-            return gettext('feedback_message_error'), 500
+            return make_response(gettext('feedback_message_error'), 500)
 
-        response = make_response("")
+        response = make_response('', 204)
         response.headers["HX-Push-URL"] = 'false'
         response.headers["HX-Trigger"] = json.dumps({"hideFeedbackModal": True})
 

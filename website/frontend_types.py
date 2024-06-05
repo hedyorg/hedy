@@ -108,10 +108,17 @@ def halve_adventure_content(content, max_char_length=750):
     example_code = ""
     if len(text_without_tags) > max_char_length:
         # Split text at a suitable breaking point
-        split_index = content.find('</p>', len(text_without_tags)//2)  # Find a closing paragraph tag.
+        split_index = -1
+        chosen_tag = None
+        for t in ["pre", "p"]:
+            split_index = content.find(f'</{t}>', len(text_without_tags)//2)  # Find a closing paragraph tag.
+            if split_index:
+                chosen_tag = t
+                break
         if split_index > -1:
-            text = content[:split_index]
-            example_code = content[split_index:]
+            # since we find the first occurence of </chosen_tag>, we append: / + > + 1 (to start from next char) = 3
+            text = content[:split_index + len(chosen_tag) + 3]
+            example_code = content[split_index + len(chosen_tag) + 3:]
         else:
             # If no suitable split point found, don't truncate content
             text = content

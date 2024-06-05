@@ -190,7 +190,7 @@ class PublicAdventuresModule(WebsiteModule):
             javascript_page_options=js,
         )
 
-        response = make_response(temp)
+        response = make_response(temp, 200)
         response.headers["HX-Trigger"] = json.dumps({"updateTSCode": js})
         return response
 
@@ -202,12 +202,12 @@ class PublicAdventuresModule(WebsiteModule):
         if not current_adventure:
             return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
         elif current_adventure["creator"] == user["username"]:
-            return gettext("adventure_duplicate"), 400
+            return make_response(gettext("adventure_duplicate"), 400)
 
         adventures = self.db.get_teacher_adventures(user["username"])
         for adventure in adventures:
             if adventure["name"] == current_adventure["name"]:
-                return gettext("adventure_duplicate"), 400
+                return make_response(gettext("adventure_duplicate"), 400)
 
         level = current_adventure.get("level")
         adventure = {

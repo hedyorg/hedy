@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-05-06 19:11+0000\n"
+"PO-Revision-Date: 2024-05-16 14:12+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: es <LL@li.org>\n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5.4-dev\n"
+"X-Generator: Weblate 5.6-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -25,9 +25,8 @@ msgstr "Has intentado usar la variable {name} en la línea {access_line_number},
 msgid "Cyclic Var Definition"
 msgstr "Debes declarar la variable `{variable}` antes de poder usarla en el lado derecho del comando `{is}`."
 
-#, fuzzy
 msgid "Else Without If Error"
-msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
+msgstr "En la línea {line_number} has utilizado un `{else}` pero no hay ningún `{if}` en la línea anterior."
 
 msgid "Function Undefined"
 msgstr "Has intentado utilizar la función {name}, pero no la has definido."
@@ -68,9 +67,8 @@ msgstr "Parece que olvidaste usar un comando con el texto que pusiste en la lín
 msgid "Missing Additional Command"
 msgstr "Parece que olvidaste terminar de escribir `{command}` en la línea {line_number}. Intenta añadir `{missing_command}` a tu código."
 
-#, fuzzy
 msgid "Missing Colon Error"
-msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
+msgstr "A partir del nivel 17, `{command}` necesita un `:`. Parece que olvidaste usar uno al final de la línea {line_number}."
 
 msgid "Missing Command"
 msgstr "Parece que has olvidado de usar un comando en la línea {line_number}."
@@ -183,9 +181,8 @@ msgstr "Añadir estudiantes"
 msgid "add_students_options"
 msgstr "Añadir opciones de estudiantes"
 
-#, fuzzy
 msgid "add_your_language"
-msgstr "Add your language!"
+msgstr "¡Agrega tu idioma!"
 
 msgid "admin"
 msgstr "Admin"
@@ -400,9 +397,11 @@ msgstr "Errores comunes"
 msgid "congrats_message"
 msgstr "¡Felicitaciones, {username}, has alcanzado los siguientes resultados con Hedy!"
 
-#, fuzzy
 msgid "connect_guest_teacher"
-msgstr "I would like to be connected with a guest teacher who can give a few lessons"
+msgstr "Me gustaría que me pusieran en contacto con un profesor invitado que pueda dar algunas clases"
+
+msgid "constant_variable_role"
+msgstr ""
 
 msgid "content_invalid"
 msgstr "Esta aventura no es válida."
@@ -500,9 +499,8 @@ msgstr "un guión"
 msgid "default_401"
 msgstr "Parece que no tienes autorización..."
 
-#, fuzzy
 msgid "default_403"
-msgstr "Looks like this action is forbidden..."
+msgstr "Parece que esta acción está prohibida..."
 
 msgid "default_404"
 msgstr "No pudimos encontrar esa página..."
@@ -546,9 +544,8 @@ msgstr "Directamente abierto"
 msgid "disable"
 msgstr "Deshabilitado"
 
-#, fuzzy
 msgid "disable_explore_page"
-msgstr "Disable explore page"
+msgstr "Desactivar la página de exploración"
 
 msgid "disable_parsons"
 msgstr "Desactivar todos los rompecabezas"
@@ -829,6 +826,9 @@ msgstr "Sangría incorrecta"
 msgid "input"
 msgstr "input de `{ask}`"
 
+msgid "input_variable_role"
+msgstr ""
+
 msgid "integer"
 msgstr "un número"
 
@@ -886,9 +886,8 @@ msgstr "Esperando a que se presione un botón..."
 msgid "keyword_language_invalid"
 msgstr "Por favor, selecciona un idioma para palabras clave (selecciona Inglés o tu propio idioma)."
 
-#, fuzzy
 msgid "landcode_phone_number"
-msgstr "Please also add your country's landcode"
+msgstr "Por favor, añadir también el prefijo internacional de su país"
 
 msgid "language"
 msgstr "Idioma"
@@ -952,6 +951,9 @@ msgstr "Enlace"
 
 msgid "list"
 msgstr "una lista"
+
+msgid "list_variable_role"
+msgstr ""
 
 msgid "live_dashboard"
 msgstr "Panel de control en directo"
@@ -1062,9 +1064,8 @@ msgstr "Modo de desarrollador obligatorio"
 msgid "more_options"
 msgstr "Más opciones"
 
-#, fuzzy
 msgid "multiple_keywords_warning"
-msgstr "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}"
+msgstr "Está intentando utilizar la palabra clave {orig_keyword}, pero esta palabra clave puede tener varios significados. Por favor, elija la que está intentando utilizar de esta lista y cópiela y péguela en su código, llaves incluidas: {keyword_list}"
 
 msgid "multiple_levels_warning"
 msgstr "Hemos observado que ha seleccionado varios niveles y ha incluido fragmentos de código en su aventura, lo que podría causar problemas con el resaltador de sintaxis y la traducción automática de palabras clave"
@@ -1297,9 +1298,8 @@ msgstr "Texto personal"
 msgid "personal_text_invalid"
 msgstr "Tu texto personal es inválido."
 
-#, fuzzy
 msgid "phone_number"
-msgstr "Phone number"
+msgstr "Número de teléfono"
 
 msgid "postfix_classname"
 msgstr "Sufijo de nombre de clase"
@@ -1321,6 +1321,10 @@ msgstr "Está previsualizando la clase <em>{class_name}</em> como profesor."
 
 msgid "previous_campaigns"
 msgstr "Ver campañas anteriores"
+
+#, fuzzy
+msgid "previous_page"
+msgstr "Previous page"
 
 msgid "print_logo"
 msgstr "imprimir"
@@ -1459,6 +1463,9 @@ msgstr "¿Estás seguro de que quieres reportar este programa?"
 
 msgid "report_success"
 msgstr "Este programa ha sido reportado"
+
+msgid "request_invalid"
+msgstr ""
 
 msgid "request_teacher"
 msgstr "¿Te gustaría aplicar a una cuenta de profesor?"
@@ -1634,6 +1641,9 @@ msgstr "Empezar a enseñar"
 msgid "step_title"
 msgstr "Tarea"
 
+msgid "stepper_variable_role"
+msgstr ""
+
 msgid "stop_code_button"
 msgstr "Detener programa"
 
@@ -1761,12 +1771,12 @@ msgid "template_code"
 msgstr ""
 "¡Esta es la explicación de mi aventura!\n"
 "\n"
-"De esta manera puedo mostrar un comando: <code>{print}</code>\n"
+"De esta manera puedo mostrar un comando: <code>print</code>\n"
 "\n"
-"Pero a veces podría querer mostrar un fragmento de código, como este:\n"
+"Pero a veces es posible que quiera mostrar un fragmento de código, como este:\n"
 "<pre>\n"
-"ask ¿Cómo te llamas?\n"
-"echo entonces tu nombre es\n"
+"pregunta ¿Cuál es tu nombre?\n"
+"echo así que tu nombre es \n"
 "</pre>"
 
 msgid "this_turns_in_assignment"
@@ -1882,6 +1892,9 @@ msgstr "Su programa no es favorito."
 msgid "unique_usernames"
 msgstr "Los nombres de usuario deben ser únicos."
 
+msgid "unknown_variable_role"
+msgstr ""
+
 msgid "unlock_thresholds"
 msgstr "Desbloquear umbrales de nivel"
 
@@ -1956,6 +1969,9 @@ msgstr "Ver programa"
 
 msgid "view_slides"
 msgstr "Ver diapositivas"
+
+msgid "walker_variable_role"
+msgstr ""
 
 msgid "welcome"
 msgstr "Bienvenido/a"
@@ -2166,4 +2182,10 @@ msgstr "Tu programa"
 
 #~ msgid "variables"
 #~ msgstr "Variables"
+
+#~ msgid "container_variable_role"
+#~ msgstr ""
+
+#~ msgid "input_constant_variable_role"
+#~ msgstr ""
 
