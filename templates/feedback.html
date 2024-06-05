@@ -1,0 +1,64 @@
+{% extends "auth.html" %}
+
+{% block regular_content %}
+    <h1>Feedback Reports</h1>
+
+    <form>
+        <div class="flex flex-row px-4 w-full py-2 rounded-lg gap-4">
+            <select id="category-dropdown" name="category" class="block appearance-none w-1/8 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
+                <option selected value="">&mdash; Category &mdash;</option>
+                {% for category in categories %}
+                    <option value="{{ category }}" {% if request.args.get('category') == category %}selected{% endif %}>{{ category }}</option>
+                {% endfor %}
+            </select>
+            <select id="page-dropdown" name="page" class="block appearance-none w-1/8 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
+                <option selected value="">&mdash; Page &mdash;</option>
+                {% for page in pages %}
+                    <option value="{{ page }}" {% if request.args.get('page') == page %}selected{% endif %}>{{ page }}</option>
+                {% endfor %}
+            </select>
+            <select id="user-dropdown" name="username" class="block appearance-none w-1/8 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
+                <option selected value="">&mdash; User &mdash;</option>
+                {% for username in users %}
+                    <option value="{{ username }}" {% if request.args.get('username') == username %}selected{% endif %}>{{ username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </form>
+  </div>
+
+{% for category, feedback_list in feedback_by_category.items() %}
+  <div class="flex flex-col gap-4 mb-8 md:px-16 " id="classes_table">
+    <div class="overflow-x-auto rounded-lg shadow-lg">
+      <h2>Category: <strong>{{category}}</strong></h2>
+      <table class="w-full border border-gray-400">
+        <thead>
+          <tr class="bg-blue-300 text-blue-900">
+            <th class="px-2 py-2 text-center">Username</th>
+            <th class="px-2 py-2 text-center">Email</th>
+            <th class="px-10 ">Message</th>
+            <th class="px-10 ">Page</th>
+            <th class="px-10 ">Category</th>
+            <th class="px-10 ">Date</th>
+            <th class="px-10 bg-blue-900 text-white">Github issue</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for feedback in feedback_list %}
+            <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
+              <td class="text-center px-4 py-2">{{ feedback.username }}</td>
+              <td id="teacher_cell" class="text-center p-2">{{ feedback.email }}</td>
+              <td class="text-center p-2">{{ feedback.message }}</td>
+              <td class="text-center p-2">{{ feedback.page }}</td>
+              <td class="text-center p-2">{{ feedback.category }}</td>
+              <td class="text-center p-2">{{ feedback.date|format_date }}</td>
+              <td class="text-center p-2"><a target="_blank"
+                href="https://github.com/hedyorg/hedy/issues/new?labels=feedback&title={{feedback.category}}&body=%23%20Description%0A{{feedback.message}}%0A%0A%23%20Page%0A{{feedback.page}}%0A%0A%23%20Date%0A{{feedback.date|format_date}}">Create issue</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}

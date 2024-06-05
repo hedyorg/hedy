@@ -173,6 +173,14 @@ class AuthHelper(unittest.TestCase):
         self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
         return self.login_user(self.username)
 
+    def make_current_user_super_teacher(self):
+        """Mark the current user as super-teacher.
+
+        Need to log in again to refresh the session.
+        """
+        self.post_data('admin/mark-super-teacher', {'username': self.username})
+        return self.login_user(self.username)
+
     def given_user_is_logged_in(self):
         self.user = self.get_any_logged_user()
 
@@ -232,7 +240,7 @@ class AuthHelper(unittest.TestCase):
 
     def destroy_current_user(self):
         assert self.username is not None
-        self.post_data('auth/destroy', '')
+        self.post_data('auth/destroy', '', 204)
         # Remove any records of this user
         USERS.pop(self.username)
 
@@ -585,7 +593,7 @@ class TestAuth(AuthHelper):
 
         # WHEN logging out the user
         # THEN receive an OK response code from the server
-        self.post_data('auth/logout', '')
+        self.post_data('auth/logout', '', 204)
 
         # WHEN retrieving the user profile with the same cookie
         # THEN first receive a redirect response code from the server, and the next
@@ -965,7 +973,7 @@ class TestAuth(AuthHelper):
 
         # WHEN destroying the public profile
         # THEN receive an OK response from the server
-        self.post_data('auth/destroy_public', public_profile, expect_http_code=200)
+        self.post_data('auth/destroy_public', public_profile, expect_http_code=204)
 
 
 class TestProgram(AuthHelper):

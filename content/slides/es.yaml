@@ -1010,12 +1010,12 @@ levels:
                 {print} 'El nuevo precio es ' new_price ' dólares'
         6:
             header: Debugging
-            text: Let's debug this code!
+            text: ¡Depuremos este código!
             code: |-
                 item = 'no comprado'
                 {print} 'Me gustaría comprar este artículo'
                 price == {ask} '¿Cuál es el precio?'
-                {si} precio inferior o igual a 10
+                {if} precio inferior o igual a 10
                     {print} '¡Eso es mucho!'
                     artículo = 'comprado'
                 {if} precio es superior a 10 {and} inferior o igual a 20
@@ -1023,7 +1023,7 @@ levels:
                     artículo = 'comprado'
                 {if} precio es superior a 20 {and} inferior a 50
                     {print} '¡Eso es demasiado!'
-                {si} precio es mayor o igual que 50
+                {if} precio es mayor o igual que 50
                     {print} '¡De ninguna manera!'
                 {if} artículo =! comprado
                     {print} 'Vergüenza.. No lo voy a comprar.
@@ -1052,26 +1052,26 @@ levels:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                numbers = 1, 2
+                números = 1, 2
 
                 {for} i {in} {range} 3 {to} 50
-                    {add} x {to} numbers
-                    i = + 1
+                     {add} x {to} números
+                     yo = + 1
 
-                random_number = numbers {random}
-                guesses = 10
+                número_aleatorio = números {aleatorio}
+                conjeturas = 10
 
-                {while} guess = 0
-                    answer = 'Guess my number:'
-                    {if} answer >= random_number
-                        {print} 'lower'
-                        guesses = guesses -1
-                    {if} answer > random_number
-                        {print} 'higher!'
-                        guesses = guesses
-                    {else} answer = random_number
-                        {print} 'correct'
-                        guesses = 10
+                {while} adivina = 0
+                     respuesta = 'Adivina mi número:'
+                     {if} respuesta >= número_aleatorio
+                         {imprimir} 'inferior'
+                         conjeturas = conjeturas -1
+                     {if} respuesta > número_aleatorio
+                         {print} '¡más alto!'
+                         conjeturas = conjeturas
+                     {else} respuesta = número_aleatorio
+                         {imprimir} 'correcto'
+                         conjeturas = 10
 
             debug: 'True'
         4:

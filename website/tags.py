@@ -1,4 +1,4 @@
-from flask import request, g
+from flask import make_response, request, g
 from flask_babel import gettext
 import jinja_partials
 import uuid
@@ -58,7 +58,7 @@ class TagsModule(WebsiteModule):
             adventure_tags.append(tag_name)
             self.db.update_adventure(adventure_id, {"tags": adventure_tags})
         else:
-            return gettext("tag_in_adventure"), 400
+            return make_response(gettext("tag_in_adventure"), 400)
 
         db_tag = self.db.read_tag(tag_name)
         if not db_tag:
@@ -89,7 +89,8 @@ class TagsModule(WebsiteModule):
         # This only deletes a tag from an adventure.
         # TODO: perhaps allow admin to permanently delete a tag.
         if not tag or not adventure_id:
-            return {}, 200
+            # is this not suppossed to be an error response?
+            return make_response('', 204)
 
         tag_name = tag.strip()
         db_tag = self.db.read_tag(tag_name)

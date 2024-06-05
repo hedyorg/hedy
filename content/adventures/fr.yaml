@@ -36,7 +36,7 @@ adventures:
                     Tu peux ensuite mettre ce nom n'importe où dans une phrase.
                 example_code: |-
                     ```
-                    nom {is} {ask} Quel est le nom du personnage principal ?
+                    nom {is} {ask} Quel est le nom du personnage principal ?
                     {print} nom va courir dans les bois
                     {print} nom a un peu peur
                     {print} Soudain, il entend un bruit étrange…
@@ -66,7 +66,7 @@ adventures:
                     ```
                     {print} Il entend un bruit
                     animaux {is} un 🐿, un 🦔, une 🦇, une 🦉
-                    animal {is} {ask} C'est quoi à ton avis ?
+                    animal {is} {ask} C'est quoi à ton avis ?
                     {add} animal {to_list} animaux
                     {print} C'était animaux {at} {random}
                     ```
@@ -216,19 +216,19 @@ adventures:
                     ```
             13:
                 story_text: |
-                    En utilisant les commandes `{and}` et `{or}` , vous pouvez rendre vos histoires plus complètes. Vous pouvez poser deux question combiner vos réponses.
+                    En utilisant les commandes `{and}` et `{or}`, vous pouvez rendre vos histoires plus complètes. Vous pouvez poser deux questions combiner vos réponses.
 
                     ### Exercice 1
-                    Regardez le code d'exemple et complétez-le. Puis, ajoutez au moins 2 `{if}`  de plus  avec `{and}` ou `{or}`.
+                    Regardez le code d'exemple et complétez-le. Puis, ajoutez au moins 2 `{if}`  de plus avec `{and}` ou `{or}`.
 
                     ### Exercice 2
                     Prenez une histoire des niveaux précédents et ajoutez un `{and}` ou un `{or}` de plus.
                 example_code: |
                     ```
-                    {print} "Notre hero se promène en forêt"
+                    {print} "Notre heroïne se promène en forêt"
                     {print} "Le chemin se sépare en deux"
-                    chemin = {ask} "Quel chemin doit-elle choisir ?"
-                    arme = {ask} "Quelle arme doit-elle prendre ?"
+                    chemin = {ask} "Quel chemin doit-elle choisir ?"
+                    arme = {ask} "Quelle arme doit-elle prendre ?"
                     {if} chemin {is} "gauche" {and} arme {is} "épée"
                         _
                     ```
@@ -627,22 +627,22 @@ adventures:
                     ```
             9:
                 story_text: |
-                    Au niveau 6 tu as créé une calculatrice, à ce niveau, tu peux étendre ce code pour qu'il pose plusieurs questions.
+                    Au niveau précédent, tu as créé une calculatrice. À ce niveau, tu peux étendre ce code pour qu'il pose plusieurs questions.
 
                     ### Exercice
-                    Peux-tu terminer la ligne 10 pour faire fonctionner le programme ?
+                    Peux-tu terminer la ligne 10 pour faire fonctionner le programme ?
 
                     ### Exercice 2
-                    Donne au joueur ou à la joueuse un retour quand il ou elle répond bien ou mal. Pour y parvenir, étant ton programme avec un `{else}`.
+                    Donne au joueur ou à la joueuse un retour quand il ou elle répond. Comme par exemple, `{print} "Correct !"` ou `{print} "Faux ! La réponse correcte est " réponse_correcte`.
                 example_code: |
                     ```
                     score = 0
                     {repeat} 10 {times}
                         nombres = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        nombre1 = nombres {at} {random}
-                        nombre2 = nombres {at} {random}
-                        bonne_réponse = nombre1 * nombre2
-                        {print}"Combien font " nombre1 " fois " nombre2 " ?"
+                        nombre_1 = nombres {at} {random}
+                        nombre_2 = nombres {at} {random}
+                        bonne_réponse = nombre_1 * nombre_2
+                        {print}"Combien font " nombre_1 " fois " nombre_2 " ?"
                         tentative = {ask} "Quel est ta réponse ?"
                         {print} "Ta réponse est " tentative
                         {if} _ {is} _
@@ -713,17 +713,17 @@ adventures:
                     ```
             13:
                 story_text: |
-                    ### Exercise 1
-                    Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
+                    ### Exercice 1
+                    Rendons le programme d'entrainement un petit peu plus difficile. Le joueur doit maintenant répondre à deux questions correctement. Complète les espaces vide pour terminer le programme.
 
-                    ### Exercise 2 (extra)
-                    Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
-                    Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
-                    Empty the programming field and create your own solution.
+                    ### Exercice 2
+                    Parfois, les calculs peuvent avoir plusieurs réponses correctes. Par exemple, 10 peut être divisé par 5 et par 2. Donc la question « Quel nombre divise 10 ? » peut être répondue par 2 ou par 5.
+                    Pour chaque calcul qui peut avoir plusieurs réponses correctes, demande au joueur de répondre, et détermine si sa réponse est correcte en utilisant `{or}`.
+                    Efface la zone de programmation et crée ta propre solution à partir de zéro.
                 example_code: |
                     ```
-                    réponse1 = {ask} 'Combien font 10 fois 7'
-                    réponse2 = {ask} 'Combien font 6 fois 7?'
+                    réponse1 = {ask} "Combien font 10 fois 7 ?"
+                    réponse2 = {ask} "Combien font 6 fois 7 ?"
                     {if} _ _ _ _ _ _ _
                         {print} _
                     ```
@@ -741,20 +741,15 @@ adventures:
                     Tu y arrives ? Génial ! Veux-tu ajouter davantage de fonctions à ta calculatrice ? **Cette aventure se poursuit dans l'onglet suivant !**
                 example_code: |
                     ```
-                    {print} 'Guess which number'
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    number = numbers {at} {random}
-                    game = 'on'
-                    {for} i {in} {range} 1 {to} 10
-                        {if} game == 'on'
-                            guess = {ask} 'Which number do you think it is?'
-                            {if} guess > number
-                                {print} 'Lower!'
-                            {if} guess < number
-                                {print} 'Higher!'
-                            {if} guess == number
-                                {print} 'You win!'
-                                game = 'over'
+                    {define} calculate_mean_grade
+                        total = 0
+                        {for} i {in} {range} 1 {to} 4
+                            grade = {ask} _
+                            total = total + _
+                            return _ / 4
+
+                    mean_grade = {call} _
+                    {print} 'Your mean grade is ' mean_grade
                     ```
             15:
                 story_text: |
@@ -1090,7 +1085,7 @@ adventures:
                 story_text: |-
                     ### Exercice
                     Déboguez ce code. Bonne chance !
-                example_code: "**Attention ! Ce code doit être débogué !**\n```\n{define}movie_recommendation {with} name\n\taction_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'\n\tromance_movies = 'Love Actually', 'The Notebook', 'Titanic'\n\tcomedy_movies = 'Mr Bean' 'Barbie''Deadpool'\n\tkids_movies = 'Minions', 'Paddington', 'Encanto'\n\t{if} name {is} 'Camila' {or} name {is} 'Manuel'\n\t\trecommended_movie = kids_movie {at} {random}\n\t{if} name {is} 'Pedro' {or} 'Gabriella'\n\t\tmood = {ask} 'What you in the mood for?'\n\t{if} mood {is} 'action'\n\t\trecommended_movie = comedy_movies {at} {random}\n\t{if} mood {is} 'romance'\n\t\trecommended_movie = romance_movies\n\t{if} mood {is} 'comedy'\n\t\trecommended_movie = comedy_movies {at} {random}\n\n{print} 'Je recommande ' recommended_movie ' pour ' name\n\nname = {ask} 'Qui regarde ?'\nrecommendation = {ask} 'Voulez-vous une recommandation?'\n{if} recommendation {is} 'yes'\n\t{print} movie_recommendation {with} name\n{else}\n\t{print} 'Pas de problème!'\n```\n"
+                example_code: "**Attention ! Ce code doit être débogué !**\n```\n{define}recommender_un_film {with} nom\n    films_d_action == \"Piège de cristal\", \"Fast and Furious\", \"Inglorious Bastards\"\n    films_romantiques = \"Love Actually\", \"Les Pages de notre amour\", \"Titanic\"\n    comédies = \"Mr Bean\" \"Barbie\"\"Deadpool\"\n    films_enfants = \"Les Minions\", \"Paddington\", \"Encanto\"\n    {if} nom {is} \"Camila\" {or} name {is} \"Emmanuel\"\n        film_recommandé = films_enfants {at} {random}\n    {if} nom {is} \"Pedro\" {or} \"Gabrielle\"\n            humeur = {ask} \"De quelle humeur êtes-vous ?\"\n        {if} humeur {is} \"energique\"\n            film_recommandé = comédies {at} {random}\n        {if} humeur {is} \"romantique\"\n            film_recommandé = films_romantiques\n    {if} humeur {is} \"joyeuse\"\n            film_recommandé = comédies {at} {random}\n\n{print} \"Je recommande \" film_recommandé \" à \" nom\n\nnom = {ask} \"Qui regarde ?\"\nrecommendation = {ask} \"Voulez-vous une recommandation ?\"\n{if} recommendation {is} \"oui\"\n{print} recommender_un_film {with} nom\n{else}\n{print} \"Pas de problème !\"\n```\n"
             14:
                 story_text: |-
                     ### Exercice
@@ -1436,9 +1431,9 @@ adventures:
                     ```
             14:
                 story_text: |
-                    Avec le programme ci-dessous, tu peux calculer si tu as réussi une matière à l'école (c'est-à-dire si tu as obtenu une note de 6 ou plus).
+                    Avec le code d'exemple, tu peux calculer si tu as réussi une matière à l'école (c'est-à-dire si tu as obtenu une note de six ou plus).
                     Tu peux voir que ce code est extrêmement inefficace en raison de la longueur excessive du code dans la ligne 5.
-                    Toutes les différentes notes de 1 à 5 doivent être programmées séparément. Heureusement pour toi, dans ce niveau, tu vas apprendre comment le faire sans avoir à écrire ce code extrêmement long !
+                    Toutes les différentes notes de 1 à 5 doivent être programmées séparément. Heureusement pour toi, dans ce niveau, tu vas apprendre comment le faire sans avoir à écrire ce code extrêmement long !
                 example_code: |
                     ```
                     premiere_note = {ask} "Quelle note as-tu eu à ton premier test ?"
@@ -1458,13 +1453,13 @@ adventures:
                     Dans ce niveau, tu vas apprendre une commande qui rendra tout cela beaucoup plus facile !
                 example_code: |
                     ```
-                    jeu {is} "en cours"
+                    jeu = "en cours"
                     {for} i {in} {range} 1 {to} 100
-                        {if} jeu {is} "en cours"
-                            réponse = {ask} "Est-ce que tu veux continuer ?"
-                            {if} réponse {is} "non"
-                                jeu {is} "fini"
-                            {if} réponse {is} "oui"
+                        {if} jeu == "en cours"
+                            réponse = {ask} "Est-ce que tu veux continuer ?"
+                            {if} réponse == "non"
+                                jeu = "fini"
+                            {if} réponse == "oui"
                                 {print} "Ok on continue"
                     ```
             16:
@@ -1548,11 +1543,11 @@ adventures:
             6:
                 story_text: |
                     Tu peux aussi faire à nouveau un dé Earthworm a ce niveau-ci, mais maintenant tu peux aussi calculer combien de points tu as obtenu.
-                    Tu sais peut-être que le ver vaut pour 5 points. Donc, après un lancé, tu peux immédiatement calculer combien de points tu as totalisé.
-                    Voici le code pour calculer les points avec un seul dé :
+                    Tu sais peut-être que le ver vaut pour 5 points. Donc, après un lancer, tu peux immédiatement calculer combien de points tu as totalisé.
+                    Voici le code pour calculer les points avec un seul dé :
 
                     ### Exercice
-                    Peux-tu faire le code pour totaliser le score de 8 dés ? Pour faire ça, tu dois copier et coller certaines des lignes de code.
+                    Peux-tu faire le code pour totaliser le score de 8 dés ? Pour faire ça, tu dois copier et coller certaines des lignes de code.
                 example_code: |
                     ```
                     choix = 1, 2, 3, 4, 5, ver
@@ -1563,7 +1558,7 @@ adventures:
                     {print} "Cela fait un total de " points " points"
                     ```
                 example_code_2: |
-                    As-tu réussi à calculer le score pour 8 dés ? Cela nécessite beaucoup de copier-coller, n'est-ce pas ? Nous allons rendre ça plus facile au niveau 7 !
+                    As-tu réussi à calculer le score pour 8 dés ? Cela nécessite beaucoup de copier-coller, n'est-ce pas ? Nous allons rendre ça plus facile au niveau 7 !
             7:
                 story_text: |
                     Tu peux aussi faire encore un dé à ce niveau. Avec le code `{repeat}` tu peux facilement jeter une pleine poignée de dés.
@@ -1579,7 +1574,7 @@ adventures:
                 story_text: |
                     ### Exercice
                     Est-ce que quelqu'un met trop de temps pour lancer les dés ? À ce niveau, tu peux demander à Hedy de lancer tous les dés en même temps !
-                    Change les noms par les noms de tes amis ou de ta famille, et termine le code pour qu'ils fassent tous un lancer.
+                    Change les noms par les noms de tes amis ou de ta famille, et termine le code.
                 example_code: |
                     ```
                     joueurs = Anne, Jean, Jeanne
@@ -1675,11 +1670,11 @@ adventures:
                     Maintenant, tu peux copier les lignes 3 à 5 quelques fois (e.g. 7 fois) pour calculer pour la semaine entière.
                     As-tu fait le code pour la semaine entière ?
                 story_text_2: |
-                    Si tu as vraiment beaucoup de malchance, le programme précédent pourrait te choisir pour toute la semaine ! Ce n'est pas juste !
-                    Pour faire un système équitable, tu peux utiliser la commande `{remove}` pour supprimer la personne choisie de la liste. De cette façon tu ne seras pas obligé de faire la vaisselle une fois de plus tant que tout le monde n'aura pas eu son tour.
+                    Si tu as vraiment beaucoup de malchance, le programme précédent pourrait te choisir pour toute la semaine ! Ce n'est pas juste !
+                    Pour faire un système équitable, tu peux utiliser la commande `{remove}` pour supprimer la personne choisie de la liste. De cette façon, tu ne seras pas obligé de faire la vaisselle à nouveau tant que tout le monde n'aura pas eu son tour.
 
-                    Lundi et mardi ont déjà été faits pour toi ! Peux-tu ajouter le reste de la semaine ?
-                    Et… peux-tu trouver la solution pour quand la liste est vide ?
+                    Lundi et mardi ont déjà été faits pour toi ! Peux-tu ajouter le reste de la semaine ?
+                    Et… peux-tu trouver la solution pour quand la liste est vide ?
                 example_code_2: |
                     ```
                     personnes = maman, papa, Emma, Sophie
@@ -1786,6 +1781,14 @@ adventures:
                     {for} i {in} {range} 1 {to} 10:
                         {print} i
                     {print} "Caché ou pas, j'arrive !"
+                    ```
+            18:
+                story_text: |
+                    Lastly, we'll turn `{for} i {in} {range} 1 to 5` into real Python code, like this:
+                example_code: |
+                    ```
+                    {for} i {in} {range}(1,5):
+                        {print} (i)
                     ```
     fortune:
         name: La voyante
@@ -1912,11 +1915,11 @@ adventures:
                     Peux-tu remplire les espaces vides avec les bonnes commande ?
                 example_code: |
                     ```
-                    {print} "Je suis Hedy la voyante !"
+                    {print} "Je suis Hedy la voyante !"
                     {print} "Tu peux me poser 3 questions."
                     réponses = oui, non, peut-être
                     _ _ _
-                        question = {ask} "Que veux-tu savoir ?"
+                        question = {ask} "Que veux-tu savoir ?"
                         {print} question
                         {sleep}
                         {print} "Ma boule de cristal dit… " réponses {at} {random}
@@ -1964,7 +1967,7 @@ adventures:
                     Pour créer une fonction, utilise `{define}` et donne un nom à la fonction. Ensuite, ajoute toutes les lignes que tu veux dans la fonction dans un bloc indenté, sous la ligne du `{define}`.
                     Laisse une ligne vide après le bloc pour rendre ton code beau et propre. Bon travail ! tu as créé une fonction !
 
-                    Maintenant, quand nous aurons besoin de ce bloc de code, nous pourrons juste appeler la fonction avec `{call}` suivi du nom de la fonction ! Nous n'aurons plus besoins d'écrire ce bloc a nouveau.
+                    Maintenant, quand nous aurons besoin de ce bloc de code, nous pourrons juste appeler la fonction avec `{call}` suivi du nom de la fonction ! Nous n'aurons plus besoins d'écrire ce bloc à nouveau.
 
                     Regarde cet exemple de code du jeu Twister. La fonction « joue_un_tour » contient un bloc de code qui choisi quel membre doit aller où.
 
@@ -1974,7 +1977,7 @@ adventures:
 
                     ### Exercice 2
                     Améliore ton code en ajoutant une variable « personnes ». Utilise la variable pour distribuer aux joueurs et joueuses leur instruction de jeu personnelle.
-                    Par exemple : « Ahmed, main droit`{define}`e sur vert » ou « Jessica, pied gauche sur jaune ».
+                    Par exemple : « Ahmed, main droite sur vert » ou « Jessica, pied gauche sur jaune ».
                 example_code: |
                     ```
                     cotés = "gauche", "droit(e)"
@@ -1994,23 +1997,25 @@ adventures:
                     ```
             13:
                 story_text: |
-                    Now that you've learned how to use functions, you'll learn how to use a function with an argument.
-                    An **argument** is a variable that is used within a function. It is not used outside the function.
+                    Maintenant que tu as appris à utiliser les fonctions, tu peux apprendre à utiliser une fonction avec un paramètre.
+                    Un **paramètre** est une variable utilisable dans la fonction dont la valeur est définie au moment de l'appel de la fonction. Cette variable ne peut pas être utilisée en dehors de la fonction.
 
                     For example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.
-                    In this example code the argument `place` is used. Place is a variable that is only used in the function, so an argument.
-                    To use `place` we have programmed the line `define song with place`.
-                    When the function is called, computer will replace the argument `place`, with the piece of text after `call song with`.
+                    In this example code the argument 'place' is used. Place is a variable that is only used in the function, so an argument.
+                    To use 'place' we have placed `{with} place` after `{define} chanson`.
+                    When the function is called, the computer will replace the argument 'place', with the piece of text after `{call} chanson {with}`.
 
-                    ### Exercise
-                    The next verse of this song goes:
+                    ### Exercice
+                    Le second couplet de cette chanson est le suivant :
 
+                    ```not_hedy_code
                     Last night as I lay on my pillow
                     Last night as I lay on my bed
                     Last night as I lay on my pillow
                     I dreamed that my Bonnie is dead
+                    ```
 
-                    Can you program this verse in the same way as the example?
+                    Peux-tu programmer ce couplet de la même manière que dans l’exemple ?
                 example_code: |
                     ```
                     {define} chanson {with} place
@@ -2043,6 +2048,35 @@ adventures:
                     new_price = _ calculate_new_price {with} old_price, _
                     {print} 'The new price is ' new_price ' dollar'
                     ```
+            18:
+                story_text: |
+                    Let's make functions the Pythons way! To define a function, we no longer use:
+
+                    `{define} name_function {with} argument_1, argument_2:`
+
+                    but we use:
+
+                    `{def} name_function(argument_1, argument_2):`.
+
+
+                    If you don't want to use arguments, you just leave the space between the parantheses empty.
+                    To call a function, we don't need the `{call}` command anymore. You just type the name of the function.
+                example_code: |
+                    ```
+                    {def} calculate_score(answer, correct_answer):
+                        {if} answer == correct_answer:
+                            score = 1
+                        {elif} answer == '?':
+                            score = 0
+                        {else}:
+                            score = -1
+                        {return} score
+
+                    answer = {input} ('Where can you find the Eiffel Tower?')
+                    correct_answer = 'Paris'
+                    score = calculate_score(answer, correct_answer)
+                    {print} ('Your score is... ', score)
+                    ```
     guess_my_number:
         name: Devine le nombre
         default_save_name: devine le nombre
@@ -2059,14 +2093,14 @@ adventures:
                     {print} "Devine le nombre"
                     nombres = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                     nombre = nombres {at} {random}
-                    jeu = "commencer"
+                    jeu = "en cours"
                     {for} i {in} {range} 1 {to} 10
-                        {if} jeu == "commencer"
+                        {if} jeu == "en cours"
                             nombre_deviner = {ask} "De quel nombre pensez-vous qu'il s'agit ?"
                             {if} nombre_deviner > nombre
-                                {print} "Moins!"
+                                {print} "Moins !"
                             {if} nombre_deviner < nombre
-                                {print} "Plus!"
+                                {print} "Plus !"
                             {if} nombre_deviner == nombre
                                 {print} "C'est gagné !"
                                 jeu = "fini"
@@ -2615,12 +2649,12 @@ adventures:
                 story_text_2: |
                     ### Exercice
                     Il est temps de faire tes propres variables !
-                    Dans le code d'exemple, nous avons défini la variable `animaux_préférés`. En ligne 1, la variable reçoit une valeur, et en ligne 2 nous avons utilisé la variable dans une commande `{print}`.
+                    Dans le code d'exemple, nous avons défini la variable `animal_préféré`. En ligne 1, la variable reçoit une valeur, et en ligne 2 nous avons utilisé la variable dans une commande `{print}`.
                     Pour commencer, termine notre exemple en remplissant l'espace vide avec le nom de ton animal préféré. Ensuite, essaye d'écrire 3 autres codes toi-même. Choisi un nom de variable, donne-lui une valeur avec la commande `{is}`. Ensuite, utilise ta nouvelle variable dans une commande `{print}`, comme dans l'exemple.
                 example_code_2: |
                     ```
-                    animaux_préférés {is} _
-                    {print} J'aime les animaux_préférés
+                    animal_préféré {is} _
+                    {print} J'aime les animal_préféré
                     ```
             6:
                 story_text: |
@@ -2640,9 +2674,16 @@ adventures:
                     Ces comparaisons s'utilisent avec `{if}`, comme ceci :
                 example_code: |
                     ```
-                    âge = {ask} "Quel âge as-tu ?"
-                    {if} âge > 12
-                         {print} "Tu es plus agé que moi !"
+                    age = {ask} 'How old are you?'
+                    {if} age > 12
+                        {print} 'You are older than I am!'
+                    ```
+                    ```
+                    age = {ask} 'How old are you?'
+                    {if} age < 12
+                        {print} 'You are younger than me!'
+                    {else}
+                        {print} 'You are older than me!'
                     ```
                 story_text_2: |
                     A parti de ce niveau et pour les suivants, si tu veux comparer l'égalité, tu dois utiliser deux fois le signe égale. C'est ainsi que font la plupart des langages de programmation.
@@ -2852,12 +2893,12 @@ adventures:
                     Then think of 3 more questions to add to this quiz.
                 example_code: |
                     ```
-                    answer {is} {ask} 'What is the capital of Zimbabwe?'
-                    {if} answer {is} Harare {play} C6
+                    réponse {is} {ask} "Quelle est la capital du Zimbabwe ?"
+                    {if} réponse {is} Harare {play} C6
                     _
                     ```
             6:
-                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting numbers. \nThen, see if you can compose a song using the numbers.\n"
+                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\nThis calls for musical maths! Try out the example code a couple of times with different starting numbers.\nThen, see if you can compose a song using the numbers.\n"
                 example_code: |
                     ```
                     number = {ask} 'Say a starting number between 1 and 67'
@@ -3268,8 +3309,8 @@ adventures:
                     ```
     pressit:
         name: Presse une touche
-        default_save_name: Pressed
-        description: Try linking a keyboard key to a command!
+        default_save_name: Pressé
+        description: Essaie d'associer une touche du clavier à une commande !
         levels:
             5:
                 story_text: |
@@ -3339,11 +3380,11 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercice
-                    Dans Hedy tu as des exercices pour chaque aventure. Un exercice te permet de t'entraîner aux nouvelles commandes et concepts, et te permet de jouer avec les codes d'exemple.
+                    Dans Hedy, tu as des exercices pour chaque aventure. Un exercice te permet de t'entraîner aux nouvelles commandes et concepts, et te permet de jouer avec les codes d'exemple.
                     Dans cet exercice, tu verras un espace vide rose. Tu dois écrire quelque chose à la place de cet espace vide pour que ton code fonctionne.
 
                     Complète l'espace vide en écrivant la commande `{print}` et ajoute cinq autres lignes de code. Chaque ligne doit commencer par la commande `{print}`.
-                    Amuse-toi !
+                    Amuse-toi !
                 example_code_2: |
                     ```
                     _ Salut !
@@ -3364,10 +3405,14 @@ adventures:
                     temperature = 25
                     {print}("Il fait ", temperature, " degrés dehors")
                     ```
+                    ```
+                    nom = "Hedy"
+                    {print}("Mon nom est ", nom)
+                    ```
     quizmaster:
         name: Quizmaster
         default_save_name: Quizmaster
-        description: Make your own quiz!
+        description: Fabrique ton propre quiz !
         levels:
             14:
                 story_text: |
@@ -3421,9 +3466,9 @@ adventures:
                     L'exemple montre le problème si tu entoures ton texte avec les apostrophes. Peux-tu le corriger en remplaçant par des guillemets ?
                 example_code_2: |
                     ```
-                    {print} _ Voici comment ça ne marche pas avec les apostrophes : _
+                    {print} _ Voici comment ça ne marche pas avec les apostrophes : _
                     {print} 'aujourd'hui je fais du babysitting avec les enfants de ma sœur'
-                    {print} 'qu'y a-t-il de plus amusant que ça ?'
+                    {print} 'qu'y a-t-il de plus amusant que ça ?'
                     ```
             12:
                 story_text: |
@@ -3523,11 +3568,11 @@ adventures:
         levels:
             7:
                 story_text: |
-                    ## Répète ! Répète ! Répète !
-                    Le niveau 7 ajoute la commande `{repeat}`. `{repeat}` peut être utilisée pour exécuter une ligne de code plusieurs fois. Comme ceci :
+                    ## Répète ! Répète ! Répète !
+                    Le niveau 7 ajoute la commande `{repeat}`. `{repeat}` peut être utilisée pour exécuter une ligne de code plusieurs fois. Comme ceci :
 
                     ### Exercice
-                    Joue avec la commande `{repeat}`. Peux-tu faire la chanson d'anniversaire avec seulement 3 lignes de code à la place de 4 maintenant ?
+                    Joue avec la commande `{repeat}`. Peux-tu faire la chanson d'anniversaire avec seulement 3 lignes de code à la place de 4 maintenant ?
                 example_code: |
                     ```
                     {repeat} 3 {times} {print} "Hedy est amusante !"
@@ -3885,17 +3930,25 @@ adventures:
                     ```
             13:
                 story_text: |
-                    In this level we can use the new commands to upgrade our restaurant.
-                    We use `{and}` to see {if} two things are both the case.
+                    À ce niveau, tu vas apprendre de nouvelles commandes pour ajouter encore plus de code.
+
+                    ### Exercice 1
+                    Mets un `{and}` et un `{or}` à l'endroit logique dans le programme.
+
+                    ### Exercice 2
+                    Agrandis ton restaurant avec au moins un `{and}` et un `{or}`.
+                    Par exemple, crée un coupon de réduction spécial qui ne s'applique que pour les pizzas, ou donne à tes clients une boisson gratuite s'il prend des frites et des pancakes. Ou quelque chose de complètement différent, ça marche aussi !
                 example_code: |
                     ```
-                    price = 10
-                    food = {ask} 'What would you like to eat?'
-                    drinks = {ask} 'What would you like to drink?'
-                    {if} food {is} 'sandwich' {and} drinks {is} 'juice'
-                        {print} 'Thats our discount menu'
-                        price = price - 3
-                    {print} 'That will be ' price ' dollars'
+                    prix = 10
+                    plat = {ask} "Que voulez-vous manger ?"
+                    boisson = {ask} "Que voulez-vous boire ?"
+                    {if} plat {is} "sandwich" _ boisson {is} "jus"
+                        {print} "C'est notre menu en promotion"
+                        prix = prix - 3
+                    {if} boisson {is} "eau" _ boisson {is} "jus"
+                        {print} "Cette boisson est bonne pour la santé"
+                    {print} "Ça vous fera " prix " euros"
                     ```
             15:
                 story_text: |
@@ -4036,20 +4089,24 @@ adventures:
                     ```
             13:
                 story_text: |
-                    With the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.
+                    Avec la commande `{and}`, tu peux raccourcir le code de ton pierre, papier, ciseaux ! Regarde le code d'exemple.
+
+                    ### Exercice
+                    Termine le code pour qu'il y ait un résultat dans tous les cas. Exécute ton code plusieurs fois pour vérifier que le résultat s'affiche bien à chaque fois.
                 example_code: |
                     ```
-                    options = 'rock', 'paper', 'scissors'
-                    your_choice = {ask} 'What do you choose?'
-                    computer_choice = options {at} {random}
-                    {print} 'You choose ' your_choice
-                    {print} 'The computer chooses ' computer_choice
-                    {if} computer_choice {is} your_choice
-                        {print} 'Tie'
-                    {if} computer_choice {is} 'rock' {and} your_choice {is} 'paper'
-                        {print} 'You win!'
-                    {if} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'
-                        {print} 'The computer wins!'
+                    options = "Pierre", "Papier", "Ciseaux"
+                    ton_choix = {ask} "Que choisis-tu ?"
+                    choix_ordinateur = options {at} {random}
+                    {print} "Tu as choisis " ton_choix
+                    {print} "L'ordinateur à choisi " choix_ordinateur
+                    {if} choix_ordinateur {is} ton_choix
+                        {print} "Match nul"
+                    {if} choix_ordinateur {is} "Pierre" {and} ton_choix {is} "Papier"
+                        {print} "Tu gagnes !"
+                    {if} choix_ordinateur {is} "Pierre" {and} ton_choix {is} "Ciseaux"
+                        {print} "L'ordinateur gagne !"
+                    _
                     ```
             15:
                 story_text: |
@@ -4532,280 +4589,148 @@ adventures:
                     movement = [ 'round and round', 'open and shut', _]
                     ```
     tic:
-        name: Tic Tac Toe
+        name: Tic-Tac-Toe
         default_save_name: Tic
         description: Play a game of Tic Tac Toe!
         levels:
-            13:
+            16:
                 story_text: |
-                    In this adventure you can program a game of Tic Tac Toe. You can play with two people. Taking turns, you pick a number of the spot (1 - 9) you want to put your sign (x or o) on.
-                    The first player that gets 3 in a row (horizontally, vertically or diagonally) wins!
+                    Let's program a game of tic-tac-toe!
+
+                    ### Exercise
+                    In this adventure we'll start with creating an empty field.
+
+                    ***Create a list called field*** This list will be our playing field. This list is filled with 9 dots, since there are no x's and o's yet at the start of our game.
+
+                    ***Create a function that prints the field*** Firstly, clear the screen so the old playing fields will be removed. Then we print the first line of our Tic Tac Toe field. This line constists of the first 3 spots in our list field.
+                    We have already programmed this line for you. Now finish the field by printing spot 4, 5, and 6 on the second row and spot 7, 8 and 9 in the third row.
+
+                    ***Call the function that prints the field*** Now call the function.
+                    <div class="w-full flex flex-row gap-2">
+                        Run the code. Your output should look like this: <img src="https://github.com/hedyorg/hedy/assets/80678586/bcbd156e-4b48-4e82-84ae-f86d21b0cbcc" width="100">
+                    </div>
+
+                    ***Continue in the next tab*** In the next tab you'll learn how to program the game itself.
                 example_code: |
                     ```
-                    sign = 'x'
-                    open_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    game = 'on'
-                    spot_1 = '.'
-                    spot_2 = '.'
-                    spot_3 = '.'
-                    spot_4 = '.'
-                    spot_5 = '.'
-                    spot_6 = '.'
-                    spot_7 = '.'
-                    spot_8 = '.'
-                    spot_9 = '.'
-                    {print} 'TIC TAC TOE!'
-                    {print} spot_1 spot_2 spot_3
-                    {print} spot_4 spot_5 spot_6
-                    {print} spot_7 spot_8 spot_9
-                    {print} ' '
-                    {for} i {in} {range} 1 {to} 9
-                        {if} game {is} 'on'
-                            choice = {ask} 'Player ' sign ', which spot?'
-                            {if} choice {in} open_spots
-                                {remove} choice {from} open_spots
-                                {if} choice {is} 1
-                                    spot_1 = sign
-                                {if} choice {is} 2
-                                    spot_2 = sign
-                                {if} choice {is} 3
-                                    spot_3 = sign
-                                {if} choice {is} 4
-                                    spot_4 = sign
-                                {if} choice {is} 5
-                                    spot_5 = sign
-                                {if} choice {is} 6
-                                    spot_6 = sign
-                                {if} choice {is} 7
-                                    spot_7 = sign
-                                {if} choice {is} 8
-                                    spot_8 = sign
-                                {if} choice {is} 9
-                                    spot_9 = sign
-                            {else}
-                                {print} 'That spot was already taken'
-                            {print} spot_1 spot_2 spot_3
-                            {print} spot_4 spot_5 spot_6
-                            {print} spot_7 spot_8 spot_9
-                            {print} ' '
-                            winner = {ask} 'Did you win?'
-                            {if} winner {is} 'yes'
-                                {print} 'Good job, player ' sign '!'
-                                game = 'over'
-                            {else}
-                                {if} sign {is} 'x'
-                                    sign = 'o'
-                                {else}
-                                    sign = 'x'
-                    ```
-            14:
-                story_text: |
-                    In the previous levels you've made a tic tac toe game. Now you've learned how to use the `=` sign, the `==` sign and the `!=` sign.
-                    You can use this knowledge in your new Tic Tac Toe game, like this:
-                example_code: |
-                    ```
-                    sign = 'x'
-                    open_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    game = 'on'
-                    spot_1 = '.'
-                    spot_2 = '.'
-                    spot_3 = '.'
-                    spot_4 = '.'
-                    spot_5 = '.'
-                    spot_6 = '.'
-                    spot_7 = '.'
-                    spot_8 = '.'
-                    spot_9 = '.'
-                    {print} 'TIC TAC TOE!'
-                    {print} spot_1 spot_2 spot_3
-                    {print} spot_4 spot_5 spot_6
-                    {print} spot_7 spot_8 spot_9
-                    {print} ' '
-                    {for} i {in} {range} 1 {to} 9
-                        {if} game != 'over'
-                            choice = {ask} 'Player ' sign ', which spot?'
-                            {if} choice {in} open_spots
-                                {remove} choice {from} open_spots
-                                {if} choice == 1
-                                    spot_1 = sign
-                                {if} choice == 2
-                                    spot_2 = sign
-                                {if} choice == 3
-                                    spot_3 = sign
-                                {if} choice == 4
-                                    spot_4 = sign
-                                {if} choice == 5
-                                    spot_5 = sign
-                                {if} choice == 6
-                                    spot_6 = sign
-                                {if} choice == 7
-                                    spot_7 = sign
-                                {if} choice == 8
-                                    spot_8 = sign
-                                {if} choice == 9
-                                    spot_9 = sign
-                            {else}
-                                {print} 'That spot was already taken'
-                            {print} spot_1 spot_2 spot_3
-                            {print} spot_4 spot_5 spot_6
-                            {print} spot_7 spot_8 spot_9
-                            {print} ' '
-                            winner = {ask} 'Did you win?'
-                            {if} winner == 'yes'
-                                {print} 'Good job, player ' sign '!'
-                                game = 'over'
-                            {else}
-                                {if} sign == 'x'
-                                    sign = 'o'
-                                {else}
-                                    sign = 'x'
-                    ```
-            15:
-                story_text: |
-                    In this level you can improve your Tic Tac Toe game with the {while} loop. With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 to 9` into one simple line.
-                    Check it out:
-                example_code: |
-                    ```
-                    sign = 'x'
-                    open_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    game = 'on'
-                    spot_1 = '.'
-                    spot_2 = '.'
-                    spot_3 = '.'
-                    spot_4 = '.'
-                    spot_5 = '.'
-                    spot_6 = '.'
-                    spot_7 = '.'
-                    spot_8 = '.'
-                    spot_9 = '.'
-                    {print} 'TIC TAC TOE!'
-                    {print} spot_1 spot_2 spot_3
-                    {print} spot_4 spot_5 spot_6
-                    {print} spot_7 spot_8 spot_9
-                    {print} ' '
-                    {while} game != 'over'
-                        choice = {ask} 'Player ' sign ', which spot?'
-                        {if} choice {in} open_spots
-                            {remove} choice {from} open_spots
-                            {if} choice == 1
-                                spot_1 = sign
-                            {if} choice == 2
-                                spot_2 = sign
-                            {if} choice == 3
-                                spot_3 = sign
-                            {if} choice == 4
-                                spot_4 = sign
-                            {if} choice == 5
-                                spot_5 = sign
-                            {if} choice == 6
-                                spot_6 = sign
-                            {if} choice == 7
-                                spot_7 = sign
-                            {if} choice == 8
-                                spot_8 = sign
-                            {if} choice == 9
-                                spot_9 = sign
-                        {else}
-                            {print} 'That spot was already taken'
-                        {print} spot_1 spot_2 spot_3
-                        {print} spot_4 spot_5 spot_6
-                        {print} spot_7 spot_8 spot_9
-                        {print} ' '
-                        winner = {ask} 'Did you win?'
-                        {if} winner == 'yes'
-                            {print} 'Good job, player ' sign '!'
-                            game = 'over'
-                        {else}
-                            {if} sign == 'x'
-                                sign = 'o'
-                            {else}
-                                sign = 'x'
+                    # Create a list called field
+                    _ = ['.', '.', '.', '.', '.', '.', '.', '.', '.']
+
+                    # Create a function that prints the field
+                    {define} print_field
+                        _
+                        {print} 'TIC TAC TOE'
+                        {print} field[1] field[2] field[3]
+                        _
+                        _
+
+                    # Call the function
                     ```
             17:
                 story_text: |
-                    In the previous levels the tic tac toe game had an annoying feature. After every move, you had to fill in yourself if you had won or not.
-                    This made the game playable, but also quite slow. In this level we have learned the `{elif}` command, that could solve that problem.
-                    To use the {elif} to let Hedy check whether or not a player has won is fun, but it also requires a fair amount of extra lines.
+                    In the previous level you've learned how to make a tic-tac-toe game. The game works, but is quite annoying as it keeps asking you if you've won yet.
+                    Now that we have the {elif} command, we can let the game decide if someone has won and it can stop asking us!
 
-                    In the example code you see that we added the requirements to win (3 spots in a row horizontally, vertically or diagonally).
-                    You can find them in line 46 to 69. You can see that each time the requirement is met (so if a player has won) the variable game is set to 'over'.
-                    This means that the {while} loop will be stopped and the game ends.
+                    ### Exercise
+                    ***Paste your code*** Paste your code from the previous level here and make it level 17 proof. In this level you've learned to use a colon everytime you create a block of code. Please add the colons in the correct spots.
+
+                    ***Create a function that detects if someone's won*** We have started the function for you, paste it under the function `print_field` and finish the function. You can see that this first piece of code checks to see if spot 1, 2 and 3 are the same, because if they are you have 3 in a row.
+                    It also checks if they are not a dot, because if they are, the line might have the same symbols on them, but that's just because it's still empty.
+                    If all these conditions are met, the game is over and the winner is printed.
+                    Finish this function with all possible ways to win. This means you have to make this for the other 2 rows, 3 columns and 2 diagonals.
+                    If you've finished all the other options, the function should return the variable `game_over` so we can use it in our game.
+
+                    ***Call the function in the game*** Go to the line `game_over = {ask} 'Did you win?'` and change it to `game_over = {call} detect_winner {with} field, sign`. Now the function will check if there's a winner and the game doesn't need to keep asking anymore!
+
+                    ***Enjoy your game!*** Great job! You have finished the game! Enjoy playing it!
+
                 example_code: |
                     ```
-                    sign = 'x'
-                    open_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-                    game = 'on'
-                    spot_1 = '.'
-                    spot_2 = '.'
-                    spot_3 = '.'
-                    spot_4 = '.'
-                    spot_5 = '.'
-                    spot_6 = '.'
-                    spot_7 = '.'
-                    spot_8 = '.'
-                    spot_9 = '.'
-                    {print} 'TIC TAC TOE!'
-                    {print} spot_1 spot_2 spot_3
-                    {print} spot_4 spot_5 spot_6
-                    {print} spot_7 spot_8 spot_9
-                    {print} ' '
-                    {while} game != 'over':
-                        choice = {ask} 'Player ' sign ', which spot?'
-                        {if} choice {in} open_spots:
-                            {remove} choice {from} open_spots
-                            {if} choice == 1:
-                                spot_1 = sign
-                            {if} choice == 2:
-                                spot_2 = sign
-                            {if} choice == 3:
-                                spot_3 = sign
-                            {if} choice == 4:
-                                spot_4 = sign
-                            {if} choice == 5:
-                                spot_5 = sign
-                            {if} choice == 6:
-                                spot_6 = sign
-                            {if} choice == 7:
-                                spot_7 = sign
-                            {if} choice == 8:
-                                spot_8 = sign
-                            {if} choice == 9:
-                                spot_9 = sign
+                    # Paste your code here and make it level 17 proof
+
+                    # Create a function that detects if someone has won
+                    {define} detect_winner {with} field, sign:
+                        {if} field[1] == field[2] {and} field[2] == field[3] {and} field[1] != '.':
+                            game_over = 'yes'
+                            {print} 'Player ' sign 'wins!'
+                        {elif}:
+                            _
                         {else}:
-                            {print} 'That spot was already taken'
-                        {print} spot_1 spot_2 spot_3
-                        {print} spot_4 spot_5 spot_6
-                        {print} spot_7 spot_8 spot_9
-                        {print} ' '
-                        {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':
-                            {print} 'Player ' sign ' wins!'
-                            game = 'over'
-                        {else}:
-                            {if} sign == 'x':
-                                sign = 'o'
-                            {else}:
-                                sign = 'x'
+                            game_over = 'no'
+                    {return} _
+                    ```
+    tic_2:
+        name: Tic-Tac-Toe 2
+        default_save_name: Tic
+        description: Play a game of Tic Tac Toe!
+        levels:
+            16:
+                story_text: |
+                    In the previous adventure you've learned how to create a playing field. Now you'll learn how to create the game!
+
+                    ### Exercise
+                    ***Paste your code*** Start by pasting your code from the previous adventure here.
+
+                    ***Add variables*** Underneath your list called `field` we'll add 2 more variables that we'll need to program the game.
+                    The variable `game_over` tells us if the game is over, and should be 'no' at the start of the game.
+                    The variable `sign` tells us if it's the turn of player x or player o. Set the variable to 'x'.
+
+                    ***The game*** First use a {while} command, to make sure the game keeps on playing the variable while game_over is set to no.
+                    During the game, we first ask the player which spot they choose. Then we change the field with the number they chose into their sign.
+                    Then we print the field again and we ask the player if they've won yet. Lastly we want to switch whose turn it is, so if the sign is 'x' it should be 'o' and the other way around.
+
+                    ***Test your game*** Does your game work? Great, have fun playing the game! If not, use the ladybug button to debug your code.
+                    You might have noticed one mistake in the code though, you can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and steal their spot.
+                    That's not fair! Go to the next tab to learn how to fix this problem.
+                example_code: |
+                    ```
+                    # Paste your code from the previous adventure here
+
+                    # Add variables
+                    game_over = _
+                    sign = _
+
+                    # The game
+                    {while} _
+                        choice = _ 'Player ' sign '_?'
+                        field[choice] = _
+                        _ print_field
+                        game_over = {ask} _
+                        {if} sign = 'o'
+                            sign = _
+                        _
+                            sign = _
+                    ```
+    tic_3:
+        name: Tic-Tac-Toe 3
+        default_save_name: Tic
+        description: Play a game of Tic Tac Toe!
+        levels:
+            16:
+                story_text: |
+                    You might have noticed one mistake in the code you've made in the previous adventure. You can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and steal their spot.
+                    That's not fair! In this tab we'll fix that mistake.
+
+                    ### Exercise
+                    ***Paste your code here*** Paste your code from the previous adventure here.
+
+                    ***Fix the mistake*** To fix the mistake we replace the line that says `field[choice] = sign`. This turns any spot that the player has chosen into their sign.
+                    Go to the header that says 'Use this to fix the mistake' and finish the code. We first want to check if the chosen spot is still empty, so `if field[choice] = '.'`. If that is the case, you are allowed to take it.
+                    Then we make an else command and print 'Sorry, this spot is already taken' if the spot is not empty. Lastly, we add a {sleep} command, so the players can actually read the text before it gets cleared again.
+                    Now copy this piece of code and replace the line `field[choice] = sign` with this new piece of code.
+
+                    ***Play your game!*** Now the game should work properly! Good job!
+                    The only flaw is that you can get a bit annoyed that the game keeps asking you if you've won yet. Do you want to fix that? Go to level 17 and we'll fix it!
+                example_code: |
+                    ```
+                    # Paste your code here
+
+                    # Use this to fix the mistake
+                    {if} _ = '.'
+                        field[choice] = sign
+                    {else}
+                        {print} _
+                        _
                     ```
     turtle:
         name: Tortue
@@ -5088,11 +5013,11 @@ adventures:
                     Nested squares <img src="https://github.com/hedyorg/hedy/assets/80678586/f013f9fa-bc68-4c60-b778-2c457799d6f7" width="200">
                     </div>
                 example_code: |
-                    **Extra** Up for a real challenge? Make sure that the colors of these figures are selected randomly, so that each time you run your programs they'll look differently!
+                    **Bonus** Prêt ou prête pour un vrai défit ? Assure-toi que les couleurs de ces formes sont choisies au hasard, pour qu'elles aient une apparence différente à chaque exécution de ton programme.
 
                     ```
-                    colors {is} red, orange, yellow, green, blue, purple, pink, brown, gray, black
-                    color _
+                    couleur {is} rouge, orange, jaune, vert, bleu, violet, rose, maron, gris, noir
+                    couleur _
                     ```
             5:
                 story_text: |
@@ -5127,9 +5052,9 @@ adventures:
                     Flag <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
                     </div>
                 example_code: |
-                    Hint for the square:
+                    Aide pour le carré :
                     ```
-                    chosen_color = {ask} _
+                    couleur_choisi = {ask} _
                     ```
             7:
                 story_text: |
@@ -5168,20 +5093,20 @@ adventures:
                     Flags <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
                     </div>
                 example_code: |
-                    Hint for the nested squares:
+                    Aide pour les carrés :
                     ```
-                    colors = red, blue, orange, yellow, pink, purple, green, brown, black
+                    coleurs = rouge, bleu, orange, jaune, rose, violet, vert, maron, noir
                     distance = 120
-                    repeat 5 times
+                    {repeat} 5 {times}
                     _
                     ```
-                    Hint for the flags:
+                    Aide pour les drapeaux :
                     ```
-                    country = ask 'which country would you like to see the flag of?'
-                    if country is 'the Netherlands'
-                        color_1 = red
-                        color_2 = white
-                        color_3 = blue
+                    pays = {ask} "De quelle pays veux-tu voir le drapeau ?"
+                    {if} pays {is} "La France"
+                        color_1 = bleu
+                        color_2 = blanc
+                        color_3 = rouge
                     ```
             10:
                 story_text: |
@@ -5252,10 +5177,12 @@ adventures:
                 story_text: |
                     ### Exercice
                     Refait les dessins avec la tortue !
-                    Aide pour le programme de conception de bracelet. Commence par définir une fonction **pour chaque forme** que tu veux utiliser dans le bracelet. Ensuite, ajoute les formes au bracelet comme ceci :
 
-                    Bracelet <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
+                    Commence par définir une fonction **pour chaque forme** que tu veux utiliser dans le bracelet. Ensuite, ajoute les formes au bracelet comme ceci :
+
+                    Bracelet <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500"> 
                 example_code: |
+                    Aide pour le bracelet
                     ```
                     {define} dessine_un_carré
                     _
@@ -5279,40 +5206,40 @@ adventures:
                     ### Exercice
                     Refait les dessins avec la tortue !
 
-                    Street in different sizes <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
-                    Colored street  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
-                    Snow Storm <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
+                    Une rue avec des maisons de toutes les tailles <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
+                    Une rue colorée  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
+                    Un orage de flocons <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
                 example_code: |
-                    Hint Street in different sizes
+                    Aide pour la rue avec les maisons de toutes les tailles
                     ```
-                    {define} draw_a_house {with} size
+                    {define} dessine_une_maison {with} taille
                     _
 
-                    {call} draw_a_house {with} 90
-                    {call} draw_a_house {with} 60
-                    {call} draw_a_house {with} 30
+                    {call} dessine_une_maison {with} 90
+                    {call} dessine_une_maison {with} 60
+                    {call} dessine_une_maison {with} 30
                     ```
 
-                    Hint Colored street
+                    Aide pour la rue colorée
                     ```
-                    {define} draw_a_house {with} chosen_color
+                    {define} dessine_une_maison {with} couleur
                     _
                     ```
 
-                    Hint Snow Storm
+                    Aide pour l'orage de flocons
                     ```
-                    {define} draw_snowflake {with} length, color
+                    {define} dessine_flocon {with} longueur, couleur
                         _
 
-                    numbers = 10, 20, 30
-                    colors = _
+                    longueurs = 10, 20, 30
+                    couleurs = _
 
                     {for} i {in} {range} 1 {to} 5
-                        random_number = _
-                        random_color = _
-                        {call} draw_snowflake {with} random_number, random_color
-                        {color} white
-                        {turn} random_number * 5
+                        longueur_au_hasard = _
+                        couleur_au_hasard = _
+                        {call} dessine_flocon {with} longueur_au_hasard, couleur_au_hasard
+                        {color} blanc
+                        {turn} longueur_au_hasard * 5
                         {forward} 80
                     ```
             14:
@@ -5349,7 +5276,7 @@ adventures:
 
                     Spiral <img src="https://github.com/hedyorg/hedy/assets/80678586/6943223c-018b-435b-a391-23723cc7a6ad" width="150">
                 example_code: |
-                    Spiral
+                    Spirale
                     ```
                     distance = 5
                     {while} distance < 200
@@ -5357,11 +5284,11 @@ adventures:
                          _
                     ```
                 story_text_2: |
-                    Fan <img src="https://github.com/hedyorg/hedy/assets/80678586/cb671065-b47b-49f0-b298-dcbcd2a5e28f" width="150">
+                    Ventilateur <img src="https://github.com/hedyorg/hedy/assets/80678586/cb671065-b47b-49f0-b298-dcbcd2a5e28f" width="150">
                 example_code_2: |
-                    Fan
+                    Ventilateur
                     ```
-                    {define} draw_a_square {with} side
+                    {define} dessine_un_carré {with} longueur_coté
                     _
 
                     i = 100
@@ -5371,14 +5298,14 @@ adventures:
                         i = i - 3
                     ```
                 story_text_3: |
-                    Star <img src="https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93" width="150">
+                    Étoile <img src="https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93" width="150">
                 example_code_3: |
                     Star
                     A star is usually drawn using 144-degree-turns. If you change this slightly to 143 degrees for example and repeat the pattern multiple times with a {while} loop you can make this figure.
     while_command:
         name: '{while}'
         default_save_name: while_command
-        description: tant que
+        description: '{while}'
         levels:
             15:
                 story_text: |-
@@ -5399,8 +5326,8 @@ adventures:
                     {print} "Une réponse correcte a été donnée"
     years:
         name: Nouvel an
-        default_save_name: New Year's Countdown
-        description: Countdown to the new year!
+        default_save_name: Compte à rebours du Nouvel An
+        description: Compte à rebours du Nouvel An !
         levels:
             11:
                 story_text: |

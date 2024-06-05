@@ -859,37 +859,37 @@ levels:
             correct_answer: D
             question_score: '10'
         2:
-            question_text: What appears in your output screen when you type in the name Hedy?
+            question_text: O que aparece no teu ecrã de output quando escreves o nome Hedy?
             code: |-
-                name {is} {ask} 'What is your name?'
-                {if} name {is} Hedy {print} 'fun' {else} {print} 'less fun'
+                nome {is} {ask} 'Qual é o teu nome?'
+                {if} nome {is} Hedy {print} 'divertido' {else} {print} 'não tão divertido'
             mp_choice_options:
             -   option: fun
-                feedback: That's right!
+                feedback: Isso está correcto!
             -   option: less fun
-                feedback: If the name is Hedy, it will say 'fun''
+                feedback: Se o nome for Hedy, vai dizer 'divertido''
             -   option: Hedy
-                feedback: No, it doesn't print the name
+                feedback: Não, não imprime o nome
             -   option: Error
-                feedback: Fortunately not!
-            hint: '`{if}` name `{is}` Hedy `{print}` ...?'
+                feedback: Infelizmente não!
+            hint: '`{if}` nome `{is}` Hedy `{print}` ...?'
             correct_answer: A
             question_score: '10'
         3:
-            question_text: What is the right password?
+            question_text: Qual é a password correcta?
             code: |-
-                password {is} {ask} 'What is the password?'
-                {if} password {is} SECRET {print} 'Correct!'
-                {else} {print} 'ALARM! INTRUDER!'
+                password {is} {ask} 'Qual é a password?'
+                {if} password {is} SEGREDO {print} 'Correcto!'
+                {else} {print} 'ALARME! INTRUSO!'
             mp_choice_options:
-            -   option: Correct!
-                feedback: This is printed when you type in the correct password
-            -   option: SECRET
-                feedback: That's right!'
+            -   option: Correcto!
+                feedback: Isto é impresso quando escreves a password correcta
+            -   option: SEGREDO
+                feedback: Isso está correcto!'
             -   option: password
-                feedback: The password isn't password...
-            -   option: ALARM INTRUDER
-                feedback: This is printed when you type in the incorrect password!
+                feedback: A password não é password...
+            -   option: ALARME INTRUSO
+                feedback: Isto é impresso quando escreves a password incorrecta!
             hint: '`{if}` password `{is}` ... `{print}` ''Correct!''!'''
             correct_answer: B
             question_score: '10'
@@ -900,13 +900,13 @@ levels:
                 {if} password {is} SECRET {print} 'Correct!'
                 {else} {print} 'ALARM! INTRUDER!'
             mp_choice_options:
-            -   option: Correct
+            -   option: Correcto
                 feedback: That's printed if the correct answer is given, not the wrong one...
-            -   option: SECRET
+            -   option: SEGREDO
                 feedback: That's not the right answer
-            -   option: Wrong!
+            -   option: Incorrecto!
                 feedback: No, this is not what Hedy will print
-            -   option: ALARM! INTRUDER!
+            -   option: ALARME! INTRUSO!
                 feedback: Great job!
             hint: Your computer will sound the alarm for intruders!
             correct_answer: D
@@ -918,13 +918,13 @@ levels:
                 {if} password {is} SECRET {print} 'Correct!'
                 {else} {print} 'ALARM! INTRUDER!'
             mp_choice_options:
-            -   option: Because it needs to be in capitals, so SECRET
+            -   option: Por precisa de ser em maiúsculas, SEGREDO
                 feedback: Indeed!
-            -   option: Because the password is alarm
+            -   option: Porque a password é alarme
                 feedback: No, this is not the password.
-            -   option: Because it's spelled wrong.
+            -   option: Porque está escrito incorrectamente.
                 feedback: That's not how you spell secret
-            -   option: Because Hedy makes a mistake
+            -   option: Porque Hedy cometeu um erro
                 feedback: No, Hedy is right
             hint: The spelling of the word has to be exactly the same.
             correct_answer: A
@@ -970,24 +970,16 @@ levels:
                 {else} _?_ 'Unfortunately... No big money for you.'
             mp_choice_options:
             -   option: |-
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: '`{if}` is in the line above.'
             -   option: |-
-                    ```
-                    {at} {random}
-                    ```
+                    `{at}``{random}`
                 feedback: No, you don't need `{at} {random}`.
             -   option: |-
-                    ```
-                    {else}
-                    ```
+                    `{else}`
                 feedback: There already is an `{else}` command
             -   option: |-
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: Awesome!
             hint: After `{else}` a `{print}` command follows
             correct_answer: D
@@ -1001,7 +993,7 @@ levels:
             mp_choice_options:
             -   option: |-
                     ```
-                    favorite animal
+                    animal favorito
                     ```
                 feedback: That's not the variable name.
             -   option: |-
@@ -1010,14 +1002,10 @@ levels:
                     ```
                 feedback: Great job!
             -   option: |-
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: '`{if}` is already there'
             -   option: |-
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: No, that's not it.
             hint: What the variable name?
             correct_answer: B
@@ -1038,7 +1026,7 @@ levels:
                 feedback: Super! You escaped!
             -   option: '3'
                 feedback: Bad choice! You're being eaten.
-            -   option: It's a trap, you will always be eaten!
+            -   option: É uma armadilha, vais sempre ser comido!
                 feedback: Luckily not!
             hint: One of the doors will keep you safe..
             correct_answer: B
@@ -1053,13 +1041,13 @@ levels:
                 {if} door {is} 2 {print} 'Yay, you can escape!'
                 {else} {print} 'You are being devoured by a... ' monsters {at} {random}
             mp_choice_options:
-            -   option: Hedy picks a random monster each time.
+            -   option: Hedy escolhe um monstro aleatório todas as vezes.
                 feedback: Awesome!
-            -   option: vampire
+            -   option: vampiro
                 feedback: Not always...
-            -   option: werewolf
+            -   option: lobisomem
                 feedback: Not always...
-            -   option: giant spider
+            -   option: aranha gigante
                 feedback: Not always...
             hint: Mind the last 3 words... monsters `{at} {random}`...
             correct_answer: A
@@ -1085,7 +1073,7 @@ levels:
             mp_choice_options:
             -   option: '`-`'
                 feedback: That's not it
-            -   option: plus
+            -   option: mais
                 feedback: That's not it
             -   option: '`*`'
                 feedback: That's not it
@@ -1104,7 +1092,7 @@ levels:
                 feedback: Try again..
             -   option: 3*10
                 feedback: Correct! There are quotation marks, so Hedy will print it literally.
-            -   option: Nothing, Hedy will give an error message.
+            -   option: Nada, Hedy mostrará uma mensagem de erro.
                 feedback: No, Hedy will print it literally.
             hint: Mind the quotation marks!!
             correct_answer: C
@@ -1121,9 +1109,9 @@ levels:
                 feedback: Mind, Hedy also prints 'Your lucky number is...'
             -   option: '10'
                 feedback: Please try again.
-            -   option: Your lucky number is... 30
+            -   option: O teu número da sorte é... 30
                 feedback: That's right!
-            -   option: Your lucky number is... 10
+            -   option: O teu número da sorte é... 10
                 feedback: Her lucky number is name times age...
             hint: 'Kim has 3 letters, she is 10 years old so: letters times age = 3*10 = 30.'
             correct_answer: C
@@ -1136,13 +1124,13 @@ levels:
                 price = people * 10
                 {print} 'That will be ' price 'dollar please'
             mp_choice_options:
-            -   option: 5 dollars
+            -   option: 5 euros
                 feedback: Unfortunately, it's not that cheap.
-            -   option: 10 dollars
+            -   option: 10 euros
                 feedback: No, it's 10 dollars each.
-            -   option: 15 dollars
+            -   option: 15 euros
                 feedback: The * means multiplication.
-            -   option: 50 dollars
+            -   option: 50 euros
                 feedback: Great!
             hint: '`price` `is` `people` `times` 10'
             correct_answer: D
@@ -1156,13 +1144,13 @@ levels:
                 {if} food {is} hamburger price = 15
                 {if} food {is} fries price = 6
             mp_choice_options:
-            -   option: 15 dollars
+            -   option: 15 euros
                 feedback: Super!
-            -   option: 6 dollars
+            -   option: 6 euros
                 feedback: The fries are 6 dollars
-            -   option: 0 dollars
+            -   option: 0 euros
                 feedback: The hamburger isn't free!
-            -   option: 21 dollars
+            -   option: 21 euros
                 feedback: That's the price for a hamburger and fries!
             hint: Mind the fourth line.
             correct_answer: A
@@ -1180,13 +1168,13 @@ levels:
                 {if} drinks {is} water price = price + 1
                 {print} price ' dollars please'
             mp_choice_options:
-            -   option: It could have been `price = 3` just as well.
+            -   option: Também poderia ter sido `price = 3` .
                 feedback: No, that's not true. Hedy needs to add 3 dollars to the total.
-            -   option: Because Hedy doesn't understand `price = 3`.
+            -   option: Porque a Hedy não entende `price = 3`.
                 feedback: Hedy would understand, but it wouldn't be right.
-            -   option: Because Hedy would otherwise forget about the previous order. The price would be 3 dollars in total.
+            -   option: Porque a Hedy de outra forma esqueceria-se da ordem anterior. O preço seria 3 euros no total.
                 feedback: That's right!
-            -   option: Because the price is 0 dollars to begin with.
+            -   option: Porque o preço é de 0 euros para começar.
                 feedback: That's true, but not the reason
             hint: The price shouldn't be 3, but 3 dollars more than it already was
             correct_answer: C
@@ -1199,53 +1187,53 @@ levels:
                 {if} answer {is} correct answer {print} 'Good job!'
                 {else} {print} 'No... It was ' correct answer
             mp_choice_options:
-            -   option: There shouldn't be quotation marks in line 2
+            -   option: Não deveriam existir aspas na linha 2
                 feedback: No, there should be!
-            -   option: The variable is called correct answer, but a variable's name can only be 1 word. So it should be correct_answer
+            -   option: A variável é chamada de resposta correcta, mas o nome de uma variável só pode ser uma palavra. Então deve ser resposta_correcta
                 feedback: Correct!
-            -   option: The `{if}` and `{else}` commands should be in the same line.
+            -   option: Os comandos `{if}` e `{else}` deveriam estar na mesma linha.
                 feedback: No, that's not true.
-            -   option: The variable in line 2 can't be called answer, because it is too similar to the variable correct answer.
-                feedback: Variable names can be similar, but they can't be 2 words...
+            -   option: A variável na linha 2 não pode ser chamada de resposta, porque é demasiado parecida com a variável resposta correcta.
+                feedback: Os nomes das variáveis podem ser parecidos, mas não podem ser duas palavras...
             hint: Inspect what the variables are called.
             correct_answer: B
             question_score: '10'
         9:
             question_text: Imagine you love football a 10, you've eaten 2 bananas and have washed your hands 3 times today. How smart does the silly fortune teller think you are?
             code: |-
-                {print} 'Im Hedy the silly fortune teller'
-                {print} 'I will predict how smart you are!'
-                football = {ask} 'On a scale of 0 to 10 how much do you love football?'
-                bananas = {ask} 'How many bananas have you eaten this week?'
-                hygiene = {ask} 'How many times did you wash your hands today??'
-                result = bananas + hygiene
-                result = result * football
-                {print} 'You are ' result 'percent smart.'
+                {print} 'Eu sou a Hedy a cartomante tonta '
+                {print} 'Eu vou prever o quão inteligente és!'
+                fútebol = {ask} 'Numa escala de 0 a 10 quanto adoras fútebol?'
+                bananas = {ask} 'Quantas bananas comeste este fim-de-semana?'
+                higiene = {ask} 'Quantas vezes lavaste as mãos hoje??'
+                resultado = bananas + higiene
+                resultado = resultado * fútebol
+                {print} 'Tu és ' resultado 'por cento esperto.'
             mp_choice_options:
             -   option: 10%
-                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+                feedback: (2 bananas + 3 higiene) * 10 fútebol = 5*10 =?
             -   option: 32%
-                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+                feedback: (2 bananas + 3 higiene) * 10 fútebol = 5*10 =?
             -   option: 50%
-                feedback: Super! You are 100 percent smart!
+                feedback: Íncrivel! Tu és 100 por cento esperto!
             -   option: 100%
-                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+                feedback: (2 bananas + 3 higiene) * 10 fútebol = 5*10 =?
             hint: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
             correct_answer: C
             question_score: '10'
         10:
             question_text: Which statement is true?
             code: |-
-                name _?_ Hedy
-                {print} name 'is walking trough the forrest'
+                nome _ Hedy
+                {print} nome 'está a passear pela floresta'
             mp_choice_options:
-            -   option: You can only fill in the word is on the `_?_`
+            -   option: Só podes preencher a palavra que está no `_`
                 feedback: You are allowed to use the `=` sign as well
-            -   option: You can fill in either the word is or the `=` sign on the `_?_`
+            -   option: Podes preencher com a palavra é ou com o sinal `=` no `_`
                 feedback: Amazing!
-            -   option: You have to fill in =is= on the `_?_`
+            -   option: Tens que preencher =é= no `_`
                 feedback: No, one `=` sign is enough
-            -   option: You can only use the `=` sign when working with numbers, not with words.
+            -   option: Só podes usar o sinal `=` quando estás a trabalhar com números, não com palavras.
                 feedback: You can also use `=` with words.
             hint: '`{is}` and `=` are both allowed'
             correct_answer: B
@@ -3392,8 +3380,8 @@ levels:
         3:
             question_text: Which command should be filled in on the two blanks?
             code: |-
-                _ age >= 18
-                  print 'you are not allowed in this bar'
+                _idade < 18
+                  {print} 'tu não podes entrar neste bar'
             mp_choice_options:
             -   option: '`{in}`'
                 feedback: That's not it
@@ -3409,48 +3397,48 @@ levels:
         4:
             question_text: What's wrong with this code?
             code: |-
-                options = 1, 2, 3, 4, 5, 6
-                print 'Throw 6 as fast as you can!'
-                thrown = 0
-                tries = 0
-                while thrown == 6
-                    thrown = options at random
-                    print 'You threw ' thrown
-                    tries = tries + 1
-                print 'Yes! You have thrown 6 in ' tries ' tries.'
+                opções = 1, 2, 3, 4, 5, 6
+                {print} 'Lança 6 o mais rápido que conseguires!'
+                lança = 0
+                tentativas = 0
+                {while} lançamento == 6
+                    lança = opções {at} {random}
+                    {print} 'Tu lanças-te ' lançado
+                    tentativas = tentativas + 1
+                {print} 'Sim! Tu lanças-te 6 em ' tentativas ' tentativas.'
             mp_choice_options:
-            -   option: In line 1 == should be used instead of =
-                feedback: No that's not it
-            -   option: Line 2 misses quotation marks
-                feedback: That's not right
-            -   option: In line 5 if should have been used instead of while
-                feedback: That's not it
-            -   option: In line 5 != should have been used instead of ==
-                feedback: You are correct
-            hint: There is something wrong in line 5
+            -   option: Na linha 1 `==` deveria ter sido usado em vez de `=`
+                feedback: Não, não é isso
+            -   option: Na linha 2 faltam as aspas
+                feedback: Não está correcto
+            -   option: Na linha 5 `{if}` deveria ter sido usado em vez de `{while}`
+                feedback: Não é isso
+            -   option: Na linha 5 `!=` deveria ser usado em vez de `==`
+                feedback: Estás correcto(a)!
+            hint: Há algo de errado na linha 5
             correct_answer: D
             question_score: '10'
         5:
-            question_text: What should be placed on the blank to make this program work correctly?
+            question_text: O que deve ser preenchido no espaço em branco para que este programa funcione?
             code: |-
-                wetness = 10
-                while wetness != 0
-                    print 'Your hair is still wet, hair dryer on!'
-                    sleep 1
-                    clear
-                    wetness _
+                humidade = 10
+                enquanto humidade != 0
+                    {print}'O teu cabelo ainda está molhado, o secador está ligado!'
+                    {sleep} 1
+                    {clear}
+                    humidade _
 
-                print 'All dry!'
+                {print} 'Seco!'
             mp_choice_options:
-            -   option: = wetness
-                feedback: That will not change anything
-            -   option: = wetness = 1
-                feedback: You can't have two times = in one line
-            -   option: = wetness - 1
-                feedback: You are correct!
-            -   option: = wetness + 1
-                feedback: The program should count down
-            hint: wetness should get less each time
+            -   option: "```\n   = humidade\n```"
+                feedback: Isso não vai mudar nada
+            -   option: "```\n   = humidade = 1\n```"
+                feedback: Não podes ter duas vezes = numa linha
+            -   option: "```\n   = humidade - 1\n```"
+                feedback: Estás correcto(a)!
+            -   option: "```\n   = humidade + 1\n```"
+                feedback: O programa deve contar ao contrário
+            hint: A humidade deve diminuir de cada vez
             correct_answer: C
             question_score: '10'
         6:
@@ -3474,24 +3462,24 @@ levels:
             correct_answer: D
             question_score: '10'
         7:
-            question_text: How should this program be changed to that it works?
+            question_text: O que deve ser alterado neste programa para que funcione?
             code: |-
-                {print} 'Guess which number'
-                numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                number = numbers {at} {random}
-                game = 'on'
-                {if} game == 'on'
-                    guess = {ask} 'Which number do you think it is?'
-                    {if} guess < number
+                {print} 'Adivinha o número'
+                número = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                número = números {at} {random}
+                jogo = 'on'
+                {if} jogo == 'on'
+                     adivinha = {ask} 'Qual número achas que é?'
+                    {if} adivinha< número
                         {print} _
-                    {if} guess > number
+                    {if} adivinha > número
                         {print} _
-                    {if} guess == number
+                    {if} adivinha == número
                         {print} _
-                        game = 'over'
+                        jogo= 'fim'
             mp_choice_options:
-            -   option: '... change the first {if} into a {while}'
-                feedback: Perfect!
+            -   option: '... muda o primeiro `{if}` para `{while}`'
+                feedback: Perfeito!
             -   option: '... change the second {if} into a {while}'
                 feedback: That's not quite right.
             -   option: '... change the third {if} into a {while}'
@@ -3832,11 +3820,11 @@ levels:
             code: |-
                 {print} 'The book raffle will start soon'
                 {print} 'Get your tickets now!'
-                {books} = ['Narnia', 'The Hobbit', 'Oliver Twist', 'Harry Potter', 'Green eggs and ham']
+                books = ['Narnia', 'The Hobbit', 'Oliver Twist', 'Harry Potter', 'Green eggs and ham']
                 people = {ask} 'How many raffle tickets are sold?'
-                list_of_raffle_numbers = [1, 2]
+                list_of_numbers = [1, 2]
                 {for} i {in} {range} 3 {to} people
-                    {add} i {to} list_of_raffle_numbers
+                    {add} i {to} list_of_numbers
                 {for} i {in} {range} 1 {to} 5
             mp_choice_options:
             -   option: |-
@@ -4066,7 +4054,7 @@ levels:
             code: |-
                 name = {ask} 'What is your name?'
                 {if} name == 'Hedy':
-                password = {ask} 'What is your password?'
+                    password = {ask} 'What is your password?'
                     {if} password =='turtle123':
                         {print} 'Yey'
                     {else}:

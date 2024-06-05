@@ -1,4 +1,4 @@
-from flask import jsonify, request, session
+from flask import make_response, request, session
 from flask_babel import gettext
 
 import hedy
@@ -273,11 +273,11 @@ class AchievementsModule(WebsiteModule):
             if body["achievement"] not in session["achieved"] and body[
                 "achievement"
             ] in self.achievements.translations.get_translations(session["lang"]).get("achievements"):
-                return jsonify(
+                return make_response(
                     {
                         "achievements": self.achievements.verify_pushed_achievement(
                             user.get("username"), body["achievement"]
                         )
                     }
                 )
-        return jsonify({})
+        return make_response('', 204)

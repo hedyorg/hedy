@@ -184,7 +184,8 @@ export function remove_student(class_id: string, student_id: string, prompt: str
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      if (response.achievement) {
+      // the check for response is necessary because of make_response() but I'm not sure why
+      if (response && response.achievement) {
           showAchievements(response.achievement, true, "");
       } else {
           location.reload();
@@ -198,8 +199,19 @@ export function remove_student(class_id: string, student_id: string, prompt: str
 function update_db_adventure(adventure_id: string) {
   // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
   const adventure_name = $('#custom_adventure_name').val();
-  const classes = $('#custom_adventure_classes').val();
-  const levels: string[] = $('#custom_adventure_levels').val() as string[];
+  let classes: string[] = [];
+  let levels: string[] = []
+
+  document.querySelectorAll('#levels_dropdown > .option.selected').forEach((el) => {
+    levels.push(el.getAttribute("data-value") as string)
+  })
+
+  document.querySelectorAll('#classes_dropdown > .option.selected').forEach((el) => {
+    classes.push(el.getAttribute("data-value") as string)
+  })
+
+  const language = document.querySelector('#languages_dropdown> .option.selected')!.getAttribute('data-value') as string
+
   const content = DOMPurify.sanitize(window.ckEditor.getData());
   
   const parser = new DOMParser();
@@ -219,7 +231,7 @@ function update_db_adventure(adventure_id: string) {
   }
 
   for (const snippet of snippets) {
-    snippetsFormatted.push(addCurlyBracesToCode(snippet, minLevel, $('#language').val() as string || 'en'));
+    snippetsFormatted.push(addCurlyBracesToCode(snippet, minLevel, language || 'en'));
   }
 
   for (const keyword of keywords) {
@@ -238,7 +250,6 @@ function update_db_adventure(adventure_id: string) {
   // We have to replace <br> for newlines, because the serializer swithces them around
   const formatted_content = html.getElementsByTagName('body')[0].outerHTML.replace(/<br>/g, '\n');
   const agree_public = $('#agree_public').prop('checked');
-  const language = $('#language').val();
 
   $.ajax({
     type: 'POST',
@@ -275,7 +286,10 @@ export function update_adventure(adventure_id: string, first_edit: boolean, prom
 function show_preview(content: string) {
     const name = $('#custom_adventure_name').val();
     if (typeof name !== 'string') { throw new Error(`Expected name to be string, got '${name}'`); }
-    const levels = $('#custom_adventure_levels').val();
+    let levels: string[] = []
+    document.querySelectorAll('#levels_dropdown > .option.selected').forEach((el) => {
+      levels.push(el.getAttribute("data-value") as string)
+    })
     if (typeof levels !== 'object') { throw new Error(`Expected level to be a list, got '${levels}'`); }
 
     let container = $('<div>');
@@ -369,7 +383,7 @@ export function show_doc_section(section_key: string) {
      $("#button-" + section_key).removeClass("green-btn");
      $("#button-" + section_key).addClass("blue-btn");
      $('.section').hide();
-     $ ('.common-mistakes-section').hide ();
+     $ ('.common_mistakes_section').hide ();
      $('#section-' + section_key).toggle();
    }
 }
@@ -426,13 +440,13 @@ export function restore_customization_to_default(prompt: string) {
     modal.confirm (prompt, async function () {
       // We need to know the current level that is selected by the user
       // so we can know which level to draw in the template  
-      let active_level_id : string = $('[id^=level-]')[0].id;
-      let active_level = active_level_id.split('-')[1]
+      let active_level_id : string = $('[id^=level_]')[0].id;
+      let active_level = active_level_id.split('_')[1]
       try {
         await htmx.ajax(
           'POST',
           `/for-teachers/restore-customizations?level=${active_level}`,
-          '#adventure-dragger'
+          '#adventure_dragger'
         )
         $('.other_settings_checkbox').prop('checked', false);
         // Remove the value from all input fields -> reset to text to show placeholder
@@ -472,7 +486,7 @@ export function enable_level(level: string) {
                                        .val('');
     }
 
-    if ($('#level-' + level).is(':visible')) {
+    if ($('#level_' + level).is(':visible')) {
       setLevelStateIndicator(level);
     }
 }
@@ -490,13 +504,13 @@ export function setDateLevelInputColor(level: string) {
                                      .addClass('bg-gray-200')
   }
 
-  if ($('#level-' +  level).is(':visible')) {
+  if ($('#level_' +  level).is(':visible')) {
     setLevelStateIndicator(level);
   }
 }
 
 export function add_account_placeholder() {
-    let row = $("#account_row_unique").clone();
+    let row = $('#account_row_unique').clone();
     row.removeClass('hidden');
     row.attr('id', "");
     // Set all inputs except class to required
@@ -654,21 +668,21 @@ export function initializeTeacherPage(options: InitializeTeacherPageOptions) {
 }
 
 function setLevelStateIndicator(level: string) {
-  $('[id^=state-]').addClass('hidden');
+  $('[id^=state_]').addClass('hidden');
 
   if ($('#opening_date_level_' + level).is(':disabled')) {
-    $('#state-disabled').removeClass('hidden');
+    $('#state_disabled').removeClass('hidden');
   } else if($('#opening_date_level_' + level).val() === ''){
-    $('#state-accessible').removeClass('hidden');
+    $('#state_accessible').removeClass('hidden');
   } else {
     var date_string : string = $('#opening_date_level_' + level).val() as string;
     var input_date = new Date(date_string);
     var today_date = new Date();
     if (input_date > today_date) {
       $('#opening_date').text(date_string);
-      $('#state-future').removeClass('hidden');
+      $('#state_future').removeClass('hidden');
     } else {
-      $('#state-accessible').removeClass('hidden');
+      $('#state_accessible').removeClass('hidden');
     }
   }
 }
@@ -704,7 +718,7 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
         setDateLevelInputColor($(this).attr('level')!);
       })
 
-      $('#levels-dropdown').on('change', function(){
+      $('#levels_dropdown').on('change', function(){
           var level = $(this).val() as string;
           setLevelStateIndicator(level);
       });
@@ -712,7 +726,7 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
       // Autosave customize class page
       // the third argument is used to trigger a GET request on the specified element
       // if the trigger (input in this case) is changed.
-      autoSave("customize_class", null, {elementId: "levels-dropdown", trigger: "input"});
+      autoSave("customize_class", null, {elementId: "levels_dropdown", trigger: "input"});
 
   });
 }
@@ -734,5 +748,25 @@ export function initializeClassOverviewPage(_options: InitializeClassOverviewPag
         $('#' + attribute + '_header').show();
         $('.' + attribute + '_cell').show();
     }
+  });
+}
+
+
+export function invite_support_teacher(requester: string) {
+  modal.prompt(`Invite a teacher to support ${requester}.`, '', function (username) {
+    $.ajax({
+        type: 'POST',
+        url: "/super-teacher/invite-support",
+        data: JSON.stringify({
+          sourceUser: requester,
+          targetUser: username,
+        }),
+        contentType: 'application/json',
+        dataType: 'json'
+    }).done(function() {
+        location.reload();
+    }).fail(function(err) {
+        modal.notifyError(err.responseText);
+    });
   });
 }

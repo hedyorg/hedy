@@ -8,6 +8,7 @@ let TRADUCTION: Map<string,string>;
 
 //Feature flag for variable and values view
 let variable_view = true;
+let showRoles = false;
 let step_debugger = false;
 const fullLineCommands = [
   'print',
@@ -54,43 +55,38 @@ interface GutterMouseDownEvent {
   stop(): void;
 }
 
-function hide_if_no_variables(){ //this shows just the button, not the list itself
-  if($('#variables #variable-list li').length == 0){
+//this shows just the button, not the list itself
+export function toggleVariableView(){
+  if($('#variables #variable_list li').length == 0){
     $('#variable_button').hide();
-    $('#variables').hide();
   }
-  else{
+  else{    
     $('#variable_button').show();
-    if(variable_view){
-      $('#variables').show();
-    }
-    
-  }
-}
-
-export function show_variables() {
-  if (variable_view === true) {
-    const variableList = $('#variable-list');
-    if (variableList.hasClass('hidden')) {
-      variableList.removeClass('hidden');
-    }
+    $('#variable_list').show();
+    document.getElementById('variables_arrow')!.classList.remove('fa-angle-up');
+    document.getElementById('variables_arrow')!.classList.add('fa-angle-down');
   }
 }
 
 export function load_variables(variables: any) {
   if (variable_view === true) {
+    const programData = theGlobalDebugger?.get_program_data();
     variables = clean_variables(variables);
-    const variableList = $('#variable-list');
+    const variableList = $('#variable_list');
     variableList.empty();
     for (const i in variables) {
       // Only append if the variable contains any data (and is not undefined)
       if (variables[i][1]) {
         const variableName = variables[i][0].replace(/^_/, '');
-        variableList.append(`<li style=color:${variables[i][2]}>${variableName}: ${variables[i][1]}</li>`);
+        const role = programData?.variables[variableName];
+        if (showRoles) {
+          variableList.append(`<li style=color:${variables[i][2]}>${variableName}: ${variables[i][1]} (${role})</li>`);
+        } else {
+          variableList.append(`<li style=color:${variables[i][2]}>${variableName}: ${variables[i][1]}</li>`);
+        }
       }
     }
-    show_variables();
-    hide_if_no_variables();
+    toggleVariableView();
   }
 }
 
@@ -101,20 +97,19 @@ function special_style_for_variable(variable: Variable) {
   let result = '';
   let parsedVariable = parseInt(variable.v as string);
   if (typeof parsedVariable == 'number' && !isNaN(parsedVariable)){
-     result =  "#ffffff";
+     result =  "#4299e1";
    }
    if(typeof variable.v == 'string' && isNaN(parsedVariable)){
-     result = "#ffffff";
+     result = "#4299e1";
    }
    if(typeof variable.v == 'boolean'){
-     result = "#ffffff";
+     result = "#4299e1";
    }
    if (variable.tp$name == 'list'){
-    result =  "#ffffff";
+    result =  "#4299e1";
    }
    return result;
 }
-
 //hiding certain variables from the list unwanted for users
 function clean_variables(variables: Record<string, Variable>) {
   const new_variables = [];
@@ -151,7 +146,6 @@ export function initializeDebugger(options: InitializeDebuggerOptions) {
   theGlobalEditor = options.editor;
   theLevel = options.level;
   theLanguage = options.language;
-  
   let TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;
   let lang = options.keywordLanguage;
   if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
@@ -177,11 +171,8 @@ export function initializeDebugger(options: InitializeDebuggerOptions) {
 
   if(options.level != 0){
     let level = options.level;
-    variable_view = level >= 2;
-    show_variables();
-    hide_if_no_variables();
+    variable_view = level >= 2;  
   }
-
   initializeBreakpoints(options.editor);
 }
 
@@ -244,12 +235,12 @@ function debugRun() {
 
 export function startDebug() {
   if (step_debugger === true) {
-    var debugButton = $("#debug_button");
+    var debugButton = $('#debug_button');
     debugButton.hide();
-    var continueButton = $("#debug_continue");
-    var stopButton = $("#debug_stop");
-    var resetButton = $("#debug_restart");
-    var runButtonContainer = $("#runButtonContainer");
+    var continueButton = $('#debug_continue');
+    var stopButton = $('#debug_stop');
+    var resetButton = $('#debug_restart');
+    var runButtonContainer = $('#run_button_container');
 
     runButtonContainer.hide();
     continueButton.show();
@@ -261,7 +252,7 @@ export function startDebug() {
 export function resetDebug() {
   if (step_debugger === true) {
     var storage = window.localStorage;
-    var continueButton = $("#debug_continue");
+    var continueButton = $('#debug_continue');
     continueButton.show();
 
     storage.setItem("debugLine", "0");
@@ -273,12 +264,12 @@ export function resetDebug() {
 
 export function stopDebug() {
   if (step_debugger === true) {
-    var debugButton = $("#debug_button");
+    var debugButton = $('#debug_button');
     debugButton.show();
-    var continueButton = $("#debug_continue");
-    var stopButton = $("#debug_stop");
-    var resetButton = $("#debug_restart");
-    var runButtonContainer = $("#runButtonContainer");
+    var continueButton = $('#debug_continue');
+    var stopButton = $('debug_stop');
+    var resetButton = $('#debug_restart');
+    var runButtonContainer = $('#run_button_container');
 
     $('#stopit').hide();
     $('#runit').show()

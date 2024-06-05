@@ -2,7 +2,7 @@ from collections import namedtuple
 from enum import Enum
 from difflib import SequenceMatcher
 import re
-from flask import g, jsonify, request
+from flask import g, make_response, request
 from flask_babel import gettext
 import utils
 import hedy_content
@@ -157,7 +157,7 @@ class StatisticsModule(WebsiteModule):
             "per_level": _to_response_per_level(per_level_data),
             "per_week": _to_response(per_week_data, "week", lambda e: f"L{e['level']}"),
         }
-        return jsonify(response)
+        return make_response(response, 200)
 
     def get_grid_info(self, user, class_id, level):
         class_ = self.db.get_class(class_id)
@@ -820,7 +820,7 @@ class LiveStatisticsModule(WebsiteModule):
                 self.db.update_class_errors(common_errors)
                 break
 
-        return {}, 200
+        return make_response('', 204)
 
     def retrieve_exceptions_per_student(self, class_id):
         """
@@ -954,7 +954,7 @@ class LiveStatisticsModule(WebsiteModule):
 
         self.db.update_class_customizations(class_customization)
 
-        return {}, 200
+        return make_response('', 204)
 
 
 def add(username, action):
