@@ -92,7 +92,7 @@ teachers.forEach((teacher) => {
     it('removes the adventure and checks that it is added to the available adventures drop down and removed from the dragger', () => {
 
       // Click on level 2
-      cy.getDataCy("adventures")
+      cy.getDataCy("levels_dropdown")
         .select('2')
         .should('have.value', '2');
 
@@ -245,7 +245,7 @@ teachers.forEach((teacher) => {
   });
 
   function selectLevel(level) {
-    cy.getDataCy("adventures")
+    cy.getDataCy("levels_dropdown")
       .select(level)
       .should('have.value', level);
   }

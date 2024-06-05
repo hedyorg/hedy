@@ -10,7 +10,7 @@ describe('Is able to click on duplicate class', () => {
 
     // Click on duplicate icon
     openClassView();
-    cy.get('#duplicate_class').first().click();
+    cy.getDataCy('duplicate_class').first().click();
 
     // Checks for duplicate class name
     cy.getDataCy('modal_prompt_input').should('be.empty');
@@ -20,8 +20,8 @@ describe('Is able to click on duplicate class', () => {
     cy.getDataCy('modal_ok_button').should('be.visible');
     cy.getDataCy('modal_ok_button').should('be.enabled');
 
-    cy.get('#modal_cancel_button').should('be.visible');
-    cy.get('#modal_cancel_button').should('be.enabled');
+    cy.getDataCy('modal_cancel_button').should('be.visible');
+    cy.getDataCy('modal_cancel_button').should('be.enabled');
     logout();
   })
 
@@ -55,8 +55,8 @@ describe('Is able to click on duplicate class', () => {
           cy.getDataCy('modal_ok_button').should('be.enabled');
           
           // Checks for cancel button
-          cy.get('#modal_cancel_button').should('be.visible');
-          cy.get('#modal_cancel_button').should('be.enabled');
+          cy.getDataCy('modal_cancel_button').should('be.visible');
+          cy.getDataCy('modal_cancel_button').should('be.enabled');
         }
       })
   })

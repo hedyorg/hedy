@@ -25,7 +25,7 @@
                   <span class="fas fa-pen block mb-1"></span>
                   <span>{{_('customize')}}</span>
                 </button>
-                <button class="flex flex-col items-center mr-16" id="duplicate_class"
+                <button class="flex flex-col items-center mr-16" id="duplicate_class" data-cy="duplicate_class"
                   data-cy="duplicate_{{class.name}}"
                   onclick='hedyApp.duplicate_class("{{class.id}}", "{{class.second_teachers}}", {{_('second_teacher_copy_prompt')|default(None)|tojson}}, {{_('class_name_prompt')|default(None)|tojson}}, {% if class.teacher != username %}"{{class.name}}"{% else %}" "{% endif %})'>
                   <span class="fas fa-copy block mb-1"></span>
@@ -36,7 +36,7 @@
                   <span class="fas fa-eye block mb-1"></span>
                   <span>{{_('preview')}}</span>
                 </button>
-                <button id="remove_class" class="flex flex-col items-center"
+                <button data-cy="remove_class" class="flex flex-col items-center"
                     hx-confirm="{{_('delete_class_prompt')}}"
                     hx-trigger="click"
                     hx-delete="/class/{{class.id}}"

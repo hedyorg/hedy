@@ -7,7 +7,7 @@ export function createClass()
     goToTeachersPage();
     cy.wait(500);
 
-    cy.get('#create_class_button').click();
+    cy.getDataCy('create_class_button').click();
     cy.getDataCy('modal_prompt_input').type(classname);
     cy.getDataCy('modal_ok_button').click();
 
@@ -95,7 +95,7 @@ export function addCustomizations(classname){
     cy.getDataCy('opening_date_container').should("not.be.visible")
     cy.getDataCy('opening_date_label').click();
     cy.getDataCy('opening_date_container').should("be.visible")
-    cy.get('#enable_level_7').parent('.switch').click();
+    cy.getDataCy('enable_level_7').parent('.switch').click();
 
     cy.wait(1000)
     cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);

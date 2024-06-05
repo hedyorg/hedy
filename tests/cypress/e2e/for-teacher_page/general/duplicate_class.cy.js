@@ -14,7 +14,7 @@ describe('Duplicate class tests', () => {
     cy.reload();
     cy.wait(500);
     openClassView();
-    cy.get('#duplicate_class').first().click();
+    cy.getDataCy('duplicate_class').first().click();
 
     // Checks for input field
     cy.getDataCy('modal_prompt_input').type(duplicate_class);
@@ -29,7 +29,7 @@ describe('Duplicate class tests', () => {
     cy.getDataCy('opening_date_container').should("not.be.visible")
     cy.getDataCy('opening_date_label').click();
     cy.getDataCy('opening_date_container').should("be.visible")
-    cy.get("#enable_level_7").should('be.enabled');
+    cy.getDataCy('enable_level_7').should('be.enabled');
     logout();
   })
 
@@ -57,6 +57,6 @@ describe('Duplicate class tests', () => {
     cy.getDataCy('opening_date_container').should("not.be.visible")
     cy.getDataCy('opening_date_label').click();
     cy.getDataCy('opening_date_container').should("be.visible")
-    cy.get("#enable_level_7").should('be.enabled');
+    cy.getDataCy('enable_level_7').should('be.enabled');
   })
 })

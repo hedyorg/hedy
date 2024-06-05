@@ -27,7 +27,7 @@ describe('customize class page', () => {
 
     it('removes the puzzle and quiz from level 2', () => {
       // Click on level 2
-      cy.getDataCy("adventures")
+      cy.getDataCy("levels_dropdown")
         .select('2')
         .should('have.value', '2');
 

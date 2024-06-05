@@ -2,8 +2,7 @@
         <div class="flex w-full overflow-x-auto my-2">
             <h3 class="flex-1">{{_('select_adventures')}}</h3>
             <div class="flex items-center gap-2">
-                <select class="py-2 px-1 h-10 text-center " name="level" id="levels_dropdown"
-                        data-cy="adventures"
+                <select class="py-2 px-1 h-10 text-center " name="level" id="levels_dropdown" data-cy="levels_dropdown"
                         hx-get="/for-teachers/get-customization-level"
                         hx-target="#adventure_dragger"
                         hx-swap="outerHTML"
