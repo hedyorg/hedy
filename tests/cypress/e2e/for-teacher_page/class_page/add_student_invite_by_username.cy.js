@@ -2,6 +2,7 @@ import {loginForTeacher, logout, login} from '../../tools/login/login.js'
 import { openClassView } from "../../tools/classes/class";
 
 it('Is able to add student by name', () => {
+    cy.intercept('/invite-student').as('invite')    
     loginForTeacher();
     let student = 'student5'
 
@@ -24,8 +25,8 @@ it('Is able to add student by name', () => {
     cy.getDataCy('invite_student').click();
     cy.getDataCy('modal_prompt_input').type(student);
     cy.getDataCy('modal_ok_button').click();
-
-    cy.wait(500);
+    cy.wait('@invite')
+    
     login(student, "123456");
 
     cy.getDataCy('user_dropdown').click();
