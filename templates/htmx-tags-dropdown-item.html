@@ -1,6 +1,6 @@
 <!-- Requires #search_tags_input to exist -->
 <div class="relative cursor-pointer border-2 rounded-lg border-green-300 p-2 px-5 m-1 shadow"
-    id="tag_{{tag['name']}}" data-cy="tag_{{loop.index}}" hx-post="/tags/create/{{adventure_id}}/{{tag.name}}" hx-target="#tags_list"
+    id="tag_{{tag['name']}}" hx-post="/tags/create/{{adventure_id}}/{{tag.name}}" hx-target="#tags_list"
     hx-swap="outerHTML" _="on click event.stopPropagation()
         on htmx:afterRequest 
             if detail.xhr.status == 200

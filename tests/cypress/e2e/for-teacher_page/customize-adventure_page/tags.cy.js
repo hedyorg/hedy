@@ -66,7 +66,7 @@ describe("Tags of adventures", () => {
     }).as("deleteTag")
 
     cy.wait(500)
-    cy.getDataCy('tag_2')
+    cy.getDataCy("#tag_2")
       .should("be.visible")
       .should("include.text", "statements")
     cy.get("#tag_2 .fa-circle-xmark")
