@@ -19,24 +19,16 @@ levels:
             code: ___ Hello!
             mp_choice_options:
             -   option: |-
-                    ```
-                    {echo}
-                    ```
+                    `{echo}`
                 feedback: '`{echo}` repeats a given answer.'
             -   option: |-
-                    ```
-                    {print}
-                    ```
-                feedback: Correct!
+                    `{print}`
+                feedback: 正確！
             -   option: |-
-                    ```
-                    hello
-                    ```
+                    `hello`
                 feedback: Hello isn't a command.
             -   option: |-
-                    ```
-                    {ask}
-                    ```
+                    `{ask}`
                 feedback: With `{ask}`, you can ask a question.
             hint: _?_ Hello world!
             correct_answer: B
@@ -58,7 +50,7 @@ levels:
                     ```
                     {ask} What is your favorite color?
                     ```
-                feedback: Great!
+                feedback: 太棒了！
             -   option: |-
                     ```
                     {echo} What is your favorite color?
@@ -75,7 +67,7 @@ levels:
                 {echo} Hi...
             mp_choice_options:
             -   option: '`{print}` in line 1 is missing.'
-                feedback: Correct!
+                feedback: 正確！
             -   option: Im in line 1 is spelled wrong.
                 feedback: Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
             -   option: '`{echo}` isn''t a command.'
@@ -92,24 +84,16 @@ levels:
                 _?_ So your favorite pet is...
             mp_choice_options:
             -   option: |-
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: No, you would like the answer to be repeated back to you.
             -   option: |-
-                    ```
-                    Hedy
-                    ```
+                    `Hedy`
                 feedback: Hedy isn't a command.
             -   option: |-
-                    ```
-                    {ask}
-                    ```
+                    `{ask}`
                 feedback: With `{ask}` you can ask a question.
             -   option: |-
-                    ```
-                    {echo}
-                    ```
+                    `{echo}`
                 feedback: Right on!
             hint: You want to see the answer at the end of line 2...
             correct_answer: D
@@ -148,7 +132,7 @@ levels:
             -   option: In line 3 `{echo}` needs to be replaced with `{print}`
                 feedback: Are you sure something is wrong?
             -   option: Nothing! This is a perfect code!
-                feedback: Correct!
+                feedback: 正確！
             hint: Check the code line by line
             correct_answer: D
             question_score: '10'
@@ -303,24 +287,16 @@ levels:
                 {print} Hedy!
             mp_choice_options:
             -   option: |-
-                    ```
-                    {sleep}
-                    ```
+                    `{sleep}`
                 feedback: Perfect!
             -   option: |-
-                    ```
-                    {echo}
-                    ```
+                    `{echo}`
                 feedback: There is nothing to repeat back here
             -   option: |-
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: There is no text there to `{print}` there
             -   option: |-
-                    ```
-                    {ask}
-                    ```
+                    `{ask}`
                 feedback: There is no question there to be asked
             hint: Pause for dramatic effect...
             correct_answer: A
@@ -437,25 +413,17 @@ levels:
             question_text: What command do you use to let Hedy pick something arbitrarily?
             mp_choice_options:
             -   option: |-
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: '`{print}` is used to print text'
             -   option: |-
-                    ```
-                    {ask}
-                    ```
+                    `{ask}`
                 feedback: '`{ask}` is used to ask a question'
             -   option: |-
-                    ```
-                    {is}
-                    ```
+                    `{is}`
                 feedback: '`{is}` is used to make a list'
             -   option: |-
-                    ```
-                    {at} {random}
-                    ```
-                feedback: Correct!
+                    `{at}` `{random}`
+                feedback: 正確！
             hint: Arbitrarily means without a plan or randomly.
             correct_answer: D
             question_score: '10'
@@ -557,7 +525,7 @@ levels:
             -   option: Line 2 needs to say question instead of answers
                 feedback: No that's not right
             -   option: Line 2 needs the `{is}` command
-                feedback: Correct
+                feedback: 正確
             -   option: Line 3 needs to say answer instead of answers
                 feedback: No the variable's called answers
             -   option: Nothing! This code is great!
@@ -578,7 +546,7 @@ levels:
             -   option: The `{add}` command adds a random book to a list
                 feedback: It doesn't. It adds your answer to the list!
             -   option: The `{add}` command adds your favorite book to the list
-                feedback: Correct!
+                feedback: 正確！
             -   option: The `{add}` command prints your favorite book.
                 feedback: No, it adds your favorite book to the list
             hint: The `{add}` command adds a book, but which one?
@@ -681,7 +649,7 @@ levels:
                     ```
                     {print} 'hello'
                     ```
-                feedback: Correct
+                feedback: 正確
             -   option: |-
                     ```
                     {print} hello
@@ -796,7 +764,7 @@ levels:
                 {print} answers {at} {random}
             mp_choice_options:
             -   option: Quotation marks are missing in line 1
-                feedback: Correct!
+                feedback: 正確！
             -   option: Quotation marks are missing in line 2
                 feedback: A variable doesn't need quotes
             -   option: Quotation marks are missing in line 3
@@ -863,7 +831,7 @@ levels:
             -   option: Quotation marks are missing in line 1
                 feedback: A list doesn't need quotation marks
             -   option: Quotation marks are missing in line 2
-                feedback: Correct
+                feedback: 正確
             -   option: Quotation marks are missing in both line 2 and 3
                 feedback: Line 3 doesn't need quotation marks because it's not printed literally
             -   option: Nothing, this code has no mistakes
@@ -879,13 +847,13 @@ levels:
                 {if} number {is} 5 {print} 'Mine too!'
                 _?_ {print} 'My lucky number is 5!'
             mp_choice_options:
-            -   option: In level 5 `{print}` works differently than in level 4
-                feedback: '`{print}` is still the same'
-            -   option: In level 5 `{ask}` works differently than in level 4
+            -   option: '`{print}`'
+                feedback: '已經有一個 `{print}` 指令。'
+            -   option: '`{if}`'
                 feedback: '`{ask}` is still the same'
-            -   option: In level 5 `{ask}` and `{print}` work differently than in level 4
-                feedback: '`No these commands remain the same'
-            -   option: In level 5 `{ask}` and `{print}` work the same as in level 4
+            -   option: '`{sleep}`'
+                feedback: '不是這個！'
+            -   option: '`{else}`'
                 feedback: Correct!
             hint: We have only learned a new command in level 5.
             correct_answer: D
@@ -902,7 +870,7 @@ levels:
                 feedback: If the name is Hedy, it will say 'fun''
             -   option: Hedy
                 feedback: No, it doesn't print the name
-            -   option: Error
+            -   option: 錯誤
                 feedback: Fortunately not!
             hint: '`{if}` name `{is}` Hedy `{print}` ...?'
             correct_answer: A
@@ -914,11 +882,11 @@ levels:
                 {if} password {is} SECRET {print} 'Correct!'
                 {else} {print} 'ALARM! INTRUDER!'
             mp_choice_options:
-            -   option: Correct!
+            -   option: 正確！
                 feedback: This is printed when you type in the correct password
-            -   option: SECRET
+            -   option: 秘密
                 feedback: That's right!'
-            -   option: password
+            -   option: 密碼
                 feedback: The password isn't password...
             -   option: ALARM INTRUDER
                 feedback: This is printed when you type in the incorrect password!
@@ -932,9 +900,9 @@ levels:
                 {if} password {is} SECRET {print} 'Correct!'
                 {else} {print} 'ALARM! INTRUDER!'
             mp_choice_options:
-            -   option: Correct
+            -   option: 正確
                 feedback: That's printed if the correct answer is given, not the wrong one...
-            -   option: SECRET
+            -   option: 秘密
                 feedback: That's not the right answer
             -   option: Wrong!
                 feedback: No, this is not what Hedy will print
@@ -1002,24 +970,16 @@ levels:
                 {else} _?_ 'Unfortunately... No big money for you.'
             mp_choice_options:
             -   option: |-
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: '`{if}` is in the line above.'
             -   option: |-
-                    ```
-                    {at} {random}
-                    ```
+                    `{at}` `{random}`
                 feedback: No, you don't need `{at} {random}`.
             -   option: |-
-                    ```
-                    {else}
-                    ```
+                    `{else}`
                 feedback: There already is an `{else}` command
             -   option: |-
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: Awesome!
             hint: After `{else}` a `{print}` command follows
             correct_answer: D
@@ -1042,14 +1002,10 @@ levels:
                     ```
                 feedback: Great job!
             -   option: |-
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: '`{if}` is already there'
             -   option: |-
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: No, that's not it.
             hint: What the variable name?
             correct_answer: B
@@ -1102,7 +1058,7 @@ levels:
             code: '{print} 2*10'
             mp_choice_options:
             -   option: '20'
-                feedback: Correct!
+                feedback: 正確！
             -   option: '12'
                 feedback: No, the plus sign is used in addition
             -   option: 2*10
@@ -1122,7 +1078,7 @@ levels:
             -   option: '`*`'
                 feedback: That's not it
             -   option: '`+`'
-                feedback: Correct!
+                feedback: 正確！
             hint: It's the plus sign.
             correct_answer: D
             question_score: '10'
@@ -1234,7 +1190,7 @@ levels:
             -   option: There shouldn't be quotation marks in line 2
                 feedback: No, there should be!
             -   option: The variable is called correct answer, but a variable's name can only be 1 word. So it should be correct_answer
-                feedback: Correct!
+                feedback: 正確！
             -   option: The `{if}` and `{else}` commands should be in the same line.
                 feedback: No, that's not true.
             -   option: The variable in line 2 can't be called answer, because it is too similar to the variable correct answer.
@@ -1350,19 +1306,13 @@ levels:
                     ```
                 feedback: That's right!
             -   option: |-
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: '`{print}` is spelled correctly'
             -   option: |-
-                    ```
-                    {repeat}
-                    ```
+                    `{repeat}`
                 feedback: '`{repeat}` is spelled correctly'
             -   option: |-
-                    ```
-                    {times}
-                    ```
+                    `{times}`
                 feedback: '`{times}` is spelled correctly'
             hint: I'm is wrong, you can't use apostrophes
             correct_answer: A
@@ -1611,7 +1561,7 @@ levels:
             -   option: There is a spelling mistake in the `{repeat}` command.
                 feedback: Nee, repeat is de goede spelling
             -   option: The second line need to start with 4 spaces as indentation.
-                feedback: Correct!
+                feedback: 正確！
             hint: Something is missing in the second line?
             correct_answer: D
             question_score: '10'
@@ -1668,7 +1618,7 @@ levels:
                     We are going on vacation!
                     Yay!
                     We are going on vacation!
-                feedback: Correct!
+                feedback: 正確！
             -   option: |-
                     The children went:
                     Yay!
@@ -1905,7 +1855,7 @@ levels:
                     Good job!
                     You can use the computer!
                     ```
-                feedback: Correct!
+                feedback: 正確！
             hint: Everything under the `{repeat}` command is repeated twice.
             correct_answer: D
             question_score: '10'
@@ -2364,19 +2314,13 @@ levels:
                     ```
                 feedback: 'No'
             -   option: |-
-                    ```
-                    {range}
-                    ```
+                    `{range}`
                 feedback: Correct
             -   option: |-
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: 'No'
             -   option: |-
-                    ```
-                    {for}
-                    ```
+                    `{for}`
                 feedback: 'No'
             hint: What did you learn in this level?
             correct_answer: B
@@ -2391,7 +2335,7 @@ levels:
                     1
                     2
                     3
-                feedback: Correct!
+                feedback: 正確！
             -   option: 1 2 3
                 feedback: That's not it
             -   option: 1, 2, 3
@@ -2689,7 +2633,7 @@ levels:
                 print 'I like ' favoriteanimal ' too!'
             mp_choice_options:
             -   option: The name of the variable is different in line 1 than in line 2.
-                feedback: Correct!
+                feedback: 正確！
             -   option: The quotation marks aren't used correctly in line 2
                 feedback: That's not true
             -   option: You can't use the = sign when using an ask command
@@ -2948,7 +2892,7 @@ levels:
                 feedback: You don't have to be vegan and muslim
             -   option: or
                 feedback: Great thinking!
-            -   option: +
+            -   option: '`+`'
                 feedback: 'No'
             -   option: print
                 feedback: 'No'
@@ -3119,7 +3063,7 @@ levels:
                     ```
                     {if} chocolate = 'yes' {and} sprinkles = 'yes'
                     ```
-                feedback: Correct!
+                feedback: 正確！
             -   option: |-
                     Line 3 should be:
                     ```
@@ -3896,7 +3840,7 @@ levels:
                     Kevin
                     Stuart
                     ```
-                feedback: Correct!
+                feedback: 正確！
             -   option: |-
                     ```
                     minions
@@ -3933,7 +3877,7 @@ levels:
             -   option: One of the variables `noleap_year` does not belong with the `{if}` statement.
                 feedback: Keep looking for the mistake.
             -   option: The `noleap_year` has to be identical in both cases.
-                feedback: Correct!
+                feedback: 正確！
             hint: Read the code carefully.
             correct_answer: D
             question_score: '10'
