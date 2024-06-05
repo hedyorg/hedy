@@ -86,6 +86,20 @@
                     class="green-btn" id="edit_adventure_button">
                     {{_('edit_adventure')}}</a>
             {% endif %}
+            <span class="fa fa-flag bg-{% if adventure.flagged %}red{%else%}blue{%endif%}-300 hover:bg-blue-600 p-2 mx-4 rounded-full text-white cursor-pointer" 
+                    hx-confirm="{{_('flag_adventure_prompt')}}"
+                    hx-trigger="click"
+                    hx-post="/public-adventures/flag/{{adventure.id}}/{{adventure.flagged}}"
+                    hx-swap="none"
+                    _="on htmx:afterRequest if detail.xhr.status == 200 then window.location.reload()"></span>
+            {% if is_super_teacher %}
+                <i class="fa fa-trash p-2 bg-red-500 mr-4 rounded-full cursor-pointer" id="{{adventure.id}}"
+                    hx-confirm="{{_('delete_adventure_prompt')}}"
+                    hx-trigger="click"
+                    hx-delete="/for-teachers/customize-adventure/{{adventure.id}}/{{adventure.creator}}"
+                    hx-swap="none"
+                    _="on htmx:afterRequest if detail.xhr.status == 200 then window.location.reload()"></i>
+            {% endif %}
         {% endif %}
     </div>
 </div>
