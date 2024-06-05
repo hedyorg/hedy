@@ -1,9 +1,9 @@
 import { loginForStudent, loginForTeacher, logout } from "../tools/login/login";
-import  {goToHedyLevel2Page, goToTeachersPage } from "../tools/navigation/nav";
-import { createClassAndAddStudents, openClassView } from '../tools/classes/class.js'
+import  {goToHedyLevel2Page } from "../tools/navigation/nav";
+import { createClassAndAddStudents, addCustomizations } from '../tools/classes/class.js'
 
 describe('Go to level dropdown', () => {
-  it('Is not able to go to disabled level 5', () => {  
+  it('Is not able to go to disabled level 7', () => {  
     cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
     
     loginForTeacher();
@@ -12,21 +12,7 @@ describe('Go to level dropdown', () => {
     let classname;
     let students;
     ({classname, students} = createClassAndAddStudents());
-    goToTeachersPage();
-
-    cy.wait(500);
-    openClassView();
-    cy.getDataCy('view_class_link').contains(new RegExp(`^${classname}$`)).click();
-    cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide());
-    cy.getDataCy('customize_class_button').click();
-    cy.getDataCy('opening_date_container').should("not.be.visible")
-    cy.getDataCy('opening_date_label').click();
-    cy.getDataCy('opening_date_container').should("be.visible")
-    cy.get('#enable_level_5').parent('.switch').click();
-    
-    cy.wait(1000)
-    cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
-
+    addCustomizations(new RegExp(`^${classname}$`));
     logout()
     loginForStudent(students[0]);
     cy.wait(500);
@@ -34,6 +20,6 @@ describe('Go to level dropdown', () => {
 
     cy.get('#dropdown_level_button').click();
     cy.get('#level_button_4').should('not.be.disabled');
-    cy.get('#level_button_5').should('be.disabled');
+    cy.get('#level_button_7').should('be.disabled');
   })
 })

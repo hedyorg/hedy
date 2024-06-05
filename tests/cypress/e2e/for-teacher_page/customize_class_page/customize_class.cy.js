@@ -1,5 +1,6 @@
-import { loginForTeacher } from '../../tools/login/login.js'
+import { loginForTeacher, loginForStudent } from '../../tools/login/login.js'
 import { ensureClass, openClassView, removeCustomizations } from "../../tools/classes/class";
+import { goToHedyPage } from "../../tools/navigation/nav";
 
 const teachers = ["teacher1", "teacher4"];
 
@@ -167,7 +168,7 @@ teachers.forEach((teacher) => {
       cy.getDataCy('parrot').should('be.visible');
     });
 
-    it('an adventure that is hidden', () => {
+    describe('an adventure that is hidden', () => {
       const hiddenAdventure = 'parrot';
 
       beforeEach(() => {
@@ -181,12 +182,65 @@ teachers.forEach((teacher) => {
 
       it('can be re-added from the right dropdown list', () => {
         cy.getDataCy('available_adventures_current_level').children(`*[value='${hiddenAdventure}']`).should('exist');
-
         cy.getDataCy('available_adventures_current_level').select(`${hiddenAdventure}`);
-
         cy.getDataCy(`${hiddenAdventure}`).should('exist');
-      });
+        cy.wait(500);
 
+        // should be visible for a student
+        loginForStudent();
+        goToHedyPage();
+        cy.getDataCy('parrot').should('be.visible');
+      });
+    });
+
+    it('FIXME: selects two adventures and swaps them using drag and drop', () => {
+      /**
+       * FIXME: Since We changed the library that handles the drag and drop,
+       * this test is harder to make into work, since the Cypress documentation,
+       * and the documentation of the library are no use.
+       */
+
+      /*
+      // Click on level 1
+      selectLevel('1');
+      // Now it should be visible
+      cy.getDataCy('level_1').should('be.visible');
+      // Get the first and second adventure
+      cy.getDataCy('level_1')
+        .children()
+        .eq(0)
+        .invoke('attr', 'value')
+        .as('first_adventure');
+      cy.getDataCy('level_1')
+        .children()
+        .eq(1)
+        .invoke('attr', 'value')
+        .as('second_adventure');
+      // Getting their values first, and then moving them around
+      cy.get('@first_adventure').then(first_adventure => {
+        cy.get('@second_adventure').then(second_adventure => {
+          // Move the second adventure to the first place
+          cy.getDataCy('level_1')
+            .children()
+            .eq(1)
+            .trigger('dragstart')
+          cy.getDataCy('level_1')
+            .children()
+            .eq(0)
+            .trigger('drop')
+            .trigger('dragend');
+          // they should be inverted now
+          cy.getDataCy('level_1')
+            .children()
+            .eq(0)
+            .should('have.value', second_adventure);
+          cy.getDataCy('level_1')
+            .children()
+            .eq(1)
+            .should('have.value', first_adventure);
+        })
+      })
+    */
     });
   });
 
@@ -196,3 +250,5 @@ teachers.forEach((teacher) => {
       .should('have.value', level);
   }
 });
+
+

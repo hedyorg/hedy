@@ -87,8 +87,10 @@ export function addCustomizations(classname){
     cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
     goToTeachersPage();
 
+    cy.wait(500);
     openClassView();
     cy.getDataCy('view_class_link').contains(classname).click();
+    cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide());
     cy.getDataCy('customize_class_button').click();
     cy.getDataCy('opening_date_container').should("not.be.visible")
     cy.getDataCy('opening_date_label').click();
