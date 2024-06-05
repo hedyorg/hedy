@@ -1,14 +1,14 @@
 import {loginForTeacher, logout, login} from '../../../tools/login/login.js'
-import { openClassView } from "../../../tools/classes/class.js";
+import { navigateToClass } from "../../../tools/classes/class.js";
 
-it('Is able to add student by name', () => {
-    cy.intercept('/invite-student').as('invite')    
-    loginForTeacher();
+const teachers = ["teacher1", "teacher4"];
+
+teachers.forEach((teacher) => {
+  it(`Is able to add student by name for ${teacher}`, () => {
     let student = 'student5'
-
-    openClassView();
-    cy.getDataCy('view_class_link').first().click();
-    cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
+    cy.intercept('/invite-student').as('invite')
+    loginForTeacher();
+    navigateToClass();
 
     // delete student if in class
     cy.getDataCy('class_user_table').then(($div) => {
@@ -35,12 +35,11 @@ it('Is able to add student by name', () => {
 
     logout();
     loginForTeacher();
-
-    openClassView();
-    cy.getDataCy('view_class_link').first().click();
+    navigateToClass();
 
     cy.getDataCy('student_username_cell').should(($div) => {
       const text = $div.text()
       expect(text).include('student5');
     })
+  })
 })

@@ -5,82 +5,65 @@ let classname;
 let students;
 const teachers = ["teacher1", "teacher4"];
 
+before(() => {
+  loginForTeacher();
+  ({classname, students} = createClassAndAddStudents());
+})
+
 beforeEach(() => {
   loginForTeacher();
+  navigateToClass(classname);
+  cy.getDataCy('add_student').click();
+  cy.getDataCy('create_accounts').click();
 })
 
 teachers.forEach((teacher) => {
-  describe(`Testing ${teacher} account`, () => {
-    it('Is able to add rows to create more accounts', () => {
-      ({classname, students} = createClassAndAddStudents());
-      cy.getDataCy('add_multiple_rows').click();
-      cy.get(':nth-child(6) > [data-cy="username"]').should('have.value', '');
-    })
+  describe(`Testing creating accounts for ${teacher}`, () => {
+    it('Test go back button and see if students created in createClassAndAddStudents() are present', () => {
+        cy.getDataCy('go_back_button').click();
+        cy.wait(1000);
+        cy.url().should('include', 'class/'); 
 
-    it('Is able to create new accounts for class', () => {
-      navigateToClass(classname);
       cy.getDataCy('student_username_cell').should(($div) => {
         const text = $div.text();
         expect(text).include(students[0]);
       }) 
     })
 
-    it('Is able to download login credentials', () => {
-      ({classname, students} = createClassAndAddStudents());
+    it('Is able to download login credentials and generate passwords', () => {
+      // download login credentials
       cy.readFile('cypress/downloads/accounts.csv');
-    })
 
-    it('Is able to generate passwords', () => {
-      navigateToClass(classname);
-      cy.getDataCy('add_student').click();
-      cy.getDataCy('create_accounts').click();
+      // generate passwords
       cy.getDataCy('toggle_circle').click(); //switches the toggle on so that passwords are generated
       cy.wait(1000);
       cy.get(':nth-child(2) > [data-cy="password"]').should('have.length.greaterThan', 0);
     })
 
-    it('Is able to go to logs page', () => {
-      var currentUrl = '';
-      navigateToClass(classname);
-      cy.url().then(url => {
-        currentUrl = url;
-        cy.getDataCy('add_student').click();
-        cy.getDataCy('create_accounts').click();
-        cy.getDataCy('go_back_button').click();
-        cy.wait(1000);
-        let statsUrl = Cypress.env('class_page') + currentUrl.substring(currentUrl.indexOf('class/')+6);
-        cy.url().should('include', statsUrl); 
-      })    
-    })
-
-    it('Is able to remove row', () => {
-      navigateToClass(classname);
-      cy.getDataCy('add_student').click();
-      cy.getDataCy('create_accounts').click();
-      //fills in first row
+    it('Is able to add and remove a row and use the reset button', () => {
+      // testing add a row
+      cy.getDataCy('add_multiple_rows').click();
+      cy.get(':nth-child(6) > [data-cy="username"]').should('have.value', '');
+      // testing removing a row
+      // fills in two rows
       cy.get(':nth-child(2) > [data-cy="username"]').type("student10");
       cy.get(':nth-child(2) > [data-cy="password"]').type("123456");
+      cy.get(':nth-child(3) > [data-cy="username"]').type("student11");
+      cy.get(':nth-child(3) > [data-cy="password"]').type("123456");
       cy.wait(1000);
-      //checks if the first row is filled
+      // checks if they are filled
       cy.get(':nth-child(2) > [data-cy="username"]').should('have.value', 'student10');
-      //deletes the first row
+      cy.get(':nth-child(3) > [data-cy="username"]').should('have.value', 'student11');
+      // deletes the first row
       cy.get(':nth-child(2) > .fill-current > path').click();
       cy.wait(1000);
-      //check if the first row is now empty
-      cy.get(':nth-child(2) > [data-cy="username"]').should('have.value', '');
-    })
-
-    it('Is able to use the reset button', () => {
-      navigateToClass(classname);
-      cy.getDataCy('add_student').click();
-      cy.getDataCy('create_accounts').click();
-      cy.get(':nth-child(2) > [data-cy="username"]').type("student10");
-      cy.get(':nth-child(2) > [data-cy="password"]').type("123456");
-      cy.wait(1000);
-      cy.get(':nth-child(2) > [data-cy="username"]').should('have.value', 'student10');
+      // check if the first row is now student12
+      cy.get(':nth-child(2) > [data-cy="username"]').should('have.value', 'student11');
+      // testing reseting
       cy.getDataCy('reset_button').click();
       cy.wait(1000);
       cy.get(':nth-child(2) > [data-cy="username"]').should('have.value', '');
+      cy.get(':nth-child(3) > [data-cy="username"]').should('have.value', '');
     })
   })
 })

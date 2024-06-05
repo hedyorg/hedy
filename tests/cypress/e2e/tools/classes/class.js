@@ -109,11 +109,15 @@ export function createClassAndAddStudents(){
     return {classname, students};
 }
 
-export function navigateToClass(classname) {
+export function navigateToClass(classname=null) {
     goToTeachersPage();
     cy.wait(500);
     openClassView();
-    cy.getDataCy('view_class_link').contains(new RegExp(`^${classname}$`)).click();
+    if (classname) {
+        cy.getDataCy('view_class_link').contains(new RegExp(`^${classname}$`)).click();
+    } else {
+        cy.getDataCy('view_class_link').first().click();
+    }
     cy.wait(500);
     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
 }

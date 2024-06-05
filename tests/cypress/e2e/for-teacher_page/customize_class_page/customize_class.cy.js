@@ -4,7 +4,6 @@ import { goToHedyPage } from "../../tools/navigation/nav";
 
 const teachers = ["teacher1", "teacher4"];
 
-// test a first teacher and a second teacher
 teachers.forEach((teacher) => {
   describe(`customize class page for ${teacher}`, () => {
     beforeEach(() => {
