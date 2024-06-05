@@ -1,5 +1,5 @@
-import {loginForTeacher, logout, login} from '../../tools/login/login.js'
-import { openClassView } from "../../tools/classes/class";
+import {loginForTeacher, logout, login} from '../../../tools/login/login.js'
+import { openClassView } from "../../../tools/classes/class.js";
 
 it('Is able to add student by name', () => {
     cy.intercept('/invite-student').as('invite')    

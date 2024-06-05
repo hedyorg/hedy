@@ -1,5 +1,5 @@
-import {loginForTeacher} from '../../tools/login/login.js'
-import { openClassView } from "../../tools/classes/class";
+import {loginForTeacher} from '../../../tools/login/login.js'
+import { openClassView } from "../../../tools/classes/class.js";
 
 it('Is able to see copy link to add student to class', () => {
     loginForTeacher();
