@@ -27,7 +27,7 @@ it('Is able to add student by name', () => {
     cy.getDataCy('invite_student').click();
     cy.getDataCy('modal_prompt_input').type(student);
     cy.getDataCy('modal_ok_button').click();
-    cy.wait(1000)
+    cy.wait(3000)
     
     login(student, "123456");
 
