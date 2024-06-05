@@ -288,7 +288,7 @@ class AuthModule(WebsiteModule):
         hashed = password_hash(body["password"], make_salt())
         self.db.update_user(body["username"], {"password": hashed})
 
-        return make_response(gettext("password_change_success"), 200)
+        return make_response({"success": gettext("password_change_success")}, 200)
 
     @ route("/change_password", methods=["POST"])
     @ requires_login
