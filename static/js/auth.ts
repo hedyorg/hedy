@@ -184,7 +184,7 @@ export function initializeFormSubmits() {
 
 // *** Admin functionality ***
 
-export function markAsTeacher(checkbox: any, username: string, is_teacher: boolean, pending_request: boolean) {
+export function markAsTeacher(checkbox: any, username: string, is_teacher: boolean, pending_request: boolean, by_super_teacher = false) {
   $(checkbox).prop('checked', false);
   let text = "Are you sure you want to remove " + username + " as a teacher?";
   if (is_teacher) {
@@ -192,7 +192,7 @@ export function markAsTeacher(checkbox: any, username: string, is_teacher: boole
   }
   modal.confirm (text, async () => {
     try {
-      await postNoResponse('/admin/markAsTeacher', {
+      await postNoResponse(by_super_teacher ? '/super-teacher/markAsTeacher' : '/admin/markAsTeacher', {
         username: username,
         is_teacher: is_teacher,
       });
@@ -212,6 +212,27 @@ export function markAsTeacher(checkbox: any, username: string, is_teacher: boole
     }
   });
 }
+
+export function markSuperTeacher(checkbox: any, username: string, is_super_teacher: boolean) {
+  let text = "Are you sure you want to make " + username + " a super teacher?";
+  if (is_super_teacher) {
+    text = "Are you sure you want to revoke super teacher privilege from " + username + "?";
+  }
+  modal.confirm (text, async () => {
+    try {
+      await postNoResponse('/admin/mark-super-teacher', {
+        username: username,
+      });
+      location.reload();
+    } catch (e: any) {
+      console.error(e);
+      modal.notifyError(e);
+      $(checkbox).prop('checked', is_super_teacher);
+    }
+  }, () => $(checkbox).prop('checked', is_super_teacher)
+  );
+}
+
 
 export function changeUserEmail(username: string, email: string) {
   modal.prompt ('Please enter the corrected email', email, async function (correctedEmail) {
