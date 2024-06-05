@@ -42,8 +42,8 @@ describe('Is able to click on duplicate class', () => {
           cy.getDataCy('modal_yes_button').should('be.visible');
           cy.getDataCy('modal_yes_button').should('be.enabled');
 
-          cy.get('#modal_no_button').should('be.visible');
-          cy.get('#modal_no_button').should('be.enabled').click();
+          cy.getDataCy('modal_no_button').should('be.visible');
+          cy.getDataCy('modal_no_button').should('be.enabled').click();
 
           // Checks for input field
           cy.getDataCy('modal_prompt_input').should('not.have.value', '');
