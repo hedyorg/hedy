@@ -180,9 +180,13 @@ ADVENTURES = dynamo.Table(storage, "adventures", "id",
 INVITATIONS = dynamo.Table(
     storage, "invitations", partition_key="username#class_id",
     types=only_in_dev({
-        'username#class_id': str,
         'username': str,
         'class_id': str,
+        'timestamp': int,
+        'ttl': int,
+        'invited_as': str,
+        'invited_as_text': str,
+        'username#class_id': str
     }),
     indexes=[
         dynamo.Index("username"),
@@ -202,6 +206,11 @@ TAGS = dynamo.Table(storage, "tags", "id",
                         'id': str,
                         'name': str,
                         'popularity': int,
+                        'tagged_in': Optional(ListOf(RecordOf({
+                            'id': str,
+                            'public': bool,
+                            'language': str
+                        })))
                     }),
                     indexes=[
                         dynamo.Index("name", sort_key="popularity")
