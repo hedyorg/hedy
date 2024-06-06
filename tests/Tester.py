@@ -106,11 +106,12 @@ class SkippedMapping:
 
 @cache
 def get_hedy_source_hash():
-    directory = os.path.join(ROOT_DIR, 'grammars')
+    grammars_dir = os.path.join(ROOT_DIR, 'grammars')
 
     files_affecting_parsing = (
-        [os.path.join(directory, filename) for filename in os.listdir(directory)] +
-        [os.path.join(ROOT_DIR, 'hedy.py')]
+        [os.path.join(grammars_dir, filename) for filename in os.listdir(grammars_dir)] +
+        [os.path.join(ROOT_DIR, 'hedy.py')] +
+        [os.path.join(ROOT_DIR, file) for file in os.listdir(ROOT_DIR) if re.fullmatch('hedy_.*\\.py', file)]
     )
 
     files_affecting_parsing.sort()
