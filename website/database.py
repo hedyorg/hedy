@@ -112,8 +112,7 @@ PROGRAMS = dynamo.Table(storage, "programs", "id",
                             'name': str,
                             'username_level': str,
                             'error': Optional(bool),
-                            # TODO: not sure if this one is optional or not. I think not!
-                            'is_modified': Optional(bool)
+                            'is_modified': bool
                         }),
                         indexes=[
                             dynamo.Index('username', sort_key='date', index_name='username-index'),
@@ -225,10 +224,20 @@ TAGS = dynamo.Table(storage, "tags", "id",
 SURVEYS = dynamo.Table(storage, "surveys", "id",
                        types=only_in_dev({
                            'id': str,
+                           'responses': dict
                        }),
                        )
 
-FEEDBACK = dynamo.Table(storage, "teacher_feedback", "id")
+FEEDBACK = dynamo.Table(storage, "teacher_feedback", "id",
+                        types=only_in_dev({
+                            'id': str,
+                            'username': str,
+                            'email': str,
+                            'message': str,
+                            'category': str,
+                            'page': str,
+                            'date': int
+                        }))
 
 # Class customizations
 #
