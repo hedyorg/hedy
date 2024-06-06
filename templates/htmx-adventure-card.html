@@ -57,7 +57,7 @@
 
         {% if adventure["code"] %}
             <p class="text-gray-600 mt-1"><strong>{{_('number_lines')}}:</strong> {{ adventure.number_lines }}</p>
-            <pre level="{{ adventure.level }}">{{ adventure.code }}</pre>
+            <pre level="{{ adventure.level }}" class="text-sm">{{ adventure.code }}</pre>
         {%endif%}
     </div>
     <div id="actions"
@@ -70,7 +70,7 @@
             {% endif %}
         {% else %}
             {% if user["username"] != adventure["creator"] %}
-                <button class="green-btn" 
+                <button class="green-btn"
                     hx-post="/public-adventures/clone/{{adventure.id}}"
                     hx-target="#adventure_{{adventure.id}}"
                     hx-swap="outerHTML"
@@ -85,6 +85,20 @@
                     data-cy="edit_{{adventure.name}}"
                     class="green-btn" id="edit_adventure_button">
                     {{_('edit_adventure')}}</a>
+            {% endif %}
+            <span class="fa fa-flag bg-{% if adventure.flagged %}red{%else%}blue{%endif%}-300 hover:bg-blue-600 p-2 mx-4 rounded-full text-white cursor-pointer" 
+                    hx-confirm="{{_('flag_adventure_prompt')}}"
+                    hx-trigger="click"
+                    hx-post="/public-adventures/flag/{{adventure.id}}/{{adventure.flagged}}"
+                    hx-swap="none"
+                    _="on htmx:afterRequest if detail.xhr.status == 200 then window.location.reload()"></span>
+            {% if is_super_teacher %}
+                <i class="fa fa-trash p-2 bg-red-500 mr-4 rounded-full cursor-pointer" id="{{adventure.id}}"
+                    hx-confirm="{{_('delete_adventure_prompt')}}"
+                    hx-trigger="click"
+                    hx-delete="/for-teachers/customize-adventure/{{adventure.id}}/{{adventure.creator}}"
+                    hx-swap="none"
+                    _="on htmx:afterRequest if detail.xhr.status == 200 then window.location.reload()"></i>
             {% endif %}
         {% endif %}
     </div>

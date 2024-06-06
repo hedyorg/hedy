@@ -1,26 +1,22 @@
 import {loginForTeacher} from '../../tools/login/login.js'
-import {createClass} from '../../tools/classes/class.js'
 
+it('Is able to go to logs page', () => {
+  loginForTeacher();
+  cy.wait(500);
 
-describe('Is able to go to logs page', () => {
-  it('Passes', () => {
-    loginForTeacher();
-    cy.wait(500);
+  cy.getDataCy('view_class_link').then($viewClass => {
+    if (!$viewClass.is(':visible')) {
+        cy.getDataCy('view_classes').click();
+    }
+  });
+  cy.getDataCy('view_class_link').first().click(); // Press view class button
+  cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
 
-    cy.get(".view_class").then($viewClass => {
-      if (!$viewClass.is(':visible')) {
-          cy.get("#view_classes").click();
-      }
-    });
-    cy.get(".view_class").first().click(); // Press view class button
-    cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
+  cy.getDataCy('go_back_button')
+    .should('be.visible')
+    .should('not.be.disabled')
+    .click();   
 
-    cy.get('#go_back_button')
-      .should('be.visible')
-      .should('not.be.disabled')
-      .click();   
-
-    cy.url()
-      .should('eq', Cypress.config('baseUrl') + Cypress.env('teachers_page'));
-  })
+  cy.url()
+    .should('eq', Cypress.config('baseUrl') + Cypress.env('teachers_page'));
 })
