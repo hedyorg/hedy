@@ -1680,8 +1680,8 @@ class Validator(metaclass=ABCMeta):
             elif isinstance(k, str):
                 type_dict[k] = Validator.ensure(v)
             else:
-                raise ValueError(f'Key values should be of type str or instances of string. {
-                                 k} does not comply with that')
+                raise ValueError(f'Key values should be of type str or instances of string.\
+                                 {k} does not comply with that')
         return type_dict
 
     def is_valid(self, value):
