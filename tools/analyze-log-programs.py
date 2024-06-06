@@ -47,7 +47,8 @@ for p in public_programs['rows']:
 with open('analysis.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(['program_id', 'username', 'language', 'experiment_language', 'class', 'number of lines',
-                    'number of variables', 'number of commands', 'number of distinct commands', 'level', 'error_message'])
+                     'number of variables', 'number of commands', 'number of distinct commands',
+                     'level', 'error_message'])
 
 analysis = False
 variables = True
@@ -61,7 +62,7 @@ for snippet in snippets:
             all_commands = hedy.all_commands(snippet.code, snippet.level, snippet.language)
             try:
                 all_variables = hedy.all_variables(snippet.code, snippet.level, snippet.language)
-            except:
+            except Exception as e:
                 all_variables = []
 
             lines = len(snippet.code.split('\n'))
@@ -71,13 +72,14 @@ for snippet in snippets:
                     writer = csv.writer(csvfile)
                     for v in all_variables:
                         writer.writerow([program_id, snippet.username, snippet.language,
-                                        snippet.experiment_language, snippet.level, v])
+                                         snippet.experiment_language, snippet.level, v])
 
             if analysis:
                 with open('analysis.csv', 'a', newline='') as csvfile:
                     writer = csv.writer(csvfile)
-                    writer.writerow([program_id, snippet.username, snippet.language, snippet.experiment_language, snippet.adventure_name, lines, len(
-                        all_variables), len(all_commands), len(set(all_commands)), snippet.level, ''])
+                    writer.writerow([program_id, snippet.username, snippet.language, snippet.experiment_language,
+                                     snippet.adventure_name, lines, len(
+                            all_variables), len(all_commands), len(set(all_commands)), snippet.level, ''])
 
             print(program_id, len(snippets), round(100 * program_id / len(snippets), 2))
 
@@ -94,5 +96,6 @@ for snippet in snippets:
             with open('analysis.csv', 'a', newline='') as csvfile:
                 writer = csv.writer(csvfile)
                 writer.writerow(
-                    [program_id, snippet.username, snippet.language, snippet.experiment_language, snippet.adventure_name,
+                    [program_id, snippet.username, snippet.language, snippet.experiment_language,
+                     snippet.adventure_name,
                      0, 0, 0, 0, snippet.level, snippet.error])
