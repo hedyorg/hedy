@@ -224,7 +224,12 @@ TAGS = dynamo.Table(storage, "tags", "id",
 SURVEYS = dynamo.Table(storage, "surveys", "id",
                        types=only_in_dev({
                            'id': str,
-                           'responses': dict
+                           'responses': RecordOf({
+                               str: RecordOf({
+                                   'answer': str,
+                                   'question': str
+                               })
+                           })
                        }),
                        )
 
@@ -265,16 +270,52 @@ FEEDBACK = dynamo.Table(storage, "teacher_feedback", "id",
 #      available to this class. This list is deprecated, all adventures a teacher created
 #      are now automatically available to all of their classes.
 CUSTOMIZATIONS = dynamo.Table(storage, "class_customizations", partition_key="id",
-                              types=only_in_dev({'id': str}),
-                              )
+                              types=only_in_dev({
+                                  'id': str,
+                                  'levels': ListOf(int),
+                                  'opening_dates': RecordOf({
+                                      str: str
+                                  }),
+                                  'other_settings': ListOf(str),
+                                  'level_thresholds': RecordOf({
+                                      str: int
+                                  }),
+                                  'sorted_adventures': RecordOf({
+                                      str: ListOf(RecordOf({
+                                          'name': str,
+                                          'from_teacher': bool
+                                      }))
+                                  }),
+                                  'updated_by': str,
+                                  'quiz_parsons_tabs_migrated': bool
+                              }))
+
 ACHIEVEMENTS = dynamo.Table(storage, "achievements", partition_key="username",
-                            types=only_in_dev({'username': str}),
-                            )
+                            types=only_in_dev({
+                                'username': str,
+                                'achieved': Optional(ListOf(str)),
+                                'commands': Optional(ListOf(str)),
+                                'saved_programs': Optional(int),
+                                'run_programs': Optional(int)
+                            }))
 PUBLIC_PROFILES = dynamo.Table(storage, "public_profiles", partition_key="username",
-                               types=only_in_dev({'username': str}),
-                               )
+                               types=only_in_dev({
+                                   'username': str,
+                                   'image': str,
+                                   'personal_text': str,
+                                   'agree_terms': str,
+                                   'tags': Optional(ListOf(str))
+                               }))
 PARSONS = dynamo.Table(storage, "parsons", "id",
-                       types=only_in_dev({'id': str}),
+                       types=only_in_dev({
+                           'id': str,
+                           'username': str,
+                           'level': str,
+                           'exercise': str,
+                           'order': str,
+                           'correct': str,
+                           'timestamp': ListOf(int)
+                       }),
                        )
 STUDENT_ADVENTURES = dynamo.Table(storage, "student_adventures", "id",
                                   types=only_in_dev({'id': str}),
