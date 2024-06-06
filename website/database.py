@@ -287,7 +287,7 @@ CUSTOMIZATIONS = dynamo.Table(storage, "class_customizations", partition_key="id
                                       }))
                                   }),
                                   'updated_by': str,
-                                  'quiz_parsons_tabs_migrated': bool
+                                  'quiz_parsons_tabs_migrated': Optional(int)
                               }))
 
 ACHIEVEMENTS = dynamo.Table(storage, "achievements", partition_key="username",
@@ -318,7 +318,11 @@ PARSONS = dynamo.Table(storage, "parsons", "id",
                        }),
                        )
 STUDENT_ADVENTURES = dynamo.Table(storage, "student_adventures", "id",
-                                  types=only_in_dev({'id': str}),
+                                  types=only_in_dev({
+                                      'id': str,
+                                      'ticked': bool,
+                                      'program_id': str
+                                  }),
                                   )
 CLASS_ERRORS = dynamo.Table(storage, "class_errors", "id",
                             types=only_in_dev({'id': str}),
