@@ -1670,7 +1670,19 @@ class Validator(metaclass=ABCMeta):
 
     @staticmethod
     def ensure_all(validator_dict):
-        return {k: Validator.ensure(v) for k, v in validator_dict.items()}
+        if str in validator_dict.keys() and len(validator_dict.keys()) > 1:
+            raise ValueError(f'If you specify str as part of the validation, you cant define more type checks.\
+                              You dindt do that for {validator_dict}')
+        type_dict = {}
+        for k, v in validator_dict.items():
+            if k is str:
+                type_dict[Validator.ensure(k)] = Validator.ensure(v)
+            elif isinstance(k, str):
+                type_dict[k] = Validator.ensure(v)
+            else:
+                raise ValueError(f'Key values should be of type str or instances of string. {
+                                 k} does not comply with that')
+        return type_dict
 
     def is_valid(self, value):
         ...
@@ -1761,8 +1773,13 @@ class RecordOf(Validator):
         self.inner = Validator.ensure_all(inner)
 
     def is_valid(self, value):
-        return (isinstance(value, dict)
-                and all(validator.is_valid(value.get(key)) for key, validator in self.inner.items()))
+        if not isinstance(value, dict):
+            return False
+        first_type = list(self.inner.keys())[0]
+        if isinstance(first_type, InstanceOf):
+            return all(first_type.is_valid(k) and self.inner.get(first_type).is_valid(v) for k, v in value.items())
+        else:
+            return all(validator.is_valid(value.get(key)) for key, validator in self.inner.items())
 
     def __str__(self):
         return f'{self.inner}'
