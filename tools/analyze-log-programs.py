@@ -79,7 +79,7 @@ for snippet in snippets:
                     writer = csv.writer(csvfile)
                     writer.writerow([program_id, snippet.username, snippet.language, snippet.experiment_language,
                                      snippet.adventure_name, lines, len(
-                            all_variables), len(all_commands), len(set(all_commands)), snippet.level, ''])
+                                         all_variables), len(all_commands), len(set(all_commands)), snippet.level, ''])
 
             print(program_id, len(snippets), round(100 * program_id / len(snippets), 2))
 
