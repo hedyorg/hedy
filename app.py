@@ -727,6 +727,12 @@ def prepare_files():
     threader = textwrap.dedent("""
         import time
         from turtlethread import Turtle
+        def int_with_error(value, error_message):
+            try:
+                return int(value)
+            except ValueError:
+                raise ValueError(error_message.format(value))
+
         t = Turtle()
         t.left(90)
         with t.running_stitch(stitch_length=20):
@@ -751,7 +757,6 @@ def prepare_files():
         for file in [x for x in files if x[:len(filename)] == filename and x[-3:] != 'zip']:
             zip_file.write('machine_files/' + file)
     zip_file.close()
-
     return make_response({'filename': filename}, 200)
 
 
@@ -788,7 +793,6 @@ def generate_microbit_file():
         save_transpiled_code_for_microbit(transpile_result)
         return make_response({'filename': 'Micro-bit.py', 'microbit': True}, 200)
     else:
-        # TODO
         return make_response({'message': 'Microbit feature is disabled'}, 403)
 
 
@@ -827,7 +831,6 @@ def convert_to_hex_and_download():
 
         return send_file(os.path.join(micro_bit_directory, "micropython.hex"), as_attachment=True)
     else:
-        # TODO
         return make_response({'message': 'Microbit feature is disabled'}, 403)
 
 
