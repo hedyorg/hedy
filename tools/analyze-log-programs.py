@@ -63,6 +63,7 @@ for snippet in snippets:
             try:
                 all_variables = hedy.all_variables(snippet.code, snippet.level, snippet.language)
             except Exception as e:
+                print(e)
                 all_variables = []
 
             lines = len(snippet.code.split('\n'))
