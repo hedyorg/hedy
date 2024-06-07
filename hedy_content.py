@@ -22,12 +22,14 @@ ALL_KEYWORD_LANGUAGES = {}
 CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK',
                           'kmr': 'ku_TR',
                           'tl': 'en',
-                          'iba': 'en'
+                          'iba': 'en',
+                          'enm': 'en'
                           }
 
 # For the non-existing language manually overwrite the display language to make sure it is displayed correctly
 CUSTOM_LANGUAGE_TRANSLATIONS = {'kmr': 'Kurdî (Tirkiye)',
                                 'tl': 'ᜆᜄᜎᜓᜄ᜔',
+                                'enm': 'English (Middle)',
                                 'iba': 'Iban'}
 
 customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
