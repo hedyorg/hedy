@@ -672,7 +672,7 @@ export async function showAchievements(achievements: Achievement[] | undefined, 
       $('#achievement_pop_up').removeAttr('reload');
       $('#achievement_pop_up').removeAttr('redirect');
       location.reload();
-     }, achievements.length * 6000);
+     }, achievements.length * 3000);
   }
   if (redirect) {
     $('#achievement_pop_up').attr('redirect', redirect);
@@ -680,7 +680,7 @@ export async function showAchievements(achievements: Achievement[] | undefined, 
       $('#achievement_pop_up').removeAttr('reload');
       $('#achievement_pop_up').removeAttr('redirect');
       window.location.pathname = redirect;
-     }, achievements.length * 6000);
+     }, achievements.length * 3000);
   }
 }
 
@@ -692,11 +692,11 @@ function showAchievement(achievement: Achievement) {
         $('#achievement_pop_up').fadeIn(1000, function () {
           setTimeout(function(){
             $('#achievement_pop_up').fadeOut(1000);
-           }, 4000);
+           }, 1000);
         });
         setTimeout(()=>{
             resolve();
-        ;} , 6000
+        ;} , 1000
         );
     });
 }
@@ -786,6 +786,7 @@ export async function delete_program(id: string, prompt: string) {
     // this function decreases the total programs saved
     updateProgramCount();
     const response = await postJsonWithAchievements('/programs/delete', { id });
+    console.log(response)
     showAchievements(response.achievement, true, "");
     // issue request on the Bar component.
     console.log("resp", response)
