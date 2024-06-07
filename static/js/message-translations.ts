@@ -49,7 +49,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "Transpile_success": "Good job!\nAmazing!\nWell done!\nExcellent!\nYou did great!",
     "Transpile_warning": "Внимание!",
     "Unsaved_Changes": "You have an unsaved program. Do you want to leave without saving it?",
-    "adventures_restored": "The default adventures have been restored!",
+    "adventures_restored": "The default adventures have been restored.",
     "copy_link_to_share": "Copy link to share",
     "customization_deleted": "Customizations successfully deleted.",
     "dice": "🎲",

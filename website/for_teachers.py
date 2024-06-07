@@ -3,7 +3,7 @@ import json
 import os
 import uuid
 
-from flask import g, jsonify, request, session, url_for, redirect
+from flask import g, make_response, request, session, url_for, redirect
 from jinja_partials import render_partial
 from flask_babel import gettext
 
@@ -19,6 +19,7 @@ from website.flask_helpers import render_template
 from website.auth import (
     is_admin,
     is_teacher,
+    is_super_teacher,
     requires_login,
     requires_teacher,
     store_new_student_account,
@@ -170,7 +171,13 @@ class ForTeachersModule(WebsiteModule):
             student["last_login"] = utils.localized_date_format(student.get("last_login", 0))
 
         if utils.is_testing_request(request):
-            return jsonify({"students": students, "link": Class["link"], "name": Class["name"], "id": Class["id"]})
+            return make_response(
+                {
+                    "students": students,
+                    "link": Class["link"],
+                    "name": Class["name"],
+                    "id": Class["id"]
+                }, 200)
 
         achievement = None
         if len(students) > 20:
@@ -835,15 +842,15 @@ class ForTeachersModule(WebsiteModule):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("levels"), list):
-            return "Levels must be a list", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("other_settings"), list):
-            return "Other settings must be a list", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("opening_dates"), dict):
-            return "Opening dates must be a dict", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("level_thresholds"), dict):
-            return "Level thresholds must be a dict", 400
+            return make_response(gettext("request_invalid"), 400)
         # Values are always strings from the front-end -> convert to numbers
         levels = [int(i) for i in body["levels"]]
 
@@ -855,7 +862,7 @@ class ForTeachersModule(WebsiteModule):
                 try:
                     opening_dates[level] = utils.datetotimeordate(timestamp)
                 except BaseException:
-                    return "One or more of your opening dates is invalid", 400
+                    return make_response(gettext("request_invalid"), 400)
 
         level_thresholds = {}
         for name, value in body.get("level_thresholds").items():
@@ -864,9 +871,9 @@ class ForTeachersModule(WebsiteModule):
                 try:
                     value = int(value)
                 except BaseException:
-                    return "Quiz threshold value is invalid", 400
+                    return make_response(gettext("request_invalid"), 400)
                 if value < 0 or value > 100:
-                    return "Quiz threshold value is invalid", 400
+                    return make_response(gettext("request_invalid"), 400)
             level_thresholds[name] = value
 
         customizations = self.db.get_class_customizations(class_id)
@@ -908,8 +915,8 @@ class ForTeachersModule(WebsiteModule):
 
         achievement = self.achievements.add_single_achievement(user["username"], "my_class_my_rules")
         if achievement:
-            return {"achievement": achievement, "success": gettext("class_customize_success")}, 200
-        return {"success": gettext("class_customize_success")}, 200
+            utils.add_pending_achievement({"achievement": achievement})
+        return make_response(gettext("class_customize_success"), 200)
 
     @route("/create-accounts/<class_id>", methods=["GET"])
     @requires_teacher
@@ -929,12 +936,12 @@ class ForTeachersModule(WebsiteModule):
 
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("accounts"), list):
-            return "accounts should be a list!", 400
+            return make_response(gettext("request_invalid"), 400)
 
         if len(body.get("accounts", [])) < 1:
-            return gettext("no_accounts"), 400
+            return make_response(gettext("no_accounts"), 400)
 
         usernames = []
 
@@ -944,16 +951,17 @@ class ForTeachersModule(WebsiteModule):
             if validation:
                 return validation, 400
             if account.get("username").strip().lower() in usernames:
-                return {"error": gettext("unique_usernames"), "value": account.get("username")}, 200
+                return make_response({"error": gettext("unique_usernames"), "value": account.get("username")}, 200)
             usernames.append(account.get("username").strip().lower())
 
         # Validation for duplicates in the db
         classes = self.db.get_teacher_classes(user["username"], False)
         for account in body.get("accounts", []):
             if account.get("class") and account["class"] not in [i.get("name") for i in classes]:
-                return "not your class", 404
+                return make_response(gettext("request_invalid"), 404)
             if self.db.user_by_username(account.get("username").strip().lower()):
-                return {"error": gettext("usernames_exist"), "value": account.get("username").strip().lower()}, 200
+                return make_response(
+                    {"error": gettext("usernames_exist"), "value": account.get("username").strip().lower()}, 200)
 
         # the following is due to the fact that the current user may be a second user.
         teacher = classes[0].get("teacher") if len(classes) else user["username"]
@@ -966,7 +974,7 @@ class ForTeachersModule(WebsiteModule):
             if account.get("class"):
                 class_id = [i.get("id") for i in classes if i.get("name") == account.get("class")][0]
                 self.db.add_student_to_class(class_id, account.get("username").strip().lower())
-        return {"success": gettext("accounts_created")}, 200
+        return make_response({"success": gettext("accounts_created")}, 200)
 
     @route("/customize-adventure/view/<adventure_id>", methods=["GET"])
     @requires_login
@@ -1033,9 +1041,9 @@ class ForTeachersModule(WebsiteModule):
     @requires_teacher
     def get_adventure_info(self, user, adventure_id,):
         if not adventure_id:
-            return gettext("adventure_empty"), 400
+            return make_response(gettext("adventure_empty"), 400)
         if not isinstance(adventure_id, str):
-            return gettext("adventure_name_invalid"), 400
+            return make_response(gettext("adventure_name_invalid"), 400)
 
         adventure = self.db.get_adventure(adventure_id)
         if not adventure and request.args.get("new_adventure"):
@@ -1091,21 +1099,21 @@ class ForTeachersModule(WebsiteModule):
 
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("id"), str):
-            return gettext("adventure_id_invalid"), 400
+            return make_response(gettext("adventure_id_invalid"), 400)
         if not isinstance(body.get("name"), str):
-            return gettext("adventure_name_invalid"), 400
+            return make_response(gettext("adventure_name_invalid"), 400)
         if not isinstance(body.get("levels"), list) or (isinstance(body.get("levels"), list) and not body["levels"]):
-            return gettext("level_invalid"), 400
+            return make_response(gettext("level_invalid"), 400)
         if not isinstance(body.get("content"), str):
-            return gettext("content_invalid"), 400
+            return make_response(gettext("content_invalid"), 400)
         if len(body.get("content")) < 20:
-            return gettext("adventure_length"), 400
+            return make_response(gettext("adventure_length"), 400)
         if not isinstance(body.get("public"), bool) and not isinstance(body.get("public"), int):
-            return gettext("public_invalid"), 400
+            return make_response(gettext("public_invalid"), 400)
         if 'formatted_content' in body and not isinstance(body.get("formatted_content"), str):
-            return gettext("content_invalid"), 400
+            return make_response(gettext("content_invalid"), 400)
         if not isinstance(body.get("language"), str) or body.get("language") not in hedy_content.ALL_LANGUAGES.keys():
             # we're incrementally integrating language into adventures; i.e., not all adventures have a language field.
             body["language"] = g.lang
@@ -1117,7 +1125,7 @@ class ForTeachersModule(WebsiteModule):
 
         # TODO: instead of not allowing the teacher, let them update the adventure in their relevant classes only.
         elif current_adventure["creator"] != user["username"]:
-            return gettext("unauthorized"), 401
+            return make_response(gettext("unauthorized"), 401)
         current_classes = {}
         if body.get("classes"):
             current_classes = current_adventure.get('classes', [])
@@ -1128,7 +1136,7 @@ class ForTeachersModule(WebsiteModule):
         adventures = self.db.get_teacher_adventures(user["username"])
         for adventure in adventures:
             if adventure["name"] == body["name"] and adventure["id"] != body["id"]:
-                return gettext("adventure_duplicate"), 400
+                return make_response(gettext("adventure_duplicate"), 400)
 
         # We want to make sure the adventure is valid and only contains correct placeholders
         # Try to parse with our current language, if it fails -> return an error to the user
@@ -1138,7 +1146,7 @@ class ForTeachersModule(WebsiteModule):
             if 'formatted_content' in body:
                 body['formatted_content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
         except BaseException:
-            return gettext("something_went_wrong_keyword_parsing"), 400
+            return make_response(gettext("something_went_wrong_keyword_parsing"), 400)
 
         adventure = {
             "date": utils.timems(),
@@ -1178,16 +1186,19 @@ class ForTeachersModule(WebsiteModule):
                 elif class_id not in current_classes:
                     self.add_adventure_to_class_level(user, class_id, body["id"], level, False)
 
-        return {"success": gettext("adventure_updated")}, 200
+        return make_response(gettext("adventure_updated"), 200)
 
     @route("/customize-adventure/<adventure_id>", methods=["DELETE"])
+    @route("/customize-adventure/<adventure_id>/<owner>", methods=["DELETE"])
     @requires_teacher
-    def delete_adventure(self, user, adventure_id):
+    def delete_adventure(self, user, adventure_id, owner=None):
         adventure = self.db.get_adventure(adventure_id)
         if not adventure:
             return utils.error_page(error=404, ui_message=gettext("retrieve_adventure_error"))
         elif adventure["creator"] != user["username"]:
-            return gettext("unauthorized"), 401
+            # in case the current user is a super teacher, they may delete any adventure.
+            if not (is_super_teacher(user) and adventure["creator"] == owner):
+                return make_response(gettext("unauthorized"), 401)
 
         self.db.delete_adventure(adventure_id)
         tags = self.db.read_tags(adventure.get("tags", []))
@@ -1221,8 +1232,8 @@ class ForTeachersModule(WebsiteModule):
         try:
             code = safe_format(body.get("code"), **hedy_content.KEYWORDS.get(g.keyword_lang))
         except BaseException:
-            return gettext("something_went_wrong_keyword_parsing"), 400
-        return {"code": code}, 200
+            return make_response(gettext("something_went_wrong_keyword_parsing"), 400)
+        return make_response({"code": code}, 200)
 
     def add_adventure_to_class_level(self, user, class_id, adventure_id, level, remove_adv):
         Class = self.db.get_class(class_id)
