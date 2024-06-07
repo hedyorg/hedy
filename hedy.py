@@ -2039,7 +2039,9 @@ class ConvertToPython_4(ConvertToPython_3):
             if self.is_quoted(name):
                 name = name[1:-1]
                 return name.replace("'", "\\'")
-            name = name if self.is_bool(name) else escape_var(name.replace("'", "\\'"))
+            if not ConvertToPython.is_int(name) and not ConvertToPython.is_float(name):
+                name = name if self.is_bool(name) else escape_var(name.replace("'", "\\'"))
+                name = '"' + name + '"'
             return f'{{convert_numerals("{self.numerals_language}", {name})}}'
 
     def var_access(self, meta, args):
