@@ -2602,9 +2602,10 @@ def update_public_profile(user):
             body['tags'].append('admin')
 
     DATABASE.update_public_profile(user['username'], body)
+    response_body = {"message": gettext("public_profile_updated")}
     if achievement:
-        utils.add_pending_achievement({"achievement": achievement})
-    return make_response({"message": gettext("public_profile_updated")}, 200)
+        response_body["achievement"] = achievement
+    return response_body
 
 
 @app.route('/translating')
