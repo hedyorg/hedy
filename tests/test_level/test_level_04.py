@@ -1044,7 +1044,7 @@ class TestsLevel4(HedyTester):
     @parameterized.expand(hedy.english_colors)
     def test_all_colors(self, color):
         code = f'color {color}'
-        expected = HedyTester.turtle_color_command_transpiled(f'{{convert_numerals("Latin", {color})}}')
+        expected = HedyTester.turtle_color_command_transpiled(f'{{convert_numerals("Latin", "{color}")}}')
 
         self.multi_level_tester(
             code=code,
@@ -1054,7 +1054,7 @@ class TestsLevel4(HedyTester):
 
     def test_color_red(self):
         code = "color red"
-        expected = HedyTester.turtle_color_command_transpiled('{convert_numerals("Latin", red)}')
+        expected = HedyTester.turtle_color_command_transpiled('{convert_numerals("Latin", "red")}')
 
         self.multi_level_tester(
             code=code,
@@ -1066,7 +1066,7 @@ class TestsLevel4(HedyTester):
     def test_color_translated(self):
         lang = 'nl'
         code = "kleur blauw"
-        expected = HedyTester.turtle_color_command_transpiled('{convert_numerals("Latin", blue)}', lang)
+        expected = HedyTester.turtle_color_command_transpiled('{convert_numerals("Latin", "blue")}', lang)
 
         self.multi_level_tester(
             code=code,
@@ -1082,7 +1082,7 @@ class TestsLevel4(HedyTester):
         forward 10""")
 
         expected = HedyTester.dedent(
-            HedyTester.turtle_color_command_transpiled('{convert_numerals("Latin", red)}', 'en'),
+            HedyTester.turtle_color_command_transpiled('{convert_numerals("Latin", "red")}', 'en'),
             HedyTester.forward_transpiled('10', self.level))
 
         self.multi_level_tester(
