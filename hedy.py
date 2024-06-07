@@ -1022,8 +1022,8 @@ def flatten_list_of_lists_to_list(args):
     flat_list = []
     for element in args:
         if isinstance(
-                element,
-                str):  # str needs a special case before list because a str is also a list and we don't want to split all letters out
+            element,
+            str):  # str needs a special case before list because a str is also a list and we don't want to split all letters out
             flat_list.append(element)
         elif isinstance(element, list):
             flat_list += flatten_list_of_lists_to_list(element)
@@ -1120,7 +1120,7 @@ class AllCommands(Transformer):
         operators = ['addition', 'subtraction', 'multiplication', 'division']
 
         if production_rule_name in commands_per_level[
-                self.level] or production_rule_name in operators or production_rule_name == 'if_pressed_else':
+            self.level] or production_rule_name in operators or production_rule_name == 'if_pressed_else':
             # if_pressed_else is not in the yamls, upsetting lookup code to get an alternative later
             # lookup should be fixed instead, making a special case for now
             if production_rule_name == 'else':  # use of else also has an if
@@ -1515,7 +1515,7 @@ class ConvertToPython(Transformer):
     def process_variable_for_fstring(self, variable_name, access_line_number=100, var_to_escape=''):
 
         if (self.is_var_defined_before_access(variable_name, access_line_number, var_to_escape) and
-                not self.is_unreferenced_list(variable_name)):
+            not self.is_unreferenced_list(variable_name)):
             self.add_variable_access_location(variable_name, access_line_number)
             return "{" + escape_var(variable_name) + "}"
         else:
@@ -1947,7 +1947,7 @@ class ConvertToPython_2(ConvertToPython_1):
             index_exception = self.make_index_error_check_if_list(args)
             ex = make_value_error(Command.sleep, 'suggestion_number', self.language)
             code = index_exception + \
-                textwrap.dedent(f"time.sleep(int_with_error({value}, {ex})){self.add_debug_breakpoint()}")
+                   textwrap.dedent(f"time.sleep(int_with_error({value}, {ex})){self.add_debug_breakpoint()}")
             return code
 
 
@@ -2851,19 +2851,7 @@ class MicrobitConvertToPython_2(MicrobitConvertToPython_1, ConvertToPython_2):
             else:
                 # If the value is a variable, ensure it's used correctly
                 milliseconds = f"{value} * 1000"
-            return f"    sleep({milliseconds}){self.add_debug_breakpoint()}"
-
-    def assign(self, meta, args):
-        variable_name = args[0]
-        value = args[1]
-
-        if self.is_variable(value, meta.line):
-            # if the assigned value is a variable, this is a reassign
-            value = self.process_variable(value, meta.line)
-        else:
-            # if the assigned value is not a variable, add quotes around it and escape inner quotes
-            value = f"'{process_characters_needing_escape(value)}'"
-        return "    " + str(variable_name) + " = " + value + self.add_debug_breakpoint()
+            return f"sleep({milliseconds}){self.add_debug_breakpoint()}"
 
 
 @v_args(meta=True)
@@ -3493,7 +3481,7 @@ def preprocess_ifs(code, lang='en'):
         times_plus_translated = ['times', keywords_in_lang.get('times')]
 
         if len(elements_in_line) > 2 and elements_in_line[0] in repeat_plus_translated and elements_in_line[
-                2] in times_plus_translated:
+            2] in times_plus_translated:
             line = ' '.join(elements_in_line[3:])
 
         if lang in ALL_KEYWORD_LANGUAGES:
@@ -3524,7 +3512,7 @@ def preprocess_ifs(code, lang='en'):
             command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
             for c in command_plus_translated_command:
                 if line.count(
-                        ' ' + c + ' ') >= 2:  # surround in spaces since we dont want to mathc something like 'dishwasher is sophie'
+                    ' ' + c + ' ') >= 2:  # surround in spaces since we dont want to mathc something like 'dishwasher is sophie'
                     return True
             return False
 
@@ -3558,7 +3546,7 @@ def preprocess_ifs(code, lang='en'):
 
         # if this line starts with if but does not contain an else, and the next non-empty line too is not an else.
         if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (
-                not starts_with('else', next_non_empty_line(lines, i))) and (not contains('else', line)):
+            not starts_with('else', next_non_empty_line(lines, i))) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
             commands = ["print", "ask", "forward", "turn", "play"]
             excluded_commands = ["pressed"]
