@@ -74,7 +74,7 @@ async function postJsonUsingFetch(url: string, data?: any): Promise<any> {
     });
   }
 
-  return response;
+  return response.json();
 }
 
 export function postNoResponse(url: string, data?: any): Promise<void> {
