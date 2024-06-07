@@ -99,6 +99,26 @@ class TestDynamoAbstraction(unittest.TestCase, Helpers):
             final = table.get(dict(id='key'))
             self.assertEqual(final['values'], set(['a', 'b', 'c']))
 
+    def test_set_validation(self):
+        """Test that adding to a set and removing from a set validates the elements."""
+        self.table = dynamo.Table(dynamo.MemoryStorage(), 'table', 'id', types={
+            'id': str,
+            'values': dynamo.SetOf(str),
+        })
+        self.table.create(dict(
+            id='key',
+            values=set(['a', 'b', 'c']),
+        ))
+
+        self.table.update(dict(id='key'), dict(
+            values=dynamo.DynamoAddToStringSet('x', 'y'),
+        ))
+        # This should not have thrown an exception
+        with self.assertRaises(ValueError):
+            self.table.update(dict(id='key'), dict(
+                values=dynamo.DynamoAddToStringSet(3),
+            ))
+
     def test_batch_get(self):
         self.insert(
             dict(id='k1', bla=1),

@@ -1259,10 +1259,11 @@ class DynamoAddToStringSet(DynamoUpdate):
         }
 
     def validate_against_type(self, validator):
-        return all(validate_value_against_validator(x, validator) for x in self.elements)
+        # The validator should be SetOf(...)
+        return validate_value_against_validator(set(self.elements), validator)
 
     def __repr__(self):
-        return f'Add({self.elements})'
+        return f'Add{self.elements}'
 
 
 class DynamoAddToNumberSet(DynamoUpdate):
@@ -1281,10 +1282,11 @@ class DynamoAddToNumberSet(DynamoUpdate):
         }
 
     def validate_against_type(self, validator):
-        return all(validate_value_against_validator(x, validator) for x in self.elements)
+        # The validator should be SetOf(...)
+        return validate_value_against_validator(set(self.elements), validator)
 
     def __repr__(self):
-        return f'Add({self.elements})'
+        return f'Add{self.elements}'
 
 
 class DynamoAddToList(DynamoUpdate):
@@ -1294,7 +1296,8 @@ class DynamoAddToList(DynamoUpdate):
         self.elements = elements
 
     def validate_against_type(self, validator):
-        return all(validate_value_against_validator(x, validator) for x in self.elements)
+        # The validator should be ListOf(...)
+        return validate_value_against_validator(list(self.elements), validator)
 
     def to_dynamo(self):
         return {
@@ -1303,7 +1306,7 @@ class DynamoAddToList(DynamoUpdate):
         }
 
     def __repr__(self):
-        return f'Add({self.elements})'
+        return f'Add{self.elements}'
 
 
 class DynamoRemoveFromStringSet(DynamoUpdate):
@@ -1319,10 +1322,11 @@ class DynamoRemoveFromStringSet(DynamoUpdate):
         }
 
     def validate_against_type(self, validator):
-        return all(validate_value_against_validator(x, validator) for x in self.elements)
+        # The validator should be SetOf(...)
+        return validate_value_against_validator(set(self.elements), validator)
 
     def __repr__(self):
-        return f'Remove({self.elements})'
+        return f'Remove{self.elements}'
 
 
 class DynamoCondition:
