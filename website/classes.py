@@ -88,7 +88,7 @@ class ClassModule(WebsiteModule):
         achievement = self.achievements.add_single_achievement(user["username"], "on_second_thoughts")
         if achievement:
             return make_response({"achievement": achievement}, 200)
-        return make_response({}, 200)
+        return make_response('', 200)
 
     @route("/<class_id>", methods=["DELETE"])
     @requires_login
@@ -165,7 +165,7 @@ class ClassModule(WebsiteModule):
             utils.add_pending_achievement({"achievement": achievement, "redirect": "/programs"})
         # request.url = re.sub(r'/class/.*', '/programs', request.url)
         # return redirect(request.url, code=302)
-        return make_response({}, 302)
+        return make_response('', 302)
 
     # Legacy function; will be gradually replaced by the join_class_id
     @route("/join", methods=["POST"])
@@ -198,7 +198,7 @@ class ClassModule(WebsiteModule):
 
         if achievement:
             return make_response({"achievement": achievement}, 200)
-        return make_response({}, 200)
+        return make_response('', 200)
 
     @route("/<class_id>/student/<student_id>", methods=["DELETE"])
     @requires_login
@@ -214,7 +214,7 @@ class ClassModule(WebsiteModule):
             achievement = self.achievements.add_single_achievement(user["username"], "detention")
         if achievement:
             return make_response({"achievement": achievement}, 200)
-        return make_response({}, 200)
+        return make_response('', 200)
 
     @route("/<class_id>/second-teacher/<second_teacher>", methods=["DELETE"])
     @requires_login
@@ -231,7 +231,7 @@ class ClassModule(WebsiteModule):
             achievement = self.achievements.add_single_achievement(user["username"], "detention")
         if achievement:
             return make_response({"achievement": achievement, "reload": True}, 200)
-        return make_response({}, 200)
+        return make_response('', 200)
 
 
 class MiscClassPages(WebsiteModule):
@@ -355,11 +355,11 @@ class MiscClassPages(WebsiteModule):
             "invited_as_text": gettext("student"),
         }
         self.db.add_class_invite(data)
-        return make_response({}, 204)
+        return make_response('', 204)
 
     @route("/invite-second-teacher", methods=["POST"])
     @requires_teacher
-    def invite_second_teaceher(self, user):
+    def invite_second_teacher(self, user):
         teacher = user
         body = request.json
         # Validations
@@ -402,7 +402,7 @@ class MiscClassPages(WebsiteModule):
             "invited_as_text": gettext("second_teacher"),
         }
         self.db.add_class_invite(data)
-        return make_response({}, 200)
+        return make_response('', 200)
 
     @route("/remove_student_invite", methods=["POST"])
     @requires_login
@@ -427,7 +427,7 @@ class MiscClassPages(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         self.db.remove_user_class_invite(username, class_id)
-        return make_response({}, 204)
+        return make_response('', 204)
 
     @route("/hedy/l/<link_id>", methods=["GET"])
     def resolve_class_link(self, link_id):

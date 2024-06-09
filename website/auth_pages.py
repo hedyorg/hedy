@@ -248,7 +248,7 @@ class AuthModule(WebsiteModule):
             self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         session[JUST_LOGGED_OUT] = True
         remove_class_preview()
-        return make_response({}, 204)
+        return make_response('', 204)
 
     @ route("/destroy", methods=["POST"])
     @ requires_login
@@ -257,14 +257,14 @@ class AuthModule(WebsiteModule):
         self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         self.db.forget_user(user["username"])
         session[JUST_LOGGED_OUT] = True
-        return make_response({}, 204)
+        return make_response('', 204)
 
     @ route("/destroy_public", methods=["POST"])
     @ requires_login
     def destroy_public(self, user):
         self.db.forget_public_profile(user["username"])
         session.pop("profile_image", None)  # Delete profile image id if existing
-        return make_response({}, 204)
+        return make_response('', 204)
 
     @ route("/change_student_password", methods=["POST"])
     @ requires_login

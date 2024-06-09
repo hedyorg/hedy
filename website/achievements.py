@@ -280,4 +280,4 @@ class AchievementsModule(WebsiteModule):
                         )
                     }
                 )
-        return make_response({}, 200)
+        return make_response('', 200)
