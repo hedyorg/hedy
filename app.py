@@ -692,7 +692,7 @@ def parse_by_id(user):
                 program.get('level'),
                 program.get('lang')
             )
-            return make_response('', 204)
+            return make_response({}, 204)
         except BaseException:
             make_response(gettext("request_invalid"), 200)
     else:
@@ -2344,7 +2344,7 @@ def store_parsons_order():
     }
 
     DATABASE.store_parsons(attempt)
-    return make_response('', 204)
+    return make_response({}, 204)
 
 
 @app.template_global()

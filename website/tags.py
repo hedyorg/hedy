@@ -90,7 +90,7 @@ class TagsModule(WebsiteModule):
         # TODO: perhaps allow admin to permanently delete a tag.
         if not tag or not adventure_id:
             # is this not suppossed to be an error response?
-            return make_response('', 204)
+            return make_response({}, 204)
 
         tag_name = tag.strip()
         db_tag = self.db.read_tag(tag_name)
