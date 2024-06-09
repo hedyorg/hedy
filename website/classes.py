@@ -197,7 +197,7 @@ class ClassModule(WebsiteModule):
             session["messages"] = session["messages"] - 1 if session["messages"] else 0
 
         if achievement:
-            make_response({"achievement": achievement}, 200)
+            return make_response({"achievement": achievement}, 200)
         return make_response({}, 200)
 
     @route("/<class_id>/student/<student_id>", methods=["DELETE"])
