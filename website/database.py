@@ -163,8 +163,8 @@ ADVENTURES = dynamo.Table(storage, "adventures", "id",
                               'date': int,
                               'creator': str,
                               'name': str,
-                              'classes': ListOf(str),
-                              'level': int,
+                              'classes': Optional(ListOf(str)),
+                              'level': any,  # this might be a string or a int
                               'levels': ListOf(str),
                               'content': str,
                               'public': int,
@@ -286,7 +286,7 @@ CUSTOMIZATIONS = dynamo.Table(storage, "class_customizations", partition_key="id
                                           'from_teacher': bool
                                       }))
                                   }),
-                                  'updated_by': str,
+                                  'updated_by': Optional(str),
                                   'quiz_parsons_tabs_migrated': Optional(int)
                               }))
 
