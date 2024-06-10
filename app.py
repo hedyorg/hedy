@@ -48,10 +48,10 @@ from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, st
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
-                     translating, tags, surveys, public_adventures, user_activity, feedback)
-from website.auth import (current_user, hide_explore, is_admin, is_teacher, is_second_teacher, has_public_profile,
+                     translating, tags, surveys, super_teacher, public_adventures, user_activity, feedback)
+from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, is_super_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
-                          forget_current_user)
+                          forget_current_user, hide_explore)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 
@@ -326,7 +326,7 @@ def initialize_session():
 
     g.user = current_user()
     querylog.log_value(session_id=utils.session_id(), username=g.user['username'],
-                       is_teacher=is_teacher(g.user), is_admin=is_admin(g.user))
+                       is_teacher=is_teacher(g.user), is_admin=is_admin(g.user), is_super_teacher=is_admin(g.user))
 
 
 if os.getenv('IS_PRODUCTION'):
@@ -439,6 +439,7 @@ def enrich_context_with_user_info():
     data = {'username': user.get('username', ''),
             'is_teacher': is_teacher(user), 'is_second_teacher': is_second_teacher(user),
             'is_admin': is_admin(user), 'has_public_profile': has_public_profile(user),
+            'is_super_teacher': is_super_teacher(user),
             'hide_explore': hide_explore(g.user)}
     return data
 
@@ -2775,6 +2776,7 @@ app.register_blueprint(programs.ProgramsModule(DATABASE, ACHIEVEMENTS, STATISTIC
 app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(classes.ClassModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(classes.MiscClassPages(DATABASE, ACHIEVEMENTS))
+app.register_blueprint(super_teacher.SuperTeacherModule(DATABASE))
 app.register_blueprint(admin.AdminModule(DATABASE))
 app.register_blueprint(achievements.AchievementsModule(ACHIEVEMENTS))
 app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))

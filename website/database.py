@@ -681,6 +681,10 @@ class Database:
     def get_survey(self, id):
         return SURVEYS.get({"id": id})
 
+    def get_feedback(self):
+        """Get allfeedback in the database"""
+        return FEEDBACK.scan()
+
     def add_survey_responses(self, id, responses):
         SURVEYS.update({"id": id}, {"responses":  responses})
 
