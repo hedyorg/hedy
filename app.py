@@ -2076,6 +2076,11 @@ def join():
                            current_page='join', content=join_translations)
 
 
+@app.route('/kerndoelen')
+def poster():
+    return send_from_directory('content/', 'kerndoelenposter.pdf')
+
+
 @app.route('/start')
 def start():
     start_translations = hedyweb.PageTranslations('start').get_page_translations(g.lang)
