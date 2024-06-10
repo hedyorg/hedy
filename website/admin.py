@@ -265,8 +265,7 @@ class AdminModule(WebsiteModule):
                 )
             except BaseException:
                 return make_response(gettext("mail_error_change_processed"), 400)
-
-        return make_response('', 204)
+        return make_response('', 200)
 
     @route("/getUserTags", methods=["POST"])
     @requires_admin
