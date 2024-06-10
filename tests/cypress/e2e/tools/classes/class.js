@@ -1,9 +1,7 @@
 import { goToTeachersPage } from "../navigation/nav";
 
-export function createClass()
+export function createClass(classname=`test class ${Math.random()}`)
 {
-    const classname = `test class ${Math.random()}`;
-
     goToTeachersPage();
     cy.wait(500);
 
@@ -75,6 +73,14 @@ export function openClassView(){
       });
 }
 
+export function openAdventureView(){
+    cy.getDataCy('adventures_table').then($viewAdventure => {
+        if (!$viewAdventure.is(':visible')) {
+            cy.getDataCy('view_adventures').click();
+        }
+    });
+}
+
 export function removeCustomizations(){
     cy.getDataCy('customize_class_button').click();
     cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');      
@@ -100,6 +106,7 @@ export function addCustomizations(classname){
     cy.wait(1000)
     cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
 
+    cy.wait(500);
     cy.get("#back_to_class").click();
 }
 

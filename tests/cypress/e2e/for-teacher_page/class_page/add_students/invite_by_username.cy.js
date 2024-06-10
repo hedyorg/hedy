@@ -25,7 +25,8 @@ teachers.forEach((teacher) => {
     cy.getDataCy('invite_student').click();
     cy.getDataCy('modal_prompt_input').type(student);
     cy.getDataCy('modal_ok_button').click();
-    cy.wait('@invite')
+    cy.wait(500);
+    cy.wait('@invite');
     
     login(student, "123456");
 

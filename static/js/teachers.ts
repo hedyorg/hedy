@@ -59,7 +59,7 @@ export function rename_class(id: string, class_name_prompt: string) {
 }
 
 export function duplicate_class(id: string, teacher_classes: string[], second_teacher_prompt: string, prompt: string, defaultValue: string = '') {
-  if (teacher_classes){
+  if (teacher_classes && !defaultValue){
     modal.confirm(second_teacher_prompt, function () {
       apiDuplicateClass(id, prompt, true, defaultValue);
     }, function () {

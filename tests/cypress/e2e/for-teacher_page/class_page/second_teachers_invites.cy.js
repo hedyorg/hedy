@@ -2,7 +2,7 @@ import { loginForTeacher } from "../../tools/login/login.js"
 import { goToProfilePage } from "../../tools/navigation/nav";
 import { createClass, navigateToClass } from "../../tools/classes/class";
 
-const allSecondTeachers = ["teacher2", "teacher3", "teacher4"]
+const testSecondTeachers = ["teacher2", "teacher3", "teacher4"]
 const secondTeachers = ["teacher2", "teacher3"]
 let className;
 
@@ -18,7 +18,7 @@ beforeEach(() => {
 
   it(`Invites second teachers by username, accepts it and check it`, () => {
     // first add all teachers
-    for (const teacher of allSecondTeachers) {
+    for (const teacher of testSecondTeachers) {
       cy.getDataCy('add_second_teacher').click();
       cy.getDataCy('modal_prompt_input').type(teacher);
       cy.getDataCy('modal_ok_button').click();
@@ -26,16 +26,16 @@ beforeEach(() => {
       .contains(teacher);
     }
 
-    //duplicate thrid teacher
+    //duplicate third teacher
     cy.getDataCy('add_second_teacher').click();
-    cy.getDataCy('modal_prompt_input').type(allSecondTeachers[2]);
+    cy.getDataCy('modal_prompt_input').type(testSecondTeachers[2]);
     cy.getDataCy('modal_ok_button').click();
     cy.getDataCy('modal_alert_container')
     .contains('pending invitation')
 
     //delete third teacher
     cy.getDataCy('invites_block invite_username_cell')
-    .contains(allSecondTeachers[2])
+    .contains(testSecondTeachers[2])
     .parent('tr')
     .find('[data-cy="remove_user_invitation"]')
     .click();
@@ -44,7 +44,7 @@ beforeEach(() => {
     // This needs to come before we accept teacher2's invitation, otherwise
     // after this there are no invites and so this table isn't rendered at all.
     cy.getDataCy('invites_block')
-      .should("not.contain", allSecondTeachers[2]);
+      .should("not.contain", testSecondTeachers[2]);
 
     //then accept other teachers invitations
     for (const teacher of secondTeachers) {

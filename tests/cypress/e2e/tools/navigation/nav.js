@@ -1,4 +1,5 @@
 import { loginForAdmin } from "../login/login";
+import { openAdventureView } from '../../tools/classes/class.js';
 
 export function goToPage(page)
 {
@@ -100,11 +101,7 @@ export function goToEditAdventure()
 
     // takes the first adventures and goes to its edit page
     // It does not matter which adventure we take (we choose the first one)
-    cy.get("#adventures_table").then($viewAdventure => {
-        if (!$viewAdventure.is(':visible')) {
-            cy.get("#view_adventures").click();
-        }
-    });
+    openAdventureView();
     cy.getDataCy("edit_link_adventure").first().click();
 }
 

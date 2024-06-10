@@ -1,5 +1,6 @@
 import { loginForTeacher } from '../../tools/login/login.js'
 
+// TODO
 it('Is able to click on create new class', () => {
   loginForTeacher();
 
