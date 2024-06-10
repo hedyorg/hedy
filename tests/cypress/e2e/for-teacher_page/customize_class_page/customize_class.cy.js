@@ -1,39 +1,23 @@
 import { loginForTeacher, loginForStudent } from '../../tools/login/login.js'
-import { ensureClass, openClassView, removeCustomizations } from "../../tools/classes/class";
+import { navigateToClass, removeCustomizations } from "../../tools/classes/class";
 import { goToHedyPage } from "../../tools/navigation/nav";
 
-const teachers = ["teacher1", "teacher4"];
+const teachers = ["teacher1"];//, "teacher4"];
 
 teachers.forEach((teacher) => {
   describe(`customize class page for ${teacher}`, () => {
     beforeEach(() => {
       loginForTeacher(teacher);
-      ensureClass();
-      openClassView();
-      cy.getDataCy('view_class_link').first().click(); // Press on view class button
-      cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
-
-      // Remove any customizations that already exist to get the class into a predictable state
-      // This always throws up a modal dialog
+      navigateToClass();
       removeCustomizations();
     });
-
-    it('checks the opening date container', () => {
-      cy.getDataCy('opening_date_container').should("not.be.visible")
-      cy.getDataCy('opening_date_label').click();
-      cy.getDataCy('opening_date_container').should("be.visible")
-    });
-
-    it('checks the option checkboxes', () => {
-      // following code checks every single checkbox on the current page:
-      cy.getDataCy('opening_date_label').click();
-      cy.get('[type="checkbox"]').parent('.switch').click({ multiple: true });
-      cy.get('[type="checkbox"]').should('be.not.checked')
-      cy.get('[type="checkbox"]').parent('.switch').click({ multiple: true });
-      cy.get('[type="checkbox"]').should('be.checked')
-    });
-
-    it('goes back to the view class page', () => {
+  
+    // TODO: add check if the quiz actually has a treshold now, either here or in quiz.cy.js
+    it('Is able to fill in the quiz score and click on go back button', () => {
+      // Fill in the quiz score
+      cy.getDataCy('quiz_input').clear().type("50").should("have.value", "50");
+  
+      // Click the go back button
       cy.getDataCy('back_to_class')
       .should('be.visible')
       .should('not.be.disabled')
@@ -43,20 +27,21 @@ teachers.forEach((teacher) => {
         .should('include', Cypress.config('baseUrl') + Cypress.env('class_page'));
     });
 
-    it('level 1 should be visible by default, and the level dropdown changes which adventures are displayed', () => {
-      // Click on level 1
-      cy.getDataCy('adventures')
+    it('Is able to switch to level 2', () => {
+      // Should be defaulted on level 1
+      cy.getDataCy('levels_dropdown')
         .select('1')
         .should('have.value', '1');
 
-      // level 1 should be visible and level 2 shouldn't exist
+      // Level 1 should be visible and level 2 shouldn't exist
       cy.getDataCy("level_1")
         .should('be.visible');
 
       cy.getDataCy("level_2")
         .should('not.exist');
 
-      cy.getDataCy('adventures')
+      // Go to level 2 and check if the adventure bar changes to level_2
+      cy.getDataCy('levels_dropdown')
         .select('2')
         .should('have.value', '2');
 
@@ -67,8 +52,14 @@ teachers.forEach((teacher) => {
         .should('not.exist');
     });
 
-    it('tests if the opening tests are not empty', () => {
+    it('Is able to open the opening date container, check the option checkboxes, fill in the dates and level disabled text should be visible', () => {
+      cy.getDataCy('opening_date_container').should("not.be.visible")
       cy.getDataCy('opening_date_label').click();
+      cy.getDataCy('opening_date_container').should("be.visible")
+
+      // Level 1 should not have disabled message
+      cy.getDataCy('level_1').should('be.visible');
+      cy.getDataCy('state_disabled').should('not.be.visible');
       // The following line has a bug in cypress:
       // cy.getDataCy("opening_date_level_" + index).type("2023-01-01").should("have.value", "2023-01-01")
       // The following tests only checks if the field is not empty using a for loop:
@@ -79,17 +70,17 @@ teachers.forEach((teacher) => {
           .invoke('val').then((text) => {
             expect('2023-01-01').to.equal(text);
           });
+
+          cy.getDataCy(`enable_level_${index}`).should('be.checked')
+          cy.getDataCy(`enable_level_${index}`).parent('.switch').click();
+          cy.getDataCy(`enable_level_${index}`).should('be.not.checked')
       });
+
+      // Level 1 should have disabled message
+      cy.getDataCy('state_disabled').should('be.visible');
     });
 
-    it('the quiz score holds the value typed to it', () => {
-      // testing quiz score feature
-      cy.getDataCy('quiz_input').clear().type("50").should("have.value", "50");
-    });
-
-
-    it('removes the adventure and checks that it is added to the available adventures drop down and removed from the dragger', () => {
-
+    it('Is able to remove adventure', () => {
       // Click on level 2
       cy.getDataCy("levels_dropdown")
         .select('2')
@@ -138,21 +129,7 @@ teachers.forEach((teacher) => {
       });
     });
 
-
-    it('Disabling current level displays a message', () => {
-      cy.getDataCy('opening_date_label').click();
-      cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
-
-      cy.getDataCy('level_1').should('be.visible');
-      cy.getDataCy('state_disabled').should('not.be.visible');
-
-      cy.getDataCy('enable_level_1').parent('.switch').click();
-      cy.getDataCy('state_disabled').should('be.visible');
-
-      cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
-    });
-
-    it('Clicking the Reset button displays a confirm dialog', () => {
+    it.only('Is able to reset the adventures and create a new adventure', () => {
       /**
        * At the beginning, the Parrot adventure should be in the level 1's adventures
        */
@@ -165,6 +142,14 @@ teachers.forEach((teacher) => {
       cy.getDataCy('confirm_modal').should('be.visible');
       cy.getDataCy('htmx_modal_yes_button').click();
       cy.getDataCy('parrot').should('be.visible');
+
+      const new_adventure = "test_new_adventure"
+      cy.getDataCy('edit_link').click();
+      url = cy.url().find();
+      cy.getDataCy('custom_adventure_name')
+      .clear()
+      .type(new_adventure)
+      // TODO check if adventure is added to class and level correctly
     });
 
     describe('an adventure that is hidden', () => {

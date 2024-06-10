@@ -2,7 +2,7 @@ import { loginForTeacher } from '../../tools/login/login.js'
 import { goToTeachersPage } from '../../tools/navigation/nav.js';
 import { createClass, openClassView } from '../../tools/classes/class.js';
 
-it('Remove class test', () => {
+it('Is able to remove a class', () => {
   loginForTeacher();
   createClass();
   goToTeachersPage();

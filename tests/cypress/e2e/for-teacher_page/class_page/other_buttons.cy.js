@@ -30,7 +30,7 @@ it('Is able to click on go back button', () => {
     .should('eq', Cypress.config('baseUrl') + Cypress.env('teachers_page'));
 })
 
-it('Class survey button: survey can first be canceled, then respond to 1 question, then to last 3', () => {
+it('Is able to click on survey button, cancel it, respond to 1 question, then 3 to finish', () => {
   // cancel survey
   cy.getDataCy('survey_status_button').click();
   cy.getDataCy('survey').should("be.visible");

@@ -19,7 +19,7 @@ beforeEach(() => {
 
 teachers.forEach((teacher) => {
   describe(`Testing creating accounts for ${teacher}`, () => {
-    it('Test go back button and see if students created in createClassAndAddStudents() are present', () => {
+    it('Is able to click on go back button and see if students created in createClassAndAddStudents() are present', () => {
         cy.getDataCy('go_back_button').click();
         cy.wait(1000);
         cy.url().should('include', 'class/'); 

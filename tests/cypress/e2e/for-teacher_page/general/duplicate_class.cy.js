@@ -63,7 +63,7 @@ describe('Duplicate class tests', () => {
     checkCustomizations();
   })
 
-  it("Second teacher can click on duplicate button of main teacher's class, should not be able to add teachers", () => {
+  it("Is able to click on duplicate button of main teacher's class when second teacher, should not be able to add teachers", () => {
     loginForTeacher("teacher4");
     goToTeachersPage();
 
