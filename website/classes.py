@@ -55,9 +55,9 @@ class ClassModule(WebsiteModule):
 
         self.db.store_class(Class)
         achievement = self.achievements.add_single_achievement(user["username"], "ready_set_education")
-        response_body = {"id": Class["id"]}
-        response_body["achievement"] = achievement
-        return make_response(response_body, 200)
+        response = {"id": Class["id"]}
+        response["achievement"] = achievement
+        return make_response(response, 200)
 
     @route("/<class_id>", methods=["PUT"])
     @requires_teacher
@@ -305,12 +305,12 @@ class MiscClassPages(WebsiteModule):
             new_second_teachers = Class.get("second_teachers")
 
         achievement = self.achievements.add_single_achievement(current_user()["username"], "one_for_money")
-        response_body = {"id": new_class["id"]}
+        response = {"id": new_class["id"]}
         if achievement:
-            response_body['achievement'] = achievement
+            response['achievement'] = achievement
         if new_second_teachers:
-            response_body["second_teachers"] = new_second_teachers
-        return make_response(response_body, 200)
+            response["second_teachers"] = new_second_teachers
+        return make_response(response, 200)
 
     @route("/invite-student", methods=["POST"])
     @requires_teacher

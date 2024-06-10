@@ -914,10 +914,10 @@ class ForTeachersModule(WebsiteModule):
         self.db.update_class_customizations(customizations)
 
         achievement = self.achievements.add_single_achievement(user["username"], "my_class_my_rules")
-        response_body = {"success": gettext("class_customize_success")}
+        response = {"success": gettext("class_customize_success")}
         if achievement:
-            response_body["achievement"] = achievement
-        return make_response(response_body, 200)
+            response["achievement"] = achievement
+        return make_response(response, 200)
 
     @route("/create-accounts/<class_id>", methods=["GET"])
     @requires_teacher
