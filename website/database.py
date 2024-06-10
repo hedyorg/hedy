@@ -37,7 +37,7 @@ from utils import timems, times, is_debug_mode
 from . import dynamo, auth
 from . import querylog
 
-from .dynamo import Optional, ListOf, SetOf, RecordOf
+from .dynamo import DictOf, Optional, ListOf, SetOf, RecordOf
 
 is_offline = getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
 if is_offline:
@@ -224,12 +224,12 @@ TAGS = dynamo.Table(storage, "tags", "id",
 SURVEYS = dynamo.Table(storage, "surveys", "id",
                        types=only_in_dev({
                            'id': str,
-                           'responses': RecordOf({
+                           'responses':  Optional(DictOf({
                                str: RecordOf({
                                    'answer': str,
                                    'question': str
                                })
-                           })
+                           }))
                        }),
                        )
 
@@ -273,14 +273,14 @@ CUSTOMIZATIONS = dynamo.Table(storage, "class_customizations", partition_key="id
                               types=only_in_dev({
                                   'id': str,
                                   'levels': ListOf(int),
-                                  'opening_dates': RecordOf({
+                                  'opening_dates': DictOf({
                                       str: str
                                   }),
                                   'other_settings': ListOf(str),
-                                  'level_thresholds': RecordOf({
+                                  'level_thresholds': DictOf({
                                       str: int
                                   }),
-                                  'sorted_adventures': RecordOf({
+                                  'sorted_adventures': DictOf({
                                       str: ListOf(RecordOf({
                                           'name': str,
                                           'from_teacher': bool

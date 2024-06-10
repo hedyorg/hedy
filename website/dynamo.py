@@ -1777,13 +1777,24 @@ class RecordOf(Validator):
         self.inner = Validator.ensure_all(inner)
 
     def is_valid(self, value):
-        if not isinstance(value, dict):
-            return False
-        first_type = list(self.inner.keys())[0]
-        if isinstance(first_type, InstanceOf):
-            return all(first_type.is_valid(k) and self.inner.get(first_type).is_valid(v) for k, v in value.items())
-        else:
-            return all(validator.is_valid(value.get(key)) for key, validator in self.inner.items())
+        return (isinstance(value, dict)
+                and all(validator.is_valid(value.get(key)) for key, validator in self.inner.items()))
 
     def __str__(self):
         return f'{self.inner}'
+
+
+class DictOf(Validator):
+    """ Validator wich matches dictionaries of any string to inner validators """
+
+    def __init__(self, inner):
+        self.inner = Validator.ensure_all(inner)
+
+    def is_valid(self, value):
+        if not isinstance(value, dict):
+            return False
+        first_type = list(self.inner.keys())[0]
+        return all(first_type.is_valid(k) and self.inner.get(first_type).is_valid(v) for k, v in value.items())
+
+    def __str__(self):
+        return f'list of {self.inner}'
