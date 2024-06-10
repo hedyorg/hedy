@@ -175,11 +175,11 @@ class TestsLevel9(HedyTester):
 
         expected = textwrap.dedent(f"""\
             for __i in range({self.int_cast_transpiled(3)}):
-              print(f'3')
+              print(f'{{convert_numerals("Latin", 3)}}')
               for __i in range({self.int_cast_transpiled(5)}):
-                print(f'5')
+                print(f'{{convert_numerals("Latin", 5)}}')
                 time.sleep(0.1)
-              print(f'1')
+              print(f'{{convert_numerals("Latin", 1)}}')
               time.sleep(0.1)""")
 
         self.multi_level_tester(

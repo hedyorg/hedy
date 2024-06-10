@@ -2,7 +2,7 @@ import copy
 import uuid
 from typing import Optional
 
-from flask import g, request, jsonify
+from flask import g, make_response, request
 from flask_babel import gettext
 import jinja_partials
 import hedy_content
@@ -124,19 +124,19 @@ class ProgramsModule(WebsiteModule):
     @requires_login
     def list_programs(self, user):
         # Filter by level, adventure, submitted, paginated.
-        return {"programs": self.db.programs_for_user(user["username"]).records}
+        return make_response({"programs": self.db.programs_for_user(user["username"]).records})
 
     @route("/delete/", methods=["POST"])
     @requires_login
     def delete_program(self, user):
         body = request.json
         if not isinstance(body.get("id"), str):
-            return "program id must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
 
         result = self.db.program_by_id(body["id"])
 
         if not result or (result["username"] != user["username"] and not is_admin(user)):
-            return "", 404
+            return make_response(gettext("request_invalid"), 404)
         self.db.delete_program_by_id(body["id"])
         self.db.increase_user_program_count(user["username"], -1)
 
@@ -154,44 +154,44 @@ class ProgramsModule(WebsiteModule):
         resp = {"message": gettext("delete_success")}
         if achievement:
             resp["achievement"] = achievement
-        return jsonify(resp)
+        return make_response(resp, 200)
 
     @route("/duplicate-check", methods=["POST"])
     def check_duplicate_program(self):
         body = request.json
         if not isinstance(body, dict):
-            return "body must be an object", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("name"), str):
-            return "name must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
 
         if not current_user()["username"]:
-            return gettext("save_prompt"), 403
+            return make_response(gettext("save_prompt"), 403)
 
         programs = self.db.programs_for_user(current_user()["username"])
         for program in programs:
             if program["name"] == body["name"]:
-                return jsonify({"duplicate": True, "message": gettext("overwrite_warning")})
-        return jsonify({"duplicate": False})
+                return make_response({"duplicate": True, "message": gettext("overwrite_warning")})
+        return make_response({"duplicate": False}, 200)
 
     @route("/", methods=["POST"])
     @requires_login
     def save_program(self, user):
         body = request.json
         if not isinstance(body, dict):
-            return "body must be an object", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("code"), str):
-            return "code must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("name"), str):
-            return "name must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("level"), int):
-            return "level must be an integer", 400
+            return make_response(gettext("request_invalid"), 400)
         if 'program_id' in body and not isinstance(body.get("program_id"), str):
-            return "program_id must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
         if 'shared' in body and not isinstance(body.get("shared"), bool):
-            return "shared must be a boolean", 400
+            return make_response(gettext("request_invalid"), 400)
         if "adventure_name" in body:
             if not isinstance(body.get("adventure_name"), str):
-                return "if present, adventure_name must be a string", 400
+                return make_response(gettext("request_invalid"), 400)
 
         error = None
         program_id = body.get('program_id')
@@ -210,7 +210,7 @@ class ProgramsModule(WebsiteModule):
             except BaseException:
                 error = True
                 if not body.get("force_save", True):
-                    return jsonify({"parse_error": True, "message": gettext("save_parse_warning")})
+                    return make_response({"parse_error": True, "message": gettext("save_parse_warning")})
 
         program = self.logic.store_user_program(
             program_id=program_id,
@@ -223,14 +223,14 @@ class ProgramsModule(WebsiteModule):
             adventure_name=body.get('adventure_name'),
             short_name=body.get('short_name', body.get('adventure_name')))
 
-        return jsonify({
+        return make_response({
             "message": gettext("save_success_detail"),
             "share_message": gettext("copy_clipboard"),
             "name": program["name"],
             "id": program['id'],
             "save_info": SaveInfo.from_program(Program.from_database_row(program)),
             "achievements": self.achievements.get_earned_achievements(),
-        })
+        }, 200)
 
     @route("/share/<program_id>", methods=['POST'], defaults={'second_teachers_programs': False})
     @route("/share/<program_id>/<second_teachers_programs>", methods=["POST"])
@@ -238,7 +238,7 @@ class ProgramsModule(WebsiteModule):
     def share_unshare_program(self, user, program_id, second_teachers_programs):
         program = self.db.program_by_id(program_id)
         if not program or program["username"] != user["username"]:
-            return "No such program!", 404
+            return make_response(gettext("request_invalid"), 404)
 
         # This only happens in the situation were a user un-shares their favourite program -> Delete from public profile
         public_profile = self.db.get_public_profile_settings(current_user()["username"])
@@ -274,13 +274,13 @@ class ProgramsModule(WebsiteModule):
     def submit_program(self, user):
         body = request.json
         if not isinstance(body, dict):
-            return "body must be an object", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("id"), str):
-            return "id must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
 
         result = self.db.program_by_id(body["id"])
         if not result or result["username"] != user["username"]:
-            return "No such program!", 404
+            return make_response(gettext("request_invalid"), 400)
 
         program = self.db.submit_program_by_id(body["id"], True)
         self.db.increase_user_submit_count(user["username"])
@@ -292,20 +292,20 @@ class ProgramsModule(WebsiteModule):
             "save_info": SaveInfo.from_program(Program.from_database_row(program)),
             "achievements": self.achievements.get_earned_achievements(),
         }
-        return jsonify(response)
+        return make_response(response, 200)
 
     @route("/unsubmit", methods=["POST"])
     @requires_teacher
     def unsubmit_program(self, user):
         body = request.json
         if not isinstance(body, dict):
-            return "body must be an object", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("id"), str):
-            return "id must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
 
         result = self.db.program_by_id(body["id"])
         if not result:
-            return "No such program!", 404
+            return make_response(gettext("request_invalid"), 400)
 
         program = self.db.submit_program_by_id(body["id"], False)
 
@@ -314,50 +314,50 @@ class ProgramsModule(WebsiteModule):
             "save_info": SaveInfo.from_program(Program.from_database_row(program)),
             "achievements": self.achievements.get_earned_achievements(),
         }
-        return jsonify(response)
+        return make_response(response, 200)
 
     @route("/set_favourite", methods=["POST"])
     @requires_login
     def set_favourite_program(self, user):
         body = request.json
         if not isinstance(body, dict):
-            return "body must be an object", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("id"), str):
-            return "id must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("set"), bool):
-            return "set must be a bool", 400
+            return make_response(gettext("request_invalid"), 400)
 
         result = self.db.program_by_id(body["id"])
         if not result or result["username"] != user["username"]:
-            return "No such program!", 404
+            return make_response(gettext("request_invalid"), 400)
 
         if self.db.set_favourite_program(user["username"], body["id"], body["set"]):
             message = gettext("favourite_success") if body["set"] else gettext("unfavourite_success")
-            return jsonify({"message": message})
+            return make_response({"message": message}, 200)
         else:
-            return "You can't set a favourite program without a public profile", 400
+            return make_response(gettext("request_invalid"), 400)
 
     @route("/set_hedy_choice", methods=["POST"])
     @requires_admin
     def set_hedy_choice(self, user):
         body = request.json
         if not isinstance(body, dict):
-            return "body must be an object", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("id"), str):
-            return "id must be a string", 400
+            return make_response(gettext("request_invalid"), 400)
         if not isinstance(body.get("favourite"), int):
-            return "favourite must be a integer", 400
+            return make_response(gettext("request_invalid"), 400)
 
         favourite = True if body.get("favourite") == 1 else False
 
         result = self.db.program_by_id(body["id"])
         if not result:
-            return "No such program!", 404
+            return make_response(gettext("request_invalid"), 400)
 
         self.db.set_program_as_hedy_choice(body["id"], favourite)
         if favourite:
-            return jsonify({"message": 'Program successfully set as a "Hedy choice" program.'}), 200
-        return jsonify({"message": 'Program successfully removed as a "Hedy choice" program.'}), 200
+            return make_response({"message": gettext("favourite_success")}, 200)
+        return make_response({"message": gettext("unfavourite_success")}, 200)
 
     @route("/report", methods=["POST"])
     @requires_login
@@ -367,7 +367,7 @@ class ProgramsModule(WebsiteModule):
         # Make sure the program actually exists and is public
         program = self.db.program_by_id(body.get("id"))
         if not program or program.get("public") != 1:
-            return gettext("report_failure"), 400
+            return make_response(gettext("report_failure"), 400)
 
         link = email_base_url() + "/hedy/" + body.get("id") + "/view"
         send_email(
@@ -377,7 +377,7 @@ class ProgramsModule(WebsiteModule):
             '<a href="' + link + '">Program link</a>',
         )
 
-        return {"message": gettext("report_success")}, 200
+        return make_response({"message": gettext("report_success")}, 200)
 
 
 class NotYourProgramError(RuntimeError):

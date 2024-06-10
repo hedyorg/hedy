@@ -339,33 +339,42 @@ commands_and_types_per_level = {
         1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.list],
         4: [HedyType.string, HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
-        16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]
+        15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean],
+        16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean, HedyType.list]
     },
     Command.ask: {
         1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.list],
         4: [HedyType.string, HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
-        16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]
+        15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean],
+        16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean, HedyType.list]
     },
-    Command.turn: {1: command_turn_literals,
-                   2: [HedyType.integer, HedyType.input],
-                   12: [HedyType.integer, HedyType.input, HedyType.float]
-                   },
-    Command.color: {1: [english_colors, HedyType.list],
-                    2: [english_colors, HedyType.string, HedyType.input, HedyType.list]},
-    Command.forward: {1: [HedyType.integer, HedyType.input],
-                      12: [HedyType.integer, HedyType.input, HedyType.float]
-                      },
-    Command.sleep: {1: [HedyType.integer, HedyType.input],
-                    12: [HedyType.integer, HedyType.input, HedyType.float]
-                    },
+    Command.turn: {
+        1: command_turn_literals,
+        2: [HedyType.integer, HedyType.input],
+        12: [HedyType.integer, HedyType.input, HedyType.float]
+    },
+    Command.color: {
+        1: [english_colors, HedyType.list],
+        2: [english_colors, HedyType.string, HedyType.input, HedyType.list]},
+    Command.forward: {
+        1: [HedyType.integer, HedyType.input],
+        12: [HedyType.integer, HedyType.input, HedyType.float]
+    },
+    Command.sleep: {
+        1: [HedyType.integer, HedyType.input],
+        12: [HedyType.integer, HedyType.input, HedyType.float]
+    },
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
     Command.not_in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
     Command.remove_from_list: {1: [HedyType.list]},
-    Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
-                       14: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]},
+    Command.equality: {
+        1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
+        14: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list],
+        15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list, HedyType.boolean]
+    },
     Command.addition: {
         6: [HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]
@@ -389,7 +398,9 @@ commands_and_types_per_level = {
     Command.smaller_equal: {14: [HedyType.integer, HedyType.float, HedyType.input]},
     Command.bigger: {14: [HedyType.integer, HedyType.float, HedyType.input]},
     Command.bigger_equal: {14: [HedyType.integer, HedyType.float, HedyType.input]},
-    Command.not_equal: {14: [HedyType.integer, HedyType.float, HedyType.string, HedyType.input, HedyType.list]},
+    Command.not_equal: {
+        14: [HedyType.integer, HedyType.float, HedyType.string, HedyType.input, HedyType.list, HedyType.boolean]
+    },
     Command.pressed: {5: [HedyType.string]}  # TODO: maybe use a seperate type character in the future.
 }
 
@@ -541,6 +552,15 @@ class ExtractAST(Transformer):
 
     def NEGATIVE_NUMBER(self, args):
         return Tree('number', [str(args)])
+
+    def TRUE(self, args):
+        return Tree('true', [str(args)])
+
+    def FALSE(self, args):
+        return Tree('false', [str(args)])
+
+    def boolean(self, meta, args):
+        return args[0]
 
     # level 2
     def var(self, meta, args):
@@ -824,6 +844,12 @@ class TypeValidator(Transformer):
         # We managed to parse a number that cannot be parsed by python
         raise exceptions.ParseException(level=self.level, location='', found=number)
 
+    def true(self, tree):
+        return self.to_typed_tree(tree, HedyType.boolean)
+
+    def false(self, tree):
+        return self.to_typed_tree(tree, HedyType.boolean)
+
     def subtraction(self, tree):
         return self.to_sum_typed_tree(tree, Command.subtraction)
 
@@ -1045,6 +1071,12 @@ class Filter(Transformer):
     def NEGATIVE_NUMBER(self, args):
         return True, ''.join([c for c in args]), None
 
+    def true(self, meta, args):
+        return True, args[0], meta
+
+    def false(self, meta, args):
+        return True, args[0], meta
+
     def text(self, meta, args):
         return all(args), ''.join([c for c in args]), meta
 
@@ -1137,9 +1169,9 @@ def all_commands(input_string, level, lang='en'):
 
 
 def all_variables(input_string, level, lang='en'):
-    """Return the commands used in a program string.
+    """Return all variables used in a program string.
 
-    This function is still used in the web frontend, and some tests, but no longer by 'transpile'.
+    This function is still used by the roles of variables detection
     """
     program_root = parse_input(input_string, level, lang)
     abstract_syntax_tree = ExtractAST().transform(program_root)
@@ -1504,7 +1536,7 @@ class ConvertToPython(Transformer):
             return f"convert_numerals('{self.numerals_language}', {escape_var(name)})"
         elif ConvertToPython.is_float(name):
             return f"convert_numerals('{self.numerals_language}', {name})"
-        elif ConvertToPython.is_quoted(name):
+        elif ConvertToPython.is_quoted(name) or self.is_bool(name):
             return f"{name}"
 
     def get_fresh_var(self, name):
@@ -1519,8 +1551,9 @@ class ConvertToPython(Transformer):
 
         def is_var_candidate(arg) -> bool:
             return not isinstance(arg, Tree) and \
-                not ConvertToPython.is_int(arg) and \
-                not ConvertToPython.is_float(arg)
+                not self.is_int(arg) and \
+                not self.is_float(arg) and \
+                not self.is_bool(arg)
 
         args_to_process = [a for a in args if is_var_candidate(a)]  # we do not check trees (calcs) they are always ok
 
@@ -1550,9 +1583,10 @@ class ConvertToPython(Transformer):
         try:
             self.check_var_usage([arg], meta.line)
         except exceptions.UndefinedVarException:
-            if not (ConvertToPython.is_int(arg) or
-                    ConvertToPython.is_float(arg) or
-                    ConvertToPython.is_random(arg)):
+            if not (self.is_int(arg) or
+                    self.is_float(arg) or
+                    self.is_random(arg) or
+                    self.is_bool(arg)):
                 raise exceptions.UnquotedAssignTextException(text=arg, line_number=meta.line)
 
     # static methods
@@ -1586,6 +1620,10 @@ class ConvertToPython(Transformer):
     @staticmethod
     def is_random(s):
         return 'random.choice' in s
+
+    @staticmethod
+    def is_bool(s):
+        return s in ['True', 'False']
 
     @staticmethod
     def is_list(s):
@@ -1997,12 +2035,17 @@ class ConvertToPython_4(ConvertToPython_3):
             if self.numerals_language == "Latin":
                 converted = escape_var(name)
             else:
-                converted = f'convert_numerals("{self.numerals_language}",{escape_var(name)})'
+                converted = f'convert_numerals("{self.numerals_language}", {escape_var(name)})'
             return "{" + converted + "}"
         else:
+            # at level 4 backslashes are escaped in preprocessing, so we escape only '
             if self.is_quoted(name):
                 name = name[1:-1]
-            return name.replace("'", "\\'")  # at level 4 backslashes are escaped in preprocessing, so we escape only '
+                return name.replace("'", "\\'")
+            if not ConvertToPython.is_int(name) and not ConvertToPython.is_float(name):
+                name = name if self.is_bool(name) else escape_var(name.replace("'", "\\'"))
+                name = '"' + name + '"'
+            return f'{{convert_numerals("{self.numerals_language}", {name})}}'
 
     def var_access(self, meta, args):
         name = args[0]
@@ -2498,6 +2541,14 @@ class ConvertToPython_12(ConvertToPython_11):
     def NEGATIVE_NUMBER(self, meta, args):
         numbers = [str(float(x)) for x in args]
         return ''.join(numbers)
+
+    def true(self, meta, args):
+        # The args contain the actual parse value that was used
+        return str(True)
+
+    def false(self, meta, args):
+        # The args contain the actual parse value that was used
+        return str(False)
 
     def text_in_quotes(self, meta, args):
         # We need to re-add the quotes, so that the Python code becomes name = 'Jan' or "Jan's"
@@ -3027,7 +3078,7 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
 
 
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle',
-                                         'has_pressed', 'has_clear', 'has_music', 'commands', 'roles_of_variables'])
+                                         'has_pressed', 'has_clear', 'has_music', 'has_sleep', 'commands', 'roles_of_variables'])
 
 
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en", unused_allowed=True):
@@ -3523,16 +3574,18 @@ def determine_roles(lookup, input_string, level, lang):
         assignments = [x for x in lookup if x.name == var]
 
         if (assignments[0].tree.data == 'for_list'):
-            roles_dictionary[var] = 'walker'
+            roles_dictionary[var] = gettext('walker_variable_role')
+        elif (assignments[0].tree.data == 'for_loop'):
+            roles_dictionary[var] = gettext('stepper_variable_role')
         elif (assignments[0].type_ == 'list'):
-            roles_dictionary[var] = 'container'
+            roles_dictionary[var] = gettext('list_variable_role')
         elif (len(assignments) == 1):
             if (assignments[0].type_ == 'input'):
-                roles_dictionary[var] = 'input constant'
+                roles_dictionary[var] = gettext('input_variable_role')
             else:
-                roles_dictionary[var] = 'constant'
+                roles_dictionary[var] = gettext('constant_variable_role')
         else:
-            roles_dictionary[var] = 'unknown'
+            roles_dictionary[var] = gettext('unknown_variable_role')
 
     return roles_dictionary
 
@@ -3704,11 +3757,12 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         has_turtle = "forward" in commands or "turn" in commands or "color" in commands
         has_pressed = "if_pressed" in commands or "if_pressed_else" in commands or "assign_button" in commands
         has_music = "play" in commands
+        has_sleep = "sleep" in commands
 
         roles_of_variables = determine_roles(lookup_table, input_string, level, lang)
 
         parse_result = ParseResult(python, source_map, has_turtle, has_pressed,
-                                   has_clear, has_music, commands, roles_of_variables)
+                                   has_clear, has_music, has_sleep, commands, roles_of_variables)
 
         if populate_source_map:
             source_map.set_python_output(python)

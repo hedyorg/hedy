@@ -173,6 +173,14 @@ class AuthHelper(unittest.TestCase):
         self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
         return self.login_user(self.username)
 
+    def make_current_user_super_teacher(self):
+        """Mark the current user as super-teacher.
+
+        Need to log in again to refresh the session.
+        """
+        self.post_data('admin/mark-super-teacher', {'username': self.username})
+        return self.login_user(self.username)
+
     def given_user_is_logged_in(self):
         self.user = self.get_any_logged_user()
 

@@ -44,20 +44,20 @@ export function callNextIntroStep() {
     cheatsheetStep();
   } else if (current_step == 15) {
     pushAchievement("well_begun_is_half_done");
-    $('#achievement_pop-up').removeClass('z-10');
-    $('#achievement_pop-up').addClass('z-50');
+    $('#achievement_pop_up').removeClass('z-10');
+    $('#achievement_pop_up').addClass('z-50');
     // If the achievement pop-up is visible -> wait with the next function call
     setTimeout(function(){
-      if ($('#achievement_pop-up').is(':visible')) {
+      if ($('#achievement_pop_up').is(':visible')) {
         setTimeout(function() {
           endTutorial();
-          $('#achievement_pop-up').removeClass('z-50');
-          $('#achievement_pop-up').addClass('z-10');
+          $('#achievement_pop_up').removeClass('z-50');
+          $('#achievement_pop_up').addClass('z-10');
         }, 5000);
       } else {
         endTutorial();
-        $('#achievement_pop-up').removeClass('z-50');
-        $('#achievement_pop-up').addClass('z-10');
+        $('#achievement_pop_up').removeClass('z-50');
+        $('#achievement_pop_up').addClass('z-10');
       }
     }, 500);
   } else {
@@ -90,8 +90,8 @@ function codeOutputStep() {
 function runButtonStep() {
   removeBorder("code_output");
   $('#code_related_buttons').show();
-  $('#runButtonContainer').addClass("z-40");
-  addHighlightBorder("runButtonContainer");
+  $('#run_button_container').addClass("z-40");
+  addHighlightBorder("run_button_container");
 
   relocatePopup(50, 30);
   tutorialPopup("intro", current_step);
@@ -113,10 +113,10 @@ function tryRunButtonStep() {
 }
 
 function speakAloudStep() {
-  removeBorder("runButtonContainer");
+  removeBorder("run_button_container");
   $('#editor').removeClass('z-40');
   $('#code_output').removeClass('z-40');
-  $('#runButtonContainer').removeClass('z-40');
+  $('#run_button_container').removeClass('z-40');
 
   $('#speak_container').addClass('z-40 bg-white relative');
 
@@ -129,7 +129,7 @@ function speakAloudStep() {
 function runSpeakAloudStep() {
   $('#editor').addClass('z-40');
   $('#code_output').addClass('z-40');
-  $('#runButtonContainer').addClass('z-40');
+  $('#run_button_container').addClass('z-40');
 
   relocatePopup(50, 70);
   tutorialPopup("intro", current_step);
@@ -139,7 +139,7 @@ function nextLevelStep() {
   removeBorder("speak_container");
   $('#editor').removeClass('z-40');
   $('#code_output').removeClass('z-40');
-  $('#runButtonContainer').removeClass('z-40');
+  $('#run_button_container').removeClass('z-40');
   $('#speak_container').removeClass('z-40 bg-white relative');
 
   $('#next_level_button').addClass("z-40");
@@ -167,7 +167,7 @@ function levelDefaultStep() {
 }
 
 function adventureTabsStep() {
-  $('#adventures-buttons').children().each(function() {
+  $('#adventures_buttons').children().each(function() {
     if ($(this).attr('data-tab') == "story") {
       // Set to false, prevent "are you sure you want to switch without saving" pop-up
       clearUnsavedChanges();
@@ -179,7 +179,7 @@ function adventureTabsStep() {
 }
 
 function parsonsTabStep() {
-  $('#adventures-buttons').children().each(function() {
+  $('#adventures_buttons').children().each(function() {
     if ($(this).attr('data-tab') == "parsons") {
       // Set to false, prevent "are you sure you want to switch without saving" pop-up
       clearUnsavedChanges();
@@ -190,7 +190,7 @@ function parsonsTabStep() {
 }
 
 function quizTabStep() {
-  $('#adventures-buttons').children().each(function() {
+  $('#adventures_buttons').children().each(function() {
     if ($(this).attr('data-tab') == "quiz") {
       // Set to false, prevent "are you sure you want to switch without saving" pop-up
       clearUnsavedChanges();
@@ -202,7 +202,7 @@ function quizTabStep() {
 
 function saveShareStep() {
   // We should go back to the intro tab to make sure the save/share option is shown
-  $('#adventures-buttons').children().each(function() {
+  $('#adventures_buttons').children().each(function() {
     if ($(this).attr('data-tab') == "default") {
       clearUnsavedChanges();
       $(this).click();
@@ -210,9 +210,9 @@ function saveShareStep() {
   });
   removeBorder("adventures");
   $('#code_content_container').removeClass('z-40');
-  $('#level-header').addClass("z-40");
+  $('#level_header').addClass("z-40");
   $('#cheatsheet_container').hide();
-  addHighlightBorder("level-header");
+  addHighlightBorder("level_header");
 
   $('#save_program_button').removeAttr('onclick');
   $('#share_program_button').removeAttr('onclick');
@@ -232,8 +232,8 @@ function cheatsheetStep() {
 }
 
 function endTutorial() {
-  removeBorder("level-header");
-  $('#level-header').removeClass('z-40');
+  removeBorder("level_header");
+  $('#level_header').removeClass('z-40');
   $('#cheatsheet_dropdown').removeClass('z-40');
   $('#cheatsheet_dropdown').hide();
 
