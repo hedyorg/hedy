@@ -2075,6 +2075,10 @@ def join():
     return render_template('join.html', page_title=gettext('title_learn-more'),
                            current_page='join', content=join_translations)
 
+@app.route('/kerndoelen')
+def poster():
+    return send_from_directory('content/','kerndoelenposter.pdf')
+
 
 @app.route('/start')
 def start():
