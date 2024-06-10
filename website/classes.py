@@ -402,7 +402,7 @@ class MiscClassPages(WebsiteModule):
             "invited_as_text": gettext("second_teacher"),
         }
         self.db.add_class_invite(data)
-        return make_response('', 200)
+        return make_response('', 204)
 
     @route("/remove_student_invite", methods=["POST"])
     @requires_login
