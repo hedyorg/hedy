@@ -39,7 +39,7 @@
                     <span class="fas fa-eye block mb-1"></span>
                     <span>{{_('preview')}}</span>
                   </button>
-                  <button id="delete_adventure" class="flex flex-col items-center" data-cy="delete_adventure" 
+                  <button id="delete_adventure" class="flex flex-col items-center" data-cy="delete_adventure_{{ adventure.name }}" 
                   hx-confirm="{{_('delete_adventure_prompt')}}"
                   hx-trigger="click"
                   hx-delete="/for-teachers/customize-adventure/{{adventure.id}}"

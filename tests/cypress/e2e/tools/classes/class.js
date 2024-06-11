@@ -78,7 +78,9 @@ export function removeCustomizations(){
     cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');      
     cy.getDataCy('remove_customizations_button').click();
     cy.getDataCy('modal_yes_button').click();
-    cy.wait('@restoreCustomizations');
+    cy.wait(500);
+    cy.wait('@restoreCustomizations').should('have.nested.property', 'response.statusCode', 200);
+    cy.wait(3000);
 }
 
 export function addCustomizations(classname){

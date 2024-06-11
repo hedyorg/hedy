@@ -10,19 +10,18 @@ beforeEach(() => {
 describe('Duplicate class tests', () => {
   it('Is able to duplicate a class without second teachers', () => {
     const classname = `TEST_CLASS_${Math.random()}`
+    const duplicate_class = `test class ${Math.random()}`;
     createClass(classname);
     addCustomizations(classname);
-    const duplicate_class = `test class ${Math.random()}`;
 
+    cy.reload();
+    cy.wait(500);
     openClassView();
     cy.getDataCy(`duplicate_${classname}`).click();
 
     cy.getDataCy('modal_prompt_input').type(duplicate_class);
     cy.getDataCy('modal_ok_button').click();
 
-    cy.reload();
-    cy.wait(500);
-    openClassView();
     cy.getDataCy('view_class_link').contains(duplicate_class).click();
     checkCustomizations();
   })
