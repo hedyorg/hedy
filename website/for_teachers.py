@@ -914,9 +914,10 @@ class ForTeachersModule(WebsiteModule):
         self.db.update_class_customizations(customizations)
 
         achievement = self.achievements.add_single_achievement(user["username"], "my_class_my_rules")
+        response = {"success": gettext("class_customize_success")}
         if achievement:
-            utils.add_pending_achievement({"achievement": achievement})
-        return make_response(gettext("class_customize_success"), 200)
+            response["achievement"] = achievement
+        return make_response(response, 200)
 
     @route("/create-accounts/<class_id>", methods=["GET"])
     @requires_teacher
@@ -1186,7 +1187,7 @@ class ForTeachersModule(WebsiteModule):
                 elif class_id not in current_classes:
                     self.add_adventure_to_class_level(user, class_id, body["id"], level, False)
 
-        return make_response(gettext("adventure_updated"), 200)
+        return make_response({"success": gettext("adventure_updated")}, 200)
 
     @route("/customize-adventure/<adventure_id>", methods=["DELETE"])
     @route("/customize-adventure/<adventure_id>/<owner>", methods=["DELETE"])
