@@ -1718,6 +1718,19 @@ class InstanceOf(Validator):
         return f'instance of {self.type}'
 
 
+class Or(Validator):
+    """Validator wihch checks if a value is instance of one of several types"""
+
+    def __init__(self, *types):
+        self.validators = [Validator.ensure(type) for type in types]
+
+    def is_valid(self, value):
+        return any(validator.is_valid(value) for validator in self.validators)
+
+    def __str__(self):
+        return f'matches one of {self.validators}'
+
+
 class Predicate(Validator):
     """Validator which calls an arbitrary callback."""
 
