@@ -1,5 +1,4 @@
 import { goToTeachersPage } from "../navigation/nav";
-import { openAdventureView } from '../../tools/classes/class.js';
 
 export function createAdventure(name)
 {
@@ -33,6 +32,14 @@ export function deleteAdventure(name) {
     })
     cy.getDataCy('modal_yes_button').should('be.enabled').click();
     cy.getDataCy('adventures_table').should("be.visible");
+}
+
+export function openAdventureView(){
+    cy.getDataCy('adventures_table').then($viewAdventure => {
+        if (!$viewAdventure.is(':visible')) {
+            cy.getDataCy('view_adventures').click();
+        }
+    });
 }
 
 export default {createAdventure};

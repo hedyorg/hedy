@@ -73,14 +73,6 @@ export function openClassView(){
       });
 }
 
-export function openAdventureView(){
-    cy.getDataCy('adventures_table').then($viewAdventure => {
-        if (!$viewAdventure.is(':visible')) {
-            cy.getDataCy('view_adventures').click();
-        }
-    });
-}
-
 export function removeCustomizations(){
     cy.getDataCy('customize_class_button').click();
     cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');      
@@ -107,7 +99,8 @@ export function addCustomizations(classname){
     cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
 
     cy.wait(500);
-    cy.get("#back_to_class").click();
+    cy.getDataCy('back_to_class').click();
+    cy.getDataCy('go_back_button').click();
 }
 
 export function createClassAndAddStudents(){

@@ -138,6 +138,7 @@ describe('customize class page', () => {
 
       cy.wait(1000)
       cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
+      cy.wait(1000)
       loginForStudent();
       cy.getDataCy('explorebutton').should("not.exist")
     });

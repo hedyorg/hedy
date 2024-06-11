@@ -8,7 +8,7 @@ beforeEach(() => {
 })
 
 describe('Duplicate class tests', () => {
-  it.only('Is able to duplicate a class without second teachers', () => {
+  it('Is able to duplicate a class without second teachers', () => {
     const classname = `TEST_CLASS_${Math.random()}`
     createClass(classname);
     addCustomizations(classname);

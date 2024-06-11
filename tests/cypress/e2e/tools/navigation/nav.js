@@ -1,5 +1,5 @@
 import { loginForAdmin } from "../login/login";
-import { openAdventureView } from '../../tools/classes/class.js';
+import { openAdventureView } from '../../tools/adventures/adventure.js';
 
 export function goToPage(page)
 {

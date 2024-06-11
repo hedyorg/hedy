@@ -6,7 +6,6 @@ const teachers = ["teacher1", "teacher4"];
 teachers.forEach((teacher) => {
   it(`Is able to add student by name for ${teacher}`, () => {
     let student = 'student5'
-    cy.intercept('/invite-student').as('invite')
     loginForTeacher();
     navigateToClass();
 
@@ -25,8 +24,7 @@ teachers.forEach((teacher) => {
     cy.getDataCy('invite_student').click();
     cy.getDataCy('modal_prompt_input').type(student);
     cy.getDataCy('modal_ok_button').click();
-    cy.wait(3000);
-    cy.wait('@invite');
+    cy.wait(3000)
     
     login(student, "123456");
 

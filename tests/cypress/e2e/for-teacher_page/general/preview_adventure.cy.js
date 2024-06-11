@@ -1,5 +1,5 @@
 import {loginForTeacher} from '../../tools/login/login.js'
-import { openAdventureView } from '../../tools/classes/class.js';
+import { openAdventureView } from '../../tools/adventures/adventure.js';
 
 const adventures = ["adventure1", "adventure3"];
 
@@ -14,6 +14,6 @@ adventures.forEach((adventure) => {
     cy.getDataCy(adventure)
       .should("be.visible")
       .should("contain.text", adventure)
-    cy.get("#adventures_tab").should("be.visible")
+    cy.getDataCy('adventures_tab').should("be.visible")
   })
 })

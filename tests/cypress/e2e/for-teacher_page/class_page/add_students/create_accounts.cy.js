@@ -31,6 +31,7 @@ teachers.forEach((teacher) => {
     })
 
     it('Is able to download login credentials and generate passwords', () => {
+      ({classname, students} = createClassAndAddStudents());
       // download login credentials
       cy.readFile('cypress/downloads/accounts.csv');
 

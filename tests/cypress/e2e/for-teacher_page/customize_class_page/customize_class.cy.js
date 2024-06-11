@@ -22,6 +22,7 @@ teachers.forEach((teacher) => {
       .should('be.visible')
       .should('not.be.disabled')
       .click();
+      cy.wait(3000);
       // We should be in the view class page
       cy.url()
         .should('include', Cypress.config('baseUrl') + Cypress.env('class_page'));
@@ -129,7 +130,7 @@ teachers.forEach((teacher) => {
       });
     });
 
-    it.only('Is able to reset the adventures and create a new adventure', () => {
+    it('Is able to reset the adventures and create a new adventure', () => {
       /**
        * At the beginning, the Parrot adventure should be in the level 1's adventures
        */
@@ -145,36 +146,28 @@ teachers.forEach((teacher) => {
 
       const new_adventure = "test_new_adventure"
       cy.getDataCy('edit_link').click();
-      url = cy.url().find();
       cy.getDataCy('custom_adventure_name')
       .clear()
       .type(new_adventure)
       // TODO check if adventure is added to class and level correctly
     });
 
-    describe('an adventure that is hidden', () => {
+    it('Is able to be re-added from the right dropdown list', () => {
       const hiddenAdventure = 'parrot';
+      selectLevel('1');
+      cy.getDataCy(`*level_1 ${hiddenAdventure} *hide`).click();
 
-      beforeEach(() => {
-        selectLevel('1');
-        cy.getDataCy(`*level_1 ${hiddenAdventure} *hide`).click();
-      });
+      cy.get(`input[value="${hiddenAdventure}"]`).should('not.exist');
 
-      it('disappears from the tab list', () => {
-        cy.get(`input[value="${hiddenAdventure}"]`).should('not.exist');
-      });
+      cy.getDataCy('available_adventures_current_level').children(`*[value='${hiddenAdventure}']`).should('exist');
+      cy.getDataCy('available_adventures_current_level').select(`${hiddenAdventure}`);
+      cy.getDataCy(`${hiddenAdventure}`).should('exist');
+      cy.wait(500);
 
-      it('can be re-added from the right dropdown list', () => {
-        cy.getDataCy('available_adventures_current_level').children(`*[value='${hiddenAdventure}']`).should('exist');
-        cy.getDataCy('available_adventures_current_level').select(`${hiddenAdventure}`);
-        cy.getDataCy(`${hiddenAdventure}`).should('exist');
-        cy.wait(500);
-
-        // should be visible for a student
-        loginForStudent();
-        goToHedyPage();
-        cy.getDataCy('parrot').should('be.visible');
-      });
+      // should be visible for a student
+      loginForStudent();
+      goToHedyPage();
+      cy.getDataCy('parrot').should('be.visible');
     });
 
     it('FIXME: selects two adventures and swaps them using drag and drop', () => {
