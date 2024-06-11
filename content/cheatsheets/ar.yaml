@@ -254,15 +254,15 @@
 -   name: أصغر
     explanation: نستعمل الاشارة `<` لفحص ما اذا كان الرقم الأول أصغر من الرقم الثاني.
     demo_code: |-
-        عمرك = {ask} "ما عمرك؟"
-        {if} عمرك < ١٣
-         . . . .{print} "أنت أصغر مني!"
+        age = {ask} 'How old are you?'
+        {if} age < 13
+            {print} 'You are younger than me!'
 -   name: أكبر
     explanation: نستعمل الاشارة `>` لفحص ما اذا كان الرقم الأول أكبر من الرقم الثاني.
     demo_code: |-
-        عمرك = {ask} "ما عمرك؟"
-        {if} عمرك > ١٣
-        . . . .{print} "أنت أكبر مني!"
+        age = {ask} 'How old are you?'
+        {if} age > 13
+            {print} 'You are older than me!'
 -   name: التساوي
     explanation: نستخدم علامتين مساواة متلاحقتين `==` عند فحص اذا ما كان شيئان متساويين.
     demo_code: |-
@@ -278,15 +278,15 @@
 -   name: أصغر أو يساوي
     explanation: نستعمل العلامة `<=` عندما نريد فحص ما اذا كان الرقم الأول أصغر من أو مساوياً للرقم الثاني.
     demo_code: |-
-        عمرك = {ask} "ما عمرك؟"
-        {if} عمرك <= ١٢
-        . . . .{print} "أنت أصغر مني!"
+        age = {ask} 'How old are you?'
+        {if} age <= 12
+            {print} 'You are younger than me!'
 -   name: أكبر أو يساوي
     explanation: نستعمل علامة `>=` عندما نريد فحص ما اذا كان الرقم الأول أكبر من أو مساوياً للرقم الثاني.
     demo_code: |-
-        عمرك = {ask} "ما عمرك؟"
-        {if} عمرك >= ١٤
-         . . . .{print} "أنت أكبر مني!"
+        age = {ask} 'How old are you?'
+        {if} age >= 14
+            {print} 'You are older than me!'
 15:
 -   name: '{while}'
     explanation: نستطيع استعمال دورة التكرار `{while}` مع علامة عدم التساوي !=.
