@@ -2039,8 +2039,10 @@ class ConvertToPython_4(ConvertToPython_3):
             if self.is_quoted(name):
                 name = name[1:-1]
                 return name.replace("'", "\\'")
-            name = name.replace("'", "\\'")
-            return f'{{convert_numerals("{self.numerals_language}", {escape_var(name)})}}'
+            if not ConvertToPython.is_int(name) and not ConvertToPython.is_float(name):
+                name = name if self.is_bool(name) else escape_var(name.replace("'", "\\'"))
+                name = '"' + name + '"'
+            return f'{{convert_numerals("{self.numerals_language}", {name})}}'
 
     def var_access(self, meta, args):
         name = args[0]
@@ -3569,16 +3571,18 @@ def determine_roles(lookup, input_string, level, lang):
         assignments = [x for x in lookup if x.name == var]
 
         if (assignments[0].tree.data == 'for_list'):
-            roles_dictionary[var] = 'walker'
+            roles_dictionary[var] = gettext('walker_variable_role')
+        elif (assignments[0].tree.data == 'for_loop'):
+            roles_dictionary[var] = gettext('stepper_variable_role')
         elif (assignments[0].type_ == 'list'):
-            roles_dictionary[var] = 'container'
+            roles_dictionary[var] = gettext('list_variable_role')
         elif (len(assignments) == 1):
             if (assignments[0].type_ == 'input'):
-                roles_dictionary[var] = 'input constant'
+                roles_dictionary[var] = gettext('input_variable_role')
             else:
-                roles_dictionary[var] = 'constant'
+                roles_dictionary[var] = gettext('constant_variable_role')
         else:
-            roles_dictionary[var] = 'unknown'
+            roles_dictionary[var] = gettext('unknown_variable_role')
 
     return roles_dictionary
 
