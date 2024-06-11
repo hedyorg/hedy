@@ -785,8 +785,7 @@ export async function delete_program(id: string, prompt: string) {
     updateSelectOptions('adventure');
     // this function decreases the total programs saved
     updateProgramCount();
-    const response = await postJsonWithAchievements('/programs/delete', { id });
-    console.log(response)
+    const response = await postJsonWithAchievements('/programs/delete', { id });    
     showAchievements(response.achievement, true, "");
     // issue request on the Bar component.
     console.log("resp", response)
