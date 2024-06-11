@@ -2850,8 +2850,15 @@ class MicrobitConvertToPython_2(MicrobitConvertToPython_1, ConvertToPython_2):
             # if the assigned value is a variable, this is a reassign
             value = self.process_variable(value, meta.line)
         else:
-            # if it is not a variable, put it in single quotes and escape them
-            value = f"{process_characters_needing_escape(value)}"
+            # if it is not a variable, check if it is a number
+            if value.isdigit() or (value.startswith('-') and value[1:].isdigit()):  # check for integers
+                pass  # do not encapsulate in quotes if it's a number
+            else:
+                try:
+                    float(value)  # check for floats
+                except ValueError:
+                    # encapsulate in quotes if it's not a number
+                    value = f"'{process_characters_needing_escape(value)}'"
         return exception + variable_name + " = " + value + self.add_debug_breakpoint()
 
     def sleep(self, meta, args):
