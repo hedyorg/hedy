@@ -7,7 +7,7 @@ describe('customize class page', () => {
       loginForTeacher();
       ensureClass();
       openClassView();
-      cy.getDataCy('view_class_link').first().click(); // Press on view class button
+      cy.getDataCy('view_class_link').contains("CLASS1").click(); // Press on view class button
       cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
 
       // Remove any customizations that already exist to get the class into a predictable state

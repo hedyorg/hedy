@@ -82,12 +82,12 @@ describe("General tests for my programs page (with both custom teacher and built
                 //favourite a program:
                 cy.get(`#favourite_program_container_${programId}`).click();
                 cy.get(`#modal_confirm_text`).should('contain.text', 'favourite');
-                cy.getDataCy('modal_yes_button').should('be.enabled').click();
+                cy.getDataCy('modal_yes_button').click();
                 //unfavourite a program:
                 cy.wait(500);
                 cy.get(`#favourite_program_container_${programId}`).click();
                 cy.get(`#modal_confirm_text`).should('contain.text', 'unfavourite');
-                cy.getDataCy('modal_yes_button').should('be.enabled').click();
+                cy.getDataCy('modal_yes_button').click();
             })
     });
 

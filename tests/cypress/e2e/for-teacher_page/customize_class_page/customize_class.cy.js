@@ -16,13 +16,13 @@ teachers.forEach((teacher) => {
     it('Is able to fill in the quiz score and click on go back button', () => {
       // Fill in the quiz score
       cy.getDataCy('quiz_input').clear().type("50").should("have.value", "50");
+      cy.wait(3000);
   
       // Click the go back button
       cy.getDataCy('back_to_class')
       .should('be.visible')
       .should('not.be.disabled')
       .click();
-      cy.wait(3000);
       // We should be in the view class page
       cy.url()
         .should('include', Cypress.config('baseUrl') + Cypress.env('class_page'));
@@ -170,7 +170,8 @@ teachers.forEach((teacher) => {
       cy.getDataCy('parrot').should('be.visible');
     });
 
-    it('FIXME: selects two adventures and swaps them using drag and drop', () => {
+    //commenting this out because the for each takes time.
+    // it('FIXME: selects two adventures and swaps them using drag and drop', () => {
       /**
        * FIXME: Since We changed the library that handles the drag and drop,
        * this test is harder to make into work, since the Cypress documentation,
@@ -218,7 +219,7 @@ teachers.forEach((teacher) => {
         })
       })
     */
-    });
+    // });
   });
 
   function selectLevel(level) {

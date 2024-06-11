@@ -24,13 +24,8 @@ export function deleteAdventure(name) {
     cy.wait(500);
     openAdventureView();
 
-    cy.get("#adventures_table tbody tr")
-    .each(($tr, i) => {
-        if ($tr.text().includes(name)) {
-            cy.get(`tbody :nth-child(${i+1}) [data-cy="delete_adventure"]`).click();
-        }
-    })
-    cy.getDataCy('modal_yes_button').should('be.enabled').click();
+    cy.getDataCy(`delete_adventure_${name}`).click();
+    cy.getDataCy('modal_yes_button').click();
     cy.getDataCy('adventures_table').should("be.visible");
 }
 

@@ -22,6 +22,9 @@ describe('Duplicate class tests', () => {
     cy.getDataCy('modal_prompt_input').type(duplicate_class);
     cy.getDataCy('modal_ok_button').click();
 
+    cy.reload();
+    cy.wait(500);
+    openClassView();
     cy.getDataCy('view_class_link').contains(duplicate_class).click();
     checkCustomizations();
   })
@@ -48,7 +51,7 @@ describe('Duplicate class tests', () => {
     openClassView();
     cy.getDataCy("duplicate_CLASS1").click();
     // add second teachers
-    cy.getDataCy('modal_yes_button').should('be.enabled').click();
+    cy.getDataCy('modal_yes_button').click();
 
     const duplicate_class = `test class ${Math.random()}`;
     cy.getDataCy('modal_prompt_input').type(duplicate_class);
