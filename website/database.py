@@ -207,7 +207,7 @@ TAGS = dynamo.Table(storage, "tags", "id",
                         'popularity': int,
                         'tagged_in': Optional(ListOf(RecordOf({
                             'id': str,
-                            'public': bool,
+                            'public': int,
                             'language': str
                         })))
                     }),
