@@ -1718,7 +1718,7 @@ class InstanceOf(Validator):
         return f'instance of {self.type}'
 
 
-class Or(Validator):
+class EitherOf(Validator):
     """Validator wihch checks if a value is instance of one of several types"""
 
     def __init__(self, *types):

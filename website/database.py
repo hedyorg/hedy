@@ -37,7 +37,7 @@ from utils import timems, times, is_debug_mode
 from . import dynamo, auth
 from . import querylog
 
-from .dynamo import DictOf, Optional, ListOf, SetOf, RecordOf, Or
+from .dynamo import DictOf, Optional, ListOf, SetOf, RecordOf, EitherOf
 
 is_offline = getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
 if is_offline:
@@ -164,7 +164,7 @@ ADVENTURES = dynamo.Table(storage, "adventures", "id",
                               'creator': str,
                               'name': str,
                               'classes': Optional(ListOf(str)),
-                              'level': Or(str, int),  # this might be a string or a int
+                              'level': EitherOf(str, int),  # this might be a string or a int
                               'levels': ListOf(str),
                               'content': str,
                               'public': int,
