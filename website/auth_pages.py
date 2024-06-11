@@ -288,7 +288,7 @@ class AuthModule(WebsiteModule):
         hashed = password_hash(body["password"], make_salt())
         self.db.update_user(body["username"], {"password": hashed})
 
-        return make_response(gettext("password_change_success"), 200)
+        return make_response({"success": gettext("password_change_success")}, 200)
 
     @ route("/change_password", methods=["POST"])
     @ requires_login
@@ -467,5 +467,5 @@ class AuthModule(WebsiteModule):
                 )
             except BaseException:
                 return user, make_response({gettext("mail_error_change_processed")}, 400)
-            resp = make_response('', 204)
+            resp = make_response('', 200)
         return user, resp

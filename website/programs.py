@@ -377,7 +377,7 @@ class ProgramsModule(WebsiteModule):
             '<a href="' + link + '">Program link</a>',
         )
 
-        return make_response(gettext("report_success"), 200)
+        return make_response({"message": gettext("report_success")}, 200)
 
 
 class NotYourProgramError(RuntimeError):
