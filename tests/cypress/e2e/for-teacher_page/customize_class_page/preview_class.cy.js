@@ -2,6 +2,7 @@ import { createClass, openClassView, selectLevel } from '../../tools/classes/cla
 import { loginForTeacher } from '../../tools/login/login.js'
 import { goToTeachersPage } from '../../tools/navigation/nav.js';
 
+// Do we also want this to be tested for a second_teacher?
 it('Is able to preview class', () => {
     loginForTeacher();
     // go to main hedy page in "normal mode"

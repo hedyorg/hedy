@@ -2,7 +2,7 @@ import { loginForTeacher, loginForStudent } from '../../tools/login/login.js'
 import { navigateToClass, removeCustomizations, selectLevel } from "../../tools/classes/class";
 import { goToHedyPage } from "../../tools/navigation/nav";
 
-const teachers = ["teacher1"];//, "teacher4"];
+const teachers = ["teacher1", "teacher4"];
 
 teachers.forEach((teacher) => {
   describe(`customize class page for ${teacher}`, () => {
