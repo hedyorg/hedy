@@ -11,7 +11,6 @@ describe('customize class page', () => {
 
       // Remove any customizations that already exist to get the class into a predictable state
       removeCustomizations();
-      cy.getDataCy('opening_date_label').click();
     });
 
     it('Is able to remove the puzzle and quiz from level 2 and then add them back', () => {
