@@ -152,14 +152,6 @@ class ForTeachersModule(WebsiteModule):
             survey_id, description, questions, total_questions, survey_later = self.class_survey(class_id)
 
         students = Class.get("students", [])
-        if utils.is_testing_request(request):
-            return make_response(
-                {
-                    "students": students,
-                    "link": Class["link"],
-                    "name": Class["name"],
-                    "id": Class["id"]
-                }, 200)
 
         achievement = None
         if len(students) > 20:
@@ -183,6 +175,16 @@ class ForTeachersModule(WebsiteModule):
 
         teacher = user if Class["teacher"] == user["username"] else self.db.user_by_username(Class["teacher"])
         second_teachers = [teacher] + Class.get("second_teachers", [])
+        print('*'*100)
+        print(graph_students)
+        print('*'*100)
+        if utils.is_testing_request(request):
+            return make_response({
+                "students": graph_students,
+                "link": Class["link"],
+                "name": Class["name"],
+                "id": Class["id"]
+            }, 200)
 
         return render_template(
             "class-overview.html",
