@@ -11,12 +11,12 @@ describe('Is able to preview adventures', () => {
             }
         });
         // preview adventure3
-        cy.getDataCy(`preview-${adv}`).click();
+        cy.getDataCy(`preview_${adv}`).click();
         // now it should be visible in code-page.
         cy.getDataCy(adv)
           .should("be.visible")
           .should("contain.text", adv)
-        cy.get("#adventures-tab").should("be.visible")
+        cy.get("#adventures_tab").should("be.visible")
     })
   }
 })

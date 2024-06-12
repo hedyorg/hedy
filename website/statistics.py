@@ -1,6 +1,6 @@
 from collections import namedtuple
 from enum import Enum
-from flask import g, jsonify, request
+from flask import g, make_response, request
 from website import querylog
 from website.auth import requires_admin
 from .database import Database
@@ -50,7 +50,7 @@ class StatisticsModule(WebsiteModule):
             "per_level": _to_response_per_level(per_level_data),
             "per_week": _to_response(per_week_data, "week", lambda e: f"L{e['level']}"),
         }
-        return jsonify(response)
+        return make_response(response, 200)
 
 
 def add(username, action):

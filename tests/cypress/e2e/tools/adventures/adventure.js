@@ -31,7 +31,7 @@ export function deleteAdventure(name) {
     cy.get("#adventures_table tbody tr")
     .each(($tr, i) => {
         if ($tr.text().includes(name)) {
-            cy.get(`tbody :nth-child(${i+1}) [data-cy="delete-adventure"]`).click();
+            cy.get(`tbody :nth-child(${i+1}) [data-cy="delete_adventure"]`).click();
         }
     })
     cy.getDataCy('modal_yes_button').should('be.enabled').click();

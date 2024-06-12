@@ -8,9 +8,9 @@ let searchInput: HTMLInputElement;
 
 function initializeVariables() {
     // Get and initialize needed variables
-    levelSelect = document.getElementById("level-select") as HTMLElement;
-    languageSelect = document.getElementById("language-select") as HTMLElement;
-    tagsSelect = document.getElementById("tag-select") as HTMLElement;
+    levelSelect = document.getElementById("level_select") as HTMLElement;
+    languageSelect = document.getElementById("language_select") as HTMLElement;
+    tagsSelect = document.getElementById("tag_select") as HTMLElement;
     searchInput = document.getElementById('search_adventure') as HTMLInputElement;
 }
 

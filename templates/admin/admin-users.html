@@ -1,8 +1,8 @@
 {% extends "auth.html" %}
 
 {% block regular_content %}
-<div id="modal-tags" class="hidden fixed z-50 py-4 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center" style="top: 20%; left: 50%; transform: translate(-50%, -50%);">
-    <div class="absolute top-2 right-2" onclick="$('#modal-tags').hide();$('#modal-mask').hide();">
+<div id="modal_tags" class="hidden fixed z-50 py-4 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center" style="top: 20%; left: 50%; transform: translate(-50%, -50%);">
+    <div class="absolute top-2 right-2" onclick="$('#modal_tags').hide();$('#modal_mask').hide();">
         <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <title>{{_('close')}}</title>
             <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
@@ -12,15 +12,15 @@
     <div id="tags_container" class="flex flex-row w-full gap-4">
         <div class="flex flex-col gap-2 items-center">
             <div class="bg-red-500 text-white py-1 rounded-lg font-bold px-3">{{_('certified_teacher')}} ⊙</div>
-            <input type="checkbox" id="certified-tag-input" class="tags-input bg-white">
+            <input type="checkbox" id="certified_tag_input" class="tags-input bg-white">
         </div>
         <div class="flex flex-col gap-2 items-center">
             <div class="bg-indigo-500 text-white py-1 rounded-lg font-bold px-3">{{_('distinguished_user')}} ⊙</div>
-            <input type="checkbox" id="distinguished-tag-input" class="tags-input bg-white">
+            <input type="checkbox" id="distinguished_tag_input" class="tags-input bg-white">
         </div>
         <div class="flex flex-col gap-2 items-center">
             <div class="bg-pink-500 text-white py-1 rounded-lg font-bold px-3">{{_('contributor')}} ⊙</div>
-            <input type="checkbox" id="contributor-tag-input" class="tags-input bg-white">
+            <input type="checkbox" id="contributor_tag_input" class="tags-input bg-white">
         </div>
     </div>
     <button class="green-btn mt-4" onclick="hedyApp.update_user_tags();">Update tags</button>
@@ -124,7 +124,7 @@
             </div>
         </div>
 
-        <input id="hidden-page-input" type="hidden" name="page" value="">
+        <input id="hidden_page_input" type="hidden" name="page" value="">
     </form>
 </div>
 <h4 class="text-center">Total amount of shown users: {{ users|length }}</h4>
@@ -145,6 +145,7 @@
           <td id="experience_header" class="hidden">Experience</td>
           <td id="tags_header" class="text-center">Tags</td>
           <td id="teacher_header" class="text-center">Teacher</td>
+          <td id="teacher_header" class="text-center">Super Teacher</td>
           <td id="verified_header" class="hidden">Verified</td>
       </tr>
     </thead>
@@ -167,17 +168,19 @@
                 <td class="teacher_cell text-center"><span class="fa-solid fa-circle-question cursor-pointer" onclick="hedyApp.markAsTeacher (this, '{{user.username}}', true, true)"></span></td>
             {% else %}
                 <td class="teacher_cell text-center"><input type="checkbox" {% if user.is_teacher %}checked="checked"{% endif %} onclick="hedyApp.markAsTeacher (this, '{{user.username}}', {% if user.is_teacher %}false{% else %}true{% endif %}, false)"></td>
-            {% endif %}<td class="verified_cell hidden">{{user.email_verified}}</td>
+            {% endif %}
+            <td class="teacher_cell text-center"><input type="checkbox" {% if user.is_super_teacher %}checked="checked"{% endif %} onclick="hedyApp.markSuperTeacher (this, '{{user.username}}', {% if user.is_super_teacher %}true{% else %}false{% endif %})"></td>
+            <td class="verified_cell hidden">{{user.email_verified}}</td>
             <td class="third_party_cell hidden text-center"><input type="checkbox" {% if user.third_party %}checked="checked"{% endif %} ></td>
           </tr>
       {% endfor %}
     </tbody>
   </table>
   {% if prev_page_token %}
-  <button data-page_token="{{prev_page_token}}" class="admin-pagination-btn green-btn mt-4">« Prev page</button>
+  <button data-page_token="{{prev_page_token}}" class="admin_pagination_btn green-btn mt-4">« Prev page</button>
   {% endif %}
   {% if next_page_token %}
-  <button data-page_token="{{next_page_token}}" class="admin-pagination-btn green-btn mt-4">Next page »</button>
+  <button data-page_token="{{next_page_token}}" class="admin_pagination_btn green-btn mt-4">Next page »</button>
   {% endif %}
 </div>
 {% endblock %}

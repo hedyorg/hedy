@@ -11,7 +11,7 @@ describe("Test the feedback feature", () => {
             .should("be.visible")
             .click()
         
-        cy.getDataCy('modal-feedback')
+        cy.getDataCy('modal_feedback')
             .should("be.visible")
     });
 
@@ -22,17 +22,17 @@ describe("Test the feedback feature", () => {
             .should("be.visible")
             .click()
         
-        cy.getDataCy('modal-feedback-input')
+        cy.getDataCy('modal_feedback_input')
             .type("should not work without a category")
 
         
-        cy.getDataCy('modal-feedback-input')
+        cy.getDataCy('modal_feedback_input')
             .should("be.visible")
         
-        cy.getDataCy('modal-feedback-cancel')
+        cy.getDataCy('modal_feedback_cancel')
             .click()
             
-        cy.getDataCy('modal-feedback-input')
+        cy.getDataCy('modal_feedback_input')
             .should("not.be.visible")
     });
 
@@ -49,16 +49,16 @@ describe("Test the feedback feature", () => {
             .should("be.visible")
             .click()
         
-        cy.getDataCy('modal-feedback-input')
+        cy.getDataCy('modal_feedback_input')
             .type("This feature is wonderful! Thanks a lot for making it happen ;)")
 
         cy.get("#feedback")
             .click()
 
-        cy.getDataCy('modal-feedback-submit')
+        cy.getDataCy('modal_feedback_submit')
             .click()
         
-        cy.getDataCy('modal-feedback-input')
+        cy.getDataCy('modal_feedback_input')
             .should("not.be.visible")
 
         cy.wait("@postFeedback").should('have.nested.property', 'response.statusCode', 200)
