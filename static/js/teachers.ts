@@ -871,7 +871,7 @@ export function initializeGraph() {
           x: {
             title: {
               display: true,
-              text: 'Adventures tried',
+              text: ClientMessages['adventures_tried'],
               font: {
                 size: 15
               }
@@ -880,7 +880,7 @@ export function initializeGraph() {
           y: {
             title: {
               display: true,
-              text: 'Errors',
+              text: ClientMessages['errors'],
               font: {
                 size: 15
               }
@@ -890,7 +890,7 @@ export function initializeGraph() {
         plugins: {
           title: {
             display: true,
-            text: `Errors per adventure completed on level ${graphData.level}`,
+            text: ClientMessages['graph_title'].replace('{level}', graphData.level.toString()),
             font: {
               size: 19
             }
@@ -912,9 +912,9 @@ export function initializeGraph() {
               label: (tooltipItem) => {
                 const item: dataPoint = tooltipItem.dataset.data[tooltipItem.dataIndex] as dataPoint
                 return [
-                  `Adventures completed: ${item.x}`,
-                  `Number of errors: ${item.y}`,
-                  `Successful runs: ${item.successful_runs}`
+                  ClientMessages['adventures_completed'].replace('{number_of_adventures}', item.x.toString()),
+                  ClientMessages['number_of_errors'].replace('{number_of_errors}', item.y.toString()),
+                  ClientMessages['successful_runs'].replace('{successful_runs}', item.successful_runs.toString())
                 ]
               }
             }
