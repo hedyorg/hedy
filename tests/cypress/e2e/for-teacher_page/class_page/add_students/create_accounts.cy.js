@@ -7,7 +7,6 @@ const teachers = ["teacher1", "teacher4"];
 
 before(() => {
   loginForTeacher();
-  ({classname, students} = createClassAndAddStudents());
 })
 
 beforeEach(() => {
@@ -19,13 +18,22 @@ beforeEach(() => {
 
 teachers.forEach((teacher) => {
   describe(`Testing creating accounts for ${teacher}`, () => {
-    it('Is able to download login credentials and generate passwords', () => {
+    it('Is able to download login credentials, generate passwords, click on go back button and see if students created in createClassAndAddStudents() are present', () => {
+      ({classname, students} = createClassAndAddStudents());
       // download login credentials
       cy.readFile('cypress/downloads/accounts.csv');
 
       // generate passwords
       cy.getDataCy('toggle_circle').click();
       cy.getDataCy('password_1').should('have.length.greaterThan', 0);
+
+      cy.getDataCy('go_back_button').click();
+      cy.url().should('include', 'class/'); 
+
+      cy.getDataCy('student_username_cell').should(($div) => {
+        const text = $div.text();
+        expect(text).include(students[0]);
+      })
     })
 
     it('Is able to add and remove a row and use the reset button', () => {
@@ -49,15 +57,5 @@ teachers.forEach((teacher) => {
       cy.getDataCy('username_2').should('have.value', '');
       cy.getDataCy('username_3').should('have.value', '');
     })
-
-    it('Is able to click on go back button and see if students created in createClassAndAddStudents() are present', () => {
-      cy.getDataCy('go_back_button').click();
-      cy.url().should('include', 'class/'); 
-
-      cy.getDataCy('student_username_cell').should(($div) => {
-        const text = $div.text();
-        expect(text).include(students[0]);
-      })
-  })
   })
 })

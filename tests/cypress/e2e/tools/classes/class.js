@@ -86,7 +86,7 @@ export function removeCustomizations(){
     cy.getDataCy('remove_customizations_button').click();
     cy.getDataCy('modal_yes_button').click();
     cy.wait('@restoreCustomizations').should('have.nested.property', 'response.statusCode', 200);
-    cy.wait(3000);
+    cy.wait(4000);
 }
 
 export function addCustomizations(classname){

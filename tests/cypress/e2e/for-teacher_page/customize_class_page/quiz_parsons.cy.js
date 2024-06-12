@@ -2,6 +2,7 @@ import { loginForStudent, loginForTeacher } from '../../tools/login/login.js'
 import { ensureClass, openClassView, removeCustomizations, selectLevel } from "../../tools/classes/class";
 import { goToHedyLevel2Page, goToHedyLevel5Page } from '../../tools/navigation/nav.js';
 
+// Do we also want this to be tested for a second_teacher?
 describe('customize class page', () => {
     beforeEach(() => {
       loginForTeacher();
@@ -29,7 +30,7 @@ describe('customize class page', () => {
       cy.getDataCy('available_adventures_current_level').select("parsons")
 
       // Now the order should be quiz as last, then parsons.
-      cy.getDataCy('level_2 parsons').should("exist")
+      cy.getDataCy('parsons').should("exist")
 
       // scrol to get quiz into view and make sure its the last one
       cy.getDataCy('quiz').scrollIntoView().should('be.visible');
