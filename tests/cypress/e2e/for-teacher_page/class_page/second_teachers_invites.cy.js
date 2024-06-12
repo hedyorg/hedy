@@ -8,11 +8,7 @@ let className;
 
 before(() => {
   loginForTeacher();
-  className = createClass()
-});
-
-beforeEach(() => {
-  loginForTeacher();
+  className = createClass();
   navigateToClass(className);
 });
 

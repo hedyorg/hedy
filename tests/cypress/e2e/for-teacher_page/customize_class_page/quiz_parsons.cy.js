@@ -1,63 +1,41 @@
 import { loginForStudent, loginForTeacher } from '../../tools/login/login.js'
-import { ensureClass, openClassView, removeCustomizations } from "../../tools/classes/class";
+import { ensureClass, openClassView, removeCustomizations, selectLevel } from "../../tools/classes/class";
 import { goToHedyLevel2Page, goToHedyLevel5Page } from '../../tools/navigation/nav.js';
 
 describe('customize class page', () => {
     beforeEach(() => {
       loginForTeacher();
       ensureClass();
-      openClassView();
-      cy.getDataCy('view_class_link').contains("CLASS1").click(); // Press on view class button
-      cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
+      openClassView("CLASS1");
 
       // Remove any customizations that already exist to get the class into a predictable state
-      // This always throws up a modal dialog
       removeCustomizations();
       cy.getDataCy('opening_date_label').click();
     });
 
     it('Is able to remove the puzzle and quiz from level 2 and then add them back', () => {
-      // Click on level 2
-      cy.getDataCy("levels_dropdown")
-        .select('2')
-        .should('have.value', '2');
+      selectLevel('2');
 
-      // validate and then remove the quiz
-      cy.get('[data-cy="level_2"] div:last input')
-        .should('have.value', 'quiz')
+      // remove the quiz
+      cy.getDataCy('hide_quiz').click();
+      cy.getDataCy('quiz').should("not.exist")
 
-      cy.get('[data-cy="level_2"] div:last [data-cy="hide"]')
-        .click();
-
-      cy.getDataCy('level_2 quiz')
-        .should("not.exist")
-
-      // validate and then remove the puzzle
-      cy.get('[data-cy="level_2"] div:last input')
-        .should('have.value', 'parsons')
-
-      cy.get('[data-cy="level_2"] div:last [data-cy="hide"]')
-        .click();
-
-      cy.getDataCy('level_2 parsons')
-        .should("not.exist")
+      // remove the puzzle
+      cy.getDataCy('hide_parsons').click();
+      cy.getDataCy('parsons').should("not.exist")
 
       // add them from available list
-      cy.getDataCy("available_adventures_current_level")
-        .select("quiz")
-
-      cy.getDataCy("available_adventures_current_level")
-        .select("parsons")
+      cy.getDataCy('available_adventures_current_level').select("quiz")
+      cy.getDataCy('available_adventures_current_level').select("parsons")
 
       // Now the order should be quiz as last, then parsons.
-      cy.getDataCy('level_2 parsons')
-        .should("exist")
+      cy.getDataCy('level_2 parsons').should("exist")
 
-      cy.get('[data-cy="level_2"] div:last input')
-        .should('have.value', 'quiz')
-      
-      cy.wait(1000);
+      // scrol to get quiz into view and make sure its the last one
+      cy.getDataCy('quiz').scrollIntoView().should('be.visible');
+      cy.getDataCy('quiz').last().should("exist")
 
+      // make sure they are visible
       loginForStudent();
       goToHedyLevel2Page();
       cy.getDataCy('quiz').scrollIntoView().should('be.visible');
@@ -67,18 +45,18 @@ describe('customize class page', () => {
     it('Is able to disable all quizes and parsons', () => {
       cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
 
-      cy.getDataCy('hide_quiz')
+      cy.getDataCy('hide_quiz_setting')
           .should("not.be.checked")
           .click()
 
-      cy.getDataCy('hide_quiz')
+      cy.getDataCy('hide_quiz_setting')
           .should("be.checked")
 
-      cy.getDataCy('hide_parsons')
+      cy.getDataCy('hide_parsons_setting')
           .should("not.be.checked")
           .click()
 
-      cy.getDataCy('hide_parsons')
+      cy.getDataCy('hide_parsons_setting')
           .should("be.checked")
 
       cy.wait(1000)
@@ -101,11 +79,11 @@ describe('customize class page', () => {
     it('Is able to hide the explore page', () => {
       cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
 
-      cy.getDataCy('hide_explore')
+      cy.getDataCy('hide_explore_setting')
           .should("not.be.checked")
           .click()
 
-      cy.getDataCy('hide_explore')
+      cy.getDataCy('hide_explore_setting')
           .should("be.checked")
 
       cy.wait(1000)

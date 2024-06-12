@@ -24,8 +24,7 @@ describe('Duplicate class tests', () => {
 
     cy.reload();
     cy.wait(500);
-    openClassView();
-    cy.getDataCy('view_class_link').contains(duplicate_class).click();
+    openClassView(duplicate_class);
     checkCustomizations();
   })
 
@@ -41,8 +40,7 @@ describe('Duplicate class tests', () => {
 
     cy.reload();
     cy.wait(500);
-    openClassView();
-    cy.getDataCy('view_class_link').contains(duplicate_class).click();
+    openClassView(duplicate_class);
     cy.getDataCy('invites_block').should('not.exist');
     checkCustomizations();
   })
@@ -59,8 +57,7 @@ describe('Duplicate class tests', () => {
 
     cy.reload();
     cy.wait(500);
-    openClassView();
-    cy.getDataCy('view_class_link').contains(duplicate_class).click();
+    openClassView(duplicate_class);
     cy.getDataCy('invites_block').should('be.visible');
     checkCustomizations();
   })
@@ -78,8 +75,7 @@ describe('Duplicate class tests', () => {
           cy.getDataCy(`duplicate_CLASS1`).click();
           cy.getDataCy('modal_ok_button').click();
 
-          openClassView();
-          cy.getDataCy('view_class_link').contains('CLASS1').click();
+          openClassView("CLASS1");
           cy.getDataCy('invites_block').should('not.exist');
           checkCustomizations();
         }

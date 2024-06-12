@@ -12,7 +12,6 @@ it('Is able to click on customize class page button', () => {
   var currentUrl = '';
   cy.url().then(url => {
     currentUrl = url;
-    cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
     cy.getDataCy('customize_class_button').click();
 
     let statsUrl = Cypress.env('customize_class_page') + currentUrl.substring(currentUrl.indexOf('class/')+6);
@@ -21,10 +20,7 @@ it('Is able to click on customize class page button', () => {
 })
 
 it('Is able to click on go back button', () => {
-  cy.getDataCy('go_back_button')
-    .should('be.visible')
-    .should('not.be.disabled')
-    .click();   
+  cy.getDataCy('go_back_button').click();   
 
   cy.url()
     .should('eq', Cypress.config('baseUrl') + Cypress.env('teachers_page'));

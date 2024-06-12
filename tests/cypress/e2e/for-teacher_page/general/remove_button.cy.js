@@ -11,6 +11,8 @@ it('Is able to remove a class', () => {
   cy.reload();
   cy.wait(500);
   openClassView();
+  // this assumes the first class is the one we just added 
+  // TODO: avoid creating a new class, f.e: test after a class is created somewhere else?
   cy.getDataCy('remove_class').first().click();
   cy.getDataCy('modal_yes_button').click();
   cy.getDataCy('view_class_link').should("not.contain.text", newClass)

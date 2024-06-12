@@ -6,9 +6,7 @@ const adventures = ["adventure1", "adventure3"];
 adventures.forEach((adventure) => {
   it('Is able to preview adventures', () => {
     loginForTeacher();
-    // view the adventures if not opened.
     openAdventureView();
-    // preview adventure3
     cy.getDataCy(`preview_${adventure}`).click();
     // now it should be visible in code-page.
     cy.getDataCy(adventure)

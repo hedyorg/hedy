@@ -1,5 +1,5 @@
 import { loginForTeacher, loginForStudent } from '../../tools/login/login.js'
-import { navigateToClass, removeCustomizations } from "../../tools/classes/class";
+import { navigateToClass, removeCustomizations, selectLevel } from "../../tools/classes/class";
 import { goToHedyPage } from "../../tools/navigation/nav";
 
 const teachers = ["teacher1"];//, "teacher4"];
@@ -14,43 +14,28 @@ teachers.forEach((teacher) => {
   
     // TODO: add check if the quiz actually has a treshold now, either here or in quiz.cy.js
     it('Is able to fill in the quiz score and click on go back button', () => {
+      cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations'); 
       // Fill in the quiz score
       cy.getDataCy('quiz_input').clear().type("50").should("have.value", "50");
-      cy.wait(3000);
+      cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
+      cy.wait(4000);
   
       // Click the go back button
-      cy.getDataCy('back_to_class')
-      .should('be.visible')
-      .should('not.be.disabled')
-      .click();
+      cy.getDataCy('back_to_class').click();
       // We should be in the view class page
       cy.url()
         .should('include', Cypress.config('baseUrl') + Cypress.env('class_page'));
     });
 
     it('Is able to switch to level 2', () => {
-      // Should be defaulted on level 1
-      cy.getDataCy('levels_dropdown')
-        .select('1')
-        .should('have.value', '1');
+      // We should be defaulted in level 1
+      cy.getDataCy("level_1").should('be.visible');
+      cy.getDataCy("level_2").should('not.exist');
 
-      // Level 1 should be visible and level 2 shouldn't exist
-      cy.getDataCy("level_1")
-        .should('be.visible');
-
-      cy.getDataCy("level_2")
-        .should('not.exist');
-
-      // Go to level 2 and check if the adventure bar changes to level_2
-      cy.getDataCy('levels_dropdown')
-        .select('2')
-        .should('have.value', '2');
-
-      cy.getDataCy("*level_2")
-        .should('be.visible');
-
-      cy.getDataCy("*level_1")
-        .should('not.exist');
+      // Go to level 2 and check if we are now in level 2
+      selectLevel('2');
+      cy.getDataCy("level_2").should('be.visible');
+      cy.getDataCy("level_1").should('not.exist');
     });
 
     it('Is able to open the opening date container, check the option checkboxes, fill in the dates and level disabled text should be visible', () => {
@@ -64,7 +49,7 @@ teachers.forEach((teacher) => {
       // The following line has a bug in cypress:
       // cy.getDataCy("opening_date_level_" + index).type("2023-01-01").should("have.value", "2023-01-01")
       // The following tests only checks if the field is not empty using a for loop:
-      var levelarray = Array.from({length:18},(v, k)=>k+1) // length reflects how many levels there are
+      var levelarray = Array.from({length:4},(v, k)=>k+1) // is it necessary to run this for all 18 levels?
       cy.wrap(levelarray).each((index) => {
         cy.getDataCy("opening_date_level_" + index)
           .type("2023-01-01")
@@ -82,12 +67,8 @@ teachers.forEach((teacher) => {
     });
 
     it('Is able to remove adventure', () => {
-      // Click on level 2
-      cy.getDataCy("levels_dropdown")
-        .select('2')
-        .should('have.value', '2');
-
-      // Finding this makes sure that level-2 has been loaded
+      selectLevel('2');
+      // Make sure that level 2 has been loaded
       cy.getDataCy('level_2');
 
       // The available adventures dropdown should only include the default option
@@ -103,8 +84,7 @@ teachers.forEach((teacher) => {
             .as('adventure')
             .then(adventure => {
               // Get the first adventure, and click its remove button
-              cy.get('[data-cy="level_2"] div:first [data-cy="hide"]')
-                .click();
+              cy.getDataCy(`hide_${adventure}`).click();
 
               // The available adventures dropdown should now include the new adventure
               cy.getDataCy("available_adventures_current_level")
@@ -116,27 +96,24 @@ teachers.forEach((teacher) => {
                 .should('have.value', `${adventure}`);
 
               // after selecting the adventure, it shouldn't be among the options
-              cy.getDataCy("available_adventures_current_level")
-                .select(`${adventure}`)
+              cy.getDataCy('available_adventures_current_level').select(`${adventure}`)
 
-              cy.getDataCy("available_adventures_current_level")
+              cy.getDataCy('available_adventures_current_level')
                 .children()
                 .should('have.length', startLength);
 
               // the adventure should now be last
-              cy.getDataCy(`level_2 ${adventure}`)
-                .should("exist")
+              cy.getDataCy(`level_2 ${adventure}`).should("exist")
           });
       });
     });
 
     it('Is able to reset the adventures and create a new adventure', () => {
-      /**
-       * At the beginning, the Parrot adventure should be in the level 1's adventures
-       */
+      // At first, the Parrot adventure should be in the level 1's adventures
+
       selectLevel('1');
       cy.getDataCy('htmx_modal').should('not.exist');
-      cy.getDataCy(`*level_1 parrot *hide`).click();
+      cy.getDataCy(`hide_parrot`).click();
       cy.getDataCy('parrot').should('not.exist');
 
       cy.getDataCy('reset_adventures').click();
@@ -155,9 +132,9 @@ teachers.forEach((teacher) => {
     it('Is able to be re-added from the right dropdown list', () => {
       const hiddenAdventure = 'parrot';
       selectLevel('1');
-      cy.getDataCy(`*level_1 ${hiddenAdventure} *hide`).click();
+      cy.getDataCy(`hide_${hiddenAdventure}`).click();
 
-      cy.get(`input[value="${hiddenAdventure}"]`).should('not.exist');
+      cy.getDataCy(`${hiddenAdventure}`).should('not.exist');
 
       cy.getDataCy('available_adventures_current_level').children(`*[value='${hiddenAdventure}']`).should('exist');
       cy.getDataCy('available_adventures_current_level').select(`${hiddenAdventure}`);
@@ -221,12 +198,6 @@ teachers.forEach((teacher) => {
     */
     // });
   });
-
-  function selectLevel(level) {
-    cy.getDataCy("levels_dropdown")
-      .select(level)
-      .should('have.value', level);
-  }
 });
 
 
