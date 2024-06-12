@@ -1000,6 +1000,7 @@ class ForTeachersModule(WebsiteModule):
             "level_thresholds": {},
             "sorted_adventures": db_adventures,
             "restored_by": user["username"],
+            "updated_by": user["username"]
         }
 
         self.db.update_class_customizations(customizations)
@@ -1397,7 +1398,7 @@ class ForTeachersModule(WebsiteModule):
             "creator": user["username"],
             "name": body["name"],
             "classes": body["classes"],
-            "level": body["levels"][0],  # TODO: this should be removed gradually.
+            "level": int(body["levels"][0]),  # TODO: this should be removed gradually.
             "levels": body["levels"],
             "content": body["content"],
             "public": 1 if body["public"] else 0,
@@ -1527,7 +1528,7 @@ class ForTeachersModule(WebsiteModule):
             "date": utils.timems(),
             "creator": user["username"],
             "name": name,
-            "classes": [class_id],
+            "classes": [class_id] if class_id is not None else [],
             "level": int(level),
             "levels": [level],
             "content": "",

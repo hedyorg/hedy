@@ -88,7 +88,7 @@ def times():
     return int(round(time.time()))
 
 
-DEBUG_MODE = False
+DEBUG_MODE = not os.getenv('NO_DEBUG_MODE')
 
 
 def is_debug_mode():
