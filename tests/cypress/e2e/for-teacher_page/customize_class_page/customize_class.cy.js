@@ -17,6 +17,7 @@ teachers.forEach((teacher) => {
       cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations'); 
       // Fill in the quiz score
       cy.getDataCy('quiz_input').clear().type("50").should("have.value", "50");
+      cy.wait(500);
       cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
       cy.wait(4000);
   

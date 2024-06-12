@@ -18,10 +18,12 @@ describe('customize class page', () => {
       selectLevel('2');
 
       // remove the quiz
+      cy.getDataCy('hide_quiz').scrollIntoView().should('be.visible');
       cy.getDataCy('hide_quiz').click();
       cy.getDataCy('quiz').should("not.exist")
 
       // remove the puzzle
+      cy.getDataCy('hide_parsons').scrollIntoView().should('be.visible');
       cy.getDataCy('hide_parsons').click();
       cy.getDataCy('parsons').should("not.exist")
 
@@ -30,11 +32,9 @@ describe('customize class page', () => {
       cy.getDataCy('available_adventures_current_level').select("parsons")
 
       // Now the order should be quiz as last, then parsons.
-      cy.getDataCy('parsons').should("exist")
-
+      cy.getDataCy('parsons').scrollIntoView().should("exist")
       // scrol to get quiz into view and make sure its the last one
-      cy.getDataCy('quiz').scrollIntoView().should('be.visible');
-      cy.getDataCy('quiz').last().should("exist")
+      cy.getDataCy('quiz').scrollIntoView().last().should("exist");
 
       // make sure they are visible
       loginForStudent();
