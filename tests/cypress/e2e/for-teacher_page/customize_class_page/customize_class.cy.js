@@ -83,7 +83,7 @@ teachers.forEach((teacher) => {
             .as('adventure')
             .then(adventure => {
               // Get the first adventure, and click its remove button
-              cy.getDataCy(`hide_${adventure}`).click();
+              cy.getDataCy(`hide_adv_${adventure}`).click();
 
               // The available adventures dropdown should now include the new adventure
               cy.getDataCy("available_adventures_current_level")
@@ -112,7 +112,7 @@ teachers.forEach((teacher) => {
 
       selectLevel('1');
       cy.getDataCy('htmx_modal').should('not.exist');
-      cy.getDataCy(`hide_parrot`).click();
+      cy.getDataCy(`hide_adv_parrot`).click();
       cy.getDataCy('parrot').should('not.exist');
 
       cy.getDataCy('reset_adventures').click();
@@ -131,7 +131,7 @@ teachers.forEach((teacher) => {
     it('Is able to be re-added from the right dropdown list', () => {
       const hiddenAdventure = 'parrot';
       selectLevel('1');
-      cy.getDataCy(`hide_${hiddenAdventure}`).click();
+      cy.getDataCy(`hide_adv_${hiddenAdventure}`).click();
 
       cy.getDataCy(`${hiddenAdventure}`).should('not.exist');
 

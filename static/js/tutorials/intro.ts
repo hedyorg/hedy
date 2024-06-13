@@ -1,6 +1,5 @@
 import {pushAchievement, runit, theGlobalEditor} from "../app";
 import {addHighlightBorder, relocatePopup, removeBorder, tutorialPopup} from "./utils";
-import { clearUnsavedChanges } from '../browser-helpers/unsaved-changes';
 
 let current_step = 0;
 
@@ -158,8 +157,6 @@ function levelDefaultStep() {
   $('#adventures').addClass('z-40 bg-gray-100');
   $('#adventures').show();
 
-  // Set to false, prevent "are you sure you want to switch without saving" pop-up
-  clearUnsavedChanges();
 
   addHighlightBorder("adventures");
   relocatePopup(50, 40);
@@ -169,8 +166,6 @@ function levelDefaultStep() {
 function adventureTabsStep() {
   $('#adventures_buttons').children().each(function() {
     if ($(this).attr('data-tab') == "story") {
-      // Set to false, prevent "are you sure you want to switch without saving" pop-up
-      clearUnsavedChanges();
       $(this).click();
     }
   });
@@ -181,8 +176,6 @@ function adventureTabsStep() {
 function parsonsTabStep() {
   $('#adventures_buttons').children().each(function() {
     if ($(this).attr('data-tab') == "parsons") {
-      // Set to false, prevent "are you sure you want to switch without saving" pop-up
-      clearUnsavedChanges();
       $(this).click();
     }
   });
@@ -192,8 +185,6 @@ function parsonsTabStep() {
 function quizTabStep() {
   $('#adventures_buttons').children().each(function() {
     if ($(this).attr('data-tab') == "quiz") {
-      // Set to false, prevent "are you sure you want to switch without saving" pop-up
-      clearUnsavedChanges();
       $(this).click();
     }
   });
@@ -204,7 +195,6 @@ function saveShareStep() {
   // We should go back to the intro tab to make sure the save/share option is shown
   $('#adventures_buttons').children().each(function() {
     if ($(this).attr('data-tab') == "default") {
-      clearUnsavedChanges();
       $(this).click();
     }
   });

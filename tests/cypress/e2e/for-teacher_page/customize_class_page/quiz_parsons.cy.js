@@ -17,13 +17,13 @@ describe('customize class page', () => {
       selectLevel('2');
 
       // remove the quiz
-      cy.getDataCy('hide_quiz').scrollIntoView().should('be.visible');
-      cy.getDataCy('hide_quiz').click();
+      cy.getDataCy('hide_adv_quiz').scrollIntoView().should('be.visible');
+      cy.getDataCy('hide_adv_quiz').click();
       cy.getDataCy('quiz').should("not.exist")
 
       // remove the puzzle
-      cy.getDataCy('hide_parsons').scrollIntoView().should('be.visible');
-      cy.getDataCy('hide_parsons').click();
+      cy.getDataCy('hide_adv_parsons').scrollIntoView().should('be.visible');
+      cy.getDataCy('hide_adv_parsons').click();
       cy.getDataCy('parsons').should("not.exist")
 
       // add them from available list
@@ -45,24 +45,23 @@ describe('customize class page', () => {
     it('Is able to disable all quizes and parsons', () => {
       cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
 
-      cy.getDataCy('hide_quiz_setting')
+      cy.getDataCy('hide_quiz')
           .should("not.be.checked")
           .click()
 
-      cy.getDataCy('hide_quiz_setting')
+      cy.getDataCy('hide_quiz')
           .should("be.checked")
 
-      cy.getDataCy('hide_parsons_setting')
+      cy.getDataCy('hide_parsons')
           .should("not.be.checked")
           .click()
 
-      cy.getDataCy('hide_parsons_setting')
+      cy.getDataCy('hide_parsons')
           .should("be.checked")
 
-      cy.wait(1000)
-      cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
-      cy.reload();
+      cy.wait('@updateCustomizations');
 
+      selectLevel('3');
       cy.getDataCy('level_3 quiz')
         .should("not.exist")
 
@@ -79,16 +78,14 @@ describe('customize class page', () => {
     it('Is able to hide the explore page', () => {
       cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
 
-      cy.getDataCy('hide_explore_setting')
+      cy.getDataCy('hide_explore')
           .should("not.be.checked")
           .click()
 
-      cy.getDataCy('hide_explore_setting')
+      cy.getDataCy('hide_explore')
           .should("be.checked")
 
-      cy.wait(1000)
-      cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
-      cy.reload();
+      cy.wait('@updateCustomizations');
     
       loginForStudent();
       cy.getDataCy('explorebutton').should("not.exist")

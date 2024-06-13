@@ -18,7 +18,7 @@ it('Is able to preview class', () => {
     openClassView(className);
     cy.getDataCy('customize_class_button').click();
 
-    cy.getDataCy('hide_print_command').click();
+    cy.getDataCy('hide_adv_print_command').click();
     cy.getDataCy('preview_class_link').click();
     cy.getDataCy('preview_class_banner').should("be.visible");
     cy.getDataCy('ask_command').should("be.visible");

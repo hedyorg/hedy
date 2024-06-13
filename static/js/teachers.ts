@@ -1,6 +1,5 @@
 import { modal } from './modal';
 import { showAchievements, theKeywordLanguage } from "./app";
-import { markUnsavedChanges, clearUnsavedChanges } from './browser-helpers/unsaved-changes';
 import { ClientMessages } from './client-messages';
 import DOMPurify from 'dompurify'
 import { startTeacherTutorial } from './tutorials/tutorial';
@@ -429,7 +428,6 @@ export function save_customizations(class_id: string) {
           showAchievements(response.achievement, false, "");
       }
       modal.notifySuccess(response.success);
-      clearUnsavedChanges();
       $('#remove_customizations_button').removeClass('hidden');
     }).fail(function (err) {
       modal.notifyError(err.responseText);
@@ -472,7 +470,6 @@ export function restore_customization_to_default(prompt: string) {
 }
 
 export function enable_level(level: string) {
-    markUnsavedChanges();
     if ($('#enable_level_' + level).is(':checked')) {
       $('#opening_date_level_' + level).prop('disabled', false)
                                       .attr('type', 'text')
@@ -706,16 +703,8 @@ export interface InitializeCustomizeClassPageOptions {
 
 export function initializeCustomizeClassPage(options: InitializeCustomizeClassPageOptions) {
   $(document).ready(function(){
-      // Use this to make sure that we return a prompt when a user leaves the page without saving
-      $( "input" ).on('change', function() {
-        markUnsavedChanges();
-      });
-
       $('#back_to_class').on('click', () => {
-        function backToClass() {
-            window.location.href = `/for-teachers/class/${options.class_id}`;
-        }
-        backToClass();
+        window.location.href = `/for-teachers/class/${options.class_id}`;
       });
 
       $('[id^=opening_date_level_]').each(function() {
