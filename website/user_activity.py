@@ -60,6 +60,6 @@ class UserActivityModule(WebsiteModule):
 
         try:
             logger.log(data)
-            return make_response('', 204)
+            return make_response({}, 200)
         except IOError:
             return make_response(gettext("request_invalid"), 400)
