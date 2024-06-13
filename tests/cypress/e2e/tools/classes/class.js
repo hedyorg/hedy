@@ -89,7 +89,7 @@ export function removeCustomizations(){
 }
 
 export function addCustomizations(classname){
-    cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
+    cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');
     goToTeachersPage();
 
     cy.wait(500);
