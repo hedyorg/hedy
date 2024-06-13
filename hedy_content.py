@@ -32,7 +32,6 @@ CUSTOM_LANGUAGE_TRANSLATIONS = {'kmr': 'Kurdî (Tirkiye)',
                                 'tl': 'ᜆᜄᜎᜓᜄ᜔',
                                 'peo': 'Old Persian',
                                 'enm': 'English (Middle)',
-                                'ang': 'English (Old)',
                                 'iba': 'Iban'}
 
 customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
