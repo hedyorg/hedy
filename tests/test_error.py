@@ -12,6 +12,7 @@ def exception_language_input():
     languages = ALL_LANGUAGES.keys()
     return [(ex, lang) for lang in languages for ex in exceptions_]
 
+
 def custom_name_func(testcase_func, _, param):
     (ex, lang) = param.args
     return parameterized.to_safe_name(
