@@ -27,11 +27,12 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 class Snippet:
-    def __init__(self, filename, level, code, field_name=None, adventure_name=None, error=None, language=None, key=None, counter=0):
+    def __init__(self, filename, level, code, username=None, field_name=None, adventure_name=None, experiment_language=None, error=None, language=None, key=None, counter=0):
         self.filename = filename
         self.level = level
         self.field_name = field_name if field_name is not None else ''
         self.code = code
+        self.username = username
         self.error = error
         self.key = key if key is not None else ''
         filename_shorter = os.path.basename(filename)
@@ -40,6 +41,7 @@ class Snippet:
         else:
             self.language = language
         self.adventure_name = adventure_name
+        self.experiment_language = experiment_language
         self.name = f'{self.language}-{self.level}-{self.key}-{self.field_name}'
         self.hash = sha1digest(self.code)
         self.counter = counter
@@ -106,11 +108,12 @@ class SkippedMapping:
 
 @cache
 def get_hedy_source_hash():
-    directory = os.path.join(ROOT_DIR, 'grammars')
+    grammars_dir = os.path.join(ROOT_DIR, 'grammars')
 
     files_affecting_parsing = (
-        [os.path.join(directory, filename) for filename in os.listdir(directory)] +
-        [os.path.join(ROOT_DIR, 'hedy.py')]
+        [os.path.join(grammars_dir, filename) for filename in os.listdir(grammars_dir)] +
+        [os.path.join(ROOT_DIR, 'hedy.py')] +
+        [os.path.join(ROOT_DIR, file) for file in os.listdir(ROOT_DIR) if re.fullmatch('hedy_.*\\.py', file)]
     )
 
     files_affecting_parsing.sort()
@@ -135,6 +138,7 @@ class HedyTester(unittest.TestCase):
     arithmetic_operations = ['+', '-', '*', '/']
     in_not_in_list_commands = ['in', 'not in']
     quotes = ["'", '"']
+    booleans = [('true', True), ('True', True), ('false', False), ('False', False)]
     commands_level_4 = [("print 'hello'", "print(f'hello')"),
                         ("name is ask 'who?'", "name = input(f'who?')"),
                         ('name is Harry', "name = 'Harry'")]

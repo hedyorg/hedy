@@ -8,11 +8,11 @@ describe('Preview button test', () => {
     goToEditAdventure();
 
     // Initially this should not be visible
-    cy.get('#modal-confirm')
+    cy.getDataCy('modal_confirm')
       .should('not.be.visible');
-    cy.get('#modal-no-button')
+    cy.get('#modal_no_button')
       .should('not.be.visible');
-    cy.get('[data-cy="modal_yes_button"]')
+    cy.getDataCy('modal_yes_button')
       .should('not.be.visible');
 
     // Testing not removing adventure (clicking on remove and then on 'no')
@@ -22,19 +22,19 @@ describe('Preview button test', () => {
       .should('have.attr', 'type', 'reset')
       .click();
 
-    cy.get('#modal-confirm')
+    cy.getDataCy('modal_confirm')
       .should('be.visible');
 
-    cy.get('#modal-no-button')
+    cy.get('#modal_no_button')
       .should('be.visible')
       .should('not.be.disabled')
       .click();
 
     cy.wait(500);
 
-    cy.get('#modal-confirm')
+    cy.getDataCy('modal_confirm')
       .should('not.be.visible');
-    cy.get('#modal-no-button')
+    cy.get('#modal_no_button')
       .should('not.be.visible');
 
     // Creating a new adventure to remove
@@ -44,7 +44,7 @@ describe('Preview button test', () => {
     cy.get('#remove_adventure_button')
       .click();
 
-    cy.get('[data-cy="modal_yes_button"]')
+    cy.getDataCy('modal_yes_button')
       .should('be.visible')
       .should('not.be.disabled')
       .click();

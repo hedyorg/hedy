@@ -23,8 +23,8 @@ from iso639 import languages
 
 import static_babel_content
 from markupsafe import Markup
-from flask import (Flask, Response, abort, after_this_request, g, make_response,
-                   redirect, request, send_file, url_for, jsonify,
+from flask import (Flask, Response, abort, after_this_request, g, jsonify, make_response,
+                   redirect, request, send_file, url_for,
                    send_from_directory, session)
 from flask_babel import Babel, gettext
 from website.flask_commonmark import Commonmark
@@ -48,10 +48,10 @@ from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, st
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
-                     translating, tags, surveys, public_adventures, user_activity, feedback)
-from website.auth import (current_user, hide_explore, is_admin, is_teacher, is_second_teacher, has_public_profile,
+                     translating, tags, surveys, super_teacher, public_adventures, user_activity, feedback)
+from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, is_super_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
-                          forget_current_user)
+                          forget_current_user, hide_explore)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 
@@ -326,7 +326,7 @@ def initialize_session():
 
     g.user = current_user()
     querylog.log_value(session_id=utils.session_id(), username=g.user['username'],
-                       is_teacher=is_teacher(g.user), is_admin=is_admin(g.user))
+                       is_teacher=is_teacher(g.user), is_admin=is_admin(g.user), is_super_teacher=is_admin(g.user))
 
 
 if os.getenv('IS_PRODUCTION'):
@@ -423,7 +423,7 @@ def setup_language():
 
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
-        return "Language " + g.lang + " not supported", 404
+        return make_response(gettext("request_invalid"), 404)
 
 
 if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
@@ -439,6 +439,7 @@ def enrich_context_with_user_info():
     data = {'username': user.get('username', ''),
             'is_teacher': is_teacher(user), 'is_second_teacher': is_second_teacher(user),
             'is_admin': is_admin(user), 'has_public_profile': has_public_profile(user),
+            'is_super_teacher': is_super_teacher(user),
             'hide_explore': hide_explore(g.user)}
     return data
 
@@ -507,16 +508,16 @@ if os.getenv('PROXY_TO_TEST_HOST') and not os.getenv('IS_TEST_ENV'):
 @app.route('/session_test', methods=['GET'])
 def echo_session_vars_test():
     if not utils.is_testing_request(request):
-        return 'This endpoint is only meant for E2E tests', 400
-    return jsonify({'session': dict(session)})
+        return make_response(gettext("request_invalid"), 400)
+    return make_response({'session': dict(session)})
 
 
 @app.route('/session_main', methods=['GET'])
 def echo_session_vars_main():
     if not utils.is_testing_request(request):
-        return 'This endpoint is only meant for E2E tests', 400
-    return jsonify({'session': dict(session),
-                    'proxy_enabled': bool(os.getenv('PROXY_TO_TEST_HOST'))})
+        return make_response(gettext("request_invalid"), 400)
+    return make_response({'session': dict(session),
+                          'proxy_enabled': bool(os.getenv('PROXY_TO_TEST_HOST'))})
 
 
 @app.route('/parse', methods=['POST'])
@@ -524,17 +525,17 @@ def echo_session_vars_main():
 def parse():
     body = request.json
     if not body:
-        return "body must be an object", 400
+        return make_response(gettext("request_invalid"), 400)
     if 'code' not in body:
-        return "body.code must be a string", 400
+        return make_response(gettext("request_invalid"), 400)
     if 'level' not in body:
-        return "body.level must be a string", 400
+        return make_response(gettext("request_invalid"), 400)
     if 'adventure_name' in body and not isinstance(body['adventure_name'], str):
-        return "if present, body.adventure_name must be a string", 400
+        return make_response(gettext("request_invalid"), 400)
     if 'is_debug' not in body:
-        return "body.is_debug must be a boolean", 400
+        return make_response(gettext("request_invalid"), 400)
     if 'raw' not in body:
-        return "body.raw is missing", 400
+        return make_response(gettext("request_invalid"), 400)
     error_check = False
     if 'error_check' in body:
         error_check = True
@@ -605,40 +606,12 @@ def parse():
             if transpile_result.has_music:
                 response['has_music'] = True
 
+            if transpile_result.has_sleep:
+                response['has_sleep'] = True
+
             response['variables'] = transpile_result.roles_of_variables
         except Exception:
             pass
-
-        if level < 7:
-            with querylog.log_time('detect_sleep'):
-                try:
-                    # FH, Nov 2023: hmmm I don't love that this is not done in the same place as the other "has"es
-                    sleep_list = []
-                    pattern = (
-                        r'time\.sleep\((?P<time>\d+)\)'
-                        r'|time\.sleep\(int\("(?P<sleep_time>\d+)"\)\)'
-                        r'|time\.sleep\(int\((?P<variable>\w+)\)\)')
-                    matches = re.finditer(
-                        pattern,
-                        response['Code'])
-                    for i, match in enumerate(matches, start=1):
-                        time = match.group('time')
-                        sleep_time = match.group('sleep_time')
-                        variable = match.group('variable')
-                        if sleep_time:
-                            sleep_list.append(int(sleep_time))
-                        elif time:
-                            sleep_list.append(int(time))
-                        elif variable:
-                            assignment_match = re.search(r'{} = (.+?)\n'.format(variable), response['Code'])
-                            if assignment_match:
-                                assignment_code = assignment_match.group(1)
-                                variable_value = eval(assignment_code)
-                                sleep_list.append(int(variable_value))
-                    if sleep_list:
-                        response['has_sleep'] = sleep_list
-                except BaseException:
-                    pass
 
         if not raw:
             try:
@@ -698,7 +671,7 @@ def parse():
 
     if "Error" in response and error_check:
         response["message"] = gettext('program_contains_error')
-    return jsonify(response)
+    return make_response(response, 200)
 
 
 @app.route('/parse-by-id', methods=['POST'])
@@ -721,9 +694,9 @@ def parse_by_id(user):
             )
             return make_response('', 204)
         except BaseException:
-            return {"error": "parsing error"}, 200
+            make_response(gettext("request_invalid"), 200)
     else:
-        return 'this is not your program!', 400
+        return make_response(gettext("request_invalid"), 400)
 
 
 @app.route('/parse_tutorial', methods=['POST'])
@@ -735,9 +708,10 @@ def parse_tutorial(user):
     level = try_parse_int(body['level'])
     try:
         result = hedy.transpile(code, level, "en")
-        jsonify({'code': result.code}), 200
+        # this is not a return, is this code needed?
+        make_response(({'code': result.code}), 200)
     except BaseException:
-        return "error", 400
+        return make_response(gettext("request_invalid"), 400)
 
 
 @app.route("/generate_machine_files", methods=['POST'])
@@ -753,6 +727,12 @@ def prepare_files():
     threader = textwrap.dedent("""
         import time
         from turtlethread import Turtle
+        def int_with_error(value, error_message):
+            try:
+                return int(value)
+            except ValueError:
+                raise ValueError(error_message.format(value))
+
         t = Turtle()
         t.left(90)
         with t.running_stitch(stitch_length=20):
@@ -777,8 +757,7 @@ def prepare_files():
         for file in [x for x in files if x[:len(filename)] == filename and x[-3:] != 'zip']:
             zip_file.write('machine_files/' + file)
     zip_file.close()
-
-    return jsonify({'filename': filename}), 200
+    return make_response({'filename': filename}, 200)
 
 
 @app.route("/download_machine_files/<filename>", methods=['GET'])
@@ -812,9 +791,9 @@ def generate_microbit_file():
 
         transpile_result = hedy.transpile_and_return_python(code, level)
         save_transpiled_code_for_microbit(transpile_result)
-        return jsonify({'filename': 'Micro-bit.py', 'microbit': True}), 200
+        return make_response({'filename': 'Micro-bit.py', 'microbit': True}, 200)
     else:
-        return jsonify({'message': 'Microbit feature is disabled'}), 403
+        return make_response({'message': 'Microbit feature is disabled'}, 403)
 
 
 def save_transpiled_code_for_microbit(transpiled_python_code):
@@ -852,7 +831,7 @@ def convert_to_hex_and_download():
 
         return send_file(os.path.join(micro_bit_directory, "micropython.hex"), as_attachment=True)
     else:
-        return jsonify({'message': 'Microbit feature is disabled'}), 403
+        return make_response({'message': 'Microbit feature is disabled'}, 403)
 
 
 def flash_micro_bit():
@@ -1012,7 +991,8 @@ def programs_page(user):
     page = request.args.get('page', default=None, type=str)
     filter = request.args.get('filter', default=None, type=str)
     submitted = True if filter == 'submitted' else None
-
+    if page == '':
+        page = None
     all_programs = DATABASE.filtered_programs_for_user(from_user or username,
                                                        submitted=submitted,
                                                        pagination_token=page)
@@ -1023,7 +1003,9 @@ def programs_page(user):
                 program['adventure_name'] not in adventure_names:
             ids_to_fetch.append(program['adventure_name'])
 
-    all_programs = [program for program in all_programs if program.get('is_modified')]
+    # When saving a program, 'is_modified' is set to True or False
+    # But for older programs, 'is_modified' doesn't exist yet, therefore the check
+    all_programs = [program for program in all_programs if program.get('is_modified') or 'is_modified' not in program]
 
     teacher_adventures = DATABASE.batch_get_adventures(ids_to_fetch)
     for id, teacher_adventure in teacher_adventures.items():
@@ -1109,7 +1091,7 @@ def query_logs():
 
     (exec_id, status) = log_fetcher.query(body)
     response = {'query_status': status, 'query_execution_id': exec_id}
-    return jsonify(response)
+    return make_response(response, 200)
 
 
 @app.route('/logs/results', methods=['GET'])
@@ -1125,7 +1107,7 @@ def get_log_results():
     data, next_token = log_fetcher.get_query_results(
         query_execution_id, next_token)
     response = {'data': data, 'next_token': next_token}
-    return jsonify(response)
+    return make_response(response, 200)
 
 
 @app.route('/tutorial', methods=['GET'])
@@ -2097,6 +2079,11 @@ def join():
                            current_page='join', content=join_translations)
 
 
+@app.route('/kerndoelen')
+def poster():
+    return send_from_directory('content/', 'kerndoelenposter.pdf')
+
+
 @app.route('/start')
 def start():
     start_translations = hedyweb.PageTranslations('start').get_page_translations(g.lang)
@@ -2279,6 +2266,7 @@ def change_language():
     # Remove 'keyword_lang' from session, it will automatically be renegotiated from 'lang'
     # on the next page load.
     session.pop('keyword_lang')
+    # if this is changed to make_response(), it gives an error, I don't know why
     return jsonify({'success': 204})
 
 
@@ -2311,11 +2299,11 @@ def translate_keywords():
         if translated_code or translated_code == '':  # empty string is False, so explicitly allow it
             session["previous_keyword_lang"] = body.get("start_lang")
             session["keyword_lang"] = body.get("goal_lang")
-            return jsonify({'success': 200, 'code': translated_code})
+            return make_response({'code': translated_code}, 200)
         else:
-            return gettext('translate_error'), 400
+            return make_response(gettext("translate_error"), 400)
     except BaseException:
-        return gettext('translate_error'), 400
+        return make_response(gettext('translate_error'), 400)
 
 
 # TODO TB: Think about changing this to sending all steps to the front-end at once
@@ -2324,17 +2312,17 @@ def get_tutorial_translation(level, step):
     # Keep this structure temporary until we decide on a nice code / parse structure
     if step == "code_snippet":
         code = hedy_content.deep_translate_keywords(gettext('tutorial_code_snippet'), g.keyword_lang)
-        return jsonify({'code': code}), 200
+        return make_response({'code': code}, 200)
     try:
         step = int(step)
     except ValueError:
-        return gettext('invalid_tutorial_step'), 400
+        return make_response(gettext('invalid_tutorial_step'), 400)
 
     data = TUTORIALS[g.lang].get_tutorial_for_level_step(level, step, g.keyword_lang)
     if not data:
         data = {'title': gettext('tutorial_title_not_found'),
                 'text': gettext('tutorial_message_not_found')}
-    return jsonify(data), 200
+    return make_response((data), 200)
 
 
 @app.route('/store_parsons_order', methods=['POST'])
@@ -2582,20 +2570,20 @@ def update_public_profile(user):
 
     # Validations
     if not isinstance(body, dict):
-        return gettext('ajax_error'), 400
+        return make_response(gettext('ajax_error'), 400)
     # The images are given as a "picture id" from 1 till 12
     if not isinstance(body.get('image'), str) or int(body.get('image'), 0) not in [*range(1, 13)]:
-        return gettext('image_invalid'), 400
+        return make_response(gettext('image_invalid'), 400)
     if not isinstance(body.get('personal_text'), str):
-        return gettext('personal_text_invalid'), 400
+        return make_response(gettext('personal_text_invalid'), 400)
     if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
-        return gettext('favourite_program_invalid'), 400
+        return make_response(gettext('favourite_program_invalid'), 400)
 
     # Verify that the set favourite program is actually from the user (and public)!
     if 'favourite_program' in body:
         program = DATABASE.program_by_id(body.get('favourite_program'))
         if not program or program.get('username') != user['username'] or not program.get('public'):
-            return gettext('favourite_program_invalid'), 400
+            return make_response(gettext('favourite_program_invalid'), 400)
 
     achievement = None
     current_profile = DATABASE.get_public_profile_settings(user['username'])
@@ -2619,10 +2607,10 @@ def update_public_profile(user):
             body['tags'].append('admin')
 
     DATABASE.update_public_profile(user['username'], body)
+    response = {"message": gettext("public_profile_updated")}
     if achievement:
-        # Todo TB -> Check if we require message or success on front-end
-        return {'message': gettext('public_profile_updated'), 'achievement': achievement}, 200
-    return {'message': gettext('public_profile_updated')}, 200
+        response["achievement"] = achievement
+    return response
 
 
 @app.route('/translating')
@@ -2661,6 +2649,8 @@ def public_user_page(username):
         return utils.error_page(error=404, ui_message=gettext('user_not_private'))
     user_public_info = DATABASE.get_public_profile_settings(username)
     page = request.args.get('page', default=None, type=str)
+    if page == '':
+        page = None
 
     keyword_lang = g.keyword_lang
     adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
@@ -2795,6 +2785,7 @@ app.register_blueprint(programs.ProgramsModule(DATABASE, ACHIEVEMENTS, STATISTIC
 app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(classes.ClassModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(classes.MiscClassPages(DATABASE, ACHIEVEMENTS))
+app.register_blueprint(super_teacher.SuperTeacherModule(DATABASE))
 app.register_blueprint(admin.AdminModule(DATABASE))
 app.register_blueprint(achievements.AchievementsModule(ACHIEVEMENTS))
 app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))

@@ -75,17 +75,17 @@ onclick="window.open('/for-teachers', '_self');">
                                     <button class="green-btn" id="add_adventure_tags"
                                         hx-trigger="click"
                                         hx-post="/tags/create/{{adventure.id}}"
-                                        hx-target="#tags-list"
+                                        hx-target="#tags_list"
                                         hx-swap="outerHTML"
                                         hx-include="[name='tag']"
                                         _="on htmx:afterRequest set value of #search_tags_input to ''"
                                         >{{_('add')}}</button>
 
                                     <div
-                                        id="tags-dropdown"
+                                        id="tags_dropdown"
                                         hx-trigger="load"
                                         hx-get="/tags?adventure_id={{adventure.id}}"
-                                        hx-target="#tags-dropdown"
+                                        hx-target="#tags_dropdown"
                                         hx-swap="outerHTML"
                                     ></div>
                             </div>
@@ -127,7 +127,7 @@ onclick="window.open('/for-teachers', '_self');">
                     </h3>
                     <div class="flex">
                         {% set content = prepare_content_for_ckeditor(adventure.content) if adventure.content|length > 0 else prepare_content_for_ckeditor(_('template_code')) %}
-                        <textarea id="adventure-editor" class="hidden">{{content}}</textarea>
+                        <textarea id="adventure_editor" class="hidden">{{content}}</textarea>
                     </div>
 
                     <div class="mt-2 mb-0 flex flex-row items-center text-center border-gray-500 border p-4 rounded-lg">

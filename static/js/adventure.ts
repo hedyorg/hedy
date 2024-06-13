@@ -20,7 +20,7 @@ let $editor: ClassicEditor;
 let keywordHasAlert: Map<string, boolean> = new Map()
 
 export async function initializeCustomAdventurePage(_options: InitializeCustomizeAdventurePage) {
-    const editorContainer = document.querySelector('#adventure-editor') as HTMLElement;
+    const editorContainer = document.querySelector('#adventure_editor') as HTMLElement;
     // Initialize the editor with the default language
     let lang = (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
     const TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;    

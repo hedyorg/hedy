@@ -1,15 +1,15 @@
 # Bulgarian translations for PROJECT.
-# Copyright (C) 2023 ORGANIZATION
+# Copyright (C) 2024 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-05-16 14:12+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"POT-Creation-Date: 2024-05-27 13:48+0000\n"
+"PO-Revision-Date: 2024-06-13 11:59+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: bg <LL@li.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr "You tried to use the variable {name} on line {access_line_number}, but y
 
 #, fuzzy
 msgid "Cyclic Var Definition"
-msgstr "The name `{variable}` needs to be set before you can use it on the right-hand side of the is command"
+msgstr "The name `{variable}` needs to be set before you can use it on the right-hand side of the `{is}` command."
 
 #, fuzzy
 msgid "Else Without If Error"
@@ -35,22 +35,24 @@ msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the
 msgid "Function Undefined"
 msgstr "You tried to use the function {name}, but you didn't define it."
 
+#, fuzzy
 msgid "Has Blanks"
 msgstr "Кодът ти е непълен. Съдържа празни места, който трябва да замениш с програмен код."
 
+#, fuzzy
 msgid "Incomplete"
 msgstr "Момент, кодът ти не е пълен! На ред {line_number} е нужно да напишеш текст след `{incomplete_command}`."
 
 #, fuzzy
 msgid "Incomplete Repeat"
-msgstr "It looks like you forgot to use `{command}` with the repeat command you used on line {line_number}."
+msgstr "It looks like you forgot to use a `{command}` with the `{repeat}` command you used on line {line_number}."
 
 msgid "Invalid"
 msgstr "`{invalid_command}` не е валидна команда в ниво {level} на Хеди. Може би имаш предвид `{guessed_command}`?"
 
 #, fuzzy
 msgid "Invalid Argument"
-msgstr "You cannot use the command `{command}` with `{invalid_argument}` . Try changing `{invalid_argument}` to {allowed_types}."
+msgstr "You cannot use the command `{command}` with `{invalid_argument}`. Try changing `{invalid_argument}` to {allowed_types}."
 
 #, fuzzy
 msgid "Invalid Argument Type"
@@ -60,6 +62,7 @@ msgstr "You cannot use `{command}` with `{invalid_argument}` because it is {inva
 msgid "Invalid At Command"
 msgstr "The `{command}` command may not be used from level 16 onward. You can use square brackets to use an element from a list, for example `friends[i]`, `lucky_numbers[{random}]`."
 
+#, fuzzy
 msgid "Invalid Space"
 msgstr "Ой! Написал(а) си шпация в началото на {line_number}. Шпациите объркват компютрите."
 
@@ -69,15 +72,15 @@ msgstr "You cannot use `{invalid_argument}` and `{invalid_argument_2}` with `{co
 
 #, fuzzy
 msgid "Lonely Echo"
-msgstr "Използваш командата echo пред командата ask, или echo без ask преди него. Правило: първо е ask, а после echo."
+msgstr "You used an `{echo}` before an `{ask}`, or an `{echo}` without an `{ask}`. Place an `{ask}` before the `{echo}`."
 
 #, fuzzy
 msgid "Lonely Text"
-msgstr "It looks like you forgot to use a command with the text you put in line {line_number}"
+msgstr "It looks like you forgot to use a command with the text you used in line {line_number}"
 
 #, fuzzy
 msgid "Missing Additional Command"
-msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}. Try adding `{missing_command}` to your code."
 
 #, fuzzy
 msgid "Missing Colon Error"
@@ -110,6 +113,7 @@ msgstr "You used too few spaces in line {line_number}. You used {leading_spaces}
 msgid "Non Decimal Variable"
 msgstr "At line {line_number}, you might have tried using a number which Hedy does not like very much! Try changing it to a decimal number like 2."
 
+#, fuzzy
 msgid "Parse"
 msgstr "Този код не е валиден на Хеди. Има грешка на {location[0]}, на позиция {location[1]}. Написаното `{character_found}`, не е валидно."
 
@@ -125,12 +129,14 @@ msgstr "You tried to access the list {name} but it is either empty or the index 
 msgid "Runtime Value Error"
 msgstr "While running your program the command `{command}` received the value `{value}` which is not allowed. {tip}."
 
+#, fuzzy
 msgid "Runtime Values Error"
 msgstr "While running your program the command `{command}` received the values `{value}` and `{value}` which are not allowed. {tip}."
 
 msgid "Save Microbit code "
 msgstr "Изтегли код за Микробит"
 
+#, fuzzy
 msgid "Too Big"
 msgstr "Уау! Написал(а) си много код, цели {lines_of_code} реда! в това ниво Хеди има лимит за обработка до {max_lines} реда. Пренапиши си редовете то лимита и пробвай пак!"
 
@@ -148,7 +154,7 @@ msgstr "You used too many spaces in line {line_number}. You used {leading_spaces
 
 #, fuzzy
 msgid "Unquoted Assignment"
-msgstr "From this level, you need to place texts to the right of the `is` between quotes. You forgot that for the text {text}."
+msgstr "From this level, you need to place texts to the right of the `{is}` between quotes. You forgot that for the text {text}."
 
 #, fuzzy
 msgid "Unquoted Equality Check"
@@ -156,7 +162,7 @@ msgstr "If you want to check if a variable is equal to multiple words, the words
 
 #, fuzzy
 msgid "Unquoted Text"
-msgstr "Съвет! Заедно с командата print е нужно да ползваш кавички около текста. Някъде вероятно си забравил(а) кавичка."
+msgstr "Be careful. If you `{ask}` or `{print}` something, the text should start and finish with a quotation mark. You forgot that for the text {unquotedtext}."
 
 #, fuzzy
 msgid "Unsupported Float"
@@ -170,9 +176,11 @@ msgstr "Text values cannot contain `{invalid_value}`."
 msgid "Unused Variable"
 msgstr "You defined the variable {variable_name} on line {line_number}, but you did not use it."
 
+#, fuzzy
 msgid "Var Undefined"
 msgstr "Опитваш се да принтираш променливата `{name}`, но май си забравил(а) да й дадеш стойност. А може би се опитваш да принтираш думата `{name}`, а си забравил(а) отваряща или затваряща кавичка."
 
+#, fuzzy
 msgid "Wrong Level"
 msgstr "Кодът ти беше правилен, но принадлежи към друго ниво. Ти използва `{offending_keyword}` за ниво {working_level}. Съвет: {tip}"
 
@@ -186,11 +194,11 @@ msgstr "Account overview"
 
 #, fuzzy
 msgid "accounts_created"
-msgstr "Accounts where successfully created."
+msgstr "Accounts were successfully created."
 
 #, fuzzy
 msgid "accounts_intro"
-msgstr "On this page you can create accounts for multiple students at the same time. It is also possible to directly add them to one of your classes. By pressing the green + on the bottom right of the page you can add extra rows. You can delete a row by pressing the corresponding red cross. Make sure no rows are empty when you press \"Create accounts\". Please keep in mind that every username and mail address needs to be unique and the password needs to be <b>at least</b> 6 characters."
+msgstr "On this page you can create accounts for multiple students at once. These are automatically added to the current class, so make sure the class shown above is the right one! Every username needs to be unique in the entire Hedy system. You can use 'Postfix classname' to add your class name to all accounts. If you manually enter passwords, these need to be <b>at least</b> 6 characters."
 
 #, fuzzy
 msgid "achievement_earned"
@@ -202,11 +210,11 @@ msgstr "achievements"
 
 #, fuzzy
 msgid "achievements_check_icon_alt"
-msgstr "You've earned an achievement!"
+msgstr "Achievement check icon"
 
 #, fuzzy
 msgid "achievements_logo_alt"
-msgstr "achievements"
+msgstr "Achievement logo"
 
 #, fuzzy
 msgid "actions"
@@ -218,11 +226,11 @@ msgstr "Add"
 
 #, fuzzy
 msgid "add_students"
-msgstr "students"
+msgstr "Add students"
 
 #, fuzzy
 msgid "add_students_options"
-msgstr "Create student accounts"
+msgstr "Add students options"
 
 #, fuzzy
 msgid "add_your_language"
@@ -260,10 +268,14 @@ msgstr "You didn't enter an adventure name!"
 
 #, fuzzy
 msgid "adventure_exp_3"
-msgstr "You can use the \"preview\" button to view a styled version of your adventure. To view the adventure on a dedicated page, select \"view\" from the teachers page."
+msgstr "Make sure you always surround keywords with { } when you write them outside of code blocks, then they are recognized correctly. You can use the \"preview\" button to view a styled version of your adventure. To view the adventure on a dedicated page, select \"view\" from the teachers page."
 
 msgid "adventure_exp_classes"
 msgstr "Your adventure is used within the following classes"
+
+#, fuzzy
+msgid "adventure_flagged"
+msgstr "The adventure was flagged successfully."
 
 #, fuzzy
 msgid "adventure_id_invalid"
@@ -299,7 +311,7 @@ msgstr "Each Hedy level has built-in exercises for students, which we call adven
 
 #, fuzzy
 msgid "adventures_restored"
-msgstr "The default adventures have been restored!"
+msgstr "The default adventures have been restored."
 
 #, fuzzy
 msgid "ago"
@@ -330,7 +342,7 @@ msgstr "Вече имаш акаунт?"
 
 #, fuzzy
 msgid "already_program_running"
-msgstr "Start programming"
+msgstr "There is already a program running, finish that one first."
 
 #, fuzzy
 msgid "already_teacher"
@@ -357,7 +369,7 @@ msgstr "Внимание! Това действие е необратимо."
 
 #, fuzzy
 msgid "ask_needs_var"
-msgstr "От ниво 2 нагоре, командата ask изисква променлива. Например: name is ask What are you called?"
+msgstr "Starting in level 2, `{ask}` needs to be used with a variable. Example: name `{is}` `{ask}` What is your name?"
 
 #, fuzzy
 msgid "available_in"
@@ -398,7 +410,7 @@ msgstr "Смяна на паролата"
 
 #, fuzzy
 msgid "cheatsheet_title"
-msgstr "Hide cheatsheet"
+msgstr "Cheatsheet"
 
 #, fuzzy
 msgid "class_already_joined"
@@ -426,7 +438,7 @@ msgstr "This class name is invalid."
 
 #, fuzzy
 msgid "class_name_prompt"
-msgstr "Please enter the name of the class"
+msgstr "Please enter the name of the new class"
 
 #, fuzzy
 msgid "class_overview"
@@ -474,7 +486,7 @@ msgstr "Clones"
 
 #, fuzzy
 msgid "close"
-msgstr "Sluiten"
+msgstr "Close"
 
 msgid "comma"
 msgstr "запетая"
@@ -497,11 +509,14 @@ msgstr "Common errors"
 
 #, fuzzy
 msgid "congrats_message"
-msgstr "Congratulations, {username}, you have completed Hedy!"
+msgstr "Congratulations, {username}, you have reached the following results with Hedy!"
 
-#, fuzzy
 msgid "connect_guest_teacher"
 msgstr "I would like to be connected with a guest teacher who can give a few lessons"
+
+#, fuzzy
+msgid "constant_variable_role"
+msgstr "constant"
 
 #, fuzzy
 msgid "content_invalid"
@@ -521,11 +536,11 @@ msgstr "Copy code"
 
 #, fuzzy
 msgid "copy_join_link"
-msgstr "Please copy and paste this link into a new tab:"
+msgstr "Copy join link"
 
 #, fuzzy
 msgid "copy_link_success"
-msgstr "Copy link to share"
+msgstr "Join link successfully copied to clipboard"
 
 #, fuzzy
 msgid "copy_link_to_share"
@@ -548,14 +563,14 @@ msgstr "Please select a valid country."
 
 #, fuzzy
 msgid "country_title"
-msgstr "Please select a valid country."
+msgstr "Country"
 
 msgid "create_account"
 msgstr "Направи си акаунт"
 
 #, fuzzy
 msgid "create_accounts"
-msgstr "Create multiple accounts"
+msgstr "Create accounts"
 
 #, fuzzy
 msgid "create_accounts_prompt"
@@ -575,7 +590,7 @@ msgstr "Create multiple accounts"
 
 #, fuzzy
 msgid "create_public_profile"
-msgstr "Public profile"
+msgstr "Create public profile"
 
 #, fuzzy
 msgid "create_question"
@@ -735,7 +750,7 @@ msgstr "Echo and ask mismatch"
 
 #, fuzzy
 msgid "echo_out"
-msgstr "От ниво 2 нагоре командата echo не е необходима. Вече можеш да потвориш отговор чрез командите ask и print. Например: name is ask What are you called? print hello name"
+msgstr "Starting in level 2 `{echo}` is no longer needed. You can repeat an answer with `{ask}` and `{print}` now. Example: `name {is} {ask} What are you called? {print} hello name`"
 
 #, fuzzy
 msgid "edit_adventure"
@@ -813,7 +828,7 @@ msgstr "Explore programs"
 
 #, fuzzy
 msgid "explore_programs_logo_alt"
-msgstr "Explore programs"
+msgstr "Explore programs icon"
 
 #, fuzzy
 msgid "favorite_program"
@@ -859,6 +874,10 @@ msgid "female"
 msgstr "Женски"
 
 #, fuzzy
+msgid "flag_adventure_prompt"
+msgstr "Do you want to flag this adventure so that we check its appropriateness?"
+
+#, fuzzy
 msgid "float"
 msgstr "a number"
 
@@ -895,7 +914,7 @@ msgstr "Please select a valid gender, choose (Female, Male, Other)."
 
 #, fuzzy
 msgid "general"
-msgstr "Пол"
+msgstr "General"
 
 #, fuzzy
 msgid "general_settings"
@@ -955,7 +974,7 @@ msgstr "Please select a valid way you heard about us."
 
 #, fuzzy
 msgid "hedy_achievements"
-msgstr "My achievements"
+msgstr "Hedy achievements"
 
 #, fuzzy
 msgid "hedy_choice_title"
@@ -975,14 +994,14 @@ msgstr "Hedy on Github"
 
 #, fuzzy
 msgid "hedy_tutorial_logo_alt"
-msgstr "Start hedy tutorial"
+msgstr "Hedy tutorial icon"
 
 msgid "hello_logo"
 msgstr "Здравей"
 
 #, fuzzy
 msgid "hidden"
-msgstr "Hint?"
+msgstr "Hidden"
 
 #, fuzzy
 msgid "hide_cheatsheet"
@@ -1002,7 +1021,7 @@ msgstr "Highest quiz score"
 
 #, fuzzy
 msgid "highscore_explanation"
-msgstr "On this page you can look through programs created by other Hedy users. You can filter on both a Hedy level and adventure. Click on \"View program\" to open a program and run it. Programs with a red header contain a mistake. You can still open the program, but running it will result in an error. You can of course try to fix it! If the creator has a public profile you can click their username to visit their profile. There you will find all their shared programs and much more!"
+msgstr "On this page you can view the current Highscores, based on the amount of achievements gathered. View the ranking for either all users, your country or your class. Click on a username to view their public profile."
 
 #, fuzzy
 msgid "highscore_no_public_profile"
@@ -1010,7 +1029,7 @@ msgstr "You don't have a public profile and are therefore not listed on the high
 
 #, fuzzy
 msgid "highscores"
-msgstr "Score"
+msgstr "Highscores"
 
 #, fuzzy
 msgid "hint"
@@ -1022,7 +1041,7 @@ msgstr "I'll work on it a little longer"
 
 #, fuzzy
 msgid "image_invalid"
-msgstr "Your chosen image is invalid."
+msgstr "The image you chose is invalid."
 
 #, fuzzy
 msgid "incomplete_command_exception"
@@ -1044,9 +1063,12 @@ msgstr "Incorrect use of variable"
 msgid "indentation_exception"
 msgstr "Incorrect Indentation"
 
-#, fuzzy
 msgid "input"
 msgstr "input from `{ask}`"
+
+#, fuzzy
+msgid "input_variable_role"
+msgstr "input"
 
 #, fuzzy
 msgid "integer"
@@ -1089,7 +1111,7 @@ msgstr "Invalid username/password."
 
 #, fuzzy
 msgid "invite_by_username"
-msgstr "All usernames need to be unique."
+msgstr "Invite by username"
 
 #, fuzzy
 msgid "invite_date"
@@ -1165,7 +1187,7 @@ msgstr "Last update"
 
 #, fuzzy
 msgid "lastname"
-msgstr "Name"
+msgstr "Last Name"
 
 #, fuzzy
 msgid "leave_class"
@@ -1184,11 +1206,11 @@ msgstr "Level disabled"
 
 #, fuzzy
 msgid "level_future"
-msgstr "This level will open automatically after the opening date"
+msgstr "This level automatically opens on "
 
 #, fuzzy
 msgid "level_invalid"
-msgstr "This Hedy level in invalid."
+msgstr "This Hedy level is invalid."
 
 msgid "level_not_class"
 msgstr "Това ниво не е налично в твоя клас все още"
@@ -1202,11 +1224,14 @@ msgstr "levels"
 
 #, fuzzy
 msgid "link"
-msgstr "Вход"
+msgstr "Link"
 
-#, fuzzy
 msgid "list"
 msgstr "a list"
+
+#, fuzzy
+msgid "list_variable_role"
+msgstr "list"
 
 #, fuzzy
 msgid "live_dashboard"
@@ -1235,11 +1260,13 @@ msgstr "Longest program"
 
 #, fuzzy
 msgid "mail_change_password_body"
-msgstr "Смяна на паролата"
+msgstr ""
+"Your Hedy password has been changed. If you did this, all is good.\n"
+"If you didn't change your password, please contact us immediately by replying to this email."
 
 #, fuzzy
 msgid "mail_change_password_subject"
-msgstr "Смяна на паролата"
+msgstr "Your Hedy password has been changed"
 
 #, fuzzy
 msgid "mail_error_change_processed"
@@ -1248,7 +1275,7 @@ msgstr "Something went wrong when sending a validation mail, the changes are sti
 #, fuzzy
 msgid "mail_goodbye"
 msgstr ""
-"Thank you!\n"
+"Keep programming!\n"
 "The Hedy team"
 
 #, fuzzy
@@ -1266,24 +1293,35 @@ msgstr "Поискайте повторно задаване на парола."
 
 #, fuzzy
 msgid "mail_reset_password_body"
-msgstr "Reset password"
+msgstr ""
+"Your Hedy password has been reset to a new one. If you did this, all is good.\n"
+"If you didn't change your password, please contact us immediately by replying to this email."
 
 #, fuzzy
 msgid "mail_reset_password_subject"
-msgstr "Reset password"
+msgstr "Your Hedy password has been reset"
 
 #, fuzzy
 msgid "mail_welcome_teacher_body"
 msgstr ""
 "<strong>Welcome!</strong>\n"
-"Congratulations on your brand new Hedy teachers account. Welcome to the world wide community of Hedy teachers!\n"
-"<strong>What teachers accounts can do</strong>\n"
-"With your teacher account, you have the option to create classes. Your students can than join your classes and you can see their progress. Classes are made and managed though the for <a href=\"https://hedycode.com/for-teachers\">teachers page</a>.\n"
-"<strong>How to share ideas</strong>\n"
-"If you are using Hedy in class, you probably have ideas for improvements! You can share those ideas with us on the <a href=\"https://github.com/hedyorg/hedy/discussions/categories/ideas\">Ideas Discussion</a>.\n"
-"<strong>How to ask for help</strong>\n"
-"If anything is unclear, you can post in the <a href=\"https://github.com/hedyorg/hedy/discussions/categories/q-a\">Q&A discussion</a>, or <a href=\"mailto: hello@hedy.org\">send us an email</a>.\n"
-"Keep programming!"
+"Congratulations on your brand new Hedy teacher's account. Welcome to the world wide community of Hedy teachers!\n"
+"\n"
+"<strong>What teacher's accounts can do</strong>\n"
+"There are a number of extra options unlocked for you now.\n"
+"\n"
+"1. Extra explanation is available in the <a href=\"https://hedy.org/for-teachers/manual\">teacher's manual</a>.\n"
+"2. With your teacher account, you can create classes. Your students can than join your classes and you can see their progress. Classes are made and managed though the for <a href=\"https://hedycode.com/for-teachers\">teachers page</a>.\n"
+"3. You can fully customize your classes, for example you can open and close levels, enable or disable adventures and author your own adventures!\n"
+"\n"
+"<strong>Join our online community!</strong>\n"
+"All Hedy teachers, programmers and other fans are welcome to join our <a href=\"https://discord.gg/8yY7dEme9r\">Discord server</a>. This is the ideal place to chat about Hedy: we have channels where you can show your cool projects and lessons, channels to report bugs, and channels to chat with other teachers and with the Hedy team.\n"
+"\n"
+"<strong>How to ask for help </strong>\n"
+"If anything is unclear, you can let us know on Discord, or <a href=\"mailto: hello@hedy.org\">send us an email</a>.\n"
+"\n"
+"<strong>How to report bugs</strong>\n"
+"In Discord, we have a channel for reporting bugs, called #bugs. That is the perfect place to let us know about issues you are running into. If you know how to use GitHub, you can create an <a href=\"https://github.com/hedyorg/hedy/issues/new?assignees=&labels=&template=bug_report.md&title=%5BBUG%5D\">issue</a> there.\n"
 
 #, fuzzy
 msgid "mail_welcome_teacher_subject"
@@ -1301,7 +1339,7 @@ msgstr "Welcome to Hedy"
 
 #, fuzzy
 msgid "mailing_title"
-msgstr "Hedy"
+msgstr "Subscribe to the Hedy newsletter"
 
 msgid "main_subtitle"
 msgstr "Градуален език за програмиране"
@@ -1418,11 +1456,11 @@ msgstr "Starting in level 8, the code after `{if}` needs to be placed on the nex
 
 #, fuzzy
 msgid "no_programs"
-msgstr "Нямаш програми."
+msgstr "There are no programs."
 
 #, fuzzy
 msgid "no_public_profile"
-msgstr "Public profile"
+msgstr "You don't have a public profile text yet..."
 
 #, fuzzy
 msgid "no_shared_programs"
@@ -1433,11 +1471,11 @@ msgstr "Това приключение не съществува!"
 
 #, fuzzy
 msgid "no_such_class"
-msgstr "No such Hedy class"
+msgstr "No such Hedy class."
 
 #, fuzzy
 msgid "no_such_highscore"
-msgstr "Няма такова ниво в Хеди!"
+msgstr "Highscores"
 
 msgid "no_such_level"
 msgstr "Няма такова ниво в Хеди!"
@@ -1481,7 +1519,7 @@ msgstr "Number of lines"
 
 #, fuzzy
 msgid "number_programs"
-msgstr "Number of programs"
+msgstr "Number of programs ran"
 
 #, fuzzy
 msgid "ok"
@@ -1530,7 +1568,7 @@ msgstr "Another text language"
 
 #, fuzzy
 msgid "overwrite_warning"
-msgstr "You already have a program with this name, saving this program will overwrite the old one. Are you sure?"
+msgstr "You already have a program with this name, saving this program will replace the old one. Are you sure?"
 
 #, fuzzy
 msgid "owner"
@@ -1549,7 +1587,7 @@ msgstr "I would like to be paired with another teacher for help"
 
 #, fuzzy
 msgid "parsons_title"
-msgstr "Hedy"
+msgstr "Puzzle"
 
 msgid "password"
 msgstr "Парола"
@@ -1656,7 +1694,7 @@ msgstr "принтирай"
 
 #, fuzzy
 msgid "privacy_terms"
-msgstr "privacy terms"
+msgstr "Privacy terms"
 
 #, fuzzy
 msgid "private"
@@ -1664,7 +1702,7 @@ msgstr "Private"
 
 #, fuzzy
 msgid "profile_logo_alt"
-msgstr "Profile updated."
+msgstr "Profile icon."
 
 #, fuzzy
 msgid "profile_picture"
@@ -1703,15 +1741,15 @@ msgstr "Programs"
 
 #, fuzzy
 msgid "programs_created"
-msgstr "My programs"
+msgstr "Programs created"
 
 #, fuzzy
 msgid "programs_saved"
-msgstr "Programs"
+msgstr "Programs saved"
 
 #, fuzzy
 msgid "programs_submitted"
-msgstr "programs submitted"
+msgstr "Programs submitted"
 
 #, fuzzy
 msgid "prompt_join_class"
@@ -1746,7 +1784,7 @@ msgstr "By selecting this box I make my profile visible for everyone. Be careful
 
 #, fuzzy
 msgid "public_profile_updated"
-msgstr "Public profile updated."
+msgstr "Public profile updated, page will be re-loaded."
 
 msgid "question mark"
 msgstr "въпросителен знак"
@@ -1789,7 +1827,7 @@ msgstr "Remove customization"
 
 #, fuzzy
 msgid "remove_customizations_prompt"
-msgstr "Are you sure you want to remove this class their customizations?"
+msgstr "Are you sure you want to remove this class's customizations?"
 
 #, fuzzy
 msgid "remove_student_prompt"
@@ -1824,6 +1862,10 @@ msgstr "Are you sure you want to report this program?"
 #, fuzzy
 msgid "report_success"
 msgstr "This program has been reported"
+
+#, fuzzy
+msgid "request_invalid"
+msgstr "Request invalid"
 
 #, fuzzy
 msgid "request_teacher"
@@ -1902,7 +1944,7 @@ msgstr "Search..."
 
 #, fuzzy
 msgid "search_button"
-msgstr "Save & share code"
+msgstr "Search"
 
 #, fuzzy
 msgid "second_teacher"
@@ -1929,7 +1971,7 @@ msgstr "Избери"
 
 #, fuzzy
 msgid "select_adventures"
-msgstr "Select adventures"
+msgstr "Select and order adventures"
 
 msgid "select_all"
 msgstr "Select all"
@@ -2026,11 +2068,11 @@ msgstr "Start learning"
 
 #, fuzzy
 msgid "start_programming"
-msgstr "Directly start programming"
+msgstr "Start programming"
 
 #, fuzzy
 msgid "start_programming_logo_alt"
-msgstr "Directly start programming"
+msgstr "Start programming icon"
 
 msgid "start_quiz"
 msgstr "Започни теста"
@@ -2047,8 +2089,12 @@ msgid "step_title"
 msgstr "Задача"
 
 #, fuzzy
+msgid "stepper_variable_role"
+msgstr "stepper"
+
+#, fuzzy
 msgid "stop_code_button"
-msgstr "Save code"
+msgstr "Stop program"
 
 #, fuzzy
 msgid "string"
@@ -2116,7 +2162,7 @@ msgstr "This is a submitted program and can't be altered."
 
 #, fuzzy
 msgid "subscribe"
-msgstr "Абонирай се за нашия журнал"
+msgstr "Subscribe"
 
 msgid "subscribe_newsletter"
 msgstr "Абонирай се за нашия журнал"
@@ -2138,7 +2184,7 @@ msgstr "Try changing the values to be all text or all numbers"
 
 #, fuzzy
 msgid "surname"
-msgstr "Потребителско име"
+msgstr "First Name"
 
 #, fuzzy
 msgid "survey"
@@ -2170,7 +2216,7 @@ msgstr "Tags"
 
 #, fuzzy
 msgid "teacher"
-msgstr "Looks like you are not a teacher!"
+msgstr "Teacher"
 
 #, fuzzy
 msgid "teacher_account_request"
@@ -2186,7 +2232,7 @@ msgstr "Your teacher value is invalid."
 
 #, fuzzy
 msgid "teacher_invitation_require_login"
-msgstr "To set up your profile as a teacher we will need you to log in. If you don't have an account, please create one."
+msgstr "To set up your profile as a teacher, we will need you to log in. If you don't have an account, please create one."
 
 #, fuzzy
 msgid "teacher_manual"
@@ -2198,7 +2244,7 @@ msgstr "Teacher"
 
 #, fuzzy
 msgid "teacher_tutorial_logo_alt"
-msgstr "You have received an invitation to join class"
+msgstr "Teacher tutorial icon"
 
 #, fuzzy
 msgid "teacher_welcome"
@@ -2213,7 +2259,7 @@ msgid "template_code"
 msgstr ""
 "This is the explanation of my adventure!\n"
 "\n"
-"This way I can show a command: <code>{print}</code>\n"
+"This way I can show a command: <code>print</code>\n"
 "\n"
 "But sometimes I might want to show a piece of code, like this:\n"
 "<pre>\n"
@@ -2335,11 +2381,11 @@ msgstr ""
 
 #, fuzzy
 msgid "tutorial_message_not_found"
-msgstr "You have received an invitation to join class"
+msgstr "We couldn't find the requested tutorial step..."
 
 #, fuzzy
 msgid "tutorial_title_not_found"
-msgstr "We could not find that page!"
+msgstr "Tutorial step not found"
 
 msgid "unauthorized"
 msgstr "Нямаш достъп до тази страница"
@@ -2352,9 +2398,12 @@ msgstr "Are you sure you want to unfavourite this program?"
 msgid "unfavourite_success"
 msgstr "Your program is unfavourited."
 
-#, fuzzy
 msgid "unique_usernames"
 msgstr "All usernames need to be unique."
+
+#, fuzzy
+msgid "unknown_variable_role"
+msgstr "unknown"
 
 #, fuzzy
 msgid "unlock_thresholds"
@@ -2402,7 +2451,7 @@ msgstr "Used in:"
 
 #, fuzzy
 msgid "user"
-msgstr "Потребителско име"
+msgstr "user"
 
 #, fuzzy
 msgid "user_inexistent"
@@ -2410,7 +2459,7 @@ msgstr "This user doesn't exist"
 
 #, fuzzy
 msgid "user_not_private"
-msgstr "This user doesn't exist or doesn't have a public profile"
+msgstr "This user either doesn't exist or doesn't have a public profile"
 
 msgid "username"
 msgstr "Потребителско име"
@@ -2449,17 +2498,20 @@ msgstr "View classes"
 msgid "view_program"
 msgstr "View program"
 
-#, fuzzy
 msgid "view_slides"
 msgstr "View slides"
 
 #, fuzzy
+msgid "walker_variable_role"
+msgstr "walker"
+
+#, fuzzy
 msgid "welcome"
-msgstr "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students."
+msgstr "Welcome"
 
 #, fuzzy
 msgid "welcome_back"
-msgstr "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students."
+msgstr "Welcome back"
 
 #, fuzzy
 msgid "what_is_your_role"
@@ -2482,21 +2534,20 @@ msgstr "Да"
 
 #, fuzzy
 msgid "your_account"
-msgstr "Нямаш акаунт?"
+msgstr "Your profile"
 
 #, fuzzy
 msgid "your_class"
-msgstr "My classes"
+msgstr "Your class"
 
 #, fuzzy
 msgid "your_last_program"
-msgstr "Favourite program"
+msgstr "Your last saved program"
 
 #, fuzzy
 msgid "your_personal_text"
 msgstr "Your personal text..."
 
-#, fuzzy
 msgid "your_program"
 msgstr "Your program"
 

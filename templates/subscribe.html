@@ -10,15 +10,15 @@
                 <h2 class="my-0 text-center">{{_('mailing_title')}}</h2>
                 <div class="signup-container">
                     <label for="mce-FNAME" class="signup-label">{{_('surname')}}</label>
-                    <input type="text" value="" name="FNAME" class="signup-input" id="mce-FNAME">
+                    <input type="text" value="" name="FNAME" class="signup-input" id="mce_FNAME">
                 </div>
                 <div class="signup-container">
                     <label for="mce-LNAME" class="signup-label">{{_('lastname')}}</label>
-                    <input type="text" value="" name="LNAME" class="signup-input" id="mce-LNAME">
+                    <input type="text" value="" name="LNAME" class="signup-input" id="mce_LNAME">
                 </div>
                 <div class="signup-container">
                     <label for="mce-EMAIL" class="signup-label">{{_('email')}}<span class="asterisk">*</span></label>
-                    <input type="email" value="" name="EMAIL" class="signup-input" id="mce-EMAIL" required>
+                    <input type="email" value="" name="EMAIL" class="signup-input" id="mce_EMAIL" required>
                 </div>
                 <div class="signup-container">
                     <label for="mce-EMAIL" class="signup-label">{{_('what_is_your_role')}}</label>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="signup-container">
                     <label for="mce-LANG" class="signup-label">{{_('language')}}*</label>
-                    <select data-placeholder="Choose a Language..." name="LANG" class="signup-input" id="mce-LANG" required>
+                    <select data-placeholder="Choose a Language..." name="LANG" class="signup-input" id="mce_LANG" required>
                         <option value="" disabled selected>-- {{_('select')}} --</option>
                         {% for language in other_languages() %}
                         <option value="{{language.lang}}">{{language.sym}}</option>
@@ -37,12 +37,12 @@
                     </select>
                 </div>
                 <div class="signup-container">
-                    <div class="response" id="mce-error-response" style="display:none"></div>
-                    <div class="response" id="mce-success-response" style="display:none"></div>
+                    <div class="response" id="mce_error_response" style="display:none"></div>
+                    <div class="response" id="mce_success_response" style="display:none"></div>
                 </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                 <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_22a3ce4e09535f82f587a7118_57f3b3c090" tabindex="-1" value=""></div>
                 <div class="flex flex-row items-center justify-center gap-4">
-                    <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="green-btn" value="{{_('subscribe')}}">
+                    <input type="submit" name="subscribe" id="mc_embedded_subscribe" class="green-btn" value="{{_('subscribe')}}">
                 </div>
                 <div class="text-center text-sm mb-4">
                     <p class="text-base mt-0">({{_('required_field')}})</p>

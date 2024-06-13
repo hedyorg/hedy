@@ -5,93 +5,93 @@ describe('customize class page', () => {
     beforeEach(() => {
       loginForTeacher();
       ensureClass();
-      cy.get(".view_class").then($viewClass => {
+      cy.getDataCy('view_class_link').then($viewClass => {
         if (!$viewClass.is(':visible')) {
-            cy.get("#view_classes").click();
+            cy.getDataCy('view_classes').click();
         }
       });
-      cy.getBySel('view_class_link').first().click(); // Press on view class button
-      cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide())
-      cy.getBySel('customize_class_button').click(); // Press customize class button
+      cy.getDataCy('view_class_link').first().click(); // Press on view class button
+     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
+      cy.getDataCy('customize_class_button').click(); // Press customize class button
 
       // Remove any customizations that already exist to get the class into a predictable state
       // This always throws up a modal dialog
       cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');      
-      cy.getBySel('remove_customizations_button').click();
-      cy.getBySel('modal_yes_button').click();
+      cy.getDataCy('remove_customizations_button').click();
+      cy.getDataCy('modal_yes_button').click();
       cy.wait('@restoreCustomizations');
     });
 
     it('checks that puzzle and quiz exist in list', () => {
       // validate and then remove the quiz
-      cy.get('[data-cy="level-1"] [data-cy="quiz"]')
+      cy.getDataCy('level_1 quiz')
         .should("exist")
 
-      cy.get('[data-cy="level-1"] [data-cy="parsons"]')
+      cy.getDataCy('level_1 parsons')
         .should("exist")
 
     });
 
     it('removes the puzzle and quiz from level 2', () => {
       // Click on level 2
-      cy.getBySel("adventures")
+      cy.getDataCy("adventures")
         .select('2')
         .should('have.value', '2');
 
       // validate and then remove the quiz
-      cy.get('[data-cy="level-2"] div:last input')
+      cy.get('[data-cy="level_2"] div:last input')
         .should('have.value', 'quiz')
 
-      cy.get('[data-cy="level-2"] div:last [data-cy="hide"]')
+      cy.get('[data-cy="level_2"] div:last [data-cy="hide"]')
         .click();
 
-      cy.get('[data-cy="level-2"] [data-cy="quiz"]')
+      cy.getDataCy('level_2 quiz')
         .should("not.exist")
 
       // validate and then remove the puzzle
-      cy.get('[data-cy="level-2"] div:last input')
+      cy.get('[data-cy="level_2"] div:last input')
         .should('have.value', 'parsons')
 
-      cy.get('[data-cy="level-2"] div:last [data-cy="hide"]')
+      cy.get('[data-cy="level_2"] div:last [data-cy="hide"]')
         .click();
 
-      cy.get('[data-cy="level-2"] [data-cy="parsons"]')
+      cy.getDataCy('level_2 parsons')
         .should("not.exist")
     });
 
     it('remove and add puzzle and quiz (with order)', () => {
       // validate and then remove the quiz
-      cy.get('[data-cy="level-1"] div:last input')
+      cy.get('[data-cy="level_1"] div:last input')
         .should('have.value', 'quiz')
 
-      cy.get('[data-cy="level-1"] div:last [data-cy="hide"]')
+      cy.get('[data-cy="level_1"] div:last [data-cy="hide"]')
         .click();
 
-      cy.get('[data-cy="level-1"] [data-cy="quiz"]')
+      cy.getDataCy('level_1 quiz')
         .should("not.exist")
 
       // validate and then remove the puzzle
-      cy.get('[data-cy="level-1"] div:last input')
+      cy.get('[data-cy="level_1"] div:last input')
         .should('have.value', 'parsons')
 
-      cy.get('[data-cy="level-1"] div:last [data-cy="hide"]')
+      cy.get('[data-cy="level_1"] div:last [data-cy="hide"]')
         .click();
 
-      cy.get('[data-cy="level-1"] [data-cy="parsons"]')
+      cy.getDataCy('level_1 parsons')
         .should("not.exist")
 
       // add them from available list
-      cy.getBySel("available_adventures_current_level")
+      cy.getDataCy("available_adventures_current_level")
         .select("quiz")
 
-      cy.getBySel("available_adventures_current_level")
+      cy.getDataCy("available_adventures_current_level")
         .select("parsons")
 
       // Now the order should be quiz as last, then parsons.
-      cy.get('[data-cy="level-1"] [data-cy="parsons"]')
+      cy.getDataCy('level_1 parsons')
         .should("not.exist")
 
-      cy.get('[data-cy="level-1"] div:last input')
+      cy.get('[data-cy="level_1"] div:last input')
         .should('have.value', 'quiz')
     });
 
@@ -110,7 +110,7 @@ describe('customize class page', () => {
 
       cy.reload();
 
-      cy.get('[data-cy="level-1"] [data-cy="quiz"]')
+      cy.getDataCy('level_1 quiz')
         .should("not.exist")
     });
 
@@ -129,7 +129,7 @@ describe('customize class page', () => {
 
       cy.reload();
 
-      cy.get('[data-cy="level-1"] [data-cy="parsons"]')
+      cy.getDataCy('level_1 parsons')
         .should("not.exist")
     });
 

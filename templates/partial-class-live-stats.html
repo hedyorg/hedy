@@ -173,14 +173,14 @@
                                             <a hx-get="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student='~dashboard_options.student, 'student='~student.username)}}"
                                             hx-target="#main_content"
                                             class="text-gray-700 no-underline hover:underline cursor-pointer" 
-                                            id="show-student">
+                                            id="show_student">
                                                 {{student.username}}
                                             </a>
                                         {% else %}
                                             <a hx-get="/live_stats/class/{{class_info.id}}/student?{{dashboard_options_args | replace('student=None', 'student='~student.username)}}"
                                             hx-target="#main_content"                                          
                                             class="text-gray-700 no-underline hover:underline underline-offset-2 cursor-pointer"
-                                            id="show-student">
+                                            id="show_student">
                                                 {{student.username}}
                                             </a>
                                         {% endif %}
@@ -258,12 +258,12 @@
                                 {% if error_entry.active == 1 %}
                                     <li class="relative w-full border-solid rounded p-2 shadow bg-blue-100" id="{{ ident }}">
                                         <div class="flex justify-between items-center">
-                                            <a class="no-underline" hx-target="#modal-target" hx-get='{{ "/live_stats/class/"~class_info.id~"/pop_up?" ~ dashboard_options_args ~ "&error-id=" ~ error_entry.id }}'>
+                                            <a class="no-underline" hx-target="#modal_target" hx-get='{{ "/live_stats/class/"~class_info.id~"/pop_up?" ~ dashboard_options_args ~ "&error-id=" ~ error_entry.id }}'>
                                                 <h3 class="cursor-pointer ml-2 hover:underline underline-offset-2">
                                                 {{_(error_entry.label)}} ({{error_entry.students|length}})
                                                 </h3>
                                             </a>
-                                            <button class="btn-shape tiny-btn bg-green-500  p-1 border-0 text-white self-end" id="resolve-student" 
+                                            <button class="btn-shape tiny-btn bg-green-500  p-1 border-0 text-white self-end" id="resolve_student" 
                                                 onclick='hedyApp.resolve_student("{{ class_info.id }}", "{{ error_entry.id }}", {{('resolve_student_prompt')|default(None)|tojson}})'>
                                                 Resolve <i class="fa-regular fa-circle-check"></i>
                                             </button>

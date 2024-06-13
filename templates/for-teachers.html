@@ -2,11 +2,11 @@
 
 {% block regular_content %}
 {% if tutorial %}
-<div id = "tutorial-pop-up" class = "z-50 fixed hidden" style = "width: 500px; top: 20%; left: 50%; transform: translate(-50%, -50%);" >
+<div id = "tutorial_pop_up" class = "z-50 fixed hidden" style = "width: 500px; top: 20%; left: 50%; transform: translate(-50%, -50%);" >
       <div class = "bg-blue-500 border border-black rounded-lg px-8 py-4 text-center" >
           <h2 id = "tutorial_title" class = "text-white" > </h2 >
           <p id = "tutorial_text" > </p >
-          <button id = "tutorial_next_button" class = "green-btn mt-4" > {{_('next_step_tutorial')}} < /button >
+          <button id = "tutorial_next_button" class = "green-btn mt-4" > {{_('next_step_tutorial')}} </button>
       </div >
   </div>
 {% endif %}
@@ -21,7 +21,7 @@
         <button class="green-btn inline-flex items-center" id="create_class_button" onclick='hedyApp.create_class ({{_('class_name_prompt')|default(None)|tojson}})'
         {% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_class')}}</button>
         {% if teacher_classes %}
-        <button class="white-btn inline-flex items-center gap-2" id="view_classes"
+        <button class="white-btn inline-flex items-center gap-2" data-cy="view_classes"
         _="on click hedyApp.saveForTeacherTable('classes_table')"
         >
         <span>{{_('view_classes')}}</span>
@@ -39,7 +39,7 @@
             <button id="create_adventure_button" class="green-btn inline-flex" 
               _="on click
                 window.open('/for-teachers/customize-adventure', '_self')"
-              data-cy="edit-link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
+              data-cy="edit_link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
             {% if teacher_adventures %}
             <button class="white-btn inline-flex" id="view_adventures"
             _="on click hedyApp.saveForTeacherTable('adventures_table')">
@@ -53,9 +53,13 @@
     </div>
   </div>
     <!-- classes table -->
-    {{ render_partial('htmx-classes-table.html', teacher_classes=teacher_classes) }}
+    {% if teacher_classes %}
+      {{ render_partial('htmx-classes-table.html', teacher_classes=teacher_classes) }}
+    {% endif %}
     <!-- adventures table -->
-    {{ render_partial('htmx-adventures-table.html', teacher_adventures=teacher_adventures) }}
+    {% if teacher_adventures %}
+      {{ render_partial('htmx-adventures-table.html', teacher_adventures=teacher_adventures) }}
+    {% endif %}
 
     <div class="flex flex-row gap-4 mb-8 mt-10 md:px-16">
       <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full lg:w-2/4 p-8">
@@ -79,7 +83,7 @@
         <h2 class="m-0 basis-1/12"> {{_('public_content')}} </h2>
         <div class="text-black basis-10/12">{{ _('public_content_info') }}</div>
         <div class="flex gap-3 justify-end basis-1/12">
-              <button id="public-adventures-link" class="blue-btn inline-flex items-center"
+              <button id="public_adventures_link" class="blue-btn inline-flex items-center"
             _="on click window.open('/public-adventures', '_self')">{{_('public_adventures')}}</button>
         </div>
       </div>
@@ -96,11 +100,11 @@
                     {% endif %}
                 </div>
                 <div class="flex flex-row gap-3 mb-2 mr-6">
-                    <iframe class="hidden" id="level-{{level}}-slides" data-src="/slides/{{level}}" src="about:blank"></iframe>
+                    <iframe class="hidden" id="level_{{level}}_slides" data-src="/slides/{{level}}" src="about:blank"></iframe>
                     <a class="green-btn mt-4" href="/slides/{{level}}" target="_blank">
                         {{_('view_slides')}}
                     </a>
-                    <button class="white-btn mt-4" id="download-slides-{{level}}" onclick="hedyApp.downloadSlides({{level}})">
+                    <button class="white-btn mt-4" id="download_slides_{{level}}" onclick="hedyApp.downloadSlides({{level}})">
                         {{_('download')}}
                         <a class="fa fa-download"></a>
                     </button>

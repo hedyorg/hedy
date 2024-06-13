@@ -24,10 +24,21 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('getBySel', (selector, ...args) => {
-  return cy.get(`[data-cy=${selector}]`, ...args)
+Cypress.Commands.add('getDataCy', (selector, ...args) => {
+  let dataSelector = "";
+  const selectors = selector.split(" ");
+  for (let s of selectors) {
+    if (s.startsWith("*")) {
+      s = s.slice(1);
+      dataSelector += `*[data-cy="${s}"] `
+    } else {
+      dataSelector += `[data-cy="${s}"] `
+    }
+  }
+
+  return cy.get(dataSelector, ...args)
 })
 
-Cypress.Commands.add('getBySelLike', (selector, ...args) => {
+Cypress.Commands.add('getDataCyLike', (selector, ...args) => {
   return cy.get(`[data-cy*=${selector}]`, ...args)
 })

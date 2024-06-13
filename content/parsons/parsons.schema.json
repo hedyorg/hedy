@@ -7,33 +7,35 @@
       "type": "object",
       "description": "Levels with exercise for the Hedy Parsons",
       "additionalProperties": {
-        "$ref": "#/Level"
+        "$ref": "#/definitions/Level"
       }
     }
   },
   "required": [
     "levels"
   ],
-  "Level": {
-    "type": "object",
-    "additionalProperties": {
-      "$ref": "#/Exercise"
-    }
-  },
-  "Exercise": {
-    "type": "object",
-    "properties": {
-      "story": {
-        "type": "string"
-      },
-      "code": {
-        "type": "string"
+  "definitions": {
+    "Level": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/Exercise"
+      }
     },
-    "required": [
-      "story",
-      "code"
-    ]
-  },
-    "additionalProperties": false
+    "Exercise": {
+      "type": "object",
+      "properties": {
+        "story": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "story",
+        "code"
+      ],
+      "additionalProperties": false
+    }
   }
 }

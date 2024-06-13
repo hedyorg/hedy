@@ -2,9 +2,9 @@ import { HedySelect } from "./custom-elements";
 import { initialize } from "./initialize";
 
 function updateURL() {
-    const levelSelect = document.getElementById("level-select") as HedySelect;
-    const languageSelect = document.getElementById("language-select") as HedySelect;
-    const tagsSelect = document.getElementById("tag-select") as HedySelect;
+    const levelSelect = document.getElementById("level_select") as HedySelect;
+    const languageSelect = document.getElementById("language_select") as HedySelect;
+    const tagsSelect = document.getElementById("tag_select") as HedySelect;
     const searchInput = document.getElementById('search_adventure') as HTMLInputElement;
     
     const queryString = window.location.search;
