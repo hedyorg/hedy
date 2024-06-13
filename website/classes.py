@@ -55,9 +55,9 @@ class ClassModule(WebsiteModule):
 
         self.db.store_class(Class)
         achievement = self.achievements.add_single_achievement(user["username"], "ready_set_education")
-        if achievement:
-            utils.add_pending_achievement({"achievement": achievement})
-        return make_response({"id": Class["id"]}, 200)
+        response = {"id": Class["id"]}
+        response["achievement"] = achievement
+        return make_response(response, 200)
 
     @route("/<class_id>", methods=["PUT"])
     @requires_teacher
@@ -87,8 +87,8 @@ class ClassModule(WebsiteModule):
         self.db.update_class(class_id, body["name"])
         achievement = self.achievements.add_single_achievement(user["username"], "on_second_thoughts")
         if achievement:
-            utils.add_pending_achievement({"achievement": achievement})
-        return make_response('', 204)
+            return make_response({"achievement": achievement}, 200)
+        return make_response('', 200)
 
     @route("/<class_id>", methods=["DELETE"])
     @requires_login
@@ -197,7 +197,7 @@ class ClassModule(WebsiteModule):
             session["messages"] = session["messages"] - 1 if session["messages"] else 0
 
         if achievement:
-            utils.add_pending_achievement({"achievement": achievement})
+            return make_response({"achievement": achievement}, 200)
         return make_response('', 200)
 
     @route("/<class_id>/student/<student_id>", methods=["DELETE"])
@@ -213,8 +213,8 @@ class ClassModule(WebsiteModule):
         if Class["teacher"] == user["username"]:
             achievement = self.achievements.add_single_achievement(user["username"], "detention")
         if achievement:
-            utils.add_pending_achievement({"achievement": achievement})
-        return make_response('', 204)
+            return make_response({"achievement": achievement}, 200)
+        return make_response('', 200)
 
     @route("/<class_id>/second-teacher/<second_teacher>", methods=["DELETE"])
     @requires_login
@@ -230,8 +230,8 @@ class ClassModule(WebsiteModule):
         if Class["teacher"] == user["username"]:
             achievement = self.achievements.add_single_achievement(user["username"], "detention")
         if achievement:
-            utils.add_pending_achievement({"achievement": achievement, "reload": True})
-        return make_response('', 205)
+            return make_response({"achievement": achievement, "reload": True}, 200)
+        return make_response('', 200)
 
 
 class MiscClassPages(WebsiteModule):
@@ -305,11 +305,12 @@ class MiscClassPages(WebsiteModule):
             new_second_teachers = Class.get("second_teachers")
 
         achievement = self.achievements.add_single_achievement(current_user()["username"], "one_for_money")
+        response = {"id": new_class["id"]}
         if achievement:
-            utils.add_pending_achievement({"achievement": achievement})
+            response['achievement'] = achievement
         if new_second_teachers:
-            return make_response({"id": new_class["id"], "second_teachers": new_second_teachers}, 200)
-        return make_response({"id": new_class["id"]}, 200)
+            response["second_teachers"] = new_second_teachers
+        return make_response(response, 200)
 
     @route("/invite-student", methods=["POST"])
     @requires_teacher
@@ -358,7 +359,7 @@ class MiscClassPages(WebsiteModule):
 
     @route("/invite-second-teacher", methods=["POST"])
     @requires_teacher
-    def invite_second_teaceher(self, user):
+    def invite_second_teacher(self, user):
         teacher = user
         body = request.json
         # Validations
