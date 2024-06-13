@@ -1,6 +1,6 @@
 import { modal } from './modal';
 import { showAchievements, theKeywordLanguage } from "./app";
-import { markUnsavedChanges, clearUnsavedChanges, hasUnsavedChanges } from './browser-helpers/unsaved-changes';
+import { markUnsavedChanges, clearUnsavedChanges } from './browser-helpers/unsaved-changes';
 import { ClientMessages } from './client-messages';
 import DOMPurify from 'dompurify'
 import { startTeacherTutorial } from './tutorials/tutorial';
@@ -715,15 +715,7 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
         function backToClass() {
             window.location.href = `/for-teachers/class/${options.class_id}`;
         }
-
-        if (hasUnsavedChanges()) {
-            modal.confirm(ClientMessages.unsaved_class_changes, () => {
-                clearUnsavedChanges();
-                backToClass();
-            });
-        } else {
-            backToClass();
-        }
+        backToClass();
       });
 
       $('[id^=opening_date_level_]').each(function() {

@@ -100,10 +100,8 @@ export function addCustomizations(classname){
     cy.getDataCy('opening_date_container').should("be.visible")
     cy.getDataCy('enable_level_7').parent('.switch').click();
 
-    cy.wait(1000)
     cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
 
-    cy.wait(500);
     cy.getDataCy('back_to_class').click();
     cy.getDataCy('go_back_button').click();
 }
