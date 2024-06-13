@@ -10,7 +10,7 @@ from tests.Tester import HedyTester
 def exception_language_input():
     exceptions_ = create_exceptions()
     languages = ALL_LANGUAGES.keys()
-    # ang locale does not work, maybe we should remove it 
+    # ang locale does not work, maybe we should remove it
     return [(ex, lang) for lang in languages for ex in exceptions_ if not lang == 'ang']
 
 
