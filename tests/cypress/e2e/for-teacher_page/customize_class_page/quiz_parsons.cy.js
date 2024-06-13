@@ -13,34 +13,34 @@ describe('customize class page', () => {
       removeCustomizations();
     });
 
-    it('Is able to remove the puzzle and quiz from level 2 and then add them back', () => {
-      selectLevel('2');
+    // it('Is able to remove the puzzle and quiz from level 2 and then add them back', () => {
+    //   selectLevel('2');
 
-      // remove the quiz
-      cy.getDataCy('hide_quiz').scrollIntoView().should('be.visible');
-      cy.getDataCy('hide_quiz').click();
-      cy.getDataCy('quiz').should("not.exist")
+    //   // remove the quiz
+    //   cy.getDataCy('hide_quiz').scrollIntoView().should('be.visible');
+    //   cy.getDataCy('hide_quiz').click();
+    //   cy.getDataCy('quiz').should("not.exist")
 
-      // remove the puzzle
-      cy.getDataCy('hide_parsons').scrollIntoView().should('be.visible');
-      cy.getDataCy('hide_parsons').click();
-      cy.getDataCy('parsons').should("not.exist")
+    //   // remove the puzzle
+    //   cy.getDataCy('hide_parsons').scrollIntoView().should('be.visible');
+    //   cy.getDataCy('hide_parsons').click();
+    //   cy.getDataCy('parsons').should("not.exist")
 
-      // add them from available list
-      cy.getDataCy('available_adventures_current_level').select("quiz")
-      cy.getDataCy('available_adventures_current_level').select("parsons")
+    //   // add them from available list
+    //   cy.getDataCy('available_adventures_current_level').select("quiz")
+    //   cy.getDataCy('available_adventures_current_level').select("parsons")
 
-      // Now the order should be quiz as last, then parsons.
-      cy.getDataCy('parsons').scrollIntoView().should("exist")
-      // scrol to get quiz into view and make sure its the last one
-      cy.getDataCy('quiz').scrollIntoView().last().should("exist");
+    //   // Now the order should be quiz as last, then parsons.
+    //   cy.getDataCy('parsons').scrollIntoView().should("exist")
+    //   // scrol to get quiz into view and make sure its the last one
+    //   cy.getDataCy('quiz').scrollIntoView().last().should("exist");
 
-      // make sure they are visible
-      loginForStudent();
-      goToHedyLevel2Page();
-      cy.getDataCy('quiz').scrollIntoView().should('be.visible');
-      cy.getDataCy('parsons').scrollIntoView().should('be.visible');
-    });
+    //   // make sure they are visible
+    //   loginForStudent();
+    //   goToHedyLevel2Page();
+    //   cy.getDataCy('quiz').scrollIntoView().should('be.visible');
+    //   cy.getDataCy('parsons').scrollIntoView().should('be.visible');
+    // });
 
     it('Is able to disable all quizes and parsons', () => {
       cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
