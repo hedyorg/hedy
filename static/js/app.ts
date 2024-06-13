@@ -173,7 +173,8 @@ export function initializeApp(options: InitializeAppOptions) {
 
   // All input elements with data-autosubmit="true" automatically submit their enclosing form
   $('*[data-autosubmit="true"]').on('change', (ev) => {
-    $(ev.target).closest('form').trigger('submit');
+    const form = ev.target.closest('form') as HTMLFormElement
+    form['trigger']('submit');
   });
 
   initializeLoginLinks();

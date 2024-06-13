@@ -10,15 +10,15 @@ describe('Levels Dropdown Select test', () => {
         goToEditAdventure();
 
         // Tests level field interaction
-        cy.get("#level_select")
+        cy.get("#levels_dropdown")
           .should('be.visible')
           .should('not.be.disabled')
           .click()
         
-        cy.get(`#levels_dropdown > div.option[data-value="${level}"]`)
+        cy.get(`#levels_dropdown > div > div > div.option[data-value="${level}"`)
           .click()
         
-        cy.get(`#levels_dropdown > div.option[data-value="${level}"]`)
+        cy.get(`#levels_dropdown > div > div > div.option[data-value="${level}"`)
           .should('have.class', 'selected')
       })
     }
