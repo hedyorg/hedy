@@ -100,6 +100,7 @@ export function addCustomizations(classname){
     cy.getDataCy('opening_date_container').should("be.visible")
     cy.getDataCy('enable_level_7').parent('.switch').click();
 
+    cy.wait(1000);
     cy.wait('@updateCustomizations');
 
     cy.getDataCy('back_to_class').click();
