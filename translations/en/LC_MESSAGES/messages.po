@@ -19,133 +19,133 @@ msgstr ""
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
-msgstr "You tried to use the variable {name} on line {access_line_number}, but you set it on line {definition_line_number}. Set a variable before using it."
+msgstr "Variable {name} used on line {access_line_number} before being set. Try setting the variable before use."
 
 msgid "Cyclic Var Definition"
-msgstr "The name `{variable}` needs to be set before you can use it on the right-hand side of the `{is}` command."
+msgstr "Set `{variable}` before using it on the right-hand side of the `{is}` command."
 
 msgid "Else Without If Error"
-msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
+msgstr "Set an `{if}` before using an `{else}` on line {line_number}."
 
 msgid "Function Undefined"
-msgstr "You tried to use the function {name}, but you didn't define it."
+msgstr "Function {name} used without being defined."
 
 msgid "Has Blanks"
-msgstr "Your code is incomplete. It contains blanks that you have to replace with code."
+msgstr "Code is incomplete, fill in blanks with code."
 
 msgid "Incomplete"
-msgstr "Oops! You forgot a bit of code! On line {line_number}, you need to enter text behind `{incomplete_command}`."
+msgstr "On line {line_number}, you need to enter text behind `{incomplete_command}`."
 
 msgid "Incomplete Repeat"
-msgstr "It looks like you forgot to use a `{command}` with the `{repeat}` command you used on line {line_number}."
+msgstr "Missing `{command}` with `{repeat}` on line {line_number}."
 
 msgid "Invalid"
 msgstr "`{invalid_command}` is not a Hedy level {level} command. Did you mean `{guessed_command}`?"
 
 msgid "Invalid Argument"
-msgstr "You cannot use the command `{command}` with `{invalid_argument}`. Try changing `{invalid_argument}` to {allowed_types}."
+msgstr "You can't use command `{command}` with `{invalid_argument}`. Change `{invalid_argument}` to {allowed_types}."
 
 msgid "Invalid Argument Type"
-msgstr "You cannot use `{command}` with `{invalid_argument}` because it is {invalid_type}. Try changing `{invalid_argument}` to {allowed_types}."
+msgstr "`{command}` doesn't work with `{invalid_argument}` because it is {invalid_type}. Change `{invalid_argument}` to {allowed_types}."
 
 msgid "Invalid At Command"
-msgstr "The `{command}` command may not be used from level 16 onward. You can use square brackets to use an element from a list, for example `friends[i]`, `lucky_numbers[{random}]`."
+msgstr "The `{command}` command may not be used from level 16 onward. Use square brackets for lists"
 
 msgid "Invalid Space"
-msgstr "Oops! You started a line with a space on line {line_number}. Spaces confuse computers, can you remove it?"
+msgstr "Line {line_number} started with a space. Try removing the space"
 
 msgid "Invalid Type Combination"
-msgstr "You cannot use `{invalid_argument}` and `{invalid_argument_2}` with `{command}` because one is {invalid_type} and the other is {invalid_type_2}. Try changing `{invalid_argument}` to {invalid_type_2} or `{invalid_argument_2}` to {invalid_type}."
+msgstr "`{invalid_argument}` and `{invalid_argument_2}` cannot be used with `{command}` because one is {invalid_type} and the other is {invalid_type_2}. Try changing `{invalid_argument}` to {invalid_type_2} or `{invalid_argument_2}` to {invalid_type}."
 
 msgid "Lonely Echo"
-msgstr "You used an `{echo}` before an `{ask}`, or an `{echo}` without an `{ask}`. Place an `{ask}` before the `{echo}`."
+msgstr "Place an `{ask}` before the `{echo}` or check if there is an `{echo}` without an `{ask}`."
 
 msgid "Lonely Text"
 msgstr "It looks like you forgot to use a command with the text you used in line {line_number}"
 
 msgid "Missing Additional Command"
-msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}. Try adding `{missing_command}` to your code."
+msgstr "Complete writing the `{command}` on line {line_number}. Try adding `{missing_command}` to your code."
 
 msgid "Missing Colon Error"
 msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
 
 msgid "Missing Command"
-msgstr "It looks like you forgot to use a command on line {line_number}."
+msgstr "You missed a command on line {line_number}."
 
 msgid "Missing Inner Command"
-msgstr "It looks like you forgot to use a command with the `{command}` statement you used on line {line_number}."
+msgstr "It seems you missed a command for the `{command}` statement on line {line_number}."
 
 msgid "Missing Square Brackets"
 msgstr "It looks like you forgot to use square brackets `[]` around the list you were creating on line {line_number}."
 
 msgid "Missing Variable"
-msgstr "It looks like your `{command}` is missing a variable at the start of the line."
+msgstr "`{command}` is missing a variable at the start of the line."
 
 msgid "Misspelled At Command"
-msgstr "It looks like you might have misspelled the `{command}` command, instead you wrote `{invalid_argument}` in line {line_number}."
+msgstr "Check `{command}` spelling on line {line_number}, you wrote `{invalid_argument}` instead."
 
 msgid "No Indentation"
-msgstr "You used too few spaces in line {line_number}. You used {leading_spaces} spaces, which is not enough. Start every new block with {indent_size} spaces more than the line before."
+msgstr "On line {line_number}, insufficent {leading_spaces} spaces used. Increase by {indent_size} for each new block."
 
 msgid "Non Decimal Variable"
-msgstr "At line {line_number}, you might have tried using a number which Hedy does not like very much! Try changing it to a decimal number like 2."
+msgstr "At line {line_number}, you used a number Hedy does not support! Try a decimal number, like 2."
 
 msgid "Parse"
-msgstr "The code you entered is not valid Hedy code. There is a mistake on line {location[0]}, at position {location[1]}. You typed `{character_found}`, but that is not allowed."
+msgstr "The code is not valid Hedy code. There is a mistake on line {location[0]}. You typed `{character_found}`, which is not allowed."
 
 msgid "Pressit Missing Else"
-msgstr "You forgot to add what happens when you press a different key, add an `{else}` to your code"
+msgstr "Add an `{else}` to your code to handle other key presses"
 
 msgid "Runtime Index Error"
-msgstr "You tried to access the list {name} but it is either empty or the index is not there."
+msgstr "List {name} is empty or index is missing."
 
 msgid "Runtime Value Error"
-msgstr "While running your program the command `{command}` received the value `{value}` which is not allowed. {tip}."
+msgstr "`{command}` received disallowed value `{value}`. {tip}."
 
 msgid "Runtime Values Error"
-msgstr "While running your program the command `{command}` received the values `{value}` and `{value}` which are not allowed. {tip}."
+msgstr "`{command}` received disallowed values `{value}` and `{value}`. {tip}."
 
 msgid "Save Microbit code "
 msgstr "Save Microbit code"
 
 msgid "Too Big"
-msgstr "Wow! Your program has an impressive {lines_of_code} lines of code! But we can only process {max_lines} lines in this level. Make your program smaller and try again."
+msgstr "Your program has {lines_of_code} lines, but we can only process {max_lines} lines. Please shorten your program and try again."
 
 msgid "Too Few Indents"
-msgstr "You used too few leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too few."
+msgstr "Line {line_number} has too few ({leading_spaces}) spaces."
 
 msgid "Too Many Indents"
-msgstr "You used too many leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too many."
+msgstr "Line {line_number} has too many ({leading_spaces}) spaces."
 
 msgid "Unexpected Indentation"
-msgstr "You used too many spaces in line {line_number}. You used {leading_spaces} spaces, which is too much. Start every new block with {indent_size} spaces more than the line before."
+msgstr "Line {line_number} has too many ({leading_spaces}) spaces. Use {indent_size} more spaces per new block."
 
 msgid "Unquoted Assignment"
-msgstr "From this level, you need to place texts to the right of the `{is}` between quotes. You forgot that for the text {text}."
+msgstr "From this level, place texts to the right of the `{is}` in quotes. Try doing that for the text {text}."
 
 msgid "Unquoted Equality Check"
-msgstr "If you want to check if a variable is equal to multiple words, the words should be surrounded by quotation marks!"
+msgstr "\"To check if a variable equals multiple words, use quotation marks for those words!\""
 
 msgid "Unquoted Text"
-msgstr "Be careful. If you `{ask}` or `{print}` something, the text should start and finish with a quotation mark. You forgot that for the text {unquotedtext}."
+msgstr "Text for `{ask}` or `{print}` must be in a quotation mark. Missing quotes for {unquotedtext}."
 
 msgid "Unsupported Float"
-msgstr "Non-integer numbers are not supported yet but they will be in a few levels. For now change `{value}` to an integer."
+msgstr "Non-integer numbers are not supported yet. Change `{value}` to an integer."
 
 msgid "Unsupported String Value"
 msgstr "Text values cannot contain `{invalid_value}`."
 
 msgid "Unused Variable"
-msgstr "You defined the variable {variable_name} on line {line_number}, but you did not use it."
+msgstr "{variable_name} defined on line {line_number}, but not used."
 
 msgid "Var Undefined"
-msgstr "You tried to use the variable `{name}`, but you didn't set it. It is also possible that you were trying to use the word `{name}` but forgot quotation marks."
+msgstr "Variable `{name}` used without setting it. Also consider using quotation marks for `{name}`."
 
 msgid "Wrong Level"
-msgstr "That was correct Hedy code, but not at the right level. You wrote `{offending_keyword}` for level {working_level}. Tip: {tip}"
+msgstr "Correct Hedy code, but not on the wrong level. `{offending_keyword}` is used on level {working_level}. Tip: {tip}"
 
 msgid "Wrong Number of Arguments"
-msgstr "Your function used the wrong number of arguments. You provided {used_number} but the function {name} needs {defined_number}"
+msgstr "Wrong number of arguments for function {name}. Provided {used_number}, needs {defined_number}"
 
 msgid "account_overview"
 msgstr "Account overview"
