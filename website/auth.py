@@ -159,6 +159,7 @@ def forget_current_user():
     session.pop("keyword_lang", None)  # Delete session keyword language if existing
     session.pop("profile_image", None)  # Delete profile image id if existing
 
+
 def show_roles_of_variables():
     """Whether the roles of variables should be shown in the variable view.
     (If not, only variable names and values will be shown in the list).
@@ -166,6 +167,7 @@ def show_roles_of_variables():
     """
     can_show_roles = os.getenv("SHOW_ROLES")
     return can_show_roles
+
 
 def is_admin(user):
     """Whether the given user (object) is an admin.
@@ -179,6 +181,7 @@ def is_admin(user):
         admin_users.extend(os.getenv("ADMIN_USERS").split(","))
 
     return user.get("username") in admin_users or user.get("email") in admin_users
+
 
 def is_teacher(user, cls=None):
     # the `is_teacher` field is either `0`, `1` or not present.
