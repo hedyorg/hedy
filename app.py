@@ -2918,6 +2918,7 @@ if __name__ == '__main__':
     env_defaults = dict(
         BASE_URL=f"http://localhost:{config['port']}/",
         ADMIN_USER="admin",
+        SHOW_ROLES=False,
     )
     for key, value in env_defaults.items():
         if key not in os.environ:
