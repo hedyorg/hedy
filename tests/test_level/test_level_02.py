@@ -561,20 +561,20 @@ class TestsLevel2(HedyTester):
         code = "sleep 2"
         expected = "sleep(2000)"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=5, microbit=True)
+        self.multi_level_tester(code=code, expected=expected, max_level=18, microbit=True)
 
     def test_sleep_micro_bit_no_argument(self):
         code = "sleep"
         expected = "sleep(1000)"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=5, microbit=True)\
+        self.multi_level_tester(code=code, expected=expected, max_level=18, microbit=True)\
 
 
     def test_sleep_micro_bit_variable_argument(self):
-        code = " duration = 2\nsleep duration"
-        expected = "sleep(duration * 1000)"
+        code = "duration is 2\nsleep duration"
+        expected = "duration = 2\nsleep(duration * 1000)"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=5, microbit=True)
+        self.multi_level_tester(code=code, expected=expected, max_level=18, microbit=True)
 
     def test_sleep_with_default_number(self):
         code = "sleep 1"

@@ -2853,14 +2853,10 @@ class MicrobitConvertToPython_2(MicrobitConvertToPython_1, ConvertToPython_2):
             value = self.process_variable(value, meta.line)
         else:
             # if it is not a variable, check if it is a number
-            if value.isdigit() or (value.startswith('-') and value[1:].isdigit()):  # check for integers
-                pass  # do not encapsulate in quotes if it's a number
-            else:
-                try:
-                    float(value)  # check for floats
-                except ValueError:
-                    # encapsulate in quotes if it's not a number
-                    value = f"'{process_characters_needing_escape(value)}'"
+            if not self.is_int(value) and not self.is_float(value):
+                # encapsulate in quotes if it's not a number
+                value = f"'{process_characters_needing_escape(value)}'"
+
         return exception + variable_name + " = " + value + self.add_debug_breakpoint()
 
     def sleep(self, meta, args):
@@ -2873,7 +2869,8 @@ class MicrobitConvertToPython_2(MicrobitConvertToPython_1, ConvertToPython_2):
                 milliseconds = int(variable) * 1000
             else:
                 milliseconds = f"{variable} * 1000"
-                return f"sleep({milliseconds}){self.add_debug_breakpoint()}"
+                self.add_variable_access_location(variable, meta.line)
+        return f"sleep({milliseconds}){self.add_debug_breakpoint()}"
 
 
 @v_args(meta=True)
@@ -2888,7 +2885,8 @@ class MicrobitConvertToPython_3(MicrobitConvertToPython_2, ConvertToPython_3):
 @source_map_transformer(source_map)
 class MicrobitConvertToPython_4(MicrobitConvertToPython_3, ConvertToPython_4):
     def print(self, meta, args):
-        argument_string = self.print_ask_args(meta, args)
+        args_new = [self.make_print_ask_arg(a, meta) for a in args]
+        argument_string = ''.join(args_new)
         return f"display.scroll('{argument_string}')"
 
 

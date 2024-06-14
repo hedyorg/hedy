@@ -805,7 +805,8 @@ def save_transpiled_code_for_microbit(transpiled_python_code):
     with open(filepath, 'w') as file:
         custom_string = "from microbit import *\nimport random"
         file.write(custom_string + "\n")
-        # Splitting strings to new line, so it can be properly displayed by Micro:bit
+
+        # Splitting strings to new lines, so it can be properly displayed by Micro:bit
         processed_code = ""
         lines = transpiled_python_code.split('\n')
         for line in lines:
@@ -814,8 +815,10 @@ def save_transpiled_code_for_microbit(transpiled_python_code):
                 match = re.search(r"display\.scroll\((.*)\)", line)
                 if match:
                     content = match.group(1)
-                    parts = re.findall(r"'[^']*'|[^']+", content)
+                    # Split the content by quoted strings and variables
+                    parts = re.findall(r"('[^']*')|([^',]+)", content)
                     for part in parts:
+                        part = part[0] or part[1]
                         if part.strip():
                             processed_code += f"display.scroll({part.strip()})\n"
             else:
@@ -823,7 +826,6 @@ def save_transpiled_code_for_microbit(transpiled_python_code):
 
         # Write the processed code
         file.write(processed_code)
-
 
 @app.route('/download_microbit_files/', methods=['GET'])
 def convert_to_hex_and_download():
