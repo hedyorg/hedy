@@ -8,7 +8,7 @@ let TRADUCTION: Map<string,string>;
 
 //Feature flag for variable and values view
 let variable_view = true;
-let showRoles = false;
+let showRoles = true;
 let step_debugger = false;
 const fullLineCommands = [
   'print',
