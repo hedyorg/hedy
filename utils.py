@@ -1,4 +1,4 @@
-from flask import session, request, jsonify, make_response
+from flask import session, request, make_response
 from website.flask_helpers import render_template
 from bs4 import BeautifulSoup
 import contextlib
@@ -88,7 +88,7 @@ def times():
     return int(round(time.time()))
 
 
-DEBUG_MODE = False
+DEBUG_MODE = not os.getenv('NO_DEBUG_MODE')
 
 
 def is_debug_mode():
@@ -329,8 +329,10 @@ def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=No
     if error not in [400, 403, 404, 500, 401]:
         error = 404
     default = gettext('default_404')
+    error_image = error
     if error == 401:
         default = gettext('default_401')
+        error_image = 403
     if error == 403:
         default = gettext('default_403')
     elif error == 500:
@@ -343,12 +345,12 @@ def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=No
 
     if request.accept_mimetypes.accept_json and not request.accept_mimetypes.accept_html:
         # Produce a JSON response instead of an HTML response
-        return jsonify({"code": error,
-                        "error": default,
-                        "exception": traceback.format_exception(type(exception), exception, exception.__traceback__) if exception else None}), error
+        return make_response({"code": error,
+                              "error": default,
+                              "exception": traceback.format_exception(type(exception), exception, exception.__traceback__) if exception else None}, error)
 
-    return render_template("error-page.html", menu=menu, error=error, iframe=iframe,
-                           page_error=page_error or ui_message or '', default=default), error
+    return render_template("error-page.html", menu=menu, error_image=error_image, iframe=iframe,
+                           page_error=page_error or ui_message or default or '', default=default), error
 
 
 def session_id():

@@ -504,7 +504,7 @@ export function setDateLevelInputColor(level: string) {
                                      .addClass('bg-gray-200')
   }
 
-  if ($('#level-' +  level).is(':visible')) {
+  if ($('#level_' +  level).is(':visible')) {
     setLevelStateIndicator(level);
   }
 }
@@ -748,5 +748,25 @@ export function initializeClassOverviewPage(_options: InitializeClassOverviewPag
         $('#' + attribute + '_header').show();
         $('.' + attribute + '_cell').show();
     }
+  });
+}
+
+
+export function invite_support_teacher(requester: string) {
+  modal.prompt(`Invite a teacher to support ${requester}.`, '', function (username) {
+    $.ajax({
+        type: 'POST',
+        url: "/super-teacher/invite-support",
+        data: JSON.stringify({
+          sourceUser: requester,
+          targetUser: username,
+        }),
+        contentType: 'application/json',
+        dataType: 'json'
+    }).done(function() {
+        location.reload();
+    }).fail(function(err) {
+        modal.notifyError(err.responseText);
+    });
   });
 }

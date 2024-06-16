@@ -1,8 +1,9 @@
+import csv
 import json
 import hedy
 from tests.Tester import Snippet
 
-most_recent_file_name = 'tools/alpha-logs.json'
+most_recent_file_name = 'tools/botswana-programs.json'
 snippets = []
 
 # this file analyzes logs from the database
@@ -21,30 +22,81 @@ def get_column_number_by_name(name):
     return columns.index(level_row)
 
 
-level_id = get_column_number_by_name('level')
+level = get_column_number_by_name('level')
 code_id = get_column_number_by_name('code')
-language_id = get_column_number_by_name('lang')
+experiment_language = get_column_number_by_name('Botswana_language')
 error_id = get_column_number_by_name('server_error')
+language = get_column_number_by_name('lang')
+class_name = get_column_number_by_name('name')
+username = get_column_number_by_name('username')
 
 for p in public_programs['rows']:
     s = Snippet(filename='file',
-                level=p[level_id],
+                level=p[level],
                 field_name=None,
                 code=p[code_id],
-                language=p[language_id],
+                username=p[username],
+                language=p[language],
+                # storing the classname in adventurename so I don't have to add one more field
+                adventure_name=p[class_name],
+                experiment_language=p[experiment_language],
                 error=p[error_id]
                 )
     snippets.append(s)
 
-for snippet in snippets:
+with open('analysis.csv', 'w', newline='') as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerow(['program_id', 'username', 'language', 'experiment_language', 'class', 'number of lines',
+                     'number of variables', 'number of commands', 'number of distinct commands',
+                     'level', 'error_message'])
 
-    if snippet is not None and len(snippet.code) > 0 and len(snippet.code) < 100 and not snippet.error:
+analysis = False
+variables = True
+program_id = 0
+
+for snippet in snippets:
+    program_id += 1
+    if not snippet.error:
         try:
 
             all_commands = hedy.all_commands(snippet.code, snippet.level, snippet.language)
-            all_variables = hedy.all_variables(snippet.code, snippet.level, snippet.language)
-            print(snippet.language, all_commands)
-            print(snippet.language, all_variables)
+            try:
+                all_variables = hedy.all_variables(snippet.code, snippet.level, snippet.language)
+            except Exception as e:
+                print(e)
+                all_variables = []
+
+            lines = len(snippet.code.split('\n'))
+
+            if variables:
+                with open('variables.csv', 'a', newline='') as csvfile:
+                    writer = csv.writer(csvfile)
+                    for v in all_variables:
+                        writer.writerow([program_id, snippet.username, snippet.language,
+                                         snippet.experiment_language, snippet.level, v])
+
+            if analysis:
+                with open('analysis.csv', 'a', newline='') as csvfile:
+                    writer = csv.writer(csvfile)
+                    writer.writerow([program_id, snippet.username, snippet.language, snippet.experiment_language,
+                                     snippet.adventure_name, lines, len(
+                                         all_variables), len(all_commands), len(set(all_commands)), snippet.level, ''])
+
+            print(program_id, len(snippets), round(100 * program_id / len(snippets), 2))
 
         except Exception as E:
-            print(E)
+            if analysis:
+                with open('analysis.csv', 'a', newline='') as csvfile:
+                    writer = csv.writer(csvfile)
+                    writer.writerow(
+                        [program_id, snippet.username, snippet.language, snippet.experiment_language,
+                         snippet.adventure_name,
+                         0, 0, 0, 0, snippet.level, str(E)])
+    else:
+        if analysis:
+            with open('analysis.csv', 'a', newline='') as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow(
+                    [program_id, snippet.username, snippet.language, snippet.experiment_language,
+                     snippet.adventure_name,
+                     0, 0, 0, 0, snippet.level, snippet.error])
