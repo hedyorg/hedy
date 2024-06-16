@@ -2894,7 +2894,7 @@ class MicrobitConvertToPython_4(MicrobitConvertToPython_3, ConvertToPython_4):
 
     def print(self, meta, args):
         args_new = [self.make_print_ask_arg(a, meta) for a in args]
-        argument_string = ' + '.join(args_new)
+        argument_string = ''.join(args_new)
         return f"display.scroll({argument_string})"
 
 

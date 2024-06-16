@@ -805,28 +805,28 @@ def save_transpiled_code_for_microbit(transpiled_python_code):
     with open(filepath, 'w') as file:
         custom_string = "from microbit import *\nimport random"
         file.write(custom_string + "\n")
-        file.write(transpiled_python_code + "\n")
+        # file.write(transpiled_python_code + "\n")
 
-        # # Splitting strings to new lines, so it can be properly displayed by Micro:bit
-        # processed_code = ""
-        # lines = transpiled_python_code.split('\n')
-        # for line in lines:
-        #     if "display.scroll" in line:
-        #         # Extract the content inside display.scroll()
-        #         match = re.search(r"display\.scroll\((.*)\)", line)
-        #         if match:
-        #             content = match.group(1)
-        #             # Split the content by quoted strings and variables
-        #             parts = re.findall(r"('[^']*')|([^',]+)", content)
-        #             for part in parts:
-        #                 part = part[0] or part[1]
-        #                 if part.strip():
-        #                     processed_code += f"display.scroll({part.strip()})\n"
-        #     else:
-        #         processed_code += line + "\n"
-        #
-        # # Write the processed code
-        # file.write(processed_code)
+        # Splitting strings to new lines, so it can be properly displayed by Micro:bit
+        processed_code = ""
+        lines = transpiled_python_code.split('\n')
+        for line in lines:
+            if "display.scroll" in line:
+                # Extract the content inside display.scroll()
+                match = re.search(r"display\.scroll\((.*)\)", line)
+                if match:
+                    content = match.group(1)
+                    # Split the content by quoted strings and variables
+                    parts = re.findall(r"('[^']*')|([^',]+)", content)
+                    for part in parts:
+                        part = part[0] or part[1]
+                        if part.strip():
+                            processed_code += f"display.scroll({part.strip()})\n"
+            else:
+                processed_code += line + "\n"
+
+        # Write the processed code
+        file.write(processed_code)
 
 
 @app.route('/download_microbit_files/', methods=['GET'])
