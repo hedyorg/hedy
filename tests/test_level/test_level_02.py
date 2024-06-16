@@ -675,7 +675,7 @@ class TestsLevel2(HedyTester):
 
     def test_assign_micro_bit(self):
         code = "naam is Felienne"
-        expected = "    naam = 'Felienne'"
+        expected = "naam = 'Felienne'"
 
         self.multi_level_tester(code=code, expected=expected, max_level=5, unused_allowed=True, microbit=True)
 
