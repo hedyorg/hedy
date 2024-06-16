@@ -2897,6 +2897,9 @@ class MicrobitConvertToPython_4(MicrobitConvertToPython_3, ConvertToPython_4):
         argument_string = ''.join(args_new)
         return f"display.scroll({argument_string})"
 
+    def clear(self, meta, args):
+        return f"display.clear()"
+
 
 @v_args(meta=True)
 @hedy_transpiler(level=5, microbit=True)
