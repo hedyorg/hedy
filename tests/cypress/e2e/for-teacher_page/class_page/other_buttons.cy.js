@@ -6,7 +6,6 @@ const teachers = ["teacher1", "teacher4"];
 teachers.forEach((teacher) => {
   describe(`other buttons test for ${teacher}`, () => {
     beforeEach(() => {
-      // do we want this test to be run for a second teacher as well?
       loginForTeacher(teacher);
       navigateToClass();
     })
