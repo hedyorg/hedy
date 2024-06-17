@@ -106,7 +106,7 @@ class TagsModule(WebsiteModule):
         self.db.delete_tag_from_adventure(tag, adventure_id)
 
         return jinja_partials.render_partial('htmx-tags-dropdown-item.html', tag=db_tag, adventure_id=adventure_id)
-    
+
     @route("/delete/<tag>", methods=["DELETE"])
     @requires_teacher
     def delete_tag(self, user, tag):

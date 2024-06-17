@@ -852,7 +852,7 @@ class Database:
     def update_tag(self, tags_id, data):
         # Update existing tags
         return TAGS.update({"id": tags_id}, data)
-    
+
     def delete_tag(self, tags_id):
         TAGS.delete({"id": tags_id})
 
