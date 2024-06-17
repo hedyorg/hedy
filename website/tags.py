@@ -88,9 +88,10 @@ class TagsModule(WebsiteModule):
     @route("/delete/<tag>/<adventure_id>", methods=["DELETE"])
     @requires_teacher
     def delete_from_adventure(self, user, tag, adventure_id):
-        if not tag or not adventure_id:
-            # is this not suppossed to be an error response?
-            return make_response('', 204)
+        if not tag:
+            return utils.error_page(error=400, ui_message=gettext("no_tag"))
+        if not adventure_id:
+            return utils.error_page(error=400, ui_message=gettext("retrieve_adventure_error"))
 
         tag_name = tag.strip()
         db_tag = self.db.read_tag(tag_name)
@@ -110,7 +111,7 @@ class TagsModule(WebsiteModule):
     @requires_teacher
     def delete_tag(self, user, tag):
         if not tag:
-            return make_response('', 204)
+            return utils.error_page(error=400, ui_message=gettext("no_tag"))
 
         tag_name = tag.strip()
         db_tag = self.db.read_tag(tag_name)
