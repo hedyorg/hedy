@@ -103,7 +103,7 @@ def show_roles_of_variables():
     (If not, only variable names and values will be shown in the list).
     Checks the configuration in the environment variable $SHOW_ROLES    
     """
-    can_show_roles = os.getenv("SHOW_ROLES")
+    can_show_roles = os.getenv("SHOW_ROLES", False)
     return can_show_roles
 
 def is_offline_mode():
