@@ -106,7 +106,7 @@ def task_tailwind():
             *glob('main/**/*.md'),
             *glob('content/**/*.md'),
             # exclude files generated for translations
-            *[file for file in glob('static/js/*.ts') if file not in \
+            *[file for file in glob('static/js/*.ts') if file not in
                 ['static/js/message-translations.ts', 'static/js/client-messages.ts']
               ],
             'build-tools/heroku/tailwind/styles.css',
