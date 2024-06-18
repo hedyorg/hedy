@@ -79,7 +79,7 @@ export function load_variables(variables: any) {
       if (variables[i][1]) {
         const variableName = variables[i][0].replace(/^_/, '');
         const role = programData?.variables[variableName];
-        const showRoles = theGlobalDebugger.getProgramData().show_roles;
+        const showRoles = theGlobalDebugger.getProgramData().show_roles === "False";
         if (showRoles) {
           variableList.append(`<li style=color:${variables[i][2]}>${variableName}: ${variables[i][1]} (${role})</li>`);
         } else {
