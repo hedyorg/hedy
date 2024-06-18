@@ -19,25 +19,25 @@ msgstr ""
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
-msgstr "Variable {name} used on line {access_line_number} before being set. Try setting the variable before use."
+msgstr "We detected that a variable {name} is being used on line {access_line_number} before being set. Can you set the variable before its used?"
 
 msgid "Cyclic Var Definition"
-msgstr "Variable `{variable}` used on the right-hand side of the `{is}` command before being set. Try setting the variable before use."
+msgstr "We detected that a variable `{variable}` is being used on the right-hand side of the `{is}` command before being set. Can you set the variable before its used?"
 
 msgid "Else Without If Error"
-msgstr "Command `{else}` used before using an `{if}` on line {line_number}. Try writing `{if}` before writing `{else}`."
+msgstr "We noticed that there is an `{else}` being used before an `{if}` on line {line_number}. Can you try writing an `{if}` before the `{else}`?"
 
 msgid "Function Undefined"
-msgstr "Function {name} used without being defined. Try to define the function before use."
+msgstr "We noted a function {name} is being used without being defined. Can you define the function before use?"
 
 msgid "Has Blanks"
-msgstr "Code is incomplete. Try filling in blanks with code."
+msgstr "Oh no! The code seems to be incomplete. Can you fill in blanks with code?"
 
 msgid "Incomplete"
-msgstr "Command `{incomplete_command}`, on line {line_number} is not yet fully completed. Try to enter text behind `{incomplete_command}`."
+msgstr "Oh no! We need something written before `{incomplete_command}`, on line {line_number}. Can you try to enter text behind `{incomplete_command}`."
 
 msgid "Incomplete Repeat"
-msgstr "I am either missing `{command}` with `{repeat}` or I need an amount for the `{command}` command on line {line_number}. Try writing `{command}` with `{repeat}` or try writing a number before `{command}`."
+msgstr "Missing `{command}` with `{repeat}` on line {line_number}."
 
 msgid "Invalid"
 msgstr "Command `{invalid_command}` is not a Hedy level {level} command. Try using `{guessed_command}`?"
@@ -1682,7 +1682,7 @@ msgid "suggestion_color"
 msgstr "Try using another color"
 
 msgid "suggestion_note"
-msgstr "Use a note between C0 and B9 or a number between 1 and 70"
+msgstr "Try using a note between C0 and B9 or a number between 1 and 70"
 
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
