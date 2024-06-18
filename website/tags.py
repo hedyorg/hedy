@@ -30,7 +30,6 @@ class TagsModule(WebsiteModule):
         adventure_id = request.args.get("adventure_id")
         adventure = self.db.get_adventure(adventure_id)
         if adventure:
-            adventure = self.db.get_adventure(adventure_id)
             # exclude current adventure's tags
             public_tags = list(filter(lambda t: t["name"] not in adventure.get("tags", []), public_tags))
 
@@ -56,6 +55,7 @@ class TagsModule(WebsiteModule):
         adventure_tags = db_adventure.get("tags", [])
         if tag_name not in adventure_tags:
             adventure_tags.append(tag_name)
+            adventure_tags = sorted(adventure_tags, key=lambda tag: tag)
             self.db.update_adventure(adventure_id, {"tags": adventure_tags})
         else:
             return make_response(gettext("tag_in_adventure"), 400)
