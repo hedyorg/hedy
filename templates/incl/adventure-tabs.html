@@ -34,7 +34,7 @@
         </div>
       </div>
       {# PANES #}
-      <div id="adventures_tab" class="w-full overflow-auto bg-white mb-5 shadow-md">
+      <div id="adventures_tab" data-cy="adventures_tab" class="w-full overflow-auto bg-white mb-5 shadow-md">
         {% for adventure in adventures %}
             <div
                 data-tabtarget="{{adventure.short_name}}" class="
