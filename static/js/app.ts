@@ -916,7 +916,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPressed: boolean, hasSleep: number[], hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, variables: any, showRoles: boolean, isModified: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPressed: boolean, hasSleep: number[], hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, variables: any, showRoles: any, isModified: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
   let skip_faulty_found_errors = false;
