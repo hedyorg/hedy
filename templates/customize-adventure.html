@@ -1,7 +1,7 @@
 {% extends "auth.html" %}
 
 {% block regular_content %}
-<button id='go_back_button' class="back-btn"
+<button id='go_back_button' data-cy='go_back_button' class="back-btn"
 onclick="window.open('/for-teachers', '_self');">
     <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
     <span>{{_('go_back')}}</span>
@@ -20,7 +20,7 @@ onclick="window.open('/for-teachers', '_self');">
                     <div class="flex flex-row items-center mb-4">
                         <label for="name" class="inline-block w-40 text-xl">{{_('name')}}</label>
                         <div class="flex-1">
-                            <input id="custom_adventure_name" autofocus required value="{{ adventure.name }}" class="w-full border-2 bg-gray-100 text-gray-700 py-2 px-4 ltr:pr-8 rtl:pl-8 rounded"{% if 'AdventureX' in adventure.name %}autofocus{% endif %}>
+                            <input id="custom_adventure_name" data-cy="custom_adventure_name" autofocus required value="{{ adventure.name }}" class="w-full border-2 bg-gray-100 text-gray-700 py-2 px-4 ltr:pr-8 rtl:pl-8 rounded"{% if 'AdventureX' in adventure.name %}autofocus{% endif %}>
                         </div>
                     </div>
                     <div class="flex flex-row items-center mb-4">
@@ -55,7 +55,7 @@ onclick="window.open('/for-teachers', '_self');">
                     <div class="flex flex-row items-center mb-4">
                         <label for="custom_adventure_levels" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('available_in')}}</label>
                         <div class="flex-1">
-                            <div class="dropdown dropdown-green rounded relative" id="level_select" data-value="" data-dropdown-initialize>
+                            <div class="dropdown dropdown-green rounded relative" id="level_select" data-cy="level_select" data-value="" data-dropdown-initialize>
                                 <button type="button" class="toggle-button font-semibold rounded inline-flex justify-between 
                                                      appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
                                     onclick="$('#levels_dropdown').slideToggle('medium');">
@@ -121,7 +121,7 @@ onclick="window.open('/for-teachers', '_self');">
                         <label for="search_tags_input" class="inline-block w-40 text-xl">{{_('tags')}}</label>
                         <div class="flex-1">
                             <div class="flex flex-row w-full relative" id="add_tags">
-                                    <input type="text" name="tag" autocomplete="off" placeholder="{{_('tag_input_placeholder')}}" id="search_tags_input"
+                                    <input type="text" name="tag" autocomplete="off" placeholder="{{_('tag_input_placeholder')}}" id="search_tags_input" data-cy="search_tags_input"
                                         class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"
                                         hx-trigger="keyup[keyCode == 13]"
                                         data-autosaved="true"
@@ -133,7 +133,7 @@ onclick="window.open('/for-teachers', '_self');">
                                             on htmx:beforeRequest event.preventDefault() then if my value == '' then detail.xhr.abort() end
                                             on htmx:afterRequest set my value to '' then focus()" 
                                         >
-                                    <button class="green-btn" id="add_adventure_tags"
+                                    <button class="green-btn" data-cy="add_adventure_tags"
                                         hx-trigger="click"
                                         hx-post="/tags/create/{{adventure.id}}"
                                         hx-target="#tags_list"
@@ -192,14 +192,14 @@ onclick="window.open('/for-teachers', '_self');">
                     </div>
                     
                     <div class="mt-2 mb-0 flex flex-row items-center text-center border-gray-500 border p-4 rounded-lg">
-                        <input type="checkbox" name="agree_public" id="agree_public" class="mr-4" {% if adventure.public %}checked{% endif %}>
+                        <input type="checkbox" name="agree_public" id="agree_public" data-cy="agree_public" class="mr-4" {% if adventure.public %}checked{% endif %}>
                         <label for="agree_public" class="text-sm italic w-full">{{_('adventure_terms')}}</label>
                     </div>
                 </div>
             </div>
             <div class="flex flex-row justify-end gap-2 my-4">
-                <button type="button" class="green-btn" id="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">{{_('preview')}}</button>
-                <button type="reset" class="red-btn" id="remove_adventure_button" 
+                <button type="button" class="green-btn" data-cy="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">{{_('preview')}}</button>
+                <button type="reset" class="red-btn" data-cy="remove_adventure_button" 
                   hx-confirm="{{_('delete_adventure_prompt')}}"
                   hx-trigger="click"
                   hx-delete="/for-teachers/customize-adventure/{{adventure.id}}"
