@@ -18,12 +18,12 @@
     {% endif %}
     <noscript>Hedy requires Javascript to be enabled in your browser.</noscript>
     <div id="modal_mask" class="hidden fixed bg-black z-50 w-full h-full opacity-75"></div>
-    <div id="modal_content" class="hidden fixed z-50 p-12 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style="max-height: 80vh; overflow-y: auto;">
+    <div id="modal_content" data-cy="modal_content" class="hidden fixed z-50 p-12 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style="max-height: 80vh; overflow-y: auto;">
        <div id="modal_confirm" data-cy="modal_confirm" class="hidden">
           <div id="modal_confirm_text" class="text-white mb-8 text-xl"></div>
           <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
             <button id="modal_yes_button" data-cy="modal_yes_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('yes')}}</button>
-            <button id="modal_no_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('no')}}</button>
+            <button id="modal_no_button" data-cy="modal_no_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('no')}}</button>
           </div>
        </div>
        <div id="modal_prompt" class="hidden">
@@ -32,7 +32,7 @@
             <input id="modal_prompt_input" data-cy="modal_prompt_input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
             <div class="mt-4 flex flex-row justify-center">
                 <button id="modal_ok_button" data-cy="modal_ok_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('ok')}}</button>
-                <button id="modal_cancel_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
+                <button id="modal_cancel_button" data-cy="modal_cancel_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
             </div>
           </div>
        </div>
@@ -107,7 +107,7 @@
        </div>
         <div id="modal_preview" class="hidden">
           <div class="absolute top-2 right-2">
-              <svg class="fill-current h-8 w-8 text-white cursor-pointer" id="modal_preview_button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <svg class="fill-current h-8 w-8 text-white cursor-pointer" id="modal_preview_button" data-cy="modal_preview_button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <title>Close</title>
               <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
           </svg></div>

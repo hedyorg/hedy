@@ -80,7 +80,8 @@ USERS = dynamo.Table(storage, 'users', 'username',
                          'classes': Optional(SetOf(str)),
                          'teacher': Optional(str),
                          'pair_with_teacher': Optional(int),
-                         'teacher_request': Optional(bool)
+                         'teacher_request': Optional(bool),
+                         'is_super_teacher': Optional(int)
                      }),
                      indexes=[
                          dynamo.Index('email'),
