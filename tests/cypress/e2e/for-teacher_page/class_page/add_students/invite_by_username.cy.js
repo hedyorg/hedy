@@ -11,9 +11,9 @@ teachers.forEach((teacher) => {
     navigateToClass(test_class);
 
     // delete student if in class
-    cy.getDataCy('class_user_table').then(($div) => {
+    cy.getDataCy('adventure_table').then(($div) => {
         if ($div.text().includes(student)){
-          cy.getDataCy('remove_student').first().click();
+          cy.getDataCy(`remove_student_${student}`).click();
           cy.getDataCy('modal_yes_button').click();
         }
     })
@@ -23,7 +23,7 @@ teachers.forEach((teacher) => {
     cy.getDataCy('invite_student').click();
     cy.getDataCy('modal_prompt_input').type(student);
     cy.getDataCy('modal_ok_button').click();
-    cy.wait(500)
+    cy.wait(500);
     login(student, "123456");
 
     cy.getDataCy('user_dropdown').click();
@@ -34,9 +34,9 @@ teachers.forEach((teacher) => {
     loginForTeacher();
     navigateToClass(test_class);
 
-    cy.getDataCy('student_username_cell').should(($div) => {
+    cy.getDataCy(`student_${student}`).should(($div) => {
       const text = $div.text()
-      expect(text).include('student5');
+      expect(text).include(student);
     })
   })
 })
