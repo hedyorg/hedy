@@ -1,0 +1,36 @@
+{% extends "auth.html" %}
+
+{% block regular_content %}
+<h4 class="text-center">All public tags</h4>
+<h6 class="text-center">June 2024: Popularity might not be accurate, because up until now, it wasn't decreased when a tag was deleted.<br><br></h6>
+<div class="program w-full ">
+    <table class="w-full border border-gray-400">
+      <thead>
+        <tr class="bg-blue-300 text-blue-900">
+          <td class="px-2 py-2 text-center" id="name_header">Name</td>
+          <td class="px-2 py-2 text-center" id="popularity_header">Popularity</td>
+          <td class="px-2 py-2 text-white text-center bg-blue-900" id="">Delete</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tag in tags %}
+        <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
+          <td class="name_cell text-center p-2">{{tag.name}}</td>
+          <td class="popularity_cell text-center p-2">{{tag.popularity}}</td>
+          <td class="delete_cell text-center cursor-pointer text-center p-2">
+            <i class="fa fa-trash p-2 bg-red-500 mr-4 rounded-full cursor-pointer" id=""
+              hx-confirm="{{_('delete_tag_prompt')}}"
+              hx-trigger="click"
+              hx-delete="/tags/delete/{{tag.name}}"
+              hx-swap="none"
+              _="on htmx:afterRequest if detail.xhr.status == 200 then window.location.reload()"></i>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if next_page_token %}
+  <button id="next_page_btn" data-page_token="{{next_page_token}}" class="green-btn mt-4">Next page »</button>
+  {% endif %}
+</div>
+{% endblock %}
