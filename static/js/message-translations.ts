@@ -647,7 +647,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "CheckInternet": "בדקו אם חיבור האינטרנט שלכם.ן פועל כראוי.",
     "Connection_error": "לא הצלחנו להגיע לשרת.",
     "Empty_output": "הקוד הזה עובד אבל לא מדפיס שום דבר. הוסיפו פקודת הדפסה לקוד או השתמשו בצב בשביל לקבל פלט.",
-    "Errors_found": "You made a mistake! Don't worry, Hedy is trying to find the mistakes",
+    "Errors_found": "עשית טעות! אל דאגה, אנחנו עדיין נריץ את התוכנית",
     "Execute_error": "משהו השתבש במהלך הרצת התכנית.",
     "Other_error": "אופס! אולי עשינו טעות קטנה.",
     "Program_repair": "הקוד הזה יכול להיות נכון, האם תוכלו לתקן אותו?",
@@ -804,7 +804,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "id": {
-    "CheckInternet": "Cobalah cek apakah internet kamu berjalan dengan baik.",
+    "CheckInternet": "Cek apakah internet anda bekerja dengan baik.",
     "Connection_error": "Kami tidak bisa terhubung dengan server.",
     "Empty_output": "Kode ini berfungsi tetapi tidak mencetak apa pun. Tambahkan print command ke dalam kode Anda atau gunakan turtle untuk mendapatkan hasil keluaran.",
     "Errors_found": "Kamu membuat kesalahan! Tidak perlu khawatir, program tetap berjalan",
