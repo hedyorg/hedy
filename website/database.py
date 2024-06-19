@@ -80,7 +80,8 @@ USERS = dynamo.Table(storage, 'users', 'username',
                          'classes': Optional(SetOf(str)),
                          'teacher': Optional(str),
                          'pair_with_teacher': Optional(int),
-                         'teacher_request': Optional(bool)
+                         'teacher_request': Optional(bool),
+                         'is_super_teacher': Optional(int)
                      }),
                      indexes=[
                          dynamo.Index('email'),
@@ -852,6 +853,15 @@ class Database:
     def update_tag(self, tags_id, data):
         # Update existing tags
         return TAGS.update({"id": tags_id}, data)
+
+    def delete_tag(self, tags_id):
+        TAGS.delete({"id": tags_id})
+
+    def delete_tag_from_adventure(self, tag_name, adventure_id):
+        db_adventure = self.get_adventure(adventure_id)
+        adventure_tags = db_adventure.get("tags", [])
+        adventure_tags = list(filter(lambda name: name != tag_name, adventure_tags))
+        self.update_adventure(adventure_id, {"tags": adventure_tags})
 
     def get_teacher_adventures(self, username):
         return ADVENTURES.get_many({"creator": username})
