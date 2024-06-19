@@ -8,18 +8,18 @@ describe("Able to browse all public adventures and use filters", () => {
     });
 
     it("should have level 1 as the default one", () => {
-        cy.getDataCy('level_select').should('have.attr', 'data-value', '1')
+        cy.get("#level_select > div > div > div.option.selected").should('have.attr', 'data-value', '1')
     })
 
     it("should be able to filter by levels", () => {
         cy.getDataCy('level_select')
             .click()
 
-        cy.get('#level_dropdown').should('be.visible');
+        cy.get('#level_select > div > div.dropdown-menu').should('be.visible');
 
         cy.get("#adventures").should("contain.text", "adventure1")
         cy.get("#adventures").should("contain.text", "adventure2")
-        cy.get("#level_dropdown .option[data-value='2']")
+        cy.get("#level_select > div > div > div.option[data-value='2']")
             .click()
 
         cy.get("#adventures").should("contain.text", "adventure1")
@@ -30,11 +30,11 @@ describe("Able to browse all public adventures and use filters", () => {
         cy.get("#language_select")
             .click()
 
-        cy.get('#lang_dropdown').should('be.visible');
+        cy.get('#language_select > div > div.dropdown-menu').should('be.visible');
 
         cy.get("#adventures").should("contain.text", "adventure1")
         cy.get("#adventures").should("contain.text", "adventure2")
-        cy.get("#lang_dropdown .option[data-value='en']")
+        cy.get("#language_select > div > div > div.option[data-value='English']")
             .click()
 
         cy.get("#adventures").should("contain.text", "adventure1")
@@ -45,11 +45,11 @@ describe("Able to browse all public adventures and use filters", () => {
         cy.get("#tag_select")
             .click()
 
-        cy.get('#tags_dropdown').should('be.visible');
+        cy.get('#tag_select > div > div.dropdown-menu').should('be.visible');
 
         cy.get("#adventures").should("contain.text", "adventure1")
         cy.get("#adventures").should("contain.text", "adventure2")
-        cy.get("#tags_dropdown .option[data-value='test']")
+        cy.get("#tag_select > div > div.dropdown-menu > .option[data-value='test']")
             .click()
 
         cy.get("#adventures").should("contain.text", "adventure1")
