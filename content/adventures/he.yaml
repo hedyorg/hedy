@@ -70,11 +70,11 @@ adventures:
                     This is an example of the `{remove}` command in your story
                 example_code_3: |
                     ```
-                    {print} התיק שלו נעשה כבד מדי.
-                    {print} בתוכו היו בקבוק מים, פנס ולבנה.
-                    תיק {is} מים, פנס, לבנה.
-                    השמט {is}{ask} איזה פריט עלינו להשמיט?
-                    {remove} השמט {from} תיק
+                    {print} His backpack got way too heavy.
+                    {print} Inside were a bottle of water, a flashlight and a brick.
+                    bag {is} water, flashlight, brick
+                    dump {is} {ask} Which item should he dump?
+                    {remove} dump {from} bag
                     ```
             4:
                 story_text: |
@@ -125,9 +125,9 @@ adventures:
                     You can put such repetitions in your story, in this level with `{repeat}`.
                 example_code: |
                     ```
-                    {print} 'הנסיך המשיך לקרוא לעזרה'
-                    {repeat} 5 {times}{print} 'הצילו!'
-                    {print} 'למה אף אחד לא עוזר לי?'
+                    {print} 'The prince kept calling for help'
+                    {repeat} 5 {times} {print} 'Help!'
+                    {print} 'Why is nobody helping me?'
                     ```
             8:
                 story_text: |
