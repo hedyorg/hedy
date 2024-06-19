@@ -170,7 +170,7 @@ class AuthHelper(unittest.TestCase):
 
         Need to log in again to refresh the session.
         """
-        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
+        self.post_data('admin/mark-as-teacher', {'username': self.username, 'is_teacher': True})
         return self.login_user(self.username)
 
     def make_current_user_super_teacher(self):
