@@ -2,79 +2,59 @@ import { loginForTeacher } from "../../tools/login/login.js"
 import { goToProfilePage } from "../../tools/navigation/nav";
 import { createClass, navigateToClass } from "../../tools/classes/class";
 
+const testSecondTeachers = ["teacher2", "teacher3", "teacher4"]
 const secondTeachers = ["teacher2", "teacher3"]
+let className;
 
-// NOTE: These test steps must execute in sequence. Each of them depends on the previous
-// test having executed, in the order they are listed in the file.
-// They cannot be made independent until https://github.com/hedyorg/hedy/issues/4804 is resolved
-describe("Second teachers: invitations", () => {
-  // Before all: create a single class
-  let className;
-  before(() => {
-    loginForTeacher();
-    className = createClass()
-  });
+before(() => {
+  loginForTeacher();
+  className = createClass();
+  navigateToClass(className);
+});
 
-  it(`Invites ${secondTeachers.length} second teachers: by username`, () => {
-    loginForTeacher();
-    navigateToClass(className);
-
-    for (const teacher of secondTeachers) {
-      cy.getDataCy('add_second_teacher').click();
-      cy.getDataCy('modal_prompt_input').type(teacher);
-      cy.getDataCy('modal_ok_button').click();
-    }
-
-    // Check that both invited teachers are in the table
-    for (const teacher of secondTeachers) {
-      cy.getDataCy('invites_block')
-        .contains(teacher);
-    }
-  })
-
-  it(`Tries duplicating ${secondTeachers[0]}'s invitation`, () => {
-    loginForTeacher();
-    navigateToClass(className);
-
+it(`Is able to invite second teachers by username, accept it and check it`, () => {
+  // first add all teachers
+  for (const teacher of testSecondTeachers) {
     cy.getDataCy('add_second_teacher').click();
-    cy.getDataCy('modal_prompt_input').type(secondTeachers[0]);
+    cy.getDataCy('modal_prompt_input').type(teacher);
     cy.getDataCy('modal_ok_button').click();
-
-    cy.getDataCy('modal_alert_container')
-      .contains('pending invitation')
-  })
-
-  it(`Deletes ${secondTeachers[1]}'s invitation`, () => {
-    loginForTeacher();
-    navigateToClass(className);
-
-    cy.getDataCy('invites_block invite_username_cell')
-      .contains(secondTeachers[1])
-      .parent('tr')
-      .find('[data-cy="remove_user_invitation"]')
-      .click();
-
-    cy.getDataCy('modal_confirm modal_yes_button').click();
-
-    // This needs to come before we accept teacher2's invitation, otherwise
-    // after this there are no invites and so this table isn't rendered at all.
     cy.getDataCy('invites_block')
-      .should("not.contain", secondTeachers[1]);
-  });
+    .contains(teacher);
+  }
 
-  it(`Accepts invitation sent to ${secondTeachers[0]}`, () => {
+  //duplicate third teacher
+  cy.getDataCy('add_second_teacher').click();
+  cy.getDataCy('modal_prompt_input').type(testSecondTeachers[2]);
+  cy.getDataCy('modal_ok_button').click();
+  cy.getDataCy('modal_alert_container')
+  .contains('pending invitation')
+
+  //delete third teacher
+  cy.getDataCy('invites_block invite_username_cell')
+  .contains(testSecondTeachers[2])
+  .parent('tr')
+  .find('[data-cy="remove_user_invitation"]')
+  .click();
+  cy.getDataCy('modal_confirm modal_yes_button').click();
+
+  // This needs to come before we accept teacher2's invitation, otherwise
+  // after this there are no invites and so this table isn't rendered at all.
+  cy.getDataCy('invites_block')
+    .should("not.contain", testSecondTeachers[2]);
+
+  //then accept other teachers invitations
+  for (const teacher of secondTeachers) {
     cy.intercept('class/join/**').as('join');
-    loginForTeacher(secondTeachers[0]);
+    loginForTeacher(teacher);
     goToProfilePage();
     cy.getDataCy('join_link').click();
     // Give the Ajax request that gets sent as a result of the click enough time to complete
     cy.wait('@join');
-  })
+  }
 
-  it(`After accepting, the teacher table now contains ${secondTeachers[0]}`, () => {
-    loginForTeacher();
-    navigateToClass(className);
-
-    cy.getDataCy('second_teacher_username_cell').contains(secondTeachers[0]);
-  })
+  //check if teacher table now cotains the teachers
+  loginForTeacher();
+  navigateToClass(className);
+  cy.getDataCy('second_teacher_username_cell').contains(secondTeachers[0]);
+  cy.getDataCy('second_teacher_username_cell').contains(secondTeachers[1]);
 })

@@ -19,7 +19,7 @@
         </div>
         <div class="flex w-full sm:basis-1/2 gap-2">
             <div id="levels" class="flex-1">
-              <custom-select id="level_select" data-label="{{_('select_levels')}}">
+              <custom-select id="level_select" data-cy="level_select" data-label="{{_('select_levels')}}">
                 {% for level in customizations["available_levels"] %}
                     <option {% if selectedLevel|string == level|string %}selected{% endif %}
                         hx-post="/public-adventures/filter?level={{level}}&lang={{selectedLang}}&tag={{selectedTag}}&search={{currentSearch}}"

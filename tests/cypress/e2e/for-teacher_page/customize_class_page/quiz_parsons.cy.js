@@ -1,151 +1,93 @@
 import { loginForStudent, loginForTeacher } from '../../tools/login/login.js'
-import { ensureClass } from "../../tools/classes/class";
+import { ensureClass, openClassView, removeCustomizations, selectLevel } from "../../tools/classes/class";
+import { goToHedyLevel2Page, goToHedyLevel5Page } from '../../tools/navigation/nav.js';
 
-describe('customize class page', () => {
-    beforeEach(() => {
-      loginForTeacher();
-      ensureClass();
-      cy.getDataCy('view_class_link').then($viewClass => {
-        if (!$viewClass.is(':visible')) {
-            cy.getDataCy('view_classes').click();
-        }
+const teachers = ["teacher1", "teacher4"];
+
+teachers.forEach((teacher) => {
+  describe(`customize class page - quiz parsons for ${teacher}`, () => {
+      beforeEach(() => {
+        loginForTeacher(teacher);
+        ensureClass();
+        openClassView("CLASS1");
+
+        // Remove any customizations that already exist to get the class into a predictable state
+        removeCustomizations();
       });
-      cy.getDataCy('view_class_link').first().click(); // Press on view class button
-     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
-      cy.getDataCy('customize_class_button').click(); // Press customize class button
 
-      // Remove any customizations that already exist to get the class into a predictable state
-      // This always throws up a modal dialog
-      cy.intercept('/for-teachers/restore-customizations*').as('restoreCustomizations');      
-      cy.getDataCy('remove_customizations_button').click();
-      cy.getDataCy('modal_yes_button').click();
-      cy.wait('@restoreCustomizations');
-    });
+      it('Is able to remove the puzzle and quiz from level 2 and then add them back', () => {
+        selectLevel('2');
 
-    it('checks that puzzle and quiz exist in list', () => {
-      // validate and then remove the quiz
-      cy.getDataCy('level_1 quiz')
-        .should("exist")
+        // remove the quiz
+        cy.getDataCy('hide_quiz').click();
+        cy.getDataCy('quiz').should("not.exist")
 
-      cy.getDataCy('level_1 parsons')
-        .should("exist")
+        // remove the puzzle
+        cy.getDataCy('hide_parsons').click();
+        cy.getDataCy('parsons').should("not.exist")
 
-    });
+        // add them from available list
+        cy.getDataCy('available_adventures_current_level').select("quiz")
+        cy.getDataCy('available_adventures_current_level').select("parsons")
 
-    it('removes the puzzle and quiz from level 2', () => {
-      // Click on level 2
-      cy.getDataCy("adventures")
-        .select('2')
-        .should('have.value', '2');
+        // Now the order should be quiz as last, then parsons.
+        cy.getDataCy('parsons').should("exist")
+        cy.getDataCy('quiz').last().should("exist");
 
-      // validate and then remove the quiz
-      cy.get('[data-cy="level_2"] div:last input')
-        .should('have.value', 'quiz')
+        // make sure they are visible
+        loginForStudent();
+        goToHedyLevel2Page();
+        cy.getDataCy('quiz').scrollIntoView().should('be.visible');
+        cy.getDataCy('parsons').scrollIntoView().should('be.visible');
+      });
 
-      cy.get('[data-cy="level_2"] div:last [data-cy="hide"]')
-        .click();
+      it('Is able to disable all quizes and parsons', () => {
+        cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
 
-      cy.getDataCy('level_2 quiz')
-        .should("not.exist")
+        cy.getDataCy('hide_quiz')
+            .should("not.be.checked")
+            .click()
 
-      // validate and then remove the puzzle
-      cy.get('[data-cy="level_2"] div:last input')
-        .should('have.value', 'parsons')
+        cy.getDataCy('hide_quiz')
+            .should("be.checked")
 
-      cy.get('[data-cy="level_2"] div:last [data-cy="hide"]')
-        .click();
+        cy.getDataCy('hide_parsons')
+            .should("not.be.checked")
+            .click()
 
-      cy.getDataCy('level_2 parsons')
-        .should("not.exist")
-    });
+        cy.getDataCy('hide_parsons')
+            .should("be.checked")
 
-    it('remove and add puzzle and quiz (with order)', () => {
-      // validate and then remove the quiz
-      cy.get('[data-cy="level_1"] div:last input')
-        .should('have.value', 'quiz')
+        cy.wait('@updateCustomizations');
 
-      cy.get('[data-cy="level_1"] div:last [data-cy="hide"]')
-        .click();
+        selectLevel('3');
+        cy.getDataCy('level_3 quiz')
+          .should("not.exist")
 
-      cy.getDataCy('level_1 quiz')
-        .should("not.exist")
+        cy.getDataCy('level_3 parsons')
+          .should("not.exist")
 
-      // validate and then remove the puzzle
-      cy.get('[data-cy="level_1"] div:last input')
-        .should('have.value', 'parsons')
+        loginForStudent();
+        goToHedyLevel5Page();
+        cy.getDataCy('quiz').should('not.exist');
+        cy.getDataCy('parsons').should('not.exist');
+      });
 
-      cy.get('[data-cy="level_1"] div:last [data-cy="hide"]')
-        .click();
 
-      cy.getDataCy('level_1 parsons')
-        .should("not.exist")
+      it('Is able to hide the explore page', () => {
+        cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
 
-      // add them from available list
-      cy.getDataCy("available_adventures_current_level")
-        .select("quiz")
+        cy.getDataCy('hide_explore')
+            .should("not.be.checked")
+            .click()
 
-      cy.getDataCy("available_adventures_current_level")
-        .select("parsons")
+        cy.getDataCy('hide_explore')
+            .should("be.checked")
 
-      // Now the order should be quiz as last, then parsons.
-      cy.getDataCy('level_1 parsons')
-        .should("not.exist")
-
-      cy.get('[data-cy="level_1"] div:last input')
-        .should('have.value', 'quiz')
-    });
-
-    it.only('disable all quizes', () => {
-      cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
-
-      cy.get("#hide_quiz")
-          .should("not.be.checked")
-          .click()
-
-      cy.get("#hide_quiz")
-          .should("be.checked")
-
-      cy.wait(1000)
-      cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
-
-      cy.reload();
-
-      cy.getDataCy('level_1 quiz')
-        .should("not.exist")
-    });
-
-    it('disable all parsons', () => {
-      cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
-
-      cy.get("#hide_parsons")
-          .should("not.be.checked")
-          .click()
-
-      cy.get("#hide_parsons")
-          .should("be.checked")
-
-      cy.wait(1000)
-      cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
-
-      cy.reload();
-
-      cy.getDataCy('level_1 parsons')
-        .should("not.exist")
-    });
-
-    it('hide explore page', () => {
-      cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
-
-      cy.get("#hide_explore")
-          .should("not.be.checked")
-          .click()
-
-      cy.get("#hide_explore")
-          .should("be.checked")
-
-      cy.wait(1000)
-      cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
-      loginForStudent();
-      cy.get("#explorebutton").should("not.exist")
-    });
+        cy.wait('@updateCustomizations');
+      
+        loginForStudent();
+        cy.getDataCy('explorebutton').should("not.exist")
+      });
+  });
 });

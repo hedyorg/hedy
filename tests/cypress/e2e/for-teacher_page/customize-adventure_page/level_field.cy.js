@@ -1,16 +1,17 @@
 import { loginForTeacher } from '../../tools/login/login.js'
 import { goToEditAdventure } from '../../tools/navigation/nav.js'
 
-describe('Levels Dropdown Select test', () => {
-  const levels = ["3", "5"];
-  for (const level of levels) {
-    for (const teacher of ["teacher1", "teacher4"]) {
-      it(`${teacher} can select level ${level}`, () => {
-        loginForTeacher(teacher);
-        goToEditAdventure();
+const levels = ["3", "5"];
+const teachers = ["teacher1", "teacher4"];
+
+levels.forEach((level) => {
+  teachers.forEach((teacher) => {
+    it(`${teacher} can select level ${level}`, () => {
+      loginForTeacher(teacher);
+      goToEditAdventure();
 
         // Tests level field interaction
-        cy.get("#levels_dropdown")
+        cy.getDataCy('level_select')
           .should('be.visible')
           .should('not.be.disabled')
           .click()

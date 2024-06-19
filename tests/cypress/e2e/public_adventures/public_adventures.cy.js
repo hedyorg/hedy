@@ -12,7 +12,7 @@ describe("Able to browse all public adventures and use filters", () => {
     })
 
     it("should be able to filter by levels", () => {
-        cy.get("#level_select")
+        cy.getDataCy('level_select')
             .click()
 
         cy.get('#level_select > div > div.dropdown-menu').should('be.visible');

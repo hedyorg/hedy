@@ -5,7 +5,7 @@ describe('Modal alert popup test', () => {
     goToLogin();
 
     // Tests hidden modal alert text
-    cy.get('#modal_alert_text')
+    cy.getDataCy('modal_alert_text')
       .should('not.be.visible')
       .should('be.empty');
 
@@ -16,7 +16,7 @@ describe('Modal alert popup test', () => {
       .type('anonexistingpassword123@#$%^!')
     cy.get('#login_button')
        .click()
-    cy.get('#modal_alert_text')
+    cy.getDataCy('modal_alert_text')
       .should('be.visible')
   })
 })
