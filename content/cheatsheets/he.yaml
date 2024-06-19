@@ -101,11 +101,11 @@
     explanation: בדוק פריטים באמצעות `{in}`.
     demo_code: |-
         צבעים_יפים {is} ירוק, צהוב
-        צבע {is} {ask} 'מה {is} הצבע האהוב עליך?'
+        צבע {is} {ask} 'מה הצבע האהוב עליך?'
         {if} צבע {in} צבעים_יפים {print} 'יפה!' {else} {print} 'טוב נו...'
 -   name: '{pressed}'
     explanation: בדוק אם מקש נתון במקלדת כן `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
+    demo_code: '{if} א {is}{pressed}{print} ''לחצת על א!'' {else}{print} ''לחצת על מקש אחר!'''
 6:
 -   name: '{print}'
     explanation: הדפיסו את הטקסט בדיוק עם מירכאות.
@@ -159,12 +159,12 @@
             {turn} 90
             {forward} 50
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    explanation: בדוק האם המקש הנתון במקלדת הוא `{pressed}`.
     demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'You pressed A!'
+        {if} א {is} {pressed}
+            {print} 'לחצת על א'
         {else}
-            {print} 'You pressed another key!'
+            {print} 'לחצת על מקש אחר!'
 9:
 -   name: '{if} עם מספר שורות'
     explanation: קבלו את התשובה למספר שאלות עם `{ask}` ובדקו שהיא נכונה. עכשיו ביכולתנו להדפיס מספר שורות.
@@ -220,7 +220,7 @@
     demo_code: |-
         שם = 'הֶדִי הרובוטית'
         {print} 'שלום ' שם
--   name: מירכאות אחרי בדיקה עם {if}
+-   name: מירכאות אחרי בדיקה עם `{if}`.
     explanation: טקסט במירכאות אחרי `{if}`.
     demo_code: |-
         שם = {ask} 'מה שמך?'
@@ -316,7 +316,7 @@
         firstfruit = fruit[1]
         {print} firstfruit
 -   name: Get a random item from a list
-    explanation: To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!
+    explanation: כדי לקבל פריט רנדומאלי מרשימה אנחנו משתמשים ב{random} כך ש - פירות[{random}] פירושו, קבל פריט רנדומאלי מרשימת הפירות!
     demo_code: |-
         fruit = ['banana', 'apple', 'cherry']
         random_fruit = fruit[random]
