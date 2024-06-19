@@ -1,6 +1,5 @@
 import { modal } from './modal';
 import { showAchievements, theKeywordLanguage } from "./app";
-import { markUnsavedChanges, clearUnsavedChanges, hasUnsavedChanges } from './browser-helpers/unsaved-changes';
 import { ClientMessages } from './client-messages';
 import DOMPurify from 'dompurify'
 import { startTeacherTutorial } from './tutorials/tutorial';
@@ -59,7 +58,7 @@ export function rename_class(id: string, class_name_prompt: string) {
 }
 
 export function duplicate_class(id: string, teacher_classes: string[], second_teacher_prompt: string, prompt: string, defaultValue: string = '') {
-  if (teacher_classes){
+  if (teacher_classes && !defaultValue){
     modal.confirm(second_teacher_prompt, function () {
       apiDuplicateClass(id, prompt, true, defaultValue);
     }, function () {
@@ -429,7 +428,6 @@ export function save_customizations(class_id: string) {
           showAchievements(response.achievement, false, "");
       }
       modal.notifySuccess(response.success);
-      clearUnsavedChanges();
       $('#remove_customizations_button').removeClass('hidden');
     }).fail(function (err) {
       modal.notifyError(err.responseText);
@@ -472,7 +470,6 @@ export function restore_customization_to_default(prompt: string) {
 }
 
 export function enable_level(level: string) {
-    markUnsavedChanges();
     if ($('#enable_level_' + level).is(':checked')) {
       $('#opening_date_level_' + level).prop('disabled', false)
                                       .attr('type', 'text')
@@ -510,19 +507,31 @@ export function setDateLevelInputColor(level: string) {
 }
 
 export function add_account_placeholder() {
-    let row = $('#account_row_unique').clone();
-    row.removeClass('hidden');
-    row.attr('id', "");
-    // Set all inputs except class to required
-    row.find(':input').each(function() {
-       if ($(this).prop('id') != 'classes') {
-           $(this).prop('required', true);
-       }
-    });
-    // Append 5 rows at once
-    for (let x = 0; x < 5; x++) {
-        row.clone().appendTo("#account_rows_container");
-    }
+  // Get the hidden row template
+  const rowTemplate = $('#account_row_unique').clone();
+  rowTemplate.removeClass('hidden');
+  rowTemplate.attr('id', "");
+
+  // Function to update data-cy attributes
+  function updateDataCyAttributes(row: JQuery<HTMLElement>, index: number) {
+      row.find('[data-cy]').each(function() {
+          const currentCy = $(this).attr('data-cy');
+          if (currentCy) {
+              const newCy = currentCy.replace(/_\d+$/, `_${index}`);
+              $(this).attr('data-cy', newCy);
+          }
+      });
+  }
+
+  // Get the current number of rows
+  const existingRowsCount = $('.account_row').length;
+
+  // Append 5 rows at once
+  for (let x = 0; x < 5; x++) {
+      const newRow = rowTemplate.clone();
+      updateDataCyAttributes(newRow, existingRowsCount + x + 1);
+      newRow.appendTo("#account_rows_container");
+  }
 }
 
 export function generate_passwords() {
@@ -694,24 +703,8 @@ export interface InitializeCustomizeClassPageOptions {
 
 export function initializeCustomizeClassPage(options: InitializeCustomizeClassPageOptions) {
   $(document).ready(function(){
-      // Use this to make sure that we return a prompt when a user leaves the page without saving
-      $( "input" ).on('change', function() {
-        markUnsavedChanges();
-      });
-
       $('#back_to_class').on('click', () => {
-        function backToClass() {
-            window.location.href = `/for-teachers/class/${options.class_id}`;
-        }
-
-        if (hasUnsavedChanges()) {
-            modal.confirm(ClientMessages.unsaved_class_changes, () => {
-                clearUnsavedChanges();
-                backToClass();
-            });
-        } else {
-            backToClass();
-        }
+        window.location.href = `/for-teachers/class/${options.class_id}`;
       });
 
       $('[id^=opening_date_level_]').each(function() {

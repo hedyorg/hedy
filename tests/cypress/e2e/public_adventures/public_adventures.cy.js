@@ -8,11 +8,11 @@ describe("Able to browse all public adventures and use filters", () => {
     });
 
     it("should have level 1 as the default one", () => {
-        cy.get("#level_select").should('have.attr', 'data-value', '1')
+        cy.getDataCy('level_select').should('have.attr', 'data-value', '1')
     })
 
     it("should be able to filter by levels", () => {
-        cy.get("#level_select")
+        cy.getDataCy('level_select')
             .click()
 
         cy.get('#level_dropdown').should('be.visible');
