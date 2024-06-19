@@ -557,6 +557,25 @@ class TestsLevel2(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected)
 
+    def test_sleep_micro_bit_argument(self):
+        code = "sleep 2"
+        expected = "sleep(2000)"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=18, microbit=True)
+
+    def test_sleep_micro_bit_no_argument(self):
+        code = "sleep"
+        expected = "sleep(1000)"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=18, microbit=True)\
+
+
+    def test_sleep_micro_bit_variable_argument(self):
+        code = "duration is 2\nsleep duration"
+        expected = "duration = 2\nsleep(duration * 1000)"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=18, microbit=True)
+
     def test_sleep_with_default_number(self):
         code = "sleep 1"
         expected = HedyTester.sleep_command_transpiled('"1"')
@@ -653,6 +672,12 @@ class TestsLevel2(HedyTester):
         expected = "naam = 'Felienne'"
 
         self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
+
+    def test_assign_micro_bit(self):
+        code = "naam is Felienne"
+        expected = "naam = 'Felienne'"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=5, unused_allowed=True, microbit=True)
 
     def test_assign_catalan_var_name(self):
         code = textwrap.dedent("""\
@@ -878,7 +903,7 @@ class TestsLevel2(HedyTester):
             exception=hedy.exceptions.IncompleteCommandException
         )
 
-# music tests
+    # music tests
 
     def test_play(self):
         code = textwrap.dedent("""\
