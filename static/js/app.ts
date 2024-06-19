@@ -672,7 +672,7 @@ export async function showAchievements(achievements: Achievement[] | undefined, 
       $('#achievement_pop_up').removeAttr('reload');
       $('#achievement_pop_up').removeAttr('redirect');
       location.reload();
-     }, achievements.length * 6000);
+     }, achievements.length * 3000);
   }
   if (redirect) {
     $('#achievement_pop_up').attr('redirect', redirect);
@@ -680,7 +680,7 @@ export async function showAchievements(achievements: Achievement[] | undefined, 
       $('#achievement_pop_up').removeAttr('reload');
       $('#achievement_pop_up').removeAttr('redirect');
       window.location.pathname = redirect;
-     }, achievements.length * 6000);
+     }, achievements.length * 3000);
   }
 }
 
@@ -692,11 +692,11 @@ function showAchievement(achievement: Achievement) {
         $('#achievement_pop_up').fadeIn(1000, function () {
           setTimeout(function(){
             $('#achievement_pop_up').fadeOut(1000);
-           }, 4000);
+           }, 1000);
         });
         setTimeout(()=>{
             resolve();
-        ;} , 6000
+        ;} , 1000
         );
     });
 }
@@ -759,7 +759,6 @@ function updateSelectOptions(selectName: string) {
         } else if (!optionsArray.includes(text)){
           optionsArray.push(text);
           }
-      console.log(optionsArray);
   });
 
   if (selectName == 'level'){
@@ -785,10 +784,9 @@ export async function delete_program(id: string, prompt: string) {
     updateSelectOptions('adventure');
     // this function decreases the total programs saved
     updateProgramCount();
-    const response = await postJsonWithAchievements('/programs/delete', { id });
+    const response = await postJsonWithAchievements('/programs/delete', { id });    
     showAchievements(response.achievement, true, "");
     // issue request on the Bar component.
-    console.log("resp", response)
     modal.notifySuccess(response.message);
   });
 }
@@ -1496,7 +1494,7 @@ function createModal(level:number ){
   modal.repair(editor, 0, title);
 }
 
-export function toggleDevelopersMode(event='click', enforceDevMode: boolean) {
+export function setDevelopersMode(event='click', enforceDevMode: boolean) {
   let enable: boolean = false;
   switch (event) {
     case 'load':
@@ -1508,17 +1506,21 @@ export function toggleDevelopersMode(event='click', enforceDevMode: boolean) {
     case 'click':
       // Toggled
       enable = $('#developers_toggle').prop('checked');
-      window.localStorage.setItem('developer_mode', `${enable}`);
       if (enable) {
         pushAchievement("lets_focus");
       }
       break;
   }
+  window.localStorage.setItem('developer_mode', `${enable}`)
+  toggleDevelopersMode()
+}
 
+function toggleDevelopersMode() {
+  const enable = window.localStorage.getItem('developer_mode') === 'true';
   // DevMode hides the tabs and makes resizable elements track the appropriate size.
   // (Driving from HTML attributes is more flexible on what gets resized, and avoids duplicating
   // size literals between HTML and JavaScript).
-  $('#adventures').toggle(!enable);
+  $('#adventures').toggle(!enable || currentTab === 'quiz' || currentTab === 'parsons');
   // Parsons dont need a fixed height
   if (currentTab === 'parsons') return
   $('[data-devmodeheight]').each((_, el) => {
@@ -1852,17 +1854,13 @@ function reconfigurePageBasedOnTab() {
   resetWindow();
 
   updatePageElements();
+  toggleDevelopersMode();
   if (currentTab === 'parsons') {
     loadParsonsExercise(theLevel, 1);
     // remove the fixed height from the editor
     document.getElementById('code_editor')!.style.height = '100%'
     document.getElementById('code_output')!.style.height = '100%'
     return;
-  } else {
-    $('[data-devmodeheight]').each((_, el) => {
-      const heights = $(el).data('devmodeheight').split(',') as string[];
-      $(el).css('height', heights[0]);
-    });
   }
 
   const adventure = theAdventures[currentTab];

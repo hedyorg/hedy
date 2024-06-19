@@ -48,10 +48,10 @@ from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, st
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
-                     translating, tags, surveys, public_adventures, user_activity, feedback)
-from website.auth import (current_user, hide_explore, is_admin, is_teacher, is_second_teacher, has_public_profile,
+                     translating, tags, surveys, super_teacher, public_adventures, user_activity, feedback)
+from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, is_super_teacher, has_public_profile,
                           login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
-                          forget_current_user)
+                          forget_current_user, hide_explore)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 
@@ -326,7 +326,7 @@ def initialize_session():
 
     g.user = current_user()
     querylog.log_value(session_id=utils.session_id(), username=g.user['username'],
-                       is_teacher=is_teacher(g.user), is_admin=is_admin(g.user))
+                       is_teacher=is_teacher(g.user), is_admin=is_admin(g.user), is_super_teacher=is_admin(g.user))
 
 
 if os.getenv('IS_PRODUCTION'):
@@ -439,6 +439,7 @@ def enrich_context_with_user_info():
     data = {'username': user.get('username', ''),
             'is_teacher': is_teacher(user), 'is_second_teacher': is_second_teacher(user),
             'is_admin': is_admin(user), 'has_public_profile': has_public_profile(user),
+            'is_super_teacher': is_super_teacher(user),
             'hide_explore': hide_explore(g.user)}
     return data
 
@@ -726,6 +727,12 @@ def prepare_files():
     threader = textwrap.dedent("""
         import time
         from turtlethread import Turtle
+        def int_with_error(value, error_message):
+            try:
+                return int(value)
+            except ValueError:
+                raise ValueError(error_message.format(value))
+
         t = Turtle()
         t.left(90)
         with t.running_stitch(stitch_length=20):
@@ -750,7 +757,6 @@ def prepare_files():
         for file in [x for x in files if x[:len(filename)] == filename and x[-3:] != 'zip']:
             zip_file.write('machine_files/' + file)
     zip_file.close()
-
     return make_response({'filename': filename}, 200)
 
 
@@ -787,7 +793,6 @@ def generate_microbit_file():
         save_transpiled_code_for_microbit(transpile_result)
         return make_response({'filename': 'Micro-bit.py', 'microbit': True}, 200)
     else:
-        # TODO
         return make_response({'message': 'Microbit feature is disabled'}, 403)
 
 
@@ -798,14 +803,30 @@ def save_transpiled_code_for_microbit(transpiled_python_code):
     if not os.path.exists(folder):
         os.makedirs(folder)
     with open(filepath, 'w') as file:
-        custom_string = "from microbit import *\nwhile True:"
+        custom_string = "from microbit import *\nimport random"
         file.write(custom_string + "\n")
+        # file.write(transpiled_python_code + "\n")
 
-        # Add space before every display.scroll call
-        indented_code = transpiled_python_code.replace("display.scroll(", "    display.scroll(")
+        # Splitting strings to new lines, so it can be properly displayed by Micro:bit
+        processed_code = ""
+        lines = transpiled_python_code.split('\n')
+        for line in lines:
+            if "display.scroll" in line:
+                # Extract the content inside display.scroll()
+                match = re.search(r"display\.scroll\((.*)\)", line)
+                if match:
+                    content = match.group(1)
+                    # Split the content by quoted strings and variables
+                    parts = re.findall(r"('[^']*')|([^',]+)", content)
+                    for part in parts:
+                        part = part[0] or part[1]
+                        if part.strip():
+                            processed_code += f"display.scroll({part.strip()})\n"
+            else:
+                processed_code += line + "\n"
 
-        # Append the indented transpiled code
-        file.write(indented_code)
+        # Write the processed code
+        file.write(processed_code)
 
 
 @app.route('/download_microbit_files/', methods=['GET'])
@@ -826,7 +847,6 @@ def convert_to_hex_and_download():
 
         return send_file(os.path.join(micro_bit_directory, "micropython.hex"), as_attachment=True)
     else:
-        # TODO
         return make_response({'message': 'Microbit feature is disabled'}, 403)
 
 
@@ -2075,6 +2095,11 @@ def join():
                            current_page='join', content=join_translations)
 
 
+@app.route('/kerndoelen')
+def poster():
+    return send_from_directory('content/', 'kerndoelenposter.pdf')
+
+
 @app.route('/start')
 def start():
     start_translations = hedyweb.PageTranslations('start').get_page_translations(g.lang)
@@ -2598,9 +2623,10 @@ def update_public_profile(user):
             body['tags'].append('admin')
 
     DATABASE.update_public_profile(user['username'], body)
+    response = {"message": gettext("public_profile_updated")}
     if achievement:
-        utils.add_pending_achievement({"achievement": achievement})
-    return make_response(gettext("public_profile_updated"), 200)
+        response["achievement"] = achievement
+    return response
 
 
 @app.route('/translating')
@@ -2775,6 +2801,7 @@ app.register_blueprint(programs.ProgramsModule(DATABASE, ACHIEVEMENTS, STATISTIC
 app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(classes.ClassModule(DATABASE, ACHIEVEMENTS))
 app.register_blueprint(classes.MiscClassPages(DATABASE, ACHIEVEMENTS))
+app.register_blueprint(super_teacher.SuperTeacherModule(DATABASE))
 app.register_blueprint(admin.AdminModule(DATABASE))
 app.register_blueprint(achievements.AchievementsModule(ACHIEVEMENTS))
 app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))

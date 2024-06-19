@@ -19,6 +19,7 @@ from website.flask_helpers import render_template
 from website.auth import (
     is_admin,
     is_teacher,
+    is_super_teacher,
     requires_login,
     requires_teacher,
     store_new_student_account,
@@ -756,6 +757,7 @@ class ForTeachersModule(WebsiteModule):
             "level_thresholds": {},
             "sorted_adventures": db_adventures,
             "restored_by": user["username"],
+            "updated_by": user["username"]
         }
 
         self.db.update_class_customizations(customizations)
@@ -913,9 +915,10 @@ class ForTeachersModule(WebsiteModule):
         self.db.update_class_customizations(customizations)
 
         achievement = self.achievements.add_single_achievement(user["username"], "my_class_my_rules")
+        response = {"success": gettext("class_customize_success")}
         if achievement:
-            utils.add_pending_achievement({"achievement": achievement})
-        return make_response(gettext("class_customize_success"), 200)
+            response["achievement"] = achievement
+        return make_response(response, 200)
 
     @route("/create-accounts/<class_id>", methods=["GET"])
     @requires_teacher
@@ -1152,7 +1155,7 @@ class ForTeachersModule(WebsiteModule):
             "creator": user["username"],
             "name": body["name"],
             "classes": body["classes"],
-            "level": body["levels"][0],  # TODO: this should be removed gradually.
+            "level": int(body["levels"][0]),  # TODO: this should be removed gradually.
             "levels": body["levels"],
             "content": body["content"],
             "public": 1 if body["public"] else 0,
@@ -1185,16 +1188,19 @@ class ForTeachersModule(WebsiteModule):
                 elif class_id not in current_classes:
                     self.add_adventure_to_class_level(user, class_id, body["id"], level, False)
 
-        return make_response(gettext("adventure_updated"), 200)
+        return make_response({"success": gettext("adventure_updated")}, 200)
 
     @route("/customize-adventure/<adventure_id>", methods=["DELETE"])
+    @route("/customize-adventure/<adventure_id>/<owner>", methods=["DELETE"])
     @requires_teacher
-    def delete_adventure(self, user, adventure_id):
+    def delete_adventure(self, user, adventure_id, owner=None):
         adventure = self.db.get_adventure(adventure_id)
         if not adventure:
             return utils.error_page(error=404, ui_message=gettext("retrieve_adventure_error"))
         elif adventure["creator"] != user["username"]:
-            return make_response(gettext("unauthorized"), 401)
+            # in case the current user is a super teacher, they may delete any adventure.
+            if not (is_super_teacher(user) and adventure["creator"] == owner):
+                return make_response(gettext("unauthorized"), 401)
 
         self.db.delete_adventure(adventure_id)
         tags = self.db.read_tags(adventure.get("tags", []))
@@ -1279,7 +1285,7 @@ class ForTeachersModule(WebsiteModule):
             "date": utils.timems(),
             "creator": user["username"],
             "name": name,
-            "classes": [class_id],
+            "classes": [class_id] if class_id is not None else [],
             "level": int(level),
             "levels": [level],
             "content": "",

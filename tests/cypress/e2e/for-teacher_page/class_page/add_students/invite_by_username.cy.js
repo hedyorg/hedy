@@ -1,16 +1,14 @@
-import {loginForTeacher, logout, login} from '../../tools/login/login.js'
+import {loginForTeacher, logout, login} from '../../../tools/login/login.js'
+import { navigateToClass } from "../../../tools/classes/class.js";
 
-it('Is able to add student by name', () => {
+const teachers = ["teacher1", "teacher4"];
+const student = 'student5';
+const test_class = 'CLASS1';
+
+teachers.forEach((teacher) => {
+  it(`Is able to add student by name for ${teacher}`, () => {
     loginForTeacher();
-    let student = 'student5'
-
-    cy.getDataCy('view_class_link').then($viewClass => {
-      if (!$viewClass.is(':visible')) {
-          cy.getDataCy('view_classes').click();
-      }
-    });
-    cy.getDataCy('view_class_link').first().click();
-    cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
+    navigateToClass(test_class);
 
     // delete student if in class
     cy.getDataCy('class_user_table').then(($div) => {
@@ -20,15 +18,12 @@ it('Is able to add student by name', () => {
         }
     })
 
-    cy.wait(500);
-
     cy.getDataCy('add_student').click();
 
     cy.getDataCy('invite_student').click();
     cy.getDataCy('modal_prompt_input').type(student);
     cy.getDataCy('modal_ok_button').click();
-
-    cy.wait(500);
+    
     login(student, "123456");
 
     cy.getDataCy('user_dropdown').click();
@@ -37,16 +32,11 @@ it('Is able to add student by name', () => {
 
     logout();
     loginForTeacher();
-
-    cy.getDataCy('view_class_link').then($viewClass => {
-      if (!$viewClass.is(':visible')) {
-          cy.getDataCy('view_classes').click();
-      }
-    });
-    cy.getDataCy('view_class_link').first().click();
+    navigateToClass(test_class);
 
     cy.getDataCy('student_username_cell').should(($div) => {
       const text = $div.text()
       expect(text).include('student5');
     })
+  })
 })
