@@ -8,6 +8,7 @@ import { initializeTranslation } from './lezer-parsers/tokens';
 import { CustomWindow } from './custom-window';
 import { addCurlyBracesToCode, addCurlyBracesToKeyword } from './adventure';
 import { autoSave } from './autosave';
+import { Chart } from 'chart.js';
 
 declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
@@ -105,6 +106,25 @@ function apiDuplicateClass(id: string, prompt: string, second_teacher: boolean, 
           }
     }).fail(function(err) {
       return modal.notifyError(err.responseText);
+    });
+  });
+}
+
+export function delete_class(id: string, prompt: string) {
+  modal.confirm(prompt, function () {
+    $.ajax({
+      type: 'DELETE',
+      url: '/class/' + id,
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function (response) {
+      if (response.achievement) {
+        showAchievements(response.achievement, true, '');
+      } else {
+        location.reload();
+      }
+    }).fail(function (err) {
+      modal.notifyError(err.responseText);
     });
   });
 }
@@ -343,6 +363,21 @@ export function preview_adventure() {
     }).fail(function (err) {
       modal.notifyError(err.responseText);
     });
+}
+
+export function delete_adventure(adventure_id: string, prompt: string) {
+  modal.confirm(prompt, function () {
+    $.ajax({
+      type: 'DELETE',
+      url: '/for-teachers/customize-adventure/' + adventure_id,
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function () {
+      window.location.href = '/for-teachers';
+    }).fail(function (err) {
+      modal.notifyError(err.responseText);
+    });
+  });
 }
 
 export function change_password_student(username: string, enter_password: string, password_prompt: string) {
@@ -729,21 +764,159 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
  */
 export interface InitializeClassOverviewPageOptions {
   readonly page: 'class-overview';
+  readonly graph_students: student[];
+  readonly level: number;
 }
 
 export function initializeClassOverviewPage(_options: InitializeClassOverviewPageOptions) {
-  $('.attribute').change(function() {
+  $('.attribute').change(function () {
     const attribute = $(this).attr('id');
-    if(!(this as HTMLInputElement).checked) {
-        $('#' + attribute + '_header').hide();
-        $('.' + attribute + '_cell').hide();
+    if (!(this as HTMLInputElement).checked) {
+      $('#' + attribute + '_header').hide();
+      $('.' + attribute + '_cell').hide();
     } else {
-        $('#' + attribute + '_header').show();
-        $('.' + attribute + '_cell').show();
+      $('#' + attribute + '_header').show();
+      $('.' + attribute + '_cell').show();
     }
   });
+
+  initializeGraph()
 }
 
+interface InitializeGraphOptions {
+  readonly graph_students: student[];
+  readonly level: number
+}
+
+interface student { 
+  adventures_tried: number,
+  number_of_errors: number,
+  successful_runs: number,
+  username: string,
+}
+
+interface dataPoint {
+  x: number,
+  y: number,
+  r: number,
+  successful_runs: number,
+  name: string
+}
+
+export function initializeGraph() {
+  const graphElement = document.getElementById('adventure_bubble') as HTMLCanvasElement
+  if (graphElement === undefined || graphElement === null) return;
+  const graphData: InitializeGraphOptions = JSON.parse(graphElement.dataset['graph'] || '') ;
+  
+  const students = graphData.graph_students
+  let data: dataPoint[] = students.map((student: student) => {    
+    let radius;
+    
+    if (student.successful_runs < 7)        radius = 7;
+    else if (student.successful_runs > 300) radius = 300;
+    else                                    radius = student.successful_runs;
+
+    return {
+      x: student.adventures_tried,
+      y: student.number_of_errors,
+      r: radius,
+      successful_runs: student.successful_runs,
+      name: student.username
+    }
+  });
+  new Chart(
+    graphElement,
+    {
+      type: 'bubble',
+      data: {
+        datasets: [
+          {
+            backgroundColor: '#c9dded',
+            borderColor: '#35a4ff',
+            data: data,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        onHover: (event, chartElement) => {
+          //@ts-ignore
+          event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default'
+        },
+        interaction: {
+          mode: 'point'
+        },
+        onClick: (_e, activePoints, chart) => {
+          if (activePoints.length === 0) return;
+          const item: dataPoint = chart.data.datasets[0].data[activePoints[0].index] as dataPoint
+          for(const point of activePoints) {
+            console.log(chart.data.datasets[0].data[point.index])
+          }
+          document.getElementById('programs_container')?.classList.remove('hidden')
+          htmx.ajax(
+            'GET',
+            `/for-teachers/get_student_programs/${item.name}`,
+            '#programs_container'
+          )
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: ClientMessages['adventures_tried'],
+              font: {
+                size: 15
+              }
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: ClientMessages['errors'],
+              font: {
+                size: 15
+              }
+            }
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: ClientMessages['graph_title'].replace('{level}', graphData.level.toString()),
+            font: {
+              size: 19
+            }
+          },
+          legend: {
+            display: false
+          },
+          tooltip: {
+            displayColors: false,
+            callbacks: {
+              title: (tooltipItems) => {
+                // A single point can have 2 data points associated.
+                const names = tooltipItems.map((currentValue) => {
+                  const item: dataPoint = currentValue.dataset.data[currentValue.dataIndex] as dataPoint
+                  return item.name
+                })
+                return names.join(', ')
+              },
+              label: (tooltipItem) => {
+                const item: dataPoint = tooltipItem.dataset.data[tooltipItem.dataIndex] as dataPoint
+                return [
+                  ClientMessages['adventures_completed'].replace('{number_of_adventures}', item.x.toString()),
+                  ClientMessages['number_of_errors'].replace('{number_of_errors}', item.y.toString()),
+                  ClientMessages['successful_runs'].replace('{successful_runs}', item.successful_runs.toString())
+                ]
+              }
+            }
+          }
+        }
+      },
+    }
+  );
+}
 
 export function invite_support_teacher(requester: string) {
   modal.prompt(`Invite a teacher to support ${requester}.`, '', function (username) {
