@@ -534,7 +534,6 @@ class TestsLevel1(HedyTester):
         )
 
     def test_turn_ar(self):
-        # doesn't translate, I don't know why!!
         code = "استدر يسار"
         expected = "t.left(90)"
 
@@ -864,7 +863,7 @@ class TestsLevel1(HedyTester):
         {HedyTester.indent(
             HedyTester.forward_transpiled(50, self.level),
             8, True)
-        }
+         }
         answer = input('Wat is je lievelingskleur')
         print('je lievelingskleur is '+answer)""")
 

@@ -228,10 +228,10 @@ class TestsLevel16(HedyTester):
             "lijst = [1, 2, 3]",
             HedyTester.list_access_transpiled('lijst[int(1)-1]'),
             HedyTester.list_access_transpiled('lijst[int(2)-1]'),
-            f"optellen = {self.addition_transpiled('lijst[int(1)-1]','lijst[int(2)-1]')}",
+            f"optellen = {self.addition_transpiled('lijst[int(1)-1]', 'lijst[int(2)-1]')}",
             HedyTester.list_access_transpiled('lijst[int(3)-1]'),
             f"""\
-            optellen = {self.addition_transpiled('optellen','lijst[int(3)-1]')}
+            optellen = {self.addition_transpiled('optellen', 'lijst[int(3)-1]')}
             print(f'''{{optellen}}''')""")
 
         self.multi_level_tester(
@@ -856,4 +856,34 @@ class TestsLevel16(HedyTester):
             unused_allowed=True,
             expected=expected,
             max_level=17
+        )
+
+    #
+    # boolean values
+    #
+    def test_assign_list_var_boolean(self):
+        code = "cond = [True, False, true, false]"
+        expected = "cond = [True, False, True, False]"
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            unused_allowed=True
+        )
+
+    @parameterized.expand(HedyTester.booleans)
+    def test_cond_boolean(self, value, expected):
+        code = textwrap.dedent(f"""\
+            cond = {value}
+            if cond is {value}
+                sleep""")
+        expected = textwrap.dedent(f"""\
+            cond = {expected}
+            if convert_numerals('Latin', cond) == convert_numerals('Latin', '{expected}'):
+              time.sleep(1)""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            translate=False
         )

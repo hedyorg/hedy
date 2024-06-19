@@ -3793,11 +3793,11 @@ levels:
             code: |-
                 {print} 'The book raffle will start soon'
                 {print} 'Get your tickets now!'
-                {books} = ['Narnia', 'The Hobbit', 'Oliver Twist', 'Harry Potter', 'Green eggs and ham']
+                books = ['Narnia', 'The Hobbit', 'Oliver Twist', 'Harry Potter', 'Green eggs and ham']
                 people = {ask} 'How many raffle tickets are sold?'
-                list_of_raffle_numbers = [1, 2]
+                list_of_numbers = [1, 2]
                 {for} i {in} {range} 3 {to} people
-                    {add} i {to} list_of_raffle_numbers
+                    {add} i {to} list_of_numbers
                 {for} i {in} {range} 1 {to} 5
             mp_choice_options:
             -   option: |-
@@ -4027,7 +4027,7 @@ levels:
             code: |-
                 name = {ask} 'What is your name?'
                 {if} name == 'Hedy':
-                password = {ask} 'What is your password?'
+                    password = {ask} 'What is your password?'
                     {if} password =='turtle123':
                         {print} 'Yey'
                     {else}:

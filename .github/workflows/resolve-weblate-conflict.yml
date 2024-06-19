@@ -57,10 +57,20 @@ jobs:
         python3 -m pip install --upgrade pip
         pip3 install -r requirements.txt
 
+    - name: Install Weblate Client
+      run: pip install wlc
+    - name: Prepare client config
+      run: |
+        echo '[weblate]' >> .weblate
+        echo 'url = https://hosted.weblate.org/api/' >> .weblate
+        echo 'translation = hedy' >> .weblate
+        echo '[keys]' >> .weblate
+        echo 'https://hosted.weblate.org/api/ = ${{ secrets.WEBLATE_API_KEY }}' >> .weblate
+
     #----------------------------------------------------------------------
     #  Set up cache so that running snippet tests is somewhat cheap
     - name: Calculate hedy cache key
-      run: "echo value=$(ls -1 hedy.py grammars/* | sort | xargs tail -n 99999999 | sha256sum | cut -f 1 -d ' ') >> $GITHUB_OUTPUT"
+      run: "echo value=$(ls -1 hedy.py hedy_*.py grammars/* | sort | xargs tail -n 99999999 | sha256sum | cut -f 1 -d ' ') >> $GITHUB_OUTPUT"
       id: hedy_cache_key
     - name: Cache hedy test runs
       uses: actions/cache@v3
@@ -100,7 +110,11 @@ jobs:
     # Weblate will be unlocked when the PR is merged.
     - name: Prevent updates and merge conflicts until merged
       run: |
-        wlc lock
+        # Have to lock each component individually. Not in the UI, but using the CLI we do.
+        for component in glossary adventures keywords achievements quizzes commands client-messages web-texts webpages parsons tutorials slides; do
+          wlc lock hedy/$component
+        done
+
         # On our repo, 'wlc reset' consistently times out the TCP connection after waiting
         # for 5 minutes. The actual reset does seem to work, so we just don't wait for the
         # command to finish, otherwise all our workflow executions show errors.

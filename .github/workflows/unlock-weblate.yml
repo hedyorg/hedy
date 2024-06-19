@@ -4,7 +4,7 @@
 # We do this to avoid conflicts.
 name: Unlock Weblate when PR is closed
 on:
-  pull_request:
+  pull_request_target:
     types:
       - closed
 
@@ -30,4 +30,7 @@ jobs:
         echo '[keys]' >> .weblate
         echo 'https://hosted.weblate.org/api/ = ${{ secrets.WEBLATE_API_KEY }}' >> .weblate
     - run: |
-        wlc unlock
+        # Have to lock each component individually. Not in the UI, but using the CLI we do.
+        for component in glossary adventures keywords achievements quizzes commands client-messages web-texts webpages parsons tutorials slides; do
+          wlc unlock hedy/$component
+        done

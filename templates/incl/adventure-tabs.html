@@ -13,7 +13,7 @@
         {% endmacro %}
 
         <div class="overflow-x-auto overflow-y-hidden px-2 pt-2">
-        <div class="flex flex-row w-min" id="adventures-buttons">
+        <div class="flex flex-row w-min" id="adventures_buttons">
             {% for adventure in adventures %}
                 {% if adventure.is_teacher_adventure %}
                     {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'teacher_tab', loop.index ) }}
@@ -34,7 +34,7 @@
         </div>
       </div>
       {# PANES #}
-      <div id="adventures-tab" class="w-full overflow-auto bg-white mb-5 shadow-md">
+      <div id="adventures_tab" data-cy="adventures_tab" class="w-full overflow-auto bg-white mb-5 shadow-md">
         {% for adventure in adventures %}
             <div
                 data-tabtarget="{{adventure.short_name}}" class="
@@ -43,12 +43,12 @@
                 >
               <div class="lg:flex lg:flex-row {% if adventure.is_teacher_adventure %}teacher-adv{% endif %}">
                     <div class="w-full {% if adventure.example_code or adventure.is_teacher_adventure %}lg:w-1/2 {% endif %} p-2 ltr:mr-2 rtl:ml-2">
-                        {{ adventure.text|commonmark }}
+                        {% if adventure.is_teacher_adventure %}{{ adventure.text|safe }}{% else %}{{ adventure.text|commonmark }}{% endif %}
                     </div>
                   {% if adventure.example_code %}
                       <div class="border"></div>
                       <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
-                          {{ adventure.example_code|commonmark }}
+                        {% if adventure.is_teacher_adventure %}{{ adventure.example_code|safe }}{% else %}{{ adventure.example_code|commonmark }}{% endif %}
                       </div>
                   {% endif %}
                   {% if public_adventures_page %}

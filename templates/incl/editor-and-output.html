@@ -1,6 +1,6 @@
 {% set editor_height='22rem' %}
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
-    <div id="editor-area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4">
+    <div id="editor_area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4">
 
     <div id="fold_out_toggle_container" class="hidden absolute z-10 top-16 ltr:-left-2 rtl:-right-2 cursor-pointer" onclick="hedyApp.show_editor();">
      <div class="bg-green-500 text-white py-3 rounded-lg text-sm">
@@ -79,30 +79,43 @@
           <div class="flex">
             <div class="flex w-full justify-between items-center">
               <p class="caption font-bold">Success</p>
-              <button class="hidden" id="confetti-button" onclick="hedyApp.confetti_cannon()">🎉</button>
+              <button class="hidden" id="confetti_button" onclick="hedyApp.confetti_cannon()">🎉</button>
               <!-- <p class="details text-sm">Something went according to plan.</p> -->
             </div>
           </div>
         </div>
     </div>
     <div data-devmodeheight="{{editor_height}},36rem" data-origheight="{{editor_height}}" class="w-full flex flex-col order-3 relative min-h-0 overflow-hidden" id="code_output" style="height: {{editor_height}}">
-        <div class="inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 text-white" id="variables_container">
-            <button id="variable_button" class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" onclick="hedyApp.showVariableView()">
-                🏷<svg class="float-right w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round"  d="M19 9l-7 7-7-7"></path>
-                    </svg>
-            </button>
-            <div class="absolute hidden inline-block flex ltr:right-0 rtl:left-0 z-10 text-white bg-blue-600 rounded-lg ltr:mr-1 rtl:ml-1 mt-2" id="variables">
-                <div id="variables_header" class="text-center text-lg font-bold px-4">{{_('variables')}}</div>
-                <ul id="variable-list" class="px-4 whitespace-nowrap list-none mt-0" style="margin-left: 0px;"></ul> <!-- For some reason the Tailwind ml-0 doesn't do the trick here -->
-            </div>
-        </div>
-      <!-- tabindex=0 makes the div focusable -->
       <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto" style="min-height: 3rem;"></div>
+          <div id="variable_button" class="hidden my-3 cursor-pointer" onclick="$('#variable_list').slideToggle('medium');">
+            <div class="h-2 z-10 bg-blue-500 content-center justify-center grid text-center">
+                <div class="w-fit bg-blue-500 text-white px-5 rounded-lg text-sm">
+                    <i class="fa-solid fa-tag text-lg mt-2 mr-2"></i>
+                    <i id="variables_arrow" class="fa-solid fa-angle-up text-lg mt-2 ml-2"></i>                    
+                </div>
+            </div>            
+          </div>
+
+        <div class="overflow-auto inline-block flex z-10 text-white bg-blue-100 rounded-lg" id="variables">
+            <ul id="variable_list" class="bg-blue-100 text-blue-500 px-4 whitespace-nowrap list-none mb-0"
+                style="display: none; margin-left: 0px;"
+                _="on mutation of @style
+                  set arrow to #variables_arrow
+                  if *display == 'none'
+                      remove .fa-angle-down from arrow
+                      add .fa-angle-up to arrow
+                  else
+                      remove .fa-angle-up from arrow
+                      add .fa-angle-down to arrow
+                  end"
+            >
+            </ul>
+            <!-- For some reason the Tailwind ml-0 doesn't do the trick here -->
+        </div>
 
       <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
-      <div id="inline-modal" class="flex-0 absolute bottom-0 w-full z-20">
-        <div id="ask-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none">
+      <div id="inline_modal" class="flex-0 absolute bottom-0 w-full z-20">
+        <div id="ask_modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none">
           <!--Title-->
           <div class="flex justify-between items-center">
             <p class="text-2xl font-bold caption">Header</p>
@@ -116,31 +129,31 @@
             </div>
           </form>
         </div>
-        <div id="keybinding-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99; position: absolute; bottom: 0; width: 100%;">
+        <div id="keybinding_modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99; position: absolute; bottom: 0; width: 100%;">
           <!--Title-->
           <div class="flex justify-between items-center">
             <p class="text-2xl font-bold caption">{{_('keybinding_waiting_for_keypress')}}</p>
           </div>
         </div>
-        <div id="sleep-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99;">
+        <div id="sleep_modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99;">
           <!--Title-->
           <div class="flex justify-between items-center">
             <p class="text-2xl font-bold caption">{{_('sleeping')}}</p>
           </div>
         </div>
       </div>
-      <div id="dynamic-buttons" class="flex mt-3 gap-2 overflow-auto border-4 border-blue-600 rounded bg-blue-300 py-2 px-3" style="display: none">
+      <div id="dynamic_buttons" class="flex mt-3 gap-2 overflow-auto border-4 border-blue-600 rounded bg-blue-300 py-2 px-3" style="display: none">
       </div>
     </div>
     <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
     <div class="order-2 md:order-4" id="code_related_buttons">
       {% if not raw %}
-      <div id="not-logged-in-warning" class="hidden bg-yellow-200 text-sm px-4 py-1 border-2 border-yellow-400 mb-4">
+      <div id="not_logged_in_warning" class="hidden bg-yellow-200 text-sm px-4 py-1 border-2 border-yellow-400 mb-4">
         {{ _('not_logged_in_cantsave') }}. <a href="/login" class="text-black">{{_('login_to_save_your_work')}}</a>
       </div>
       {% endif %}
       <div class="flex justify-between gap-2 items-start h-12 overflow-visible">
-        <div id="runButtonContainer">
+        <div id="run_button_container">
           <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>{{_('run_code_button')}} </button>
           <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
         </div>
@@ -149,7 +162,7 @@
             <img src="{{ static('/images/microbit_logo_icon_248480.png') }}" style="width: 25px; height: 25px; margin-left: 1px; display: inline;" alt=""/>
         </button>
       </div>
-        <div id="saveFilesContainer" class="hidden">
+        <div id="save_files_container" class="hidden">
           <button id="saveFiles" class="green-btn" onclick="hedyApp.saveMachineFiles();">💾</button>
         </div>
         <div id="debug_container" class="ltr:ml-auto rtl:mr-auto">
@@ -254,14 +267,14 @@
   {% endif %}
 <!-- developer mode toggle -->
 {% if raw or public_adventures_page %}
-  <div _="on load hedyApp.toggleDevelopersMode('load', false)"></div>
+  <div _="on load hedyApp.setDevelopersMode('load', false)"></div>
 {% elif not enforce_developers_mode and not editor_readonly %}
   <div class="mx-auto mt-4 w-64 border-gray-400 border-2 rounded-full py-2 px-4" id="developers_toggle_container">
     <label for="developers_toggle" class="flex flex-row items-center justify-center cursor-pointer">
       <div class="relative">
         <input id="developers_toggle" type="checkbox" class="sr-only"
-        _="on load hedyApp.toggleDevelopersMode('load', false)
-          on click hedyApp.toggleDevelopersMode('click', false)">
+        _="on load hedyApp.setDevelopersMode('load', false)
+          on click hedyApp.setDevelopersMode('click', false)">
         <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner" id="dev_toggle"></div>
         <div
           id="toggle_circle"
@@ -271,5 +284,5 @@
     </label>
   </div>
 {% else %}
-  <div _="on load hedyApp.toggleDevelopersMode('load', true)"></div>
+  <div _="on load hedyApp.setDevelopersMode('load', true)"></div>
 {% endif %}

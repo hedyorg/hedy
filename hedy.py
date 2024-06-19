@@ -8,9 +8,9 @@ from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
 from os import path, getenv
 
-import warnings
 import hedy
 import hedy_error
+import hedy_grammar
 import hedy_translation
 from utils import atomic_write_file
 from hedy_content import ALL_KEYWORD_LANGUAGES
@@ -44,6 +44,7 @@ local_keywords_enabled = True
 
 # dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
+MICROBIT_TRANSPILER_LOOKUP = {}
 
 # define source-map
 source_map = SourceMap()
@@ -169,22 +170,6 @@ for lang_, keywords in KEYWORDS.items():
         indent_keywords[lang_].append(keywords.get(keyword))
 
 
-# These are the preprocessor rules that we use to specify changes in the rules that
-# are expected to work across several rules
-# Example
-# for<needs_colon> instead of defining the whole rule again.
-
-
-def needs_colon(rule):
-    pos = rule.find('_EOL (_SPACE command)')
-    return f'{rule[0:pos]} _COLON {rule[pos:]}'
-
-
-PREPROCESS_RULES = {
-    'needs_colon': needs_colon
-}
-
-
 def make_value_error(command, tip, lang, value='{}'):
     return make_error_text(exceptions.RuntimeValueException(command=command, value=value, tip=tip), lang)
 
@@ -229,6 +214,9 @@ class Command:
     repeat = 'repeat'
     for_list = 'for in'
     for_loop = 'for in range'
+    if_ = 'if'
+    else_ = 'else'
+    elif_ = 'elif'
     addition = '+'
     subtraction = '-'
     multiplication = '*'
@@ -244,6 +232,7 @@ class Command:
     call = 'call'
     returns = 'return'
     play = 'play'
+    while_ = 'while'
 
 
 translatable_commands = {Command.print: ['print'],
@@ -302,7 +291,7 @@ def add_level(commands, level, add=None, remove=None):
         add = []
     if not remove:
         remove = []
-    commands[level] = [c for c in commands[level-1] if c not in remove] + add
+    commands[level] = [c for c in commands[level - 1] if c not in remove] + add
 
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
@@ -324,7 +313,6 @@ add_level(commands_per_level, level=15, add=['while'])
 add_level(commands_per_level, level=16)
 add_level(commands_per_level, level=17, add=['elif'])
 add_level(commands_per_level, level=18, add=['input'], remove=['ask'])
-
 
 command_turn_literals = ['right', 'left']
 english_colors = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
@@ -348,33 +336,42 @@ commands_and_types_per_level = {
         1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.list],
         4: [HedyType.string, HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
-        16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]
+        15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean],
+        16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean, HedyType.list]
     },
     Command.ask: {
         1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.list],
         4: [HedyType.string, HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
-        16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]
+        15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean],
+        16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean, HedyType.list]
     },
-    Command.turn: {1: command_turn_literals,
-                   2: [HedyType.integer, HedyType.input],
-                   12: [HedyType.integer, HedyType.input, HedyType.float]
-                   },
-    Command.color: {1: [english_colors, HedyType.list],
-                    2: [english_colors, HedyType.string, HedyType.input, HedyType.list]},
-    Command.forward: {1: [HedyType.integer, HedyType.input],
-                      12: [HedyType.integer, HedyType.input, HedyType.float]
-                      },
-    Command.sleep: {1: [HedyType.integer, HedyType.input],
-                    12: [HedyType.integer, HedyType.input, HedyType.float]
-                    },
+    Command.turn: {
+        1: command_turn_literals,
+        2: [HedyType.integer, HedyType.input],
+        12: [HedyType.integer, HedyType.input, HedyType.float]
+    },
+    Command.color: {
+        1: [english_colors, HedyType.list],
+        2: [english_colors, HedyType.string, HedyType.input, HedyType.list]},
+    Command.forward: {
+        1: [HedyType.integer, HedyType.input],
+        12: [HedyType.integer, HedyType.input, HedyType.float]
+    },
+    Command.sleep: {
+        1: [HedyType.integer, HedyType.input],
+        12: [HedyType.integer, HedyType.input, HedyType.float]
+    },
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
     Command.not_in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
     Command.remove_from_list: {1: [HedyType.list]},
-    Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
-                       14: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]},
+    Command.equality: {
+        1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
+        14: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list],
+        15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list, HedyType.boolean]
+    },
     Command.addition: {
         6: [HedyType.integer, HedyType.input],
         12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]
@@ -398,7 +395,9 @@ commands_and_types_per_level = {
     Command.smaller_equal: {14: [HedyType.integer, HedyType.float, HedyType.input]},
     Command.bigger: {14: [HedyType.integer, HedyType.float, HedyType.input]},
     Command.bigger_equal: {14: [HedyType.integer, HedyType.float, HedyType.input]},
-    Command.not_equal: {14: [HedyType.integer, HedyType.float, HedyType.string, HedyType.input, HedyType.list]},
+    Command.not_equal: {
+        14: [HedyType.integer, HedyType.float, HedyType.string, HedyType.input, HedyType.list, HedyType.boolean]
+    },
     Command.pressed: {5: [HedyType.string]}  # TODO: maybe use a seperate type character in the future.
 }
 
@@ -550,6 +549,15 @@ class ExtractAST(Transformer):
 
     def NEGATIVE_NUMBER(self, args):
         return Tree('number', [str(args)])
+
+    def TRUE(self, args):
+        return Tree('true', [str(args)])
+
+    def FALSE(self, args):
+        return Tree('false', [str(args)])
+
+    def boolean(self, meta, args):
+        return args[0]
 
     # level 2
     def var(self, meta, args):
@@ -833,6 +841,12 @@ class TypeValidator(Transformer):
         # We managed to parse a number that cannot be parsed by python
         raise exceptions.ParseException(level=self.level, location='', found=number)
 
+    def true(self, tree):
+        return self.to_typed_tree(tree, HedyType.boolean)
+
+    def false(self, tree):
+        return self.to_typed_tree(tree, HedyType.boolean)
+
     def subtraction(self, tree):
         return self.to_sum_typed_tree(tree, Command.subtraction)
 
@@ -1054,6 +1068,12 @@ class Filter(Transformer):
     def NEGATIVE_NUMBER(self, args):
         return True, ''.join([c for c in args]), None
 
+    def true(self, meta, args):
+        return True, args[0], meta
+
+    def false(self, meta, args):
+        return True, args[0], meta
+
     def text(self, meta, args):
         return all(args), ''.join([c for c in args]), meta
 
@@ -1099,7 +1119,8 @@ class AllCommands(Transformer):
         # for the achievements we want to be able to also detect which operators were used by a kid
         operators = ['addition', 'subtraction', 'multiplication', 'division']
 
-        if production_rule_name in commands_per_level[self.level] or production_rule_name in operators or production_rule_name == 'if_pressed_else':
+        if production_rule_name in commands_per_level[
+                self.level] or production_rule_name in operators or production_rule_name == 'if_pressed_else':
             # if_pressed_else is not in the yamls, upsetting lookup code to get an alternative later
             # lookup should be fixed instead, making a special case for now
             if production_rule_name == 'else':  # use of else also has an if
@@ -1143,6 +1164,23 @@ def all_commands(input_string, level, lang='en'):
     program_root = parse_input(input_string, level, lang)
 
     return AllCommands(level).transform(program_root)
+
+
+def all_variables(input_string, level, lang='en'):
+    """Return all variables used in a program string.
+
+    This function is still used by the roles of variables detection
+    """
+    program_root = parse_input(input_string, level, lang)
+    abstract_syntax_tree = ExtractAST().transform(program_root)
+    vars = set()
+    lookup = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
+    for x in lookup:
+        name = str(x.name)
+        if '[' not in name:  # we also stor list access but that is not needed here
+            vars.add(name)
+
+    return list(vars)
 
 
 @v_args(meta=True)
@@ -1276,6 +1314,40 @@ class IsValid(Filter):
         raise exceptions.MissingElseForPressitException(
             command='ifpressed_else', level=self.level, line_number=meta.line)
 
+    def if_pressed_no_colon(self, meta, args):
+        raise exceptions.MissingColonException(command=Command.if_, line_number=meta.line)
+
+    def if_pressed_elifs_no_colon(self, meta, args):
+        # if_pressed_elifs starts with _EOL, so we need to add +1 to its line
+        raise exceptions.MissingColonException(command=Command.elif_, line_number=meta.line + 1)
+
+    def if_pressed_elses_no_colon(self, meta, args):
+        # if_pressed_elses starts with _EOL, so we need to add +1 to its line
+        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line + 1)
+
+    def ifs_no_colon(self, meta, args):
+        raise exceptions.MissingColonException(command=Command.if_, line_number=meta.line)
+
+    def elifs_no_colon(self, meta, args):
+        # elifs starts with _EOL, so we need to add +1 to its line
+        raise exceptions.MissingColonException(command=Command.elif_, line_number=meta.line + 1)
+
+    def elses_no_colon(self, meta, args):
+        # elses starts with _EOL, so we need to add +1 to its line
+        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line + 1)
+
+    def for_list_no_colon(self, meta, args):
+        raise exceptions.MissingColonException(command=Command.for_list, line_number=meta.line)
+
+    def for_loop_no_colon(self, meta, args):
+        raise exceptions.MissingColonException(command=Command.for_loop, line_number=meta.line)
+
+    def while_loop_no_colon(self, meta, args):
+        raise exceptions.MissingColonException(command=Command.while_, line_number=meta.line)
+
+    def define_no_colon(self, meta, args):
+        raise exceptions.MissingColonException(command=Command.define, line_number=meta.line)
+
     # other rules are inherited from Filter
 
 
@@ -1349,9 +1421,12 @@ def get_allowed_types(command, level):
 
 
 # decorator used to store each class in the lookup table
-def hedy_transpiler(level):
+def hedy_transpiler(level, microbit=False):
     def decorator(c):
-        TRANSPILER_LOOKUP[level] = c
+        if not microbit:
+            TRANSPILER_LOOKUP[level] = c
+        else:
+            MICROBIT_TRANSPILER_LOOKUP[level] = c
         c.level = level
         return c
 
@@ -1360,12 +1435,11 @@ def hedy_transpiler(level):
 
 @v_args(meta=True)
 class ConvertToPython(Transformer):
-    def __init__(self, lookup, language="en", numerals_language="Latin", is_debug=False, microbit=False):
+    def __init__(self, lookup, language="en", numerals_language="Latin", is_debug=False):
         self.lookup = lookup
         self.language = language
         self.numerals_language = numerals_language
         self.is_debug = is_debug
-        self.microbit = microbit
 
     def add_debug_breakpoint(self):
         if self.is_debug:
@@ -1462,7 +1536,7 @@ class ConvertToPython(Transformer):
             return f"convert_numerals('{self.numerals_language}', {escape_var(name)})"
         elif ConvertToPython.is_float(name):
             return f"convert_numerals('{self.numerals_language}', {name})"
-        elif ConvertToPython.is_quoted(name):
+        elif ConvertToPython.is_quoted(name) or self.is_bool(name):
             return f"{name}"
 
     def get_fresh_var(self, name):
@@ -1477,8 +1551,9 @@ class ConvertToPython(Transformer):
 
         def is_var_candidate(arg) -> bool:
             return not isinstance(arg, Tree) and \
-                not ConvertToPython.is_int(arg) and \
-                not ConvertToPython.is_float(arg)
+                not self.is_int(arg) and \
+                not self.is_float(arg) and \
+                not self.is_bool(arg)
 
         args_to_process = [a for a in args if is_var_candidate(a)]  # we do not check trees (calcs) they are always ok
 
@@ -1508,9 +1583,10 @@ class ConvertToPython(Transformer):
         try:
             self.check_var_usage([arg], meta.line)
         except exceptions.UndefinedVarException:
-            if not (ConvertToPython.is_int(arg) or
-                    ConvertToPython.is_float(arg) or
-                    ConvertToPython.is_random(arg)):
+            if not (self.is_int(arg) or
+                    self.is_float(arg) or
+                    self.is_random(arg) or
+                    self.is_bool(arg)):
                 raise exceptions.UnquotedAssignTextException(text=arg, line_number=meta.line)
 
     # static methods
@@ -1546,6 +1622,10 @@ class ConvertToPython(Transformer):
         return 'random.choice' in s
 
     @staticmethod
+    def is_bool(s):
+        return s in ['True', 'False']
+
+    @staticmethod
     def is_list(s):
         return '[' in s and ']' in s
 
@@ -1560,12 +1640,11 @@ class ConvertToPython(Transformer):
 @source_map_transformer(source_map)
 class ConvertToPython_1(ConvertToPython):
 
-    def __init__(self, lookup, language, numerals_language, is_debug, microbit=False):
+    def __init__(self, lookup, language, numerals_language, is_debug):
         self.numerals_language = numerals_language
         self.language = language
         self.lookup = lookup
         self.is_debug = is_debug
-        self.microbit = microbit
         __class__.level = 1
 
     def program(self, meta, args):
@@ -1590,11 +1669,7 @@ class ConvertToPython_1(ConvertToPython):
     def print(self, meta, args):
         # escape needed characters
         argument = process_characters_needing_escape(args[0])
-        if not self.microbit:
-            return f"print('" + argument + "')" + self.add_debug_breakpoint()
-        else:
-            return textwrap.dedent(f"""\
-                display.scroll('{argument}')""")
+        return f"print('" + argument + "')" + self.add_debug_breakpoint()
 
     def ask(self, meta, args):
         argument = process_characters_needing_escape(args[0])
@@ -1792,11 +1867,8 @@ class ConvertToPython_2(ConvertToPython_1):
     def print(self, meta, args):
         args_new = [self.make_print_ask_arg(a, meta) for a in args]
         argument_string = ' '.join(args_new)
-        if not self.microbit:
-            exception = self.make_index_error_check_if_list(args)
-            return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
-        else:
-            return f"""display.scroll('{argument_string}')"""
+        exception = self.make_index_error_check_if_list(args)
+        return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
 
     def ask(self, meta, args):
         var = args[0]
@@ -1812,9 +1884,9 @@ class ConvertToPython_2(ConvertToPython_1):
         # therefore we should not process it anymore and thread it as a variable:
         # we set the line number to 100 so there is never an issue with variable access before
         # assignment (regular code will not work since random.choice(dieren) is never defined as var as such)
+
         if "random.choice" in arg or "[" in arg:
             return self.process_variable_for_fstring(arg, meta.line, var_to_escape)
-
         # this regex splits words from non-letter characters, such that name! becomes [name, !]
         p = r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+"
         res = regex.findall(p, arg)
@@ -1856,17 +1928,14 @@ class ConvertToPython_2(ConvertToPython_1):
         variable_name = args[0]
         value = args[1]
 
-        if self.is_random(value) or self.is_list(value):
-            exception = self.make_index_error_check_if_list([value])
-            return exception + variable_name + " = " + value + self.add_debug_breakpoint()
+        exception = self.make_index_error_check_if_list([value])
+        if self.is_variable(value, meta.line):
+            # if the assigned value is a variable, this is a reassign
+            value = self.process_variable(value, meta.line)
         else:
-            if self.is_variable(value, meta.line):  # if the value is a variable, this is a reassign
-                value = self.process_variable(value, meta.line)
-                return variable_name + " = " + value + self.add_debug_breakpoint()
-            else:
-                # if the assigned value is not a variable and contains single quotes, escape them
-                value = process_characters_needing_escape(value)
-                return variable_name + " = '" + value + "'" + self.add_debug_breakpoint()
+            # if it is not a variable, put it in single quotes and escape them
+            value = f"'{process_characters_needing_escape(value)}'"
+        return exception + variable_name + " = " + value + self.add_debug_breakpoint()
 
     def sleep(self, meta, args):
         if not args:
@@ -1955,12 +2024,17 @@ class ConvertToPython_4(ConvertToPython_3):
             if self.numerals_language == "Latin":
                 converted = escape_var(name)
             else:
-                converted = f'convert_numerals("{self.numerals_language}",{escape_var(name)})'
+                converted = f'convert_numerals("{self.numerals_language}", {escape_var(name)})'
             return "{" + converted + "}"
         else:
+            # at level 4 backslashes are escaped in preprocessing, so we escape only '
             if self.is_quoted(name):
                 name = name[1:-1]
-            return name.replace("'", "\\'")  # at level 4 backslashes are escaped in preprocessing, so we escape only '
+                return name.replace("'", "\\'")
+            if not ConvertToPython.is_int(name) and not ConvertToPython.is_float(name):
+                name = name if self.is_bool(name) else escape_var(name.replace("'", "\\'"))
+                name = '"' + name + '"'
+            return f'{{convert_numerals("{self.numerals_language}", {name})}}'
 
     def var_access(self, meta, args):
         name = args[0]
@@ -1981,11 +2055,7 @@ class ConvertToPython_4(ConvertToPython_3):
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
         exceptions = self.make_index_error_check_if_list(args)
-        if not self.microbit:
-            return exceptions + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
-        else:
-            return textwrap.dedent(f"""\
-                    display.scroll('{argument_string}')""")
+        return exceptions + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
 
     def ask(self, meta, args):
         var = args[0]
@@ -2019,8 +2089,8 @@ except NameError:
 @source_map_transformer(source_map)
 class ConvertToPython_5(ConvertToPython_4):
 
-    def __init__(self, lookup, language, numerals_language, is_debug, microbit):
-        super().__init__(lookup, language, numerals_language, is_debug, microbit)
+    def __init__(self, lookup, language, numerals_language, is_debug):
+        super().__init__(lookup, language, numerals_language, is_debug)
 
     def ifs(self, meta, args):  # might be worth asking if we want a debug breakpoint here
         return f"""if {args[0]}:{self.add_debug_breakpoint()}
@@ -2457,6 +2527,14 @@ class ConvertToPython_12(ConvertToPython_11):
         numbers = [str(float(x)) for x in args]
         return ''.join(numbers)
 
+    def true(self, meta, args):
+        # The args contain the actual parse value that was used
+        return str(True)
+
+    def false(self, meta, args):
+        # The args contain the actual parse value that was used
+        return str(False)
+
     def text_in_quotes(self, meta, args):
         # We need to re-add the quotes, so that the Python code becomes name = 'Jan' or "Jan's"
         text = args[0] if args else ''
@@ -2473,11 +2551,7 @@ class ConvertToPython_12(ConvertToPython_11):
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
         exception = self.make_index_error_check_if_list(args)
-        if not self.microbit:
-            return exception + f"print(f'''{argument_string}''')" + self.add_debug_breakpoint()
-        else:
-            return textwrap.dedent(f"""\
-                    display.scroll('{argument_string}')""")
+        return exception + f"print(f'''{argument_string}''')" + self.add_debug_breakpoint()
 
     def ask(self, meta, args):
         var = args[0]
@@ -2742,127 +2816,183 @@ class ConvertToPython_18(ConvertToPython_17):
         return self.print(meta, args)
 
 
-def get_rule_from_string(s):
-    parts = s.split(':')
-    # get part before and after : (this is a join because there can be : in the rule)
-    if len(parts) <= 1:
-        return s, s
-    return parts[0], ''.join(parts[1])
+@v_args(meta=True)
+@hedy_transpiler(level=1, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_1(ConvertToPython_1):
+    def print(self, meta, args):
+        # escape needed characters
+        argument = process_characters_needing_escape(args[0])
+        return f"display.scroll('{argument}')"
 
 
-def merge_grammars(grammar_text_1, grammar_text_2):
-    # this function takes two grammar files and merges them into one
-    # rules that are redefined in the second file are overridden
-    # rules that are new in the second file are added (remaining_rules_grammar_2)
-    merged_grammar = []
+@v_args(meta=True)
+@hedy_transpiler(level=2, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_2(MicrobitConvertToPython_1, ConvertToPython_2):
 
-    deletables = []
-    # this list collects rules we no longer need,
-    # they will be removed when we encounter them
+    def print(self, meta, args):
+        args_new = [self.make_print_ask_arg(a, meta) for a in args]
+        argument_string = ' '.join(args_new)
+        return f"display.scroll({argument_string})"
 
-    rules_grammar_1 = grammar_text_1.split('\n')
-    remaining_rules_grammar_2 = grammar_text_2.split('\n')
-    for line_1 in rules_grammar_1:
-        if line_1 == '' or line_1[0] == '/':  # skip comments and empty lines:
-            continue
+    def make_print_ask_arg(self, arg, meta, var_to_escape=''):
+        if self.is_variable(arg, meta.line):
+            return arg
+        else:
+            # If the argument is not a variable, return it as a string literal with quotes
+            return f"'{arg}'"
 
-        name_1, definition_1 = get_rule_from_string(line_1)
+    def assign(self, meta, args):
+        variable_name = args[0]
+        value = args[1]
 
-        rules_grammar_2 = grammar_text_2.split('\n')
-        override_found = False
-        for line_2 in rules_grammar_2:
-            if line_2 == '' or line_2[0] == '/':  # skip comments and empty lines:
-                continue
+        exception = self.make_index_error_check_if_list([value])
+        if self.is_variable(value, meta.line):
+            # if the assigned value is a variable, this is a reassign
+            value = self.process_variable(value, meta.line)
+        else:
+            # if it is not a variable, check if it is a number
+            if not self.is_int(value) and not self.is_float(value):
+                # encapsulate in quotes if it's not a number
+                value = f"'{process_characters_needing_escape(value)}'"
 
-            needs_preprocessing = re.match(r'((\w|_)+)<((\w|_)+)>', line_2)
-            if needs_preprocessing:
-                name_2 = f'{needs_preprocessing.group(1)}'
-                processor = needs_preprocessing.group(3)
+        return exception + variable_name + " = " + value + self.add_debug_breakpoint()
+
+    def sleep(self, meta, args):
+        if not args:
+            return f"sleep(1000){self.add_debug_breakpoint()}"  # Default 1-second sleep in milliseconds
+        else:
+            variable = args[0]
+            if self.is_int(variable):
+                # Direct conversion of seconds to milliseconds
+                milliseconds = int(variable) * 1000
             else:
-                name_2, definition_2 = get_rule_from_string(line_2)
+                milliseconds = f"{variable} * 1000"
+                self.add_variable_access_location(variable, meta.line)
+        return f"sleep({milliseconds}){self.add_debug_breakpoint()}"
 
-            if name_1 == name_2:
-                override_found = True
-                if needs_preprocessing:
-                    definition_2 = PREPROCESS_RULES[processor](definition_1)
-                    line_2_processed = f'{name_2}: {definition_2}'
-                else:
-                    line_2_processed = line_2
-                if definition_1.strip() == definition_2.strip():
-                    warn_message = f"The rule {name_1} is duplicated: {definition_1} and {definition_2}. Please check!"
-                    warnings.warn(warn_message)
-                # Used to compute the rules that use the merge operators in the grammar, namely +=, -= and >>
-                new_rule, new_deletables = merge_rules_operator(definition_1, definition_2, name_1, line_2_processed)
-                if new_deletables:
-                    deletables += new_deletables
-                # Already processed, so remove it
-                remaining_rules_grammar_2.remove(line_2)
-                break
 
-        # new rule found? print that. nothing found? print org rule
-        if override_found:
-            merged_grammar.append(new_rule)
+@v_args(meta=True)
+@hedy_transpiler(level=3, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_3(MicrobitConvertToPython_2, ConvertToPython_3):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=4, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_4(MicrobitConvertToPython_3, ConvertToPython_4):
+
+    def make_print_ask_arg(self, arg, meta, var_to_escape=''):
+        if self.is_variable(arg, meta.line):
+            return arg
         else:
-            merged_grammar.append(line_1)
+            # If the argument is not a variable, return it as a string literal with quotes
+            return f'{arg}'
 
-    # all rules that were not overlapping are new in the grammar, add these too
-    for rule in remaining_rules_grammar_2:
-        if not (rule == '' or rule[0] == '/'):
-            merged_grammar.append(rule)
+    def print(self, meta, args):
+        args_new = [self.make_print_ask_arg(a, meta) for a in args]
+        argument_string = ''.join(args_new)
+        return f"display.scroll({argument_string})"
 
-    merged_grammar = sorted(merged_grammar)
-    # filter deletable rules
-    rules_to_keep = [rule for rule in merged_grammar if get_rule_from_string(rule)[0] not in deletables]
-    return '\n'.join(rules_to_keep)
-
-
-ADD_GRAMMAR_MERGE_OP = '+='
-REMOVE_GRAMMAR_MERGE_OP = '-='
-LAST_GRAMMAR_MERGE_OP = '>>'
-GRAMMAR_MERGE_OPERATORS = [ADD_GRAMMAR_MERGE_OP, REMOVE_GRAMMAR_MERGE_OP, LAST_GRAMMAR_MERGE_OP]
+    def clear(self, meta, args):
+        return f"display.clear()"
 
 
-def merge_rules_operator(prev_definition, new_definition, name, complete_line):
-    op_to_arg = get_operator_to_argument(new_definition)
-
-    add_arg = op_to_arg.get(ADD_GRAMMAR_MERGE_OP, '')
-    remove_arg = op_to_arg.get(REMOVE_GRAMMAR_MERGE_OP, '')
-    last_arg = op_to_arg.get(LAST_GRAMMAR_MERGE_OP, '')
-    remaining_commands = get_remaining_rules(prev_definition, remove_arg, last_arg)
-    ordered_commands = split_rule(remaining_commands, add_arg, last_arg)
-
-    new_rule = f"{name}: {' | '.join(ordered_commands)}" if bool(op_to_arg) else complete_line
-    deletable = split_rule(remove_arg)
-    return new_rule, deletable
+@v_args(meta=True)
+@hedy_transpiler(level=5, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_5(MicrobitConvertToPython_4, ConvertToPython_5):
+    pass
 
 
-def get_operator_to_argument(definition):
-    # Creates a map of all used operators and their respective arguments e.g. {'+=': 'print | play', '>>': 'echo'}
-    operator_to_index = [(op, definition.find(op)) for op in GRAMMAR_MERGE_OPERATORS if op in definition]
-    result = {}
-    for i, (op, index) in enumerate(operator_to_index):
-        start_index = index + len(op)
-        if i + 1 < len(operator_to_index):
-            _, next_index = operator_to_index[i + 1]
-            result[op] = definition[start_index:next_index].strip()
-        else:
-            result[op] = definition[start_index:].strip()
-    return result
+@v_args(meta=True)
+@hedy_transpiler(level=6, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_6(MicrobitConvertToPython_5, ConvertToPython_6):
+    pass
 
 
-def get_remaining_rules(orig_def, *sub_def):
-    original_commands = split_rule(orig_def)
-    commands_after_minus = split_rule(*sub_def)
-    misses = [c for c in commands_after_minus if c not in original_commands]
-    if misses:
-        raise Exception(f"Command(s) {'|'.join(misses)} do not exist in the previous definition")
-    remaining_commands = [cmd for cmd in original_commands if cmd not in commands_after_minus]
-    remaining_commands = ' | '.join(remaining_commands)  # turn the result list into a string
-    return remaining_commands
+@v_args(meta=True)
+@hedy_transpiler(level=7, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_7(MicrobitConvertToPython_6, ConvertToPython_7):
+    pass
 
 
-def split_rule(*rules):
-    return [c.strip() for rule in rules for c in rule.split('|') if c.strip() != '']
+@v_args(meta=True)
+@hedy_transpiler(level=8, microbit=True)
+@hedy_transpiler(level=9, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_8_9(MicrobitConvertToPython_7, ConvertToPython_8_9):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=10, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_10(MicrobitConvertToPython_8_9, ConvertToPython_10):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=11, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_11(MicrobitConvertToPython_10, ConvertToPython_11):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=12, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_12(MicrobitConvertToPython_11, ConvertToPython_12):
+    def print(self, meta, args):
+        argument_string = self.print_ask_args(meta, args)
+        return f"display.scroll('{argument_string}')"
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=13, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_13(MicrobitConvertToPython_12, ConvertToPython_13):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=14, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_14(MicrobitConvertToPython_13, ConvertToPython_14):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=15, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_15(MicrobitConvertToPython_14, ConvertToPython_15):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=16, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_16(MicrobitConvertToPython_15, ConvertToPython_16):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=17, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_17(MicrobitConvertToPython_16, ConvertToPython_17):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=18, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_18(MicrobitConvertToPython_17, ConvertToPython_18):
+    pass
 
 
 # this is only a couple of MB in total, safe to cache
@@ -2874,7 +3004,7 @@ def create_grammar(level, lang, skip_faulty):
     # then keep merging new grammars in
     for i in range(2, level + 1):
         grammar_text_i = get_additional_rules_for_level(i)
-        merged_grammars = merge_grammars(merged_grammars, grammar_text_i)
+        merged_grammars = hedy_grammar.merge_grammars(merged_grammars, grammar_text_i)
 
     # keyword and other terminals never have mergable rules, so we can just add them at the end
     keywords = get_keywords_for_language(lang)
@@ -3108,7 +3238,8 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
 
 
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle',
-                                         'has_pressed', 'has_clear', 'has_music', 'commands'])
+                                         'has_pressed', 'has_clear', 'has_music', 'has_sleep', 'commands',
+                                         'roles_of_variables'])
 
 
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en", unused_allowed=True):
@@ -3597,6 +3728,29 @@ def create_AST(input_string, level, lang="en"):
     return abstract_syntax_tree, lookup_table, commands
 
 
+def determine_roles(lookup, input_string, level, lang):
+    all_vars = all_variables(input_string, level, lang)
+    roles_dictionary = {}
+    for var in all_vars:
+        assignments = [x for x in lookup if x.name == var]
+
+        if (assignments[0].tree.data == 'for_list'):
+            roles_dictionary[var] = gettext('walker_variable_role')
+        elif (assignments[0].tree.data == 'for_loop'):
+            roles_dictionary[var] = gettext('stepper_variable_role')
+        elif (assignments[0].type_ == 'list'):
+            roles_dictionary[var] = gettext('list_variable_role')
+        elif (len(assignments) == 1):
+            if (assignments[0].type_ == 'input'):
+                roles_dictionary[var] = gettext('input_variable_role')
+            else:
+                roles_dictionary[var] = gettext('constant_variable_role')
+        else:
+            roles_dictionary[var] = gettext('unknown_variable_role')
+
+    return roles_dictionary
+
+
 def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False, unused_allowed=False,
                     microbit=False):
     check_program_size_is_valid(input_string)
@@ -3624,16 +3778,19 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         abstract_syntax_tree, lookup_table, commands = create_AST(input_string, level, lang)
 
         # grab the right transpiler from the lookup
-        convertToPython = TRANSPILER_LOOKUP[level]
-        python = convertToPython(lookup_table, lang, numerals_language, is_debug,
-                                 microbit).transform(abstract_syntax_tree)
+        convertToPython = MICROBIT_TRANSPILER_LOOKUP[level] if microbit else TRANSPILER_LOOKUP[level]
+        python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
 
         has_clear = "clear" in commands
         has_turtle = "forward" in commands or "turn" in commands or "color" in commands
         has_pressed = "if_pressed" in commands or "if_pressed_else" in commands or "assign_button" in commands
         has_music = "play" in commands
+        has_sleep = "sleep" in commands
 
-        parse_result = ParseResult(python, source_map, has_turtle, has_pressed, has_clear, has_music, commands)
+        roles_of_variables = determine_roles(lookup_table, input_string, level, lang)
+
+        parse_result = ParseResult(python, source_map, has_turtle, has_pressed,
+                                   has_clear, has_music, has_sleep, commands, roles_of_variables)
 
         if populate_source_map:
             source_map.set_python_output(python)

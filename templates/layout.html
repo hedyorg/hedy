@@ -12,33 +12,33 @@
     <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}"/>
   </head>
   <body id="main_container" dir="{{ g.dir }}" class="{% if not raw %}bg-gray-100{% endif %}" hx-ext="disable-element" data-logged-in="{{ 1 if username else 0 }}">
-    <div id="modal-target"></div>
+    <div id="modal_target"></div>
     {% if intro_tutorial or tutorial %}
-      <div id="tutorial-mask" class="hidden fixed bg-black z-30 w-full h-full opacity-50"></div>
+      <div id="tutorial_mask" class="hidden fixed bg-black z-30 w-full h-full opacity-50"></div>
     {% endif %}
     <noscript>Hedy requires Javascript to be enabled in your browser.</noscript>
-    <div id="modal-mask" class="hidden fixed bg-black z-50 w-full h-full opacity-75"></div>
-    <div id="modal-content" class="hidden fixed z-50 p-12 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style="max-height: 80vh; overflow-y: auto;">
-       <div id="modal-confirm" class="hidden">
-          <div id="modal-confirm-text" class="text-white mb-8 text-xl"></div>
+    <div id="modal_mask" class="hidden fixed bg-black z-50 w-full h-full opacity-75"></div>
+    <div id="modal_content" data-cy="modal_content" class="hidden fixed z-50 p-12 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style="max-height: 80vh; overflow-y: auto;">
+       <div id="modal_confirm" data-cy="modal_confirm" class="hidden">
+          <div id="modal_confirm_text" class="text-white mb-8 text-xl"></div>
           <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
-            <button id="modal-yes-button" data-cy="modal_yes_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('yes')}}</button>
-            <button id="modal-no-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('no')}}</button>
+            <button id="modal_yes_button" data-cy="modal_yes_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('yes')}}</button>
+            <button id="modal_no_button" data-cy="modal_no_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('no')}}</button>
           </div>
        </div>
-       <div id="modal-prompt" class="hidden">
-          <div id="modal-prompt-text" class="text-white mb-8 text-xl"></div>
+       <div id="modal_prompt" class="hidden">
+          <div id="modal_prompt_text" class="text-white mb-8 text-xl"></div>
           <div class="xm-auto">
-            <input id="modal-prompt-input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
+            <input id="modal_prompt_input" data-cy="modal_prompt_input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
             <div class="mt-4 flex flex-row justify-center">
-                <button id="modal-ok-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('ok')}}</button>
-                <button id="modal-cancel-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
+                <button id="modal_ok_button" data-cy="modal_ok_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('ok')}}</button>
+                <button id="modal_cancel_button" data-cy="modal_cancel_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
             </div>
           </div>
        </div>
 
-        <div id="modal-feedback" data-cy="modal-feedback" class="hidden">                                                                                                                                                            
-            <div id="modal-feedback-message" class="text-white mb-4 text-xl"></div>                                                                                                                            
+        <div id="modal_feedback" data-cy="modal_feedback" class="hidden">                                                                                                                                                            
+            <div id="modal_feedback_message" class="text-white mb-4 text-xl"></div>                                                                                                                            
               <div class="mt-4 flex w-full justify-center">                                                                                                                                    
                   <form                                                                                                                                                                                   
                       hx-post="/feedback" 
@@ -57,8 +57,8 @@
 
                       <textarea
                       name="message"
-                      id="modal-feedback-input"
-                      data-cy="modal-feedback-input"
+                      id="modal_feedback_input"
+                      data-cy="modal_feedback_input"
                       type="text"
                       required
                       class="border border-green-400 rounded py-2 px-2 w-full h-48"></textarea>
@@ -73,9 +73,9 @@
                       </div>
                       
                       <div class="mt-4 flex flex-row justify-center">
-                          <button data-cy="modal-feedback-submit"
+                          <button data-cy="modal_feedback_submit"
                               class="green-btn block m-4 w-40 pb-4 pt-4">{{_('ok')}}</button>
-                          <button type="button" data-cy="modal-feedback-cancel"
+                          <button type="button" data-cy="modal_feedback_cancel"
                             _="on click call hedyApp.modal.hide()"
                             class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
                       </div>
@@ -84,42 +84,42 @@
               </div>
         </div>
 
-       <div id="modal-copy" class="hidden">
+       <div id="modal_copy" class="hidden">
            <div class="absolute top-2 right-2">
-              <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer" id="modal-copy-close-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer" id="modal_copy_close_button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <title>Close</title>
               <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
           </svg></div>
-          <div id="modal-copy-title" class="text-white mb-8 text-xl hidden"></div>
-          <div id="modal-copy-text" class="text-white mb-8 text-xl"></div>
-          <div id="modal-copy-buttons" class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
-            <button id="modal-copy-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('copy_link_to_share')}}</button>
+          <div id="modal_copy_title" class="text-white mb-8 text-xl hidden"></div>
+          <div id="modal_copy_text" class="text-white mb-8 text-xl"></div>
+          <div id="modal_copy_buttons" class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
+            <button id="modal_copy_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('copy_link_to_share')}}</button>
           </div>
        </div>
-       <div id="modal-repair" class="hidden">
+       <div id="modal_repair" class="hidden">
           <div class="absolute top-2 right-2">
-              <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer" id="modal-repair-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer" id="modal_repair_button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <title>Close</title>
               <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
           </svg></div>
-          <div id="modal-repair-title" class="text-white mb-8 text-xl hidden"></div>
-          <div id="modal-repair-text" class="text-white mb-8 text-xl"></div>
+          <div id="modal_repair_title" class="text-white mb-8 text-xl hidden"></div>
+          <div id="modal_repair_text" class="text-white mb-8 text-xl"></div>
        </div>
-        <div id="modal-preview" class="hidden">
+        <div id="modal_preview" class="hidden">
           <div class="absolute top-2 right-2">
-              <svg class="fill-current h-8 w-8 text-white cursor-pointer" id="modal-preview-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <svg class="fill-current h-8 w-8 text-white cursor-pointer" id="modal_preview_button" data-cy="modal_preview_button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <title>Close</title>
               <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
           </svg></div>
-          <div id="modal-preview-title" class="text-black mb-4 text-2xl"></div>
-          <div id="modal-preview-content"></div>
+          <div id="modal_preview_title" class="text-black mb-4 text-2xl"></div>
+          <div id="modal_preview_content"></div>
        </div>
     </div>
-    <div id="modal-alert" class="z-50 fixed hidden" role="alert" style="top: 10%; left: 50%; transform: translate(-50%, -50%);">
-        <div id="modal_alert_container" class="mx-auto text-center bg-green-100 border-green-400 text-green-700 border rounded px-4 py-3">
+    <div id="modal_alert" class="z-50 fixed hidden" role="alert" style="top: 10%; left: 50%; transform: translate(-50%, -50%);">
+        <div id="modal_alert_container" data-cy="modal_alert_container" class="mx-auto text-center bg-green-100 border-green-400 text-green-700 border rounded px-4 py-3">
             <span id="modal_alert_title" class="block sm:inline"></span>
             <span id="modal_alert_text" data-cy="modal_alert_text" class="block sm:inline"></span>
-            <svg class="fill-current h-6 w-6 text-green-500 block sm:inline" id="modal-alert-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+            <svg class="fill-current h-6 w-6 text-green-500 block sm:inline" id="modal_alert_button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
         </div>
     </div>
     <div class="min-h-screen">
@@ -131,9 +131,9 @@
 
       <canvas id="confetti" style="width: 60vw;" class="hidden"></canvas>
     </div>
-    <div id="achievement_pop-up" class="z-30 fixed hidden" style="width: 500px; top: 40%; left: 50%; transform: translate(-50%, -50%);">
+    <div id="achievement_pop_up" class="z-30 fixed hidden" style="width: 500px; top: 40%; left: 50%; transform: translate(-50%, -50%);">
         <div class="absolute top-2 right-2 cursor-pointer" onclick="hedyApp.closeAchievement();">
-            <svg class="fill-current h-8 w-8 text-blue-600" id="modal-repair-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <svg class="fill-current h-8 w-8 text-blue-600" id="modal_repair_button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <title>{{_('close')}}</title>
             <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
             </svg>

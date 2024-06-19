@@ -1,14 +1,43 @@
+"""Data layer for Hedy.
+
+This file defines all DynamoDB tables that make up the Hedy data model,
+as well as the class 'Database' which can be used to access those tables.
+
+THE DATABASE CLASS
+-------------------
+
+The Database class should implement logical operations that make sense
+for the data model, spanning multiple tables if necessary. As much as you
+can, hide the details of how data is stored in and queried from tables so
+that the front-end doesn't have to think about those details.
+
+TYPE ANNOTATIONS
+----------------
+
+The tables below have type annotations. Type annotations will be used
+to validate records that are stored INTO the database; they are not
+used to validate records that are retrieved from the database.
+
+!!! You cannot assume that records retrieved from a table will always have
+    the fields of the types that are listed in the table definition!
+
+The record could be older than the validation that was added. Always
+program defensively!
+"""
+
 import functools
 import operator
 import itertools
-from datetime import date, timedelta
+from datetime import date
 import sys
 from os import path
 
-from utils import timems, times
+from utils import timems, times, is_debug_mode
 
 from . import dynamo, auth
 from . import querylog
+
+from .dynamo import DictOf, Optional, ListOf, SetOf, RecordOf, EitherOf
 
 is_offline = getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
 if is_offline:
@@ -18,29 +47,105 @@ else:
     # Production or dev: use environment variables or dev storage
     storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage("dev_database.json")
 
-USERS = dynamo.Table(storage, "users", "username", indexes=[
-    dynamo.Index("email"),
-    dynamo.Index("epoch", sort_key="created")
-])
-TOKENS = dynamo.Table(storage, "tokens", "id", indexes=[
-    dynamo.Index('id'),
-    dynamo.Index('username'),
-])
-PROGRAMS = dynamo.Table(storage, "programs", "id", indexes=[
-    dynamo.Index('username', sort_key='date', index_name='username-index'),
-    dynamo.Index('hedy_choice', sort_key='date', index_name='hedy_choice-index'),
-    # For the explore page, this index has 'level', 'lang' and 'adventure_name'
-    dynamo.Index('public', sort_key='date'),
 
-    # For the filtered view of the 'explore' page (keys_only so we don't duplicate other attributes unnecessarily)
-    dynamo.Index('lang', sort_key='date', keys_only=True),
-    dynamo.Index('level', sort_key='date', keys_only=True),
-    dynamo.Index('adventure_name', sort_key='date', keys_only=True),
-])
-CLASSES = dynamo.Table(storage, "classes", "id", indexes=[
-    dynamo.Index('teacher'),
-    dynamo.Index('link'),
-])
+def only_in_dev(x):
+    """Return the argument only in debug mode. In production or offline mode, return None.
+
+    This is intended to be used with validation expressions, so that when testing
+    locally we do validation, but production data that happens to work but doesn't
+    validate doesn't throw exceptions.
+    """
+    return x if is_debug_mode() else None
+
+
+USERS = dynamo.Table(storage, 'users', 'username',
+                     types=only_in_dev({
+                         'username': str,
+                         'password': str,
+                         'email': Optional(str),
+                         'language': Optional(str),
+                         'keyword_language': Optional(str),
+                         'created': int,
+                         'is_teacher': Optional(int),
+                         'verification_pending': Optional(str),
+                         'last_login': int,
+                         'country': Optional(str),
+                         'birth_year': Optional(int),
+                         'gender': Optional(str),
+                         'heard_about': Optional(ListOf(str)),
+                         'prog_experience': Optional(str),
+                         'experience_languages': Optional(ListOf(str)),
+                         'epoch': int,
+                         'second_teacher_in': Optional(ListOf(str)),
+                         'classes': Optional(SetOf(str)),
+                         'teacher': Optional(str),
+                         'pair_with_teacher': Optional(int),
+                         'teacher_request': Optional(bool),
+                         'is_super_teacher': Optional(int)
+                     }),
+                     indexes=[
+                         dynamo.Index('email'),
+                         dynamo.Index('epoch', sort_key='created')
+                     ]
+                     )
+TOKENS = dynamo.Table(storage, 'tokens', 'id',
+                      types=only_in_dev({
+                          'id': str,
+                          'username': str,
+                          'ttl': int,
+                      }),
+                      indexes=[
+                          dynamo.Index('username'),
+                      ]
+                      )
+PROGRAMS = dynamo.Table(storage, "programs", "id",
+                        types=only_in_dev({
+                            'id': str,
+                            'session': str,
+                            'username': str,
+                            'date': int,
+                            'hedy_choice': Optional(int),
+                            'public': Optional(int),
+                            'lang': str,
+                            'level': int,
+                            'code': str,
+                            'adventure_name': str,
+                            'name': str,
+                            'username_level': str,
+                            'error': Optional(bool),
+                            'is_modified': Optional(bool)
+                        }),
+                        indexes=[
+                            dynamo.Index('username', sort_key='date', index_name='username-index'),
+                            dynamo.Index('hedy_choice', sort_key='date', index_name='hedy_choice-index'),
+                            # For the explore page, this index has 'level', 'lang' and 'adventure_name'
+                            dynamo.Index('public', sort_key='date'),
+
+                            # For the filtered view of the 'explore' page (keys_only so we don't duplicate
+                            # other attributes unnecessarily)
+                            dynamo.Index('lang', sort_key='date', keys_only=True),
+                            dynamo.Index('level', sort_key='date', keys_only=True),
+                            dynamo.Index('adventure_name', sort_key='date', keys_only=True),
+                        ]
+                        )
+CLASSES = dynamo.Table(storage, "classes", "id",
+                       types=only_in_dev({
+                           'id': str,
+                           'teacher': str,
+                           'link': str,
+                           'date': int,
+                           'name': str,
+                           'second_teachers': Optional(ListOf(RecordOf({
+                               'role': str,
+                               'username': str,
+                           }))),
+                           'students': Optional(SetOf(str)),
+                       }),
+                       indexes=[
+                           dynamo.Index('teacher'),
+                           dynamo.Index('link'),
+                       ]
+                       )
 
 # A custom teacher adventure
 # - id (str): id of the adventure
@@ -51,12 +156,42 @@ CLASSES = dynamo.Table(storage, "classes", "id", indexes=[
 # - name (str): adventure name
 # - public (int): 1 or 0 whether it can be shared
 # - tags_id (str): id of tags that describe this adventure.
-ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[
-                          dynamo.Index("creator"), dynamo.Index("public"),
-                          dynamo.Index("name", sort_key="creator", index_name="name-creator-index")])
+
+
+ADVENTURES = dynamo.Table(storage, "adventures", "id",
+                          types=only_in_dev({
+                              'id': str,
+                              'date': int,
+                              'creator': str,
+                              'name': str,
+                              'classes': Optional(ListOf(str)),
+                              'level': EitherOf(str, int),  # this might be a string or a int
+                              'levels': ListOf(str),
+                              'content': str,
+                              'public': int,
+                              'language': str,
+                              'formatted_content': Optional(str)
+                          }),
+                          indexes=[
+                              dynamo.Index("creator"),
+                              dynamo.Index("public"),
+                              dynamo.Index("name", sort_key="creator", index_name="name-creator-index")
+                          ])
 INVITATIONS = dynamo.Table(
     storage, "invitations", partition_key="username#class_id",
-    indexes=[dynamo.Index("username"), dynamo.Index("class_id")],
+    types=only_in_dev({
+        'username': str,
+        'class_id': str,
+        'timestamp': int,
+        'ttl': int,
+        'invited_as': str,
+        'invited_as_text': str,
+        'username#class_id': str
+    }),
+    indexes=[
+        dynamo.Index("username"),
+        dynamo.Index("class_id"),
+    ],
 )
 
 """
@@ -66,16 +201,49 @@ INVITATIONS = dynamo.Table(
     - tagged_in ([{ id, public, language }]): tagged in which adventures.
     - popularity (int): # of adventures it's been tagged in.
 """
-TAGS = dynamo.Table(storage, "tags", "id", indexes=[dynamo.Index("name", sort_key="popularity")])
+TAGS = dynamo.Table(storage, "tags", "id",
+                    types=only_in_dev({
+                        'id': str,
+                        'name': str,
+                        'popularity': int,
+                        'tagged_in': Optional(ListOf(RecordOf({
+                            'id': str,
+                            'public': int,
+                            'language': str
+                        })))
+                    }),
+                    indexes=[
+                        dynamo.Index("name", sort_key="popularity")
+                    ]
+                    )
 
 # A survey
 # - id (str): the identifier of the survey + the response identifier ex. "class_teacher1" or "students_student1"
 # - responses (str []): the response per question
 # - skip (str): if the survey should never be shown or today date to be reminded later
 
-SURVEYS = dynamo.Table(storage, "surveys", "id")
+SURVEYS = dynamo.Table(storage, "surveys", "id",
+                       types=only_in_dev({
+                           'id': str,
+                           'responses':  Optional(DictOf({
+                               str: RecordOf({
+                                   'answer': str,
+                                   'question': str
+                               })
+                           }))
+                       }),
+                       )
 
-FEEDBACK = dynamo.Table(storage, "teacher_feedback", "id")
+FEEDBACK = dynamo.Table(storage, "teacher_feedback", "id",
+                        types=only_in_dev({
+                            'id': str,
+                            'username': str,
+                            'email': str,
+                            'message': str,
+                            'category': str,
+                            'page': str,
+                            'date': int
+                        }))
 
 # Class customizations
 #
@@ -102,12 +270,64 @@ FEEDBACK = dynamo.Table(storage, "teacher_feedback", "id")
 # - teacher_adventures (str[]): a list of all ids of the adventures that have been made
 #      available to this class. This list is deprecated, all adventures a teacher created
 #      are now automatically available to all of their classes.
-CUSTOMIZATIONS = dynamo.Table(storage, "class_customizations", partition_key="id")
-ACHIEVEMENTS = dynamo.Table(storage, "achievements", partition_key="username")
-PUBLIC_PROFILES = dynamo.Table(storage, "public_profiles", partition_key="username")
-PARSONS = dynamo.Table(storage, "parsons", "id")
-STUDENT_ADVENTURES = dynamo.Table(storage, "student_adventures", "id")
-CLASS_ERRORS = dynamo.Table(storage, "class_errors", "id")
+CUSTOMIZATIONS = dynamo.Table(storage, "class_customizations", partition_key="id",
+                              types=only_in_dev({
+                                  'id': str,
+                                  'levels': ListOf(int),
+                                  'opening_dates': DictOf({
+                                      str: str
+                                  }),
+                                  'other_settings': ListOf(str),
+                                  'level_thresholds': DictOf({
+                                      str: int
+                                  }),
+                                  'sorted_adventures': DictOf({
+                                      str: ListOf(RecordOf({
+                                          'name': str,
+                                          'from_teacher': bool
+                                      }))
+                                  }),
+                                  'updated_by': Optional(str),
+                                  'quiz_parsons_tabs_migrated': Optional(int)
+                              }))
+
+ACHIEVEMENTS = dynamo.Table(storage, "achievements", partition_key="username",
+                            types=only_in_dev({
+                                'username': str,
+                                'achieved': Optional(ListOf(str)),
+                                'commands': Optional(ListOf(str)),
+                                'saved_programs': Optional(int),
+                                'run_programs': Optional(int)
+                            }))
+PUBLIC_PROFILES = dynamo.Table(storage, "public_profiles", partition_key="username",
+                               types=only_in_dev({
+                                   'username': str,
+                                   'image': str,
+                                   'personal_text': str,
+                                   'agree_terms': str,
+                                   'tags': Optional(ListOf(str))
+                               }))
+PARSONS = dynamo.Table(storage, "parsons", "id",
+                       types=only_in_dev({
+                           'id': str,
+                           'username': str,
+                           'level': str,
+                           'exercise': str,
+                           'order': str,
+                           'correct': str,
+                           'timestamp': ListOf(int)
+                       }),
+                       )
+STUDENT_ADVENTURES = dynamo.Table(storage, "student_adventures", "id",
+                                  types=only_in_dev({
+                                      'id': str,
+                                      'ticked': bool,
+                                      'program_id': str
+                                  }),
+                                  )
+CLASS_ERRORS = dynamo.Table(storage, "class_errors", "id",
+                            types=only_in_dev({'id': str}),
+                            )
 # We use the epoch field to make an index on the users table, sorted by a different
 # sort key. In our case, we want to sort by 'created', so that we can make an ordered
 # list of users.
@@ -115,9 +335,10 @@ CLASS_ERRORS = dynamo.Table(storage, "class_errors", "id")
 # We add an 'epoch' field so that we can make an index of (PK: epoch, SK: created).
 # It doesn't matter what the 'epoch' field is, it just needs to have a predictable value
 # that we know so we can query on it again.
-# Once the users table starts to hit 10GB, we need to increase this number to make sure
-# the new users to to separate partition, and at that point we need to query both
-# partitions in the index (but that will most likely not happen any time soon...)
+# Once the users table starts to hit 10GB (~30M users), we need to increase this
+# number to make sure the new users to to separate partition, and at that point
+# we need to query both partitions in the index (but that will most likely not
+# happen any time soon...)
 CURRENT_USER_EPOCH = 1
 
 # Information on quizzes. We will update this record in-place as the user completes
@@ -139,7 +360,12 @@ CURRENT_USER_EPOCH = 1
 # 'levelAttempt' is a combination of level and attemptId, to distinguish attempts
 # by a user. 'level' is padded to 4 characters, then attemptId is added.
 #
-QUIZ_ANSWERS = dynamo.Table(storage, "quizAnswers", partition_key="user", sort_key="levelAttempt")
+QUIZ_ANSWERS = dynamo.Table(storage, "quizAnswers", partition_key="user", sort_key="levelAttempt",
+                            types=only_in_dev({
+                                'user': str,
+                                'levelAttempt': str,
+                            })
+                            )
 
 # Holds information about program runs: success/failure and produced exceptions. Entries are created per user per level
 # per week and updated in place. Uses a composite partition key 'id#level' and 'week' as a sort key. Structure:
@@ -152,11 +378,23 @@ QUIZ_ANSWERS = dynamo.Table(storage, "quizAnswers", partition_key="user", sort_k
 # }
 #
 PROGRAM_STATS = dynamo.Table(
-    storage, "program-stats", partition_key="id#level", sort_key="week", indexes=[dynamo.Index("id", "week")]
+    storage, "program-stats", partition_key="id#level", sort_key="week",
+    types=only_in_dev({
+        'id#level': str,
+        'id': str,
+        'week': str,
+    }),
+    indexes=[dynamo.Index("id", "week")]
 )
 
 QUIZ_STATS = dynamo.Table(
-    storage, "quiz-stats", partition_key="id#level", sort_key="week", indexes=[dynamo.Index("id", "week")]
+    storage, "quiz-stats", partition_key="id#level", sort_key="week",
+    types=only_in_dev({
+        'id#level': str,
+        'id': str,
+        'week': str,
+    }),
+    indexes=[dynamo.Index("id", "week")]
 )
 
 # Program stats also includes a boolean array indicating the order of successful and non-successful runs.
@@ -230,33 +468,26 @@ class Database:
 
     def filtered_programs_for_user(self, username, level=None, adventure=None, submitted=None, public=None,
                                    limit=None, pagination_token=None):
-        ret = []
+        def client_side_filter(program):
+            if level and int(program.get('level', 0)) != int(level):
+                return False
+            if adventure:
+                if adventure == 'default' and program.get('adventure_name') != '':
+                    return False
+                if adventure != 'default' and program.get('adventure_name') != adventure:
+                    return False
+            if submitted is not None:
+                if program.get('submitted') != submitted:
+                    return False
+            if public is not None and bool(program.get('public')) != public:
+                return False
+            return True
 
         # FIXME: Query by index, the current behavior is slow for many programs
         # (See https://github.com/hedyorg/hedy/issues/4121)
-        programs = dynamo.GetManyIterator(PROGRAMS, {"username": username},
-                                          reverse=True, batch_size=limit, pagination_token=pagination_token)
-
-        for program in programs:
-            if level and program.get('level') != int(level):
-                continue
-            if adventure:
-                if adventure == 'default' and program.get('adventure_name') != '':
-                    continue
-                if adventure != 'default' and program.get('adventure_name') != adventure:
-                    continue
-            if submitted is not None:
-                if program.get('submitted') != submitted:
-                    continue
-            if public is not None and bool(program.get('public')) != public:
-                continue
-
-            ret.append(program)
-
-            if limit and len(ret) >= limit:
-                break
-
-        return dynamo.ResultPage(ret, programs.next_page_token)
+        return PROGRAMS.get_page({"username": username},
+                                 reverse=True, limit=limit or 50, pagination_token=pagination_token,
+                                 client_side_filter=client_side_filter)
 
     def program_by_id(self, id):
         """Get program by ID.
@@ -401,49 +632,33 @@ class Database:
         for Class in self.get_teacher_classes(username, False):
             self.delete_class(Class)
 
-    def all_users(self, page_token=None):
+    def all_users(self, page_token=None, limit=500):
         """Return a page from the users table.
 
         There may be more users to retrieve. If so, the returned page object
         will have a 'next_page_token' attribute to continue retrieval.
 
-        The pagination token will be of the form '<epoch>:<pagination_token>'
+        Right now, we will only ever query the current epoch, since we are very
+        far from 30M users. Once we start to get in that neighbourhood, we should
+        update this code.
         """
-        limit = 500
-
-        epoch, pagination_token = (
-            page_token.split(":", maxsplit=1) if page_token is not None else (CURRENT_USER_EPOCH, None)
-        )
-        epoch = int(epoch)
-
-        page = USERS.get_many(dict(epoch=epoch), pagination_token=pagination_token, limit=limit, reverse=True)
-
-        # If we are not currently at epoch > 1 and there are no more records in the current
-        # epoch, also include the first page of the next epoch.
-        if not page.next_page_token and epoch > 1:
-            epoch -= 1
-            next_epoch_page = USERS.get_many(dict(epoch=epoch), reverse=True, limit=limit)
-
-            # Build a new result page with both sets of records, ending with the next "next page" token
-            page = dynamo.ResultPage(list(page) + list(next_epoch_page), next_epoch_page.next_page_token)
-
-        # Prepend the epoch to the next pagination token
-        if page.next_page_token:
-            page.next_page_token = f"{epoch}:{page.next_page_token}"
-        return page
+        return USERS.get_page(dict(epoch=CURRENT_USER_EPOCH), pagination_token=page_token,
+                              limit=limit, reverse=True)
 
     def get_all_public_programs(self):
         programs = PROGRAMS.get_many({"public": 1}, reverse=True)
         return [x for x in programs if not x.get("submitted", False)]
 
     @querylog.timed_as("get_public_programs")
-    def get_public_programs(self, level_filter=None, language_filter=None, adventure_filter=None, limit=40):
+    def get_public_programs(self, level_filter=None, language_filter=None, adventure_filter=None,
+                            limit=40, pagination_token=None):
         """Return the most recent N public programs, optionally filtered by attributes.
 
         The 'public' index is the most discriminatory: fetch public programs, then evaluate them against
         the filters (on the server). The index we're using here has the 'lang', 'adventure_name' and
         'level' columns.
         """
+        # This index contains relevant filterable fields, but doesn't contain the actual code
         filter = {}
         if level_filter:
             filter['level'] = int(level_filter)
@@ -452,23 +667,11 @@ class Database:
         if adventure_filter:
             filter['adventure_name'] = adventure_filter
 
-        timeout = dynamo.Cancel.after_timeout(timedelta(seconds=3))
-        id_batch_size = 200
-
-        found_program_ids = []
-        pagination_token = None
-        while len(found_program_ids) < limit and not timeout.is_cancelled():
-            page = PROGRAMS.get_many({'public': 1}, reverse=True, limit=id_batch_size,
-                                     pagination_token=pagination_token, filter=filter)
-            found_program_ids.extend([{'id': r['id']} for r in page])
-            pagination_token = page.next_page_token
-            if pagination_token is None:
-                break
-        del found_program_ids[limit:]  # Cap off in case we found too much
-
-        # Now retrieve all programs we found with a batch-get
-        found_programs = PROGRAMS.batch_get(found_program_ids)
-        return found_programs
+        ids = PROGRAMS.get_page({'public': 1}, reverse=True, limit=limit,
+                                server_side_filter=filter, pagination_token=pagination_token,
+                                timeout=3, fetch_factor=2.0)
+        ret = PROGRAMS.batch_get(ids)
+        return ret
 
     def add_public_profile_information(self, programs):
         """For each program in a list, note whether the author has a public profile or not.
@@ -477,11 +680,11 @@ class Database:
 
         Modifies the records in the list in-place.
         """
-        queries = {p['id']: {'username': p['username'].strip().lower()} for p in programs}
+        queries = {p['id']: {'username': p['username'].strip().lower()} for p in programs if 'username' in p}
         profiles = PUBLIC_PROFILES.batch_get(queries)
 
         for program in programs:
-            program['public_user'] = True if profiles[program['id']] else None
+            program['public_user'] = True if profiles.get(program['id']) else None
 
     def get_highscores(self, username, filter, filter_value=None):
         profiles = []
@@ -628,7 +831,11 @@ class Database:
         return TAGS.get({"name": tag_name})
 
     def read_tags(self, tags):
-        return [self.read_tag(name) for name in tags]
+        db_tags = []
+        for name in tags:
+            if (db_tag := self.read_tag(name)) is not None:
+                db_tags.append(db_tag)
+        return db_tags
 
     def read_public_tags(self):
         """Public tags are tagged within one or more public adventure or those that aren't in use."""
@@ -710,6 +917,10 @@ class Database:
 
     def get_survey(self, id):
         return SURVEYS.get({"id": id})
+
+    def get_feedback(self):
+        """Get allfeedback in the database"""
+        return FEEDBACK.scan()
 
     def add_survey_responses(self, id, responses):
         SURVEYS.update({"id": id}, {"responses":  responses})
@@ -899,8 +1110,7 @@ class Database:
         # We can only set a favourite program is there is already a public profile
         data = PUBLIC_PROFILES.get({"username": username})
         if data:
-            data["favourite_program"] = program_id if set_favourite else ''
-            self.update_public_profile(username, data)
+            self.update_public_profile(username, {"favourite_program": program_id if set_favourite else ''})
             return True
         return False
 
