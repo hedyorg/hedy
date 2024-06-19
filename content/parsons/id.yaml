@@ -137,11 +137,11 @@ levels:
                 Either red, yellow or blue! Take a little pauze after announcing a team.
             code: |-
                 teams = red, yellow, blue
-                {print} 'Red, Yellow of Blue?'
+                {print} 'Merah, Kuning, atau Biru?'
                 {repeat} 5 {times}
-                  {print} 'You are selected in team... '
+                  {print} 'Kamu terpilih di tim... '
                   {print} teams {at} {random}
-                  sleep 2
+                  {sleep} 2
         2:
             story: Print the countdown for a  game of hide and seek.
             code: |-
@@ -181,8 +181,8 @@ levels:
     10:
         1:
             story: |-
-                Help this family out by creating a schedule of who is cooking and what they should be making this week. The remove commands make sure nobody has to cook twice and they have a differnet dinner every day.
-                **Mind!** the variable order should be first days, then people, and lastly dinner_options. This goes for the lines with the remove commands too.
+                Bantu keluarga ini dengan membuat jadwal siapa yang memasak dan apa yang harus mereka buat minggu ini. Perintah hapus memastikan tidak ada yang memasak dua kali dan mereka mendapatkan makan malam berbeda setiap hari.
+                **Keberatan!** urutan variabel harus hari pertama, lalu orang, dan terakhir pilihan makan malam. Ini juga berlaku untuk baris dengan perintah `{remove}`.
             code: |-
                 days = Monday, Tuesday, Wednesday, Thursday, Friday
                 people = mom, dad, Martin, Abby, Jesse
@@ -218,8 +218,8 @@ levels:
                 {print} 'Happy New Year!'
         2:
             story: |-
-                Create a program that tells us the final results of the science fair. Firstly define the variable contestants, then the variable place.
-                **Hint** Line 5 should be the sleep command, and you should end with saying congratulations.
+                Buatlah program yang memberi tahu kita hasil akhir pameran sains. Pertama tentukan variabel kontestan, lalu variabel tempatnya.
+                **Petunjuk** Baris 5 harus menjadi perintah tidur, dan kamu harus mengakhirinya dengan mengucapkan selamat.
             code: |-
                 {print} 'And now we will reveal the results of the science fair'
                 contestants = Vivienne, Paul, Trixy, Bianca, Katya

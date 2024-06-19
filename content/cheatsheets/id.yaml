@@ -32,10 +32,10 @@
 -   name: '{ask}'
     explanation: Tanyakan sesuatu dengan `ask`. Ingat, kamu harus memberikan jawabannya sebuah nama menggunakan `is`
     demo_code: |-
-        warna is ask Apa warna favoritmu?
-        print warna ini kesukaanmu
+        warna {is} {ask} Apa warna kesukaanmu?
+        {print} warna adalah kesukaanmu!
 -   name: '{sleep}'
-    explanation: Let Hedy pause for a (couple of) second(s).
+    explanation: Dengan `{sleep}`, kamu dapat membuat Hedy istirahat untuk sesaat.
     demo_code: |-
         {print} Let me think for one second...
         {sleep}
@@ -100,12 +100,12 @@
 -   name: '{in}'
     explanation: Check elements with `{in}`
     demo_code: |-
-        pretty_colors {is} green, yellow
-        color {is} {ask} 'What {is} your favorite color?'
-        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
+        pretty_colors {is} hijau, kuning
+        color {is} {ask} 'Apa warna kesukaanmu?'
+        {if} color {in} pretty_colors {print} 'cantik!' {else} {print} 'meh'
 -   name: '{pressed}'
     explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
+    demo_code: '{if} a {is} {pressed} {print} ''Kamu menekan A!'' {else} {print} ''Kamu menekan tombol lain!'''
 6:
 -   name: '{print}'
     explanation: Tampilkan sama persis menggunakan tanda kutip satu
@@ -115,7 +115,7 @@
     demo_code: |-
         jawaban = ask 'Apa hasil dari 10 tambah 10?'
         if jawaban is 20 print 'Yeah!' else print 'Ups'
--   name: '`{ask}` {and} `{if}` turtle'
+-   name: '`{ask}` dan `{if}` dengan kura-kura'
     explanation: '{ask} the user how many angles they want'
     demo_code: |-
         angles = {ask} 'How many angles?'
@@ -138,8 +138,7 @@
 -   name: '{repeat} - turtle'
     explanation: Gabungan `repeat` dan `if`
     demo_code: |-
-        warna = ask 'Apa warna favoritmu?'
-        if warna is hijau repeat 3 times print 'pretty!' else repeat 5 times print 'meh'
+        {repeat} 3 {times} {forward} 10
 8:
 -   name: '{print}'
     explanation: Tampilkan sesuatu. Ingat untuk menggunakan tanda kutip satu jika ingin menampilkan teks sama persis.
@@ -161,12 +160,12 @@
             {turn} 90
             {forward} 50
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    explanation: Periksa apakah tombol tertentu pada keyboard sudah `{pressed}`.
     demo_code: |-
         {if} a {is} {pressed}
-            {print} 'You pressed A!'
+            {print} 'Kamu menekan A!'
         {else}
-            {print} 'You pressed another key!'
+            {print} 'Kamu menekan tombol lain!'
 9:
 -   name: '`if` dengan beberapa baris'
     explanation: Cek apakah jawaban dari penjumlahan yang ditanyakan dengan `ask` benar. Sekarang kita menampilkan dua baris.
@@ -214,17 +213,15 @@
 -   name: Angka desimal langsung
     explanation: Perhitungan dengan angka desimal
     demo_code: |-
-        print 'Hitung langsung!'
-        print 'Dua setengah tambah dua setengah adalah...'
-        print 2.5 + 2.5
+        {print} 'Hitung saja!'
+        {print} 'Dua setengah tambah dua setengah adalah...'
+        {print} 2.5 + 2.5
 -   name: desimal di variabel
     explanation: Menyimpan hasil perhitungan desimal
     demo_code: |-
-        jawaban = 2.5 + 2.5
-        print 'Hitung langsung!'
-        print 'Dua setengah tambah dua setengah adalah...'
-        print jawaban
--   name: quotes after {if} comparison
+        name = 'Hedy si Robot'
+        {print} 'Halo ' nama
+-   name: quotes after `{if}` comparison
     explanation: Text with quotation marks after {if}
     demo_code: |-
         name = {ask} 'Who are you?'
@@ -320,7 +317,7 @@
         buahpertama = buah[1]
         print buahpertama
 -   name: Mengambil sebuah nilai dari dalam list secara acak
-    explanation: Untuk mengambil sebuah nilai dalam list secara acak, kita menggunakan [random] jadi buah[random] artinya mengambil buah dari dalam list secara acak!
+    explanation: Untuk mengambil item acak dalam list kita menggunakan [{random}] jadi buah[{random}] artinya, ambil buah dari dalam list secara acak!
     demo_code: |-
         buah = ['apel', 'pisang', 'ceri']
         buaha_cak = buah[random]
@@ -329,27 +326,27 @@
 -   name: '{elif}'
     explanation: Ketika kita menggunakan `for`, kita perlu menambahkan `:` diakhir statemen `for`
     demo_code: |-
-        for i in range 1 to 10:
-            print i
-        print 'Siap atau tidak, aku datang!'
+        a = 2
+        {if} a == 1:
+            {print} 'a adalah 1'
+        {elif} a == 2:
+            {print} 'a adalah 2'
+        {else}:
+            {print} 'a adalah tidak 1 atau 2'
 -   name: '{print}'
-    explanation: Kita perlu melakukan hal yang sama untuk semua statemen `if`
+    explanation: Saat kita menggunakan `{for}`, kita perlu menaruh `:` dibelakang `{for}` pernyataan!
     demo_code: |-
-        warna = 'hijau'
-        if warna is 'hijau':
-            print 'Warnanya hijau'
-        else:
-            print 'Warnanya bukan hijau'
+        {for} i {in} {range} 1 {to} 12:
+            {print} i
+        {print} 'Siap atau tidak, aku datang!'
 -   name: '{if}'
     explanation: Kami akan memberikan sebuah perintah baru yang bisa kamu pakai:`elif`. `elif` berarti `else if`. Program akan mulai mengecek apakah kondisi di `if` dipenuhi. Jika tidak, program akan mengecek `elif` dan jika tidak memenuhi juga, program akan ke `else`.
     demo_code: |-
-        a = 2
-        if a is 1:
-            print 'a bernilai 1'
-        elif a is 2:
-            print 'a bernilai 2'
-        else:
-            print 'a bukan bernilai 1 atau 2'
+        color = {ask} 'Apa warna kesukaanmu?'
+        {if} color == 'hijau':
+            {print} 'Warna kesukaanmu hijau'
+        {else}:
+            {print} 'Warna kesukaanmu bukan hijau'
 18:
 -   name: '{print}'
     explanation: With `{print}` you need to use parentheses
@@ -360,12 +357,12 @@
         name = 'Hedy'
         {print}('my name is ', name)
 -   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
+    explanation: Dengan `{print}` anda perlu menggunakan tanda kurung dan koma jika anda mencetak lebih banyak item.
     demo_code: |-
         name = 'Hedy'
-        {print}('my name is ', name)
--   name: ask something with {input}
-    explanation: Use `{input}` instead of `{ask}` to ask something
+        {print}('nama saya ', nama)
+-   name: tanya sesuatu dengan {input}
+    explanation: Gunakan `{input}` alih-alih `{ask}` untuk menanyakan sesuatu.
     demo_code: |-
-        name = {input}('What is your name?')
-        {print}('So your name is ', name)
+        name = {input}('Siapa namamu?')
+        {print}('Jadi namamu ', nama)
