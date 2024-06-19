@@ -93,13 +93,13 @@ strong {
 
 .btn-shape {
   @apply font-slab leading-6 font-normal tracking-wide;
-  @apply pt-2 pb-1 px-4 border border-b-4 rounded no-underline;
+  @apply pt-2 pb-1 px-4 border rounded-md no-underline;
   display: inline-block;
 }
 
 .green-btn {
   @apply btn-shape;
-  @apply bg-green-500 text-white border-green-700;
+  @apply bg-green-500 text-white border-green-500;
 }
 
 .green-btn:disabled, .green-btn[disabled] {
@@ -108,7 +108,12 @@ strong {
 
 .white-btn {
   @apply btn-shape;
-  @apply bg-white text-blue-500 border-blue-400;
+  @apply bg-gray-100 text-blue-900 border-gray-100;
+}
+
+.hedy-dropdown-btn {
+  @apply btn-shape;
+  @apply bg-blue-100 text-blue-900;
 }
 
 
@@ -206,7 +211,7 @@ a.green-btn:hover {
 
 .blue-btn {
   @apply btn-shape;
-  @apply bg-blue-500 text-white border-blue-700;
+  @apply bg-gray-200 text-blue-800 border-gray-200;
 }
 
 .blue-btn:hover {
@@ -337,7 +342,7 @@ code {
 .menubar-item {
   @apply cursor-pointer block border-b-4 tracking-wide;
   /* Colors */
-  @apply border-gray-100;
+  @apply border-blue-200;
 }
 
 .menubar-item:hover {
@@ -347,13 +352,13 @@ code {
 
 .menubar-item.active {
   /* Colors */
-  @apply border-blue-600 !important;
+  @apply border-blue-700 !important;
 }
 
 .menubar-text {
   @apply items-center text-base lg:text-xl no-underline font-slab p-1;
   /* Colors */
-  @apply text-blue-600;
+  @apply text-blue-800;
 }
 
 #output, #quiz_question_output_container {
