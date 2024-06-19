@@ -173,7 +173,7 @@ class AdminModule(WebsiteModule):
             page_title=gettext("title_admin"),
         )
 
-    @route("/markAsTeacher", methods=["POST"])
+    @route("/mark-as-teacher", methods=["POST"])
     def mark_as_teacher(self):
         user = current_user()
         if not is_admin(user) and not utils.is_testing_request(request):
@@ -224,7 +224,7 @@ class AdminModule(WebsiteModule):
         self.db.update_user(user["username"], {"is_super_teacher": 0 if user.get("is_super_teacher") else 1, })
         refresh_current_user_from_db()
 
-        return f"{user['username']} is now a super-teacher.", 200
+        return make_response(f"{user['username']} is now a super-teacher.", 200)
 
     @route("/changeUserEmail", methods=["POST"])
     @requires_admin
