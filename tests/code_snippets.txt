@@ -1,0 +1,293 @@
+{print} Hedy puede imprimir esto!,Hedy no puede imprimir esto
+{ask} ¿Por qué mi código funciona ahora?
+{print} ¡Porque eliminé las mayúsculas!,Preguntar ¿Por qué mi código no funciona?
+Imprimir Porque estoy usando mayúsculas.
+{ask} ¿Cómo te llamas?
+{echo} Tu nombre es,ecoo Tu nombre es
+{ask} ¿Qué lenguaje de programación es el más divertido?
+{echo} el mejor es...,{ask} ¿Qué lenguaje de programación es el más divertido?
+{echo} ¡es el mejor!
+{forward} 100
+{turn} 90,{forward} 300
+{turn} 90
+{forward} -100,retroceder 100
+{print} ¡No cometas errores tipográficos,{print} No hagas errores de escritura
+pedir {is} {ask} ¿Qué te gustaría comer,preguntar ¿Qué te gustaría comer
+respuesta {is} {ask} ¿¡Por qué ya no funciona {echo}?!
+{print} respuesta,responder {is} {ask} ¡¿Por qué {echo} ya no funciona?!
+{echo}
+nombre {is} Hedy
+{print} Hola soy nombre,nombre {is} Hedy
+{print} Hola mi nombre es nombre
+puerta_elegida {is} {ask} ¿qué puerta escoges,puerta escogida es preguntar ¿Qué puerta eliges
+nombre {is} {ask} ¿Cómo se llama tu caballo
+imprimit Tu caballo se llama nombre,caballo {is} {ask} ¿Cómo se llama tu caballo
+{print} Tu caballo se llama nombre
+{print} manzanas, leche, chocolate
+
+o
+
+comestibles {is} manzanas, leche, chocolate
+{print} comestibles {at} {random},productos {is} manzanas, leche, chocolate
+{print} productos
+nombre {is} Hedy
+{print} Hola soy nombre
+
+o
+
+animales {is} rinoceronte, abeja, cisne
+{print} El mejor animal es... animales {at} {random},nombre {is} Hedy
+{print} Hola mi nombre es nombre
+
+o
+
+animal {is} rinoceronte, abeja, cisne
+{print} El mejor animal es... animal {at} {random}
+pájaros {is} gorrión, gaviota, petirrojo
+{print} pájaros {at} {random},pájaros {is} gorrión, gaviota, petirrojo
+{print} pájaros aleatorio
+fruta {is} manzana, cereza, plátano
+{print} fruta {at} {random},fruta {is} manzana, cereza, plátano
+fruta {at} {random}
+pizzas {is} setas, de atún, cuatro estaciones
+imprime pizzas en aleatorio,pizzas {is} setas de atún cuatro estaciones
+{print} pizzas {at} {random}
+clubs {is} Manchester United, Bayern Munchen, FC Barcelona
+{print} clubs {at} {random},clubs {is} Manchester United
+{print} clubs {at} {random}
+nombres {is} Jake, Amy
+tu_nombre {is} {ask} ¿Quién eres tú?
+{add} tu_nombre {to} nombres
+{print} nombres {at} {random},nombres {is} Jake
+tu_nombre {is} {ask} ¿Quién eres tú?
+{add} tu_nombre {to} nombres
+{print} nombres {at} {random}
+aventuras {is} historia, loro, dado
+opción {is} ¿Qué aventura te gusta más?
+{add} opción   aventuras
+{remove} dado {from} aventuras
+{print} Me encanta aventuras {at} {random},aventuras {is} historia, loro, dados
+opción {is} ¿Qué aventura te gusta más?
+{add} opción
+{remove} dados
+{print} Me encanta aventuras {at} {random}
+{print} 'Hola'
+estado_animo {is} {ask} '¿Cómo estás?',{print} Hola
+estado_animo {is} {ask} '¿Cómo estás?
+{print} 'Bienvenido al restaurante'
+comida {is} {ask} '¿Qué te gustaría pedir?',{print} `Bienvenido al restaurante`
+comida {is} {ask} "¿Qué te gustaría pedir?"
+{print} 'Se permite que escribas esto (Youre)'
+{print} 'Y también puedes escribir esto (you`re)',{print} 'No está permitido escribir esto'
+{if} nombre {is} Hedy {print} '¡Genial!'
+{else} {print} '¡Hedy es mejor!',{if} nombre {is} Hedy '¡Genial!'
+{else}  ¡Hedy {is} mejor!
+caballo {is} {ask} 'Cómo se llama tu caballo'
+{if} caballo {is} Hoguera {print} '¡mola!'
+{else} {print} '¡no mola tanto!',caballo {is} {ask} '¿Cómo se llama tu caballo?'
+{if} nombre {is} Hoguera {print} 'mola'
+{else} {print} '¡no mola tanto!'
+{if} nombre {is} Hedy {print} 'divertido'
+{else} {print} '¡meh!',{if} nombre {is} Hedy {print} divertido
+{else} {print} '¡meh!
+{if} nombre {is} Hedy {print} 'divertido'
+{else} {print} '¡meh!,{if}  nombre  {is} 'Hedy' {print} 'divertido'
+{else} {print} '¡meh!'
+puerta_elegida {is} {ask} '¿qué puerta eliges?',puerta elegida es preguntar  ¿Qué puerta eliges?
+amigos {is} Jesse, David, Souf
+nombre {is} {ask} '¿Quién eres?'
+{if} nombre {in} amigos {print} 'Eres divertido'
+{else} {print} 'No eres divertido'
+
+o
+
+nombre {is} {ask} '¿Quién eres?'
+{if} nombre {is} Jesse {print} 'Eres divertido'
+{if} nombre {is} David {print} 'Eres divertido'
+{if} nombre {is} Souf {print} 'Eres divertido',{if} nombre {is} Jesse, David, Souf imprimir  Eres divertido  {else} {print} 'No eres divertido'
+contraseña_secreta {is} {ask} 'Cuál es la contraseña'
+{if} contraseña_secreta {is} contraseña {print} '¡Acceso permitido!'
+{else} {print} '¡Acceso denegado!',contraseña {is} {ask} '?Cuál es la contraseña?'
+{if} contraseña {is} contraseña {print} 'Acceso permitido'
+{else} {print} '¡Acceso denegado!'
+{print} 5 + 5,{print} '5 + 5'
+precio = 0
+{print} 'Bienvenido a nuestro restaurante de hamburguesas'
+hamburguesa = {ask} '¿Quieres una hamburguesa?'
+{if} hamburguesa = sí precio = precio + 10
+bebida = {ask} '¿Quieres una bebida?'
+{if} bebida = sí precio = precio + 4
+{print} 'Serán ' precio ' euros por favor',edad = {ask} '¿Cuántos años tienes?'
+{print} 'El año que viene tendré ' edad + 1
+{repeat} 3 {times} {print} 'Porque es un buen amigo'
+{repeat} 3 {times} {print} '¡Que nadie puede negar!',{repeat} 3 {times}  Porque {is} un buen amigo
+{repeat} 3 imprimir
+bebida = {ask} '¿Qué te gustaría beber?'
+{print} bebida
+bebida = {ask} '¿Qué te gustaría beber?'
+{print} bebida
+bebida = {ask} '¿Qué te gustaría beber?'
+{print} bebida,{repeat} 3 {times} bebida = {ask} '¿Qué te gustaría beber?'
+{print} bebida
+{repeat} 20 {times} {print} 'Esto es suficiente',{repeat} 100 {times} {print} '¿Cuántas veces puedo repetir esto?'
+{repeat} 3 {times}
+    {print} 'hola',{repeat} 3 {times}
+{print} 'hola'
+{repeat} 3 {times}
+    bebida = {ask} '¿Qué quieres beber?'
+    {print} bebida,{repeat} 3 {times}
+    bebida = {ask} '¿Qué quieres beber?'
+{print} bebida
+cumpleaños = {ask} '¿Es tu cumpleaños?'
+{if} cumpleaños = sí
+    {print} '¡Hip Hip Hurra!'
+    {print} '¡Hip Hip Hurra!'
+    {print} '¡Hip Hip Hurra!',cumpleaños = {ask} '¿Es tu cumpleaños?'
+{if} cumpleaños = sí
+    {repeat} 3 {times}
+        {print} '¡Hip Hip Hurra!'
+{repeat} 20 {times}
+    {print} 'Esto es suficiente',{repeat} 100 {times}
+    {print} '¿Cuántas veces puedo repetir esto?'
+contraseña {is} {ask} '¿Cuál es la contraseña?'
+{if} contraseña {is} 'contraseña'
+    {print} 'Puedes entrar'
+{else}
+    {print} 'No puedes entrar',contraseña {is} {ask} '?Cuál es la contraseña?'
+{if} contraseña {is} contraseña
+    {print} 'Puedes entrar'
+{else}
+    {print} 'No puedes entrar'
+{print} 'Robin está caminando por el centro'
+ubicación = {ask} '¿Va Robin a entrar a una tienda, o se va a casa?'
+{if} ubicación {is} tienda
+    {print} 'Entra en la tienda.'
+    {print} 'Robin ve un libro interesante'
+    libro = {ask} '¿Va a comprar el libro?'
+    {if} libro {is} sí
+        {print} 'Robin compra el libro y se va a casa'
+    {else}
+        {print} 'Robin sale de la tienda y se va a casa'
+{else}
+    {print} 'Robin se va a casa',{print} 'Robin está caminando por el centro'
+ubicación = {ask} '¿Va Robin a entrar a una tienda, o se va a casa?'
+{if} ubicación {is} tienda
+    {print} 'Entra en la tienda.'
+    {print} 'Robin ve un libro interesante'
+    libro = {ask} '¿Va a comprar el libro?'
+        {if} libro {is} sí
+{print} 'Robin compra el libro y se va a casa'
+{else}
+    {print} 'Robin sale de la tienda y se va a casa'
+{else}
+    {print} 'Robin se va a casa'
+animales {is} perro, gato, pez globo
+{for} animal {in} animales
+  {print} 'Amo ' animal,animales {is} perro, gato, pez globo
+{for} animal {in} animales
+  {print} 'Amo ' animales
+animales {is} perro, gato, pez globo
+{for} animal {in} animales
+  {print} 'Amo ' animal,animales {is} perro, gato, pez globo
+{for} animal {in} animales
+{print} 'Amo ' animales
+{for} i {in} {range} 1 {to} 5
+    {print} i,{for} i {in} {range} 1 {to} 5
+{print} i
+{for} plátano {in} {range} 1 {to} 5
+    {print} plátano,{for} i {in} {range} 1 {to} 5
+{print} i
+superhéroes = 'Spiderman', 'Batman', 'Iron Man'
+superhéroe = superhéroes {at} {random}
+{if} superhéroe {is} 'Batman'
+    {print} '¡SOY BATMAN!',superhéroes = Spiderman, Batman, Iron Man
+superhéroe = superhéroes {at} {random}
+{if} superhéroe = Batman
+    {print} '¡SOY BATMAN!'
+puntuación = 25
+respuesta {is} {ask} '¿Quieres un punto?'
+{if} respuesta {is} 'sí'
+    puntuación = puntuación + 1
+    {print} puntuación,puntuación = '25'
+respuesta {is} {ask} '¿Quieres un punto?'
+{if} respuesta {is} 'sí'
+    puntuación = puntuación + 1
+    {print} puntuación
+{print} 2.5 + 2.5,{print} 2,5 + 2,5
+juego {is} {ask} '¿Quieres jugar a un juego?'
+tiempo {is} {ask} '¿Tienes tiempo para jugar?'
+{if} juego {is} 'sí' {and} tiempo {is} 'sí'
+    {print} '¡Juguemos!',juego {is} {ask} '¿Quieres jugar a un juego?'
+tiempo {is} {ask} '¿Tienes tiempo para jugar?'
+{if} juego {is} 'sí' {or} tiempo {is} 'sí'
+    {print} '¡Juguemos!'
+edad = {ask} '¿Cuántos años tienes?'
+{if} edad > 12
+    {print} '¡Eres mayor que yo!',edad = {ask} '¿Cuántos años tienes?'
+{if} edad < 12
+    {print} '¡Eres mayor que yo!'
+nombre = {ask} '¿Cómo te llamas?'
+{if} nombre != 'Hedy'
+    {print} 'No eres Hedy',nombre = {ask} '¿Cómo te llamas?'
+{if} nombre =  'Hedy'
+    {print} 'No eres Hedy'
+nombre = {ask} '¿Cómo te llamas?'
+{if} nombre == 'Hedy'
+    {print} '¡Eres genial!',nombre = {ask} '¿Cómo te llamas?'
+{if} nombre = 'Hedy'
+    {print} '¡Eres genial!'
+respuesta = 0
+{while} respuesta != 25
+    respuesta = {ask} '¿Cuánto es 5 veces 5?'
+{print} 'Se ha dado una respuesta correcta',respuesta = 0
+{while} respuesta != 25
+respuesta = {ask} '¿Cuánto es 5 veces 5?'
+{print} 'Se ha dado una respuesta correcta'
+helado = ['fresa', 'chocolate']
+{print} 'Me encanta el helado de ' helado[{random}],helado = 'fresa', 'chocolate'
+{print} 'Me encanta el helado de ' helado[{random}]
+helado = ['fresa', 'chocolate']
+{print} 'Me encanta el helado de ' helado[{random}],helado = ('fresa', 'chocolate'}
+{print} 'Me encanta el helado de ' helado[{random}]
+helado = ['fresa', 'chocolate']
+{print} 'Me encanta el helado de ' helado[{random}],helado = [fresa, chocolate]
+{print} 'Me encanta el helado de ' helado[{random}]
+helado = ['fresa', 'chocolate']
+{print} 'Me encanta el helado de ' helado[{random}],helado = [fresa, chocolate]
+{print} 'Me encanta el helado de ' helado en aleatorio
+helado = ['fresa', 'chocolate']
+{print} 'Me encanta el helado de ' helado[{random}],helado = [fresa, chocolate]
+{print} 'Me encanta el helado de ' helado[{random}]
+color = {ask} '¿Cuál es tu color favorito?'
+{if} color == 'verde':
+    {print} 'el verde es bonito'
+{elif} color == amarillo:
+    {print} 'el amarillo está bien'
+{else}:
+    {print} 'Me gusta el verde',color = preguntar '¿Cuál es tu color favorito?'
+{if} color == 'verde':
+    {print} 'el verde es bonito'
+{elif}:
+    {print} 'Me gusta el verde'
+respuesta = {ask} '¿Qué tal estás?'
+{if} respuesta {is} 'genial':
+    {print} '¡Yo también!'
+{elif} respuesta {is} 'mal':
+    {print} '¡Deja que te anime!'
+{else}:
+    {print} '¡Estoy genial!',respuesta = preguntar '¿Qué tal estás?'
+{if} respuesta {is} 'genial'
+    {print} '¡Yo también!'
+{elif} respuesta {is} 'mal'
+    {print} '¡Deja que te anime!'
+{else}
+    {print} '¡Estoy genial!'
+{print}('¡mi nombre es Hedy!'),{print} '¡mi nombre es Hedy!'
+{print}('¡Mi nombre es Hedy!')
+nombre = {input}('¿Cómo te llamas?')
+{print}('Así que tu nombre es ', nombre),{print}('¡Mi nombre es Hedy!')
+nombre = preguntar('¿Cómo te llamas?')
+{print}('Así que tu nombre es ', nombre)
+temperatura = 25
+{print}('Hay ', temperatura, 'grados fuera'),temperatura = 25
+{print}('Hay ')
