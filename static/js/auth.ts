@@ -192,7 +192,7 @@ export function markAsTeacher(checkbox: any, username: string, is_teacher: boole
   }
   modal.confirm (text, async () => {
     try {
-      await postNoResponse(by_super_teacher ? '/super-teacher/markAsTeacher' : '/admin/markAsTeacher', {
+      await postNoResponse(by_super_teacher ? '/super-teacher/mark-as-teacher' : '/admin/mark-as-teacher', {
         username: username,
         is_teacher: is_teacher,
       });
@@ -204,7 +204,7 @@ export function markAsTeacher(checkbox: any, username: string, is_teacher: boole
   }, async () => {
     // If there is a pending request, we decline the modal -> remove the teacher request
     if (pending_request) {
-      await postJson('/admin/markAsTeacher', {
+      await postJson('/admin/mark-as-teacher', {
         username: username,
         is_teacher: false
       });
