@@ -3,38 +3,6 @@
 
 export type MessageKey = 'CheckInternet' | 'Connection_error' | 'Empty_output' | 'Errors_found' | 'Execute_error' | 'Other_error' | 'Program_repair' | 'Program_too_long' | 'ServerError' | 'Transpile_error' | 'Transpile_success' | 'Transpile_warning' | 'Unsaved_Changes' | 'adventures_restored' | 'copy_link_to_share' | 'customization_deleted' | 'dice' | 'directly_available' | 'disabled' | 'fortune' | 'haunted' | 'level_title' | 'multiple_keywords_warning' | 'restaurant' | 'rock' | 'selected' | 'songs' | 'teacher_welcome' | 'turtle' | 'unsaved_class_changes'
 export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
-  "ang": {
-    "CheckInternet": "Check whether your Internet connection is working.",
-    "Connection_error": "We couldn't reach the server.",
-    "Empty_output": "This code works but does not print anything. Add a print command to your code or use the turtle to get output.",
-    "Errors_found": "You made a mistake! Don't worry, we still ran the program",
-    "Execute_error": "Something went wrong while running the program.",
-    "Other_error": "Oops! Maybe we made a little mistake.",
-    "Program_repair": "This could be the correct code, can you fix it?",
-    "Program_too_long": "Your program takes too long to run.",
-    "ServerError": "You wrote a program we weren't expecting. If you want to help, send us an email with the level and your program at hello@hedy.org. In the meantime, try something a little different and take another look at the examples. Thanks!",
-    "Transpile_error": "We can't run your program.",
-    "Transpile_success": "Good job!\nAmazing!\nWell done!\nExcellent!\nYou did great!",
-    "Transpile_warning": "Warning!",
-    "Unsaved_Changes": "You have an unsaved program. Do you want to leave without saving it?",
-    "adventures_restored": "The default adventures have been restored.",
-    "copy_link_to_share": "Copy link to share",
-    "customization_deleted": "Customizations successfully deleted.",
-    "dice": "🎲",
-    "directly_available": "Directly open",
-    "disabled": "Disabled",
-    "fortune": "🔮, ✨",
-    "haunted": "🦇, 👻, 🎃",
-    "level_title": "Level",
-    "multiple_keywords_warning": "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}",
-    "restaurant": "🍣, 🍕, 🍔",
-    "rock": "✂️, 📜, 🗻",
-    "selected": "Selected",
-    "songs": "🎵,🎶",
-    "teacher_welcome": "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students.",
-    "turtle": "🐢",
-    "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
-  },
   "ar": {
     "CheckInternet": "ألقي نظرة إذا كان اتصالك بالإنترنت يعمل بشكل صحيح.",
     "Connection_error": "لم نتمكن من الوصول إلى الخادم.",
