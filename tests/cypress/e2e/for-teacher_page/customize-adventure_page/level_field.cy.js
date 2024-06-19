@@ -22,6 +22,5 @@ levels.forEach((level) => {
         cy.get(`#levels_dropdown > div > div > div.option[data-value="${level}"`)
           .should('have.class', 'selected')
       })
-    }
-  }
-})
+    })
+  })
