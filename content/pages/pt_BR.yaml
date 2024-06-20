@@ -579,7 +579,7 @@ teacher-guide:
                 solution_code: |-
                     adventures {is} story, parrot, dice
                     choice {is} Which adventure do you like best?
-                    {add} choice    adventures
+                    {add} choice {to_list} adventures
                     {remove} dice {from} adventures
                     {print} I love adventures {at} {random}
     -   level: '4'

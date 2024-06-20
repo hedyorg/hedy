@@ -617,13 +617,13 @@ teacher-guide:
                 error_code: |-
                     namen {is} Jake
                     jouw_naam {is} {ask} Hoe heet jij?
-                    {add} jouw_naam    namen
+                    {add} jouw_naam {to_list} namen
                     {print} namen {at} {random}
                 solution_text: Je moet dus eerst een lijstje hebben, dus moet je een tweede naam toevoegen (Amy) aan namen om het een lijstje te maken. Als je Amy niet wil gebruiken, kun je Amy wel weer verwijderen uit het lijstje met remove.
                 solution_code: |-
                     namen {is} Jake, Amy
                     jouw_naam {is} {ask} Hoe heet jij?
-                    {add} jouw_naam    namen
+                    {add} jouw_naam {to_list} namen
                     {print} namen {at} {random}
         -   title: Leerlingen vergeten het to en from gedeelte van add en remove.
             example:
@@ -638,7 +638,7 @@ teacher-guide:
                 solution_code: |-
                     avonturen {is} verhaal, papegaai, dobbelsteen
                     keuze {is} {ask} Wat vind jij het leukste Hedy avontuur?
-                    {add} keuze    avonturen
+                    {add} keuze {to_list} avonturen
                     {remove} dobbelsteen {from} avonturen
                     {print} Ik hou van avonturen {at} {random}
     -   level: "4"
