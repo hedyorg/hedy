@@ -610,7 +610,7 @@ def parse():
                 response['has_sleep'] = True
 
             response['variables'] = transpile_result.roles_of_variables
-            response['show_roles'] = utils.show_roles_of_variables()
+            response['show_roles'] = utils.show_roles_of_variables() == "True"
         except Exception:
             pass
 
