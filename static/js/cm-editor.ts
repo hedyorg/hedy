@@ -213,7 +213,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             "print forward turn play color ask is echo sleep Comma": t.keyword,
             "at random remove from add to if else in not_in Op": t.keyword,
             "repeat times for range with return and or while": t.keyword,
-            "elif def input toList": t.keyword,
+            "elif def input to_list": t.keyword,
             "true false True False": t.number,
             Comment: t.lineComment,
             "Text": t.name,
@@ -244,6 +244,15 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         const effect = StateEffect.appendConfig.of(hedy());
 
         this.view.dispatch({ effects: effect });
+
+        const transaction = this.view.state.update({
+            effects: StateEffect.appendConfig.of(EditorView.updateListener.of((v: ViewUpdate) => {
+                if (v.docChanged) {
+                    console.log(language.parse(v.state.doc.toString()).toString());
+                }
+            }))
+        })
+        this.view.dispatch(transaction);
     }
     /**
     * @returns the string of the current program in the editor

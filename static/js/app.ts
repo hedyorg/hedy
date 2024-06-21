@@ -25,6 +25,7 @@ import { stopDebug } from "./debugging";
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
 import { initializeActivity } from './user-activity';
+import { addCurlyBracesToCode } from './adventure';
 
 export let theGlobalDebugger: any;
 export let theGlobalEditor: HedyEditor;
@@ -567,7 +568,7 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
         let response = await postJsonWithAchievements('/parse', data);
         program_data = response;
         console.log('Response', response);
-
+        console.log(addCurlyBracesToCode(code, level, theKeywordLanguage))
         if (response.Warning && $('#editor').is(":visible")) {
           //storeFixedCode(response, level);
           error.showWarning(ClientMessages['Transpile_warning'], response.Warning);

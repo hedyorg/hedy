@@ -27,7 +27,7 @@ export const
   def = 25,
   returns = 26,
   fors = 27,
-  toList = 28,
+  to_list = 28,
   elif = 29,
   low_true = 30,
   low_false = 31,
