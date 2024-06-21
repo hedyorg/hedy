@@ -1,7 +1,7 @@
 1:
 -   name: '{print}'
-    explanation: Print something with `{print}`.
-    demo_code: '{print} Hallå och välkommen till Hedy!'
+    explanation: Skriv ut någonting med `{print}`.
+    demo_code: '{print} Hej och välkommen till Hedy!'
 -   name: '{ask}'
     explanation: Fråga något med `{ask}`.
     demo_code: '{ask} Vilken är din favoritfärg?'
@@ -100,9 +100,9 @@
 -   name: '{in}'
     explanation: Kolla element med `{in}`.
     demo_code: |-
-        snygga_färger {is} grönt, gult
-        färg {is} {ask} 'Vad {is} din favoritfärg?'
-        {if} färg {in} snygga_färger {print} 'snyggt!' {else} {print} 'meh'
+        fina_färger {is} grön, gul
+        färg {is} {ask} 'Vilken är din favoritfärg?'
+        {if} färg {in} fina_färger {print} 'fint!' {else} {print} 'meh'
 -   name: '{pressed}'
     explanation: Kontrollera om en viss tangent är `{pressed}`.
     demo_code: '{if} a {is} {pressed} {print} ''Du tryckte på A!'' {else} {print} ''Du tryckte på en annan tangent!'''
@@ -316,7 +316,7 @@
         första_frukten = frukt[1]
         {print} första_frukten
 -   name: Hämta ett slumpmässigt element från en lista
-    explanation: För att få ett slumpmässigt element från en lista använder vi [slump] så frukt[slump] betyder att hämta en slumpmässig frukt från listan!
+    explanation: För att få ett slumpmässigt föremål från en lista använder vi {random} så frukt{random} betyder, hämta en slumpmässig utvald frukt ifrån listan!
     demo_code: |-
         frukt = ['banan', 'äpple', 'körsbär']
         slumpad_frukt = frukt[{random}]

@@ -38,7 +38,7 @@ htmx.defineExtension('disable-element', {
  * (Notably: turning <pre>s into Ace editors)
  */
 htmx.onLoad((content) => {
-    initializeHighlightedCodeBlocks(content);
+    initializeHighlightedCodeBlocks(content, true);
     var sortables =  content.querySelectorAll('.sortable');
     for (let i = 0; i < sortables.length; i++) {
         var sortable = sortables[i] as HTMLElement;
