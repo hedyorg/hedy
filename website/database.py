@@ -80,7 +80,8 @@ USERS = dynamo.Table(storage, 'users', 'username',
                          'classes': Optional(SetOf(str)),
                          'teacher': Optional(str),
                          'pair_with_teacher': Optional(int),
-                         'teacher_request': Optional(bool)
+                         'teacher_request': Optional(bool),
+                         'is_super_teacher': Optional(int)
                      }),
                      indexes=[
                          dynamo.Index('email'),
@@ -853,6 +854,15 @@ class Database:
         # Update existing tags
         return TAGS.update({"id": tags_id}, data)
 
+    def delete_tag(self, tags_id):
+        TAGS.delete({"id": tags_id})
+
+    def delete_tag_from_adventure(self, tag_name, adventure_id):
+        db_adventure = self.get_adventure(adventure_id)
+        adventure_tags = db_adventure.get("tags", [])
+        adventure_tags = list(filter(lambda name: name != tag_name, adventure_tags))
+        self.update_adventure(adventure_id, {"tags": adventure_tags})
+
     def get_teacher_adventures(self, username):
         return ADVENTURES.get_many({"creator": username})
 
@@ -1172,6 +1182,12 @@ class Database:
         add_attributes["chart_history"] = new_chart_history[-chart_slice:]
 
         return PROGRAM_STATS.update(key, add_attributes)
+
+    def get_program_stats_per_level(self, id, level, start=None, end=None):
+        start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
+        end_week = self.to_year_week(self.parse_date(end, date.today()))
+        data = PROGRAM_STATS.get_many({'id#level': id + '#' + str(level), "week": dynamo.Between(start_week, end_week)})
+        return data
 
     def get_program_stats(self, ids, start=None, end=None):
         start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))

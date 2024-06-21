@@ -1,5 +1,5 @@
 
-from flask import render_template, request
+from flask import make_response, render_template, request
 from flask_babel import gettext
 from website.auth import requires_super_teacher, pick, is_teacher
 import utils
@@ -144,9 +144,9 @@ class SuperTeacherModule(WebsiteModule):
             return "Not possible to add this support teacher", 400
 
         self.db.update_user(source_user["username"], {"support_teacher": target_user["username"]})
-        return "Done", 200
+        return make_response("Done", 200)
 
-    @route("/markAsTeacher", methods=["POST"])
+    @route("/mark-as-teacher", methods=["POST"])
     @requires_super_teacher
     def mark_as_teacher(self, user):
 
@@ -167,4 +167,10 @@ class SuperTeacherModule(WebsiteModule):
         is_teacher_value = 1 if body["is_teacher"] else 0
         update_is_teacher(self.db, user, is_teacher_value)
 
-        return "Done!", 200
+        return make_response("Done", 200)
+
+    @route("/tags", methods=["GET"])
+    @requires_super_teacher
+    def get_tags(self, user):
+        all_tags = self.db.read_public_tags()
+        return render_template('super-teacher/tags.html', tags=all_tags)
