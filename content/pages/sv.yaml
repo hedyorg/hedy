@@ -35,7 +35,7 @@ home-sections:
         och vanliga misstag.
 join-sections:
 -   title: Att stödja Hedy
-    text: '# Det finns tre sätt att stödja Hedy!'
+    text: "# Det finns tre sätt att stödja Hedy!"
 -   title: Förbättra språket
     text: |-
         Hedys stegvisa och flerspråkiga karaktär skapar många intressanta tekniska utmaningar.
@@ -85,9 +85,47 @@ learn-more-sections:
         * [AG Connect (Dutch), April 2020](https://www.agconnect.nl/artikel/stapsgewijs-python-leren-programmeren-met-nieuwe-taal-hedy)
 start-sections:
 -   title: Getting started with Hedy
-    text: '*Something about teachers accounts, slides etc*'
+    text: "*Something about teachers accounts, slides etc*"
 -   title: What other teachers say
-    text: "A while ago we ran a few short Hedy teachers surveys. \nThe questions span between suggestions of improvement and Hedy’s best features. \nBelow is a testimony of their thoughts:\n\nSimple interface and good examples. *Teacher: 3rd - 6th grades (elementary)*\n\nMultilingual programming and just the gradual programming concept itself. - *US: middle school, 6th-8th grade*\n\nThe gradual nature of introducing programming. *Australia: High school*\n\nThe construction is so good. *Netherlands: Lower secondary school HAVO-VWO*\n\nI can keep the pace of the class. *Netherlands: group 7 en 8* \n\nContinues automatically. *Netherlands: 2 HAVO-VWO*\n\nBoth that the explanation can be in Dutch (and the code in English), and that it builds up with more \nand more possibilities. *Netherlands: Plus class group 7*\n\nThe 'realness' of programming, it resembles how it is in reality. *Netherlands: Plus class group 4 to 8*\n\nStep-by-step activities. Fun activities. *Netherlands: 1e All levels, 2e VWO/HAVO 2e VWO +, 3e HAVO 3e VWO*\n\nBut Hedy and its gradual levels... what an idea, \nI wanted to personally thank you for creating this. I cannot thank you enough. Also, I have never seen the level of engagement and enthusiasm of my \nstudents, as I have seen with Hedy. We have covered till level 5, and plan to spend one more week on it in classes and labs, \nbefore starting Python.  *Pakistan*\n\nI really like Hedy very much and it is also nicely set up, which makes it good to use in primary school. \nHedy's gradual approach works very well. \nThe short explanation at the beginning of each level and the short example programs help to give the children a quick insight into what is new in the chosen level. \nThe different assignments that the children can choose also work very well. \nYou see the children choose assignments that appeal to them and they then get to work with them, \nthrough the levels. Hedy is great fun for children who are good at programming and want to get a \ntaste of a real programming language. It is good preparation for secondary school as soon as more ICT \neducation is given there. *Netherlands: Oegstgeest Montessori school*\n\n<img width=\"500px\" src=\"static/images/teacherfeedback/Fkids1.JPG\"></img>"
+    text: |-
+        A while ago we ran a few short Hedy teachers surveys. 
+        The questions span between suggestions of improvement and Hedy’s best features. 
+        Below is a testimony of their thoughts:
+
+        Simple interface and good examples. *Teacher: 3rd - 6th grades (elementary)*
+
+        Multilingual programming and just the gradual programming concept itself. - *US: middle school, 6th-8th grade*
+
+        The gradual nature of introducing programming. *Australia: High school*
+
+        The construction is so good. *Netherlands: Lower secondary school HAVO-VWO*
+
+        I can keep the pace of the class. *Netherlands: group 7 en 8* 
+
+        Continues automatically. *Netherlands: 2 HAVO-VWO*
+
+        Both that the explanation can be in Dutch (and the code in English), and that it builds up with more 
+        and more possibilities. *Netherlands: Plus class group 7*
+
+        The 'realness' of programming, it resembles how it is in reality. *Netherlands: Plus class group 4 to 8*
+
+        Step-by-step activities. Fun activities. *Netherlands: 1e All levels, 2e VWO/HAVO 2e VWO +, 3e HAVO 3e VWO*
+
+        But Hedy and its gradual levels... what an idea, 
+        I wanted to personally thank you for creating this. I cannot thank you enough. Also, I have never seen the level of engagement and enthusiasm of my 
+        students, as I have seen with Hedy. We have covered till level 5, and plan to spend one more week on it in classes and labs, 
+        before starting Python.  *Pakistan*
+
+        I really like Hedy very much and it is also nicely set up, which makes it good to use in primary school. 
+        Hedy's gradual approach works very well. 
+        The short explanation at the beginning of each level and the short example programs help to give the children a quick insight into what is new in the chosen level. 
+        The different assignments that the children can choose also work very well. 
+        You see the children choose assignments that appeal to them and they then get to work with them, 
+        through the levels. Hedy is great fun for children who are good at programming and want to get a 
+        taste of a real programming language. It is good preparation for secondary school as soon as more ICT 
+        education is given there. *Netherlands: Oegstgeest Montessori school*
+
+        <img width="500px" src="static/images/teacherfeedback/Fkids1.JPG"></img>
 teacher-guide:
 -   title: Inledning
     key: intro
@@ -378,14 +416,14 @@ teacher-guide:
         Att göra misstag är oundvikligt och en fantastisk möjlighet att lära sig, men för lärare kan det vara en utmaning att hitta rätt lösning på ett misstag!
         Särskilt när koden blir längre och längre i takt med att nivåerna utvecklas. Därför har vi gjort en lista med vanliga misstag på varje nivå och deras lösningar.
     levels:
-    -   level: '1'
+    -   level: "1"
         sections:
         -   title: Eleverna glömmer att skriva kommandon
             example:
                 error_text: De skriver t.ex. en mening utan att använda print.
                 error_code: Hedy kan inte skriva ut detta
                 solution_text: Lär eleverna att alltid börja en kodrad med ett kommando.
-                solution_code: skriv Hedy kan skriva detta!
+                solution_code: "{print} Hedy kan skriva detta!"
         -   title: Eleverna använder versaler när de skriver kommandon
             example:
                 error_text: Kommandon fungerar inte om de är skrivna med versaler.
@@ -394,100 +432,100 @@ teacher-guide:
                     Print för jag använder stora bokstäver.
                 solution_text: Ta bort versalerna.
                 solution_code: |-
-                    fråga Varför fungerar min kod nu?
-                    skriv Eftersom jag tog bort versalerna!
+                    {ask} Varför fungerar min kod nu?
+                    {print} Eftersom jag tog bort versalerna!
         -   title: Eleverna använder eko utan fråga
             example:
                 error_text: Echo görs för att upprepa ett svar efter ett fråga-kommando. Utan fråga kommer echo inte att göra någonting.
-                error_code: echo Du heter
+                error_code: "{echo} Du heter"
                 solution_text: Lägg till ett ask-kommando för att få det att fungera.
                 solution_code: |-
-                    fråga Vad heter du?
+                    {ask} Vad heter du?
                     svara Du heter
         -   title: Eleverna vill att deras eko-ord (variabel) ska vara inuti en mening
             example:
                 error_text: Och de har rätt! Det är därför de kommer att lära sig att använda riktiga variabler på nästa nivå.
                 error_code: |-
-                    fråga Vilket programmeringsspråk är roligast?
-                    eko är bäst!
-                solution_text: 'På nivå 1 får vi hålla oss till detta:'
+                    {ask} Vilket programmeringsspråk är roligast?
+                    {echo} är bäst!
+                solution_text: "På nivå 1 får vi hålla oss till detta:"
                 solution_code: |-
-                    fråga Vilket programmeringsspråk är roligast?
-                    echo Det bästa är …
-        -   title: 'Sköldpadda: Eleverna låter sköldpaddan gå utanför skärmen'
+                    {ask} Vilket programmeringsspråk är roligast?
+                    {echo} Det bästa är …
+        -   title: "Sköldpadda: Eleverna låter sköldpaddan gå utanför skärmen"
             example:
                 error_text: Ofta vill eleverna testa stora tal när de använder sköldpaddan, vilket gör att pilen hamnar utanför skärmen.
                 error_code: |-
-                    framåt 300
-                    sväng 90
+                    {forward} 300
+                    {turn} 90
                 solution_text: I exemplet kan eleverna att tro att kommandot för att svänga inte fungerar. Även om det fungerar kan du inte se det hända utanför skärmen. Använd mindre tal för att förhindra att detta händer.
                 solution_code: |-
-                    framåt 100
-                    sväng 90
-        -   title: 'Sköldpadda: Eleverna använder kommandot bakåt, men det finns inte'
+                    {forward} 100
+                    {turn} 90
+        -   title: "Sköldpadda: Eleverna använder kommandot bakåt, men det finns inte"
             example:
                 error_text: Bakåt är inte ett kommando.
                 error_code: bakåt 100
                 solution_text: För att få sköldpaddan att gå baklänges används kommandot framåt och ett negativt tal. Till exempel
-                solution_code: framåt -100
-    -   level: '2'
+                solution_code: "{forward} -100"
+    -   level: "2"
         sections:
         -   title: Eleverna har stavfel i sina kommandon
             example:
                 error_text: Hedy kan inte känna igen ett felstavat kommando.
-                error_code: skrivv Gör inga stavfel!
+                error_code: skrivv Gör inga stavfel
                 solution_text: Lär eleverna att läsa felmeddelandena. På så sätt kan de själva ta reda på vad som gick fel.
-                solution_code: skriv Gör inga stavfel!
+                solution_code: "{print} Gör inga stavfel"
         -   title: Studenter glömmer att kommandot fråga har ändrats
             example:
                 error_text: På den här nivån lär sig eleverna om variabler. Kommandot fråga behöver en variabel, men eleverna glömmer detta.
-                error_code: fråga vad vill du äta?
+                error_code: fråga vad vill du äta
                 solution_text: På den här nivån måste du berätta för Hedy var du vill spara ditt svar, så att det kan användas senare. Detta kallas en variabel.
-                solution_code: beställning är fråga Vad vill du äta?
+                solution_code: beställning {is} {ask} Vad vill du äta
         -   title: Eleverna försöker använda kommandot eko
             example:
                 error_text: För vissa studenter kan det vara frustrerande att lära sig att kommandot eko inte fungerar längre. Det är därför det är så viktigt att förklara fördelarna med att använda variabler. Du kan till exempel använda flera olika variabler i koden och du kan placera dem var du vill i en mening!
                 error_code: |-
-                    svaret är fråga Varför fungerar inte eko längre?!
+                    svaret {is} {ask} Varför fungerar inte eko längre
                     echo
                 solution_text: Använd en variabel istället.
                 solution_code: |-
-                    svar är fråga Varför fungerar inte eko längre?!
-                    skriv svar
+                    svar {is} {ask} Varför fungerar inte eko längre
+                    {print} svar
         -   title: Eleverna använder ett variabelnamn som ett vanligt ord
             example:
                 error_text: I exemplet nedan används ordet "namn" som variabel men också som vanlig text. Resultatet av koden blir "Hej mitt Hedy är Hedy".
                 error_code: |-
-                    namn är Hedy
-                    skriv Hej mitt namn är namn
+                    namn {is} Hedy
+                    {print} Hej mitt namn är namn
                 solution_text: Använd alltså inte ett ord som du vill använda i texten som variabelnamn. På nivå 4 löses detta med citattecken.
                 solution_code: |-
-                    namn är Hedy
-                    skriv Hej jag heter namn
+                    namn {is} Hedy
+                    {print} Hej jag heter namn
         -   title: Studenter använder långa variabelnamn som innehåller två ord.
             example:
                 error_text: En variabelnamn ska vara ett ord. Du kan använda ett understreck för att koppla ihop två ord. Det räknas som ett ord.
-                error_code: vald dörr är fråga Vilken dörr väljer du?
+                error_code: vald dörr är fråga Vilken dörr väljer du
                 solution_text: Lägg till ett understreck.
-                solution_code: vald_dörr är fråga vilken dörr väljer du?
+                solution_code: vald_dörr {is} {ask} vilken dörr väljer du
         -   title: Eleverna kan råka använda två olika namn för samma variabel
             example:
                 error_text: I det här exemplet har eleven använt 'häst' och 'namn' för samma variabler.
                 error_code: |-
-                    häst är fråga vad heter din häst?
-                    print Din häst heter namn
+                    häst {is} {ask} vad heter din häst
+                    {print} Din häst heter namn
                 solution_text: Kolla alltid om variabeln genomgående har samma namn. Små skillnader kan vara svåra att upptäcka (till exempel pluralformer) men de kommer att påverka vad koden gör.
                 solution_code: |-
-                    namn är fråga Vad heter din häst?
-                    print Din häst heter namn
-    -   level: '3'
+                    namn {is} {ask} Vad heter din häst
+                    {print} Din häst heter namn
+    -   level: "3"
         sections:
         -   title: Eleverna försöker skriva ut hela listor
             example:
                 error_text: En hel lista kan inte skrivas ut. Du kan bara skriva ut ett element i taget från listan med {at} {random}.
                 error_code: |-
-                    matvaror är äpplen, mjölk, choklad
-                    skriv matvaror
+                    matvaror {is} äpplen, mjölk, choklad
+                    {print} matvaror
                 solution_text: För att skriva ut en lista med alla matvaror behöver du bara sätta dem efter ett `{print}`-kommando. Annars kan du använda listan för att skriva ut ett element med `{at}` `{random}`.
                 solution_code: |-
                     {print} äpplen, mjölk, choklad
@@ -520,8 +558,8 @@ teacher-guide:
             example:
                 error_text: Som i exemplet
                 error_code: |-
-                    fåglar är sparv, mås, rödhake
-                    skriv fåglar slump
+                    fåglar {is} sparv, mås, rödhake
+                    {print} fåglar slump
                 solution_text: Lös problemet genom att lägga till ordet på.
                 solution_code: |-
                     fåglar {är} sparv, mås, rödhake
@@ -544,8 +582,8 @@ teacher-guide:
                     {print} pizzor {at} {random}
                 solution_text: Efter varje element i listan ska det vara ett kommatecken
                 solution_code: |-
-                    pizzor är funghi, tonno, quattro stagioni
-                    skriv pizzor på slump
+                    pizzor {is} funghi, tonno, quattro stagioni
+                    {print} pizzor på slump
         -   title: Eleverna försöker använda `{at}` `{random}` utan en lista
             example:
                 error_text: Till exempel
@@ -581,230 +619,230 @@ teacher-guide:
                     {print} Jag älskar äventyr {at} {random}
                 solution_text: Hedy måste veta vilken lista objektet ska läggas till i/tas bort från.
                 solution_code: |-
-                    äventyr är berättelse, papegoja, tärningar
-                    val är Vilket äventyr gillar du bäst?
-                    lägg till val till äventyr
-                    ta bort tärningar från äventyr
-                    print Jag älskar äventyr på slump
-    -   level: '4'
+                    äventyr {is} berättelse, papegoja, tärningar
+                    val {is} Vilket äventyr gillar du bäst?
+                    {add} val {to} äventyr
+                    {remove} tärningar {from} äventyr
+                    {print} Jag älskar äventyr på slump
+    -   level: "4"
         sections:
         -   title: Eleverna glömmer att det behövs citattecken på båda sidor om texten
             example:
                 error_text: På den här nivån behöver skriv och fråga ett par citattecken. Ett före och ett efter texten.
                 error_code: |-
-                    skriv Hej
-                    humör är fråga 'Hur är det?
+                    {print} Hej
+                    humör {is} {ask} 'Hur är det?
                 solution_text: Lägg till rätt citattecken.
                 solution_code: |-
-                    skriv 'Hej'
-                    humör är fråga 'Hur är det?'
+                    {print} 'Hej'
+                    humör {is} {ask} 'Hur är det?'
         -   title: Eleverna använder fel citattecken
             example:
                 error_text: Det är viktigt att börja lektionen med att kolla om eleverna vet hur man skriver ett citattecken på rätt sätt. Annars kanske de använder "dubbla citattecken" eller den sneda apostrofen `.
                 error_code: |-
-                    skriv `Välkommen till restaurangen`
-                    mat är fråga "Vad vill du beställa?"
-                solution_text: 'Detta är rätt citattecken:'
+                    {print} `Välkommen till restaurangen`
+                    mat {is} {ask} "Vad vill du beställa?"
+                solution_text: "Detta är rätt citattecken:"
                 solution_code: |-
-                    skriv 'Välkommen till restaurangen'
-                    mat är fråga 'Vad vill du beställa?'
+                    {print} 'Välkommen till restaurangen'
+                    mat {is} {ask} 'Vad vill du beställa?'
         -   title: Eleverna använder en apostrof i sin text
             example:
                 error_text: Från den här nivån är apostrofer inte tillåtna. De används ofta på engelska när du skriver sammandragningar som you’re, don’t eller what’s.
-                error_code: skriv 'Skriv inte rock'n roll'
+                error_code: "{print} 'Skriv inte rock'n roll'"
                 solution_text: Du kan välja att använda fel grammatik och bara utelämna apostrof. Eller så kan du använda ` som apostrof.
                 solution_code: |-
-                    skriv 'Du kan skriva rock-n-roll'
-                    skriv 'Och du kan skriva rock`n roll'
-    -   level: '5'
+                    {print} 'Du kan skriva rock-n-roll'
+                    {print} 'Och du kan skriva rock`n roll'
+    -   level: "5"
         sections:
         -   title: Eleverna glömmer att använda `{print}` i ett `{if}`-kommando
             example:
                 error_text: När eleverna har använt `{if}` eller `{else}` glömmer de att ha ett andra kommando som `{print}` eller `{ ask}`.
                 error_code: |-
-                    om namn är Hedy 'Bra!'
-                    annars 'Hedy är bättre!'
+                    {if} namn {is} Hedy 'Bra!'
+                    {else}  Hedy {is} bättre!
                 solution_text: Lägg till kommandot skriv för att fixa det.
                 solution_code: |-
-                    om namn är Hedy skriv 'Bra!'
-                    annars skriv 'Hedy är bättre!'
+                    {if} namn {is} Hedy {print} 'Bra!'
+                    {else} {print} 'Hedy är bättre!'
         -   title: Elever råkar använda två olika namn för samma variabel
             example:
                 error_text: I det här exemplet har eleven använt 'häst' och 'namn' för samma variabler.
                 error_code: |-
-                    häst är fråga 'Vad heter din häst?'
-                    om namn är Bonfire skriv 'coolt'
-                    annars skriv 'mindre coolt!'
+                    häst {is} {ask} 'Vad heter din häst?'
+                    {if} namn {is} Bonfire {print} 'coolt'
+                    {else} {print} 'mindre coolt!'
                 solution_text: Kolla alltid om variabeln har samma namn genomgående. Små skillnader kan vara svåra att upptäcka (till exempel pluralformer) men de kommer att ändra kodens innebörd.
                 solution_code: |-
-                    häst är fråga 'Vad heter din häst?'
-                    om häst är Bonfire skriv 'coolt!'
-                    annars skriv 'mindre coolt!'
+                    häst {is} {ask} 'Vad heter din häst?'
+                    {if} häst {is} Bonfire {print} 'coolt!'
+                    {else} {print} 'mindre coolt!'
         -   title: Eleverna glömmer fortfarande citattecken före och efter text
             example:
                 error_text: Kod som använder kommandot `om` kan bli väldigt lång och eleverna tenderar att glömma att använda citattecken.
                 error_code: |-
-                    om namn är Hedy skriv 'kul'
-                    annars skriv 'meh!
+                    {if} namn {is} Hedy {print} 'kul'
+                    {else} {print} 'meh!
                 solution_text: Använd alltid två citattecken i kommandot skriv.
                 solution_code: |-
-                    om namn är Hedy skriv 'kul'
-                    annars skriv 'meh!'
+                    {if} namn {is} Hedy {print} 'kul'
+                    {else} {print} 'meh!'
         -   title: Eleverna använder citattecken runt variabelnamn
             example:
                 error_text: På den här nivån är det inga citattecken kring variabelnamn.
                 error_code: |-
-                    om 'namn' är 'Hedy' skriv 'kul'
-                    annars skriv 'meh!'
+                    {if}  namn  {is} 'Hedy' {print} 'kul'
+                    {else} {print} 'meh!'
                 solution_text: Ta bort citattecknen för att få koden att fungera.
                 solution_code: |-
-                    om namn är Hedy skriv 'kul'
-                    annars skriv 'meh!'
+                    {if} namn {is} Hedy {print} 'kul'
+                    {else} {print} 'meh!'
         -   title: Studenter använder långa variabelnamn med två ord
             example:
                 error_text: En variabel ska heta ett ord. Du kan använda ett understreck för att koppla ihop två ord. Det räknas som ett ord.
-                error_code: vald dörr är fråga 'Vilken dörr väljer du?'
+                error_code: vald dörr är fråga  Vilken dörr väljer du?
                 solution_text: Lägg till ett understreck.
-                solution_code: vald_dörr är fråga 'vilken dörr väljer du?'
+                solution_code: vald_dörr {is} {ask} 'vilken dörr väljer du?'
         -   title: Eleverna vill att flera svar ska vara rätt
             example:
                 error_text: Till exempel vill den här eleven att Hedy ska säga att alla hens vänner är roliga och att de andra klasskamrater inte är det.
-                error_code: om namn är Jesse, David, Souf skriv 'Du är rolig' annars skriv 'Du är inte rolig'
+                error_code: "{if} namn {is} Jesse, David, Souf skriv  Du är rolig  {else} {print} 'Du är inte rolig'"
                 solution_text: |-
                     Du kan använda kommandot `i` för att lösa det. Det förklaras på en högre nivå, men det fungerar redan på nivå 5.
                     En annan lösning är att använda flera om-kommandon och inget annars-kommando. Nackdelen är att det inte kommer att säga till de andra klasskamraterna att de inte är roliga.
                 solution_code: |-
-                    vänner är Jesse, David, Souf
-                    namn är fråga 'Vem är du?'
-                    om namn i vänner skriv 'Du är rolig'
-                    annars skriv 'Du är inte rolig'
+                    vänner {is} Jesse, David, Souf
+                    namn {is} {ask} 'Vem är du?'
+                    {if} namn {in} vänner {print} 'Du är rolig'
+                    {else} {print} 'Du är inte rolig'
 
                     eller
 
-                    namn är fråga 'Vem är du?'
-                    om namn är Jesse skriv 'Du är rolig'
-                    om namn är David skriv 'Du är rolig'
-                    om namn är Souf skriv 'Du är rolig'
+                    namn {is} {ask} 'Vem är du?'
+                    {if} namn {is} Jesse {print} 'Du är rolig'
+                    {if} namn {is} David {print} 'Du är rolig'
+                    {if} namn {is} Souf {print} 'Du är rolig'
         -   title: Eleverna gör variabelnamnet till samma som värdet i `{if}`-satsen
             example:
                 error_text: I exemplet nedan är lösenordet 'lösenord'. Detta kommer att resultera i att det alltid är korrekt.
                 error_code: |-
-                    lösenord är fråga 'Vad är lösenordet?'
-                    om lösenord är lösenord skriv 'Åtkomst beviljad'
-                    annars skriv 'Ingen åtkomst'
+                    lösenord {is} {ask} 'Vad är lösenordet?'
+                    {if} lösenord {is} lösenord {print} 'Åtkomst beviljad'
+                    {else} {print} 'Ingen åtkomst'
                 solution_text: Välj ett annat variabelnamn.
                 solution_code: |-
                     hemligt_lösenord {is} {ask} 'Vad är lösenordet'
                     {if} hemligt_lösenord {is} lösenord {print} 'Åtkomst beviljad!'
                     {else} {print} 'Ingen åtkomst'
-    -   level: '6'
+    -   level: "6"
         sections:
         -   title: Eleverna kämpar med citattecken
             example:
                 error_text: Vissa elever kämpar med att lägga till citattecken eller inte. Om du lägger till citattecken blir utskriften bokstavligen '5+5'.
-                error_code: skriv '5 + 5'
+                error_code: "{print} '5 + 5'"
                 solution_text: I den här koden kommer utdataskärmen att skriva ut '10'.
-                solution_code: skriv 5 + 5
+                solution_code: "{print} 5 + 5"
         -   title: Eleverna kämpar med begreppet att göra uträkningar med en variabel
             example:
-                error_text: 'Vissa elever kommer att tycka att det är svårt att göra uträkningar med variabler. Försök att visa dem mycket enkla exempel, t.ex:'
+                error_text: "Vissa elever kommer att tycka att det är svårt att göra uträkningar med variabler. Försök att visa dem mycket enkla exempel, t.ex:"
                 error_code: |-
-                    ålder = fråga 'Hur gammal är du?'
-                    skriv 'Nästa år fyller du ' ålder + 1
+                    ålder = {ask} 'Hur gammal är du?'
+                    {print} 'Nästa år fyller du ' ålder + 1
                 solution_text: Eller ta det ett steg längre och gör så här.
                 solution_code: |-
                     pris = 0
-                    skriv 'Välkommen till vår hamburgerrestaurang'
-                    hamburgare = fråga 'Vill du ha en hamburgare?'
-                    om hamburgare = ja pris = pris + 10
-                    dryck = fråga 'Vill du ha något att dricka?'
-                    om dryck = ja pris = pris + 4
-                    skriv 'Det blir ' pris ' euro tack'
-    -   level: '7'
+                    {print} 'Välkommen till vår hamburgerrestaurang'
+                    hamburgare = {ask} 'Vill du ha en hamburgare?'
+                    {if} hamburgare = ja pris = pris + 10
+                    dryck = {ask} 'Vill du ha något att dricka?'
+                    {if} dryck = ja pris = pris + 4
+                    {print} 'Det blir ' pris ' euro tack'
+    -   level: "7"
         sections:
         -   title: Eleverna glömmer något av orden i repetera-kommandot, eller så glömmer de skriv-kommandot
             example:
                 error_text: Se till att eleverna vet att de ska använda både det fullständiga repetera-kommandot och utskriftskommandot.
                 error_code: |-
-                    upprepa 3 gånger 'For he`s a jolly good fellow'
-                    upprepa 3 skriv 'Which nobody can deny!'
-                solution_text: 'Detta är rätt kod:'
+                    {repeat} 3 {times}  For he`s a jolly good fellow
+                    {repeat} 3 skriv
+                solution_text: "Detta är rätt kod:"
                 solution_code: |-
-                    upprepa 3 gånger skriv 'For he`s a jolly good fellow'
-                    upprepa 3 gånger skriv 'Which nobody can deny!'
+                    {repeat} 3 {times} {print} 'For he`s a jolly good fellow'
+                    {repeat} 3 {times} {print} 'Which nobody can deny!'
         -   title: Eleverna försöker upprepa flera rader
             example:
                 error_text: På den här nivån kan du bara upprepa en kodrad åt gången. I den här koden ville eleven skriva ut tre olika drycker, men det fungerar inte. Den kommer att ställa frågan tre gånger och bara skriva ut det sista svaret.
                 error_code: |-
-                    upprepa 3 gånger dryck = fråga 'Vad skulle du vilja dricka?'
-                    skriv dryck
+                    {repeat} 3 {times} dryck = {ask} 'Vad skulle du vilja dricka?'
+                    {print} dryck
                 solution_text: Du bör gå till nästa nivå för att kunna upprepa flera rader. Så på den här nivån måste du skriva ut allt separat.
                 solution_code: |-
-                    dryck = fråga 'Vad skulle du vilja dricka?'
-                    skriv dryck
-                    dryck = fråga 'Vad skulle du vilja dricka?'
-                    skriv dryck
-                    dryck = fråga 'Vad skulle du vilja dricka?'
-                    skriv dryck
+                    dryck = {ask} 'Vad skulle du vilja dricka?'
+                    {print} dryck
+                    dryck = {ask} 'Vad skulle du vilja dricka?'
+                    {print} dryck
+                    dryck = {ask} 'Vad skulle du vilja dricka?'
+                    {print} dryck
         -   title: Eleverna skriver program som tar för lång tid att köra
             example:
                 error_text: På den här nivån är det väldigt lätt att göra långa kod. Eleverna får inte göra program som tar för lång tid att ladda (för att spara våra servrar).
-                error_code: upprepa 100 gånger skriv 'Hur många gånger kan jag upprepa detta?'
+                error_code: "{repeat} 100 {times} {print} 'Hur många gånger kan jag upprepa detta?'"
                 solution_text: Se till att koden inte är för lång
-                solution_code: upprepa 20 gånger skriv 'Detta räcker'
-    -   level: '8'
+                solution_code: "{repeat} 20 {times} {print} 'Detta räcker'"
+    -   level: "8"
         sections:
         -   title: Eleverna gör fel indrag
             example:
                 error_text: Indrag är ett nytt begrepp på den här nivån, som är svårt att använda för vissa elever. Se till att de tränar på enkel kod innan du gör ett helt program med det.
                 error_code: |-
-                    upprepa 3 gånger
-                    skriv 'hej'
-                solution_text: 'Detta är rätt kod:'
+                    {repeat} 3 {times}
+                    {print} 'hej'
+                solution_text: "Detta är rätt kod:"
                 solution_code: |-
-                    upprepa 3 gånger
-                        skriv 'hej'
+                    {repeat} 3 {times}
+                        {print} 'hej'
         -   title: Elever upprepar bara en rad när de ville upprepa flera rader
             example:
                 error_text: I koden nedan ville studenten t.ex. ta emot tre personers dryckesbeställningar. Men istället frågade programmet tre gånger och men skrev bara ut en beställning.
                 error_code: |-
-                    upprepa 3 gånger
-                        dryck = fråga 'Vad skulle du vilja dricka?'
-                    skriv dryck
+                    {repeat} 3 {times}
+                        dryck = {ask} 'Vad skulle du vilja dricka?'
+                    {print} dryck
                 solution_text: |-
                     I rätt kod börjar även den tredje raden med indrag. På så vis tillhör den raden upprepningsblocket och kommer att upprepas 3 gånger.
                     Att visa dina elever dessa skillnader kan hjälpa dem att förstå varför vi behöver indrag för att få våra program att fungera.
                 solution_code: |-
-                    upprepa 3 gånger
-                        dryck = fråga 'Vad skulle du vilja dricka?'
-                        skriv dryck
+                    {repeat} 3 {times}
+                        dryck = {ask} 'Vad skulle du vilja dricka?'
+                        {print} dryck
         -   title: Elever vill nästa `{if}`-satser eller ha `{if}`-satser i en loop
             example:
                 error_text: |-
                     På den här nivån får eleverna ännu inte ha `{if}`-satser inuti andra `{if}`-satser eller inuti upprepade loopar.
                     På nästa nivå är detta tillåtet.
                 error_code: |-
-                    födelsedag = fråga 'Är det din födelsedag?'
-                    om födelsedag = ja
-                        upprepa 3 gånger
-                            skriv 'Hipp Hipp Hurra!'
-                solution_text: 'Det här är rätt kod på den här nivån:'
+                    födelsedag = {ask} 'Är det din födelsedag?'
+                    {if} födelsedag = ja
+                        {repeat} 3 {times}
+                            {print} 'Hipp Hipp Hurra!'
+                solution_text: "Det här är rätt kod på den här nivån:"
                 solution_code: |-
-                    födelsedag = fråga 'Är det din födelsedag?'
-                    om födelsedag = ja
-                        skriv 'Hipp Hipp Hurra!'
-                        skriv 'Hipp Hipp Hurra!'
-                        skriv 'Hipp Hipp Hurra!'
+                    födelsedag = {ask} 'Är det din födelsedag?'
+                    {if} födelsedag = ja
+                        {print} 'Hipp Hipp Hurra!'
+                        {print} 'Hipp Hipp Hurra!'
+                        {print} 'Hipp Hipp Hurra!'
         -   title: Eleverna skriver program som tar för lång tid att köra
             example:
                 error_text: På den här nivån är det väldigt lätt att skriva mycket kod. Eleverna får inte göra program som tar för lång tid att ladda (för att spara våra servrar).
                 error_code: |-
-                    upprepa 100 gånger
-                        skriv 'Hur många gånger kan jag upprepa detta?'
+                    {repeat} 100 {times}
+                        {print} 'Hur många gånger kan jag upprepa detta?'
                 solution_text: Se till att koden inte är för lång
                 solution_code: |-
-                    upprepa 20 gånger
-                        skriv 'Detta räcker'
+                    {repeat} 20 {times}
+                        {print} 'Detta räcker'
         -   title: Elever använder kommandot `{if}` för att kolla om variabelvärdet är lika med variabelnamnet
             example:
                 error_text: |-
@@ -812,88 +850,88 @@ teacher-guide:
                     På rad 2 uppmanas datorn att kolla om det variabeln lösenord är lika med variabeln lösenord, alltså sig själv. Det innebär att svaret alltid är ja.
                     Så med den här koden kommer svaret alltid att vara 'Du kan komma in' oavsett vad spelaren fyller i.
                 error_code: |-
-                    lösenord är fråga 'Vad är lösenordet?'
-                    om lösenord är lösenord
-                        print 'Du kan komma in'
-                    annars
-                        print 'Du får inte komma in'
+                    lösenord {is} {ask} 'Vad är lösenordet?'
+                    {if} lösenord {is} lösenord
+                        {print} 'Du kan komma in'
+                    {else}
+                        {print} 'Du får inte komma in'
                 solution_text: Du kan åtgärda det här misstaget genom att lägga till citattecken. Då vet datorn att det andra lösenordet i '{if} lösenord {is} 'lösenord' är en sträng (alltså normal text) och inte variabelnamnet.
                 solution_code: |-
-                    lösenord är fråga 'Vad är lösenordet?'
-                    om lösenord är 'lösenord'
-                        print 'Du kan komma in'
-                    annars
-                        print 'Du får inte komma in'
-    -   level: '9'
+                    lösenord {is} {ask} 'Vad är lösenordet?'
+                    {if} lösenord {is} 'lösenord'
+                        {print} 'Du kan komma in'
+                    {else}
+                        {print} 'Du får inte komma in'
+    -   level: "9"
         sections:
         -   title: Elever gör fel på indrag
             example:
                 error_text: Det svåraste med den här nivån är att ha rätt indrag. Elever älskar att kapsla `{if}`-satser, ibland även inuti andra kapslade `{if}`-satser. Att hålla reda på indragen kan bli ganska svårt.
                 error_code: |-
-                    skriv 'Robin går på stan'
-                    plats = fråga 'Går Robin in i en butik eller går hon hem?'
-                    om plats är butik
-                        skriv 'Hon går in i butiken.'
-                        skriv 'Robin ser en intressant bok'
-                        bok = fråga 'Köper Robin boken?'
-                            om bok är ja
-                    skriv 'Robin köper boken och går hem'
-                    annars
-                        skriv 'Robin lämnar butiken och går hem'
-                    annars
-                        skriv 'Robin går hem'
+                    {print} 'Robin går på stan'
+                    plats = {ask} 'Går Robin in i en butik eller går hon hem?'
+                    {if} plats {is} butik
+                        {print} 'Hon går in i butiken.'
+                        {print} 'Robin ser en intressant bok'
+                        bok = {ask} 'Köper Robin boken?'
+                            {if} bok {is} ja
+                    {print} 'Robin köper boken och går hem'
+                    {else}
+                        {print} 'Robin lämnar butiken och går hem'
+                    {else}
+                        {print} 'Robin går hem'
                 solution_text: Detta är rätt kod. Försök att hålla reda på alla olika konstruktioner när du sätter `{if}`-satser inuti andra `{if}`-satser.
                 solution_code: |-
-                    skriv 'Robin går på stan'
-                    plats = fråga 'Går Robin in i en butik eller går hon hem?'
-                    om plats är butik
-                        skriv 'Hon går in i butiken.'
-                        skriv 'Robin ser en intressant bok'
-                        bok = fråga 'Köper Robin boken?'
-                        om bok är ja
-                            skriv 'Robin köper boken och går hem'
-                        annars
-                            skriv 'Robin lämnar butiken och går hem'
-                    annars
-                        skriv 'Robin går hem'
-    -   level: '10'
+                    {print} 'Robin går på stan'
+                    plats = {ask} 'Går Robin in i en butik eller går hon hem?'
+                    {if} plats {is} butik
+                        {print} 'Hon går in i butiken.'
+                        {print} 'Robin ser en intressant bok'
+                        bok = {ask} 'Köper Robin boken?'
+                        {if} bok {is} ja
+                            {print} 'Robin köper boken och går hem'
+                        {else}
+                            {print} 'Robin lämnar butiken och går hem'
+                    {else}
+                        {print} 'Robin går hem'
+    -   level: "10"
         sections:
         -   title: Eleverna använder inte för-kommandot rätt
             example:
                 error_text: Vi ser ofta att elever försöker skriva ut listan (i exemplet djur) istället för elementen i listan.
                 error_code: |-
-                    djur är hund, katt, marulk
-                    för djuret i djur
-                      skriv 'Jag älskar ' djur
+                    djur {is} hund, katt, marulk
+                    {for} djuret {in} djur
+                      {print} 'Jag älskar ' djur
                 solution_text: Ordet djur i den sista raden bör ändras till djuret.
                 solution_code: |-
-                    djur är hund, katt, marulk
-                    för djuret i djur
-                      skriv 'Jag älskar ' djuret
+                    djur {is} hund, katt, marulk
+                    {for} djuret {in} djur
+                      {print} 'Jag älskar ' djuret
         -   title: Eleverna glömmer indragningen
             example:
                 error_text: Elever har en tendens att glömma att använda indrag efter ett för-kommando.
                 error_code: |-
-                    djur är hund, katt, marulk
-                    för djuret i djur
-                    skriv 'Jag älskar ' djuret
+                    djur {is} hund, katt, marulk
+                    {for} djuret {in} djur
+                    {print} 'Jag älskar ' djuret
                 solution_text: Du behöver använda indrag efter kommandot för.
                 solution_code: |-
-                    djur är hund, katt, marulk
-                    för djuret i djur
-                      skriv 'Jag älskar ' djuret
-    -   level: '11'
+                    djur {is} hund, katt, marulk
+                    {for} djuret {in} djur
+                      {print} 'Jag älskar ' djuret
+    -   level: "11"
         sections:
         -   title: Eleverna glömmer att använda indrag
             example:
                 error_text: Se till att eleverna använder indrag.
                 error_code: |-
                     för j i intervallet 1 till 5
-                    skriv j
-                solution_text: 'Detta är rätt kod:'
+                    {print} j
+                solution_text: "Detta är rätt kod:"
                 solution_code: |-
                     för j i intervallet 1 till 5
-                        skriv j
+                        {print} j
         -   title: Eleverna förstår inte j:ets betydelse
             example:
                 error_text: |-
@@ -901,12 +939,12 @@ teacher-guide:
                     Till exempel den här koden:
                 error_code: |-
                     för j i intervallet 1 till 5
-                    skriv j
+                    {print} j
                 solution_text: Kan lika gärna ersättas med denna kod. Den fungerar på samma sätt.
                 solution_code: |-
                     för banan i intervallet 1 till 5
-                        skriv banan
-    -   level: '12'
+                        {print} banan
+    -   level: "12"
         sections:
         -   title: Eleverna glömmer citattecken
             example:
@@ -916,7 +954,7 @@ teacher-guide:
                     superhjälte = superhjältar {at} {random}
                     {if} superhjälte = Batman
                         {print} 'JAG ÄR BATMAN!'
-                solution_text: 'Detta är rätt kod:'
+                solution_text: "Detta är rätt kod:"
                 solution_code: |-
                     superhjältar = 'Spiderman', 'Batman', 'Iron Man'
                     superhjälte = superhjältar {at} {random}
@@ -929,146 +967,146 @@ teacher-guide:
                     I exemplet nedan kan du inte göra uträkningar med talet 25, eftersom det står inom citattecken.
                 error_code: |-
                     poäng = '25'
-                    svar är fråga 'Vill du ha en poäng?'
-                    om svar är 'ja'
+                    svar {is} {ask} 'Vill du ha en poäng?'
+                    {if} svar {is} 'ja'
                         poäng = poäng + 1
                         skriva poäng
-                solution_text: 'Detta är rätt kod:'
+                solution_text: "Detta är rätt kod:"
                 solution_code: |-
                     poäng = 25
-                    svar är fråga 'Vill du ha en poäng?'
-                    om svar är 'ja'
+                    svar {is} {ask} 'Vill du ha en poäng?'
+                    {if} svar {is} 'ja'
                         poäng = poäng + 1
-                        skriv poäng
+                        {print} poäng
         -   title: Eleverna använder kommatecken istället för punkt i decimaltal
             example:
                 error_text: Decimaltal kan användas från och med den här nivån, men du kan inte använda decimalkomma.
-                error_code: skriv 2,5 + 2,5
-                solution_text: 'Detta är rätt kod:'
-                solution_code: skriv 2.5 + 2.5
-    -   level: '13'
+                error_code: "{print} 2,5 + 2,5"
+                solution_text: "Detta är rätt kod:"
+                solution_code: "{print} 2.5 + 2.5"
+    -   level: "13"
         sections:
         -   title: Elever förväxlar `och` med `eller`
             example:
                 error_text: De båda kommandona kan verka snarlika, men de fungerar helt olika.
                 error_code: |-
-                    spel är fråga 'Vill du spela ett spel?'
-                    tid är fråga 'Har du tid att spela?'
-                    om spel är 'ja' eller tid är 'ja'
-                        skriv 'Nu spelar vi!'
+                    spel {is} {ask} 'Vill du spela ett spel?'
+                    tid {is} {ask} 'Har du tid att spela?'
+                    {if} spel {is} 'ja' {or} tid {is} 'ja'
+                        {print} 'Nu spelar vi!'
                 solution_text: I det här fallet behöver personen svara ja på båda frågorna, så du ska använda `och`.
                 solution_code: |-
-                    spel är fråga 'Vill du spela ett spel?'
-                    tid är fråga 'Har du tid att spela?'
-                    om spel är 'ja' och tid är 'ja'
-                        skriv 'Nu spelar vi!'
-    -   level: '14'
+                    spel {is} {ask} 'Vill du spela ett spel?'
+                    tid {is} {ask} 'Har du tid att spela?'
+                    {if} spel {is} 'ja' {and} tid {is} 'ja'
+                        {print} 'Nu spelar vi!'
+    -   level: "14"
         sections:
         -   title: Eleverna blandar ihop symbolerna < och >
             example:
                 error_text: Ofta är eleverna redan bekanta med de symbolerna från matten. Men om dina elever inte känner till tecknen än kan de få problem med det.
                 error_code: |-
-                    ålder = fråga 'Hur gammal är du?'
-                    om ålder < 12
-                        skriv 'Du är äldre än jag!'
-                solution_text: 'Detta är rätt kod:'
+                    ålder = {ask} 'Hur gammal är du?'
+                    {if} ålder < 12
+                        {print} 'Du är äldre än jag!'
+                solution_text: "Detta är rätt kod:"
                 solution_code: |-
-                    ålder = fråga 'Hur gammal är du?'
-                    om ålder > 12
-                        skriv 'Du är äldre än jag!'
+                    ålder = {ask} 'Hur gammal är du?'
+                    {if} ålder > 12
+                        {print} 'Du är äldre än jag!'
         -   title: Eleverna använder fel symboler för `!=`, `<=` och `>=`
             example:
                 error_text: De här symbolerna är förmodligen nya för de flesta eleverna. Se till att förklara dem för dina elever.
                 error_code: |-
-                    namn = fråga 'Vad heter du?'
-                    om namn =< 'Hedy'
-                        skriv 'Du är inte Hedy'
-                solution_text: 'Detta är rätt kod:'
+                    namn = {ask} 'Vad heter du?'
+                    {if} namn =  'Hedy'
+                        {print} 'Du är inte Hedy'
+                solution_text: "Detta är rätt kod:"
                 solution_code: |-
-                    namn = fråga 'Vad heter du?'
-                    om namn != 'Hedy'
-                        skriv 'Du är inte Hedy'
+                    namn = {ask} 'Vad heter du?'
+                    {if} namn != 'Hedy'
+                        {print} 'Du är inte Hedy'
         -   title: Eleverna glömmer att använda symbolen ==
             example:
                 error_text: På den här nivån får eleverna fortfarande använda = eller är. Men på högre nivåer, eller i Python, kan de få problem. Därför är det bäst att träna dem i att använda symbolen ==.
                 error_code: |-
-                    namn = fråga 'Vad heter du?'
-                    om namn = 'Hedy'
-                        skriv 'Du är cool!'
-                solution_text: 'Detta är rätt kod:'
+                    namn = {ask} 'Vad heter du?'
+                    {if} namn = 'Hedy'
+                        {print} 'Du är cool!'
+                solution_text: "Detta är rätt kod:"
                 solution_code: |-
-                    namn = fråga 'Vad heter du?'
-                    om namn == 'Hedy'
-                        skriv 'Du är cool!'
-    -   level: '15'
+                    namn = {ask} 'Vad heter du?'
+                    {if} namn == 'Hedy'
+                        {print} 'Du är cool!'
+    -   level: "15"
         sections:
         -   title: Eleverna glömmer indrag i while-loopen
             example:
                 error_text: Indrag är ofta svårt för eleverna.
                 error_code: |-
                     svar = 0
-                    medan svar != 25
-                    svar = fråga 'Vad är 5 gånger 5?'
-                    print 'Rätt svar har getts'
-                solution_text: 'Detta är rätt kod:'
+                    {while} svar != 25
+                    svar = {ask} 'Vad är 5 gånger 5?'
+                    {print} 'Rätt svar har getts'
+                solution_text: "Detta är rätt kod:"
                 solution_code: |-
                     svar = 0
-                    medan svar != 25
-                        svar = fråga 'Vad är 5 gånger 5?'
-                    print 'Rätt svar har getts'
-    -   level: '16'
+                    {while} svar != 25
+                        svar = {ask} 'Vad är 5 gånger 5?'
+                    {print} 'Rätt svar har getts'
+    -   level: "16"
         sections:
         -   title: Eleverna glömmer klamrar
             example:
                 error_text: Från och med den här nivån ska listor anges inom klammer.
                 error_code: |-
                     glass = 'jordgubbs', 'choklad'
-                    skriv 'Jag älskar ' glass[slump] 'glass'
-                solution_text: 'Detta är rätt kod:'
+                    {print} 'Jag älskar ' glass[{random}] 'glass'
+                solution_text: "Detta är rätt kod:"
                 solution_code: |-
                     glass = ['jordgubbs', 'choklad']
-                    skriv 'Jag älskar ' glass[slump] 'glass'
+                    {print} 'Jag älskar ' glass[{random}] 'glass'
         -   title: Eleverna använder fel sorts klammer
             example:
                 error_text: Från och med den här nivån ska listor ha hakparenteser (klammer).
                 error_code: |-
-                    glass = ('jordgubbs', 'choklad'}
-                    skriv 'Jag älskar ' glass[slump] 'glass'
-                solution_text: 'Detta är rätt kod:'
+                    glass = ('jordgubbs', 'choklad')
+                    {print} 'Jag älskar ' glass[{random}] 'glass'
+                solution_text: "Detta är rätt kod:"
                 solution_code: |-
                     glass = ['jordgubbs', 'choklad']
-                    skriv 'Jag älskar ' glass[slump] 'glass'
+                    {print} 'Jag älskar ' glass[{random}] 'glass'
         -   title: Eleverna glömmer citattecknen när de fokuserar på parenteserna
             example:
                 error_text: Studenter är ibland så fokuserade på den nya aspekten av syntaxen att de glömmer bort citattecknen.
                 error_code: |-
                     glass = [jordgubbs, choklad]
-                    skriv 'Jag älskar ' glass[slump] 'glass'
-                solution_text: 'Detta är rätt kod:'
+                    {print} 'Jag älskar ' glass[{random}] 'glass'
+                solution_text: "Detta är rätt kod:"
                 solution_code: |-
                     glass = ['jordgubbs', 'choklad']
-                    skriv 'Jag älskar ' glass[slump] 'glass'
+                    {print} 'Jag älskar ' glass[{random}] 'glass'
         -   title: Eleverna använder fortfarande det gamla kommandot på slump
             example:
                 error_text: Studenter är ibland så fokuserade på den nya aspekten av syntaxen att de glömmer bort citattecknen.
                 error_code: |-
                     glass = [jordgubbs, choklad]
-                    skriv 'Jag älskar ' glass på slump 'glass'
-                solution_text: 'Detta är rätt kod:'
+                    {print} 'Jag älskar ' glass på slump 'glass'
+                solution_text: "Detta är rätt kod:"
                 solution_code: |-
                     glass = ['jordgubbs', 'choklad']
-                    skriv 'Jag älskar ' glass[slump] 'glass'
+                    {print} 'Jag älskar ' glass[{random}] 'glass'
         -   title: Eleverna glömmer citattecken medan när fokuserar på parenteserna
             example:
                 error_text: Studenter är ibland så fokuserade på den nya aspekten av syntaxen att de glömmer bort citattecknen.
                 error_code: |-
                     glass = [jordgubbs, choklad]
-                    skriv 'Jag älskar ' glass[slump] 'glass'
-                solution_text: 'Detta är rätt kod:'
+                    {print} 'Jag älskar ' glass[{random}] 'glass'
+                solution_text: "Detta är rätt kod:"
                 solution_code: |-
                     glass = ['jordgubbs', 'choklad']
-                    skriv 'Jag älskar ' glass[slump] 'glass'
-    -   level: '17'
+                    {print} 'Jag älskar ' glass[{random}] 'glass'
+    -   level: "17"
         sections:
         -   title: Eleverna använder `{elif}` som `{else}`, alltså utan ett villkor
             example:
@@ -1079,7 +1117,7 @@ teacher-guide:
                         {print} 'grönt är trevligt'
                     {elif}:
                         {print} 'Jag gillar grönt'
-                solution_text: 'Detta är rätt kod:'
+                solution_text: "Detta är rätt kod:"
                 solution_code: |-
                     färg = {ask} 'Vilken är din favoritfärg?'
                     {if} färg == 'grön':
@@ -1099,42 +1137,42 @@ teacher-guide:
                         {print} 'Jag kan pigga upp dig!'
                     {annars}
                         {print} 'Jag är jättebra!'
-                solution_text: 'Detta är rätt kod:'
+                solution_text: "Detta är rätt kod:"
                 solution_code: |-
-                    svar = fråga 'Hur mår du?'
-                    om svar är 'bra':
-                        skriv 'Jag också!'
-                    annars om svar är 'dåligt':
-                        skriv 'Jag kan muntra upp dig!'
-                    annars:
-                        skriv 'Jag är jättebra!'
-    -   level: '18'
+                    svar = {ask} 'Hur mår du?'
+                    {if} svar {is} 'bra':
+                        {print} 'Jag också!'
+                    {else}
+                        om svar är  dåligt
+                    {print} 'Jag kan muntra upp dig!'
+                        {else}:
+    -   level: "18"
         sections:
         -   title: Eleverna glömmer hakparenteser
             example:
                 error_text: Eleverna glömmer att ha parenteser runt text.
-                error_code: skriv 'jag heter Hedy!'
-                solution_text: 'Detta är rätt kod:'
-                solution_code: skriv('jag heter Hedy!')
+                error_code: "{print} 'jag heter Hedy!'"
+                solution_text: "Detta är rätt kod:"
+                solution_code: "{print}('jag heter Hedy!')"
         -   title: Eleverna fortsätter använda fråga-kommandot
             example:
                 error_text: Ask-kommandot har använts från nivå 1. Så det kan vara svårt för eleverna att byta till kommandot inmatning istället för kommandot fråga.
                 error_code: |-
-                    skriv('Jag heter Hedy!')
+                    {print}('Jag heter Hedy!')
                     namn = fråga('Vad heter du?')
-                    skriv('Så du heter ', namn)
-                solution_text: 'Detta är rätt kod:'
+                    {print}('Så du heter ', namn)
+                solution_text: "Detta är rätt kod:"
                 solution_code: |-
-                    skriv('Jag heter Hedy!')
-                    namn = inmatning('Vad heter du?')
-                    skriv('Så du heter ', namn)
+                    {print}('Jag heter Hedy!')
+                    namn = {input}('Vad heter du?')
+                    {print}('Så du heter ', namn)
         -   title: Eleverna råkar använda parenteser som citattecken
             example:
                 error_text: De har lärt sig att ha variablerna utanför citattecknen, så de kanske gör samma sak med parenteserna, vilket inte är rätt sätt att använda dem.
                 error_code: |-
                     temperatur = 25
-                    skriv('Det är ') temperatur (' grader ute')
-                solution_text: 'Detta är rätt kod:'
+                    {print}('Det är ') temperatur (' grader ute')
+                solution_text: "Detta är rätt kod:"
                 solution_code: |-
                     temperatur = 25
-                    skriv('Det är' , temperatur, ' grader ute')
+                    {print}('Det är' , temperatur, ' grader ute')
