@@ -1364,6 +1364,7 @@ class DynamoCondition:
 
 class Equals(DynamoCondition):
     """Assert that a value is equal to another value."""
+
     def __init__(self, value):
         self.value = value
 
@@ -1377,6 +1378,7 @@ class Equals(DynamoCondition):
 
     def matches(self, value):
         return value == self.value
+
 
 class Between(DynamoCondition):
     """Assert that a value is between two other values."""
@@ -1832,4 +1834,3 @@ class DictOf(Validator):
 def slugify(x):
     """Strips special characters from Dynamo identifiers."""
     return re.sub(r'[^a-zA-Z0-9_.-]', '_', x)
-

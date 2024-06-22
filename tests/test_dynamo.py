@@ -618,16 +618,16 @@ class TestSortKeysAgainstAws(unittest.TestCase):
         self.db.query.assert_called_with(
             KeyConditionExpression='#id = :id AND #sort BETWEEN :sort_min AND :sort_max',
             ExpressionAttributeValues={
-                ':id': { 'S': 'key' },
-                ':sort_min': { 'N': '2' },
-                ':sort_max': { 'N': '5'}
+                ':id': {'S': 'key'},
+                ':sort_min': {'N': '2'},
+                ':sort_max': {'N': '5'}
             }, ExpressionAttributeNames={
                 '#id': 'id',
                 '#sort': 'sort'
             },
             TableName=mock.ANY,
             ScanIndexForward=mock.ANY
-            )
+        )
 
     def test_key_with_hash_in_it(self):
         self.table = dynamo.Table(
@@ -643,16 +643,16 @@ class TestSortKeysAgainstAws(unittest.TestCase):
         self.db.query.assert_called_with(
             KeyConditionExpression='#id_key = :id_key AND #sort_key BETWEEN :sort_key_min AND :sort_key_max',
             ExpressionAttributeValues={
-                ':id_key': { 'S': 'key' },
-                ':sort_key_min': { 'N': '2' },
-                ':sort_key_max': { 'N': '5'}
+                ':id_key': {'S': 'key'},
+                ':sort_key_min': {'N': '2'},
+                ':sort_key_max': {'N': '5'}
             }, ExpressionAttributeNames={
                 '#id_key': 'id#key',
                 '#sort_key': 'sort#key'
             },
             TableName=mock.ANY,
             ScanIndexForward=mock.ANY
-            )
+        )
 
 
 def try_to_delete(filename):
