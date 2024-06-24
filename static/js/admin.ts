@@ -1,3 +1,5 @@
+import { autoSave } from "./autosave";
+
 export interface InitializeAdminUsersPageOptions {
   readonly page: 'admin-users';
 }
@@ -34,4 +36,7 @@ export function initializeAdminUserPage(_options: InitializeAdminUsersPageOption
       $('#hidden_page_input').attr('value', token);
       $('#filterform').submit();
   });
+
+    // Autosave admin page
+    autoSave("admin_users")
 }

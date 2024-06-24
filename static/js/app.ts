@@ -1703,6 +1703,52 @@ export function filter_admin() {
   window.open('?' + queryString, '_self');
 }
 
+export function save_admin(username: string) {
+  let levels: (string | undefined)[] = [];
+  $('[id^=enable_level_]').each(function() {
+      if ($(this).is(":checked")) {
+          levels.push(<string>$(this).attr('level'));
+      }
+  });
+  let other_settings: string[] = [];
+  $('.other_settings_checkbox').each(function() {
+      if ($(this).prop("checked")) {
+          other_settings.push(<string>$(this).attr('id'));
+      }
+  });
+  let level_thresholds: Record<string, string> = {};
+  $('.threshold_settings_value').each(function() {
+      if ($(this).val() != '') {
+          level_thresholds[$(this).attr('id') as string] = $(this).val() as string;
+      }
+  });
+  let opening_dates: Record<string, string> = {};
+  $('[id^=opening_date_level_]').each(function() {
+    opening_dates[$(this).attr('level') as string] = $(this).val() as string;
+  });
+  // Not sending the adventures because the adventures are automatically saved in the database
+  $.ajax({
+    type: 'POST',
+    url: '/for-teachers/customize-class/' + class_id,
+    data: JSON.stringify({
+        levels: levels,
+        opening_dates: opening_dates,
+        other_settings: other_settings,
+        level_thresholds: level_thresholds
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function (response) {
+    if (response.achievement) {
+        showAchievements(response.achievement, false, "");
+    }
+    modal.notifySuccess(response.success);
+    $('#remove_customizations_button').removeClass('hidden');
+  }).fail(function (err) {
+    modal.notifyError(err.responseText);
+  });
+}
+
 export function hide_editor() {
   $('#fold_in_toggle_container').hide();
   $('#code_editor').toggle();
