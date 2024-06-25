@@ -1,9 +1,9 @@
 
-<ul id="tags-list" class="flex flex-wrap items-center list-none">
+<ul id="tags_list" data-cy="tags_list" class="flex flex-wrap items-center mb-4 list-none">
     {% for tag in tags %}
     <!-- TODO: allow teacher to edit tags; not urgent, but for a better ux! -->
         <li 
-            id="tag_{{loop.index}}" 
+            id="tag_{{loop.index}}"
             class='relative border-2 rounded-lg border-green-300 p-2 px-5 mx-2 mb-2 shadow'>
             {{tag}}
             {% if not public and username == creator %}

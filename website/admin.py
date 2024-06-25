@@ -14,6 +14,7 @@ from website.auth import (
     pick,
     requires_admin,
     send_localized_email_template,
+    refresh_current_user_from_db,
 )
 
 from .database import Database
@@ -66,6 +67,7 @@ class AdminModule(WebsiteModule):
             "last_login",
             "verification_pending",
             "is_teacher",
+            "is_super_teacher",
             "program_count",
             "prog_experience",
             "teacher_request",
@@ -171,7 +173,7 @@ class AdminModule(WebsiteModule):
             page_title=gettext("title_admin"),
         )
 
-    @route("/markAsTeacher", methods=["POST"])
+    @route("/mark-as-teacher", methods=["POST"])
     def mark_as_teacher(self):
         user = current_user()
         if not is_admin(user) and not utils.is_testing_request(request):
@@ -181,22 +183,48 @@ class AdminModule(WebsiteModule):
 
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("username"), str):
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
         if not isinstance(body.get("is_teacher"), bool):
-            return gettext("teacher_invalid"), 400
+            return make_response(gettext("teacher_invalid"), 400)
 
         user = self.db.user_by_username(body["username"].strip().lower())
 
         if not user:
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
 
         is_teacher_value = 1 if body["is_teacher"] else 0
         update_is_teacher(self.db, user, is_teacher_value)
 
         # Todo TB feb 2022 -> Return the success message here instead of fixing in the front-end
         return "", 200
+
+    @route("/mark-super-teacher", methods=["POST"])
+    @requires_admin
+    def mark_super_teacher(self, user):
+        if not user and not utils.is_testing_request(request):
+            return utils.error_page(error=401, ui_message=gettext("unauthorized"))
+
+        body = request.json
+
+        # Validations
+        if not isinstance(body, dict):
+            return gettext("ajax_error"), 400
+        if not isinstance(body.get("username"), str):
+            return gettext("username_invalid"), 400
+
+        user = self.db.user_by_username(body["username"].strip().lower())
+
+        if not user:
+            return gettext("username_invalid"), 400
+        elif not is_teacher(user):
+            return "user must be a teacher.", 400
+
+        self.db.update_user(user["username"], {"is_super_teacher": 0 if user.get("is_super_teacher") else 1, })
+        refresh_current_user_from_db()
+
+        return make_response(f"{user['username']} is now a super-teacher.", 200)
 
     @route("/changeUserEmail", methods=["POST"])
     @requires_admin
@@ -205,16 +233,16 @@ class AdminModule(WebsiteModule):
 
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("username"), str):
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
         if not isinstance(body.get("email"), str) or not utils.valid_email(body["email"]):
-            return gettext("email_invalid"), 400
+            return make_response(gettext("email_invalid"), 400)
 
         user = self.db.user_by_username(body["username"].strip().lower())
 
         if not user:
-            return gettext("email_invalid"), 400
+            return make_response(gettext("email_invalid"), 400)
 
         token = make_salt()
         hashed_token = password_hash(token, make_salt())
@@ -225,7 +253,7 @@ class AdminModule(WebsiteModule):
 
         # If this is an e2e test, we return the email verification token directly instead of emailing it.
         if utils.is_testing_request(request):
-            return {"username": user["username"], "token": hashed_token}, 200
+            return make_response({"username": user["username"], "token": hashed_token}, 200)
         else:
             try:
                 send_localized_email_template(
@@ -236,9 +264,8 @@ class AdminModule(WebsiteModule):
                     username=user["username"],
                 )
             except BaseException:
-                return gettext("mail_error_change_processed"), 400
-
-        return make_response('', 204)
+                return make_response(gettext("mail_error_change_processed"), 400)
+        return make_response('', 200)
 
     @route("/getUserTags", methods=["POST"])
     @requires_admin
@@ -246,8 +273,8 @@ class AdminModule(WebsiteModule):
         body = request.json
         user = self.db.get_public_profile_settings(body["username"].strip().lower())
         if not user:
-            return "User doesn't have a public profile", 400
-        return {"tags": user.get("tags", [])}, 200
+            return make_response(gettext("request_invalid"), 400)
+        return make_response({"tags": user.get("tags", [])}, 200)
 
     @route("/updateUserTags", methods=["POST"])
     @requires_admin
@@ -255,7 +282,7 @@ class AdminModule(WebsiteModule):
         body = request.json
         db_user = self.db.get_public_profile_settings(body["username"].strip().lower())
         if not user:
-            return "User doesn't have a public profile", 400
+            return make_response(gettext("request_invalid"), 400)
 
         tags = []
         if "admin" in user.get("tags", []):

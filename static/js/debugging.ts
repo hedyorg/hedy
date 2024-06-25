@@ -57,12 +57,12 @@ interface GutterMouseDownEvent {
 
 //this shows just the button, not the list itself
 export function toggleVariableView(){
-  if($('#variables #variable-list li').length == 0){
+  if($('#variables #variable_list li').length == 0){
     $('#variable_button').hide();
   }
   else{    
     $('#variable_button').show();
-    $('#variable-list').show();
+    $('#variable_list').show();
     document.getElementById('variables_arrow')!.classList.remove('fa-angle-up');
     document.getElementById('variables_arrow')!.classList.add('fa-angle-down');
   }
@@ -70,15 +70,15 @@ export function toggleVariableView(){
 
 export function load_variables(variables: any) {
   if (variable_view === true) {
-    const programData = theGlobalDebugger.get_program_data();
+    const programData = theGlobalDebugger?.get_program_data();
     variables = clean_variables(variables);
-    const variableList = $('#variable-list');
+    const variableList = $('#variable_list');
     variableList.empty();
     for (const i in variables) {
       // Only append if the variable contains any data (and is not undefined)
       if (variables[i][1]) {
         const variableName = variables[i][0].replace(/^_/, '');
-        const role = programData.variables[variableName];
+        const role = programData?.variables[variableName];
         if (showRoles) {
           variableList.append(`<li style=color:${variables[i][2]}>${variableName}: ${variables[i][1]} (${role})</li>`);
         } else {
@@ -235,12 +235,12 @@ function debugRun() {
 
 export function startDebug() {
   if (step_debugger === true) {
-    var debugButton = $("#debug_button");
+    var debugButton = $('#debug_button');
     debugButton.hide();
-    var continueButton = $("#debug_continue");
-    var stopButton = $("#debug_stop");
-    var resetButton = $("#debug_restart");
-    var runButtonContainer = $("#runButtonContainer");
+    var continueButton = $('#debug_continue');
+    var stopButton = $('#debug_stop');
+    var resetButton = $('#debug_restart');
+    var runButtonContainer = $('#run_button_container');
 
     runButtonContainer.hide();
     continueButton.show();
@@ -252,7 +252,7 @@ export function startDebug() {
 export function resetDebug() {
   if (step_debugger === true) {
     var storage = window.localStorage;
-    var continueButton = $("#debug_continue");
+    var continueButton = $('#debug_continue');
     continueButton.show();
 
     storage.setItem("debugLine", "0");
@@ -264,12 +264,12 @@ export function resetDebug() {
 
 export function stopDebug() {
   if (step_debugger === true) {
-    var debugButton = $("#debug_button");
+    var debugButton = $('#debug_button');
     debugButton.show();
-    var continueButton = $("#debug_continue");
-    var stopButton = $("#debug_stop");
-    var resetButton = $("#debug_restart");
-    var runButtonContainer = $("#runButtonContainer");
+    var continueButton = $('#debug_continue');
+    var stopButton = $('debug_stop');
+    var resetButton = $('#debug_restart');
+    var runButtonContainer = $('#run_button_container');
 
     $('#stopit').hide();
     $('#runit').show()

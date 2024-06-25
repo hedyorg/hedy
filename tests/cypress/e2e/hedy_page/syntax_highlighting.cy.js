@@ -12,7 +12,7 @@ context('chai-colors', () => {
     });
   
     it('has the word print highlighted in examples', () => {
-      cy.get('#adventures-tab pre .cm-editor')
+      cy.get('#adventures_tab pre .cm-editor')
         .eq(1)
         .contains('print')
         .should('be.visible')
@@ -30,8 +30,8 @@ describe('The view program page', () => {
     programName = Math.random().toString(36);
     cy.get('#program_name').clear().type(programName);
     cy.get('#share_program_button').click();
-    cy.get('#share-public').click();
-    cy.get('button[data-action="copy-to-clipboard"]').click();
+    cy.get('#share_public').click();
+    cy.get('button[data-action="copy_to_clipboard"]').click();
 
     const urlFromClipboard = await new Promise((ok) =>
       cy.window().then((win) =>

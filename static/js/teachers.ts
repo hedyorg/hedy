@@ -1,6 +1,5 @@
 import { modal } from './modal';
 import { showAchievements, theKeywordLanguage } from "./app";
-import { markUnsavedChanges, clearUnsavedChanges, hasUnsavedChanges } from './browser-helpers/unsaved-changes';
 import { ClientMessages } from './client-messages';
 import DOMPurify from 'dompurify'
 import { startTeacherTutorial } from './tutorials/tutorial';
@@ -9,6 +8,7 @@ import { initializeTranslation } from './lezer-parsers/tokens';
 import { CustomWindow } from './custom-window';
 import { addCurlyBracesToCode, addCurlyBracesToKeyword } from './adventure';
 import { autoSave } from './autosave';
+import { Chart } from 'chart.js';
 
 declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
@@ -59,7 +59,7 @@ export function rename_class(id: string, class_name_prompt: string) {
 }
 
 export function duplicate_class(id: string, teacher_classes: string[], second_teacher_prompt: string, prompt: string, defaultValue: string = '') {
-  if (teacher_classes){
+  if (teacher_classes && !defaultValue){
     modal.confirm(second_teacher_prompt, function () {
       apiDuplicateClass(id, prompt, true, defaultValue);
     }, function () {
@@ -106,6 +106,25 @@ function apiDuplicateClass(id: string, prompt: string, second_teacher: boolean, 
           }
     }).fail(function(err) {
       return modal.notifyError(err.responseText);
+    });
+  });
+}
+
+export function delete_class(id: string, prompt: string) {
+  modal.confirm(prompt, function () {
+    $.ajax({
+      type: 'DELETE',
+      url: '/class/' + id,
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function (response) {
+      if (response.achievement) {
+        showAchievements(response.achievement, true, '');
+      } else {
+        location.reload();
+      }
+    }).fail(function (err) {
+      modal.notifyError(err.responseText);
     });
   });
 }
@@ -184,7 +203,8 @@ export function remove_student(class_id: string, student_id: string, prompt: str
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      if (response.achievement) {
+      // the check for response is necessary because of make_response() but I'm not sure why
+      if (response && response.achievement) {
           showAchievements(response.achievement, true, "");
       } else {
           location.reload();
@@ -353,6 +373,21 @@ export function preview_adventure() {
     });
 }
 
+export function delete_adventure(adventure_id: string, prompt: string) {
+  modal.confirm(prompt, function () {
+    $.ajax({
+      type: 'DELETE',
+      url: '/for-teachers/customize-adventure/' + adventure_id,
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function () {
+      window.location.href = '/for-teachers';
+    }).fail(function (err) {
+      modal.notifyError(err.responseText);
+    });
+  });
+}
+
 export function change_password_student(username: string, enter_password: string, password_prompt: string) {
     modal.prompt ( enter_password + " " + username + ":", '', function (password) {
         modal.confirm (password_prompt, function () {
@@ -390,7 +425,7 @@ export function show_doc_section(section_key: string) {
      $("#button-" + section_key).removeClass("green-btn");
      $("#button-" + section_key).addClass("blue-btn");
      $('.section').hide();
-     $ ('.common-mistakes-section').hide ();
+     $ ('.common_mistakes_section').hide ();
      $('#section-' + section_key).toggle();
    }
 }
@@ -436,7 +471,6 @@ export function save_customizations(class_id: string) {
           showAchievements(response.achievement, false, "");
       }
       modal.notifySuccess(response.success);
-      clearUnsavedChanges();
       $('#remove_customizations_button').removeClass('hidden');
     }).fail(function (err) {
       modal.notifyError(err.responseText);
@@ -447,13 +481,13 @@ export function restore_customization_to_default(prompt: string) {
     modal.confirm (prompt, async function () {
       // We need to know the current level that is selected by the user
       // so we can know which level to draw in the template  
-      let active_level_id : string = $('[id^=level-]')[0].id;
-      let active_level = active_level_id.split('-')[1]
+      let active_level_id : string = $('[id^=level_]')[0].id;
+      let active_level = active_level_id.split('_')[1]
       try {
         await htmx.ajax(
           'POST',
           `/for-teachers/restore-customizations?level=${active_level}`,
-          '#adventure-dragger'
+          '#adventure_dragger'
         )
         $('.other_settings_checkbox').prop('checked', false);
         // Remove the value from all input fields -> reset to text to show placeholder
@@ -479,7 +513,6 @@ export function restore_customization_to_default(prompt: string) {
 }
 
 export function enable_level(level: string) {
-    markUnsavedChanges();
     if ($('#enable_level_' + level).is(':checked')) {
       $('#opening_date_level_' + level).prop('disabled', false)
                                       .attr('type', 'text')
@@ -493,7 +526,7 @@ export function enable_level(level: string) {
                                        .val('');
     }
 
-    if ($('#level-' + level).is(':visible')) {
+    if ($('#level_' + level).is(':visible')) {
       setLevelStateIndicator(level);
     }
 }
@@ -511,25 +544,37 @@ export function setDateLevelInputColor(level: string) {
                                      .addClass('bg-gray-200')
   }
 
-  if ($('#level-' +  level).is(':visible')) {
+  if ($('#level_' +  level).is(':visible')) {
     setLevelStateIndicator(level);
   }
 }
 
 export function add_account_placeholder() {
-    let row = $("#account_row_unique").clone();
-    row.removeClass('hidden');
-    row.attr('id', "");
-    // Set all inputs except class to required
-    row.find(':input').each(function() {
-       if ($(this).prop('id') != 'classes') {
-           $(this).prop('required', true);
-       }
-    });
-    // Append 5 rows at once
-    for (let x = 0; x < 5; x++) {
-        row.clone().appendTo("#account_rows_container");
-    }
+  // Get the hidden row template
+  const rowTemplate = $('#account_row_unique').clone();
+  rowTemplate.removeClass('hidden');
+  rowTemplate.attr('id', "");
+
+  // Function to update data-cy attributes
+  function updateDataCyAttributes(row: JQuery<HTMLElement>, index: number) {
+      row.find('[data-cy]').each(function() {
+          const currentCy = $(this).attr('data-cy');
+          if (currentCy) {
+              const newCy = currentCy.replace(/_\d+$/, `_${index}`);
+              $(this).attr('data-cy', newCy);
+          }
+      });
+  }
+
+  // Get the current number of rows
+  const existingRowsCount = $('.account_row').length;
+
+  // Append 5 rows at once
+  for (let x = 0; x < 5; x++) {
+      const newRow = rowTemplate.clone();
+      updateDataCyAttributes(newRow, existingRowsCount + x + 1);
+      newRow.appendTo("#account_rows_container");
+  }
 }
 
 export function generate_passwords() {
@@ -675,21 +720,21 @@ export function initializeTeacherPage(options: InitializeTeacherPageOptions) {
 }
 
 function setLevelStateIndicator(level: string) {
-  $('[id^=state-]').addClass('hidden');
+  $('[id^=state_]').addClass('hidden');
 
   if ($('#opening_date_level_' + level).is(':disabled')) {
-    $('#state-disabled').removeClass('hidden');
+    $('#state_disabled').removeClass('hidden');
   } else if($('#opening_date_level_' + level).val() === ''){
-    $('#state-accessible').removeClass('hidden');
+    $('#state_accessible').removeClass('hidden');
   } else {
     var date_string : string = $('#opening_date_level_' + level).val() as string;
     var input_date = new Date(date_string);
     var today_date = new Date();
     if (input_date > today_date) {
       $('#opening_date').text(date_string);
-      $('#state-future').removeClass('hidden');
+      $('#state_future').removeClass('hidden');
     } else {
-      $('#state-accessible').removeClass('hidden');
+      $('#state_accessible').removeClass('hidden');
     }
   }
 }
@@ -701,31 +746,15 @@ export interface InitializeCustomizeClassPageOptions {
 
 export function initializeCustomizeClassPage(options: InitializeCustomizeClassPageOptions) {
   $(document).ready(function(){
-      // Use this to make sure that we return a prompt when a user leaves the page without saving
-      $( "input" ).on('change', function() {
-        markUnsavedChanges();
-      });
-
       $('#back_to_class').on('click', () => {
-        function backToClass() {
-            window.location.href = `/for-teachers/class/${options.class_id}`;
-        }
-
-        if (hasUnsavedChanges()) {
-            modal.confirm(ClientMessages.unsaved_class_changes, () => {
-                clearUnsavedChanges();
-                backToClass();
-            });
-        } else {
-            backToClass();
-        }
+        window.location.href = `/for-teachers/class/${options.class_id}`;
       });
 
       $('[id^=opening_date_level_]').each(function() {
         setDateLevelInputColor($(this).attr('level')!);
       })
 
-      $('#levels-dropdown').on('change', function(){
+      $('#levels_dropdown').on('change', function(){
           var level = $(this).val() as string;
           setLevelStateIndicator(level);
       });
@@ -733,7 +762,7 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
       // Autosave customize class page
       // the third argument is used to trigger a GET request on the specified element
       // if the trigger (input in this case) is changed.
-      autoSave("customize_class", null, {elementId: "levels-dropdown", trigger: "input"});
+      autoSave("customize_class", null, {elementId: "levels_dropdown", trigger: "input"});
 
   });
 }
@@ -743,17 +772,175 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
  */
 export interface InitializeClassOverviewPageOptions {
   readonly page: 'class-overview';
+  readonly graph_students: student[];
+  readonly level: number;
 }
 
 export function initializeClassOverviewPage(_options: InitializeClassOverviewPageOptions) {
-  $('.attribute').change(function() {
+  $('.attribute').change(function () {
     const attribute = $(this).attr('id');
-    if(!(this as HTMLInputElement).checked) {
-        $('#' + attribute + '_header').hide();
-        $('.' + attribute + '_cell').hide();
+    if (!(this as HTMLInputElement).checked) {
+      $('#' + attribute + '_header').hide();
+      $('.' + attribute + '_cell').hide();
     } else {
-        $('#' + attribute + '_header').show();
-        $('.' + attribute + '_cell').show();
+      $('#' + attribute + '_header').show();
+      $('.' + attribute + '_cell').show();
     }
+  });
+
+  initializeGraph()
+}
+
+interface InitializeGraphOptions {
+  readonly graph_students: student[];
+  readonly level: number
+}
+
+interface student { 
+  adventures_tried: number,
+  number_of_errors: number,
+  successful_runs: number,
+  username: string,
+}
+
+interface dataPoint {
+  x: number,
+  y: number,
+  r: number,
+  successful_runs: number,
+  name: string
+}
+
+export function initializeGraph() {
+  const graphElement = document.getElementById('adventure_bubble') as HTMLCanvasElement
+  if (graphElement === undefined || graphElement === null) return;
+  const graphData: InitializeGraphOptions = JSON.parse(graphElement.dataset['graph'] || '') ;
+  
+  const students = graphData.graph_students
+  let data: dataPoint[] = students.map((student: student) => {    
+    let radius;
+    
+    if (student.successful_runs < 7)        radius = 7;
+    else if (student.successful_runs > 300) radius = 300;
+    else                                    radius = student.successful_runs;
+
+    return {
+      x: student.adventures_tried,
+      y: student.number_of_errors,
+      r: radius,
+      successful_runs: student.successful_runs,
+      name: student.username
+    }
+  });
+  new Chart(
+    graphElement,
+    {
+      type: 'bubble',
+      data: {
+        datasets: [
+          {
+            backgroundColor: '#c9dded',
+            borderColor: '#35a4ff',
+            data: data,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        onHover: (event, chartElement) => {
+          //@ts-ignore
+          event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default'
+        },
+        interaction: {
+          mode: 'point'
+        },
+        onClick: (_e, activePoints, chart) => {
+          if (activePoints.length === 0) return;
+          const item: dataPoint = chart.data.datasets[0].data[activePoints[0].index] as dataPoint
+          for(const point of activePoints) {
+            console.log(chart.data.datasets[0].data[point.index])
+          }
+          document.getElementById('programs_container')?.classList.remove('hidden')
+          htmx.ajax(
+            'GET',
+            `/for-teachers/get_student_programs/${item.name}`,
+            '#programs_container'
+          )
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: ClientMessages['adventures_tried'],
+              font: {
+                size: 15
+              }
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: ClientMessages['errors'],
+              font: {
+                size: 15
+              }
+            }
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: ClientMessages['graph_title'].replace('{level}', graphData.level.toString()),
+            font: {
+              size: 19
+            }
+          },
+          legend: {
+            display: false
+          },
+          tooltip: {
+            displayColors: false,
+            callbacks: {
+              title: (tooltipItems) => {
+                // A single point can have 2 data points associated.
+                const names = tooltipItems.map((currentValue) => {
+                  const item: dataPoint = currentValue.dataset.data[currentValue.dataIndex] as dataPoint
+                  return item.name
+                })
+                return names.join(', ')
+              },
+              label: (tooltipItem) => {
+                const item: dataPoint = tooltipItem.dataset.data[tooltipItem.dataIndex] as dataPoint
+                return [
+                  ClientMessages['adventures_completed'].replace('{number_of_adventures}', item.x.toString()),
+                  ClientMessages['number_of_errors'].replace('{number_of_errors}', item.y.toString()),
+                  ClientMessages['successful_runs'].replace('{successful_runs}', item.successful_runs.toString())
+                ]
+              }
+            }
+          }
+        }
+      },
+    }
+  );
+}
+
+export function invite_support_teacher(requester: string) {
+  modal.prompt(`Invite a teacher to support ${requester}.`, '', function (username) {
+    $.ajax({
+        type: 'POST',
+        url: "/super-teacher/invite-support",
+        data: JSON.stringify({
+          sourceUser: requester,
+          targetUser: username,
+        }),
+        contentType: 'application/json',
+        dataType: 'json'
+    }).done(function() {
+        location.reload();
+    }).fail(function(err) {
+        modal.notifyError(err.responseText);
+    });
   });
 }

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-05-16 14:13+0000\n"
+"PO-Revision-Date: 2024-06-19 19:09+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: eo <LL@li.org>\n"
 "Language: eo\n"
@@ -16,12 +16,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6-dev\n"
+"X-Generator: Weblate 5.6-rc\n"
 "Generated-By: Babel 2.14.0\n"
 
+#, fuzzy
 msgid "Access Before Assign"
 msgstr "Vi provis uzi la variablon {name} je la linio {access_line_number}, sed vi donis al ĝi valoron je la linio {definition_line_number}. Donu valoron al variablo antaŭ uzi ĝin."
 
+#, fuzzy
 msgid "Cyclic Var Definition"
 msgstr "La nomo `{variable}` bezonas ricevi valoron antaŭ vi povas uzi ĝin maldekstre de la komando `{is}`."
 
@@ -29,24 +31,30 @@ msgstr "La nomo `{variable}` bezonas ricevi valoron antaŭ vi povas uzi ĝin mal
 msgid "Else Without If Error"
 msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
 
+#, fuzzy
 msgid "Function Undefined"
 msgstr "Vi provis uzi la funkcion {name}, sed vi ne difinis ĝin."
 
+#, fuzzy
 msgid "Has Blanks"
 msgstr "Via kodo ne estas kompleta. Ĝi enhavas spacojn kiun vi devas anstataŭigi per kodo."
 
+#, fuzzy
 msgid "Incomplete"
 msgstr "Ups! Vi forgesis parton de kodo! Je la linio {line_number} vi bezonas enigi tekston post `{incomplete_command}`."
 
+#, fuzzy
 msgid "Incomplete Repeat"
 msgstr "Ŝajnas ke vi forgesis uzi komandon kun la komando `{repeat}` kiun vi uzis je la linio {line_number}."
 
 msgid "Invalid"
 msgstr "`{invalid_command}` ne estas komando je la nivelo {level} de Hedy. Ĉu vi celis skribi `{guessed_command}`?"
 
+#, fuzzy
 msgid "Invalid Argument"
 msgstr "Vi ne povas uzi la komandon `{command}` kun `{invalid_argument}`. Provu ŝanĝi `{invalid_argument}` per {allowed_types}."
 
+#, fuzzy
 msgid "Invalid Argument Type"
 msgstr "Vi ne povas uzi `{command}` kun `{invalid_argument}` ĉar ĝi estas {invalid_type}. Provu ŝanĝi `{invalid_argument}` per {allowed_types}."
 
@@ -121,6 +129,7 @@ msgstr "You tried to access the list {name} but it is either empty or the index 
 msgid "Runtime Value Error"
 msgstr "While running your program the command `{command}` received the value `{value}` which is not allowed. {tip}."
 
+#, fuzzy
 msgid "Runtime Values Error"
 msgstr "While running your program the command `{command}` received the values `{value}` and `{value}` which are not allowed. {tip}."
 
@@ -140,6 +149,7 @@ msgstr "You used too few leading spaces in line {line_number}. You used {leading
 msgid "Too Many Indents"
 msgstr "You used too many leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too many."
 
+#, fuzzy
 msgid "Unexpected Indentation"
 msgstr "Vi uzis tro da spacetoj en linio {line_number}. Vi uzis {leading_spaces} spacetojn, kiom estas tro multe. Komencu ĉiun novan blokon per {indent_size} spacetoj pli ol la antaŭa linio."
 
@@ -213,9 +223,6 @@ msgstr "Add"
 msgid "add_students"
 msgstr "Aldoni lernantojn"
 
-msgid "add_students_options"
-msgstr "Krei kontojn de lernantoj"
-
 #, fuzzy
 msgid "add_your_language"
 msgstr "Add your language!"
@@ -256,6 +263,10 @@ msgstr "You can use the \"preview\" button to view a styled version of your adve
 msgid "adventure_exp_classes"
 msgstr "Your adventure is used within the following classes"
 
+#, fuzzy
+msgid "adventure_flagged"
+msgstr "The adventure was flagged successfully."
+
 msgid "adventure_id_invalid"
 msgstr "Jen nevalida identigilo de aventuro."
 
@@ -280,12 +291,20 @@ msgid "adventures"
 msgstr "Adventures"
 
 #, fuzzy
+msgid "adventures_completed"
+msgstr "Adventures completed: {number_of_adventures}"
+
+#, fuzzy
 msgid "adventures_info"
 msgstr "Each Hedy level has built-in exercises for students, which we call adventures. You can create your own adventures and add them to your classes. With your own adventures you can create adventures that are relevant and interesting for your students. You can find more information about creating your own adventures <a href=\"https://hedy.org/for-teachers/manual/features\">here</a>."
 
 #, fuzzy
 msgid "adventures_restored"
 msgstr "The default adventures have been restored!"
+
+#, fuzzy
+msgid "adventures_tried"
+msgstr "Adventures tried"
 
 #, fuzzy
 msgid "ago"
@@ -388,8 +407,8 @@ msgid "class_customize_success"
 msgstr "Class successfully customized."
 
 #, fuzzy
-msgid "class_live"
-msgstr "Live statistics"
+msgid "class_graph_explanation"
+msgstr "In this graph you can see represented the numbers of adventures your students have attempted (meaning they have done meaninful work in that adventure), with respect to the number of errors and successful runs."
 
 #, fuzzy
 msgid "class_name_duplicate"
@@ -405,8 +424,8 @@ msgid "class_name_prompt"
 msgstr "Bonvolu tajpi la nomon de la klaso"
 
 #, fuzzy
-msgid "class_overview"
-msgstr "Class overview"
+msgid "class_performance_graph"
+msgstr "Class performance graph"
 
 #, fuzzy
 msgid "class_survey_description"
@@ -478,6 +497,10 @@ msgstr "Congratulations, {username}, you have completed Hedy!"
 #, fuzzy
 msgid "connect_guest_teacher"
 msgstr "I would like to be connected with a guest teacher who can give a few lessons"
+
+#, fuzzy
+msgid "constant_variable_role"
+msgstr "constant"
 
 msgid "content_invalid"
 msgstr "Jen nevalida aventuro."
@@ -626,6 +649,10 @@ msgstr "Forviŝi publikan profilon"
 msgid "delete_success"
 msgstr "Program deleted successfully."
 
+#, fuzzy
+msgid "delete_tag_prompt"
+msgstr "Are you sure you want to delete this tag?"
+
 msgid "destroy_profile"
 msgstr "Forviŝi profilon"
 
@@ -722,6 +749,10 @@ msgstr "Tajpu vian respondon ĉi tie…"
 msgid "error_logo_alt"
 msgstr "Emblemo pri eraro"
 
+#, fuzzy
+msgid "errors"
+msgstr "Errors"
+
 msgid "exclamation mark"
 msgstr "krisigno"
 
@@ -804,6 +835,10 @@ msgstr "Please send us a message with a category. We appreciate your help to imp
 msgid "female"
 msgstr "Ina"
 
+#, fuzzy
+msgid "flag_adventure_prompt"
+msgstr "Do you want to flag this adventure so that we check its appropriateness?"
+
 msgid "float"
 msgstr "nombro"
 
@@ -868,6 +903,10 @@ msgstr "Iri al rezulto de kvizo"
 
 msgid "goto_profile"
 msgstr "Al mia profilo"
+
+#, fuzzy
+msgid "graph_title"
+msgstr "Errors per adventure completed on level {level}"
 
 #, fuzzy
 msgid "grid_overview"
@@ -978,6 +1017,10 @@ msgstr "Incorrect Indentation"
 msgid "input"
 msgstr "input from `{ask}`"
 
+#, fuzzy
+msgid "input_variable_role"
+msgstr "input"
+
 msgid "integer"
 msgstr "nombro"
 
@@ -1072,9 +1115,6 @@ msgstr "Last edited"
 msgid "last_error"
 msgstr "Last error"
 
-msgid "last_login"
-msgstr "Lasta saluto"
-
 #, fuzzy
 msgid "last_program"
 msgstr "Last program"
@@ -1121,6 +1161,10 @@ msgstr "Ligo"
 
 msgid "list"
 msgstr "listo"
+
+#, fuzzy
+msgid "list_variable_role"
+msgstr "list"
 
 #, fuzzy
 msgid "live_dashboard"
@@ -1357,6 +1401,10 @@ msgstr "Programo ne ekzistas!"
 msgid "no_tag"
 msgstr "No tag provided!"
 
+#, fuzzy
+msgid "not_adventure_yet"
+msgstr "You must fill in an adventure name first"
+
 msgid "not_enrolled"
 msgstr "Ŝajne vi ne apartenas al ĉi tiu klaso!"
 
@@ -1385,6 +1433,10 @@ msgstr "Number of achievements"
 #, fuzzy
 msgid "number_lines"
 msgstr "Number of lines"
+
+#, fuzzy
+msgid "number_of_errors"
+msgstr "Number of errors: {number_of_errors}"
 
 msgid "number_programs"
 msgstr "Nombro de programoj"
@@ -1434,9 +1486,6 @@ msgstr "You already have a program with this name, saving this program will repl
 #, fuzzy
 msgid "owner"
 msgstr "Owner"
-
-msgid "page"
-msgstr "paĝo"
 
 msgid "page_not_found"
 msgstr "Paĝo ne ekzistas!"
@@ -1696,6 +1745,10 @@ msgstr "Ĉu vi certas voli denunci ĉi tiun programaĵon?"
 msgid "report_success"
 msgstr "Ĉi tiu programo estis denuncita"
 
+#, fuzzy
+msgid "request_invalid"
+msgstr "Request invalid"
+
 msgid "request_teacher"
 msgstr "Ĉu vi volas peti instruistan konton?"
 
@@ -1900,6 +1953,10 @@ msgstr "Start teaching"
 msgid "step_title"
 msgstr "Assignment"
 
+#, fuzzy
+msgid "stepper_variable_role"
+msgstr "stepper"
+
 msgid "stop_code_button"
 msgstr "Ĉesigi programon"
 
@@ -1920,10 +1977,6 @@ msgstr "This student already has a pending invitation."
 #, fuzzy
 msgid "student_details"
 msgstr "Student details"
-
-#, fuzzy
-msgid "student_list"
-msgstr "Student list"
 
 #, fuzzy
 msgid "student_not_allowed_in_class"
@@ -1966,6 +2019,10 @@ msgstr "Aboni"
 #, fuzzy
 msgid "subscribe_newsletter"
 msgstr "Subscribe to the newsletter"
+
+#, fuzzy
+msgid "successful_runs"
+msgstr "Successful runs: {successful_runs}"
 
 #, fuzzy
 msgid "suggestion_color"
@@ -2081,14 +2138,6 @@ msgstr "Hedy - Miaj premioj"
 msgid "title_admin"
 msgstr "Hedy - Paĝo por administranto"
 
-#, fuzzy
-msgid "title_class grid_overview"
-msgstr "Hedy - Grid overview"
-
-#, fuzzy
-msgid "title_class live_statistics"
-msgstr "Hedy - Live Statistics"
-
 msgid "title_class-overview"
 msgstr "Hedy - Superrigardo pri klaso"
 
@@ -2195,6 +2244,10 @@ msgid "unique_usernames"
 msgstr "All usernames need to be unique."
 
 #, fuzzy
+msgid "unknown_variable_role"
+msgstr "unknown"
+
+#, fuzzy
 msgid "unlock_thresholds"
 msgstr "Unlock level thresholds"
 
@@ -2285,6 +2338,14 @@ msgstr "Vidi programon"
 #, fuzzy
 msgid "view_slides"
 msgstr "View slides"
+
+#, fuzzy
+msgid "waiting_for_submit"
+msgstr "Waiting for submit"
+
+#, fuzzy
+msgid "walker_variable_role"
+msgstr "walker"
 
 msgid "welcome"
 msgstr "Bonveno"
@@ -2505,4 +2566,19 @@ msgstr "Your program"
 
 #~ msgid "variables"
 #~ msgstr "Variabloj"
+
+#~ msgid "class_live"
+#~ msgstr "Live statistics"
+
+#~ msgid "class_overview"
+#~ msgstr "Class overview"
+
+#~ msgid "student_list"
+#~ msgstr "Student list"
+
+#~ msgid "title_class grid_overview"
+#~ msgstr "Hedy - Grid overview"
+
+#~ msgid "title_class live_statistics"
+#~ msgstr "Hedy - Live Statistics"
 

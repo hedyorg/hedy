@@ -7,25 +7,27 @@
       "type": "object",
       "description": "Achievements with title and text",
       "additionalProperties": {
-        "$ref": "#/Achievement"
+        "$ref": "#/definitions/Achievement"
       }
     }
   },
   "required": [
     "achievements"
   ],
-  "Achievement": {
-    "type": "object",
-    "additionalProperties": false,
-   "properties": {
-     "title": {
-       "type": "string",
-       "description": "Achievement title"
-     },
-     "text": {
-       "type": "string",
-       "description": "Achievement text"
-     }
-   }
+  "definitions": {
+    "Achievement": {
+      "type": "object",
+      "additionalProperties": false,
+    "properties": {
+      "title": {
+        "type": "string",
+        "description": "Achievement title"
+      },
+      "text": {
+        "type": "string",
+        "description": "Achievement text"
+      }
+    }
+    }
   }
 }

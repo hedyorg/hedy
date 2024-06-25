@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-4 mb-8 md:px-16 hidden" id="adventures_table"
+<div class="flex flex-col gap-4 mb-8 md:px-16 hidden" id="adventures_table" data-cy="adventures_table"
     _="on load hedyApp.getForTeacherTable('adventures_table')">
     <div class="flex flex-col gap-4 pb-4 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full lg:w-4/4 p-8">
       <h2 class="m-0 justify-left"> {{_('my_adventures')}} </h2>
@@ -17,7 +17,7 @@
         <tbody>
           {% for adventure in teacher_adventures %}
             <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
-              <td class="text-center px-4 py-2"><a href="for-teachers/customize-adventure/{{adventure.id}}" class="no-underline" data-cy="edit-link">{{adventure.name|e}}</a></td>
+              <td class="text-center px-4 py-2"><a href="for-teachers/customize-adventure/{{adventure.id}}" class="no-underline" data-cy="edit_link_adventure">{{adventure.name|e}}</a></td>
               <td class="text-center owner_username_cell">{{adventure.author or adventure.creator}}</td>
               <td class="text-center username_cell">{{adventure.creator}}</td>
               <td class="text-center p-2">
@@ -34,12 +34,12 @@
               <td class="text-center p-4 hidden sm:block">{{adventure.date}}</td>
               <td class="text-center p-2">
                 <div class="flex justify-center text-blue-900">
-                  <button class="flex flex-col items-center mr-16" data-cy="preview-{{adventure.name}}"
+                  <button class="flex flex-col items-center mr-16" data-cy="preview_{{adventure.name}}"
                   _="on click window.open('/adventure/{{ adventure.name }}/{{ adventure.level }}?creator={{ adventure.creator }}', '_self')">
                     <span class="fas fa-eye block mb-1"></span>
                     <span>{{_('preview')}}</span>
                   </button>
-                  <button id="delete_adventure" class="flex flex-col items-center" data-cy="delete-adventure" 
+                  <button id="delete_adventure" class="flex flex-col items-center" data-cy="delete_adventure_{{ adventure.name }}" 
                   hx-confirm="{{_('delete_adventure_prompt')}}"
                   hx-trigger="click"
                   hx-delete="/for-teachers/customize-adventure/{{adventure.id}}"

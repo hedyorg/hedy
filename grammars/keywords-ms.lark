@@ -5,7 +5,7 @@ _DEF: ("def" | "def") _SPACE?
 _RETURN: ("return" | "return") _SPACE?
 _PRINT: ("print" | "print") _SPACE?
 _PLAY: ("play" | "play") _SPACE
-_ASK: ("ask" | "ask") _SPACE?
+_ASK: ("tanya" | "ask") _SPACE?
 _ECHO: ("echo" | "echo") _SPACE?
 _FORWARD: ("forward" | "forward") _SPACE?
 _TURN: ("turn" | "turn") _SPACE?
@@ -25,7 +25,7 @@ yellow: ("yellow" | "yellow") _SPACE?
 _IS: _SPACE ("is" | "is") _SPACE
 _STANDALONE_IS: ("is" | "is")
 _SLEEP: ("sleep" | "sleep") _SPACE?
-_ADD_LIST: ("add" | "add") _SPACE
+_ADD_LIST: ("tambah" | "add") _SPACE
 _TO_LIST: _SPACE ("to" | "to") _SPACE
 _REMOVE: ("remove" | "remove") _SPACE
 _FROM: _SPACE ("from" | "from") _SPACE
@@ -35,7 +35,7 @@ _IN: _SPACE ("in" | "in") _SPACE
 _NOT_IN: _SPACE ("not in" | "not in") _SPACE
 _IF: ("if" | "if") _SPACE
 _ELSE: "else" | "else"
-_AND: _SPACE? ("and" | "and") _SPACE
+_AND: _SPACE? ("dan" | "and") _SPACE
 _REPEAT: ("repeat" | "repeat") _SPACE
 _TIMES: _SPACE ("times" | "times")
 _FOR: ("for" | "for") _SPACE
@@ -51,3 +51,5 @@ _COLOR : ("color" | "color") _SPACE?
 _PRESSED: ("pressed" | "pressed") _SPACE?
 _BUTTON: ("button" | "button") _SPACE?
 clear: ("clear" | "clear") _SPACE?
+TRUE: ("true" | "True" | "true" | "True") _SPACE?
+FALSE: ("false" | "False" | "false" | "False") _SPACE?

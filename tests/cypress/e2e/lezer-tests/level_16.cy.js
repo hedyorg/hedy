@@ -59,6 +59,13 @@ describe('Lezer parser tests for level 16', () => {
 
                 multiLevelTester('Assign list with multiple items', code, expectedTree, 16, 18)
             });
+
+            describe('AssignList boolean values', () => {
+                const code = 'options = [True, False]'
+                const expectedTree = 'Program(Command(AssignList(Text,Op,Op,True,Comma,False,Op)))'
+
+                multiLevelTester('AssignList boolean values', code, expectedTree, 16, 18)
+            });
         })
     });
 })

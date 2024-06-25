@@ -28,11 +28,11 @@ String { doubleQuotedString | singleQuotedString }
 Print { print+ ( Expression )+ }
 Ask { Text (is+ | Op<"=">) ask+ ( Expression )+ }
 
-AssignList { Text (is+ | Op<"=">) Op<"["> ((String | Text | Number) ~ambig (Comma (String | Text | Number))*)? Op<"]"> }
+AssignList { Text (is+ | Op<"=">) Op<"["> ((boolean | String | Text | Number) ~ambig (Comma (boolean | String | Text | Number))*)? Op<"]"> }
 Assign { (Text | ListAccess) (is+ | Op<"=">) (Expression ~ambig )+ }
 Sleep { sleep+ (Expression )? }
 ListAccess { Text Op<"["> (random+ | Text | Number) Op<"]"> }
-Add { add+ (Expression ) toList+ Text }
+Add { add+ (Expression ) to_list+ Text }
 Remove { remove+ (Expression ) from+ Text }
 Clear { clear+ }
 Play { play+ Expression }
@@ -77,8 +77,11 @@ binaryExpression {
     Expression !plus Op<"+" | "-"> Expression
 }
 
+boolean { low_true | low_false | cap_true | cap_false }
+
 Expression {
     Number |
+    boolean |
     Text |
     String |
     ListAccess |
@@ -103,7 +106,11 @@ Expression {
     is[@name="is"],
     while[@name="while"],
     define[@name="define"],
-    with[@name="with"]
+    with[@name="with"],
+    low_true[@name="true"],
+    low_false[@name="false"],
+    cap_true[@name="True"],
+    cap_false[@name="False"]
 }
 
 @external extend { Text } extendKeyword from "./tokens" {
@@ -116,7 +123,7 @@ Expression {
     add[@name="add"],
     from[@name="from"],
     remove[@name="remove"],
-    toList[@name="toList"],
+    to_list[@name="to_list"],
     clear[@name="clear"],    
     ins[@name="in"],
     not_in[@name="not_in"],
@@ -126,7 +133,7 @@ Expression {
     to[@name="to"],
     range[@name="range"],
     call[@name="call"],
-    returns[@name="return"]    
+    returns[@name="return"]
 }
 
 

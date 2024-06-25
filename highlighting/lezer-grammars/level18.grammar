@@ -25,7 +25,7 @@ Command {
 String { doubleQuotedString | singleQuotedString }
 
 Print { print+  Op<"("> Arguments? Op<")"> }
-AssignList { Text (is+ | Op<"=">) Op<"["> ((String | Text | Number) ~ambig (Comma (String | Text | Number))*)? Op<"]"> } // Comma doesn't really parse well if it is not separated by spaces
+AssignList { Text (is+ | Op<"=">) Op<"["> ((boolean | String | Text | Number) ~ambig (Comma (boolean | String | Text | Number))*)? Op<"]"> } // Comma doesn't really parse well if it is not separated by spaces
 Assign { (Text | ListAccess) (is+ | Op<"=">) (Expression ~ambig )+ }
 Input { Text (is+ | Op<"=">) input+ Op<"("> Arguments? Op<")"> }
 Sleep { sleep+ (Expression )? }
@@ -39,7 +39,7 @@ Turtle[@isGroup=turtle] {
     Color { color+ (Expression )  }
 }   
 
-Add { add+ (Expression ) toList+ Text }
+Add { add+ (Expression ) to_list+ Text }
 Remove { remove+ (Expression ) from+ Text }
 Clear { clear+ }
 ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
@@ -75,8 +75,11 @@ binaryExpression {
     Expression !plus Op<"+" | "-"> Expression
 }
 
+boolean { low_true | low_false | cap_true | cap_false }
+
 Expression {
     Number |
+    boolean |
     Text |
     String |
     ListAccess |
@@ -119,8 +122,12 @@ Expression {
     def[@name="def"],
     returns[@name="return"],
     fors[@name="for"],
-    toList[@name="toList"],
-    elif[@name="elif"]
+    to_list[@name="to_list"],
+    elif[@name="elif"],
+    low_true[@name="true"],
+    low_false[@name="false"],
+    cap_true[@name="True"],
+    cap_false[@name="False"]
 }
 
 @tokens {

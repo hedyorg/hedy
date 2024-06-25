@@ -108,7 +108,7 @@ class AuthHelper(unittest.TestCase):
         body = {
             'username': username,
             'email': username + '@hedy.com',
-            'language': 'nl',
+            'language': 'en',
             'keyword_language': 'en',
             'agree_terms': 'yes',
             'password': 'foobar',
@@ -170,7 +170,15 @@ class AuthHelper(unittest.TestCase):
 
         Need to log in again to refresh the session.
         """
-        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
+        self.post_data('admin/mark-as-teacher', {'username': self.username, 'is_teacher': True})
+        return self.login_user(self.username)
+
+    def make_current_user_super_teacher(self):
+        """Mark the current user as super-teacher.
+
+        Need to log in again to refresh the session.
+        """
+        self.post_data('admin/mark-super-teacher', {'username': self.username})
         return self.login_user(self.username)
 
     def given_user_is_logged_in(self):
@@ -904,7 +912,12 @@ class TestAuth(AuthHelper):
         self.given_user_is_logged_in()
 
         # Create a program -> make sure it is not public
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
+        program = {'code': 'print testing programs creation',
+                   'name': 'program 1',
+                   'level': 1,
+                   'adventure_name': 'default',
+                   'shared': False
+                   }
         program_id = self.post_data('programs', program)['id']
 
         # WHEN attempting to create a public profile with invalid bodies
@@ -941,13 +954,19 @@ class TestAuth(AuthHelper):
         self.given_user_is_logged_in()
 
         # Create a program that is public -> can be set as favourite on the public profile
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': True}
+        program = {'code': 'print testing programs creation',
+                   'name': 'program 1',
+                   'level': 1,
+                   'adventure_name': 'default',
+                   'shared': True
+                   }
         program_id = self.post_data('programs', program)['id']
 
         public_profile = {
             'image': '9',
             'personal_text': 'welcome to my profile!',
-            'favourite_program': program_id}
+            'favourite_program': program_id
+        }
 
         # WHEN creating a new public profile with favourite program
         # THEN receive an OK response code from the server
@@ -1027,7 +1046,13 @@ class TestProgram(AuthHelper):
         self.given_fresh_user_is_logged_in()
 
         # WHEN submitting a valid program
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
+        program = {
+            'code': 'print testing programs creation',
+            'name': 'program 1',
+            'level': 1,
+            'adventure_name': 'default',
+            'shared': False
+        }
         # THEN receive an OK response code from the server
         program = self.post_data('programs', program)
         # THEN verify that the returned program has both a name and an id
@@ -1066,7 +1091,13 @@ class TestProgram(AuthHelper):
     def test_valid_make_program_public(self):
         # GIVEN a logged in user with at least one program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
+        program = {
+            'code': 'print testing programs creation',
+            'name': 'program 1',
+            'level': 1,
+            'adventure_name': 'default',
+            'shared': False
+        }
         program_id = self.post_data('programs', program)['id']
 
         # WHEN making a program public
@@ -1089,7 +1120,13 @@ class TestProgram(AuthHelper):
     def test_valid_make_program_private(self):
         # GIVEN a logged in user with at least one public program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
+        program = {
+            'code': 'print testing programs creation',
+            'name': 'program 1',
+            'level': 1,
+            'adventure_name': 'default',
+            'shared': False
+        }
         program_id = self.post_data('programs', program)['id']
         self.post_data('programs/share/' + program_id + '/0', {'id': program_id})
 
@@ -1113,7 +1150,13 @@ class TestProgram(AuthHelper):
     def test_invalid_delete_program(self):
         # GIVEN a logged in user with at least one program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
+        program = {
+            'code': 'print testing programs creation',
+            'name': 'program 1',
+            'level': 1,
+            'adventure_name': 'default',
+            'shared': False
+        }
         self.post_data('programs', program)['id']
         program_id = '123456'
 
@@ -1124,7 +1167,13 @@ class TestProgram(AuthHelper):
     def test_valid_delete_program(self):
         # GIVEN a logged in user with at least one program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
+        program = {
+            'code': 'print testing programs creation',
+            'name': 'program 1',
+            'level': 1,
+            'adventure_name': 'default',
+            'shared': False
+        }
         program_id = self.post_data('programs', program)['id']
 
         # WHEN deleting a program
@@ -1139,7 +1188,13 @@ class TestProgram(AuthHelper):
     def test_destroy_account_with_programs(self):
         # GIVEN a logged in user with at least one program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
+        program = {
+            'code': 'print testing programs creation',
+            'name': 'program 1',
+            'level': 1,
+            'adventure_name': 'default',
+            'shared': False
+        }
         self.post_data('programs', program)['id']
 
         # WHEN deleting the user account
@@ -1338,9 +1393,10 @@ class TestClasses(AuthHelper):
         # THEN the class should contain a student with valid fields
         self.assertEqual(len(Class_data['students']), 1)
         class_student = Class_data['students'][0]
-        self.assertEqual(class_student['highest_level'], "-")
+        self.assertEqual(class_student['adventures_tried'], 0)
         self.assertEqual(class_student['programs'], 0)
-        self.assertIsInstance(class_student['last_login'], str)
+        self.assertEqual(class_student['number_of_errors'], 0)
+        self.assertEqual(class_student['successful_runs'], 0)
         self.assertEqual(class_student['username'], student['username'])
 
         # WHEN retrieving the student's programs
@@ -1360,10 +1416,22 @@ class TestClasses(AuthHelper):
         self.given_fresh_user_is_logged_in()
         self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
         # GIVEN a student with two programs, one public and one private
-        public_program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
+        public_program = {
+            'code': 'print testing programs creation',
+            'name': 'program 1',
+            'level': 1,
+            'adventure_name': 'default',
+            'shared': False
+        }
         public_program_id = self.post_data('programs', public_program)['id']
         self.post_data('programs/share/' + public_program_id + '/False', {'id': public_program_id})
-        private_program = {'code': 'hello world', 'name': 'program 2', 'level': 2, 'shared': False}
+        private_program = {
+            'code': 'print testing programs creation',
+            'name': 'program 2',
+            'level': 2,
+            'adventure_name': 'default',
+            'shared': False
+        }
         self.post_data('programs', private_program)['id']
 
         # GIVEN the aforementioned teacher

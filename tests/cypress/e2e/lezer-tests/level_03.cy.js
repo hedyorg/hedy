@@ -49,14 +49,14 @@ describe('Lezer parser tests for level 3', () => {
         describe('Add tests', () => {
             describe('Add single word to list', () => {
                 const code = 'add word to list'
-                const expectedTree = 'Program(Command(Add(add,Text,toList,Text)))'
+                const expectedTree = 'Program(Command(Add(add,Text,to_list,Text)))'
 
                 multiLevelTester('Add single word to list', code, expectedTree, 3, 11)
             });
 
             describe('Add multiple words to list', () => {
                 const code = 'add sour cream to sauces'
-                const expectedTree = 'Program(Command(Add(add,Text,Text,toList,Text)))'
+                const expectedTree = 'Program(Command(Add(add,Text,Text,to_list,Text)))'
 
                 multiLevelTester('Add multiple words to list', code, expectedTree, 3, 11)
             });
