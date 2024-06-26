@@ -1,13 +1,10 @@
 
 from flask import make_response, render_template, request
-from flask_babel import gettext
 from website.auth import requires_super_teacher, pick, is_teacher
 import utils
 
 from .database import Database
 from .website_module import WebsiteModule, route
-from .admin import update_is_teacher
-
 
 class SuperTeacherModule(WebsiteModule):
     def __init__(self, db: Database):
