@@ -54,7 +54,7 @@
                 <svg id="language_arrow" class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
             </div>
           </a>
-          <div class="dropdown-menu dropdown-blue h-48 overflow-auto" id="language_dropdown" style="display: none;"
+          <div class="dropdown-menu dropdown-blue h-96 overflow-auto" id="language_dropdown" style="display: none;"
           _="on mutation of @style
                 set arrow to #language_arrow
                 if *display == 'none'
@@ -63,14 +63,12 @@
                     add .rotate-180 to arrow
                 end">
               <div class="mb-4">
-                  <input id="search_language" placeholder="{{_('search')}}" class="border text-black border-gray-500 rounded h-8 px-2 w-full">
-              </div>    
+                  <input id="search_language" placeholder="{{_('search')}} {{other_languages()|length}}" class="border text-black border-gray-500 rounded h-8 px-2 w-full">
+              </div>
               <div class="flex flex-row flex-wrap w-min justify-start content-start items-start">         
-              <!-- <div class="grid grid-cols-3 gap-2"> -->
                 {% for lang in other_languages() %}
                     <div class="dropdown-item language" data-english="{{ lang.english }}" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();" data-cy="switch_lang_{{lang.lang}}">{{ lang.sym }}</div>
                 {% endfor %}
-                
                 <a id="add_language_btn" class="add-language-item language" href="https://hosted.weblate.org/new-lang/hedy/adventures/">{{_('add_your_language')}}</a>
               </div>
           </div>
