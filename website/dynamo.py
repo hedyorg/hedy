@@ -11,6 +11,7 @@ import time
 import random
 import datetime
 import collections
+import re
 from abc import ABCMeta
 from dataclasses import dataclass
 from typing import List, Optional
@@ -840,26 +841,34 @@ class AwsDynamoStorage(TableStorage):
         return items, next_page_token
 
     def _prep_query_data(self, key, sort_key=None, is_key_expression=True):
-        eq_conditions, special_conditions = DynamoCondition.partition(key)
+        """Build a DynamoDB condition expression from a dictionary mapping fields to values.
+
+        The values may be literals, in which case we will render an `=` condition,
+        or it may be a `DynamoCondition` subclass for more complex conditions.
+
+        Field names are escaped in order to make them not conflict with
+        built-in words.
+
+        Returns a triple of (expression, values, names):
+
+        - expression: a string containing placeholders like `#myfield = :myfield`.
+        - names: a dict mapping `#myfield` placeholders to `my-field` field names.
+        - values: a dict mapping `:myfield` placeholders to their serialized values.
+        """
+        conditions = DynamoCondition.make_conditions(key)
         if is_key_expression:
-            validate_only_sort_key(special_conditions, sort_key)
+            validate_only_sort_key(conditions, sort_key)
 
-        # We must escape field names with a '#' because Dynamo is unhappy
-        # with fields called 'level' etc:
-        # https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-        # This escapes too much, but at least it's easy.
+        escaped_names = {k: slugify(k) for k in conditions.keys()}
 
-        key_expression = " AND ".join(
-            [f"#{field} = :{field}" for field in eq_conditions.keys()]
-            + [cond.to_dynamo_expression(field) for field, cond in special_conditions.items()]
-        )
+        key_expression = " AND ".join(cond.to_dynamo_expression(escaped_names[field])
+                                      for field, cond in conditions.items())
 
-        attr_values = {f":{field}": DDB_SERIALIZER.serialize(key[field]) for field in eq_conditions.keys()}
-        for field, cond in special_conditions.items():
-            attr_values.update(cond.to_dynamo_values(field))
+        attr_values = {}
+        for field, cond in conditions.items():
+            attr_values.update(cond.to_dynamo_values(escaped_names[field]))
 
-        attr_names = {"#" + field: field for field in key.keys()}
-
+        attr_names = {f'#{e}': k for k, e in escaped_names.items()}
         return key_expression, attr_values, attr_names
 
     def put(self, table_name, _key, data):
@@ -1018,16 +1027,13 @@ class MemoryStorage(TableStorage):
 
     @lock.synchronized
     def query(self, table_name, key, sort_key, reverse, limit, pagination_token, filter=None, pagination_key=None):
-        eq_conditions, special_conditions = DynamoCondition.partition(key)
-        validate_only_sort_key(special_conditions, sort_key)
+        key_conditions = DynamoCondition.make_conditions(key)
+        validate_only_sort_key(key_conditions, sort_key)
 
-        if filter:
-            filter_eq_conditions, filter_special_conditions = DynamoCondition.partition(filter)
-        else:
-            filter_eq_conditions, filter_special_conditions = {}, {}
+        filter_conditions = DynamoCondition.make_conditions(filter or {})
 
         records = self.tables.get(table_name, [])
-        filtered = [r for r in records if self._query_matches(r, eq_conditions, special_conditions)]
+        filtered = [r for r in records if self._query_matches(r, key_conditions)]
 
         if sort_key:
             filtered.sort(key=lambda x: x[sort_key])
@@ -1056,7 +1062,7 @@ class MemoryStorage(TableStorage):
         # Do a final filtering to mimic DynamoDB FilterExpression
         return copy.deepcopy([record
                               for record in filtered
-                              if self._query_matches(record, filter_eq_conditions, filter_special_conditions)
+                              if self._query_matches(record, filter_conditions)
                               ]), next_page_key
 
     # NOTE: on purpose not @synchronized here
@@ -1188,10 +1194,8 @@ class MemoryStorage(TableStorage):
     def _eq_matches(self, record, key):
         return all(record.get(k) == v for k, v in key.items())
 
-    def _query_matches(self, record, eq, conds):
-        return all(record.get(k) == v for k, v in eq.items()) and all(
-            cond.matches(record.get(k)) for k, cond in conds.items()
-        )
+    def _query_matches(self, record, conds):
+        return all(cond.matches(record.get(k)) for k, cond in conds.items())
 
     def _flush(self):
         if self.filename:
@@ -1350,17 +1354,30 @@ class DynamoCondition:
         raise NotImplementedError()
 
     @staticmethod
-    def partition(key):
-        """Partition a dictionary into 2 dictionaries.
+    def make_conditions(key):
+        """Turn a dict of values into a dict of DynamoConditions.
 
-        The first one will contain all elements for which the values are
-        NOT of type DynamoCondition. The other one will contain all the elements
-        for which the value ARE DynamoConditions.
+        Non-DynamoConditions are returned into instances of Equals.
         """
-        eq_conditions = {k: v for k, v in key.items() if not isinstance(v, DynamoCondition)}
-        special_conditions = {k: v for k, v in key.items() if isinstance(v, DynamoCondition)}
+        return {k: v if isinstance(v, DynamoCondition) else Equals(v) for k, v in key.items()}
 
-        return (eq_conditions, special_conditions)
+
+class Equals(DynamoCondition):
+    """Assert that a value is equal to another value."""
+
+    def __init__(self, value):
+        self.value = value
+
+    def to_dynamo_expression(self, field_name):
+        return f"#{field_name} = :{field_name}"
+
+    def to_dynamo_values(self, field_name):
+        return {
+            f':{field_name}': DDB_SERIALIZER.serialize(self.value),
+        }
+
+    def matches(self, value):
+        return value == self.value
 
 
 class Between(DynamoCondition):
@@ -1426,9 +1443,10 @@ class CustomEncoder(json.JSONEncoder):
 
 
 def validate_only_sort_key(conds, sort_key):
-    """Check that only the sort key is used in the given key conditions."""
-    if sort_key and set(conds.keys()) - {sort_key}:
-        raise RuntimeError(f"Conditions only allowed on sort key {sort_key}, got: {list(conds)}")
+    """Check that non-Equals conditions are only used on the sort key."""
+    non_equals_fields = [k for k, v in conds.items() if not isinstance(v, Equals)]
+    if sort_key and set(non_equals_fields) - {sort_key}:
+        raise RuntimeError(f"Non-Equals conditions only allowed on sort key {sort_key}, got: {list(conds)}")
 
 
 def encode_page_token(x, inverted):
@@ -1811,3 +1829,8 @@ class DictOf(Validator):
 
     def __str__(self):
         return f'list of {self.inner}'
+
+
+def slugify(x):
+    """Strips special characters from Dynamo identifiers."""
+    return re.sub(r'[^a-zA-Z0-9_.-]', '_', x)

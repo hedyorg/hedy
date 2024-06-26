@@ -112,3 +112,8 @@ class TestErrors(HedyTester):
         result = _highlight('this is ```incorrect quotes``` but I will use it ```again```')
         expected = f'this is {highlighted("incorrect quotes")} but I will use it {highlighted("again")}'
         self.assertEqual(expected, result)
+
+    def test_highlight_at_random(self):
+        result = _highlight('`{at}``{random}`')
+        expected = f'{highlighted("{at}")}{highlighted("{random}")}'
+        self.assertEqual(expected, result)

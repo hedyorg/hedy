@@ -25,7 +25,7 @@ export const
   add = 23,
   from = 24,
   remove = 25,
-  toList = 26,
+  to_list = 26,
   clear = 27,
   ins = 28,
   not_in = 29,
