@@ -26,7 +26,7 @@
             {% if user.teacher_request %}
                 <button id="teacher_request_{{user.username}}" class="blue-btn" 
                 hx-trigger="click"
-                hx-post="/admin/mark-as-teacher/{{user.username}}/{{user.is_teacher}}"
+                hx-post="/admin/mark-as-teacher/{{user.username}}"
                 _="on click
                 remove #teacher_request_{{user.username}}
                 then toggle .hidden on #invite_support_teacher_{{user.username}}"

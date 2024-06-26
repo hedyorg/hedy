@@ -174,15 +174,13 @@ class AdminModule(WebsiteModule):
             page_title=gettext("title_admin"),
         )
 
-    @route("/mark-as-teacher/<username>/<is_teacher>", methods=["POST"])
-    def mark_as_teacher(self, username, is_teacher):
+    @route("/mark-as-teacher/<username>", methods=["POST"])
+    def mark_as_teacher(self, username):
         user = current_user()
         if (not is_admin(user) and not is_super_teacher(user)) and not utils.is_testing_request(request):
             return utils.error_page(error=401, ui_message=gettext("unauthorized"))
         if not username:
             return make_response(gettext("username_invalid"), 400)
-        if not is_teacher:
-            return make_response(gettext("teacher_invalid"), 400)
 
         user = self.db.user_by_username(username.strip().lower())
 
