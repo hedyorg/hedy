@@ -151,8 +151,6 @@
     </thead>
     <tbody>
       {% for user in users %}
-      <form onsubmit="event.preventDefault(); hedyApp.save_customizations({{user.username}})"
-        id="customize_class">
           <tr>
             <td class="username_cell cursor-pointer"><a class="no-underline" onclick="window.open('/programs?user={{ user.username }}', '_blank');">{% if user.username|length > 18 %}{{user.username[:15] + "..."}}{% else %}{{user.username}}{% endif %}</a></td>
             <td class="count_cell hidden">{{user.program_count or 0}}</td>
