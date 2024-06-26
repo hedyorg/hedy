@@ -61,7 +61,7 @@ describe('Error code gives correct error', () => {
 
     it('Invalid Argument', () => {
         const error_code = "turn test"
-        const error_message = `We detected that turn is not usable with test. Can you try changing test to right or left?`;
+        const error_message = `We detected that turn is not usable with  test. Can you try changing  test to right or left?`;
         goToHedyPage();
     
         cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').click();
