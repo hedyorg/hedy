@@ -6,6 +6,7 @@ import utils
 from .database import Database
 from .website_module import WebsiteModule, route
 
+
 class SuperTeacherModule(WebsiteModule):
     def __init__(self, db: Database):
         super().__init__("super_teacher", __name__, url_prefix="/super-teacher")
