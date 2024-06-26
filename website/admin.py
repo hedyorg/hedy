@@ -174,7 +174,7 @@ class AdminModule(WebsiteModule):
             page_title=gettext("title_admin"),
         )
 
-    @route("/mark-as-teacher/<username>", methods=["POST"])
+    @route("/mark-as-teacher/<username>", methods=["GET"])
     def mark_as_teacher(self, username):
         user = current_user()
         if (not is_admin(user) and not is_super_teacher(user)) and not utils.is_testing_request(request):
@@ -192,7 +192,7 @@ class AdminModule(WebsiteModule):
 
         return make_response('', 200)
 
-    @route("/mark-super-teacher/<username>", methods=["POST"])
+    @route("/mark-super-teacher/<username>", methods=["GET"])
     @requires_admin
     def mark_super_teacher(self, user, username):
         if not user and not utils.is_testing_request(request):
