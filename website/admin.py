@@ -8,6 +8,7 @@ from website.auth import (
     create_verify_link,
     current_user,
     is_admin,
+    is_super_teacher,
     is_teacher,
     make_salt,
     password_hash,
@@ -173,53 +174,42 @@ class AdminModule(WebsiteModule):
             page_title=gettext("title_admin"),
         )
 
-    @route("/mark-as-teacher", methods=["POST"])
-    def mark_as_teacher(self):
+    @route("/mark-as-teacher/<username>/<is_teacher>", methods=["POST"])
+    def mark_as_teacher(self, username, is_teacher):
         user = current_user()
-        if not is_admin(user) and not utils.is_testing_request(request):
+        if (not is_admin(user) and not is_super_teacher(user)) and not utils.is_testing_request(request):
             return utils.error_page(error=401, ui_message=gettext("unauthorized"))
-
-        body = request.json
-
-        # Validations
-        if not isinstance(body, dict):
-            return make_response(gettext("ajax_error"), 400)
-        if not isinstance(body.get("username"), str):
+        if not username:
             return make_response(gettext("username_invalid"), 400)
-        if not isinstance(body.get("is_teacher"), bool):
+        if not is_teacher:
             return make_response(gettext("teacher_invalid"), 400)
 
-        user = self.db.user_by_username(body["username"].strip().lower())
+        user = self.db.user_by_username(username.strip().lower())
 
         if not user:
             return make_response(gettext("username_invalid"), 400)
 
-        is_teacher_value = 1 if body["is_teacher"] else 0
+        is_teacher_value = 0 if user.get("is_teacher") else 1
         update_is_teacher(self.db, user, is_teacher_value)
 
-        # Todo TB feb 2022 -> Return the success message here instead of fixing in the front-end
-        return "", 200
+        return make_response('', 200)
 
-    @route("/mark-super-teacher", methods=["POST"])
+    @route("/mark-super-teacher/<username>", methods=["POST"])
     @requires_admin
-    def mark_super_teacher(self, user):
+    def mark_super_teacher(self, user, username):
         if not user and not utils.is_testing_request(request):
             return utils.error_page(error=401, ui_message=gettext("unauthorized"))
+        if not username:
+            return make_response(gettext("username_invalid"), 400)
+        if not is_teacher:
+            return make_response(gettext("teacher_invalid"), 400)
 
-        body = request.json
-
-        # Validations
-        if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
-        if not isinstance(body.get("username"), str):
-            return gettext("username_invalid"), 400
-
-        user = self.db.user_by_username(body["username"].strip().lower())
+        user = self.db.user_by_username(username.strip().lower())
 
         if not user:
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
         elif not is_teacher(user):
-            return "user must be a teacher.", 400
+            return make_response("user must be a teacher.", 400)
 
         self.db.update_user(user["username"], {"is_super_teacher": 0 if user.get("is_super_teacher") else 1, })
         refresh_current_user_from_db()

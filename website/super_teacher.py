@@ -146,29 +146,6 @@ class SuperTeacherModule(WebsiteModule):
         self.db.update_user(source_user["username"], {"support_teacher": target_user["username"]})
         return make_response("Done", 200)
 
-    @route("/mark-as-teacher", methods=["POST"])
-    @requires_super_teacher
-    def mark_as_teacher(self, user):
-
-        body = request.json
-
-        if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
-        if not isinstance(body.get("username"), str):
-            return gettext("username_invalid"), 400
-        if not isinstance(body.get("is_teacher"), bool):
-            return gettext("teacher_invalid"), 400
-
-        user = self.db.user_by_username(body["username"].strip().lower())
-
-        if not user:
-            return gettext("username_invalid"), 400
-
-        is_teacher_value = 1 if body["is_teacher"] else 0
-        update_is_teacher(self.db, user, is_teacher_value)
-
-        return make_response("Done", 200)
-
     @route("/tags", methods=["GET"])
     @requires_super_teacher
     def get_tags(self, user):
