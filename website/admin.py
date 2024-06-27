@@ -175,7 +175,8 @@ class AdminModule(WebsiteModule):
         )
 
     @route("/mark-as-teacher/<username_teacher>", methods=["GET"])
-    def mark_as_teacher(self, user, username_teacher):
+    def mark_as_teacher(self, username_teacher):
+        user = current_user()
         # the user that wants to mark a teacher
         if (not is_admin(user) and not is_super_teacher(user)) and not utils.is_testing_request(request):
             return utils.error_page(error=401, ui_message=gettext("unauthorized"))
