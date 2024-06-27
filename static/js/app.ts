@@ -9,7 +9,13 @@ import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './type
 import { startIntroTutorial } from './tutorials/tutorial';
 import { get_parsons_code, initializeParsons, loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
-import { incrementDebugLine, initializeDebugger, load_variables, startDebug } from './debugging';
+import {
+    incrementDebugLine,
+    initializeDebugger,
+    load_variables,
+    startDebug,
+    toggleVariableView
+} from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
 import { postJson, postNoResponse } from './comm';
@@ -136,12 +142,12 @@ export function initializeApp(options: InitializeAppOptions) {
   $(document).on("click", function(event){
     // The following is not needed anymore, but it saves the next for loop if the click is not for dropdown.
     if (!$(event.target).closest(".dropdown").length) {
-      $(".dropdown-menu").slideUp("medium");
-      $(".cheatsheet-menu").slideUp("medium");
+      $('.dropdown_menu').slideUp("medium");
+      $('.cheatsheet_menu').slideUp("medium");
       return;
     }
 
-    const allDropdowns = $('.dropdown-menu')
+    const allDropdowns = $('.dropdown_menu')
     for (const dd of allDropdowns) {
       // find the closest dropdown button (element) that initiated the event
       const c = $(dd).closest('.dropdown')[0]
@@ -152,15 +158,18 @@ export function initializeApp(options: InitializeAppOptions) {
     }
   });
 
-  $("#search_language").on('keyup', function() {
-      let search_query = ($("#search_language").val() as string).toLowerCase();
-      $(".language").each(function(){
-          if ($(this).html().toLowerCase().includes(search_query)) {
-              $(this).show();
-          } else {
-              $(this).hide();
-          }
-      });
+  $('#search_language').on('keyup', function() {
+    let search_query = ($('#search_language').val() as string).toLowerCase();
+    $('.language').each(function(){
+      let languageName = $(this).html().toLowerCase();
+      let englishName = $(this).attr('data-english');
+      if (englishName !== undefined && (languageName.includes(search_query) || englishName.toLowerCase().includes(search_query))) {
+          $(this).show();
+        } else {
+          $(this).hide();
+          $('#add_language_btn').show();
+        }
+    });
   });
 
   // All input elements with data-autosubmit="true" automatically submit their enclosing form
@@ -204,7 +213,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   // *** EDITOR SETUP ***
   const $editor = $('#editor');
   if ($editor.length) {
-    const dir = $("body").attr("dir");
+    const dir = $('body').attr('dir');
     theGlobalEditor = editorCreator.initializeEditorWithGutter($editor, EditorType.MAIN, dir);
     initializeTranslation({keywordLanguage: theKeywordLanguage, level: theLevel});
     attachMainEditorEvents(theGlobalEditor);
@@ -258,8 +267,8 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   }
 
   // Share/hand in modals
-  $('#share_program_button').on('click', () => $('#share-modal').show());
-  $('#hand_in_button').on('click', () => $('#hand-in-modal').show());
+  $('#share_program_button').on('click', () => $('#share_modal').show());
+  $('#hand_in_button').on('click', () => $('#hand_in_modal').show());
   initializeShareProgramButtons();
   initializeHandInButton();
 
@@ -286,7 +295,7 @@ function attachMainEditorEvents(editor: HedyEditor) {
       stopit();
       theGlobalEditor.focus(); // Make sure the editor has focus, so we can continue typing
     }
-    if ($('#ask-modal').is(':visible')) $('#inline-modal').hide();
+    if ($('#ask_modal').is(':visible')) $('#inline_modal').hide();
     askPromptOpen = false;
     $('#runit').css('background-color', '');
     theGlobalEditor.clearErrors();
@@ -312,7 +321,7 @@ function attachMainEditorEvents(editor: HedyEditor) {
       if (!theLevel || !theLanguage) {
         throw new Error('Oh no');
       }
-      runit (theLevel, theLanguage, "", "run",function () {
+      runit (theLevel, theLanguage, false, "", "run",function () {
         $ ('#output').focus ();
       });
     }
@@ -344,7 +353,7 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
   theLanguage = options.lang;
 
   // We need to enable the main editor for the program page as well
-  const dir = $("body").attr("dir");
+  const dir = $('body').attr('dir');
   theGlobalEditor = editorCreator.initializeEditorWithGutter($('#editor'), EditorType.MAIN, dir);
   initializeTranslation({
     keywordLanguage: options.lang,
@@ -360,7 +369,7 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
   });
 }
 
-export function initializeHighlightedCodeBlocks(where: Element) {
+export function initializeHighlightedCodeBlocks(where: Element, initializeAll?: boolean) {
   const dir = $("body").attr("dir");
   initializeParsons();
   if (theLevel) {
@@ -377,54 +386,63 @@ export function initializeHighlightedCodeBlocks(where: Element) {
         .addClass('relative text-lg rounded overflow-x-hidden')
         // We set the language of the editor to the current keyword_language -> needed when copying to main editor
         .attr('lang', theKeywordLanguage);
-
-      // Only turn into an editor if the editor scrolls into view
-      // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
-      onElementBecomesVisible(preview, () => {
-        const codeNode = preview.querySelector('code')
-        let code: string;
-        // In case it has a child <code> node
-        if(codeNode) {
-          codeNode.hidden = true
-          code = codeNode.innerText
+      // If the request comes from HTMX initialize all directly
+        if (initializeAll) {
+          convertPreviewToEditor(preview, container, dir)
         } else {
-          code = preview.textContent || "";
-          preview.textContent = "";
-        }
-
-        // Create this example editor
-        const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
-        // Strip trailing newline, it renders better
-        exampleEditor.contents = code;
-        exampleEditor.contents = exampleEditor.contents.trimEnd();
-        // And add an overlay button to the editor if requested via a show-copy-button class, either
-        // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
-        if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
-          const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
-          let symbol = "⇥";
-          if (dir === "rtl") {
-            symbol = "⇤";
-          }
-          $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
-            if (!theGlobalEditor?.isReadOnly) {
-              theGlobalEditor.contents = exampleEditor.contents + '\n';
-            }
-            update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
-            stopit();
-            clearOutput();
-          });
-        }
-        const levelStr = $(preview).attr('level');
-        const lang = $(preview).attr('lang');
-        if (levelStr && lang) {
-          initializeTranslation({
-            keywordLanguage: lang,
-            level: parseInt(levelStr, 10),
-          })
-          exampleEditor.setHighlighterForLevel(parseInt(levelStr, 10));
-        }
-      });
+        // Only turn into an editor if the editor scrolls into view
+        // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
+        onElementBecomesVisible(preview, () => {
+          convertPreviewToEditor(preview, container, dir)
+        });
+      }
     }
+  }
+}
+
+function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement, dir?: string) {
+  const codeNode = preview.querySelector('code')
+  let code: string;
+  // In case it has a child <code> node
+  if (codeNode) {
+    codeNode.hidden = true
+    code = codeNode.innerText
+  } else {
+    code = preview.textContent || "";
+    preview.textContent = "";
+  }
+
+  // Create this example editor
+  const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
+  // Strip trailing newline, it renders better
+  exampleEditor.contents = code;
+  exampleEditor.contents = exampleEditor.contents.trimEnd();
+  // And add an overlay button to the editor if requested via a show-copy-button class, either
+  // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
+  if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
+    const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
+    let symbol = "⇥";
+    if (dir === "rtl") {
+      symbol = "⇤";
+    }
+    const adventure = container.getAttribute('data-tabtarget')
+    $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').attr('data-cy', `paste_example_code_${adventure}`).text(symbol).appendTo(buttonContainer).click(function() {
+      if (!theGlobalEditor?.isReadOnly) {
+        theGlobalEditor.contents = exampleEditor.contents + '\n';
+      }
+      update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
+      stopit();
+      clearOutput();
+    });
+  }
+  const levelStr = $(preview).attr('level');
+  const lang = $(preview).attr('lang');
+  if (levelStr && lang) {
+    initializeTranslation({
+      keywordLanguage: lang,
+      level: parseInt(levelStr, 10),
+    })
+    exampleEditor.setHighlighterForLevel(parseInt(levelStr, 10));
   }
 }
 
@@ -438,10 +456,10 @@ export function stopit() {
   clearTimeouts();
   $('#stopit').hide();
   $('#runit').show();
-  $('#ask-modal').hide();
+  $('#ask_modal').hide();
   document.onkeydown = null;
-  $('#keybinding-modal').hide();
-  $('#sleep-modal').hide();
+  $('#keybinding_modal').hide();
+  $('#sleep_modal').hide();
   
   if (sleepRunning) {    
     sleepRunning = false;
@@ -464,12 +482,12 @@ function clearOutput() {
   success.hide();
 
   // Clear the user created buttons.
-  const buttonsDiv = $('#dynamic-buttons');
+  const buttonsDiv = $('#dynamic_buttons');
   buttonsDiv.empty();
   buttonsDiv.hide();
 }
 
-export async function runit(level: number, lang: string, disabled_prompt: string, run_type: "run" | "debug" | "continue", cb: () => void) {
+export async function runit(level: number, lang: string, raw: boolean, disabled_prompt: string, run_type: "run" | "debug" | "continue", cb: () => void) {
   // Copy 'currentTab' into a variable, so that our event handlers don't mess up
   // if the user changes tabs while we're waiting for a response
   const adventureName = currentTab;
@@ -488,7 +506,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
   Sk.execLimit = 1;
   $('#runit').hide();
   $('#stopit').show();
-  $('#saveFilesContainer').hide();
+  $('#save_files_container').hide();
 
   if (run_type !== 'continue') {
     clearOutput();
@@ -537,7 +555,9 @@ export async function runit(level: number, lang: string, disabled_prompt: string
           is_debug: run_type === 'debug',
           tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
           read_aloud : !!$('#speak_dropdown').val(),
-          adventure_name: adventure ? adventure.name : undefined,
+          adventure_name: adventureName,
+          short_name: adventure ? adventure.short_name : undefined,
+          raw: raw,
 
           // Save under an existing id if this field is set
           program_id: isServerSaveInfo(adventure?.save_info) ? adventure.save_info.id : undefined,
@@ -545,10 +565,8 @@ export async function runit(level: number, lang: string, disabled_prompt: string
         };
 
         let response = await postJsonWithAchievements('/parse', data);
-
         program_data = response;
         console.log('Response', response);
-
         if (response.Warning && $('#editor').is(":visible")) {
           //storeFixedCode(response, level);
           error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
@@ -583,7 +601,7 @@ export async function runit(level: number, lang: string, disabled_prompt: string
       program_data = theGlobalDebugger.get_program_data();
     }
 
-    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pressed, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, cb, run_type).catch(function(err: any) {
+    runPythonProgram(program_data.Code, program_data.source_map, program_data.has_turtle, program_data.has_pressed, program_data.has_sleep, program_data.has_clear, program_data.has_music, program_data.Warning, program_data.variables, program_data.is_modified ,cb, run_type).catch(function(err: any) {
       // The err is null if we don't understand it -> don't show anything
       if (err != null) {
         error.show(ClientMessages['Execute_error'], err.message);
@@ -629,21 +647,21 @@ export async function pushAchievement(achievement: string) {
 }
 
 export function closeAchievement() {
-  $('#achievement_pop-up').hide();
-  if ($('#achievement_pop-up').attr('reload')) {
-    $('#achievement_pop-up').removeAttr('reload');
-    $('#achievement_pop-up').removeAttr('redirect');
+  $('#achievement_pop_up').hide();
+  if ($('#achievement_pop_up').attr('reload')) {
+    $('#achievement_pop_up').removeAttr('reload');
+    $('#achievement_pop_up').removeAttr('redirect');
     return location.reload();
   }
-  if ($('#achievement_pop-up').attr('redirect')) {
-    const redirect = <string>$('#achievement_pop-up').attr('redirect');
-    $('#achievement_pop-up').removeAttr('reload');
-    $('#achievement_pop-up').removeAttr('redirect');
+  if ($('#achievement_pop_up').attr('redirect')) {
+    const redirect = <string>$('#achievement_pop_up').attr('redirect');
+    $('#achievement_pop_up').removeAttr('reload');
+    $('#achievement_pop_up').removeAttr('redirect');
     return window.location.pathname = redirect;
   }
   // If for some reason both situation don't happen we still want to make sure the attributes are removed
-  $('#achievement_pop-up').removeAttr('reload');
-  $('#achievement_pop-up').removeAttr('redirect');
+  $('#achievement_pop_up').removeAttr('reload');
+  $('#achievement_pop_up').removeAttr('redirect');
 }
 
 export async function showAchievements(achievements: Achievement[] | undefined, reload: boolean, redirect: string) {
@@ -656,20 +674,20 @@ export async function showAchievements(achievements: Achievement[] | undefined, 
   }
 
   if (reload) {
-    $('#achievement_pop-up').attr('reload', 'true');
+    $('#achievement_pop_up').attr('reload', 'true');
     setTimeout(function(){
-      $('#achievement_pop-up').removeAttr('reload');
-      $('#achievement_pop-up').removeAttr('redirect');
+      $('#achievement_pop_up').removeAttr('reload');
+      $('#achievement_pop_up').removeAttr('redirect');
       location.reload();
-     }, achievements.length * 6000);
+     }, achievements.length * 3000);
   }
   if (redirect) {
-    $('#achievement_pop-up').attr('redirect', redirect);
+    $('#achievement_pop_up').attr('redirect', redirect);
     setTimeout(function(){
-      $('#achievement_pop-up').removeAttr('reload');
-      $('#achievement_pop-up').removeAttr('redirect');
+      $('#achievement_pop_up').removeAttr('reload');
+      $('#achievement_pop_up').removeAttr('redirect');
       window.location.pathname = redirect;
-     }, achievements.length * 6000);
+     }, achievements.length * 3000);
   }
 }
 
@@ -678,14 +696,14 @@ function showAchievement(achievement: Achievement) {
         $('#achievement_reached_title').text('"' + achievement[0] + '"');
         $('#achievement_reached_text').text(achievement[1]);
         $('#achievement_reached_statics').text(achievement[2]);
-        $('#achievement_pop-up').fadeIn(1000, function () {
+        $('#achievement_pop_up').fadeIn(1000, function () {
           setTimeout(function(){
-            $('#achievement_pop-up').fadeOut(1000);
-           }, 4000);
+            $('#achievement_pop_up').fadeOut(1000);
+           }, 1000);
         });
         setTimeout(()=>{
             resolve();
-        ;} , 6000
+        ;} , 1000
         );
     });
 }
@@ -719,47 +737,104 @@ export function viewProgramLink(programId: string) {
   return window.location.origin + '/hedy/' + programId + '/view';
 }
 
-export async function delete_program(id: string, index: number, prompt: string) {
+function updateProgramCount() {
+  const programCountDiv = $('#program_count');
+  const countText = programCountDiv.text();
+  const regex = /(\d+)/;
+  const match = countText.match(regex);
+  
+  if (match && match.length > 0) {
+    const currentCount = parseInt(match[0]);
+    const newCount = currentCount - 1;
+    const newText = countText.replace(regex, newCount.toString());
+    programCountDiv.text(newText);
+  }
+}
+
+function updateSelectOptions(selectName: string) {
+  let optionsArray: string[] = [];
+  const select = $(`select[name='${selectName}']`);
+  
+  // grabs all the levels and names from the remaining adventures
+  $(`[id="program_${selectName}"]`).each(function() {
+      const text = $(this).text().trim();
+        if (selectName == 'level'){
+          const number = text.match(/\d+/)
+          if (number && !optionsArray.includes(number[0])) {
+            optionsArray.push(number[0]);
+          }
+        } else if (!optionsArray.includes(text)){
+          optionsArray.push(text);
+          }
+  });
+
+  if (selectName == 'level'){
+    optionsArray.sort();
+  }
+  // grabs the -- level -- or -- adventure -- from the options
+  const firstOption = select.find('option:first').text().trim();
+  optionsArray.unshift(firstOption);
+
+  select.empty();
+  optionsArray.forEach(optionText => {
+    const option = $('<option></option>').text(optionText);
+    select.append(option);
+  });
+}
+
+export async function delete_program(id: string, prompt: string) {
   await modal.confirmP(prompt);
   await tryCatchPopup(async () => {
-    const response = await postJsonWithAchievements('/programs/delete', { id });
+    $('#program_' + id).remove();
+    // only shows the remaining levels and programs in the options
+    updateSelectOptions('level');
+    updateSelectOptions('adventure');
+    // this function decreases the total programs saved
+    updateProgramCount();
+    const response = await postJsonWithAchievements('/programs/delete', { id });    
     showAchievements(response.achievement, true, "");
-    $('#program_' + index).remove();
+    // issue request on the Bar component.
     modal.notifySuccess(response.message);
   });
 }
 
-function set_favourite(index: number) {
+function set_favourite(id: string, set: boolean) {
     $('.favourite_program_container').removeClass('text-yellow-400');
     $('.favourite_program_container').addClass('text-white');
+    $('.favourite_program_container').attr("data-starred", "false");
 
-    $('#favourite_program_container_' + index).removeClass('text-white');
-    $('#favourite_program_container_' + index).addClass('text-yellow-400');
+    if (set) {
+        $('#favourite_program_container_' + id).removeClass('text-white');
+        $('#favourite_program_container_' + id).addClass('text-yellow-400');
+    }
+    $('#favourite_program_container_' + id).attr("data-starred", JSON.stringify(set));
 }
 
-export async function set_favourite_program(id: string, index: number, prompt: string) {
-  await modal.confirmP(prompt);
+export async function set_favourite_program(id: string, promptSet: string, promptUnset: string) {
+  let set = JSON.parse($('#favourite_program_container_' + id).attr("data-starred")?.toLowerCase() || "");
+  await modal.confirmP(set ? promptUnset : promptSet);
   await tryCatchPopup(async () => {
-    const response = await postJsonWithAchievements('/programs/set_favourite', { id });
-    set_favourite(index)
+    const response = await postJsonWithAchievements('/programs/set_favourite', { id, set: !set });
+    // TODO: response with 200, assumed.
+    set_favourite(id, !set)
     modal.notifySuccess(response.message);
   });
 }
 
-function change_to_submitted (index: number) {
+function change_to_submitted (id: string) {
     // Index is a front-end unique given to each program container and children
     // This value enables us to remove, hide or show specific element without connecting to the server (again)
-    $('#non_submitted_button_container_' + index).remove();
-    $('#submitted_button_container_' + index).show();
-    $('#submitted_header_' + index).show();
-    $('#program_' + index).removeClass("border-orange-400");
-    $('#program_' + index).addClass("border-gray-400 bg-gray-400");
+    $('#non_submitted_button_container_' + id).remove();
+    $('#submitted_button_container_' + id).show();
+    $('#submitted_header_' + id).show();
+    $('#program_' + id).removeClass("border-orange-400");
+    $('#program_' + id).addClass("border-gray-400 bg-gray-400");
 }
 
-export function submit_program (id: string, index: number) {
+export function submit_program (id: string) {
   tryCatchPopup(async () => {
     await postJsonWithAchievements('/programs/submit', { id });
-    change_to_submitted(index);
+    change_to_submitted(id);
   });
 }
 
@@ -846,7 +921,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPressed: boolean, hasSleep: number[], hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
+export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPressed: boolean, hasSleep: number[], hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, variables: any, isModified: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
   let skip_faulty_found_errors = false;
@@ -888,7 +963,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
   turtleConfig.target = 'turtlecanvas';
   // If the adventures are not shown  -> increase height of turtleConfig
-  if ($('#adventures-tab').is(":hidden")) {
+  if ($('#adventures_tab').is(":hidden")) {
       turtleConfig.height = 600;
       turtleConfig.worldHeight = 600;
   } else if ($('#turtlecanvas').attr("raw") == 'yes'){
@@ -926,7 +1001,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     $('#turtlecanvas').show();
   }
 
-  if (hasSleep) {
+  if (hasSleep && theLevel < 7) {
     function executeWithDelay(index: number) {
       return new Promise((resolve, reject) => {
         if (index >= hasSleep.length) {
@@ -936,10 +1011,10 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 
         const sleepTime = hasSleep[index];
         if (sleepTime) {
-          $('#sleep-modal').show();
+          $('#sleep_modal').show();
           sleepRunning = true;
           setTimeout(() => {
-            $('#sleep-modal').hide();
+            $('#sleep_modal').hide();
             sleepRunning = false;
             setTimeout(() => {
               resolve(reject);
@@ -971,8 +1046,9 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     synth.triggerAttackRelease(note_name, "16n");
 
   });
-
   if (run_type === "run") {
+    $('#variable_list').empty();
+    toggleVariableView();
     Sk.configure({
       output: outf,
       read: builtinRead,
@@ -1005,8 +1081,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
           // Also on a level < 7 (as we don't support loops yet), a timeout is redundant -> just set one for 5 minutes
           return (3000000);
         }
-        // Set a time-out of either 20 seconds when having a sleep and 5 seconds when not
-        return ((hasSleep) ? 20000 : 5000);
+        // Set a time-out of either 30 seconds when having a sleep and 10 seconds when not
+        return ((hasSleep) ? 30000 : 10000);
       }) ()
     });
 
@@ -1028,20 +1104,20 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       $('#runit').show();
 
       document.onkeydown = null;
-      $('#keybinding-modal').hide();
+      $('#keybinding_modal').hide();
 
       if (hasTurtle) {
-        $('#saveFilesContainer').show();
+        $('#save_files_container').show();
       }
 
       // Check if the program was correct but the output window is empty: Return a warning
-      if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
+      if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty') && !hasMusic) {
         pushAchievement("error_or_empty");
         error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);
         return;
       }
       if (!hasWarnings && code !== last_code) {
-          showSuccesMessage(); //FH nov 2023: typo in success :)
+          showSuccessMessage(isModified);
           last_code = code;
       }
       if (cb) cb ();
@@ -1091,7 +1167,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       has_turtle: hasTurtle,
       has_clear: hasClear,
       has_music: hasMusic,
-      Warning: hasWarnings
+      Warning: hasWarnings,
+      variables: variables
     });
 
     startDebug();
@@ -1109,10 +1186,10 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         stopDebug();
 
         document.onkeydown = null;
-        $('#keybinding-modal').hide();
+        $('#keybinding_modal').hide();
 
         if (hasTurtle) {
-          $('#saveFilesContainer').show();
+          $('#save_files_container').show();
         }
 
         if (cb) cb ();
@@ -1191,15 +1268,14 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     var debug = storage.getItem("debugLine")
     if (storage.getItem("prompt-" + prompt) == null) {
     Sk.execStart = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
-    $('#turtlecanvas').hide();
     document.onkeydown = null;
-    $('#keybinding-modal').hide();
+    $('#keybinding_modal').hide();
 
     return new Promise(function(ok) {
       askPromptOpen = true;
 
-      const input = $('#ask-modal input[type="text"]');
-      $('#ask-modal .caption').text(prompt);
+      const input = $('#ask_modal input[type="text"]');
+      $('#ask_modal .caption').text(prompt);
       input.val('');
       input.attr('placeholder', prompt);
       speak(prompt)
@@ -1207,10 +1283,10 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       setTimeout(function() {
         input.focus();
       }, 0);
-      $('#ask-modal form').one('submit', function(event) {
+      $('#ask_modal form').one('submit', function(event) {
         askPromptOpen = false;
         event.preventDefault();
-        $('#ask-modal').hide();
+        $('#ask_modal').hide();
 
         if (hasTurtle) {
           $('#turtlecanvas').show();
@@ -1231,7 +1307,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 
           return false;
         });
-        $('#ask-modal').show();
+        $('#ask_modal').show();
 
         // Scroll the output div to the bottom so you can see the question
         scrollOutputToBottom();
@@ -1328,19 +1404,7 @@ function initializeSpeech() {
 }
 
 export function load_quiz(level: string) {
-  $('*[data-tabtarget="quiz"]').html ('<iframe id="quiz-iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
-}
-
-export function showVariableView() {
-// When blue label button is clicked, the view will appear or hide
-  const variables = $('#variables');
-  if (variables.is(":hidden")) {
-    variables.show();
-    $("#variables").trigger("click")
-  }
-  else {
-    variables.hide();
-  }
+  $('*[data-tabtarget="quiz"]').html ('<iframe id="quiz_iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
 }
 
 export async function store_parsons_attempt(order: Array<string>, correct: boolean) {
@@ -1393,7 +1457,7 @@ export function confetti_cannon(){
       jsConfetti.addConfetti();
     }
 
-    const confettiButton = document.getElementById('confetti-button');
+    const confettiButton = document.getElementById('confetti_button');
     if (confettiButton) {
       confettiButton.classList.add('hidden');
     }
@@ -1417,27 +1481,27 @@ function scrollOutputToBottom() {
 
 export function modalStepOne(level: number){
   createModal(level);
-  let $modalEditor = $('#modal-editor');
+  let $modalEditor = $('#modal_editor');
   if ($modalEditor.length) {
-    const dir = $("body").attr("dir");
+    const dir = $('body').attr('dir');
     theModalEditor = editorCreator.initializeEditorWithGutter($modalEditor, EditorType.MODAL, dir);
   }
 }
 
-function showSuccesMessage(){
+function showSuccessMessage(isModified: boolean){
   removeBulb();
   var allsuccessmessages = ClientMessages['Transpile_success'].split('\n');
   var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
-  success.show(allsuccessmessages[randomnum]);
+  success.show(allsuccessmessages[randomnum], isModified);
 }
 
 function createModal(level:number ){
-  let editor = "<div id='modal-editor' class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
+  let editor = "<div id='modal_editor' class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
   let title = ClientMessages['Program_repair'];
   modal.repair(editor, 0, title);
 }
 
-export function toggleDevelopersMode(event='click', enforceDevMode: boolean) {
+export function setDevelopersMode(event='click', enforceDevMode: boolean) {
   let enable: boolean = false;
   switch (event) {
     case 'load':
@@ -1449,17 +1513,21 @@ export function toggleDevelopersMode(event='click', enforceDevMode: boolean) {
     case 'click':
       // Toggled
       enable = $('#developers_toggle').prop('checked');
-      window.localStorage.setItem('developer_mode', `${enable}`);
       if (enable) {
         pushAchievement("lets_focus");
       }
       break;
   }
+  window.localStorage.setItem('developer_mode', `${enable}`)
+  toggleDevelopersMode()
+}
 
+function toggleDevelopersMode() {
+  const enable = window.localStorage.getItem('developer_mode') === 'true';
   // DevMode hides the tabs and makes resizable elements track the appropriate size.
   // (Driving from HTML attributes is more flexible on what gets resized, and avoids duplicating
   // size literals between HTML and JavaScript).
-  $('#adventures').toggle(!enable);
+  $('#adventures').toggle(!enable || currentTab === 'quiz' || currentTab === 'parsons');
   // Parsons dont need a fixed height
   if (currentTab === 'parsons') return
   $('[data-devmodeheight]').each((_, el) => {
@@ -1514,31 +1582,36 @@ export function toggle_keyword_language(current_lang: string, new_lang: string) 
       goal_lang: new_lang,
       level: theLevel,
     });
+    if (response) {
+      const code = response.code
+      theGlobalEditor.contents = code;
+      const saveName = saveNameFromInput();
 
-  if (response.success) {
-    const code = response.code
-    theGlobalEditor.contents = code;
-    const saveName = saveNameFromInput();
+      // save translated code to local storage
+      // such that it can be fetched after reload
+      localSave(currentTabLsKey(), { saveName, code });
+      $('#editor').attr('lang', new_lang);
 
-    // save translated code to local storage
-    // such that it can be fetched after reload
-    localSave(currentTabLsKey(), { saveName, code });
-    $('#editor').attr('lang', new_lang);
+      // update the whole page (example codes)
+      const hash = window.location.hash;
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      urlParams.set('keyword_language', new_lang)
+      window.location.search = urlParams.toString()
+      window.open(hash, "_self");
 
-    // update the whole page (example codes)
-    const hash = window.location.hash;
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    urlParams.set('keyword_language', new_lang)
-    window.location.search = urlParams.toString()
-    window.open(hash, "_self");
+      // if in iframe, reload the topper window level.
+      if (window.top && !(window as any).Cypress) {
+        window.top.location.reload();
+      }
+
     }
   });
 }
 
 export function toggle_blur_code() {
   // Switch the both icons from hiding / showing
-  $('.blur-toggle').toggle();
+  $('.blur_toggle').toggle();
 
   // Keep track of a element attribute "blurred" to indicate if blurred or not
   if ($('#editor').attr('blurred') == 'true') {
@@ -1555,7 +1628,7 @@ export function toggle_blur_code() {
 export async function change_language(lang: string) {
   await tryCatchPopup(async () => {
     const response = await postJsonWithAchievements('/change_language', { lang });
-    if (response.succes) {
+    if (response) {
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
 
@@ -1604,8 +1677,8 @@ export function filter_admin() {
   const filter = $('#admin_filter_category').val();
   params['filter'] = filter;
 
-  if ($('#hidden-page-input').val()) {
-    params['page'] = $('#hidden-page-input').val();
+  if ($('#hidden_page_input').val()) {
+    params['page'] = $('#hidden_page_input').val();
   }
 
   switch (filter) {
@@ -1666,9 +1739,9 @@ const clearTimeouts = () => {
 };
 
 export function downloadSlides(level: number) {
-  var iframe : any = document.getElementById(`level-${level}-slides`)!;
+  var iframe : any = document.getElementById(`level_${level}_slides`)!;
   iframe.setAttribute('src',`/slides/${level}`);
-  $(`#level-${level}-slides`).on('load', function (){
+  $(`#level_${level}_slides`).on('load', function (){
     var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
     var slides = innerDoc.getElementsByTagName('section');
     var slidesHTML = ''
@@ -1740,11 +1813,11 @@ function updatePageElements() {
   // .toggle(bool) sets visibility based on the boolean
 
   // Explanation area is visible for non-code tabs, or when we are NOT in developer's mode
-  $('#adventures-tab').toggle(!(isCodeTab && $('#developers_toggle').is(":checked")));
+  $('#adventures_tab').toggle(!(isCodeTab && $('#developers_toggle').is(":checked")));
   $('#developers_toggle_container').toggle(isCodeTab);
-  $('#level-header input').toggle(isCodeTab);
+  $('#level_header input').toggle(isCodeTab);
   $('#parsons_code_container').toggle(currentTab === 'parsons');
-  $('#editor-area').toggle(isCodeTab || currentTab === 'parsons');
+  $('#editor_area').toggle(isCodeTab || currentTab === 'parsons');
   $('#editor').toggle(isCodeTab);
   $('#debug_container').toggle(isCodeTab);
   $('#program_name_container').toggle(isCodeTab);
@@ -1788,17 +1861,13 @@ function reconfigurePageBasedOnTab() {
   resetWindow();
 
   updatePageElements();
+  toggleDevelopersMode();
   if (currentTab === 'parsons') {
     loadParsonsExercise(theLevel, 1);
     // remove the fixed height from the editor
     document.getElementById('code_editor')!.style.height = '100%'
     document.getElementById('code_output')!.style.height = '100%'
     return;
-  } else {
-    $('[data-devmodeheight]').each((_, el) => {
-      const heights = $(el).data('devmodeheight').split(',') as string[];
-      $(el).css('height', heights[0]);
-    });
   }
 
   const adventure = theAdventures[currentTab];
@@ -1958,6 +2027,7 @@ async function saveIfNecessary() {
       program_id: saveInfo?.id,
       // We pass 'public' in here to save the backend a lookup
       share: saveInfo?.public,
+      short_name: adventure.short_name,
     });
 
     // Record that we saved successfully

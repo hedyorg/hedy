@@ -1,24 +1,21 @@
 // redefining it entirely since it has many order-depending rules (e.g ask_no_quotes should be after ask and before assign)
 command: clear | error_non_decimal | print | ask | play | turtle | assign_list | add | remove | error_add_missing_to | error_remove_missing_from | sleep | error_list_access | error_ask_no_quotes| assign | error_invalid_space | error_print_no_quotes | error_print_one_quote_only | error_text_no_print |error_invalid | empty_line
 
-print: _PRINT (_print_argument)? -> print
+_print_ask_argument: (_SPACE | list_access | error_list_access | quoted_text | var_access_print)*
+
 error_print_no_quotes: _PRINT text -> error_print_nq
+error_ask_no_quotes: var _IS _ASK text -> error_print_nq
 
 textwithoutsinglequote: /([^\n']+)/ -> text
 textwithoutdoublequote: /([^\n"]+)/ -> text
 error_print_one_quote_only: _PRINT "'" textwithoutsinglequote -> error_print_nq | _PRINT "\"" textwithoutdoublequote -> error_print_nq | _PRINT textwithoutsinglequote "'" -> error_print_nq | _PRINT textwithoutdoublequote "\"" -> error_print_nq
-
-
-// FH, feb 2023 Shall we rename this 'var' to declare maybe? I confused myself :)
-ask: var _IS _ASK (_print_argument)?
-error_ask_no_quotes: var _IS _ASK text  -> error_print_nq
+error_ask_one_quote_only: var _IS _ASK "'" textwithoutsinglequote -> error_print_nq | var _IS _ASK "\"" textwithoutdoublequote -> error_print_nq | var _IS _ASK textwithoutsinglequote "'" -> error_print_nq | var _IS _ASK textwithoutdoublequote "\"" -> error_print_nq
 
 error_list_access: var_access _SPACE textwithoutspaces _SPACE random
 
-list_access: var_access _AT (INT | random | var_access)
-_print_argument: (_SPACE | list_access | error_list_access | quoted_text | var_access_print)*
-
 error_text_no_print: quoted_text
+
+list_access: var_access _AT (INT | random | var_access)
 
 // literal strings must be single-quoted in ask and print commands
 // anything can be parsed except for a newline, a space and a list separator

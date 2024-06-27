@@ -383,4 +383,14 @@ class RuntimeIndexException(HedyException):
         super().__init__('Runtime Index Error', name=name)
 
 
+class ElseWithoutIfException(HedyException):
+    def __init__(self, line_number):
+        super().__init__('Else Without If Error', line_number=line_number)
+
+
+class MissingColonException(HedyException):
+    def __init__(self, command, line_number):
+        super().__init__('Missing Colon Error', command=command, line_number=line_number)
+
+
 HEDY_EXCEPTIONS = {name: cls for name, cls in globals().items() if inspect.isclass(cls)}

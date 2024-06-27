@@ -1,5 +1,6 @@
 import random
 import textwrap
+from dataclasses import dataclass
 import pickle
 import hashlib
 import hedy
@@ -12,6 +13,7 @@ from contextlib import contextmanager
 import inspect
 import unittest
 import utils
+import typing
 from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 
 from hedy_sourcemap import SourceRange
@@ -25,11 +27,12 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 class Snippet:
-    def __init__(self, filename, level, code, field_name=None, adventure_name=None, error=None, language=None, key=None, counter=0):
+    def __init__(self, filename, level, code, username=None, field_name=None, adventure_name=None, experiment_language=None, error=None, language=None, key=None, counter=0):
         self.filename = filename
         self.level = level
         self.field_name = field_name if field_name is not None else ''
         self.code = code
+        self.username = username
         self.error = error
         self.key = key if key is not None else ''
         filename_shorter = os.path.basename(filename)
@@ -38,6 +41,7 @@ class Snippet:
         else:
             self.language = language
         self.adventure_name = adventure_name
+        self.experiment_language = experiment_language
         self.name = f'{self.language}-{self.level}-{self.key}-{self.field_name}'
         self.hash = sha1digest(self.code)
         self.counter = counter
@@ -46,6 +50,52 @@ class Snippet:
 
     def __repr__(self):
         return f'Snippet({self.name})'
+
+
+@dataclass
+class YamlSnippet:
+    """A snippet found in one of the YAML files.
+
+    This is a replacement of 'Snippet' with fewer fields, only the fields that
+    are used in the snippet tests.
+
+    `yaml_path` is the path in the YAML where this snippet was found, as an
+    array of either strings or ints.
+
+    For example, in a YAML file that looks like:
+
+    ```
+    adventures:
+        1:
+            code: |
+               print hello
+    ```
+
+    The `yaml_path` would be `['adventures', 1, 'code']`.
+    """
+    filename: str
+    yaml_path: typing.List
+    code: str
+    language: str
+    level: int
+
+    def __post_init__(self):
+        # 'code' may be replaced later on when translating keywords
+        self.original_code = self.code
+        self.name = f'{self.relative_filename}-{self.yaml_path_str}'
+
+    @property
+    def relative_filename(self):
+        return os.path.relpath(self.filename, ROOT_DIR)
+
+    @property
+    def yaml_path_str(self):
+        return '.'.join(str(x) for x in self.yaml_path)
+
+    @property
+    def location(self):
+        """Returns a description of the location."""
+        return f'{self.relative_filename} at {self.yaml_path_str}'
 
 
 class SkippedMapping:
@@ -58,11 +108,12 @@ class SkippedMapping:
 
 @cache
 def get_hedy_source_hash():
-    directory = os.path.join(ROOT_DIR, 'grammars')
+    grammars_dir = os.path.join(ROOT_DIR, 'grammars')
 
     files_affecting_parsing = (
-        [os.path.join(directory, filename) for filename in os.listdir(directory)] +
-        [os.path.join(ROOT_DIR, 'hedy.py')]
+        [os.path.join(grammars_dir, filename) for filename in os.listdir(grammars_dir)] +
+        [os.path.join(ROOT_DIR, 'hedy.py')] +
+        [os.path.join(ROOT_DIR, file) for file in os.listdir(ROOT_DIR) if re.fullmatch('hedy_.*\\.py', file)]
     )
 
     files_affecting_parsing.sort()
@@ -87,6 +138,7 @@ class HedyTester(unittest.TestCase):
     arithmetic_operations = ['+', '-', '*', '/']
     in_not_in_list_commands = ['in', 'not in']
     quotes = ["'", '"']
+    booleans = [('true', True), ('True', True), ('false', False), ('False', False)]
     commands_level_4 = [("print 'hello'", "print(f'hello')"),
                         ("name is ask 'who?'", "name = input(f'who?')"),
                         ('name is Harry', "name = 'Harry'")]
@@ -293,7 +345,8 @@ class HedyTester(unittest.TestCase):
             skipped_exceptions = [
                 hedy.exceptions.ParseException, hedy.exceptions.CodePlaceholdersPresentException,
                 hedy.exceptions.TooFewIndentsStartLevelException, hedy.exceptions.TooManyIndentsStartLevelException,
-                hedy.exceptions.NoIndentationException, hedy.exceptions.IndentationException
+                hedy.exceptions.NoIndentationException, hedy.exceptions.IndentationException,
+                hedy.exceptions.ElseWithoutIfException
             ]
 
             if translate and exception not in skipped_exceptions and skipped_mappings is None:
@@ -454,6 +507,17 @@ class HedyTester(unittest.TestCase):
     def index_exception_transpiled():
         return '"""Runtime Index Error"""'
 
+    @staticmethod
+    def return_transpiled(arg):
+        return textwrap.dedent(f"""\
+        try:
+          return int(f'''{arg}''')
+        except ValueError:
+          try:
+            return float(f'''{arg}''')
+          except ValueError:
+            return f'''{arg}'''""")
+
     # Used to overcome indentation issues when the above code is inserted
     # in test cases which use different indentation style (e.g. 2 or 4 spaces)
 
@@ -473,6 +537,8 @@ class HedyTester(unittest.TestCase):
 
     @staticmethod
     def translate_keywords_in_snippets(snippets):
+        """Mutates the snippets in-place."""
+
         # fill keyword dict for all keyword languages
         keyword_dict = {}
         for lang in ALL_KEYWORD_LANGUAGES:
@@ -487,20 +553,18 @@ class HedyTester(unittest.TestCase):
         # NOTE: .format() instead of safe_format() on purpose!
         for snippet in snippets:
             # store original code
-            snippet[1].original_code = snippet[1].code
+            snippet.original_code = snippet.code
             try:
-                if snippet[1].language in ALL_KEYWORD_LANGUAGES.keys():
-                    snippet[1].code = snippet[1].code.format(**keyword_dict[snippet[1].language])
+                if snippet.language in ALL_KEYWORD_LANGUAGES.keys():
+                    snippet.code = snippet.code.format(**keyword_dict[snippet.language])
                 else:
-                    snippet[1].code = snippet[1].code.format(**english_keywords)
+                    snippet.code = snippet.code.format(**english_keywords)
             except KeyError:
                 print("This following snippet contains an invalid placeholder...")
-                print(snippet[1].code)
+                print(snippet.code)
             except ValueError:
                 print("This following snippet contains an unclosed invalid placeholder...")
-                print(snippet[1].code)
-
-        return snippets
+                print(snippet.code)
 
     def format_test_error_md(self, E, snippet: Snippet):
         """Given a snippet and an exception, return a Markdown string describing the problem."""
@@ -530,7 +594,7 @@ class HedyTester(unittest.TestCase):
 
         rel_file = os.path.relpath(snippet.filename, ROOT_DIR)
         message.append(f'## {rel_file}')
-        message.append(f'There was a problem in a level {snippet.level} snippet:')
+        message.append(f'There was a problem in a level {snippet.level} snippet, at {snippet.yaml_path_str}:')
 
         # Use a 'caution' admonition because it renders in red
         message.append('> [!CAUTION]')

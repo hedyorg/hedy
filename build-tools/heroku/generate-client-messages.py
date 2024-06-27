@@ -23,7 +23,15 @@ ADDITIONAL_GETTEXT_KEYS = [
     'customization_deleted',
     'directly_available',
     'disabled',
-    'adventures_restored'
+    'adventures_restored',
+    'multiple_keywords_warning',
+    'selected',
+    'adventures_tried',
+    'graph_title',
+    'errors',
+    'adventures_completed',
+    'number_of_errors',
+    'successful_runs'
 ]
 
 

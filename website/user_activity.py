@@ -1,6 +1,7 @@
 
+import gettext
 import os
-from flask import request, session
+from flask import make_response, request, session
 
 # import utils
 from config import config
@@ -36,8 +37,7 @@ class UserActivityModule(WebsiteModule):
         # /tracking activity/
         user = self.db.user_by_username(user["username"])
         if not user:
-            return {}, 304
-        print("\n\n TRACKING index \n\n")
+            return make_response('', 304)
         body = request.json
         data = []
 
@@ -58,10 +58,8 @@ class UserActivityModule(WebsiteModule):
 
             data.append(data_row)
 
-        print(data)
-
         try:
             logger.log(data)
-            return {}, 200
+            return make_response({}, 200)
         except IOError:
-            return "Not logged", 400
+            return make_response(gettext("request_invalid"), 400)

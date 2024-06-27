@@ -36,6 +36,16 @@ describe('Adds curly braces around keywords, mainting the original code as much 
         })
     })
 
+    describe('Level 3 tests', () => {
+        it('add ... to command', () => {
+            const code = `añadir gusta a animales`;
+            const expected = `{add} gusta {to_list} animales`;
+            const generatedCode = addCurlyBracesToCode(code, 3, 'es');
+
+            expect(expected).to.equal(generatedCode);
+        })  
+    })
+
     describe('Level 8 tests', () => {
         it('Spaces are maintained', () => {
             const code =  `name = ask 'What is your name?'\nif name is Hedy\n    print 'Welcome Hedy'\n    print 'You can play on your computer!'`

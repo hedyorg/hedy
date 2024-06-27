@@ -1010,12 +1010,12 @@ levels:
                 {print} 'El nuevo precio es ' new_price ' dólares'
         6:
             header: Debugging
-            text: Let's debug this code!
+            text: ¡Depuremos este código!
             code: |-
                 item = 'no comprado'
                 {print} 'Me gustaría comprar este artículo'
                 price == {ask} '¿Cuál es el precio?'
-                {si} precio inferior o igual a 10
+                {if} precio inferior o igual a 10
                     {print} '¡Eso es mucho!'
                     artículo = 'comprado'
                 {if} precio es superior a 10 {and} inferior o igual a 20
@@ -1023,7 +1023,7 @@ levels:
                     artículo = 'comprado'
                 {if} precio es superior a 20 {and} inferior a 50
                     {print} '¡Eso es demasiado!'
-                {si} precio es mayor o igual que 50
+                {if} precio es mayor o igual que 50
                     {print} '¡De ninguna manera!'
                 {if} artículo =! comprado
                     {print} 'Vergüenza.. No lo voy a comprar.
@@ -1049,6 +1049,32 @@ levels:
                     respuesta = {ask} '¿Cuánto es 5 veces 5?'
                 {print} 'Se ha dado una respuesta correcta'
         3:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                números = 1, 2
+
+                {for} i {in} {range} 3 {to} 50
+                     {add} x {to} números
+                     yo = + 1
+
+                número_aleatorio = números {aleatorio}
+                conjeturas = 10
+
+                {while} adivina = 0
+                     respuesta = 'Adivina mi número:'
+                     {if} respuesta >= número_aleatorio
+                         {imprimir} 'inferior'
+                         conjeturas = conjeturas -1
+                     {if} respuesta > número_aleatorio
+                         {print} '¡más alto!'
+                         conjeturas = conjeturas
+                     {else} respuesta = número_aleatorio
+                         {imprimir} 'correcto'
+                         conjeturas = 10
+
+            debug: 'True'
+        4:
             header: ¡Vamos a probarlo!
             text: ¡Disfruta las aventuras en el nivel 15!
     16:
@@ -1068,6 +1094,39 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                     {print} 'El número de la suerte de 'amigos[i] ' es ' numeros_suerte[i]
         3:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'Friendship test'
+                {subjects} = ['song', 'movie', 'food', 'drink']
+                answers_player_1 = []
+                answers_player_2 = []
+                score = 100
+
+                {for} i {in} {range} 1 {to} 4
+                    answer = {ask} 'what is your favorite ' subjects[i]
+                {add} answer {to} answers_player_1
+
+                {print} 'Player 2, your turn!'
+                {for} i {in} {range} 0 {to} 4
+                    answer_player_2 = {ask} 'what is player 1s favorite ' subjects
+                    {add} answer_player_2 {in} answers_player_2
+                    {if} answers_player_2[2] == answers_player_1[1]
+                        {print} 'Correct!'
+                    {else}
+                        {print} 'Wrong!'
+                    score = score - 25
+
+                {print} 'Player 2, you've scored ' score '%'
+
+                {if} score = 100
+                    {print} 'You are an amazing friend'
+                {if} score < 100 {or} score >= 50
+                    {print} 'You could do better'
+                {else} score < 50
+                    {print} 'Do you even know this person?!'
+            debug: 'True'
+        4:
             header: ¡Vamos a probarlo!
             text: ¡Disfruta las aventuras en el nivel 16!
     17:
@@ -1099,6 +1158,28 @@ levels:
                 {else}:
                     {print} 'Más suerte la próxima vez..'
         4:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {define} ask_direction
+                    direction = {ask} 'Where do you want to go?'
+                    {if} direction = 'backwards'
+                        {turn} 180
+                    {else} direction == 'right'
+                        {turn} 90
+                    {else} direction == 'left'
+                        {turn} 270
+                        {forward} 100
+
+                continue = 'yes'
+
+                {while} continue == 'yes'
+                    {print} ask_direction
+                    {sleep}
+                    continue = 'do you want to draw some more?'
+                    {sleep}
+            debug: 'True'
+        5:
             header: ¡Vamos a probarlo!
             text: ¡Disfruta las aventuras en el nivel 17!
     18:

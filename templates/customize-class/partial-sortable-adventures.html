@@ -1,16 +1,15 @@
-<div class="flex flex-col w-full px-4 border border-gray-400 rounded-lg" id="adventure-dragger">
+<div class="flex flex-col w-full px-4 border border-gray-400 rounded-lg" id="adventure_dragger">
         <div class="flex w-full overflow-x-auto my-2">
             <h3 class="flex-1">{{_('select_adventures')}}</h3>
             <div class="flex items-center gap-2">
-                <select class="py-2 px-1 h-10 text-center " name="level" id="levels-dropdown"
-                        data-cy="adventures"
+                <select class="py-2 px-1 h-10 text-center " name="level" id="levels_dropdown" data-cy="levels_dropdown"
                         hx-get="/for-teachers/get-customization-level"
-                        hx-target="#adventure-dragger"
+                        hx-target="#adventure_dragger"
                         hx-swap="outerHTML"
                         hx-trigger="input"
                         hx-indicator="#indicator">
                     {% for i in range(1, max_level + 1) %}
-                    <option id="select-{{i}}" value="{{ i }}" {% if i|string == level|string %} selected {% endif %}>
+                    <option id="select_{{i}}" value="{{ i }}" {% if i|string == level|string %} selected {% endif %}>
                         {{ _('level_title') }} {{ i }}
                     </option>
                     {% endfor %}
@@ -18,7 +17,7 @@
                 <select class="py-2 px-1 h-10 text-center min-w-[200px]" name="adventure_id" id="available"
                         data-cy="available_adventures_current_level"
                         hx-post="/for-teachers/add-adventure/level/{{ level }}"
-                        hx-target="#adventure-dragger"
+                        hx-target="#adventure_dragger"
                         hx-swap="outerHTML"
                         hx-trigger="change"
                         hx-indicator="#indicator">
@@ -32,42 +31,39 @@
 
                 <button data-cy="reset_adventures" title="{{_('reset_adventures')}}" class="yellow-btn text-white place-self-center"
                     hx-get="/for-teachers/restore-adventures-modal/level/{{ level }}"
-                    hx-target="#modal-target"
+                    hx-target="#modal_target"
                     >
                     {{_('reset_button')}}
                 </button>
                 <div class="flex flex-row">
                     <button id="create_adventure_button" class="green-btn" 
-                    hx-trigger="click"
-                    hx-post="/for-teachers/create-adventure/{{class_id}}/{{level}}"
-                    hx-swap="none"
-                    _="on htmx:afterRequest if detail.xhr.response
-                    window.open('/for-teachers/customize-adventure/' + detail.xhr.response, '_self')"
-                    data-cy="edit-link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>
+                        _="on click
+                            window.open('/for-teachers/customize-adventure?class_id={{ class_id }}&level={{level}}', '_self')"
+                    data-cy="edit_link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>
                     {{_('create_adventure')}}
                     </button>
-                    </div>
+                </div>
             </div>
         </div>
         <div class="flex items-center min-w-max">
-            <div id="state-accessible" class="leading-6 rounded-lg bg-gray-200 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
+            <div id="state_accessible" class="leading-6 rounded-lg bg-gray-200 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
                 <span>{{_('level_accessible')}}</span>
             </div>
-            <div id="state-disabled" class="leading-6 rounded-lg bg-gray-400 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
+            <div id="state_disabled" data-cy="state_disabled" class="leading-6 rounded-lg bg-gray-400 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
                 <span>{{_('level_disabled')}}</span>
             </div>
-            <div id="state-future" class="leading-6 rounded-lg bg-green-300 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
+            <div id="state_future" class="leading-6 rounded-lg bg-green-300 pt-1 pb-1 pl-2 pr-2 w-fit hidden">
                 <span>{{_('level_future')}}</span>
                 <span id="opening_date"></span>
             </div>
             <div id="indicator" class="htmx-indicator custom-indicator pl-4">{{_('updating_indicator')}} <i class="fa fa-spinner fa-spin"></i> </div>
         </div>
     <div id="sortadventures" data-cy="sortadventures" class="flex overflow-x-auto">   
-        <div id="level-{{ level }}" data-cy="level-{{ level }}" class="adventures-tab flex sortable" 
+        <div id="level_{{ level }}" data-cy="level_{{ level }}" class="adventures-tab flex sortable" 
             style="min-width: fit-content;"
             hx-trigger="end"
             hx-post="/for-teachers/sort-adventures?level={{ level }}"
-            hx-target="#adventure-dragger" 
+            hx-target="#adventure_dragger" 
             hx-swap="outerHTML"
             hx-include="[name='adventure']"
             hx-indicator="#indicator">
@@ -76,9 +72,9 @@
                         {% if adventure.is_teacher_adventure %}teacher_tab{% elif adventure.is_command_adventure %}command_tab{% endif %} 
                         {% if adventure.short_name in ['quiz', 'parsons'] %}special_tab{% endif %}
                         z-10 whitespace-nowrap flex items-center justify-left relative" data-cy="{{ adventure.short_name }}">
-                        <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide"
+                        <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide_adv_{{adventure.short_name}}"
                             hx-post="/for-teachers/remove-adventure?adventure_id={{ adventure.short_name }}&level={{ level }}" 
-                            hx-target="#adventure-dragger"
+                            hx-target="#adventure_dragger"
                             hx-indicator="#indicator"></span>
                             {{ adventure.long_name }}
                         {# Hidden input so we can send the adventures names in the request to the server #}

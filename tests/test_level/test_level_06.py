@@ -943,13 +943,16 @@ class TestsLevel6(HedyTester):
         self.multi_level_tester(max_level=7, code=code, expected=expected)
 
     def test_print_single_number(self):
-        code = textwrap.dedent("""\
-                print 5""")
+        code = "print 5"
+        expected = 'print(f\'{convert_numerals("Latin", 5)}\')'
 
-        expected = textwrap.dedent("""\
-                print(f'5')""")
+        self.multi_level_tester(max_level=11, code=code, expected=expected)
 
-        self.multi_level_tester(max_level=6, code=code, expected=expected)
+    def test_print_single_number_ar(self):
+        code = "قول 2"
+        expected = 'print(f\'{convert_numerals("Arabic", 2)}\')'
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected, lang='ar')
 
     def test_negative_variable(self):
         code = textwrap.dedent("""\

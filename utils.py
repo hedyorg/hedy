@@ -1,4 +1,4 @@
-from flask import session, request, jsonify, make_response
+from flask import session, request, make_response
 from website.flask_helpers import render_template
 from bs4 import BeautifulSoup
 import contextlib
@@ -15,6 +15,7 @@ import uuid
 import unicodedata
 import sys
 import traceback
+import collections
 
 from email_validator import EmailNotValidError, validate_email
 from flask_babel import gettext, format_date, format_datetime, format_timedelta
@@ -87,7 +88,7 @@ def times():
     return int(round(time.time()))
 
 
-DEBUG_MODE = False
+DEBUG_MODE = not os.getenv('NO_DEBUG_MODE')
 
 
 def is_debug_mode():
@@ -297,20 +298,41 @@ def random_id_generator(
     return ''.join(random.choice(chars) for _ in range(size))
 
 
-# This function takes a Markdown string and returns a list with each of the HTML elements obtained
-# by rendering the Markdown into HTML.
-
-
 def markdown_to_html_tags(markdown):
+    """
+    This function takes a Markdown string and returns a list with each of the HTML elements obtained
+    by rendering the Markdown into HTML.
+    """
     _html = commonmark_renderer.render(commonmark_parser.parse(markdown))
     soup = BeautifulSoup(_html, 'html.parser')
     return soup.find_all()
 
 
+MarkdownCode = collections.namedtuple('MarkdownCode', ('code', 'info'))
+
+
+def code_blocks_from_markdown(markdown):
+    """
+    Takes a MarkDown string and returns a list of code blocks, along with their metadata.
+
+    Returns pairs of `(code, info)`, where 'info' is the text that appears after the three
+    backticks (usually used to indicate the programming language).
+    """
+    md = commonmark_parser.parse(markdown)
+    for node, _ in md.walker():
+        # We will only ever see '_entered == True' for CodeBlock nodes.
+        if node.t == 'code_block':
+            yield MarkdownCode(node.literal.strip(), node.info)
+
+
 def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None, exception=None):
-    if error not in [400, 403, 404, 500]:
+    if error not in [400, 403, 404, 500, 401]:
         error = 404
     default = gettext('default_404')
+    error_image = error
+    if error == 401:
+        default = gettext('default_401')
+        error_image = 403
     if error == 403:
         default = gettext('default_403')
     elif error == 500:
@@ -323,12 +345,12 @@ def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=No
 
     if request.accept_mimetypes.accept_json and not request.accept_mimetypes.accept_html:
         # Produce a JSON response instead of an HTML response
-        return jsonify({"code": error,
-                        "error": default,
-                        "exception": traceback.format_exception(type(exception), exception, exception.__traceback__) if exception else None}), error
+        return make_response({"code": error,
+                              "error": default,
+                              "exception": traceback.format_exception(type(exception), exception, exception.__traceback__) if exception else None}, error)
 
-    return render_template("error-page.html", menu=menu, error=error, iframe=iframe,
-                           page_error=page_error or ui_message or '', default=default), error
+    return render_template("error-page.html", menu=menu, error_image=error_image, iframe=iframe,
+                           page_error=page_error or ui_message or default or '', default=default), error
 
 
 def session_id():
@@ -481,3 +503,10 @@ def prepare_content_for_ckeditor(content):
         content += "<p>&nbsp;</p>"
 
     return content
+
+
+def remove_class_preview():
+    try:
+        del session["preview_class"]
+    except KeyError:
+        pass

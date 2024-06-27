@@ -26,6 +26,18 @@ class TestsLevel4(HedyTester):
     #
     # print tests
     #
+    def test_print_list_gives_type_error(self):
+        code = textwrap.dedent("""\
+            plaatsen is een stad, een  dorp, een strand
+            print plaatsen""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException
+        )
+
     def test_print_single_quoted_text(self):
         code = "print 'hallo wereld!'"
         expected = "print(f'hallo wereld!')"
@@ -520,6 +532,18 @@ class TestsLevel4(HedyTester):
     #
     # ask tests
     #
+    def test_ask_list_gives_type_error(self):
+        code = textwrap.dedent("""\
+           plaatsen is een stad, een  dorp, een strand
+           var is ask plaatsen""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException
+        )
+
     def test_ask_single_quoted_text(self):
         code = "details is ask 'tell me more'"
         expected = "details = input(f'tell me more')"
@@ -647,12 +671,13 @@ class TestsLevel4(HedyTester):
 
     def test_ask_list_random(self):
         code = textwrap.dedent("""\
-        colors is orange, blue, green
-        favorite is ask 'Is your fav color ' colors at random""")
+            colors is orange, blue, green
+            favorite is ask 'Is your fav color ' colors at random""")
 
-        expected = textwrap.dedent("""\
-        colors = ['orange', 'blue', 'green']
-        favorite = input(f'Is your fav color {random.choice(colors)}')""")
+        expected = self.dedent(
+            "colors = ['orange', 'blue', 'green']",
+            self.list_access_transpiled('random.choice(colors)'),
+            "favorite = input(f'Is your fav color {random.choice(colors)}')")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
@@ -690,12 +715,13 @@ class TestsLevel4(HedyTester):
 
     def test_ask_list_access_index(self):
         code = textwrap.dedent("""\
-        colors is orange, blue, green
-        favorite is ask 'Is your fav color ' colors at 1""")
+            colors is orange, blue, green
+            favorite is ask 'Is your fav color ' colors at 1""")
 
-        expected = textwrap.dedent("""\
-        colors = ['orange', 'blue', 'green']
-        favorite = input(f'Is your fav color {colors[int(1)-1]}')""")
+        expected = self.dedent(
+            "colors = ['orange', 'blue', 'green']",
+            self.list_access_transpiled('colors[int(1)-1]'),
+            "favorite = input(f'Is your fav color {colors[int(1)-1]}')")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
@@ -1011,3 +1037,57 @@ class TestsLevel4(HedyTester):
                                 exception=hedy.exceptions.UndefinedVarException,
                                 skip_faulty=False,
                                 max_level=11)
+
+    #
+    # color
+    #
+    @parameterized.expand(hedy.english_colors)
+    def test_all_colors(self, color):
+        code = f'color {color}'
+        expected = HedyTester.turtle_color_command_transpiled(f'{{convert_numerals("Latin", "{color}")}}')
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle()
+        )
+
+    def test_color_red(self):
+        code = "color red"
+        expected = HedyTester.turtle_color_command_transpiled('{convert_numerals("Latin", "red")}')
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            max_level=10
+        )
+
+    def test_color_translated(self):
+        lang = 'nl'
+        code = "kleur blauw"
+        expected = HedyTester.turtle_color_command_transpiled('{convert_numerals("Latin", "blue")}', lang)
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            lang=lang,
+            max_level=10
+        )
+
+    def test_color_basic(self):
+        code = textwrap.dedent("""\
+        color red
+        forward 10""")
+
+        expected = HedyTester.dedent(
+            HedyTester.turtle_color_command_transpiled('{convert_numerals("Latin", "red")}', 'en'),
+            HedyTester.forward_transpiled('10', self.level))
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            translate=False,
+            expected=expected
+        )
