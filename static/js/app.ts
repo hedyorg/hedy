@@ -2050,3 +2050,17 @@ export function goToLevel(level: any) {
   window.location.pathname = newPath
   window.location.hash = hash
 }
+
+export function scrollToLastClickedButton(dropdown_id: string) {
+  const lastClickedButtonId = localStorage.getItem(dropdown_id);
+  console.log(lastClickedButtonId)
+  if (lastClickedButtonId) {
+    const button = document.getElementById(lastClickedButtonId);
+    if (button) {
+      const dropdown = document.getElementById(dropdown_id);
+      if (dropdown){
+        dropdown.scrollTop = button.offsetTop - dropdown.offsetTop;
+      }
+    }
+  }
+}

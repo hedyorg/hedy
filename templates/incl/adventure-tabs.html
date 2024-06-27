@@ -36,7 +36,7 @@
       {# PANES #}
       <div id="adventures_tab" class="w-full overflow-auto bg-gray-200 mb-5 shadow-md">
         {% for adventure in adventures %}
-            <div
+            <div id="{{adventure.short_name}}"
                 data-tabtarget="{{adventure.short_name}}" class="
                 {% if adventure.short_name != initial_tab %}hidden{% endif %}
                 turn-pre-into-ace show-copy-button p-4 text-adventure-copy"
@@ -72,6 +72,18 @@
                   {% endif %}
                 </div>
             {% endfor %}
+            <div class="flex flex-row justify-end">
+                <button class="gray-btn px-4 rounded inline-flex items-center gap-2"
+                _="on click 
+                toggle .hidden on #{{adventure.short_name}}
+                then toggle .hidden on #show_button
+                then localStorage.setItem('hide_adventure', '{{adventure.short_name}}')">
+                    Hide
+                    <svg id="hide_arrow" class="fill-current h-6 w-6 rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+            </div>
           </div>
         {% endfor %}
         {% if parsons %}
@@ -88,3 +100,15 @@
         {% endif %}
       </div>
     </div>
+<div class="flex flex-row justify-end">
+    <button class="hidden gray-btn mb-2 mr-2 px-4 rounded inline-flex items-center gap-2" id="show_button"
+    _="on click
+        set v to localStorage.getItem('hide_adventure')
+        toggle .hidden on #{v}
+        toggle .hidden on me">
+        Show
+        <svg id="hide_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+        </svg>
+    </button>
+  </div>
