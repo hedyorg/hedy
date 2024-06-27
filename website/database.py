@@ -1207,6 +1207,15 @@ class Database:
         role = "teacher" if USERS.get({"username": username}).get("teacher_request") is True else "student"
         return role
 
+    def clean_teacher_mode_account(self, username):
+        adventures = self.get_teacher_adventures(username)
+        for adv in adventures:
+            self.delete_adventure(adv["id"])
+
+        classes = self.get_teacher_classes(username)
+        for cls in classes:
+            self.delete_class(cls)
+
 
 def batched(iterable, n):
     "Batch data into tuples of length n. The last batch may be shorter."

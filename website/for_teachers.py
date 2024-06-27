@@ -28,10 +28,13 @@ from website.auth import (
     requires_teacher,
     store_new_student_account,
     validate_student_signup_data,
+    prepare_user_db,
+    remember_current_user,
 )
 
 from .achievements import Achievements
 from .database import Database
+from .auth_pages import AuthModule
 from .website_module import WebsiteModule, route
 
 SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
@@ -40,10 +43,11 @@ for lang in hedy_content.ALL_LANGUAGES.keys():
 
 
 class ForTeachersModule(WebsiteModule):
-    def __init__(self, db: Database, achievements: Achievements):
+    def __init__(self, db: Database, achievements: Achievements, auth: AuthModule):
         super().__init__("teachers", __name__, url_prefix="/for-teachers")
         self.db = db
         self.achievements = achievements
+        self.auth = auth
 
     @route("/", methods=["GET"])
     @requires_teacher
@@ -484,6 +488,34 @@ class ForTeachersModule(WebsiteModule):
     def clear_preview_class(self):
         utils.remove_class_preview()
         return redirect("/for-teachers")
+
+    @route("/preview-teacher-mode", methods=["GET"])
+    def preview_teacher_mode(self):
+        username = "TestTeacher"
+        user = self.db.user_by_username(username)
+        if not user:
+            user_pass = os.getenv("PREVIEW_TEACHER_MODE_PASSWORD", "")
+            username, hashed, _ = prepare_user_db(username, user_pass)
+            user = {
+                "username": username,
+                "passowrd": hashed,
+                "is_teacher": 1,
+            }
+            self.db.store_user(user)
+
+        session["preview_teacher_mode"] = {
+            "username": username,
+        }
+        remember_current_user(user)
+        return redirect("/hedy")
+
+    @route("/exit-preview-teacher-mode", methods=["GET"])
+    # Note: we explicitly do not need login here, anyone can exit preview mode
+    def exit_teacher_mode(self):
+        if session.get("preview_teacher_mode"):
+            self.db.clean_teacher_mode_account(session["preview_teacher_mode"]["username"])
+            self.auth.logout()
+        return redirect("/hedy")
 
     @route("/class/<class_id>/programs/<username>", methods=["GET", "POST"])
     @requires_teacher
