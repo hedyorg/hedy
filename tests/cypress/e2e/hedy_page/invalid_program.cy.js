@@ -33,7 +33,7 @@ describe('Error code gives correct error', () => {
 
     it('Missing Command', () => {
         const error_code = "hello world"
-        const error_message = `We detected that the code seems to be missing a command on line 1. Can you try looking at the exercise section to find which command to use?`;
+        const error_message = `We detected that the code seems to be missing a command on line 1. Can you try looking at the adventure section to find which command to use?`;
         goToHedyPage();
     
         cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').click();
