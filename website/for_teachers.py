@@ -498,8 +498,10 @@ class ForTeachersModule(WebsiteModule):
             username, hashed, _ = prepare_user_db(username, user_pass)
             user = {
                 "username": username,
-                "passowrd": hashed,
+                "password": hashed,
                 "is_teacher": 1,
+                "created": utils.timems(),
+                "last_login": utils.timems(),
             }
             self.db.store_user(user)
 
