@@ -4,7 +4,7 @@ _WITH: ("com" | "with") _SPACE?
 _DEF: ("def" | "def") _SPACE?
 _RETURN: ("retorne" | "return") _SPACE?
 _PRINT: ("imprima" | "print") _SPACE?
-_PLAY: ("play" | "play") _SPACE
+_PLAY: ("toque" | "play") _SPACE
 _ASK: ("pergunte" | "ask") _SPACE?
 _ECHO: ("eco" | "echo") _SPACE?
 _FORWARD: ("adiante" | "forward") _SPACE?
@@ -35,19 +35,21 @@ _IN: _SPACE ("em" | "in") _SPACE
 _NOT_IN: _SPACE ("não em" | "not in") _SPACE
 _IF: ("se" | "if") _SPACE
 _ELSE: "senão" | "else"
-_AND: _SPACE ("e" | "and") _SPACE
+_AND: _SPACE? ("e" | "and") _SPACE
 _REPEAT: ("repita" | "repeat") _SPACE
 _TIMES: _SPACE ("vezes" | "times")
 _FOR: ("para" | "for") _SPACE
 _RANGE: ("intervalo" | "range") _SPACE?
 _TO: _SPACE ("para" | "to") _SPACE
 _STEP: "passo" | "step"
-_ELIF: _SPACE? ("senãose" | "elif") _SPACE
+_ELIF: _SPACE? ("senão se" | "elif") _SPACE
 _INPUT: ("entrada" | "input")
-_OR: _SPACE ("ou" | "or") _SPACE
+_OR: _SPACE? ("ou" | "or") _SPACE
 _WHILE: ("enquanto" | "while") _SPACE
 _LENGTH: "comprimento" | "length"
 _COLOR : ("cor" | "color") _SPACE?
 _PRESSED: ("apertado" | "pressed") _SPACE?
 _BUTTON: ("botão" | "button") _SPACE?
 clear: ("limpe" | "clear") _SPACE?
+TRUE: ("true" | "True" | "true" | "True") _SPACE?
+FALSE: ("false" | "False" | "false" | "False") _SPACE?

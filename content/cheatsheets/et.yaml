@@ -115,7 +115,7 @@
     demo_code: |-
         vastus = {ask} 'Kui palju on 10 pluss 10?'
         {if} vastus {is} 20 {print} 'Õige!' {else} {print} 'Oih'
--   name: '{ask} ja {if} kilpkonnaga'
+-   name: '`{ask}` ja `{if}` kilpkonnaga'
     explanation: Küsi kasutajalt mitut nurka ta tahab.
     demo_code: |-
         nurki = {ask} 'Mitu nurka?'
@@ -220,7 +220,7 @@
     demo_code: |-
         name = 'Hedy the Robot'
         {print} 'Hello ' name
--   name: quotes after {if} comparison
+-   name: quotes after `{if}` comparison
     explanation: '`{if}`-le järgnev jutumärkidega tekst .'
     demo_code: |-
         name = {ask} 'Who are you?'
@@ -316,7 +316,7 @@
         firstfruit = fruit[1]
         {print} firstfruit
 -   name: Get a random item from a list
-    explanation: To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!
+    explanation: To get a random item from a list we use [{random}] so fruit[{random}] means, get a random fruit from the list!
     demo_code: |-
         fruit = ['banana', 'apple', 'cherry']
         random_fruit = fruit[random]

@@ -32,10 +32,10 @@ _FROM: _SPACE ({from} | "from") _SPACE
 _AT: _SPACE ({at} | "at") _SPACE
 random: ({random} | "random") _SPACE?
 _IN: _SPACE ({in} | "in") _SPACE
-_NOT_IN: _SPACE ({not in} | "not in") _SPACE
+_NOT_IN: _SPACE ({not_in} | "not in") _SPACE
 _IF: ({if} | "if") _SPACE
 _ELSE: {else} | "else"
-_AND: _SPACE ({and} | "and") _SPACE
+_AND: _SPACE? ({and} | "and") _SPACE
 _REPEAT: ({repeat} | "repeat") _SPACE
 _TIMES: _SPACE ({times} | "times")
 _FOR: ({for} | "for") _SPACE
@@ -44,10 +44,12 @@ _TO: _SPACE ({to} | "to") _SPACE
 _STEP: {step} | "step"
 _ELIF: _SPACE? ({elif} | "elif") _SPACE
 _INPUT: ({input} | "input")
-_OR: _SPACE ({or} | "or") _SPACE
+_OR: _SPACE? ({or} | "or") _SPACE
 _WHILE: ({while} | "while") _SPACE
 _LENGTH: {length} | "length"
 _COLOR : ({color} | "color") _SPACE?
 _PRESSED: ({pressed} | "pressed") _SPACE?
 _BUTTON: ({button} | "button") _SPACE?
 clear: ({clear} | "clear") _SPACE?
+TRUE: ({true} | {True} | "true" | "True") _SPACE?
+FALSE: ({false} | {False} | "false" | "False") _SPACE?

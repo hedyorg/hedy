@@ -5,12 +5,12 @@ from parameterized import parameterized
 import exceptions
 import hedy
 from hedy_sourcemap import SourceRange
-# from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester, SkippedMapping  # , SkippedMapping
+from tests.Tester import HedyTester, SkippedMapping
 
 
 class TestsLevel17(HedyTester):
     level = 17
+    maxDiff = None
 
     def test_if_with_indent(self):
         code = textwrap.dedent("""\
@@ -65,24 +65,69 @@ class TestsLevel17(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
-    def test_if_else_boolean(self):
+    #
+    # boolean values
+    #
+
+    def test_cond_boolean(self):
+        # this one fails, fix it
         code = textwrap.dedent("""\
-    computerc = 'PC'
-    userc = 'Hedy'
-    print 'Pilihan komputer: ' computerc
-    if userc is computerc and userc is 'Hedy':
-        print 'SERI'
-    else:
-        print 'Komputer'""")
+            cond = False
+            if cond is True:
+                sleep""")
+        expected = textwrap.dedent("""\
+            cond = False
+            if convert_numerals('Latin', cond) == convert_numerals('Latin', 'True'):
+              time.sleep(1)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected
+        )
+
+    def test_if_elif_boolean(self):
+        code = textwrap.dedent("""\
+            computerc = 'PC'
+            userc = 'Hedy'
+            print 'Pilihan komputer: ' computerc
+            if userc is computerc and userc is 'Hedy':
+                print 'SERI'
+            elif userc is 'PC' and userc is 'Hedy':
+                print 'HARI'
+            else:
+                print 'Komputer'""")
 
         expected = textwrap.dedent("""\
-    computerc = 'PC'
-    userc = 'Hedy'
-    print(f'''Pilihan komputer: {computerc}''')
-    if convert_numerals('Latin', userc) == convert_numerals('Latin', computerc) and convert_numerals('Latin', userc) == convert_numerals('Latin', 'Hedy'):
-      print(f'''SERI''')
-    else:
-      print(f'''Komputer''')""")
+            computerc = 'PC'
+            userc = 'Hedy'
+            print(f'''Pilihan komputer: {computerc}''')
+            if convert_numerals('Latin', userc) == convert_numerals('Latin', computerc) and convert_numerals('Latin', userc) == convert_numerals('Latin', 'Hedy'):
+              print(f'''SERI''')
+            elif convert_numerals('Latin', userc) == convert_numerals('Latin', 'PC') and convert_numerals('Latin', userc) == convert_numerals('Latin', 'Hedy'):
+              print(f'''HARI''')
+            else:
+              print(f'''Komputer''')""")
+
+        self.single_level_tester(code=code, expected=expected)
+
+    def test_if_else_boolean(self):
+        code = textwrap.dedent("""\
+            computerc = 'PC'
+            userc = 'Hedy'
+            print 'Pilihan komputer: ' computerc
+            if userc is computerc and userc is 'Hedy':
+                print 'SERI'
+            else:
+                print 'Komputer'""")
+
+        expected = textwrap.dedent("""\
+            computerc = 'PC'
+            userc = 'Hedy'
+            print(f'''Pilihan komputer: {computerc}''')
+            if convert_numerals('Latin', userc) == convert_numerals('Latin', computerc) and convert_numerals('Latin', userc) == convert_numerals('Latin', 'Hedy'):
+              print(f'''SERI''')
+            else:
+              print(f'''Komputer''')""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -102,48 +147,66 @@ class TestsLevel17(HedyTester):
             expected=expected,
             expected_commands=['for', 'print'])
 
-    def test_if_elif_boolean(self):
-        code = textwrap.dedent("""\
-    computerc = 'PC'
-    userc = 'Hedy'
-    print 'Pilihan komputer: ' computerc
-    if userc is computerc and userc is 'Hedy':
-        print 'SERI'
-    elif userc is 'PC' and userc is 'Hedy':
-        print 'HARI'
-    else:
-        print 'Komputer'""")
+    @parameterized.expand(['and', 'or'])
+    def test_if_list_access_lhs_and_or(self, op):
+        code = textwrap.dedent(f"""\
+            colors = ['red', 'green', 'blue']
+            if colors[1] == colors[2] {op} 1 == 1:
+                print 'red'""")
 
-        expected = textwrap.dedent("""\
-    computerc = 'PC'
-    userc = 'Hedy'
-    print(f'''Pilihan komputer: {computerc}''')
-    if convert_numerals('Latin', userc) == convert_numerals('Latin', computerc) and convert_numerals('Latin', userc) == convert_numerals('Latin', 'Hedy'):
-      print(f'''SERI''')
-    elif convert_numerals('Latin', userc) == convert_numerals('Latin', 'PC') and convert_numerals('Latin', userc) == convert_numerals('Latin', 'Hedy'):
-      print(f'''HARI''')
-    else:
-      print(f'''Komputer''')""")
+        expected = HedyTester.dedent(
+            "colors = ['red', 'green', 'blue']",
+            self.list_access_transpiled('colors[int(1)-1]'),
+            self.list_access_transpiled('colors[int(2)-1]'),
+            f"""\
+            if convert_numerals('Latin', colors[int(1)-1]) == convert_numerals('Latin', colors[int(2)-1]) {op} convert_numerals('Latin', '1') == convert_numerals('Latin', '1'):
+              print(f'''red''')""")
 
-        self.single_level_tester(code=code, expected=expected)
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+        )
 
     def test_for_loop(self):
         code = textwrap.dedent("""\
-    a is 2
-    b is 3
-    for a in range 2 to 4:
-        a is a + 2
-        b is b + 2""")
-        expected = textwrap.dedent("""\
-    a = 2
-    b = 3
-    step = 1 if 2 < 4 else -1
-    for a in range(2, 4 + step, step):
-      a = a + 2
-      b = b + 2
-      time.sleep(0.1)""")
+            a is 2
+            b is 3
+            for a in range 2 to 4:
+                a is a + 2
+                b is b + 2""")
+        expected = textwrap.dedent(f"""\
+            a = 2
+            b = 3
+            step = 1 if 2 < 4 else -1
+            for a in range(2, 4 + step, step):
+              a = {self.addition_transpiled('a', 2)}
+              b = {self.addition_transpiled('b', 2)}
+              time.sleep(0.1)""")
 
         self.single_level_tester(code=code, expected=expected)
+
+    def test_for_loop_no_colon_after_pressed_gives_error(self):
+        code = textwrap.dedent("""\
+        for a in range 2 to 4
+            a = 1""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('for in range', 1)
+        )
+
+    def test_for_list_without_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        dieren = ['cat', 'dog', 'parrot']
+        for dier in dieren
+            a = 1""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('for in', 2)
+        )
 
     def test_if__else(self):
         code = textwrap.dedent("""\
@@ -196,14 +259,47 @@ class TestsLevel17(HedyTester):
             expected_commands=['is', 'if', 'print', 'print']
         )
 
+    #
+    # while loop
+    #
+
     def test_while_undefined_var(self):
         code = textwrap.dedent("""\
-      while antwoord != 25:
-          print 'hoera'""")
+        while antwoord != 25:
+            print 'hoera'""")
 
         self.single_level_tester(
             code=code,
             exception=hedy.exceptions.UndefinedVarException
+        )
+
+    def test_while_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        a = 1
+        while a != 5
+            a = a + 1""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('while', 2)
+        )
+
+    def test_while_equals_boolean(self):
+        code = textwrap.dedent("""\
+            cond is True
+            while cond != False:
+              cond is False""")
+        expected = textwrap.dedent("""\
+            cond = True
+            while convert_numerals('Latin', cond)!=False:
+              cond = False
+              time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skip_faulty=False
         )
 
     def test_allow_space_before_colon(self):
@@ -441,26 +537,26 @@ class TestsLevel17(HedyTester):
 
     def test_if_pressed_with_turtlecolor(self):
         code = textwrap.dedent("""\
-      if x is pressed:
-          color red""")
+        if x is pressed:
+            color red""")
+
+        # Need to exgtract this out for now because of an autopep8 bug
+        # https://github.com/hhatto/autopep8/issues/744
+        color_dict = "{'black': 'black', 'blue': 'blue', 'brown': 'brown', 'gray': 'gray', 'green': 'green', 'orange': 'orange', 'pink': 'pink', 'purple': 'purple', 'red': 'red', 'white': 'white', 'yellow': 'yellow'}"
 
         expected = HedyTester.dedent(f"""\
-      pygame_end = False
-      while not pygame_end:
-        pygame.display.update()
-        event = pygame.event.wait()
-        if event.type == pygame.QUIT:
-          pygame_end = True
-          pygame.quit()
-          break
-        if event.type == pygame.KEYDOWN:
-          if event.unicode == 'x':
-            {HedyTester.indent(
-              HedyTester.turtle_color_command_transpiled('red'),
-              12, True)
-            }
-            break
-          # End of PyGame Event Handler""")
+        if_pressed_mapping = {{"else": "if_pressed_default_else"}}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        def if_pressed_x_():
+            __trtl = f'{{convert_numerals("Latin", "red")}}'
+            color_dict = {color_dict}
+            if __trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
+              raise Exception(f{self.value_exception_transpiled()})
+            else:
+              if not __trtl in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
+                __trtl = color_dict[__trtl]
+            t.pencolor(__trtl)
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(
             code=code,
@@ -468,15 +564,108 @@ class TestsLevel17(HedyTester):
             extra_check_function=self.is_turtle()
         )
 
-    def test_if_no_colon_after_pressed_gives_parse_error(self):
+    def test_if_pressed_no_colon_gives_error(self):
         code = textwrap.dedent("""\
         if x is pressed
-            print 'no colon!'""")
+            a = 'no colon!'""")
 
-        self.single_level_tester(
+        self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.ParseException,
-            extra_check_function=lambda c: c.exception.error_location[0] == 2 and c.exception.error_location[1] == 31
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('if', 1)
+        )
+
+    def test_pressed_elif_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if x is pressed:
+            a = 'correct'
+        elif m is pressed
+            a = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('elif', 3)
+        )
+
+    def test_pressed_if_else_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if x is pressed:
+            a = 'correct'
+        else
+            a = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('else', 3)
+        )
+
+    def test_pressed_if_elif_else_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if x is pressed:
+            a = 'correct'
+        elif m is pressed:
+            a = 'correct'
+        else
+            a = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('else', 5)
+        )
+
+    def test_if_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if 'a' is 'a'
+            b = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('if', 1)
+        )
+
+    def test_elif_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if 'a' is 'a':
+            b = 'colon!'
+        elif 'a' is 'b'
+            b = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('elif', 3)
+        )
+
+    def test_else_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if 'a' is 'a':
+            b = 'colon!'
+        else
+            b = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('else', 3)
+        )
+
+    def test_if_elif_else_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+        if 'a' is 'a':
+            b = 'colon!'
+        elif 'a' is 'b':
+            b = 'colon!'
+        else
+            b = 'no colon!'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('else', 5)
         )
 
     def test_if_button_is_pressed_print(self):
@@ -486,22 +675,14 @@ class TestsLevel17(HedyTester):
         if PRINT is pressed:
             print 'The button got pressed!'""")
 
-        expected = HedyTester.dedent(f"""\
-        x = 'PRINT'
-        create_button(x)
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'PRINT':
-              print(f'''The button got pressed!''')
-              break
-            # End of PyGame Event Handler""")
+        expected = HedyTester.dedent("""\
+         x = 'PRINT'
+         create_button(x)
+         if_pressed_mapping = {"else": "if_pressed_default_else"}
+         if_pressed_mapping['PRINT'] = 'if_pressed_PRINT_'
+         def if_pressed_PRINT_():
+             print(f'''The button got pressed!''')
+         extensions.if_pressed(if_pressed_mapping)""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -514,28 +695,18 @@ class TestsLevel17(HedyTester):
         else:
             print 'Other'""")
 
-        expected = HedyTester.dedent(f"""\
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'a':
-              print(f'''A''')
-              break
-            # End of PyGame Event Handler
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'b':
-              print(f'''B''')
-              break
-            # End of PyGame Event Handler    
-            else:
-              print(f'''Other''')
-              break""")
+        expected = HedyTester.dedent("""\
+         if_pressed_mapping = {"else": "if_pressed_default_else"}
+         if_pressed_mapping['a'] = 'if_pressed_a_'
+         def if_pressed_a_():
+             print(f'''A''')
+         if_pressed_mapping['b'] = 'if_pressed_b_'
+         def if_pressed_b_():
+             print(f'''B''')
+         if_pressed_mapping['else'] = 'if_pressed_else_'
+         def if_pressed_else_():
+             print(f'''Other''')
+         extensions.if_pressed(if_pressed_mapping)""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -558,6 +729,18 @@ class TestsLevel17(HedyTester):
             code=code,
             expected=expected,
             skipped_mappings=skipped_mappings,
+        )
+
+    def test_define_no_colon_gives_error(self):
+        code = textwrap.dedent("""\
+            define simple_function
+                a = 1
+            call simple_function""")
+
+        self.single_level_tester(
+            code=code,
+            exception=exceptions.MissingColonException,
+            extra_check_function=missing_colon_check('define', 1)
         )
 
     def test_source_map(self):
@@ -584,3 +767,8 @@ class TestsLevel17(HedyTester):
 
         self.single_level_tester(code, expected=excepted_code)
         self.source_map_tester(code=code, expected_source_map=expected_source_map)
+
+
+def missing_colon_check(command, line_number):
+    return lambda c: (c.exception.arguments['line_number'] == line_number and
+                      c.exception.arguments['command'] == command)

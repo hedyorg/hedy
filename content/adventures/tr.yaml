@@ -75,7 +75,7 @@ adventures:
 
                     ### Alıştırma
                     Önceki seviyelerdeki hikayenizi bu seviyeye kopyalayın.
-                    Bu seviyede, 3 yeni komut öğrendiniz `{at} {random}` , `{add} {to}` ve `{remove} {from}`.
+                    Bu seviyede, 3 yeni komut öğrendiniz `{at} {random}` , `{add} {to_list}` ve `{remove} {from}`.
                     Hikayenize yeni kod satırları ekleyin, böylece tüm yeni komutlar hikayenizde en az bir kez yer alsın.
                 example_code_3: |
                     ```
@@ -87,9 +87,6 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Önceki seviyelerde hala bir sorun olduğunu fark etmiş olabilirsiniz. İsim kelimesini içeren bir cümle yazdırmayı denediniz mi? Örneğin: `{print}` benim adım adım dır.
-                    Bunu bu seviyede çözebilirsiniz. Yazdıracağınız her şey için tırnak işareti kullanmalısınız.
-
                     ### Alıştırma
                     Örnek kodu kopyalayın ve 1. ve 2. satırlardaki boşluklara tırnak işareti ekleyerek tamamlayın.
                     Satır 3 ve 4'teki boşluklar tırnak işaretleriyle değil, bir `{sleep}` ve bir `{clear}` komutuyla değiştirilmelidir. Bunu çalıştırabilir misin?
@@ -216,7 +213,7 @@ adventures:
                 example_code: |
                     ```
                     isim = 'İngiltere Kraliçesi'
-                    {print} isim ' bir parça kek yiyordu, sonra aniden...'
+                    {print} isim ' bir parça kek yiyordu, sonra aniden…'
                     ```
             13:
                 story_text: |
@@ -286,7 +283,7 @@ adventures:
             3:
                 story_text: |
                     ## ekle şuraya
-                    Listeye `{add} {to}` komutu ile yeni öğeler ekleyebilirsiniz. Listeye bir öğe eklemek için sadece şunu yazın: `{add} penguen {to} hayvanlar` , ya da örnek koddaki gibi `{ask}` komutunu kullanabilirsiniz.
+                    Listeye `{add} {to_list}` komutu ile yeni öğeler ekleyebilirsiniz. Listeye bir öğe eklemek için sadece şunu yazın: `{add} penguen {to} hayvanlar` , ya da örnek koddaki gibi `{ask}` komutunu kullanabilirsiniz.
                 example_code: |
                     ```
                     hayvanlar {is} köpek, kedi, kanguru
@@ -414,91 +411,182 @@ adventures:
                     Ancak 21 puandan fazla almamaya dikkat edin, çünkü alırsanız kaybedersiniz!
                     21'i aşmadan 21'e en çok yaklaşan oyuncu kazanır!
 
-                    İyi eğlenceler!
+                    ### Exercise
+                    In this adventure we code the first part of our Blackjack game. We'll create a function to calculate how many points a card is worth.
+
+                    ***Set the variables***
+                    Start by making a list of all the cards, from 2 to Ace. Next make a list of the face cards, so Jack, Queen and King. Then pick a random card from the list of cards to be card_1.
+
+                    ***Create a function to calculate the points***
+                    Create a function that calculates how many points a card is worth.
+                    All the face cards are worth 10 points, the Ace is worth 11 and all the other cards are worth their numeral.
+                    Return the variable `points` at the end of the function.
+
+                    ***Test the function***
+                    Test if your function is working properly. Finish the first print command by filling in which card you've drawn. Then finish the second line by calling the function with card_1.
+                    Run the code a couple of times. Are you happy with the results? Great! Then you can remove the testing part and move on the the next tab!
                 example_code: |
                     ```
-                    {print} 'YİRMİBİR'
-                    kartlar = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Vale', 'Kız', 'Papaz', 'As']
-                    puanlar = 0
-                    dağıtıcı_puanları = 0
-                    kart_1 = kartlar[{random}]
-                    kart_2 = kartlar[{random}]
-                    kart_3 = kartlar[{random}]
-                    dağıtıcı_kartı_1 = kartlar[{random}]
-                    dağıtıcı_kartı_2 = kartlar[{random}]
-                    dağıtıcı_kartı_3 = kartlar[{random}]
-                    # Kart 1 için puanlar
-                    {if} kart_1 == 'Vale' {or} kart_1 == 'Kız' {or} kart_1 == 'Papaz':
-                        puanlar = puanlar + 10
-                    {elif} kart_1 == 'As':
-                        puanlar = puanlar + 11
-                    {else}:
-                        puanlar = puanlar + kart_1
-                    # Kart 2 için puanlar
-                    {if} kart_2 == 'Vale' {or} kart_2 == 'Kız' {or} kart_2 == 'Papaz':
-                        puanlar = puanlar + 10
-                    {elif} kart_2 == 'As':
-                        puanlar = puanlar + 11
-                    {else}:
-                        puanlar = puanlar + kart_2
-                    # Dağıtıcı kartı 1 için puanlar
-                    {if} dağıtıcı_kartı_1 == 'Vale' {or} dağıtıcı_kartı_1 == 'Kız' {or} dağıtıcı_kartı_1 == 'Papaz':
-                        dağıtıcı_puanları = dağıtıcı_puanları + 10
-                    {elif} dağıtıcı_kartı_1 == 'As':
-                        dağıtıcı_puanları = dağıtıcı_puanları + 11
-                    {else}:
-                        dağıtıcı_puanları = dağıtıcı_puanları + dağıtıcı_kartı_1
-                    # Dağıtıcı kartı 2 için puanlar
-                    {if} dağıtıcı_kartı_2 == 'Vale' {or} dağıtıcı_kartı_2 == 'Kız' {or} dağıtıcı_kartı_2 == 'Papaz':
-                        dağıtıcı_puanları = dağıtıcı_puanları + 10
-                    {elif} dağıtıcı_kartı_2 == 'As':
-                        dağıtıcı_puanları = dağıtıcı_puanları + 11
-                    {else}:
-                        dağıtıcı_puanları = dağıtıcı_puanları + dağıtıcı_kartı_2
-                    # İki As
-                    {if} kart_1 == 'As' {and} kart_2 == 'As':
-                        puanlar = 12
-                    {if} dağıtıcı_kartı_1 == 'As' {and} dağıtıcı_kartı_2 == 'As':
-                        dağıtıcı_puanları = 12
-                    # Sayı Tabelası
-                    {print} 'Elinizde bir ' kart_1 ' ve bir ' kart_2 ' var (' puanlar ' puan)'
-                    {print} 'Dağıtıcının elinde bir ' dağıtıcı_kartı_1 ' ve bir ' dağıtıcı_kartı_2 ' var (' dağıtıcı_puanları ' puan)'
-                    # Oyuncu için ek kart
-                    ekkart = {ask} 'Ek bir kart ister misin?'
-                    {if} ekkart == 'evet':
-                        {if} kart_3 == 'Vale' {or} kart_3 == 'Kız' {or} kart_3 == 'Papaz':
-                            puanlar = puanlar + 10
-                        {elif} kart_3 == 'As':
-                            {if} puanlar < 11:
-                                puanlar = puanlar + 11
+                    {print} 'BLACKJACK'
+
+                    # Set these variables
+                    cards = _
+                    face_cards = _
+                    card_1 =
+
+                    # Create a function to calculate the points
+                    {define} calculate_points {with} card:
+                        {if} card {in} face_cards:
+                            points = _
+                        {elif} _
+                            _
+                        {else}:
+                            _
+                        _ points
+
+                    # Test your function
+                    {print} 'Your card is a ' _
+                    {print} 'That is worth ' _ ' points'.
+                    ```
+    blackjack_2:
+        name: Blackjack 2
+        default_save_name: Blackjack_2
+        description: Blackjack part 2
+        levels:
+            17:
+                story_text: |
+                    ### Exercise
+                    In this adventure we code the second part of our Blackjack game.
+
+                    ***Paste your code from the previous adventure***
+                    In the previous adventure you've started a list of variables and created a function to calculate how many points a card is worth. Copy your code and paste it here. Mind that you don't need the testing part, so if you haven't removed that yet, please do so now.
+
+                    ***Add more variables***
+                    You have already set the lists `cards` and `face_cards` and the variable `card_1`. Underneath those variables create 3 more variables: `card_2`, dealer_card_1` and `dealer_card_2`. These variables are all set to a random card from the list of cards.
+
+                    ***Add up points***
+                    To calculate how many points you have scored we call the function with card 1 and we do it again for card 2. Then we add both these scores together to get your total.
+                    Do the same thing for the dealers points, but be sure to use the dealer's cards and not your own!
+
+                    ***2 Aces***
+                    You're doing great! Almost all scores can be calculated now. There is only one exception: 2 Aces. If you get 2 Aces, your total is 12 points and not 22 (because 22 points would be losing!). This of course also goes for the dealer.
+
+                    ***Show the score***
+                    Lastly, you want to tell the program to tell you which cards you have drawn and how many points that is. Then show which cards the dealer has and how many points they have.
+
+                    ***Continue in the next tab***
+                    Great! You have finished this part of the game! Copy your code and go to the next tab to learn how to ask for an extra card and to declare a winner.
+                example_code: |
+                    ```
+                    # Paste your code from the previous adventure here
+
+                    # Add these variables to the list of variables
+                    card_2 = _
+                    dealer_card_1 = _
+                    dealer_card_2 = _
+
+                    # Add up your points
+                    your_points_1 = {call} _ {with} card_1
+                    your_points_2 = _
+                    your_total = _
+
+                    # Add up the dealers points
+                    dealer_points_1 = _
+                    _
+                    _
+
+                    # 2 Aces
+                    {if} card_1 == 'Ace' {and} _
+                        your_total = 12
+                    {if} dealer_card_1 _
+                        dealer_total = _
+
+                    # Show the score
+                    {print} 'You have drawn a ' _ ' and a ' _ '. That is ' _ ' points'
+                    {print} 'The dealer has drawn a ' _ ' and a ' _ '. That is ' _ ' points'
+                    ```
+    blackjack_3:
+        name: Blackjack 3
+        default_save_name: Blackjack_3
+        description: Blackjack part 3
+        levels:
+            17:
+                story_text: |
+                    In the previous tabs you have learned how to draw 2 random cards for yourself and for the dealer and to calculate how many points you both got.
+                    In this adventure we add the option to ask for an extra card for both you and the dealer.
+
+                    ### Exercise
+                    ***Paste your code from the previous adventure*** Firstly, copy your code from the previous tab and paste it here.
+
+                    ***Extra card for you*** If you want, you can get an extra card to get your total as close to 21 as possible. First ask the player if they want an extra card.
+                    If they do, pick a random card and print what they have drawn. If the card is not an Ace, you can call the function and add the points to your total.
+                    In case the card is an Ace, you can't use the function, because the Ace can be either 1 point or 11 points, depending on how many points you already have earned.
+                    If your total is less than 11, you want the ace to be 11 points (because this is closest to 21). So you add 11 points to your total.
+                    If the total is more than or equal to 11, you want the ace to be 1 point (because you don't want more than 21 points). So you add 1 point to your total.
+                    Lastly, print your new total of points.
+
+                    ***Extra card for the dealer*** The dealer can also get an extra card. The dealer doesn't need to be asked, because they always get an extra card if their total is less than 17.
+                    Copy the 'Extra card for you code' and paste it in the dealers section. Then change it to fit the dealer picking an extra card and getting points added to their total.
+                example_code: |
+                    ```
+                    # Paste your code from the previous adventure here
+
+                    # Extra card for you
+                    hit = {ask} _
+                    {if} hit == 'yes':
+                        card_3 = _
+                        {print} _
+                        {if} card_3 _ 'Ace':
+                            your_points_3 = _
+                            your_total = _
+                        {else}:
+                           {if} your_total _
+                                _
                             {else}:
-                                puanlar = puanlar + 1
+                                _
+                        {print} _
+
+                    # Extra card for the dealer
+                    {if} dealer_total < 17
+                    _
+                    ```
+    blackjack_4:
+        name: Blackjack 4
+        default_save_name: Blackjack_4
+        description: Blackjack part 4
+        levels:
+            17:
+                story_text: |
+                    In the last 3 adventures you have alsmost created a working blackjack game! The only thing left to do is to decide a winner!
+
+                    ### Exercise
+                    ***Paste your code from the previous adventure*** Start by pasting the code that you've made so far into your programming field.
+
+                    ***Decide a winner***
+                    Firstly, if you and the dealer have an equal amount of points, it's a draw.
+                    Secondly, if the dealer has more than 21 points and you don't, you are the winner.
+                    Thirdly, if both you and the dealer have less than 22 points, we have to see who came closest to 21. We do that by comparing who has the highest score. Is your total higher than the dealer's total, then you are the winner. If not, the dealer wins.
+                    Lastly, in all other scenarios (e.g. you have more than 21 points and the dealer doesn't, or you both have more than 21 points) you are the loser.
+
+                    ***Enjoy the game!***
+                    Does your game work properly? Amazing! You have done a great job! Enjoy your game!
+                    If it doesn't work right away, no worries, you might have made a mistake. Just keep calm and bebug your code using the ladybug button.
+                example_code: |
+                    ```
+                    # Paste your code from the previous adventure here
+
+                    # Decide a winner
+                    {if} _
+                        {print} 'Its a draw! Play again!'
+                    {elif} _
+                        {print} 'You win!'
+                    {elif} _ :
+                        {if} _:
+                            {print} _
                         {else}:
-                            puanlar = puanlar + kart_3
-                        {print} 'Çektiğin ek kart bir ' kart_3 ' (' puanlar ' puan)'
+                            {print} _
                     {else}:
-                        {print} 'Ek kart yok'
-                    # Kazanan
-                    {if} puanlar > 21 {or} dağıtıcı_puanları > puanlar {or} dağıtıcı_puanları == 21:
-                        {print} 'Sen kaybettin'
-                    {elif} dağıtıcı_puanları < 17:
-                        {print} 'Dağıtıcı ek kart istiyor. Aldığı bir... ' dağıtıcı_kartı_3
-                        {if} dağıtıcı_kartı_3 == 'Vale' {or} dağıtıcı_kartı_3 == 'Kız' {or} dağıtıcı_kartı_3 == 'Papaz':
-                            dağıtıcı_puanları = dağıtıcı_puanları + 10
-                        {elif} dağıtıcı_kartı_3 == 'As':
-                            {if} dağıtıcı_puanları < 11:
-                                dağıtıcı_puanları = dağıtıcı_puanları + 11
-                            {else}:
-                                dağıtıcı_puanları = dağıtıcı_puanları + 1
-                        {else}:
-                            dağıtıcı_puanları = dağıtıcı_puanları + dağıtıcı_kartı_3
-                        {print} 'Dağıtıcının şimdi ' dağıtıcı_puanları ' puanı var'
-                        {if} dağıtıcı_puanları < 21 {and} dağıtıcı_puanları > puanlar:
-                            {print} 'Sen kaybettin'
-                        {else}:
-                            {print} 'Sen kazandın'
-                    {elif} puanlar > dağıtıcı_puanları {and} puanlar < 21:
-                        {print} 'Sen kazandın!'
+                        _
                     ```
     calculator:
         name: Hesap Makinesi
@@ -562,20 +650,32 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Bu hesap makinesi oyunu, çarpım tablosu alıştırması yapmanıza yardımcı olur!
-                    ### Alıştırma
-                    Listeye daha fazla sayı ekleyebilir misiniz, böylece 10'a kadar sayıların çarpım tablosunu çalışabilirsiniz?
+                    This calculator game helps you practise your tables of multiplication!
+                    ### Exercise
+                    Fill in the blanks. We want this program to ask the player these questions:
+                    ```
+                    How much is 1 times 1?
+                    How much is 1 times 2?
+                    How much is 1 times 3?
+                    How much is 2 times 1?
+                    How much is 2 times 2?
+                    How much is 2 times 3?
+                    How much is 3 times 1?
+                    How much is 3 times 2?
+                    How much is 3 times 3?
+                    _
+                    ```
                 example_code: |
                     ```
-                    sayılar = 1, 2, 3
-                    {for} sayı1 {in} sayılar
-                        {for} sayı2 {in} sayılar
-                            cevap = {ask} 'Söyle bakalım, ' sayı2 ' kere ' sayı1 ' kaç eder?'
-                            doğrucevap = sayı1 * sayı2
-                            {if} cevap {is} doğrucevap
-                                {print} 'Aferin!'
+                    numbers = 1, 2, 3
+                    {for} _
+                        {for} _
+                            answer = {ask} _
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
                             {else}
-                                {print} 'Bu yanlış. Doğru cevap ' doğrucevap
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |
@@ -847,9 +947,6 @@ adventures:
                     total = price + amount_of_product
                     {print} 'That will be $' price 'please'
                     ```
-
-                    total = price + amount_of_product
-                    {print} 'That will be $' price 'please'
             7:
                 story_text: |-
                     ### Exercise
@@ -887,21 +984,7 @@ adventures:
                     {sleep} 5
                     {print} 'All done! That will be $' price ' please!'
                     {print} 'Thank you! Byebye!'
-
-                            {print} That will be $25'
-                            price = 25
-                        {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
-                    {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
+                    ```
             9:
                 story_text: |-
                     ### Exercise
@@ -1193,7 +1276,7 @@ adventures:
                     for i in range 1 to 3
                         animal = animals[i]
                         sound = sounds[i]
-                        print 'Old McDonald had a farm'
+                        print 'Old MacDonald had a farm'
                         print 'E I E I O!'
                         print 'and on that farm he had a ' animal
                         print 'E I E I O!'
@@ -1224,6 +1307,8 @@ adventures:
                     Tebrikler! Seviye 2'ye ulaştınız. Umarım şimdiden bazı harika kodlar yapmışsınızdır!
                     İlk seviyede `{echo}` komutunun bir seferde sadece bir bilgi kaydedebildiğini fark etmiş olabilirsiniz.
                     Örneğin restoran macerasında, müşterinin ne yemek istediğini veya ne içmek istediğini yankılayabilirsiniz, ancak her ikisi tek bir cümlede olmaz.
+                    Seviye 2'de bu durum değişiyor. Seviye 2'de, birden fazla bilgi parçasını kaydetmenize ve bunları istediğiniz yere yazdırmanıza olanak tanıyan değişkenlerle çalışmayı öğreneceksiniz.
+                    O halde hadi bir sonraki sekmeye geçelim!
                 example_code: |
                     **Uyarı! Bu kod çalışmaz!**
                     Hedy'de komutlar arada değişecektir. Örneğin `{echo}` sadece 1. seviyede çalışır. Bu seviyede cevapları geri yankılamanın daha iyi bir yolunu öğreneceksiniz.
@@ -1234,12 +1319,6 @@ adventures:
                     {ask} Ne içmek istersiniz?
                     {echo} Demek isteğiniz
                     ```
-                story_text_2: |
-                    Oyuncu hamburger ve kola yazarsa, "yani hamburger ve kola istiyorsunuz" diyemezsiniz, ancak iki ayrı satır oluşturmanız gerekir.
-                    Ayrıca, `{echo}` komutu sadece cümlenin sonundaki kelimeyi yankılar. Yani "hamburgeriniz hemen geliyor!" diyemezsiniz.
-
-                    Seviye 2'de bu durum değişiyor. Seviye 2'de, birden fazla bilgi parçasını kaydetmenize ve bunları istediğiniz yere yazdırmanıza olanak tanıyan değişkenlerle çalışmayı öğreneceksiniz.
-                    O halde hadi bir sonraki sekmeye geçelim!
             3:
                 story_text: |
                     Bir önceki seviyede değişkenin ne olduğunu ve maceralarınızı daha etkileşimli hale getirmek için nasıl kullanabileceğinizi öğrendiniz.
@@ -1442,7 +1521,7 @@ adventures:
                 story_text: |
                     Şimdi girintilemeyi biraz değiştireceğiz. Her girintiye ihtiyaç duyduğumuzda, girintiden önceki satırda `:` işaretine ihtiyacımız var.
 
-                    Bu seviyede yeni bir komut da kullanabilirsiniz: `{elif}`. `{elif}` {else} {if}'in kısaltmasıdır ve 3 (veya daha fazla!) seçenek arasından seçim yapmak istediğinizde buna ihtiyacınız vardır.
+                    Bu seviyede yeni bir komut da kullanabilirsiniz: `{elif}`. `{elif}` `{else} {if}`'in kısaltmasıdır ve 3 (veya daha fazla!) seçenek arasından seçim yapmak istediğinizde buna ihtiyacınız vardır.
                     Şuna bir bakın!
             18:
                 story_text: |
@@ -1703,6 +1782,20 @@ adventures:
                     {for} hayvan {in} hayvanlar
                         {print} 'Benim sevdiğim ' hayvan
                     ```
+                story_text_2: |
+                    ### Exercise
+                    Finish this code by adding `{for} action {in} actions` to line 2.
+                example_code_2: |
+                    ```
+                    actions = clap your hands, stomp your feet, shout Hurray!
+                    _
+                        {repeat} 2 {times}
+                            {print} 'If youre happy and you know it, ' action
+                            {sleep} 2
+                        {print} 'If youre happy and you know it, and you really want to show it'
+                        {print} 'If youre happy and you know it, ' action
+                        {sleep} 3
+                    ```
             11:
                 story_text: |-
                     Bu seviyede, `{for}` in yeni bir şeklini ekliyoruz. Daha önceki seviyelerde `{for}` i bir liste ile kullanmıştık, ancak `{for}` ni sayılarla da kullanabiliriz.
@@ -1723,6 +1816,14 @@ adventures:
                     {for} i {in} {range} 1 {to} 10:
                         {print} i
                     {print} 'Önüm arkam sağım solum sobe, saklanmayan ebe!'
+                    ```
+            18:
+                story_text: |
+                    Lastly, we'll turn `{for} i {in} {range} 1 to 5` into real Python code, like this:
+                example_code: |
+                    ```
+                    {for} i {in} {range}(1,5):
+                        {print} (i)
                     ```
     fortune:
         name: Falcı
@@ -1768,12 +1869,6 @@ adventures:
                     Şimdilik, Hedy sadece evet, hayır veya belki cevaplarını verebiliyor. Hedy'ye 'kesinlikle' veya 'tekrar sor' gibi daha fazla cevap seçeneği verebilir misiniz?
             4:
                 story_text: |
-                    Bu seviyede yeni bir işlev yok, ancak tırnak işaretlerini kullanarak pratik yapmanızı sağlar.
-                    Seviye 3 kodunuzu yeniden oluşturabilir ve tırnak işaretlerini doğru yerlere eklediğinizden emin olabilirsiniz!
-
-                    Seviye 3'te 'soru' kelimesini hem değişken adı hem de yazdırılabilecek normal bir kelime olarak kullanamadığımızı unutmayın.
-                    Seviye 4'teki tırnak işaretleri bunu mümkün kılmaktadır!
-
                     ### Alıştırma
                     Bu örnek koddan tüm tırnak işaretlerini kaldırdık, bunları doğru yerlere ekleyebilir misiniz?
 
@@ -1986,6 +2081,35 @@ adventures:
                     new_price = _ calculate_new_price {with} old_price, _
                     {print} 'The new price is ' new_price ' dollar'
                     ```
+            18:
+                story_text: |
+                    Let's make functions the Pythons way! To define a function, we no longer use:
+
+                    `{define} name_function {with} argument_1, argument_2:`
+
+                    but we use:
+
+                    `{def} name_function(argument_1, argument_2):`.
+
+
+                    If you don't want to use arguments, you just leave the space between the parantheses empty.
+                    To call a function, we don't need the `{call}` command anymore. You just type the name of the function.
+                example_code: |
+                    ```
+                    {def} calculate_score(answer, correct_answer):
+                        {if} answer == correct_answer:
+                            score = 1
+                        {elif} answer == '?':
+                            score = 0
+                        {else}:
+                            score = -1
+                        {return} score
+
+                    answer = {input} ('Where can you find the Eiffel Tower?')
+                    correct_answer = 'Paris'
+                    score = calculate_score(answer, correct_answer)
+                    {print} ('Your score is... ', score)
+                    ```
     guess_my_number:
         name: Guess my number
         default_save_name: guess my number
@@ -2013,6 +2137,141 @@ adventures:
                             {if} guess _ number
                                 {print} 'You win!'
                                 game = 'over'
+                    ```
+    hangman:
+        name: Hangman
+        default_save_name: Hangman
+        description: Guess the word
+        levels:
+            17:
+                story_text: |
+                    In this adventure we program a game of hangman. First we make some preparations, then we program the game and in the third part we add a drawing with the turtle.
+
+                    ### Exercise
+                    ***Set the variables*** In this game of hangman, Player 1 chooses an answer and Player 2 has to guess the letters in this answer.
+                    To let the computer know all the letters in the word, we will turn the answer into a list of letters. We also do this with the guesses Player 2 makes.
+                    We will start the game with 2 empty lists. We have made an empty list for the variable answer for you. Now make an empty list for guessed_letters as well.
+                    Then we fill in how many mistakes were made. At the start of the game, this should be 0.
+                    The variable `amount_letters` tells us how many letters are in the answer. Ask Player 1 to tell us how many letters their word has.
+                    Lastly we tell the computer if the game is over. We use the variable `game_over` and set it to `False`.
+
+                    ***Choosing the answer*** We want Player 1 to be able to choose the answer. We'll ask them, as many times as necessary, what the next letter is.
+                    Then we add that letter to the answer. Lastly, we add an empty _ to the list of guessed letters, so we get as many _s as there are letters in the answer.
+
+                    ***Player 2's turn***
+                    Tell Player 2 its their turn. Then tell Player 2 how many letters there are in the answer. Finally, print the list of `guessed_letters`.
+
+                    ***Go to the next tab*** Now that all the starting variables are set, we can start programming the game itself. Check out the next tab to learn how!
+                example_code: |
+                    ```
+                    print 'Hangman!'
+
+                    # Set the variables
+                    answer = []
+                    guessed_letters = _
+                    mistakes_made = _
+                    amount_letters = {ask} _
+                    _ = 'False'
+
+                    # Choosing the answer
+                    {for} _
+                        letter = {ask} 'Player 1, what is letter ' i '?'
+                        _
+                        {add} '_' {to} _
+
+                    # Player 2 turn
+                    print _
+                    print _
+                    print guessed_letters
+                    ```
+    hangman_2:
+        name: Hangman 2
+        default_save_name: Hangman_2
+        description: Hangman 2
+        levels:
+            17:
+                story_text: |
+                    Now it's time to program the hangman game.
+
+                    ### Exercise
+
+                    ***Paste your code*** Copy your code from the previous tab and paste the code in the programming field.
+
+                    ***The game*** This games continues playing until Player 2 is game over. Fill in the while command accordingly. Now, Player 2 is allowed to guess a letter, so ask Player 2 to guess a letter.
+                    We need to check if their answer is correct, so check if their `guess` is (somewhere) in the (list) `answer`. Then we let the computer figure out which of the letter(s) is the guess. We have already programmed that part for you.
+                    Next we want to compliment the player for finding a correct letter and we want to print the list `guessed_letters`, so the player can see their progress.
+
+                    The next part we're going to program is what happens when the player has guessed all of the letters. So if their list of `guessed_letters` is the same as our list `answer`.
+                    If the lists are the same, congratulate Player 2 with their victory and set the variable `game_over` to `True`.
+
+                    Next we'll program what happens when Player 2 guesses wrong (so the `{else}` command). First, tell the player that their guess was wrong. Then increase the `mistakes_made` variable by 1.
+
+                    For the last part we'll program what happens when Player 2 has made 10 mistakes. We'll print that Player 1 has won the game. Then we'll print the correct answer. And finally, we'll set our `game_over` variable to `True`, so the game stops.
+
+                    ***Go to the next tab*** Amazing work! Your game is playable, but wouldn't it be fun if the hangman was actually drawn when Player 2 makes a mistake..?
+                example_code: |
+                    ```
+                    # Paste your code here
+
+                    # The game
+                    {while} game_over _
+                        guess = _
+                        {if} _
+                            {for} i {in} {range} 1 {to} amount_letters:
+                                if answer[i] == guess:
+                                    guessed_letters[i] = guess
+                            {print} _
+                            {if} guessed_letters == _:
+                                {print} _
+                                game_over = _
+                        {else}:
+                            {print} _
+                            mistakes_made _
+                            {if} _ == 10:
+                                {print} _
+                                {print} _
+                                _
+                    ```
+    hangman_3:
+        name: Hangman 3
+        default_save_name: Hangman_3
+        description: Hangman 3
+        levels:
+            17:
+                story_text: |
+                    In a game of hangman the mistakes are shown by drawing a part of the hangman each time a mistake has been made.
+                    We now add those drawings with our turtle!
+
+                    ### Exercise
+                    ***Create a function that draws the hangman*** Create a function that draws the hangman in 10 steps. We have already made step 1 for you.
+
+                    ***Test the function*** Test the function by calling the function with 10. If you are happy with the function, remove the line that calls the function for now. We will call the function when the player makes a mistake.
+
+                    ***Paste your hangman game under your function*** Go back to the previous tab and copy your hangman game. Paste the game underneath your function.
+
+                    ***Call the function when the player makes a mistake*** Under the line `mistakes_made = mistakes_made + 1` we will call the function. We want the turtle to take the same amount of steps as the player has made mistakes, so we call the function with `mistakes_made` as argument.
+
+                    ***Enjoy your game!***
+                    <div class="w-full flex flex-row gap-2">
+                        The hangman could look like this <img src="https://github.com/hedyorg/hedy/assets/80678586/d385b691-5701-4342-b5d9-dfae1589c129" width="100">
+                    </div>
+                example_code: |
+                    ```
+                    # Create a function that draws the hangman
+                    {define} draw_hangman {with} step:
+                        {if} step == 1:
+                            {color} white
+                            {forward} -100
+                            {turn} 90
+                            {forward} -50
+                            {color} black
+                            {forward} 100
+                            {forward} -50
+
+                        {if} step == 2:
+                            _
+                    # Paste your hangman game here
+
                     ```
     harry_potter:
         name: Harry Potter
@@ -2517,14 +2776,13 @@ adventures:
         description: matematiğe giriş
         levels:
             6:
-                story_text: |4
+                story_text: |
+                    In this level you learn something new: you can now also calculate.
 
-                              Bu seviyede yeni bir şey öğreniyorsunuz: artık hesaplama da yapabileceksiniz.
+                    The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                              Toplama kolaydır, matematikte olduğu gibi yazarsınız: Örneğin `5 + 5`. Çıkarma da iyi çalışır, `5 - 5` şeklindedir.
-
-                              Çarpma biraz farklıdır, çünkü klavyenizde çarpma simgesi yoktur. Arayın bakın, özel klavye değilse gerçekten yoktur!
-                              Bu yüzden çarpmayı sayıların yanındaki yıldız işaretiyle yapıyoruz: `5 * 5`. Bunu "5 çarpı 5" olarak okuyun, en iyi şekilde böyle hatırlamanıza yardımcı olur.
+                    The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
+                    That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
                     {print} '5 artı 5 eder ' 5 + 5
@@ -2567,21 +2825,23 @@ adventures:
                     C1 is the lowest note you can play, C10 is the highest.
 
                     ### Exercise
-                    Try out the example code and thenplay around with it! Can you create your own melody?
+                    Try out the example code and then play around with it! Can you create your own melody?
                     In the next level you'll learn how to play some existing songs.
                 example_code: |-
                     ```
-                    play C4
-                    play D4
-                    play E4
-                    play F4
-                    play G4
-                    play A4
-                    play B4
-                    play C5
+                    {play} C4
+                    {play} D4
+                    {play} E4
+                    {play} F4
+                    {play} G4
+                    {play} A4
+                    {play} B4
+                    {play} C5
                     ```
             2:
-                story_text: Finish the songs! We have started the codes for some melodies.
+                story_text: |
+                    ### Exercise
+                    Finish the songs! We have started the codes for some melodies.
                 example_code: |
                     ```
                     {print} Old Mac Donald had a farm
@@ -2624,7 +2884,7 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Use the `{clear}` command to create a karaokemachine!
+                    Use the `{clear}` command to create a karaoke machine!
 
                     ### Exercise
                     Finish the karaoke version of 'Mary had a little lamb'.
@@ -2666,8 +2926,7 @@ adventures:
                     _
                     ```
             6:
-                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting\
-                    \ numbers. \nThen, see if you can compose a song using the numbers.\n"
+                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting numbers. \nThen, see if you can compose a song using the numbers.\n"
                 example_code: |
                     ```
                     number = {ask} 'Say a starting number between 1 and 67'
@@ -2738,10 +2997,10 @@ adventures:
                     ```
             12:
                 story_text: |
-                    Use functions in you songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle little star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
+                    Use functions in your songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle Little Star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
 
                     ### Exercise
-                    Finish the song of Twinkle Twinkle little star.
+                    Finish the song of Twinkle Twinkle Little Star.
                     Then look back at all the songs you've programmed in the levels before, can you make those codes better and shorter using functions too?
                 example_code: |
                     ```
@@ -2784,12 +3043,12 @@ adventures:
                     ```
             13:
                 story_text: |
-                    You can use a function with an argument for songs that have line taht are almost the same, but slightly different each time.
-                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, buyt each time they are followed by a different couple of notes.
+                    You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
+                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, but each time they are followed by a different couple of notes.
 
                     ### Exercise
                     Can you finish the song of Yankee Doodle?
-                    Can you think of another song to programm this way?
+                    Can you think of another song to program this way?
                 example_code: |
                     ```
                     {print} 'Yankee Doodle'
@@ -2816,7 +3075,7 @@ adventures:
                     ```
             14:
                 story_text: |
-                    You can programm music for fun, but you can also use the musical notes to make something useful like a fire alarm!
+                    You can program music for fun, but you can also use the musical notes to make something useful like a fire alarm!
 
                     ### Exercise
                     Make sure the fire alarm rings when there is a fire!
@@ -2835,6 +3094,106 @@ adventures:
                     fire = {ask} 'Is there a fire?'
                     {if} fire _ 'yes'
                         {call} fire_alarm
+                    ```
+            15:
+                story_text: |
+                    **Warning** This adventure can become extremely annoying!
+                    We can also use the {while} command to repeat a song forever.
+
+                    ### Exercise
+                    Finish the never-ending song.
+                example_code: |
+                    ```
+                    {define} song
+                        {play} _
+
+                    yes_or_no = {ask} 'Do you want to hear my never-ending song?'
+                    {while} yes_or_no = 'yes'
+                        {call} song
+                        {print} '🥳'
+                    ```
+            16:
+                story_text: |
+                    Upgrade your Old MacDonald code!
+
+                    ### Exercise
+                    Take your code from the 'Sing a Song' adventure and add musical notes to it!
+                    You can make a function for each line in the song and call that function after the line is printed.
+                    We defined the first line for you and called it in the code. Can you finish the whole song?
+                example_code: |
+                    ```
+                    {define} line_1
+                        {for} i {in} {range} 1 {to} 3
+                            {play} G
+                        {play} D
+                        {for} i {in} {range} 1 {to} 2
+                            {play} E
+                        {play} D
+
+                    animals = ['pig', 'dog', 'cow']
+                    sounds = ['oink', 'woof', 'moo']
+                    for i in range 1 to 3
+                        animal = animals[i]
+                        sound = sounds[i]
+                        print 'Old MacDonald had a farm'
+                        call line_1
+                        print 'E I E I O!'
+                        _
+                    ```
+            17:
+                story_text: |
+                    You can use the {elif} to create different options.
+
+                    ### Exercise
+                    Firstly, add colons to get the code to work.
+                    Then finish this code by adding at least 2 other songs for other moods. For example a happy song and an angry song.
+                example_code: |
+                    ```
+                    {define} scary_song
+                        {for} i {in} {range} 1 {to} 3
+                            {play} G
+                        {play} E
+                        {sleep} 2
+                        {for} i {in} {range} 1 {to} 3
+                            {play} F
+                        {play} D
+
+                    mood = {ask} 'Which emotion are you feeling?'
+                    {if} mood {is} 'fear'
+                        {call} scary_song
+                    {elif} _
+                    ```
+            18:
+                story_text: |
+                    ### Exercise
+                    Even in this last level of Hedy we can make some music! Be careful of all the syntax that is needed now.
+                    Take a good look at how the functions are defined and called upon in the example code.
+                    Finish the song!
+                example_code: |
+                    ```
+                    {def} line_1():
+                        {for} i {in} {range}(1, 5):
+                            {play} A
+                        {play} D
+                        {play} F
+                        {play} A
+
+                    {def} line_2():
+                        {for} i {in} {range}(1, 5):
+                            {play} G
+                        {play} C
+                        {play} E
+                        {play} G
+
+                    {def} line_3():
+                    _
+
+                    {print} ('The drunken sailor')
+                    {print} ('What shall we do with the drunken sailor?')
+                    line_1()
+                    line_2()
+                    line_3()
+                    {print} ('Early in the morning')
                     ```
     parrot:
         name: Papağan
@@ -2886,7 +3245,7 @@ adventures:
                 story_text: |
                     Papağanınıza `{add}` ile yeni bir kelime öğretin.
                     ### Alıştırma
-                    Kodun çalışması için `{add} {to}` komutunu ekleyebilir misiniz?
+                    Kodun çalışması için `{add} {to_list}` komutunu ekleyebilir misiniz?
                 example_code: |
                     ```
                     kelimeler {is} gaak, Hedy
@@ -3146,10 +3505,10 @@ adventures:
                 story_text_2: |
                     **Listelerdeki tüm öğelerin de tırnak işaretine ihtiyacı vardır**
                     Listeler metindir, bu nedenle onlarında tırnak işaretlerine ihtiyaçları vardır. Listedeki her bir öğenin tırnak işaretine sahip olduğuna dikkat edin.
-                    Bu, örneğin 'Iron Man' gibi iki kelimeyi listeye 1 öğe olarak kaydetmenizi sağlar.
+                    Bu, örneğin 'Black Widow' gibi iki kelimeyi listeye 1 öğe olarak kaydetmenizi sağlar.
                 example_code_2: |
                     ```
-                    süperkahramanlar = 'Spiderman', 'Batman', 'Iron Man'
+                    süperkahramanlar = 'Spiderman', 'Batman', 'Black Widow'
                     {print} süperkahramanlar {at} {random}
                     ```
                 story_text_3: |
@@ -3318,14 +3677,6 @@ adventures:
             1:
                 story_text: |
                     Seviye 1'de, kendi sanal restoranınızı oluşturabilir ve konuklarınızın siparişlerini alabilirsiniz.
-                example_code: |
-                    ```
-                    {print} Hedy'nin restoranına hoş geldiniz 🍟
-                    _ Ne sipariş etmek istersiniz?
-                    {echo} Yani siparişiniz
-                    {print} Siparişiniz için teşekkür ederiz!
-                    {print} Şimdi hazırlıyoruz!
-                    ```
                 story_text_2: |
                     ### Alıştırma
                     Sarı düğmeye tıklayarak örnek kodu giriş ekranınıza kopyalayın.
@@ -3333,6 +3684,14 @@ adventures:
                     Ardından restoran programına en az 4 satır kod daha ekleyin.
                     Müşteriye ne içmek istediklerini sorun ve nakit mi yoksa kartla mı ödeme yapmak istediklerini sorun.
                     Son olarak, müşterinize veda etmek için güzel bir yol düşünün.
+                example_code_2: |
+                    ```
+                    {print} Hedy'nin restoranına hoş geldiniz 🍟
+                    _ Ne sipariş etmek istersiniz?
+                    {echo} Yani siparişiniz
+                    {print} Siparişiniz için teşekkür ederiz!
+                    {print} Şimdi hazırlıyoruz!
+                    ```
             2:
                 story_text: |
                     Seviye 2'de, değişkenler kullanarak restoranınızı genişletebilirsiniz. Seviye 1'de Hedy siparişi sadece bir kez `{echo}` yapabiliyordu ve sadece en son sipariş edilen şeyi hatırlayabiliyordu.
@@ -3386,8 +3745,6 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Bu seviyede, `{print}` veya `{ask}` komutunu kullanırken artık tırnak işareti kullanmanız gerekiyor.
-
                     ### Alıştırma
                     Çalışması için bu koda tırnak işaretlerini ekleyin! Dikkatli olun: değişkenler tırnak işareti içinde olmamalıdır.
                     Ardından, çıktı ekranınızda her seferinde yalnızca bir satır göstermek için `{clear}` komutunu kullanın.
@@ -3466,6 +3823,10 @@ adventures:
             8:
                 story_text: |
                     Bu seviyede, birden fazla kod satırını tekrarlayarak sanal restoranınızı daha ayrıntılı hale getirebilirsiniz. Bunun gibi:
+
+                    ### Alıştırma
+                    Bu kod, menüde daha fazla öğe eklenerek genişletilebilir, örneğin içecekler ve/veya birden fazla yemek veya tatlı sunulabilir. En az bir öğe daha ekleyin.
+                    **Ek Görev** Daha da fazla ürün ekleyin, istediğiniz kadar seçenek olsun!
                 example_code: |
                     ```
                     {print} "Restaurant Chez Hedy'ye hoş geldiniz!"
@@ -3477,10 +3838,6 @@ adventures:
                     {print} 'Siparişiniz için teşekkür ederiz!'
                     {print} 'Afiyet olsun!'
                     ```
-                story_text_2: |
-                    ### Alıştırma
-                    Bu kod, menüde daha fazla öğe eklenerek genişletilebilir, örneğin içecekler ve/veya birden fazla yemek veya tatlı sunulabilir. En az bir öğe daha ekleyin.
-                    **Ek Görev** Daha da fazla ürün ekleyin, istediğiniz kadar seçenek olsun!
             9:
                 story_text: |
                     Bu seviyede restoranınızı daha gerçekçi ve daha eğlenceli hale getirmek için iç içe geçmeyi kullanabilirsiniz!
@@ -3671,7 +4028,12 @@ adventures:
                 story_text: |
                     Bu seviyede, taş, kağıt, makas programını daha da geliştirebiliriz. Ancak metin eklemek istiyorsanız, burada da tırnak işareti kullanmanız gerekir.
                     ### Alıştırma
-                    Kodunuzu önceki seviyeden kopyalayın ve her `{print}` veya `{ask}` komutundan sonra tırnak işareti kullanarak çalışmasını sağlayın.
+                    Fill in quotation marks on the blanks. Mind that the variable `choices` should be outside the quotes.
+                example_code: |
+                    ```
+                    choices {is} rock, paper, scissors
+                    {print} _The computer chooses..._ choices {at} {random}
+                    ```
             5:
                 story_text: |
                     Bu seviyede beraberlik olup olmadığını belirleyebiliriz. Bunun için yeni `{if}` koduna ihtiyacınız var.
@@ -3833,6 +4195,136 @@ adventures:
                     {else}
                         {print} 'Sabah 10.00'da tren istasyonuna git.'
                      ```
+    simon:
+        name: Simon Says
+        default_save_name: Simon
+        description: Make a game of Simon Says
+        levels:
+            16:
+                story_text: |
+                    Let's make a game of Simon Says! Simon Says is a memory game in which the player will be given a color. They have to repeat that color back.
+                    If they get it right a color is added to the sequence, so they now have to remember 2 colors, then 3, then 4 etc. the game stops as soon as the player makes a mistake.
+
+                    ### Exercise
+                    In this first part of the Simon Says adventure, we'll let the computer pick a random color and add it to a list.
+
+                    ***Make 2 lists*** First, make a list called `colors` and fill it with the colors red, yellow, green and blue.
+                    Then make a list called `simon_sequence`. This list will be used as the answer.
+                    At the start of the game this lists need to be empty. unfortunately, we can't create an empty list (yet), so we'll fill it with the words 'empty' and 'list' and we'll remove them from the list immediately.
+
+                    ***Create a function that adds a color to the sequence*** Now that we have an empty list called simon_sequence, we can start filling it with random colors.
+                    We do that with a function, so we can call it everytime there's a new level in our game. Create a function called `add_random_color`.
+                    Then create the variable random_color and set it to a random color. Next, add this random color to the simon_sequence.
+
+                    ***Create a function that shows the simon_sequence*** Start by naming the new function `show_simon_sequence` with `level` as an argument. Now we want to show as many colors as the level we are in (in level 1 you see 1 color, in level 2 you see 2 colors etc).
+                    So we repeat `level` times, to print the `simon_sequence[i]`. Each time a color is shown, wait for 1 second and then clear the screen.
+
+                    ***Test your program*** Before you go to the next level, test if the functions are working by calling both of the functions. If they're working you should see a random color in your output screen.
+                    Remove this testing part of your code, copy the code and continue to the next tab to learn more about the simon says game!
+                example_code: |
+                    ```
+                    # Make 2 lists
+                    colors = _
+                    _ = ['empty', 'list']
+                    {remove} _ {from} simon_sequence
+                    {remove} _
+
+                    # Create a function that adds a color
+                    _ add_random_color
+                        _
+                        {add} _
+
+                    # Create a function that shows the simon_sequence
+                    {define} _
+                        {for} i {in} {range} 1 {to} _
+                            {print} _
+                            _
+                            _
+
+                    # Test your program
+                    {call} _
+                    {call} show_simon_sequence {with} 1
+                    ```
+    simon_2:
+        name: Simon Says 2
+        default_save_name: Simon
+        description: Make a game of Simon Says
+        levels:
+            16:
+                story_text: |
+                    We'll continue with our Simon Says game!
+
+                    ### Exercise
+                    ***Paste your code here*** Paste your code from the previous level here. Don't forget to remove the part that was just used for testing the functions.
+
+                    ***Create a function that creates the player_sequence*** The list `player_sequence` is used to capture the answers of the player. First we define the function with the argument level.
+                    Next, we ask level times what the color is that they choose. We call that variable `answer`. Then we add the variable `answer` to the list player_sequence.
+
+                    ***Setting up the game*** Before we program the game in the next tab, we'll need some starting variables. First, we'll set the variable `level` to 1 and the variable `game_over` to False.
+                    Then we make an introduction for the game. We'll print 'Welcome to Simon Says!' and clear the screen after 1 second.
+
+                    ***Continue to the next tab to finish the game!**** Don't forget to copy your code and take it with you to the next tab.
+                example_code: |
+                    ```
+                    # Paste your code here
+
+
+                    # Create a function that creates the player_sequence
+                    {define} _
+                        {for} _
+                            _ 'What is color number ' i '?'
+                            {add} answer {to} _
+
+                    # Set up
+                    level = _
+                    game_over = _
+                    {print} _
+                    _ 1
+                    _
+                    ```
+    simon_3:
+        name: Simon Says 3
+        default_save_name: Simon
+        description: Make a game of Simon Says
+        levels:
+            16:
+                story_text: |
+                    In this tab we'll program the game of Simon Says!
+
+                    ### Exercise
+                    ***Paste your code*** Copy your code from the previous tab and paste it here.
+
+                    ***Program the game*** We start by making sure the game goes on while the game isn't over. Then we print what level the player is on, we use the variable level for that. We only show that for 1 second and then we clear the screen again.
+                    Now, we have to create the empty list player_sequence. We've already programmed how to fill the list, with our function `player_sequence`, but we never made the list itself. To create the list we use the same trick as we did in the previous tab.
+                    We'll make a list with the words 'empty' and 'list' on it, and then we remove both these words. Next, we'll call all of the 3 functions that we've created.
+                    Lastly, we'll have to check if the player gave the correct answers (so if the player_sequence and the simon_sequence are the same).
+                    If that's the case, we'll compliment the player. Wait for 1 second and increase the level with 1.
+                    Did the player give the wrong answer, we'll tell them and end the game by setting game_over to 'True'
+
+                    ***Enjoy your game!*** Great job! Does your game not work? Use the ladybug button to debug your code!
+                example_code: |
+                    ```
+                    # Paste your code here
+
+                    # The game
+                    {while} game_over _
+                        {print} _
+                        _
+                        _
+                        _ = ['empty', 'list']
+                        {remove} _
+                        {remove} _
+                        {call} _
+                        {call} _ {with} _
+                        {call} _ {with} _
+                        {if} player_sequence == _
+                            _
+                            _
+                            _
+                        {else}
+                            _
+                            game_over = _
+                    ```
     sleep_command:
         name: '{sleep}'
         default_save_name: uyu_komutu
@@ -4061,249 +4553,176 @@ adventures:
                     {print} 'Like a diamond in the sky'
                     {call} _
                     ```
-    tic:
-        name: Tic Tac Toe
-        default_save_name: Tic
-        description: Tic Tac Toe oyunu oynayın!
-        levels:
-            13:
+            16:
                 story_text: |
-                    Bu macerada bir Tic Tac Toe oyunu programlayabilirsiniz. İki kişi ile oynayabilirsiniz. Sırayla, işaretinizi (x veya o) koymak istediğiniz yerin numarasını (1 - 9) seçersiniz.
-                    Arka arkaya 3 tane (yatay, dikey veya çapraz) koyan ilk oyuncu kazanır!
-
-                    ### Alıştırma 1
-                    Oyun çalışıyor, ancak bazı sorunları var. Örneğin, herhangi bir oyuncu herhangi bir alanı seçebilir, zaten alınmış bir alanı bile! Yerin alınıp alınmadığını `{if}` ile kontrol edin ve eğer öyleyse oyuncuyu uyarın.
-
-                    ### Alıştırma 2
-                    Oyun ayrıca kimin kazandığına karar vermiyor. Bunu, arka arkaya 3 noktanın aynı sembole sahip olup olmadığını kontrol ederek eklemeniz gerekir.
-
-                    ### Alıştırma 3 Ek Görev
-                    Her zaman birlikte oynayabileceğiniz bir arkadaşınız olmayabilir. Bir bilgisayar rakibi oluşturabilir misin?
+                    ### Exercise
+                    Finish the nursery rhyme!
                 example_code: |
                     ```
-                    oyuncu = 'x'
-                    oyun_alanı = '.', '.', '.', '.', '.', '.', '.', '.', '.'
+                    number = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+                    object = ['on his drum', 'on his shoe', 'on his knee', 'on his door', 'on his hive', 'on his sticks', 'up in heaven', 'on his gate', 'on his vine', 'once again']
 
-                    {for} i {in} {range} 1 {to} 9
-                        seçim = {ask} 'Oyuncu ' oyuncu ' , hangi yeri seçiyorsun?'
-                        oyun_alanı {at} seçim = oyuncu
+                    _
+                        {print} 'This old man'
+                        {print} 'He played ' _
+                        {print} 'He played knick-knack ' _
+                        {print} 'With a knick-knack paddywhack'
+                        {print} 'Give the dog a bone'
+                        {print} 'This old man came rolling home'
+                        {sleep} 8
                         {clear}
-                        {print} oyun_alanı {at} 1 oyun_alanı {at} 2 oyun_alanı {at} 3
-                        {print} oyun_alanı {at} 4 oyun_alanı {at} 5 oyun_alanı {at} 6
-                        {print} oyun_alanı {at} 7 oyun_alanı {at} 8 oyun_alanı {at} 9
-                        {if} oyuncu = 'x'
-                            oyuncu = 'o'
-                        {else}
-                            oyuncu = 'x'
                     ```
-            14:
+                story_text_2: |
+                    ### Exersice 2
+                    Now create your own code for the nursery rhyme 'The wheels on the bus' on the same way!
+                example_code_2: |
+                    ```
+                    object = ['wheels', 'doors', _]
+                    movement = [ 'round and round', 'open and shut', _]
+                    ```
+    tic:
+        name: Tic-Tac-Toe
+        default_save_name: Tic
+        description: Play a game of Tic Tac Toe!
+        levels:
+            16:
                 story_text: |
-                    Önceki seviyelerde bir tic tac toe oyunu yaptınız. Şimdi de = işaretini, == işaretini ve != işaretini nasıl kullanacağınızı öğrendiniz.
-                    Bu bilgiyi yeni Tic Tac Toe oyununuzda şu şekilde kullanabilirsiniz:
+                    Let's program a game of tic-tac-toe!
+
+                    ### Exercise
+                    In this adventure we'll start with creating an empty field.
+
+                    ***Create a list called field*** This list will be our playing field. This list is filled with 9 dots, since there are no x's and o's yet at the start of our game.
+
+                    ***Create a function that prints the field*** Firstly, clear the screen so the old playing fields will be removed. Then we print the first line of our Tic Tac Toe field. This line constists of the first 3 spots in our list field.
+                    We have already programmed this line for you. Now finish the field by printing spot 4, 5, and 6 on the second row and spot 7, 8 and 9 in the third row.
+
+                    ***Call the function that prints the field*** Now call the function.
+                    <div class="w-full flex flex-row gap-2">
+                        Run the code. Your output should look like this: <img src="https://github.com/hedyorg/hedy/assets/80678586/bcbd156e-4b48-4e82-84ae-f86d21b0cbcc" width="100">
+                    </div>
+
+                    ***Continue in the next tab*** In the next tab you'll learn how to program the game itself.
                 example_code: |
                     ```
-                    işaret = 'x'
-                    açık_yerler = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    oyun = 'devam'
-                    yer_1 = '.'
-                    yer_2 = '.'
-                    yer_3 = '.'
-                    yer_4 = '.'
-                    yer_5 = '.'
-                    yer_6 = '.'
-                    yer_7 = '.'
-                    yer_8 = '.'
-                    yer_9 = '.'
-                    {print} 'TIC TAC TOE!'
-                    {print} yer_1 yer_2 yer_3
-                    {print} yer_4 yer_5 yer_6
-                    {print} yer_7 yer_8 yer_9
-                    {print} ' '
-                    {for} i {in} {range} 1 {to} 9
-                        {if} oyun != 'bitti'
-                            seçim = {ask} 'Oyuncu ' işaret ', hangi yer?'
-                            {if} seçim {in} açık_yerler
-                                {remove} seçim {from} açık_yerler
-                                {if} seçim == 1
-                                    yer_1 = işaret
-                                {if} seçim == 2
-                                    yer_2 = işaret
-                                {if} seçim == 3
-                                    yer_3 = işaret
-                                {if} seçim == 4
-                                    yer_4 = işaret
-                                {if} seçim == 5
-                                    yer_5 = işaret
-                                {if} seçim == 6
-                                    yer_6 = işaret
-                                {if} seçim == 7
-                                    yer_7 = işaret
-                                {if} seçim == 8
-                                    yer_8 = işaret
-                                {if} seçim == 9
-                                    yer_9 = işaret
-                            {else}
-                                {print} 'Bu yer zaten doldu'
-                            {print} yer_1 yer_2 yer_3
-                            {print} yer_4 yer_5 yer_6
-                            {print} yer_7 yer_8 yer_9
-                            {print} ' '
-                            kazanan = {ask} 'Kazandın mı?'
-                            {if} kazanan == 'yes'
-                                {print} 'Aferin, oyuncu ' işaret '!'
-                                oyun = 'bitti'
-                            {else}
-                                {if} işaret == 'x'
-                                    işaret = 'o'
-                                {else}
-                                    işaret = 'x'
-                    ```
-            15:
-                story_text: |
-                    Bu seviyede, Tic Tac Toe oyununuzu {while} döngüsü ile geliştirebilirsiniz. Bu döngü ile `{if} oyun != 'bitti'` ve `{for} i {in} {range} 1 {to} 9` satırları basit tek bir satıra dönüştürülür.
-                    Şuna bir bak:
-                example_code: |
-                    ```
-                    işaret = 'x'
-                    açık_yerler = 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    oyun = 'devam'
-                    yer_1 = '.'
-                    yer_2 = '.'
-                    yer_3 = '.'
-                    yer_4 = '.'
-                    yer_5 = '.'
-                    yer_6 = '.'
-                    yer_7 = '.'
-                    yer_8 = '.'
-                    yer_9 = '.'
-                    {print} 'TIC TAC TOE!'
-                    {print} yer_1 yer_2 yer_3
-                    {print} yer_4 yer_5 yer_6
-                    {print} yer_7 yer_8 yer_9
-                    {print} ' '
-                    {while} oyun != 'bitti'
-                        seçim = {ask} 'Oyuncu ' işaret ', hangi yer?'
-                        {if} seçim {in} açık_yerler
-                            {remove} seçim {from} açık_yerler
-                            {if} seçim == 1
-                                yer_1 = işaret
-                            {if} seçim == 2
-                                yer_2 = işaret
-                            {if} seçim == 3
-                                yer_3 = işaret
-                            {if} seçim == 4
-                                yer_4 = işaret
-                            {if} seçim == 5
-                                yer_5 = işaret
-                            {if} seçim == 6
-                                yer_6 = işaret
-                            {if} seçim == 7
-                                yer_7 = işaret
-                            {if} seçim == 8
-                                yer_8 = işaret
-                            {if} seçim == 9
-                                yer_9 = işaret
-                        {else}
-                            {print} 'Burası zaten dolu'
-                        {print} yer_1 yer_2 yer_3
-                        {print} yer_4 yer_5 yer_6
-                        {print} yer_7 yer_8 yer_9
-                        {print} ' '
-                        kazanan = {ask} 'Kazandın mı?'
-                        {if} kazanan == 'evet'
-                            {print} 'Aferin, oyuncu ' işaret '!'
-                            oyun = 'bitti'
-                        {else}
-                            {if} işaret == 'x'
-                                işaret = 'o'
-                            {else}
-                                işaret = 'x'
+                    # Create a list called field
+                    _ = ['.', '.', '.', '.', '.', '.', '.', '.', '.']
+
+                    # Create a function that prints the field
+                    {define} print_field
+                        _
+                        {print} 'TIC TAC TOE'
+                        {print} field[1] field[2] field[3]
+                        _
+                        _
+
+                    # Call the function
                     ```
             17:
                 story_text: |
-                    Önceki seviyelerde, tic tac toe oyununun can sıkıcı bir özelliği vardı. Her hamleden sonra, kazanıp kazanmadığınızı kendiniz doldurmanız gerekiyordu.
-                    Bu da oyunu oynanabilir ama aynı zamanda oldukça yavaş hale getiriyordu. Bu seviyede, bu sorunu çözebilecek `{elif}` komutunu öğrendik.
-                    Hedy'nin bir oyuncunun kazanıp kazanmadığını kontrol etmesini sağlamak için `{elif}` kullanmak eğlencelidir, ancak aynı zamanda oldukça fazla miktarda ek satır gerektirir.
+                    In the previous level you've learned how to make a tic-tac-toe game. The game works, but is quite annoying as it keeps asking you if you've won yet.
+                    Now that we have the {elif} command, we can let the game decide if someone has won and it can stop asking us!
 
-                    Örnek kodda kazanmak için gerekenleri eklediğimizi görüyorsunuz (yatay, dikey veya çapraz olarak arka arkaya 3 nokta).
-                    Bunları 46'dan 69'a kadar olan satırlarda bulabilirsiniz. Gereksinim her karşılandığında (yani bir oyuncu kazandığında) oyun değişkeninin 'bitti' olarak ayarlandığını görebilirsiniz.
-                    Bu, `{while}` döngüsünün durdurulacağı ve oyunun sona ereceği anlamına gelir.
+                    ### Exercise
+                    ***Paste your code*** Paste your code from the previous level here and make it level 17 proof. In this level you've learned to use a colon everytime you create a block of code. Please add the colons in the correct spots.
+
+                    ***Create a function that detects if someone's won*** We have started the function for you, paste it under the function `print_field` and finish the function. You can see that this first piece of code checks to see if spot 1, 2 and 3 are the same, because if they are you have 3 in a row.
+                    It also checks if they are not a dot, because if they are, the line might have the same symbols on them, but that's just because it's still empty.
+                    If all these conditions are met, the game is over and the winner is printed.
+                    Finish this function with all possible ways to win. This means you have to make this for the other 2 rows, 3 columns and 2 diagonals.
+                    If you've finished all the other options, the function should return the variable `game_over` so we can use it in our game.
+
+                    ***Call the function in the game*** Go to the line `game_over = {ask} 'Did you win?'` and change it to `game_over = {call} detect_winner {with} field, sign`. Now the function will check if there's a winner and the game doesn't need to keep asking anymore!
+
+                    ***Enjoy your game!*** Great job! You have finished the game! Enjoy playing it!
+
                 example_code: |
                     ```
-                    işaret = 'x'
-                    açık_yerler = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-                    oyun = 'devam'
-                    yer_1 = '.'
-                    yer_2 = '.'
-                    yer_3 = '.'
-                    yer_4 = '.'
-                    yer_5 = '.'
-                    yer_6 = '.'
-                    yer_7 = '.'
-                    yer_8 = '.'
-                    yer_9 = '.'
-                    {print} 'TIC TAC TOE!'
-                    {print} yer_1 yer_2 yer_3
-                    {print} yer_4 yer_5 yer_6
-                    {print} yer_7 yer_8 yer_9
-                    {print} ' '
-                    {while} oyun != 'bitti':
-                        seçim = {ask} 'Oyuncu ' işaret ', hangi yer?'
-                        {if} seçim {in} açık_yerler:
-                            {remove} seçim {from} açık_yerler
-                            {if} seçim == 1:
-                                yer_1 = işaret
-                            {if} seçim == 2:
-                                yer_2 = işaret
-                            {if} seçim == 3:
-                                yer_3 = işaret
-                            {if} seçim == 4:
-                                yer_4 = işaret
-                            {if} seçim == 5:
-                                yer_5 = işaret
-                            {if} seçim == 6:
-                                yer_6 = işaret
-                            {if} seçim == 7:
-                                yer_7 = işaret
-                            {if} seçim == 8:
-                                yer_8 = işaret
-                            {if} seçim == 9:
-                                yer_9 = işaret
+                    # Paste your code here and make it level 17 proof
+
+                    # Create a function that detects if someone has won
+                    {define} detect_winner {with} field, sign:
+                        {if} field[1] == field[2] {and} field[2] == field[3] {and} field[1] != '.':
+                            game_over = 'yes'
+                            {print} 'Player ' sign 'wins!'
+                        {elif}:
+                            _
                         {else}:
-                            {print} 'Bu yer doldu'
-                        {print} yer_1 yer_2 yer_3
-                        {print} yer_4 yer_5 yer_6
-                        {print} yer_7 yer_8 yer_9
-                        {print} ' '
-                        {if} yer_1 == yer_2 {and} yer_2 == yer_3 {and} yer_1 != '.':
-                            {print} 'Oyuncu ' işaret ' kazandı!'
-                            oyun = 'bitti'
-                        {elif} yer_4 == yer_5 {and} yer_5 == yer_6 {and} yer_4 != '.':
-                            {print} 'Oyuncu ' işaret ' kazandı!'
-                            oyun = 'bitti'
-                        {elif} yer_7 == yer_8 {and} yer_8 == yer_9 {and} yer_7 != '.':
-                            {print} 'Oyuncu ' işaret ' kazandı!'
-                            oyun = 'bitti'
-                        {elif} yer_1 == yer_4 {and} yer_4 == yer_7 {and} yer_1 != '.':
-                            {print} 'Oyuncu ' işaret ' kazandı!'
-                            oyun = 'bitti'
-                        {elif} yer_2 == yer_5 {and} yer_5 == yer_8 {and} yer_2 != '.':
-                            {print} 'Oyuncu ' işaret ' kazandı!'
-                            oyun = 'bitti'
-                        {elif} yer_3 == yer_6 {and} yer_6 == yer_9 {and} yer_3 != '.':
-                            {print} 'Oyuncu ' işaret ' kazandı!'
-                            oyun = 'bitti'
-                        {elif} yer_1 == yer_5 {and} yer_5 == yer_9 {and} yer_1 != '.':
-                            {print} 'Oyuncu ' işaret ' kazandı!'
-                            oyun = 'bitti'
-                        {elif} yer_3 == yer_5 {and} yer_5 == yer_7 {and} yer_3 != '.':
-                            {print} 'Oyuncu ' işaret ' kazandı!'
-                            oyun = 'bitti'
-                        {else}:
-                            {if} işaret == 'x':
-                                işaret = 'o'
-                            {else}:
-                                işaret = 'x'
+                            game_over = 'no'
+                    {return} _
+                    ```
+    tic_2:
+        name: Tic-Tac-Toe 2
+        default_save_name: Tic
+        description: Play a game of Tic Tac Toe!
+        levels:
+            16:
+                story_text: |
+                    In the previous adventure you've learned how to create a playing field. Now you'll learn how to create the game!
+
+                    ### Exercise
+                    ***Paste your code*** Start by pasting your code from the previous adventure here.
+
+                    ***Add variables*** Underneath your list called `field` we'll add 2 more variables that we'll need to program the game.
+                    The variable `game_over` tells us if the game is over, and should be 'no' at the start of the game.
+                    The variable `sign` tells us if it's the turn of player x or player o. Set the variable to 'x'.
+
+                    ***The game*** First use a {while} command, to make sure the game keeps on playing the variable while game_over is set to no.
+                    During the game, we first ask the player which spot they choose. Then we change the field with the number they chose into their sign.
+                    Then we print the field again and we ask the player if they've won yet. Lastly we want to switch whose turn it is, so if the sign is 'x' it should be 'o' and the other way around.
+
+                    ***Test your game*** Does your game work? Great, have fun playing the game! If not, use the ladybug button to debug your code.
+                    You might have noticed one mistake in the code though, you can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and steal their spot.
+                    That's not fair! Go to the next tab to learn how to fix this problem.
+                example_code: |
+                    ```
+                    # Paste your code from the previous adventure here
+
+                    # Add variables
+                    game_over = _
+                    sign = _
+
+                    # The game
+                    {while} _
+                        choice = _ 'Player ' sign '_?'
+                        field[choice] = _
+                        _ print_field
+                        game_over = {ask} _
+                        {if} sign = 'o'
+                            sign = _
+                        _
+                            sign = _
+                    ```
+    tic_3:
+        name: Tic-Tac-Toe 3
+        default_save_name: Tic
+        description: Play a game of Tic Tac Toe!
+        levels:
+            16:
+                story_text: |
+                    You might have noticed one mistake in the code you've made in the previous adventure. You can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and steal their spot.
+                    That's not fair! In this tab we'll fix that mistake.
+
+                    ### Exercise
+                    ***Paste your code here*** Paste your code from the previous adventure here.
+
+                    ***Fix the mistake*** To fix the mistake we replace the line that says `field[choice] = sign`. This turns any spot that the player has chosen into their sign.
+                    Go to the header that says 'Use this to fix the mistake' and finish the code. We first want to check if the chosen spot is still empty, so `if field[choice] = '.'`. If that is the case, you are allowed to take it.
+                    Then we make an else command and print 'Sorry, this spot is already taken' if the spot is not empty. Lastly, we add a {sleep} command, so the players can actually read the text before it gets cleared again.
+                    Now copy this piece of code and replace the line `field[choice] = sign` with this new piece of code.
+
+                    ***Play your game!*** Now the game should work properly! Good job!
+                    The only flaw is that you can get a bit annoyed that the game keeps asking you if you've won yet. Do you want to fix that? Go to level 17 and we'll fix it!
+                example_code: |
+                    ```
+                    # Paste your code here
+
+                    # Use this to fix the mistake
+                    {if} _ = '.'
+                        field[choice] = sign
+                    {else}
+                        {print} _
+                        _
                     ```
     turtle:
         name: Kaplumbağa
@@ -4317,10 +4736,15 @@ adventures:
                     `{forward}` kullanarak ileriye doğru bir çizgi çizersiniz. Ardındaki sayı kaplumbağanın ne kadar yürüyeceğini belirler. `{turn} {right}` saat yönünde çeyrek tur döner, `{turn} {left}` saat yönünün tersine döner.
 
                     Geriye doğru gitmek istiyorsanız, `{forward}` komutunu eksili bir sayı ile kullanırsınız. Yani örneğin `{forward} -100`
-
+                example_code: |
+                    ```
+                    {forward} 100
+                    {turn} {left}
+                    ```
+                story_text_2: |
                     ### Alıştırma
                     Bu küçük bir merdivenin başlangıcı. Bunu beş basamaklı yapabilir misin?
-                example_code: |
+                example_code_2: |
                     ```
                     {forward} 20
                     {turn} {right}
@@ -4602,7 +5026,7 @@ adventures:
                 example_code: |
                     Hint:
                     ```
-                    chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?
+                    chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?'
                     {if} _
                     ```
             6:
@@ -4722,8 +5146,9 @@ adventures:
                     Recreate the drawings with the turtle!
 
                     <div class="w-full flex flex-row gap-2">
-                    Beehive (6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="200">
-                    Fan (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="200">
+                    Beehive (6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="150">
+                    Fan (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="150">
+                    Snowflake (13) <img src="https://github.com/hedyorg/hedy/assets/80678586/90f56bbb-86e5-448d-8aec-16f8c2c05cf2" width="150">
                     </div>
                 example_code: |
                     Hint Beehive:
@@ -4738,16 +5163,16 @@ adventures:
 
                     Hint Fan:
                     Start out like the fan you made in level 7. Or take a peak at the hint for the beehive, because the codes are very similar.
+
+                    Hint Snowflake: Start by making one 'leg' and repeat it 6 times.
             12:
                 story_text: |
                     ### Exercise
                     Recreate the drawings with the turtle!
+                    Hint: Bracelet designing program. Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
+                    </div>
+                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
                 example_code: |
-                    Hint: Bracelet designing program
-
-
-                    Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
-
                     ```
                     {define} draw_a_square
                     _
@@ -4773,6 +5198,7 @@ adventures:
 
                     Street in different sizes <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
                     Colored street  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
+                    Snow Storm <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
                 example_code: |
                     Hint Street in different sizes
                     ```
@@ -4788,6 +5214,23 @@ adventures:
                     ```
                     {define} draw_a_house {with} chosen_color
                     _
+                    ```
+
+                    Hint Snow Storm
+                    ```
+                    {define} draw_snowflake {with} length, color
+                        _
+
+                    numbers = 10, 20, 30
+                    colors = _
+
+                    {for} i {in} {range} 1 {to} 5
+                        random_number = _
+                        random_color = _
+                        {call} draw_snowflake {with} random_number, random_color
+                        {color} white
+                        {turn} random_number * 5
+                        {forward} 80
                     ```
             14:
                 story_text: |

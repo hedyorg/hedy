@@ -211,9 +211,10 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         // Contains all of the keywords for every level
         const hedyStyleTags: Record<string, Tag> = {
             "print forward turn play color ask is echo sleep Comma": t.keyword,
-            "at random remove from add to if else in not Op": t.keyword,
+            "at random remove from add to if else in not_in Op": t.keyword,
             "repeat times for range with return and or while": t.keyword,
-            "elif def input toList": t.keyword,
+            "elif def input to_list": t.keyword,
+            "true false True False": t.number,
             Comment: t.lineComment,
             "Text": t.name,
             "String": t.string,

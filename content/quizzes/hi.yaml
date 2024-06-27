@@ -1,21 +1,21 @@
 levels:
     1:
         1:
-            question_text: What's this programming language called?
+            question_text: इस प्रोग्रामिंग भाषा को क्या कहा जाता है?
             mp_choice_options:
             -   option: Hedy
-                feedback: Good job!
+                feedback: बहुत बढ़िया!
             -   option: Heddy
-                feedback: Not this one!
+                feedback: ये वाला नहीं!
             -   option: Haydie
-                feedback: Not this one!
+                feedback: ये वाला नहीं!
             -   option: Heidi
-                feedback: Not this one!
-            hint: It's named after Hedy Lamarr.
+                feedback: ये वाला नहीं!
+            hint: इसका नाम हेडी लैमर के नाम पर रखा गया है।
             correct_answer: A
             question_score: '10'
         2:
-            question_text: Which command makes text appear?
+            question_text: हैलो! टेक्स्ट प्रदर्शित करने के लिए रिक्त स्थान पर किसे भरना आवश्यक है?
             code: ___ Hello!
             mp_choice_options:
             -   option: |-
@@ -3832,11 +3832,11 @@ levels:
             code: |-
                 {print} 'The book raffle will start soon'
                 {print} 'Get your tickets now!'
-                {books} = ['Narnia', 'The Hobbit', 'Oliver Twist', 'Harry Potter', 'Green eggs and ham']
+                books = ['Narnia', 'The Hobbit', 'Oliver Twist', 'Harry Potter', 'Green eggs and ham']
                 people = {ask} 'How many raffle tickets are sold?'
-                list_of_raffle_numbers = [1, 2]
+                list_of_numbers = [1, 2]
                 {for} i {in} {range} 3 {to} people
-                    {add} i {to} list_of_raffle_numbers
+                    {add} i {to} list_of_numbers
                 {for} i {in} {range} 1 {to} 5
             mp_choice_options:
             -   option: |-
@@ -4066,7 +4066,7 @@ levels:
             code: |-
                 name = {ask} 'What is your name?'
                 {if} name == 'Hedy':
-                password = {ask} 'What is your password?'
+                    password = {ask} 'What is your password?'
                     {if} password =='turtle123':
                         {print} 'Yey'
                     {else}:

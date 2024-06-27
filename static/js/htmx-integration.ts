@@ -38,7 +38,7 @@ htmx.defineExtension('disable-element', {
  * (Notably: turning <pre>s into Ace editors)
  */
 htmx.onLoad((content) => {
-    initializeHighlightedCodeBlocks(content);
+    initializeHighlightedCodeBlocks(content, true);
     var sortables =  content.querySelectorAll('.sortable');
     for (let i = 0; i < sortables.length; i++) {
         var sortable = sortables[i] as HTMLElement;
@@ -78,4 +78,20 @@ htmx.on('displayAchievements', (ev) => {
         const achievement= payload["achievement"] as Achievement[]
         showAchievements(achievement, payload["reload"], payload["redirect"])
     }
+});
+
+
+htmx.on("htmx:confirm", function(e: any) {
+    e.preventDefault();
+    const modalPrompt = e.target.getAttribute("hx-confirm");
+    // this is to prevent window.confirm. Just passing true to issueRequest isn't enough.
+    if (!modalPrompt) {
+        // if no confirm attribute was attached, just continue with the  request.
+        e.detail.issueRequest(true);
+        return;
+    }
+    modal.confirm(modalPrompt, () => {
+        e.target.removeAttribute("hx-confirm");
+        e.detail.issueRequest(true);
+    });
 });

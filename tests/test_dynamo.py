@@ -4,6 +4,7 @@ import unittest
 from unittest import mock
 
 from website import dynamo
+from website.dynamo import Optional
 
 
 class Helpers:
@@ -21,6 +22,10 @@ class Helpers:
             dict(id='key', sort=2, x=1, y=3, m=9),
             dict(id='key', sort=3, x=1, y=2, m=8))
 
+    def insert_many_sample_datas(self, n):
+        self.insert(*(
+            dict(id='key', sort=i + 1, x=1) for i in range(n)))
+
     def get_pages(self, key, **kwargs):
         ret = []
 
@@ -37,7 +42,9 @@ class Helpers:
 
 class TestDynamoAbstraction(unittest.TestCase, Helpers):
     def setUp(self):
-        self.table = dynamo.Table(dynamo.MemoryStorage(), 'table', 'id')
+        self.table = dynamo.Table(dynamo.MemoryStorage(), 'table', 'id', types={
+            'id': str,
+        })
 
     def test_set_manipulation(self):
         """Test that adding to a set and removing from a set works."""
@@ -80,15 +87,37 @@ class TestDynamoAbstraction(unittest.TestCase, Helpers):
     def test_sets_are_serialized_properly(self):
         """Test that adding to a set and removing from a set works."""
         with with_clean_file('test.json'):
-            table = dynamo.Table(dynamo.MemoryStorage('test.json'), 'table', 'id')
+            table = dynamo.Table(dynamo.MemoryStorage('test.json'), 'table', 'id',
+                                 types={'id': str})
             table.create(dict(
                 id='key',
                 values=set(['a', 'b', 'c']),
             ))
 
-            table = dynamo.Table(dynamo.MemoryStorage('test.json'), 'table', 'id')
+            table = dynamo.Table(dynamo.MemoryStorage('test.json'), 'table', 'id',
+                                 types={'id': str})
             final = table.get(dict(id='key'))
             self.assertEqual(final['values'], set(['a', 'b', 'c']))
+
+    def test_set_validation(self):
+        """Test that adding to a set and removing from a set validates the elements."""
+        self.table = dynamo.Table(dynamo.MemoryStorage(), 'table', 'id', types={
+            'id': str,
+            'values': dynamo.SetOf(str),
+        })
+        self.table.create(dict(
+            id='key',
+            values=set(['a', 'b', 'c']),
+        ))
+
+        self.table.update(dict(id='key'), dict(
+            values=dynamo.DynamoAddToStringSet('x', 'y'),
+        ))
+        # This should not have thrown an exception
+        with self.assertRaises(ValueError):
+            self.table.update(dict(id='key'), dict(
+                values=dynamo.DynamoAddToStringSet(3),
+            ))
 
     def test_batch_get(self):
         self.insert(
@@ -122,6 +151,60 @@ class TestDynamoAbstraction(unittest.TestCase, Helpers):
             'z': None,
         })
 
+    def test_no_memory_sharing_direct(self):
+        """Ensure that changes to objects retrieved from the database do not leak into other operations."""
+        self.table.put({'id': 'key', 'x': 1})
+
+        # WHEN
+        retrieved = self.table.get({'id': 'key'})
+        retrieved['x'] = 666
+
+        # THEN
+        retrieved2 = self.table.get({'id': 'key'})
+        self.assertEqual(retrieved2['x'], 1)
+
+    def test_no_memory_sharing_sublists(self):
+        """Ensure that changes to objects retrieved from the database do not leak into other operations."""
+        # GIVEN
+        self.table.put(dict(
+            id='with_list',
+            sublist=[1]
+        ))
+
+        # WHEN
+        retrieved = self.table.get(dict(id='with_list'))
+        retrieved['sublist'].append(2)
+
+        # THEN
+        retrieved2 = self.table.get(dict(id='with_list'))
+        self.assertEqual(retrieved2['sublist'], [1])
+
+    def test_no_memory_sharing_insert_direct(self):
+        """Ensure that changes to objects we insert aren't accidentally seen by other viewers."""
+        # GIVEN
+        obj = dict(id='lookatme', x=0)
+
+        # WHEN
+        self.table.put(obj)
+        obj['x'] = 1
+
+        # THEN
+        obj2 = self.table.get(dict(id='lookatme'))
+        self.assertEqual(obj2['x'], 0)
+
+    def test_no_memory_sharing_insert_sublist(self):
+        """Ensure that changes to objects we insert aren't accidentally seen by other viewers."""
+        # GIVEN
+        obj = dict(id='lookatme', x=[0])
+
+        # WHEN
+        self.table.put(obj)
+        obj['x'].append(1)
+
+        # THEN
+        obj2 = self.table.get(dict(id='lookatme'))
+        self.assertEqual(obj2['x'], [0])
+
 
 class TestSortKeysInMemory(unittest.TestCase):
     """Test that the operations work on an in-memory table with a sort key."""
@@ -131,7 +214,10 @@ class TestSortKeysInMemory(unittest.TestCase):
             dynamo.MemoryStorage(),
             'table',
             partition_key='id',
-            sort_key='sort')
+            sort_key='sort', types={
+                'id': str,
+                'sort': str,
+            })
 
     def test_put_and_get(self):
         self.table.create(dict(
@@ -173,6 +259,14 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
             'table',
             partition_key='id',
             sort_key='sort',
+            types={
+                'id': str,
+                'sort': int,
+                'x': Optional(int),
+                'y': Optional(int),
+                'm': Optional(int),
+                'n': Optional(int),
+            },
             indexes=[
                 dynamo.Index(
                     'x',
@@ -182,14 +276,14 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
             ])
 
     def test_query(self):
-        self.table.create({'id': 'key', 'sort': 1, 'm': 'val'})
-        self.table.create({'id': 'key', 'sort': 2, 'm': 'another'})
+        self.table.create({'id': 'key', 'sort': 1, 'm': 999})
+        self.table.create({'id': 'key', 'sort': 2, 'm': 888})
 
         ret = list(self.table.get_many({'id': 'key'}))
 
         self.assertEqual(ret, [
-            {'id': 'key', 'sort': 1, 'm': 'val'},
-            {'id': 'key', 'sort': 2, 'm': 'another'}
+            {'id': 'key', 'sort': 1, 'm': 999},
+            {'id': 'key', 'sort': 2, 'm': 888}
         ])
 
     def test_cant_use_array_for_indexed_field(self):
@@ -201,27 +295,27 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
             self.table.create({'id': [1, 2]})
 
     def test_query_with_filter(self):
-        self.table.create({'id': 'key', 'sort': 1, 'm': 'val'})
-        self.table.create({'id': 'key', 'sort': 2, 'm': 'another'})
+        self.table.create({'id': 'key', 'sort': 1, 'm': 999})
+        self.table.create({'id': 'key', 'sort': 2, 'm': 888})
 
-        ret = list(self.table.get_many({'id': 'key'}, filter={'m': 'another'}))
+        ret = list(self.table.get_many({'id': 'key'}, filter={'m': 888}))
 
         self.assertEqual(ret, [
-            {'id': 'key', 'sort': 2, 'm': 'another'}
+            {'id': 'key', 'sort': 2, 'm': 888}
         ])
 
     def test_between_query(self):
-        self.table.create({'id': 'key', 'sort': 1, 'x': 'x'})
-        self.table.create({'id': 'key', 'sort': 2, 'x': 'y'})
-        self.table.create({'id': 'key', 'sort': 3, 'x': 'z'})
+        self.table.create({'id': 'key', 'sort': 1, 'x': 1})
+        self.table.create({'id': 'key', 'sort': 2, 'x': 2})
+        self.table.create({'id': 'key', 'sort': 3, 'x': 3})
 
         ret = list(self.table.get_many({
             'id': 'key',
             'sort': dynamo.Between(2, 5),
         }))
         self.assertEqual(ret, [
-            {'id': 'key', 'sort': 2, 'x': 'y'},
-            {'id': 'key', 'sort': 3, 'x': 'z'},
+            {'id': 'key', 'sort': 2, 'x': 2},
+            {'id': 'key', 'sort': 3, 'x': 3},
         ])
 
     def test_no_superfluous_keys(self):
@@ -229,65 +323,65 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
             self.table.get_many({'m': 'some_value', 'Z': 'some_other_value'})
 
     def test_query_index(self):
-        self.table.create({'id': 'key', 'sort': 1, 'm': 'val'})
-        self.table.create({'id': 'key', 'sort': 2, 'm': 'another'})
+        self.table.create({'id': 'key', 'sort': 1, 'm': 999})
+        self.table.create({'id': 'key', 'sort': 2, 'm': 888})
 
-        ret = list(self.table.get_many({'m': 'val'}))
+        ret = list(self.table.get_many({'m': 999}))
 
         self.assertEqual(ret, [
-            {'id': 'key', 'sort': 1, 'm': 'val'}
+            {'id': 'key', 'sort': 1, 'm': 999}
         ])
 
     def test_query_index_with_filter(self):
-        self.table.create({'id': 'key', 'sort': 1, 'm': 'val', 'p': 'p'})
-        self.table.create({'id': 'key', 'sort': 3, 'm': 'val', 'p': 'p'})
-        self.table.create({'id': 'key', 'sort': 2, 'm': 'another', 'q': 'q'})
+        self.table.create({'id': 'key', 'sort': 1, 'm': 999, 'p': 'p'})
+        self.table.create({'id': 'key', 'sort': 3, 'm': 999, 'p': 'p'})
+        self.table.create({'id': 'key', 'sort': 2, 'm': 888, 'q': 'q'})
 
-        ret = list(self.table.get_many({'m': 'val'}, filter={'p': 'p'}))
+        ret = list(self.table.get_many({'m': 999}, filter={'p': 'p'}))
 
         self.assertEqual(ret, [
-            {'id': 'key', 'sort': 1, 'm': 'val', 'p': 'p'},
-            {'id': 'key', 'sort': 3, 'm': 'val', 'p': 'p'},
+            {'id': 'key', 'sort': 1, 'm': 999, 'p': 'p'},
+            {'id': 'key', 'sort': 3, 'm': 999, 'p': 'p'},
         ])
 
     def test_query_index_with_partition_key(self):
-        self.table.create({'id': 'key', 'sort': 1, 'x': 'val', 'y': 0})
-        self.table.create({'id': 'key', 'sort': 2, 'x': 'val', 'y': 1})
-        self.table.create({'id': 'key', 'sort': 3, 'x': 'val', 'y': 1})
-        self.table.create({'id': 'key', 'sort': 4, 'x': 'another_val', 'y': 2})
+        self.table.create({'id': 'key', 'sort': 1, 'x': 1, 'y': 0})
+        self.table.create({'id': 'key', 'sort': 2, 'x': 1, 'y': 1})
+        self.table.create({'id': 'key', 'sort': 3, 'x': 1, 'y': 1})
+        self.table.create({'id': 'key', 'sort': 4, 'x': 2, 'y': 2})
 
-        ret = list(self.table.get_many({'x': 'val'}))
+        ret = list(self.table.get_many({'x': 1}))
 
         self.assertEqual(ret, [
-            {'id': 'key', 'sort': 1, 'x': 'val', 'y': 0},
-            {'id': 'key', 'sort': 2, 'x': 'val', 'y': 1},
-            {'id': 'key', 'sort': 3, 'x': 'val', 'y': 1}
+            {'id': 'key', 'sort': 1, 'x': 1, 'y': 0},
+            {'id': 'key', 'sort': 2, 'x': 1, 'y': 1},
+            {'id': 'key', 'sort': 3, 'x': 1, 'y': 1}
         ])
 
     def test_query_index_with_partition_sort_key(self):
-        self.table.create({'id': 'key', 'sort': 1, 'x': 'val', 'y': 0})
-        self.table.create({'id': 'key', 'sort': 2, 'x': 'val', 'y': 1})
-        self.table.create({'id': 'key', 'sort': 3, 'x': 'val', 'y': 1})
-        self.table.create({'id': 'key', 'sort': 4, 'x': 'another_val', 'y': 2})
+        self.table.create({'id': 'key', 'sort': 1, 'x': 1, 'y': 0})
+        self.table.create({'id': 'key', 'sort': 2, 'x': 1, 'y': 1})
+        self.table.create({'id': 'key', 'sort': 3, 'x': 1, 'y': 1})
+        self.table.create({'id': 'key', 'sort': 4, 'x': 2, 'y': 2})
 
-        ret = list(self.table.get_many({'x': 'val', 'y': 1}))
+        ret = list(self.table.get_many({'x': 1, 'y': 1}))
 
         self.assertEqual(ret, [
-            {'id': 'key', 'sort': 2, 'x': 'val', 'y': 1},
-            {'id': 'key', 'sort': 3, 'x': 'val', 'y': 1}
+            {'id': 'key', 'sort': 2, 'x': 1, 'y': 1},
+            {'id': 'key', 'sort': 3, 'x': 1, 'y': 1}
         ])
 
     def test_query_index_sort_key_between(self):
-        self.table.create({'id': 'key', 'sort': 1, 'x': 'val', 'y': 1})
-        self.table.create({'id': 'key', 'sort': 2, 'x': 'val', 'y': 3})
-        self.table.create({'id': 'key', 'sort': 3, 'x': 'val', 'y': 6})
+        self.table.create({'id': 'key', 'sort': 1, 'x': 1, 'y': 1})
+        self.table.create({'id': 'key', 'sort': 2, 'x': 1, 'y': 3})
+        self.table.create({'id': 'key', 'sort': 3, 'x': 1, 'y': 6})
 
         ret = list(self.table.get_many({
-            'x': 'val',
+            'x': 1,
             'y': dynamo.Between(2, 5),
         }))
         self.assertEqual(ret, [
-            {'id': 'key', 'sort': 2, 'x': 'val', 'y': 3}
+            {'id': 'key', 'sort': 2, 'x': 1, 'y': 3}
         ])
 
     def test_paginated_query(self):
@@ -300,6 +394,34 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
             [dict(id='key', sort=3, x=1, y=2, m=8)],
         ])
 
+    def test_paginated_query_and_back(self):
+        self.insert_many_sample_datas(5)
+        key = {'id': 'key'}
+        kwargs = {'limit': 2}
+        p1 = self.table.get_many(key, **kwargs)
+        p12 = self.table.get_many(key, **kwargs, pagination_token=p1.next_page_token)
+        p123 = self.table.get_many(key, **kwargs, pagination_token=p12.next_page_token)
+
+        p121 = self.table.get_many(key, **kwargs, pagination_token=p12.prev_page_token)
+        p1212 = self.table.get_many(key, **kwargs, pagination_token=p121.next_page_token)
+        p12123 = self.table.get_many(key, **kwargs, pagination_token=p1212.next_page_token)
+
+        p1232 = self.table.get_many(key, **kwargs, pagination_token=p123.prev_page_token)
+        p12321 = self.table.get_many(key, **kwargs, pagination_token=p1232.prev_page_token)
+
+        for p in [p121, p12321]:
+            self.assertEqual(list(p1), list(p))
+        for p in [p1212, p1232]:
+            self.assertEqual(list(p12), list(p))
+        for p in [p12123]:
+            self.assertEqual(list(p123), list(p))
+
+        self.assertEqual(p1.prev_page_token, None)
+        self.assertEqual(p121.prev_page_token, None)
+        self.assertEqual(p12321.prev_page_token, None)
+        self.assertEqual(p123.next_page_token, None)
+        self.assertEqual(p12123.next_page_token, None)
+
     def test_paginated_query_reverse(self):
         self.insert_sample_data()
         pages = self.get_pages({'id': 'key'}, limit=1, reverse=True)
@@ -309,6 +431,53 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
             [dict(id='key', sort=2, x=1, y=3, m=9)],
             [dict(id='key', sort=1, x=1, y=1, m=9)],
         ])
+
+    def test_get_page_and_back(self):
+        self.insert_many_sample_datas(40)
+
+        def even_only(row):
+            return row['sort'] % 2 == 0
+
+        key = dict(id='key')
+
+        # Get everything forward
+        pages = []
+        pagination_token = None
+        prev_page_token = None
+        while True:
+            page = self.table.get_page(key, 5, pagination_token=pagination_token, client_side_filter=even_only)
+            pages.append(list(page))
+            pagination_token, prev_page_token = page.next_page_token, page.prev_page_token
+            if not pagination_token:
+                break
+
+        # Then get everything backwards
+        prev_pages = []
+        while prev_page_token:
+            page = self.table.get_page(key, 5, pagination_token=prev_page_token, client_side_filter=even_only)
+            prev_pages.insert(0, list(page))
+            prev_page_token = page.prev_page_token
+
+        # Everything except the last page should be the same
+        self.assertGreater(len(pages), 3)
+        self.assertNotIn([], pages)
+        self.assertEqual(pages[:-1], prev_pages)
+
+    def test_get_page_pagination_makes_progress_even_if_cancelled(self):
+        """Even if all elements from a page are rejected and the query is cancelled, next_page_token still makes progress."""
+        self.insert_many_sample_datas(40)
+        key = dict(id='key')
+
+        rows = []
+        pagination_token = None
+        while True:
+            page = self.table.get_page(key, 5, pagination_token=pagination_token,
+                                       client_side_filter=lambda row: row['sort'] > 20, timeout=dynamo.Cancel.immediate())
+            rows.extend(page)
+            pagination_token = page.next_page_token
+            if not pagination_token:
+                break
+        self.assertEqual(20, len(rows))
 
     def test_paginated_query_on_sortkey_index(self):
         self.insert_sample_data()
@@ -364,6 +533,14 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
         self.assertEqual(ret[0], {'id': 'key', 'sort': 3, 'y': 6})
 
         self.assertIsNone(ret.next_page_token)
+
+    def test_scan_all_items_doesnt_return_pagination_key(self):
+        self.insert(
+            dict(id='key', sort=1, y=1),
+            dict(id='key', sort=2, y=3),
+            dict(id='key', sort=3, y=6))
+        page = self.table.scan(limit=3)
+        self.assertIsNone(page.next_page_token)
 
     def test_keys_only_index(self):
         self.insert(
@@ -426,7 +603,10 @@ class TestSortKeysAgainstAws(unittest.TestCase):
                 ''),
             'table',
             partition_key='id',
-            sort_key='sort')
+            sort_key='sort', types={
+                'id': str,
+                'sort': int,
+            })
 
         self.db.query.return_value = {'Items': []}
 
@@ -436,12 +616,43 @@ class TestSortKeysAgainstAws(unittest.TestCase):
             'sort': dynamo.Between(2, 5),
         })
         self.db.query.assert_called_with(
-            KeyConditionExpression='#id = :id AND #sort BETWEEN :sort_min AND :sort_max', ExpressionAttributeValues={
-                ':id': {
-                    'S': 'key'}, ':sort_min': {
-                    'N': '2'}, ':sort_max': {
-                    'N': '5'}}, ExpressionAttributeNames={
-                        '#id': 'id', '#sort': 'sort'}, TableName=mock.ANY, ScanIndexForward=mock.ANY)
+            KeyConditionExpression='#id = :id AND #sort BETWEEN :sort_min AND :sort_max',
+            ExpressionAttributeValues={
+                ':id': {'S': 'key'},
+                ':sort_min': {'N': '2'},
+                ':sort_max': {'N': '5'}
+            }, ExpressionAttributeNames={
+                '#id': 'id',
+                '#sort': 'sort'
+            },
+            TableName=mock.ANY,
+            ScanIndexForward=mock.ANY
+        )
+
+    def test_key_with_hash_in_it(self):
+        self.table = dynamo.Table(
+            dynamo.AwsDynamoStorage(self.db, ''),
+            'table',
+            partition_key='id#key',
+            sort_key='sort#key',
+        )
+        self.table.get_many({
+            'id#key': 'key',
+            'sort#key': dynamo.Between(2, 5),
+        })
+        self.db.query.assert_called_with(
+            KeyConditionExpression='#id_key = :id_key AND #sort_key BETWEEN :sort_key_min AND :sort_key_max',
+            ExpressionAttributeValues={
+                ':id_key': {'S': 'key'},
+                ':sort_key_min': {'N': '2'},
+                ':sort_key_max': {'N': '5'}
+            }, ExpressionAttributeNames={
+                '#id_key': 'id#key',
+                '#sort_key': 'sort#key'
+            },
+            TableName=mock.ANY,
+            ScanIndexForward=mock.ANY
+        )
 
 
 def try_to_delete(filename):

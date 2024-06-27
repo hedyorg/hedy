@@ -21,6 +21,10 @@ from website import querylog
 
 TOKEN_COOKIE_NAME = config["session"]["cookie_name"]
 
+# A special value in the session, if this is set and we hit a 403 on the
+# very next page load, we redirect to the front page.
+JUST_LOGGED_OUT = 'just-logged-out'
+
 # The session_length in the session is set to 60 * 24 * 14 (in minutes) config.py#13
 # The reset_length in the session is set to 60 * 4 (in minutes) config.py#14
 # We multiply this by 60 to set the session_length to 14 days and reset_length to 4 hours
@@ -98,7 +102,7 @@ def remember_current_user(db_user):
     session["keyword_lang"] = db_user.get("keyword_language", "en")
 
     # Prepare the cached user object
-    session["user"] = pick(db_user, "username", "email", "is_teacher", "second_teacher_in")
+    session["user"] = pick(db_user, "username", "email", "is_teacher", "second_teacher_in", "is_super_teacher")
     session["user"]["second_teacher_in"] = db_user.get("second_teacher_in", [])
     # Classes is a set in dynamo, but it must be converted to an array otherwise it cannot be stored in a session
     session["user"]["classes"] = list(db_user.get("classes", []))
@@ -182,6 +186,11 @@ def is_second_teacher(user, class_id=None):
     return is_teacher(user) and class_id in user.get("second_teacher_in", [])
 
 
+def is_super_teacher(user):
+    # the `is_super_teacher` field is either `0`, `1` or not present.
+    return bool(user.get("is_super_teacher", False))
+
+
 def has_public_profile(user):
     if 'username' not in user or user.get('username') == '':
         return False
@@ -191,6 +200,15 @@ def has_public_profile(user):
     return has_public_profile
 
 # Thanks to https://stackoverflow.com/a/34499643
+
+
+def hide_explore(user):
+    if 'username' not in user or user.get('username') == '':
+        return False
+    username = user.get('username')
+    customizations = g.db.get_student_class_customizations(username)
+    hide_explore = True if customizations and 'hide_explore' in customizations.get('other_settings') else False
+    return hide_explore
 
 
 def requires_login(f):
@@ -213,8 +231,9 @@ def requires_login(f):
 
     @wraps(f)
     def inner(*args, **kws):
+        just_logged_out = session.pop(JUST_LOGGED_OUT, False)
         if not is_user_logged_in():
-            return utils.error_page(error=403)
+            return redirect('/') if just_logged_out else utils.error_page(error=401)
         # The reason we pass by keyword argument is to make this
         # work logically both for free-floating functions as well
         # as [unbound] class methods.
@@ -249,8 +268,9 @@ def requires_admin(f):
 
     @wraps(f)
     def inner(*args, **kws):
+        just_logged_out = session.pop(JUST_LOGGED_OUT, False)
         if not is_user_logged_in() or not is_admin(current_user()):
-            return utils.error_page(error=403, ui_message=gettext("unauthorized"))
+            return redirect('/') if just_logged_out else utils.error_page(error=401, ui_message=gettext("unauthorized"))
         return f(*args, user=current_user(), **kws)
 
     return inner
@@ -264,8 +284,25 @@ def requires_teacher(f):
 
     @wraps(f)
     def inner(*args, **kws):
+        just_logged_out = session.pop(JUST_LOGGED_OUT, False)
         if not is_user_logged_in() or not is_teacher(current_user()):
-            return utils.error_page(error=403, ui_message=gettext("unauthorized"))
+            return redirect('/') if just_logged_out else utils.error_page(error=401, ui_message=gettext("unauthorized"))
+        return f(*args, user=current_user(), **kws)
+
+    return inner
+
+
+def requires_super_teacher(f):
+    """Similar to 'requires_login', but also tests that the user is a super teacher.
+
+    The decorated function MUST declare an argument named 'user'.
+    """
+
+    @wraps(f)
+    def inner(*args, **kws):
+        just_logged_out = session.pop(JUST_LOGGED_OUT, False)
+        if not is_user_logged_in() or not is_super_teacher(current_user()):
+            return redirect('/') if just_logged_out else utils.error_page(error=401, ui_message=gettext("unauthorized"))
         return f(*args, user=current_user(), **kws)
 
     return inner

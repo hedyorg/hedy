@@ -1,8 +1,7 @@
 levels:
     1:
         1:
-            story: "In de sleeppuzzels zijn de regels code al voor je geschreven. Je hoeft ze alleen nog maar in de juiste volgorde te plaatsen! Sleep de regels code in je invoerscherm en voer de code uit. Kun jij het programma aan de praat krijgen?\n\n\nJe bent een klant bij bakkerij Hedy. \nJe loopt\
-                \ de bakkerij binnen en wordt verwelkomd door de bakker.\nHij vraagt wat voor taart je wil bestellen en herhaalt het antwoord.\nDaarna wordt je bestelling klaargezet."
+            story: "In de sleeppuzzels zijn de regels code al voor je geschreven. Je hoeft ze alleen nog maar in de juiste volgorde te plaatsen! Sleep de regels code in je invoerscherm en voer de code uit. Kun jij het programma aan de praat krijgen?\n\n\nJe bent een klant bij bakkerij Hedy. \nJe loopt de bakkerij binnen en wordt verwelkomd door de bakker.\nHij vraagt wat voor taart je wil bestellen en herhaalt het antwoord.\nDaarna wordt je bestelling klaargezet."
             code: |-
                 {print} Welkom bij bakkerij Hedy!
                 {ask} Welke taart wilt u bestellen?
@@ -34,8 +33,7 @@ levels:
                 {print} Bedankt voor het winkelen bij ons!
     3:
         1:
-            story: "Het nieuwe schooljaar op Zweinstein gaat van start! \nHet is de taak van de sorteerhoed om jou in te delen in een van de afdelingen. \nBij welke afdeling zou jij willen?\nBen jij een Griffoendor, Huffelpuf, Zwadderich of Ravenklauw. \nVoordat de sorteerhoed zijn keuze bekend maakt,\
-                \ kun je aangeven bij welk huis je niet terecht wil komen."
+            story: "Het nieuwe schooljaar op Zweinstein gaat van start! \nHet is de taak van de sorteerhoed om jou in te delen in een van de afdelingen. \nBij welke afdeling zou jij willen?\nBen jij een Griffoendor, Huffelpuf, Zwadderich of Ravenklauw. \nVoordat de sorteerhoed zijn keuze bekend maakt, kun je aangeven bij welk huis je niet terecht wil komen."
             code: |-
                 {print} De sorteerhoed is er klaar voor om jou in te delen op Zweinstein.
                 afdelingen {is} Griffoendor, Huffelpuf, Zwadderich, Ravenklauw
@@ -138,7 +136,7 @@ levels:
                 Jij en je vrienden spelen Pokémon Go! Maak een programma dat bepaalt in welke kleur alle teams komen:
                 rood, geel of blauw! Pauzeer na iedere indeling eventjes.
             code: |-
-                teams = rood, blauw, geel
+                teams = rood, geel, blauw
                 {print} 'Rood, geel of blauw?'
                 {repeat} 5 {times}
                     {print} 'Jij komt bij team...'
@@ -183,8 +181,8 @@ levels:
     10:
         1:
             story: |-
-                Help deze familie een schema te maken voor wie wanneer wat moet koken. Zorg met de `{remove}` commando's dat er nooit twee dagen hetzelfde wordt gegeten en dat iedereen maar één keer hoeft te koken.
-                **Let op!** De volgorde van de variabelen is eerst dagen, daarna mensen en als laatste diner_opties. Deze volgorde geldt ook bij de `{remove}` commando's.
+                Help deze familie een schema te maken voor wie er moet koken en wat ze moeten maken. Met de `{remove}`-commando's zorgen er voor dat niemand twee keer moet koken en dat er altijd een ander menu is voor elke dag.
+                **Let op!** De variabele volgorde zou moeten zijn: als eerste de dagen, dan de personen en als laatste de diner_opties. Deze volgorde geldt ook voor de `{remove}`-commando's.
             code: |-
                 dagen = maandag, dinsdag, woensdag, donderdag, vrijdag
                 mensen = mama, papa, Martin, Abby, Jesse
@@ -221,7 +219,7 @@ levels:
         2:
             story: |-
                 Maak een programma dat ons de uitslag van de wetenschapswedstrijd kan vertellen. Definieer eerst de variabele deelnemers en daarna de variabele plek.
-                **Tip** Regel 5 is het {sleep} commando en je eindigt met een felicitatie naar de deelnemers.
+                **Tip** Regel 5 zou het sleep (slaap) commando moeten zijn, en op het laatst geef je de felicitaties.
             code: |-
                 {print} 'En dan nu.. de resultaten van de wetenschapswedstrijd'
                 deelnemers = Vivienne, Paul, Trixy, Bianca, Katya

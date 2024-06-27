@@ -35,7 +35,7 @@ _IN: _SPACE ("u" | "in") _SPACE
 _NOT_IN: _SPACE ("ne/nije u" | "not in") _SPACE
 _IF: ("ako" | "if") _SPACE
 _ELSE: "inače" | "else"
-_AND: _SPACE ("i" | "and") _SPACE
+_AND: _SPACE? ("i" | "and") _SPACE
 _REPEAT: ("ponovi" | "repeat") _SPACE
 _TIMES: _SPACE ("vremena" | "times")
 _FOR: ("za" | "for") _SPACE
@@ -44,10 +44,12 @@ _TO: _SPACE ("u" | "to") _SPACE
 _STEP: "korak" | "step"
 _ELIF: _SPACE? ("inače ako" | "elif") _SPACE
 _INPUT: ("ulaz" | "input")
-_OR: _SPACE ("ili" | "or") _SPACE
+_OR: _SPACE? ("ili" | "or") _SPACE
 _WHILE: ("dok" | "while") _SPACE
 _LENGTH: "dužina" | "length"
 _COLOR : ("boja" | "color") _SPACE?
 _PRESSED: ("pritisnuto" | "pressed") _SPACE?
 _BUTTON: ("dugme" | "button") _SPACE?
 clear: ("očisti" | "clear") _SPACE?
+TRUE: ("true" | "True" | "true" | "True") _SPACE?
+FALSE: ("false" | "False" | "false" | "False") _SPACE?

@@ -59,7 +59,7 @@ class TestsLevel8(HedyTester):
 
         # gives the right exception for all levels even though it misses brackets
         # because the indent check happens before parsing
-        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+        self.single_level_tester(code=code, exception=hedy.exceptions.TooFewIndentsStartLevelException)
 
     def test_if_equality_with_is(self):
         code = textwrap.dedent("""\
@@ -240,6 +240,50 @@ class TestsLevel8(HedyTester):
             expected_commands=['is', 'is', 'if', 'in', 'print']
         )
 
+    def test_if_not_in_list_print(self):
+        code = textwrap.dedent("""\
+         letters is a, b, c
+         if d not in letters
+             print 'Not found'""")
+
+        expected = textwrap.dedent("""\
+         letters = ['a', 'b', 'c']
+         if 'd' not in letters:
+           print(f'Not found')""")
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            expected=expected,
+            output='Not found'
+        )
+
+    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    def test_if_not_in_and_in_list_with_string_var_gives_type_error(self, operator):
+        code = textwrap.dedent(f"""\
+        items is red
+        if red {operator} items
+          print 'found!'""")
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException
+        )
+
+    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    def test_if_not_in_and_in_list_with_input_gives_type_error(self, operator):
+        code = textwrap.dedent(f"""\
+            items is ask 'What are the items?'
+            if red {operator} items
+              print 'found!'""")
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException
+        )
+
     def test_if_equality_assign_calc(self):
         code = textwrap.dedent("""\
         cmp is 1
@@ -248,12 +292,12 @@ class TestsLevel8(HedyTester):
         if test is cmp
             acu is acu + 1""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         cmp = '1'
         test = '2'
         acu = '0'
         if convert_numerals('Latin', test) == convert_numerals('Latin', cmp):
-          acu = int(acu) + int(1)""")
+          acu = {self.int_cast_transpiled('acu', False)} + int(1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -357,10 +401,8 @@ class TestsLevel8(HedyTester):
         else
         print 'bah slecht'""")
 
-        # gives the right exception for all levels even though it misses brackets
-        # because the indent check happens before parsing
-        self.multi_level_tester(code=code,
-                                exception=hedy.exceptions.NoIndentationException)
+        self.single_level_tester(code=code,
+                                 exception=hedy.exceptions.TooFewIndentsStartLevelException)
 
     def test_if_equality_print_else_print(self):
         code = textwrap.dedent("""\
@@ -525,7 +567,7 @@ class TestsLevel8(HedyTester):
           repeat 3 times
           print 'hooray!'""")
 
-        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+        self.single_level_tester(code=code, exception=hedy.exceptions.TooFewIndentsStartLevelException)
 
     def test_repeat_repair_too_few_indents(self):
         code = textwrap.dedent("""\
@@ -538,9 +580,9 @@ class TestsLevel8(HedyTester):
              print('repair')
              print('me')""")
 
-        self.multi_level_tester(
+        self.single_level_tester(
             code=code,
-            exception=hedy.exceptions.NoIndentationException,
+            exception=hedy.exceptions.TooFewIndentsStartLevelException,
             extra_check_function=(lambda x: x.exception.fixed_code == fixed_code)
         )
 
@@ -554,9 +596,9 @@ class TestsLevel8(HedyTester):
           print('repair')
           print('me')""")
 
-        self.multi_level_tester(
+        self.single_level_tester(
             code=code,
-            exception=hedy.exceptions.IndentationException,
+            exception=hedy.exceptions.TooManyIndentsStartLevelException,
             extra_check_function=(lambda x: x.exception.fixed_code == fixed_code)
         )
 
@@ -565,9 +607,9 @@ class TestsLevel8(HedyTester):
         print('repair')
            print('me')""")
 
-        self.multi_level_tester(
+        self.single_level_tester(
             code=code,
-            exception=hedy.exceptions.IndentationException
+            exception=hedy.exceptions.TooManyIndentsStartLevelException
         )
 
     def test_repeat_turtle(self):
@@ -576,7 +618,7 @@ class TestsLevel8(HedyTester):
                 forward 100""")
 
         expected = HedyTester.dedent(
-            "for i in range(int('3')):",
+            f"for __i in range({self.int_cast_transpiled(3)}):",
             (HedyTester.forward_transpiled(100, self.level), '  '))
 
         self.multi_level_tester(
@@ -591,8 +633,8 @@ class TestsLevel8(HedyTester):
         repeat 5 times
             print 'koekoek'""")
 
-        expected = textwrap.dedent("""\
-        for i in range(int('5')):
+        expected = textwrap.dedent(f"""\
+        for __i in range({self.int_cast_transpiled(5)}):
           print(f'koekoek')
           time.sleep(0.1)""")
 
@@ -604,11 +646,11 @@ class TestsLevel8(HedyTester):
         repeat n times
             print 'me wants a cookie!'""")
 
-        expected = textwrap.dedent("""\
-        n = '5'
-        for i in range(int(n)):
-          print(f'me wants a cookie!')
-          time.sleep(0.1)""")
+        expected = textwrap.dedent(f"""\
+            n = '5'
+            for __i in range({self.int_cast_transpiled('n', quotes=False)}):
+              print(f'me wants a cookie!')
+              time.sleep(0.1)""")
 
         output = textwrap.dedent("""\
         me wants a cookie!
@@ -624,8 +666,8 @@ class TestsLevel8(HedyTester):
         repeat ٥ times
             print 'koekoek'""")
 
-        expected = textwrap.dedent("""\
-        for i in range(int('5')):
+        expected = textwrap.dedent(f"""\
+        for __i in range({self.int_cast_transpiled(5)}):
           print(f'koekoek')
           time.sleep(0.1)""")
 
@@ -637,11 +679,11 @@ class TestsLevel8(HedyTester):
         repeat n times
             print 'me wants a cookie!'""")
 
-        expected = textwrap.dedent("""\
-        n = '٥'
-        for i in range(int(n)):
-          print(f'me wants a cookie!')
-          time.sleep(0.1)""")
+        expected = textwrap.dedent(f"""\
+            n = '٥'
+            for __i in range({self.int_cast_transpiled('n', quotes=False)}):
+              print(f'me wants a cookie!')
+              time.sleep(0.1)""")
 
         output = textwrap.dedent("""\
         me wants a cookie!
@@ -658,11 +700,11 @@ class TestsLevel8(HedyTester):
         repeat állatok times
             print 'me wants a cookie!'""")
 
-        expected = textwrap.dedent("""\
-        állatok = '5'
-        for i in range(int(állatok)):
-          print(f'me wants a cookie!')
-          time.sleep(0.1)""")
+        expected = textwrap.dedent(f"""\
+            állatok = '5'
+            for __i in range({self.int_cast_transpiled('állatok', quotes=False)}):
+              print(f'me wants a cookie!')
+              time.sleep(0.1)""")
 
         output = textwrap.dedent("""\
         me wants a cookie!
@@ -691,11 +733,11 @@ class TestsLevel8(HedyTester):
             print count ' times 12 is ' count * 12
             count is count + 1""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         count = '1'
-        for i in range(int('12')):
-          print(f'{count} times 12 is {int(count) * int(12)}')
-          count = int(count) + int(1)
+        for __i in range({self.int_cast_transpiled(12)}):
+          print(f'{{count}} times 12 is {{{self.int_cast_transpiled('count', False)} * int(12)}}')
+          count = {self.int_cast_transpiled('count', False)} + int(1)
           time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -706,8 +748,8 @@ class TestsLevel8(HedyTester):
             print 'koekoek'
             print 'koekoek'""")
 
-        expected = textwrap.dedent("""\
-        for i in range(int('5')):
+        expected = textwrap.dedent(f"""\
+        for __i in range({self.int_cast_transpiled(5)}):
           print(f'koekoek')
           print(f'koekoek')
           time.sleep(0.1)""")
@@ -752,11 +794,11 @@ class TestsLevel8(HedyTester):
         repeat n times
             print 'n'""")
 
-        expected = textwrap.dedent("""\
-        n = input(f'How many times?')
-        for i in range(int(n)):
-          print(f'n')
-          time.sleep(0.1)""")
+        expected = textwrap.dedent(f"""\
+            n = input(f'How many times?')
+            for __i in range({self.int_cast_transpiled('n', quotes=False)}):
+              print(f'n')
+              time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -768,7 +810,7 @@ class TestsLevel8(HedyTester):
             print 'me wants a cookie!'""")
 
         expected = textwrap.dedent(f"""\
-        for i in range(int('{int(number)}')):
+        for __i in range({self.int_cast_transpiled(int(number))}):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -786,8 +828,8 @@ class TestsLevel8(HedyTester):
         repeat 10 times
             print 'me wants a cookie!'""")
 
-        expected = textwrap.dedent("""\
-        for i in range(int('10')):
+        expected = textwrap.dedent(f"""\
+        for __i in range({self.int_cast_transpiled(10)}):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -818,12 +860,12 @@ class TestsLevel8(HedyTester):
             print 'me wants a cookie!'
         print i""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         i = 'hallo!'
-        for _i in range(int('5')):
+        for __i in range({self.int_cast_transpiled(5)}):
           print(f'me wants a cookie!')
           time.sleep(0.1)
-        print(f'{i}')""")
+        print(f'{{i}}')""")
 
         output = textwrap.dedent("""\
         me wants a cookie!
@@ -841,6 +883,14 @@ class TestsLevel8(HedyTester):
             max_level=11
         )
 
+    def test_repeat_without_body_gives_error(self):
+        code = "repeat 5 times"
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingInnerCommandException,
+        )
+
     #
     # negative tests
     #
@@ -856,7 +906,7 @@ class TestsLevel8(HedyTester):
                 prijs is prijs + 1
         print 'Dat is in totaal ' prijs ' euro.'""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.LockedLanguageFeatureException)
+        self.single_level_tester(code=code, exception=hedy.exceptions.TooManyIndentsStartLevelException)
 
     def test_if_repeat_gives_error(self):
         code = textwrap.dedent("""\
@@ -865,7 +915,7 @@ class TestsLevel8(HedyTester):
             repeat 3 times
                 print 'mooi'""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.LockedLanguageFeatureException)
+        self.single_level_tester(code=code, exception=hedy.exceptions.TooManyIndentsStartLevelException)
 
     #
     # if pressed tests
@@ -878,22 +928,14 @@ class TestsLevel8(HedyTester):
         else
             print 'other key'""")
         expected = HedyTester.dedent("""\
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'x':
-              print(f'it is a letter key')
-              break
-            # End of PyGame Event Handler    
-            else:
-              print(f'other key')
-              break""")
+         if_pressed_mapping = {"else": "if_pressed_default_else"}
+         if_pressed_mapping['x'] = 'if_pressed_x_'
+         def if_pressed_x_():
+             print(f'it is a letter key')
+         if_pressed_mapping['else'] = 'if_pressed_else_'
+         def if_pressed_else_():
+             print(f'other key')
+         extensions.if_pressed(if_pressed_mapping)""")
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_double_if_pressed(self):
@@ -908,38 +950,22 @@ class TestsLevel8(HedyTester):
           print 'other key'""")
 
         expected = HedyTester.dedent("""\
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'x':
+          if_pressed_mapping = {"else": "if_pressed_default_else"}
+          if_pressed_mapping['x'] = 'if_pressed_x_'
+          def if_pressed_x_():
               print(f'first key')
-              break
-            # End of PyGame Event Handler    
-            else:
+          if_pressed_mapping['else'] = 'if_pressed_else_'
+          def if_pressed_else_():
               print(f'other key')
-              break
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'y':
+          extensions.if_pressed(if_pressed_mapping)
+          if_pressed_mapping = {"else": "if_pressed_default_else"}
+          if_pressed_mapping['y'] = 'if_pressed_y_'
+          def if_pressed_y_():
               print(f'second key')
-              break
-            # End of PyGame Event Handler    
-            else:
+          if_pressed_mapping['else'] = 'if_pressed_else_'
+          def if_pressed_else_():
               print(f'other key')
-              break""")
+          extensions.if_pressed(if_pressed_mapping)""")
 
         self.maxDiff = None
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -952,22 +978,14 @@ class TestsLevel8(HedyTester):
             print 'it is something else'""")
 
         expected = HedyTester.dedent("""\
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == '1':
-              print(f'it is a number key')
-              break
-            # End of PyGame Event Handler    
-            else:
-              print(f'it is something else')
-              break""")
+         if_pressed_mapping = {"else": "if_pressed_default_else"}
+         if_pressed_mapping['1'] = 'if_pressed_1_'
+         def if_pressed_1_():
+             print(f'it is a number key')
+         if_pressed_mapping['else'] = 'if_pressed_else_'
+         def if_pressed_else_():
+             print(f'it is something else')
+         extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -984,39 +1002,23 @@ class TestsLevel8(HedyTester):
           print 'other'""")
 
         expected = textwrap.dedent("""\
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'a':
-              print(f'A is pressed')
-              break
-            # End of PyGame Event Handler    
-            else:
-              print(f'other')
-              break
-        print(f'Press another button')
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'b':
-              print(f'B is pressed')
-              break
-            # End of PyGame Event Handler    
-            else:
-              print(f'other')
-              break""")
+         if_pressed_mapping = {"else": "if_pressed_default_else"}
+         if_pressed_mapping['a'] = 'if_pressed_a_'
+         def if_pressed_a_():
+             print(f'A is pressed')
+         if_pressed_mapping['else'] = 'if_pressed_else_'
+         def if_pressed_else_():
+             print(f'other')
+         extensions.if_pressed(if_pressed_mapping)
+         print(f'Press another button')
+         if_pressed_mapping = {"else": "if_pressed_default_else"}
+         if_pressed_mapping['b'] = 'if_pressed_b_'
+         def if_pressed_b_():
+             print(f'B is pressed')
+         if_pressed_mapping['else'] = 'if_pressed_else_'
+         def if_pressed_else_():
+             print(f'other')
+         extensions.if_pressed(if_pressed_mapping)""")
 
         self.maxDiff = None
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -1024,7 +1026,7 @@ class TestsLevel8(HedyTester):
     def test_if_pressed_missing_else_gives_error(self):
         code = textwrap.dedent("""\
         prind skipping
-        if x is pressed 
+        if x is pressed
           print 'missing else!'""")
 
         expected = textwrap.dedent("""\
@@ -1043,16 +1045,14 @@ class TestsLevel8(HedyTester):
             max_level=14
         )
 
-    def test_if_no_indent_after_pressed_and_else_gives_noindent_error(self):
+    def test_if_no_indent_after_pressed_and_else_gives_error(self):
         code = textwrap.dedent("""\
         if x is pressed
         print 'no indent!'
         else
         print 'no indent again!'""")
 
-        # gives the right exception for all levels even though it misses brackets
-        # because the indent check happens before parsing
-        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+        self.single_level_tester(code=code, exception=hedy.exceptions.TooFewIndentsStartLevelException)
 
     #
     # button tests
@@ -1065,24 +1065,16 @@ class TestsLevel8(HedyTester):
         else
           print 'other is pressed'""")
 
-        expected = HedyTester.dedent(f"""\
-        create_button('PRINT')
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'PRINT':
-              print(f'The button got pressed!')
-              break
-            # End of PyGame Event Handler    
-            else:
-              print(f'other is pressed')
-              break""")
+        expected = HedyTester.dedent("""\
+         create_button('PRINT')
+         if_pressed_mapping = {"else": "if_pressed_default_else"}
+         if_pressed_mapping['PRINT'] = 'if_pressed_PRINT_'
+         def if_pressed_PRINT_():
+             print(f'The button got pressed!')
+         if_pressed_mapping['else'] = 'if_pressed_else_'
+         def if_pressed_else_():
+             print(f'other is pressed')
+         extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -1094,24 +1086,16 @@ class TestsLevel8(HedyTester):
         else
           print 'something else'""")
 
-        expected = HedyTester.dedent(f"""\
-        create_button('BUTTON1')
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'BUTTON1':
-              create_button('BUTTON2')
-              break
-            # End of PyGame Event Handler    
-            else:
-              print(f'something else')
-              break""")
+        expected = HedyTester.dedent("""\
+         create_button('BUTTON1')
+         if_pressed_mapping = {"else": "if_pressed_default_else"}
+         if_pressed_mapping['BUTTON1'] = 'if_pressed_BUTTON1_'
+         def if_pressed_BUTTON1_():
+             create_button('BUTTON2')
+         if_pressed_mapping['else'] = 'if_pressed_else_'
+         def if_pressed_else_():
+             print(f'something else')
+         extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -1124,25 +1108,17 @@ class TestsLevel8(HedyTester):
         else
             print 'oof :('""")
 
-        expected = HedyTester.dedent(f"""\
-        create_button('PRINT')
-        create_button('PRINT2')
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'PRINT':
-              print(f'The button got pressed!')
-              break
-            # End of PyGame Event Handler    
-            else:
-              print(f'oof :(')
-              break""")
+        expected = HedyTester.dedent("""\
+         create_button('PRINT')
+         create_button('PRINT2')
+         if_pressed_mapping = {"else": "if_pressed_default_else"}
+         if_pressed_mapping['PRINT'] = 'if_pressed_PRINT_'
+         def if_pressed_PRINT_():
+             print(f'The button got pressed!')
+         if_pressed_mapping['else'] = 'if_pressed_else_'
+         def if_pressed_else_():
+             print(f'oof :(')
+         extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -1157,16 +1133,16 @@ class TestsLevel8(HedyTester):
         print 'Thank you for ordering!'
         print 'Enjoy your meal!'""")
 
-        expected_code = textwrap.dedent("""\
-        print(f'Welcome to Restaurant Chez Hedy!')
-        people = input(f'How many people will be joining us today?')
-        print(f'Great!')
-        for i in range(int(people)):
-          food = input(f'What would you like to order?')
-          print(f'{food}')
-          time.sleep(0.1)
-        print(f'Thank you for ordering!')
-        print(f'Enjoy your meal!')""")
+        expected_code = textwrap.dedent(f"""\
+            print(f'Welcome to Restaurant Chez Hedy!')
+            people = input(f'How many people will be joining us today?')
+            print(f'Great!')
+            for __i in range({self.int_cast_transpiled('people', quotes=False)}):
+              food = input(f'What would you like to order?')
+              print(f'{{food}}')
+              time.sleep(0.1)
+            print(f'Thank you for ordering!')
+            print(f'Enjoy your meal!')""")
 
         expected_source_map = {
             '1/1-1/41': '1/1-1/43',
@@ -1195,19 +1171,16 @@ class TestsLevel8(HedyTester):
                 print note
                 play note""")
 
-        expected = textwrap.dedent("""\
-            for i in range(int('10')):
+        expected = textwrap.dedent(f"""\
+            for __i in range({self.int_cast_transpiled(10)}):
               notes = ['C4', 'E4', 'D4', 'F4', 'G4']
               try:
                 random.choice(notes)
               except IndexError:
-                raise Exception('catch_index_exception')
+                raise Exception({self.index_exception_transpiled()})
               note = random.choice(notes)
-              print(f'{note}')
-              chosen_note = str(note).upper()
-              if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
-                  raise Exception('catch_value_exception')
-              play(notes_mapping.get(chosen_note, chosen_note))
+              print(f'{{note}}')
+              play(note_with_error(note, {self.value_exception_transpiled()}))
               time.sleep(0.5)
               time.sleep(0.1)""")
 
@@ -1227,15 +1200,36 @@ class TestsLevel8(HedyTester):
         repeat 10 times
             play notes at random""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         notes = ['1', '2', '3']
-        for i in range(int('10')):
-          chosen_note = str(random.choice(notes)).upper()
-          if chosen_note not in notes_mapping.keys() and chosen_note not in notes_mapping.values():
-              raise Exception('catch_value_exception')
-          play(notes_mapping.get(chosen_note, chosen_note))
+        for __i in range({self.int_cast_transpiled(10)}):
+          play(note_with_error(random.choice(notes), {self.value_exception_transpiled()}))
           time.sleep(0.5)
           time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            unused_allowed=True,
+            expected=expected,
+            max_level=11
+        )
+
+    def test_play_repeat_with_calc(self):
+        code = textwrap.dedent("""\
+        note is 34
+        repeat 3 times
+            play note
+            note is note + 1""")
+
+        expected = HedyTester.dedent(
+            f"""\
+            note = '34'
+            for __i in range({self.int_cast_transpiled(3)}):""",
+            (self.play_transpiled('note', quotes=False), '  '),
+            (f"note = {self.int_cast_transpiled('note', False)} + int(1)", '  '),
+            ("time.sleep(0.1)", '  '))
 
         self.multi_level_tester(
             code=code,

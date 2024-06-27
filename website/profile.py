@@ -2,7 +2,7 @@ import datetime
 import hashlib
 
 import requests
-from flask import jsonify, request, session
+from flask import make_response, request, session
 from flask_babel import gettext
 
 from safe_format import safe_format
@@ -35,21 +35,21 @@ class ProfileModule(WebsiteModule):
     def update_profile(self, user):
         body = request.json
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("language"), str) or body.get("language") not in ALL_LANGUAGES.keys():
-            return gettext("language_invalid"), 400
+            return make_response(gettext("language_invalid"), 400)
         if (
             not isinstance(body.get("keyword_language"), str)
             or body.get("keyword_language") not in ["en", body.get("language")]
             or body.get("keyword_language") not in ALL_KEYWORD_LANGUAGES.keys()
         ):
-            return gettext("keyword_language_invalid"), 400
+            return make_response(gettext("keyword_language_invalid"), 400)
 
         # Mail is a unique field, only mandatory if the user doesn't have a related teacher (and no mail address)
         user = self.db.user_by_username(user["username"])
         if not user.get("teacher") or "email" in body:
             if not isinstance(body.get("email"), str) or not valid_email(body["email"]):
-                return gettext("email_invalid"), 400
+                return make_response(gettext("email_invalid"), 400)
 
         # Validations, optional fields
         if "birth_year" in body:
@@ -62,10 +62,10 @@ class ProfileModule(WebsiteModule):
                 return safe_format(gettext("year_invalid"), current_year=str(year)), 400
         if "gender" in body:
             if body["gender"] not in ["m", "f", "o"]:
-                return gettext("gender_invalid"), 400
+                return make_response(gettext("gender_invalid"), 400)
         if "country" in body:
             if not body["country"] in COUNTRIES:
-                return gettext("country_invalid"), 400
+                return make_response(gettext("country_invalid"), 400)
 
         resp = {}
         if "email" in body:
@@ -74,7 +74,7 @@ class ProfileModule(WebsiteModule):
             if email != user.get("email"):
                 exists = self.db.user_by_email(email)
                 if exists:
-                    return gettext("exists_email"), 403
+                    return make_response(gettext("exists_email"), 403)
                 token = make_salt()
                 hashed_token = password_hash(token, make_salt())
                 self.db.update_user(user["username"], {"email": email, "verification_pending": hashed_token})
@@ -133,7 +133,7 @@ class ProfileModule(WebsiteModule):
             resp["message"] = gettext("profile_updated")
 
         remember_current_user(self.db.user_by_username(user["username"]))
-        return jsonify(resp)
+        return make_response(resp, 200)
 
     @route("/", methods=["GET"])
     @requires_login
@@ -141,7 +141,7 @@ class ProfileModule(WebsiteModule):
         # The user object we got from 'requires_login' is not fully hydrated yet. Look up the database user.
         user = self.db.user_by_username(user["username"])
 
-        output = {"username": user["username"], "email": user["email"], "language": user.get("language", "en")}
+        output = {"username": user["username"], "email": user.get("email", ""), "language": user.get("language", "en")}
         for field in ["birth_year", "country", "gender", "prog_experience", "experience_languages"]:
             if field in user:
                 output[field] = user[field]
@@ -152,4 +152,4 @@ class ProfileModule(WebsiteModule):
 
         output["session_expires_at"] = timems() + SESSION_LENGTH * 1000
 
-        return jsonify(output), 200
+        return make_response(output, 200)
