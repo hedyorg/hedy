@@ -268,10 +268,6 @@ class Database:
 
         # Class customizations
         #
-        # Various columns with different meanings:
-        #
-        # These I'm quite sure about:
-        #
         # - id (str): the identifier of the class this customization set applies to
         # - levels (int[]): the levels available in this class
         # - opening_dates ({ str -> str }): key is level nr as string, value is an ISO date
@@ -280,17 +276,10 @@ class Database:
         #     for every level (key as string) the adventures to show, in order. If from_teacher
         #     is False, the name of a built-in adventure. If from_teacher is true, name is the
         #     id of a adventure in the ADVENTURES table. The id may refer to an adventure that
-        #     has been deleted. In that case, it should be ignored.
-        #
-        # These not so much:
-        #
-        # - level_thresholds ({ "quiz" -> int }): TODO don't know what this does
-        # - adventures: ({ str -> int[] }): probably a map indicating, for each adventure, what
-        #      levels it should be available in. It's sort of redundant with sorted_adventures,
-        #      so I'm not sure why it exists.
-        # - teacher_adventures (str[]): a list of all ids of the adventures that have been made
-        #      available to this class. This list is deprecated, all adventures a teacher created
-        #      are now automatically available to all of their classes.
+        #     has been deleted. In that case, it should be ignored
+        # - level_thresholds ({ "quiz" -> int }): the minimum quiz grade that unlocks the next level
+        # - quiz_parsons_tabs_migrated if the customizations in this tab already have quiz
+        #    and parson tabs in sorted adventures
         self.customizations = dynamo.Table(storage, "class_customizations", partition_key="id",
                                            types=only_in_dev({
                                                'id': str,
