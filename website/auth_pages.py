@@ -2,8 +2,6 @@ import datetime
 
 from flask import make_response, redirect, request, session
 from flask_babel import gettext
-
-from app import limiter
 from config import config
 from safe_format import safe_format
 from hedy_content import ALL_LANGUAGES, COUNTRIES
@@ -30,7 +28,7 @@ from website.auth import (
     send_email_template,
     validate_signup_data,
 )
-
+from utils import limiter
 from .database import Database
 from .website_module import WebsiteModule, route
 
@@ -371,8 +369,8 @@ class AuthModule(WebsiteModule):
 
             return make_response({"message": gettext("sent_password_recovery")}, 200)
 
-    @limiter.limit("100/day;10/hour;1/minute")
     @route("/reset", methods=["POST"])
+    @limiter.limit("1/day;1/hour;1/minute")
     def reset(self):
         body = request.json
         # Validations
