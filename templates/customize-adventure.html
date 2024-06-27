@@ -192,7 +192,7 @@ onclick="window.open('/for-teachers', '_self');">
                                                 hx-trigger="keyup[keyCode == 13]"
                                                 data-autosaved="true"
                                                 hx-post="/tags/create/{{ adventure.id }}" 
-                                                hx-target="#tags-list"
+                                                hx-target="#tags_list"
                                                 hx-swap="outerHTML"
                                                 _="on click event.stopPropagation()
                                                     on keypress if event.keyCode == 13 event.stopPropagation() end
@@ -202,17 +202,17 @@ onclick="window.open('/for-teachers', '_self');">
                                             <button class="green-btn" id="add_adventure_tags"
                                                 hx-trigger="click"
                                                 hx-post="/tags/create/{{adventure.id}}"
-                                                hx-target="#tags-list"
+                                                hx-target="#tags_list"
                                                 hx-swap="outerHTML"
                                                 hx-include="[name='tag']"                                        
                                                 _="on htmx:afterRequest set value of #search_tags_input to ''"
                                                 >{{_('add')}}</button>
             
                                             <div
-                                                id="tags-dropdown"
+                                                id="tags_dropdown"
                                                 hx-trigger="load"
                                                 hx-get="/tags?adventure_id={{adventure.id}}"
-                                                hx-target="#tags-dropdown"
+                                                hx-target="#tags_dropdown"
                                                 hx-swap="outerHTML"
                                             ></div>
                                     </div>

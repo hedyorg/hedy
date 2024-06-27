@@ -11,7 +11,7 @@ it('auto save should work when changing the name field.', () => {
   goToEditAdventure();
 
   // the rest of the fields work similar to this.
-  cy.getDataCy('custom_adventure_name')
+  cy.get('#custom_adventure_name')
     .clear()
     .type('changed')
 
@@ -25,7 +25,7 @@ it('auto save should work when changing the name field.', () => {
     .should('be.visible')
   
   // update it to its expected name
-  cy.getDataCy('custom_adventure_name')
+  cy.get('#custom_adventure_name')
     .clear()
     .type('adventure1')
   cy.wait(1000)

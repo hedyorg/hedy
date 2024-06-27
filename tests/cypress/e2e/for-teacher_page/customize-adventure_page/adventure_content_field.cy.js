@@ -9,7 +9,7 @@ teachers.forEach((teacher) => {
     loginForTeacher(teacher);
     goToEditAdventure();
     // navigate to the editor's view
-    cy.getBySel("adventure").click();
+    cy.getDataCy("adventure").click();
 
     cy.window().then(win => {
       const editor = win.ckEditor;
