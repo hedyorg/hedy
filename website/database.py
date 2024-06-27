@@ -78,10 +78,10 @@ CURRENT_USER_EPOCH = 1
 
 class Database:
     def __init__(self):
-        self.CLASS_ERRORS = dynamo.Table(storage, "class_errors", "id",
+        self.class_errors = dynamo.Table(storage, "class_errors", "id",
                                          types=only_in_dev({'id': str}),
                                          )
-        self.USERS = dynamo.Table(storage, 'users', 'username',
+        self.users = dynamo.Table(storage, 'users', 'username',
                                   types=only_in_dev({
                                       'username': str,
                                       'password': str,
@@ -111,7 +111,7 @@ class Database:
                                       dynamo.Index('epoch', sort_key='created')
                                   ]
                                   )
-        self.TOKENS = dynamo.Table(storage, 'tokens', 'id',
+        self.tokens = dynamo.Table(storage, 'tokens', 'id',
                                    types=only_in_dev({
                                        'id': str,
                                        'username': str,
@@ -121,7 +121,7 @@ class Database:
                                        dynamo.Index('username'),
                                    ]
                                    )
-        self.PROGRAMS = dynamo.Table(storage, "programs", "id",
+        self.programs = dynamo.Table(storage, "programs", "id",
                                      types=only_in_dev({
                                          'id': str,
                                          'session': str,
@@ -151,7 +151,7 @@ class Database:
                                          dynamo.Index('adventure_name', sort_key='date', keys_only=True),
                                      ]
                                      )
-        self.CLASSES = dynamo.Table(storage, "classes", "id",
+        self.classes = dynamo.Table(storage, "classes", "id",
                                     types=only_in_dev({
                                         'id': str,
                                         'teacher': str,
@@ -179,7 +179,7 @@ class Database:
         # - name (str): adventure name
         # - public (int): 1 or 0 whether it can be shared
         # - tags_id (str): id of tags that describe this adventure.
-        self.ADVENTURES = dynamo.Table(storage, "adventures", "id",
+        self.adventures = dynamo.Table(storage, "adventures", "id",
                                        types=only_in_dev({
                                            'id': str,
                                            'date': int,
@@ -198,7 +198,7 @@ class Database:
                                            dynamo.Index("public"),
                                            dynamo.Index("name", sort_key="creator", index_name="name-creator-index")
                                        ])
-        self.INVITATIONS = dynamo.Table(
+        self.invitations = dynamo.Table(
             storage, "invitations", partition_key="username#class_id",
             types=only_in_dev({
                 'username': str,
@@ -222,7 +222,7 @@ class Database:
             - tagged_in ([{ id, public, language }]): tagged in which adventures.
             - popularity (int): # of adventures it's been tagged in.
         """
-        self.TAGS = dynamo.Table(storage, "tags", "id",
+        self.tags = dynamo.Table(storage, "tags", "id",
                                  types=only_in_dev({
                                      'id': str,
                                      'name': str,
@@ -243,7 +243,7 @@ class Database:
         # - responses (str []): the response per question
         # - skip (str): if the survey should never be shown or today date to be reminded later
 
-        self.SURVEYS = dynamo.Table(storage, "surveys", "id",
+        self.surveys = dynamo.Table(storage, "surveys", "id",
                                     types=only_in_dev({
                                         'id': str,
                                         'responses':  Optional(DictOf({
@@ -255,7 +255,7 @@ class Database:
                                     }),
                                     )
 
-        self.FEEDBACK = dynamo.Table(storage, "teacher_feedback", "id",
+        self.feedback = dynamo.Table(storage, "teacher_feedback", "id",
                                      types=only_in_dev({
                                          'id': str,
                                          'username': str,
@@ -291,7 +291,7 @@ class Database:
         # - teacher_adventures (str[]): a list of all ids of the adventures that have been made
         #      available to this class. This list is deprecated, all adventures a teacher created
         #      are now automatically available to all of their classes.
-        self.CUSTOMIZATIONS = dynamo.Table(storage, "class_customizations", partition_key="id",
+        self.customizations = dynamo.Table(storage, "class_customizations", partition_key="id",
                                            types=only_in_dev({
                                                'id': str,
                                                'levels': ListOf(int),
@@ -312,7 +312,7 @@ class Database:
                                                'quiz_parsons_tabs_migrated': Optional(int)
                                            }))
 
-        self.ACHIEVEMENTS = dynamo.Table(storage, "achievements", partition_key="username",
+        self.achievements = dynamo.Table(storage, "achievements", partition_key="username",
                                          types=only_in_dev({
                                              'username': str,
                                              'achieved': Optional(ListOf(str)),
@@ -320,7 +320,7 @@ class Database:
                                              'saved_programs': Optional(int),
                                              'run_programs': Optional(int)
                                          }))
-        self.PUBLIC_PROFILES = dynamo.Table(storage, "public_profiles", partition_key="username",
+        self.public_profiles = dynamo.Table(storage, "public_profiles", partition_key="username",
                                             types=only_in_dev({
                                                 'username': str,
                                                 'image': str,
@@ -328,7 +328,7 @@ class Database:
                                                 'agree_terms': str,
                                                 'tags': Optional(ListOf(str))
                                             }))
-        self.PARSONS = dynamo.Table(storage, "parsons", "id",
+        self.parsons = dynamo.Table(storage, "parsons", "id",
                                     types=only_in_dev({
                                         'id': str,
                                         'username': str,
@@ -346,7 +346,7 @@ class Database:
                                                    'program_id': str
                                                }),
                                                )
-        self.CLASS_ERRORS = dynamo.Table(storage, "class_errors", "id",
+        self.class_errors = dynamo.Table(storage, "class_errors", "id",
                                          types=only_in_dev({'id': str}),
                                          )
 
@@ -369,7 +369,7 @@ class Database:
         # 'levelAttempt' is a combination of level and attemptId, to distinguish attempts
         # by a user. 'level' is padded to 4 characters, then attemptId is added.
         #
-        self.QUIZ_ANSWERS = dynamo.Table(storage, "quizAnswers", partition_key="user", sort_key="levelAttempt",
+        self.quiz_answers = dynamo.Table(storage, "quizAnswers", partition_key="user", sort_key="levelAttempt",
                                          types=only_in_dev({
                                              'user': str,
                                              'levelAttempt': str,
@@ -387,7 +387,7 @@ class Database:
         #   "InvalidSpaceException": 2
         # }
         #
-        self.PROGRAM_STATS = dynamo.Table(
+        self.program_stats = dynamo.Table(
             storage, "program-stats", partition_key="id#level", sort_key="week",
             types=only_in_dev({
                 'id#level': str,
@@ -397,7 +397,7 @@ class Database:
             indexes=[dynamo.Index("id", "week")]
         )
 
-        self.QUIZ_STATS = dynamo.Table(
+        self.quiz_stats = dynamo.Table(
             storage, "quiz-stats", partition_key="id#level", sort_key="week",
             types=only_in_dev({
                 'id#level': str,
@@ -427,12 +427,12 @@ class Database:
         if is_correct:
             updates["correct"] = dynamo.DynamoAddToNumberSet(int(question_number))
 
-        return self.QUIZ_ANSWERS.update(key, updates)
+        return self.quiz_answers.update(key, updates)
 
     def get_quiz_answer(self, username, level, attempt_id):
         """Load a quiz answer from the database."""
 
-        quizAnswers = self.QUIZ_ANSWERS.get({"user": username, "levelAttempt": str(level).zfill(4) + "_" + attempt_id})
+        quizAnswers = self.quiz_answers.get({"user": username, "levelAttempt": str(level).zfill(4) + "_" + attempt_id})
 
         array_quiz_answers = []
         for question_number in range(len(quizAnswers)):
@@ -447,7 +447,7 @@ class Database:
         """
         # FIXME: Query by index, the current behavior is slow for many programs
         # (See https://github.com/hedyorg/hedy/issues/4121)
-        programs = self.PROGRAMS.get_many({"username": username}, reverse=True)
+        programs = self.programs.get_many({"username": username}, reverse=True)
         return [x for x in programs if x.get("level") == int(level)]
 
     def last_level_programs_for_user(self, username, level):
@@ -468,7 +468,7 @@ class Database:
 
         Returns: [{ code, name, program, level, adventure_name, date }]
         """
-        return self.PROGRAMS.get_many({"username": username}, reverse=True)
+        return self.programs.get_many({"username": username}, reverse=True)
 
     def filtered_programs_for_user(self, username, level=None, adventure=None, submitted=None, public=None,
                                    limit=None, pagination_token=None):
@@ -489,7 +489,7 @@ class Database:
 
         # FIXME: Query by index, the current behavior is slow for many programs
         # (See https://github.com/hedyorg/hedy/issues/4121)
-        return self.PROGRAMS.get_page({"username": username},
+        return self.programs.get_page({"username": username},
                                       reverse=True, limit=limit or 50, pagination_token=pagination_token,
                                       client_side_filter=client_side_filter)
 
@@ -498,7 +498,7 @@ class Database:
 
         Returns: { code, name, program, level, adventure_name, date }
         """
-        return self.PROGRAMS.get({"id": id})
+        return self.programs.get({"id": id})
 
     def store_program(self, program):
         """Store a program.
@@ -507,7 +507,7 @@ class Database:
 
         Add an additional indexable field: 'username_level'.
         """
-        self.PROGRAMS.create(
+        self.programs.create(
             dict(program,
                  username_level=f"{program.get('username')}-{program.get('level')}"))
 
@@ -518,25 +518,25 @@ class Database:
 
         Returns the updated state of the program.
         """
-        return self.PROGRAMS.update(dict(id=id), updates)
+        return self.programs.update(dict(id=id), updates)
 
     def set_program_public_by_id(self, id, public):
         """Switch a program to public or private.
 
         Return the updated state of the program.
         """
-        return self.PROGRAMS.update({"id": id}, {"public": 1 if public else 0})
+        return self.programs.update({"id": id}, {"public": 1 if public else 0})
 
     def submit_program_by_id(self, id, submit):
         """Switch a program to submitted.
 
         Return the updated program state.
         """
-        return self.PROGRAMS.update({"id": id}, {"submitted": submit, "date": timems()})
+        return self.programs.update({"id": id}, {"submitted": submit, "date": timems()})
 
     def delete_program_by_id(self, id):
         """Delete a program by id."""
-        self.PROGRAMS.delete({"id": id})
+        self.programs.delete({"id": id})
 
     def student_adventure_by_id(self, id):
         # Fetch a student adventure with id formatted as studentID-adventureName-level
@@ -553,52 +553,52 @@ class Database:
 
     def get_class_errors(self, class_id):
         # Fetch a student adventure with id formatted as studentID-adventureName-level
-        return self.CLASS_ERRORS.get({"id": class_id})
+        return self.class_errors.get({"id": class_id})
 
     def update_class_errors(self, class_errors):
         # Swap the ticked value when a request is sent
-        return self.CLASS_ERRORS.put(class_errors)
+        return self.class_errors.put(class_errors)
 
     def store_class_errors(self, class_errors):
         # create a new class errors object
-        self.CLASS_ERRORS.create(class_errors)
+        self.class_errors.create(class_errors)
         return class_errors
 
     def increase_user_program_count(self, username, delta=1):
         """Increase the program count of a user by the given delta."""
-        return self.USERS.update({"username": username}, {"program_count": dynamo.DynamoIncrement(delta)})
+        return self.users.update({"username": username}, {"program_count": dynamo.DynamoIncrement(delta)})
 
     def user_by_username(self, username):
         """Return a user object from the username."""
-        return self.USERS.get({"username": username.strip().lower()})
+        return self.users.get({"username": username.strip().lower()})
 
     def user_by_email(self, email):
         """Return a user object from the email address."""
-        return self.USERS.get({"email": email.strip().lower()})
+        return self.users.get({"email": email.strip().lower()})
 
     def get_token(self, token_id):
         """Load a token from the database."""
-        return self.TOKENS.get({"id": token_id})
+        return self.tokens.get({"id": token_id})
 
     def store_token(self, token):
         """Store a token in the database."""
-        self.TOKENS.create(token)
+        self.tokens.create(token)
 
     def forget_token(self, token_id):
         """Forget a Token.
 
         Returns the Token that was deleted.
         """
-        return self.TOKENS.delete({"id": token_id})
+        return self.tokens.delete({"id": token_id})
 
     def delete_all_tokens(self, username):
         """Forget all Tokens from a user."""
-        self.TOKENS.del_many({"username": username})
+        self.tokens.del_many({"username": username})
 
     def store_user(self, user):
         """Store a user in the database."""
         user["epoch"] = CURRENT_USER_EPOCH
-        self.USERS.create(user)
+        self.users.create(user)
 
     def record_login(self, username, new_password_hash=None):
         """Record the fact that the user logged in, potentially updating their password hash."""
@@ -614,15 +614,15 @@ class Database:
         slight variants of tweaking some fields on the user in the code to
         turn each of them into a separate method here.
         """
-        self.USERS.update({"username": username}, userdata)
+        self.users.update({"username": username}, userdata)
 
     def forget_user(self, username):
         """Forget the given user."""
-        classes = self.USERS.get({"username": username}).get("classes") or []
-        self.USERS.delete({"username": username})
+        classes = self.users.get({"username": username}).get("classes") or []
+        self.users.delete({"username": username})
         # The recover password token may exist, so we delete it
-        self.TOKENS.delete({"id": username})
-        self.PROGRAMS.del_many({"username": username})
+        self.tokens.delete({"id": username})
+        self.programs.del_many({"username": username})
         # Remove user from classes of which they are a student
         for class_id in classes:
             self.remove_student_from_class(class_id, username)
@@ -646,11 +646,11 @@ class Database:
         far from 30M users. Once we start to get in that neighbourhood, we should
         update this code.
         """
-        return self.USERS.get_page(dict(epoch=CURRENT_USER_EPOCH), pagination_token=page_token,
+        return self.users.get_page(dict(epoch=CURRENT_USER_EPOCH), pagination_token=page_token,
                                    limit=limit, reverse=True)
 
     def get_all_public_programs(self):
-        programs = self.PROGRAMS.get_many({"public": 1}, reverse=True)
+        programs = self.programs.get_many({"public": 1}, reverse=True)
         return [x for x in programs if not x.get("submitted", False)]
 
     @querylog.timed_as("get_public_programs")
@@ -671,10 +671,10 @@ class Database:
         if adventure_filter:
             filter['adventure_name'] = adventure_filter
 
-        ids = self.PROGRAMS.get_page({'public': 1}, reverse=True, limit=limit,
+        ids = self.programs.get_page({'public': 1}, reverse=True, limit=limit,
                                      server_side_filter=filter, pagination_token=pagination_token,
                                      timeout=3, fetch_factor=2.0)
-        ret = self.PROGRAMS.batch_get(ids)
+        ret = self.programs.batch_get(ids)
         return ret
 
     def add_public_profile_information(self, programs):
@@ -685,7 +685,7 @@ class Database:
         Modifies the records in the list in-place.
         """
         queries = {p['id']: {'username': p['username'].strip().lower()} for p in programs if 'username' in p}
-        profiles = self.PUBLIC_PROFILES.batch_get(queries)
+        profiles = self.public_profiles.batch_get(queries)
 
         for program in programs:
             program['public_user'] = True if profiles.get(program['id']) else None
@@ -750,28 +750,28 @@ class Database:
         return profiles[:50]
 
     def get_all_hedy_choices(self):
-        return self.PROGRAMS.get_many({"hedy_choice": 1}, reverse=True)
+        return self.programs.get_many({"hedy_choice": 1}, reverse=True)
 
     def get_hedy_choices(self):
-        return self.PROGRAMS.get_many({"hedy_choice": 1}, limit=4, reverse=True)
+        return self.programs.get_many({"hedy_choice": 1}, limit=4, reverse=True)
 
     def set_program_as_hedy_choice(self, id, favourite):
-        self.PROGRAMS.update({"id": id}, {"hedy_choice": 1 if favourite else None})
+        self.programs.update({"id": id}, {"hedy_choice": 1 if favourite else None})
 
     def get_class(self, id):
         """Return the classes with given id."""
-        return self.CLASSES.get({"id": id})
+        return self.classes.get({"id": id})
 
     def get_teacher_classes(self, username, students_to_list=False, teacher_only=False):
         """Return all the classes belonging to a teacher."""
         classes = None
         user = auth.current_user()
         if isinstance(storage, dynamo.AwsDynamoStorage):
-            classes = list(self.CLASSES.get_many({"teacher": username}, reverse=True))
+            classes = list(self.classes.get_many({"teacher": username}, reverse=True))
 
             # if current user is a second teacher, we show the related classes.
             if not teacher_only and auth.is_second_teacher(user):
-                classes.extend([self.CLASSES.get({"id": class_id}) for class_id in user["second_teacher_in"]])
+                classes.extend([self.classes.get({"id": class_id}) for class_id in user["second_teacher_in"]])
         # If we're using the in-memory database, we need to make a shallow copy
         # of the classes before changing the `students` key from a set to list,
         # otherwise the field will remain a list later and that will break the
@@ -781,12 +781,12 @@ class Database:
         # skeptical that it's accurate.
         else:
             classes = []
-            for Class in self.CLASSES.get_many({"teacher": username}, reverse=True):
+            for Class in self.classes.get_many({"teacher": username}, reverse=True):
                 classes.append(Class.copy())
 
             # if current user is a second teacher, we show the related classes.
             if not teacher_only and auth.is_second_teacher(user):
-                classes.extend([self.CLASSES.get({"id": class_id}).copy() for class_id in user["second_teacher_in"]])
+                classes.extend([self.classes.get({"id": class_id}).copy() for class_id in user["second_teacher_in"]])
                 # classes.extend(CLASSES.query.filter(id__in=user["second_teacher_in"]).all())
 
         if students_to_list:
@@ -800,7 +800,7 @@ class Database:
     def get_teacher_students(self, username):
         """Return all the students belonging to a teacher."""
         students = []
-        classes = self.CLASSES.get_many({"teacher": username}, reverse=True)
+        classes = self.classes.get_many({"teacher": username}, reverse=True)
         for Class in classes:
             for student in Class.get("students", []):
                 if student not in students:
@@ -808,34 +808,34 @@ class Database:
         return students
 
     def get_adventure(self, adventure_id):
-        return self.ADVENTURES.get({"id": adventure_id})
+        return self.adventures.get({"id": adventure_id})
 
     def batch_get_adventures(self, adventure_ids):
         """From a list of adventure ids, return a map of { id -> adventure }."""
         keys = {id: {"id": id} for id in adventure_ids}
-        return self.ADVENTURES.batch_get(keys) if keys else {}
+        return self.adventures.batch_get(keys) if keys else {}
 
     def get_public_adventures(self):
-        return self.ADVENTURES.get_many({"public": 1})
+        return self.adventures.get_many({"public": 1})
 
     def get_adventure_by_creator_and_name(self, name, username):
-        return self.ADVENTURES.get({"name": name, "creator": username})
+        return self.adventures.get({"name": name, "creator": username})
 
     def delete_adventure(self, adventure_id):
-        self.ADVENTURES.delete({"id": adventure_id})
+        self.adventures.delete({"id": adventure_id})
 
     def store_adventure(self, adventure):
         """Store an adventure."""
-        self.ADVENTURES.create(adventure)
+        self.adventures.create(adventure)
 
     def update_adventure(self, adventure_id, adventure):
-        self.ADVENTURES.update({"id": adventure_id}, adventure)
+        self.adventures.update({"id": adventure_id}, adventure)
 
     def create_tag(self, data):
-        return self.TAGS.create(data)
+        return self.tags.create(data)
 
     def read_tag(self, tag_name):
-        return self.TAGS.get({"name": tag_name})
+        return self.tags.get({"name": tag_name})
 
     def read_tags(self, tags):
         db_tags = []
@@ -846,7 +846,7 @@ class Database:
 
     def read_public_tags(self):
         """Public tags are tagged within one or more public adventure or those that aren't in use."""
-        all_tags = self.TAGS.scan()
+        all_tags = self.tags.scan()
         public_tags = []
         for tag in all_tags:
             if not tag["tagged_in"] or any([adv["public"] for adv in tag["tagged_in"]]):
@@ -854,15 +854,15 @@ class Database:
         return public_tags
 
     def read_tags_by_username(self, username):
-        tags = self.TAGS.get_many({"creator": username})
+        tags = self.tags.get_many({"creator": username})
         return tags if tags else {}
 
     def update_tag(self, tags_id, data):
         # Update existing tags
-        return self.TAGS.update({"id": tags_id}, data)
+        return self.tags.update({"id": tags_id}, data)
 
     def delete_tag(self, tags_id):
-        self.TAGS.delete({"id": tags_id})
+        self.tags.delete({"id": tags_id})
 
     def delete_tag_from_adventure(self, tag_name, adventure_id):
         db_adventure = self.get_adventure(adventure_id)
@@ -871,7 +871,7 @@ class Database:
         self.update_adventure(adventure_id, {"tags": adventure_tags})
 
     def get_teacher_adventures(self, username):
-        return self.ADVENTURES.get_many({"creator": username})
+        return self.adventures.get_many({"creator": username})
 
     def get_second_teacher_adventures(self, classes, teacher):
         """Retrieves all adventures of every second teacher in a class"""
@@ -894,13 +894,13 @@ class Database:
         return adventures
 
     def all_adventures(self):
-        return self.ADVENTURES.scan()
+        return self.adventures.scan()
 
     def public_adventures(self):
-        return self.ADVENTURES.get_many({"public": 1})
+        return self.adventures.get_many({"public": 1})
 
     def get_student_classes_ids(self, username):
-        ids = self.USERS.get({"username": username}).get("classes")
+        ids = self.users.get({"username": username}).get("classes")
         return list(ids) if ids else []
 
     def get_student_classes(self, username):
@@ -914,48 +914,48 @@ class Database:
 
     def store_class(self, Class):
         """Store a class."""
-        self.CLASSES.create(Class)
+        self.classes.create(Class)
 
     def update_class(self, id, name):
         """Updates a class."""
-        self.CLASSES.update({"id": id}, {"name": name})
+        self.classes.update({"id": id}, {"name": name})
 
     def update_class_data(self, id, class_data):
         """Updates a class."""
-        self.CLASSES.update({"id": id}, class_data)
+        self.classes.update({"id": id}, class_data)
 
     def store_feedback(self, feedback):
         """Store a feedback message in the database"""
-        self.FEEDBACK.create(feedback)
+        self.feedback.create(feedback)
 
     def store_survey(self, survey):
-        self.SURVEYS.create(survey)
+        self.surveys.create(survey)
 
     def get_survey(self, id):
-        return self.SURVEYS.get({"id": id})
+        return self.surveys.get({"id": id})
 
     def get_feedback(self):
         """Get allfeedback in the database"""
-        return self.FEEDBACK.scan()
+        return self.feedback.scan()
 
     def add_survey_responses(self, id, responses):
-        self.SURVEYS.update({"id": id}, {"responses":  responses})
+        self.surveys.update({"id": id}, {"responses":  responses})
 
     def add_skip_survey(self, id):
-        self.SURVEYS.update({"id": id}, {"skip": True})
+        self.surveys.update({"id": id}, {"skip": True})
 
     def add_remind_later_survey(self, id):
-        self.SURVEYS.update({"id": id}, {"skip": date.today().isoformat()})
+        self.surveys.update({"id": id}, {"skip": date.today().isoformat()})
 
     def add_student_to_class(self, class_id, student_id):
         """Adds a student to a class."""
-        self.CLASSES.update({"id": class_id}, {"students": dynamo.DynamoAddToStringSet(student_id)})
-        self.USERS.update({"username": student_id}, {"classes": dynamo.DynamoAddToStringSet(class_id)})
+        self.classes.update({"id": class_id}, {"students": dynamo.DynamoAddToStringSet(student_id)})
+        self.users.update({"username": student_id}, {"classes": dynamo.DynamoAddToStringSet(class_id)})
 
     def remove_student_from_class(self, class_id, student_id):
         """Removes a student from a class."""
-        self.CLASSES.update({"id": class_id}, {"students": dynamo.DynamoRemoveFromStringSet(student_id)})
-        self.USERS.update({"username": student_id}, {"classes": dynamo.DynamoRemoveFromStringSet(class_id)})
+        self.classes.update({"id": class_id}, {"students": dynamo.DynamoRemoveFromStringSet(student_id)})
+        self.users.update({"username": student_id}, {"classes": dynamo.DynamoRemoveFromStringSet(class_id)})
 
     def add_second_teacher_to_class(self, Class, second_teacher):
         """Adds a second teacher to a class."""
@@ -982,41 +982,41 @@ class Database:
         for student_id in Class.get("students", []):
             Database.remove_student_from_class(self, Class["id"], student_id)
 
-        self.CUSTOMIZATIONS.del_many({"id": Class["id"]})
-        self.INVITATIONS.del_many({"class_id": Class["id"]})
-        self.CUSTOMIZATIONS.delete({"id": Class["id"]})
-        self.CLASSES.delete({"id": Class["id"]})
+        self.customizations.del_many({"id": Class["id"]})
+        self.invitations.del_many({"class_id": Class["id"]})
+        self.customizations.delete({"id": Class["id"]})
+        self.classes.delete({"id": Class["id"]})
 
     def resolve_class_link(self, link_id):
-        return self.CLASSES.get({"link": link_id})
+        return self.classes.get({"link": link_id})
 
     def get_user_class_invite(self, username, class_id):
-        return self.INVITATIONS.get({"username#class_id": f"{username}#{class_id}"}) or None
+        return self.invitations.get({"username#class_id": f"{username}#{class_id}"}) or None
 
     def add_class_invite(self, data):
         data['username#class_id'] = data['username'] + '#' + data['class_id']
-        self.INVITATIONS.put(data)
+        self.invitations.put(data)
 
     def remove_user_class_invite(self, username, class_id):
-        return self.INVITATIONS.delete({"username#class_id": f"{username}#{class_id}"})
+        return self.invitations.delete({"username#class_id": f"{username}#{class_id}"})
 
     def get_user_invitations(self, username):
-        return self.INVITATIONS.get_many({"username": username}) or []
+        return self.invitations.get_many({"username": username}) or []
 
     def get_class_invitations(self, class_id):
-        return self.INVITATIONS.get_many({"class_id": class_id}) or []
+        return self.invitations.get_many({"class_id": class_id}) or []
 
     def all_classes(self):
-        return self.CLASSES.scan()
+        return self.classes.scan()
 
     def delete_class_customizations(self, class_id):
-        self.CUSTOMIZATIONS.delete({"id": class_id})
+        self.customizations.delete({"id": class_id})
 
     def update_class_customizations(self, customizations):
-        self.CUSTOMIZATIONS.put(customizations)
+        self.customizations.put(customizations)
 
     def get_class_customizations(self, class_id):
-        customizations = self.CUSTOMIZATIONS.get({"id": class_id})
+        customizations = self.customizations.get({"id": class_id})
         return customizations
 
     def get_student_class_customizations(self, user, class_to_preview=None):
@@ -1039,21 +1039,21 @@ class Database:
         return {}
 
     def progress_by_username(self, username):
-        return self.ACHIEVEMENTS.get({"username": username})
+        return self.achievements.get({"username": username})
 
     def achievements_by_username(self, username):
-        progress_data = self.ACHIEVEMENTS.get({"username": username})
+        progress_data = self.achievements.get({"username": username})
         if progress_data and "achieved" in progress_data:
             return progress_data["achieved"]
         else:
             return None
 
     def get_all_achievements(self):
-        return self.ACHIEVEMENTS.scan()
+        return self.achievements.scan()
 
     def add_achievement_to_username(self, username, achievement):
         new_user = False
-        user_achievements = self.ACHIEVEMENTS.get({"username": username})
+        user_achievements = self.achievements.get({"username": username})
         if not user_achievements:
             new_user = True
             user_achievements = {"username": username}
@@ -1061,7 +1061,7 @@ class Database:
             user_achievements["achieved"] = []
         if achievement not in user_achievements["achieved"]:
             user_achievements["achieved"].append(achievement)
-            self.ACHIEVEMENTS.put(user_achievements)
+            self.achievements.put(user_achievements)
         # Update the amount of achievements on the public profile (if exists)
         self.update_achievements_public_profile(username, len(user_achievements["achieved"]))
         if new_user:
@@ -1070,7 +1070,7 @@ class Database:
 
     def add_achievements_to_username(self, username, achievements):
         new_user = False
-        user_achievements = self.ACHIEVEMENTS.get({"username": username})
+        user_achievements = self.achievements.get({"username": username})
         if not user_achievements:
             new_user = True
             user_achievements = {"username": username}
@@ -1080,7 +1080,7 @@ class Database:
             if achievement not in user_achievements["achieved"]:
                 user_achievements["achieved"].append(achievement)
         user_achievements["achieved"] = list(dict.fromkeys(user_achievements["achieved"]))
-        self.ACHIEVEMENTS.put(user_achievements)
+        self.achievements.put(user_achievements)
 
         # Update the amount of achievements on the public profile (if exists)
         self.update_achievements_public_profile(username, len(user_achievements["achieved"]))
@@ -1089,65 +1089,65 @@ class Database:
         return False
 
     def add_commands_to_username(self, username, commands):
-        user_achievements = self.ACHIEVEMENTS.get({"username": username})
+        user_achievements = self.achievements.get({"username": username})
         if not user_achievements:
             user_achievements = {"username": username}
         user_achievements["commands"] = commands
-        self.ACHIEVEMENTS.put(user_achievements)
+        self.achievements.put(user_achievements)
 
     def increase_user_run_count(self, username):
-        self.ACHIEVEMENTS.update({"username": username}, {"run_programs": dynamo.DynamoIncrement(1)})
+        self.achievements.update({"username": username}, {"run_programs": dynamo.DynamoIncrement(1)})
 
     def increase_user_save_count(self, username):
-        self.ACHIEVEMENTS.update({"username": username}, {"saved_programs": dynamo.DynamoIncrement(1)})
+        self.achievements.update({"username": username}, {"saved_programs": dynamo.DynamoIncrement(1)})
 
     def increase_user_submit_count(self, username):
-        self.ACHIEVEMENTS.update({"username": username}, {"submitted_programs": dynamo.DynamoIncrement(1)})
+        self.achievements.update({"username": username}, {"submitted_programs": dynamo.DynamoIncrement(1)})
 
     def update_public_profile(self, username, data):
-        self.PUBLIC_PROFILES.update({"username": username}, data)
+        self.public_profiles.update({"username": username}, data)
 
     def update_achievements_public_profile(self, username, amount_achievements):
-        data = self.PUBLIC_PROFILES.get({"username": username})
+        data = self.public_profiles.get({"username": username})
         # In the case that we make this call but there is no public profile -> don't do anything
         if data:
-            self.PUBLIC_PROFILES.update(
+            self.public_profiles.update(
                 {"username": username}, {"achievements": amount_achievements, "last_achievement": timems()}
             )
 
     def update_country_public_profile(self, username, country):
-        data = self.PUBLIC_PROFILES.get({"username": username})
+        data = self.public_profiles.get({"username": username})
         # If there is no data -> we might have made this request from the /update_profile route without a public profile
         # In this case don't do anything
         if data:
-            self.PUBLIC_PROFILES.update({"username": username}, {"country": country})
+            self.public_profiles.update({"username": username}, {"country": country})
 
     def set_favourite_program(self, username, program_id, set_favourite):
         # We can only set a favourite program is there is already a public profile
-        data = self.PUBLIC_PROFILES.get({"username": username})
+        data = self.public_profiles.get({"username": username})
         if data:
             self.update_public_profile(username, {"favourite_program": program_id if set_favourite else ''})
             return True
         return False
 
     def get_public_profile_settings(self, username):
-        return self.PUBLIC_PROFILES.get({"username": username})
+        return self.public_profiles.get({"username": username})
 
     def forget_public_profile(self, username):
-        self.PUBLIC_PROFILES.delete({"username": username})
+        self.public_profiles.delete({"username": username})
 
     def get_all_public_profiles(self):
-        return self.PUBLIC_PROFILES.scan()
+        return self.public_profiles.scan()
 
     def store_parsons(self, attempt):
-        self.PARSONS.create(attempt)
+        self.parsons.create(attempt)
 
     def add_quiz_started(self, id, level):
         key = {"id#level": f"{id}#{level}", "week": self.to_year_week(date.today())}
 
         add_attributes = {"id": id, "level": level, "started": dynamo.DynamoIncrement()}
 
-        return self.QUIZ_STATS.update(key, add_attributes)
+        return self.quiz_stats.update(key, add_attributes)
 
     def add_quiz_finished(self, id, level, score):
         key = {"id#level": f"{id}#{level}", "week": self.to_year_week(date.today())}
@@ -1159,19 +1159,19 @@ class Database:
             "scores": dynamo.DynamoAddToList(score),
         }
 
-        return self.QUIZ_STATS.update(key, add_attributes)
+        return self.quiz_stats.update(key, add_attributes)
 
     def get_quiz_stats(self, ids, start=None, end=None):
         start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
         end_week = self.to_year_week(self.parse_date(end, date.today()))
 
-        data = [self.QUIZ_STATS.get_many({"id": i, "week": dynamo.Between(start_week, end_week)}) for i in ids]
+        data = [self.quiz_stats.get_many({"id": i, "week": dynamo.Between(start_week, end_week)}) for i in ids]
         return functools.reduce(operator.iconcat, data, [])
 
     def add_program_stats(self, id, level, number_of_lines, exception, error_message=None):
         key = {"id#level": f"{id}#{level}", "week": self.to_year_week(date.today())}
         add_attributes = {"id": id, "level": level, "number_of_lines": number_of_lines}
-        program_stats = self.PROGRAM_STATS.get_many({"id": id, "week": self.to_year_week(date.today())})
+        program_stats = self.program_stats.get_many({"id": id, "week": self.to_year_week(date.today())})
 
         # chart history and error history are used for visual elements on the live dashboard, see statistics.py
         # for how they are read from the database
@@ -1188,12 +1188,12 @@ class Database:
             new_chart_history = list(chart_history) + [1]
         add_attributes["chart_history"] = new_chart_history[-chart_slice:]
 
-        return self.PROGRAM_STATS.update(key, add_attributes)
+        return self.program_stats.update(key, add_attributes)
 
     def get_program_stats_per_level(self, id, level, start=None, end=None):
         start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
         end_week = self.to_year_week(self.parse_date(end, date.today()))
-        data = self.PROGRAM_STATS.get_many(
+        data = self.program_stats.get_many(
             {'id#level': id + '#' + str(level), "week": dynamo.Between(start_week, end_week)})
         return data
 
@@ -1201,7 +1201,7 @@ class Database:
         start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
         end_week = self.to_year_week(self.parse_date(end, date.today()))
 
-        data = [self.PROGRAM_STATS.get_many({"id": i, "week": dynamo.Between(start_week, end_week)}) for i in ids]
+        data = [self.program_stats.get_many({"id": i, "week": dynamo.Between(start_week, end_week)}) for i in ids]
         return functools.reduce(operator.iconcat, data, [])
 
     def parse_date(self, d, default):
@@ -1212,7 +1212,7 @@ class Database:
         return f"{cal[0]}-{cal[1]:02d}"
 
     def get_username_role(self, username):
-        role = "teacher" if self.USERS.get({"username": username}).get("teacher_request") is True else "student"
+        role = "teacher" if self.users.get({"username": username}).get("teacher_request") is True else "student"
         return role
 
 
