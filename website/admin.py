@@ -174,45 +174,47 @@ class AdminModule(WebsiteModule):
             page_title=gettext("title_admin"),
         )
 
-    @route("/mark-as-teacher/<username>", methods=["GET"])
-    def mark_as_teacher(self, username):
-        user = current_user()
+    @route("/mark-as-teacher/<username_teacher>", methods=["GET"])
+    def mark_as_teacher(self, user, username_teacher):
+        # the user that wants to mark a teacher
         if (not is_admin(user) and not is_super_teacher(user)) and not utils.is_testing_request(request):
             return utils.error_page(error=401, ui_message=gettext("unauthorized"))
-        if not username:
+        if not username_teacher:
             return make_response(gettext("username_invalid"), 400)
 
-        user = self.db.user_by_username(username.strip().lower())
-
-        if not user:
+        # the user that is going to be a teacher
+        teacher = self.db.user_by_username(username_teacher.strip().lower())
+        if not teacher:
             return make_response(gettext("username_invalid"), 400)
 
-        is_teacher_value = 0 if user.get("is_teacher") else 1
-        update_is_teacher(self.db, user, is_teacher_value)
+        is_teacher_value = 0 if teacher.get("is_teacher") else 1
+        update_is_teacher(self.db, teacher, is_teacher_value)
 
         return make_response('', 200)
 
-    @route("/mark-super-teacher/<username>", methods=["GET"])
+    @route("/mark-super-teacher/<username_teacher>", methods=["GET"])
     @requires_admin
-    def mark_super_teacher(self, user, username):
+    def mark_super_teacher(self, user, username_teacher):
+        # the user that wants to mark a teacher
         if not user and not utils.is_testing_request(request):
             return utils.error_page(error=401, ui_message=gettext("unauthorized"))
-        if not username:
+        if not username_teacher:
             return make_response(gettext("username_invalid"), 400)
         if not is_teacher:
             return make_response(gettext("teacher_invalid"), 400)
 
-        user = self.db.user_by_username(username.strip().lower())
+        # the user that is going to be a teacher
+        teacher = self.db.user_by_username(username_teacher.strip().lower())
 
-        if not user:
+        if not teacher:
             return make_response(gettext("username_invalid"), 400)
         elif not is_teacher(user):
             return make_response("user must be a teacher.", 400)
 
-        self.db.update_user(user["username"], {"is_super_teacher": 0 if user.get("is_super_teacher") else 1, })
+        self.db.update_user(username_teacher, {"is_super_teacher": 0 if teacher.get("is_super_teacher") else 1, })
         refresh_current_user_from_db()
 
-        return make_response(f"{user['username']} is now a super-teacher.", 200)
+        return make_response(f"{username_teacher} is now a super-teacher.", 200)
 
     @route("/changeUserEmail", methods=["POST"])
     @requires_admin
