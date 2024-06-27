@@ -1709,7 +1709,7 @@ class Validator(metaclass=ABCMeta):
     def is_valid(self, value):
         ...
 
-    def __str__(self, value):
+    def __str__(self):
         ...
 
 
@@ -1762,7 +1762,7 @@ class Predicate(Validator):
         return f'matches {self.fn}'
 
 
-class Optional(Validator):
+class OptionalOf(Validator):
     """Validator which matches either None or an inner validator."""
 
     def __init__(self, inner):
