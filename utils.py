@@ -98,6 +98,7 @@ def is_debug_mode():
     """
     return DEBUG_MODE
 
+
 def show_roles_of_variables():
     """Whether the roles of variables should be shown in the variable view.
     (If not, only variable names and values will be shown in the list).
@@ -105,6 +106,7 @@ def show_roles_of_variables():
     """
     can_show_roles = os.getenv("SHOW_ROLES", False)
     return can_show_roles
+
 
 def is_offline_mode():
     """Return whether or not we're in offline mode.

@@ -159,6 +159,7 @@ def forget_current_user():
     session.pop("keyword_lang", None)  # Delete session keyword language if existing
     session.pop("profile_image", None)  # Delete profile image id if existing
 
+
 def is_admin(user):
     """Whether the given user (object) is an admin.
 
@@ -171,6 +172,7 @@ def is_admin(user):
         admin_users.extend(os.getenv("ADMIN_USERS").split(","))
 
     return user.get("username") in admin_users or user.get("email") in admin_users
+
 
 def is_teacher(user, cls=None):
     # the `is_teacher` field is either `0`, `1` or not present.
