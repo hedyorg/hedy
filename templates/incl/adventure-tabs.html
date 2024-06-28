@@ -78,8 +78,9 @@
                 <button id="show_button_{{adventure.short_name}}" class="gray-btn px-4 rounded inline-flex items-center gap-2"
                 _="on click
                     toggle .hidden on #hide_button_{{adventure.short_name}}
-                    then toggle .hidden on me
-                    then toggle .hidden on #adv_{{adventure.short_name}}
+                    toggle .hidden on me
+                    remove .lg:flex from #adv_{{adventure.short_name}}
+                    toggle .hidden on #adv_{{adventure.short_name}}
                     toggle .hidden on #extra_{{adventure.short_name}}
                 end">
                     Hide
@@ -92,8 +93,9 @@
                 <button id="hide_button_{{adventure.short_name}}" class="hidden gray-btn px-4 rounded inline-flex items-center gap-2"
                 _="on click 
                     toggle .hidden on #show_button_{{adventure.short_name}}
-                    then toggle .hidden on me
-                    then toggle .hidden on #adv_{{adventure.short_name}}
+                    toggle .hidden on me
+                    add .lg:flex to #adv_{{adventure.short_name}}
+                    toggle .hidden on #adv_{{adventure.short_name}}
                     toggle .hidden on #extra_{{adventure.short_name}}
                 end">
                     Show
