@@ -44,6 +44,7 @@ local_keywords_enabled = True
 
 # dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
+MICROBIT_TRANSPILER_LOOKUP = {}
 
 # define source-map
 source_map = SourceMap()
@@ -290,7 +291,7 @@ def add_level(commands, level, add=None, remove=None):
         add = []
     if not remove:
         remove = []
-    commands[level] = [c for c in commands[level-1] if c not in remove] + add
+    commands[level] = [c for c in commands[level - 1] if c not in remove] + add
 
 
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
@@ -312,7 +313,6 @@ add_level(commands_per_level, level=15, add=['while'])
 add_level(commands_per_level, level=16)
 add_level(commands_per_level, level=17, add=['elif'])
 add_level(commands_per_level, level=18, add=['input'], remove=['ask'])
-
 
 command_turn_literals = ['right', 'left']
 english_colors = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
@@ -1119,7 +1119,8 @@ class AllCommands(Transformer):
         # for the achievements we want to be able to also detect which operators were used by a kid
         operators = ['addition', 'subtraction', 'multiplication', 'division']
 
-        if production_rule_name in commands_per_level[self.level] or production_rule_name in operators or production_rule_name == 'if_pressed_else':
+        if production_rule_name in commands_per_level[
+                self.level] or production_rule_name in operators or production_rule_name == 'if_pressed_else':
             # if_pressed_else is not in the yamls, upsetting lookup code to get an alternative later
             # lookup should be fixed instead, making a special case for now
             if production_rule_name == 'else':  # use of else also has an if
@@ -1318,22 +1319,22 @@ class IsValid(Filter):
 
     def if_pressed_elifs_no_colon(self, meta, args):
         # if_pressed_elifs starts with _EOL, so we need to add +1 to its line
-        raise exceptions.MissingColonException(command=Command.elif_, line_number=meta.line+1)
+        raise exceptions.MissingColonException(command=Command.elif_, line_number=meta.line + 1)
 
     def if_pressed_elses_no_colon(self, meta, args):
         # if_pressed_elses starts with _EOL, so we need to add +1 to its line
-        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line+1)
+        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line + 1)
 
     def ifs_no_colon(self, meta, args):
         raise exceptions.MissingColonException(command=Command.if_, line_number=meta.line)
 
     def elifs_no_colon(self, meta, args):
         # elifs starts with _EOL, so we need to add +1 to its line
-        raise exceptions.MissingColonException(command=Command.elif_, line_number=meta.line+1)
+        raise exceptions.MissingColonException(command=Command.elif_, line_number=meta.line + 1)
 
     def elses_no_colon(self, meta, args):
         # elses starts with _EOL, so we need to add +1 to its line
-        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line+1)
+        raise exceptions.MissingColonException(command=Command.else_, line_number=meta.line + 1)
 
     def for_list_no_colon(self, meta, args):
         raise exceptions.MissingColonException(command=Command.for_list, line_number=meta.line)
@@ -1420,9 +1421,12 @@ def get_allowed_types(command, level):
 
 
 # decorator used to store each class in the lookup table
-def hedy_transpiler(level):
+def hedy_transpiler(level, microbit=False):
     def decorator(c):
-        TRANSPILER_LOOKUP[level] = c
+        if not microbit:
+            TRANSPILER_LOOKUP[level] = c
+        else:
+            MICROBIT_TRANSPILER_LOOKUP[level] = c
         c.level = level
         return c
 
@@ -1431,12 +1435,11 @@ def hedy_transpiler(level):
 
 @v_args(meta=True)
 class ConvertToPython(Transformer):
-    def __init__(self, lookup, language="en", numerals_language="Latin", is_debug=False, microbit=False):
+    def __init__(self, lookup, language="en", numerals_language="Latin", is_debug=False):
         self.lookup = lookup
         self.language = language
         self.numerals_language = numerals_language
         self.is_debug = is_debug
-        self.microbit = microbit
 
     def add_debug_breakpoint(self):
         if self.is_debug:
@@ -1637,12 +1640,11 @@ class ConvertToPython(Transformer):
 @source_map_transformer(source_map)
 class ConvertToPython_1(ConvertToPython):
 
-    def __init__(self, lookup, language, numerals_language, is_debug, microbit=False):
+    def __init__(self, lookup, language, numerals_language, is_debug):
         self.numerals_language = numerals_language
         self.language = language
         self.lookup = lookup
         self.is_debug = is_debug
-        self.microbit = microbit
         __class__.level = 1
 
     def program(self, meta, args):
@@ -1667,11 +1669,7 @@ class ConvertToPython_1(ConvertToPython):
     def print(self, meta, args):
         # escape needed characters
         argument = process_characters_needing_escape(args[0])
-        if not self.microbit:
-            return f"print('" + argument + "')" + self.add_debug_breakpoint()
-        else:
-            return textwrap.dedent(f"""\
-                display.scroll('{argument}')""")
+        return f"print('" + argument + "')" + self.add_debug_breakpoint()
 
     def ask(self, meta, args):
         argument = process_characters_needing_escape(args[0])
@@ -1869,11 +1867,8 @@ class ConvertToPython_2(ConvertToPython_1):
     def print(self, meta, args):
         args_new = [self.make_print_ask_arg(a, meta) for a in args]
         argument_string = ' '.join(args_new)
-        if not self.microbit:
-            exception = self.make_index_error_check_if_list(args)
-            return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
-        else:
-            return f"""display.scroll('{argument_string}')"""
+        exception = self.make_index_error_check_if_list(args)
+        return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
 
     def ask(self, meta, args):
         var = args[0]
@@ -1889,9 +1884,9 @@ class ConvertToPython_2(ConvertToPython_1):
         # therefore we should not process it anymore and thread it as a variable:
         # we set the line number to 100 so there is never an issue with variable access before
         # assignment (regular code will not work since random.choice(dieren) is never defined as var as such)
+
         if "random.choice" in arg or "[" in arg:
             return self.process_variable_for_fstring(arg, meta.line, var_to_escape)
-
         # this regex splits words from non-letter characters, such that name! becomes [name, !]
         p = r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+"
         res = regex.findall(p, arg)
@@ -1933,17 +1928,14 @@ class ConvertToPython_2(ConvertToPython_1):
         variable_name = args[0]
         value = args[1]
 
-        if self.is_random(value) or self.is_list(value):
-            exception = self.make_index_error_check_if_list([value])
-            return exception + variable_name + " = " + value + self.add_debug_breakpoint()
+        exception = self.make_index_error_check_if_list([value])
+        if self.is_variable(value, meta.line):
+            # if the assigned value is a variable, this is a reassign
+            value = self.process_variable(value, meta.line)
         else:
-            if self.is_variable(value, meta.line):  # if the value is a variable, this is a reassign
-                value = self.process_variable(value, meta.line)
-                return variable_name + " = " + value + self.add_debug_breakpoint()
-            else:
-                # if the assigned value is not a variable and contains single quotes, escape them
-                value = process_characters_needing_escape(value)
-                return variable_name + " = '" + value + "'" + self.add_debug_breakpoint()
+            # if it is not a variable, put it in single quotes and escape them
+            value = f"'{process_characters_needing_escape(value)}'"
+        return exception + variable_name + " = " + value + self.add_debug_breakpoint()
 
     def sleep(self, meta, args):
         if not args:
@@ -2039,7 +2031,9 @@ class ConvertToPython_4(ConvertToPython_3):
             if self.is_quoted(name):
                 name = name[1:-1]
                 return name.replace("'", "\\'")
-            name = name if self.is_bool(name) else escape_var(name.replace("'", "\\'"))
+            if not ConvertToPython.is_int(name) and not ConvertToPython.is_float(name):
+                name = name if self.is_bool(name) else escape_var(name.replace("'", "\\'"))
+                name = '"' + name + '"'
             return f'{{convert_numerals("{self.numerals_language}", {name})}}'
 
     def var_access(self, meta, args):
@@ -2061,11 +2055,7 @@ class ConvertToPython_4(ConvertToPython_3):
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
         exceptions = self.make_index_error_check_if_list(args)
-        if not self.microbit:
-            return exceptions + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
-        else:
-            return textwrap.dedent(f"""\
-                    display.scroll('{argument_string}')""")
+        return exceptions + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
 
     def ask(self, meta, args):
         var = args[0]
@@ -2099,8 +2089,8 @@ except NameError:
 @source_map_transformer(source_map)
 class ConvertToPython_5(ConvertToPython_4):
 
-    def __init__(self, lookup, language, numerals_language, is_debug, microbit):
-        super().__init__(lookup, language, numerals_language, is_debug, microbit)
+    def __init__(self, lookup, language, numerals_language, is_debug):
+        super().__init__(lookup, language, numerals_language, is_debug)
 
     def ifs(self, meta, args):  # might be worth asking if we want a debug breakpoint here
         return f"""if {args[0]}:{self.add_debug_breakpoint()}
@@ -2561,11 +2551,7 @@ class ConvertToPython_12(ConvertToPython_11):
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
         exception = self.make_index_error_check_if_list(args)
-        if not self.microbit:
-            return exception + f"print(f'''{argument_string}''')" + self.add_debug_breakpoint()
-        else:
-            return textwrap.dedent(f"""\
-                    display.scroll('{argument_string}')""")
+        return exception + f"print(f'''{argument_string}''')" + self.add_debug_breakpoint()
 
     def ask(self, meta, args):
         var = args[0]
@@ -2830,6 +2816,185 @@ class ConvertToPython_18(ConvertToPython_17):
         return self.print(meta, args)
 
 
+@v_args(meta=True)
+@hedy_transpiler(level=1, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_1(ConvertToPython_1):
+    def print(self, meta, args):
+        # escape needed characters
+        argument = process_characters_needing_escape(args[0])
+        return f"display.scroll('{argument}')"
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=2, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_2(MicrobitConvertToPython_1, ConvertToPython_2):
+
+    def print(self, meta, args):
+        args_new = [self.make_print_ask_arg(a, meta) for a in args]
+        argument_string = ' '.join(args_new)
+        return f"display.scroll({argument_string})"
+
+    def make_print_ask_arg(self, arg, meta, var_to_escape=''):
+        if self.is_variable(arg, meta.line):
+            return arg
+        else:
+            # If the argument is not a variable, return it as a string literal with quotes
+            return f"'{arg}'"
+
+    def assign(self, meta, args):
+        variable_name = args[0]
+        value = args[1]
+
+        exception = self.make_index_error_check_if_list([value])
+        if self.is_variable(value, meta.line):
+            # if the assigned value is a variable, this is a reassign
+            value = self.process_variable(value, meta.line)
+        else:
+            # if it is not a variable, check if it is a number
+            if not self.is_int(value) and not self.is_float(value):
+                # encapsulate in quotes if it's not a number
+                value = f"'{process_characters_needing_escape(value)}'"
+
+        return exception + variable_name + " = " + value + self.add_debug_breakpoint()
+
+    def sleep(self, meta, args):
+        if not args:
+            return f"sleep(1000){self.add_debug_breakpoint()}"  # Default 1-second sleep in milliseconds
+        else:
+            variable = args[0]
+            if self.is_int(variable):
+                # Direct conversion of seconds to milliseconds
+                milliseconds = int(variable) * 1000
+            else:
+                milliseconds = f"{variable} * 1000"
+                self.add_variable_access_location(variable, meta.line)
+        return f"sleep({milliseconds}){self.add_debug_breakpoint()}"
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=3, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_3(MicrobitConvertToPython_2, ConvertToPython_3):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=4, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_4(MicrobitConvertToPython_3, ConvertToPython_4):
+
+    def make_print_ask_arg(self, arg, meta, var_to_escape=''):
+        if self.is_variable(arg, meta.line):
+            return arg
+        else:
+            # If the argument is not a variable, return it as a string literal with quotes
+            return f'{arg}'
+
+    def print(self, meta, args):
+        args_new = [self.make_print_ask_arg(a, meta) for a in args]
+        argument_string = ''.join(args_new)
+        return f"display.scroll({argument_string})"
+
+    def clear(self, meta, args):
+        return f"display.clear()"
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=5, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_5(MicrobitConvertToPython_4, ConvertToPython_5):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=6, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_6(MicrobitConvertToPython_5, ConvertToPython_6):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=7, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_7(MicrobitConvertToPython_6, ConvertToPython_7):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=8, microbit=True)
+@hedy_transpiler(level=9, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_8_9(MicrobitConvertToPython_7, ConvertToPython_8_9):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=10, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_10(MicrobitConvertToPython_8_9, ConvertToPython_10):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=11, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_11(MicrobitConvertToPython_10, ConvertToPython_11):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=12, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_12(MicrobitConvertToPython_11, ConvertToPython_12):
+    def print(self, meta, args):
+        argument_string = self.print_ask_args(meta, args)
+        return f"display.scroll('{argument_string}')"
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=13, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_13(MicrobitConvertToPython_12, ConvertToPython_13):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=14, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_14(MicrobitConvertToPython_13, ConvertToPython_14):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=15, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_15(MicrobitConvertToPython_14, ConvertToPython_15):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=16, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_16(MicrobitConvertToPython_15, ConvertToPython_16):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=17, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_17(MicrobitConvertToPython_16, ConvertToPython_17):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=18, microbit=True)
+@source_map_transformer(source_map)
+class MicrobitConvertToPython_18(MicrobitConvertToPython_17, ConvertToPython_18):
+    pass
+
+
 # this is only a couple of MB in total, safe to cache
 @cache
 def create_grammar(level, lang, skip_faulty):
@@ -3073,7 +3238,8 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
 
 
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle',
-                                         'has_pressed', 'has_clear', 'has_music', 'has_sleep', 'commands', 'roles_of_variables'])
+                                         'has_pressed', 'has_clear', 'has_music', 'has_sleep', 'commands',
+                                         'roles_of_variables'])
 
 
 def transpile_inner_with_skipping_faulty(input_string, level, lang="en", unused_allowed=True):
@@ -3612,9 +3778,8 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         abstract_syntax_tree, lookup_table, commands = create_AST(input_string, level, lang)
 
         # grab the right transpiler from the lookup
-        convertToPython = TRANSPILER_LOOKUP[level]
-        python = convertToPython(lookup_table, lang, numerals_language, is_debug,
-                                 microbit).transform(abstract_syntax_tree)
+        convertToPython = MICROBIT_TRANSPILER_LOOKUP[level] if microbit else TRANSPILER_LOOKUP[level]
+        python = convertToPython(lookup_table, lang, numerals_language, is_debug).transform(abstract_syntax_tree)
 
         has_clear = "clear" in commands
         has_turtle = "forward" in commands or "turn" in commands or "color" in commands

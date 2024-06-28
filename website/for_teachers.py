@@ -1,11 +1,15 @@
 import collections
+from difflib import SequenceMatcher
 import json
 import os
+import re
 import uuid
 
+from bs4 import BeautifulSoup
 from flask import g, make_response, request, session, url_for, redirect
 from jinja_partials import render_partial
 from flask_babel import gettext
+import jinja_partials
 
 import hedy
 import hedy_content
@@ -137,47 +141,17 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         session['class_id'] = class_id
-        students = []
         survey_id = ""
         description = ""
         questions = []
         survey_later = ""
         total_questions = ""
+        level = 1
 
         if Class.get("students"):
             survey_id, description, questions, total_questions, survey_later = self.class_survey(class_id)
 
-        for student_username in Class.get("students", []):
-            student = self.db.user_by_username(student_username)
-            programs = self.db.programs_for_user(student_username)
-            # Fixme: The get_quiz_stats function requires a list of ids -> doesn't work on single string
-            quiz_scores = self.db.get_quiz_stats([student_username])
-            # Verify if the user did finish any quiz before getting the max() of the finished levels
-            finished_quizzes = any("finished" in x for x in quiz_scores)
-            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
-            students.append(
-                {
-                    "username": student_username,
-                    "last_login": student["last_login"],
-                    "programs": len(programs),
-                    "highest_level": highest_quiz,
-                }
-            )
-
-        # Sort the students by their last login
-        students = sorted(students, key=lambda d: d.get("last_login", 0), reverse=True)
-        # After sorting: replace the number value by a string format date
-        for student in students:
-            student["last_login"] = utils.localized_date_format(student.get("last_login", 0))
-
-        if utils.is_testing_request(request):
-            return make_response(
-                {
-                    "students": students,
-                    "link": Class["link"],
-                    "name": Class["name"],
-                    "id": Class["id"]
-                }, 200)
+        students = Class.get("students", [])
 
         achievement = None
         if len(students) > 20:
@@ -196,8 +170,22 @@ class ForTeachersModule(WebsiteModule):
                 }
             )
 
+        student_overview_table, _, class_adventures_formatted, \
+            _, student_adventures, graph_students = self.get_grid_info(user, class_id, 1)
+
         teacher = user if Class["teacher"] == user["username"] else self.db.user_by_username(Class["teacher"])
         second_teachers = [teacher] + Class.get("second_teachers", [])
+        print('*'*100)
+        print(graph_students)
+        print('*'*100)
+        if utils.is_testing_request(request):
+            return make_response({
+                "students": graph_students,
+                "link": Class["link"],
+                "name": Class["name"],
+                "id": Class["id"]
+            }, 200)
+
         return render_template(
             "class-overview.html",
             current_page="for-teachers",
@@ -205,20 +193,277 @@ class ForTeachersModule(WebsiteModule):
             achievement=achievement,
             invites=invites,
             class_info={
-                "students": students,
+                "students": len(students),
                 "link": os.getenv("BASE_URL", "") + "/hedy/l/" + Class["link"],
                 "teacher": Class["teacher"],
                 "second_teachers": second_teachers,
                 "name": Class["name"],
                 "id": Class["id"],
             },
-            javascript_page_options=dict(page="class-overview"),
+            javascript_page_options=dict(
+                page="class-overview"
+            ),
             survey_id=survey_id,
             description=description,
             questions=questions,
             total_questions=total_questions,
             survey_later=survey_later,
+            adventure_table={
+                'students': student_overview_table,
+                'adventures': class_adventures_formatted,
+                'student_adventures': student_adventures,
+                'graph_options': {
+                    'level': level,
+                    'graph_students': graph_students
+                }
+            }
         )
+
+    def get_grid_info(self, user, class_id, level):
+        class_ = self.db.get_class(class_id)
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+
+        students = sorted(class_.get("students", []))
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+
+        class_info = get_customizations(self.db, class_id)
+        class_adventures = class_info.get('sorted_adventures')
+
+        adventure_names = {}
+        for adv_key, adv_dic in adventures.items():
+            for name, _ in adv_dic.items():
+                adventure_names[adv_key] = hedy_content.get_localized_name(name, g.keyword_lang)
+
+        for adventure in teacher_adventures:
+            adventure_names[adventure['id']] = adventure['name']
+
+        class_adventures_formatted = {}
+        for key, value in class_adventures.items():
+            adventure_list = []
+            for adventure in value:
+                # if the adventure is not in adventure names it means that the data in the customizations is bad
+                if not adventure['name'] == 'next' and adventure['name'] in adventure_names:
+                    adventure_list.append({'name': adventure_names[adventure['name']], 'id': adventure['name']})
+            class_adventures_formatted[key] = adventure_list
+
+        student_adventures = {}
+        graph_students = []
+        for student in students:
+            programs = self.db.last_level_programs_for_user(student, level)
+            program_stats = self.db.get_program_stats_per_level(student, level)
+            adventures_tried = 0
+            number_of_errors = 0
+            successful_runs = 0
+            # We use the program stats to get the number of errors, and successful runs in this level
+            for stat in program_stats:
+                successful_runs += stat.get('successful_runs', 0)
+                for key in stat:
+                    if "Exception" in key:
+                        number_of_errors += stat[key]
+
+            # and we use the stored programs to get the numbers of adventures tried by the student
+            # and also to populate the table
+            for _, program in programs.items():
+                # Old programs sometimes don't have adventures associated to them
+                # So skip them
+                if 'adventure_name' not in program:
+                    continue
+                adventures_tried += 1
+                name = adventure_names.get(program['adventure_name'], program['adventure_name'])
+                customized_level = class_adventures_formatted.get(str(program['level']))
+                if next((adventure for adventure in customized_level if adventure["name"] == name), False)\
+                        and self.is_program_modified(program, adventures, teacher_adventures):
+                    student_adventure_id = f"{student}-{program['adventure_name']}-{level}"
+                    current_adventure = self.db.student_adventure_by_id(student_adventure_id)
+                    if not current_adventure:
+                        # store the adventure in case it's not in the table
+                        current_adventure = self.db.store_student_adventure(
+                            dict(id=f"{student_adventure_id}", ticked=False, program_id=program['id']))
+
+                    current_program = dict(level=str(program['level']), name=name,
+                                           program=program['id'], ticked=current_adventure['ticked'])
+
+                    student_adventures[student_adventure_id] = current_program
+            graph_students.append(
+                {
+                    "username": student,
+                    "programs": len(programs),
+                    "adventures_tried": adventures_tried,
+                    "number_of_errors": number_of_errors,
+                    "successful_runs": successful_runs
+                }
+            )
+        return students, class_, class_adventures_formatted, adventure_names, student_adventures, graph_students
+
+    def is_program_modified(self, program, full_adventures, teacher_adventures):
+        # a single adventure migh have several code snippets, formatted using markdown
+        # we need to get them individually
+        adventure_info = full_adventures.get(program['adventure_name'], {})\
+            .get('levels', {})\
+            .get(program['level'], {})
+
+        example_codes = []
+        # for what I can see the examples codes start with no index, and then jump to two
+        # e.g: example_code, example_code_2, etc.
+        example_codes.append(adventure_info.get('example_code', ''))
+        i = 2
+        while adventure_info.get(f'example_code_{i}') is not None:
+            example_codes.append(adventure_info[f'example_code_{i}'])
+            i += 1
+        # Examples codes sometimes are not single code sections
+        # but actually can be several code sections mixed with text
+        # formatted using markdown.
+        adventure_snippets = []
+        for code in example_codes:
+            consecutive_backticks = 0
+            inside_code = False
+            previous_char = ''
+            code_start = -1
+            for index, char in enumerate(code):
+                if char == '`':
+                    consecutive_backticks += 1
+                    if consecutive_backticks == 3:
+                        # We've already finished the code section, which means
+                        # we can add it to the example_codes array
+                        if inside_code:
+                            adventure_snippets.append(code[code_start:index-3])
+                            inside_code = False
+                        # We are starting a code section, therefore we need to save this index
+                        else:
+                            code_start = index + 1
+                            inside_code = True
+                # if we find a char before 3 consecutive backticks it's either inline code
+                # or a malformed code section
+                elif char != '`' and previous_char == '`':
+                    consecutive_backticks = 0
+                previous_char = char
+        # now we have to get the snippets of the teacher adventures
+        for adventure in teacher_adventures:
+            if program['adventure_name'] == adventure["id"]:
+                content = adventure['content']
+                soup = BeautifulSoup(content, features="html.parser")
+                for pre in soup.find_all('pre'):
+                    adventure_snippets.append(str(pre.contents[0]))
+
+        student_code = program['code'].strip()
+        # now we have to calculate the differences between the student code and the code snippets
+        can_save = True
+        for snippet in adventure_snippets:
+            if re.search(r'<code.*?>.*?</code>', snippet):
+                snippet = re.sub(r'<code.*?>(.*?)</code>', r'\1', snippet)
+            snippet = snippet.strip()
+            seq_match = SequenceMatcher(None, snippet, student_code)
+            matching_ratio = round(seq_match.ratio(), 2)
+            # Allowing a difference of more than 10% or the student filled the placeholders
+            if matching_ratio >= 0.95 and (self.has_placeholder(student_code) or not self.has_placeholder(snippet)):
+                can_save = False
+        return can_save
+
+    def has_placeholder(self, code):
+        return re.search(r'(?<![^ \n])(_)(?= |$)', code, re.M) is not None
+
+    @route("/grid_overview/<class_id>/change_checkbox", methods=["POST"])
+    @requires_login
+    def change_checkbox(self, user, class_id):
+        level = request.args.get('level')
+        student_name = request.args.get('student', type=str)
+        adventure_name = request.args.get('adventure', type=str)
+
+        students, class_, class_adventures_formatted, adventure_names, _, _ = self.get_grid_info(
+            user, class_id, level)
+
+        adventure_names = {value: key for key, value in adventure_names.items()}
+        student_adventure_id = f"{student_name}-{adventure_name}-{level}"
+        current_adventure = self.db.student_adventure_by_id(student_adventure_id)
+        if not current_adventure:
+            return utils.error_page(error=404, ui_message=gettext("no_programs"))
+
+        self.db.update_student_adventure(student_adventure_id, current_adventure['ticked'])
+        student_overview_table, class_, class_adventures_formatted, \
+            adventure_names, student_adventures, _ = self.get_grid_info(user, class_id, level)
+
+        return jinja_partials.render_partial("customize-grid/partial-grid-table.html",
+                                             level=level,
+                                             class_info={"id": class_id, "students": students, "name": class_["name"]},
+                                             adventure_table={
+                                                 'students': student_overview_table,
+                                                 'adventures': class_adventures_formatted,
+                                                 'student_adventures': student_adventures,
+                                                 'level': level,
+                                             }
+                                             )
+
+    @route("/grid_overview/<class_id>/level", methods=["GET"])
+    @requires_login
+    def change_dropdown_level_class_overview(self, user, class_id):
+        level = request.args.get('level')
+        students, class_, class_adventures_formatted, \
+            adventure_names, student_adventures, graph_students = self.get_grid_info(user, class_id, level)
+        adventure_names = {value: key for key, value in adventure_names.items()}
+
+        return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
+                                             level=level,
+                                             class_info={"id": class_id, "students": students, "name": class_["name"]},
+                                             max_level=hedy.HEDY_MAX_LEVEL,
+                                             class_adventures=class_adventures_formatted,
+                                             adventure_names=adventure_names,
+                                             student_adventures=student_adventures,
+                                             adventure_table={
+                                                 'students': students,
+                                                 'adventures': class_adventures_formatted,
+                                                 'student_adventures': student_adventures,
+                                                 'graph_options': {
+                                                     'level': level,
+                                                     'graph_students': graph_students
+                                                 }
+                                             }
+                                             )
+
+    @route("/get_student_programs/<student>", methods=["GET"])
+    @requires_teacher
+    def show_students_programs(self, user, student):
+        result = self.db.programs_for_user(student)
+
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+
+        adventure_names = {}
+        for adv_key, adv_dic in adventures.items():
+            for name, _ in adv_dic.items():
+                adventure_names[adv_key] = hedy_content.get_localized_name(name, g.keyword_lang)
+
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        for adventure in teacher_adventures:
+            adventure_names[adventure['id']] = adventure['name']
+        programs = []
+        for item in result:
+            date = utils.delta_timestamp(item['date'])
+            # This way we only keep the first 4 lines to show as preview to the user
+            preview_code = "\n".join(item['code'].split("\n")[:4])
+            if item.get('is_modified', True):
+                programs.append(
+                    {'id': item['id'],
+                     'preview_code': preview_code,
+                     'code': item['code'],
+                     'date': date,
+                     'level': item['level'],
+                     'name': item['name'],
+                     'adventure_name': item.get('adventure_name'),
+                     'submitted': item.get('submitted'),
+                     'public': item.get('public'),
+                     'number_lines': item['code'].count('\n') + 1
+                     }
+                )
+        return jinja_partials.render_partial("incl/programs_loop.html",
+                                             programs=programs,
+                                             adventure_names=adventure_names,
+                                             student=student
+                                             )
 
     @route("/class/<class_id>/preview", methods=["GET"])
     @requires_login
@@ -757,6 +1002,7 @@ class ForTeachersModule(WebsiteModule):
             "level_thresholds": {},
             "sorted_adventures": db_adventures,
             "restored_by": user["username"],
+            "updated_by": user["username"]
         }
 
         self.db.update_class_customizations(customizations)
@@ -914,9 +1160,10 @@ class ForTeachersModule(WebsiteModule):
         self.db.update_class_customizations(customizations)
 
         achievement = self.achievements.add_single_achievement(user["username"], "my_class_my_rules")
+        response = {"success": gettext("class_customize_success")}
         if achievement:
-            utils.add_pending_achievement({"achievement": achievement})
-        return make_response(gettext("class_customize_success"), 200)
+            response["achievement"] = achievement
+        return make_response(response, 200)
 
     @route("/create-accounts/<class_id>", methods=["GET"])
     @requires_teacher
@@ -1153,7 +1400,7 @@ class ForTeachersModule(WebsiteModule):
             "creator": user["username"],
             "name": body["name"],
             "classes": body["classes"],
-            "level": body["levels"][0],  # TODO: this should be removed gradually.
+            "level": int(body["levels"][0]),  # TODO: this should be removed gradually.
             "levels": body["levels"],
             "content": body["content"],
             "public": 1 if body["public"] else 0,
@@ -1186,7 +1433,7 @@ class ForTeachersModule(WebsiteModule):
                 elif class_id not in current_classes:
                     self.add_adventure_to_class_level(user, class_id, body["id"], level, False)
 
-        return make_response(gettext("adventure_updated"), 200)
+        return make_response({"success": gettext("adventure_updated")}, 200)
 
     @route("/customize-adventure/<adventure_id>", methods=["DELETE"])
     @route("/customize-adventure/<adventure_id>/<owner>", methods=["DELETE"])
@@ -1283,7 +1530,7 @@ class ForTeachersModule(WebsiteModule):
             "date": utils.timems(),
             "creator": user["username"],
             "name": name,
-            "classes": [class_id],
+            "classes": [class_id] if class_id is not None else [],
             "level": int(level),
             "levels": [level],
             "content": "",
@@ -1295,3 +1542,59 @@ class ForTeachersModule(WebsiteModule):
             self.add_adventure_to_class_level(user, class_id, adventure_id, str(level), False)
 
         return adventure["id"], 200
+
+
+def get_customizations(db, class_id):
+    """
+    Retrieves the customizations for a specific class from the database.
+
+    Args:
+        db (Database): The database object used to retrieve the customizations.
+        class_id (string): The ID of the class for which to retrieve the customizations.
+
+    Returns:
+        customizations (dict): A dictionary containing the customizations for the class.
+    """
+    customizations = db.get_class_customizations(class_id)
+    if customizations and 'adventures' in customizations:
+        # it uses the old way so convert it to the new one
+        customizations['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
+        for adventure, levels in customizations['adventures'].items():
+            for level in levels:
+                customizations['sorted_adventures'][str(level)].append(
+                    {"name": adventure, "from_teacher": False})
+
+        db.update_class_customizations(customizations)
+    elif not customizations:
+        # Create a new default customizations object in case it doesn't have one
+        customizations = _create_customizations(db, class_id)
+    return customizations
+
+
+def _create_customizations(db, class_id):
+    """
+    Create customizations for a given class.
+
+    Args:
+        db (Database): The database object.
+        class_id (int): The ID of the class.
+
+    Returns:
+        customizations (dict): The customizations for the class.
+    """
+    sorted_adventures = {}
+    for lvl, adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
+        sorted_adventures[str(lvl)] = [{'name': adventure, 'from_teacher': False} for adventure in adventures]
+    customizations = {
+        "id": class_id,
+        "levels": [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)],
+        "opening_dates": {},
+        "other_settings": [],
+        "level_thresholds": {},
+        "sorted_adventures": sorted_adventures,
+        "dashboard_customization": {
+            "selected_levels": [1]
+        },
+    }
+    db.update_class_customizations(customizations)
+    return customizations

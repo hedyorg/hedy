@@ -40,5 +40,5 @@ Cypress.Commands.add('getDataCy', (selector, ...args) => {
 })
 
 Cypress.Commands.add('getDataCyLike', (selector, ...args) => {
-  return cy.get(`[data-cy*=${selector}]`, ...args)
+  return cy.get(`*[data-cy="${selector}"]`, ...args)
 })

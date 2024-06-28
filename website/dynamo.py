@@ -11,6 +11,7 @@ import time
 import random
 import datetime
 import collections
+import re
 from abc import ABCMeta
 from dataclasses import dataclass
 from typing import List, Optional
@@ -241,14 +242,22 @@ class Table:
           project the full set of attributes. Indexes can have a partition and their
           own sort keys.
         - sort_key: a field that is the sort key for the table.
+        - Types: a dictionary of field name to type object, to validate fields against.
+          Does not have to be exhaustive, but it must include all the indexed fields.
+          You can use: str, list, bool, bytes, int, float, numbers.Number, dict, list,
+          string_set, number_set, binary_set (last 3 declared in this module).
     """
 
-    def __init__(self, storage: TableStorage, table_name, partition_key, sort_key=None, indexes=None):
+    def __init__(self, storage: TableStorage, table_name, partition_key, types=None, sort_key=None, indexes=None):
         self.key_schema = KeySchema(partition_key, sort_key)
         self.storage = storage
         self.table_name = table_name
         self.indexes = indexes or []
         self.indexed_fields = set()
+        if types is not None:
+            self.types = Validator.ensure_all(types)
+        else:
+            self.types = None
 
         all_schemas = [self.key_schema] + [i.key_schema for i in self.indexes]
         for schema in all_schemas:
@@ -259,7 +268,12 @@ class Table:
         part_names = reverse_index((index.index_name, index.key_schema.partition_key) for index in self.indexes)
         duped = [names for names in part_names.values() if len(names) > 1]
         if duped:
-            raise RuntimeError(f'Table {self.table_name}: indexes with the same partition key: {duped}')
+            raise ValueError(f'Table {self.table_name}: indexes with the same partition key: {duped}')
+
+        # Check to make sure all indexed fields have a declared type
+        if self.types:
+            if undeclared := [f for f in self.indexed_fields if f not in self.types]:
+                raise ValueError(f'Declare the type of these fields which are used as keys: {", ".join(undeclared)}')
 
     @querylog.timed_as("db_get")
     def get(self, key):
@@ -510,6 +524,7 @@ class Table:
         if not self.key_schema.contains_both_keys(data):
             raise ValueError(f"Expecting fields {self.key_schema} in create() call, got: {data}")
         self._validate_indexable_fields(data, False)
+        self._validate_types(data, full=True)
 
         querylog.log_counter(f"db_create:{self.table_name}")
         self.storage.put(self.table_name, self.key_schema.extract(data), data)
@@ -530,6 +545,7 @@ class Table:
         querylog.log_counter(f"db_update:{self.table_name}")
         self._validate_indexable_fields(updates, True)
         self._validate_key(key)
+        self._validate_types(updates, full=False)
 
         updating_keys = set(updates.keys()) & set(self.key_schema.key_names)
         if updating_keys:
@@ -657,6 +673,39 @@ class Table:
             raise ValueError('Trying to insert %r into table %s, but %s is a Partition or Sort Key of the table itself '
                              ' or an index, so must be of type string, number or binary.'
                              % ({field: value}, self.table_name, field))
+
+    def _validate_types(self, data, full):
+        """Validate the types in the record according to the 'self.types' map.
+
+        If 'full=True' we will use the declared keys as a basis (making sure
+        the record is complete). If full=False, we only use the given keys,
+        making sure the updates are valid.
+        """
+        if self.types is None:
+            return
+
+        keys_to_validate = self.types.keys() if full else data.keys()
+
+        for field in keys_to_validate:
+            validator = self.types.get(field)
+            if not validator:
+                continue
+
+            value = data.get(field)
+            if not validate_value_against_validator(value, validator):
+                raise ValueError(f'In {data}, value of {field} should be {validator} (got {value})')
+
+
+def validate_value_against_validator(value, validator: 'Validator'):
+    """Validate a value against a validator.
+
+    A validator can be a built-in class representing a type, like 'str'
+    or 'int'.
+    """
+    if isinstance(value, DynamoUpdate):
+        return value.validate_against_type(validator)
+    else:
+        return validator.is_valid(value)
 
 
 DDB_SERIALIZER = TypeSerializer()
@@ -792,26 +841,34 @@ class AwsDynamoStorage(TableStorage):
         return items, next_page_token
 
     def _prep_query_data(self, key, sort_key=None, is_key_expression=True):
-        eq_conditions, special_conditions = DynamoCondition.partition(key)
+        """Build a DynamoDB condition expression from a dictionary mapping fields to values.
+
+        The values may be literals, in which case we will render an `=` condition,
+        or it may be a `DynamoCondition` subclass for more complex conditions.
+
+        Field names are escaped in order to make them not conflict with
+        built-in words.
+
+        Returns a triple of (expression, values, names):
+
+        - expression: a string containing placeholders like `#myfield = :myfield`.
+        - names: a dict mapping `#myfield` placeholders to `my-field` field names.
+        - values: a dict mapping `:myfield` placeholders to their serialized values.
+        """
+        conditions = DynamoCondition.make_conditions(key)
         if is_key_expression:
-            validate_only_sort_key(special_conditions, sort_key)
+            validate_only_sort_key(conditions, sort_key)
 
-        # We must escape field names with a '#' because Dynamo is unhappy
-        # with fields called 'level' etc:
-        # https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-        # This escapes too much, but at least it's easy.
+        escaped_names = {k: slugify(k) for k in conditions.keys()}
 
-        key_expression = " AND ".join(
-            [f"#{field} = :{field}" for field in eq_conditions.keys()]
-            + [cond.to_dynamo_expression(field) for field, cond in special_conditions.items()]
-        )
+        key_expression = " AND ".join(cond.to_dynamo_expression(escaped_names[field])
+                                      for field, cond in conditions.items())
 
-        attr_values = {f":{field}": DDB_SERIALIZER.serialize(key[field]) for field in eq_conditions.keys()}
-        for field, cond in special_conditions.items():
-            attr_values.update(cond.to_dynamo_values(field))
+        attr_values = {}
+        for field, cond in conditions.items():
+            attr_values.update(cond.to_dynamo_values(escaped_names[field]))
 
-        attr_names = {"#" + field: field for field in key.keys()}
-
+        attr_names = {f'#{e}': k for k, e in escaped_names.items()}
         return key_expression, attr_values, attr_names
 
     def put(self, table_name, _key, data):
@@ -970,16 +1027,13 @@ class MemoryStorage(TableStorage):
 
     @lock.synchronized
     def query(self, table_name, key, sort_key, reverse, limit, pagination_token, filter=None, pagination_key=None):
-        eq_conditions, special_conditions = DynamoCondition.partition(key)
-        validate_only_sort_key(special_conditions, sort_key)
+        key_conditions = DynamoCondition.make_conditions(key)
+        validate_only_sort_key(key_conditions, sort_key)
 
-        if filter:
-            filter_eq_conditions, filter_special_conditions = DynamoCondition.partition(filter)
-        else:
-            filter_eq_conditions, filter_special_conditions = {}, {}
+        filter_conditions = DynamoCondition.make_conditions(filter or {})
 
         records = self.tables.get(table_name, [])
-        filtered = [r for r in records if self._query_matches(r, eq_conditions, special_conditions)]
+        filtered = [r for r in records if self._query_matches(r, key_conditions)]
 
         if sort_key:
             filtered.sort(key=lambda x: x[sort_key])
@@ -1008,7 +1062,7 @@ class MemoryStorage(TableStorage):
         # Do a final filtering to mimic DynamoDB FilterExpression
         return copy.deepcopy([record
                               for record in filtered
-                              if self._query_matches(record, filter_eq_conditions, filter_special_conditions)
+                              if self._query_matches(record, filter_conditions)
                               ]), next_page_key
 
     # NOTE: on purpose not @synchronized here
@@ -1140,10 +1194,8 @@ class MemoryStorage(TableStorage):
     def _eq_matches(self, record, key):
         return all(record.get(k) == v for k, v in key.items())
 
-    def _query_matches(self, record, eq, conds):
-        return all(record.get(k) == v for k, v in eq.items()) and all(
-            cond.matches(record.get(k)) for k, cond in conds.items()
-        )
+    def _query_matches(self, record, conds):
+        return all(cond.matches(record.get(k)) for k, cond in conds.items())
 
     def _flush(self):
         if self.filename:
@@ -1177,6 +1229,9 @@ class DynamoUpdate:
     def to_dynamo(self):
         raise NotImplementedError()
 
+    def validate_against_type(self, validator):
+        raise NotImplementedError()
+
 
 class DynamoIncrement(DynamoUpdate):
     def __init__(self, delta=1):
@@ -1187,6 +1242,12 @@ class DynamoIncrement(DynamoUpdate):
             "Action": "ADD",
             "Value": {"N": str(self.delta)},
         }
+
+    def validate_against_type(self, validator):
+        return validate_value_against_validator(self.delta, validator)
+
+    def __repr__(self):
+        return f'Inc({self.delta})'
 
 
 class DynamoAddToStringSet(DynamoUpdate):
@@ -1200,6 +1261,13 @@ class DynamoAddToStringSet(DynamoUpdate):
             "Action": "ADD",
             "Value": {"SS": list(self.elements)},
         }
+
+    def validate_against_type(self, validator):
+        # The validator should be SetOf(...)
+        return validate_value_against_validator(set(self.elements), validator)
+
+    def __repr__(self):
+        return f'Add{self.elements}'
 
 
 class DynamoAddToNumberSet(DynamoUpdate):
@@ -1217,6 +1285,13 @@ class DynamoAddToNumberSet(DynamoUpdate):
             "Value": {"NS": [str(x) for x in self.elements]},
         }
 
+    def validate_against_type(self, validator):
+        # The validator should be SetOf(...)
+        return validate_value_against_validator(set(self.elements), validator)
+
+    def __repr__(self):
+        return f'Add{self.elements}'
+
 
 class DynamoAddToList(DynamoUpdate):
     """Add one or more elements to a list."""
@@ -1224,11 +1299,18 @@ class DynamoAddToList(DynamoUpdate):
     def __init__(self, *elements):
         self.elements = elements
 
+    def validate_against_type(self, validator):
+        # The validator should be ListOf(...)
+        return validate_value_against_validator(list(self.elements), validator)
+
     def to_dynamo(self):
         return {
             "Action": "ADD",
             "Value": {"L": [DDB_SERIALIZER.serialize(x) for x in self.elements]},
         }
+
+    def __repr__(self):
+        return f'Add{self.elements}'
 
 
 class DynamoRemoveFromStringSet(DynamoUpdate):
@@ -1242,6 +1324,13 @@ class DynamoRemoveFromStringSet(DynamoUpdate):
             "Action": "DELETE",
             "Value": {"SS": list(self.elements)},
         }
+
+    def validate_against_type(self, validator):
+        # The validator should be SetOf(...)
+        return validate_value_against_validator(set(self.elements), validator)
+
+    def __repr__(self):
+        return f'Remove{self.elements}'
 
 
 class DynamoCondition:
@@ -1265,17 +1354,30 @@ class DynamoCondition:
         raise NotImplementedError()
 
     @staticmethod
-    def partition(key):
-        """Partition a dictionary into 2 dictionaries.
+    def make_conditions(key):
+        """Turn a dict of values into a dict of DynamoConditions.
 
-        The first one will contain all elements for which the values are
-        NOT of type DynamoCondition. The other one will contain all the elements
-        for which the value ARE DynamoConditions.
+        Non-DynamoConditions are returned into instances of Equals.
         """
-        eq_conditions = {k: v for k, v in key.items() if not isinstance(v, DynamoCondition)}
-        special_conditions = {k: v for k, v in key.items() if isinstance(v, DynamoCondition)}
+        return {k: v if isinstance(v, DynamoCondition) else Equals(v) for k, v in key.items()}
 
-        return (eq_conditions, special_conditions)
+
+class Equals(DynamoCondition):
+    """Assert that a value is equal to another value."""
+
+    def __init__(self, value):
+        self.value = value
+
+    def to_dynamo_expression(self, field_name):
+        return f"#{field_name} = :{field_name}"
+
+    def to_dynamo_values(self, field_name):
+        return {
+            f':{field_name}': DDB_SERIALIZER.serialize(self.value),
+        }
+
+    def matches(self, value):
+        return value == self.value
 
 
 class Between(DynamoCondition):
@@ -1341,9 +1443,10 @@ class CustomEncoder(json.JSONEncoder):
 
 
 def validate_only_sort_key(conds, sort_key):
-    """Check that only the sort key is used in the given key conditions."""
-    if sort_key and set(conds.keys()) - {sort_key}:
-        raise RuntimeError(f"Conditions only allowed on sort key {sort_key}, got: {list(conds)}")
+    """Check that non-Equals conditions are only used on the sort key."""
+    non_equals_fields = [k for k, v in conds.items() if not isinstance(v, Equals)]
+    if sort_key and set(non_equals_fields) - {sort_key}:
+        raise RuntimeError(f"Non-Equals conditions only allowed on sort key {sort_key}, got: {list(conds)}")
 
 
 def encode_page_token(x, inverted):
@@ -1566,3 +1669,168 @@ def make_predicate(obj):
     if isinstance(obj, dict):
         return lambda row: all(row.get(key) == value for key, value in obj.items())
     raise ValueError(f'Not a valid client_side_filter: {obj}')
+
+
+class Validator(metaclass=ABCMeta):
+    """Base class for validators.
+
+    Subclasses should implement 'is_valid' and '__str__'.
+    """
+
+    @staticmethod
+    def ensure(validator):
+        """Turn the given value into a validator."""
+        if validator is True:
+            return Any()
+        if isinstance(validator, Validator):
+            return validator
+        if type(validator) is type:
+            return InstanceOf(validator)
+        if callable(validator):
+            return Predicate(validator)
+        raise ValueError(f'Not sure how to treat {validator} as a validator')
+
+    @staticmethod
+    def ensure_all(validator_dict):
+        if str in validator_dict.keys() and len(validator_dict.keys()) > 1:
+            raise ValueError(f'If you specify str as part of the validation, you cant define more type checks.\
+                              You dindt do that for {validator_dict}')
+        type_dict = {}
+        for k, v in validator_dict.items():
+            if k is str:
+                type_dict[Validator.ensure(k)] = Validator.ensure(v)
+            elif isinstance(k, str):
+                type_dict[k] = Validator.ensure(v)
+            else:
+                raise ValueError(f'Key values should be of type str or instances of string.\
+                                 {k} does not comply with that')
+        return type_dict
+
+    def is_valid(self, value):
+        ...
+
+    def __str__(self, value):
+        ...
+
+
+class Any(Validator):
+    """Validator which allows any type."""
+
+    def is_valid(self, value):
+        return True
+
+    def __str__(self):
+        return 'any value'
+
+
+class InstanceOf(Validator):
+    """Validator which checks if a value is an instance of a type."""
+
+    def __init__(self, type):
+        self.type = type
+
+    def is_valid(self, value):
+        return isinstance(value, self.type)
+
+    def __str__(self):
+        return f'instance of {self.type}'
+
+
+class EitherOf(Validator):
+    """Validator wihch checks if a value is instance of one of several types"""
+
+    def __init__(self, *types):
+        self.validators = [Validator.ensure(type) for type in types]
+
+    def is_valid(self, value):
+        return any(validator.is_valid(value) for validator in self.validators)
+
+    def __str__(self):
+        return f'matches one of {self.validators}'
+
+
+class Predicate(Validator):
+    """Validator which calls an arbitrary callback."""
+
+    def __init__(self, fn):
+        self.fn = fn
+
+    def is_valid(self, value):
+        return self.fn(value)
+
+    def __str__(self):
+        return f'matches {self.fn}'
+
+
+class Optional(Validator):
+    """Validator which matches either None or an inner validator."""
+
+    def __init__(self, inner):
+        self.inner = Validator.ensure(inner)
+
+    def is_valid(self, value):
+        return value is None or self.inner.is_valid(value)
+
+    def __str__(self):
+        return f'optional {self.inner}'
+
+
+class SetOf(Validator):
+    """Validator which matches a set matching inner validators."""
+
+    def __init__(self, inner):
+        self.inner = Validator.ensure(inner)
+
+    def is_valid(self, value):
+        return isinstance(value, set) and all(self.inner.is_valid(x) for x in value)
+
+    def __str__(self):
+        return f'set of {self.inner}'
+
+
+class ListOf(Validator):
+    """Validator which matches a list matching inner validators."""
+
+    def __init__(self, inner):
+        self.inner = Validator.ensure(inner)
+
+    def is_valid(self, value):
+        return isinstance(value, list) and all(self.inner.is_valid(x) for x in value)
+
+    def __str__(self):
+        return f'list of {self.inner}'
+
+
+class RecordOf(Validator):
+    """Validator which matches a record with inner validators."""
+
+    def __init__(self, inner):
+        self.inner = Validator.ensure_all(inner)
+
+    def is_valid(self, value):
+        return (isinstance(value, dict)
+                and all(validator.is_valid(value.get(key)) for key, validator in self.inner.items()))
+
+    def __str__(self):
+        return f'{self.inner}'
+
+
+class DictOf(Validator):
+    """ Validator wich matches dictionaries of any string to inner validators """
+
+    def __init__(self, inner):
+        self.inner = Validator.ensure_all(inner)
+
+    def is_valid(self, value):
+        if not isinstance(value, dict):
+            return False
+        first_type = list(self.inner.keys())[0]
+        return all(first_type.is_valid(k) and self.inner.get(first_type).is_valid(v) for k, v in value.items())
+
+    def __str__(self):
+        return f'list of {self.inner}'
+
+
+def slugify(x):
+    """Strips special characters from Dynamo identifiers."""
+    return re.sub(r'[^a-zA-Z0-9_.-]', '_', x)

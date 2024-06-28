@@ -369,8 +369,8 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
   });
 }
 
-export function initializeHighlightedCodeBlocks(where: Element) {
-  const dir = $('body').attr('dir');
+export function initializeHighlightedCodeBlocks(where: Element, initializeAll?: boolean) {
+  const dir = $("body").attr("dir");
   initializeParsons();
   if (theLevel) {
     initializeTranslation({
@@ -386,55 +386,63 @@ export function initializeHighlightedCodeBlocks(where: Element) {
         .addClass('relative text-lg rounded overflow-x-hidden')
         // We set the language of the editor to the current keyword_language -> needed when copying to main editor
         .attr('lang', theKeywordLanguage);
-
-      // Only turn into an editor if the editor scrolls into view
-      // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
-      onElementBecomesVisible(preview, () => {
-        const codeNode = preview.querySelector('code')
-        let code: string;
-        // In case it has a child <code> node
-        if(codeNode) {
-          codeNode.hidden = true
-          code = codeNode.innerText
+      // If the request comes from HTMX initialize all directly
+        if (initializeAll) {
+          convertPreviewToEditor(preview, container, dir)
         } else {
-          code = preview.textContent || "";
-          preview.textContent = "";
-        }
-
-        // Create this example editor
-        const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
-        // Strip trailing newline, it renders better
-        exampleEditor.contents = code;
-        exampleEditor.contents = exampleEditor.contents.trimEnd();
-        // And add an overlay button to the editor if requested via a show-copy-button class, either
-        // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
-        if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
-          const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
-          let symbol = "⇥";
-          if (dir === "rtl") {
-            symbol = "⇤";
-          }
-          const adventure = container.getAttribute('data-tabtarget')
-          $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').attr('data-cy', `paste_example_code_${adventure}`).text(symbol).appendTo(buttonContainer).click(function() {
-            if (!theGlobalEditor?.isReadOnly) {
-              theGlobalEditor.contents = exampleEditor.contents + '\n';
-            }
-            update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
-            stopit();
-            clearOutput();
-          });
-        }
-        const levelStr = $(preview).attr('level');
-        const lang = $(preview).attr('lang');
-        if (levelStr && lang) {
-          initializeTranslation({
-            keywordLanguage: lang,
-            level: parseInt(levelStr, 10),
-          })
-          exampleEditor.setHighlighterForLevel(parseInt(levelStr, 10));
-        }
-      });
+        // Only turn into an editor if the editor scrolls into view
+        // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
+        onElementBecomesVisible(preview, () => {
+          convertPreviewToEditor(preview, container, dir)
+        });
+      }
     }
+  }
+}
+
+function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement, dir?: string) {
+  const codeNode = preview.querySelector('code')
+  let code: string;
+  // In case it has a child <code> node
+  if (codeNode) {
+    codeNode.hidden = true
+    code = codeNode.innerText
+  } else {
+    code = preview.textContent || "";
+    preview.textContent = "";
+  }
+
+  // Create this example editor
+  const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
+  // Strip trailing newline, it renders better
+  exampleEditor.contents = code;
+  exampleEditor.contents = exampleEditor.contents.trimEnd();
+  // And add an overlay button to the editor if requested via a show-copy-button class, either
+  // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
+  if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
+    const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
+    let symbol = "⇥";
+    if (dir === "rtl") {
+      symbol = "⇤";
+    }
+    const adventure = container.getAttribute('data-tabtarget')
+    $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').attr('data-cy', `paste_example_code_${adventure}`).text(symbol).appendTo(buttonContainer).click(function() {
+      if (!theGlobalEditor?.isReadOnly) {
+        theGlobalEditor.contents = exampleEditor.contents + '\n';
+      }
+      update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
+      stopit();
+      clearOutput();
+    });
+  }
+  const levelStr = $(preview).attr('level');
+  const lang = $(preview).attr('lang');
+  if (levelStr && lang) {
+    initializeTranslation({
+      keywordLanguage: lang,
+      level: parseInt(levelStr, 10),
+    })
+    exampleEditor.setHighlighterForLevel(parseInt(levelStr, 10));
   }
 }
 
@@ -559,7 +567,6 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
         let response = await postJsonWithAchievements('/parse', data);
         program_data = response;
         console.log('Response', response);
-
         if (response.Warning && $('#editor').is(":visible")) {
           //storeFixedCode(response, level);
           error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
@@ -672,7 +679,7 @@ export async function showAchievements(achievements: Achievement[] | undefined, 
       $('#achievement_pop_up').removeAttr('reload');
       $('#achievement_pop_up').removeAttr('redirect');
       location.reload();
-     }, achievements.length * 6000);
+     }, achievements.length * 3000);
   }
   if (redirect) {
     $('#achievement_pop_up').attr('redirect', redirect);
@@ -680,7 +687,7 @@ export async function showAchievements(achievements: Achievement[] | undefined, 
       $('#achievement_pop_up').removeAttr('reload');
       $('#achievement_pop_up').removeAttr('redirect');
       window.location.pathname = redirect;
-     }, achievements.length * 6000);
+     }, achievements.length * 3000);
   }
 }
 
@@ -692,11 +699,11 @@ function showAchievement(achievement: Achievement) {
         $('#achievement_pop_up').fadeIn(1000, function () {
           setTimeout(function(){
             $('#achievement_pop_up').fadeOut(1000);
-           }, 4000);
+           }, 1000);
         });
         setTimeout(()=>{
             resolve();
-        ;} , 6000
+        ;} , 1000
         );
     });
 }
@@ -759,7 +766,6 @@ function updateSelectOptions(selectName: string) {
         } else if (!optionsArray.includes(text)){
           optionsArray.push(text);
           }
-      console.log(optionsArray);
   });
 
   if (selectName == 'level'){
@@ -785,10 +791,9 @@ export async function delete_program(id: string, prompt: string) {
     updateSelectOptions('adventure');
     // this function decreases the total programs saved
     updateProgramCount();
-    const response = await postJsonWithAchievements('/programs/delete', { id });
+    const response = await postJsonWithAchievements('/programs/delete', { id });    
     showAchievements(response.achievement, true, "");
     // issue request on the Bar component.
-    console.log("resp", response)
     modal.notifySuccess(response.message);
   });
 }
@@ -1497,7 +1502,7 @@ function createModal(level:number ){
   modal.repair(editor, 0, title);
 }
 
-export function toggleDevelopersMode(event='click', enforceDevMode: boolean) {
+export function setDevelopersMode(event='click', enforceDevMode: boolean) {
   let enable: boolean = false;
   switch (event) {
     case 'load':
@@ -1509,17 +1514,21 @@ export function toggleDevelopersMode(event='click', enforceDevMode: boolean) {
     case 'click':
       // Toggled
       enable = $('#developers_toggle').prop('checked');
-      window.localStorage.setItem('developer_mode', `${enable}`);
       if (enable) {
         pushAchievement("lets_focus");
       }
       break;
   }
+  window.localStorage.setItem('developer_mode', `${enable}`)
+  toggleDevelopersMode()
+}
 
+function toggleDevelopersMode() {
+  const enable = window.localStorage.getItem('developer_mode') === 'true';
   // DevMode hides the tabs and makes resizable elements track the appropriate size.
   // (Driving from HTML attributes is more flexible on what gets resized, and avoids duplicating
   // size literals between HTML and JavaScript).
-  $('#adventures').toggle(!enable);
+  $('#adventures').toggle(!enable || currentTab === 'quiz' || currentTab === 'parsons');
   // Parsons dont need a fixed height
   if (currentTab === 'parsons') return
   $('[data-devmodeheight]').each((_, el) => {
@@ -1853,17 +1862,13 @@ function reconfigurePageBasedOnTab() {
   resetWindow();
 
   updatePageElements();
+  toggleDevelopersMode();
   if (currentTab === 'parsons') {
     loadParsonsExercise(theLevel, 1);
     // remove the fixed height from the editor
     document.getElementById('code_editor')!.style.height = '100%'
     document.getElementById('code_output')!.style.height = '100%'
     return;
-  } else {
-    $('[data-devmodeheight]').each((_, el) => {
-      const heights = $(el).data('devmodeheight').split(',') as string[];
-      $(el).css('height', heights[0]);
-    });
   }
 
   const adventure = theAdventures[currentTab];

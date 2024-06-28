@@ -8,21 +8,22 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-05-16 14:13+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"PO-Revision-Date: 2024-06-27 16:31+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: pl <LL@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.6-dev\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.7-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
+#, fuzzy
 msgid "Access Before Assign"
 msgstr "Próbowano użyć zmiennej {name} w linii {access_line_number}, ale ustawiono ją w linii {definition_line_number}. Ustaw zmienną przed jej użyciem."
 
+#, fuzzy
 msgid "Cyclic Var Definition"
 msgstr "Zmienna `{variable}` musi zostać ustawiona zanim będzie można użyć jej po prawej stronie tej komendy."
 
@@ -30,39 +31,51 @@ msgstr "Zmienna `{variable}` musi zostać ustawiona zanim będzie można użyć 
 msgid "Else Without If Error"
 msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
 
+#, fuzzy
 msgid "Function Undefined"
 msgstr "Próba użycia funkcji {name}, która nie została zdefiniowana."
 
+#, fuzzy
 msgid "Has Blanks"
 msgstr "Twój kod nie jest skończony. Posiada miejsca które trzeba wypełnić."
 
+#, fuzzy
 msgid "Incomplete"
 msgstr "Ups! Zapomniałeś o odrobinie kodu! W linii {line_number}, musisz dodać tekst po `{incomplete_command}`."
 
+#, fuzzy
 msgid "Incomplete Repeat"
 msgstr "Wygląda na to, że zapomniano użyć komendy z poleceniem `{repeat}` w linii {line_number}."
 
+#, fuzzy
 msgid "Invalid"
 msgstr "`{invalid_command}` nie jest komendą z {level} poziomu Hedy. Czy miałeś na myśli `{guessed_command}`?"
 
+#, fuzzy
 msgid "Invalid Argument"
 msgstr "Nie możesz użyć komendy `{command}` z `{invalid_argument}` . Spróbuj zmienić typ `{invalid_argument}` na {allowed_types}."
 
+#, fuzzy
 msgid "Invalid Argument Type"
 msgstr "Nie możesz użyć komendy `{command}` z `{invalid_argument}`, ponieważ jest ona typu {invalid_type}. Spróbuj zmienić `{invalid_argument}` na {allowed_types}."
 
+#, fuzzy
 msgid "Invalid At Command"
 msgstr "Polecenie `{command}` nie może być używane od poziomu 16 wzwyż. Możesz użyć nawiasów kwadratowych aby wybrać element z listy, na przykład: `przyjaciele[i]`, `szczęśliwe_numerki[{random}]`."
 
+#, fuzzy
 msgid "Invalid Space"
 msgstr "Ups! Linia numer {line_number} zaczyna się od spacji. Spacje są dziwne dla komputerów, czy można ją usunąć?"
 
+#, fuzzy
 msgid "Invalid Type Combination"
 msgstr "Nie możesz użyć `{invalid_argument}` oraz `{invalid_argument_2}` z `{command}` ponieważ pierwszy jest typu {invalid_type}, a drugi jest typu {invalid_type_2}. Spróbuj zmienić `{invalid_argument}` na {invalid_type_2} lub `{invalid_argument_2}` na {invalid_type}."
 
+#, fuzzy
 msgid "Lonely Echo"
 msgstr "Użyłeś `{echo}` przed `{ask}` lub `{echo}` bez `{ask}`. Umieść `{ask}` przed `{echo}`."
 
+#, fuzzy
 msgid "Lonely Text"
 msgstr "Wygląda na to, że zapomniano użyć komendy z tekstem w linii {line_number}"
 
@@ -74,9 +87,11 @@ msgstr "It looks like you forgot to complete writing `{command}` on line {line_n
 msgid "Missing Colon Error"
 msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
 
+#, fuzzy
 msgid "Missing Command"
 msgstr "Wygląda na to, że zapomniano użyć komendy w linii {line_number}."
 
+#, fuzzy
 msgid "Missing Inner Command"
 msgstr "Wygląda na to, że zapomniano użyć komendy z słowem `{command}` użytym w linii {line_number}."
 
@@ -84,24 +99,31 @@ msgstr "Wygląda na to, że zapomniano użyć komendy z słowem `{command}` uży
 msgid "Missing Square Brackets"
 msgstr "It looks like you forgot to use square brackets `[]` around the list you were creating on line {line_number}."
 
+#, fuzzy
 msgid "Missing Variable"
 msgstr "W poleceniu `{command}` brakuje zmiennej na początku linii."
 
+#, fuzzy
 msgid "Misspelled At Command"
 msgstr "Wygląda na to, że mogłeś błędnie napisać polecenie `{command}`, zamiast tego w wierszu {line_number} wpisałeś `{invalid_argument}`."
 
+#, fuzzy
 msgid "No Indentation"
 msgstr "Użyto zbyt mało spacji w linii {line_number}. Użyto {leading_spaces} spacji, to za mało. Rozpocznij każdy blok o {indent_size} spacji dalej niż linia powyżej."
 
+#, fuzzy
 msgid "Non Decimal Variable"
 msgstr "W linii {line_number} mogłeś spróbować użyć numeru, którego Hedy nie bardzo lubi! Spróbuj zmienić go na liczbę dziesiętną, np. 2."
 
+#, fuzzy
 msgid "Parse"
 msgstr "Kod który wprowadzono nie jest poprawnym kodem Hedy. W linii {location[0]} jest błąd, w pozycji {location[1]}. Użyto `{character_found}`, co nie jest dozwolone."
 
+#, fuzzy
 msgid "Pressit Missing Else"
 msgstr "Nie dodano instrukcji co ma się wydarzyć gdy naciśnięty zostanie inny klawisz, dodaj instrukcję `{else}` do swojego kodu"
 
+#, fuzzy
 msgid "Runtime Index Error"
 msgstr "Próbowałeś dostać się do elementu listy {name}, ale jest ona pusta albo indeks który podałeś nie istnieje."
 
@@ -109,6 +131,7 @@ msgstr "Próbowałeś dostać się do elementu listy {name}, ale jest ona pusta 
 msgid "Runtime Value Error"
 msgstr "While running your program the command `{command}` received the value `{value}` which is not allowed. {tip}."
 
+#, fuzzy
 msgid "Runtime Values Error"
 msgstr "While running your program the command `{command}` received the values `{value}` and `{value}` which are not allowed. {tip}."
 
@@ -116,6 +139,7 @@ msgstr "While running your program the command `{command}` received the values `
 msgid "Save Microbit code "
 msgstr "Save Microbit code"
 
+#, fuzzy
 msgid "Too Big"
 msgstr "Wow! Twój program ma aż {lines_of_code} linii kodu! Ale możemy przetworzyć tylko {max_lines} linii na tym poziomie. Zmniejsz swój program, i spróbuj ponownie."
 
@@ -127,12 +151,15 @@ msgstr "You used too few leading spaces in line {line_number}. You used {leading
 msgid "Too Many Indents"
 msgstr "You used too many leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too many."
 
+#, fuzzy
 msgid "Unexpected Indentation"
 msgstr "Użyto zbyt dużo spacji w linii {line_number}. Użyto {leading_spaces} spacji, to za dużo. Rozpocznij każdy blok {indent_size} spacji dalej niż poprzednia linia."
 
+#, fuzzy
 msgid "Unquoted Assignment"
 msgstr "Od tego poziomu, tekst po `{is}` będzie musiał być między apostrofami. Zapomniano o tym przy tekście {text}."
 
+#, fuzzy
 msgid "Unquoted Equality Check"
 msgstr "Jeśli chcesz sprawdzić, czy zmienna jest równa wielu słowom, słowa powinny być pomiędzy apostrofami!"
 
@@ -140,21 +167,27 @@ msgstr "Jeśli chcesz sprawdzić, czy zmienna jest równa wielu słowom, słowa 
 msgid "Unquoted Text"
 msgstr "Uważaj. Jeżeli chcesz coś wypisać, tekst powinien zaczynać i kończyć się apostrofem. Zapomniano o tym dla tekstu {unquotedtext}."
 
+#, fuzzy
 msgid "Unsupported Float"
 msgstr "Liczby niecałkowita nie są jeszcze dostępne, ale będą za kilka poziomów. Na teraz, zmień `{value}` na liczbę całkowitą."
 
+#, fuzzy
 msgid "Unsupported String Value"
 msgstr "Wartości tekstowe nie mogą zawierać `{invalid_value}`."
 
+#, fuzzy
 msgid "Unused Variable"
 msgstr "Zdefiniowałeś zmienną {variable_name} w linii {line_number}, ale jej nie użyłeś."
 
+#, fuzzy
 msgid "Var Undefined"
 msgstr "Próbowano użyć zmiennej `{name}`, ale nie została ona ustawiona. Jest też możliwe, że próbowano użyć słowa `{name}`, ale zapomniano o apostrofach."
 
+#, fuzzy
 msgid "Wrong Level"
 msgstr "To był poprawny kod Hedy, ale nie dla tego poziomu. Użyto `{offending_keyword}` dla poziomu {working_level}. Porada: {tip}"
 
+#, fuzzy
 msgid "Wrong Number of Arguments"
 msgstr "Twoja funkcja użyła nieprawidłowej liczby argumentów. Podałeś {used_number}, ale funkcja {name} potrzebuje {defined_number}"
 
@@ -189,9 +222,6 @@ msgstr "Dodaj"
 
 msgid "add_students"
 msgstr "Dodaj uczniów"
-
-msgid "add_students_options"
-msgstr "Dodaj opcje ucznia"
 
 #, fuzzy
 msgid "add_your_language"
@@ -230,8 +260,9 @@ msgstr "Pamiętaj, żeby zawsze otaczać słowa kluczowe / polecenia symbolami {
 msgid "adventure_exp_classes"
 msgstr "Your adventure is used within the following classes"
 
+#, fuzzy
 msgid "adventure_flagged"
-msgstr ""
+msgstr "The adventure was flagged successfully."
 
 msgid "adventure_id_invalid"
 msgstr "Ten identyfikator przygody jest nieprawidłowy."
@@ -256,11 +287,19 @@ msgid "adventures"
 msgstr "Adventures"
 
 #, fuzzy
+msgid "adventures_completed"
+msgstr "Adventures completed: {number_of_adventures}"
+
+#, fuzzy
 msgid "adventures_info"
 msgstr "Each Hedy level has built-in exercises for students, which we call adventures. You can create your own adventures and add them to your classes. With your own adventures you can create adventures that are relevant and interesting for your students. You can find more information about creating your own adventures <a href=\"https://hedy.org/for-teachers/manual/features\">here</a>."
 
 msgid "adventures_restored"
 msgstr "Domyślne przygody zostały przywrócone."
+
+#, fuzzy
+msgid "adventures_tried"
+msgstr "Adventures tried"
 
 msgid "ago"
 msgstr "{timestamp} temu"
@@ -350,8 +389,8 @@ msgid "class_customize_success"
 msgstr "Personalizacje zostaly zapisane pomyślnie."
 
 #, fuzzy
-msgid "class_live"
-msgstr "Live statistics"
+msgid "class_graph_explanation"
+msgstr "In this graph you can see represented the numbers of adventures your students have attempted (meaning they have done meaninful work in that adventure), with respect to the number of errors and successful runs."
 
 msgid "class_name_duplicate"
 msgstr "Już masz klasę z taką nazwą."
@@ -366,8 +405,8 @@ msgid "class_name_prompt"
 msgstr "Podaj proszę nazwę nowej klasy"
 
 #, fuzzy
-msgid "class_overview"
-msgstr "Class overview"
+msgid "class_performance_graph"
+msgstr "Class performance graph"
 
 #, fuzzy
 msgid "class_survey_description"
@@ -437,8 +476,9 @@ msgstr "Gratulacje, {username}, ukończyłeś Hedy!"
 msgid "connect_guest_teacher"
 msgstr "I would like to be connected with a guest teacher who can give a few lessons"
 
+#, fuzzy
 msgid "constant_variable_role"
-msgstr ""
+msgstr "constant"
 
 msgid "content_invalid"
 msgstr "Ta przygoda jest nieprawidłowa."
@@ -572,6 +612,10 @@ msgstr "Usuń profil publiczny"
 msgid "delete_success"
 msgstr "Program został usunięty pomyślnie."
 
+#, fuzzy
+msgid "delete_tag_prompt"
+msgstr "Are you sure you want to delete this tag?"
+
 msgid "destroy_profile"
 msgstr "Usuń profil"
 
@@ -658,6 +702,10 @@ msgstr "Wprowadź swoją odpowiedź tutaj..."
 msgid "error_logo_alt"
 msgstr "Logo błędu"
 
+#, fuzzy
+msgid "errors"
+msgstr "Errors"
+
 msgid "exclamation mark"
 msgstr "wykrzyknik"
 
@@ -731,8 +779,9 @@ msgstr "Please send us a message with a category. We appreciate your help to imp
 msgid "female"
 msgstr "Żeńska"
 
+#, fuzzy
 msgid "flag_adventure_prompt"
-msgstr ""
+msgstr "Do you want to flag this adventure so that we check its appropriateness?"
 
 msgid "float"
 msgstr "liczba"
@@ -791,6 +840,10 @@ msgstr "Idź do wyników quizu"
 
 msgid "goto_profile"
 msgstr "Idź do mój profil"
+
+#, fuzzy
+msgid "graph_title"
+msgstr "Errors per adventure completed on level {level}"
 
 msgid "grid_overview"
 msgstr "Przegląd programów na przygodę"
@@ -886,8 +939,9 @@ msgstr "Incorrect Indentation"
 msgid "input"
 msgstr "wejście z `{ask}`"
 
+#, fuzzy
 msgid "input_variable_role"
-msgstr ""
+msgstr "input"
 
 msgid "integer"
 msgstr "liczba"
@@ -976,9 +1030,6 @@ msgstr "Ostatnio edytowano"
 msgid "last_error"
 msgstr "Last error"
 
-msgid "last_login"
-msgstr "Ostatnie logowanie"
-
 #, fuzzy
 msgid "last_program"
 msgstr "Last program"
@@ -1024,8 +1075,9 @@ msgstr "Link"
 msgid "list"
 msgstr "lista"
 
+#, fuzzy
 msgid "list_variable_role"
-msgstr ""
+msgstr "list"
 
 #, fuzzy
 msgid "live_dashboard"
@@ -1246,6 +1298,10 @@ msgstr "Nie ma takiego programu!"
 msgid "no_tag"
 msgstr "No tag provided!"
 
+#, fuzzy
+msgid "not_adventure_yet"
+msgstr "You must fill in an adventure name first"
+
 msgid "not_enrolled"
 msgstr "Wygląda na to, że nie jesteś członkiem tej klasy!"
 
@@ -1269,6 +1325,10 @@ msgstr "Liczba osiągnięć"
 
 msgid "number_lines"
 msgstr "Numer linii"
+
+#, fuzzy
+msgid "number_of_errors"
+msgstr "Number of errors: {number_of_errors}"
 
 msgid "number_programs"
 msgstr "Liczba programów"
@@ -1315,9 +1375,6 @@ msgstr "Już posiadasz zapisany program o tej samej nazwie. Zapisanie tego progr
 #, fuzzy
 msgid "owner"
 msgstr "Owner"
-
-msgid "page"
-msgstr "strona"
 
 msgid "page_not_found"
 msgstr "Nie możemy odnaleźć tej strony!"
@@ -1554,8 +1611,9 @@ msgstr "Czy jesteś pewien, że chcesz zgłosić ten program?"
 msgid "report_success"
 msgstr "Ten program został zgłoszony"
 
+#, fuzzy
 msgid "request_invalid"
-msgstr ""
+msgstr "Request invalid"
 
 msgid "request_teacher"
 msgstr "Czy chciałbyś aplikować o konto nauczyciela?"
@@ -1746,8 +1804,9 @@ msgstr "Start teaching"
 msgid "step_title"
 msgstr "Zadanie domowe"
 
+#, fuzzy
 msgid "stepper_variable_role"
-msgstr ""
+msgstr "stepper"
 
 msgid "stop_code_button"
 msgstr "Zatrzymaj program"
@@ -1768,10 +1827,6 @@ msgstr "Ten uczeń został już zaproszony do klasy."
 #, fuzzy
 msgid "student_details"
 msgstr "Student details"
-
-#, fuzzy
-msgid "student_list"
-msgstr "Student list"
 
 #, fuzzy
 msgid "student_not_allowed_in_class"
@@ -1809,6 +1864,10 @@ msgstr "Zasubskrybuj"
 
 msgid "subscribe_newsletter"
 msgstr "Zasubskrybuj do biuletynu informacyjnego"
+
+#, fuzzy
+msgid "successful_runs"
+msgstr "Successful runs: {successful_runs}"
 
 #, fuzzy
 msgid "suggestion_color"
@@ -1911,13 +1970,6 @@ msgstr "Hedy - Moje osiągnięcia"
 msgid "title_admin"
 msgstr "Hedy - Strona Administratora"
 
-msgid "title_class grid_overview"
-msgstr "Hedy - Przegląd siatki"
-
-#, fuzzy
-msgid "title_class live_statistics"
-msgstr "Hedy - Live Statistics"
-
 msgid "title_class-overview"
 msgstr "Hedy - Informacje o klasie"
 
@@ -2018,8 +2070,9 @@ msgstr "Your program is unfavourited."
 msgid "unique_usernames"
 msgstr "Wszystkie nazwy użytkowników muszą być unikalne."
 
+#, fuzzy
 msgid "unknown_variable_role"
-msgstr ""
+msgstr "unknown"
 
 msgid "unlock_thresholds"
 msgstr "Wymagania do odblokowania następnego poziomu"
@@ -2105,8 +2158,13 @@ msgstr "Wyświetl program"
 msgid "view_slides"
 msgstr "View slides"
 
+#, fuzzy
+msgid "waiting_for_submit"
+msgstr "Waiting for submit"
+
+#, fuzzy
 msgid "walker_variable_role"
-msgstr ""
+msgstr "walker"
 
 msgid "welcome"
 msgstr "Witaj"
@@ -2325,9 +2383,15 @@ msgstr "Twój program"
 #~ msgid "variables"
 #~ msgstr "Zmienne"
 
-#~ msgid "container_variable_role"
-#~ msgstr ""
+#~ msgid "class_live"
+#~ msgstr "Live statistics"
 
-#~ msgid "input_constant_variable_role"
-#~ msgstr ""
+#~ msgid "class_overview"
+#~ msgstr "Class overview"
+
+#~ msgid "student_list"
+#~ msgstr "Student list"
+
+#~ msgid "title_class live_statistics"
+#~ msgstr "Hedy - Live Statistics"
 

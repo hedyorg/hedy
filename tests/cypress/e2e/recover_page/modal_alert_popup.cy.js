@@ -5,7 +5,7 @@ describe('Modal alert popup test', () => {
     goToRecover();
 
     // Tests hidden modal alert text
-    cy.get('#modal_alert_text')
+    cy.getDataCy('modal_alert_text')
       .should('not.be.visible')
       .should('be.empty');
 
@@ -16,7 +16,7 @@ describe('Modal alert popup test', () => {
        .should('be.visible')
        .should('not.be.disabled')
        .click()
-    cy.get('#modal_alert_text')
+    cy.getDataCy('modal_alert_text')
       .should('be.visible')
 
     // Reset fields
@@ -28,7 +28,7 @@ describe('Modal alert popup test', () => {
       .type('user1')
     cy.get('#send_recovery_button')
        .click()
-    cy.get('#modal_alert_text')
+    cy.getDataCy('modal_alert_text')
       .should('be.visible')
   })
 })
