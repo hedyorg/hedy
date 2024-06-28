@@ -170,7 +170,7 @@ class AuthHelper(unittest.TestCase):
 
         Need to log in again to refresh the session.
         """
-        self.get_data('admin/mark-as-teacher/' + self.username)
+        self.post_data('admin/mark-as-teacher/' + self.username, {})
         return self.login_user(self.username)
 
     def make_current_user_super_teacher(self):
@@ -178,7 +178,7 @@ class AuthHelper(unittest.TestCase):
 
         Need to log in again to refresh the session.
         """
-        self.get_data('admin/mark-super-teacher/' + self.username)
+        self.post_data('admin/mark-super-teacher/' + self.username, {})
         return self.login_user(self.username)
 
     def given_user_is_logged_in(self):

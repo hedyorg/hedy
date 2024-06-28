@@ -174,7 +174,7 @@ class AdminModule(WebsiteModule):
             page_title=gettext("title_admin"),
         )
 
-    @route("/mark-as-teacher/<username_teacher>", methods=["GET"])
+    @route("/mark-as-teacher/<username_teacher>", methods=["POST"])
     def mark_as_teacher(self, username_teacher):
         user = current_user()
         # the user that wants to mark a teacher
@@ -193,7 +193,7 @@ class AdminModule(WebsiteModule):
 
         return make_response('', 200)
 
-    @route("/mark-super-teacher/<username_teacher>", methods=["GET"])
+    @route("/mark-super-teacher/<username_teacher>", methods=["POST"])
     @requires_admin
     def mark_super_teacher(self, user, username_teacher):
         # the user that wants to mark a teacher
