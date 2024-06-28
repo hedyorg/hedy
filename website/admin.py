@@ -187,8 +187,11 @@ class AdminModule(WebsiteModule):
         teacher = self.db.user_by_username(username_teacher.strip().lower())
         if not teacher:
             return make_response(gettext("username_invalid"), 400)
+        if utils.is_testing_request(request):
+            is_teacher_value = request.json['is_teacher']
+        else:
+            is_teacher_value = 0 if teacher.get("is_teacher") else 1
 
-        is_teacher_value = 0 if teacher.get("is_teacher") else 1
         update_is_teacher(self.db, teacher, is_teacher_value)
 
         return make_response('', 200)
