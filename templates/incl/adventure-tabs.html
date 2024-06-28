@@ -36,12 +36,12 @@
       {# PANES #}
       <div id="adventures_tab" class="w-full overflow-auto bg-gray-200 mb-5 shadow-md">
         {% for adventure in adventures %}
-            <div id="{{adventure.short_name}}"
+            <div
                 data-tabtarget="{{adventure.short_name}}" class="
                 {% if adventure.short_name != initial_tab %}hidden{% endif %}
                 turn-pre-into-ace show-copy-button p-4 text-adventure-copy"
                 >
-              <div class="lg:flex lg:flex-row {% if adventure.is_teacher_adventure %}teacher-adv{% endif %}">
+              <div id="adv_{{adventure.short_name}}" class="lg:flex lg:flex-row {% if adventure.is_teacher_adventure %}teacher-adv{% endif %}">
                     <div class="w-full {% if adventure.example_code or adventure.is_teacher_adventure %}lg:w-1/2 {% endif %} p-2 ltr:mr-2 rtl:ml-2">
                         {% if adventure.is_teacher_adventure %}{{ adventure.text|safe }}{% else %}{{ adventure.text|commonmark }}{% endif %}
                     </div>
@@ -57,6 +57,7 @@
                       </div>
                   {% endif %}
               </div>
+            <div class="{% if not adventure.extra_stories %}hidden{% endif %}" id="extra_{{adventure.short_name}}">
             {% for story in adventure.extra_stories %}
                 <div class="lg:flex lg:flex-row border-t-2">
                     <div class="lg:w-1/2 w-full p-2 ltr:mr-2 rtl:ml-2">
@@ -72,14 +73,31 @@
                   {% endif %}
                 </div>
             {% endfor %}
+            </div>
             <div class="flex flex-row justify-end">
-                <button class="gray-btn px-4 rounded inline-flex items-center gap-2"
-                _="on click 
-                toggle .hidden on #{{adventure.short_name}}
-                then toggle .hidden on #show_button
-                then localStorage.setItem('hide_adventure', '{{adventure.short_name}}')">
+                <button id="show_button_{{adventure.short_name}}" class="gray-btn px-4 rounded inline-flex items-center gap-2"
+                _="on click
+                    toggle .hidden on #hide_button_{{adventure.short_name}}
+                    then toggle .hidden on me
+                    then toggle .hidden on #adv_{{adventure.short_name}}
+                    toggle .hidden on #extra_{{adventure.short_name}}
+                end">
                     Hide
-                    <svg id="hide_arrow" class="fill-current h-6 w-6 rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <svg id="show_hide_arrow" class="fill-current h-6 w-6 rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="flex flex-row justify-end">
+                <button id="hide_button_{{adventure.short_name}}" class="hidden gray-btn px-4 rounded inline-flex items-center gap-2"
+                _="on click 
+                    toggle .hidden on #show_button_{{adventure.short_name}}
+                    then toggle .hidden on me
+                    then toggle .hidden on #adv_{{adventure.short_name}}
+                    toggle .hidden on #extra_{{adventure.short_name}}
+                end">
+                    Show
+                    <svg id="show_hide_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                     </svg>
                 </button>
@@ -100,7 +118,7 @@
         {% endif %}
       </div>
     </div>
-<div class="flex flex-row justify-end">
+<!-- <div class="flex flex-row justify-end">
     <button class="hidden gray-btn mb-2 mr-2 px-4 rounded inline-flex items-center gap-2" id="show_button"
     _="on click
         set v to localStorage.getItem('hide_adventure')
@@ -111,4 +129,4 @@
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
         </svg>
     </button>
-  </div>
+  </div> -->
