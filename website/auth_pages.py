@@ -370,7 +370,7 @@ class AuthModule(WebsiteModule):
             return make_response({"message": gettext("sent_password_recovery")}, 200)
 
     @route("/reset", methods=["POST"])
-    @limiter.limit("1/day;1/hour;1/minute")
+    @limiter.limit("1/day;1/hour;1/minute", exempt_when=lambda: is_testing_request(request))
     def reset(self):
         body = request.json
         # Validations
