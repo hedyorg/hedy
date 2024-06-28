@@ -9,11 +9,29 @@
     </div>
     <!-- Row 1: editor, output pane -->
     <div data-devmodeheight="{{editor_height}},36rem" class="flex flex-col order-1 relative" id="code_editor" style="height: {{editor_height}}">
-        <div id="fold_in_toggle_container" class="hidden md:flex absolute z-10 top-16 ltr:-right-1 rtl:-left-1 cursor-pointer" onclick="hedyApp.hide_editor();">
-         <div id="text_field" class="bg-green-500 text-white py-3 rounded-lg text-sm">
-             <span>←</span>
-         </div>
-        </div>
+      <div id="fold_in_toggle_container" class="absolute top-16 flex z-10 ltr:-right-1 rtl:-left-1 cursor-pointer" onclick="hedyApp.hide_editor();">
+          <div id="text_field" class="bg-green-500 text-white py-3 rounded-lg text-sm">
+              <span>←</span>
+          </div>
+      </div>
+      <div id="button_row" class="absolute top-72 right-0 z-20 flex px-4 py-3 justify-end">
+          <div id="run_button_container" class="z-10 px-1 inline-flex items-center">
+              <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>{{_('run_code_button')}} </button>
+              <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
+          </div>
+          <div id="debug_container" class="z-10 px-1 inline-flex items-center">
+              <button id="debug_button" class="blue-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>Debug</button>
+              <button id="debug_restart" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>🔄</button>
+              <button id="debug_stop" class="green-btn hidden" onclick="hedyApp.stopDebug()">🛑</button>
+              <button id="debug_continue" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "continue")'><div class="{% if g.dir == "rtl" %}rotate-180{% endif %}">⏩</div></button>
+          </div>
+          <div id="copy_button_container" class="z-10 px-1 inline-flex items-center">
+              <button id="copy" class="blue-btn" onclick="">Copy</button>
+          </div>
+          <div id="clear_button_container" class="z-10 px-1 inline-flex items-center">
+              <button id="clear" class="blue-btn" onclick="">Clear</button>
+          </div>
+      </div>
         <!--The div below is used to send translation of search to Ace through the frontend-->
         <div id="search_placeholder" style="display: none":>{{_('search')}}</div>
         <!-- Status warning -->
@@ -153,10 +171,10 @@
       </div>
       {% endif %}
       <div class="flex justify-between gap-2 items-start h-12 overflow-visible">
-        <div id="run_button_container">
+        <!-- <div id="run_button_container">
           <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>{{_('run_code_button')}} </button>
           <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
-        </div>
+        </div> -->
       <div id="saveMicrobitFilesContainer" {% if not microbit_feature %} class="hidden" {% endif %} >
         <button id="runMicrobit" class="green-btn" onclick="hedyApp.saveMicrobit({{ level }});" > {{ _('Save Microbit code ') }}
             <img src="{{ static('/images/microbit_logo_icon_248480.png') }}" style="width: 25px; height: 25px; margin-left: 1px; display: inline;" alt=""/>
@@ -165,12 +183,12 @@
         <div id="save_files_container" class="hidden">
           <button id="saveFiles" class="green-btn" onclick="hedyApp.saveMachineFiles();">💾</button>
         </div>
-        <div id="debug_container" class="ltr:ml-auto rtl:mr-auto">
+        <!-- <div id="debug_container" class="ltr:ml-auto rtl:mr-auto">
           <button id="debug_button" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>🐞</button>
           <button id="debug_restart" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>🔄</button>
           <button id="debug_stop" class="green-btn hidden" onclick="hedyApp.stopDebug()">🛑</button>
           <button id="debug_continue" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "continue")'><div class="{% if g.dir == "rtl" %}rotate-180{% endif %}">⏩</div></button>
-        </div>
+        </div> -->
         <button id="next_parson_button" max_exercise="{{ parsons_exercises }}" class="green-btn ltr:ml-auto rtl:mr-auto" style="display: none;">{{_('next_exercise')}}</button>
         {% if show_edit_button %}
             <button onclick="window.location = '/hedy/{{level}}/{{program_id}}'" class="blue-btn ltr:ml-4 rtl:mr-4">{{_('edit_code_button')}}</button>
