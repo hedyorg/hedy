@@ -884,9 +884,9 @@ adventures:
                     {print} Heute schau wir uns film _wahl an
                     Magst {ask} Magst du den Film?
                     {print} Morgen schauen wir etwas anderes.
-                    {add} film_wahl {to} film_auswahl
-                    {print} Morgen schauen wir  morgige_filme
-                    morgige_filme {is} film_auswahl {at} {random}
+                    {add} film_wahl {to_list} film_auswahl
+                    {print} Morgen schauen wir morgigen_film
+                    morgigen_film {is} film_auswahl {at} {random}
                     I hole uns mal das Popcorn! {print}
                     ```
             4:
@@ -1432,11 +1432,12 @@ adventures:
                     Bis jetzt konntest du mit Hedy keine Dezimalzahlen (das sind Kommazahlen) wie 1,5 verwenden, aber jetzt geht das. Denke jedoch daran, dass Hedy (wie viele andere Programmiersprachen auch) anstatt des Kommas einen Punkt (`.`) verwendet.
                 example_code: |
                     ```
-                    {print} 'Zweieinhalb plus zweieinhalb macht...'
-                    {print} 2.5 + 2.5
+                    burger = 5
+                    getraenk = 2
+                    gesamt = burger + getraenk
+                    print 'Du hast einen Burger und ein Getränk bestellt'
+                    print 'Das macht zusammen 'total' Euro, bitte'
                     ```
-
-                    {print} 2.5 + 2.5
             13:
                 story_text: |-
                     Wir werden jetzt `{and}` und `{or}` lernen! Wenn du zwei Angaben überprüfen willst, musst du nicht zwei Mal `{if}` verwenden, sondern kannst `{and}` und `{or}` benutzen.
@@ -3573,14 +3574,13 @@ adventures:
                     Good news! In this level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command. Putting a block of code inside another block of code is called nesting.                     ``` Putting a block of code inside another block of code is called nesting.
                 example_code: |
                     ```
-                    answer = {ask} 'Are you ready to learn something new?'
-                    {if} answer {is} yes
-                        {print} 'Great! You can learn to use the repeat command in the if command!'
-                        {print} 'Hooray!'
-                        {print} 'Hooray!'
-                        {print} 'Hooray!'
-                    {else}
-                        {print} 'Maybe you should practice some more in the previous level'
+                    {repeat} 3 {times}
+                        bestellung = {ask} 'Was möchtest du bestellen?'
+                        {if} bestellung {is} pizza
+                            {print} 'Lecker!'
+                        {else}
+                            {print} 'Pizza ist besser!'
+                    ```
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: repeat_command_2
@@ -3844,7 +3844,7 @@ adventures:
                     ```
                     {print} 'Willkommen im Restaurant Hedy!'
                     Leute = {ask} 'Für wie viele Leute möchten Sie bestellen?'
-                    {print} 'Also möchten Sie für' Leute ' Leute bestellen.'
+                    {print} 'Also möchten Sie für 'Leute ' Leute bestellen.'
                     {print} "Los geht's!"
                     ```
             12:
