@@ -1,0 +1,19 @@
+#!/bin/bash
+# Validate Python code
+set -eu
+scriptdir=$(cd $(dirname $0) && pwd)
+cd $scriptdir/../..
+
+echo "------> Check Python for problems using pylint"
+
+# Find all .py files to validate, except those in the 'prefixes' directory.
+# Syntax: ( <condition> -o <condition> -o <condition> ... -prune )
+pyfiles=$(find . -not \( -path ./.\* -o -path ./prefixes -prune \) -name \*.py)
+
+# Get the system/library directories. pylint should not report any errors against those.
+sysdirs=$(python3 -c 'import sys; print(",".join(p for p in sys.path if p))')
+
+pylint -E \
+  --jobs 0 \
+  --ignore-paths $sysdirs \
+  $pyfiles
