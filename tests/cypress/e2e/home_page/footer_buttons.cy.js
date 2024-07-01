@@ -1,8 +1,8 @@
 import { goToHome } from "../tools/navigation/nav";
 
 beforeEach(() => {
-    goToHome();
-  })
+  goToHome();
+})
 
 describe('Footer buttons', () => {
   it('Is able to subscribe to newsletter', () => {
