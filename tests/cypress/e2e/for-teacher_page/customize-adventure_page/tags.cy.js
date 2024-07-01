@@ -16,7 +16,7 @@ describe("Tags of adventures", () => {
       .should("be.visible")
   })
 
-  it.only("adds a tag to adventure by pressing enter within the input field", () => {
+  it("adds a tag to adventure by pressing enter within the input field", () => {
     cy.get('#search_tags_input')
       .should("be.empty")
       .type("statements{enter}")

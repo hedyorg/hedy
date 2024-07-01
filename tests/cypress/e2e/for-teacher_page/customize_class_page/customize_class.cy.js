@@ -107,7 +107,7 @@ teachers.forEach((teacher) => {
       });
     });
 
-    it.only('Is able to reset the adventures and create a new adventure', () => {
+    it('Is able to reset the adventures and create a new adventure', () => {
       // At first, the Parrot adventure should be in the level 1's adventures
 
       selectLevel('1');
