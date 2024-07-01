@@ -1,13 +1,6 @@
 {% extends "auth.html" %}
 {% block regular_content %}
 <div class="px-8 py-12">
-    {% if achievement %}
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            hedyApp.showAchievements({{ achievement|safe }}, false, "");
-        });
-    </script>
-    {% endif %}
     <!-- <h2 class="px-8 mb-4">{{_('explore_programs')}}</h2> -->
     <!--
     <div class="mb-4">

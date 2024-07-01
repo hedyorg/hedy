@@ -1,5 +1,5 @@
 import { modal } from './modal';
-import { showAchievements, theKeywordLanguage } from "./app";
+import { theKeywordLanguage } from "./app";
 import { ClientMessages } from './client-messages';
 import DOMPurify from 'dompurify'
 import { startTeacherTutorial } from './tutorials/tutorial';
@@ -25,11 +25,7 @@ export function create_class(class_name_prompt: string) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      if (response.achievement) {
-        showAchievements(response.achievement, false, '/for-teachers/customize-class/' + response.id);
-      } else {
-        window.location.pathname = '/for-teachers/customize-class/' + response.id ;
-      }
+      window.location.pathname = '/for-teachers/customize-class/' + response.id ;      
     }).fail(function(err) {
       return modal.notifyError(err.responseText);
     });
@@ -46,12 +42,8 @@ export function rename_class(id: string, class_name_prompt: string) {
           }),
           contentType: 'application/json',
           dataType: 'json'
-        }).done(function(response) {
-          if (response.achievement) {
-            showAchievements(response.achievement, true, "");
-          } else {
-            location.reload();
-          }
+        }).done(function() {
+          location.reload();
         }).fail(function(err) {
           return modal.notifyError(err.responseText);
         });
@@ -99,11 +91,7 @@ function apiDuplicateClass(id: string, prompt: string, second_teacher: boolean, 
             });
         }
       }
-      if (response.achievement) {
-            showAchievements(response.achievement, true, "");
-          } else {
-            location.reload();
-          }
+      location.reload();      
     }).fail(function(err) {
       return modal.notifyError(err.responseText);
     });
@@ -117,12 +105,8 @@ export function delete_class(id: string, prompt: string) {
       url: '/class/' + id,
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function (response) {
-      if (response.achievement) {
-        showAchievements(response.achievement, true, '');
-      } else {
-        location.reload();
-      }
+    }).done(function () {
+      location.reload();      
     }).fail(function (err) {
       modal.notifyError(err.responseText);
     });
@@ -139,12 +123,8 @@ export function join_class(id: string, name: string) {
         name: name
       }),
       dataType: 'json'
-    }).done(function(response) {
-      if (response.achievement) {
-          showAchievements(response.achievement, false, '/programs');
-      } else {
-          window.location.pathname = '/programs';
-      }
+    }).done(function() {
+      window.location.pathname = '/programs';
     }).fail(function(err) {
       if (err.status == 403) { //The user is not logged in -> ask if they want to
          return modal.confirm (err.responseText, function () {
@@ -202,13 +182,8 @@ export function remove_student(class_id: string, student_id: string, prompt: str
       url: '/class/' + class_id + '/student/' + student_id,
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function(response) {
-      // the check for response is necessary because of make_response() but I'm not sure why
-      if (response && response.achievement) {
-          showAchievements(response.achievement, true, "");
-      } else {
-          location.reload();
-      }
+    }).done(function() {
+      location.reload();
     }).fail(function(err) {
         modal.notifyError(err.responseText);
     });
@@ -458,10 +433,7 @@ export function save_customizations(class_id: string) {
       }),
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function (response) {
-      if (response.achievement) {
-          showAchievements(response.achievement, false, "");
-      }
+    }).done(function (response) {      
       modal.notifySuccess(response.success);
       $('#remove_customizations_button').removeClass('hidden');
     }).fail(function (err) {
