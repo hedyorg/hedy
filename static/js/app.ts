@@ -1671,37 +1671,6 @@ export function select_profile_image(image: number) {
   $('#image').val(image);
 }
 
-export function filter_admin() {
-  const params: Record<string, any> = {};
-
-  const filter = $('#admin_filter_category').val();
-  params['filter'] = filter;
-
-  if ($('#hidden_page_input').val()) {
-    params['page'] = $('#hidden_page_input').val();
-  }
-
-  switch (filter) {
-    case 'email':
-    case 'username':
-      params['substring'] = $('#email_filter_input').val();
-      break;
-    case 'language':
-      params['language'] = $('#language_filter_input').val();
-      break;
-    case 'keyword_language':
-      params['keyword_language'] = $('#keyword_language_filter_input').val();
-      break;
-    default:
-      params['start'] = $('#admin_start_date').val();
-      params['end'] = $('#admin_end_date').val();
-      break;
-  }
-
-  const queryString = Object.entries(params).map(([k, v]) => k + '=' + encodeURIComponent(v)).join('&');
-  window.open('?' + queryString, '_self');
-}
-
 export function hide_editor() {
   $('#fold_in_toggle_container').hide();
   $('#code_editor').toggle();
