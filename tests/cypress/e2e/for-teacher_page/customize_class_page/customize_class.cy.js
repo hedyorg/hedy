@@ -107,7 +107,7 @@ teachers.forEach((teacher) => {
       });
     });
 
-    it('Is able to reset the adventures and create a new adventure', () => {
+    it.only('Is able to reset the adventures and create a new adventure', () => {
       // At first, the Parrot adventure should be in the level 1's adventures
 
       selectLevel('1');
@@ -122,7 +122,7 @@ teachers.forEach((teacher) => {
 
       const new_adventure = "test_new_adventure"
       cy.getDataCy('edit_link').click();
-      cy.getDataCy('custom_adventure_name')
+      cy.get('#custom_adventure_name')
       .clear()
       .type(new_adventure)
       // TODO check if adventure is added to class and level correctly

@@ -7,10 +7,8 @@ teachers.forEach((teacher) => {
   it(`Agree public checkbox test for ${teacher}`, () => {
     loginForTeacher(teacher);
     goToEditAdventure();
-    // navigate to the editor's view
-    cy.getBySel("adventure").click();
 
-    cy.getDataCy('agree_public')
+    cy.get('#agree_public')
       .should('be.visible')
       .should('not.be.disabled')
       .check()
