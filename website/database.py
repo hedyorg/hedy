@@ -37,7 +37,7 @@ from utils import timems, times, is_debug_mode
 from . import dynamo, auth
 from . import querylog
 
-from .dynamo import DictOf, Optional, ListOf, SetOf, RecordOf, EitherOf
+from .dynamo import DictOf, OptionalOf, ListOf, SetOf, RecordOf, EitherOf
 
 is_offline = getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
 if is_offline:
@@ -62,26 +62,26 @@ USERS = dynamo.Table(storage, 'users', 'username',
                      types=only_in_dev({
                          'username': str,
                          'password': str,
-                         'email': Optional(str),
-                         'language': Optional(str),
-                         'keyword_language': Optional(str),
+                         'email': OptionalOf(str),
+                         'language': OptionalOf(str),
+                         'keyword_language': OptionalOf(str),
                          'created': int,
-                         'is_teacher': Optional(int),
-                         'verification_pending': Optional(str),
+                         'is_teacher': OptionalOf(int),
+                         'verification_pending': OptionalOf(str),
                          'last_login': int,
-                         'country': Optional(str),
-                         'birth_year': Optional(int),
-                         'gender': Optional(str),
-                         'heard_about': Optional(ListOf(str)),
-                         'prog_experience': Optional(str),
-                         'experience_languages': Optional(ListOf(str)),
+                         'country': OptionalOf(str),
+                         'birth_year': OptionalOf(int),
+                         'gender': OptionalOf(str),
+                         'heard_about': OptionalOf(ListOf(str)),
+                         'prog_experience': OptionalOf(str),
+                         'experience_languages': OptionalOf(ListOf(str)),
                          'epoch': int,
-                         'second_teacher_in': Optional(ListOf(str)),
-                         'classes': Optional(SetOf(str)),
-                         'teacher': Optional(str),
-                         'pair_with_teacher': Optional(int),
-                         'teacher_request': Optional(bool),
-                         'is_super_teacher': Optional(int)
+                         'second_teacher_in': OptionalOf(ListOf(str)),
+                         'classes': OptionalOf(SetOf(str)),
+                         'teacher': OptionalOf(str),
+                         'pair_with_teacher': OptionalOf(int),
+                         'teacher_request': OptionalOf(bool),
+                         'is_super_teacher': OptionalOf(int)
                      }),
                      indexes=[
                          dynamo.Index('email'),
@@ -104,16 +104,16 @@ PROGRAMS = dynamo.Table(storage, "programs", "id",
                             'session': str,
                             'username': str,
                             'date': int,
-                            'hedy_choice': Optional(int),
-                            'public': Optional(int),
+                            'hedy_choice': OptionalOf(int),
+                            'public': OptionalOf(int),
                             'lang': str,
                             'level': int,
                             'code': str,
                             'adventure_name': str,
                             'name': str,
                             'username_level': str,
-                            'error': Optional(bool),
-                            'is_modified': Optional(bool)
+                            'error': OptionalOf(bool),
+                            'is_modified': OptionalOf(bool)
                         }),
                         indexes=[
                             dynamo.Index('username', sort_key='date', index_name='username-index'),
@@ -135,11 +135,11 @@ CLASSES = dynamo.Table(storage, "classes", "id",
                            'link': str,
                            'date': int,
                            'name': str,
-                           'second_teachers': Optional(ListOf(RecordOf({
+                           'second_teachers': OptionalOf(ListOf(RecordOf({
                                'role': str,
                                'username': str,
                            }))),
-                           'students': Optional(SetOf(str)),
+                           'students': OptionalOf(SetOf(str)),
                        }),
                        indexes=[
                            dynamo.Index('teacher'),
@@ -164,13 +164,13 @@ ADVENTURES = dynamo.Table(storage, "adventures", "id",
                               'date': int,
                               'creator': str,
                               'name': str,
-                              'classes': Optional(ListOf(str)),
+                              'classes': OptionalOf(ListOf(str)),
                               'level': EitherOf(str, int),  # this might be a string or a int
                               'levels': ListOf(str),
                               'content': str,
                               'public': int,
                               'language': str,
-                              'formatted_content': Optional(str)
+                              'formatted_content': OptionalOf(str)
                           }),
                           indexes=[
                               dynamo.Index("creator"),
@@ -206,7 +206,7 @@ TAGS = dynamo.Table(storage, "tags", "id",
                         'id': str,
                         'name': str,
                         'popularity': int,
-                        'tagged_in': Optional(ListOf(RecordOf({
+                        'tagged_in': OptionalOf(ListOf(RecordOf({
                             'id': str,
                             'public': int,
                             'language': str
@@ -225,7 +225,7 @@ TAGS = dynamo.Table(storage, "tags", "id",
 SURVEYS = dynamo.Table(storage, "surveys", "id",
                        types=only_in_dev({
                            'id': str,
-                           'responses':  Optional(DictOf({
+                           'responses':  OptionalOf(DictOf({
                                str: RecordOf({
                                    'answer': str,
                                    'question': str
@@ -287,17 +287,17 @@ CUSTOMIZATIONS = dynamo.Table(storage, "class_customizations", partition_key="id
                                           'from_teacher': bool
                                       }))
                                   }),
-                                  'updated_by': Optional(str),
-                                  'quiz_parsons_tabs_migrated': Optional(int)
+                                  'updated_by': OptionalOf(str),
+                                  'quiz_parsons_tabs_migrated': OptionalOf(int)
                               }))
 
 ACHIEVEMENTS = dynamo.Table(storage, "achievements", partition_key="username",
                             types=only_in_dev({
                                 'username': str,
-                                'achieved': Optional(ListOf(str)),
-                                'commands': Optional(ListOf(str)),
-                                'saved_programs': Optional(int),
-                                'run_programs': Optional(int)
+                                'achieved': OptionalOf(ListOf(str)),
+                                'commands': OptionalOf(ListOf(str)),
+                                'saved_programs': OptionalOf(int),
+                                'run_programs': OptionalOf(int)
                             }))
 PUBLIC_PROFILES = dynamo.Table(storage, "public_profiles", partition_key="username",
                                types=only_in_dev({
@@ -305,7 +305,7 @@ PUBLIC_PROFILES = dynamo.Table(storage, "public_profiles", partition_key="userna
                                    'image': str,
                                    'personal_text': str,
                                    'agree_terms': str,
-                                   'tags': Optional(ListOf(str))
+                                   'tags': OptionalOf(ListOf(str))
                                }))
 PARSONS = dynamo.Table(storage, "parsons", "id",
                        types=only_in_dev({
