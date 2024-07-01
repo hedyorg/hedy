@@ -1031,82 +1031,8 @@ class Database:
                     return class_customizations or {}
         return {}
 
-    def progress_by_username(self, username):
-        return ACHIEVEMENTS.get({"username": username})
-
-    def achievements_by_username(self, username):
-        progress_data = ACHIEVEMENTS.get({"username": username})
-        if progress_data and "achieved" in progress_data:
-            return progress_data["achieved"]
-        else:
-            return None
-
-    def get_all_achievements(self):
-        return ACHIEVEMENTS.scan()
-
-    def add_achievement_to_username(self, username, achievement):
-        new_user = False
-        user_achievements = ACHIEVEMENTS.get({"username": username})
-        if not user_achievements:
-            new_user = True
-            user_achievements = {"username": username}
-        if "achieved" not in user_achievements:
-            user_achievements["achieved"] = []
-        if achievement not in user_achievements["achieved"]:
-            user_achievements["achieved"].append(achievement)
-            ACHIEVEMENTS.put(user_achievements)
-        # Update the amount of achievements on the public profile (if exists)
-        self.update_achievements_public_profile(username, len(user_achievements["achieved"]))
-        if new_user:
-            return True
-        return False
-
-    def add_achievements_to_username(self, username, achievements):
-        new_user = False
-        user_achievements = ACHIEVEMENTS.get({"username": username})
-        if not user_achievements:
-            new_user = True
-            user_achievements = {"username": username}
-        if "achieved" not in user_achievements:
-            user_achievements["achieved"] = []
-        for achievement in achievements:
-            if achievement not in user_achievements["achieved"]:
-                user_achievements["achieved"].append(achievement)
-        user_achievements["achieved"] = list(dict.fromkeys(user_achievements["achieved"]))
-        ACHIEVEMENTS.put(user_achievements)
-
-        # Update the amount of achievements on the public profile (if exists)
-        self.update_achievements_public_profile(username, len(user_achievements["achieved"]))
-        if new_user:
-            return True
-        return False
-
-    def add_commands_to_username(self, username, commands):
-        user_achievements = ACHIEVEMENTS.get({"username": username})
-        if not user_achievements:
-            user_achievements = {"username": username}
-        user_achievements["commands"] = commands
-        ACHIEVEMENTS.put(user_achievements)
-
-    def increase_user_run_count(self, username):
-        ACHIEVEMENTS.update({"username": username}, {"run_programs": dynamo.DynamoIncrement(1)})
-
-    def increase_user_save_count(self, username):
-        ACHIEVEMENTS.update({"username": username}, {"saved_programs": dynamo.DynamoIncrement(1)})
-
-    def increase_user_submit_count(self, username):
-        ACHIEVEMENTS.update({"username": username}, {"submitted_programs": dynamo.DynamoIncrement(1)})
-
     def update_public_profile(self, username, data):
         PUBLIC_PROFILES.update({"username": username}, data)
-
-    def update_achievements_public_profile(self, username, amount_achievements):
-        data = PUBLIC_PROFILES.get({"username": username})
-        # In the case that we make this call but there is no public profile -> don't do anything
-        if data:
-            PUBLIC_PROFILES.update(
-                {"username": username}, {"achievements": amount_achievements, "last_achievement": timems()}
-            )
 
     def update_country_public_profile(self, username, country):
         data = PUBLIC_PROFILES.get({"username": username})

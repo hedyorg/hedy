@@ -1,6 +1,5 @@
 import collections
 from difflib import SequenceMatcher
-import json
 import os
 import re
 import uuid
@@ -30,7 +29,6 @@ from website.auth import (
     validate_student_signup_data,
 )
 
-from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
 
@@ -40,10 +38,9 @@ for lang in hedy_content.ALL_LANGUAGES.keys():
 
 
 class ForTeachersModule(WebsiteModule):
-    def __init__(self, db: Database, achievements: Achievements):
+    def __init__(self, db: Database):
         super().__init__("teachers", __name__, url_prefix="/for-teachers")
         self.db = db
-        self.achievements = achievements
 
     @route("/", methods=["GET"])
     @requires_teacher
@@ -153,12 +150,6 @@ class ForTeachersModule(WebsiteModule):
 
         students = Class.get("students", [])
 
-        achievement = None
-        if len(students) > 20:
-            achievement = self.achievements.add_single_achievement(user["username"], "full_house")
-        if achievement:
-            achievement = json.dumps(achievement)
-
         invites = []
         for invite in self.db.get_class_invitations(Class["id"]):
             invites.append(
@@ -190,7 +181,6 @@ class ForTeachersModule(WebsiteModule):
             "class-overview.html",
             current_page="for-teachers",
             page_title=gettext("title_class-overview"),
-            achievement=achievement,
             invites=invites,
             class_info={
                 "students": len(students),
@@ -1158,11 +1148,7 @@ class ForTeachersModule(WebsiteModule):
         }
 
         self.db.update_class_customizations(customizations)
-
-        achievement = self.achievements.add_single_achievement(user["username"], "my_class_my_rules")
         response = {"success": gettext("class_customize_success")}
-        if achievement:
-            response["achievement"] = achievement
         return make_response(response, 200)
 
     @route("/create-accounts/<class_id>", methods=["GET"])

@@ -1,10 +1,9 @@
 /**
  * Custom integrations we have with HTMX
  */
-import { initializeHighlightedCodeBlocks, showAchievements } from './app';
+import { initializeHighlightedCodeBlocks } from './app';
 import { ClientMessages } from './client-messages';
 import { modal } from './modal';
-import { Achievement } from './types';
 import Sortable from 'sortablejs';
 
 declare const htmx: typeof import('./htmx');
@@ -67,19 +66,6 @@ htmx.on('htmx:responseError', (ev) => {
 htmx.on('htmx:sendError', () => {
     modal.notifyError(`${ClientMessages.Connection_error} ${ClientMessages.CheckInternet}`);
 });
-
-
-/**
- * The server can trigger achievement events
- */
-htmx.on('displayAchievements', (ev) => {
-    const payloads = (ev as any).detail.value
-    for (const payload of payloads) {
-        const achievement= payload["achievement"] as Achievement[]
-        showAchievements(achievement, payload["reload"], payload["redirect"])
-    }
-});
-
 
 htmx.on("htmx:confirm", function(e: any) {
     e.preventDefault();

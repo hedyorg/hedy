@@ -20,7 +20,6 @@ from website.auth import (
     send_email,
 )
 
-from .achievements import Achievements
 from .database import Database
 from .for_teachers import ForTeachersModule
 from .website_module import WebsiteModule, route
@@ -38,9 +37,8 @@ class ProgramsLogic:
     Achievements and stuff.
     """
 
-    def __init__(self, db: Database, achievements: Achievements, for_teachers: ForTeachersModule):
+    def __init__(self, db: Database, for_teachers: ForTeachersModule):
         self.db = db
-        self.achievements = achievements
         self.for_teachers = for_teachers
 
     @querylog.timed
@@ -114,11 +112,10 @@ class ProgramsLogic:
 class ProgramsModule(WebsiteModule):
     """Flask routes that deal with manipulating programs."""
 
-    def __init__(self, db: Database, achievements: Achievements, for_teachers: ForTeachersModule):
+    def __init__(self, db: Database, for_teachers: ForTeachersModule):
         super().__init__("programs", __name__, url_prefix="/programs")
-        self.logic = ProgramsLogic(db, achievements, for_teachers)
+        self.logic = ProgramsLogic(db, for_teachers)
         self.db = db
-        self.achievements = achievements
 
     @route("/list", methods=["GET"])
     @requires_login
@@ -149,11 +146,7 @@ class ProgramsModule(WebsiteModule):
         ):
             self.db.set_favourite_program(user["username"], body["id"], None)
 
-        achievement = self.achievements.add_single_achievement(user["username"], "do_you_have_copy")
-
         resp = {"message": gettext("delete_success")}
-        if achievement:
-            resp["achievement"] = achievement
         return make_response(resp, 200)
 
     @route("/duplicate-check", methods=["POST"])
@@ -228,8 +221,7 @@ class ProgramsModule(WebsiteModule):
             "share_message": gettext("copy_clipboard"),
             "name": program["name"],
             "id": program['id'],
-            "save_info": SaveInfo.from_program(Program.from_database_row(program)),
-            "achievements": self.achievements.get_earned_achievements(),
+            "save_info": SaveInfo.from_program(Program.from_database_row(program))
         }, 200)
 
     @route("/share/<program_id>", methods=['POST'], defaults={'second_teachers_programs': False})
@@ -254,9 +246,6 @@ class ProgramsModule(WebsiteModule):
         else:
             public = 1
         program = self.db.set_program_public_by_id(program_id, public)
-        achievement = self.achievements.add_single_achievement(user["username"], "sharing_is_caring")
-        if achievement:
-            utils.add_pending_achievement({"achievement": achievement})
 
         keyword_lang = g.keyword_lang
         adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
@@ -284,13 +273,10 @@ class ProgramsModule(WebsiteModule):
 
         program = self.db.submit_program_by_id(body["id"], True)
         self.db.increase_user_submit_count(user["username"])
-        self.achievements.increase_count("submitted")
-        self.achievements.verify_submit_achievements(user["username"])
 
         response = {
             "message": gettext("submitted"),
-            "save_info": SaveInfo.from_program(Program.from_database_row(program)),
-            "achievements": self.achievements.get_earned_achievements(),
+            "save_info": SaveInfo.from_program(Program.from_database_row(program))
         }
         return make_response(response, 200)
 
@@ -311,8 +297,7 @@ class ProgramsModule(WebsiteModule):
 
         response = {
             "message": gettext("unsubmitted"),
-            "save_info": SaveInfo.from_program(Program.from_database_row(program)),
-            "achievements": self.achievements.get_earned_achievements(),
+            "save_info": SaveInfo.from_program(Program.from_database_row(program))
         }
         return make_response(response, 200)
 

@@ -1,6 +1,5 @@
 import { modal, tryCatchPopup } from './modal';
 import { join_class } from './teachers';
-import { showAchievements } from './app';
 import { localLoadOnce, localSave } from './local';
 import { postNoResponse, postJson } from './comm';
 
@@ -155,13 +154,9 @@ export function initializeFormSubmits() {
     tryCatchPopup(async () => {
       const response = await postJson('/auth/public_profile', convertFormJSON($(this)));
       modal.notifySuccess(response.message, 2000);
-      if (response.achievement) {
-        showAchievements(response.achievement, true, "");
-      } else {
-        setTimeout(function () {
-          location.reload()
-        }, 2000);
-      }
+      setTimeout(function () {
+        location.reload()
+      }, 2000);      
     });
   });
 

@@ -1,4 +1,3 @@
-import {pushAchievement} from "../app";
 import {addHighlightBorder, relocatePopup, removeBorder, tutorialPopup} from "./utils";
 
 let current_step = 0;
@@ -22,23 +21,7 @@ export function callTeacherNextStep() {
   } else if (current_step == 6) {
     documentationStep();
   } else if (current_step == 7) {
-    pushAchievement("ring_the_bell");
-    $('#achievement_pop_up').removeClass('z-10');
-    $('#achievement_pop_up').addClass('z-50');
-    // If the achievement pop-up is visible -> wait with the next function call
-    setTimeout(function(){
-      if ($('#achievement_pop_up').is(':visible')) {
-        setTimeout(function() {
-          teacherEndStep();
-          $('#achievement_pop_up').removeClass('z-50');
-          $('#achievement_pop_up').addClass('z-10');
-        }, 5000);
-      } else {
-        teacherEndStep();
-        $('#achievement_pop_up').removeClass('z-50');
-        $('#achievement_pop_up').addClass('z-10');
-      }
-    }, 500);
+    teacherEndStep();    
   } else {
     location.replace("/for-teachers");
   }

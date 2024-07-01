@@ -9,8 +9,6 @@ from config import config
 from website.flask_helpers import render_template
 from website.auth import current_user, is_teacher, requires_login, requires_teacher, \
     refresh_current_user_from_db, is_second_teacher
-
-from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
 
@@ -21,11 +19,9 @@ invite_length = config["session"]["invite_length"] * 60
 class ClassModule(WebsiteModule):
     """The /class/... pages."""
 
-    def __init__(self, db: Database, achievements: Achievements):
+    def __init__(self, db: Database):
         super().__init__("class", __name__, url_prefix="/class")
-
         self.db = db
-        self.achievements = achievements
 
     @route("/", methods=["POST"])
     @requires_teacher
@@ -54,9 +50,7 @@ class ClassModule(WebsiteModule):
         }
 
         self.db.store_class(Class)
-        achievement = self.achievements.add_single_achievement(user["username"], "ready_set_education")
         response = {"id": Class["id"]}
-        response["achievement"] = achievement
         return make_response(response, 200)
 
     @route("/<class_id>", methods=["PUT"])
@@ -85,9 +79,6 @@ class ClassModule(WebsiteModule):
                 return make_response(gettext("class_name_duplicate"), 200)
 
         self.db.update_class(class_id, body["name"])
-        achievement = self.achievements.add_single_achievement(user["username"], "on_second_thoughts")
-        if achievement:
-            return make_response({"achievement": achievement}, 200)
         return make_response('', 200)
 
     @route("/<class_id>", methods=["DELETE"])
@@ -100,10 +91,6 @@ class ClassModule(WebsiteModule):
             return make_response(gettext("unauthorized"), 401)
 
         self.db.delete_class(Class)
-
-        achievement = self.achievements.add_single_achievement(user["username"], "end_of_semester")
-        if achievement:
-            utils.add_pending_achievement({"achievement": achievement})
         teacher_classes = self.db.get_teacher_classes(user["username"], True)
         return render_partial('htmx-classes-table.html', teacher_classes=teacher_classes)
 
@@ -160,11 +147,6 @@ class ClassModule(WebsiteModule):
             # Also remove the pending message in this case
             session["messages"] = session["messages"] - 1 if session["messages"] else 0
 
-        achievement = self.achievements.add_single_achievement(username, "epic_education")
-        if achievement:
-            utils.add_pending_achievement({"achievement": achievement, "redirect": "/programs"})
-        # request.url = re.sub(r'/class/.*', '/programs', request.url)
-        # return redirect(request.url, code=302)
         return make_response('', 302)
 
     # Legacy function; will be gradually replaced by the join_class_id
@@ -187,8 +169,6 @@ class ClassModule(WebsiteModule):
 
         self.db.add_student_to_class(Class["id"], username)
         refresh_current_user_from_db()
-        achievement = self.achievements.add_single_achievement(username, "epic_education")
-
         # We only want to remove the invite if the user joins the class with an actual pending invite
         invite = self.db.get_user_class_invite(username, Class["id"])
         if invite:
@@ -196,8 +176,6 @@ class ClassModule(WebsiteModule):
             # Also remove the pending message in this case
             session["messages"] = session["messages"] - 1 if session["messages"] else 0
 
-        if achievement:
-            return make_response({"achievement": achievement}, 200)
         return make_response('', 200)
 
     @route("/<class_id>/student/<student_id>", methods=["DELETE"])
@@ -209,11 +187,6 @@ class ClassModule(WebsiteModule):
 
         self.db.remove_student_from_class(Class["id"], student_id)
         refresh_current_user_from_db()
-        achievement = None
-        if Class["teacher"] == user["username"]:
-            achievement = self.achievements.add_single_achievement(user["username"], "detention")
-        if achievement:
-            return make_response({"achievement": achievement}, 200)
         return make_response('', 200)
 
     @route("/<class_id>/second-teacher/<second_teacher>", methods=["DELETE"])
@@ -226,11 +199,6 @@ class ClassModule(WebsiteModule):
         self.db.remove_second_teacher_from_class(Class, second_teacher)
 
         refresh_current_user_from_db()
-        achievement = None
-        if Class["teacher"] == user["username"]:
-            achievement = self.achievements.add_single_achievement(user["username"], "detention")
-        if achievement:
-            return make_response({"achievement": achievement, "reload": True}, 200)
         return make_response('', 200)
 
 
@@ -239,11 +207,10 @@ class MiscClassPages(WebsiteModule):
     are not mounted under the '/class' URL space.
     """
 
-    def __init__(self, db: Database, achievements: Achievements):
+    def __init__(self, db: Database):
         # Note: explicitly no 'url_prefix'
         super().__init__("miscclass", __name__)
         self.db = db
-        self.achievements = achievements
 
     @route("/classes", methods=["GET"])
     @requires_teacher
@@ -304,10 +271,7 @@ class MiscClassPages(WebsiteModule):
         if body.get("second_teacher") is True:
             new_second_teachers = Class.get("second_teachers")
 
-        achievement = self.achievements.add_single_achievement(current_user()["username"], "one_for_money")
         response = {"id": new_class["id"]}
-        if achievement:
-            response['achievement'] = achievement
         if new_second_teachers:
             response["second_teachers"] = new_second_teachers
         return make_response(response, 200)
