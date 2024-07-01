@@ -11,8 +11,6 @@ from hedy import HEDY_MAX_LEVEL
 from hedy_content import Quizzes
 from website import statistics
 from website.auth import current_user
-
-from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
 
@@ -33,11 +31,10 @@ class QuizLogic:
 
 
 class QuizModule(WebsiteModule):
-    def __init__(self, db: Database, achievements: Achievements, quizzes: Dict[str, Quizzes]):
+    def __init__(self, db: Database, quizzes: Dict[str, Quizzes]):
         super().__init__("quiz", __name__, url_prefix="/quiz")
         self.logic = QuizLogic(db)
         self.db = db
-        self.achievements = achievements
         self.quizzes = quizzes
 
     @route("/begin/<int:level>", methods=["GET", "POST"])
@@ -212,25 +209,9 @@ class QuizModule(WebsiteModule):
         """
         if progress.is_preview:
             return
-
-        questions = self.get_all_questions(progress.level)
-        total_achievable = sum(q.score for q in questions)
-
-        achievement = []
         username = current_user()["username"]
         if username:
             statistics.add(username, lambda id_: self.db.add_quiz_finished(id_, progress.level, progress.total_score))
-            achievement.extend(self.achievements.add_single_achievement(username, "next_question") or [])
-            if progress.total_score == total_achievable:
-                achievement.extend(self.achievements.add_single_achievement(username, "quiz_master") or [])
-            if progress.level == HEDY_MAX_LEVEL:
-                achievement.extend(self.achievements.add_single_achievement(username, "hedy_certificate") or [])
-
-        # Add any achievements we accumulated to the session. They will be sent to the
-        # client at the next possible opportunity. `add_single_achievement` may have
-        if achievement:
-            session['pending_achievements'] = session.get(
-                'pending_achievements', []) + [{"achievement": achievement, "redirect": None}]
 
     def initialize_attempt(self, level):
         """Record that we're starting a new attempt."""
