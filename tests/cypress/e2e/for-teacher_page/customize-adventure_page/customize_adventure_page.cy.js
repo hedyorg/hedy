@@ -7,6 +7,7 @@ it('Test for the Customize Adventure Page: writing a word with several possible 
   goToEditAdventure();
 
   cy.window().then(win => {
+      cy.getDataCy("adventure").click();
       const editor = win.ckEditor;
       cy.get('.ck-editor__editable')
         .should('be.visible')

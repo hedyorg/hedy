@@ -8,6 +8,8 @@ teachers.forEach((teacher) => {
   it(`Adventure content Field test for ${teacher}`, () => {
     loginForTeacher(teacher);
     goToEditAdventure();
+    // navigate to the editor's view
+    cy.getDataCy("adventure").click();
 
     cy.window().then(win => {
       const editor = win.ckEditor;

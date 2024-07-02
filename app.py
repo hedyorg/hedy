@@ -257,6 +257,9 @@ def load_customized_adventures(level, customizations, into_adventures):
                 else:
                     db_row['content'] = safe_format(db_row['content'],
                                                     **hedy_content.KEYWORDS.get(g.keyword_lang))
+                if 'solution_example' in db_row:
+                    db_row['solution_example'] = safe_format(db_row['solution_example'],
+                                                             **hedy_content.KEYWORDS.get(g.keyword_lang))
             except Exception:
                 # We don't want teacher being able to break the student UI -> pass this adventure
                 pass
