@@ -6,7 +6,7 @@ it('Name Field test', () => {
   goToEditAdventure();
 
   // Tests name field interaction
-  cy.get('#custom_adventure_name')
+  cy.getDataCy('custom_adventure_name')
     .should('be.visible')
     .should('not.be.disabled')
     .clear()
