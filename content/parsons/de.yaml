@@ -161,15 +161,15 @@ levels:
         1:
             story: Dieses Spiel wird dir drei Mathe Aufgaben geben. Die Frage ist jedesmal anders. Kannst du die Reihenfolge herausfinden?
             code: |-
-                nummern = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                 {repeat} 3 {times}
-                    nummer = nummern {at} {random}
-                    richtige_antwort = 5 * nummer
-                    antwort = {ask} 'Was ist 5 mal' number '?'
-                    {if} antwort = richtige_antwort
-                        {print} 'Gute Arbeit!'
+                    number = numbers {at} {random}
+                    correct_answer = 5 * number
+                    answer = {ask} 'What is 5 times' number '?'
+                    {if} answer = correct_answer
+                        {print} 'Good job!'
                     {else}
-                        {print} 'Nein! Die richtige Antwort ist ' richtige_antwort
+                        {print} 'No! The correct answer is ' correct_answer
         2:
             story: |-
                 Dieser Code fragt die Kunden in einem Restaurant, ob sie Nachtisch bestellen wollen. Falls sie Nachtisch bestellen wollen, frag sie, was sie für einen Nachtisch wollen. Wenn sie Tiramisu bestellen, wird ihnen gesagt, dass es ausverkauft ist.
@@ -204,24 +204,24 @@ levels:
                 Dieser Friseur-Roboter wird für dich einen neuen Haarschnitt aussuchen. Wenn du mit der ersten Wahl nicht einverstanden bist, kannst du es nochmal versuchen.
                 **Achtung** Die Variable person wird in der ersten Zeile bestimmt. Die Variable frisur wird in der zweiten Zeile bestimmt.
             code: |-
-                personen = Betty, Amanda, Marc
-                frisuren = eine Glatze, eine Vokuhila, einen Zopf, Stacheln
-                {for} person {in} personen
-                    {print} person ' bekommt ' frisuren {at} {random}
-                    zufrieden = {ask} person ', bist du mit dieser Auswahl zufrieden?'
-                    {if} zufrieden {is} Ja
-                        {print} 'Großartig'
+                people = Betty, Amanda, Marc
+                hairstyles = a bald head, a mohawk, a ponytail, spikes
+                {for} person {in} people
+                    {print} person ' will get ' hairstyles {at} {random}
+                    happy = {ask} person ', are you happy with this choice?'
+                    {if} happy {is} yes
+                        {print} 'Great'
                     {else}
-                        {print} 'Lass es uns nochmal probieren... Dann bekommt 'person ' ' hairstyles {at} {random}
+                        {print} 'Lets try again... Then 'person ' will get ' hairstyles {at} {random}
     11:
         1:
             story: Erzeuge die Countdown Uhr für Neujahr! Das Programm sollte die Zahlen 10 bis 1 für eine Sekunde zeigen und dir dann ein Frohes neues Jahr wünschen.
             code: |-
-                {for} zahll {in} {range} 10 {to} 1
-                    {print} zahl
+                {for} number {in} {range} 10 {to} 1
+                    {print} number
                     {sleep}
                     {clear}
-                {print} 'Frohes neues Jahr!'
+                {print} 'Happy New Year!'
         2:
             story: |-
                 Erstelle ein Programm, das uns die Ergebnisse der Wissenschaftsschau sagt. Definiere zuerst die Variable Teilnehmer, dann die Variable Platzierung.
