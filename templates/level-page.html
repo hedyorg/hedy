@@ -112,12 +112,10 @@
                     end">
                   {% for adventure in adventures %}
                     <button id="adventure_button_{{ adventure.name }}" class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white"
+                    data-tab="{{adventure.short_name}}"
                     style="width: 100%;"
                     _="on click localStorage.setItem('adventure_dropdown', 'adventure_button_{{ adventure.name }}')">
-                      <div class="text-center opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 items-top"></div>
-                      <div class="flex-grow h-min min-w-80" tabindex=0>
                         {{ adventure.name }}
-                      </div>
                     </button>
                   {% endfor %}
               </div>
