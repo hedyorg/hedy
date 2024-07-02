@@ -282,7 +282,7 @@ adventures:
             3:
                 story_text: |
                     ## Hinzufügen zu
-                    Du kannst einer Liste mit dem Befehl `{add} {to_list}` Elemente hinzufügen. Um ein Element zu einer Liste hinzuzufügen, kannst du einfach Folgendes eingeben: `{add} penguin {to} animals` oder du kannst den Befehl `{ask}` wie im Beispielcode verwenden.
+                    Du kannst einer Liste mit dem Befehl `{add} {to_list}` Elemente hinzufügen. Um ein Element zu einer Liste hinzuzufügen, kannst du einfach Folgendes eingeben: `{add} penguin {to_list} animals` oder du kannst den Befehl `{ask}` wie im Beispielcode verwenden.
                 example_code: |
                     ```
                     tiere {is} Hund, Katze, Känguru
@@ -305,13 +305,13 @@ adventures:
                     Probiere die neuen Befehle in diesem virtuellen Restaurant aus. Füge jene Geschmacksrichtung hinzu, auf die der Spieler hofft, und entferne solche, gegen die er allergisch ist.
                 example_code_3: |
                     ```
-                    {print} Mystery milkshake
-                    flavors {is} strawberry, chocolate, vanilla
-                    hope {is} {ask} What flavor are you hoping for?
+                    {print} Mysteriöser Milchshake
+                    geschmacksrichtungen {is} Erdbeere, Schokolade, Vanille
+                    hoffnung {is} {ask} Auf welche Geschmacksrichtung hoffst du?
                     _
-                    allergies {is} {ask} Are you allergic to any flavors?
+                    allergien {is} {ask} Bist du auf eine Geschmacksrichtung allergisch?
                     _
-                    {print} You get a flavors {at} {random} milkshake
+                    {print} Du bekommst einen geschmacksrichtungen {at} {random} Milchshake
                     ```
     and_or_command:
         name: '{and} & {or}'
@@ -841,13 +841,13 @@ adventures:
                     ### Übung
                     Debugge den Code. Viel Glück!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Achtung! Dieser Code muss gedebugged werden!**
                     ```
-                    {print} I love programming
-                    Do you love programming too?
+                    {print} Ich liebe programmieren
+                    Liebst du Programmieren auch?
                     {echo}
-                    {print} What are your hobbies?
-                    {echo} Your hobbies are
+                    {print} Was sind deine Hobbys?
+                    {echo} Deine Hobbys sind
                     ```
             2:
                 story_text: |-
@@ -2794,16 +2794,16 @@ adventures:
         levels:
             1:
                 story_text: |-
-                    In this level you'll learn how to use the `{play}` command to play a tune!
+                    In diesem Level lernst du, wie man den `{play}` Befehl benutzt um einen Ton zu spielen.
 
-                    Type `{play}` followed by the note you want to play. The scale goes C-D-E-F-G-A-B.
-                    As you can see there are 7 different letters, but we can play more than just 7 notes.
-                    Type a number between 1 and 10 behind the letter to choose the scale, for example after B4 comes C5.
-                    C1 is the lowest note you can play, C10 is the highest.
+                    Tippe `{play}` gefolgt von der Note, die du spielen möchtest. Die Skala geht C-D-E-F-G-A-B.
+                    Wie du sehen kannst, sind es 7 verschiedene Buchstaben, wir können aber viel mehr als 7 Töne spielen.
+                    Tippe eine Nummer zwischen 1 und 10 hinter den Buchstaben um die Skala auszuwählen, zum Beispiel kommt B4 nach C5.
+                    C1 ist die tiefste Note die du spielen kannst, C10 die höchste
 
-                    ### Exercise
-                    Try out the example code and then play around with it! Can you create your own melody?
-                    In the next level you'll learn how to play some existing songs.
+                    ### Übung
+                    Probier den Beispielcode aus und spiele damit herum! Kannst du deine eigene Melodie erzeugen?
+                    Im nächsten Level lernst du, wie man einige bereits existierende Lieder spielt.
                 example_code: |-
                     ```
                     {play} C4
@@ -2854,10 +2854,10 @@ adventures:
                     Füge der Liste weitere Noten hinzu und erstellen Sie eine längere Melodie, indem du die letzte Zeile noch ein paar Mal kopierst.
                 example_code: |
                     ```
-                    notes {is} A4, B4, C4
-                    {play} notes {at} {random}
-                    {play} notes {at} {random}
-                    {play} notes {at} {random}
+                    noten {is} A4, B4, C4
+                    {play} noten {at} {random}
+                    {play} noten {at} {random}
+                    {play} noten {at} {random}
                     ```
             4:
                 story_text: |
@@ -3427,16 +3427,16 @@ adventures:
         levels:
             4:
                 story_text: |
-                    ## 'Quotation marks'
-                    In level 4 `{ask}` and `{print}` have changed.
-                    You must put text that you want to print between quotation marks.
-                    This is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.
-                    Most programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!
+                    ## 'Anführungszeichen'
+                    In Level 4 haben sich `{ask}` und `{print}` verändert.
+                    Du musst Text, den du drucken möchtest, zwischen Anführungszeichen schreiben.
+                    Das ist nützlich, weil du jetzt alle Wörter drucken kannst, die du möchtest. Auch die Wörter, die du benutzt hast um etwas mit `{is}` zu speichern.
+                    Die meisten Programmiersprachen verwenden Anführungszeichen, wenn sie ettwas drucken, wir kommen also einen Schritt weiter zum echten Programmieren!
                 example_code: |
                     ```
-                    {print} 'You need to use quotation marks from now on!'
-                    answer {is} {ask} 'What do we need to use from now on?'
-                    {print} 'We need to use ' answer
+                    {print} 'Du musst abjetzt Anführungszeichen verwenden'
+                    antwort {is} {ask} 'Was müssen wir ab jetzt benutzen?'
+                    {print} 'Wir müssen ' antwort ' benutzen'
                     ```
                 story_text_2: |
                     ## Contractions
