@@ -15,7 +15,7 @@ it('Preview button test', () => {
       .should('not.be.visible');
 
     // Testing not removing adventure (clicking on remove and then on 'no')
-    cy.get('#remove_adventure_button')
+    cy.getDataCy('remove_adventure_button')
       .should('be.visible')
       .should('not.be.disabled')
       .should('have.attr', 'type', 'reset')
@@ -40,7 +40,7 @@ it('Preview button test', () => {
     createAdventure("test adv");
 
     // Testing removing adventure (clicking on remove and then on 'yes')
-    cy.get('#remove_adventure_button')
+    cy.getDataCy('remove_adventure_button')
       .click();
 
     cy.getDataCy('modal_yes_button')

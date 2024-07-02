@@ -11,7 +11,7 @@ levels.forEach((level) => {
       goToEditAdventure();
 
       // Tests level field interaction
-      cy.get('#level_select')
+      cy.getDataCy('level_select')
         .should('be.visible')
         .should('not.be.disabled')
         .click()
