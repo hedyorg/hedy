@@ -20,6 +20,13 @@
 {% endif %}
 <div id="level_header" class="bg-blue-200">
   <div class="ltr:pl-8 rtl:pr-8 py-2 flex gap-2 px-4 items-center justify-between w-full max-w-screen-2xl mx-auto">
+    {% if intro_tutorial %}
+        <div class="text-2xl font-bold text-blue-500 whitespace-nowrap flex-0">
+          {{ _('level_title') }} {{ level_nr }}
+          &nbsp;
+          {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}
+        </div>
+    {% else %}
       <div class="dropdown relative">
         <button class="white-btn px-4 rounded inline-flex items-center gap-2 text-xl" data-cy="dropdown_level_button"
           onclick="$('#level_dropdown').slideToggle('medium');">
@@ -60,6 +67,7 @@
             {% endfor %}
         </div>
       </div>
+    {% endif %}
     <div class="flex-1">
       <div id="program_name_container" class="overflow-hidden flex-1 flex border border-blue-400 ltr:divide-x rtl:divide-x-reverse divide-blue-400 rounded md:mx-16 items-center">
         <input id="program_name" type="text" class="outline-0 text-2xl font-light text-blue-500 flex-1 bg-transparent focus:bg-blue-100 border-0 px-4 flex-1 h-full" value="{{initial_adventure.save_name}}">
