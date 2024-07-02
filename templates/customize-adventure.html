@@ -9,39 +9,39 @@ onclick="window.open('/for-teachers', '_self');">
 <br><br>
 <div class="flex flex-col">
     <h2>{{_('customize_adventure')}}: <strong>{{adventure.name}}</strong></h2>
-    <div class="flex flex-row w-min" id="adventures-buttons">
+    <div class="h-full w-full list-none flex flex-row items-center gap-x-2 xl:gap-x-6 mb-4 mt-4" id="adventures-buttons">
         <div
-            class="tab tab-selected flex items-center justify-center whitespace-nowrap"
+            class="cust-adv-tab cust-adv-tab-text active flex-initial truncate flex items-center justify-center"
             data-cy="settings"
-            _="on click remove .tab-selected from .tab
-                add .tab-selected to me
+            _="on click remove .active from .cust-adv-tab
+                add .active to me
                 add .hidden to .tab_content
                 remove .hidden from .settings"
             >
-            {{_('general_settings')}}
+            <div class="cust-adv-text">{{_('general_settings')}}</div>
         </div>
         <div
-            class="tab flex items-center justify-center whitespace-nowrap"
+            class="cust-adv-tab cust-adv-tab-text flex-initial truncate flex items-center justify-center"
             data-cy="adventure"
-            _="on click remove .tab-selected from .tab
-                add .tab-selected to me
+            _="on click remove .active from .cust-adv-tab
+                add .active to me
                 add .hidden to .tab_content
                 remove .hidden from .editor"
             >
             {{_('adventure')}}
-                <button type="button" class="px-2" _="on click toggle .hidden on #explanation">
-                    <svg class="fill-current h-4 w-4 text-blue-500 cursor-pointer !m-0 !p-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path
-                        d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
-                    </svg>
-                </button>
+            <button type="button" class="px-2" _="on click toggle .hidden on #explanation">
+                <svg class="fill-current h-4 w-4 text-blue-500 cursor-pointer !m-0 !p-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path
+                    d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+                </svg>
+            </button>
         </div>
         <div
             id="preview-tab"
-            class="tab flex items-center justify-center whitespace-nowrap"
+            class="cust-adv-tab cust-adv-tab-text flex-initial truncate flex items-center justify-center"
             data-cy="preview"
-            _="on click remove .tab-selected from .tab
-                add .tab-selected to me
+            _="on click remove .active from .cust-adv-tab
+                add .active to me
                 add .hidden to .tab_content
                 remove .hidden from .preview
                 hedyApp.initializeCodePage({{javascript_page_options|tojson}})"
@@ -49,10 +49,10 @@ onclick="window.open('/for-teachers', '_self');">
             {{_('preview')}}
         </div>
         <div
-            class="tab flex items-center justify-center whitespace-nowrap"
+            class="cust-adv-tab cust-adv-tab-text flex-initial truncate flex items-center justify-center"
             data-cy="solution_example"
-            _="on click remove .tab-selected from .tab
-                add .tab-selected to me
+            _="on click remove .active from .cust-adv-tab
+                add .active to me
                 add .hidden to .tab_content
                 remove .hidden from .solution_example"
             >
@@ -65,7 +65,7 @@ onclick="window.open('/for-teachers', '_self');">
                 </button>
         </div>
         <div
-            class="tab flex hidden items-center justify-center whitespace-nowrap"
+            class="cust-adv-tab cust-adv-tab-text flex-initial truncate flex hidden items-center justify-center"
             data-cy="tips"
             _="on click remove .tab-selected from .tab
                 add .tab-selected to me
