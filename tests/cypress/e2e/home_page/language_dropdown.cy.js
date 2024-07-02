@@ -23,4 +23,4 @@ it('Is able to search a language, see all languages and add a language', () => {
 
   // test if adding a language button works
   cy.getDataCy('add_language_btn').should('be.visible');
-  })
+})

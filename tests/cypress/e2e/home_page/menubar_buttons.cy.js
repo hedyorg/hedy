@@ -1,54 +1,42 @@
-import { loginForTeacher } from "../tools/login/login";
-import { goToHome } from "../tools/navigation/nav";
-
-beforeEach(() => {
-  goToHome();
-})
+import { loginForStudent, loginForTeacher, loginForUser } from "../tools/login/login";
+import { goToHome, navigate_home_button } from "../tools/navigation/nav";
 
 describe('Navigation buttons', () => {
-  it('Is able to click on hedy button', () => {
-    cy.getDataCy('hedy_button').click();
-    
-    cy.location().should((loc) => {
-      expect(loc.pathname).equal("/hedy");
-    })
+  it('When not logged in: Is able to click all menubar buttons', () => {
+    navigate_home_button('hedy_button', '/hedy')
+    navigate_home_button('explore_button', '/login')
   })
 
-  it('Is able to click on explore button', () => {
-    cy.getDataCy('explore_button').click();
-    
-    cy.location().should((loc) => {
-      expect(loc.pathname).equal("/login");
-    })
-  })
-
-  it('As a teacher, is able to click on explore button, for-teacher button, teacher manual button and go to my programs', () => {
+  it('As a teacher: Is able to click all menubar buttons', () => {
     loginForTeacher();
-    cy.getDataCy('explore_button').click();
-    
-    cy.location().should((loc) => {
-      expect(loc.pathname).equal("/explore");
-    })
+    navigate_home_button('hedy_button', '/hedy')
+    navigate_home_button('explore_button', '/explore')
+    navigate_home_button('for_teacher_button', '/for-teachers')
+    navigate_home_button('manual_button', '/for-teachers/manual')
+    navigate_home_button('programs_button', '/programs')
+  })
 
-    goToHome();
-    cy.getDataCy('for_teacher_button').click();
-    
-    cy.location().should((loc) => {
-      expect(loc.pathname).equal("/for-teachers");
-    })
+  it('As a student: Is able to click all menubar buttons', () => {
+    loginForStudent();
+    navigate_home_button('hedy_button', '/hedy')
+    navigate_home_button('explore_button', '/explore')
+    not_navigate_home_button('for_teacher_button')
+    not_navigate_home_button('manual_button')
+    navigate_home_button('programs_button', '/programs')
+  })
 
-    goToHome();
-    cy.getDataCy('manual_button').click();
-    
-    cy.location().should((loc) => {
-      expect(loc.pathname).equal("/for-teachers/manual");
-    })
-
-    goToHome();
-    cy.getDataCy('programs_button').click();
-    
-    cy.location().should((loc) => {
-      expect(loc.pathname).equal("/programs");
-    })
+  it('As a user: Is able to click all menubar buttons', () => {
+    loginForUser();
+    navigate_home_button('hedy_button', '/hedy')
+    navigate_home_button('explore_button', '/explore')
+    not_navigate_home_button('for_teacher_button')
+    not_navigate_home_button('manual_button')
+    navigate_home_button('programs_button', '/programs')
   })
 })
+
+function not_navigate_home_button(button)
+{
+    goToHome();
+    cy.getDataCy(button).should('not.exist');
+}

@@ -1,35 +1,29 @@
-import { loginForStudent, loginForTeacher } from "../tools/login/login";
-import { goToHome } from "../tools/navigation/nav";
-
-beforeEach(() => {
-  goToHome();
-})
+import { loginForStudent, loginForTeacher, loginForUser } from "../tools/login/login";
+import { goToHome, navigate_home_button } from "../tools/navigation/nav";
 
 describe('Start buttons', () => {
-  it('Should be able to click on start learning button', () => {
-    cy.getDataCy('start_learning_button').click();
-    cy.url().should('include', 'hedy');
-    })
-
-  it('Should be able to click on start teaching button', () => {
-    // teaching button first test not signed in
+  it('When not logged in: Should be able to click on start buttons', () => {
+    navigate_home_button('start_learning_button', '/hedy')
+    goToHome();
     cy.getDataCy('start_teaching_button').click();
     cy.url().should('include', 'signup?teacher=true');
+  })
 
-    // then test signed in as teacher
+  it('As a teacher: Should be able to click on start buttons', () => {
     loginForTeacher();
-    goToHome();
-    cy.getDataCy('start_teaching_button').click();
-    cy.location().should((loc) => {
-      expect(loc.pathname).equal("/for-teachers");
-    })
+    navigate_home_button('start_learning_button', '/hedy')
+    navigate_home_button('start_teaching_button', '/for-teachers')
+  })
 
-    // then test signed in as student
+  it('As a student: Should be able to click on start buttons', () => {
     loginForStudent();
-    goToHome();
-    cy.getDataCy('start_teaching_button').click();
-    cy.location().should((loc) => {
-      expect(loc.pathname).equal("/my-profile");
-    })
+    navigate_home_button('start_learning_button', '/hedy')
+    navigate_home_button('start_teaching_button', '/my-profile')
+  })
+
+  it('As a user: Should be able to click on start buttons', () => {
+    loginForUser();
+    navigate_home_button('start_learning_button', '/hedy')
+    navigate_home_button('start_teaching_button', '/my-profile')
   })
 })
