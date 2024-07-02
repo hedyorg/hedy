@@ -8,7 +8,7 @@ teachers.forEach((teacher) => {
     loginForTeacher(teacher);
     goToEditAdventure();
 
-    cy.get('#agree_public')
+    cy.getDataCy('agree_public')
       .should('be.visible')
       .should('not.be.disabled')
       .check()

@@ -122,7 +122,7 @@ teachers.forEach((teacher) => {
 
       const new_adventure = "test_new_adventure"
       cy.getDataCy('edit_link').click();
-      cy.get('#custom_adventure_name')
+      cy.getDataCy('custom_adventure_name')
       .clear()
       .type(new_adventure)
       // TODO check if adventure is added to class and level correctly
