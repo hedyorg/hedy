@@ -2123,8 +2123,9 @@ def landing_page(user, first):
     user_info = DATABASE.get_public_profile_settings(username)
     user_programs = DATABASE.programs_for_user(username)
     # Only return the last program of the user
+    last_program = None
     if user_programs:
-        user_programs = user_programs[:1][0]
+        last_program = user_programs[:1][0]
     user_achievements = DATABASE.progress_by_username(username)
 
     return render_template(
@@ -2133,7 +2134,8 @@ def landing_page(user, first):
         page_title=gettext('title_landing-page'),
         user=user['username'],
         user_info=user_info,
-        program=user_programs,
+        programs=user_programs,
+        last_program=last_program,
         achievements=user_achievements)
 
 
