@@ -33,6 +33,7 @@ from website.auth import (
 from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
+from website.frontend_types import halve_adventure_content
 
 SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
 for lang in hedy_content.ALL_LANGUAGES.keys():
@@ -1301,6 +1302,14 @@ class ForTeachersModule(WebsiteModule):
         if adventure["creator"] != user["username"] and not is_teacher(user):
             return utils.error_page(error=401, ui_message=gettext("retrieve_adventure_error"))
 
+        adventure['content'] = safe_format(adventure['content'],
+                                           **hedy_content.KEYWORDS.get(g.keyword_lang))
+        adventure['solution_example'] = safe_format(adventure.get('solution_example', ''),
+                                                    **hedy_content.KEYWORDS.get(g.keyword_lang))
+
+        # We don't change adventure["content"] because it's used in the editor, while this is for previwing only.
+        preview_content, adventure["example_code"] = halve_adventure_content(adventure["content"])
+
         # Now it gets a bit complex, we want to get the teacher classes as well as the customizations
         # This is a quite expensive retrieval, but we should be fine as this page is not called often
         # We only need the name, id and if it already has the adventure set as data to the front-end
@@ -1330,12 +1339,19 @@ class ForTeachersModule(WebsiteModule):
             max_level=hedy.HEDY_MAX_LEVEL,
             # TODO: update tags to be {name, canEdit} where canEdit is true if currentUser is the creator.
             adventure_tags=adventure.get("tags", []),
+            level=adventure.get("level"),
+            content=preview_content,
             js=dict(
                 content=adventure.get("content"),
                 lang=g.lang,
             ),
             javascript_page_options=dict(
-                page='customize-adventure'
+                page='customize-adventure',
+                lang=g.lang,
+                level=adventure.get("level"),
+                adventures=[adventure],
+                initial_tab='',
+                current_user_name=user['username'],
             )
         )
 
@@ -1389,9 +1405,9 @@ class ForTeachersModule(WebsiteModule):
         # Try to parse with our current language, if it fails -> return an error to the user
         # NOTE: format() instead of safe_format() on purpose!
         try:
-            body["content"].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
-            if 'formatted_content' in body:
-                body['formatted_content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
+            body['content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
+            if 'formatted_solution_code' in body:
+                body['formatted_solution_code'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
         except BaseException:
             return make_response(gettext("something_went_wrong_keyword_parsing"), 400)
 
@@ -1402,13 +1418,11 @@ class ForTeachersModule(WebsiteModule):
             "classes": body["classes"],
             "level": int(body["levels"][0]),  # TODO: this should be removed gradually.
             "levels": body["levels"],
-            "content": body["content"],
             "public": 1 if body["public"] else 0,
             "language": body["language"],
+            "content": body["content"],
+            "solution_example": body.get("formatted_solution_code"),
         }
-
-        if 'formatted_content' in body:
-            adventure['formatted_content'] = body['formatted_content']
 
         self.db.update_adventure(body["id"], adventure)
 
