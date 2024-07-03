@@ -53,6 +53,7 @@ class PublicAdventuresModule(WebsiteModule):
 
             content = safe_format(adventure.get('formatted_content', adventure['content']),
                                   **hedy_content.KEYWORDS.get(g.keyword_lang))
+
             current_adventure = {
                 "id": adventure.get("id"),
                 "name": adventure.get("name"),
@@ -226,6 +227,7 @@ class PublicAdventuresModule(WebsiteModule):
             "language": current_adventure.get("language", g.lang),
             "tags": current_adventure.get("tags", []),
             "is_teacher_adventure": True,
+            "solution_example": current_adventure.get("solution_example", ""),
         }
 
         self.db.update_adventure(adventure_id, {"cloned_times": current_adventure.get("cloned_times", 0) + 1})

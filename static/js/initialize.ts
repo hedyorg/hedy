@@ -66,8 +66,14 @@ type InitializePageOptions =
 export function initialize(options: InitializeOptions) {
   setClientMessageLanguage(options.lang);
 
+  let level = options.level;
+
+  if (!level && options.javascriptPageOptions?.page == "customize-adventure") {
+    level = options.javascriptPageOptions.level
+  }
+
   initializeApp({
-    level: options.level,
+    level: level,
     keywordLanguage: options.keyword_language,
     staticRoot: options.staticRoot,
   });
