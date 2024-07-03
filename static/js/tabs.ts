@@ -126,3 +126,11 @@ export function getPreviousAndNext() {
   const next = document.querySelector(`.tab[tabindex='${i+1}']`)
   return [prev, next]
 }
+
+export function getCurrentAdv() {
+  const selectedElement = document.querySelector('.tab-selected');
+  if (selectedElement) {
+    return selectedElement.textContent?.trim() ?? '';
+  }
+  return '';
+}

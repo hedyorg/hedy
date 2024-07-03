@@ -95,8 +95,9 @@
             <div class="dropdown relative">
               <button class="blue-btn px-4 rounded inline-flex items-center gap-2 text-l" id="dropdown_adventure_button"
                 onclick="$('#adventure_dropdown').slideToggle('medium');"
-                _="on click hedyApp.scrollToLastClickedButton('adventure_dropdown')">
-                <span>print</span>
+                _="on load put hedyApp.getCurrentAdv() into #adventure_text
+                on click hedyApp.scrollToLastClickedButton('adventure_dropdown')">
+                <div id="adventure_text"></div>
                 <svg id="adventure_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                   <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                 </svg>
@@ -111,10 +112,14 @@
                         add .rotate-180 to arrow
                     end">
                   {% for adventure in adventures %}
-                    <button id="adventure_button_{{ adventure.name }}" class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white"
+                    <button id="adventure_button_{{ adventure.name }}" 
+                    class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white"
                     data-tab="{{adventure.short_name}}"
                     style="width: 100%;"
-                    _="on click localStorage.setItem('adventure_dropdown', 'adventure_button_{{ adventure.name }}')">
+                    onclick="$('#adventure_dropdown').slideUp('medium');"
+                    _="on click 
+                    put hedyApp.getCurrentAdv() into #adventure_text
+                    then localStorage.setItem('adventure_dropdown', 'adventure_button_{{ adventure.name }}')">
                         {{ adventure.name }}
                     </button>
                   {% endfor %}
