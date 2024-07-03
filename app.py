@@ -1778,7 +1778,7 @@ def get_specific_adventure(name, level, mode):
                            level=level,
                            prev_level=prev_level,
                            next_level=next_level,
-                           #    max_level=max_level,
+                           max_level=hedy.HEDY_MAX_LEVEL,
                            customizations=customizations,
                            hide_cheatsheet=None,
                            enforce_developers_mode=None,
