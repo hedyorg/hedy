@@ -491,7 +491,7 @@ class ForTeachersModule(WebsiteModule):
 
     @route("/preview-teacher-mode", methods=["GET"])
     def preview_teacher_mode(self):
-        username = "TestTeacher"
+        username = "testteacher"
         user = self.db.user_by_username(username)
         if not user:
             user_pass = os.getenv("PREVIEW_TEACHER_MODE_PASSWORD", "")
@@ -504,12 +504,14 @@ class ForTeachersModule(WebsiteModule):
                 "last_login": utils.timems(),
             }
             self.db.store_user(user)
+        else:
+            self.db.clean_teacher_mode_account(username)
 
         session["preview_teacher_mode"] = {
             "username": username,
         }
         remember_current_user(user)
-        return redirect("/hedy")
+        return redirect("/for-teachers")
 
     @route("/exit-preview-teacher-mode", methods=["GET"])
     # Note: we explicitly do not need login here, anyone can exit preview mode
