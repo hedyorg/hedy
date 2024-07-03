@@ -141,8 +141,8 @@ levels:
             text: To make or 'set' a variable we use the `{is}` command
             code: |-
                 name {is} Hedy
-                age {is} 15
-                {print} name is age years old
+                alter {is} 15
+                {print} name ist alter Jahre alt
         3:
             header: Interactive
             text: |-
@@ -158,10 +158,10 @@ levels:
             header: Multiple variables
             text: Now that we use variables, we can use multiple variables instead of just one `{echo}`command.
             code: |-
-                name {is} {ask} What is your name?
-                {print} Hello name
-                age {is} {ask} How old are you?
-                {print} name is age years old.
+                name {is} {ask} Was ist dein Name?
+                {print} Hallo name
+                alter {is} {ask} Wie alt bist du?
+                {print} name ist alter Jahre alt.
         5:
             header: Sleep
             text: You can also use the `{sleep}` command to pause the code for a while.

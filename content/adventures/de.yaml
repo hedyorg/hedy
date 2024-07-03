@@ -88,7 +88,8 @@ adventures:
             4:
                 story_text: |
                     ### Übung
-                    Kopiere den Beispielcode und füge die Anführungszeichen in die Zeilen ein.
+                    Kopiere den Beispielcode und vervollständige ihn indem du Anführungszeichen in die Lücken in Zeile 1 und 2 einsetzt.
+                    Die Lücken in Zeile 3 und 4 sollen nicht durch Anführungszeichen ersetzt werden, sondern einem `{sleep}` und einem `{clear}` Befehl. Kannst du es zum Laufen bekommen?
 
                     ### Übung 2
                     Gehe zurück zum vorherigen Level und kopiere deinen Storycode. Bringe den Code in diesem Level zum Laufen, indem du Anführungszeichen an den richtigen Stellen einfügst.
@@ -1587,10 +1588,9 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Brauchen alle zu lange, um zu würfeln? In diesem Level kannst du Hedy alle Würfel auf einmal werfen lassen.
-
                     ### Übung
-                    Ändere die Namen zu den Namen deiner Freunde oder Familienmitglieder und vervollständige den Code, sodass sie alle würfeln.
+                    Brauchen alle zu lange, um zu würfeln? In diesem Level kannst du Hedy alle Würfel auf einmal werfen lassen.
+                    Ändere die Namen zu den Namen deiner Freunde oder Familienmitglieder und vervollständige den Code.
                 example_code: |
                     ```
                     Spielerliste = Ann, John, Jesse
@@ -1700,14 +1700,13 @@ adventures:
                     Tellerwäscher = Familienmitglieder {at} {random}
                     {print} 'Am Dienstag macht ' Tellerwäscher ' den Abwasch.'
                     {remove} Tellerwäscher {from} Familienmitglieder
-                    Tellerwäscher = Familienmitglieder {at} {random}
                     ```
             7:
                 story_text: |
                     Mit dem Befehl `{repeat}` kannst du Code-Zeilen wiederholen. Das kannst du nutzen, um für mehrere Tage zu berechnen, wer abwäscht.
                     ### Übung
                     Benutze den `{repeat}` Befehl um zu entscheiden wer die ganze Woche abwaschen muss. Jede Lücke muss mit einem Befehl oder einer Zahl gefüllt werden!
-                    **(extra)** Kannst du an eine andere Aufgabe im Haushalt denken? Passe den Code an, sodass er drei Haushaltsaufgaben entscheidet. Vergiss nicht auszugeben um welche Aufgaben es sich handelt!
+                    **(Extra)** Kannst du an eine andere Aufgabe im Haushalt denken? Passe den Code an, sodass er drei Haushaltsaufgaben entscheidet. Vergiss nicht auszugeben um welche Aufgaben es sich handelt!
                 example_code: |
                     ```
                     Familienmitglieder = Mama, Papa, Emma, Sophie
@@ -1719,7 +1718,7 @@ adventures:
 
                     ### Übung
                     Füge eine zweite Hauspflicht hinzu, wie z.B. Staubsaugen oder Aufräumen, und stelle sicher, dass sie ebenfalls für die ganze Woche aufgeteilt ist.
-                    <br> **(extra)** Das Programm ist nicht fair, du kannst Pech haben und die ganze Woche abwaschen. Wie könntest du das Programm fairer machen?
+                    <br> **(Extra)** Das Programm ist nicht fair, du kannst Pech haben und die ganze Woche abwaschen. Wie könntest du das Programm fairer machen?
                 example_code: |
                     ```
                     tage = Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag
@@ -1730,12 +1729,12 @@ adventures:
     elif_command:
         name: '{elif}'
         default_save_name: elif
-        description: elif
+        description: '{elif}'
         levels:
             17:
                 story_text: |
-                    In this level you can also use a new command: `{elif}`. `{elif}` is a combination of the keywords `{else}` and `{if}` and you need it when you want to make 3 (or more!) options.
-                    Check it out!
+                    In diesem Level kannst du auch einen neuen Befehl nutzen: `{elif}`. `{elif}` ist eine Kombination der Schlüsselwörter `{else}` und `{if}` und du brauchst es, wenn du 3 (oder mehr!) Optionen erstellen möchtest.
+                    Guck es dir jetzt an!
                 example_code: |
                     ```
                     prices = ['1 million dollars', 'an apple pie', 'nothing']
@@ -2665,7 +2664,7 @@ adventures:
                     ```
             6:
                 story_text: |
-                    We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:
+                    Wir haben außerdem geändert, wie man ein Wort in einer Variable speichert. Du kannst nun auch `=` anstatt von `{is}` verwenden, wenn du einen Namen oder eine Zahl in einer Variable speichert, und zwar so:
                 example_code: |
                     ```
                     name = Hedy
@@ -2755,12 +2754,12 @@ adventures:
         levels:
             6:
                 story_text: |
-                    In this level you learn something new: you can now also calculate.
+                    In diesem Level lernst du etwas Neues: Du kannst nun auch Rechnen.
 
-                    The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
+                    Das Plus ist einfach, du schreibst es wie in Mathe: `5 + 5` zum Beispiel. Das Minus klappt auch prima, es ist `5 - 5`.
 
-                    The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                    That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                    Das Mal ist ein bisschen anders, weil es dafür kein Symbol auf deiner Tastatur gibt. Such danach, es gibt wirklich keins!
+                    Darum multiplizieren wir mit dem Sternchen über der 8: `5 * 5`. Lies das als "5 mal 5", so kannst du es dir am Besten merken.
                 example_code: |
                     ```
                     {print} '5 plus 5 is ' 5 + 5
@@ -2788,9 +2787,9 @@ adventures:
 
                     {print} 2.5 + 2.5
     music:
-        name: music
-        default_save_name: music
-        description: Play a tune!
+        name: Musik
+        default_save_name: Musik
+        description: Spiele einen Ton!
         levels:
             1:
                 story_text: |-
@@ -2903,7 +2902,7 @@ adventures:
                     _
                     ```
             6:
-                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting numbers. \nThen, see if you can compose a song using the numbers.\n"
+                story_text: "Anstatt Noten zu spielen, kannst du nun auch Zahlen spielen. Tippe einfach `{play} 1` für die tiefste Note, `{play} 70` für die höchste Note, oder irgendetwas dazwischen.\n\n### Übung\nDas schreit nach musikalischer Mathematik. Probiere den Beispielcode einige Male mit verschiedenen Startzahlen aus.\nDann gucke, ob du ein Lied komponieren kannst, indem du Zahlen benutzt.\n"
                 example_code: |
                     ```
                     number = {ask} 'Say a starting number between 1 and 67'
@@ -4964,12 +4963,12 @@ adventures:
                     ```
             6:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Übung
+                    Mache die Zeichnungen mit der Schildkröte nach!
 
-                    **Extra** Let the player decide which color the square should be.
+                    **Extra** Lasse die Spielerin oder den Spieler entscheiden, welche Farbe das erste Quadrat haben sollte.
 
-                    ***Extra*** Can you make the letter of your own first name and the flag of your own country too?
+                    ***Extra*** Kannst du den Buchstaben deines eigenen Namen und die Flagge deines eigenen Landes malen?
 
                     <div class="w-full flex flex-row gap-2">
                     Square <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="150">
@@ -4983,8 +4982,8 @@ adventures:
                     ```
             7:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Übung
+                    Mache die Zeichnungen mit der Schildkröte nach!
 
                     <div class="w-full flex flex-row gap-2">
                     Hexagon <img src="https://github.com/hedyorg/hedy/assets/80678586/92e492e1-1593-489b-aaf0-51d2a29755f4" width="200">
@@ -4993,10 +4992,10 @@ adventures:
                     </div>
             8:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Übung
+                    Mache die Zeichnungen mit der Schildkröte nach!
 
-                    **Extra** The number in brackets indicates in how many lines of code this figure can be drawn. Can you do it in the same amount of lines?
+                    **Extra** Die Zahl in den Klammern gibt an, in wie vielen Codezeilen die Figur gezeichnet werden kann. Kannst du es in derselben Anzahl an Zeilen machen?
 
                     <div class="w-full flex flex-row gap-2">
                     Square (3) <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
