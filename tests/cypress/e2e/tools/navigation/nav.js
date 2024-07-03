@@ -18,14 +18,9 @@ export function goToHome()
     goToPage('/');
 }
 
-export function goToRegisterStudent()
+export function goToSignup()
 {
-    goToPage(Cypress.env('register_student_page'));
-}
-
-export function goToRegisterTeacher()
-{
-    goToPage(Cypress.env('register_teacher_page'));
+    goToPage(Cypress.env('signup_page'));
 }
 
 export function goToLogin()
