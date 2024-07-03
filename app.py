@@ -1056,8 +1056,6 @@ def programs_page(user):
                  'number_lines': item['code'].count('\n') + 1
                  }
             )
-        else:
-            print('\n\n\n\nITEMS ', item)
 
     sorted_level_programs = hedy_content.Adventures(g.lang) \
         .get_sorted_level_programs(all_programs, adventure_names)
