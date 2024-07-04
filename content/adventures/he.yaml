@@ -117,12 +117,12 @@ adventures:
                     You can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `{if}`, and then you have already made a whole program!
                 example_code: |
                     ```
-                    שם{is} {ask} 'מי הולך ביער?'
-                    {print} שם 'הולך ביער'
-                    {print} שם 'פגש מפלצת'
-                    סוף{is} {ask} 'האם תרצה סוף רע או טוב??'
-                    {if} סוף{is} טוב{print} שם 'הוציא את החרב והמפלצת ברחה במהירות'
-                    {else} {print} 'המפלצת אוכלת את ' שם
+                    name {is} {ask} 'Who is walking in the forest?'
+                    {print} name ' walks through the forest'
+                    {print} name ' encounters a monster'
+                    end {is} {ask} 'Would you like a good or a bad ending?'
+                    {if} end {is} good {print} name ' takes the sword and the monster quickly runs away'
+                    {else} {print} 'The monster eats ' name
                     ```
             7:
                 story_text: |
