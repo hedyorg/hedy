@@ -17,13 +17,22 @@ ALL_LANGUAGES = {}
 ALL_KEYWORD_LANGUAGES = {}
 
 # Babel has a different naming convention than Weblate and doesn't support some languages -> fix this manually
+# Map our langauge code to the language code recognized by Babel, or 'en' if Babel doesn't support this locale
+# at all.
 CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK',
                           'kmr': 'ku_TR',
-                          'tl': 'en'}
+                          'tl': 'en',
+                          'iba': 'en',
+                          'peo': 'fa',
+                          'enm': 'en'
+                          }
 
 # For the non-existing language manually overwrite the display language to make sure it is displayed correctly
 CUSTOM_LANGUAGE_TRANSLATIONS = {'kmr': 'Kurdî (Tirkiye)',
-                                'tl': 'ᜆᜄᜎᜓᜄ᜔'}
+                                'tl': 'ᜆᜄᜎᜓᜄ᜔',
+                                'peo': 'Old Persian',
+                                'enm': 'English (Middle)',
+                                'iba': 'Iban'}
 
 customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
 
@@ -47,7 +56,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle_draw_it',
         'restaurant',
         'fortune',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     2: [
         'default',
@@ -63,7 +74,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'turtle',
         'turtle_draw_it',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     3: [
         'default',
@@ -80,7 +93,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'haunted',
         'turtle',
         'turtle_draw_it',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     4: [
         'default',
@@ -97,7 +112,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'haunted',
         'fortune',
         'restaurant',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     5: [
         'default',
@@ -116,7 +133,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'pressit',
         'turtle',
         'turtle_draw_it',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     6: [
         'default',
@@ -131,7 +150,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'calculator',
         'fortune',
         'restaurant',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     7: [
         'default',
@@ -146,7 +167,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'pressit',
         'turtle_draw_it',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     8: [
         'default',
@@ -161,7 +184,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'turtle',
         'turtle_draw_it',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     9: [
         'default',
@@ -176,7 +201,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'pressit',
         'turtle',
         'turtle_draw_it',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     10: [
         'default',
@@ -192,7 +219,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'rock',
         'calculator',
         'restaurant',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     11: [
         'default',
@@ -203,13 +232,15 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'haunted',
         'turtle_draw_it',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     12: [
         'default',
         'maths',
-        'functions',
         'quotation_marks',
+        'functions',
         'story',
         'fortune',
         'music',
@@ -221,7 +252,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'piggybank',
         'secret',
         'turtle_draw_it',
-        'debugging'
+        'debugging',
+        'parsons',
+        'quiz',
     ],
     13: [
         'default',
@@ -234,8 +267,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle_draw_it',
         'restaurant',
         'calculator',
-        'tic',
-        'debugging'
+        'debugging',
+        'quiz',
     ],
     14: [
         'default',
@@ -250,43 +283,64 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'calculator_2',
         'piggybank',
         'quizmaster',
-        'tic',
-        'debugging'
+        'debugging',
+        'quiz',
     ],
     15: [
         'default',
         'while_command',
+        'music',
         'turtle_draw_it',
         'restaurant',
         'story',
         'dice',
         'rock',
         'calculator',
-        'tic',
-        'debugging'
+        'debugging',
+        'quiz',
     ],
     16: [
         'default',
         'random_command',
         'haunted',
         'songs',
+        'songs_2',
+        'music',
         'language',
-        'debugging'
+        'tic',
+        'tic_2',
+        'tic_3',
+        'simon',
+        'simon_2',
+        'simon_3',
+        'debugging',
+        'quiz',
     ],
     17: [
         'default',
         'for_command',
         'elif_command',
+        'music',
         'tic',
+        'hangman',
+        'hangman_2',
+        'hangman_3',
         'blackjack',
-        'debugging'
+        'blackjack_2',
+        'blackjack_3',
+        'blackjack_4',
+        'debugging',
+        'quiz',
     ],
     18: [
         'default',
         'print_command',
         'ask_command',
+        'functions',
+        'for_command',
         'story',
         'songs',
+        'music',
         'debugging'
     ]
 }
@@ -524,29 +578,31 @@ class Adventures(StructuredDataFile):
         for item in programs:
             programs_by_level.append(
                 {'level': item['level'],
-                 'adventure_name': item.get('adventure_name'),
+                 'adventure_name': item.get('adventure_name', item['name']),
                  }
             )
 
         sort = {}
+
         for program in programs_by_level:
             if program['level'] in sort:
-                sort[program['level']].append(adventure_names.get(program['adventure_name']))
+                sort[program['level']].append(adventure_names.get(program['adventure_name'], program['adventure_name']))
             else:
-                sort[program['level']] = [adventure_names.get(program['adventure_name'])]
+                sort[program['level']] = [adventure_names.get(program['adventure_name'], program['adventure_name'])]
         for level, adventures in sort.copy().items():
-            sort[level] = sorted(adventures, key=lambda s: s.lower())
+            sort[level] = sorted(adventures, key=lambda s: s.lower() if s else "")
 
         return dict(sorted(sort.items(), key=lambda item: item[0]))
 
     def get_sorted_adventure_programs(self, programs, adventure_names):
         programs_by_adventure = []
         for item in programs:
-            programs_by_adventure.append(
-                {'adventure_name': adventure_names.get(item.get('adventure_name')),
-                 'level': item['level'],
-                 }
-            )
+            if item.get('adventure_name'):
+                programs_by_adventure.append(
+                    {'adventure_name': adventure_names.get(item.get('adventure_name')) or item.get('adventure_name'),
+                     'level': item['level'],
+                     }
+                )
 
         sort = {}
         for program in programs_by_adventure:
@@ -558,7 +614,7 @@ class Adventures(StructuredDataFile):
             sort[adventure] = sorted(levels, key=lambda item: item)
 
         return {key: sort[key]
-                for key in sorted(sort.keys(), key=lambda s: s.lower())}
+                for key in sorted(sort.keys(), key=lambda s: s.lower() if s else "")}
 
     def get_adventure_names(self, keyword_lang):
         return {aid: adv['name'] for aid, adv in deep_translate_keywords(

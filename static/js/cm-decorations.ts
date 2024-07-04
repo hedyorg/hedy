@@ -338,7 +338,8 @@ function highlightVariables(view: EditorView) {
         "Expression",
         "Repeat",
         "For",
-        "Call"   
+        "Call",
+        "Play"
     ]
     // in levels 2 and 3 variables are not substitued inside ask
     // not sure if that's intended behaviour or not

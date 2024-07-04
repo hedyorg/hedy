@@ -27,11 +27,42 @@ export function initializeAdminUserPage(_options: InitializeAdminUsersPageOption
       }
   });
 
-  $('#next_page_btn').click(function() {
+  $('.admin_pagination_btn').click(function(ev) {
       // Copy the token into the hidden input field, then submit the form
-      var token = $('#next_page_btn').data('page_token');
+      var token = $(ev.target).data('page_token');
       console.log(token);
-      $('#hidden-page-input').attr('value', token);
+      $('#hidden_page_input').attr('value', token);
       $('#filterform').submit();
   });
+}
+
+export function filter_admin() {
+    const params: Record<string, any> = {};
+  
+    const filter = $('#admin_filter_category').val();
+    params['filter'] = filter;
+  
+    if ($('#hidden_page_input').val()) {
+      params['page'] = $('#hidden_page_input').val();
+    }
+  
+    switch (filter) {
+      case 'email':
+      case 'username':
+        params['substring'] = $('#email_filter_input').val();
+        break;
+      case 'language':
+        params['language'] = $('#language_filter_input').val();
+        break;
+      case 'keyword_language':
+        params['keyword_language'] = $('#keyword_language_filter_input').val();
+        break;
+      default:
+        params['start'] = $('#admin_start_date').val();
+        params['end'] = $('#admin_end_date').val();
+        break;
+    }
+  
+    const queryString = Object.entries(params).map(([k, v]) => k + '=' + encodeURIComponent(v)).join('&');
+    window.open('?' + queryString, '_self');
 }

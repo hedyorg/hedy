@@ -2,12 +2,13 @@ levels:
     1:
         1:
             story: |-
-                Puzzels are exercises in which the lines of code are already written for you. You only have to place the lines in the correct order. Drag the lines of code into the input screen and run the code. Can you get the program to work?
-                You're a customer at bakery Hedy.
-                You walk into the bakery and are welcomed by the baker.
-                He asks what type of pie you want to order.
-                Then he repeats your answer back to you.
-                Lastly, your order is being prepared.
+                Puzzels são exercícios onde as linhas de código já estão escritas. Tu só tens que colocá-las na ordem correcta. Arrasta as linhas de código para o ecrã de input e corre o código. Consegues fazer o programa funcionar?
+
+                Tu és um cliente na pastelaria da Hedy.
+                Tu entras na pastelaria e és recebido(a) pelo pasteleiro(a).
+                Ele(a) pergunta que torta queres pedir.
+                E depois repete a tua resposta de volta para ti.
+                Finalmente, o teu pedido está a ser preparado.
             code: |-
                 {print} Welcome to bakery Hedy!
                 {ask} What type of pie do you want to order?
@@ -53,37 +54,37 @@ levels:
         2:
             story: Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
             code: |-
-                food {is} pizza, icecream, salad, sandwich
-                toppings {is} chocolate, cheese, tuna, sprinkles
-                {print} Your random meal for today is...
-                sleep 2
-                {print} food at random with toppings at random
+                comida {is} pizza, gelado, salada, sandwich
+                coberturas {is} chocolate, queijo, atum, sprinkles
+                {print} A tua refeição aleatória do dia é...
+                {sleep} 2
+                {print} comida {at}{random} com cobertura de {at}{random}
         3:
             story: |-
                 In a chess tournament there are three players left.
                 Create a program that decides which two players have to play against each other first.
                 Start by printing the two players who play the first match, then print against which player the winner will play.
             code: |-
-                players {is} Liam, Noah, Sophie
-                player_1 {is} players {at} {random}
-                {remove} player_1 {from} players
-                player_2 {is} players {at} {random}
-                {print} player_1 ' first plays against ' player_2
-                {remove} player_2 {from} players
-                {print} 'The winner plays against ' players {at} {random}
+                jogadores {is} Liam, Noah, Sofia
+                jogador_1 {is} jogadores {at} {random}
+                {remove} jogador_1 {from} jogadores
+                jogador_2 {is} jogadores {at} {random}
+                {print} jogador_1 ' jogará primeiro contra ' jogador_2
+                {remove} jogador_2 {from} jogadores
+                {print} 'O vencedor joga contra' jogadores {at} {random}
     4:
         1:
             story: |-
-                You are the newest Pokémon trainer from Pallet Town!
-                Make a program that selects your first Pokémon.
-                Let the program wait a minute before revealing your first pokémon.
+                És o mais recente treinador de Pokémon de Pallet Town!
+                Cria um programa que selecione o teu primeiro Pokémon.
+                Deixa o programa esperar um segundo antes de revelares o teu primeiro Pokémon.
             code: |-
                 pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
                 {print} 'This is going to be your first pokémon!'
                 {sleep}
                 {print} pokemons {at} {random}
         2:
-            story: Create a lottery that lets you choose an extra price that you might win.
+            story: Cria uma lotaria que te permite escolher um prémio extra que poderás ganhar.
             code: |-
                 prices {is} car, hamster, 1 million euros
                 price {is} {ask} 'What would you like to win?'
@@ -103,10 +104,10 @@ levels:
         2:
             story: Create a maths game.
             code: |-
-                {print} 'Solve this problem'
-                answer {is} {ask} '88 - 16 = ?'
-                {if} answer {is} 72 {print} 'Correct!'
-                {else} print 'Wrong! The answer was 72'
+                {print} 'Resolve o problema'
+                resposta {is} {ask} '88 - 16 = ?'
+                {if} resposta {is} 72 {print} 'Correcto!'
+                {else} {print} 'Incorrecto! A resposta era 72'
     6:
         1:
             story: |-
@@ -150,12 +151,12 @@ levels:
                 You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.
                 Either red, yellow or blue! Take a little pauze after announcing a team.
             code: |-
-                teams = red, yellow, blue
-                {print} 'Red, Yellow of Blue?'
+                equipas = vermelha, amarela, azul
+                {print} 'Vermelha, Amarela ou Azul?'
                 {repeat} 5 {times}
-                  {print} 'You are selected in team... '
-                  {print} teams {at} {random}
-                  sleep 2
+                    {print} 'Estás na equipa... '
+                    {print} equipas {at} {random}
+                    {sleep} 2
         2:
             story: Print the countdown for a  game of hide and seek.
             code: |-
@@ -195,8 +196,8 @@ levels:
     10:
         1:
             story: |-
-                Help this family out by creating a schedule of who is cooking and what they should be making this week. The remove commands make sure nobody has to cook twice and they have a differnet dinner every day.
-                **Mind!** the variable order should be first days, then people, and lastly dinner_options. This goes for the lines with the remove commands too.
+                Ajude esta família criando um calendário de quem está a cozinhar e o que deve fazer esta semana. Os comandos `{remove}` garantem que ninguém tem de cozinhar duas vezes e que todos os dias têm um jantar diferente.
+                **Detalhe!** a ordem das variáveis deve ser primeiro dias, depois pessoas e, por último, opções_jantar. Isto é válido para as linhas com os comandos `{remove}` também.
             code: |-
                 days = Monday, Tuesday, Wednesday, Thursday, Friday
                 people = mom, dad, Martin, Abby, Jesse
@@ -232,8 +233,8 @@ levels:
                 {print} 'Happy New Year!'
         2:
             story: |-
-                Create a program that tells us the final results of the science fair. Firstly define the variable contestants, then the variable place.
-                **Hint** Line 5 should be the sleep command, and you should end with saying congratulations.
+                Crie um programa que nos diga os resultados finais da feira de ciências. Primeiro define a variável concorrentes e depois a variável lugar.
+                **Dica** A linha 5 deve ser o comando sleep, e deves terminar com os parabéns.
             code: |-
                 {print} 'And now we will reveal the results of the science fair'
                 contestants = Vivienne, Paul, Trixy, Bianca, Katya

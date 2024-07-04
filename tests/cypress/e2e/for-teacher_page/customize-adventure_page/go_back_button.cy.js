@@ -1,19 +1,19 @@
 import {loginForTeacher} from '../../tools/login/login.js'
 import {goToEditAdventure} from '../../tools/navigation/nav.js'
 
-describe('Preview button test', () => {
-  for (const teacher of ["teacher1", "teacher4"]) { 
-    it(`passes: ${teacher}`, () => {
-      loginForTeacher(teacher);
-      goToEditAdventure();
+const teachers = ["teacher1", "teacher4"];
 
-      cy.get('#go_back_button')
-        .should('be.visible')
-        .should('not.be.disabled')
-        .click();
+teachers.forEach((teacher) => {
+  it(`Preview button test for ${teacher}`, () => {
+    loginForTeacher(teacher);
+    goToEditAdventure();
 
-      cy.url()
-        .should('eq', Cypress.config('baseUrl') + Cypress.env('teachers_page'));
+    cy.getDataCy('go_back_button')
+      .should('be.visible')
+      .should('not.be.disabled')
+      .click();
+
+    cy.url()
+      .should('eq', Cypress.config('baseUrl') + Cypress.env('teachers_page'));
     })
-  }
 })

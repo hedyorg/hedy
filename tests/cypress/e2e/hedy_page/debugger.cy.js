@@ -23,9 +23,9 @@ describe('Test editor box functionality', () => {
       .should('have.class', 'cm-debugger-current-line');
 
     cy.get('#debug_continue').click();
-    cy.get('#ask-modal').should('be.visible');
-    cy.get('#ask-modal > form > div > input[type="text"]').type('Hedy!');
-    cy.get('#ask-modal > form > div > input[type="submit"]').click();
+    cy.get('#ask_modal').should('be.visible');
+    cy.get('#ask_modal > form > div > input[type="text"]').type('Hedy!');
+    cy.get('#ask_modal > form > div > input[type="submit"]').click();
 
     codeMirrorLines()
       .eq(2)
@@ -50,9 +50,9 @@ describe('Test editor box functionality', () => {
       .should('have.class', 'cm-debugger-current-line');
 
     cy.get('#debug_continue').click();
-    cy.get('#ask-modal').should('be.visible');
-    cy.get('#ask-modal > form > div > input[type="text"]').type('Hedy');
-    cy.get('#ask-modal > form > div > input[type="submit"]').click();
+    cy.get('#ask_modal').should('be.visible');
+    cy.get('#ask_modal > form > div > input[type="text"]').type('Hedy');
+    cy.get('#ask_modal > form > div > input[type="submit"]').click();
 
     codeMirrorLines()
       .eq(1)
@@ -480,6 +480,50 @@ describe('Test editor box functionality', () => {
 
     cy.get('#output').should('contain.text', 'a');
   });
+  
+  describe('Test play with no variables', () => {
+    for (let i = 1; i <= 10; i++) {
+      it ('Test play no variables level ' + i, () => {
+        cy.intercept('/parse').as('parse');
+        
+        visitLevel(i)
+        
+        cy.focused().type("play C4\nplay D4\nplay E4\n");
+    
+        cy.get('#debug_button').click();
+        cy.wait('@parse')
+        
+        for (let line = 0; line < 3; line++) {
+          codeMirrorLines()
+            .eq(line)
+            .should('have.class', 'cm-debugger-current-line');
+          cy.get('#debug_continue').click();
+        }
+      })
+    }
+  })
+
+  describe('Test play with variables', () => {
+    for (let i = 2; i <= 11; i++) {
+      it ('Test play variables level ' + i, () => {
+        cy.intercept('/parse').as('parse');
+        
+        visitLevel(i)
+        
+        cy.focused().type("note1 is C4\nnote2 is D4\nnote3 is E4\nplay C4\nplay D4\nplay E4\n");
+    
+        cy.get('#debug_button').click();
+        cy.wait('@parse')
+
+        for (let line = 0; line < 6; line++) {
+          codeMirrorLines()
+            .eq(line)
+            .should('have.class', 'cm-debugger-current-line');
+          cy.get('#debug_continue').click();
+        }
+      })
+    }
+  })
 });
 
 /**

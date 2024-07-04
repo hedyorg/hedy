@@ -1,0 +1,75 @@
+# Get Weblate to commit and push changes to a PR,
+# which will be auto-approved.
+name: Update Weblate
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # 6 in the morning
+    - cron:  '0 6 * * *'
+
+jobs:
+  update-weblate:
+    runs-on: ubuntu-latest
+
+    steps:
+    # If an open Weblate/translations PR still exists, we shouldn't tell Weblate to push again.
+    # Because we ended our previous push with a 'reset', Weblate would otherwise force-push
+    # new changes over the unmerged old changes, causing them to lost.
+    - name: Check for existence of old Weblate PR
+      run: |
+        prs=$(gh pr -R hedyorg/hedy list -q '.[] | select(.title | contains("Translations update"))' --json title)
+        if [[ "$prs" != "" ]]; then
+          echo "Open Pull Request for Weblate!"
+          gh pr -R hedyorg/hedy list --search 'Translations update'
+          exit 1
+        fi
+      env:
+        GH_TOKEN: ${{ github.token }}
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.12
+    - name: Install Weblate Client
+      run: pip install wlc
+    - name: Prepare client config
+      run: |
+        echo '[weblate]' >> .weblate
+        echo 'url = https://hosted.weblate.org/api/' >> .weblate
+        echo 'translation = hedy' >> .weblate
+        echo '[keys]' >> .weblate
+        echo 'https://hosted.weblate.org/api/ = ${{ secrets.WEBLATE_API_KEY }}' >> .weblate
+    - name: Weblate commands
+      # Do a weblate pull, commit and push.
+      # After pushing, clean the Weblate remote. This is necessary because we squash merge the
+      # commits that Weblate pushes, and if the bytes aren't exactly equivalent (for example
+      # if we wrap or we revert a broken bit of code) it will trigger a merge
+      # conflict.
+      #
+      # To prevent merge conflicts, lock the repository while we're merging this; otherwise,
+      # any translations in the merge window will cause merge conflicts. Only lock if we're
+      # going to create a Pull Request while doing this, since unlocking will
+      # only happen as the result of a PR being merged.
+      run: |
+        set -x
+        wlc repo | tee repo.txt
+        if grep -q "needs_commit: False" repo.txt && grep -q "needs_push: False" repo.txt; then
+          echo "Nothing to do"
+          exit 0
+        fi
+
+        # Have to lock each component individually. Not in the UI, but using the CLI we do.
+        for component in glossary adventures keywords achievements quizzes commands client-messages web-texts webpages parsons tutorials slides; do
+          wlc lock hedy/$component
+        done
+
+        wlc pull
+        wlc commit
+        wlc push
+        # On our repo, 'wlc reset' consistently times out the TCP connection after waiting
+        # for 5 minutes. The actual reset does seem to work, so we just don't wait for the
+        # command to finish, otherwise all our workflow executions show errors.
+        wlc reset &
+        sleep 10
+
+

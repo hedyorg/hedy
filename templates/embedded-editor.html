@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}"/>
     </head>
     <body class="flex flex-col gap-2 h-screen" dir="{{ g.dir }}">
-        <div id="editor-area" class="relative grid grid-cols-1 {% if run and not fullWidth %}grid-cols-2{% endif %} md:grid-flow-row-dense gap-2">
+        <div id="editor_area" class="relative grid grid-cols-1 {% if run and not fullWidth %}grid-cols-2{% endif %} md:grid-flow-row-dense gap-2">
             <div class="flex flex-col order-1 relative" id="code_editor" style="height: {{ editorHeight }};">
                 <div id="editor" style="background: #272822; font-size:0.95em; color: white" blurred="false" class="h-full w-full flex-1 text-lg rounded min-h-0 overflow-hidden fixed-editor-height" {% if readOnly %}data-readonly="true"{% endif %}></div>
                 <div id="errorbox"
@@ -73,8 +73,8 @@
                       <!-- tabindex=0 makes the div focusable -->
                       <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto" style="min-height: 3rem;"></div>
                       <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
-                      <div id="inline-modal" class="flex-0">
-                        <div id="ask-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none">
+                      <div id="inline_modal" class="flex-0">
+                        <div id="ask_modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none">
                         <!--Title-->
                             <div class="flex justify-between items-center">
                             <p class="text-2xl font-bold caption">Header</p>
@@ -88,14 +88,14 @@
                             </div>
                         </form>
                     </div>
-                    <div id="pygame-modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99;">
+                    <div id="keybinding_modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99; position: absolute; bottom: 0; width: 100%;">
                       <!--Title-->
                       <div class="flex justify-between items-center">
-                        <p class="text-2xl font-bold caption">{{_('pygame_waiting_for_input')}}</p>
+                        <p class="text-2xl font-bold caption">{{_('keybinding_waiting_for_keypress')}}</p>
                       </div>
                     </div>
                   </div>
-                  <div id="dynamic-buttons" class="flex mt-3 gap-2 overflow-auto border-4 border-blue-600 rounded bg-blue-300 py-2 px-3" style="display: none">
+                  <div id="dynamic_buttons" class="flex mt-3 gap-2 overflow-auto border-4 border-blue-600 rounded bg-blue-300 py-2 px-3" style="display: none">
                   </div>
                 </div>
             {% endif %}
@@ -103,8 +103,8 @@
         {% if run %}
             <div class="h-12" id="code_related_buttons">
               <div class="flex justify-between gap-2 items-start h-12 overflow-visible">
-                <div id="runButtonContainer">
-                  <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ language }}", {{_('already_program_running')|default(None)|tojson}}, "run")'>{{_('run_code_button')}} </button>
+                <div id="run_button_container">
+                  <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ language }}", false, {{_('already_program_running')|default(None)|tojson}}, "run")'>{{_('run_code_button')}} </button>
                   <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
                 </div>
               </div>

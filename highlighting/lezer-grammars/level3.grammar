@@ -9,9 +9,9 @@ Assign { Text is+ (Text+ | ListAccess) }
 Ask { Text is+ ask+ (Text)+ }
 Sleep { sleep+ (Text | ListAccess)? }
 ListAccess { Text at+ (random+ | Text) }
-Add { add+ Text+ toList+ Text }
+Add { add+ Text+ to_list+ Text }
 Remove { remove+ Text+ from+ Text }
-Play { play+ Text+ }
+Play { play+ (ListAccess | Text+) }
 
 Turtle[@isGroup=turtle] {
     Forward { forward+ (Text | ListAccess ) } |
@@ -38,7 +38,7 @@ ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
     add[@name="add"],
     from[@name="from"],
     remove[@name="remove"],
-    toList[@name="toList"]
+    to_list[@name="to_list"]
 }
 
 @tokens {

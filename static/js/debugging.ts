@@ -1,4 +1,3 @@
-import { HedyAceEditor } from "./ace-editor";
 import { runit, theGlobalDebugger,theGlobalSourcemap } from "./app";
 import { HedyEditor, Breakpoints } from "./editor";
 import  TRADUCTION_IMPORT  from '../../highlighting/highlighting-trad.json'
@@ -8,7 +7,8 @@ let theLanguage: string;
 let TRADUCTION: Map<string,string>;
 
 //Feature flag for variable and values view
-let variable_view = false;
+let variable_view = true;
+let showRoles = false;
 let step_debugger = false;
 const fullLineCommands = [
   'print',
@@ -19,22 +19,23 @@ const fullLineCommands = [
   'add',
   'remove',
   'ask',
+  'play',
   'command', // the turtle and clear commands get put in the source map as 'command'
 ]
 
 const blockCommands = [
   'ifs',
   'ifelse',
-  'ifpressed_else',
+  'if_pressed_else',
   'repeat',
-  'ifpressed',
+  'if_pressed',
   'elses',
-  'ifpressed_elses',
+  'if_pressed_elses',
   'for_list',
   'for_loop',
   'while_loop',
   'elifs',
-  'ifpressed_elifs',
+  'if_pressed_elifs',
 ]
 
 const ifRegex = "((__if__) *[^\n ]+ *((__is__)|(__in__)) *[^\n ]+) *.*";
@@ -54,36 +55,38 @@ interface GutterMouseDownEvent {
   stop(): void;
 }
 
-function hide_if_no_variables(){
-  if($('#variables #variable-list li').length == 0){
+//this shows just the button, not the list itself
+export function toggleVariableView(){
+  if($('#variables #variable_list li').length == 0){
     $('#variable_button').hide();
   }
-  else{
+  else{    
     $('#variable_button').show();
-  }
-}
-
-export function show_variables() {
-  if (variable_view === true) {
-    const variableList = $('#variable-list');
-    if (variableList.hasClass('hidden')) {
-      variableList.removeClass('hidden');
-    }
+    $('#variable_list').show();
+    document.getElementById('variables_arrow')!.classList.remove('fa-angle-up');
+    document.getElementById('variables_arrow')!.classList.add('fa-angle-down');
   }
 }
 
 export function load_variables(variables: any) {
   if (variable_view === true) {
+    const programData = theGlobalDebugger?.get_program_data();
     variables = clean_variables(variables);
-    const variableList = $('#variable-list');
+    const variableList = $('#variable_list');
     variableList.empty();
     for (const i in variables) {
       // Only append if the variable contains any data (and is not undefined)
       if (variables[i][1]) {
-        variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
+        const variableName = variables[i][0].replace(/^_/, '');
+        const role = programData?.variables[variableName];
+        if (showRoles) {
+          variableList.append(`<li style=color:${variables[i][2]}>${variableName}: ${variables[i][1]} (${role})</li>`);
+        } else {
+          variableList.append(`<li style=color:${variables[i][2]}>${variableName}: ${variables[i][1]}</li>`);
+        }
       }
     }
-    hide_if_no_variables();
+    toggleVariableView();
   }
 }
 
@@ -94,24 +97,23 @@ function special_style_for_variable(variable: Variable) {
   let result = '';
   let parsedVariable = parseInt(variable.v as string);
   if (typeof parsedVariable == 'number' && !isNaN(parsedVariable)){
-     result =  "#ffffff";
+     result =  "#4299e1";
    }
    if(typeof variable.v == 'string' && isNaN(parsedVariable)){
-     result = "#ffffff";
+     result = "#4299e1";
    }
    if(typeof variable.v == 'boolean'){
-     result = "#ffffff";
+     result = "#4299e1";
    }
    if (variable.tp$name == 'list'){
-    result =  "#ffffff";
+    result =  "#4299e1";
    }
    return result;
 }
-
 //hiding certain variables from the list unwanted for users
 function clean_variables(variables: Record<string, Variable>) {
   const new_variables = [];
-  const unwanted_variables = ["random", "time", "int_saver", "int_$rw$", "turtle", "t"];
+  const unwanted_variables = ["random", "time", "int_saver", "int_$rw$", "turtle", "t", "chosen_note"];
   for (const variable in variables) {
     if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
       let extraStyle = special_style_for_variable(variables[variable]);
@@ -144,7 +146,6 @@ export function initializeDebugger(options: InitializeDebuggerOptions) {
   theGlobalEditor = options.editor;
   theLevel = options.level;
   theLanguage = options.language;
-  
   let TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;
   let lang = options.keywordLanguage;
   if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
@@ -170,10 +171,8 @@ export function initializeDebugger(options: InitializeDebuggerOptions) {
 
   if(options.level != 0){
     let level = options.level;
-    variable_view = level >= 2;
-    hide_if_no_variables();
+    variable_view = level >= 2;  
   }
-
   initializeBreakpoints(options.editor);
 }
 
@@ -217,23 +216,6 @@ function initializeBreakpoints(editor: HedyEditor) {
     }
     e.stop();
   });
-
-  /**
- * Render markers for all lines that have breakpoints
- * 
- * (Breakpoints mean "disabled lines" in Hedy).
- * */
-  editor.on('changeBreakpoint', function() {
-    if (theGlobalEditor instanceof HedyAceEditor) {
-      const breakpoints = theGlobalEditor.getDeactivatedLines();
-      const disabledLines = Object.entries(breakpoints)
-        .filter(([_, bpClass]) => bpClass === BP_DISABLED_LINE)
-        .map(([line, _]) => line)
-        .map(x => parseInt(x, 10));
-      
-      theGlobalEditor.strikethroughLines(disabledLines);
-    }
-  });
 }
 
 function get_shift_key(event: Event | undefined) {
@@ -245,7 +227,7 @@ function get_shift_key(event: Event | undefined) {
 
 function debugRun() {
   if (theLevel && theLanguage) {
-    runit(theLevel, theLanguage, "", "run", function () {
+    runit(theLevel, theLanguage, false, "", "run", function () {
       $('#output').focus();
     });
   }
@@ -253,12 +235,12 @@ function debugRun() {
 
 export function startDebug() {
   if (step_debugger === true) {
-    var debugButton = $("#debug_button");
+    var debugButton = $('#debug_button');
     debugButton.hide();
-    var continueButton = $("#debug_continue");
-    var stopButton = $("#debug_stop");
-    var resetButton = $("#debug_restart");
-    var runButtonContainer = $("#runButtonContainer");
+    var continueButton = $('#debug_continue');
+    var stopButton = $('#debug_stop');
+    var resetButton = $('#debug_restart');
+    var runButtonContainer = $('#run_button_container');
 
     runButtonContainer.hide();
     continueButton.show();
@@ -270,7 +252,7 @@ export function startDebug() {
 export function resetDebug() {
   if (step_debugger === true) {
     var storage = window.localStorage;
-    var continueButton = $("#debug_continue");
+    var continueButton = $('#debug_continue');
     continueButton.show();
 
     storage.setItem("debugLine", "0");
@@ -282,12 +264,12 @@ export function resetDebug() {
 
 export function stopDebug() {
   if (step_debugger === true) {
-    var debugButton = $("#debug_button");
+    var debugButton = $('#debug_button');
     debugButton.show();
-    var continueButton = $("#debug_continue");
-    var stopButton = $("#debug_stop");
-    var resetButton = $("#debug_restart");
-    var runButtonContainer = $("#runButtonContainer");
+    var continueButton = $('#debug_continue');
+    var stopButton = $('debug_stop');
+    var resetButton = $('#debug_restart');
+    var runButtonContainer = $('#run_button_container');
 
     $('#stopit').hide();
     $('#runit').show()

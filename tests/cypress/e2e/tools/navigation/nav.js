@@ -1,4 +1,5 @@
 import { loginForAdmin } from "../login/login";
+import { openAdventureView } from '../../tools/adventures/adventure.js';
 
 export function goToPage(page)
 {
@@ -100,8 +101,8 @@ export function goToEditAdventure()
 
     // takes the first adventures and goes to its edit page
     // It does not matter which adventure we take (we choose the first one)
-    cy.get('#teacher_adventures tbody > :nth-child(1) [data-cy="edit-link"]')
-      .click();
+    openAdventureView();
+    cy.getDataCy("edit_link_adventure").first().click();
 }
 
 export function goToExploreProgramsPage()

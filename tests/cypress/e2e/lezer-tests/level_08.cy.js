@@ -51,5 +51,19 @@ describe('Lezer parser tests for level 8', () => {
 
             multiLevelTester('Test if number not in list print', code, expectedTree, 8, 11);
         })
+
+        describe('Test equality check equal sign', () => {
+            const code = 
+                `if order = burger
+                    price is 5`
+            const expectedTree = 
+                `Program(
+                    Command(If(if,Condition(EqualityCheck(Text,Op,Expression(Text))))),
+                    Command(Assign(Text,is,Expression(Int)))
+                )
+                `
+            
+            multiLevelTester('Test equality check equal sign', code, expectedTree, 8, 11);
+        })
     })
 })

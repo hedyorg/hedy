@@ -106,7 +106,7 @@ def task_tailwind():
             *glob('main/**/*.md'),
             *glob('content/**/*.md'),
             # exclude files generated for translations
-            *[file for file in glob('static/js/*.ts') if file not in \
+            *[file for file in glob('static/js/*.ts') if file not in
                 ['static/js/message-translations.ts', 'static/js/client-messages.ts']
               ],
             'build-tools/heroku/tailwind/styles.css',
@@ -287,13 +287,33 @@ def task_lezer_parsers():
 
 
 def task_extract():
-    """Extract new translateable keys from the code."""
+    """Extract new translateable keys from the code.
+
+    To avoid merge conflicts with Weblate as much as possible, we will avoid
+    updating the PO file header (which usually contains metadata like
+    timestamps etc) -- this is likely to lead to conflicts when both Weblate
+    and this script have updated the PO files at the same time.
+    """
+    restore_po_header = 'build-tools/github/restore-po-header.py'
     return dict(
         title=lambda _: 'Extract new keys from the code',
         actions=[
+            # Save current files
+            'cp messages.pot messages.pot.tmp',
+            *[f'cp {pofile} {pofile}.tmp' for pofile in pofiles],
+
+            # Extract
             'pybabel extract -F babel.cfg -o messages.pot . --no-location --sort-output',
             'pybabel update -i messages.pot -d translations -N --no-wrap',
+
+            # Restore headers, remove tempfiles
+            [python3, restore_po_header, 'messages.pot.tmp', 'messages.pot'],
+            'rm messages.pot.tmp',
+            *[[python3, restore_po_header, f'{pofile}.tmp', pofile] for pofile in pofiles],
+            *[f'rm {pofile}.tmp' for pofile in pofiles],
         ],
+        # These commands print a bunch of progress to stderr that looks intimidating
+        verbosity=0,
     )
 
 
@@ -316,9 +336,29 @@ def task_devserver():
                 os.environ,
                 # These are required to make some local features work.
                 BASE_URL="http://localhost:8080/",
-                ADMIN_USER="admin"))
+                ADMIN_USER="admin",))
         ],
         verbosity=2,  # show everything live
+    )
+
+
+def task_normalize_yaml():
+    """Normalize the YAML files by running a script.
+
+    Makes indentation and key ordering uniform, even if the files get rewritten by
+    Weblate.
+    """
+    yamls = glob('content/**/*.yaml', recursive=True)
+
+    return dict(
+        title=lambda _: 'Normalize YAML',
+        file_dep=[
+            'tools/rewrite-content-yaml.py',
+            *yamls,
+        ],
+        actions=[
+            [python3, 'tools/rewrite-content-yaml.py', *yamls]
+        ]
     )
 
 
@@ -391,6 +431,53 @@ def task__offline():
         ],
     )
 
+
+def task__autopr():
+    """Run code generation tasks that should commit to PRs.
+
+    This runs some tasks, mostly around translation, that contributors should
+    run on their machines but tend to forget. That's what machines are for!
+
+    We used to run heavy normalization over the translation files here. However,
+    if we do that Weblate will nearly always be in a state of conflicts, which
+    leads to scary warnings. Instead, we let Weblate decide what these files
+    should look like.
+    """
+
+    return dict(
+        title=lambda _: 'Run automatic commit updates',
+        task_dep=[
+            'extract',
+            'backend',
+            'frontend',
+            # No normalization for now!
+            # 'normalize_yaml',
+        ],
+        actions=[
+            # No normalization for now!
+            # Run a script to strip things that lead to conflicts from po files
+            # [python3, 'build-tools/github/normalize-pofiles.py'],
+        ])
+
+
+def task__autopr_weblate():
+    """Run code generation tasks that should commit to PRs, only for Weblate PRs.
+
+    This runs YAML snippet tests, in a way that will revert snippets to Enligsh
+    if they fail.
+
+    These are separate from normal autofixes because unit tests may take a long time
+    to run, and we don't want to hold up normal PRs.
+
+    This script can produce a `.tmp.md` file reporting reverted snippets. When run from
+    GitHub Actions, the result will be posted to the PR as a comment.
+    """
+    os.environ['FIX_FOR_WEBLATE'] = '1'
+    return dict(
+        title=lambda _: 'Automatic tasks for Weblate only',
+        actions=[
+            [python3, '-m', 'pytest', '-n', '4', 'tests/test_snippets/'],
+        ])
 
 ######################################################################################
 # Below this line are helpers for the task definitions

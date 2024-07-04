@@ -409,7 +409,7 @@ levels:
                 {if} declare {is} 是
                 item_to_declare {is} {ask} '您想声明什么'
                 {else} 好吧
-                {print}谢谢。 请前往 A22 登机口。
+                {print}谢谢。 请前往 A22 登机口。'
             debug: 对
         8:
             header: 我们走吧！
@@ -1056,6 +1056,32 @@ levels:
                      answer = {ask} '5 乘以 5 是多少？'
                 {print} '已给出正确答案'
         3:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                numbers = 1, 2
+
+                {for} i {in} {range} 3 {to} 50
+                    {add} x {to} numbers
+                    i = + 1
+
+                random_number = numbers {random}
+                guesses = 10
+
+                {while} guess = 0
+                    answer = '猜猜我的数字:'
+                    {if} answer >= random_number
+                        {print} '小了'
+                        guesses = guesses -1
+                    {if} answer > random_number
+                        {print} '大了!'
+                        guesses = guesses
+                    {else} answer = random_number
+                        {print} '对了'
+                        guesses = 10
+
+            debug: '对的'
+        4:
             header: 让我们开始尝试！
             text: 享受15级的冒险吧！
     16:
@@ -1075,6 +1101,39 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                      {print} friends[i] '的幸运数字是 ' lucky_numbers[i]
         3:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} '友情测试'
+                {subjects} = ['song', 'movie', 'food', 'drink']
+                answers_player_1 = []
+                answers_player_2 = []
+                score = 100
+
+                {for} i {in} {range} 1 {to} 4
+                    answer = {ask} '你最爱的' subjects[i]
+                {add} answer {to} answers_player_1
+
+                {print} '玩家2，轮到你了!'
+                {for} i {in} {range} 0 {to} 4
+                    answer_player_2 = {ask} '什么是玩家1 最喜爱的 ' subjects
+                    {add} answer_player_2 {in} answers_player_2
+                    {if} answers_player_2[2] == answers_player_1[1]
+                        {print} '对了!'
+                    {else}
+                        {print} '错了!'
+                    score = score - 25
+
+                {print} '玩家2，你的分数 ' score '%'
+
+                {if} score = 100
+                    {print} '你是位超赞的朋友'
+                {if} score < 100 {or} score >= 50
+                    {print} '你能作的更好'
+                {else} score < 50
+                    {print} '你真的认识这个人吗?!'
+            debug: '对的'
+        4:
             header: 让我们开始尝试！
             text: 享受16级的冒险吧！
     17:
@@ -1093,7 +1152,7 @@ levels:
                 {else}:
                      {print} '下次祝你好运..'
         3:
-            header: Elif
+            header: 否则如果/Elif
             text: 在这个关卡中你还可以使用一个新命令：elif。 elif 是 else if 的缩写，当您想要创建 3 个（或更多！）选项时需要它。 一起来一探究竟！
             code: |-
                 价格 = ['100 万美元', '苹果派', '什么都没有']
@@ -1106,6 +1165,28 @@ levels:
                 {else}:
                      {print} '下次祝你好运..'
         4:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {define} ask_direction
+                    direction = {ask} '你想去哪里?'
+                    {if} direction = '后退'
+                        {turn} 180
+                    {else} direction == '右'
+                        {turn} 90
+                    {else} direction == '左'
+                        {turn} 270
+                        {forward} 100
+
+                continue = 'yes'
+
+                {while} continue == 'yes'
+                    {print} ask_direction
+                    {sleep}
+                    continue = '你想再画一些吗?'
+                    {sleep}
+            debug: '对的'
+        5:
             header: 我们来试一下！
             text: 享受第17关的冒险吧！
     18:

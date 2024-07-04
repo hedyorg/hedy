@@ -1,0 +1,631 @@
+levels:
+    0:
+        1:
+            header: Dobrodošli v Hedy!
+            text: Hedy je programski jezik.
+        2:
+            header: Programiranje
+            text: "Programiranje je podajanje navodil računalniku z uporabo računalniku razumljivega jezika.\n\nTakšen jezik se imenuje \"programski jezik\"."
+        3:
+            header: Programski Jezik
+            text: "Morda že poznate kakšen programski jezik?\nNekaj primerov:\n* Scratch\n* Python\n* HTML"
+        4:
+            header: Programiranje
+            text: "Če znate programirati, lahko naredite veliko zanimivih stvari:\n* Zgradite interaktivne zgodbe ali kvize\n* Ustvarite računalniške risbe in jih narišite na papir ali blago\n* Ustvarite lastne aplikacije za uporabo v telefonu"
+        5:
+            header: Programiranje v Hedy
+            text: V Hedy uporabljamo posebne izraze, kot je `{print}`.
+            code: '{print} Dobrodošli v Hedy!'
+        6:
+            header: Programiranje v Hedy-ju
+            text: Ključni ukazi bodo prikazani v rožnati barvi.
+            code: '{print} Dobrodošli v Hedy!'
+        7:
+            header: Programiranje v Hedy-ju
+            text: Kodo zaženemo / začnemo izvajati z gumbom Zaženi program pod kodo.
+            code: '{print} Dobrodošli v Hedy!'
+        8:
+            header: Programiranje v Hedy-ju
+            text: Rezultat se prikaže na desni strani.
+            code: '{print} Dobrodošli v Hedy!'
+        9:
+            header: Programiranje v Hedy-ju
+            text: Rezultat je lahko tudi slika.
+            code: "{forward} 100\n{turn} {left}"
+    1:
+        1:
+            header: Dobrodošli v prvo stopnjo!
+            text: "1. stopnjo bomo začeli z ustvarjanjem zgodb v Hedy!\n\nZa ustvarjanje interaktivnih zgodb potrebujemo tri ukaze."
+        2:
+            header: '{print}'
+            text: "Prvi ukaz, ki ga lahko uporabite na ravni 1  je `{print}`.\n\n`{print}` se uporablja za prikaz besedila na zaslonu."
+            code: '{print} Izpiši besedilo na zaslonu'
+        3:
+            header: The {print} command
+            text: "Besedilo po ukazu za tiskanje lahko poljubno spremenite.\n\nLahko pa natisnete več vrstic tako, da dodate drugo vrstico kode, ki se prav tako začne z `{print}``."
+            code: "{print} Dobrodošli v Hedy!\n{print} Zdaj pa začnimo programirati!"
+        4:
+            header: '{ask}'
+            text: "Drugi ukaz, ki jo lahko uporabite na prvi stopnji, je `{ask}`.\n\n`{ask}` se uporablja za zastavljanje vprašanja, na katerega je mogoče odgovoriti."
+            code: "{print} Dobrodošli v svojo igro kamen, škarje in papir!\n{ask} Kaj boste izbrali?"
+        5:
+            header: '{echo}'
+            text: "As you could see in the previous example. If you use the `{ask}` command, you can ask a question.\nThe answer, however doesn't show in the output screen.\n\nIf you do want the answer to show, you can use the final command of this level: `{echo}`.\n`{echo}` is used to repeat the answer of an `{ask}`."
+            code: "{print} Hello!\n{ask} What is your name?\n{echo} hello"
+        6:
+            header: Programming!
+            text: "With `{print}`, `{ask}` and `{echo}` you can already create a little story.\nThis is a good time to try the Parrot, Story and Rock, Paper Scissors adventures."
+            editor: /hedy/1
+        7:
+            header: Programming!
+            text: Adventures are shown in tabs.
+            editor: /hedy/1
+        8:
+            header: Programming!
+            text: The yellow arrow buttons can be used to copy examples.
+            editor: /hedy#print_command
+        9:
+            header: Drawing with the turtle
+            text: Now that we have seen at text codes, we will now look at drawing codes next.
+        10:
+            header: 'Drawing with the turtle: {forward}'
+            text: '`{forward}` is used to move the turtle forward.'
+            code: '{forward} 50'
+        11:
+            header: 'Drawing with the turtle: {turn}'
+            text: '`{turn}` is used to make the turtle turn left or right.'
+            code: "{forward} 50\n{turn} {left}"
+        12:
+            header: Debugging
+            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            code: "I am DJ Hedy\n{print} What song would you like to hear?\n{ask} I like that song too!\n{print} Next up... {echo}"
+            debug: 'True'
+        13:
+            header: Let the programming fun begin!
+            text: Enjoy the adventures in level 1!
+    2:
+        1:
+            header: Welcome to level 2
+            text: "Na tej stopnji se boste naučili uporabljati spremenljivke.\n\nSpremenljivka je beseda, ki se lahko uporablja za shranjevanje informacij.\n\nNa primer: ime, starost ali najljubša športna ekipa."
+        2:
+            header: Spremenljivke
+            text: To make or 'set' a variable we use the `{is}` command
+            code: "name {is} Hedy\nage {is} 15\n{print} name is age years old"
+        3:
+            header: Interactive
+            text: "We can also set a variable by asking questions.\n\nThe answer to the question is stored in the variable.\n\nThis way we don't need the `{echo}` command."
+            code: "name {is} {ask} What is your name?\n{print} Hello name"
+        4:
+            header: Več spremenljivk
+            text: Zdaj, ko znamo uporabljati spremenljivke, lahko namesto enega ukaza `{echo}` uporabimo več spremenljivk.
+            code: "name {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old."
+        5:
+            header: Sleep
+            text: Z ukazom`{sleep}`lahko izvajnje programa za nekaj časa zaustavite.
+            code: "{print} Moja priljubljena barva je...\n{sleep} 2\n{print} zelena!"
+        6:
+            header: Zaspi 5
+            text: "Za ukazom `{sleep}` lahko dodate številko, če želite, da je premor daljši.\n\nČe želite, lahko celo uporabite spremenljivko namesto številke, da določite  koliko sekund naj program spi."
+            code: "pause {is} 10\n{print} My favorite colour is...\n{sleep} pause\n{print} green!"
+        7:
+            header: Razhroščevanje
+            text: Razhroščevanje oziroma odpravljanje napak pomeni, da se znebite napak v programu. Skupaj razhroščimo to kodo. Kliknite na gumb pikapolonica, da zaženete razhroščevalnik.
+            code: "Dobrodošli v trgovini s krofi!\npolnilo {is} Kakšno polnilo bi radi?\n{print} Izbrali ste... polnilo, njam!\npreliv {ask} Kakšen preliv bi želeli?\npreliv je okusen!\n{print} Grem po tvoj krof. {sleep}\n{print} Izvolite! Nasiten krof s prelivom!\n{ask} Lep dan!"
+            debug: 'True'
+        8:
+            header: Naj se zabava ob programiranju začne!
+            text: Uživajte v dogodivščinah na 2. stopnji!
+    3:
+        1:
+            header: Dobrodošli na stopnjo 3
+            text: Na tej stopnji se boste naučili narediti seznam, dodati in odstraniti elemente s seznamov ter izbrati naključni element s tega seznama.
+        2:
+            header: Ustvarjanje seznama
+            text: "Seznam ustvarite z ukazom `{is}`.\n\nPredmete na seznamu ločite z vejico."
+            code: živali {is} psi, mačke, kenguruji
+        3:
+            header: Naključno
+            text: "Seznam lahko uporabite z ukazom `{at}` `{random}`.\nRačunalnik bo naključno izbral en element s seznama.\nVsakič, ko zaženete to kodo, se bo rezultat razlikoval."
+            code: "žival {is} pes, mačka, kenguru\n{print} žival {at} {random}"
+        4:
+            header: Naključno v stavku
+            text: Ukaz `{at}` `{random}` lahko uporabite tudi v stavku.
+            code: "animals {is} dogs, cats, kangaroos\n{print} My favorite animal is animals {at} {random}"
+        5:
+            header: Add to
+            text: "Elemente lahko dodate na seznam z ukazom `{add}` `{to}`.\n\nIzberete lahko, kaj boste dodali na seznam, ali pa uporabite ukaz `{add}` `{to}` v kombinaciji z ukazom `{ask}`.\nTako lahko igralcem omgoočilte, da se odločijo, kaj dodati na seznam."
+            code: "žival {is} pes, mačka, kenguru\nvšeč {is} {ask} Katera je vaša najljubša žival?\n{add} všeč {to_list} žival\n{print} Jaz izberem žival {at} {random}"
+        6:
+            header: Odstrani iz
+            text: "Nasprotje ukaza `{add}` `{to}` je ukaz `{remove}` `{from}`.\nTa ukaz odstrani element s seznama."
+            code: "žival {is} pes, mačka, kenguru\nne_maram {is} {ask} Katere živali ne marate?\n{remove} ne_maram {from} žival\n{print} Jaz izberem žival {at} {random}"
+        7:
+            header: Razhroševanje
+            text: Razhroščimo to kodo!
+            editor: "music_genres {is} rock, pop, metal, indie, jazz\nchosen_genre is music {at} {random}\n{print} Let's listen to chosen genre\nnice {ask} Do you like that genre?\n{remove} chosen_genre {from} chosen_genre\nsecond_choice {is} music_genres\n{print} or do you prefer... second_choice {at} {random}\n{remove} second_choice {to} music_genres\n{print} I like music_genre {random} best!"
+            debug: 'True'
+        8:
+            header: Gremo na delo!
+            text: Uživajte v dogodivščinah na 3. stopnji!
+    4:
+        1:
+            header: Dobrodošli na stopnji 4
+            text: Na tej stopnji se boste naučili uporabljati narekovaje.
+            code: "{print} 'vprašaj z narekovaji'"
+        2:
+            header: Težava
+            text: 'V prejšnjih stopnjah ste morda naleteli na to težavo:'
+            code: "ime {is} Sofija\n{print} Moje ime je ime"
+            debug: 'True'
+        3:
+            header: Popravek z narekovaji
+            text: "Na tej stopnji bomo to težavo odpravili z uporabo narekovajev.\n\nZaradi tega je tudi naša koda bolj podobna \"pravi\" Python kodi."
+        4:
+            header: Narekovaji in izpisovanje
+            text: Vsakič, ko uporabite ukaz `{print}`, morate dodati besedilo, ki ga želite prikazati na zaslonu, v narekovaje.
+            code: "{print} 'print with quotes!'"
+        5:
+            header: Quotation marks with ask
+            text: This also goes for the `{ask}` command.
+            code: name {is} {ask} 'name please?'
+        6:
+            header: Narekovaji in spremenljivke
+            text: "Imena spremenljivk ne želite izpisati na zaslonu.\nZato je treba spremenljivke pustiti zunaj narekovajev, kot na primer:"
+            code: "name {is} Harry\n{print} 'Hello ' name"
+        7:
+            header: Narekovaji in spremenljivke
+            text: "Če so imena spremenljivk uporabljena sredi stavka, jih morate pustiti zunaj narekovajev.\nZa preostali del stavka pa so potrebni narekovaji. To izgleda takole:"
+            code: "name {is} Harry\n{print} 'Hello ' name ', how are you?'"
+        8:
+            header: Quotation marks and contractions
+            text: "Be careful! Now that you are using quotation marks, you can't use apostrophes in contractions.\n\nPlease try to print a contraction like \"you're\" or \"I'm\" in the screen below and see what happens...."
+            code: "{print} 'This won't work!'"
+            debug: 'True'
+        9:
+            header: Clear
+            text: "In this level you'll also learn the {clear} command.\nWith this command you can wipe all the text from your output screen.\n\nBe careful that you always use a sleep command too. If you don't the computer will wipe all the text before you can read it!"
+            code: "{print} '3'\n{clear}\n{print} '2'\n{clear}\n{print} '1'\n{clear}\n{print} 'SURPRISE!'"
+        10:
+            header: Debugging
+            text: Let's debug this code!
+            code: "{clear}\n{print} What a nice day to go to the beach!\n{ask} 'Do you want to build a sandcastle or swim in the ocean?'\n{print} 'You would like to activity '\n{print} 'I'd like to do that too'\n{print} 'Look at these beautiful seashells!'\ncolors {is} 'orange, silver, white, brown'\n{print} 'I love the colors {at} {random} one!'\nchoice {is} {ask} Which one do you like?"
+            debug: 'True'
+        11:
+            header: Ready, Set, Go!
+            text: Enjoy the adventures in level 4!
+    5:
+        1:
+            header: Welcome to level 5
+            text: 'In this level you will learn to use 3 new commands: `{if}`, `{else}` and `{in}`.'
+        2:
+            header: if
+            text: "The `{if}` command allows you to choose between two options.\nIn this example the computer will print 'nice' if the given answer is Hedy.\nIf the answer is not Hedy, the computer will do nothing."
+            code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'"
+        3:
+            header: Don't forget to print
+            text: "When using the `{if}` command, don't forget to use the `{print}` command.\nThis code will not work!"
+            code: "{if} name {is} Hedy 'nice'"
+            debug: 'True'
+        4:
+            header: else
+            text: "When using an `{if}` command, you can also add an `{else}` command.\nIf the answer is Hedy, the computer will print 'nice'.\nBut if the answer is something else the computer will print 'boo'"
+            code: "{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'"
+        5:
+            header: Long lines
+            text: "You might have noticed that your lines can get very long when you have both an `{if}` and an `{else}` command.\n\nYou can choose to separate commands and put them on 2 lines, like this:"
+            code: "{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'"
+        6:
+            header: Another new command
+            text: "If you have practised with the `{if}` and `{else}` commands, you can also try the `{in}` command.\n\nWith `{in}` you can let the computer check if an item is in a list, for example:\n\nPlease note that Hedy is case sensitive. This means that if you answer \"Green\" instead of \"green\", Hedy will print \"meh\"."
+            code: "pretty_colors {is} green, yellow\nfavorite_color {is} {ask} 'What is your favorite color?'\n{if} favorite_color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'"
+        7:
+            header: Debugging
+            text: Let's debug this code!
+            code: "{print} Welcome to HedyAir Security!\nboarding_pass {is} {ask} 'Do you have your boarding pass?'\n{if} bording_pass yes {print} Great!\n{else} Please, get your boarding pass ready.\npassport {is} 'Can I see your passport, please?'\n{if} passport {is} yes 'thank you'\n{else} 'You can't fly without a passport'\ndeclare {is} {ask} Do you have anything to declare?\n{if} declare {is} yes\nitem_to_declare {is} {ask} 'What would you like to declare'\n{else} Alright\n{print} Thank you. Please head to gate A22.'"
+            debug: 'True'
+        8:
+            header: Let's go!
+            text: Enjoy the adventures in level 5!
+    6:
+        1:
+            header: Welcome to level 6
+            text: In this level we are adding maths to our codes.
+        2:
+            header: Addition
+            text: If you want to calculate an addition, simply use the plus sign.
+            code: "{print} '5 plus 5 is ' 5 + 5"
+        3:
+            header: Subtraction
+            text: If you want to subtract, you can use the minus sign.
+            code: "{print} '5 minus 5 is ' 5 - 5"
+        4:
+            header: Multiplication
+            text: If you want to do multiplications, you can use the asterisk.
+            code: "{print} '5 times 5 is ' 5 * 5"
+        5:
+            header: Division
+            text: You can use the slash for division.
+            code: "{print} '5 divided by 5 is ' 5 / 5"
+        6:
+            header: Summary
+            text: In summary, you can use +, -, * and / to do maths.
+            code: "{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n{print} '5 divided by 5 is ' 5 / 5"
+        7:
+            header: The = symbol
+            text: "From now on you can also use the = symbol instead of the `{is}` command.\nThis goes for both numbers and words, and it also goes after the `{if}` or `{else}` commands."
+            code: "name = Hedy\nanswer = 20 + 4"
+        8:
+            header: Računanje s spremenljivkami
+            text: 'Izračune lahko izvajate neposredno s številkami, vendar lahko za računanje uporabljate tudi spremenljivke, kot je ta:'
+            code: "number_1 = {ask} 'Fill in the first number:'\nnumber_2 = {ask} 'Fill in the second number:'\ncorrect_answer = number_1 * number_2\n{print} number_1 ' times ' number_2 ' is ' correct_answer"
+        9:
+            header: Debugging
+            text: Let's debug this code!
+            code: "{print} 'This is the water park ticket machine'\n{print} 'Price list: Children under 12 $3, Adults $5'\n{print} 'Mondays are 25% off'\namount_of_children = 'How many kids tickets would you like?'\namount_of_adults = 'How many adult tickets would you like?'\nday_of_the_week = {ask} 'What day is it?'\n{clear}\nchild_price = amount of children * 3\nadult_price = amount_of_adults + 5\ntotal_price = adult_price * child_price\n{if} day {is} monday\ntotal_price = total_price * 0.25\n{print} 'That will be total_price please'"
+            debug: 'True'
+        10:
+            header: Let's get to work!
+            text: Enjoy the adventures in level 6!
+    7:
+        1:
+            header: Welcome to level 7
+            text: In this level you will learn how to repeat a line of code as many times a you'd like.
+        2:
+            header: repeat 3 times
+            text: "If you want to repeat a line of code, you can use the `{repeat}` 3 `{times}` code.\nIf you want to repeat the line more times, simply change the number.\n\nFor example: If you are programming a story where your character shouts for help for 5 times, it could look like this:"
+            code: "{print} 'The prince kept calling for help'\n{repeat} 5 {times} {print} 'Help!'\n{print} 'Why is nobody helping me?'"
+        3:
+            header: Don't forget the print command
+            text: When using the repeat command, do not forget the `{print}` command.
+            code: "{repeat} 5 {times} 'Help!'"
+            debug: 'True'
+        4:
+            header: Repeat an ask command
+            text: You can also repeat an `{ask}`, `{if}` or `{else}` command multiple times.
+            code: "{repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'\n{if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'\n{else} {repeat} 3 {times} {print} 'You have learned something new!'"
+        5:
+            header: Debugging
+            text: Let's debug this code!
+            code: "{print} You gave stranded on a desert island.\n{repeat} 3 'Help!'\nrescued = {ask} Has anybody come to the rescue?\n{if} rescued yes {is}\n{print} Lucky!\n{else} {repeat} 3 {times} 'HELP!'\nrescued = 'What about now?'\n{if} yes\n{print} 'Hurray!\n{else} 'That's a shame... Oh well... time to build a shelter and find some food.'"
+            debug: 'True'
+        6:
+            header: Ready Set Go!
+            text: Enjoy the adventures in level 7!
+    8:
+        1:
+            header: Welcome to level 8
+            text: In this level you will learn to use indentation to make the `{repeat}`, `{if}` and `{else}` commands work for multiple lines of code.
+        2:
+            header: '{repeat} commands before'
+            text: "In the previous levels, the `{repeat}` command looked like this:\n\nYou could only repeat one line of code."
+            code: "{repeat} 5 {times} {print} 'Help!'"
+            debug: 'True'
+        3:
+            header: '{repeat} commands now'
+            text: "In this level you can repeat multiple lines of code. To do this you must tell the computer which lines belong together and should be repeated.\nYou do this by using indentation.\n\nUse 4 spaces (or one tab) at the beginning of each line that you want to repeat, like this:"
+            code: "{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This will be printed 5 times'"
+        4:
+            header: '{repeat} commands now'
+            text: "If you want to, you can continue after the `{repeat}` command without indentation.\nThe lines that do not start with indentation will not be repeated."
+            code: "{repeat} 3 {times}\n    {print} 'Hello!'\n{print} 'We are done repeating!'"
+        5:
+            header: if and else before
+            text: "The same goes for the `{if}` and `{else}` commands.\nThese were the commands before:"
+            code: "{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'"
+            debug: 'True'
+        6:
+            header: if and else now
+            text: "These are the `{if}` and `{else}` commands now.\nEach line after the `{if}` and `{else}` commands start with indentation."
+            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!'"
+        7:
+            header: stopping the indentation
+            text: Just like with the `{repeat}` command, you can stop using indentation and the lines will always be shown. Not just if the statement is true.
+            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!' \n{print} '3..2..1.. Start programming!'"
+        8:
+            header: if statements inside if statements
+            text: "You might have thought of trying to put an if command inside a repeat command, or inside another if command.\nFor now, this is not possible yet. In the higher levels, it will be allowed, but for now let's focus on practising the `{if}` `{else}` and `{repeat}` commands with proper indentation first."
+        9:
+            header: Debugging
+            text: Let's debug this code!
+            code: "{print} 'HedyWheels bus tickets machine'\nzone_1 = Town Hall, Library, Campus, Market Place\nzone_2 = Swimming Pool, Skate Park, Mall, Airport\ndestination = 'Where do you want to go?'\n{if} destination {in} zone 1\n{print} destination 'is in zone 1'\nprice = 3 euros\n    {if} destination {is} zone_2\n{print} destination 'is in zone 2'\nprice = 6\nticket_types = {ask} 'Press 1 for a single use ticket.\nPress 2 for a round trip ticket:'\n{if} ticket_type = 1\n{print} 'You chose a single use ticket'\n{else}\n        {print} You chose a round trip ticket'\nprice * 2\n{print} 'That will be ' price ' euros please'"
+            debug: 'True'
+        10:
+            header: Let's check out the adventures!
+            text: Enjoy the adventures in level 8!
+    9:
+        1:
+            header: Welcome to level 9
+            text: "In this level you can use multiple lines of code after an `{if}` or after a `{repeat}` command.\n\nYou can even put a `{repeat}` command within another `{repeat}`  command."
+        2:
+            header: Multiple lines after `{repeat}`
+            text: You are allowed to combine `{repeat}` and `{if}` in this level.
+            code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
+        3:
+            header: Indentation matters!
+            text: Indentation is very important to tell the computer which lines should be repeated and which lines should only be ran once.
+            code: "{repeat} 3 {times}\n    {print} 'This line will be repeated...'\n    {print} 'This one too...'\n{print} 'but this one will not!'"
+        4:
+            header: Multiple lines after `{if}`
+            text: You can also use multiple lines after `{if}`
+            code: "continue = {ask} 'Do you want to continue?'\n{if} continue = yes\n    sure = {ask} 'Are you sure?'\n    {if} sure {is} yes\n        {print} 'We will continue'\n    {else}\n        {print} 'You are not sure'\n{else}\n    {print} 'You do not want to continue'"
+        5:
+            header: Indentation matters
+            text: Again, indentation is still very important and can make a big difference in the code.
+            code: "continue = {ask} 'Do you want to continue?'\n{if} continue = yes\n    sure = {ask} 'Are you sure?'\n    {if} sure {is} yes\n        {print} 'We will continue'\n{else}\n    {print} 'You are not sure'"
+        6:
+            header: An `{if}` inside a `{repeat}`
+            text: "Now that you can use multiple lines of code after these command, you can also put them within each other.\nCheck it out:"
+            code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
+        7:
+            header: Mind the indentation
+            text: Mind that the fourth and sixth line of this code starts with 8 spaces of indentation.
+            code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
+        8:
+            header: Debugging
+            text: Let's debug this code!
+            code: "{print} 'Welcome to HedyJumps, your parachute jump adventure!'\npeople = {ask} 'How many people are you jumping with today?\n{print} 'We'll ask all of you some questions for safety reasons.'\nextra_instructions_people = a, b\n{repeat} 3 {times}\n    name = {ask} 'What is your name?'\njumped_before = 'Have you ever done a parachute jump before, ' name '?'\n{if} jumped_before  no\n{print} 'No worries, you'll get an extra safety instruction in room 13'\n{add} name {to} extra_instructions_people\n{else}\n{print} 'Fun!'\n{print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'"
+            debug: 'True'
+        9:
+            header: Let's go!
+            text: Enjoy the adventures in level 9!
+    10:
+        1:
+            header: Welcome to level 10
+            text: 'In this level you will learn a new command: `{for}`.'
+        2:
+            header: The for command
+            text: With for you can make a list and use all items on that list. `{for}` creates a block, like repeat and if so all lines in the block need to start with indentation (4 spaces).
+            code: "animals = dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal"
+        3:
+            header: The for command
+            text: 'Here you see another example of the `{for}` command:'
+            code: "days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day"
+        4:
+            header: Debugging
+            text: Let's debug this code
+            code: "{print} 'Ladies and gentlemen!'\n{print} 'For one night and one night only in circus Hedy!'\nacts = shoot out of a canon, walk the tightrope, pack themself in a suitcase,\npeople = Iris the Incredible Achmed the Amazing Francis the Fantastic\n    {for} people {in} acts\nchosen_person {is} people {random}\n    chosen_person ' will ' act\n{add} chosen_person {from} people\n{print} 'Come and watch our show tonight!'\n{print} 'Tickets are only available at the counter"
+            debug: 'True'
+        5:
+            header: Time to program!
+            text: Enjoy the adventures in level 10!
+    11:
+        1:
+            header: Welcome to level 11
+            text: "In this level, we add a new form of the `{for}` command. In earlier levels, we used for with a list, but we can also use for with numbers.\n\nThis way we don't need the `{repeat}` command anymore."
+        2:
+            header: The for command
+            text: 'This is what the new for command looks like:'
+            code: "{for} counter {in} {range} 1 {to} 10\n    {print} counter\n{print} 'Ready or not. Here I come!'"
+        3:
+            header: the variable i
+            text: "Na prejšnji strani je bila spremenljivka poimenovana 'števec', ker je odštevala.\nSeveda lahko za spremenljivko uporabite poljubno ime.\nObičajno ime za spremenljivke v takšni situaciji, ki se uporablja v programskih jezikih, kot je Python, je 'i'.\nTo izgleda takole:"
+            code: "number = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * number"
+        4:
+            header: Debugging
+            text: Let's debug this code!
+            code: "factor {is} {ask} 'Which table of multiplication do you need?'\n{repeat} {for} numbers {in} {range} 1 {to} 10 {times}\n    {print} This is the table of multiplications for factor\n    {print} number ' x ' factor ' = ' i * factor"
+            debug: 'True'
+        5:
+            header: Let's start programming!
+            text: Enjoy the adventures in level 11!
+    12:
+        1:
+            header: Welcome to level 12
+            text: "From this level on you are allowed to use decimal numbers and there are some changes to the quotation marks.\nYou can also use functions from this level on!"
+        2:
+            header: Quotation marks
+            text: "Na tej stopnji je nekaj sprememb pri uporabi narekovajev.\nOdslej morajo biti **vsa besedila** v narekovajih. To vključuje vrednosti spremenljivk, elemente na seznamih in besedilo za ukazi {if}."
+            code: "name = 'Hedy the Robot'\n{print} 'Hello ' name"
+        3:
+            header: Decimal numbers
+            text: "From this level on you are also allowed to use decimal numbers. This can make programs like your restaurant even better!\n\nNumbers do not need quotation marks."
+            code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
+        4:
+            header: Functions!
+            text: "In this level you'll learn how to use functions. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again. To create a function, use define and give the function a name. Then put all the lines you want in the function in a indented block under the define line. Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!\n\nNow, whenever we need that block of code, we just use call with the function's name to call it up! We don't have to type that block of code again."
+        5:
+            header: Twinkle Twinkle little star!
+            text: "In this program you see an example of a function.\nLet's see what happens if you fill in the rest of the song!"
+            code: "{define} twinkle\n     {print} 'Twinkle'\n     {print} '...'\n\n{call} twinkle\n{print} 'Up above the world so high'\n{print} 'Like a diamond in the sky'\n{call} twinkle"
+        6:
+            header: Functions
+            text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
+        7:
+            header: Debugging
+            text: Let's debug this code!
+            code: "{call} new_member\n{print} 'Hi new member!'\nusername = {ask} 'What is your username?'\npassword = 'What is your password?'\n{print} 'Welcome to our club!'\n\nusername = {ask} 'Please enter your username. Are you a new member? Type New Member'\n{if} username = New Member\n{call} new member\n    {else}\n        password = {ask} 'Please enter password'"
+            debug: 'True'
+        8:
+            header: Ready to try it out?
+            text: Enjoy the adventures in level 12!
+    13:
+        1:
+            header: Welcome to level 13
+            text: "We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two ifs but can use and and or.\nFrom now on you could also use arguments in your functions."
+        2:
+            header: The and command
+            text: "The `{and}` command is always used in a combination with the {if} command.\nThis way you can check if 2 statements are true. For example:"
+            code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
+        3:
+            header: The or command
+            text: "The `{or}` works in the same way as the `{and}` command, but only 1 of the two statements has to be true.\n\nLet's see what happens when you change the `{and}` for `{or}`."
+            code: "name = {ask} 'what is your name?'\n{if} name {is} 'Hedy' {or} name {is} 'hedy'\n    {print} 'Welcome!!'"
+        4:
+            header: Functions with arguments
+            text: Now that you've learned how to use functions, you'll learn how to use a function with an **argument**. An argument is a variable that is used within a function. It is not used outside the function.
+        5:
+            header: Example
+            text: "In this example you see how the argument 'place' is used in the function.\nRun the code and change 'ocean' and 'sea' to something else, and see what happens."
+            code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'"
+        6:
+            header: Example with variable
+            text: "You can also combine functions with a question.\n\nWhat happens if you make these changes:\n```\ndefine song with place\n    print 'My Bonnie is ' place\n\nanswer is ask 'Where is my Bonnie?'\ncall song with answer\n```"
+            code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'"
+        7:
+            header: Even more questions!
+            text: "Zdaj smo v funkcijo združili več vprašanj. V program vnesite to kodo in poglejte, kaj se bo zgodilo.\n\nUpoštevajte, da imajo spremenljivke in argumenti enako ime. To je dovoljeno.\nVas to moti? Uporabite različna imena, tudi to je dovoljeno.\n```\ndefiniraj pesem z ime, kraj\n    izpiši 'Moje ' ime ' je ' kraj\n\nime je vprašaj 'Kdo?'\nplace is vprašaj 'Kje so?'\npokliči pesmi z ime, kraj\n```"
+            code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'"
+        8:
+            header: Debugging
+            text: Let's debug this code!
+            code: "{define} happiness {with} name\n    {print} '🥳'\n{play} G\n{play} A\n{play} B\n{print} 'Party on, ' name\n{define} sadness\n{print} '😞'\n{play} E\n{play} D\n{play} C\n{print} 'Hope you feel better, ' name\n\nname = {ask} 'What is your' name '?'\nmood = {ask} 'Are you happy or sad?'\n{if} mood = happy\n    {call} happiness {with} person\n{else} mood = sad\n    {define} sadness {to} name"
+            debug: 'True'
+        9:
+            header: Let's go!
+            text: Enjoy the adventures in level 13!
+    14:
+        1:
+            header: Welcome to level 14
+            text: In this level you'll learn some new symbols that can help you improve your programs, like >. You will also learn to work with return values of a function.
+        2:
+            header: Symbols
+            text: "These are the new symbols you can use:\n\n  The >  means bigger than...\n\n  The >= means bigger than or the same as...\n\n  The <  means smaller than...\n\n  The <= means smaller than or the same as...\n\nYou can use them like this:"
+            code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'"
+        3:
+            header: Symbols
+            text: "You can also use:\n\n== is the same as.\n\n!= is not\n\n== is used in `{if}` statements."
+            code: "answer = {ask} 'Do you want to learn more?'\n{if} answer == 'yes'\n    {print} 'Go to the next adventure!'\n{if} answer != 'yes'\n    {print} 'That is a shame!'"
+        4:
+            header: Return value
+            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
+        5:
+            header: Return value
+            text: V tej kodi bo na primer funkcija izračunaj_novo_ceno izračunala novo ceno katerega koli predmeta. Vrnila bo novo ceno.
+            code: "{define} izračunaj_novo_ceno {with} znesek, odstotek\n    odstotek = odstotek/ 100\n    znesek_popusta = znesek* odstotek\n    return znesek - znesek_popusta\n\nstara_cena = {ask} 'Kakšna je označena cena?'\npopust = {ask} 'Kakšen je odstotek popusta?'\n\nnova_cena = _ izračunaj_novo_ceno {with} stara_cena, _\n{print} 'Nova cena je ' nova_cena ' Eurov'"
+        6:
+            header: Debugging
+            text: Let's debug this code!
+            code: "item = 'not bought'\n{print} 'I would like to buy this item'\nprice == {ask} 'What is the price?'\n{if} price less than or the same as 10\n    {print} 'Thats a great deal!'\n    item = 'bought'\n{if} price is more than 10 {and} less than or the same as 20\n    {print} 'Alright'\n    item = 'bought'\n{if} price is more than 20 {and} less than 50\n    {print} 'That is a bit much!'\n{if} price is more than or the same as 50\n    {print} 'No way!'\n{if} item =! bought\n    {print} 'Shame.. I wont buy it'\n{else}\n    {print} 'I will buy it! Thank you!'"
+            debug: 'True'
+        7:
+            header: Let's get to work!
+            text: Enjoy the adventures in level 14!
+    15:
+        1:
+            header: Welcome to level 15
+            text: In this level you will learn about the `{while}` loop.
+        2:
+            header: '{while}'
+            text: "We are going to learn a new loop, the while loop! The loop continues as long as the statement is true. So don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given. If the correct answer is never given, the loop will never end!"
+            code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
+        3:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                numbers = 1, 2
+
+                {for} i {in} {range} 3 {to} 50
+                    {add} x {to} numbers
+                    i = + 1
+
+                random_number = numbers {random}
+                guesses = 10
+
+                {while} guess = 0
+                    answer = 'Guess my number:'
+                    {if} answer >= random_number
+                        {print} 'lower'
+                        guesses = guesses -1
+                    {if} answer > random_number
+                        {print} 'higher!'
+                        guesses = guesses
+                    {else} answer = random_number
+                        {print} 'correct'
+                        guesses = 10
+
+            debug: 'True'
+        4:
+            header: Let's try it out!
+            text: Enjoy the adventures in level 15!
+    16:
+        1:
+            header: Welcome to level 16
+            text: In this level you will learn about the [square brackets] and how to use them.
+        2:
+            header: Square brackets
+            text: We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels. We use square brackets to point out a place in a list. The at random command can not be used anymore.
+            code: "friends = ['Ahmed', 'Ben', 'Cayden']\n{print} friends[1] ' is the first friend on the list.'\n{print} friends[2] ' is the second friend on the list.'\n{print} friends[3] ' is the third friend on the list.'\n#now we will match 2 lists using the variable i\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} friends[i] 's lucky number is ' lucky_numbers[i]"
+        3:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'Friendship test'
+                {subjects} = ['song', 'movie', 'food', 'drink']
+                answers_player_1 = []
+                answers_player_2 = []
+                score = 100
+
+                {for} i {in} {range} 1 {to} 4
+                    answer = {ask} 'what is your favorite ' subjects[i]
+                {add} answer {to} answers_player_1
+
+                {print} 'Player 2, your turn!'
+                {for} i {in} {range} 0 {to} 4
+                    answer_player_2 = {ask} 'what is player 1s favorite ' subjects
+                    {add} answer_player_2 {in} answers_player_2
+                    {if} answers_player_2[2] == answers_player_1[1]
+                        {print} 'Correct!'
+                    {else}
+                        {print} 'Wrong!'
+                    score = score - 25
+
+                {print} 'Player 2, you've scored ' score '%'
+
+                {if} score = 100
+                    {print} 'You are an amazing friend'
+                {if} score < 100 {or} score >= 50
+                    {print} 'You could do better'
+                {else} score < 50
+                    {print} 'Do you even know this person?!'
+            debug: 'True'
+        4:
+            text: Enjoy the adventures in level 16!
+            header: Let's try it out!
+    17:
+        1:
+            header: Welcome to level 17
+            text: in this level you will learn how to use a colon and you will learn the elif command.
+        2:
+            header: Colon
+            text: 'Now we are going to change indentation a little bit. Every time that we need an indentation, we need : at the line before the indentation.'
+            code: "prices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{else}:\n    {print} 'Better luck next time..'"
+        3:
+            header: Elif
+            text: 'In this level you can also use a new command: elif. elif is short for else if and you need it when you want to make 3 (or more!) options. Check it out!'
+            code: "prices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'"
+        4:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {define} ask_direction
+                    direction = {ask} 'Where do you want to go?'
+                    {if} direction = 'backwards'
+                        {turn} 180
+                    {else} direction == 'right'
+                        {turn} 90
+                    {else} direction == 'left'
+                        {turn} 270
+                        {forward} 100
+
+                continue = 'yes'
+
+                {while} continue == 'yes'
+                    {print} ask_direction
+                    {sleep}
+                    continue = 'do you want to draw some more?'
+                    {sleep}
+            debug: 'True'
+        5:
+            header: Let's try it out!
+            text: Enjoy the adventures in level 17!
+    18:
+        1:
+            header: Welcome to level 18
+            text: Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.
+        2:
+            header: The Python way
+            text: "We arrived at real Python code! That means we need to use parentheses with print and range from now on.\n\nAlso, if you want to print more than one item, you need to separate them by commas.\n\nThe final change we will need to make to get Python code is changing ask into input.\n\nClick on the 'print' tab for all the examples."
+            editor: /hedy/18
+        3:
+            header: The very last adventures!
+            text: Enjoy the very last adventures in level 18!

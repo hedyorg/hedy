@@ -178,6 +178,22 @@ describe('Lezer parser tests for level 5', () => {
 
                 multiLevelTester('Test if text not in list print', code, expectedTree, 5, 7);
             })
+
+            describe('Test if text not in spanish, but using english keyword', () => {
+                const code = `si text not in list imprimir 'in'`
+                const expectedTree =
+                `Program(
+                    Command(
+                        If(
+                            if,
+                            Condition(NotInListCheck(Text,not_in,not_in,Text)),
+                            IfLessCommand(Print(print,String))
+                        )
+                    )
+                )`
+
+                multiLevelTester('Test if text not in list print', code, expectedTree, 5, 7, 'es');
+            })
         });
     });
 })

@@ -1,0 +1,50 @@
+{% extends "auth.html" %}
+
+{% block regular_content %}
+<h4 class="text-center">Total amount of shown users: {{ users|length }}</h4>
+<div class="program w-full ">
+    <table class="w-full border border-gray-400">
+      <thead>
+        <tr class="bg-blue-300 text-blue-900">
+          <td class="px-2 py-2 text-center" id="username_header">Username</td>
+          <td class="px-2 py-2 text-center" id="email_header">Email</td>
+          <td class="px-2 py-2 text-center" id="last_login_header">Last login</td>
+          <td class="px-2 py-2 text-center" id="language_header">Language</td>
+          <td class="px-2 py-2 text-center" id="country_header">Country</td>
+          <td class="px-2 py-2 text-white text-center bg-blue-900" id="">Actions</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+          <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
+            <td class="username_cell cursor-pointer text-center p-2"><a class="no-underline" onclick="window.open('/programs?user={{ user.username }}', '_blank');">{% if user.username|length > 18 %}{{user.username[:15] + "..."}}{% else %}{{user.username}}{% endif %}</a></td>
+            <td class="email_cell cursor-pointer text-center p-2"><a class="no-underline" onclick="hedyApp.changeUserEmail ('{{user.username}}', '{{user.email}}')">{% if user.email and user.email|length > 30 %}{{user.email[:27] + "..."}}{% else %}{{user.email}}{% endif %}</a></td>
+            <td class="last_login_cell text-center p-2">{{user.last_login}}</td>
+            <td class="language_cell text-center p-2">{{user.language}}</td>
+            <td class="country_cell text-center p-2">{{user.country}}</td>
+            <td class="tags_cell text-center cursor-pointer text-center p-2">
+            {% if user.teacher_request %}
+                <button id="teacher_request_{{user.username}}" class="blue-btn" 
+                hx-trigger="click"
+                hx-post="/admin/mark-as-teacher/{{user.username}}"
+                _="on click
+                remove #teacher_request_{{user.username}}
+                then toggle .hidden on #invite_support_teacher_{{user.username}}"
+                >Make teacher</button>
+            {% endif %}
+            {% if user.support_teacher %}
+              {{user.support_teacher}}
+            {% else %}
+              <button class="green-btn {% if user.teacher_request %}hidden{% endif %}" id="invite_support_teacher_{{user.username}}"
+                onclick='hedyApp.invite_support_teacher("{{user.username}}")'>Pair support teacher</button>
+            {% endif %}
+            </td>
+          </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if next_page_token %}
+  <button id="next_page_btn" data-page_token="{{next_page_token}}" class="green-btn mt-4">Next page »</button>
+  {% endif %}
+</div>
+{% endblock %}

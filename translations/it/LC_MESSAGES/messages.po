@@ -7,62 +7,69 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-02-13 11:36+0100\n"
-"PO-Revision-Date: 2024-02-26 20:10+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"POT-Creation-Date: 2000-01-01 00:00+0000\n"
+"PO-Revision-Date: 2024-06-27 16:31+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: it <LL@li.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
+#, fuzzy
 msgid "Access Before Assign"
 msgstr "Hai provato a utilizzare la variabile {name} sulla riga {access_line_number}, ma l'hai impostata sulla riga {definition_line_number}. Impostare una variabile prima di usarla."
 
+#, fuzzy
 msgid "Cyclic Var Definition"
-msgstr "Il nome {variabile} deve essere impostato prima di poterlo utilizzare sul lato destro del comando {is}."
+msgstr "Il nome `{variable}` deve essere impostato prima di poterlo utilizzare sul lato destro del comando `{is}`."
+
+#, fuzzy
+msgid "Else Without If Error"
+msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
 
 #, fuzzy
 msgid "Function Undefined"
 msgstr "You tried to use the function {name}, but you didn't define it."
 
+#, fuzzy
 msgid "Has Blanks"
 msgstr "Il tuo codice è incompleto. Contiene spazi vuoti che devi sostituire con il codice."
 
+#, fuzzy
 msgid "Incomplete"
-msgstr "Ops! Hai dimenticato un po' di codice! Alla riga {line_number}, devi inserire il testo dietro {incomplete_command}."
+msgstr "Ops! Hai dimenticato un po' di codice! Alla riga {line_number}, devi inserire il testo dietro `{incomplete_command}`."
 
+#, fuzzy
 msgid "Incomplete Repeat"
-msgstr "Sembra che tu abbia dimenticato di utilizzare un comando con il comando {repeat} utilizzato alla riga {line_number}."
+msgstr "Sembra che tu abbia dimenticato di utilizzare un comando con il comando `{repeat}` utilizzato alla riga {line_number}."
 
+#, fuzzy
 msgid "Invalid"
-msgstr "{invalid_command} non è un commando Hedy per il livello {level}. Intendevi {guessed_command}?"
+msgstr "`{invalid_command}` non è un commando Hedy per il livello {level}. Intendevi `{guessed_command}`?"
 
 #, fuzzy
 msgid "Invalid Argument"
-msgstr "You cannot use the command {command} with {invalid_argument} . Try changing {invalid_argument} to {allowed_types}."
+msgstr "You cannot use the command `{command}` with `{invalid_argument}` . Try changing `{invalid_argument}` to {allowed_types}."
 
 #, fuzzy
 msgid "Invalid Argument Type"
-msgstr "You cannot use {command} with {invalid_argument} because it is {invalid_type}. Try changing {invalid_argument} to {allowed_types}."
+msgstr "You cannot use `{command}` with `{invalid_argument}` because it is {invalid_type}. Try changing `{invalid_argument}` to {allowed_types}."
 
 #, fuzzy
 msgid "Invalid At Command"
-msgstr "The {at} command may not be used from level 16 onward. You can use square brackets to use an element from a list, for example `friends[i]`, `lucky_numbers[{random}]`."
+msgstr "The `{command}` command may not be used from level 16 onward. You can use square brackets to use an element from a list, for example `friends[i]`, `lucky_numbers[{random}]`."
 
+#, fuzzy
 msgid "Invalid Space"
 msgstr "Ops! Hai iniziato una linea con uno spazio alla linea {line_number}. Gli spazi confondono i computer, puoi rimuoverla?"
 
 #, fuzzy
 msgid "Invalid Type Combination"
-msgstr "You cannot use {invalid_argument} and {invalid_argument_2} with {command} because one is {invalid_type} and the other is {invalid_type_2}. Try changing {invalid_argument} to {invalid_type_2} or {invalid_argument_2} to {invalid_type}."
-
-#, fuzzy
-msgid "Locked Language Feature"
-msgstr "You are using {concept}! That is awesome, but {concept} is not unlocked yet! It will be unlocked in a later level."
+msgstr "You cannot use `{invalid_argument}` and `{invalid_argument_2}` with `{command}` because one is {invalid_type} and the other is {invalid_type_2}. Try changing `{invalid_argument}` to {invalid_type_2} or `{invalid_argument_2}` to {invalid_type}."
 
 #, fuzzy
 msgid "Lonely Echo"
@@ -74,7 +81,11 @@ msgstr "It looks like you forgot to use a command with the text you put in line 
 
 #, fuzzy
 msgid "Missing Additional Command"
-msgstr "It looks like you forgot to complete writing {command} on line {line_number}."
+msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+
+#, fuzzy
+msgid "Missing Colon Error"
+msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
 
 #, fuzzy
 msgid "Missing Command"
@@ -82,15 +93,19 @@ msgstr "It looks like you forgot to use a command on line {line_number}."
 
 #, fuzzy
 msgid "Missing Inner Command"
-msgstr "It looks like you forgot to use a command with the {command} statement you used on line {line_number}."
+msgstr "It looks like you forgot to use a command with the `{command}` statement you used on line {line_number}."
+
+#, fuzzy
+msgid "Missing Square Brackets"
+msgstr "It looks like you forgot to use square brackets `[]` around the list you were creating on line {line_number}."
 
 #, fuzzy
 msgid "Missing Variable"
-msgstr "It looks like your {command} is missing a variable at the start of the line."
+msgstr "It looks like your `{command}` is missing a variable at the start of the line."
 
 #, fuzzy
 msgid "Misspelled At Command"
-msgstr "It looks like you might have misspelled the {command} command, instead you wrote {invalid_argument} in line {line_number}."
+msgstr "It looks like you might have misspelled the `{command}` command, instead you wrote `{invalid_argument}` in line {line_number}."
 
 #, fuzzy
 msgid "No Indentation"
@@ -100,15 +115,41 @@ msgstr "You used too few spaces in line {line_number}. You used {leading_spaces}
 msgid "Non Decimal Variable"
 msgstr "At line {line_number}, you might have tried using a number which Hedy does not like very much! Try changing it to a decimal number like 2."
 
+#, fuzzy
 msgid "Parse"
-msgstr "Il codice che hai scritto non è un codice Hedy valido. C'è un errore alla linea {location[0]}, alla posizione {location[1]}. Hai scritto {character_found} ma questo non è permesso."
+msgstr "Il codice che hai scritto non è un codice Hedy valido. C'è un errore alla linea {location[0]}, alla posizione {location[1]}. Hai scritto `{character_found}` ma questo non è permesso."
 
+#, fuzzy
 msgid "Pressit Missing Else"
-msgstr "Hai dimenticato di aggiungere cosa succede quando premi un tasto diverso, aggiungi un {else} al tuo codice"
+msgstr "Hai dimenticato di aggiungere cosa succede quando premi un tasto diverso, aggiungi un `{else}` al tuo codice"
+
+#, fuzzy
+msgid "Runtime Index Error"
+msgstr "You tried to access the list {name} but it is either empty or the index is not there."
+
+#, fuzzy
+msgid "Runtime Value Error"
+msgstr "While running your program the command `{command}` received the value `{value}` which is not allowed. {tip}."
+
+#, fuzzy
+msgid "Runtime Values Error"
+msgstr "While running your program the command `{command}` received the values `{value}` and `{value}` which are not allowed. {tip}."
+
+#, fuzzy
+msgid "Save Microbit code "
+msgstr "Save Microbit code"
 
 #, fuzzy
 msgid "Too Big"
 msgstr "Wow! Your program has an impressive {lines_of_code} lines of code! But we can only process {max_lines} lines in this level. Make your program smaller and try again."
+
+#, fuzzy
+msgid "Too Few Indents"
+msgstr "You used too few leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too few."
+
+#, fuzzy
+msgid "Too Many Indents"
+msgstr "You used too many leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too many."
 
 #, fuzzy
 msgid "Unexpected Indentation"
@@ -122,26 +163,29 @@ msgstr "From this level, you need to place texts to the right of the `is` betwee
 msgid "Unquoted Equality Check"
 msgstr "If you want to check if a variable is equal to multiple words, the words should be surrounded by quotation marks!"
 
+#, fuzzy
 msgid "Unquoted Text"
 msgstr "Stai attento. Se stampi qualcosa, il testo dovrebbe iniziare e finire con virgolette. Ne hai dimenticato una da qualche parte."
 
 #, fuzzy
 msgid "Unsupported Float"
-msgstr "Non-integer numbers are not supported yet but they will be in a few levels. For now change {value} to an integer."
+msgstr "Non-integer numbers are not supported yet but they will be in a few levels. For now change `{value}` to an integer."
 
 #, fuzzy
 msgid "Unsupported String Value"
-msgstr "Text values cannot contain {invalid_value}."
+msgstr "Text values cannot contain `{invalid_value}`."
 
 #, fuzzy
 msgid "Unused Variable"
 msgstr "You defined the variable {variable_name} on line {line_number}, but you did not use it."
 
+#, fuzzy
 msgid "Var Undefined"
-msgstr "Hai provato a scrivere {name} ma non l'hai inizializzato."
+msgstr "Hai provato a scrivere `{name}` ma non l'hai inizializzato."
 
+#, fuzzy
 msgid "Wrong Level"
-msgstr "Questo è il codice Hedy corretto ma non al livello giusto. Hai scritto  codice {offending_keyword} per il livello {working_level}. Tip: {tip}"
+msgstr "Questo è il codice Hedy corretto ma non al livello giusto. Hai scritto  codice `{offending_keyword}` per il livello {working_level}. Tip: {tip}"
 
 #, fuzzy
 msgid "Wrong Number of Arguments"
@@ -176,6 +220,10 @@ msgid "achievements_logo_alt"
 msgstr "achievements"
 
 #, fuzzy
+msgid "actions"
+msgstr "Actions"
+
+#, fuzzy
 msgid "add"
 msgstr "Add"
 
@@ -184,8 +232,8 @@ msgid "add_students"
 msgstr "students"
 
 #, fuzzy
-msgid "add_students_options"
-msgstr "Create student accounts"
+msgid "add_your_language"
+msgstr "Add your language!"
 
 #, fuzzy
 msgid "admin"
@@ -203,6 +251,14 @@ msgid "adventure_cloned"
 msgstr "Adventure is cloned"
 
 #, fuzzy
+msgid "adventure_code_button"
+msgstr "Adventure Code"
+
+#, fuzzy
+msgid "adventure_codeblock_button"
+msgstr "Use this button when you want to create a block of code that students can run in your adventure. Tip: put the selection at the end of the last line of the code block and <kbd>Enter</kbd> 3 times to type after a code block."
+
+#, fuzzy
 msgid "adventure_duplicate"
 msgstr "You already have an adventure with this name."
 
@@ -213,6 +269,13 @@ msgstr "You didn't enter an adventure name!"
 #, fuzzy
 msgid "adventure_exp_3"
 msgstr "You can use the \"preview\" button to view a styled version of your adventure. To view the adventure on a dedicated page, select \"view\" from the teachers page."
+
+msgid "adventure_exp_classes"
+msgstr "Your adventure is used within the following classes"
+
+#, fuzzy
+msgid "adventure_flagged"
+msgstr "The adventure was flagged successfully."
 
 #, fuzzy
 msgid "adventure_id_invalid"
@@ -240,7 +303,11 @@ msgstr "The adventure has been updated!"
 
 #, fuzzy
 msgid "adventures"
-msgstr "Available Adventures"
+msgstr "Adventures"
+
+#, fuzzy
+msgid "adventures_completed"
+msgstr "Adventures completed: {number_of_adventures}"
 
 #, fuzzy
 msgid "adventures_info"
@@ -249,6 +316,10 @@ msgstr "Each Hedy level has built-in exercises for students, which we call adven
 #, fuzzy
 msgid "adventures_restored"
 msgstr "The default adventures have been restored!"
+
+#, fuzzy
+msgid "adventures_tried"
+msgstr "Adventures tried"
 
 #, fuzzy
 msgid "ago"
@@ -308,19 +379,15 @@ msgid "ask_needs_var"
 msgstr "Starting in level 2, ask needs to be used with a variable. Example: name is ask What are you called?"
 
 #, fuzzy
-msgid "back_to_class"
-msgstr "Go back to class"
-
-#, fuzzy
-msgid "back_to_teachers_page"
-msgstr "Go back to teachers page"
-
-#, fuzzy
 msgid "become_a_sponsor"
 msgstr "Become a sponsor"
 
 msgid "birth_year"
 msgstr "Anno di nascita"
+
+#, fuzzy
+msgid "bug"
+msgstr "Bug"
 
 #, fuzzy
 msgid "by"
@@ -333,14 +400,6 @@ msgstr "Cancel"
 #, fuzzy
 msgid "cant_parse_exception"
 msgstr "Couldn't parse the program"
-
-#, fuzzy
-msgid "catch_index_exception"
-msgstr "You tried to access the list {list_name} but it is either empty or the index is not there."
-
-#, fuzzy
-msgid "catch_value_exception"
-msgstr "While running your program the command {command} received the value {value} which is not allowed. {suggestion}."
 
 #, fuzzy
 msgid "certificate"
@@ -366,8 +425,8 @@ msgid "class_customize_success"
 msgstr "Class successfully customized."
 
 #, fuzzy
-msgid "class_live"
-msgstr "Live statistics"
+msgid "class_graph_explanation"
+msgstr "In this graph you can see represented the numbers of adventures your students have attempted (meaning they have done meaninful work in that adventure), with respect to the number of errors and successful runs."
 
 #, fuzzy
 msgid "class_name_duplicate"
@@ -386,8 +445,8 @@ msgid "class_name_prompt"
 msgstr "Please enter the name of the class"
 
 #, fuzzy
-msgid "class_overview"
-msgstr "Class overview"
+msgid "class_performance_graph"
+msgstr "Class performance graph"
 
 #, fuzzy
 msgid "class_survey_description"
@@ -412,6 +471,10 @@ msgstr "What is the gender balance in your class?"
 #, fuzzy
 msgid "class_survey_question4"
 msgstr "What distinguishes your students from others?"
+
+#, fuzzy
+msgid "classes"
+msgstr "Classes"
 
 #, fuzzy
 msgid "classes_info"
@@ -451,6 +514,14 @@ msgstr "Common errors"
 #, fuzzy
 msgid "congrats_message"
 msgstr "Congratulations, {username}, you have completed Hedy!"
+
+#, fuzzy
+msgid "connect_guest_teacher"
+msgstr "I would like to be connected with a guest teacher who can give a few lessons"
+
+#, fuzzy
+msgid "constant_variable_role"
+msgstr "constant"
 
 #, fuzzy
 msgid "content_invalid"
@@ -559,6 +630,10 @@ msgid "customization_deleted"
 msgstr "Customizations successfully deleted."
 
 #, fuzzy
+msgid "customize"
+msgstr "Customize"
+
+#, fuzzy
 msgid "customize_adventure"
 msgstr "Customize adventure"
 
@@ -570,8 +645,12 @@ msgid "dash"
 msgstr "una lineetta"
 
 #, fuzzy
-msgid "default_403"
+msgid "default_401"
 msgstr "Looks like you aren't authorized..."
+
+#, fuzzy
+msgid "default_403"
+msgstr "Looks like this action is forbidden..."
 
 #, fuzzy
 msgid "default_404"
@@ -611,6 +690,10 @@ msgstr "Delete public profile"
 msgid "delete_success"
 msgstr "Program deleted successfully."
 
+#, fuzzy
+msgid "delete_tag_prompt"
+msgstr "Are you sure you want to delete this tag?"
+
 msgid "destroy_profile"
 msgstr "Cancella account permanentemente"
 
@@ -625,6 +708,18 @@ msgstr "Directly open"
 #, fuzzy
 msgid "disable"
 msgstr "Disable"
+
+#, fuzzy
+msgid "disable_explore_page"
+msgstr "Disable explore page"
+
+#, fuzzy
+msgid "disable_parsons"
+msgstr "Disable all puzzles"
+
+#, fuzzy
+msgid "disable_quizes"
+msgstr "Disable all quizes"
 
 #, fuzzy
 msgid "disabled"
@@ -701,6 +796,10 @@ msgstr "Inserisci la risposta qui..."
 msgid "error_logo_alt"
 msgstr "Error logo"
 
+#, fuzzy
+msgid "errors"
+msgstr "Errors"
+
 msgid "exclamation mark"
 msgstr "un punto esclamativo"
 
@@ -762,8 +861,32 @@ msgstr "Your chosen favourite program is invalid."
 msgid "favourite_success"
 msgstr "Your program is set as favourite."
 
+#, fuzzy
+msgid "feature"
+msgstr "Feature"
+
+#, fuzzy
+msgid "feedback"
+msgstr "Feedback"
+
+#, fuzzy
+msgid "feedback_message_error"
+msgstr "Something went wrong, please try again later."
+
+#, fuzzy
+msgid "feedback_message_success"
+msgstr "Thank you, we recieved your feedback and will contact you if needed."
+
+#, fuzzy
+msgid "feedback_modal_message"
+msgstr "Please send us a message with a category. We appreciate your help to improve Hedy!"
+
 msgid "female"
 msgstr "Femmina"
+
+#, fuzzy
+msgid "flag_adventure_prompt"
+msgstr "Do you want to flag this adventure so that we check its appropriateness?"
 
 #, fuzzy
 msgid "float"
@@ -820,6 +943,10 @@ msgid "give_link_to_teacher"
 msgstr "Give the following link to your teacher:"
 
 #, fuzzy
+msgid "go_back"
+msgstr "Go back"
+
+#, fuzzy
 msgid "go_back_to_main"
 msgstr "Go back to main page"
 
@@ -834,6 +961,10 @@ msgstr "Go to quiz result"
 #, fuzzy
 msgid "goto_profile"
 msgstr "Go to my profile"
+
+#, fuzzy
+msgid "graph_title"
+msgstr "Errors per adventure completed on level {level}"
 
 #, fuzzy
 msgid "grid_overview"
@@ -864,6 +995,10 @@ msgid "hedy_choice_title"
 msgstr "Hedy's Choice"
 
 #, fuzzy
+msgid "hedy_introduction_slides"
+msgstr "Hedy Introduction Slides"
+
+#, fuzzy
 msgid "hedy_logo_alt"
 msgstr "Hedy logo"
 
@@ -889,14 +1024,6 @@ msgstr "Hide cheatsheet"
 #, fuzzy
 msgid "hide_keyword_switcher"
 msgstr "Hide keyword switcher"
-
-#, fuzzy
-msgid "hide_parsons"
-msgstr "Hide parsons"
-
-#, fuzzy
-msgid "hide_quiz"
-msgstr "Hide quiz"
 
 #, fuzzy
 msgid "highest_level_reached"
@@ -952,7 +1079,11 @@ msgstr "Incorrect Indentation"
 
 #, fuzzy
 msgid "input"
-msgstr "input from ask"
+msgstr "input from `{ask}`"
+
+#, fuzzy
+msgid "input_variable_role"
+msgstr "input"
 
 #, fuzzy
 msgid "integer"
@@ -1022,8 +1153,16 @@ msgid "join_prompt"
 msgstr "You need to have an account to join a class. Would you like to login now?"
 
 #, fuzzy
+msgid "keybinding_waiting_for_keypress"
+msgstr "Waiting for a button press..."
+
+#, fuzzy
 msgid "keyword_language_invalid"
 msgstr "Please select a valid keyword language (select English or your own language)."
+
+#, fuzzy
+msgid "landcode_phone_number"
+msgstr "Please also add your country's landcode"
 
 #, fuzzy
 msgid "language"
@@ -1048,10 +1187,6 @@ msgstr "Last edited"
 #, fuzzy
 msgid "last_error"
 msgstr "Last error"
-
-#, fuzzy
-msgid "last_login"
-msgstr "Last login"
 
 #, fuzzy
 msgid "last_program"
@@ -1106,6 +1241,10 @@ msgstr "Accedi"
 #, fuzzy
 msgid "list"
 msgstr "a list"
+
+#, fuzzy
+msgid "list_variable_role"
+msgstr "list"
 
 #, fuzzy
 msgid "live_dashboard"
@@ -1220,6 +1359,17 @@ msgstr "Maschio"
 msgid "mandatory_mode"
 msgstr "Mandatory developer's mode"
 
+#, fuzzy
+msgid "more_options"
+msgstr "More options"
+
+#, fuzzy
+msgid "multiple_keywords_warning"
+msgstr "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}"
+
+msgid "multiple_levels_warning"
+msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
+
 msgid "my_account"
 msgstr "Mio profilo"
 
@@ -1262,10 +1412,6 @@ msgstr "Learn more"
 #, fuzzy
 msgid "nav_start"
 msgstr "Home"
-
-#, fuzzy
-msgid "nested blocks"
-msgstr "a block in a block"
 
 msgid "new_password"
 msgstr "Nuova password"
@@ -1310,7 +1456,7 @@ msgstr "This user hasn't earned the Hedy Certificate of Completion"
 
 #, fuzzy
 msgid "no_more_flat_if"
-msgstr "Starting in level 8, the code after {if} needs to be placed on the next line and start with 4 spaces."
+msgstr "Starting in level 8, the code after `{if}` needs to be placed on the next line and start with 4 spaces."
 
 #, fuzzy
 msgid "no_programs"
@@ -1349,6 +1495,10 @@ msgid "no_tag"
 msgstr "No tag provided!"
 
 #, fuzzy
+msgid "not_adventure_yet"
+msgstr "You must fill in an adventure name first"
+
+#, fuzzy
 msgid "not_enrolled"
 msgstr "Looks like you are not in this class!"
 
@@ -1379,6 +1529,10 @@ msgstr "Number of achievements"
 #, fuzzy
 msgid "number_lines"
 msgstr "Number of lines"
+
+#, fuzzy
+msgid "number_of_errors"
+msgstr "Number of errors: {number_of_errors}"
 
 msgid "number_programs"
 msgstr "Numeri di programma"
@@ -1431,11 +1585,12 @@ msgstr "You already have a program with this name, saving this program will over
 msgid "owner"
 msgstr "Owner"
 
-msgid "page"
-msgstr "pagina"
-
 msgid "page_not_found"
 msgstr "Non siamo riusciti a trovare quella pagina!"
+
+#, fuzzy
+msgid "pair_with_teacher"
+msgstr "I would like to be paired with another teacher for help"
 
 msgid "parsons_title"
 msgstr "Puzzle"
@@ -1502,6 +1657,10 @@ msgid "personal_text_invalid"
 msgstr "Your personal text is invalid."
 
 #, fuzzy
+msgid "phone_number"
+msgstr "Phone number"
+
+#, fuzzy
 msgid "postfix_classname"
 msgstr "Postfix classname"
 
@@ -1528,6 +1687,10 @@ msgstr "You are previewing class <em>{class_name}</em> as a teacher."
 #, fuzzy
 msgid "previous_campaigns"
 msgstr "View previous campaigns"
+
+#, fuzzy
+msgid "previous_page"
+msgstr "Previous page"
 
 msgid "print_logo"
 msgstr "stampa"
@@ -1602,6 +1765,14 @@ msgid "public_adventures"
 msgstr "Browse public adventures"
 
 #, fuzzy
+msgid "public_content"
+msgstr "Public content"
+
+#, fuzzy
+msgid "public_content_info"
+msgstr "You can also look for public adventures and use them as an example."
+
+#, fuzzy
 msgid "public_invalid"
 msgstr "This agreement selection is invalid"
 
@@ -1616,10 +1787,6 @@ msgstr "By selecting this box I make my profile visible for everyone. Be careful
 #, fuzzy
 msgid "public_profile_updated"
 msgstr "Public profile updated."
-
-#, fuzzy
-msgid "pygame_waiting_for_input"
-msgstr "Waiting for a button press..."
 
 msgid "question mark"
 msgstr "un punto di domanda"
@@ -1678,7 +1845,7 @@ msgstr "Repair program icon"
 
 #, fuzzy
 msgid "repeat_dep"
-msgstr "Starting in level 8, {repeat} needs to be used with indentation. You can see examples on the {repeat} tab in level 8."
+msgstr "Starting in level 8, `{repeat}` needs to be used with indentation. You can see examples on the `{repeat}` tab in level 8."
 
 msgid "repeat_match_password"
 msgstr "La password ripetuta non combacia."
@@ -1697,6 +1864,10 @@ msgstr "Are you sure you want to report this program?"
 #, fuzzy
 msgid "report_success"
 msgstr "This program has been reported"
+
+#, fuzzy
+msgid "request_invalid"
+msgstr "Request invalid"
 
 #, fuzzy
 msgid "request_teacher"
@@ -1753,10 +1924,6 @@ msgid "runs_over_time"
 msgstr "Runs over time"
 
 #, fuzzy
-msgid "save"
-msgstr "Save"
-
-#, fuzzy
 msgid "save_parse_warning"
 msgstr "This program contains an error, are you sure you want to save it?"
 
@@ -1805,7 +1972,6 @@ msgstr "Seleziona"
 msgid "select_adventures"
 msgstr "Select adventures"
 
-#, fuzzy
 msgid "select_all"
 msgstr "Select all"
 
@@ -1813,11 +1979,13 @@ msgstr "Select all"
 msgid "select_lang"
 msgstr "Select language"
 
+msgid "select_levels"
+msgstr "Select levels"
+
 #, fuzzy
 msgid "select_tag"
 msgstr "Select tag"
 
-#, fuzzy
 msgid "selected"
 msgstr "Selected"
 
@@ -1840,20 +2008,8 @@ msgid "settings"
 msgstr "My personal settings"
 
 #, fuzzy
-msgid "share"
-msgstr "Share"
-
-#, fuzzy
 msgid "share_by_giving_link"
 msgstr "Show your program to other people by giving them the link below:"
-
-#, fuzzy
-msgid "share_confirm"
-msgstr "Are you sure you want to make the program public?"
-
-#, fuzzy
-msgid "share_success_detail"
-msgstr "Program shared successfully."
 
 #, fuzzy
 msgid "share_your_program"
@@ -1870,8 +2026,16 @@ msgid "slash"
 msgstr "una barra obliqua"
 
 #, fuzzy
+msgid "sleeping"
+msgstr "Sleeping..."
+
+#, fuzzy
 msgid "slides"
 msgstr "Slides"
+
+#, fuzzy
+msgid "slides_for_level"
+msgstr "Slides for level"
 
 #, fuzzy
 msgid "slides_info"
@@ -1880,6 +2044,12 @@ msgstr "For each level of Hedy, we have created slides to help you teach. The sl
 #, fuzzy
 msgid "social_media"
 msgstr "Social media"
+
+msgid "solution_example"
+msgstr ""
+
+msgid "solution_example_explanation"
+msgstr ""
 
 #, fuzzy
 msgid "something_went_wrong_keyword_parsing"
@@ -1894,6 +2064,10 @@ msgstr "una stella"
 #, fuzzy
 msgid "start_hedy_tutorial"
 msgstr "Start hedy tutorial"
+
+#, fuzzy
+msgid "start_learning"
+msgstr "Start learning"
 
 #, fuzzy
 msgid "start_programming"
@@ -1911,8 +2085,16 @@ msgstr "Start quiz"
 msgid "start_teacher_tutorial"
 msgstr "Start teacher tutorial"
 
+#, fuzzy
+msgid "start_teaching"
+msgstr "Start teaching"
+
 msgid "step_title"
 msgstr "Compito"
+
+#, fuzzy
+msgid "stepper_variable_role"
+msgstr "stepper"
 
 #, fuzzy
 msgid "stop_code_button"
@@ -1937,10 +2119,6 @@ msgstr "This student already has a pending invitation."
 #, fuzzy
 msgid "student_details"
 msgstr "Student details"
-
-#, fuzzy
-msgid "student_list"
-msgstr "Student list"
 
 #, fuzzy
 msgid "student_not_allowed_in_class"
@@ -1990,6 +2168,10 @@ msgid "subscribe_newsletter"
 msgstr "Iscriviti alla newsletter"
 
 #, fuzzy
+msgid "successful_runs"
+msgstr "Successful runs: {successful_runs}"
+
+#, fuzzy
 msgid "suggestion_color"
 msgstr "Try using another color"
 
@@ -2000,6 +2182,9 @@ msgstr "Use a note between C0 and B9 or a number between 1 and 70"
 #, fuzzy
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
+
+msgid "suggestion_numbers_or_strings"
+msgstr "Try changing the values to be all text or all numbers"
 
 #, fuzzy
 msgid "surname"
@@ -2078,7 +2263,7 @@ msgid "template_code"
 msgstr ""
 "This is the explanation of my adventure!\n"
 "\n"
-"This way I can show a command: <code>print</code>\n"
+"This way I can show a command: <code>{print}</code>\n"
 "\n"
 "But sometimes I might want to show a piece of code, like this:\n"
 "<pre>\n"
@@ -2101,14 +2286,6 @@ msgstr "Hedy - My achievements"
 #, fuzzy
 msgid "title_admin"
 msgstr "Hedy - Administrator page"
-
-#, fuzzy
-msgid "title_class grid_overview"
-msgstr "Hedy - Grid overview"
-
-#, fuzzy
-msgid "title_class live_statistics"
-msgstr "Hedy - Live Statistics"
 
 #, fuzzy
 msgid "title_class-overview"
@@ -2203,16 +2380,14 @@ msgid "translator"
 msgstr "Translator"
 
 #, fuzzy
-msgid "try_it"
-msgstr "Provar"
-
-#, fuzzy
 msgid "tutorial"
 msgstr "Tutorial"
 
 #, fuzzy
 msgid "tutorial_code_snippet"
-msgstr "Hide cheatsheet"
+msgstr ""
+"{print} Hello world!\n"
+"{print} I'm learning Hedy with the tutorial!"
 
 #, fuzzy
 msgid "tutorial_message_not_found"
@@ -2227,8 +2402,20 @@ msgid "unauthorized"
 msgstr "You don't have access rights for this page"
 
 #, fuzzy
+msgid "unfavourite_confirm"
+msgstr "Are you sure you want to unfavourite this program?"
+
+#, fuzzy
+msgid "unfavourite_success"
+msgstr "Your program is unfavourited."
+
+#, fuzzy
 msgid "unique_usernames"
 msgstr "All usernames need to be unique."
+
+#, fuzzy
+msgid "unknown_variable_role"
+msgstr "unknown"
 
 #, fuzzy
 msgid "unlock_thresholds"
@@ -2239,23 +2426,20 @@ msgid "unsaved_class_changes"
 msgstr "There are unsaved changes, are you sure you want to leave this page?"
 
 #, fuzzy
-msgid "unshare"
-msgstr "Unshare"
+msgid "unsubmit_program"
+msgstr "Unsubmit program"
 
 #, fuzzy
-msgid "unshare_confirm"
-msgstr "Are you sure you want to make the program private?"
+msgid "unsubmit_warning"
+msgstr "Are you sure you want to unsubmit this program?"
 
 #, fuzzy
-msgid "unshare_success_detail"
-msgstr "Program unshared successfully."
+msgid "unsubmitted"
+msgstr "Unsubmitted"
 
 #, fuzzy
 msgid "update_adventure_prompt"
 msgstr "Are you sure you want to update this adventure?"
-
-msgid "update_profile"
-msgstr "Aggiorna profilo"
 
 #, fuzzy
 msgid "update_public"
@@ -2272,6 +2456,10 @@ msgstr "Use of blanks in programs"
 #, fuzzy
 msgid "use_of_nested_functions_exception"
 msgstr "Use of nested functions"
+
+#, fuzzy
+msgid "used_in"
+msgstr "Used in:"
 
 #, fuzzy
 msgid "user"
@@ -2311,12 +2499,28 @@ msgid "value"
 msgstr "Value"
 
 #, fuzzy
-msgid "variables"
-msgstr "Variables"
+msgid "view_adventures"
+msgstr "View adventures"
+
+#, fuzzy
+msgid "view_classes"
+msgstr "View classes"
 
 #, fuzzy
 msgid "view_program"
 msgstr "View program"
+
+#, fuzzy
+msgid "view_slides"
+msgstr "View slides"
+
+#, fuzzy
+msgid "waiting_for_submit"
+msgstr "Waiting for submit"
+
+#, fuzzy
+msgid "walker_variable_role"
+msgstr "walker"
 
 #, fuzzy
 msgid "welcome"
@@ -2382,9 +2586,6 @@ msgstr "Your program"
 
 #~ msgid "select_own_adventures"
 #~ msgstr "Select own adventures"
-
-#~ msgid "edit"
-#~ msgstr "Edit"
 
 #~ msgid "view"
 #~ msgstr "View"
@@ -2467,9 +2668,6 @@ msgstr "Your program"
 #~ msgid "question_invalid"
 #~ msgstr "Your token is invalid."
 
-#~ msgid "select_levels"
-#~ msgstr "Select levels"
-
 #~ msgid "too_many_attempts"
 #~ msgstr "Too many attempts"
 
@@ -2506,14 +2704,75 @@ msgstr "Your program"
 #~ msgid "write_first_program"
 #~ msgstr "Scrivi il tuo primo programma!"
 
-#, fuzzy
-msgid "adventure_exp_2"
-msgstr "If you want to show actual code snippets, for example to give student a template or example of the code. Please use pre anchors like this:"
+#~ msgid "share_confirm"
+#~ msgstr "Are you sure you want to make the program public?"
 
-#, fuzzy
-msgid "adventure_exp_1"
-msgstr "Type your adventure of choice on the right-hand side. After creating your adventure you can include it in one of your classes under \"customizations\". If you want to include a command in your adventure please use code anchors like this:"
+#~ msgid "share_success_detail"
+#~ msgstr "Program shared successfully."
 
-#, fuzzy
-msgid "hello_world"
-msgstr "Hello world!"
+#~ msgid "try_it"
+#~ msgstr "Provar"
+
+#~ msgid "unshare_confirm"
+#~ msgstr "Are you sure you want to make the program private?"
+
+#~ msgid "unshare_success_detail"
+#~ msgstr "Program unshared successfully."
+
+#~ msgid "adventure_exp_2"
+#~ msgstr "If you want to show actual code snippets, for example to give student a template or example of the code. Please use pre anchors like this:"
+
+#~ msgid "adventure_exp_1"
+#~ msgstr "Type your adventure of choice on the right-hand side. After creating your adventure you can include it in one of your classes under \"customizations\". If you want to include a command in your adventure please use code anchors like this:"
+
+#~ msgid "hello_world"
+#~ msgstr "Hello world!"
+
+#~ msgid "hide_parsons"
+#~ msgstr "Hide parsons"
+
+#~ msgid "hide_quiz"
+#~ msgstr "Hide quiz"
+
+#~ msgid "back_to_class"
+#~ msgstr "Go back to class"
+
+#~ msgid "Locked Language Feature"
+#~ msgstr "You are using {concept}! That is awesome, but {concept} is not unlocked yet! It will be unlocked in a later level."
+
+#~ msgid "nested blocks"
+#~ msgstr "a block in a block"
+
+#~ msgid "save"
+#~ msgstr "Save"
+
+#~ msgid "update_profile"
+#~ msgstr "Aggiorna profilo"
+
+#~ msgid "variables"
+#~ msgstr "Variables"
+
+#~ msgid "add_students_options"
+#~ msgstr "Create student accounts"
+
+#~ msgid "class_live"
+#~ msgstr "Live statistics"
+
+#~ msgid "class_overview"
+#~ msgstr "Class overview"
+
+#~ msgid "last_login"
+#~ msgstr "Last login"
+
+#~ msgid "student_list"
+#~ msgstr "Student list"
+
+#~ msgid "title_class grid_overview"
+#~ msgstr "Hedy - Grid overview"
+
+#~ msgid "title_class live_statistics"
+#~ msgstr "Hedy - Live Statistics"
+
+#~ msgid "available_in"
+#~ msgstr "Available in:"
+

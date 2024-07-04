@@ -111,6 +111,7 @@ strong {
   @apply bg-white text-blue-500 border-blue-400;
 }
 
+
 .stripe-colored {
   @apply bg-yellow-400 border-yellow-500 border-b-4;
 }
@@ -213,13 +214,33 @@ a.green-btn:hover {
   @apply active:bg-blue-700 active:border-blue-700;
 }
 
+.gray-btn-shape {
+  @apply font-slab leading-6 font-normal tracking-wide;
+  @apply pt-2 pb-1 px-4 rounded no-underline;
+  display: inline-block;
+}
+
 .gray-btn {
-  @apply btn-shape;
-  @apply bg-gray-500 text-white border-gray-700;
+  @apply gray-btn-shape;
+  @apply bg-gray-300 text-gray-500;
 }
 
 .gray-btn:hover {
-  @apply bg-gray-400 border-gray-500;
+  @apply bg-gray-100;
+  @apply active:bg-gray-700 active:border-gray-700;
+}
+
+.back-btn {
+  @apply gray-btn;
+  @apply text-blue-500;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  width: 8rem;
+}
+
+.back-btn:hover {
+  @apply bg-gray-200;
   @apply active:bg-gray-700 active:border-gray-700;
 }
 
@@ -335,12 +356,29 @@ code {
   @apply text-blue-600;
 }
 
+.cust-adv-tab {
+  @apply cursor-pointer block border-b-4 tracking-wide;
+  /* Colors */
+  @apply border-gray-400;
+}
+
+.cust-adv-tab.active {
+  /* Colors */
+  @apply border-blue-800 !important;
+}
+
+.cust-adv-tab-text {
+  @apply font-slab;
+  /* Colors */
+  @apply text-blue-800;
+}
+
 #output, #quiz_question_output_container {
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
 }
 
 .dropdown-menu {
-  @apply absolute overflow-hidden block rounded-md ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max p-4 shadow-lg;;
+  @apply absolute block rounded-md ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max p-4 shadow-lg;;
   top: 40px;
   @apply cursor-auto; /* Undo cursor-pointer we inherit from the menu */
 }
@@ -359,6 +397,12 @@ code {
 
 .dropdown-green h2 {
   @apply text-green-600;
+}
+
+.add-language-item {
+  @apply text-gray-800 bg-green-400 no-underline hover:bg-green-500 hover:text-white py-2 px-4 block whitespace-nowrap;
+  @apply cursor-pointer w-52 font-medium rounded-md;
+  @apply grow-0;
 }
 
 .dropdown-item {

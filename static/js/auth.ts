@@ -167,7 +167,7 @@ export function initializeFormSubmits() {
 
   // *** LOADERS ***
 
-  $("#language").on('change', function () {
+  $('#language').on('change', function () {
       const lang = $(this).val();
       $('#keyword_language').val("en");
       if (lang == "en" || !($('#' + lang + '_option').length)) {
@@ -183,35 +183,6 @@ export function initializeFormSubmits() {
 }
 
 // *** Admin functionality ***
-
-export function markAsTeacher(checkbox: any, username: string, is_teacher: boolean, pending_request: boolean) {
-  $(checkbox).prop('checked', false);
-  let text = "Are you sure you want to remove " + username + " as a teacher?";
-  if (is_teacher) {
-    text = "Are you sure you want to make " + username + " a teacher?";
-  }
-  modal.confirm (text, async () => {
-    try {
-      await postNoResponse('/admin/markAsTeacher', {
-        username: username,
-        is_teacher: is_teacher,
-      });
-      location.reload();
-    } catch (e) {
-      console.error(e);
-      modal.notifyError(['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join(' '));
-    }
-  }, async () => {
-    // If there is a pending request, we decline the modal -> remove the teacher request
-    if (pending_request) {
-      await postJson('/admin/markAsTeacher', {
-        username: username,
-        is_teacher: false
-      });
-      location.reload();
-    }
-  });
-}
 
 export function changeUserEmail(username: string, email: string) {
   modal.prompt ('Please enter the corrected email', email, async function (correctedEmail) {
@@ -234,31 +205,31 @@ export function edit_user_tags(username: string) {
       username: username
     });
     console.log(response);
-    $('#modal-mask').show();
+    $('#modal_mask').show();
     $('#tags_username').text(username);
-    $('.tags-input').prop('checked', false);
+    $('.tags_input').prop('checked', false);
     if (response.tags) {
       console.log(response.tags);
       if (jQuery.inArray("certified_teacher", response.tags) !== -1) {
-        $('#certified-tag-input').prop('checked', true);
+        $('#certified_tag_input').prop('checked', true);
       }
       if (jQuery.inArray("distinguished_user", response.tags) !== -1) {
-        $('#distinguished-tag-input').prop('checked', true);
+        $('#distinguished_tag_input').prop('checked', true);
       }
       if (jQuery.inArray("contributor", response.tags) !== -1) {
-        $('#contributor-tag-input').prop('checked', true);
+        $('#contributor_tag_input').prop('checked', true);
       }
     }
-    $('#modal-tags').show();
+    $('#modal_tags').show();
   });
 }
 
 export function update_user_tags() {
   tryCatchPopup(async () => {
     const username = $('#tags_username').text();
-    const certified = $('#certified-tag-input').prop('checked');
-    const distinguished = $('#distinguished-tag-input').prop('checked');
-    const contributor = $('#contributor-tag-input').prop('checked');
+    const certified = $('#certified_tag_input').prop('checked');
+    const distinguished = $('#distinguished_tag_input').prop('checked');
+    const contributor = $('#contributor_tag_input').prop('checked');
 
     await postJson('/admin/updateUserTags', {
       username: username,
@@ -267,8 +238,8 @@ export function update_user_tags() {
       contributor: contributor
     });
 
-    $('#modal-mask').hide();
-    $('#modal-tags').hide();
+    $('#modal_mask').hide();
+    $('#modal_tags').hide();
     modal.notifySuccess("Tags successfully updated");
   });
 }

@@ -2,7 +2,7 @@ command:+= repeat | error_repeat_no_command | error_repeat_no_print | error_repe
 _if_less_command:+= repeat
 
 // new commands
-repeat: _REPEAT (INT | var_access) _TIMES _SPACE command
+repeat.1: _REPEAT (INT | var_access) _TIMES _SPACE command
 error_repeat_no_command: _REPEAT (INT | var_access) _TIMES _SPACE*
 error_repeat_no_print: _REPEAT (INT | var_access) _TIMES _SPACE* quoted_text _SPACE*
 error_repeat_no_times: _REPEAT (INT | var_access) (_SPACE* command _SPACE*)?

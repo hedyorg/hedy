@@ -2,7 +2,7 @@
 *
 * !!! THIS FILE HAS BEEN GENERATED. DO NOT EDIT !!!
 *
-* Make desired changes to prefixes/{normal,pygame,turtle,music}.py
+* Make desired changes to prefixes/{normal,pressed,turtle,music}.py
 *
 * Add/edit tests for those changes in tests/test_python_prefixes.py
 *
@@ -27,24 +27,14 @@ t.speed(3)
 t.showturtle()
 `;
 
-export const pygame_prefix = 
+export const pressed_prefix = 
 `# coding=utf8
 
-import pygame  # noqa F401
-import buttons  # noqa F401
-
-pygame.init()
-canvas = pygame.display.set_mode((711, 300))
-canvas.fill(pygame.Color(247, 250, 252, 255))
-
-pygame_end = False
-button_list = []
+def if_pressed_default_else():
+    pass
 
 
-def create_button(name):
-    if name not in button_list:
-        button_list.append(name)
-        buttons.add(name)
+if_pressed_mapping = {"else": "if_pressed_default_else"}
 `;
 
 export const normal_prefix = 
@@ -98,6 +88,16 @@ def int(s):
 
 
 def convert_numerals(alphabet, number):
+    if number is None or number == '':
+        return ''
+
+    if bool == type(number):
+        return number
+    if number == 'True':
+        return True
+    if number == 'False':
+        return False
+
     numerals_dict_return = {
         'Latin': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
         'Brahmi': ['𑁦', '𑁧', '𑁨', '𑁩', '𑁪', '𑁫', '𑁬', '𑁭', '𑁮', '𑁯'],
@@ -145,6 +145,30 @@ def convert_numerals(alphabet, number):
                 T = int
         number = ''.join(all_numerals_converted)
     return T(f'{sign}{number}')
+
+
+def int_with_error(s, err):
+    try:
+        return int(str(s))
+    except ValueError:
+        raise Exception(err.format(s))
+
+
+def number_with_error(s, err):
+    try:
+        return int(str(s))
+    except ValueError:
+        try:
+            return float(str(s))
+        except ValueError:
+            raise Exception(err.format(s))
+
+
+def sum_with_error(left, right, err):
+    try:
+        return left + right
+    except Exception:
+        raise Exception(err.format(left, right))
 `;
 
 export const music_prefix = 
@@ -228,4 +252,16 @@ notes_mapping = {
     '69': 'A9',
     '70': 'B9',
 }
+
+
+def present_in_notes_mapping(value):
+    note = str(value).upper()
+    return note in notes_mapping.keys() or note in notes_mapping.values()
+
+
+def note_with_error(value, err):
+    note = str(value).upper()
+    if not present_in_notes_mapping(note):
+        raise Exception(err.format(value))
+    return notes_mapping.get(note, note)
 `;

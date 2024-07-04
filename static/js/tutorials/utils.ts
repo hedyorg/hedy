@@ -12,11 +12,11 @@ export function removeBorder(element_id: string) {
 }
 
 export function relocatePopup(x: number, y: number) {
-  $('#tutorial-pop-up').css({'top': '20%', 'left': '50%'});
+  $('#tutorial_pop_up').css({'top': '20%', 'left': '50%'});
   if (x && y) {
     let left = x.toString() + "%"
     let top = y.toString() + "%"
-    $('#tutorial-pop-up').css({'top': top, 'left': left});
+    $('#tutorial_pop_up').css({'top': top, 'left': left});
   }
 
 }
@@ -30,7 +30,7 @@ export function tutorialPopup(current_level: string, step: number) {
   }).done(function(response: any) {
       $('#tutorial_title').text(response.title);
       $('#tutorial_text').text(response.text);
-      $('#tutorial-pop-up').fadeIn(800);
+      $('#tutorial_pop_up').fadeIn(800);
   }).fail(function(response) {
     modal.notifyError(response.responseText);
   });
