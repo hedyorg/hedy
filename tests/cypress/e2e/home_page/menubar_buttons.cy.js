@@ -19,7 +19,7 @@ describe('Navigation buttons', () => {
   it('As a student: Is able to click all menubar buttons', () => {
     loginForStudent();
     navigate_home_button('hedy_button', Cypress.env('hedy_page'))
-    navigate_home_button('explore_button', Cypress.env('explore_programs_page'))
+    // explore button for a student is tested within the quiz parsons test
     not_navigate_home_button('for_teacher_button')
     not_navigate_home_button('manual_button')
     navigate_home_button('programs_button', Cypress.env('programs_page'))
