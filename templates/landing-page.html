@@ -68,7 +68,7 @@
                     {% if programs %}
                         <div class="mt-auto">
                             <div class="font-semibold bg-blue-600 pb-2 pt-2 text-white flex flex-row justify-center rounded-b-lg">
-                                <div class="profile-nametag__stats">{{ programs|length }} {{_('amount_saved')}}</div>
+                                <div class="profile-nametag__stats">{{ programs|length }} {{_('programs')|lower}}</div>
                                 <div class="h-8 w-px border-r border-white relative"></div>
                                 {% if achievements.submitted_programs %}
                                     <div class="profile-nametag__stats">{{ achievements.submitted_programs }} {{_('amount_submitted')}}</div>
