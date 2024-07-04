@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-06-27 16:31+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2024-07-01 15:43+0000\n"
+"Last-Translator: \"Zoom.Quiet\" <zoomquiet+gh@gmail.com>\n"
 "Language-Team: zh_Hans <LL@li.org>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
@@ -19,176 +19,134 @@ msgstr ""
 "X-Generator: Weblate 5.7-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
-#, fuzzy
 msgid "Access Before Assign"
-msgstr "您尝试在第 {access_line_number} 行使用变量 {name}，但在第 {definition_line_number} 行设置了它。要在使用变量之前设置它。"
+msgstr "我们检测到变量 `{name}` 在设置之前已在第 {access_line_number} 行被使用。您可以在使用之前设置该变量吗？"
 
-#, fuzzy
 msgid "Cyclic Var Definition"
-msgstr "需要先设置名称 `{variable}`，然后才能在 `{is}` 命令的右侧使用它。"
+msgstr "我们检测到变量 `{variable}` 在“{is}”命令的右侧被使用，但尚未设置。你应该在使用之前设置该变量？"
 
-#, fuzzy
 msgid "Else Without If Error"
-msgstr "在第 {line_number} 行中，您使用了`{else}`，但其之前的行中没有`{if}`。"
+msgstr "我们检测到在第 {line_number} 行的 `{if}` 之前使用了 `{else}`。你应该尝试在 `{else}` 之前写入 `{if}` ？"
 
-#, fuzzy
 msgid "Function Undefined"
-msgstr "您尝试使用函数 {name}，但没有定义它。"
+msgstr "我们检测到函数 {name} 未被定义，但已被使用。你应该使用该函数之前定义它？"
 
-#, fuzzy
 msgid "Has Blanks"
-msgstr "你的代码还不完整。你需要在空白的地方填上代码。"
+msgstr "我们发现代码似乎不完整。能能用代码填补空白吗？"
 
-#, fuzzy
 msgid "Incomplete"
-msgstr "呀！你漏写了一些代码！在第{line_number}行，你需要在`{incomplete_command}`后面输 入文字。"
+msgstr "我们发现第 {line_number} 行的 `{incomplete_command}` 部分代码似乎缺失。你可以尝试添加缺失的内容吗？"
 
-#, fuzzy
 msgid "Incomplete Repeat"
-msgstr "您似乎忘记使用在{command}第 {line_number} 行使用的 `{repeat}` 命令。"
+msgstr "我们检测到第 {line_number} 行的 `{repeat}` 缺少 `{command}` 命令。你可以尝试添加它吗？"
 
-#, fuzzy
 msgid "Invalid"
 msgstr "`{invalid_command}` 不是海蒂第{level}关里的命令。你是不是想写 `{guessed_command}`？"
 
-#, fuzzy
 msgid "Invalid Argument"
-msgstr "你不能在命令`{command}`中使用`{invalid_argument}`。试着把`{invalid_argument}`改成 {allowed_types}。"
+msgstr "我们检测到 `{command}` 不能与`{invalid_argument}`一起使用。你可以尝试将`{invalid_argument}`更改为`{allowed_types}`？"
 
-#, fuzzy
 msgid "Invalid Argument Type"
-msgstr "你不能在`{command}`中使用`{invalid_argument}`，因为它是个{invalid_type}。试着把 `{invalid_argument}`改成{allowed_types}。"
+msgstr "我们检测到 `{command}` 无法与 `{invalid_argument}` 配合使用，因为它是 {invalid_type}。你可以尝试将 `{invalid_argument}` 更改为 {allowed_types} ？"
 
-#, fuzzy
 msgid "Invalid At Command"
-msgstr "从 16 级开始，不能使用 `{command}` 命令。 您可以使用方括号来使用列表中的元素，例如“friends[i]”、“lucky_numbers[{random}]”。"
+msgstr "我们检测到从 16 级开始可能无法使用 `{command}`。你可以尝试使用方括号 `[]` 来列出列表？"
 
-#, fuzzy
 msgid "Invalid Space"
-msgstr "呀！你在第{line_number}开头加了一个空格。空格会让电脑产生困惑，你不能能删除这 个空格？"
+msgstr "我们检测到第 {line_number} 行以空格开头。你可以尝试删除该空格？"
 
-#, fuzzy
 msgid "Invalid Type Combination"
-msgstr "你不能在`{command}`中使用`{invalid_argument}`和`{invalid_argument_2}`，因为它们一个是{invalid_type}，一个是{invalid_type_2}。试着把`{invalid_argument}`改成{invalid_type_2}，或者把`{invalid_argument_2}`改成{invalid_type}。"
+msgstr "我们检测到 `{invalid_argument}`和`{invalid_argument_2}`不能与 `{command}` 一起使用，因为一个是{invalid_type}，另一个是{invalid_type_2}。你可以尝试将`{invalid_argument}`更改为{invalid_type_2}或将`{invalid_argument_2}`更改为{invalid_type} ？"
 
-#, fuzzy
 msgid "Lonely Echo"
-msgstr "您在 `{ask}` 之前使用了 `{echo}`，或者在没有 `{ask}` 的情况下使用了 `{echo}`。 在 `{echo}` 之前要放置一个 `{ask}`。"
+msgstr "我们检测到在 `{echo}` 之前或未使用 `{ask}` 的情况下使用了它。您可以尝试在 `{echo}` 之前写入 `{ask}` 吗？"
 
-#, fuzzy
 msgid "Lonely Text"
-msgstr "看来你忘记在第{line_number}行的文字里使用指令"
+msgstr "我们检测到代码中似乎缺少一个包含第 {line_number} 行所用文本的命令。你能否尝试使用文本编写所需的命令"
 
-#, fuzzy
 msgid "Missing Additional Command"
-msgstr "似乎忘记在第 {line_number} 行上完成写入 `{command}`。 尝试将 `{missing_command}` 添加到你的代码中。"
+msgstr "我们发现代码第 {line_number} 行似乎缺少 `{command}`。您能否尝试在代码中使用 `{missing_command}`。"
 
-#, fuzzy
 msgid "Missing Colon Error"
-msgstr "从第 17 级开始，`{command}` 需要一个 `:`。 您似乎忘记在第 {line_number} 行末尾使用 1。"
+msgstr "我们检测到 `{command}` 在第 {line_number} 行末尾需要一个 `:`。从第 17 级开始，你可以在命令行末尾添加 `:` ？"
 
-#, fuzzy
 msgid "Missing Command"
-msgstr "看上去你忘记在第{line_number}行写命令了。"
+msgstr "我们发现代码第 {line_number} 行似乎缺少一个命令。你可以尝试查看练习部分以找出要使用的命令？"
 
-#, fuzzy
 msgid "Missing Inner Command"
-msgstr "看上去你忘了在第{line_number}行的`{command}`这一句里加上一个命令。"
+msgstr "我们发现代码中第 {line_number} 行的 `{command}` 语句似乎缺少一个命令。你可以尝试查看练习部分以找出要使用的命令？"
 
-#, fuzzy
 msgid "Missing Square Brackets"
-msgstr "看起来您忘记在{line_number}行上创建的列表两端使用方括号`[]`。"
+msgstr "我们检测到您在第 {line_number} 行创建的列表缺少方括号 `[]`。你可以尝试在列表的 `[]` 两边添加方括号吗？"
 
-#, fuzzy
 msgid "Missing Variable"
-msgstr "看起来你的 `{command}` 在行开头缺少变量。"
+msgstr "我们检测到 `{command}` 在行首缺少一个变量。可以尝试在 `{command}` 之前写入该变量吗?"
 
-#, fuzzy
 msgid "Misspelled At Command"
 msgstr "看来您可能拼错了 `{command}` 命令，而是在第 {line_number} 行中写了 `{invalid_argument}`。"
 
-#, fuzzy
 msgid "No Indentation"
-msgstr "第{line_number}行的空格太少了。你空了{leading_spaces}格，这样不够。每个新的代码块都要比前一行多{indent_size}个空格。"
+msgstr "我们发现第 {line_number} 行使用的 {leading_spaces} 空格似乎太少。能否尝试将每个新块的缩进量增加 {indent_size}."
 
-#, fuzzy
 msgid "Non Decimal Variable"
-msgstr "在第 {line_number} 行，您可能尝试使用 海蒂 不太喜欢的号码！ 尝试将其更改为十进制数，例如 2。"
+msgstr "我们检测到您在第 {line_number} 行使用了 Hedy 不支持的数字！可以尝试使用十进制数，例如 2 吗？"
 
-#, fuzzy
 msgid "Parse"
-msgstr "你输入的代码不是正确的海蒂代码。错误点在第{location[0]}行，第{location[1]}个字。你输入了一个禁止使用的字符：`{character_found}`。"
+msgstr "我们检测到`{character_found}`在行 {location[0]} 上使用，这是不允许的。可以尝试在代码中查找缺失或多余的字符吗？"
 
-#, fuzzy
 msgid "Pressit Missing Else"
-msgstr "您忘记添加按不同键时会发生的情况，请在代码中添加 `{else}`"
+msgstr "我们发现代码缺少 `{else}` 来处理其他按键。可以尝试在代码中添加 `{else}` 吗？"
 
-#, fuzzy
 msgid "Runtime Index Error"
-msgstr "你尝试访问列表 {name}，但它要么是空的，要么索引不存在。"
+msgstr "我们检测到列表 {name} 为空或其索引缺失。能确保列表不为空吗？或者尝试在 `[]` 中写入一个数字作为缺失的索引？"
 
-#, fuzzy
 msgid "Runtime Value Error"
 msgstr "在运行程序时，命令`{command}`收到了不允许的值{value}。{tip}。"
 
-#, fuzzy
 msgid "Runtime Values Error"
-msgstr "While running your program the command `{command}` received the values `{value}` and `{value}` which are not allowed. {tip}."
+msgstr "我们检测到 `{command}` 收到了不允许的值 `{value}` 和 `{value}`。{tip}。"
 
 msgid "Save Microbit code "
 msgstr "保存 Microbit 代码"
 
-#, fuzzy
 msgid "Too Big"
-msgstr "哇！你的程序有足足{lines_of_code}行代码！但是这一关只能用{max_lines}行代码。把你的程序改得短一点，然后再试一次。"
+msgstr "我们检测到程序有 {lines_of_code} 行，但我们只能处理 {max_lines} 行。可以尝试缩短您的程序吗？"
 
-#, fuzzy
 msgid "Too Few Indents"
-msgstr "您在第 {line_number} 行中使用的前导空格太少。 您使用了 {leading_spaces} 个空格，这太少了。"
+msgstr "我们发现第 {line_number} 行空格太少只有（{leading_spaces}）。可以尝试添加一个额外的空格吗？"
 
-#, fuzzy
 msgid "Too Many Indents"
-msgstr "您在第 {line_number} 行中使用了太多前导空格。 您使用了 {leading_spaces} 个空格，这太多了。"
+msgstr "我们检测到第 {line_number} 行有太多有 ({leading_spaces}) 个空格。可以尝试删除多余的空格吗？"
 
-#, fuzzy
 msgid "Unexpected Indentation"
-msgstr "第{line_number}行的空格太多了。你空了{leading_spaces}格，这样太多。每个新的代码块都要比前一行多{indent_size}个空格。"
+msgstr "我们检测到第 {line_number} 行有太多 ({leading_spaces}) 个空格。可以尝试在每个新块中添加 {indent_size} 个空格吗？"
 
-#, fuzzy
 msgid "Unquoted Assignment"
-msgstr "从这个级别开始，您需要将文本放置在引号之间的 `{is}` 右侧。 您忘记了文本 {text} 的内容。"
+msgstr "我们检测到`{is}`右侧的文本未写在引号之间。此级别要求您开始在引号之间写文本。尝试对文本 {text} 执行此操作"
 
-#, fuzzy
 msgid "Unquoted Equality Check"
-msgstr "如果你想检查一个变量的内容是否是一些词，那就需要用引号将这些词括起来！"
+msgstr "我们检测到代码正在尝试检查一个变量是否等于多个单词。可以尝试对要检查的单词使用引号吗？"
 
-#, fuzzy
 msgid "Unquoted Text"
-msgstr "当心。 如果您`{ask}`或`{print}`某些内容，则文本应以引号开头和结尾。 您忘记了文本 {unquotedtext} 的内容。"
+msgstr "我们发现`{ask}`或`{print}`的文本似乎缺少引号。可以尝试为{unquotedtext}添加引号吗？"
 
-#, fuzzy
 msgid "Unsupported Float"
-msgstr "尚不支持非整数，但它们将在几个级别上支持。 现在将`{value}`更改为整数。"
+msgstr "我们检测到代码使用了尚不支持的非整数。可以尝试将`{value}`更改为整数吗？"
 
-#, fuzzy
 msgid "Unsupported String Value"
-msgstr "文本值不能包含`{invalid_value}`。"
+msgstr "我们检测到文本使用的值不能包含`{invalid_value}`。可以尝试删除写入的值或更改其类型吗？"
 
-#, fuzzy
 msgid "Unused Variable"
-msgstr "您在第{line_number}行定义了变量{variable_name}，但没有使用它。"
+msgstr "我们检测到变量 {variable_name} 已在第 {line_number} 行定义，但未被使用。可以尝试使用已定义的变量或将其删除吗？"
 
-#, fuzzy
 msgid "Var Undefined"
-msgstr "您尝试使用变量`{name}`, 但没有设置它。 也有可能您尝试使用单词`{name}`但忘记了引号。"
+msgstr "我们检测到变量`{name}`在设置之前被使用。可以在使用之前设置变量，或者为“{name}”使用引号吗？"
 
-#, fuzzy
 msgid "Wrong Level"
 msgstr "这是正确的海蒂代码，但不是在正确的关卡。你在第{working_level}关用了`{offending_keyword}`。提示：{tip}"
 
-#, fuzzy
 msgid "Wrong Number of Arguments"
-msgstr "您的函数使用了错误数量的参数。 您提供了 {used_number} 但函数 {name} 需要 {defined_number}"
+msgstr "我们发现函数 {name} 的参数数量有误，为 {used_number}。可以尝试改写为 {defined_number} 吗？"
 
 msgid "account_overview"
 msgstr "账户概览"
@@ -253,9 +211,8 @@ msgstr "当您在代码块之外编写关键字时，请确保始终用 { } 将�
 msgid "adventure_exp_classes"
 msgstr "您的冒险将在以下类中使用"
 
-#, fuzzy
 msgid "adventure_flagged"
-msgstr "The adventure was flagged successfully."
+msgstr "此次冒险已被成功标记。"
 
 msgid "adventure_id_invalid"
 msgstr "这个探险活动的账号是无效的。"
@@ -278,9 +235,8 @@ msgstr "这个探险活动已被更新！"
 msgid "adventures"
 msgstr "探险"
 
-#, fuzzy
 msgid "adventures_completed"
-msgstr "Adventures completed: {number_of_adventures}"
+msgstr "已完成的冒险：{number_of_adventures}"
 
 msgid "adventures_info"
 msgstr "每个 海蒂 级别都为学生提供内置练习，我们称之为冒险。 您可以创建自己的冒险并将其添加到您的课程中。 通过您自己的冒险，您可以创造与您的学生相关且有趣的冒险。 您可以在<a href=\"https://hedy.org/for-teachers/manual/features\">此处</a>找到有关创建自己的冒险的更多信息。"
@@ -288,9 +244,8 @@ msgstr "每个 海蒂 级别都为学生提供内置练习，我们称之为冒�
 msgid "adventures_restored"
 msgstr "默认的冒险已经恢复。"
 
-#, fuzzy
 msgid "adventures_tried"
-msgstr "Adventures tried"
+msgstr "尝试冒险"
 
 msgid "ago"
 msgstr "{timestamp} 前"
@@ -337,9 +292,6 @@ msgstr "你确定吗？ 你无法撤销此操作。"
 msgid "ask_needs_var"
 msgstr "从第2关开始，`{ask}`需要和变量共同使用。例子：名字`{is}` `{ask}`你叫什么？"
 
-msgid "available_in"
-msgstr "适用于："
-
 msgid "become_a_sponsor"
 msgstr "成为赞助商"
 
@@ -376,9 +328,8 @@ msgstr "你已经是班级的学生了"
 msgid "class_customize_success"
 msgstr "成功自定义课程。"
 
-#, fuzzy
 msgid "class_graph_explanation"
-msgstr "In this graph you can see represented the numbers of adventures your students have attempted (meaning they have done meaninful work in that adventure), with respect to the number of errors and successful runs."
+msgstr "在这张图表中，你可以看到学生尝试过的冒险次数（意味着他们在该次冒险中做了有意义的工作）以及错误次数和成功次数。"
 
 msgid "class_name_duplicate"
 msgstr "您已经有一个同名的班级了。"
@@ -392,9 +343,8 @@ msgstr "此班级名称无效。"
 msgid "class_name_prompt"
 msgstr "请输入新班级的名称"
 
-#, fuzzy
 msgid "class_performance_graph"
-msgstr "Class performance graph"
+msgstr "班级表现图"
 
 msgid "class_survey_description"
 msgstr "我们希望更好地了解 海蒂 用户。 通过提供这些答案，将有助于改进 Hedy。 谢谢你！"
@@ -450,9 +400,8 @@ msgstr "恭喜你，{username}，你已经完成了Hedy!"
 msgid "connect_guest_teacher"
 msgstr "我想与一位可以教授一些课程的客座老师联系"
 
-#, fuzzy
 msgid "constant_variable_role"
-msgstr "constant"
+msgstr "持续的"
 
 msgid "content_invalid"
 msgstr "这个探险活动无效。"
@@ -583,9 +532,8 @@ msgstr "删除公开的个人资料"
 msgid "delete_success"
 msgstr "已成功删除程序。"
 
-#, fuzzy
 msgid "delete_tag_prompt"
-msgstr "Are you sure you want to delete this tag?"
+msgstr "您确定要删除该标签吗？"
 
 msgid "destroy_profile"
 msgstr "删除个人资料"
@@ -668,9 +616,8 @@ msgstr "在这儿输入你的答案。。。"
 msgid "error_logo_alt"
 msgstr "错误徽标"
 
-#, fuzzy
 msgid "errors"
-msgstr "Errors"
+msgstr "错误"
 
 msgid "exclamation mark"
 msgstr "感叹号"
@@ -738,9 +685,8 @@ msgstr "请给我们发送带有类别的消息。 我们感谢你为改进 Hedy
 msgid "female"
 msgstr "女"
 
-#, fuzzy
 msgid "flag_adventure_prompt"
-msgstr "Do you want to flag this adventure so that we check its appropriateness?"
+msgstr "您是否想标记此冒险以便我们检查其是否合适？"
 
 msgid "float"
 msgstr "数字"
@@ -799,9 +745,8 @@ msgstr "转到测验结果"
 msgid "goto_profile"
 msgstr "转到我的个人资料"
 
-#, fuzzy
 msgid "graph_title"
-msgstr "Errors per adventure completed on level {level}"
+msgstr "在 {level} 级别完成的每次冒险的错误数"
 
 msgid "grid_overview"
 msgstr "每次冒险的计划概览"
@@ -890,9 +835,8 @@ msgstr "缩进不正确"
 msgid "input"
 msgstr "`{ask}`中的输入"
 
-#, fuzzy
 msgid "input_variable_role"
-msgstr "input"
+msgstr "输入"
 
 msgid "integer"
 msgstr "数字"
@@ -1014,9 +958,8 @@ msgstr "链接"
 msgid "list"
 msgstr "列表"
 
-#, fuzzy
 msgid "list_variable_role"
-msgstr "list"
+msgstr "列表"
 
 msgid "live_dashboard"
 msgstr "实时仪表板"
@@ -1229,9 +1172,8 @@ msgstr "这个海蒂程序不存在！"
 msgid "no_tag"
 msgstr "没有提供标签！"
 
-#, fuzzy
 msgid "not_adventure_yet"
-msgstr "You must fill in an adventure name first"
+msgstr "您必须先填写冒险名称"
 
 msgid "not_enrolled"
 msgstr "看来你不在这个班上！"
@@ -1257,9 +1199,8 @@ msgstr "成就数"
 msgid "number_lines"
 msgstr "行数"
 
-#, fuzzy
 msgid "number_of_errors"
-msgstr "Number of errors: {number_of_errors}"
+msgstr "错误数量：{number_of_errors}"
 
 msgid "number_programs"
 msgstr "运行了的程序数量"
@@ -1393,9 +1334,8 @@ msgstr "您正在以教师身份预习<em>{class_name}</em>课程。"
 msgid "previous_campaigns"
 msgstr "查看之前的活动"
 
-#, fuzzy
 msgid "previous_page"
-msgstr "Previous page"
+msgstr "上一页"
 
 msgid "print_logo"
 msgstr "打印"
@@ -1535,9 +1475,8 @@ msgstr "你确定要上报这个程序吗？"
 msgid "report_success"
 msgstr "该程序已被上报"
 
-#, fuzzy
 msgid "request_invalid"
-msgstr "Request invalid"
+msgstr "请求无效"
 
 msgid "request_teacher"
 msgstr "你想申请教师账户吗？"
@@ -1680,6 +1619,12 @@ msgstr "对于 海蒂 的每个级别，我们都创建了幻灯片来帮助您�
 msgid "social_media"
 msgstr "社交媒体"
 
+msgid "solution_example"
+msgstr ""
+
+msgid "solution_example_explanation"
+msgstr ""
+
 msgid "something_went_wrong_keyword_parsing"
 msgstr "您的冒险中有一个错误，所有关键字都正确地用 { } 括起来吗？"
 
@@ -1713,9 +1658,8 @@ msgstr "开始教学"
 msgid "step_title"
 msgstr "任务"
 
-#, fuzzy
 msgid "stepper_variable_role"
-msgstr "stepper"
+msgstr "步进机"
 
 msgid "stop_code_button"
 msgstr "停止程序"
@@ -1771,16 +1715,14 @@ msgstr "订阅"
 msgid "subscribe_newsletter"
 msgstr "订阅通讯"
 
-#, fuzzy
 msgid "successful_runs"
-msgstr "Successful runs: {successful_runs}"
+msgstr "成功运行：{successful_runs}"
 
 msgid "suggestion_color"
 msgstr "尝试使用另一种颜色"
 
-#, fuzzy
 msgid "suggestion_note"
-msgstr "使用 C0 和 B9 之间的注释或 1 到 70 之间的数字"
+msgstr "尝试使用 C0 至 B9 之间的音符或 1 至 70 之间的数字"
 
 msgid "suggestion_number"
 msgstr "尝试将值更改为数字"
@@ -1961,9 +1903,8 @@ msgstr "您的节目已经取消收藏."
 msgid "unique_usernames"
 msgstr "所有用户名都必须是唯一的。"
 
-#, fuzzy
 msgid "unknown_variable_role"
-msgstr "unknown"
+msgstr "未知"
 
 msgid "unlock_thresholds"
 msgstr "解锁级别阈值"
@@ -2040,13 +1981,11 @@ msgstr "观看程序"
 msgid "view_slides"
 msgstr "查阅幻灯"
 
-#, fuzzy
 msgid "waiting_for_submit"
-msgstr "Waiting for submit"
+msgstr "等待提交"
 
-#, fuzzy
 msgid "walker_variable_role"
-msgstr "walker"
+msgstr "漫游者"
 
 msgid "welcome"
 msgstr "欢迎"
@@ -2263,4 +2202,7 @@ msgstr "你的程序"
 
 #~ msgid "variables"
 #~ msgstr "变量"
+
+#~ msgid "available_in"
+#~ msgstr "适用于："
 
