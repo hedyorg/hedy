@@ -21,6 +21,6 @@ it('Is able to search a language, see all languages and add a language', () => {
     .should('be.not.disabled');
   })
 
-  // test if adding a language button works
+  // test if adding a language button is present
   cy.getDataCy('add_language_btn').should('be.visible');
 })

@@ -105,13 +105,18 @@ export function goToExploreProgramsPage()
    goToPage(Cypress.env('explore_programs_page'));
 }
 
-export function navigate_home_button(button, path)
+export function navigateHomeButton(button, path)
 {
     goToHome();
     cy.getDataCy(button).click();
     cy.location().should((loc) => {
       expect(loc.pathname).equal(path);
     })
+}
+
+export function goToSubscribePage()
+{
+   goToPage(Cypress.env('subscribe_page'));
 }
 
 export default {goToPage}
