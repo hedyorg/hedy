@@ -34,15 +34,8 @@ export function login(username, password) {
 export function logout()
 {
     goToHome();            
-    cy.get('body').then($body => {
-        if ($body.find(".menubar-text:contains('Log in')").length == 0) {
-            
-            cy.get('.dropdown > .menubar-text').click();
-            cy.get('#logout_button').click();
-            cy.wait(500);
-            
-        } 
-    });
+    cy.getDataCy('user_dropdown').click()
+    cy.getDataCy('logout_button').click()
 }
 
 export default {loginForUser};
