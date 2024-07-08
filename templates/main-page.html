@@ -8,7 +8,7 @@
                 <h2 class="py-0 my-0 font-sans font-light text-black tracking-wide">{{_('main_subtitle')}}</h2>
                 <div class="flex flex-row gap-4 min-w-full">
                     <button id="try_learning_button" class="green-btn text-white w-64 py-4" onclick="window.location.href='/hedy'">{{_('start_learning')}}</button>
-                    <button id="try_teaching_button" class="white-btn text-blue-500 w-64 py-4" onclick="window.location.href={% if not user.is_teacher %}'signup?teacher=true'{% else %}'for-teachers'{% endif %}">{{_('start_teaching')}}</button>
+                    <button id="try_teaching_button" class="white-btn text-blue-500 w-64 py-4" onclick="window.location.href={% if not user.is_teacher %}'for-teachers/preview-teacher-mode'{% else %}'for-teachers'{% endif %}">{{_('start_teaching')}}</button>
                 </div>
             </div>
             {# image for large screens #}
