@@ -21,15 +21,15 @@
           </div>
           <div id="debug_container" class="z-10 px-1 inline-flex items-center">
               <button id="debug_button" class="blue-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>Debug</button>
-              <button id="debug_restart" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>🔄</button>
-              <button id="debug_stop" class="green-btn hidden" onclick="hedyApp.stopDebug()">🛑</button>
+              <button id="debug_restart" class="green-btn hidden mr-2" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>🔄</button>
+              <button id="debug_stop" class="green-btn hidden mr-2" onclick="hedyApp.stopDebug()">🛑</button>
               <button id="debug_continue" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "continue")'><div class="{% if g.dir == "rtl" %}rotate-180{% endif %}">⏩</div></button>
           </div>
           <div id="copy_button_container" class="z-10 px-1 inline-flex items-center">
-              <button id="copy" class="blue-btn" onclick="">Copy</button>
+              <button id="copy" class="blue-btn" onclick="">{{_('copy')}}</button>
           </div>
           <div id="clear_button_container" class="z-10 px-1 inline-flex items-center">
-              <button id="clear" class="blue-btn" onclick="">Clear</button>
+              <button id="clear" class="blue-btn" onclick="hedyApp.emptyEditor()">{{_('clear')}}</button>
           </div>
       </div>
         <!--The div below is used to send translation of search to Ace through the frontend-->

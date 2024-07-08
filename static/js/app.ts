@@ -2064,3 +2064,7 @@ export function scrollToLastClickedButton(dropdown_id: string) {
     }
   }
 }
+
+export function emptyEditor() {
+  theGlobalEditor.contents = ""
+}

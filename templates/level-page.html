@@ -139,7 +139,7 @@
                 on click
                 call :next.click() 
                 put hedyApp.getCurrentAdv() into #adventure_text">
-                Next adventure&nbsp;
+                {{_('next_adventure')}}&nbsp;
                 <span class="fa fa-arrow-{% if g.dir == "ltr" %}right{% else %}left{% endif %}"></span>
                 </button>
             {% if not quiz and not parsons and next_level and (not customizations or next_level in customizations['available_levels']) %}
