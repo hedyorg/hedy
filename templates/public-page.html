@@ -52,7 +52,7 @@
                 {% if achievements %}
                     <div class="mt-auto">
                         <div class="font-semibold bg-blue-600 pb-2 pt-2 text-white w-full flex flex-row gap-2 px-2 justify-between rounded-b-lg items-center">
-                            <div class="profile-nametag__stats">{{ user_program_count }} {{_('amount_saved')}}</div>
+                            <div class="profile-nametag__stats">{{ user_program_count }} {{_('programs')|lower}}</div>
                             <div class="h-8 w-px border-r border-white relative"></div>
                             {% if user_achievements.submitted_programs %}
                                 <div class="profile-nametag__stats">{{ user_achievements.submitted_programs }} {{_('amount_submitted')}}</div>
