@@ -26,8 +26,8 @@
                 <span class="hidden lg:inline-block">{{ _('program_header')}}</span>
             </a>
         </li>
-        <li class="flex-initial menubar-item dropdown relative z-20{% if current_page == 'my-profile' %} active{% endif %}">
-            <a data-cy="user_dropdown" class="menubar-text cursor-pointer whitespace-nowrap" onclick="$('#profile_dropdown').slideToggle('medium');">
+        <li class="flex-initial menubar-item dropdown relative z-20{% if current_page == 'my-profile' %} active{% endif %}" data-cy="user_dropdown">
+            <a class="menubar-text cursor-pointer whitespace-nowrap" onclick="$('#profile_dropdown').slideToggle('medium');">
                 {% if session.profile_image %}
                     <img src="{{static('/images/profile_images/' + session.profile_image + '.png')}}" class="h-8 lg:h-10 inline-block">
                 {% else %}
