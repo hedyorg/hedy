@@ -22,7 +22,6 @@ teachers.forEach((teacher) => {
       cy.get('.ck-editor__editable')
         .invoke('text')
         .should('eq', data);
-
     })
   })
 })

@@ -33,7 +33,7 @@ export function login(username, password) {
 
 export function logout()
 {
-    goToHome();            
+    goToHome();
     cy.getDataCy('user_dropdown').click()
     cy.getDataCy('logout_button').click()
 }
