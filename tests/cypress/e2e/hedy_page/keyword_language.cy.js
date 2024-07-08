@@ -5,7 +5,7 @@ describe('when the user changes their language to Arabic', () => {
     goToHedyPageWithEnKeywords();
     cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').click();
     cy.get('#editor').type("print Hallo!'\n");
-    cy.getDataCy('language_dropdown').click();
+    cy.getDataCy('language_dropdown_button').click();
     cy.getDataCy('switch_lang_ar').click();
 
     // switch back and forth

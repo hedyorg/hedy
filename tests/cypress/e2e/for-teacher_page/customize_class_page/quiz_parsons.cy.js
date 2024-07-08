@@ -87,7 +87,7 @@ teachers.forEach((teacher) => {
         cy.wait('@updateCustomizations');
       
         loginForStudent();
-        cy.getDataCy('explorebutton').should("not.exist")
+        cy.getDataCy('explore_button').should("not.exist")
       });
   });
 });

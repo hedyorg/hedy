@@ -37,7 +37,7 @@
              {% endfor %}
            </div>
        {% endif %}
-       <h1 id="public_profile_button" class="section-header" onclick="$ ('#public_profile_body').toggle()">{{_('public_profile')}}</h1>
+       <h1 data-cy="profile_button" class="section-header" onclick="$ ('#public_profile_body').toggle()">{{_('public_profile')}}</h1>
        <div id="public_profile_body" class="profile-section-body" {% if request.args.get('open') == "public-profile" %} style="display: inline;"{% endif %}>
             <h2 class="profile-section-body-header">{{_('public_profile')}}</h2>
              <form id="public_profile" class="flex flex-col gap-4">
@@ -56,7 +56,7 @@
                  </div>
                  <div class="flex flex-col">
                      <h3 class="px-2 pt-0 pb-2 my-0 font-semibold">{{_('personal_text')}}</h3>
-                     <textarea class="block h-32 px-2 py-1 border border-gray-400 rounded-lg" id="personal_text" name="personal_text" required maxlength="200" minlength="5" placeholder="{{_('your_personal_text')}}">{% if public_settings.personal_text %}{{ public_settings.personal_text }}{% endif %}</textarea>
+                     <textarea class="block h-32 px-2 py-1 border border-gray-400 rounded-lg" data-cy="personal_text" name="personal_text" required maxlength="200" minlength="5" placeholder="{{_('your_personal_text')}}">{% if public_settings.personal_text %}{{ public_settings.personal_text }}{% endif %}</textarea>
                  </div>
                  {% if programs %}
                      <div>
@@ -70,11 +70,11 @@
                      </div>
                  {% endif %}
                  <div class="flex flex-row gap-4 items-center border-gray-400 border p-4 rounded-lg">
-                    <input type="checkbox" name="agree_terms" id="agree_terms" required class="" {% if public_settings %}checked{% endif %}>
+                    <input type="checkbox" name="agree_terms" data-cy="agree_terms" required class="" {% if public_settings %}checked{% endif %}>
                     <label for="agree_terms" class="cursor-pointer w-full">{{_('public_profile_info')}}</label>
                  </div>
                  <div class="flex flex-row">
-                    <button id="submit_public_profile" type="submit" class="green-btn">{{_('update_public')}}</button>
+                    <button data-cy="submit_public_profile" type="submit" class="green-btn">{{_('update_public')}}</button>
                     {% if public_settings %}
                         <button type="reset" class="ml-auto red-btn" onclick="event.preventDefault(); hedyApp.destroy_public('{{_('are_you_sure')}}');">{{_('delete_public')}}</button>
                     {% endif %}
@@ -96,7 +96,7 @@
                 </div>
            </div>
        {% endif %}
-       <h1 class="section-header" onclick="$('#profile_change_body').toggle();" id="personal_settings">{{_('settings')}}</h1>
+       <h1 class="section-header" onclick="$('#profile_change_body').toggle();" data-cy="personal_settings">{{_('settings')}}</h1>
        <div class="profile-section-body" id="profile_change_body">
         <form id="profile">
             <h2 class="profile-section-body-header">{{_('settings')}}</h2>
@@ -153,7 +153,7 @@
                 </select>
             </div>
         </form>
-        <button class="red-btn" onclick="hedyApp.destroy('{{_('are_you_sure')}}')" id="delete_profile_button">{{_('destroy_profile')}}</button>
+        <button class="red-btn" onclick="hedyApp.destroy('{{_('are_you_sure')}}')" data-cy="delete_profile_button">{{_('destroy_profile')}}</button>
        </div>
       <h1 id="password_toggle" class="section-header" onclick="$ ('#change_password_body').toggle()">{{_('change_password')}}</h1>
         <div class="profile-section-body" id="change_password_body">
