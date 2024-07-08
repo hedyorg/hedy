@@ -248,6 +248,9 @@ class AuthModule(WebsiteModule):
             self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         session[JUST_LOGGED_OUT] = True
         remove_class_preview()
+        if session.get("preview_teacher_mode"):
+            self.db.forget_user(session["preview_teacher_mode"]["username"])
+            session["preview_teacher_mode"] = None
         return make_response('', 204)
 
     @route("/destroy", methods=["POST"])

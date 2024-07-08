@@ -1,12 +1,10 @@
 import { loginForStudent, loginForTeacher, loginForUser } from "../tools/login/login";
-import { goToHome, navigateHomeButton } from "../tools/navigation/nav";
+import { navigateHomeButton } from "../tools/navigation/nav";
 
 describe('Start buttons', () => {
   it('When not logged in: Should be able to click on start buttons', () => {
     navigateHomeButton('start_learning_button', Cypress.env('hedy_page'))
-    goToHome();
-    cy.getDataCy('start_teaching_button').click();
-    cy.url().should('include', 'signup?teacher=true');
+    // start_teaching button is tested in teacher_mode.cy.js
   })
 
   it('As a teacher: Should be able to click on start buttons', () => {

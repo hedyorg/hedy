@@ -632,6 +632,19 @@ class Database:
         for Class in self.get_teacher_classes(username, False):
             self.delete_class(Class)
 
+        # Delete possible adventures owned by the user
+        for adv in self.get_teacher_adventures(username):
+            self.delete_adventure(adv["id"])
+
+        # Delete possibly created public profile data
+        self.forget_public_profile(username)
+
+        # Delete programs stats
+        PROGRAM_STATS.del_many({"id": username})
+
+        # Delete existing achievements of the user
+        ACHIEVEMENTS.delete({"username": username})
+
     def all_users(self, page_token=None, limit=500):
         """Return a page from the users table.
 
