@@ -736,7 +736,7 @@ adventures:
                         {for} i {in} {range} 1 {to} 4
                             grade = {ask} _
                             total = total + _
-                            return _ / 4
+                            {return} _ / 4
 
                     mean_grade = {call} _
                     {print} 'Your mean grade is ' mean_grade
@@ -2039,7 +2039,7 @@ adventures:
                     {define} calculate_new_price {with} amount, percentage
                         percentage = percentage / 100
                         discount_amount = amount * percentage
-                        return amount - discount_amount
+                        {return} amount - discount_amount
 
                     old_price = {ask} 'How much is on the price tag?'
                     discount = {ask} 'What percentage is the discount?'

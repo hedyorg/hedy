@@ -704,22 +704,16 @@ adventures:
                     Did you get it? Awesome! Would you like to add even more to your calculator? **This adventure continues in the next tab!**
                 example_code: |
                     ```
-                    {define} calculate_mean_grade
+                    {define} calcular_média
                         total = 0
                         {for} i {in} {range} 1 {to} 4
-                            grade = {ask} _
+                            nota = {ask} _
                             total = total + _
-                            return _ / 4
+                            {return} _ / 4
 
-                    mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
+                    média = {call} _
+                    {print} 'A sua média foi ' média
                     ```
-
-                            total = total + _
-                            return _ / 4
-
-                    mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
             15:
                 story_text: |
                     You can add the `{while}` loop to the calculator game you've learned to make in a previous level.
@@ -1946,7 +1940,7 @@ adventures:
                         lado_escolhido = lados {at} {random}
                         membro_escolhido = membros _
                         cor_escolhida = cores _
-                        {print} lado_escolhido < ' ' membro_escolhido ' no ' cor_escolhida
+                        {print} membro_escolhido ' ' lado_escolhido ' no ' cor_escolhida
 
                     {print} 'Vamos jogar uma partida de Twister!'
                     {for} i {in} {range} 1 {to} _
@@ -1993,16 +1987,16 @@ adventures:
                     You should finish the line of code by calling the function that calculates the new price.
                 example_code: |
                     ```
-                    {define} calculate_new_price {with} amount, percentage
-                        percentage = percentage / 100
-                        discount_amount = amount * percentage
-                        return amount - discount_amount
+                    {define} calcular_preço_novo {with} valor, porcentagem
+                        porcentagem = porcentagem / 100
+                        valor_descontado = valor * porcentagem
+                        {return} valor - valor_descontado
 
-                    old_price = {ask} 'How much is on the price tag?'
-                    discount = {ask} 'What percentage is the discount?'
+                    preço_antigo = {ask} 'Qual é o valor na etiqueta de preço?'
+                    desconto = {ask} 'Qual é a porcentagem de desconto?'
 
-                    new_price = _ calculate_new_price {with} old_price, _
-                    {print} 'The new price is ' new_price ' dollar'
+                    preço_novo = _ calcular_preço_novo {with} preço_antigo, _
+                    {print} 'O preço novo é ' preço_novo ' reais'
                     ```
             18:
                 story_text: |
@@ -2290,7 +2284,7 @@ adventures:
                     _ Há 3 portas na sua frente...
                     _ _ _ Qual delas você escolhe?
                     _ Você escolheu a porta... escolha
-                    monstros _ um zumbi, um vampiro, NADA DE QUE VOCÊ CONSIGA ESCAPAR
+                    monstros _ um zumbi, um vampiro, ALGO IMPOSSÍVEL DE SE ESCAPAR
                     _ Você vê...
                     {sleep}
                     _ _ _ _
@@ -2301,14 +2295,15 @@ adventures:
                     Can you make your Haunted House level 4 proof?
                 example_code: |
                     ```
-                    {print} _Escape from the haunted house!_
-                    {print} _There are 3 doors in front of you..._
-                    choice {is} {ask} _Which door do you choose?_
-                    {print} _You picked door ..._ choice
-                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    {print} _You see..._
+                    _ Adicione aspas a este código _
+                    {print} Escape da casa mal-assombrada!
+                    {print} Há 3 portas na sua frente...
+                    escolha {is} {ask} Qual delas você escolhe?
+                    {print} Você escolheu a porta... escolha
+                    monstros {is} um zumbi, um vampiro, ALGO IMPOSSÍVEL DE SE ESCAPAR
+                    {print} Você vê...
                     {sleep}
-                    {print} monsters {at} {random}
+                    {print} monstros {at} {random}
                      ```
             5:
                 story_text: |
@@ -2317,51 +2312,63 @@ adventures:
                     In this level you can only win the game by picking the same door Hedy picked randomly.
                 example_code: |
                     ```
-                    {print} 'Escape from the haunted house!'
-                    {print} 'There are 3 doors in front of you...'
-                    doors {is} 1, 2, 3
-                    monsters {is} werewolf, mummy, vampire, zombie
-                    chosen_door {is} {ask} 'Which door do you choose?'
-                    {print} 'You chose door...' chosen_door
+                    {print} 'Escape da casa mal-assombrada!'
+                    {print} 'Há 3 portas na sua frente...'
+                    portas {is} 1, 2, 3
+                    monstros {is} lobisomem, múmia, vampiro, zumbi
+                    porta_escolhida {is} {ask} 'Qual delas você escolhe?'
+                    {print} 'Você escolhe a porta... ' porta_escolhida
                     {sleep}
-                    correct_door {is} doors {at} {random}
-                    _ _ _ _ {print} 'Great! Youve escaped!'
-                    {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
+                    porta_correta {is} portas {at} {random}
+                    _ _ _ _ {print} 'Ótimo! Você escapou!'
+                    {else} {print} 'Ah não! Você está sendo devorado(a) por um(a)... ' monstros {at} {random}
                     ```
             9:
                 story_text: |
                     In this level you can use nesting, which allows you to make the haunted house even more interactive!
                 example_code: |
                     ```
-                    {print} 'Escape from the Haunted House!'
-                    player = alive
-                    doors = 1, 2, 3
-                    monsters = zombie, vampire, giant spider
+                    {print} 'Escape da Casa Mal-Assombrada!!'
+                    jogador = vivo
+                    portas = 1, 2, 3
+                    monstros = zumbi, vampiro, aranha gigante
                     {repeat} 3 {times}
-                        {if} player {is} alive
-                            correct_door {is} doors {at} {random}
-                            {print} 'There are 3 doors in front of you...'
-                            chosen_door = {ask} 'Which door do you choose?'
-                            {if} chosen_door {is} correct_door
-                                {print} 'No monsters here!'
+                        {if} jogador {is} vivo
+                            porta_correta {is} portas {at} {random}
+                            {print} 'Há 3 portas na sua frente...'
+                            porta_escolhida = {ask} 'Qual delas você escolhe?'
+                            {if} porta_escolhida {is} porta_correta
+                                {print} 'Sem monstros aqui!'
                             {else}
-                                {print} 'You are eaten by a ' monsters {at} {random}
-                                player = dead
+                                {print} 'Você foi devorado(a) por um(a) ' monstros {at} {random}
+                                jogador = morto
                         {else}
-                            {print} 'GAME OVER'
-                    {if} player {is} alive
-                        {print} 'Great! You survived!'
+                            {print} 'FIM DE JOGO'
+                    {if} jogador {is} morto
+                        {print} 'Ótimo! Você sobreviveu!'
                     ```
             11:
                 story_text: |
-                    In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
+                    Neste nível, mudamos o comando `{for}` para podermos dizer ao(à) jogador(a) onde está. 
+
+                    ### Exercício 1
+                    Complete o programa de modo que o(a) jogador(a) saiba onde está.
+
+                    ### Exercício 2
+                    Transforme o programa em uma aventura seguindo estes passos:
+
+                    1. Faça uma lista de escolhas (ex.: lutar ou fugir)
+                    2. Certifique-se de que o(a) jogador(a) pode escolher uma opção usando `{ask}`
+                    3. Foi a escolha certa? Então o jogo pode prosseguir para o próximo monstro. Foi uma escolha ruim? Informe isso com um `{print}`. 
+
+                    **Extra** Se você fizer uma escolha ruim, o jogo ainda mostra outro monstro! Como pode consertar isso?
                 example_code: |
                     ```
-                    {print} 'Escape from the Haunted House!'
-                    monsters = zombie, vampire, giant spider
+                    {print} 'Escape da Casa Mal-Assombrada!'
+                    monstros = zumbi, vampiro, aranha gigante
                     _
-                        {print} 'Room ' i
-                        monster = monsters {at} {random}
+                        {print} 'Sala ' i
+                        monstro = monstros {at} {random}
                     ```
             14:
                 story_text: |
@@ -2559,13 +2566,13 @@ adventures:
         levels:
             2:
                 story_text: |
-                    ## Variables
-                    You can name a word with `{is}`. This is called a **variable**. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:
+                    ## Variáveis
+                    Você pode dar um valor a uma palavra usando `{is}`. Isso se chama **variável**. Neste exemplo, fizemos uma variável chamada de nome e uma variável chamada de idade. Você pode usar a palavra nome em qualquer parte do seu código e ela será substituída por Hedy, assim:
                 example_code: |
                     ```
-                    name {is} Hedy
-                    age {is} 15
-                    {print} name is age years old
+                    nome {is} Hedy
+                    idade {is} 15
+                    {print} nome tem idade anos
                     ```
                 story_text_2: |
                     ### Exercise
