@@ -632,6 +632,19 @@ class Database:
         for Class in self.get_teacher_classes(username, False):
             self.delete_class(Class)
 
+        # Delete possible adventures owned by the user
+        for adv in self.get_teacher_adventures(username):
+            self.delete_adventure(adv["id"])
+
+        # Delete possibly created public profile data
+        self.forget_public_profile(username)
+
+        # Delete programs stats
+        PROGRAM_STATS.del_many({"id": username})
+
+        # Delete existing achievements of the user
+        ACHIEVEMENTS.delete({"username": username})
+
     def all_users(self, page_token=None, limit=500):
         """Return a page from the users table.
 
@@ -1206,15 +1219,6 @@ class Database:
     def get_username_role(self, username):
         role = "teacher" if USERS.get({"username": username}).get("teacher_request") is True else "student"
         return role
-
-    def clean_teacher_mode_account(self, username):
-        adventures = self.get_teacher_adventures(username)
-        for adv in adventures:
-            self.delete_adventure(adv["id"])
-
-        classes = self.get_teacher_classes(username)
-        for cls in classes:
-            self.delete_class(cls)
 
 
 def batched(iterable, n):
