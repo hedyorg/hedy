@@ -22,7 +22,7 @@ export * from './teachers';
 export * from './browser-helpers/unsaved-changes';
 export * from './initialize';
 export * from './debugging';
-export { getPreviousAndNext, getCurrentAdv } from './tabs';
+export { getNext, getCurrentAdv } from './tabs';
 export * from './tailwind';
 export * from './public-adventures';
 export { loadParsonsExercise } from './parsons';

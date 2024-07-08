@@ -117,14 +117,12 @@ export class Tabs {
   }
 }
 
-
-export function getPreviousAndNext() {
+export function getNext() {
   const selected = document.querySelector('.tab-selected')
   if (!selected) return []
   const i = parseInt(selected.getAttribute('tabindex') || '0')
-  const prev = document.querySelector(`.tab[tabindex='${i-1}']`)
   const next = document.querySelector(`.tab[tabindex='${i+1}']`)
-  return [prev, next]
+  return next
 }
 
 export function getCurrentAdv() {

@@ -115,6 +115,7 @@
                     <button id="adventure_button_{{ adventure.name }}" 
                     class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white"
                     data-tab="{{adventure.short_name}}"
+                    tabindex="{{ loop.index }}"
                     style="width: 100%;"
                     onclick="$('#adventure_dropdown').slideUp('medium');"
                     _="on click 
@@ -129,13 +130,15 @@
             <button class="blue-btn next-tab ltr:ml-1 rtl:mr-1"
               href="#"
               _="on load or click from .tab
-                set :els to hedyApp.getPreviousAndNext()
-                if :els[1]
+                set :next to hedyApp.getNext()
+                if :next
                   set *display to 'block'
                 else
                   set *display to 'none'
                 end
-                on click call :els[1].click()">
+                on click
+                call :next.click() 
+                put hedyApp.getCurrentAdv() into #adventure_text">
                 Next adventure&nbsp;
                 <span class="fa fa-arrow-{% if g.dir == "ltr" %}right{% else %}left{% endif %}"></span>
                 </button>
