@@ -218,7 +218,10 @@ export function remove_student(class_id: string, student_id: string, prompt: str
 function get_formatted_content(content: string, levels: string[], language: string) {
   const parser = new DOMParser();
   const html = parser.parseFromString(content, 'text/html');
-  const minLevel = Math.min(...levels.map((el) => Number(el)));
+  let minLevel = 1;
+  if (levels.length) {
+    minLevel = Math.min(...levels.map((el) => Number(el)));
+  } 
   let snippets: string[] = [] ;
   let snippetsFormatted: string[] = [];
   let keywords: string[] = []
