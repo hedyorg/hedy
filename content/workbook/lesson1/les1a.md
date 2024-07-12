@@ -21,203 +21,79 @@ Een `print` opdracht print een woord uit, als het tussen aanhalingstekens staat.
 print Hallo allemaal
 ```
 
-1\) Welke van deze `print()` opdrachten print **Hallo** uit?
+### Opdracht 1: Voorspel de uitvoer
 
-Schrijf de goede code over in je schrift!
+[Assignment:Output
+Code:print Hallo allemaal
+Icon:>
+Lines:1
+Answer:Hallo allemaal] 
 
-Tip: **Let goed op de aanhalingstekens!**
+[Assignment:Output
+Code:print goedemorgen!
+Icon:>
+Lines:1
+Answer:goedemorgen!] 
 
-```python
-1. print Hallo
+### Opdracht 2: Foutje?
+Soms sluipt er een foutje in je code. Dat is niet erg, maar Hedy kan je code dan niet goed lezen.
+Welke van deze code zijn fout, denk jij?
 
-2. print('Hallo")
+[Assignment:MC
+Options: Goed,Fout
+Code:prnt Hallo allemaal!
+Icon:A/B
+Answer:Goed] 
 
-3. print(Hallo)
+[Assignment:MC
+Options: Goed,Fout
+Code:print print
+Icon:A/B
+Answer:Goed] 
 
-4. print("Hallo')
+### Invoer vragen
 
-5. print('Hallo')
+Alleen tekst is een beetje saai. Je kan in Hedy ook om _invoer_ vragen. Invoer is tekst die je aan de computer geeft.
+De computer onthoudt die tekst en kan die later weer aan jou laten zien.
+Deze code toont de vraag 'Hoe heet jij?'
+
+```hedy
+ask Hoe heet jij?
 ```
 
-2\) Maak deze `print()` opdracht zelf af zodat er **Allemaal** in beeld komt.
+### Invoer laten zien
 
-```python
-print ... ... Allemaal ... ...
+Alleen een ask slaat het antwoord op, maar laat het niet zien. Daarvoor heb je de opdracht `echo` nodig. Die laat het antwoord zien op het einde van de zin.
+Bijvoorbeeld zo:
+
+```hedy
+ask Hoe heet jij?
+echo dus jij heet: 
 ```
 
-Schrijf de code over in je schrift.
+Als iemand die Maan heet deze code zou gebruiken, dan wordt de uitvoer:
 
-3\) Kies nu zelf drie woorden uit om te printen. Schrijf de goede codes in je schrift op.
-
-Einde werkblad! Ben je klaar, leg dan je schrift bovenaan op je tafel
-
-### Meerdere woorden printen
-
-Een `print()` kan ook meerdere woorden printen. Dan moeten er komma's tussen de woorden. Let goed op, ieder woord moet nog steeds tussen twee aanhalingstekens.
-
-Zo:
-
-```python
-print('Goedemorgen', 'allemaal')
+```
+dus jij heet: Maan
 ```
 
-Op de plek van de komma komt een spatie in de uitvoer.
+Let op, het komt precies zo in beeld als het er staat, dus met hetzelfde hoofdlettergebruik en de dubbele punt erbij!
 
-![image-20190126194646749](../../../.gitbook/assets/image-20190126194716104.png)
 
-Python stopt met printen bij een aanhalingsteken.
+### Opdracht 3: Voorspel de uitvoer
 
-1\) Welke van deze `print()` opdrachten print **Hallo klas** uit?
+Voorspel wat de uitvoer van deze codes is. Vul steeds je eigen naam in, of een ander kloppend antwoord.
 
-Schrijf de goede code over in je schrift. Kijk goed naar de aanhalingstekens!
+[Assignment:Output
+Code:ask Hoe heet jij?
+echo dus jij heet:
+Icon:>
+Lines:2
+Answer:dus jij heet: **naam**] 
 
-```python
-1. print Hallo, klas
-2. print('Hallo', 'klas')
-3. print('Hallo, klas')
-4. print(Hallo, klas)
-5. print("Hallo', 'klas")
-```
-
-2\) Maak deze `print()` opdracht zelf af zodat er **Hallo allemaal** in beeld komt.
-
-print ... ... Hallo ... ... ... allemaal ... ...
-
-Schrijf de code in je schrift.
-
-3\) Kies nu zelf twee woorden om naast elkaar te printen. Schrijf de goede code op in je schrift.
-
-Einde werkblad! Ben je klaar, leg dan je schrift bovenaan op je tafel
-
-### Zinnetjes printen
-
-Je kunt zoveel woorden combineren met komma's als je maar wilt! Bijvoorbeeld:
-
-```python
-print('Goedemorgen', 'leerlingen', 'uit', 'deze', 'klas')
-```
-
-1\) Welke van deze `print()` opdrachten print **ik hou van programmeren** uit?
-
-Schrijf de goede code over in je schrift.
-
-Tip: Let goed op, de goede code heeft:
-
-* Ronde haakjes
-* Een aanhalingsteken voor en na ieder woord
-* Komma's tussen alle woorden
-
-Weet jij welke code goed is?
-
-```python
-1. print('Ik', 'hou', 'van', 'programmeren')
-2. print('Ik', hou, van, 'programmeren')
-3. print('Ik', 'hou', 'van' 'programmeren')
-4. print Ik hou van programmeren
-5. print(Ik hou van programmeren)
-```
-
-2\) Maak deze codes af zodat er een goede zin geprint wordt:
-
-```python
-1. print ... ... Programmeren ... ... ... is ... ... ... leuk ... )
-2. print ... ...  Programmeren ...  , ... is ... ... ... leuk ... ...
-3. print ...   ' Programmeren ... ... ... is ... ... ... leuk ... ...
-```
-
-3\) Kies nu zelf korte zinnetjes om te printen. Bijvoorbeeld: 'Ik hou van programmeren'.
-
-Schrijf drie codes voor zinnetjes in je schrift.
-
-Einde werkblad! Ben je klaar, leg dan je schrift bovenaan op je tafel
-
-### Onder elkaar
-
-1\) Wat printen deze codes uit? Schrijf het antwoord op in je schrift! Wees _heel_ precies.
-
-Let op: **Er zitten ook foute codes tussen!** Als een code fout is, schrijf dan op: **FOUT.**
-
-```python
-1.print('Hallo', 'allemaal')
-```
-
-```python
-2.print('Hallo)
-  print('Allemaal')
-```
-
-```python
-3.print('Hallo' , allemaal')
-```
-
-```python
-4.print('Hallo')
-  print('allemaal')
-```
-
-```python
-5.prit('Hallo')
-  prit('Allemaal')
-```
-
-2\) Hier staan drie codes en drie resultaten: de woorden die in beeld komen.
-
-Welke code hoort bij welk resultaat?
-
-Schrijf de codes over in je schrift, met het resultaat erachter.
-
-Bijvoorbeeld:
-
-```python
-print('test')  > test
-```
-
-**Let op:** een van de drie codes geeft een fout.
-
-Codes: Resultaten:
-
-```python
-print(goedemorgen)                              # >goedemorgen
-```
-
-```python
-print('Goedemorgen')                            # >Goedemorgen
-```
-
-```python
-print('goedemorgen')                            # >FOUT
-```
-
-### Foutmeldingen
-
-Soms geeft Python een foutmelding.
-
-![image-20190126194646749](../../../.gitbook/assets/image-20190126194646749.png)
-
-1\) Je ziet hier vijf foute codes. Wat is de fout? Schrijf het op in je schrift.
-
-**Tip:** kijk ook goed naar de kleuren. Alleen tekst en aanhalingstekens horen rood te zijn.
-
-```python
-1. pint('Python')
-2. print('Python)
-3. print(Python)
-4. print(Python')
-5. print('Python'
-```
-
-2\) Schrijf zelf nog 3 andere, _verkeerde_ codes in je schrift.
-
-Schrijf er ook bij waarom de code verkeerd is.
-
-Voorbeeld:
-
-```python
-print('Python)
-```
-
-Deze code is fout omdat er maar 1 aanhalingsteken om het woord staat.
-
-3\) Schijf nu in je schrift de goede versie op van de 3 verkeerde codes hierboven.
-
-Einde werkblad! Ben je klaar, leg dan je schrift bovenaan op je tafel
+[Assignment:Output
+Code:ask Hoe heet jij?
+echo Leuk om je te ontmoeten, 
+Icon:>
+Lines:2
+Answer:Leuk om je te ontmoeten, **naam**] 

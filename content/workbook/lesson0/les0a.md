@@ -15,37 +15,48 @@ Aan het einde van de les weet jij:
 In deze lessen gaan we je soms vragen geven waarop geen goed of fout antwoord is. Je mag gewoon opschrijven wat je denkt.
 Bij zo'n opdracht staat altijd een vraagteken.
 
-**Vraag:** Wat denk jij dat programmeren is? 
-Er is dus geen goed of fout antwoord!
-
-[Assignment:Text Icon:? Lines:3 Answer:Programmeren betekent de computer opdrachten geven, in de taal van de computer. ] <br>
+[
+Assignment:Text Icon:?
+Question:Wat denk jij dat programmeren is? 
+Note:Er is dus geen goed of fout antwoord!
+Lines:3 
+Answer:Programmeren betekent de computer opdrachten geven, in de taal van de computer. 
+] <br>
 ..................................................<br>
 ..................................................<br>
 ..................................................<br>
 
 ### Opdracht 2: Ken jij al programmeertalen?
 
-**Vraag:** Ken jij al programmeertalen? Vul ze hier in.
-
-[Assignment:Text Icon:? Lines:3 Answer:Bijvoorbeeld Scratch, Python, HTML, Swift]
+[
+Assignment:Text
+Question:Ken jij al programmeertalen? Vul ze hier in.
+Icon:?
+Lines:3
+Answer:Bijvoorbeeld Scratch, Python, HTML, Swift
+]
 ..................................................<br>
 ..................................................<br>
 ..................................................<br>
 
 ### Opdracht 3: Wat kan je maken met programmeren?
 
-**Vraag:** Wat voor dingen kan je met programmeren maken, denk jij?
-
-[Assignment:Text Icon:? Lines:3 Answer:Apps, games, spelletjes, maar ook tekeningen, een bestelcomputer zoals bij de Mac of de Dunkin Donuts, een rekenmachine, een quiz, een overhoorprogramma en nog veel meer]
+[Assignment:Text
+Question:Wat voor dingen kan je met programmeren maken, denk jij?
+Icon:?
+Lines:3
+Answer:Apps, games, spelletjes, maar ook tekeningen, een bestelcomputer zoals bij de Mac of de Dunkin Donuts, een rekenmachine, een quiz, een overhoorprogramma en nog veel meer.
+]
 ..................................................<br>
 ..................................................<br>
 ..................................................<br>
 
 ### Opdracht 4: Wat wil je maken met programmeren?
 
-**Vraag:** Welke dingen zou je willen maken? Niet alles kan, maar misschien lukken sommige van deze dingen jou wel in de komende weken, maanden of jaren!
-
-[Assignment:Text Icon:? Lines:3]
+[Assignment:Text
+Question: Welke dingen zou je willen maken? Niet alles kan, maar misschien lukken sommige van deze dingen jou wel in de komende weken, maanden of jaren!
+Icon:?
+Lines:3]
 ..................................................<br>
 ..................................................<br>
 ..................................................<br>
