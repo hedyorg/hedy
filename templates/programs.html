@@ -7,12 +7,12 @@
   <div class="w-full mb-8 flex items-center justify-between" id="program_filter">
         <div id="program_count" class="pt-2 pb-1 px-4 border rounded no-underline bg-blue-700 text-white font-slab leading-6 font-normal tracking-wide"
             data-count="{{user_program_count}}"
-        >{{user_program_count}} {{_('amount_saved')}}</div>
+        >{{user_program_count}} {{_('programs')|lower}}</div>
     <form>
         <input type="hidden" name="page" value=""> <!-- Submitting the form resets the page -->
         <input type="hidden" name="user" value="{{ from_user }}">
         <div class="flex flex-row px-4 w-full justify-end py-2 rounded-lg gap-4">
-            <select id="levels_dropdown" name="level" class="block appearance-none w-1/8 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
+            <select id="levels_dropdown" data-cy="levels_dropdown" name="level" class="block appearance-none w-1/8 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
                 <option selected value="">&mdash; {{_('level')}} &mdash;</option>
                 {% if not request.args.get('adventure') %}
                     {% for i in sorted_level_programs %}

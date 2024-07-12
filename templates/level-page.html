@@ -4,7 +4,7 @@
 {% if not raw %}
   {% if not raw and session.preview_class %}
     <div class="bg-red-500 text-white text-sm font-bold px-4 py-3" data-cy="preview_class_banner" role="alert">
-        <div class="text-center center-text">{{_('previewing_class').format(class_name=session.preview_class["name"])}} <a class="text-white" href="/for-teachers/clear-preview-class">{{_('exit_preview_mode')}}</a></div>
+        <div class="text-center center-text">{{_('previewing_class').format(class_name=session.preview_class["name"])}} <a data-cy="exit_preview_class_banner" class="text-white" href="/for-teachers/clear-preview-class">{{_('exit_preview_mode')}}</a></div>
     </div>
   {% endif %}
 {% if customizations and customizations["teachers_adventure"] %}
@@ -18,13 +18,18 @@
       </div>
   </div>
 {% endif %}
-<div id="level_header">
-  <div class="mt-4 py-2 flex gap-2 px-4 items-center justify-between w-full max-w-screen-2xl mx-auto">
-    {% if customizations and customizations["available_levels"]%}
+<div id="level_header" class="bg-blue-200">
+  <div class="ltr:pl-8 rtl:pr-8 py-2 flex gap-2 px-4 items-center justify-between w-full max-w-screen-2xl mx-auto">
+    {% if intro_tutorial %}
+        <div class="text-2xl font-bold text-blue-500 whitespace-nowrap flex-0">
+          {{ _('level_title') }} {{ level_nr }}
+          &nbsp;
+          {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}
+        </div>
+    {% else %}
       <div class="dropdown relative">
-        <button class="blue-btn px-4 inline-flex items-center text-xl" id="dropdown_level_button"
-          onclick="$('#level_dropdown').slideToggle('medium');"
-          _="on click hedyApp.scrollToLastClickedButton('level_dropdown')">
+        <button class="white-btn px-4 rounded inline-flex items-center gap-2 text-xl" data-cy="dropdown_level_button"
+          onclick="$('#level_dropdown').slideToggle('medium');">
           <span>{{ _('level_title') }} {{ level_nr }}
             &nbsp;
             {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}</span>
@@ -32,29 +37,29 @@
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
           </svg>
         </button>
-        <div class="dropdown-menu dropdown-blue z-30 min-w-full h-48 overflow-auto" id="level_dropdown"
+        <div class="dropdown-menu dropdown-blue z-30 min-w-full" id="level_dropdown"
           style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
           _="on mutation of @style
               set arrow to #level_arrow
               if *display == 'none'
-                  then remove .rotate-180 from arrow
+                  remove .rotate-180 from arrow
               else if not arrow.classList.contains('rotate-180')
                   add .rotate-180 to arrow
               end">
             {% set dropdown_levels = customizations["available_levels"] if customizations["teachers_adventure"] else range(1, max_level + 1) %}
             {% for dropdown_level in dropdown_levels %}
-              <button id="level_button_{{ dropdown_level }}" class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500
-              {% if dropdown_level == level %}bg-white{% elif dropdown_level not in customizations['available_levels'] %}bg-gray-400 tooltip{% else %}hover:bg-blue-100 bg-blue-200c{% endif %}"
-              {% if dropdown_level == level or dropdown_level not in customizations['available_levels']%}disabled{% endif %}
+              <button id="level_button_{{ dropdown_level }}" data-cy="level_button_{{ dropdown_level }}" class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500
+              {% if dropdown_level == level %}bg-white{% elif dropdown_level not in customizations['available_levels'] and not specific_adventure %}bg-gray-400 tooltip{% else %}hover:bg-blue-100 bg-blue-200c{% endif %}"
+              {% if (dropdown_level == level or dropdown_level not in customizations['available_levels']) and not specific_adventure %}disabled{% endif %}
               style="width: 100%;"
-              _="on click
-              hedyApp.goToLevel({{dropdown_level}})
-              then localStorage.setItem('level_dropdown', 'level_button_{{ dropdown_level }}')">
+              _="on click hedyApp.goToLevel({{dropdown_level}})">
+                {% if not specific_adventure %}
                 <div class="{% if dropdown_level in customizations['available_levels'] %}hidden{% endif %} text-center opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 items-top">
                   <span class="tooltiptext text-xs font-medium absolute rounded shadow-lg !fixed p-2" style="inset: auto; margin-left: -90px; margin-top: -30px; color:black; ">
                     {{ _('tooltip_level_locked') }}
                   </span>
                 </div>
+                {% endif %}
                 <div class="flex-grow h-min min-w-80" tabindex=0>
                     {{ _('level_title') }} {{ dropdown_level }}
                 </div>
@@ -62,104 +67,8 @@
             {% endfor %}
         </div>
       </div>
-    {% else %}
-      <div class="text-2xl font-bold text-blue-500 whitespace-nowrap flex-0">
-        {{ _('level_title') }} {{ level_nr }}
-        &nbsp;
-        {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}
-      </div>
     {% endif %}
-    {% if not public_adventures_page %}
-    <div class="order-5">
-          <div class="flex justify-between" id="pagination_container">
-            <!--
-              TODO:
-              investigate why next_level is always incremented instead of assigned to the level that's actually next.
-              For instance, disable level 2, but leave the rest enabled; now next_level is 2 but should be 3.
-             -->
-            {% if prev_level and (not customizations or prev_level in customizations['available_levels']) %}
-              <div class="flex-1">
-                <a id="pagination_container"
-                  class="green-btn ltr:ml-1 rtl:mr-1 hidden"
-                  href="#"
-                  _="on load or click from .tab
-                      if the *display of .previous-tab is 'none'
-                        toggle .hidden on me
-                      else
-                        add .hidden to me
-                      end
-                      on click hedyApp.goToLevel({{prev_level}})">{{ _('previous_adventure') }}</a>
-              </div>
-            {% endif %}
-
-            <div class="dropdown relative">
-              <button class="blue-btn px-4 rounded inline-flex items-center gap-2 text-l" id="dropdown_adventure_button"
-                onclick="$('#adventure_dropdown').slideToggle('medium');"
-                _="on load put hedyApp.getCurrentAdv() into #adventure_text
-                on click hedyApp.scrollToLastClickedButton('adventure_dropdown')">
-                <div id="adventure_text"></div>
-                <svg id="adventure_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-              </button>
-              <div class="dropdown-menu dropdown-blue z-30 min-w-full h-48 overflow-auto" id="adventure_dropdown"
-                style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
-                _="on mutation of @style
-                    set arrow to #adventure_arrow
-                    if *display == 'none'
-                        remove .rotate-180 from arrow
-                    else if not arrow.classList.contains('rotate-180')
-                        add .rotate-180 to arrow
-                    end">
-                  {% for adventure in adventures %}
-                    <button id="adventure_button_{{ adventure.name }}" 
-                    class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white"
-                    data-tab="{{adventure.short_name}}"
-                    tabindex="{{ loop.index }}"
-                    style="width: 100%;"
-                    onclick="$('#adventure_dropdown').slideUp('medium');"
-                    _="on click 
-                    put hedyApp.getCurrentAdv() into #adventure_text
-                    then localStorage.setItem('adventure_dropdown', 'adventure_button_{{ adventure.name }}')">
-                        {{ adventure.name }}
-                    </button>
-                  {% endfor %}
-              </div>
-            </div>
-
-            <button class="blue-btn next-tab ltr:ml-1 rtl:mr-1"
-              href="#"
-              _="on click
-                set :next to hedyApp.getNext()
-                if :next
-                  set *display to 'block'
-                else
-                  set *display to 'none'
-                end
-                call :next.click() 
-                then set adv to hedyApp.getCurrentAdv()
-                put adv into #adventure_text
-                then localStorage.setItem('adventure_dropdown', 'adventure_button_' + adv)">
-                {{_('next_adventure')}}&nbsp;
-                <span class="fa fa-arrow-{% if g.dir == "ltr" %}right{% else %}left{% endif %}"></span>
-                </button>
-            {% if not quiz and not parsons and next_level and (not customizations or next_level in customizations['available_levels']) %}
-              <a id="next_level_button"
-                class="green-btn ltr:ml-1 rtl:mr-1 hidden"
-                href="#"
-                _="on load or click from .tab
-                    if the *display of .next-tab is 'none'
-                      toggle .hidden on me
-                    else
-                      add .hidden to me
-                    end
-                    on click hedyApp.goToLevel({{next_level}})">{{ _('next_adventure') }}</a>
-            {% endif %}
-          </div>
-    </div>
-    {% endif %}
-    <!-- #TODO -->
-    <!-- <div class="flex-1">
+    <div class="flex-1">
       <div id="program_name_container" class="overflow-hidden flex-1 flex border border-blue-400 ltr:divide-x rtl:divide-x-reverse divide-blue-400 rounded md:mx-16 items-center">
         <input id="program_name" type="text" class="outline-0 text-2xl font-light text-blue-500 flex-1 bg-transparent focus:bg-blue-100 border-0 px-4 flex-1 h-full" value="{{initial_adventure.save_name}}">
         <button id="share_program_button" class="h-full hover:bg-blue-100" title="{{_('share_your_program')}}">
@@ -214,42 +123,11 @@
     {% if get_syntax_language(g.lang) != "en" and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) %}
      {{ render_partial('htmx-language-switch-button.html', commands=commands) }}
     {% endif %}
-    -->
   </div> <!-- container -->
 </div><!-- blue bar -->
 {% endif %}
 
-<div id="level_header">
-  <div class="mt-4 py-2 flex gap-2 px-4 items-center justify-between w-full max-w-screen-2xl mx-auto">
-    <div id="program_name_container" class="overflow-hidden flex-1 flex border border-blue-800 ltr:divide-x rtl:divide-x-reverse divide-blue-400 rounded">
-      <input id="program_name" type="text" class="outline-0 text-2xl font-light text-blue-800 flex-1 bg-transparent focus:bg-blue-100 border-0 px-4" value="Introduction">
-    </div>
-    <div class="order-5">
-      <button class="blue-btn next-tab ltr:ml-1 rtl:mr-1">
-        Cheatsheet
-        <span class="fa fa-list"></span>
-      </button>
-      <button class="blue-btn next-tab ltr:ml-1 rtl:mr-1">
-        Language
-        <span class="fa fa-language"></span>
-      </button>
-      <button class="blue-btn next-tab ltr:ml-1 rtl:mr-1">
-        Share
-        <span class="fa fa-share-nodes"></span>
-      </button>
-      <button class="blue-btn next-tab ltr:ml-1 rtl:mr-1">
-        Submit
-        <span class="fa fa-paper-plane"></span>
-      </button>
-    </div>
-  </div>
-</div>
-
 <div class="w-full max-w-screen-2xl mx-auto" id="code_content_container">
-  <div class="mt-5 ml-4 text-base font-medium dark:text-white"><b>75%</b> to complete</div>
-<div class="max-w-screen-2xl mr-4 items-center justify-between mx-auto ml-4 rounded-full h-2.5 bg-gray-300">
-  <div class="rounded-full h-2.5 bg-blue-800" style="width: 75%"></div>
-</div>
 {% block levelbody %}{% endblock %}
 </div>
 

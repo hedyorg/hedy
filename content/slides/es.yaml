@@ -340,7 +340,7 @@ levels:
                 {print} '¡Mira estas maravillosas conchas!'
                 colores {is} 'naranja, plata, silver, blanco, marrón'
                 {print} 'Me encanta el colores {at} {random}!'
-                opcion {is} {ask} '¿Cuál quieres?'
+                opcion {is} {ask} ¿Cuál quieres?
             debug: 'True'
         11:
             header: ¡Preparados, Listos, Ya!
@@ -410,7 +410,7 @@ levels:
                 objeto_a_declarar {is} {ask} 'Qué quieres declarar'
                 {else} Muy bien
                 {print} Gracias. Vaya a la puerta A22.'
-            debug: debug
+            debug: Verdadero
         8:
             header: ¡Vamos!
             text: ¡Disfruta las aventuras en el nivel 5!
@@ -586,8 +586,8 @@ levels:
                 Quizás hayas pensado en intentar poner un comando si dentro de un comando repetir, o dentro de otro comando si.
                 Por ahora, esto todavía no es posible. En niveles superiores, esto se permitirá, pero por ahora centrémosnos primero en practicar los comandos `{if}` `{else}` y `{repeat}` con la sangría adecuada.
         9:
-            header: Debugging
-            text: Let's debug this code!
+            header: Depuración
+            text: ¡Depuremos este código!
             code: |-
                 {print} 'Máquina de billetes para el autobus HedyWheels'
                 zona_1 = Ayuntamiento, Biblioteca, Campus, Mercado
@@ -683,8 +683,8 @@ levels:
                     {else}
                         {print} 'la pizza es mejor'
         8:
-            header: Debugging
-            text: Let's debug this code!
+            header: Depuración
+            text: ¡Depuremos este código!
             code: |-
                 {print} '¡Bienvenido a HedyJumps, ¡tu aventura de salto en paracaídas!'
                 gente = {ask} '¡Con cuánta gente vas a saltar hoy?
@@ -723,20 +723,20 @@ levels:
                 {for} dia {in} dias
                     {print} nombres {at} {random} ' friega los platos el ' dia
         4:
-            header: Debugging
-            text: Let's debug this code
+            header: Depuración
+            text: Depuremos este código
             code: |-
                 {print} "¡Damas y caballeros!"
                 {print} '¡Por una noche y una sola noche en el circo Hedy!'
                 actos = disparar de un cañón, caminar por la cuerda floja, meterse en una maleta,
                 gente = Iris la Increíble Achmed el Increíble Francis el Fantástico
                     {for} personas {in} actos
-                chosen_person {es} personas {random}
+                chosen_person {is} personas {random}
                     chosen_person ' will ' act
                 {add} chosen_person {from} personas
                 {print} '¡Ven a ver nuestro espectáculo esta noche!'
                 {print} 'Las entradas sólo están disponibles en el mostrador
-            debug: true {print} '¡Señoras y señores!' {print} '¡Por una noche y sólo una noche en el circo Hedy!' actos = disparar desde un cañón, funambulismo, meterse en una maleta, gente = Iris la Increíble Achmed el Maravilloso Francis el Fantástico {for} gente {in} actos persona_elegida {is} gente {random} persona_elegida ' hará ' act {add} persona_elegida {from} gente {print} '¡Ven a ver nuestro espectáculo esta noche!' {print} 'Las entradas sólo están disponibles en la taquilla
+            debug: Verdadero
         5:
             header: ¡Hora de programar!
             text: ¡Disfruta las aventuras en el nivel 10!
@@ -766,8 +766,8 @@ levels:
                 {for} i {in} {range} 1 {to} 10
                     {print} i * numero
         4:
-            header: Debugging
-            text: Let's debug this code!
+            header: Depuración
+            text: ¡Depuremos este código!
             code: |-
                 factor {is} {ask} '¿Qué tabla de multiplicar necesitas?'
                 {repeat} {for} números {in} {range} 1 {to} 10 {times}
@@ -824,8 +824,8 @@ levels:
             header: Funciones
             text: Como has podido ver en el ejemplo una función es un bloque de código que puede ser llamado en cualquier momento. Se usa `{define}` para definir la función y `{call}` para usarla.
         7:
-            header: Debugging
-            text: Let's debug this code!
+            header: Depuración
+            text: ¡Depuremos este código!
             code: |-
                 {call} nuevo_miembro
                 {print} '¡Hola nuevo miembro!'
@@ -926,8 +926,8 @@ levels:
                 {call} cancion {with} 'mar'
                 {call} cancion {with} 'océano'
         8:
-            header: Debugging
-            text: Let's debug this code!
+            header: Depuración
+            text: ¡Depuremos este código!
             code: |-
                 {define} felicidad {with} nombre
                     {print} '🥳'
@@ -941,6 +941,7 @@ levels:
                 {play} D
                 {play} C
                 {print} 'Espero que te sientas mejor, ' nombre
+
                 nombre = {ask} '¿Cómo te llamas '?'
                 estado = {ask} 'Estás contento o triste?'
                 {if} estado = contento
@@ -1009,7 +1010,7 @@ levels:
                 new_price = {call} calculate_new_price {with} old_price, descuento
                 {print} 'El nuevo precio es ' new_price ' dólares'
         6:
-            header: Debugging
+            header: Depuración
             text: ¡Depuremos este código!
             code: |-
                 item = 'no comprado'
@@ -1049,8 +1050,8 @@ levels:
                     respuesta = {ask} '¿Cuánto es 5 veces 5?'
                 {print} 'Se ha dado una respuesta correcta'
         3:
-            header: Debugging
-            text: Let's debug this code!
+            header: Depuración
+            text: ¡Depuremos este código!
             code: |-
                 números = 1, 2
 
@@ -1058,22 +1059,22 @@ levels:
                      {add} x {to} números
                      yo = + 1
 
-                número_aleatorio = números {aleatorio}
+                número_aleatorio = números {random}
                 conjeturas = 10
 
                 {while} adivina = 0
                      respuesta = 'Adivina mi número:'
                      {if} respuesta >= número_aleatorio
-                         {imprimir} 'inferior'
+                         {print} 'inferior'
                          conjeturas = conjeturas -1
                      {if} respuesta > número_aleatorio
                          {print} '¡más alto!'
                          conjeturas = conjeturas
                      {else} respuesta = número_aleatorio
-                         {imprimir} 'correcto'
+                         {print} 'correcto'
                          conjeturas = 10
 
-            debug: 'True'
+            debug: 'Verdadero'
         4:
             header: ¡Vamos a probarlo!
             text: ¡Disfruta las aventuras en el nivel 15!
@@ -1094,38 +1095,38 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                     {print} 'El número de la suerte de 'amigos[i] ' es ' numeros_suerte[i]
         3:
-            header: Debugging
-            text: Let's debug this code!
+            header: Depuración
+            text: ¡Depuremos este código!
             code: |-
-                {print} 'Friendship test'
-                {subjects} = ['song', 'movie', 'food', 'drink']
-                answers_player_1 = []
-                answers_player_2 = []
-                score = 100
+                {print} 'Prueba de amistad'
+                {subjects} = ['canción', 'película', 'comida', 'bebida']
+                respuestas_jugador_1 = []
+                respuestas_jugador_2 = []
+                puntuación = 100
 
                 {for} i {in} {range} 1 {to} 4
-                    answer = {ask} 'what is your favorite ' subjects[i]
-                {add} answer {to} answers_player_1
+                    respuesta = {ask} 'cúal es tu ' subjects[i] ' favorito'
+                {add} respuesta {to} respuestas_jugador_1
 
-                {print} 'Player 2, your turn!'
+                {print} 'Jugador 2, ¡tu turno!'
                 {for} i {in} {range} 0 {to} 4
-                    answer_player_2 = {ask} 'what is player 1s favorite ' subjects
-                    {add} answer_player_2 {in} answers_player_2
-                    {if} answers_player_2[2] == answers_player_1[1]
-                        {print} 'Correct!'
+                    respuesta = {ask} 'cuáles son los ' subjects ' del jugador 1'
+                    {add} respuesta {in} respuestas_jugador_2
+                    {if} respuestas_jugador_2[2] == respuestas_jugador_1[1]
+                        {print} '¡Correcto!'
                     {else}
-                        {print} 'Wrong!'
-                    score = score - 25
+                        {print} '¡Fallo!'
+                    puntuación = puntuación - 25
 
-                {print} 'Player 2, you've scored ' score '%'
+                {print} 'Jugador 2, has conseguido ' puntuación '%'
 
-                {if} score = 100
-                    {print} 'You are an amazing friend'
-                {if} score < 100 {or} score >= 50
-                    {print} 'You could do better'
-                {else} score < 50
-                    {print} 'Do you even know this person?!'
-            debug: 'True'
+                {if} puntuación = 100
+                    {print} 'Eres un amigo increible'
+                {if} puntuación < 100 {or} puntuación >= 50
+                    {print} 'Puedes hacerlo mejor'
+                {else} puntuación < 50
+                    {print} '¡¿Acaso conoces a esta persona?!'
+            debug: 'Verdadero'
         4:
             header: ¡Vamos a probarlo!
             text: ¡Disfruta las aventuras en el nivel 16!
@@ -1158,27 +1159,27 @@ levels:
                 {else}:
                     {print} 'Más suerte la próxima vez..'
         4:
-            header: Debugging
-            text: Let's debug this code!
+            header: Depuración
+            text: ¡Depuremos este código!
             code: |-
-                {define} ask_direction
-                    direction = {ask} 'Where do you want to go?'
-                    {if} direction = 'backwards'
+                {define} preguntar_direccion
+                    direccion = {ask} '¿A dónde quieres ir?'
+                    {if} direccion = 'hacia atrás'
                         {turn} 180
-                    {else} direction == 'right'
+                    {else} direccion == 'derecha'
                         {turn} 90
-                    {else} direction == 'left'
+                    {else} direccion == 'izquierda'
                         {turn} 270
                         {forward} 100
 
-                continue = 'yes'
+                continuar = 'si'
 
-                {while} continue == 'yes'
-                    {print} ask_direction
+                {while} continuar == 'si'
+                    {print} preguntar_direccion
                     {sleep}
-                    continue = 'do you want to draw some more?'
+                    continuar = '¿quieres dibujar algo más?'
                     {sleep}
-            debug: 'True'
+            debug: 'Verdadero'
         5:
             header: ¡Vamos a probarlo!
             text: ¡Disfruta las aventuras en el nivel 17!

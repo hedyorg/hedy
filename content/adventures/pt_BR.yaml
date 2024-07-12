@@ -704,22 +704,16 @@ adventures:
                     Did you get it? Awesome! Would you like to add even more to your calculator? **This adventure continues in the next tab!**
                 example_code: |
                     ```
-                    {define} calculate_mean_grade
+                    {define} calcular_média
                         total = 0
                         {for} i {in} {range} 1 {to} 4
-                            grade = {ask} _
+                            nota = {ask} _
                             total = total + _
-                            return _ / 4
+                            {return} _ / 4
 
-                    mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
+                    média = {call} _
+                    {print} 'A sua média foi ' média
                     ```
-
-                            total = total + _
-                            return _ / 4
-
-                    mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
             15:
                 story_text: |
                     You can add the `{while}` loop to the calculator game you've learned to make in a previous level.
@@ -1946,7 +1940,7 @@ adventures:
                         lado_escolhido = lados {at} {random}
                         membro_escolhido = membros _
                         cor_escolhida = cores _
-                        {print} lado_escolhido < ' ' membro_escolhido ' no ' cor_escolhida
+                        {print} membro_escolhido ' ' lado_escolhido ' no ' cor_escolhida
 
                     {print} 'Vamos jogar uma partida de Twister!'
                     {for} i {in} {range} 1 {to} _
@@ -1993,16 +1987,16 @@ adventures:
                     You should finish the line of code by calling the function that calculates the new price.
                 example_code: |
                     ```
-                    {define} calculate_new_price {with} amount, percentage
-                        percentage = percentage / 100
-                        discount_amount = amount * percentage
-                        return amount - discount_amount
+                    {define} calcular_preço_novo {with} valor, porcentagem
+                        porcentagem = porcentagem / 100
+                        valor_descontado = valor * porcentagem
+                        {return} valor - valor_descontado
 
-                    old_price = {ask} 'How much is on the price tag?'
-                    discount = {ask} 'What percentage is the discount?'
+                    preço_antigo = {ask} 'Qual é o valor na etiqueta de preço?'
+                    desconto = {ask} 'Qual é a porcentagem de desconto?'
 
-                    new_price = _ calculate_new_price {with} old_price, _
-                    {print} 'The new price is ' new_price ' dollar'
+                    preço_novo = _ calcular_preço_novo {with} preço_antigo, _
+                    {print} 'O preço novo é ' preço_novo ' reais'
                     ```
             18:
                 story_text: |
@@ -2290,7 +2284,7 @@ adventures:
                     _ Há 3 portas na sua frente...
                     _ _ _ Qual delas você escolhe?
                     _ Você escolheu a porta... escolha
-                    monstros _ um zumbi, um vampiro, NADA DE QUE VOCÊ CONSIGA ESCAPAR
+                    monstros _ um zumbi, um vampiro, ALGO IMPOSSÍVEL DE SE ESCAPAR
                     _ Você vê...
                     {sleep}
                     _ _ _ _
@@ -2301,14 +2295,15 @@ adventures:
                     Can you make your Haunted House level 4 proof?
                 example_code: |
                     ```
-                    {print} _Escape from the haunted house!_
-                    {print} _There are 3 doors in front of you..._
-                    choice {is} {ask} _Which door do you choose?_
-                    {print} _You picked door ..._ choice
-                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    {print} _You see..._
+                    _ Adicione aspas a este código _
+                    {print} Escape da casa mal-assombrada!
+                    {print} Há 3 portas na sua frente...
+                    escolha {is} {ask} Qual delas você escolhe?
+                    {print} Você escolheu a porta... escolha
+                    monstros {is} um zumbi, um vampiro, ALGO IMPOSSÍVEL DE SE ESCAPAR
+                    {print} Você vê...
                     {sleep}
-                    {print} monsters {at} {random}
+                    {print} monstros {at} {random}
                      ```
             5:
                 story_text: |
@@ -2317,51 +2312,63 @@ adventures:
                     In this level you can only win the game by picking the same door Hedy picked randomly.
                 example_code: |
                     ```
-                    {print} 'Escape from the haunted house!'
-                    {print} 'There are 3 doors in front of you...'
-                    doors {is} 1, 2, 3
-                    monsters {is} werewolf, mummy, vampire, zombie
-                    chosen_door {is} {ask} 'Which door do you choose?'
-                    {print} 'You chose door...' chosen_door
+                    {print} 'Escape da casa mal-assombrada!'
+                    {print} 'Há 3 portas na sua frente...'
+                    portas {is} 1, 2, 3
+                    monstros {is} lobisomem, múmia, vampiro, zumbi
+                    porta_escolhida {is} {ask} 'Qual delas você escolhe?'
+                    {print} 'Você escolhe a porta... ' porta_escolhida
                     {sleep}
-                    correct_door {is} doors {at} {random}
-                    _ _ _ _ {print} 'Great! Youve escaped!'
-                    {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
+                    porta_correta {is} portas {at} {random}
+                    _ _ _ _ {print} 'Ótimo! Você escapou!'
+                    {else} {print} 'Ah não! Você está sendo devorado(a) por um(a)... ' monstros {at} {random}
                     ```
             9:
                 story_text: |
                     In this level you can use nesting, which allows you to make the haunted house even more interactive!
                 example_code: |
                     ```
-                    {print} 'Escape from the Haunted House!'
-                    player = alive
-                    doors = 1, 2, 3
-                    monsters = zombie, vampire, giant spider
+                    {print} 'Escape da Casa Mal-Assombrada!!'
+                    jogador = vivo
+                    portas = 1, 2, 3
+                    monstros = zumbi, vampiro, aranha gigante
                     {repeat} 3 {times}
-                        {if} player {is} alive
-                            correct_door {is} doors {at} {random}
-                            {print} 'There are 3 doors in front of you...'
-                            chosen_door = {ask} 'Which door do you choose?'
-                            {if} chosen_door {is} correct_door
-                                {print} 'No monsters here!'
+                        {if} jogador {is} vivo
+                            porta_correta {is} portas {at} {random}
+                            {print} 'Há 3 portas na sua frente...'
+                            porta_escolhida = {ask} 'Qual delas você escolhe?'
+                            {if} porta_escolhida {is} porta_correta
+                                {print} 'Sem monstros aqui!'
                             {else}
-                                {print} 'You are eaten by a ' monsters {at} {random}
-                                player = dead
+                                {print} 'Você foi devorado(a) por um(a) ' monstros {at} {random}
+                                jogador = morto
                         {else}
-                            {print} 'GAME OVER'
-                    {if} player {is} alive
-                        {print} 'Great! You survived!'
+                            {print} 'FIM DE JOGO'
+                    {if} jogador {is} morto
+                        {print} 'Ótimo! Você sobreviveu!'
                     ```
             11:
                 story_text: |
-                    In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
+                    Neste nível, mudamos o comando `{for}` para podermos dizer ao(à) jogador(a) onde está. 
+
+                    ### Exercício 1
+                    Complete o programa de modo que o(a) jogador(a) saiba onde está.
+
+                    ### Exercício 2
+                    Transforme o programa em uma aventura seguindo estes passos:
+
+                    1. Faça uma lista de escolhas (ex.: lutar ou fugir)
+                    2. Certifique-se de que o(a) jogador(a) pode escolher uma opção usando `{ask}`
+                    3. Foi a escolha certa? Então o jogo pode prosseguir para o próximo monstro. Foi uma escolha ruim? Informe isso com um `{print}`. 
+
+                    **Extra** Se você fizer uma escolha ruim, o jogo ainda mostra outro monstro! Como pode consertar isso?
                 example_code: |
                     ```
-                    {print} 'Escape from the Haunted House!'
-                    monsters = zombie, vampire, giant spider
+                    {print} 'Escape da Casa Mal-Assombrada!'
+                    monstros = zumbi, vampiro, aranha gigante
                     _
-                        {print} 'Room ' i
-                        monster = monsters {at} {random}
+                        {print} 'Sala ' i
+                        monstro = monstros {at} {random}
                     ```
             14:
                 story_text: |
@@ -2559,13 +2566,13 @@ adventures:
         levels:
             2:
                 story_text: |
-                    ## Variables
-                    You can name a word with `{is}`. This is called a **variable**. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:
+                    ## Variáveis
+                    Você pode dar um valor a uma palavra usando `{is}`. Isso se chama **variável**. Neste exemplo, fizemos uma variável chamada de nome e uma variável chamada de idade. Você pode usar a palavra nome em qualquer parte do seu código e ela será substituída por Hedy, assim:
                 example_code: |
                     ```
-                    name {is} Hedy
-                    age {is} 15
-                    {print} name is age years old
+                    nome {is} Hedy
+                    idade {is} 15
+                    {print} nome tem idade anos
                     ```
                 story_text_2: |
                     ### Exercise
@@ -3280,12 +3287,12 @@ adventures:
                     {print} Bem-vindo(a) à Hedy!
                     ```
                 story_text_2: |
-                    ### Exercise
-                    In Hedy you will find exercises in every adventure. An exercise allows you to practise the new commands and concepts, and lets you give your own twist to the example codes.
-                    In this exercise you will see a pink blank space. You have to fill something in the place of the blank space before the code can be run.
+                    ### Exercício
+                    Em Hedy você encontrará exercícios em todas as aventuras. Um exercício permite que você pratique os novos comandos e conceitos além de permitir que você dê seu toque pessoal aos códigos de exemplo.
+                    Neste exercício você verá um espaço em branco de cor rosa. Você deve preencher algo no lugar do espaço em branco antes que o código possa ser executado.
 
-                    Fill in the `{print}` command in the blank space and then add five more lines of code. Each line has to start with a `{print}` command.
-                    Have fun!
+                    Coloque o comando `{print}` no espaço em branco e então adicione mais cinco linhas de código. Cada linha precisa começar com o comando `{print}`.
+                    Divirta-se!
                 example_code_2: |
                     ```
                     _ Olá!
@@ -3545,7 +3552,7 @@ adventures:
                     _ {print} 'Do you know the muffin man, who lives on Drury Lane?'
                     ```
     restaurant:
-        name: Restaurant
+        name: Restaurante
         default_save_name: Restaurante
         description: Crie seu próprio restaurante virtual
         levels:
@@ -3807,9 +3814,9 @@ adventures:
                     {echo} então sua escolha foi:
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Instead of using words, you could also use emojis: ✊✋✌
-                    Can you create a code using emojis?
+                    ### Exercício
+                    Em vez de usar palavras, você também pode usar emojis: ✊✋✌
+                    Você consegue criar um código usando emojis?
                 example_code_2: |
                     ```
                     {print} o que você escolhe?
@@ -4765,52 +4772,52 @@ adventures:
                     {call} square
                     ```
     turtle_draw_it:
-        name: Draw it!
-        default_save_name: Draw it
-        description: Draw this picture with the turtle
+        name: Desenhe!
+        default_save_name: Desenhe
+        description: Desenhe essa imagem com a tartaruga
         levels:
             1:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Exercício
+                    Recrie os desenhos com a tartaruga!
 
                     <div class="w-full flex flex-row gap-2">
-                        Rectangle <img src="https://github.com/hedyorg/hedy/assets/80678586/77aa99d5-cd8f-4969-b49d-e8fed34ac550" width="100">
-                        Square <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
-                        Stairs<img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
+                        Retângulo <img src="https://github.com/hedyorg/hedy/assets/80678586/77aa99d5-cd8f-4969-b49d-e8fed34ac550" width="100">
+                        Quadrado <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
+                        Escada<img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
                     </div>
             2:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Exercício
+                    Recrie os desenhos com a tartaruga!
 
                     <div class="w-full flex flex-row gap-2">
-                    Triangle <img src="https://github.com/hedyorg/hedy/assets/80678586/e974b62c-f0cf-445a-8bd4-5ad9f1f71204" width="100">
-                    Arrow <img src="https://github.com/hedyorg/hedy/assets/80678586/803d8f42-9708-448c-82ea-d035697f08c9" width="150">
-                    Boat <img src="https://github.com/hedyorg/hedy/assets/80678586/94ef7189-442a-4c8f-827d-12a69203c2e9" width="150">
+                    Triângulo <img src="https://github.com/hedyorg/hedy/assets/80678586/e974b62c-f0cf-445a-8bd4-5ad9f1f71204" width="100">
+                    Seta <img src="https://github.com/hedyorg/hedy/assets/80678586/803d8f42-9708-448c-82ea-d035697f08c9" width="150">
+                    Barco <img src="https://github.com/hedyorg/hedy/assets/80678586/94ef7189-442a-4c8f-827d-12a69203c2e9" width="150">
                     </div>
             3:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Exercício
+                    Recrie os desenhos com a tartaruga!
 
                     <div class="w-full flex flex-row gap-2">
-                    Triangle <img src="https://github.com/hedyorg/hedy/assets/80678586/71e04d98-9545-4614-9caf-a5f179b756a1" width="150">
-                    Star <img src="https://github.com/hedyorg/hedy/assets/80678586/421c4d28-cb99-424b-be26-dcae30d65c80" width="150">
-                    Arrow <img src="https://github.com/hedyorg/hedy/assets/80678586/3cbebcae-5258-47c5-a6ac-e7ee36c1d1ce" width="200">
+                    Triângulo <img src="https://github.com/hedyorg/hedy/assets/80678586/71e04d98-9545-4614-9caf-a5f179b756a1" width="150">
+                    Estrela <img src="https://github.com/hedyorg/hedy/assets/80678586/421c4d28-cb99-424b-be26-dcae30d65c80" width="150">
+                    Seta <img src="https://github.com/hedyorg/hedy/assets/80678586/3cbebcae-5258-47c5-a6ac-e7ee36c1d1ce" width="200">
                     </div>
             4:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Exercício
+                    Recrie os desenhos com a tartaruga!
 
                     <div class="w-full flex flex-row gap-2">
-                    Colored Star <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
-                    Rainbow <img src="https://github.com/hedyorg/hedy/assets/80678586/2728b10f-9f7f-45ea-964e-5b284033e4f0" width="500">
-                    Nested squares <img src="https://github.com/hedyorg/hedy/assets/80678586/f013f9fa-bc68-4c60-b778-2c457799d6f7" width="200">
+                    Estrela Colorida <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
+                    Arco-íris <img src="https://github.com/hedyorg/hedy/assets/80678586/2728b10f-9f7f-45ea-964e-5b284033e4f0" width="500">
+                    Quadrados Aninhados <img src="https://github.com/hedyorg/hedy/assets/80678586/f013f9fa-bc68-4c60-b778-2c457799d6f7" width="200">
                     </div>
                 example_code: |
-                    **Extra** Up for a real challenge? Make sure that the colors of these figures are selected randomly, so that each time you run your programs they'll look differently!
+                    **Extra** Está pronto para um verdadeiro desafio? Certifique-se de que as cores das imagens sejam selecionadas de forma aleatória, para que cada vez que você executar os programas, a aparência seja diferente!
 
                     ```
                     colors {is} red, orange, yellow, green, blue, purple, pink, brown, gray, black

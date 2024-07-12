@@ -170,7 +170,7 @@ class AuthHelper(unittest.TestCase):
 
         Need to log in again to refresh the session.
         """
-        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
+        self.post_data('admin/mark-as-teacher/' + self.username, {'is_teacher': True})
         return self.login_user(self.username)
 
     def make_current_user_super_teacher(self):
@@ -178,7 +178,7 @@ class AuthHelper(unittest.TestCase):
 
         Need to log in again to refresh the session.
         """
-        self.post_data('admin/mark-super-teacher', {'username': self.username})
+        self.post_data('admin/mark-super-teacher/' + self.username, {})
         return self.login_user(self.username)
 
     def given_user_is_logged_in(self):
@@ -411,7 +411,7 @@ class TestSessionVariables(AuthHelper):
         self.assertIn('session', test_body)
         self.assertIn('session_id', test_body['session'])
         self.assertIn('test_session', test_body['session'])
-        self.assertEquals(test_body['session']['session_id'], session['id'])
+        self.assertEqual(test_body['session']['session_id'], session['id'])
 
         # WHEN getting session variables from the main environment
         body = self.get_data('/session_main')
@@ -1393,9 +1393,10 @@ class TestClasses(AuthHelper):
         # THEN the class should contain a student with valid fields
         self.assertEqual(len(Class_data['students']), 1)
         class_student = Class_data['students'][0]
-        self.assertEqual(class_student['highest_level'], "-")
+        self.assertEqual(class_student['adventures_tried'], 0)
         self.assertEqual(class_student['programs'], 0)
-        self.assertIsInstance(class_student['last_login'], str)
+        self.assertEqual(class_student['number_of_errors'], 0)
+        self.assertEqual(class_student['successful_runs'], 0)
         self.assertEqual(class_student['username'], student['username'])
 
         # WHEN retrieving the student's programs

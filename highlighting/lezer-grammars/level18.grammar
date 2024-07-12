@@ -39,7 +39,7 @@ Turtle[@isGroup=turtle] {
     Color { color+ (Expression )  }
 }   
 
-Add { add+ (Expression ) toList+ Text }
+Add { add+ (Expression ) to_list+ Text }
 Remove { remove+ (Expression ) from+ Text }
 Clear { clear+ }
 ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
@@ -122,7 +122,7 @@ Expression {
     def[@name="def"],
     returns[@name="return"],
     fors[@name="for"],
-    toList[@name="toList"],
+    to_list[@name="to_list"],
     elif[@name="elif"],
     low_true[@name="true"],
     low_false[@name="false"],

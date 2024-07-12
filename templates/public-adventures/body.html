@@ -19,7 +19,7 @@
         </div>
         <div class="flex w-full sm:basis-1/2 gap-2">
             <div id="levels" class="flex-1">
-                <div class="dropdown relative" data-type="single" id="level_select" data-value="{{selectedLevel}}">
+                <div class="dropdown relative" data-type="single" id="level_select" data-cy="level_select" data-value="{{selectedLevel}}">
                   <button class="toggle-button font-semibold rounded inline-flex justify-between 
                      appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
                     onclick="$('#level_dropdown').slideToggle('medium');">
@@ -115,36 +115,39 @@
                 </div>
             </div>
 
-            <div id="report" class="flex-1">
-              <div class="dropdown relative" data-type="single" id="report-select" data-value="{{selectedReport}}">
-                <button class="toggle-button font-semibold rounded inline-flex justify-between 
-                   appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
-                  onclick="$('#report_dropdown').slideToggle('medium');">
-                  <span class="label" data-value="reported">{{selectedReported}}reported?</span>
-                  <svg id="keyword_arrow_report" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                  </svg>
-                </button>
-                <div class="dropdown-menu dropdown-blue z-30 mt-2 w-full" id="report_dropdown"
-                  style="display: none; width: 100%;"
-                  _="on mutation of @style
-                      set arrow to #keyword_arrow_report
-                      if *display == 'none'
-                          remove .rotate-180 from arrow
-                      else if not arrow.classList.contains('rotate-180')
-                          add .rotate-180 to arrow
-                      end">
-                        <div class="option {% if selected %}selected{% endif %}"
+            <!-- false should be removed once reported is implemented in public_adventures.py after PR #5431 -->
+            {% if false and is_super_teacher %}
+              <div id="report" class="flex-1">
+                <div class="dropdown relative" data-type="single" id="report-select" data-value="{{selectedReport}}">
+                  <button class="toggle-button font-semibold rounded inline-flex justify-between 
+                    appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
+                    onclick="$('#report_dropdown').slideToggle('medium');">
+                    <span class="label" data-value="reported">{{selectedReported}}reported?</span>
+                    <svg id="keyword_arrow_report" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                  </button>
+                  <div class="dropdown-menu dropdown-blue z-30 mt-2 w-full" id="report_dropdown"
+                    style="display: none; width: 100%;"
+                    _="on mutation of @style
+                        set arrow to #keyword_arrow_report
+                        if *display == 'none'
+                            remove .rotate-180 from arrow
+                        else if not arrow.classList.contains('rotate-180')
+                            add .rotate-180 to arrow
+                        end">
+                          <div class="option {% if selected %}selected{% endif %}"
+                            {% if selected %}
+                            {% else %}
+                            {% endif %}>reported</div>
+                          <div class="option {% if selected %}selected{% endif %}"
                           {% if selected %}
                           {% else %}
-                          {% endif %}>reported</div>
-                        <div class="option {% if selected %}selected{% endif %}"
-                        {% if selected %}
-                        {% else %}
-                        {% endif %}>not reported</div>
-                </div>
+                          {% endif %}>not reported</div>
+                    </div>
+                  </div>
               </div>
-          </div>
+            {% endif %}
 
         </div>
     </div>

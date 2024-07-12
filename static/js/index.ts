@@ -19,7 +19,6 @@ export * from './statistics';
 export * from './logs';
 export * from './tutorials/tutorial';
 export * from './teachers';
-export * from './browser-helpers/unsaved-changes';
 export * from './initialize';
 export * from './debugging';
 export { getNext, getCurrentAdv } from './tabs';

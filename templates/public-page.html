@@ -1,6 +1,6 @@
 {% extends "auth.html" %}
 {% block regular_content %}
-    <div id="general_info" class="flex flex-col md:flex-row gap-4 md:gap-8 justify-between md:items-center mt-8 mx-2 md:h-64">
+    <div data-cy="general_info" class="flex flex-col md:flex-row gap-4 md:gap-8 justify-between md:items-center mt-8 mx-2 md:h-64">
         <div class="h-full flex items-center justify-center">
             <div class="container flex flex-col items-center">
                 {% if user_info.image %}
@@ -52,7 +52,7 @@
                 {% if achievements %}
                     <div class="mt-auto">
                         <div class="font-semibold bg-blue-600 pb-2 pt-2 text-white w-full flex flex-row gap-2 px-2 justify-between rounded-b-lg items-center">
-                            <div class="profile-nametag__stats">{{ user_program_count }} {{_('amount_saved')}}</div>
+                            <div class="profile-nametag__stats">{{ user_program_count }} {{_('programs')|lower}}</div>
                             <div class="h-8 w-px border-r border-white relative"></div>
                             {% if user_achievements.submitted_programs %}
                                 <div class="profile-nametag__stats">{{ user_achievements.submitted_programs }} {{_('amount_submitted')}}</div>

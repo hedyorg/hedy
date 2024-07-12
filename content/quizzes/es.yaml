@@ -187,7 +187,7 @@ levels:
             question_text: ¿Qué sentencia es cierta?
             mp_choice_options:
             -   option: Puedes usar el comando `{print}`para hacer preguntas.
-                feedback: Y para esto sirve `{preguntar}`
+                feedback: Y para esto sirve `{ask}`
             -   option: Puedes usar el comando `{ask}` para mostrar las respuestas.
                 feedback: Eso no es verdad
             -   option: Con el comando `{print}` puedes hacer que el texto aparezca
@@ -406,7 +406,7 @@ levels:
                 feedback: '`{ask}` se usa para hacer una pregunta'
             -   option: '`{is}`'
                 feedback: '`{is}` se usa para hacer una lista'
-            -   option: '`{at}` `{random}`'
+            -   option: '`{at} {random}`'
                 feedback: ¡Correcto!
             hint: Arbitrariamente significa sin planificar o de manera aleatoria.
             correct_answer: D
@@ -2287,7 +2287,7 @@ levels:
             question_score: '10'
         10:
             question_text: ¿Qué hay de cierto en este código?
-            code: "premios = 1 millón dólares, coche, sandwich\nnombres = Bob, Patrick, Sandy, Larry\n{for} premio {in} premios\n\t{print} 'El ' premio 'lo gana ' nombres {at} {random}"
+            code: "premios = 1 millón dólares, coche, sandwich\nnombres = Bob, Patrick, Sandy, Larry\n{for} premio {in} premios\n    {print} 'El ' premio 'lo gana ' nombres {at} {random}"
             mp_choice_options:
             -   option: Todo el mundo siempre ganará un premio.
                 feedback: Eso no es cierto, puede que acabes sin llevarte un premio.
@@ -2308,7 +2308,7 @@ levels:
                     {print} i
             mp_choice_options:
             -   option: |-
-                    `contador`
+                    `counter`
                 feedback: 'No'
             -   option: '`{range}`'
                 feedback: Correcto
@@ -3665,9 +3665,9 @@ levels:
                     imprimir 'el número de la suerte de ' amigos[i]
                     imprimir 'es ' numeros_suerte[i]
             mp_choice_options:
-            -   option: En la línea 4 la variable debería ser `amigo[i]`, no `amigos[i]`
+            -   option: En la línea 4 la variable debería ser `friend[i]`, no `friends[i]`
                 feedback: Eso no es correcto.
-            -   option: La línea 3 debería decir `en rango 1 a 3` no `en rango 0 a 3`
+            -   option: La línea 3 debería decir `in range 1 to 3` no `in range 0 to 3`
                 feedback: ¡Bien visto!
             -   option: La línea 4 debería decir 'numero_suerte', no 'número suerte
                 feedback: No es una variable, sólo es texto.
@@ -3902,9 +3902,9 @@ levels:
                 feedback: Esto no es.
             -   option: La forma en que se multiplican las variables es incorrecta.
                 feedback: ¡No es verdad!
-            -   option: Una de las variables `noaño_bisiesto` no pertenece a la declaración `{if}`.
+            -   option: Una de las variables `noleap_year` no pertenece a la declaración `{if}`.
                 feedback: Sigue buscando el error.
-            -   option: El `noaño_bisiesto` tiene que ser idéntico en ambos casos.
+            -   option: El `noleap_year` tiene que ser idéntico en ambos casos.
                 feedback: ¡Correcto!
             hint: Lea cuidadosamente el código.
             correct_answer: D
@@ -4119,7 +4119,7 @@ levels:
             mp_choice_options:
             -   option: '`{or}` no se puede utilizar con `{if}`.'
                 feedback: Inténtalo de nuevo.
-            -   option: En el comando `{for}`, `insecto` debe ser `insectos`.
+            -   option: En el comando `{for}`, `insect` debe ser `insects`.
                 feedback: No es verdad.
             -   option: ¡Nada!
                 feedback: ¡Bien hecho!
@@ -4141,38 +4141,38 @@ levels:
                 2 es positivo
                 3 es positivo
             mp_choice_options:
-            -   option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number < 0: \n      {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
-                feedback: Try again!
-            -   option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number <= 0: \n     {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
-                feedback: That is not it.
-            -   option: "```\n {for} number in range -5 to 3:\n     {if} number >= 0: \n     {print} number ' is positive'\n     {elif} number < 0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
-                feedback: Very good!
-            -   option: "```\n {for} number in range -5 to 3:\n     {if} number < 0: \n      {print} number ' is positive'\n     {elif} number <=0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
-                feedback: That is not it.
-            hint: Read the code carefully.
+            -   option: "```\n {for} numero en rango -5 a 3:\n     {if} numero > 0: \n      {print} numero ' es positivo'\n     {elif} numero < 0: \n      {print} numero ' es negativo' \n    {else}: \n     {print} numero ' es cero'\n```"
+                feedback: ¡Inténtalo de nuevo!
+            -   option: "```\n {for} numero en rango -5 a 3:\n     {if} numero > 0: \n      {print} numero ' es positivo'\n     {elif} numero <= 0: \n     {print} numero ' es negativo' \n    {else}: \n     {print} numero ' es cero'\n```"
+                feedback: No es eso.
+            -   option: "```\n {for} numero en rango -5 a 3:\n     {if} numero >= 0: \n     {print} numero ' es positivo'\n     {elif} numero < 0: \n     {print} numero ' es negativo' \n     {else}: \n     {print} numero ' es cero'\n```"
+                feedback: ¡Muy bien!
+            -   option: "```\n {for} numero en rango -5 a 3:\n     {if} numero < 0: \n      {print} numero ' es positivo'\n     {elif} numero <=0: \n     {print} numero ' es negativo' \n     {else}: \n     {print} numero ' es cero'\n```"
+                feedback: Eso no es.
+            hint: Lee atentamente el código.
             correct_answer: C
             question_score: '10'
         10:
-            question_text: What is wrong with this code?
+            question_text: ¿Qué le pasa a este código?
             code: |-
-                {for} number in range 1 to 5:
-                  volume_room = num * num * num
-                  {print} volume_room ' cubic meters'
-                    {if} volume_room > 100:
-                      {print} 'this is a large room'
-                    {elif} volume_room < 100:
-                      {print} 'small room but cosy'
+                {for} numero en rango 1 a 5:
+                  volumen_habitacion = num * num * num
+                  {print} volumen_habitacion ' metros cúbicos'
+                    {if} volumen_habitacion > 100:
+                      {print} 'es una habitación grande'
+                    {elif} volumen_habitacion < 100:
+                      {print} 'habitación pequeña pero acogedora'
                     {else}:
-                      {print} 'i will look for something else'
+                      {print} 'buscaré otra cosa'
             mp_choice_options:
-            -   option: The word num needs quotation marks.
-                feedback: Try again.
-            -   option: The `{if}` command is not used correctly.
-                feedback: Not true.
-            -   option: Line 3 should be `volume_room = number * number * number`.
-                feedback: Well done!
-            -   option: There is an indentation mistake in the last line.
-                feedback: Nope.
-            hint: Read the code carefully.
+            -   option: La palabara num necesita comillas.
+                feedback: Inténtalo de nuevo.
+            -   option: El comando `{if}` no se utiliza correctamente.
+                feedback: No es cierto.
+            -   option: La línea 3 debería ser `volume_room = number * number * number`.
+                feedback: ¡Bien hecho!
+            -   option: Hay un error de sangría en la última línea.
+                feedback: No.
+            hint: Lee atentamente el código.
             correct_answer: C
             question_score: '10'

@@ -65,25 +65,15 @@
                             </div>
                         {% endif %}
                     </div>
-                    {% if achievements %}
+                    {% if programs %}
                         <div class="mt-auto">
                             <div class="font-semibold bg-blue-600 pb-2 pt-2 text-white flex flex-row justify-center rounded-b-lg">
-                                {% if achievements.run_programs %}
-                                    <div>{{ achievements.run_programs }} {{_('amount_created')}}</div>
-                                {% else %}
-                                    <div>0 {{_('amount_created')}}</div>
-                                {% endif %}
-                                <div class="mx-2">|</div>
-                                {% if achievements.saved_programs %}
-                                    <div>{{ achievements.saved_programs }} {{_('amount_saved')}}</div>
-                                {% else %}
-                                    <div>0 {{_('amount_saved')}}</div>
-                                {% endif %}
-                                <div class="mx-2">|</div>
+                                <div class="profile-nametag__stats">{{ programs|length }} {{_('programs')|lower}}</div>
+                                <div class="h-8 w-px border-r border-white relative"></div>
                                 {% if achievements.submitted_programs %}
-                                    <div>{{ achievements.submitted_programs }} {{_('amount_submitted')}}</div>
+                                    <div class="profile-nametag__stats">{{ achievements.submitted_programs }} {{_('amount_submitted')}}</div>
                                 {% else %}
-                                    <div>0 {{_('amount_submitted')}}</div>
+                                    <div class="profile-nametag__stats">0 {{_('amount_submitted')}}</div>
                                 {% endif %}
                             </div>
                         </div>
@@ -97,14 +87,14 @@
                     </div>
                 {% endif %}
             </div>
-            {% if program %}
+            {% if last_program %}
                 <h2>{{_('your_last_program')}}</h2>
-                <div class="w-full rounded-lg border border-black mt-4 relative bg-blue-200 cursor-pointer" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
+                <div class="w-full rounded-lg border border-black mt-4 relative bg-blue-200 cursor-pointer" onclick="window.open (hedyApp.viewProgramLink('{{last_program.id}}'))">
                     <div class="flex items-center justify-center mt-2 mb-2">
-                        <p>{{ program.name }}</p>
+                        <p>{{ last_program.name }}</p>
                     </div>
                     <div class="relative mb-4 px-4 turn-pre-into-ace">
-                        <pre level="{{ program.level }}">{{ program.preview_code | truncate(200) }}</pre>
+                        <pre level="{{ last_program.level }}">{{ last_program.preview_code | truncate(200) }}</pre>
                     </div>
                 </div>
             {% endif %}

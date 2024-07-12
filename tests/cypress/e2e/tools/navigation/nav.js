@@ -1,4 +1,5 @@
 import { loginForAdmin } from "../login/login";
+import { openAdventureView } from '../../tools/adventures/adventure.js';
 
 export function goToPage(page)
 {
@@ -17,14 +18,9 @@ export function goToHome()
     goToPage('/');
 }
 
-export function goToRegisterStudent()
+export function goToSignup()
 {
-    goToPage(Cypress.env('register_student_page'));
-}
-
-export function goToRegisterTeacher()
-{
-    goToPage(Cypress.env('register_teacher_page'));
+    goToPage(Cypress.env('signup_page'));
 }
 
 export function goToLogin()
@@ -100,17 +96,27 @@ export function goToEditAdventure()
 
     // takes the first adventures and goes to its edit page
     // It does not matter which adventure we take (we choose the first one)
-    cy.get("#adventures_table").then($viewAdventure => {
-        if (!$viewAdventure.is(':visible')) {
-            cy.get("#view_adventures").click();
-        }
-    });
+    openAdventureView();
     cy.getDataCy("edit_link_adventure").first().click();
 }
 
 export function goToExploreProgramsPage()
 {
    goToPage(Cypress.env('explore_programs_page'));
+}
+
+export function navigateHomeButton(button, path)
+{
+    goToHome();
+    cy.getDataCy(button).click();
+    cy.location().should((loc) => {
+      expect(loc.pathname).equal(path);
+    })
+}
+
+export function goToSubscribePage()
+{
+   goToPage(Cypress.env('subscribe_page'));
 }
 
 export default {goToPage}

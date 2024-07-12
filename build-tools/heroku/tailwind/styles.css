@@ -356,6 +356,23 @@ code {
   @apply text-blue-800;
 }
 
+.cust-adv-tab {
+  @apply cursor-pointer block border-b-4 tracking-wide;
+  /* Colors */
+  @apply border-gray-400;
+}
+
+.cust-adv-tab.active {
+  /* Colors */
+  @apply border-blue-800 !important;
+}
+
+.cust-adv-tab-text {
+  @apply font-slab;
+  /* Colors */
+  @apply text-blue-800;
+}
+
 #output, #quiz_question_output_container {
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
 }
