@@ -25,8 +25,8 @@
               <button id="debug_stop" class="green-btn hidden mr-2" onclick="hedyApp.stopDebug()">🛑</button>
               <button id="debug_continue" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "continue")'><div class="{% if g.dir == "rtl" %}rotate-180{% endif %}">⏩</div></button>
           </div>
-          <div id="copy_button_container" class="z-10 px-1 inline-flex items-center">
-              <button id="copy" class="blue-btn" onclick="">{{_('copy')}}</button>
+          <div id="read_outloud_button_container" class="z-10 px-1 inline-flex items-center">
+            <button id="read_outloud" class="blue-btn" onclick="">{{_('read_outloud')}}</button>
           </div>
           <div id="clear_button_container" class="z-10 px-1 inline-flex items-center">
               <button id="clear" class="blue-btn" onclick="hedyApp.emptyEditor()">{{_('clear')}}</button>

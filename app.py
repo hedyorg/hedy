@@ -1125,7 +1125,7 @@ def tutorial_index():
     max_level = hedy.HEDY_MAX_LEVEL  # do we need to fetch the max level per language?
 
     return render_template(
-        "code-page.html",
+        "hedy-page/code-page.html",
         intro_tutorial=True,
         next_level=2,
         level_nr=str(level),
@@ -1317,7 +1317,7 @@ def hour_of_code(level, program_id=None):
 
     commands = hedy.commands_per_level.get(level)
     return render_template(
-        "code-page.html",
+        "hedy-page/code-page.html",
         level_nr=str(level_number),
         level=level_number,
         current_page='Hour of Code',
@@ -1549,7 +1549,7 @@ def index(level, program_id):
 
     commands = hedy.commands_per_level.get(level)
     return render_template(
-        "code-page.html",
+        "hedy-page/code-page.html",
         level_nr=str(level_number),
         level=level_number,
         current_page='hedy',
@@ -1683,7 +1683,7 @@ def render_code_in_editor(level):
         editor_contents=code)
     adventures = [a]
 
-    return render_template("code-page.html",
+    return render_template("hedy-page/code-page.html",
                            specific_adventure=True,
                            level_nr=str(level),
                            level=level,
@@ -1752,7 +1752,7 @@ def get_specific_adventure(name, level, mode):
     initial_tab = name
     initial_adventure = adventures[0]
 
-    return render_template("code-page.html",
+    return render_template("hedy-page/code-page.html",
                            specific_adventure=True,
                            level_nr=str(level),
                            commands=commands,

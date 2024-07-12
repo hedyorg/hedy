@@ -219,7 +219,37 @@
 </div><!-- blue bar -->
 {% endif %}
 
+<div id="level_header">
+  <div class="mt-4 py-2 flex gap-2 px-4 items-center justify-between w-full max-w-screen-2xl mx-auto">
+    <div id="program_name_container" class="overflow-hidden flex-1 flex border border-blue-800 ltr:divide-x rtl:divide-x-reverse divide-blue-400 rounded">
+      <input id="program_name" type="text" class="outline-0 text-2xl font-light text-blue-800 flex-1 bg-transparent focus:bg-blue-100 border-0 px-4" value="Introduction">
+    </div>
+    <div class="order-5">
+      <button class="blue-btn next-tab ltr:ml-1 rtl:mr-1">
+        Cheatsheet
+        <span class="fa fa-list"></span>
+      </button>
+      <button class="blue-btn next-tab ltr:ml-1 rtl:mr-1">
+        Language
+        <span class="fa fa-language"></span>
+      </button>
+      <button class="blue-btn next-tab ltr:ml-1 rtl:mr-1">
+        Share
+        <span class="fa fa-share-nodes"></span>
+      </button>
+      <button class="blue-btn next-tab ltr:ml-1 rtl:mr-1">
+        Submit
+        <span class="fa fa-paper-plane"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
 <div class="w-full max-w-screen-2xl mx-auto" id="code_content_container">
+  <div class="mt-5 ml-4 text-base font-medium dark:text-white"><b>75%</b> to complete</div>
+<div class="max-w-screen-2xl mr-4 items-center justify-between mx-auto ml-4 rounded-full h-2.5 bg-gray-300">
+  <div class="rounded-full h-2.5 bg-blue-800" style="width: 75%"></div>
+</div>
 {% block levelbody %}{% endblock %}
 </div>
 
