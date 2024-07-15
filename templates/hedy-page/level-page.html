@@ -57,7 +57,10 @@
         <div class="dropdown relative">
           <button class="blue-btn px-4 rounded inline-flex items-center gap-2 text-l" id="dropdown_adventure_button"
             onclick="$('#adventure_dropdown').slideToggle('medium');"
-            _="on load put hedyApp.getCurrentAdv() into #adventure_text
+            _="on load
+            set adv to hedyApp.getCurrentAdv()
+            put adv into #adventure_text
+            put adv + {{level_nr}} into #program_name_input.value
             on click hedyApp.scrollToLastClickedButton('adventure_dropdown')">
             <div id="adventure_text"></div>
             <svg id="adventure_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -80,8 +83,10 @@
                 tabindex="{{ loop.index }}"
                 style="width: 100%;"
                 onclick="$('#adventure_dropdown').slideUp('medium');"
-                _="on click 
-                put hedyApp.getCurrentAdv() into #adventure_text
+                _="on click
+                set adv to hedyApp.getCurrentAdv()
+                put adv into #adventure_text
+                put adv + {{level_nr}} into #program_name_input.value
                 then localStorage.setItem('adventure_dropdown', 'adventure_button_{{ adventure.name }}')">
                     {{ adventure.name }}
                 </button>
@@ -100,6 +105,7 @@
             call :next.click() 
             then set adv to hedyApp.getCurrentAdv()
             put adv into #adventure_text
+            put adv + {{level_nr}} into #program_name_input.value
             then localStorage.setItem('adventure_dropdown', 'adventure_button_' + adv)">
             {{_('next_adventure')}}&nbsp;
             <span class="fa fa-arrow-{% if g.dir == "ltr" %}right{% else %}left{% endif %}"></span>
@@ -111,8 +117,8 @@
 
 <div id="second_row">
   <div class="mt-4 py-2 flex gap-2 px-4 items-center justify-between w-full max-w-screen-2xl mx-auto">
-    <div id="program_name_container" class="overflow-hidden flex-1 flex border border-blue-800 ltr:divide-x rtl:divide-x-reverse divide-blue-400 rounded">
-      <input id="program_name" type="text" class="outline-0 text-2xl font-light text-blue-800 flex-1 bg-transparent focus:bg-blue-100 border-0 px-4" value="{{initial_adventure.save_name}}">
+    <div class="overflow-hidden flex-1 flex border border-blue-800 ltr:divide-x rtl:divide-x-reverse divide-blue-400 rounded">
+      <input id="program_name_input" type="text" class="outline-0 text-2xl font-light text-blue-800 flex-1 bg-transparent focus:bg-blue-100 border-0 px-4">
     </div>
     <button id="share_program_button" class="blue-btn next-tab ltr:ml-1 rtl:mr-1">
       Share
