@@ -52,6 +52,7 @@ export let theKeywordLanguage: string = 'en';
 let theStaticRoot: string = '';
 let currentTab: string;
 let theUserIsLoggedIn: boolean;
+let selectedURI: JQuery<HTMLElement>;
 //create a synth and connect it to the main output (your speakers)
 //const synth = new Tone.Synth().toDestination();
 
@@ -1339,9 +1340,8 @@ function resetTurtleTarget() {
 }
 
 function speak(text: string) {
-  var selectedURI = $('#speak_dropdown').val();
   if (!selectedURI) { return; }
-  var voice = window.speechSynthesis.getVoices().filter(v => v.voiceURI === selectedURI)[0];
+  var voice = window.speechSynthesis.getVoices().filter(v => v.voiceURI === selectedURI.val())[0];
 
   if (voice) {
     let utterance = new SpeechSynthesisUtterance(text);
@@ -1378,9 +1378,23 @@ function initializeSpeech() {
 
     if (voices.length > 0 || isBeingTested) {
       for (const voice of voices) {
-        $('#speak_dropdown').append($('<option>').attr('value', voice.voiceURI).text('📣 ' + voice.name));
+        $('#speak_dropdown').append(
+          $('<button>')
+            .attr('id', `speak_button_${voice.name}`)
+            .attr('onclick', `$('#speak_dropdown').slideUp('medium');`)
+            .attr('value', voice.voiceURI)
+            .addClass('flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white')
+            .css('width', '100%')
+            .text(voice.name)
+            .on('click', function () {
+              if (selectedURI){
+                selectedURI.find('span').remove();
+              }
+              selectedURI = $(this);
+              $(this).append(`<span class="fa fa-check"></span>`);
+            })
+          );
       }
-
       $('#speak_container').show();
 
       clearInterval(timer);

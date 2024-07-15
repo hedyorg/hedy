@@ -81,9 +81,10 @@
         {% endif %}
       </div>
     </div>
-    {% if tutorial %}
-    <button class="green-btn" onclick="hedyApp.startLevelTutorial('{{level_nr}}')">{{_('tutorial')}}</button>
-    {% endif %}
+      <!-- TODO -->
+      {% if tutorial %}
+      <button class="green-btn" onclick="hedyApp.startLevelTutorial('{{level_nr}}')">{{_('tutorial')}}</button>
+      {% endif %}
     {% if not hide_cheatsheet and cheatsheet %}
     <div class="dropdown relative">
       <button class="green-btn font-semibold rounded inline-flex items-center gap-2 mr-2" id="dropdown_cheatsheet_button"
