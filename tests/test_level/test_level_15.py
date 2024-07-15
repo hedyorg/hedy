@@ -11,12 +11,48 @@ class TestsLevel15(HedyTester):
     level = 15
 
     #
+    # numeral values
+    #
+    def test_numerals(self):
+        code = textwrap.dedent("""\
+            a = ١١
+            print a""")
+        expected = textwrap.dedent("""\
+            a = V(11, num_sys='Arabic')
+            print(f'''{a.text()}''')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            unused_allowed=True,
+            translate=False,
+            skip_faulty=False,
+        )
+
+    def test_addition(self):
+        code = textwrap.dedent("""\
+            a = ٢٢ + ١١
+            print a""")
+        expected = textwrap.dedent("""\
+            a = V(22 + 11, num_sys='Arabic')
+            print(f'''{a.text()}''')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            unused_allowed=True,
+            translate=False,
+            skip_faulty=False,
+        )
+
+    #
     # boolean values
     #
     @parameterized.expand(HedyTester.booleans)
-    def test_assign_var_boolean(self, value, expected):
+    def test_assign_var_boolean(self, value, exp):
         code = f"cond = {value}"
-        expected = f"cond = {expected}"
+        true_, false_ = HedyTester.bool_options(value)
+        expected = f"cond = V({exp}, bools={{True: '{true_}', False: '{false_}'}})"
 
         self.multi_level_tester(
             code=code,
@@ -26,8 +62,8 @@ class TestsLevel15(HedyTester):
         )
 
     def test_assign_list_var_boolean(self):
-        code = "cond = True, False, true, false"
-        expected = "cond = [True, False, True, False]"
+        code = "cond = true"
+        expected = "cond = V(True, bools={True: 'true', False: 'false'})"
 
         self.single_level_tester(
             code=code,
@@ -35,10 +71,25 @@ class TestsLevel15(HedyTester):
             unused_allowed=True
         )
 
+    def test_assign_print_var_boolean(self):
+        code = textwrap.dedent("""\
+            cond = true
+            print cond""")
+        expected = textwrap.dedent("""\
+            cond = V(True, bools={True: 'true', False: 'false'})
+            print(f'''{cond.text()}''')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output="true"
+        )
+
     @parameterized.expand(HedyTester.booleans)
     def test_print_boolean(self, value, exp):
         code = f"print 'variable is ' {value}"
-        expected = f"print(f'''variable is {{convert_numerals(\"Latin\", \"{exp}\")}}''')"
+        true_, false_ = HedyTester.bool_options(value)
+        expected = f"print(f'''variable is {{localize({exp}, bools={{True: '{true_}', False: '{false_}'}})}}''')"
 
         self.multi_level_tester(
             code=code,
@@ -47,10 +98,15 @@ class TestsLevel15(HedyTester):
             translate=False
         )
 
-    @parameterized.expand([('вярно', True), ('Вярно', True), ('невярно', False), ('Невярно', False)])
-    def test_print_boolean_bulgarian(self, value, exp):
-        code = f"принтирай 'Това е ' {value}"
-        expected = f"print(f'''Това е {{convert_numerals(\"Latin\", \"{exp}\")}}''')"
+    @parameterized.expand([
+        ('вярно', True, 'вярно', 'невярно'),
+        ('Вярно', True, 'Вярно', 'Невярно'),
+        ('невярно', False, 'вярно', 'невярно'),
+        ('Невярно', False, 'Вярно', 'Невярно')
+    ])
+    def test_print_boolean_bulgarian(self, input_, value, true_, false_):
+        code = f"принтирай 'Това е ' {input_}"
+        expected = f"print(f'''Това е {{localize({value}, bools={{True: '{true_}', False: '{false_}'}})}}''')"
 
         self.multi_level_tester(
             code=code,
@@ -64,9 +120,10 @@ class TestsLevel15(HedyTester):
         code = textwrap.dedent(f"""\
             cond = {value}
             print 'variable is ' cond""")
+        true_, false_ = HedyTester.bool_options(value)
         expected = textwrap.dedent(f"""\
-            cond = {expected}
-            print(f'''variable is {{cond}}''')""")
+            cond = V({expected}, bools={{True: '{true_}', False: '{false_}'}})
+            print(f'''variable is {{cond.text()}}''')""")
 
         self.multi_level_tester(
             code=code,
@@ -81,16 +138,18 @@ class TestsLevel15(HedyTester):
             cond = {value}
             if cond is {value}
                 sleep""")
+        true_, false_ = HedyTester.bool_options(value)
         expected = textwrap.dedent(f"""\
-            cond = {expected}
-            if convert_numerals('Latin', cond) == convert_numerals('Latin', '{expected}'):
+            cond = V({expected}, bools={{True: '{true_}', False: '{false_}'}})
+            if cond.data == {expected}:
               time.sleep(1)""")
 
         self.multi_level_tester(
             code=code,
             max_level=16,
             expected=expected,
-            translate=False
+            translate=False,
+            skip_faulty=False
         )
 
     #
@@ -98,41 +157,37 @@ class TestsLevel15(HedyTester):
     #
     def test_while_equals(self):
         code = textwrap.dedent("""\
-      antwoord is 0
-      while antwoord != 25
-          antwoord is ask 'Wat is 5 keer 5?'
-      print 'Goed gedaan!'""")
+        a is true
+        while a != false
+            print a
+            a = false
+        print 'Bye!'""")
         expected = textwrap.dedent("""\
-    antwoord = 0
-    while convert_numerals('Latin', antwoord)!=convert_numerals('Latin', 25):
-      antwoord = input(f'''Wat is 5 keer 5?''')
-      try:
-        antwoord = int(antwoord)
-      except ValueError:
-        try:
-          antwoord = float(antwoord)
-        except ValueError:
-          pass
-      time.sleep(0.1)
-    print(f'''Goed gedaan!''')""")
+        a = V(True, bools={True: 'true', False: 'false'})
+        while a.data!=False:
+          print(f'''{a.text()}''')
+          a = V(False, bools={True: 'true', False: 'false'})
+          time.sleep(0.1)
+        print(f'''Bye!''')""")
 
         self.multi_level_tester(
             code=code,
-            max_level=16,
+            max_level=15,
             expected=expected,
-            expected_commands=['is', 'while', 'ask', 'print']
+            skip_faulty=False
         )
 
     @parameterized.expand(HedyTester.booleans)
-    def test_while_equals_boolean(self, value, expected):
+    def test_while_equals_boolean(self, value, exp):
         code = textwrap.dedent(f"""\
             cond is {value}
             while cond != {value}
               cond is {value}""")
+        true_, false_ = HedyTester.bool_options(value)
         expected = textwrap.dedent(f"""\
-            cond = {expected}
-            while convert_numerals('Latin', cond)!={expected}:
-              cond = {expected}
+            cond = V({exp}, bools={{True: '{true_}', False: '{false_}'}})
+            while cond.data!={exp}:
+              cond = V({exp}, bools={{True: '{true_}', False: '{false_}'}})
               time.sleep(0.1)""")
 
         self.multi_level_tester(
@@ -146,16 +201,17 @@ class TestsLevel15(HedyTester):
     @parameterized.expand(['and', 'or'])
     def test_while_and_or(self, op):
         code = textwrap.dedent(f"""\
-      answer = 7
-      while answer > 5 {op} answer < 10
-        answer = ask 'What is 5 times 5?'
-      print 'A correct answer has been given'""")
+        answer = 7
+        while answer > 5 {op} answer < 10
+          answer = ask 'What is 5 times 5?'
+        print 'A correct answer has been given'""")
 
         # Splitting like this to wrap the line around 120 characters max
         expected = textwrap.dedent(f"""\
-        answer = 7
-        while convert_numerals('Latin', answer)>convert_numerals('Latin', 5) {op} convert_numerals('Latin', answer)<convert_numerals('Latin', 10):
+        answer = V(7, num_sys='Latin')
+        while answer.data>5 {op} answer.data<10:
           answer = input(f'''What is 5 times 5?''')
+          num_sys = get_num_sys(answer)
           try:
             answer = int(answer)
           except ValueError:
@@ -163,6 +219,7 @@ class TestsLevel15(HedyTester):
               answer = float(answer)
             except ValueError:
               pass
+          answer = V(answer, num_sys=num_sys)
           time.sleep(0.1)
         print(f'''A correct answer has been given''')""")
 
@@ -181,18 +238,20 @@ class TestsLevel15(HedyTester):
             antwoord est demande 'Wat is 5 keer 5?'
         affiche 'Goed gedaan!'""")
         expected = textwrap.dedent("""\
-      antwoord = 0
-      while convert_numerals('Latin', antwoord)!=convert_numerals('Latin', 25):
-        antwoord = input(f'''Wat is 5 keer 5?''')
-        try:
-          antwoord = int(antwoord)
-        except ValueError:
+        antwoord = V(0, num_sys='Latin')
+        while antwoord.data!=25:
+          antwoord = input(f'''Wat is 5 keer 5?''')
+          num_sys = get_num_sys(antwoord)
           try:
-            antwoord = float(antwoord)
+            antwoord = int(antwoord)
           except ValueError:
-            pass
-        time.sleep(0.1)
-      print(f'''Goed gedaan!''')""")
+            try:
+              antwoord = float(antwoord)
+            except ValueError:
+              pass
+          antwoord = V(antwoord, num_sys=num_sys)
+          time.sleep(0.1)
+        print(f'''Goed gedaan!''')""")
 
         self.multi_level_tester(
             code=code,
@@ -204,8 +263,8 @@ class TestsLevel15(HedyTester):
 
     def test_while_undefined_var(self):
         code = textwrap.dedent("""\
-      while antwoord != 25
-          print 'hoera'""")
+            while antwoord != 25
+                print 'hoera'""")
 
         self.multi_level_tester(
             code=code,
@@ -215,23 +274,25 @@ class TestsLevel15(HedyTester):
 
     def test_while_smaller(self):
         code = textwrap.dedent("""\
-      getal is 0
-      while getal < 100000
-          getal is ask 'HOGER!!!!!'
-      print 'Hoog he?'""")
+        getal is 0
+        while getal < 100000
+            getal is ask 'HOGER!!!!!'
+        print 'Hoog he?'""")
         expected = textwrap.dedent("""\
-    getal = 0
-    while convert_numerals('Latin', getal)<convert_numerals('Latin', 100000):
-      getal = input(f'''HOGER!!!!!''')
-      try:
-        getal = int(getal)
-      except ValueError:
-        try:
-          getal = float(getal)
-        except ValueError:
-          pass
-      time.sleep(0.1)
-    print(f'''Hoog he?''')""")
+        getal = V(0, num_sys='Latin')
+        while getal.data<100000:
+          getal = input(f'''HOGER!!!!!''')
+          num_sys = get_num_sys(getal)
+          try:
+            getal = int(getal)
+          except ValueError:
+            try:
+              getal = float(getal)
+            except ValueError:
+              pass
+          getal = V(getal, num_sys=num_sys)
+          time.sleep(0.1)
+        print(f'''Hoog he?''')""")
 
         self.multi_level_tester(
             code=code,
@@ -268,29 +329,29 @@ class TestsLevel15(HedyTester):
 
     def test_if_pressed_works_in_while_loop(self):
         code = textwrap.dedent("""\
-      stop is 0
-      while stop != 1
-          if p is pressed
-              print 'press'
-          if s is pressed
-              stop = 1
-      print 'Uit de loop!'""")
+        stop is 0
+        while stop != 1
+            if p is pressed
+                print 'press'
+            if s is pressed
+                stop = 1
+        print 'Uit de loop!'""")
 
         expected = textwrap.dedent("""\
-         stop = 0
-         while convert_numerals('Latin', stop)!=convert_numerals('Latin', 1):
-           if_pressed_mapping = {"else": "if_pressed_default_else"}
-           if_pressed_mapping['p'] = 'if_pressed_p_'
-           def if_pressed_p_():
-               print(f'''press''')
-           extensions.if_pressed(if_pressed_mapping)
-           if_pressed_mapping = {"else": "if_pressed_default_else"}
-           if_pressed_mapping['s'] = 'if_pressed_s_'
-           def if_pressed_s_():
-               stop = 1
-           extensions.if_pressed(if_pressed_mapping)
-           time.sleep(0.1)
-         print(f'''Uit de loop!''')""")
+        stop = V(0, num_sys='Latin')
+        while stop.data!=1:
+          if_pressed_mapping = {"else": "if_pressed_default_else"}
+          if_pressed_mapping['p'] = 'if_pressed_p_'
+          def if_pressed_p_():
+              print(f'''press''')
+          extensions.if_pressed(if_pressed_mapping)
+          if_pressed_mapping = {"else": "if_pressed_default_else"}
+          if_pressed_mapping['s'] = 'if_pressed_s_'
+          def if_pressed_s_():
+              stop = V(1, num_sys='Latin')
+          extensions.if_pressed(if_pressed_mapping)
+          time.sleep(0.1)
+        print(f'''Uit de loop!''')""")
 
         self.multi_level_tester(
             code=code,
@@ -333,9 +394,10 @@ class TestsLevel15(HedyTester):
         print 'A correct answer has been given'""")
 
         excepted_code = textwrap.dedent("""\
-        answer = 0
-        while convert_numerals('Latin', answer)!=convert_numerals('Latin', 25):
+        answer = V(0, num_sys='Latin')
+        while answer.data!=25:
           answer = input(f'''What is 5 times 5?''')
+          num_sys = get_num_sys(answer)
           try:
             answer = int(answer)
           except ValueError:
@@ -343,19 +405,20 @@ class TestsLevel15(HedyTester):
               answer = float(answer)
             except ValueError:
               pass
+          answer = V(answer, num_sys=num_sys)
           time.sleep(0.1)
         print(f'''A correct answer has been given''')""")
 
         expected_source_map = {
             '1/1-1/7': '1/1-1/7',
-            '1/1-1/11': '1/1-1/11',
-            '2/7-2/13': '2/33-2/39',
-            '2/7-2/19': '2/7-2/71',
-            '3/5-3/11': '8/5-8/11',
-            '3/5-3/38': '3/1-9/18',
-            '2/1-3/47': '2/1-11/18',
-            '4/1-4/40': '12/1-12/46',
-            '1/1-4/41': '1/1-12/46'
+            '1/1-1/11': '1/1-1/31',
+            '2/7-2/13': '2/7-2/13',
+            '2/7-2/19': '2/7-2/22',
+            '3/5-3/11': '9/5-9/11',
+            '3/5-3/38': '3/1-12/18',
+            '2/1-3/47': '2/1-13/18',
+            '4/1-4/40': '14/1-14/46',
+            '1/1-4/41': '1/1-14/46'
         }
 
         self.single_level_tester(code, expected=excepted_code)

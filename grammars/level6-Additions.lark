@@ -13,7 +13,6 @@ play: _PLAY (list_access | expression | textwithoutspaces)
 equality_check: (textwithoutspaces | INT) (_IS | _EQUALS) (quoted_text| textwithoutspaces | INT)
 condition: >> equality_check
 
-list_access_var: var (_IS | _EQUALS) var _AT (INT | random)
 assign_button: NAME (_IS | _EQUALS) _BUTTON
 assign_list: var (_IS | _EQUALS) textwithspaces (_COMMA textwithspaces)+
 assign: var (_IS | _EQUALS) (list_access | expression | textwithoutspaces | textwithspaces)

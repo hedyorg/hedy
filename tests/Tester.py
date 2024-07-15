@@ -453,20 +453,30 @@ class HedyTester(unittest.TestCase):
     @staticmethod
     def input_transpiled(var_name, text):
         return textwrap.dedent(f"""\
-    {var_name} = input(f'''{text}''')
-    try:
-      {var_name} = int({var_name})
-    except ValueError:
-      try:
-        {var_name} = float({var_name})
-      except ValueError:
-        pass""")
+            {var_name} = input(f'''{text}''')
+            num_sys = get_num_sys({var_name})
+            try:
+              {var_name} = int({var_name})
+            except ValueError:
+              try:
+                {var_name} = float({var_name})
+              except ValueError:
+                pass
+            {var_name} = V({var_name}, num_sys=num_sys)""")
+
+    @staticmethod
+    def remove_transpiled_obsolete(list_name, value):
+        return textwrap.dedent(f"""\
+            try:
+              {list_name}.remove({value})
+            except:
+              pass""")
 
     @staticmethod
     def remove_transpiled(list_name, value):
         return textwrap.dedent(f"""\
       try:
-        {list_name}.remove({value})
+        {list_name}.data.remove({value})
       except:
         pass""")
 
@@ -511,12 +521,20 @@ class HedyTester(unittest.TestCase):
     def return_transpiled(arg):
         return textwrap.dedent(f"""\
         try:
-          return int(f'''{arg}''')
+          return V(int(f'''{arg}'''), num_sys=get_num_sys(f'''{arg}'''))
         except ValueError:
           try:
-            return float(f'''{arg}''')
+            return V(float(f'''{arg}'''), num_sys=get_num_sys(f'''{arg}'''))
           except ValueError:
-            return f'''{arg}'''""")
+            return V(f'''{arg}''')""")
+
+    @staticmethod
+    def range_transpiled(start, stop, num_sys):
+        return f"[V(__rv, num_sys={num_sys}) for __rv in range({start}, {stop} + step, step)]"
+
+    @staticmethod
+    def bool_options(value):
+        return ('true', 'false') if value.islower() else ('True', 'False')
 
     # Used to overcome indentation issues when the above code is inserted
     # in test cases which use different indentation style (e.g. 2 or 4 spaces)

@@ -14,54 +14,48 @@ class TestsLevel17(HedyTester):
 
     def test_if_with_indent(self):
         code = textwrap.dedent("""\
-    naam is 'Hedy'
-    if naam is 'Hedy':
-        print 'koekoek'""")
+            naam is 'Hedy'
+            if naam is 'Hedy':
+                print 'koekoek'""")
         expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
-      print(f'''koekoek''')""")
+            naam = V('Hedy')
+            if naam.data == 'Hedy':
+              print(f'''koekoek''')""")
 
         self.single_level_tester(code=code, expected=expected)
 
     def test_if_with_equals_sign(self):
         code = textwrap.dedent("""\
-    naam is 'Hedy'
-    if naam == Hedy:
-        print 'koekoek'""")
+            naam is 'Hedy'
+            if naam == 'Hedy':
+                print 'koekoek'""")
 
         expected = textwrap.dedent("""\
-    naam = 'Hedy'
-    if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
-      print(f'''koekoek''')""")
+            naam = V('Hedy')
+            if naam.data == 'Hedy':
+              print(f'''koekoek''')""")
 
         self.single_level_tester(code=code, expected=expected)
 
     def test_if_else(self):
         code = textwrap.dedent("""\
-    antwoord is ask 'Hoeveel is 10 plus 10?'
-    if antwoord is 20:
-        print 'Goedzo!'
-        print 'Het antwoord was inderdaad ' antwoord
-    else:
-        print 'Foutje'
-        print 'Het antwoord moest zijn ' antwoord""")
+            antwoord is ask 'Hoeveel is 10 plus 10?'
+            if antwoord is 20:
+                print 'Goedzo!'
+                print 'Het antwoord was inderdaad ' antwoord
+            else:
+                print 'Foutje'
+                print 'Het antwoord moest zijn ' antwoord""")
 
-        expected = textwrap.dedent("""\
-    antwoord = input(f'''Hoeveel is 10 plus 10?''')
-    try:
-      antwoord = int(antwoord)
-    except ValueError:
-      try:
-        antwoord = float(antwoord)
-      except ValueError:
-        pass
-    if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '20'):
-      print(f'''Goedzo!''')
-      print(f'''Het antwoord was inderdaad {antwoord}''')
-    else:
-      print(f'''Foutje''')
-      print(f'''Het antwoord moest zijn {antwoord}''')""")
+        expected = self.dedent(
+            self.input_transpiled('antwoord', 'Hoeveel is 10 plus 10?'),
+            """\
+            if antwoord.data == 20:
+              print(f'''Goedzo!''')
+              print(f'''Het antwoord was inderdaad {antwoord.text()}''')
+            else:
+              print(f'''Foutje''')
+              print(f'''Het antwoord moest zijn {antwoord.text()}''')""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -70,14 +64,13 @@ class TestsLevel17(HedyTester):
     #
 
     def test_cond_boolean(self):
-        # this one fails, fix it
         code = textwrap.dedent("""\
             cond = False
             if cond is True:
                 sleep""")
         expected = textwrap.dedent("""\
-            cond = False
-            if convert_numerals('Latin', cond) == convert_numerals('Latin', 'True'):
+            cond = V(False, bools={True: 'True', False: 'False'})
+            if cond.data == True:
               time.sleep(1)""")
 
         self.multi_level_tester(
@@ -98,15 +91,42 @@ class TestsLevel17(HedyTester):
                 print 'Komputer'""")
 
         expected = textwrap.dedent("""\
-            computerc = 'PC'
-            userc = 'Hedy'
-            print(f'''Pilihan komputer: {computerc}''')
-            if convert_numerals('Latin', userc) == convert_numerals('Latin', computerc) and convert_numerals('Latin', userc) == convert_numerals('Latin', 'Hedy'):
+            computerc = V('PC')
+            userc = V('Hedy')
+            print(f'''Pilihan komputer: {computerc.text()}''')
+            if userc.data == computerc.data and userc.data == 'Hedy':
               print(f'''SERI''')
-            elif convert_numerals('Latin', userc) == convert_numerals('Latin', 'PC') and convert_numerals('Latin', userc) == convert_numerals('Latin', 'Hedy'):
+            elif userc.data == 'PC' and userc.data == 'Hedy':
               print(f'''HARI''')
             else:
               print(f'''Komputer''')""")
+
+        self.single_level_tester(code=code, expected=expected)
+
+    def test_snippet(self):
+        code = textwrap.dedent("""\
+            prijzen = ['1 miljoen', 'een appeltaart', 'niks']
+            jouw_prijs = prijzen [random]
+            print 'Je wint ' jouw_prijs
+            if jouw_prijs== '1 miljoen' :
+                print 'Yess! Je bent rijk!'
+            elif jouw_prijs == 'een appeltaart' :
+                print 'Heerlijk, een appeltaart!'
+            else:
+                print 'Meer geluk volgende keer..'""")
+        expected = self.dedent(
+            "prijzen = V([V('1 miljoen'), V('een appeltaart'), V('niks')])",
+            self.list_access_transpiled("random.choice(prijzen.data)"),
+            """\
+            jouw_prijs = random.choice(prijzen.data)
+            print(f'''Je wint {jouw_prijs.text()}''')
+            if jouw_prijs.data == '1 miljoen':
+              print(f'''Yess! Je bent rijk!''')
+            elif jouw_prijs.data == 'een appeltaart':
+              print(f'''Heerlijk, een appeltaart!''')
+            else:
+              print(f'''Meer geluk volgende keer..''')"""
+        )
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -121,10 +141,10 @@ class TestsLevel17(HedyTester):
                 print 'Komputer'""")
 
         expected = textwrap.dedent("""\
-            computerc = 'PC'
-            userc = 'Hedy'
-            print(f'''Pilihan komputer: {computerc}''')
-            if convert_numerals('Latin', userc) == convert_numerals('Latin', computerc) and convert_numerals('Latin', userc) == convert_numerals('Latin', 'Hedy'):
+            computerc = V('PC')
+            userc = V('Hedy')
+            print(f'''Pilihan komputer: {computerc.text()}''')
+            if userc.data == computerc.data and userc.data == 'Hedy':
               print(f'''SERI''')
             else:
               print(f'''Komputer''')""")
@@ -133,14 +153,14 @@ class TestsLevel17(HedyTester):
 
     def test_for_loop_arabic(self):
         code = textwrap.dedent("""\
-    for دورة in range ١ to ٥:
-        print دورة""")
+            for دورة in range ١ to ٥:
+                print دورة""")
 
-        expected = textwrap.dedent("""\
-    step = 1 if 1 < 5 else -1
-    for دورة in range(1, 5 + step, step):
-      print(f'''{دورة}''')
-      time.sleep(0.1)""")
+        expected = textwrap.dedent(f"""\
+            step = 1 if 1 < 5 else -1
+            for دورة in {self.range_transpiled(1, 5, "'Arabic'")}:
+              print(f'''{{دورة.text()}}''')
+              time.sleep(0.1)""")
 
         self.single_level_tester(
             code=code,
@@ -154,12 +174,12 @@ class TestsLevel17(HedyTester):
             if colors[1] == colors[2] {op} 1 == 1:
                 print 'red'""")
 
-        expected = HedyTester.dedent(
-            "colors = ['red', 'green', 'blue']",
-            self.list_access_transpiled('colors[int(1)-1]'),
-            self.list_access_transpiled('colors[int(2)-1]'),
+        expected = self.dedent(
+            "colors = V([V('red'), V('green'), V('blue')])",
+            self.list_access_transpiled('colors.data[int(1)-1]'),
+            self.list_access_transpiled('colors.data[int(2)-1]'),
             f"""\
-            if convert_numerals('Latin', colors[int(1)-1]) == convert_numerals('Latin', colors[int(2)-1]) {op} convert_numerals('Latin', '1') == convert_numerals('Latin', '1'):
+            if colors.data[int(1)-1].data == colors.data[int(2)-1].data {op} 1 == 1:
               print(f'''red''')""")
 
         self.single_level_tester(
@@ -175,12 +195,12 @@ class TestsLevel17(HedyTester):
                 a is a + 2
                 b is b + 2""")
         expected = textwrap.dedent(f"""\
-            a = 2
-            b = 3
+            a = V(2, num_sys='Latin')
+            b = V(3, num_sys='Latin')
             step = 1 if 2 < 4 else -1
-            for a in range(2, 4 + step, step):
-              a = {self.addition_transpiled('a', 2)}
-              b = {self.addition_transpiled('b', 2)}
+            for a in {self.range_transpiled(2, 4, "'Latin'")}:
+              a = V({self.addition_transpiled('a', 2)}, num_sys=get_num_sys(a))
+              b = V({self.addition_transpiled('b', 2)}, num_sys=get_num_sys(b))
               time.sleep(0.1)""")
 
         self.single_level_tester(code=code, expected=expected)
@@ -210,47 +230,47 @@ class TestsLevel17(HedyTester):
 
     def test_if__else(self):
         code = textwrap.dedent("""\
-    a is 5
-    if a is 1:
-        a is 2
-    else:
-        a is 222""")
+            a is 5
+            if a is 1:
+                a is 2
+            else:
+                a is 222""")
         expected = textwrap.dedent("""\
-    a = 5
-    if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
-      a = 2
-    else:
-      a = 222""")
+            a = V(5, num_sys='Latin')
+            if a.data == 1:
+              a = V(2, num_sys='Latin')
+            else:
+              a = V(222, num_sys='Latin')""")
         self.single_level_tester(code=code, expected=expected)
 
     def test_forloop(self):
         code = textwrap.dedent("""\
-    for i in range 1 to 10:
-        print i
-    print 'wie niet weg is is gezien'""")
-        expected = textwrap.dedent("""\
-    step = 1 if 1 < 10 else -1
-    for i in range(1, 10 + step, step):
-      print(f'''{i}''')
-      time.sleep(0.1)
-    print(f'''wie niet weg is is gezien''')""")
+            for i in range 1 to 10:
+                print i
+            print 'wie niet weg is is gezien'""")
+        expected = textwrap.dedent(f"""\
+            step = 1 if 1 < 10 else -1
+            for i in {self.range_transpiled(1, 10, "'Latin'")}:
+              print(f'''{{i.text()}}''')
+              time.sleep(0.1)
+            print(f'''wie niet weg is is gezien''')""")
 
         self.single_level_tester(code=code, expected=expected)
 
     def test_allow_space_after_else_line(self):
         code = textwrap.dedent("""\
-    a is 1
-    if a is 1:
-        print a
-    else:
-        print 'nee'""")
+            a is 1
+            if a is 1:
+                print a
+            else:
+                print 'nee'""")
 
         expected = textwrap.dedent("""\
-    a = 1
-    if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
-      print(f'''{a}''')
-    else:
-      print(f'''nee''')""")
+            a = V(1, num_sys='Latin')
+            if a.data == 1:
+              print(f'''{a.text()}''')
+            else:
+              print(f'''nee''')""")
 
         self.multi_level_tester(
             max_level=17,
@@ -291,9 +311,9 @@ class TestsLevel17(HedyTester):
             while cond != False:
               cond is False""")
         expected = textwrap.dedent("""\
-            cond = True
-            while convert_numerals('Latin', cond)!=False:
-              cond = False
+            cond = V(True, bools={True: 'True', False: 'False'})
+            while cond.data!=False:
+              cond = V(False, bools={True: 'True', False: 'False'})
               time.sleep(0.1)""")
 
         self.multi_level_tester(
@@ -303,20 +323,19 @@ class TestsLevel17(HedyTester):
         )
 
     def test_allow_space_before_colon(self):
-
         code = textwrap.dedent("""\
-    a is 1
-    if a is 1  :
-        print a
-    else:
-        print 'nee'""")
+            a is 1
+            if a is 1  :
+                print a
+            else:
+                print 'nee'""")
 
         expected = textwrap.dedent("""\
-    a = 1
-    if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
-      print(f'''{a}''')
-    else:
-      print(f'''nee''')""")
+            a = V(1, num_sys='Latin')
+            if a.data == 1:
+              print(f'''{a.text()}''')
+            else:
+              print(f'''nee''')""")
 
         self.multi_level_tester(
             code=code,
@@ -327,85 +346,80 @@ class TestsLevel17(HedyTester):
     def test_if_under_else_in_for(self):
         # todo can me multitester with higher levels!
         code = textwrap.dedent("""\
-    for i in range 0 to 10:
-        antwoord is ask 'Wat is 5*5'
-        if antwoord is 24:
-            print 'Dat is fout!'
-        else:
-            print 'Dat is goed!'
-        if antwoord is 25:
-            i is 10""")
+            for i in range 0 to 10:
+                antwoord is ask 'Wat is 5*5'
+                if antwoord is 24:
+                    print 'Dat is fout!'
+                else:
+                    print 'Dat is goed!'
+                if antwoord is 25:
+                    i is 10""")
 
-        expected = textwrap.dedent("""\
-    step = 1 if 0 < 10 else -1
-    for i in range(0, 10 + step, step):
-      antwoord = input(f'''Wat is 5*5''')
-      try:
-        antwoord = int(antwoord)
-      except ValueError:
-        try:
-          antwoord = float(antwoord)
-        except ValueError:
-          pass
-      if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '24'):
-        print(f'''Dat is fout!''')
-      else:
-        print(f'''Dat is goed!''')
-      if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '25'):
-        i = 10
-      time.sleep(0.1)""")
+        expected = self.dedent(
+            f"""\
+            step = 1 if 0 < 10 else -1
+            for i in {self.range_transpiled(0, 10, "'Latin'")}:""",
+            (self.input_transpiled('antwoord', 'Wat is 5*5'), '  '),
+            ("""\
+            if antwoord.data == 24:
+              print(f'''Dat is fout!''')
+            else:
+              print(f'''Dat is goed!''')
+            if antwoord.data == 25:
+              i = V(10, num_sys='Latin')
+            time.sleep(0.1)""", '  '))
 
         self.single_level_tester(code=code, expected=expected)
 
     def test_if_elif(self):
         code = textwrap.dedent("""\
-      a is 5
-      if a is 1:
-          a is 2
-      elif a is 2:
-          a is 222""")
+            a is 5
+            if a is 1:
+                a is 2
+            elif a is 2:
+                a is 222""")
         expected = textwrap.dedent("""\
-      a = 5
-      if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
-        a = 2
-      elif convert_numerals('Latin', a) == convert_numerals('Latin', '2'):
-        a = 222""")
+            a = V(5, num_sys='Latin')
+            if a.data == 1:
+              a = V(2, num_sys='Latin')
+            elif a.data == 2:
+              a = V(222, num_sys='Latin')""")
 
         self.single_level_tester(code=code, expected=expected)
 
     def test_if_elif_french(self):
         code = textwrap.dedent("""\
-      a est 5
-      si a est 1:
-          a est 2
-      sinon si a est 2:
-          a est 222""")
+            a est 5
+            si a est 1:
+                a est 2
+            sinon si a est 2:
+                a est 222""")
         expected = textwrap.dedent("""\
-      a = 5
-      if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
-        a = 2
-      elif convert_numerals('Latin', a) == convert_numerals('Latin', '2'):
-        a = 222""")
+            a = V(5, num_sys='Latin')
+            if a.data == 1:
+              a = V(2, num_sys='Latin')
+            elif a.data == 2:
+              a = V(222, num_sys='Latin')""")
 
         self.single_level_tester(code=code, expected=expected, lang='fr')
 
     def test_if_with_multiple_elifs(self):
         code = textwrap.dedent("""\
-      a is 5
-      if a is 1:
-          a is 2
-      elif a is 4:
-          a is 3
-      elif a is 2:
-          a is 222""")
+            a is 5
+            if a is 1:
+                a is 2
+            elif a is 4:
+                a is 3
+            elif a is 2:
+                a is 222""")
         expected = textwrap.dedent("""\
-      a = 5
-      if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
-        a = 2
-      elif convert_numerals('Latin', a) == convert_numerals('Latin', '4'):
-        a = 3
-      elif convert_numerals('Latin', a) == convert_numerals('Latin', '2'):
-        a = 222""")
+            a = V(5, num_sys='Latin')
+            if a.data == 1:
+              a = V(2, num_sys='Latin')
+            elif a.data == 4:
+              a = V(3, num_sys='Latin')
+            elif a.data == 2:
+              a = V(222, num_sys='Latin')""")
 
         self.single_level_tester(
             code=code, expected=expected, expected_commands=[
@@ -424,16 +438,16 @@ class TestsLevel17(HedyTester):
 
     def test_equality_with_lists(self):
         code = textwrap.dedent("""\
-      m is [1, 2]
-      n is [1, 2]
-      if m is n:
-          print 'JA!'""")
+            m is [1, 2]
+            n is [1, 2]
+            if m is n:
+                print 'JA!'""")
 
         expected = textwrap.dedent("""\
-      m = [1, 2]
-      n = [1, 2]
-      if convert_numerals('Latin', m) == convert_numerals('Latin', n):
-        print(f'''JA!''')""")
+            m = V([V(1, num_sys='Latin'), V(2, num_sys='Latin')])
+            n = V([V(1, num_sys='Latin'), V(2, num_sys='Latin')])
+            if m.data == n.data:
+              print(f'''JA!''')""")
 
         self.multi_level_tester(
             code=code,
@@ -443,10 +457,10 @@ class TestsLevel17(HedyTester):
 
     def test_equality_with_incompatible_types_gives_error(self):
         code = textwrap.dedent("""\
-    a is 'test'
-    b is 15
-    if a is b:
-      c is 1""")
+        a is 'test'
+        b is 15
+        if a is b:
+          c is 1""")
         self.multi_level_tester(
             code=code,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
@@ -456,29 +470,23 @@ class TestsLevel17(HedyTester):
     @parameterized.expand(HedyTester.comparison_commands)
     def test_comparisons(self, comparison):
         code = textwrap.dedent(f"""\
-      leeftijd is ask 'Hoe oud ben jij?'
-      if leeftijd {comparison} 12:
-          print 'Dan ben je jonger dan ik!'""")
-        expected = textwrap.dedent(f"""\
-      leeftijd = input(f'''Hoe oud ben jij?''')
-      try:
-        leeftijd = int(leeftijd)
-      except ValueError:
-        try:
-          leeftijd = float(leeftijd)
-        except ValueError:
-          pass
-      if convert_numerals('Latin', leeftijd){comparison}convert_numerals('Latin', 12):
-        print(f'''Dan ben je jonger dan ik!''')""")
+            leeftijd is ask 'Hoe oud ben jij?'
+            if leeftijd {comparison} 12:
+                print 'Dan ben je jonger dan ik!'""")
+        expected = self.dedent(
+            self.input_transpiled('leeftijd', 'Hoe oud ben jij?'),
+            f"""\
+            if leeftijd.data{comparison}12:
+              print(f'''Dan ben je jonger dan ik!''')""")
 
         self.single_level_tester(code=code, expected=expected)
 
     @parameterized.expand(HedyTester.number_comparison_commands)
     def test_smaller_with_string_gives_type_error(self, comparison):
         code = textwrap.dedent(f"""\
-      a is 'text'
-      if a {comparison} 12:
-          b is 1""")
+        a is 'text'
+        if a {comparison} 12:
+            b is 1""")
 
         self.multi_level_tester(
             code=code,
@@ -488,30 +496,34 @@ class TestsLevel17(HedyTester):
 
     def test_not_equal_string_literal(self):
         code = textwrap.dedent(f"""\
-    if 'quoted' != 'string':
-      sleep""")
+        if 'quoted' != 'string':
+          sleep""")
         expected = textwrap.dedent(f"""\
-    if 'quoted'!='string':
-      time.sleep(1)""")
+        if 'quoted'!='string':
+          time.sleep(1)""")
 
         self.multi_level_tester(
             code=code,
             expected=expected
         )
 
-    @parameterized.expand(["'text'", '1', '1.3', '[1, 2]'])
-    def test_not_equal(self, arg):
+    @parameterized.expand([
+        ("'text'", "V('text')"),
+        ('1', "V(1, num_sys='Latin')"),
+        ('1.3', "V(1.3, num_sys='Latin')"),
+        ('[1, 2]', "V([V(1, num_sys='Latin'), V(2, num_sys='Latin')])")])
+    def test_not_equal(self, arg, exp):
         code = textwrap.dedent(f"""\
-      a = {arg}
-      b = {arg}
-      if a != b:
-          b = 1""")
+            a = {arg}
+            b = {arg}
+            if a != b:
+                b = 1""")
 
         expected = textwrap.dedent(f"""\
-      a = {arg}
-      b = {arg}
-      if convert_numerals('Latin', a)!=convert_numerals('Latin', b):
-        b = 1""")
+            a = {exp}
+            b = {exp}
+            if a.data!=b.data:
+              b = V(1, num_sys='Latin')""")
 
         self.multi_level_tester(
             code=code,
@@ -535,28 +547,18 @@ class TestsLevel17(HedyTester):
             exception=exceptions.InvalidTypeCombinationException
         )
 
-    def test_if_pressed_with_turtlecolor(self):
+    def test_if_pressed_with_color(self):
         code = textwrap.dedent("""\
         if x is pressed:
             color red""")
 
-        # Need to exgtract this out for now because of an autopep8 bug
-        # https://github.com/hhatto/autopep8/issues/744
-        color_dict = "{'black': 'black', 'blue': 'blue', 'brown': 'brown', 'gray': 'gray', 'green': 'green', 'orange': 'orange', 'pink': 'pink', 'purple': 'purple', 'red': 'red', 'white': 'white', 'yellow': 'yellow'}"
-
-        expected = HedyTester.dedent(f"""\
-        if_pressed_mapping = {{"else": "if_pressed_default_else"}}
-        if_pressed_mapping['x'] = 'if_pressed_x_'
-        def if_pressed_x_():
-            __trtl = f'{{convert_numerals("Latin", "red")}}'
-            color_dict = {color_dict}
-            if __trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
-              raise Exception(f{self.value_exception_transpiled()})
-            else:
-              if not __trtl in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
-                __trtl = color_dict[__trtl]
-            t.pencolor(__trtl)
-        extensions.if_pressed(if_pressed_mapping)""")
+        expected = self.dedent(
+            f"""\
+            if_pressed_mapping = {{"else": "if_pressed_default_else"}}
+            if_pressed_mapping['x'] = 'if_pressed_x_'
+            def if_pressed_x_():""",
+            (self.turtle_color_command_transpiled('"red"'), '    '),
+            "extensions.if_pressed(if_pressed_mapping)")
 
         self.multi_level_tester(
             code=code,
@@ -670,19 +672,19 @@ class TestsLevel17(HedyTester):
 
     def test_if_button_is_pressed_print(self):
         code = textwrap.dedent("""\
-        x = 'PRINT'
-        x is button
-        if PRINT is pressed:
-            print 'The button got pressed!'""")
+            x = 'PRINT'
+            x is button
+            if PRINT is pressed:
+                print 'The button got pressed!'""")
 
         expected = HedyTester.dedent("""\
-         x = 'PRINT'
-         create_button(x)
-         if_pressed_mapping = {"else": "if_pressed_default_else"}
-         if_pressed_mapping['PRINT'] = 'if_pressed_PRINT_'
-         def if_pressed_PRINT_():
-             print(f'''The button got pressed!''')
-         extensions.if_pressed(if_pressed_mapping)""")
+            x = V('PRINT')
+            create_button(x.data)
+            if_pressed_mapping = {"else": "if_pressed_default_else"}
+            if_pressed_mapping['PRINT'] = 'if_pressed_PRINT_'
+            def if_pressed_PRINT_():
+                print(f'''The button got pressed!''')
+            extensions.if_pressed(if_pressed_mapping)""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -745,21 +747,21 @@ class TestsLevel17(HedyTester):
 
     def test_source_map(self):
         code = textwrap.dedent("""\
-        for i in range 1 to 10:
-            print i
-        print 'Ready or not, here I come!'""")
+            for i in range 1 to 10:
+                print i
+            print 'Ready or not, here I come!'""")
 
-        excepted_code = textwrap.dedent("""\
-        step = 1 if 1 < 10 else -1
-        for i in range(1, 10 + step, step):
-          print(f'''{i}''')
-          time.sleep(0.1)
-        print(f'''Ready or not, here I come!''')""")
+        excepted_code = textwrap.dedent(f"""\
+            step = 1 if 1 < 10 else -1
+            for i in {self.range_transpiled(1, 10, "'Latin'")}:
+              print(f'''{{i.text()}}''')
+              time.sleep(0.1)
+            print(f'''Ready or not, here I come!''')""")
 
         expected_source_map = {
             '1/5-1/6': '1/10-1/11',
             '2/11-2/12': '1/1-1/2',
-            '2/5-2/12': '3/1-3/18',
+            '2/5-2/12': '3/1-3/25',
             '1/1-2/21': '1/1-4/18',
             '3/1-3/35': '5/1-5/41',
             '1/1-3/36': '1/1-5/41'

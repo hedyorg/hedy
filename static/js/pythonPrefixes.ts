@@ -52,7 +52,9 @@ except ModuleNotFoundError:
     pass
 
 global int_saver
-global convert_numerals  # needed for recursion to work
+global convert_numerals
+global localize
+global get_num_sys  # needed for recursion to work
 int_saver = int
 
 
@@ -87,40 +89,66 @@ def int(s):
     return (int_saver(s))
 
 
-def convert_numerals(alphabet, number):
+numerals_dict_return = {
+    'Latin': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+    'Brahmi': ['𑁦', '𑁧', '𑁨', '𑁩', '𑁪', '𑁫', '𑁬', '𑁭', '𑁮', '𑁯'],
+    'Devanagari': ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'],
+    'Gujarati': ['૦', '૧', '૨', '૩', '૪', '૫', '૬', '૭', '૮', '૯'],
+    'Gurmukhi': ['੦', '੧', '੨', '੩', '੪', '੫', '੬', '੭', '੮', '੯'],
+    'Bengali': ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'],
+    'Kannada': ['೦', '೧', '೨', '೩', '೪', '೫', '೬', '೭', '೮', '೯'],
+    'Odia': ['୦', '୧', '୨', '୩', '୪', '୫', '୬', '୭', '୮', '୯'],
+    'Malayalam': ['൦', '൧', '൨', '൩', '൪', '൫', '൬', '൭', '൮', '൯'],
+    'Tamil': ['௦', '௧', '௨', '௩', '௪', '௫', '௬', '௭', '௮', '௯'],
+    'Telugu': ['౦', '౧', '౨', '౩', '౪', '౫', '౬', '౭', '౮', '౯'],
+    'Burmese': ['၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉'],
+    'Tibetan': ['༠', '༡', '༢', '༣', '༤', '༥', '༦', '༧', '༨', '༩'],
+    'Mongolian': ['᠐', '᠑', '᠒', '᠓', '᠔', '᠕', '᠖', '᠗', '᠘', '᠙'],
+    'Khmer': ['០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩'],
+    'Thai': ['๐', '๑', '๒', '๓', '๔', '๕', '๖', '๗', '๘', '๙'],
+    'Lao': ['໐', '໑', '໒', '໓', '໔', '໕', '໖', '໗', '໘', '໙'],
+    'Javanese': ['꧐', '꧑', '꧒', '꧓', '꧔', '꧕', '꧖', '꧗', '꧘', '꧙'],
+    'Arabic': ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'],
+    'Persian': ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'],
+    'Urdu': ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹']
+}
+
+
+def is_int(n):
+    try:
+        int(n)
+        return True
+    except Exception:
+        return False
+
+
+def get_num_sys(value):
+    if isinstance(value, V):
+        return value.numeral_system
+    for num_sys, digits in numerals_dict_return.items():
+        if all(n in digits for n in str(value) if is_int(n)):
+            return num_sys
+    return None
+
+
+def localize(value, num_sys=None, bools=None):
+    numeral_system = num_sys if num_sys else 'Latin'
+    boolean_values = bools if bools else {True: 'True', False: 'False'}
+    return convert_numerals(numeral_system, value, boolean_values)
+
+
+def convert_numerals(alphabet, number, booleans=None):
     if number is None or number == '':
         return ''
 
-    if bool == type(number):
-        return number
-    if number == 'True':
-        return True
-    if number == 'False':
-        return False
+    booleans = {True: 'True', False: 'False'} if not booleans else booleans
 
-    numerals_dict_return = {
-        'Latin': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-        'Brahmi': ['𑁦', '𑁧', '𑁨', '𑁩', '𑁪', '𑁫', '𑁬', '𑁭', '𑁮', '𑁯'],
-        'Devanagari': ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'],
-        'Gujarati': ['૦', '૧', '૨', '૩', '૪', '૫', '૬', '૭', '૮', '૯'],
-        'Gurmukhi': ['੦', '੧', '੨', '੩', '੪', '੫', '੬', '੭', '੮', '੯'],
-        'Bengali': ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'],
-        'Kannada': ['೦', '೧', '೨', '೩', '೪', '೫', '೬', '೭', '೮', '೯'],
-        'Odia': ['୦', '୧', '୨', '୩', '୪', '୫', '୬', '୭', '୮', '୯'],
-        'Malayalam': ['൦', '൧', '൨', '൩', '൪', '൫', '൬', '൭', '൮', '൯'],
-        'Tamil': ['௦', '௧', '௨', '௩', '௪', '௫', '௬', '௭', '௮', '௯'],
-        'Telugu': ['౦', '౧', '౨', '౩', '౪', '౫', '౬', '౭', '౮', '౯'],
-        'Burmese': ['၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉'],
-        'Tibetan': ['༠', '༡', '༢', '༣', '༤', '༥', '༦', '༧', '༨', '༩'],
-        'Mongolian': ['᠐', '᠑', '᠒', '᠓', '᠔', '᠕', '᠖', '᠗', '᠘', '᠙'],
-        'Khmer': ['០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩'],
-        'Thai': ['๐', '๑', '๒', '๓', '๔', '๕', '๖', '๗', '๘', '๙'],
-        'Lao': ['໐', '໑', '໒', '໓', '໔', '໕', '໖', '໗', '໘', '໙'],
-        'Javanese': ['꧐', '꧑', '꧒', '꧓', '꧔', '꧕', '꧖', '꧗', '꧘', '꧙'],
-        'Arabic': ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'],
-        'Persian': ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'],
-        'Urdu': ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹']
-    }
+    if type(number) is bool:
+        return booleans[number]
+    if number == 'True':
+        return booleans[True]
+    if number == 'False':
+        return booleans[False]
 
     number = str(number)
     T = str
@@ -148,6 +176,8 @@ def convert_numerals(alphabet, number):
 
 
 def int_with_error(s, err):
+    if isinstance(s, V):
+        s = s.data
     try:
         return int(str(s))
     except ValueError:
@@ -155,6 +185,8 @@ def int_with_error(s, err):
 
 
 def number_with_error(s, err):
+    if isinstance(s, V):
+        s = s.data
     try:
         return int(str(s))
     except ValueError:
@@ -166,9 +198,37 @@ def number_with_error(s, err):
 
 def sum_with_error(left, right, err):
     try:
+        if isinstance(left, V):
+            if isinstance(left.data, str):
+                left = left.text()
+            else:
+                left = left.data
+        if isinstance(right, V):
+            if isinstance(right.data, str):
+                right = right.text()
+            else:
+                right = right.data
         return left + right
     except Exception:
         raise Exception(err.format(left, right))
+
+
+class V:
+    def __init__(self, data, num_sys='Latin', bools=None):
+        self.data = data
+        self.numeral_system = num_sys
+        self.boolean_values = bools
+
+    def text(self):
+        if type(self.data) is list:
+            return ', '.join([localize(d.data, d.numeral_system, d.boolean_values) for d in self.data])
+        return localize(self.data, self.numeral_system, self.boolean_values)
+
+    # Needed to
+    def __eq__(self, other):
+        if isinstance(other, V):
+            return self.data == other.data
+        return False
 `;
 
 export const music_prefix = 

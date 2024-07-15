@@ -680,7 +680,7 @@ class TestsLevel8(HedyTester):
               time.sleep(1)
               time.sleep(0.1)""")
 
-        self.multi_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_repeat_with_comment(self):
         code = textwrap.dedent("""\
@@ -692,7 +692,7 @@ class TestsLevel8(HedyTester):
           time.sleep(1)
           time.sleep(0.1)""")
 
-        self.multi_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_repeat_inner_whole_line_comment(self):
         code = textwrap.dedent("""\
@@ -705,7 +705,7 @@ class TestsLevel8(HedyTester):
               time.sleep(1)
               time.sleep(0.1)""")
 
-        self.multi_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_repeat_end_line_comment(self):
         code = textwrap.dedent("""\
@@ -717,7 +717,7 @@ class TestsLevel8(HedyTester):
               time.sleep(1)
               time.sleep(0.1)""")
 
-        self.multi_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_repeat_whole_line_comment_after(self):
         code = textwrap.dedent("""\
@@ -730,7 +730,7 @@ class TestsLevel8(HedyTester):
               time.sleep(1)
               time.sleep(0.1)""")
 
-        self.multi_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_repeat_turtle(self):
         code = textwrap.dedent("""\

@@ -12,8 +12,6 @@ _if_less_command: print | ask | play | turtle | assign_button | assign_list | ad
 // just to be sure that if Lark tries to resolve ambiguity, error_invalid will be considered last
 error_invalid.-100: textwithoutspaces _SPACE* (quoted_text | textwithspaces)?
 
-//todo: list_access_var can be merged with var? would simplify rewriting a bit, some duplication now in processing
-list_access_var: var _IS var _AT (INT | random)
 assign_button: NAME _IS _BUTTON
 assign_list: var _IS textwithspaces (_COMMA textwithspaces)+
 assign: var _IS (list_access | textwithspaces)

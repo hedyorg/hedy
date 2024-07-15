@@ -561,44 +561,43 @@ class TestsLevel2(HedyTester):
         code = "sleep 2"
         expected = "sleep(2000)"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=18, microbit=True)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, microbit=True)
 
     def test_sleep_micro_bit_no_argument(self):
         code = "sleep"
         expected = "sleep(1000)"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=18, microbit=True)\
-
+        self.multi_level_tester(code=code, expected=expected, max_level=18, microbit=True)
 
     def test_sleep_micro_bit_variable_argument(self):
         code = "duration is 2\nsleep duration"
         expected = "duration = 2\nsleep(duration * 1000)"
 
-        self.multi_level_tester(code=code, expected=expected, max_level=18, microbit=True)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, microbit=True)
 
     def test_sleep_with_default_number(self):
         code = "sleep 1"
         expected = HedyTester.sleep_command_transpiled('"1"')
 
-        self.multi_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_sleep_with_number(self):
         code = "sleep 20"
         expected = HedyTester.sleep_command_transpiled('"20"')
 
-        self.multi_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_sleep_with_number_hi(self):
         code = "sleep २"
         expected = HedyTester.sleep_command_transpiled('"2"')
 
-        self.multi_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_sleep_with_number_ar(self):
         code = "sleep ٣"
         expected = HedyTester.sleep_command_transpiled('"3"')
 
-        self.multi_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_sleep_with_number_variable(self):
         code = textwrap.dedent("""\

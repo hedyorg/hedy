@@ -179,7 +179,7 @@ class TestsLevel9(HedyTester):
                time.sleep(1)
                time.sleep(0.1)""")
 
-        self.multi_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_repeat_nested_multi_commands(self):
         code = textwrap.dedent("""\

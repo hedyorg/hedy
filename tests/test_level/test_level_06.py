@@ -267,7 +267,7 @@ class TestsLevel6(HedyTester):
                                 expected=expected,
                                 lang='fr')
 
-    def test_equality_arabic(self):
+    def test_equality_var_arabic(self):
         code = textwrap.dedent("""\
         nummer1 is ٢
         nummer2 is 2

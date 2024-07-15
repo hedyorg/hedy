@@ -651,8 +651,8 @@ class TestsLevel3(HedyTester):
         print numbers at random""")
 
         expected = HedyTester.dedent("numbers = ['1', '2']",
-                                     HedyTester.remove_transpiled('numbers', "'1'"),
-                                     HedyTester.remove_transpiled('numbers', "'2'"),
+                                     HedyTester.remove_transpiled_obsolete('numbers', "'1'"),
+                                     HedyTester.remove_transpiled_obsolete('numbers', "'2'"),
                                      "numbers.append('4')",
                                      HedyTester.list_access_transpiled("random.choice(numbers)"),
                                      "print(f'{random.choice(numbers)}')")
@@ -725,7 +725,7 @@ class TestsLevel3(HedyTester):
         print dieren at random""")
 
         expected = HedyTester.dedent("dieren = ['koe', 'kiep']",
-                                     HedyTester.remove_transpiled('dieren', "'kiep'"),
+                                     HedyTester.remove_transpiled_obsolete('dieren', "'kiep'"),
                                      HedyTester.list_access_transpiled('random.choice(dieren)'),
                                      "print(f'{random.choice(dieren)}')")
 
@@ -742,7 +742,7 @@ class TestsLevel3(HedyTester):
         remove kiep's from dieren
         print dieren at random""")
         expected = HedyTester.dedent("dieren = ['koe', 'kiep\\\'s']",
-                                     HedyTester.remove_transpiled('dieren', "'kiep\\\'s'"),
+                                     HedyTester.remove_transpiled_obsolete('dieren', "'kiep\\\'s'"),
                                      HedyTester.list_access_transpiled('random.choice(dieren)'),
                                      "print(f'{random.choice(dieren)}')")
 
@@ -760,7 +760,7 @@ class TestsLevel3(HedyTester):
         print dieren at random""")
 
         expected = HedyTester.dedent("dieren = ['koe', 'kiep\"s']",
-                                     HedyTester.remove_transpiled('dieren', "'kiep\"s'"),
+                                     HedyTester.remove_transpiled_obsolete('dieren', "'kiep\"s'"),
                                      HedyTester.list_access_transpiled("random.choice(dieren)"),
                                      "print(f'{random.choice(dieren)}')")
 
@@ -846,7 +846,7 @@ class TestsLevel3(HedyTester):
 
         expected = HedyTester.dedent("colors = ['green', 'red', 'blue']",
                                      "color = input(f'what color to remove?')",
-                                     HedyTester.remove_transpiled('colors', 'color'),
+                                     HedyTester.remove_transpiled_obsolete('colors', 'color'),
                                      HedyTester.list_access_transpiled('random.choice(colors)'),
                                      "print(f'{random.choice(colors)}')")
 

@@ -538,6 +538,9 @@ class ExtractAST(Transformer):
     def text(self, meta, args):
         return Tree('text', [' '.join([str(c) for c in args])], meta)
 
+    def NAME(self, args):
+        return ''.join([str(c) for c in args])
+
     def INT(self, args):
         return Tree('integer', [str(args)])
 
@@ -564,19 +567,9 @@ class ExtractAST(Transformer):
         return Tree('var', [''.join([str(c) for c in args])], meta)
 
     def list_access(self, meta, args):
-        # FH, may 2022 I don't fully understand why we remove INT here and just plemp
-        # the number in the tree. should be improved but that requires rewriting the further processing code too (TODO)
-        if isinstance(args[1], Tree):
-            if "random" in args[1].data:
-                return Tree('list_access', [args[0], 'random'], meta)
-            elif args[1].data == "var_access":
-                return Tree('list_access', [args[0], args[1].children[0]], meta)
-            else:
-                # convert to latin int
-                latin_int_index = str(int(args[1].children[0]))
-                return Tree('list_access', [args[0], latin_int_index], meta)
-        else:
-            return Tree('list_access', [args[0], args[1]], meta)
+        if isinstance(args[1], Tree) and "random" in args[1].data:
+            return Tree('list_access', [args[0], 'random'], meta)
+        return Tree('list_access', [args[0], args[1]], meta)
 
     # level 5
     def error_unsupported_number(self, meta, args):
@@ -628,13 +621,22 @@ class LookupEntryCollector(visitors.Visitor):
 
     def list_access(self, tree):
         list_name = escape_var(tree.children[0].children[0])
-        position_name = escape_var(tree.children[1])
-        if position_name == 'random':
-            name = f'random.choice({list_name})'
+        index = tree.children[1].children[0] if isinstance(tree.children[1], Tree) else tree.children[1]
+        try:
+            index = str(int(index))  # needed to convert non-latin numbers
+            name = f'{list_name}.data[int({index})-1]'
+            name_old = f'{list_name}[int({index})-1]'
+        except ValueError:
+            if index == 'random':
+                name = f'random.choice({list_name}.data)'
+                name_old = f'random.choice({list_name})'
+            else:
+                name = f'{list_name}.data[int({escape_var(index)}.data)-1]'
+                name_old = f'{list_name}[int({escape_var(index)})-1]'
+        if self.level > 11:
+            self.add_to_lookup(name, tree, tree.meta.line, True)
         else:
-            # We want list access to be 1-based instead of 0-based, hence the -1
-            name = f'{list_name}[int({position_name})-1]'
-        self.add_to_lookup(name, tree, tree.meta.line, True)
+            self.add_to_lookup(name_old, tree, tree.meta.line, True)
 
     def change_list_item(self, tree):
         self.add_to_lookup(tree.children[0].children[0], tree, tree.meta.line, True)
@@ -751,10 +753,10 @@ class TypeValidator(Transformer):
 
         list_name = escape_var(tree.children[0].children[0])
         if tree.children[1] == 'random':
-            name = f'random.choice({list_name})'
+            name = f'random.choice({list_name}.data)'
         else:
             # We want list access to be 1-based instead of 0-based, hence the -1
-            name = f'{list_name}[int({tree.children[1]})-1]'
+            name = f'{list_name}.data[int({tree.children[1]})-1]'
         self.save_type_to_lookup(name, HedyType.any)
 
         return self.to_typed_tree(tree, HedyType.any)
@@ -1420,6 +1422,75 @@ def get_allowed_types(command, level):
     return allowed[-1] if allowed else []
 
 
+class BV:
+    """
+    TV stands for base value an is used to transpile AST nodes that need to preserve localization information,
+    such as numeral system. It has the following properties:
+      - data holds the already transpiled Python value, e.g. 1, -50.5, 'Hedy', True, 'sum * 15'
+      - num_sys keeps the used numeral system, e.g. 'Latin', 'Arabic'
+      - booleans holds the actual keywords used to create the boolean value, e.g. {True: 'вярно', False: 'невярно'}
+    """
+
+    def __init__(self, data, num_sys, booleans):
+        self.data = data
+        self.num_sys = num_sys
+        self.booleans = booleans
+
+    def __str__(self):
+        return f"{self.__class__.__name__}({self.data}, {self.num_sys}, {self.booleans})"
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self.data}, {self.num_sys}, {self.booleans})"
+
+
+class LV(BV):
+    """
+    LV stands for literal value an is used to transpile numbers, booleans and texts. The data property contains the
+    already transpiled value, e.g. 1, -50.5, 'Hedy', True, false. Note that in some cases variable access is
+    parsed to a text node instead of a var_access and gets converted to a LV. If you need to check for variables,
+    always assume they could come as plain strings or LVs, i.e. 'variable' or LV('variable').
+    """
+
+    def __init__(self, data, num_sys=None, booleans=None):
+        super().__init__(data, num_sys, booleans)
+
+
+class EV(BV):
+    """
+    EV stands for expression value and is used to transpile expressions. The data property contains the already
+    transpiled expression, e.g. '5 * a', 'sum_with_error(a, b, get_error('error_name'))'.
+    """
+
+    def __init__(self, data, num_sys=None, bools=None):
+        super().__init__(data, num_sys, bools)
+
+
+# TODO: this is duplicated in the prefixes. Extract and deduplicate.
+numeral_systems = {
+    'Latin': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+    'Brahmi': ['𑁦', '𑁧', '𑁨', '𑁩', '𑁪', '𑁫', '𑁬', '𑁭', '𑁮', '𑁯'],
+    'Devanagari': ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'],
+    'Gujarati': ['૦', '૧', '૨', '૩', '૪', '૫', '૬', '૭', '૮', '૯'],
+    'Gurmukhi': ['੦', '੧', '੨', '੩', '੪', '੫', '੬', '੭', '੮', '੯'],
+    'Bengali': ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'],
+    'Kannada': ['೦', '೧', '೨', '೩', '೪', '೫', '೬', '೭', '೮', '೯'],
+    'Odia': ['୦', '୧', '୨', '୩', '୪', '୫', '୬', '୭', '୮', '୯'],
+    'Malayalam': ['൦', '൧', '൨', '൩', '൪', '൫', '൬', '൭', '൮', '൯'],
+    'Tamil': ['௦', '௧', '௨', '௩', '௪', '௫', '௬', '௭', '௮', '௯'],
+    'Telugu': ['౦', '౧', '౨', '౩', '౪', '౫', '౬', '౭', '౮', '౯'],
+    'Burmese': ['၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉'],
+    'Tibetan': ['༠', '༡', '༢', '༣', '༤', '༥', '༦', '༧', '༨', '༩'],
+    'Mongolian': ['᠐', '᠑', '᠒', '᠓', '᠔', '᠕', '᠖', '᠗', '᠘', '᠙'],
+    'Khmer': ['០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩'],
+    'Thai': ['๐', '๑', '๒', '๓', '๔', '๕', '๖', '๗', '๘', '๙'],
+    'Lao': ['໐', '໑', '໒', '໓', '໔', '໕', '໖', '໗', '໘', '໙'],
+    'Javanese': ['꧐', '꧑', '꧒', '꧓', '꧔', '꧕', '꧖', '꧗', '꧘', '꧙'],
+    'Arabic': ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'],
+    'Persian': ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'],
+    'Urdu': ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹']
+}
+
+
 # decorator used to store each class in the lookup table
 def hedy_transpiler(level, microbit=False):
     def decorator(c):
@@ -1472,6 +1543,8 @@ class ConvertToPython(Transformer):
     # default for line number is max lines so if it is not given, there
     # is no check on whether the var is defined
     def is_variable(self, variable_name, access_line_number=100):
+        # Unpacking is needed because sometimes variable references are parsed as 'text' and transpiled to LVs
+        variable_name = self.unpack(variable_name)
         if self.is_var_in_lookup(variable_name) and not self.is_var_defined_before_access(variable_name,
                                                                                           access_line_number):
             definition_line_number = [a.definition_line for a in self.lookup if a.name == variable_name][0]
@@ -1490,7 +1563,7 @@ class ConvertToPython(Transformer):
         if isinstance(variable_name, str):
             pattern = r'^([a-zA-Z_][a-zA-Z0-9_]*)\('
             match = re.match(pattern, variable_name)
-            is_function = match and [a.name for a in self.lookup if match.group(1) + "()" == a.name]
+            is_function = match is not None and f'{match.group(1)}()' in [a.name for a in self.lookup]
             return is_function
 
         return False
@@ -1521,23 +1594,14 @@ class ConvertToPython(Transformer):
         else:
             return process_characters_needing_escape(variable_name)
 
-    def add_variable_access_location(self, variable_name, access_line_number):
+    def add_variable_access_location(self, var_name, access_line_number):
         # store the line of access (or string value) in the lookup table
         # so we know what variable is used where
-        if isinstance(variable_name, str):
-            vars = [a for a in self.lookup if isinstance(a.name, str) and a.name[:len(variable_name)] == variable_name]
-            for v in vars:  # vars can be defined multiple times, access validates all of them
+        if isinstance(var_name, str):
+            variables = [a for a in self.lookup if type(a.name) is str and a.name[:len(var_name)] == var_name]
+            for v in variables:  # vars can be defined multiple times, access validates all of them
                 corresponding_lookup_entry = v
                 corresponding_lookup_entry.access_line = access_line_number
-
-    def process_variable_for_comparisons(self, name):
-        # used to transform variables in comparisons
-        if self.is_variable(name):
-            return f"convert_numerals('{self.numerals_language}', {escape_var(name)})"
-        elif ConvertToPython.is_float(name):
-            return f"convert_numerals('{self.numerals_language}', {name})"
-        elif ConvertToPython.is_quoted(name) or self.is_bool(name):
-            return f"{name}"
 
     def get_fresh_var(self, name):
         while self.is_variable(name):
@@ -1550,12 +1614,16 @@ class ConvertToPython(Transformer):
         # If an unquoted arg is not present in the lookup table, an UndefinedVarException is raised
 
         def is_var_candidate(arg) -> bool:
+            # expressions (which currently come as Trees or EV) are excluded from the variables list
+            if isinstance(arg, LV):
+                arg = self.unpack(arg)
             return not isinstance(arg, Tree) and \
+                not isinstance(arg, EV) and \
                 not self.is_int(arg) and \
                 not self.is_float(arg) and \
                 not self.is_bool(arg)
 
-        args_to_process = [a for a in args if is_var_candidate(a)]  # we do not check trees (calcs) they are always ok
+        args_to_process = [self.unpack(a) for a in args if is_var_candidate(a)]
 
         unquoted_args = [a for a in args_to_process if not ConvertToPython.is_quoted(a)]
         unquoted_in_lookup = [self.is_variable(a, var_access_linenumber) for a in unquoted_args]
@@ -1571,7 +1639,7 @@ class ConvertToPython(Transformer):
             # return first name with issue
             for index, a in enumerate(unquoted_args):
                 current_arg = unquoted_in_lookup[index]
-                if current_arg is None:
+                if current_arg is False:
                     first_unquoted_var = a
                     raise exceptions.UndefinedVarException(name=first_unquoted_var, line_number=var_access_linenumber)
 
@@ -1580,14 +1648,58 @@ class ConvertToPython(Transformer):
         # The arg is valid if it is either an int, a float, the 'random' operator, a quoted string,
         # or a variable. If the arg is an unquoted string which is not in the lookup table, an
         # UnquotedAssignTextException is raised. Most likely the real is that the kid forgot to add quotes.
-        try:
-            self.check_var_usage([arg], meta.line)
-        except exceptions.UndefinedVarException:
-            if not (self.is_int(arg) or
-                    self.is_float(arg) or
-                    self.is_random(arg) or
-                    self.is_bool(arg)):
-                raise exceptions.UnquotedAssignTextException(text=arg, line_number=meta.line)
+        args = arg if type(arg) is list else [arg]
+        for a in args:
+            try:
+                self.check_var_usage([a], meta.line)
+            except exceptions.UndefinedVarException:
+                a = self.unpack(a)
+                if not (self.is_int(a) or
+                        self.is_float(a) or
+                        self.is_random(a) or
+                        self.is_bool(a)):
+                    raise exceptions.UnquotedAssignTextException(text=a, line_number=meta.line)
+
+    def get_successfully_accessed_vars(self, args, access_line_number):
+        # Currently, the is_variable method registers var access as a side effect
+        # this should be refactored or the naming should be changed
+        result = []
+        for a in args:
+            # Unpacking is needed because sometimes variable references are parsed as 'text' and transpiled to LVs
+            value = self.unpack(a)
+            if self.is_variable(value, access_line_number):
+                result.append(value)
+                self.add_variable_access_location(value, access_line_number)
+        return result
+
+    def get_successfully_accessed_var(self, arg, access_line_number):
+        value = self.unpack(arg)
+        if self.is_variable(value, access_line_number):
+            self.add_variable_access_location(value, access_line_number)
+            return value
+        return None
+
+    def merge_localization_info(self, args):
+        """ For now:
+            - take the numeral system of the first argument. If the arg is a LV or EV, return its numeral system.
+              If it is a variable, determine the numeral system at runtime.
+            - take the boolean representation of the first LV or EV argument that has booleans stored.
+              Unfortunately, at this point we don't have a way to determine the boolean representation at runtime.
+        """
+        num_sys, bools = None, None
+        if args:
+            num_sys = args[0].num_sys if isinstance(args[0], BV) else f'get_num_sys({args[0]})'
+            bools = next((a.booleans for a in args if isinstance(a, BV) and a.booleans is not None), None)
+        return num_sys, bools
+
+    def get_localization_info_from_arg(self, arg, access_line_number):
+        var = self.get_successfully_accessed_var(arg, access_line_number)
+        if var:
+            return f'get_num_sys({escape_var(var)})'
+        elif isinstance(arg, BV):
+            return f"'{arg.num_sys}'"
+        else:
+            return f'get_num_sys({arg})'
 
     # static methods
 
@@ -1599,14 +1711,14 @@ class ConvertToPython(Transformer):
     def is_quoted(s):
         opening_quotes = ['‘', "'", '"', "“", "«", "„"]
         closing_quotes = ['’', "'", '"', "”", "»", "“"]
-        return len(s) > 1 and (s[0] in opening_quotes and s[-1] in closing_quotes)
+        return isinstance(s, str) and len(s) > 1 and (s[0] in opening_quotes and s[-1] in closing_quotes)
 
     @staticmethod
     def is_int(n):
         try:
             int(n)
             return True
-        except ValueError:
+        except (ValueError, TypeError):
             return False
 
     @staticmethod
@@ -1614,12 +1726,12 @@ class ConvertToPython(Transformer):
         try:
             float(n)
             return True
-        except ValueError:
+        except (ValueError, TypeError):
             return False
 
     @staticmethod
     def is_random(s):
-        return 'random.choice' in s
+        return isinstance(s, str) and 'random.choice' in s
 
     @staticmethod
     def is_bool(s):
@@ -1627,12 +1739,27 @@ class ConvertToPython(Transformer):
 
     @staticmethod
     def is_list(s):
-        return '[' in s and ']' in s
+        return isinstance(s, str) and '[' in s and ']' in s
 
     @staticmethod
     def indent(s, spaces_amount=2):
         lines = s.split('\n')
         return '\n'.join([' ' * spaces_amount + line for line in lines])
+
+    @staticmethod
+    def unpack(arg):
+        if isinstance(arg, Tree):  # left for compatibility reasons
+            return arg.children[0]
+        if isinstance(arg, BV):
+            return arg.data
+        return arg
+
+    @staticmethod
+    def get_num_sys(number):
+        for num_sys, digits in numeral_systems.items():
+            if all(n in digits for n in number if ConvertToPython.is_int(n)):
+                return num_sys
+        return None
 
 
 @v_args(meta=True)
@@ -1684,10 +1811,10 @@ class ConvertToPython_1(ConvertToPython):
 
     def play(self, meta, args):
         if len(args) == 0:
-            return self.make_play('C4', meta) + self.add_debug_breakpoint()
+            return self.make_play('C4', meta)
 
         note = args[0].upper()  # will we also support multiple notes at once?
-        return self.make_play(note, meta) + self.add_debug_breakpoint()
+        return self.make_play(note, meta)
 
     def comment(self, meta, args):
         return f"#{''.join(args)}"
@@ -1740,7 +1867,7 @@ class ConvertToPython_1(ConvertToPython):
 
         return textwrap.dedent(f"""\
                 play(note_with_error('{note}', {ex}))
-                time.sleep(0.5)""")
+                time.sleep(0.5)""") + self.add_debug_breakpoint()
 
     def make_play_var(self, note, meta):
         self.check_var_usage([note], meta.line)
@@ -1749,7 +1876,7 @@ class ConvertToPython_1(ConvertToPython):
 
         return textwrap.dedent(f"""\
                 play(note_with_error({chosen_note}, {ex}))
-                time.sleep(0.5)""")
+                time.sleep(0.5)""") + self.add_debug_breakpoint()
 
     def make_color(self, parameter, language):
         return self.make_turtle_color_command(parameter, Command.color, 'pencolor', language)
@@ -1786,24 +1913,22 @@ class ConvertToPython_1(ConvertToPython):
             t.{command_text}({variable}){self.add_debug_breakpoint()}""")
 
     def make_index_error_check_if_list(self, args):
-        lists_names = []
-        list_args = []
+        list_args = {}
         # List usage comes in indexation and random choice
-        var_regex = r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+"
+        var_regex = r"([\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+)(\.data)?"
         list_access_with_int_cast = fr"(({var_regex})+\[int\(({var_regex})\)-1\])"
         list_access_without_cast = fr"(({var_regex})+\[({var_regex})-1\])"
         list_access_random = fr"(random\.choice\(({var_regex})\))"
         list_regex = f"{list_access_with_int_cast}|{list_access_without_cast}|{list_access_random}"
         for arg in args:
-            # Expressions come inside a Tree object, so unpack them
-            if isinstance(arg, Tree):
-                arg = arg.children[0]
+            # arg could be a literal value, expression value or a tree, so unpack it
+            arg = str(self.unpack(arg))
             for group in regex.findall(list_regex, arg):
                 match = [e for e in group if e][:2]
-                list_args.append(match[0])
-                lists_names.append(match[1])
+                # match[0] is the access, e.g. animals[int(1)-1]; match[2] is the list name, e.g. animals
+                list_args[match[0]] = match[1]
 
-        errors = [self.make_index_error(list_args[i], list_name) for i, list_name in enumerate(lists_names)]
+        errors = [self.make_index_error(list_access, list_name) for list_access, list_name in list_args.items()]
         return ''.join(errors)
 
     def make_index_error(self, code, list_name):
@@ -1908,7 +2033,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def play(self, meta, args):
         if len(args) == 0:
-            return self.make_play('C4', meta) + self.add_debug_breakpoint()
+            return self.make_play('C4', meta)
 
         # if ConvertToPython.is_int(args[0]): #handig ff laten staan als ik nog integers ga ondersteunen in this PR or the next
         #     parameter = int(args[0])
@@ -1918,11 +2043,11 @@ class ConvertToPython_2(ConvertToPython_1):
         note = args[0]
         if isinstance(note, str):
             if present_in_notes_mapping(note):  # this is a supported note
-                return self.make_play(note.upper(), meta) + self.add_debug_breakpoint()
+                return self.make_play(note.upper(), meta)
 
         # no note? it must be a variable!
         self.add_variable_access_location(note, meta.line)
-        return self.make_play_var(note, meta) + self.add_debug_breakpoint()
+        return self.make_play_var(note, meta)
 
     def assign(self, meta, args):
         variable_name = args[0]
@@ -1977,7 +2102,7 @@ class ConvertToPython_3(ConvertToPython_2):
         else:
             return listname + '[int(' + args[1] + ')-1]'
 
-    def process_argument(self, meta, arg):
+    def process_add_to_remove_from_list_argument(self, meta, arg):
         # only call process_variable if arg is a string, else keep as is (ie.
         # don't change 5 into '5', my_list[1] into 'my_list[1]')
         if arg.isnumeric() and isinstance(arg, int):  # is int/float
@@ -1991,7 +2116,7 @@ class ConvertToPython_3(ConvertToPython_2):
             return self.process_variable(arg, meta.line)
 
     def add(self, meta, args):
-        value = self.process_argument(meta, args[0])
+        value = self.process_add_to_remove_from_list_argument(meta, args[0])
         list_var = args[1]
 
         # both sides have been used now
@@ -2000,7 +2125,7 @@ class ConvertToPython_3(ConvertToPython_2):
         return f"{list_var}.append({value}){self.add_debug_breakpoint()}"
 
     def remove(self, meta, args):
-        value = self.process_argument(meta, args[0])
+        value = self.process_add_to_remove_from_list_argument(meta, args[0])
         list_var = args[1]
 
         # both sides have been used now
@@ -2022,7 +2147,7 @@ class ConvertToPython_4(ConvertToPython_3):
     def process_variable_for_fstring(self, name):
         if self.is_variable(name):
             if self.numerals_language == "Latin":
-                converted = escape_var(name)
+                converted = f'{escape_var(name)}'
             else:
                 converted = f'convert_numerals("{self.numerals_language}", {escape_var(name)})'
             return "{" + converted + "}"
@@ -2395,7 +2520,6 @@ class ConvertToPython_8_9(ConvertToPython_7):
             self.add_else_key_mapping(else_function_name) + '\n' +
             self.make_function(else_function_name, else_code) + '\n' +
             self.make_extension_call()
-
         )
 
     def elses(self, meta, args):
@@ -2458,94 +2582,172 @@ for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):{self.a
 @hedy_transpiler(level=12)
 @source_map_transformer(source_map)
 class ConvertToPython_12(ConvertToPython_11):
-    def define(self, meta, args):
-        function_name = args[0]
-        args_str = ", ".join(str(x) for x in args[1].children) if isinstance(
-            args[1], Tree) and args[1].data == "arguments" else ""
-
-        lines = []
-        for line in args[1 if args_str == "" else 2:]:
-            lines.append(line)
-        body = "\n".join(ConvertToPython.indent(x) for x in lines)
-
-        return f"def {function_name}({args_str}):\n{body}"
-
-    def call(self, meta, args):
-        args_str = ""
-        self.add_variable_access_location(args[0], meta.line)
-
-        function_name = args[0]
-        function_tree = [x.tree for x in self.lookup if x.name == function_name + "()"]
-        tree_arguments = [x for x in function_tree[0].children if x.data == 'arguments']
-
-        number_of_defined_arguments = 0 if tree_arguments == [] else len(tree_arguments[0].children)
-        number_of_used_arguments = 0 if len(args) == 1 else len(args[1].children)
-
-        if number_of_used_arguments != number_of_defined_arguments:
-            raise hedy.exceptions.WrongNumberofArguments(
-                name=function_name,
-                defined_number=number_of_defined_arguments,
-                used_number=number_of_used_arguments,
-                line_number=meta.line)
-
-        if len(args) > 1:
-            args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x) for x in args[1].children)
-            for x in args[1].children:
-                self.add_variable_access_location(str(x), meta.line)
-
-        return f"{function_name}({args_str})"
-
-    def returns(self, meta, args):
-        argument_string = self.print_ask_args(meta, args)
-        exception = self.make_index_error_check_if_list(args)
-        return exception + textwrap.dedent(f"""\
-            try:
-              return int(f'''{argument_string}''')
-            except ValueError:
-              try:
-                return float(f'''{argument_string}''')
-              except ValueError:
-                return f'''{argument_string}'''""")
-
-    def number(self, meta, args):
-        # try all ints? return ints
-        try:
-            all_int = [str(int(x)) == x for x in args]
-            if all(all_int):
-                return ''.join(args)
-            else:
-                # int succeeds but does not return the same? these are non-latin numbers
-                # and need to be casted
-                return ''.join([str(int(x)) for x in args])
-        except Exception:
-            # if not? make into all floats
-            numbers = [str(float(x)) for x in args]
-            return ''.join(numbers)
-
-    def NEGATIVE_NUMBER(self, meta, args):
-        numbers = [str(float(x)) for x in args]
-        return ''.join(numbers)
-
-    def true(self, meta, args):
-        # The args contain the actual parse value that was used
-        return str(True)
-
-    def false(self, meta, args):
-        # The args contain the actual parse value that was used
-        return str(False)
-
     def text_in_quotes(self, meta, args):
         # We need to re-add the quotes, so that the Python code becomes name = 'Jan' or "Jan's"
-        text = args[0] if args else ''
-        if "'" in text:
-            return f'"{text}"'
-        return f"'{text}'"
+        if args:
+            text = args[0].data
+            text_in_quotes = f'"{text}"' if "'" in text else f"'{text}'"
+        else:
+            text_in_quotes = "''"
+        return LV(text_in_quotes)
 
-    def print_ask_args(self, meta, args):
-        result = super().print_ask_args(meta, args)
-        if "'''" in result:
-            raise exceptions.UnsupportedStringValue(invalid_value="'''")
-        return result
+    def text(self, meta, args):
+        return LV(''.join([str(c) for c in args]))
+
+    def integer(self, meta, args):
+        input_text = args[0].replace(' ', '')  # remove whitespaces
+        return LV(int(input_text), num_sys=self.get_num_sys(input_text))
+
+    def number(self, meta, args):
+        # try converting to ints
+        try:
+            value = ''.join([str(int(x)) for x in args])
+            value = int(value)
+        except Exception:
+            # if it does not work, convert to floats
+            value = ''.join([str(float(x)) for x in args])
+            value = float(value)
+        input_text = ''.join([x for x in args])
+        return LV(value, num_sys=self.get_num_sys(input_text))
+
+    def true(self, meta, args):
+        booleans = self.extract_booleans(args[0], True)
+        return LV(True, booleans=booleans)
+
+    def false(self, meta, args):
+        booleans = self.extract_booleans(args[0], False)
+        return LV(False, booleans=booleans)
+
+    def extract_booleans(self, value, boolean):
+        def get_boolean_values(val, used_key, language, true_key, false_key):
+            if KEYWORDS[language][used_key] == val:
+                return KEYWORDS[language][true_key], KEYWORDS[language][false_key]
+            return None, None
+
+        booleans = ['true', 'True'] if boolean else ['false', 'False']
+        for lang in [self.language, 'en']:
+            keyword_true, keyword_false = get_boolean_values(value, booleans[0], lang, 'true', 'false')
+            if keyword_true:
+                return {True: keyword_true, False: keyword_false}
+
+            keyword_true, keyword_false = get_boolean_values(value, booleans[1], lang, 'True', 'False')
+            if keyword_true:
+                return {True: keyword_true, False: keyword_false}
+
+    def play(self, meta, args):
+        if not args:
+            return self.make_play('C4', meta)
+
+        note = self.unpack(args[0])
+        if present_in_notes_mapping(note):  # this is a supported note
+            return self.make_play(note.upper(), meta)
+
+        # TODO: merge the check_var_usage and the is_var check
+        self.check_var_usage_when_quotes_are_required(args[0], meta)
+        var = self.get_successfully_accessed_var(args[0], meta.line)
+        if var:
+            arg = f'{var}.data'
+        elif isinstance(args[0], BV):
+            arg = args[0].data
+        else:
+            # We end up here in case of list access, e.g. 'random.choice[animals]'
+            arg = f"{args[0]}.data"
+
+        ex = make_value_error(Command.play, 'suggestion_note', self.language)
+        return textwrap.dedent(f"""\
+                play(note_with_error({arg}, {ex}))
+                time.sleep(0.5)""") + self.add_debug_breakpoint()
+
+    def addition(self, meta, args):
+        lhs = self.unpack(args[0])
+        rhs = self.unpack(args[1])
+        num_sys, bools = self.merge_localization_info(args)
+
+        variables = self.get_successfully_accessed_vars(args, meta.line)
+        if variables:
+            ex_text = make_values_error(Command.addition, 'suggestion_numbers_or_strings', self.language)
+            value = f'sum_with_error({lhs}, {rhs}, {ex_text})'
+        else:
+            value = f'{lhs} + {rhs}'
+        return EV(value, num_sys, bools)
+
+    def division(self, meta, args):
+        return self.process_calculation(args, '/', meta)
+
+    def process_calculation(self, args, operator, meta):
+        lhs = self.unpack(args[0])
+        rhs = self.unpack(args[1])
+        self.get_successfully_accessed_vars(args, meta.line)
+        num_sys, bools = self.merge_localization_info(args)
+
+        only_literal_values = all([isinstance(a, LV) for a in args])
+        if only_literal_values:
+            value = f'{lhs} {operator} {rhs}'
+        else:
+            exception_text = make_value_error(operator, 'suggestion_number', self.language)
+            value = f'number_with_error({lhs}, {exception_text}) {operator} number_with_error({rhs}, {exception_text})'
+        return EV(value, num_sys, bools)
+
+    def sleep(self, meta, args):
+        if not args:
+            return "time.sleep(1)"
+
+        if type(args[0]) is Tree and self.check_if_error_skipped(args[0]):
+            raise hedy.exceptions.InvalidErrorSkippedException
+
+        self.check_var_usage_when_quotes_are_required(args[0], meta)
+        var = self.get_successfully_accessed_var(args[0], meta.line)
+        if var:
+            value = f'{escape_var(var)}.data'
+        else:
+            value = f'{self.unpack(args[0])}'
+
+        index_exception = self.make_index_error_check_if_list(args)
+        ex = make_value_error(Command.sleep, 'suggestion_number', self.language)
+        return index_exception + textwrap.dedent(f"time.sleep(int_with_error({value}, {ex}))")
+
+    def turn(self, meta, args):
+        if not args:
+            return "t.right(90)" + self.add_debug_breakpoint()  # no arguments defaults to a right turn
+
+        self.check_var_usage_when_quotes_are_required(args[0], meta)
+        var = self.get_successfully_accessed_var(args[0], meta.line)
+        if var:
+            return self.make_turn(f'{escape_var(var)}.data')
+
+        value = f'{self.unpack(args[0])}'
+        return self.make_turn(value)
+
+    def forward(self, meta, args):
+        if not args:
+            command = f't.forward(50){self.add_debug_breakpoint()}'
+            return add_sleep_to_command(command, False, self.is_debug)
+
+        self.check_var_usage_when_quotes_are_required(args[0], meta)
+        var = self.get_successfully_accessed_var(args[0], meta.line)
+        if var:
+            return self.make_forward(f'{escape_var(var)}.data')
+
+        value = f'{self.unpack(args[0])}'
+        return self.make_forward(value)
+
+    def make_turn(self, parameter):
+        return self.make_turtle_command(parameter, Command.turn, 'right', False, HedyType.float)
+
+    def make_forward(self, parameter):
+        return self.make_turtle_command(parameter, Command.forward,
+                                        'forward', True, HedyType.float)
+
+    def assign(self, meta, args):
+        left_hand_side = args[0]
+        right_hand_side = args[1]
+
+        self.check_var_usage_when_quotes_are_required(right_hand_side, meta)
+
+        right_hand_side = self.process_assign_argument(right_hand_side)
+        # we no longer escape quotes here because they are now needed
+        exception = self.make_index_error_check_if_list([right_hand_side])
+        return exception + left_hand_side + " = " + right_hand_side + self.add_debug_breakpoint()
 
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
@@ -2558,108 +2760,269 @@ class ConvertToPython_12(ConvertToPython_11):
         exception = self.make_index_error_check_if_list(args)
         return exception + textwrap.dedent(f"""\
             {var} = input(f'''{argument_string}'''){self.add_debug_breakpoint()}
+            num_sys = get_num_sys({var})
             try:
               {var} = int({var})
             except ValueError:
               try:
                 {var} = float({var})
               except ValueError:
-                pass""")  # no number? leave as string
+                pass
+            {var} = V({var}, num_sys=num_sys)""")  # no number? leave as string
+
+    def print_ask_args(self, meta, args):
+        result = super().print_ask_args(meta, args)
+        if "'''" in result:
+            raise exceptions.UnsupportedStringValue(invalid_value="'''")
+        return result
+
+    # TODO: rename to process_argument_for_fstring
+    def process_variable_for_fstring(self, name):
+        if self.is_variable(name) or self.is_list(name) or self.is_random(name):
+            return f"{{{name}.text()}}"
+        elif isinstance(name, LV):
+            return self.transpile_literal_for_fstring(name)
+        elif isinstance(name, EV):
+            return self.transpile_expression_for_fstring(name)
+        elif self.is_quoted(name):
+            name = name[1:-1]
+            return name.replace("'", "\\'")
+        elif not ConvertToPython.is_int(name) and not ConvertToPython.is_float(name):
+            # We end up here with colors
+            name = name if self.is_bool(name) else escape_var(name.replace("'", "\\'"))
+            name = '"' + name + '"'
+        return name
 
     def assign_list(self, meta, args):
         parameter = args[0]
-        values = args[1:]
-        return parameter + " = [" + ", ".join(values) + "]" + self.add_debug_breakpoint()
+        arguments = [self.process_assign_argument(v, escape_quotes=True) for v in args[1:]]
+
+        return f"{parameter} = V([{', '.join(arguments)}]){self.add_debug_breakpoint()}"
+
+    def list_access(self, meta, args):
+        args = [escape_var(a) for a in args]
+        vars_to_check = [a for a in args if str(a) != 'random']
+        self.check_var_usage_when_quotes_are_required(vars_to_check, meta)
+
+        list_name = str(args[0])
+        list_index = args[1]
+
+        if str(list_index) == 'random':
+            return f'random.choice({list_name}.data)'
+
+        var = self.get_successfully_accessed_var(list_index, meta.line)
+        value = f'{var}.data' if var else self.unpack(list_index)
+        return f'{list_name}.data[int({value})-1]'
+
+    def process_assign_argument(self, arg, escape_quotes=False):
+        if isinstance(arg, LV):
+            return self.transpile_literal_to_value(arg, escape=escape_quotes)
+        elif isinstance(arg, EV):
+            return self.transpile_expression_to_value(arg)
+        else:
+            return arg
+
+    def ifs(self, meta, args):
+        all_lines = [self.indent(x) for x in args[1:]]
+        exception = self.make_index_error_check_if_list([args[0]])
+        return exception + "if " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
+
+    def add(self, meta, args):
+        value = self.process_add_to_remove_from_list_argument(args[0], meta)
+        list_name = args[1]
+
+        # both sides have been used now
+        self.add_variable_access_location(value, meta.line)
+        self.add_variable_access_location(list_name, meta.line)
+        return f"{list_name}.data.append({value}){self.add_debug_breakpoint()}"
+
+    def remove(self, meta, args):
+        value = self.process_add_to_remove_from_list_argument(args[0], meta)
+        list_name = args[1]
+
+        # both sides have been used now
+        self.add_variable_access_location(value, meta.line)
+        self.add_variable_access_location(list_name, meta.line)
+
+        return textwrap.dedent(f"""\
+            try:
+              {list_name}.data.remove({value}){self.add_debug_breakpoint()}
+            except:
+              pass""")
+
+    def process_add_to_remove_from_list_argument(self, arg, meta):
+        self.check_var_usage_when_quotes_are_required(arg, meta)
+        var = self.get_successfully_accessed_var(arg, meta.line)
+        if var:
+            return f'{escape_var(var)}'
+        elif isinstance(arg, LV):
+            return self.transpile_literal_to_value(arg)
+        elif isinstance(arg, EV):
+            return self.transpile_expression_to_value(arg)
+        else:
+            return f"{arg}"
 
     def in_list_check(self, meta, args):
-        left_hand_side = args[0]
-        right_hand_side = args[1]
-        self.check_var_usage_when_quotes_are_required(left_hand_side, meta)
-        self.check_var_usage_when_quotes_are_required(right_hand_side, meta)
-        return f"{left_hand_side} in {right_hand_side}"
+        self.check_var_usage_when_quotes_are_required([args[0], args[1]], meta)
+
+        value = self.process_assign_argument(args[0])
+        list_name = args[1]
+        return f"{value} in {list_name}.data"
 
     def not_in_list_check(self, meta, args):
-        left_hand_side = args[0]
-        right_hand_side = args[1]
-        self.check_var_usage_when_quotes_are_required(left_hand_side, meta)
-        self.check_var_usage_when_quotes_are_required(right_hand_side, meta)
-        return f"{left_hand_side} not in {right_hand_side}"
+        self.check_var_usage_when_quotes_are_required([args[0], args[1]], meta)
 
-    def assign(self, meta, args):
-        right_hand_side = args[1]
-        left_hand_side = args[0]
+        value = self.process_assign_argument(args[0])
+        list_name = args[1]
+        return f"{value} not in {list_name}.data"
 
-        self.check_var_usage_when_quotes_are_required(right_hand_side, meta)
+    def equality_check(self, meta, args):
+        left_hand_side = self.process_variable(args[0], meta.line)
+        right_hand_side = self.process_variable(args[1], meta.line)
 
-        if isinstance(right_hand_side, Tree):
-            exception = self.make_index_error_check_if_list([right_hand_side.children[0]])
-            return exception + left_hand_side + " = " + right_hand_side.children[0] + self.add_debug_breakpoint()
+        # From level 12 we work only with the real values (e.g. int, floats, booleans), no string conversion is needed
+        return f"{left_hand_side} == {right_hand_side}"
+
+    def for_list(self, meta, args):
+        times = self.process_variable(args[0], meta.line, use_var_value=False)
+        list_name = escape_var(args[1])
+        # add the list to the lookup table, this used now too
+        self.add_variable_access_location(list_name, meta.line)
+
+        body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
+        body = add_sleep_to_command(body, is_debug=self.is_debug)
+        return f"for {times} in {list_name}.data:{self.add_debug_breakpoint()}\n{body}"
+
+    def for_loop(self, meta, args):
+        iterator = escape_var(args[0])
+        # iterator is always a used variable
+        self.add_variable_access_location(iterator, meta.line)
+
+        body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])
+        body = add_sleep_to_command(body, is_debug=self.is_debug)
+        step_var_name = self.get_fresh_var('step')
+
+        begin = self.process_variable(args[1], meta.line)
+        end = self.process_variable(args[2], meta.line)
+        num_sys = self.get_localization_info_from_arg(args[1], meta.line)
+        range_var = self.get_fresh_var("__rv")
+        range_part = (f'[V({range_var}, num_sys={num_sys}) '
+                      f'for {range_var} in range({begin}, {end} + {step_var_name}, {step_var_name})]')
+
+        return textwrap.dedent(f"""\
+            {step_var_name} = 1 if {begin} < {end} else -1
+            for {iterator} in {range_part}:{self.add_debug_breakpoint()}
+            """) + body
+
+    # TODO: rename to process_data_access_argument
+    def process_variable(self, arg, access_line_number=100, use_var_value=True):
+        var = self.get_successfully_accessed_var(arg, access_line_number)
+        if var:
+            # In some cases, we don't need to use the data of a variable, e.g. `for a in animals`
+            data_part = '.data' if use_var_value else ''
+            return f"{escape_var(var)}{data_part}"
+        elif isinstance(arg, LV):
+            if self.is_quoted(arg.data):
+                return f"'{process_characters_needing_escape(arg.data[1:-1])}'"
+            return arg.data
+        elif self.is_random(arg) or self.is_list(arg):
+            return f'{arg}.data'
         else:
-            # we no longer escape quotes here because they are now needed
-            exception = self.make_index_error_check_if_list([right_hand_side])
-            return exception + left_hand_side + " = " + right_hand_side + "" + self.add_debug_breakpoint()
+            # We end up here when if-pressed receives a Token(LETTER_OR_NUMBER, 'x')
+            return f"{arg}"
 
-    def var(self, meta, args):
-        name = args[0]
-        # self.check_var_usage(args, meta.line)
-        return escape_var(name)
-
-    def turn(self, meta, args):
-        if len(args) == 0:
-            return "t.right(90)" + self.add_debug_breakpoint()  # no arguments defaults to a right turn
-        arg = args[0]
-        if self.is_variable(arg, meta.line):
-            return self.make_turn(escape_var(arg))
-        if isinstance(arg, Tree):
-            return self.make_turn(arg.children[0])
-        return self.make_turn(float(arg))
-
-    def forward(self, meta, args):
-        if len(args) == 0:
-            return add_sleep_to_command('t.forward(50)' + self.add_debug_breakpoint(), False, self.is_debug,
-                                        location="after")
-        arg = args[0]
-        if self.is_variable(arg, meta.line):
-            return self.make_forward(escape_var(arg))
-        if isinstance(arg, Tree):
-            return self.make_forward(arg.children[0])
-        return self.make_forward(float(args[0]))
-
-    def make_turn(self, parameter):
-        return self.make_turtle_command(parameter, Command.turn, 'right', False, HedyType.float)
-
-    def make_forward(self, parameter):
-        return self.make_turtle_command(parameter, Command.forward,
-                                        'forward', True, HedyType.float)
-
-    def process_token_or_tree(self, argument, meta):
-        if isinstance(argument, Tree):
-            return f'{str(argument.children[0])}'
+    def transpile_literal_to_value(self, lv, escape=False):
+        """
+        Transpiles a Literal Value instance to a Value instance, which exists in prefixes.
+        For example, LV(1, num_sys='Arabic') is converted to V(1, num_sys='Arabic').
+        """
+        # The data of the literal value is exactly as it would be transpiled, so quotes must already be in it.
+        # However, in some cases we need to strip quotes and re-add them as single quotes.
+        if escape and isinstance(lv.data, str):
+            arg = lv.data[1:-1] if self.is_quoted(lv.data) else lv.data
+            data = f"'{process_characters_needing_escape(arg)}'"
         else:
-            # this is a variable, add to the table
-            self.add_variable_access_location(argument, meta.line)
-            return argument
+            data = lv.data
+        num_sys = f", num_sys='{lv.num_sys}'" if lv.num_sys else ''
+        booleans = f', bools={lv.booleans}' if lv.booleans else ''
+        return f"V({data}{num_sys}{booleans})"
 
-    def process_token_or_tree_for_calculation(self, argument, command, meta):
-        if type(argument) is Tree:
-            return f'{str(argument.children[0])}'
+    def transpile_expression_to_value(self, ev):
+        """
+        Transpiles an Expression Value instance to a Value instance, which exists in prefixes.
+        For example, EV('100 / 2', num_sys='Arabic') is converted to V(100 / 2, num_sys='Arabic').
+        """
+        # The data of the expression value is exactly as it would be transpiled, so quotes must already be in it.
+        data = ev.data
+        num_sys_value = ev.num_sys if ev.num_sys and 'get_num_sys' in ev.num_sys else f"'{ev.num_sys}'"
+        num_sys = f", num_sys={num_sys_value}" if ev.num_sys else ''
+        booleans = f', bools={ev.booleans}' if ev.booleans else ''
+        return f"V({data}{num_sys}{booleans})"
+
+    def transpile_literal_for_fstring(self, lv):
+        value = lv.data
+        if self.is_quoted(value):
+            value = value[1:-1].replace("'", "\\'")
+        if (lv.num_sys is None or lv.num_sys == 'Latin') and lv.booleans is None:
+            return str(value)
+        num_sys_part = f", num_sys='{lv.num_sys}'" if lv.num_sys else ''
+        bools_part = f', bools={lv.booleans}' if lv.booleans else ''
+        return f"{{localize({value}{num_sys_part}{bools_part})}}"
+
+    def transpile_expression_for_fstring(self, ev):
+        num_sys_value = ev.num_sys if ev.num_sys and 'get_num_sys' in ev.num_sys else f"'{ev.num_sys}'"
+        num_sys = f", num_sys={num_sys_value}" if ev.num_sys else ''
+        booleans = f', bools={ev.booleans}' if ev.booleans else ''
+        return f"{{localize({ev.data}{num_sys}{booleans})}}"
+
+    def define(self, meta, args):
+        function_name = self.unpack(args[0])
+        has_args = isinstance(args[1], Tree) and args[1].data == "arguments"
+        args_str = ", ".join(str(x) for x in args[1].children) if has_args else ""
+
+        body_start = 2 if has_args else 1
+        body = "\n".join(ConvertToPython.indent(line) for line in args[body_start:])
+
+        return f"def {function_name}({args_str}):\n{body}"
+
+    def call(self, meta, args):
+        function_name = self.unpack(args[0])
+        self.add_variable_access_location(function_name, meta.line)
+
+        function_tree = [e.tree for e in self.lookup if e.name == function_name + "()"]
+        tree_arguments = [c for c in function_tree[0].children if c.data == 'arguments']
+
+        number_of_defined_arguments = 0 if tree_arguments == [] else len(tree_arguments[0].children)
+        number_of_used_arguments = 0 if len(args) == 1 else len(args[1].children)
+
+        if number_of_used_arguments != number_of_defined_arguments:
+            raise hedy.exceptions.WrongNumberofArguments(
+                name=function_name,
+                defined_number=number_of_defined_arguments,
+                used_number=number_of_used_arguments,
+                line_number=meta.line)
+
+        if len(args) > 1:
+            flat_args = [x.children[0] if isinstance(x, Tree) else x for x in args[1].children]
+            args_str = ", ".join([self.process_assign_argument(a) for a in flat_args])
+            for a in args[1].children:
+                self.add_variable_access_location(str(self.unpack(a)), meta.line)
         else:
-            # this is a variable, add to the table
-            self.add_variable_access_location(argument, meta.line)
-            exception_text = make_value_error(command, 'suggestion_number', self.language)
-            return f'number_with_error({argument}, {exception_text})'
+            args_str = ""
 
-    # From level 12 concatenation should also work, so the args could be either numbers or strings
-    def addition(self, meta, args):
-        args = [self.process_token_or_tree(a, meta) for a in args]
-        if all([self.is_int(a) or self.is_float(a) for a in args]):
-            return Tree('sum', [f'{args[0]} + {args[1]}'])
-        else:
-            ex_text = make_values_error(Command.addition, 'suggestion_numbers_or_strings', self.language)
-            return Tree('sum', [f'sum_with_error({args[0]}, {args[1]}, {ex_text})'])
+        return f"{function_name}({args_str})"
 
-    def division(self, meta, args):
-        return self.process_calculation(args, '/', meta)
+    def returns(self, meta, args):
+        args_str = self.print_ask_args(meta, args)
+        exception = self.make_index_error_check_if_list(args)
+        return exception + textwrap.dedent(f"""\
+            try:
+              return V(int(f'''{args_str}'''), num_sys=get_num_sys(f'''{args_str}'''))
+            except ValueError:
+              try:
+                return V(float(f'''{args_str}'''), num_sys=get_num_sys(f'''{args_str}'''))
+              except ValueError:
+                return V(f'''{args_str}''')""")
 
 
 @v_args(meta=True)
@@ -2678,19 +3041,20 @@ class ConvertToPython_13(ConvertToPython_12):
 @source_map_transformer(source_map)
 class ConvertToPython_14(ConvertToPython_13):
     def process_comparison(self, meta, args, operator):
+        arg0 = self.process_variable_for_comparisons(args[0], meta)
+        arg1 = self.process_variable_for_comparisons(args[1], meta)
 
-        arg0 = self.process_variable_for_comparisons(args[0])
-        arg1 = self.process_variable_for_comparisons(args[1])
+        return f"{arg0}{operator}{arg1}"
 
-        simple_comparison = arg0 + operator + arg1
-
-        if len(args) == 2:
-            return simple_comparison  # no and statements
-        else:
-            return f"{simple_comparison} and {args[2]}"
+    def process_variable_for_comparisons(self, arg, meta):
+        name = self.get_successfully_accessed_var(arg, meta.line)
+        if name:
+            return f"{escape_var(name)}.data"
+        name = self.unpack(arg)
+        return f'{name}'
 
     def equality_check_dequals(self, meta, args):
-        return super().equality_check(meta, args)
+        return self.equality_check(meta, args)
 
     def smaller(self, meta, args):
         return self.process_comparison(meta, args, "<")
@@ -2717,8 +3081,8 @@ class ConvertToPython_15(ConvertToPython_14):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
         body = add_sleep_to_command(body, True, self.is_debug, location="after")
-        exceptions = self.make_index_error_check_if_list([args[0]])
-        return exceptions + "while " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + body
+        exception = self.make_index_error_check_if_list([args[0]])
+        return exception + "while " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + body
 
     def if_pressed_without_else(self, meta, args):
         code = args[0]
@@ -2727,47 +3091,22 @@ class ConvertToPython_15(ConvertToPython_14):
             code + self.make_extension_call()
         )
 
-    def if_pressed(self, meta, args):
-        self.process_variable(args[0], meta.line)
-        args = [a for a in args if a != ""]  # filter out in|dedent tokens
-
-        key = args[0]
-
-        if_code = '\n'.join([x for x in args[1:]])
-        if_code = ConvertToPython.indent(if_code)
-        if_function_name = self.make_function_name(key)
-
-        return (
-            self.clear_key_mapping() + '\n' +
-            self.add_if_key_mapping(key, if_function_name) + '\n' +
-            self.make_function(if_function_name, if_code) + '\n'
-        )
-
 
 @v_args(meta=True)
 @hedy_transpiler(level=16)
 @source_map_transformer(source_map)
 class ConvertToPython_16(ConvertToPython_15):
-    def assign_list(self, meta, args):
-        parameter = args[0]
-        values = [a for a in args[1:]]
-        return parameter + " = [" + ", ".join(values) + "]" + self.add_debug_breakpoint()
-
     def change_list_item(self, meta, args):
-        left_side = args[0] + '[' + args[1] + '-1]'
-        right_side = args[2]
+        name = args[0].data if isinstance(args[0], LV) else args[0]
+        index = args[1].data if isinstance(args[1], LV) else args[1]
+        self.check_var_usage_when_quotes_are_required(args[0:3], meta)
 
-        self.add_variable_access_location(args[0], meta.line)
-        self.add_variable_access_location(args[1], meta.line)
-        self.add_variable_access_location(args[2], meta.line)
+        index = f'{index}.data' if self.is_variable(args[1]) else index
+        left_side = f'{name}.data[int({index})-1]'
+        right_side = self.transpile_literal_to_value(args[2]) if isinstance(args[2], LV) else args[2]
 
         exception = self.make_index_error_check_if_list([left_side])
         return exception + left_side + ' = ' + right_side + self.add_debug_breakpoint()
-
-    def ifs(self, meta, args):
-        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
-        exceptions = self.make_index_error_check_if_list([args[0]])
-        return exceptions + "if " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
 
 @v_args(meta=True)

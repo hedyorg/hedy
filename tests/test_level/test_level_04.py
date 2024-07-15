@@ -877,7 +877,7 @@ class TestsLevel4(HedyTester):
 
         expected = HedyTester.dedent("colors = ['green', 'red', 'blue']",
                                      "color = input(f'what color to remove?')",
-                                     HedyTester.remove_transpiled('colors', 'color'),
+                                     HedyTester.remove_transpiled_obsolete('colors', 'color'),
                                      HedyTester.list_access_transpiled('random.choice(colors)'),
                                      "print(f'{random.choice(colors)}')")
 
@@ -1055,7 +1055,8 @@ class TestsLevel4(HedyTester):
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle()
+            extra_check_function=self.is_turtle(),
+            max_level=11
         )
 
     def test_color_red(self):
