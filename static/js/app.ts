@@ -1803,7 +1803,10 @@ function updatePageElements() {
   $('#editor_area').toggle(isCodeTab || currentTab === 'parsons');
   $('#editor').toggle(isCodeTab);
   $('#debug_container').toggle(isCodeTab);
-  $('#program_name_container').toggle(isCodeTab);
+  console.log("update page elements")
+  console.log(isCodeTab)
+  console.log($('#program_name'))
+  $('#program_name').toggle(isCodeTab);
   theGlobalEditor.isReadOnly = false;
 
   const adventure = theAdventures[currentTab];
@@ -1854,7 +1857,11 @@ function reconfigurePageBasedOnTab() {
   }
 
   const adventure = theAdventures[currentTab];
+  console.log("reconfigurePageBasedOnTab")
   if (adventure) {
+    console.log("there is an adventure")
+    console.log(adventure)
+    console.log($('#program_name'))
     $ ('#program_name').val(adventure.save_name);
     theGlobalEditor.contents = adventure.editor_contents;
   }
@@ -1931,6 +1938,7 @@ function initializeCopyToClipboard() {
 }
 
 function saveNameFromInput(): string {
+  console.log("saveNameFromInput")
   return $('#program_name').val() as string;
 }
 
@@ -1945,6 +1953,7 @@ function programNeedsSaving(adventureName: string) {
   // (Submitted programs are never saved again).
   const programChanged = theGlobalEditor.contents !== adventure.editor_contents;
   const nameChanged = $('#program_name').val() !== adventure.save_name;
+  console.log("programNeedsSaving")
   const localStorageCanBeSavedToServer = theUserIsLoggedIn && adventure.save_info === 'local-storage';
   const isUnchangeable = isServerSaveInfo(adventure.save_info) ? adventure.save_info.submitted : false;
 

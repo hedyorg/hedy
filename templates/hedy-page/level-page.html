@@ -80,7 +80,6 @@
           _="on load
           set adv to hedyApp.getCurrentAdv()
           put adv into #adventure_text
-          put adv + {{level_nr}} into #program_name_input.value
           on click hedyApp.scrollToLastClickedButton('adventure_dropdown')">
           <div id="adventure_text"></div>
           <svg id="adventure_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -106,7 +105,6 @@
               _="on click
               set adv to hedyApp.getCurrentAdv()
               put adv into #adventure_text
-              put adv + {{level_nr}} into #program_name_input.value
               then localStorage.setItem('adventure_dropdown', 'adventure_button_{{ adventure.name }}')">
                   {{ adventure.name }}
               </button>
@@ -125,7 +123,6 @@
           call :next.click() 
           then set adv to hedyApp.getCurrentAdv()
           put adv into #adventure_text
-          put adv + {{level_nr}} into #program_name_input.value
           then localStorage.setItem('adventure_dropdown', 'adventure_button_' + adv)">
           {{_('next_adventure')}}&nbsp;
           <span class="fa fa-arrow-{% if g.dir == "ltr" %}right{% else %}left{% endif %}"></span>
@@ -137,7 +134,7 @@
 <!-- the second row: program name, share button, (optional) submit button, cheatsheet button and language button -->
 <div class="mt-4 py-2 flex gap-2 px-4 items-center justify-between w-full max-w-screen-2xl mx-auto">
   <div class="overflow-hidden flex-1 flex border border-blue-800 ltr:divide-x rtl:divide-x-reverse divide-blue-400 rounded">
-    <input id="program_name_input" type="text" class="outline-0 text-2xl font-light text-blue-800 flex-1 bg-transparent focus:bg-blue-100 border-0 px-4">
+    <input id="program_name" type="text" class="outline-0 text-2xl font-light text-blue-800 flex-1 bg-transparent focus:bg-blue-100 border-0 px-4">
   </div>
   <button id="share_program_button" class="blue-btn next-tab">
     <span class="fa fa-share-nodes ltr:mr-1 rtl:ml-1"></span>
@@ -211,6 +208,7 @@
   </div>
 </div>
 
+<!-- progress bar -->
 <div data-cy="progress_bar" class="w-full max-w-screen-2xl mx-auto">
   <div class="mt-5 ml-4 text-base font-medium dark:text-white">
     <b>75%</b> to complete</div>
