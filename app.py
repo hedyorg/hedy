@@ -3,7 +3,6 @@ import base64
 import binascii
 import collections
 import logging
-import json
 import datetime
 import os
 import re
@@ -463,22 +462,6 @@ def add_hx_detection():
         "hx_request": hx_request,
         "hx_layout": 'htmx-layout-yes.html' if hx_request else 'htmx-layout-no.html',
     }
-
-
-@app.after_request
-def hx_triggers(response):
-    """For HTMX Requests, push any pending achievements in the session to the client.
-
-    Use the HX-Trigger header, which will trigger events on the client. There is a listener
-    there which will respond to the 'displayAchievements' event.
-    """
-    if not request.headers.get('HX-Request'):
-        return response
-
-    achs = session.pop('pending_achievements', [])
-    if achs:
-        response.headers.set('HX-Trigger', json.dumps({'displayAchievements': achs}))
-    return response
 
 
 @app.after_request

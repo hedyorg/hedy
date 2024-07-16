@@ -699,65 +699,6 @@ class Database:
         for program in programs:
             program['public_user'] = True if profiles.get(program['id']) else None
 
-    def get_highscores(self, username, filter, filter_value=None):
-        profiles = []
-
-        # If the filter is global or country -> get all public profiles
-        if filter == "global" or filter == "country":
-            profiles = self.get_all_public_profiles()
-        # If it's a class, only get the ones from your class
-        elif filter == "class":
-            Class = self.get_class(filter_value)
-            customizations = self.get_class_customizations(Class.get("id"))
-            for student in Class.get("students", []):
-                profile = self.get_public_profile_settings(student)
-                if profile:
-                    profiles.append(profile)
-                # If the user doesn't have a public profile the situation depends on the customizations
-                # If the teacher has allowed the "all public" function -> add dummy profile to make all visible
-                # Give the profile an extra attribute to clarify we don't update any non-existing public-profile
-                elif customizations and "all_highscores" in customizations.get("other_settings", []):
-                    profiles.append({"username": student, "no_public_profile": True})
-
-        for profile in profiles:
-            if not profile.get("country"):
-                try:
-                    country = self.user_by_username(profile.get("username")).get("country")
-                    if not profile.get("no_public_profile"):
-                        self.update_country_public_profile(profile.get("username"), country)
-                except AttributeError:
-                    print("This profile username is invalid...")
-                    country = None
-                profile["country"] = country
-            if not profile.get("achievements"):
-                achievements = self.achievements_by_username(profile.get("username"))
-                if not profile.get("no_public_profile"):
-                    self.update_achievements_public_profile(profile.get("username"), len(achievements) or 0)
-                else:
-                    # As the last achievement timestamp is stored on the public profile -> create an artificial one
-                    # We don't have a choice, otherwise the double sorting below will crash
-                    # Todo TB -> Store last achievement on achievements data instead of public profile data (11-11-22)
-                    profile["last_achievement"] = timems()
-                profile["achievements"] = len(achievements) if achievements else 0
-
-        # If we filter on country, make sure to filter out all non-country values
-        if filter == "country":
-            profiles = [x for x in profiles if x.get("country") == filter_value]
-
-        # Perform a double sorting: first by achievements (high-low), then by timestamp (low-high)
-        profiles = sorted(profiles, key=lambda k: (k.get("achievements"), -k.get("last_achievement")), reverse=True)
-
-        # Add ranking for each profile
-        ranking = 1
-        for profile in profiles:
-            profile["ranking"] = ranking
-            ranking += 1
-
-        # If the user is not in the current top 50: still append to the results
-        if not any(d["username"] == username for d in profiles[:50]):
-            return profiles[:50] + [i for i in profiles if i["username"] == username]
-        return profiles[:50]
-
     def get_all_hedy_choices(self):
         return PROGRAMS.get_many({"hedy_choice": 1}, reverse=True)
 

@@ -374,7 +374,6 @@ class TestPages(AuthHelper):
             '/explore',
             '/learn-more',
             '/programs',
-            '/my-achievements',
             '/my-profile']
 
         for language in ALL_LANGUAGES.keys():

@@ -494,8 +494,6 @@ class AuthModule(WebsiteModule):
             program = self.db.program_by_id(body.get('favourite_program'))
             if not program or program.get('username') != user['username'] or not program.get('public'):
                 return make_response(gettext('favourite_program_invalid'), 400)
-
-        achievement = None
         current_profile = self.db.get_public_profile_settings(user['username'])
 
         # Make sure the session value for the profile image is up-to-date
@@ -512,6 +510,4 @@ class AuthModule(WebsiteModule):
 
         self.db.update_public_profile(user['username'], body)
         response = {"message": gettext("public_profile_updated")}
-        if achievement:
-            response["achievement"] = achievement
         return response
