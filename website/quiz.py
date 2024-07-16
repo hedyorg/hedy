@@ -212,6 +212,8 @@ class QuizModule(WebsiteModule):
         username = current_user()["username"]
         if username:
             statistics.add(username, lambda id_: self.db.add_quiz_finished(id_, progress.level, progress.total_score))
+            if progress.level == HEDY_MAX_LEVEL:
+                self.db.add_certificate_to_user(username)
 
     def initialize_attempt(self, level):
         """Record that we're starting a new attempt."""

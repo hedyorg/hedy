@@ -1824,25 +1824,23 @@ def get_certificate_page(username):
     user = DATABASE.user_by_username(username)
     if not user:
         return utils.error_page(error=403, ui_message=gettext('user_inexistent'))
-    progress_data = DATABASE.progress_by_username(username)
-    if progress_data is None:
-        return utils.error_page(error=404, ui_message=gettext('no_certificate'))
-    achievements = progress_data.get('achieved', None)
-    if achievements is None:
-        return utils.error_page(error=404, ui_message=gettext('no_certificate'))
-    if 'run_programs' in progress_data:
-        count_programs = progress_data['run_programs']
-    else:
-        count_programs = 0
     quiz_score = get_highest_quiz_score(username)
     quiz_level = get_highest_quiz_level(username)
-    longest_program = get_longest_program(username)
 
-    number_achievements = len(achievements)
+    programs = DATABASE.get_program_stats([username])
+    longest_program = max(programs)
+
     congrats_message = safe_format(gettext('congrats_message'), username=username)
-    return render_template("printable/certificate.html", count_programs=count_programs, quiz_score=quiz_score,
-                           longest_program=longest_program, number_achievements=number_achievements,
-                           quiz_level=quiz_level, congrats_message=congrats_message)
+    user = DATABASE.user_by_username(username)
+    if user.get('program_count'):
+        user_program_count = user.get('program_count')
+
+    return render_template("printable/certificate.html",
+                           quiz_score=quiz_score,
+                           longest_program=longest_program,
+                           user_program_count=user_program_count,
+                           quiz_level=quiz_level,
+                           congrats_message=congrats_message)
 
 
 def get_highest_quiz_level(username):
@@ -1860,15 +1858,6 @@ def get_highest_quiz_score(username):
             if score > max:
                 max = score
     return max
-
-
-def get_longest_program(username):
-    programs = DATABASE.get_program_stats([username])
-    highest = 0
-    for program in programs:
-        if 'number_of_lines' in program:
-            highest = max(highest, program['number_of_lines'])
-    return highest
 
 
 @app.errorhandler(404)
@@ -2079,7 +2068,10 @@ def landing_page(user, first):
             if not (program.get('is_modified') or 'is_modified' not in program):
                 programs.remove(program)
 
-    user_achievements = DATABASE.progress_by_username(username)
+    achievements = DATABASE.achievements_by_username(username)
+    user_from_db = DATABASE.user_by_username(username)
+    has_certificate = ('achieved' in achievements and 'hedy_certificate' in achievements['achieved']) \
+        or user_from_db.get('certificate', False)
 
     return render_template(
         'landing-page.html',
@@ -2089,7 +2081,7 @@ def landing_page(user, first):
         user_info=user_info,
         programs=programs,
         last_program=last_program,
-        achievements=user_achievements)
+        has_certificate=has_certificate)
 
 
 @app.route('/explore', methods=['GET'])
@@ -2567,7 +2559,10 @@ def public_user_page(username):
             user_program_count = user.get('program_count')
         else:
             user_program_count = 0
-
+        achievements = DATABASE.achievements_by_username(username)
+        user_from_db = DATABASE.user_by_username(username)
+        has_certificate = ('achieved' in achievements and 'hedy_certificate' in achievements['achieved']) \
+            or user_from_db.get('certificate', False)
         return render_template(
             'public-page.html',
             user_info=user_public_info,
@@ -2579,6 +2574,7 @@ def public_user_page(username):
             sorted_level_programs=sorted_level_programs,
             sorted_adventure_programs=sorted_adventure_programs,
             user_program_count=user_program_count,
+            has_certificate=has_certificate,
         )
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 

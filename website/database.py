@@ -81,7 +81,8 @@ USERS = dynamo.Table(storage, 'users', 'username',
                          'teacher': OptionalOf(str),
                          'pair_with_teacher': OptionalOf(int),
                          'teacher_request': OptionalOf(bool),
-                         'is_super_teacher': OptionalOf(int)
+                         'is_super_teacher': OptionalOf(int),
+                         'certificate': OptionalOf(bool)
                      }),
                      indexes=[
                          dynamo.Index('email'),
@@ -559,6 +560,12 @@ class Database:
         # create a new class errors object
         CLASS_ERRORS.create(class_errors)
         return class_errors
+
+    def add_certificate_to_user(self, username):
+        return USERS.update({"username": username}, {"certificate": True})
+
+    def achievements_by_username(self, username):
+        return ACHIEVEMENTS.get({"username": username})
 
     def increase_user_program_count(self, username, delta=1):
         """Increase the program count of a user by the given delta."""
