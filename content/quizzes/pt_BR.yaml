@@ -136,7 +136,7 @@ levels:
         7:
             question_text: O que há de errado com este código?
             code: |-
-                {print} Bem-vindo ao restaurante Hedys!
+                {print} Bem-vindo ao restaurante da Hedy!
                 {ask} O que você gostaria de comer?
                 {echo} Então você quer pedir...
                 {print} Em breve! Aproveite!
@@ -194,9 +194,9 @@ levels:
             -   option: Você está pronto(a) para ir ao nível 2?
                 feedback: Há dois comandos `{echo}`
             -   option: |-
-                    Yes!
-                    Yes!
-                feedback: Great job!
+                    Sim!
+                    Sim!
+                feedback: Bom trabalho!
             -   option: Sim!
                 feedback: Há dois comandos `{echo}`
             -   option: |-
@@ -296,9 +296,9 @@ levels:
             correct_answer: C
             question_score: '10'
         6:
-            question_text: What should be on the lines?
+            question_text: O que deve estar na linha?
             code: |-
-                {print} And the award for best programming language goes to...
+                {print} E o prêmio de melhor linguagem de programação vai para...
                 _?_
                 {print} Hedy!
             mp_choice_options:
@@ -306,29 +306,29 @@ levels:
                     ```
                     {sleep}
                     ```
-                feedback: Perfect!
+                feedback: Perfeito!
             -   option: |-
                     ```
                     {echo}
                     ```
-                feedback: There is nothing to repeat back here
+                feedback: Não há nada para repetir aqui
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: There is no text there to `{print}` there
+                feedback: Não há texto para ser impresso pelo comando `{print}`
             -   option: |-
                     ```
                     {ask}
                     ```
-                feedback: There is no question there to be asked
-            hint: Pause for dramatic effect...
+                feedback: Não há nenhuma pergunta a ser feita
+            hint: Pausa para efeito dramático...
             correct_answer: A
             question_score: '10'
         7:
-            question_text: What command should be used on line 2?
+            question_text: Qual comando deve ser usado na linha 2?
             code: |-
-                {print} I will explode in 3 seconds!
+                {print} Vou explodir em 3 segundos!
                 _?_
                 {print} BOOM!
             mp_choice_options:
@@ -336,100 +336,100 @@ levels:
                     ```
                     {print} 3
                     ```
-                feedback: You don't need to `{print}`
+                feedback: Você não precisa imprimir usando `{print}`
             -   option: |-
                     ```
                     {sleep} 3
                     ```
-                feedback: Perfect!
+                feedback: Perfeito!
             -   option: |-
                     ```
                     {sleep}
                     ```
-                feedback: This way the bomb will explode in 1 second
+                feedback: Desta forma a bomba explodirá em 1 segundo
             -   option: |-
                     ```
                     {sleep} {sleep} {sleep}
                     ```
-                feedback: Make it easier on yourself by using the number 3
-            hint: You want the computer to wait for 3 seconds
+                feedback: Torne as coisas mais fáceis para você usando o número 3
+            hint: Você quer que o computador espere 3 segundos
             correct_answer: B
             question_score: '10'
         8:
-            question_text: How would you correct the first line of code?
+            question_text: Como você corrigiria a primeira linha do código?
             code: |-
-                {ask} {is} How old are you?
+                {ask} {is} Quantos anos você tem?
                 {print} age
             mp_choice_options:
             -   option: |-
                     ```
                     idade {ask} {is} Quantos anos você tem?
                     ```
-                feedback: That is the wrong order
+                feedback: A ordem está errada
             -   option: |-
                     ```
                     {ask} {is} idade Quantos anos você tem?
                     ```
-                feedback: That is the wrong order
+                feedback: A ordem está errada
             -   option: |-
                     ```
                     idade {is} {ask} Quantos anos você tem?
                     ```
-                feedback: You get it!
+                feedback: Você conseguiu!
             -   option: |-
                     ```
                     idade {is} Quantos anos você tem?
                     ```
                 feedback: Cadê o comando `{ask}`?
-            hint: The variable name should come first
+            hint: O nome da variável deve vir primeiro
             correct_answer: C
             question_score: '10'
         9:
-            question_text: What is going wrong in this code?
+            question_text: O que está errado neste código?
             code: |-
-                dogs {is} animal
-                {print} I love animal
+                cachorros {is} animal
+                {print} Eu amo animal
             mp_choice_options:
-            -   option: 'Line 1 should say: dogs `{is}` animals'
-                feedback: The variable name is animal
-            -   option: 'Line 1 should say: animal `{is}` dogs'
+            -   option: 'Linha 1 deveria ser: cachorros `{is}` animais'
+                feedback: O nome da variável é animal
+            -   option: 'Linha 1 deveria ser: animal `{is}` cachorros'
                 feedback: Ótimo!
-            -   option: 'Line 2 should say: `{print}` I love animals'
-                feedback: The variable name is animal
-            -   option: 'Line 2 should say: `{sleep}` I love animals'
-                feedback: Sleep is not used to `{print}` text
-            hint: You want to `{print}` 'I love dogs'
+            -   option: 'Linha 2 deveria ser: `{print}` Eu amo animais'
+                feedback: O nome da variável é animal
+            -   option: 'Linha 2 deveria ser: `{sleep}` Eu amo animais'
+                feedback: durma (sleep) não é usado para imprimir texto
+            hint: Você quer imprimir 'Eu amo cachorros'
             correct_answer: B
             question_score: '10'
         10:
-            question_text: What command should be used on the line 1?
+            question_text: Qual comando deve ser usado na linha 1?
             code: |-
-                flavor {is} _?_
-                {print} Your favorite icecream is...
+                sabor {is} _?_
+                {print} Seu sorvete favorito é...
                 {sleep}
-                {print} flavor
+                {print} sabor
             mp_choice_options:
             -   option: |-
                     ```
                     {sleep} 3
                     ```
-                feedback: You want to know the favorite flavor!
+                feedback: Você quer saber o sabor favorito!
             -   option: |-
                     ```
                     {print} morango
                     ```
-                feedback: You do not want a `{print}` command at the middle of the line...
+                feedback: Você não quer o comando `{print}` no meio da linha...
             -   option: |-
                     ```
                     morango, chocolate, baunilha
                     ```
-                feedback: This way you are making a list. You don't want that now.
+                feedback: Assim você está fazendo uma lista. Você não quer isso agora.
             -   option: |-
                     ```
                     {ask} De que sabor de sorvete você gosta?
                     ```
-                feedback: That's right!
-            hint: You want to `{ask}` a question
+                feedback: Correto!
+            hint: Você quer perguntar uma questão
             correct_answer: D
             question_score: '10'
     3:

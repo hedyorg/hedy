@@ -12,13 +12,13 @@
         <div class="bg-white shadow-md rounded-lg rounded py-4 px-0 md:px-4 lg:px-8" id="role_selection">
             <h2 class="my-0 text-center">{{_('signup_student_or_teacher')}}</h2>
             <div class="mt-4 mx-auto flex flex-wrap px-8 lg:px-0 lg:flex-nowrap justify-center gap-8">
-                <a class="w-full no-underline border-2 rounded-lg flex flex-col items-center bg-white text-center border-green-400 bg-gray-200 hover:bg-green-400 cursor-pointer hover:text-white p-4 px-8" href="?teacher=false">
+                <a data-cy="signup_student" class="w-full no-underline border-2 rounded-lg flex flex-col items-center bg-white text-center border-green-400 bg-gray-200 hover:bg-green-400 cursor-pointer hover:text-white p-4 px-8" href="?teacher=false">
                     <img src="/images/profile_images/1.png" class="h-32 m-8 mb-0" alt="Hedy tutorial icon">
                     <div class="mb-2 mt-4 text-xl">
                         {{_('student_signup_header')}}
                     </div>
                 </a>
-                <a class="w-full no-underline border-2 rounded-lg flex flex-col items-center bg-white text-center border-green-400 bg-gray-200 hover:bg-green-400 cursor-pointer hover:text-white p-4 px-8" href="?teacher=true">
+                <a data-cy="signup_teacher" class="w-full no-underline border-2 rounded-lg flex flex-col items-center bg-white text-center border-green-400 bg-gray-200 hover:bg-green-400 cursor-pointer hover:text-white p-4 px-8" href="?teacher=true">
                     <img src="/images/profile_images/3.png" class="h-32 m-8 mb-0" alt="Hedy tutorial icon">
                     <div class="mb-2 mt-4 text-xl">
                         {{_('teacher_signup_header')}}
@@ -38,22 +38,22 @@
                 {% endif %}
                 <div class="signup-container">
                     <label class="signup-label" for="username">{{_('username')}}</label>
-                    <input class="signup-input" minlength="3" id="username" name="username" required>
+                    <input class="signup-input" minlength="3" id="username" data-cy="username" name="username" required>
                 </div>
                 <div class="signup-container">
                     <label class="signup-label" for="email">{{_('email')}}</label>
-                    <input class="signup-input" id="email" name="email" type="email" required>
+                    <input class="signup-input" id="email" data-cy="email" name="email" type="email" required>
                 </div>
                 <div class="signup-container">
                     <div class="hidden" id="phone_number">
                         <label class="signup-label" for="phone">{{_('phone_number')}}</label>
-                        <input class="signup-input" id="phone" name="phone" type="number" placeholder="{{_('landcode_phone_number')}}">
+                        <input class="signup-input" id="phone" data-cy="phone" name="phone" type="number" placeholder="{{_('landcode_phone_number')}}">
                     </div>
                 </div>
                 <div class="signup-container">
                     <label class="signup-label" for="password">{{_('password')}}</label>
                     <div class="flex ml-auto items-center justify-end">
-                        <input class="signup-input" minlength="6" id="password" name="password" type="password" required>
+                        <input class="signup-input" minlength="6" id="password" data-cy="password" name="password" type="password" required>
                         <span class="inline z-10 absolute mx-2 text-sm text-gray-500" onclick="$('.blur-toggle').toggle();$('#password').attr('type',$('#password').attr('type')==='password'?'text':'password');">
                             <i class="fas fa-eye-slash fa-lg cursor-pointer blur-toggle" aria-hidden="true"></i>
                             <i class="fas fa-eye fa-lg cursor-pointer blur-toggle" style="display: none;" aria-hidden="true"></i>
@@ -63,7 +63,7 @@
                 <div class="signup-container">
                     <label class="signup-label" for="password_repeat">{{_('password_repeat')}}</label>
                     <div class="flex ml-auto items-center justify-end">
-                        <input class="signup-input" minlength="6" id="password_repeat" name="password_repeat" type="password" required>
+                        <input class="signup-input" minlength="6" id="password_repeat" data-cy="password_repeat" name="password_repeat" type="password" required>
                         <span class="inline z-10 absolute mx-2 text-sm text-gray-500" onclick="$('.blur-toggle2').toggle();$('#password_repeat').attr('type',$('#password_repeat').attr('type')==='password'?'text':'password');">
                             <i class="fas fa-eye-slash fa-lg cursor-pointer blur-toggle2" aria-hidden="true"></i>
                             <i class="fas fa-eye fa-lg cursor-pointer blur-toggle2" style="display: none;" aria-hidden="true"></i>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="signup-container">
                     <label class="signup-label" for="language">{{_('preferred_language')}}</label>
-                    <select class="signup-input appearance-none" id="language" name="language" required>
+                    <select class="signup-input appearance-none" id="language" data-cy="language" name="language" required>
                         <option value="" selected disabled hidden>{{_('select')}}</option>
                         <option value="{{ current_language().lang}}">{{current_language().sym}}</option>
                         {% for language in other_languages() %}
@@ -82,7 +82,7 @@
                 </div>
                 <div class="signup-container" style="display: none;" id="keyword_lang_container">
                     <label class="signup-label" for="keyword_language">{{_('preferred_keyword_language')}}</label>
-                    <select class="signup-input appearance-none" id="keyword_language" name="keyword_language" required>
+                    <select class="signup-input appearance-none" id="keyword_language" data-cy="keyword_language" name="keyword_language" required>
                         {% for language in keyword_languages() %}
                         <option value="{{language.lang}}" id="{{language.lang}}_option" class="keyword_lang_option" {% if language.lang=="en" %}selected{% endif %}>{{language.sym}}</option>
                         {% endfor %}
@@ -90,11 +90,11 @@
                 </div>
                 <div class="signup-container">
                     <label class="signup-label" for="birth_year">{{_('birth_year')}}</label>
-                    <input class="signup-input appearance-none" id="birth_year" min="1900" max="2022" name="birth_year" placeholder="1995" type="number">
+                    <input class="signup-input appearance-none" id="birth_year" data-cy="birth_year" min="1900" max="2022" name="birth_year" placeholder="1995" type="number">
                 </div>
                 <div class="signup-container">
                     <label class="signup-label" for="gender">{{_('gender')}}</label>
-                    <select class="signup-input appearance-none" id="gender" name="gender">
+                    <select class="signup-input appearance-none" id="gender" data-cy="gender" name="gender">
                         <option value="" selected disabled hidden>{{_('select')}}</option>
                         <option value="f">{{_('female')}}</option>
                         <option value="m">{{_('male')}}</option>
@@ -103,7 +103,7 @@
                 </div>
                 <div class="signup-container">
                     <label class="signup-label" for="country">{{_('country')}}</label>
-                    <select class="signup-input appearance-none" id="country" name="country">
+                    <select class="signup-input appearance-none" id="country" data-cy="country" name="country">
                         <option value="" selected disabled hidden>{{_('select')}}</option>
                         {% for alpha, name in all_countries().items() %}
                         <option value="{{ alpha }}">{{ name }}</option>
@@ -114,34 +114,34 @@
                 {% if is_teacher %}
                 <div class="signup-container">
                     <label class="signup-label" for="heard_about">{{_('heard_about_hedy')}}</label>
-                    <ul class="signup-input appearance-none">
+                    <ul class="signup-input appearance-none" data-cy="heard_about">
                         <li class="flex">
                             <div class="flex items-center gap-2">
-                                <input type="checkbox" name="heard_about" value="from_another_teacher">
+                                <input type="checkbox" name="heard_about" value="from_another_teacher" data-cy="from_another_teacher">
                                 <label>{{_('from_another_teacher')}}</label>
                             </div>
                         </li>
                         <li class="flex">
                             <div class="flex items-center gap-2">
-                                <input type="checkbox" name="heard_about" value="social_media">
+                                <input type="checkbox" name="heard_about" value="social_media" data-cy="social_media">
                                 <label>{{_('social_media')}}</label>
                             </div>
                         </li>
                         <li class="flex">
                             <div class="flex items-center gap-2">
-                                <input type="checkbox" name="heard_about" value="from_video">
+                                <input type="checkbox" name="heard_about" value="from_video" data-cy="from_video">
                                 <label>{{_('from_video')}}</label>
                             </div>
                         </li>
                         <li class="flex">
                             <div class="flex items-center gap-2">
-                                <input type="checkbox" name="heard_about" value="from_magazine_website">
+                                <input type="checkbox" name="heard_about" value="from_magazine_website" data-cy="from_magazine_website">
                                 <label>{{_('from_magazine_website')}}</label>
                             </div>
                         </li>
                         <li class="flex">
                             <div class="flex items-center gap-2">
-                                <input type="checkbox" name="heard_about" value="other_source">
+                                <input type="checkbox" name="heard_about" value="other_source" data-cy="other_source">
                                 <label>{{_('other_source')}}</label>
                             </div>
                         </li>
@@ -154,11 +154,11 @@
                     <ul class="signup-input" style="margin-top: -0.3em">
                         <div class="flex gap-2">
                             <li class="flex items-center mr-5">
-                                <input type="radio" name="prog_experience" value="yes" onclick="$('#languages').show()" class="ltr:mr-2 rtl: ml-2" id="prog_experience_yes">
+                                <input type="radio" name="prog_experience" value="yes" onclick="$('#languages').show()" class="ltr:mr-2 rtl: ml-2" data-cy="prog_experience_yes">
                                 <label for="prog_experience"> {{_('yes')}}</label>
                             </li>
                             <li class="flex items-center">
-                                <input type="radio" name="prog_experience" value="no" onclick="$('#languages').hide()" class="ltr:mr-2 rtl:ml-2" id="prog_experience_no">
+                                <input type="radio" name="prog_experience" value="no" onclick="$('#languages').hide()" class="ltr:mr-2 rtl:ml-2" data-cy="prog_experience_no">
                                 <label for="prog_experience"> {{_('no')}}</label>
                             </li>
                         </div>
@@ -170,25 +170,25 @@
                     <ul class="mt-0">
                         <li class="flex">
                             <div class="flex items-center gap-2">
-                                <input type="checkbox" name="experience_languages" value="scratch">
+                                <input type="checkbox" name="experience_languages" value="scratch" data-cy="scratch">
                                 <label style>Scratch</label>
                             </div>
                         </li>
                         <li class="flex">
                             <div class="flex items-center gap-2">
-                                <input type="checkbox" name="experience_languages" value="other_block">
+                                <input type="checkbox" name="experience_languages" value="other_block" data-cy="other_block">
                                 <label>{{_('other_block')}}</label>
                             </div>
                         </li>
                         <li class="flex">
                             <div class="flex items-center gap-2">
-                                <input type="checkbox" name="experience_languages" value="python" id="experience_language_python">
+                                <input type="checkbox" name="experience_languages" value="python" data-cy="python">
                                 <label>Python</label>
                             </div>
                         </li>
                         <li class="flex">
                             <div class="flex items-center gap-2">
-                                <input type="checkbox" name="experience_languages" value="other_text">
+                                <input type="checkbox" name="experience_languages" value="other_text" data-cy="other_text">
                                 <label>{{_('other_text')}}</label>
                             </div>
                         </li>
@@ -203,29 +203,29 @@
                     {% if is_teacher %}
                         <div class="flex justify-between items-center">
                             <label for="subscribe">{{_('subscribe_newsletter')}}</label>
-                            <input type="checkbox" id="subscribe" name="subscribe">
+                            <input type="checkbox" data-cy="subscribe" name="subscribe">
                         </div>
                         <div class="flex justify-between items-center">
                             <label for="pair_with_teacher">{{_('pair_with_teacher')}}</label>
-                            <input type="checkbox" id="pair_with_teacher" name="pair_with_teacher">
+                            <input type="checkbox" data-cy="pair_with_teacher" name="pair_with_teacher">
                         </div>
                         <div class="flex justify-between items-center">
                             <label for="connect_guest_teacher">{{_('connect_guest_teacher')}}</label>
-                            <input type="checkbox" id="connect_guest_teacher" name="connect_guest_teacher"
+                            <input type="checkbox" data-cy="connect_guest_teacher" name="connect_guest_teacher"
                             _="on click toggle [@required='true'] on #phone
                                      toggle .hidden on #phone_number">
                         </div>
                     {% endif %}
                     <div class="flex justify-between items-center">
-                        <label for="agree_terms">{{_('agree_with')}} <a href="/privacy" target="_blank">{{_('privacy_terms')}}</a></label>
-                        <input type="checkbox" id="agree_terms" name="agree_terms" required>
+                        <label for="agree_terms">{{_('agree_with')}} <a data-cy="privacy" onclick="event.preventDefault (); window.location.href='/privacy'">{{_('privacy_terms')}}</a></label>
+                        <input type="checkbox" data-cy="agree_terms" name="agree_terms" required>
                     </div>
                 </div>
                 <div class="flex items-center justify-center px-4 md:px-8 gap-4">
 
                 </div>
                 <div class="flex">
-                    <button type="submit" class="green-btn mx-auto" id="submit_button">{{_('create_account')}}</button>
+                    <button type="submit" class="green-btn mx-auto" data-cy="submit_button">{{_('create_account')}}</button>
                 </div>
             </form>
         </div>
@@ -233,7 +233,7 @@
 
     <form onsubmit="event.preventDefault (); window.location.href='/login'" class="flex gap-4 items-center">
         <label>{{_('already_account')}}</label>
-        <button type="submit" class="btn">{{_('login')}}</button>
+        <button data-cy="login_button" type="submit" class="btn">{{_('login')}}</button>
     </form>
 </div>
 {% endblock %}

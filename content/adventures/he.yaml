@@ -60,14 +60,19 @@ adventures:
                     גם הפקודה `{add}` יכולה לעזור לך בסיפור שלך.
                 example_code_2: |
                     ```
-                    {print} He hears a sound
-                    animals {is} 🐿, 🦔, 🦇, 🦉
-                    animal {is} {ask} What do you think it is?
-                    {add} animal {to_list} animals
-                    {print} it was a animals {at} {random}
+                    {print} הם שמעו קול
+                    חיות {is} 🐿, 🦔, 🦇, 🦉
+                    חיה {is} {ask} מה אתה חושב שזה?
+                    {add} חיה {to_list} חיות
+                    {print} אלה היו חיות {at} {random}
                     ```
                 story_text_3: |
-                    This is an example of the `{remove}` command in your story
+                    זאת דוגמא של פקודת `{remove}` בסיפור שלכם
+
+                    ### תרגיל
+                    העתיקו את הסיפור שלכם מהשלב הקודם לשלב הזה.
+                    בשלב הזהלמדתם 3 פקודות חדשות `{at} {random}` , `{add} {to_list}` ו`{remove} {from}`.
+                    הוסיפו שורות קוד חדשות לסיפור שלכם, כך שכל הפקודות החדשות יהיו חלק מהסיפור שלכם לפחות פעם אחת.
                 example_code_3: |
                     ```
                     {print} His backpack got way too heavy.
@@ -113,16 +118,20 @@ adventures:
                 example_code: |
                     ```
                     name {is} {ask} 'Who is walking in the forest?'
-                    {print} name 'walks through the forest'
-                    {print} name 'encounter a monster'
+                    {print} name ' walks through the forest'
+                    {print} name ' encounters a monster'
                     end {is} {ask} 'Would you like a good or a bad ending?'
-                    {if} end {is} good {print} name 'takes the sword and the monster quickly runs away'
-                    {else} {print} 'The monster eats' name
+                    {if} end {is} good {print} name ' takes the sword and the monster quickly runs away'
+                    {else} {print} 'The monster eats ' name
                     ```
             7:
                 story_text: |
-                    In a story, someone says words several times. For example, when someone calls for help or sings a song.
-                    You can put such repetitions in your story, in this level with `{repeat}`.
+                    בסיפור, מישהו חוזר על מילים. לדוגמא, כשמישהו קורא לעזרה או שר שיר.
+                    אתה יכול להוסיף חזרות כאלה בסיפור שלך, ולהשתמש ב`{repeat}`.
+
+                    ### תרגיל
+                    הוסף חזרות לסיפור שלך. לך חזרה לתוכנית השמורה שלך, בחר את הסיפור שלך מהשלב הקודם
+                    בחר שורה שכוללת את הפקודה `{print}` ותחזור עליה!
                 example_code: |
                     ```
                     {print} 'The prince kept calling for help'
@@ -299,8 +308,8 @@ adventures:
                     ```
     and_or_command:
         name: '{and} & {or}'
-        default_save_name: and or
-        description: introducing and or
+        default_save_name: ו או
+        description: הצגת {and} ו {or}
         levels:
             13:
                 story_text: |-
@@ -317,7 +326,7 @@ adventures:
     ask_command:
         name: '{ask}'
         default_save_name: ask_command
-        description: Introduction ask command
+        description: הצגת הפקודה {ask}
         levels:
             1:
                 story_text: |
