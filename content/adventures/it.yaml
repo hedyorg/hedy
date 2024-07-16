@@ -17,7 +17,7 @@ adventures:
                     {ask} Il personaggio principale di questa storia è
                     {print} Il personaggio principale ora camminerà nella foresta
                     {echo} È un po' spaventato,
-                    {print} Sente rumori assurdi ovunque
+                    {print} Sente rumori terrificanti ovunque
                     {print} Ha paura che questa sia una foresta infestata
                     ```
                 story_text_2: |
@@ -339,7 +339,7 @@ adventures:
     ask_command:
         name: '{ask}'
         default_save_name: ask_command
-        description: Introduction ask command
+        description: Introduzione comando {ask}
         levels:
             1:
                 story_text: |
@@ -347,25 +347,25 @@ adventures:
                     Ora che sai usare il comando `{print}`, sei pronto per imparare il prossimo comando: `{ask}`. Con il comando `{ask}`, puoi fare una domanda. Controlla:
                 example_code: |
                     ```
-                    {print} Hello!
-                    {ask} What is your name?
+                    {print} Ciao!
+                    {ask} Come ti chiami?
                     ```
                 story_text_2: |
                     ## The  `{echo}` command
                     If you want the computer to repeat the answer, you can use the `{echo}` command. The answer will then be echoed back at the end of the sentence, so in this example after hello.
                 example_code_2: |
                     ```
-                    {print} Hello!
-                    {ask} What is your name?
-                    {echo} hello
+                    {print} Ciao!
+                    {ask} Come ti chiami?
+                    {echo} ciao
                     ```
                 story_text_3: |
-                    ### Exercise
-                    Try out the `{ask}` and `{echo}` commands. Firstly, fill in the blanks to make this program work.
-                    Then ask 2 more questions using the `{ask}` command, after each `{ask}` use an `{echo}` to print the answer on the screen.
+                    ### Esercizio
+                    Prova i comandi `{ask}` e `{echo}` . Prima di tutto, riempi i campi vuoti per far funzionare il programna.
+                    Quindi, formula 2 altre domande utilizzando il comando `{ask}` e, dopo ciascun `{ask}`, utilizza  `{echo}` per far visualizzare a schermo la risposta.
                 example_code_3: |
                     ```
-                    _ How are you doing?
+                    _ Come va?
                     _
                     ```
             2:
@@ -378,10 +378,10 @@ adventures:
                     In questo modo il tuo codice diventa interattivo!
                 example_code: |
                     ```
-                    name {is} {ask} What is your name?
-                    {print} Hello name
-                    age {is} {ask} How old are you?
-                    {print} name is age years old.
+                    name {is} {ask} Come ti chiami?
+                    {print} Ciao name
+                    age {is} {ask} Quanti anni hai?
+                    {print} name ha age anni.
                     ```
                 story_text_2: |
                     ### Esercizio
@@ -594,7 +594,7 @@ adventures:
                         _
                     ```
     calculator:
-        name: Calculator
+        name: Calcolatore
         default_save_name: Calcolatrice
         description: Crea una calcolatrice
         levels:
@@ -620,7 +620,7 @@ adventures:
                     {else} {print} 'Sbagliato! Era ' _
                     ```
                 story_text_3: |
-                    **Extra** Puoi anche lasciare che il computer esegua somme casuali da solo utilizzando `{random}`.
+                    **Extra** Puoi anche lasciare che il computer esegua prodotti casuali da solo utilizzando `{random}`.
                 example_code_3: |-
                     ```
                     numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
