@@ -40,6 +40,7 @@
                 data-tabtarget="{{adventure.short_name}}" class="
                 {% if adventure.short_name != initial_tab %}hidden{% endif %}
                 turn-pre-into-ace show-copy-button p-4 text-adventure-copy"
+                value="{{_('put')}}"
                 >
               <div id="adv_{{adventure.short_name}}" class="lg:flex lg:flex-row {% if adventure.is_teacher_adventure %}teacher-adv{% endif %}">
                     <div class="w-full {% if adventure.example_code or adventure.is_teacher_adventure %}lg:w-1/2 {% endif %} p-2 ltr:mr-2 rtl:ml-2">
