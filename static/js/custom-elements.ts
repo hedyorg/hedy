@@ -117,4 +117,16 @@ export function toggleDropdown(event: Event) {
     $(dropdown).slideToggle('medium');
 }
 
+document.addEventListener("click", (e) => {
+    let dropdowns = [...document.getElementsByClassName('dropdown-menu')]
+    let target = e.target as HTMLElement;
+    const dropdown = target.closest('.dropdown-menu') || target.closest('.dropdown');    
+    if (!dropdown) {
+        dropdowns.forEach((dropdown) => {
+            if ($(dropdown).is(":hidden")) return;
+            $(dropdown).slideToggle("medium");
+        })
+    }
+});
+
 customElements.define('custom-select', HedySelect)
