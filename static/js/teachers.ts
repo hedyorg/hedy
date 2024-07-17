@@ -209,7 +209,7 @@ function update_db_adventure(adventure_id: string) {
   const parser = new DOMParser();
   const html = parser.parseFromString(content, 'text/html');
   if(levels.length === 0) {
-    modal.notifyError('You have to select at least one level');
+    modal.notifyError(ClientMessages['one_level_error']);
     return;
   }
   const minLevel = Math.min(...levels.map((el) => Number(el)));
