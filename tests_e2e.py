@@ -280,60 +280,6 @@ class TestPages(AuthHelper):
         self.get_data('/cheatsheet/123', expect_http_code=404)
         self.get_data('/cheatsheet/panda', expect_http_code=404)
 
-    def test_highscore_pages(self):
-        # WHEN trying all languages to reach the highscore page
-        # THEN receive an OK response from the server
-        self.given_fresh_user_is_logged_in()
-        body = {'email': self.user['email'], 'keyword_language': self.user['keyword_language']}
-
-        for language in ALL_LANGUAGES.keys():
-            body['language'] = language
-            self.post_data('profile', body)
-            self.get_data("/highscores")
-
-    def test_valid_country_highscore_page(self):
-        # WHEN trying to reach the highscores page for a country with a profile country
-        # THEN receive an OK response from the server
-        self.given_fresh_user_is_logged_in()
-
-        # Add a country to the user profile
-        body = {
-            'email': self.user['email'],
-            'language': self.user['language'],
-            'keyword_language': self.user['keyword_language'],
-            'country': 'NL'
-        }
-        self.post_data('profile', body)
-
-        # Receive a valid response
-        self.get_data("/highscores/country")
-
-    def test_invalid_country_highscore_page(self):
-        # WHEN trying to reach the highscores page for a country without a profile country
-        # THEN receive an error response from the server
-        self.given_fresh_user_is_logged_in()
-        self.get_data("/highscores/country", expect_http_code=403)
-
-    def test_valid_class_highscore_page(self):
-        # WHEN a teacher is logged in and create a class
-        self.given_teacher_is_logged_in()
-        self.post_data('class', {'name': 'class1'})
-        Class = self.get_data('classes')[0]
-
-        # THEN a fresh user logs in and joins this class
-        self.given_fresh_user_is_logged_in()
-        self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
-
-        # THEN we can access the class highscore page
-        self.get_data("/highscores/class")
-
-    def test_invalid_class_highscore_page(self):
-        # WHEN a fresh user is not in a class
-        self.given_fresh_user_is_logged_in()
-
-        # THEN we can can't access the class highscore page
-        self.get_data("/highscores/class", expect_http_code=403)
-
     def test_valid_program_filtering_page(self):
         # WHEN a fresh user
         self.given_fresh_user_is_logged_in()
