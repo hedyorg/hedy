@@ -2070,7 +2070,8 @@ def landing_page(user, first):
 
     achievements = DATABASE.achievements_by_username(username)
     user_from_db = DATABASE.user_by_username(username)
-    has_certificate = ('achieved' in achievements and 'hedy_certificate' in achievements['achieved']) \
+    has_certificate = (achievements and 'achieved' in achievements
+                       and 'hedy_certificate' in achievements['achieved'])\
         or user_from_db.get('certificate', False)
 
     return render_template(
@@ -2561,7 +2562,8 @@ def public_user_page(username):
             user_program_count = 0
         achievements = DATABASE.achievements_by_username(username)
         user_from_db = DATABASE.user_by_username(username)
-        has_certificate = ('achieved' in achievements and 'hedy_certificate' in achievements['achieved']) \
+        has_certificate = (achievements and 'achieved' in achievements
+                           and 'hedy_certificate' in achievements['achieved'])\
             or user_from_db.get('certificate', False)
         return render_template(
             'public-page.html',
