@@ -81,7 +81,7 @@ onclick="window.open('/for-teachers', '_self');">
             <form onsubmit="event.preventDefault (); hedyApp.update_adventure('{{ adventure.id }}', true, '{{_('update_adventure_prompt')}}')"
                 id="customize_adventure"
                 data-te-validation-init>
-                <div class="flex gap-4">
+                <div class="flex gap-4 w-2/3">
                     <div class="flex flex-col w-full">
                         <div class="flex flex-row items-center mb-4">
                             <label for="name" class="inline-block w-40 text-xl">{{_('name')}}</label>
@@ -123,8 +123,8 @@ onclick="window.open('/for-teachers', '_self');">
                         </div>
 
                         <div class="flex flex-row items-start mb-4">  
+                                <label for="search_tags_input" class="inline-block w-40 text-xl">{{_('tags')}}</label>
                                 <div class="flex flex-1">
-                                    <label for="search_tags_input" class="inline-block w-40 text-xl">{{_('tags')}}</label>
                                     <div class="flex flex-1 flex-row w-full relative" id="add_tags">
                                             <input type="text" name="tag" autocomplete="off" placeholder="{{_('tag_input_placeholder')}}" id="search_tags_input"  data-cy="search_tags_input"
                                                 class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"
@@ -162,7 +162,7 @@ onclick="window.open('/for-teachers', '_self');">
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-row items-center text-center border-gray-500 border p-4 rounded-lg">
+                <div class="flex flex-row items-center text-center border-gray-500 border p-4 rounded-lg w-2/3">
                     <input type="checkbox" name="agree_public" id="agree_public" data-cy="agree_public" class="mr-4" {% if adventure.public %}checked{% endif %}>
                     <label for="agree_public" class="text-sm italic w-full">{{_('adventure_terms')}}</label>
                 </div>

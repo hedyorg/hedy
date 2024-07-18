@@ -264,6 +264,10 @@ function update_db_adventure(adventure_id: string) {
   const levels = (document.querySelector('#levels_dropdown') as HedySelect).selected
   const classes = (document.querySelector('#classes_dropdown') as HedySelect).selected
   const language = (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
+  if(levels.length === 0) {
+    modal.notifyError(ClientMessages['one_level_error']);
+    return;
+  }
   const content = DOMPurify.sanitize(window.ckEditor.getData());
   const solutionExampleCode = DOMPurify.sanitize(window.ckSolutionEditor.getData());
   
