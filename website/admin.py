@@ -8,6 +8,7 @@ from website.auth import (
     create_verify_link,
     current_user,
     is_admin,
+    is_super_teacher,
     is_teacher,
     make_salt,
     password_hash,
@@ -173,58 +174,51 @@ class AdminModule(WebsiteModule):
             page_title=gettext("title_admin"),
         )
 
-    @route("/markAsTeacher", methods=["POST"])
-    def mark_as_teacher(self):
+    @route("/mark-as-teacher/<username_teacher>", methods=["POST"])
+    def mark_as_teacher(self, username_teacher):
         user = current_user()
-        if not is_admin(user) and not utils.is_testing_request(request):
+        # the user that wants to mark a teacher
+        if (not is_admin(user) and not is_super_teacher(user)) and not utils.is_testing_request(request):
             return utils.error_page(error=401, ui_message=gettext("unauthorized"))
-
-        body = request.json
-
-        # Validations
-        if not isinstance(body, dict):
-            return make_response(gettext("ajax_error"), 400)
-        if not isinstance(body.get("username"), str):
-            return make_response(gettext("username_invalid"), 400)
-        if not isinstance(body.get("is_teacher"), bool):
-            return make_response(gettext("teacher_invalid"), 400)
-
-        user = self.db.user_by_username(body["username"].strip().lower())
-
-        if not user:
+        if not username_teacher:
             return make_response(gettext("username_invalid"), 400)
 
-        is_teacher_value = 1 if body["is_teacher"] else 0
-        update_is_teacher(self.db, user, is_teacher_value)
+        # the user that is going to be a teacher
+        teacher = self.db.user_by_username(username_teacher.strip().lower())
+        if not teacher:
+            return make_response(gettext("username_invalid"), 400)
+        if utils.is_testing_request(request):
+            is_teacher_value = request.json['is_teacher']
+        else:
+            is_teacher_value = 0 if teacher.get("is_teacher") else 1
 
-        # Todo TB feb 2022 -> Return the success message here instead of fixing in the front-end
-        return "", 200
+        update_is_teacher(self.db, teacher, is_teacher_value)
 
-    @route("/mark-super-teacher", methods=["POST"])
+        return make_response('', 200)
+
+    @route("/mark-super-teacher/<username_teacher>", methods=["POST"])
     @requires_admin
-    def mark_super_teacher(self, user):
+    def mark_super_teacher(self, user, username_teacher):
+        # the user that wants to mark a teacher
         if not user and not utils.is_testing_request(request):
             return utils.error_page(error=401, ui_message=gettext("unauthorized"))
+        if not username_teacher:
+            return make_response(gettext("username_invalid"), 400)
+        if not is_teacher:
+            return make_response(gettext("teacher_invalid"), 400)
 
-        body = request.json
+        # the user that is going to be a teacher
+        teacher = self.db.user_by_username(username_teacher.strip().lower())
 
-        # Validations
-        if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
-        if not isinstance(body.get("username"), str):
-            return gettext("username_invalid"), 400
-
-        user = self.db.user_by_username(body["username"].strip().lower())
-
-        if not user:
-            return gettext("username_invalid"), 400
+        if not teacher:
+            return make_response(gettext("username_invalid"), 400)
         elif not is_teacher(user):
-            return "user must be a teacher.", 400
+            return make_response("user must be a teacher.", 400)
 
-        self.db.update_user(user["username"], {"is_super_teacher": 0 if user.get("is_super_teacher") else 1, })
+        self.db.update_user(username_teacher, {"is_super_teacher": 0 if teacher.get("is_super_teacher") else 1, })
         refresh_current_user_from_db()
 
-        return f"{user['username']} is now a super-teacher.", 200
+        return make_response(f"{username_teacher} is now a super-teacher.", 200)
 
     @route("/changeUserEmail", methods=["POST"])
     @requires_admin

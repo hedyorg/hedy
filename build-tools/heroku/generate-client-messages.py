@@ -28,6 +28,12 @@ ADDITIONAL_GETTEXT_KEYS = [
     'selected',
     'select_all',
     'one_level_error'
+    'adventures_tried',
+    'graph_title',
+    'errors',
+    'adventures_completed',
+    'number_of_errors',
+    'successful_runs'
 ]
 
 

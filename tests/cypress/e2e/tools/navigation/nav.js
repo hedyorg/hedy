@@ -18,14 +18,9 @@ export function goToHome()
     goToPage('/');
 }
 
-export function goToRegisterStudent()
+export function goToSignup()
 {
-    goToPage(Cypress.env('register_student_page'));
-}
-
-export function goToRegisterTeacher()
-{
-    goToPage(Cypress.env('register_teacher_page'));
+    goToPage(Cypress.env('signup_page'));
 }
 
 export function goToLogin()
@@ -108,6 +103,20 @@ export function goToEditAdventure()
 export function goToExploreProgramsPage()
 {
    goToPage(Cypress.env('explore_programs_page'));
+}
+
+export function navigateHomeButton(button, path)
+{
+    goToHome();
+    cy.getDataCy(button).click();
+    cy.location().should((loc) => {
+      expect(loc.pathname).equal(path);
+    })
+}
+
+export function goToSubscribePage()
+{
+   goToPage(Cypress.env('subscribe_page'));
 }
 
 export default {goToPage}

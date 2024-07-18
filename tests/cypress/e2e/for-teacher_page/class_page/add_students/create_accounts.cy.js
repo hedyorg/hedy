@@ -30,10 +30,7 @@ teachers.forEach((teacher) => {
       cy.getDataCy('go_back_button').click();
       cy.url().should('include', 'class/'); 
 
-      cy.getDataCy('student_username_cell').should(($div) => {
-        const text = $div.text();
-        expect(text).include(students[0]);
-      })
+      cy.getDataCy(`student_${students[0]}`).should('contain.text', students[0])
     })
 
     it('Is able to add and remove a row and use the reset button', () => {

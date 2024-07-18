@@ -1070,7 +1070,7 @@ adventures:
                         {print} messages {at} {random}
 
                     {define} prise_de_commande
-                        nouriture = {ask} "Que voulez-vous manger ?"
+                        nourriture = {ask} "Que voulez-vous manger ?"
                         {print} "Vous voulez manger nourriture"
                         boisson = "Que voulez-vous boire ?"
                         {print} "Vous voulez boire " boisson
@@ -3514,8 +3514,8 @@ adventures:
                     Tu peux aussi utiliser la commande `{at} {random}` dans une phrase.
                 example_code_2: |
                     ```
-                    nouriture {is} part de tarte, part de pizza, salade, crêpe
-                    {print} Je vais prendre une nouriture {at} {random} pour le déjeuner.
+                    nourriture {is} part de tarte, part de pizza, salade, crêpe
+                    {print} Je vais prendre une nourriture {at} {random} pour le déjeuner.
                     ```
                 story_text_3: |
                     ### Exercice
@@ -3684,7 +3684,7 @@ adventures:
                     ```
                     {print} Bienvenue dans le restaurant Chez Hedy !
                     {print} Aujourd'hui, nous avons pizza ou lasagnes.
-                    nouriture {is} {ask} Que désirez-vous manger ?
+                    nourriture {is} {ask} Que désirez-vous manger ?
                     {print} Très bon choix ! nourriture est mon choix préféré
                     accompagnement {is} {ask} Désirez-vous des frites ou de la salade avec ça ?
                     {print} nourriture avec accompagnement sont en route !
@@ -3695,7 +3695,7 @@ adventures:
                     Corrige le code en remplaçant les commandes `{ask}` et `{echo}` et en utilisant des variables comme tu viens de l'apprendre à ce niveau.
 
                     Maintenant que ton code fonctionne à nouveau, c'est le moment d'ajouter quelquechose en plus.
-                    Regarde la dernière ligne du code d'exemple : `{print} nouriture avec accompagnement sont en route !`
+                    Regarde la dernière ligne du code d'exemple : `{print} nourriture avec accompagnement sont en route !`
                     Dans cette simple ligne, deux variables ont été utilisés pour créer un résumé de la commande.
                     Maintenant ajoute ton propre résumé de la nourriture et de la boisson commandé par le client.
 
@@ -3908,11 +3908,11 @@ adventures:
                 example_code: |
                     ```
                     total = 0.0
-                    nouriture = {ask} "Que voulez-vous commander ?"
+                    nourriture = {ask} "Que voulez-vous commander ?"
                     boisson = {ask} "Que voulez-vous boire ?"
-                    {if} nouriture {is} "hamburger"
+                    {if} nourriture {is} "hamburger"
                         total = total + 6.50
-                    {if} nouriture {is} "pizza"
+                    {if} nourriture {is} "pizza"
                         total = total + 5.75
                     {if} boisson {is} "water"
                         total = total + 1.20
