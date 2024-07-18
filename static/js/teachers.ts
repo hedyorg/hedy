@@ -261,52 +261,14 @@ function get_formatted_content(content: string, levels: string[], language: stri
 function update_db_adventure(adventure_id: string) {
   // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
   const adventure_name = $('#custom_adventure_name').val();
-
   const levels = (document.querySelector('#levels_dropdown') as HedySelect).selected
   const classes = (document.querySelector('#classes_dropdown') as HedySelect).selected
   const language = (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
-
   const content = DOMPurify.sanitize(window.ckEditor.getData());
+  const solutionExampleCode = DOMPurify.sanitize(window.ckSolutionEditor.getData());
   
-  const parser = new DOMParser();
-  const html = parser.parseFromString(content, 'text/html');
-  if(levels.length === 0) {
-    modal.notifyError(ClientMessages['one_level_error']);
-    return;
-  }
-  const minLevel = Math.min(...levels.map((el) => Number(el)));
-  let snippets: string[] = [] ;
-  let snippetsFormatted: string[] = [];
-  let keywords: string[] = []
-  let keywordsFormatted: string[] = []
-
-  for (const tag of html.getElementsByTagName('code')) {
-    if (tag.className === "language-python") {
-      snippets.push(tag.innerText);
-    } else {
-      keywords.push(tag.innerText);
-    }
-  }
-
-  for (const snippet of snippets) {
-    snippetsFormatted.push(addCurlyBracesToCode(snippet, minLevel, language || 'en'));
-  }
-
-  for (const keyword of keywords) {
-    keywordsFormatted.push(addCurlyBracesToKeyword(keyword))
-  }
-
-  let i = 0;
-  let j = 0;
-  for (const tag of html.getElementsByTagName('code')) {
-    if (tag.className === "language-python") {
-      tag.innerText = snippetsFormatted[i++]
-    } else {
-      tag.innerText = keywordsFormatted[j++]
-    }
-  }
-  // We have to replace <br> for newlines, because the serializer swithces them around
-  const formatted_content = html.getElementsByTagName('body')[0].outerHTML.replace(/<br>/g, '\n');
+  const formatted_content = get_formatted_content(content, levels, language);
+  const formatted_solution_code = get_formatted_content(solutionExampleCode, levels, language);
   const agree_public = $('#agree_public').prop('checked');
 
   $.ajax({
@@ -317,6 +279,7 @@ function update_db_adventure(adventure_id: string) {
       name: adventure_name,
       content: content,
       formatted_content: formatted_content,
+      formatted_solution_code: formatted_solution_code,
       public: agree_public,
       language,
       classes,
