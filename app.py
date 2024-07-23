@@ -1566,7 +1566,7 @@ def index(level, program_id):
     level_number = int(level)
     prev_level, next_level = utils.find_prev_next_levels(
         list(available_levels), level_number)
-    
+
     progress = 0
     for i, adventure in enumerate(adventures):
         if adventure.save_info:
