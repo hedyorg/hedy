@@ -37,8 +37,11 @@ teachers.forEach((teacher) => {
         // make sure they are visible
         loginForStudent();
         goToHedyLevel2Page();
-        cy.getDataCy('quiz').scrollIntoView().should('be.visible');
-        cy.getDataCy('parsons').scrollIntoView().should('be.visible');
+        cy.getDataCy('dropdown_adventure_button').click();
+        cy.wait(500);
+        cy.getDataCy('adventure_dropdown').should('be.visible');
+        cy.getDataCy('adventure_button_parsons').scrollIntoView().should('be.visible');
+        cy.getDataCy('adventure_button_quiz').scrollIntoView().should('be.visible');
       });
 
       it('Is able to disable all quizes and parsons', () => {
@@ -69,8 +72,11 @@ teachers.forEach((teacher) => {
 
         loginForStudent();
         goToHedyLevel5Page();
-        cy.getDataCy('quiz').should('not.exist');
-        cy.getDataCy('parsons').should('not.exist');
+        cy.getDataCy('dropdown_adventure_button').click();
+        cy.wait(500);
+        cy.getDataCy('adventure_dropdown').should('be.visible');
+        cy.getDataCy('adventure_button_parsons').should('not.exist');
+        cy.getDataCy('adventure_button_quiz').should('not.exist');
       });
 
 

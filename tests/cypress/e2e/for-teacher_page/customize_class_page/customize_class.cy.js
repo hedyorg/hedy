@@ -1,6 +1,6 @@
 import { loginForTeacher, loginForStudent } from '../../tools/login/login.js'
 import { navigateToClass, removeCustomizations, selectLevel } from "../../tools/classes/class";
-import { goToHedyPage } from "../../tools/navigation/nav";
+import { goToHedyPage, goToHedyPageAdventure } from "../../tools/navigation/nav";
 
 const teachers = ["teacher1", "teacher4"];
 
@@ -129,7 +129,7 @@ teachers.forEach((teacher) => {
     });
 
     it('Is able to be re-added from the right dropdown list', () => {
-      const hiddenAdventure = 'parrot';
+      const hiddenAdventure = 'ask_command';
       selectLevel('1');
       cy.getDataCy(`hide_adv_${hiddenAdventure}`).click();
 
@@ -142,8 +142,7 @@ teachers.forEach((teacher) => {
 
       // should be visible for a student
       loginForStudent();
-      goToHedyPage();
-      cy.getDataCy('parrot').should('be.visible');
+      goToHedyPageAdventure('ask')
     });
 
     //commenting this out because the for each takes time.

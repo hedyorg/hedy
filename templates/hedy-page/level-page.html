@@ -31,7 +31,7 @@
           <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
         </svg>
       </button>
-      <div class="dropdown-menu dropdown-blue z-30 min-w-full h-48 overflow-auto" id="level_dropdown"
+      <div class="dropdown-menu dropdown-blue z-30 min-w-full h-96 overflow-auto" id="level_dropdown"
         style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
         _="on mutation of @style
             set arrow to #level_arrow
@@ -86,7 +86,7 @@
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
           </svg>
         </button>
-        <div class="dropdown-menu dropdown-blue z-30 min-w-full h-48 overflow-auto" id="adventure_dropdown"
+        <div class="dropdown-menu dropdown-blue z-30 min-w-full h-96 overflow-auto" id="adventure_dropdown" data-cy="adventure_dropdown"
           style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
           _="on mutation of @style
               set arrow to #adventure_arrow
@@ -96,7 +96,8 @@
                   add .rotate-180 to arrow
               end">
             {% for adventure in adventures %}
-              <button id="adventure_button_{{ adventure.name }}" 
+              <button id="adventure_button_{{ adventure.name }}"
+              data-cy="adventure_button_{{ adventure.name }}"
               class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white"
               data-tab="{{adventure.short_name}}"
               tabindex="{{ loop.index }}"
@@ -110,7 +111,8 @@
               </button>
             {% endfor %}
             {% if parsons %}
-              <button id="adventure_button_parsons" 
+              <button id="adventure_button_parsons"
+              data-cy="adventure_button_parsons"
               class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white"
               data-tab="parsons"
               tabindex="{{adventures|length + 1}}"
@@ -124,7 +126,8 @@
               </button>
             {% endif %}
             {% if quiz %}
-              <button id="adventure_button_quiz" 
+              <button id="adventure_button_quiz"
+              data-cy="adventure_button_quiz"
               class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white"
               data-tab="quiz"
               style="width: 100%;"

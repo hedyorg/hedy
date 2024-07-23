@@ -1,6 +1,6 @@
 import { createClass, openClassView } from '../../tools/classes/class.js';
 import { loginForTeacher } from '../../tools/login/login.js'
-import { goToHedyPage, goToTeachersPage } from '../../tools/navigation/nav.js';
+import { goToHedyPage, goToTeachersPage, goToHedyPageAdventure } from '../../tools/navigation/nav.js';
 
 const teachers = ["teacher1", "teacher4"];
 
@@ -8,9 +8,7 @@ teachers.forEach((teacher) => {
     it(`${teacher } is able to preview class`, () => {
         loginForTeacher(teacher);
         // go to main hedy page in "normal mode"
-        goToHedyPage();
-        cy.getDataCy('print_command').should("be.visible");
-        cy.getDataCy('ask_command').should("be.visible");
+        goToHedyPageAdventure('print')
         // assert that no preview_class_banner is shown right now
         cy.getDataCy('preview_class_banner').should("not.exist");
 
@@ -23,14 +21,17 @@ teachers.forEach((teacher) => {
         cy.getDataCy('hide_adv_print_command').click();
         cy.getDataCy('preview_class_link').click();
         cy.getDataCy('preview_class_banner').should("be.visible");
-        cy.getDataCy('ask_command').should("be.visible");
+        cy.getDataCy('dropdown_adventure_button').click();
+        cy.wait(500);
+        cy.getDataCy('adventure_dropdown').should('be.visible');
+        cy.getDataCy(`adventure_button_ask`).scrollIntoView().should('be.visible');
         // check that the print_command is absent
-        cy.getDataCy('print_command').should("not.exist");
+        cy.getDataCy('adventure_button_print').should("not.exist");
         cy.getDataCy('exit_preview_class_banner').click();
 
         // we now expect the normal situation to be restored
         goToHedyPage();
-        cy.getDataCy('print_command');
+        goToHedyPageAdventure('print');
         cy.getDataCy('preview_class_banner').should("not.exist");
     })
 });
