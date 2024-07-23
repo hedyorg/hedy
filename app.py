@@ -1566,6 +1566,13 @@ def index(level, program_id):
     level_number = int(level)
     prev_level, next_level = utils.find_prev_next_levels(
         list(available_levels), level_number)
+    
+    progress = 0
+    for i, adventure in enumerate(adventures):
+        if adventure.save_info:
+            progress = i
+
+    progress = round(progress / len(adventures) * 100)
 
     commands = hedy.commands_per_level.get(level)
     return render_template(
@@ -1590,6 +1597,7 @@ def index(level, program_id):
         quiz=quiz,
         quiz_questions=quiz_questions,
         cheatsheet=cheatsheet,
+        progress=progress,
         blur_button_available=False,
         initial_adventure=adventures_map[initial_tab],
         current_user_is_in_class=len(current_user().get('classes') or []) > 0,

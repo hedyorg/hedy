@@ -72,7 +72,7 @@
     <div data-cy="teacher_adventure" class="text-blue-800 text-xl font-slab ltr:mr-5 rtl:ml-5">
       {{adventures[0].name}}
     </div>
-  {% elif not public_adventures_page %}
+    {% elif not public_adventures_page %}
     <div class="flex justify-between">
       <div class="dropdown relative">
         <button class="blue-btn px-4 rounded inline-flex items-center gap-2 text-l" id="dropdown_adventure_button"
@@ -103,12 +103,46 @@
               style="width: 100%;"
               onclick="$('#adventure_dropdown').slideUp('medium');"
               _="on click
+              remove .hidden from #progress_bar
+              remove .hidden from #program_name_container
+              remove .hidden from #share_program_button
+              remove .hidden from #hand_in_button
               set adv to hedyApp.getCurrentAdv()
               put adv into #adventure_text
               then localStorage.setItem('adventure_dropdown', 'adventure_button_{{ adventure.name }}')">
                   {{ adventure.name }}
               </button>
             {% endfor %}
+            {% if parsons %}
+              <button id="adventure_button_parsons" 
+              class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white"
+              data-tab="parsons"
+              style="width: 100%;"
+              onclick="$('#adventure_dropdown').slideUp('medium');"
+              _="on click
+              add .hidden to #progress_bar
+              add .hidden to #program_name_container
+              add .hidden to #share_program_button
+              add .hidden to #hand_in_button
+              set adv to hedyApp.getCurrentAdv()
+              put adv into #adventure_text
+              then localStorage.setItem('adventure_dropdown', 'adventure_button_parsons')">
+                  {{_('parsons_title')}}
+              </button>
+            {% endif %}
+            {% if quiz %}
+              <button id="adventure_button_quiz" 
+              class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white"
+              data-tab="quiz"
+              style="width: 100%;"
+              onclick="$('#adventure_dropdown').slideUp('medium');"
+              _="on click
+              set adv to hedyApp.getCurrentAdv()
+              put adv into #adventure_text
+              then localStorage.setItem('adventure_dropdown', 'adventure_button_quiz')">
+                {{_('quiz_tab')}}
+              </button>
+            {% endif %}
         </div>
       </div>
 
@@ -133,7 +167,7 @@
 
 <!-- the second row: program name, share button, (optional) submit button, cheatsheet button and language button -->
 <div class="mt-4 py-2 flex gap-2 px-4 items-center justify-between w-full max-w-screen-2xl mx-auto">
-  <div class="overflow-hidden flex-1 flex border border-blue-800 ltr:divide-x rtl:divide-x-reverse divide-blue-400 rounded">
+  <div id="program_name_container" class="overflow-hidden flex-1 flex border border-blue-800 ltr:divide-x rtl:divide-x-reverse divide-blue-400 rounded">
     <input id="program_name" type="text" class="outline-0 text-2xl font-light text-blue-800 flex-1 bg-transparent focus:bg-blue-100 border-0 px-4">
   </div>
   <button id="share_program_button" class="blue-btn next-tab">
@@ -209,13 +243,15 @@
 </div>
 
 <!-- progress bar -->
-<div data-cy="progress_bar" class="w-full max-w-screen-2xl mx-auto">
+{% if username %}
+<div id="progress_bar" data-cy="progress_bar" class="w-full max-w-screen-2xl mx-auto">
   <div class="mt-5 ml-4 text-base font-medium dark:text-white">
-    <b>75%</b> to complete</div>
+    <b>{{progress}}% </b>{{_('complete')}}</div>
   <div class="max-w-screen-2xl mr-4 items-center justify-between mx-auto ml-4 rounded-full h-2.5 bg-gray-300">
-    <div class="rounded-full h-2.5 bg-blue-800" style="width: 75%"></div>
+    <div class="rounded-full h-2.5 bg-blue-800" style="width: {{progress}}%"></div>
   </div>
 </div>
+{% endif %}
 
 {% endif %}
 <div class="w-full max-w-screen-2xl mx-auto" id="code_content_container">

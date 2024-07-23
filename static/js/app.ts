@@ -1820,7 +1820,7 @@ function updatePageElements() {
     const isPublic = !!saveInfo.public;
     $('#share_program_button')
       .toggleClass('active-bluebar-btn', isPublic);
-    $(`#share-${isPublic ? 'public' : 'private'}`).prop('checked', true);
+    $(`#share_${isPublic ? 'public' : 'private'}`).prop('checked', true);
 
     // Show <...data-view="if-public-url"> only if we have a public url
     $('[data-view="if-public"]').toggle(isPublic);
@@ -2044,7 +2044,6 @@ export function goToLevel(level: any) {
 
 export function scrollToLastClickedButton(dropdown_id: string) {
   const lastClickedButtonId = localStorage.getItem(dropdown_id);
-  console.log(lastClickedButtonId)
   if (lastClickedButtonId) {
     const button = document.getElementById(lastClickedButtonId);
     if (button) {

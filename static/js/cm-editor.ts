@@ -85,7 +85,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
 
             const mainEditorStyling = EditorView.theme({
                 "&": {
-                    background: '#272822',
+                    background: '#12253F',
                     fontSize: '15.2px',
                     color: 'white',
                     borderRadius: '4px',
