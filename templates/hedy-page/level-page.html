@@ -21,7 +21,7 @@
 <div class="mt-4 py-2 flex gap-2 px-4 items-center justify-between w-full max-w-screen-2xl mx-auto">
   {% if customizations and customizations["available_levels"]%}
     <div class="dropdown relative">
-      <button class="blue-btn px-4 inline-flex items-center text-xl" id="dropdown_level_button"
+      <button class="blue-btn px-4 inline-flex items-center text-xl" data-cy="dropdown_level_button"
         onclick="$('#level_dropdown').slideToggle('medium');"
         _="on click hedyApp.scrollToLastClickedButton('level_dropdown')">
         <span>{{ _('level_title') }} {{ level_nr }}
@@ -42,7 +42,7 @@
             end">
           {% set dropdown_levels = customizations["available_levels"] if customizations["teachers_adventure"] else range(1, max_level + 1) %}
           {% for dropdown_level in dropdown_levels %}
-            <button id="level_button_{{ dropdown_level }}" class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500
+            <button id="level_button_{{ dropdown_level }}" data-cy="level_button_{{ dropdown_level }}" class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500
             {% if dropdown_level == level %}bg-white{% elif dropdown_level not in customizations['available_levels'] %}bg-gray-400 tooltip{% else %}hover:bg-blue-100 bg-blue-200c{% endif %}"
             {% if dropdown_level == level or dropdown_level not in customizations['available_levels']%}disabled{% endif %}
             style="width: 100%;"
@@ -75,7 +75,7 @@
     {% elif not public_adventures_page %}
     <div class="flex justify-between">
       <div class="dropdown relative">
-        <button class="blue-btn px-4 rounded inline-flex items-center gap-2 text-l" id="dropdown_adventure_button"
+        <button class="blue-btn px-4 rounded inline-flex items-center gap-2 text-l" data-cy="dropdown_adventure_button"
           onclick="$('#adventure_dropdown').slideToggle('medium');"
           _="on load
           set adv to hedyApp.getCurrentAdv()
@@ -214,7 +214,7 @@
     {{ render_partial('hedy-page/htmx-language-switch-button.html', commands=commands) }}
   {% endif %}
   <div id="read_outloud_button_container" class="dropdown relative">
-    <button id="read_outloud" class="blue-btn rounded inline-flex items-center gap-2"
+    <button id="read_outloud" data-cy="read_outloud" class="blue-btn rounded inline-flex items-center gap-2"
     onclick="$('#speak_dropdown').slideToggle('medium');">
     <span class="fa fa-volume-high ltr:mr-1 rtl:ml-1"></span>
     <span>{{_('read_outloud')}}</span>
