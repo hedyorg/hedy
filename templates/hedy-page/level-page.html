@@ -103,10 +103,6 @@
               style="width: 100%;"
               onclick="$('#adventure_dropdown').slideUp('medium');"
               _="on click
-              remove .hidden from #progress_bar
-              remove .hidden from #program_name_container
-              remove .hidden from #share_program_button
-              remove .hidden from #hand_in_button
               set adv to hedyApp.getCurrentAdv()
               put adv into #adventure_text
               then localStorage.setItem('adventure_dropdown', 'adventure_button_{{ adventure.name }}')">
@@ -117,13 +113,10 @@
               <button id="adventure_button_parsons" 
               class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white"
               data-tab="parsons"
+              tabindex="{{adventures|length + 1}}"
               style="width: 100%;"
               onclick="$('#adventure_dropdown').slideUp('medium');"
               _="on click
-              add .hidden to #progress_bar
-              add .hidden to #program_name_container
-              add .hidden to #share_program_button
-              add .hidden to #hand_in_button
               set adv to hedyApp.getCurrentAdv()
               put adv into #adventure_text
               then localStorage.setItem('adventure_dropdown', 'adventure_button_parsons')">
@@ -151,10 +144,10 @@
           set :next to hedyApp.getNext()
           if :next
             set *display to 'block'
+            call :next.click()
           else
             set *display to 'none'
           end
-          call :next.click() 
           then set adv to hedyApp.getCurrentAdv()
           put adv into #adventure_text
           then localStorage.setItem('adventure_dropdown', 'adventure_button_' + adv)">
@@ -166,12 +159,12 @@
 </div>
 
 <!-- the second row: program name, share button, (optional) submit button, cheatsheet button and language button -->
-<div class="mt-4 py-2 flex gap-2 px-4 items-center justify-between w-full max-w-screen-2xl mx-auto">
+<div class="mt-4 py-2 flex gap-2 px-4 items-center justify-end w-full max-w-screen-2xl mx-auto">
   <div id="program_name_container" class="overflow-hidden flex-1 flex border border-blue-800 ltr:divide-x rtl:divide-x-reverse divide-blue-400 rounded">
     <input id="program_name" type="text" class="outline-0 text-2xl font-light text-blue-800 flex-1 bg-transparent focus:bg-blue-100 border-0 px-4">
   </div>
   <button id="share_program_button" class="blue-btn next-tab">
-    <span class="fa fa-share-nodes ltr:mr-1 rtl:ml-1"></span>
+    <span class="fa fa-lock ltr:mr-1 rtl:ml-1"></span>
     {{_('share')}}
   </button>
   {% if current_user_is_in_class %}
@@ -181,7 +174,7 @@
   </button>
   {% endif %}
   {% if not hide_cheatsheet and cheatsheet %}
-  <div class="dropdown relative">
+  <div class="dropdown relative" id="cheatsheet_dropdown_container">
     <button class="blue-btn ltr:ml-1 rtl:mr-1 rounded inline-flex items-center gap-2" id="dropdown_cheatsheet_button"
       onclick="$('#cheatsheet_dropdown').slideToggle('medium');">
       <span class="fa fa-list ltr:mr-1 rtl:ml-1"></span>

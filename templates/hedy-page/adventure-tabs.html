@@ -1,90 +1,137 @@
-{# PANES #}
-<div id="adventures_tab" class="w-full overflow-auto bg-gray-200 mb-5 shadow-md">
-{% for adventure in adventures %}
-    <div
-        data-tabtarget="{{adventure.short_name}}" class="
-        {% if adventure.short_name != initial_tab %}hidden{% endif %}
-        turn-pre-into-ace show-copy-button p-4 text-adventure-copy"
-        value="{{_('put')}}"
-        >
-        <div id="adv_{{adventure.short_name}}" class="lg:flex lg:flex-row {% if adventure.is_teacher_adventure %}teacher-adv{% endif %}">
-            <div class="w-full {% if adventure.example_code or adventure.is_teacher_adventure %}lg:w-1/2 {% endif %} p-2 ltr:mr-2 rtl:ml-2">
-                {% if adventure.is_teacher_adventure %}{{ adventure.text|safe }}{% else %}{{ adventure.text|commonmark }}{% endif %}
+      {# TABS #}
+      <div id="adventures">
+        {% macro adventure_tab(tabname, title, selected, id, tab_class, index) %}
+            <div
+                class="tab {% if selected %}tab-selected{% endif %} flex items-center justify-center whitespace-nowrap {{ tab_class }}"
+                id="{{ id }}"
+                tabindex="{{ index }}"
+                data-tab="{{ tabname }}"
+                data-cy="{{ title if tab_class == 'teacher_tab' else tabname }}"
+                >
+                {{title}}
             </div>
-            {% if adventure.example_code %}
-                <div class="border"></div>
-                <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
-                {% if adventure.is_teacher_adventure %}{{ adventure.example_code|safe }}{% else %}{{ adventure.example_code|commonmark }}{% endif %}
-                </div>
+        {% endmacro %}
+
+        <div class="hidden overflow-x-auto overflow-y-hidden px-2 pt-2">
+        <div class="flex flex-row w-min" id="adventures_buttons">
+            {% for adventure in adventures %}
+                {% if adventure.is_teacher_adventure %}
+                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'teacher_tab', loop.index ) }}
+                {% elif adventure.is_command_adventure %}
+                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'command_tab', loop.index ) }}
+                {% else %}
+                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, '', loop.index) }}
+                {% endif %}
+            {% endfor %}
+            <!-- Add the tab for the parsons problem (if it exists) -->
+            {% if parsons %}
+                {{ adventure_tab('parsons', _('parsons_title'), False, 'parsons', 'special_tab', adventures|length + 1 ) }}
             {% endif %}
-            {% if public_adventures_page %}
-                <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
-                {{ render_partial('htmx-adventure-card.html', user={"username": username}, adventure=adventure, level=level ) }}
-                </div>
-            {% endif %}
-        </div>
-    <div class="{% if not adventure.extra_stories %}hidden{% endif %}" id="extra_{{adventure.short_name}}">
-    {% for story in adventure.extra_stories %}
-        <div class="lg:flex lg:flex-row border-t-2">
-            <div class="lg:w-1/2 w-full p-2 ltr:mr-2 rtl:ml-2">
-                <div class="max-w-prose">
-                    {{ story.text|commonmark }}
-                </div>
-            </div>
-            {% if story.example_code %}
-                <div class="border"></div>
-                <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
-                    {{ story.example_code|commonmark }}
-                </div>
+            <!-- Add the tab for the quiz -->
+            {% if quiz %}
+                {{ adventure_tab('quiz', _('quiz_tab'), False, 'quiz', 'special_tab', (adventures|length + (2 if parsons else 1)) ) }}
             {% endif %}
         </div>
-    {% endfor %}
-    </div>
-    {% if not public_adventures_page %}
-    <div class="flex flex-row justify-end">
-        <button id="show_button_{{adventure.short_name}}" class="gray-btn px-4 rounded inline-flex items-center gap-2"
-        _="on click
-            toggle .hidden on #hide_button_{{adventure.short_name}}
-            toggle .hidden on me
-            remove .lg:flex from #adv_{{adventure.short_name}}
-            toggle .hidden on #adv_{{adventure.short_name}}
-            toggle .hidden on #extra_{{adventure.short_name}}
-        end">
-        {{_('close')}}
-            <svg id="show_hide_arrow" class="fill-current h-6 w-6 rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-            </svg>
-        </button>
-    </div>
-    {% endif %}
-    <div class="flex flex-row justify-end">
-        <button id="hide_button_{{adventure.short_name}}" class="hidden gray-btn px-4 rounded inline-flex items-center gap-2"
-        _="on click 
-            toggle .hidden on #show_button_{{adventure.short_name}}
-            toggle .hidden on me
-            add .lg:flex to #adv_{{adventure.short_name}}
-            toggle .hidden on #adv_{{adventure.short_name}}
-            toggle .hidden on #extra_{{adventure.short_name}}
-        end">
-        {{_('open')}}
-            <svg id="show_hide_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-            </svg>
-        </button>
-    </div>
-</div>
-{% endfor %}
-    {% if parsons %}
-        <div data-tabtarget="parsons" class="hidden p-4">
-            <div>
-                {% include 'incl/parsons.html' %}
+      </div>
+      {# PANES #}
+      <div id="adventures_tab" class="w-full overflow-auto bg-gray-200 mb-5 shadow-md">
+        {% for adventure in adventures %}
+            <div
+                data-tabtarget="{{adventure.short_name}}" class="
+                {% if adventure.short_name != initial_tab %}hidden{% endif %}
+                turn-pre-into-ace show-copy-button p-4 text-adventure-copy"
+                value="{{_('put')}}"
+                >
+              <div id="adv_{{adventure.short_name}}" class="lg:flex lg:flex-row {% if adventure.is_teacher_adventure %}teacher-adv{% endif %}">
+                    <div class="w-full {% if adventure.example_code or adventure.is_teacher_adventure %}lg:w-1/2 {% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                        {% if adventure.is_teacher_adventure %}{{ adventure.text|safe }}{% else %}{{ adventure.text|commonmark }}{% endif %}
+                    </div>
+                  {% if adventure.example_code %}
+                      <div class="border"></div>
+                      <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
+                        {% if adventure.is_teacher_adventure %}{{ adventure.example_code|safe }}{% else %}{{ adventure.example_code|commonmark }}{% endif %}
+                      </div>
+                  {% endif %}
+                  {% if public_adventures_page %}
+                      <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
+                        {{ render_partial('htmx-adventure-card.html', user={"username": username}, adventure=adventure, level=level ) }}
+                      </div>
+                  {% endif %}
+              </div>
+            <div class="{% if not adventure.extra_stories %}hidden{% endif %}" id="extra_{{adventure.short_name}}">
+            {% for story in adventure.extra_stories %}
+                <div class="lg:flex lg:flex-row border-t-2">
+                    <div class="lg:w-1/2 w-full p-2 ltr:mr-2 rtl:ml-2">
+                        <div class="max-w-prose">
+                            {{ story.text|commonmark }}
+                        </div>
+                  </div>
+                  {% if story.example_code %}
+                      <div class="border"></div>
+                      <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
+                          {{ story.example_code|commonmark }}
+                      </div>
+                  {% endif %}
+                </div>
+            {% endfor %}
             </div>
-        </div>
-    {% endif %}
-    {% if quiz %}
-        <div data-tabtarget="quiz" class="hidden">
-            {% include 'quiz/incl-begin.html' %}
-        </div>
-    {% endif %}
+            {% if not public_adventures_page %}
+            <div class="flex flex-row justify-end">
+                <button id="show_button_{{adventure.short_name}}" class="gray-btn px-4 rounded inline-flex items-center gap-2"
+                _="on click
+                    toggle .hidden on #hide_button_{{adventure.short_name}}
+                    toggle .hidden on me
+                    remove .lg:flex from #adv_{{adventure.short_name}}
+                    toggle .hidden on #adv_{{adventure.short_name}}
+                    toggle .hidden on #extra_{{adventure.short_name}}
+                end">
+                {{_('close')}}
+                    <svg id="show_hide_arrow" class="fill-current h-6 w-6 rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+            </div>
+            {% endif %}
+            <div class="flex flex-row justify-end">
+                <button id="hide_button_{{adventure.short_name}}" class="hidden gray-btn px-4 rounded inline-flex items-center gap-2"
+                _="on click 
+                    toggle .hidden on #show_button_{{adventure.short_name}}
+                    toggle .hidden on me
+                    add .lg:flex to #adv_{{adventure.short_name}}
+                    toggle .hidden on #adv_{{adventure.short_name}}
+                    toggle .hidden on #extra_{{adventure.short_name}}
+                end">
+                {{_('open')}}
+                    <svg id="show_hide_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+            </div>
+          </div>
+        {% endfor %}
+        {% if parsons %}
+            <div data-tabtarget="parsons" class="hidden p-4">
+                <div>
+                    {% include 'incl/parsons.html' %}
+                </div>
+            </div>
+        {% endif %}
+        {% if quiz %}
+            <div data-tabtarget="quiz" class="hidden">
+                {% include 'quiz/incl-begin.html' %}
+            </div>
+        {% endif %}
+      </div>
     </div>
-</div>
+<!-- <div class="flex flex-row justify-end">
+    <button class="hidden gray-btn mb-2 mr-2 px-4 rounded inline-flex items-center gap-2" id="show_button"
+    _="on click
+        set v to localStorage.getItem('hide_adventure')
+        toggle .hidden on #{v}
+        toggle .hidden on me">
+        Show
+        <svg id="hide_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+        </svg>
+    </button>
+  </div> -->

@@ -1818,8 +1818,7 @@ function updatePageElements() {
     // SHARING SETTINGS
     // Star on "share" button is filled if program is already public, outlined otherwise
     const isPublic = !!saveInfo.public;
-    $('#share_program_button')
-      .toggleClass('active-bluebar-btn', isPublic);
+    changeIconButton(isPublic, 'share_program_button', 'fa-lock', 'fa-users')
     $(`#share_${isPublic ? 'public' : 'private'}`).prop('checked', true);
 
     // Show <...data-view="if-public-url"> only if we have a public url
@@ -1829,14 +1828,39 @@ function updatePageElements() {
 
     // Paper plane on "hand in" button is filled if program is already submitted, outlined otherwise
     const isSubmitted = !!saveInfo.submitted;
-    $('#hand_in_button')
-      .toggleClass('active-bluebar-btn', isSubmitted);
+    changeIconButton(isSubmitted, 'hand_in_button', 'fa-paper-plane', 'fa-check')
 
     // Show <...data-view="if-submitted"> only if we have a public url
     $('[data-view="if-submitted"]').toggle(isSubmitted);
     $('[data-view="if-not-submitted"]').toggle(!isSubmitted);
 
     theGlobalEditor.isReadOnly = isSubmitted;
+    $('#progress_bar').show()
+    $('#program_name_container').show()
+    $('#share_program_button').show()
+    $('#read_outloud_button_container').show()
+    $('#cheatsheet_dropdown_container').show()
+    $('#commands_dropdown_container').show()
+    $('#hand_in_button').show()
+  }
+  if (currentTab === 'parsons'){
+    $('#progress_bar').hide()
+    $('#program_name_container').hide()
+    $('#share_program_button').hide()
+    $('#read_outloud_button_container').hide()
+    $('#cheatsheet_dropdown_container').hide()
+    $('#commands_dropdown_container').show()
+    $('#hand_in_button').hide()
+    $('#clear').hide()
+  }
+  if (currentTab === 'quiz'){
+    $('#progress_bar').hide()
+    $('#program_name_container').hide()
+    $('#share_program_button').hide()
+    $('#read_outloud_button_container').hide()
+    $('#cheatsheet_dropdown_container').hide()
+    $('#commands_dropdown_container').hide()
+    $('#hand_in_button').hide()
   }
 }
 
@@ -1888,6 +1912,15 @@ function initializeShareProgramButtons() {
           throw new Error('This program does not have an id');
         }
         await postNoResponse(`/programs/share/${saveInfo.id}`, {})
+        const programPrivate = document.getElementById('share_private') as HTMLInputElement;
+        const programPublic = document.getElementById('share_public') as HTMLInputElement;
+        if (programPrivate && programPublic){
+          if (programPrivate.checked){
+            changeIconButton(false, 'share_program_button', 'fa-lock', 'fa-users')
+          } else if (programPublic.checked){
+            changeIconButton(true, 'share_program_button', 'fa-lock', 'fa-users')
+          }
+        }
       });
     }
   })
@@ -1917,6 +1950,22 @@ function initializeHandInButton() {
       });
   });
 }
+
+  function changeIconButton(status: boolean, buttonName: string, icon1: string, icon2: string) {
+    const button = document.getElementById(buttonName);
+    if (button) {
+      const iconSpan = button.querySelector('span');
+      if (iconSpan) {
+        if (status){
+          iconSpan.classList.remove(icon1);
+          iconSpan.classList.add(icon2);
+        } else {
+          iconSpan.classList.add(icon1);
+          iconSpan.classList.remove(icon2);
+        }
+      }
+    }
+  }
 
 /**
  * Initialize copy to clipboard buttons.
