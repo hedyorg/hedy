@@ -1,6 +1,6 @@
 import { createClass, openClassView } from '../../tools/classes/class.js';
 import { loginForTeacher } from '../../tools/login/login.js'
-import { goToHedyPage, goToTeachersPage, goToHedyPageAdventure } from '../../tools/navigation/nav.js';
+import { goToHedyPage, goToTeachersPage } from '../../tools/navigation/nav.js';
 
 const teachers = ["teacher1", "teacher4"];
 
@@ -8,7 +8,7 @@ teachers.forEach((teacher) => {
     it(`${teacher } is able to preview class`, () => {
         loginForTeacher(teacher);
         // go to main hedy page in "normal mode"
-        goToHedyPageAdventure('print')
+        cy.visit('/hedy/1#print_command')
         // assert that no preview_class_banner is shown right now
         cy.getDataCy('preview_class_banner').should("not.exist");
 
@@ -31,7 +31,9 @@ teachers.forEach((teacher) => {
 
         // we now expect the normal situation to be restored
         goToHedyPage();
-        goToHedyPageAdventure('print');
+        goToHedyPage();
+        cy.visit('/hedy/1#print_command')
+        cy.getDataCy('dropdown_adventure_button').should('contain.text', 'print');
         cy.getDataCy('preview_class_banner').should("not.exist");
     })
 });

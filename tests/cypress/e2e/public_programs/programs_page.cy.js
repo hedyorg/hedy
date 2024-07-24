@@ -3,11 +3,11 @@ import { executeHelloWorldProgram, deleteProgram } from "../tools/programs/progr
 import { loginForTeacher } from "../tools/login/login";
 import { navigateToClass } from "../tools/classes/class";
 import { makeProfilePublic } from "../tools/profile/profile";
-import { goToProgramsPage, goToHedyPageAdventure } from "../tools/navigation/nav";
+import { goToProgramsPage } from "../tools/navigation/nav";
 
 describe("General tests for my programs page (with both custom teacher and built-in adventure)", () => {
     const programName = "myTestProgram";
-    const adventure = 'Story'
+    const adventure = 'story'
     beforeEach(() => {
         loginForTeacher();
     })
@@ -27,9 +27,9 @@ describe("General tests for my programs page (with both custom teacher and built
     });
 
     it("should not be added to my programs when running a program with copied code", () => {
-        goToHedyPageAdventure(adventure)
+        cy.visit(`/hedy/1#${adventure}`)
         // Paste example code
-        cy.getDataCy(`paste_example_code_${adventure.toLowerCase()}`).click();
+        cy.getDataCy(`paste_example_code_${adventure}`).click();
         cy.getDataCy('runit').click();
         cy.wait(500);
         goToProgramsPage();
@@ -37,9 +37,9 @@ describe("General tests for my programs page (with both custom teacher and built
     });
 
     it("should be added to my programs when running a program with modified code", () => {
-        goToHedyPageAdventure(adventure)
+        cy.visit(`/hedy/1#${adventure}`)
         // Paste example code and modify code
-        cy.getDataCy(`paste_example_code_${adventure.toLowerCase()}`).click();
+        cy.getDataCy(`paste_example_code_${adventure}`).click();
         cy.getDataCy('editor').click();
         cy.focused().type('print Hello world\nask Hello world?');
         cy.getDataCy('runit').click();

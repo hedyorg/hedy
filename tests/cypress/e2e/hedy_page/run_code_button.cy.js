@@ -1,4 +1,4 @@
-import {goToHedyLevel5Page, goToHedyPage} from "../tools/navigation/nav";
+import { goToHedyLevel5Page, goToHedyPage } from "../tools/navigation/nav";
 
 describe('Is able to run code', () => {
     it('Passes', () => {
@@ -41,7 +41,7 @@ describe('Is able to run code', () => {
       }
     })
 
-    it ("Old programs doesn't execute after cancelled", () => {
+    it("Old programs doesn't execute after cancelled", () => {
       // Only works for now if the old program is stuck in an ask, and doesn't return an
       // exception
       cy.visit('/hedy/14#tic')
@@ -52,8 +52,10 @@ describe('Is able to run code', () => {
       cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').type(program_1)      
       cy.getDataCy('runit').click()
       cy.wait('@parse')
+      cy.getDataCy('close_warning').click()
 
-      cy.getDataCy('quizmaster').click()
+      cy.visit('/hedy/14#quizmaster')
+
       const program_2 = "name = ask 'what is your name?'"
       cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').clear()
       cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').type(program_2)

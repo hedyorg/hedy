@@ -510,7 +510,7 @@ describe('Test editor box functionality', () => {
         
         visitLevel(i)
         
-        cy.focused().type("note1 is C4\nnote2 is D4\nnote3 is E4\nplay C4\nplay D4\nplay E4\n");
+        cy.focused().type("note1 is C4\nnote2 is D4\nnote3 is E4\nplay note1\nplay note2\nplay note3\n");
     
         cy.get('#debug_button').click();
         cy.wait('@parse')

@@ -68,7 +68,7 @@
       {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}
     </div>
   {% endif %}
-  {% if customizations["teachers_adventure"] %}
+  {% if customizations and customizations["teachers_adventure"] %}
     <div data-cy="teacher_adventure" class="text-blue-800 text-xl font-slab ltr:mr-5 rtl:ml-5">
       {{adventures[0].name}}
     </div>

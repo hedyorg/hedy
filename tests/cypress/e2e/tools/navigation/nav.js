@@ -124,16 +124,4 @@ export function goToSubscribePage()
    goToPage(Cypress.env('subscribe_page'));
 }
 
-export function goToHedyPageAdventure(adventure)
-{
-    goToHedyPage();
-    cy.getDataCy('dropdown_adventure_button').click();
-    cy.wait(1000);
-    cy.getDataCy('adventure_dropdown').should('be.visible');
-    cy.getDataCy(`adventure_button_${adventure}`).scrollIntoView();
-    cy.wait(1000);
-    cy.getDataCy(`adventure_button_${adventure}`).should('be.visible');
-    cy.getDataCy(`adventure_button_${adventure}`).click();
-}
-
 export default {goToPage}

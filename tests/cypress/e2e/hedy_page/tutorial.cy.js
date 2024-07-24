@@ -7,19 +7,19 @@ beforeEach(() => {
 
 it('initial tutorial page has popup text and editor is visible', () => {
   cy.contains('In this tutorial we will explain').should('be.visible');
-  cy.get('#editor').should('be.visible');
+  cy.getDataCy('editor').should('be.visible');
 });
 
 it('after clicking next, code appears in the editor', () => {
   advanceToStep(2);
-  cy.get('#editor').contains('print ___');
+  cy.getDataCy('editor').contains('print ___');
 });
 
 it('step 6 of the tutorial has translated keywords', () => {
   advanceToStep(6);
 
   // Untranslated this looks like '{print} Hello world!'
-  cy.get('#editor').contains('print Hello world!');
+  cy.getDataCy('editor').contains('print Hello world!');
 });
 
 /**

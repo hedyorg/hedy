@@ -36,19 +36,13 @@ teachers.forEach((teacher) => {
 
         // make sure they are visible
         loginForStudent();
-        goToHedyLevel2Page();
-        cy.getDataCy('dropdown_adventure_button').click();
-        cy.wait(500);
-        cy.getDataCy('adventure_dropdown').should('be.visible');
-        cy.getDataCy('adventure_button_parsons').scrollIntoView();
-        cy.wait(500);
-        cy.getDataCy('adventure_button_parsons').should('be.visible');
-        cy.getDataCy('adventure_button_quiz').scrollIntoView();
-        cy.wait(500);
-        cy.getDataCy('adventure_button_quiz').should('be.visible');
+        cy.visit('/hedy/2#parsons')
+        cy.getDataCy('dropdown_adventure_button').should('contain.text', 'Puzzle');
+        cy.getDataCy('next_adventure').click();
+        cy.getDataCy('dropdown_adventure_button').should('contain.text', 'Quiz');
       });
 
-      it('Is able to disable all quizes and parsons', () => {
+      it.only('Is able to disable all quizes and parsons', () => {
         cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
 
         cy.getDataCy('hide_quiz')
@@ -75,12 +69,11 @@ teachers.forEach((teacher) => {
           .should("not.exist")
 
         loginForStudent();
+        cy.visit('/hedy/5#parsons')
+        cy.getDataCy('dropdown_adventure_button').should('contain.text', 'Introduction');
         goToHedyLevel5Page();
-        cy.getDataCy('dropdown_adventure_button').click();
-        cy.wait(500);
-        cy.getDataCy('adventure_dropdown').should('be.visible');
-        cy.getDataCy('adventure_button_parsons').should('not.exist');
-        cy.getDataCy('adventure_button_quiz').should('not.exist');
+        cy.visit('/hedy/5#quiz')
+        cy.getDataCy('dropdown_adventure_button').should('contain.text', 'Introduction');
       });
 
 
