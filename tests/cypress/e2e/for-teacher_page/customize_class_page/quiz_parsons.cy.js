@@ -40,8 +40,12 @@ teachers.forEach((teacher) => {
         cy.getDataCy('dropdown_adventure_button').click();
         cy.wait(500);
         cy.getDataCy('adventure_dropdown').should('be.visible');
-        cy.getDataCy('adventure_button_parsons').scrollIntoView().should('be.visible');
-        cy.getDataCy('adventure_button_quiz').scrollIntoView().should('be.visible');
+        cy.getDataCy('adventure_button_parsons').scrollIntoView();
+        cy.wait(500);
+        cy.getDataCy('adventure_button_parsons').should('be.visible');
+        cy.getDataCy('adventure_button_quiz').scrollIntoView();
+        cy.wait(500);
+        cy.getDataCy('adventure_button_quiz').should('be.visible');
       });
 
       it('Is able to disable all quizes and parsons', () => {

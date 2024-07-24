@@ -125,7 +125,9 @@ export function goToHedyPageAdventure(adventure)
     cy.getDataCy('dropdown_adventure_button').click();
     cy.wait(500);
     cy.getDataCy('adventure_dropdown').should('be.visible');
-    cy.getDataCy(`adventure_button_${adventure}`).scrollIntoView().should('be.visible');
+    cy.getDataCy(`adventure_button_${adventure}`).scrollIntoView();
+    cy.wait(500);
+    cy.getDataCy(`adventure_button_${adventure}`).should('be.visible');
     cy.getDataCy(`adventure_button_${adventure}`).click();
 }
 
