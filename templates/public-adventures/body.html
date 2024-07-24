@@ -1,4 +1,3 @@
-
 <div id="public_adventures">
     <div id="filters"
         class="flex flex-col sm:flex-row items-center gap-2
@@ -18,6 +17,39 @@
                 >
         </div>
         <div class="flex w-full sm:basis-1/2 gap-2">
+          <div id="adventures" class="flex-1">
+            <div class="dropdown relative" data-type="single" id="adventure_select" data-value="{{selectedLang}}">
+              <button class="toggle-button font-semibold rounded inline-flex justify-between 
+                 appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
+                onclick="$('#adventure_dropdown').slideToggle('medium');">
+                <span class="label" data-value="{{_('select_adventure')}}">{{selectedAdventure if selectedAdventure else _('select_adventure')}}</span>
+                <svg id="adventure_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
+              </button>
+              <div class="dropdown-menu dropdown-blue z-30 mt-2 w-full" id="adventure_dropdown"
+                style="display: none; width: 100%;"
+                _="on mutation of @style
+                    set arrow to #adventure_arrow
+                    if *display == 'none'
+                        remove .rotate-180 from arrow
+                    else if not arrow.classList.contains('rotate-180')
+                        add .rotate-180 to arrow
+                    end">
+                <div class="option default"
+                    hx-post="/public-adventures/filter?adventure=reset&lang={{selectedLang}}&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}"
+                    hx-target="#public_adventures"
+                    value="">{{_('select_adventure')}}</div>
+                {% for adventure in adventures %}
+                    <div class="option {% if adventure == selectedAdventure %}selected{% endif %}"
+                        hx-post="/public-adventures/filter?adventure={{adventure.name}}&lang={{selectedLang}}&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}"
+                        hx-target="#public_adventures"
+                        data-value="{{adventure.name}}">{{adventure.name}}</div>
+                {% endfor %}
+              </div>
+            </div>
+        </div>
+
             <div id="levels" class="flex-1">
                 <div class="dropdown relative" data-type="single" id="level_select" data-cy="level_select" data-value="{{selectedLevel}}">
                   <button class="toggle-button font-semibold rounded inline-flex justify-between 

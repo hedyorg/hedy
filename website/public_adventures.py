@@ -90,6 +90,7 @@ class PublicAdventuresModule(WebsiteModule):
         index_page = request.method == "GET"
 
         level = int(request.args["level"]) if request.args.get("level") else 1
+        adventure = request.args.get("adventure", "")
         language = request.args.get("lang", "")
         tag = request.args.get("tag", "")
         search = request.form.get("search", request.args.get("search", ""))
@@ -166,6 +167,7 @@ class PublicAdventuresModule(WebsiteModule):
             teacher_adventures=adventures,
             available_languages=self.available_languages,
             available_tags=self.available_tags,
+            selectedAdventure=adventure,
             selectedLevel=level,
             selectedLang=language,
             # selectedTag=",".join(self.selectedTag),
