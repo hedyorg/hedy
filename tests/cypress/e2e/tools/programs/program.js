@@ -1,24 +1,21 @@
+import { goToHedyPageAdventure, goToProgramsPage } from '../../tools/navigation/nav.js';
 
 export function executeHelloWorldProgram(name) {
-    cy.visit(`${Cypress.env('hedy_page')}#${name}`);
-    // make sure to navigate to the wanted program tab.
-    cy.get(`[data-cy="${name}"]`)
-        .click();
+    goToHedyPageAdventure(name)
     // Execute program to save it
-    cy.get('#editor .cm-content').click();
-    // empty textarea
+    cy.getDataCy('editor').click();
     cy.focused().clear()
     cy.focused().type('print Hello world');
-    cy.get('#editor .cm-content').should('contain.text', 'print Hello world');
-    cy.get('#runit').click();
-    cy.get('#output').should('contain.text', 'Hello world');
-    cy.visit(`${Cypress.env('programs_page')}`);
-    cy.get(".programs").should("contain.text", name)
-    // cy.get('#program_1').should('contain.text', 'print Hello world');
+    cy.getDataCy('editor').should('contain.text', 'print Hello world');
+    cy.getDataCy('runit').click();
+    cy.getDataCy('output').should('contain.text', 'Hello world');
+    goToProgramsPage();
+    cy.getDataCy('programs_list').should("contain.text", name)
+    cy.get(`[data-name=${name}]`).should('contain.text', 'print Hello world');
 }
 
 export function deleteProgram(name) {
-    cy.visit(`${Cypress.env('programs_page')}`);
+    goToProgramsPage();
     cy.get(".programs")
         .each(($program, i) => {
             if ($program.text().includes(name)) {

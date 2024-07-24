@@ -105,6 +105,11 @@ export function goToExploreProgramsPage()
    goToPage(Cypress.env('explore_programs_page'));
 }
 
+export function goToProgramsPage()
+{
+   goToPage(Cypress.env('programs_page'));
+}
+
 export function navigateHomeButton(button, path)
 {
     goToHome();

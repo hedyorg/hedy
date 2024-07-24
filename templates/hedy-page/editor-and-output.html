@@ -16,7 +16,7 @@
     </div>
     <div id="button_row" class="absolute top-72 right-0 z-20 flex px-4 py-3 justify-end">
         <div id="run_button_container" class="z-10 px-1 inline-flex items-center">
-            <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
+            <button id="runit" data-cy="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
               <span class="fa fa-play ltr:mr-1 rtl:ml-1"></span>
               {{_('run_code_button')}}
             </button>
@@ -56,7 +56,7 @@
       </div>
 
       <!-- The actual editor -->
-      <div id="editor" style="background: #272822; font-size:0.95em; color: white; direction: {{ g.dir }};" lang="en" blurred='false'
+      <div id="editor" data-cy="editor" style="background: #272822; font-size:0.95em; color: white; direction: {{ g.dir }};" lang="en" blurred='false'
         {% if editor_readonly %}data-readonly="true"{% endif %}
         class="w-full flex-1 text-lg rounded min-h-0 overflow-hidden fixed-editor-height"></div>
       <div id="parsons_code_container" class="w-full flex flex-col mx-auto gap-2 items-center hover:cursor" style="display: none;">
@@ -119,7 +119,7 @@
       </div>
   </div>
   <div data-devmodeheight="{{editor_height}},36rem" data-origheight="{{editor_height}}" class="w-full flex flex-col order-3 relative min-h-0 overflow-hidden" id="code_output" style="height: {{editor_height}}">
-    <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 color-white w-full text-lg overflow-auto" style="background: #424B66; min-height: 3rem;"></div>
+    <div id="output" data-cy="output" tabindex=0 class="flex-1 rounded p-2 px-3 color-white w-full text-lg overflow-auto" style="background: #424B66; min-height: 3rem;"></div>
         <div id="variable_button" class="hidden my-3 cursor-pointer" onclick="$('#variable_list').slideToggle('medium');">
           <div class="h-2 z-10 bg-blue-500 content-center justify-center grid text-center">
               <div class="w-fit bg-blue-500 text-white px-5 rounded-lg text-sm">

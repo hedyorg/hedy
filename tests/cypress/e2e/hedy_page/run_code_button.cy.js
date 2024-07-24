@@ -7,18 +7,18 @@ describe('Is able to run code', () => {
       cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').click();
       cy.focused().type("print Hallo!'\n");
       // Run with correct code
-      cy.get('#runit').click();
+      cy.getDataCy('runit').click();
       cy.get('#okbox').should('be.visible');
 
       // Run again with same code
-      cy.get('#runit').click();
+      cy.getDataCy('runit').click();
       cy.get('#okbox').should('not.be.visible');
 
       // Run with incorrect code when skipping faulty code is not possible
       goToHedyLevel5Page();
       cy.get('#editor >.cm-editor').click(); // Wait for the editor to be initialized
       cy.focused().type("anders prind 'minder leuk!'\n");
-      cy.get('#runit').click();
+      cy.getDataCy('runit').click();
       cy.get('#errorbox').should('be.visible');
     })
 
@@ -32,7 +32,7 @@ describe('Is able to run code', () => {
           expectWarning();
           return;
         }
-        cy.get('#runit').click();
+        cy.getDataCy('runit').click();
         clickRun(n - 1);
       }
 
@@ -50,14 +50,14 @@ describe('Is able to run code', () => {
       cy.intercept('/parse').as('parse')
       cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').clear()
       cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').type(program_1)      
-      cy.get('#runit').click()
+      cy.getDataCy('runit').click()
       cy.wait('@parse')
 
       cy.getDataCy('quizmaster').click()
       const program_2 = "name = ask 'what is your name?'"
       cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').clear()
       cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').type(program_2)
-      cy.get('#runit').click()
+      cy.getDataCy('runit').click()
       cy.wait('@parse')
       cy.get('#ask_modal').type('Hedy')
       cy.get('#ask_modal > form').submit()
@@ -73,12 +73,12 @@ describe('Is able to run code', () => {
       cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').clear()
       cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').type(program)
 
-      cy.get('#runit').click()
+      cy.getDataCy('runit').click()
       cy.wait('@parse')
       // A hardcoded wait to ensure that the program finishes execution
       cy.wait(500)
       cy.get('#stopit').should('not.be.visible')
-      cy.get('#runit').should('be.visible')
+      cy.getDataCy('runit').should('be.visible')
       cy.get('#variable_list').should('be.visible').and('have.text', 'var1: 1var2: 2var3: 3var4: 4')
     })
   })
