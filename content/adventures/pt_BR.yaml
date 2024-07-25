@@ -65,7 +65,7 @@ adventures:
                 story_text_3: |
                     Este é um exemplo do comando `{remove}` em sua história
 
-                    ### Exercise
+                    ### Exercício
                     Copie a sua história dos níveis anteriores para esse nível.
                     Nesse nível, você aprendeu 3 novos comandos: `{at} {random}` , `{add} {to_list}` e `{remove} {from}`.
                     Adicione novas linhas de código à sua história, usando cada um desses comandos novos pelo menos uma vez.
@@ -246,7 +246,7 @@ adventures:
         levels:
             3:
                 story_text: |
-                    ## Some a
+                    ## {add} {to_list}
                     Você pode adicionar itens a uma lista usando o comando `{add} {to_list}`. Basta digitar: `{add} pinguim {to_list} animais`, ou você pode usar o comando `{ask}` assim como no código exemplo.
                 example_code: |
                     ```
@@ -256,7 +256,7 @@ adventures:
                     {print} Eu escolho animais {at} {random}
                     ```
                 story_text_2: |
-                    ## Remova de
+                    ## {remove} {from}
                     Se você pode adicionar itens a uma lista, é claro que você também pode tirar. Isso é feito usando o comando `{remove} {from}`.
                 example_code_2: |
                     ```
@@ -1780,8 +1780,8 @@ adventures:
                     **Extra** Altere o código e deixe que a vidente preveja não apenas seu nome, mas também sua idade, seu time favorito ou algo mais sobre você.
             3:
                 story_text: |
-                    In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
-                    In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
+                    Nos níveis anteriores você criou sua primeira máquina de adivinhação, mas Hedy não conseguia prever nada, apenas usava {echo}.
+                    Neste nível você pode usar uma variável e o comando `{at} {random}` para realmente deixar Hedy escolher uma resposta para você. Confira este código, por exemplo:
                 example_code: |
                     ```
                     {print} Eu sou Hedy, a vidente!
@@ -1793,8 +1793,8 @@ adventures:
                     {print} respostas {at} {random}
                     ```
                 story_text_2: |
-                    ### Exercises
-                    Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
+                    ### Exercício
+                    Agora, Hedy só pode responder sim, não ou talvez. Você pode dar a Hedy mais opções de resposta, como 'definitivamente' ou '{ask} novamente'.
             4:
                 story_text: |
                     ### Exercício
@@ -2275,9 +2275,9 @@ adventures:
                     ```
             3:
                 story_text: |
-                    In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
-                    In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
-                    Let Hedy decide randomly!
+                    Nos níveis anteriores você fez uma introdução ao seu jogo de casa mal-assombrada, mas como você deve ter notado, a história sempre teria um final terrível.
+                    Neste nível você pode tornar sua história mais interativa alterando o resultado do jogo; às vezes você será comido, às vezes você escapará!
+                    Deixe Hedy decidir aleatoriamente!
                 example_code: |
                     ```
                     _ Escape da casa mal-assombrada!
@@ -3134,7 +3134,7 @@ adventures:
                     **Extra** Você consegue fazer a papagaia pedir mais do que apenas seu nome adicionando mais linhas de código?
             3:
                 story_text: |
-                    Ensine ao seu papagaio uma nova palavra com `{add}`.
+                    Ensine a sua papagaia uma nova palavra com `{add}`.
                     ### Exercício
                     Você consegue adicionar o comando `{add} {to_list}` de modo a fazer o código funcionar?
                 example_code: |
@@ -3435,15 +3435,15 @@ adventures:
                     {print} Vou comer comida {at} {random} no almoço.
                     ```
                 story_text_3: |
-                    ### Exercise
-                    Try out the `{at} {random}` command by making your own gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
-                    Can you do it? We have already put the first lines into the example code.
+                    ### Exercício
+                    Experimente o comando `{at} {random}` criando seu próprio concurso de televisão onde você escolhe uma porta ou mala e ela contém um grande prêmio em dinheiro!
+                    Consegue fazer isso? Já colocamos as primeiras linhas no código de exemplo.
                 example_code_3: |
                     ```
-                    {print} The big gameshow!
-                    {print} There are 3 suitcases in front of you...
-                    chosen {is} {ask} Which suitcase do you choose?
-                    prices {is} _
+                    {print} O grande concurso de televisão!
+                    {print} Tem 3 malas na sua frente...
+                    escolhida {is} {ask} Qual mala você escolhe?
+                    premio_em_dinheiro {is} _
                     _
                     ```
             16:
@@ -3598,18 +3598,21 @@ adventures:
                     **Extra** Agora que você aprendeu como usar variáveis, você pode usar quantas variáveis desejar em uma linha. Você pode adicionar mais variáveis ao seu código, como comer no local ou levar, dinheiro ou cartão, com ou sem canudo, etc.?
             3:
                 story_text: |
-                    Having trouble to decide what you wanna have for dinner? You can let Hedy choose for you!
-                    Simply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.
-                    You can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?
+                    Está tendo problemas para decidir o que quer jantar? Você pode deixar Hedy escolher por você!
+                    Basta adicionar listas de suas refeições favoritas (ou menos favoritas) e Hedy poderá escolher seu jantar aleatoriamente.
+                    Você também pode se divertir um pouco, deixando Hedy escolher o preço do seu jantar também! O que você vai conseguir?
                 example_code: |
                     ```
-                    dishes {is} spaghetti, brussels sprouts, hamburgers
-                    {print} You will have dishes {at} {random} tonight!
-                    prices {is} 1 euro, 10 euros, 100 euros
-                    {print} That will be prices {at} {random} please.
+                    pratos {is} espaguete, couve de Bruxelas, hambúrgueres
+                    {print} Você terá pratos {at} {random} esta noite!
+                    preços {is} 1 euro, 10 euros, 100 euros
+                    {print} Isso custará preços {at} {random}, por favor.
                     ```
                 story_text_2: |
-                    Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.
+                    ### Exercício
+                    Agora faça sua própria versão do restaurante aleatório.
+                    Faça você mesmo uma lista de entradas, pratos principais, sobremesas, bebidas e preços.
+                    Em seguida, use os comandos `{print}` e `{at} {random}` para informar ao cliente o que estará em seu menu esta noite.
                 example_code_2: |
                     ```
                     {print} Bem-vindo(a) ao seu próprio restaurante aleatório!
