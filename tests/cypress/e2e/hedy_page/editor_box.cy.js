@@ -34,7 +34,7 @@ describe('Test editor box functionality', () => {
     codeMirrorContent().should('have.text', 'print Hello worldask Hello!echo');
     cy.getDataCy('runit').click();
     cy.getDataCy('output').should('contain.text', 'Hello world');
-    cy.get('#ask_modal').should('be.visible');
+    cy.getDataCy('ask_modal').should('be.visible');
     cy.get('#ask_modal > form > div > input[type="text"]').type('Hedy!');
     cy.get('#ask_modal > form > div > input[type="submit"]').click();
     cy.getDataCy('output').should('contain.text', 'Hedy!');
@@ -47,18 +47,18 @@ describe('Test editor box functionality', () => {
     codeMirrorContent().should('have.text', 'print Hello worldask Hello!');
     cy.getDataCy('runit').click();
     cy.getDataCy('output').should('contain.text', 'Hello world');
-    cy.get('#ask_modal').should('be.visible');
+    cy.getDataCy('ask_modal').should('be.visible');
 
     // Now we edit the program and the ask modal should be hidden
     codeMirrorContent().click();
     cy.focused().type('!');
 
-    cy.get('#ask_modal').should('not.be.visible');
+    cy.getDataCy('ask_modal').should('not.be.visible');
 
     // Running program again and it should show the modal
     cy.getDataCy('runit').click();
     cy.getDataCy('output').should('contain.text', 'Hello world');
-    cy.get('#ask_modal').should('be.visible');
+    cy.getDataCy('ask_modal').should('be.visible');
   });
 
   it ('When making an error the error modal should be shown', () => {
@@ -66,7 +66,7 @@ describe('Test editor box functionality', () => {
     codeMirrorContent().should('have.text', 'echo');
     cy.getDataCy('runit').click();
 
-    cy.get('#errorbox').should('be.visible');
+    cy.getDataCy('errorbox').should('be.visible');
     // The error should be about the lonely echo
     cy.getDataCy('error_details').should('contain.text', 'echo');
   });
@@ -76,7 +76,7 @@ describe('Test editor box functionality', () => {
     codeMirrorContent().should('have.text', 'prin Hello world');
     cy.getDataCy('runit').click();
 
-    cy.get('#errorbox').should('be.visible');
+    cy.getDataCy('errorbox').should('be.visible');
     // The error should be about the lonely echo
     cy.getDataCy('error_details').should('contain.text', 'prin');
     cy.get('[data-cy="error_details"] span').should('have.class', 'command-highlighted');

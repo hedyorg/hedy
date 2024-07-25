@@ -20,7 +20,7 @@
               <span class="fa fa-play ltr:mr-1 rtl:ml-1"></span>
               {{_('run_code_button')}}
             </button>
-            <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
+            <button id="stopit" data-cy="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
         </div>
         <div id="debug_container" class="z-10 px-1 inline-flex items-center">
             <button id="debug_button" class="blue-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
@@ -68,7 +68,7 @@
           {% endfor %}
       </div>
       <!-- errorbox -->
-      <div id="errorbox"
+      <div id="errorbox" data-cy="errorbox"
         class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
         style="display: none;">
         <p class="close-dialog" onclick="hedyApp.error.hide ()"><i class="fa-solid fa-xmark"></i></p>
@@ -106,7 +106,7 @@
         </div>
       </div>
       <!-- okbox -->
-      <div id="okbox"
+      <div id="okbox" data-cy="okbox"
         class="flex-0 z-20 mt-0 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md"
         role="alert" style="display: none;">
         <div class="flex">
@@ -130,7 +130,7 @@
         </div>
 
       <div class="overflow-auto inline-block flex z-10 text-white bg-blue-100 rounded-lg" id="variables">
-          <ul id="variable_list" class="bg-blue-100 text-blue-500 px-4 whitespace-nowrap list-none mb-0"
+          <ul id="variable_list" data-cy="variable_list" class="bg-blue-100 text-blue-500 px-4 whitespace-nowrap list-none mb-0"
               style="display: none; margin-left: 0px;"
               _="on mutation of @style
                 set arrow to #variables_arrow
@@ -148,7 +148,7 @@
 
     <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
     <div id="inline_modal" class="flex-0 absolute bottom-0 w-full z-20">
-      <div id="ask_modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none">
+      <div id="ask_modal" data-cy="ask_modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none">
         <!--Title-->
         <div class="flex justify-between items-center">
           <p class="text-2xl font-bold caption">Header</p>
@@ -158,7 +158,7 @@
         <form>
           <div class="my-2 flex">
             <input type="text" class="border border-green-400 rounded p-2 px-3 flex-1" placeholder="{{_('enter_text')}}">
-            <input type="submit" class="flex-0 green-btn ltr:ml-3 rtl:mr-3" value="{{_('enter')}}"></p>
+            <input type="submit" data-cy="submit_ask_modal" class="flex-0 green-btn ltr:ml-3 rtl:mr-3" value="{{_('enter')}}"></p>
           </div>
         </form>
       </div>
@@ -181,7 +181,7 @@
   <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
   <div class="order-2 md:order-4" id="code_related_buttons">
     {% if not raw %}
-    <div id="not_logged_in_warning" class="hidden bg-yellow-200 text-sm px-4 py-1 border-2 border-yellow-400 mb-4">
+    <div id="not_logged_in_warning" data-cy="not_logged_in_warning" class="hidden bg-yellow-200 text-sm px-4 py-1 border-2 border-yellow-400 mb-4">
       {{ _('not_logged_in_cantsave') }}. <a href="/login" class="text-black">{{_('login_to_save_your_work')}}</a>
     </div>
     {% endif %}

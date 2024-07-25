@@ -13,7 +13,7 @@ describe('Error code gives correct error', () => {
             cy.intercept('/parse').as('parse')
             cy.getDataCy('runit').click();
             cy.wait('@parse')
-            cy.get('#errorbox').should('be.visible').should('contain', error_message);
+            cy.getDataCy('errorbox').should('be.visible').should('contain', error_message);
         })
 
         it('tests the ask keyword', () => {
@@ -27,7 +27,7 @@ describe('Error code gives correct error', () => {
             cy.intercept('/parse').as('parse')
             cy.getDataCy('runit').click();
             cy.wait('@parse')
-            cy.get('#errorbox').should('be.visible').should('contain', error_message);
+            cy.getDataCy('errorbox').should('be.visible').should('contain', error_message);
         })
     })
 
@@ -42,7 +42,7 @@ describe('Error code gives correct error', () => {
         cy.intercept('/parse').as('parse')
         cy.getDataCy('runit').click();
         cy.wait('@parse')
-        cy.get('#errorbox').should('be.visible').should('contain', error_message);
+        cy.getDataCy('errorbox').should('be.visible').should('contain', error_message);
     })
 
     it('Invalid Argument Type', () => {
@@ -56,7 +56,7 @@ describe('Error code gives correct error', () => {
         cy.intercept('/parse').as('parse')
         cy.getDataCy('runit').click();
         cy.wait('@parse')
-        cy.get('#errorbox').should('be.visible').should('contain', error_message);
+        cy.getDataCy('errorbox').should('be.visible').should('contain', error_message);
     })
 
     it('Invalid Argument', () => {
@@ -70,6 +70,6 @@ describe('Error code gives correct error', () => {
         cy.intercept('/parse').as('parse')
         cy.getDataCy('runit').click();
         cy.wait('@parse')
-        cy.get('#errorbox').should('be.visible').and('contain', error_message);
+        cy.getDataCy('errorbox').should('be.visible').and('contain', error_message);
     })
 })

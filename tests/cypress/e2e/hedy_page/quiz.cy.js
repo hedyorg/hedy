@@ -5,7 +5,7 @@ beforeEach(() => {
   goToHedyPage();
   // I am not sure how to make Cypress scroll to the quiz button in the adventure_dropdown
   for (let i = 0; i < 14; i++) {
-    cy.get('[data-cy=next_adventure]').click();
+    cy.getDataCy('next_adventure').click();
   }
 });
 
