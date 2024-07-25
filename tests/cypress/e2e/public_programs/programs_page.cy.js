@@ -14,16 +14,21 @@ describe("General tests for my programs page (with both custom teacher and built
 
     it("create adventure, run its code, and see it in my programs", () => {
         createAdventure(programName);
-        navigateToClass("CLASS1");
-        cy.getDataCy("customize_class_button").click(); // Press customize class button
-        cy.getDataCy("available_adventures_current_level").select(`${programName}`);
-
-        // Now preview it and run the program
-        cy.getDataCy('preview_class_link').click();
-        executeHelloWorldProgram(programName)
-        cy.getDataCy('programs_list').should("contain.text", programName);
-
-        deleteAdventure(programName)
+        cy.url().then(url => {
+            const cleanUrl = url.split('?')[0];
+            const urlParts = cleanUrl.split('/');
+            const adventureId = urlParts[urlParts.length - 1];
+            navigateToClass("CLASS1");
+            cy.getDataCy("customize_class_button").click(); // Press customize class button
+            cy.getDataCy("available_adventures_current_level").select(`${programName}`);
+    
+            // Now preview it and run the program
+            cy.getDataCy('preview_class_link').click();
+            executeHelloWorldProgram(programName, adventureId)
+            cy.getDataCy('programs_list').should("contain.text", programName);
+    
+            deleteAdventure(programName)
+        });
     });
 
     it("should not be added to my programs when running a program with copied code", () => {
@@ -113,7 +118,6 @@ describe("General tests for my programs page (with both custom teacher and built
 
     it('can make program private', () => {
         goToProgramsPage();
-
         cy.get(`[data-name=${programName}]`)
                     .first()
                     .then($el => {

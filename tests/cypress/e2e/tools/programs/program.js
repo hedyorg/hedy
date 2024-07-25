@@ -1,7 +1,7 @@
 import { goToProgramsPage } from '../../tools/navigation/nav.js';
 
-export function executeHelloWorldProgram(name) {
-    cy.visit(`/hedy/1#${name}`)
+export function executeHelloWorldProgram(name, adventureId) {
+    cy.visit(`/hedy/1#${adventureId}`)
     // Execute program to save it
     cy.getDataCy('editor').click();
     cy.focused().clear()
