@@ -32,8 +32,8 @@ class TestsLevel18(HedyTester):
         print('ik heet', naam)""")
 
         expected = textwrap.dedent("""\
-        naam = V('Hedy')
-        print(f'''ik heet{naam.text()}''')""")
+        naam = Value('Hedy')
+        print(f'''ik heet{naam}''')""")
 
         self.multi_level_tester(
             code=code,
@@ -56,7 +56,7 @@ class TestsLevel18(HedyTester):
             print(leeftijd)""")
         expected = self.dedent(
             self.input_transpiled('leeftijd', 'Hoe oud ben jij?'),
-            "print(f'''{leeftijd.text()}''')")
+            "print(f'''{leeftijd}''')")
 
         self.multi_level_tester(
             max_level=20,
@@ -74,7 +74,7 @@ class TestsLevel18(HedyTester):
                 print('koekoek')""")
 
         expected = textwrap.dedent("""\
-            naam = V('Hedy')
+            naam = Value('Hedy')
             if naam.data == 'Hedy':
               print(f'''koekoek''')""")
 
@@ -134,10 +134,10 @@ class TestsLevel18(HedyTester):
             """\
             if antwoord.data == 20:
               print(f'''Goedzo!''')
-              print(f'''Het antwoord was inderdaad{antwoord.text()}''')
+              print(f'''Het antwoord was inderdaad{antwoord}''')
             else:
               print(f'''Foutje''')
-              print(f'''Het antwoord moest zijn{antwoord.text()}''')""")
+              print(f'''Het antwoord moest zijn{antwoord}''')""")
 
         self.multi_level_tester(
             code=code,
@@ -154,14 +154,13 @@ class TestsLevel18(HedyTester):
             for a in range(2, 4):
                 a is a + 2
                 b is b + 2""")
-        expected = textwrap.dedent(f"""\
-            a = V(2, num_sys='Latin')
-            b = V(3, num_sys='Latin')
-            step = 1 if 2 < 4 else -1
-            for a in {self.range_transpiled(2, 4, "'Latin'")}:
-              a = V({self.addition_transpiled('a', 2)}, num_sys=get_num_sys(a))
-              b = V({self.addition_transpiled('b', 2)}, num_sys=get_num_sys(b))
-              time.sleep(0.1)""")
+        expected = self.dedent(
+            "a = Value(2, num_sys='Latin')",
+            "b = Value(3, num_sys='Latin')",
+            self.for_loop('a', 2, 4),
+            (f"a = Value({self.sum_transpiled('a', 2)}, num_sys=get_num_sys(a))", '  '),
+            (f"b = Value({self.sum_transpiled('b', 2)}, num_sys=get_num_sys(b))", '  '),
+            ("time.sleep(0.1)", '  '))
 
         self.multi_level_tester(
             code=code,
@@ -174,13 +173,11 @@ class TestsLevel18(HedyTester):
             for i in range(1, 3):
                 for j in range(1, 4):
                     print('rondje: ', i, ' tel: ', j)""")
-        expected = textwrap.dedent(f"""\
-            step = 1 if 1 < 3 else -1
-            for i in {self.range_transpiled(1, 3, "'Latin'")}:
-              step = 1 if 1 < 4 else -1
-              for j in {self.range_transpiled(1, 4, "'Latin'")}:
-                print(f'''rondje: {{i.text()}} tel: {{j.text()}}''')
-                time.sleep(0.1)""")
+        expected = self.dedent(
+            self.for_loop('i', 1, 3),
+            (self.for_loop('j', 1, 4), '  '),
+            ("print(f'''rondje: {i} tel: {j}''')", '    '),
+            ("time.sleep(0.1)", '    '))
 
         self.multi_level_tester(
             code=code,
@@ -193,11 +190,10 @@ class TestsLevel18(HedyTester):
             for دورة in range(١, ٥):
                 print(دورة)""")
 
-        expected = textwrap.dedent(f"""\
-            step = 1 if 1 < 5 else -1
-            for دورة in {self.range_transpiled(1, 5, "'Arabic'")}:
-              print(f'''{{دورة.text()}}''')
-              time.sleep(0.1)""")
+        expected = self.dedent(
+            self.for_loop('دورة', 1, 5, "'Arabic'"),
+            (f"print(f'''{{دورة}}''')", '  '),
+            ("time.sleep(0.1)", '  '))
 
         self.single_level_tester(
             code=code,
@@ -210,8 +206,8 @@ class TestsLevel18(HedyTester):
             choice is input('Is your favorite color one of: ', color)""")
 
         expected = self.dedent(
-            "color = V([V('green'), V('blue')])",
-            self.input_transpiled('choice', 'Is your favorite color one of: {color.text()}'))
+            "color = Value([Value('green'), Value('blue')])",
+            self.input_transpiled('choice', 'Is your favorite color one of: {color}'))
 
         self.multi_level_tester(
             code=code,
@@ -294,8 +290,8 @@ class TestsLevel18(HedyTester):
         if PRINT is pressed:
             print('The button got pressed!')""")
 
-        expected = HedyTester.dedent("""\
-        x = V('PRINT')
+        expected = self.dedent("""\
+        x = Value('PRINT')
         create_button(x.data)
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['PRINT'] = 'if_pressed_PRINT_'
@@ -333,8 +329,8 @@ class TestsLevel18(HedyTester):
             if colors[1] == colors[2] {op} 1 == 1:
                 print('red')""")
 
-        expected = HedyTester.dedent(
-            "colors = V([V('red'), V('green'), V('blue')])",
+        expected = self.dedent(
+            "colors = Value([Value('red'), Value('green'), Value('blue')])",
             self.list_access_transpiled('colors.data[int(1)-1]'),
             self.list_access_transpiled('colors.data[int(2)-1]'),
             f"""\
@@ -358,9 +354,9 @@ class TestsLevel18(HedyTester):
                 print(1)""")
 
         expected = textwrap.dedent(f"""\
-            for __i in range({self.int_cast_transpiled(3, quotes=False)}):
+            for __i in range({self.int_transpiled(3)}):
               print(f'''3''')
-              for __i in range({self.int_cast_transpiled(5, quotes=False)}):
+              for __i in range({self.int_transpiled(5)}):
                 print(f'''5''')
                 time.sleep(0.1)
               print(f'''1''')

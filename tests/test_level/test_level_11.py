@@ -24,13 +24,12 @@ class TestsLevel11(HedyTester):
     #
     def test_for_loop(self):
         code = textwrap.dedent("""\
-        for i in range 1 to 10
-            a is i + 1""")
-        expected = textwrap.dedent(f"""\
-        step = 1 if int(1) < int(10) else -1
-        for i in range(int(1), int(10) + step, step):
-          a = {self.int_cast_transpiled('i', False)} + int(1)
-          time.sleep(0.1)""")
+            for i in range 1 to 10
+                a is i + 1""")
+        expected = self.dedent(
+            self.for_loop('i', 1, 10),
+            (f"a = Value({self.number_transpiled('i')} + {self.number_transpiled(1)}, num_sys=get_num_sys(i))", '  '),
+            ("time.sleep(0.1)", '  '))
 
         self.single_level_tester(
             code=code,
@@ -40,18 +39,17 @@ class TestsLevel11(HedyTester):
 
     def test_for_loop_with_int_vars(self):
         code = textwrap.dedent("""\
-        begin = 1
-        end = 10
-        for i in range begin to end
-            print i""")
+            begin = 1
+            end = 10
+            for i in range begin to end
+                print i""")
 
-        expected = textwrap.dedent("""\
-        begin = '1'
-        end = '10'
-        step = 1 if int(begin) < int(end) else -1
-        for i in range(int(begin), int(end) + step, step):
-          print(f'{i}')
-          time.sleep(0.1)""")
+        expected = self.dedent(
+            "begin = Value('1', num_sys='Latin')",
+            "end = Value('10', num_sys='Latin')",
+            self.for_loop('i', 'begin', 'end', 'get_num_sys(begin)'),
+            ("print(f'{i}')", '  '),
+            ("time.sleep(0.1)", '  '))
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -107,48 +105,46 @@ class TestsLevel11(HedyTester):
 
     def test_for_loop_multiline_body(self):
         code = textwrap.dedent("""\
-        a is 2
-        b is 3
-        for a in range 2 to 4
-            a is a + 2
-            b is b + 2""")
+            a is 2
+            b is 3
+            for a in range 2 to 4
+                a is a + 2
+                b is b + 2""")
 
-        expected = textwrap.dedent(f"""\
-        a = '2'
-        b = '3'
-        step = 1 if int(2) < int(4) else -1
-        for a in range(int(2), int(4) + step, step):
-          a = {self.int_cast_transpiled('a', False)} + int(2)
-          b = {self.int_cast_transpiled('b', False)} + int(2)
-          time.sleep(0.1)""")
+        expected = self.dedent(
+            "a = Value('2', num_sys='Latin')",
+            "b = Value('3', num_sys='Latin')",
+            self.for_loop('a', 2, 4),
+            (f'a = Value({self.number_transpiled("a")} + {self.number_transpiled(2)}, num_sys=get_num_sys(a))', '  '),
+            (f'b = Value({self.number_transpiled("b")} + {self.number_transpiled(2)}, num_sys=get_num_sys(b))', '  '),
+            ('time.sleep(0.1)', '  '))
 
         self.single_level_tester(code=code, expected=expected)
 
     def test_for_loop_followed_by_print(self):
         code = textwrap.dedent("""\
-        for i in range 1 to 10
-            print i
-        print 'wie niet weg is is gezien'""")
+            for i in range 1 to 10
+                print i
+            print 'wie niet weg is is gezien'""")
 
-        expected = textwrap.dedent("""\
-        step = 1 if int(1) < int(10) else -1
-        for i in range(int(1), int(10) + step, step):
-          print(f'{i}')
-          time.sleep(0.1)
-        print(f'wie niet weg is is gezien')""")
+        expected = self.dedent(
+            self.for_loop('i', 1, 10),
+            ("print(f'{i}')", '  '),
+            ("time.sleep(0.1)", '  '),
+            "print(f'wie niet weg is is gezien')")
 
         output = textwrap.dedent("""\
-        1
-        2
-        3
-        4
-        5
-        6
-        7
-        8
-        9
-        10
-        wie niet weg is is gezien""")
+            1
+            2
+            3
+            4
+            5
+            6
+            7
+            8
+            9
+            10
+            wie niet weg is is gezien""")
 
         self.single_level_tester(
             code=code,
@@ -158,82 +154,54 @@ class TestsLevel11(HedyTester):
 
     def test_for_loop_hindi_variable(self):
         code = textwrap.dedent("""\
-        for काउंटर in range 1 to 5
-            print काउंटर""")
+            for काउंटर in range 1 to 5
+                print काउंटर""")
 
-        expected = textwrap.dedent("""\
-        step = 1 if int(1) < int(5) else -1
-        for काउंटर in range(int(1), int(5) + step, step):
-          print(f'{काउंटर}')
-          time.sleep(0.1)""")
+        expected = self.dedent(
+            self.for_loop('काउंटर', 1, 5),
+            ("print(f'{काउंटर}')", '  '),
+            ("time.sleep(0.1)", '  '))
 
         self.single_level_tester(
             code=code,
             expected=expected,
             expected_commands=['for', 'print'])
 
-    def test_for_loop_arabic_range_latin_output(self):
+    def test_for_loop_arabic_range(self):
         code = textwrap.dedent("""\
-        for دورة in range ١ to ٥
-            print دورة""")
+            for دورة in range ١ to ٥
+                print دورة""")
 
-        expected = textwrap.dedent("""\
-        step = 1 if int(1) < int(5) else -1
-        for دورة in range(int(1), int(5) + step, step):
-          print(f'{دورة}')
-          time.sleep(0.1)""")
+        expected = self.dedent(
+            self.for_loop('دورة', 1, 5, "'Arabic'"),
+            ("print(f'{دورة}')", '  '),
+            ("time.sleep(0.1)", '  '))
 
         output = textwrap.dedent("""\
-        1
-        2
-        3
-        4
-        5""")
+            ١
+            ٢
+            ٣
+            ٤
+            ٥""")
 
         self.single_level_tester(
             code=code,
             output=output,
-            expected=expected,
-            expected_commands=['for', 'print'])
-
-    def test_for_loop_arabic_range_arabic_output(self):
-        code = textwrap.dedent("""\
-        for دورة in range ١ to ٥
-            print دورة""")
-
-        expected = textwrap.dedent("""\
-        step = 1 if int(1) < int(5) else -1
-        for دورة in range(int(1), int(5) + step, step):
-          print(f'{convert_numerals("Arabic", دورة)}')
-          time.sleep(0.1)""")
-
-        output = textwrap.dedent("""\
-        ١
-        ٢
-        ٣
-        ٤
-        ٥""")
-
-        self.single_level_tester(
-            code=code,
-            output=output,
-            lang='ar',
             translate=False,
             expected=expected,
             expected_commands=['for', 'print'])
 
     def test_for_loop_reversed_range(self):
         code = textwrap.dedent("""\
-        for i in range 10 to 1
-            print i
-        print 'wie niet weg is is gezien'""")
+            for i in range 10 to 1
+                print i
+            print 'wie niet weg is is gezien'""")
 
-        expected = textwrap.dedent("""\
-        step = 1 if int(10) < int(1) else -1
-        for i in range(int(10), int(1) + step, step):
-          print(f'{i}')
-          time.sleep(0.1)
-        print(f'wie niet weg is is gezien')""")
+        expected = self.dedent(
+            self.for_loop('i', 10, 1),
+            ("print(f'{i}')", '  '),
+            ("time.sleep(0.1)", '  '),
+            "print(f'wie niet weg is is gezien')")
 
         self.single_level_tester(
             code=code,
@@ -242,62 +210,59 @@ class TestsLevel11(HedyTester):
 
     def test_for_loop_with_if_else_body(self):
         code = textwrap.dedent("""\
-        for i in range 0 to 10
-            antwoord is ask 'Wat is 5*5'
-            if antwoord is 24
-                print 'Dat is fout!'
-            else
-                print 'Dat is goed!'
-            if antwoord is 25
-                i is 10""")
+            for i in range 0 to 10
+                antwoord is ask 'Wat is 5*5'
+                if antwoord is 24
+                    print 'Dat is fout!'
+                else
+                    print 'Dat is goed!'
+                if antwoord is 25
+                    i is 10""")
 
-        expected = textwrap.dedent("""\
-        step = 1 if int(0) < int(10) else -1
-        for i in range(int(0), int(10) + step, step):
-          antwoord = input(f'Wat is 5*5')
-          if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '24'):
-            print(f'Dat is fout!')
-          else:
-            print(f'Dat is goed!')
-          if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '25'):
-            i = '10'
-          time.sleep(0.1)""")
+        expected = self.dedent(
+            self.for_loop('i', 0, 10),
+            (self.input_transpiled('antwoord', 'Wat is 5*5'), '  '),
+            ("if localize(antwoord.data) == localize('24'):", '  '),
+            ("print(f'Dat is fout!')", '    '),
+            ("else:", '  '),
+            ("print(f'Dat is goed!')", '    '),
+            ("if localize(antwoord.data) == localize('25'):", '  '),
+            ("i = Value('10', num_sys='Latin')", '    '),
+            ("time.sleep(0.1)", '  '))
 
         self.single_level_tester(code=code, expected=expected)
 
     # issue 363
     def test_for_loop_if_followed_by_print(self):
         code = textwrap.dedent("""\
-        for i in range 0 to 10
-            antwoord is ask 'Wat is 5*5'
-            if antwoord is 24
-                print 'fout'
-        print 'klaar met for loop'""")
+            for i in range 0 to 10
+                antwoord is ask 'Wat is 5*5'
+                if antwoord is 24
+                    print 'fout'
+            print 'klaar met for loop'""")
 
-        expected = textwrap.dedent("""\
-        step = 1 if int(0) < int(10) else -1
-        for i in range(int(0), int(10) + step, step):
-          antwoord = input(f'Wat is 5*5')
-          if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '24'):
-            print(f'fout')
-          time.sleep(0.1)
-        print(f'klaar met for loop')""")
+        expected = self.dedent(
+            self.for_loop('i', 0, 10),
+            (self.input_transpiled('antwoord', 'Wat is 5*5'), '  '),
+            ("if localize(antwoord.data) == localize('24'):", '  '),
+            ("print(f'fout')", '    '),
+            ("time.sleep(0.1)", '  '),
+            "print(f'klaar met for loop')")
 
         self.single_level_tester(code=code, expected=expected)
 
     # issue 599
     def test_for_loop_if(self):
         code = textwrap.dedent("""\
-        for i in range 0 to 10
-            if i is 2
-                print '2'""")
+            for i in range 0 to 10
+                if i is 2
+                    print '2'""")
 
-        expected = textwrap.dedent("""\
-        step = 1 if int(0) < int(10) else -1
-        for i in range(int(0), int(10) + step, step):
-          if convert_numerals('Latin', i) == convert_numerals('Latin', '2'):
-            print(f'2')
-          time.sleep(0.1)""")
+        expected = self.dedent(
+            self.for_loop('i', 0, 10),
+            ("if localize(i.data) == localize('2'):", '  '),
+            ("print(f'2')", '    '),
+            ("time.sleep(0.1)", '  '))
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -335,24 +300,24 @@ class TestsLevel11(HedyTester):
 
     def test_if_pressed_works_in_for_loop(self):
         code = textwrap.dedent("""\
-        for i in range 1 to 10
-            if p is pressed
-                print 'press'
-            else
-                print 'no!'""")
+            for i in range 1 to 10
+                if p is pressed
+                    print 'press'
+                else
+                    print 'no!'""")
 
-        expected = textwrap.dedent("""\
-        step = 1 if int(1) < int(10) else -1
-        for i in range(int(1), int(10) + step, step):
-          if_pressed_mapping = {"else": "if_pressed_default_else"}
-          if_pressed_mapping['p'] = 'if_pressed_p_'
-          def if_pressed_p_():
-              print(f'press')
-          if_pressed_mapping['else'] = 'if_pressed_else_'
-          def if_pressed_else_():
-              print(f'no!')
-          extensions.if_pressed(if_pressed_mapping)
-          time.sleep(0.1)""")
+        expected = self.dedent(
+            self.for_loop('i', 1, 10),
+            ("""\
+            if_pressed_mapping = {"else": "if_pressed_default_else"}
+            if_pressed_mapping['p'] = 'if_pressed_p_'
+            def if_pressed_p_():
+                print(f'press')
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            def if_pressed_else_():
+                print(f'no!')
+            extensions.if_pressed(if_pressed_mapping)
+            time.sleep(0.1)""", '  '))
 
         self.single_level_tester(
             code=code,

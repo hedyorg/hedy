@@ -31,10 +31,10 @@ class TestsLevel9(HedyTester):
                 print 'great!'""")
 
         expected = textwrap.dedent("""\
-        n = '1'
-        m = '2'
-        if convert_numerals('Latin', n) == convert_numerals('Latin', '1'):
-          if convert_numerals('Latin', m) == convert_numerals('Latin', '2'):
+        n = Value('1', num_sys='Latin')
+        m = Value('2', num_sys='Latin')
+        if localize(n.data) == localize('1'):
+          if localize(m.data) == localize('2'):
             print(f'great!')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -51,13 +51,13 @@ class TestsLevel9(HedyTester):
                 print 'awesome'""")
 
         expected = textwrap.dedent("""\
-        n = '1'
-        m = '2'
-        if convert_numerals('Latin', n) == convert_numerals('Latin', '1'):
-          if convert_numerals('Latin', m) == convert_numerals('Latin', '2'):
+        n = Value('1', num_sys='Latin')
+        m = Value('2', num_sys='Latin')
+        if localize(n.data) == localize('1'):
+          if localize(m.data) == localize('2'):
             print(f'great!')
         else:
-          if convert_numerals('Latin', m) == convert_numerals('Latin', '3'):
+          if localize(m.data) == localize('3'):
             print(f'awesome')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -73,10 +73,10 @@ class TestsLevel9(HedyTester):
                 print 'awesome'""")
 
         expected = textwrap.dedent("""\
-        n = '1'
-        m = '2'
-        if convert_numerals('Latin', n) == convert_numerals('Latin', '1'):
-          if convert_numerals('Latin', m) == convert_numerals('Latin', '2'):
+        n = Value('1', num_sys='Latin')
+        m = Value('2', num_sys='Latin')
+        if localize(n.data) == localize('1'):
+          if localize(m.data) == localize('2'):
             print(f'great!')
           else:
             print(f'awesome')""")
@@ -99,15 +99,15 @@ class TestsLevel9(HedyTester):
                  print 'amazing!'""")
 
         expected = textwrap.dedent("""\
-         n = '1'
-         m = '2'
-         if convert_numerals('Latin', n) == convert_numerals('Latin', '1'):
-           if convert_numerals('Latin', m) == convert_numerals('Latin', '2'):
+         n = Value('1', num_sys='Latin')
+         m = Value('2', num_sys='Latin')
+         if localize(n.data) == localize('1'):
+           if localize(m.data) == localize('2'):
              print(f'great!')
            else:
              print(f'nice!')
          else:
-           if convert_numerals('Latin', m) == convert_numerals('Latin', '3'):
+           if localize(m.data) == localize('3'):
              print(f'awesome!')
            else:
              print(f'amazing!')""")
@@ -158,8 +158,8 @@ class TestsLevel9(HedyTester):
                 print 'hello'""")
 
         expected = textwrap.dedent(f"""\
-           for __i in range({self.int_cast_transpiled(2)}):
-             for __i in range({self.int_cast_transpiled(3)}):
+           for __i in range({self.int_transpiled(2)}):
+             for __i in range({self.int_transpiled(3)}):
                print(f'hello')
                time.sleep(0.1)""")
 
@@ -174,8 +174,8 @@ class TestsLevel9(HedyTester):
                 # test""")
 
         expected = textwrap.dedent(f"""\
-           for __i in range({self.int_cast_transpiled(2)}):
-             for __i in range({self.int_cast_transpiled(2)}):
+           for __i in range({self.int_transpiled(2)}):
+             for __i in range({self.int_transpiled(2)}):
                time.sleep(1)
                time.sleep(0.1)""")
 
@@ -190,12 +190,12 @@ class TestsLevel9(HedyTester):
                 print 1""")
 
         expected = textwrap.dedent(f"""\
-            for __i in range({self.int_cast_transpiled(3)}):
-              print(f'{{convert_numerals("Latin", 3)}}')
-              for __i in range({self.int_cast_transpiled(5)}):
-                print(f'{{convert_numerals("Latin", 5)}}')
+            for __i in range({self.int_transpiled(3)}):
+              print(f'3')
+              for __i in range({self.int_transpiled(5)}):
+                print(f'5')
                 time.sleep(0.1)
-              print(f'{{convert_numerals("Latin", 1)}}')
+              print(f'1')
               time.sleep(0.1)""")
 
         self.multi_level_tester(
@@ -250,41 +250,43 @@ class TestsLevel9(HedyTester):
     #
     def test_if_nested_in_repeat(self):
         code = textwrap.dedent("""\
-        prijs is 0
-        repeat 7 times
-            ingredient is ask 'wat wil je kopen?'
-            if ingredient is appel
-                prijs is prijs + 1
-        print 'Dat is in totaal ' prijs ' euro.'""")
+            p is 0
+            repeat 7 times
+                ingredient is ask 'wat wil je kopen?'
+                if ingredient is appel
+                    p is p + 1
+            print 'Dat is in totaal ' p ' euro.'""")
 
-        expected = textwrap.dedent(f"""\
-        prijs = '0'
-        for __i in range({self.int_cast_transpiled(7)}):
-          ingredient = input(f'wat wil je kopen?')
-          if convert_numerals('Latin', ingredient) == convert_numerals('Latin', 'appel'):
-            prijs = {self.int_cast_transpiled('prijs', False)} + int(1)
-          time.sleep(0.1)
-        print(f'Dat is in totaal {{prijs}} euro.')""")
+        expected = self.dedent(
+            "p = Value('0', num_sys='Latin')",
+            f"for __i in range({self.int_transpiled(7)}):",
+            (self.input_transpiled('ingredient', 'wat wil je kopen?'), '  '),
+            f"""\
+              if localize(ingredient.data) == localize('appel'):
+                p = Value({self.number_transpiled('p')} + {self.number_transpiled(1)}, num_sys=get_num_sys(p))
+              time.sleep(0.1)
+            print(f'Dat is in totaal {{p}} euro.')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_if_nested_in_repeat_with_comment(self):
         code = textwrap.dedent("""\
-        prijs is 0
-        repeat 7 times # comment
-            ingredient is ask 'wat wil je kopen?'
-            if ingredient is appel # another comment
-                prijs is prijs + 1
-        print 'Dat is in totaal ' prijs ' euro.'""")
+            p is 0
+            repeat 7 times # comment
+                ingredient is ask 'wat wil je kopen?'
+                if ingredient is appel # another comment
+                    p is p + 1
+            print 'Dat is in totaal ' p ' euro.'""")
 
-        expected = textwrap.dedent(f"""\
-        prijs = '0'
-        for __i in range({self.int_cast_transpiled(7)}):
-          ingredient = input(f'wat wil je kopen?')
-          if convert_numerals('Latin', ingredient) == convert_numerals('Latin', 'appel'):
-            prijs = {self.int_cast_transpiled('prijs', False)} + int(1)
-          time.sleep(0.1)
-        print(f'Dat is in totaal {{prijs}} euro.')""")
+        expected = self.dedent(
+            "p = Value('0', num_sys='Latin')",
+            f"for __i in range({self.int_transpiled(7)}):",
+            (self.input_transpiled('ingredient', f'wat wil je kopen?'), '  '),
+            f"""\
+              if localize(ingredient.data) == localize('appel'):
+                p = Value({self.number_transpiled('p')} + {self.number_transpiled(1)}, num_sys=get_num_sys(p))
+              time.sleep(0.1)
+            print(f'Dat is in totaal {{p}} euro.')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -296,9 +298,9 @@ class TestsLevel9(HedyTester):
                 print 'mooi'""")
 
         expected = textwrap.dedent(f"""\
-        kleur = 'groen'
-        if convert_numerals('Latin', kleur) == convert_numerals('Latin', 'groen'):
-          for __i in range({self.int_cast_transpiled(3)}):
+        kleur = Value('groen')
+        if localize(kleur.data) == localize('groen'):
+          for __i in range({self.int_transpiled(3)}):
             print(f'mooi')
             time.sleep(0.1)""")
 
@@ -317,8 +319,8 @@ class TestsLevel9(HedyTester):
                 print 'lalala'""")
 
         expected = textwrap.dedent(f"""\
-        for __i in range({self.int_cast_transpiled(5)}):
-          if convert_numerals('Latin', 'antwoord2') == convert_numerals('Latin', '10'):
+        for __i in range({self.int_transpiled(5)}):
+          if localize('antwoord2') == localize('10'):
             print(f'Goedzo')
           else:
             print(f'lalala')
@@ -362,11 +364,11 @@ class TestsLevel9(HedyTester):
         else
             print '1 keertje'""")
 
-        expected = HedyTester.dedent(f"""\
+        expected = self.dedent(f"""\
          if_pressed_mapping = {{"else": "if_pressed_default_else"}}
          if_pressed_mapping['x'] = 'if_pressed_x_'
          def if_pressed_x_():
-             for __i in range({self.int_cast_transpiled(5)}):
+             for __i in range({self.int_transpiled(5)}):
                print(f'doe het 5 keer!')
                time.sleep(0.1)
          if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -389,9 +391,9 @@ class TestsLevel9(HedyTester):
           else
             print 'nah'""")
 
-        expected = HedyTester.dedent(f"""\
+        expected = self.dedent(f"""\
          create_button('button1')
-         for __i in range({self.int_cast_transpiled(3)}):
+         for __i in range({self.int_transpiled(3)}):
            if_pressed_mapping = {{"else": "if_pressed_default_else"}}
            if_pressed_mapping['button1'] = 'if_pressed_button1_'
            def if_pressed_button1_():
@@ -425,15 +427,15 @@ class TestsLevel9(HedyTester):
 
         expected_source_map = {
             '2/5-2/9': '2/1-2/5',
-            '2/5-2/35': '2/1-2/35',
-            '3/8-3/21': '7/-237-2/3',
-            '4/9-4/22': '4/1-4/16',
-            '3/5-4/31': '3/1-4/16',
-            '6/9-6/32': '6/1-6/26',
-            '4/31-6/41': '7/-237-1/34',
-            '3/5-6/41': '3/1-6/22',
-            '1/1-6/50': '1/1-7/18',
-            '1/1-6/51': '1/1-7/18'
+            '2/5-2/35': '2/1-4/29',
+            '3/8-3/21': '9/-270-1/40',
+            '4/9-4/22': '6/1-6/16',
+            '3/5-4/31': '5/1-6/16',
+            '6/9-6/32': '8/1-8/26',
+            '4/31-6/41': '9/-270-1/34',
+            '3/5-6/41': '5/1-8/22',
+            '1/1-6/50': '1/1-9/18',
+            '1/1-6/51': '1/1-9/18'
         }
 
         self.source_map_tester(

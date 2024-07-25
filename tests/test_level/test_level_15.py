@@ -18,8 +18,8 @@ class TestsLevel15(HedyTester):
             a = ١١
             print a""")
         expected = textwrap.dedent("""\
-            a = V(11, num_sys='Arabic')
-            print(f'''{a.text()}''')""")
+            a = Value(11, num_sys='Arabic')
+            print(f'''{a}''')""")
 
         self.single_level_tester(
             code=code,
@@ -34,8 +34,8 @@ class TestsLevel15(HedyTester):
             a = ٢٢ + ١١
             print a""")
         expected = textwrap.dedent("""\
-            a = V(22 + 11, num_sys='Arabic')
-            print(f'''{a.text()}''')""")
+            a = Value(22 + 11, num_sys='Arabic')
+            print(f'''{a}''')""")
 
         self.single_level_tester(
             code=code,
@@ -52,7 +52,7 @@ class TestsLevel15(HedyTester):
     def test_assign_var_boolean(self, value, exp):
         code = f"cond = {value}"
         true_, false_ = HedyTester.bool_options(value)
-        expected = f"cond = V({exp}, bools={{True: '{true_}', False: '{false_}'}})"
+        expected = f"cond = Value({exp}, bools={{True: '{true_}', False: '{false_}'}})"
 
         self.multi_level_tester(
             code=code,
@@ -63,7 +63,7 @@ class TestsLevel15(HedyTester):
 
     def test_assign_list_var_boolean(self):
         code = "cond = true"
-        expected = "cond = V(True, bools={True: 'true', False: 'false'})"
+        expected = "cond = Value(True, bools={True: 'true', False: 'false'})"
 
         self.single_level_tester(
             code=code,
@@ -76,8 +76,8 @@ class TestsLevel15(HedyTester):
             cond = true
             print cond""")
         expected = textwrap.dedent("""\
-            cond = V(True, bools={True: 'true', False: 'false'})
-            print(f'''{cond.text()}''')""")
+            cond = Value(True, bools={True: 'true', False: 'false'})
+            print(f'''{cond}''')""")
 
         self.single_level_tester(
             code=code,
@@ -122,8 +122,8 @@ class TestsLevel15(HedyTester):
             print 'variable is ' cond""")
         true_, false_ = HedyTester.bool_options(value)
         expected = textwrap.dedent(f"""\
-            cond = V({expected}, bools={{True: '{true_}', False: '{false_}'}})
-            print(f'''variable is {{cond.text()}}''')""")
+            cond = Value({expected}, bools={{True: '{true_}', False: '{false_}'}})
+            print(f'''variable is {{cond}}''')""")
 
         self.multi_level_tester(
             code=code,
@@ -140,7 +140,7 @@ class TestsLevel15(HedyTester):
                 sleep""")
         true_, false_ = HedyTester.bool_options(value)
         expected = textwrap.dedent(f"""\
-            cond = V({expected}, bools={{True: '{true_}', False: '{false_}'}})
+            cond = Value({expected}, bools={{True: '{true_}', False: '{false_}'}})
             if cond.data == {expected}:
               time.sleep(1)""")
 
@@ -163,10 +163,10 @@ class TestsLevel15(HedyTester):
             a = false
         print 'Bye!'""")
         expected = textwrap.dedent("""\
-        a = V(True, bools={True: 'true', False: 'false'})
+        a = Value(True, bools={True: 'true', False: 'false'})
         while a.data!=False:
-          print(f'''{a.text()}''')
-          a = V(False, bools={True: 'true', False: 'false'})
+          print(f'''{a}''')
+          a = Value(False, bools={True: 'true', False: 'false'})
           time.sleep(0.1)
         print(f'''Bye!''')""")
 
@@ -185,9 +185,9 @@ class TestsLevel15(HedyTester):
               cond is {value}""")
         true_, false_ = HedyTester.bool_options(value)
         expected = textwrap.dedent(f"""\
-            cond = V({exp}, bools={{True: '{true_}', False: '{false_}'}})
+            cond = Value({exp}, bools={{True: '{true_}', False: '{false_}'}})
             while cond.data!={exp}:
-              cond = V({exp}, bools={{True: '{true_}', False: '{false_}'}})
+              cond = Value({exp}, bools={{True: '{true_}', False: '{false_}'}})
               time.sleep(0.1)""")
 
         self.multi_level_tester(
@@ -201,27 +201,18 @@ class TestsLevel15(HedyTester):
     @parameterized.expand(['and', 'or'])
     def test_while_and_or(self, op):
         code = textwrap.dedent(f"""\
-        answer = 7
-        while answer > 5 {op} answer < 10
-          answer = ask 'What is 5 times 5?'
-        print 'A correct answer has been given'""")
+            answer = 7
+            while answer > 5 {op} answer < 10
+              answer = ask 'What is 5 times 5?'
+            print 'A correct answer has been given'""")
 
         # Splitting like this to wrap the line around 120 characters max
-        expected = textwrap.dedent(f"""\
-        answer = V(7, num_sys='Latin')
-        while answer.data>5 {op} answer.data<10:
-          answer = input(f'''What is 5 times 5?''')
-          num_sys = get_num_sys(answer)
-          try:
-            answer = int(answer)
-          except ValueError:
-            try:
-              answer = float(answer)
-            except ValueError:
-              pass
-          answer = V(answer, num_sys=num_sys)
-          time.sleep(0.1)
-        print(f'''A correct answer has been given''')""")
+        expected = self.dedent(
+            "answer = Value(7, num_sys='Latin')",
+            f"while answer.data>5 {op} answer.data<10:",
+            (self.input_transpiled('answer', 'What is 5 times 5?'), '  '),
+            ('time.sleep(0.1)', '  '),
+            "print(f'''A correct answer has been given''')")
 
         self.multi_level_tester(
             code=code,
@@ -233,25 +224,16 @@ class TestsLevel15(HedyTester):
     def test_while_fr_equals(self):
         # note to self: we need to pass in lang!!
         code = textwrap.dedent("""\
-        antwoord est 0
-        tant que antwoord != 25
-            antwoord est demande 'Wat is 5 keer 5?'
-        affiche 'Goed gedaan!'""")
-        expected = textwrap.dedent("""\
-        antwoord = V(0, num_sys='Latin')
-        while antwoord.data!=25:
-          antwoord = input(f'''Wat is 5 keer 5?''')
-          num_sys = get_num_sys(antwoord)
-          try:
-            antwoord = int(antwoord)
-          except ValueError:
-            try:
-              antwoord = float(antwoord)
-            except ValueError:
-              pass
-          antwoord = V(antwoord, num_sys=num_sys)
-          time.sleep(0.1)
-        print(f'''Goed gedaan!''')""")
+            antwoord est 0
+            tant que antwoord != 25
+                antwoord est demande 'Wat is 5 keer 5?'
+            affiche 'Goed gedaan!'""")
+        expected = self.dedent(
+            "antwoord = Value(0, num_sys='Latin')",
+            "while antwoord.data!=25:",
+            (self.input_transpiled('antwoord', 'Wat is 5 keer 5?'), '  '),
+            ("time.sleep(0.1)", '  '),
+            "print(f'''Goed gedaan!''')")
 
         self.multi_level_tester(
             code=code,
@@ -274,25 +256,16 @@ class TestsLevel15(HedyTester):
 
     def test_while_smaller(self):
         code = textwrap.dedent("""\
-        getal is 0
-        while getal < 100000
-            getal is ask 'HOGER!!!!!'
-        print 'Hoog he?'""")
-        expected = textwrap.dedent("""\
-        getal = V(0, num_sys='Latin')
-        while getal.data<100000:
-          getal = input(f'''HOGER!!!!!''')
-          num_sys = get_num_sys(getal)
-          try:
-            getal = int(getal)
-          except ValueError:
-            try:
-              getal = float(getal)
-            except ValueError:
-              pass
-          getal = V(getal, num_sys=num_sys)
-          time.sleep(0.1)
-        print(f'''Hoog he?''')""")
+            getal is 0
+            while getal < 100000
+                getal is ask 'HOGER!!!!!'
+            print 'Hoog he?'""")
+        expected = self.dedent(
+            "getal = Value(0, num_sys='Latin')",
+            "while getal.data<100000:",
+            (self.input_transpiled('getal', 'HOGER!!!!!'), '  '),
+            ("time.sleep(0.1)", '  '),
+            "print(f'''Hoog he?''')")
 
         self.multi_level_tester(
             code=code,
@@ -338,7 +311,7 @@ class TestsLevel15(HedyTester):
         print 'Uit de loop!'""")
 
         expected = textwrap.dedent("""\
-        stop = V(0, num_sys='Latin')
+        stop = Value(0, num_sys='Latin')
         while stop.data!=1:
           if_pressed_mapping = {"else": "if_pressed_default_else"}
           if_pressed_mapping['p'] = 'if_pressed_p_'
@@ -348,7 +321,7 @@ class TestsLevel15(HedyTester):
           if_pressed_mapping = {"else": "if_pressed_default_else"}
           if_pressed_mapping['s'] = 'if_pressed_s_'
           def if_pressed_s_():
-              stop = V(1, num_sys='Latin')
+              stop = Value(1, num_sys='Latin')
           extensions.if_pressed(if_pressed_mapping)
           time.sleep(0.1)
         print(f'''Uit de loop!''')""")
@@ -388,34 +361,25 @@ class TestsLevel15(HedyTester):
 
     def test_source_map(self):
         code = textwrap.dedent("""\
-        answer = 0
-        while answer != 25
-            answer = ask 'What is 5 times 5?'
-        print 'A correct answer has been given'""")
+            answer = 0
+            while answer != 25
+                answer = ask 'What is 5 times 5?'
+            print 'A correct answer has been given'""")
 
-        excepted_code = textwrap.dedent("""\
-        answer = V(0, num_sys='Latin')
-        while answer.data!=25:
-          answer = input(f'''What is 5 times 5?''')
-          num_sys = get_num_sys(answer)
-          try:
-            answer = int(answer)
-          except ValueError:
-            try:
-              answer = float(answer)
-            except ValueError:
-              pass
-          answer = V(answer, num_sys=num_sys)
-          time.sleep(0.1)
-        print(f'''A correct answer has been given''')""")
+        excepted_code = self.dedent(
+            "answer = Value(0, num_sys='Latin')",
+            "while answer.data!=25:",
+            (self.input_transpiled('answer', 'What is 5 times 5?'), '  '),
+            ("time.sleep(0.1)", '  '),
+            "print(f'''A correct answer has been given''')")
 
         expected_source_map = {
             '1/1-1/7': '1/1-1/7',
-            '1/1-1/11': '1/1-1/31',
+            '1/1-1/11': '1/1-1/35',
             '2/7-2/13': '2/7-2/13',
             '2/7-2/19': '2/7-2/22',
             '3/5-3/11': '9/5-9/11',
-            '3/5-3/38': '3/1-12/18',
+            '3/5-3/38': '3/1-12/19',
             '2/1-3/47': '2/1-13/18',
             '4/1-4/40': '14/1-14/46',
             '1/1-4/41': '1/1-14/46'

@@ -56,7 +56,7 @@ class TestsLevel14(HedyTester):
             if numbers at 1 {comparison} 1.5
                 print 'meh'""")
         expected = self.dedent(
-            "numbers = V([V(1.5, num_sys='Latin'), V(2.9, num_sys='Latin'), V(42.0, num_sys='Latin')])",
+            "numbers = Value([Value(1.5, num_sys='Latin'), Value(2.9, num_sys='Latin'), Value(42.0, num_sys='Latin')])",
             self.list_access_transpiled('numbers.data[int(1)-1]'),
             f"""\
             if numbers.data[int(1)-1].data == 1.5:
@@ -77,8 +77,8 @@ class TestsLevel14(HedyTester):
                 print 'neejoh!'""")
 
         expected = textwrap.dedent("""\
-            nummer1 = V(2, num_sys='Arabic')
-            nummer2 = V(2, num_sys='Latin')
+            nummer1 = Value(2, num_sys='Arabic')
+            nummer2 = Value(2, num_sys='Latin')
             if nummer1.data == nummer2.data:
               print(f'''jahoor!''')
             else:
@@ -118,8 +118,8 @@ class TestsLevel14(HedyTester):
                 sleep""")
 
         expected = textwrap.dedent(f"""\
-            a = V([V(1, num_sys='Latin'), V(2, num_sys='Latin')])
-            b = V([V(1, num_sys='Latin'), V(2, num_sys='Latin')])
+            a = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])
+            b = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])
             if a.data == b.data:
               time.sleep(1)""")
 
@@ -192,19 +192,19 @@ class TestsLevel14(HedyTester):
                 b is 1""")
 
         expected = textwrap.dedent(f"""\
-            a = V(1, num_sys='Latin')
-            b = V(1.2, num_sys='Latin')
+            a = Value(1, num_sys='Latin')
+            b = Value(1.2, num_sys='Latin')
             if a.data!=b.data:
-              b = V(1, num_sys='Latin')""")
+              b = Value(1, num_sys='Latin')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=16)
 
     @parameterized.expand([
-        ('"text"', "V('text')"),
-        ("'text'", "V('text')"),
-        ('1', "V(1, num_sys='Latin')"),
-        ('1.3', "V(1.3, num_sys='Latin')"),
-        ('1, 2', "V([V(1, num_sys='Latin'), V(2, num_sys='Latin')])")])
+        ('"text"', "Value('text')"),
+        ("'text'", "Value('text')"),
+        ('1', "Value(1, num_sys='Latin')"),
+        ('1.3', "Value(1.3, num_sys='Latin')"),
+        ('1, 2', "Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])")])
     def test_inequality_vars(self, arg, exp):
         code = textwrap.dedent(f"""\
             a is {arg}
@@ -216,7 +216,7 @@ class TestsLevel14(HedyTester):
             a = {exp}
             b = {exp}
             if a.data!=b.data:
-              b = V(1, num_sys='Latin')""")
+              b = Value(1, num_sys='Latin')""")
 
         self.multi_level_tester(
             code=code,
@@ -232,8 +232,8 @@ class TestsLevel14(HedyTester):
                 sleep""")
 
         expected = self.dedent(
-            "a = V([V(1, num_sys='Latin'), V(2, num_sys='Latin')])",
-            "b = V([V(1, num_sys='Latin'), V(2, num_sys='Latin')])",
+            "a = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])",
+            "b = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])",
             self.list_access_transpiled('a.data[int(2)-1]'),
             self.list_access_transpiled('b.data[int(2)-1]'),
             f"""\
@@ -253,8 +253,8 @@ class TestsLevel14(HedyTester):
                 sleep""")
 
         expected = textwrap.dedent("""\
-            a = V([V(1, num_sys='Latin'), V(2, num_sys='Latin')])
-            b = V([V(1, num_sys='Latin'), V(2, num_sys='Latin')])
+            a = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])
+            b = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])
             if a.data!=b.data:
               time.sleep(1)""")
 
@@ -296,7 +296,7 @@ class TestsLevel14(HedyTester):
         else
           print 'Below'""")
         expected = textwrap.dedent(f"""\
-        var = V({a}, num_sys='Latin')
+        var = Value({a}, num_sys='Latin')
         if var.data>{b}:
           print(f'''Above {b}''')
         else:
@@ -318,7 +318,7 @@ class TestsLevel14(HedyTester):
         else
           print 'Below'""")
         expected = textwrap.dedent(f"""\
-        var = V({a}, num_sys='Latin')
+        var = Value({a}, num_sys='Latin')
         if var.data>{b}:
           print(f'''Above {b}''')
         else:
@@ -354,7 +354,7 @@ class TestsLevel14(HedyTester):
             if numbers at 2 {comparison} numbers at 1
                 print 'great!'""")
         expected = self.dedent(
-            "numbers = V([V(1, num_sys='Latin'), V(2, num_sys='Latin'), V(10, num_sys='Latin')])",
+            "numbers = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin'), Value(10, num_sys='Latin')])",
             self.list_access_transpiled('numbers.data[int(2)-1]'),
             self.list_access_transpiled('numbers.data[int(1)-1]'),
             f"""\
@@ -434,6 +434,104 @@ class TestsLevel14(HedyTester):
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
+    def test_not_equal_promotes_int_to_float(self):
+        code = textwrap.dedent(f"""\
+            a is 1
+            b is 1.2
+            if a != b
+                b is 1""")
+
+        expected = textwrap.dedent(f"""\
+            a = Value(1, num_sys='Latin')
+            b = Value(1.2, num_sys='Latin')
+            if a.data!=b.data:
+              b = Value(1, num_sys='Latin')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            expected=expected
+        )
+
+    @parameterized.expand([
+        ('"text"', "Value('text')"),
+        ("'text'", "Value('text')"),
+        ('1', "Value(1, num_sys='Latin')"),
+        ('1.3', "Value(1.3, num_sys='Latin')"),
+        ('1, 2', "Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])")])
+    def test_not_equal(self, arg, exp):
+        code = textwrap.dedent(f"""\
+            a is {arg}
+            b is {arg}
+            if a != b
+                b is 1""")
+
+        expected = textwrap.dedent(f"""\
+            a = {exp}
+            b = {exp}
+            if a.data!=b.data:
+              b = Value(1, num_sys='Latin')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=15,
+            expected=expected
+        )
+
+    def test_if_with_double_equals(self):
+        code = textwrap.dedent("""\
+            naam = 'Hedy'
+            if naam == 'Hedy'
+                print 'koekoek'""")
+
+        expected = textwrap.dedent("""\
+            naam = Value('Hedy')
+            if naam.data == 'Hedy':
+              print(f'''koekoek''')""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=16,
+            skip_faulty=False)
+
+    @parameterized.expand(HedyTester.equality_comparison_commands)
+    def test_equality_with_lists(self, comparison):
+        code = textwrap.dedent(f"""\
+            a = 1, 2
+            b = 1, 2
+            if a {comparison} b
+                sleep""")
+
+        expected = textwrap.dedent(f"""\
+            a = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])
+            b = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])
+            if a.data == b.data:
+              time.sleep(1)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=15)
+
+    def test_inequality_with_lists(self):
+        code = textwrap.dedent("""\
+            a = 1, 2
+            b = 1, 2
+            if a != b
+                sleep""")
+
+        expected = textwrap.dedent("""\
+            a = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])
+            b = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])
+            if a.data!=b.data:
+              time.sleep(1)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=15)
+
     @parameterized.expand(HedyTester.comparison_commands)
     def test_comparison_with_boolean(self, comparison):
         code = textwrap.dedent(f"""\
@@ -466,7 +564,7 @@ class TestsLevel14(HedyTester):
                 print 'seems correct'""")
 
         expected = textwrap.dedent(f"""\
-            var = V(5, num_sys='Latin')
+            var = Value(5, num_sys='Latin')
             if var.data{comparison}1:
               print(f'''seems correct''')""")
 
@@ -480,7 +578,7 @@ class TestsLevel14(HedyTester):
                 print 'seems correct'""")
 
         expected = textwrap.dedent(f"""\
-            var = V(5, num_sys='Latin')
+            var = Value(5, num_sys='Latin')
             if var.data{comparison}1:
               print(f'''seems correct''')""")
 
@@ -520,9 +618,9 @@ class TestsLevel14(HedyTester):
 
         expected = self.dedent(
             "def test_function_1():",
-            ("_int = V(1, num_sys='Arabic')", "  "),
-            (self.return_transpiled('Test function {_int.text()}'), "  "),
-            "print(f'''{test_function_1().text()}''')")
+            ("_int = Value(1, num_sys='Arabic')", "  "),
+            (self.return_transpiled('Test function {_int}'), "  "),
+            "print(f'''{test_function_1()}''')")
 
         output = "Test function ١"
         self.multi_level_tester(
@@ -569,10 +667,10 @@ class TestsLevel14(HedyTester):
         expected = self.dedent(
             """\
             def test_function_1():
-              _int = V(1, num_sys='Latin')""",
-            (self.return_transpiled("Test function {_int.text()}"), '  '),
+              _int = Value(1, num_sys='Latin')""",
+            (self.return_transpiled("Test function {_int}"), '  '),
             "def test_function_2(_int):",
-            (self.return_transpiled("Test function {_int.text()}"), '  '),
+            (self.return_transpiled("Test function {_int}"), '  '),
             f"""\
             def test_function_3(_input):
               if _input.data!=5:
@@ -587,19 +685,19 @@ class TestsLevel14(HedyTester):
                 print(f'''GTE5''')
               if _input.data == 5:
                 print(f'''E5''')
-            print(f'''{{test_function_1().text()}}''')
-            print(f'''{{test_function_2(V(2, num_sys='Latin')).text()}}''')
-            m = V(3, num_sys='Latin')
-            print(f'''{{test_function_2(m).text()}}''')
-            print(f'''{{test_function_2(V(4.0, num_sys='Latin')).text()}}''')
-            print(f'''{{test_function_2(V('5')).text()}}''')
-            print(f'''{{test_function_2(V(1.5 * 4, num_sys='Latin')).text()}}''')
+            print(f'''{{test_function_1()}}''')
+            print(f'''{{test_function_2(Value(2, num_sys='Latin'))}}''')
+            m = Value(3, num_sys='Latin')
+            print(f'''{{test_function_2(m)}}''')
+            print(f'''{{test_function_2(Value(4.0, num_sys='Latin'))}}''')
+            print(f'''{{test_function_2(Value('5'))}}''')
+            print(f'''{{test_function_2(Value(1.5 * 4, num_sys='Latin'))}}''')
             print(f'''''')
-            test_function_3(V(4, num_sys='Latin'))
+            test_function_3(Value(4, num_sys='Latin'))
             print(f'''''')
-            test_function_3(V(5, num_sys='Latin'))
+            test_function_3(Value(5, num_sys='Latin'))
             print(f'''''')
-            test_function_3(V(6, num_sys='Latin'))""")
+            test_function_3(Value(6, num_sys='Latin'))""")
 
         output = textwrap.dedent("""\
         Test function 1
@@ -625,7 +723,8 @@ class TestsLevel14(HedyTester):
             code=code,
             expected=expected,
             output=output,
-            max_level=16
+            max_level=16,
+            skip_faulty=False
         )
 
     def test_source_map(self):
@@ -646,13 +745,13 @@ class TestsLevel14(HedyTester):
 
         expected_source_map = {
             '1/1-1/4': '1/1-1/4',
-            '1/1-1/29': '1/1-10/30',
-            '2/4-2/7': '2/23-2/26',
+            '1/1-1/29': '1/1-10/31',
+            '2/4-2/7': '2/20-2/23',
             '2/4-2/12': '11/4-11/15',
             '3/5-3/37': '12/1-12/39',
             '2/1-3/46': '11/1-12/41',
             '5/5-5/35': '14/1-14/37',
-            '3/46-5/44': '14/-256-2/8',
+            '3/46-5/44': '14/-254-2/8',
             '2/1-5/44': '11/1-14/39',
             '1/1-5/45': '1/1-14/39'
         }

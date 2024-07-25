@@ -28,9 +28,9 @@ class TestsLevel7(HedyTester):
     def test_repeat_turtle(self):
         code = "repeat 3 times forward 100"
 
-        expected = HedyTester.dedent(
-            f"for __i in range({self.int_cast_transpiled(3)}):",
-            (HedyTester.forward_transpiled(100, self.level), '  '))
+        expected = self.dedent(
+            f"for __i in range({self.int_transpiled(3)}):",
+            (self.forward_transpiled(100), '  '))
 
         self.single_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
 
@@ -38,7 +38,7 @@ class TestsLevel7(HedyTester):
         code = "repeat 5 times print 'me wants a cookie!'"
 
         expected = textwrap.dedent(f"""\
-        for __i in range({self.int_cast_transpiled(5)}):
+        for __i in range({self.int_transpiled(5)}):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -53,21 +53,21 @@ class TestsLevel7(HedyTester):
 
     def test_repeat_print_variable(self):
         code = textwrap.dedent("""\
-        n is 5
-        repeat n times print 'me wants a cookie!'""")
+            n is 5
+            repeat n times print 'me wants a cookie!'""")
 
         expected = textwrap.dedent(f"""\
-            n = '5'
-            for __i in range({self.int_cast_transpiled('n', quotes=False)}):
+            n = Value('5', num_sys='Latin')
+            for __i in range({self.int_transpiled('n.data')}):
               print(f'me wants a cookie!')
               time.sleep(0.1)""")
 
         output = textwrap.dedent("""\
-        me wants a cookie!
-        me wants a cookie!
-        me wants a cookie!
-        me wants a cookie!
-        me wants a cookie!""")
+            me wants a cookie!
+            me wants a cookie!
+            me wants a cookie!
+            me wants a cookie!
+            me wants a cookie!""")
 
         self.single_level_tester(code=code, expected=expected, output=output)
 
@@ -95,50 +95,6 @@ class TestsLevel7(HedyTester):
             expected=expected,
             skipped_mappings=skipped_mappings,
             max_level=8
-        )
-
-    @parameterized.expand(HedyTester.quotes)
-    def test_print_without_opening_quote_gives_error(self, q):
-        code = textwrap.dedent(f"""\
-        print hedy 123{q}
-        prind skipping""")
-
-        expected = textwrap.dedent("""\
-        pass
-        pass""")
-
-        skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 16), hedy.exceptions.UnquotedTextException),
-            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
-        ]
-
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            skipped_mappings=skipped_mappings,
-            max_level=17
-        )
-
-    @parameterized.expand(HedyTester.quotes)
-    def test_print_without_closing_quote_gives_error(self, q):
-        code = textwrap.dedent(f"""\
-        prind skipping
-        print {q}hedy 123""")
-
-        expected = textwrap.dedent("""\
-        pass
-        pass""")
-
-        skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
-            SkippedMapping(SourceRange(2, 1, 2, 16), hedy.exceptions.UnquotedTextException)
-        ]
-
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            skipped_mappings=skipped_mappings,
-            max_level=17
         )
 
     def test_repeat_with_string_variable_gives_type_error(self):
@@ -176,7 +132,7 @@ class TestsLevel7(HedyTester):
         repeat 3 print 'x'""")
 
         expected = textwrap.dedent("""\
-        x = '3'
+        x = Value('3', num_sys='Latin')
         pass""")
 
         skipped_mappings = [
@@ -196,7 +152,7 @@ class TestsLevel7(HedyTester):
 
         expected = textwrap.dedent(f"""\
         pass
-        for __i in range({self.int_cast_transpiled(3)}):
+        for __i in range({self.int_transpiled(3)}):
           pass
           time.sleep(0.1)""")
 
@@ -242,12 +198,13 @@ class TestsLevel7(HedyTester):
 
     def test_repeat_ask(self):
         code = textwrap.dedent("""\
-        n is ask 'How many times?'
-        repeat n times print 'n'""")
+            n is ask 'How many times?'
+            repeat n times print 'n'""")
 
-        expected = textwrap.dedent(f"""\
-            n = input(f'How many times?')
-            for __i in range({self.int_cast_transpiled('n', quotes=False)}):
+        expected = self.dedent(
+            self.input_transpiled('n', 'How many times?'),
+            f"""\
+            for __i in range({self.int_transpiled('n.data')}):
               print(f'n')
               time.sleep(0.1)""")
 
@@ -259,7 +216,7 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent(f"repeat {number} times print 'me wants a cookie!'")
 
         expected = textwrap.dedent(f"""\
-        for __i in range({self.int_cast_transpiled(int(number))}):
+        for __i in range({self.int_transpiled(int(number))}):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -277,7 +234,7 @@ class TestsLevel7(HedyTester):
         repeat 10 times print 'me wants a cookie!'""")
 
         expected = textwrap.dedent(f"""\
-        for __i in range({self.int_cast_transpiled(10)}):
+        for __i in range({self.int_transpiled(10)}):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -306,8 +263,8 @@ class TestsLevel7(HedyTester):
         print i""")
 
         expected = textwrap.dedent(f"""\
-        i = 'hallo!'
-        for __i in range({self.int_cast_transpiled(5)}):
+        i = Value('hallo!')
+        for __i in range({self.int_transpiled(5)}):
           print(f'me wants a cookie!')
           time.sleep(0.1)
         print(f'{{i}}')""")
@@ -332,9 +289,9 @@ class TestsLevel7(HedyTester):
         if naam is Hedy repeat 3 times print 'Hallo Hedy!'""")
 
         expected = textwrap.dedent(f"""\
-        naam = 'Hedy'
-        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
-          for __i in range({self.int_cast_transpiled('3')}):
+        naam = Value('Hedy')
+        if localize(naam.data) == localize('Hedy'):
+          for __i in range({self.int_transpiled('3')}):
             print(f'Hallo Hedy!')
             time.sleep(0.1)""")
 
@@ -345,7 +302,7 @@ class TestsLevel7(HedyTester):
     def test_if_pressed_repeat(self):
         code = "if x is pressed repeat 5 times print 'doe het 5 keer!' else print 'iets anders'"
 
-        expected = HedyTester.dedent(f"""\
+        expected = self.dedent(f"""\
          if_pressed_mapping = {{"else": "if_pressed_default_else"}}
          if_pressed_mapping['x'] = 'if_pressed_x_'
          if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -367,7 +324,7 @@ class TestsLevel7(HedyTester):
             if y is pressed print 'doe het 1 keer!' else print 'iets anders'
             if z is pressed print 'doe het 1 keer!' else print 'iets anders'""")
 
-        expected = HedyTester.dedent("""\
+        expected = self.dedent("""\
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -405,49 +362,41 @@ class TestsLevel7(HedyTester):
             repeat 3 times if y is pressed forward 15 else forward -15
             repeat 3 times if z is pressed forward 15 else forward -15""")
 
-        expected = HedyTester.dedent(f"""\
-            for __i in range({self.int_cast_transpiled(3)}):
+        expected = self.dedent(
+            f"""\
+            for __i in range({self.int_transpiled(3)}):
               if_pressed_mapping = {{"else": "if_pressed_default_else"}}
               if_pressed_mapping['x'] = 'if_pressed_x_'
               if_pressed_mapping['else'] = 'if_pressed_else_'
-              def if_pressed_x_():
-                __trtl = {self.int_cast_transpiled(15, quotes=False)}
-                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
-                time.sleep(0.1)
-              def if_pressed_else_():
-                __trtl = {self.int_cast_transpiled(-15, quotes=False)}
-                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
-                time.sleep(0.1)
+              def if_pressed_x_():""",
+            (self.forward_transpiled('15'), '    '),
+            ("def if_pressed_else_():", '  '),
+            (self.forward_transpiled('-15'), '    '),
+            f"""\
               extensions.if_pressed(if_pressed_mapping)
               time.sleep(0.1)
-            for __i in range({self.int_cast_transpiled(3)}):
+            for __i in range({self.int_transpiled(3)}):
               if_pressed_mapping = {{"else": "if_pressed_default_else"}}
               if_pressed_mapping['y'] = 'if_pressed_y_'
               if_pressed_mapping['else'] = 'if_pressed_else_'
-              def if_pressed_y_():
-                __trtl = {self.int_cast_transpiled(15, quotes=False)}
-                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
-                time.sleep(0.1)
-              def if_pressed_else_():
-                __trtl = {self.int_cast_transpiled(-15, quotes=False)}
-                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
-                time.sleep(0.1)
+              def if_pressed_y_():""",
+            (self.forward_transpiled('15'), '    '),
+            ("def if_pressed_else_():", '  '),
+            (self.forward_transpiled('-15'), '    '),
+            f"""\
               extensions.if_pressed(if_pressed_mapping)
               time.sleep(0.1)
-            for __i in range({self.int_cast_transpiled(3)}):
+            for __i in range({self.int_transpiled(3)}):
               if_pressed_mapping = {{"else": "if_pressed_default_else"}}
               if_pressed_mapping['z'] = 'if_pressed_z_'
               if_pressed_mapping['else'] = 'if_pressed_else_'
-              def if_pressed_z_():
-                __trtl = {self.int_cast_transpiled(15, quotes=False)}
-                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
-                time.sleep(0.1)
-              def if_pressed_else_():
-                __trtl = {self.int_cast_transpiled(-15, quotes=False)}
-                t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
-                time.sleep(0.1)
+              def if_pressed_z_():""",
+            (self.forward_transpiled('15'), '    '),
+            ("def if_pressed_else_():", '  '),
+            (self.forward_transpiled('-15'), '    '),
+            (f"""\
               extensions.if_pressed(if_pressed_mapping)
-              time.sleep(0.1)""")
+              time.sleep(0.1)""", '  '))
 
         self.single_level_tester(
             code=code,
@@ -460,26 +409,26 @@ class TestsLevel7(HedyTester):
             repeat 3 times if aan is ja print 'Hedy is leuk!'
             repeat 3 times if aan is ja print 'Hedy is leuk!'""")
 
-        expected = HedyTester.dedent(f"""\
-        aan = 'ja'
-        for __i in range({self.int_cast_transpiled(3)}):
-          if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
-            print(f'Hedy is leuk!')
-          else:
-            x__x__x__x = '5'
-          time.sleep(0.1)
-        for __i in range({self.int_cast_transpiled(3)}):
-          if convert_numerals('Latin', aan) == convert_numerals('Latin', 'ja'):
-            print(f'Hedy is leuk!')
-          time.sleep(0.1)""")
+        expected = self.dedent(f"""\
+            aan = Value('ja')
+            for __i in range({self.int_transpiled(3)}):
+              if localize(aan.data) == localize('ja'):
+                print(f'Hedy is leuk!')
+              else:
+                x__x__x__x = Value('5', num_sys='Latin')
+              time.sleep(0.1)
+            for __i in range({self.int_transpiled(3)}):
+              if localize(aan.data) == localize('ja'):
+                print(f'Hedy is leuk!')
+              time.sleep(0.1)""")
 
         output = textwrap.dedent("""\
-        Hedy is leuk!
-        Hedy is leuk!
-        Hedy is leuk!
-        Hedy is leuk!
-        Hedy is leuk!
-        Hedy is leuk!""")
+            Hedy is leuk!
+            Hedy is leuk!
+            Hedy is leuk!
+            Hedy is leuk!
+            Hedy is leuk!
+            Hedy is leuk!""")
 
         self.single_level_tester(
             code=code,
@@ -494,7 +443,7 @@ class TestsLevel7(HedyTester):
 
         expected_code = textwrap.dedent(f"""\
         print(f'The prince kept calling for help')
-        for __i in range({self.int_cast_transpiled(5)}):
+        for __i in range({self.int_transpiled(5)}):
           print(f'Help!')
           time.sleep(0.1)
         print(f'Why is nobody helping me?')""")
@@ -516,9 +465,9 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent("""\
             repeat 3 times play C4""")
 
-        expected = HedyTester.dedent(
-            f"for __i in range({self.int_cast_transpiled(3)}):",
-            (self.play_transpiled('C4'), '  '),
+        expected = self.dedent(
+            f"for __i in range({self.int_transpiled(3)}):",
+            (self.play_transpiled("'C4'"), '  '),
             ("time.sleep(0.1)", '  '))
 
         self.multi_level_tester(
@@ -535,10 +484,10 @@ class TestsLevel7(HedyTester):
             notes is C4, E4, D4, F4, G4
             repeat 3 times play notes at random""")
 
-        expected = HedyTester.dedent(
-            "notes = ['C4', 'E4', 'D4', 'F4', 'G4']",
-            f"for __i in range({self.int_cast_transpiled(3)}):",
-            (self.play_transpiled('random.choice(notes)', quotes=False), '  '),
+        expected = self.dedent(
+            "notes = Value([Value('C4'), Value('E4'), Value('D4'), Value('F4'), Value('G4')])",
+            f"for __i in range({self.int_transpiled(3)}):",
+            (self.play_transpiled('random.choice(notes.data).data'), '  '),
             ("time.sleep(0.1)", '  '))
 
         self.multi_level_tester(

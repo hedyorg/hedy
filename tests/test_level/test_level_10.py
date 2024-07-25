@@ -29,8 +29,8 @@ class TestsLevel10(HedyTester):
             print dier""")
 
         expected = textwrap.dedent("""\
-        dieren = ['hond', 'kat', 'papegaai']
-        for dier in dieren:
+        dieren = Value([Value('hond'), Value('kat'), Value('papegaai')])
+        for dier in dieren.data:
           print(f'{dier}')
           time.sleep(0.1)""")
 
@@ -64,8 +64,8 @@ class TestsLevel10(HedyTester):
             print काउंटर""")
 
         expected = textwrap.dedent("""\
-        क = ['hond', 'kat', 'papegaai']
-        for काउंटर in क:
+        क = Value([Value('hond'), Value('kat'), Value('papegaai')])
+        for काउंटर in क.data:
           print(f'{काउंटर}')
           time.sleep(0.1)""")
 
@@ -86,8 +86,8 @@ class TestsLevel10(HedyTester):
             print shark ' shark'""")
 
         expected = textwrap.dedent("""\
-        familie = ['baby', 'mommy', 'daddy', 'grandpa', 'grandma']
-        for shark in familie:
+        familie = Value([Value('baby'), Value('mommy'), Value('daddy'), Value('grandpa'), Value('grandma')])
+        for shark in familie.data:
           print(f'{shark} shark tudutudutudu')
           print(f'{shark} shark tudutudutudu')
           print(f'{shark} shark tudutudutudu')
@@ -133,12 +133,12 @@ class TestsLevel10(HedyTester):
         else
             print 'onbekend dier'""")
 
-        expected = HedyTester.dedent("""\
-         lijstje = ['kip', 'haan', 'kuiken']
+        expected = self.dedent("""\
+         lijstje = Value([Value('kip'), Value('haan'), Value('kuiken')])
          if_pressed_mapping = {"else": "if_pressed_default_else"}
          if_pressed_mapping['x'] = 'if_pressed_x_'
          def if_pressed_x_():
-             for dier in lijstje:
+             for dier in lijstje.data:
                print(f'{dier}')
                time.sleep(0.1)
          if_pressed_mapping['else'] = 'if_pressed_else_'

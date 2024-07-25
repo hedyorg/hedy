@@ -288,7 +288,7 @@ class TestsLevel1(HedyTester):
 
     def test_play_no_args(self):
         code = "play "
-        expected = self.play_transpiled('C4')
+        expected = self.play_transpiled("'C4'")
 
         self.multi_level_tester(
             code=code,
@@ -299,7 +299,7 @@ class TestsLevel1(HedyTester):
 
     def test_play(self):
         code = "play A"
-        expected = self.play_transpiled('A')
+        expected = self.play_transpiled("'A'")
 
         self.multi_level_tester(
             code=code,
@@ -309,8 +309,7 @@ class TestsLevel1(HedyTester):
 
     def test_print_microbit(self):
         code = "print a"
-        expected = textwrap.dedent(f"""\
-                display.scroll('a')""")
+        expected = "display.scroll('a')"
 
         self.multi_level_tester(
             code=code,
@@ -323,7 +322,7 @@ class TestsLevel1(HedyTester):
 
     def test_play_lowercase(self):
         code = "play a"
-        expected = self.play_transpiled('A')
+        expected = self.play_transpiled("'A'")
 
         self.multi_level_tester(
             code=code,
@@ -333,7 +332,7 @@ class TestsLevel1(HedyTester):
 
     def test_play_int(self):
         code = "play 34"
-        expected = self.play_transpiled(34)
+        expected = self.play_transpiled("'34'")
 
         self.multi_level_tester(
             code=code,
@@ -387,7 +386,7 @@ class TestsLevel1(HedyTester):
     #
     def test_forward(self):
         code = "forward 50"
-        expected = HedyTester.dedent(HedyTester.forward_transpiled(50, self.level))
+        expected = self.forward_transpiled(50)
 
         self.multi_level_tester(
             code=code,
@@ -398,7 +397,7 @@ class TestsLevel1(HedyTester):
 
     def test_forward_arabic_numeral(self):
         code = "forward ١١١١١١١"
-        expected = HedyTester.forward_transpiled(1111111, self.level)
+        expected = self.forward_transpiled(1111111)
 
         self.multi_level_tester(
             code=code,
@@ -409,7 +408,7 @@ class TestsLevel1(HedyTester):
 
     def test_forward_hindi_numeral(self):
         code = "forward ५५५"
-        expected = HedyTester.forward_transpiled(555, self.level)
+        expected = self.forward_transpiled(555)
 
         self.multi_level_tester(
             code=code,
@@ -614,10 +613,10 @@ class TestsLevel1(HedyTester):
             turn
             forward 100""")
 
-        expected = HedyTester.dedent(
-            HedyTester.forward_transpiled(50, self.level),
+        expected = self.dedent(
+            self.forward_transpiled(50),
             't.right(90)',
-            HedyTester.forward_transpiled(100, self.level))
+            self.forward_transpiled(100))
 
         self.multi_level_tester(
             code=code,
@@ -853,19 +852,16 @@ class TestsLevel1(HedyTester):
 
     def test_source_map(self):
         code = textwrap.dedent("""\
-        print Hallo welkom bij Hedy!
-        forward 50
-        ask Wat is je lievelingskleur
-        echo je lievelingskleur is""")
+            print Hallo welkom bij Hedy!
+            forward 50
+            ask Wat is je lievelingskleur
+            echo je lievelingskleur is""")
 
-        expected_code = HedyTester.dedent(f"""\
-        print('Hallo welkom bij Hedy!')
-        {HedyTester.indent(
-            HedyTester.forward_transpiled(50, self.level),
-            8, True)
-         }
-        answer = input('Wat is je lievelingskleur')
-        print('je lievelingskleur is '+answer)""")
+        expected_code = self.dedent(
+            "print('Hallo welkom bij Hedy!')",
+            self.forward_transpiled(50),
+            "answer = input('Wat is je lievelingskleur')",
+            "print('je lievelingskleur is '+answer)")
 
         expected_source_map = {
             '1/1-1/29': '1/1-1/32',
@@ -900,8 +896,8 @@ templates = [
 def valid_permutation(lines):
     orders = [order for _, order in lines]
     significant_orders = [x for x in orders if x > 0]  # -1 may be placed everywhere
-    list = [significant_orders[i] <= significant_orders[i+1] for i in range(len(significant_orders)-1)]
-    return all(list)
+    list_ = [significant_orders[i] <= significant_orders[i+1] for i in range(len(significant_orders)-1)]
+    return all(list_)
 
 
 class TestsHypothesisLevel1(HedyTester):

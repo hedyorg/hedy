@@ -101,11 +101,11 @@ levels:
         1:
             story: Make a program that calculates how old you are in dog and cat years.\nFirst ask the age of the user and start calculating.\nFirst calculate the dogyears then the catyears.\nShow the user the different ages.\n
             code: |-
+                age = {ask} 'How old are you?'
                 dog_age = age * 7
                 cat_age = age * 5
-                {print} 'In dogyears you are ' dog_age ' years old.'
-                {print} 'In catyears you are ' cat_age ' years old.'
-                age = {ask} 'How old are you?'
+                {print} 'In dog years you are ' dog_age ' years old.'
+                {print} 'In cat years you are ' cat_age ' years old.'
         2:
             story: Create a program that helps you calculate how many cakes you should buy for your birthday party.\n
             code: |-

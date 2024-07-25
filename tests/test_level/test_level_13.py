@@ -92,28 +92,28 @@ class TestsLevel13(HedyTester):
         expected = textwrap.dedent("""\
         def simple_function_1(parameter):
           print(f'''simple_function_1 - 1''')
-          m = V('simple_function_1 - 2')
-          print(f'''{m.text()}''')
+          m = Value('simple_function_1 - 2')
+          print(f'''{m}''')
         def simple_function_2(param):
           print(f'''simple_function_2 - 1''')
-          print(f'''{param.text()}''')
+          print(f'''{param}''')
         def simple_function_3(param_a, param_b, param_c):
           if param_a.data == 'A' or param_a.data == 'B':
             print(f'''simple_function_3 - 1''')
-            print(f'''{param_b.text()}''')
+            print(f'''{param_b}''')
           else:
             print(f'''simple_function_3 - 2''')
             if param_a.data == 'B' and param_b.data == 'test1':
               print(f'''simple_function_3 - 2A''')
-              print(f'''{param_b.text()}''')
+              print(f'''{param_b}''')
             else:
               print(f'''simple_function_3 - 2B''')
-              print(f'''{param_c.text()}''')
-        a = V('test1')
-        simple_function_3(V('A'), a, V(1.0, num_sys='Latin'))
-        simple_function_3(V('B'), a, V(1.0, num_sys='Latin'))
-        simple_function_3(V('C'), a, V(1.0, num_sys='Latin'))
-        simple_function_3(V('C'), V(3 + 3, num_sys='Latin'), V(1.0, num_sys='Latin'))""")
+              print(f'''{param_c}''')
+        a = Value('test1')
+        simple_function_3(Value('A'), a, Value(1.0, num_sys='Latin'))
+        simple_function_3(Value('B'), a, Value(1.0, num_sys='Latin'))
+        simple_function_3(Value('C'), a, Value(1.0, num_sys='Latin'))
+        simple_function_3(Value('C'), Value(3 + 3, num_sys='Latin'), Value(1.0, num_sys='Latin'))""")
 
         output = textwrap.dedent("""\
         simple_function_3 - 1
