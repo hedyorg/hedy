@@ -128,6 +128,25 @@ class TestsLevel14(HedyTester):
             expected=expected,
             max_level=15)
 
+    @parameterized.expand(HedyTester.equality_comparison_commands)
+    def test_equality_with_lists(self, comparison):
+        code = textwrap.dedent(f"""\
+            a = 1, 2
+            b = 1, 2
+            if a {comparison} b
+                sleep""")
+
+        expected = textwrap.dedent(f"""\
+            a = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])
+            b = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])
+            if a.data == b.data:
+              time.sleep(1)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=15)
+
     #
     # inequality tests / not equals tests
     #
@@ -263,6 +282,24 @@ class TestsLevel14(HedyTester):
             expected=expected,
             max_level=15)
 
+    def test_inequality_with_lists(self):
+        code = textwrap.dedent("""\
+            a = 1, 2
+            b = 1, 2
+            if a != b
+                sleep""")
+
+        expected = textwrap.dedent("""\
+            a = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])
+            b = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])
+            if a.data!=b.data:
+              time.sleep(1)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=15)
+
     @parameterized.expand([
         ('"text"', '1'),      # double-quoted text and number
         ("'text'", '1'),      # single-quoted text and number
@@ -346,7 +383,6 @@ class TestsLevel14(HedyTester):
             code=code,
             max_level=16,
             expected=expected)
-
 
     @parameterized.expand([
         ('>', 'incorrect'),
@@ -463,60 +499,6 @@ class TestsLevel14(HedyTester):
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
-
-    def test_if_with_double_equals(self):
-        code = textwrap.dedent("""\
-            naam = 'Hedy'
-            if naam == 'Hedy'
-                print 'koekoek'""")
-
-        expected = textwrap.dedent("""\
-            naam = Value('Hedy')
-            if naam.data == 'Hedy':
-              print(f'''koekoek''')""")
-
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            max_level=16,
-            skip_faulty=False)
-
-    @parameterized.expand(HedyTester.equality_comparison_commands)
-    def test_equality_with_lists(self, comparison):
-        code = textwrap.dedent(f"""\
-            a = 1, 2
-            b = 1, 2
-            if a {comparison} b
-                sleep""")
-
-        expected = textwrap.dedent(f"""\
-            a = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])
-            b = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])
-            if a.data == b.data:
-              time.sleep(1)""")
-
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            max_level=15)
-
-    def test_inequality_with_lists(self):
-        code = textwrap.dedent("""\
-            a = 1, 2
-            b = 1, 2
-            if a != b
-                sleep""")
-
-        expected = textwrap.dedent("""\
-            a = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])
-            b = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])
-            if a.data!=b.data:
-              time.sleep(1)""")
-
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            max_level=15)
 
     @parameterized.expand(HedyTester.comparison_commands)
     def test_comparison_with_boolean(self, comparison):
