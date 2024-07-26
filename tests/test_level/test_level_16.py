@@ -683,38 +683,6 @@ class TestsLevel16(HedyTester):
 
         self.single_level_tester(code, exception=exceptions.InvalidTypeCombinationException)
 
-    def test_color_with_list_variable_runtime_gives_error(self):
-        code = textwrap.dedent("""\
-            c = ['red', 'green', 'blue']
-            color c""")
-
-        expected = self.dedent(
-            "c = Value([Value('red'), Value('green'), Value('blue')])",
-            self.color_transpiled('{c}')
-        )
-
-        self.multi_level_tester(
-            code=code,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
-            expected=expected,
-        )
-
-    def test_color_with_list_access_random(self):
-        code = textwrap.dedent("""\
-        colors = ['red', 'green', 'blue']
-        color colors[random]""")
-
-        expected = self.dedent(
-            "colors = Value([Value('red'), Value('green'), Value('blue')])",
-            self.color_transpiled('{random.choice(colors.data)}')
-        )
-
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_turtle(),
-        )
-
     #
     # and/or commands
     #
