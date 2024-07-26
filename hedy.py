@@ -1811,7 +1811,7 @@ class ConvertToPython_1(ConvertToPython):
         ex = make_value_error(Command.play, 'suggestion_note', self.language)
 
         return textwrap.dedent(f"""\
-                play(note_with_error('{note}', {ex}))
+                play(note_with_error(localize('{note}'), {ex}))
                 time.sleep(0.5)""") + self.add_debug_breakpoint()
 
     def make_play_var(self, note, meta):
@@ -1912,7 +1912,7 @@ class ConvertToPython_2(ConvertToPython_1):
         arg = self.unpack(args[0])
         if not self.is_variable(arg, meta.line):
             arg = int(arg)  # if not a variable, then the arg is an int
-        return self.make_forward(arg)
+        return self.make_forward(escape_var(arg))
 
     def var(self, meta, args):
         name = args[0]
@@ -1927,34 +1927,35 @@ class ConvertToPython_2(ConvertToPython_1):
         return self.var_access(meta, args)
 
     def print(self, meta, args):
-        args_new = [self.make_print_ask_arg(a, meta) for a in args]
-        argument_string = ' '.join(args_new)
+        argument_string = self.process_print_ask_args(args, meta)
         exception = self.make_index_error_check_if_list(args)
         return exception + f"print(f'{argument_string}'){self.add_debug_breakpoint()}"
 
     def ask(self, meta, args):
         var = args[0]
-        args_new = [self.make_print_ask_arg(a, meta, var) for a in args[1:]]
-        argument_string = ' '.join(args_new)
+        argument_string = self.process_print_ask_args(args[1:], meta, var)
         exception = self.make_index_error_check_if_list(args)
         return exception + f"{var} = input(f'{argument_string}'){self.add_debug_breakpoint()}"
 
-    def make_print_ask_arg(self, arg, meta, var_to_escape=''):
+    def process_print_ask_args(self, args, meta, var_to_escape=''):
         # list access has been already rewritten since it occurs lower in the tree
         # so when we encounter it as a child of print it will not be a subtree, but
         # transpiled code (for example: random.choice(dieren))
         # therefore we should not process it anymore and treat it as a variable:
         # we set the line number to 100 so there is never an issue with variable access before
         # assignment (regular code will not work since random.choice(dieren) is never defined as var as such)
-
-        arg = self.unpack(arg)
-        if self.is_random(arg) or self.is_list(arg):
-            return self.process_arg_for_fstring(arg, meta.line, var_to_escape)
-        # this regex splits words from non-letter characters, such that name! becomes [name, !]
-        p = (r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|"
-             r"[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+")
-        res = regex.findall(p, arg)
-        return ''.join([self.process_arg_for_fstring(x, meta.line, var_to_escape) for x in res])
+        result = []
+        for arg in args:
+            arg = self.unpack(arg)
+            if self.is_random(arg) or self.is_list(arg):
+                result.append(self.process_arg_for_fstring(arg, meta.line, var_to_escape))
+            else:
+                # this regex splits words from non-letter characters, such that name! becomes [name, !]
+                p = (r"[·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|"
+                     r"[^·\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+")
+                words = regex.findall(p, arg)
+                result.append(''.join([self.process_arg_for_fstring(w, meta.line, var_to_escape) for w in words]))
+        return ' '.join(result)
 
     def play(self, meta, args):
         if not args:
@@ -1964,10 +1965,12 @@ class ConvertToPython_2(ConvertToPython_1):
         if present_in_notes_mapping(note):  # this is a supported note
             return self.make_play(note.upper(), meta)
 
-        self.is_variable_with_definition(note, meta.line)
+        if not self.is_variable_with_definition(note, meta.line):
+            note = f"'{note}'"
+
         ex = make_value_error(Command.play, 'suggestion_note', self.language)
         return textwrap.dedent(f"""\
-                play(note_with_error({note}, {ex}))
+                play(note_with_error(localize({note}), {ex}))
                 time.sleep(0.5)""") + self.add_debug_breakpoint()
 
     def assign(self, meta, args):
@@ -2076,22 +2079,18 @@ class ConvertToPython_4(ConvertToPython_3):
     def var_access_print(self, meta, args):
         return self.var_access(meta, args)
 
-    def print_ask_args(self, meta, args):
+    def process_print_ask_args(self, args, meta, var_to_escape=''):
         self.check_variable_usage_and_definition(args, meta.line)
-        result = ''
-        for argument in args:
-            argument = self.process_arg_for_fstring(argument)
-            result += argument
-        return result
+        return ''.join([self.process_arg_for_fstring(a, meta.line) for a in args])
 
     def print(self, meta, args):
-        argument_string = self.print_ask_args(meta, args)
+        argument_string = self.process_print_ask_args(args, meta)
         ex = self.make_index_error_check_if_list(args)
         return f"{ex}print(f'{argument_string}'){self.add_debug_breakpoint()}"
 
     def ask(self, meta, args):
         var = args[0]
-        argument_string = self.print_ask_args(meta, [self.unpack(a) for a in args[1:]])
+        argument_string = self.process_print_ask_args(args[1:], meta)
         ex = self.make_index_error_check_if_list(args)
         return f"{ex}{var} = input(f'{argument_string}'){self.add_debug_breakpoint()}"
 
@@ -2253,20 +2252,12 @@ class ConvertToPython_6(ConvertToPython_5):
 
     def ask(self, meta, args):
         var = args[0]
-        argument_string = self.print_ask_args(meta, [self.unpack(a) for a in args[1:]])
+        argument_string = self.process_print_ask_args(args[1:], meta)
         ex = self.make_index_error_check_if_list(args)
         return ex + textwrap.dedent(f"""\
             {var} = input(f'{argument_string}'){self.add_debug_breakpoint()}
             __ns = get_num_sys({var})
             {var} = Value({var}, num_sys=__ns)""")
-
-    def print_ask_args(self, meta, args):
-        self.check_variable_usage_and_definition(args, meta.line)
-        result = ''
-        for argument in args:
-            argument = self.process_arg_for_fstring(argument)
-            result += argument
-        return result
 
     def play(self, meta, args):
         if not args:
@@ -2279,7 +2270,9 @@ class ConvertToPython_6(ConvertToPython_5):
 
         if self.is_variable_with_definition(arg, meta.line):
             arg = f'{escape_var(self.unpack(arg))}.data'
-        elif isinstance(arg, BaseValue):
+        elif isinstance(arg, LiteralValue):
+            arg = f"{arg.data}" if self.is_quoted(arg.data) else f"'{arg.data}'"
+        elif isinstance(arg, ExpressionValue):
             arg = arg.data
         else:
             # We end up here in case of list access, e.g. 'random.choice[animals]'
@@ -2287,12 +2280,12 @@ class ConvertToPython_6(ConvertToPython_5):
 
         ex = make_value_error(Command.play, 'suggestion_note', self.language)
         return textwrap.dedent(f"""\
-                play(note_with_error({arg}, {ex}))
+                play(note_with_error(localize({arg}), {ex}))
                 time.sleep(0.5)""") + self.add_debug_breakpoint()
 
     def process_arg_for_fstring(self, name, access_line=100, var_to_escape=''):
         if self.is_variable(name) or self.is_list(name) or self.is_random(name):
-            return f"{{{name}}}"
+            return f"{{{escape_var(self.unpack(name))}}}"
         elif isinstance(name, LiteralValue):
             return self.process_literal_for_fstring(name)
         elif isinstance(name, ExpressionValue):
@@ -2303,7 +2296,7 @@ class ConvertToPython_6(ConvertToPython_5):
         elif not ConvertToPython.is_int(name) and not ConvertToPython.is_float(name):
             # We end up here with colors
             return name.replace("'", "\\'")
-        return name
+        return str(name)
 
     def equality_check(self, meta, args):
         left_hand_side = self.process_arg_for_data_access(args[0], meta.line)
@@ -2679,21 +2672,24 @@ class ConvertToPython_12(ConvertToPython_11):
         if not args:
             return self.make_play('C4', meta)
 
-        note = self.unpack(args[0])
+        arg = args[0]
+        note = self.unpack(arg)
         if present_in_notes_mapping(note):  # this is a supported note
             return self.make_play(note.upper(), meta)
 
-        if self.is_variable_with_definition(args[0], meta.line):
-            arg = f'{escape_var(self.unpack(args[0]))}.data'
-        elif isinstance(args[0], BaseValue):
-            arg = args[0].data
+        if self.is_variable_with_definition(arg, meta.line):
+            arg = f'{escape_var(self.unpack(arg))}.data'
+        elif isinstance(arg, LiteralValue):
+            arg = f"{arg.data}" if self.is_quoted(arg.data) else f"'{arg.data}'"
+        elif isinstance(arg, ExpressionValue):
+            arg = arg.data
         else:
             # We end up here in case of list access, e.g. 'random.choice[animals]'
-            arg = f"{args[0]}.data"
+            arg = f"{arg}.data"
 
         ex = make_value_error(Command.play, 'suggestion_note', self.language)
         return textwrap.dedent(f"""\
-                play(note_with_error({arg}, {ex}))
+                play(note_with_error(localize({arg}), {ex}))
                 time.sleep(0.5)""") + self.add_debug_breakpoint()
 
     def addition(self, meta, args):
@@ -2767,13 +2763,13 @@ class ConvertToPython_12(ConvertToPython_11):
         return exception + left_hand_side + " = " + right_hand_side + self.add_debug_breakpoint()
 
     def print(self, meta, args):
-        argument_string = self.print_ask_args(meta, args)
+        argument_string = self.process_print_ask_args(args, meta)
         exception = self.make_index_error_check_if_list(args)
         return exception + f"print(f'''{argument_string}''')" + self.add_debug_breakpoint()
 
     def ask(self, meta, args):
         var = args[0]
-        argument_string = self.print_ask_args(meta, args[1:])
+        argument_string = self.process_print_ask_args(args[1:], meta)
         exception = self.make_index_error_check_if_list(args)
         return exception + textwrap.dedent(f"""\
             {var} = input(f'''{argument_string}'''){self.add_debug_breakpoint()}
@@ -2787,15 +2783,15 @@ class ConvertToPython_12(ConvertToPython_11):
                 pass
             {var} = Value({var}, num_sys=__ns)""")  # no number? leave as string
 
-    def print_ask_args(self, meta, args):
-        result = super().print_ask_args(meta, args)
+    def process_print_ask_args(self, args, meta, var_to_escape=''):
+        result = super().process_print_ask_args(args, meta)
         if "'''" in result:
             raise exceptions.UnsupportedStringValue(invalid_value="'''")
         return result
 
     def process_arg_for_fstring(self, name, access_line=100, var_to_escape=''):
         if self.is_variable(name) or self.is_list(name) or self.is_random(name):
-            return f"{{{name}}}"
+            return f"{{{escape_var(self.unpack(name))}}}"
         elif isinstance(name, LiteralValue):
             return self.process_literal_for_fstring(name)
         elif isinstance(name, ExpressionValue):
@@ -2807,7 +2803,7 @@ class ConvertToPython_12(ConvertToPython_11):
             # We end up here with colors
             name = name if self.is_bool(name) else escape_var(name.replace("'", "\\'"))
             name = '"' + name + '"'
-        return name
+        return str(name)
 
     def list_access(self, meta, args):
         args = [escape_var(a) for a in args]
@@ -3002,7 +2998,7 @@ class ConvertToPython_12(ConvertToPython_11):
         return f"{function_name}({args_str})"
 
     def returns(self, meta, args):
-        args_str = self.print_ask_args(meta, args)
+        args_str = self.process_print_ask_args(args, meta)
         exception = self.make_index_error_check_if_list(args)
         return exception + textwrap.dedent(f"""\
             try:
@@ -3085,8 +3081,8 @@ class ConvertToPython_15(ConvertToPython_14):
 @source_map_transformer(source_map)
 class ConvertToPython_16(ConvertToPython_15):
     def change_list_item(self, meta, args):
-        name = self.unpack(args[0])  # TODO: args[0].data if isinstance(args[0], LiteralValue) else args[0]
-        index = self.unpack(args[1])  # args[1].data if isinstance(args[1], LiteralValue) else args[1]
+        name = self.unpack(args[0])
+        index = self.unpack(args[1])
         self.check_variable_usage_and_definition(args[0:3], meta.line)
 
         index = f'{index}.data' if self.is_variable(args[1]) else index
@@ -3113,7 +3109,7 @@ class ConvertToPython_17(ConvertToPython_16):
         key = args[0]
 
         elif_code = '\n'.join([x for x in args[1:]])
-        elif_code = ConvertToPython.indent(elif_code)
+        elif_code = self.indent(elif_code)
         elif_function_name = self.make_function_name(key)
 
         return (
@@ -3158,16 +3154,11 @@ class MicrobitConvertToPython_1(ConvertToPython_1):
 class MicrobitConvertToPython_2(MicrobitConvertToPython_1, ConvertToPython_2):
 
     def print(self, meta, args):
-        args_new = [self.make_print_ask_arg(self.unpack(a), meta) for a in args]
-        argument_string = ' '.join(args_new)
+        argument_string = self.process_print_ask_args(args, meta)
         return f"display.scroll({argument_string})"
 
-    def make_print_ask_arg(self, arg, meta, var_to_escape=''):
-        if self.is_variable(arg, meta.line):
-            return arg
-        else:
-            # If the argument is not a variable, return it as a string literal with quotes
-            return f"'{arg}'"
+    def process_print_ask_args(self, args, meta, var_to_escape=''):
+        return ' '.join([self.unpack(a) if self.is_variable(a, meta.line) else f"'{self.unpack(a)}'" for a in args])
 
     def assign(self, meta, args):
         variable_name = args[0]
@@ -3209,16 +3200,11 @@ class MicrobitConvertToPython_3(MicrobitConvertToPython_2, ConvertToPython_3):
 @source_map_transformer(source_map)
 class MicrobitConvertToPython_4(MicrobitConvertToPython_3, ConvertToPython_4):
 
-    def make_print_ask_arg(self, arg, meta, var_to_escape=''):
-        if self.is_variable(arg, meta.line):
-            return arg
-        else:
-            # If the argument is not a variable, return it as a string literal with quotes
-            return f'{arg}'
+    def process_print_ask_args(self, args, meta, var_to_escape=''):
+        return ''.join([self.unpack(a) if self.is_variable(a, meta.line) else f'{self.unpack(a)}' for a in args])
 
     def print(self, meta, args):
-        args_new = [self.make_print_ask_arg(self.unpack(a), meta) for a in args]
-        argument_string = ''.join(args_new)
+        argument_string = self.process_print_ask_args(args, meta)
         return f"display.scroll({argument_string})"
 
     def clear(self, meta, args):
@@ -3272,9 +3258,10 @@ class MicrobitConvertToPython_11(MicrobitConvertToPython_10, ConvertToPython_11)
 @hedy_transpiler(level=12, microbit=True)
 @source_map_transformer(source_map)
 class MicrobitConvertToPython_12(MicrobitConvertToPython_11, ConvertToPython_12):
-    def print(self, meta, args):
-        argument_string = self.print_ask_args(meta, args)
-        return f"display.scroll('{argument_string}')"
+    pass
+    # def print(self, meta, args):
+    #     argument_string = self.process_print_ask_args(args, meta)
+    #     return f"display.scroll('{argument_string}')"
 
 
 @v_args(meta=True)

@@ -347,6 +347,36 @@ class TestsLevel14(HedyTester):
             max_level=16,
             expected=expected)
 
+
+    @parameterized.expand([
+        ('>', 'incorrect'),
+        ('>=', 'correct'),
+        ('<', 'incorrect'),
+        ('<=', 'correct'),
+        ('!=', 'incorrect')])
+    def test_comparisons_arabic_and_latin_vars(self, op, output):
+        code = textwrap.dedent(f"""\
+            nummer1 is ١١
+            nummer2 is 11
+            if nummer1 {op} nummer2
+                print 'correct'
+            else
+                print 'incorrect'""")
+
+        expected = textwrap.dedent(f"""\
+            nummer1 = Value(11, num_sys='Arabic')
+            nummer2 = Value(11, num_sys='Latin')
+            if nummer1.data{op}nummer2.data:
+              print(f'''correct''')
+            else:
+              print(f'''incorrect''')""")
+
+        self.multi_level_tester(
+            max_level=16,
+            code=code,
+            expected=expected,
+            output=output)
+
     @parameterized.expand(HedyTester.comparison_commands)
     def test_comparison_with_list_access(self, comparison):
         code = textwrap.dedent(f"""\
@@ -432,50 +462,6 @@ class TestsLevel14(HedyTester):
             max_level=15,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
-        )
-
-    def test_not_equal_promotes_int_to_float(self):
-        code = textwrap.dedent(f"""\
-            a is 1
-            b is 1.2
-            if a != b
-                b is 1""")
-
-        expected = textwrap.dedent(f"""\
-            a = Value(1, num_sys='Latin')
-            b = Value(1.2, num_sys='Latin')
-            if a.data!=b.data:
-              b = Value(1, num_sys='Latin')""")
-
-        self.multi_level_tester(
-            code=code,
-            max_level=16,
-            expected=expected
-        )
-
-    @parameterized.expand([
-        ('"text"', "Value('text')"),
-        ("'text'", "Value('text')"),
-        ('1', "Value(1, num_sys='Latin')"),
-        ('1.3', "Value(1.3, num_sys='Latin')"),
-        ('1, 2', "Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])")])
-    def test_not_equal(self, arg, exp):
-        code = textwrap.dedent(f"""\
-            a is {arg}
-            b is {arg}
-            if a != b
-                b is 1""")
-
-        expected = textwrap.dedent(f"""\
-            a = {exp}
-            b = {exp}
-            if a.data!=b.data:
-              b = Value(1, num_sys='Latin')""")
-
-        self.multi_level_tester(
-            code=code,
-            max_level=15,
-            expected=expected
         )
 
     def test_if_with_double_equals(self):

@@ -431,6 +431,39 @@ class TestsLevel4(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=5, unused_allowed=True)
 
+    def test_print_number(self):
+        code = "print '10'"
+        expected = "print(f'10')"
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            output='10',
+            expected_commands=[Command.print],
+            max_level=11)
+
+    def test_print_number_arabic(self):
+        code = "print '١١'"
+        expected = "print(f'١١')"
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            output='١١',
+            expected_commands=[Command.print],
+            max_level=11)
+
+    def test_print_multi_args(self):
+        code = "print 'hello' 'Hedy' '4' '١١'"
+        expected = "print(f'helloHedy4١١')"
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            output='helloHedy4١١',
+            expected_commands=[Command.print],
+            max_level=11)
+
     #
     # Test comment
     #
@@ -550,6 +583,24 @@ class TestsLevel4(HedyTester):
         print(f'{dieren}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=5)
+
+    def test_ask_number(self):
+        code = "n is ask '42'"
+        expected = "n = input(f'42')"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=5, unused_allowed=True)
+
+    def test_ask_arabic_number(self):
+        code = "n is ask '٢٣٤'"
+        expected = "n = input(f'٢٣٤')"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=5, unused_allowed=True)
+
+    def test_ask_multi_args(self):
+        code = "n is ask 'hello' 'Hedy' '4' '١١'"
+        expected = "n = input(f'helloHedy4١١')"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=5, unused_allowed=True)
 
     @parameterized.expand(HedyTester.quotes)
     def test_ask_es(self, q):

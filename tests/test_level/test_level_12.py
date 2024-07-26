@@ -6,8 +6,7 @@ import exceptions
 import hedy
 from hedy import Command
 from hedy_sourcemap import SourceRange
-# from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester, SkippedMapping  # , SkippedMapping
+from tests.Tester import HedyTester, SkippedMapping
 
 
 class TestsLevel12(HedyTester):
@@ -28,6 +27,107 @@ class TestsLevel12(HedyTester):
     #
     # print tests
     #
+    def test_print_var_number(self):
+        code = textwrap.dedent("""\
+            n is 10
+            print n""")
+        expected = textwrap.dedent("""\
+            n = Value(10, num_sys='Latin')
+            print(f'''{n}''')""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            output='10',
+            max_level=17)
+
+    def test_print_var_number_arabic(self):
+        code = textwrap.dedent("""\
+            n is ١١
+            print n""")
+        expected = textwrap.dedent("""\
+            n = Value(11, num_sys='Arabic')
+            print(f'''{n}''')""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            output='١١',
+            max_level=17)
+
+    def test_print_keyword_var(self):
+        code = textwrap.dedent("""\
+            sum is 10
+            print sum""")
+        expected = textwrap.dedent("""\
+            _sum = Value(10, num_sys='Latin')
+            print(f'''{_sum}''')""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            output='10',
+            max_level=17)
+
+    def test_print_multi_args(self):
+        code = "print 'hello' 'Hedy' 4 ١١"
+        expected = """print(f'''helloHedy4{localize(11, num_sys='Arabic')}''')"""
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            output='helloHedy4١١',
+            max_level=17)
+
+    def test_print_calc_with_var(self):
+        code = textwrap.dedent("""\
+            var is 5
+            print var + 5""")
+        expected = textwrap.dedent(f"""\
+            var = Value(5, num_sys='Latin')
+            print(f'''{{localize({self.sum_transpiled('var', 5)}, num_sys=get_num_sys(var))}}''')""")
+
+        self.multi_level_tester(max_level=17, code=code, output='10', expected=expected)
+
+    def test_print_calc_with_arabic_var(self):
+        code = textwrap.dedent("""\
+            var is ٨
+            print var + ١""")
+        expected = textwrap.dedent(f"""\
+            var = Value(8, num_sys='Arabic')
+            print(f'''{{localize({self.sum_transpiled('var', 1)}, num_sys=get_num_sys(var))}}''')""")
+
+        self.multi_level_tester(max_level=17, code=code, output='٩', expected=expected)
+
+    @parameterized.expand([
+        ('*', '16'),
+        ('/', '4.0'),
+        ('+', '10'),
+        ('-', '6')
+    ])
+    def test_print_calc_directly(self, op, output):
+        code = f"print 8 {op} 2"
+        expected = f"""print(f'''{{localize(8 {op} 2, num_sys='Latin')}}''')"""
+
+        self.multi_level_tester(max_level=17, code=code, expected=expected, output=output)
+
+    @parameterized.expand([
+        ('*', '٢٥'),
+        ('/', '١.٠'),
+        ('+', '١٠'),
+        ('-', '٠')])
+    def test_print_calc_arabic_directly(self, op, out):
+        code = f"""قول "٥ ضرب ٥ يساوي " ٥{op}٥"""
+        expected = f"""print(f'''٥ ضرب ٥ يساوي {{localize(5 {op} 5, num_sys='Arabic')}}''')"""
+        output = f'٥ ضرب ٥ يساوي {out}'
+
+        self.multi_level_tester(
+            max_level=17,
+            code=code,
+            expected=expected,
+            output=output,
+            lang='ar')
+
     def test_print_float_variable(self):
         code = textwrap.dedent("""\
             pi is 3.14
@@ -129,13 +229,10 @@ class TestsLevel12(HedyTester):
 
     def test_print_microbit(self):
         code = "print 'a'"
-        expected = textwrap.dedent(f"""\
-                display.scroll('a')""")
+        expected = "display.scroll('a')"
 
         self.multi_level_tester(
             code=code,
-            translate=False,
-            skip_faulty=False,
             expected=expected,
             max_level=17,
             microbit=True
@@ -509,6 +606,36 @@ class TestsLevel12(HedyTester):
             extra_check_function=self.is_turtle()
         )
 
+    def test_forward_arabic_numeral(self):
+        code = "forward ١١١١١١١"
+        expected = self.forward_transpiled(1111111)
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle()
+        )
+
+    def test_forward_hindi_numeral(self):
+        code = "forward ५५५"
+        expected = self.forward_transpiled(555)
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle()
+        )
+
+    def test_forward_float(self):
+        code = "forward 50.5"
+        expected = self.forward_transpiled(50.5)
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle()
+        )
+
     def test_forward_with_int_var(self):
         code = textwrap.dedent("""\
             a is 50
@@ -523,15 +650,31 @@ class TestsLevel12(HedyTester):
             extra_check_function=self.is_turtle(),
         )
 
-    def test_forward_float(self):
-        code = "forward 50.5"
-        expected = self.forward_transpiled(50.5)
+    def test_forward_with_hindi_int_var(self):
+        code = textwrap.dedent("""\
+            a is ५५५
+            forward a""")
+        expected = self.dedent(
+            "a = Value(555, num_sys='Devanagari')",
+            self.forward_transpiled('a.data'))
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle()
-        )
+            extra_check_function=self.is_turtle())
+
+    def test_forward_with_keyword_variable(self):
+        code = textwrap.dedent("""\
+           sum is 50
+           forward sum""")
+        expected = self.dedent(
+            "_sum = Value(50, num_sys='Latin')",
+            self.forward_transpiled('_sum.data'))
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle())
 
     def test_forward_with_string_variable_gives_type_error(self):
         code = textwrap.dedent("""\
@@ -542,6 +685,23 @@ class TestsLevel12(HedyTester):
             code=code,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException,
+        )
+
+    def test_forward_with_list_access(self):
+        code = textwrap.dedent("""\
+            directions is 10, 100, 360
+            forward directions at 1""")
+
+        expected = self.dedent(
+            f"directions = {self.list_transpiled(10, 100, 360)}",
+            self.list_access_transpiled('directions.data[int(1)-1]'),
+            self.forward_transpiled('directions.data[int(1)-1].data'))
+
+        self.multi_level_tester(
+            max_level=15,
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
         )
 
     def test_forward_with_list_access_random(self):
@@ -634,6 +794,21 @@ class TestsLevel12(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle()
+        )
+
+    def test_turn_with_keyword_var(self):
+        code = textwrap.dedent("""\
+            sum is 70
+            turn sum""")
+        expected = self.dedent(
+            "_sum = Value(70, num_sys='Latin')",
+            self.turn_transpiled('_sum.data'))
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            max_level=17
         )
 
     def test_turn_with_non_latin_float_number_var(self):
@@ -773,6 +948,24 @@ class TestsLevel12(HedyTester):
     #
     # ask tests
     #
+    def test_ask_number(self):
+        code = "n is ask 42"
+        expected = self.input_transpiled('n', '42')
+
+        self.multi_level_tester(code=code, expected=expected, max_level=17, unused_allowed=True)
+
+    def test_ask_arabic_number(self):
+        code = "n is ask ٢٣٤"
+        expected = self.input_transpiled('n', "{localize(234, num_sys='Arabic')}")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=17, unused_allowed=True)
+
+    def test_ask_multi_args(self):
+        code = "n is ask 'hello' 'Hedy' 4 ١١"
+        expected = self.input_transpiled('n', "helloHedy4{localize(11, num_sys='Arabic')}")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=17, unused_allowed=True)
+
     def test_ask_number_answer(self):
         code = textwrap.dedent("""\
             prijs is ask 'hoeveel?'
@@ -785,22 +978,6 @@ class TestsLevel12(HedyTester):
             f"sparen = Value({minus_op}, num_sys=get_num_sys(prijs))")
 
         self.multi_level_tester(code=code, unused_allowed=True, expected=expected, max_level=17)
-
-    def test_play(self):
-        code = textwrap.dedent("""\
-            n = 'C4' #
-            play n""")
-
-        expected = self.dedent(
-            "n = Value('C4')",
-            self.play_transpiled('n.data'))
-
-        self.multi_level_tester(
-            code=code,
-            translate=False,
-            expected=expected,
-            max_level=17
-        )
 
     def test_ask_with_list_var(self):
         code = textwrap.dedent("""\
@@ -843,6 +1020,17 @@ class TestsLevel12(HedyTester):
             self.input_transpiled('favorite', 'Is your fav number{number}'))
 
         self.multi_level_tester(code=code, unused_allowed=True, expected=expected, max_level=17)
+
+    def test_ask_with_keyword_var(self):
+        code = textwrap.dedent("""\
+            sum is 'Hedy'
+            v is ask sum""")
+
+        expected = self.dedent(
+            "_sum = Value('Hedy')",
+            self.input_transpiled('v', '{_sum}'))
+
+        self.multi_level_tester(code=code, expected=expected, max_level=17, unused_allowed=True, skip_faulty=False)
 
     def test_ask_list_gives_type_error(self):
         code = textwrap.dedent("""\
@@ -996,6 +1184,16 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected)
 
+    def test_sleep_with_keyword_variable(self):
+        code = textwrap.dedent("""\
+            sum is 2
+            sleep sum""")
+        expected = self.dedent(
+            "_sum = Value(2, num_sys='Latin')",
+            self.sleep_transpiled("_sum.data"))
+
+        self.multi_level_tester(max_level=17, code=code, expected=expected)
+
     def test_sleep_with_string_variable_gives_error(self):
         code = textwrap.dedent("""\
             n is "test"
@@ -1065,12 +1263,17 @@ class TestsLevel12(HedyTester):
     #
     # assign tests
     #
-
     def test_assign_integer(self):
         code = "naam is 14"
         expected = "naam = Value(14, num_sys='Latin')"
 
         self.multi_level_tester(code=code, unused_allowed=True, expected=expected)
+
+    def test_assign_keyword_var(self):
+        code = "sum is 'Felienne'"
+        expected = "_sum = Value('Felienne')"
+
+        self.multi_level_tester(code=code, expected=expected, unused_allowed=True)
 
     def test_assign_list(self):
         code = "animals is 'duck', 'dog', 'penguin'"
@@ -1161,7 +1364,7 @@ class TestsLevel12(HedyTester):
         code = f"name is {q}felienne{q}"
         expected = "name = Value('felienne')"
 
-        self.multi_level_tester(code=code, unused_allowed=True, expected=expected, max_level=17)
+        self.multi_level_tester(code=code, unused_allowed=True, expected=expected)
 
     @parameterized.expand(HedyTester.quotes)
     def test_assign_empty_string(self, q):
@@ -1481,6 +1684,7 @@ class TestsLevel12(HedyTester):
 
     # Lists can be compared for equality starting with level 14
     def test_if_equality_lists(self):
+        # Lists can be compared for equality starting with level 14
         code = textwrap.dedent("""\
          m is 1, 2
          n is 1, 2
@@ -1517,7 +1721,7 @@ class TestsLevel12(HedyTester):
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 3
         )
 
-    def test_equality_arabic(self):
+    def test_equality_arabic_and_latin_vars(self):
         code = textwrap.dedent("""\
             nummer1 is ٢
             nummer2 is 2
@@ -1539,6 +1743,30 @@ class TestsLevel12(HedyTester):
             code=code,
             expected=expected,
             output='jahoor!')
+
+    def test_if_arabic_number_equals_latin_number(self):
+        code = textwrap.dedent("""\
+        if ١١ is 11
+          print 'correct'""")
+
+        expected = textwrap.dedent("""\
+        if 11 == 11:
+          print(f'''correct''')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=16, output='correct')
+
+    def test_if_arabic_var_equals_latin_number(self):
+        code = textwrap.dedent("""\
+        a is ١١
+        if a is 11
+          print 'correct'""")
+
+        expected = textwrap.dedent("""\
+        a = Value(11, num_sys='Arabic')
+        if a.data == 11:
+          print(f'''correct''')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=16, output='correct')
 
     #
     # in/not-in list commands
@@ -1730,6 +1958,32 @@ class TestsLevel12(HedyTester):
             output=output
         )
 
+    def test_if_ar_number_list_with_latin_numbers(self):
+        code = textwrap.dedent("""\
+        a is 11, 22, 33
+        if ١١ in a
+          print 'correct'""")
+
+        expected = textwrap.dedent(f"""\
+        a = {self.list_transpiled("11", "22", "33")}
+        if {self.in_list_transpiled("Value(11, num_sys='Arabic')", 'a')}:
+          print(f'''correct''')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=15, output='correct')
+
+    def test_if_ar_number_not_list_with_latin_numbers(self):
+        code = textwrap.dedent("""\
+        a is 22, 33, 44
+        if ١١ not in a
+          print 'correct'""")
+
+        expected = textwrap.dedent(f"""\
+        a = {self.list_transpiled("22", "33", "44")}
+        if {self.not_in_list_transpiled("Value(11, num_sys='Arabic')", 'a')}:
+          print(f'''correct''')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=15, output='correct')
+
     #
     # if else tests
     #
@@ -1855,6 +2109,18 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
+    def test_repeat_arabic_number_print(self):
+        code = textwrap.dedent("""\
+        repeat ٥ times
+            print 'koekoek'""")
+
+        expected = textwrap.dedent(f"""\
+        for __i in range({self.int_transpiled(5)}):
+          print(f'''koekoek''')
+          time.sleep(0.1)""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=17)
+
     def test_repeat_print_variable(self):
         code = textwrap.dedent("""\
         n is 5
@@ -1875,6 +2141,45 @@ class TestsLevel12(HedyTester):
         me wants a cookie!""")
 
         self.multi_level_tester(code=code, expected=expected, output=output, max_level=17)
+
+    def test_repeat_arabic_var_print(self):
+        code = textwrap.dedent("""\
+            n is ٥
+            repeat n times
+                print 'me wants a cookie!'""")
+
+        expected = textwrap.dedent(f"""\
+            n = Value(5, num_sys='Arabic')
+            for __i in range({self.int_transpiled('n.data')}):
+              print(f'''me wants a cookie!''')
+              time.sleep(0.1)""")
+
+        output = textwrap.dedent("""\
+        me wants a cookie!
+        me wants a cookie!
+        me wants a cookie!
+        me wants a cookie!
+        me wants a cookie!""")
+
+        self.multi_level_tester(code=code, expected=expected, output=output, max_level=17)
+
+    def test_repeat_keyword_variable(self):
+        code = textwrap.dedent("""\
+            sum is 2
+            repeat sum times
+              print 'me wants a cookie!'""")
+
+        expected = textwrap.dedent(f"""\
+            _sum = Value(2, num_sys='Latin')
+            for __i in range({self.int_transpiled('_sum.data')}):
+              print(f'''me wants a cookie!''')
+              time.sleep(0.1)""")
+
+        output = textwrap.dedent("""\
+            me wants a cookie!
+            me wants a cookie!""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=17, output=output)
 
     # issue 297
     def test_repeat_print_assign_addition(self):
@@ -2034,7 +2339,7 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(code=code, expected=expected)
 
     #
-    # for list command
+    # for list tests
     #
     def test_for_list(self):
         code = textwrap.dedent("""\
@@ -2052,6 +2357,28 @@ class TestsLevel12(HedyTester):
             code=code,
             expected=expected,
             expected_commands=['is', 'for', 'print'],
+            max_level=15
+        )
+
+    def test_for_list_diff_num_sys(self):
+        code = textwrap.dedent("""\
+        digits is 1, 𑁨, ३, ૪, ੫
+        for d in digits
+            print d""")
+
+        list_transpiled = ("Value([""Value(1, num_sys='Latin'), Value(2, num_sys='Brahmi'), "
+                           "Value(3, num_sys='Devanagari'), Value(4, num_sys='Gujarati'), "
+                           "Value(5, num_sys='Gurmukhi')])")
+        expected = textwrap.dedent(f"""\
+        digits = {list_transpiled}
+        for d in digits.data:
+          print(f'''{{d}}''')
+          time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            output="1\n𑁨\n३\n૪\n੫",
             max_level=15
         )
 
@@ -2076,7 +2403,7 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(code=code, expected=expected, max_level=15)
 
     #
-    # for loop
+    # for loop tests
     #
     def test_for_loop(self):
         code = textwrap.dedent("""\
@@ -2124,6 +2451,22 @@ class TestsLevel12(HedyTester):
             "begin = Value(1, num_sys='Latin')",
             "end = Value(10, num_sys='Latin')",
             self.for_loop('i', 'begin', 'end', 'get_num_sys(begin)'),
+            ("print(f'''{i}''')", '  '),
+            ("time.sleep(0.1)", '  '))
+
+        self.multi_level_tester(code=code, expected=expected, max_level=16)
+
+    def test_for_loop_with_keyword_vars(self):
+        code = textwrap.dedent("""\
+            sum = 1
+            dir = 10
+            for i in range sum to dir
+                print i""")
+
+        expected = self.dedent(
+            "_sum = Value(1, num_sys='Latin')",
+            "_dir = Value(10, num_sys='Latin')",
+            self.for_loop('i', '_sum', '_dir', 'get_num_sys(_sum)'),
             ("print(f'''{i}''')", '  '),
             ("time.sleep(0.1)", '  '))
 
@@ -2703,27 +3046,9 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=16)
 
-    def test_actually_simple_function(self):
-        code = textwrap.dedent(f"""\
-            define test_function_1
-                i = ١
-                return "Test function " i
-            print call test_function_1""")
-
-        expected = self.dedent(
-            "def test_function_1():",
-            ("i = Value(1, num_sys='Arabic')", "  "),
-            (self.return_transpiled('Test function {i}'), "  "),
-            "print(f'''{test_function_1()}''')")
-
-        output = "Test function ١"
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            output=output,
-            max_level=16
-        )
-
+    #
+    # function tests
+    #
     def test_simple_function(self):
         code = textwrap.dedent("""\
         define simple_function_1 with parameter
@@ -2813,6 +3138,26 @@ class TestsLevel12(HedyTester):
             expected=expected
         )
 
+    def test_function_with_arabic_var(self):
+        code = textwrap.dedent(f"""\
+             define test_function_1
+                 i = ١
+                 return "Test function " i
+             print call test_function_1""")
+
+        expected = self.dedent(
+            "def test_function_1():",
+            ("i = Value(1, num_sys='Arabic')", "  "),
+            (self.return_transpiled('Test function {i}'), "  "),
+            "print(f'''{test_function_1()}''')")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            output="Test function ١",
+            max_level=16
+        )
+
     def test_undefined_function_without_params(self):
         code = textwrap.dedent("""\
         call func""")
@@ -2872,10 +3217,31 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            max_level=16,
-            skip_faulty=False,
             expected=expected,
-            unused_allowed=True
+            output='6',
+            max_level=16,
+        )
+
+    def test_function_returns_arabic_number(self):
+        code = textwrap.dedent("""\
+        define func with n1, n2
+            return n1 + n2
+
+        a = call func with ٣, ١
+        print a + 3""")
+
+        return_arg = f"{{localize({self.sum_transpiled('n1', 'n2')}, num_sys=get_num_sys(n1))}}"
+        expected = self.dedent(
+            "def func(n1, n2):",
+            (self.return_transpiled(return_arg), '  '),
+            "a = func(Value(3, num_sys='Arabic'), Value(1, num_sys='Arabic'))",
+            f"print(f'''{{localize({self.sum_transpiled('a', '3')}, num_sys=get_num_sys(a))}}''')")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            output='٧',
+            expected=expected,
         )
 
     def test_too_many_parameters(self):
@@ -3032,9 +3398,45 @@ class TestsLevel12(HedyTester):
         )
 
     #
-    # music tests
+    # play tests / music tests
     #
-    def test_play_random(self):
+    def test_play_var(self):
+        code = textwrap.dedent("""\
+            n = 'C4' #
+            play n""")
+
+        expected = self.dedent(
+            "n = Value('C4')",
+            self.play_transpiled('n.data'))
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=17)
+
+    def test_play_arabic_number_var(self):
+        code = textwrap.dedent("""\
+            n is ١١
+            play n""")
+
+        expected = self.dedent(
+            "n = Value(11, num_sys='Arabic')",
+            self.play_transpiled('n.data'))
+
+        self.multi_level_tester(code=code, expected=expected)
+
+    def test_play_keyword_var(self):
+        code = textwrap.dedent("""\
+            sum is 'C4'
+            play sum""")
+
+        expected = self.dedent(
+            "_sum = Value('C4')",
+            self.play_transpiled('_sum.data'))
+
+        self.multi_level_tester(code=code, expected=expected)
+
+    def test_play_list_access_random(self):
         code = textwrap.dedent("""\
         notes = 'C4', 'E4', 'D4', 'F4', 'G4'
         play notes at random""")
@@ -3052,7 +3454,7 @@ class TestsLevel12(HedyTester):
             max_level=15
         )
 
-    def test_play_integers(self):
+    def test_play_list_access_random_repeat(self):
         code = textwrap.dedent("""\
         notes = 1, 2, 3
 
@@ -3079,7 +3481,14 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected)
 
-    def test_play_sum(self):
+    @parameterized.expand(['-', '*', '/', '+'])
+    def test_play_arabic_calc(self, op):
+        code = f"play ٣١ {op} ١"
+        expected = self.play_transpiled(f'31 {op} 1')
+
+        self.multi_level_tester(code=code, expected=expected)
+
+    def test_play_calc_with_var(self):
         code = textwrap.dedent(f"""\
             note is 34
             play note + 1""")
@@ -3087,11 +3496,7 @@ class TestsLevel12(HedyTester):
             "note = Value(34, num_sys='Latin')",
             self.play_transpiled(self.sum_transpiled('note', 1)))
 
-        self.multi_level_tester(
-            code=code,
-            translate=False,
-            expected=expected,
-        )
+        self.multi_level_tester(code=code, expected=expected)
 
     def test_play_input(self):
         code = textwrap.dedent("""\
@@ -3120,4 +3525,35 @@ class TestsLevel12(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle()
+        )
+
+    def test_color_with_var(self):
+        code = textwrap.dedent("""\
+            foo is 'white'
+            color foo""")
+        expected = self.dedent(
+            "foo = Value('white')",
+            self.color_transpiled('{foo}')
+        )
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+        )
+
+    def test_color_with_keyword_var(self):
+        code = textwrap.dedent("""\
+            sum is 'white'
+            color sum""")
+        expected = self.dedent(
+            "_sum = Value('white')",
+            self.color_transpiled('{_sum}')
+        )
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            max_level=18
         )

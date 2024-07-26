@@ -51,6 +51,21 @@ class TestsLevel7(HedyTester):
 
         self.single_level_tester(code=code, expected=expected, output=output)
 
+    def test_repeat_arabic_number_print(self):
+        code = "repeat ٣ times print 'hooray!'"
+
+        expected = textwrap.dedent(f"""\
+        for __i in range({self.int_transpiled(3)}):
+          print(f'hooray!')
+          time.sleep(0.1)""")
+
+        output = textwrap.dedent("""\
+            hooray!
+            hooray!
+            hooray!""")
+
+        self.single_level_tester(code=code, expected=expected, output=output)
+
     def test_repeat_print_variable(self):
         code = textwrap.dedent("""\
             n is 5
@@ -66,6 +81,41 @@ class TestsLevel7(HedyTester):
             me wants a cookie!
             me wants a cookie!
             me wants a cookie!
+            me wants a cookie!
+            me wants a cookie!""")
+
+        self.single_level_tester(code=code, expected=expected, output=output)
+
+    def test_repeat_arabic_var_print(self):
+        code = textwrap.dedent("""\
+            n is ٣
+            repeat n times print 'me wants a cookie!'""")
+
+        expected = textwrap.dedent(f"""\
+            n = Value('3', num_sys='Arabic')
+            for __i in range({self.int_transpiled('n.data')}):
+              print(f'me wants a cookie!')
+              time.sleep(0.1)""")
+
+        output = textwrap.dedent("""\
+            me wants a cookie!
+            me wants a cookie!
+            me wants a cookie!""")
+
+        self.single_level_tester(code=code, expected=expected, output=output)
+
+    def test_repeat_keyword_variable(self):
+        code = textwrap.dedent("""\
+            sum is 2
+            repeat sum times print 'me wants a cookie!'""")
+
+        expected = textwrap.dedent(f"""\
+            _sum = Value('2', num_sys='Latin')
+            for __i in range({self.int_transpiled('_sum.data')}):
+              print(f'me wants a cookie!')
+              time.sleep(0.1)""")
+
+        output = textwrap.dedent("""\
             me wants a cookie!
             me wants a cookie!""")
 

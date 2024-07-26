@@ -20,7 +20,7 @@ class TestsLevel11(HedyTester):
     '''
 
     #
-    # for loop
+    # for loop tests
     #
     def test_for_loop(self):
         code = textwrap.dedent("""\
@@ -28,6 +28,21 @@ class TestsLevel11(HedyTester):
                 a is i + 1""")
         expected = self.dedent(
             self.for_loop('i', 1, 10),
+            (f"a = Value({self.number_transpiled('i')} + {self.number_transpiled(1)}, num_sys=get_num_sys(i))", '  '),
+            ("time.sleep(0.1)", '  '))
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            unused_allowed=True,
+            expected_commands=['for', 'is', 'addition'])
+
+    def test_for_loop_arabic(self):
+        code = textwrap.dedent("""\
+            for i in range ١ to ١١
+                a is i + 1""")
+        expected = self.dedent(
+            self.for_loop('i', 1, 11, num_sys="'Arabic'"),
             (f"a = Value({self.number_transpiled('i')} + {self.number_transpiled(1)}, num_sys=get_num_sys(i))", '  '),
             ("time.sleep(0.1)", '  '))
 
@@ -48,6 +63,22 @@ class TestsLevel11(HedyTester):
             "begin = Value('1', num_sys='Latin')",
             "end = Value('10', num_sys='Latin')",
             self.for_loop('i', 'begin', 'end', 'get_num_sys(begin)'),
+            ("print(f'{i}')", '  '),
+            ("time.sleep(0.1)", '  '))
+
+        self.single_level_tester(code=code, expected=expected)
+
+    def test_for_loop_with_keyword_vars(self):
+        code = textwrap.dedent("""\
+            sum = 1
+            dir = 10
+            for i in range sum to dir
+                print i""")
+
+        expected = self.dedent(
+            "_sum = Value('1', num_sys='Latin')",
+            "_dir = Value('10', num_sys='Latin')",
+            self.for_loop('i', '_sum', '_dir', 'get_num_sys(_sum)'),
             ("print(f'{i}')", '  '),
             ("time.sleep(0.1)", '  '))
 

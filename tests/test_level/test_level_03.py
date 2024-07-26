@@ -658,8 +658,6 @@ class TestsLevel3(HedyTester):
             extra_check_function=self.result_in(['koe', 'kiep', 'muis']),
         )
 
-    # add/remove tests (IMAN)
-    #
     def test_add_text_to_list_numerical(self):
         code = textwrap.dedent("""\
             numbers is 1, 2
@@ -835,18 +833,6 @@ class TestsLevel3(HedyTester):
             unused_allowed=True,
             skipped_mappings=skipped_mappings,
         )
-
-    def test_random_ask(self):
-        code = textwrap.dedent("""\
-           colors is green, red, blue
-           answer is ask Do you like colors at random?""")
-
-        expected = self.dedent(
-            "colors = ['green', 'red', 'blue']",
-            self.list_access_transpiled("random.choice(colors)"),
-            "answer = input(f'Do you like {random.choice(colors)} ?')")
-
-        self.single_level_tester(code=code, expected=expected, unused_allowed=True)
 
     def test_add_ask_to_list(self):
         code = textwrap.dedent("""\

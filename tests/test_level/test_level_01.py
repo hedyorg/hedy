@@ -38,7 +38,28 @@ class TestsLevel1(HedyTester):
             expected=expected,
             output=output,
             expected_commands=expected_commands
+        )
 
+    def test_print_number(self):
+        code = "print 10"
+        expected = "print('10')"
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output='10',
+            expected_commands=[Command.print]
+        )
+
+    def test_print_number_arabic(self):
+        code = "print ١١"
+        expected = "print('١١')"
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output='١١',
+            expected_commands=[Command.print]
         )
 
     def test_print_no_space(self):
@@ -230,6 +251,19 @@ class TestsLevel1(HedyTester):
 
         self.single_level_tester(code=code, expected=expected, output=output, lang='ar')
 
+    def test_print_microbit(self):
+        code = "print a"
+        expected = "display.scroll('a')"
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            expected=expected,
+            max_level=3,
+            microbit=True
+        )
+
     #
     # ask tests
     #
@@ -286,6 +320,21 @@ class TestsLevel1(HedyTester):
             translate=False  # we are trying a Dutch keyword in en, can't be translated
         )
 
+    def test_ask_number(self):
+        code = "ask 42"
+        expected = "answer = input('42')"
+
+        self.single_level_tester(code=code, expected=expected)
+
+    def test_ask_arabic_number(self):
+        code = "ask ٢٣٤"
+        expected = "answer = input('٢٣٤')"
+
+        self.single_level_tester(code=code, expected=expected)
+
+    #
+    # play tests
+    #
     def test_play_no_args(self):
         code = "play "
         expected = self.play_transpiled("'C4'")
@@ -307,19 +356,6 @@ class TestsLevel1(HedyTester):
             expected=expected
         )
 
-    def test_print_microbit(self):
-        code = "print a"
-        expected = "display.scroll('a')"
-
-        self.multi_level_tester(
-            code=code,
-            translate=False,
-            skip_faulty=False,
-            expected=expected,
-            max_level=3,
-            microbit=True
-        )
-
     def test_play_lowercase(self):
         code = "play a"
         expected = self.play_transpiled("'A'")
@@ -334,11 +370,13 @@ class TestsLevel1(HedyTester):
         code = "play 34"
         expected = self.play_transpiled("'34'")
 
-        self.multi_level_tester(
-            code=code,
-            translate=False,
-            expected=expected
-        )
+        self.multi_level_tester(code=code, expected=expected)
+
+    def test_play_int_arabic(self):
+        code = "play ١١"
+        expected = self.play_transpiled("'١١'")
+
+        self.multi_level_tester(code=code, expected=expected)
 
     def test_mixes_languages_nl_en(self):
         code = textwrap.dedent("""\
@@ -481,7 +519,7 @@ class TestsLevel1(HedyTester):
         self.single_level_tester(code=code, expected=expected,
                                  extra_check_function=self.is_turtle())
 
-    def test_one_color_purple_nl(self):
+    def test_one_color_nl(self):
         code = "kleur paars"
         expected = "t.pencolor('purple')"
 

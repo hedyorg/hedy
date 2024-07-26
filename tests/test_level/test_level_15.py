@@ -11,9 +11,9 @@ class TestsLevel15(HedyTester):
     level = 15
 
     #
-    # numeral values
+    # print tests
     #
-    def test_numerals(self):
+    def test_print_arabic_var(self):
         code = textwrap.dedent("""\
             a = ١١
             print a""")
@@ -29,7 +29,7 @@ class TestsLevel15(HedyTester):
             skip_faulty=False,
         )
 
-    def test_addition(self):
+    def test_print_arabic_calc_var(self):
         code = textwrap.dedent("""\
             a = ٢٢ + ١١
             print a""")
@@ -243,6 +243,32 @@ class TestsLevel15(HedyTester):
             lang='fr'
         )
 
+    @parameterized.expand([
+        ('0', 'Latin', '1\n2\n3\n4\n5'),
+        ('𑁦', 'Brahmi', '𑁧\n𑁨\n𑁩\n𑁪\n𑁫'),
+        ('०', 'Devanagari', '१\n२\n३\n४\n५'),
+        ('൦', 'Malayalam', '൧\n൨\n൩\n൪\n൫')
+    ])
+    def test_while_calc_var(self, num, num_sys, output):
+        code = textwrap.dedent(f"""\
+            a = {num}
+            while a != 5
+                a = a + 1
+                print a""")
+        expected = self.dedent(f"""\
+            a = Value(0, num_sys='{num_sys}')
+            while a.data!=5:
+              a = Value({self.sum_transpiled('a', 1)}, num_sys=get_num_sys(a))
+              print(f'''{{a}}''')
+              time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=16,
+            output=output,
+        )
+
     def test_while_undefined_var(self):
         code = textwrap.dedent("""\
             while antwoord != 25
@@ -275,10 +301,10 @@ class TestsLevel15(HedyTester):
 
     def test_missing_indent_while(self):
         code = textwrap.dedent(f"""\
-    answer = 0
-    while answer != 25
-    answer = ask 'What is 5 times 5?'
-    print 'A correct answer has been given'""")
+            answer = 0
+            while answer != 25
+            answer = ask 'What is 5 times 5?'
+            print 'A correct answer has been given'""")
 
         self.multi_level_tester(
             code=code,
@@ -288,15 +314,15 @@ class TestsLevel15(HedyTester):
 
     def test_if_pressed_without_else_works(self):
         code = textwrap.dedent("""\
-        if p is pressed
-            print 'press'""")
+            if p is pressed
+                print 'press'""")
 
         expected = textwrap.dedent("""\
-         if_pressed_mapping = {"else": "if_pressed_default_else"}
-         if_pressed_mapping['p'] = 'if_pressed_p_'
-         def if_pressed_p_():
-             print(f'''press''')
-         extensions.if_pressed(if_pressed_mapping)""")
+            if_pressed_mapping = {"else": "if_pressed_default_else"}
+            if_pressed_mapping['p'] = 'if_pressed_p_'
+            def if_pressed_p_():
+                print(f'''press''')
+            extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code, expected=expected, max_level=16)
 

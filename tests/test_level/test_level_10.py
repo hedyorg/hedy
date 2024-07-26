@@ -20,7 +20,7 @@ class TestsLevel10(HedyTester):
     '''
 
     #
-    # for list command
+    # for list tests
     #
     def test_for_list(self):
         code = textwrap.dedent("""\
@@ -73,6 +73,28 @@ class TestsLevel10(HedyTester):
             code=code,
             expected=expected,
             expected_commands=['is', 'for', 'print'],
+            max_level=11
+        )
+
+    def test_for_list_diff_num_sys(self):
+        code = textwrap.dedent("""\
+        digits is 1, 𑁨, ३, ૪, ੫
+        for d in digits
+            print d""")
+
+        list_transpiled = ("Value([""Value('1', num_sys='Latin'), Value('2', num_sys='Brahmi'), "
+                           "Value('3', num_sys='Devanagari'), Value('4', num_sys='Gujarati'), "
+                           "Value('5', num_sys='Gurmukhi')])")
+        expected = textwrap.dedent(f"""\
+        digits = {list_transpiled}
+        for d in digits.data:
+          print(f'{{d}}')
+          time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            output="1\n𑁨\n३\n૪\n੫",
             max_level=11
         )
 

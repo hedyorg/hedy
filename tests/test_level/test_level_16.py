@@ -843,6 +843,32 @@ class TestsLevel16(HedyTester):
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2
         )
 
+    def test_if_ar_number_list_with_latin_numbers(self):
+        code = textwrap.dedent("""\
+           a = [11, 22, 33]
+           if ١١ in a
+             print 'correct'""")
+
+        expected = textwrap.dedent(f"""\
+           a = {self.list_transpiled("11", "22", "33")}
+           if {self.in_list_transpiled("Value(11, num_sys='Arabic')", 'a')}:
+             print(f'''correct''')""")
+
+        self.single_level_tester(code=code, expected=expected, output='correct')
+
+    def test_if_ar_number_not_list_with_latin_numbers(self):
+        code = textwrap.dedent("""\
+           a is [22, 33, 44]
+           if ١١ not in a
+             print 'correct'""")
+
+        expected = textwrap.dedent(f"""\
+           a = {self.list_transpiled("22", "33", "44")}
+           if {self.not_in_list_transpiled("Value(11, num_sys='Arabic')", 'a')}:
+             print(f'''correct''')""")
+
+        self.single_level_tester(code=code, expected=expected, output='correct')
+
     #
     # forward tests
     #

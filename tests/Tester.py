@@ -473,7 +473,7 @@ class HedyTester(unittest.TestCase):
     @staticmethod
     def play_transpiled(arg):
         return textwrap.dedent(f"""\
-            play(note_with_error({arg}, {HedyTester.value_exception_transpiled()}))
+            play(note_with_error(localize({arg}), {HedyTester.value_exception_transpiled()}))
             time.sleep(0.5)""")
 
     @staticmethod
@@ -497,8 +497,8 @@ class HedyTester(unittest.TestCase):
         bools_part = f', bools={bools}' if bools else ''
         return f'Value({value_part}{num_sys_part}{bools_part})'
 
-    def list_transpiled(self, *args):
-        args_string = ', '.join([self.value(a) for a in args])
+    def list_transpiled(self, *args, num_sys=None):
+        args_string = ', '.join([self.value(a, num_sys) for a in args])
         return f'Value([{args_string}])'
 
     def int_transpiled(self, value):
@@ -562,12 +562,18 @@ class HedyTester(unittest.TestCase):
             return Value(f'''{arg}''')""")
 
     def in_list_transpiled(self, val, list_name):
-        data_part = '.data' if self.level > 5 else ''
-        return f"localize({val}) in [localize(__la{data_part}) for __la in {list_name}{data_part}]"
+        if self.level < 12:
+            data_part = '.data' if self.level > 5 else ''
+            return f"localize({val}) in [localize(__la{data_part}) for __la in {list_name}{data_part}]"
+        else:
+            return f"{val} in {list_name}.data"
 
     def not_in_list_transpiled(self, val, list_name):
-        data_part = '.data' if self.level > 5 else ''
-        return f"localize({val}) not in [localize(__la{data_part}) for __la in {list_name}{data_part}]"
+        if self.level < 12:
+            data_part = '.data' if self.level > 5 else ''
+            return f"localize({val}) not in [localize(__la{data_part}) for __la in {list_name}{data_part}]"
+        else:
+            return f"{val} not in {list_name}.data"
 
     @staticmethod
     def bool_options(value):

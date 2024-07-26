@@ -94,7 +94,17 @@ class TestsLevel5(HedyTester):
 
         self.single_level_tester(code=code, expected=expected, output='gelijkspel!')
 
-    def test_if_ar_number_equals_latin_number(self):
+    def test_if_arabic_number_equals_latin_number(self):
+        code = textwrap.dedent("""\
+        if ١١ is 11 print 'correct'""")
+
+        expected = textwrap.dedent("""\
+        if localize('١١') == localize('11'):
+          print(f'correct')""")
+
+        self.single_level_tester(code=code, expected=expected, output='correct')
+
+    def test_if_arabic_var_equals_latin_number(self):
         code = textwrap.dedent("""\
         a is ١١
         if a is 11 print 'correct'""")
@@ -102,125 +112,6 @@ class TestsLevel5(HedyTester):
         expected = textwrap.dedent("""\
         a = '١١'
         if localize(a) == localize('11'):
-          print(f'correct')""")
-
-        self.single_level_tester(code=code, expected=expected, output='correct')
-
-    def test_if_not_in_list_print(self):
-        code = textwrap.dedent("""\
-        items is red, green
-        selected is red
-        if selected not in items print 'not found!'
-        else print 'found'""")
-
-        expected = textwrap.dedent(f"""\
-        items = ['red', 'green']
-        selected = 'red'
-        if {self.not_in_list_transpiled('selected', 'items')}:
-          print(f'not found!')
-        else:
-          print(f'found')""")
-
-        self.single_level_tester(code=code, expected=expected, output='found')
-
-    def test_if_not_in_list_in_print(self):
-        code = textwrap.dedent("""\
-        items is red, green
-        selected is purple
-        if selected not in items print 'not found!'
-        else print 'found'""")
-
-        expected = textwrap.dedent(f"""\
-        items = ['red', 'green']
-        selected = 'purple'
-        if {self.not_in_list_transpiled('selected', 'items')}:
-          print(f'not found!')
-        else:
-          print(f'found')""")
-
-        self.single_level_tester(code=code, expected=expected, output='not found!')
-
-    def test_if_ar_numbers_not_list_with_latin_numbers(self):
-        code = textwrap.dedent("""\
-        a is 22, 33, 44
-        if ١١ not in a print 'correct'""")
-
-        expected = textwrap.dedent(f"""\
-        a = ['22', '33', '44']
-        if {self.not_in_list_transpiled("'١١'", 'a')}:
-          print(f'correct')""")
-
-        self.single_level_tester(code=code, expected=expected, output='correct')
-
-    def test_if_var_in_list_print(self):
-        code = textwrap.dedent("""\
-        items is red, green
-        selected is red
-        if selected in items print 'found!'""")
-
-        expected = textwrap.dedent(f"""\
-        items = ['red', 'green']
-        selected = 'red'
-        if {self.in_list_transpiled('selected', 'items')}:
-          print(f'found!')""")
-
-        self.single_level_tester(
-            code=code,
-            expected=expected,
-            output='found!',
-            expected_commands=['is', 'is', 'if', 'in', 'print']
-        )
-
-    @parameterized.expand(HedyTester.quotes)
-    def test_if_quoted_text_in_list_print(self, q):
-        code = textwrap.dedent(f"""\
-        items is red, green
-        if {q}red{q} in items print 'found!'""")
-
-        expected = textwrap.dedent(f"""\
-        items = ['red', 'green']
-        if {self.in_list_transpiled(f"'red'", 'items')}:
-          print(f'found!')""")
-
-        self.single_level_tester(
-            code=code,
-            expected=expected,
-            output='found!',
-            expected_commands=['is', 'if', 'in', 'print']
-        )
-
-    @parameterized.expand(HedyTester.quotes)
-    def test_if_quoted_text_not_in_list_print(self, q):
-        code = textwrap.dedent(f"""\
-        items is red, green
-        if {q}blue{q} not in items print 'not found!'""")
-
-        expected = textwrap.dedent(f"""\
-        items = ['red', 'green']
-        if {self.not_in_list_transpiled(f"'blue'", 'items')}:
-          print(f'not found!')""")
-
-        self.single_level_tester(
-            code=code,
-            expected=expected,
-            output='not found!'
-        )
-
-    def test_if_in_undefined_list(self):
-        code = textwrap.dedent("""\
-        selected is red
-        if selected in items print 'found!'""")
-
-        self.multi_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException, max_level=7)
-
-    def test_if_ar_numbers_list_with_latin_numbers(self):
-        code = textwrap.dedent("""\
-        a is 11, 22, 33
-        if ١١ in a print 'correct'""")
-
-        expected = textwrap.dedent(f"""\
-        a = ['11', '22', '33']
-        if {self.in_list_transpiled("'١١'", 'a')}:
           print(f'correct')""")
 
         self.single_level_tester(code=code, expected=expected, output='correct')
@@ -386,6 +277,7 @@ class TestsLevel5(HedyTester):
         self.single_level_tester(code=code, expected=expected, unused_allowed=True)
 
     def test_equality_with_lists_gives_error(self):
+        # Lists can be compared for equality starting with level 14
         code = textwrap.dedent("""\
         n is 1, 2
         m is 1, 2
@@ -756,6 +648,128 @@ class TestsLevel5(HedyTester):
             max_level=7,
             skip_faulty=False
         )
+
+    #
+    # in/not in tests
+    #
+    def test_if_var_in_list_print(self):
+        code = textwrap.dedent("""\
+        items is red, green
+        selected is red
+        if selected in items print 'found!'""")
+
+        expected = textwrap.dedent(f"""\
+        items = ['red', 'green']
+        selected = 'red'
+        if {self.in_list_transpiled('selected', 'items')}:
+          print(f'found!')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output='found!',
+            expected_commands=['is', 'is', 'if', 'in', 'print']
+        )
+
+    def test_if_var_in_list_print_else(self):
+        code = textwrap.dedent("""\
+        items is red, green
+        selected is red
+        if selected in items print 'found!'
+        else print 'not found'""")
+
+        expected = textwrap.dedent(f"""\
+        items = ['red', 'green']
+        selected = 'red'
+        if {self.in_list_transpiled('selected', 'items')}:
+          print(f'found!')
+        else:
+          print(f'not found')""")
+
+        self.single_level_tester(code=code, expected=expected, output='found!')
+
+    def test_if_var_not_in_list_print_else(self):
+        code = textwrap.dedent("""\
+        items is red, green
+        selected is purple
+        if selected not in items print 'not found!'
+        else print 'found'""")
+
+        expected = textwrap.dedent(f"""\
+        items = ['red', 'green']
+        selected = 'purple'
+        if {self.not_in_list_transpiled('selected', 'items')}:
+          print(f'not found!')
+        else:
+          print(f'found')""")
+
+        self.single_level_tester(code=code, expected=expected, output='not found!')
+
+    def test_if_ar_number_list_with_latin_numbers(self):
+        code = textwrap.dedent("""\
+        a is 11, 22, 33
+        if ١١ in a print 'correct'""")
+
+        expected = textwrap.dedent(f"""\
+        a = ['11', '22', '33']
+        if {self.in_list_transpiled("'١١'", 'a')}:
+          print(f'correct')""")
+
+        self.single_level_tester(code=code, expected=expected, output='correct')
+
+    def test_if_ar_number_not_list_with_latin_numbers(self):
+        code = textwrap.dedent("""\
+        a is 22, 33, 44
+        if ١١ not in a print 'correct'""")
+
+        expected = textwrap.dedent(f"""\
+        a = ['22', '33', '44']
+        if {self.not_in_list_transpiled("'١١'", 'a')}:
+          print(f'correct')""")
+
+        self.single_level_tester(code=code, expected=expected, output='correct')
+
+    @parameterized.expand(HedyTester.quotes)
+    def test_if_quoted_text_in_list_print(self, q):
+        code = textwrap.dedent(f"""\
+        items is red, green
+        if {q}red{q} in items print 'found!'""")
+
+        expected = textwrap.dedent(f"""\
+        items = ['red', 'green']
+        if {self.in_list_transpiled(f"'red'", 'items')}:
+          print(f'found!')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output='found!',
+            expected_commands=['is', 'if', 'in', 'print']
+        )
+
+    @parameterized.expand(HedyTester.quotes)
+    def test_if_quoted_text_not_in_list_print(self, q):
+        code = textwrap.dedent(f"""\
+        items is red, green
+        if {q}blue{q} not in items print 'not found!'""")
+
+        expected = textwrap.dedent(f"""\
+        items = ['red', 'green']
+        if {self.not_in_list_transpiled(f"'blue'", 'items')}:
+          print(f'not found!')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output='not found!'
+        )
+
+    def test_if_in_undefined_list(self):
+        code = textwrap.dedent("""\
+        selected is red
+        if selected in items print 'found!'""")
+
+        self.multi_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException, max_level=7)
 
     #
     # combined tests
