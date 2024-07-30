@@ -34,8 +34,8 @@ export function login(username, password) {
 
 export function logout()
 {
-    cy.intercept('/auth/logout').as('logout')    
-    goToHome();
+    cy.intercept('/auth/logout').as('logout')
+    goToHome();            
     cy.getDataCy('user_dropdown').click()
     cy.getDataCy('logout_button').click()
     cy.wait('@logout')

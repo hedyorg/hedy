@@ -815,8 +815,7 @@ class ForTeachersModule(WebsiteModule):
                               available_adventures=available_adventures,
                               class_id=session['class_id'])
 
-    @staticmethod
-    def migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden):
+    def migrate_quizzes_parsons_tabs(self, customizations, parsons_hidden, quizzes_hidden):
         """If the puzzles/quizzes were not migrated yet which is possible if the teacher didn't tweak
             the class customizations, if this is the case, we need to add them if possible."""
         migrated = customizations.get("quiz_parsons_tabs_migrated")
@@ -840,7 +839,7 @@ class ForTeachersModule(WebsiteModule):
 
             # Mark current customization as being migrated so that we don't do this step next time.
             customizations["quiz_parsons_tabs_migrated"] = 1
-            Database.update_class_customizations(Database, customizations)
+            self.db.update_class_customizations(customizations)
 
     def get_class_info(self, user, class_id, get_customizations=False):
         if hedy_content.Adventures(g.lang).has_adventures():

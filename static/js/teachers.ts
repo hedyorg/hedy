@@ -8,6 +8,7 @@ import { initializeTranslation } from './lezer-parsers/tokens';
 import { CustomWindow } from './custom-window';
 import { addCurlyBracesToCode, addCurlyBracesToKeyword } from './adventure';
 import { autoSave } from './autosave';
+import { HedySelect } from './custom-elements';
 import { Chart } from 'chart.js';
 
 declare const htmx: typeof import('./htmx');
@@ -235,19 +236,13 @@ function get_formatted_content(content: string, levels: string[], language: stri
 function update_db_adventure(adventure_id: string) {
   // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
   const adventure_name = $('#custom_adventure_name').val();
-  let classes: string[] = [];
-  let levels: string[] = []
-
-  document.querySelectorAll('#levels_dropdown > .option.selected').forEach((el) => {
-    levels.push(el.getAttribute("data-value") as string)
-  })
-
-  document.querySelectorAll('#classes_dropdown > .option.selected').forEach((el) => {
-    classes.push(el.getAttribute("data-value") as string)
-  })
-
-  const language = document.querySelector('#languages_dropdown> .option.selected')!.getAttribute('data-value') as string
-
+  const levels = (document.querySelector('#levels_dropdown') as HedySelect).selected
+  const classes = (document.querySelector('#classes_dropdown') as HedySelect).selected
+  const language = (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
+  if(levels.length === 0) {
+    modal.notifyError(ClientMessages['one_level_error']);
+    return;
+  }
   const content = DOMPurify.sanitize(window.ckEditor.getData());
   const solutionExampleCode = DOMPurify.sanitize(window.ckSolutionEditor.getData());
   
