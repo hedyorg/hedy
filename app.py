@@ -2945,7 +2945,7 @@ if __name__ == '__main__':
     # own file loading routines also hot-reload.
     no_debug_mode_requested = os.getenv('NO_DEBUG_MODE')
     utils.set_debug_mode(not no_debug_mode_requested)
-
+    utils.limiter.init_app(app)
     if utils.is_offline_mode():
         on_offline_mode()
 
