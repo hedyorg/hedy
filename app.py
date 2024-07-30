@@ -112,13 +112,6 @@ SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
 for lang in ALL_LANGUAGES.keys():
     SLIDES[lang] = hedy_content.Slides(lang)
 
-ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
-DATABASE = database.Database()
-ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
-SURVEYS = surveys.SurveysModule(DATABASE)
-STATISTICS = statistics.StatisticsModule(DATABASE)
-AUTH_MODULE = auth_pages.AuthModule(DATABASE)
-FOR_TEACHERS = for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS, AUTH_MODULE)
 TAGS = collections.defaultdict(hedy_content.NoSuchAdventure)
 for lang in ALL_LANGUAGES.keys():
     TAGS[lang] = hedy_content.Tags(lang)
@@ -1547,7 +1540,7 @@ def index(level, program_id):
     quizzes_hidden = 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']
 
     if customizations:
-        for_teachers.ForTeachersModule.migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden)
+        FOR_TEACHERS.migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden)
 
     parsons_in_level = True
     quiz_in_level = True
@@ -1744,7 +1737,7 @@ def get_specific_adventure(name, level, mode):
             user = current_user()
         adventure = None
         if user and is_teacher(user):
-            adventure = database.ADVENTURES.get({"name": name, "creator": user["username"]})
+            adventure = DATABASE.get_adventure_by_creator_and_name(name, user['username'])
 
         if not adventure:
             return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
@@ -2806,25 +2799,6 @@ def current_user_allowed_to_see_program(program):
     return False
 
 
-app.register_blueprint(auth_pages.AuthModule(DATABASE))
-app.register_blueprint(profile.ProfileModule(DATABASE))
-app.register_blueprint(programs.ProgramsModule(DATABASE, ACHIEVEMENTS, FOR_TEACHERS))
-app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS, AUTH_MODULE))
-app.register_blueprint(classes.ClassModule(DATABASE, ACHIEVEMENTS))
-app.register_blueprint(classes.MiscClassPages(DATABASE, ACHIEVEMENTS))
-app.register_blueprint(super_teacher.SuperTeacherModule(DATABASE))
-app.register_blueprint(admin.AdminModule(DATABASE))
-app.register_blueprint(achievements.AchievementsModule(ACHIEVEMENTS))
-app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))
-app.register_blueprint(parsons.ParsonsModule(PARSONS))
-app.register_blueprint(statistics.StatisticsModule(DATABASE))
-app.register_blueprint(user_activity.UserActivityModule(DATABASE))
-app.register_blueprint(tags.TagsModule(DATABASE, ACHIEVEMENTS))
-app.register_blueprint(public_adventures.PublicAdventuresModule(DATABASE, ACHIEVEMENTS))
-app.register_blueprint(surveys.SurveysModule(DATABASE))
-app.register_blueprint(feedback.FeedbackModule(DATABASE))
-
-
 # *** START SERVER ***
 
 
@@ -2945,6 +2919,32 @@ if __name__ == '__main__':
     # own file loading routines also hot-reload.
     no_debug_mode_requested = os.getenv('NO_DEBUG_MODE')
     utils.set_debug_mode(not no_debug_mode_requested)
+
+    DATABASE = database.Database()
+    AUTH_MODULE = auth_pages.AuthModule(DATABASE)
+    ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
+    ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
+    SURVEYS = surveys.SurveysModule(DATABASE)
+    STATISTICS = statistics.StatisticsModule(DATABASE)
+    FOR_TEACHERS = for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS, AUTH_MODULE)
+
+    app.register_blueprint(auth_pages.AuthModule(DATABASE))
+    app.register_blueprint(profile.ProfileModule(DATABASE))
+    app.register_blueprint(programs.ProgramsModule(DATABASE, ACHIEVEMENTS, FOR_TEACHERS))
+    app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS, AUTH_MODULE))
+    app.register_blueprint(classes.ClassModule(DATABASE, ACHIEVEMENTS))
+    app.register_blueprint(classes.MiscClassPages(DATABASE, ACHIEVEMENTS))
+    app.register_blueprint(super_teacher.SuperTeacherModule(DATABASE))
+    app.register_blueprint(admin.AdminModule(DATABASE))
+    app.register_blueprint(achievements.AchievementsModule(ACHIEVEMENTS))
+    app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))
+    app.register_blueprint(parsons.ParsonsModule(PARSONS))
+    app.register_blueprint(statistics.StatisticsModule(DATABASE))
+    app.register_blueprint(user_activity.UserActivityModule(DATABASE))
+    app.register_blueprint(tags.TagsModule(DATABASE, ACHIEVEMENTS))
+    app.register_blueprint(public_adventures.PublicAdventuresModule(DATABASE, ACHIEVEMENTS))
+    app.register_blueprint(surveys.SurveysModule(DATABASE))
+    app.register_blueprint(feedback.FeedbackModule(DATABASE))
 
     if utils.is_offline_mode():
         on_offline_mode()
