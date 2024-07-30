@@ -26,6 +26,8 @@ ADDITIONAL_GETTEXT_KEYS = [
     'adventures_restored',
     'multiple_keywords_warning',
     'selected',
+    'select_all',
+    'one_level_error',
     'adventures_tried',
     'graph_title',
     'errors',
