@@ -555,10 +555,10 @@ class Database:
         return class_errors
 
     def add_certificate_to_user(self, username):
-        return self.db.update({"username": username}, {"certificate": True})
+        return self.users.update({"username": username}, {"certificate": True})
 
     def achievements_by_username(self, username):
-        return self.db.get({"username": username})
+        return self.achievements.get({"username": username})
 
     def increase_user_program_count(self, username, delta=1):
         """Increase the program count of a user by the given delta."""
