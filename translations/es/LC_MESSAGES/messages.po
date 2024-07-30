@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-06-19 19:09+0000\n"
+"PO-Revision-Date: 2024-07-08 10:20+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: es <LL@li.org>\n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6-rc\n"
+"X-Generator: Weblate 5.7-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -47,6 +47,7 @@ msgstr "¡Oops! ¡Has olvidado una parte de código! En la línea {line_number},
 msgid "Incomplete Repeat"
 msgstr "Parece que olvidaste usar un `{command}` con el comando `{repeat}` que usaste en la línea {line_number}."
 
+#, fuzzy
 msgid "Invalid"
 msgstr "`{invalid_command}` no es un comando de Hedy en nivel {level}. ¿Querías decir `{guessed_command}`?"
 
@@ -74,6 +75,7 @@ msgstr "No puedes usar `{invalid_argument}` y `{invalid_argument_2}` con `{comma
 msgid "Lonely Echo"
 msgstr "Has utilizado un `{echo}` antes de un `{ask}`, o un `{echo}` sin un `{ask}`. Coloca un `{ask}` antes del `{echo}`."
 
+#, fuzzy
 msgid "Lonely Text"
 msgstr "Parece que olvidaste usar un comando con el texto que pusiste en la línea {line_number}"
 
@@ -81,6 +83,7 @@ msgstr "Parece que olvidaste usar un comando con el texto que pusiste en la lín
 msgid "Missing Additional Command"
 msgstr "Parece que olvidaste terminar de escribir `{command}` en la línea {line_number}. Intenta añadir `{missing_command}` a tu código."
 
+#, fuzzy
 msgid "Missing Colon Error"
 msgstr "A partir del nivel 17, `{command}` necesita un `:`. Parece que olvidaste usar uno al final de la línea {line_number}."
 
@@ -92,6 +95,7 @@ msgstr "Parece que has olvidado de usar un comando en la línea {line_number}."
 msgid "Missing Inner Command"
 msgstr "Parece que has olvidad usar un comando en el `{command}` que has usado en la línea {line_number}."
 
+#, fuzzy
 msgid "Missing Square Brackets"
 msgstr "Parece que olvidaste usar corchetes `[]` alrededor de la lista que estabas creando en la línea {line_number}."
 
@@ -166,6 +170,7 @@ msgstr "¡Ten cuidado! Si `{ask}` o `{print}` algo, el texto debe estar rodeado 
 msgid "Unsupported Float"
 msgstr "Números no enteros no se soportan pero estarán disponibles en unos niveles. De momento, cambia `{value}` a un entero."
 
+#, fuzzy
 msgid "Unsupported String Value"
 msgstr "El texto no puede contener `{invalid_value}`."
 
@@ -317,12 +322,6 @@ msgstr "Ya tienes una cuenta de profesor."
 msgid "already_teacher_request"
 msgstr "Ya tienes una solicitud de profesor pendiente."
 
-msgid "amount_created"
-msgstr "programas creados"
-
-msgid "amount_saved"
-msgstr "programas guardados"
-
 msgid "amount_submitted"
 msgstr "programas enviados"
 
@@ -331,9 +330,6 @@ msgstr "¿Estás segura/o? No puedes revertir esta acción."
 
 msgid "ask_needs_var"
 msgstr "A partir del nivel 2, `{ask}` debe utilizarse con una variable. Ejemplo: nombre `{is}` `{ask}` ¿Cómo te llamas?"
-
-msgid "available_in"
-msgstr "Disponible en:"
 
 msgid "become_a_sponsor"
 msgstr "Conviértete en patrocinador"
@@ -435,9 +431,6 @@ msgstr "El comando ya no es correcto"
 
 msgid "commands"
 msgstr "Comandos"
-
-msgid "common_errors"
-msgstr "Errores comunes"
 
 msgid "congrats_message"
 msgstr "¡Felicitaciones, {username}, has alcanzado los siguientes resultados con Hedy!"
@@ -798,9 +791,6 @@ msgstr "Ir a mi perfil"
 msgid "graph_title"
 msgstr "Errors per adventure completed on level {level}"
 
-msgid "grid_overview"
-msgstr "Vista general de los programas por aventura"
-
 msgid "hand_in"
 msgstr "Entregar"
 
@@ -964,12 +954,6 @@ msgstr "Último logro"
 msgid "last_edited"
 msgstr "Última edición"
 
-msgid "last_error"
-msgstr "Último error"
-
-msgid "last_program"
-msgstr "Último programa"
-
 msgid "last_update"
 msgstr "Última actualización"
 
@@ -1012,9 +996,6 @@ msgstr "una lista"
 #, fuzzy
 msgid "list_variable_role"
 msgstr "list"
-
-msgid "live_dashboard"
-msgstr "Panel de control en directo"
 
 msgid "logged_in_to_share"
 msgstr "Debe iniciar sesión para guardar y compartir un programa."
@@ -1376,6 +1357,10 @@ msgstr "Lenguaje favorito"
 msgid "preview"
 msgstr "Previsualizar"
 
+#, fuzzy
+msgid "preview_teacher_mode"
+msgstr "This account is for you to try out Hedy, note that you need to sign out and create an actual account to save your progress."
+
 msgid "previewing_adventure"
 msgstr "Previsualizar la aventura"
 
@@ -1570,9 +1555,6 @@ msgstr "Papel"
 msgid "run_code_button"
 msgstr "Ejecutar código"
 
-msgid "runs_over_time"
-msgstr "Se ejecuta en el tiempo"
-
 msgid "save_parse_warning"
 msgstr "Tu programa contiene un error. ¿Estás seguro/a de que quieres guardarlo?"
 
@@ -1672,6 +1654,14 @@ msgstr "¡Estas son diapositivas que hemos creado para ayudarte a enseñar con H
 msgid "social_media"
 msgstr "Redes sociales"
 
+#, fuzzy
+msgid "solution_example"
+msgstr "Solution Example"
+
+#, fuzzy
+msgid "solution_example_explanation"
+msgstr "This is where the solution of your adventure goes. This can be used if you want to share this adventure with other teacher's, so they can know what your suggested solution is."
+
 msgid "something_went_wrong_keyword_parsing"
 msgstr "Hay un problema en tu aventura, ¿están todas las palabras clave correctamente rodeadas por { }?"
 
@@ -1724,9 +1714,6 @@ msgstr "Este estudiante ya está en tu clase."
 msgid "student_already_invite"
 msgstr "Este estudiante ya tiene una invitación pendiente."
 
-msgid "student_details"
-msgstr "Datos de los alumnos"
-
 msgid "student_not_allowed_in_class"
 msgstr "El alumno no autorizado en la clase"
 
@@ -1770,6 +1757,7 @@ msgstr "Successful runs: {successful_runs}"
 msgid "suggestion_color"
 msgstr "Intenta usar otro color"
 
+#, fuzzy
 msgid "suggestion_note"
 msgstr "Utilice una nota entre C0 y B9 o un número entre 1 y 70"
 
@@ -2248,4 +2236,28 @@ msgstr "Tu programa"
 
 #~ msgid "variables"
 #~ msgstr "Variables"
+
+#~ msgid "available_in"
+#~ msgstr "Disponible en:"
+
+#~ msgid "common_errors"
+#~ msgstr "Errores comunes"
+
+#~ msgid "grid_overview"
+#~ msgstr "Vista general de los programas por aventura"
+
+#~ msgid "last_error"
+#~ msgstr "Último error"
+
+#~ msgid "last_program"
+#~ msgstr "Último programa"
+
+#~ msgid "live_dashboard"
+#~ msgstr "Panel de control en directo"
+
+#~ msgid "runs_over_time"
+#~ msgstr "Se ejecuta en el tiempo"
+
+#~ msgid "student_details"
+#~ msgstr "Datos de los alumnos"
 

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-06-19 19:09+0000\n"
+"PO-Revision-Date: 2024-07-08 10:20+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: sv <LL@li.org>\n"
 "Language: sv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6-rc\n"
+"X-Generator: Weblate 5.7-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -47,6 +47,7 @@ msgstr "Hoppsan! Du glömde lite kod! På rad {line_number} måste du ange text 
 msgid "Incomplete Repeat"
 msgstr "Du verkar ha glömt att använda ett kommando med `{repeat}`-kommandot som du använde på rad {line_number}."
 
+#, fuzzy
 msgid "Invalid"
 msgstr "`{invalid_command}` är inte ett Hedy-kommando på nivå {level}. Menade du `{guessed_command}`?"
 
@@ -74,6 +75,7 @@ msgstr "Du kan inte använda `{invalid_argument}` och `{invalid_argument_2}` med
 msgid "Lonely Echo"
 msgstr "Du använde `{echo}` före `{ask}`, eller `{echo}` utan något `{ask}`. Skriv `{ask}` före `{echo}`."
 
+#, fuzzy
 msgid "Lonely Text"
 msgstr "Du verkar ha glömt att använda ett kommando ihop med texten du använde på rad {line_number}"
 
@@ -93,6 +95,7 @@ msgstr "Du verkar ha glömt att använda ett kommando på rad {line_number}."
 msgid "Missing Inner Command"
 msgstr "Du verkar ha glömt ett kommando ihop med `{command}` som du använde på rad {line_number}."
 
+#, fuzzy
 msgid "Missing Square Brackets"
 msgstr "It looks like you forgot to use square brackets `[]` around the list you were creating on line {line_number}."
 
@@ -168,6 +171,7 @@ msgstr "Var försiktig. Om du `{ask}` eller `{print}` något ska texten börja o
 msgid "Unsupported Float"
 msgstr "Icke-heltal stöds inte än, men kommer att finnas några nivåer högre upp. Ändra `{value}` till ett heltal för tillfället."
 
+#, fuzzy
 msgid "Unsupported String Value"
 msgstr "Textvärden kan inte innehålla `{invalid_value}`."
 
@@ -330,12 +334,6 @@ msgstr "Du har redan ett lärarkonto."
 msgid "already_teacher_request"
 msgstr "Du har redan en väntande lärarförfrågan."
 
-msgid "amount_created"
-msgstr "skapade program"
-
-msgid "amount_saved"
-msgstr "sparade program"
-
 msgid "amount_submitted"
 msgstr "program som lämnats in"
 
@@ -344,10 +342,6 @@ msgstr "Är du säker? Du kan inte ångra den här åtgärden."
 
 msgid "ask_needs_var"
 msgstr "Från och med nivå 2 måste `{ask}` användas med en variabel. Exempel: namn `{is}` `{ask}` Vad heter du?"
-
-#, fuzzy
-msgid "available_in"
-msgstr "Available in:"
 
 msgid "become_a_sponsor"
 msgstr "Bli sponsor"
@@ -460,9 +454,6 @@ msgstr "Kommandot är inte korrekt längre"
 
 msgid "commands"
 msgstr "Kommandon"
-
-msgid "common_errors"
-msgstr "Vanliga fel"
 
 msgid "congrats_message"
 msgstr "Grattis, {username}, du har nått följande resultat med Hedy!"
@@ -839,9 +830,6 @@ msgstr "Gå till min profil"
 msgid "graph_title"
 msgstr "Errors per adventure completed on level {level}"
 
-msgid "grid_overview"
-msgstr "Översikt över program per äventyr"
-
 msgid "hand_in"
 msgstr "Lämna in"
 
@@ -1019,14 +1007,6 @@ msgstr "Senast uppnådda prestation"
 msgid "last_edited"
 msgstr "Senast ändrad"
 
-#, fuzzy
-msgid "last_error"
-msgstr "Last error"
-
-#, fuzzy
-msgid "last_program"
-msgstr "Last program"
-
 msgid "last_update"
 msgstr "Senaste uppdatering"
 
@@ -1071,10 +1051,6 @@ msgstr "en lista"
 #, fuzzy
 msgid "list_variable_role"
 msgstr "list"
-
-#, fuzzy
-msgid "live_dashboard"
-msgstr "Live Dashboard"
 
 msgid "logged_in_to_share"
 msgstr "Du måste vara inloggad för att spara och dela ett program."
@@ -1447,6 +1423,10 @@ msgid "preview"
 msgstr "Förhandsgranskning"
 
 #, fuzzy
+msgid "preview_teacher_mode"
+msgstr "This account is for you to try out Hedy, note that you need to sign out and create an actual account to save your progress."
+
+#, fuzzy
 msgid "previewing_adventure"
 msgstr "Previewing adventure"
 
@@ -1649,10 +1629,6 @@ msgstr "Role"
 msgid "run_code_button"
 msgstr "Kör kod"
 
-#, fuzzy
-msgid "runs_over_time"
-msgstr "Runs over time"
-
 msgid "save_parse_warning"
 msgstr "Programmet har ett fel; är du säker på att du vill spara det?"
 
@@ -1762,6 +1738,14 @@ msgstr "For each level of Hedy, we have created slides to help you teach. The sl
 msgid "social_media"
 msgstr "Sociala medier"
 
+#, fuzzy
+msgid "solution_example"
+msgstr "Solution Example"
+
+#, fuzzy
+msgid "solution_example_explanation"
+msgstr "This is where the solution of your adventure goes. This can be used if you want to share this adventure with other teacher's, so they can know what your suggested solution is."
+
 msgid "something_went_wrong_keyword_parsing"
 msgstr "Det finns ett misstag i ditt äventyr; är alla nyckelord skrivna inom { }?"
 
@@ -1816,10 +1800,6 @@ msgstr "Den här eleven går redan i din klass."
 
 msgid "student_already_invite"
 msgstr "Eleven har redan en väntande inbjudan."
-
-#, fuzzy
-msgid "student_details"
-msgstr "Student details"
 
 #, fuzzy
 msgid "student_not_allowed_in_class"
@@ -2381,4 +2361,28 @@ msgstr "Ditt program"
 
 #~ msgid "title_class live_statistics"
 #~ msgstr "Hedy - Live Statistics"
+
+#~ msgid "available_in"
+#~ msgstr "Available in:"
+
+#~ msgid "common_errors"
+#~ msgstr "Vanliga fel"
+
+#~ msgid "grid_overview"
+#~ msgstr "Översikt över program per äventyr"
+
+#~ msgid "last_error"
+#~ msgstr "Last error"
+
+#~ msgid "last_program"
+#~ msgstr "Last program"
+
+#~ msgid "live_dashboard"
+#~ msgstr "Live Dashboard"
+
+#~ msgid "runs_over_time"
+#~ msgstr "Runs over time"
+
+#~ msgid "student_details"
+#~ msgstr "Student details"
 

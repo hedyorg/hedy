@@ -251,6 +251,9 @@ def load_customized_adventures(level, customizations, into_adventures):
                 else:
                     db_row['content'] = safe_format(db_row['content'],
                                                     **hedy_content.KEYWORDS.get(g.keyword_lang))
+                if 'solution_example' in db_row:
+                    db_row['solution_example'] = safe_format(db_row['solution_example'],
+                                                             **hedy_content.KEYWORDS.get(g.keyword_lang))
             except Exception:
                 # We don't want teacher being able to break the student UI -> pass this adventure
                 pass
@@ -1769,7 +1772,7 @@ def get_specific_adventure(name, level, mode):
                            level=level,
                            prev_level=prev_level,
                            next_level=next_level,
-                           #    max_level=max_level,
+                           max_level=hedy.HEDY_MAX_LEVEL,
                            customizations=customizations,
                            hide_cheatsheet=None,
                            enforce_developers_mode=None,
@@ -2116,9 +2119,15 @@ def landing_page(user, first):
 
     user_info = DATABASE.get_public_profile_settings(username)
     user_programs = DATABASE.programs_for_user(username)
+    programs = list(user_programs)
     # Only return the last program of the user
-    if user_programs:
-        user_programs = user_programs[:1][0]
+    last_program = None
+    if programs:
+        last_program = programs[:1][0]
+        for program in programs:
+            if not (program.get('is_modified') or 'is_modified' not in program):
+                programs.remove(program)
+
     user_achievements = DATABASE.progress_by_username(username)
 
     return render_template(
@@ -2127,7 +2136,8 @@ def landing_page(user, first):
         page_title=gettext('title_landing-page'),
         user=user['username'],
         user_info=user_info,
-        program=user_programs,
+        programs=programs,
+        last_program=last_program,
         achievements=user_achievements)
 
 
@@ -2911,16 +2921,17 @@ if __name__ == '__main__':
     utils.set_debug_mode(not no_debug_mode_requested)
 
     DATABASE = database.Database()
+    AUTH_MODULE = auth_pages.AuthModule(DATABASE)
     ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
     ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
     SURVEYS = surveys.SurveysModule(DATABASE)
     STATISTICS = statistics.StatisticsModule(DATABASE)
-    FOR_TEACHERS = for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS)
+    FOR_TEACHERS = for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS, AUTH_MODULE)
 
     app.register_blueprint(auth_pages.AuthModule(DATABASE))
     app.register_blueprint(profile.ProfileModule(DATABASE))
     app.register_blueprint(programs.ProgramsModule(DATABASE, ACHIEVEMENTS, FOR_TEACHERS))
-    app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS))
+    app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS, AUTH_MODULE))
     app.register_blueprint(classes.ClassModule(DATABASE, ACHIEVEMENTS))
     app.register_blueprint(classes.MiscClassPages(DATABASE, ACHIEVEMENTS))
     app.register_blueprint(super_teacher.SuperTeacherModule(DATABASE))

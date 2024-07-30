@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-06-19 19:09+0000\n"
+"PO-Revision-Date: 2024-07-08 10:20+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: ru <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.6-rc\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.7-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -47,6 +48,7 @@ msgstr "Ой-ой! На строке {line_number} нужно дописать �
 msgid "Incomplete Repeat"
 msgstr "Похоже вы забыли использовать какую-нибудь ещё команду вместе с командой `{repeat}` на строке {line_number}."
 
+#, fuzzy
 msgid "Invalid"
 msgstr "`{invalid_command}` - это не команда Хеди с уровня {level}. Может вы имели ввиду `{guessed_command}`?"
 
@@ -74,6 +76,7 @@ msgstr "Вы не можете использовать `{invalid_argument}` и 
 msgid "Lonely Echo"
 msgstr "Вы использовали команду `{echo}` до команды `{ask}` или `{echo}` без `{ask}`. Вставьте `{ask}` до команды `{echo}`."
 
+#, fuzzy
 msgid "Lonely Text"
 msgstr "Кажется, вы забыли использовать команду вместе с текстом, написанным на строке {line_number}"
 
@@ -93,6 +96,7 @@ msgstr "Кажется, вы забыли использовать команд�
 msgid "Missing Inner Command"
 msgstr "Кажется, вы забыли использовать команду с выражением `{command}` на строке {line_number}."
 
+#, fuzzy
 msgid "Missing Square Brackets"
 msgstr "It looks like you forgot to use square brackets `[]` around the list you were creating on line {line_number}."
 
@@ -168,6 +172,7 @@ msgstr "Будьте внимательны. Если вы `{ask}` или `{prin
 msgid "Unsupported Float"
 msgstr "Нецелые числа пока не поддерживаются, но будут поддерживаться через несколько уровней. Пока измените `{value}` на целое число."
 
+#, fuzzy
 msgid "Unsupported String Value"
 msgstr "Текстовые значения не могут содержать `{invalid_value}`."
 
@@ -330,12 +335,6 @@ msgstr "У вас уже есть преподавательская учётн�
 msgid "already_teacher_request"
 msgstr "Вы уже запросили преподавательскую учётную запись."
 
-msgid "amount_created"
-msgstr "созданных программ"
-
-msgid "amount_saved"
-msgstr "сохранённых программ"
-
 msgid "amount_submitted"
 msgstr "представленных программ"
 
@@ -344,10 +343,6 @@ msgstr "Вы уверены? Это действие невозможно буд
 
 msgid "ask_needs_var"
 msgstr "Начиная со второго уровня, `{ask}` нужно использовать с переменной. Пример: имя `{is}` `{ask}` Как тебя зовут?"
-
-#, fuzzy
-msgid "available_in"
-msgstr "Available in:"
 
 msgid "become_a_sponsor"
 msgstr "Станьте спонсором"
@@ -463,10 +458,6 @@ msgstr "Command not correct anymore"
 
 msgid "commands"
 msgstr "Команды"
-
-#, fuzzy
-msgid "common_errors"
-msgstr "Common errors"
 
 msgid "congrats_message"
 msgstr "Поздравляем, {username}, вы завершили Hedy!"
@@ -846,10 +837,6 @@ msgstr "Перейти в мой профиль"
 msgid "graph_title"
 msgstr "Errors per adventure completed on level {level}"
 
-#, fuzzy
-msgid "grid_overview"
-msgstr "Overview of programs per adventure"
-
 msgid "hand_in"
 msgstr "Вручить"
 
@@ -1028,14 +1015,6 @@ msgstr "Последнее полученное достижение"
 msgid "last_edited"
 msgstr "Последнее редактирование"
 
-#, fuzzy
-msgid "last_error"
-msgstr "Last error"
-
-#, fuzzy
-msgid "last_program"
-msgstr "Last program"
-
 msgid "last_update"
 msgstr "Последнее обновление"
 
@@ -1082,10 +1061,6 @@ msgstr "список"
 #, fuzzy
 msgid "list_variable_role"
 msgstr "list"
-
-#, fuzzy
-msgid "live_dashboard"
-msgstr "Live Dashboard"
 
 msgid "logged_in_to_share"
 msgstr "Вы должны войти в систему, чтобы сохранить и поделиться программой."
@@ -1460,6 +1435,10 @@ msgid "preview"
 msgstr "Предварительный просмотр"
 
 #, fuzzy
+msgid "preview_teacher_mode"
+msgstr "This account is for you to try out Hedy, note that you need to sign out and create an actual account to save your progress."
+
+#, fuzzy
 msgid "previewing_adventure"
 msgstr "Previewing adventure"
 
@@ -1663,10 +1642,6 @@ msgstr "Role"
 msgid "run_code_button"
 msgstr "Выполнить код"
 
-#, fuzzy
-msgid "runs_over_time"
-msgstr "Runs over time"
-
 msgid "save_parse_warning"
 msgstr "Эта программа содержит ошибку, вы уверены, что хотите сохранить ее?"
 
@@ -1776,6 +1751,14 @@ msgstr "For each level of Hedy, we have created slides to help you teach. The sl
 msgid "social_media"
 msgstr "Социальные сети"
 
+#, fuzzy
+msgid "solution_example"
+msgstr "Solution Example"
+
+#, fuzzy
+msgid "solution_example_explanation"
+msgstr "This is where the solution of your adventure goes. This can be used if you want to share this adventure with other teacher's, so they can know what your suggested solution is."
+
 msgid "something_went_wrong_keyword_parsing"
 msgstr "В вашем приключении есть ошибка, все ли ключевые слова правильно окружены { }?"
 
@@ -1830,10 +1813,6 @@ msgstr "Этот ученик уже учится в вашем классе."
 
 msgid "student_already_invite"
 msgstr "У этого студента уже есть ожидающее приглашение."
-
-#, fuzzy
-msgid "student_details"
-msgstr "Student details"
 
 #, fuzzy
 msgid "student_not_allowed_in_class"
@@ -2405,4 +2384,28 @@ msgstr "Ваша программа"
 
 #~ msgid "title_class live_statistics"
 #~ msgstr "Hedy - Live Statistics"
+
+#~ msgid "available_in"
+#~ msgstr "Available in:"
+
+#~ msgid "common_errors"
+#~ msgstr "Common errors"
+
+#~ msgid "grid_overview"
+#~ msgstr "Overview of programs per adventure"
+
+#~ msgid "last_error"
+#~ msgstr "Last error"
+
+#~ msgid "last_program"
+#~ msgstr "Last program"
+
+#~ msgid "live_dashboard"
+#~ msgstr "Live Dashboard"
+
+#~ msgid "runs_over_time"
+#~ msgstr "Runs over time"
+
+#~ msgid "student_details"
+#~ msgstr "Student details"
 

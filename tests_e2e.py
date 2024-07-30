@@ -170,7 +170,7 @@ class AuthHelper(unittest.TestCase):
 
         Need to log in again to refresh the session.
         """
-        self.post_data('admin/mark-as-teacher', {'username': self.username, 'is_teacher': True})
+        self.post_data('admin/mark-as-teacher/' + self.username, {'is_teacher': True})
         return self.login_user(self.username)
 
     def make_current_user_super_teacher(self):
@@ -178,7 +178,7 @@ class AuthHelper(unittest.TestCase):
 
         Need to log in again to refresh the session.
         """
-        self.post_data('admin/mark-super-teacher', {'username': self.username})
+        self.post_data('admin/mark-super-teacher/' + self.username, {})
         return self.login_user(self.username)
 
     def given_user_is_logged_in(self):
@@ -411,7 +411,7 @@ class TestSessionVariables(AuthHelper):
         self.assertIn('session', test_body)
         self.assertIn('session_id', test_body['session'])
         self.assertIn('test_session', test_body['session'])
-        self.assertEquals(test_body['session']['session_id'], session['id'])
+        self.assertEqual(test_body['session']['session_id'], session['id'])
 
         # WHEN getting session variables from the main environment
         body = self.get_data('/session_main')

@@ -37,7 +37,7 @@ from utils import timems, times, is_debug_mode
 from . import dynamo, auth
 from . import querylog
 
-from .dynamo import DictOf, Optional, ListOf, SetOf, RecordOf, EitherOf
+from .dynamo import DictOf, OptionalOf, ListOf, SetOf, RecordOf, EitherOf
 
 is_offline = getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
 if is_offline:
@@ -85,26 +85,26 @@ class Database:
                                   types=only_in_dev({
                                       'username': str,
                                       'password': str,
-                                      'email': Optional(str),
-                                      'language': Optional(str),
-                                      'keyword_language': Optional(str),
+                                      'email': OptionalOf(str),
+                                      'language': OptionalOf(str),
+                                      'keyword_language': OptionalOf(str),
                                       'created': int,
-                                      'is_teacher': Optional(int),
-                                      'verification_pending': Optional(str),
+                                      'is_teacher': OptionalOf(int),
+                                      'verification_pending': OptionalOf(str),
                                       'last_login': int,
-                                      'country': Optional(str),
-                                      'birth_year': Optional(int),
-                                      'gender': Optional(str),
-                                      'heard_about': Optional(ListOf(str)),
-                                      'prog_experience': Optional(str),
-                                      'experience_languages': Optional(ListOf(str)),
+                                      'country': OptionalOf(str),
+                                      'birth_year': OptionalOf(int),
+                                      'gender': OptionalOf(str),
+                                      'heard_about': OptionalOf(ListOf(str)),
+                                      'prog_experience': OptionalOf(str),
+                                      'experience_languages': OptionalOf(ListOf(str)),
                                       'epoch': int,
-                                      'second_teacher_in': Optional(ListOf(str)),
-                                      'classes': Optional(SetOf(str)),
-                                      'teacher': Optional(str),
-                                      'pair_with_teacher': Optional(int),
-                                      'teacher_request': Optional(bool),
-                                      'is_super_teacher': Optional(int)
+                                      'second_teacher_in': OptionalOf(ListOf(str)),
+                                      'classes': OptionalOf(SetOf(str)),
+                                      'teacher': OptionalOf(str),
+                                      'pair_with_teacher': OptionalOf(int),
+                                      'teacher_request': OptionalOf(bool),
+                                      'is_super_teacher': OptionalOf(int)
                                   }),
                                   indexes=[
                                       dynamo.Index('email'),
@@ -127,16 +127,16 @@ class Database:
                                          'session': str,
                                          'username': str,
                                          'date': int,
-                                         'hedy_choice': Optional(int),
-                                         'public': Optional(int),
+                                         'hedy_choice': OptionalOf(int),
+                                         'public': OptionalOf(int),
                                          'lang': str,
                                          'level': int,
                                          'code': str,
                                          'adventure_name': str,
                                          'name': str,
                                          'username_level': str,
-                                         'error': Optional(bool),
-                                         'is_modified': Optional(bool)
+                                         'error': OptionalOf(bool),
+                                         'is_modified': OptionalOf(bool)
                                      }),
                                      indexes=[
                                          dynamo.Index('username', sort_key='date', index_name='username-index'),
@@ -158,11 +158,11 @@ class Database:
                                         'link': str,
                                         'date': int,
                                         'name': str,
-                                        'second_teachers': Optional(ListOf(RecordOf({
+                                        'second_teachers': OptionalOf(ListOf(RecordOf({
                                             'role': str,
                                             'username': str,
                                         }))),
-                                        'students': Optional(SetOf(str)),
+                                        'students': OptionalOf(SetOf(str)),
                                     }),
                                     indexes=[
                                         dynamo.Index('teacher'),
@@ -185,13 +185,13 @@ class Database:
                                            'date': int,
                                            'creator': str,
                                            'name': str,
-                                           'classes': Optional(ListOf(str)),
+                                           'classes': OptionalOf(ListOf(str)),
                                            'level': EitherOf(str, int),  # this might be a string or a int
                                            'levels': ListOf(str),
                                            'content': str,
                                            'public': int,
                                            'language': str,
-                                           'formatted_content': Optional(str)
+                                           'formatted_content': OptionalOf(str)
                                        }),
                                        indexes=[
                                            dynamo.Index("creator"),
@@ -227,7 +227,7 @@ class Database:
                                      'id': str,
                                      'name': str,
                                      'popularity': int,
-                                     'tagged_in': Optional(ListOf(RecordOf({
+                                     'tagged_in': OptionalOf(ListOf(RecordOf({
                                          'id': str,
                                          'public': int,
                                          'language': str
@@ -246,7 +246,7 @@ class Database:
         self.surveys = dynamo.Table(storage, "surveys", "id",
                                     types=only_in_dev({
                                         'id': str,
-                                        'responses':  Optional(DictOf({
+                                        'responses':  OptionalOf(DictOf({
                                             str: RecordOf({
                                                 'answer': str,
                                                 'question': str
@@ -297,17 +297,17 @@ class Database:
                                                        'from_teacher': bool
                                                    }))
                                                }),
-                                               'updated_by': Optional(str),
-                                               'quiz_parsons_tabs_migrated': Optional(int)
+                                               'updated_by': OptionalOf(str),
+                                               'quiz_parsons_tabs_migrated': OptionalOf(int)
                                            }))
 
         self.achievements = dynamo.Table(storage, "achievements", partition_key="username",
                                          types=only_in_dev({
                                              'username': str,
-                                             'achieved': Optional(ListOf(str)),
-                                             'commands': Optional(ListOf(str)),
-                                             'saved_programs': Optional(int),
-                                             'run_programs': Optional(int)
+                                             'achieved': OptionalOf(ListOf(str)),
+                                             'commands': OptionalOf(ListOf(str)),
+                                             'saved_programs': OptionalOf(int),
+                                             'run_programs': OptionalOf(int)
                                          }))
         self.public_profiles = dynamo.Table(storage, "public_profiles", partition_key="username",
                                             types=only_in_dev({
@@ -315,7 +315,7 @@ class Database:
                                                 'image': str,
                                                 'personal_text': str,
                                                 'agree_terms': str,
-                                                'tags': Optional(ListOf(str))
+                                                'tags': OptionalOf(ListOf(str))
                                             }))
         self.parsons = dynamo.Table(storage, "parsons", "id",
                                     types=only_in_dev({
@@ -624,6 +624,19 @@ class Database:
         # Delete classes owned by the user
         for Class in self.get_teacher_classes(username, False):
             self.delete_class(Class)
+
+        # Delete possible adventures owned by the user
+        for adv in self.get_teacher_adventures(username):
+            self.delete_adventure(adv["id"])
+
+        # Delete possibly created public profile data
+        self.forget_public_profile(username)
+
+        # Delete programs stats
+        self.program_stats.del_many({"id": username})
+
+        # Delete existing achievements of the user
+        self.achievements.delete({"username": username})
 
     def all_users(self, page_token=None, limit=500):
         """Return a page from the users table.

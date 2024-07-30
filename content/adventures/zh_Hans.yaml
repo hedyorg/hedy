@@ -722,7 +722,7 @@ adventures:
                         {for} i {in} {range} 1 {to} 4
                             grade = {ask} _
                             total = total + _
-                            return _ / 4
+                            {return} _ / 4
 
                     mean_grade = {call} _
                     {print} '你的平均成绩是' mean_grade
@@ -1957,7 +1957,7 @@ adventures:
                     {define} 计算新价格 {with} 金额, 折扣
                         折扣 = 折扣 / 100
                         折扣金额 = 金额 * 折扣
-                        return 金额 - 折扣金额
+                        {return} 金额 - 折扣金额
 
                     之前的价格 = {ask} '标价上是多少钱?'
                     打折 = {ask} '有多少百分比的折扣?'
