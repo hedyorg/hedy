@@ -8,7 +8,8 @@ teachers.forEach((teacher) => {
     it(`${teacher } is able to preview class`, () => {
         loginForTeacher(teacher);
         // go to main hedy page in "normal mode"
-        cy.visit('/hedy/1#print_command')
+        cy.visit('/hedy/1#print_command');
+        cy.reload();
         // assert that no preview_class_banner is shown right now
         cy.getDataCy('preview_class_banner').should("not.exist");
 
@@ -31,8 +32,8 @@ teachers.forEach((teacher) => {
 
         // we now expect the normal situation to be restored
         goToHedyPage();
-        goToHedyPage();
-        cy.visit('/hedy/1#print_command')
+        cy.visit('/hedy/1#print_command');
+        cy.reload();
         cy.getDataCy('dropdown_adventure_button').should('contain.text', 'print');
         cy.getDataCy('preview_class_banner').should("not.exist");
     })

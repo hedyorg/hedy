@@ -1,6 +1,6 @@
 import { loginForStudent, loginForTeacher } from '../../tools/login/login.js'
 import { ensureClass, openClassView, removeCustomizations, selectLevel } from "../../tools/classes/class";
-import { goToHedyLevel2Page, goToHedyLevel5Page } from '../../tools/navigation/nav.js';
+import { goToHedyLevel5Page } from '../../tools/navigation/nav.js';
 
 const teachers = ["teacher1", "teacher4"];
 
@@ -36,7 +36,8 @@ teachers.forEach((teacher) => {
 
         // make sure they are visible
         loginForStudent();
-        cy.visit('/hedy/2#parsons')
+        cy.visit('/hedy/2#parsons');
+        cy.reload();
         cy.getDataCy('dropdown_adventure_button').should('contain.text', 'Puzzle');
         cy.getDataCy('next_adventure').click();
         cy.getDataCy('dropdown_adventure_button').should('contain.text', 'Quiz');
@@ -69,10 +70,10 @@ teachers.forEach((teacher) => {
           .should("not.exist")
 
         loginForStudent();
-        cy.visit('/hedy/5#parsons')
-        cy.getDataCy('dropdown_adventure_button').should('contain.text', 'Introduction');
         goToHedyLevel5Page();
-        cy.visit('/hedy/5#quiz')
+        cy.visit('/hedy/5#parsons');
+        cy.getDataCy('dropdown_adventure_button').should('contain.text', 'Introduction');
+        cy.visit('/hedy/5#quiz');
         cy.getDataCy('dropdown_adventure_button').should('contain.text', 'Introduction');
       });
 
