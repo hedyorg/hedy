@@ -85,8 +85,13 @@ export class Tabs {
       const allTargets = target.siblings('*[data-tabtarget]');
 
       // Fix classes
-      allTabs.removeClass('tab-selected');
-      tab.addClass('tab-selected');
+      if (allTabs.hasClass('tab-selected')){
+        allTabs.removeClass('tab-selected');
+        tab.addClass('tab-selected');
+      } else {
+        allTabs.removeClass('adv-selected');
+        tab.addClass('adv-selected');
+      }
 
       allTargets.addClass('hidden');
       target.removeClass('hidden');
@@ -118,7 +123,7 @@ export class Tabs {
 }
 
 export function getNext() {
-  const selected = document.querySelector('.tab-selected')
+  const selected = document.querySelector('.adv-selected')
   if (!selected) return []
   const i = parseInt(selected.getAttribute('tabindex') || '0')
   const next = document.querySelector(`.tab[tabindex='${i+1}']`)
@@ -126,7 +131,7 @@ export function getNext() {
 }
 
 export function getCurrentAdv() {
-  const selectedElement = document.querySelector('.tab-selected');
+  const selectedElement = document.querySelector('.adv-selected');
   if (selectedElement) {
     return selectedElement.textContent?.trim() ?? '';
   }
