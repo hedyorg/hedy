@@ -2,9 +2,7 @@
 import base64
 import binascii
 import collections
-import copy
 import logging
-import json
 import datetime
 import os
 import re
@@ -45,7 +43,7 @@ from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, KEYWORDS_ADVENTURES, ALL_KE
 
 from logging_config import LOGGING_CONFIG
 from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
-from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
+from website import (ab_proxying, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
                      translating, tags, surveys, super_teacher, public_adventures, user_activity, feedback)
@@ -112,13 +110,6 @@ SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
 for lang in ALL_LANGUAGES.keys():
     SLIDES[lang] = hedy_content.Slides(lang)
 
-ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
-DATABASE = database.Database()
-ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
-SURVEYS = surveys.SurveysModule(DATABASE)
-STATISTICS = statistics.StatisticsModule(DATABASE)
-AUTH_MODULE = auth_pages.AuthModule(DATABASE)
-FOR_TEACHERS = for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS, AUTH_MODULE)
 TAGS = collections.defaultdict(hedy_content.NoSuchAdventure)
 for lang in ALL_LANGUAGES.keys():
     TAGS[lang] = hedy_content.Tags(lang)
@@ -469,22 +460,6 @@ def add_hx_detection():
 
 
 @app.after_request
-def hx_triggers(response):
-    """For HTMX Requests, push any pending achievements in the session to the client.
-
-    Use the HX-Trigger header, which will trigger events on the client. There is a listener
-    there which will respond to the 'displayAchievements' event.
-    """
-    if not request.headers.get('HX-Request'):
-        return response
-
-    achs = session.pop('pending_achievements', [])
-    if achs:
-        response.headers.set('HX-Trigger', json.dumps({'displayAchievements': achs}))
-    return response
-
-
-@app.after_request
 def set_security_headers(response):
     security_headers = {
         'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
@@ -554,8 +529,6 @@ def parse():
 
     # true if kid enabled the read aloud option
     read_aloud = body.get('read_aloud', False)
-    raw = body.get('raw')
-
     response = {}
     username = current_user()['username'] or None
     exception = None
@@ -568,10 +541,6 @@ def parse():
         with querylog.log_time('transpile'):
             try:
                 transpile_result = transpile_add_stats(code, level, lang, is_debug)
-                if username and not body.get('tutorial'):
-                    DATABASE.increase_user_run_count(username)
-                    if not raw:
-                        ACHIEVEMENTS.increase_count("run")
             except hedy.exceptions.WarningException as ex:
                 translated_error = get_error_text(ex, keyword_lang)
                 if isinstance(ex, hedy.exceptions.InvalidSpaceException):
@@ -617,14 +586,6 @@ def parse():
         except Exception:
             pass
 
-        if not raw:
-            try:
-                if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(
-                        username, code, level, response, transpile_result.commands):
-                    response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
-            except Exception as E:
-                print(f"error determining achievements for {code} with {E}")
-
     except hedy.exceptions.HedyException as ex:
         traceback.print_exc()
         response = hedy_error_to_response(ex)
@@ -639,7 +600,7 @@ def parse():
     # Save this program (if the user is logged in)
     if username and body.get('save_name'):
         try:
-            program_logic = programs.ProgramsLogic(DATABASE, ACHIEVEMENTS, FOR_TEACHERS)
+            program_logic = programs.ProgramsLogic(DATABASE, FOR_TEACHERS)
             program = program_logic.store_user_program(
                 user=current_user(),
                 level=level,
@@ -953,28 +914,6 @@ def all_commands(id):
     return render_template(
         'commands.html',
         commands=hedy.all_commands(code, level, lang))
-
-
-@app.route('/my-achievements')
-def achievements_page():
-    user = current_user()
-    username = user['username']
-    if not username:
-        # redirect users to /login if they are not logged in
-        # Todo: TB -> I wrote this once, but wouldn't it make more sense to simply
-        # throw a 302 error?
-        url = request.url.replace('/my-achievements', '/login')
-        return redirect(url, code=302)
-
-    user_achievements = DATABASE.achievements_by_username(user.get('username')) or []
-    achievements = ACHIEVEMENTS_TRANSLATIONS.get_translations(g.lang).get('achievements')
-
-    return render_template(
-        'achievements.html',
-        page_title=gettext('title_achievements'),
-        translations=achievements,
-        user_achievements=user_achievements,
-        current_page='my-profile')
 
 
 @app.route('/programs', methods=['GET'])
@@ -1547,7 +1486,7 @@ def index(level, program_id):
     quizzes_hidden = 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']
 
     if customizations:
-        for_teachers.ForTeachersModule.migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden)
+        FOR_TEACHERS.migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden)
 
     parsons_in_level = True
     quiz_in_level = True
@@ -1752,7 +1691,7 @@ def get_specific_adventure(name, level, mode):
             user = current_user()
         adventure = None
         if user and is_teacher(user):
-            adventure = database.ADVENTURES.get({"name": name, "creator": user["username"]})
+            adventure = DATABASE.get_adventure_by_creator_and_name(name, user['username'])
 
         if not adventure:
             return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
@@ -1888,25 +1827,23 @@ def get_certificate_page(username):
     user = DATABASE.user_by_username(username)
     if not user:
         return utils.error_page(error=403, ui_message=gettext('user_inexistent'))
-    progress_data = DATABASE.progress_by_username(username)
-    if progress_data is None:
-        return utils.error_page(error=404, ui_message=gettext('no_certificate'))
-    achievements = progress_data.get('achieved', None)
-    if achievements is None:
-        return utils.error_page(error=404, ui_message=gettext('no_certificate'))
-    if 'run_programs' in progress_data:
-        count_programs = progress_data['run_programs']
-    else:
-        count_programs = 0
     quiz_score = get_highest_quiz_score(username)
     quiz_level = get_highest_quiz_level(username)
-    longest_program = get_longest_program(username)
 
-    number_achievements = len(achievements)
+    programs = DATABASE.get_program_stats([username])
+    longest_program = max(programs)
+
     congrats_message = safe_format(gettext('congrats_message'), username=username)
-    return render_template("printable/certificate.html", count_programs=count_programs, quiz_score=quiz_score,
-                           longest_program=longest_program, number_achievements=number_achievements,
-                           quiz_level=quiz_level, congrats_message=congrats_message)
+    user = DATABASE.user_by_username(username)
+    if user.get('program_count'):
+        user_program_count = user.get('program_count')
+
+    return render_template("printable/certificate.html",
+                           quiz_score=quiz_score,
+                           longest_program=longest_program,
+                           user_program_count=user_program_count,
+                           quiz_level=quiz_level,
+                           congrats_message=congrats_message)
 
 
 def get_highest_quiz_level(username):
@@ -1924,15 +1861,6 @@ def get_highest_quiz_score(username):
             if score > max:
                 max = score
     return max
-
-
-def get_longest_program(username):
-    programs = DATABASE.get_program_stats([username])
-    highest = 0
-    for program in programs:
-        if 'number_of_lines' in program:
-            highest = max(highest, program['number_of_lines'])
-    return highest
 
 
 @app.errorhandler(404)
@@ -2143,7 +2071,11 @@ def landing_page(user, first):
             if not (program.get('is_modified') or 'is_modified' not in program):
                 programs.remove(program)
 
-    user_achievements = DATABASE.progress_by_username(username)
+    achievements = DATABASE.achievements_by_username(username)
+    user_from_db = DATABASE.user_by_username(username)
+    has_certificate = (achievements and 'achieved' in achievements
+                       and 'hedy_certificate' in achievements['achieved'])\
+        or user_from_db.get('certificate', False)
 
     return render_template(
         'landing-page.html',
@@ -2153,7 +2085,7 @@ def landing_page(user, first):
         user_info=user_info,
         programs=programs,
         last_program=last_program,
-        achievements=user_achievements)
+        has_certificate=has_certificate)
 
 
 @app.route('/explore', methods=['GET'])
@@ -2165,11 +2097,6 @@ def explore():
     adventure = request.args.get('adventure', default=None, type=str)
     page = request.args.get('page', default=None, type=str)
     language = g.lang
-
-    achievement = None
-    if level or adventure or language:
-        achievement = ACHIEVEMENTS.add_single_achievement(
-            current_user()['username'], "indiana_jones")
 
     result = DATABASE.get_public_programs(
         limit=42,  # 3 columns so make it a multiple of 3
@@ -2201,7 +2128,6 @@ def explore():
         filtered_level=str(level) if level else None,
         next_page_url=next_page_url,
         prev_page_url=prev_page_url,
-        achievement=achievement,
         filtered_adventure=adventure,
         filtered_lang=language,
         max_level=hedy.HEDY_MAX_LEVEL,
@@ -2249,49 +2175,6 @@ def pre_process_explore_program(program):
         DATABASE.store_program(program)
 
     return program
-
-
-@app.route('/highscores', methods=['GET'], defaults={'filter': 'global'})
-@app.route('/highscores/<filter>', methods=['GET'])
-@requires_login
-def get_highscores_page(user, filter):
-    if filter not in ["global", "country", "class"]:
-        return utils.error_page(error=404, ui_message=gettext('page_not_found'))
-
-    user_data = DATABASE.user_by_username(user['username'])
-    public_profile = True if DATABASE.get_public_profile_settings(user['username']) else False
-    classes = list(user_data.get('classes', set()))
-    country = user_data.get('country')
-    user_country = COUNTRIES.get(country)
-
-    if filter == "global":
-        highscores = DATABASE.get_highscores(user['username'], filter)
-    elif filter == "country":
-        # Can't get a country highscore if you're not in a country!
-        if not country:
-            return utils.error_page(error=403, ui_message=gettext('no_such_highscore'))
-        highscores = DATABASE.get_highscores(user['username'], filter, country)
-    elif filter == "class":
-        # Can't get a class highscore if you're not in a class!
-        if not classes:
-            return utils.error_page(error=403, ui_message=gettext('no_such_highscore'))
-        highscores = DATABASE.get_highscores(user['username'], filter, classes[0])
-
-    # Make a deepcopy if working locally, otherwise the local database values
-    # are by-reference and overwritten
-    if not os.getenv('NO_DEBUG_MODE'):
-        highscores = copy.deepcopy(highscores)
-    for highscore in highscores:
-        highscore['country'] = highscore.get('country') if highscore.get('country') else "-"
-        highscore['last_achievement'] = utils.delta_timestamp(highscore.get('last_achievement'))
-    return render_template(
-        'highscores.html',
-        highscores=highscores,
-        has_country=True if country else False,
-        filter=filter,
-        user_country=user_country,
-        public_profile=public_profile,
-        in_class=True if classes else False)
 
 
 @app.route('/change_language', methods=['POST'])
@@ -2593,61 +2476,6 @@ def get_user_messages():
 app.add_template_global(utils.prepare_content_for_ckeditor, name="prepare_content_for_ckeditor")
 
 
-# Todo TB: Re-write this somewhere sometimes following the line below
-# We only store this @app.route here to enable the use of achievements ->
-# might want to re-write this in the future
-
-
-@app.route('/auth/public_profile', methods=['POST'])
-@requires_login
-def update_public_profile(user):
-    body = request.json
-
-    # Validations
-    if not isinstance(body, dict):
-        return make_response(gettext('ajax_error'), 400)
-    # The images are given as a "picture id" from 1 till 12
-    if not isinstance(body.get('image'), str) or int(body.get('image'), 0) not in [*range(1, 13)]:
-        return make_response(gettext('image_invalid'), 400)
-    if not isinstance(body.get('personal_text'), str):
-        return make_response(gettext('personal_text_invalid'), 400)
-    if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
-        return make_response(gettext('favourite_program_invalid'), 400)
-
-    # Verify that the set favourite program is actually from the user (and public)!
-    if 'favourite_program' in body:
-        program = DATABASE.program_by_id(body.get('favourite_program'))
-        if not program or program.get('username') != user['username'] or not program.get('public'):
-            return make_response(gettext('favourite_program_invalid'), 400)
-
-    achievement = None
-    current_profile = DATABASE.get_public_profile_settings(user['username'])
-    if current_profile:
-        if current_profile.get('image') != body.get('image'):
-            achievement = ACHIEVEMENTS.add_single_achievement(
-                current_user()['username'], "fresh_look")
-    else:
-        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
-
-    # Make sure the session value for the profile image is up-to-date
-    session['profile_image'] = body.get('image')
-
-    # If there is no current profile or if it doesn't have the tags list ->
-    # check if the user is a teacher / admin
-    if not current_profile or not current_profile.get('tags'):
-        body['tags'] = []
-        if is_teacher(user):
-            body['tags'].append('teacher')
-        if is_admin(user):
-            body['tags'].append('admin')
-
-    DATABASE.update_public_profile(user['username'], body)
-    response = {"message": gettext("public_profile_updated")}
-    if achievement:
-        response["achievement"] = achievement
-    return response
-
-
 @app.route('/translating')
 def translating_page():
     return render_template('translating.html')
@@ -2703,7 +2531,6 @@ def public_user_page(username):
                                                             pagination_token=page)
         next_page_token = user_programs.next_page_token
         user_programs = normalize_public_programs(user_programs)
-        user_achievements = DATABASE.progress_by_username(username) or {}
 
         all_programs = DATABASE.filtered_programs_for_user(username,
                                                            public=True,
@@ -2725,10 +2552,7 @@ def public_user_page(username):
                 user_public_info['favourite_program'])
 
         last_achieved = None
-        if user_achievements.get('achieved'):
-            last_achieved = user_achievements['achieved'][-1]
         certificate_message = safe_format(gettext('see_certificate'), username=username)
-        # Todo: TB -> In the near future: add achievement for user visiting their own profile
         next_page_url = url_for(
             'public_user_page',
             username=username, **dict(request.args,
@@ -2739,21 +2563,23 @@ def public_user_page(username):
             user_program_count = user.get('program_count')
         else:
             user_program_count = 0
-
+        achievements = DATABASE.achievements_by_username(username)
+        user_from_db = DATABASE.user_by_username(username)
+        has_certificate = (achievements and 'achieved' in achievements
+                           and 'hedy_certificate' in achievements['achieved'])\
+            or user_from_db.get('certificate', False)
         return render_template(
             'public-page.html',
             user_info=user_public_info,
-            achievements=ACHIEVEMENTS_TRANSLATIONS.get_translations(
-                g.lang).get('achievements'),
             favorite_program=favorite_program,
             programs=user_programs,
             last_achieved=last_achieved,
-            user_achievements=user_achievements,
             certificate_message=certificate_message,
             next_page_url=next_page_url,
             sorted_level_programs=sorted_level_programs,
             sorted_adventure_programs=sorted_adventure_programs,
             user_program_count=user_program_count,
+            has_certificate=has_certificate,
         )
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
@@ -2812,25 +2638,6 @@ def current_user_allowed_to_see_program(program):
         return True
 
     return False
-
-
-app.register_blueprint(auth_pages.AuthModule(DATABASE))
-app.register_blueprint(profile.ProfileModule(DATABASE))
-app.register_blueprint(programs.ProgramsModule(DATABASE, ACHIEVEMENTS, FOR_TEACHERS))
-app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS, AUTH_MODULE))
-app.register_blueprint(classes.ClassModule(DATABASE, ACHIEVEMENTS))
-app.register_blueprint(classes.MiscClassPages(DATABASE, ACHIEVEMENTS))
-app.register_blueprint(super_teacher.SuperTeacherModule(DATABASE))
-app.register_blueprint(admin.AdminModule(DATABASE))
-app.register_blueprint(achievements.AchievementsModule(ACHIEVEMENTS))
-app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))
-app.register_blueprint(parsons.ParsonsModule(PARSONS))
-app.register_blueprint(statistics.StatisticsModule(DATABASE))
-app.register_blueprint(user_activity.UserActivityModule(DATABASE))
-app.register_blueprint(tags.TagsModule(DATABASE, ACHIEVEMENTS))
-app.register_blueprint(public_adventures.PublicAdventuresModule(DATABASE, ACHIEVEMENTS))
-app.register_blueprint(surveys.SurveysModule(DATABASE))
-app.register_blueprint(feedback.FeedbackModule(DATABASE))
 
 
 # *** START SERVER ***
@@ -2953,6 +2760,29 @@ if __name__ == '__main__':
     # own file loading routines also hot-reload.
     no_debug_mode_requested = os.getenv('NO_DEBUG_MODE')
     utils.set_debug_mode(not no_debug_mode_requested)
+
+    DATABASE = database.Database()
+    SURVEYS = surveys.SurveysModule(DATABASE)
+    STATISTICS = statistics.StatisticsModule(DATABASE)
+    AUTH_MODULE = auth_pages.AuthModule(DATABASE)
+    FOR_TEACHERS = for_teachers.ForTeachersModule(DATABASE, AUTH_MODULE)
+
+    app.register_blueprint(auth_pages.AuthModule(DATABASE))
+    app.register_blueprint(profile.ProfileModule(DATABASE))
+    app.register_blueprint(programs.ProgramsModule(DATABASE, FOR_TEACHERS))
+    app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, AUTH_MODULE))
+    app.register_blueprint(classes.ClassModule(DATABASE))
+    app.register_blueprint(classes.MiscClassPages(DATABASE))
+    app.register_blueprint(super_teacher.SuperTeacherModule(DATABASE))
+    app.register_blueprint(admin.AdminModule(DATABASE))
+    app.register_blueprint(quiz.QuizModule(DATABASE, QUIZZES))
+    app.register_blueprint(parsons.ParsonsModule(PARSONS))
+    app.register_blueprint(statistics.StatisticsModule(DATABASE))
+    app.register_blueprint(user_activity.UserActivityModule(DATABASE))
+    app.register_blueprint(tags.TagsModule(DATABASE))
+    app.register_blueprint(public_adventures.PublicAdventuresModule(DATABASE))
+    app.register_blueprint(surveys.SurveysModule(DATABASE))
+    app.register_blueprint(feedback.FeedbackModule(DATABASE))
 
     if utils.is_offline_mode():
         on_offline_mode()

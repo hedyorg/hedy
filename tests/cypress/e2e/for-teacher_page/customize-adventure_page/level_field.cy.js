@@ -10,17 +10,17 @@ levels.forEach((level) => {
       loginForTeacher(teacher);
       goToEditAdventure();
 
-      // Tests level field interaction
-      cy.getDataCy('level_select')
-        .should('be.visible')
-        .should('not.be.disabled')
-        .click()
-      
-      cy.get(`#levels_dropdown > div.option[data-value="${level}"]`)
-        .click()
-      
-      cy.get(`#levels_dropdown > div.option[data-value="${level}"]`)
-        .should('have.class', 'selected')
+        // Tests level field interaction
+        cy.getDataCy('level_select')
+          .should('be.visible')
+          .should('not.be.disabled')
+          .click()
+        
+        cy.get(`#levels_dropdown > div > div > div.option[data-value="${level}"`)
+          .click()
+        
+        cy.get(`#levels_dropdown > div > div > div.option[data-value="${level}"`)
+          .should('have.class', 'selected')
+      })
     })
   })
-})
