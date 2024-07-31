@@ -996,8 +996,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       // So: a very large limit in these levels, keep the limit on other ones.
       execLimit: (function () {
         const level = theLevel;
-        if (hasTurtle || hasMusic) {
-          // We don't want a timeout when using the turtle or music -> just set one for 10 minutes
+        if (hasTurtle || hasPressed || hasMusic) {
+          // We don't want a timeout when using the turtle, if_pressed or music -> just set one for 10 minutes
           return (6000000);
         }
         if (level < 7) {
