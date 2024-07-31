@@ -128,7 +128,7 @@ teachers.forEach((teacher) => {
       // TODO check if adventure is added to class and level correctly
     });
 
-    it.only('Is able to be re-added from the right dropdown list', () => {
+    it('Is able to be re-added from the right dropdown list', () => {
       const hiddenAdventure = 'ask_command';
       selectLevel('1');
       cy.getDataCy(`hide_adv_${hiddenAdventure}`).click();
@@ -143,7 +143,7 @@ teachers.forEach((teacher) => {
       // should be visible for a student
       loginForStudent();
       goToHedyPage();
-      cy.reload();
+      goToHedyPage();
       cy.visit('/hedy/1#ask_command')
       cy.getDataCy('dropdown_adventure_button').should('contain.text', 'ask');
     });

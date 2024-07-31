@@ -42,7 +42,7 @@ teachers.forEach((teacher) => {
         cy.getDataCy('dropdown_adventure_button').should('contain.text', 'Quiz');
       });
 
-      it.only('Is able to disable all quizes and parsons', () => {
+      it('Is able to disable all quizes and parsons', () => {
         cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
 
         cy.getDataCy('hide_quiz')

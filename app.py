@@ -1107,6 +1107,7 @@ def tutorial_index():
         initial_adventure=initial_adventure,
         cheatsheet=cheatsheet,
         blur_button_available=False,
+        progress=0,
         current_user_is_in_class=len(current_user().get('classes') or []) > 0,
         # See initialize.ts
         javascript_page_options=dict(
@@ -1744,6 +1745,7 @@ def get_specific_adventure(name, level, mode):
                            initial_adventure=initial_adventure,
                            latest=version(),
                            raw=raw,
+                           progress=0,
                            menu=not raw,
                            blur_button_available=False,
                            current_user_is_in_class=len(current_user().get('classes') or []) > 0,

@@ -3,7 +3,7 @@
       <div id="adventures">
         {% macro adventure_tab(tabname, title, selected, id, tab_class, index) %}
             <div
-                class="tab {% if selected %}tab-selected{% endif %} flex items-center justify-center whitespace-nowrap {{ tab_class }}"
+                class="tab {% if selected and public_adventures_page %}tab-selected{% endif %} flex items-center justify-center whitespace-nowrap {{ tab_class }}"
                 id="{{ id }}"
                 tabindex="{{ index }}"
                 data-tab="{{ tabname }}"

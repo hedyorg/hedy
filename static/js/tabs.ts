@@ -90,7 +90,11 @@ export class Tabs {
         tab.addClass('tab-selected');
       } else {
         allTabs.removeClass('adv-selected');
+        allTabs.addClass('hover:bg-blue-100');
+        allTabs.prop('disabled', false);
         tab.addClass('adv-selected');
+        tab.removeClass('hover:bg-blue-100');
+        tab.prop('disabled', true);
       }
 
       allTargets.addClass('hidden');
