@@ -56,6 +56,14 @@ from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
 
+DATABASE = None
+AUTH_MODULE = None
+ACHIEVEMENTS_TRANSLATIONS = None
+ACHIEVEMENTS = None
+SURVEYS = None
+STATISTICS = None
+FOR_TEACHERS = None
+
 # Todo TB: This can introduce a possible app breaking bug when switching
 # to Python 4 -> e.g. Python 4.0.1 is invalid
 if (sys.version_info.major < 3 or sys.version_info.minor < 7):
@@ -2648,7 +2656,27 @@ def on_server_start():
 
     Use this to initialize objects, dependencies and connections.
     """
-    pass
+    global DATABASE, AUTH_MODULE, FOR_TEACHERS
+    DATABASE = database.Database()
+    AUTH_MODULE = auth_pages.AuthModule(DATABASE)
+    FOR_TEACHERS = for_teachers.ForTeachersModule(DATABASE, AUTH_MODULE)
+
+    app.register_blueprint(auth_pages.AuthModule(DATABASE))
+    app.register_blueprint(profile.ProfileModule(DATABASE))
+    app.register_blueprint(programs.ProgramsModule(DATABASE, FOR_TEACHERS))
+    app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, AUTH_MODULE))
+    app.register_blueprint(classes.ClassModule(DATABASE))
+    app.register_blueprint(classes.MiscClassPages(DATABASE))
+    app.register_blueprint(super_teacher.SuperTeacherModule(DATABASE))
+    app.register_blueprint(admin.AdminModule(DATABASE))
+    app.register_blueprint(quiz.QuizModule(DATABASE, QUIZZES))
+    app.register_blueprint(parsons.ParsonsModule(PARSONS))
+    app.register_blueprint(statistics.StatisticsModule(DATABASE))
+    app.register_blueprint(user_activity.UserActivityModule(DATABASE))
+    app.register_blueprint(tags.TagsModule(DATABASE))
+    app.register_blueprint(public_adventures.PublicAdventuresModule(DATABASE))
+    app.register_blueprint(surveys.SurveysModule(DATABASE))
+    app.register_blueprint(feedback.FeedbackModule(DATABASE))
 
 
 def try_parse_int(x):
@@ -2761,31 +2789,10 @@ if __name__ == '__main__':
     no_debug_mode_requested = os.getenv('NO_DEBUG_MODE')
     utils.set_debug_mode(not no_debug_mode_requested)
 
-    DATABASE = database.Database()
-    SURVEYS = surveys.SurveysModule(DATABASE)
-    STATISTICS = statistics.StatisticsModule(DATABASE)
-    AUTH_MODULE = auth_pages.AuthModule(DATABASE)
-    FOR_TEACHERS = for_teachers.ForTeachersModule(DATABASE, AUTH_MODULE)
-
-    app.register_blueprint(auth_pages.AuthModule(DATABASE))
-    app.register_blueprint(profile.ProfileModule(DATABASE))
-    app.register_blueprint(programs.ProgramsModule(DATABASE, FOR_TEACHERS))
-    app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, AUTH_MODULE))
-    app.register_blueprint(classes.ClassModule(DATABASE))
-    app.register_blueprint(classes.MiscClassPages(DATABASE))
-    app.register_blueprint(super_teacher.SuperTeacherModule(DATABASE))
-    app.register_blueprint(admin.AdminModule(DATABASE))
-    app.register_blueprint(quiz.QuizModule(DATABASE, QUIZZES))
-    app.register_blueprint(parsons.ParsonsModule(PARSONS))
-    app.register_blueprint(statistics.StatisticsModule(DATABASE))
-    app.register_blueprint(user_activity.UserActivityModule(DATABASE))
-    app.register_blueprint(tags.TagsModule(DATABASE))
-    app.register_blueprint(public_adventures.PublicAdventuresModule(DATABASE))
-    app.register_blueprint(surveys.SurveysModule(DATABASE))
-    app.register_blueprint(feedback.FeedbackModule(DATABASE))
-
     if utils.is_offline_mode():
         on_offline_mode()
+
+    on_server_start()
 
     # Set some default environment variables for development mode
     env_defaults = dict(
@@ -2812,8 +2819,6 @@ if __name__ == '__main__':
 
         tracemalloc.start()
         start_snapshot = tracemalloc.take_snapshot()
-
-    on_server_start()
     debug = utils.is_debug_mode() and not (is_in_debugger or profile_memory)
     if debug:
         logger.debug('app starting in debug mode')
