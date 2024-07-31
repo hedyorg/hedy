@@ -1,4 +1,8 @@
-{% set editor_height='22rem' %}
+{% if enforce_developers_mode %}
+  {% set editor_height='30rem' %}
+{% else %}
+  {% set editor_height='22rem' %}
+{% endif %}
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
   <div id="editor_area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4">
 
@@ -14,7 +18,7 @@
             <span>←</span>
         </div>
     </div>
-    <div id="button_row" class="absolute top-72 right-0 z-20 flex px-4 py-3 justify-end">
+    <div id="button_row" class="absolute bottom-1 right-0 z-20 flex px-4 py-3 justify-end">
         <div id="run_button_container" class="z-10 px-1 inline-flex items-center">
             <button id="runit" data-cy="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
               <span class="fa fa-play ltr:mr-1 rtl:ml-1"></span>
