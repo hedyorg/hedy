@@ -1,14 +1,7 @@
 {% extends "auth.html" %}
 {% block regular_content %}
 <div class="px-8 py-12">
-    {% if achievement %}
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            hedyApp.showAchievements({{ achievement|safe }}, false, "");
-        });
-    </script>
-    {% endif %}
-    <div class="w-full mb-4" id="program_filter">        
+    <div class="w-full mb-4" id="program_filter">
             <div class="flex flex-row w-full items-center rounded-lg gap-4">
                 <custom-select name="adventure" id="explore_page_adventure" data-autosubmit="true" class="w-2/3" data-type="single">
                     <option hidden 

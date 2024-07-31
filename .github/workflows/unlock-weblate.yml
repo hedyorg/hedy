@@ -31,6 +31,6 @@ jobs:
         echo 'https://hosted.weblate.org/api/ = ${{ secrets.WEBLATE_API_KEY }}' >> .weblate
     - run: |
         # Have to lock each component individually. Not in the UI, but using the CLI we do.
-        for component in glossary adventures keywords achievements quizzes commands client-messages web-texts webpages parsons tutorials slides; do
+        for component in glossary adventures keywords quizzes commands client-messages web-texts webpages parsons tutorials slides; do
           wlc unlock hedy/$component
         done
