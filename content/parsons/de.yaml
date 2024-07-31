@@ -2,9 +2,12 @@ levels:
     1:
         1:
             story: |-
+                Puzzle sind Übungen, in denen die Codezeilen bereits für dich geschrieben sind. Du musst die Zeilen nur noch in die richtige Reihenfolge bringen. Ziehe die Codezeilen in das Eingabefeld und führe den Code aus. Kannst du das Programm zum Laufen bekommen?
+
                 Du bist Kunde der Bäckerei Hedy.
                 Du gehst in die Bäckerei und wirst vom Bäcker begrüßt.
                 Er fragt, welche Art Kuchen du bestellen möchtest.
+                Dann wiederholt er deine Antwort.
                 Als Nächstes wird deine Bestellung zubereitet.
             code: |-
                 {print} Willkommen in der Bäckerei Hedy!
@@ -12,7 +15,7 @@ levels:
                 {echo} Also möchtest du
                 {print} deine Bestellung wird vorbereitet!
         2:
-            story: You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.
+            story: Du bist am DJ Pult und wünscht dir ein Lied. Erzeuge ein Programm, das dich fragst, ob du bereit bist, Party zu machen und dich dann fragt, welches Lied du gerne hören möchtest.
             code: |-
                 {print} Hier ist DJ Hedy
                 {ask} Bist du bereit zum Feiern?
@@ -25,7 +28,7 @@ levels:
                 Zeige den Film, den ihr anschauen wollt und wünsche den Zuschauern viel Freude!
             code: |-
                 {print} Es ist Zeit für einen Netflix-Abend
-                film {is} Sonic der Igel 2
+                film {is} Sonic The Hedgehog 2
                 {print} Wir schauen film
                 {print} Viel Spaß!
         2:
@@ -81,8 +84,8 @@ levels:
     5:
         1:
             story: |-
-                Make a program that checks if your favourite movie is already in the list of the computer.
-                If so, print that you have great taste, otherwise add the movie to the list.
+                Erstelle ein Programm, das überprüft, ob deine Lieblingsfilm bereits in der Liste des Computers ist.
+                Wenn das so ist, drucke dass du guten Geschmack hast, ansonsten füge den Film der Liste hinzu.
             code: |-
                 lieblingsfilme {is} Batman, Spiderman, The Avengers, Jurassic Park
                 film {is} {ask} 'Welcher ist dein Lieblingsfilm?'
@@ -90,7 +93,7 @@ levels:
                 {else} {print} 'Schade, dass dein Lieblingsfilm nicht in der Liste ist, wir fügen ihn sofort hinzu!'
                 {add} film {to_list} lieblingsfilme
         2:
-            story: Create a maths game.
+            story: Erstelle ein Mathe-Spiel.
             code: |-
                 {print} 'Löse diese Aufgabe'
                 Antwort {is} {ask} '88 - 16 = ?'
@@ -99,10 +102,10 @@ levels:
     6:
         1:
             story: |-
-                Make a program that calculates how old you are in dog and cat years.
-                First ask the age of the user and start calculating.
-                First calculate the dogyears then the catyears.
-                Show the user the different ages.
+                Erstelle ein Programm, das berechnet, wie alt du in Hunde- und Katzenjahren bist.
+                Frage zuerst nach dem Alter des Benutzers und fange dann an zu rechnen.
+                Berechne zuerst die Hundejahre, dann die Katzenjahre.
+                Zeige dem Nutzer die unterschiedlichen Alter.
             code: |-
                 Alter = {ask} 'Wie alt bist du?'
                 Hundealter = Alter * 7
@@ -110,7 +113,7 @@ levels:
                 {print} 'In Hundejahren bist du ' Hundealter ' Jahre alt.'
                 {print} 'In Katzenjahren bist du ' Katzenalter ' Jahre alt.'
         2:
-            story: Create a program that helps you calculate how many cakes you should buy for your birthday party.
+            story: Erstelle ein Programm, das dir dabei hilft, zu berechnen, wie viele Kuchen du für deinen Geburtstagsfeier kaufen solltest.
             code: |-
                 {print} 'Du hast Geburtstag!'
                 leute = {ask} 'Wie vielen Leuten möchtest du ein Stück Torte geben?'
@@ -118,7 +121,7 @@ levels:
                 {print} 'Du musst ' kuchen_anzahl ' Torten kaufen'
     7:
         1:
-            story: Complete the baby shark song. First comes baby shark, then mommy and finally daddy shark.
+            story: Vervollständige den Baby Shark Song. Zuerst kommt Baby Shark, dann Mommy und zum Schluss Daddy Shark.
             code: |-
                 {repeat} 3 {times} {print} 'Baby shark tututututudu'
                 {print} 'Baby shark'
@@ -127,7 +130,7 @@ levels:
                 {repeat} 3 {times} {print} 'Daddy shark tututututudu'
                 {print} 'Daddy shark'
         2:
-            story: Create the song 'The wheels on the bus go round and round'
+            story: Erstelle den Song 'Die Räder am Bus gehen rundherum'
             code: |-
                 {print} 'Die Räder am Bus gehen'
                 {repeat} 3 {times} {print} 'rundherum'
@@ -142,9 +145,9 @@ levels:
                 Teams = Rot, Gelb, Blau
                 {print} 'Rot, Gelb oder Blau?'
                 {repeat} 5 {times}
-                  {print} 'Du bist in Team... '
-                  {print} Teams {at} {random}
-                  sleep 2
+                    {print} 'Du bist in Team... '
+                    {print} Teams {at} {random}
+                    {sleep} 2
         2:
             story: Drucke den Countdown für eine Runde Verstecken.
             code: |-
@@ -156,7 +159,7 @@ levels:
                 {print} 'Bereit oder nicht, ich komme!'
     9:
         1:
-            story: This game will give you three maths assignments. Each time the question is different. Can you figure out the order?
+            story: Dieses Spiel wird dir drei Mathe Aufgaben geben. Die Frage ist jedesmal anders. Kannst du die Reihenfolge herausfinden?
             code: |-
                 numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                 {repeat} 3 {times}
@@ -169,37 +172,37 @@ levels:
                         {print} 'No! The correct answer is ' correct_answer
         2:
             story: |-
-                This code asks the costumers in a restaurant if they would like to order dessert. If they do, it asks them what kind of dessert. If they order tiramisu they are told that the tiramisu is sold out.
-                Can you get the code to work?
+                Dieser Code fragt die Kunden in einem Restaurant, ob sie Nachtisch bestellen wollen. Falls sie Nachtisch bestellen wollen, frag sie, was sie für einen Nachtisch wollen. Wenn sie Tiramisu bestellen, wird ihnen gesagt, dass es ausverkauft ist.
+                Kannst du den Code zum Laufen bekommen?
             code: |-
-                order = {ask} 'Would you like to order dessert?'
-                {if} order = yes
-                    dessert = {ask} 'What kind of dessert would you like?'
-                    {if} dessert = tiramisu
-                        {print} 'Sorry, we are out of tiramisu.'
+                bestellung = {ask} 'Würdest du gerne Nachtisch bestellen?'
+                {if} bestellung = yes
+                    nachtisch = {ask} 'Welchen Nachtisch hättest du gerne?'
+                    {if} nachtisch = Tiramisu
+                        {print} 'Tut mir leid, Tiramisu ist leider ausverkauft.'
                     {else}
-                        {print} 'One ' dessert ' coming right up!'
+                        {print} 'Ein/e ' nachtisch ' kommt sofort!'
                 {else}
-                    {print} 'You dont want a dessert. No problem!'
+                    {print} 'Du möchtest keinen Nachtisch. Kein Problem!'
     10:
         1:
             story: |-
                 Hilf dieser Familie, indem du einen Plan erstellst, wer kocht und was sie diese Woche kochen sollten. Die `{remove}` Befehle stellen sicher, dass niemand zwei Mal kochen muss und dass es jeden Tag ein anderes Abendessen gibt.
                 **Beachte!** Die Reihenfolge der Variablen sollte zuerst Tage, dann Leute und dann Essensoption sein. Dies gilt auch für die Zeilen mit den `{remove}` Befehlen.
             code: |-
-                days = Monday, Tuesday, Wednesday, Thursday, Friday
-                people = mom, dad, Martin, Abby, Jesse
-                dinner_options = pizza, tacos, pancakes, a salad, lasagne
-                {for} day {in} days
-                    chosen_person = people {at} {random}
-                    chosen_dinner = dinner_options {at} {random}
-                    {print} 'On ' day ' ' chosen_person ' is making ' chosen_dinner
-                    {remove} chosen_person {from} people
-                    {remove} chosen_dinner {from} dinner_options
+                tage = Montag, Dienstag, Mittwoch, Donnerstag, Freitag
+                personen = Mama, Papa, Martin, Abby, Jesse
+                abendessen_optionen = Pizza, Tacos, Pfannkuchen, ein Salad, Lasagne
+                {for} tag {in} tage
+                    ausgewaehlte_person = personen {at} {random}
+                    ausgewaehltes_essen = abendessen_optionen {at} {random}
+                    {print} 'Am ' tag ' macht ' ausgewaehlte_person ' ' ausgewaehltes_essen
+                    {remove} ausgewaehlte_person {from} personen
+                    {remove} ausgewaehltes_essen {from} abendessen_optionen
         2:
             story: |-
-                This make-over robot will decide your new hairstyle for you. If you do not agree with the first choice, you can try again.
-                **Mind** The variable people is defined in the first line. The variable hairstyles in the second.
+                Dieser Friseur-Roboter wird für dich einen neuen Haarschnitt aussuchen. Wenn du mit der ersten Wahl nicht einverstanden bist, kannst du es nochmal versuchen.
+                **Achtung** Die Variable person wird in der ersten Zeile bestimmt. Die Variable frisur wird in der zweiten Zeile bestimmt.
             code: |-
                 people = Betty, Amanda, Marc
                 hairstyles = a bald head, a mohawk, a ponytail, spikes
@@ -212,7 +215,7 @@ levels:
                         {print} 'Lets try again... Then 'person ' will get ' hairstyles {at} {random}
     11:
         1:
-            story: Create the count down clock for New Year's eve! The program should show the numbers from 10 to 1 for a second and then wish you a happy new year.
+            story: Erzeuge die Countdown Uhr für Neujahr! Das Programm sollte die Zahlen 10 bis 1 für eine Sekunde zeigen und dir dann ein Frohes neues Jahr wünschen.
             code: |-
                 {for} number {in} {range} 10 {to} 1
                     {print} number
@@ -224,18 +227,18 @@ levels:
                 Erstelle ein Programm, das uns die Ergebnisse der Wissenschaftsschau sagt. Definiere zuerst die Variable Teilnehmer, dann die Variable Platzierung.
                 **Hinweis** Zeile 5 sollte der Schlafbefehl sein und du solltest am Ende Glückwunsch sagen.
             code: |-
-                {print} 'And now we will reveal the results of the science fair'
-                contestants = Vivienne, Paul, Trixy, Bianca, Katya
-                place = 5
-                {for} contestant {in} contestants
+                {print} 'Und nun verkünden wir die Ergebnisse des Wissenschaftswettbewerbs'
+                leute = Vivienne, Paul, Trixy, Bianca, Katya
+                platz = 5
+                {for} teilnehmer {in} leute
                     {sleep} 2
-                    {print} 'On number ' place ' has ended... ' contestant
-                    place = place - 1
-                {print} 'Congratulations!'
+                    {print} 'Auf Platz ' platz ' haben wir... ' teilnehmer
+                    platz = platz - 1
+                {print} 'Herzlichen Glückwunsch!'
     12:
         1:
             story: |-
-                Sing the song 'What shall we do with the drunken sailor'. In case you don't know it, the song goed like this:
+                Sing the song 'What shall we do with the drunken sailor'. In case you don't know it, the song goes like this:
 
                 What will we do with the drunken sailor
                 What will we do with the drunken sailor

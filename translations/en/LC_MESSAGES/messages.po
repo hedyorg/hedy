@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2000-01-01 00:00+0000\n"
+"POT-Creation-Date: 2024-06-26 16:04+0200\n"
 "PO-Revision-Date: 2000-01-01 00:00+0000\n"
 "Last-Translator: Someone <someone@example.com>\n"
 "Language: en\n"
@@ -19,133 +19,133 @@ msgstr ""
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
-msgstr "Variable {name} used on line {access_line_number} before being set. Try setting the variable before use."
+msgstr "We detected that a variable `{name}` is being used on line {access_line_number} before being set. Can you set the variable before it is used?"
 
 msgid "Cyclic Var Definition"
-msgstr "Set `{variable}` before using it on the right-hand side of the `{is}` command."
+msgstr "We detected that a variable `{variable}` is being used on the right-hand side of the `{is}` command before being set. Can you set the variable before it is used?"
 
 msgid "Else Without If Error"
-msgstr "Set an `{if}` before using an `{else}` on line {line_number}."
+msgstr "We detected that there is an `{else}` being used before an `{if}` on line {line_number}. Can you try writing an `{if}` before the `{else}`?"
 
 msgid "Function Undefined"
-msgstr "Function {name} used without being defined."
+msgstr "We detected that a function {name} is being used without being defined. Can you define the function before it is used?"
 
 msgid "Has Blanks"
-msgstr "Code is incomplete, fill in blanks with code."
+msgstr "We detected that the code seems to be incomplete. Can you fill in the blanks with code?"
 
 msgid "Incomplete"
-msgstr "On line {line_number}, you need to enter text behind `{incomplete_command}`."
+msgstr "We detected that part of the code seems to be missing from the `{incomplete_command}` on line {line_number}. Can you try adding the what's missing?"
 
 msgid "Incomplete Repeat"
-msgstr "Missing `{command}` with `{repeat}` on line {line_number}."
+msgstr "We detected that the `{repeat}` on line {line_number} is missing a `{command}` command. Can you try adding it?"
 
 msgid "Invalid"
-msgstr "`{invalid_command}` is not a Hedy level {level} command. Did you mean `{guessed_command}`?"
+msgstr "We detected that `{invalid_command}` is not a Hedy level {level} command. Can you try using `{guessed_command}`?"
 
 msgid "Invalid Argument"
-msgstr "You can't use command `{command}` with `{invalid_argument}`. Change `{invalid_argument}` to {allowed_types}."
+msgstr "We detected that `{command}` is not usable with `{invalid_argument}`. Can you try changing `{invalid_argument}` to {allowed_types}?"
 
 msgid "Invalid Argument Type"
-msgstr "`{command}` doesn't work with `{invalid_argument}` because it is {invalid_type}. Change `{invalid_argument}` to {allowed_types}."
+msgstr "We detected that `{command}` doesn't work with `{invalid_argument}` because it is {invalid_type}. Can you try changing `{invalid_argument}` to {allowed_types}?"
 
 msgid "Invalid At Command"
-msgstr "The `{command}` command may not be used from level 16 onward. Use square brackets for lists"
+msgstr "We detected that `{command}` may not be used from level 16 onward. Can you try using square brackets `[]` for lists?"
 
 msgid "Invalid Space"
-msgstr "Line {line_number} started with a space. Try removing the space"
+msgstr "We detected that line {line_number} started with a space. Can you try removing the space?"
 
 msgid "Invalid Type Combination"
-msgstr "`{invalid_argument}` and `{invalid_argument_2}` cannot be used with `{command}` because one is {invalid_type} and the other is {invalid_type_2}. Try changing `{invalid_argument}` to {invalid_type_2} or `{invalid_argument_2}` to {invalid_type}."
+msgstr "We detected that `{invalid_argument}` and `{invalid_argument_2}` cannot be used with `{command}` because one is {invalid_type} and the other is {invalid_type_2}. Can you try changing `{invalid_argument}` to {invalid_type_2} or `{invalid_argument_2}` to {invalid_type}?"
 
 msgid "Lonely Echo"
-msgstr "Place an `{ask}` before the `{echo}` or check if there is an `{echo}` without an `{ask}`."
+msgstr "We detected that an `{echo}` is being used before or without using an `{ask}`. Can you try writing an `{ask}` before the `{echo}`?"
 
 msgid "Lonely Text"
-msgstr "It looks like you forgot to use a command with the text you used in line {line_number}"
+msgstr "We detected that the code seems to be missing a command with the text that was used in line {line_number}. Can you try writing the needed command with the text"
 
 msgid "Missing Additional Command"
-msgstr "Complete writing the `{command}` on line {line_number}. Try adding `{missing_command}` to your code."
+msgstr "We detected that the code seems to be missing a `{command}` on line {line_number}. Can you try using `{missing_command}` in your code."
 
 msgid "Missing Colon Error"
-msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
+msgstr "We detected that `{command}` needs a `:` at the end of line {line_number}. Starting from level 17, can you start adding a `:` at the end of line with commands?"
 
 msgid "Missing Command"
-msgstr "You missed a command on line {line_number}."
+msgstr "We detected that the code seems to be missing a command on line {line_number}. Can you try looking at the exercise section to find which command to use?"
 
 msgid "Missing Inner Command"
-msgstr "It seems you missed a command for the `{command}` statement on line {line_number}."
+msgstr "We detected that the code seems to be missing a command for the `{command}` statement on line {line_number}. Can you try looking at the exercise section to find which command to use?"
 
 msgid "Missing Square Brackets"
-msgstr "It looks like you forgot to use square brackets `[]` around the list you were creating on line {line_number}."
+msgstr "We detected that the list you created on line {line_number} is missing square brackets `[]`. Can you try adding square brackets around `[]` the list?"
 
 msgid "Missing Variable"
-msgstr "`{command}` is missing a variable at the start of the line."
+msgstr "We detected that `{command}` is missing a variable at the start of the line. Can you try writing the variable before the `{command}?`"
 
 msgid "Misspelled At Command"
-msgstr "Check `{command}` spelling on line {line_number}, you wrote `{invalid_argument}` instead."
+msgstr "We detected that `{invalid_argument}` seems to have a spelling mistake on line {line_number}. Can you try writing `{command}` instead."
 
 msgid "No Indentation"
-msgstr "On line {line_number}, insufficent {leading_spaces} spaces used. Increase by {indent_size} for each new block."
+msgstr "We detected that there seems to be too few {leading_spaces} spaces used on line {line_number}. Can you try increasing indentation by {indent_size} for each new block."
 
 msgid "Non Decimal Variable"
-msgstr "At line {line_number}, you used a number Hedy does not support! Try a decimal number, like 2."
+msgstr "We detected that at line {line_number} you used a number Hedy does not support! Can you try a decimal number, like 2?"
 
 msgid "Parse"
-msgstr "The code is not valid Hedy code. There is a mistake on line {location[0]}. You typed `{character_found}`, which is not allowed."
+msgstr "We detected that `{character_found}` is being used on line {location[0]} which is not allowed. Can you try looking for a missing or an extra character on your code?"
 
 msgid "Pressit Missing Else"
-msgstr "Add an `{else}` to your code to handle other key presses"
+msgstr "We detected that the code is missing an `{else}` to handle other key presses. Can you try adding an `{else}` to your code?"
 
 msgid "Runtime Index Error"
-msgstr "List {name} is empty or index is missing."
+msgstr "We detected that the list {name} is empty or its index is missing. Can you make sure that the list is not empty or try writing a number inside the `[]` for the missing index?"
 
 msgid "Runtime Value Error"
-msgstr "`{command}` received disallowed value `{value}`. {tip}."
+msgstr "We detected that `{command}` received disallowed value `{value}`. {tip}."
 
 msgid "Runtime Values Error"
-msgstr "`{command}` received disallowed values `{value}` and `{value}`. {tip}."
+msgstr "We detected that `{command}` received disallowed values `{value}` and `{value}`. {tip}."
 
 msgid "Save Microbit code "
 msgstr "Save Microbit code"
 
 msgid "Too Big"
-msgstr "Your program has {lines_of_code} lines, but we can only process {max_lines} lines. Please shorten your program and try again."
+msgstr "We detected that the program has {lines_of_code} lines, but we can only process {max_lines} lines. Can you try to shorten your program?"
 
 msgid "Too Few Indents"
-msgstr "Line {line_number} has too few ({leading_spaces}) spaces."
+msgstr "We detected that line {line_number} has too few ({leading_spaces}) spaces. Can you try to add an extra space?"
 
 msgid "Too Many Indents"
-msgstr "Line {line_number} has too many ({leading_spaces}) spaces."
+msgstr "We detected that line {line_number} has too many ({leading_spaces}) spaces. Can you try to remove the extra space?"
 
 msgid "Unexpected Indentation"
-msgstr "Line {line_number} has too many ({leading_spaces}) spaces. Use {indent_size} more spaces per new block."
+msgstr "We detected that line {line_number} has too many ({leading_spaces}) spaces. Can you try adding {indent_size} more spaces per new block?"
 
 msgid "Unquoted Assignment"
-msgstr "From this level, place texts to the right of the `{is}` in quotes. Try doing that for the text {text}."
+msgstr "We detected that the text to the right of the `{is}` is not written between quotes. This level requires you to start writing the text between quotes. Try doing that for the text {text}"
 
 msgid "Unquoted Equality Check"
-msgstr "\"To check if a variable equals multiple words, use quotation marks for those words!\""
+msgstr "We detected that the code is trying to check if a variable equals multiple words. Can you try using quotation marks for the words you want to check?"
 
 msgid "Unquoted Text"
-msgstr "Text for `{ask}` or `{print}` must be in a quotation mark. Missing quotes for {unquotedtext}."
+msgstr "We detected that text for `{ask}` or `{print}` seems to be missing their quotation marks. Can you try adding quotes for {unquotedtext}?"
 
 msgid "Unsupported Float"
-msgstr "Non-integer numbers are not supported yet. Change `{value}` to an integer."
+msgstr "We detected that the code uses non-integer numbers which are not supported yet. Can you try changing `{value}` to an integer?"
 
 msgid "Unsupported String Value"
-msgstr "Text values cannot contain `{invalid_value}`."
+msgstr "We detected that text uses values it cannot contain `{invalid_value}`. Can you try removing the written value or change its type?"
 
 msgid "Unused Variable"
-msgstr "{variable_name} defined on line {line_number}, but not used."
+msgstr "We detected that variable {variable_name} defined on line {line_number}, but not used. Can you try using the defined variable or remove it?"
 
 msgid "Var Undefined"
-msgstr "Variable `{name}` used without setting it. Also consider using quotation marks for `{name}`."
+msgstr "We detected that variable `{name}` is being used before being set. Can you set the variable before it is used or use quotation marks for `{name}`?"
 
 msgid "Wrong Level"
-msgstr "Correct Hedy code, but not on the wrong level. `{offending_keyword}` is used on level {working_level}. Tip: {tip}"
+msgstr "We detected that the written code is correct Hedy code, but `{offending_keyword}` is used on level {working_level}. {tip}"
 
 msgid "Wrong Number of Arguments"
-msgstr "Wrong number of arguments for function {name}. Provided {used_number}, needs {defined_number}"
+msgstr "We detected that function {name} has wrong number of arguments which is {used_number}. Can you try writing {defined_number} instead?"
 
 msgid "account_overview"
 msgstr "Account overview"
@@ -155,18 +155,6 @@ msgstr "Accounts were successfully created."
 
 msgid "accounts_intro"
 msgstr "On this page you can create accounts for multiple students at once. These are automatically added to the current class, so make sure the class shown above is the right one! Every username needs to be unique in the entire Hedy system. You can use 'Postfix classname' to add your class name to all accounts. If you manually enter passwords, these need to be <b>at least</b> 6 characters."
-
-msgid "achievement_earned"
-msgstr "You've earned an achievement!"
-
-msgid "achievements"
-msgstr "achievements"
-
-msgid "achievements_check_icon_alt"
-msgstr "Achievement check icon"
-
-msgid "achievements_logo_alt"
-msgstr "Achievement logo"
 
 msgid "actions"
 msgstr "Actions"
@@ -276,15 +264,6 @@ msgstr "You already have a teacher account."
 msgid "already_teacher_request"
 msgstr "You already have a pending teacher request."
 
-msgid "amount_created"
-msgstr "programs created"
-
-msgid "amount_saved"
-msgstr "programs saved"
-
-msgid "amount_submitted"
-msgstr "programs submitted"
-
 msgid "are_you_sure"
 msgstr "Are you sure? You cannot revert this action."
 
@@ -393,9 +372,6 @@ msgstr "Command not correct anymore"
 msgid "commands"
 msgstr "Commands"
 
-msgid "common_errors"
-msgstr "Common errors"
-
 msgid "congrats_message"
 msgstr "Congratulations, {username}, you have reached the following results with Hedy!"
 
@@ -438,9 +414,6 @@ msgstr "Country"
 msgid "country_invalid"
 msgstr "Please select a valid country."
 
-msgid "country_title"
-msgstr "Country"
-
 msgid "create_account"
 msgstr "Create account"
 
@@ -458,9 +431,6 @@ msgstr "Create a new class"
 
 msgid "create_multiple_accounts"
 msgstr "Create multiple accounts"
-
-msgid "create_public_profile"
-msgstr "Create public profile"
 
 msgid "create_question"
 msgstr "Do you want to create one?"
@@ -645,9 +615,6 @@ msgstr "Please select a valid experience, choose (Yes, No)."
 msgid "expiration_date"
 msgstr "Expiration date"
 
-msgid "explore_explanation"
-msgstr "On this page you can look through programs created by other Hedy users. You can filter on both a Hedy level and adventure. Click on \"View program\" to open a program and run it. Programs with a red header contain a mistake. You can still open the program, but running it will result in an error. You can of course try to fix it! If the creator has a public profile you can click their username to visit their profile. There you will find all their shared programs and much more!"
-
 msgid "explore_programs"
 msgstr "Explore programs"
 
@@ -717,9 +684,6 @@ msgstr "Gender"
 msgid "gender_invalid"
 msgstr "Please select a valid gender, choose (Female, Male, Other)."
 
-msgid "general"
-msgstr "General"
-
 msgid "general_settings"
 msgstr "General settings"
 
@@ -750,9 +714,6 @@ msgstr "Go to my profile"
 msgid "graph_title"
 msgstr "Errors per adventure completed on level {level}"
 
-msgid "grid_overview"
-msgstr "Overview of programs per adventure"
-
 msgid "hand_in"
 msgstr "Hand in"
 
@@ -764,9 +725,6 @@ msgstr "How have you heard about Hedy?"
 
 msgid "heard_about_invalid"
 msgstr "Please select a valid way you heard about us."
-
-msgid "hedy_achievements"
-msgstr "Hedy achievements"
 
 msgid "hedy_choice_title"
 msgstr "Hedy's Choice"
@@ -786,9 +744,6 @@ msgstr "Hedy tutorial icon"
 msgid "hello_logo"
 msgstr "hello"
 
-msgid "hidden"
-msgstr "Hidden"
-
 msgid "hide_cheatsheet"
 msgstr "Hide cheatsheet"
 
@@ -800,15 +755,6 @@ msgstr "Highest level reached"
 
 msgid "highest_quiz_score"
 msgstr "Highest quiz score"
-
-msgid "highscore_explanation"
-msgstr "On this page you can view the current Highscores, based on the amount of achievements gathered. View the ranking for either all users, your country or your class. Click on a username to view their public profile."
-
-msgid "highscore_no_public_profile"
-msgstr "You don't have a public profile and are therefore not listed on the highscores. Do you wish to create one?"
-
-msgid "highscores"
-msgstr "Highscores"
 
 msgid "hint"
 msgstr "Hint?"
@@ -909,17 +855,8 @@ msgstr "Please select a valid language."
 msgid "languages"
 msgstr "Which of these programming languages have you used before?"
 
-msgid "last_achievement"
-msgstr "Last earned achievement"
-
 msgid "last_edited"
 msgstr "Last edited"
-
-msgid "last_error"
-msgstr "Last error"
-
-msgid "last_program"
-msgstr "Last program"
 
 msgid "last_update"
 msgstr "Last update"
@@ -962,9 +899,6 @@ msgstr "a list"
 
 msgid "list_variable_role"
 msgstr "list"
-
-msgid "live_dashboard"
-msgstr "Live Dashboard"
 
 msgid "logged_in_to_share"
 msgstr "You must be logged in to save and share a program."
@@ -1081,9 +1015,6 @@ msgstr "We've noticed you have both selected several levels and included code sn
 msgid "my_account"
 msgstr "My account"
 
-msgid "my_achievements"
-msgstr "My achievements"
-
 msgid "my_adventures"
 msgstr "My adventures"
 
@@ -1141,9 +1072,6 @@ msgstr "There are no accounts to create."
 msgid "no_adventures_yet"
 msgstr "There are no public adventures yet..."
 
-msgid "no_certificate"
-msgstr "This user hasn't earned the Hedy Certificate of Completion"
-
 msgid "no_more_flat_if"
 msgstr "Starting in level 8, the code after `{if}` needs to be placed on the next line and start with 4 spaces."
 
@@ -1161,9 +1089,6 @@ msgstr "This adventure doesn't exist!"
 
 msgid "no_such_class"
 msgstr "No such Hedy class."
-
-msgid "no_such_highscore"
-msgstr "Highscores"
 
 msgid "no_such_level"
 msgstr "No such Hedy level!"
@@ -1195,9 +1120,6 @@ msgstr "Looks like you are not a teacher!"
 msgid "number"
 msgstr "a number"
 
-msgid "number_achievements"
-msgstr "Number of achievements"
-
 msgid "number_lines"
 msgstr "Number of lines"
 
@@ -1209,6 +1131,9 @@ msgstr "Number of programs ran"
 
 msgid "ok"
 msgstr "OK"
+
+msgid "one_level_error"
+msgstr "You need to select at least one level."
 
 msgid "only_you_can_see"
 msgstr "Only you can see this program."
@@ -1297,9 +1222,6 @@ msgstr "Other people with a link can see this program. It also can be found on t
 msgid "percentage"
 msgstr "percentage"
 
-msgid "percentage_achieved"
-msgstr "Achieved by {percentage}% of the users"
-
 msgid "period"
 msgstr "a period"
 
@@ -1323,6 +1245,9 @@ msgstr "Preferred language"
 
 msgid "preview"
 msgstr "Preview"
+
+msgid "preview_teacher_mode"
+msgstr "This account is for you to try out Hedy, note that you need to sign out and create an actual account to save your progress."
 
 msgid "previewing_adventure"
 msgstr "Previewing adventure"
@@ -1374,15 +1299,6 @@ msgstr "Please select a valid programming language."
 
 msgid "programs"
 msgstr "Programs"
-
-msgid "programs_created"
-msgstr "Programs created"
-
-msgid "programs_saved"
-msgstr "Programs saved"
-
-msgid "programs_submitted"
-msgstr "Programs submitted"
 
 msgid "prompt_join_class"
 msgstr "Do you want to join this class?"
@@ -1516,9 +1432,6 @@ msgstr "Role"
 msgid "run_code_button"
 msgstr "Run code"
 
-msgid "runs_over_time"
-msgstr "Runs over time"
-
 msgid "save_parse_warning"
 msgstr "This program contains an error, are you sure you want to save it?"
 
@@ -1618,6 +1531,12 @@ msgstr "For each level of Hedy, we have created slides to help you teach. The sl
 msgid "social_media"
 msgstr "Social media"
 
+msgid "solution_example"
+msgstr "Solution Example"
+
+msgid "solution_example_explanation"
+msgstr "This is where the solution of your adventure goes. This can be used if you want to share this adventure with other teacher's, so they can know what your suggested solution is."
+
 msgid "something_went_wrong_keyword_parsing"
 msgstr "There is a mistake in your adventure, are all keywords correctly surrounded with { }?"
 
@@ -1669,9 +1588,6 @@ msgstr "This student is already in your class."
 msgid "student_already_invite"
 msgstr "This student already has a pending invitation."
 
-msgid "student_details"
-msgstr "Student details"
-
 msgid "student_not_allowed_in_class"
 msgstr "Student not allowed in class"
 
@@ -1715,7 +1631,7 @@ msgid "suggestion_color"
 msgstr "Try using another color"
 
 msgid "suggestion_note"
-msgstr "Use a note between C0 and B9 or a number between 1 and 70"
+msgstr "Try using a note between C0 and B9 or a number between 1 and 70"
 
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
@@ -1794,9 +1710,6 @@ msgstr "This turns in your assignment to your teacher."
 
 msgid "title"
 msgstr "Title"
-
-msgid "title_achievements"
-msgstr "Hedy - My achievements"
 
 msgid "title_admin"
 msgstr "Hedy - Administrator page"
@@ -1992,9 +1905,6 @@ msgstr "What is your role?"
 msgid "what_should_my_code_do"
 msgstr "What should my code do?"
 
-msgid "whole_world"
-msgstr "The world"
-
 msgid "year_invalid"
 msgstr "Please enter a year between 1900 and {current_year}."
 
@@ -2003,9 +1913,6 @@ msgstr "Yes"
 
 msgid "your_account"
 msgstr "Your profile"
-
-msgid "your_class"
-msgstr "Your class"
 
 msgid "your_last_program"
 msgstr "Your last saved program"
@@ -2235,4 +2142,112 @@ msgstr "Your program"
 
 #~ msgid "title_class live_statistics"
 #~ msgstr "Hedy - Live Statistics"
+
+#~ msgid "tips"
+#~ msgstr ""
+
+#~ msgid "amount_created"
+#~ msgstr "programs created"
+
+#~ msgid "amount_saved"
+#~ msgstr "programs saved"
+
+#~ msgid "common_errors"
+#~ msgstr "Common errors"
+
+#~ msgid "grid_overview"
+#~ msgstr "Overview of programs per adventure"
+
+#~ msgid "last_error"
+#~ msgstr "Last error"
+
+#~ msgid "last_program"
+#~ msgstr "Last program"
+
+#~ msgid "live_dashboard"
+#~ msgstr "Live Dashboard"
+
+#~ msgid "runs_over_time"
+#~ msgstr "Runs over time"
+
+#~ msgid "student_details"
+#~ msgstr "Student details"
+
+#~ msgid "explore_explanation"
+#~ msgstr "On this page you can look through programs created by other Hedy users. You can filter on both a Hedy level and adventure. Click on \"View program\" to open a program and run it. Programs with a red header contain a mistake. You can still open the program, but running it will result in an error. You can of course try to fix it! If the creator has a public profile you can click their username to visit their profile. There you will find all their shared programs and much more!"
+
+#~ msgid "achievement_earned"
+#~ msgstr "You've earned an achievement!"
+
+#~ msgid "achievements"
+#~ msgstr "achievements"
+
+#~ msgid "achievements_check_icon_alt"
+#~ msgstr "Achievement check icon"
+
+#~ msgid "achievements_logo_alt"
+#~ msgstr "Achievement logo"
+
+#~ msgid "amount_submitted"
+#~ msgstr "programs submitted"
+
+#~ msgid "country_title"
+#~ msgstr "Country"
+
+#~ msgid "create_public_profile"
+#~ msgstr "Create public profile"
+
+#~ msgid "general"
+#~ msgstr "General"
+
+#~ msgid "hedy_achievements"
+#~ msgstr "Hedy achievements"
+
+#~ msgid "hidden"
+#~ msgstr "Hidden"
+
+#~ msgid "highscore_explanation"
+#~ msgstr "On this page you can view the current Highscores, based on the amount of achievements gathered. View the ranking for either all users, your country or your class. Click on a username to view their public profile."
+
+#~ msgid "highscore_no_public_profile"
+#~ msgstr "You don't have a public profile and are therefore not listed on the highscores. Do you wish to create one?"
+
+#~ msgid "highscores"
+#~ msgstr "Highscores"
+
+#~ msgid "last_achievement"
+#~ msgstr "Last earned achievement"
+
+#~ msgid "my_achievements"
+#~ msgstr "My achievements"
+
+#~ msgid "no_certificate"
+#~ msgstr "This user hasn't earned the Hedy Certificate of Completion"
+
+#~ msgid "no_such_highscore"
+#~ msgstr "Highscores"
+
+#~ msgid "number_achievements"
+#~ msgstr "Number of achievements"
+
+#~ msgid "percentage_achieved"
+#~ msgstr "Achieved by {percentage}% of the users"
+
+#~ msgid "programs_created"
+#~ msgstr "Programs created"
+
+#~ msgid "programs_saved"
+#~ msgstr "Programs saved"
+
+#~ msgid "programs_submitted"
+#~ msgstr "Programs submitted"
+
+#~ msgid "title_achievements"
+#~ msgstr "Hedy - My achievements"
+
+#~ msgid "whole_world"
+#~ msgstr "The world"
+
+#~ msgid "your_class"
+#~ msgstr "Your class"
 

@@ -32,7 +32,6 @@ export function autoSave(formId: string,
           // If the event is not from a customEvent with is the element autosaved, we pass.
           return
         }
-
           // Now we can simply trigger the submit event on the parent form element.
           formElement.requestSubmit()
 

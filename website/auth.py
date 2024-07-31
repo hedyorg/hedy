@@ -155,7 +155,6 @@ def is_user_logged_in():
 def forget_current_user():
     session.pop("user", None)  # We are not interested in the value of the use key.
     session.pop("messages", None)  # Delete messages counter for current user if existed
-    session.pop("achieved", None)  # Delete session achievements if existing
     session.pop("keyword_lang", None)  # Delete session keyword language if existing
     session.pop("profile_image", None)  # Delete profile image id if existing
 

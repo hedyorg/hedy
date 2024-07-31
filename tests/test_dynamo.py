@@ -4,7 +4,7 @@ import unittest
 from unittest import mock
 
 from website import dynamo
-from website.dynamo import Optional
+from website.dynamo import OptionalOf
 
 
 class Helpers:
@@ -262,10 +262,10 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
             types={
                 'id': str,
                 'sort': int,
-                'x': Optional(int),
-                'y': Optional(int),
-                'm': Optional(int),
-                'n': Optional(int),
+                'x': OptionalOf(int),
+                'y': OptionalOf(int),
+                'm': OptionalOf(int),
+                'n': OptionalOf(int),
             },
             indexes=[
                 dynamo.Index(
@@ -616,12 +616,43 @@ class TestSortKeysAgainstAws(unittest.TestCase):
             'sort': dynamo.Between(2, 5),
         })
         self.db.query.assert_called_with(
-            KeyConditionExpression='#id = :id AND #sort BETWEEN :sort_min AND :sort_max', ExpressionAttributeValues={
-                ':id': {
-                    'S': 'key'}, ':sort_min': {
-                    'N': '2'}, ':sort_max': {
-                    'N': '5'}}, ExpressionAttributeNames={
-                        '#id': 'id', '#sort': 'sort'}, TableName=mock.ANY, ScanIndexForward=mock.ANY)
+            KeyConditionExpression='#id = :id AND #sort BETWEEN :sort_min AND :sort_max',
+            ExpressionAttributeValues={
+                ':id': {'S': 'key'},
+                ':sort_min': {'N': '2'},
+                ':sort_max': {'N': '5'}
+            }, ExpressionAttributeNames={
+                '#id': 'id',
+                '#sort': 'sort'
+            },
+            TableName=mock.ANY,
+            ScanIndexForward=mock.ANY
+        )
+
+    def test_key_with_hash_in_it(self):
+        self.table = dynamo.Table(
+            dynamo.AwsDynamoStorage(self.db, ''),
+            'table',
+            partition_key='id#key',
+            sort_key='sort#key',
+        )
+        self.table.get_many({
+            'id#key': 'key',
+            'sort#key': dynamo.Between(2, 5),
+        })
+        self.db.query.assert_called_with(
+            KeyConditionExpression='#id_key = :id_key AND #sort_key BETWEEN :sort_key_min AND :sort_key_max',
+            ExpressionAttributeValues={
+                ':id_key': {'S': 'key'},
+                ':sort_key_min': {'N': '2'},
+                ':sort_key_max': {'N': '5'}
+            }, ExpressionAttributeNames={
+                '#id_key': 'id#key',
+                '#sort_key': 'sort#key'
+            },
+            TableName=mock.ANY,
+            ScanIndexForward=mock.ANY
+        )
 
 
 def try_to_delete(filename):

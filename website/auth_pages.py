@@ -248,6 +248,9 @@ class AuthModule(WebsiteModule):
             self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         session[JUST_LOGGED_OUT] = True
         remove_class_preview()
+        if session.get("preview_teacher_mode"):
+            self.db.forget_user(session["preview_teacher_mode"]["username"])
+            session["preview_teacher_mode"] = None
         return make_response('', 204)
 
     @route("/destroy", methods=["POST"])
@@ -469,3 +472,42 @@ class AuthModule(WebsiteModule):
                 return user, make_response({gettext("mail_error_change_processed")}, 400)
             resp = make_response('', 200)
         return user, resp
+
+    @route('/public_profile', methods=['POST'])
+    @requires_login
+    def update_public_profile(self, user):
+        body = request.json
+
+        # Validations
+        if not isinstance(body, dict):
+            return make_response(gettext('ajax_error'), 400)
+        # The images are given as a "picture id" from 1 till 12
+        if not isinstance(body.get('image'), str) or int(body.get('image'), 0) not in [*range(1, 13)]:
+            return make_response(gettext('image_invalid'), 400)
+        if not isinstance(body.get('personal_text'), str):
+            return make_response(gettext('personal_text_invalid'), 400)
+        if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
+            return make_response(gettext('favourite_program_invalid'), 400)
+
+        # Verify that the set favourite program is actually from the user (and public)!
+        if 'favourite_program' in body:
+            program = self.db.program_by_id(body.get('favourite_program'))
+            if not program or program.get('username') != user['username'] or not program.get('public'):
+                return make_response(gettext('favourite_program_invalid'), 400)
+        current_profile = self.db.get_public_profile_settings(user['username'])
+
+        # Make sure the session value for the profile image is up-to-date
+        session['profile_image'] = body.get('image')
+
+        # If there is no current profile or if it doesn't have the tags list ->
+        # check if the user is a teacher / admin
+        if not current_profile or not current_profile.get('tags'):
+            body['tags'] = []
+            if is_teacher(user):
+                body['tags'].append('teacher')
+            if is_admin(user):
+                body['tags'].append('admin')
+
+        self.db.update_public_profile(user['username'], body)
+        response = {"message": gettext("public_profile_updated")}
+        return response
