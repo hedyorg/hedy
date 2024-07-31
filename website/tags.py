@@ -6,8 +6,6 @@ import uuid
 import utils
 from config import config
 from website.auth import requires_teacher
-
-from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
 
@@ -16,11 +14,9 @@ invite_length = config["session"]["invite_length"] * 60
 
 
 class TagsModule(WebsiteModule):
-    def __init__(self, db: Database, achievements: Achievements):
+    def __init__(self, db: Database):
         super().__init__("tags", __name__, url_prefix="/tags")
-
         self.db = db
-        self.achievements = achievements
 
     @route("/<adventure_id>", methods=["GET"])
     @route("/", methods=["GET"], defaults={"adventure_id": None})
