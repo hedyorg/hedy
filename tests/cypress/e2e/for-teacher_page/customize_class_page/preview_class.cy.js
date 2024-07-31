@@ -31,7 +31,7 @@ teachers.forEach((teacher) => {
 
         // we now expect the normal situation to be restored
         goToHedyPage();
-        goToHedyPage();
+        cy.wait(500);
         cy.visit('/hedy/1#print_command')
         cy.getDataCy('dropdown_adventure_button').should('contain.text', 'print');
         cy.getDataCy('preview_class_banner').should("not.exist");
