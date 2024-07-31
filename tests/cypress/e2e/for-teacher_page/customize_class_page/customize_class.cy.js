@@ -144,6 +144,7 @@ teachers.forEach((teacher) => {
       loginForStudent();
       goToHedyPage();
       cy.visit('/hedy/1#ask_command');
+      cy.visit('/hedy/1#ask_command');
       cy.reload();
       cy.getDataCy('dropdown_adventure_button').should('contain.text', 'ask');
     });
