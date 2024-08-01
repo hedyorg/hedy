@@ -14,14 +14,13 @@ describe("General tests for my programs page (with both custom teacher and built
     it("create adventure, run its code, and see it in my programs", () => {
         createAdventure(programName);
         navigateToClass("CLASS1");
-        cy.getDataCy("customize_class_button").click(); // Press customize class button
-        cy.getDataCy("available_adventures_current_level").select(`${programName}`);
+        cy.getDataCy('customize_class_button').click(); // Press customize class button
+        cy.getDataCy('available_adventures_current_level').select(`${programName}`);
 
         // Now preview it and run the program
-        cy.getDataCy('preview_class_link')
-            .click();
+        cy.getDataCy('preview_class_link').click();
         executeHelloWorldProgram(programName)
-        cy.get(".programs").should("contain.text", programName);
+        cy.getDataCy('programs').should("contain.text", programName);
 
         deleteAdventure(programName)
     });
@@ -29,41 +28,39 @@ describe("General tests for my programs page (with both custom teacher and built
     it("should not be added to my programs when running a program with copied code", () => {
         cy.visit(`${Cypress.env('hedy_page')}#${adventure}`);
         // make sure to navigate to the wanted program tab.
-        cy.getDataCy(adventure)
-            .click();
+        cy.getDataCy(adventure).click();
         // Paste example code
         cy.getDataCy(`paste_example_code_${adventure}`).click();
-        cy.get('#runit').click();
+        cy.getDataCy('runit').click();
         cy.wait(500);
         cy.visit(`${Cypress.env('programs_page')}`);
-        cy.get(".programs").should("not.contain.text", adventure);
+        cy.getDataCy('programs').should("not.contain.text", adventure);
     });
 
     it("should be added to my programs when running a program with modified code", () => {
         cy.visit(`${Cypress.env('hedy_page')}#${adventure}`);
         // make sure to navigate to the wanted program tab.
-        cy.getDataCy(adventure)
-            .click();
+        cy.getDataCy(adventure).click();
         // Paste example code and modify code
         cy.getDataCy(`paste_example_code_${adventure}`).click();
         cy.get('#editor .cm-content').click();
         cy.focused().type('print Hello world\nask Hello world?');
-        cy.get('#runit').click();
+        cy.getDataCy('runit').click();
         cy.wait(500);
         cy.visit(`${Cypress.env('programs_page')}`);
-        cy.get(".programs").should("contain.text", adventure);
+        cy.getDataCy('programs').should("contain.text", adventure);
     });
 
     it('can make program public', () => {
         cy.visit(`${Cypress.env('programs_page')}`);
-        cy.get(`[data-name=${programName}]`)
+        cy.getDataCy(`${programName}`)
             .first()
             .then($el => {
                 const programId = $el[0].getAttribute("data-id");
-                cy.get(`#share_option_dropdown_${programId}`).click();
-                cy.get(`#share_button_${programId}`).click();
-                cy.get(`#share_option_dropdown_${programId}`).should('contain.text', 'Public');
-                cy.get(`#non_submitted_button_container_${programId} [data-cy="submit_btn"]`).should('be.visible');
+                cy.getDataCy(`share_option_dropdown_${programId}`).click();
+                cy.getDataCy(`share_button_${programId}`).click();
+                cy.getDataCy(`share_option_dropdown_${programId}`).should('contain.text', 'Public');
+                cy.getDataCy(`non_submitted_button_container_${programId}`).getDataCy(`submit_btn_${programId}`).should('be.visible');
             })
     });
 
@@ -75,22 +72,21 @@ describe("General tests for my programs page (with both custom teacher and built
         makeProfilePublic();
         cy.wait('@public_profile')
         cy.visit(`${Cypress.env('programs_page')}`);
-        cy.get(`[data-name=${programName}]`)
+        cy.getDataCy(`${programName}`)
             .first()
             .then($el => {
                 const programId = $el[0].getAttribute("data-id");
                 //favourite a program:
-                cy.get(`#favourite_program_container_${programId}`).click();
-                cy.get(`#modal_confirm_text`).should('contain.text', 'favourite');
+                cy.getDataCy(`favourite_program_container_${programId}`).click();
+                cy.getDataCy('modal_confirm_text').should('contain.text', 'favourite');
                 cy.getDataCy('modal_yes_button').click();
                 //unfavourite a program:
                 cy.wait(500);
-                cy.get(`#favourite_program_container_${programId}`).click();
-                cy.get(`#modal_confirm_text`).should('contain.text', 'unfavourite');
+                cy.getDataCy(`favourite_program_container_${programId}`).click();
+                cy.getDataCy('modal_confirm_text').should('contain.text', 'unfavourite');
                 cy.getDataCy('modal_yes_button').click();
             })
     });
-
 
     it("second-teachers can view each other's public programs", () => {
         loginForTeacher("teacher4");
@@ -99,17 +95,17 @@ describe("General tests for my programs page (with both custom teacher and built
             .each(($tr, i) => {
                 if ($tr.text().includes("teacher1")) {
                     cy.get(`#second_teachers_container tbody :nth-child(${i+1}) [data-cy="programs"]`).click();
-                    cy.get(".programs")
+                    cy.getDataCy('programs')
                         .should("contain.text", programName);
                     // but second teacher should is not permitted to see submit or delete btns.
                     cy.get(`[data-name=${programName}]`)
                     .first()
                     .then($el => {
                         const programId = $el[0].getAttribute("data-id");
-                        cy.get(`#non_submitted_button_container_${programId} [data-cy="submit_btn"]`)
+                        cy.getDataCy(`submit_btn_${programId}`)
                             .should('not.be.visible');
-                        cy.get(`#more_options_${programId}`).click();
-                        cy.get(`#program_options_dropdown_${programId}`).should("be.visible");
+                        cy.getDataCy(`more_options_${programId}`).click();
+                        cy.getDataCy(`program_options_dropdown_${programId}`).should("be.visible");
                         cy.getDataCy(`delete_non_submitted_program_${programId}`).should("not.exist");
                     })
                 }
@@ -117,18 +113,44 @@ describe("General tests for my programs page (with both custom teacher and built
 
     });
 
+
+    // it("second-teachers can view each other's public programs", () => {
+    //     loginForTeacher("teacher4");
+    //     navigateToClass("CLASS1");
+    //     cy.getDataCy('second_teachers_container')
+    //         .each(($tr, i) => {
+    //             if ($tr.text().includes("teacher1")) {
+    //                 cy.get(`#second_teachers_container tbody :nth-child(${i+1}) [data-cy="programs"]`).click();
+
+    //                 cy.getDataCy('programs').should("contain.text", programName);
+    //                 // but second teacher should is not permitted to see submit or delete btns.
+    //                 cy.get(`${programName}`)
+    //                 .first()
+    //                 .then($el => {
+    //                     const programId = $el[0].getAttribute("data-id");
+    //                     cy.getDataCy(`submit_btn_${programId}`)
+    //                         .should('not.be.visible');
+    //                     cy.getDataCy(`more_options_${programId}`).click();
+    //                     cy.getDataCy(`program_options_dropdown_${programId}`).should("be.visible");
+    //                     cy.getDataCy(`delete_non_submitted_program_${programId}`).should("not.exist");
+    //                 })
+    //             }
+    //         })
+
+    // });
+
     it('can make program private', () => {
         cy.visit(`${Cypress.env('programs_page')}`);
 
-        cy.get(`[data-name=${programName}]`)
-                    .first()
-                    .then($el => {
-                        const programId = $el[0].getAttribute("data-id");
-                        cy.get(`#share_option_dropdown_${programId}`).click();
-                        cy.get(`#share_button_${programId}`).click();
-                        cy.get(`#share_option_dropdown_${programId}`).should('contain.text', 'Private');
-                        cy.get(`#non_submitted_button_container_${programId} [data-cy="submit_btn"]`).should('not.be.visible');
-                    })
+        cy.getDataCy(`${programName}`)
+        .first()
+        .then($el => {
+            const programId = $el[0].getAttribute("data-id");
+            cy.getDataCy(`share_option_dropdown_${programId}`).click();
+            cy.getDataCy(`share_button_${programId}`).click();
+            cy.getDataCy(`share_option_dropdown_${programId}`).should('contain.text', 'Private');
+            cy.getDataCy(`non_submitted_button_container_${programId}`).getDataCy(`submit_btn_${programId}`).should('not.be.visible');
+        })
     });
 
     it("second-teachers can NOT view each other's public programs after making them private", () => {

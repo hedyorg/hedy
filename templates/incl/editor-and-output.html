@@ -86,7 +86,7 @@
         </div>
     </div>
     <div data-devmodeheight="{{editor_height}},36rem" data-origheight="{{editor_height}}" class="w-full flex flex-col order-3 relative min-h-0 overflow-hidden" id="code_output" style="height: {{editor_height}}">
-      <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto" style="min-height: 3rem;"></div>
+      <div id="output" data-cy="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto" style="min-height: 3rem;"></div>
           <div id="variable_button" class="hidden my-3 cursor-pointer" onclick="$('#variable_list').slideToggle('medium');">
             <div class="h-2 z-10 bg-blue-500 content-center justify-center grid text-center">
                 <div class="w-fit bg-blue-500 text-white px-5 rounded-lg text-sm">
@@ -154,7 +154,7 @@
       {% endif %}
       <div class="flex justify-between gap-2 items-start h-12 overflow-visible">
         <div id="run_button_container">
-          <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>{{_('run_code_button')}} </button>
+          <button id="runit" data-cy="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>{{_('run_code_button')}} </button>
           <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
         </div>
       <div id="saveMicrobitFilesContainer" {% if not microbit_feature %} class="hidden" {% endif %} >
