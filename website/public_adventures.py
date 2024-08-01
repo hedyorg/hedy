@@ -11,7 +11,6 @@ from website.auth import requires_teacher
 from website.flask_helpers import render_template
 from jinja_partials import render_partial
 
-from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
 from safe_format import safe_format
@@ -21,11 +20,10 @@ invite_length = config["session"]["invite_length"] * 60
 
 
 class PublicAdventuresModule(WebsiteModule):
-    def __init__(self, db: Database, achievements: Achievements):
+    def __init__(self, db: Database):
         super().__init__("public_adventures", __name__, url_prefix="/public-adventures")
 
         self.db = db
-        self.achievements = achievements
         self.adventures = {}
         self.customizations = {"available_levels": set()}
         self.available_languages = set()
@@ -243,7 +241,6 @@ class PublicAdventuresModule(WebsiteModule):
                     # Replace the old adventure with the new adventure
                     self.adventures[_level][i] = adventure
                     break
-        # TODO: add achievement
         return render_partial('htmx-adventure-card.html', user=user, adventure=adventure, level=level,)
 
     def update_filters(self, adventures,  to_filter):
