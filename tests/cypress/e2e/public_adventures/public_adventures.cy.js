@@ -27,8 +27,7 @@ describe("Able to browse all public adventures and use filters", () => {
     })
 
     it("should be able to filter by language", () => {
-        cy.get("#language_select")
-            .click()
+        cy.getDataCy('language_select').click()
 
         cy.get('#language_select > div > div.dropdown-menu').should('be.visible');
 

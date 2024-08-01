@@ -97,7 +97,7 @@ export function goToEditAdventure()
     // takes the first adventures and goes to its edit page
     // It does not matter which adventure we take (we choose the first one)
     openAdventureView();
-    cy.getDataCy("edit_link_adventure").first().click();
+    cy.getDataCy("edit_link_adventure1").first().click();
 }
 
 export function goToExploreProgramsPage()

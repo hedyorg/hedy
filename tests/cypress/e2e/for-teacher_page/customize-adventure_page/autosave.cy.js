@@ -1,7 +1,7 @@
 import {loginForTeacher} from '../../tools/login/login.js'
 import {goToEditAdventure} from '../../tools/navigation/nav.js'
 
-it('auto save should work when changing the name field.', () => {
+it('Is able to auto save when changing the name field.', () => {
   cy.intercept({
     method: "POST",
     url: "/for-teachers/customize-adventure",

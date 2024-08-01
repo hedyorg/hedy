@@ -94,7 +94,7 @@ onclick="window.open('/for-teachers', '_self');">
                             <div class="flex-1">
                                 <custom-select data-type="multiple" id="classes_dropdown" data-cy="classes_select" data-label="{{_('used_in')}}">
                                     {% for class in all_classes %}
-                                        <option {% if class.id in adventure.classes %}selected{% endif %} value="{{class.id}}">{{ class.name }}</option>
+                                        <option {% if class.id in adventure.classes %}selected{% endif %} value="{{class.id}}" data-cy="{{class.name}}">{{ class.name }}</option>
                                     {% endfor %}
                                 </custom-select>
                             </div>
