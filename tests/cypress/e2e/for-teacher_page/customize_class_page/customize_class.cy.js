@@ -142,10 +142,11 @@ teachers.forEach((teacher) => {
 
       // should be visible for a student
       loginForStudent();
-      cy.visit('/hedy/1#ask_command');
-      cy.reload();
+      goToHedyPage();
+      cy.getDataCy('dropdown_adventure_button').click();
       cy.wait(500);
-      cy.getDataCy('dropdown_adventure_button').should('contain.text', 'ask');
+      cy.getDataCy('adventure_dropdown').should('be.visible');
+      cy.getDataCy(`adventure_button_ask`).scrollIntoView().should('be.visible');
     });
 
     //commenting this out because the for each takes time.
