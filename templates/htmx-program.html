@@ -1,4 +1,4 @@
-<div id="program_{{ program.id }}" data-cy="program_{{program.id}}" data-name="{{program.name}}" data-id="{{program.id}}" class="program w-full border-solid border-2 {% if program.submitted %} border-gray-400 bg-gray-400 {% else %} border-orange-400 {% endif %} rounded p-4 mb-4">
+<div id="program_{{ program.id }}" data-cy="{{program.name}}" data-name="{{program.name}}" data-id="{{program.id}}" class="program w-full border-solid border-2 {% if program.submitted %} border-gray-400 bg-gray-400 {% else %} border-orange-400 {% endif %} rounded p-4 mb-4">
     <h3 id="submitted_header_{{ program.id }}" class="mt-0 mb-4 text-red-500 text-center {% if not program.submitted %} hidden{% endif %}">{{_('submitted_header')}}</h3>
     <div class="flex flex-row">
         <div class="flex flex-row flex-wrap justify-between">
