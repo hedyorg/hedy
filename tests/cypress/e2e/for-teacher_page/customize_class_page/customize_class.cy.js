@@ -1,5 +1,5 @@
 import { loginForTeacher, loginForStudent } from '../../tools/login/login.js'
-import { createClass, navigateToClass, removeCustomizations, selectLevel, deleteClass } from "../../tools/classes/class";
+import { navigateToClass, removeCustomizations, selectLevel } from "../../tools/classes/class";
 import { goToHedyPage } from "../../tools/navigation/nav";
 
 const teachers = ["teacher1", "teacher4"];
