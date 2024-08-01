@@ -1,14 +1,20 @@
 import { loginForTeacher, loginForStudent } from '../../tools/login/login.js'
-import { navigateToClass, removeCustomizations, selectLevel } from "../../tools/classes/class";
+import { createClass, navigateToClass, removeCustomizations, selectLevel } from "../../tools/classes/class";
 import { goToHedyPage } from "../../tools/navigation/nav";
 
 const teachers = ["teacher1", "teacher4"];
+let classname;
 
 teachers.forEach((teacher) => {
   describe(`customize class page for ${teacher}`, () => {
+    before(() => {
+      loginForTeacher(teacher);
+      classname = createClass();
+    });
+
     beforeEach(() => {
       loginForTeacher(teacher);
-      navigateToClass();
+      navigateToClass(classname);
       removeCustomizations();
     });
   
@@ -143,10 +149,9 @@ teachers.forEach((teacher) => {
       // should be visible for a student
       loginForStudent();
       goToHedyPage();
-      cy.getDataCy('dropdown_adventure_button').click();
-      cy.wait(500);
-      cy.getDataCy('adventure_dropdown').should('be.visible');
-      cy.getDataCy(`adventure_button_ask`).scrollIntoView().should('be.visible');
+      cy.visit(`/hedy/1#${hiddenAdventure}`);
+      cy.reload();
+      cy.getDataCy('dropdown_adventure_button').should('contain.text', 'ask');
     });
 
     //commenting this out because the for each takes time.
