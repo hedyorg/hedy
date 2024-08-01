@@ -1,23 +1,16 @@
 import { loginForTeacher, loginForStudent } from '../../tools/login/login.js'
-import { createClass, navigateToClass, removeCustomizations, selectLevel } from "../../tools/classes/class";
+import { createClass, navigateToClass, removeCustomizations, selectLevel, deleteClass } from "../../tools/classes/class";
 import { goToHedyPage } from "../../tools/navigation/nav";
 
 const teachers = ["teacher1", "teacher4"];
-let classname;
 
 teachers.forEach((teacher) => {
   describe(`customize class page for ${teacher}`, () => {
-    before(() => {
-      loginForTeacher(teacher);
-      classname = createClass();
-    });
-
     beforeEach(() => {
       loginForTeacher(teacher);
-      navigateToClass(classname);
+      navigateToClass();
       removeCustomizations();
     });
-  
     // TODO: add check if the quiz actually has a treshold now, either here or in quiz.cy.js
     it('Is able to fill in the quiz score and click on go back button', () => {
       cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations'); 
@@ -135,7 +128,7 @@ teachers.forEach((teacher) => {
     });
 
     it('Is able to be re-added from the right dropdown list', () => {
-      const hiddenAdventure = 'ask_command';
+      const hiddenAdventure = 'parrot';
       selectLevel('1');
       cy.getDataCy(`hide_adv_${hiddenAdventure}`).click();
 
@@ -151,7 +144,7 @@ teachers.forEach((teacher) => {
       goToHedyPage();
       cy.visit(`/hedy/1#${hiddenAdventure}`);
       cy.reload();
-      cy.getDataCy('dropdown_adventure_button').should('contain.text', 'ask');
+      cy.getDataCy('dropdown_adventure_button').should('contain.text', 'Parrot');
     });
 
     //commenting this out because the for each takes time.
