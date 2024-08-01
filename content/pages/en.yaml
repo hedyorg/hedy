@@ -349,7 +349,7 @@ teacher-guide:
             It is important to notice that the blue dots means that a students 'attempted' the adventure. This means that they ran a code in this adventure and went on to the next adventure, so this does not automatically mean that they did a good job!
             If you want to see how an individual student is getting along, you can click their name in this overview. This is what you see if you click on marleen_h3a for example:
             <img src="https://github.com/hedyorg/hedy/assets/80678586/f8c2480d-c724-46f9-a702-33532828de70" width="800">
-            You see that Marleen is having some trouble programming. She tried to run a program that contains blanks multiple times, so she probably doesn't know that she has to change the code examples before running them.
+            You see that Marleen is having some trouble programming. She tried to run a program that contains blanks multiple times, so she might not realize that she has to change the code examples before running them.
             In this way this overview can give you a better understanding of what a student is struggling with.
     -   title: Common Errors
         text: |-
@@ -463,7 +463,7 @@ teacher-guide:
                 error_code: |-
                     {forward} 300
                     {turn} 90
-                solution_text: In the example, students tend to think that the turn command doesn't work. Even though it does work, you can't see it happening off screen. Use smaller numbers to prevent this from happening.
+                solution_text: In the example, students tend to think that the turn command failed; even though it did what it what supossed to. What happened is the turtle walked past the screen limits. Use smaller numbers to prevent this from happening.
                 solution_code: |-
                     {forward} 100
                     {turn} 90
@@ -613,7 +613,7 @@ teacher-guide:
                     your_name {is} {ask} Who are you?
                     {add} your_name {to} names
                     {print} names {at} {random}
-        -   title: Students forget to use to/from in add/remove
+        -   title: Students forget to use `{to}`/`{from}` in `{add}`/`{remove}`
             example:
                 error_text: Without to/from the add/remove command won't work.
                 error_code: |-
@@ -643,7 +643,7 @@ teacher-guide:
                     mood {is} {ask} 'How are you?'
         -   title: Students use the wrong quotation marks
             example:
-                error_text: It is important to start your lesson by checking if the students know how to type a quotation mark properly. Else they might use the "double quotes" or the skewed one `.
+                error_text: It is important to start your lesson by checking if the students know how to type a quotation mark properly. On Hedy, students might use single quotes ('') and double quotes (""). Backticks on the other hand, are not considered valid quotes (``).
                 error_code: |-
                     {print} `Welcome to the restaurant`
                     food {is} {ask} "What would you like to order?"
@@ -703,19 +703,19 @@ teacher-guide:
                 solution_code: |-
                     {if} name {is} Hedy {print} 'fun'
                     {else} {print} 'meh!
-        -   title: Students use long variable names containing two words
+        -   title: Students use long variable names containing two or more words
             example:
-                error_text: A variable should be named with one word. You could use an underscore to connect two words. That counts as one.
+                error_text: Variables in Hedy can't contain spaces, so, in order to use together several words, students need to connect them using underscores (_)
                 error_code: chosen door is ask  Which door do you pick?
                 solution_text: Add an underscore.
                 solution_code: chosen_door {is} {ask} 'which door do you pick?'
         -   title: Students want multiple answers to be correct
             example:
-                error_text: For example this student Hedy to tell all his friends that they are funny, but other classmates would be told that they are not.
-                error_code: "{if} name {is} Jesse, David, Souf print  You are funny  {else} {print} 'You are not funny'"
+                error_text: For example this student wants Hedy to tell all his friends that they are funny, while other classmates should be told that they are not.
+                error_code: "{if} name {is} Jesse, David, Souf {print} 'You are funny' {else} {print} 'You are not funny'"
                 solution_text: |-
-                    You could use the `in` command for that. It is explained in a higher level, but it does already work in level 5.
-                    Another solution is to use multiple if commands and no else command. The disadvantage is that it won't tell the other classmates that they are not funny.
+                    You could use the `{in}` command for that. While it is explained in a higher level, it does already work in level 5.
+                    Another solution is to use multiple `{if}` commands and no `{else}` command. The disadvantage is that it won't tell the other classmates that they are not funny.
                 solution_code: |-
                     friends {is} Jesse, David, Souf
                     name {is} {ask} 'Who are you?'
@@ -851,7 +851,7 @@ teacher-guide:
         -   title: Students use the `{if}` command to check if the variable value is the same as the variable name
             example:
                 error_text: |-
-                    We have seen this mistake by some of our students. They make a password for their computer, but they make the password 'password'.
+                    We've noticed a common error among our students: they try to create a program that checks for a password, but they make the password 'password'.
                     In line 2 the computer is asked to check whether the variable password is the same as the variable password, so itself. Which means the answer is always yes.
                     So with this code the answer will always be 'You can come in' no matter what the player fills in.
                 error_code: |-
@@ -901,7 +901,7 @@ teacher-guide:
                         {print} 'Robin goes home'
     -   level: '10'
         sections:
-        -   title: Students do not use the for command correctly
+        -   title: Students do not use the `{for}` command correctly
             example:
                 error_text: We often see that students try to print the list (in the example animals) instead of the items of the list.
                 error_code: |-
@@ -991,7 +991,7 @@ teacher-guide:
                 solution_code: '{print} 2.5 + 2.5'
     -   level: '13'
         sections:
-        -   title: Students confuse `and` with `or`
+        -   title: Students confuse `{and}` with `{or}`
             example:
                 error_text: Both commands might appear similar, but their functions are very different.
                 error_code: |-
