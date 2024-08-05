@@ -2,12 +2,12 @@
 
 condition:+= equality_check_dequals | smaller | bigger | not_equal | smaller_equal | bigger_equal
 
-equality_check: comparison_arg (_IS | _EQUALS) comparison_arg
-equality_check_dequals: comparison_arg  _DOUBLE_EQUALS  comparison_arg
-smaller: comparison_arg  _SMALLER  comparison_arg
-bigger: comparison_arg  _LARGER  comparison_arg
-smaller_equal: comparison_arg  _SMALLER_EQUALS  comparison_arg
-bigger_equal: comparison_arg  _LARGER_EQUALS  comparison_arg
-not_equal: comparison_arg  _NOT_EQUALS  comparison_arg
+equality_check: comparison_arg (_IS | _EQUALS) comparison_arg _SPACE?
+equality_check_dequals: comparison_arg _DOUBLE_EQUALS comparison_arg _SPACE?
+smaller: comparison_arg _SMALLER comparison_arg _SPACE?
+bigger: comparison_arg _LARGER comparison_arg _SPACE?
+smaller_equal: comparison_arg _SMALLER_EQUALS comparison_arg _SPACE?
+bigger_equal: comparison_arg _LARGER_EQUALS comparison_arg _SPACE?
+not_equal: comparison_arg _NOT_EQUALS comparison_arg _SPACE?
 
 ?comparison_arg: call | var_access | list_access | text_in_quotes | NUMBER

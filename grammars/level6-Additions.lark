@@ -1,4 +1,4 @@
-_print_ask_argument: (_SPACE | quoted_text | list_access | expression | print_expression)*
+_print_ask_argument.1: (_SPACE | quoted_text | list_access | expression | print_expression)*
 ?print_expression: var_access_print | error_unsupported_number | INT
 
 // redefining it entirely since it has many order-depending rules
