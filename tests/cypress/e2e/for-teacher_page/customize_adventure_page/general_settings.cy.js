@@ -26,11 +26,6 @@ teachers.forEach((teacher) => {
     cy.getDataCy('2').click()
     cy.getDataCy('level_select').click()
 
-    // select language
-    cy.getDataCy('language_select').click()
-    cy.wait(500)
-    cy.getDataCy('English').click()
-
     // agree public 
     cy.getDataCy('agree_public')
       .should('be.visible')
@@ -47,7 +42,7 @@ teachers.forEach((teacher) => {
       .click();
 
     openAdventureView();
-    cy.getDataCy(`edit_link${advName}`).click();
+    cy.getDataCy(`edit_link_${advName}`).click();
 
     // delete adventure
     cy.getDataCy('remove_adventure_button').click();
