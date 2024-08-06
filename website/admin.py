@@ -1,7 +1,6 @@
 from flask import make_response, request
 from flask_babel import gettext
 
-import hedyweb
 import utils
 from website.flask_helpers import render_template
 from website.auth import (
@@ -147,31 +146,6 @@ class AdminModule(WebsiteModule):
             adventures=adventures,
             page_title=gettext("title_admin"),
             current_page="admin",
-        )
-
-    @route("/achievements", methods=["GET"])
-    @requires_admin
-    def get_admin_achievements_page(self, user):
-        stats = {}
-        achievements = hedyweb.AchievementTranslations().get_translations("en").get("achievements")
-        for achievement in achievements.keys():
-            stats[achievement] = {}
-            stats[achievement]["name"] = achievements.get(achievement).get("title")
-            stats[achievement]["description"] = achievements.get(achievement).get("text")
-            stats[achievement]["count"] = 0
-
-        user_achievements = self.db.get_all_achievements()
-        total = len(user_achievements)
-        for user in user_achievements:
-            for achieved in user.get("achieved", []):
-                stats[achieved]["count"] += 1
-
-        return render_template(
-            "admin/admin-achievements.html",
-            stats=stats,
-            current_page="admin",
-            total=total,
-            page_title=gettext("title_admin"),
         )
 
     @route("/mark-as-teacher/<username_teacher>", methods=["POST"])

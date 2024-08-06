@@ -81,4 +81,26 @@ describe('Is able to run code', () => {
       cy.get('#runit').should('be.visible')
       cy.get('#variable_list').should('be.visible').and('have.text', 'var1: 1var2: 2var3: 3var4: 4')
     })
+
+    it('Running a program with the turtle, still should show the variables', () => {
+      cy.intercept('/parse').as('parse')
+      cy.visit('/hedy/2')
+
+      let code = "forward 10";
+      for(let i = 1; i <= 20; i++) {
+        code += `\nangle${i} is 90`
+      }
+      cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').clear()
+      cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').type(code)
+      
+      cy.get('#runit').click()
+      cy.wait('@parse')
+
+      cy.wait(500)
+      cy.get('#stopit').should('not.be.visible')
+      cy.get('#runit').should('be.visible')
+
+      cy.get('#variable_button').click()
+      cy.get('#variables').invoke('height').should('gte', 50)
+    })
   })

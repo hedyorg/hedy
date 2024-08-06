@@ -81,7 +81,7 @@ onclick="window.open('/for-teachers', '_self');">
             <form onsubmit="event.preventDefault (); hedyApp.update_adventure('{{ adventure.id }}', true, '{{_('update_adventure_prompt')}}')"
                 id="customize_adventure"
                 data-te-validation-init>
-                <div class="flex gap-4">
+                <div class="flex gap-4 w-2/3">
                     <div class="flex flex-col w-full">
                         <div class="flex flex-row items-center mb-4">
                             <label for="name" class="inline-block w-40 text-xl">{{_('name')}}</label>
@@ -90,102 +90,41 @@ onclick="window.open('/for-teachers', '_self');">
                             </div>
                         </div>
                         <div class="flex flex-row items-center mb-4">
-                            <label for="custom_adventure_classes" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('used_in')}}</label>
+                            <label for="custom_adventure_classes" class="inline-block w-40 text-xl">{{_('used_in')}}</label>
                             <div class="flex-1">
-                                <div class="dropdown dropdown-green rounded relative" id="custom_adventure_classes" data-value="" data-dropdown-initialize>
-                                    <button type="button" class="toggle-button font-semibold rounded inline-flex justify-between 
-                                                        appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
-                                        onclick="$('#classes_dropdown').slideToggle('medium');">
-                                        <span class="label" data-value="{{_('used_in')}}">{{_('used_in')}}</span>
-                                        <svg id="keyword-arrow_tag" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20">
-                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                        </svg>
-                                    </button>
-                                    <div class="dropdown-menu overflow-auto dropdown-blue z-30 mt-2 w-full max-h-96" id="classes_dropdown"
-                                        style="display: none; width: 100%;" _="on mutation of @style
-                                                            set arrow to #keyword-arrow_tag
-                                                            if *display == 'none'
-                                                                remove .rotate-180 from arrow
-                                                            else if not arrow.classList.contains('rotate-180')
-                                                                add .rotate-180 to arrow
-                                                            end">
-                                        {% for class in all_classes %}                                        
-                                            <div class="option {% if class.id in adventure.classes %}selected{% endif %}" data-value="{{class.id}}">{{ class.name }}</div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <div class="flex flex-row items-center mb-4">
-                            <label for="custom_adventure_levels" class="inline-block w-40 text-xl"  data-te-select-label-ref>{{_('level')}}</label>
-                            <div class="flex-1">
-                                <div class="dropdown dropdown-green rounded relative" id="level_select" data-cy="level_select" data-value="" data-dropdown-initialize>
-                                    <button type="button" class="toggle-button font-semibold rounded inline-flex justify-between 
-                                                        appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
-                                        onclick="$('#levels_dropdown').slideToggle('medium');">
-                                        <span class="label" data-value="{{_('select_levels')}}">{{_('select_levels')}}</span>
-                                        <svg id="keyword-arrow_tag" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20">
-                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                        </svg>
-                                    </button>
-                                    <div class="dropdown-menu overflow-auto dropdown-blue z-30 mt-2 w-full max-h-96" id="levels_dropdown"
-                                        style="display: none; width: 100%;" _="on mutation of @style
-                                                            set arrow to #keyword-arrow_tag
-                                                            if *display == 'none'
-                                                                remove .rotate-180 from arrow
-                                                            else if not arrow.classList.contains('rotate-180')
-                                                                add .rotate-180 to arrow
-                                                            end">
-                                        <div class="option" data-value="select_all">{{_('select_all')}}</div>                                    
-                                        {% for i in range(1, (max_level + 1)) %}
-                                            {% set adv_levels = adventure.levels if adventure.get("levels") else [adventure.level|string] %}
-                                            <div class="option {% if i|string in adv_levels %}selected{% endif %}" data-value="{{i}}">{{ i }}</div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
+                                <custom-select data-type="multiple" id="classes_dropdown" data-label="{{_('used_in')}}">
+                                    {% for class in all_classes %}
+                                        <option {% if class.id in adventure.classes %}selected{% endif %} value="{{class.id}}">{{ class.name }}</option>
+                                    {% endfor %}
+                                </custom-select>
                             </div>
                         </div>
                         <div class="flex flex-row items-center mb-4">
-                            <label class="inline-block w-40 text-xl" for="language" data-te-select-label-ref>{{_('language')}}</label>
+                            <label for="custom_adventure_levels" class="inline-block w-40 text-xl">{{_('available_in')}}</label>
                             <div class="flex-1">
-                                <div class="dropdown dropdown-green rounded relative"
-                                    id="language" 
-                                    data-value="" 
-                                    data-type="single" 
-                                    data-dropdown-initialize>
-                                    
-                                    <button type="button" class="toggle-button font-semibold rounded inline-flex justify-between 
-                                                        appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
-                                        onclick="$('#languages_dropdown').slideToggle('medium');">
-                                        <span class="label" data-value="{{_('select_lang')}}">{{_('select_lang')}}</span>
-                                        <svg id="keyword-arrow_tag" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20">
-                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                        </svg>
-                                    </button>
-                                    <div class="dropdown-menu overflow-auto dropdown-blue z-30 mt-2 w-full max-h-96" id="languages_dropdown"
-                                        style="display: none; width: 100%;" _="on mutation of @style
-                                                            set arrow to #keyword-arrow_tag
-                                                            if *display == 'none'
-                                                                remove .rotate-180 from arrow
-                                                            else if not arrow.classList.contains('rotate-180')
-                                                                add .rotate-180 to arrow
-                                                            end">                                    
-                                        <div data-value="{{ adventure['language'] or current_language().lang }}" class="option selected">{{ lang_to_sym(adventure['language'] or current_language().lang) }}</div>                                    
-                                        {% for language in other_languages(adventure["language"]) %}
-                                            <div class="option" data-value="{{ language.lang }}">{{ language.sym }}</div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
+                                <custom-select data-type="multiple" id="levels_dropdown" data-cy="level_select" data-label="{{_('select_levels')}}">
+                                    {% for i in range(1, (max_level + 1)) %}
+                                        {% set adv_levels = adventure.levels if adventure.get("levels") else [adventure.level|string] %}
+                                        <option {% if i|string in adv_levels %}selected{% endif %} data-value="{{i}}">{{ i }}</option>
+                                    {% endfor %}
+                                </custom-select>
                             </div>
-                        </div> 
+                        </div>
+                        <div class="flex flex-row items-center mb-4">
+                            <label class="inline-block w-40 text-xl" for="language">{{_('language')}}</label>
+                            <div class="flex-1">
+                                <custom-select data-type="single" id="languages_dropdown" data-label="{{_('select_lang')}}">
+                                    <option value="{{ adventure['language'] or current_language().lang }}" selected>{{ lang_to_sym(adventure['language'] or current_language().lang) }}</option>
+                                    {% for language in other_languages(adventure["language"]) %}
+                                        <option value="{{ language.lang }}">{{ language.sym }}</option>
+                                    {% endfor %}
+                                </custom-select>
+                            </div>
+                        </div>
 
                         <div class="flex flex-row items-start mb-4">  
+                                <label for="search_tags_input" class="inline-block w-40 text-xl">{{_('tags')}}</label>
                                 <div class="flex flex-1">
-                                    <label for="search_tags_input" class="inline-block w-40 text-xl">{{_('tags')}}</label>
                                     <div class="flex flex-1 flex-row w-full relative" id="add_tags">
                                             <input type="text" name="tag" autocomplete="off" placeholder="{{_('tag_input_placeholder')}}" id="search_tags_input"  data-cy="search_tags_input"
                                                 class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"
@@ -223,7 +162,7 @@ onclick="window.open('/for-teachers', '_self');">
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-row items-center text-center border-gray-500 border p-4 rounded-lg">
+                <div class="flex flex-row items-center text-center border-gray-500 border p-4 rounded-lg w-2/3">
                     <input type="checkbox" name="agree_public" id="agree_public" data-cy="agree_public" class="mr-4" {% if adventure.public %}checked{% endif %}>
                     <label for="agree_public" class="text-sm italic w-full">{{_('adventure_terms')}}</label>
                 </div>
@@ -247,13 +186,13 @@ onclick="window.open('/for-teachers', '_self');">
                 {% if usedInClasses > 0 %}
                     <div class="flex flex-col">
                         <h3>{{_('adventure_exp_classes')}}</h3>
-                        
+
                         <div class="flex gap-2 flex-wrap">
                             {% for cls in adventure_classes %}
                                 {{ render_partial('htmx-class-card.html', class=cls, username=username,) }}
                             {% endfor %}
                         </div>
-                        
+
                     </div>
                 {% endif %}
             </div>
@@ -359,26 +298,4 @@ onclick="window.open('/for-teachers', '_self');">
     </div>
 
 </div>
-
-<template id="warning_template">
-    <div data-cy="test_warning_message"
-        class="flex-0 z-20 mt-4 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md relative"
-        role="alert">
-        <p class="close-dialog"><i class="fa-solid fa-xmark"></i></p>
-        <div class="flex">
-            <div class="py-1">
-                <div id="warningbox_icon">
-                    <svg class="fill-current h-6 w-6 text-yellow-500 ltr:mr-4 rtl:ml-4"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path
-                            d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
-                    </svg>
-                </div>
-            </div>
-            <div>
-                <p class="details text-sm"></p>
-            </div>
-        </div>
-    </div>
-</template>
 {% endblock %}

@@ -1,6 +1,5 @@
 import collections
 from difflib import SequenceMatcher
-import json
 import os
 import re
 import uuid
@@ -31,8 +30,6 @@ from website.auth import (
     prepare_user_db,
     remember_current_user,
 )
-
-from .achievements import Achievements
 from .database import Database
 from .auth_pages import AuthModule
 from .website_module import WebsiteModule, route
@@ -44,10 +41,9 @@ for lang in hedy_content.ALL_LANGUAGES.keys():
 
 
 class ForTeachersModule(WebsiteModule):
-    def __init__(self, db: Database, achievements: Achievements, auth: AuthModule):
+    def __init__(self, db: Database, auth: AuthModule):
         super().__init__("teachers", __name__, url_prefix="/for-teachers")
         self.db = db
-        self.achievements = achievements
         self.auth = auth
 
     @route("/", methods=["GET"])
@@ -124,7 +120,7 @@ class ForTeachersModule(WebsiteModule):
             level['title'] = gettext('level') + ' ' + str(level['level'])
 
         subsection_titles = [x.get('title', '') for x in subsections + levels]
-
+        levels = hedy_content.deep_translate_keywords(levels, g.keyword_lang)
         return render_template("teacher-manual.html",
                                current_page="teacher-manual",
                                page_title=page_title,
@@ -157,13 +153,6 @@ class ForTeachersModule(WebsiteModule):
             survey_id, description, questions, total_questions, survey_later = self.class_survey(class_id)
 
         students = Class.get("students", [])
-
-        achievement = None
-        if len(students) > 20:
-            achievement = self.achievements.add_single_achievement(user["username"], "full_house")
-        if achievement:
-            achievement = json.dumps(achievement)
-
         invites = []
         for invite in self.db.get_class_invitations(Class["id"]):
             invites.append(
@@ -195,7 +184,6 @@ class ForTeachersModule(WebsiteModule):
             "class-overview.html",
             current_page="for-teachers",
             page_title=gettext("title_class-overview"),
-            achievement=achievement,
             invites=invites,
             class_info={
                 "students": len(students),
@@ -827,8 +815,7 @@ class ForTeachersModule(WebsiteModule):
                               available_adventures=available_adventures,
                               class_id=session['class_id'])
 
-    @staticmethod
-    def migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden):
+    def migrate_quizzes_parsons_tabs(self, customizations, parsons_hidden, quizzes_hidden):
         """If the puzzles/quizzes were not migrated yet which is possible if the teacher didn't tweak
             the class customizations, if this is the case, we need to add them if possible."""
         migrated = customizations.get("quiz_parsons_tabs_migrated")
@@ -852,7 +839,7 @@ class ForTeachersModule(WebsiteModule):
 
             # Mark current customization as being migrated so that we don't do this step next time.
             customizations["quiz_parsons_tabs_migrated"] = 1
-            Database.update_class_customizations(Database, customizations)
+            self.db.update_class_customizations(customizations)
 
     def get_class_info(self, user, class_id, get_customizations=False):
         if hedy_content.Adventures(g.lang).has_adventures():
@@ -1194,11 +1181,8 @@ class ForTeachersModule(WebsiteModule):
         }
 
         self.db.update_class_customizations(customizations)
-
-        achievement = self.achievements.add_single_achievement(user["username"], "my_class_my_rules")
         response = {"success": gettext("class_customize_success")}
-        if achievement:
-            response["achievement"] = achievement
+
         return make_response(response, 200)
 
     @route("/create-accounts/<class_id>", methods=["GET"])
