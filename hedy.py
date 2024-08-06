@@ -1205,8 +1205,8 @@ class IsValid(Filter):
         raise exceptions.MissingVariableException(command='is ask', level=self.level, line_number=meta.line)
 
     def error_print_nq(self, meta, args):
-        words = [str(x[1]) for x in args]  # second half of the list is the word
-        text = ' '.join(words)
+        words = [str(x[1]).replace('\\\\', '\\') for x in args]  # second half of the list is the word
+        text = find_unquoted_segments(' '.join(words))
 
         raise exceptions.UnquotedTextException(
             level=self.level,
@@ -1413,6 +1413,42 @@ def process_characters_needing_escape(value):
     return value
 
 
+supported_quotes = {
+    "'": "'",  # single straight quotation marks
+    '"': '"',  # double straight quotation marks
+    '‘': '’',  # single curved quotation marks
+    "“": "”",  # double curved quotation marks or English quotes
+    "„": "“",  # inward double curved quotation marks or German quotes
+    "«": "»",  # guillemets or double angular marks or French quotes
+}
+
+
+def is_quoted(s):
+    return len(s) > 1 and s[0] in supported_quotes and s[-1] in supported_quotes[s[0]]
+
+
+def find_unquoted_segments(s):
+    result = ''
+    segment = ''
+    used_quote = None
+    for c in s:
+        if not used_quote and c in supported_quotes:
+            # if it is a valid opening quote, append the segment to the result and clear the buffer
+            used_quote = c
+            result += segment
+            segment = c
+        elif used_quote and c == supported_quotes[used_quote]:
+            # if this is a valid closing quote, then empty the buffer as it holds a correctly quoted segment
+            used_quote = None
+            segment = ''
+        else:
+            segment += c
+
+    # add a segment with a missing closing quote, if any
+    result += segment
+    return result
+
+
 def get_allowed_types(command, level):
     # get only the allowed types of the command for all levels before the requested level
     allowed = [values for key, values in commands_and_types_per_level[command].items() if key <= level]
@@ -1501,7 +1537,7 @@ class ConvertToPython(Transformer):
             # add this access line to the lookup table
             self.add_variable_access_location(arg, access_line_number)
             return escape_var(arg)
-        if ConvertToPython.is_quoted(arg):
+        if is_quoted(arg):
             arg = arg[1:-1]
         return f"'{process_characters_needing_escape(arg)}'"
 
@@ -1536,7 +1572,7 @@ class ConvertToPython(Transformer):
             return f"convert_numerals('{self.numerals_language}', {escape_var(name)})"
         elif ConvertToPython.is_float(name):
             return f"convert_numerals('{self.numerals_language}', {name})"
-        elif ConvertToPython.is_quoted(name) or self.is_bool(name):
+        elif is_quoted(name) or self.is_bool(name):
             return f"{name}"
 
     def get_fresh_var(self, name):
@@ -1557,7 +1593,7 @@ class ConvertToPython(Transformer):
 
         args_to_process = [a for a in args if is_var_candidate(a)]  # we do not check trees (calcs) they are always ok
 
-        unquoted_args = [a for a in args_to_process if not ConvertToPython.is_quoted(a)]
+        unquoted_args = [a for a in args_to_process if not is_quoted(a)]
         unquoted_in_lookup = [self.is_variable(a, var_access_linenumber) for a in unquoted_args]
 
         if unquoted_in_lookup == [] or all(unquoted_in_lookup):
@@ -1594,12 +1630,6 @@ class ConvertToPython(Transformer):
     @staticmethod
     def check_if_error_skipped(tree):
         return hasattr(IsValid, tree.data)
-
-    @staticmethod
-    def is_quoted(s):
-        opening_quotes = ['‘', "'", '"', "“", "«", "„"]
-        closing_quotes = ['’', "'", '"', "”", "»", "“"]
-        return len(s) > 1 and (s[0] in opening_quotes and s[-1] in closing_quotes)
 
     @staticmethod
     def is_int(n):
@@ -2028,7 +2058,7 @@ class ConvertToPython_4(ConvertToPython_3):
             return "{" + converted + "}"
         else:
             # at level 4 backslashes are escaped in preprocessing, so we escape only '
-            if self.is_quoted(name):
+            if is_quoted(name):
                 name = name[1:-1]
                 return name.replace("'", "\\'")
             if not ConvertToPython.is_int(name) and not ConvertToPython.is_float(name):
