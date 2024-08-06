@@ -908,7 +908,6 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 
   if (hasTurtle) {
     code_prefix += turtle_prefix;
-    resetTurtleTarget();
     $('#turtlecanvas').show();
   }
 
@@ -1121,6 +1120,9 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     });
 
   } else {
+    // Disable continue button, until the current instruction is completed.
+    // The button is enabled again in incrementDebugLine()
+    document.getElementById('debug_continue')!.setAttribute('disabled', 'disabled');
     // maybe remove debug marker here
     return theGlobalDebugger.continueForward()
       .catch(function(err: any) {
@@ -1236,24 +1238,6 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       });
     }
   }
-}
-
-function resetTurtleTarget() {
-    if (Sk.TurtleGraphics !== undefined) {
-
-      let selector = Sk.TurtleGraphics.target;
-      let target = typeof selector === "string" ? document.getElementById(selector) : selector;
-      if (target !== null && target !== undefined){
-        // clear canvas container
-        while (target.firstChild) {
-          target.removeChild(target.firstChild);
-        }
-        return target;
-      }
-
-    }
-
-    return null;
 }
 
 function speak(text: string) {
