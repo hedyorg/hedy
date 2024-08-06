@@ -87,10 +87,51 @@ class TestsLevel8(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-    def test_if_equality_trailing_space_linebreak_print(self):
+    def test_if_equality_linebreak_comment_print(self):
         code = textwrap.dedent("""\
+        naam is Hedy
+        if naam is Hedy
+            # comment
+            print 'hedy'""")
+
+        expected = textwrap.dedent("""\
+        naam = 'Hedy'
+        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
+          print(f'hedy')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_if_equality_comment_linebreak_print(self):
+        code = textwrap.dedent("""\
+        naam is Hedy
+        if naam is Hedy  # this linebreak is allowed
+            print 'leuk'""")
+
+        expected = textwrap.dedent("""\
+        naam = 'Hedy'
+        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
+          print(f'leuk')""")
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected, output='leuk')
+
+    def test_if_equality_linebreak_print_comment(self):
+        code = textwrap.dedent("""\
+        naam is Hedy
+        if naam is Hedy
+            print 'leuk'  # this linebreak is allowed""")
+
+        expected = textwrap.dedent("""\
+        naam = 'Hedy'
+        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
+          print(f'leuk')""")
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected, output='leuk')
+
+    def test_if_equality_trailing_space_linebreak_print(self):
+        value = 'trailing_space  '
+        code = textwrap.dedent(f"""\
         naam is James
-        if naam is trailing_space
+        if naam is {value}
             print 'shaken'""")
 
         expected = textwrap.dedent("""\
@@ -113,10 +154,24 @@ class TestsLevel8(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-    def test_if_equality_unquoted_rhs_with_space_and_trailing_space_linebreak_print(self):
+    def test_if_equality_unquoted_rhs_with_multi_space(self):
         code = textwrap.dedent("""\
+        v is three   spaces
+        if v is three   spaces
+            print '3'""")
+
+        expected = textwrap.dedent("""\
+        v = 'three   spaces'
+        if convert_numerals('Latin', v) == convert_numerals('Latin', 'three   spaces'):
+          print(f'3')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11, output='3')
+
+    def test_if_equality_unquoted_rhs_with_space_and_trailing_space_linebreak_print(self):
+        value = 'trailing space  '
+        code = textwrap.dedent(f"""\
         naam is James
-        if naam is trailing space
+        if naam is {value}
             print 'shaken'""")
 
         expected = textwrap.dedent("""\
@@ -572,13 +627,13 @@ class TestsLevel8(HedyTester):
     def test_repeat_repair_too_few_indents(self):
         code = textwrap.dedent("""\
         repeat 5 times
-             print('repair')
-          print('me')""")
+             print 'repair'
+          print 'me'""")
 
         fixed_code = textwrap.dedent("""\
         repeat 5 times
-             print('repair')
-             print('me')""")
+             print 'repair'
+             print 'me'""")
 
         self.single_level_tester(
             code=code,
@@ -589,28 +644,93 @@ class TestsLevel8(HedyTester):
     def test_repeat_repair_too_many_indents(self):
         code = textwrap.dedent("""\
         repeat 5 times
-          print('repair')
-             print('me')""")
+          print 'repair'
+             print 'me'""")
         fixed_code = textwrap.dedent("""\
         repeat 5 times
-          print('repair')
-          print('me')""")
+          print 'repair'
+          print 'me'""")
 
         self.single_level_tester(
             code=code,
             exception=hedy.exceptions.TooManyIndentsStartLevelException,
-            extra_check_function=(lambda x: x.exception.fixed_code == fixed_code)
+            extra_check_function=(lambda x: x.exception.fixed_code == fixed_code),
+            skip_faulty=False
         )
 
     def test_unexpected_indent(self):
         code = textwrap.dedent("""\
-        print('repair')
-           print('me')""")
+        print 'repair'
+           print 'me'""")
 
         self.single_level_tester(
             code=code,
             exception=hedy.exceptions.TooManyIndentsStartLevelException
         )
+
+    def test_repeat_empty_lines(self):
+        code = textwrap.dedent("""\
+            repeat 2 times
+                
+                
+                sleep""")
+
+        expected = textwrap.dedent(f"""\
+            for __i in range({self.int_cast_transpiled(2)}):
+              time.sleep(1)
+              time.sleep(0.1)""")
+
+        self.multi_level_tester(code=code, expected=expected)
+
+    def test_repeat_with_comment(self):
+        code = textwrap.dedent("""\
+        repeat 5 times #This should be ignored
+            sleep""")
+
+        expected = textwrap.dedent(f"""\
+        for __i in range({self.int_cast_transpiled(5)}):
+          time.sleep(1)
+          time.sleep(0.1)""")
+
+        self.multi_level_tester(code=code, expected=expected)
+
+    def test_repeat_inner_whole_line_comment(self):
+        code = textwrap.dedent("""\
+            repeat 2 times
+                # let's sleep!
+                sleep""")
+
+        expected = textwrap.dedent(f"""\
+            for __i in range({self.int_cast_transpiled(2)}):
+              time.sleep(1)
+              time.sleep(0.1)""")
+
+        self.multi_level_tester(code=code, expected=expected)
+
+    def test_repeat_end_line_comment(self):
+        code = textwrap.dedent("""\
+            repeat 2 times
+                sleep # let's print!""")
+
+        expected = textwrap.dedent(f"""\
+            for __i in range({self.int_cast_transpiled(2)}):
+              time.sleep(1)
+              time.sleep(0.1)""")
+
+        self.multi_level_tester(code=code, expected=expected)
+
+    def test_repeat_whole_line_comment_after(self):
+        code = textwrap.dedent("""\
+            repeat 2 times
+                sleep
+            # let's print!""")
+
+        expected = textwrap.dedent(f"""\
+            for __i in range({self.int_cast_transpiled(2)}):
+              time.sleep(1)
+              time.sleep(0.1)""")
+
+        self.multi_level_tester(code=code, expected=expected)
 
     def test_repeat_turtle(self):
         code = textwrap.dedent("""\
@@ -738,20 +858,6 @@ class TestsLevel8(HedyTester):
         for __i in range({self.int_cast_transpiled(12)}):
           print(f'{{count}} times 12 is {{{self.int_cast_transpiled('count', False)} * int(12)}}')
           count = {self.int_cast_transpiled('count', False)} + int(1)
-          time.sleep(0.1)""")
-
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
-
-    def test_repeat_with_comment(self):
-        code = textwrap.dedent("""\
-        repeat 5 times #This should be ignored
-            print 'koekoek'
-            print 'koekoek'""")
-
-        expected = textwrap.dedent(f"""\
-        for __i in range({self.int_cast_transpiled(5)}):
-          print(f'koekoek')
-          print(f'koekoek')
           time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)

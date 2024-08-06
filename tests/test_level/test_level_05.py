@@ -40,9 +40,10 @@ class TestsLevel5(HedyTester):
         self.single_level_tester(code=code, expected=expected, unused_allowed=True)
 
     def test_if_equality_trailing_space_linebreak_print(self):
-        code = textwrap.dedent("""\
+        value = 'trailing_space  '
+        code = textwrap.dedent(f"""\
         naam is James
-        if naam is trailing_space
+        if naam is {value}
         print 'shaken'""")
 
         expected = textwrap.dedent("""\
@@ -66,9 +67,10 @@ class TestsLevel5(HedyTester):
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
     def test_if_equality_unquoted_rhs_with_space_and_trailing_space_linebreak_print(self):
-        code = textwrap.dedent("""\
+        value = 'trailing space  '
+        code = textwrap.dedent(f"""\
         naam is James
-        if naam is trailing space
+        if naam is {value}
         print 'shaken'""")
 
         expected = textwrap.dedent("""\
@@ -416,10 +418,10 @@ class TestsLevel5(HedyTester):
         self.single_level_tester(code=code, expected=expected)
 
     def test_if_equality_trailing_space_linebreak_print_else(self):
-        # this code has a space at the end of line 2
-        code = textwrap.dedent("""\
+        value = 'trailing space  '
+        code = textwrap.dedent(f"""\
         naam is James
-        if naam is trailing space
+        if naam is {value}
         print 'shaken' else print 'biertje!'""")
 
         expected = textwrap.dedent("""\

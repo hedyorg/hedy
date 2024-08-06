@@ -218,6 +218,12 @@ class TestsLevel4(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
+    def test_print_hash(self):
+        code = "print 'comments start with the # sign'"
+        expected = "print(f'comments start with the # sign')"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
     def test_print_without_quotes_gives_error_from_grammar(self):
         # in some cases, there is no variable confusion since 'hedy 123' can't be a variable
         # then we can immediately raise the no quoted exception
