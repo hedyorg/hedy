@@ -332,6 +332,12 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
+    def test_print_hash(self):
+        code = "print 'comments start with the # sign'"
+        expected = "print(f'''comments start with the # sign''')"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=17)
+
     def test_print_single_quoted_text_var(self):
         code = textwrap.dedent("""\
         naam is "'Hedy'"
@@ -1339,19 +1345,6 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(max_level=16, code=code, expected=expected, output='gelijkspel!')
 
-    # def test_if_equality_trailing_space_linebreak_print(self):
-    #     code = textwrap.dedent("""\
-    #     naam is 'James'
-    #     if naam is 'trailing_space'
-    #         print 'shaken'""")
-    #
-    #     expected = textwrap.dedent("""\
-    #     naam = 'James'
-    #     if convert_numerals('Latin', naam) == convert_numerals('Latin', 'trailing_space'):
-    #       print(f'''shaken''')""")
-    #
-    #     self.multi_level_tester(max_level=18, code=code, expected=expected)
-
     # Lists can be compared for equality starting with level 14
     def test_if_equality_lists(self):
         code = textwrap.dedent("""\
@@ -1582,11 +1575,12 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(code=code, expected=expected, max_level=16)
 
     def test_if_else_trailing_space_after_else(self):
-        code = textwrap.dedent("""\
+        else_with_space = 'else  '
+        code = textwrap.dedent(f"""\
         a is 1
         if a is 1
             print a
-        else
+        {else_with_space}
             print 'nee'""")
 
         expected = textwrap.dedent("""\
@@ -1688,17 +1682,59 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
-    def test_repeat_with_comment(self):
+    def test_if_equality_linebreak_comment_print(self):
         code = textwrap.dedent("""\
-        repeat 5 times #This should be ignored
-            sleep""")
+        naam is 'Hedy'
+        if naam is 'Hedy'
+            # comment
+            print 'hedy'""")
 
-        expected = textwrap.dedent(f"""\
-        for __i in range({self.int_cast_transpiled(5)}):
-          time.sleep(1)
-          time.sleep(0.1)""")
+        expected = textwrap.dedent("""\
+        naam = 'Hedy'
+        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
+          print(f'''hedy''')""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=17)
+        self.multi_level_tester(code=code, expected=expected, max_level=16)
+
+    def test_if_equality_comment_linebreak_print(self):
+        code = textwrap.dedent("""\
+        naam is 'Hedy'
+        if naam is 'Hedy'  # this linebreak is allowed
+            print 'leuk'""")
+
+        expected = textwrap.dedent("""\
+        naam = 'Hedy'
+        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
+          print(f'''leuk''')""")
+
+        self.multi_level_tester(max_level=16, code=code, expected=expected, output='leuk')
+
+    def test_if_equality_linebreak_print_comment(self):
+        code = textwrap.dedent("""\
+        naam is 'Hedy'
+        if naam is 'Hedy'
+            print 'leuk'  # this linebreak is allowed""")
+
+        expected = textwrap.dedent("""\
+        naam = 'Hedy'
+        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
+          print(f'''leuk''')""")
+
+        self.multi_level_tester(max_level=16, code=code, expected=expected, output='leuk')
+
+    def test_if_equality_trailing_space_linebreak_print(self):
+        value = "'trailing_space'  "
+        code = textwrap.dedent(f"""\
+        naam is 'James'
+        if naam is {value}
+            print 'shaken'""")
+
+        expected = textwrap.dedent("""\
+        naam = 'James'
+        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'trailing_space'):
+          print(f'''shaken''')""")
+
+        self.multi_level_tester(max_level=16, code=code, expected=expected)
 
     @parameterized.expand(['5', '𑁫', '५', '૫', '੫', '৫', '೫', '୫', '൫', '௫',
                            '౫', '၅', '༥', '᠕', '៥', '๕', '໕', '꧕', '٥', '۵'])

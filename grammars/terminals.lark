@@ -1,5 +1,8 @@
-// A comment has a negative lookahead to ensure it cannot parse _END_BLOCKS
-COMMENT: /#(?!ENDBLOCK)[^\n]*/
+// If the comment takes up the whole line, it should also encompass its leading newline. In this way the whole
+// comment line can be skipped for the commands containing it. Comments should escape ENDBLOCKS not only in the start
+// but at any point, because if the body of a command (e.g. `if`) ends up with a comment, the ENDBLOCK would appear
+// right after it. Therefore, the ENDBLOCK should not be counted as a part of the comment.
+COMMENT: /[\n ]*\#(?!ENDBLOCK)(?:[^\n#]|#(?!ENDBLOCK))*/
 %ignore COMMENT
 
 // Internal symbol added by the preprocess_blocks function to indicate the end of blocks
