@@ -9,9 +9,9 @@ adventures.forEach((adventure) => {
     openAdventureView();
     cy.getDataCy(`preview_${adventure}`).click();
     // now it should be visible in code-page.
-    cy.getDataCy(adventure)
-      .should("be.visible")
-      .should("contain.text", adventure)
-    cy.getDataCy('adventures_tab').should("be.visible")
+    cy.wait(500);
+    cy.getDataCy('teacher_adventure')
+    .should('be.visible')
+    .should("contain.text", adventure)
   })
 })

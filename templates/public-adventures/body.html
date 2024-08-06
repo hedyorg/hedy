@@ -1,4 +1,3 @@
-
 <div id="public_adventures">
     <div id="filters"
         class="flex flex-col sm:flex-row items-center gap-2
@@ -17,7 +16,6 @@
                 class="border text-black border-gray-500 rounded h-8 px-2 w-full"
                 >
         </div>
-        <div class="flex w-full sm:basis-1/2 gap-2">
             <div id="levels" class="flex-1">
               <custom-select id="level_select" data-cy="level_select" data-label="{{_('select_levels')}}">
                 {% for level in customizations["available_levels"] %}
@@ -106,8 +104,8 @@
                         data-cy="edit_link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
             </div>
         {% else %}
-            {% include "incl/adventure-tabs.html" %}
-            {% include "incl/editor-and-output.html" %}
+            {% include "hedy-page/adventure-tabs.html" %}
+            {% include "hedy-page/editor-and-output.html" %}
         {% endif %}
       </div>
 </div>

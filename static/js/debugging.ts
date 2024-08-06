@@ -267,7 +267,7 @@ export function stopDebug() {
     var debugButton = $('#debug_button');
     debugButton.show();
     var continueButton = $('#debug_continue');
-    var stopButton = $('debug_stop');
+    var stopButton = $('#debug_stop');
     var resetButton = $('#debug_restart');
     var runButtonContainer = $('#run_button_container');
 

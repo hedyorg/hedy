@@ -3,6 +3,7 @@ import { executeHelloWorldProgram, deleteProgram } from "../tools/programs/progr
 import { loginForTeacher } from "../tools/login/login";
 import { navigateToClass } from "../tools/classes/class";
 import { makeProfilePublic } from "../tools/profile/profile";
+import { goToProgramsPage } from "../tools/navigation/nav";
 
 describe("General tests for my programs page (with both custom teacher and built-in adventure)", () => {
     const programName = "myTestProgram";
@@ -13,49 +14,47 @@ describe("General tests for my programs page (with both custom teacher and built
 
     it("create adventure, run its code, and see it in my programs", () => {
         createAdventure(programName);
-        navigateToClass("CLASS1");
-        cy.getDataCy("customize_class_button").click(); // Press customize class button
-        cy.getDataCy("available_adventures_current_level").select(`${programName}`);
-
-        // Now preview it and run the program
-        cy.getDataCy('preview_class_link')
-            .click();
-        executeHelloWorldProgram(programName)
-        cy.get(".programs").should("contain.text", programName);
-
-        deleteAdventure(programName)
+        cy.url().then(url => {
+            const cleanUrl = url.split('?')[0];
+            const urlParts = cleanUrl.split('/');
+            const adventureId = urlParts[urlParts.length - 1];
+            navigateToClass("CLASS1");
+            cy.getDataCy("customize_class_button").click(); // Press customize class button
+            cy.getDataCy("available_adventures_current_level").select(`${programName}`);
+    
+            // Now preview it and run the program
+            cy.getDataCy('preview_class_link').click();
+            executeHelloWorldProgram(programName, adventureId)
+            cy.getDataCy('programs_list').should("contain.text", programName);
+    
+            deleteAdventure(programName)
+        });
     });
 
     it("should not be added to my programs when running a program with copied code", () => {
-        cy.visit(`${Cypress.env('hedy_page')}#${adventure}`);
-        // make sure to navigate to the wanted program tab.
-        cy.getDataCy(adventure)
-            .click();
+        cy.visit(`/hedy/1#${adventure}`)
         // Paste example code
         cy.getDataCy(`paste_example_code_${adventure}`).click();
-        cy.get('#runit').click();
+        cy.getDataCy('runit').click();
         cy.wait(500);
-        cy.visit(`${Cypress.env('programs_page')}`);
-        cy.get(".programs").should("not.contain.text", adventure);
+        goToProgramsPage();
+        cy.getDataCy('programs_list').should("not.contain.text", adventure.toLowerCase());
     });
 
     it("should be added to my programs when running a program with modified code", () => {
-        cy.visit(`${Cypress.env('hedy_page')}#${adventure}`);
-        // make sure to navigate to the wanted program tab.
-        cy.getDataCy(adventure)
-            .click();
+        cy.visit(`/hedy/1#${adventure}`)
         // Paste example code and modify code
         cy.getDataCy(`paste_example_code_${adventure}`).click();
-        cy.get('#editor .cm-content').click();
+        cy.getDataCy('editor').click();
         cy.focused().type('print Hello world\nask Hello world?');
-        cy.get('#runit').click();
+        cy.getDataCy('runit').click();
         cy.wait(500);
-        cy.visit(`${Cypress.env('programs_page')}`);
-        cy.get(".programs").should("contain.text", adventure);
+        goToProgramsPage();
+        cy.getDataCy('programs_list').should("contain.text", adventure);
     });
 
     it('can make program public', () => {
-        cy.visit(`${Cypress.env('programs_page')}`);
+        goToProgramsPage();
         cy.get(`[data-name=${programName}]`)
             .first()
             .then($el => {
@@ -74,7 +73,7 @@ describe("General tests for my programs page (with both custom teacher and built
         }).as('public_profile')
         makeProfilePublic();
         cy.wait('@public_profile')
-        cy.visit(`${Cypress.env('programs_page')}`);
+        goToProgramsPage();
         cy.get(`[data-name=${programName}]`)
             .first()
             .then($el => {
@@ -118,8 +117,7 @@ describe("General tests for my programs page (with both custom teacher and built
     });
 
     it('can make program private', () => {
-        cy.visit(`${Cypress.env('programs_page')}`);
-
+        goToProgramsPage();
         cy.get(`[data-name=${programName}]`)
                     .first()
                     .then($el => {
@@ -149,7 +147,7 @@ describe("General tests for my programs page (with both custom teacher and built
 
     describe('Test filters', () => {
         beforeEach(() => {
-            cy.visit(`${Cypress.env('programs_page')}`);
+            goToProgramsPage();
         })
         it("The level filter should show the appropiate programs", ()=>{        
             // After selecting level 2 only the programs from level 2 should ve visible

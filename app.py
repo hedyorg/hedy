@@ -1092,7 +1092,7 @@ def tutorial_index():
     max_level = hedy.HEDY_MAX_LEVEL  # do we need to fetch the max level per language?
 
     return render_template(
-        "code-page.html",
+        "hedy-page/code-page.html",
         intro_tutorial=True,
         next_level=2,
         level_nr=str(level),
@@ -1107,6 +1107,7 @@ def tutorial_index():
         initial_adventure=initial_adventure,
         cheatsheet=cheatsheet,
         blur_button_available=False,
+        progress=0,
         current_user_is_in_class=len(current_user().get('classes') or []) > 0,
         # See initialize.ts
         javascript_page_options=dict(
@@ -1284,7 +1285,7 @@ def hour_of_code(level, program_id=None):
 
     commands = hedy.commands_per_level.get(level)
     return render_template(
-        "code-page.html",
+        "hedy-page/code-page.html",
         level_nr=str(level_number),
         level=level_number,
         current_page='Hour of Code',
@@ -1514,9 +1515,16 @@ def index(level, program_id):
     prev_level, next_level = utils.find_prev_next_levels(
         list(available_levels), level_number)
 
+    progress = 0
+    for i, adventure in enumerate(adventures):
+        if adventure.save_info:
+            progress = i
+
+    progress = round(progress / len(adventures) * 100)
+
     commands = hedy.commands_per_level.get(level)
     return render_template(
-        "code-page.html",
+        "hedy-page/code-page.html",
         level_nr=str(level_number),
         level=level_number,
         current_page='hedy',
@@ -1537,6 +1545,7 @@ def index(level, program_id):
         quiz=quiz,
         quiz_questions=quiz_questions,
         cheatsheet=cheatsheet,
+        progress=progress,
         blur_button_available=False,
         initial_adventure=adventures_map[initial_tab],
         current_user_is_in_class=len(current_user().get('classes') or []) > 0,
@@ -1650,7 +1659,7 @@ def render_code_in_editor(level):
         editor_contents=code)
     adventures = [a]
 
-    return render_template("code-page.html",
+    return render_template("hedy-page/code-page.html",
                            specific_adventure=True,
                            level_nr=str(level),
                            level=level,
@@ -1719,7 +1728,7 @@ def get_specific_adventure(name, level, mode):
     initial_tab = name
     initial_adventure = adventures[0]
 
-    return render_template("code-page.html",
+    return render_template("hedy-page/code-page.html",
                            specific_adventure=True,
                            level_nr=str(level),
                            commands=commands,
@@ -1736,6 +1745,7 @@ def get_specific_adventure(name, level, mode):
                            initial_adventure=initial_adventure,
                            latest=version(),
                            raw=raw,
+                           progress=0,
                            menu=not raw,
                            blur_button_available=False,
                            current_user_is_in_class=len(current_user().get('classes') or []) > 0,

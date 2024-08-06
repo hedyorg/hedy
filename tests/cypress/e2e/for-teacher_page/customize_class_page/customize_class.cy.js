@@ -11,7 +11,6 @@ teachers.forEach((teacher) => {
       navigateToClass();
       removeCustomizations();
     });
-  
     // TODO: add check if the quiz actually has a treshold now, either here or in quiz.cy.js
     it('Is able to fill in the quiz score and click on go back button', () => {
       cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations'); 
@@ -143,7 +142,9 @@ teachers.forEach((teacher) => {
       // should be visible for a student
       loginForStudent();
       goToHedyPage();
-      cy.getDataCy('parrot').should('be.visible');
+      cy.visit(`/hedy/1#${hiddenAdventure}`);
+      cy.reload();
+      cy.getDataCy('dropdown_adventure_button').should('contain.text', 'Parrot');
     });
 
     //commenting this out because the for each takes time.

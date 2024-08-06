@@ -93,13 +93,13 @@ strong {
 
 .btn-shape {
   @apply font-slab leading-6 font-normal tracking-wide;
-  @apply pt-2 pb-1 px-4 border border-b-4 rounded no-underline;
+  @apply pt-2 pb-1 px-4 border rounded-md no-underline;
   display: inline-block;
 }
 
 .green-btn {
   @apply btn-shape;
-  @apply bg-green-500 text-white border-green-700;
+  @apply bg-green-500 text-white border-green-500;
 }
 
 .green-btn:disabled, .green-btn[disabled] {
@@ -108,7 +108,12 @@ strong {
 
 .white-btn {
   @apply btn-shape;
-  @apply bg-white text-blue-500 border-blue-400;
+  @apply bg-gray-100 text-blue-900 border-gray-100;
+}
+
+.hedy-dropdown-btn {
+  @apply btn-shape;
+  @apply bg-blue-100 text-blue-900;
 }
 
 
@@ -206,12 +211,12 @@ a.green-btn:hover {
 
 .blue-btn {
   @apply btn-shape;
-  @apply bg-blue-500 text-white border-blue-700;
+  @apply bg-gray-200 text-blue-800 border-gray-200;
 }
 
 .blue-btn:hover {
-  @apply bg-blue-400 border-blue-500;
-  @apply active:bg-blue-700 active:border-blue-700;
+  @apply bg-blue-300 border-blue-400;
+  @apply active:bg-blue-400 active:border-blue-500;
 }
 
 .gray-btn-shape {
@@ -261,7 +266,7 @@ a.green-btn:hover {
 }
 
 h2 {
-  @apply font-slab font-medium text-blue-500;
+  @apply font-slab font-medium text-blue-800;
   @apply leading-tight text-2xl mb-2 mt-10;
 }
 
@@ -340,20 +345,15 @@ code {
   @apply border-gray-100;
 }
 
-.menubar-item:hover {
-  /* Colors */
-  @apply border-gray-100;
-}
-
 .menubar-item.active {
   /* Colors */
-  @apply border-blue-600 !important;
+  @apply border-blue-700 !important;
 }
 
 .menubar-text {
   @apply items-center text-base lg:text-xl no-underline font-slab p-1;
   /* Colors */
-  @apply text-blue-600;
+  @apply text-blue-800;
 }
 
 .cust-adv-tab {
@@ -384,7 +384,7 @@ code {
 }
 
 .dropdown-blue {
-  @apply border-blue-500 border-2 bg-gray-100;
+  @apply border-blue-700 border-2 bg-gray-100;
 }
 
 .dropdown-green {
@@ -551,6 +551,10 @@ body[dir='rtl'] .right-hand-shadow {
 .tab-selected {
   @apply mt-0 pt-2 bg-white text-black font-normal rounded-t-lg border-t-8 border-r border-l border-pink-500;
   box-shadow: none !important;
+}
+
+.adv-selected {
+  @apply bg-blue-200;
 }
 
 /* EDITOR WARNINGS & ERRORS */

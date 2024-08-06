@@ -51,6 +51,7 @@ export let theKeywordLanguage: string = 'en';
 let theStaticRoot: string = '';
 let currentTab: string;
 let theUserIsLoggedIn: boolean;
+let selectedURI: JQuery<HTMLElement>;
 //create a synth and connect it to the main output (your speakers)
 //const synth = new Tone.Synth().toDestination();
 
@@ -420,13 +421,16 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
   // And add an overlay button to the editor if requested via a show-copy-button class, either
   // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
   if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
-    const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
-    let symbol = "⇥";
-    if (dir === "rtl") {
-      symbol = "⇤";
-    }
+    const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-2 ltr:mr-2 rtl:ml-2').appendTo(preview);
     const adventure = container.getAttribute('data-tabtarget')
-    $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').attr('data-cy', `paste_example_code_${adventure}`).text(symbol).appendTo(buttonContainer).click(function() {
+    let text = $(preview).attr('value') || $(container).attr('value')
+    if (!text){ text = 'Put' }
+    $('<button>')
+    .addClass('blue-btn')
+    .attr('data-cy', `paste_example_code_${adventure}`)
+    .append(`<span class="fa fa-paste ltr:mr-1 rtl:ml-1"></span>`)
+    .append(text)
+    .appendTo(buttonContainer).click(function() {
       if (!theGlobalEditor?.isReadOnly) {
         theGlobalEditor.contents = exampleEditor.contents + '\n';
       }
@@ -1257,9 +1261,8 @@ function resetTurtleTarget() {
 }
 
 function speak(text: string) {
-  var selectedURI = $('#speak_dropdown').val();
   if (!selectedURI) { return; }
-  var voice = window.speechSynthesis.getVoices().filter(v => v.voiceURI === selectedURI)[0];
+  var voice = window.speechSynthesis.getVoices().filter(v => v.voiceURI === selectedURI.val())[0];
 
   if (voice) {
     let utterance = new SpeechSynthesisUtterance(text);
@@ -1295,9 +1298,23 @@ function initializeSpeech() {
 
     if (voices.length > 0 || isBeingTested) {
       for (const voice of voices) {
-        $('#speak_dropdown').append($('<option>').attr('value', voice.voiceURI).text('📣 ' + voice.name));
+        $('#speak_dropdown').append(
+          $('<button>')
+            .attr('id', `speak_button_${voice.name}`)
+            .attr('onclick', `$('#speak_dropdown').slideUp('medium');`)
+            .attr('value', voice.voiceURI)
+            .addClass('flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white')
+            .css('width', '100%')
+            .text(voice.name)
+            .on('click', function () {
+              if (selectedURI){
+                selectedURI.find('span').remove();
+              }
+              selectedURI = $(this);
+              $(this).append(`<span class="fa fa-check"></span>`);
+            })
+          );
       }
-
       $('#speak_container').show();
 
       clearInterval(timer);
@@ -1691,7 +1708,7 @@ function updatePageElements() {
   $('#editor_area').toggle(isCodeTab || currentTab === 'parsons');
   $('#editor').toggle(isCodeTab);
   $('#debug_container').toggle(isCodeTab);
-  $('#program_name_container').toggle(isCodeTab);
+  $('#program_name').toggle(isCodeTab);
   theGlobalEditor.isReadOnly = false;
 
   const adventure = theAdventures[currentTab];
@@ -1703,9 +1720,8 @@ function updatePageElements() {
     // SHARING SETTINGS
     // Star on "share" button is filled if program is already public, outlined otherwise
     const isPublic = !!saveInfo.public;
-    $('#share_program_button')
-      .toggleClass('active-bluebar-btn', isPublic);
-    $(`#share-${isPublic ? 'public' : 'private'}`).prop('checked', true);
+    changeIconButton(isPublic, 'share_program_button', 'fa-lock', 'fa-users')
+    $(`#share_${isPublic ? 'public' : 'private'}`).prop('checked', true);
 
     // Show <...data-view="if-public-url"> only if we have a public url
     $('[data-view="if-public"]').toggle(isPublic);
@@ -1714,14 +1730,39 @@ function updatePageElements() {
 
     // Paper plane on "hand in" button is filled if program is already submitted, outlined otherwise
     const isSubmitted = !!saveInfo.submitted;
-    $('#hand_in_button')
-      .toggleClass('active-bluebar-btn', isSubmitted);
+    changeIconButton(isSubmitted, 'hand_in_button', 'fa-paper-plane', 'fa-check')
 
     // Show <...data-view="if-submitted"> only if we have a public url
     $('[data-view="if-submitted"]').toggle(isSubmitted);
     $('[data-view="if-not-submitted"]').toggle(!isSubmitted);
 
     theGlobalEditor.isReadOnly = isSubmitted;
+    $('#progress_bar').show()
+    $('#program_name_container').show()
+    $('#share_program_button').show()
+    $('#read_outloud_button_container').show()
+    $('#cheatsheet_dropdown_container').show()
+    $('#commands_dropdown_container').show()
+    $('#hand_in_button').show()
+  }
+  if (currentTab === 'parsons'){
+    $('#progress_bar').hide()
+    $('#program_name_container').hide()
+    $('#share_program_button').hide()
+    $('#read_outloud_button_container').hide()
+    $('#cheatsheet_dropdown_container').hide()
+    $('#commands_dropdown_container').show()
+    $('#hand_in_button').hide()
+    $('#clear').hide()
+  }
+  if (currentTab === 'quiz'){
+    $('#progress_bar').hide()
+    $('#program_name_container').hide()
+    $('#share_program_button').hide()
+    $('#read_outloud_button_container').hide()
+    $('#cheatsheet_dropdown_container').hide()
+    $('#commands_dropdown_container').hide()
+    $('#hand_in_button').hide()
   }
 }
 
@@ -1773,6 +1814,15 @@ function initializeShareProgramButtons() {
           throw new Error('This program does not have an id');
         }
         await postNoResponse(`/programs/share/${saveInfo.id}`, {})
+        const programPrivate = document.getElementById('share_private') as HTMLInputElement;
+        const programPublic = document.getElementById('share_public') as HTMLInputElement;
+        if (programPrivate && programPublic){
+          if (programPrivate.checked){
+            changeIconButton(false, 'share_program_button', 'fa-lock', 'fa-users')
+          } else if (programPublic.checked){
+            changeIconButton(true, 'share_program_button', 'fa-lock', 'fa-users')
+          }
+        }
       });
     }
   })
@@ -1802,6 +1852,22 @@ function initializeHandInButton() {
       });
   });
 }
+
+  function changeIconButton(status: boolean, buttonName: string, icon1: string, icon2: string) {
+    const button = document.getElementById(buttonName);
+    if (button) {
+      const iconSpan = button.querySelector('span');
+      if (iconSpan) {
+        if (status){
+          iconSpan.classList.remove(icon1);
+          iconSpan.classList.add(icon2);
+        } else {
+          iconSpan.classList.add(icon1);
+          iconSpan.classList.remove(icon2);
+        }
+      }
+    }
+  }
 
 /**
  * Initialize copy to clipboard buttons.
@@ -1925,4 +1991,21 @@ export function goToLevel(level: any) {
   }
   window.location.pathname = newPath
   window.location.hash = hash
+}
+
+export function scrollToLastClickedButton(dropdown_id: string) {
+  const lastClickedButtonId = localStorage.getItem(dropdown_id);
+  if (lastClickedButtonId) {
+    const button = document.getElementById(lastClickedButtonId);
+    if (button) {
+      const dropdown = document.getElementById(dropdown_id);
+      if (dropdown){
+        dropdown.scrollTop = button.offsetTop - dropdown.offsetTop;
+      }
+    }
+  }
+}
+
+export function emptyEditor() {
+  theGlobalEditor.contents = ""
 }
