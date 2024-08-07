@@ -10,12 +10,16 @@ adventures:
 
                     Como primeira linha, usa este código `{ask}`.
 
-                    Após a primeira linha, começa com `print` se quiseres que a frase seja escrita.
-                    Utilizas `echo` se quiseres colocar o teu personagem principal no final da frase.
-                example_code: "```\nask O(A) personagem principal desta história é ...\nprint O(A) personagem principal vai caminhar agora na floresta\necho Está um pouco(a) assustado(a) \nprint Ouve barulhos estranhos por toda a parte\nprint Receia que esta floresta seja assombrada\n```\n\nÉ uma pena só conseguires criar frases em que o nome do personagem principal aparece no final, certo? Depois de praticarmos com esta história, prossegue para o nível 2 e, a seguir, para o nível 3, onde podes criar programas cada vez mais complexos.\n"
+                    Após a primeira linha, começa com `{print}` se quiseres que a frase seja escrita.
+                    Utilizas `{echo}` se quiseres colocar o teu personagem principal no final da frase.
+                example_code: "```\n{ask} O(A) personagem principal desta história é\n{print} O(A) personagem principal vai caminhar agora pela floresta\n{echo} Estão um pouco(a) assustados(as),\n{print} Ouvem barulhos estranhos por toda a parte\n{print} Receiam que esta floresta seja assombrada\n```\n"
                 story_text_2: |
-                    ### Exercise
-                    Can you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?
+                    ### Exercício
+                    Agora cria a tua própria história , com pelo menos 6 linhas de código
+                    Esta história não pode ser igual ao exemplo de código
+                    Usa pelo menos um comando `{ask}` e um `{echo}`
+                    Podes escrever sobre qualquer tema que gostes
+                    Se não consegues pensar num tema, escolhe uma das seguintes alternativas: ir ao cinema, um evento desportivo ou um dia no zoo.
             2:
                 story_text: |
                     No nível 2 podes tornar a tua história ainda mais divertida. O nome da tua personagem principal pode agora aparecer em qualquer parte da frase.
@@ -23,23 +27,24 @@ adventures:
                     Precisas de programar algumas coisas extra, para conseguires isso. Tens de atribuir o nome ao teu personagem principal, primeiro de tudo.
 
                     Depois, podes colocar esse nome em qualquer lugar da frase.
-                example_code: |
+                example_code: |-
                     ```
-                    nome is ask Qual é o nome da tua personagem principal?
-                    print nome vai agora correr na floresta
-                    print nome está um pouco assustado(a)
-                    print Está a ouvir barulhos estranhos por toda a parte
-                    print nome receia que esta floresta seja assombrada
+                    nome {is} {ask} Qual é o nome da tua personagem principal?
+                    {print} nome vai agora correr pela floresta
+                    {print} nome está um pouco assustado(a)
+                    {print} De repente, ele(a) ouve um barulho esquisito...
+                    {sleep}
+                    {print} nome receia que esta floresta seja assombrada
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Now it's time to add variables to your own story that you've made in the previous level.
-                    Go to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.
+                    ### Exercício
+                    Agora é altura para adicionar variáveis à tua história, que criaste no nível anterior.
+                    Vai aos 'Meus programas', procura pela tua história aventura do nível 1 e copia o código. Cola o código na tua janela de introdução deste nível.
 
-                    This code won't work in this level, because you have not used variables yet.
-                    Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
+                    Este código não vai funcionar neste nível, porque ainda não utilizaste variáveis.
+                    Altera os comandos `{ask}` e `{echo}` no teu código para a forma correta, que aprendeste neste nível.
 
-                    **Extra** Add a sleep command to your code to build up tension in your story.
+                    **Extra** Adiciona um comando `{sleep}` ao teu código, para aumentares a tensão na tua história.
             3:
                 story_text: |
                     Podes também acrescentar algo aleatório à tua história. Pode ser um monstro, um animal ou qualquer outro obstáculo.

@@ -1,31 +1,31 @@
-title: Hedy documentation
+title: Documentação da Hedy
 home-sections:
--   title: Textual programming made easy!
+-   title: Programação textual facilitada!
     text: |-
-        Many schools and teachers around the world want to teach their students programming. Initially this is often done with playful tools, ranging from the Beebot robot to
-        Scratch Junior or Scratch. After using such tools, kids often want to move to more powerful, textual programming languages, like Python.
+        Muitas escolas e professores em todo o mundo, querem ensinar os seus alunos a programar. Inicialmente, isto é concretizado com ferramentas divertidas, desde o robot Beebot ao 
+        Scratch Junior ou Scratch. Após usarem estas ferramentas, as crianças querem experimentar linguagens de programação textual mais poderosas, como o Python.
 
-        Python however is hard, because it is only available in English, and requires learners to learn complex programming concepts and syntax at once.
-        Hedy is the easy way to get started with textual programming languages! Hedy is free to use, open source, and unlike any other textual programming language in three ways.
+        Python, no entanto, é difícil, porque está apenas disponível em Inglês e requer a aprendizagem de conceitos de programação e síntaxe complexos, em simultâneo.
+        Hedy é a forma mais acessível de iniciar a aprendizagem de linguagens de programação textual! A Hedy é grátis, código aberto e diferente de qualquer outra linguagem de programação textual em três aspectos.
 
-        1. Hedy is multi-lingual, you can use Hedy in your own language
-        2. Hedy is gradual, so you can learn one concept and its syntax a time
-        3. Hedy is built for the classroom, allowing teachers to fully customize their student's experience
--   title: Multi-lingual programming
+        1. Hedy é multilingue, pode usar a Hedy na sua própria língua
+        2. Hedy é gradual, portanto, pode aprender um conceito e a sua síntaxe de cada vez
+        3. Hedy foi construída para a sala de aula, permitindo aos professores personalizar, por completo, a experiência dos seus alunos
+-   title: Programação multilingue
     text: Enquanto quase todas as linguagens de programação textual têm palavras-chave em inglês, como `for` ou `repeat`, a Hedy pode ser usada em qualquer idioma! Nós atualmente suportamos 47 idiomas diferentes, incluindo Holandês, Espanhol, Árabe, Turco, Chinês e Hindi. Se o seu idioma não está disponível podes sempre começar uma nova tradução.
--   title: Step by step learning
-    text: Learning a programming language can be overwhelming, since learners have to learn concepts (for example if-else or loops) and syntax (like quotation marks or round brackets) at the same time. In Hedy, concepts are first introduced with little syntax and then refined. A scientifically proven way to learn!
--   title: Built for the classroom
+-   title: Aprendizagem passo a passo
+    text: Aprender uma linguagem de programação pode ser desafiante, dado que os estudantes tem de aprender conceitos (por exemplo,if-else ou ciclos) e sintaxes (como aspas ou parênteses), ao mesmo tempo. Na Hedy, conceitos são introduzidos inicialmente com pouca sintaxe e, em seguida, refinados. Um método de aprendizagem cientificamente testado!
+-   title: Construída para a sala de aula
     text: |-
-        Hedy is suitable for kids aged 10 and up and designed for classroom use.
-        Teachers can use our free, built-in lesson plans, but can also author their own lessons and load these into the Hedy user interface.
--   title: Programming in context
-    text: Hedy shows programming in the broadest way possible, and can be used in variety of exciting ways. Hedy allows for the creation of digital and interactive stories, colorful drawings that can be shown on the screen but also drawn with a pen plotter or embroidered on a shirt, and can be used to create games or apps with buttons and keyboard actions.
--   title: Is Hedy free?
+        Hedy é indicada para crianças a partir dos 10 anos de idade e desenvolvida para uso na sala de aula.
+        Os professores podem usar, gratuitamente, os nossos planos de aula, mas também podem criar as suas próprias lições e adicioná-las à interface de utilizador da Hedy.
+-   title: Programação em contexto
+    text: Hedy apresenta a programação na forma mais abrangente possível e pode ser usada de várias maneiras interessantes. A Hedy permite criar histórias digitais e interactivas, desenhos coloridos que podem ser apresentados no ecrã, mas também desenhados com um jato de tinta ou bordado numa camisa e pode ainda ser usada para criar jogos ou aplicações com botões e ações do teclado.
+-   title: A Hedy é gratuita?
     text: |-
         Sim! A Hedy é 'Open source', o que significa que as pessoas podem ajudar-nos a tornar a Hedy melhor.
         Podes encontrar o nosso código em <a href="https://github.com/hedyorg/hedy" target="_blank">Github</a>.
-        Se gostaste da Hedy e gostarias de contribuir, nós aceitamos (e estamos muito agradecidos por) <a href="https://github.com/sponsors/hedyorg" target="_blank">donativos</a>!
+        Se gostaste da Hedy e gostarias de contribuir, nós aceitamos (e ficamos muito gratos) <a href="https://github.com/sponsors/hedyorg" target="_blank">donativos</a>!
 -   title: Preciso de instalar alguma coisa?
     text: No. Hedy works in the browser, which is the program you are using to look at this page. Probably Chrome or Edge or Firefox. Hedy also works on phones and tablets.
 -   title: Do I need programming experience to teach with Hedy?
@@ -676,17 +676,17 @@ teacher-guide:
                     {else} {print} 'meh!
         -   title: Students use long variable names containing two words
             example:
-                error_text: A variable should be named with one word. You could use an underscore to connect two words. That counts as one.
+                error_text: As variáveis na Hedy não podem conter espaços, por isso, para podermos usar várias palavras em conjunto, os alunos devem uni-las usando caracteres de sublinhado (_)
                 error_code: chosen door is ask  Which door do you pick?
                 solution_text: Add an underscore.
                 solution_code: chosen_door {is} {ask} 'which door do you pick?'
         -   title: Students want multiple answers to be correct
             example:
-                error_text: For example this student Hedy to tell all his friends that they are funny, but other classmates would be told that they are not.
+                error_text: Por exemplo, este aluno quer que a Hedy diga a todos os seus amigos que são divertidos, enquanto diz a outros colegas da turma que não o são.
                 error_code: "{if} name {is} Jesse, David, Souf print  You are funny  {else} {print} 'You are not funny'"
                 solution_text: |-
-                    You could use the `in` command for that. It is explained in a higher level, but it does already work in level 5.
-                    Another solution is to use multiple if commands and no else command. The disadvantage is that it won't tell the other classmates that they are not funny.
+                    Pode usar o comando `{in}` para isso. Embora seja explicado num nível mais avançado, já funciona no nível 5.
+                    Outra solução passa por usar múltiplos comandos `{if}` e nenhum comando `{else}`. A desvantagem será que não dirá aos outros colegas de turma que eles não são divertidos.
                 solution_code: |-
                     friends {is} Jesse, David, Souf
                     name {is} {ask} 'Who are you?'
@@ -962,7 +962,7 @@ teacher-guide:
                 solution_code: '{print} 2.5 + 2.5'
     -   level: '13'
         sections:
-        -   title: Students confuse `and` with `or`
+        -   title: Os alunos confundem `{and}` com `{or}`
             example:
                 error_text: Both commands might appear similar, but their functions are very different.
                 error_code: |-
