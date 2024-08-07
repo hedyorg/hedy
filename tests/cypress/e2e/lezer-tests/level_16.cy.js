@@ -55,14 +55,14 @@ describe('Lezer parser tests for level 16', () => {
 
             describe('Assign list with multiple items', () => {
                 const code = 'list = [1, 0.1, "cat", variable]'
-                const expectedTree = 'Program(Command(AssignList(Text,Op,Op,Number,Comma,Number,Comma,String,Comma,Text,Op)))'
+                const expectedTree = 'Program(Command(AssignList(Text,Op,Op,Number,Op,Number,Op,String,Op,Text,Op)))'
 
                 multiLevelTester('Assign list with multiple items', code, expectedTree, 16, 18)
             });
 
             describe('AssignList boolean values', () => {
                 const code = 'options = [True, False]'
-                const expectedTree = 'Program(Command(AssignList(Text,Op,Op,True,Comma,False,Op)))'
+                const expectedTree = 'Program(Command(AssignList(Text,Op,Op,True,Op,False,Op)))'
 
                 multiLevelTester('AssignList boolean values', code, expectedTree, 16, 18)
             });
