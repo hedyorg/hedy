@@ -1,4 +1,4 @@
-@top Program { (Command newline)* }
+@top Program { newline* (Command newline+)* Command? }
 Command {
     Assign | AssignList | Ask | Clear | Print | Play | Turtle | Sleep | Add | Remove| If | Else | Repeat | For | ErrorInvalid
 }
