@@ -122,27 +122,27 @@ Expression {
         Number,
         Text
     }
+    symbol { $[%&().:;?@\\\^\{\}`~$_] }
     Comment { "#" ![\n]* }
     newline { '\n' }
     // A char can be anything that goes after the character ! (A1)
     // Excluding the commas in different languages:
-    // ، (U+00060C) ，(U+00FF0C) 、 (U+003001)    identifierChar { 
-    // We are also excluding the arab and Pajabi numeral systems.    
+    // ، (U+00060C) ，(U+00FF0C) 、 (U+003001)
+    // We are also excluding the arab and Pajabi numeral systems.
     identifierChar { 
-        @asciiLetter | $[_$\u{0000a1}-\u{00060b}] |
-        $[$\u{00060d}-\u{000659}] | $[$\u{000670}-\u{0006EF}] |
-        $[$\u{0006FA}-\u{003000}] |
-        $[$\u{003002}-\u{00ff0b}] | $[$\u{00ff0d}-\u{10ffff}]
+        @asciiLetter | 
+        $[\u{0000a1}-\u{00060b}] | $[\u{00060d}-\u{000659}] |
+        $[\u{000670}-\u{0006EF}] | $[\u{0006FA}-\u{003000}] |
+        $[\u{003002}-\u{00ff0b}] | $[\u{00ff0d}-\u{10ffff}]
     }
-    word { identifierChar (identifierChar | @digit)* }
-    Text { word }
+    Text { (identifierChar | symbol | digit)+ }
     space { " " }
     digit { $[٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹0123456789] } // latin, arab and pa_PK (Panjabi) scripts
     Number { digit+ ("." digit+)? }
     String {
-        '"' (![\\\n"] | "\\" _)* '"' |
-        "'" (![\\\n'] | "\\" _)* "'"
-    }    
+        '"' ( ![\\\n"] )* '"' |
+        "'" ( ![\\\n'] )* "'"
+    } 
 }
 
 @skip { Comment | space }
