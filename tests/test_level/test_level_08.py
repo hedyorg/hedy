@@ -135,7 +135,7 @@ class TestsLevel8(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = Value('James')
-        if localize(naam.data) == localize('trailing_space  '):
+        if localize(naam.data) == localize('trailing_space'):
           print(f'shaken')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -175,7 +175,7 @@ class TestsLevel8(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = Value('James')
-        if localize(naam.data) == localize('trailing space  '):
+        if localize(naam.data) == localize('trailing space'):
           print(f'shaken')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
