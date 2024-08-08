@@ -9,7 +9,7 @@ Print { print+ ( ListAccess | Expression )+ }
 Ask { Text (is+ | Op<"=">) ask+ ( ListAccess | Expression )+ }
 
 // Commas in every language are allowed
-AssignList { Text (is+ | Op<"=">) (boolean | Text+ | Number ) ~ambig  (Op<',' | '،' | '，' | '、' > (boolean | Text+ | Number ))+ }
+AssignList { Text (is+ | Op<"=">) (boolean | String | Number ) ~ambig  (Op<',' | '،' | '，' | '、' > (boolean | String | Number ))+ }
 Assign { (Text | ListAccess) (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
 Sleep { sleep+ (Expression | ListAccess )? }
 ListAccess { Text at+ (random+ | Text | Number) }
