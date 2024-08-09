@@ -5,7 +5,7 @@ assign_list: var (_IS| _EQUALS) (text_in_quotes|NUMBER) (_COMMA (text_in_quotes|
 ?atom: NUMBER | _MINUS NUMBER | var_access | text_in_quotes //unsupported numbers are gone, we can now allow floats with NUMBER
 ?print_expression: var_access_print | error_unsupported_number | NUMBER
 
-equality_check: (list_access | var_access | text_in_quotes | NUMBER) (_IS| _EQUALS) (list_access | var_access | text_in_quotes | NUMBER)
+equality_check: (list_access | var_access | text_in_quotes | NUMBER) (_IS| _EQUALS) (list_access | var_access | text_in_quotes | NUMBER) _SPACE?
 
 in_list_check: (list_access | var_access | text_in_quotes | NUMBER) _IN var_access
 sleep: _SLEEP (NUMBER | list_access | var_access | expression)?

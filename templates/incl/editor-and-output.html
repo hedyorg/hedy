@@ -85,18 +85,19 @@
           </div>
         </div>
     </div>
-    <div data-devmodeheight="{{editor_height}},36rem" data-origheight="{{editor_height}}" class="w-full flex flex-col order-3 relative min-h-0 overflow-hidden" id="code_output" style="height: {{editor_height}}">
-      <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto" style="min-height: 3rem;"></div>
-          <div id="variable_button" class="hidden my-3 cursor-pointer" onclick="$('#variable_list').slideToggle('medium');">
-            <div class="h-2 z-10 bg-blue-500 content-center justify-center grid text-center">
-                <div class="w-fit bg-blue-500 text-white px-5 rounded-lg text-sm">
-                    <i class="fa-solid fa-tag text-lg mt-2 mr-2"></i>
-                    <i id="variables_arrow" class="fa-solid fa-angle-up text-lg mt-2 ml-2"></i>                    
-                </div>
-            </div>            
-          </div>
-
-        <div class="overflow-auto inline-block flex z-10 text-white bg-blue-100 rounded-lg" id="variables">
+    <div data-devmodeheight="{{editor_height}},36rem" data-origheight="{{editor_height}}" class="w-full flex flex-col order-3 relative min-h-0 overflow-auto" id="code_output" style="height: {{editor_height}}">
+      <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 pb-10 bg-gray-900 color-white w-full text-lg overflow-auto" style="min-height: 3rem;"></div>
+      <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
+      <div class="overflow-auto flex-0 absolute bottom-0 w-full z-20 bg-blue-100">
+        <div id="variable_button" class="hidden my-3 cursor-pointer" onclick="$('#variable_list').slideToggle('medium');">
+          <div class="h-2 z-10 bg-blue-500 content-center justify-center grid text-center">
+              <div class="w-fit bg-blue-500 text-white px-5 rounded-lg text-sm">
+                  <i class="fa-solid fa-tag text-lg mt-2 mr-2"></i>
+                  <i id="variables_arrow" class="fa-solid fa-angle-up text-lg mt-2 ml-2"></i>                    
+              </div>
+          </div>            
+        </div>
+        <div class="inline-block flex z-10 text-white bg-blue-100 rounded-lg max-h-36" id="variables">
             <ul id="variable_list" class="bg-blue-100 text-blue-500 px-4 whitespace-nowrap list-none mb-0"
                 style="display: none; margin-left: 0px;"
                 _="on mutation of @style
@@ -112,8 +113,7 @@
             </ul>
             <!-- For some reason the Tailwind ml-0 doesn't do the trick here -->
         </div>
-
-      <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
+      </div>
       <div id="inline_modal" class="flex-0 absolute bottom-0 w-full z-20">
         <div id="ask_modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none">
           <!--Title-->

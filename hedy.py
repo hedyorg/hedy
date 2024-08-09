@@ -2142,7 +2142,7 @@ else:{self.add_debug_breakpoint()}
 
     def equality_check(self, meta, args):
         arg0 = self.process_variable(args[0], meta.line)
-        arg1 = ' '.join([self.process_variable(a) for a in args[1:]])
+        arg1 = self.process_variable(str(args[1]).strip(), meta.line)
         return f"{arg0} == {arg1}"
         # TODO, FH 2021: zelfde change moet ik ook nog ff maken voor equal. check in hogere levels
 
@@ -2257,8 +2257,7 @@ class ConvertToPython_6(ConvertToPython_5):
 
     def equality_check(self, meta, args):
         arg0 = self.process_variable(args[0], meta.line)
-        remaining_text = ' '.join(args[1:])
-        arg1 = self.process_variable(remaining_text, meta.line)
+        arg1 = self.process_variable(str(args[1]).strip(), meta.line)
 
         # FH, 2022 this used to be str but convert_numerals in needed to accept non-latin numbers
         # and works exactly as str for latin numbers (i.e. does nothing on str, makes 3 into '3')
@@ -3441,6 +3440,12 @@ def preprocess_blocks(code, level, lang):
         # ignore whitespace-only lines
         if leading_spaces == len(line):
             processed_code.append('')
+            continue
+
+        # ignore lines that contain only a comment
+        comment_reg_ex = r' *\#[^\n]*'
+        if regex.fullmatch(comment_reg_ex, line):
+            processed_code.append(line)
             continue
 
         # first encounter sets indent size for this program

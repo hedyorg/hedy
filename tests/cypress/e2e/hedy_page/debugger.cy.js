@@ -348,6 +348,7 @@ describe('Test editor box functionality', () => {
     cy.get('#debug_continue').click();
     cy.get('#output').should('contain.text', 'Not Hedy');
   });
+
   it('Test repeat with blocks', () => {
     cy.intercept('/parse').as('parse');
 
@@ -378,8 +379,11 @@ describe('Test editor box functionality', () => {
       .eq(2)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
-
-    cy.get('#turtlecanvas').should('be.visible');
+    
+    cy.wait(100);
+    
+    cy.get('#debug_continue').should('not.be.visible')
+    cy.get('#turtlecanvas').invoke('height').should('gte', 100)
   });
 
   it('Test repeat with ifelse inside', () => {
@@ -517,12 +521,39 @@ describe('Test editor box functionality', () => {
 
         for (let line = 0; line < 6; line++) {
           codeMirrorLines()
-            .eq(line)
-            .should('have.class', 'cm-debugger-current-line');
+          .eq(line)
+          .should('have.class', 'cm-debugger-current-line');
           cy.get('#debug_continue').click();
         }
       })
     }
+  })
+
+  it("Test disabling the continue button when the program is sleeping", () => {
+    const code = "print hello world\nsleep 1";
+    cy.intercept('/parse').as('parse');
+
+    visitLevel(2);
+
+    cy.focused().type(code)
+    cy.get('#debug_button').click()
+    cy.wait('@parse')
+
+    codeMirrorLines()
+      .eq(0)
+      .should('have.class', 'cm-debugger-current-line');
+    cy.get('#debug_continue').click();
+
+    cy.get('#output').should('contain.text', 'hello world');
+    
+    codeMirrorLines()
+      .eq(1)
+      .should('have.class', 'cm-debugger-current-line');
+    cy.get('#debug_continue').click();
+    // Now that we clicked continue, the continue button should be disabled for a second
+    cy.get('#debug_continue').should('be.disabled')
+    cy.wait(1000)
+    cy.get('#debug_continue').should('not.be.visible')
   })
 });
 
