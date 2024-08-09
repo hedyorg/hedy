@@ -176,12 +176,53 @@ class TestsLevel6(HedyTester):
         if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
           print(f'leuk')""")
 
-        self.multi_level_tester(max_level=7, code=code, expected=expected)
+        self.multi_level_tester(max_level=7, code=code, expected=expected, output='leuk')
+
+    def test_if_equality_linebreak_comment_print(self):
+        code = textwrap.dedent("""\
+        naam is Hedy
+        if naam is Hedy
+        # this linebreak is allowed
+        print 'leuk'""")
+
+        expected = textwrap.dedent("""\
+        naam = 'Hedy'
+        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
+          print(f'leuk')""")
+
+        self.multi_level_tester(max_level=7, code=code, expected=expected, output='leuk')
+
+    def test_if_equality_comment_linebreak_print(self):
+        code = textwrap.dedent("""\
+        naam is Hedy
+        if naam is Hedy  # this linebreak is allowed
+        print 'leuk'""")
+
+        expected = textwrap.dedent("""\
+        naam = 'Hedy'
+        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
+          print(f'leuk')""")
+
+        self.multi_level_tester(max_level=7, code=code, expected=expected, output='leuk')
+
+    def test_if_equality_linebreak_print_comment(self):
+        code = textwrap.dedent("""\
+        naam is Hedy
+        if naam is Hedy
+        print 'leuk'  # this linebreak is allowed""")
+
+        expected = textwrap.dedent("""\
+        naam = 'Hedy'
+        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
+          print(f'leuk')""")
+
+        self.multi_level_tester(max_level=7, code=code, expected=expected, output='leuk')
 
     def test_if_equality_trailing_space_linebreak_print(self):
-        code = textwrap.dedent("""\
+        value = 'trailing_space  '
+        code = textwrap.dedent(f"""\
         naam is James
-        if naam is trailing_space
+        if naam is {value}
         print 'shaken'""")
 
         expected = textwrap.dedent("""\

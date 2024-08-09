@@ -383,6 +383,35 @@ class TestsLevel14(HedyTester):
             expected=expected,
         )
 
+    @parameterized.expand(HedyTester.comparison_commands)
+    def test_comparisons_with_trailing_spaces(self, comparison):
+        value = '1  '
+        code = textwrap.dedent(f"""\
+            var is 5
+            if var   {comparison} {value} 
+                print 'seems correct'""")
+
+        expected = textwrap.dedent(f"""\
+            var = 5
+            if convert_numerals('Latin', var){comparison}convert_numerals('Latin', 1):
+              print(f'''seems correct''')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=16)
+
+    @parameterized.expand(HedyTester.comparison_commands)
+    def test_comparisons_with_leading_spaces(self, comparison):
+        code = textwrap.dedent(f"""\
+            var is 5
+            if   var {comparison}  1 
+                print 'seems correct'""")
+
+        expected = textwrap.dedent(f"""\
+            var = 5
+            if convert_numerals('Latin', var){comparison}convert_numerals('Latin', 1):
+              print(f'''seems correct''')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=16)
+
     @parameterized.expand([
         ('"text"', '1'),      # double-quoted text and number
         ("'text'", '1'),      # single-quoted text and number

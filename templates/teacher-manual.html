@@ -56,7 +56,7 @@
                     <h3 id="{{level.title|slugify}}">{{ level.title }}</h3>
                     {% for mistake_section in level.sections %}
                         <div>
-                            <h4>{{ mistake_section.title }}</h4>
+                            <h4>{{ mistake_section.title|commonmark }}</h4>
                             {% if mistake_section.example %} <!-- In this case we expect an error/solution combination -->
                                 <p>{{ mistake_section.example.error_text|commonmark }}</p>
                                 <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
