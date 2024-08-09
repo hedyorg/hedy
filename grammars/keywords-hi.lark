@@ -26,9 +26,9 @@ _IS: _SPACE ("है" | "is") _SPACE
 _STANDALONE_IS: ("है" | "is")
 _SLEEP: ("नींद" | "sleep") _SPACE?
 _ADD_LIST: ("जोड़ना" | "add") _SPACE
-_TO_LIST: _SPACE ("से" | "to") _SPACE
+_TO_LIST: _SPACE? ("से" | "to") _SPACE
 _REMOVE: ("हटाना" | "remove") _SPACE
-_FROM: _SPACE ("से" | "from") _SPACE
+_FROM: _SPACE? ("से" | "from") _SPACE
 _AT: _SPACE ("पर" | "at") _SPACE
 random: ("अनियमित" | "random") _SPACE?
 _IN: _SPACE ("में" | "in") _SPACE

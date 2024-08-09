@@ -12,8 +12,6 @@ _if_less_command: print | ask | play | turtle | assign_button | assign_list | ad
 // just to be sure that if Lark tries to resolve ambiguity, error_invalid will be considered last
 error_invalid.-100: textwithoutspaces _SPACE* (quoted_text | textwithspaces)?
 
-//todo: list_access_var can be merged with var? would simplify rewriting a bit, some duplication now in processing
-list_access_var: var _IS var _AT (INT | random)
 assign_button: NAME _IS _BUTTON
 assign_list: var _IS textwithspaces (_COMMA textwithspaces)+
 assign: var _IS (list_access | textwithspaces)
@@ -36,7 +34,6 @@ condition_spaces: textwithoutspaces _IS textwithoutspaces (_SPACE textwithoutspa
 condition: equality_check | in_list_check | not_in_list_check
 equality_check: (textwithoutspaces | INT) _IS (quoted_text | textwithoutspaces | INT) //TODO FH nov 2021: not super pretty that this is textwithoutquotes for both a var and also a textual constant, level 12 handles this nicer now, could be done here too
 
-
 in_list_check: textwithoutspaces _IN var_access
 not_in_list_check: textwithoutspaces _NOT_IN var_access
 
@@ -45,6 +42,10 @@ nospace: /[^\n, ]/
 textwithspaces: /(?:[^#\n،,，、 ]| (?!else|başka|faese|अन्यथा|否则|muuten|muidu|senão|ellers|alie|altfel|иначе|inače|altrimenti|інакше|lainnya|arall|annars|değilse|anders|ndryshe|inaczej|sinon|ไม่อย่างนั้น|sonst|లేకపోతే|sino|ورنہ|وکھرا|אחרת|وإلا))+/ -> text //anything can be parsed except for a newline and a comma for list separators
 //a space is allowed, but it may not be followed by an else. The part " (?!else))" means space not followed by (negative look ahead) else
 //That is because allowing else in strings leads to issue #303
+
+textwithinnerspaces: /(?:[^#\n،,，、 ]| (?!else|başka|faese|अन्यथा|否则|muuten|muidu|senão|ellers|alie|altfel|иначе|inače|altrimenti|інакше|lainnya|arall|annars|değilse|anders|ndryshe|inaczej|sinon|ไม่อย่างนั้น|sonst|లేకపోతే|sino|ورنہ|وکھرا|אחרת|وإلا))*[^#\n،,，、 ]/ -> text
+// a space is allowed but not at the end and not if followed by an else
+
 textwithoutspaces: /(?:[^#\n،,，、 *+\-\/eidіиlలేไamfnsbअ否אو]|א(?!חרת )|و(?!إلا |کھرا |رنہ)|否(?!则 )|अ(?!न्यथा )|и(?!наче )|m(?!uidu |uuten )|d(?!eğilse )|b(?!aşka )|n(?!dryshe )|ไ(?!ม่อย่างนั้น )|l(?!ainnya )|f(?!aese )|e(?!lse |llers )|s(?!inon |enão |ino |onst )|і(?!накше )|i(?!naczej |nače )|లే (?!కపోతే )|a(?!nders |lie |ltfel |ltrimenti |nnars |rall ))+/ _END_BLOCK* -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
 //the part e(?!lse)|i(?!f)) means e not followed by lse, and i not followed by f
 // this is because allowing else and if in invalid leads to ambiguity in the grammar

@@ -26,9 +26,9 @@ _IS: _SPACE ("це" | "is") _SPACE
 _STANDALONE_IS: ("це" | "is")
 _SLEEP: ("почекай" | "sleep") _SPACE?
 _ADD_LIST: ("додай" | "add") _SPACE
-_TO_LIST: _SPACE ("до" | "to") _SPACE
+_TO_LIST: _SPACE? ("до" | "to") _SPACE
 _REMOVE: ("видали" | "remove") _SPACE
-_FROM: _SPACE ("iз" | "з" | "from") _SPACE
+_FROM: _SPACE? ("iз" | "з" | "from") _SPACE
 _AT: _SPACE ("на позиції" | "at") _SPACE
 random: ("випадковий" | "випадковій" | "random") _SPACE?
 _IN: _SPACE ("в" | "in") _SPACE

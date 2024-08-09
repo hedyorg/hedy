@@ -26,9 +26,9 @@ _IS: _SPACE ("הוא" | "is") _SPACE
 _STANDALONE_IS: ("הוא" | "is")
 _SLEEP: ("המתן" | "sleep") _SPACE?
 _ADD_LIST: ("הוסף" | "add") _SPACE
-_TO_LIST: _SPACE ("אל" | "to") _SPACE
+_TO_LIST: _SPACE? ("אל" | "to") _SPACE
 _REMOVE: ("הסר" | "remove") _SPACE
-_FROM: _SPACE ("מ" | "from") _SPACE
+_FROM: _SPACE? ("מ" | "from") _SPACE
 _AT: _SPACE ("ב" | "at") _SPACE
 random: ("אקראי" | "random") _SPACE?
 _IN: _SPACE ("בתוך" | "in") _SPACE

@@ -26,9 +26,9 @@ _IS: _SPACE ("on" | "is") _SPACE
 _STANDALONE_IS: ("on" | "is")
 _SLEEP: ("nuku" | "sleep") _SPACE?
 _ADD_LIST: ("lisää" | "add") _SPACE
-_TO_LIST: _SPACE ("listaksi" | "to") _SPACE
+_TO_LIST: _SPACE? ("listaksi" | "to") _SPACE
 _REMOVE: ("poista" | "remove") _SPACE
-_FROM: _SPACE ("listasta" | "from") _SPACE
+_FROM: _SPACE? ("listasta" | "from") _SPACE
 _AT: _SPACE ("ota" | "at") _SPACE
 random: ("satunnainen" | "random") _SPACE?
 _IN: _SPACE ("listassa" | "in") _SPACE
