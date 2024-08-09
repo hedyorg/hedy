@@ -36,7 +36,7 @@
       <h2 class="m-0 basis-1/12"> {{_('adventures')}} </h2>
       <div class="text-black basis-10/12">{{ _('adventures_info') }}</div>
       <div class="flex gap-3 justify-end basis-1/12">
-            <button id="create_adventure_button" class="green-btn inline-flex" 
+            <button id="create_adventure_button" data-cy="create_adventure_button" class="green-btn inline-flex" 
               _="on click
                 window.open('/for-teachers/customize-adventure', '_self')"
               data-cy="edit_link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
@@ -83,7 +83,7 @@
         <h2 class="m-0 basis-1/12"> {{_('public_content')}} </h2>
         <div class="text-black basis-10/12">{{ _('public_content_info') }}</div>
         <div class="flex gap-3 justify-end basis-1/12">
-              <button id="public_adventures_link" class="blue-btn inline-flex items-center"
+              <button id="public_adventures_link" data-cy="public_adventures_link" class="blue-btn inline-flex items-center"
             _="on click window.open('/public-adventures', '_self')">{{_('public_adventures')}}</button>
         </div>
       </div>
