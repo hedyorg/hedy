@@ -441,7 +441,7 @@ class HedyTester(unittest.TestCase):
             __trtl = color_dict[__trtl]
         t.pencolor(__trtl)''')
 
-    def input_transpiled(self, var_name, text):
+    def input_transpiled(self, var_name, text, bool_sys=None):
         if self.level < 6:
             return f"{var_name} = input(f'{text}')"
         elif self.level < 12:
@@ -449,7 +449,7 @@ class HedyTester(unittest.TestCase):
                 {var_name} = input(f'{text}')
                 __ns = get_num_sys({var_name})
                 {var_name} = Value({var_name}, num_sys=__ns)""")
-        else:
+        elif self.level < 15:
             return textwrap.dedent(f"""\
                 {var_name} = input(f'''{text}''')
                 __ns = get_num_sys({var_name})
@@ -461,6 +461,22 @@ class HedyTester(unittest.TestCase):
                   except ValueError:
                     pass
                 {var_name} = Value({var_name}, num_sys=__ns)""")
+        else:
+            bool_sys = bool_sys if bool_sys else "[{'True': True, 'False': False}, {'true': True, 'false': False}]"
+            return textwrap.dedent(f"""\
+                {var_name} = input(f'''{text}''')
+                __ns = get_num_sys({var_name})
+                __bs = None
+                try:
+                  {var_name} = int({var_name})
+                except ValueError:
+                  try:
+                    {var_name} = float({var_name})
+                  except ValueError:
+                    __b, __bs = get_value_and_bool_sys({var_name}, {bool_sys})
+                    if __b:
+                      {var_name} = __b
+                {var_name} = Value({var_name}, num_sys=__ns, bool_sys=__bs)""")
 
     def remove_transpiled(self, list_name, value):
         data_part = '' if self.level < 6 else '.data'
@@ -484,7 +500,7 @@ class HedyTester(unittest.TestCase):
         except IndexError:
           raise Exception({HedyTester.index_exception_transpiled()})''')
 
-    def value(self, value, num_sys=None, bools=None):
+    def value(self, value, num_sys=None, bool_sys=None):
         value_part = f"'{value}'" if self.level < 12 else str(value)
         if num_sys:
             num_sys = num_sys if num_sys[0] == num_sys[-1] == "'" else f"'{num_sys}'"
@@ -494,8 +510,8 @@ class HedyTester(unittest.TestCase):
             if str_value.isnumeric():
                 num_sys = "'Latin'"
         num_sys_part = f', num_sys={num_sys}' if num_sys else ''
-        bools_part = f', bools={bools}' if bools else ''
-        return f'Value({value_part}{num_sys_part}{bools_part})'
+        bool_sys_part = f', bool_sys={bool_sys}' if bool_sys else ''
+        return f'Value({value_part}{num_sys_part}{bool_sys_part})'
 
     def list_transpiled(self, *args, num_sys=None):
         args_string = ', '.join([self.value(a, num_sys) for a in args])

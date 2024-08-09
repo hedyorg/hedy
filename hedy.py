@@ -1453,18 +1453,18 @@ class BaseValue:
     properties:
       - data holds the already transpiled Python value, e.g. 1, -50.5, 'Hedy', True, 'sum * 15'
       - num_sys keeps the used numeral system, e.g. 'Latin', 'Arabic'
-      - booleans holds the actual keywords used to create the boolean value, e.g. {True: 'вярно', False: 'невярно'}"""
+      - bool_sys holds the actual keywords used to create the boolean value, e.g. {True: 'вярно', False: 'невярно'}"""
 
-    def __init__(self, data, num_sys, booleans):
+    def __init__(self, data, num_sys, bool_sys):
         self.data = data
         self.num_sys = num_sys
-        self.booleans = booleans
+        self.bool_sys = bool_sys
 
     def __str__(self):
-        return f"{self.__class__.__name__}({self.data}, {self.num_sys}, {self.booleans})"
+        return f"{self.__class__.__name__}({self.data}, {self.num_sys}, {self.bool_sys})"
 
     def __repr__(self):
-        return f"{self.__class__.__name__}({self.data}, {self.num_sys}, {self.booleans})"
+        return f"{self.__class__.__name__}({self.data}, {self.num_sys}, {self.bool_sys})"
 
 
 class LiteralValue(BaseValue):
@@ -1473,16 +1473,16 @@ class LiteralValue(BaseValue):
     of a var_access and gets converted to a LiteralValue. If you need to check for variables, always assume they
     could come as plain strings or LiteralValues, i.e. 'variable' or LiteralValue('variable'). """
 
-    def __init__(self, data, num_sys=None, booleans=None):
-        super().__init__(data, num_sys, booleans)
+    def __init__(self, data, num_sys=None, bool_sys=None):
+        super().__init__(data, num_sys, bool_sys)
 
 
 class ExpressionValue(BaseValue):
     """ Used to transpile expressions. The data property contains the already transpiled expression,
     e.g. '5 * a', 'sum_with_error(a, b, get_error('error_name'))'. """
 
-    def __init__(self, data, num_sys=None, bools=None):
-        super().__init__(data, num_sys, bools)
+    def __init__(self, data, num_sys=None, bool_sys=None):
+        super().__init__(data, num_sys, bool_sys)
 
 
 # decorator used to store each class in the lookup table
@@ -1608,11 +1608,11 @@ class ConvertToPython(Transformer):
             - take the boolean representation of the first LV or EV argument that has booleans stored.
               Unfortunately, at this point we don't have a way to determine the boolean representation at runtime."""
 
-        num_sys, bools = None, None
+        num_sys, bool_sys = None, None
         if args:
             num_sys = args[0].num_sys if isinstance(args[0], BaseValue) else f'get_num_sys({args[0]})'
-            bools = next((a.booleans for a in args if isinstance(a, BaseValue) and a.booleans is not None), None)
-        return num_sys, bools
+            bool_sys = next((a.bool_sys for a in args if isinstance(a, BaseValue) and a.bool_sys is not None), None)
+        return num_sys, bool_sys
 
     def get_localization_info_from_arg(self, arg, access_line):
         if self.is_variable(arg, access_line):
@@ -2429,7 +2429,7 @@ class ConvertToPython_6(ConvertToPython_5):
         lhs = self.unpack(args[0])
         rhs = self.unpack(args[1])
         self.check_variable_usage_and_definition(args, meta.line)
-        num_sys, bools = self.merge_localization_info(args)
+        num_sys, bool_sys = self.merge_localization_info(args)
 
         only_literal_values = all([isinstance(a, LiteralValue) for a in args])
         if only_literal_values:
@@ -2437,7 +2437,7 @@ class ConvertToPython_6(ConvertToPython_5):
         else:
             exception_text = make_value_error(operator, 'suggestion_number', self.language)
             value = f'number_with_error({lhs}, {exception_text}) {operator} number_with_error({rhs}, {exception_text})'
-        return ExpressionValue(value, num_sys, bools)
+        return ExpressionValue(value, num_sys, bool_sys)
 
     def process_literal_to_value(self, lv, escape=False):
         """ Transpiles a Literal Value to a Value instance, which exists in prefixes. For example,
@@ -2445,8 +2445,8 @@ class ConvertToPython_6(ConvertToPython_5):
         arg = lv.data
         data = f"'{process_characters_needing_escape(str(arg))}'"
         num_sys = f", num_sys='{lv.num_sys}'" if lv.num_sys else ''
-        booleans = f', bools={lv.booleans}' if lv.booleans else ''
-        return f"Value({data}{num_sys}{booleans})"
+        bool_sys = f', bool_sys={lv.bool_sys}' if lv.bool_sys else ''
+        return f"Value({data}{num_sys}{bool_sys})"
 
     def process_expression_to_value(self, ev):
         """ Transpiles an Expression Value instance to a Value instance, which exists in prefixes.
@@ -2455,24 +2455,24 @@ class ConvertToPython_6(ConvertToPython_5):
         data = ev.data
         num_sys_value = ev.num_sys if ev.num_sys and 'get_num_sys' in ev.num_sys else f"'{ev.num_sys}'"
         num_sys = f", num_sys={num_sys_value}" if ev.num_sys else ''
-        booleans = f', bools={ev.booleans}' if ev.booleans else ''
-        return f"Value({data}{num_sys}{booleans})"
+        bool_sys = f', bool_sys={ev.bool_sys}' if ev.bool_sys else ''
+        return f"Value({data}{num_sys}{bool_sys})"
 
     def process_literal_for_fstring(self, lv):
         value = lv.data
         if self.is_quoted(value):
             value = value[1:-1].replace("'", "\\'")
-        if (lv.num_sys is None or lv.num_sys == 'Latin') and lv.booleans is None:
+        if (lv.num_sys is None or lv.num_sys == 'Latin') and lv.bool_sys is None:
             return str(value)
         num_sys_part = f', num_sys="{lv.num_sys}"' if lv.num_sys else ''
-        bools_part = f', bools={lv.booleans}' if lv.booleans else ''
-        return f"{{localize({value}{num_sys_part}{bools_part})}}"
+        bool_sys_part = f', bool_sys={lv.bool_sys}' if lv.bool_sys else ''
+        return f"{{localize({value}{num_sys_part}{bool_sys_part})}}"
 
     def process_expression_for_fstring(self, ev):
         num_sys_value = ev.num_sys if ev.num_sys and 'get_num_sys' in ev.num_sys else f'"{ev.num_sys}"'
         num_sys = f", num_sys={num_sys_value}" if ev.num_sys else ''
-        booleans = f', bools={ev.booleans}' if ev.booleans else ''
-        return f"{{localize({ev.data}{num_sys}{booleans})}}"
+        bool_sys = f', bool_sys={ev.bool_sys}' if ev.bool_sys else ''
+        return f"{{localize({ev.data}{num_sys}{bool_sys})}}"
 
 
 @v_args(meta=True)
@@ -2628,14 +2628,14 @@ class ConvertToPython_12(ConvertToPython_11):
         return LiteralValue(value, num_sys=get_num_sys(input_text))
 
     def true(self, meta, args):
-        booleans = self.extract_booleans(args[0], True)
-        return LiteralValue(True, booleans=booleans)
+        bool_sys = self.get_bool_sys(args[0], True)
+        return LiteralValue(True, bool_sys=bool_sys)
 
     def false(self, meta, args):
-        booleans = self.extract_booleans(args[0], False)
-        return LiteralValue(False, booleans=booleans)
+        bool_sys = self.get_bool_sys(args[0], False)
+        return LiteralValue(False, bool_sys=bool_sys)
 
-    def extract_booleans(self, value, boolean):
+    def get_bool_sys(self, value, boolean):
         def get_boolean_values(val, used_key, language, true_key, false_key):
             if KEYWORDS[language][used_key] == val:
                 return KEYWORDS[language][true_key], KEYWORDS[language][false_key]
@@ -2695,14 +2695,14 @@ class ConvertToPython_12(ConvertToPython_11):
     def addition(self, meta, args):
         lhs = self.unpack(args[0])
         rhs = self.unpack(args[1])
-        num_sys, bools = self.merge_localization_info(args)
+        num_sys, bool_sys = self.merge_localization_info(args)
 
         if self.has_variable_with_definition(args, meta.line):
             ex_text = make_values_error(Command.addition, 'suggestion_numbers_or_strings', self.language)
             value = f'sum_with_error({lhs}, {rhs}, {ex_text})'
         else:
             value = f'{lhs} + {rhs}'
-        return ExpressionValue(value, num_sys, bools)
+        return ExpressionValue(value, num_sys, bool_sys)
 
     def division(self, meta, args):
         return self.process_calculation(args, '/', meta)
@@ -2940,25 +2940,25 @@ class ConvertToPython_12(ConvertToPython_11):
         else:
             data = lv.data
         num_sys = f", num_sys='{lv.num_sys}'" if lv.num_sys else ''
-        booleans = f', bools={lv.booleans}' if lv.booleans else ''
-        return f"Value({data}{num_sys}{booleans})"
+        bool_sys = f', bool_sys={lv.bool_sys}' if lv.bool_sys else ''
+        return f"Value({data}{num_sys}{bool_sys})"
 
     def process_literal_for_fstring(self, lv):
         value = lv.data
         if self.is_quoted(value):
             value = value[1:-1].replace("'", "\\'")
-        if (lv.num_sys is None or lv.num_sys == 'Latin') and lv.booleans is None:
+        if (lv.num_sys is None or lv.num_sys == 'Latin') and lv.bool_sys is None:
             return str(value)
         # In level 12, the f string uses ''', so we keep the status quo and use single quotes for the numeral system
         num_sys_part = f", num_sys='{lv.num_sys}'" if lv.num_sys else ''
-        bools_part = f', bools={lv.booleans}' if lv.booleans else ''
-        return f"{{localize({value}{num_sys_part}{bools_part})}}"
+        bool_sys_part = f', bool_sys={lv.bool_sys}' if lv.bool_sys else ''
+        return f"{{localize({value}{num_sys_part}{bool_sys_part})}}"
 
     def process_expression_for_fstring(self, ev):
         num_sys_value = ev.num_sys if ev.num_sys and 'get_num_sys' in ev.num_sys else f"'{ev.num_sys}'"
         num_sys = f", num_sys={num_sys_value}" if ev.num_sys else ''
-        booleans = f', bools={ev.booleans}' if ev.booleans else ''
-        return f"{{localize({ev.data}{num_sys}{booleans})}}"
+        bool_sys = f', bool_sys={ev.bool_sys}' if ev.bool_sys else ''
+        return f"{{localize({ev.data}{num_sys}{bool_sys})}}"
 
     def define(self, meta, args):
         function_name = self.unpack(args[0])
@@ -3070,10 +3070,36 @@ class ConvertToPython_15(ConvertToPython_14):
 
     def if_pressed_without_else(self, meta, args):
         code = args[0]
+        return code + self.make_extension_call()
 
-        return (
-            code + self.make_extension_call()
-        )
+    def ask(self, meta, args):
+        var = args[0]
+        argument_string = self.process_print_ask_args(args[1:], meta)
+        exception = self.make_index_error_check_if_list(args)
+        boolean_keywords = self.get_boolean_system()
+
+        return exception + textwrap.dedent(f"""\
+            {var} = input(f'''{argument_string}'''){self.add_debug_breakpoint()}
+            __ns = get_num_sys({var})
+            __bs = None
+            try:
+              {var} = int({var})
+            except ValueError:
+              try:
+                {var} = float({var})
+              except ValueError:
+                __b, __bs = get_value_and_bool_sys({var}, {boolean_keywords})
+                if __b:
+                  {var} = __b
+            {var} = Value({var}, num_sys=__ns, bool_sys=__bs)""")
+
+    def get_boolean_system(self):
+        """ Returns a list of localized boolean keywords and their respective boolean values in pairs.
+        For example: [{'true': True, 'false': False}, {'Вярно': True, 'Невярно': False}]"""
+        langs = [self.language] if self.language == 'en' else [self.language, 'en']
+        # unlike other keywords, booleans could start with uppercase or lowercase, so there are 4 keywords in total
+        bool_pairs = [('True', 'False'), ('true', 'false')]
+        return [{KEYWORDS[lang][t]: True, KEYWORDS[lang][f]: False} for t, f in bool_pairs for lang in langs]
 
 
 @v_args(meta=True)

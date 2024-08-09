@@ -94,21 +94,31 @@ def get_num_sys(value):
     return None
 
 
-def localize(value, num_sys=None, bools=None):
+def get_value_and_bool_sys(value, bool_keywords):
+    if not value:
+        return None, None
+    value = str(value).strip()
+    match = [pair for pair in bool_keywords if value in pair]
+    if match:
+        return match[0][value], {v: k for k, v in match[0].items()}
+    return None, None
+
+
+def localize(value, num_sys=None, bool_sys=None):
     if value is None or value == '':
         return ''
 
-    if bools and type(bools) is dict and True in bools and False in bools:
-        boolean_values = bools
+    if bool_sys and type(bool_sys) is dict and True in bool_sys and False in bool_sys:
+        boolean_system = bool_sys
     else:
-        boolean_values = {True: 'True', False: 'False'}
+        boolean_system = {True: 'True', False: 'False'}
 
     if type(value) is bool:
-        return boolean_values[value]
+        return boolean_system[value]
     if value == 'True':
-        return boolean_values[True]
+        return boolean_system[True]
     if value == 'False':
-        return boolean_values[False]
+        return boolean_system[False]
 
     value = str(value)
     result_type = str
@@ -182,15 +192,15 @@ def sum_with_error(left, right, err):
 
 
 class Value:
-    def __init__(self, data, num_sys=None, bools=None):
+    def __init__(self, data, num_sys=None, bool_sys=None):
         self.data = data
         self.numeral_system = num_sys
-        self.boolean_values = bools
+        self.boolean_system = bool_sys
 
     def __str__(self):
         if type(self.data) is list:
-            return ', '.join([localize(d.data, d.numeral_system, d.boolean_values) for d in self.data])
-        return str(localize(self.data, self.numeral_system, self.boolean_values))
+            return ', '.join([localize(d.data, d.numeral_system, d.boolean_system) for d in self.data])
+        return str(localize(self.data, self.numeral_system, self.boolean_system))
 
     def __eq__(self, other):
         if isinstance(other, Value):
