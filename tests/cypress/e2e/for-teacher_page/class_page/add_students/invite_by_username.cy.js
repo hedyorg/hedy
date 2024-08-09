@@ -1,5 +1,6 @@
 import {loginForTeacher, logout, login} from '../../../tools/login/login.js'
 import { navigateToClass } from "../../../tools/classes/class.js";
+import { goToProfilePage } from "../../../tools/navigation/nav.js";
 
 const teachers = ["teacher1", "teacher4"];
 const student = 'student5';
@@ -26,8 +27,7 @@ teachers.forEach((teacher) => {
     cy.wait(500);
     login(student, "123456");
 
-    cy.getDataCy('user_dropdown').click();
-    cy.getDataCy('my_account_button').click();
+    goToProfilePage();
     cy.getDataCy('join_link').click();
 
     logout();
