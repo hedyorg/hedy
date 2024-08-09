@@ -1208,8 +1208,8 @@ class IsValid(Filter):
         raise exceptions.MissingVariableException(command='is ask', level=self.level, line_number=meta.line)
 
     def error_print_nq(self, meta, args):
-        words = [str(x[1]) for x in args]  # second half of the list is the word
-        text = ' '.join(words)
+        words = [str(x[1]).replace('\\\\', '\\') for x in args]  # second half of the list is the word
+        text = find_unquoted_segments(' '.join(words))
 
         raise exceptions.UnquotedTextException(
             level=self.level,
@@ -1426,6 +1426,42 @@ def process_characters_needing_escape(value):
     return value
 
 
+supported_quotes = {
+    "'": "'",  # single straight quotation marks
+    '"': '"',  # double straight quotation marks
+    '‘': '’',  # single curved quotation marks
+    "“": "”",  # double curved quotation marks or English quotes
+    "„": "“",  # inward double curved quotation marks or German quotes
+    "«": "»",  # guillemets or double angular marks or French quotes
+}
+
+
+def is_quoted(s):
+    return isinstance(s, str) and len(s) > 1 and s[0] in supported_quotes and s[-1] in supported_quotes[s[0]]
+
+
+def find_unquoted_segments(s):
+    result = ''
+    segment = ''
+    used_quote = None
+    for c in s:
+        if not used_quote and c in supported_quotes:
+            # if it is a valid opening quote, append the segment to the result and clear the buffer
+            used_quote = c
+            result += segment
+            segment = c
+        elif used_quote and c == supported_quotes[used_quote]:
+            # if this is a valid closing quote, then empty the buffer as it holds a correctly quoted segment
+            used_quote = None
+            segment = ''
+        else:
+            segment += c
+
+    # add a segment with a missing closing quote, if any
+    result += segment
+    return result
+
+
 def get_allowed_types(command, level):
     # get only the allowed types of the command for all levels before the requested level
     allowed = [values for key, values in commands_and_types_per_level[command].items() if key <= level]
@@ -1584,7 +1620,7 @@ class ConvertToPython(Transformer):
             not self.is_bool(value) and \
             not self.is_int(value) and \
             not self.is_float(value) and \
-            not self.is_quoted(value)
+            not is_quoted(value)
 
         if is_var_candidate and not self.is_variable(arg, access_line):
             raise exceptions.UndefinedVarException(name=value, line_number=access_line)
@@ -1625,7 +1661,7 @@ class ConvertToPython(Transformer):
     def process_arg_for_data_access(self, arg, access_line=100, use_var_value=True):
         if self.is_variable(arg, access_line):
             return escape_var(arg)
-        if ConvertToPython.is_quoted(arg):
+        if is_quoted(arg):
             arg = arg[1:-1]
         return f"'{process_characters_needing_escape(arg)}'"
 
@@ -1653,12 +1689,6 @@ class ConvertToPython(Transformer):
     @staticmethod
     def check_if_error_skipped(tree):
         return hasattr(IsValid, tree.data)
-
-    @staticmethod
-    def is_quoted(s):
-        opening_quotes = ['‘', "'", '"', "“", "«", "„"]
-        closing_quotes = ['’', "'", '"', "”", "»", "“"]
-        return isinstance(s, str) and len(s) > 1 and (s[0] in opening_quotes and s[-1] in closing_quotes)
 
     @staticmethod
     def is_int(n):
@@ -2065,7 +2095,7 @@ class ConvertToPython_4(ConvertToPython_3):
         if self.is_variable(name):
             return f"{{{name}}}"
 
-        if self.is_quoted(name):
+        if is_quoted(name):
             name = name[1:-1]
 
         # at level 4 backslashes are escaped in preprocessing, so we escape only '
@@ -2271,7 +2301,7 @@ class ConvertToPython_6(ConvertToPython_5):
         if self.is_variable_with_definition(arg, meta.line):
             arg = f'{escape_var(self.unpack(arg))}.data'
         elif isinstance(arg, LiteralValue):
-            arg = f"{arg.data}" if self.is_quoted(arg.data) else f"'{arg.data}'"
+            arg = f"{arg.data}" if is_quoted(arg.data) else f"'{arg.data}'"
         elif isinstance(arg, ExpressionValue):
             arg = arg.data
         else:
@@ -2290,7 +2320,7 @@ class ConvertToPython_6(ConvertToPython_5):
             return self.process_literal_for_fstring(name)
         elif isinstance(name, ExpressionValue):
             return self.process_expression_for_fstring(name)
-        elif self.is_quoted(name):
+        elif is_quoted(name):
             name = name[1:-1]
             return name.replace("'", "\\'")
         elif not ConvertToPython.is_int(name) and not ConvertToPython.is_float(name):
@@ -2313,7 +2343,7 @@ class ConvertToPython_6(ConvertToPython_5):
             var_name = escape_var(self.unpack(arg))
             return f"{var_name}{data_part}"
         elif isinstance(arg, LiteralValue):
-            val = arg.data[1:-1] if self.is_quoted(arg.data) else arg.data
+            val = arg.data[1:-1] if is_quoted(arg.data) else arg.data
             # equality does not have an f string and requires quotes to be added manually
             return f"'{process_characters_needing_escape(str(val))}'"
         elif self.is_random(arg) or self.is_list(arg):
@@ -2322,7 +2352,7 @@ class ConvertToPython_6(ConvertToPython_5):
             # We end up here when if-pressed receives a Token(LETTER_OR_NUMBER, 'x')
             # We also en up here when equality deals with an arg with spaces. We need to unpack, join them and pass it.
             # And since equality does not have an f string and requires quotes to be added manually
-            val = arg[1:-1] if self.is_quoted(arg) else arg
+            val = arg[1:-1] if is_quoted(arg) else arg
             return f"'{process_characters_needing_escape(str(val))}'"
 
     def assign(self, meta, args):
@@ -2460,7 +2490,7 @@ class ConvertToPython_6(ConvertToPython_5):
 
     def process_literal_for_fstring(self, lv):
         value = lv.data
-        if self.is_quoted(value):
+        if is_quoted(value):
             value = value[1:-1].replace("'", "\\'")
         if (lv.num_sys is None or lv.num_sys == 'Latin') and lv.booleans is None:
             return str(value)
@@ -2680,7 +2710,7 @@ class ConvertToPython_12(ConvertToPython_11):
         if self.is_variable_with_definition(arg, meta.line):
             arg = f'{escape_var(self.unpack(arg))}.data'
         elif isinstance(arg, LiteralValue):
-            arg = f"{arg.data}" if self.is_quoted(arg.data) else f"'{arg.data}'"
+            arg = f"{arg.data}" if is_quoted(arg.data) else f"'{arg.data}'"
         elif isinstance(arg, ExpressionValue):
             arg = arg.data
         else:
@@ -2796,7 +2826,7 @@ class ConvertToPython_12(ConvertToPython_11):
             return self.process_literal_for_fstring(name)
         elif isinstance(name, ExpressionValue):
             return self.process_expression_for_fstring(name)
-        elif self.is_quoted(name):
+        elif is_quoted(name):
             name = name[1:-1]
             return name.replace("'", "\\'")
         elif not ConvertToPython.is_int(name) and not ConvertToPython.is_float(name):
@@ -2920,7 +2950,7 @@ class ConvertToPython_12(ConvertToPython_11):
             var_name = escape_var(self.unpack(arg))
             return f"{var_name}{data_part}"
         elif isinstance(arg, LiteralValue):
-            if self.is_quoted(arg.data):
+            if is_quoted(arg.data):
                 return f"'{process_characters_needing_escape(arg.data[1:-1])}'"
             return arg.data
         elif self.is_random(arg) or self.is_list(arg):
@@ -2935,7 +2965,7 @@ class ConvertToPython_12(ConvertToPython_11):
         # The data of the literal value is exactly as it would be transpiled, so quotes must already be in it.
         # However, in some cases we need to strip quotes and re-add them as single quotes.
         if escape and isinstance(lv.data, str):
-            arg = lv.data[1:-1] if self.is_quoted(lv.data) else lv.data
+            arg = lv.data[1:-1] if is_quoted(lv.data) else lv.data
             data = f"'{process_characters_needing_escape(arg)}'"
         else:
             data = lv.data
@@ -2945,7 +2975,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def process_literal_for_fstring(self, lv):
         value = lv.data
-        if self.is_quoted(value):
+        if is_quoted(value):
             value = value[1:-1].replace("'", "\\'")
         if (lv.num_sys is None or lv.num_sys == 'Latin') and lv.booleans is None:
             return str(value)

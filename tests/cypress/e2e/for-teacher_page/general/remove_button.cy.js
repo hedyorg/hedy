@@ -28,5 +28,5 @@ it('Is able to remove an adventure', () => {
   openAdventureView();
   cy.getDataCy(`delete_adventure_${newAdventure}`).click();
   cy.getDataCy('modal_yes_button').click();
-  cy.getDataCy('edit_link_adventure').should("not.contain.text", newAdventure);
+  cy.getDataCy('adventures_table').should("not.contain.text", newAdventure);
 })

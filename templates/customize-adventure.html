@@ -92,9 +92,9 @@ onclick="window.open('/for-teachers', '_self');">
                         <div class="flex flex-row items-center mb-4">
                             <label for="custom_adventure_classes" class="inline-block w-40 text-xl">{{_('used_in')}}</label>
                             <div class="flex-1">
-                                <custom-select data-type="multiple" id="classes_dropdown" data-label="{{_('used_in')}}">
+                                <custom-select data-type="multiple" id="classes_dropdown" data-cy="classes_select" data-label="{{_('used_in')}}">
                                     {% for class in all_classes %}
-                                        <option {% if class.id in adventure.classes %}selected{% endif %} value="{{class.id}}">{{ class.name }}</option>
+                                        <option {% if class.id in adventure.classes %}selected{% endif %} value="{{class.id}}" data-cy="{{class.name}}">{{ class.name }}</option>
                                     {% endfor %}
                                 </custom-select>
                             </div>
@@ -105,7 +105,7 @@ onclick="window.open('/for-teachers', '_self');">
                                 <custom-select data-type="multiple" id="levels_dropdown" data-cy="level_select" data-label="{{_('select_levels')}}">
                                     {% for i in range(1, (max_level + 1)) %}
                                         {% set adv_levels = adventure.levels if adventure.get("levels") else [adventure.level|string] %}
-                                        <option {% if i|string in adv_levels %}selected{% endif %} data-value="{{i}}">{{ i }}</option>
+                                        <option {% if i|string in adv_levels %}selected{% endif %} data-value="{{i}}" data-cy="{{i}}">{{ i }}</option>
                                     {% endfor %}
                                 </custom-select>
                             </div>
@@ -113,10 +113,10 @@ onclick="window.open('/for-teachers', '_self');">
                         <div class="flex flex-row items-center mb-4">
                             <label class="inline-block w-40 text-xl" for="language">{{_('language')}}</label>
                             <div class="flex-1">
-                                <custom-select data-type="single" id="languages_dropdown" data-label="{{_('select_lang')}}">
+                                <custom-select data-type="single" id="languages_dropdown" data-cy="language_select" data-label="{{_('select_lang')}}">
                                     <option value="{{ adventure['language'] or current_language().lang }}" selected>{{ lang_to_sym(adventure['language'] or current_language().lang) }}</option>
                                     {% for language in other_languages(adventure["language"]) %}
-                                        <option value="{{ language.lang }}">{{ language.sym }}</option>
+                                        <option value="{{ language.lang }}" data-cy="{{ language.lang }}">{{ language.sym }}</option>
                                     {% endfor %}
                                 </custom-select>
                             </div>

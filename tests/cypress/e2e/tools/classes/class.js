@@ -127,7 +127,7 @@ export function navigateToClass(classname=null) {
 }
 
 export function selectLevel(level) {
-    cy.getDataCy("levels_dropdown").select(level);
+    cy.getDataCy('levels_dropdown').select(level);
   }
 
 export default {createClassAndAddStudents};
