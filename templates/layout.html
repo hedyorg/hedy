@@ -20,7 +20,7 @@
     <div id="modal_mask" class="hidden fixed bg-black z-50 w-full h-full opacity-75"></div>
     <div id="modal_content" data-cy="modal_content" class="hidden fixed z-50 p-12 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style="max-height: 80vh; overflow-y: auto;">
        <div id="modal_confirm" data-cy="modal_confirm" class="hidden">
-          <div id="modal_confirm_text" class="text-white mb-8 text-xl"></div>
+          <div id="modal_confirm_text" data-cy="modal_confirm_text" class="text-white mb-8 text-xl"></div>
           <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
             <button id="modal_yes_button" data-cy="modal_yes_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('yes')}}</button>
             <button id="modal_no_button" data-cy="modal_no_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('no')}}</button>
@@ -64,11 +64,11 @@
                       class="border border-green-400 rounded py-2 px-2 w-full h-48"></textarea>
 
                       <div class="pt-4 text-white flex justify-center items-center gap-2">
-                        <input type="radio" id="bug" required name="category" value="bug" />
+                        <input type="radio" data-cy="bug" required name="category" value="bug" />
                         <label for="bug">{{_('bug')}}</label>
-                        <input type="radio" id="feature" required name="category" value="feature" />
+                        <input type="radio" data-cy="feature" required name="category" value="feature" />
                         <label for="feature">{{_('feature')}}</label>
-                        <input type="radio" id="feedback" required name="category" value="feedback" />
+                        <input type="radio" data-cy="feedback" required name="category" value="feedback" />
                         <label for="feedback">{{_('feedback')}}</label>
                       </div>
                       
