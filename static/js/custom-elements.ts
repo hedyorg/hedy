@@ -31,6 +31,9 @@ export class HedySelect extends HTMLElement {
             for(const attribute of option.attributes) {
                 if(attribute.name.includes('hx-')) {
                     newDiv.setAttribute(attribute.name, attribute.value);
+                } else if(attribute.name == "data-cy") {
+                    newDiv.setAttribute(attribute.name, attribute.value);
+                    option.removeAttribute(attribute.name);
                 }
             }
         }

@@ -18,7 +18,7 @@ it('Is able to create a class adventure, public profile, in teacher preview mode
   createAdventure(adv);
   goToTeachersPage();
   openAdventureView();
-  cy.getDataCy('edit_link_adventure').should("contain.text", adv);
+  cy.getDataCy('adventures_table').should("contain.text", adv);
 
   // can create public profile
   makeProfilePublic();

@@ -5,7 +5,7 @@ export function createAdventure(name)
     goToTeachersPage();
 
     // Click 'Create new class' button
-    cy.get('#create_adventure_button').click();
+    cy.getDataCy('create_adventure_button').click();
 
     if (name) {
         cy.intercept('/for-teachers/customize-adventure').as('customizeAdventure');      
@@ -14,7 +14,7 @@ export function createAdventure(name)
         cy.wait('@customizeAdventure').should('have.nested.property', 'response.statusCode', 200);
     }
 
-    cy.wait(500);
+    cy.wait(1000);
 }
 
 export function deleteAdventure(name) {
