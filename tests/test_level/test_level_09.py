@@ -165,6 +165,22 @@ class TestsLevel9(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
+    def test_repeat_nested_in_repeat_with_comments(self):
+        code = textwrap.dedent("""\
+        repeat 2 times # test
+            repeat 2 times # test
+                # test
+                sleep # test
+                # test""")
+
+        expected = textwrap.dedent(f"""\
+           for __i in range({self.int_cast_transpiled(2)}):
+             for __i in range({self.int_cast_transpiled(2)}):
+               time.sleep(1)
+               time.sleep(0.1)""")
+
+        self.multi_level_tester(code=code, expected=expected)
+
     def test_repeat_nested_multi_commands(self):
         code = textwrap.dedent("""\
             repeat 3 times
