@@ -21,7 +21,6 @@ export const
   Text = 19,
   ListAccess = 20,
   AssignList = 21,
-  Comma = 22,
   Ask = 23,
   Print = 24,
   Play = 25,

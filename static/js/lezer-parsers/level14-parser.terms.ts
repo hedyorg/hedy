@@ -42,7 +42,6 @@ export const
   String = 41,
   Call = 42,
   Arguments = 43,
-  Comma = 44,
   AssignList = 47,
   Ask = 48,
   Clear = 49,

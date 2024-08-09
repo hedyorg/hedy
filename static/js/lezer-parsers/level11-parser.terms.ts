@@ -34,7 +34,6 @@ export const
   Int = 33,
   ListAccess = 36,
   AssignList = 37,
-  Comma = 38,
   Ask = 39,
   String = 40,
   Clear = 41,

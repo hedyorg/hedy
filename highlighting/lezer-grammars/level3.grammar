@@ -4,7 +4,7 @@ Command {
 }
 
 Print { print+ ( Text | ListAccess )+ }
-AssignList { Text is+ Text+ (Comma Text+)+ }
+AssignList { Text is+ Text+ (Op<',' | '،' | '，' | '、' > Text+)+ }
 Assign { Text is+ (Text+ | ListAccess) }
 Ask { Text is+ ask+ (Text)+ }
 Sleep { sleep+ (Text | ListAccess)? }
@@ -41,10 +41,11 @@ ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
     to_list[@name="to_list"]
 }
 
+Op<expr> { expr }
+
 @tokens {
     Comment { "#" ![\n]* }
     eol { "\n" }
-    Comma { $[,،，、] } // every language comma is valid here
     Text { ![^\n,،，、 #]+ } // a little bit of a hack not to parse commas never, but lezer adds them as error nodes, so it still
     space { " " }
 }

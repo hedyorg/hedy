@@ -126,5 +126,11 @@ describe('Tests level 12', () => {
                   multiLevelTester('Play note', code, expectedTree, 12, 15)
               })
         })
+        describe('List with quotes tests', () => {
+            const code = "list = 'string 1', 'string 2', 'string 3'"
+            const expectedTree =  'Program(Command(AssignList(Text,Op,String,Op,String,Op,String)))'
+
+            multiLevelTester('List with quotes tests', code, expectedTree, 12, 15)
+        })
     })
 })
