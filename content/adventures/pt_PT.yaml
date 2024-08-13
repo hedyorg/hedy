@@ -1,109 +1,120 @@
 adventures:
     story:
-        name: Uma história
+        name: História
         default_save_name: História
-        description: Cria uma história interactiva
+        description: História
         levels:
             1:
                 story_text: |
                     No nível 1 podes criar uma história com um personagem principal diferente, saído da tua imaginação.
 
-                    Como primeira linha, usa este código `{ask}`.
+                    Na primeira linha, usa `{ask}` e pergunta à personagem principal como será a história.
 
-                    Após a primeira linha, começa com `print` se quiseres que a frase seja escrita.
-                    Utilizas `echo` se quiseres colocar o teu personagem principal no final da frase.
-                example_code: "```\nask O(A) personagem principal desta história é ...\nprint O(A) personagem principal vai caminhar agora na floresta\necho Está um pouco(a) assustado(a) \nprint Ouve barulhos estranhos por toda a parte\nprint Receia que esta floresta seja assombrada\n```\n\nÉ uma pena só conseguires criar frases em que o nome do personagem principal aparece no final, certo? Depois de praticarmos com esta história, prossegue para o nível 2 e, a seguir, para o nível 3, onde podes criar programas cada vez mais complexos.\n"
+                    Após a primeira linha, começa com `{print}` se precisares que a frase seja escrita.
+                    Utilizas `{echo}` se quiseres colocar o teu personagem principal no final da frase.
+                example_code: "```\n{ask} O(A) personagem principal desta história é\n{print} O(A) personagem principal vai caminhar agora na floresta\n{echo} Estão um pouco assustados,\n{print} Ouvem barulhos estranhos por toda a parte\n{print} Receiam que esta floresta seja assombrada\n```\n"
                 story_text_2: |
-                    ### Exercise
-                    Can you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?
+                    ### Exercício
+                    Agora, cria a tua própria história com pelo menos 6 linhas de código.
+                    Esta história não pode ser igual ao código de exemplo.
+                    Usa pelo meno um comando `{ask}` e um `{echo}`.
+                    Podes escolher o tema que preferires.
+                    Se não conseguires lembrar-te de um tema, escolhe uma das nossas opções: ir ao cinema, um evento desportivo ou um dia no zoo.
             2:
                 story_text: |
                     No nível 2 podes tornar a tua história ainda mais divertida. O nome da tua personagem principal pode agora aparecer em qualquer parte da frase.
 
-                    Precisas de programar algumas coisas extra, para conseguires isso. Tens de atribuir o nome ao teu personagem principal, primeiro de tudo.
+                    Precisas de programar algumas coisas extra, para conseguires isso. Antes de mais, tens de atribuir o nome ao teu personagem principal.
 
                     Depois, podes colocar esse nome em qualquer lugar da frase.
-                example_code: |
+                example_code: |-
                     ```
-                    nome is ask Qual é o nome da tua personagem principal?
-                    print nome vai agora correr na floresta
-                    print nome está um pouco assustado(a)
-                    print Está a ouvir barulhos estranhos por toda a parte
-                    print nome receia que esta floresta seja assombrada
+                    nome {is} {ask} Qual é o nome da tua personagem principal?
+                    {print} nome vai agora correr na floresta
+                    {print} nome está um pouco assustado(a)
+                    {print} De repente, escuta um barulho estranho...
+                    {sleep}
+                    {print} nome receia que esta floresta seja assombrada
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Now it's time to add variables to your own story that you've made in the previous level.
-                    Go to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.
+                    ### Exercício
+                    Chegou o momento de adicionar variáveis à tua história, que construíste no nível anterior.
+                    Vai até 'Os meus programas', procura pela história aventura do nível 1 e copia o código. Cola o código na tua janela de introdução neste nível.
 
-                    This code won't work in this level, because you have not used variables yet.
-                    Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
+                    Este código não irá funcionar neste nível, porque ainda não usaste variáveis.
+                    Altera os comandos `{ask}` e `{echo}` no teu código para a forma correcta, que aprendeste neste nível.
 
-                    **Extra** Add a sleep command to your code to build up tension in your story.
+                    **Extra** Adiciona um comando `{sleep}` ao teu código, para aumentar o nervosismo na tua história.
             3:
                 story_text: |
-                    Podes também acrescentar algo aleatório à tua história. Pode ser um monstro, um animal ou qualquer outro obstáculo.
-
-                    Podemos fazê-lo da seguinte maneira.
+                    No nível 3 podes tornar a tua história mais divertida. Podes usar a aleatoriedade para qualquer monstro, animal ou outro obstáculo, da seguinte forma:
                 example_code: |
                     ```
-                    animais {is} coruja, cobra, raposa
-                    {print} Agora consegue ouvir o barulho de uma animais {at} {random}
+                    animais {is} 🦔, 🐿, 🦉, 🦇
+                    {print} Agora conseguem ouvir o barulho de animais {at} {random}
                     ```
                 story_text_2: |
-                    The command `{add}` can also come in handy in your story. For example
+                    O comando `{add}` pode também ser útil na tua história. Por exemplo
                 example_code_2: |
                     ```
-                    {print} They hear a sound
-                    animals {is} 🐿, 🦔, 🦇, 🦉
-                    animal {is} {ask} What do you think it is?
-                    {add} animal {to_list} animals
-                    {print} it was an animals {at} {random}
+                    {print} Ouvem um ruído
+                    animais {is} 🐿, 🦔, 🦇, 🦉
+                    animal {is} {ask} O que achas que é?
+                    {add} animal {to_list} animais
+                    {print} era um animais {at} {random}
                     ```
                 story_text_3: |
-                    This is an example of the `{remove}` command in your story
+                    Este é um exemplo do comando `{remove}` na tua história
+
+                    ### Exercício
+                    Copia a tua história do nível anterior para este novo nível.
+                    Neste nível aprendeste 3 novos comandos `{at} {random}`, `{add} {to_list}` e `{remove} {from}`.
+                    Adiciona novas linhas de código à tua história, por forma a que todos os novos comandos apareçam, pelo menos, uma vez na tua história.
                 example_code_3: |
                     ```
-                    {print} His backpack got way too heavy.
-                    {print} Inside were a bottle of water, a flashlight and a brick.
-                    bag {is} water, flashlight, brick
-                    dump {is} {ask} Which item should he dump?
-                    {remove} dump {from} bag
+                    {print} A mochila dele ficou demasiado pesada.
+                    {print} No interior, estavam uma garrafa de água, uma lanterna e um tijolo.
+                    mochila {is} água, lanterna, tijolo
+                    despeja {is} {ask} Que objeto ele devia despejar?
+                    {remove} despeja {from} mochila
                     ```
             4:
                 story_text: |
-                    ### Exercise
-                    Copy the example code and finish it by adding quotation marks on the blanks in lines 1 and 2.
-                    The blanks in line 3 and 4 should not be replaced by quotation marks, but a `{sleep}` and a `{clear}` command. Can you make it work?
+                    ### Exercício
+                    Copia o código de exemplo e completa-o, adicionando aspas no espaços vazios nas linhas 1 e 2.
+                    Os espaços vazios nas linhas 3 e 4 não devem ser substituídos por aspas, mas sim por um comando `{sleep}` e um `{clear}`. Consegues fazer isto resultar?
 
-                    ### Exercise 2
-                    Go back to the previous level and copy your story code. Make the code work in this level by adding quotation marks in the right spots.
-                    Mind: The variables in your own story should be outside of the quotation marks. Just like the second line of the example code. In that line the variable name is placed outside of the quotation marks.
+                    ### Exercício 2
+                    Volta ao nível anterior e copia o código da tua história. Faz com que o código funcione neste nível, adicionando aspas nos sítios certos.
+                    Lembra-te: As variáveis na tua própria história devem estar fora das aspas. Tal como está na seguna linha do código de exemplo. Nessa linha, o nome da variável é colocado por fora das aspas.
                 example_code: |
                     ```
-                    name {is} {ask} _ What is your name? _
-                    {print}  _ The main character is called _ name
+                    nome {is} {ask} _ Qual é o teu nome? _
+                    {print} _ O personagem principal chama-se _ nome
                     _
                     _
-                    {print} name  _ is now going to walk in the woods _
-                    {print} name _ is a bit scared _
-                    animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _ He hears the sound of a _ animals {at} {random}
-                    {print} name _ is afraid this is a haunted forest _
+                    {print} nome _ vai agora caminhar na floresta _
+                    {print} nome _ está um pouco(a) assustado(a) _
+                    animais {is} 🦔, 🐿, 🦉, 🦇
+                    {print} _ Escuta o som de um _ animais {at} {random}
+                    {print} nome _ receia que a floresta é assombrada _
                     ```
             5:
                 story_text: |
-                    In this level you can program different endings, which will make your story even more fun.
+                    Neste nível podes programar diferentes finais, o que irá tornar a tua história ainda mais divertida.
+                    No código de exemplo podes ver como podes criar 2 finais diferentes.
 
-                    Think of two endings for your story, for example:
+                    ### Exercício 1
+                    Escreve uma nova história curta com, pelo menos, 6 linhas de código sobre um tema à tua escolha.
+                    Sem inspiração? Escolhe um dos seguintes tópicos: um super-herói, um dia chato na escola, preso numa ilha deserta.
 
-                    - The princess is walking through the forest
-                    - She runs into a monster
+                    Agora concede ao jogador a possibilidade de escolher um final feliz ou triste, tal como no código de exemplo.
+                    Programa ambos os finais.
 
-                    - Happy ending: She takes her sword and the monster quickly runs away
-                    - Bad Ending: The monster eats the princess
-
-                    You can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `{if}`, and then you have already made a whole program!
+                    ### Exercício 2
+                    Copia a história que criaste na tua própria história aventura, nos níveis anteriores.
+                    Encontra uma forma de incluíres na tua história, pelo menos, 2 comandos `{if}` e `{else}`.
+                    Podes fazê-lo com um final feliz e outro triste, mas podes também experimentar outras maneiras de incorporar os comandos.
                 example_code: |
                     ```
                     name {is} {ask} 'Who is walking in the forest?'
@@ -115,13 +126,17 @@ adventures:
                     ```
             7:
                 story_text: |
-                    In a story, someone says words several times. For example, when someone calls for help or sings a song.
-                    You can put such repetitions in your story, in this level with `{repeat}`.
+                    Numa históra, alguém pode repetir palavras várias vezes. Por exemplo, quando gritam por ajuda ou cantam uma canção.
+                    Podes colocar estas repetições na tua história, neste nível, com o `{repeat}`.
+
+                    ### Exercício
+                    Adiciona repetição à tua própria história. Volta aos teus programas guardados, escolhe o teu programa da história de um nível anterior e
+                    procura uma linha contendo `{print}` e repete-a!
                 example_code: |
                     ```
-                    {print} 'The prince kept calling for help'
-                    {repeat} 5 {times} {print} 'Help!'
-                    {print} 'Why is nobody helping me?'
+                    {print} 'O príncipe continuava a gritar por ajuda'
+                    {repeat} 5 {times} {print} 'Socorro!'
+                    {print} 'Porque é que ninguém me ajuda?'
                     ```
             8:
                 story_text: |
