@@ -95,10 +95,10 @@ def get_num_sys(value):
 
 
 def get_value_and_bool_sys(value, bool_keywords):
-    if not value:
+    if not value or not bool_keywords:
         return None, None
     value = str(value).strip()
-    match = [pair for pair in bool_keywords if value in pair]
+    match = [pair for pair in bool_keywords if isinstance(pair, dict) and value in pair]
     if match:
         return match[0][value], {v: k for k, v in match[0].items()}
     return None, None
@@ -195,12 +195,12 @@ class Value:
     def __init__(self, data, num_sys=None, bool_sys=None):
         self.data = data
         self.numeral_system = num_sys
-        self.boolean_system = bool_sys
+        self.boolean_values = bool_sys
 
     def __str__(self):
         if type(self.data) is list:
-            return ', '.join([localize(d.data, d.numeral_system, d.boolean_system) for d in self.data])
-        return str(localize(self.data, self.numeral_system, self.boolean_system))
+            return ', '.join([localize(d.data, d.numeral_system, d.boolean_values) for d in self.data])
+        return str(localize(self.data, self.numeral_system, self.boolean_values))
 
     def __eq__(self, other):
         if isinstance(other, Value):

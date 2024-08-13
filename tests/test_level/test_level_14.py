@@ -449,10 +449,10 @@ class TestsLevel14(HedyTester):
         )
 
     @parameterized.expand(HedyTester.comparison_commands)
-    def tests_comparison_no_spaces(self, comparison):
+    def tests_smaller_no_spaces(self, comparison):
         code = textwrap.dedent(f"""\
             leeftijd is 10
-            if leeftijd{comparison}12
+            if leeftijd {comparison} 12
                 print 'Dan ben je jonger dan ik!'""")
         expected = self.dedent(f"""\
             leeftijd = Value(10, num_sys='Latin')

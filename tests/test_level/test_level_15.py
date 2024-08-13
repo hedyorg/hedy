@@ -414,8 +414,7 @@ class TestsLevel15(HedyTester):
             code=code,
             max_level=16,
             expected=expected,
-            translate=False,
-            skip_faulty=False
+            translate=False
         )
 
     #
