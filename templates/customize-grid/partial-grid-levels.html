@@ -38,7 +38,7 @@
     }}
   {% endif %}
   </div>
-  <button class="green-btn mt-4 w-40" data-cy="add_student" _="on click toggle the *display of #add_students_options">{{_('add_students')}}</button>
+  <button class="green-btn mt-4 min-w-40" data-cy="add_student" _="on click toggle the *display of #add_students_options">{{_('add_students')}}</button>
   <div id="add_students_options" class="flex flex-row gap-2 items-left my-4" style="display: none;">
     <button class="green-btn" data-cy="copy_join_link" onclick='hedyApp.copy_join_link("{{class_info.link}}", {{_('copy_link_success')|default(None)|tojson}})'>{{_('copy_join_link')}}</button>
     <button class="green-btn" data-cy="invite_student" onclick='hedyApp.invite_student("{{class_info.id}}", {{_('invite_prompt')|default(None)|tojson}})'>{{_('invite_by_username')}}</button>
