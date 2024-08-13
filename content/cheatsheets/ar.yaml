@@ -45,9 +45,9 @@
 -   name: '{is} مع السلحفاة'
     explanation: نعطي اسماً لأي رقم من خلال الأمر `{is}` . بامكانك اختيار الاسم بنفسك.
     demo_code: |-
-        الزاوية هي ٩٠
-        {turn} الزاوية
-        {forward} ١٠٠
+        angle {is} 90
+        {turn} angle
+        {forward} 100
 3:
 -   name: بشكل عشوائي
     explanation: نختار كلمة من مجموعة كلمات او قائمة بشكل عشوائي باستخدام `{at}` و `{random}`.
@@ -100,9 +100,9 @@
 -   name: '{in}'
     explanation: نستطيع أن نفحص العناصر الموجودة في قائمة معينة من خلال الأمر `{in}`.
     demo_code: |-
-        الالوان_الجميلة {is} اخضر، اصفر، وردي
-        لوني_المفضل {is} {ask} "ما لونك المفضل؟"
-        {if} لوني_المفضل {in} الالوان_الجميلة {print} "هذا رائع!" {else} {print} "يا خسارة!"
+        pretty_colors {is} green, yellow
+        color {is} {ask} 'What is your favorite color?'
+        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
 -   name: '{pressed}'
     explanation: تحقق مما إذا كان مفتاح معين على لوحة المفاتيح هو `{pressed}`.
     demo_code: '{if} a {is} {pressed} {print} "لقد ضغطت على A!" {else} {print} "لقد ضغطت على مفتاح آخر!"'
@@ -288,21 +288,21 @@
         {if} age >= 14
             {print} 'You are older than me!'
 15:
--   name: '{while}'
-    explanation: نستطيع استعمال دورة التكرار `{while}` مع علامة عدم التساوي !=.
+-   name: 'بينما'
+    explanation: نستطيع استعمال دورة التكرار أثناء استعملت لعلامة عدم التساوي !=.
     demo_code: |-
-        الاجابة = ٠
-        {while} الاجابة != ٢٥
-            الاجابة = {ask} "ما ناتج ٥ ضرب ٥؟"
-        {print} "تم الاجابة بشكل صحيح"
--   name: '{while} مع علامة الأصغر'
-    explanation: يمكننا أن ندمج استعمال الأمر `{while}` مع علامتي الأصغر `<` والأكبر `>`.
+        answer = 0
+        {while} answer != 25
+            answer = {ask} 'What is 5 times 5?'
+        {print} 'A correct answer has been given'
+-   name: '{طالما} مع علامة الأصغر'
+    explanation: يمكننا أن ندمج استعمال الأمر `{طالما}` مع علامتي الأصغر `<` والأكبر `>`.
     demo_code: |-
-        العدد = ١
-        {while} العدد < ٣
-            {print} "سنقوم بهذا " ٣-العدد " مرة أخرى"
-            العدد = العدد + ١
-        {print} "لقد انتهينا!"
+        count = 1
+        {while} count < 3
+            {print} 'We do this ' 3 - count ' more times'
+            count = count + 1
+        {print} 'We are done'
 16:
 -   name: الأقواس المربعة
     explanation: القوائم مع الأقواس المربعة.

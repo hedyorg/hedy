@@ -1,10 +1,10 @@
-// adds list access with numbers and brackets
-// TODO for tomorrow: this stills needs tests in level 16 for > and !=
+// list definition and list access are now done with brackets
+
 command:+= change_list_item | error_assign_list_missing_brackets
 
 ?atom: NUMBER | _MINUS NUMBER | boolean | list_access | text_in_quotes | var_access
 list_access: var_access _LEFT_SQUARE_BRACKET (INT | random | var_access) _RIGHT_SQUARE_BRACKET
-change_list_item: var_access _LEFT_SQUARE_BRACKET (INT | var_access) _RIGHT_SQUARE_BRACKET _EQUALS (var_access | textwithoutspaces)
+change_list_item: var_access _LEFT_SQUARE_BRACKET (INT | var_access) _RIGHT_SQUARE_BRACKET _EQUALS (var_access | quoted_text | NUMBER | boolean)
 assign_list: var (_IS | _EQUALS) _LEFT_SQUARE_BRACKET ((quoted_text | NUMBER | boolean) (_COMMA (quoted_text | NUMBER | boolean))*)? _RIGHT_SQUARE_BRACKET
 error_assign_list_missing_brackets: var  (_IS | _EQUALS) (_LEFT_SQUARE_BRACKET)? ((quoted_text | NUMBER | boolean) _COMMA (quoted_text | NUMBER | boolean) (_COMMA (quoted_text | NUMBER | boolean))*)? (_RIGHT_SQUARE_BRACKET)?
 
