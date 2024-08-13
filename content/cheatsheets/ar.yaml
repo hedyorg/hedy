@@ -45,9 +45,9 @@
 -   name: '{is} مع السلحفاة'
     explanation: نعطي اسماً لأي رقم من خلال الأمر `{is}` . بامكانك اختيار الاسم بنفسك.
     demo_code: |-
-        الزاوية هي ٩٠
-        {أدر} الزاوية
-        {forward} ١٠٠
+        angle {is} 90
+        {turn} angle
+        {forward} 100
 3:
 -   name: بشكل عشوائي
     explanation: نختار كلمة من مجموعة كلمات او قائمة بشكل عشوائي باستخدام `{at}` و `{random}`.
@@ -100,9 +100,9 @@
 -   name: '{in}'
     explanation: نستطيع أن نفحص العناصر الموجودة في قائمة معينة من خلال الأمر `{in}`.
     demo_code: |-
-        الالوان_الجميلة {هي} اخضر، اصفر،
-        لوني_المفضل {هو} {يسأل} "ما لونك المفضل؟"
-        {إذا} لوني_المفضل {هو} الالوان_الجميلة {مطابقة} "هذا رائع!" {ليس} {مطابقة} "يا خسارة!"
+        pretty_colors {is} green, yellow
+        color {is} {ask} 'What is your favorite color?'
+        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
 -   name: '{pressed}'
     explanation: تحقق مما إذا كان مفتاح معين على لوحة المفاتيح هو `{pressed}`.
     demo_code: '{if} a {is} {pressed} {print} "لقد ضغطت على A!" {else} {print} "لقد ضغطت على مفتاح آخر!"'
@@ -291,18 +291,18 @@
 -   name: 'بينما'
     explanation: نستطيع استعمال دورة التكرار أثناء استعملت لعلامة عدم التساوي !=.
     demo_code: |-
-        الاجابة = ٠
-        {طالما} الاجابة != ٢٥
-            الاجابة = {اسأل} "ما ناتج ٥ ضرب ٥؟"
-        {اطبع} "تم الاجابة بشكل صحيح"
+        answer = 0
+        {while} answer != 25
+            answer = {ask} 'What is 5 times 5?'
+        {print} 'A correct answer has been given'
 -   name: '{طالما} مع علامة الأصغر'
     explanation: يمكننا أن ندمج استعمال الأمر `{طالما}` مع علامتي الأصغر `<` والأكبر `>`.
     demo_code: |-
-        العدد = ١
-        {طالما} العدد < ٣
-            {اطبع} "سنقوم بهذا " ٣-العدد " مرة أخرى"
-            العدد = العدد + ١
-        {اطبع} "لقد انتهينا!"
+        count = 1
+        {while} count < 3
+            {print} 'We do this ' 3 - count ' more times'
+            count = count + 1
+        {print} 'We are done'
 16:
 -   name: الأقواس المربعة
     explanation: القوائم مع الأقواس المربعة.
