@@ -165,13 +165,11 @@ class ForTeachersModule(WebsiteModule):
             )
 
         student_overview_table, _, class_adventures_formatted, \
-            _, student_adventures, graph_students = self.get_grid_info(user, class_id, 1)
+            _, student_adventures, graph_students, students_info = self.get_grid_info(user, class_id, 1)
 
         teacher = user if Class["teacher"] == user["username"] else self.db.user_by_username(Class["teacher"])
         second_teachers = [teacher] + Class.get("second_teachers", [])
-        print('*'*100)
-        print(graph_students)
-        print('*'*100)
+
         if utils.is_testing_request(request):
             return make_response({
                 "students": graph_students,
@@ -209,7 +207,8 @@ class ForTeachersModule(WebsiteModule):
                     'level': level,
                     'graph_students': graph_students
                 }
-            }
+            },
+            students_info=students_info
         )
 
     def get_grid_info(self, user, class_id, level):
@@ -244,6 +243,24 @@ class ForTeachersModule(WebsiteModule):
 
         student_adventures = {}
         graph_students = []
+
+        students_info = {}
+        for student_username in students:
+            student = self.db.user_by_username(student_username)
+            # Fixme: The get_quiz_stats function requires a list of ids -> doesn't work on single string
+            quiz_scores = self.db.get_quiz_stats([student_username])
+            # Verify if the user did finish any quiz before getting the max() of the finished levels
+            finished_quizzes = any("finished" in x for x in quiz_scores)
+            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+            students_info[student_username] = {
+                "last_login": student["last_login"],
+                "highest_level": highest_quiz,
+                "adventures_ticked": 0
+            }
+
+        for student, info in students_info.items():
+            info["last_login"] = utils.localized_date_format(info.get("last_login", 0))
+
         for student in students:
             programs = self.db.last_level_programs_for_user(student, level)
             program_stats = self.db.get_program_stats_per_level(student, level)
@@ -279,6 +296,9 @@ class ForTeachersModule(WebsiteModule):
                     current_program = dict(level=str(program['level']), name=name,
                                            program=program['id'], ticked=current_adventure['ticked'])
 
+                    if current_adventure['ticked']:
+                        students_info[student]['adventures_ticked'] += 1
+
                     student_adventures[student_adventure_id] = current_program
             graph_students.append(
                 {
@@ -289,7 +309,8 @@ class ForTeachersModule(WebsiteModule):
                     "successful_runs": successful_runs
                 }
             )
-        return students, class_, class_adventures_formatted, adventure_names, student_adventures, graph_students
+        return students, class_, class_adventures_formatted, adventure_names, \
+            student_adventures, graph_students, students_info
 
     def is_program_modified(self, program, full_adventures, teacher_adventures):
         # a single adventure migh have several code snippets, formatted using markdown
@@ -365,7 +386,7 @@ class ForTeachersModule(WebsiteModule):
         student_name = request.args.get('student', type=str)
         adventure_name = request.args.get('adventure', type=str)
 
-        students, class_, class_adventures_formatted, adventure_names, _, _ = self.get_grid_info(
+        students, class_, class_adventures_formatted, adventure_names, _, _, _ = self.get_grid_info(
             user, class_id, level)
 
         adventure_names = {value: key for key, value in adventure_names.items()}
@@ -376,9 +397,9 @@ class ForTeachersModule(WebsiteModule):
 
         self.db.update_student_adventure(student_adventure_id, current_adventure['ticked'])
         student_overview_table, class_, class_adventures_formatted, \
-            adventure_names, student_adventures, _ = self.get_grid_info(user, class_id, level)
+            adventure_names, student_adventures, _, students_info = self.get_grid_info(user, class_id, level)
 
-        return jinja_partials.render_partial("customize-grid/partial-grid-table.html",
+        return jinja_partials.render_partial("customize-grid/partial-grid-tables.html",
                                              level=level,
                                              class_info={"id": class_id, "students": students, "name": class_["name"]},
                                              adventure_table={
@@ -386,7 +407,8 @@ class ForTeachersModule(WebsiteModule):
                                                  'adventures': class_adventures_formatted,
                                                  'student_adventures': student_adventures,
                                                  'level': level,
-                                             }
+                                             },
+                                             students_info=students_info
                                              )
 
     @route("/grid_overview/<class_id>/level", methods=["GET"])
@@ -394,7 +416,8 @@ class ForTeachersModule(WebsiteModule):
     def change_dropdown_level_class_overview(self, user, class_id):
         level = request.args.get('level')
         students, class_, class_adventures_formatted, \
-            adventure_names, student_adventures, graph_students = self.get_grid_info(user, class_id, level)
+            adventure_names, student_adventures, graph_students, students_info = self.get_grid_info(
+                user, class_id, level)
         adventure_names = {value: key for key, value in adventure_names.items()}
 
         return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
@@ -412,7 +435,8 @@ class ForTeachersModule(WebsiteModule):
                                                      'level': level,
                                                      'graph_students': graph_students
                                                  }
-                                             }
+                                             },
+                                             students_info=students_info
                                              )
 
     @route("/get_student_programs/<student>", methods=["GET"])
@@ -677,7 +701,7 @@ class ForTeachersModule(WebsiteModule):
             name = adv.short_name if from_sorted_adv_class else adv.get("name")
             if name == "parsons":
                 parsons_adv = adv
-            if name == "quiz":
+            if name == "":
                 quiz_adv = adv
 
         if parsons_adv:
