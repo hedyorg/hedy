@@ -57,10 +57,10 @@
     </h2>
     <div id="explanation" class="hidden flex flex-col gap-2 border border-black rounded-lg p-4 text-sm h-full w-full">
       {{_('class_graph_explanation')}}      
-  </div>
-    <div class="flex flex-row relative justify-center items-center">
-        <div id="graph" class="w-2/3 relative h-[32rem]"><canvas data-graph='{{ adventure_table["graph_options"]|tojson|safe }}' id="adventure_bubble"></canvas></div>
-        <div class="w-1/3 overflow-auto hidden" style="height: 32rem;" id="programs_container"></div>
+    </div>
+    <div class="flex flex-col md:flex-row relative justify-center items-center">
+        <div id="graph" class="w-full md:w-2/3 relative h-[32rem]"><canvas data-graph='{{ adventure_table["graph_options"]|tojson|safe }}' id="adventure_bubble"></canvas></div>
+        <div class="w-full md:w-1/3 overflow-auto hidden" style="height: 32rem;" id="programs_container"></div>
     </div>
     {% endif %}
   </div>
