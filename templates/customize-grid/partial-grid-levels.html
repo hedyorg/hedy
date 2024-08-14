@@ -1,54 +1,62 @@
 <div id="adventure_overview">
   {% if class_info.students %}
-  <div id="level_button" class="dropdown relative mb-4">
-    <button class="white-btn rounded inline-flex gap-2 text-xl" id="dropdown_level_button"
-      onclick="$('#level_dropdown').slideToggle('medium');">
-      <span>{{ _('level_title') }} {{ adventure_table.graph_options.level }}</span> <i id="level-arrow"
-        class="fa-solid fa-angle-down"></i>
-    </button>
-    <div class="absolute overflow-hidden block rounded-md ltr:left-0 rtl:right-0 w-40 ltr:mr-1 rtl:ml-1 cursor-auto p-4 shadow-lg dropdown-blue z-20" id="level_dropdown"
-      style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;" _="on mutation of @style
-        set arrow to #level-arrow
-        if *display == 'none'
-        remove .rotate-180 from arrow
-        else if not arrow.classList.contains('rotate-180')
-        add .rotate-180 to arrow
-        end">
-      {% for dropdown_level in range(1, 19) %}
-      <button id="level_button_{{dropdown_level}}" class="flex-row flex justify-between items-center px-2 py-2 border-b border-dashed border-blue-500
-          {% if dropdown_level == adventure_table.level %}bg-white{% else %}hover:bg-blue-100 bg-blue-200{% endif %}"
-        {% if dropdown_level==adventure_table.level %}disabled{% endif %} style="width: 100%;"
-        hx-get="/for-teachers/grid_overview/{{ class_info.id }}/level?level={{dropdown_level}}"
-        hx-target="#adventure_overview" 
-        hx-swap="outerHTML"
-        _='on htmx:afterRequest wait 150ms then hedyApp.initializeGraph()'>
-        <div class="flex-grow h-min min-w-80" tabindex=0>
-          {{ _('level_title') }} {{ dropdown_level }}
-        </div>
+  <div class="grid grid-cols-2 md:grid-cols-3 items-center mb-4">
+    <div id="level_button" class="dropdown relative">
+      <button class="white-btn rounded inline-flex gap-2 text-xl" id="dropdown_level_button"
+        onclick="$('#level_dropdown').slideToggle('medium');">
+        <span>{{ _('level_title') }} {{ adventure_table.graph_options.level }}</span> <i id="level-arrow"
+          class="fa-solid fa-angle-down"></i>
       </button>
-      {% endfor %}
+      <div class="absolute overflow-hidden block rounded-md ltr:left-0 rtl:right-0 w-40 ltr:mr-1 rtl:ml-1 cursor-auto p-4 shadow-lg dropdown-blue z-20" id="level_dropdown"
+        style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;" _="on mutation of @style
+          set arrow to #level-arrow
+          if *display == 'none'
+          remove .rotate-180 from arrow
+          else if not arrow.classList.contains('rotate-180')
+          add .rotate-180 to arrow
+          end">
+        {% for dropdown_level in range(1, 19) %}
+        <button id="level_button_{{dropdown_level}}" class="flex-row flex justify-between items-center px-2 py-2 border-b border-dashed border-blue-500
+            {% if dropdown_level == adventure_table.level %}bg-white{% else %}hover:bg-blue-100 bg-blue-200{% endif %}"
+          {% if dropdown_level==adventure_table.level %}disabled{% endif %} style="width: 100%;"
+          hx-get="/for-teachers/grid_overview/{{ class_info.id }}/level?level={{dropdown_level}}"
+          hx-target="#adventure_overview" 
+          hx-swap="outerHTML"
+          _='on htmx:afterRequest wait 150ms then hedyApp.initializeGraph()'>
+          <div class="flex-grow h-min min-w-80" tabindex=0>
+            {{ _('level_title') }} {{ dropdown_level }}
+          </div>
+        </button>
+        {% endfor %}
+      </div>
     </div>
+    <h2 class="justify-self-center m-0">
+      {{_('student_adventures_table')}}
+      <button type="button" _="on click toggle .hidden on #adventure_table_explanation" title="{{_('more_info')}}">
+        <svg class="fill-current h-4 w-4 text-blue-500 cursor-pointer !m-0 !p-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path
+            d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+        </svg>
+      </button>
+    </h2>
+    <div></div>
+  </div>
+  <div id="adventure_table_explanation" class="hidden mb-4 flex flex-col gap-2 border border-black rounded-lg p-4 text-sm h-full w-full">
+    {{_('student_adventures_table_explanation')}}      
   </div>
   {# The actual table that holds the data #}
-  <div class="w-full overflow-x-auto border rounded-lg">
-    {{ render_partial('customize-grid/partial-grid-table.html',
+    {{ render_partial('customize-grid/partial-grid-tables.html',
                             class_info=class_info,
                             level=level,
-                            adventure_table=adventure_table)
+                            adventure_table=adventure_table,
+                            students_info=students_info)
     }}
   {% endif %}
-  </div>
-  <button class="green-btn mt-4 min-w-40" data-cy="add_student" _="on click toggle the *display of #add_students_options">{{_('add_students')}}</button>
-  <div id="add_students_options" class="flex flex-row gap-2 items-left my-4" style="display: none;">
-    <button class="green-btn" data-cy="copy_join_link" onclick='hedyApp.copy_join_link("{{class_info.link}}", {{_('copy_link_success')|default(None)|tojson}})'>{{_('copy_join_link')}}</button>
-    <button class="green-btn" data-cy="invite_student" onclick='hedyApp.invite_student("{{class_info.id}}", {{_('invite_prompt')|default(None)|tojson}})'>{{_('invite_by_username')}}</button>
-    <button class="green-btn" data-cy="create_accounts" onclick="window.open('/for-teachers/create-accounts/{{ class_info.id }}', '_self')">{{_('create_accounts')}}</button>
-  </div>
   <div class="mt-4">
     {% if class_info.students %}
     <h2>
-      {{_('class_performance_graph')}}            
-      <button type="button" _="on click toggle .hidden on #explanation">
+      {{_('class_performance_graph')}}
+      <button type="button" _="on click toggle .hidden on #explanation" title="{{_('more_info')}}">
         <svg class="fill-current h-4 w-4 text-blue-500 cursor-pointer !m-0 !p-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path
             d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
