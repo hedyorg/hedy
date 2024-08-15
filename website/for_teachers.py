@@ -411,6 +411,59 @@ class ForTeachersModule(WebsiteModule):
                                              students_info=students_info
                                              )
 
+    @route("/class/<class_id>/remove_student_modal/<student_id>", methods=["GET"])
+    @requires_teacher
+    def get_remove_student_modal(self, user, class_id, student_id):
+        level = request.args.get('level')
+        Class = self.db.get_class(session['class_id'])
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        modal_text = gettext('remove_student_prompt')
+        htmx_endpoint = f'/for-teachers/class/{class_id}/remove_student/{student_id}?level={level}'
+        htmx_target = "#adventure_overview"
+        hyperscript = "on htmx:afterRequest wait 150ms then hedyApp.initializeGraph()"
+
+        return render_partial('modal/htmx-modal-confirm.html',
+                              modal_text=modal_text,
+                              htmx_endpoint=htmx_endpoint,
+                              htmx_target=htmx_target,
+                              hyperscript=hyperscript)
+
+    @route("/class/<class_id>/remove_student/<student_id>", methods=["POST"])
+    @requires_login
+    def leave_class(self, user, class_id, student_id):
+        # We use the level to redraw the adventure table in the level
+        # the teacher was using before
+        level = request.args.get('level')
+        Class = self.db.get_class(class_id)
+        if not Class or not (utils.can_edit_class(user, Class)):
+            return make_response(gettext("ajax_error"), 400)
+
+        self.db.remove_student_from_class(Class["id"], student_id)
+        students, class_, class_adventures_formatted, \
+            adventure_names, student_adventures, graph_students, students_info = self.get_grid_info(
+                user, class_id, level)
+
+        return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
+                                             level=level,
+                                             class_info={"id": class_id, "students": students, "name": class_["name"]},
+                                             max_level=hedy.HEDY_MAX_LEVEL,
+                                             class_adventures=class_adventures_formatted,
+                                             adventure_names=adventure_names,
+                                             student_adventures=student_adventures,
+                                             adventure_table={
+                                                 'students': students,
+                                                 'adventures': class_adventures_formatted,
+                                                 'student_adventures': student_adventures,
+                                                 'graph_options': {
+                                                     'level': level,
+                                                     'graph_students': graph_students
+                                                 }
+                                             },
+                                             students_info=students_info
+                                             )
+
     @route("/grid_overview/<class_id>/level", methods=["GET"])
     @requires_login
     def change_dropdown_level_class_overview(self, user, class_id):
