@@ -1,5 +1,4 @@
 <div id="adventure_overview">
-  {% if class_info.students %}
   <div class="grid grid-cols-2 md:grid-cols-3 items-center mb-4">
     <div id="level_button" class="dropdown relative">
       <button class="white-btn rounded inline-flex gap-2 text-xl" id="dropdown_level_button"
@@ -51,7 +50,6 @@
                             adventure_table=adventure_table,
                             students_info=students_info)
     }}
-  {% endif %}
   <div class="mt-4">
     {% if class_info.students %}
     <h2>

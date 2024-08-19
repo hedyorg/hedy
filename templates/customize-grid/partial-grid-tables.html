@@ -39,6 +39,11 @@
     
           </tr>
           {% endfor %}
+          {% if not class_info.students %}
+            <tr class="bg-gray-200 h-12">
+              <td colspan="{{ adventure_table['adventures'][level]|length + 1}}" class="text-center font-medium text-blue-900 px-4"> {{_('no_students')}} </td>
+            </tr>
+          {% endif %}
         </tbody>
       </table>
   </div>
@@ -95,6 +100,11 @@
             </td>
           </tr>
           {% endfor %}
+          {% if not class_info.students %}
+            <tr class="bg-gray-200 h-12">
+              <td colspan="5" class="text-center font-medium text-blue-900 px-4">{{_('no_students')}}</td>
+            </tr>
+          {% endif %}
         </tbody>
       </table>
     </div>
