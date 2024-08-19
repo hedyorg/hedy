@@ -15,7 +15,7 @@ teachers.forEach((teacher) => {
     cy.getDataCy('adventure_table').then(($div) => {
         if ($div.text().includes(student)){
           cy.getDataCy(`remove_student_${student}`).click();
-          cy.getDataCy('modal_yes_button').click();
+          cy.getDataCy('htmx_modal_yes_button').click();
         }
     })
 
