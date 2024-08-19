@@ -12,9 +12,11 @@ sleep: _SLEEP (INT | list_access | var_access)?
 // lists are introduced and list separators (comma and arabic comma) have to excluded from text.
 text: /([^\n،,，、#]+)/ -> text
 text_list: /([^\n,،，、#]+)/ -> text // list elements are another exception since they can contain punctuation but not list separators
-// values which are added or removed from lists can contain spaces, so we need to escape the _TO_LIST and _FROM keywords
-// The part " (?!to|from|...)" is a negative lookahead which means that a space not followed by "to" or "from"
-text_add_remove_list: /(?:[^\n,،，、# ]| (?!to|from|до|nimistusse|till|в|toe|से|do|ebbe|zu|til|à|ไปยัง|listaksi|para|الى|到|a|şuraya|către|منزل|u|al|ke|i|deri|اندر|కు|אל|aus|de|från|จาก|от|从|से|nga|da|從|fra|de|nimistust|من|నుండి|ebből|el|z|سے|şuradan|uit|سروت|из|listasta|מ|o|iз|od|dari))+/ -> text
+
+// Values which are added or removed from lists can contain spaces, so we need to escape the 'to_list' and 'from' keywords
+// The part " (?!<expand_keyword to_list>|<expand_keyword from>)" will be processed to a space with a negative look ahead of all to_list and from values
+// It means that a space cannot be not followed by a 'to' or 'from' for the given language
+text_add_remove_list: /(?:[^\n,،，、# ]| (?!<expand_keyword to_list>|<expand_keyword from>))+/ -> text
 
 add: _ADD_LIST text_add_remove_list _TO_LIST var_access
 remove: _REMOVE text_add_remove_list _FROM var_access
