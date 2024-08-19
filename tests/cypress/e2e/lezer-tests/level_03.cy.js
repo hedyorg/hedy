@@ -8,7 +8,7 @@ describe('Lezer parser tests for level 3', () => {
                 const expectedTree = 
                     `Program(
                         Command(
-                            AssignList(Text,is,Text,Comma,Text,Comma,Text)
+                            AssignList(Text,is,Text,Op,Text,Op,Text)
                         )
                     )`
                 

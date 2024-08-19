@@ -47,7 +47,7 @@ describe('Lezer parser tests for level 15', () => {
 
             describe('AssignList boolean values', () => {
                 const code = 'options = False, True'
-                const expectedTree = 'Program(Command(AssignList(Text,Op,False,Comma,True)))'
+                const expectedTree = 'Program(Command(AssignList(Text,Op,False,Op,True)))'
 
                 singleLevelTester('AssignList boolean values', code, expectedTree, 15)
             });
