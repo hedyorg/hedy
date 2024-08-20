@@ -324,9 +324,9 @@ class Database:
                                         'username': str,
                                         'level': str,
                                         'exercise': str,
-                                        'order': str,
+                                        'order': ListOf(str),
                                         'correct': str,
-                                        'timestamp': ListOf(int)
+                                        'timestamp': int
                                     }),
                                     )
         self.STUDENT_ADVENTURES = dynamo.Table(storage, "student_adventures", "id",
