@@ -2054,40 +2054,6 @@ def privacy():
                            content=privacy_translations)
 
 
-@app.route('/landing-page/', methods=['GET'], defaults={'first': False})
-@app.route('/landing-page/<first>', methods=['GET'])
-@requires_login
-def landing_page(user, first):
-    username = user['username']
-
-    user_info = DATABASE.get_public_profile_settings(username)
-    user_programs = DATABASE.programs_for_user(username)
-    programs = list(user_programs)
-    # Only return the last program of the user
-    last_program = None
-    if programs:
-        last_program = programs[:1][0]
-        for program in programs:
-            if not (program.get('is_modified') or 'is_modified' not in program):
-                programs.remove(program)
-
-    achievements = DATABASE.achievements_by_username(username)
-    user_from_db = DATABASE.user_by_username(username)
-    has_certificate = (achievements and 'achieved' in achievements
-                       and 'hedy_certificate' in achievements['achieved'])\
-        or user_from_db.get('certificate', False)
-
-    return render_template(
-        'landing-page.html',
-        first_time=True if first else False,
-        page_title=gettext('title_landing-page'),
-        user=user['username'],
-        user_info=user_info,
-        programs=programs,
-        last_program=last_program,
-        has_certificate=has_certificate)
-
-
 @app.route('/explore', methods=['GET'])
 def explore():
     if not current_user()['username']:
