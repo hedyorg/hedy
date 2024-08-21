@@ -275,6 +275,7 @@ int_to_string = (HedyType.integer, HedyType.string)
 float_to_string = (HedyType.float, HedyType.string)
 input_to_int = (HedyType.input, HedyType.integer)
 input_to_float = (HedyType.input, HedyType.float)
+input_to_boolean = (HedyType.input, HedyType.boolean)
 input_to_string = (HedyType.input, HedyType.string)
 
 
@@ -782,7 +783,7 @@ class TypeValidator(Transformer):
         if self.level < 12:
             rules = [int_to_float, int_to_string, float_to_string, input_to_string, input_to_int, input_to_float]
         else:
-            rules = [int_to_float, input_to_string, input_to_int, input_to_float]
+            rules = [int_to_float, input_to_string, input_to_int, input_to_float, input_to_boolean]
         self.validate_binary_command_args_type(Command.equality, tree, rules)
         return self.to_typed_tree(tree, HedyType.boolean)
 
@@ -3119,7 +3120,7 @@ class ConvertToPython_15(ConvertToPython_14):
                 {var} = float({var})
               except ValueError:
                 __b, __bs = get_value_and_bool_sys({var}, {boolean_keywords})
-                if __b:
+                if __b is not None:
                   {var} = __b
             {var} = Value({var}, num_sys=__ns, bool_sys=__bs)""")
 

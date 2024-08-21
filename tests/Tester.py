@@ -474,7 +474,7 @@ class HedyTester(unittest.TestCase):
                     {var_name} = float({var_name})
                   except ValueError:
                     __b, __bs = get_value_and_bool_sys({var_name}, {bool_sys})
-                    if __b:
+                    if __b is not None:
                       {var_name} = __b
                 {var_name} = Value({var_name}, num_sys=__ns, bool_sys=__bs)""")
 
