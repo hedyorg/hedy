@@ -8,7 +8,7 @@ change_list_item: var_access _LEFT_SQUARE_BRACKET (INT | var_access) _RIGHT_SQUA
 assign_list: var (_IS | _EQUALS) _LEFT_SQUARE_BRACKET ((quoted_text | NUMBER | boolean) (_COMMA (quoted_text | NUMBER | boolean))*)? _RIGHT_SQUARE_BRACKET
 error_assign_list_missing_brackets: var  (_IS | _EQUALS) (_LEFT_SQUARE_BRACKET)? ((quoted_text | NUMBER | boolean) _COMMA (quoted_text | NUMBER | boolean) (_COMMA (quoted_text | NUMBER | boolean))*)? (_RIGHT_SQUARE_BRACKET)?
 
-error_list_access_at<old_rule_to_error list_access>
+error_list_access_at:<old_rule_to_error list_access>
 
 _print_ask_argument.1: (_SPACE | quoted_text | list_access | error_list_access_at | expression | print_expression)*
 assign: var (_IS| _EQUALS) (list_access | error_list_access_at | boolean | atom | expression)

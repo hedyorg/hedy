@@ -1,12 +1,12 @@
-_DEFINE: ("define" | "define") _SPACE?
-_CALL: ("call" | "call") _SPACE?
-_WITH: ("with" | "with") _SPACE?
+_DEFINE: ("definir" | "define") _SPACE?
+_CALL: ("chamar" | "call") _SPACE?
+_WITH: ("com" | "with") _SPACE?
 _DEF: ("def" | "def") _SPACE?
-_RETURN: ("return" | "return") _SPACE?
+_RETURN: ("retornar" | "return") _SPACE?
 _PRINT: ("imprimir" | "print") _SPACE?
-_PLAY: ("play" | "play") _SPACE
+_PLAY: ("tocar" | "play") _SPACE
 _ASK: ("perguntar" | "ask") _SPACE?
-_ECHO: ("eco" | "echo") _SPACE?
+_ECHO: ("ecoar" | "echo") _SPACE?
 _FORWARD: ("avançar" | "forward") _SPACE?
 _TURN: ("virar" | "turn") _SPACE?
 left: ("esquerda" | "left") _SPACE?
@@ -22,18 +22,18 @@ purple: ("roxo" | "purple") _SPACE?
 red: ("vermelho" | "red") _SPACE?
 white: ("branco" | "white") _SPACE?
 yellow: ("amarelo" | "yellow") _SPACE?
-_IS: _SPACE ("is" | "is") _SPACE
-_STANDALONE_IS: ("is" | "is")
+_IS: _SPACE ("é" | "is") _SPACE
+_STANDALONE_IS: ("é" | "is")
 _SLEEP: ("dormir" | "sleep") _SPACE?
 _ADD_LIST: ("adicionar" | "add") _SPACE
 _TO_LIST: _SPACE? ("para" | "to") _SPACE
 _REMOVE: ("remover" | "remove") _SPACE
 _FROM: _SPACE? ("de" | "from") _SPACE
-_AT: _SPACE ("em" | "at") _SPACE
+_AT: _SPACE ("'no'" | "at") _SPACE
 random: ("aleatório" | "random") _SPACE?
-_IN: _SPACE ("in" | "in") _SPACE
-_NOT_IN: _SPACE ("not in" | "not in") _SPACE
-_IF: ("if" | "if") _SPACE
+_IN: _SPACE ("em" | "in") _SPACE
+_NOT_IN: _SPACE ("não em" | "not in") _SPACE
+_IF: ("se" | "if") _SPACE
 _ELSE: "senão" | "else"
 _AND: _SPACE? ("e" | "and") _SPACE
 _REPEAT: ("repetir" | "repeat") _SPACE
@@ -43,13 +43,13 @@ _RANGE: ("intervalo" | "range") _SPACE?
 _TO: _SPACE ("to" | "to") _SPACE
 _STEP: "passo" | "step"
 _ELIF: _SPACE? ("elif" | "elif") _SPACE
-_INPUT: ("input" | "input")
-_OR: _SPACE? ("or" | "or") _SPACE
+_INPUT: ("inserir" | "input")
+_OR: _SPACE? ("ou" | "or") _SPACE
 _WHILE: ("enquanto" | "while") _SPACE
 _LENGTH: "comprimento" | "length"
 _COLOR : ("cor" | "color") _SPACE?
 _PRESSED: ("pressionado" | "pressed") _SPACE?
-_BUTTON: ("button" | "button") _SPACE?
+_BUTTON: ("botão" | "button") _SPACE?
 clear: ("limpar" | "clear") _SPACE?
-TRUE: ("true" | "True" | "true" | "True") _SPACE?
-FALSE: ("false" | "False" | "false" | "False") _SPACE?
+TRUE: ("verdadeiro" | "Verdadeiro" | "true" | "True") _SPACE?
+FALSE: ("falso" | "Falso" | "false" | "False") _SPACE?
