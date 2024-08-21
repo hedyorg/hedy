@@ -1,5 +1,5 @@
 import textwrap
-from functools import lru_cache, cache
+from functools import lru_cache
 
 import lark
 from flask_babel import gettext
@@ -3362,148 +3362,6 @@ class MicrobitConvertToPython_18(MicrobitConvertToPython_17, ConvertToPython_18)
     pass
 
 
-# this is only a couple of MB in total, safe to cache
-@cache
-def create_grammar(level, lang, skip_faulty):
-    # start with creating the grammar for level 1
-    merged_grammars = get_full_grammar_for_level(1)
-
-    # then keep merging new grammars in
-    for i in range(2, level + 1):
-        grammar_text_i = get_additional_rules_for_level(i)
-        merged_grammars = hedy_grammar.merge_grammars(merged_grammars, grammar_text_i)
-
-    # keyword and other terminals never have mergable rules, so we can just add them at the end
-    keywords = get_keywords_for_language(lang)
-    terminals = get_terminals()
-    merged_grammars = merged_grammars + '\n' + keywords + '\n' + terminals
-
-    # Change the grammar if skipping faulty is enabled
-    if skip_faulty:
-        # Make sure to change the meaning of error_invalid
-        # this way more text will be 'catched'
-        error_invalid_rules = re.findall(r'^error_invalid.-100:.*?\n', merged_grammars, re.MULTILINE)
-        if len(error_invalid_rules) > 0:
-            error_invalid_rule = error_invalid_rules[0]
-            error_invalid_rule_changed = 'error_invalid.-100: textwithoutspaces _SPACE* text?\n'
-            merged_grammars = merged_grammars.replace(error_invalid_rule, error_invalid_rule_changed)
-
-        # from level 12:
-        # Make sure that all keywords in the language are added to the rules:
-        # textwithspaces & textwithoutspaces, so that these do not fall into the error_invalid rule
-        if level > 12:
-            textwithspaces_rules = re.findall(r'^textwithspaces:.*?\n', merged_grammars, re.MULTILINE)
-            if len(textwithspaces_rules) > 0:
-                textwithspaces_rule = textwithspaces_rules[0]
-                textwithspaces_rule_changed = r'textwithspaces: /(?:[^#\n،,，、 ]| (?!SKIP1))+/ -> text' + '\n'
-                merged_grammars = merged_grammars.replace(textwithspaces_rule, textwithspaces_rule_changed)
-
-            textwithoutspaces_rules = re.findall(r'^textwithoutspaces:.*?\n', merged_grammars, re.MULTILINE)
-            if len(textwithoutspaces_rules) > 0:
-                textwithoutspaces_rule = textwithoutspaces_rules[0]
-                textwithoutspaces_rule_changed = (
-                    r'textwithoutspaces: /(?:[^#\n،,，、 *+\-\/eiіиలేไamfnsbअ否אو]|SKIP2)+/ -> text' + '\n'
-                )
-                merged_grammars = merged_grammars.replace(textwithoutspaces_rule, textwithoutspaces_rule_changed)
-
-            non_allowed_words = re.findall(r'".*?"', keywords)
-            non_allowed_words = list(set(non_allowed_words))
-
-            non_allowed_words = [x.replace('"', '') for x in non_allowed_words]
-            non_allowed_words_with_space = '|'.join(non_allowed_words)
-            merged_grammars = merged_grammars.replace('SKIP1', non_allowed_words_with_space)
-
-            letters_done = []
-            string_words = ''
-
-            for word in non_allowed_words:
-                # go through all words and add them in groups by their first letter
-                first_letter = word[0]
-                if first_letter not in letters_done:
-                    string_words += f'|{first_letter}(?!{word[1:]})'
-                    letters_done.append(first_letter)
-                else:
-                    string_words = string_words.replace(f'|{word[0]}(?!', f'|{word[0]}(?!{word[1:]}|')
-
-            string_words = string_words.replace('|)', ')')  # remove empty regex expressions
-            string_words = string_words[1:]  # remove first |
-
-            merged_grammars = merged_grammars.replace('SKIP2', string_words)
-
-        # Make sure that the error_invalid is added to the command rule
-        # to function as a 'bucket' for faulty text
-        command_rules = re.findall(r'^command:.*?\n', merged_grammars, re.MULTILINE)
-        if len(command_rules) > 0:
-            command_rule = command_rules[0]
-            command_rule_with_error_invalid = command_rule.replace('\n', '') + " | error_invalid\n"
-            merged_grammars = merged_grammars.replace(command_rule, command_rule_with_error_invalid)
-
-        # Make sure that the error_invalid is added to the if_less_command rule
-        # to function as a 'bucket' for faulty if body commands
-        if_less_command_rules = re.findall(r'^_if_less_command:.*?\n', merged_grammars, re.MULTILINE)
-        if len(if_less_command_rules) > 0:
-            if_less_command_rule = if_less_command_rules[0]
-            if_less_command_rule_with_error_invalid = if_less_command_rule.replace('\n', '') + " | error_invalid\n"
-            merged_grammars = merged_grammars.replace(if_less_command_rule, if_less_command_rule_with_error_invalid)
-
-        # Make sure that the _non_empty_program rule does not contain error_invalid rules
-        # so that all errors will be catches by error_invalid instead of _non_empty_program_skipping
-        non_empty_program_rules = re.findall(r'^_non_empty_program:.*?\n', merged_grammars, re.MULTILINE)
-        if len(non_empty_program_rules) > 0:
-            non_empty_program_rule = non_empty_program_rules[0]
-            non_empty_program_rule_changed = (
-                '_non_empty_program: _EOL* (command) _SPACE* (_EOL+ command _SPACE*)* _EOL*\n'
-            )
-            merged_grammars = merged_grammars.replace(non_empty_program_rule, non_empty_program_rule_changed)
-
-    # ready? Save to file to ease debugging
-    # this could also be done on each merge for performance reasons
-    save_total_grammar_file(level, merged_grammars, lang)
-    return merged_grammars
-
-
-def save_total_grammar_file(level, grammar, lang_):
-    write_file(grammar, 'grammars-Total', f'level{level}.{lang_}-Total.lark')
-
-
-def get_additional_rules_for_level(level):
-    return read_file('grammars', f'level{level}-Additions.lark')
-
-
-def get_full_grammar_for_level(level):
-    return read_file('grammars', f'level{level}.lark')
-
-
-def get_keywords_for_language(language):
-    if not local_keywords_enabled:
-        language = 'en'
-    try:
-        return read_file('grammars', f'keywords-{language}.lark')
-    except FileNotFoundError:
-        return read_file('grammars', f'keywords-en.lark')
-
-
-def get_terminals():
-    return read_file('grammars', 'terminals.lark')
-
-
-def read_file(*paths):
-    script_dir = path.abspath(path.dirname(__file__))
-    path_ = path.join(script_dir, *paths)
-    with open(path_, "r", encoding="utf-8") as file:
-        return file.read()
-
-
-def write_file(content, *paths):
-    script_dir = path.abspath(path.dirname(__file__))
-    path_ = path.join(script_dir, *paths)
-    with open(path_, "w", encoding="utf-8") as file:
-        file.write(content)
-
-
-PARSER_CACHE = {}
-
-
 def _get_parser_cache_directory():
     # TODO we should maybe store this to .test-cache so we can
     # re-use them in github actions caches for faster CI.
@@ -3578,7 +3436,7 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
     This is not implemented by Lark natively for the Earley parser.
     See https://github.com/lark-parser/lark/issues/1348.
     """
-    grammar = create_grammar(level, lang, skip_faulty)
+    grammar = hedy_grammar.create_grammar(level, lang, skip_faulty)
     parser_opts = {
         "regex": True,
         "propagate_positions": True,
@@ -3593,15 +3451,15 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
     cached_parser_file = f"cached-parser-{level}-{lang}-{unique_parser_hash}.pkl"
 
     use_cache = True
-    lark = None
+    parser = None
     if use_cache:
-        lark = _restore_parser_from_file_if_present(cached_parser_file)
-    if lark is None:
-        lark = Lark(grammar, **parser_opts)  # ambiguity='explicit'
+        parser = _restore_parser_from_file_if_present(cached_parser_file)
+    if parser is None:
+        parser = Lark(grammar, **parser_opts)  # ambiguity='explicit'
         if use_cache:
-            _save_parser_to_file(lark, cached_parser_file)
+            _save_parser_to_file(parser, cached_parser_file)
 
-    return lark
+    return parser
 
 
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle',
@@ -3716,8 +3574,6 @@ def translate_characters(s):
         return 'slash'
     elif s == '-':
         return 'dash'
-    elif s >= 'a' and s <= 'z' or s >= 'A' and s <= 'Z':
-        return s
     else:
         return s
 

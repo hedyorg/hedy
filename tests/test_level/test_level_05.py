@@ -317,6 +317,58 @@ class TestsLevel5(HedyTester):
     #
     # if else tests
     #
+    def test_if_assign_else_assign(self):
+        code = textwrap.dedent("""\
+        num is 0
+        if num is 0 result is num else result is b
+        print result""")
+
+        expected = textwrap.dedent("""\
+        num = '0'
+        if localize(num) == localize('0'):
+          result = num
+        else:
+          result = 'b'
+        print(f'{result}')""")
+
+        self.single_level_tester(code=code, expected=expected, output='0')
+
+    @parameterized.expand(['ellers', 'else'])
+    def test_if_assign_else_assign_danish(self, else_):
+        code = textwrap.dedent(f"""\
+        num is 0
+        if num is 0 result is num {else_} result is b
+        print result""")
+
+        expected = textwrap.dedent("""\
+        num = '0'
+        if localize(num) == localize('0'):
+          result = num
+        else:
+          result = 'b'
+        print(f'{result}')""")
+
+        self.single_level_tester(code=code, expected=expected, lang='da', output='0', translate=False)
+
+    @parameterized.expand(['иначе', 'sinon'])
+    def test_if_assign_danish(self, else_):
+        # The supplied keywords are the values for `else` in other lang than Danish.
+        # So, instead of an if-else, this is an if-statement with a assignment containing spaces.
+        code = textwrap.dedent(f"""\
+        num is 0
+        if num is 0 result is num {else_} result is b
+        print result""")
+
+        expected = textwrap.dedent(f"""\
+        num = '0'
+        if localize(num) == localize('0'):
+          result = 'num {else_} result is b'
+        else:
+          x__x__x__x = '5'
+        print(f'{{result}}')""")
+
+        self.single_level_tester(code=code, expected=expected, lang='da', output=f'num {else_} result is b')
+
     def test_if_equality_print_else_print(self):
         code = textwrap.dedent("""\
         naam is Hedy
