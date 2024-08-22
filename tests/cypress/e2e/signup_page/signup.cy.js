@@ -9,8 +9,9 @@ describe('Test signing up', () => {
     cy.getDataCy('signup_student').click()
 
     // basic info
-    cy.getDataCy('username').type('student123')
-    cy.getDataCy('email').type('somerandomstudentemail@gmail.com')
+    let student = `student_${Math.random()}`
+    cy.getDataCy('username').type(student)
+    cy.getDataCy('email').type(student + '@test.biz')
     const some_password = 'some_password\"!#@\'( )*$%\'123\"'
     cy.getDataCy('password').type(some_password)
     cy.getDataCy('password_repeat').type(some_password)
@@ -44,15 +45,19 @@ describe('Test signing up', () => {
     goToProfilePage();
     cy.getDataCy('personal_settings').click()
     cy.getDataCy('delete_profile_button').click()
+    cy.intercept('/auth/destroy').as('delete_user')
     cy.getDataCy('modal_yes_button').click()
+    cy.wait('@delete_user').should('have.nested.property', 'response.statusCode', 204)
+    cy.url().should('contain', Cypress.config('baseUrl'));
   })
 
-  it('Is able to sign up as a teacher', () => {
+it('Is able to sign up as a teacher', () => {
     cy.getDataCy('signup_teacher').click()
 
     // basic info
-    cy.getDataCy('username').type('teacher123')
-    cy.getDataCy('email').type('somerandomteacheremail@gmail.com')
+    let username = `teacher_${Math.random()}`
+    cy.getDataCy('username').type(username)
+    cy.getDataCy('email').type(username + '@test.biz')
     const some_password = 'some_password\"!#@\'( )*$%\'123\"'
     cy.getDataCy('password').type(some_password)
     cy.getDataCy('password_repeat').type(some_password)
@@ -76,7 +81,6 @@ describe('Test signing up', () => {
     cy.getDataCy('other_text').check()
 
     // teacher connect
-    cy.getDataCy('subscribe').check()
     cy.getDataCy('pair_with_teacher').check()
     cy.getDataCy('connect_guest_teacher').check()
     // phone will open when connect_guest_teacher is checked
@@ -90,6 +94,9 @@ describe('Test signing up', () => {
     goToProfilePage();
     cy.getDataCy('personal_settings').click()
     cy.getDataCy('delete_profile_button').click()
+    cy.intercept('/auth/destroy').as('delete_user')
     cy.getDataCy('modal_yes_button').click()
+    cy.wait('@delete_user').should('have.nested.property', 'response.statusCode', 204)
+    cy.url().should('contain', Cypress.config('baseUrl'));
   })
 })
