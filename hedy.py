@@ -1,9 +1,7 @@
 import textwrap
-from functools import lru_cache
 
 import lark
 from flask_babel import gettext
-from lark import Lark
 from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
 from os import path, getenv
@@ -12,7 +10,7 @@ import hedy
 import hedy_error
 import hedy_grammar
 import hedy_translation
-from utils import atomic_write_file
+
 from hedy_content import ALL_KEYWORD_LANGUAGES
 from collections import namedtuple
 import re
@@ -21,12 +19,6 @@ from dataclasses import dataclass, field
 import exceptions
 import program_repair
 import yaml
-import hashlib
-import os
-import pickle
-import sys
-import tempfile
-import utils
 
 # Some useful constants
 from hedy_content import KEYWORDS
@@ -3336,106 +3328,6 @@ class MicrobitConvertToPython_18(MicrobitConvertToPython_17, ConvertToPython_18)
     pass
 
 
-def _get_parser_cache_directory():
-    # TODO we should maybe store this to .test-cache so we can
-    # re-use them in github actions caches for faster CI.
-    # We can do this after #4574 is merged.
-    return tempfile.gettempdir()
-
-
-def _save_parser_to_file(lark, pickle_file):
-    # Store the parser to a file, a bit hacky because it is not
-    # pickle-able out of the box
-    # See https://github.com/lark-parser/lark/issues/1348
-
-    # Note that if Lark ever implements the cache for Earley parser
-    # or if we switch to a LALR parser we don't need this hack anymore
-
-    full_path = os.path.join(_get_parser_cache_directory(), pickle_file)
-
-    # These attributes can not be pickled as they are a module
-    lark.parser.parser.lexer_conf.re_module = None
-    lark.parser.lexer_conf.re_module = None
-
-    try:
-        with atomic_write_file(full_path) as fp:
-            pickle.dump(lark, fp)
-    except OSError:
-        # Ignore errors if another process already moved the file
-        # or if the destination already exist.
-        # These scenarios can happen under concurrent execution.
-        pass
-
-    # Restore the unpickle-able bits.
-    # Keep this in sync with the restore method!
-    lark.parser.parser.lexer_conf.re_module = regex
-    lark.parser.lexer_conf.re_module = regex
-
-
-def _restore_parser_from_file_if_present(pickle_file):
-    full_path = os.path.join(_get_parser_cache_directory(), pickle_file)
-    if os.path.isfile(full_path):
-        try:
-            with open(full_path, "rb") as fp:
-                lark = pickle.load(fp)
-            # Restore the unpickle-able bits.
-            # Keep this in sync with the save method!
-            lark.parser.parser.lexer_conf.re_module = regex
-            lark.parser.lexer_conf.re_module = regex
-            return lark
-        except Exception:
-            # If anything goes wrong try to remove the file
-            # and we will try again in the next cycle
-            try:
-                os.unlink(full_path)
-            except Exception:
-                pass
-    return None
-
-
-@lru_cache(maxsize=0 if utils.is_production() else 100)
-def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
-    """Return the Lark parser for a given level.
-    Parser generation takes about 0.5 seconds depending on the level so
-    we want to cache it, or we have latency of 500ms on the calculations
-    and a high server load, and CI runs of 5+ hours.
-
-    We used to cache this to RAM but because of all the permutations we
-    had 1000s of parsers and got into out-of-memory issue in the
-    production environment.
-
-    Now we cache a limited number of the parsers to RAM, but introduce
-    a second tier of cache to disk.
-
-    This is not implemented by Lark natively for the Earley parser.
-    See https://github.com/lark-parser/lark/issues/1348.
-    """
-    grammar = hedy_grammar.create_grammar(level, lang, skip_faulty)
-    parser_opts = {
-        "regex": True,
-        "propagate_positions": True,
-        "keep_all_tokens": keep_all_tokens,
-    }
-    unique_parser_hash = hashlib.sha1("_".join((
-        grammar,
-        str(sys.version_info[:2]),
-        str(parser_opts),
-    )).encode()).hexdigest()
-
-    cached_parser_file = f"cached-parser-{level}-{lang}-{unique_parser_hash}.pkl"
-
-    use_cache = True
-    parser = None
-    if use_cache:
-        parser = _restore_parser_from_file_if_present(cached_parser_file)
-    if parser is None:
-        parser = Lark(grammar, **parser_opts)  # ambiguity='explicit'
-        if use_cache:
-            _save_parser_to_file(parser, cached_parser_file)
-
-    return parser
-
-
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle',
                                          'has_pressed', 'has_clear', 'has_music', 'has_sleep', 'commands',
                                          'roles_of_variables'])
@@ -3842,7 +3734,7 @@ def process_input_string(input_string, level, lang, preprocess_ifs_enabled=True)
 
 
 def parse_input(input_string, level, lang):
-    parser = get_parser(level, lang, skip_faulty=source_map.skip_faulty)
+    parser = hedy_grammar.get_parser(level, lang, skip_faulty=source_map.skip_faulty)
     try:
         parse_result = parser.parse(input_string + '\n')
         return parse_result.children[0]  # getting rid of the root could also be done in the transformer would be nicer

@@ -2,7 +2,21 @@ import re
 import warnings
 from os import path
 from functools import cache
+import itertools
+
+import lark
+
 from hedy_translation import keywords_to_dict
+from functools import lru_cache
+from lark import Lark
+import hashlib
+import os
+import pickle
+import sys
+import tempfile
+import utils
+import regex
+
 
 """
 Because of the gradual nature of Hedy, the grammar of every level is just slightly different than the grammar of the
@@ -24,8 +38,132 @@ levels up to N. To facilitate this approach, 2 features are added:
 """
 
 
-@cache
-def create_grammar(level, lang, skip_faulty):
+def _get_parser_cache_directory():
+    # TODO we should maybe store this to .test-cache so we can
+    # re-use them in github actions caches for faster CI.
+    # We can do this after #4574 is merged.
+    return tempfile.gettempdir()
+
+
+def _save_parser_to_file(lark, pickle_file):
+    # Store the parser to a file, a bit hacky because it is not
+    # pickle-able out of the box
+    # See https://github.com/lark-parser/lark/issues/1348
+
+    # Note that if Lark ever implements the cache for Earley parser
+    # or if we switch to a LALR parser we don't need this hack anymore
+
+    full_path = os.path.join(_get_parser_cache_directory(), pickle_file)
+
+    # These attributes can not be pickled as they are a module
+    lark.parser.parser.lexer_conf.re_module = None
+    lark.parser.lexer_conf.re_module = None
+
+    try:
+        with utils.atomic_write_file(full_path) as fp:
+            pickle.dump(lark, fp)
+    except OSError:
+        # Ignore errors if another process already moved the file
+        # or if the destination already exist.
+        # These scenarios can happen under concurrent execution.
+        pass
+
+    # Restore the unpickle-able bits.
+    # Keep this in sync with the restore method!
+    lark.parser.parser.lexer_conf.re_module = regex
+    lark.parser.lexer_conf.re_module = regex
+
+
+def _restore_parser_from_file_if_present(pickle_file):
+    full_path = os.path.join(_get_parser_cache_directory(), pickle_file)
+    if os.path.isfile(full_path):
+        try:
+            with open(full_path, "rb") as fp:
+                lark = pickle.load(fp)
+            # Restore the unpickle-able bits.
+            # Keep this in sync with the save method!
+            lark.parser.parser.lexer_conf.re_module = regex
+            lark.parser.lexer_conf.re_module = regex
+            return lark
+        except Exception:
+            # If anything goes wrong try to remove the file
+            # and we will try again in the next cycle
+            try:
+                os.unlink(full_path)
+            except Exception:
+                pass
+    return None
+
+
+# @lru_cache(maxsize=0 if utils.is_production() else 100)
+def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
+    """Return the Lark parser for a given level.
+    Parser generation takes about 0.5 seconds depending on the level, so
+    we want to cache it, or we have latency of 500ms on the calculations
+    and a high server load, and CI runs of 5+ hours.
+
+    We used to cache this to RAM but because of all the permutations we
+    had 1000s of parsers and got into out-of-memory issue in the
+    production environment.
+
+    Now we cache a limited number of the parsers to RAM, but introduce
+    a second tier of cache to disk.
+
+    This is not implemented by Lark natively for the Earley parser.
+    See https://github.com/lark-parser/lark/issues/1348.
+    """
+    unique_parser_hash = hashlib.sha1("_".join([str(e) for e in [
+        skip_faulty,
+        keep_all_tokens,
+        sys.version_info[:2],
+    ]]).encode()).hexdigest()
+
+    langs = ['en', 'nl', 'bg', 'eo']  # TODO: For test purposes, let's set the langs to be static
+    langs = sorted(list(set(langs)))
+
+    cached_parser_file = f"cached-parser-{level}-{'-'.join(langs)}-{unique_parser_hash}.pkl"
+
+    use_cache = False
+    parser = None
+    if use_cache:
+        parser = _restore_parser_from_file_if_present(cached_parser_file)
+    if parser is None:
+
+        parser = create_parser(level, langs, skip_faulty, keep_all_tokens)
+        if use_cache:
+            _save_parser_to_file(parser, cached_parser_file)
+
+    return parser
+
+
+def create_parser(level, langs, skip_faulty, keep_all_tokens):
+    grammar = create_grammar(level, langs, skip_faulty)
+
+    translate = get_translated_keywords(langs)
+
+    def edit_terminals(t):
+        try:
+            # TODO: not sure how to have a nice conversion between lark's terminal syntax (_PRINT_KEYWORD) and
+            #  the keyword actual name in the yaml files (print). For now removing the _ prefix and the _KEYWORD suffix
+            if '_KEYWORD' in t.name:
+                keyword = t.name.strip('KEYWORD').strip('_').lower()
+                if keyword in translate:
+                    t.pattern.value = f"(?:{'|'.join(translate[keyword])})"
+        except KeyError:
+            pass
+
+    parser_opts = {
+        "regex": True,
+        "propagate_positions": True,
+        "keep_all_tokens": keep_all_tokens,
+        "edit_terminals": edit_terminals
+    }
+
+    return Lark(grammar, **parser_opts)  # ambiguity='explicit'
+
+
+# @cache
+def create_grammar(level, langs, skip_faulty):
     """ Creates a grammar file for a chosen level and lang. Note that the language is required
     to generate regular expressions that escape keywords (with negative lookahead).
     Currently, it is only a couple of MB in total, so it is safe to cache. """
@@ -35,24 +173,24 @@ def create_grammar(level, lang, skip_faulty):
     # then keep merging new grammars in
     for lvl in range(2, level + 1):
         grammar_text_lvl = get_additional_rules_for_level(lvl)
-        merged_grammars = merge_grammars(merged_grammars, grammar_text_lvl, lang)
+        merged_grammars = merge_grammars(merged_grammars, grammar_text_lvl, langs)
 
     if skip_faulty:
         skip_faulty_grammar = read_skip_faulty_file(level)
-        merged_grammars = merge_grammars(merged_grammars, skip_faulty_grammar, lang)
+        merged_grammars = merge_grammars(merged_grammars, skip_faulty_grammar, langs)
 
     # keyword and other terminals never have merge-able rules, so we can just add them at the end
-    keywords = get_keywords_for_language(lang)
+    # keywords = get_keywords_for_language(lang)
     terminals = get_terminals()
-    merged_grammars = merged_grammars + '\n' + keywords + '\n' + terminals
+    merged_grammars = merged_grammars + '\n' + terminals
 
     # ready? Save to file to ease debugging
     # this could also be done on each merge for performance reasons
-    save_total_grammar_file(level, merged_grammars, lang)
+    save_total_grammar_file(level, merged_grammars, langs)
     return merged_grammars
 
 
-def merge_grammars(grammar_text_1, grammar_text_2, lang):
+def merge_grammars(grammar_text_1, grammar_text_2, langs):
     """ Merges two grammar files into one.
     Rules that are redefined in the second file are overridden.
     Rules that are new in the second file are added."""
@@ -62,7 +200,7 @@ def merge_grammars(grammar_text_1, grammar_text_2, lang):
     base_grammar = parse_grammar(grammar_text_1)
     target_grammar = parse_grammar(grammar_text_2)
 
-    apply_preprocessing_rules(target_grammar, base_grammar, lang)
+    apply_preprocessing_rules(target_grammar, base_grammar, langs)
 
     for base_rule in base_grammar.values():
         if base_rule.name in target_grammar:
@@ -120,8 +258,8 @@ def get_terminals():
     return read_file('grammars', 'terminals.lark')
 
 
-def save_total_grammar_file(level, grammar, lang_):
-    write_file(grammar, 'grammars-Total', f'level{level}.{lang_}-Total.lark')
+def save_total_grammar_file(level, grammar, langs_):
+    write_file(grammar, 'grammars-Total', f'level{level}.{"-".join(langs_)}-Total.lark')
 
 
 def get_additional_rules_for_level(level):
@@ -161,12 +299,12 @@ class GrammarRule:
         self.value = value
         self.processors = processors
 
-    def apply_processors(self, base_grammar, lang):
+    def apply_processors(self, base_grammar, langs):
         if self.processors:
             result = self.value
             for processor in self.processors:
                 arg = processor.arg if processor.arg else self.name
-                target_part = processor.func(arg=arg, lang=lang, base_grammar=base_grammar)
+                target_part = processor.func(arg=arg, langs=langs, base_grammar=base_grammar)
                 result = result.replace(processor.match_string, target_part)
             self.value = result
             self.line = f'{self.name_with_priority}:{result}'
@@ -195,9 +333,9 @@ def split_rule_name_and_value(s):
     return parts[0], ':'.join(parts[1:])
 
 
-def apply_preprocessing_rules(grammar, base_grammar, lang):
+def apply_preprocessing_rules(grammar, base_grammar, langs):
     for rule in grammar.values():
-        rule.apply_processors(base_grammar, lang)
+        rule.apply_processors(base_grammar, langs)
 
 
 def get_rule_from_grammar(rule_name, grammar):
@@ -232,9 +370,9 @@ def old_rule_to_error(**kwargs):
 def expand_keyword(**kwargs):
     """ Creates a list of all values of a keyword. The keyword `else` produces `else|ellers` for Danish"""
     keyword = kwargs['arg']
-    lang = kwargs['lang']
+    langs = kwargs['langs']
 
-    values = get_translated_keyword(keyword, lang)
+    values = get_translated_keyword(keyword, langs)
     values = sorted(list(set(values)))
     return '|'.join(values)
 
@@ -243,9 +381,9 @@ def expand_keyword_first(**kwargs):
     """ Creates a list of the first letter of all values of a keyword.
     The keyword `else` produces `ei` for Ukrainian """
     keyword = kwargs['arg']
-    lang = kwargs['lang']
+    langs = kwargs['langs']
 
-    values = get_translated_keyword(keyword, lang)
+    values = get_translated_keyword(keyword, langs)
     values = sorted(list(set([v[0] for v in values])))
     return ''.join(values)
 
@@ -269,7 +407,19 @@ def expand_keyword_not_followed_by_space(**kwargs):
     return '|'.join(result)
 
 
-def get_translated_keyword(keyword, lang):
+def get_translated_keywords(langs):
+    result = dict()
+    for lang in langs:
+        keywords = keywords_to_dict(lang)
+        for k in keywords:
+            if k not in result:
+                result[k] = keywords[k]
+            else:
+                result[k].extend(keywords[k])
+    return result
+
+
+def get_translated_keyword(keyword, langs):
     def get_keyword_value_from_lang(keyword_, lang_):
         keywords = keywords_to_dict(lang_)
         if keyword_ in keywords:
@@ -277,8 +427,7 @@ def get_translated_keyword(keyword, lang):
         else:
             raise Exception(f"The keywords yaml file for language '{lang_}' has no definition for '{keyword_}'.")
 
-    translated_keyword = get_keyword_value_from_lang(keyword, lang) if lang != 'en' else []
-    return translated_keyword + get_keyword_value_from_lang(keyword, 'en')
+    return list(itertools.chain([get_keyword_value_from_lang(keyword, lang) for lang in langs]))
 
 
 PREPROCESS_RULES = {

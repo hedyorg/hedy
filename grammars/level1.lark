@@ -2,12 +2,12 @@ start: program
 program: _EOL* (command _EOL+)* command?
 command: print | ask | echo | play | turtle | error_invalid_space | error_invalid | empty_line
 
-play: _PLAY (textwithoutspaces)?
-print: _PRINT (text)?
+play: _play (textwithoutspaces)?
+print: _print (text)?
 _color_literal : black | blue | brown | gray | green | orange | pink | purple | red | white | yellow
-ask: _ASK (text)?
-echo: _ECHO (text)?
-turtle: _FORWARD ((NUMBER | text))? -> forward | _TURN ((left | right ))? -> turn | _COLOR (_color_literal | text)? -> color
+ask: _ask (text)?
+echo: _echo (text)?
+turtle: _forward ((NUMBER | text))? -> forward | _turn ((left | right ))? -> turn | _color (_color_literal | text)? -> color
 error_invalid_space: _SPACE any
 
 // We give the error_invalid rule below a priority of -100,
@@ -19,3 +19,47 @@ text: /([^\n#ـ])([^\n#]*)/ -> text //anything can be parsed except for a newlin
 // to properly deal with tatweels, we also need to prevent text from starting with a tatweel,
 // otherwise we might parse  قولـــ  as the printing of ___ (see #2699)
 textwithoutspaces: /([^\n #]+)/ -> text //anything can be parsed except for a new line, spaces and a comment hash
+
+_print: _PRINT_KEYWORD _SPACE?
+_play: _PLAY_KEYWORD _SPACE?
+_ask: _ASK_KEYWORD _SPACE?
+_echo: _ECHO_KEYWORD _SPACE?
+_forward: _FORWARD_KEYWORD _SPACE?
+_turn: _TURN_KEYWORD _SPACE?
+_color: _COLOR_KEYWORD _SPACE?
+left: _LEFT_KEYWORD _SPACE?
+right: _RIGHT_KEYWORD _SPACE?
+black: _BLACK_KEYWORD _SPACE?
+blue: _BLUE_KEYWORD _SPACE?
+brown: _BROWN_KEYWORD _SPACE?
+gray: _GRAY_KEYWORD _SPACE?
+green: _GREEN_KEYWORD _SPACE?
+orange: _ORANGE_KEYWORD _SPACE?
+pink: _PINK_KEYWORD _SPACE?
+purple: _PURPLE_KEYWORD _SPACE?
+red: _RED_KEYWORD _SPACE?
+white: _WHITE_KEYWORD _SPACE?
+yellow: _YELLOW_KEYWORD _SPACE?
+
+// These keywords need to have | so that they are converted correctly
+// to a `re` pattern, whose value will will swap later
+_PRINT_KEYWORD: "print" | "print"
+_PLAY_KEYWORD: "play" | "play"
+_ASK_KEYWORD: "ask" | "ask"
+_ECHO_KEYWORD: "echo" | "echo"
+_FORWARD_KEYWORD: "forward" | "forward"
+_TURN_KEYWORD: "turn" | "turn"
+_COLOR_KEYWORD: "color" | "color"
+_LEFT_KEYWORD: "left" | "left"
+_RIGHT_KEYWORD: "right" | "right"
+_BLACK_KEYWORD: "black" | "black"
+_BLUE_KEYWORD: "blue" | "blue"
+_BROWN_KEYWORD: "brown" | "brown"
+_GRAY_KEYWORD: "gray" | "gray"
+_GREEN_KEYWORD: "green" | "green"
+_ORANGE_KEYWORD: "orange" | "orange"
+_PINK_KEYWORD: "pink" | "pink"
+_PURPLE_KEYWORD: "purple" | "purple"
+_RED_KEYWORD: "red" | "red"
+_WHITE_KEYWORD: "white" | "white"
+_YELLOW_KEYWORD: "yellow" | "yellow"
