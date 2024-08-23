@@ -1,4 +1,8 @@
 
+export function codeEditorContent() {
+  return cy.get('#editor > .cm-editor > .cm-scroller > .cm-content');
+}
+
 export function executeHelloWorldProgram(name) {
     cy.visit(`${Cypress.env('hedy_page')}#${name}`);
     // make sure to navigate to the wanted program tab.

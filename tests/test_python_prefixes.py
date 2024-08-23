@@ -1,6 +1,6 @@
 import pytest
 
-from prefixes.normal import localize, to_latin_numeral
+from prefixes.normal import localize, to_latin_numeral, get_value_and_bool_sys
 
 localize_test_data = [
     # None and empty values
@@ -78,6 +78,21 @@ to_latin_numeral_test_data = [
 ]
 
 
+get_value_and_bool_sys_test_data = [
+    (None, None, None, None),
+    ('', None, None, None),
+    ('true', None, None, None),
+    ('true', [], None, None),
+    ('tr', [12, 25, 5], None, None),
+    (15, [{'true': True, 'false': False}], None, None),
+    ('False', [{'true': True, 'false': False}], None, None),
+    ('true', [{'true': True, 'false': False}], True, {True: 'true', False: 'false'}),
+    ('false', [{'true': True, 'false': False}], False, {True: 'true', False: 'false'}),
+    ('вярно', [{'вярно': True, 'невярно': False}], True, {True: 'вярно', False: 'невярно'}),
+    ('true', [{'True': True, 'False': False}, {'true': True, 'false': False}], True, {True: 'true', False: 'false'}),
+]
+
+
 @pytest.mark.parametrize("value, num_sys, bools, expected", localize_test_data)
 def test_localize(value, num_sys, bools, expected):
     assert localize(value, num_sys, bools) == expected
@@ -86,3 +101,10 @@ def test_localize(value, num_sys, bools, expected):
 @pytest.mark.parametrize("value, expected", to_latin_numeral_test_data)
 def test_to_latin_numeral(value, expected):
     assert to_latin_numeral(value) == expected
+
+
+@pytest.mark.parametrize("value, keywords, expected_value, expected_system", get_value_and_bool_sys_test_data)
+def test_get_value_and_bool_sys(value, keywords, expected_value, expected_system):
+    bool_value, bool_system = get_value_and_bool_sys(value, keywords)
+    assert bool_value == expected_value
+    assert bool_system == expected_system

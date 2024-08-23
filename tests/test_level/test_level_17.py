@@ -69,7 +69,7 @@ class TestsLevel17(HedyTester):
             if cond is True:
                 sleep""")
         expected = textwrap.dedent("""\
-            cond = Value(False, bools={True: 'True', False: 'False'})
+            cond = Value(False, bool_sys={True: 'True', False: 'False'})
             if cond.data == True:
               time.sleep(1)""")
 
@@ -308,9 +308,9 @@ class TestsLevel17(HedyTester):
             while cond != False:
               cond is False""")
         expected = textwrap.dedent("""\
-            cond = Value(True, bools={True: 'True', False: 'False'})
+            cond = Value(True, bool_sys={True: 'True', False: 'False'})
             while cond.data!=False:
-              cond = Value(False, bools={True: 'True', False: 'False'})
+              cond = Value(False, bool_sys={True: 'True', False: 'False'})
               time.sleep(0.1)""")
 
         self.multi_level_tester(
