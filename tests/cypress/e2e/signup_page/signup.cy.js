@@ -5,7 +5,7 @@ beforeEach(() => {
 })
 
 describe('Test signing up', () => {
-  it('Is able to sign up as a student', () => {
+it('Is able to sign up as a student', () => {
     cy.getDataCy('signup_student').click()
 
     // basic info
@@ -37,9 +37,11 @@ describe('Test signing up', () => {
     cy.getDataCy('python').check()
     cy.getDataCy('other_text').check()
   
-    cy.getDataCy('agree_terms').check()
+    cy.getDataCy('agree_terms').check()    
+    cy.intercept('/auth/signup').as('sign_up');
     cy.getDataCy('submit_button').click()
-    cy.url().should('contain', Cypress.config('baseUrl') + Cypress.env('landing_page'));
+    cy.wait('@sign_up').should('have.nested.property', 'response.statusCode', 200)
+    cy.url().should('contain', Cypress.config('baseUrl') + Cypress.env('hedy_page'));
     
     // delete profile
     goToProfilePage();
@@ -52,8 +54,10 @@ describe('Test signing up', () => {
   })
 
 it('Is able to sign up as a teacher', () => {
+    cy.clearCookies();
+    cy.clearAllLocalStorage()
+    cy.clearAllSessionStorage();  
     cy.getDataCy('signup_teacher').click()
-
     // basic info
     let username = `teacher_${Math.random()}`
     cy.getDataCy('username').type(username)
@@ -87,8 +91,10 @@ it('Is able to sign up as a teacher', () => {
     cy.getDataCy('phone').type('0612345678')
   
     cy.getDataCy('agree_terms').check()
+    cy.intercept('/auth/signup').as('sign_up');
     cy.getDataCy('submit_button').click()
-    cy.url().should('contain', Cypress.config('baseUrl') + Cypress.env('landing_page'));
+    cy.wait('@sign_up').should('have.nested.property', 'response.statusCode', 200)
+    cy.url().should('contain', Cypress.config('baseUrl'));
     
     //delete profile
     goToProfilePage();
