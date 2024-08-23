@@ -86,7 +86,7 @@ adventures:
 
                     ### Exercício 2
                     Volta ao nível anterior e copia o código da tua história. Faz com que o código funcione neste nível, adicionando aspas nos sítios certos.
-                    Lembra-te: As variáveis na tua própria história devem estar fora das aspas. Tal como está na seguna linha do código de exemplo. Nessa linha, o nome da variável é colocado por fora das aspas.
+                    Lembra-te: As variáveis na tua própria história devem estar fora das aspas. Tal como está na segunda linha do código de exemplo. Nessa linha, o nome da variável é colocado por fora das aspas.
                 example_code: |
                     ```
                     nome {is} {ask} _ Qual é o teu nome? _
@@ -140,39 +140,61 @@ adventures:
                     ```
             8:
                 story_text: |
-                    In this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!
+                    Neste nível podes usar múltiplos comandos `{if}`, desta forma, podes melhorar o teu final feliz ou triste!
+
+                    ### Exercício 1
+                    O código de exemplo mostra dois finais diferentes; um onde os personagens saltam para uma máquina do tempo e outro onde isso não acontece.
+                    Completa os espaços em branco com pelo menos uma frase por cada final.
+                    **Extra** Torna a história mais longa. O que acontece na história? Podes também adicionar um segundo `{ask}` com diferente opções.
+
+                    ### Exercício 2
+                    Regressa ao teus programas guardados, escolhe o programa da tua história do nível 5. Agora, escreve um final feliz e um final triste, com pelo menos três linhas cada um!
                 example_code: |
                     ```
-                    {print} 'OH NO! The T-rex is closing in!'
-                    end = {ask} 'Do you want a happy or a sad ending?'
-                    {if} end {is} happy
-                        {print} 'Just in time Richard jumps back into the time machine!'
+                    {print} 'OH NÃO! O T-rex está a aproximar-se!'
+                    fim = {ask} 'Queres um final feliz ou triste?'
+                    {if} fim {is} feliz
+                        {print} 'Mesmo a tempo, Ricardo salta para dentro da máquina do tempo!'
                         {print} _
                     {else}
-                        {print} 'Oh no! Richard is too slow...'
+                        {print} 'Oh não! Ricardo é demasiado lento...'
                         {print} _
                     ```
             9:
                 story_text: |
-                    In this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.
+                    Neste nível podes usar comandos `{if}` e `{repeat}` dentro de outros comandos `{if}` e `{repeat}`.
+                    Isto proporciona-te muitas opções e ajuda imenso a tornar a tua história mais interactiva.
+
+                    ### Exercício 1
+                    Completa o código para que o `{if}` funcione correctamente.
+
+                    ### Exercício 2
+                    Adiciona também um `{if}` e um `{else}` para a parte da história em que Robin regressa a casa.
+
+                    ### Exercício 3
+                    Regressa à tua história do nível 8 e usa pelo menos dois `{if}`s dentro de outro `{if}`.
                 example_code: |
                     ```
-                    {print} 'Robin is walking downtown'
-                    location = {ask} 'Is Robin going into a shop, or does she go home?'
-                    {if} location {is} shop
-                        {print} 'She enters the shop.'
-                        {print} 'Robin sees an interesting looking book'
-                        book = {ask} 'Does Robin buy the book?'
-                        {if} book {is} yes
-                            {print} 'Robin buys the book and goes home'
-                        {else}
-                            {print} 'Robin leaves the shop and goes home'
+                    {print} 'Robin está a caminhar pela baixa da cidade'
+                    local = {ask} 'Robin vai entrar numa loja ou está a voltar para casa?'
+                    {if} local {is} loja
+                    	{print} 'Ela entra na loja.'
+                    	{print} 'Robin vê um livro com um aspecto interessante'
+                    	livro = {ask} 'A Robin compra o livro?'
+                    	{if} livro {is} sim
+                    	_ {print} 'Robin compra o livro e volta para casa'
+                    	_ {else}
+                    	_ {print} 'Robin sai da loja e volta para casa'
                     {else}
-                        {print} 'Robin goes home'
+                    	{print} 'Robin volta para casa'
                     ```
             10:
                 story_text: |
-                    In this level you can use the {for} command in your story. In this way you could easily program the children's book 'brown bear, brown bear, what do you see'.
+                    In this level you can use the {for} command in your story. In this way you could easily program the children's book 'Brown bear, Brown bear, what do you see'.
+
+                    ### Exercise
+
+                    Look at <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> the story</a> if you do not know it, and make sure it is printed as in the book.
                 example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
             12:
                 story_text: |
