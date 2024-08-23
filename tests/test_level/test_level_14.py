@@ -16,12 +16,11 @@ class TestsLevel14(HedyTester):
     @parameterized.expand(HedyTester.equality_comparison_commands)
     def test_equality_with_var_and_string(self, comparison):
         code = textwrap.dedent(f"""\
-            name is ask 'What is your name?'
+            name is 'Hedy'
             if name {comparison} 'Hedy'
                 print 'meh'""")
-        expected = self.dedent(
-            self.input_transpiled('name', 'What is your name?'),
-            f"""\
+        expected = self.dedent(f"""\
+            name = Value('Hedy')
             if name.data == 'Hedy':
               print(f'''meh''')""")
 
@@ -34,12 +33,11 @@ class TestsLevel14(HedyTester):
     @parameterized.expand(HedyTester.equality_comparison_commands)
     def test_equality_with_var_and_int(self, comparison):
         code = textwrap.dedent(f"""\
-            age is ask 'How old are you?'
+            age is 20
             if age {comparison} 18
                 print 'congrats'""")
-        expected = self.dedent(
-            self.input_transpiled('age', 'How old are you?'),
-            f"""\
+        expected = self.dedent(f"""\
+            age = Value(20, num_sys='Latin')
             if age.data == 18:
               print(f'''congrats''')""")
 
@@ -152,12 +150,11 @@ class TestsLevel14(HedyTester):
     #
     def test_inequality_with_string(self):
         code = textwrap.dedent(f"""\
-            name is ask 'What is your name?'
+            name is 'Hedy'
             if name != 'Hedy'
                 print 'meh'""")
-        expected = self.dedent(
-            self.input_transpiled('name', 'What is your name?'),
-            f"""\
+        expected = self.dedent(f"""\
+            name = Value('Hedy')
             if name.data!='Hedy':
               print(f'''meh''')""")
 
@@ -169,14 +166,13 @@ class TestsLevel14(HedyTester):
 
     def test_inequality_hindi(self):
         code = textwrap.dedent(f"""\
-            उम्र is ask 'आप कितने साल के हैं?'
+            उम्र is 15
             if उम्र > 12
                 print 'आप मुझसे छोटे हैं!'
             else
                 print 'आप मुझसे बड़े हैं!'""")
-        expected = self.dedent(
-            self.input_transpiled('उम्र', 'आप कितने साल के हैं?'),
-            f"""\
+        expected = self.dedent(f"""\
+            उम्र = Value(15, num_sys='Latin')
             if उम्र.data>12:
               print(f'''आप मुझसे छोटे हैं!''')
             else:
@@ -370,12 +366,11 @@ class TestsLevel14(HedyTester):
     @parameterized.expand(HedyTester.comparison_commands)
     def test_comparison_with_int(self, comparison):
         code = textwrap.dedent(f"""\
-            leeftijd is ask 'Hoe oud ben jij?'
+            leeftijd is 12
             if leeftijd {comparison} 12
                 print 'Dan ben je jonger dan ik!'""")
-        expected = self.dedent(
-            self.input_transpiled('leeftijd', 'Hoe oud ben jij?'),
-            f"""\
+        expected = self.dedent(f"""\
+            leeftijd = Value(12, num_sys='Latin')
             if leeftijd.data{comparison}12:
               print(f'''Dan ben je jonger dan ik!''')""")
 
@@ -435,14 +430,13 @@ class TestsLevel14(HedyTester):
     @parameterized.expand(HedyTester.comparison_commands)
     def test_comparison_else(self, comparison):
         code = textwrap.dedent(f"""\
-            leeftijd is ask 'Hoe oud ben jij?'
+            leeftijd is 12
             if leeftijd {comparison} 12
                 print 'Dan ben je jonger dan ik!'
             else
                 print 'Dan ben je ouder dan ik!'""")
-        expected = self.dedent(
-            self.input_transpiled('leeftijd', 'Hoe oud ben jij?'),
-            f"""\
+        expected = self.dedent(f"""\
+            leeftijd = Value(12, num_sys='Latin')
             if leeftijd.data{comparison}12:
               print(f'''Dan ben je jonger dan ik!''')
             else:
@@ -455,14 +449,13 @@ class TestsLevel14(HedyTester):
         )
 
     @parameterized.expand(HedyTester.comparison_commands)
-    def tests_comparison_no_spaces(self, comparison):
+    def tests_smaller_no_spaces(self, comparison):
         code = textwrap.dedent(f"""\
-            leeftijd is ask 'Hoe oud ben jij?'
-            if leeftijd{comparison}12
+            leeftijd is 10
+            if leeftijd {comparison} 12
                 print 'Dan ben je jonger dan ik!'""")
-        expected = self.dedent(
-            self.input_transpiled('leeftijd', 'Hoe oud ben jij?'),
-            f"""\
+        expected = self.dedent(f"""\
+            leeftijd = Value(10, num_sys='Latin')
             if leeftijd.data{comparison}12:
               print(f'''Dan ben je jonger dan ik!''')""")
 
@@ -503,15 +496,14 @@ class TestsLevel14(HedyTester):
     @parameterized.expand(HedyTester.comparison_commands)
     def test_comparison_with_boolean(self, comparison):
         code = textwrap.dedent(f"""\
-            leeftijd is ask 'Hoe oud ben jij?'
+            leeftijd is 10
             if leeftijd {comparison} 12 or leeftijd {comparison} 15
                 print 'Dan ben je jonger dan ik!'
             if leeftijd {comparison} 12 and leeftijd {comparison} 15
                 print 'Some other string!'""")
 
-        expected = self.dedent(
-            self.input_transpiled('leeftijd', 'Hoe oud ben jij?'),
-            f"""\
+        expected = self.dedent(f"""\
+            leeftijd = Value(10, num_sys='Latin')
             if leeftijd.data{comparison}12 or leeftijd.data{comparison}15:
               print(f'''Dan ben je jonger dan ik!''')
             if leeftijd.data{comparison}12 and leeftijd.data{comparison}15:
@@ -697,15 +689,14 @@ class TestsLevel14(HedyTester):
 
     def test_source_map(self):
         code = textwrap.dedent("""\
-        age = ask 'How old are you?'
-        if age < 13
-            print 'You are younger than me!'
-        else
-            print 'You are older than me!'""")
+            age = 10
+            if age < 13
+                print 'You are younger than me!'
+            else
+                print 'You are older than me!'""")
 
-        excepted_code = self.dedent(
-            self.input_transpiled('age', 'How old are you?'),
-            """\
+        excepted_code = self.dedent("""\
+            age = Value(10, num_sys='Latin')
             if age.data<13:
               print(f'''You are younger than me!''')
             else:
@@ -713,15 +704,15 @@ class TestsLevel14(HedyTester):
 
         expected_source_map = {
             '1/1-1/4': '1/1-1/4',
-            '1/1-1/29': '1/1-10/31',
-            '2/4-2/7': '2/20-2/23',
-            '2/4-2/12': '11/4-11/15',
-            '3/5-3/37': '12/1-12/39',
-            '2/1-3/46': '11/1-12/41',
-            '5/5-5/35': '14/1-14/37',
-            '3/46-5/44': '14/-254-2/8',
-            '2/1-5/44': '11/1-14/39',
-            '1/1-5/45': '1/1-14/39'
+            '1/1-1/9': '1/1-1/33',
+            '2/4-2/7': '2/4-2/7',
+            '2/4-2/12': '2/4-2/15',
+            '3/5-3/37': '3/1-3/39',
+            '2/1-3/46': '2/1-3/41',
+            '5/5-5/35': '5/1-5/37',
+            '3/46-5/44': '5/-96-2/12',
+            '2/1-5/44': '2/1-5/39',
+            '1/1-5/45': '1/1-5/39'
         }
 
         self.single_level_tester(code, expected=excepted_code)

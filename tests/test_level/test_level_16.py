@@ -970,10 +970,10 @@ class TestsLevel16(HedyTester):
     #
     def test_assign_list_var_boolean(self):
         code = "cond = [True, False, true, false]"
-        expected = ("cond = Value([Value(True, bools={True: 'True', False: 'False'}), "
-                    "Value(False, bools={True: 'True', False: 'False'}), "
-                    "Value(True, bools={True: 'true', False: 'false'}), "
-                    "Value(False, bools={True: 'true', False: 'false'})])")
+        expected = ("cond = Value([Value(True, bool_sys={True: 'True', False: 'False'}), "
+                    "Value(False, bool_sys={True: 'True', False: 'False'}), "
+                    "Value(True, bool_sys={True: 'true', False: 'false'}), "
+                    "Value(False, bool_sys={True: 'true', False: 'false'})])")
 
         self.multi_level_tester(
             code=code,
@@ -988,7 +988,7 @@ class TestsLevel16(HedyTester):
             if cond is {value}
                 sleep""")
         expected = textwrap.dedent(f"""\
-            cond = Value({exp}, bools={{True: '{exp_true}', False: '{exp_false}'}})
+            cond = Value({exp}, bool_sys={{True: '{exp_true}', False: '{exp_false}'}})
             if cond.data == {exp}:
               time.sleep(1)""")
 

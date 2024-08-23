@@ -1,6 +1,6 @@
 import { loginForStudent, loginForTeacher } from '../../tools/login/login.js'
 import { ensureClass, openClassView, removeCustomizations, selectLevel } from "../../tools/classes/class";
-import { goToHedyLevel2Page, goToHedyLevel5Page } from '../../tools/navigation/nav.js';
+import { goToHedyLevel } from '../../tools/navigation/nav.js';
 
 const teachers = ["teacher1", "teacher4"];
 
@@ -36,7 +36,7 @@ teachers.forEach((teacher) => {
 
         // make sure they are visible
         loginForStudent();
-        goToHedyLevel2Page();
+        goToHedyLevel(2);
         cy.getDataCy('quiz').scrollIntoView().should('be.visible');
         cy.getDataCy('parsons').scrollIntoView().should('be.visible');
       });
@@ -68,7 +68,7 @@ teachers.forEach((teacher) => {
           .should("not.exist")
 
         loginForStudent();
-        goToHedyLevel5Page();
+        goToHedyLevel(5);
         cy.getDataCy('quiz').should('not.exist');
         cy.getDataCy('parsons').should('not.exist');
       });
