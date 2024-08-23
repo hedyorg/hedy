@@ -20,11 +20,7 @@ class TestsLevel13(HedyTester):
             if naam.data == 'Felienne' and leeftijd.data == 37:
               print(f'''hallo jij!''')""")
 
-        self.multi_level_tester(
-            max_level=16,
-            code=code,
-            expected=expected
-        )
+        self.multi_level_tester(code=code, expected=expected, max_level=14)
 
     def test_equals(self):
         code = textwrap.dedent("""\
@@ -42,7 +38,7 @@ class TestsLevel13(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            max_level=16,
+            max_level=14,
             expected=expected,
             expected_commands=['ask', 'ask', 'if', 'and', 'print']
         )
