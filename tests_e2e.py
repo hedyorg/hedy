@@ -1597,6 +1597,63 @@ class TestMultipleAccounts(AuthHelper):
         }
         self.post_data('for-teachers/create-accounts', body, expect_http_code=200)
 
+
+class TestHedyPage(AuthHelper):
+    def test_valid_parsons(self):
+        self.given_fresh_user_is_logged_in()
+
+        # WHEN attempting a parsons program
+        # THEN should store attempt and receive OK from server
+        body = {
+            'id': utils.random_id_generator(12),
+            'username': self.user['username'],
+            'level': 1,
+            'exercise': '1',
+            'order': ['1', '2', '3', '4'],
+            'correct': '1',
+            'timestamp': utils.timems()
+        }
+
+        self.post_data('store_parsons_order', body, expect_http_code=204)
+
+    def test_invalid_parsons(self):
+        self.given_fresh_user_is_logged_in()
+
+        invalid_bodies = [
+            {},
+            {
+                'id': str(utils.random_id_generator(12)),
+                'username': self.user,
+                'level': '1',
+                'exercise': '1',
+                'order': ['1', '2', '3', '4'],
+                'correct': '1',
+                'timestamp': utils.timems()
+            },
+            {
+                'id': str(utils.random_id_generator(12)),
+                'username': self.user,
+                'level': '1',
+                'exercise': '1',
+                'order': [1, 2, 3, 4],
+                'correct': '1',
+                'timestamp': utils.timems()
+            },
+            {
+                'id': str(utils.random_id_generator(12)),
+                'username': self.user,
+                'level': '1',
+                'exercise': 1,
+                'order': ['1', '2', '3', '4'],
+                'correct': '1',
+                'timestamp': utils.timems()
+            }
+        ]
+
+        for body in invalid_bodies:
+            self.post_data('store_parsons_order', body, expect_http_code=400)
+
+
 # *** CLEANUP OF USERS CREATED DURING THE TESTS ***
 
 

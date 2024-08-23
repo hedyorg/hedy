@@ -1,0 +1,112 @@
+<div id="adventure_tables">
+  <div class="w-full overflow-x-auto border rounded-lg">
+    <table class="w-full" data-cy="adventure_table">
+        <thead>
+          <tr class="bg-blue-300 text-blue-900 h-12">
+            <th class="px-2 py-2 text-center">{{_('students')}}</th>
+            {% for adventure in adventure_table['adventures'][level] %}
+            <th class="px-2 py-2 text-center">{{ adventure.name }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for student in adventure_table['students'] %}
+          <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %} h-12">
+            <td data-cy="student_{{ student }}" class="text-center font-medium text-blue-900 px-4">{{student}}</td>
+            {% for adventure in adventure_table['adventures'][level] %}
+            {% set student_adventure_id = (student ~ '-' ~ adventure.id ~ '-' ~ level) | lower %}
+            {% set student_adventure = adventure_table.student_adventures[student_adventure_id] %}
+            {% if student_adventure_id in adventure_table['student_adventures'] %}
+            <td class="text-center">
+              <div class="flex justify-center gap-3 mt-1">
+                <input type="checkbox"
+                  class="student_adventure_checkbox text-green-700 text-center text-sm cursor-pointer {% if student_adventure.ticked %}fa-solid fa-check{% endif %}"
+                  {% if student_adventure.ticked %}checked{% endif %}
+                  hx-post="/for-teachers/grid_overview/{{ class_info.id }}/change_checkbox?level={{level}}&student={{student}}&adventure={{adventure.id|lower}}"
+                  hx-target="#adventure_tables" hx-swap="outerHTML" hx-trigger="change">
+                <div title="{{ _('view_program') }}">
+                  <a class="no-underline cursor-pointer text-gray-800 hover:bg-gray-400/50 hover:rounded-full"
+                    href='/hedy/{{student_adventure.program}}/view'><i class="fa-regular fa-eye"></i></a>
+                </div>
+              </div>
+            </td>
+            {% else %}
+            <td class="text-center" title="{{ _('waiting_for_submit') }}">
+              <span class="fa-regular fa-hourglass text-gray-600"></span>
+            </td>
+            {% endif %}
+            {% endfor %}
+    
+          </tr>
+          {% endfor %}
+          {% if not class_info.students %}
+            <tr class="bg-gray-200 h-12">
+              <td colspan="{{ adventure_table['adventures'][level]|length + 1}}" class="text-center font-medium text-blue-900 px-4"> {{_('no_students')}} </td>
+            </tr>
+          {% endif %}
+        </tbody>
+      </table>
+  </div>
+  <button class="green-btn mt-4 w-fit" data-cy="add_student" _="on click toggle the *display of #add_students_options">{{_('add_students')}}</button>
+  <div id="add_students_options" class="flex flex-row gap-2 items-left my-4" style="display: none;">
+    <button class="green-btn" data-cy="copy_join_link" onclick='hedyApp.copy_join_link("{{class_info.link}}", {{_('copy_link_success')|default(None)|tojson}})'>{{_('copy_join_link')}}</button>
+    <button class="green-btn" data-cy="invite_student" onclick='hedyApp.invite_student("{{class_info.id}}", {{_('invite_prompt')|default(None)|tojson}})'>{{_('invite_by_username')}}</button>
+    <button class="green-btn" data-cy="create_accounts" onclick="window.open('/for-teachers/create-accounts/{{ class_info.id }}', '_self')">{{_('create_accounts')}}</button>
+  </div>
+  <div class="mt-10">
+    <h2>
+      {{_('student_information')}}
+      <button type="button" _="on click toggle .hidden on #student_table_explanation" title="{{_('more_info')}}">
+        <svg class="fill-current h-4 w-4 text-blue-500 cursor-pointer !m-0 !p-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path
+            d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+        </svg>
+      </button>
+    </h2>
+    <div id="student_table_explanation" class="hidden mb-4 flex flex-col gap-2 border border-black rounded-lg p-4 text-sm h-full w-full">
+      {{_('student_information_explanation')}}      
+    </div>
+    <div class="w-full overflow-x-auto border rounded-lg">
+      <table class="w-full" id="actions_table" data-cy="adventure_table">
+        <thead>
+          <tr class="bg-blue-300 text-blue-900">
+            <th class="px-2 py-2 text-center">{{_('students')}}</th>
+            <th class="px-2 py-2 text-center">{{_('class_logs')}}</th>
+            <th class="px-2 py-2 text-center">{{_('highest_level_reached')}}</th>
+            <th class="px-2 py-2 text-center">{{_('adventures_ticked')}}</th>        
+            <th class="px-2 p-2 bg-blue-900 text-white">{{_('actions')}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for student in adventure_table['students'] %}
+          <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
+            <td data-cy="student_{{ student }}" class="text-center font-medium text-blue-900  px-4">{{ student }}</td>
+            <td data-cy="student_{{ student }}" class="text-center font-medium text-blue-900"> {{ students_info[student].last_login }} </td>
+            <td data-cy="student_{{ student }}" class="text-center font-medium text-blue-900"> {{ students_info[student].highest_level }}  </td>      
+            <td data-cy="student_{{ student }}" class="text-center font-medium text-blue-900"> {{ students_info[student].adventures_ticked }} </td>      
+            <td class="text-center text-blue-900">
+              <div class="flex justify-center gap-6">
+                <button title="{{ _('change_password') }}" class="flex flex-col items-center" onclick='hedyApp.change_password_student("{{student}}", {{_('enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})'>
+                  <span class="fas fa-pen block mb-4 mt-4"></span>
+                </button>
+                <button title="{{ _('programs') }}" class="flex flex-col items-center" onclick=window.open('/programs?user={{student}}')>
+                  <span class="fas fa-code block mb-4 mt-4"></span>
+                </button>
+                <button title="{{ _('remove') }}" class="flex flex-col items-center" hx-get="/for-teachers/class/{{ class_info['id'] }}/remove_student_modal/{{ student }}?level={{ level }}" hx-target="#modal_target"
+                    id="duplicate_class" data-cy="remove_student_{{ student }}">
+                    <span class="fa-solid fa-trash text-red-500 block mb-4 mt-4 ltr:mr-4 rtl:ml-4"></span>
+              </button>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+          {% if not class_info.students %}
+            <tr class="bg-gray-200 h-12">
+              <td colspan="5" class="text-center font-medium text-blue-900 px-4">{{_('no_students')}}</td>
+            </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

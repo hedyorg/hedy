@@ -1,3 +1,7 @@
+import {goToHedyLevel} from "../tools/navigation/nav";
+import {codeEditorContent} from "../tools/programs/program";
+
+
 describe('Test editor box functionality', () => {
 
   it('Test echo, print, ask level 1', () => {
@@ -6,7 +10,7 @@ describe('Test editor box functionality', () => {
     visitLevel(1);
 
     cy.focused().type('print Hello world\nask Hello!\necho');
-    codeMirrorContent().should('have.text', 'print Hello worldask Hello!echo');
+    codeEditorContent().should('have.text', 'print Hello worldask Hello!echo');
 
     cy.get('#debug_button').click();
     cy.wait('@parse')
@@ -220,6 +224,8 @@ describe('Test editor box functionality', () => {
     cy.get('#debug_continue').click();
     cy.get('#output').should('contain.text', 'Hedy is fun\nHedy is fun\nHedy is fun');
   });
+
+
   it('Test if with repeat statement inside ', () => {
     cy.intercept('/parse').as('parse');
 
@@ -256,6 +262,8 @@ describe('Test editor box functionality', () => {
     cy.get('#debug_continue').click();
     cy.get('#output').should('contain.text', 'Hedy is fun');
   });
+
+
   it('Test repeat with blocks', () => {
     cy.intercept('/parse').as('parse');
 
@@ -328,6 +336,8 @@ describe('Test editor box functionality', () => {
     cy.get('#debug_continue').click();
     cy.get('#output').should('contain.text', 'Welcome Hedy');
   });
+
+
   it('Test ifelse with condition false', () => {
     cy.intercept('/parse').as('parse');
     visitLevel(8);
@@ -379,9 +389,9 @@ describe('Test editor box functionality', () => {
       .eq(2)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
-    
+
     cy.wait(100);
-    
+
     cy.get('#debug_continue').should('not.be.visible')
     cy.get('#turtlecanvas').invoke('height').should('gte', 100)
   });
@@ -468,13 +478,13 @@ describe('Test editor box functionality', () => {
       expect(texts).to.deep.eq('repeat 1 times'.split(' '));
     });
     cy.get('#debug_continue').click();
-    
+
     cy.get('.cm-debugger-current-line > span').then(els => {
       const texts = [...els].map(getText);
       expect(texts).to.deep.eq('if x is x'.split(' '));
     });
     cy.get('#debug_continue').click();
-    
+
     cy.get('.cm-debugger-current-line > span').then(els => {
       const texts = [...els].map(getText);
       expect(texts).to.deep.eq(['print', "'a'"]);
@@ -484,19 +494,19 @@ describe('Test editor box functionality', () => {
 
     cy.get('#output').should('contain.text', 'a');
   });
-  
+
   describe('Test play with no variables', () => {
     for (let i = 1; i <= 10; i++) {
       it ('Test play no variables level ' + i, () => {
         cy.intercept('/parse').as('parse');
-        
+
         visitLevel(i)
-        
+
         cy.focused().type("play C4\nplay D4\nplay E4\n");
-    
+
         cy.get('#debug_button').click();
         cy.wait('@parse')
-        
+
         for (let line = 0; line < 3; line++) {
           codeMirrorLines()
             .eq(line)
@@ -511,11 +521,11 @@ describe('Test editor box functionality', () => {
     for (let i = 2; i <= 11; i++) {
       it ('Test play variables level ' + i, () => {
         cy.intercept('/parse').as('parse');
-        
+
         visitLevel(i)
-        
+
         cy.focused().type("note1 is C4\nnote2 is D4\nnote3 is E4\nplay C4\nplay D4\nplay E4\n");
-    
+
         cy.get('#debug_button').click();
         cy.wait('@parse')
 
@@ -545,7 +555,7 @@ describe('Test editor box functionality', () => {
     cy.get('#debug_continue').click();
 
     cy.get('#output').should('contain.text', 'hello world');
-    
+
     codeMirrorLines()
       .eq(1)
       .should('have.class', 'cm-debugger-current-line');
@@ -567,11 +577,7 @@ describe('Test editor box functionality', () => {
  */
 function clearViaBackspace() {
   cy.focused().type('{moveToEnd}' + '{backspace}'.repeat(200));
-  codeMirrorContent().should('have.text', '');
-}
-
-function codeMirrorContent() {
-  return cy.get('#editor > .cm-editor > .cm-scroller > .cm-content');
+  codeEditorContent().should('have.text', '');
 }
 
 function codeMirrorLines() {
@@ -612,8 +618,8 @@ function checkPartialDebugLine(lineHeight, line, begginingOfLine) {
 }
 
 function visitLevel(level) {
-  cy.visit(`${Cypress.env('hedy_page')}/${level}#default`);
-  codeMirrorContent().click();
+  goToHedyLevel(level);
+  codeEditorContent().click();
   cy.focused().clear();
 }
 

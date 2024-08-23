@@ -2225,10 +2225,10 @@ def store_parsons_order():
     attempt = {
         'id': utils.random_id_generator(12),
         'username': current_user()['username'] or f'anonymous:{utils.session_id()}',
-        'level': int(body['level']),
-        'exercise': int(body['exercise']),
+        'level': str(body['level']),
+        'exercise': str(body['exercise']),
         'order': body['order'],
-        'correct': 1 if body['correct'] else 0,
+        'correct': '1' if body['correct'] else '0',
         'timestamp': utils.timems()
     }
 
