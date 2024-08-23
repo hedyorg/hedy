@@ -188,8 +188,9 @@ class Value:
         self.boolean_values = bools
 
     def __str__(self):
-        if type(self.data) is list:
-            return ', '.join([localize(d.data, d.numeral_system, d.boolean_values) for d in self.data])
+        if isinstance(self.data, list):
+            elements = [str(localize(d.data, d.numeral_system, d.boolean_values)) for d in self.data]
+            return f"[{', '.join(elements)}]"
         return str(localize(self.data, self.numeral_system, self.boolean_values))
 
     def __eq__(self, other):
