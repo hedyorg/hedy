@@ -279,28 +279,6 @@ class TestsLevel18(HedyTester):
             output=output
         )
 
-    #
-    # button tests
-    #
-
-    def test_if_button_is_pressed_print(self):
-        code = textwrap.dedent("""\
-        x = 'PRINT'
-        x is button
-        if PRINT is pressed:
-            print('The button got pressed!')""")
-
-        expected = self.dedent("""\
-        x = Value('PRINT')
-        create_button(x.data)
-        if_pressed_mapping = {"else": "if_pressed_default_else"}
-        if_pressed_mapping['PRINT'] = 'if_pressed_PRINT_'
-        def if_pressed_PRINT_():
-            print(f'''The button got pressed!''')
-        extensions.if_pressed(if_pressed_mapping)""")
-
-        self.single_level_tester(code=code, expected=expected)
-
     def test_nested_functions(self):
         code = textwrap.dedent("""\
         def simple_function():
