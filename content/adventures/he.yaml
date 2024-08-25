@@ -1,43 +1,49 @@
 adventures:
     story:
-        name: Story
-        default_save_name: Story
+        name: '`{ask}` סיפור'
+        default_save_name: סיפור
         description: סיפור
         levels:
             1:
                 story_text: |
-                    In level 1 you can make a story with a different main character that you enter yourself.
+                    בשלב 1 אתם יכולים  ליצור סיפור עם דמות ראשית שונה, שאתם כותבים בעצמכם
 
-                    In the first line, use `{ask}` and ask who the main character of the story will be.
+                    בשורה הראשונה, התשמשו ב `{ask}` ושאלו מי יהיה הדמות הראשית בסיפור
 
-                    After that first line, start with `{print}` if the sentence needs to be printed.
-                    You use `{echo}` if you want your main character to be at the end of the sentence.
+                    אחרי השורה הראשונה, כתוב `{print}`   אם צריך להדפיס את המשפט
+
+                    השתמשו ב `{echo}`  אם אתם רוצים שהדמות הראשית תהיה בסוף המשפט
                 example_code: |
                     ```
-                    {ask} The main character of this story is
-                    {print} The main character is now going to walk in the forest
-                    {echo} They're a bit scared,
-                    {print} They hear crazy noises everywhere
-                    {print} They're afraid this is a haunted forest
+                    {ask} הדמות הראשית בסיפור היא 
+
+                    {print}  גיבור הסיפור הולך לטיול ביער
+                    {echo}  הוא קצת מפחד,
+                    {print}  הוא שומע קולות מפחידים בכל עבר
+                    {print}  הוא מפחד שהיער רדוף רוחות
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Can you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?
+                    ### תרגול
+                    עכשיו תצרו סיפור משלכם עם  6 שורות קוד לפחות
+                    הסיפור לא יהיה זהה לדוגמא
+                    השתמשו בפקודת `{ask}` ופקודת `{echo}`
+                    הסיפור יהיה על איזה נושא שאתם בוחרים
+                    אם קשה לכם לבחור נושא, השתמשו באחת מאלו: ללכת לסרט, משחק ספורט, או יום בגן חיות
             2:
                 story_text: |
-                    In level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.
+                    בשלב 2 תוכל להפוך את הסיפור שלך למהנה יותר. שמו של הדמות הראשית שלך יכול להופיע כעת בכל מקום במשפט.
 
-                    You do have to program a little bit extra for that. You must now name your main character first.
+                    עם זאת, תצטרך לתכנת קצת יותר בשביל זה. עליך קודם כל להגדיר את שמו של הדמות הראשית שלך.
 
-                    You can then put that name anywhere in a sentence.
+                    לאחר מכן, תוכל לשים את השם הזה בכל מקום במשפט.
                 example_code: |-
                     ```
-                    name {is} {ask} What is the name of the main character?
-                    {print} name is now going to run in the woods
-                    {print} name is a bit scared
-                    {print} Suddenly she hears a crazy noise...
+                    שם {is} {ask}  מהו שמו של הגיבור הראשי?
+                    {print} שם הולך לרוץ ביער
+                    {print} שם קצת מפחד
+                    {print} לפתע הוא שומע קול משוגע
                     {sleep}
-                    {print} name is afraid this is a haunted forest
+                    {print} שם מפחד שהיער רדוף רוחות
                     ```
                 story_text_2: |
                     ### תרגיל
@@ -50,7 +56,7 @@ adventures:
                     **בונוס** הוסף את הפקודה `{sleep}` לקוד שלך כדי לבנות מתח בסיפור.
             3:
                 story_text: |
-                    In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:
+                    בשלב 3 תוכל להפוך את הסיפור שלך למהנה יותר. תוכל להשתמש באקראיות עבור כל מפלצת, חיה או מכשול אחר, כמו זה:
                 example_code: |
                     ```
                     animals {is} 🦔, 🐿, 🦉, 🦇
@@ -75,122 +81,133 @@ adventures:
                     הוסיפו שורות קוד חדשות לסיפור שלכם, כך שכל הפקודות החדשות יהיו חלק מהסיפור שלכם לפחות פעם אחת.
                 example_code_3: |
                     ```
-                    {print} His backpack got way too heavy.
-                    {print} Inside were a bottle of water, a flashlight and a brick.
-                    bag {is} water, flashlight, brick
-                    dump {is} {ask} Which item should he dump?
-                    {remove} dump {from} bag
+                    {print} התיק שלו היה כבד מדי
+                    {print} בפנים היו בקבוק מים, פנס ובלטה
+                    תיק {is} מים, פנס, בלטה
+                    להסיר {is} {ask} מה כדאי להסיר?
+                    {remove} להסיר {from} תיק
                     ```
             4:
                 story_text: |
-                    ### Exercise
-                    Copy the example code and finish it by adding quotation marks on the blanks in lines 1 and 2.
-                    The blanks in line 3 and 4 should not be replaced by quotation marks, but a `{sleep}` and a `{clear}` command. Can you make it work?
+                    ### תרגיל 1
+                    העתק את קוד הדוגמה והשלם אותו על ידי הוספת גרשיים במקומות החסרים בשורות 1 ו-2.
+                    אל תחליף בגרשיים את הרווחים בשורות 3 ו4 אלא בפקודות  `{sleep}` ו  `{clear}`האם תוכלו לגרום לזה לעבוד?
 
-                    ### Exercise 2
-                    Go back to the previous level and copy your story code. Make the code work in this level by adding quotation marks in the right spots.
-                    Mind: The variables in your own story should be outside of the quotation marks. Just like the second line of the example code. In that line the variable name is placed outside of the quotation marks.
+                    ### תרגיל 2
+                    חזור לשלב הקודם והעתק את קוד הסיפור שלך. עשה שהקוד יעבוד בשלב הזה על ידי הוספת גרשיים במקומות הנכונים.
+                    שים לב: המשתנים בסיפור שלך צריכים להיות מחוץ לגרשיים, בדיוק כמו בשורה השנייה של קוד הדוגמה. בשורה זו, שם המשתנה ממוקם מחוץ לגרשיים.
                 example_code: |
                     ```
-                    name {is} {ask} _ What is your name? _
-                    {print}  _ The main character is called _ name
+                    שם {is} {ask} _ מה שמך? _
+                    {print}  _ הדמות הראשית נקראת _ שם
                     _
                     _
-                    {print} name  _ is now going to walk in the woods _
-                    {print} name _ is a bit scared _
-                    animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _ He hears the sound of a _ animals {at} {random}
-                    {print} name _ is afraid this is a haunted forest _
+                    {print} שם  _ הולך לטיול ביער _
+                    {print} שם _ מעט מפחד _
+                    חיות {is} 🦔, 🐿, 🦉, 🦇
+                    {print} _ הוא שומע קולות של _ חיות {at} {random}
+                    {print} שם _ מפחד שהיער רדוף רוחות _
                     ```
             5:
                 story_text: |
-                    In this level you can program different endings, which will make your story even more fun.
+                    בשלב זה תוכל לתכנת סיומים שונים, מה שיהפוך את הסיפור שלך למהנה עוד יותר. בקוד הדוגמה תוכל לראות איך ליצור שני סיומים שונים.
 
-                    Think of two endings for your story, for example:
+                    ### תרגיל 1
+                    כתוב סיפור קצר חדש של לפחות 6 שורות קוד על נושא לבחירתך.
+                    אין לך השראה? בחר באחד מהנושאים הבאים: גיבור על, יום משעמם בבית הספר, נתקע על אי בודד.
 
-                    - The princess is walking through the forest
-                    - She runs into a monster
+                    כעת תן לשחקן אפשרות לבחור בין סוף טוב לסוף רע, בדיוק כמו בקוד הדוגמה.
+                    תכנת את שני הסיומים.
 
-                    - Happy ending: She takes her sword and the monster quickly runs away
-                    - Bad Ending: The monster eats the princess
-
-                    You can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `{if}`, and then you have already made a whole program!
+                    העתק את הסיפור שיצרת בהרפתקת הסיפור שלך בשלבים הקודמים.
+                    מצא דרך להוסיף לפחות 2 פקודות `{if}` ו- `{else}` לסיפור שלך.
+                    זה יכול להיות עם סוף טוב או רע, אבל אתה יכול גם לנסות למצוא דרכים אחרות לשלב את הפקודות.
                 example_code: |
                     ```
-                    name {is} {ask} 'Who is walking in the forest?'
-                    {print} name ' walks through the forest'
-                    {print} name ' encounters a monster'
-                    end {is} {ask} 'Would you like a good or a bad ending?'
-                    {if} end {is} good {print} name ' takes the sword and the monster quickly runs away'
-                    {else} {print} 'The monster eats ' name
+                    שם {is} {ask} 'מי הולך ביער?'
+                    {print} שם ' הולך דרך היער'
+                    {print} שם ' פוגש מפלצת'
+                    סוף {is} {ask} 'האם תרצה סוף רע או סוף טוב?'
+                    {if} סוף {is} טוב {print} שם ' מוציא את החרב והמפלצת בורחת במהירות'
+                    {else} {print} 'המפלצת אוכלת את  ' שם
                     ```
             7:
                 story_text: |
                     בסיפור, מישהו חוזר על מילים. לדוגמא, כשמישהו קורא לעזרה או שר שיר.
-                    אתה יכול להוסיף חזרות כאלה בסיפור שלך, ולהשתמש ב`{repeat}`.
+                    אתה יכול להוסיף חזרות כאלה בסיפור שלך בשלב הזה, ולהשתמש ב`{repeat}`.
 
                     ### תרגיל
                     הוסף חזרות לסיפור שלך. לך חזרה לתוכנית השמורה שלך, בחר את הסיפור שלך מהשלב הקודם
                     בחר שורה שכוללת את הפקודה `{print}` ותחזור עליה!
                 example_code: |
                     ```
-                    {print} 'The prince kept calling for help'
-                    {repeat} 5 {times} {print} 'Help!'
-                    {print} 'Why is nobody helping me?'
+                    {print} 'הנסיך קרא לעזרה שוב ושוב'
+                    {repeat} 5 {times} {print} 'הצילו!'
+                    {print} 'למה אף אחד לא עוזר לי?'
                     ```
             8:
                 story_text: |
-                    In this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!
+                    בשלב הזה תוכל להשתמש בכמה שורות בתוך פקודות `{if}` שלך, כך שתוכל לשדרג את הסיום השמח או העצוב שלך!
+                    ###תרגיל 1
+                    קוד הדוגמה מציג שני סיומים שונים; אחד שבו הדמויות קופצות לתוך מכונת זמן ואחד שבו הן לא.
+                    השלם את החסר עם לפחות משפט אחד לכל סיום.
+                    (תוספת) הארך את הסיפור. מה קורה בסיפור? תוכל גם להוסיף פקודת `{ask}` שנייה עם אפשרויות שונות.
+
+                    ###תרגיל 2
+                    חזור לתוכניות ששמרת, בחר את תוכנית הסיפור שלך משלב 5. כעת כתוב סוף טוב וסוף רע, כאשר כל אחד מהם יהיה באורך של לפחות שלוש שורות!
                 example_code: |
                     ```
-                    {print} 'OH NO! The T-rex is closing in!'
-                    end = {ask} 'Do you want a happy or a sad ending?'
-                    {if} end {is} happy
-                        {print} 'Just in time Richard jumps back into the time machine!'
-                        {print} 'Michael types in the code and...'
-                        {print} '💥ZAP!💥'
-                        {print} 'They are back in their garage'
+                    {print} 'אוי לא! הטי-רקס מתקרב!'
+                    סוף = {ask} 'אתה רוצה סוף שמח או סוף עצוב??'
+                    {if} שם {is} שמח
+                        {print} 'בדיוק בזמן ריצ'רד קופץ בחזרה לתוך מכונת הזמן.!'
+                        {print} _
                     {else}
-                        {print} 'Michael yells COME ON RICHARD! RUN FASTER!'
-                        {print} 'But Richard is too slow...'
-                        {print} 'The T-rex closes in and eats him in one big bite!🦖'
+                        {print} 'אוי לא! ריצ׳רד איטי מדי...'
+                        {print} _
                     ```
             9:
                 story_text: |
-                    In this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.
+                    בשלב זה אתם יכולים להשתמש בפקודות `{if}` ו `{repeat}` בתוך פקודות `{if}` ו `{repeat}` אחרות
+                    זה נותן לך הרבה אפשרויות ועוזר לך מאוד להפוך את הסיפור שלך לאינטראקטיבי.
+
+                    ### תרגיל 1
+                    השלם את הקוד כך ש  `{if}` עובד.
+
+                    ### תרגיל 2
+                    הוסף `{if}` ו  `{else}` לחלק בסיפור שבו רובין חוזר הביתה.
+
+                    ### תרגיל 3
+                    חזור לסיפור בשלב 8 והשתמש ב2 פקודות `{if}` בתוך `{if}` אחר.
                 example_code: |
                     ```
-                    {print} 'Robin is walking downtown'
-                    location = {ask} 'Is Robin going into a shop, or does she go home?'
-                    {if} location {is} shop
-                        {print} 'She enters the shop.'
-                        {print} 'Robin sees an interesting looking book'
-                        book = {ask} 'Does Robin buy the book?'
-                        {if} book {is} yes
-                            {print} 'Robin buys the book and goes home'
+                    {print} 'רובין הולך בעיר'
+                    מיקום = {ask} 'רובין נכנסת לחנות או שהיא הולכת הביתה?'
+                    {if} מיקום {is} חנות
+                        {print} 'היא נכנסת לחנות.'
+                        {print} 'רובין רואה ספר מעניין'
+                        ספר = {ask} 'האם רובין קונה את הספר?'
+                        {if} ספר {is} כן
+                            {print} 'רובין קונה את הספר והולכת הביתה'
                         {else}
-                            {print} 'Robin leaves the shop and goes home'
+                            {print} 'רובין יוצאת מהחנות והולכת הביתה'
                     {else}
-                        {print} 'Robin goes home'
+                        {print} 'רובין הולכת הביתה'
                     ```
             10:
                 story_text: |
-                    In this level you can use the {for} command in your story. In this way you could easily program the children's book 'brown bear, brown bear, what do you see'.
+                    בשלב הזה תוכל להשתמש בפקודת {for} בסיפור שלך. כך תוכל לתכנת בקלות את ספר הילדים "דוב חום, דוב חום, מה אתה רואה?".
+
+                    ### Exercise
+
+                    הסתכלו בסיפור <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> 
+                     </a> אם אתם לא מכירים אותו, תוודאו שזה נכתב כמו בספר  .
                 example_code: |
-                    ```
-                    animals = red bird, black sheep, green frog, yellow duck, little child
-                    {print} 'brown bear'
-                    {print} 'brown bear'
-                    {print} 'What do you see?'
-                    {for} animal {in} animals
-                        {print} 'I see a ' animal ' looking at me'
-                        {print} animal
-                        {print} animal
-                        {print} 'What do you see?'
-                    {print} 'I see all the animals looking at me!'
-                    ```
+                    חיות = _ , _ , _ 
+                    {print} 'דוב חום, דוב חום'
+                    {print} 'מה אתה רואה?'
             12:
-                story_text: In this level you can use the quotation marks to save multiple words in a variable.
+                story_text: "בשלב הזה תזדקק לגרשיים כדי לשמור מספר מילים במשתנה.\n\n###תרגיל\nמצא סיפור משלב קודם, כל שלב מתאים. כעת ודא שהגרשיים נוספו במקומות הנכונים."
                 example_code: |
                     ```
                     שם = 'מלכת אנגליה'
