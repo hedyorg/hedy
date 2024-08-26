@@ -260,7 +260,7 @@ async function afterLogin(loginData: Dict<boolean>) {
     return join_class(joinClass.id, joinClass.name);
   }
 
-  // If the user logs in for the first time -> redirect to the landing-page after signup
+  // If the user logs in for the first time -> redirect to the first-level after signup
   if (loginData['first_time']) {
     return redirect('hedy/1');
   }
