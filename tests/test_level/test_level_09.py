@@ -378,34 +378,6 @@ class TestsLevel9(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-    #
-    # button tests
-    #
-
-    def test_if_button_is_pressed_print_in_repeat(self):
-        code = textwrap.dedent("""\
-        button1 is button
-        repeat 3 times
-          if button1 is pressed
-            print 'wow'
-          else
-            print 'nah'""")
-
-        expected = self.dedent(f"""\
-         create_button('button1')
-         for __i in range({self.int_transpiled(3)}):
-           if_pressed_mapping = {{"else": "if_pressed_default_else"}}
-           if_pressed_mapping['button1'] = 'if_pressed_button1_'
-           def if_pressed_button1_():
-               print(f'wow')
-           if_pressed_mapping['else'] = 'if_pressed_else_'
-           def if_pressed_else_():
-               print(f'nah')
-           extensions.if_pressed(if_pressed_mapping)
-           time.sleep(0.1)""")
-
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
-
     def test_unexpected_indent(self):
         code = textwrap.dedent("""\
          print('repair')

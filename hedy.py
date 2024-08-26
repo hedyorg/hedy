@@ -301,7 +301,7 @@ commands_per_level = {1: ['ask', 'color', 'echo', 'forward', 'play', 'print', 't
 add_level(commands_per_level, level=2, add=['is', 'sleep'], remove=['echo'])
 add_level(commands_per_level, level=3, add=['add', 'at', 'from', 'random', 'remove', 'to'])
 add_level(commands_per_level, level=4, add=['clear'])
-add_level(commands_per_level, level=5, add=['assign_button', 'else', 'if', 'if_pressed', 'in', 'not_in'])
+add_level(commands_per_level, level=5, add=['else', 'if', 'if_pressed', 'in', 'not_in'])
 add_level(commands_per_level, level=6)
 add_level(commands_per_level, level=7, add=['repeat', 'times'])
 add_level(commands_per_level, level=8)
@@ -430,8 +430,6 @@ def get_list_keywords(commands, to_lang):
         for command in commands:
             if command == 'if_pressed':  # TODO: this is a bit of a hack
                 command = 'pressed'  # since in the yamls they are called pressed
-            if command == 'assign_button':  # but in the grammar 'if_pressed'
-                command = 'button'  # should be changed in the yaml eventually!
             try:
                 translation_commands.append(to_yaml_dict[command])
             except Exception:
@@ -2189,10 +2187,6 @@ else:{self.add_debug_breakpoint()}
         # In level 5 the values of variables are always strings (numbers are added in level 6)
         # So, to check if a number is not in a list of numbers with diff numeral system, we use localize()
         return f"localize({arg0}) not in [localize(__la) for __la in {arg1}]"
-
-    def assign_button(self, meta, args):
-        button_name = self.process_arg_for_data_access(args[0], meta.line)
-        return f"""create_button({button_name})"""
 
     def make_function_name(self, key_name):
         return f"if_pressed_{key_name}_"
@@ -4005,7 +3999,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
 
         has_clear = "clear" in commands
         has_turtle = "forward" in commands or "turn" in commands or "color" in commands
-        has_pressed = "if_pressed" in commands or "if_pressed_else" in commands or "assign_button" in commands
+        has_pressed = "if_pressed" in commands or "if_pressed_else" in commands
         has_music = "play" in commands
         has_sleep = "sleep" in commands
 
