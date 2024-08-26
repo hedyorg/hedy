@@ -78,9 +78,9 @@ to_latin_numeral_test_data = [
 ]
 
 
-@pytest.mark.parametrize("value, num_sys, bools, expected", localize_test_data)
-def test_localize(value, num_sys, bools, expected):
-    assert localize(value, num_sys, bools) == expected
+@pytest.mark.parametrize("value, num_sys, bool_sys, expected", localize_test_data)
+def test_localize(value, num_sys, bool_sys, expected):
+    assert localize(value, num_sys, bool_sys) == expected
 
 
 @pytest.mark.parametrize("value, expected", to_latin_numeral_test_data)
@@ -91,8 +91,8 @@ def test_to_latin_numeral(value, expected):
 value_str_test_data = [
     (Value('hello Hedy'), 'hello Hedy'),
     (Value(1, num_sys='Latin'), '1'),
-    (Value(True, bools={True: 'yes', False: 'no'}), 'yes'),
-    (Value(False, bools={True: 'yes', False: 'no'}), 'no'),
+    (Value(True, bool_sys={True: 'yes', False: 'no'}), 'yes'),
+    (Value(False, bool_sys={True: 'yes', False: 'no'}), 'no'),
 
     # TODO: before, lists were printed out by python, e.g. ['test', 1] and now they are printed as individual
     #  elements, e.g. [test, 1]. Should we wrap strings in lists in quotes for compatibility with the old way?
@@ -100,7 +100,7 @@ value_str_test_data = [
     (Value([Value('hello Hedy')]), '[hello Hedy]'),
     (Value([Value('hello'), Value('Hedy')]), '[hello, Hedy]'),
     (Value([Value(1, num_sys='Latin')]), '[1]'),
-    (Value([Value(False, bools={True: 'yes', False: 'no'})]), '[no]'),
+    (Value([Value(False, bool_sys={True: 'yes', False: 'no'})]), '[no]'),
 ]
 
 
