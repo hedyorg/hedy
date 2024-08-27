@@ -4,7 +4,7 @@
   {% set editor_height='22rem' %}
 {% endif %}
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
-  <div id="editor_area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4">
+  <div id="editor_area" class="relative grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-row-dense gap-4">
 
   <div id="fold_out_toggle_container" class="hidden absolute z-10 top-16 ltr:-left-2 rtl:-right-2 cursor-pointer" onclick="hedyApp.show_editor();">
     <div class="bg-green-500 text-white py-3 rounded-lg text-sm">
@@ -150,20 +150,21 @@
     </div>
   </div>
   <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
-  <div class="order-2 md:order-4" id="code_related_buttons">
-    <div id="button_row" class="flex flex-row mb-4">
-      <div id="run_button_container" class="flex-initial inline-flex items-center ltr:mr-1 rtl:ml-1">
-          <button id="runit" data-cy="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
+  <div class="order-2 lg:order-4" id="code_related_buttons">
+    <div id="button_row" class="flex flex-col md:flex-row mb-4">
+      <div id="run_button_container" class="flex flex-row flex-initial inline-flex items-center">
+          <button id="runit" data-cy="runit" class="green-btn ltr:mr-1 rtl:ml-1" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
             <span class="fa fa-play ltr:mr-1 rtl:ml-1"></span>
             {{_('run_code_button')}}
           </button>
-          <button id="stopit" data-cy="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
+          <button id="stopit" data-cy="stopit" class="red-btn ltr:mr-1 rtl:ml-1" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
+          <div class="flex-1 md:hidden"></div>
+          <button id="debug_button" class="blue-btn ltr:mr-1 rtl:ml-1" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
+              <span class="fa fa-bug ltr:mr-1 rtl:ml-1"></span>
+              {{_('debug')}}
+           </button>
       </div>
       <div id="debug_container" class="flex-initial ltr:mr-1 rtl:ml-1" inline-flex items-center">
-          <button id="debug_button" class="blue-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
-            <span class="fa fa-bug ltr:mr-1 rtl:ml-1"></span>
-            {{_('debug')}}
-          </button>
           <button id="debug_restart" class="green-btn hidden ltr:mr-2 rtl:ml-2" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
             <span class="fa fa-repeat ltr:mr-1 rtl:ml-1"></span>
             {{_('restart')}}
@@ -178,7 +179,7 @@
         </button>
       </div>
       <div class="flex-1"></div>
-      <div id="clear_button_container" class="flex-initial :mr-1 rtl:ml-1 inline-flex items-center">
+      <div id="clear_button_container" class="flex-initial mt-2 lg:mt-0 ltr:mr-1 rtl:ml-1 inline-flex items-center">
           <button id="clear" class="blue-btn" onclick="hedyApp.emptyEditor()">
             <span class="fa fa-broom ltr:mr-1 rtl:ml-1"></span>
             {{_('clear')}}
