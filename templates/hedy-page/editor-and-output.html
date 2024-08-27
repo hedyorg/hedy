@@ -151,7 +151,7 @@
   </div>
   <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
   <div class="order-2 md:order-4" id="code_related_buttons">
-    <div id="button_row" class="flex flex-row">
+    <div id="button_row" class="flex flex-row mb-4">
       <div id="run_button_container" class="flex-initial inline-flex items-center ltr:mr-1 rtl:ml-1">
           <button id="runit" data-cy="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
             <span class="fa fa-play ltr:mr-1 rtl:ml-1"></span>
