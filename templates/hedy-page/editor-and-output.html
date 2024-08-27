@@ -18,39 +18,6 @@
             <span>←</span>
         </div>
     </div>
-    <div id="button_row" class="absolute bottom-1 right-0 z-20 flex px-4 py-3 justify-end">
-        <div id="run_button_container" class="z-10 px-1 inline-flex items-center">
-            <button id="runit" data-cy="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
-              <span class="fa fa-play ltr:mr-1 rtl:ml-1"></span>
-              {{_('run_code_button')}}
-            </button>
-            <button id="stopit" data-cy="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
-        </div>
-        <div id="debug_container" class="z-10 px-1 inline-flex items-center">
-            <button id="debug_button" class="blue-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
-              <span class="fa fa-bug ltr:mr-1 rtl:ml-1"></span>
-              {{_('debug')}}
-            </button>
-            <button id="debug_restart" class="green-btn hidden ltr:mr-2 rtl:ml-2" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
-              <span class="fa fa-repeat ltr:mr-1 rtl:ml-1"></span>
-              {{_('restart')}}
-            </button>
-            <button id="debug_stop" class="green-btn hidden ltr:mr-2 rtl:ml-2" onclick="hedyApp.stopDebug()">
-              <span class="fa fa-stop ltr:mr-1 rtl:ml-1"></span>
-              {{_('stop')}}
-            </button>
-            <button id="debug_continue" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "continue")'>
-              <span class="fa fa-forward ltr:mr-1 rtl:ml-1 {% if g.dir == "rtl" %}rotate-180{% endif %}"></span>
-              {{_('continue')}}
-          </button>
-        </div>
-        <div id="clear_button_container" class="z-10 px-1 inline-flex items-center">
-            <button id="clear" class="blue-btn" onclick="hedyApp.emptyEditor()">
-              <span class="fa fa-broom ltr:mr-1 rtl:ml-1"></span>
-              {{_('clear')}}
-            </button>
-        </div>
-    </div>
       <!--The div below is used to send translation of search to Ace through the frontend-->
       <div id="search_placeholder" style="display: none":>{{_('search')}}</div>
       <!-- Status warning -->
@@ -184,6 +151,39 @@
   </div>
   <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
   <div class="order-2 md:order-4" id="code_related_buttons">
+    <div id="button_row" class="flex">
+      <div id="run_button_container" class="inline-flex items-center ltr:mr-1 rtl:ml-1">
+          <button id="runit" data-cy="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
+            <span class="fa fa-play ltr:mr-1 rtl:ml-1"></span>
+            {{_('run_code_button')}}
+          </button>
+          <button id="stopit" data-cy="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
+      </div>
+      <div id="debug_container" class="ltr:mr-1 rtl:ml-1" inline-flex items-center">
+          <button id="debug_button" class="blue-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
+            <span class="fa fa-bug ltr:mr-1 rtl:ml-1"></span>
+            {{_('debug')}}
+          </button>
+          <button id="debug_restart" class="green-btn hidden ltr:mr-2 rtl:ml-2" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
+            <span class="fa fa-repeat ltr:mr-1 rtl:ml-1"></span>
+            {{_('restart')}}
+          </button>
+          <button id="debug_stop" class="red-btn hidden ltr:mr-2 rtl:ml-2" onclick="hedyApp.stopDebug()">
+            <span class="fa fa-stop ltr:mr-1 rtl:ml-1"></span>
+            {{_('stop')}}
+          </button>
+          <button id="debug_continue" class="btn-shape bg-blue-400 hover:bg-blue-300 text-white hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "continue")'>
+            <span class="fa fa-forward ltr:mr-1 rtl:ml-1 {% if g.dir == "rtl" %}rotate-180{% endif %}"></span>
+            {{_('continue')}}
+        </button>
+      </div>
+      <div id="clear_button_container" class="ltr:mr-1 rtl:ml-1 inline-flex items-center">
+          <button id="clear" class="blue-btn" onclick="hedyApp.emptyEditor()">
+            <span class="fa fa-broom ltr:mr-1 rtl:ml-1"></span>
+            {{_('clear')}}
+          </button>
+      </div>
+    </div>
     {% if not raw %}
     <div id="not_logged_in_warning" data-cy="not_logged_in_warning" class="hidden bg-yellow-200 text-sm px-4 py-1 border-2 border-yellow-400 mb-4">
       {{ _('not_logged_in_cantsave') }}. <a href="/login" class="text-black">{{_('login_to_save_your_work')}}</a>
