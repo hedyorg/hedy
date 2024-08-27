@@ -216,26 +216,6 @@
   {% if get_syntax_language(g.lang) != "en" and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) %}
     {{ render_partial('hedy-page/htmx-language-switch-button.html', commands=commands) }}
   {% endif %}
-  <div id="read_outloud_button_container" class="dropdown relative">
-    <button id="read_outloud" data-cy="read_outloud" class="blue-btn rounded inline-flex items-center gap-2"
-    onclick="$('#speak_dropdown').slideToggle('medium');">
-    <span class="fa fa-volume-high ltr:mr-1 rtl:ml-1"></span>
-    <span>{{_('read_outloud')}}</span>
-    <svg id="speak_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-    </svg>
-    </button>
-    <div class="dropdown-menu dropdown-blue z-30 min-w-full h-48 overflow-auto" id="speak_dropdown"
-      style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
-      _="on mutation of @style
-          set arrow to #speak_arrow
-          if *display == 'none'
-              then remove .rotate-180 from arrow
-          else if not arrow.classList.contains('rotate-180')
-              add .rotate-180 to arrow
-          end">
-    </div>
-  </div>
 </div>
 
 <!-- progress bar -->

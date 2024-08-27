@@ -4,7 +4,7 @@
   {% set editor_height='22rem' %}
 {% endif %}
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
-  <div id="editor_area" class="relative grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-row-dense gap-4">
+<div id="editor_area" class="relative grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-row-dense gap-4">
 
   <div id="fold_out_toggle_container" class="hidden absolute z-10 top-16 ltr:-left-2 rtl:-right-2 cursor-pointer" onclick="hedyApp.show_editor();">
     <div class="bg-green-500 text-white py-3 rounded-lg text-sm">
@@ -150,7 +150,7 @@
     </div>
   </div>
   <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
-  <div class="order-2 lg:order-4" id="code_related_buttons">
+  <div class="order-2 lg:order-3" id="code_related_buttons">
     <div id="button_row" class="flex flex-col md:flex-row mb-4">
       <div id="run_button_container" class="flex flex-row flex-initial inline-flex items-center">
           <button id="runit" data-cy="runit" class="green-btn ltr:mr-1 rtl:ml-1" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
@@ -211,4 +211,28 @@
       {% endif %}
     </div>
   </div>
+  
+  <div class="order-4 flex flex-row justify-end">
+    <div id="read_outloud_button_container" class="dropdown relative">
+        <button id="read_outloud" data-cy="read_outloud" class="blue-btn rounded inline-flex items-center gap-2"
+        onclick="$('#speak_dropdown').slideToggle('medium');">
+        <span class="fa fa-volume-high ltr:mr-1 rtl:ml-1"></span>
+        <span>{{_('read_outloud')}}</span>
+        <svg id="speak_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+        </svg>
+        </button>
+        <div class="dropdown-menu dropdown-blue z-30 min-w-full h-48 overflow-auto" id="speak_dropdown"
+          style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
+          _="on mutation of @style
+              set arrow to #speak_arrow
+              if *display == 'none'
+                  then remove .rotate-180 from arrow
+              else if not arrow.classList.contains('rotate-180')
+                  add .rotate-180 to arrow
+              end">
+        </div>
+    </div>
+  </div>
+
 </div>
