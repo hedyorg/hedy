@@ -1,6 +1,6 @@
-<nav aria-label="Website" class="px-4 h-14 lg:h-16 w-full max-w-screen-2xl mx-auto">
-    {% block menu %}
-    <ul class="h-full w-full list-none flex flex-row items-center gap-x-2 xl:gap-x-6">
+<nav aria-label="Website" class="lg:px-4 lg:h-16 w-full max-w-screen-2xl mx-auto">
+{% block menu %}
+    <ul class="hidden h-full w-full list-none lg:flex lg:flex-row items-center gap-x-2 xl:gap-x-6">
         <li class="ltr:mr-2 rtl:ml-2"><a href="/" class="inline-block w-10 lg:w-12"><img src="{{static('/images/Hedy-logo-96x96-round.png')}}" height="48px" width="48px" alt="{{_('hedy_logo_alt')}}"></a></li>
         <li class="flex-initial menubar-item{% if current_page == 'start' %} active{% endif %}"><a class="menubar-text" href="/" title="{{_('nav_start')}}">{{_('nav_start')}}</a></li>
         <li class="flex-initial menubar-item{% if current_page == 'hedy' %} active{% endif %}"><a class="menubar-text" data-cy="hedy_button" href="/hedy" title="{{_('nav_hedy')}}">{{_('nav_hedy')}}</a></li>
@@ -73,6 +73,35 @@
       </li>
       <a class="blue-btn mr-3" href="/login">{{_('login')}}</a>
     {% endif %}
-    {% endblock %}
     </ul>
+    <div class="lg:hidden flex flex-row place-items-center h-12 mx-1">
+        <a href="/" class="items-center"><img src="{{static('/images/Hedy-logo-96x96-round.png')}}" height="36px" width="36px" alt="{{_('hedy_logo_alt')}}"></a>
+        <button class="flex-initial navbar-burger flex items-center text-blue-600 p-3" _="on click remove .hidden from #nav_menu then add .relative to #nav_menu">
+            <svg class="block h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <title>Mobile menu</title>
+                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+            </svg>
+        </button>
+        <div class="flex-1"></div>
+        <ul class="flex-initial list-none mt-0 place-items-center flex flex-row gap-x-2">
+            <li class="">
+                <a class="menubar-text whitespace-nowrap" data-cy="programs_button" href="/programs">
+                    <span class="fas fa-fw fa-list-alt"></span>
+                    <span class="hidden lg:inline-block">My programs</span>
+                </a>
+            </li>
+            <li class="dropdown relative z-20" data-cy="user_dropdown">
+                <a class="menubar-text cursor-pointer whitespace-nowrap" onclick="$('#profile_dropdown').slideToggle('medium');">
+                    <img src="/images/profile_images/1.png" height="36px" width="36px">
+                    <span data-cy="username" class="hidden lg:inline-block">Teacher1 </span>
+                </a>
+                <div class="dropdown-menu dropdown-blue" id="profile_dropdown" style="display: none;">
+                    <a class="dropdown-item" data-cy="my_account_button" href="/my-profile"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span>My account </a>
+                    <a class="dropdown-item" data-cy="public_profile_button" href="#" onclick="window.open('/user/teacher1')"><span class="fas fa-user ltr:mr-4 rtl:ml-4"></span>My public profile</a>
+                    <a class="dropdown-item" data-cy="logout_button" href="#" onclick="hedyApp.logout(); return false;"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span>Log out</a>
+                </div>
+            </li>        
+        </ul>
+    </div>
+{% endblock %}
 </nav>
