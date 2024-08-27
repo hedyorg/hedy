@@ -1,6 +1,6 @@
 import datetime
 
-from flask import make_response, redirect, request, session
+from flask import make_response, request, session
 from flask_babel import gettext
 
 from config import config
@@ -208,38 +208,6 @@ class AuthModule(WebsiteModule):
 
         remember_current_user(user)
         return resp
-
-    @route("/verify", methods=["GET"])
-    def verify_email(self):
-        username = request.args.get("username", None)
-        token = request.args.get("token", None)
-        if not token:
-            return make_response(gettext("token_invalid"), 400)
-        if not username:
-            return make_response(gettext("username_invalid"), 400)
-
-        # Verify that user actually exists
-        user = self.db.user_by_username(username)
-        if not user:
-            return make_response(gettext("username_invalid"), 403)
-
-        # If user is already verified -> re-direct to landing-page anyway
-        if "verification_pending" not in user:
-            return redirect("/landing-page")
-
-        # Verify the token
-        if token != user["verification_pending"]:
-            return make_response(gettext("token_invalid"), 403)
-
-        # Remove the token from the user
-        self.db.update_user(username, {"verification_pending": None})
-
-        # We automatically login the user
-        cookie = make_salt()
-        self.db.store_token({"id": cookie, "username": user["username"], "ttl": times() + SESSION_LENGTH})
-        remember_current_user(user)
-
-        return redirect("/landing-page")
 
     @route("/logout", methods=["POST"])
     def logout(self):

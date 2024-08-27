@@ -260,9 +260,9 @@ async function afterLogin(loginData: Dict<boolean>) {
     return join_class(joinClass.id, joinClass.name);
   }
 
-  // If the user logs in for the first time -> redirect to the landing-page after signup
+  // If the user logs in for the first time -> redirect to the first-level after signup
   if (loginData['first_time']) {
-    return redirect('landing-page/1');
+    return redirect('hedy/1');
   }
   // If the user is an admin -> re-direct to admin page after login
   if (loginData['admin']) {
@@ -274,5 +274,5 @@ async function afterLogin(loginData: Dict<boolean>) {
     return redirect('for-teachers');
   }
   // Otherwise, redirect to the programs page
-  redirect('landing-page');
+  redirect('');
 }
