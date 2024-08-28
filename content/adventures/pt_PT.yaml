@@ -190,83 +190,93 @@ adventures:
                     ```
             10:
                 story_text: |
-                    In this level you can use the {for} command in your story. In this way you could easily program the children's book 'Brown bear, Brown bear, what do you see'.
+                    Neste nível podes usar o comando {for} na tua história. Desta maneira, podes facilmente programar o livro infantil 'Urso Castanho, Urso Castanho, o que vês aqui?'.
 
-                    ### Exercise
+                    ### Exercício
 
-                    Look at <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> the story</a> if you do not know it, and make sure it is printed as in the book.
-                example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
+                    Vai ver <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> a história</a>, se ainda não a conheces, e assegura-te que é escrita conforme está no livro.
+                example_code: "```\nanimais = _ , _, ­­­_  \n{print} 'Urso Castanho, Urso Castanho'\n{print} 'O que vês aqui?'\n```\n"
             12:
-                story_text: |
-                    In this level you can use the quotation marks to save multiple words in a variable.
+                story_text: |-
+                    Neste nível, vamos precisar das aspas para salvar múltiplas palavras numa variável.
+
+                    ### Exercício
+
+                    Encontra uma história de um nível anterior, qualque nível serve. Agora, garante que adicionas as aspas nos locais correctos.
                 example_code: |
                     ```
-                    name = 'The Queen of England'
-                    {print} name ' was eating a piece of cake, when suddenly...'
+                    nome = 'A Rainha de Inglaterra'
+                    {print} nome ' estava a comer uma fatia de bolo, quando de repente...'
                     ```
             13:
                 story_text: |
-                    By using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.
+                    Usando os comandos `{and}` e `{or}` , podes tornar as tuas histórias ainda mais versáteis. Podes colocar duas questões e responder à combinação de ambas as respostas.
+
+                    ### Exercício 1
+                    Observa o código de exemplo e completa-o. Em seguida, inclui mais 2 códigos `{if}` com `{and}` ou `{or}`.
+
+                    ### Exercício 2
+                    Encontra uma história de um nível anterior e adiciona um `{and}` ou `{or}`.
                 example_code: |
                     ```
-                    {print} 'Our hero is walking through the forest'
-                    {print} 'The path splits two ways'
-                    path = {ask} 'Which path should she choose?'
-                    weapon = {ask} 'What weapon does she draw?'
-                    {if} path {is} 'left' {and} weapon {is} 'sword'
-                        _
+                    {print} 'O nosso herói caminha pela floresta'
+                    {print} 'O caminho divide-se em dois'
+                    caminho = {ask} 'Qual caminho deve escolher?'
+                    arma = {ask} 'Que arma deve pegar?'
+                    {if} caminho {is} 'esquerda' {and} arma {is} 'espada'
+                    	_
                     ```
             15:
                 story_text: |
-                    Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game == 'on'` so you can play until the game is over.
-                    Or you can use `{while} sword == 'lost'` so the player can't continue the game until they have found something.
+                    Recorrendo ao ciclo `{while}` podes tornar as tuas histórias mais interessantes. Por exemplo, podes usar `{while} game == 'on'` para que possas jogar até o jogo chegar ao fim.
+                    Ou então podes usar `{while} sword == 'lost'` para que o jogador não possa continuar o jogo, até que encontre algum objecto.
 
-                    ### Exercise
-                    The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
+                    ### Exercício
+                    O código de exemplo mostra-te como usar o ciclo `{while}` numa história. Agora, **pensa no teu próprio cenário** no qual o jogador tem de encontrar algo antes que possa continuar.
                 example_code: |
                     ```
-                    keys = 'lost'
-                    {print} 'You are standing in your garden and you have lost your keys.'
-                    {print} 'Where do you want to look for them?'
-                    {print} 'You can choose: tree, flowerbed, rock, postbox'
-                    {while} keys == 'lost'
-                        location = {ask} 'Where do you want to look?'
-                        {if} location == 'flowerbed'
-                            {print} 'Here they are!'
-                            keys = 'found'
-                        {else}
-                            {print} 'Nope they are not at the ' location
-                    {print} 'Now you can enter the house!'
+                    chaves = 'perdidas'
+                    {print} 'Estás no teu jardim e perdeste as tuas chaves.'
+                    {print} 'Onde queres procurá-las?'
+                    {print} 'Podes escolher: árvore, canteiro de flores, pedra, caixa de correio'
+                    {while} chaves == 'perdida'
+                    	local= {ask} 'Where do you want to look?'
+                    	{if} local == 'canteiro de flores'
+                    		{print} 'Aqui estão elas!'
+                    		chaves = 'encontradas'
+                    	{else}
+                    		{print} 'Não, elas não estão na ' local
+                    {print} 'Agora podes entrar em casa!'
                     ```
             18:
                 story_text: |
-                    We are going to print another story, but now we have to use brackets with `{print}`.
+                    Vamos agora escrever outra história, mas agora temos de usar chavetas com o `{print}`.
 
-                    ### Exercise 1
-                    Create a story of at least 5 sentences. You don't have to use 'name' just yet.
+                    ### Exercício 1
+                    Cria uma história com pelo menos 5 frases. Não precisas de usar já a variável 'nome'.
                 example_code: |
                     ```
-                    {print}('Welcome to this story!')
+                    {print}('Bem-vindo(a) a esta história!')
                     ```
                 story_text_2: |
-                    ### Exercise 2
-                    We have already prepared an `{input}` for you. First, use the `name` variable in your story.
-                    Then add a second `{ask}` and use that variable as well.
-                    Tip: Remember the commas in a `{print}` between text and variables!
+                    ### Exercício 2
+                    Já preparamos um `{input}` para ti. Primeiro, usa a variável `name` na tua história.
+                    Depois, adiciona um segundo `{ask}` e usa a variável também.
+                    Dica: Lembra-te das vírgulas no `{print}` entre o texto e as variáveis!
                 example_code_2: |
                     ```
-                    naam = {input}("What's your name?")
-                    {print}('Welcome to this story!')
+                    nome = {input}("Qual é o teu nome?")
+                    {print}('Bem-vindo(a) a esta história!')
                     ```
     add_remove_command:
-        name: '{add} {to} & {remove} {from}'
-        default_save_name: add_remove_command
-        description: introducing add to and remove from
+        name: '{add} {to_list} & {remove} {from}'
+        default_save_name: adiciona_remove_comando
+        description: introduzindo {add} {to_list} e {remove} {from}
         levels:
             3:
                 story_text: |
-                    ## Add to
-                    You can add items to the list with the `{add} {to_list}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
+                    ## Adiciona a
+                    Podes adicionar itens a uma lista com o comando `{add} {to_list}`. Para adicionar um item a uma lista, basta digitar: `{add} penguin {to_list} animals` o podes usar o comando `{ask}` como no código de exemplo.
                 example_code: |
                     ```
                     animals {is} dog, cat, kangaroo
