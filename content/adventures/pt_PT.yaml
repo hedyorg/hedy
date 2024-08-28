@@ -235,18 +235,18 @@ adventures:
                     O código de exemplo mostra-te como usar o ciclo `{while}` numa história. Agora, **pensa no teu próprio cenário** no qual o jogador tem de encontrar algo antes que possa continuar.
                 example_code: |
                     ```
-                    chaves = 'perdidas'
-                    {print} 'Estás no teu jardim e perdeste as tuas chaves.'
-                    {print} 'Onde queres procurá-las?'
-                    {print} 'Podes escolher: árvore, canteiro de flores, pedra, caixa de correio'
-                    {while} chaves == 'perdida'
-                    	local= {ask} 'Where do you want to look?'
-                    	{if} local == 'canteiro de flores'
-                    		{print} 'Aqui estão elas!'
-                    		chaves = 'encontradas'
-                    	{else}
-                    		{print} 'Não, elas não estão na ' local
-                    {print} 'Agora podes entrar em casa!'
+                    keys = 'lost'
+                    {print} 'You are standing in your garden and you have lost your keys.'
+                    {print} 'Where do you want to look for them?'
+                    {print} 'You can choose: tree, flowerbed, rock, postbox'
+                    {while} keys == 'lost'
+                        location = {ask} 'Where do you want to look?'
+                        {if} location == 'flowerbed'
+                            {print} 'Here they are!'
+                            keys = 'found'
+                        {else}
+                            {print} 'Nope they are not at the ' location
+                    {print} 'Now you can enter the house!'
                     ```
             18:
                 story_text: |
