@@ -3049,6 +3049,16 @@ class ConvertToPython_12(ConvertToPython_11):
               except ValueError:
                 return Value(f'''{args_str}''')""")
 
+    def add_if_key_mapping(self, key, function_name):
+        return textwrap.dedent(f"""\
+            global {function_name}
+            if_pressed_mapping['{key}'] = '{function_name}'""")
+
+    def add_else_key_mapping(self, function_name):
+        return textwrap.dedent(f"""\
+            global {function_name}
+            if_pressed_mapping['else'] = '{function_name}'""")
+
 
 @v_args(meta=True)
 @hedy_transpiler(level=13)

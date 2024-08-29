@@ -907,6 +907,7 @@ class TestsLevel16(HedyTester):
         expected = self.dedent("""\
         lijstje = Value([Value('kip'), Value('haan'), Value('kuiken')])
         if_pressed_mapping = {"else": "if_pressed_default_else"}
+        global if_pressed_x_
         if_pressed_mapping['x'] = 'if_pressed_x_'
         def if_pressed_x_():
           global dier, lijstje

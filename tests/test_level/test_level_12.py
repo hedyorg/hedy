@@ -2970,12 +2970,14 @@ class TestsLevel12(HedyTester):
         expected = self.dedent("""\
         lijstje = Value([Value('kip'), Value('haan'), Value('kuiken')])
         if_pressed_mapping = {"else": "if_pressed_default_else"}
+        global if_pressed_x_
         if_pressed_mapping['x'] = 'if_pressed_x_'
         def if_pressed_x_():
           global dier, lijstje
           for dier in lijstje.data:
             print(f'''dier''')
             time.sleep(0.1)
+        global if_pressed_else_
         if_pressed_mapping['else'] = 'if_pressed_else_'
         def if_pressed_else_():
           global dier, lijstje
@@ -2999,10 +3001,12 @@ class TestsLevel12(HedyTester):
         expected = self.dedent("""\
         x = Value('a')
         if_pressed_mapping = {"else": "if_pressed_default_else"}
+        global if_pressed_x_
         if_pressed_mapping['x'] = 'if_pressed_x_'
         def if_pressed_x_():
           global x
           print(f'''it is a letter key''')
+        global if_pressed_else_
         if_pressed_mapping['else'] = 'if_pressed_else_'
         def if_pressed_else_():
           global x
@@ -3024,10 +3028,12 @@ class TestsLevel12(HedyTester):
         expected = self.dedent("""\
         x = Value('a')
         if_pressed_mapping = {"else": "if_pressed_default_else"}
+        global if_pressed_x_
         if_pressed_mapping['x'] = 'if_pressed_x_'
         def if_pressed_x_():
           global x
           x = Value('great')
+        global if_pressed_else_
         if_pressed_mapping['else'] = 'if_pressed_else_'
         def if_pressed_else_():
           global x
@@ -3049,10 +3055,12 @@ class TestsLevel12(HedyTester):
         expected = self.dedent("""\
         x = Value('a')
         if_pressed_mapping = {"else": "if_pressed_default_else"}
+        global if_pressed_x_
         if_pressed_mapping['x'] = 'if_pressed_x_'
         def if_pressed_x_():
           global m, x
           m = Value('great')
+        global if_pressed_else_
         if_pressed_mapping['else'] = 'if_pressed_else_'
         def if_pressed_else_():
           global m, x

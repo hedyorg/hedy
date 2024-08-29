@@ -573,15 +573,16 @@ class TestsLevel17(HedyTester):
 
     def test_if_pressed_with_color(self):
         code = textwrap.dedent("""\
-        if x is pressed:
-            color red""")
+            if x is pressed:
+                color 'red'""")
 
         expected = self.dedent(
             f"""\
             if_pressed_mapping = {{"else": "if_pressed_default_else"}}
+            global if_pressed_x_
             if_pressed_mapping['x'] = 'if_pressed_x_'
             def if_pressed_x_():""",
-            (self.color_transpiled('"red"'), '  '),
+            (self.color_transpiled('red'), '  '),
             "extensions.if_pressed(if_pressed_mapping)")
 
         self.multi_level_tester(
@@ -705,12 +706,15 @@ class TestsLevel17(HedyTester):
 
         expected = self.dedent("""\
          if_pressed_mapping = {"else": "if_pressed_default_else"}
+         global if_pressed_a_
          if_pressed_mapping['a'] = 'if_pressed_a_'
          def if_pressed_a_():
            print(f'''A''')
+         global if_pressed_b_
          if_pressed_mapping['b'] = 'if_pressed_b_'
          def if_pressed_b_():
            print(f'''B''')
+         global if_pressed_else_
          if_pressed_mapping['else'] = 'if_pressed_else_'
          def if_pressed_else_():
            print(f'''Other''')
