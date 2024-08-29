@@ -1591,17 +1591,17 @@ export function select_profile_image(image: number) {
 }
 
 export function hide_editor() {
-  $('#fold_in_toggle_container').hide();
-  $('#code_editor').toggle();
-  $('#code_output').addClass('col-span-2');
-  $('#fold_out_toggle_container').show();
+  $('#hide_editor').hide();
+  $('#code_editor').addClass('lg:hidden block');
+  $('#code_output').addClass('lg:col-span-2');
+  $('#show_editor').show();
 }
 
 export function show_editor() {
-  $('#fold_out_toggle_container').hide();
-  $('#code_editor').toggle();
-  $('#code_output').removeClass('col-span-2');
-  $('#fold_in_toggle_container').show();
+  $('#show_editor').hide();
+  $('#code_editor').removeClass('lg:hidden block');
+  $('#code_output').removeClass('lg:col-span-2');
+  $('#hide_editor').show();
 }
 
 // See https://github.com/skulpt/skulpt/pull/579#issue-156538278 for the JS version of this code

@@ -6,18 +6,8 @@
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 <div id="editor_area" class="relative grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-row-dense gap-4">
 
-  <div id="fold_out_toggle_container" class="hidden absolute z-10 top-16 ltr:-left-2 rtl:-right-2 cursor-pointer" onclick="hedyApp.show_editor();">
-    <div class="bg-green-500 text-white py-3 rounded-lg text-sm">
-        <span>→</span>
-    </div>
-  </div>
   <!-- Row 1: editor, output pane -->
   <div data-devmodeheight="{{editor_height}},36rem" class="flex flex-col order-1 relative" id="code_editor" style="height: {{editor_height}}">
-    <div id="fold_in_toggle_container" class="absolute top-16 flex z-10 ltr:-right-1 rtl:-left-1 cursor-pointer" onclick="hedyApp.hide_editor();">
-        <div id="text_field" class="bg-green-500 text-white py-3 rounded-lg text-sm">
-            <span>←</span>
-        </div>
-    </div>
       <!--The div below is used to send translation of search to Ace through the frontend-->
       <div id="search_placeholder" style="display: none":>{{_('search')}}</div>
       <!-- Status warning -->
@@ -211,9 +201,18 @@
       {% endif %}
     </div>
   </div>
-  
-  <div class="order-4 flex flex-row justify-end">
-    <div id="read_outloud_button_container" class="dropdown relative">
+  <div class="order-3 lg:order-4" id="code_related_buttons">
+    <div id="button_row" class="flex flex-col md:flex-row mb-4">
+      <button id="hide_editor" class="blue-btn rounded items-center hidden lg:inline-block" onclick="hedyApp.hide_editor();">
+        <i class="fa-solid fa-caret-left"></i>
+        <span>Expand output</span>
+      </button>
+      <button id="show_editor" class="blue-btn rounded items-center hidden lg:inline-block" onclick="hedyApp.show_editor();" style="display: none;">
+        <i class="fa-solid fa-caret-right"></i>
+        <span>Show editor</span>
+      </button>
+      <div class="hidden lg:block lg:flex-1"></div>
+      <div id="read_outloud_button_container" class="dropdown relative">
         <button id="read_outloud" data-cy="read_outloud" class="blue-btn rounded inline-flex items-center gap-2"
         onclick="$('#speak_dropdown').slideToggle('medium');">
         <span class="fa fa-volume-high ltr:mr-1 rtl:ml-1"></span>
@@ -232,6 +231,7 @@
                   add .rotate-180 to arrow
               end">
         </div>
+    </div>
     </div>
   </div>
 
