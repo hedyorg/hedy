@@ -4,7 +4,6 @@ import collections
 import random
 import json
 import re
-import urllib.parse
 from http.cookies import SimpleCookie
 
 # *** LIBRARIES ***
@@ -315,7 +314,6 @@ class TestPages(AuthHelper):
         pages = [
             '/',
             '/hedy',
-            '/landing-page',
             '/tutorial',
             '/explore',
             '/learn-more',
@@ -456,81 +454,6 @@ class TestAuth(AuthHelper):
         self.assertEqual(hedy_cookie['httponly'], True)
         self.assertEqual(hedy_cookie['path'], '/')
         self.assertEqual(hedy_cookie['samesite'], 'Lax,')
-
-    def test_invalid_verify_email(self):
-        # GIVEN a new user
-        # (we create a new user to ensure that the verification flow hasn't been done for this user yet)
-        self.given_fresh_user_is_logged_in()
-
-        # WHEN submitting invalid verifications
-        invalid_verifications = [
-            # Missing token
-            {'username': self.username},
-            # Missing username
-            {'token': self.user['verify_token']},
-        ]
-
-        for invalid_verification in invalid_verifications:
-            # THEN receive an invalid response code from the server
-            self.get_data(
-                'auth/verify?' +
-                urllib.parse.urlencode(invalid_verification),
-                expect_http_code=400)
-
-        # WHEN submitting well-formed verifications with invalid values
-        incorrect_verifications = [
-            # Invalid username
-            {'username': 'foobar', 'token': self.user['verify_token']},
-            # Invalid token
-            {'username': self.username, 'token': 'foobar'}
-        ]
-
-        for incorrect_verification in incorrect_verifications:
-            # THEN receive a forbidden response code from the server
-            self.get_data(
-                'auth/verify?' +
-                urllib.parse.urlencode(incorrect_verification),
-                expect_http_code=403)
-
-    def test_verify_email(self):
-        # GIVEN a new user
-        # (we create a new user to ensure that the verification flow hasn't been done for this user yet)
-        self.given_fresh_user_is_logged_in()
-
-        # WHEN attepting to verify the user
-        # THEN receive a redirect from the server taking us to `/landing-page`
-        headers = self.get_data(
-            'auth/verify?' +
-            urllib.parse.urlencode(
-                {
-                    'username': self.username,
-                    'token': self.user['verify_token']}),
-            expect_http_code=302,
-            return_headers=True)
-        self.assertEqual(headers['location'], '/landing-page')
-
-        # WHEN attepting to verify the user again (the operation should be idempotent)
-        # THEN (again) receive a redirect from the server taking us to `/landing-page`
-        headers = self.get_data(
-            'auth/verify?' +
-            urllib.parse.urlencode(
-                {
-                    'username': self.username,
-                    'token': self.user['verify_token']}),
-            expect_http_code=302,
-            return_headers=True)
-        self.assertEqual(headers['location'], '/landing-page')
-
-        # WHEN retrieving profile to see that the user is no longer marked with
-        # `verification_pending`
-        self.given_specific_user_is_logged_in(self.username)
-        profile = self.get_data('profile')
-
-        # THEN check that the `verification_pending` has been removed from the user profile
-        self.assertNotIn('verification_pending', profile)
-
-        # FINALLY remove token from user since it's already been used.
-        self.user.pop('verify_token')
 
     def test_logout(self):
         # GIVEN a logged in user
