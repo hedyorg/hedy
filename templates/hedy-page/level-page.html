@@ -141,22 +141,6 @@
             {% endif %}
         </div>
       </div>
-
-      <button data-cy="next_adventure" class="blue-btn next-tab ltr:ml-1 rtl:mr-1"
-        _="on click
-          set :next to hedyApp.getNext()
-          if :next
-            set *display to 'block'
-            call :next.click()
-          else
-            set *display to 'none'
-          end
-          then set adv to hedyApp.getCurrentAdv()
-          put adv into #adventure_text
-          then localStorage.setItem('adventure_dropdown', 'adventure_button_' + adv)">
-          {{_('next_adventure')}}&nbsp;
-          <span class="fa fa-arrow-{% if g.dir == "ltr" %}right{% else %}left{% endif %}"></span>
-      </button>
     </div>
   {% endif %}
 </div>
@@ -217,18 +201,6 @@
     {{ render_partial('hedy-page/htmx-language-switch-button.html', commands=commands) }}
   {% endif %}
 </div>
-
-<!-- progress bar -->
-{% if username %}
-<div id="progress_bar" data-cy="progress_bar" class="w-full max-w-screen-2xl mx-auto">
-  <div class="mt-5 ml-4 text-base font-medium dark:text-white">
-    <b>{{progress}}% </b>{{_('complete')}}</div>
-  <div class="max-w-screen-2xl mr-4 items-center justify-between mx-auto ml-4 rounded-full h-2.5 bg-gray-300">
-    <div class="rounded-full h-2.5 bg-blue-800" style="width: {{progress}}%"></div>
-  </div>
-</div>
-{% endif %}
-
 {% endif %}
 <div class="w-full max-w-screen-2xl mx-auto" id="code_content_container">
 {% block levelbody %}{% endblock %}
