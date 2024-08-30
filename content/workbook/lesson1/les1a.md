@@ -23,33 +23,47 @@ print Hallo allemaal
 
 ### Opdracht 1: Voorspel de uitvoer
 
-[Assignment:Output
-Code:print Hallo allemaal
-Icon:>
-Lines:1
-Answer:Hallo allemaal] 
+{
+    "assignment": {"type": "output"}
+    "icon"      : "computer",
+    "code"      : "print Hallo allemaal",
+    "answer"    : "Hallo allemaal",
+    "lines"     : 1
+}
 
-[Assignment:Output
-Code:print goedemorgen!
-Icon:>
-Lines:1
-Answer:goedemorgen!] 
+{
+    "assignment": {"type": "output"}
+    "icon"      : "computer",
+    "code"      : "print goedemorgen",
+    "answer"    : "goedemorgen",
+    "lines"     : 1
+}
+
+
 
 ### Opdracht 2: Foutje?
 Soms sluipt er een foutje in je code. Dat is niet erg, maar Hedy kan je code dan niet goed lezen.
 Welke van deze code zijn fout, denk jij?
 
-[Assignment:MC
-Options: Goed,Fout
-Code:prnt Hallo allemaal!
-Icon:A/B
-Answer:Goed] 
+{
+    "assignment": { "type"      : "MC",
+                    "options"   : ["Goed" , "Fout"]},
+    "question"  : "Is deze code goed of fout?",
+    "icon"      : "A/B",
+    "code"      : "prnt Hallo allemaal!",
+    "answer"    : "Fout"
+}
 
-[Assignment:MC
-Options: Goed,Fout
-Code:print print
-Icon:A/B
-Answer:Goed] 
+{
+    "assignment": { "type"      : "MC",
+                    "options"   : ["Goed" , "Fout"]},
+    "question"  : "Is deze code goed of fout?",
+    "icon"      : "A/B",
+    "code"      : "print print",
+    "answer"    : "Goed"
+}
+
+
 
 ### Invoer vragen
 
@@ -84,16 +98,18 @@ Let op, het komt precies zo in beeld als het er staat, dus met hetzelfde hoofdle
 
 Voorspel wat de uitvoer van deze codes is. Vul steeds je eigen naam in, of een ander kloppend antwoord.
 
-[Assignment:Output
-Code:ask Hoe heet jij?
-echo dus jij heet:
-Icon:>
-Lines:2
-Answer:dus jij heet: **naam**] 
+{
+    "assignment": {"type": "output"}
+    "icon"      : "computer",
+    "code"      : "ask Hoe heet jij?\necho dus jij heet:",
+    "answer"    : "dus jij heet: **naam**",
+    "lines"     : 2
+}
 
-[Assignment:Output
-Code:ask Hoe heet jij?
-echo Leuk om je te ontmoeten, 
-Icon:>
-Lines:2
-Answer:Leuk om je te ontmoeten, **naam**] 
+{
+    "assignment": {"type": "output"}
+    "icon"      : "computer",
+    "code"      : "ask Hoe heet jij?\necho Leuk om je te ontmoeten,",
+    "answer"    : "Leuk om je te ontmoeten, **naam**",
+    "lines"     : 2
+}
