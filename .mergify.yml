@@ -4,7 +4,7 @@ queue_rules:
   - name: default_queue
     conditions:
         - "check-success=build"
-    method: squash
+    merge_method: squash
     commit_message_template: |-
       {{ title }} (#{{number}})
       {{ body }}
