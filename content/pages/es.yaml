@@ -444,7 +444,7 @@ teacher-guide:
         -   title: Alumnos utilizan eco sin preguntar
             example:
                 error_text: El comando Echo se utiliza para repetir una respuesta después de un comando ask. Sin ask, echo no hará nada.
-                error_code: ecoo Tu nombre es
+                error_code: '{echo} Tu nombre es'
                 solution_text: Añade un comando ask para que funcione.
                 solution_code: |-
                     {ask} ¿Cómo te llamas?
@@ -469,7 +469,7 @@ teacher-guide:
                 solution_code: |-
                     {forward} 100
                     {turn} 90
-        -   title: 'Tortuga: Los estudiantes usan el comando retroceder, pero no existe'
+        -   title: 'Tortuga: Los estudiantes usan el comando retroceder, pero no existe.'
             example:
                 error_text: Retroceder no es un comando.
                 error_code: retroceder 100
@@ -524,7 +524,7 @@ teacher-guide:
                 solution_text: Comprueba siempre cuando una variable tiene el mismo nombre en todo el código. Las pequeñas diferencias pueden ser difíciles de detectar (por ejemplo los plurales) pero interferirán con tu código.
                 solution_code: |-
                     nombre {is} {ask} ¿Cómo se llama tu caballo
-                    imprimit Tu caballo se llama nombre
+                    {print} Tu caballo se llama nombre
     -   level: '3'
         sections:
         -   title: Los estudiantes intentan imprimir listas enteras
@@ -590,7 +590,7 @@ teacher-guide:
                 solution_text: Tras cada objeto de tu lista, debería haber una coma
                 solution_code: |-
                     pizzas {is} setas, de atún, cuatro estaciones
-                    imprime pizzas en aleatorio
+                    {print} pizzas {at} {random}
         -   title: Los alumnos intentan usar `{at}` `{random}` sin una lista
             example:
                 error_text: Por ejemplo
@@ -615,7 +615,7 @@ teacher-guide:
                     tu_nombre {is} {ask} ¿Quién eres tú?
                     {add} tu_nombre {to} nombres
                     {print} nombres {at} {random}
-        -   title: Los estudiantes olvidan utilizar to/from con add/remove
+        -   title: Los estudiantes olvidan utilizar `{to}`/`{from}` en `{add}`/`{remove}`
             example:
                 error_text: Sin a/de el comando añadir/borrar no funcionará.
                 error_code: |-
@@ -628,7 +628,7 @@ teacher-guide:
                 solution_code: |-
                     aventuras {is} historia, loro, dado
                     opción {is} ¿Qué aventura te gusta más?
-                    {add} opción   aventuras
+                    {add} opción {to_list} aventuras
                     {remove} dado {from} aventuras
                     {print} Me encanta aventuras {at} {random}
     -   level: '4'
@@ -716,8 +716,8 @@ teacher-guide:
                 error_text: Por ejemplo este alumno Hedy le dice a todos sus amigos que son divertidos, pero a otros compañeros les diría que no lo son.
                 error_code: "{if} nombre {is} Jesse, David, Souf imprimir  Eres divertido  {else} {print} 'No eres divertido'"
                 solution_text: |-
-                    Puedes usar el comando `in` para eso. Se explica en un nivel superior, pero ya funciona en el nivel 5.
-                    Otra solución es usar varios comandos si y no comando si no. La desventaja es que no le dirá a los otros compañeros que no son divertidos.
+                    Puedes usar el comando `{in}` para eso. Se explica en un nivel superior, pero ya funciona en el nivel 5.
+                    Otra solución es usar varios comandos `{if}` y no comando `{else}`. La desventaja es que no le dirá a los otros compañeros que no son divertidos.
                 solution_code: |-
                     amigos {is} Jesse, David, Souf
                     nombre {is} {ask} '¿Quién eres?'
@@ -771,7 +771,7 @@ teacher-guide:
             example:
                 error_text: Asegúrate que los alumnos saben usar tanto el comando repetir completo y el comando imprimir.
                 error_code: |-
-                    {repeat} 3 {times}  Porque {is} un buen amigo
+                    {repeat} 3 {times}  Porque él es un buen compañero
                     {repeat} 3 imprimir
                 solution_text: 'Este es el código correcto:'
                 solution_code: |-
@@ -795,7 +795,7 @@ teacher-guide:
             example:
                 error_text: En este nivel es muy fácil hacer códigos extensos. Los alumnos no tienen permitido hacer programas que tarden mucho en cargar (para proteger nuestros servidores).
                 error_code: "{repeat} 100 {times} {print} '¿Cuántas veces puedo repetir esto?'"
-                solution_text: Asegúrate que los códigos no son demasiado largos
+                solution_text: Asegúrate que el código no tarda mucho en ejecutarse
                 solution_code: "{repeat} 20 {times} {print} 'Esto es suficiente'"
     -   level: '8'
         sections:
@@ -846,7 +846,7 @@ teacher-guide:
                 error_code: |-
                     {repeat} 100 {times}
                         {print} '¿Cuántas veces puedo repetir esto?'
-                solution_text: Asegúrate que los códigos no son demasiado largos
+                solution_text: Asegúrate que el código no tarda mucho en ejecutarse
                 solution_code: |-
                     {repeat} 20 {times}
                         {print} 'Esto es suficiente'
@@ -903,7 +903,7 @@ teacher-guide:
                         {print} 'Robin se va a casa'
     -   level: '10'
         sections:
-        -   title: Los alumnos no utilizan correctamente el comando para
+        -   title: Los alumnos no utilizan correctamente el comando `{for}`
             example:
                 error_text: Con frecuencia vemos que los alumnos intentan imprimir la lista (animales, en el ejemplo) en vez de los objetos de la lista.
                 error_code: |-
@@ -993,7 +993,7 @@ teacher-guide:
                 solution_code: '{print} 2.5 + 2.5'
     -   level: '13'
         sections:
-        -   title: Los alumnos confunden `and` con `or`
+        -   title: Los alumnos confunden `{and}` con `{or}`
             example:
                 error_text: Ambos comandos podrían parecer similares, pero su función es muy diferente.
                 error_code: |-
