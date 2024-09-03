@@ -2272,7 +2272,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "level_title": "级别",
     "multiple_keywords_warning": "您正在尝试使用关键字 {orig_keyword}，但该关键字可能有多种含义。 请从此列表中选择您要使用的一个，然后将其复制粘贴到您的代码中，包括大括号：{keyword_list}",
     "number_of_errors": "错误数量：{number_of_errors}",
-    "one_level_error": "You need to select at least one level.",
+    "one_level_error": "你需要至少选择一个级别。",
     "restaurant": "🍣, 🍕, 🍔",
     "rock": "✂️, 📜, 🗻",
     "select_all": "全选",
