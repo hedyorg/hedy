@@ -2639,28 +2639,28 @@ adventures:
                     ```
     is_command:
         name: '{is}'
-        default_save_name: is_command
-        description: introducing is command
+        default_save_name: ist-Befehl
+        description: Einführung des {is}-Befehls
         levels:
             2:
                 story_text: |
                     ## Variablen
-                    Du kannst einem Wort mit `{is}` einen Wert geben. Dieses Wort nennt man eine **Variable**. In diesem Beispiel haben wir eine Variable namens name und eine Variable names age benutzt. Du kannst das Wort name irgendwo in deinem Code verwenden. Es wird von Hedy automatisch ersetzt, wie hier:
+                    Du kannst einem Wort mit `{is}` einen Wert geben. Dieses Wort nennt man eine **Variable**. In diesem Beispiel haben wir eine Variable namens name und eine Variable names alter benutzt. Du kannst das Wort name irgendwo in deinem Code verwenden. Es wird von Hedy automatisch ersetzt, wie hier:
                 example_code: |
                     ```
                     name {is} Hedy
-                    age {is} 15
-                    {print} name is age years old
+                    alter {is} 15
+                    {print} name ist alter Jahre alt.
                     ```
                 story_text_2: |
                     ### Übung
                     Es ist Zeit, deine eigenen Variablen zu definieren.
-                    Im Beispiel-Code zeigen wir ein Beispiel mit der Variable `favorite_animal`. In Zeile 1 wird die Variable gesetzt, und in Zeile 2 verwenden wir die Variable in einem `{print}` Befehl.
+                    Im Beispiel-Code zeigen wir ein Beispiel mit der Variable `lieblingstier`. In Zeile 1 wird die Variable gesetzt, und in Zeile 2 verwenden wir die Variable in einem `{print}` Befehl.
                     Zuerst, vervollständige unser Beispiel, in dem du dein Lieblingstier in die Leerstelle einträgst. Dann denke dir mindestens 3 eigene Code-Beispiele aus. Wähle eine Variable und gib der Variable mit dem `{is}` Befehl einen Wert. Dann verwenden den `{print}` Befehl, so wie wir es gezeigt haben.
                 example_code_2: |
                     ```
-                    favorite_animal {is} _
-                    {print} I like favorite_animal
+                    lieblingstier {is} _
+                    {print} Ich mag lieblingstierl
                     ```
             6:
                 story_text: |
@@ -2860,11 +2860,11 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Use the `{clear}` command to create a karaoke machine!
+                    Benutze den  `{clear}` Befehl, um eine Karaokemaschine zu bauen!
 
-                    ### Exercise
-                    Finish the karaoke version of 'Mary had a little lamb'.
-                    Then, create a karaoke version of any song you'd like!
+                    ### Übung
+                    Vervollständige die Karaokeversion von  'Mary had a little lamb'.
+                    Dann Scheibe eine Karaokeversion eines Lieds, das dir gefällt!
                 example_code: |
                     ```
                     {print} 'Mary had a little lamb'
@@ -2889,39 +2889,39 @@ adventures:
                     ```
             5:
                 story_text: |
-                    You don't always have to use the `{play}` command to play a whole song, sometimes you just want to play one note.
-                    For example, if you want to make a quiz, you can play a happy high note if the answer is right and a sad low note if the answer is wrong.
+                    Du kannst den `{play}` Befehl nicht nur zu verwenden, um ein ganzes Lied zu spielen. Manchmal willst du nur eine einzelne Note spielen.
+                    Wenn Du beispielsweise einen Quiz programmieren willst, kannst du einen fröhlichen hohen Ton spielen, wenn die Antwort richtig ist und einen traurigen tiefen Ton, wenn sie falsch ist.
 
-                    ### Exercise
-                    Finish the first question by adding a line of code that plays a C3 note if the wrong answer is given.
-                    Then think of 3 more questions to add to this quiz.
+                    ### Übung
+                    Vervollständige die erste Frage, in dem du eine Zeile Code einfügst, die ein C3 spielt, wenn die Antwort falsch ist.
+                    Dann denke dir noch 3 Fragen für den Quiz aus.
                 example_code: |
                     ```
-                    answer {is} {ask} 'What is the capital of Zimbabwe?'
-                    {if} answer {is} Harare {play} C6
+                    antwort {is} {ask} 'Wie heißt die Hauptstadt von Simbabwe?'
+                    {if} antwort {is} Harare {play} C6
                     _
                     ```
             6:
                 story_text: "Anstatt Noten zu spielen, kannst du nun auch Zahlen spielen. Tippe einfach `{play} 1` für die tiefste Note, `{play} 70` für die höchste Note, oder irgendetwas dazwischen.\n\n### Übung\nDas schreit nach musikalischer Mathematik. Probiere den Beispielcode einige Male mit verschiedenen Startzahlen aus.\nDann gucke, ob du ein Lied komponieren kannst, indem du Zahlen benutzt.\n"
                 example_code: |
                     ```
-                    number = {ask} 'Say a starting number between 1 and 67'
-                    {print} number
-                    {play} number
-                    number = number + 1
-                    {print} number
-                    {play} number
-                    number = number + 1
-                    {print} number
-                    {play} number
+                    zahl = {ask} 'Sag eine Anfangszahl zwischen 1 und 67'
+                    {print} zahl
+                    {play} zahl
+                    number = zahl + 1
+                    {print} zahl
+                    {play} zahl
+                    zahl = zahl + 1
+                    {print} zahl
+                    {play} zahl
                     ```
             7:
                 story_text: |
-                    Using the `{repeat}` command can make your codes for melodies a lot shorter!
+                    Wenn du den  `{repeat}` Befehl benutzt, kann dein Programm viel kürzer werden!
 
-                    ### Exercise
-                    Finish the code for Twinkle Twinkle Little Star by using the `{repeat}`command.
-                    Then go back to the songs you've made in the previous levels. Can you shorten those codes too?
+                    ### Übung
+                    Vervollständige das Programm für Twinkle Twinkle Little Star mit dem `{repeat}`Befehl.
+                    Dann gehe nochmal zu den Liedern aus den vorherigen Levels. Kannst Du die Programme auch kürzer machen?
                 example_code: |
                     ```
                     {print} 'Twinkle Twinkle Little Star'
@@ -3484,8 +3484,8 @@ adventures:
                     ```
     random_command:
         name: '{random}'
-        default_save_name: random_command
-        description: introducing at random command
+        default_save_name: zufällig-Befehl
+        description: Einführung des an zufällig Befehls
         levels:
             3:
                 story_text: |
@@ -3521,14 +3521,14 @@ adventures:
                     We use square brackets to point out a place in a list. For example: `friends[1]` is the first name on the list of friends, as you can see in the first part of the example code. The second part of the example code shows you that we can also match 2 lists using the variable i.
                 example_code: |
                     ```
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} friends[1] ' is the first friend on the list.'
-                    {print} friends[2] ' is the second friend on the list.'
-                    {print} friends[3] ' is the third friend on the list.'
-                    #now we will match 2 lists using the variable i
-                    lucky_numbers = [15, 18, 6]
+                    freunde = ['Ahmed', 'Ben', 'Clemens']
+                    {print} freunde[1] ' ist der erste Freund auf der Liste.'
+                    {print} freunde[2] ' ist der zweite Freund auf der Liste.'
+                    {print} freunde[3] ' ist der dritte Freund auf der Liste.'
+                    #Jetzt paaren wir die Elemente aus beiden Listen indem wir die variable i verwenden.
+                    glückszahl = [15, 18, 6]
                     {for} i {in} {range} 1 {to} 3
-                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
+                        {print} freunde[i] 's Glückszahl ist  ' glückszahl[i]
                     ```
                 story_text_2: |-
                     Now that you've learned to use the brackets in lists, you can also start using the {at} {random} command in the Python way!
@@ -4274,7 +4274,7 @@ adventures:
                     Ein weiterer neuer Befehl in diesem Level ist der `{sleep}` Befehl. Er pausiert dein Programm für eine Sekunde. Wenn du eine Zahl hinter den {sleep} Befehl schreibst, pausiert dein Programm für diese Anzahl an Sekunden.
 
                     ### Übung
-                    Übe den neuen Befehl, in dem du dir eigenen Code ausdenkst, der mindestens 3 mal den Befehl {sleep} verwendet. Mit jeden {sleep} Befehl soll die Pausierzeit anders sein.
+                    Übe den neuen Befehl, in dem du dir eigenen Code ausdenkst, der mindestens 3 mal den Befehl {sleep} verwendet. Mit jeden {sleep} Befehl soll die Pause eine andere Länge haben..
                 example_code: |
                     ```
                     {print} Meine Lieblingsfarbe ist...
