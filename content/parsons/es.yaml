@@ -176,7 +176,7 @@ levels:
             code: |-
                 pedir = {ask} '¿Desea pedir postre?'
                 {if} pedido = sí
-                    postre = {ask} ¿Qué tipo de postre desea?
+                    postre = {ask} '¿Qué tipo de postre desea?'
                     {if} postre = tiramisú
                         {print} "Lo sentimos, no tenemos tiramisú."
                     {else}
