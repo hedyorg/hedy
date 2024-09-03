@@ -1,3 +1,4 @@
+import exceptions
 import textwrap
 from parameterized import parameterized
 import hedy
@@ -221,6 +222,12 @@ class TestsLevel6(HedyTester):
         expected = self.input_transpiled('details', "say \\'no\\'")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
+
+    @parameterized.expand(HedyTester.quotes)
+    def test_ask_with_equals_without_closing_quote_gives_error(self, q):
+        code = f"kleur = ask {q}Hedy 123"
+
+        self.single_level_tester(code, exception=exceptions.UnquotedTextException)
 
     @parameterized.expand(HedyTester.quotes)
     def test_ask_es(self, q):

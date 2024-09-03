@@ -17,37 +17,41 @@ adventures:
                     {ask} Hlavní postavou tohoto příběhu je
                     {print} Hlavní postava se nyní chystá procházet lesem
                     {echo} Trochu se bojí,
-                    {print} Všude slyší šílené zvuky
-                    {print} Bojí se, že tohle je strašidelný les
+                    {print} Všude slyší podivné zvuky
+                    {print} Bojí se, že je to strašidelný les
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Můžete nyní vytvořit svůj vlastní příběh v Hedy pomocí `{print}` , `{ask}` a `{echo}`?
+                    ### Cvičení
+                    Nyní vytvořte vlastní příběh, který bude mít alespoň 6 řádků kódu.
+                    Tento příběh nesmí být stejný jako ukázkový kód.
+                    Použijte alespoň jeden příkaz `{ask}` a jeden `{echo}`.
+                    Můžete si vybrat jakékoliv téma, které se vám líbí.
+                    Pokud nevíte, o čem psát, použijte některou z našich možností: návštěva kina, sportovní zápas nebo den v zoo.
             2:
                 story_text: |
-                    In level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.
+                    Ve druhé úrovni můžete svůj příběh zpestřit. Jméno vaší hlavní postavy může nyní být kdekoli ve větě.
 
-                    You do have to program a little bit extra for that. You must now name your main character first.
+                    Budete muset naprogramovat trochu více. Nejprve musíte pojmenovat svou hlavní postavu.
 
-                    You can then put that name anywhere in a sentence.
+                    Poté můžete toto jméno umístit kdekoli ve větě.
                 example_code: |-
                     ```
-                    jmeno {is} {ask} Jak se jmenuje hlavní postava?
-                    {print} jmeno teď bude běhat v lese
-                    {print} jmeno je trochu vyděšené
-                    {print} Najednou uslyší šílený zvuk...
+                    jmeno {is} {ask} Jaké je jméno hlavní postavy (holka)?
+                    {print} jmeno nyní poběží lesem
+                    {print} jmeno je trochu vystrašená
+                    {print} Najednou slyší podivný zvuk...
                     {sleep}
-                    {print} jmeno se obává, že je to strašidelný les
+                    {print} jmeno se bojí, že je to strašidelný les
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Now it's time to add variables to your own story that you've made in the previous level.
-                    Go to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.
+                    ### Cvičení
+                    Nyní je čas přidat proměnné do vašeho vlastního příběhu, který jste vytvořili v předchozí úrovni.
+                    Přejděte do 'Moje programy', najděte své dobrodružství z úrovně 1 a zkopírujte kód. Vložte kód do vstupní obrazovky v této úrovni.
 
-                    This code won't work in this level, because you have not used variables yet.
-                    Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
+                    Tento kód nebude fungovat v této úrovni, protože jste ještě nepoužili proměnné.
+                    Změňte příkazy `{ask}` a `{echo}` ve svém kódu na správný formát, který jste se naučili v této úrovni.
 
-                    **Extra** Add a sleep command to your code to build up tension in your story.
+                    **Extra** Přidejte příkaz `{sleep}` do svého kódu, abyste zvýšili napětí ve svém příběhu.
             3:
                 story_text: |
                     In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:
@@ -121,8 +125,11 @@ adventures:
                     ```
             7:
                 story_text: |
-                    In a story, someone says words several times. For example, when someone calls for help or sings a song.
-                    You can put such repetitions in your story, in this level with `{repeat}`.
+                    V příběhu někdo opakuje slova několikrát. Například, když někdo volá o pomoc nebo zpívá píseň.
+                    Takové opakování můžete vložit do svého příběhu, na této úrovni s `{repeat}`.
+
+                    ### Cvičení
+                    Přidejte opakování do svého vlastního příběhu. Vraťte se ke svým uloženým programům, vyberte svůj příběhový program z předchozí úrovně a najděte řádek obsahující `{print}` a opakujte ho!
                 example_code: |
                     ```
                     {print} 'The prince kept calling for help'
@@ -131,91 +138,71 @@ adventures:
                     ```
             8:
                 story_text: |
-                    In this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!
+                    Na této úrovni můžete použít více řádků ve vašich `{if}` příkazech, tímto způsobem můžete vylepšit svůj šťastný nebo smutný konec!
+
+                    ### Cvičení 1
+                    Ukázkový kód zobrazuje dva různé konce; jeden, kde postavy skočí do stroje času, a druhý, kde to neudělají. Doplňte mezery alespoň jednou větou na každý konec.
+                    **Extra** Udělejte příběh delší. Co se v příběhu stane? Můžete také přidat druhý `{ask}` s různými možnostmi.
+
+                    ### Cvičení 2
+                    Vraťte se ke svým uloženým programům, vyberte svůj příběhový program z úrovně 5. Nyní napište dobrý a špatný konec, každý alespoň o třech větách!
                 example_code: |
                     ```
-                    {print} 'OH NO! The T-rex is closing in!'
-                    end = {ask} 'Do you want a happy or a sad ending?'
-                    {if} end {is} happy
-                        {print} 'Just in time Richard jumps back into the time machine!'
-                        {print} 'Michael types in the code and...'
-                        {print} '💥ZAP!💥'
-                        {print} 'They are back in their garage'
+                    {print} 'JEJDA! T-rex se blíží!'
+                    end = {ask} 'Chcete šťastný nebo smutný konec?'
+                    {if} end {is} stastny
+                        {print} 'Richard na poslední chvíli skočí zpátky do stroje času!'
+                        {print} _
                     {else}
-                        {print} 'Michael yells COME ON RICHARD! RUN FASTER!'
-                        {print} 'But Richard is too slow...'
-                        {print} 'The T-rex closes in and eats him in one big bite!🦖'
+                        {print} 'Oh ne! Richard je příliš pomalý...'
+                        {print} _
                     ```
             9:
                 story_text: |
                     In this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.
                 example_code: |
                     ```
-                    {print} 'Robin is walking downtown'
-                    location = {ask} 'Is Robin going into a shop, or does she go home?'
-                    {if} location {is} shop
-                        {print} 'She enters the shop.'
-                        {print} 'Robin sees an interesting looking book'
-                        book = {ask} 'Does Robin buy the book?'
-                        {if} book {is} yes
-                            {print} 'Robin buys the book and goes home'
-                        {else}
-                            {print} 'Robin leaves the shop and goes home'
+                    {print} 'Robin jde do centra města'
+                    location = {ask} 'Jde Robin do obchodu, nebo jde domů?'
+                    {if} location {is} obchodu
+                        {print} 'Vstoupí do obchodu.'
+                        {print} 'Robin vidí zajímavou knihu'
+                        book = {ask} 'Koupí si Robin knihu?'
+                        {if} book {is} ano
+                        _ {print} 'Robin si koupí knihu a jde domů'
+                        _ {else}
+                        _ {print} 'Robin opustí obchod a jde domů'
                     {else}
-                        {print} 'Robin goes home'
+                        {print} 'Robin jde domů'
                     ```
             10:
                 story_text: |
                     In this level you can use the {for} command in your story. In this way you could easily program the children's book 'brown bear, brown bear, what do you see'.
                 example_code: |
                     ```
-                    animals = red bird, black sheep, green frog, yellow duck, little child
-                    {print} 'brown bear'
-                    {print} 'brown bear'
-                    {print} 'What do you see?'
-                    {for} animal {in} animals
-                        {print} 'I see a ' animal ' looking at me'
-                        {print} animal
-                        {print} animal
-                        {print} 'What do you see?'
-                    {print} 'I see all the animals looking at me!'
+                    zvirata = _ , _ , _ 
+                    {print} 'Hnědý medvěde, hnědý medvěde'
+                    {print} 'Co vidíš?'
                     ```
             12:
                 story_text: |
                     In this level you can use the quotation marks to save multiple words in a variable.
                 example_code: |
                     ```
-                    name = 'The Queen of England'
-                    {print} name ' was eating a piece of cake, when suddenly...'
+                    jmeno = 'Královna Velké Británie'
+                    {print} jmeno ' jedla kousek dortu, když najednou…'
                     ```
             13:
                 story_text: |
                     By using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.
                 example_code: |
                     ```
-                    sword = 'lost'
-                    game = 'on'
-                    {print} 'Our hero is walking through the forest'
-                    {print} 'The path splits two ways'
-                    {for} i {in} {range} 0 {to} 2
-                        {if} game {is} 'on'
-                            path = {ask} 'Which path should she choose?'
-                            {if} path {is} 'left' {and} sword {is} 'found'
-                                {print} 'Our hero comes across a dragon!'
-                                {print} 'Luckily our hero has a sword to defeat the beast!'
-                                game = 'over'
-                            {if} path {is} 'left' {and} sword {is} 'lost'
-                                {print} 'Our hero finds a dragon, but she doesnt have any weapons!'
-                                {print} 'Our hero is beaten by the dragon...'
-                                {print} 'Try again'
-                                game = 'over'
-                            {if} path {is} 'right' {and} sword {is} 'found'
-                                {print} 'You have already found the sword. There is nothing left here.'
-                                {print} 'She walks back'
-                            {if} path {is} 'right' {and} sword {is} 'lost'
-                                {print} 'Our hero finds a sword'
-                                {print} 'This could come in very handy'
-                                sword = 'found'
+                    {print} 'Náš hrdina kráčí lesem'
+                    {print} 'Cesta se rozdvojuje'
+                    cesta = {ask} 'Kterou cestu by měla zvolit?'
+                    zbran = {ask} 'Jakou zbraň vytáhne?'
+                    {if} cesta {is} 'levou' {and} zbran {is} 'mec'
+                        _
                     ```
             15:
                 story_text: |
@@ -246,7 +233,7 @@ adventures:
                     Create a story of at least 5 sentences. You don't have to use 'name' just yet.
                 example_code: |
                     ```
-                    {print}('Welcome to this story!')
+                    {print}('Vítejte v tomto příběhu!')
                     ```
                 story_text_2: |
                     ### Exercise 2
@@ -348,26 +335,26 @@ adventures:
                     ```
             2:
                 story_text: |
-                    ## The ask command
-                    Now that we can use **variables** in our codes, we no longer need the `{echo}` command.
-                    We can use variables to store the answers to our questions and this way we can use the answer to multiple questions in our codes.
-                    Check it out:
+                    ## Příkaz ask
+                    Nyní, když můžeme používat **proměnné** ve svých kódech, už nepotřebujeme příkaz `{echo}`.
+                    Můžeme použít proměnné k uložení odpovědí na naše otázky a tímto způsobem můžeme odpověď použít na více otázek ve svých kódech.
+                    Podívejte se na to:
 
-                    This way your code is becoming interactive!
+                    Tímto způsobem se váš kód stává interaktivním!
                 example_code: |
                     ```
-                    name {is} {ask} What is your name?
-                    {print} Hello name
-                    age {is} {ask} How old are you?
-                    {print} name is age years old.
+                    jmeno {is} {ask} 'Jaké je vaše jméno?'
+                    {print} 'Ahoj, ' jmeno
+                    vek {is} {ask} 'Kolik vám je let?'
+                    {print} jmeno ' má ' vek ' let.'
                     ```
                 story_text_2: |
-                    ### Exercise
-                    In the previous tab you have practised with setting variables with the `{is}` command.
-                    You have created at least 3 variables and used them with a print command.
-                    Now, instead of setting the variables we want you to make the variables interactive, like we did in our example.
+                    ### Cvičení
+                    V předchozím panelu jste cvičili nastavování proměnných pomocí příkazu `{is}`.
+                    Vytvořili jste alespoň 3 proměnné a použili je s příkazem print.
+                    Nyní místo nastavování proměnných chceme, abyste proměnné učinili interaktivními, jak jsme to udělali v našem příkladu.
 
-                    Copy your code from the previous tab and make the variables interactive by using `{ask}` commands.
+                    Zkopírujte svůj kód z předchozího panelu a učiňte proměnné interaktivními pomocí příkazů `{ask}`.
                 example_code_2: |
                     ```
                     favorite_animal {is} {ask} What is your favorite animal?
@@ -2235,67 +2222,60 @@ adventures:
         levels:
             1:
                 story_text: |
-                    In this adventure you are working towards making a game in which you have to escape from a haunted house by picking the correct door.
-                    If you pick the right door you'll survive, but {if} not a terrible monster might...
+                    V tomto dobrodružství pracujete na vytvoření hry, ve které se musíte dostat z strašidelného domu tím, že si vyberete správné dveře.
+                    Pokud vyberete správné dveře, přežijete, ale pokud ne, strašidelný monster může...
 
-                    In level 1 we start our haunted house game by making up a scary story and {ask} the player what monster they'll see in the haunted house.
+                    V úrovni 1 začneme naši hru ve strašidelném domě tím, že vytvoříme děsivý příběh a zeptáme se hráče, jaké monstrum uvidí ve strašidelném domě.
                 example_code: |
                     ```
-                    {print} How did I get here?
-                    {print} I remember my friend telling me to go into the old mansion...
-                    {print} and suddenly everything went black.
-                    {print} But how did I end up on the floor...?
-                    {print} My head hurts like Ive been hit by a baseball bat!
-                    {print} What's that sound?
-                    {print} Oh no! I feel like Im not alone in this house!
-                    {print} I need to get out of here!
-                    {print} There are 3 doors in front of me..
-                    {ask} Which door should i pick?
-                    {echo} I choose door
+                    {print} Jak jsem se sem dostal?
+                    {print} Pamatuji si, jak mi kamarád řekl, abych šel do starého sídla...
+                    {print} a najednou vše zčernalo.
+                    {print} Ale jak jsem skončil na podlaze...?
+                    {print} Hlava mě bolí, jako bych dostal ránu baseballovou pálkou!
+                    {print} Co je to za zvuk?
+                    {print} Oh ne! Mám pocit, že nejsem v tomto domě sám!
+                    {print} Musím se odsud dostat!
+                    {print} Před sebou mám 3 dveře...
+                    {ask} Které dveře mám vybrat?
+                    {echo} Vybral jsem si dveře
                     {print} ...?
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Can you finish the scary story? Or make up your own haunted house story?
+                    ### Cvičení
+                    Zkopírujte ukázkový kód do své vstupní obrazovky kliknutím na žluté tlačítko.
+                    Nyní dokončete příběh přidáním alespoň 5 řádků kódu.
+                    Nezapomeňte začít každý řádek kódu příkazem `{print}`.
             2:
                 story_text: |
-                    In this haunted house you can choose your monsters with emojis. Of course you could also use words.
-
-                    ```
-                    monster1 {is} 👻
-                    monster2 {is} 🤡
-                    monster3 {is} 👶
-                    {print} You enter the haunted house.
-                    {print} Suddenly you see a monster1
-                    {print} You run into the other room, but a monster2 is waiting there for you!
-                    {print} Oh no! Quickly get to the kitchen.
-                    {print} But as you enter monster3 attacks you!
-                    ```
+                    V tomto strašidelném domě si můžete vybrat svá monstra pomocí emoji. Samozřejmě můžete také použít slova.
                 example_code: |
                     ```
                     monster_1 {is} 👻
                     monster_2 {is} 🤡
                     monster_3 {is} 👶
-                    {print} You enter the haunted house.
-                    {print} Suddenly you see a monster_1
-                    {print} You run into the other room, but a monster_2 is waiting there for you!
-                    {print} Oh no! Quickly get to the kitchen.
-                    {print} But as you enter monster_3 attacks you!
+                    {print} Vstupujete do strašidelného domu.
+                    {print} Najednou uvidíte monster_1
+                    {print} Utíkáte do jiné místnosti...
+                    {print} Ale monster_2 na vás tam čeká!
+                    {print} Oh ne! Rychle se dostaňte do kuchyně.
+                    {print} Ale když vstoupíte, monster_3 vás napadne!
                     ```
                 story_text_2: |
-                    ### Exercise
-                    In the example above the monsters are predetermined. So each time you run your code, the output is the same.
-                    Can you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?
+                    ### Cvičení
+                    V příkladu výše jsou monstra předem určena. Takže pokaždé, když spustíte svůj kód, je výstup stejný.
+                    Dokážete přidat příkazy `{ask}`, aby byl strašidelný dům interaktivní a hráči si mohli vybrat monstra, se kterými se setkají?
                 example_code_2: |
                     ```
                     monster_1 {is} _
                     monster_2 {is} _
                     monster_3 {is} _
-                    {print} You enter the haunted house.
-                    {print} Suddenly you see a monster_1
-                    {print} You run into the other room, but a monster_2 is waiting there for you!
-                    {print} Oh no! Quickly get to the kitchen.
-                    {print} But as you enter monster_3 attacks you!
+                    {print} Vstupujete do strašidelného domu.
+                    {print} Najednou uvidíte monster_1
+                    {print} Utíkáte do jiné místnosti...
+                    {print} Ale monster_2 na vás tam čeká!
+                    {print} Oh ne! Rychle se dostaňte do kuchyně.
+                    {print} Ale když vstoupíte, monster_3 vás napadne!
                     ```
             3:
                 story_text: |
@@ -2744,21 +2724,21 @@ adventures:
                     {print} 2.5 + 2.5
     music:
         name: music
-        default_save_name: music
+        default_save_name: Hudba
         description: Play a tune!
         levels:
             1:
                 story_text: |-
-                    In this level you'll learn how to use the `{play}` command to play a tune!
+                    V této úrovni se naučíte používat příkaz `{play}` k zahrání melodie!
 
-                    Type `{play}` followed by the note you want to play. The scale goes C-D-E-F-G-A-B.
-                    As you can see there are 7 different letters, but we can play more than just 7 notes.
-                    Type a number between 1 and 10 behind the letter to choose the scale, for example after B4 comes C5.
-                    C1 is the lowest note you can play, C10 is the highest.
+                    Napište `{play}` následované notou, kterou chcete zahrát. Stupnice obsahuje C-D-E-F-G-A-H.
+                    Jak vidíte, je zde 7 různých písmen, ale můžeme hrát více než jen 7 not.
+                    Za písmenem zadejte číslo mezi 1 a 10, abyste vybrali stupnici, například po H4 následuje C5.
+                    C1 je nejnižší nota, kterou můžete zahrát, C10 je nejvyšší.
 
-                    ### Exercise
-                    Try out the example code and then play around with it! Can you create your own melody?
-                    In the next level you'll learn how to play some existing songs.
+                    ### Cvičení
+                    Vyzkoušejte si ukázkový kód a pak si s ním pohrajte! Dokážete vytvořit vlastní melodii?
+                    V další úrovni se naučíte, jak zahrát některé existující písně.
                 example_code: |-
                     ```
                     {play} C4
@@ -4573,7 +4553,7 @@ adventures:
     tic_2:
         name: Tic-Tac-Toe 2
         default_save_name: Tic
-        description: Play a game of Tic Tac Toe!
+        description: Zahrajte si hru Piškvorky!
         levels:
             16:
                 story_text: |
@@ -4650,17 +4630,19 @@ adventures:
         levels:
             1:
                 story_text: |
-                    V úrovni 1 můžete také použít Hedy ke kreslení. Kombinací zatáček a linií můžete vytvořit čtverec nebo schod!
+                    Hedy můžete také používat k kreslení. Kombinováním otočení a čar můžete nakreslit čtverec nebo schody!
 
-                    Pomocí `{forward}` nakreslíte čáru vpřed. Číslo za ním určuje, jak daleko želva dojde. `{turn} vpravo` se otočí o čtvrt otáčky ve směru hodinových ručiček, `{turn} left` otočí proti směru hodinových ručiček.
+                    Pomocí `{forward}` nakreslíte čáru dopředu. Číslo za ním určuje, jak daleko želva půjde. `{turn} {right}` otočí želvu o čtvrt otáčky ve směru hodinových ručiček, `{turn} {left}` otočí proti směru hodinových ručiček.
+
+                    Pokud chcete jít dozadu, použijete příkaz `{forward}` s negativním číslem. Například `{forward} -100`
                 example_code: |
                     ```
                     {forward} 100
                     {turn} {left}
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Toto je začátek malého schodiště. Dokážete udělat 5 kroků?
+                    ### Cvičení
+                    Toto je začátek malých schodů. Dokážete je rozšířit na 5 schodů?
                 example_code_2: |
                     ```
                     {forward} 20

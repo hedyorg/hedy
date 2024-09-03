@@ -64,11 +64,26 @@ jobs:
         done
 
         wlc pull
+
+        # 'commit' seems to be an async process, as sometimes nothing is pushed if we run this
+        # too quickly in succession. Add a short sleep to reduce chances of this happening.
+        # https://github.com/WeblateOrg/weblate/issues/12400
         wlc commit
+        sleep 10
+
         wlc push
-        # On our repo, 'wlc reset' consistently times out the TCP connection after waiting
-        # for 5 minutes. The actual reset does seem to work, so we just don't wait for the
-        # command to finish, otherwise all our workflow executions show errors.
+        sleep 10
+
+        # Safety check: we should now see `needs_commit: False` and `needs_push: False`. If we don't,
+        # the 'wlc reset` below is going to lead to data loss.
+        wlc repo | tee repo.txt
+        if grep -q "needs_commit: True" repo.txt || grep -q "needs_push: True" repo.txt; then
+          echo "wlc commit and push combo didn't flush out all changes; aborting before we lose data!"
+          exit 1
+        fi
+
+        # 'wlc reset' always leads to ConnectionAborted, so don't wait for it.
+        # https://github.com/WeblateOrg/weblate/issues/11368
         wlc reset &
         sleep 10
 
