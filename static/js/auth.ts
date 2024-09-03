@@ -249,7 +249,7 @@ export function update_user_tags() {
  */
 async function afterLogin(loginData: Dict<boolean>) {
   const { url } = localLoadOnce(REDIRECT_AFTER_LOGIN_KEY) ?? {};
-  if (url) {
+  if (url && !loginData['first_time']) {
     window.location = url;
     return;
   }

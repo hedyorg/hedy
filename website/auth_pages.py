@@ -1,6 +1,6 @@
 import datetime
 
-from flask import make_response, request, session
+from flask import make_response, redirect, request, session
 from flask_babel import gettext
 
 from config import config
@@ -16,6 +16,7 @@ from website.auth import (
     check_password,
     create_recover_link,
     create_verify_link,
+    current_user,
     forget_current_user,
     is_admin,
     is_teacher,
@@ -27,6 +28,7 @@ from website.auth import (
     requires_login,
     send_email,
     send_email_template,
+    send_localized_email_template,
     validate_signup_data,
 )
 
@@ -208,6 +210,65 @@ class AuthModule(WebsiteModule):
 
         remember_current_user(user)
         return resp
+
+    @route("/verify", methods=["GET"])
+    def verify_email(self):
+        username = request.args.get("username", None)
+        token = request.args.get("token", None)
+        if not token:
+            return make_response(gettext("token_invalid"), 400)
+        if not username:
+            return make_response(gettext("username_invalid"), 400)
+
+        # Verify that user actually exists
+        user = self.db.user_by_username(username)
+        if not user:
+            return make_response(gettext("username_invalid"), 403)
+
+        # If user is already verified -> re-direct to landing-page anyway
+        if "verification_pending" not in user:
+            return redirect("/landing-page")
+
+        # Verify the token
+        if token != user["verification_pending"]:
+            return make_response(gettext("token_invalid"), 403)
+
+        # Remove the token from the user
+        self.db.update_user(username, {"verification_pending": None})
+
+        # We automatically login the user
+        cookie = make_salt()
+        self.db.store_token({"id": cookie, "username": user["username"], "ttl": times() + SESSION_LENGTH})
+        remember_current_user(user)
+
+        return redirect("/landing-page")
+
+    @route("/turn-into-teacher", methods=['POST'])
+    def turn_into_teacher_account(self):
+        username = current_user()['username']
+        if not username:
+            return make_response(gettext("username_invalid"), 400)
+        user = self.db.user_by_username(username)
+        if not user:
+            return make_response(gettext("username_invalid"), 403)
+
+        # We update the user in the database and turn it into a teacher
+        self.db.update_user(user['username'], {"is_teacher": 1, "teacher_request": None})
+
+        if user.get("email"):
+            try:
+                send_localized_email_template(
+                    locale=user["language"], template="welcome_teacher", email=user["email"], username=user["username"]
+                )
+            except Exception:
+                print(f"An error occurred when sending a welcome teacher mail to {user['email']}, "
+                      "changes still processed")
+
+        session.get('user')['is_teacher'] = True
+        session['welcome-teacher'] = True
+
+        # I want to redirect the user to a tutorial!
+        return make_response({'message': gettext('turned_into_teacher')}, 200)
 
     @route("/logout", methods=["POST"])
     def logout(self):
@@ -406,7 +467,7 @@ class AuthModule(WebsiteModule):
             "language": account["language"],
             "keyword_language": account["keyword_language"],
             "created": timems(),
-            "teacher_request": True if account.get("is_teacher") else None,
+            "is_teacher": True if account.get("is_teacher") else None,
             "verification_pending": hashed_token,
             "last_login": timems(),
             "pair_with_teacher": 1 if account.get("pair_with_teacher") else 0,
