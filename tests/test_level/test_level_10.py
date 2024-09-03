@@ -160,12 +160,14 @@ class TestsLevel10(HedyTester):
          if_pressed_mapping = {"else": "if_pressed_default_else"}
          if_pressed_mapping['x'] = 'if_pressed_x_'
          def if_pressed_x_():
-             for dier in lijstje.data:
-               print(f'{dier}')
-               time.sleep(0.1)
+           global dier, lijstje
+           for dier in lijstje.data:
+             print(f'{dier}')
+             time.sleep(0.1)
          if_pressed_mapping['else'] = 'if_pressed_else_'
          def if_pressed_else_():
-             print(f'onbekend dier')
+           global dier, lijstje
+           print(f'onbekend dier')
          extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(

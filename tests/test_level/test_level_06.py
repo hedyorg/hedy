@@ -2654,7 +2654,7 @@ class TestsLevel6(HedyTester):
     #
     # if pressed tests
     #
-    def test_if_pressed_x_is_variable(self):
+    def test_if_pressed_x_is_var(self):
         code = textwrap.dedent("""\
         x is a
         if x is pressed print 'it is a letter key' else print 'it is another letter key'
@@ -2666,10 +2666,56 @@ class TestsLevel6(HedyTester):
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
         def if_pressed_x_():
+          global x
           print(f'it is a letter key')
         def if_pressed_else_():
+          global x
           print(f'it is another letter key')
         extensions.if_pressed(if_pressed_mapping)
         print(f'{x}')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_pressed_x_is_var_and_var_reassignment(self):
+        code = textwrap.dedent("""\
+        x is a
+        if x is pressed x is great else x is not great
+        print x""")
+
+        expected = self.dedent("""\
+        x = Value('a')
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_x_():
+          global x
+          x = Value('great')
+        def if_pressed_else_():
+          global x
+          x = Value('not great')
+        extensions.if_pressed(if_pressed_mapping)
+        print(f'{x}')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_pressed_x_is_var_and_new_var_assignment(self):
+        code = textwrap.dedent("""\
+        x is a
+        if x is pressed m is great else m is not great
+        print m""")
+
+        expected = self.dedent("""\
+        x = Value('a')
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_x_():
+          global m, x
+          m = Value('great')
+        def if_pressed_else_():
+          global m, x
+          m = Value('not great')
+        extensions.if_pressed(if_pressed_mapping)
+        print(f'{m}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
