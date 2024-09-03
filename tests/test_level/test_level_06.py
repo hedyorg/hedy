@@ -902,6 +902,18 @@ class TestsLevel6(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
+    def test_assign_ask_var(self):
+        code = "ask is Felienne"
+        expected = "ask = Value('Felienne')"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
+
+    def test_assign_value_starting_with_ask(self):
+        code = "var is asking me a question?"
+        expected = "var = Value('asking me a question?')"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
+
     def test_assign_catalan_var_name(self):
         code = textwrap.dedent("""\
             pel·lícula is Sonic the Hedgehog 2

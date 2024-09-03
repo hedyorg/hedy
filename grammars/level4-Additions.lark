@@ -4,12 +4,12 @@ command: clear | error_non_decimal | print | ask | play | turtle | assign_list |
 _print_ask_argument.1: (_SPACE | list_access | error_list_access | quoted_text | var_access_print)*
 
 error_print_no_quotes: _PRINT text -> error_print_nq
-error_ask_no_quotes: var _IS _ASK text -> error_print_nq
+error_ask_no_quotes: var _IS _ASK not_letter_or_numeral text -> error_print_nq
 
 textwithoutsinglequote: /([^\n']+)/ -> text
 textwithoutdoublequote: /([^\n"]+)/ -> text
 error_print_one_quote_only: _PRINT "'" textwithoutsinglequote -> error_print_nq | _PRINT "\"" textwithoutdoublequote -> error_print_nq | _PRINT textwithoutsinglequote "'" -> error_print_nq | _PRINT textwithoutdoublequote "\"" -> error_print_nq
-error_ask_one_quote_only: var _IS _ASK "'" textwithoutsinglequote -> error_print_nq | var _IS _ASK "\"" textwithoutdoublequote -> error_print_nq | var _IS _ASK textwithoutsinglequote "'" -> error_print_nq | var _IS _ASK textwithoutdoublequote "\"" -> error_print_nq
+error_ask_one_quote_only: var _IS _ASK _SPACE? "'" textwithoutsinglequote -> error_print_nq | var _IS _ASK _SPACE? "\"" textwithoutdoublequote -> error_print_nq | var _IS _ASK _SPACE? textwithoutsinglequote "'" -> error_print_nq | var _IS _ASK _SPACE? textwithoutdoublequote "\"" -> error_print_nq
 
 error_list_access: var_access _SPACE textwithoutspaces _SPACE random
 
