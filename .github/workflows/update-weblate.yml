@@ -76,6 +76,7 @@ jobs:
 
         # Safety check: we should now see `needs_commit: False` and `needs_push: False`. If we don't,
         # the 'wlc reset` below is going to lead to data loss.
+        wlc repo | tee repo.txt
         if grep -q "needs_commit: True" repo.txt || grep -q "needs_push: True" repo.txt; then
           echo "wlc commit and push combo didn't flush out all changes; aborting before we lose data!"
           exit 1
