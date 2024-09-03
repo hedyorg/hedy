@@ -5,8 +5,8 @@ _print_ask_argument.1: (_SPACE | quoted_text | list_access | expression | print_
 command: clear | error_non_decimal | print | turtle | play | add | remove | error_add_missing_to | error_remove_missing_from | sleep | error_print_no_quotes | error_print_one_quote_only | if_pressed_else | error_if_pressed_missing_else | if_pressed_without_else | ifelse | ifs | error_else_no_if | ask | error_ask_no_quotes | assign | assign_list | error_invalid_space | error_text_no_print | empty_line
 _if_less_command: print | turtle | play | add | remove | sleep | error_print_no_quotes | error_print_one_quote_only | ask | error_ask_no_quotes | assign | assign_list
 
-//splitting these commands into two rules, one for equals and one for is so they can be properly handled in the translator
 ask: var (_IS | _EQUALS) _ASK (_print_ask_argument)?
+error_ask_no_quotes: var (_IS | _EQUALS) _ASK text -> error_print_nq
 
 play: _PLAY (list_access | expression | textwithoutspaces)
 
