@@ -631,9 +631,10 @@ class TestsLevel15(HedyTester):
 
         expected = textwrap.dedent("""\
             if_pressed_mapping = {"else": "if_pressed_default_else"}
+            global if_pressed_p_
             if_pressed_mapping['p'] = 'if_pressed_p_'
             def if_pressed_p_():
-                print(f'''press''')
+              print(f'''press''')
             extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code, expected=expected, max_level=16)
@@ -652,14 +653,18 @@ class TestsLevel15(HedyTester):
         stop = Value(0, num_sys='Latin')
         while stop.data!=1:
           if_pressed_mapping = {"else": "if_pressed_default_else"}
+          global if_pressed_p_
           if_pressed_mapping['p'] = 'if_pressed_p_'
           def if_pressed_p_():
-              print(f'''press''')
+            global stop
+            print(f'''press''')
           extensions.if_pressed(if_pressed_mapping)
           if_pressed_mapping = {"else": "if_pressed_default_else"}
+          global if_pressed_s_
           if_pressed_mapping['s'] = 'if_pressed_s_'
           def if_pressed_s_():
-              stop = Value(1, num_sys='Latin')
+            global stop
+            stop = Value(1, num_sys='Latin')
           extensions.if_pressed(if_pressed_mapping)
           time.sleep(0.1)
         print(f'''Uit de loop!''')""")
@@ -681,14 +686,16 @@ class TestsLevel15(HedyTester):
 
         expected = textwrap.dedent("""\
          if_pressed_mapping = {"else": "if_pressed_default_else"}
+         global if_pressed_x_
          if_pressed_mapping['x'] = 'if_pressed_x_'
          def if_pressed_x_():
-             print(f'''x''')
-             print(f'''lalalalala''')
+           print(f'''x''')
+           print(f'''lalalalala''')
+         global if_pressed_else_
          if_pressed_mapping['else'] = 'if_pressed_else_'
          def if_pressed_else_():
-             print(f'''not x''')
-             print(f'''lalalalala''')
+           print(f'''not x''')
+           print(f'''lalalalala''')
          extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(

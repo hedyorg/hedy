@@ -368,12 +368,12 @@ class TestsLevel9(HedyTester):
          if_pressed_mapping = {{"else": "if_pressed_default_else"}}
          if_pressed_mapping['x'] = 'if_pressed_x_'
          def if_pressed_x_():
-             for __i in range({self.int_transpiled(5)}):
-               print(f'doe het 5 keer!')
-               time.sleep(0.1)
+           for __i in range({self.int_transpiled(5)}):
+             print(f'doe het 5 keer!')
+             time.sleep(0.1)
          if_pressed_mapping['else'] = 'if_pressed_else_'
          def if_pressed_else_():
-             print(f'1 keertje')
+           print(f'1 keertje')
          extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
