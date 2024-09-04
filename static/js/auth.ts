@@ -77,7 +77,7 @@ export function destroy_public(confirmation: string) {
   });
 }
 
-export async function request_teacher_account() {
+export async function turn_into_teacher_account() {
   tryCatchPopup(async () => {
     const response = await postJson('/auth/turn-into-teacher');
     modal.notifySuccess(response.message);
