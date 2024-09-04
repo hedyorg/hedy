@@ -559,19 +559,13 @@ class TestsLevel4(HedyTester):
     def test_ask_without_opening_quote_gives_error(self, q):
         code = f"kleur is ask Hedy 123{q}"
 
-        self.single_level_tester(
-            code,
-            exception=exceptions.UnquotedTextException
-        )
+        self.single_level_tester(code, exception=exceptions.UnquotedTextException)
 
     @parameterized.expand(HedyTester.quotes)
     def test_ask_without_closing_quote_gives_error(self, q):
         code = f"kleur is ask {q}Hedy 123"
 
-        self.single_level_tester(
-            code,
-            exception=exceptions.UnquotedTextException
-        )
+        self.single_level_tester(code, exception=exceptions.UnquotedTextException)
 
     def test_ask_with_comma(self):
         code = textwrap.dedent("""\
@@ -726,6 +720,18 @@ class TestsLevel4(HedyTester):
         print(f'ik heet{naam}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=5)
+
+    def test_assign_with_var_ask(self):
+        code = "ask is Felienne"
+        expected = "ask = 'Felienne'"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=5, unused_allowed=True)
+
+    def test_assign_list_with_var_ask(self):
+        code = "ask is one, two, three"
+        expected = "ask = ['one', 'two', 'three']"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=5, unused_allowed=True)
 
     def test_assign_var_with_underscore(self):
         code = textwrap.dedent("""\

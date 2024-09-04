@@ -2549,15 +2549,15 @@ adventures:
                     {else} {print} 'meh'
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Finish the example code by filling in the blanks with commands that you've learned.
-                    When you've finished the code, try to create a code of your own and use a question that you've thought of yourself.
+                    ### Exercício
+                    Complete o código exemplo preenchendo as lacunas com comandos que você aprendeu.
+                    Quando tiver terminado, tente criar seu próprio código com sua própria pergunta.
                 example_code_2: |
                     ```
-                    animals is dog, cow, sheep
-                    answer is ask 'What is your favorite animal?'
-                    _ answer _ animals _ 'Mine too!'
-                    _ _ 'My favorite animals are dogs, cows and sheep'
+                    animais {is} cachorro, vaca, ovelha
+                    resposta {is} {ask} 'Qual é o seu animal favorito?'
+                    _ resposta _ animais _ 'O meu também!'
+                    _ _ 'Meus animais favoritos são cachorros, vacas e ovelhas.'
                     ```
     is_command:
         name: '{is}'
@@ -2594,39 +2594,41 @@ adventures:
                     ```
             14:
                 story_text: |
-                    We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.
-                    The `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.
-                    If you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.
-                    The `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.
-                    If you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.
-                    You use these comparisons in an `{if}`, like this:
+                    Vamos aprender mais itens novos. Você já deve conhecê-los da matemática, o `<` e o `>`.
+                    O `<` verifica se o primeiro número é menor que o segundo. Por exemplo, idade `<` 12 verifica se idade é menor que 12.
+                    Se quiser verificar se o primeiro número é menor ou igual ao segundo, você pode usar `<=`. Exemplo: age `<=` 11.
+                    The `>` verifica se o primeiro número é maior que o segundo. Por exemplo, pontos `>` 10 verifica se pontos é maior que 10.
+                    Se quiser verificar se o primeiro número é maior ou igual ao segundo, você pode usar `>=`. Exemplo: pontos `>=` 11.
+                    Essas comparações podem ser usadas em um `{if}`, assim:
                 example_code: |
                     ```
-                    age = {ask} 'How old are you?'
-                    {if} age > 12
-                        {print} 'You are older than I am!'
+                    idade = {ask} 'Quantos anos você tem?'
+                    {if} idade > 12
+                        {print} 'Você é mais velho(a) que eu!'
+                    ```
+                    ```
+                    idade = {ask} 'Quantos anos você tem?'
+                    {if} idade < 12
+                        {print} 'Você é mais novo(a) que eu!'
+                    {else}
+                        {print} 'Você é mais velho(a) que eu!'
                     ```
                 story_text_2: |
-                    From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:
+                    Deste nível em diante, se quiser verificar uma igualdade exata, você pode usar dois sinais de igual. É assim na maioria das linguagens de programação:
                 example_code_2: |
                     ```
-                    name = {ask} 'What is your name?'
-                    {if} name == 'Hedy'
-                        {print} 'You are cool!'
+                    nome = {ask} 'Qual é o seu nome?'
+                    {if} nome == 'Hedy'
+                        {print} 'Você é legal!'
                     ```
                 story_text_3: |
-                    You can also compare if something is *not* equal to something else using `!=` like this:
+                    Você pode verificar se duas coisas são *diferentes* usando `!=`, desse jeito:
                 example_code_3: |
                     ```
-                    name = {ask} 'What is your name?'
-                    {if} name != 'Hedy'
-                        {print} 'You are not Hedy'
+                    nome = {ask} 'Qual é o seu nome?'
+                    {if} nome != 'Hedy'
+                        {print} 'Você não é Hedy'
                     ```
-
-                    {if} age < 13
-                        {print} 'You are younger than me!'
-                    {else}
-                        {print} 'You are older than me!'
     language:
         name: Língua
         default_save_name: Idioma
@@ -2666,9 +2668,9 @@ adventures:
                     {print} 'You gave ' score ' correct answers.'
                     ```
     maths:
-        name: maths
-        default_save_name: maths
-        description: Introducing maths
+        name: matemática
+        default_save_name: matemática
+        description: introduzindo matemática
         levels:
             6:
                 story_text: |
@@ -2680,17 +2682,18 @@ adventures:
                     That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
-                    {print} '5 plus 5 is ' 5 + 5
-                    {print} '5 minus 5 is ' 5 - 5
-                    {print} '5 times 5 is ' 5 * 5
+                    {print} '5 mais 5 é ' 5 + 5
+                    {print} '5 menos 5 é ' 5 - 5
+                    {print} '5 vezes 5 é ' 5 * 5
+                    {print} '5 dividido por 5 é ' 5 / 5
                     ```
             12:
                 story_text: |-
-                    **Decimal numbers**
-                    So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.
+                    **Números Decimais**
+                    Até o momento, Hedy não permitia números decimais como 1.5. Deste nível em diante, você poderá usá-los. Note que computadores usam `.` em números decimais.
                 example_code: |
                     ```
-                    {print} 'Two and a half plus two and a half is...'
+                    {print} 'Dois e meio mais dois e meio é...'
                     {print} 2.5 + 2.5
                     ```
                 story_text_2: |-

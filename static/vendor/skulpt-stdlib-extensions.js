@@ -33,7 +33,15 @@ var $builtinmodule = function (name) {
             // If mapped key is a variable (not char), we retrieve variable value and use that
             // otherwise if char, use that.
             const charOrVar = value[0].v;
-            let mapLetterKey = Object.hasOwn(Sk.globals, charOrVar) ? Sk.globals[charOrVar].v : charOrVar;
+
+            let mapLetterKey = charOrVar;
+            if (Object.hasOwn(Sk.globals, charOrVar)) {
+              if (Sk.globals[charOrVar].hasOwnProperty('v')) {
+                mapLetterKey = Sk.globals[charOrVar].v;
+              } else {
+                mapLetterKey = Sk.globals[charOrVar].$d.entries['data'][1].v;
+              }
+            }
 
             if (event.key === `${mapLetterKey}`){
               pressed_mapped_key = true;

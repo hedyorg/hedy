@@ -1,3 +1,4 @@
+import exceptions
 import textwrap
 from parameterized import parameterized
 import hedy
@@ -221,6 +222,12 @@ class TestsLevel6(HedyTester):
         expected = self.input_transpiled('details', "say \\'no\\'")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
+
+    @parameterized.expand(HedyTester.quotes)
+    def test_ask_with_equals_without_closing_quote_gives_error(self, q):
+        code = f"kleur = ask {q}Hedy 123"
+
+        self.single_level_tester(code, exception=exceptions.UnquotedTextException)
 
     @parameterized.expand(HedyTester.quotes)
     def test_ask_es(self, q):
@@ -892,6 +899,18 @@ class TestsLevel6(HedyTester):
     def test_assign_keyword_var(self):
         code = "sum is Felienne"
         expected = "_sum = Value('Felienne')"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
+
+    def test_assign_ask_var(self):
+        code = "ask is Felienne"
+        expected = "ask = Value('Felienne')"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
+
+    def test_assign_value_starting_with_ask(self):
+        code = "var is asking me a question?"
+        expected = "var = Value('asking me a question?')"
 
         self.multi_level_tester(code=code, expected=expected, max_level=11, unused_allowed=True)
 
@@ -2647,7 +2666,7 @@ class TestsLevel6(HedyTester):
     #
     # if pressed tests
     #
-    def test_if_pressed_x_is_variable(self):
+    def test_if_pressed_x_is_var(self):
         code = textwrap.dedent("""\
         x is a
         if x is pressed print 'it is a letter key' else print 'it is another letter key'
@@ -2659,10 +2678,56 @@ class TestsLevel6(HedyTester):
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
         def if_pressed_x_():
+          global x
           print(f'it is a letter key')
         def if_pressed_else_():
+          global x
           print(f'it is another letter key')
         extensions.if_pressed(if_pressed_mapping)
         print(f'{x}')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_pressed_x_is_var_and_var_reassignment(self):
+        code = textwrap.dedent("""\
+        x is a
+        if x is pressed x is great else x is not great
+        print x""")
+
+        expected = self.dedent("""\
+        x = Value('a')
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_x_():
+          global x
+          x = Value('great')
+        def if_pressed_else_():
+          global x
+          x = Value('not great')
+        extensions.if_pressed(if_pressed_mapping)
+        print(f'{x}')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_pressed_x_is_var_and_new_var_assignment(self):
+        code = textwrap.dedent("""\
+        x is a
+        if x is pressed m is great else m is not great
+        print m""")
+
+        expected = self.dedent("""\
+        x = Value('a')
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_x_():
+          global m, x
+          m = Value('great')
+        def if_pressed_else_():
+          global m, x
+          m = Value('not great')
+        extensions.if_pressed(if_pressed_mapping)
+        print(f'{m}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
