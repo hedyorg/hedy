@@ -343,10 +343,12 @@ class TestsLevel11(HedyTester):
             if_pressed_mapping = {"else": "if_pressed_default_else"}
             if_pressed_mapping['p'] = 'if_pressed_p_'
             def if_pressed_p_():
-                print(f'press')
+              global i
+              print(f'press')
             if_pressed_mapping['else'] = 'if_pressed_else_'
             def if_pressed_else_():
-                print(f'no!')
+              global i
+              print(f'no!')
             extensions.if_pressed(if_pressed_mapping)
             time.sleep(0.1)""", '  '))
 

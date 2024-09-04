@@ -2221,10 +2221,10 @@ else:{self.add_debug_breakpoint()}
         self.process_arg_for_data_access(args[0], meta.line)
         key = args[0]
 
-        if_code = args[1]
+        if_code = self.if_pressed_code_prepend_global_vars(args[1])
         if_function_name = self.make_function_name(key)
 
-        else_code = args[2]
+        else_code = self.if_pressed_code_prepend_global_vars(args[2])
         else_function_name = self.make_function_name('else')
 
         return (
@@ -2235,6 +2235,24 @@ else:{self.add_debug_breakpoint()}
             self.make_function(else_function_name, else_code) + '\n' +
             self.make_extension_call()
         )
+
+    def if_pressed_code_prepend_global_vars(self, lines):
+        """ Combines if_pressed arguments into a code snippet, which will be placed inside a function. To allow
+         assigning and reassigning variables, all lookup entries, except for funcs and list access, are marked as
+         global and prepended to the snippet. For example:
+            points = 5
+            def if_pressed():
+                global points <-- without this line, we get an error
+                points = points + 1
+         """
+        lines = lines if isinstance(lines, list) else [lines]
+        variables = [e.name for e in self.lookup if '(' not in e.name and '[' not in e.name]
+        if variables and lines:
+            variables = sorted(list(set(variables)))
+            global_vars = f"global {', '.join(variables)}"
+            lines.insert(0, global_vars)
+
+        return '\n'.join(lines)
 
 
 @v_args(meta=True)
@@ -2545,11 +2563,9 @@ class ConvertToPython_8_9(ConvertToPython_7):
     def if_pressed(self, meta, args):
         self.process_arg_for_data_access(args[0], meta.line)
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-
         key = args[0]
 
-        if_code = '\n'.join([x for x in args[1:]])
-        if_code = ConvertToPython.indent(if_code)
+        if_code = self.if_pressed_code_prepend_global_vars(args[1:])
         if_function_name = self.make_function_name(key)
 
         return (
@@ -2558,10 +2574,9 @@ class ConvertToPython_8_9(ConvertToPython_7):
             self.make_function(if_function_name, if_code) + '\n'
         )
 
-    def if_pressed_elses(self, met, args):
+    def if_pressed_elses(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        else_code = '\n'.join([x for x in args[0:]])
-        else_code = ConvertToPython.indent(else_code)
+        else_code = self.if_pressed_code_prepend_global_vars(args)
         else_function_name = self.make_function_name('else')
 
         return (
@@ -3037,6 +3052,16 @@ class ConvertToPython_12(ConvertToPython_11):
               except ValueError:
                 return Value(f'''{args_str}''')""")
 
+    def add_if_key_mapping(self, key, function_name):
+        return textwrap.dedent(f"""\
+            global {function_name}
+            if_pressed_mapping['{key}'] = '{function_name}'""")
+
+    def add_else_key_mapping(self, function_name):
+        return textwrap.dedent(f"""\
+            global {function_name}
+            if_pressed_mapping['else'] = '{function_name}'""")
+
 
 @v_args(meta=True)
 @hedy_transpiler(level=13)
@@ -3090,8 +3115,7 @@ class ConvertToPython_14(ConvertToPython_13):
 class ConvertToPython_15(ConvertToPython_14):
     def while_loop(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
-        body = "\n".join(all_lines)
+        body = self.indent("\n".join(args[1:]))
         body = add_sleep_to_command(body, True, self.is_debug, location="after")
         exception = self.make_index_error_check_if_list([args[0]])
         return exception + "while " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + body
@@ -3159,11 +3183,9 @@ class ConvertToPython_17(ConvertToPython_16):
     def if_pressed_elifs(self, meta, args):
         self.process_arg_for_data_access(args[0], meta.line)
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-
         key = args[0]
 
-        elif_code = '\n'.join([x for x in args[1:]])
-        elif_code = self.indent(elif_code)
+        elif_code = self.if_pressed_code_prepend_global_vars(args[1:])
         elif_function_name = self.make_function_name(key)
 
         return (
