@@ -541,6 +541,9 @@ class ExtractAST(Transformer):
     def NAME(self, args):
         return ''.join([str(c) for c in args])
 
+    def NOT_LETTER_OR_NUMERAL(self, args):
+        return ''.join([str(c) for c in args])
+
     def INT(self, args):
         return Tree('integer', [str(args)])
 

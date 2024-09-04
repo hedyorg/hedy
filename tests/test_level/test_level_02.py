@@ -309,6 +309,53 @@ class TestsLevel2(HedyTester):
             exception=hedy.exceptions.MissingVariableException
         )
 
+    def test_ask_without_assign_gives_error(self):
+        code = "ask did you forget a var is?"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=3,
+            exception=hedy.exceptions.WrongLevelException
+        )
+
+    def test_ask_is_without_assign_gives_error(self):
+        code = "ask is did you forget a var is?"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=3,
+            exception=hedy.exceptions.WrongLevelException
+        )
+
+    def test_ask_without_var_gives_error(self):
+        code = textwrap.dedent("""\
+        prind skipping
+        ask is de papier goed?""")
+
+        expected = textwrap.dedent("""\
+        pass
+        pass""")
+
+        skipped_mappings = [
+            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
+            SkippedMapping(SourceRange(2, 1, 2, 23), hedy.exceptions.WrongLevelException),
+        ]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            skipped_mappings=skipped_mappings,
+            max_level=3,
+        )
+
+    def test_ask_without_argument_gives_error(self):
+        code = "name is ask"
+        self.multi_level_tester(
+            max_level=17,
+            code=code,
+            exception=hedy.exceptions.IncompleteCommandException
+        )
+
     def test_ask_with_var(self):
         code = textwrap.dedent("""\
             name is Hedy
@@ -853,6 +900,12 @@ class TestsLevel2(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=5, unused_allowed=True)
 
+    def test_assign_with_var_starting_with_ask(self):
+        code = "asks is Felienne"
+        expected = "asks = 'Felienne'"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=5, unused_allowed=True)
+
     def test_assign_keyword_var(self):
         code = "sum is Felienne"
         expected = "_sum = 'Felienne'"
@@ -1058,35 +1111,6 @@ class TestsLevel2(HedyTester):
             skipped_mappings=skipped_mappings,
             extra_check_function=lambda c: c.error_code == 'Wrong Level',
             max_level=3
-        )
-
-    def test_ask_without_var_gives_error(self):
-        code = textwrap.dedent("""\
-        prind skipping
-        ask is de papier goed?""")
-
-        expected = textwrap.dedent("""\
-        pass
-        pass""")
-
-        skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
-            SkippedMapping(SourceRange(2, 1, 2, 23), hedy.exceptions.WrongLevelException),
-        ]
-
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            skipped_mappings=skipped_mappings,
-            max_level=3,
-        )
-
-    def test_ask_without_argument_gives_error(self):
-        code = "name is ask"
-        self.multi_level_tester(
-            max_level=17,
-            code=code,
-            exception=hedy.exceptions.IncompleteCommandException
         )
 
     #
