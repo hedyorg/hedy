@@ -94,7 +94,7 @@ it('Is able to sign up as a teacher', () => {
     cy.intercept('/auth/signup').as('sign_up');
     cy.getDataCy('submit_button').click()
     cy.wait('@sign_up').should('have.nested.property', 'response.statusCode', 200)
-    cy.url().should('contain', Cypress.config('baseUrl'));
+    cy.url().should('contain', Cypress.env('teachers_page'));
     
     //delete profile
     goToProfilePage();
