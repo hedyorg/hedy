@@ -24,7 +24,7 @@ var $builtinmodule = function (name) {
     } 
 
     function keyBoardInputPromise(if_pressed_mapping) {
-      $('#keybinding-modal').show();
+      $('#keybinding_modal').show();
       return new Promise((resolve, reject) => {
         window.addEventListener("keydown", (event) => {
           let pressed_mapped_key = false;
@@ -53,7 +53,7 @@ var $builtinmodule = function (name) {
             Sk.misceval.callOrSuspend(Sk.globals[if_pressed_mapping.entries['else'][1].v]);
           }
 
-          $('#keybinding-modal').hide();
+          $('#keybinding_modal').hide();
           resolve();
         }, { once: true });
       })
