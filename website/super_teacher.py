@@ -65,7 +65,7 @@ class SuperTeacherModule(WebsiteModule):
             data["email_verified"] = not bool(data["verification_pending"])
             data["is_teacher"] = bool(data["is_teacher"])
             if not data["is_teacher"]:
-                continue           
+                continue
             data["created"] = utils.timestamp_to_date(data["created"])
             data["last_login"] = utils.timestamp_to_date(data["last_login"]) if data.get("last_login") else None
             if category == "language":
