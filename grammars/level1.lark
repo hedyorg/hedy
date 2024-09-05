@@ -5,7 +5,7 @@ command: print | ask | echo | play | turtle | error_invalid_space | error_invali
 play: _PLAY (textwithoutspaces)?
 print: _PRINT (text)?
 _color_literal : black | blue | brown | gray | green | orange | pink | purple | red | white | yellow
-ask: _ASK (text)?
+ask: _ASK _SPACE? (text)?
 echo: _ECHO (text)?
 turtle: _FORWARD ((NUMBER | text))? -> forward | _TURN ((left | right ))? -> turn | _COLOR (_color_literal | text)? -> color
 error_invalid_space: _SPACE any

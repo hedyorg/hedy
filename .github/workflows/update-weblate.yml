@@ -69,10 +69,10 @@ jobs:
         # too quickly in succession. Add a short sleep to reduce chances of this happening.
         # https://github.com/WeblateOrg/weblate/issues/12400
         wlc commit
-        sleep 10
+        sleep 30
 
         wlc push
-        sleep 10
+        sleep 60
 
         # Safety check: we should now see `needs_commit: False` and `needs_push: False`. If we don't,
         # the 'wlc reset` below is going to lead to data loss.

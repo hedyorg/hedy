@@ -721,6 +721,18 @@ class TestsLevel4(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=5)
 
+    def test_assign_with_var_ask(self):
+        code = "ask is Felienne"
+        expected = "ask = 'Felienne'"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=5, unused_allowed=True)
+
+    def test_assign_list_with_var_ask(self):
+        code = "ask is one, two, three"
+        expected = "ask = ['one', 'two', 'three']"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=5, unused_allowed=True)
+
     def test_assign_var_with_underscore(self):
         code = textwrap.dedent("""\
         voor_naam is Hedy

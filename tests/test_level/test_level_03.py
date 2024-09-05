@@ -330,6 +330,18 @@ class TestsLevel3(HedyTester):
 
         self.multi_level_tester(max_level=5, code=code, expected=expected, unused_allowed=True)
 
+    def test_assign_list_with_var_starting_with_ask(self):
+        code = "asks is one, two, three"
+        expected = "asks = ['one', 'two', 'three']"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=5, unused_allowed=True)
+
+    def test_assign_list_with_var_starting_with_ask_nl(self):
+        code = "vraaga is vind je honden aardig, doe jij teveel gamen, je ging op pad"
+        expected = "vraaga = ['vind je honden aardig', 'doe jij teveel gamen', 'je ging op pad']"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=5, unused_allowed=True)
+
     def test_assign_list_to_hungarian_var(self):
         code = textwrap.dedent("""\
             állatok is kutya, macska, kenguru
