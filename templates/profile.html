@@ -2,13 +2,6 @@
 
 {% block regular_content %}
 <div>
-   {% if user_data['teacher_request'] %}
-        <div class="flex items-center justify-center w-full h-10 bg-yellow-500 text-white font-bold">
-            <div>
-                {{_('teacher_account_request')}}
-            </div>
-        </div>
-   {% endif %}
    <h2 class="mx-4 lg:mx-16 px-2 mb-4">{{_('account_overview')}}</h2>
    <div class="flex flex-col gap-4 mx-4 lg:mx-16">
        {% if invitations %}

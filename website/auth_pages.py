@@ -253,7 +253,7 @@ class AuthModule(WebsiteModule):
             return make_response(gettext("username_invalid"), 403)
 
         # We update the user in the database and turn it into a teacher
-        self.db.update_user(user['username'], {"is_teacher": 1, "teacher_request": None})
+        self.db.update_user(user['username'], {"is_teacher": 1})
 
         if user.get("email"):
             try:
@@ -444,18 +444,6 @@ class AuthModule(WebsiteModule):
                 return make_response(gettext("mail_error_change_processed"), 400)
 
         return make_response({"message": gettext("password_resetted")}, 200)
-
-    @route("/request_teacher", methods=["POST"])
-    @requires_login
-    def request_teacher_account(self, user):
-        account = self.db.user_by_username(user["username"])
-        if account.get("is_teacher"):
-            return make_response(gettext("already_teacher"), 400)
-        if account.get("teacher_request"):
-            return make_response(gettext("already_teacher_request"), 400)
-
-        self.db.update_user(user["username"], {"teacher_request": True})
-        return make_response({"message": gettext("teacher_account_success")}, 200)
 
     def store_new_account(self, account, email):
         username, hashed, hashed_token = prepare_user_db(account["username"], account["password"])

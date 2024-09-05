@@ -70,7 +70,6 @@ class AdminModule(WebsiteModule):
             "is_super_teacher",
             "program_count",
             "prog_experience",
-            "teacher_request",
             "experience_languages",
             "language",
             "keyword_language",
@@ -80,7 +79,6 @@ class AdminModule(WebsiteModule):
             data = pick(user, *fields)
             data["email_verified"] = not bool(data["verification_pending"])
             data["is_teacher"] = bool(data["is_teacher"])
-            data["teacher_request"] = True if data["teacher_request"] else None
             data["created"] = utils.timestamp_to_date(data["created"])
             data["last_login"] = utils.timestamp_to_date(data["last_login"]) if data.get("last_login") else None
             if category == "language":
@@ -276,7 +274,7 @@ def update_is_teacher(db: Database, user, is_teacher_value=1):
     user_is_teacher = is_teacher(user)
     user_becomes_teacher = is_teacher_value and not user_is_teacher
 
-    db.update_user(user["username"], {"is_teacher": is_teacher_value, "teacher_request": None})
+    db.update_user(user["username"], {"is_teacher": is_teacher_value})
 
     # Some (student users) may not have emails, and this code would explode otherwise
     if user_becomes_teacher and not utils.is_testing_request(request) and user.get('email'):
