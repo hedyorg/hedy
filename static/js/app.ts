@@ -1435,29 +1435,29 @@ function toggleDevelopersMode() {
 }
 
 export function saveForTeacherTable(table: string) {
-  let open = window.localStorage.getItem(table);
+  let show_table = window.localStorage.getItem(table);
+  window.localStorage.setItem(table, (show_table !== 'true').toString())
   const arrow = document.querySelector('#' + table + '_arrow') as HTMLElement;
-  if (open == 'true'){
-    window.localStorage.setItem(table, 'false')
-    $('#' + table).hide();
-    arrow.classList.remove('rotate-180');
-  } else {
-    window.localStorage.setItem(table, 'true')
-    $('#' + table).show();
-    arrow.classList.add('rotate-180');
-  }
+  const table_ele = document.getElementById(table)!
+  const show_label = document.getElementById(table + '_show')!
+  const hide_label = document.getElementById(table + '_hide')!
+  table_ele.classList.toggle('hidden')
+  show_label.classList.toggle('hidden')
+  hide_label.classList.toggle('hidden')
+  arrow.classList.toggle('rotate-180');
 }
 
 export function getForTeacherTable(table: string) {
-  let open = window.localStorage.getItem(table);
-  const arrow = document.querySelector('#' + table + '_arrow') as HTMLElement;
-  if (open == 'true'){
-    $('#' + table).show();
-    arrow.classList.add('rotate-180');
-  } else {
-    $('#' + table).hide()
-    arrow.classList.remove('rotate-180');
-  }
+  let show_table = window.localStorage.getItem(table);
+  const table_ele = document.getElementById(table)!
+  const arrow = document.getElementById(table + '_arrow')!;
+  const show_label = document.getElementById(table + '_show')!
+  const hide_label = document.getElementById(table + '_hide')!
+
+  table_ele.classList.toggle('hidden', show_table !== 'true');
+  show_label.classList.toggle('hidden', show_table === 'true');
+  hide_label.classList.toggle('hidden', show_table !== 'true');
+  arrow.classList.toggle('rotate-180', show_table === 'true');
 }
 
 /**
