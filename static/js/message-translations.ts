@@ -1578,13 +1578,13 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "Transpile_warning": "Aviso!",
     "Unsaved_Changes": "Tens um programa por guardar. Queres sair sem o guardar?",
     "adventures_completed": "Adventures completed: {number_of_adventures}",
-    "adventures_restored": "The default adventures have been restored!",
+    "adventures_restored": "As aventuras padrão foram restauradas.",
     "adventures_tried": "Adventures tried",
     "copy_link_to_share": "Copiar ligação de partilha",
-    "customization_deleted": "Customizations successfully deleted.",
+    "customization_deleted": "Personalizações deletadas com sucesso.",
     "dice": "🎲",
     "directly_available": "Directly open",
-    "disabled": "Disabled",
+    "disabled": "Desativado",
     "errors": "Errors",
     "fortune": "🔮, ✨",
     "graph_title": "Errors per adventure completed on level {level}",
@@ -1601,7 +1601,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "successful_runs": "Successful runs: {successful_runs}",
     "teacher_welcome": "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students.",
     "turtle": "tartaruga🐢",
-    "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
+    "unsaved_class_changes": "Há alterações não gravadas, tem certeza que quer sair desta página?"
   },
   "ro": {
     "CheckInternet": "Verifică dacă ai semnal la internet.",

@@ -346,18 +346,18 @@ adventures:
                     {ask} Wie heißt du?
                     ```
                 story_text_2: |
-                    ## Der echo Befehl
-                    Wenn du möchtest, dass der Computer die Antwort für dich wiederholt, kannst du den `{echo}` Befehl verwenden. Beachte, dass die Antwort am Ende des Satzes wiederholt wird - also in diesem Beispiel nach hello.
+                    ## Der `{echo}` Befehl
+                    Wenn du möchtest, dass der Computer die Antwort für dich wiederholt, kannst du den `{echo}` Befehl verwenden. Beachte, dass die Antwort am Ende des Satzes wiederholt wird - also in diesem Beispiel nach Hallo.
                 example_code_2: |
                     ```
                     {print} Hallo!
                     {ask} Wie heißt du?
-                    {echo} hello
+                    {echo} Hallo
                     ```
                 story_text_3: |
                     ### Übung
                     Probiere die `{ask}` und `{echo}` Befehle aus. Zuerst fülle die Lücken, damit das Programm funktioniert.
-                    Dann frage 2 weitere Fragen mit dem `{ask}` Befehl. Nach jedem `{ask}` benutze ein `{echo}` um die Antwort auf dem Bildschirm auszugeben.
+                    Dann frage zwei weitere Fragen mit dem `{ask}` Befehl. Nach jedem `{ask}` benutze ein `{echo}`, um die Antwort auf dem Bildschirm auszugeben.
                 example_code_3: |
                     ```
                     _ Wie geht es dir?
@@ -381,22 +381,22 @@ adventures:
                 story_text_2: |
                     ### Übung
                     In vorherigen Übung hast du das Setzen von Variablen mit dem `{is}` Befehl geübt.
-                    Du hast mindestens 3 Variablen definiert und sie im print Befehl verwendet.
+                    Du hast mindestens 3 Variablen definiert und sie im drucke Befehl verwendet.
                     Jetzt wollen wir die Variablen wie unserem Beispiel interaktiv machen, statt sie zu setzen.
 
                     Kopiere den Code der vorherigen Übung hierher und mache sie mit `{ask}` Befehlen interaktiv.
                 example_code_2: |
                     ```
-                    lieblings_tier {is} {ask} Was ist dein Lieblingstier?
-                    {print} Mein Lieblingstier ist lieblings_tier
+                    lieblingstier {is} {ask} Was ist dein Lieblingstier?
+                    {print} Mein Lieblingstier ist lieblingstier
                     ```
             18:
-                story_text: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
+                story_text: Die letzte Anpassung, die wir machen müssen, um Python Code zu kriegen, ist , `{ask}` in `{input}` zu ändern.
                 example_code: |
                     ```
-                    {print}('My name is Hedy!')
-                    name = {input}('What is your name?')
-                    {print}('So your name is ', name)
+                    {print}('Mein Name ist Hedy!')
+                    name = {input}('Wie heißt du?')
+                    {print}('Aha, dein Name ist ', name)
                     ```
     blackjack:
         name: Blackjack
@@ -2660,7 +2660,7 @@ adventures:
                 example_code_2: |
                     ```
                     lieblingstier {is} _
-                    {print} Ich mag lieblingstierl
+                    {print} Ich mag lieblingstier
                     ```
             6:
                 story_text: |
@@ -2864,7 +2864,7 @@ adventures:
 
                     ### Übung
                     Vervollständige die Karaokeversion von  'Mary had a little lamb'.
-                    Dann Scheibe eine Karaokeversion eines Lieds, das dir gefällt!
+                    Dann schreibe eine Karaokeversion eines Lieds, das dir gefällt!
                 example_code: |
                     ```
                     {print} 'Mary had a little lamb'
@@ -2908,7 +2908,7 @@ adventures:
                     zahl = {ask} 'Sag eine Anfangszahl zwischen 1 und 67'
                     {print} zahl
                     {play} zahl
-                    number = zahl + 1
+                    zahl = zahl + 1
                     {print} zahl
                     {play} zahl
                     zahl = zahl + 1
@@ -4933,11 +4933,11 @@ adventures:
                     Verschachtelte Quadrate <img src="https://github.com/hedyorg/hedy/assets/80678586/f013f9fa-bc68-4c60-b778-2c457799d6f7" width="200">
                     </div>
                 example_code: |
-                    **Extra** Up for a real challenge? Make sure that the colors of these figures are selected randomly, so that each time you run your programs they'll look differently!
+                    **Extra** Willst du eine wirkliche Herausforderung? Die Farben in den Figuren sollen zufällig ausgewählt werden, so dass jedes Mal, wenn dein Programm läuft, anders aussehen!
 
                     ```
-                    colors {is} red, orange, yellow, green, blue, purple, pink, brown, gray, black
-                    color _
+                    farben {is} Rot, Orange, Gelb, Grün, Blau, Lila, Pink, Braun, Grau, Schwarz
+                    farbe _
                     ```
             5:
                 story_text: |
@@ -4952,9 +4952,9 @@ adventures:
                     L <img src="https://github.com/hedyorg/hedy/assets/80678586/3af6f919-7b67-4ee7-b923-11e56f2b6b24" width="100">
                     </div>
                 example_code: |
-                    Hint:
+                    Hinweis:
                     ```
-                    chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?'
+                    gewählter_buchstabe {is} {ask} 'Welchen Buchstaben willst Du sehen? F, E oder L?'
                     {if} _
                     ```
             6:
@@ -4972,9 +4972,9 @@ adventures:
                     Flag <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
                     </div>
                 example_code: |
-                    Hint for the square:
+                    Hinweis für das Quadrat:
                     ```
-                    chosen_color = {ask} _
+                    gewählte_farbe = {ask} _
                     ```
             7:
                 story_text: |
@@ -4984,7 +4984,7 @@ adventures:
                     <div class="w-full flex flex-row gap-2">
                     Hexagon <img src="https://github.com/hedyorg/hedy/assets/80678586/92e492e1-1593-489b-aaf0-51d2a29755f4" width="200">
                     Triangle <img src="https://github.com/hedyorg/hedy/assets/80678586/3629a5e6-1f02-4851-aab9-c5430ba4a1f1" width="200">
-                    Fan <img src="https://github.com/hedyorg/hedy/assets/80678586/1ba2ff71-1230-4fe3-8255-b2c504cf1b4e" width="200">
+                    Fächer <img src="https://github.com/hedyorg/hedy/assets/80678586/1ba2ff71-1230-4fe3-8255-b2c504cf1b4e" width="200">
                     </div>
             8:
                 story_text: |
@@ -4994,9 +4994,9 @@ adventures:
                     **Extra** Die Zahl in den Klammern gibt an, in wie vielen Codezeilen die Figur gezeichnet werden kann. Kannst du es in derselben Anzahl an Zeilen machen?
 
                     <div class="w-full flex flex-row gap-2">
-                    Square (3) <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
-                    Randomly colored star (5) <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
-                    Randomly colored spiral (7) <img src="https://github.com/hedyorg/hedy/assets/80678586/9bcdb3f1-367d-4ae0-878f-d09005424a35" width="150">
+                    Quadrat(3) <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
+                    Zufällig gefärbter Stern (5) <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
+                    Zufällig gefärbte Spirale (7) <img src="https://github.com/hedyorg/hedy/assets/80678586/9bcdb3f1-367d-4ae0-878f-d09005424a35" width="150">
                     </div>
             9:
                 story_text: |
@@ -5013,59 +5013,59 @@ adventures:
                     Flags <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
                     </div>
                 example_code: |
-                    Hint for the nested squares:
+                    Hinweis für die verschachtelten Quadrate:
                     ```
-                    colors = red, blue, orange, yellow, pink, purple, green, brown, black
-                    distance = 120
-                    repeat 5 times
+                    farben = Rot, Blau, Orange, Gelb, Pink, Lila, Grün, Braun, Schwarz
+                    entfernung = 120
+                    {repeat} 5 {times}
                     _
                     ```
-                    Hint for the flags:
+                    Hinweis für die Flaggen:
                     ```
-                    country = ask 'which country would you like to see the flag of?'
-                    if country is 'the Netherlands'
-                        color_1 = red
-                        color_2 = white
-                        color_3 = blue
+                    land = {ask} 'Von welchem Land willst Du die Flagge sehen?'
+                    {if} land {is} 'Deutschland'
+                        color_1 = Rot
+                        color_2 = Weiß
+                        color_3 = Schwarz
                     ```
             10:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Übung
+                    Mache die Zeichnungen mit der Schildkröte nach!
 
                     <div class="w-full flex flex-row gap-2">
-                    Nested Hexagon <img src="https://github.com/hedyorg/hedy/assets/80678586/3629e908-3cd5-44ac-bbcd-1f1cceb15654" width="150">
-                    Traffic lights  <img src="https://github.com/hedyorg/hedy/assets/80678586/edbbb608-5ff8-4349-85a6-e47809adde43" width="100">
+                    Verschachteltes Hexagon <img src="https://github.com/hedyorg/hedy/assets/80678586/3629e908-3cd5-44ac-bbcd-1f1cceb15654" width="150">
+                    Ampel <img src="https://github.com/hedyorg/hedy/assets/80678586/edbbb608-5ff8-4349-85a6-e47809adde43" width="100">
                     </div>
                 example_code: |
-                    Hint Nested Hexagon:
+                    Hinweis Verschachteltes Hexagon:
                     ```
-                    distances = 100, 80, 60, 40, 20
-                    {for} distance {in} distances
+                    entfernungen = 100, 80, 60, 40, 20
+                    {for} Entfernung {in} entfernungen
                     _
                     ```
 
-                    Hint Traffic Lights:
+                    Hint Ampel:
                     ```
-                    colors = red, yellow, green
-                    {for} chosen_color {in} colors
-                        color _
+                    farben = Rot, Gelb, Grün
+                    {for} gewählte_farbe {in} farben
+                        farbe _
                         {repeat} _
                     ```
                 story_text_2: |
-                    Christmas lights <img src="https://github.com/hedyorg/hedy/assets/80678586/9637ea6d-6edc-4d88-a6f7-10271bfc5371" width="500">
+                    Weihnachtsbeleuchtung <img src="https://github.com/hedyorg/hedy/assets/80678586/9637ea6d-6edc-4d88-a6f7-10271bfc5371" width="500">
                 example_code_2: |
-                    Hint Christmas Lights:
+                    Hinweis Weihnachtsbeleuchtung:
 
-                    Start by moving to the left side of the screen with an invisible white line. Then hang up the Christmas lights!
+                    Beginne, indem du die Schildkröte mit einer unsichtbaren Linie zur linken Bildschirmseite bewegst. Dann hänge die Weihnachtsbeleuchtung auf!
                     ```
-                    {color} white
+                    {color} Weiß
                     {turn} -90
                     {forward} 300
                     {turn} 90
 
-                    colors = red, blue, yellow, purple, green, orange, pink
-                    {for} chosen_color {in} colors
+                    farben = Rot, Blau, Gelb, Lila, Grün, Orange, Pink
+                    {for} gewählte_farbe {in} farben
                     _
                     ```
             11:
