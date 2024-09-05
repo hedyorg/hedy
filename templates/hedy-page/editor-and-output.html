@@ -141,25 +141,25 @@
   </div>
   <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
   <div class="order-2 lg:order-3" id="code_related_buttons">
-    <div id="button_row" class="flex flex-col md:flex-row mb-4">
-      <div id="run_button_container" class="flex flex-row flex-initial inline-flex items-center">
-          <button id="runit" data-cy="runit" class="green-btn ltr:mr-1 rtl:ml-1" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
+    <div id="button_row" class="flex flex-col gap-2 md:flex-row mb-4">
+      <div id="run_button_container" class="gap-2 flex flex-row flex-initial inline-flex items-center">
+          <button id="runit" data-cy="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
             <span class="fa fa-play ltr:mr-1 rtl:ml-1"></span>
             {{_('run_code_button')}}
           </button>
-          <button id="stopit" data-cy="stopit" class="red-btn ltr:mr-1 rtl:ml-1" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
+          <button id="stopit" data-cy="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
           <div class="flex-1 md:hidden"></div>
-          <button id="debug_button" class="blue-btn ltr:mr-1 rtl:ml-1" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
+          <button id="debug_button" class="blue-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
               <span class="fa fa-bug ltr:mr-1 rtl:ml-1"></span>
               {{_('debug')}}
            </button>
       </div>
-      <div id="debug_container" class="flex-initial ltr:mr-1 rtl:ml-1" inline-flex items-center">
-          <button id="debug_restart" class="green-btn hidden ltr:mr-2 rtl:ml-2" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
+      <div id="debug_container" class="flex-initial gap-2 inline-flex items-center">
+          <button id="debug_restart" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
             <span class="fa fa-repeat ltr:mr-1 rtl:ml-1"></span>
             {{_('restart')}}
           </button>
-          <button id="debug_stop" class="red-btn hidden ltr:mr-2 rtl:ml-2" onclick="hedyApp.stopDebug()">
+          <button id="debug_stop" class="red-btn hidden" onclick="hedyApp.stopDebug()">
             <span class="fa fa-stop ltr:mr-1 rtl:ml-1"></span>
             {{_('stop')}}
           </button>
@@ -169,7 +169,7 @@
         </button>
       </div>
       <div class="flex-1"></div>
-      <div id="clear_button_container" class="flex-initial mt-2 lg:mt-0 ltr:mr-1 rtl:ml-1 inline-flex items-center">
+      <div id="clear_button_container" class="flex-initial mt-2 lg:mt-0 inline-flex items-center">
           <button id="clear" class="blue-btn" onclick="hedyApp.emptyEditor()">
             <span class="fa fa-broom ltr:mr-1 rtl:ml-1"></span>
             {{_('clear')}}
@@ -202,7 +202,7 @@
     </div>
   </div>
   <div class="order-3 lg:order-4" id="code_related_buttons">
-    <div id="button_row" class="flex flex-col md:flex-row mb-4">
+    <div class="flex flex-col md:flex-row mb-4 gap-4">
       <button id="hide_editor" class="blue-btn rounded items-center hidden lg:inline-block" onclick="hedyApp.hide_editor();">
         <i class="fa-solid fa-caret-left"></i>
         <span>Expand output</span>
@@ -212,26 +212,32 @@
         <span>Show editor</span>
       </button>
       <div class="hidden lg:block lg:flex-1"></div>
-      <div id="read_outloud_button_container" class="dropdown relative">
-        <button id="read_outloud" data-cy="read_outloud" class="blue-btn rounded inline-flex items-center gap-2"
-        onclick="$('#speak_dropdown').slideToggle('medium');">
-        <span class="fa fa-volume-high ltr:mr-1 rtl:ml-1"></span>
-        <span>{{_('read_outloud')}}</span>
-        <svg id="speak_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-        </svg>
-        </button>
-        <div class="dropdown-menu dropdown-blue z-30 min-w-full h-48 overflow-auto" id="speak_dropdown"
-          style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
-          _="on mutation of @style
-              set arrow to #speak_arrow
-              if *display == 'none'
-                  then remove .rotate-180 from arrow
-              else if not arrow.classList.contains('rotate-180')
-                  add .rotate-180 to arrow
-              end">
+      <div class="flex flex-row justify-between gap-2">
+        <div id="read_outloud_button_container" class="dropdown relative">
+          <button id="read_outloud" data-cy="read_outloud" class="blue-btn rounded inline-flex items-center gap-2"
+          onclick="$('#speak_dropdown').slideToggle('medium');">
+          <span class="fa fa-volume-high ltr:mr-1 rtl:ml-1"></span>
+          <span>{{_('read_outloud')}}</span>
+          <svg id="speak_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+          </svg>
+          </button>
+          <div class="dropdown-menu dropdown-blue z-30 min-w-full h-48 overflow-auto" id="speak_dropdown"
+            style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
+            _="on mutation of @style
+                set arrow to #speak_arrow
+                if *display == 'none'
+                    then remove .rotate-180 from arrow
+                else if not arrow.classList.contains('rotate-180')
+                    add .rotate-180 to arrow
+                end">
+          </div>
         </div>
-    </div>
+        <button id="share_program_button" class="blue-btn next-tab">
+          <i class="fa-solid fa-share-nodes ltr:mr-1 rtl:ml-1"></i>
+          {{_('share')}}
+        </button>
+      </div>      
     </div>
   </div>
 
