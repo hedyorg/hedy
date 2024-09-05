@@ -267,7 +267,7 @@ class AuthModule(WebsiteModule):
         session.get('user')['is_teacher'] = True
         session['welcome-teacher'] = True
 
-        # I want to redirect the user to a tutorial!
+        # TODO: Redirect the user to a tutorial page
         return make_response({'message': gettext('turned_into_teacher')}, 200)
 
     @route("/logout", methods=["POST"])
