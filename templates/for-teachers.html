@@ -24,7 +24,8 @@
         <button class="white-btn inline-flex items-center gap-2" data-cy="view_classes"
         _="on click hedyApp.saveForTeacherTable('classes_table')"
         >
-        <span>{{_('view_classes')}}</span>
+        <span id="classes_table_show" class="">{{_('view_classes')}}</span>
+        <span id="classes_table_hide" class="hidden">{{_('hide_classes')}}</span>
         <svg id="classes_table_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
           <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
         </svg>
@@ -43,7 +44,8 @@
             {% if teacher_adventures %}
             <button class="white-btn inline-flex" id="view_adventures" data-cy="view_adventures"
             _="on click hedyApp.saveForTeacherTable('adventures_table')">
-            <span>{{_('view_adventures')}}</span>
+            <span id="adventures_table_show" class="">{{_('view_adventures')}}</span>
+            <span id="adventures_table_hide" class="hidden">{{_('hide_adventures')}}</span>
             <svg id="adventures_table_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
             </svg>
@@ -72,7 +74,8 @@
           _="on load hedyApp.getForTeacherTable('slides_table') end
           on click hedyApp.saveForTeacherTable('slides_table') end"
           >
-          <span>{{_('view_slides')}}</span>
+          <span id="slides_table_show">{{_('view_slides')}}</span>
+          <span id="slides_table_hide" class="hidden">{{_('hide_slides')}}</span>
           <svg id="slides_table_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
           </svg>
