@@ -164,23 +164,11 @@
             <td class="gender_cell hidden">{{user.gender}}</td>
             <td class="experience_cell hidden">{{user.prog_experience}}</td>
             <td class="tags_cell text-center cursor-pointer"><span onclick="hedyApp.edit_user_tags('{{user.username}}');">✏️</span></td>
-            {% if user.teacher_request %}
-                <td id="teacher_request_{{user.username}}" class="teacher_cell text-center">
-                    <span class="fa-solid fa-circle-question cursor-pointer"
-                    hx-trigger="click"
-                    hx-post="/admin/mark-as-teacher/{{user.username}}"
-                    _="on click
-                    remove #teacher_request_{{user.username}}
-                    then toggle .hidden on #is_teacher_{{user.username}}
-                    then set #check_teacher_{{user.username}}.checked to true">
-                    </span>
-                </td>
-            {% endif %}
-                <td id="is_teacher_{{user.username}}" class="{% if user.teacher_request %}hidden{% endif %} teacher_cell text-center">
-                    <input id="check_teacher_{{user.username}}" type="checkbox" {% if user.is_teacher %}checked{% endif %}
-                    hx-trigger="click"
-                    hx-post="/admin/mark-as-teacher/{{user.username}}">
-                </td>
+            <td id="is_teacher_{{user.username}}" class="teacher_cell text-center">
+                <input id="check_teacher_{{user.username}}" type="checkbox" {% if user.is_teacher %}checked{% endif %}
+                hx-trigger="click"
+                hx-post="/admin/mark-as-teacher/{{user.username}}">
+            </td>
             <td class="teacher_cell text-center">
                 <input type="checkbox" {% if user.is_super_teacher %}checked="checked"{% endif %} 
                 hx-trigger="click"
