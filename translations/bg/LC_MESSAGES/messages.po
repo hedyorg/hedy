@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-05-27 13:48+0000\n"
-"PO-Revision-Date: 2024-08-22 06:23+0000\n"
+"PO-Revision-Date: 2024-09-05 15:24+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: bg <LL@li.org>\n"
 "Language: bg\n"
@@ -16,24 +16,21 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7\n"
+"X-Generator: Weblate 5.8-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
 msgid "Access Before Assign"
-msgstr "You tried to use the variable {name} on line {access_line_number}, but you set it on line {definition_line_number}. Set a variable before using it."
+msgstr "Опитваш се да използваш променливата {name} на ред {access_line_number}, но задаваш стойност на променливата на ред {definition_line_number}. Можеш ли да зададеш стойност на променливата преди да я използваш?"
 
-#, fuzzy
 msgid "Cyclic Var Definition"
-msgstr "The name `{variable}` needs to be set before you can use it on the right-hand side of the `{is}` command."
+msgstr "Променливата `{variable}` е използвана от дясната страна на командата `{is}` преди да й е зададена стойност. Можеш ли да дадеш стойност на променливата преди да я използваш?"
 
-#, fuzzy
 msgid "Else Without If Error"
-msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
+msgstr "Командата `{else}` е използвана преди командата `{if}` на ред {line_number}. Можеш ли да сложиш `{if}` преди `{else}`?"
 
-#, fuzzy
 msgid "Function Undefined"
-msgstr "You tried to use the function {name}, but you didn't define it."
+msgstr "Функция с име {name} е използвана преди да е дефинирана. Можеш ли да я дефинираш преди да я използваш?"
 
 #, fuzzy
 msgid "Has Blanks"
@@ -943,22 +940,25 @@ msgstr "Hedy on Github"
 msgid "hello_logo"
 msgstr "Здравей"
 
+#, fuzzy
 msgid "hide_adventures"
-msgstr ""
+msgstr "Hide adventures"
 
 #, fuzzy
 msgid "hide_cheatsheet"
 msgstr "Hide cheatsheet"
 
+#, fuzzy
 msgid "hide_classes"
-msgstr ""
+msgstr "Hide classes"
 
 #, fuzzy
 msgid "hide_keyword_switcher"
 msgstr "Hide keyword switcher"
 
+#, fuzzy
 msgid "hide_slides"
-msgstr ""
+msgstr "Hide slides"
 
 #, fuzzy
 msgid "highest_level_reached"

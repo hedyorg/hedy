@@ -783,7 +783,7 @@ adventures:
                     {print} 'You win!'
                     ```
     calculator_2:
-        name: Calculator 2
+        name: Taschenrechner 2
         default_save_name: Calculator 2
         description: Calculator 2
         levels:
@@ -1341,9 +1341,8 @@ adventures:
                     In diesem Level wird dieses Problem durch die Verwendung von Anführungszeichen behoben.
                 example_code: |
                     ```
-                    {print} 'Ab jetzt musst du Anführungszeichen verwenden!'
-                    antwort {is} {ask} 'Was müssen wir ab jetzt verwenden?'
-                    {print} 'Wir müssen ' antwort ' verwenden.'
+                    name {is} Sophie
+                    {print} Ich heiße name
                     ```
             5:
                 story_text: |
@@ -1352,9 +1351,7 @@ adventures:
                     `{ask}` und `{print}` funktionieren immer noch wie in Level 4.
                 example_code: |
                     ```
-                    name {is} {ask} 'Wie heißt du?'
-                    {if} name {is} Hedy {print} 'Schön' {else} {print} 'Buh!'
-                    ```
+                    passwort {is} {ask} 'Was ist das richtige Passwort?```
             6:
                 story_text: |
                     In diesem Level lernst du etwas Neues: Du kannst jetzt auch rechnen.
@@ -1737,12 +1734,12 @@ adventures:
                     Guck es dir jetzt an!
                 example_code: |
                     ```
-                    prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '1 million dollars' :
+                    prizes = ['1 million dollars', 'an apple pie', 'nothing']
+                    your_prize = prizes[{random}]
+                    {print} 'You win ' your_prize
+                    {if} your_prize == '1 million dollars' :
                         {print} 'Yeah! You are rich!'
-                    {elif} your_price == 'an apple pie' :
+                    {elif} your_prize == 'an apple pie' :
                         {print} 'Lovely, an apple pie!'
                     {else}:
                         {print} 'Better luck next time..'
@@ -1975,7 +1972,7 @@ adventures:
                     {print} Schicksale {at} {random}
                     ```
     functions:
-        name: functions
+        name: Funktionen
         default_save_name: functions
         description: functions
         levels:
@@ -2122,7 +2119,7 @@ adventures:
                                 game = 'over'
                     ```
     hangman:
-        name: Hangman
+        name: Galgenmännchen
         default_save_name: Hangman
         description: Guess the word
         levels:
@@ -2168,7 +2165,7 @@ adventures:
                     print guessed_letters
                     ```
     hangman_2:
-        name: Hangman 2
+        name: Galgenmännchen 2
         default_save_name: Hangman_2
         description: Hangman 2
         levels:
@@ -2216,7 +2213,7 @@ adventures:
                                 _
                     ```
     hangman_3:
-        name: Hangman 3
+        name: Galgenmännchen 3
         default_save_name: Hangman_3
         description: Hangman 3
         levels:
@@ -2510,7 +2507,7 @@ adventures:
                         {print} 'GAME OVER'
                     ```
     hotel:
-        name: hotel
+        name: Hotel
         default_save_name: hotel
         description: hotel
         levels:
@@ -2548,66 +2545,66 @@ adventures:
     if_command:
         name: '{if} & {else}'
         default_save_name: if_command
-        description: Introducing the if command
+        description: Einführung des {if} Befehls
         levels:
             5:
                 story_text: |
                     ## If... else....
-                    In level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.
-                    This code prints nice if you enter Hedy as a name, and boo! if you enter something else.
-                    `{ask}` and `{print}` still work like they did in level 4.
+                    Im Level 5 gib's was Neues, das `{if}`! Mit dem `{if}` kannst zu zwischen zwei verschiedenen Möglichkeiten wählen.
+                    Dieses Programm druckt Wunderbar, falls du Hedy als Name eingibst und Buh, bei anderen Eingaben.
+                    `{ask}` und `{print}` funktionieren noch so wie in Level 4.
                 example_code: |
                     ```
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
+                    name {is} {ask} 'Wie heißt du?'
+                    {if} name {is} Hedy {print} 'Wünderbar' {else} {print} 'Buh!'
                     ```
                 story_text_2: |
-                    Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:
+                    Machmal wird der Code mit einem `{if}` wirklich lang und passt nicht gut in eine Zeile. <br> Du kannst dann den Code auf zwei Zeilen verteilen. Die zweite Zeile beginnt mit einem `{else}` dann so:
                 example_code_2: |
                     ```
-                    name {is} {ask} 'what is your name?'
-                    {if} name {is} Hedy {print} 'nice'
-                    {else} {print} 'boo!'
+                    name {is} {ask} 'Hie heißt du?'
+                    {if} name {is} Hedy {print} 'Wunderbar'
+                    {else} {print} 'Buh!'
                     ```
                 story_text_3: |
-                    ### Exercise
-                    Try to create your own code with `{if}` and `{else}`. You can use the example code if you want.
+                    ### Übung
+                    Versuche dein eigenes Programm mit `{if}` und `{else}` zu schreiben. Wenn du willst, kannst du das Beispielprogramm verwenden.
                 example_code_3: |
                     ```
                     answer {is} {ask} '2 + 2 = ?'
-                    _ _ _ 4 _ 'Great job!'
-                    _ _ 'No 2 + 2 = 4'
+                    _ _ _ 4 _ 'Großartig!'
+                    _ _ 'Nein, 2 + 2 = 4'
                     ```
             8:
                 story_text: |
-                    ## If... Else...
-                    You have learned to repeat a block of lines of code after a `{repeat}` command.
-                    Now you can also use indentation to make blocks after a {if} or {else} command.
-                    Check out the example code.
+                    ## Falls... Sonst...
+                    Du hast gelernt, einen Block von Programmzeilen nach einem `{repeat}` Befehl zu wiederholen.
+                    Jetzt kannst du auch Einrückung verwenden um Blöcke nach nach einem {if} oder {else} Befehl zu erzeugen.
+                    Scheu die das Beispielprogramm an.
 
-                    ### Exercise
-                    Add an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.
+                    ### Übung
+                    Füge einen {else} Befehl zum Beispielprogramm hinzu. Erzeuge einen Block von Zeilen indem du Einrückungen verwendest. Starte dazu jede Zeile mit 4 Leerzeichen.
                 example_code: |
                     ```
-                    name = {ask} 'What is your name?'
+                    name = {ask} 'Wie heißt Du?'
                     {if} name {is} Hedy
-                        {print} 'Welcome Hedy'
-                        {print} 'You can play on your computer!'
+                        {print} 'Willkommen Hedy'
+                        {print} 'Du kannst auf deinem Computer spielen!'
                     ```
             9:
                 story_text: |
-                    In this level you can also put an {if} command inside another {if} command.
+                    In diesem Level kannst du einen {if} Befehl innerhalb eines anderen {if} Befehls verwenden.
                 example_code: |
                     ```
-                    continue = {ask} 'Do you want to continue?'
-                    {if} continue = yes
-                        sure = {ask} 'Are you sure?'
-                        {if} sure {is} yes
-                            {print} 'We will continue'
+                    weiter = {ask} 'Willst Du weiter machen?'
+                    {if} weiter = ja
+                        sicher = {ask} 'Bist du sicher?'
+                        {if} sicher {is} ja
+                            {print} 'Wir machen weiter.'
                         {else}
-                            {print} 'You are not sure'
+                            {print} 'Du ist nicht sicher.'
                     {else}
-                        {print} 'You do not want to continue'
+                        {print} 'Du willst nicht weiter machen.'
                     ```
     in_command:
         name: '{in}'
@@ -2748,7 +2745,7 @@ adventures:
                     {print} 'You gave ' score ' correct answers.'
                     ```
     maths:
-        name: maths
+        name: Mathe
         default_save_name: maths
         description: Introducing maths
         levels:
@@ -2931,10 +2928,10 @@ adventures:
                     ```
             8:
                 story_text: |
-                    Now that we can use the `{repeat}` command for multiple lines, we can make songs even more easily!
+                    Nachdem wir den `{repeat}`Befehl auch für mehrere Zeilen verwenden können, ist es noch leichter, Lieder zu schreiben!
 
-                    ### Exercise
-                    Finish the song of Brother John (Frère Jacques). Don't forget to use `{repeat}`!
+                    ### Übung
+                    Vervollständige das Lieder von Brother John (Bruder Jakob). Vergiss nicht, `{repeat}` zu benutzen!
                 example_code: |
                     ```
                     {print} 'Brother John'
@@ -2951,36 +2948,36 @@ adventures:
                     ```
             9:
                 story_text: |
-                    From this level on you can - among other things - use a {repeat} command inside a {repeat} command.
-                    That makes songs like 'Happy birthday' even shorter!
+                    Ab diesem Level kannst Du - unter anderem - den {repeat} Befehl in einem {repeat} Befehl verwenden.
+                    Damit wird z.B. 'Happy birthday' noch kürzer!
 
-                    ### Exercise
-                    Finish the song!
+                    ### Übung
+                    Vervollständige das Lied!
                 example_code: |
                     ```
-                    first_time = yes
+                    erstes_mal = ja
                     {repeat} 2 {times}
                         {repeat} 2 {times}
                             {play} C
                         {play} D
                         {play} C
-                        {if} first_time {is} yes
+                        {if} erstes_mal {is} ja
                             {play} F
                             {play} E
-                            first_time {is} no
+                            erstes_mal {is} nein
                         {else}
                             _
                     ```
             12:
                 story_text: |
-                    Use functions in your songs! As you can see in the example code, you can make a function for each line of Twinkle Twinkle Little Star. Once you've programmed the first three lines, all you have to do is call the functions in the order you want them played in.
+                    Benutze Funktionen in Deinen Liedern! So wie im Programmbeispiel kannst du eine Funktion für jede Zeile von 'Twinkle Twinkle Little Star' machen. Wenn du die ersten drei Zeilen geschrieben hast, mußt du nur noch die Funktionen in der Reihenfolge aufrufen, in der du sie gespielt haben willst.
 
-                    ### Exercise
-                    Finish the song of Twinkle Twinkle Little Star.
-                    Then look back at all the songs you've programmed in the levels before, can you make those codes better and shorter using functions too?
+                    ### Übung
+                    Vervollständige 'Twinkle Twinkle Little Star'.
+                    Dann schau die nochmal die Lieder an, die du in den vorherigen Leveln geschrieben hast. Kannst du die Programme auch besser und kürzer machen, indem du Funktionen benutzt?
                 example_code: |
                     ```
-                    {define} first_line
+                    {define} erste_zeile
                         {play} C
                         {play} C
                         {play} G
@@ -2990,7 +2987,7 @@ adventures:
                         {play} G
                         {sleep}
 
-                    {define} second_line
+                    {define} zweite_zeile
                         {play} F
                         {play} F
                         {play} E
@@ -3000,7 +2997,7 @@ adventures:
                         {play} C
                         {sleep}
 
-                    {define} third_line
+                    {define} dritte_zeile
                         {play} G
                         {play} G
                         {play} F
@@ -3019,12 +3016,12 @@ adventures:
                     ```
             13:
                 story_text: |
-                    You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
-                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, but each time they are followed by a different couple of notes.
+                    Du kannst eine Funktion mit einem Argument verwenden, wenn in einem Lied Zeilen vorkommen, die fast gleich, aber jedes mal etwas unterschiedlich sind.
+                    Ein Beispiel dafür ist das Lied 'Yankee Doodle'. Die ersten 4 Noten in der ersten Zeile sind gleich, aber danach kommen jedes Mal andere Noten.
 
-                    ### Exercise
-                    Can you finish the song of Yankee Doodle?
-                    Can you think of another song to program this way?
+                    ### Übung
+                    Kannst du 'Yankee Doodle' vervollständigen?
+                    Fällt dir ein anderes Lied ein, das du so programmieren kannst?
                 example_code: |
                     ```
                     {print} 'Yankee Doodle'
@@ -3051,14 +3048,14 @@ adventures:
                     ```
             14:
                 story_text: |
-                    You can program music for fun, but you can also use the musical notes to make something useful like a fire alarm!
+                    Du kannst Musik zum Spass programmieren, aber du kannst die Noten auch verwenden, um etwas nützliches wie einen Feueralarm zu machen!
 
-                    ### Exercise
-                    Make sure the fire alarm rings when there is a fire!
+                    ### Übung
+                    Stelle sicher, dass der Feueralarm ertönt, wenn es brennt!
                 example_code: |
                     ```
-                    {define} fire_alarm
-                        {print} 'FIRE!'
+                    {define} feueralarm
+                        {print} 'FEUER!'
                         note = 40
                         {for} i {in} {range} 1 {to} 100
                             {if} note _ 50
@@ -3067,35 +3064,35 @@ adventures:
                             {else}
                                 note = 40
 
-                    fire = {ask} 'Is there a fire?'
-                    {if} fire _ 'yes'
-                        {call} fire_alarm
+                    feuer = {ask} 'Brennt es?'
+                    {if} feuer _ 'ja'
+                        {call} feueralarm
                     ```
             15:
                 story_text: |
-                    **Warning** This adventure can become extremely annoying!
-                    We can also use the {while} command to repeat a song forever.
+                    **Achtung** Dieses Abenteuer kann mega nervig werden!
+                    Wir können auch den {while} Befehl verwenden, um das Lied ewig zu wiederholen.
 
-                    ### Exercise
-                    Finish the never-ending song.
+                    ### Übung
+                    Vervollstänige das Lied-das-niemals-endet.
                 example_code: |
                     ```
-                    {define} song
+                    {define} lied
                         {play} _
 
-                    yes_or_no = {ask} 'Do you want to hear my never-ending song?'
-                    {while} yes_or_no = 'yes'
+                    ja_oder_nein = {ask} 'Willst du mein Lied-das-niemals-endet hören?'
+                    {while} ja_oder_nein = 'ja'
                         {call} song
                         {print} '🥳'
                     ```
             16:
                 story_text: |
-                    Upgrade your Old MacDonald code!
+                    Verbessere dein 'Old MacDonald' Programm!
 
-                    ### Exercise
-                    Take your code from the 'Sing a Song' adventure and add musical notes to it!
-                    You can make a function for each line in the song and call that function after the line is printed.
-                    We defined the first line for you and called it in the code. Can you finish the whole song?
+                    ### Übung
+                    Nimm das Programm aus Deinem 'Singe eine Lied' Abenteuer und füge Musiknoten hinzu!
+                    Da kannst eine Funktion für jede Zeile des Lieds erstellen und die Funktion aufrufen, nachdem die Zeile gedruckt wurde.
+                    Wir haben die erste Zeile für dich definiert und den Aufruf im Programm eingefügt. Kannst du das ganze Lied vervollständigen?
                 example_code: |
                     ```
                     {define} line_1
@@ -3118,14 +3115,14 @@ adventures:
                     ```
             17:
                 story_text: |
-                    You can use the {elif} to create different options.
+                    Kannt kannst {elif} verwenden, um verschiedene Möglichkeiten zu erzeugen.
 
-                    ### Exercise
-                    Firstly, add colons to get the code to work.
-                    Then finish this code by adding at least 2 other songs for other moods. For example a happy song and an angry song.
+                    ### Übung
+                    Zuerst ergänze die Doppelpunkte, so dass das Programm funktioniert.
+                    Dann vervollständige das Programm, indem du mindestens zwei weitere Lieder für andere Stimmungen ergänzt. Zum Beispiel ein Glücklich-Lied und ein Ärger-Lied.
                 example_code: |
                     ```
-                    {define} scary_song
+                    {define} grusel_lied
                         {for} i {in} {range} 1 {to} 3
                             {play} G
                         {play} E
@@ -3134,34 +3131,34 @@ adventures:
                             {play} F
                         {play} D
 
-                    mood = {ask} 'Which emotion are you feeling?'
-                    {if} mood {is} 'fear'
-                        {call} scary_song
+                    stimmung = {ask} 'Was fühlst du?'
+                    {if} stimmung {is} 'furcht'
+                        {call} grusel_lied
                     {elif} _
                     ```
             18:
                 story_text: |
-                    ### Exercise
-                    Even in this last level of Hedy we can make some music! Be careful of all the syntax that is needed now.
-                    Take a good look at how the functions are defined and called upon in the example code.
-                    Finish the song!
+                    ### Übung
+                    Sogar in diesem letzten Level von Hedy können wir Musik machen.
+                    Schau dir gut an, wie die Funktionen definiert sind und wie die Aufrufe im Beispiel statt finden.
+                    Vervollständige das Lied!
                 example_code: |
                     ```
-                    {def} line_1():
+                    {def} zeile_1():
                         {for} i {in} {range}(1, 5):
                             {play} A
                         {play} D
                         {play} F
                         {play} A
 
-                    {def} line_2():
+                    {def} zeile_2():
                         {for} i {in} {range}(1, 5):
                             {play} G
                         {play} C
                         {play} E
                         {play} G
 
-                    {def} line_3():
+                    {def} zeile_3():
                     _
 
                     {print} ('The drunken sailor')
@@ -3420,7 +3417,7 @@ adventures:
                         {print} 'Du gehörst zum B-Club'
                     ```
     quotation_marks:
-        name: '''quotation marks'''
+        name: '''Anführungszeichen'''
         default_save_name: quotation_marks
         description: Introduction quotation marks
         levels:
@@ -4135,7 +4132,7 @@ adventures:
                         {print}  'Gehe um 10 Uhr zum Bahnhof'
                      ```
     simon:
-        name: Simon Says
+        name: Simon sagt
         default_save_name: Simon
         description: Make a game of Simon Says
         levels:
@@ -4185,7 +4182,7 @@ adventures:
                     {call} show_simon_sequence {with} 1
                     ```
     simon_2:
-        name: Simon Says 2
+        name: Simon sagt 2
         default_save_name: Simon
         description: Make a game of Simon Says
         levels:
@@ -4222,7 +4219,7 @@ adventures:
                     _
                     ```
     simon_3:
-        name: Simon Says 3
+        name: Simon sagt 3
         default_save_name: Simon
         description: Make a game of Simon Says
         levels:
@@ -4461,7 +4458,7 @@ adventures:
                         {print} 'early in the morning'
                     ```
     songs_2:
-        name: Sing a song! 2
+        name: Singe ein Lied! 2
         default_save_name: Song 2
         description: Sing a song 2
         levels:
@@ -4888,7 +4885,7 @@ adventures:
                     {call} square
                     ```
     turtle_draw_it:
-        name: Draw it!
+        name: Zeichne!
         default_save_name: Draw it
         description: Draw this picture with the turtle
         levels:
