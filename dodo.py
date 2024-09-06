@@ -103,6 +103,7 @@ def task_tailwind():
     return dict(
         file_dep=[
             *glob('templates/**/*.html'),
+            *glob('templates/*.html'),
             *glob('main/**/*.md'),
             *glob('content/**/*.md'),
             # exclude files generated for translations
