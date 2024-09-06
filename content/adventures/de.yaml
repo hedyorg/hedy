@@ -1734,15 +1734,15 @@ adventures:
                     Guck es dir jetzt an!
                 example_code: |
                     ```
-                    preise = ['1 Million Euro, 'ein Apfelkuchen', 'nichts']
-                    dein_preis = preise[{random}]
-                    {print} 'Du gewinnst ' dein_preis
-                    {if} dein_preis == '1 Million Euro' :
-                        {print} 'Juhu! Du bis reich!'
-                    {elif} dein_preis == 'ein Apfelkuchen' :
-                        {print} 'Wunderbar, ein Apfelkuchen!'
+                    prizes = ['1 million dollars', 'an apple pie', 'nothing']
+                    your_prize = prizes[{random}]
+                    {print} 'You win ' your_prize
+                    {if} your_prize == '1 million dollars' :
+                        {print} 'Yeah! You are rich!'
+                    {elif} your_prize == 'an apple pie' :
+                        {print} 'Lovely, an apple pie!'
                     {else}:
-                        {print} 'Mehr Glück für's nächste Mal...'
+                        {print} 'Better luck next time..'
                     ```
     for_command:
         name: '{for}'
