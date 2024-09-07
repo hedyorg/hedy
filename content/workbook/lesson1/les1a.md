@@ -1,6 +1,6 @@
 # Hedy - Les 1a
 
-[Teacher] Het doel van deze les is om de eerste codes uit level 1 van Hedy te leren kennen: `print` en `echo` [/Teacher]
+[Teacher] Het doel van deze les is om de eerste drie codes uit level 1 van Hedy te leren kennen: `print`, `echo` en `ask`. [/Teacher]
 
 ## Printen en invoer
 
@@ -10,7 +10,7 @@ Aan het einde van de les kun jij:
 * Een verhaal met invoer maken
 
 ### Opdrachten
-Een computer doet niet zomaar zelf iets, je moet een computer altijd een opdracht geven. Om code uit te printen, gebruiken we de code `print`.
+Een computer doet niet zomaar zelf iets, je moet een computer altijd een opdracht geven. Zo'n opdracht heet commando. Om code uit te printen, gebruiken we de code `print`.
 
 ### Tekst printen
 
@@ -21,7 +21,7 @@ Een `print` opdracht print een woord uit, als het tussen aanhalingstekens staat.
 print Hallo allemaal
 ```
 
-### Opdracht 1: Voorspel de uitvoer
+#### Opdracht 1: Voorspel de uitvoer
 
 {
     "assignment": {"type": "output"}
@@ -41,7 +41,7 @@ print Hallo allemaal
 
 
 
-### Opdracht 2: Foutje?
+#### Opdracht 2: Foutje?
 Soms sluipt er een foutje in je code. Dat is niet erg, maar Hedy kan je code dan niet goed lezen.
 Welke van deze code zijn fout, denk jij?
 
@@ -94,9 +94,9 @@ dus jij heet: Maan
 Let op, het komt precies zo in beeld als het er staat, dus met hetzelfde hoofdlettergebruik en de dubbele punt erbij!
 
 
-### Opdracht 3: Voorspel de uitvoer
+#### Opdracht 3: Voorspel de uitvoer
 
-Voorspel wat de uitvoer van deze codes is. Vul steeds je eigen naam in, of een ander kloppend antwoord.
+Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingevuld.
 
 {
     "assignment": {"type": "output"}
@@ -112,4 +112,182 @@ Voorspel wat de uitvoer van deze codes is. Vul steeds je eigen naam in, of een a
     "code"      : "ask Hoe heet jij?\necho Leuk om je te ontmoeten,",
     "answer"    : "Leuk om je te ontmoeten, **naam**",
     "lines"     : 2
+}
+
+
+#### Opdracht 4: Programmeer-woorden 
+
+Iedere les gaan we nieuwe woorden leren, deze les ook. Weet jij wat deze termen betekenen? Leg het uit je eigen woorden. 
+
+{
+    "assignment": "define",
+    "icon"      : "📖",
+    "question"  : "Wat betekent commando?",
+    "lines"     : 1,
+    "answer"    : "Een opdracht die je aan de computer geeft, bijv print."
+}
+
+{
+    "assignment": "define",
+    "icon"      : "📖",
+    "question"  : "Wat betekent invoer?",
+    "lines"     : 1,
+    "answer"    : "Wat je intikt, als Hedy een ask venster laat zien."
+}
+
+{
+    "assignment": "define",
+    "icon"      : "📖",
+    "question"  : "Wat betekent uitvoer?",
+    "lines"     : 1,
+    "answer"    : "Wat Hedy op het scherm zet als je op Uitvoeren drukt, in het rechterscherm."
+}
+
+#### Opdracht 5: Codes
+
+We hebben tot nu toe 3 codes geleerd: `print`, `ask` en `echo`. Wat doen die? Leg het uit in je eigen woorden. 
+
+{
+    "assignment": "define",
+    "icon"      : "📖",
+    "question"  : "Wat doet het commando `print`?",
+    "lines"     : 1,
+    "answer"    : "Zet tekst op het scherm."
+}
+
+{
+    "assignment": "define",
+    "icon"      : "📖",
+    "question"  : "Wat doet het commando `ask`?",
+    "lines"     : 1,
+    "answer"    : "Vraag om invoer van de gebruiker."
+}
+
+{
+    "assignment": "define",
+    "icon"      : "📖",
+    "question"  : "Wat doet het commando `echo`?",
+    "lines"     : 1,
+    "answer"    : "Herhaalt de invoer van de gebruiker."
+}
+
+
+## Op de computer!
+
+Ga nu naar Les1b - Deel 1
+
+## Tekenen
+
+Aan het einde van de les kun jij:
+
+* Tekeningen maken met de tekenturtle.
+
+
+#### Opdracht 6: Programmeer-woorden 
+
+Weet jij wat deze termen betekenen? Leg het uit je eigen woorden. 
+
+{
+    "assignment": "define",
+    "icon"      : "📖",
+    "question"  : "Wat betekent tabblad?",
+    "lines"     : 1,
+    "answer"    : "Een digitaal mapje waar een opdracht in zit."
+}
+
+{
+    "assignment": "define",
+    "icon"      : "📖",
+    "question"  : "Wat betekent turtle (bij programmeren)?",
+    "lines"     : 1,
+    "answer"    : "De optie om te tekenen met code."
+}
+
+#### Opdracht 7: Codes
+
+We hebben weer 2 nieuwe codes geleerd. Wat doen die? Leg het uit in je eigen woorden. 
+
+{
+    "assignment": "define",
+    "icon"      : "📖",
+    "question"  : "Wat doet het commando `forward`?",
+    "lines"     : 1,
+    "answer"    : "Beweegt de tekenschildpad vooruit"
+}
+
+{
+    "assignment": "define",
+    "icon"      : "📖",
+    "question"  : "Wat doet het commando `turn`?",
+    "lines"     : 1,
+    "answer"    : "Draait de tekenschildpad links of rechts"
+}
+
+
+#### Opdracht 8: Voorspel de uitvoer
+
+Voorspel wat de uitvoer van deze codes is. Dat is bij de turtle of tekenschildpad natuurlijk een tekening.
+
+{
+    "assignment": {"type": "output"}
+    "icon"      : "computer",
+    "code"      : "forward 100\nturn left\nforward 100\nturn left\nforward 100\nturn left\nforward 100\nturn left\n",
+    "answer"    : "een vierkant",
+    "lines"     : 5
+}
+
+{
+    "assignment": {"type": "output"}
+    "icon"      : "computer",
+    "code"      : "forward 100\nturn left\nforward 100\nturn right\nforward 100\nturn left\nforward 100\nturn right\n",
+    "answer"    : "een trapje (zonder onderkant)",
+    "lines"     : 5
+}
+
+{
+    "assignment": {"type": "output"}
+    "icon"      : "computer",
+    "code"      : "forward 100\nturn right\nforward 5\nturn right\nforward 100\nturn right\nforward 5\nturn right\n",
+    "answer"    : "een hele smalle vierkant",
+    "lines"     : 6
+}
+
+
+#### Opdracht 9: Schrijf de code
+
+We draaien het nu om! Je krijg een uitvoer en jij moet de code erbij schrijven.
+
+
+{
+    "assignment": {"type": "input"}
+    "icon"      : "🧑‍💻",
+    "output"    : "
+```
+----------
+|        |
+|        |
+|        |
+|        |
+|        |
+---------
+```
+"
+    "answer"    : "forward 50\nturn left\nforward 50\nturn left\nforward 50\nturn left\n",
+    "lines"     : 8
+}
+
+
+
+{
+    "assignment": {"type": "input"}
+    "icon"      : "🧑‍💻",
+    "output"    : "
+```
+  _
+   |
+   _________
+```
+"
+    "answer"    : "forward 5\nturn right\nforward 10\nturn left\nforward 50\n",
+    "lines"     : 5
 }

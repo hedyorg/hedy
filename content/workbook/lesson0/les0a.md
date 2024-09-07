@@ -10,7 +10,7 @@ Aan het einde van de les weet jij:
 * Welke programmeertalen er zijn
 * Wat je met programmeren kan maken
 
-### Opdracht 1: Wat is programmeren?
+#### Opdracht 1: Wat is programmeren?
 
 In deze lessen gaan we je soms vragen geven waarop geen goed of fout antwoord is. Je mag gewoon opschrijven wat je denkt.
 Bij zo'n opdracht staat altijd een vraagteken.
@@ -24,7 +24,7 @@ Bij zo'n opdracht staat altijd een vraagteken.
     "answer"    : "Programmeren betekent de computer opdrachten geven, in de taal van de computer."
 }
 
-### Opdracht 2: Ken jij al programmeertalen?
+#### Opdracht 2: Ken jij al programmeertalen?
 
 {
     "assignment": "text",
@@ -35,7 +35,7 @@ Bij zo'n opdracht staat altijd een vraagteken.
 }
 
 
-### Opdracht 3: Wat kan je maken met programmeren?
+#### Opdracht 3: Wat kan je maken met programmeren?
 
 {
     "assignment": "text",
@@ -45,7 +45,7 @@ Bij zo'n opdracht staat altijd een vraagteken.
     "answer"    : "Apps, games, spelletjes, maar ook tekeningen, een bestelcomputer zoals bij de Mac of de Dunkin Donuts, een rekenmachine, een quiz, een overhoorprogramma en nog veel meer."
 }
 
-### Opdracht 4: Wat wil je maken met programmeren?
+#### Opdracht 4: Wat wil je maken met programmeren?
 
 {
     "assignment": {"type"   : "options",
@@ -55,7 +55,7 @@ Bij zo'n opdracht staat altijd een vraagteken.
     "lines"     : 3,
 }
 
-### Opdracht 5: Bekijk een programma, opdracht 1
+#### Opdracht 5: Bekijk een programma, opdracht 1
 
 {
     "assignment": {"type": "options",
