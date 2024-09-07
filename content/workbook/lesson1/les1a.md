@@ -10,7 +10,7 @@ Aan het einde van de les kun jij:
 * Een verhaal met invoer maken
 
 ### Opdrachten
-Een computer doet niet zomaar zelf iets, je moet een computer altijd een opdracht geven. Zo'n opdracht heet commando. Om code uit te printen, gebruiken we de code `print`.
+Een     "assignment": "output" doet niet zomaar zelf iets, je moet een computer altijd een opdracht geven. Zo'n opdracht heet commando. Om code uit te printen, gebruiken we de code `print`.
 
 ### Tekst printen
 
@@ -24,16 +24,16 @@ print Hallo allemaal
 #### Opdracht 1: Voorspel de uitvoer
 
 {
-    "assignment": {"type": "output"}
-    "icon"      : "computer",
+    "assignment": "output",
+    "icon"      : "💻",
     "code"      : "print Hallo allemaal",
     "answer"    : "Hallo allemaal",
     "lines"     : 1
 }
 
 {
-    "assignment": {"type": "output"}
-    "icon"      : "computer",
+    "assignment": "output",
+    "icon"      : "💻",
     "code"      : "print goedemorgen",
     "answer"    : "goedemorgen",
     "lines"     : 1
@@ -46,8 +46,8 @@ Soms sluipt er een foutje in je code. Dat is niet erg, maar Hedy kan je code dan
 Welke van deze code zijn fout, denk jij?
 
 {
-    "assignment": { "type"      : "MC",
-                    "options"   : ["Goed" , "Fout"]},
+    "assignment": "MC"
+    "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "A/B",
     "code"      : "prnt Hallo allemaal!",
@@ -55,8 +55,8 @@ Welke van deze code zijn fout, denk jij?
 }
 
 {
-    "assignment": { "type"      : "MC",
-                    "options"   : ["Goed" , "Fout"]},
+    "assignment": "MC"
+    "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "A/B",
     "code"      : "print print",
@@ -99,16 +99,16 @@ Let op, het komt precies zo in beeld als het er staat, dus met hetzelfde hoofdle
 Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingevuld.
 
 {
-    "assignment": {"type": "output"}
-    "icon"      : "computer",
+    "assignment": "output",
+    "icon"      : "💻",
     "code"      : "ask Hoe heet jij?\necho dus jij heet:",
     "answer"    : "dus jij heet: **naam**",
     "lines"     : 2
 }
 
 {
-    "assignment": {"type": "output"}
-    "icon"      : "computer",
+    "assignment": "output",
+    "icon"      : "💻",
     "code"      : "ask Hoe heet jij?\necho Leuk om je te ontmoeten,",
     "answer"    : "Leuk om je te ontmoeten, **naam**",
     "lines"     : 2
@@ -229,24 +229,24 @@ We hebben weer 2 nieuwe codes geleerd. Wat doen die? Leg het uit in je eigen woo
 Voorspel wat de uitvoer van deze codes is. Dat is bij de turtle of tekenschildpad natuurlijk een tekening.
 
 {
-    "assignment": {"type": "output"}
-    "icon"      : "computer",
+    "assignment": "output",
+    "icon"      : "💻",
     "code"      : "forward 100\nturn left\nforward 100\nturn left\nforward 100\nturn left\nforward 100\nturn left\n",
     "answer"    : "een vierkant",
     "lines"     : 5
 }
 
 {
-    "assignment": {"type": "output"}
-    "icon"      : "computer",
+    "assignment": "output",
+    "icon"      : "💻",
     "code"      : "forward 100\nturn left\nforward 100\nturn right\nforward 100\nturn left\nforward 100\nturn right\n",
     "answer"    : "een trapje (zonder onderkant)",
     "lines"     : 5
 }
 
 {
-    "assignment": {"type": "output"}
-    "icon"      : "computer",
+    "assignment": "output",
+    "icon"      : "💻",
     "code"      : "forward 100\nturn right\nforward 5\nturn right\nforward 100\nturn right\nforward 5\nturn right\n",
     "answer"    : "een hele smalle vierkant",
     "lines"     : 6

@@ -19,8 +19,8 @@ print Hallo allemaal
 
 #### Opdracht 1: Uitvoer
 
-**💻 Vraag**: Wat is de uitvoer van deze code?
 
+**💻 Vraag**: Wat is de uitvoer van deze code?
 
 Code:									Uitvoer:
 
@@ -28,8 +28,8 @@ Code:									Uitvoer:
 print Hallo klas H1C!	 								___________________________________
 ```
 
-
 **💻 Vraag**: Wat is de uitvoer van deze code?
+
 Code:									Uitvoer:
 
 ```hedy

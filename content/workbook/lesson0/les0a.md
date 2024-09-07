@@ -48,21 +48,21 @@ Bij zo'n opdracht staat altijd een vraagteken.
 #### Opdracht 4: Wat wil je maken met programmeren?
 
 {
-    "assignment": "options"
-    "options_number" : 3
-    "icon"      : "?",
+    "assignment": "text",
+    "icon"      : "✍️",
+    "numbered"  : "yes",
     "question"  : "Welke dingen zou je willen maken? Noem minstens 3 dingen. Niet alles kan, maar misschien lukken sommige van deze dingen jou wel in de komende weken, maanden of jaren!",
-    "lines"     : 3,
+    "lines"     : 5
 }
 
 #### Opdracht 5: Bekijk een programma, opdracht 1
 
 {
-    "assignment": "options"
-    "options_number" : 5
-    "icon"      : "pen",
+    "assignment": "text",
+    "icon"      : "✍️",
+    "numbered"  : "yes",
     "question"  : "Voor deze opdracht mag je je laptop pakken. Open Magister op je laptop. Maak dan een lijst van de opties die Magister biedt. Schrijf per optie in 1 zin op wat die optie doet.",
-    "example"   : "Voorbeeld: Eén van de opties is 'Berichten'. Bij Berichten kan je je docenten berichten sturen en nieuwe berichten lezen. "
-    "lines"     : 10,
+    "note"      : "Voorbeeld: Eén van de opties is 'Berichten'. Bij Berichten kan je je docenten berichten sturen en nieuwe berichten lezen.",
+    "lines"     : 10
 }
 
