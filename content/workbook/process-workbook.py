@@ -21,9 +21,6 @@ Code:									Uitvoer:
 line = '____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>\n'
 
 
-
-
-
 def convert_json(json):
     assignment_type = json['assignment']
     template = templates[assignment_type]
@@ -40,7 +37,7 @@ def convert_json(json):
             json['lines'] = line * number_of_lines
 
     if 'note' in json.keys():
-        json['note'] += '<br>' # add a newline if we have a note
+        json['note'] += '<br>'  # add a newline if we have a note
     else:
         json['note'] = ''
 
@@ -62,7 +59,6 @@ def convert_json(json):
     return template.format(**json)
 
 
-
 def process_workbook(file_path):
     workbook_output = ''
     json_found = ''
@@ -79,7 +75,7 @@ def process_workbook(file_path):
                     else:
                         # this is not JSON, but markdown, just output
                         workbook_output += line + '\n'
-                    
+
                 # Start of a JSON object
                 else:
                     inside_json = True
@@ -108,7 +104,6 @@ def process_workbook(file_path):
         print(f"File {file_path} not found.")
 
     return workbook_output
-
 
 
 lesson = '1'
