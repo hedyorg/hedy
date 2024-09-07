@@ -1,11 +1,11 @@
+import os
 import json
 import re
+
 
 def convert_json(j):
     for k in j:
         print(j[k])
-
-
 
 
 def process_workbook(file_path):
@@ -18,18 +18,16 @@ def process_workbook(file_path):
                 line = line.strip()  # Strip leading and trailing whitespace
 
                 if not line.startswith('{'):
-                    if  inside_json:
+                    if inside_json:
                         json_found += line  # Add line to the buffer
                     else:
                         # this is not JSON, but markdown, just output
                         print(line)
-                    
+
                 # Start of a JSON object
                 else:
                     inside_json = True
                     json_found = line  # Start buffering JSON content
-
-
 
                 # End of JSON
                 if line.endswith('}'):
@@ -48,7 +46,6 @@ def process_workbook(file_path):
         print(f"File {file_path} not found.")
 
 
-import os
 current_directory = os.path.dirname(os.path.abspath(__file__))
 
 file_path = "/lesson0/les0a.md"
