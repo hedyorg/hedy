@@ -59,6 +59,7 @@ jobs:
         fi
 
         # Have to lock each component individually. Not in the UI, but using the CLI we do.
+        # (NOTE: this list is also below!)
         for component in glossary adventures keywords quizzes commands client-messages web-texts webpages parsons tutorials slides; do
           wlc lock hedy/$component
         done
@@ -74,14 +75,24 @@ jobs:
         wlc push
         sleep 60
 
-        # Safety check: we should now see `needs_commit: False` and `needs_push: False`. If we don't,
-        # the 'wlc reset` below is going to lead to data loss.
-        wlc repo | tee repo.txt
-        if grep -q "needs_commit: True" repo.txt || grep -q "needs_push: True" repo.txt; then
-          echo "wlc commit and push combo didn't flush out all changes; aborting before we lose data!"
+    - name: Confirm that Weblate created a new PR
+      run: |
+        prs=$(gh pr -R hedyorg/hedy list -q '.[] | select(.title | contains("Translations update"))' --json title)
+        if [[ "$prs" == "" ]]; then
+          echo "Weblate didn't create a PR! Not resetting because that would lose changes!"
+
+          # Unlock each component again so we don't stay locked
+          # (NOTE: this list is also above!)
+          for component in glossary adventures keywords quizzes commands client-messages web-texts webpages parsons tutorials slides; do
+            wlc unlock hedy/$component
+          done
+
           exit 1
         fi
+      env:
+        GH_TOKEN: ${{ github.token }}
 
+      run: |
         # 'wlc reset' always leads to ConnectionAborted, so don't wait for it.
         # https://github.com/WeblateOrg/weblate/issues/11368
         wlc reset &
