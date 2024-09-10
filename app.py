@@ -1602,9 +1602,9 @@ def view_program(user, id):
     student_adventure_id = f"{result['username']}-{result['adventure_name']}-{result['level']}"
     student_adventure = DATABASE.student_adventure_by_id(student_adventure_id)
     if not student_adventure:
-                # store the adventure in case it's not in the table
-                student_adventure = DATABASE.store_student_adventure(
-                    dict(id=f"{student_adventure_id}", ticked=False, program_id=id))
+        # store the adventure in case it's not in the table
+        student_adventure = DATABASE.store_student_adventure(
+            dict(id=f"{student_adventure_id}", ticked=False, program_id=id))
 
     arguments_dict = {}
     arguments_dict['program_id'] = id
@@ -1622,8 +1622,7 @@ def view_program(user, id):
         arguments_dict['show_edit_button'] = True
 
     arguments_dict['show_checkbox'] = is_teacher(user)\
-          and result['username'] in DATABASE.get_teacher_students(user['username'])
-
+        and result['username'] in DATABASE.get_teacher_students(user['username'])
 
     return render_template("view-program-page.html",
                            blur_button_available=True,

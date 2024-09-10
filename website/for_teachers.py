@@ -392,9 +392,9 @@ class ForTeachersModule(WebsiteModule):
             # store the adventure in case it's not in the table
             current_adventure = self.db.store_student_adventure(
                 dict(id=f"{student_adventure_id}", ticked=False, program_id=program_id))
-        
-        self.db.update_student_adventure(student_adventure_id, current_adventure['ticked'])        
-        
+
+        self.db.update_student_adventure(student_adventure_id, current_adventure['ticked'])
+
         return make_response({'message': 'success'})
 
     @route("/grid_overview/<class_id>/change_checkbox", methods=["POST"])
