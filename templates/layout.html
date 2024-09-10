@@ -1,3 +1,39 @@
+
+{% macro adventure_index(adv_name, title, selected, id, adv_class, index) %}
+  <li class="border-l-2
+            {% if adv_class == 'teacher' %} 
+              teacher_tab
+            {% elif adv_class == 'command' %}
+              command_tab
+            {% elif adv_class == 'special' %}
+              border-blue-500
+            {% else %}
+              border-blue-900
+            {% endif %}
+          {% if selected %}adv-selected{% endif %}
+        px-3 py-1 hover:px-4 hover:py-3 hover:text-lg cursor-pointer text-blue-900"
+        data-tab="{{ adv_name }}"
+        tabindex="{{ index }}"
+        data-type="{{ adv_class }}"
+        id = "{{ id }}"
+        _="on click wait 150ms 
+        then toggle .-translate-x-full on #index_sidebar
+        then toggle .opacity-75 on #sidebar_bg
+        then toggle .opacity-0 on #sidebar_bg
+        wait 300ms
+        then toggle .hidden on #sidebar_bg"
+  >
+    {{ title }}
+    {% if adv_class == 'teacher' %}
+      <i class="fa-solid fa-chalkboard-user text-xs"></i>
+    {% elif adv_class == 'quiz' %}
+      <i class="fa-solid fa-laptop-file text-xs">
+    {% elif adv_class == 'parsons' %}
+      <i class="fa-solid fa-puzzle-piece text-xs">
+    {% endif %}
+  </li>
+{% endmacro %}
+
 <!doctype html>
 <html lang="{{ g.lang }}" class="notranslate" translate="no">
   <head>
@@ -24,26 +60,19 @@
       <div class="bg-white w-4/5 rounded-lg mt-10">
         <ul class="list-none p-6">
          {% for adventure in adventures%}
-           <li class="border-l-2 {% if adventure.is_teacher_adventure %} 
-                                    teacher_tab
-                                  {% elif adventure.is_command_adventure %}
-                                    command_tab
-                                  {% else %}
-                                    border-blue-900
-                                  {% endif %}
-            px-3 py-1 hover:px-4 hover:py-3 hover:text-lg cursor-pointer text-blue-900"
-            data-tab="{{ adventure.short_name }}"
-            tabindex="{{ loop.index }}">{{ adventure.name }} {% if adventure.is_teacher_adventure %}<i class="fa-solid fa-chalkboard-user text-xs"></i>{% endif %}</li>
+            {% if adventure.is_teacher_adventure%}
+              {{ adventure_index(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'teacher', loop.index) }}
+            {% elif adventure.is_command_adventure %}
+              {{ adventure_index(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'command', loop.index) }}
+            {% else %}
+              {{ adventure_index(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, '', loop.index) }}
+            {% endif %}           
          {% endfor %}
          {% if parsons %}
-           <li class="text-blue-900 border-l-2 border-blue-400 px-3 py-1 hover:px-4 hover:py-3 hover:text-lg cursor-pointer"
-              data-tab="parsons"
-              tabindex="{{ adventures|length + 1 }}">{{_('parsons_title')}} <i class="fa-solid fa-puzzle-piece text-xs"></i></li>
+           {{ adventure_index('parsons', _('parsons_title'), False, 'parsons', 'special', adventures|length + 1) }}
          {% endif %}
          {% if quiz %}
-           <li class="text-blue-900 border-l-2 border-blue-400 px-3 py-1 hover:px-4 hover:py-3 hover:text-lg cursor-pointer"
-              data-tab="quiz"
-              tabindex="(adventures|length + (2 if parsons else 1))">{{_('quiz_tab')}} <i class="fa-solid fa-laptop-file text-xs"></i></li>          
+            {{ adventure_index('quiz', _('quiz_tab'), False, 'quiz', 'special', (adventures|length + (2 if parsons else 1)) ) }}
          {% endif %}
        </ul>
       </div>

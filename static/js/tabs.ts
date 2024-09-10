@@ -86,7 +86,20 @@ export class Tabs {
 
       allTabs.removeClass('adv-selected');
       tab.addClass('adv-selected');
-      document.getElementById('program_name')!.textContent = tab.text().trim()
+      let tab_title = document.getElementById('program_name')!
+      tab_title.textContent = tab.text().trim()
+      const type = tab.data('type');
+      tab_title.classList.remove('border-green-300', 'border-[#fdb2c5]', 'border-blue-300', 'border-blue-900')
+      if (type == 'teacher') {
+        tab_title.classList.add('border-green-300');
+      } else if(type == 'command') {
+        tab_title.classList.add('border-[#fdb2c5]')
+      } else if (type == 'special') {
+        tab_title.classList.add('border-blue-300')
+      } else {
+        tab_title.classList.add('border-blue-900')
+      }
+      
 
       allTargets.addClass('hidden');
       target.removeClass('hidden');
