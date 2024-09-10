@@ -84,18 +84,9 @@ export class Tabs {
       const target = $('*[data-tabtarget="' + tabName + '"]');
       const allTargets = target.siblings('*[data-tabtarget]');
 
-      // Fix classes
-      if (allTabs.hasClass('tab-selected')){
-        allTabs.removeClass('tab-selected');
-        tab.addClass('tab-selected');
-      } else {
-        allTabs.removeClass('adv-selected');
-        allTabs.addClass('hover:bg-blue-100');
-        allTabs.prop('disabled', false);
-        tab.addClass('adv-selected');
-        tab.removeClass('hover:bg-blue-100');
-        tab.prop('disabled', true);
-      }
+      allTabs.removeClass('adv-selected');
+      tab.addClass('adv-selected');
+      document.getElementById('program_name')!.textContent = tab.text().trim()
 
       allTargets.addClass('hidden');
       target.removeClass('hidden');

@@ -22,12 +22,26 @@
     {% endif %}
         {% include "hedy-page/editor-and-output.html" %}
     <!-- progress bar -->
-        {% if username %}
         <div id="progress_bar" data-cy="progress_bar" class="w-full max-w-screen-2xl mx-auto mt-10">
             <div class="flex flex-row w-full">
+                <button data-cy="next_adventure" class="blue-btn flex-initial w-fit next-tab ltr:mr-1 rtl:ml-1 justify-self-end mb-1"
+                _="on click
+                set :next to hedyApp.getNext()
+                if :next
+                set *display to 'block'
+                call :next.click()
+                else
+                set *display to 'none'
+                end
+                then set adv to hedyApp.getCurrentAdv()
+                put adv into #program_name
+                then localStorage.setItem('adventure_dropdown', 'adventure_button_' + adv)">
+                        <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}"></span>
+                        {{_('previous_adventure')}}&nbsp;
+                </button>
                 <div class="flex-initial"></div>
-                <div class="flex-1 mt-5 ml-4 text-center font-medium dark:text-white"><b>{{progress}}% </b>{{_('complete')}}</div>                
-                <button data-cy="next_adventure" class="blue-btn flex-initial w-fit next-tab ltr:ml-1 rtl:mr-1 justify-self-end mx-4 mb-1"
+                <div class="flex-1 mt-5 ml-4 text-center font-medium dark:text-white"><b class="{% if not username %}hidden{% endif %}">{{progress}}% {{_('complete')}}</b></div>                
+                <button data-cy="next_adventure" class="blue-btn flex-initial w-fit next-tab ltr:ml-1 rtl:mr-1 justify-self-end mb-1"
                     _="on click
                     set :next to hedyApp.getNext()
                     if :next
@@ -43,11 +57,10 @@
                     <span class="fa fa-arrow-{% if g.dir == "ltr" %}right{% else %}left{% endif %}"></span>
                 </button>
             </div>
-        <div class="max-w-screen-2xl mr-4 items-center justify-between mx-auto ml-4 rounded-full h-2.5 bg-gray-300">
+        <div class="max-w-screen-2xl mr-4 items-center justify-between mx-auto rounded-full h-2.5 bg-gray-300 {% if not username %}hidden{% endif %}">
             <div class="rounded-full h-2.5 bg-blue-800" style="width: {{progress}}%"></div>
         </div>
         </div>
-        {% endif %}
     {% if latest and not raw %}
       <div class="text-sm mt-10 ltr:mr-5 rtl:ml-5 font-extralight">
       Latest update: {{latest}}
