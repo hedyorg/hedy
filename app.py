@@ -213,10 +213,12 @@ def load_saved_programs(level, into_adventures, preferential_program: Optional[P
             program = loaded_programs.get(adventure.name)
         if not program:
             continue
-
+        student_adventure_id = f"{current_user()['username']}-{program['adventure_name']}-{level}"
+        student_adventure = DATABASE.student_adventure_by_id(student_adventure_id)
         adventure.save_name = program.name
         adventure.editor_contents = program.code
         adventure.save_info = SaveInfo.from_program(program)
+        adventure.is_checked = (student_adventure and student_adventure['ticked']) == True
 
 
 def load_customized_adventures(level, customizations, into_adventures):
