@@ -1815,13 +1815,13 @@ adventures:
                     Twój program musi zawierać co najmniej 10 wierszy kodu i musi posiadać co najmniej jedno polecenie `{if}` i `{else}`.
                 example_code: |
                     ```
-                    przyjaciele {is} Jordan, Lucy, Dave
-                    {print} 'Potrafię przewidzieć, czy wygrasz jutro na loterii!'
-                    osoba {is} {ask} 'Kim jesteś?'
-                    dobra odpowiedź {is} Hurra! Wygrałeś!, Na pewno wygrasz!, Mamy zwycięzcę!
-                    zła odpowiedź[ {is} Pech! Spróbuj ponownie!, Kolejna osoba wygra, Przegrywasz!
-                    {if} osoba {in} przyjaciele {print} dobra odpowiedź {at} {random}
-                    {else} {print} zła odpowiedź {at} {random}
+                    friends {is} Jordan, Lucy, Dave
+                    {print} 'I can predict if you will win the lottery tomorrow!'
+                    person {is} {ask} 'Who are you?'
+                    good_answer {is} Hurray! You win!, You will definitely win!, We have a winner!
+                    bad_answer {is} Bad luck! Try again!, Another person will win, You lose!
+                    {if} person {in} friends {print} good_answer {at} {random}
+                    {else} {print} bad_answer {at} {random}
                     ```
             6:
                 story_text: |
