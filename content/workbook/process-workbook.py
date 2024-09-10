@@ -6,7 +6,7 @@ current_directory = os.path.dirname(os.path.abspath(__file__))
 # teacher content/answers
 
 templates = {
-    'text': '''**{icon} Vraag**: {question} <br>
+'text': '''**{icon} Vraag**: {question} <br>
 {note}
 {lines} <br>
 ''',
@@ -15,8 +15,25 @@ Code:									Uitvoer:
 ```hedy
 {code}							
 ```
+''',
+
+'define': '''**{icon} Vraag**: {question}
+Antwoord: ____________________________________________________________________________________________________<br>
+''',
+
+'MC': '''**{icon} Vraag**: {question}
+Antwoord: {options}
+''',
+
+'MC-code': '''**{icon} Vraag**: {question}
+```hedy
+{code}							
+```
+Antwoord: {options}
 '''
 }
+
+
 
 line = '____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>\n'
 
@@ -41,7 +58,7 @@ def convert_json(json):
     else:
         json['note'] = ''
 
-    if 'code' in json.keys():
+    if 'code' in json.keys() and 'lines' in json.keys():
         code_with_output = ''
         current_line = 1
 
@@ -55,6 +72,11 @@ def convert_json(json):
 
         json['code'] = code_with_output
         # todo: add more empty lines if we need more (not an issue till we get to loops)
+
+    if 'options' in json.keys():
+        all = json['options']
+        json['options'] = '〇 ' + ' 〇 '.join(all)
+
 
     return template.format(**json)
 
@@ -88,7 +110,7 @@ def process_workbook(file_path):
                     try:
                         json_part = json.loads(json_found)
                         workbook_output += convert_json(json_part)
-                        print(workbook_output)
+                        # print(workbook_output)
                         f = open(current_directory + 'tester.md', "w")
                         f.write(workbook_output)
                         f.close()

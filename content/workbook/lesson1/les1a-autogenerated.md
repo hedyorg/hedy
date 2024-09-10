@@ -55,8 +55,6 @@ print print
 ```
 Antwoord: 〇 Goed 〇 Fout
 
-
-
 ### Invoer vragen
 
 Alleen tekst is een beetje saai. Je kan in Hedy ook om _invoer_ vragen. Invoer is tekst die je aan de computer geeft.
@@ -214,3 +212,13 @@ turn right
                                       
 							
 ```
+
+
+#### Opdracht 9: Schrijf de code
+
+We draaien het nu om! Je krijg een uitvoer en jij moet de code erbij schrijven.
+
+
+
+
+

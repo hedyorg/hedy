@@ -46,7 +46,7 @@ Soms sluipt er een foutje in je code. Dat is niet erg, maar Hedy kan je code dan
 Welke van deze code zijn fout, denk jij?
 
 {
-    "assignment": "MC"
+    "assignment": "MC-code",
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "A/B",
@@ -55,7 +55,7 @@ Welke van deze code zijn fout, denk jij?
 }
 
 {
-    "assignment": "MC"
+    "assignment": "MC-code",
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "A/B",
@@ -259,7 +259,7 @@ We draaien het nu om! Je krijg een uitvoer en jij moet de code erbij schrijven.
 
 
 {
-    "assignment": {"type": "input"}
+    "assignment": "input",
     "icon"      : "🧑‍💻",
     "output"    : "
 ```
@@ -279,7 +279,7 @@ We draaien het nu om! Je krijg een uitvoer en jij moet de code erbij schrijven.
 
 
 {
-    "assignment": {"type": "input"}
+    "assignment": "input",
     "icon"      : "🧑‍💻",
     "output"    : "
 ```
