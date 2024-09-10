@@ -6,7 +6,7 @@ current_directory = os.path.dirname(os.path.abspath(__file__))
 # teacher content/answers
 
 templates = {
-'text': '''**{icon} Vraag**: {question} <br>
+    'text': '''**{icon} Vraag**: {question} <br>
 {note}
 {lines} <br>
 ''',
@@ -17,22 +17,21 @@ Code:									Uitvoer:
 ```
 ''',
 
-'define': '''**{icon} Vraag**: {question}
+    'define': '''**{icon} Vraag**: {question}
 Antwoord: ____________________________________________________________________________________________________<br>
 ''',
 
-'MC': '''**{icon} Vraag**: {question}
+    'MC': '''**{icon} Vraag**: {question}
 Antwoord: {options}
 ''',
 
-'MC-code': '''**{icon} Vraag**: {question}
+    'MC-code': '''**{icon} Vraag**: {question}
 ```hedy
 {code}							
 ```
 Antwoord: {options}
 '''
 }
-
 
 
 line = '____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>\n'
@@ -76,7 +75,6 @@ def convert_json(json):
     if 'options' in json.keys():
         all = json['options']
         json['options'] = '〇 ' + ' 〇 '.join(all)
-
 
     return template.format(**json)
 
