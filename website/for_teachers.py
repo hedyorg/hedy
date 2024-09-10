@@ -379,6 +379,24 @@ class ForTeachersModule(WebsiteModule):
     def has_placeholder(self, code):
         return re.search(r'(?<![^ \n])(_)(?= |$)', code, re.M) is not None
 
+    @route("/check_adventure", methods=["POST"])
+    @requires_login
+    def check_adventure(self, user):
+        level = request.args.get('level')
+        student_name = request.args.get('student_name', type=str)
+        adventure_name = request.args.get('adventure_name', type=str)
+        program_id = request.args.get('program_id', type=str)
+        student_adventure_id = f"{student_name}-{adventure_name}-{level}"
+        current_adventure = self.db.student_adventure_by_id(student_adventure_id)
+        if not current_adventure:
+            # store the adventure in case it's not in the table
+            current_adventure = self.db.store_student_adventure(
+                dict(id=f"{student_adventure_id}", ticked=False, program_id=program_id))
+        
+        self.db.update_student_adventure(student_adventure_id, current_adventure['ticked'])        
+        
+        return make_response({'message': 'success'})
+
     @route("/grid_overview/<class_id>/change_checkbox", methods=["POST"])
     @requires_login
     def change_checkbox(self, user, class_id):
