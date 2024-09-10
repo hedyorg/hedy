@@ -218,7 +218,7 @@ def load_saved_programs(level, into_adventures, preferential_program: Optional[P
         adventure.save_name = program.name
         adventure.editor_contents = program.code
         adventure.save_info = SaveInfo.from_program(program)
-        adventure.is_checked = (student_adventure and student_adventure['ticked']) == True
+        adventure.is_checked = (student_adventure and student_adventure['ticked']) is True
 
 
 def load_customized_adventures(level, customizations, into_adventures):
