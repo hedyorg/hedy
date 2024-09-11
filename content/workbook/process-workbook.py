@@ -97,8 +97,6 @@ def convert_json(json):
         all = json['options']
         json['options'] = '<br> 〇 ' + '<br> 〇 '.join(all)
 
-
-
     return template.format(**json)
 
 
