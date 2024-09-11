@@ -257,37 +257,28 @@ Voorspel wat de uitvoer van deze codes is. Dat is bij de turtle of tekenschildpa
 
 We draaien het nu om! Je krijg een uitvoer en jij moet de code erbij schrijven.
 
+{
+    "assignment": "input",
+    "icon"      : "🧑‍💻",
+    "output"    : "_\n |\n |_________",
+    "answer"    : "forward 5\nturn right\nforward 10\nturn left\nforward 50\n",
+    "lines"     : 5
+}
+
 
 {
     "assignment": "input",
     "icon"      : "🧑‍💻",
     "output"    : "
-```
-----------
-|        |
-|        |
-|        |
-|        |
-|        |
----------
-```
-"
+----------\n
+|        |\n
+|        |\n
+|        |\n
+|        |\n
+---------\n",
     "answer"    : "forward 50\nturn left\nforward 50\nturn left\nforward 50\nturn left\n",
     "lines"     : 8
 }
 
 
 
-{
-    "assignment": "input",
-    "icon"      : "🧑‍💻",
-    "output"    : "
-```
-  _
-   |
-   _________
-```
-"
-    "answer"    : "forward 5\nturn right\nforward 10\nturn left\nforward 50\n",
-    "lines"     : 5
-}

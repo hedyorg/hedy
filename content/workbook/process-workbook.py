@@ -13,7 +13,7 @@ templates = {
     'output': '''**{icon} Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									Uitvoer:
 ```hedy
-{code}							
+{textfields}							
 ```
 ''',
 
@@ -30,7 +30,13 @@ Antwoord: {options}
 {code}							
 ```
 Antwoord: {options}
-'''
+''',
+    'input': '''**{icon} Vraag**: Welke code hoort bij deze uitvoer? <br>
+Code:									Uitvoer:
+```hedy
+{textfields}							
+```
+''',
 }
 
 
@@ -57,24 +63,41 @@ def convert_json(json):
     else:
         json['note'] = ''
 
-    if 'code' in json.keys() and 'lines' in json.keys():
-        code_with_output = ''
+    if assignment_type == 'output':
+        textfields = ''
         current_line = 1
 
-        for line_of_code in json['code'].split('\n'):
+        for output_line in json['code'].split('\n'):
             # make the length with spaces, then with _ for the lines
-            output_line = line_of_code.ljust(38, ' ')
+            output_line = output_line.ljust(38, ' ')
             if current_line <= number_of_lines:
                 output_line = output_line.ljust(76, '_')
                 current_line += 1
-            code_with_output += output_line + '\n'
+            textfields += output_line + '\n'
 
-        json['code'] = code_with_output
+        json['textfields'] = textfields
         # todo: add more empty lines if we need more (not an issue till we get to loops)
+
+    if assignment_type == 'input':
+        textfields = ''
+        number_of_input_lines = len(json['answer'].split('\n'))
+        output_lines = json['output'].split('\n')
+        number_of_output_lines = len(output_lines)
+
+        for i in range(max(number_of_input_lines, number_of_output_lines)):
+            if i < number_of_output_lines:
+                output_line = output_lines[i]
+                newline = '_' * 30 + ' ' * 10 + output_line
+
+            textfields += newline + '\n'
+
+        json['textfields'] = textfields
 
     if 'options' in json.keys():
         all = json['options']
-        json['options'] = '〇 ' + ' 〇 '.join(all)
+        json['options'] = '<br> 〇 ' + '<br> 〇 '.join(all)
+
+
 
     return template.format(**json)
 

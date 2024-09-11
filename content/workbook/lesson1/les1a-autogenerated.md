@@ -47,13 +47,15 @@ Welke van deze code zijn fout, denk jij?
 ```hedy
 prnt Hallo allemaal!							
 ```
-Antwoord: 〇 Goed 〇 Fout
+Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **A/B Vraag**: Is deze code goed of fout?
 ```hedy
 print print							
 ```
-Antwoord: 〇 Goed 〇 Fout
+Antwoord: <br> 〇 Goed<br> 〇 Fout
+
+
 
 ### Invoer vragen
 
@@ -218,7 +220,31 @@ turn right
 
 We draaien het nu om! Je krijg een uitvoer en jij moet de code erbij schrijven.
 
+**🧑‍💻 Vraag**: Welke code hoort bij deze uitvoer? <br>
+Code:									Uitvoer:
+```hedy
+______________________________          _
+______________________________           |
+______________________________           |_________
+______________________________           |_________
+______________________________           |_________
+______________________________           |_________
+							
+```
 
+
+**🧑‍💻 Vraag**: Welke code hoort bij deze uitvoer? <br>
+Code:									Uitvoer:
+```hedy
+______________________________          ----------
+______________________________          |        |
+______________________________          |        |
+______________________________          |        |
+______________________________          |        |
+______________________________          ---------
+______________________________          
+							
+```
 
 
 
