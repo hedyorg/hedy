@@ -737,27 +737,27 @@ adventures:
         levels:
             14:
                 story_text: |
-                    ### Exercise 2
+                    ### Ćwiczenie 2
                     **To druga część tej przygody.** Przygoda zaczyna się w poprzedniej zakładce.
-                    czywiście nie zawsze chcesz obliczyć średnią z 4 testów. Możesz obliczyć średnią z 10 testów lub tylko 2.
+                    Oczywiście nie zawsze chcesz obliczyć średnią z 4 testów. Możesz obliczyć średnią z 10 testów lub tylko 2.
                     Możemy rozwiązać ten problem, dodając argument i zmienną 'ilość_testów'.
-                    * Start a new line on line 3. Set the amount_of_tests argument by asking the student how many tests they have made.
-                    * Change the 4 in line 4 to the new argument amount_of_tests.
-                    * Lastly, change the 4 in line 6 to amount_of_tests
+                    * Zacznij nową linię w wierszu 3. Ustaw argument ilość_testów, pytając ucznia, ile testów napisał.
+                    * Zmień 4 w wierszu 4 na nowy argument ilość_testów.
+                    * Na koniec zmień 4 w wierszu 6 na ilość_testów
 
-                    Try out your new program. Does it work?
+                    Wypróbuj nowy program. Działa?
 
-                    ### Exercise 3
-                    Did you want to make your program even better? Great! In the previous program you could only calculate the mean grade of 1 subject, but it would be better if you could calculate the mean grade for all subjects you want!
-                    We won't tell you how to do it, but we will give you one tip: Start your code in line 1 with: define calculate_mean_grade with subject.
+                    ### Ćwiczenie 3
+                    Chciałbyś ulepszyć swój program? Świetnie! W poprzednim programie można było obliczyć tylko średnią ocenę z 1 przedmiotu, ale byłoby lepiej, gdybyś mógł obliczyć średnią ocenę dla wszystkich przedmiotów!
+                    Nie powiemy ci, jak to zrobić, ale damy ci jedną wskazówkę: Rozpocznij swój kod w wierszu 1 od: zdefiniuj oblicz_średnią_oceny z przedmiotu.
                 example_code: |
                     ```
-                    # Use your own code from the previous adventure.
+                    # Wykorzystaj swój kod z poprzedniej przygody.
                     ```
     clear_command:
         name: '{clear}'
         default_save_name: clear_command
-        description: '{clear} command'
+        description: 'Polecenie {clear}'
         levels:
             4:
                 story_text: |
@@ -771,7 +771,7 @@ adventures:
                     {clear}
                     {print} '1'
                     {clear}
-                    {print} 'wait for it...'
+                    {print} 'czekaj...'
                     {sleep} 3
                     {clear}
                     {print} 'NIESPODZIANKA!'
@@ -779,7 +779,7 @@ adventures:
     debugging:
         name: debugging
         default_save_name: debugging
-        description: debugging adventure
+        description: przygoda debuggowania
         levels:
             1:
                 story_text: |-
@@ -788,7 +788,7 @@ adventures:
                     Będziecie musieli dowiedzieć się, co jest z nim nie tak oraz poprawić wszelkie pomyłki.
 
                     ### Ćwiczenie
-                    Pozbądź się pomyłek z tego kodu. Powodzenia!
+                    Zdebugguj ten kod. Powodzenia!
                 example_code: |
                     **Uwaga! Ten kod wymaga usunięcia z niego błędów!**
                     ```
@@ -805,7 +805,7 @@ adventures:
                     Będziecie musieli dowiedzieć się, co jest z nim nie tak oraz poprawić wszelkie pomyłki.
 
                     ### Ćwiczenie
-                    Pozbądź się pomyłek z tego kodu. Powodzenia!
+                    Zdebugguj ten kod. Powodzenia!
                 example_code: |
                     **Uwaga! Ten kod musi zostać zdebugowany!**
                     ```
@@ -857,43 +857,43 @@ adventures:
                     ### Ćwiczenie
                     Zdebugguj ten kod. Powodzenia!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Uwaga! Ten kod musi zostać zdebuggowany**
                     ```
-                    {print} Welcome to Swimming Pool Hedy!
-                    class {is} {ask} 'Are you here to join a class today?'
-                    {if} class yes
-                    {print} 'Great! You're joining a class!
-                    {print} {else} 'You will not be joining a class'
-                    discount {is} 'Do you have a discount code?'
-                    {if} discount {is} yes
-                    discount_answer {is} {ask} 'What's your discount code?'
-                    discount_codes = Senior4231, Student8786, NewMember6709
-                    {if} discount_answer {is} {in} discount_cods
-                    {print} 'That will be $3,50'
-                    'That will be $5,50'
-                    {print} 'Have a nice swim!'
+                    {print} Witamy na basenie Hedy'ego!
+                    klasa {is} {ask} 'Czy chciałbyś dzisiaj dołączyć na lekcję pływania?'
+                    {if} lekcja pływania tak
+                    {print} 'Świetnie! Dołączasz na lekcję pływania!
+                    {print} {else} 'Nie dołączasz na lekcję pływania'
+                    discount {is} 'Czy posiadasz kod zniżkowy?'
+                    {if} zniżka {is} tak
+                    zniżka-odpowiedź {is} {ask} 'Jaki jest twój kod zniżkowy?'
+                    kody_zniżkowe = Senior4231, Student8786, NewMember6709
+                    {if} zniżka_odpowiedź {is} {in} kod_zniżkowy
+                    {print} 'Do zapłaty będzie $3,50'
+                    'Do zapłaty będzie $5,50'
+                    {print} 'Życzymy miłego pływania!'
                     ```
             6:
                 story_text: |-
                     ### Ćwiczenie
                     Zdebugguj ten kod. Powodzenia!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Uwaga! Ten kod musi zostać zdebuggowany**
                     ```
-                    {print} 'Vending machine'
-                    chosen_product = {ask} 'Please select a product'
-                    1_dollar_products = coke orange juice water
-                    2_dollar_products = chocolate, cookie, museli bar
-                    3dollar_prodcuts = potato chips, beef jerky, banana bread
-                    {if} chosen {is} {in} 1_dollar_products
-                    price = 1
-                    {if} chosen_product {is} 2_dollar_products
+                    {print} 'Automat z przekąskami'
+                    wybrany_produkt = {ask} 'Proszę wybrać produkt'
+                    produkty_1_dolarowe = kola, sok pomarańczowy, woda 
+                    produkty_2_dolarowe = czekolada, ciastko, batonik muesli
+                    produkty_3_dolarowe = chipsy, kabanosy, chleb bananowy
+                    {if} wybrany  {is} {in} produkty_1_dolarowe
+                    cena = 1
+                    {if} wybrany_produkt {is} produkty_2_dolarowe
                     price = 2
-                    {else} chosen_product {in} 3_dollar_products
-                    price = 3
-                    amount_of_products = '{ask} How many of ' chosen_product would you like to have?'
-                    total = price + amount_of_product
-                    {print} 'That will be $' price 'please'
+                    {else} wybrany_produkt {in} produkty_3_dolarowe
+                    cena = 3
+                    ilość_produktów = '{ask} Ile ' wybrany_produkt ' chciałbyś otrzymać?'
+                    suma= cena + ilość_produktów
+                    {print} 'To będzie ' cena ' $
                     ```
             7:
                 story_text: |-
@@ -912,26 +912,26 @@ adventures:
                 story_text: |-
                     ### Ćwiczenie
                     Zdebuguj ten kod. Powodzenia!
-                example_code: |
+                example_code: |-
                     **Warning! This code needs to be debugged!**
                     ```
-                    {print} 'Welcome to Manicures and Pedicures by Hedy'
-                    bodypart = {ask} 'Are you getting your fingernails or toenails done today? Or both?'
-                    {if} bodyparts {is} both
-                            {print} That will be $25'
-                            price = 25
+                    {print} 'Witamy w Salonie Kosmetycznym Hedy'ego'
+                    część ciała = {ask} 'Czy robi Pani dziś paznokcie u rąk czy paznokcie u stóp? A może obydwa?'
+                    {if} części_ciała {is} obie
+                            {print} Będzie to $25'
+                            cena = 25
                         {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
+                            {print} Będzie to $18'
+                            cena = 18
+                    kolor = {ask} Jaki kolor ?
+                    świecidełka = {ask} 'Chciała by Pani do tego jakieś świecidełka?'
+                    {if} świecidełka {is} tak
+                        {print} 'Są one płatne dodatkowo 3$'
+                    cena całkowita = cena + 3
+                    {else} {print} 'Bez świecidełek' {print} 'Więc bez dodatkowej opłaty'
                     {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
+                    {print} 'Gotowe! Za wszystko będzie ' cena ' $!'
+                    {print} 'Dziękuję! Do widzenia!'
                     ```
             9:
                 story_text: |-
