@@ -554,7 +554,7 @@ body[dir='rtl'] .right-hand-shadow {
 }
 
 .adv-selected {
-  @apply border-l-4
+  @apply border-l-4 bg-blue-100 rounded-r-lg
 }
 
 /* EDITOR WARNINGS & ERRORS */
@@ -905,3 +905,9 @@ div[class^="ace_incorrect_hedy_code"] {
 
 /* Remove the margin between the scroll bar and the side of the container */
 .cm-editor { margin-right: 0px !important; }
+
+/* Hyperscript doesn't like when we use [] inside of classes */
+.max-h-550px {
+  @apply max-h-[550px]
+}
+

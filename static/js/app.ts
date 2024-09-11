@@ -282,6 +282,9 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
   // Save if program name is changed
   $('#program_name').on('blur', () => saveIfNecessary());
+
+  // Scroll to this level in the adventures side pane
+  document.getElementById(`level_${options.level}_header`)?.scrollIntoView({block: 'center'});
 }
 
 function attachMainEditorEvents(editor: HedyEditor) {
