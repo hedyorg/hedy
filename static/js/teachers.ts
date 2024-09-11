@@ -767,7 +767,6 @@ export function initializeClassOverviewPage(_options: InitializeClassOverviewPag
                            ( typeof window.performance != "undefined" && 
                                 window.performance.navigation.type === 2 );
     if ( historyTraversal ) {
-      console.log('There was reload')
       window.location.href = window.location.href
     }
   });
