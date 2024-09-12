@@ -1691,9 +1691,9 @@ adventures:
                     `{for}` tworzy blok, jak `{repeat}` i `{if}` więc wszystkie linie w bloku muszą zaczynać się od 4 spacji.
                 example_code: |
                     ```
-                    zwierzęta = pies, kot, rybka,
-                    {for} zwierzę {in} zwierzęta
-                        {print} 'Kocham ' zwierzę
+                    animals = dog, cat, blobfish
+                    {for} animal {in} animals
+                        {print} 'I love ' animal
                     ```
                 story_text_2: |
                     ### Ćwiczenie
@@ -1924,33 +1924,33 @@ adventures:
                     ```
             13:
                 story_text: |
-                    Teraz, gdy nauczyłeś się korzystać z funkcji, nauczysz się korzystać z funkcji z argumentem.
-                    ** Argument ** to zmienna używana w funkcji. Nie jest używany poza funkcją.
+                    Now that you've learned how to use functions, you'll learn how to use a function with an argument.
+                    An **argument** is a variable that is used within a function. It is not used outside the function.
 
-                    Na przykład w tym kodzie zaprogramowaliśmy pierwszy wers piosenki „My Bonnie is over the ocean”'.
-                    W tym przykładowym kodzie używany jest argument „miejsce”. Miejsce to zmienna używana tylko w funkcji, więc argument.
-                    Aby użyć „miejsca”, umieściliśmy {with} miejsce” po {define} utwór`.
-                    Po wywołaniu funkcji komputer zastąpi argument „miejsce” fragmentem tekstu po  {call} utwór {with}
+                    For example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.
+                    In this example code the argument 'place' is used. Place is a variable that is only used in the function, so an argument.
+                    To use 'place' we have placed `{with} place` after `{define} song`.
+                    When the function is called, the computer will replace the argument 'place', with the piece of text after `{call} song {with}`.
 
-                    ### Ćwiczenie
-                    Następny wers tej piosenki brzmi:
+                    ### Exercise
+                    The next verse of this song goes:
 
-                    ```nie_kod_Hedy
+                    ```not_hedy_code
                     Last night as I lay on my pillow
                     Last night as I lay on my bed
                     Last night as I lay on my pillow
                     I dreamed that my Bonnie is dead
                     ```
 
-                    Czy możesz zaprogramować ten werset w taki sam sposób jak przykład?
+                    Can you program this verse in the same way as the example?
                 example_code: |
                     ```
-                    {define} utwór {with} miejsce
-                        {print} 'My Bonnie is over the ' miejsce
+                    {define} song {with} place
+                        {print} 'My Bonnie is over the ' place
 
-                    {call} utwór{with} 'ocean'
-                    {call} utwór {with} 'morze'
-                    {call} utwór {with} 'ocean'
+                    {call} song {with} 'ocean'
+                    {call} song {with} 'sea'
+                    {call} song {with} 'ocean'
                     ```
             14:
                 story_text: |
