@@ -88,7 +88,8 @@ adventures:
             4:
                 story_text: |
                     ### Ćwiczenie
-                    Skopiuj przykładowy kod i popraw go dodając cudzysłowy do linii.
+                    Skopiuj przykładowy kod i dokończ go dodając cudzysłowie w puste miejsca w liniach 1 i 2.
+                    Puste miejsca w linii 3 i 4 nie powinny być zastępowane przez cudzysłowie , tylko komendą `{sleep}` i `{clear}`. Czy dasz radę to zrobić?
 
                     ### Ćwiczenie 2
                     Wróć do poprzedniego poziomu i skopiuj kod z opowieści. Spraw by kod działał w tym poziomie dodając cudzysłowy w odpowiednie miejsca.
@@ -97,19 +98,21 @@ adventures:
                     ```
                     imię {is} {ask}_ Jakie jest twoje imię? _
                     {print}  _ Głównym bohaterem jest _ imię
+                    _
+                    _
                     {print} imię _ idzie na spacer do lasu _
                     {print} imię _ nieco się boi _
                     zwierzęta {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _ Słyszy dźwięk _ zwierzęta {at} {random}
-                    {print} name _ obawia się, że jest w nawiedzonym lesie _
+                    {print} _ Słyszy dźwięk _ zwierzęcia {at} {random}
+                    {print} imię _ obawia się, że jest w nawiedzonym lesie _
                     ```
             5:
                 story_text: |
                     W tym poziomie możesz zaprogramować różne zakończenia, które sprawią, że Twoja opowieść będzie jeszcze ciekawsza.
-                    W przykładowym kodzie możesz zobaczyć 2 różne zakończenia.
+                    W przykładowym kodzie możesz zobaczyć jak stworzyć 2 różne zakończenia.
 
                     ### Ćwiczenie 1
-                    Napisz nową, krótką opowieść składającą się z 6 linii kodu na wybrany przez Ciebie temat.
+                    Napisz nową, krótką opowieść składającą się z  przynajmniej 6 linii kodu na wybrany przez Ciebie temat.
                     Brak Ci pomysłów? Wybierz jeden z tych: superbohater, nudny dzień w szkole, opuszczeni na bezludnej wyspie.
 
                     Teraz daj graczowi wybór pomiędzy dobrym i złym zakończeniem, tak jak w kodzie przykładowym.
@@ -117,8 +120,8 @@ adventures:
 
                     ### Ćwiczenie 2
                     Skopiuj swoją opowieść przygodową z poprzednich poziomów.
-                    Znajdź sposób by dodać przynajmniej 2 polecenia `{if}` oraz `{else}` do Twojej historii.
-                    Mogą to być dobre lub złe zakończenia lub wymyślić inny sposób na użycie tych poleceń.
+                    Znajdź sposób by dodać co najmniej 2 polecenia `{if}` oraz `{else}` do Twojej historii.
+                    Mogą to być dobre lub złe zakończenia, możesz również znaleźć inny sposób na użycie tych poleceń.
                 example_code: |
                     ```
                     imię {is} {ask} 'Kto idzie przez las?'
@@ -129,7 +132,7 @@ adventures:
                     {else} {print} 'Potwór zjada ' imię
                     ```
             7:
-                story_text: "W niektórych opowieściach, bohaterowie czasem powtarzają wybrany zwrot kilka razy. Przykładem tego jest bohater wołający o pomoc lub też śpiewający piosenkę.\nMożesz stworzyć takie powtórzenia w swojej opowieści przy użyciu polecenia `{repeat}`.\n\nDodaj powtórzenia do Twojej opowieści. Wróć do swoich zapisanych programów i wybierz Twój program z opowieścią z poziomu 6 i \nznajdź linię zawierającą polecenie `{print}` i powtórz ją!\n"
+                story_text: "W opowieściach, bohaterowie czasem powtarzają wybrany zwrot kilka razy. Przykładem tego jest bohater wołający o pomoc lub śpiewający piosenkę.\nMożesz stworzyć takie powtórzenia w swojej opowieści przy użyciu polecenia `{repeat}`.\n\n### Ćwiczenie\nDodaj powtórzenia do Twojej opowieści. Wróć do swoich zapisanych programów i wybierz Twój program z opowieścią z poziomu 6 i \nznajdź linię zawierającą polecenie `{print}` i powtórz ją!\n"
                 example_code: |
                     ```
                     {print} 'Książę wciąż wołał o pomoc'
@@ -140,10 +143,12 @@ adventures:
                 story_text: |
                     W tym poziomie masz możliwość napisania wielu linii kodu wewnątrz polecenia `{if}`. Dzięki temu możesz urozmaicić szczęśliwe i tragiczne zakończenia Twojej opowieści.
 
+                    ### Ćwiczenie 1
                     Przykładowy kod pokazuje dwa różne zakończenia; jedno, w którym bohaterowie skaczą w czasie przy użyciu maszyny czasu, a drugie, w którym tego nie robią.
                     Uzupełnij puste miejsca co najmniej jednym zdaniem na każde zakończenie.
-                    **(Dodatkowo)** Utwórz dłuższą opowieść. Co się w niej dzieje? Możesz także dodać drugie polecenie `{ask}` z innymi opcjami.
+                    **(Dodatkowo)** Stwórz dłuższą opowieść. Co się w niej dzieje? Możesz także dodać drugie polecenie `{ask}` z innymi opcjami.
 
+                    ### Ćwiczenie 2
                     Wróć do swoich zapisanych programów, wybierz program z opowieścią z poziomu 5. Napisz w nich dobre oraz złe zakończenia, każde z co najmniej trzema liniami kodu!
                 example_code: |
                     ```
@@ -191,10 +196,10 @@ adventures:
                     ### Ćwiczenie
 
                     Spójrz na <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> opowiadanie</a> jeśli go nie znasz i upewnij się, że jest wydrukowane tak jak w książce.
-                example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n {print} 'What do you see?'\n```\n"
+                example_code: "```\nzwierzęta = _ , _ , _ \n{print} 'Brązowy niedźwiedź, Brązowy niedźwiedź'\n {print} 'Co widzisz?'\n```\n"
             12:
                 story_text: |-
-                    W tym poziomie cudzysłowy będą potrzebne, żeby przypisac wiele słów do jednej zmiennej.
+                    W tym poziomie cudzysłowy będą potrzebne, żeby przypisać wiele słów do jednej zmiennej.
 
                     ### Ćwiczenie
 
@@ -216,19 +221,18 @@ adventures:
                 example_code: "```\n{print} 'Nasz bohater idzie przez las'\n{print} 'Ścieżka rozdziela się'\nścieżka = {ask} 'Którą ścieżkę powinna wybrać?'\nbroń ={ask} 'Jaką broń wyciąga?'\n{if} ścieżka {is} 'lewo' {and} broń {is} 'miecz'\n\t_\n```\n"
             15:
                 story_text: |
-                    Przy użyciu pętli `{while}` możesz stworzyć jeszcze bardziej wciągające opowieści. Na przykład, możesz użyć `{while} gra {is} 'działa'` żeby kontynuować grę aż się zakończy.
-                    Alternatywnie możesz napisać `{while} miecz {is} 'zagubiony'` żeby nie pozwolić graczowi kontynuować zanim znajdą miecz.
+                    Przy użyciu pętli `{while}` możesz stworzyć jeszcze bardziej wciągające opowieści. Na przykład, możesz użyć `{while} game == 'on'` żeby kontynuować grę aż się zakończy.
+                    Alternatywnie możesz napisać `{while} sword == 'lost'` żeby nie pozwolić graczowi kontynuować zanim znajdą miecz.
 
-                    ### Exercise
-                    The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
+                    ### Ćwiczenie
+                    Przykładowy kod pokazuje, jak w historii używać pętli `{while}` . Teraz ** pomyśl o swoim scenariuszu **, w którym gracz musi coś znaleźć , zanim będzie mógł kontynuować.
                 example_code: "```\nklucze = 'zgubione'\n{print} 'Stoisz w ogrodzie i zgubiłeś swoje klucze.' \n{print} 'Gdzie chcesz ich poszukać?'\n{print} 'Możesz wybrać: drzewo, doniczka, kamień, skrzynka na listy'\n{while} klucze == 'zgubione'\n    miejsce = {ask} 'Gdzie chcesz popatrzeć?'\n    {if} miejsce == 'doniczka'\n        {print} 'Tutaj są!'\n        klucze = 'znalezione'\n    {else}\n        {print} 'Nie, nie ma ich w ' miejsce\n{print} 'Teraz możesz wejść do domu!'\n```\n"
             18:
                 story_text: |
-                    Napiszemy kolejną opowieść, ale teraz musimy użyć nawiasów z `{print}`.
-
+                    Napiszemy kolejną opowieść, ale teraz musimy użyć nawiasów z poleceniem`{print}`.
 
                     ### Ćwiczenie 1
-                    Stwórz opowieść składającą się z co najmniej 5 zdań. Nie musisz użyć 'imię' jeszcze.
+                    Stwórz opowieść składającą się z co najmniej 5 zdań. Nie musisz jeszcze używać 'imię'
                 example_code: |
                     ```
                     {print}('Witamy w tej opowieści!')
@@ -244,14 +248,14 @@ adventures:
                     {print}('Witamy w tej opowieści!')
                     ```
     add_remove_command:
-        name: '{add} {to} & {remove} {from}'
+        name: '{add} {to_list} & {remove} {from}'
         default_save_name: add_remove_command
-        description: introducing add to and remove from
+        description: wprowadzamy {add}{to_list} i {remove} {from}
         levels:
             3:
                 story_text: |
-                    ## Komenda {add} {to}
-                    Możesz dodawać elementy  do listy używając komendy {add} {to}. Żeby dodać element do listy możesz po prostu wpisać: `{add} pingwin {to} zwierzęta` albo możesz użyć komendy `{ask}`, tak jak w przykładowym kodzie.
+                    ## Komenda Add to
+                    Możesz dodawać elementy do listy używając komendy`{add} {to_list}`. Żeby dodać element do listy możesz po prostu wpisać: `{add} penguin {to_list} animals` albo możesz użyć komendy `{ask}`, tak jak w przykładowym kodzie.
                 example_code: |
                     ```
                     zwierzęta {is} pies, kot, kangur
@@ -260,7 +264,7 @@ adventures:
                     {print} Wybieram zwierzęta {at} {random}
                     ```
                 story_text_2: |
-                    ## Komenda {remove} {from}
+                    ## Komenda Remove from
                     Tak samo jak możemy dodawać elementy do listy, możemy je również usuwać. Robimy to za pomocą komendy `{remove} {from}`.
                 example_code_2: |
                     ```
@@ -284,25 +288,25 @@ adventures:
                     ```
     and_or_command:
         name: '{and} & {or}'
-        default_save_name: and or
-        description: introducing and or
+        default_save_name: i lub
+        description: wprowadzenie komendy {and} i {or}
         levels:
             13:
                 story_text: |-
-                    We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but can use `{and}` and `{or}`.
+                    Teraz nauczymy się komend `{and}` i `{or}`! Jeżeli chcesz sprawdzić dwa stwierdzenia, nie musisz używać dwóch komend`{if}` zamiast tego możesz użyć komendy `{and}` i `{or}`.
 
-                    If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
+                    Jeżeli używasz komendy `{and}`, oba stwierdzenia, po lewej i prawej stronie komendy `{and}` muszą być prawdziwe. Możemy również użyć komendy `{or}`. Wtedy tylko jedno stwierdzenie musi być poprawne.
                 example_code: |
                     ```
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
+                    imię = {ask} 'Jak masz na imię?'
+                    wiek = {ask} 'Ile masz lat?'
+                    {if} imię {is} 'Hedy' {and} wiek {is} 2
+                        {print} 'Jesteś prawdziwym Hedym!'
                     ```
     ask_command:
         name: '{ask}'
-        default_save_name: komenda_{ask}
-        description: Introduction ask command
+        default_save_name: komenda_ask
+        description: Wprowadzenie komendy {ask}
         levels:
             1:
                 story_text: |
@@ -314,7 +318,7 @@ adventures:
                     {ask} Jak masz na imię?
                     ```
                 story_text_2: |
-                    ## Komenda dołącz
+                    ## Komenda `{echo}`
                     Jeśli chcesz aby komputer powtórzył odpowiedź, możesz użyć komendy `{echo}`. Odpowiedź zostanie wypisana na końcu zdania, czyli w tym przypadku po "cześć"
                 example_code_2: |
                     ```
@@ -335,9 +339,8 @@ adventures:
                 story_text: |
                     ## Komenda zapytaj
                     Teraz gdy potrafimy używać **zmiennych** w naszym kodzie, nie potrzebujemy już komendy `{echo}`.
-                    Możemy używać zmiennych, aby zapisać odpowiedzi do naszych pytań i w ten sposób używać tych odpowiedzi w wielu miejscach w naszym kodzie.
-                    Spróbuj tego:
-
+                    Możemy używać zmiennych, aby zapisać odpowiedzi do naszych pytań i w ten sposób używać tych odpowiedzi w wielu zapytaniach w naszym kodzie.
+                    Spójrz na to:
 
                     W ten sposób Twój kod staje się interaktywny!
                 example_code: |
@@ -345,13 +348,13 @@ adventures:
                     imię {is} {ask} Jak masz na imię?
                     {print} Cześć imię
                     wiek {is} {ask} Ile masz lat?
-                    {print} imię ma wiek lat.
+                    {print} imię ma ... lat.
                     ```
                 story_text_2: |
                     ### Ćwiczenie
                     W poprzedniej zakładce przećwiczyliśmy ustawianie wartości zmiennych używając komendy `{is}`.
-                    Utworzyłeś co najmniej 3 zmiennych i użyłeś ich z komendą `{print}`.
-                    Teraz, zamiast ustawiać zmienne w kodzie, spróbuj uczynić je interaktywnymi, tak jak zrobiliśmy to powyżej.
+                    Utworzyłeś co najmniej 3 zmiennych i użyłeś ich z komendą print.
+                    Teraz, zamiast ustawiać zmiennych w kodzie, spróbuj uczynić je interaktywnymi, tak jak zrobiliśmy to powyżej.
 
                     Skopiuj kod z poprzedniej zakładki i uczyń zmienne interaktywnymi używając komendy `{ask}`.
                 example_code_2: |
@@ -374,181 +377,181 @@ adventures:
         levels:
             17:
                 story_text: |
-                    Blackjack to prosta gra karciana, w której musisz zdobyć jak najwięcej 21 punktów. Dostajesz dwie karty. Każda karta ma swoją wartość liczbową, a figury (walet, królowa i król) są warte 10 punktów.
+                    Blackjack to prosta gra karciana, w której musisz zdobyć jak najwięcej punktów, ale nie więcej niż 21. Dostajesz dwie karty. Każda karta ma swoją wartość liczbową, a figury (walet, królowa i król) są warte 10 punktów.
                     As jest wart 1 lub 11 punktów (do wyboru). Rozdający, twój przeciwnik, również otrzymuje dwie karty.
                     Jeśli chcesz, możesz zdobyć kolejną kartę, a jej punkty zostaną dodane do Twojej sumy. Rozdający może również wybrać inną kartę.
                     Uważaj, aby nie zdobyć więcej niż 21 punktów, ponieważ jeśli to zrobisz, przegrywasz!
                     Gracz, który zbliży się do liczby 21, nie przekraczając jej, wygrywa!
 
-                    ### Exercise
-                    In this adventure we code the first part of our Blackjack game. We'll create a function to calculate how many points a card is worth.
+                    ### Ćwiczenie
+                    W tej przygodzie będziemy kodować pierwszą część naszej gry w Blackjacka. Stworzymy funkcję, która pozwoli nam obliczyć wartość każdej z kart.
 
-                    ***Set the variables***
-                    Start by making a list of all the cards, from 2 to Ace. Next make a list of the face cards, so Jack, Queen and King. Then pick a random card from the list of cards to be card_1.
+                    ***Ustaw zmienne***
+                    Zacznij od zrobienia listy wszystkich kart, od 2 do Asa. Następnie zrób listę figur, czyli Walet, Królowa i Król. Wtedy wybierz przypadkową kartę z listy kart, która ma być kartą_1.
 
-                    ***Create a function to calculate the points***
-                    Create a function that calculates how many points a card is worth.
-                    All the face cards are worth 10 points, the Ace is worth 11 and all the other cards are worth their numeral.
-                    Return the variable `points` at the end of the function.
+                    ***Utwórz funkcję do obliczania punktów***
+                    Utwórz funkcję, która obliczy, ile punktów jest warta karta.
+                    Wszystkie figury są warte 10 punktów, As jest wart 11, a wszystkie pozostałe karty mają swoją wartość liczbową .
+                    Return the zmienną `points` na koniec funkcji.
 
-                    ***Test the function***
-                    Test if your function is working properly. Finish the first print command by filling in which card you've drawn. Then finish the second line by calling the function with card_1.
-                    Run the code a couple of times. Are you happy with the results? Great! Then you can remove the testing part and move on the the next tab!
+                    ***Przetestuj funkcję***
+                    Sprawdź, czy Twoja funkcja działa poprawnie. Zakończ pierwsze polecenie print poprzez wypełnienie go kartą, którą wyciągnąłeś. Następnie zakończ drugi wiersz, wywołując funkcję za pomocą card_1.
+                    Uruchom kod kilka razy. Czy jesteś zadowolony z wyników? Świetnie! Następnie możesz usunąć część testową i przejść do następnej zakładki!
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
 
-                    # Set these variables
-                    cards = _
-                    face_cards = _
-                    card_1 =
+                    # Ustaw zmienne
+                    karty = _
+                    figury = _
+                    karta_1 =
 
-                    # Create a function to calculate the points
-                    {define} calculate_points {with} card:
-                        {if} card {in} face_cards:
-                            points = _
+                    # Stwórz funkcję do obliczenia punktów
+                    {define} oblicz_punkty {with} kart:
+                        {if} karta{in} figury:
+                            punkty = _
                         {elif} _
                             _
                         {else}:
                             _
                         _ points
 
-                    # Test your function
-                    {print} 'Your card is a ' _
-                    {print} 'That is worth ' _ ' points'.
+                    # Przetestuj swoją funkcję
+                    {print} 'Twoja karta to ' _
+                    {print} 'Jest warta ' _ ' punktów'.
                     ```
     blackjack_2:
         name: Blackjack 2
         default_save_name: Blackjack_2
-        description: Blackjack part 2
+        description: Blackjack część 2
         levels:
             17:
                 story_text: |
-                    ### Exercise
-                    In this adventure we code the second part of our Blackjack game.
+                    ### Ćwiczenie
+                    W tej przygodzie napiszemy kod drugiej części naszej gry w Blackjacka.
 
-                    ***Paste your code from the previous adventure***
-                    In the previous adventure you've started a list of variables and created a function to calculate how many points a card is worth. Copy your code and paste it here. Mind that you don't need the testing part, so if you haven't removed that yet, please do so now.
+                    ***Wklej swój kod z poprzedniej przygody***
+                    Poprzednio zacząłeś listę zmiennych i stworzyłeś funkcję do obliczania wartości kart. Skopiuj swój kod i wklej go tutaj. Zwróć uwagę na to, że nie potrzebujesz już części testowej, dlatego jeśli jeszcze jej nie usunąłeś to zrób to teraz.
 
-                    ***Add more variables***
-                    You have already set the lists `cards` and `face_cards` and the variable `card_1`. Underneath those variables create 3 more variables: `card_2`, dealer_card_1` and `dealer_card_2`. These variables are all set to a random card from the list of cards.
+                    ***Dodaj więcej zmiennych***
+                    Ustawiłeś już listy `cards` i `face_cards` oraz zmienną `card_1`. Pod tymi zmiennymi utwórz 3 dodatkowe zmienne: `card_2`, dealer_card_1` and `dealer_card_2`. Wszystkie te zmienne są ustawione na losową kartę z listy kart.
 
-                    ***Add up points***
-                    To calculate how many points you have scored we call the function with card 1 and we do it again for card 2. Then we add both these scores together to get your total.
-                    Do the same thing for the dealers points, but be sure to use the dealer's cards and not your own!
+                    ***Podlicz punkty***
+                    Aby obliczyć liczbę punktów, które zdobyłeś, wywołujemy funkcję za pomocą karty 1 i robimy to ponownie dla karty 2. Następnie dodajemy oba te wyniki razem, aby uzyskać sumę.
+                    Zrób to samo dla punktów innych graczy , ale pamiętaj, aby użyć kart innych graczy, a nie własnych!
 
-                    ***2 Aces***
-                    You're doing great! Almost all scores can be calculated now. There is only one exception: 2 Aces. If you get 2 Aces, your total is 12 points and not 22 (because 22 points would be losing!). This of course also goes for the dealer.
+                    ***2 Asy***
+                    Świetnie sobie radzisz! Prawie wszystkie wyniki można teraz obliczyć. Jest tylko jeden wyjątek: 2 asy. Jeśli zdobędziesz 2 asy, twoja suma to 12 punktów, a nie 22 (ponieważ mając 22 punkty przegrałbyś!). Dotyczy to oczywiście również rozdającego.
 
-                    ***Show the score***
-                    Lastly, you want to tell the program to tell you which cards you have drawn and how many points that is. Then show which cards the dealer has and how many points they have.
+                    ***Pokaż wynik***
+                    Na koniec musisz powiedzieć programowi, które karty wyciągnąłeś i ile to jest punktów. Następnie pokaż, jakie karty ma inny gracz i ile zdobył punktów.
 
-                    ***Continue in the next tab***
-                    Great! You have finished this part of the game! Copy your code and go to the next tab to learn how to ask for an extra card and to declare a winner.
+                    ***Przejdź do następnej zakładki***
+                    Świetnie! Skończyłeś tę część gry! Skopiuj kod i przejdź do następnej zakładki, aby dowiedzieć się, jak poprosić o dodatkową kartę i ogłosić zwycięzcę.
                 example_code: |
                     ```
-                    # Paste your code from the previous adventure here
+                    # Wklej tutaj swój kod z poprzedniej przygody. 
 
-                    # Add these variables to the list of variables
-                    card_2 = _
-                    dealer_card_1 = _
-                    dealer_card_2 = _
+                    # Dodaj te zmienne do listy zmiennych
+                    karta_2 = _
+                    karta_przeciwnika_1 = _
+                    karta_przeciwnika_2 = _
 
-                    # Add up your points
-                    your_points_1 = {call} _ {with} card_1
-                    your_points_2 = _
-                    your_total = _
+                    # Podlicz swoje punkty
+                    twoje_punkty_1 = {call} _ {with} card_1
+                    twoje_punkty_2 = _
+                    twój_wynik= _
 
-                    # Add up the dealers points
-                    dealer_points_1 = _
+                    # Podlicz punkty przeciwnika
+                    punkty_przeciwnika_1 = _
                     _
                     _
 
-                    # 2 Aces
-                    {if} card_1 == 'Ace' {and} _
-                        your_total = 12
-                    {if} dealer_card_1 _
-                        dealer_total = _
+                    # 2 Asy
+                    {if} karta_1 == 'As' {and} _
+                        twój_wynik = 12
+                    {if} karta_przeciwnika_1 _
+                        wynik_przeciwnika = _
 
-                    # Show the score
-                    {print} 'You have drawn a ' _ ' and a ' _ '. That is ' _ ' points'
-                    {print} 'The dealer has drawn a ' _ ' and a ' _ '. That is ' _ ' points'
+                    # Pokaż wynik
+                    {print} 'Wyciągnąłeś ' _ ' i ' _ ' kartę. To oznacza, że masz ' _ ' punktów'
+                    {print} 'Przeciwnik wyciągnął ' _ ' i ' _ '. To oznacza, że ma ' _ ' punktów'
                     ```
     blackjack_3:
         name: Blackjack 3
         default_save_name: Blackjack_3
-        description: Blackjack part 3
+        description: Blackjack część 3
         levels:
             17:
                 story_text: |
-                    In the previous tabs you have learned how to draw 2 random cards for yourself and for the dealer and to calculate how many points you both got.
-                    In this adventure we add the option to ask for an extra card for both you and the dealer.
+                    W poprzedniej zakładce nauczyłeś się jak dobierać 2 losowe karty dla siebie i dla przeciwnika, a także jak obliczyć ile punktów dostał każdy z was.
+                    W tej przygodzie dodamy opcję zapytania o dodatkową kartę dla ciebie oraz dla twojego przeciwnika.
 
-                    ### Exercise
-                    ***Paste your code from the previous adventure*** Firstly, copy your code from the previous tab and paste it here.
+                    ### Ćwiczenie
+                    ***Wklej swój kod z poprzedniej przygody*** Skopiuj swój kod z poprzedniej zakładki i wklej tutaj.
 
-                    ***Extra card for you*** If you want, you can get an extra card to get your total as close to 21 as possible. First ask the player if they want an extra card.
-                    If they do, pick a random card and print what they have drawn. If the card is not an Ace, you can call the function and add the points to your total.
-                    In case the card is an Ace, you can't use the function, because the Ace can be either 1 point or 11 points, depending on how many points you already have earned.
-                    If your total is less than 11, you want the ace to be 11 points (because this is closest to 21). So you add 11 points to your total.
-                    If the total is more than or equal to 11, you want the ace to be 1 point (because you don't want more than 21 points). So you add 1 point to your total.
-                    Lastly, print your new total of points.
+                    ***Dodatkowa karta dla ciebie*** Jeśli chcesz, to możesz dostać dodatkową kartę ,żeby zbliżyć swój wynik do 21 punktów. Najpierw zapytaj gracza czy chcę dodatkową kartę.
+                    Jeśli będzie chciał, to wybierz losową kartę i napisz jaką kartę dobrał. Jeżeli karta nie jest asem , to wtedy wywołaj funkcję i dodaj punkty do twojego wyniku. 
+                    W przypadku, gdy karta jest asem, nie możesz użyć funkcji, ponieważ wartość asa może wynosić 1 punkt lub jedenaście w zależności od tego jak dużo punktów zebrałeś do tej pory.
+                    Jeśli twój wynik jest mniejszy niż 11, to wtedy chcesz aby wartość asa wynosiła 11 punktów (ponieważ jest to najbliższe 21 punktów). Więc dodaj 11 punktów do swojego wyniku.
+                    Jeżeli wynik jest większy lub równy 11, to wtedy chcesz aby wartość asa wynosiła 1 punkt (ponieważ nie chcesz mieć więcej niż 21 punktów). Więc dodaj 1 punkt do swojego wyniku.
+                    Na koniec napisz swój nowy wynik.
 
-                    ***Extra card for the dealer*** The dealer can also get an extra card. The dealer doesn't need to be asked, because they always get an extra card if their total is less than 17.
-                    Copy the 'Extra card for you code' and paste it in the dealers section. Then change it to fit the dealer picking an extra card and getting points added to their total.
+                    ***Dodatkowa karta dla przeciwnika*** Przeciwnik może również dostać dodatkową kartę. Przeciwnik nie musi być oto zapytany, ponieważ zawsze dostaje dodatkową kartę jeżeli jego wynik wynosi mniej niż 17.
+                    Skopiuj 'Dodatkowa karta do twojego kodu' i wklej do sekcji przeciwnika. Następnie zmień go w taki sposób, aby dopasować do przeciwnika wybierającego dodatkową kartę i otrzymującego punkty, które są dodawane do jego wyniku.
                 example_code: |
                     ```
-                    # Paste your code from the previous adventure here
+                    # Wklej tutaj swój kod z poprzedniej przygody.
 
-                    # Extra card for you
+                    # Dodatkowa karta dla ciebie 
                     hit = {ask} _
                     {if} hit == 'yes':
-                        card_3 = _
+                        karta_3 = _
                         {print} _
-                        {if} card_3 _ 'Ace':
-                            your_points_3 = _
-                            your_total = _
+                        {if} karta_3 _ 'As':
+                            twoje_punkty_3 = _
+                            twój_wynik = _
                         {else}:
-                           {if} your_total _
+                           {if} twój _wynik _
                                 _
                             {else}:
                                 _
                         {print} _
 
-                    # Extra card for the dealer
-                    {if} dealer_total < 17
+                    # Dodatkowa karta dla przeciwnika
+                    {if} wynik_przeciwnika< 17
                     _
                     ```
     blackjack_4:
         name: Blackjack 4
         default_save_name: Blackjack_4
-        description: Blackjack part 4
+        description: Blackjack część 4
         levels:
             17:
                 story_text: |
-                    In the last 3 adventures you have alsmost created a working blackjack game! The only thing left to do is to decide a winner!
+                    W ostatnich 3 przygodach prawie stworzyłeś działającą grę w Blackjacka! Ostatnią rzeczą do zrobienia jest zdecydowanie kto jest zwycięzcą.
 
-                    ### Exercise
-                    ***Paste your code from the previous adventure*** Start by pasting the code that you've made so far into your programming field.
+                    ### Ćwiczenie
+                    ***Wklej swój kod z poprzedniej przygody*** Zacznij od wklejenia kodu, który do tej pory stworzyłeś do pola programowania.
 
-                    ***Decide a winner***
-                    Firstly, if you and the dealer have an equal amount of points, it's a draw.
-                    Secondly, if the dealer has more than 21 points and you don't, you are the winner.
-                    Thirdly, if both you and the dealer have less than 22 points, we have to see who came closest to 21. We do that by comparing who has the highest score. Is your total higher than the dealer's total, then you are the winner. If not, the dealer wins.
-                    Lastly, in all other scenarios (e.g. you have more than 21 points and the dealer doesn't, or you both have more than 21 points) you are the loser.
+                    ***Zdecyduj kto jest zwycięzcą***
+                    Po pierwsze, jeśli ty i przeciwnik macie po tyle samo punktów, oznacza to remis.
+                    Po drugie, jeżeli przeciwnik ma więcej niż 21 punktów a ty tyle nie masz, to wtedy ty jesteś zwycięzcą. 
+                    Po trzecie, jeśli oboje macie mniej niż 22 punkty, to wtedy musimy dowiedzieć się kto jest bliżej 21 punktów. Możemy to zrobić poprzez porównanie wyników. Jeżeli twój wynik jest wyższy niż wynik przeciwnika, to jesteś zwycięzcą. Jeżeli nie, to wygrywa przeciwnik. 
+                    Na koniec, we wszystkich innych przypadkach (np. jak masz więcej niż 21 punktów a przeciwnik nie lub jeżeli oboje macie więcej niż 21 punktów) jesteś przegranym.
 
-                    ***Enjoy the game!***
-                    Does your game work properly? Amazing! You have done a great job! Enjoy your game!
-                    If it doesn't work right away, no worries, you might have made a mistake. Just keep calm and bebug your code using the ladybug button.
+                    ***Ciesz się swoją grą!***
+                    Czy Twoja gra działa poprawnie? Niesamowicie! Wykonałeś świetną robotę! Ciesz się swoją grą!
+                    Jeśli to nie zadziała od razu, nie martw się, mogłeś popełnić błąd. Zachowaj spokój i zdebuguj swój kod za pomocą przycisku biedronki.
                 example_code: |
                     ```
-                    # Paste your code from the previous adventure here
+                    # Wklej tutaj swój kod z poprzedniej przygody.
 
-                    # Decide a winner
+                    # Zdecyduj kto jest zwycięzcą.
                     {if} _
-                        {print} 'Its a draw! Play again!'
+                        {print} 'Remis! Zagraj ponownie!'
                     {elif} _
-                        {print} 'You win!'
+                        {print} 'Wygrywasz!'
                     {elif} _ :
                         {if} _:
                             {print} _
@@ -565,7 +568,7 @@ adventures:
             6:
                 story_text: |
                     Teraz gdy umiesz już matematykę, możesz sam zrobić kalkulator!
-                example_code: "```\nliczba_1 {is} {ask} 'Wpisz pierwszą liczbę:'\nliczba_2 {is} {ask} 'Wpisz drugą liczbę:'\npoprawna_odpowiedź = liczba_1 * liczba_2 \n{print} liczba_1 ' razy ' liczba_2 ' to ' poprawna_odpowiedź \n```\n"
+                example_code: "```\nliczba_1 ={ask} 'Wpisz pierwszą liczbę:'\nliczba_2 ={ask} 'Wpisz drugą liczbę:'\npoprawna_odpowiedź = liczba_1 * liczba_2 \n{print} liczba_1 ' razy ' liczba_2 ' to ' poprawna_odpowiedź \n```\n"
                 story_text_2: |
                     ### Ćwiczenie
                     Powyższy kalkulator obliczy odpowiedź za Ciebie, ale możesz również stworzyć program, aby sprawdzić swoje umiejętności matematyczne, jak ten:
@@ -574,57 +577,59 @@ adventures:
                     ```
                     poprawna_odpowiedź = 11 * 27
                     odpowiedź = {ask} 'Ile to jest 11 razy 27?'
-                    {if} odpowiedź {is} _ {print} 'good job!'
+                    {if} odpowiedź {is} _ {print} 'dobra robota!'
                     {else} {print} 'Źle! To było ' _.
                     ```
                 story_text_3: |
-                    Możesz też pozwolić komputerowi na samodzielne wykonywanie losowych sum za pomocą {random}.
-                example_code_3: |
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    number_1 = _
-                    number_2 = _
-                    correct_answer = number_1 * number_2
-                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
+                    **Dodatkowo**Możesz też pozwolić komputerowi na samodzielne wykonywanie losowych sum za pomocą`{random}`.
+                example_code_3: |-
+                    ```
+                    liczby= 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    liczba_1 = _
+                    liczba_2 = _
+                    poprawna_odpowiedź = liczba_1 * liczba_2
+                    podana_odpowiedź ={ask} 'Ile to jest ' liczba_1 ' razy ' liczba_2 '?'
                     {if} _
                     {else} _
+                    ```
             9:
                 story_text: |
                     W poziomie 6 stworzyłeś kalkulator, w tym poziomie możesz rozbudować ten kod tak, aby zadawał wiele pytań.
 
                     ### Ćwiczenie 1
-                    Czy potrafisz dokończyć linię 10, aby program działał?
+                    Czy potrafisz dokończyć linię 10, w taki sposób aby program zadziałał?
 
                     ### Ćwiczenie 2
-                    Daj graczom informację zwrotną, gdy wprowadzą dobrą lub złą odpowiedź. Aby to osiągnąć, rozszerz swój program o `{else}`.
-                example_code: "```\nwynik = 0\n{repeat} 10 {times}\n    liczby = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    liczba1= liczby {at} {random}\n    liczba2 = liczby {at} {random}\n    poprawna_odpowiedź = liczba1* liczba2 \n    {print} 'Ile jest ' liczba1 ' razy ' liczba2 '?'\n    odpowiedź = {ask} 'Wpisz tutaj swoją odpowiedź...'\n    {print} 'Twoja odpowiedź to'  odpowiedź\n    {if} _ {is} _\n        wynik = wynik + 1\n{print} 'Świetna robota! Twój wynik to... ' wynik ' na 10!\n```\n"
+                    Daj graczom informację zwrotną, gdy wpiszą odpowiedź. Zrób to za pomocą `{print} 'Correct!'` lub `{print} 'Wrong! The correct answer is ' correct_answer`
+                example_code: "```\nwynik = 0\n{repeat} 10 {times}\n    liczby = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    liczba_1= liczby {at} {random}\n    liczba_2 = liczby {at} {random}\n    poprawna_odpowiedź = liczba_1* liczba_2 \n    {print} 'Ile wynosi ' liczba_1 ' razy ' liczba_2 '?'\n    odpowiedź = {ask} 'Wpisz tutaj swoją odpowiedź...'\n    {print} 'Twoja odpowiedź to' odpowiedź\n    {if} _ {is} _\n        wynik = wynik + 1\n{print} 'Świetna robota! Twój wynik to... ' wynik ' na 10!\n```\n"
             10:
                 story_text: |
-                    This calculator game helps you practise your tables of multiplication!
-                    ### Exercise
-                    Fill in the blanks. We want this program to ask the player these questions:
+                    Ten kalkulator pomaga ci ćwiczyć tabliczkę mnożenia!
+                    ### Ćwiczenie
+                    Wypełnij puste miejsca. Chcemy, aby program zadał graczowi te pytania: 
                     ```
-                    How much is 1 times 1?
-                    How much is 1 times 2?
-                    How much is 1 times 3?
-                    How much is 2 times 1?
-                    How much is 2 times 2?
-                    How much is 2 times 3?
-                    How much is 3 times 1?
-                    How much is 3 times 2?
-                    How much is 3 times 3?
+                    Ile to jest 1 razy 1?
+                    Ile to jest 1 razy 2?
+                    Ile to jest 1 razy 3?
+                    Ile to jest 2 razy 1?
+                    Ile to jest 2 razy 2?
+                    Ile to jest 2 razy 3?
+                    Ile to jest 3 razy 1?
+                    Ile to jest 3 razy 2?
+                    Ile to jest 3 razy 3?
                     _
                     ```
                 example_code: |
                     ```
-                    numbers = 1, 2, 3
+                    liczby = 1, 2, 3
                     {for} _
                         {for} _
-                            answer = {ask} _
-                            correct = number_1 * number_2
-                            {if} answer {is} correct
-                                {print} 'Great job!'
+                            odpowiedź = {ask} _
+                            poprawnie = liczba_1 * liczba_2
+                            {if} odpowiedź{is} poprawna
+                                {print} 'Dobra robota!'
                             {else}
-                                {print} 'That is wrong. The right answer is ' correct
+                                {print} 'Zła odpowiedź. Poprawna odpowiedź ' poprawnie
                     ```
             11:
                 story_text: |
@@ -638,12 +643,20 @@ adventures:
                 example_code: |
                     ```
                     liczba = 10
-                    {for} i {in} {range} 1 do 10
+                    {for} i {in} {range} 1 {to} 10
                         {print} i * liczba
                     ```
             12:
                 story_text: |
-                    Teraz możesz zrobić kalkulator, który działa dla liczb dziesiętnych. Wypełnij puste miejsca, aby działał poprawnie!
+                    W tym poziomie, możesz stworzyć kalkulator, który działa z liczbami dziesiętnymi.
+
+                    ### Ćwiczenie 1
+                    Wypełnij puste miejsca, aby ukończyć kalkulator. Pamiętaj o używaniu kropki, a nie przecinka z liczbami dziesiętnymi.
+
+                    ### Ćwiczenie 2
+                    Stwórz nowy program do ćwiczeń matematycznych, ale tym razem użyj liczb dziesiętnych.
+                    Stwórz listę liczb, wybierz dwie lub więcej i pozwól graczowi odpowiedzieć.
+                    Oczywiście, musisz jeszcze potwierdzić odpowiedź! **Dodatkowo** Podnieś poziom trudności poprzez dodanie liczby żyć: Gracz traci jedno życie udzielając złej odpowiedzi, po 3 złych odpowiedziach następuje koniec gry.
                 example_code: |
                     ```
                     liczba1 = {ask} 'Jaka jest pierwsza liczba?'
@@ -654,108 +667,102 @@ adventures:
             13:
                 story_text: |
                     ### Ćwiczenie 1
-                    Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
+                    Uczyńmy program do ćwiczeń nieco trudniejszym. Tym razem gracz musi odpowiedzieć poprawnie na dwa pytania. Uzupełnij puste miejsca, aby ukończyć program.
 
-                    ### Ćwiczenie 2 dodatkowe
-                    Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
-                    Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
-                    Empty the programming field and create your own solution.
+                    ### Ćwiczenie 2 
+                    Czasami, obliczenia mają wiele prawidłowych odpowiedzi. Przykładowo, 10 może być podzielone na 5 i na 2. Więc na pytanie 'Przez jaką liczbę można podzielić 10?' można odpowiedzieć, że przez 2 i przez 5.
+                    Zapytaj o obliczenia, które mają wiele poprawnych odpowiedzi, poproś gracza, aby odpowiedział i ustalił, czy odpowiedź jest poprawna za pomocą komendy `{or}`.
+                    Wyczyść pole programowania i stwórz swoje własne rozwiązanie.
                 example_code: |
                     ```
-                    answer1 = {ask} 'What is 10 times 7?'
-                    answer2 = {ask} 'What is 6 times 7?'
+                    odpowiedź1 = {ask} 'Ile to jest 10 razy 7?'
+                    odpowiedź2 = {ask} 'Ile to jest 6 razy 7?'
                     {if} _ _ _ _ _ _ _
                         {print} _
                     ```
             14:
                 story_text: |
-                    In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra features.
+                    W tej przygodzie stworzysz kalkulator, który pozwoli ci na obliczenie średniej ocen. Jeśli uda ci się uruchomić kalkulator, wtedy możesz przejść do następnej przygody, która pozwala dodać dwie dodatkowe funkcje.
 
-                    ### Exercise 1
-                    Fill in the blanks to get the calculator to work.
-                    * Start with the fourth line, add a question to figure out what grade the student got.
-                    * In the fifth line you'll want to calculate the total of all grades, so the total = total + grade.
+                    ### Ćwiczenie 1
+                    Wypełnij puste pola, aby kalkulator zadziałał.
+                    * Zacznij od czwartej linii, dodaj pytanie, aby dowiedzieć się, jaką ocenę uzyskał uczeń.
+                    * W piątej linii będziesz chciał obliczyć sumę wszystkich ocen, więc suma = suma + ocena.
                     * Then we get to set the return value. We want to return the mean, so the total devided by the amount of tests (4).
-                    * Lastly we finish the code by calling the function in line 8.
+                    * Ostatecznie kończymy kod, wywołując funkcję w wierszu 8.
 
-                    Did you get it? Awesome! Would you like to add even more to your calculator? **This adventure continues in the next tab!**
+                    Udało ci się? Niesamowite! Chciałbyś dodać jeszcze więcej do swojego kalkulatora? **Dalsza część tej przygody w następnej zakładce!**
                 example_code: |
                     ```
-                    {define} calculate_mean_grade
-                        total = 0
+                    {define} oblicz_średnią_ocen
+                        wynik = 0
                         {for} i {in} {range} 1 {to} 4
-                            grade = {ask} _
-                            total = total + _
-                            return _ / 4
+                            ocena = {ask} _
+                            wynik= wynik + _
+                            {return}_ / 4
 
-                    mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
+                    średnia_ocen= {call} _
+                    {print} 'Twoja średnia ocen wynosi ' średnia ocen
                     ```
-
-                            total = total + _
-                            return _ / 4
-
-                    mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
             15:
                 story_text: |
-                    Możesz dodać pętlę `{while}` do gry w kalkulator, którą nauczyłeś się robić na poprzednim poziomie.
-                    Dzięki temu gracz nie będzie mógł przejść do następnego pytania {if} udzielił błędnej odpowiedzi.
+                    Możesz dodać pętlę `{while}` do swojego kalkulatora, który nauczyłeś się tworzyć na poprzednim poziomie.
+                    Daje to pewność, że gracz nie będzie mógł przejść do następnego pytania jeżeli udzielił błędnej odpowiedzi.
 
-                    ### Exercise
-                    Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
-                    Then `{call}` the function.
+                    ### Ćwiczenie
+                    Dodaj w funkcji pętlę loop `{while}` ,  zapytaj gracza, ile to jest numer_1 razy numer_2 i napisz jego odpowiedź..
+                    Następnie `{call}` funkcję.
                 example_code: |
                     ```
-                    {define} new_question
-                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        number_1 = numbers {at} {random}
-                        number_2 = numbers {at} {random}
-                        correct = number_1 * number_2
-                        answer = 0
+                    {define} nowe_pytanie
+                        liczby = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        liczba_1 = liczby {at} {random}
+                        liczba_2 = liczby {at} {random}
+                        poprawnie = liczba_1 * liczba_2
+                        odpowiedź= 0
                         _
                         _
                         _
-                        {print} 'Well done!'
+                        {print} 'Dobra robota!'
 
-                    {print} 'Give 10 correct answers to win!'
+                    {print} 'Odpowiedz poprawnie na 10 pytań, aby wygrać'
                     {for} i {in} {range} 1 {to} 10
                         _
-                    {print} 'You win!'
+                    {print} 'Wygrałeś!'
                     ```
     calculator_2:
-        name: Calculator 2
-        default_save_name: Calculator 2
-        description: Calculator 2
+        name: Kalkulator 2
+        default_save_name: Kalkulator 2
+        description: Kalkulator 2
         levels:
             14:
                 story_text: |
-                    ### Exercise 2
-                    **This is the second part of this adventure.** The adventure starts in the previous tab.
-                    Of course, you don't always want to calculate the mean of 4 tests. You might want to calculate the mean of 10 tests or only 2...
-                    We can fix this problem by adding the argument and variable 'amount_of_tests'.
-                    * Start a new line on line 3. Set the amount_of_tests argument by asking the student how many tests they have made.
-                    * Change the 4 in line 4 to the new argument amount_of_tests.
-                    * Lastly, change the 4 in line 6 to amount_of_tests
+                    ### Ćwiczenie 2
+                    **To druga część tej przygody.** Przygoda zaczyna się w poprzedniej zakładce.
+                    Oczywiście nie zawsze chcesz obliczyć średnią z 4 testów. Możesz obliczyć średnią z 10 testów lub tylko 2.
+                    Możemy rozwiązać ten problem, dodając argument i zmienną 'ilość_testów'.
+                    * Zacznij nową linię w wierszu 3. Ustaw argument ilość_testów, pytając ucznia, ile testów napisał.
+                    * Zmień 4 w wierszu 4 na nowy argument ilość_testów.
+                    * Na koniec zmień 4 w wierszu 6 na ilość_testów
 
-                    Try out your new program. Does it work?
+                    Wypróbuj nowy program. Działa?
 
-                    ### Exercise 3
-                    Did you want to make your program even better? Great! In the previous program you could only calculate the mean grade of 1 subject, but it would be better if you could calculate the mean grade for all subjects you want!
-                    We won't tell you how to do it, but we will give you one tip: Start your code in line 1 with: define calculate_mean_grade with subject.
+                    ### Ćwiczenie 3
+                    Chciałbyś ulepszyć swój program? Świetnie! W poprzednim programie można było obliczyć tylko średnią ocenę z 1 przedmiotu, ale byłoby lepiej, gdybyś mógł obliczyć średnią ocenę dla wszystkich przedmiotów!
+                    Nie powiemy ci, jak to zrobić, ale damy ci jedną wskazówkę: Rozpocznij swój kod w wierszu 1 od: zdefiniuj oblicz_średnią_oceny z przedmiotu.
                 example_code: |
                     ```
-                    # Use your own code from the previous adventure.
+                    # Wykorzystaj swój kod z poprzedniej przygody.
                     ```
     clear_command:
         name: '{clear}'
         default_save_name: clear_command
-        description: clear command
+        description: 'Polecenie {clear}'
         levels:
             4:
                 story_text: |
                     Czas na nową komendę! Z komendą `{clear}` możesz wyczyścić cały tekst z ekranu. W ten sposób możesz zapobiec ścianie tekstu na Twoim ekranie.
-                    Uważaj! Jeżeli używasz komendy `{clear}`, to pamiętaj nad nią użyć komendy `{sleep}`. W przeciwnym wypadku Hedy wyczyści Twój ekran zanim będziesz miał szansę cokolwiek przeczytać.
+                    Uważaj! Jeżeli używasz komendy `{clear}`, to może być konieczne użycie nad nią komendy `{sleep}`. W przeciwnym wypadku Hedy wyczyści Twój ekran zanim będziesz miał szansę cokolwiek przeczytać, jak to możesz zobaczyć w podanym przykładzie.
                 example_code: |
                     ```
                     {print} '3'
@@ -764,7 +771,7 @@ adventures:
                     {clear}
                     {print} '1'
                     {clear}
-                    {print} 'wait for it...'
+                    {print} 'czekaj...'
                     {sleep} 3
                     {clear}
                     {print} 'NIESPODZIANKA!'
@@ -772,196 +779,193 @@ adventures:
     debugging:
         name: debugging
         default_save_name: debugging
-        description: debugging adventure
+        description: przygoda debuggowania
         levels:
             1:
                 story_text: |-
-                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
-                    That means that in these debugging adventures, we will show you code that does not work yet.
-                    You will have to figure out what's wrong and correct the mistakes.
+                    Witamy w przygodzie debuggowania. Debuggowanie kodu oznacza pozbywanie się pomyłek znajdujących się w kodzie.
+                    Oznacza to, że w tych przygodach debuggingu, pokażemy wam kod, który jeszcze nie działa.
+                    Będziecie musieli dowiedzieć się, co jest z nim nie tak oraz poprawić wszelkie pomyłki.
 
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Ćwiczenie
+                    Zdebugguj ten kod. Powodzenia!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Uwaga! Ten kod wymaga usunięcia z niego błędów!**
                     ```
-                    {print} I love programming
-                    Do you love programming too?
+                    {print} Uwielbiam programować
+                    Czy ty też uwielbiasz programować?
                     {echo}
-                    {print} What are your hobbies?
-                    {echo} Your hobbies are
+                    {print} Jakie są twoje zainteresowania?
+                    {echo} Moje zainteresowania to
                     ```
             2:
                 story_text: |-
-                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
-                    That means that in these debugging adventures, we will give you a code that does not work yet.
-                    You will have to figure out what's wrong and correct the mistakes.
+                    Witamy w przygodzie debuggowania. Debuggowanie kodu oznacza pozbywanie się pomyłek znajdujących się w kodzie.
+                    Oznacza to, że w tych przygodach debuggingu, pokażemy wam kod, który jeszcze nie działa.
+                    Będziecie musieli dowiedzieć się, co jest z nim nie tak oraz poprawić wszelkie pomyłki.
 
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Ćwiczenie
+                    Zdebugguj ten kod. Powodzenia!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Uwaga! Ten kod musi zostać zdebugowany!**
                     ```
-                    destination {ask} Where are you going on holidays?
-                    {print} The flight to dstination leaves at 3 pm.
-                    {ask} Did you check in your luggage yet?
+                    miejsce docelowe {ask} Gdzie jedzie Pan/Pani na wakacje?
+                    {print} Lot do miejsca docelowego odlatuje o 3 po południu.
+                    {ask} Czy dał Pan/Pani już swój bagaż do sprawdzenia?
                     {echo}
-                    {print} Let me print your boarding pass for you.
+                    {print} Proszę pozwolić, że wydrukuję kartę pokładową.
                     {sleep}
-                    Here you go! Have a nice trip!
+                    Proszę bardzo! Miłej podróży!
                     ```
             3:
                 story_text: |-
-                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
-                    That means that in these debugging adventures, we will give you a code that does not work yet.
-                    You will have to figure out what's wrong and correct the mistakes.
+                    Witamy w przygodzie debuggowania. Debuggowanie kodu oznacza pozbywanie się pomyłek znajdujących się w kodzie.
+                    Oznacza to, że w tych przygodach debuggingu, pokażemy wam kod, który jeszcze nie działa.
+                    Będziecie musieli dowiedzieć się, co jest z nim nie tak oraz poprawić wszelkie pomyłki.
 
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Ćwiczenie
+                    Pozbądź się pomyłek z tego kodu. Powodzenia!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Uwaga! Ten kod musi zostać zdebuggowany!**
                     ```
-                    movie_choices {is} dracula, fast and furious, home alone, barbie
-                    chosen_movie {is} movies {at} {random}
-                    {print} Tonight we will watch chosen _movies
-                    like {ask} Do you like that movie?
-                    {print} Tomorrow we will watch something else.
-                    {add} chosen_movie {to} movie_choices
-                    {print} Tomorrow we will watch tomorrows_movie
-                    tomorrows_movie {is} movie_choices {at} {random}
-                    I'll go get the popcorn! {print}
+                    filmy_do_wyboru {is} dracula, fast and furious, home alone, barbie
+                    wybrany_film {is} filmy {at} {random}
+                    {print} Dzisiejszego wieczoru bedziemy oglądać wybrane_filmy
+                    lubić {ask} Lubisz ten film?
+                    {print} Jutro obejrzymy coś innego.
+                    {add} wybrany_film {to_list} filmy_do_wyboru
+                    {print} Jutro obejrzymy jutrzejszy_film
+                    jutrzejszy_film {is} filmy_do_wyboru {at} {random}
+                    Pójdę po popcorn! {print}
                     ```
             4:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Ćwiczenie
+                    Zdebuguj ten kod. Powodzenia!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Uwaga! Ten kod musi zostać zdebuggowany!**
                     ```
-                    {print} 'Welcome to the online library!
-                    {ask} What genre of books do you like?
-                    {print} You like genre
-                    author {is} {ask} 'Who's your favorite author?'
-                    {print} 'author is your favorite author'
-                    {print} Hmmm... i think you should try... books {at} {random}
+                    {print} 'Witamy w internetowej bibliotece!
+                    {ask} Jaki gatunek książek lubisz?
+                    {print} Lubisz gatunek
+                    autor {is} {ask} 'Kto jest twoim ulubionym autorem?'
+                    {print} 'autor jest twoim ulubionym autorem'
+                    {print} Hmmm... myślę, że powinieneś spróbować książek ... {at} {random}
                     ```
             5:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Ćwiczenie
+                    Zdebugguj ten kod. Powodzenia!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Uwaga! Ten kod musi zostać zdebuggowany**
                     ```
-                    {print} Welcome to Swimming Pool Hedy!
-                    class {is} {ask} 'Are you here to join a class today?'
-                    {if} class yes
-                    {print} 'Great! You're joining a class!
-                    {print} {else} 'You will not be joining a class'
-                    discount {is} 'Do you have a discount code?'
-                    {if} discount {is} yes
-                    discount_answer {is} {ask} 'What's your discount code?'
-                    discount_codes = Senior4231, Student8786, NewMember6709
-                    {if} discount_answer {is} {in} discount_cods
-                    {print} 'That will be $3,50'
-                    'That will be $5,50'
-                    {print} 'Have a nice swim!'
+                    {print} Witamy na basenie Hedy'ego!
+                    klasa {is} {ask} 'Czy chciałbyś dzisiaj dołączyć na lekcję pływania?'
+                    {if} lekcja pływania tak
+                    {print} 'Świetnie! Dołączasz na lekcję pływania!
+                    {print} {else} 'Nie dołączasz na lekcję pływania'
+                    discount {is} 'Czy posiadasz kod zniżkowy?'
+                    {if} zniżka {is} tak
+                    zniżka-odpowiedź {is} {ask} 'Jaki jest twój kod zniżkowy?'
+                    kody_zniżkowe = Senior4231, Student8786, NewMember6709
+                    {if} zniżka_odpowiedź {is} {in} kod_zniżkowy
+                    {print} 'Do zapłaty będzie $3,50'
+                    'Do zapłaty będzie $5,50'
+                    {print} 'Życzymy miłego pływania!'
                     ```
             6:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Ćwiczenie
+                    Zdebugguj ten kod. Powodzenia!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Uwaga! Ten kod musi zostać zdebuggowany**
                     ```
-                    {print} 'Vending machine'
-                    chosen_product = {ask} 'Please select a product'
-                    1_dollar_products = coke orange juice water
-                    2_dollar_products = chocolate, cookie, museli bar
-                    3dollar_prodcuts = potato chips, beef jerky, banana bread
-                    {if} chosen {is} {in} 1_dollar_products
-                    price = 1
-                    {if} chosen_product {is} 2_dollar_products
+                    {print} 'Automat z przekąskami'
+                    wybrany_produkt = {ask} 'Proszę wybrać produkt'
+                    produkty_1_dolarowe = kola, sok pomarańczowy, woda 
+                    produkty_2_dolarowe = czekolada, ciastko, batonik muesli
+                    produkty_3_dolarowe = chipsy, kabanosy, chleb bananowy
+                    {if} wybrany  {is} {in} produkty_1_dolarowe
+                    cena = 1
+                    {if} wybrany_produkt {is} produkty_2_dolarowe
                     price = 2
-                    {else} chosen_product {in} 3_dollar_products
-                    price = 3
-                    amount_of_products = '{ask} How many of ' chosen_product would you like to have?'
-                    total = price + amount_of_product
-                    {print} 'That will be $' price 'please'
+                    {else} wybrany_produkt {in} produkty_3_dolarowe
+                    cena = 3
+                    ilość_produktów = '{ask} Ile ' wybrany_produkt ' chciałbyś otrzymać?'
+                    suma= cena + ilość_produktów
+                    {print} 'To będzie ' cena ' $
                     ```
             7:
                 story_text: |-
-                    ### Exercise
-                    Surprise! This program looks more like an output than a code. And yet, we don't want you to just add `{print}` commands in front of each line.
-                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jaques)' by using the {repeat} command of course!
+                    ### Ćwiczenie
+                    Niespodzianka! Ten program wygląda bardziej jak dane wyjściowe a nie kod. A jednak nie chcemy, żebyś tylko dodawał komendy `{print}` na początku każdej linijki.
+                    Napraw ten program, żeby zmienić go w kołysankę 'Panie Janie', oczywiście używając komendy {repeat} !
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Uwaga! Ten kod musi zostać zdebugowany!**
                     ```
-                    Are you sleeping?
-                    Brother John!
-                    Morning bells are ringing!
-                    Ding, dang, dong!
+                    Panie Janie !
+                    Rano wstań !
+                    Wszystkie dzwony biją!!
+                    Bim, Bam, Bom!
                     ```
             8:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
-                example_code: |
+                    ### Ćwiczenie
+                    Zdebuguj ten kod. Powodzenia!
+                example_code: |-
                     **Warning! This code needs to be debugged!**
                     ```
-                    {print} 'Welcome to Manicures and Pedicures by Hedy'
-                    bodypart = {ask} 'Are you getting your fingernails or toenails done today? Or both?'
-                    {if} bodyparts {is} both
-                            {print} That will be $25'
-                            price = 25
+                    {print} 'Witamy w Salonie Kosmetycznym Hedy'ego'
+                    część ciała = {ask} 'Czy robi Pani dziś paznokcie u rąk czy paznokcie u stóp? A może obydwa?'
+                    {if} części_ciała {is} obie
+                            {print} Będzie to $25'
+                            cena = 25
                         {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
+                            {print} Będzie to $18'
+                            cena = 18
+                    kolor = {ask} Jaki kolor ?
+                    świecidełka = {ask} 'Chciała by Pani do tego jakieś świecidełka?'
+                    {if} świecidełka {is} tak
+                        {print} 'Są one płatne dodatkowo 3$'
+                    cena całkowita = cena + 3
+                    {else} {print} 'Bez świecidełek' {print} 'Więc bez dodatkowej opłaty'
                     {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
+                    {print} 'Gotowe! Za wszystko będzie ' cena ' $!'
+                    {print} 'Dziękuję! Do widzenia!'
                     ```
             9:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Ćwiczenie
+                    Zdebuguj ten kod. Powodzenia!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Uwaga! Ten kod musi być zostać zdebugowany!**
                     ```
-                    {print} 'Welcome to our sandwich shop'
-                    amount 'How many sandwiches would you like to buy?'
-                    {repeat} amount {times}
-                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
-                    types_of_bread {is} white, wheat, rye, garlic, gluten free
-                    {if} chosen_bread in types_of_bread
-                    {print} 'Lovely!'
+                    {print} 'Witamy w naszym sklepie z kanapkami'
+                    amount 'Ile kanapek chciałby Pan/Pani kupić?'
+                    {repeat} ilość {times}
+                    {ask} {is} {ask} 'Z jakiego rodzaju chleba miałaby być Pana/Pani kanapka?'
+                    rodzaje_chleba {is} biały, pszenny, żytni, czosnkowy, bezglutenowy
+                    {if} wybrany_chleb w rodzaje_chleba
+                    {print} 'Cudownie!'
                     {else}
-                    'I'm sorry we don't sell that'
-                    topping {is} {ask} 'What kind of topping would you like?'
-                    sauce {is} {ask} 'What kind of sauce would you like?'
-                    {print} One chosen_bread with topping and sauce.
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
+                    'Przepraszam, ale nie sprzedajemy takiego'
+                    topping {is} {ask} 'Jaki rodzaj dodatków chciałby Pan?'
+                    sos {is} {ask} 'Jaki sos chciałby Pan?'
+                    {print} Jeden wybrany_chleb z dodatkiem i sosem.
+                    cena = ilość * 6
+                    {print} 'To będzie 'cena w dolarach'
                     ```
-
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
             10:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Ćwiczenie
+                    Zdebuguj ten kod. Powodzenia!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Uwaga! Ten kod musi zostać zdebugowany!**
                     ```
-                    names = Muad Hasan Samira Noura
-                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
-                    {for} name {is} names
-                    {print} At the beach name loves to activity at random
+                    imiona = Muad Hasan Samira Noura
+                    aktywność = puszczać latawce, pływać, wędrować, opalać się na słońcu
+                    {for} imię {is} imiona
+                    {print} Na plaży imię uwielbia aktywność {at}{random}
                     ```
             11:
                 story_text: |-
@@ -1035,229 +1039,212 @@ adventures:
                     ### Exercise
                     Debug this code. Good luck!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Uwaga! Ten kod musi zostać zdebuggowany!**
                     ```
-                    defin movie_recommendation with name
-                        action_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'
-                        romance_movies = 'Love Actually', 'The Notebook', 'Titanic'
-                        comedy_movies = 'Mr Bean' 'Barbie''Deadpool'
-                        kids_movies = 'Minions', 'Paddington', 'Encanto'
-                        if name is 'Camila' or name is 'Manuel'
-                            recommended_movie = kids_movie at random
-                        if name is 'Pedro' or 'Gabriella'
-                                mood = ask 'What you in the mood for?'
-                            if mood is 'action'
-                                recommended_movie = comedy_movies at random
-                            if mood is 'romance'
-                                recommended_movie = romance_movies
-                        if mood is 'comedy'
-                                recommended_movie = comedy_movies at random
+                    {define} rekomendacja_filmu {with} imię
+                        filmy_akcji == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'
+                        romase = 'Love Actually', 'The Notebook', 'Titanic'
+                        komedie = 'Mr Bean' 'Barbie''Deadpool'
+                        filmy_dla_dzieci = 'Minions', 'Paddington', 'Encanto'
+                        {if} imię{is} 'Camila' {or} imię {is} 'Manuel'
+                            recommended_movie = kids_movie {at} {random}
+                        {if} imię {is} 'Pedro' {or} 'Gabriella'
+                                ochota = {ask} 'What you in the mood for?'
+                            {if} ochota {is} 'action'
+                                polecany_film = komedie {at} {random}
+                            {if} ochota {is} 'romans'
+                                polecany_film = romans
+                        {if} ochota {is} 'komedie'
+                                polecany_film = komedie {at} {random}
 
-                    print 'I would recommend ' recommended_movie ' for ' name
+                    {print} 'Poleciłbym ci ' rekomedowany_film ' for ' imię
 
-                    name = ask 'Who is watching?'
-                    recommendation = ask 'Would you like a recommendation?'
-                    if recommendaion is 'yes'
-                    print movie_recommendation with name
-                    else
-                    print 'No problem!'
+                    imię = {ask} 'Kto ogląda?'
+                    rekomendacja = {ask} 'Chciałbyś otrzymać rekomendację?'
+                    {if} rekomendacja {is} 'tak'
+                    {print} rekomedacja_filmu {with} imię
+                    {else}
+                    {print} 'Żaden problem!'
                     ```
             14:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Ćwiczenie
+                    Zdebugguj ten kod. Powodzenia!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Uwaga! Ten kod musi zostać zdebuggowany!**
                     ```
-                    define calculate_heartbeat
-                        print 'Press your fingertips gently against the side of your neck'
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
-                        heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
-                        if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
-                        else
-                            if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
-                            if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
+                    {define} zmierz_tętno
+                        {print} 'Delikatnie dociśnij opuszki palców z boku szyi'
+                        {print} '(tuż pod twoją szczęką)'
+                        {print} 'Zmierz liczbę uderzeń serca przez 15 sekund'
+                        uderzenia serca == {ask} 'Ile uderzeń naliczyłeś w 15 sekund?'
+                         tętno= uderzenia*4
+                        {print} 'Twoje tętno wynosi ' tętno
+                        {if} tętno >= 60 {or} tętno <= 100
+                            {print} 'Twoje tętno jest w porządku'
+                        {else}
+                            {if} tętno > 60
+                                {print} 'Twoje tętno jest za niskie'
+                            {if} tętno < 100
+                                {print} 'Twoje tętno jest za wysokie'
+                            {print} 'Powinieneś skontaktować się z lekarzem'
 
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
-                        call measure_heartbeat
-                    else
-                        'no problem'
+                    zmierz_tętno = {ask} 'Chciałbyś zmierzyć swoje tętno?'
+                    {if} zmierz_tętno= 'tak'
+                        {call} zmierz_tętno
+                    {else}
+                        'żaden problem'
                     ```
-
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
-                        heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
-                        if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
-                        else
-                            if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
-                            if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
-
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
-                        call measure_heartbeat
-                    else
-                        'no problem'
             15:
                 story_text: |-
-                    ### Exercise
-                    Debug this random children's story. Good luck!
+                    ### Ćwiczenie
+                    Zdebugguj tą historyjkę dla dzieci. Powodzenia!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Uwaga! Ten kod musi zostać zdebuggowany!**
                     ```
-                    names = 'Tanya', 'Romy', 'Kayla', 'Aldrin', 'Ali'
-                    verbs='walking', 'skipping', 'cycling', 'driving', 'running'
-                    locations = 'on a mountaintop', 'in the supermarket', 'to the swimming pool'
-                    hiding_spots = 'behind a tree', under a table', in a box'
-                    sounds = 'a trumpet', 'a car crash', 'thunder'
-                    causes_of_noise = 'a television', 'a kid with firecrackers', 'a magic elephant', 'a dream'
+                    Imiona = 'Tanya', 'Romy', 'Kayla', 'Aldrin', 'Ali'
+                    czynność ='spacerował', 'skakał na skakance', 'jeżdził na rowerze', 'biegał', 'jeździł na deskorolce'
+                    miejsca = 'na szczycie góry', 'w supermarkecie', 'na basenie'
+                    kryjówka = 'za drzewem', pod stołem', w pudełku'
+                    dźwięki = 'trąbka', 'uderzenie', 'grzmot'
+                    przyczyna hałasu = 'telewizja', 'dziecko z petardami', 'magiczny słoń', 'sen'
 
-                    chosen_ name = names at random
-                    chosen_verb = verbs at random
-                    chosen_location = 'locations at random'
-                    chosen_sounds = noises at random
-                    chosen_spot = hiding_spots random
-                    chosen_causes = causes_of_noise at random
+                    wybrane_imię = imiona {at} {random}
+                    wybrana_czynność= czynności{at} {random}
+                    wybrane_miejsce = 'miejsca {at} {random}'
+                    wybrany_dźwięk = hałasy {at} {random}
+                    wybrana_kryjówka= kryjówki {random}
+                    wybrana_przyczyna=przyczyna hałasu {at} {random}
 
-                    print chosen_name ' was ' chosen_verb ' ' chosen_location
-                    print 'when they suddenly heard a sound like ' sounds at random
-                    print chosen_name ' looked around, but they couldn't discover where the noise came from'
-                    print chosen_name ' hid ' chosen_spot'
-                    print 'They tried to look around, but couldn't see anything from there'
-                    hidden = 'yes'
-                    while hidden = 'yes'
-                        print chosen_name 'still didn't see anything'
-                    answer = ask 'does ' chosen_name ' move from their hiding spot?'
-                        if answer = 'yes'
-                            hidden == 'no'
-                    print 'chosen_name moved from' chosen_spot
-                    print 'And then they saw it was just' chosen_cause
-                    print chosen_name 'laughed and went on with their day'
-                    print The End
+                    {print} wybrane_imię ' ' wybrana_czynność ' ' wybrane_miejsce
+                    {print} 'nagle usłyszał dźwięk podobny do ' dzwięki {at} {random}
+                    {print} wybrane_imię ' rozglądnął się, ale nie widział skąd dochodził hałas'
+                    {print} wybrane_imię ' ukrył się ' wybrana_kryjówka'
+                    {print} 'Próbował się rozglądać, ale niczego nie mógł zobaczyć z tego miejsca'
+                    ukryty = 'tak'
+                    {while} ukryty = 'tak'
+                        {print} wybrane_imię 'nadal niczego nie widział'
+                    odpowiedź = {ask} 'Czy ' wybrane_imię ' wyszedł z kryjówki?'
+                        {if} odpowiedź = 'tak'
+                            ukryty == 'nie'
+                    {print} 'wybrane_imię wyszedł z' wybrana_kryjówka
+                    {print} 'I wtedy zobaczył, że to był to tylko' wybrana_przyczyna
+                    {print} wybrane_imię 'roześmiał się i kontynuował swój dzien'
+                    {print} Koniec
                     ```
             16:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
-                    Tip: Make sure that you only see your score once in the end.
+                    ### Ćwiczenia
+                    Zdebugguj ten kod. Powodzenia!
+                    Wskazówka: Upewnij się, że widzisz swój wynik tylko raz.
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Uwaga! Ten kod musi zostać zdebuggowany!**
                     ```
-                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
-                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
-                    score = 0
-                    for i in range 0 to 10
-                        answer = ask 'What's the capital of ' countries[i]
-                        correct = capital[i]
-                        if answer = correct
-                            print 'Correct!'
-                        score = score + 1
-                        else
-                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
-                        print 'You scored ' score ' out of 10'
+                    kraj = ['Holandia', 'Polska', 'Turcja', 'Zimbabwe', 'Tajlandia', 'Brazylia', 'Peru', 'Australia', 'Indie', 'Romania' ]
+                    stolice = 'Amsterdam', 'Warszawa' 'Istambuł', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bukareszt'
+                    wynik = 0
+                    {for} i {in} {range} 0 {to} 10
+                        odpowiedź = {ask} 'Jaka jest stolica ' kraje[i]
+                        poprawna = stolica[i]
+                        {if} odpowiedź = poprawna
+                            {print} 'Poprawnie!'
+                        wynik = wynik + 1
+                        {else}
+                            {print} 'Źle,' stolice[i] 'w stolicy' kraje[i]
+                        {print} 'Twój wynik to ' wynik ' na 10'
 
                     ```
             17:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Ćwiczenie
+                    Zdebugguj ten kod. Powodzenia!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Uwaga! Ten kod musi zostać zdebuggowany!**
                     ```
-                    define food_order
-                        toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                        size = ask 'big, medium or small?'
-                        number_of_pizza = ask 'How many these pizzas would you like?'
+                    {define} zamówienie_jedzenia
+                        dodatki = {ask} 'pepperoni, tuńczyk, warzywa lub ser?'
+                        rozmiar = {ask} 'duży, średni czy mały?'
+                        liczba_pizz = {ask} 'Ile pizz chciałbyś zamówić ?'
 
-                        print 'YOU ORDERED'
-                        print number_of_pizzas ' size  ' topping ' pizza'
+                        {print} 'ZAMÓWIŁEŚ'
+                        {print} liczba_pizz' rozmiar ' dodatki' pizzy'
 
-                    define drinks_order
-                        drink = ask 'water, coke, icetea, lemonade or coffee?'
-                        number_of_drinks = ask 'How many of these drinks would you like?'
+                    {define} zamówienie_napojów
+                        napoje = {ask} 'woda, kola, mrożona herbata, lemoniada, kawa?'
+                        liczba_napojów = {ask} 'Ile napojów chciałbyś zamówić?'
 
-                        print 'YOU ORDERED'
-                        print number_of_drinks ' ' drink
+                        {print} 'ZAMÓWIŁEŚ'
+                        {print} liczba napojów ' ' napój
 
-                    'Welcome to Hedy pizza'
-                    more_food = ask 'Would you like to order a pizza?'
-                    while more_food = 'yes'
-                        return food_order
-                        more_food = ask 'Would you like to order a pizza?'
-                    more_drinks = ask 'Would you like to order some drinks?'
-                    while more_drinks == 'yes'
-                        call drink_order
-                        more_drinks == ask 'Would you like to order more drinks?'
+                    'Witamy w pizzerii Hedy"ego'
+                    wiecej_jedzenia = {ask} 'Czy chciałbyś zamówić pizzę?'
+                    {while} wiecej_jedzenia = 'tak'
+                        {return} zamówienie_jedzenia
+                        wiecej_jedzenia = {ask} 'Czy chciałbyś zamówić pizzę?'
+                    więcej_napojów = {ask} 'Chciałbyś zamówić napoje?'
+                    {while} wiecej_napojów == 'tak'
+                        {call} zamowienie_napoju
+                        wiecej_napojów == {ask} 'Chciałbyś zamówić więcej napojów?'
 
 
-                    print 'Thanks for ordering!'
+                    {print} 'Dziękuję za złożenie zamówienia!'
                     ```
             18:
                 story_text: |-
-                    ### Exercise
-                    Debug this Old MacDonald program from level 16. Good luck!
+                    ### Ćwiczenie
+                    Zdebugguj ten program Stary MacDonald z poziomu 16. Powodzenia!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Uwaga! Ten kod musi zostać zdebuggowany!**
                     ```
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
-                    for i in range 1 to 3
-                        animal = animals[i]
-                        sound = sounds[i]
-                        print 'Old MacDonald had a farm'
-                        print 'E I E I O!'
-                        print 'and on that farm he had a ' animal
-                        print 'E I E I O!'
-                        print 'with a ' sound sound ' here'
-                        print 'and a ' sound sound ' there'
-                        print 'here a ' sound
-                        print 'there a ' sound
-                        print 'everywhere a ' sound sound
+                    zwierzęta = ['świnka', 'pies', 'krowa']
+                    dwięki = ['chrum', 'hau', 'muu']
+                    {for} i {in} {range} 1 {to} 3
+                        zwierzę = zwierzęta[i]
+                        dźwięk = dźwięki [i]
+                        {print} 'Pan MacDonald farmę miał'
+                        {print} 'E I E I O!'
+                        {print} 'na tej farmie ' zwierzę' hodował'
+                        {print} 'E I E I O!'
+                        {print} 'i ' dźwięk dźwięk ' tu'
+                        {print} 'i ' dźwięk dźwięk ' tam'
+                        {print} 'tu ' dźwięk
+                        {print} 'tam ' dźwięk
+                        {print} 'wszędzie ' dźwięk dźwięk
                     ```
     default:
-        name: Pierwsze kroki
+        name: Wprowadzenie
         default_save_name: wstęp
         description: Wyjaśnienie poziomu
         levels:
             1:
                 story_text: |
-                    Witaj w Hedy! Na Poziomie 1 nauczysz się pisać historię.
-                    Wypróbuj kod, naciskając zielony przycisk pod polem programowania.
-                    Gotowe? Świetnie, możesz udać się do następnej zakładki i nauczyć pierwszej komendy!
+                    Witamy w Hedy! Tutaj możesz nauczyć się programowania krok po kroku.
+
+                    Wypróbuj kod! Żółty przycisk kopiuje przykładowy kod do pola programowania.
+                    Następnie naciśnij zielony przycisk „uruchom kod” w polu programowania, aby uruchomić kod.
+
+                    Gotowy? Następnie przejdź do następnej karty, aby dowiedzieć się, jak tworzyć własne kody!
                 example_code: |
                     ```
-                    {print} Hello world!
+                    {print} Witaj świecie!
                     ```
             2:
                 story_text: |
-                    Congratulations! You've reached level 2. Hopefully you've already made some awesome codes!
-                    In the first level you might've notice that the `{echo}` command can only save one bit of information at a time.
-                    For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
+                    Gratulacje! Osiągnąłeś poziom 2. Mam nadzieję, że już stworzyłeś niesamowite kody!
+                    Na pierwszym poziomie możesz zauważyć, że polecenie `{echo}` może zapisywać tylko jeden bit informacji na raz.
+                    Na przykład podczas przygody w restauracji można powtórzyć to, co klient chciał zjeść lub co chciał wypić, ale nie jedno i drugie w jednym zdaniu.
 
-                    That changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.
-                    So let's go to the next tab!
+                    To zmienia się na poziomie 2. Na poziomie 2 nauczysz się pracować ze zmiennymi, które pozwalają zapisać wiele informacji i napisać je w dowolnym miejscu.
+                    Przejdźmy więc do następnej karty!
                 example_code: |
-                    **Warning! This code does not work!**
-                    In Hedy commands will change sometimes. `{echo}` for example only works in level 1. In this level you'll learn a better way to echo answers back.
+                    **Uwaga! Ten kod nie działa!**
+                    W Hedy polecenia będą się czasem zmieniać. Na przykład `{echo}`działa tylko na poziomie 1. Na tym poziomie nauczysz się lepszego sposobu powtarzania odpowiedzi.
                     ```
-                    {print} Welcome at Hedy's
-                    {ask} What would you like to eat?
-                    {echo} So you want
-                    {ask} what would you like to drink?
-                    {echo} So you want
+                    {print} Witamy u Hedy'ego
+                    {ask} Co chciałbyś zjeść?
+                    {echo} Czyli chcesz
+                    {ask} Czego chciałbyś się napić?
+                    {echo} Czyli chcesz
                     ```
             3:
                 story_text: "Na poprzednim poziomie nauczyliśmy się czym są zmienna i jak możemy ich używać, żeby nasze przygody były bardziej interaktywne. \nAle... to nie jedyna rzecz, którą możemy zrobić ze zmiennymi! Zmienne mogą też być listami. \nA nawet możemy pozwolić Hedy, aby wybrała losowe słowo z listy, co pozwoli Ci stworzyć prawdziwe gry!\nSpójrzmy na kolejną zakładkę!\n"
@@ -1274,7 +1261,7 @@ adventures:
 
                     `Moje Zosia to Zosia`.
 
-                    Na tym poziomie rozwiążemy ten problem używająć cudzysłowów.
+                    Na tym poziomie rozwiążemy ten problem używając cudzysłowów.
                 example_code: |
                     ```
                     imię {is} Zosia
@@ -1282,10 +1269,10 @@ adventures:
                     ```
             5:
                 story_text: |
-                    W poprzednich poziomach nauczyliśmy się używać `{at} {random}`, które sprawiało, że gry wyglądały inaczej pomiędzy ich odpaleniami.
-                    Ale to nie jest do końca interaktywne, ponieważ gracz nie ma wpływu co się stanie dalej w grze.
+                    W poprzednich poziomach nauczyliśmy się używać `{at} {random}`, które sprawiało, że gry wyglądały inaczej pomiędzy ich uruchomieniem.
+                    Ale to nie jest do końca interaktywne, ponieważ gracz nie ma wpływu, na to co się stanie dalej w grze.
 
-                    Na tym poziomie nauczyć się nowej komendy `{if}`, która pozwoli na dawanie różnych odpowiedzi w Twoich programach.
+                    Na tym poziomie nauczyć się nowej komendy `{if}`, która pozwoli na podawanie różnych odpowiedzi w twoim programie.
                     Dla przykładu, w ten sposób będziesz mógł zaprogramować hasło dla swojego komputera. Przejdźmy do kolejnej zakładki!
                 example_code: |
                     ```
@@ -1293,149 +1280,166 @@ adventures:
                     ```
             6:
                 story_text: |
-                    W tym poziomie nauczysz się czegoś nowego: od teraz możesz również liczyć.
+                    Na poprzednim poziomie ćwiczyłeś z `{ask}` i `{if}`. Na przykład możesz zapytać gości, co chcieliby zjeść.
+                    Jednak nie możesz jeszcze obliczyć ceny za obiad każdej osoby.
 
-                    Dodawanie jest proste, możesz je zapisać tak jak w matematyce: na przykład `5 + 5`. Odejmowanie też jest proste, to po prostu `5 - 5`.
-
-                    Mnożenie jest trochę inne, ponieważ nie ma znaku mnożenia na twojej klawiaturze. Poszukaj, naprawdę go nie ma!
-                    Z tego powodu mnożymy za pomocą gwiazdki nad 8: `5 * 5`. Czytaj to jako „5 razy 5”, tak lepiej zapamiętasz.
+                    Ten poziom umożliwia stosowanie dodawania, odejmowania i mnożenia w twoich programach. W ten sposób możesz obliczyć ceny w swojej restauracji, ale możesz również dodać tajny kod, aby dać swoim znajomym i rodzinie zniżkę.
+                    Inną opcją na tym poziomie jest zaprogramowanie własnej gry matematycznej, aby młodszy brat lub siostra ćwiczyli mnożenie liczb.
+                    Sprawdź sam!
                 example_code: |
                     ```
-                    {print} '5 plus 5 to ' 5 + 5
-                    {print} '5 minus 5 to ' 5 - 5
-                    {print} '5 razy 5 to ' 5 * 5
+                    cena_posiłku {is} 0
+                    cena_napoju{is} 0
+                    cena_całkowita {is} 0
+                    {print} 'Witamy w McHedy'
+                    zamówienie {is} {ask} 'Co chciałbyś zjeść?'
+                    {if} zamówienie {is} hamburger cena_posiłku {is} 5
+                    {if} zamówienie {is} frytki cena_posiłku {is} 2
+                    napój {is} {ask} 'Czego chciałbyś się napić?'
+                    {if} napój {is} woda cena_napoju {is} 0
+                    {else} cena_napoju {is} 3
+                    cena_całkowita {is} cena_posiłku + cena_napoju
+                    {print} 'Za wszystko należy się ' cena_całkowita ' dolarów'
                     ```
             7:
                 story_text: |
-                    Poziom 7 dodaje komendę `{repeat}`. `{repeat}` może być użyte po to, aby tę samą linie kodu wykonać wiele razy.
+                    Dobra robota! Osiągnąłeś następny poziom, co oznacza, że ćwiczyłeś `{if}` i `{else}`. Prawdopodobnie zauważyłeś, że twoje kody stają się coraz dłuższe.
+                    Na przykład, jeśli chcesz zaprogramować 'Wszystkiego najlepszego'.
+
+                    To dużo kodu - głównie te same słowa w kółko i w kółko. Na szczęście w następnej zakładce nauczysz się rozwiązania używając komendy`{repeat}`, która pozwala powtarzać wiersz kodu wiele razy.
                 example_code: |
                     ```
-                    {repeat} 3 {times} {print} 'Hedy to zabawa!'
+                    {print} 'Sto lat'
+                    {print} 'Sto lat'
+                    {print} 'Niech żyje, żyje nam'
+                    {print} 'Sto la'
                     ```
             8:
                 story_text: |
-                    `{ask}` i `{print}` wciąż działają tak jak je poznałeś do tej pory. Ale `{if}`, `{else}` i `{repeat}` zmieniły się!
-                    Od teraz możesz zgrupować kilka linii kodu, ale musisz wtedy *wciąć* ten kod.
-                    To znaczy dodać cztery spacje na początku linii. Będziesz musiał również wciąć kod, kiedy będziesz chciał utworzyć blok złożony z tylko 1 linii.
+                    Teraz nauczyłeś się powtarzać jeden wiersz kodu. Przydaje się to, ale nie zawsze wystarcza. Czasami chcesz powtórzyć wiele linii jednocześnie.
+                    Ten poziom pozwala zgrupować kilka wierszy kodu i powtórzyć tę małą grupę wierszy jednocześnie!
                 example_code: |
-                    Zobacz jak działa polecenie `{repeat}`:
                     ```
-                    {repeat} 5 {times}
-                        {print} 'Cześć wszystkim'
-                        {print} 'Całość powtórzona 5 razy'
-                    ```
-                    Zobacz jak działa polecenie `{if}` oraz `{else}`:
-
-                    ```
-                    imie {is} {ask} 'Jak masz na imię?'
-                    {if} imie {is} Karol
-                        {print} 'Cześć Karol'
-                        {print} 'Możesz pograć na swoim komputerze!'
-                    {else}
-                        {print} 'INTRUZ!'
-                        {print} 'Nie możesz używać tego komputera!'
+                    {repeat} 5 {times} {print} 'W następnej zakładce możesz powtórzyć wiele wierszy kodu jednocześnie!'
                     ```
             9:
                 story_text: |
-                    Na tym poziomie możesz używać nie tylko wielu linii z poleceniem `{if}` oraz `{repeat}`, ale możesz używać ich łącznie!
-                    W tym przykładzie możesz zobaczyć polecenie `{if}` wewnątrz pętli/polecenia `{repeat}`. Można też odwrotnie. Dodatkowo polecenie `{if}` jest dozwolone w innym poleceniu `{if}`. Możesz też wykorzystać pętle/polecenie `{repeat}` w innej pętli/poleceniu `{repeat}`.
-                    Spróbuj samemu!
+                    Świetna robota! Osiągnąłeś kolejny poziom! Na poprzednim poziomie nauczyłeś się używać wielu wierszy kodu w poleceniu {if} lub {repeat}. Ale nie możesz jeszcze połączyć dwóch..
+                    Dobre wieści! Na tym poziomie będziesz mógł umieścić {if} w poleceniu {if}lub w poleceniu {repeat}. Umieszczenie bloku kodu w innym bloku kodu nazywa się nesting (zagnieżdżeniem).                     ``` Umieszczenie bloku kodu w innym bloku kodu nazywa się nesting (tłumaczenie dosłowne: zagnieżdżeniem).
                 example_code: |
                     ```
-                    {repeat} 3 {times}
-                        jedzenie= {ask} 'Co byś zjadła?'
-                        {if} jedzenie {is} pizza
-                            {print} 'super!'
-                        {else}
-                            {print} 'pizza jest lepsza'
-                    ```
+                    odpowiedź = {ask} 'Jesteś gotów, aby nauczyć się czegoś nowego?'
+                    {if} odpowiedź {is} tak
+                        {print} 'Świetny! Możesz nauczyć się używać polecenia powtórz w poleceniu if!'
+                        {print} 'Hura!'
+                        {print} 'Hura!'
+                        {print} 'Hura!'
+                    {else}
+                        {print} 'Może powinieneś poćwiczyć więcej na poprzednim poziomie'
             10:
-                story_text: "W tym poziomie nauczysz się nowego polecenia/pętli `{for}`. Z poleceniem/pętlą `{for}`możesz tworzyć listy i możesz używać wszystkich elementów listy. \n`{for}` tworzy blok kodu, jak `{repeat}` i `{if}`  więc wszystkie linie w bloku muszą być wcięte, a więc zaczynać się spacjami."
+                story_text: "Świetnie sobie radzisz! Na poprzednich poziomach wciąż mieliśmy do czynienia z małym problemem. Nauczyłeś się powtarzać wiersze, ale co, jeśli chcesz nieznacznie zmienić jeden wiersz.\nNa przykład, jeśli chcesz zaśpiewać piosenkę 'if you're happy and you know it'. Wyglądałoby to tak:\n\nJeśli chcesz także zawrzeć następny werset 'stomp your feet',  następny i następny, musisz całkowicie zmienić kod.\nNa tym poziomie nauczysz się polecenia `{for}`, które pozwala tworzyć listę akcji i powtarzać kod z inną akcją za każdym razem\nSpójrz!\n"
                 example_code: |
                     ```
-                    zwierzęta {is} pies, kot, blobfish
-                    {for} zwierzę {in} zwierzęta
-                      {print} 'Moim ulubionym zwierzakiem jest ' zwierzę
+                    {repeat} 2 {times}
+                        {print} 'if youre happy and you know it clap your hands'
+                    {print} 'if youre happy and you know it and you really want to show it'
+                    {print} 'if youre happy and you know it clap your hands'
                     ```
             11:
                 story_text: |
-                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
-                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
+                    Osiągnąłeś poziom 11, świetnie sobie radzisz! Na wyższych poziomach Hedy coraz bardziej koncentruje się na nauczaniu języka programowania Python.
+                    W Pythonie nie ma polecenia `{repeat}`, ale istnieje polecenie, które działa jak {repeat}. Czy chcesz dowiedzieć się, jak powiedzieć `{repeat}` w języku Python? Szybko przejdź dalej, aby się tego dowiedzieć!
             12:
-                story_text: |-
-                    **Ułamki dziesiętne**
-                    Do tej pory Hedy nie pozwalał na zapisywanie ułamków dziesiętnych np. 1.5, ale od tej pory możesz już wykorzystać ułamki dziesiętne w swoich kodach. Pamiętaj że w komputerze wykorzystujemy  `.` do oddzielenia części ułamkowej od całkowitej.
+                story_text: |
+                    Może próbowałeś użyć liczb dziesiętnych w swojej przygodzie w restauracji. Jeśli tak, prawdopodobnie zauważyłeś, że Hedy jeszcze ich nie zrozumiał i zawsze je zaokrąglał.
+                    Od tego poziomu możesz używać liczb dziesiętnych.
                 example_code: |
                     ```
-                    {print} 'Dwa i pół plus dwa i pół to...'
-                    {print} 2.5 + 2.5
+                    burger = 5
+                    napój = 2
+                    cena = burger + drink
+                    print 'Zamówiłeś burgera i napój'
+                    print 'Za wszystko należy się ' cena ' dolarów'
                     ```
-
-                    {print} 2.5 + 2.5
             13:
-                story_text: |-
-                    Nauczysz się teraz o `{and}` i `{or}`! Jeśli chcesz sprawdzić dwa wyrażenia, nie musisz używać dwóch poleceń `{if}`, w zamian możesz użyć `{and}` i `{or}`.
+                story_text: |
+                    Na poprzednich poziomach nauczyłeś się umieszczać w sobie dwa polecenia `{if}`. Działa to dobrze, ale daje bardzo długie i nieprzydatne kody, takie jak ten:
 
-                    Jeśli użyjesz `{and}`, oba wyrażenia, przed i po `{and}`, muszą być prawdziwie. Można też użyć `{or}`. W takim przypadku wystarczy że jedno z wyrażeń będzie prawdziwe.
+                    W tym systemie musisz podać zarówno poprawną nazwę użytkownika, jak i prawidłowe hasło.
+                    Na tym poziomie nauczysz się polecenia `{and}`, które sprawi, że ten kod będzie znacznie krótszy i bardziej zrozumiały!
+                    Sprawdź to!
                 example_code: |
                     ```
-                    imię = {ask} 'Jak masz na imię?'
-                    wiek = {ask} 'Ile masz lat?'
-                    {if} imię {is} 'Hedy' {and} wiek {is} 2
-                        {print} 'Naprawdę jesteś Hedy!'
+                    nazwa_użytkownika = {ask} 'Jaka jest twoja nazwa użytkownika?'
+                    hasło = {ask} 'Jakie jest twoje hasło?'
+                    {if} nazwa_użytkownika {is} 'Hedy'
+                        {if} hasło {is} 'sekret'
+                            {print} 'Witaj Hedy!'
+                        {else}
+                            {print} 'Brak dostępu'
+                    {else}
+                        {print} 'Brak dostępu!'
                     ```
             14:
                 story_text: |
-                    W tej lekcji nauczymy się zastosowania nowych operatorów logicznych, które możesz pamiętać z lekcji matematyki: operatory `<` i `>`.
-                    Operator `<` sprawdza czy pierwsza liczba jest mniejsza od drugiej liczby, na przykład wiek `<` 12 sprawdza czy wiek jest mniejszy niż 12.
-                    Jeżeli chcesz sprawdzić czy pierwsza liczba jest mniejsza lub równa drugiej liczbie możesz użyć operator `<=`, na przykład wiek `<=` 11, który sprawdza czy wiek jest mniejszy lub równy 11.
-                    Operator `>` sprawdza czy pierwsza liczba jest większa od drugiej liczby, na przykład punkty `>` 10 sprawdza czy punkty są większe od 10.
-                    Jeżeli chcesz sprawdzić, czy pierwsza liczba jest większa lub równa drugiej liczbie możesz użyć `>=`, na przykład punkty `>=` 11, który sprawdza czy punkty są większe lub równe 11.
-                    Możesz użyć tych operatorów logicznych w `{if}`, na przykład:
+                    Za pomocą przykładowego kodu możesz obliczyć, czy zdałeś przedmiot w szkole.
+                    Możesz zauważyć, że ten kod jest wyjątkowo nieefektywny ze względu na to, że jest zbyt długi w wierszu 5.
+                    Wszystkie stopnie od 1 do 5 musiały być programowane osobno. Na szczęście dla ciebie, na tym poziomie nauczysz się, jak to zrobić bez tego wyjątkowo długiego kodu!
                 example_code: |
                     ```
-                    wiek = {ask} 'Ile masz lat?'
-                    {if} wiek > 12
-                        {print} 'Masz więcej lat niż ja!'
-                    ```
-
-                    {if} wiek < 13
-                        {print} 'Jesteś młodszy niż ja!'
+                    pierwsza_ocena = {ask} 'Jaki wynik uzyskałeś z pierwszego testu?'
+                    druga_ocena = {ask} 'Jaki wynik uzyskałeś z drugiego testu?'
+                    suma = pierwsza_ocena + druga_ocena
+                    średnia_ocen = suma / 2
+                    {if} średnia_ocen = 1 {or} średnia_ocen = 2 {or} średnia_ocen = 3 {or} średnia_ocen = 4 {or} średnia_ocen = 5
+                        {print} 'O nie! Oblałeś przedmiot...'
                     {else}
-                        {print} 'Jesteś starszy niż ja!'
+                        {print} 'Świetnie! Zdałeś przedmiot!'
+                    ```
             15:
-                story_text: "Tym razem nauczymy się nowego typu pętli - pętla `{while}`! Ta pętla będzie działać tak długo, jak warunek w pętli jest prawdziwy, \nwięc nie zapomnij zmienić wartości warunku w pętli.\n\nPętla kodzie przykładowym będzie działać aż poprawna odpowiedź zostanie podana.\nPętla nigdy się nie skończy, gdy poprawna odpowiedź nie zostanie podana!"
+                story_text: "W tej grze poniżej wprowadzono kod, aby gracz mógł grać tak długo, jak zechce...\nAle ten kod jest nieskuteczny i zdecydowanie za długi. A co, jeśli gracz chce zagrać w 101 gier zamiast 100?\nNie możesz grać w nieskończoność?\nNa tym poziomie nauczysz się polecenia, które znacznie to wszystko ułatwia!\n"
                 example_code: |
                     ```
-                    odpowiedź = 0
-                    {while} odpowiedź != 25
-                        odpowiedź = {ask} 'Ile jest 5 razy 5?'
-                    {print} 'Dobra odpowiedź'
+                    gra = 'start'
+                    {for} i {in} {range} 1 {to} 100
+                        {if} gra == 'start'
+                            answer = {ask} 'Czy chcesz kontynuować?'
+                            {if} answer == 'no'
+                                gra = 'koniec'
+                            {if} odpowiedź == 'tak'
+                                {print} 'Kontynuujemy'
                     ```
             16:
-                story_text: |-
-                    Tym razem stworzymy listy w sposób podobny do Pythona. Te listy mają kwadratowe nawiasy dookoła listy! Dodatkowo, zostawimy też cudzysłowie dookoła każdego elementu listy tak jak się nauczyliśmy w poprzednich poziomach.
-                    Nawiasów kwadratowych używamy również do wybrania konkretnego elementu z listy. Polecenie `{at}` nie może już być używane.
-                example_code: |
+                story_text: |
+                    Na tym poziomie pójdziemy nieco bardziej kierunku prawdziwego kodu Pythona. Dowiesz się również, jak dopasować razem dwie listy.
+                    W ten sposób możesz zaprogramować kod, w którym prawidłowe zwierzę jest dopasowane do właściwego dźwięku.
+                    Ponieważ dwa poniższe kody... To kompletny nonsens!
+                example_code: |-
                     ```
-                    przyjaciele = ['Ahmed', 'Bogdan', 'Cayden']
-                    szczęśliwe_liczby = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} 'szczęśliwa liczba ' przyjaciele[i]
-                        {print} 'to ' szczęśliwe_liczby[i]
+                    zwierzęta = 'kurczak', 'koń', 'krowa'
+                    dźwięki = 'pipipi', 'ihaha', 'muuu'
+                    {for} zwierzę {in} zwierzęta
+                        {print} 'A ' zwierzę ' mówi ' dźwięki {at} {random}
                     ```
+                    Możesz spróbować zrobić to również w ten sposób.
+                    ```
+                    zwierzęta = 'kurczak', 'koń', 'krowa'
+                    dźwięki = 'pipipi', 'ihaha', 'muuuu'
+                    {for} zwierzę {in} zwierzęta
+                        {for} dźwięk {in} dźwięki
+                            {print} 'A ' zwierzę' mówi ' dźwięk
+                    ```
+                    Uwaga: Te kody nie będą działać w ten sposób na tym poziomie. Przejdź do następnej karty, aby zobaczyć, które części należy poprawić.
             17:
-                story_text: |-
+                story_text: |
                     Teraz zmienimy nieco wcięcia. Za każdym razem, gdy potrzebujemy wciąć kod, potrzebujemy `:` w linii przed wcięciem.
 
-                    Na tym poziomie możesz też użyć nowej komendy: `{elif}`. `{elif}` to połączenie `{else}` i `{if}` i potrzebujesz go, gdy chcesz zrobić 3 (lub więcej!) opcji.
+                    Na tym poziomie możesz też użyć nowej komendy: `{elif}`. `{elif}` ,które jest połczeniem ``{else} {if}` i potrzebujesz go, gdy chcesz dodać 3 (lub więcej!) opcji.
                     Sprawdź to!
             18:
-                story_text: |-
-                    Dotarliśmy do prawdziwego kodu Pythona! Oznacza to, że od teraz musimy używać nawiasów z `{print}` i `{range}`.
-                    Oznacza to również, że jeśli używasz angielskich wersji poleceń możesz używać kodu Hedy z tego poziomu w dowolnym środowisku Pythona. Jeśli jeszcze tego nie zrobiłeś, możesz przełączyć język w menu poleceń, aby to zrobić.
-
-                    {print}('Mam na imię ', imię)
+                story_text: |
+                    Gratulacje! Osiągnąłeś ostatni poziom Hedy! Utworzony tutaj kod można skopiować do prawdziwych środowisk Pythona, takich jak replika lub PyCharm, i możesz tam kontynuować naukę!
+                    Pamiętaj jednak, że Python może czytać tylko polecenia w języku angielskim, więc jeśli używasz innych języków, musisz teraz przejść na angielski.
     dice:
         name: Kostka do gry
         default_save_name: Kostka do gry
@@ -1486,12 +1490,12 @@ adventures:
                     ```
             6:
                 story_text: |
-                    Na tym poziomie możesz zrobić kostkę do gry z Gąsienicą i nawet policzyć ile punktów wyrzuciłaś w sumie.
-                    Wiedząc, że Gąsienica jest warta 5 punktów możesz teraz policzyć ile punktów wyrzuciłaś w sumie.
-                    Ten kod policzy ilość punktów jednek kostki:
+                    Na tym poziomie możesz zrobić kostkę do gry z Gąsienicą i teraz możesz nawet policzyć ile punktów zostało wyrzuconych.
+                    Wiedząc, że Gąsienica jest warta 5 punktów.  Teraz po rzucie możesz policzyć ile punktów wyrzuciłeś w sumie.
+                    Ten kod policzy ilość punktów dla jednej kostki:
 
                     ### Ćwiczenie
-                    Czy potrafisz napisać kod, który policzy sumę punkt na 8 kostkach? Aby to zrobić musisz skopiować kilka linijek kodu.
+                    Czy potrafisz napisać kod, który policzy sumę punkt na 8 kostkach? Aby to zrobić musisz skopiować i wkleić kilka linijek kodu.
                 example_code: |
                     ```
                     wybory = 1, 2, 3, 4, 5, gąsienica
@@ -1502,13 +1506,13 @@ adventures:
                     {print} 'suma punktów to ' punkty
                     ```
                 example_code_2: |
-                    Czy udało ci się policzyć wynik dla 8 kostek? Wymagało to sporo kopiowania i wklejania, prawda? W poziomie 7 ułatwimy to!
+                    Czy udało ci się policzyć wynik dla 8 kostek? Wymagało to sporo kopiowania i wklejania , prawda? W poziomie 7 ułatwimy to!
             7:
                 story_text: |
-                    Na poziomie 5 już mogłeś zrobić kostkę do gry. Przy pomocy polecenia `{repeat}` możesz łatwo rzucić ręką pełną kostek.
+                    Na tym poziomie możeszponownie zrobić kości. Dzięki kodowi `{repeat}` możesz łatwo rzucić całą ręką kości.
 
                     ### Ćwiczenie
-                    Spróbuj ukończyć przykładowy kod! **Dodatkowo** Zastanów się nad grą, którą znasz, i która wymaga kostki i zaprogramuj ją przy pomocy polecenia `{repeat}`.
+                    Spróbuj zakończyć przykładowy kod! **Dodatkowo ** Pomyśl o znanej grze, która obejmuje kości i zaprogramuj taką przy użyciu`{repeat}`.
                 example_code: |
                     ```
                     wybory = 1, 2, 3, 4, 5, 6
@@ -1516,10 +1520,9 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Czy wszyscy zbyt długo rzucają kostką? Na tym poziomie możesz pozwolić Hedy rzucić wszystkimi kośćmi naraz!
-
                     ### Ćwiczenie
-                    Zmień imiona na imiona swoich przyjaciół lub rodziny i dokończ kod, aby każdy z nich rzucił.
+                    Czy wszyscy zbyt długo rzucają kostką? Na tym poziomie możesz pozwolić Hedy rzucić wszystkimi kośćmi naraz!
+                    Zmień nazwy na imiona swoich przyjaciół lub rodziny i dokończ kod.
                 example_code: |
                     ```
                     gracze = Ania, Jasiek, Kasia
@@ -1530,27 +1533,27 @@ adventures:
                     ```
             15:
                 story_text: |
-                    ### Exercise
-                    In this level you can create a little game in which you'll have to throw 6 as fast as possible.
-                    We have started the code, it's up to you to get the game to work!
+                    ### Ćwiczenie
+                    Na tym poziomie możesz stworzyć małą grę, w której będziesz musiał rzucić 6 tak szybko, jak to możliwe.
+                    Rozpoczęliśmy pisanie kodu, teraz to od Ciebie zależy, czy gra zadziała!
 
-                    Firstly, add a `{while}` loop that checks if 6 has been thrown or not.
-                    As long as you haven't thrown 6 already, throw the dice on a random number.
-                    Print what the player has thrown.
-                    Add a try to the amount of tries
-                    Wait a second before you throw again, or - in case you've thrown a 6 - before the game ends.
+                    Na początku, dodaj pętlę `{while}` , która sprawdza czy 6 oczek zostało wyrzuconych czy nie.
+                    Dopóki nie wyrzuciłeś 6, wyrzuć kostką losową liczbę.
+                    Napisz, co wyrzucił gracz.
+                    Dodaj próbę do liczby prób
+                    Poczekaj sekundę, zanim rzucisz ponownie lub - na wypadek, gdybyś rzucił 6 - przed końcem gry.
                 example_code: |
                     ```
-                    options = 1, 2, 3, 4, 5, 6
-                    {print} 'Throw 6 as fast as you can!'
-                    thrown = 0
-                    tries = 0
+                    opcje = 1, 2, 3, 4, 5, 6
+                    {print} 'Wyzuć 6 tak szybko, jak to możliwe!'
+                    wyrzucono = 0
+                    próby = 0
                     _
                     _
                     _
                     _
                     _
-                    {print} 'Yes! You have thrown 6 in ' tries ' tries.'
+                    {print} 'Tak! Wrzuciłeś 6 w 'próby' próbach
                     ```
     dishes:
         name: Zmywanie?
@@ -1571,11 +1574,12 @@ adventures:
                     Stwórz własną wersję programu zmywarki. Najpierw sporządź listę członków swojej rodziny.
                     Następnie pomyśl o zadaniu do wykonania i pozwól komputerowi zdecydować, kto ma wykonać zadanie za pomocą polecenia `{at} {random}`.
 
-                    **Dodatkowo** Nie masz ochoty samodzielnie zmywać naczyń? Zhakuj program, usuwając swoją nazwę z listy za pomocą polecenia `{remove}` `{from}`.
+                    **Dodatkowo** Nie masz ochoty samodzielnie zmywać naczyń? Zhakuj program, usuwając swoje imię z listy za pomocą polecenia `{remove}` `{from}`.
             4:
                 story_text: |
                     Korzystając z cudzysłowów możesz sprawić, że twój program o zmywaniu naczyń będzie jeszcze lepszy.
 
+                    ### Ćwiczenie
                     Najpierw uzupełnij puste miejsca symbolami lub poleceniami, tak by przykładowy program zaczął działać.
                     Udało Ci się? Super! Teraz skopiuj swój własny kod z poprzedniego poziomu i spraw by zaczął działać w tym poziomie dodając cudzysłowy w odpowiednich miejscach.
                 example_code: |
@@ -1596,7 +1600,7 @@ adventures:
                     ludzie {is} mama, tata, Agnieszka, Zosia
                     zmywarka {is} ludzie {at} {random}
                     _ kto_zmywa {is} Zosia {print} _ o, nie... Moja kolej zmywania naczyń _
-                    _ {print} 'całe szczęście ' _ ' myje naczynia'
+                    _ {print} 'całe szczęście, że nie ma naczyń, ponieważ' _ ' już je myje '
                     ````
             6:
                 story_text: |
@@ -1604,18 +1608,18 @@ adventures:
                 example_code: |
                     ```
                     ludzie = mama, tata, Emma, Sophie
-                    emma_myła = 0
-                    zmywa = ludzie {at} {random}
-                    {print} 'Teraz zmywa ' zmywa
-                    {if} zmywa {is} Emma emma_myła = emma_myła + 1
-                    {print} 'Emma będzie zmywać naczynia w tym tygodniu ' emma_myła ' razy'
+                    emma_zmywa = 0
+                    kto_zmywa = ludzie {at} {random}
+                    {print} 'Teraz zmywa ' kto_zmywa
+                    {if} kto_zmywa {is} Emma emma_zmywa = emma_zmywa + 1
+                    {print} 'Emma będzie zmywać naczynia w tym tygodniu ' emma_zmywa ' razy'
                     ```
 
                     Teraz możesz skopiować linie od 3 do 5 kilka razy (np. 7 razy dla całego tygodnia), aby ponownie obliczyć dla całego tygodnia.
                     Czy robisz kod dla całego tygodnia?
                 story_text_2: |
-                    W poprzednim programie jakbyś był bardzo pechowy to program mógłby Cię wybrać do mycia naczyń przez cały tydzien, a to nie jest sprawiedliwe!
-                    Żeby stworzyć bardziej sprawiedliwy system możesz użyc polecenia `{remove}` żeby usunąć osobę z listy zaraz po wybraniu jej do mycia naczyń. Ty sposobem ta osoba już nie zostanie wybrana do mycia naczyń zanim wszyscy nie mieli okazji umyć naczyń.
+                    Jeśli masz wielkiego pecha to poprzedni program mógłby wybrać ciebie do zmywania naczyń przez cały tydzień! To jest niesprawiedliwe!
+                    Żeby stworzyć bardziej sprawiedliwy system możesz użyc polecenia `{remove}` żeby usunąć osobę z listy zaraz po wybraniu jej do mycia naczyń. Tym sposobem nie będziesz musiał już zmywać naczyń  dopóki wszyscy nie będą mieli swojej kolejki.
 
                     Poniedziałek i wtorek zostały przygotowane dla Ciebie. Czy potrafisz dodać resztę tygodnia?
                     Czy potrafisz również wymyślić co zrobić gdy lista jest pusta?
@@ -1628,14 +1632,13 @@ adventures:
                     kto_zmywa = ludzie {at} {random}
                     {print} 'Naczynia we wtorek myje: ' kto_zmywa
                     {remove} kto_zmywa {from} ludzie
-                    kto_zmywa = ludzie {at} {random}
                     ```
             7:
                 story_text: |
-                    Przy użyciu komendy `{repeat}` możesz powtórzyć fragmenty kodu. Możesz to wykorzystać do ustalenia kto będzie zmywał naczynia przez kilka dni!
+                    Przy użyciu komendy `{repeat}` możesz powtórzyć fragmenty kodu. Możesz to wykorzystać do obliczenia kto będzie zmywał naczynia przez kilka dni!
                     ### Ćwiczenie
-                    Użyj komendy `{repeat}` aby wylosować kto będzie mył naczynia przez cały tydzień. Każde puste miejsce musi być wypełnione jedną komendą lub liczbą!
-                    **(dodatkowe ćwiczenie)** Czy możesz wymyślić inne prace domowe? Przygotuj kod, który wylosuje trzy prace domowe. Nie zapomnij napisać, o co chodzi!
+                    Użyj komendy `{repeat}` aby zadecydować kto będzie mył naczynia przez cały tydzień. Każde puste miejsce musi być wypełnione jedną komendą lub liczbą!
+                    **(Dodatkowo)** Czy możesz wymyślić inne prace domowe? Przygotuj kod, który wylosuje trzy prace domowe. Nie zapomnij napisać, o co chodzi!
                 example_code: |
                     ```
                     ludzie = mamy, taty, Emmy, Sophie
@@ -1658,34 +1661,34 @@ adventures:
     elif_command:
         name: '{elif}'
         default_save_name: elif
-        description: elif
+        description: '{elif}'
         levels:
             17:
                 story_text: |
-                    In this level you can also use a new command: `{elif}`. `{elif}` is a combination of the keywords `{else}` and `{if}` and you need it when you want to make 3 (or more!) options.
-                    Check it out!
+                    Na tym poziomie możesz także użyć nowego polecenia: `{elif}`. `{elif}` to kombinacja słów kluczowych`{else}` i `{if}` i potrzebujesz go, gdy chcesz stworzyć 3 (lub więcej!) opcji.
+                    Sprawdź to!
                 example_code: |
                     ```
-                    prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '1 million dollars' :
-                        {print} 'Yeah! You are rich!'
-                    {elif} your_price == 'an apple pie' :
-                        {print} 'Lovely, an apple pie!'
+                    nagrody = ['1 milion dolarów', 'szarlotka', 'nic']
+                    twoja_nagroda = nagrody[{random}]
+                    {print} 'Wygrałeś ' twoja_nagroda
+                    {if} twoja_nagroda == '1 milion dolarów' :
+                        {print} 'Yeah! Jesteś bogaty!'
+                    {elif} twoja_nagroda == 'szarlotka' :
+                        {print} 'Cudownie, szarlotka!'
                     {else}:
-                        {print} 'Better luck next time..'
+                        {print} 'Spróbuj szczęścia następnym razem.'
                     ```
     for_command:
         name: '{for}'
         default_save_name: for
-        description: for command
+        description: komenda {for}
         levels:
             10:
                 story_text: |-
                     ## For
-                    In this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.
-                    `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces.
+                    Na tym poziomie nauczymy się nowego kodu/komendy `{for}`. Z komendą `{for}`możesz stworzyć listę i użyć wszystkich elementów.
+                    `{for}` tworzy blok, jak `{repeat}` i `{if}` więc wszystkie linie w bloku muszą zaczynać się od 4 spacji.
                 example_code: |
                     ```
                     animals = dog, cat, blobfish
@@ -1693,14 +1696,14 @@ adventures:
                         {print} 'I love ' animal
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Finish this code by adding `{for} action {in} actions` to line 2.
+                    ### Ćwiczenie
+                    Dokończ ten kod, dodając `{for} action {in} actions` do wiersza 2.
                 example_code_2: |
                     ```
-                    actions = clap your hands, stomp your feet, shout Hurray!
+                    czynności = klaszcz w dłonie, tupnij stopami, krzycz Hurra!
                     _
                         {repeat} 2 {times}
-                            {print} 'If youre happy and you know it, ' action
+                            {print} 'If youre happy and you know it, ' czynności
                             {sleep} 2
                         {print} 'If youre happy and you know it, and you really want to show it'
                         {print} 'If youre happy and you know it, ' action
@@ -1708,28 +1711,28 @@ adventures:
                     ```
             11:
                 story_text: |-
-                    Na tym poziomie dodajemy nową formę `{for}`. Na wcześniejszych poziomach używaliśmy `{for}` z listą, ale możemy też używać `{for}` z liczbami.
+                    Na tym poziomie dodajemy nową formę komendy`{for}`. Na wcześniejszych poziomach używaliśmy `{for}` z listą, ale możemy też używać `{for}` z liczbami.
                     Robimy to, dodając nazwę zmiennej, następnie `{in}` `{range}`. Następnie wpisujemy liczbę, od której rozpoczniemy, `{to}` i liczbę, na której zakończymy.
 
                     Wypróbuj przykład, aby zobaczyć, co się stanie! Pamiętaj, na tym poziomie będziesz musiał użyć wcięć w wierszach poniżej instrukcji `{for}`.
                 example_code: |
                     ```
-                    {for} counter {in} {range} 1 {to} 10
-                        {print} counter
-                    {print} 'Ready or not. Here I come!'
+                    {for} licznik {in} {range} 1 {to} 10
+                        {print} licznik
+                    {print} 'Gotowy czy nie. Nadchodzę!'
                     ```
             17:
                 story_text: |
-                    Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.
+                    Teraz trochę zmienimy wcięcie. Za każdym razem, gdy potrzebujemy wcięcia, potrzebujemy `:` na linii przed wcięciem.
                 example_code: |
                     ```
                     {for} i {in} {range} 1 {to} 10:
                         {print} i
-                    {print} 'Ready or not, here I come!'
+                    {print} 'Gotowy czy nie, nadchodzę!!'
                     ```
             18:
                 story_text: |
-                    Lastly, we'll turn `{for} i {in} {range} 1 to 5` into real Python code, like this:
+                    Na koniec zmienimy `{for} i {in} {range} 1 to 5` w prawdziwy kod Pythona, taki jak:
                 example_code: |
                     ```
                     {for} i {in} {range}(1,5):
@@ -1746,57 +1749,68 @@ adventures:
                     Wtedy prawdopodobnie wiesz, że tak naprawdę nie mogą one przewidzieć twojej przyszłości, ale nadal jest to zabawne!
 
                     W najbliższych poziomach możesz nauczyć się jak stworzyć własną maszynę do wróżenia!
-                    W poziomie 1 możesz zacząć łatwo, pozwalając Hedy przedstawić się jako wróżka i pozwolić jej odpowiedzieć {echo} odpowiedziami graczy.
+                    W poziomie 1 możesz zacząć łatwo, pozwalając Hedy przedstawić się jako wróżka i pozwolić jej odpowiedzieć `{echo}` odpowiedziami graczy.
                     Na przykład tak:
                 example_code: |
                     ```
                     _ Witam, jestem Hedy, wróżka!
                     _ Kim jesteś?
                     _ Pozwól mi spojrzeć w moją kryształową kulę
-                    _ Widzę... Widzę...
+                    _ Widzę... 
                     _ Twoje imię to
                     ```
                 story_text_2: |
                     ### Ćwiczenie
-                    Skopiuj przykładowy kod na ekran wprowadzania i wypełnij puste pola, aby kod działał.
+                    Skopiuj przykładowy kod na ekran wprowadzania i wypełnij puste pola, aby kod zadziałał.
                     **Dodatkowo** Zmień kod i pozwól wróżbitce nie tylko przewidzieć Twoje imię, ale także wiek, ulubioną drużynę sportową lub coś innego o sobie.
             3:
                 story_text: |
-                    Na poprzednich poziomach stworzyłeś swoją pierwszą maszynę do wróżenia, ale Hedy nie mogła niczego przewidzieć, tylko wykonać {echo}.
-                    Na tym poziomie możesz użyć zmiennej i polecenia `{at} {random}`, aby Hedy naprawdę wybrała odpowiedź. Zobacz ten kod dla przykładu:
-                example_code: "W tym przykładzie gracz może {ask} Hedy pytanie typu \"tak-nie\", a Hedy wybierze losowo odpowiedź za ciebie.\n```\n{print} Jestem wróżka Hedy!\npytanie {is} {ask} Co chcesz wiedzieć?\n{print} A więc chcesz wiedzieć czy: pytanie \nodpowiedzi {is} tak, nie, może\n{print} Moja szklana kula mówi że...\n{sleep} 2\n{print} odpowiedzi  {at} {random}\n```\n"
+                    Na poprzednich poziomach stworzyłeś swoją pierwszą maszynę do wróżenia, ale Hedy nie mogła niczego przewidzieć, tylko wykonać`{echo}`.
+                    Na tym poziomie możesz użyć zmiennej i polecenia `{at} {random}`, aby Hedy naprawdę wybrała odpowiedź. Dla przykładu, spójrz na ten kod:
+                example_code: "```\n{print} Jestem wróżka Hedy!\npytanie {is} {ask} Co chciałbyś się dowiedzieć?\n{print} A więc chcesz wiedzieć czy: pytanie \nodpowiedzi {is} tak, nie, może\n{print} Moja szklana kula mówi że...\n{sleep} 2\n{print} odpowiedzi {at} {random}\n```\n"
                 story_text_2: |
                     ### Ćwiczenie
                     Teraz Hedy może odpowiedzieć tylko tak, nie lub może. Czy możesz dać Hedy więcej opcji odpowiedzi, np. 'zdecydowanie' lub 'zapytaj ponownie'.
             4:
                 story_text: |
-                    ### Exercise
-                    We have removed all the quotation marks from this example code, can you add them in all the right places?
+                    ### Ćwiczenie
+                    Usunęliśmy wszystkie cudzysłowy z tego przykładowego kodu, czy możesz dodać je wszystkie we właściwych miejscach?
 
-                    ### Exercise 2
-                    Go back to the previous level and copy your fortune teller code. Make the code work in this level by adding quotation marks in the right spots.
+                    ### Ćwiczenie 2
+                    Wróć do poprzedniego poziomu i skopiuj kod wróżki. Spraw, aby kod zadziałał na tym poziomie, dodając cudzysłowy we właściwych miejscach.
                 example_code: |
                     ```
-                    _ Add the quotation marks to this code _
-                    {print} Im Hedy the fortune teller!
-                    question {is} {ask} What do you want to know?
-                    {print} This is your question:  question
-                    answers {is} yes, no, maybe
-                    {print} My crystal ball says...
+                    _ Dodaj cudzysłowy do tego kodu _
+                    {print} Jestem wróżka Hedy!
+                    pytanie {is} {ask} Czego chciałbyś się dowiedzieć?
+                    {print} A więc chcesz wiedzieć czy: pytanie 
+                    odpowiedzi {is} tak, nie, może
+                    {print} Moja szklana kula mówi że...
                     {sleep} 2
-                    {print} answers {at} {random}
+                    {print} odpowiedzi {at} {random}
                     ```
             5:
                 story_text: |
-                    In this level you'll learn to (secretly) tip the odds in your favor, when using the fortune teller!
-                    By using `{if}` and `{else}` you can make sure that you will always get a good fotune, while other people might not.
-                    Check out this example to find out how.
+                    ### Ćwiczenie
+                    W przykładowym kodzie widzisz, jak stworzyć program wróżki, który pozwala przechylić szanse na swoją korzyść. Ten program oszukiwania zawsze mówi ci, ,że wygrasz na loterii, ale twoi przyjaciele nigdy nie będą w stanie wygrać.
+
+                    Użyj tego, aby stworzyć własny program, bądź kreatywny! Na przykład możesz stworzyć kod, który przewiduje, że:
+                    * Twoja ulubiona drużyna sportowa pokona wszystkich przeciwników!
+                    * Twój ulubiony film zostanie wybrany na wieczór filmowy!
+                    * Wygrywasz bilety na swój ulubiony program!
+                    * Jesteś najpiękniejszą osobą ze wszystkich, jak mówiło to magiczne lustro Królewny Śnieżki.
+                    Daj się ponieść wyobraźni!
+
+                    Twój program musi zawierać co najmniej 10 wierszy kodu i musi posiadać co najmniej jedno polecenie `{if}` i `{else}`.
                 example_code: |
                     ```
-                    {print} 'Jestem wróżka Hedy'
-                    {print} 'Mogę przewidzie czy jutro wygrasz loterię!'
+                    przyjaciele {is} Jordan, Lucy, Dave
+                    {print} 'Mogę przewidzieć, czy jutro wygrasz na loterii!'
                     osoba {is} {ask} 'Kim jesteś?'
-                    {if} osoba {is} Hedy {print} 'Zdecydowanie wygrasz!🤩' {else} {print} 'Złe wieści! Ktoś inny wygra!😭'
+                    dobra_odpowiedź {is} Hurra! Wygrywasz !, Na pewno wygrasz !, Mamy zwycięzcę!
+                    zła_odpowiedź {is} Pech! Spróbuj ponownie !, Inna osoba wygra, Przegrywasz!
+                    {if} osoba {in} przyjaciele {print} dobra_odpowiedź {at} {random}
+                    {else} {print} zła_odpowiedź {at} {random}
                     ```
             6:
                 story_text: |
@@ -1807,22 +1821,21 @@ adventures:
 
                     ### Ćwiczenie
                     Czy możesz wymyślić własną (zwariowaną) maszynę do wróżenia?
-                example_code: "```\n{print} 'Jestem Hedy - wróżka!'\n{print} 'Mogę przewidzieć, ile dzieci będziesz miał, gdy dorośniesz!'\nwiek = {ask} 'Ile masz lat?'\nrodzeństwo = {ask} 'Ile masz rodzeństwa?'\nwzrost = {ask} 'Ile masz wzrostu w centymetrach?'\nliczba_dzieci = wzrost / wiek\nliczba_dzieci = liczba_dzieci - rodzeństwo\n{print} 'Będziesz miał...'\n{sleep}\n{print} liczba_dzieci ' dzieci!'\n```\n\nJeśli poprzedni przykład nie był dla Ciebie wystarczająco zwariowany, spójrz na ten!\n```\n{print} 'Jestem Hedy - zwariowany wróżbita!'\n{print} 'Przewiduję, jak mądry jesteś!'\nnożna = {ask} 'W skali 1-10 jak bardzo kochasz piłkę nożną?'\nbanany = {ask} 'Ile bananów zjadłeś w tym tygodniu?'\nhigiena = {ask} 'Ile razy dzisiaj umyłaś ręce?'\nwynik = banany + higiena\nwynik = wynik * nożna \n{print} 'Jesteś ' nożna ' procentowo inteligentny.'\n```\n"
+                example_code: "```\n{print} 'Jestem Hedy - wróżka!'\n{print} 'Mogę przewidzieć, ile dzieci będziesz miał, gdy dorośniesz!'\nwiek = {ask} 'Ile masz lat?'\nrodzeństwo = {ask} 'Ile masz rodzeństwa?'\nwzrost = {ask} 'Ile masz wzrostu w centymetrach?'\nliczba_dzieci = wzrost / wiek\nliczba_dzieci = liczba_dzieci - rodzeństwo\n{print} 'Będziesz miał...'\n{sleep}\n{print} liczba_dzieci ' dzieci!'\n```\n"
             7:
                 story_text: |
-                    Na tym poziomie możesz użyć komendy `{repeat}`, aby twoja maszyna przepowiedziała kilka losów jednocześnie.
+                    ### Ćwiczenie
+                    Skończ ten program i spraw, aby powiedział ci , czy twoja sympatia cię kocha, czy nie.
                 example_code: |
                     ```
-                    {print} 'Jestem Hedy - wróżka!'
-                    {print} 'Możesz zadać 3 pytania!'
-                    {repeat} 3 {times} pytanie = {ask} 'Co chcesz wiedzieć?'
-                    odpowiedź = tak, nie, może
-                    {repeat} 3 {times} {print} 'Moja kryształowa kula mówi...' odpowiedź {at} {random}
+                    {print} 'Mam kwiat z magicznymi płatkami'
+                    {print} 'Jeżeli wybierzesz płatki to kwiat powie ci czy twoja sympatia kocha cię z wzajemnością'
+                    ilość = {ask} 'Ile płatków chcesz wybrać?'
+                    opcje = kocha cię, nie kocha cię
+                    _ _ _ _ opcje {at} {random}
                     ```
             8:
                 story_text: |
-                    Na poprzednich poziomach nauczyłeś się, jak użyć `{repeat}`, aby wróżka odpowiedziała na 3 pytania z rzędu, ale mieliśmy problem z wydrukowaniem pytań.
-                    Teraz ten problem został rozwiązany dzięki nowemu sposobowi używania polecenia `{repeat}`.
                     W następnym przykładzie możesz poprosić wróżkę, aby zadała 3 pytania, a także je wydrukowała!
 
                     ### Ćwiczenie
@@ -1833,77 +1846,80 @@ adventures:
                     {print} 'Możesz zadać mi 3 pytania'
                     odpowiedzi = tak, nie, może
                     _ _ _
-                       pytanie = {ask} 'Co chcesz wiedzieć?'
+                       pytanie = {ask} 'Czego chciałbyś się dowiedzieć?'
                        {print} pytanie
                        {sleep}
-                       {print} 'Moja kryształowa kula mówi...' odpowiedzi {at} {random}
+                       {print} 'Moja kryształowa kula mówi..' odpowiedzi {at} {random}
                     ```
             10:
                 story_text: |
-                    Na tym poziomie nauczysz się programować grę MASH (dwór, mieszkanie, chałupa, dom). W tej grze możesz przewidzieć  jak będzie wyglądać przyszłość dla wszystkich graczy jednocześnie.
+                    Na tym poziomie nauczysz się programować grę MASH (dwór, mieszkanie, chałupa, dom). W tej grze możesz przewidzieć jak będzie wyglądać przyszłość dla wszystkich graczy jednocześnie.
 
                     ### Ćwiczenie 1
-                    Dodaj dwie nazwy do listy i zobacz, jak zmienia się wynik działania programu po jego uruchomieniu.
+                    Wypełnij puste pola za pomocą nowego polecenia, którego nauczyłeś się na tym poziomie.
                 example_code: |
                     ```
-                    houses = mansion, apartment, shack, house
-                    loves = nobody, a royal, their neighbour, their true love
-                    pets = dog, cat, elephant
-                    names = Jenna, Ryan, Jim
-                    {for} name {in} names
-                        {print} name ' lives in a ' houses {at} {random}
-                        {print} name ' will marry ' loves {at} {random}
-                        {print} name ' will get a ' pets {at} {random} ' as their pet.'
+                    domy= dwór, mieszkanie, chałupa, dom
+                    kocha = nikogo, księcia, sąsiada, prawdziwą miłość
+                    zwierzęta = pies, kot, słoń
+                    imiona = Jenna, Ryan, Jim
+                    _
+                        {print} imię ' żyje w ' domy {at} {random}
+                        {print} imię ' ożeni się z ' kocha {at} {random}
+                        {print} imię ' wezmą ' zwierzęta {at} {random} ' jako ich zwierzę.'
                         {sleep}
                     ```
             12:
-                story_text: |
-                    Na tym poziomie możesz tworzyć los wieloma słowami. Czy możesz dodać więcej różnych fortun do listy?
+                story_text: |-
+                    Od poziomu 12 będziesz musiał używać cudzysłowów na listach, przed i po każdym elemencie.
+
+                    ### Ćwiczenie
+                    Dodaj dwa przewidywania do listy
                 example_code: |
                     ```
                     losy = 'poślizgniesz się na skórce od banana', _
                     {print} 'Zajrzę do mojej kryształowej kuli w poszukiwaniu twojej przyszłości.'
-                    {print} 'Widzę... Widzę...'
+                    {print} 'Widzę...'
                     {sleep}
                     {print} losy {at} {random}
                     ```
     functions:
-        name: functions
-        default_save_name: functions
-        description: functions
+        name: funkcje
+        default_save_name: funkcje
+        description: funkcje
         levels:
             12:
                 story_text: |
-                    In this level you'll learn how to use **functions**. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again.
-                    To create a function, use `{define}` and give the function a name. Then put all the lines you want in the function in a indented block under the `{define}` line.
-                    Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
+                    Na tym poziomie nauczysz się korzystać z ** funkcji**. Funkcja to blok kodu, z którego można łatwo korzystać wiele razy. Korzystanie z funkcji pomaga nam organizować fragmenty kodu, których możemy używać wielokrotnie.
+                    Aby utworzyć funkcję, użyj `{define}` i nadaj funkcji nazwę. Następnie umieść wszystkie linie, które chcesz w funkcji, w wciętym bloku pod linią `{define}`.
+                    Pozostaw jedną pustą linię w kodzie, aby wyglądała ładnie i schludnie. Świetna robota! Stworzyłeś funkcję!
 
-                    Now, whenever we need that block of code, we just use <code>{call}</code> with the function's name to call it up! We don't have to type that block of code again.
+                    Teraz, gdy potrzebujemy tego bloku kodu, aby go wywołać używamy tylko kodu <code>{call} </code>z nazwą funkcji! Nie musimy ponownie wpisywać tego bloku kodu.
 
-                    Check out this example code of a game of Twister. The function 'turn' contains a block of code that chooses which limb should go where.
+                    Sprawdź ten przykładowy kod gry Twister. Funkcja „obróć” zawiera blok kodu, który wybiera, która kończyna powinna iść gdzie.
 
-                    ### Exercise
-                    Finish this code by setting the 2 variables chosen_limb and chosen_color.
-                    Then, choose how many times you want to call the function to give the twister spinner a spin.
+                    ### Ćwiczenie
+                    Dokończ ten kod, ustawiając 2 zmienne wybrana_kończyna i wybrany_kolor.
+                    Następnie wybierz, ile razy chcesz wywołać funkcję, która spowoduje zakręcenie spinnerem do twistera.
 
-                    ### Exercise 2
-                    Improve your code by adding a variable called 'people'. Use the variable to give all the players their own command in the game.
-                    For example: 'Ahmed, right hand on green' or 'Jessica, left foot on yellow'.
+                    ### Ćwiczenie 2
+                    Ulepsz swój kod, dodając zmienną o nazwie „ludzie”'. Użyj zmiennej, aby dać wszystkim graczom własne polecenie w grze.
+                    Na przykład: „Ahmed, prawa ręka na zielonym” lub „Jessica, lewa stopa na żółtym”'.
                 example_code: |
                     ```
-                    sides = 'left', 'right'
-                    limbs = 'hand', 'foot'
-                    colors = 'red', 'blue', 'green', 'yellow'
+                    strony = 'lewo', 'prawo'
+                    kończyny = 'ręka', 'stopa'
+                    kolory = 'czerwony', 'niebieski', 'zielony', 'żółty'
 
-                    {define} turn
-                        chosen_side = sides {at} {random}
-                        chosen_limb = limbs _
-                        chosen_color = colors _
-                        {print} chosen_side ' ' chosen_limb ' on ' chosen_color
+                    {define} kolej
+                        wybrana_strona = strony {at} {random}
+                        wybrana_kończyna= kończyny _
+                        wybrany_kolor = kolory _
+                        {print} wybrana_strona' ' wybrana_kończyna ' on ' wybrany _kolor
 
-                    {print} 'Lets play a game of Twister!'
-                    {for} i {in} {range} 1 to _
-                        {call} turn
+                    {print} 'Zagrajmy w Twistera!'
+                    {for} i {in} {range} 1 {to} _
+                        {call} kolej
                         {sleep} 2
                     ```
             13:
@@ -1912,17 +1928,19 @@ adventures:
                     An **argument** is a variable that is used within a function. It is not used outside the function.
 
                     For example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.
-                    In this example code the argument `place` is used. Place is a variable that is only used in the function, so an argument.
-                    To use `place` we have programmed the line `define song with place`.
-                    When the function is called, computer will replace the argument `place`, with the piece of text after `call song with`.
+                    In this example code the argument 'place' is used. Place is a variable that is only used in the function, so an argument.
+                    To use 'place' we have placed `{with} place` after `{define} song`.
+                    When the function is called, the computer will replace the argument 'place', with the piece of text after `{call} song {with}`.
 
                     ### Exercise
                     The next verse of this song goes:
 
+                    ```not_hedy_code
                     Last night as I lay on my pillow
                     Last night as I lay on my bed
                     Last night as I lay on my pillow
                     I dreamed that my Bonnie is dead
+                    ```
 
                     Can you program this verse in the same way as the example?
                 example_code: |
@@ -1936,239 +1954,239 @@ adventures:
                     ```
             14:
                 story_text: |
-                    In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you.
-                    You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
+                    Na poprzednich poziomach nauczyłeś się tworzyć funkcje i używać z nimi argumentów. Innym doskonałym zastosowaniem funkcji jest umożliwienie jej obliczenia czegoś.
+                    Możesz podać funkcji obliczenia, które dadzą ci odpowiedź na obliczenia. Ta odpowiedź nazywa się ** wartość zwrotu**.
 
-                    For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
+                    Na przykład w tym kodzie funkcja oblicz_nową_cenę obliczy nową cenę dowolnego elementu. Daje ci nową cenę jako wartość zwrotu.
 
-                    ### Exercise
-                    Finish this code. We have already made the variable new_price for you, you only need to set it.
-                    You should finish the line of code by calling the function that calculates the new price.
+                    ### Ćwiczenie
+                    Dokończ ten kod. Stworzyliśmy już dla ciebie zmienną nowa_cena, wystarczy ją tylko ustawić.
+                    Powinieneś zakończyć wiersz kodu, wywołując funkcję, która oblicza nową cenę.
                 example_code: |
                     ```
-                    {define} calculate_new_price {with} amount, percentage
-                        percentage = percentage / 100
-                        discount_amount = amount * percentage
-                        return amount - discount_amount
+                    {define} oblicz_nową_cenę {with} kwota, procent
+                        procent = procent / 100
+                        wysokość_zniżki = kwota * procent
+                        {return} kwota - wysokość_zniżki
 
-                    old_price = {ask} 'How much is on the price tag?'
-                    discount = {ask} 'What percentage is the discount?'
+                    stara_cena = {ask} 'Jaka cena widnieje na metce?'
+                    przecena = {ask} 'Ile procent wynosi zniżka?'
 
-                    new_price = _ calculate_new_price {with} old_price, _
-                    {print} 'The new price is ' new_price ' dollar'
+                    nowa_cena = _ obliczyć_nową_cenę {with} stara_cena, _
+                    {print} 'Nowa cena wynosi ' nowa_cena ' dolarów'
                     ```
             18:
                 story_text: |
-                    Let's make functions the Pythons way! To define a function, we no longer use:
+                    Stwórzmy funkcje w sposób Pythona! Aby zdefiniować funkcję, nie używamy już:
 
                     `{define} name_function {with} argument_1, argument_2:`
 
-                    but we use:
+                    używamy zamiast tego:
 
                     `{def} name_function(argument_1, argument_2):`.
 
 
-                    If you don't want to use arguments, you just leave the space between the parantheses empty.
-                    To call a function, we don't need the `{call}` command anymore. You just type the name of the function.
+                    Jeśli nie chcesz używać argumentów, po prostu pozostaw puste miejsce między nawiasami.
+                    Aby wywołać funkcję, nie potrzebujemy już polecenia `{call}`. Po prostu wpisz nazwę funkcji.
                 example_code: |
                     ```
-                    {def} calculate_score(answer, correct_answer):
-                        {if} answer == correct_answer:
-                            score = 1
+                    {def} oblicz_wynik(odpowiedź, poprawna_odpowiedź):
+                        {if} odpowiedź == poprawna_odpowiedź:
+                            wynik = 1
                         {elif} answer == '?':
-                            score = 0
+                            wynik = 0
                         {else}:
-                            score = -1
-                        {return} score
+                            wynik = -1
+                        {return} wynik
 
-                    answer = {input} ('Where can you find the Eiffel Tower?')
-                    correct_answer = 'Paris'
-                    score = calculate_score(answer, correct_answer)
-                    {print} ('Your score is... ', score)
+                    odpowiedź = {input} ('Gdzie możemy znaleźć wieżę Eiffla ?')
+                    poprawna_odpowiedź = 'Paryż'
+                    wynik = oblicz_wynik(odpowiedź, poprawna_odpowiedź)
+                    {print} ('Twój wynik to...', wynik)
                     ```
     guess_my_number:
-        name: Guess my number
-        default_save_name: guess my number
-        description: guess my number
+        name: Zgadnij moją liczbę
+        default_save_name: Zgadnij moją liczbę
+        description: Zgadnij mój numer
         levels:
             14:
                 story_text: |
-                    In this level you can program the game 'Guess my number'
+                    Na tym poziomie możesz zaprogramować grę 'Zgadnij moją liczbę'
 
-                    ### Exercise
-                    Fill in the correct symbols on the blanks to get the game to work.
+                    ### Ćwiczenie
+                    Wypełnij puste miejsca odpowiednimi symbolami, aby gra mogła zadziałać.
                 example_code: |
                     ```
-                    {print} 'Guess my number'
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    number = numbers {at} {random}
-                    game = 'on'
+                    {print} 'Zgadnij moją liczbę'
+                    liczby = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    liczba = liczby {at} {random}
+                    gra = 'start'
                     {for} i {in} {range} 1 {to} 10
-                        {if} game == 'on'
-                            guess = {ask} 'Which number do you think it is?'
-                            {if} guess _ number
-                                {print} 'Lower!'
-                            {if} guess _ number
-                                {print} 'Higher!'
-                            {if} guess _ number
-                                {print} 'You win!'
-                                game = 'over'
+                        {if} gra == 'start'
+                            zgadnij = {ask} 'O jakiej liczbie myślę?'
+                            {if} zgadnij _ liczbę
+                                {print} 'Niżej!'
+                            {if} zgadnij _ liczbę
+                                {print} 'Wyżej!'
+                            {if} zgadnij _ liczbę
+                                {print} 'Wygrywasz!'
+                                gra = 'koniec'
                     ```
     hangman:
-        name: Hangman
-        default_save_name: Hangman
-        description: Guess the word
+        name: Wisielec
+        default_save_name: Wisielec
+        description: Zgadnij moje słowo
         levels:
             17:
                 story_text: |
-                    In this adventure we program a game of hangman. First we make some preparations, then we program the game and in the third part we add a drawing with the turtle.
+                    W tej przygodzie zaprogramujemy grę w wisielca. Najpierw przygotowujemy się, potem zaprogramujemy grę, a w trzeciej części dodajemy rysunek z żółwiem.
 
-                    ### Exercise
-                    ***Set the variables*** In this game of hangman, Player 1 chooses an answer and Player 2 has to guess the letters in this answer.
-                    To let the computer know all the letters in the word, we will turn the answer into a list of letters. We also do this with the guesses Player 2 makes.
-                    We will start the game with 2 empty lists. We have made an empty list for the variable answer for you. Now make an empty list for guessed_letters as well.
-                    Then we fill in how many mistakes were made. At the start of the game, this should be 0.
-                    The variable `amount_letters` tells us how many letters are in the answer. Ask Player 1 to tell us how many letters their word has.
-                    Lastly we tell the computer if the game is over. We use the variable `game_over` and set it to `False`.
+                    ### Ćwiczenie
+                    ***Ustaw zmienne *** W tej grze w wisielca gracz 1 wybiera odpowiedź, a gracz 2 musi odgadnąć litery.
+                    Aby poinformować komputer o wszystkich literach w słowie, zamienimy odpowiedź w listę liter. Robimy to również za pomocą liter zgadywanych przez Gracza 2.
+                    Rozpoczniemy grę z 2 pustymi listami. Zrobiliśmy dla ciebie pustą listę dla zmiennej o nazwie odpowiedzi. Teraz utwórz pustą listę dla zgadywane_litery.
+                    Następnie piszemy ile błędów zostało popełnionych. Na początku gry powinno to być 0.
+                    Zmienna `amount_letters` mówi nam, ile liter znajduje się w odpowiedzi. Poproś Gracza 1, aby powiedział, ile liter ma jego słowo.
+                    Na koniec informujemy komputer, czy gra się skończyła. Używamy zmiennej `game_over` i ustawiamy ją na `False`.
 
-                    ***Choosing the answer*** We want Player 1 to be able to choose the answer. We'll ask them, as many times as necessary, what the next letter is.
-                    Then we add that letter to the answer. Lastly, we add an empty _ to the list of guessed letters, so we get as many _s as there are letters in the answer.
+                    ***Wybór odpowiedzi *** Chcemy, aby Gracz 1 mógł wybrać odpowiedź. Zapytamy ich tyle razy, ile to konieczne o to jaka jest następna litera.
+                    Następnie dodajemy tą literę do odpowiedzi. Na koniec dodajemy puste _ do listy zgadywanych liter, więc otrzymujemy tyle pustych _, ile jest liter w odpowiedzi.
 
-                    ***Player 2's turn***
-                    Tell Player 2 its their turn. Then tell Player 2 how many letters there are in the answer. Finally, print the list of `guessed_letters`.
+                    ***Kolej gracza 2***
+                    Powiedz Graczowi 2, że teraz jest jego kolej. Następnie powiedz Graczowi 2, ile liter znajduje się w odpowiedzi. Na koniec napisz listę `guessed_letters`.
 
-                    ***Go to the next tab*** Now that all the starting variables are set, we can start programming the game itself. Check out the next tab to learn how!
+                    ***Przejdź do następnej karty *** Po ustawieniu wszystkich zmiennych początkowych możemy rozpocząć programowanie samej gry. Sprawdź następną kartę, aby dowiedzieć się, jak to zrobić!
                 example_code: |
                     ```
-                    print 'Hangman!'
+                    print 'Wisielec!'
 
-                    # Set the variables
-                    answer = []
-                    guessed_letters = _
-                    mistakes_made = _
-                    amount_letters = {ask} _
+                    # Ustaw zmienne
+                    odpowiedź = []
+                    odgadnięte_litery = _
+                    zrobione_pomyłki= _
+                    ilość_liter = {ask} _
                     _ = 'False'
 
-                    # Choosing the answer
+                    # Wybór odpowiedzi
                     {for} _
-                        letter = {ask} 'Player 1, what is letter ' i '?'
+                        litera= {ask} 'Graczu 1, czy w słowie znajduje się litera ' i '?'
                         _
                         {add} '_' {to} _
 
-                    # Player 2 turn
+                    # Kolej Gracza 2
                     print _
                     print _
-                    print guessed_letters
+                    print  odgadnięte_litery
                     ```
     hangman_2:
-        name: Hangman 2
-        default_save_name: Hangman_2
-        description: Hangman 2
+        name: Wisielec 2
+        default_save_name: Wisielec_2
+        description: Wisielec 2
         levels:
             17:
                 story_text: |
-                    Now it's time to program the hangman game.
+                    Teraz nadszedł czas, aby zaprogramować grę w wisielca.
 
-                    ### Exercise
+                    ### Ćwiczenie
 
-                    ***Paste your code*** Copy your code from the previous tab and paste the code in the programming field.
+                    ***Wklej kod *** Skopiuj kod z poprzedniej karty i wklej go w polu programowania.
 
-                    ***The game*** This games continues playing until Player 2 is game over. Fill in the while command accordingly. Now, Player 2 is allowed to guess a letter, so ask Player 2 to guess a letter.
-                    We need to check if their answer is correct, so check if their `guess` is (somewhere) in the (list) `answer`. Then we let the computer figure out which of the letter(s) is the guess. We have already programmed that part for you.
-                    Next we want to compliment the player for finding a correct letter and we want to print the list `guessed_letters`, so the player can see their progress.
+                    **Gra *** Ta gra trwa do momentu, aż Gracz 2 nie zakończy swojej gry (wygra lub przegra). Wypełnij odpowiednio polecenie while. Teraz Gracz 2 może odgadnąć litery, więc poproś Gracza 2, aby je
+                    zgadywał. Musimy sprawdzić, czy jego odpowiedź jest poprawna, więc sprawdź, czy jego `guess` jest (gdzieś) na (liście) `answer`. Następnie pozwalamy komputerowi dowiedzieć się, która z liter jest zgadywana. Zaprogramowaliśmy już tę część dla Ciebie.
+                    Następnie chcemy pochwalić gracza za odgadnięcie poprawnej litery i chcemy wydrukować listę `guessed_letters`, aby gracz mógł zobaczyć swoje postępy.
 
-                    The next part we're going to program is what happens when the player has guessed all of the letters. So if their list of `guessed_letters` is the same as our list `answer`.
-                    If the lists are the same, congratulate Player 2 with their victory and set the variable `game_over` to `True`.
+                    W następnej części zaprogramujemy i dowiemy się co się stanie jeśli gracz odgadnie wszystkie litery. Czyli jeśli jego odgadnięte litery `guessed_letters` są takie same jak nasza odpowiedź `answer`.
+                    Jeżeli są one takie same, to wtedy pogratuluj Graczowi 2 jego zwycięstwa i ustaw zmienną `game_over` na `True`.
 
-                    Next we'll program what happens when Player 2 guesses wrong (so the `{else}` command). First, tell the player that their guess was wrong. Then increase the `mistakes_made` variable by 1.
+                    Teraz zaprogramujemy część, w której Gracz 2 przegrywa (czyli komenda `{else}` ). Najpierw powiedz graczowi, że zgadł źle. Wtedy zwiększ zmienną `mistakes_made` o 1.
 
-                    For the last part we'll program what happens when Player 2 has made 10 mistakes. We'll print that Player 1 has won the game. Then we'll print the correct answer. And finally, we'll set our `game_over` variable to `True`, so the game stops.
+                    Ostatnim krokiem będzie zaprogramowanie sytuacji, w której Gracz 2 zrobił 10 pomyłek. Napiszemy (pokażemy), że Gracz nr 1 wygrał oraz podamy poprawną odpowiedź. W końcu ustawimy zmienną `game_over` na `True`, i gra się kończy.
 
-                    ***Go to the next tab*** Amazing work! Your game is playable, but wouldn't it be fun if the hangman was actually drawn when Player 2 makes a mistake..?
+                    ***Przejdź do następnej karty *** Świetna robota! W twoją grę można grać, ale czy nie byłoby fajnie, gdyby wisielca rzeczywiście narysowano, gdy Gracz 2 popełni błąd?
                 example_code: |
                     ```
-                    # Paste your code here
+                    # Wklej tutaj swój kod.
 
-                    # The game
-                    {while} game_over _
-                        guess = _
+                    # Gra
+                    {while} Koniec_gry _
+                        próba_odgadnięcia = _
                         {if} _
-                            {for} i {in} {range} 1 {to} amount_letters:
-                                if answer[i] == guess:
-                                    guessed_letters[i] = guess
+                            {for} i {in} {range} 1 {to} Liczba_liter:
+                                jeśli odpowiedź[i] == próba_odgadnięcia:
+                                    odgadnięte_litery [i] = próba_odgadnięcia
                             {print} _
-                            {if} guessed_letters == _:
+                            {if} odgadnięte_litery == _:
                                 {print} _
-                                game_over = _
+                                koniec_gry = _
                         {else}:
                             {print} _
-                            mistakes_made _
+                            zrobione_pomyłki_
                             {if} _ == 10:
                                 {print} _
                                 {print} _
                                 _
                     ```
     hangman_3:
-        name: Hangman 3
-        default_save_name: Hangman_3
-        description: Hangman 3
+        name: Wisielec 3
+        default_save_name: Wisielec_3
+        description: Wisielec 3
         levels:
             17:
                 story_text: |
-                    In a game of hangman the mistakes are shown by drawing a part of the hangman each time a mistake has been made.
-                    We now add those drawings with our turtle!
+                    W grze w wisielca błędy są pokazywane poprzez narysowanie części wisielca za każdym razem, gdy popełniono błąd.
+                    Teraz dodajemy rysunki z naszym żółwiem!
 
-                    ### Exercise
-                    ***Create a function that draws the hangman*** Create a function that draws the hangman in 10 steps. We have already made step 1 for you.
+                    ### Ćwiczenie
+                    ***Utwórz funkcję, która będzie rysowała wisielca*** Utwórz funkcję, która narysuje wisielca w 10 krokach. Zrobiliśmy już dla ciebie krok 1.
 
-                    ***Test the function*** Test the function by calling the function with 10. If you are happy with the function, remove the line that calls the function for now. We will call the function when the player makes a mistake.
+                    ***Przetestuj funkcję *** Przetestuj ją, wywołując funkcję za pomocą 10. Jeśli jesteś zadowolony z funkcji, usuń linię, która na razie ją wywołuje. Wywołamy tę funkcję, gdy gracz popełni błąd.
 
-                    ***Paste your hangman game under your function*** Go back to the previous tab and copy your hangman game. Paste the game underneath your function.
+                    ***Wklej grę w wisielca pod swoją funkcją *** Wróć do poprzedniej karty i skopiuj grę w wisielca. Wklej grę pod swoją funkcją.
 
-                    ***Call the function when the player makes a mistake*** Under the line `mistakes_made = mistakes_made + 1` we will call the function. We want the turtle to take the same amount of steps as the player has made mistakes, so we call the function with `mistakes_made` as argument.
+                    ***Wezwij do funkcji, gdy gracz popełni błąd *** W wierszu `mistakes_made = mistakes_made + 1` wywołamy funkcję. Chcemy, aby żółw wykonał tyle samo kroków, co gracz popełnił błędów, dlatego nazywamy tę funkcję argumentem `mistakes_made`.
 
-                    ***Enjoy your game!***
+                    ***Ciesz się swoją grą!***
                     <div class="w-full flex flex-row gap-2">
-                        The hangman could look like this <img src="https://github.com/hedyorg/hedy/assets/80678586/d385b691-5701-4342-b5d9-dfae1589c129" width="100">
+                        Wisielec mógłby wyglądać tak <img src="https://github.com/hedyorg/hedy/assets/80678586/d385b691-5701-4342-b5d9-dfae1589c129" width="100">
                     </div>
                 example_code: |
                     ```
-                    # Create a function that draws the hangman
-                    {define} draw_hangman {with} step:
-                        {if} step == 1:
-                            {color} white
+                    # Utwórz funkcję, która będzie rysowała wisielca.
+                    {define} narysuj_wisielca {with} krok:
+                        {if} krok == 1:
+                            {color} biały
                             {forward} -100
                             {turn} 90
                             {forward} -50
-                            {color} black
+                            {color} czarny
                             {forward} 100
                             {forward} -50
 
-                        {if} step == 2:
+                        {if} krok == 2:
                             _
-                    # Paste your hangman game here
+                    # Wklej tutaj swoją grę w wisielca
 
                     ```
     harry_potter:
         name: Harry Potter
         default_save_name: Harry Potter
-        description: Harry Potter adventures
+        description: Przygody Harry'ego Pottera
         levels:
             10:
                 story_text: |
                     ### Ćwiczenie
-                    We can also make a Harry Potter themed fortune teller. Fill in blanks such that 9 lines are printed.
-                    **Extra** Change the theme of the fortune teller into something else, such as your favorite book, film or tv show.
+                    Możemy również zrobić wróżbitę o tematyce Harry'ego Pottera. Wypełnij puste pola, tak aby napisano 9 wierszy.
+                    **Dodatkowo ** Zmień motyw wróżbity na coś innego, na przykład ulubioną książkę, film lub program telewizyjny.
                 example_code: |
                     ```
-                    houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
-                    subjects = potions, defence against the dark arts, charms, transfiguration
-                    fears = Voldemort, spiders, failing your OWL test
-                    names = Harry, Ron, Hermione
+                    domy = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
+                    przedmioty = eliksiry, obrona przed czarną magią, zaklęcia, transfiguracja
+                    lęki = Voldemort, pająki, oblanie egzaminów
+                    imiona = Harry, Ron, Hermiona
                     _
-                    _ {print} name ' is placed in ' houses {at} {random}
-                    _ {print} name ' is great at ' subjects {at} {random}
-                    _ {print} name 's greatest fear is ' fears {at} {random}
+                    _ {print} imię ' zostaje przypisany do ' domu {at} {random}
+                    _ {print} imię ' jest dobry w ' przedmiot {at} {random}
+                    _ {print} największy lęk imię to' lęki {at} {random}
                     ```
     haunted:
         name: Nawiedzony dom
@@ -2186,12 +2204,12 @@ adventures:
                     {print} Jak się tu dostałem?
                     {print} Pamiętam, jak przyjaciel powiedział mi, że mam wejść do starej rezydencji...
                     {print} i nagle wszystko stało się czarne.
-                    {print}  Ale jak wylądowałem na podłodze...?
-                    {print} Strasznie boli mnie głowa, jakby ktoś walnął mnie kijem!
+                    {print} Ale jak wylądowałem na podłodze...?
+                    {print} Strasznie boli mnie głowa, jakby ktoś uderzył mnie kijem!
                     {print} Co to za dźwięk?
                     {print} O nie! Chyba nie jestem sam w tym domu!
                     {print} Muszę się stąd wydostać!
-                    {print} Przede mną są 3 drzwi...
+                    {print} Przede mną jest 3 drzwi...
                     {ask} Które drzwi powinienem wybrać?
                     {echo} Wybieram drzwi
                     {print} ...?
@@ -2211,7 +2229,8 @@ adventures:
                     potwór_3 {is} 👶
                     {print} Wchodzisz do nawiedzonego domu..
                     {print} Nagle widzisz potwór_1
-                    {print} Uciekasz do innego pokoju, ale potwór_2 czeka na ciebie!
+                    {print} Uciekasz do innego pokoju, 
+                    {print} ale potwór_2 czeka na ciebie!
                     {print} O nie! Szybko idź do kuchni.
                     {print} Ale jak wchodzisz zaatakował ciebie potwór_3!
                     ```
@@ -2226,23 +2245,30 @@ adventures:
                     potwór_3 {is} _
                     {print} Wchodzisz do nawiedzonego domu..
                     {print} Nagle widzisz potwór_1
-                    {print} Uciekasz do innego pokoju, ale potwór_2 czeka na ciebie!
+                    {print} Uciekasz do innego pokoju, 
+                    {print}ale potwór_2 czeka na ciebie!
                     {print} O nie! Szybko idź do kuchni.
                     {print} Ale jak wchodzisz zaatakował ciebie potwór_3!
                     ```
             3:
                 story_text: |
-                    Na poprzednich poziomach zrobiłeś wprowadzenie do gry w nawiedzony dom, ale jak mogłeś zauważyć, historia zawsze miała straszny koniec.
+                    Na poprzednich poziomach zrobiłeś wprowadzenie do gry o nawiedzony dom, ale jak mogłeś zauważyć, historia zawsze miałaby straszny koniec.
                     Na tym poziomie możesz uczynić swoją historię bardziej interaktywną, zmieniając wynik gry; czasami zostaniesz zjedzony, czasami uciekniesz!
                     Niech Hedy decyduje losowo!
+
+                    ### Ćwiczenie
+                    Skopiuj przykładowe kody i wypełnij puste pola, tak aby działały!
+
+                    **Dodatkowo ** Ta historia jest dość prosta, może możesz zrobić ją trochę straszniejszą poprzez dodanie bardziej ekscytującej historii.
+                    Masz teraz bardzo ograniczone wyniki, są tylko 3 opcje tego, co może być za drzwiami. Może wymyślisz więcej potworów do dodania do listy!
                 example_code: |
                     ```
-                    _ Escape from the haunted house!
-                    _ There are 3 doors in front of you...
-                    _ _ _ Which door do you choose?
-                    _ You picked door ... choice
-                    monsters _ a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    _ You see...
+                    _ Ucieknij z nawiedzonego domu!
+                    _ Przed tobą jest troje drzwi... 
+                    _ _ _ Które drzwi wybierzesz?
+                    _ Wybrałeś drzwi  ... wybór
+                    potwory _ zombie, wampir, NIC UCIEKŁEŚ
+                    _ Widzisz...
                     {sleep}
                     _ _ _ _
                     ```
@@ -2252,11 +2278,12 @@ adventures:
                     Czy potrafisz zmienić swój Nawiedzony Dom, aby był zgodny z poziomem 4?
                 example_code: |
                     ```
+                    _Dodaj znaki cudzysłowu do tego kodu
                     {print} _ Uciekaj z nawiedzonego domu! _
                     {print} _ Przed tobą znajduje się 3 drzwi... _
                     wybór {is} {ask} _ Które drzwi wybierzesz? _
                     {print} Wybrałeś drzwi ... _ wybór
-                    potwory {is} zombie, wampir, UCIEKŁEŚ
+                    potwory {is} zombie, wampir, NIC UCIEKŁEŚ
                     {print} Widzisz... _
                     {sleep}
                     {print} potwory {at} {random}
@@ -2305,7 +2332,7 @@ adventures:
                     Na tym poziomie zmieniliśmy polecenie `{for}`, abyśmy mogli powiedzieć graczowi, gdzie się znajduje.
 
                     ### Ćwiczenie 1
-                    Zakończ program, aby gracz wiedział, w którym pokoju się znajduje.
+                    Skończ program tak, aby gracz wiedział, w którym pokoju się znajduje.
 
                     ### Ćwiczenie 2
                     Zmień program w przygodę, wykonując następujące kroki:
@@ -2423,7 +2450,7 @@ adventures:
     if_command:
         name: '{if} & {else}'
         default_save_name: if_command
-        description: Introducing the if command
+        description: Wprowadzenie polecenia {if}
         levels:
             5:
                 story_text: |
@@ -2472,7 +2499,7 @@ adventures:
                     ```
             9:
                 story_text: |
-                    In this level you can also put an {if} command inside another {if} command.
+                    Na tym poziomie możesz również umieścić polecenie `{if}` w innym poleceniu `{if}`
                 example_code: |
                     ```
                     continue = {ask} 'Do you want to continue?'
@@ -2488,7 +2515,7 @@ adventures:
     in_command:
         name: '{in}'
         default_save_name: in_command
-        description: Introducing the in command
+        description: Wprowadzenie polecenia {in}
         levels:
             5:
                 story_text: |
@@ -2516,12 +2543,12 @@ adventures:
     is_command:
         name: '{is}'
         default_save_name: komenda_to
-        description: Przedstawienie komendy to
+        description: Wprowadzenie polecenia {is}
         levels:
             2:
                 story_text: |
-                    ## Variables
-                    You can name a word with `{is}`. This is called a **variable**. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:
+                    ## Zmienne
+                    Możesz nadać nazwę słowu za pomocą `{is}`. Nazywa się to **zmienną**. W tym przykładzie stworzyliśmy zmienną o nazwie name oraz zmienną o nazwie age. Możesz użyć słowo name gdziekolwiek w swoim kodzie  i będzie ono zastąpione Hedy, w ten oto sposób: :
                 example_code: |
                     ```
                     name {is} Hedy

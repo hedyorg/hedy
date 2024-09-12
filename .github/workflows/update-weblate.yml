@@ -92,6 +92,7 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
 
+    - name: Make Weblate forget its commits
       run: |
         # 'wlc reset' always leads to ConnectionAborted, so don't wait for it.
         # https://github.com/WeblateOrg/weblate/issues/11368
