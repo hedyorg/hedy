@@ -234,6 +234,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
     // We click on `level` to load a program associated with level, if any.
     initialTab: validAnchor ?? options.initial_tab,
+    level: options.level
   });
 
   tabs.on('beforeSwitch', () => {

@@ -1,5 +1,5 @@
 
-{% macro adventure_index(adv_name, title, selected, id, adv_class, index) %}
+{% macro adventure_index(adv_name, tab_level, title, selected, id, adv_class, index) %}
   <li class="border-l-2
             {% if adv_class == 'teacher' %} 
               teacher_tab
@@ -14,6 +14,7 @@
         px-3 py-1 hover:px-4 hover:py-3 hover:text-lg cursor-pointer text-blue-900
         transition-all ease-in duration-100"
         data-tab="{{ adv_name }}"
+        data-level="{{ tab_level }}"
         tabindex="{{ index }}"
         data-type="{{ adv_class }}"
         id = "{{ id }}"
@@ -63,7 +64,7 @@
         {% set index_levels = customizations["available_levels"] if customizations["teachers_adventure"] else range(1, max_level + 1) %}
         {% for i in index_levels %}
           <div class="flex flex-col">
-            <button class="flex flex-row justify-between items-center text-lg font-extralight py-1 px-2 text-center ease-in transition duration-100
+            <button class="flex flex-row justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
               {% if loop.index == level|int %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %}
               {% if i not in customizations['available_levels']%} bg-gray-400 {% else %} hover:bg-blue-200 {% endif %}"
             
@@ -82,20 +83,20 @@
             <div class="bg-white rounded-b-lg grow-0 ease-in transition-all duration-300 overflow-y-auto
                         {% if loop.index == level|int %}max-h-550px{% else %}max-h-0{% endif %}" id="level_{{ i }}_pane">
               <ul class="list-none p-6 grow-0">
-                {% for adventure in adventures%}
+                {% for adventure in adventures_for_index[i] %}
                     {% if adventure.is_teacher_adventure%}
-                      {{ adventure_index(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'teacher', loop.index) }}
+                      {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, 'teacher', loop.index) }}
                     {% elif adventure.is_command_adventure %}
-                      {{ adventure_index(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'command', loop.index) }}
+                      {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, 'command', loop.index) }}
                     {% else %}
-                      {{ adventure_index(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, '', loop.index) }}
+                      {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, '', loop.index) }}
                     {% endif %}           
                 {% endfor %}
                 {% if parsons %}
-                  {{ adventure_index('parsons', _('parsons_title'), False, 'parsons', 'special', adventures|length + 1) }}
+                  {{ adventure_index('parsons', i, _('parsons_title'), False, 'parsons', 'special', adventures|length + 1) }}
                 {% endif %}
                 {% if quiz %}
-                    {{ adventure_index('quiz', _('quiz_tab'), False, 'quiz', 'special', (adventures|length + (2 if parsons else 1)) ) }}
+                    {{ adventure_index('quiz', i, _('quiz_tab'), False, 'quiz', 'special', (adventures|length + (2 if parsons else 1)) ) }}
                 {% endif %}
               </ul>
             </div>

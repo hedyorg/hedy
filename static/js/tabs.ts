@@ -12,6 +12,7 @@ export interface TabEvents {
 
 export interface TabOptions {
   readonly initialTab?: string;
+  readonly level?: number;
 }
 
 /**
@@ -34,6 +35,7 @@ export interface TabOptions {
  */
 export class Tabs {
   private _currentTab: string = '';
+  private _currentLevel?: number;
 
   private tabEvents = new EventEmitter<TabEvents>({
     beforeSwitch: true,
@@ -41,12 +43,17 @@ export class Tabs {
   });
 
   constructor(options: TabOptions={}) {
+    this._currentLevel = options.level;
+    
     $('*[data-tab]').on('click', (e) => {
       const tab = $(e.target);
       const tabName = tab.data('tab') as string;
-
+      const level = tab.data('level')
       e.preventDefault();
-      this.switchToTab(tabName);
+      if (this._currentLevel == Number(level))
+        this.switchToTab(tabName, Number(level), );
+      else
+        location.href = `/hedy/${level}#${tabName}`
     });
 
     // Determine initial tab
@@ -62,12 +69,12 @@ export class Tabs {
       initialTab = $('.tab:first').attr('data-tab');
     }
 
-    if (initialTab) {
-      this.switchToTab(initialTab);
+    if (initialTab && this._currentLevel) {
+      this.switchToTab(initialTab, this._currentLevel);
     }
   }
 
-  public switchToTab(tabName: string) {
+  public switchToTab(tabName: string, level: number) {
     const doSwitch = () => {
       const oldTab = this._currentTab;
       this._currentTab = tabName;
@@ -77,7 +84,7 @@ export class Tabs {
       if (window.history) { window.history.replaceState(null, '', '#' + hashFragment); }
 
       // Find the tab that leads to this selection, and its siblings
-      const tab = $('*[data-tab="' + tabName + '"]');
+      const tab = $(`*[data-tab="${tabName}"][data-level="${level}"]`);
       const allTabs = tab.siblings('*[data-tab]');
 
       // Find the target associated with this selection, and its siblings

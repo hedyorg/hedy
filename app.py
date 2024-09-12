@@ -123,6 +123,35 @@ for lang in ALL_LANGUAGES.keys():
     TAGS[lang] = hedy_content.Tags(lang)
 
 
+def load_all_adventures_for_index(subset=None):
+    """
+    Loads all the default adventures in a dictionary that will be used to populate
+    the index, therfore we only need the titles and short names of the adventures.
+    """
+
+    keyword_lang = g.keyword_lang
+    if subset:
+        adventures = ADVENTURES[g.lang].get_adventures_subset(subset, keyword_lang)
+    else:
+        adventures = ADVENTURES[g.lang].get_adventures(keyword_lang)
+    all_adventures = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
+    for short_name, adventure in adventures.items():
+        for level in adventure['levels']:
+            all_adventures[int(level)].append({
+                'short_name': short_name,
+                'name': adventure['name'],
+                'is_teacher_adventure': False,
+                'is_command_adventure': short_name in KEYWORDS_ADVENTURES
+            })
+    for level, adventures in all_adventures.items():
+        adventures_order = ADVENTURE_ORDER_PER_LEVEL.get(level, [])
+        index_map = {v: i for i, v in enumerate(adventures_order)}
+        adventures.sort(key=lambda pair: index_map.get(
+            pair['short_name'],
+            len(adventures_order)))
+    return all_adventures
+
+
 def load_adventures_for_level(level, subset=None):
     """Load the adventures available to the current user at the given level.
 
@@ -1347,8 +1376,6 @@ def index(level, program_id):
 
         loaded_program = Program.from_database_row(result)
 
-    adventures = load_adventures_for_level(level)
-
     # Initially all levels are available -> strip those for which conditions
     # are not met or not available yet
     available_levels = list(range(1, hedy.HEDY_MAX_LEVEL + 1))
@@ -1449,8 +1476,10 @@ def index(level, program_id):
     customizations['available_levels'] = available_levels
     cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
+    adventures = load_adventures_for_level(level)
     load_customized_adventures(level, customizations, adventures)
     load_saved_programs(level, adventures, loaded_program)
+    adventures_for_index = load_all_adventures_for_index()
     initial_tab = adventures[0].short_name
 
     if loaded_program:
@@ -1550,6 +1579,7 @@ def index(level, program_id):
         initial_adventure=adventures_map[initial_tab],
         current_user_is_in_class=len(current_user().get('classes') or []) > 0,
         microbit_feature=MICROBIT_FEATURE,
+        adventures_for_index=adventures_for_index,
         # See initialize.ts
         javascript_page_options=dict(
             page='code',
