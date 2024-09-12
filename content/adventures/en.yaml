@@ -5411,25 +5411,20 @@ adventures:
 
             11:
                 story_text: |
-                    bla
+                    The maternity ward of our hospital would like some music for the babies to fall asleep to. Can you program a lullaby?
 
                     ### Exercise
-                    bla
-                example_code: |
-                    ```
-                    bla
-                    ```
-
+                    Choose a song to play:
+                    * Mary had a little lamb (easy)
+                    * Itsy Bitsy Spider (medium)
+                    * Brahms lullaby (hard)
+                    HINT: You can try to think of the correct musical notes yourself, but you can also search for them on the internet.
             12:
                 story_text: |
                     bla
 
                     ### Exercise
                     bla
-                example_code: |
-                    ```
-                    bla
-                    ```
 
             13:
                 story_text: |
@@ -5477,13 +5472,21 @@ adventures:
 
             17:
                 story_text: |
-                    bla
+                    Our centre for burnwounds would like to lessen the workload by using an online triage tool. This way the patients can not only register their name and date of birth, but also what kind of burnwound they have (first, second or third degree) and advise on what to do next.
+                    Can you help them?
 
                     ### Exercise
-                    bla
+                    The program should:
+                    * Start with a greeting and simple registration of the patients name and date of birth
+                    * Preform a triage. Is the skin only red: first degree burn. Are there blisters: second degree burn. Is the skin gone/blackened/whitened from the burn: third degree burn.
+                    * Give the patient the appropriate advise. First degree: Cool the burn with water and apply some cream on it. You do not need to see a doctor. Second degree: The doctor will see you and prescribe a special cream. Please wait in the waiting area. Third degree: Please go the the service desk now. You will need urgent care a.s.a.p.
+                    Hint: please use the {elif} command and functions to create this code.
                 example_code: |
+                    The end of your code should look like this
                     ```
-                    bla
+                    {call} registration
+                    degree = {call} triage
+                    {call} advise {with} degree
                     ```
 
     fair:
