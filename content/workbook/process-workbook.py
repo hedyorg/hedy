@@ -81,8 +81,6 @@ def convert_json(json):
 
         json['textfields'] = textfields
 
-
-
         # # todo: add more empty lines if we need more (not an issue till we get to loops)
 
     if assignment_type == 'input':
@@ -99,7 +97,6 @@ def convert_json(json):
             if i < number_of_output_lines:
                 output_line = output_lines[i]
                 newline += ' ' * 10 + output_line
-
 
             textfields += newline + '\n'
 
