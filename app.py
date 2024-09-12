@@ -213,10 +213,12 @@ def load_saved_programs(level, into_adventures, preferential_program: Optional[P
             program = loaded_programs.get(adventure.name)
         if not program:
             continue
-
+        student_adventure_id = f"{current_user()['username']}-{program['adventure_name']}-{level}"
+        student_adventure = DATABASE.student_adventure_by_id(student_adventure_id)
         adventure.save_name = program.name
         adventure.editor_contents = program.code
         adventure.save_info = SaveInfo.from_program(program)
+        adventure.is_checked = (student_adventure and student_adventure['ticked']) is True
 
 
 def load_customized_adventures(level, customizations, into_adventures):
@@ -1597,6 +1599,12 @@ def view_program(user, id):
                     1)))
 
     result['code'] = code
+    student_adventure_id = f"{result['username']}-{result['adventure_name']}-{result['level']}"
+    student_adventure = DATABASE.student_adventure_by_id(student_adventure_id)
+    if not student_adventure:
+        # store the adventure in case it's not in the table
+        student_adventure = DATABASE.store_student_adventure(
+            dict(id=f"{student_adventure_id}", ticked=False, program_id=id))
 
     arguments_dict = {}
     arguments_dict['program_id'] = id
@@ -1606,15 +1614,15 @@ def view_program(user, id):
                                                editor_contents=code,
                                                )
     arguments_dict['editor_readonly'] = True
-
+    arguments_dict['student_adventure'] = student_adventure
     if "submitted" in result and result['submitted']:
         arguments_dict['show_edit_button'] = False
         arguments_dict['program_timestamp'] = utils.localized_date_format(result['date'])
     else:
         arguments_dict['show_edit_button'] = True
 
-    # Everything below this line has nothing to do with this page and it's silly
-    # that every page needs to put in so much effort to re-set it
+    arguments_dict['show_checkbox'] = is_teacher(user)\
+        and result['username'] in DATABASE.get_teacher_students(user['username'])
 
     return render_template("view-program-page.html",
                            blur_button_available=True,

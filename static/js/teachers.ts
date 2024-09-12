@@ -759,6 +759,17 @@ export function initializeClassOverviewPage(_options: InitializeClassOverviewPag
   });
 
   initializeGraph()
+  // An ugly hack, but if someone goes back trhough the page, the cache
+  // causes the old version of the page to be shown
+  // So we hard reload it
+  window.addEventListener( "pageshow", function ( event ) {
+    var historyTraversal = event.persisted || 
+                           ( typeof window.performance != "undefined" && 
+                                window.performance.navigation.type === 2 );
+    if ( historyTraversal ) {
+      window.location.href = window.location.href
+    }
+  });
 }
 
 interface InitializeGraphOptions {
