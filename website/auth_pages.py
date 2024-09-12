@@ -225,9 +225,9 @@ class AuthModule(WebsiteModule):
         if not user:
             return make_response(gettext("username_invalid"), 403)
 
-        # If user is already verified -> re-direct to landing-page anyway
+        # If user is already verified -> re-direct to hedy page
         if "verification_pending" not in user:
-            return redirect("/landing-page")
+            return redirect("/hedy")
 
         # Verify the token
         if token != user["verification_pending"]:
@@ -241,7 +241,7 @@ class AuthModule(WebsiteModule):
         self.db.store_token({"id": cookie, "username": user["username"], "ttl": times() + SESSION_LENGTH})
         remember_current_user(user)
 
-        return redirect("/landing-page")
+        return redirect("/hedy")
 
     @route("/turn-into-teacher", methods=['POST'])
     def turn_into_teacher_account(self):
