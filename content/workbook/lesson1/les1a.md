@@ -10,7 +10,7 @@ Aan het einde van de les kun jij:
 * Een verhaal met invoer maken
 
 ### Opdrachten
-Een     "assignment": "output" doet niet zomaar zelf iets, je moet een computer altijd een opdracht geven. Zo'n opdracht heet commando. Om code uit te printen, gebruiken we de code `print`.
+Een computer doet niet zomaar zelf iets, je moet een computer altijd een opdracht geven. Zo'n opdracht heet commando. Om code uit te printen, gebruiken we de code `print`.
 
 ### Tekst printen
 

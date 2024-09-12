@@ -65,18 +65,25 @@ def convert_json(json):
 
     if assignment_type == 'output':
         textfields = ''
-        current_line = 1
+        code_lines = json['code'].split('\n')
+        number_of_input_lines = len(code_lines)
+        number_of_output_lines = number_of_lines
 
-        for output_line in json['code'].split('\n'):
-            # make the length with spaces, then with _ for the lines
-            output_line = output_line.ljust(38, ' ')
-            if current_line <= number_of_lines:
+        for i in range(max(number_of_input_lines, number_of_output_lines)):
+            output_line = ''
+            if i < number_of_input_lines:
+                output_line = code_lines[i]
+                output_line = output_line.ljust(38, ' ')
+            if i < number_of_output_lines:
                 output_line = output_line.ljust(76, '_')
-                current_line += 1
+
             textfields += output_line + '\n'
 
         json['textfields'] = textfields
-        # todo: add more empty lines if we need more (not an issue till we get to loops)
+
+
+
+        # # todo: add more empty lines if we need more (not an issue till we get to loops)
 
     if assignment_type == 'input':
         textfields = ''
@@ -84,10 +91,15 @@ def convert_json(json):
         output_lines = json['output'].split('\n')
         number_of_output_lines = len(output_lines)
 
-        for i in range(max(number_of_input_lines, number_of_output_lines)):
+        for i in range(max(number_of_input_lines, number_of_output_lines)-1):
+            newline = ''
+            if i < number_of_input_lines:
+                newline += '_' * 30
+
             if i < number_of_output_lines:
                 output_line = output_lines[i]
-                newline = '_' * 30 + ' ' * 10 + output_line
+                newline += ' ' * 10 + output_line
+
 
             textfields += newline + '\n'
 
@@ -149,7 +161,7 @@ def process_workbook(file_path):
     return workbook_output
 
 
-lesson = '1'
+lesson = '2'
 
 input_path = f"/lesson{lesson}/les{lesson}a.md"
 json_data = process_workbook(current_directory+input_path)
