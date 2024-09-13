@@ -56,6 +56,14 @@ export class Tabs {
         location.href = `/hedy/${level}#${tabName}`
     });
 
+    $('#next_adventure').on('click', () => {
+      this.switchPreviousOrNext(true)
+    })
+
+    $('#previous_adventure').on('click', () => {
+      this.switchPreviousOrNext(false)
+    })
+
     // Determine initial tab
     // 1. Given by code
     // 2. In the URL
@@ -123,6 +131,15 @@ export class Tabs {
     }
   }
 
+  private switchPreviousOrNext(toNext: boolean) {
+    const selected = document.querySelector('.adv-selected')    
+    const i = parseInt(selected?.getAttribute('tabindex') || '0')
+    const next = document.querySelector(`li[tabindex='${i + (toNext ? 1 : -1)}']`) as HTMLElement
+    
+    this.switchToTab(next.dataset['tab']!, Number(next.dataset['level']!))
+    document.getElementById('layout')?.scrollIntoView({behavior: 'smooth'})
+  }
+
   public get currentTab() {
     return this._currentTab;
   }
@@ -141,7 +158,7 @@ export function getNext() {
   const selected = document.querySelector('.adv-selected')
   if (!selected) return []
   const i = parseInt(selected.getAttribute('tabindex') || '0')
-  const next = document.querySelector(`.tab[tabindex='${i+1}']`)
+  const next = document.querySelector(`li[tabindex='${i+1}']`)
   return next
 }
 

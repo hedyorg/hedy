@@ -24,35 +24,13 @@
     <!-- progress bar -->
         <div id="progress_bar" data-cy="progress_bar" class="w-full max-w-screen-2xl mx-auto mt-10">
             <div class="flex flex-row w-full">
-                <button data-cy="next_adventure" class="blue-btn flex-initial w-fit next-tab ltr:mr-1 rtl:ml-1 justify-self-end mb-1"
-                _="on click
-                set :next to hedyApp.getNext()
-                if :next
-                set *display to 'block'
-                call :next.click()
-                else
-                set *display to 'none'
-                end
-                then set adv to hedyApp.getCurrentAdv()
-                put adv into #program_name
-                then localStorage.setItem('adventure_dropdown', 'adventure_button_' + adv)">
-                        <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}"></span>
-                        {{_('previous_adventure')}}&nbsp;
+                <button data-cy="previous_adventure" id="previous_adventure" class="blue-btn flex-initial w-fit next-tab ltr:mr-1 rtl:ml-1 justify-self-end mb-1">
+                    <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}"></span>
+                    {{_('previous_adventure')}}&nbsp;
                 </button>
                 <div class="flex-initial"></div>
                 <div class="flex-1 mt-5 ml-4 text-center font-medium dark:text-white"><b class="{% if not username %}hidden{% endif %}">{{progress}}% {{_('complete')}}</b></div>                
-                <button data-cy="next_adventure" class="blue-btn flex-initial w-fit next-tab ltr:ml-1 rtl:mr-1 justify-self-end mb-1"
-                    _="on click
-                    set :next to hedyApp.getNext()
-                    if :next
-                        set *display to 'block'
-                        call :next.click()
-                    else
-                        set *display to 'none'
-                    end
-                    then set adv to hedyApp.getCurrentAdv()
-                    put adv into #program_name
-                    then localStorage.setItem('adventure_dropdown', 'adventure_button_' + adv)">
+                <button data-cy="next_adventure" id="next_adventure" class="blue-btn flex-initial w-fit next-tab ltr:ml-1 rtl:mr-1 justify-self-end mb-1">
                     {{_('next_adventure')}}&nbsp;
                     <span class="fa fa-arrow-{% if g.dir == "ltr" %}right{% else %}left{% endif %}"></span>
                 </button>
