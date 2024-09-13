@@ -123,7 +123,7 @@ for lang in ALL_LANGUAGES.keys():
     TAGS[lang] = hedy_content.Tags(lang)
 
 
-def load_all_adventures_for_index(subset=None):
+def load_all_adventures_for_index(customizations, subset=None):
     """
     Loads all the default adventures in a dictionary that will be used to populate
     the index, therfore we only need the titles and short names of the adventures.
@@ -134,6 +134,7 @@ def load_all_adventures_for_index(subset=None):
         adventures = ADVENTURES[g.lang].get_adventures_subset(subset, keyword_lang)
     else:
         adventures = ADVENTURES[g.lang].get_adventures(keyword_lang)
+
     all_adventures = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
     for short_name, adventure in adventures.items():
         for level in adventure['levels']:
@@ -149,6 +150,33 @@ def load_all_adventures_for_index(subset=None):
         adventures.sort(key=lambda pair: index_map.get(
             pair['short_name'],
             len(adventures_order)))
+
+    sorted_adventures = customizations.get('sorted_adventures')
+    if not sorted_adventures:
+        return all_adventures
+
+    builtin_map = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
+    adventure_ids = []
+    for level, order_for_level in sorted_adventures.items():
+        for a in order_for_level:
+            if a['from_teacher']:
+                adventure_ids.append(a['name'])
+        builtin_map[int(level)] = {a['short_name']: a for a in all_adventures[int(level)]}
+
+    teacher_adventure_map = DATABASE.batch_get_adventures(adventure_ids)
+    all_adventures = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
+    for level, order_for_level in sorted_adventures.items():
+        for adventure in order_for_level:
+            if adventure['from_teacher'] and (db_row := teacher_adventure_map.get(adventure['name'])):
+                all_adventures[int(level)].append({
+                    'short_name': db_row['id'],
+                    'name': db_row['name'],
+                    'is_teacher_adventure': True,
+                    'is_command_adventure': False
+                })
+            if not adventure['from_teacher'] and (adv := builtin_map[int(level)].get(adventure['name'])):
+                all_adventures[int(level)].append(adv)
+
     return all_adventures
 
 
@@ -1479,7 +1507,7 @@ def index(level, program_id):
     adventures = load_adventures_for_level(level)
     load_customized_adventures(level, customizations, adventures)
     load_saved_programs(level, adventures, loaded_program)
-    adventures_for_index = load_all_adventures_for_index()
+    adventures_for_index = load_all_adventures_for_index(customizations)
     initial_tab = adventures[0].short_name
 
     if loaded_program:
