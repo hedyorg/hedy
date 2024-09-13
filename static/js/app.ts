@@ -1712,7 +1712,7 @@ function updatePageElements() {
   $('#editor_area').toggle(isCodeTab || currentTab === 'parsons');
   $('#editor').toggle(isCodeTab);
   $('#debug_container').toggle(isCodeTab);
-  $('#program_name').toggle(isCodeTab);
+
   theGlobalEditor.isReadOnly = false;
 
   const adventure = theAdventures[currentTab];
@@ -1751,7 +1751,6 @@ function updatePageElements() {
   }
   if (currentTab === 'parsons'){
     $('#progress_bar').hide()
-    $('#program_name_container').hide()
     $('#share_program_button').hide()
     $('#read_outloud_button_container').hide()
     $('#cheatsheet_dropdown_container').hide()
@@ -1761,7 +1760,6 @@ function updatePageElements() {
   }
   if (currentTab === 'quiz'){
     $('#progress_bar').hide()
-    $('#program_name_container').hide()
     $('#share_program_button').hide()
     $('#read_outloud_button_container').hide()
     $('#cheatsheet_dropdown_container').hide()
