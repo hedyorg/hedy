@@ -21,49 +21,71 @@ var $builtinmodule = function (name) {
           keyElement.remove()
         }, 1500);
       }
-    } 
+    }
+
+    var ongoingIfPressedCall = false;
+
+    function callIfPressedFunc(name, resolve, reject) {
+      var f = Sk.misceval.loadname(name, Sk.globals);
+      var currentProgram = window.sessionStorage.getItem("currentProgram");
+
+      Sk.misceval.asyncToPromise(() =>
+        Sk.misceval.callOrSuspend(f), {}, currentProgram).then(() => {
+          resolve();
+        }).catch((e) => {
+          reject(e);
+        }).finally(() => {
+          ongoingIfPressedCall = false;
+        });
+    }
 
     function keyBoardInputPromise(if_pressed_mapping) {
+      ongoingIfPressedCall = true;
       $('#keybinding_modal').show();
       return new Promise((resolve, reject) => {
         window.addEventListener("keydown", (event) => {
-          let pressed_mapped_key = false;
+          try {
+            let pressed_mapped_key = false;
 
-          for (const [key, value] of Object.entries(if_pressed_mapping.entries)) {
-            // If mapped key is a variable (not char), we retrieve variable value and use that
-            // otherwise if char, use that.
-            const charOrVar = value[0].v;
+            for (const [key, value] of Object.entries(if_pressed_mapping.entries)) {
+              // if the mapped key is a variable, we retrieve variable value and use that
+              // if the mapped key is not a variable, use it as a char
+              const charOrVar = value[0].v;
+              let mapLetterKey = charOrVar;
+              if (Object.hasOwn(Sk.globals, charOrVar)) {
+                if (Sk.globals[charOrVar].hasOwnProperty('v')) {
+                  mapLetterKey = Sk.globals[charOrVar].v;
+                } else {
+                  mapLetterKey = Sk.globals[charOrVar].$d.entries['data'][1].v;
+                }
+              }
 
-            let mapLetterKey = charOrVar;
-            if (Object.hasOwn(Sk.globals, charOrVar)) {
-              if (Sk.globals[charOrVar].hasOwnProperty('v')) {
-                mapLetterKey = Sk.globals[charOrVar].v;
-              } else {
-                mapLetterKey = Sk.globals[charOrVar].$d.entries['data'][1].v;
+              if (event.key === `${mapLetterKey}`) {
+                pressed_mapped_key = true;
+                callIfPressedFunc(value[1].v, resolve, reject);
               }
             }
 
-            if (event.key === `${mapLetterKey}`){
-              pressed_mapped_key = true;
-              Sk.misceval.callOrSuspend(Sk.globals[value[1].v]);
+            if (!pressed_mapped_key) {
+              callIfPressedFunc(if_pressed_mapping.entries['else'][1].v, resolve, reject);
             }
+          } catch (err) {
+            ongoingIfPressedCall = false;
+            reject(err);
+          } finally {
+            $('#keybinding_modal').hide();
           }
-
-          if (!pressed_mapped_key){
-            Sk.misceval.callOrSuspend(Sk.globals[if_pressed_mapping.entries['else'][1].v]);
-          }
-
-          $('#keybinding_modal').hide();
-          resolve();
         }, { once: true });
       })
     }
 
     mod.if_pressed = new Sk.builtin.func(function (if_pressed_mapping) {
         document.onkeydown = animateKeys;
-        return new Sk.misceval.promiseToSuspension(keyBoardInputPromise(
-            if_pressed_mapping
-        ).then(() => {document.onkeydown = null; return Sk.builtin.none.none$}));
+        return new Sk.misceval.promiseToSuspension(
+          keyBoardInputPromise(if_pressed_mapping)
+          .then(() => { return Sk.builtin.none.none$ })
+          .finally(() => { document.onkeydown = null;})
+        );
     });
 
     return mod;
