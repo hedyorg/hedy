@@ -115,7 +115,7 @@ export class Tabs {
         tab_title.classList.add('border-blue-900')
       }
       
-
+      document.getElementById('previous_adventure')?.classList.toggle('hidden', tab.attr('tabindex') === '1')
       allTargets.addClass('hidden');
       target.removeClass('hidden');
 
