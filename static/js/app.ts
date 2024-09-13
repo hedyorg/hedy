@@ -1416,12 +1416,12 @@ export function setDevelopersMode(event='click', enforceDevMode: boolean) {
       enable = $('#developers_toggle').prop('checked');
       break;
   }
-  window.localStorage.setItem('developer_mode', `${enable}`)
-  toggleDevelopersMode()
+  if (!enforceDevMode) window.localStorage.setItem('developer_mode', `${enable}`)
+  toggleDevelopersMode(enforceDevMode)
 }
 
-function toggleDevelopersMode() {
-  const enable = window.localStorage.getItem('developer_mode') === 'true';
+function toggleDevelopersMode(enforceDevMode?: boolean) {
+  const enable = window.localStorage.getItem('developer_mode') === 'true' || enforceDevMode;
   // DevMode hides the tabs and makes resizable elements track the appropriate size.
   // (Driving from HTML attributes is more flexible on what gets resized, and avoids duplicating
   // size literals between HTML and JavaScript).

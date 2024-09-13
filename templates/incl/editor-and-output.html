@@ -192,7 +192,7 @@
                 if :els[0]
                   set *display to 'block'
                   set the *justify-content of #pagination_container to 'space-between'
-                  set prevContent to :els[0].innerHTML.trim()
+                  set prevContent to :els[0].innerText.trim()
                 else
                   set the *justify-content of #pagination_container to 'flex-end'
                   set *display to 'none'
@@ -230,7 +230,7 @@
                 set :els to hedyApp.getPreviousAndNext()
                 if :els[1]
                   set *display to 'block'
-                  set nextContent to :els[1].innerHTML.trim()
+                  set nextContent to :els[1].innerText.trim()
                 else
                   set *display to 'none'
                 end
