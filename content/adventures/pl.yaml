@@ -2424,29 +2424,29 @@ adventures:
                     Oto przykład funkcji z argumentami połączonymi z poleceniami {ask}.
                 example_code: |
                     ```
-                    {define} wiadomość_powitalna {with} tytuł, nazwisko, kraj, numer_pokoju
-                        {print} 'Witamy w hotelu Hedy'ego, ' tytuł ' ' nazwisko
-                        przyjemna_podróż {is} {ask} 'Czy miał Pan/Pani przyjemną podróż z , ' kraj '?'
-                        {if} przyjemna_podróż {is} 'tak'
-                            {print} 'Cudownie!'
+                    {define} welcome_message {with} title, last_name, country, room_number
+                        {print} 'Welcome to Hotel Hedy, ' title ' ' last_name
+                        nice_trip {is} {ask} 'Did you have a nice trip from, ' country '?'
+                        {if} nice_trip {is} 'yes'
+                            {print} 'Lovely!'
                         {else}
-                            {print} 'Przykro mi to słyszeć!'
-                            {print} 'Mam nadzieję, że odpocznie Pan/Pani w swoim pokoju.'
-                        {print} 'Twój numer pokoju to ' numer_pokoju
+                            {print} 'Sorry to hear that.'
+                            {print} 'Hopefully you can take a nice rest in you room.'
+                        {print} 'Your room number is ' room_number
 
-                    {print} 'Witam. Proszę podać swoje informacje, aby się zameldować.'
-                    tytuł = {ask} 'Jaki jest Pana/Pani (pani, pan, doktor, itd.)?'
-                    nazwisko = {ask} 'Jakie jest twoje nazwisko?'
-                    kraj_pochodzenia = {ask} 'Z jakiego kraju Pan/Pani pochodzi?'
+                    {print} 'Hello. Please fill in your information to check in.'
+                    title = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'
+                    name = {ask} 'What is you last name?'
+                    homecountry = {ask} 'What country do you come from?'
 
-                    {call} wiadomość_powitalna {with} tytuł, nazwisko, kraj_pochodzenia, 105
+                    {call} welcome_message {with} title, name, homecountry, 105
                     ```
 
-                    tytuł = {ask} 'Jaki jest Pana/Pani (pani, pan, doktor, itd.)?'
-                    nazwisko = {ask} 'Jakie jest twoje nazwisko?'
-                    kraj_pochodzenia = {ask} 'Z jakiego kraju pochodzisz?'
+                    title = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'
+                    name = {ask} 'What is you last name?'
+                    homecountry = {ask} 'What country do you come from?'
 
-                    {call} wiadomość_powitalna {with} tytuł, nazwisko, kraj_pochodzenia, 105
+                    {call} welcome_message {with} title, name, homecountry, 105
     if_command:
         name: '{if} i {else}'
         default_save_name: komenda_if
@@ -2582,16 +2582,16 @@ adventures:
                     Używasz tych porównań w `{if}`, w ten sposób:
                 example_code: |
                     ```
-                    wiek = {ask} 'Ile masz lat?'
-                    {if} wiek > 12
-                        {print} 'Jesteś ode mnie starszy!'
+                    age = {ask} 'How old are you?'
+                    {if} age > 12
+                        {print} 'You are older than I am!'
                     ```
                     ```
-                    wiek = {ask} 'Ile masz lat?
-                    {if} wiek < 12
-                        {print} Jesteś ode mnie młodszy!'
+                    age = {ask} 'How old are you?'
+                    {if} age < 12
+                        {print} 'You are younger than me!'
                     {else}
-                        {print} 'Jesteś ode mnie starszy!'
+                        {print} 'You are older than me!'
                     ```
                 story_text_2: |
                     Od tego poziomu, jeśli chcesz dokładnie coś porównać, możesz użyć dwóch znaków równości. Tak właśnie robi większość języków programowania:
@@ -2623,13 +2623,13 @@ adventures:
                     **Dodatkowo ** Oczywiście możesz użyć innego języka niż francuski. Możesz zmienić kod na dowolny język, którego chcesz się nauczyć.
                 example_code: |
                     ```
-                    {print} 'Naucz się francuskiego!'
-                    kot{is} {ask} '🐱'
-                    {if} kot {is} chat {print} 'Wspaniale!'
-                    {else} {print} 'Nie, kot po francusku to chat'
-                    żaba {is} {ask} '🐸'
-                    {if} żaba {is} grenouille {print} 'Super!'
-                    {else} {print} 'Nie, żaba to grenouille'
+                    {print} 'Learn French!'
+                    cat {is} {ask} '🐱'
+                    {if} cat {is} chat {print} 'Terrific!'
+                    {else} {print} 'No, cat is chat'
+                    frog {is} {ask} '🐸'
+                    {if} frog {is} grenouille {print} 'Super!'
+                    {else} {print} 'No, frog is grenouille'
                     ```
             16:
                 story_text: |
@@ -3307,23 +3307,23 @@ adventures:
                     Możesz zrobić quiz o wszystkim, co lubisz: swoim hobby, ulubionym zwierzęciu, ulubionej książce lub w ogóle o czymkolwiek!
                 example_code: |
                     ```
-                    {print} 'Stwórz swój własny quiz'
-                    punkty_a = 0
-                    punkty_b = 0
-                    {print} 'Pytanie'
-                    {print} 'Odpowiedź opcja A'
-                    {print} 'Odpowiedź opcja B'
-                    odpowiedź = {ask} 'Która odpowiedź?'
-                    {if} odpowiedź == 'A'
-                        punkty_a = points_a + 1
-                    {if} odpowiedź == 'B'
-                        punkty_b = punkty_b + 1
-                    {print} 'Koniec quizu!'
-                    {print} 'Sprawdźmy wynik!'
-                    {if} punkty_a > punkty_b
-                        {print} 'Należysz do klubu A'
-                    {if} punkty_b >punkty_a
-                        {print} 'Należysz do klubu B'
+                    {print} 'Make your own quiz'
+                    points_a = 0
+                    points_b = 0
+                    {print} 'Question'
+                    {print} 'Answer option A'
+                    {print} 'Answer option B'
+                    answer = {ask} 'Which answer?'
+                    {if} answer == 'A'
+                        points_a = points_a + 1
+                    {if} answer == 'B'
+                        points_b = points_b + 1
+                    {print} 'End of the quiz!'
+                    {print} 'Lets see the results!'
+                    {if} points_a > points_b
+                        {print} 'You belong to the A club'
+                    {if} points_b > points_a
+                        {print} 'You belong to the B club'
                     ```
     quotation_marks:
         name: '''Cudzysłowy'''
@@ -3376,9 +3376,9 @@ adventures:
                     **Cały tekst po porównaniach `{if}` również wymaga cudzysłowu**
                 example_code_3: |
                     ```
-                    imię = {ask} 'Jak masz na imię?'
-                    {if} name = 'Robot Hedy'
-                        {print} 'Witaj!'
+                    name = {ask} 'What is your name?'
+                    {if} name = 'Hedy the Robot'
+                        {print} 'Hi there!'
                     ```
                 story_text_4: |
                     **Liczby nie potrzebują cudzysłowu**
