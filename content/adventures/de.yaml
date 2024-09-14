@@ -333,13 +333,13 @@ adventures:
                     ```
     ask_command:
         name: '{ask}'
-        default_save_name: ask_command
-        description: Introduction ask command
+        default_save_name: frage_Befehl
+        description: Einführung des {ask} Befehls
         levels:
             1:
                 story_text: |
                     ## Der frage Befehl
-                    Jetzt, wo du den  `{print}` Befehl verwenden kannst, bist du bereit, den nächsten Befehl zu lernen:  `{ask}`. Mit dem `{ask}` Befehl kannst du Fragen stellen. Probiere es aus:
+                    Jetzt, wo du den `{print}` Befehl verwenden kannst, bist du bereit, den nächsten Befehl zu lernen: `{ask}`. Mit dem `{ask}` Befehl kannst du Fragen stellen. Probiere es aus:
                 example_code: |
                     ```
                     {print} Hallo!
@@ -391,7 +391,7 @@ adventures:
                     {print} Mein Lieblingstier ist lieblingstier
                     ```
             18:
-                story_text: Die letzte Anpassung, die wir machen müssen, um Python Code zu kriegen, ist , `{ask}` in `{input}` zu ändern.
+                story_text: Die letzte Anpassung, die wir machen müssen, um Python Code zu erhalten, ist  `{ask}` in `{input}` zu ändern.
                 example_code: |
                     ```
                     {print}('Mein Name ist Hedy!')
@@ -411,157 +411,155 @@ adventures:
                     Aber pass auf, dass du nicht mehr als 21 Punkte bekommst, denn dann verlierst du!
                     Der Spieler, der am nächsten an 21 herankommt ohne sie zu überschreiten, gewinnt!
 
-                    ### Exercise
-                    In this adventure we code the first part of our Blackjack game. We'll create a function to calculate how many points a card is worth.
+                    ### Übung
+                    In diesem Abenteuer programmieren wir den ersten Teil unseres Blackjack Spiels. Wir schreiben eine Funktion, die berechnet, wie viele Punkte eine Karte zählt.
 
-                    ***Set the variables***
-                    Start by making a list of all the cards, from 2 to Ace. Next make a list of the face cards, so Jack, Queen and King. Then pick a random card from the list of cards to be card_1.
+                    ***Setze die Variablen***
+                    Beginne, indem du eine Liste mit Karten anlegst, von der 2 bis zum Ass. Als nächstes, mache eine Liste mit den Bildkarte, also Bube, Dame und König. Dann wähle eine zufällige Karte aus der Liste der Karte als karte_1.
 
-                    ***Create a function to calculate the points***
-                    Create a function that calculates how many points a card is worth.
-                    All the face cards are worth 10 points, the Ace is worth 11 and all the other cards are worth their numeral.
-                    Return the variable `points` at the end of the function.
+                    ***Schreibe eine Funktion, um die Punkte zu berechnen***
+                    Schreibe eine Funktion, die berechnet, wie viele Punkte eine Karte zählt.
+                    All Bildkarten zählen 10 Punkte, ein Ass 11 und alle anderen Karten zählen ihren Zahlenwert
+                    Die die Variable `punkte` am Ende der Funktion zurück.
 
-                    ***Test the function***
-                    Test if your function is working properly. Finish the first print command by filling in which card you've drawn. Then finish the second line by calling the function with card_1.
-                    Run the code a couple of times. Are you happy with the results? Great! Then you can remove the testing part and move on the the next tab!
+                    ***Teste die Funktion***
+                    Teste, ob deine Funktion richtig funktioniert. Vervollständige den ersten `{print}`Befehl, indem du die Karte ergänzt, die du gezogen hast. Dann vervollständige die zweite Zeile, indem du die Funktion mit karte_1 aufrufst.
+                    Lass dein Programm ein paar mal laufen. Bist du mit den Ergebnissen zufrieden? Dann kannst du den Testteil entfernen und zum nächsten Tab wechseln!
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
 
-                    # Set these variables
-                    cards = _
-                    face_cards = _
-                    card_1 =
+                    # Setze diese Variablen
+                    karten = _
+                    bildkarten = _
+                    karte_1 =
 
-                    # Create a function to calculate the points
-                    {define} calculate_points {with} card:
-                        {if} card {in} face_cards:
-                            points = _
+                    # Erzeuge eine Funktion, um die Punkte zu berechnen
+                    {define} berechne_punkte {with} karte:
+                        {if} karte {in} bildkarten:
+                            punkte = _
                         {elif} _
                             _
                         {else}:
                             _
-                        _ points
+                        _ punkte
 
-                    # Test your function
-                    {print} 'Your card is a ' _
-                    {print} 'That is worth ' _ ' points'.
+                    # Teste deine Funktion
+                    {print} 'Deine Karte ist ein(e) ' _
+                    {print} 'Sie zählt  ' _ ' Punkte'.
                     ```
     blackjack_2:
         name: Blackjack 2
         default_save_name: Blackjack_2
-        description: Blackjack part 2
+        description: Blackjack Teil 2
         levels:
             17:
                 story_text: |
-                    ### Exercise
-                    In this adventure we code the second part of our Blackjack game.
+                    ### Übung
+                    In diesem Abenteuer programmieren wir den zweiten Teil unseres Blackjack Spiels.
 
-                    ***Paste your code from the previous adventure***
-                    In the previous adventure you've started a list of variables and created a function to calculate how many points a card is worth. Copy your code and paste it here. Mind that you don't need the testing part, so if you haven't removed that yet, please do so now.
+                    ***Füge das Programm aus dem vorherigen Abenteuer hier ein***
+                    Im vorherigen Abenteuer hast zu mit einer Liste von Variablen begonnen und eine Funktion geschrieben, die berechnet, wie viele Punkte eine Karte zählt. Kopiere dein Program und füge ihn hier ein. Beachte, dass du den Testteil nicht benötigst. Wenn du ihn noch nicht gelöscht hast, mache e jetzt.
 
-                    ***Add more variables***
-                    You have already set the lists `cards` and `face_cards` and the variable `card_1`. Underneath those variables create 3 more variables: `card_2`, dealer_card_1` and `dealer_card_2`. These variables are all set to a random card from the list of cards.
+                    ***Ergänze weitere Variablen***
+                    Du hast schon die Listen `karten` und `bildkarten` und die Variable `karte_1` gesetzt. Erzeuge nach diesen Variablen noch 3 weitere: `karte_2`, `geber_karte_1` und `geber_karte_2`. Diese Variablen sind auf eine zufällige Karte aus der Liste der Karten gesetzt.
 
-                    ***Add up points***
-                    To calculate how many points you have scored we call the function with card 1 and we do it again for card 2. Then we add both these scores together to get your total.
-                    Do the same thing for the dealers points, but be sure to use the dealer's cards and not your own!
+                    ***Zähle die Punkte zusammen***
+                    Um zu berechnen, wie viele Punkte du erreicht hast, rufen wir die Funktion mit `karte_1` und `karte_2` auf. Dann addieren wir die beiden Punktzahlen zusammen, um deine Gesamtpunkte zu bestimmen.
+                    Mache dasselbe für die Punkte des Gebers, aber stelle sicher, dass du die Karten des Gebers und nicht deine benutzt.
 
-                    ***2 Aces***
-                    You're doing great! Almost all scores can be calculated now. There is only one exception: 2 Aces. If you get 2 Aces, your total is 12 points and not 22 (because 22 points would be losing!). This of course also goes for the dealer.
+                    ***2 Asse***
+                    Großartig! Fast alle Punkte können jetzt berechnet werden. Bis auf eine Ausnahme: 2 Asse. Wenn du 2 Asse bekommst, gibt es dafür 12 Punkte und nicht 22 (weil du mit 22 Punkten schon verloren hättest). Das gilt natürlich auch für den Geber.
 
-                    ***Show the score***
-                    Lastly, you want to tell the program to tell you which cards you have drawn and how many points that is. Then show which cards the dealer has and how many points they have.
+                    ***Zeige den Punktestand***
+                    Zuletzt soll das Program noch ausgeben, welchen Karte du gezogen hast und wieviele Punkte es dafür gibt. Dann zeige, welche Karten der Geber hat und wie viele Punkte die zählen.
 
-                    ***Continue in the next tab***
-                    Great! You have finished this part of the game! Copy your code and go to the next tab to learn how to ask for an extra card and to declare a winner.
+                    ***Weiter geht es mit dem nächsten Tab***
+                    Ausgezeichnet! Du hast diesen Teil des Spiels beendet! Kopiere dein Programm und gehe zum nächsten Tab um zu lernen, wie du nach einer extra Karte fragen und den Gewinner bestimmen kannst.
                 example_code: |
                     ```
-                    # Paste your code from the previous adventure here
+                    # Kopiere deine Programm aus dem vorherigen Abenteuer hier her
 
-                    # Add these variables to the list of variables
-                    card_2 = _
-                    dealer_card_1 = _
-                    dealer_card_2 = _
+                    # Füge diese Variablen zu der Liste der Variablen hinzu
+                    karte_1 = _
+                    geber_karte_1 = _
+                    geber_karte_2 = _
 
-                    # Add up your points
-                    your_points_1 = {call} _ {with} card_1
-                    your_points_2 = _
-                    your_total = _
+                    # Zähle deine Punkte zusammen
+                    deine_punkte_1 = {call} _ {with} karte_1
+                    deine_punkte_2 = _
+                    deine_gesamtpunkte = _
 
-                    # Add up the dealers points
-                    dealer_points_1 = _
+                    # Zähle die Punkte des Gebers zusammen
+                    geber_punkte_1 = _
                     _
                     _
 
-                    # 2 Aces
-                    {if} card_1 == 'Ace' {and} _
-                        your_total = 12
-                    {if} dealer_card_1 _
-                        dealer_total = _
+                    # 2 Asse
+                    {if} karte_1 == 'Ass' {and} _
+                        deine_gesamtpunkte = 12
+                    {if} geber_karte_1 _
+                        geber_gesamtpunkte = _
 
-                    # Show the score
-                    {print} 'You have drawn a ' _ ' and a ' _ '. That is ' _ ' points'
-                    {print} 'The dealer has drawn a ' _ ' and a ' _ '. That is ' _ ' points'
+                    # Zeige den Spielstand
+                    {print} 'Du hast ' _ ' und ' _ ' gezogen. Das sind ' _ ' Punkte'
+                    {print} 'Der Geber hat ' _ ' und ' _ ' gezogen. Das sind  ' _ ' Punkte'
                     ```
     blackjack_3:
         name: Blackjack 3
         default_save_name: Blackjack_3
-        description: Blackjack part 3
+        description: Blackjack Teil 3
         levels:
             17:
                 story_text: |
-                    In the previous tabs you have learned how to draw 2 random cards for yourself and for the dealer and to calculate how many points you both got.
-                    In this adventure we add the option to ask for an extra card for both you and the dealer.
+                    Beim den vorherigen Tabs hast du gelernt, wie du 2 zufällige Karten für dich und den Geber ziehen kannst und zu berechnen, wie viele Punkte ihr beiden habt.
+                    In diesem Abenteuer fügen wir für dich und den Geber die Möglichkeit hinzu, nach einer weiteren Karte zu fragen.
 
-                    ### Exercise
-                    ***Paste your code from the previous adventure*** Firstly, copy your code from the previous tab and paste it here.
+                    ### Übung
+                    ***Füge dein Programm aus dem vorherigen Abenteuer ein*** Zunächst, kopiere das Programm aus dem vorherigen Tab und füge es hier ein.
 
-                    ***Extra card for you*** If you want, you can get an extra card to get your total as close to 21 as possible. First ask the player if they want an extra card.
-                    If they do, pick a random card and print what they have drawn. If the card is not an Ace, you can call the function and add the points to your total.
-                    In case the card is an Ace, you can't use the function, because the Ace can be either 1 point or 11 points, depending on how many points you already have earned.
-                    If your total is less than 11, you want the ace to be 11 points (because this is closest to 21). So you add 11 points to your total.
-                    If the total is more than or equal to 11, you want the ace to be 1 point (because you don't want more than 21 points). So you add 1 point to your total.
-                    Lastly, print your new total of points.
+                    ***Extra Karte für dich*** Wenn du willst, kannst du eine weitere Karte bekommen, um mit deinen Gesamtpunkten so nah wie möglich an 21 zu kommen. Frage zuerst den Spieler, ob er noch eine Karte will.
+                    Falls ja, wähle eine zufällige Karte und drucke, was gezogen wurde. Falls die Karte kein Ass ist, kannst du die Funktion aufrufen und die Punkte zu deinen Gesamtpunkten hinzuzählen.
+                    Falls die Karte ein Ass ist, kannst du die Funktion nicht verwenden, weil ein Ass entweder 1 Punkt oder 11 Punkte zählen kann, abhängig davon, wie viele Punkte du bereits hast.
+                    Falls deine Gesamtpunkte weniger als 11 sind, sollte das Ass 11 Punkte zählen (weil das am nächsten an 21 ist). Also zählst du 11 Punkte zu deinen Gesamtpunkte hinzu.
+                    Falls du mehr als oder genau 11 Gesamtpunkte hast, sollte dein Ass 1 Punkt zählen (weil du nicht mehr als 21 Punkte haben solltest). Also zählst du 1 Punkt zu den Gesamtpunkten hinzu.
+                    Zuletzt, drucke deine neue Gesamtpunktzahl.
 
-                    ***Extra card for the dealer*** The dealer can also get an extra card. The dealer doesn't need to be asked, because they always get an extra card if their total is less than 17.
-                    Copy the 'Extra card for you code' and paste it in the dealers section. Then change it to fit the dealer picking an extra card and getting points added to their total.
+                    ***Extra Karte für den Geber*** Der Geber kann auch eine extra Karte bekommen. Der Geber muss nicht gefragt werden, weil er immer eine extra Karte bekommt, wenn er weniger als 17 Gesamtpunkte hat.
+                    Kopiere den 'Extra Karte für dich' Code und füge ihn in den Geber Abschnitt ein. Dann ändere ihn, dass es für den Geber passt, eine extra Karte zu nehmen und die Punkte zu seinen Gesamtpunkten hinzugefügt zu bekommen
                 example_code: |
                     ```
-                    # Paste your code from the previous adventure here
+                    # Füge dein Programm aus dem vorherigen Abenteuer hier ein
 
-                    # Extra card for you
-                    hit = {ask} _
-                    {if} hit == 'yes':
-                        card_3 = _
+                    # Extra Karte für dich
+                    weiter = {ask} _
+                    {if} weiter == 'ja':
+                        karte_3 = _
                         {print} _
-                        {if} card_3 _ 'Ace':
-                            your_points_3 = _
-                            your_total = _
+                        {if} karte_3 _ 'Ass':
+                            deine_punkte_3 = _
+                            deine_gesamtpunkte = _
                         {else}:
-                           {if} your_total _
+                           {if} deine_gesamtpunkte _
                                 _
                             {else}:
                                 _
                         {print} _
 
-                    # Extra card for the dealer
-                    {if} dealer_total < 17
+                    # Extra Karte für den Geber
+                    {if} geber_gesamtpunkte < 17
                     _
                     ```
     blackjack_4:
         name: Blackjack 4
         default_save_name: Blackjack_4
-        description: Blackjack part 4
+        description: Blackjack Teil 4
         levels:
             17:
                 story_text: |
-                    In the last 3 adventures you have alsmost created a working blackjack game! The only thing left to do is to decide a winner!
-
-                    ### Exercise
-                    ***Paste your code from the previous adventure*** Start by pasting the code that you've made so far into your programming field.
-
+                    In den letzten 3 Abenteuern hast du fast ein funktionierendes Blackjack Spiel geschrieben! Jetzt fehlt nur noch, den Gewinner zu bestimmen
+                    *
+                    Paste your code from the previous adventure*** Start by pasting the code that you've made so far into your programming
                     ***Decide a winner***
                     Firstly, if you and the dealer have an equal amount of points, it's a draw.
                     Secondly, if the dealer has more than 21 points and you don't, you are the winner.
@@ -573,13 +571,13 @@ adventures:
                     If it doesn't work right away, no worries, you might have made a mistake. Just keep calm and bebug your code using the ladybug button.
                 example_code: |
                     ```
-                    # Paste your code from the previous adventure here
+                    # Füge das Programm aus dem vorherigen Abenteuer hier ein
 
-                    # Decide a winner
+                    # Bestimme den Gewinner
                     {if} _
-                        {print} 'Its a draw! Play again!'
+                        {print} 'Unentschieden! Spiele nochmal!'
                     {elif} _
-                        {print} 'You win!'
+                        {print} 'Du gewinnst!'
                     {elif} _ :
                         {if} _:
                             {print} _
@@ -2556,7 +2554,7 @@ adventures:
                 example_code: |
                     ```
                     name {is} {ask} 'Wie heißt du?'
-                    {if} name {is} Hedy {print} 'Wünderbar' {else} {print} 'Buh!'
+                    {if} name {is} Hedy {print} 'Wunderbar' {else} {print} 'Buh!'
                     ```
                 story_text_2: |
                     Machmal wird der Code mit einem `{if}` wirklich lang und passt nicht gut in eine Zeile. <br> Du kannst dann den Code auf zwei Zeilen verteilen. Die zweite Zeile beginnt mit einem `{else}` dann so:
@@ -2571,7 +2569,7 @@ adventures:
                     Versuche dein eigenes Programm mit `{if}` und `{else}` zu schreiben. Wenn du willst, kannst du das Beispielprogramm verwenden.
                 example_code_3: |
                     ```
-                    answer {is} {ask} '2 + 2 = ?'
+                    antwort {is} {ask} '2 + 2 = ?'
                     _ _ _ 4 _ 'Großartig!'
                     _ _ 'Nein, 2 + 2 = 4'
                     ```
@@ -2636,7 +2634,7 @@ adventures:
                     ```
     is_command:
         name: '{is}'
-        default_save_name: ist-Befehl
+        default_save_name: ist_Befehl
         description: Einführung des {is}-Befehls
         levels:
             2:
@@ -2665,43 +2663,45 @@ adventures:
                 example_code: |
                     ```
                     name = Hedy
-                    answer = 20 + 4
+                    antwort = 20 + 4
                     ```
             14:
                 story_text: |
-                    We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.
-                    The `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.
-                    If you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.
-                    The `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.
-                    If you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.
-                    You use these comparisons in an `{if}`, like this:
+                    Wir lernen neue Elemente kennen. Aus der Mathematik kennst du vielleicht schon `<` und `>`.
+                    Das `<`prüft, ob die erste Zahl kleiner als die zweite ist. Zum Beispiel prüft alter `<`12, ob alter kleiner als 12 ist.
+                    Falls zu prüfen willst, ob die erste Zahl kleiner oder gleich der zweiten ist, kann du `<=` verwenden, zum Beispiel alter `<=` 11
+                    Das `>` prüft, ob die erste Zahl größer als die zweite ist, zum Beispiel punkte `>`10 prüft, ob punkte größer als 10 ist.
+                    Falls du prüfen willst ob die erste Zahl größer als oder gleich der zweiten ist, kannst du `>=`verwenden, zum Beispiel punkte `>=` 11.
+                    Benutze diese Vergleiche so in einem `{if}`:
                 example_code: |
                     ```
-                    age = {ask} 'How old are you?'
-                    {if} age > 12
-                        {print} 'You are older than I am!'
+                    alter = {ask} 'Wie also bist Du?
+                    {if} alter > 12
+                        {print} 'Du bist älter als ich!'
+                    ```
+                    ```
+                    alter = {ask} 'Wie alt bist du?'
+                    {if} alter < 12
+                        {print} 'Du bist jünger als ich!'
+                    {else}
+                        {print} 'Du bist älter als ich!'
                     ```
                 story_text_2: |
-                    From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:
+                    Ab diesem Level kannst du zwei Gleichheitszeichen verwenden, um etwas zu vergleichen. Das ist in den meisten Programmiersprachen so:
                 example_code_2: |
                     ```
-                    name = {ask} 'What is your name?'
+                    name = {ask} 'Wie heisst du?'
                     {if} name == 'Hedy'
-                        {print} 'You are cool!'
+                        {print} 'Du bist cool!'
                     ```
                 story_text_3: |
-                    You can also compare if something is *not* equal to something else using `!=` like this:
+                    Du kannst auch vergleichen, ob etwas *nicht* gleich wie etwas anderes ist. Dazu benutzt du so `!=`:
                 example_code_3: |
                     ```
-                    name = {ask} 'What is your name?'
+                    name = {ask} 'Wie heisst du?'
                     {if} name != 'Hedy'
-                        {print} 'You are not Hedy'
+                        {print} 'Du bist nicht Hedy'
                     ```
-
-                    {if} age < 13
-                        {print} 'You are younger than me!'
-                    {else}
-                        {print} 'You are older than me!'
     language:
         name: Sprache
         default_save_name: Sprache
@@ -2931,10 +2931,10 @@ adventures:
                     Nachdem wir den `{repeat}`Befehl auch für mehrere Zeilen verwenden können, ist es noch leichter, Lieder zu schreiben!
 
                     ### Übung
-                    Vervollständige das Lieder von Brother John (Bruder Jakob). Vergiss nicht, `{repeat}` zu benutzen!
+                    Vervollständige das Lieder von Bruder Jakob. Vergiss nicht, `{repeat}` zu benutzen!
                 example_code: |
                     ```
-                    {print} 'Brother John'
+                    {print} 'Bruder Jakob'
                     {repeat} 2 {times}
                         {play} C
                         {play} D
@@ -3095,7 +3095,7 @@ adventures:
                     Wir haben die erste Zeile für dich definiert und den Aufruf im Programm eingefügt. Kannst du das ganze Lied vervollständigen?
                 example_code: |
                     ```
-                    {define} line_1
+                    {define} zeal_1
                         {for} i {in} {range} 1 {to} 3
                             {play} G
                         {play} D
@@ -3103,14 +3103,14 @@ adventures:
                             {play} E
                         {play} D
 
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
-                    for i in range 1 to 3
-                        animal = animals[i]
-                        sound = sounds[i]
-                        print 'Old MacDonald had a farm'
-                        call line_1
-                        print 'E I E I O!'
+                    tiere = ['Schwein', 'Hund', 'Kuh']
+                    laute = ['quieck', 'wau', 'muh']
+                    {for} i {in} {range} 1 {to} 3
+                        tier = tiere[i]
+                        laut = laute[i]
+                        {print} 'Old MacDonald had a farm'
+                        {call} zeile_1
+                        {print} 'E I E I O!'
                         _
                     ```
             17:
@@ -3537,37 +3537,40 @@ adventures:
                     ```
     repeat_command:
         name: '{repeat}'
-        default_save_name: repeat_command
-        description: repeat command
+        default_save_name: wiederhole_Befehl
+        description: '{repeat} Befehl'
         levels:
             7:
                 story_text: |
-                    ## Repeat! Repeat! Repeat!
-                    Level 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times. Like this:
+                    ## Wiederhole!Wiederhole!Wiederhole!
+                    In Level 7 kommt der `{repeat}`Befehl. `{repeat}` kann benutzt werden, um eine Zeile Code mehrmals auszuführen. So:
 
-                    ### Exercise
-                    Play around with the repeat command. Can you make the happy birthday song in only 3 lines of code instead of 4 now?
+                    ### Übung
+                    Spiele mit dem `{repeat}` Befehl. Kannst du Happy Birthday mit 3 Zeilen anstellen von 4 machen?
                 example_code: |
                     ```
-                    {repeat} 3 {times} {print} 'Hedy is fun!'
+                    {repeat} 3 {times} {print} 'Hedy macht Spaß!'
                     ```
             8:
                 story_text: |
-                    ### Repeat commands and indentation
-                    In this level you can repeat multiple lines of code with only 1 repeat command.
-                    You do this by making a block of lines that you want to repeat.
-                    The lines in this block will need **indentation** .
-                    That means putting four spaces at the beginning of each line. You will also have to indent when you just want to create a block of one line.
+                    ### Wiederhole Befehle und Einrückung
+                    In diesem Level kannst du mehrere Zeilen Code wiederholte ausführen mit nur einem wiederhole Befehl.
+                    Das kannst du machen, indem du einen Block mit den Zeilen machst, die du wiederholen willst.
+                    Die Zeilen des Blocks brauchen **Einrückung**
+                    Das bedeutet, dass du 4 Leerzeichen an den Anfang jeder Zeile setzt. Du musst auch einrücken, wenn du einen Block mit nur einer Zeile erzeugen willst.
                 example_code: |
                     ```
                     {repeat} 5 {times}
-                        {print} 'Hello everyone'
-                        {print} 'This is all repeated 5 times'
+                        {print} 'Hallo zusammen'
+                        {print} 'Alles wird 5 mal wiederholt'
                     ```
             9:
                 story_text: |
-                    Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...
-                    Good news! In this level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command. Putting a block of code inside another block of code is called nesting.                     ``` Putting a block of code inside another block of code is called nesting.
+                    Toll gemacht! Du hast einen weiteren neuen Level erreicht! Im vorherigen Level hast du gelernt, mehrere Zeile Code in einem `{if}` oder `{repeat}` Befehl zu benutzen.
+                    Aber du kannst noch nicht beide kombinieren...
+
+                    Gute Nachrichten! In diesem Level darfst du ein `{if}`in einem `{if}`, `{repeat}`in einem `{repeat}`und jeweils ineinander zu verwenden.
+                    Versuch es!
                 example_code: |
                     ```
                     {repeat} 3 {times}
@@ -3579,45 +3582,45 @@ adventures:
                     ```
     repeat_command_2:
         name: '{repeat} 2'
-        default_save_name: repeat_command_2
-        description: repeat command 2
+        default_save_name: wiederhole_Befehl_2
+        description: '{repeat} Befehl 2'
         levels:
             7:
                 story_text: |
-                    ## Repeat with other commands and with variables
-                    You have practiced the `{repeat}` command in combination with the `{print}` command now, but did you know you could also use other commands with `{repeat}` ?
-                    In this example code you can see that `{repeat}` can also be used with an `{ask}`, `{if}` or `{else}` command.
+                    ## Wiederhole mit anderen Befehlen und mit Variablen
+                    Das hast den `{repeat}`Befehl zusammen mit dem `{print}` Befehl gebaut. Aber wusstest du, dass du auch andere Befehle mit `{repeat}`verwenden kannst?
+                    In diesem Beispielprogramm siehst du, dass `{repeat}` auch zusammen mit `{ask}`, `{if}` oder `{else}` verwendet werden kann.
                 example_code: |
                     ```
-                    {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
-                    {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
-                    {else} {repeat} 3 {times} {print} 'You have learned something new!'
+                    {repeat} 2 {times} antwort = {ask} 'Wusstest du, dass du eine Frage mehrfach stellen kannst?'
+                    {if} antwort {is} ja {repeat} 2 {times} {print} 'Das wusstest du schon!'
+                    {else} {repeat} 3 {times} {print} 'Du hast was Neues gelernt!'
                     ```
                 story_text_2: |
-                    Another interesting thing you can so with the `{repeat}` command is using variables to set the amount of times something should be repeated. In the example code you can see that we first ask the person how old they are.
-                    Then, in line 3, the question is repeated 'age' times. So we have used the variable 'age' with the `{repeat}` command.
+                    Etwas anderes Interessantes, das du mit dem `{repeat}` Befehl machen kannst ist, Variablen zu verwenden um die Anzahl der Wiederholungen zu bestimmen. In dem Beispielprogramm kannst du sehen, dass wir die Person zuerst fragen, wie alt sie ist.
+                    In Zeile 3 wird diese Frage dann 'alter' Male wiederholt. Dazu müssen wir die Variable 'alter' mit dem `{repeat}` Befehl verwenden.
                 example_code_2: |
                     ```
-                    {print} 'Yay! It is your birthday!'
-                    age = {ask} 'How old are you now?'
-                    {repeat} age {times} {print} 'Hip Hip Hurray!'
+                    {print} 'Yuhu! Es ist dein Geburtstag!'
+                    alter = {ask} 'Wie alt bist du geworden?'
+                    {repeat} alter {times} {print} 'Hip Hip Hurra!'
                     ```
             8:
                 story_text: |
-                    ### In the block or not?
-                    In this level you have to think carefully which lines of code should be in the block and which shouldn't.
-                    For example: If you want to sing the song *the muffin man*. You only want the line with 'the muffin man' to be repeated twice.
-                    This means the last line shouldn't start with indentation as it doesn't belong to the block.
-                    If you do start the last line with indentation the song will turn out wrong.
+                    ### Im Block oder nicht?
+                    In diesem Level musst du sorgfältig darüber nachdenken, welche Code Zeilen in dem Block sein sollten und welche nicht.
+                    Zum Beispiel: Wenn du das Lied *vom Muffin Mann* singen willst, sollte die Zeile mit dem 'den Muffin Mann' zwei mal wiederholt werden.
+                    Das bedeutet, dass die letzte Zeile nicht mit einer Einrückung beginnen sollte, weil sie nicht zum Block gehört.
+                    Wenn du die letzte Zeile mit einer Einrückung beginnst, wird das Lied falsch.
 
-                    ### Exercise
-                    Each line in the example code starts with a blank. Remove the blanks and try to figure out which line need indentation and which don't to make the muffin man song.
+                    ### Übung
+                    Jede Zeile im Beispielprogram startet mit einem Leerzeichen. Lösche die Leerzeichen und versuche herauszufinden, welche Zeilen einrückt werden müssen und welche nicht, um das Lied vom Muffin Mann zu schreiben.
                 example_code: |
                     ```
-                    _ {print} 'Do you know the muffin man?'
+                    _ {print} 'Kennst du denn den Muffin Mann?'
                     _ {repeat} 2 {times}
-                    _ {print} 'The muffin man'
-                    _ {print} 'Do you know the muffin man, who lives on Drury Lane?'
+                    _ {print} 'Den Muffin Mann'
+                    _ {print} 'Kennst du den Muffin Mann, der wohnt in Dury Lane.'
                     ```
     restaurant:
         name: Restaurant
@@ -4768,8 +4771,8 @@ adventures:
                 example_code_2: |
                     ```
                     richtung {is} {ask} 'Möchtest du links, rechts oder geradeaus gehen?'
-                    {if} richtung {is} left {turn} _
-                    {if} richtung {is} right {turn} _
+                    {if} richtung {is} links {turn} _
+                    {if} richtung {is} rechts {turn} _
                     {forward} 100
                     ```
             6:
@@ -4815,7 +4818,7 @@ adventures:
                         {forward} 50
                     ```
                 story_text_2: |
-                    **(extra)**Wir können auch das Programm verbessern, das verschiedene Formen zeichnet. Vervollständige den Code und du kannst jedes Vieleck zeichnen, das du möchtest!
+                    **Extra** Wir können nun das Programm verbessern, das verschiedene Formen zeichnet. Vervollständige den Code und du kannst jedes Vieleck zeichnen, das du möchtest!
                 example_code_2: |
                     ```
                     Ecken = {ask} 'Wie viele Ecken soll die Form haben?'
@@ -4831,7 +4834,7 @@ adventures:
                     ### Übung 1
                     Dieser Code erzeugt drei schwarze Dreiecke, ändere dies zu fünf pinken Quadraten.
 
-                    **(extra)** Erstelle eine Figur deiner Wahl, die aus mindestens zwei verschiedenen Formtypen besteht.
+                    **Extra** Erstelle eine Figur deiner Wahl, die aus mindestens zwei verschiedenen Formtypen besteht.
                 example_code: |
                     ```
                     {color} {black}
