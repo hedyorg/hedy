@@ -3868,7 +3868,7 @@ adventures:
                     Wpisz poprawny kod w pustych polach, aby sprawdzić, czy jest remis.
             9:
                 story_text: "W tym poziomie można zaprogramować całą grę kamień, papier, nożyce poprzez zagnieżdżanie poleceń `{if}`. \n\n### Ćwiczenie\nCzy potrafisz dokończyć kod? Program musi powiedzieć, kto wygrał dla każdej kombinacji.\n\n**Dodatkowo** Chcesz zagrać w więcej niż jedną grę? Rozwiń kod tak, aby można było rozegrać wiele rund. Możesz nawet użyć `{ask}`, aby zapytać użytkownika, ile rund chce zagrać.\n"
-                example_code: "```\nopcje = papier, kamień, nożyce\ntwój_wybór {is}{ask} 'Co wybierasz?'\n{print} 'Wybrałeś ' twój_wybór \nwybór_komputera {is}opcje {at} {random}\n{print} 'Komputer wybiera ' wybór_komputera \n{if} wybór_komputera {is} twój_wybór \n    {print} 'remis'\n{if} wybór_komputera {is} kamień\n    {if} twój_wybór  {is} papier\n        {print} 'Wygrałeś!'\n    {if} twój_wybór  {is} nożyce\n        {print} 'Przegrałeś!'\n#dokończ program\n```\n"
+                example_code: "```\nchoices = rock, paper, scissors\nyour_choice {is} {ask} 'What do you choose?'\n{print} 'You choose ' your_choice\ncomputer_choice {is} choices {at} {random}\n{print} 'The computer chooses ' computer_choice\n{if} computer_choice {is} your_choice\n    {print} 'Tie'\n{if} computer_choice {is} rock\n    {if} your_choice {is} paper\n        {print} 'You win!'\n    {if} your_choice {is} scissors\n        {print} 'You lose!'\n# finish this code\n```\n"
             10:
                 story_text: |
                     ### Ćwiczenia
@@ -4684,9 +4684,9 @@ adventures:
                 example_code: |
                     ```
                     {turn} 90
-                    odległości = 10, 20, 30, 40, 50, 60
-                    {for} odległość{in} odległości
-                        {forward} odległość
+                    distances = 10, 20, 30, 40, 50, 60
+                    {for} distance {in} distances
+                        {forward} distance
                     ```
             12:
                 story_text: |
@@ -4838,20 +4838,20 @@ adventures:
                     flagi <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
                     </div>
                 example_code: |
-                    Wskazówka dla zagnieżdżonych kwadratów:
+                    Hint for the nested squares:
                     ```
-                    kolory = czerwony, niebieski, pomarańczowy, żółty, różowy, fioletowy, zielony, brązowy, czarny
-                    odległość= 120
+                    colors = red, blue, orange, yellow, pink, purple, green, brown, black
+                    distance = 120
                     {repeat} 5 {times}
                     _
                     ```
-                    Wskazówka dotycząca flag:
+                    Hint for the flags:
                     ```
-                    kraj = {ask} 'Jakiego kraju chciałbyś zobaczyć flagę?'
-                    {if}kraj {is}'Holandia'
-                        kolor_1 =czerwony
-                        kolor_2 = biały
-                        kolor_3 = niebieski
+                    country = {ask} 'which country would you like to see the flag of?'
+                    {if} country {is} 'the Netherlands'
+                        color_1 = red
+                        color_2 = white
+                        color_3 = blue
                     ```
             10:
                 story_text: |
