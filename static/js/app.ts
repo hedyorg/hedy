@@ -191,6 +191,7 @@ export interface InitializeCodePageOptions {
   readonly initial_tab: string;
   readonly current_user_name?: string;
   readonly suppress_save_and_load_for_slides?: boolean;
+  readonly enforce_developers_mode?: boolean;
 }
 
 /**
@@ -254,8 +255,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
         adventure.save_info = 'local-storage';
       }
     }
-
-    reconfigurePageBasedOnTab();
+    reconfigurePageBasedOnTab(options.enforce_developers_mode);
     checkNow();
     theLocalSaveWarning.switchTab();
   });
@@ -1416,12 +1416,12 @@ export function setDevelopersMode(event='click', enforceDevMode: boolean) {
       enable = $('#developers_toggle').prop('checked');
       break;
   }
-  window.localStorage.setItem('developer_mode', `${enable}`)
-  toggleDevelopersMode()
+  if (!enforceDevMode) window.localStorage.setItem('developer_mode', `${enable}`)
+  toggleDevelopersMode(!!enforceDevMode)
 }
 
-function toggleDevelopersMode() {
-  const enable = window.localStorage.getItem('developer_mode') === 'true';
+function toggleDevelopersMode(enforceDevMode: boolean) {
+  const enable = window.localStorage.getItem('developer_mode') === 'true' || enforceDevMode;
   // DevMode hides the tabs and makes resizable elements track the appropriate size.
   // (Driving from HTML attributes is more flexible on what gets resized, and avoids duplicating
   // size literals between HTML and JavaScript).
@@ -1712,11 +1712,11 @@ function updatePageElements() {
 /**
  * After switching tabs, show/hide elements
  */
-function reconfigurePageBasedOnTab() {
+function reconfigurePageBasedOnTab(enforceDevMode?: boolean) {
   resetWindow();
 
   updatePageElements();
-  toggleDevelopersMode();
+  toggleDevelopersMode(!!enforceDevMode);
   if (currentTab === 'parsons') {
     loadParsonsExercise(theLevel, 1);
     // remove the fixed height from the editor
