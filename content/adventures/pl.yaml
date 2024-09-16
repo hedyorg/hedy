@@ -1993,7 +1993,7 @@ adventures:
                     {def} oblicz_wynik(odpowiedź, poprawna_odpowiedź):
                         {if} odpowiedź == poprawna_odpowiedź:
                             wynik = 1
-                        {elif} answer == '?':
+                        {elif} odpowiedź == '?':
                             wynik = 0
                         {else}:
                             wynik = -1
@@ -4643,7 +4643,7 @@ adventures:
                         {forward} 50
                     ```
                 story_text_2: |
-                    **Dodatkowo** Możemy teraz ulepszyć program, który rysuje różne figury. Dokończ kod i możesz narysować dowolny wielokąt, który chcesz!
+                    **(dodatkowe zadanie)** Możemy teraz ulepszyć program, który rysuje różne figury. Dokończ kod i możesz narysować dowolny wielokąt, który chcesz!
                 example_code_2: |
                     ```
                     figura = {ask} 'Ile kątów mam narysować?'
@@ -4678,9 +4678,9 @@ adventures:
                     ### Ćwiczenie 1
                     Dodaj obrót o 90 stopni w pętli, aby narysować spiralę.
                     Dodaj co najmniej 5 liczb do listy, aby spirala powiększyła się.
-                    **Dodatkowo ** Czy możesz zmienić spiralę na inny kształt? Eksperymentuj z liczbami!
+                     **(Dodatkowo) ** czy możesz zmienić spiralę na inny kształt? Eksperymentuj z liczbami obrotów!
                     ### Ćwiczenie 2
-                    Spirala idzie na zewnątrz, czy do wewnątrz?
+                    Spirala jest wyciągnięta na zewnątrz, czy idzie do wewnątrz?
                 example_code: |
                     ```
                     {turn} 90
@@ -4690,16 +4690,16 @@ adventures:
                     ```
             12:
                 story_text: |
-                    Możemy używać funkcji do rysowania bardziej złożonych cyfr przy mniejszej ilości kodu.
+                    Możemy używać funkcji do rysowania bardziej złożonych figur przy mniejszej ilości kodu.
                     ### Ćwiczenie 1
                     Wypełnij funkcję, aby utworzyć trzy kwadraty. Jeśli chcesz, aby obraz wyglądał ładniej, możesz ustawić linie między kwadratami na biało.
 
-                    ### Ćwiczenie 2
-                    Kod można jeszcze skrócić. Umieść końcowe linie w `{repeat}`, aby figura pozostała taka sama.
+                    ### Ćwiczenie  2
+                    Kod można jeszcze skrócić. Umieść końcowe linie w `{repeat}`, aby liczba pozostała taka sama.
 
-                    ### Ćwiczenie 3
-                    Stwórz własny rysunek z różnymi figurami.
-                    Zmień zarówno liczbę figur za pomocą `{repeat}`, jak i kształt w `{define}`
+                    ### Ćwiczenie  3
+                    Stwórz własny rysunek z różnymi figurami
+                    Zmień zarówno liczbę figur za pomocą `{repeat}`, jak i kształt cyfr w `{define}`
                 example_code: |
                     ```
                     {define} kwadrat
@@ -4713,52 +4713,52 @@ adventures:
                     {call} kwadrat
                     ```
     turtle_draw_it:
-        name: Narysuj to!
+        name: Narysuj to !
         default_save_name: Narysuj to
-        description: Narysuj ten rysunek za pomocą żółwia
+        description: Narysuj ten obrazek za pomocą żółwia
         levels:
             1:
                 story_text: |
                     ### Ćwiczenie
-                    Odtwórz rysunki żółwiem!
+                    Odtwórz rysunki za pomocą żółwia!
 
                     <div class="w-full flex flex-row gap-2">
-                        Prostokąt <img src="https://github.com/hedyorg/hedy/assets/80678586/77aa99d5-cd8f-4969-b49d-e8fed34ac550" width="100">
-                        Kwadrat <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
-                        Schodki<img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
+                        prostokąt <img src="https://github.com/hedyorg/hedy/assets/80678586/77aa99d5-cd8f-4969-b49d-e8fed34ac550" width="100">
+                        kwadrat <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
+                        schodki<img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
                     </div>
             2:
                 story_text: |
                     ### Ćwiczenie
-                    Odtwórz rysunki żółwiem!
+                    Odtwórz rysunki za pomocą żółwia!
 
                     <div class="w-full flex flex-row gap-2">
                     trójkąt <img src="https://github.com/hedyorg/hedy/assets/80678586/e974b62c-f0cf-445a-8bd4-5ad9f1f71204" width="100">
-                    strzałka<img src="https://github.com/hedyorg/hedy/assets/80678586/803d8f42-9708-448c-82ea-d035697f08c9" width="150">
+                    strzałka <img src="https://github.com/hedyorg/hedy/assets/80678586/803d8f42-9708-448c-82ea-d035697f08c9" width="150">
                     łódka <img src="https://github.com/hedyorg/hedy/assets/80678586/94ef7189-442a-4c8f-827d-12a69203c2e9" width="150">
                     </div>
             3:
                 story_text: |
                     ### Ćwiczenie
-                    Odtwórz rysunki żółwiem!
+                    Odtwórz rysunki za pomocą żółwia!
 
                     <div class="w-full flex flex-row gap-2">
                     trójkąt <img src="https://github.com/hedyorg/hedy/assets/80678586/71e04d98-9545-4614-9caf-a5f179b756a1" width="150">
                     gwiazda <img src="https://github.com/hedyorg/hedy/assets/80678586/421c4d28-cb99-424b-be26-dcae30d65c80" width="150">
-                    Strzałka <img src="https://github.com/hedyorg/hedy/assets/80678586/3cbebcae-5258-47c5-a6ac-e7ee36c1d1ce" width="200">
+                    strzałka <img src="https://github.com/hedyorg/hedy/assets/80678586/3cbebcae-5258-47c5-a6ac-e7ee36c1d1ce" width="200">
                     </div>
             4:
                 story_text: |
                     ### Ćwiczenie
-                    Odtwórz rysunki żółwiem!
+                    Odtwórz rysunki za pomocą żółwia!
 
                     <div class="w-full flex flex-row gap-2">
-                    kolorowa gwaizda <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
+                    kolorowa gwiazda <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
                     tęcza <img src="https://github.com/hedyorg/hedy/assets/80678586/2728b10f-9f7f-45ea-964e-5b284033e4f0" width="500">
-                    kwadraty blisko siebie <img src="https://github.com/hedyorg/hedy/assets/80678586/f013f9fa-bc68-4c60-b778-2c457799d6f7" width="200">
+                    kwadraty <img src="https://github.com/hedyorg/hedy/assets/80678586/f013f9fa-bc68-4c60-b778-2c457799d6f7" width="200">
                     </div>
                 example_code: |
-                    **Dodatkowo ** Masz ochotę na prawdziwe wyzwanie? Upewnij się, że kolory tych liczb są wybierane losowo, aby za każdym razem, gdy uruchamiasz programy,będą wyglądały inaczej!
+                    **Dodatkowo** Masz ochotę na prawdziwe wyzwanie? Upewnij się, że kolory tych figur są wybierane losowo, aby za każdym razem, gdy uruchamiasz program, wyglądały inaczej!
 
                     ```
                     kolory {is} czerwony, pomarańczowy, żółty, zielony, niebieski, fioletowy, różowy, brązowy, szary, czarny
@@ -4767,7 +4767,7 @@ adventures:
             5:
                 story_text: |
                     ### Ćwiczenie
-                    Odtwórz rysunki żółwiem!
+                    Odtwórz rysunki za pomocą żółwia!
 
                     **Dodatkowo ** Utwórz tylko jeden kod, który pozwala graczowi zdecydować, którą literę chciałby zobaczyć! Czy możesz dodać jeszcze więcej liter?
 
@@ -4779,17 +4779,17 @@ adventures:
                 example_code: |
                     Wskazówka:
                     ```
-                    wybrana_litera {is} {ask} 'Które litery chciałbyś zobaczyć? F, E or L?'
+                    wybrana_litera {is} {ask} 'Który literę chciałbyś zobaczyć? F, E or L?'
                     {if} _
                     ```
             6:
                 story_text: |
                     ### Ćwiczenie
-                    Odtwórz rysunki żółwiem!
+                    Odtwórz rysunki za pomocą żółwia!
 
-                    **Dodatkowo** Pozwól graczowi zdecydować, jaki kolor powinien mieć kwadrat.
+                    **Dodatkowo ** Pozwól graczowi zdecydować, jaki kolor powinien mieć kwadrat.
 
-                    ***Dodatkowo*** Czy potrafisz zrobić literę ze swojego własnego imienia i flagą własnego kraju?
+                    ***Dodatkowo*** Czy potrafisz napisać literę z własnego imienia i flagą własnego kraju?
 
                     <div class="w-full flex flex-row gap-2">
                     kwadrat <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="150">
@@ -4797,14 +4797,14 @@ adventures:
                     flaga <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
                     </div>
                 example_code: |
-                    Wskazówka dla kwadratu:
+                    Wskazówka dotycząca kwadratu:
                     ```
                     wybrany_kolor = {ask} _
                     ```
             7:
                 story_text: |
                     ### Ćwiczenie
-                    Odtwórz rysunki żółwiem!
+                    Odtwórz rysunki za pomocą żółwia!
 
                     <div class="w-full flex flex-row gap-2">
                     sześciokąt <img src="https://github.com/hedyorg/hedy/assets/80678586/92e492e1-1593-489b-aaf0-51d2a29755f4" width="200">
@@ -4814,27 +4814,27 @@ adventures:
             8:
                 story_text: |
                     ### Ćwiczenie
-                    Odtwórz rysunki żółwiem!
+                    Odtwórz rysunki za pomocą żółwia!
 
-                    **Dodatkowo ** Liczba w nawiasach wskazuje, w ilu wierszach kodu można narysować tę liczbę. Czy możesz to zrobić w tej samej liczbie linii?
+                    ** Dodatkowo** Liczba w nawiasach wskazuje, w ilu wierszach kodu można narysować tę liczbę. Czy możesz to zrobić w tej samej liczbie linii?
 
                     <div class="w-full flex flex-row gap-2">
-                    kwadrat (3) <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
+                    kwadrat(3) <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
                     Losowo pokolorowana gwiazda (5) <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
                     Losowo pokolorowana spirala (7) <img src="https://github.com/hedyorg/hedy/assets/80678586/9bcdb3f1-367d-4ae0-878f-d09005424a35" width="150">
                     </div>
             9:
                 story_text: |
-                    ### Ćwiczenia
-                    Odtwórz rysunki żółwiem!
+                    ### Ćwiczenie
+                    Odtwórz rysunki za pomocą żółwia!
 
                     **Dodatkowo ** Liczba w nawiasach wskazuje, w ilu wierszach kodu można narysować tę liczbę. Czy możesz to zrobić w tej samej liczbie linii?
 
-                    **Dodatkowo ** Daj graczowi wybór kraju, którego flagę chcieliby zobaczyć .
+                    **Dodatkowo ** Pozwól graczowi wybrać kraj, którego flagę chciałby zobaczyć.
 
                     <div class="w-full flex flex-row gap-2">
                     krzyż (7) <img src="https://github.com/hedyorg/hedy/assets/80678586/76e42c76-aa3f-4863-8eee-ead73c09a186" width="150">
-                    Losowo pokolorowane zagnieżdżone kwadraty (8) <img src="https://github.com/hedyorg/hedy/assets/80678586/17f878cc-e893-4c10-b32e-a09a50bf08de" width="200">
+                    losowo pokolorowane kwadraty (8) <img src="https://github.com/hedyorg/hedy/assets/80678586/17f878cc-e893-4c10-b32e-a09a50bf08de" width="200">
                     flagi <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
                     </div>
                 example_code: |
