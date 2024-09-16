@@ -1863,15 +1863,26 @@ adventures:
                     ```
             5:
                 story_text: |
-                    In this level you'll learn to (secretly) tip the odds in your favor, when using the fortune teller!
-                    By using `{if}` and `{else}` you can make sure that you will always get a good fotune, while other people might not.
-                    Check out this example to find out how.
+                    ### Übung
+                    Im Beispielcode siehst du, wie du ein Wahrsageprogramm schreiben kannst, das die Chance auf deiner Seite sind. Dieses Schummel-Programm antwortet, dass du immer im Lotto gewinnst, aber deine Freunde nie.
+
+                    Benutze es, um daraus dein eigenes Programm zu machen, sei kreativ! Zum Beispiel kannst Du ein Programm schreiben, das vorhersagt:
+                    * dein Lieblingssportverein wird alle Konkurrenten schlagen!
+                    * dein Lieblingsfilm wird für die Filmnacht ausgewählt!
+                    * du gewinnst Karten für deine Lieblingsshow!
+                    * du bist am Schönsten von allen, wie in Schneewittchens Spiegel.
+                    Lass deine Vorstellungskraft freien Lauf!
+
+                    Dein Programm muss aus mindestens 10 Zeilen Code bestehen und du musst mindestens einen `{if}` und `{else}` Befehl verwenden.
                 example_code: |
                     ```
-                    {print} 'Ich bin Hedy die Wahrsagerin!'
-                    {print} 'Ich kann vorhersehen, ob du morgen die Lotterie gewinnst!'
-                    Person {is} {ask} 'Wer bist du?'
-                    {if} Person {is} Hedy {print} 'Du wirst sicher gewinnen!🤩' {else} {print} 'Pech gehabt! Jemand anderes wird gewinnen!😭'
+                    Freunde {is} Jörg, Luzie, David
+                    {print} 'Ich kann vorhersehen, ob du morgen im Lotto gewinnst!
+                    Person {is} {ask} 'Wie heißt du?'
+                    gute_Antwort {is} Hurra! Du gewinnst!, Du gewinnst sicher!, Wir haben ein Gewinner!
+                    schlechte_Antwort {is} Pech gehabt!, Versuch nochmal!, Jemand andere wird gewinnen!, Du verlierst
+                    {if} Person {in} Freunde {drucke} gute_Antwort {at} {random}
+                    {else} {print} schlechte_Antwort {at} {random}
                     ```
             6:
                 story_text: |
@@ -1895,34 +1906,21 @@ adventures:
                     {sleep}
                     {print} Kinder ' Kinder!'
                     ```
-
-                    Wenn das vorige Beispiel dir nicht albern genug war, schau dir dieses an!
-                    ```
-                    {print} 'Ich bin Hedy die alberne Wahrsagerin!'
-                    {print} 'Ich werde vorhersagen wie schlau du bist!'
-                    Fußball = {ask} 'Auf einer Skala von 1 bis 10, wie sehr magst du Fußball?'
-                    Bananen = {ask} 'Wie viele Bananen hast du diese Woche gegessen?'
-                    Hygiene = {ask} 'Wie viele Male hast du heute deine Hände gewaschen?'
-                    Ergebnis = Bananen + Hygiene
-                    Ergebnis = Ergebnis * Fußball
-                    {print} 'Du bist ' Ergebnis ' Prozent schlau.'
-                    ```
             7:
                 story_text: |
-                    In this level you can use the `{repeat}` command to make your machine tell multiple fortunes at once.
+                    ### Übung
+                    Vervollständige das Programm, das vorhersagt, ob dein Schatz dich liebt oder nicht.
                 example_code: |
                     ```
-                    {print} 'Ich bin Hedy, die Wahrsagerin!'
-                    {print} 'Du kannst 3 Fragen stellen!'
-                    {repeat} 3 {times} Frage = {ask} 'Was würdest du gerne wissen?'
-                    Antwort = ja, nein, vielleicht
-                    {repeat} 3 {times} {print} 'Meine Kristallkugel sagt... ' Antwort {at} {random}
+                    {print} 'Ich habe Blumen mit magischen Blütenblättern!'
+                    {print} 'Wenn du die Blütenblätter pflückst, wird die die Blume sagen, ob dein Schatz dich liebt!'
+                    Anzahl = {ask} 'Wie viele Blütenblätter willst du pflücken?'
+                    Möglichkeiten = Du wirst geliebt, Du wirst nicht geliebt
+                    _ _ _ _ Möglichkeiten {at} {random}
                     ```
             8:
                 story_text: |
-                    In den vorigen Leveln hast du gelernt `{repeat}` zu nutzen, um die Wahrsagerin 3 Fragen in Folge beantworten zu lassen, aber wir hatten ein Problem die Fragen anzuzeigen.
-                    Jetzt ist das Problem gelöst, weil wir den neuen Weg den `{repeat}` Befehl zu benutzen nutzen.
-                    Im nächsten Beispiel kannst du die Wahrsagerin 3 Fragen stellen lassen und sie auch anzeigen!
+                    Im nächsten Beispiel kannst du die Wahrsagerin mehrere Fragen stellen lassen und sie auch anzeigen!
 
                     ### Übung
                     Kannst du den richtigen Befehl in die Lücken füllen?
@@ -1942,14 +1940,14 @@ adventures:
                     In diesem Level wirst du lernen, das englische Spiel MASH zu programmieren. In diesem Spiel geht es darum, für alle Spieler die Zukunft vorauszusagen. Auf Englisch stehen die Buchstaben für mansion, apartment, shack, und house, was auf Deutsch Schloss, Wohnung, Schuppen und Haus bedeutet.
 
                     ### Übung 1
-                    Füge zwei Namen zur Liste hinzu und sieh wie die Ausgabe des Programms sich verändert, wenn du es ausführst.
+                    Fülle die Leerstellen! Benutze dazu die neuen Befehle, die du in diesem Level gelernt hast.
                 example_code: |
                     ```
                     Häuser = Schloss, Wohnung, Schuppen, Haus
                     Liebe = niemand, eine königliche Person, ihr Nachbar, ihre wahre Liebe
                     Haustiere = Hund, Katze, Elefant
                     Namen = Judith, Ralf, Tim
-                    {for} Name {in} Namen
+                    _
                         {print} Name ' lebt in einem ' Häuser {at} {random}
                         {print} Name ' wird ' Liebe {at} {random} ' heiraten.'
                         {print} Name ' wird eine(n) ' Haustiere {at} {random} ' als Haustier haben.'
@@ -4682,7 +4680,7 @@ adventures:
                     ```
             2:
                 story_text: |
-                    In diesen level kann du Variablen nutzen, um die Schildkröte interaktiv zu machen. Du kannst zum Beispiel die Spieler fragen, wie viele Schritte die Schildkröte machen soll.
+                    In diesen Level kann du Variablen nutzen, um die Schildkröte interaktiv zu machen. Du kannst zum Beispiel die Spieler fragen, wie viele Schritte die Schildkröte machen soll.
                 example_code: |
                     ```
                     antwort {is} {ask} Wie viele Schritte soll die Schildkröte machen?
@@ -4818,7 +4816,7 @@ adventures:
                         {forward} 50
                     ```
                 story_text_2: |
-                    **Extra** Wir können nun das Programm verbessern, das verschiedene Formen zeichnet. Vervollständige den Code und du kannst jedes Vieleck zeichnen, das du möchtest!
+                    **extra**Wir können auch das Programm verbessern, das verschiedene Formen zeichnet. Vervollständige den Code und du kannst jedes Vieleck zeichnen, das du möchtest!
                 example_code_2: |
                     ```
                     Ecken = {ask} 'Wie viele Ecken soll die Form haben?'
@@ -4848,44 +4846,44 @@ adventures:
                     ```
             10:
                 story_text: |
-                    In this level you can make the turtle draw a figure.
-                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
-                    ### Exercise 1
-                    Add a 90 degree turn in the loop, so that a spiral is drawn.
-                    Add at least 5 numbers to the list, so the spiral grows larger.
-                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
-                    ### Exercise 2
-                    The spiral is drawn outwards, make it go inwards?
+                    In diesem Level kannst du die Schildkröte eine Figur zeichnen lassen.
+                    Die Schildkröte wird die Entfernungen in der Liste zurücklegen, eine nach der anderen und dabei immer größere Schritte machen.
+                    ### Übung
+                    Für eine 90 Grad Drehung in der Schleife hinzu, so dass eine Spiral gezeichnet wird.
+                    Füge mindestens 5 Zahlen zu der Liste hinzu, so dass die Spirale größer wird.
+                    **(extra)** kannst du die Spirale in eine andere Form umwandeln? Experimentiere mit Zahlen für die Drehung!
+                    ### Übung 2
+                    Die Spirale wird nach aussen gezeichnet, kannst du sie auch nach aussen zeichnen?
                 example_code: |
                     ```
                     {turn} 90
-                    distances = 10, 20, 30, 40, 50, 60
-                    {for} distance {in} distances
-                        {forward} distance
+                    entfernungen = 10, 20, 30, 40, 50, 60
+                    {for} entfernung {in} entfernungen
+                        {forward} entfernung
                     ```
             12:
                 story_text: |
-                    We can use functions to draw more complex figures with less code.
-                    ### Exercise 1
-                    Fill the function so that three squares are created. If you want the image to look nicer, you can make the lines between the squares white.
+                    Wir können die Funktion verwenden, um mehr Figuren mit weniger Code zeichnen.
+                    ### Übung 1
+                    Fülle die Funktion, so dass drei Quadrate erzeugt werden. Wenn du willst, dass das Bild hübscher aussieht, kannst du die Linien zwischen den Quadraten weiss machen.
 
-                    ### Exercise 2
-                    The code can be made even shorter. Place the final lines into a `{repeat}` so the figure remains the same.
+                    ### Übung 2
+                    Der Code kann noch kürzer gemacht werden. Lege die letzten Zeilen in einen `{repeat}`Befehl, so dass die Figuren gleich bleiben.
 
-                    ### Exercise 3
-                    Create your own drawing with different figures.
-                    Change both the number of figures with the `{repeat}` and the shape of the figures in the `{define}`
+                    ### Übung 3
+                    Erzeuge deine eigene Zeichnung mit verschiedenen Figuren.
+                    Ändere sowohl die Anzahl der Figuren mit dem `{repeat}` Befehl also auch die Form der Figuren im `{define}`.
                 example_code: |
                     ```
-                    {define} square
+                    {define} quadrat
                         {repeat} 4 {times}
                             {turn} _
                             {forward} _
-                    {call} square
+                    {call} quadrat
                     {forward} 50
-                    {call} square
+                    {call} quadrat
                     {forward} 50
-                    {call} square
+                    {call} quadrat
                     ```
     turtle_draw_it:
         name: Zeichne!
