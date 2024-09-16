@@ -3497,34 +3497,34 @@ adventures:
         levels:
             7:
                 story_text: |
-                    ## Repeat with other commands and with variables
-                    You have practiced the `{repeat}` command in combination with the `{print}` command now, but did you know you could also use other commands with `{repeat}` ?
-                    In this example code you can see that `{repeat}` can also be used with an `{ask}`, `{if}` or `{else}` command.
+                    ## Repeat z innymi poleceniami i zmiennymi
+                    Ćwiczyłeś teraz polecenie `{repeat}` w połączeniu z poleceniem`{print}`, ale czy wiesz, że możesz także używać innych poleceń z `{repeat}` ?
+                    W tym przykładowym kodzie widać, że `{repeat}` można również użyć z `{ask}`, `{if}`lub`{else}`.
                 example_code: |
                     ```
-                    {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
-                    {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
-                    {else} {repeat} 3 {times} {print} 'You have learned something new!'
+                    {repeat} 2 {times} odpowiedź = {ask} 'Czy wiedziałeś, że możesz zadać pytanie wiele razy?'
+                    {if} odpowiedź {is} tak {repeat} 2 {times} {print} 'Już o tym wiedziałeś!'
+                    {else} {repeat} 3 {times} {print} 'Nauczyłeś się czegoś nowego!'
                     ```
                 story_text_2: |
-                    Another interesting thing you can so with the `{repeat}` command is using variables to set the amount of times something should be repeated. In the example code you can see that we first ask the person how old they are.
-                    Then, in line 3, the question is repeated 'age' times. So we have used the variable 'age' with the `{repeat}` command.
+                    Kolejną interesującą rzeczą, którą możesz zrobić za pomocą polecenia `{repeat}`, jest użycie zmiennych do ustawienia liczby razy, ile coś powinno zostać powtórzone. W przykładowym kodzie widać, że najpierw pytamy osobę, ile ma lat.
+                    Następnie w wierszu 3 pytanie powtarza się 'wiek' razy. Użyliśmy więc zmiennej 'wiek' z poleceniem `{repeat}`.
                 example_code_2: |
                     ```
-                    {print} 'Yay! It is your birthday!'
-                    age = {ask} 'How old are you now?'
-                    {repeat} age {times} {print} 'Hip Hip Hurray!'
+                    {print} 'Hura! Dziś są twoje urodziny!'
+                    wiek = {ask} 'Ile masz lat?'
+                    {repeat} wiek {times} {print} 'Hura!'
                     ```
             8:
                 story_text: |
-                    ### In the block or not?
-                    In this level you have to think carefully which lines of code should be in the block and which shouldn't.
-                    For example: If you want to sing the song *the muffin man*. You only want the line with 'the muffin man' to be repeated twice.
-                    This means the last line shouldn't start with indentation as it doesn't belong to the block.
-                    If you do start the last line with indentation the song will turn out wrong.
+                    ### W bloku czy nie?
+                    Na tym poziomie musisz dokładnie przemyśleć, które wiersze kodu powinny znajdować się w bloku, a które nie.
+                    Na przykład: jeśli chcesz zaśpiewać piosenkę * muffin man*. Chcesz tylko, aby linia z 'muffin man' została powtórzona dwukrotnie.
+                    Oznacza to, że ostatni wiersz nie powinien zaczynać się od wcięcia, ponieważ nie należy do bloku.
+                    Jeśli zaczniesz ostatni wiersz od wcięcia, utwór okaże się błędny.
 
-                    ## Ćwiczenie
-                    Each line in the example code starts with a blank. Remove the blanks and try to figure out which line need indentation and which don't to make the muffin man song.
+                    ### Ćwiczenie
+                    Każda linia w przykładowym kodzie zaczyna się od pustego pola. Usuń puste pola i spróbuj dowiedzieć się, która linia wymaga wcięcia, a która nie, żeby piosenka zadziałała.
                 example_code: |
                     ```
                     _ {print} 'Do you know the muffin man?'
@@ -3550,7 +3550,7 @@ adventures:
                 example_code_2: "``` \n{print} Witaj w restauracji Hedy 🍟\n_ Co chcesz zamówić?\n {echo} A więc chcesz zamówić\n{print} Dziękuje za zamówienie!\n{print} Zaraz podamy!\n```\n"
             2:
                 story_text: |
-                    Na poziomie 2 możesz rozbudować swoją restaurację za pomocą zmiennych. Na poziomie 1 Hedy mogła wyświetlić {echo} zamówienie tylko raz i pamiętała tylko ostatnią zamówioną rzecz.
+                    Na poziomie 2 możesz rozbudować swoją restaurację za pomocą zmiennych. Na poziomie 1 Hedy mogła wyświetlić `{echo}` zamówienie tylko raz i pamiętała tylko ostatnią zamówioną rzecz.
                     Teraz możesz używać zmiennych, a Hedy może zapamiętać zarówno co zamówiłeś do jedzenie, jak i do picia!
                 example_code: |
                     ```
@@ -3601,12 +3601,14 @@ adventures:
                     ```
             4:
                 story_text: |
-                    ### Exercise
-                    Add the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.
-                    Then, use the `{clear}` command to only show one line at a time in your output screen.
+                    W restauracji należy również używać cudzysłowu podczas korzystania z polecenia `{print}` lub `{ask}`.
 
-                    ### Exercise 2
-                    Go back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots and add some `{clear}` commands.
+                    ### Ćwiczenie
+                    Aby ten kod mógł zadziałać musisz dodać cudzysłowy do tego kodu, ! Uważaj: zmienne nie powinny znajdować się w cudzysłowie.
+                    Następnie użyj polecenia `{clear}`, aby wyświetlać tylko jedną linię na raz na ekranie wyjściowym.
+
+                    ### Ćwiczenie 2
+                    Wróć do poprzedniego poziomu i skopiuj kod restauracji. Spraw, aby kod zadziałał na tym poziomie, dodając znaki cudzysłowu w odpowiednich miejscach i dodaj kilka poleceń `{clear}`.
                 example_code: |
                     ```
                     _ Dodaj cudzysłów do tego kodu _
@@ -3622,27 +3624,32 @@ adventures:
                     ```
             5:
                 story_text: |
-                    Na tym poziomie polecenie `{if}` pozwala Ci na `{ask}` (zapytanie) klientów i udzielanie różnych odpowiedzi.
-                    W poniższym przykładzie widać, że można `{ask}` klienta `{if}` chce usłyszeć specjały, a Hedy może odpowiednio odpowiedzieć.
+                    ### Ćwiczenie
+                    Przykładowy kod pokazuje, jak można zaprogramować, sytuację, w której zabraknie Ci pozycji z menu.
+                    Skopiuj własny kod restauracji z poprzednich poziomów. Stwórz problem w swojej restauracji i zakoduj go, tak jak zostało to zrobione w przykładowym kodzie.
+                    Na przykład może również zabraknąć pozycji z menu lub nie przyjmujesz płatnością kartą kredytową lub maszyna do lodów jest zepsuta.
+
+                    **Dodatkowo ** Czy zaprogramowałeś problem i odpowiednie odpowiedzi? Następnie spróbuj dodać do kodu więcej poleceń `{if}` i `{else}`.
+                    Spróbuj dodać polecenie `{if}` po każdym poleceniu `{ask}` , aby kod był jak najbardziej interaktywny!
                 example_code: |
                     ```
-                    {print} 'Witamy w restauracji Chez Hedy!'
-                    specjał {is} {ask} 'Czy chciałbyś usłyszeć nasze dzisiejsze specjały?'
-                    {if} specjał {is} tak {print} 'Dzisiaj specjalnością jest kurczak piri piri i ryż.' {else} {print} 'Nie ma problemu.'
-                    jedzenie {is} {ask} 'Co chciałbyś zjeść?'
-                    {print} 'Jedno ' jedzenie ', zaraz się pojawi!'
-                    napój {is} {ask} 'Co chciałbyś do tego pić?'
-                    {if} napój {is} cola {print} 'Przepraszam, skończyła nam się cola!' {else} {print} 'Świetny wybór!'
-                    cokolwiek {is} {ask} 'Czy chciałbyś coś jeszcze?'
-                    {print} 'Pozwól, że powtórzę twoje zamówienie…'
-                    {print} 'Jedno ' jedzenie
-                    {if} napój {is} cola {print} 'i…' {else} {print} 'jeden ' napój
-                    {if} cokolwiek {is} nie {print} 'To wszystko!' {else} {print} 'jeden ' cokolwiek
-                    {print} 'Dziękujemy za zamówienie i smacznego!'
+                    posiadane_napoje {is} woda, lemoniada, kola, sok pomarańczowy
+                    napój {is} {ask} 'Czego chciałbyś się napić?'
+                    {if} napój {in} posiadane_napoje {print} ' Już przygotowuję ' napój '!'
+                    {else} {print} 'Przepraszam, ale tego nie sprzedajemy'
                     ```
             6:
                 story_text: |
-                    Na tym poziomie możesz użyć matematyki do obliczenia całkowitej ceny zamówienia klienta, co może sprawić, że Twoja wirtualna restauracja będzie bardziej realistyczna.
+                    Na tym poziomie możesz użyć matematyki do obliczenia całkowitej ceny zamówienia klienta, co może uczynić twoją wirtualną restaurację bardziej realistyczną.
+                    Ale możesz również dodać wiele innych rzeczy do swojej wirtualnej restauracji, na przykład więcej dań.
+
+                    ### Ćwiczenie
+                    Możesz dodać o wiele więcej rzeczy do swojej wirtualnej restauracji. Na przykład możesz...
+                    - zapytaj, ile osób przyjdzie i pomnóż cenę przez ilość osób?
+                    - dodaj inne dania?
+                    - daj ludziom zniżkę, gdy podadzą (tajny) kod kuponu?
+                    - dodaj menu dla dzieci?
+                    - pomyśl o innych fajnych rzeczach do dodania?
                 example_code: |
                     Możesz utworzyć prosty kod restauracji, taki jak ten:
                     ```
@@ -3690,14 +3697,14 @@ adventures:
                     {print} 'Smacznego!'
                     ```
             9:
-                story_text: "Na tym poziomie możesz użyć wcięć, aby Twoja restauracja była bardziej realistyczna i zabawniejsza!\n\n### Ćwiczenie\nWcięcie zostało usunięte z przykładowego kodu.\nCzy potrafisz określić, ile wcięć potrzebuje każda linia, aby kod działał poprawnie?\nJeśli klient zamawia pizzę, Hedy nie powinna pytać, jakiego sosu chce klient.\n\n**Dodatkowo** Restauracja nie posiada wszystkich sosów. Sporządź listę dostępnych sosów i przy każdym zamówieniu napisz, czy je sprzedajesz. <br>\n**Dodatkowo** Pizze mają dodatki. Zapytaj klientów, czego chcą.<br>\n**Dodatkowo** Czy klienci chcą drinka? Zapytaj ich też! <br>                    \n"
+                story_text: "Na tym poziomie możesz użyć wcięć, aby Twoja restauracja była bardziej realistyczna i zabawniejsza!\n\n### Ćwiczenie\nWcięcie zostało usunięte z przykładowego kodu.\nCzy potrafisz określić, ile wcięć potrzebuje każda linia, aby kod działał poprawnie?\nJeśli klient zamawia pizzę, Hedy nie powinna pytać, jakiego sosu chce klient.\n\n**Dodatkowo** Restauracja nie posiada wszystkich sosów. Sporządź listę dostępnych sosów i przy każdym zamówieniu napisz, czy je sprzedajesz. <br>\n**Dodatkowo** Pizze mają dodatki. Zapytaj klientów, czego chcą.<br>\n**Dodatkowo** Czy klienci chcą drinka? Zapytaj ich też! <br>\n"
                 example_code: "```\n{print} 'Witamy w Restauracji Chez Hedy!'\nosoby = {ask} 'Ile osób dzisiaj do nas dołączy?'\n{print} 'Świetnie!'\ncena = 0\n{repeat} osoby {times}\n_ jedzenie = {ask} 'Co chciałbyś zamówić?'\n_ {print} jedzenie \n_ {if} jedzenie {is} frytki\n_ cena = cena + 3\n_ sos = {ask} 'Jaki sos chciałbyś mieć do swoich frytek?'\n_ {if} sos {is} nie\n_ {print} 'bez sosu'\n _ {else}\n_ cena = cena + 1\n_ {print} 'z ' sos\n_ {if} jedzenie {is} pizza\n _ cena = cena + 4\n{print} 'To będzie ' cena ' złotych.'\n{print} 'Smacznego!'\n```\n"
             10:
                 story_text: |
                     Na tym poziomie nauczysz się, jak łatwo pytać o zamówienia na różne dania.
 
                     ### Ćwiczenie 1
-                    Zakończ kod za pomocą `{ask}` w pustych miejscach, tak aby klient był pytany, co chce zjeść w ramach każdego dania.
+                    Zakończ kod za pomocą `{ask}` w pustych miejscach, tak aby klient był pytany, co chce zjeść.
                 example_code: "```\ndania = przystawka, danie główne, deser\n{for} danie {in} dania \n    {print} 'Jakie jest Państwa zamówienie na ' danie '?'\n    _ \n    _\n```\n"
                 story_text_2: |
                     ### Ćwiczenie
@@ -3729,42 +3736,52 @@ adventures:
                     Czy możesz wymyślić kod, aby dać znajomym i rodzinie 15% zniżki?
                 example_code: |
                     ```
-                    price = 0
-                    food = {ask} 'What would you like to order?'
-                    drink = {ask} 'What would you like to drink?'
-                    {if} food {is} 'hamburger'
-                        price = price + 6.50
-                    {if} food {is} 'pizza'
-                        price = price + 5.75
-                    {if} drink {is} 'water'
-                        price = price + 1.20
-                    {if} drink {is} 'soda'
-                        price = price + 2.35
-                    {print} 'That will be ' price ' dollar, please'
+                    cena = 0.0
+                    posiłek = {ask} 'Co chciałbyś zamówić do jedzenia?'
+                    napój = {ask} 'Czego chciałbyś się napić?'
+                    {if} posiłek {is} 'hamburger'
+                        cena = cena + 6.50
+                    {if} posiłek {is} 'pizza'
+                        cena = cena + 5.75
+                    {if} napój {is} 'woda'
+                        cena = cena + 1.20
+                    {if} napój {is} 'soda'
+                        cena = cena + 2.35
+                    {print} 'Za wszystko należy się ' cena ' dolarów'
                     ```
             13:
                 story_text: |
-                    Na tym poziomie możemy wykorzystać nowe komendy do ulepszenia naszej restauracji.
-                    Używamy `{and}`, aby zobaczyć {if} dwie rzeczy są w obu przypadkach.
+                    Na tym poziomie nauczysz się nowych poleceń, aby jeszcze bardziej móc rozszerzyć swój kod.
+
+                    ### Ćwiczenie 1
+                    Umieść `{and}` oraz `{or}` w logicznym miejscu w programie.
+
+                    ### Ćwiczenie 2
+                    Rozbuduj swoją restaurację o co najmniej jeszcze jedeno `{and}` i jedeo `{or}`
+                    Na przykład utwórz specjalny kupon rabatowy, który dotyczy tylko pizzy, lub daj klientowi darmowy napój
+                    z frytkami i naleśnikami. Lub oczywiście coś zupełnie innego!
                 example_code: |
                     ```
-                    price = 10
-                    food = {ask} 'What would you like to eat?'
-                    drinks = {ask} 'What would you like to drink?'
-                    {if} food {is} 'sandwich' {and} drinks {is} 'juice'
-                        {print} 'Thats our discount menu'
-                        price = price - 3
-                    {print} 'That will be ' price ' dollars'
+                    cena = 10
+                    posiłek = {ask} 'Co chciałbyś zjeść?'
+                    napój = {ask} 'Czego chciałbyś się napić?'
+                    {if} posiłek {is} 'kanapka' _ napoje {is} 'napój'
+                        {print} 'To jest nasze menu rabatowe'
+                        cena = cena - 3
+                    {if} napoje {is} 'woda' _ napoje {is} 'napój'
+                        {print} 'To jest zdrowy wybór'
+                    {print} 'Za wszystko należy się ' price ' dolarów'
                     ```
             15:
                 story_text: |
-                    Dzięki `{while}` możesz mieć pewność, że Twoi klienci będą mogli dodawać zamówienia, dopóki ich nie skończą.
-                    ### Exercise
-                    Correctly add the `{while}` command to this code.
+                    Dzięki `{while}` możesz mieć pewność, że Twoi klienci będą mogli dodawać zamówienia, dopóki nie przestaną.
+
+                    ### Ćwiczenie
+                    Poprawnie dodaj do tego kodu polecenie `{while}`
                 example_code: "```\n{print} 'Witamy w McHedy'\nwięcej = 'tak'\n_\n    zamówienie = {ask} 'Co chcesz zamówić?'\n    {print} zamówienie \n    więcej = {ask} 'Czy chciałby Pan/Pani zamówić coś jeszcze?'\n{print} 'Dziękuję!'\n```\n"
     rock:
         name: Papier, kamień, nożyce
-        default_save_name: Kamień
+        default_save_name: Kamień_2
         description: Zrób własną grę w papier, kamień, nożyce
         levels:
             1:
@@ -3790,89 +3807,84 @@ adventures:
                     ```
             2:
                 story_text: |
-                    Na tym poziomie możesz poćwiczyć używanie zmiennych, dzięki będziesz mógł stworzyć grę w papier, kamień, nożyce w następnym poziomie!
-                example_code: |
+                    Na tym poziomie możesz ćwiczyć przy użyciu zmiennych. Dzięki temu będziesz mógł  stworzyć grę w kamień, papier, nożyczki na następnym poziomie!
+                    ### Ćwiczenie
+                    Zakończ kod, wypełniając ** zmienną ** w pustych polach.
+                    Ta gra nie jest zbyt interaktywna, ale nie martw się! Na następnej karcie dowiesz się, jak używać zmiennych za pomocą polecenia `{ask}`, co sprawi, że Twoja gra będzie interaktywna!
+                example_code: |-
                     ```
-                    _ {is} {ask} papier, kamień czy nożyce?
-                    {print} Ja wybrałam _
+                    wybór{is} kamień
+                    {print} Wybieram_
                     ```
             3:
                 story_text: |
-                    Na tym poziomie możemy wprowadzać listy i wybierać z nich rzeczy.
-                    Najpierw tworzysz listę za pomocą `{is}`. Następnie możesz pozwolić komputerowi wybrać coś z listy za pomocą `{at} {random}`.
-                    Na przykład, możesz pozwolić komputerowi wybrać z listy papier, kamień lub nożyce.
+                    Możesz użyć polecenia `{at} {random}`, aby komputer mógł wybrać kamień, papier lub nożyczki!
+
+                    ### Ćwiczenie
+                    Dokończ kod za pomocą polecenia `{at} {random}`
                 example_code: |
                     ```
                     możliwości {is} papier, kamień, nożyce
-                    {print} możliwości  {at} {random}
+                    {print} możliwości_
                     ```
                 story_text_2: |
-                    ### Ćwiczenie
-                    Skopiuj przykładowy kod i wypełnij puste pola, aby dodać dodatkowego gracza do tej gry.
-
-                    **Dodatkowo** Teraz gracze nazywają się po prostu gracz 1 i gracz 2. Czy możesz dodać polecenia pytania (oczywiście ze zmiennymi), aby zapytać graczy o imiona?
-                    W ten sposób możesz stworzyć taki wynik, na przykład: Jacek wybiera... papier
+                    **Dodatkowo** Stwórz grę dla dwóch graczy. Najpierw poproś dwóch graczy o wypełnienie ich imion. Następnie pozwól komputerowi losowo wybrać ich wybory. (możliwości)
                 example_code_2: |
                     ```
                     możliwości {is} papier, kamień, nożyce
-                    {print} gracz 1 wybiera... możliwości  {at} {random}
-                    {print} gracz 2 _
+                    gracz 1 {is}{ask} imię gracza 1
+                    _
                     ```
             4:
                 story_text: |
-                    Na tym poziomie możemy dodatkowo zaprogramować kamień, papier, nożyce. Jeśli chcesz dodać tekst, tutaj również musisz użyć cudzysłowów.
-
+                    Na tym poziomie możemy dalej programować kamień, papier, nożyczki. Ale jeśli chcesz dodać tekst, musisz tutaj również użyć cudzysłowu.
                     ### Ćwiczenie
-                    Fill in quotation marks on the blanks. Mind that the variable `choices` should be outside the quotes.
+                    Wypełnij cudzysłowy w pustych polach. Pamiętaj, że zmienna `choices` powinna znajdować się poza cudzysłowami.
                 example_code: |
                     ```
-                    choices {is} rock, paper, scissors
-                    {print} _The computer chooses..._ choices {at} {random}
+                    możliwości {is} kamień, papier, nożyce
+                    {print}_ Komputer wybiera ... _ możliwości {at}{random}
                     ```
             5:
                 story_text: |
-                    Na tym poziomie możemy ustalić, kto wygrał.
-                    Do tego potrzebny jest nowy kod `{if}`.
+                    Na tym poziomie możemy ustalić, czy jest remis, czy nie. Do tego potrzebny jest nowy kod `{if}`.
 
-                    Zapisz swój wybór pod wybraną nazwą i wybór komputera jako wybór komputera.
-                    Następnie możesz użyć `{if}`, aby sprawdzić, czy są takie same, czy różne.
-                    Dokończysz kod?
+                    ### Ćwiczenie
+                    Dokończ kod, wypełniając puste pola:
+                    * Pozwól komputerowi wybrać losowa opcję 
+                    * Zapytaj gracza, co chce wybrać
+                    * Wpisz prawidłowe zmienne w wierszach 4 i 5
+                    * Dokończ wiersz 6, aby Hedy mógł sprawdzić, czy jest  remis, czy nie.
                 example_code: |
                     ```
-                    options {is} rock, paper, scissors
-                    computer_choice {is} _
-                    choice {is} {ask} 'What do you choose?'
-                    {print} 'you chose ' _
-                    {print} 'computer chose ' _
-                    {if} _ {is} _ {print} 'tie!' {else} {print} 'no tie'
+                    opcje {is} kamień, papier, nożyce
+                    opcje_komputera {is} _
+                    wybór {is} _
+                    {print} 'Wybierasz ' _
+                    {print} 'komputer wybiera ' _
+                    {if} _ {is} _ {print} 'Remis!' {else} {print} 'Nie ma remisu'
                     ```
 
-                    Fill in the correct code on the blanks to see {if} it is a draw.
+                    Wpisz poprawny kod w pustych polach, aby sprawdzić, czy jest remis.
             9:
                 story_text: "W tym poziomie można zaprogramować całą grę kamień, papier, nożyce poprzez zagnieżdżanie poleceń `{if}`. \n\n### Ćwiczenie\nCzy potrafisz dokończyć kod? Program musi powiedzieć, kto wygrał dla każdej kombinacji.\n\n**Dodatkowo** Chcesz zagrać w więcej niż jedną grę? Rozwiń kod tak, aby można było rozegrać wiele rund. Możesz nawet użyć `{ask}`, aby zapytać użytkownika, ile rund chce zagrać.\n"
-                example_code: "```\nopcje = papier, kamień, nożyce\ntwój_wybór = {ask} 'Co wybierasz?'\n{print} 'Wybrałeś ' twój_wybór \nwybór_komputera = opcje {at} {random}\n{print} 'Komputer wybrał ' wybór_komputera \n{if} wybór_komputera {is} twój_wybór \n    {print} 'remis'\n{if} wybór_komputera {is} kamień\n    {if} twój_wybór  {is} papier\n        {print} 'Wygrałeś!'\n    {if} twój_wybór  {is} nożyce\n        {print} 'Przegrałeś!'\n#dokończ program\n```\n"
+                example_code: "```\nchoices = rock, paper, scissors\nyour_choice {is} {ask} 'What do you choose?'\n{print} 'You choose ' your_choice\ncomputer_choice {is} choices {at} {random}\n{print} 'The computer chooses ' computer_choice\n{if} computer_choice {is} your_choice\n    {print} 'Tie'\n{if} computer_choice {is} rock\n    {if} your_choice {is} paper\n        {print} 'You win!'\n    {if} your_choice {is} scissors\n        {print} 'You lose!'\n# finish this code\n```\n"
             10:
                 story_text: |
-                    Czujesz się zbyt leniwy, by samemu zagrać w grę? Pozwól Hedy zagrać w nią za Ciebie!
-                    Wystarczy, że wypełnisz imiona graczy, a oni dostaną losowy wybór.
-
-                    ### Ćwiczenie 1
-                    Zakończ program, wypełniając listę nazwisk.
-
-                    ### Ćwiczenie 2
-                    Dodaj gracza komputerowego, który wybiera z każdym graczem.
-
-                    **Dodatkowo** Wróć do swojego kodu i zdecyduj, kto wygrywa w każdej rundzie: komputer czy wymieniona osoba.
+                    ### Ćwiczenia
+                    Na poprzednich poziomach często tworzyłeś własną grę w kamień, papier i nożyce. Czy możesz ukończyć kod i użyć poprawnie polecenia `{for}`, aby gra zadziałała?
                 example_code: |
                     ```
-                    wybory = kamień, papier, nożyce
+                    wybory = _
                     gracze = _
-                    {for} gracz {in} gracze
-                         {print} gracz ' wybiera ' wybory {at} {random}
+                    {for} _
                     ```
             13:
                 story_text: |
-                    Dzięki poleceniu `{and}` możesz skrócić swój kod kamień, papier, nożyce! Sprawdź poniższy przykładowy kod i spróbuj go dokończyć.
+                    Za pomocą polecenia `{and}` możesz skrócić swój kod gry w kamień papier i nożyce! Sprawdź przykładowy kod.
+
+                    ### Ćwiczenie
+                    Dokończ kod tak, aby zwycięzca był zawsze podany. Uruchom kod kilka razy, aby sprawdzić, czy zwycięzca jest zawsze wyświetlany
                 example_code: |
                     ```
                     opcje = 'kamień', 'papier', 'nożyczki'
@@ -3892,7 +3904,7 @@ adventures:
                 story_text: |
                     ### Ćwiczenie
                     Graj, aż pokonasz komputer! Najpierw dokończ przykładowy kod...
-                example_code: "```\nwygrana = 'nie'\nwybory = 'kamień', 'papier', 'nożyce'\n {while} wygrana == 'nie'\n    twój_wybór = {ask} 'Co wybierasz?'\n    wybór_komputera = wybory {at} {random}\n    {print} 'Ty wybrałeś' twój_wybór \n    {print} 'komputer wybrał ' wybór_komputera\n    {if}  wybór_komputera == twój_wybór\n        {print} 'Remis!'\n    {if} wybór_komputera == 'kamień' {and} twój_wybór == 'nożyce'\n        {print} 'Przegrywasz!'\n    {if} wybór_komputera == 'kamień' {and} twój_wybór == 'papier'\n        {print} 'Wygrywasz!'\n        wygrana = 'tak'\n_\n```\n"
+                example_code: "```\nwygrana = 'nie'\nopcje = 'kamień', 'papier', 'nożyce'\n {while} wygrana == 'nie'\n    twój_wybór = {ask} 'Co wybierasz?'\n    wybór_komputera = opcje {at} {random}\n    {print} 'Ty wybrałeś' twój_wybór \n    {print} 'komputer wybrał ' wybór_komputera\n    {if}  wybór_komputera == twój_wybór\n        {print} 'Remis!'\n    {if} wybór_komputera == 'kamień' {and} twój_wybór == 'nożyce'\n        {print} 'Przegrywasz!'\n    {if} wybór_komputera == 'kamień' {and} twój_wybór == 'papier'\n        {print} 'Wygrywasz!'\n        wygrana = 'tak'\n_\n```\n"
     rock_2:
         name: Papier, kamień, nożyce 2
         default_save_name: Kamień_2
@@ -3903,28 +3915,31 @@ adventures:
                     Znając komendę `{ask}` możemy uczynić naszą grę w papier, kamień, nożyce interaktywną!
 
                     ### Ćwiczenie
-                    Uczyń grę w papier, kamień, nożyce interkatywną dodając komendę `{ask}` wraz z pytaniem.
+                    Uczyń grę w papier, kamień, nożyce interaktywną dodając komendę `{ask}` wraz z pytaniem.
                 example_code: |
                     ```
                     wybór {is} _
-                    {print} Wybrałam wybór
+                    {print} Wybieram wybór
                     ```
     secret:
         name: Super Szpieg
-        default_save_name: language
+        default_save_name: Super Szpieg
         description: Stwórz swój kod szpiegowski
         levels:
             12:
                 story_text: |
-                    W tej przygodzie możesz stworzyć swój własny kod superszpiegowski. Zaszyfruj wiadomość, którą może rozszyfrować tylko właściwy agent.
-                    Jeśli wróg spróbuje złamać kod, otrzyma fałszywe informacje, aby zmarnować swój czas.
+                    W tej przygodzie możesz stworzyć własny super kod szpiegowski. Zakoduj wiadomość, którą tylko właściwy agent może odszyfrować.
+                    Jeśli wróg spróbuje złamać kod, otrzyma fałszywe informacje i zmarnuje swój czas.
 
-                    ### Ćwiczenie
-                    Utwórz własny tajny kod dla swojego superszpiega. Czy możesz sprawić, by składał się z jeszcze większej liczby zmiennych?
+                    ### Ćwiczenie 1
+                    Stwórz własny tajny kod dla swojej super szpiega i zwróć obie części tylko prawdziwemu szpiegowi.
+
+                    ### Ćwiczenie 2
+                    Dodaj trzeci element do kodu, taki jak ubranie lub przedmiot.
                 example_code: |
                     ```
                     imię = {ask} 'Jak masz na imię?'
-                    if imię {is} 'Agent007'
+                    {if} imię {is} _
                         a = 'Jedź na lotnisko '
                     {else}
                         a = 'Idź na dworzec kolejowy'
@@ -3937,7 +3952,13 @@ adventures:
                     ```
             13:
                 story_text: |
-                    Czy potrafisz wpisać właściwe polecenie w pustym miejscu? Mózg: Superszpieg musi poprawnie odpowiedzieć na OBA pytania, zanim zdobędzie poufne informacje!
+                    Możemy uprościć kod super szpiega za pomocą `{and}`, tak że potrzebujemy tylko jednego `{if}`.
+
+                    ### Ćwiczenie 1
+                    Uzupełnij kod, wypełniając odpowiednie polecenie na pustym polu. Wskazówka: super szpieg musi poprawnie odpowiedzieć na OBA pytania, zanim otrzyma poufne informacje!
+
+                    ### Ćwiczenie 2
+                    Chcemy jeszcze bardziej zdezorientować wroga! Utwórz listę z fałszywymi odpowiedziami i wybierz jedną losowo, gdy zostanie udzielona zła odpowiedź.
                 example_code: |
                     ```
                     imię = {ask} 'Jak masz na imię?'
@@ -3948,118 +3969,118 @@ adventures:
                         {print} 'Idź na dworzec o 10.00'
                      ```
     simon:
-        name: Simon Says
+        name: Simon mówi
         default_save_name: Simon
         description: Make a game of Simon Says
         levels:
             16:
                 story_text: |
-                    Let's make a game of Simon Says! Simon Says is a memory game in which the player will be given a color. They have to repeat that color back.
-                    If they get it right a color is added to the sequence, so they now have to remember 2 colors, then 3, then 4 etc. the game stops as soon as the player makes a mistake.
+                    Stwórzmy grę Simon mówi! Simon mówi to gra pamięciowa, w której gracz otrzymuje kolor i musi go powtórzyć.
+                    Jeśli dobrze to zrobi, do sekwencji zostanie dodany kolor, więc musi teraz zapamiętać 2 kolory, następnie 3, a następnie 4 itd. gra zatrzymuje się, gdy gracz popełni błąd.
 
-                    ### Exercise
-                    In this first part of the Simon Says adventure, we'll let the computer pick a random color and add it to a list.
+                    ### Ćwiczenie
+                    W pierwszej części przygody Simon mówi pozwolimy komputerowi wybrać losowy kolor i dodać go do listy.
 
-                    ***Make 2 lists*** First, make a list called `colors` and fill it with the colors red, yellow, green and blue.
-                    Then make a list called `simon_sequence`. This list will be used as the answer.
-                    At the start of the game this lists need to be empty. unfortunately, we can't create an empty list (yet), so we'll fill it with the words 'empty' and 'list' and we'll remove them from the list immediately.
+                    ***Zrób 2 listy *** Najpierw utwórz listę o nazwie `colors` i wypełnij ją kolorami czerwonym, żółtym, zielonym i niebieskim.
+                    Następnie utwórz listę o nazwie `simon_sequence`. Ta lista zostanie wykorzystana jako odpowiedź.
+                    Na początku gry listy muszą być puste. niestety nie możemy utworzyć pustej listy (jeszcze), więc wypełnimy ją słowami „pusty” i „lista”' i natychmiast usuniemy je z listy.
 
-                    ***Create a function that adds a color to the sequence*** Now that we have an empty list called simon_sequence, we can start filling it with random colors.
-                    We do that with a function, so we can call it everytime there's a new level in our game. Create a function called `add_random_color`.
-                    Then create the variable random_color and set it to a random color. Next, add this random color to the simon_sequence.
+                    ***Utwórz funkcję, która dodaje kolor do sekwencji *** Teraz, gdy mamy pustą listę o nazwie simon_sequence, możemy zacząć wypełniać ją losowymi kolorami.
+                    Robimy to za pomocą funkcji, dzięki czemu możemy ją wywoływać za każdym razem, gdy w naszej grze pojawia się nowy poziom. Utwórz funkcję o nazwie `add_random_color`.
+                    Następnie utwórz zmienną random_color i ustaw ją na losowy kolor. Następnie dodaj ten losowy kolor do simon_sequence.
 
-                    ***Create a function that shows the simon_sequence*** Start by naming the new function `show_simon_sequence` with `level` as an argument. Now we want to show as many colors as the level we are in (in level 1 you see 1 color, in level 2 you see 2 colors etc).
-                    So we repeat `level` times, to print the `simon_sequence[i]`. Each time a color is shown, wait for 1 second and then clear the screen.
+                    ***Utwórz funkcję, która pokazuje simon_sequence *** Zacznij od nazywania nowej funkcji `show_simon_sequence` za pomocą `level` jako argumentu. Teraz chcemy pokazać tyle kolorów, ile wynosi liczba poziomu na którym się znajdujesz (na poziomie 1 widzisz 1 kolor, na poziomie 2 widzisz 2 kolory itp.).
+                    Powtarzamy więc `level` razy , aby wydrukować `simon_sequence[i]`. Za każdym razem, gdy wyświetlany jest kolor, poczekaj 1 sekundę, a następnie wyczyść ekran.
 
-                    ***Test your program*** Before you go to the next level, test if the functions are working by calling both of the functions. If they're working you should see a random color in your output screen.
-                    Remove this testing part of your code, copy the code and continue to the next tab to learn more about the simon says game!
+                    ***Przetestuj swój program *** Zanim przejdziesz do następnego poziomu, sprawdź, czy funkcje działają, wywołując obie funkcje. Jeśli działają, powinieneś zobaczyć losowy kolor na ekranie wyjściowym.
+                    Usuń tę testową część kodu, skopiuj kod i przejdź do następnej karty, aby dowiedzieć się więcej o grze simon mówi!
                 example_code: |
                     ```
-                    # Make 2 lists
-                    colors = _
+                    # Zrób 2 listy
+                    kolory = _
                     _ = ['empty', 'list']
                     {remove} _ {from} simon_sequence
                     {remove} _
 
-                    # Create a function that adds a color
-                    _ add_random_color
+                    # Utwórz funkcję, która dodaje kolor
+                    _ dodaj_losowy_kolor
                         _
                         {add} _
 
-                    # Create a function that shows the simon_sequence
+                    # Utwórz funkcję pokazującą sekwencję simon_sequence
                     {define} _
                         {for} i {in} {range} 1 {to} _
                             {print} _
                             _
                             _
 
-                    # Test your program
+                    # Sprawdź swój program
                     {call} _
                     {call} show_simon_sequence {with} 1
                     ```
     simon_2:
-        name: Simon Says 2
+        name: Simon mówi 2
         default_save_name: Simon
-        description: Make a game of Simon Says
+        description: Zrób grę Simon mówi
         levels:
             16:
                 story_text: |
-                    We'll continue with our Simon Says game!
+                    Będziemy kontynuować naszą grę Simon mówi!
 
-                    ### Exercise
-                    ***Paste your code here*** Paste your code from the previous level here. Don't forget to remove the part that was just used for testing the functions.
+                    ### Ćwiczenie
+                    ***Wklej tutaj swój kod *** Wklej tutaj swój kod z poprzedniego poziomu. Nie zapomnij usunąć części, która została właśnie użyta do przetestowania funkcji.
 
-                    ***Create a function that creates the player_sequence*** The list `player_sequence` is used to capture the answers of the player. First we define the function with the argument level.
-                    Next, we ask level times what the color is that they choose. We call that variable `answer`. Then we add the variable `answer` to the list player_sequence.
+                    ***Utwórz funkcję, która tworzy sekwencja_gracza *** Lista `player_sequence` służy do odbierania odpowiedzi gracza. Najpierw definiujemy funkcję za pomocą poziomu argumentu. Następnie pytamy level razy , jaki kolor wybierają. Nazywamy tę zmienną `answer`. Następnie dodajemy zmienną `answer` do listy sekwencja_gracza.
 
-                    ***Setting up the game*** Before we program the game in the next tab, we'll need some starting variables. First, we'll set the variable `level` to 1 and the variable `game_over` to False.
-                    Then we make an introduction for the game. We'll print 'Welcome to Simon Says!' and clear the screen after 1 second.
+                    ***Ustawianie gry *** Zanim zaprogramujemy grę na następnej karcie, potrzebujemy zmiennych początkowych. Najpierw ustawimy zmienną `level` na 1, a zmienną `game_over` na False.
+                    Następnie przedstawiamy grę. Wydrukujemy „Witamy w Simon mówi!”!' i wyczyść ekran po 1 sekundzie.
 
-                    ***Continue to the next tab to finish the game!**** Don't forget to copy your code and take it with you to the next tab.
+                    ***Przejdź do następnej karty, aby dokończyć grę!**** Nie zapomnij skopiować kodu i zabrać go ze sobą na następną kartę.
+                    .
                 example_code: |
                     ```
-                    # Paste your code here
+                    # Wklej tutaj swój kod
 
 
-                    # Create a function that creates the player_sequence
+                    # Utwórz funkcję, która tworzy sekwencję_gracza
                     {define} _
                         {for} _
-                            _ 'What is color number ' i '?'
+                            _ 'Jaki jest kolor i numer' i '?'
                             {add} answer {to} _
 
-                    # Set up
-                    level = _
-                    game_over = _
+                    # Skonfiguruj
+                    poziom= _
+                    koniec_gry = _
                     {print} _
                     _ 1
                     _
                     ```
     simon_3:
-        name: Simon Says 3
+        name: Simon mówi 3
         default_save_name: Simon
-        description: Make a game of Simon Says
+        description: Zrób grę Simon mówi
         levels:
             16:
                 story_text: |
-                    In this tab we'll program the game of Simon Says!
+                    W tej zakładce zaprogramujemy grę Simon mówi!
 
-                    ### Exercise
-                    ***Paste your code*** Copy your code from the previous tab and paste it here.
+                    ### Ćwiczenie
+                    ***Wklej kod *** Skopiuj kod z poprzedniej karty i wklej go tutaj.
 
-                    ***Program the game*** We start by making sure the game goes on while the game isn't over. Then we print what level the player is on, we use the variable level for that. We only show that for 1 second and then we clear the screen again.
-                    Now, we have to create the empty list player_sequence. We've already programmed how to fill the list, with our function `player_sequence`, but we never made the list itself. To create the list we use the same trick as we did in the previous tab.
-                    We'll make a list with the words 'empty' and 'list' on it, and then we remove both these words. Next, we'll call all of the 3 functions that we've created.
-                    Lastly, we'll have to check if the player gave the correct answers (so if the player_sequence and the simon_sequence are the same).
-                    If that's the case, we'll compliment the player. Wait for 1 second and increase the level with 1.
-                    Did the player give the wrong answer, we'll tell them and end the game by setting game_over to 'True'
+                    ***Zaprogramuj grę *** Zaczynamy od upewnienia się, że gra będzie kontynuowana, jeżeli nie nastąpi jej koniec. Następnie wyświetlamy, na jakim poziomie jest gracz, używamy do tego poziomu zmiennej. Pokazujemy to tylko przez 1 sekundę, a następnie ponownie czyścimy ekran.
+                    Teraz musimy utworzyć pustą listę sekwencja_gracza. Zaprogramowaliśmy już sposób wypełniania listy za pomocą naszej funkcji `player_sequence`, ale nigdy nie stworzyliśmy samej listy. Aby utworzyć listę, używamy tej samej sztuczki, co w poprzedniej zakładce.
+                    Zrobimy listę ze słowami 'empty' i 'lista' a następnie usuniemy oba te słowa. Następnie wywołamy wszystkie 3 funkcje, które stworzyliśmy.
+                    Na koniec będziemy musieli sprawdzić, czy gracz udzielił poprawnych odpowiedzi (więc jeśli sekwencja gracza i sekwencja simona są takie same).
+                    W takim przypadku gratulujemy graczowi. Poczekaj 1 sekundę i zwiększ poziom o 1.
+                    Czy gracz udzielił złej odpowiedzi, powiemy mu to i zakończymy grę, ustawiając koniec_gry na „True”'
 
-                    ***Enjoy your game!*** Great job! Does your game not work? Use the ladybug button to debug your code!
+                    ***Ciesz się grą!*** Świetna robota! Czy Twoja gra nie działa? Użyj przycisku biedronki, aby zdebugować swój kod!
                 example_code: |
                     ```
-                    # Paste your code here
+                    # Wklej tutaj swój kod
 
-                    # The game
-                    {while} game_over _
+                    # Gra
+                    {while} koniec_gry _
                         {print} _
                         _
                         _
@@ -4069,23 +4090,25 @@ adventures:
                         {call} _
                         {call} _ {with} _
                         {call} _ {with} _
-                        {if} player_sequence == _
+                        {if} sekwencja_gracza == _
                             _
                             _
                             _
                         {else}
                             _
-                            game_over = _
+                            koniec_gry = _
                     ```
     sleep_command:
         name: '{sleep}'
-        default_save_name: sleep_command
-        description: introducing sleep command
+        default_save_name: komenda_sleep
+        description: Wprowadzenie komendy {sleep}
         levels:
             2:
                 story_text: |
-                    ## Komenda {sleep}
-                    Inną nową komendą jest `{sleep}`, która zatrzymuje Twój program na sekundę. Jeżeli wpiszesz jakąś liczbę zaraz za komendą `{sleep}`, to program zatrzyma się na taką ilość sekund.
+                    Kolejnym nowym poleceniem na tym poziomie jest `{sleep}`, który wstrzymuje program na sekundę. Jeśli wpiszesz liczbę za poleceniem {sleep}, program wstrzyma się na taką liczbę sekund.
+
+                    ### Ćwiczenie
+                    Ćwicz to nową komendę, tworząc własny kod, w którym używasz komendy `{sleep}` co najmniej 3 razy. Przy każdej komendzie {sleep} czas pauzy powinien się różnić.
                 example_code: |
                     ```
                     {print} Moim ulubionym kolorem jest...
@@ -4208,24 +4231,27 @@ adventures:
                     ```
             13:
                 story_text: |
-                    In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with {ask} commands as well?
-                    In this example we have changed the 'My Bonnie' program and made it interactive. You are now asked where Bonnie is.
+                    W poprzedniej przygodzie nauczyłeś się używać argumentu w funkcji, ale czy wiesz, że możesz połączyć je również z poleceniami {ask}?
+                    W tym przykładzie zmieniliśmy program „My Bonnie” i uczyniliśmy go interaktywnym. Zostajesz teraz zapytany, gdzie jest Bonnie.
                 example_code: |
                     ```
-                    {define} song {with} place
-                        {print} 'My Bonnie is ' place
+                    {define} piosenka {with} miejsce
+                        {print} 'Moja Bonnie jest ' miejsce
 
-                    chosen_place = {ask} 'Where do you want Bonnie to be?'
-                    synonym = {ask} 'What is another word for that?'
+                    wybrane_miejsce = {ask} 'Gdzie chcesz, aby Bonnie się znalazła?'
+                    synonim= {ask} 'Jak inaczej można powiedzieć na to słowo?'
 
-                    {call} song {with} chosen_place
-                    {call} song {with} synonym
-                    {call} song {with} chosen_place
+                    {call} piosenka {with} wybrane_miejsce
+                    {call} piosenka {with} synonim
+                    {call} piosenka {with} wybrane_miejsce
                     ```
             16:
                 story_text: |
-                    Na tym poziomie możesz jeszcze szybciej zaprogramować utwór taki jak „Dziadek Fajną Farmę Miał”. Możesz połączyć odpowiednie zwierzę z odpowiednim dźwiękiem, po prostu umieszczając je w tym samym miejscu na liście.
-                    „Morskie Opowieści” (ang.: Drunken Sailor) jest również szybko tworzony na tym poziomie. Potrzebujesz tylko 8 linii do całej piosenki, sprawdź to!
+                    Na tym poziomie możesz jeszcze szybciej zaprogramować utwór taki jak Pan Macdonald farmę miał. Możesz przypisać odpowiednie zwierzę do właściwego dźwięku, po prostu umieszczając je w tym samym miejscu na liście.
+                    The drunken sailor - tę piosenkę można zrobić równie szybko. Potrzebujesz tylko 8 linii do całej piosenki, sprawdź to!
+
+                    ### Ćwiczenie
+                    Uzupełnij utwór Pan Macdonald, ustawiając zmienną `animal` na `animals[i]`i `sound` na `sounds[i]`.
                 example_code: |
                     ```
                     zwierzęta = ['Kurki', 'Krówki', 'Świnkę']
@@ -4234,14 +4260,14 @@ adventures:
                         zwierzę = _
                         dźwięk = _
                         {print} 'Dziadek fajną farmę miał'
-                        {print} 'ija ija oo!'
+                        {print} 'ija oo!'
                         {print} zwierzę ' na niej hodował'
-                        {print} 'ija ija oo!'
-                        {print} zwierzę ' ' dźwięk dźwięk ' tu'
-                        {print} 'i ' dźwięk dźwięk ' tam'
+                        {print} 'ija  oo!'
+                        {print} zwierzę ' ' dźwięk  ' tu'
+                        {print} 'i ' dźwięk  ' tam'
                         {print} dźwięk 'tu,'
                         {print} dźwięk ' tam,'
-                        {print} 'ciągle tylko ' dźwięk dźwięk
+                        {print} 'ciągle tylko ' dźwięk 
                     ```
 
                     ```
@@ -4276,15 +4302,15 @@ adventures:
                         {print} 'Wcześnie o poranku!'
                     ```
     songs_2:
-        name: Sing a song! 2
-        default_save_name: Song 2
-        description: Sing a song 2
+        name: Zaśpiewaj piosenkę! 2
+        default_save_name: Piosenka 2
+        description: Zaśpiewaj piosenkę 2
         levels:
             12:
                 story_text: |
-                    Songs contain a lot of repetition. We can capture it with a function!
-                    ### Exercise
-                    Look at the example code with the function. Fill out the two lines so the full song is printed.
+                    Piosenki zawierają wiele powtórzeń. Możemy je przechwycić za pomocą funkcji!
+                    ### Ćwiczenie
+                    Spójrz na przykładowy kod z funkcją. Wypełnij dwa wiersze, aby wyświetlić cały utwór.
                 example_code: |
                     ```
                     {define} twinkle
@@ -4298,12 +4324,12 @@ adventures:
                     ```
             16:
                 story_text: |
-                    ### Exercise
-                    Finish the nursery rhyme!
+                    ### Ćwiczenie
+                    Skończ piosenkę!
                 example_code: |
                     ```
-                    number = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
-                    object = ['on his drum', 'on his shoe', 'on his knee', 'on his door', 'on his hive', 'on his sticks', 'up in heaven', 'on his gate', 'on his vine', 'once again']
+                    numer = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+                    obiekt = ['on his drum', 'on his shoe', 'on his knee', 'on his door', 'on his hive', 'on his sticks', 'up in heaven', 'on his gate', 'on his vine', 'once again']
 
                     _
                         {print} 'This old man'
@@ -4316,153 +4342,153 @@ adventures:
                         {clear}
                     ```
                 story_text_2: |
-                    ### Exersice 2
-                    Now create your own code for the nursery rhyme 'The wheels on the bus' on the same way!
+                    ### Ćwiczenie
+                    Teraz stwórz swój własny kod „Koła w autobusie” w ten sam sposób!
                 example_code_2: |
                     ```
-                    object = ['wheels', 'doors', _]
-                    movement = [ 'round and round', 'open and shut', _]
+                    obiekt = ['koła', 'drzwi', _]
+                    ruch= [ 'w kółko', 'otwarte i zamknięte', _]
                     ```
     tic:
-        name: Tic-Tac-Toe
-        default_save_name: Tic
-        description: Play a game of Tic Tac Toe!
+        name: Kółko, krzyżyk
+        default_save_name: Kółko
+        description: Zagraj w grę kółko, krzyżyk!
         levels:
             16:
                 story_text: |
-                    Let's program a game of tic-tac-toe!
+                    Zaprogramujmy grę w kółko i krzyżyk
 
-                    ### Exercise
-                    In this adventure we'll start with creating an empty field.
+                    ### Ćwiczenie
+                    W tej przygodzie zaczniemy od stworzenia pustego pola.
 
-                    ***Create a list called field*** This list will be our playing field. This list is filled with 9 dots, since there are no x's and o's yet at the start of our game.
+                    ***Utwórz listę o nazwie pole *** Ta lista będzie naszym polem do grania. Ta lista jest wypełniona 9 kropkami, ponieważ na początku naszej gry nie ma jeszcze X i O.
 
-                    ***Create a function that prints the field*** Firstly, clear the screen so the old playing fields will be removed. Then we print the first line of our Tic Tac Toe field. This line constists of the first 3 spots in our list field.
-                    We have already programmed this line for you. Now finish the field by printing spot 4, 5, and 6 on the second row and spot 7, 8 and 9 in the third row.
+                    ***Utwórz funkcję, która wyświetla pole *** Po pierwsze, wyczyść ekran, aby stare pola gry zostały usunięte. Następnie drukujemy pierwszą linię naszego pola do gry kółko i krzyżyl. Ta linia stanowi 3 pierwsze miejsca w naszym polu listy.
+                    Zaprogramowaliśmy już tę linię dla Ciebie. Teraz zakończ pole, drukując punkt 4, 5 i 6 w drugim rzędzie i miejsce 7, 8 i 9 w trzecim rzędzie.
 
-                    ***Call the function that prints the field*** Now call the function.
+                    ***Wezwij funkcję wyświetlającą pole *** Teraz wywołaj funkcję.
                     <div class="w-full flex flex-row gap-2">
-                        Run the code. Your output should look like this: <img src="https://github.com/hedyorg/hedy/assets/80678586/bcbd156e-4b48-4e82-84ae-f86d21b0cbcc" width="100">
+                        Uruchom kod. Twoje dane wyjściowe powinny wyglądać następująco: <img src="https://github.com/hedyorg/hedy/assets/80678586/bcbd156e-4b48-4e82-84ae-f86d21b0cbcc" width="100">
                     </div>
 
-                    ***Continue in the next tab*** In the next tab you'll learn how to program the game itself.
+                    ***Kontynuuj w następnej zakładce *** W następnej zakładce dowiesz się, jak zaprogramować samą grę.
                 example_code: |
                     ```
-                    # Create a list called field
+                    # Utwórz listę o nazwie pole
                     _ = ['.', '.', '.', '.', '.', '.', '.', '.', '.']
 
-                    # Create a function that prints the field
-                    {define} print_field
+                    # Utwórz funkcję wyświetlającą pole
+                    {define} wyświetl_pole
                         _
-                        {print} 'TIC TAC TOE'
-                        {print} field[1] field[2] field[3]
+                        {print} 'Kółko i krzyżyk'
+                        {print} pole[1] pole[2] pole[3]
                         _
                         _
 
-                    # Call the function
+                    # Wezwij funkcję
                     ```
             17:
                 story_text: |
-                    In the previous level you've learned how to make a tic-tac-toe game. The game works, but is quite annoying as it keeps asking you if you've won yet.
-                    Now that we have the {elif} command, we can let the game decide if someone has won and it can stop asking us!
+                    Na poprzednim poziomie nauczyłeś się, jak tworzyć grę w kółko i krzyżyk. Gra działa, ale jest dość denerwująca, ponieważ wciąż pyta, czy wygrałeś.
+                    Teraz, gdy mamy polecenie {elif}, możemy pozwolić grze zdecydować, czy ktoś wygrał i może przestać nas pytać!
 
-                    ### Exercise
-                    ***Paste your code*** Paste your code from the previous level here and make it level 17 proof. In this level you've learned to use a colon everytime you create a block of code. Please add the colons in the correct spots.
+                    ### Ćwiczenie
+                    ***Wklej swój kod *** Wklej tutaj swój kod z poprzedniego poziomu i spraw, by zadziałał Na tym poziomie nauczyłeś się używać dwukropka za każdym razem, gdy tworzysz blok kodu. Dodaj dwukropki we właściwych miejscach.
 
-                    ***Create a function that detects if someone's won*** We have started the function for you, paste it under the function `print_field` and finish the function. You can see that this first piece of code checks to see if spot 1, 2 and 3 are the same, because if they are you have 3 in a row.
-                    It also checks if they are not a dot, because if they are, the line might have the same symbols on them, but that's just because it's still empty.
-                    If all these conditions are met, the game is over and the winner is printed.
-                    Finish this function with all possible ways to win. This means you have to make this for the other 2 rows, 3 columns and 2 diagonals.
-                    If you've finished all the other options, the function should return the variable `game_over` so we can use it in our game.
+                    ***Utwórz funkcję, która wykrywa, czy ktoś wygrał *** Uruchomiliśmy dla Ciebie funkcję, wklej ją pod funkcją `print_field` i zakończ funkcję. Możesz zobaczyć, że ten pierwszy fragment kodu sprawdza, czy miejsce 1, 2 i 3 są takie same, ponieważ jeśli tak, masz 3 z rzędu.
+                    Sprawdza również, czy nie są kropką, ponieważ jeśli tak, linia może mieć te same symbole, ale tylko dlatego, że wciąż jest pusta.
+                    Jeśli wszystkie te warunki zostaną spełnione, gra się skończy, a zwycięzca zostanie wyświetlony.
+                    Zakończ tę funkcję wszystkimi możliwymi sposobami do wygrania. Oznacza to, że musisz zrobić to samo dla pozostałych 2 wierszy, 3 kolumn i 2 przekątnych.
+                    Jeśli skończyłeś wszystkie pozostałe opcje, funkcja powinna zwrócić zmienną `game_over`, abyśmy mogli użyć jej w naszej grze.
 
-                    ***Call the function in the game*** Go to the line `game_over = {ask} 'Did you win?'` and change it to `game_over = {call} detect_winner {with} field, sign`. Now the function will check if there's a winner and the game doesn't need to keep asking anymore!
+                    ***Zadzwoń do funkcji w grze *** Przejdź do linii `game_over = {ask} 'Did you win?'`i zmień go na `game_over = {call} detect_winner {with} field, sign`. Teraz funkcja sprawdzi, czy jest zwycięzca, a gra nie będzie musiała nas o to już pytać!
 
-                    ***Enjoy your game!*** Great job! You have finished the game! Enjoy playing it!
+                    ***Ciesz się grą!*** Świetna robota! Skończyłeś grę! !
 
                 example_code: |
                     ```
-                    # Paste your code here and make it level 17 proof
+                    # Wklej tutaj swój kod i spraw, aby był to dowód poziomu 17
 
-                    # Create a function that detects if someone has won
-                    {define} detect_winner {with} field, sign:
-                        {if} field[1] == field[2] {and} field[2] == field[3] {and} field[1] != '.':
-                            game_over = 'yes'
-                            {print} 'Player ' sign 'wins!'
+                    # Utwórz funkcję, która wykryje, czy ktoś wygrał
+                    {define} wykryj_zwycięzcę {with} pole, znak:
+                        {if} pole[1] == pole[2] {and} pole[2] == pole[3] {and} pole[1] != '.':
+                            koniec_gry = 'tak'
+                            {print} 'gracz ' znak 'wygrywa!'
                         {elif}:
                             _
                         {else}:
-                            game_over = 'no'
+                            koniec_gry = 'nie'
                     {return} _
                     ```
     tic_2:
-        name: Tic-Tac-Toe 2
-        default_save_name: Tic
-        description: Play a game of Tic Tac Toe!
+        name: Kółko i krzyżyk 2
+        default_save_name: Kółko
+        description: Zagraj w grę Kółko i krzyżyk!
         levels:
             16:
                 story_text: |
-                    In the previous adventure you've learned how to create a playing field. Now you'll learn how to create the game!
+                    W poprzedniej przygodzie nauczyłeś się, jak stworzyć pole gry. Teraz nauczysz się tworzyć grę!
 
-                    ### Exercise
-                    ***Paste your code*** Start by pasting your code from the previous adventure here.
+                    ### Ćwiczenie
+                    ***Wklej swój kod *** Zacznij od wklejenia kodu z poprzedniej przygody tutaj.
 
-                    ***Add variables*** Underneath your list called `field` we'll add 2 more variables that we'll need to program the game.
-                    The variable `game_over` tells us if the game is over, and should be 'no' at the start of the game.
-                    The variable `sign` tells us if it's the turn of player x or player o. Set the variable to 'x'.
+                    ***Dodaj zmienne *** Pod listą o nazwie `field` dodamy 2 dodatkowe zmienne, których będziemy potrzebować do zaprogramowania gry.
+                    Zmienna `game_over` mówi nam, czy gra się skończyła, i powinna być ustawiona na 'no' na początku gry.
+                    Zmienna `sign` mówi nam, czy jest to kolej gracza x czy gracza o. Ustaw zmienną na „x”'.
 
-                    ***The game*** First use a {while} command, to make sure the game keeps on playing the variable while game_over is set to no.
-                    During the game, we first ask the player which spot they choose. Then we change the field with the number they chose into their sign.
-                    Then we print the field again and we ask the player if they've won yet. Lastly we want to switch whose turn it is, so if the sign is 'x' it should be 'o' and the other way around.
+                    ***Gra *** Najpierw użyj polecenia {while}, aby upewnić się, że gra nadal używa zmiennej , podczas gdy koniec_gry jest ustawiona na „nie”.
+                    Podczas gry najpierw pytamy gracza, które miejsce wybiera. Następnie zmieniamy pole na liczbę, którą wybrał na swój znak.
+                    Następnie ponownie wyświetlamy pole i pytamy gracza, czy wygrał. Na koniec chcemy zmienić, czyja aktualnie jest kolej, więc jeśli znak to „x”, to powinien to być „o” i na odwrót.
 
-                    ***Test your game*** Does your game work? Great, have fun playing the game! If not, use the ladybug button to debug your code.
-                    You might have noticed one mistake in the code though, you can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and steal their spot.
-                    That's not fair! Go to the next tab to learn how to fix this problem.
+                    ***Przetestuj swoją grę *** Czy Twoja gra działa? Świetnie, baw się dobrze grając w tę grę! Jeśli nie, użyj przycisku biedronki, aby zdebugować kod.
+                    Być może zauważyłeś jeden błąd w kodzie, - możesz ukraść miejsce drugiego gracza! Jeśli druga osoba wybierze miejsce 1, możesz po prostu wpisać 1 za nimi i ukraść ich miejsce.
+                    To niesprawiedliwe! Przejdź do następnej karty, aby dowiedzieć się, jak rozwiązać ten problem.
                 example_code: |
                     ```
-                    # Paste your code from the previous adventure here
+                    # Wklej tutaj swój kod z poprzedniej przygody
 
-                    # Add variables
-                    game_over = _
-                    sign = _
+                    # Dodaj zmienne
+                    koniec_gry = _
+                    znak = _
 
-                    # The game
+                    # Gra
                     {while} _
-                        choice = _ 'Player ' sign '_?'
-                        field[choice] = _
-                        _ print_field
-                        game_over = {ask} _
-                        {if} sign = 'o'
-                            sign = _
+                        wybór = _ 'Gracz ' znak'_?'
+                        pole[wybór] = _
+                        _ wyświetl_pole
+                        koniec_gry= {ask} _
+                        {if} znak = 'o'
+                            znak = _
                         _
-                            sign = _
+                            znak = _
                     ```
     tic_3:
-        name: Tic-Tac-Toe 3
-        default_save_name: Tic
-        description: Play a game of Tic Tac Toe!
+        name: Kółko i krzyżyk 3
+        default_save_name: Kółko
+        description: Zagraj w grę Kółko i krzyżyk!
         levels:
             16:
                 story_text: |
-                    You might have noticed one mistake in the code you've made in the previous adventure. You can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and steal their spot.
-                    That's not fair! In this tab we'll fix that mistake.
+                    Być może zauważyłeś jeden błąd w kodzie, który popełniłeś podczas poprzedniej przygody. Możesz ukraść miejsce drugiego gracza! Jeśli druga osoba wybierze miejsce 1, możesz po prostu wpisać 1 tuż po nim i ukraść jego miejsce.
+                    To niesprawiedliwe! Naprawimy ten błąd.
 
-                    ### Exercise
-                    ***Paste your code here*** Paste your code from the previous adventure here.
+                    ### Ćwiczenie
+                    ***Wklej tutaj swój kod *** Wklej tutaj swój kod z poprzedniej przygody.
 
-                    ***Fix the mistake*** To fix the mistake we replace the line that says `field[choice] = sign`. This turns any spot that the player has chosen into their sign.
-                    Go to the header that says 'Use this to fix the mistake' and finish the code. We first want to check if the chosen spot is still empty, so `if field[choice] = '.'`. If that is the case, you are allowed to take it.
-                    Then we make an else command and print 'Sorry, this spot is already taken' if the spot is not empty. Lastly, we add a {sleep} command, so the players can actually read the text before it gets cleared again.
-                    Now copy this piece of code and replace the line `field[choice] = sign` with this new piece of code.
+                    ***Napraw błąd *** Aby naprawić błąd, zastępujemy linię z napisem `field[choice] = sign`. To zmienia dowolne miejsce wybrane przez gracza w jego znak.
+                    Przejdź do nagłówka z napisem „Użyj tego, aby naprawić błąd” i dokończ kod. Najpierw chcemy sprawdzić za pomocą `if field[choice] = '.'` czy nadal puste. Jeśli tak to możesz wziąć to miejsce.
+                    Następnie wykonujemy polecenie else i wyświetl „Przepraszam, to miejsce jest już zajęte”, jeśli miejsce nie jest puste. Na koniec dodajemy polecenie {sleep}, aby gracze mogli faktycznie przeczytać tekst, zanim zostanie on ponownie wyczyszczony.
+                    Teraz skopiuj ten fragment kodu i zastąp wiersz `field[choice] = sign`tym nowym fragmentem kodu.
 
-                    ***Play your game!*** Now the game should work properly! Good job!
-                    The only flaw is that you can get a bit annoyed that the game keeps asking you if you've won yet. Do you want to fix that? Go to level 17 and we'll fix it!
+                    ***Zagraj w swoją grę!*** Teraz gra powinna działać poprawnie! Dobra robota!
+                    Jedyną wadą jest to, że możesz być trochę zirytowany, że gra wciąż pyta, czy wygrałeś. Chcesz to naprawić? Przejdź do poziomu 17!
                 example_code: |
                     ```
-                    # Paste your code here
+                    # Wklej tutaj swój kod
 
-                    # Use this to fix the mistake
+                    # Użyj tego, aby naprawić błąd
                     {if} _ = '.'
-                        field[choice] = sign
+                        pole[wybór] = znak
                     {else}
                         {print} _
                         _
@@ -4617,7 +4643,7 @@ adventures:
                         {forward} 50
                     ```
                 story_text_2: |
-                    **(dodatkowe zadanie)** Możemy teraz ulepszyć program, który rysuje różne figury. Donończ kod i możesz narysować dowolny wielokąt, który chcesz!
+                    **Dodatkowo** Możemy teraz ulepszyć program, który rysuje różne figury. Dokończ kod i możesz narysować dowolny wielokąt, który chcesz!
                 example_code_2: |
                     ```
                     figura = {ask} 'Ile kątów mam narysować?'
@@ -4647,14 +4673,14 @@ adventures:
                     ```
             10:
                 story_text: |
-                    In this level you can make the turtle draw a figure.
-                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
+                    Na tym poziomie możesz sprawić, aby żółw narysował figurę.
+                    Żółw przemierzy odległości na liście, jedną po drugiej, wykonując coraz większe kroki.
                     ### Ćwiczenie 1
-                    Add a 90 degree turn in the loop, so that a spiral is drawn.
-                    Add at least 5 numbers to the list, so the spiral grows larger.
-                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
+                    Dodaj obrót o 90 stopni w pętli, aby narysować spiralę.
+                    Dodaj co najmniej 5 liczb do listy, aby spirala powiększyła się.
+                    **Dodatkowo ** Czy możesz zmienić spiralę na inny kształt? Eksperymentuj z liczbami!
                     ### Ćwiczenie 2
-                    The spiral is drawn outwards, make it go inwards?
+                    Spirala idzie na zewnątrz, czy do wewnątrz?
                 example_code: |
                     ```
                     {turn} 90
@@ -4664,86 +4690,86 @@ adventures:
                     ```
             12:
                 story_text: |
-                    We can use functions to draw more complex figures with less code.
-                    ### Exercise 1
-                    Fill the function so that three squares are created. If you want the image to look nicer, you can make the lines between the squares white.
+                    Możemy używać funkcji do rysowania bardziej złożonych cyfr przy mniejszej ilości kodu.
+                    ### Ćwiczenie 1
+                    Wypełnij funkcję, aby utworzyć trzy kwadraty. Jeśli chcesz, aby obraz wyglądał ładniej, możesz ustawić linie między kwadratami na biało.
 
-                    ### Exercise 2
-                    The code can be made even shorter. Place the final lines into a `{repeat}` so the figure remains the same.
+                    ### Ćwiczenie 2
+                    Kod można jeszcze skrócić. Umieść końcowe linie w `{repeat}`, aby figura pozostała taka sama.
 
-                    ### Exercise 3
-                    Create your own drawing with different figures.
-                    Change both the number of figures with the `{repeat}` and the shape of the figures in the `{define}`
+                    ### Ćwiczenie 3
+                    Stwórz własny rysunek z różnymi figurami.
+                    Zmień zarówno liczbę figur za pomocą `{repeat}`, jak i kształt w `{define}`
                 example_code: |
                     ```
-                    {define} square
+                    {define} kwadrat
                         {repeat} 4 {times}
                             {turn} _
                             {forward} _
-                    {call} square
+                    {call} kwadrat
                     {forward} 50
-                    {call} square
+                    {call} kwadrat
                     {forward} 50
-                    {call} square
+                    {call} kwadrat
                     ```
     turtle_draw_it:
-        name: Draw it!
-        default_save_name: Draw it
-        description: Draw this picture with the turtle
+        name: Narysuj to!
+        default_save_name: Narysuj to
+        description: Narysuj ten rysunek za pomocą żółwia
         levels:
             1:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Ćwiczenie
+                    Odtwórz rysunki żółwiem!
 
                     <div class="w-full flex flex-row gap-2">
-                        Rectangle <img src="https://github.com/hedyorg/hedy/assets/80678586/77aa99d5-cd8f-4969-b49d-e8fed34ac550" width="100">
-                        Square <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
-                        Stairs<img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
+                        Prostokąt <img src="https://github.com/hedyorg/hedy/assets/80678586/77aa99d5-cd8f-4969-b49d-e8fed34ac550" width="100">
+                        Kwadrat <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
+                        Schodki<img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
                     </div>
             2:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Ćwiczenie
+                    Odtwórz rysunki żółwiem!
 
                     <div class="w-full flex flex-row gap-2">
-                    Triangle <img src="https://github.com/hedyorg/hedy/assets/80678586/e974b62c-f0cf-445a-8bd4-5ad9f1f71204" width="100">
-                    Arrow <img src="https://github.com/hedyorg/hedy/assets/80678586/803d8f42-9708-448c-82ea-d035697f08c9" width="150">
-                    Boat <img src="https://github.com/hedyorg/hedy/assets/80678586/94ef7189-442a-4c8f-827d-12a69203c2e9" width="150">
+                    trójkąt <img src="https://github.com/hedyorg/hedy/assets/80678586/e974b62c-f0cf-445a-8bd4-5ad9f1f71204" width="100">
+                    strzałka<img src="https://github.com/hedyorg/hedy/assets/80678586/803d8f42-9708-448c-82ea-d035697f08c9" width="150">
+                    łódka <img src="https://github.com/hedyorg/hedy/assets/80678586/94ef7189-442a-4c8f-827d-12a69203c2e9" width="150">
                     </div>
             3:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Ćwiczenie
+                    Odtwórz rysunki żółwiem!
 
                     <div class="w-full flex flex-row gap-2">
-                    Triangle <img src="https://github.com/hedyorg/hedy/assets/80678586/71e04d98-9545-4614-9caf-a5f179b756a1" width="150">
-                    Star <img src="https://github.com/hedyorg/hedy/assets/80678586/421c4d28-cb99-424b-be26-dcae30d65c80" width="150">
-                    Arrow <img src="https://github.com/hedyorg/hedy/assets/80678586/3cbebcae-5258-47c5-a6ac-e7ee36c1d1ce" width="200">
+                    trójkąt <img src="https://github.com/hedyorg/hedy/assets/80678586/71e04d98-9545-4614-9caf-a5f179b756a1" width="150">
+                    gwiazda <img src="https://github.com/hedyorg/hedy/assets/80678586/421c4d28-cb99-424b-be26-dcae30d65c80" width="150">
+                    Strzałka <img src="https://github.com/hedyorg/hedy/assets/80678586/3cbebcae-5258-47c5-a6ac-e7ee36c1d1ce" width="200">
                     </div>
             4:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Ćwiczenie
+                    Odtwórz rysunki żółwiem!
 
                     <div class="w-full flex flex-row gap-2">
-                    Colored Star <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
-                    Rainbow <img src="https://github.com/hedyorg/hedy/assets/80678586/2728b10f-9f7f-45ea-964e-5b284033e4f0" width="500">
-                    Nested squares <img src="https://github.com/hedyorg/hedy/assets/80678586/f013f9fa-bc68-4c60-b778-2c457799d6f7" width="200">
+                    kolorowa gwaizda <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
+                    tęcza <img src="https://github.com/hedyorg/hedy/assets/80678586/2728b10f-9f7f-45ea-964e-5b284033e4f0" width="500">
+                    kwadraty blisko siebie <img src="https://github.com/hedyorg/hedy/assets/80678586/f013f9fa-bc68-4c60-b778-2c457799d6f7" width="200">
                     </div>
                 example_code: |
-                    **Extra** Up for a real challenge? Make sure that the colors of these figures are selected randomly, so that each time you run your programs they'll look differently!
+                    **Dodatkowo ** Masz ochotę na prawdziwe wyzwanie? Upewnij się, że kolory tych liczb są wybierane losowo, aby za każdym razem, gdy uruchamiasz programy,będą wyglądały inaczej!
 
                     ```
-                    colors {is} red, orange, yellow, green, blue, purple, pink, brown, gray, black
-                    color _
+                    kolory {is} czerwony, pomarańczowy, żółty, zielony, niebieski, fioletowy, różowy, brązowy, szary, czarny
+                    kolor _
                     ```
             5:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Ćwiczenie
+                    Odtwórz rysunki żółwiem!
 
-                    **Extra** Make only one code that lets the player decide which letter they'd like to see! And can you add even more letters?
+                    **Dodatkowo ** Utwórz tylko jeden kod, który pozwala graczowi zdecydować, którą literę chciałby zobaczyć! Czy możesz dodać jeszcze więcej liter?
 
                     <div class="w-full flex flex-row gap-2">
                     F <img src="https://github.com/hedyorg/hedy/assets/80678586/8a021b76-c24b-4e7c-b960-48d57f3bcb20" width="100">
@@ -4751,147 +4777,147 @@ adventures:
                     L <img src="https://github.com/hedyorg/hedy/assets/80678586/3af6f919-7b67-4ee7-b923-11e56f2b6b24" width="100">
                     </div>
                 example_code: |
-                    Hint:
+                    Wskazówka:
                     ```
-                    chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?'
+                    wybrana_litera {is} {ask} 'Które litery chciałbyś zobaczyć? F, E or L?'
                     {if} _
                     ```
             6:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Ćwiczenie
+                    Odtwórz rysunki żółwiem!
 
-                    **Extra** Let the player decide which color the square should be.
+                    **Dodatkowo** Pozwól graczowi zdecydować, jaki kolor powinien mieć kwadrat.
 
-                    ***Extra*** Can you make the letter of your own first name and the flag of your own country too?
+                    ***Dodatkowo*** Czy potrafisz zrobić literę ze swojego własnego imienia i flagą własnego kraju?
 
                     <div class="w-full flex flex-row gap-2">
-                    Square <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="150">
-                    Letters <img src="https://github.com/hedyorg/hedy/assets/80678586/e75f4fa5-f1f5-4b48-806c-916c28e4e8ad" width="100">
-                    Flag <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
+                    kwadrat <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="150">
+                    litery <img src="https://github.com/hedyorg/hedy/assets/80678586/e75f4fa5-f1f5-4b48-806c-916c28e4e8ad" width="100">
+                    flaga <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
                     </div>
                 example_code: |
-                    Hint for the square:
+                    Wskazówka dla kwadratu:
                     ```
-                    chosen_color = {ask} _
+                    wybrany_kolor = {ask} _
                     ```
             7:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Ćwiczenie
+                    Odtwórz rysunki żółwiem!
 
                     <div class="w-full flex flex-row gap-2">
-                    Hexagon <img src="https://github.com/hedyorg/hedy/assets/80678586/92e492e1-1593-489b-aaf0-51d2a29755f4" width="200">
-                    Triangle <img src="https://github.com/hedyorg/hedy/assets/80678586/3629a5e6-1f02-4851-aab9-c5430ba4a1f1" width="200">
-                    Fan <img src="https://github.com/hedyorg/hedy/assets/80678586/1ba2ff71-1230-4fe3-8255-b2c504cf1b4e" width="200">
+                    sześciokąt <img src="https://github.com/hedyorg/hedy/assets/80678586/92e492e1-1593-489b-aaf0-51d2a29755f4" width="200">
+                    trójkąt <img src="https://github.com/hedyorg/hedy/assets/80678586/3629a5e6-1f02-4851-aab9-c5430ba4a1f1" width="200">
+                    wachlarz <img src="https://github.com/hedyorg/hedy/assets/80678586/1ba2ff71-1230-4fe3-8255-b2c504cf1b4e" width="200">
                     </div>
             8:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Ćwiczenie
+                    Odtwórz rysunki żółwiem!
 
-                    **Extra** The number in brackets indicates in how many lines of code this figure can be drawn. Can you do it in the same amount of lines?
+                    **Dodatkowo ** Liczba w nawiasach wskazuje, w ilu wierszach kodu można narysować tę liczbę. Czy możesz to zrobić w tej samej liczbie linii?
 
                     <div class="w-full flex flex-row gap-2">
-                    Square (3) <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
-                    Randomly colored star (5) <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
-                    Randomly colored spiral (7) <img src="https://github.com/hedyorg/hedy/assets/80678586/9bcdb3f1-367d-4ae0-878f-d09005424a35" width="150">
+                    kwadrat (3) <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
+                    Losowo pokolorowana gwiazda (5) <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
+                    Losowo pokolorowana spirala (7) <img src="https://github.com/hedyorg/hedy/assets/80678586/9bcdb3f1-367d-4ae0-878f-d09005424a35" width="150">
                     </div>
             9:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Ćwiczenia
+                    Odtwórz rysunki żółwiem!
 
-                    **Extra** The number in brackets indicates in how many lines of code this figure can be drawn. Can you do it in the same amount of lines?
+                    **Dodatkowo ** Liczba w nawiasach wskazuje, w ilu wierszach kodu można narysować tę liczbę. Czy możesz to zrobić w tej samej liczbie linii?
 
-                    **Extra** Give the player a choice which country they would like to see the flag of.
+                    **Dodatkowo ** Daj graczowi wybór kraju, którego flagę chcieliby zobaczyć .
 
                     <div class="w-full flex flex-row gap-2">
-                    Cross (7) <img src="https://github.com/hedyorg/hedy/assets/80678586/76e42c76-aa3f-4863-8eee-ead73c09a186" width="150">
-                    Randomly colored nested squares (8) <img src="https://github.com/hedyorg/hedy/assets/80678586/17f878cc-e893-4c10-b32e-a09a50bf08de" width="200">
-                    Flags <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
+                    krzyż (7) <img src="https://github.com/hedyorg/hedy/assets/80678586/76e42c76-aa3f-4863-8eee-ead73c09a186" width="150">
+                    Losowo pokolorowane zagnieżdżone kwadraty (8) <img src="https://github.com/hedyorg/hedy/assets/80678586/17f878cc-e893-4c10-b32e-a09a50bf08de" width="200">
+                    flagi <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
                     </div>
                 example_code: |
                     Hint for the nested squares:
                     ```
                     colors = red, blue, orange, yellow, pink, purple, green, brown, black
                     distance = 120
-                    repeat 5 times
+                    {repeat} 5 {times}
                     _
                     ```
                     Hint for the flags:
                     ```
-                    country = ask 'which country would you like to see the flag of?'
-                    if country is 'the Netherlands'
+                    country = {ask} 'which country would you like to see the flag of?'
+                    {if} country {is} 'the Netherlands'
                         color_1 = red
                         color_2 = white
                         color_3 = blue
                     ```
             10:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Ćwiczenie
+                    Odtwórz rysunki żółwiem!
 
                     <div class="w-full flex flex-row gap-2">
-                    Nested Hexagon <img src="https://github.com/hedyorg/hedy/assets/80678586/3629e908-3cd5-44ac-bbcd-1f1cceb15654" width="150">
-                    Traffic lights  <img src="https://github.com/hedyorg/hedy/assets/80678586/edbbb608-5ff8-4349-85a6-e47809adde43" width="100">
+                    Zagnieżdżony sześciokąt <img src="https://github.com/hedyorg/hedy/assets/80678586/3629e908-3cd5-44ac-bbcd-1f1cceb15654" width="150">
+                    sygnalizacja świetlna <img src="https://github.com/hedyorg/hedy/assets/80678586/edbbb608-5ff8-4349-85a6-e47809adde43" width="100">
                     </div>
                 example_code: |
-                    Hint Nested Hexagon:
+                    Wskazówka zagnieżdżone sześciokąty
                     ```
-                    distances = 100, 80, 60, 40, 20
-                    {for} distance {in} distances
+                    odległości = 100, 80, 60, 40, 20
+                    {for} odległość {in} odległości 
                     _
                     ```
 
-                    Hint Traffic Lights:
+                    Wskazówka sygnalizacja świetlna
                     ```
-                    colors = red, yellow, green
-                    {for} chosen_color {in} colors
-                        color _
+                    kolory = czerwony, żółty, zielony
+                    {for} wybrany_kolor{in} kolory
+                        {color} _
                         {repeat} _
                     ```
                 story_text_2: |
-                    Christmas lights <img src="https://github.com/hedyorg/hedy/assets/80678586/9637ea6d-6edc-4d88-a6f7-10271bfc5371" width="500">
+                    świąteczne lampki <img src="https://github.com/hedyorg/hedy/assets/80678586/9637ea6d-6edc-4d88-a6f7-10271bfc5371" width="500">
                 example_code_2: |
-                    Hint Christmas Lights:
+                    Wskazówki dla świątecznych lampek:
 
-                    Start by moving to the left side of the screen with an invisible white line. Then hang up the Christmas lights!
+                    Zacznij od przejścia na lewą stronę ekranu z niewidoczną białą linią. Następnie załóż lampki choinkowe!
                     ```
-                    {color} white
+                    {color} biały
                     {turn} -90
                     {forward} 300
                     {turn} 90
 
-                    colors = red, blue, yellow, purple, green, orange, pink
-                    {for} chosen_color {in} colors
+                    kolory = czerwony, niebieski, żółty, fioletowy, zielony, pomarańczowy, różowy
+                    {for} wybrany_kolor {in} kolory
                     _
                     ```
             11:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Ćwiczenie
+                    Odtwórz rysunki żółwiem!
 
                     <div class="w-full flex flex-row gap-2">
-                    Beehive (6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="150">
-                    Fan (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="150">
-                    Snowflake (13) <img src="https://github.com/hedyorg/hedy/assets/80678586/90f56bbb-86e5-448d-8aec-16f8c2c05cf2" width="150">
+                    ul(6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="150">
+                    wachlarz (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="150">
+                    śnieżynka (13) <img src="https://github.com/hedyorg/hedy/assets/80678586/90f56bbb-86e5-448d-8aec-16f8c2c05cf2" width="150">
                     </div>
                 example_code: |
-                    Hint Beehive:
+                    Wskazówka dla ula
                     ```
-                    {for} amount_of_combs {in} {range} 1 {to} _
-                        {for} walls_of_one_comb {in} {range} 1 {to} _
+                    {for} ilość_plastrów  {in} {range} 1 {to} _
+                        {for} ściany_ w_jednym_plastrze {in} {range} 1 {to} _
                             {forward} _
                             {turn} _
                         {forward} _
                         {turn} _
                     ```
 
-                    Hint Fan:
-                    Start out like the fan you made in level 7. Or take a peak at the hint for the beehive, because the codes are very similar.
+                    Wskazówka wachlarz:
+                    Zacznij jak wachlarz, który stworzyłeś na poziomie 7. Lub zobacz podpowiedzi dla ula, ponieważ kody są bardzo podobne.
 
-                    Hint Snowflake: Start by making one 'leg' and repeat it 6 times.
+                    Wskazówka śnieżynka: Zacznij od zrobienia jednej „nogi” i powtórz ją 6 razy.
             12:
                 story_text: |
                     ### Exercise
