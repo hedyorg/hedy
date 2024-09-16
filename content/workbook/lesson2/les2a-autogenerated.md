@@ -1,5 +1,7 @@
 # Hedy - Les 2a
 
+[Teacher] In level 2 leren leerlingen de codes `is` en `is ask` [/Teacher]
+
 ## Printen en invoer
 
 Aan het einde van de les kun jij:
@@ -25,6 +27,7 @@ Code:									Uitvoer:
 ```hedy
 naam is Mo                            ______________________________________
 print Goed bezig naam!                
+							
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
@@ -32,6 +35,7 @@ Code:									Uitvoer:
 ```hedy
 naam is Mo                            ______________________________________
 print Goed bezig Mo!                  
+							
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
@@ -39,6 +43,7 @@ Code:									Uitvoer:
 ```hedy
 voornaam is Layla                     ______________________________________
 print Goedemorgen naam!               
+							
 ```
 
 
@@ -57,7 +62,7 @@ Antwoord: <br> 〇 Goed<br> 〇 Fout
 naam is
 print Goedemorgen naam!							
 ```
-Antwoord: <br> 〇 Goed 〇 Fout
+Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **A/B Vraag**: Is deze code goed of fout?
 ```hedy
@@ -65,18 +70,7 @@ naam is Jansen
 print Goedemorgen meneer naam!
 print Hallo meneer naam!							
 ```
-Antwoord: <br> 〇 Goed 〇 Fout
-
-
-
-
-
-
-
-
-
-
-
+Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 
 ### Invoer vragen
@@ -112,6 +106,7 @@ Code:									Uitvoer:
 ```hedy
 naam is ask Hoe heet jij?             ______________________________________
 print dus jij heet: naam              
+							
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
@@ -119,14 +114,8 @@ Code:									Uitvoer:
 ```hedy
 toestand is ask Hoe gaat het met jou? ______________________________________
 print Dus het gaat toestand met jou   
+							
 ```
-
-
-
-
-
-
-
 
 
 #### Opdracht 4: Programmeer-woorden
@@ -137,6 +126,9 @@ We hebben deze les weer nieuwe woorden geleerd! Leg ze uit je eigen woorden.
 Antwoord: ____________________________________________________________________________________________________<br>
 
 **📖 Vraag**: Wat betekent waarde?
+Antwoord: ____________________________________________________________________________________________________<br>
+
+**📖 Vraag**: Wat betekent instellen?
 Antwoord: ____________________________________________________________________________________________________<br>
 
 
@@ -150,8 +142,3 @@ Antwoord: ______________________________________________________________________
 **📖 Vraag**: Wat doet het commando `is ask`?
 Antwoord: ____________________________________________________________________________________________________<br>
 
-
-
-## Op de computer!
-
-Ga nu naar Les2b - Deel 2

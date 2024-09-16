@@ -140,7 +140,15 @@ We hebben deze les weer nieuwe woorden geleerd! Leg ze uit je eigen woorden.
     "icon"      : "📖",
     "question"  : "Wat betekent waarde?",
     "lines"     : 1,
-    "answer"    : "Wat je opslaat in een variabele, bijv Henk of 12"
+    "answer"    : "Wat je opslaat in een variabele, bijv Henk of 12."
+}
+
+{
+    "assignment": "define",
+    "icon"      : "📖",
+    "question"  : "Wat betekent instellen?",
+    "lines"     : 1,
+    "answer"    : "Een programma waarbij een gebruiker invoer kan geven."
 }
 
 
@@ -164,6 +172,3 @@ We hebben nieuwe codes geleerd: `is`, `is ask` samen. Wat doen die? Leg het uit 
     "answer"    : "Vraag om invoer van de gebruiker en die opslaan in de variabele links van de is."
 }
 
-## Op de computer!
-
-Ga nu naar Les2b - Deel 2

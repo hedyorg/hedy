@@ -1,6 +1,6 @@
 # Hedy - Les 1a
 
-[Teacher] Het doel van deze les is om de eerste drie codes uit level 1 van Hedy te leren kennen: `print`, `echo` en `ask`. [/Teacher]
+[Teacher] Het doel van deze les is om de vijf codes uit level 1 van Hedy te leren kennen: `print`, `echo` en `ask` voor tekst en `forward` en `turn` voor het tekenen. [/Teacher]
 
 ## Printen en invoer
 
@@ -171,16 +171,12 @@ We hebben tot nu toe 3 codes geleerd: `print`, `ask` en `echo`. Wat doen die? Le
     "answer"    : "Herhaalt de invoer van de gebruiker."
 }
 
+## Op naar de computer!
 
-## Op de computer!
-
-Ga nu naar Les1b - Deel 1
+Je mag nu Hedy openen door naar www.hedy.org te gaan. Daar staan een aantal tabbladen klaar.
+In ieder tabblad staat uitleg, en een **opdracht**. Lees de opdracht goed en voer die uit.
 
 ## Tekenen
-
-Aan het einde van de les kun jij:
-
-* Tekeningen maken met de tekenturtle.
 
 
 #### Opdracht 6: Programmeer-woorden 
@@ -231,6 +227,7 @@ Voorspel wat de uitvoer van deze codes is. Dat is bij de turtle of tekenschildpa
 {
     "assignment": "output",
     "icon"      : "💻",
+    "type"      " "turtle",
     "code"      : "forward 100\nturn left\nforward 100\nturn left\nforward 100\nturn left\nforward 100\nturn left\n",
     "answer"    : "een vierkant",
     "lines"     : 5
@@ -239,6 +236,7 @@ Voorspel wat de uitvoer van deze codes is. Dat is bij de turtle of tekenschildpa
 {
     "assignment": "output",
     "icon"      : "💻",
+    "type"      " "turtle",
     "code"      : "forward 100\nturn left\nforward 100\nturn right\nforward 100\nturn left\nforward 100\nturn right\n",
     "answer"    : "een trapje (zonder onderkant)",
     "lines"     : 5
@@ -247,6 +245,7 @@ Voorspel wat de uitvoer van deze codes is. Dat is bij de turtle of tekenschildpa
 {
     "assignment": "output",
     "icon"      : "💻",
+    "type"      " "turtle",
     "code"      : "forward 100\nturn right\nforward 5\nturn right\nforward 100\nturn right\nforward 5\nturn right\n",
     "answer"    : "een hele smalle vierkant",
     "lines"     : 6
@@ -282,3 +281,35 @@ We draaien het nu om! Je krijg een uitvoer en jij moet de code erbij schrijven.
 
 
 
+### Wat vond jij?
+
+{
+    "assignment": "text",
+    "icon"      : "✍️",
+    "question"  : "Wat was de leukste opdracht van level 1?",
+    "lines"     : 1
+}
+
+{
+    "assignment": "text",
+    "icon"      : "✍️",
+    "question"  : "Waarom vond je juist die opdracht leuk?",
+    "lines"     : 5
+}
+
+{
+    "assignment": "text",
+    "icon"      : "✍️",
+    "question"  : "Welke opdracht was het minst leuk?",
+    "lines"     : 1
+}
+
+{
+    "assignment": "text",
+    "icon"      : "✍️",
+    "question"  : "Waarom vond je juist die opdracht niet leuk?",
+    "lines"     : 5
+}
+
+
+``

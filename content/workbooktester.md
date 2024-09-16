@@ -105,7 +105,7 @@ Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingev
 Code:									Uitvoer:
 ```hedy
 naam is ask Hoe heet jij?             ______________________________________
-print dus jij heet: naam              ______________________________________
+print dus jij heet: naam              
 							
 ```
 
@@ -113,7 +113,7 @@ print dus jij heet: naam              ______________________________________
 Code:									Uitvoer:
 ```hedy
 toestand is ask Hoe gaat het met jou? ______________________________________
-print Dus het gaat toestand met jou   ______________________________________
+print Dus het gaat toestand met jou   
 							
 ```
 
@@ -126,6 +126,9 @@ We hebben deze les weer nieuwe woorden geleerd! Leg ze uit je eigen woorden.
 Antwoord: ____________________________________________________________________________________________________<br>
 
 **📖 Vraag**: Wat betekent waarde?
+Antwoord: ____________________________________________________________________________________________________<br>
+
+**📖 Vraag**: Wat betekent instellen?
 Antwoord: ____________________________________________________________________________________________________<br>
 
 

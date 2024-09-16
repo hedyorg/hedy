@@ -4,6 +4,7 @@ current_directory = os.path.dirname(os.path.abspath(__file__))
 
 # TODO:
 # teacher content/answers
+# schildpadje in de uitvoer zetten ipv regels
 
 templates = {
     'text': '''**{icon} Vraag**: {question} <br>
