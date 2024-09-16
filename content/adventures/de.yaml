@@ -1876,13 +1876,13 @@ adventures:
                     Dein Programm muss aus mindestens 10 Zeilen Code bestehen und du musst mindestens einen `{if}` und `{else}` Befehl verwenden.
                 example_code: |
                     ```
-                    Freunde {is} Jörg, Luzie, David
-                    {print} 'Ich kann vorhersehen, ob du morgen im Lotto gewinnst!
-                    Person {is} {ask} 'Wie heißt du?'
-                    gute_Antwort {is} Hurra! Du gewinnst!, Du gewinnst sicher!, Wir haben ein Gewinner!
-                    schlechte_Antwort {is} Pech gehabt!, Versuch nochmal!, Jemand andere wird gewinnen!, Du verlierst
-                    {if} Person {in} Freunde {drucke} gute_Antwort {at} {random}
-                    {else} {print} schlechte_Antwort {at} {random}
+                    friends {is} Jordan, Lucy, Dave
+                    {print} 'I can predict if you will win the lottery tomorrow!'
+                    person {is} {ask} 'Who are you?'
+                    good_answer {is} Hurray! You win!, You will definitely win!, We have a winner!
+                    bad_answer {is} Bad luck! Try again!, Another person will win, You lose!
+                    {if} person {in} friends {print} good_answer {at} {random}
+                    {else} {print} bad_answer {at} {random}
                     ```
             6:
                 story_text: |
