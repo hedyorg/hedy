@@ -239,7 +239,7 @@ adventures:
                     ```
                 story_text_2: |
                     ### Ćwiczenie 2
-                    Przygotowaliśmy już dla ciebie polecenie `{input}`. Najpierw użyj zmiennej `imię` w twojej opowieści.
+                    Przygotowaliśmy już dla ciebie polecenie `{input}`. Najpierw użyj zmiennej `name` w twojej opowieści.
                     Następnie dodaj drugie polecenie `{ask}` i użyj również tej zmiennej.
                     Wskazówka: Pamiętaj o przecinkach w poleceniu `{print}` pomiędzy tekstem a zmiennymi!
                 example_code_2: |
@@ -1255,11 +1255,11 @@ adventures:
 
                     Oczywiście chciałaś, aby wypisało się:
 
-                    `Moje imię to Zosia`
+                    `My name is Sophie`
 
                     Jednak Hedy wypisuje:
 
-                    `Moje Zosia to Zosia`.
+                    `My Sophie is Sophie`
 
                     Na tym poziomie rozwiążemy ten problem używając cudzysłowów.
                 example_code: |
@@ -2275,7 +2275,12 @@ adventures:
             4:
                 story_text: |
                     Na tym poziomie nauczysz się używać cudzysłowów w swoich grach.
+
+                    ### Ćwiczenie
                     Czy potrafisz zmienić swój Nawiedzony Dom, aby był zgodny z poziomem 4?
+
+                    ### Ćwiczenie 2
+                    Wróć do poprzedniego poziomu i skopiuj swój kod nawiedzonego domu. Spraw, aby kod działał na tym poziomie, dodając cudzysłowy we właściwych miejscach.
                 example_code: |
                     ```
                     _Dodaj znaki cudzysłowu do tego kodu
@@ -3249,7 +3254,7 @@ adventures:
                     ### Ćwiczenie
                     Dokończ kod. Za każdym razem należy wybrać losową literę, którą należy nacisnąć. Dostajesz punkt za poprawną naciśnięcie i odliczenie dwóch punktów za niewłaściwą prasę.
                     **Dodatkowo ** Wyczyść ekran po każdej literze i pokaż użytkownikowi, ile punktów zdobył.
-                example_code: "```\npunkty = 0\nlitery = a, b, c, d, e\n{repeat} 10 {times}\n    litera = _ _ _\n    {print} 'Naciśnij literę ' litera\n    {if} litera {is} {pressed}\n    _\n    _\n    _\n```\n"
+                example_code: "```\npunkty = 0\nlitery = a, b, c, d, e\n{repeat} 10 {times}\n    litera = _ _ _\n    {print} 'Naciśnij literę ' litera.\n    {if} litera {is} {pressed}\n    _\n    _\n    _\n```\n"
     print_command:
         name: '{print}'
         default_save_name: print
