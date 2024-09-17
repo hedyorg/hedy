@@ -4838,20 +4838,20 @@ adventures:
                     flagi <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
                     </div>
                 example_code: |
-                    Wskazówki dotyczące kwadratów
+                    Hint for the nested squares:
                     ```
-                    kolory = czerwony, niebieski, pomarańczowy, żółty, różowy, fioletowy, zielony, brązowy, czarny
-                    odległość = 120
+                    colors = red, blue, orange, yellow, pink, purple, green, brown, black
+                    distance = 120
                     {repeat} 5 {times}
                     _
                     ```
-                    Wskazówka dotycząca flag:
+                    Hint for the flags:
                     ```
-                    kraj = {ask} 'Flagę jakiego kraju chciałbyś zobaczyć?'
-                    {if} kraj{is} 'Holandia'
-                        kolor_1 = czerwony 
-                        kolor_2 = biały
-                        kolor_3 = niebieski
+                    country = {ask} 'which country would you like to see the flag of?'
+                    {if} country {is} 'the Netherlands'
+                        color_1 = red
+                        color_2 = white
+                        color_3 = blue
                     ```
             10:
                 story_text: |
