@@ -16,7 +16,7 @@ adventures:
                     ```
                     {ask} Głównym bohaterem historii jest
                     {print} Główny bohater idzie przez las
-                    {echo} Jest troszkę przestraszony,
+                    {echo}  Jest troszkę przestraszony,
                     {print} Wszędzie słyszy jakieś dziwnie odgłosy
                     {print} Obawia się że to jest nawiedzony las
                     ```
@@ -127,7 +127,7 @@ adventures:
                     imię {is} {ask} 'Kto idzie przez las?'
                     {print} imię ' idzie przez las'
                     {print} imię ' spotyka potwora'
-                    zakończenie {is} {ask} 'Czy chciałbyś dobre czy złe zakończenie?'
+                    zakończenie {is} {ask} 'Czy chciałbyś dobre czy złe ?'
                     {if} zakończenie {is} dobre {print} imię ' wyciąga miecz i potwór ucieka'
                     {else} {print} 'Potwór zjada ' imię
                     ```
@@ -249,7 +249,7 @@ adventures:
                     ```
     add_remove_command:
         name: '{add} {to_list} & {remove} {from}'
-        default_save_name: add_remove_command
+        default_save_name: Dodaj_komendę_remove
         description: wprowadzamy {add}{to_list} i {remove} {from}
         levels:
             3:
@@ -662,7 +662,7 @@ adventures:
                     liczba1 = {ask} 'Jaka jest pierwsza liczba?'
                     liczba2 = {ask} 'Jaka jest druga liczba?'
                     odpowiedź = _
-                    {print} liczba1 ' plus ' liczba2 ' to ' odpowiedź
+                    {print} liczba1 ' plus ' liczba2 ' to ' _
                     ```
             13:
                 story_text: |
@@ -756,7 +756,7 @@ adventures:
                     ```
     clear_command:
         name: '{clear}'
-        default_save_name: clear_command
+        default_save_name: komenda_clear
         description: 'Polecenie {clear}'
         levels:
             4:
@@ -924,7 +924,7 @@ adventures:
                             {print} Będzie to $18'
                             cena = 18
                     kolor = {ask} Jaki kolor ?
-                    świecidełka = {ask} 'Chciała by Pani do tego jakieś świecidełka?'
+                    świecidełka = {ask} 'Chciała by Pani do tego jakieś świecidełko?'
                     {if} świecidełka {is} tak
                         {print} 'Są one płatne dodatkowo 3$'
                     cena całkowita = cena + 3
@@ -984,55 +984,55 @@ adventures:
 
                     Mind that you have to test your code extra carefully for the month February, because the amount of days in this month changes in leap years.
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Uwaga! Ten kod musi zostać zdebuggowany!**
                     ```
-                    print 'Hedy calender'
-                    months_with_31 days = January, March, May, July, September, October, December
-                    months_with_30_days = April, June, August, November
-                    month = ask 'Which month would you like to see?'
-                    if month in months_with_31_days
-                        days = 31
-                        if month in months_with30_days
-                            days = 30
-                    if month = February
-                        leap_years = 2020, 2024, 2028, 2036, 2040, 2044, 2028
-                        year = ask 'What year is it?'
-                    if year in leap_years
-                        days = 29
-                    else
-                        days = 28
+                    {print} 'Kalendarz Hedy'
+                    miesiące_z_ 31_dniami = Styczeń, marzec, maj, lipiec, wrzesień, październik, grudzień
+                    miesiące_z_ 30_dniami = Kwiecień, czerwiec, sierpień, listopad
+                    miesiące = {ask} 'Jaki miesiąc chciałbyś zobaczyć?'
+                    {if} miesiące {in} miesiące_z_ 31_dniami
+                        dni = 31
+                        {if} miesiące {in} miesiące_z_ 30_dniami
+                            dni = 30
+                    {if} miesiące = Luty
+                        lata przestępne = 2020, 2024, 2028, 2036, 2040, 2044, 2028
+                        rok = {ask} 'Jaki mamy teraz rok)?'
+                    {if} rok {in} lata przestępne
+                        dni = 29
+                    {else}
+                        dni = 28
 
-                    print 'Here are all the days of ' moth
-                    for i in range 1 to days
-                        print month i
+                    {print} 'Oto wszystkie dni ' miesiąc
+                    {for} i {in} {range} 1 {to} dni
+                        {print} miesiąc i
                     ```
             12:
                 story_text: |-
                     ### Exercise
                     Debug this code. Good luck!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Uwaga! Ten kod musi zostać zdebuggowany!**
                     ```
-                    define greet
-                    greetings = 'Hello', 'Hi there', 'Goodevening'
-                        print greetings at random
+                    {define} powitaj
+                    powitania = 'Witam', 'Cześć', 'Dzień dobry'
+                        {print} powitania {at} {random}
 
-                    define take_order
-                        food = ask 'What would you like to eat?'
-                        print 'One food'
-                        drink = 'What would you like to drink?'
-                        print 'One ' drink
-                        more = ask 'Would you like anything else?'
-                            if more is 'no'
-                        print 'Alright'
-                            else
-                            print 'And ' more
-                    print 'Thank you'
+                    {define} wziąć zamówienie
+                        posiłek = {ask} 'Co chciałbyś zjeść?'
+                        {print} 'Jeden posiłek'
+                        napój = 'Czego chciałbyś się napić?'
+                        {print} 'Jeden ' napój
+                        więcej = {ask} 'Czy chciałbyś do tego coś jeszcze?'
+                            {if} więcej {is} 'nie'
+                        {print} 'W porządku'
+                            {else}
+                            {print} 'i ' więcej
+                    {print} 'Dziękuję'
 
-                    print 'Welcome to our restaurant'
-                    people = ask 'How many people are in your party tonight?'
-                    for i in range 0 to people
-                        call greet_costumer
+                    {print} 'Witamy w naszej restauracji'
+                    ludzie = {ask} 'Ile ludzi będzie dziś na twoim przyjęciu?'
+                    {for} i {in} {range} 0 {to} ludzie
+                        {call} powitaj_klienta
                     ```
             13:
                 story_text: |-
@@ -1456,7 +1456,7 @@ adventures:
                 example_code: |
                     ```
                     wybory {is} 1, 2, 3, 4, 5, dżdżownica
-                    {print} Wyrzucono _ {at} {random}
+                    {print} Wyrzucono _ {at} {random}!
                     ```
                 story_text_2: |
                     ### Ćwiczenie
@@ -2735,7 +2735,7 @@ adventures:
                 story_text_2: Jak widać, możesz również użyć polecenia `{sleep}`, aby dodać małą pauzę w utworze.
                 example_code_2: |
                     ```
-                    {print} Twinkle Twinkle Little Star
+                    {print} Gwiazdko gwiazdko świeć nam świeć
                     {play} C
                     {play} C
                     {play} G
@@ -3668,7 +3668,7 @@ adventures:
             7:
                 story_text: |
                     Na tym poziomie nauczyłeś się używać polecenia `{repeat}` do powtórzenia linii kodu określoną ilość razy.
-                    Możesz użyć tego w swojej restauracji do `{ask}` wielu osób, co chcą zjeść.
+                    Możesz użyć tego w swojej restauracji do `{ask}` wielu osób, co chcą zjeść. 
 
                     ### Ćwiczenie
                     Czy możesz uzupełnić kod? Hedy musi powtarzać to pytanie tyle razy, ilu jest ludzi. Więc jeśli jest 5 osób, pytanie należy zadać 5 razy.
@@ -3711,7 +3711,7 @@ adventures:
                     Oczywiście można też zamówić dla wielu osób!
                     Czy możesz dodać odpowiednią ilość wcięć przed każdą linią, aby kod działał poprawnie?
                     Wskazówka: niektóre wiersze w ogóle nie wymagają wcięcia.
-                example_code_2: "```\n_ dania = przystawka, danie główne, deser\n_ imiona = Szymon, Anna\n_ {for} imię {in} imiona \n_ {for} danie {in} dania \n_ jedzenie = {ask} imię ', co chcesz zjeść jako swoje ' danie '?'\n_ {print} imię ' zamawia ' jedzenie ' jako ich ' danie\n```\n"
+                example_code_2: "```\n_ dania = przystawka, danie główne, deser\n_ imiona = Szymon, Anna\n_ {for} imię {in} imiona \n_ {for} danie {in} dania  \n_ jedzenie = {ask} imię ', co chcesz zjeść jako swoje ' danie '?'\n_ {print} imię ' zamawia ' jedzenie ' jako ich ' danie\n```\n"
             11:
                 story_text: |
                     Możemy użyć `{for}` z `{range}` do wypisania zamówień od wielu klientów w uporządkowany sposób.
@@ -4920,69 +4920,71 @@ adventures:
                     Wskazówka śnieżynka: Zacznij od zrobienia jednej „nogi” i powtórz ją 6 razy.
             12:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
-                    Hint: Bracelet designing program. Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
-                    </div>
-                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
+                    ### Ćwiczenie
+                    Odtwórz rysunki za pomocą żółwia!
+
+                    Po pierwsze, zdefiniuj funkcję ** dla każdego kształtu **, którego chcesz użyć na bransoletce. Następnie dodaj kształty do bransoletki w następujący sposób:
+
+                    Program do projektowania bransoletek <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500"> 
                 example_code: |
+                    Wskazówka dotycząca programu do projektowania bransoletek
                     ```
-                    {define} draw_a_square
+                    {define} narysuj_kwadrat
                     _
 
-                    {color} white
+                    {color} biały
                     {turn} -90
                     {forward} 300
                     {turn} 180
 
                     {for} i {in} {range} 1 {to} 5
-                        {color} gray
+                        {color} dzary
                         {forward} 100
-                        shape = {ask} 'What kind of shape would you like next on the bracelet?'
-                        chosen_color = {ask} 'In which color?'
-                        {color} chosen_color
-                        {if} shape = 'square'
-                            {call} draw_a_square
+                        kształt = {ask} 'Jaki kształt chciałbyś następnie na bransoletce?'
+                        wybrany_kolor = {ask} 'W jakim kolorze?'
+                        {color} wybrany_kolor 
+                        {if} kształt = 'kwadrat'
+                            {call} narysuj_kwadrat
                     ```
             13:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Ćwiczenie
+                    Odtwórz rysunki za pomocą żółwia!
 
-                    Street in different sizes <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
-                    Colored street  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
-                    Snow Storm <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
+                    Ulica w różnych rozmiarach <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
+                    Pokolorowana ulica  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
+                    Śnieżyca <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
                 example_code: |
-                    Hint Street in different sizes
+                    Wskazówka dotycząca ulicy w różnych rozmiarach
                     ```
-                    {define} draw_a_house {with} size
+                    {define} narysuj_dom {with} rozmiar
                     _
 
-                    {call} draw_a_house {with} 90
-                    {call} draw_a_house {with} 60
-                    {call} draw_a_house {with} 30
+                    {call} narysuj_dom {with} 90
+                    {call} narysuj_dom {with} 60
+                    {call} narysuj_dom {with} 30
                     ```
 
-                    Hint Colored street
+                    Wskazówka dotycząca pokolorowanej ulicy
                     ```
-                    {define} draw_a_house {with} chosen_color
+                    {define} narysuj_dom {with} wybrany_kolor
                     _
                     ```
 
-                    Hint Snow Storm
+                    Wskazówka dotycząca śnieżycy
                     ```
-                    {define} draw_snowflake {with} length, color
-                        _
+                    {define} narysuj_śnieżynkę {with} długość, kolor
+                        
 
-                    numbers = 10, 20, 30
-                    colors = _
+                    liczby = 10, 20, 30
+                    kolory = _
 
                     {for} i {in} {range} 1 {to} 5
-                        random_number = _
-                        random_color = _
-                        {call} draw_snowflake {with} random_number, random_color
-                        {color} white
-                        {turn} random_number * 5
+                        losowa_liczba = _
+                        losowy_kolor = _
+                        {call} narysuj_śnieżynkę {with} losowa_liczba, losowy_kolor
+                        {color} biały
+                        {turn} losowa_liczba * 5
                         {forward} 80
                     ```
             14:
@@ -4997,17 +4999,17 @@ adventures:
                     </div>
                 example_code: |
                     ```
-                    {define} calculate_degrees {with} amount_of_corners
-                        _ 360 / amount_of_corners
+                    {define} oblicz_kąty  {with}  ilość_narożników
+                        _ 360 / ilość_narożników
 
 
-                    {define} draw_figure {with} degrees
+                    {define} narysuj_figurę {with} kąty
                         _
-                            {forward} 400/amount_of_corners
+                            {forward} 400/ilość_narożników
                             {turn} _
 
-                    amount_of_corners = {ask} _
-                    degrees = {call} _ {with} _
+                    ilość_narożników = {ask} _
+                    kąty = {call} _ {with} _
 
                     {call} _ {with}
                     {call} _ {with}
@@ -5021,17 +5023,17 @@ adventures:
                 example_code: |
                     Spirala
                     ```
-                    distance = 5
-                    {while} distance < 200
-                        distance = distance + 5
+                    odległość = 5
+                    {while} odległość < 200
+                        odległość = odległość + 5
                          _
                     ```
                 story_text_2: |
-                    Spirala <img src="https://github.com/hedyorg/hedy/assets/80678586/cb671065-b47b-49f0-b298-dcbcd2a5e28f" width="150">
+                    Wachlarz <img src="https://github.com/hedyorg/hedy/assets/80678586/cb671065-b47b-49f0-b298-dcbcd2a5e28f" width="150">
                 example_code_2: |
-                    Fan
+                    Wachlarz
                     ```
-                    {define} draw_a_square {with} side
+                    {define} narysuj_kwadrat {with} bok
                     _
 
                     i = 100
@@ -5041,14 +5043,14 @@ adventures:
                         i = i - 3
                     ```
                 story_text_3: |
-                    Star <img src="https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93" width="150">
+                    gwiazda <img src="https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93" width="150">
                 example_code_3: |
                     Gwiazda
                     Gwiazdę rysuje się zwykle za pomocą obrotu o 144 stopnie. Jeśli zmienisz to nieco na przykład na 143 stopnie i powtórzysz wzór wiele razy z pętlą {while}, możesz wykonać tę figurę.
     while_command:
         name: '{while}'
-        default_save_name: while_command
-        description: while
+        default_save_name: komenda_while
+        description: '{while}'
         levels:
             15:
                 story_text: |-
@@ -5059,10 +5061,10 @@ adventures:
                     Jeśli nigdy nie zostanie podana prawidłowa odpowiedź, pętla nigdy się nie kończy!
                 example_code: |
                     ```
-                    answer = 0
-                    {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
+                    odpowiedź = 0
+                    {while} odpowiedź != 25
+                        odpowiedź = {ask} 'Ile to jest 5 razy 5?'
+                    {print} 'Podano poprawną odpowiedź'
                     ```
     years:
         name: Nowy Rok
@@ -5077,7 +5079,8 @@ adventures:
                     Wypełnij puste pola i spraw, aby kod działał!
                 example_code: |
                     ```
-                    {for} liczba {in} {range} _ {to} _
+                    {for} liczba{in} {range} _ {to} _
                         {print} liczba
+                        {sleep}
                     {print} 'Szczęśliwego Nowego Roku!'
                     ```
