@@ -17,8 +17,7 @@
       </div>
   </div>
 {% endif %}
-<!-- the top row: level dropdown, adventure dropdown and next adventure button -->
-<div class="mt-4 py-2 flex flex-col md:flex-row gap-4 md:gap-2 px-4 md:items-center justify-between w-full max-w-screen-2xl mx-auto">
+<div class="mt-4 mb-1 mx-auto py-2 px-4 flex flex-row gap-10 justify-start md:items-center w-full max-w-screen-2xl">
   <div class="flex flex-row gap-4 justify-between sm:justify-normal hidden">
     {% if customizations and customizations["available_levels"]%}
       <div class="dropdown relative">
@@ -74,82 +73,7 @@
         {{adventures[0].name}}
       </div>
       {% elif not public_adventures_page %}
-      <!--
-      <div class="flex justify-between hidden">
-        <div class="dropdown relative">
-          <button class="blue-btn px-4 rounded inline-flex items-center gap-2 text-l" data-cy="dropdown_adventure_button"
-            onclick="$('#adventure_dropdown').slideToggle('medium');"
-            _="on load
-            set adv to hedyApp.getCurrentAdv()
-            put adv into #adventure_text
-            on click hedyApp.scrollToLastClickedButton('adventure_dropdown')">
-            <div id="adventure_text"></div>
-            <svg id="adventure_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-            </svg>
-          </button>
-          <div class="dropdown-menu dropdown-blue z-30 min-w-full h-96 overflow-auto" id="adventure_dropdown" data-cy="adventure_dropdown"
-            style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
-            _="on mutation of @style
-                set arrow to #adventure_arrow
-                if *display == 'none'
-                    remove .rotate-180 from arrow
-                else if not arrow.classList.contains('rotate-180')
-                    add .rotate-180 to arrow
-                end">
-              {% for adventure in adventures %}
-                <button id="adventure_button_{{ adventure.name }}"
-                data-cy="adventure_button_{{ adventure.name }}"
-                class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white"
-                data-tab="{{adventure.short_name}}"
-                tabindex="{{ loop.index }}"
-                style="width: 100%;"
-                onclick="$('#adventure_dropdown').slideUp('medium');"
-                _="on click
-                set adv to hedyApp.getCurrentAdv()
-                put adv into #adventure_text
-                then localStorage.setItem('adventure_dropdown', 'adventure_button_{{ adventure.name }}')">
-                    {{ adventure.name }}
-                </button>
-              {% endfor %}
-              {% if parsons %}
-                <button id="adventure_button_parsons"
-                data-cy="adventure_button_parsons"
-                class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white"
-                data-tab="parsons"
-                tabindex="{{adventures|length + 1}}"
-                style="width: 100%;"
-                onclick="$('#adventure_dropdown').slideUp('medium');"
-                _="on click
-                set adv to hedyApp.getCurrentAdv()
-                put adv into #adventure_text
-                then localStorage.setItem('adventure_dropdown', 'adventure_button_parsons')">
-                    {{_('parsons_title')}}
-                </button>
-              {% endif %}
-              {% if quiz %}
-                <button id="adventure_button_quiz"
-                data-cy="adventure_button_quiz"
-                class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white"
-                data-tab="quiz"
-                style="width: 100%;"
-                onclick="$('#adventure_dropdown').slideUp('medium');"
-                _="on click
-                set adv to hedyApp.getCurrentAdv()
-                put adv into #adventure_text
-                then localStorage.setItem('adventure_dropdown', 'adventure_button_quiz')">
-                  {{_('quiz_tab')}}
-                </button>
-              {% endif %}
-          </div>
-        </div>
-      </div>
-      {% endif %}
-      <button class="blue-btn">
-        Adventures
-        <i class="fa-solid fa-book-open-reader"></i>
-      </button>
-      -->
+      {% endif %}      
   </div>
   <div class="flex flex-row justify-between sm:justify-normal gap-4 hidden">
     {% if current_user_is_in_class %}
@@ -159,30 +83,30 @@
     </button>
     {% endif %}
   </div>
-  <div class="text-4xl font-light text-blue-800">
-    {{ _('level_title') }} {{ level_nr }}
-    &nbsp;
-    {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}
-  </div>
-</div>
-
-<!-- the second row: program name, share button, (optional) submit button, cheatsheet button and language button -->
-<div class="mt-1 md:mt-4 py-2 flex flex-col md:flex-row gap-2 px-4 md:items-center md:justify-end w-full max-w-screen-2xl mx-auto">
-  <div id="program_name_container" class="overflow-hidden gap-4 flex flex-1">
-    <p id="program_name" type="text" class="text-3xl font-light text-blue-800 border-b-4">      
+  <div class="flex flex-row gap-4">
+    <div class="flex flex-row border-b-2 border-blue-900 gap-2">
+      <div class="text-4xl font-light text-blue-800">
+        {{ _('level_title') }} {{ level_nr }}
+        {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}
+      </div>
+      <span class="text-4xl font-light text-blue-800" >—</span>
+      <div id="program_name" type="text" class="text-4xl font-light text-blue-800">      
       {{ initial_adventure.name }}
-    </p>
-    <button class="blue-btn cursor-pointer" 
-      _="on click toggle .-translate-x-full on #index_sidebar
-        then toggle .hidden on #sidebar_bg
-        wait 100ms
-         then toggle .opacity-0 on #sidebar_bg
-         then toggle .opacity-75 on #sidebar_bg">
-      {{ _('index_button') }}
-      <i class="fa-solid fa-book-open-reader"></i>
-    </button>
+      </div>
+    </div>
   </div>
-  <div class="md:flex flex-row gap-2">
+  <div class="flex-1"></div>
+  <div class="flex flex-row gap-4">
+    <button class="blue-btn cursor-pointer " 
+    _="on click toggle .-translate-x-full on #index_sidebar
+    then toggle .hidden on #sidebar_bg
+    wait 100ms
+    then toggle .opacity-0 on #sidebar_bg
+    then toggle .opacity-75 on #sidebar_bg">
+    See more adventures 
+    <i class="fa-solid fa-book-open-reader"></i>
+  </button>
+  <div class="flex flex-row gap-2">
     {% if not hide_cheatsheet and cheatsheet %}
     <div class="dropdown relative" id="cheatsheet_dropdown_container">
       <button class="blue-btn ltr:ml-1 rtl:mr-1 rounded inline-flex items-center gap-2" id="dropdown_cheatsheet_button"
@@ -224,8 +148,9 @@
       {{ render_partial('hedy-page/htmx-language-switch-button.html', commands=commands) }}
     {% endif %}
   </div>
-  {% endif %}
   </div>
+</div>
+{% endif %}
 <div class="w-full max-w-screen-2xl mx-auto" id="code_content_container">
 {% block levelbody %}{% endblock %}
 </div>
