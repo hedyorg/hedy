@@ -5422,19 +5422,36 @@ adventures:
             12:
                 story_text: |
                     bla
-
-                    ### Exercise
-
+                example_code: |
+                  ```
+                  bla
+                  ```
 
             13:
                 story_text: |
-                    bla
+                  Our janitors have a big list of tasks. Some tasks are done everyday, others on a certain day, season or date. This is very confusing and leads to situations where some tasks are forgotten.
+                  Can you help by writing a program that'll print the correct tasklist for that day?
 
-                    ### Exercise
-                    bla
+                  ### Exercise
+                  The program should:
+                  * Wish the janitor a goodmorning.
+                  * Ask the janitor what day of the week it is, which month and which day of the month.
+                  * Then the program should print the correct tasklist for that day.
+
+                  The tasks that should be done:
+                  * Everyday tasks: mop the floor, clean the toilets, open the curtains
+                  * On mondays and thursdays: water the plants
+                  * On tuesday and fridays: mop the floors
+                  * On saturdays: wash the coffeemachine
+                  * On the first of each month: wash the windows
+                  * On the 7th of each month: refill the vending machines
+                  * On the 14th of each month: check the batteries for the fire alarms
+                  * Everyday in wintermonths: turn on the heaters
+                  * Everyday in summermonths: turn on the airconditioning
+
                 example_code: |
                     ```
-                    bla
+                    {call} make_tasklist {with} day, month, date
                     ```
 
             14:
@@ -5452,7 +5469,7 @@ adventures:
                     * If the drug tolerance from this patient is 'high', add 10 more ml.
                     * If the drug tolerance is 'low', subtract 10 ml.
                     * If the drug tolerance is 'normal', don't add or subtract anything.
-                    * When the program has calculated the amount of anestehics it returns the value, and tells the anesthesiologist how much anesthetics to administer. 
+                    * When the program has calculated the amount of anestehics it returns the value, and tells the anesthesiologist how much anesthetics to administer.
             15:
                 story_text: |
                     bla
