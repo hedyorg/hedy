@@ -1515,10 +1515,10 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "one_level_error": "Musisz wybrać co najmniej jeden poziom.",
     "restaurant": "🍣, 🍕, 🍔",
     "rock": "✂️, 📜, 🗻",
-    "select_all": "Select all",
-    "selected": "Selected",
+    "select_all": "Wybierz wszystko",
+    "selected": "Wybrano",
     "songs": "🎵,🎶",
-    "successful_runs": "Successful runs: {successful_runs}",
+    "successful_runs": "Udane uruchomienia: {successful_runs}",
     "teacher_welcome": "Witaj w Hedy! Jesteś teraz dumnym posiadaczem konta nauczyciela, które pozwala Ci na tworzenie klas i zapraszanie uczniów.",
     "turtle": "🐢",
     "unsaved_class_changes": "Strona zawiera niezapisane zmiany. Czy jesteś pewien, że chcesz wyjść bez zapisania zmian?"
