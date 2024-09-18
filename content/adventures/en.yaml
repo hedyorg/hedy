@@ -5424,7 +5424,7 @@ adventures:
                     bla
 
                     ### Exercise
-                    bla
+
 
             13:
                 story_text: |
@@ -5439,15 +5439,20 @@ adventures:
 
             14:
                 story_text: |
-                    bla
+                    Our anesthesiologist has to calculate how much anesthetics to give our patients who'll undergo an operation. This depends on a couple of factors: weight, age, length of surgery and drug tolerance.
+                    Can you help our anesthesiologist by making a program that'll calculate the amount for them?
 
                     ### Exercise
-                    bla
-                example_code: |
-                    ```
-                    bla
-                    ```
-
+                    The program should:
+                    * Contain a function that calculates how much anesthetics should be given to the patient and returns the value.
+                    * The amount of anethetics in ml = weight of the patient in kilograms devided by 600.
+                    * If the patient is older than 80 this amount should be muliplied by 0.8.
+                    * If the patient is younger than 20 this amount should be multiplied by 1.2.
+                    * Then the amount is multiplied by the amount of minutes that the surgery takes.
+                    * If the drug tolerance from this patient is 'high', add 10 more ml.
+                    * If the drug tolerance is 'low', subtract 10 ml.
+                    * If the drug tolerance is 'normal', don't add or subtract anything.
+                    * When the program has calculated the amount of anestehics it returns the value, and tells the anesthesiologist how much anesthetics to administer. 
             15:
                 story_text: |
                     bla
