@@ -2,12 +2,12 @@
 
 [Teacher] In level 2 leren leerlingen de codes `is` en `is ask` [/Teacher]
 
-## Printen en invoer
+## Variabelen
 
 Aan het einde van de les kun jij:
 
-* Code schrijven die tekst print
-* Een verhaal met invoer maken
+* Iets opslaan in een variabele
+* Een verhaal en tekening maken waarin je een variabele gebruikt
 
 ### Variabelen
 
@@ -20,7 +20,37 @@ naam is Mo
 print naam
 ```
 
-#### Opdracht 1: Voorspel de uitvoer
+#### Opdracht 1: Omcirkel het juiste stukje code
+
+**◯ Opdracht**: Omcirkel alle keren dat er een variabele in de code staat.									
+```hedy
+naam is Hedy
+print Hallo naam
+leeftijd is 17
+print Jij bent leeftijd jaar oud							
+```
+
+
+**◯ Opdracht**: Omcirkel nu de stukken code waarin een variabele **wordt ingesteld.**									
+```hedy
+naam is Hedy
+print Hallo naam
+leeftijd is 17
+print Jij bent leeftijd jaar oud							
+```
+
+
+**◯ Opdracht**: Omcirkel nu de stukken code waarin de waarde van een variabele **wordt gebruikt.**									
+```hedy
+naam is Hedy
+print Hallo naam
+leeftijd is 17
+print Jij bent leeftijd jaar oud							
+```
+
+
+
+#### Opdracht 2: Voorspel de uitvoer
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									Uitvoer:
@@ -47,7 +77,7 @@ print Goedemorgen naam!
 ```
 
 
-#### Opdracht 2: Foutje?
+#### Opdracht 3: Foutje?
 Lees de codes goed! Welke zijn er goed of fout.
 
 **A/B Vraag**: Is deze code goed of fout?
@@ -97,7 +127,7 @@ Als iemand die Maan heet deze code zou gebruiken, dan wordt de uitvoer:
 dus jij heet: Maan
 ```
 
-#### Opdracht 3: Voorspel de uitvoer
+#### Opdracht 4: Voorspel de uitvoer
 
 Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingevuld.
 
@@ -118,7 +148,7 @@ print Dus het gaat toestand met jou
 ```
 
 
-#### Opdracht 4: Programmeer-woorden
+#### Opdracht 5: Programmeer-woorden
 
 We hebben deze les weer nieuwe woorden geleerd! Leg ze uit je eigen woorden.
 
@@ -132,7 +162,7 @@ Antwoord: ______________________________________________________________________
 Antwoord: ____________________________________________________________________________________________________<br>
 
 
-#### Opdracht 5: Codes
+#### Opdracht 6: Codes
 
 We hebben nieuwe codes geleerd: `is`, `is ask` samen. Wat doen die? Leg het uit in je eigen woorden.
 

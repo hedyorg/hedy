@@ -2,12 +2,12 @@
 
 [Teacher] In level 2 leren leerlingen de codes `is` en `is ask` [/Teacher]
 
-## Printen en invoer
+## Variabelen
 
 Aan het einde van de les kun jij:
 
-* Code schrijven die tekst print
-* Een verhaal met invoer maken
+* Iets opslaan in een variabele
+* Een verhaal en tekening maken waarin je een variabele gebruikt
 
 ### Variabelen
 
@@ -20,7 +20,46 @@ naam is Mo
 print naam
 ```
 
-#### Opdracht 1: Voorspel de uitvoer
+#### Opdracht 1: Omcirkel het juiste stukje code
+
+{
+    "assignment": "element selection",
+    "question"  : "Omcirkel alle variabelen in deze code.",
+    "icon"      : "◯",
+    "code"      : "naam is Hedy\nprint Hallo naam\nleeftijd is 17\nprint Jij bent leeftijd jaar oud",
+    "answer"    : "Op alle regels"
+}
+
+{
+    "assignment": "element selection",
+    "question"  : "Omcirkel nu de stukken code waarin een variabele **wordt ingesteld.**",
+    "icon"      : "◯",
+    "code"      : "naam is Hedy\nprint Hallo naam\nleeftijd is 17\nprint Jij bent leeftijd jaar oud",
+    "answer"    : "Op regel 1 en 3"
+}
+
+{
+    "assignment": "element selection",
+    "question"  : "Omcirkel nu de stukken code waarin de waarde van een variabele **wordt gebruikt.**",
+    "icon"      : "◯",
+    "code"      : "naam is Hedy\nprint Hallo naam\nleeftijd is 17\nprint Jij bent leeftijd jaar oud",
+    "answer"    : "Op regel 2 en 4"
+}
+
+
+
+#### Opdracht 2: Voorspel de uitvoer
+
+Tip: Vind je het lastig om de uitvoer te voorspellen? Gebruik dan dit stappenplan:
+
+1. Omcirkel de plek waar een variabele wordt ingesteld
+2. Omcirkel de plek waar de variabele wordt gebruikt
+3. Trek een lijn tussen deze plekken
+4. Zet de waarde (aan de rechterkant van de `is` op de plek van het gebruik).
+
+Voorbeeld:
+
+{TODO
 
 {
     "assignment": "output",
@@ -47,7 +86,7 @@ print naam
 }
 
 
-#### Opdracht 2: Foutje?
+#### Opdracht 3: Foutje?
 Lees de codes goed! Welke zijn er goed of fout.
 
 {
@@ -102,7 +141,7 @@ Als iemand die Maan heet deze code zou gebruiken, dan wordt de uitvoer:
 dus jij heet: Maan
 ```
 
-#### Opdracht 3: Voorspel de uitvoer
+#### Opdracht 4: Voorspel de uitvoer
 
 Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingevuld.
 
@@ -123,7 +162,7 @@ Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingev
 }
 
 
-#### Opdracht 4: Programmeer-woorden 
+#### Opdracht 5: Programmeer-woorden 
 
 We hebben deze les weer nieuwe woorden geleerd! Leg ze uit je eigen woorden. 
 
@@ -152,7 +191,7 @@ We hebben deze les weer nieuwe woorden geleerd! Leg ze uit je eigen woorden.
 }
 
 
-#### Opdracht 5: Codes
+#### Opdracht 6: Codes
 
 We hebben nieuwe codes geleerd: `is`, `is ask` samen. Wat doen die? Leg het uit in je eigen woorden. 
 

@@ -1,5 +1,7 @@
 # Hedy - Les 1a
 
+[Teacher] Het doel van deze les is om de vijf codes uit level 1 van Hedy te leren kennen: `print`, `echo` en `ask` voor tekst en `forward` en `turn` voor het tekenen. [/Teacher]
+
 ## Printen en invoer
 
 Aan het einde van de les kun jij:
@@ -131,16 +133,12 @@ Antwoord: ______________________________________________________________________
 **📖 Vraag**: Wat doet het commando `echo`?
 Antwoord: ____________________________________________________________________________________________________<br>
 
+## Op naar de computer!
 
-## Op de computer!
-
-Ga nu naar Les1b - Deel 1
+Je mag nu Hedy openen door naar www.hedy.org te gaan. Daar staan een aantal tabbladen klaar.
+In ieder tabblad staat uitleg, en een **opdracht**. Lees de opdracht goed en voer die uit.
 
 ## Tekenen
-
-Aan het einde van de les kun jij:
-
-* Tekeningen maken met de tekenturtle.
 
 
 #### Opdracht 6: Programmeer-woorden
@@ -166,17 +164,16 @@ Antwoord: ______________________________________________________________________
 
 #### Opdracht 8: Voorspel de uitvoer
 
-Voorspel wat de uitvoer van deze codes is. Dat is bij de turtle of tekenschildpad natuurlijk een tekening. Begin bij de schildpad met tekenen.
-
+Voorspel wat de uitvoer van deze codes is. Dat is bij de turtle of tekenschildpad natuurlijk een tekening.
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									Uitvoer:
 ```hedy
-forward 100                          🐢
+forward 100                           
 turn left                             
 forward 100                           
 turn left                             
-forward 100                          
+forward 100                           
 turn left                             
 forward 100                           
 turn left                             
@@ -187,7 +184,7 @@ turn left
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									Uitvoer:
 ```hedy
-forward 100                           🐢
+forward 100                           
 turn left                             
 forward 100                           
 turn right                            
@@ -202,11 +199,11 @@ turn right
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									Uitvoer:
 ```hedy
-forward 100                           🐢
+forward 100                           
 turn right                            
-forward 5                            
+forward 5                             
 turn right                            
-forward 100                          
+forward 100                           
 turn right                            
 forward 5                             
 turn right                            
@@ -275,3 +272,5 @@ ________________________________________________________________________________
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
  <br>
 
+
+``

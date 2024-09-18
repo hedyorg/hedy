@@ -38,6 +38,11 @@ Code:									Uitvoer:
 {textfields}							
 ```
 ''',
+    'element selection': '''**{icon} Opdracht**: {question}									
+```hedy
+{code}							
+```
+''',
 }
 
 
@@ -66,6 +71,7 @@ def convert_json(json):
 
     if assignment_type == 'output':
         textfields = ''
+        turtle = 'type' in json.keys() and json['type'] == 'turtle'
         code_lines = json['code'].split('\n')
         number_of_input_lines = len(code_lines)
         number_of_output_lines = number_of_lines
@@ -75,7 +81,9 @@ def convert_json(json):
             if i < number_of_input_lines:
                 output_line = code_lines[i]
                 output_line = output_line.ljust(38, ' ')
-            if i < number_of_output_lines:
+            if i < number_of_output_lines and not turtle:
+                if i == 0 and turtle:
+                    output_line += '🐢'
                 output_line = output_line.ljust(76, '_')
 
             textfields += output_line + '\n'
@@ -102,6 +110,8 @@ def convert_json(json):
             textfields += newline + '\n'
 
         json['textfields'] = textfields
+
+
 
     if 'options' in json.keys():
         all = json['options']

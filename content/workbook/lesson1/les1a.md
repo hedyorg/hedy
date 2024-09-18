@@ -227,7 +227,7 @@ Voorspel wat de uitvoer van deze codes is. Dat is bij de turtle of tekenschildpa
 {
     "assignment": "output",
     "icon"      : "💻",
-    "type"      " "turtle",
+    "type"      : "turtle",
     "code"      : "forward 100\nturn left\nforward 100\nturn left\nforward 100\nturn left\nforward 100\nturn left\n",
     "answer"    : "een vierkant",
     "lines"     : 5
@@ -236,7 +236,7 @@ Voorspel wat de uitvoer van deze codes is. Dat is bij de turtle of tekenschildpa
 {
     "assignment": "output",
     "icon"      : "💻",
-    "type"      " "turtle",
+    "type"      : "turtle",
     "code"      : "forward 100\nturn left\nforward 100\nturn right\nforward 100\nturn left\nforward 100\nturn right\n",
     "answer"    : "een trapje (zonder onderkant)",
     "lines"     : 5
@@ -245,7 +245,7 @@ Voorspel wat de uitvoer van deze codes is. Dat is bij de turtle of tekenschildpa
 {
     "assignment": "output",
     "icon"      : "💻",
-    "type"      " "turtle",
+    "type"      : "turtle",
     "code"      : "forward 100\nturn right\nforward 5\nturn right\nforward 100\nturn right\nforward 5\nturn right\n",
     "answer"    : "een hele smalle vierkant",
     "lines"     : 6
