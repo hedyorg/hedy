@@ -69,7 +69,7 @@
               {% if i not in customizations['available_levels']%} bg-gray-400 {% else %} hover:bg-blue-200 {% endif %}"
             
               {% if i not in customizations['available_levels']%}disabled{% endif %}  
-            _="on click toggle .max-h-0 .max-h-550px on #level_{{ i }}_pane
+            _="on click toggle .sliding-content-closed .sliding-content-open on #level_{{ i }}_pane
                  then toggle .rotate-90 on #level_{{ i }}_arrow
                 then toggle .rounded-lg .rounded-t-lg .bg-blue-200 on #level_{{ i }}_header"
                 id="level_{{ i }}_header">
@@ -80,25 +80,27 @@
                 <i class="fa-solid fa-chevron-right text-base transition-all ease-in duration-200 {% if loop.index == level|int %}rotate-90{% endif %}" id="level_{{ i }}_arrow"></i>
               {% endif %}
             </button>
-            <div class="bg-white rounded-b-lg grow-0 ease-in transition-all duration-300 overflow-y-auto
-                        {% if loop.index == level|int %}max-h-550px{% else %}max-h-0{% endif %}" id="level_{{ i }}_pane">
-              <ul class="list-none p-6 grow-0">
-                {% for adventure in adventures_for_index[i] %}
-                    {% if adventure.is_teacher_adventure%}
-                      {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, 'teacher', loop.index) }}
-                    {% elif adventure.is_command_adventure %}
-                      {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, 'command', loop.index) }}
-                    {% else %}
-                      {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, '', loop.index) }}
-                    {% endif %}           
-                {% endfor %}
-                {% if parsons %}
-                  {{ adventure_index('parsons', i, _('parsons_title'), False, 'parsons', 'special', adventures|length + 1) }}
-                {% endif %}
-                {% if quiz %}
-                    {{ adventure_index('quiz', i, _('quiz_tab'), False, 'quiz', 'special', (adventures|length + (2 if parsons else 1)) ) }}
-                {% endif %}
-              </ul>
+            <div class="bg-white rounded-b-lg grow-0 ease-in transition-all duration-300 grid
+                        {% if loop.index == level|int %}sliding-content-open{% else %}sliding-content-closed{% endif %}" id="level_{{ i }}_pane">              
+                <ul class="list-none overflow-hidden">
+                  <div class="p-6">
+                    {% for adventure in adventures_for_index[i] %}
+                        {% if adventure.is_teacher_adventure%}
+                          {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, 'teacher', loop.index) }}
+                        {% elif adventure.is_command_adventure %}
+                          {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, 'command', loop.index) }}
+                        {% else %}
+                          {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, '', loop.index) }}
+                        {% endif %}           
+                    {% endfor %}
+                    {% if parsons %}
+                      {{ adventure_index('parsons', i, _('parsons_title'), False, 'parsons', 'special', adventures|length + 1) }}
+                    {% endif %}
+                    {% if quiz %}
+                        {{ adventure_index('quiz', i, _('quiz_tab'), False, 'quiz', 'special', (adventures|length + (2 if parsons else 1)) ) }}
+                    {% endif %}                  
+                  </div>
+                </ul>
             </div>
           </div>
         {% endfor %}
