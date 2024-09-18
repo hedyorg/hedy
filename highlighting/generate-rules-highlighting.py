@@ -101,7 +101,7 @@ def get_digits(keywords, keywords_ref):
         key = f'd{d}'
         if keywords_ref[key] not in digits:
             digits.append(keywords_ref[key])
-        if keywords[key] not in digits:
+        if key in keywords and keywords[key] not in digits:
             digits.append(keywords[key])
 
     return "".join(digits)
