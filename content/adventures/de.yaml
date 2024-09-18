@@ -907,55 +907,55 @@ adventures:
                     ### Übung
                     Debugge dieses Programm. Viel Glück!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Warnung! Diese Code muss gedebugged werden!**
                     ```
-                    {print} Welcome to Swimming Pool Hedy!
-                    class {is} {ask} 'Are you here to join a class today?'
-                    {if} class yes
-                    {print} 'Great! You're joining a class!
-                    {print} {else} 'You will not be joining a class'
-                    discount {is} 'Do you have a discount code?'
-                    {if} discount {is} yes
-                    discount_answer {is} {ask} 'What's your discount code?'
-                    discount_codes = Senior4231, Student8786, NewMember6709
-                    {if} discount_answer {is} {in} discount_cods
-                    {print} 'That will be $3,50'
-                    'That will be $5,50'
-                    {print} 'Have a nice swim!'
+                    {print} Willkommen im Schwimmbad Hedy!
+                    klasse {is} {ask} 'Bist du hier, um heute einer Klasse beizutreten?'
+                    {if} klasse ja
+                    {print} 'Großartig, du bist jetzt in einer Klasse!
+                    {print} {else} 'Du wirst keiner Klasse beitreten.'
+                    ermässigung {is} 'Hast du eine Code für eine Ermässigung?'
+                    {if} ermässigung {is} ja
+                    ermässigung_antwort {is} {ask} 'Wie ist deine Code für die Ermässigung?'
+                    ermässigungs_codes = Senior4231, Student8786, NeuesMitglied6709
+                    {if} ermässigung_antwort {is} {in} ermässigungs_cods
+                    {print} 'Das kostet 3,50 €'
+                    'Das kostet 5,50 €'
+                    {print} 'Viel Spaß beim Schwimmen!'
                     ```
             6:
                 story_text: |-
                     ### Übung
                     Debugge dieses Programm. Viel Glück!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Warnung! Dieser Code muss gedebugged werden!**
                     ```
-                    {print} 'Vending machine'
-                    chosen_product = {ask} 'Please select a product'
-                    1_dollar_products = coke orange juice water
-                    2_dollar_products = chocolate, cookie, museli bar
-                    3dollar_prodcuts = potato chips, beef jerky, banana bread
-                    {if} chosen {is} {in} 1_dollar_products
+                    {print} 'Verkaufsmaschine'
+                    gewähltes_produkt = {ask} 'Bitte wähle ein Produkt'
+                    1_euro_produkte = cola orangensaft wasser
+                    2_euro_produkte = schokolade, kekse, müsliriegel
+                    3euro_prodkte = kartoffel chips, landjäger, bananenbrot
+                    {if} gewählte {is} {in} 1_euro_produkte
                     price = 1
-                    {if} chosen_product {is} 2_dollar_products
-                    price = 2
-                    {else} chosen_product {in} 3_dollar_products
-                    price = 3
-                    amount_of_products = '{ask} How many of ' chosen_product would you like to have?'
-                    total = price + amount_of_product
-                    {print} 'That will be $' price 'please'
+                    {if} gewähltes_produkt {is} 2_euro_produkte
+                    preis = 2
+                    {else} gewähltes_produkt {in} 2_euro_produkte
+                    preis = 3
+                    anzahl_produkte = '{ask} Wie viele ' gewähltes_produkt willst du haben?'
+                    gesamt = preis + anahl_produkte
+                    {print} 'Das kostet ' preis ' € bitte'
                     ```
             7:
                 story_text: |-
-                    ### Exercise
-                    Surprise! This program looks more like an output than a code. And yet, we don't want you to just add `{print}` commands in front of each line.
-                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jaques)' by using the {repeat} command of course!
+                    ### Übung
+                    Überraschung! Dies Programm sieht mehr wie eine Ausgabe aus als wie Code. Dennoch - wir wollen nun nicht einfach ein `{print}` in jeder Zeile hinzufügen.
+                    Korrigiere das Programm, so dass 'Bruder Jakob' ausgegeben wird, indem du den {repeat} Befehl verwendest (natürlich)!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Warnung! Dieser Code muss gedebugged werden!**
                     ```
-                    Are you sleeping?
-                    Brother John!
-                    Morning bells are ringing!
+                    Schläfst du noch?
+                    Bruder Jakob!
+                    Hell die Glocken klingen!
                     Ding, dang, dong!
                     ```
             8:
