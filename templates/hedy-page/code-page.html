@@ -24,20 +24,34 @@
     <!-- progress bar -->
         <div id="progress_bar" data-cy="progress_bar" class="w-full max-w-screen-2xl mx-auto mt-10">
             <div class="flex flex-row w-full">
-                <button data-cy="previous_adventure" id="previous_adventure" class="blue-btn flex-initial w-fit next-tab ltr:mr-1 rtl:ml-1 justify-self-end mb-1">
+                <button data-cy="previous_adventure" id="previous_adventure" class="blue-btn flex flex-row gap-2 align-middle items-center flex-initial w-fit next-tab ltr:mr-1 rtl:ml-1 justify-self-end mb-1">
                     <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}"></span>
-                    {{_('previous_adventure')}}&nbsp;
+                    <p class="m-0 p-0">{{_('previous_adventure')}}</p>
+                </button>
+                <button data-cy="back_level" id="back_level" 
+                        class="blue-btn flex-initial flex flex-row gap-2 align-middle items-center	 w-fit next-tab ltr:mr-1 rtl:ml-1 justify-self-end mb-1 hidden"
+                        onclick="location.href = '/hedy/{{ level - 1 }}'"
+                >
+                    <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}"></span>
+                    <p class="m-0 p-0">{{_('advance_button')|replace("{level}", level - 1)}}</p>                    
                 </button>
                 <div class="flex-initial"></div>
                 <div class="flex-1 mt-5 ml-4 text-center font-medium dark:text-white"><b class="{% if not username %}hidden{% endif %}">{{progress}}% {{_('complete')}}</b></div>                
-                <button data-cy="next_adventure" id="next_adventure" class="blue-btn flex-initial w-fit next-tab ltr:ml-1 rtl:mr-1 justify-self-end mb-1">
-                    {{_('next_adventure')}}&nbsp;
+                <button data-cy="next_adventure" id="next_adventure" class="blue-btn flex flex-row gap-2 align-middle items-center flex-initial w-fit next-tab ltr:mr-1 rtl:ml-1 justify-self-end mb-1">
+                    <p class="m-0 p-0">{{_('next_adventure')}}</p>                    
+                    <span class="fa fa-arrow-{% if g.dir == "ltr" %}right{% else %}left{% endif %}"></span>
+                </button>
+                <button data-cy="next_level" id="next_level"
+                        class="blue-btn flex-initial w-fit next-tab ltr:ml-1 rtl:mr-1 justify-self-end mb-1 hidden"
+                        onclick="location.href = '/hedy/{{ level + 1 }}'"
+                >
+                    {{_('advance_button')|replace("{level}", level + 1)}}&nbsp;
                     <span class="fa fa-arrow-{% if g.dir == "ltr" %}right{% else %}left{% endif %}"></span>
                 </button>
             </div>
-        <div class="max-w-screen-2xl mr-4 items-center justify-between mx-auto rounded-full h-2.5 bg-gray-300 {% if not username %}hidden{% endif %}">
-            <div class="rounded-full h-2.5 bg-blue-800" style="width: {{progress}}%"></div>
-        </div>
+            <div class="max-w-screen-2xl items-center justify-between mx-auto rounded-full h-2.5 bg-gray-300 {% if not username %}hidden{% endif %}">
+                <div class="rounded-full h-2.5 bg-blue-800" style="width: {{progress}}%"></div>
+            </div>
         </div>
     {% if latest and not raw %}
       <div class="text-sm mt-10 ltr:mr-5 rtl:ml-5 font-extralight">

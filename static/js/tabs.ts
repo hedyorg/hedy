@@ -115,7 +115,22 @@ export class Tabs {
         tab_title.classList.add('border-blue-900')
       }
       
-      document.getElementById('previous_adventure')?.classList.toggle('hidden', tab.attr('tabindex') === '1')
+      // Hide or show the next or previous level button in case we are in the first or last adventure
+      // And also depending in which level we are in
+      const previous: HTMLElement | null = document.querySelector(`[data-level="${tab.data('level')}"][tabindex="${Number(tab.attr('tabindex')) - 1}"]`)
+      if (previous) {
+        (document.querySelector('#previous_adventure > p') as HTMLElement).innerText = previous.innerText.trim()
+      }
+      document.getElementById('back_level')?.classList.toggle('hidden', tab.attr('tabindex') !== '1' || (this._currentLevel ?? 0) === 1)
+      document.getElementById('previous_adventure')?.classList.toggle('hidden', tab.attr('tabindex') === '1')      
+      
+      const next: HTMLElement | null = document.querySelector(`[data-level="${tab.data('level')}"][tabindex="${Number(tab.attr('tabindex')) + 1}"]`)
+      if (next) {
+        (document.querySelector('#next_adventure > p') as HTMLElement).innerText = next.innerText.trim()
+      }
+      document.getElementById('next_adventure')?.classList.toggle('hidden', next === null)
+      document.getElementById('next_level')?.classList.toggle('hidden', next !== null || (this._currentLevel ?? 0) == 18 || tab.data('tab') === 'quiz')
+
       allTargets.addClass('hidden');
       target.removeClass('hidden');
 
@@ -132,9 +147,9 @@ export class Tabs {
   }
 
   private switchPreviousOrNext(toNext: boolean) {
-    const selected = document.querySelector('.adv-selected')    
+    const selected = document.querySelector('.adv-selected') as HTMLElement
     const i = parseInt(selected?.getAttribute('tabindex') || '0')
-    const next = document.querySelector(`li[tabindex='${i + (toNext ? 1 : -1)}']`) as HTMLElement
+    const next = document.querySelector(`li[tabindex='${i + (toNext ? 1 : -1)}'][data-level='${ selected.dataset['level']}']`) as HTMLElement
     
     this.switchToTab(next.dataset['tab']!, Number(next.dataset['level']!))
     document.getElementById('layout')?.scrollIntoView({behavior: 'smooth'})

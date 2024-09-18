@@ -181,12 +181,12 @@
       {{ _('not_logged_in_cantsave') }}. <a href="/login" class="text-black">{{_('login_to_save_your_work')}}</a>
     </div>
     {% endif %}
-    <div class="flex justify-between gap-2 items-start h-12 overflow-visible">
-    <div id="saveMicrobitFilesContainer" {% if not microbit_feature %} class="hidden" {% endif %} >
-      <button id="runMicrobit" class="green-btn" onclick="hedyApp.saveMicrobit({{ level }});" > {{ _('Save Microbit code ') }}
-          <img src="{{ static('/images/microbit_logo_icon_248480.png') }}" style="width: 25px; height: 25px; margin-left: 1px; display: inline;" alt=""/>
-      </button>
-    </div>
+    <div class="flex justify-between gap-2 items-start overflow-visible">
+      <div id="saveMicrobitFilesContainer" {% if not microbit_feature %} class="hidden" {% endif %} >
+        <button id="runMicrobit" class="green-btn" onclick="hedyApp.saveMicrobit({{ level }});" > {{ _('Save Microbit code ') }}
+            <img src="{{ static('/images/microbit_logo_icon_248480.png') }}" style="width: 25px; height: 25px; margin-left: 1px; display: inline;" alt=""/>
+        </button>
+      </div>
       <div id="save_files_container" class="hidden">
         <button id="saveFiles" class="green-btn" onclick="hedyApp.saveMachineFiles();">💾</button>
       </div>

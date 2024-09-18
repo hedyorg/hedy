@@ -1749,8 +1749,7 @@ function updatePageElements() {
     $('#commands_dropdown_container').show()
     $('#hand_in_button').show()
   }
-  if (currentTab === 'parsons'){
-    $('#progress_bar').hide()
+  if (currentTab === 'parsons'){    
     $('#share_program_button').hide()
     $('#read_outloud_button_container').hide()
     $('#cheatsheet_dropdown_container').hide()
@@ -1759,7 +1758,6 @@ function updatePageElements() {
     $('#clear').hide()
   }
   if (currentTab === 'quiz'){
-    $('#progress_bar').hide()
     $('#share_program_button').hide()
     $('#read_outloud_button_container').hide()
     $('#cheatsheet_dropdown_container').hide()
