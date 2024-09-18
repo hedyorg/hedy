@@ -25,7 +25,6 @@ CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK',
                           'iba': 'en',
                           'peo': 'fa',
                           'enm': 'en',
-                          'zun': 'en'
                           }
 
 # For the non-existing language manually overwrite the display language to make sure it is displayed correctly

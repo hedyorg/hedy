@@ -78,6 +78,42 @@ class TestsLevel4(HedyTester):
             max_level=11,
             expected=expected)
 
+    def test_print_polish_quoted_text(self):
+        code = "print „bonjour tous le monde!”"
+        expected = "print(f'bonjour tous le monde!')"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            expected=expected)
+
+    def test_print_swedish_quoted_text(self):
+        code = "print ”bonjour tous le monde!”"
+        expected = "print(f'bonjour tous le monde!')"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            expected=expected)
+
+    def test_print_korean_quoted_text(self):
+        code = "print 《bonjour tous le monde!》"
+        expected = "print(f'bonjour tous le monde!')"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            expected=expected)
+
+    def test_print_japanese_quoted_text(self):
+        code = "print 「bonjour tous le monde!」"
+        expected = "print(f'bonjour tous le monde!')"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            expected=expected)
+
     def test_print_chinese_quoted_text(self):
         code = "print “逃离鬼屋！”"
         expected = "print(f'逃离鬼屋！')"
