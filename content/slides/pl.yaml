@@ -244,8 +244,8 @@ levels:
                 To polecenie usuwa element z listy.
             code: |-
                 zwierzęta {is} pies, kot, kangur
-                nie lubić {is} {ask} Jakiego zwierzęcia nie lubisz?
-                {remove} nie lubić {from} zwierzęt
+                nie_lubić {is} {ask} Jakiego zwierzęcia nie lubisz?
+                {remove} nie_lubić {from} zwierzęta
                 {print} Wybieram zwierzęta {at} {random}
         7:
             header: Debuggowanie
@@ -388,7 +388,7 @@ levels:
                 Pamiętaj, że Hedy jest wrażliwa na przypadki. Oznacza to, że jeśli odpowiesz „Zielony” zamiast „zielony”, Hedy wydrukuje „meh”".
             code: |-
                 ładne_kolory {is} zielony, żółty
-                ulubiony_kolor { to } { zapytaj } "Jaki jest twój ulubiony kolor?'
+                ulubiony_kolor {is} {ask} 'Jaki jest twój ulubiony kolor?'
                 {if} ulubiony_kolor {in} ładne_kolory {print} 'ładny!'
                 {else} {print} 'meh'
         7:
@@ -640,7 +640,7 @@ levels:
                 kontynuować = {ask} 'Chcesz kontynuować?'
                 {if} kontynuować = tak
                     pewien = {ask} 'Czy jesteś tego pewny?'
-                    {if} pewien{is} tak
+                    {if} pewien {is} tak
                         {print} 'będziemy kontynuować'
                     {else}
                         {print} 'Nie jesteś pewien'
@@ -709,7 +709,7 @@ levels:
             text: With for you can make a list and use all items on that list. `{for}` creates a block, like repeat and if so all lines in the block need to start with indentation (4 spaces).
             code: |-
                 zwierzęta = pies, kot, kropelka
-                {for}zwierzę {in} zwierzęta
+                {for} zwierzę {in} zwierzęta
                     {print} 'Uwielbiam ' zwierzę
         3:
             header: Polecenie for
@@ -1146,10 +1146,10 @@ levels:
             header: Polecenie elif
             text: 'In this level you can also use a new command: elif. elif is short for else if and you need it when you want to make 3 (or more!) options. Check it out!'
             code: |-
-                nagrody = ['1 milion dolarów, „jabłko”, „nic”']
+                nagrody = ['1 milion dolarów', 'jabłko', 'nic']
                 twoja_nagroda = nagrody[{random}]
                 {print} 'Wygrywasz' twoja_nagroda  
-                {if} twoja_nagroda  == '1 milion dolarów :
+                {if} twoja_nagroda  == '1 milion dolarów' :
                     {print} 'Tak! Jesteś bogaty!'
                 {elif} twoja_nagroda   == 'szarlotka' :
                     {print} 'Cudownie, szarlotka!'
