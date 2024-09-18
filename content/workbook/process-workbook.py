@@ -111,8 +111,6 @@ def convert_json(json):
 
         json['textfields'] = textfields
 
-
-
     if 'options' in json.keys():
         all = json['options']
         json['options'] = '<br> 〇 ' + '<br> 〇 '.join(all)
