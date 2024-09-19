@@ -168,17 +168,17 @@ levels:
                 {echo}
             mp_choice_options:
             -   option: Are you ready to go to level 2?
-                feedback: There are two echo commands
+                feedback: Istnieją dwa polecenia `{echo}`
             -   option: |-
                     Yes!
                     Yes!
                 feedback: Great job!
             -   option: Yes!
-                feedback: There are two echo commands
+                feedback: Istnieją dwa polecenia `{echo}`
             -   option: |-
                     Are you ready to go to level 2?
                     Yes!
-                feedback: There are two echo commands
+                feedback: Istnieją dwa polecenia `{echo}`
             hint: Let's go!
             correct_answer: B
             question_score: '10'
@@ -187,12 +187,12 @@ levels:
             question_text: Które zdanie jest prawdziwe?
             mp_choice_options:
             -   option: Możesz wykorzystać polecenie `{print}` do zadania pytania.
-                feedback: Po to jest polecenie ask
+                feedback: Po to jest polecenie `{ask}`
             -   option: Możesz wykorzystać polecenie `{ask}` do powtórzenia odpowiedzi.
                 feedback: To jest nie prawda
             -   option: Poleceniem `{print}` możesz wyświetlić jakiś tekst
                 feedback: Dobrze
-            -   option: Poleceniem {sleep}, możesz usunąć tekst z ekranu.
+            -   option: Poleceniem `{sleep}`, możesz usunąć tekst z ekranu.
                 feedback: Polecenie `{sleep}` tak nie działa.
             hint: '`{print}` dalej działa tak samo jak na poziomie 1'
             correct_answer: C
@@ -283,7 +283,7 @@ levels:
             -   option: '`{echo}`'
                 feedback: Nie ma tu nic do powtórzenia
             -   option: '`{print}`'
-                feedback: Nie ma tu nic do napisania
+                feedback: Nie ma tu nic do `{print}`
             -   option: '`{ask}`'
                 feedback: Nie ma tu żadnego pytania do zadania
             hint: Pauza dla dramatycznego efektu...
@@ -300,7 +300,7 @@ levels:
                     ```
                     {print} 3
                     ```
-                feedback: Nie musisz nic pisać
+                feedback: Nie musisz `{print}`
             -   option: |-
                     ```
                     {sleep} 3
@@ -361,8 +361,8 @@ levels:
             -   option: 'W linii 2 powinno być: `{print}` Kocham zwierzęta'
                 feedback: Nazwa zmiennej to zwierzę
             -   option: 'W linii 2 powinno być: `{sleep}` Kocham zwierzęta'
-                feedback: Spanie nie napisze tekstu
-            hint: Chcesz napisać „Kocham psy”
+                feedback: Polecenie sleep nie jest używane, aby `{print}` tekst
+            hint: Chcesz `{print}`„Kocham psy”
             correct_answer: B
             question_score: '10'
         10:
@@ -393,7 +393,7 @@ levels:
                     {ask} Jakie są twoje ulubione lody?
                     ```
                 feedback: Zgadza się!
-            hint: Chcesz zadać pytanie
+            hint: Chcesz `{ask}` pytanie
             correct_answer: D
             question_score: '10'
     3:
@@ -406,7 +406,7 @@ levels:
                 feedback: '`{ask}` jest używane do zadawania pytań'
             -   option: '`{is}`'
                 feedback: '`{is}` używa się do tworzenia list'
-            -   option: '`{at}` `{random}`'
+            -   option: '`{at} {random}`'
                 feedback: Zgadza się!
             hint: Losowo znaczy bez uprzedniego planu, przypadkowo.
             correct_answer: D
@@ -464,7 +464,7 @@ levels:
                     ```
                     {print} cena
                     ```
-                feedback: Nie chcesz napisać słowa cena, ale chcesz napisać jedną z cen losowo (`{at} {random}`)
+                feedback: Nie chcesz `{print}` słowa cena, ale chcesz `{print}`jedną z cen ze swojej listy (`{at} {random}`)
             -   option: |-
                     ```
                     {print} ceny {at} {random}
@@ -481,107 +481,107 @@ levels:
             correct_answer: B
             question_score: '10'
         5:
-            question_text: What is wrong in this code?
+            question_text: Co jest nie tak w tym kodzie?
             code: |-
-                question {is} {ask} What do you want to know?
-                {print} question
-                answers {is} yes, no, maybe
-                {print} answers {at} {random}
+                pytanie {is} {ask} Co chcesz wiedzieć?
+                {print} pytanie
+                odpowiedź {is} tak,nie, może
+                {print} odpowiedź {at} {random}
             mp_choice_options:
-            -   option: Line 1 needs to say `{print}` instead of `{ask}`
-                feedback: No, that's not wrong.
-            -   option: Line 2 needs to say `{ask}` instead of `{print}`
-                feedback: No that's not wrong.
-            -   option: Line 2 needs to say answers `{at} {random}` `{is}` yes, no, maybe
-                feedback: No, that's not wrong.
-            -   option: Nothing, this code is perfect
-                feedback: That's right!
-            hint: Does this code even have a mistake?
+            -   option: Wiersz 1 musi powiedzieć `{print}` zamiast `{ask}`
+                feedback: Nie, to nie jest złe.
+            -   option: Wiersz 2 musi powiedzieć `{ask}` zamiast `{print}`
+                feedback: Nie, to nie jest złe.
+            -   option: Wiersz 2 musi zawierać odpowiedzi `{at} {random}` `{is}` tak, nie, może
+                feedback: Nie, to nie jest złe.
+            -   option: Nic, ten kod jest idealny
+                feedback: Dokładnie tak!
+            hint: Czy ten kod zawiera błąd?
             correct_answer: D
             question_score: '10'
         6:
-            question_text: What's wrong with this code?
+            question_text: Co jest nie tak z tym kodem?
             code: |-
-                question {is} {ask} What do you want to know?
-                answers yes, no, maybe
-                {print} answers {at} {random}
+                pytanie {is} {ask} Co chcesz wiedzieć?
+                odpowiedzi tak, nie, może
+                {print} odpowiedzi {at} {random}
             mp_choice_options:
-            -   option: Line 2 needs to say question instead of answers
-                feedback: No that's not right
-            -   option: Line 2 needs the `{is}` command
+            -   option: Wiersz 2 musi powiedzieć pytanie zamiast odpowiedzi
+                feedback: Nie, to nie jest w porządku
+            -   option: Wiersz 2 wymaga polecenia `{is}`
                 feedback: Correct
-            -   option: Line 3 needs to say answer instead of answers
-                feedback: No the variable's called answers
-            -   option: Nothing! This code is great!
-                feedback: Actually, line 2 has a mistake.
-            hint: There is something wrong with line 2.
+            -   option: Wiersz 3 musi powiedzieć odpowiedź zamiast odpowiedzi
+                feedback: Nie, zmienna nazywa się odpowiedzi
+            -   option: Nic! Ten kod jest świetny!
+                feedback: W rzeczywistości linia 2 zawiera błąd.
+            hint: Coś jest nie tak z linią 2.
             correct_answer: B
             question_score: '10'
         7:
-            question_text: What does the `{add}` command do?
+            question_text: Co robi polecenie `{add}`?
             code: |-
                 books {is} Harry Potter, The Hobbit, Green Eggs and Ham
                 your_book {is} {ask} What is your favorite book?
                 {add} your_book {to} books
                 {print} books {at} {random}
             mp_choice_options:
-            -   option: The `{add}` command removes a random book from the list
-                feedback: The remove command removes, the add command adds
-            -   option: The `{add}` command adds a random book to a list
-                feedback: It doesn't. It adds your answer to the list!
-            -   option: The `{add}` command adds your favorite book to the list
+            -   option: Polecenie `{add}` usuwa losową książkę z listy
+                feedback: Polecenie remove usuwa, polecenie add dodaje
+            -   option: Polecenie `{add}` dodaje losową książkę do listy
+                feedback: Nie. Dodaje twoją odpowiedź do listy!
+            -   option: Polecenie `{add}` dodaje ulubioną książkę do listy
                 feedback: Correct!
-            -   option: The `{add}` command prints your favorite book.
-                feedback: No, it adds your favorite book to the list
-            hint: The `{add}` command adds a book, but which one?
+            -   option: Polecenie `{add}` drukuje ulubioną książkę.
+                feedback: Nie, to dodaje twoją ulubioną książkę do listy
+            hint: Polecenie `{add}` dodaje książkę, ale którą?
             correct_answer: C
             question_score: '10'
         8:
-            question_text: What is the output of this code?
+            question_text: Jakie jest dane wyjściowe tego kodu?
             code: |-
-                crisps {is} sea salt, paprika, sour cream
-                {remove} sea salt {from} crisps
-                {remove} paprika {from} crisps
-                {print} crisps {at} {random}
+                chipsy {is} sól morska, papryka, śmietana
+                {remove} sól morska {from} chipsy
+                {remove} papryka {from} chipsy
+                {print} chipsy {at} {random}
             mp_choice_options:
-            -   option: You can't tell, because Hedy will `{print}` one of the 3 flavors `{at} {random}`
-                feedback: Take a look at the `{remove}` commands
+            -   option: Nie można powiedzieć, ponieważ Hedy `{print}` jeden z 3 smaków `{at} {random}`
+                feedback: Spójrz na polecenia `{remove}`
             -   option: sea salt
-                feedback: sea salt is removed from the list
-            -   option: paprika
-                feedback: Paprika is removed from the list
-            -   option: sour cream
-                feedback: That's right!
-            hint: There are 3 flavors, bit 2 are removed. Which one remains?
+                feedback: sól morska jest usunięta z listy
+            -   option: papryka
+                feedback: Papryka jest usunięta z listy
+            -   option: kwaśna śmietana
+                feedback: Dokładnie, tak!
+            hint: Istnieją 3 smaki, 2 są usuwane. Który pozostanie?
             correct_answer: D
             question_score: '10'
         9:
-            question_text: What's wrong with this code?
+            question_text: Co jest nie tak z tym kodem?
             code: |-
-                colors {is} blue, purple, green
-                chosen_color {is} {ask} Which haircolor wouldn't your like to have?
-                {remove} chosen_color {from} colors
-                {print} I will dye my hair color {at} {random}
+                kolory {is} niebieski, fioletowy, zielony
+                wybrany_kolor{is}{ask} Której fryzury nie chciałbyś mieć?
+                {remove} wybrany_kolo {from} kolory
+                {print} Zafarbuję włosy na kolor{at} {random}
             mp_choice_options:
-            -   option: 'Line 3 should say: `{remove}` blue `{from}` colors'
-                feedback: Maybe you want blue hair though!
-            -   option: Line 3 should have an `{add}` command instead of a `{remove}` command
-                feedback: You want to remove the chosen color so `{remove}` is right.
-            -   option: In line 4 the variable should be called colors instead of color
-                feedback: Great job!
-            -   option: Nothing, this is a correct code!
-                feedback: Find the mistake!
-            hint: Look at line 3
+            -   option: 'Wiersz 3 powinien brzmieć: `{remove}` niebieski `{from}` kolory'
+                feedback: Może jednak chcesz niebieskie włosy!
+            -   option: Wiersz 3 powinien mieć polecenie `{add}` zamiast polecenia `{remove}`
+                feedback: Jeżeli chcesz usunąć wybrany kolor, to musisz użyć polecenia `{remove}`.
+            -   option: W wierszu 4 zmienną należy nazwać kolorami zamiast kolorem
+                feedback: Świetna robota!
+            -   option: Nic, to jest poprawny kod!
+                feedback: Znajdź błąd!
+            hint: Spójrz na linię 4
             correct_answer: C
             question_score: '10'
         10:
-            question_text: What should be on the _?_?
+            question_text: Co powinno być na _?
             code: |-
-                walkers {is} dad, mom, Sam, Petra
-                walked_yesterday {is} {ask} Who walked the dogs yesterday?
-                {print} walked_yesterday shouldn't have to walk the dogs again today
-                _?_
-                {print} walkers {at} {random} , it's your turn to walk the dogs!
+                wyprowadzacze {is} tata, mama, Sam, Petra
+                wyprowadzał_wczoraj {is}{ask} Kto wczoraj wychodził z psami?
+                {print} wyprowadzał_wczoraj nie powinien dzisiaj wychodzić z psami
+                _
+                {print} wyprowadzacze {at} {random} , twoja kolej na wyprowadzanie psów!
             mp_choice_options:
             -   option: |-
                     ```
@@ -590,7 +590,7 @@ levels:
                 feedback: Super!
             -   option: |-
                     ```
-                    {remove} walked yesterday {to} walkers
+                    {remove} wyprowadzał wczoraj {to} wyprowadzacze
                     ```
                 feedback: '`{remove} {from}` or `{add} {to}`, not `{remove} {to}`'
             -   option: |-
