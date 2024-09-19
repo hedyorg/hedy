@@ -100,6 +100,8 @@ export class Tabs {
       const allTargets = target.siblings('*[data-tabtarget]');
 
       allTabs.removeClass('adv-selected');
+      allTabs.addClass('not-selected-adv')
+      tab.removeClass('not-selected-adv')
       tab.addClass('adv-selected');
       let tab_title = document.getElementById('program_name')!
       tab_title.textContent = tab.text().trim()

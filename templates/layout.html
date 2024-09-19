@@ -1,7 +1,6 @@
 
 {% macro adventure_index(adv_name, tab_level, title, selected, id, adv_class, index) %}
-  <li class="border-l-2
-            {% if adv_class == 'teacher' %} 
+  <li class="{% if adv_class == 'teacher' %} 
               teacher_tab
             {% elif adv_class == 'command' %}
               command_tab
@@ -10,7 +9,7 @@
             {% else %}
               border-blue-900
             {% endif %}
-          {% if selected %}adv-selected{% endif %}
+          {% if selected %}adv-selected{% else %}not-selected-adv{% endif %}
         px-3 py-1 hover:px-4 hover:py-3 hover:text-lg cursor-pointer text-blue-900
         transition-all ease-in duration-100"
         data-tab="{{ adv_name }}"
@@ -19,7 +18,7 @@
         data-type="{{ adv_class }}"
         id = "{{ id }}"
         _="on click wait 150ms 
-        then toggle .-translate-x-full on #index_sidebar
+        then toggle .ltr:-translate-x-full .rtl:translate-x-full on #index_sidebar
         then toggle .opacity-75 on #sidebar_bg
         then toggle .opacity-0 on #sidebar_bg
         wait 300ms
@@ -52,9 +51,9 @@
   <body id="main_container" dir="{{ g.dir }}" class="{% if not raw %}bg-gray-100{% endif %}" hx-ext="disable-element" data-logged-in="{{ 1 if username else 0 }}">
     <div id="modal_target"></div>
     {% if current_page and current_page == 'hedy' %}
-    <div id="index_sidebar" class="-translate-x-full ease-out duration-300 xl:rounded-r h-full flex justify-start items-start w-3/4 md:w-1/2 lg:w-1/4 xl:w-1/4 bg-blue-100 flex-col z-50 fixed top-0 items-center overflow-y-auto pb-10">
-      <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark cursor-pointer text-xl"
-            _="on click toggle .-translate-x-full on #index_sidebar
+    <div id="index_sidebar" class="ltr:-translate-x-full rtl:translate-x-full ease-out duration-300 xl:rounded-r h-full flex justify-start items-start w-3/4 md:w-1/2 lg:w-1/4 xl:w-1/4 bg-blue-100 flex-col z-50 fixed top-0 items-center overflow-y-auto pb-10">
+      <span class="absolute top-0.5 ltr:right-0.5 rtl:left-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark cursor-pointer text-xl"
+            _="on click toggle .ltr:-translate-x-full .rtl:translate-x-full on #index_sidebar
             then toggle .opacity-75 on #sidebar_bg
             then toggle .opacity-0 on #sidebar_bg
             wait 300ms
@@ -107,7 +106,7 @@
       </div>
     </div>
     <div id="sidebar_bg" class="transition-all duration-300 opacity-0 fixed bg-black w-full h-full hidden z-40"
-      _="on click toggle .-translate-x-full on #index_sidebar
+      _="on click toggle .ltr:-translate-x-full .rtl:translate-x-full on #index_sidebar
          then toggle .opacity-75 on #sidebar_bg
          then toggle .opacity-0 on #sidebar_bg
          wait 300ms

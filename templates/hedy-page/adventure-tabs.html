@@ -54,39 +54,7 @@
                 </div>
             {% endfor %}
         </div>
-        {% if not public_adventures_page %}
-        <div class="flex flex-row justify-end">
-            <button id="show_button_{{adventure.short_name}}" class="gray-btn px-4 rounded inline-flex items-center gap-2"
-            _="on click
-                toggle .hidden on #hide_button_{{adventure.short_name}}
-                toggle .hidden on me
-                remove .lg:flex from #adv_{{adventure.short_name}}
-                toggle .hidden on #adv_{{adventure.short_name}}
-                toggle .hidden on #extra_{{adventure.short_name}}
-            end">
-            {{_('close')}}
-                <svg id="show_hide_arrow" class="fill-current h-6 w-6 rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-            </button>
         </div>
-        {% endif %}
-        <div class="flex flex-row justify-end">
-            <button id="hide_button_{{adventure.short_name}}" class="hidden gray-btn px-4 rounded inline-flex items-center gap-2"
-            _="on click 
-                toggle .hidden on #show_button_{{adventure.short_name}}
-                toggle .hidden on me
-                add .lg:flex to #adv_{{adventure.short_name}}
-                toggle .hidden on #adv_{{adventure.short_name}}
-                toggle .hidden on #extra_{{adventure.short_name}}
-            end">
-            {{_('open')}}
-                <svg id="show_hide_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-            </button>
-        </div>
-          </div>
         {% endfor %}
         {% if parsons %}
             <div data-tabtarget="parsons" class="hidden p-4">

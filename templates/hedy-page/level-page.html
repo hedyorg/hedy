@@ -42,7 +42,7 @@
   <div class="flex flex-col md:flex-row gap-4 md:items-center">
     <div class="flex flex-row gap-2">
       <button class="blue-btn w-fit"
-      _="on click toggle .-translate-x-full on #index_sidebar
+      _="on click toggle .ltr:-translate-x-full .rtl:translate-x-full on #index_sidebar
       then toggle .hidden on #sidebar_bg
       wait 100ms
       then toggle .opacity-0 on #sidebar_bg
@@ -50,53 +50,51 @@
       See more adventures 
       <i class="fa-solid fa-book-open-reader"></i>
       </button>
-      <button class="blue-btn md:hidden" _="on click toggle .sliding-content-closed .sliding-content-open on #more_options">
+      <button class="blue-btn md:hidden" _="on click toggle .flex .hidden on #more_options">
         <i class="fa-solid fa-ellipsis-vertical"></i>
       </button>
     </div>
-    <div class="grid sliding-content-closed transition-all duration-100 ease-in" id="more_options">
-      <div class="flex flex-row gap-2 overflow-hidden">
-        {% if not hide_cheatsheet and cheatsheet %}
-        <div class="dropdown relative" id="cheatsheet_dropdown_container">
-          <button class="blue-btn ltr:ml-1 rtl:mr-1 rounded inline-flex items-center gap-2" id="dropdown_cheatsheet_button"
-            onclick="$('#cheatsheet_dropdown').slideToggle('medium');">
-            <span class="fa fa-list ltr:mr-1 rtl:ml-1"></span>
-            <span>{{_('cheatsheet_title')}}</span>
-            <svg id="cheatsheet_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-            </svg>
-          </button>
-          <div class="dropdown-menu dropdown-blue z-30 mt-2" id="cheatsheet_dropdown"
-            style="display: none; padding: 0px !important;"
-            _="on mutation of @style
-                set arrow to #cheatsheet_arrow
-                if *display == 'none'
-                    remove .rotate-180 from arrow
-                else if not arrow.classList.contains('rotate-180')
-                    add .rotate-180 to arrow
-                end">
-            <h2 class="px-2 py-6">{{_('cheatsheet_title')}}</h2>
-            {% for example in cheatsheet %}
-            <div class="flex justify-between items-center gap-4 px-4 py-8 border-t border-dashed border-blue-700">
-              <div class="flex-grow h-min min-w-80" tabindex=0>
-                {{ example.explanation|commonmark }}
-              </div>
-              <div class="flex-none">
-                <button class="yellow-btn tiny-btn" id="try_button{{ loop.index }}"
-                  onclick='hedyApp.tryPaletteCode({{example.demo_code|tojson}});'>
-                  <span class="rtl:hidden">⇥</span>
-                  <span class="ltr:hidden">⇤</span>
-                </button>
-              </div>
+    <div class="flex flex-row gap-2" id="more_options">
+      {% if not hide_cheatsheet and cheatsheet %}
+      <div class="dropdown relative" id="cheatsheet_dropdown_container">
+        <button class="blue-btn ltr:ml-1 rtl:mr-1 rounded inline-flex items-center gap-2" id="dropdown_cheatsheet_button"
+          onclick="$('#cheatsheet_dropdown').slideToggle('medium');">
+          <span class="fa fa-list ltr:mr-1 rtl:ml-1"></span>
+          <span>{{_('cheatsheet_title')}}</span>
+          <svg id="cheatsheet_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+          </svg>
+        </button>
+        <div class="dropdown-menu dropdown-blue z-30 mt-2" id="cheatsheet_dropdown"
+          style="display: none; padding: 0px !important;"
+          _="on mutation of @style
+              set arrow to #cheatsheet_arrow
+              if *display == 'none'
+                  remove .rotate-180 from arrow
+              else if not arrow.classList.contains('rotate-180')
+                  add .rotate-180 to arrow
+              end">
+          <h2 class="px-2 py-6">{{_('cheatsheet_title')}}</h2>
+          {% for example in cheatsheet %}
+          <div class="flex justify-between items-center gap-4 px-4 py-8 border-t border-dashed border-blue-700">
+            <div class="flex-grow h-min min-w-80" tabindex=0>
+              {{ example.explanation|commonmark }}
             </div>
-            {% endfor %}
+            <div class="flex-none">
+              <button class="yellow-btn tiny-btn" id="try_button{{ loop.index }}"
+                onclick='hedyApp.tryPaletteCode({{example.demo_code|tojson}});'>
+                <span class="rtl:hidden">⇥</span>
+                <span class="ltr:hidden">⇤</span>
+              </button>
+            </div>
           </div>
+          {% endfor %}
         </div>
-        {% endif %}
-        {% if get_syntax_language(g.lang) != "en" and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) %}
-          {{ render_partial('hedy-page/htmx-language-switch-button.html', commands=commands) }}
-        {% endif %}
       </div>
+      {% endif %}
+      {% if get_syntax_language(g.lang) != "en" and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) %}
+        {{ render_partial('hedy-page/htmx-language-switch-button.html', commands=commands) }}
+      {% endif %}
     </div>
   </div>
 </div>

@@ -554,9 +554,12 @@ body[dir='rtl'] .right-hand-shadow {
 }
 
 .adv-selected {
-  @apply border-l-4 bg-blue-100 rounded-r-lg
+  @apply ltr:border-l-4 rtl:border-r-4 bg-blue-100 ltr:rounded-r-lg rtl:rounded-l-lg;
 }
 
+.not-selected-adv {
+  @apply ltr:border-l-2 rtl:border-r-2;
+}
 /* EDITOR WARNINGS & ERRORS */
 
 div#errorbox, div#warningbox {
