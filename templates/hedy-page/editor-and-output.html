@@ -141,39 +141,63 @@
   </div>
   <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
   <div class="order-2 lg:order-3" id="code_related_buttons">
-    <div id="button_row" class="flex flex-col gap-2 md:flex-row mb-4">
-      <div id="run_button_container" class="gap-2 flex flex-row flex-initial inline-flex items-center">
-          <button id="runit" data-cy="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
-            <span class="fa fa-play ltr:mr-1 rtl:ml-1"></span>
-            {{_('run_code_button')}}
+    <div id="button_row" class="flex flex-col gap-2 md:flex-row lg:flex-col xl:flex-row mb-4">
+      <div class="flex flex-row gap-2">
+        <div id="run_button_container" class="gap-2 flex flex-row flex-initial">
+            <button id="runit" data-cy="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
+              <span class="fa fa-play ltr:mr-1 rtl:ml-1"></span>
+              {{_('run_code_button')}}
+            </button>
+            <button id="stopit" data-cy="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
+            <div class="flex-1 md:hidden"></div>
+            <button id="debug_button" class="blue-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
+                <span class="fa fa-bug ltr:mr-1 rtl:ml-1"></span>
+                {{_('debug')}}
+             </button>
+        </div>
+        <div id="debug_container" class="flex-initial gap-2 inline-flex items-center">
+            <button id="debug_restart" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
+              <span class="fa fa-repeat ltr:mr-1 rtl:ml-1"></span>
+              {{_('restart')}}
+            </button>
+            <button id="debug_stop" class="red-btn hidden" onclick="hedyApp.stopDebug()">
+              <span class="fa fa-stop ltr:mr-1 rtl:ml-1"></span>
+              {{_('stop')}}
+            </button>
+            <button id="debug_continue" class="btn-shape bg-blue-400 hover:bg-blue-300 text-white hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "continue")'>
+              <span class="fa fa-forward ltr:mr-1 rtl:ml-1 {% if g.dir == "rtl" %}rotate-180{% endif %}"></span>
+              {{_('continue')}}
           </button>
-          <button id="stopit" data-cy="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
-          <div class="flex-1 md:hidden"></div>
-          <button id="debug_button" class="blue-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
-              <span class="fa fa-bug ltr:mr-1 rtl:ml-1"></span>
-              {{_('debug')}}
-           </button>
-      </div>
-      <div id="debug_container" class="flex-initial gap-2 inline-flex items-center">
-          <button id="debug_restart" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
-            <span class="fa fa-repeat ltr:mr-1 rtl:ml-1"></span>
-            {{_('restart')}}
-          </button>
-          <button id="debug_stop" class="red-btn hidden" onclick="hedyApp.stopDebug()">
-            <span class="fa fa-stop ltr:mr-1 rtl:ml-1"></span>
-            {{_('stop')}}
-          </button>
-          <button id="debug_continue" class="btn-shape bg-blue-400 hover:bg-blue-300 text-white hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "continue")'>
-            <span class="fa fa-forward ltr:mr-1 rtl:ml-1 {% if g.dir == "rtl" %}rotate-180{% endif %}"></span>
-            {{_('continue')}}
-        </button>
-      </div>
-      <div class="flex-1"></div>
-      <div id="clear_button_container" class="flex-initial mt-2 lg:mt-0 inline-flex items-center">
-          <button id="clear" class="blue-btn" onclick="hedyApp.emptyEditor()">
+        </div>
+        <div id="clear_button_container" class="flex-initial lg:mt-0 inline-flex items-center">
+          <button id="clear" class="blue-btn h-full" onclick="hedyApp.emptyEditor()">
             <span class="fa fa-broom ltr:mr-1 rtl:ml-1"></span>
             {{_('clear')}}
           </button>
+      </div>
+      </div>
+      <div class="flex-1"></div>
+      <div class="flex flex-row gap-2 flex-initial justify-between">
+        {% if raw or public_adventures_page %}
+          <div _="on load hedyApp.setDevelopersMode('load', false)"></div>
+        {% elif not enforce_developers_mode and not editor_readonly %}
+          <div class="blue-btn" id="developers_toggle_container">
+            <label for="developers_toggle" class="flex flex-row items-center justify-center cursor-pointer">
+                <div class="relative">
+                <input id="developers_toggle" type="checkbox" class="sr-only"
+                _="on load hedyApp.setDevelopersMode('load', false)
+                    on click hedyApp.setDevelopersMode('click', false)">
+                <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner" id="dev_toggle"></div>
+                <div
+                    id="toggle_circle"
+                    class="toggle-circle absolute w-6 h-6 bg-white rounded-full shadow ltr:-left-1 rtl:-right-1 -top-1 transition" style="top: -5px;"></div>
+                </div>
+                <div class="ltr:ml-3 rtl:mr-3">{{_('developers_mode')}}</div>
+            </label>
+          </div>
+        {% else %}
+          <div _="on load hedyApp.setDevelopersMode('load', true)"></div>
+        {% endif %}
       </div>
     </div>
     {% if not raw %}
