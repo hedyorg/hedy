@@ -31,12 +31,12 @@ adventures:
                     Затем вы можете поместить это имя в любое место в предложении.
                 example_code: |-
                     ```
-                    name {is} {ask} What is the name of the main character?
-                    {print} name is now going to run in the woods
-                    {print} name is a bit scared
-                    {print} Suddenly she hears a crazy noise...
+                    имя {is} {ask} Какое имя главного героя?
+                    {print} имя собирается погулять по лесу
+                    {print} имя немного напуган(а)
+                    {print} Повсюду слышно страшный шум...
                     {sleep}
-                    {print} name is afraid this is a haunted forest
+                    {print} имя боится, что это лес с привидениями
                     ```
                 story_text_2: |
                     ### Упражение
@@ -183,13 +183,13 @@ adventures:
                     ### Задание
 
                     Посмотрите на  <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf">рассказ</a> если вы его не видели раньше и убедитесь что ваш рассказ напечатан так же как и в книге.
-                example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
+                example_code: "```\nживотные = _ , _ , _ \n{print} 'Бурый мишка, Бурый мишка'\n{print} 'Что ты видишь?'\n```\n"
             12:
                 story_text: На этом уровне вы можете использовать кавычки для сохранения нескольких слов в переменной.
                 example_code: |
                     ```
-                    name = 'The Queen of England'
-                    {print} name ' was eating a piece of cake, when suddenly...'
+                    имя = 'Королева Англии'
+                    {print} имя ' ела кусочек торта, когда вдруг...'
                     ```
             13:
                 story_text: |
@@ -238,17 +238,17 @@ adventures:
                     {print}('Добро пожаловать в историю!')
                     ```
                 story_text_2: |
-                    ### Exercise 2
-                    We have already prepared an `{input}` for you. First, use the `name` variable in your story.
-                    Then add a second `{ask}` and use that variable as well.
-                    Tip: Remember the commas in a `{print}` between text and variables!
+                    ### Упражнение 2
+                    Мы уже подготовили `{input}` для тебя. Для начала, используй `name` переменную в своей истории.
+                    Затем добавь еще один `{ask}` и используй эту переменную снова.
+                    Совет: Не забывй про запятые в `{print}` между текстом и переменными!
                 example_code_2: |
                     ```
-                    naam = {input}("What's your name?")
-                    {print}('Welcome to this story!')
+                    имя = {input}("Как вас зовут?")
+                    {print}('Добро пожаловать в эту историю!')
                     ```
     add_remove_command:
-        name: '{add} {to} & {remove} {from}'
+        name: '{add} {to_list} & {remove} {from}'
         default_save_name: add_remove_command
         description: introducing add to and remove from
         levels:
