@@ -27,12 +27,12 @@
     {% endif %}
   </div>
   <div class="flex flex-row gap-4">
-    <div class="flex flex flex-col md:flex-row border-b-2 border-blue-900 md:gap-2">
+    <div class="flex flex-col md:flex-row border-b-2 border-blue-900 md:gap-2">
       <div class="text-4xl font-light text-blue-800">
         {{ _('level_title') }} {{ level_nr }}
         {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}
       </div>
-      <span class="hidden md:block font-light text-blue-800" >—</span>
+      <span class="hidden md:block text-4xl font-light text-blue-800" >—</span>
       <div id="program_name" type="text" class="text-4xl font-light text-blue-800">      
       {{ initial_adventure.name }}
       </div>
@@ -40,16 +40,21 @@
   </div>
   <div class="flex-1"></div>
   <div class="flex flex-col md:flex-row gap-4 md:items-center">
-    <button class="blue-btn w-fit"
-    _="on click toggle .-translate-x-full on #index_sidebar
-    then toggle .hidden on #sidebar_bg
-    wait 100ms
-    then toggle .opacity-0 on #sidebar_bg
-    then toggle .opacity-75 on #sidebar_bg">
-    See more adventures 
-    <i class="fa-solid fa-book-open-reader"></i>
-    </button>
     <div class="flex flex-row gap-2">
+      <button class="blue-btn w-fit"
+      _="on click toggle .-translate-x-full on #index_sidebar
+      then toggle .hidden on #sidebar_bg
+      wait 100ms
+      then toggle .opacity-0 on #sidebar_bg
+      then toggle .opacity-75 on #sidebar_bg">
+      See more adventures 
+      <i class="fa-solid fa-book-open-reader"></i>
+      </button>
+      <button class="blue-btn md:hidden" _="on click toggle .hidden .flex on #more_options">
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+      </button>
+    </div>
+    <div class="hidden transition-all duration-300 ease-in md:flex flex-row gap-2" id="more_options">
       {% if not hide_cheatsheet and cheatsheet %}
       <div class="dropdown relative" id="cheatsheet_dropdown_container">
         <button class="blue-btn ltr:ml-1 rtl:mr-1 rounded inline-flex items-center gap-2" id="dropdown_cheatsheet_button"
