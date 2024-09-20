@@ -93,7 +93,7 @@ Lees de codes goed! Welke zijn er goed of fout.
     "assignment": "MC-code",
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
-    "icon"      : "A/B",
+    "icon"      : "🤔",
     "code"      : "achternaam is Jansen\nprint Goedemorgen naam!",
     "answer"    : "Goed"
 }
@@ -102,7 +102,7 @@ Lees de codes goed! Welke zijn er goed of fout.
     "assignment": "MC-code",
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
-    "icon"      : "A/B",
+    "icon"      : "🤔",
     "code"      : "naam is\nprint Goedemorgen naam!",
     "answer"    : "Fout"
 }
@@ -111,7 +111,7 @@ Lees de codes goed! Welke zijn er goed of fout.
     "assignment": "MC-code",
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
-    "icon"      : "A/B",
+    "icon"      : "🤔",
     "code"      : "naam is Jansen\nprint Goedemorgen meneer naam!\nprint Hallo meneer naam!",
     "answer"    : "Goed"
 }

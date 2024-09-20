@@ -71,8 +71,6 @@ Vind je het lastig? Gebruik dan weer het stappenplan om variabele-uitvoer te voo
     "lines"     : 1
 }
 
-{TODO A/B Icon!
-
 #### Opdracht 3: Foutje?
 Lees de codes goed! Welke zijn er goed of fout.
 
@@ -80,7 +78,7 @@ Lees de codes goed! Welke zijn er goed of fout.
     "assignment": "MC-code",
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
-    "icon"      : "A/B",
+    "icon"      : "🤔",
     "code"      : "weer is zonnig, regen, wolken, onweer\nprint Bah! De computer loopt weer vast.",
     "answer"    : "Fout. Je kan een lijst niet printen"
 }
@@ -89,7 +87,7 @@ Lees de codes goed! Welke zijn er goed of fout.
     "assignment": "MC-code",
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
-    "icon"      : "A/B",
+    "icon"      : "🤔",
     "code"      : "docenten is Hermans\nprint Vandaag alweer docenten at random",
     "answer"    : "Fout, docenten is geen lijst"
 }
@@ -98,7 +96,7 @@ Lees de codes goed! Welke zijn er goed of fout.
     "assignment": "MC-code",
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
-    "icon"      : "A/B",
+    "icon"      : "🤔",
     "code"      : "docenten is onweer, regen, ijzel\nprint Vandaag alweer docenten at random!",
     "answer"    : "Goed, de naam hoeft niet te kloppen voor de computer."
 }
@@ -136,7 +134,39 @@ add dier to dieren
 print het was een dieren op willekeurig
 ```
 
-#### Opdracht 4: Schrijf de code
+Je kan ook iets uit een lijst verwijderen, met `remove` en `from`.
+
+#### Opdracht 4: Goed of fout?
+
+{
+    "assignment": "MC-code",
+    "options"   : ["Goed" , "Fout"],
+    "question"  : "Is deze code goed of fout?",
+    "icon"      : "🤔",
+    "code"      : "letters is a,b,c,d\nremove a to letters",
+    "answer"    : "Fout. Bij remove hoort from, niet to."
+}
+
+{
+    "assignment": "MC-code",
+    "options"   : ["Goed" , "Fout"],
+    "question"  : "Is deze code goed of fout?",
+    "icon"      : "🤔",
+    "code"      : "eten is pizza, friet, kapsalon\nremove kroket from eten",
+    "answer"    : "Goed, je mag iets verwijderen dat niet in de lijst zit."
+}
+
+{
+    "assignment": "MC-code",
+    "options"   : ["Goed" , "Fout"],
+    "question"  : "Is deze code goed of fout?",
+    "icon"      : "🤔",
+    "code"      : "eten is pizza, friet, kapsalon\nadd pizza to eten",
+    "answer"    : "Goed, je mag iets toevoegen dat al in de lijst zit."
+}
+
+
+#### Opdracht 5: Schrijf de code
 
 Kijk goed naar de uitvoer, en schrijf er een passende code bij. 
 **Zorg ervoor dat er steeds minstens een willekeurige keuze in je programma zit, dus niet alleen een print!**
@@ -144,7 +174,7 @@ Kijk goed naar de uitvoer, en schrijf er een passende code bij.
 {
     "assignment": "input",
     "icon"      : "🧑‍💻",
-    "output"    : "Welkom bij de bingoavond\nDe drie geluksnummers zijn\n: 5 en 3 en 10",
+    "output"    : "Welkom bij de bingoavond\nDe drie geluksnummers zijn:\n5 en 3 en 10",
     "answer"    : "getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nprint Welkom bij de bingoavond\nprint De drie geluksnummers zijn:\nprint nummers at random en print nummers at random en print nummers at random",
     "lines"     : 4
 }
@@ -154,12 +184,12 @@ Kijk goed naar de uitvoer, en schrijf er een passende code bij.
     "assignment": "input",
     "icon"      : "🧑‍💻",
     "output"    : "We gaan vanavond naar de film.\nWe kiezen: Inside Out",
-    "answer"    : "films is Avengers, Barbie, Inside Out\nprint e gaan vanavond naar de film.\nWe kiezen: films at random",
+    "answer"    : "films is Avengers, Barbie, Inside Out\nprint We gaan vanavond naar de film.\nWe kiezen: films at random",
     "lines"     : 2
 }
 
 
-#### Opdracht 5: Programmeerwoorden 
+#### Opdracht 6: Programmeerwoorden 
 
 We hebben deze les weer nieuwe programmeerwoorden geleerd! Leg ze uit je eigen woorden. 
 
@@ -188,9 +218,9 @@ We hebben deze les weer nieuwe programmeerwoorden geleerd! Leg ze uit je eigen w
 }
 
 
-#### Opdracht 6: Codes
+#### Opdracht 7: Codes
 
-De code `is` is in dit leven veranderd. En we hebben ook nieuwe codes geleerd. 
+De code `is` is in dit leven veranderd, en we hebben ook nieuwe codes geleerd. 
 Wat doen die? Leg het uit in je eigen woorden. 
 
 {
@@ -226,53 +256,13 @@ Wat doen die? Leg het uit in je eigen woorden.
     "answer"    : "Kiest een willekeurig element uit de lijst."
 }
 
-{TODO: goed of fout, 
-
-
-------
-
-#### Opdracht 8: Voorspel de uitvoer
-
-Voorspel wat de uitvoer van deze codes is. Dat is bij de turtle of tekenschildpad natuurlijk een tekening.
-
-{
-    "assignment": "output",
-    "icon"      : "💻",
-    "type"      : "turtle",
-    "code"      : "forward 100\nturn left\nforward 100\nturn left\nforward 100\nturn left\nforward 100\nturn left\n",
-    "answer"    : "een vierkant",
-    "lines"     : 5
-}
-
-{
-    "assignment": "output",
-    "icon"      : "💻",
-    "type"      : "turtle",
-    "code"      : "forward 100\nturn left\nforward 100\nturn right\nforward 100\nturn left\nforward 100\nturn right\n",
-    "answer"    : "een trapje (zonder onderkant)",
-    "lines"     : 5
-}
-
-{
-    "assignment": "output",
-    "icon"      : "💻",
-    "type"      : "turtle",
-    "code"      : "forward 100\nturn right\nforward 5\nturn right\nforward 100\nturn right\nforward 5\nturn right\n",
-    "answer"    : "een hele smalle vierkant",
-    "lines"     : 6
-}
-
-
-
-
-
 
 ### Wat vond jij?
 
 {
     "assignment": "text",
     "icon"      : "✍️",
-    "question"  : "Wat was de leukste opdracht van level 1?",
+    "question"  : "Wat was de leukste opdracht van dit level?",
     "lines"     : 1
 }
 

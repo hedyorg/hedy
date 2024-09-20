@@ -43,13 +43,13 @@ print goedemorgen                     ______________________________________
 Soms sluipt er een foutje in je code. Dat is niet erg, maar Hedy kan je code dan niet goed lezen.
 Welke van deze code zijn fout, denk jij?
 
-**A/B Vraag**: Is deze code goed of fout?
+**🤔 Vraag**: Is deze code goed of fout?
 ```hedy
 prnt Hallo allemaal!							
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
-**A/B Vraag**: Is deze code goed of fout?
+**🤔 Vraag**: Is deze code goed of fout?
 ```hedy
 print print							
 ```

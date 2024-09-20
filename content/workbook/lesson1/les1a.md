@@ -49,7 +49,7 @@ Welke van deze code zijn fout, denk jij?
     "assignment": "MC-code",
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
-    "icon"      : "A/B",
+    "icon"      : "🤔",
     "code"      : "prnt Hallo allemaal!",
     "answer"    : "Fout"
 }
@@ -58,7 +58,7 @@ Welke van deze code zijn fout, denk jij?
     "assignment": "MC-code",
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
-    "icon"      : "A/B",
+    "icon"      : "🤔",
     "code"      : "print print",
     "answer"    : "Goed"
 }

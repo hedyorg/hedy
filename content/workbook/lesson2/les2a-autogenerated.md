@@ -80,21 +80,21 @@ print Goedemorgen naam!
 #### Opdracht 3: Foutje?
 Lees de codes goed! Welke zijn er goed of fout.
 
-**A/B Vraag**: Is deze code goed of fout?
+**🤔 Vraag**: Is deze code goed of fout?
 ```hedy
 achternaam is Jansen
 print Goedemorgen naam!							
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
-**A/B Vraag**: Is deze code goed of fout?
+**🤔 Vraag**: Is deze code goed of fout?
 ```hedy
 naam is
 print Goedemorgen naam!							
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
-**A/B Vraag**: Is deze code goed of fout?
+**🤔 Vraag**: Is deze code goed of fout?
 ```hedy
 naam is Jansen
 print Goedemorgen meneer naam!

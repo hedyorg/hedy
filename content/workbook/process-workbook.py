@@ -12,7 +12,7 @@ templates = {
 {lines} <br>
 ''',
     'output': '''**{icon} Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									Uitvoer:
+Code:									                        Uitvoer:
 ```hedy
 {textfields}							
 ```
@@ -33,7 +33,7 @@ Antwoord: {options}
 Antwoord: {options}
 ''',
     'input': '''**{icon} Vraag**: Welke code hoort bij deze uitvoer? <br>
-Code:									Uitvoer:
+Code:									                        Uitvoer:
 ```hedy
 {textfields}							
 ```
@@ -80,7 +80,7 @@ def convert_json(json):
             output_line = ''
             if i < number_of_input_lines:
                 output_line = code_lines[i]
-                output_line = output_line.ljust(38, ' ')
+                output_line = output_line.ljust(50, ' ')
             if i < number_of_output_lines and not turtle:
                 if i == 0 and turtle:
                     output_line += '🐢'
@@ -94,14 +94,14 @@ def convert_json(json):
 
     if assignment_type == 'input':
         textfields = ''
-        number_of_input_lines = len(json['answer'].split('\n'))
+        number_of_input_lines = len(json['answer'].split('\n'))+1
         output_lines = json['output'].split('\n')
         number_of_output_lines = len(output_lines)
 
         for i in range(max(number_of_input_lines, number_of_output_lines)-1):
             newline = ''
             if i < number_of_input_lines:
-                newline += '_' * 30
+                newline += '_' * 40
 
             if i < number_of_output_lines:
                 output_line = output_lines[i]
@@ -165,7 +165,7 @@ def process_workbook(file_path):
     return workbook_output
 
 
-lesson = '2'
+lesson = '3'
 
 input_path = f"/lesson{lesson}/les{lesson}a.md"
 json_data = process_workbook(current_directory+input_path)
