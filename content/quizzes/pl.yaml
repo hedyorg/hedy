@@ -22,7 +22,7 @@ levels:
                 feedback: '`{echo}` wyświetla odpowiedź do zadanego wcześniej pytania.'
             -   option: '`{print}`'
                 feedback: Zgadza się!
-            -   option: '`witaj`'
+            -   option: '`hello`'
                 feedback: '''witaj'' nie jest komendą.'
             -   option: '`{ask}`'
                 feedback: Za pomocą `{ask}` możesz zadać pytanie.
@@ -610,14 +610,26 @@ levels:
         1:
             question_text: Which of these is true?
             mp_choice_options:
-            -   option: '`{print}` and `{ask}` now need quotation marks'
+            -   option: '```
+
+                    {print} ''Jestem bardzo podekscytowany tym quizem!''
+
+                    ```'
                 feedback: That's right
-            -   option: Only `{print}` needs quotation marks
-                feedback: '`{ask}` needs quotation marks too!'
-            -   option: '`{at} {random}` doesn''t work anymore in level 4'
+            -   option: "```\n{print}Jestem bardzo podekscytowany tym quizem!\n```"
+                feedback: '{print} potrzebuje teraz cudzysłowu!'
+            -   option: '```
+
+                    {print} ''Jestem bardzo podekscytowany tym quizem!''
+
+                    ```'
                 feedback: '`{at} {random}` still works'
-            -   option: '`{at} {random}` now needs quotation marks'
-                feedback: No, but 2 other commands do.
+            -   option: '```
+
+                    {print} ''Jestem bardzo podekscytowany tym quizem!
+
+                    ```'
+                feedback: ostrożnie, używając cudzysłowów i apostrofu
             hint: In level 4 you need quotation marks for 2 commands.
             correct_answer: A
             question_score: '10'
@@ -638,7 +650,7 @@ levels:
                     ```
                     {print} hello
                     ```
-                feedback: There are no quotation marks here!.
+                feedback: Nie ma tutaj cudzysłowu!
             -   option: |-
                     ```
                     {print} ,hello,
@@ -664,7 +676,7 @@ levels:
                     ```
                     '{print} Hi Im Hedy'
                     ```
-                feedback: The first quotation mark should be behind the word {print}
+                feedback: Pierwszy znak cudzysłowu powinien znajdować się za słowem `{print}`
             -   option: |-
                     ```
                     {print} 'Hi Im Hedy'
@@ -737,7 +749,7 @@ levels:
                     {print} 'You win... prices {at} {random}'
                     ```
                 feedback: Hedy will literally print 'prices {at} {random}''
-            hint: 'Think carefully: what is a variable and should be outside of the quotation marks? And what are normal words that should be inside?.'
+            hint: 'Zastanów się: jaka jest zmienna i czy powinna znajdować się poza cudzysłowami? A jakie normalne słowa powinny być w środku?'
             correct_answer: A
             question_score: '10'
         7:
@@ -832,14 +844,14 @@ levels:
                 _?_ {print} 'My lucky number is 5!'
             mp_choice_options:
             -   option: In level 5 `{print}` works differently than in level 4
-                feedback: '`{print}` is still the same'
+                feedback: 'Istnieje już polecenie `{print}`.'
             -   option: In level 5 `{ask}` works differently than in level 4
-                feedback: '`{ask}` is still the same'
+                feedback: 'Polecenie `{if}` jest używane w powyższym wierszu.'
             -   option: In level 5 `{ask}` and `{print}` work differently than in level 4
-                feedback: '`No these commands remain the same'
+                feedback: 'To nie to!'
             -   option: In level 5 `{ask}` and `{print}` work the same as in level 4
                 feedback: Correct!
-            hint: We have only learned a new command in level 5.
+            hint: Który idzie w parze z poleceniem `{if}`?
             correct_answer: D
             question_score: '10'
         2:
@@ -954,24 +966,16 @@ levels:
                 {else} _?_ 'Unfortunately... No big money for you.'
             mp_choice_options:
             -   option: |-
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: '`{if}` is in the line above.'
             -   option: |-
-                    ```
-                    {at} {random}
-                    ```
+                    `{at}``{random}`
                 feedback: No, you don't need `{at} {random}`.
             -   option: |-
-                    ```
-                    {else}
-                    ```
+                    `{else}`
                 feedback: There already is an `{else}` command
             -   option: |-
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: Awesome!
             hint: After `{else}` a `{print}` command follows
             correct_answer: D
@@ -994,14 +998,10 @@ levels:
                     ```
                 feedback: Great job!
             -   option: |-
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: '`{if}` is already there'
             -   option: |-
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: No, that's not it.
             hint: What the variable name?
             correct_answer: B
@@ -1302,19 +1302,13 @@ levels:
                     ```
                 feedback: That's right!
             -   option: |-
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: '`{print}` is spelled correctly'
             -   option: |-
-                    ```
-                    {repeat}
-                    ```
+                    `{repeat}`
                 feedback: '`{repeat}` is spelled correctly'
             -   option: |-
-                    ```
-                    {times}
-                    ```
+                    `{times}`
                 feedback: '`{times}` is spelled correctly'
             hint: I'm is wrong, you can't use apostrophes
             correct_answer: A
@@ -1451,7 +1445,7 @@ levels:
                     {print} 'Help !'
                     {repeat} 3 {times} {print} 'Please help me !'
                     ```
-                feedback: Je herhaalt de verkeerde regel
+                feedback: Twój powtórzony wiersz jest niepoprawny.
             -   option: |-
                     ```
                     {print} 'Batman was flying through Gotham.'
@@ -1459,7 +1453,7 @@ levels:
                     {repeat} 3 {times} 'Help !'
                     {print} 'Please help me !'
                     ```
-                feedback: Het commando `{print}` mist op regel 3
+                feedback: W wierszu 3 brakuje polecenia `{print}`.
             -   option: |-
                     ```
                     {print} Batman was flying through Gotham.
@@ -1558,7 +1552,7 @@ levels:
             mp_choice_options:
             -   option: This should be only one line, not 2.
                 feedback: No it should be 2 lines.
-            -   option: This `{print}` command has to go
+            -   option: To polecenie `{print}` musi zostać usunięte.
                 feedback: No, you need it.
             -   option: There is a spelling mistake in the `{repeat}` command.
                 feedback: Nee, repeat is de goede spelling
@@ -1597,8 +1591,8 @@ levels:
                     Baby shark
                     Baby shark
                     Baby shark
-                feedback: What is being repeated and what isn't.
-            hint: What is being repeated and what is not?.
+                feedback: Co się powtarza, a co nie?
+            hint: Co się powtarza, a co nie?
             correct_answer: C
             question_score: '10'
         4:
@@ -1696,9 +1690,9 @@ levels:
                 {print} 'That you for your order'
             mp_choice_options:
             -   option: Nothing this code is correct!
-                feedback: Something is wrong!.
+                feedback: Coś jest nie tak!
             -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
-                feedback: You are!.
+                feedback: Ty jesteś!
             -   option: You don't have to use indentation twice. Only in the first `{if}` command.
                 feedback: You always have to use indentation.
             -   option: The indentation is wrong in the first `{if}` command.
@@ -1805,9 +1799,9 @@ levels:
                 {print} 'That you for your order'
             mp_choice_options:
             -   option: Nothing this code is correct!
-                feedback: That's right!.
+                feedback: Zgadza się!
             -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
-                feedback: You are!.
+                feedback: Ty jesteś!
             -   option: You don't have to use indentation twice.
                 feedback: You always have to use indentation.
             -   option: The indentation is wrong in the last `{if}` command.
@@ -1997,7 +1991,7 @@ levels:
                     {if} drink {is} coke
                             price = price - 2
                     ```
-                feedback: Try again
+                feedback: Dwa kolejno następujące po sobie polecenia `{if}` nigdy nie są poprawne.
             -   option: |-
                     ```
                     {if} food {is} pizza
@@ -2311,19 +2305,13 @@ levels:
                     ```
                 feedback: 'No'
             -   option: |-
-                    ```
-                    {range}
-                    ```
+                    `{range}`
                 feedback: Correct
             -   option: |-
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: 'No'
             -   option: |-
-                    ```
-                    {for}
-                    ```
+                    `{for}`
                 feedback: 'No'
             hint: What did you learn in this level?
             correct_answer: B
@@ -2428,7 +2416,7 @@ levels:
                         {print} 10 - i
                     ```
                 feedback: That's right!
-            hint: It has to be a calculation...
+            hint: To musi być obliczenie…
             correct_answer: D
             question_score: '10'
         5:
@@ -2639,7 +2627,7 @@ levels:
                 feedback: Correct!
             -   option: The quotation marks aren't used correctly in line 2
                 feedback: That's not true
-            -   option: You can't use the = sign when using an ask command
+            -   option: Nie można używać znaku = podczas korzystania z polecenia {ask}
                 feedback: That's not true
             -   option: Nothing is wrong.
                 feedback: That's not true
@@ -3505,13 +3493,13 @@ levels:
         9:
             question_text: What will the diet app say if you have eaten 1600 calories today?
             code: |-
-                chocolate = {ask} 'How many calories have you eaten today?'
-                  {while} calories <= 1000
-                      {print} 'You could eat some more'
-                  {while} calories > 1000 and calories =< 2000
-                      {print} 'That is alright'
-                  {while} calories > 2000
-                      {print} 'You have had enough for today'
+                czekolada = {ask} 'Ile kalorii zjadłeś dzisiaj?'
+                  {while} kalorie <= 1000
+                      {print} 'Możesz zjeść trochę więcej'
+                  {while} kalorie > 1000 i kalorie =< 2000
+                      {print} 'W porządku'
+                  {while} kalorie > 2000
+                      {print} 'Zjadłeś dzisiaj już wystarczająco dużo'
             mp_choice_options:
             -   option: Nothing. 1600 is not programmed into the app.
                 feedback: 'No'
@@ -3661,11 +3649,11 @@ levels:
             mp_choice_options:
             -   option: noises = ['moo', 'woof', 'neigh']
                 feedback: Mind the variable name and the order of the sounds.
-            -   option: sounds = '[woof], [moo], [neigh]'.
+            -   option: "```\n   dźwięk = '[woof], [moo], [neigh]'\n```"
                 feedback: Look at line one to see how brackets are supposed to be used.
             -   option: sounds = [woof, moo, neigh]
                 feedback: Don't forget the quotation marks!
-            -   option: sounds = ['woof', 'moo', 'neigh']
+            -   option: "```\n   dźwięki = ['woof', 'moo', 'neigh']\n```"
                 feedback: Great job!
             hint: Look at line 1 to see proper use of brackets and quotation marks.
             correct_answer: D
