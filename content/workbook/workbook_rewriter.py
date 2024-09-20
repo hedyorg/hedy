@@ -1,6 +1,4 @@
 import json
-import os
-
 
 # TODO:
 # teacher content/answers
@@ -14,33 +12,30 @@ templates = {
     'output': '''**{icon} Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
-{textfields}							
+{textfields}
 ```
 ''',
-
     'define': '''**{icon} Vraag**: {question}
 Antwoord: ____________________________________________________________________________________________________<br>
 ''',
-
     'MC': '''**{icon} Vraag**: {question}
 Antwoord: {options}
 ''',
-
     'MC-code': '''**{icon} Vraag**: {question}
 ```hedy
-{code}							
+{code}
 ```
 Antwoord: {options}
 ''',
     'input': '''**{icon} Vraag**: Welke code hoort bij deze uitvoer? <br>
 Code:									                        Uitvoer:
 ```hedy
-{textfields}							
+{textfields}
 ```
 ''',
-    'element selection': '''**{icon} Opdracht**: {question}									
+    'element selection': '''**{icon} Opdracht**: {question}
 ```hedy
-{code}							
+{code}
 ```
 ''',
 }
