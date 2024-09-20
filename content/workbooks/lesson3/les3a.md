@@ -66,8 +66,10 @@ Vind je het lastig? Gebruik dan weer het stappenplan om variabele-uitvoer te voo
 {
     "assignment": "output",
     "icon"      : "💻",
-    "code"      : "weer is zonnig, regen, wolken, onweer\nprint Wat is het lekker weer vandaag!",
-    "answer"    : "Fout! Je kan een lijst niet printen",
+    "code"      : 
+"weer is zonnig, regen, wolken, onweer\n
+print Wat is het lekker weer vandaag!",
+    "answer"    : "Wat is het lekker weer vandaag!",
     "lines"     : 1
 }
 

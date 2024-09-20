@@ -8,71 +8,80 @@ Om het leuker te maken kan je in deze les andere features aanbieden, zoals `clea
 Aan het einde van de les:
 
 * snap jij waarom aanhalingstekens nodig zijn in programmeren.
-* Een verhaal maken waarin willekeurige dingen gebeuren.
-* Een tekening maken waarin willekeurige dingen verschijnen.
+* kan jij aanhalingstekens op de goede plek in code zetten.
+* kan jij foutmeldingen over aanhalingstekens goed lezen.
 
-### Variabelen
+### Aanhalingstekens
 
-Je hebt net op het bord de `is` opdracht gezien met een lijst. 
-Met als bij een gewone variabele, slaan we iets op in een lijst met `is`.
+We hebben geleerd om aanhalingstekens te gebruiken, als iets letterlijk zo in beeld moet komen.
+We gebruiken aanhalingstekens bij `print` en bij `ask`.
 
 ```hedy
-vrienden is Mo, Layla, Denny
-print Ik ga vandaag naar vrienden at random
+vriend is ask 'Hoe heet jij?'
+print 'Leuk! Ik ga naar de stad met ' vriend
 ```
 
-#### Opdracht 1: Omcirkel het juiste stukje code
+#### Opdracht 1: Maak de code af.
 
-{
-    "assignment": "element selection",
-    "question"  : "Omcircel alle lijsten in deze code",
-    "icon"      : "◯",
-    "code"      : "vandaag is maandag\nklassen is 1HC, 1HB, 1HA\nlokalen is 011, 304, 305, OLC",
-    "answer"    : "klassen en lokalen"
-}
-
-{
-    "assignment": "element selection",
-    "question"  : "Op welke plek in de code wordt er tekst uit een lijst gebruikt?",
-    "icon"      : "◯",
-    "code"      : "klassen is 1HC, 1HB, 1HA\nprint vandaag heeft klassen at random vrij!",
-    "answer"    : "Op het einde van regel 2"
-}
-
-#### Opdracht 2: Voorspel de uitvoer
-
-Vind je het lastig? Gebruik dan weer het stappenplan om variabele-uitvoer te voorspellen.
-
-1. Omcirkel de plek waar de lijst wordt ingesteld
-2. Omcirkel de plek waar de lijst wordt gebruikt
-3. Trek een lijn tussen deze plekken
-4. Bij een `at` `random` mag je zelf willekeurig iets uit de lijst kiezen.
+Deze opdrachten doe je in twee stappen:
+1. Zet op de juiste plekken aanhalingstekens in de code.
+2. Staat alles goed? Voorspel dan wat de uitvoer van de code is.
 
 {
     "assignment": "output",
     "icon"      : "💻",
-    "code"      : "docenten is Hermans, Merbis, Bagci, Senkal\nprint Vandaag les van docenten at random!",
-    "answer"    : "Vandaag les van **keuze uit docenten**",
+    "code"      : 
+                    "print Hallo allemaal!n
+                    print Welkom bij Hedy\n",
+    "answer"    : 
+                    "Hallo allemaal\n
+                    Welkom bij Hedy",
+    "lines"     : 2
+}
+
+
+{
+    "assignment": "output",
+    "icon"      : "💻",
+    "code"      : 
+                    "naam is Hermans\n
+                    lokaal is 305\n
+                    print Vandaag hebben we les van naam in lokaal!",
+    "answer"    : "print Vandaag hebben we les van Hermans in 305!",
     "lines"     : 1
 }
 
 {
     "assignment": "output",
     "icon"      : "💻",
-    "code"      : "docenten is Hermans, Merbis, Bagci, Senkal\nprint De docent vandaag is Hermans.",
-    "answer"    : "De docent vandaag is Hermans",
+    "code"      : 
+                    "docenten is Hermans, Merbis, Bagci, Senkal\n
+                    print De docent vandaag is docenten at random.",
+    "answer"    :   "De docent vandaag is Hermans",
     "lines"     : 1
 }
 
 {
     "assignment": "output",
     "icon"      : "💻",
-    "code"      : "weer is zonnig, regen, wolken, onweer\nprint Wat is het lekker weer vandaag!",
-    "answer"    : "Fout! Je kan een lijst niet printen",
+    "code"      : 
+                    "weer is zonnig, regen, wolken, onweer\n
+                    print Wat is het lekker weer vandaag!",
+    "answer"    :   "Wat is het lekker weer vandaag!",
     "lines"     : 1
 }
 
-#### Opdracht 3: Foutje?
+{
+    "assignment": "output",
+    "icon"      : "💻",
+    "code"      : 
+                    "print Wat is het lekker weer vandaag!\n
+                    naam is Bassie",
+    "answer"    :   "Wat is het lekker weer vandaag!",
+    "lines"     : 1
+}
+
+#### Opdracht 2: Foutje?
 Lees de codes goed! Welke zijn er goed of fout.
 
 {
