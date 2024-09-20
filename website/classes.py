@@ -139,7 +139,7 @@ class ClassModule(WebsiteModule):
             elif invited_as == "student":
                 student_classes = self.db.get_student_classes(username)
                 if len(student_classes):
-                    return make_response(gettext("student_not_allowed_in_class"), 400)
+                    return make_response(gettext("student_in_another_class"), 400)
                 self.db.add_student_to_class(Class["id"], username)
 
             refresh_current_user_from_db()
@@ -165,7 +165,7 @@ class ClassModule(WebsiteModule):
 
         student_classes = self.db.get_student_classes(username)
         if len(student_classes):
-            return make_response(gettext("student_not_allowed_in_class"), 400)
+            return make_response(gettext("student_in_another_class"), 400)
 
         self.db.add_student_to_class(Class["id"], username)
         refresh_current_user_from_db()
@@ -305,7 +305,7 @@ class MiscClassPages(WebsiteModule):
         else:
             student_classes = self.db.get_student_classes(username)
             if len(student_classes):
-                return make_response(gettext("student_not_allowed_in_class"), 400)
+                return make_response(gettext("student_in_another_class"), 400)
         if self.db.get_user_invitations(user["username"]):
             return make_response(gettext("student_already_invite"), 400)
 
