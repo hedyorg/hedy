@@ -8,6 +8,7 @@ from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
 from os import path, getenv
 
+import hedy
 import hedy_error
 import hedy_grammar
 import hedy_translation
