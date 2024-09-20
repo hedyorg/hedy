@@ -164,5 +164,3 @@ def process_workbook(lesson, current_directory):
         print(f"File {file_path} not found.")
 
     return workbook_output
-
-
