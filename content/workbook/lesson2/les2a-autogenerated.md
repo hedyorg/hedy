@@ -22,14 +22,13 @@ print naam
 
 #### Opdracht 1: Omcirkel het juiste stukje code
 
-**◯ Opdracht**: Omcirkel alle keren dat er een variabele in de code staat.									
+**◯ Opdracht**: Omcirkel alle variabelen in deze code.									
 ```hedy
 naam is Hedy
 print Hallo naam
 leeftijd is 17
 print Jij bent leeftijd jaar oud							
 ```
-
 
 **◯ Opdracht**: Omcirkel nu de stukken code waarin een variabele **wordt ingesteld.**									
 ```hedy
@@ -38,7 +37,6 @@ print Hallo naam
 leeftijd is 17
 print Jij bent leeftijd jaar oud							
 ```
-
 
 **◯ Opdracht**: Omcirkel nu de stukken code waarin de waarde van een variabele **wordt gebruikt.**									
 ```hedy
@@ -52,27 +50,36 @@ print Jij bent leeftijd jaar oud
 
 #### Opdracht 2: Voorspel de uitvoer
 
+Tip: Vind je het lastig om de uitvoer te voorspellen? Gebruik dan dit stappenplan:
+
+1. Omcirkel de plek waar een variabele wordt ingesteld
+2. Omcirkel de plek waar de variabele wordt gebruikt
+3. Trek een lijn tussen deze plekken
+4. Zet de waarde (aan de rechterkant van de `is` op de plek van het gebruik).
+
+Voorbeeld:
+
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									Uitvoer:
+Code:									                        Uitvoer:
 ```hedy
-naam is Mo                            ______________________________________
-print Goed bezig naam!                
+naam is Mo                                        __________________________
+print Goed bezig naam!                            
 							
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									Uitvoer:
+Code:									                        Uitvoer:
 ```hedy
-naam is Mo                            ______________________________________
-print Goed bezig Mo!                  
+naam is Mo                                        __________________________
+print Goed bezig Mo!                              
 							
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									Uitvoer:
+Code:									                        Uitvoer:
 ```hedy
-voornaam is Layla                     ______________________________________
-print Goedemorgen naam!               
+voornaam is Layla                                 __________________________
+print Goedemorgen naam!                           
 							
 ```
 
@@ -132,18 +139,18 @@ dus jij heet: Maan
 Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingevuld.
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									Uitvoer:
+Code:									                        Uitvoer:
 ```hedy
-naam is ask Hoe heet jij?             ______________________________________
-print dus jij heet: naam              
+naam is ask Hoe heet jij?                         __________________________
+print dus jij heet: naam                          
 							
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									Uitvoer:
+Code:									                        Uitvoer:
 ```hedy
-toestand is ask Hoe gaat het met jou? ______________________________________
-print Dus het gaat toestand met jou   
+toestand is ask Hoe gaat het met jou?             __________________________
+print Dus het gaat toestand met jou               
 							
 ```
 

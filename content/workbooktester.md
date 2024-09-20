@@ -1,241 +1,180 @@
-# Hedy - Les 3a
+# Hedy - Les 2a
 
-[Teacher] In level 3 leren leerlingen werken met lijsten. Die worden ingesteld zoals een variabele, met `is`, en kan je uitlezen met `at random`. [/Teacher]
+[Teacher] In level 2 leren leerlingen de codes `is` en `is ask` [/Teacher]
 
-## Lijsten en willekeurigheid
+## Variabelen
 
 Aan het einde van de les kun jij:
 
-* Meerdere dingen opslaan in een variabele, zo'n variabele heet een lijst.
-* Een verhaal maken waarin willekeurige dingen gebeuren.
-* Een tekening maken waarin willekeurige dingen verschijnen.
+* Iets opslaan in een variabele
+* Een verhaal en tekening maken waarin je een variabele gebruikt
 
 ### Variabelen
 
-Je hebt net op het bord de `is` opdracht gezien met een lijst.
-Met als bij een gewone variabele, slaan we iets op in een lijst met `is`.
+Je hebt net op het bord de `is` opdracht gezien.
+Een `is` opdracht slaat iets op in de computer, en geeft het een naam. We noemen dat een variabelen.
+Wat in de variabele is opgeslagen noemen we de waarde van de variabele.
 
 ```hedy
-vrienden is Mo, Layla, Denny
-print Ik ga vandaag naar vrienden at random
+naam is Mo
+print naam
 ```
 
 #### Opdracht 1: Omcirkel het juiste stukje code
 
-**◯ Opdracht**: Omcircel alle lijsten in deze code									
+**◯ Opdracht**: Omcirkel alle variabelen in deze code.									
 ```hedy
-vandaag is maandag
-klassen is 1HC, 1HB, 1HA
-lokalen is 011, 304, 305, OLC							
+naam is Hedy
+print Hallo naam
+leeftijd is 17
+print Jij bent leeftijd jaar oud							
 ```
 
-**◯ Opdracht**: Op welke plek in de code wordt er tekst uit een lijst gebruikt?									
+**◯ Opdracht**: Omcirkel nu de stukken code waarin een variabele **wordt ingesteld.**									
 ```hedy
-klassen is 1HC, 1HB, 1HA
-print vandaag heeft klassen at random vrij!							
+naam is Hedy
+print Hallo naam
+leeftijd is 17
+print Jij bent leeftijd jaar oud							
 ```
+
+**◯ Opdracht**: Omcirkel nu de stukken code waarin de waarde van een variabele **wordt gebruikt.**									
+```hedy
+naam is Hedy
+print Hallo naam
+leeftijd is 17
+print Jij bent leeftijd jaar oud							
+```
+
+
 
 #### Opdracht 2: Voorspel de uitvoer
 
-Vind je het lastig? Gebruik dan weer het stappenplan om variabele-uitvoer te voorspellen.
+Tip: Vind je het lastig om de uitvoer te voorspellen? Gebruik dan dit stappenplan:
 
-1. Omcirkel de plek waar de lijst wordt ingesteld
-2. Omcirkel de plek waar de lijst wordt gebruikt
+1. Omcirkel de plek waar een variabele wordt ingesteld
+2. Omcirkel de plek waar de variabele wordt gebruikt
 3. Trek een lijn tussen deze plekken
-4. Bij een `at` `random` mag je zelf willekeurig iets uit de lijst kiezen.
+4. Zet de waarde (aan de rechterkant van de `is` op de plek van het gebruik).
+
+Voorbeeld:
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
-docenten is Hermans, Merbis, Bagci, Senkal        __________________________
-print Vandaag les van docenten at random!         
+naam is Mo                                        __________________________
+print Goed bezig naam!                            
 							
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
-docenten is Hermans, Merbis, Bagci, Senkal        __________________________
-print De docent vandaag is Hermans.               
+naam is Mo                                        __________________________
+print Goed bezig Mo!                              
 							
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
-weer is zonnig, regen, wolken, onweer             __________________________
-print Wat is het lekker weer vandaag!             
+voornaam is Layla                                 __________________________
+print Goedemorgen naam!                           
 							
 ```
+
 
 #### Opdracht 3: Foutje?
 Lees de codes goed! Welke zijn er goed of fout.
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
-weer is zonnig, regen, wolken, onweer
-print Bah! De computer loopt weer vast.							
+achternaam is Jansen
+print Goedemorgen naam!							
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
-docenten is Hermans
-print Vandaag alweer docenten at random							
+naam is
+print Goedemorgen naam!							
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
-docenten is onweer, regen, ijzel
-print Vandaag alweer docenten at random!							
-```
-Antwoord: <br> 〇 Goed<br> 〇 Fout
-
-### Avonturen
-
-[Teacher] Dit zijn alle avonturen zonder `add to` en `remove from`.[/Teacher]
-Dit is een goed moment voor deze avonturen:
-Introductie
-willekeurig
-Dobbelsteen
-Steen, papier, schaar
-Muziek
-Waarzegger
-Restaurant
-Spookhuis
-Afwas?
-
-### Lijsten aanpassen
-
-Tot nu toe hebben we lijsten steeds aan het begin van het programma ingesteld.
-
-```hedy
-antwoorden is ja, nee, misschien
-print Het antwoord is antwoorden at random
-```
-
-Maar soms wil je dat de gebruiker van een programma ook opties kan toevoegen.
-Dat doe je met een `add` en een `to` commando.
-
-```
-dieren is 🐿, 🦔, 🦇, 🦉
-dier is ask Wat zou het kunnen zijn?
-add dier to dieren
-print het was een dieren op willekeurig
-```
-
-Je kan ook iets uit een lijst verwijderen, met `remove` en `from`.
-
-#### Opdracht 4: Goed of fout?
-
-**🤔 Vraag**: Is deze code goed of fout?
-```hedy
-letters is a,b,c,d
-remove a to letters							
-```
-Antwoord: <br> 〇 Goed<br> 〇 Fout
-
-**🤔 Vraag**: Is deze code goed of fout?
-```hedy
-eten is pizza, friet, kapsalon
-remove kroket from eten							
-```
-Antwoord: <br> 〇 Goed<br> 〇 Fout
-
-**🤔 Vraag**: Is deze code goed of fout?
-```hedy
-eten is pizza, friet, kapsalon
-add pizza to eten							
+naam is Jansen
+print Goedemorgen meneer naam!
+print Hallo meneer naam!							
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 
-#### Opdracht 5: Schrijf de code
+### Invoer vragen
 
-Kijk goed naar de uitvoer, en schrijf er een passende code bij.
-**Zorg ervoor dat er steeds minstens een willekeurige keuze in je programma zit, dus niet alleen een print!**
+Alleen tekst opslaan is nog niet krachtig. In level 1 hebben we de code `ask` gezien.
+Die code mag je nu combineren met een `is`. Dat gaat zo:
 
-**🧑‍💻 Vraag**: Welke code hoort bij deze uitvoer? <br>
+```hedy
+naam is ask Hoe heet jij?
+```
+
+### Invoer laten zien
+
+Je kan nu gewoon met een `print` het antwoord laten zien, zonder `echo`.
+
+```hedy
+naam is ask Hoe heet jij?
+print dus jij heet: naam
+```
+
+Als iemand die Maan heet deze code zou gebruiken, dan wordt de uitvoer:
+
+```
+dus jij heet: Maan
+```
+
+#### Opdracht 4: Voorspel de uitvoer
+
+Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingevuld.
+
+**💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
-________________________________________          Welkom bij de bingoavond
-________________________________________          De drie geluksnummers zijn:
-________________________________________          5 en 3 en 10
-________________________________________
+naam is ask Hoe heet jij?                         __________________________
+print dus jij heet: naam                          
+							
+```
+
+**💻 Vraag**: Wat is de uitvoer van deze code? <br>
+Code:									                        Uitvoer:
+```hedy
+toestand is ask Hoe gaat het met jou?             __________________________
+print Dus het gaat toestand met jou               
 							
 ```
 
 
-**🧑‍💻 Vraag**: Welke code hoort bij deze uitvoer? <br>
-Code:									                        Uitvoer:
-```hedy
-________________________________________          We gaan vanavond naar de film.
-________________________________________          We kiezen: Inside Out
-________________________________________
-							
-```
+#### Opdracht 5: Programmeer-woorden
 
+We hebben deze les weer nieuwe woorden geleerd! Leg ze uit je eigen woorden.
 
-#### Opdracht 6: Programmeerwoorden
-
-We hebben deze les weer nieuwe programmeerwoorden geleerd! Leg ze uit je eigen woorden.
-
-**📖 Vraag**: Wat betekent lijst?
+**📖 Vraag**: Wat betekent variabele?
 Antwoord: ____________________________________________________________________________________________________<br>
 
-**📖 Vraag**: Wat betekent willekeurig?
+**📖 Vraag**: Wat betekent waarde?
 Antwoord: ____________________________________________________________________________________________________<br>
 
-**📖 Vraag**: Wat betekent toevoegen?
+**📖 Vraag**: Wat betekent instellen?
 Antwoord: ____________________________________________________________________________________________________<br>
 
 
-#### Opdracht 7: Codes
+#### Opdracht 6: Codes
 
-De code `is` is in dit leven veranderd, en we hebben ook nieuwe codes geleerd.
-Wat doen die? Leg het uit in je eigen woorden.
+We hebben nieuwe codes geleerd: `is`, `is ask` samen. Wat doen die? Leg het uit in je eigen woorden.
 
-**📖 Vraag**: Wat doet het commando `is`? (Let op: `is` kan dus meerdere dingen doen!)
+**📖 Vraag**: Wat doet het commando `is`?
 Antwoord: ____________________________________________________________________________________________________<br>
 
-**📖 Vraag**: Wat doet het commando `add to`?
+**📖 Vraag**: Wat doet het commando `is ask`?
 Antwoord: ____________________________________________________________________________________________________<br>
-
-**📖 Vraag**: Wat doet het commando `remove from`?
-Antwoord: ____________________________________________________________________________________________________<br>
-
-
-**📖 Vraag**: Wat doet het commando `at random`?
-Antwoord: ____________________________________________________________________________________________________<br>
-
-
-### Wat vond jij?
-
-**✍️ Vraag**: Wat was de leukste opdracht van dit level? <br>
-
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
- <br>
-
-**✍️ Vraag**: Waarom vond je juist die opdracht leuk? <br>
-
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
- <br>
-
-**✍️ Vraag**: Welke opdracht was het minst leuk? <br>
-
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
- <br>
-
-**✍️ Vraag**: Waarom vond je juist die opdracht niet leuk? <br>
-
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
- <br>

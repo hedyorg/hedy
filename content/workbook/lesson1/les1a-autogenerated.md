@@ -24,16 +24,16 @@ print Hallo allemaal
 #### Opdracht 1: Voorspel de uitvoer
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									Uitvoer:
+Code:									                        Uitvoer:
 ```hedy
-print Hallo allemaal                  ______________________________________
+print Hallo allemaal                              __________________________
 							
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									Uitvoer:
+Code:									                        Uitvoer:
 ```hedy
-print goedemorgen                     ______________________________________
+print goedemorgen                                 __________________________
 							
 ```
 
@@ -91,18 +91,18 @@ Let op, het komt precies zo in beeld als het er staat, dus met hetzelfde hoofdle
 Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingevuld.
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									Uitvoer:
+Code:									                        Uitvoer:
 ```hedy
-ask Hoe heet jij?                     ______________________________________
-echo dus jij heet:                    ______________________________________
+ask Hoe heet jij?                                 __________________________
+echo dus jij heet:                                __________________________
 							
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									Uitvoer:
+Code:									                        Uitvoer:
 ```hedy
-ask Hoe heet jij?                     ______________________________________
-echo Leuk om je te ontmoeten,         ______________________________________
+ask Hoe heet jij?                                 __________________________
+echo Leuk om je te ontmoeten,                     __________________________
 							
 ```
 
@@ -167,47 +167,47 @@ Antwoord: ______________________________________________________________________
 Voorspel wat de uitvoer van deze codes is. Dat is bij de turtle of tekenschildpad natuurlijk een tekening.
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									Uitvoer:
+Code:									                        Uitvoer:
 ```hedy
-forward 100                           
-turn left                             
-forward 100                           
-turn left                             
-forward 100                           
-turn left                             
-forward 100                           
-turn left                             
-                                      
+forward 100                                       
+turn left                                         
+forward 100                                       
+turn left                                         
+forward 100                                       
+turn left                                         
+forward 100                                       
+turn left                                         
+                                                  
 							
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									Uitvoer:
+Code:									                        Uitvoer:
 ```hedy
-forward 100                           
-turn left                             
-forward 100                           
-turn right                            
-forward 100                           
-turn left                             
-forward 100                           
-turn right                            
-                                      
+forward 100                                       
+turn left                                         
+forward 100                                       
+turn right                                        
+forward 100                                       
+turn left                                         
+forward 100                                       
+turn right                                        
+                                                  
 							
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									Uitvoer:
+Code:									                        Uitvoer:
 ```hedy
-forward 100                           
-turn right                            
-forward 5                             
-turn right                            
-forward 100                           
-turn right                            
-forward 5                             
-turn right                            
-                                      
+forward 100                                       
+turn right                                        
+forward 5                                         
+turn right                                        
+forward 100                                       
+turn right                                        
+forward 5                                         
+turn right                                        
+                                                  
 							
 ```
 
@@ -217,26 +217,28 @@ turn right
 We draaien het nu om! Je krijg een uitvoer en jij moet de code erbij schrijven.
 
 **🧑‍💻 Vraag**: Welke code hoort bij deze uitvoer? <br>
-Code:									Uitvoer:
+Code:									                        Uitvoer:
 ```hedy
-______________________________          _
-______________________________           |
-______________________________           |_________
-______________________________
-______________________________
+________________________________________          _
+________________________________________           |
+________________________________________           |_________
+________________________________________
+________________________________________
+________________________________________
 							
 ```
 
 
 **🧑‍💻 Vraag**: Welke code hoort bij deze uitvoer? <br>
-Code:									Uitvoer:
+Code:									                        Uitvoer:
 ```hedy
-______________________________          ----------
-______________________________          |        |
-______________________________          |        |
-______________________________          |        |
-______________________________          |        |
-______________________________          ---------
+________________________________________          ----------
+________________________________________          |        |
+________________________________________          |        |
+________________________________________          |        |
+________________________________________          |        |
+________________________________________          ---------
+________________________________________          
 							
 ```
 

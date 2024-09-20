@@ -119,7 +119,7 @@ def convert_json(json):
 
 
 def process_workbook(lesson, current_directory):
-    file_path = f"/lesson{lesson}/les{lesson}a.md"
+    file_path = current_directory + f"/lesson{lesson}/les{lesson}a.md"
     workbook_output = ''
     json_found = ''
     inside_json = False
