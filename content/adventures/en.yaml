@@ -5426,7 +5426,6 @@ adventures:
                   ```
                   bla
                   ```
-
             13:
                 story_text: |
                   Our janitors have a big list of tasks. Some tasks are done everyday, others on a certain day, season or date. This is very confusing and leads to situations where some tasks are forgotten.
@@ -5436,7 +5435,7 @@ adventures:
                   The program should:
                   * Wish the janitor a goodmorning.
                   * Ask the janitor what day of the week it is, which month and which day of the month.
-                  * Then the program should print the correct tasklist for that day.
+                  * Print the correct tasklist for that day.
 
                   The tasks that should be done:
                   * Everyday tasks: mop the floor, clean the toilets, open the curtains
@@ -5450,6 +5449,7 @@ adventures:
                   * Everyday in summermonths: turn on the airconditioning
 
                 example_code: |
+                  The program should end like this:
                     ```
                     {call} make_tasklist {with} day, month, date
                     ```
