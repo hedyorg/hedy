@@ -2,7 +2,7 @@ import re
 import warnings
 from os import path
 from functools import cache
-from hedy_translation import keywords_to_dict
+import hedy_translation
 
 """
 Because of the gradual nature of Hedy, the grammar of every level is just slightly different than the grammar of the
@@ -271,7 +271,7 @@ def expand_keyword_not_followed_by_space(**kwargs):
 
 def get_translated_keyword(keyword, lang):
     def get_keyword_value_from_lang(keyword_, lang_):
-        keywords = keywords_to_dict(lang_)
+        keywords = hedy_translation.keywords_to_dict(lang_)
         if keyword_ in keywords:
             return [k for k in keywords[keyword_] if k]
         else:
