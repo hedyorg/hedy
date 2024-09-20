@@ -27,14 +27,14 @@ print Hallo allemaal
 Code:									                        Uitvoer:
 ```hedy
 print Hallo allemaal                              __________________________
-							
+
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
 print goedemorgen                                 __________________________
-							
+
 ```
 
 
@@ -45,13 +45,13 @@ Welke van deze code zijn fout, denk jij?
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
-prnt Hallo allemaal!							
+prnt Hallo allemaal!
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
-print print							
+print print
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
@@ -95,7 +95,7 @@ Code:									                        Uitvoer:
 ```hedy
 ask Hoe heet jij?                                 __________________________
 echo dus jij heet:                                __________________________
-							
+
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
@@ -103,7 +103,7 @@ Code:									                        Uitvoer:
 ```hedy
 ask Hoe heet jij?                                 __________________________
 echo Leuk om je te ontmoeten,                     __________________________
-							
+
 ```
 
 
@@ -178,7 +178,7 @@ turn left
 forward 100                                       
 turn left                                         
                                                   
-							
+
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
@@ -193,7 +193,7 @@ turn left
 forward 100                                       
 turn right                                        
                                                   
-							
+
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
@@ -208,7 +208,7 @@ turn right
 forward 5                                         
 turn right                                        
                                                   
-							
+
 ```
 
 
@@ -225,7 +225,7 @@ ________________________________________           |_________
 ________________________________________
 ________________________________________
 ________________________________________
-							
+
 ```
 
 
@@ -239,7 +239,7 @@ ________________________________________          |        |
 ________________________________________          |        |
 ________________________________________          ---------
 ________________________________________          
-							
+
 ```
 
 

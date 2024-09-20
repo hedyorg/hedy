@@ -22,28 +22,28 @@ print naam
 
 #### Opdracht 1: Omcirkel het juiste stukje code
 
-**◯ Opdracht**: Omcirkel alle variabelen in deze code.									
+**◯ Opdracht**: Omcirkel alle variabelen in deze code.
 ```hedy
 naam is Hedy
 print Hallo naam
 leeftijd is 17
-print Jij bent leeftijd jaar oud							
+print Jij bent leeftijd jaar oud
 ```
 
-**◯ Opdracht**: Omcirkel nu de stukken code waarin een variabele **wordt ingesteld.**									
+**◯ Opdracht**: Omcirkel nu de stukken code waarin een variabele **wordt ingesteld.**
 ```hedy
 naam is Hedy
 print Hallo naam
 leeftijd is 17
-print Jij bent leeftijd jaar oud							
+print Jij bent leeftijd jaar oud
 ```
 
-**◯ Opdracht**: Omcirkel nu de stukken code waarin de waarde van een variabele **wordt gebruikt.**									
+**◯ Opdracht**: Omcirkel nu de stukken code waarin de waarde van een variabele **wordt gebruikt.**
 ```hedy
 naam is Hedy
 print Hallo naam
 leeftijd is 17
-print Jij bent leeftijd jaar oud							
+print Jij bent leeftijd jaar oud
 ```
 
 
@@ -64,7 +64,7 @@ Code:									                        Uitvoer:
 ```hedy
 naam is Mo                                        __________________________
 print Goed bezig naam!                            
-							
+
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
@@ -72,7 +72,7 @@ Code:									                        Uitvoer:
 ```hedy
 naam is Mo                                        __________________________
 print Goed bezig Mo!                              
-							
+
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
@@ -80,7 +80,7 @@ Code:									                        Uitvoer:
 ```hedy
 voornaam is Layla                                 __________________________
 print Goedemorgen naam!                           
-							
+
 ```
 
 
@@ -90,14 +90,14 @@ Lees de codes goed! Welke zijn er goed of fout.
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
 achternaam is Jansen
-print Goedemorgen naam!							
+print Goedemorgen naam!
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
 naam is
-print Goedemorgen naam!							
+print Goedemorgen naam!
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
@@ -105,7 +105,7 @@ Antwoord: <br> 〇 Goed<br> 〇 Fout
 ```hedy
 naam is Jansen
 print Goedemorgen meneer naam!
-print Hallo meneer naam!							
+print Hallo meneer naam!
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
@@ -143,7 +143,7 @@ Code:									                        Uitvoer:
 ```hedy
 naam is ask Hoe heet jij?                         __________________________
 print dus jij heet: naam                          
-							
+
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
@@ -151,7 +151,7 @@ Code:									                        Uitvoer:
 ```hedy
 toestand is ask Hoe gaat het met jou?             __________________________
 print Dus het gaat toestand met jou               
-							
+
 ```
 
 
