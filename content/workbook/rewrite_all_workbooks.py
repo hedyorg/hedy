@@ -5,7 +5,7 @@ current_directory = os.path.dirname(os.path.abspath(__file__))
 
 max_lesson = 3
 
-for lesson in range(1,max_lesson):
+for lesson in range(1, max_lesson):
     json_data = process_workbook(lesson, current_directory)
     print()
 
