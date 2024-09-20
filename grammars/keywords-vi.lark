@@ -5,7 +5,7 @@ _DEF: ("def" | "def") _SPACE?
 _RETURN: ("return" | "return") _SPACE?
 _PRINT: ("xuất" | "print") _SPACE?
 _PLAY: ("play" | "play") _SPACE
-_ASK: ("hỏi" | "ask") _SPACE?
+_ASK: ("hỏi" | "ask")
 _ECHO: ("đáp" | "echo") _SPACE?
 _FORWARD: ("tiến" | "forward") _SPACE?
 _TURN: ("quay" | "turn") _SPACE?
@@ -26,9 +26,9 @@ _IS: _SPACE ("là" | "is") _SPACE
 _STANDALONE_IS: ("là" | "is")
 _SLEEP: ("sleep" | "sleep") _SPACE?
 _ADD_LIST: ("add" | "add") _SPACE
-_TO_LIST: _SPACE ("to" | "to") _SPACE
+_TO_LIST: _SPACE? ("to" | "to") _SPACE
 _REMOVE: ("remove" | "remove") _SPACE
-_FROM: _SPACE ("from" | "from") _SPACE
+_FROM: _SPACE? ("from" | "from") _SPACE
 _AT: _SPACE ("at" | "at") _SPACE
 random: ("ngẫu_nhiên" | "random") _SPACE?
 _IN: _SPACE ("in" | "in") _SPACE
@@ -49,7 +49,6 @@ _WHILE: ("while" | "while") _SPACE
 _LENGTH: "length" | "length"
 _COLOR : ("màu" | "color") _SPACE?
 _PRESSED: ("pressed" | "pressed") _SPACE?
-_BUTTON: ("button" | "button") _SPACE?
 clear: ("clear" | "clear") _SPACE?
 TRUE: ("true" | "True" | "true" | "True") _SPACE?
 FALSE: ("false" | "False" | "false" | "False") _SPACE?

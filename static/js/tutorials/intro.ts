@@ -1,4 +1,4 @@
-import {pushAchievement, runit, theGlobalEditor} from "../app";
+import { runit, theGlobalEditor} from "../app";
 import {addHighlightBorder, relocatePopup, removeBorder, tutorialPopup} from "./utils";
 
 let current_step = 0;
@@ -42,23 +42,7 @@ export function callNextIntroStep() {
   } else if (current_step == 14) {
     cheatsheetStep();
   } else if (current_step == 15) {
-    pushAchievement("well_begun_is_half_done");
-    $('#achievement_pop_up').removeClass('z-10');
-    $('#achievement_pop_up').addClass('z-50');
-    // If the achievement pop-up is visible -> wait with the next function call
-    setTimeout(function(){
-      if ($('#achievement_pop_up').is(':visible')) {
-        setTimeout(function() {
-          endTutorial();
-          $('#achievement_pop_up').removeClass('z-50');
-          $('#achievement_pop_up').addClass('z-10');
-        }, 5000);
-      } else {
-        endTutorial();
-        $('#achievement_pop_up').removeClass('z-50');
-        $('#achievement_pop_up').addClass('z-10');
-      }
-    }, 500);
+    endTutorial();    
   } else {
     location.replace("/hedy");
   }

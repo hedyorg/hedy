@@ -24,7 +24,7 @@
                     {% endfor %}
                 {% endif %}
             </select>
-            <select id="adventure_select" name="adventure" class="block appearance-none w-4/8 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
+            <select id="adventure_select" data-cy="adventure_select" name="adventure" class="block appearance-none w-4/8 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
                 <option class="text-center" selected value="">&mdash; {{ _('adventure') }} &mdash;</option>
                 {% if request.args.get('level') %}
                     {% for name in sorted_level_programs[request.args.get('level')|int] %}
@@ -49,7 +49,7 @@
         </div>
     </form>
   </div>
-  <div class="programs w-full">
+  <div class="programs w-full" data-cy="programs">
     {% for program in programs %}
         {{ render_partial('htmx-program.html', program=program, adventure_names=adventure_names, public_profile=public_profile, second_teachers_programs=second_teachers_programs) }}
     {% endfor %}

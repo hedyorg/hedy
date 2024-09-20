@@ -5,7 +5,7 @@ _DEF: ("def" | "def") _SPACE?
 _RETURN: ("rikthe" | "return") _SPACE?
 _PRINT: ("printo" | "print") _SPACE?
 _PLAY: ("play" | "play") _SPACE
-_ASK: ("pyet" | "ask") _SPACE?
+_ASK: ("pyet" | "ask")
 _ECHO: ("përsërit" | "echo") _SPACE?
 _FORWARD: ("përpara" | "forward") _SPACE?
 _TURN: ("kthesë" | "turn") _SPACE?
@@ -26,9 +26,9 @@ _IS: _SPACE ("është" | "is") _SPACE
 _STANDALONE_IS: ("është" | "is")
 _SLEEP: ("fle" | "sleep") _SPACE?
 _ADD_LIST: ("shtoni" | "add") _SPACE
-_TO_LIST: _SPACE ("deri" | "to") _SPACE
+_TO_LIST: _SPACE? ("deri" | "to") _SPACE
 _REMOVE: ("hiqni" | "remove") _SPACE
-_FROM: _SPACE ("nga" | "from") _SPACE
+_FROM: _SPACE? ("nga" | "from") _SPACE
 _AT: _SPACE ("në" | "at") _SPACE
 random: ("rastësi" | "random") _SPACE?
 _IN: _SPACE ("në" | "in") _SPACE
@@ -49,7 +49,6 @@ _WHILE: ("derisa" | "while") _SPACE
 _LENGTH: "gjatësia" | "length"
 _COLOR : ("ngjyrë" | "color") _SPACE?
 _PRESSED: ("shtypur" | "pressed") _SPACE?
-_BUTTON: ("button" | "button") _SPACE?
 clear: ("pastro" | "clear") _SPACE?
 TRUE: ("true" | "True" | "true" | "True") _SPACE?
 FALSE: ("false" | "False" | "false" | "False") _SPACE?

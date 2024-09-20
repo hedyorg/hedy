@@ -17,7 +17,7 @@
         <tbody>
           {% for adventure in teacher_adventures %}
             <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
-              <td class="text-center px-4 py-2"><a href="for-teachers/customize-adventure/{{adventure.id}}" class="no-underline" data-cy="edit_link_adventure">{{adventure.name|e}}</a></td>
+              <td class="text-center px-4 py-2"><a href="for-teachers/customize-adventure/{{adventure.id}}" class="no-underline" data-cy="edit_link_{{adventure.name|e}}">{{adventure.name|e}}</a></td>
               <td class="text-center owner_username_cell">{{adventure.author or adventure.creator}}</td>
               <td class="text-center username_cell">{{adventure.creator}}</td>
               <td class="text-center p-2">

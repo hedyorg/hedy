@@ -5,7 +5,7 @@ _DEF: ("def" | "def") _SPACE?
 _RETURN: ("vrati" | "return") _SPACE?
 _PRINT: ("štampaj" | "print") _SPACE?
 _PLAY: ("play" | "play") _SPACE
-_ASK: ("pitaj" | "ask") _SPACE?
+_ASK: ("pitaj" | "ask")
 _ECHO: ("pokaži" | "echo") _SPACE?
 _FORWARD: ("napred" | "forward") _SPACE?
 _TURN: ("okreni" | "turn") _SPACE?
@@ -26,9 +26,9 @@ _IS: _SPACE ("je" | "is") _SPACE
 _STANDALONE_IS: ("je" | "is")
 _SLEEP: ("spavanje" | "sleep") _SPACE?
 _ADD_LIST: ("dodaj" | "add") _SPACE
-_TO_LIST: _SPACE ("u" | "to") _SPACE
+_TO_LIST: _SPACE? ("u" | "to") _SPACE
 _REMOVE: ("obriši" | "remove") _SPACE
-_FROM: _SPACE ("od" | "from") _SPACE
+_FROM: _SPACE? ("od" | "from") _SPACE
 _AT: _SPACE ("na" | "at") _SPACE
 random: ("nasumično" | "random") _SPACE?
 _IN: _SPACE ("u" | "in") _SPACE
@@ -49,7 +49,6 @@ _WHILE: ("dok" | "while") _SPACE
 _LENGTH: "dužina" | "length"
 _COLOR : ("boja" | "color") _SPACE?
 _PRESSED: ("pritisnuto" | "pressed") _SPACE?
-_BUTTON: ("dugme" | "button") _SPACE?
 clear: ("očisti" | "clear") _SPACE?
 TRUE: ("true" | "True" | "true" | "True") _SPACE?
 FALSE: ("false" | "False" | "false" | "False") _SPACE?

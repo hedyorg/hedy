@@ -116,9 +116,11 @@ export function get_parsons_code() {
     let code = "";
     let order = new Array();
     let mistake = false;
+    let hiddenElementsCount = 0;
     document.querySelectorAll<HTMLElement>('#parsons_code_container > div > div').forEach((element, key) => {        
      // We are not interested in elements that are hidden
       if (!$(element).is(':visible')) {
+        hiddenElementsCount += 1;
         return;
       }
       // the parent is the one that has the borders...
@@ -131,7 +133,7 @@ export function get_parsons_code() {
       parent.classList.remove('border-green-500');
       parent.classList.remove('border-red-500');
       const index = element.dataset['index'] || 999;
-      if (index == key + 1) {
+      if (index == key + 1 - hiddenElementsCount) {
         parent.classList.add('border-green-500');
       } else {
         mistake = true;

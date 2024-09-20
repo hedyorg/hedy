@@ -23,19 +23,10 @@
             <td class="language_cell text-center p-2">{{user.language}}</td>
             <td class="country_cell text-center p-2">{{user.country}}</td>
             <td class="tags_cell text-center cursor-pointer text-center p-2">
-            {% if user.teacher_request %}
-                <button id="teacher_request_{{user.username}}" class="blue-btn" 
-                hx-trigger="click"
-                hx-post="/admin/mark-as-teacher/{{user.username}}"
-                _="on click
-                remove #teacher_request_{{user.username}}
-                then toggle .hidden on #invite_support_teacher_{{user.username}}"
-                >Make teacher</button>
-            {% endif %}
             {% if user.support_teacher %}
               {{user.support_teacher}}
             {% else %}
-              <button class="green-btn {% if user.teacher_request %}hidden{% endif %}" id="invite_support_teacher_{{user.username}}"
+              <button class="green-btn" id="invite_support_teacher_{{user.username}}"
                 onclick='hedyApp.invite_support_teacher("{{user.username}}")'>Pair support teacher</button>
             {% endif %}
             </td>

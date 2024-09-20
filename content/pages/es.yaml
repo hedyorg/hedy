@@ -349,7 +349,7 @@ teacher-guide:
             It is important to notice that the blue dots means that a students 'attempted' the adventure. This means that they ran a code in this adventure and went on to the next adventure, so this does not automatically mean that they did a good job!
             If you want to see how an individual student is getting along, you can click their name in this overview. This is what you see if you click on marleen_h3a for example:
             <img src="https://github.com/hedyorg/hedy/assets/80678586/f8c2480d-c724-46f9-a702-33532828de70" width="800">
-            You see that Marleen is having some trouble programming. She tried to run a program that contains blanks multiple times, so she probably doesn't know that she has to change something to the example codes before running them.
+            You see that Marleen is having some trouble programming. She tried to run a program that contains blanks multiple times, so she probably doesn't know that she has to change something in the example code before running it.
             In this way this overview can give you a better understanding of what a student is struggling with.
     -   title: Common Errors
         text: |-
@@ -405,7 +405,7 @@ teacher-guide:
     subsections:
     -   title: What to do after Hedy?
         text: |-
-            Congratulations on reaching the end of Hedy! Your students have now learned how to create their own basic codes in the Python programming language.
+            Congratulations on reaching the end of Hedy! Your students have now learned how to create their own basic code in the Python programming language.
             Of course, you could keep programming in our Hedy compiler, but it might be more exciting for your students to transfer to a "real" Python interface.
             Would you like to continue teaching Python? Then please visit <a href="https://www.python.org/about/gettingstarted/" target="_blank">the Python website</a> to learn how to get started in another compiler.
 
@@ -430,7 +430,7 @@ teacher-guide:
                 error_text: Por ejemplo, escribir una frase sin usar imprimir.
                 error_code: Hedy no puede imprimir esto
                 solution_text: Enseña a tus estudiantes a siempre comenzar una linea de código con un comando.
-                solution_code: imprimir Hedy puede imprimir esto!
+                solution_code: '{print} Hedy puede imprimir esto!'
         -   title: Los estudiantes usan mayúsculas al escribir los comandos
             example:
                 error_text: Los comandos no funcionarán si están en mayúsculas.
@@ -439,56 +439,56 @@ teacher-guide:
                     Imprimir Porque estoy usando mayúsculas.
                 solution_text: Quita las mayúsculas.
                 solution_code: |-
-                    preguntar ¿Por qué mi código funciona ahora?
-                    imprimir ¡Porque eliminé las mayúsculas!
+                    {ask} ¿Por qué mi código funciona ahora?
+                    {print} ¡Porque eliminé las mayúsculas!
         -   title: Alumnos utilizan eco sin preguntar
             example:
                 error_text: El comando Echo se utiliza para repetir una respuesta después de un comando ask. Sin ask, echo no hará nada.
-                error_code: ecoo Tu nombre es
+                error_code: '{echo} Tu nombre es'
                 solution_text: Añade un comando ask para que funcione.
                 solution_code: |-
-                    preguntar ¿Cómo te llamas?
-                    eco Tu nombre es
+                    {ask} ¿Cómo te llamas?
+                    {echo} Tu nombre es
         -   title: Los alumnos quieren su palabra echo (variable) en el medio de una frase
             example:
                 error_text: Y están en lo cierto! Por eso ellos aprenderán a utilizar variables adecuadas en el siguiente nivel.
                 error_code: |-
-                    preguntar ¿Qué lenguaje de programación es el más divertido?
-                    eco ¡es el mejor!
+                    {ask} ¿Qué lenguaje de programación es el más divertido?
+                    {echo} ¡es el mejor!
                 solution_text: 'En el nivel 1 tenemos que llegar hasta aquí:'
                 solution_code: |-
-                    preguntar ¿Qué lenguaje de programación es el más divertido?
-                    eco el mejor es...
+                    {ask} ¿Qué lenguaje de programación es el más divertido?
+                    {echo} el mejor es...
         -   title: 'Tortuga: los estudiantes hacen que la tortuga se salga de la pantalla'
             example:
                 error_text: A menudo, a los estudiantes les encanta probar números grandes cuando usan la tortuga, lo que hace que la flecha se salga de la pantalla.
                 error_code: |-
-                    adelante 300
-                    girar 90
+                    {forward} 300
+                    {turn} 90
                 solution_text: En el ejemplo, los alumnos tienden a pensar que el comando girar no funciona. Aunque sí funciona, no se puede ver que sucede fuera de la pantalla. Utiliza números más pequeños para evitar que esto ocurra.
                 solution_code: |-
-                    adelante 100
-                    girar 90
-        -   title: 'Tortuga: Los estudiantes usan el comando retroceder, pero no existe'
+                    {forward} 100
+                    {turn} 90
+        -   title: 'Tortuga: Los estudiantes usan el comando retroceder, pero no existe.'
             example:
                 error_text: Retroceder no es un comando.
                 error_code: retroceder 100
                 solution_text: 'Para que la tortuga retroceda, debes uitlizar el comando adelante un número negativo. Por ejemplo:'
-                solution_code: adelante -100
+                solution_code: '{forward} -100'
     -   level: '2'
         sections:
         -   title: Los estudiantes hacen errores de escritura en sus comandos
             example:
                 error_text: Hedy no puede reconocer un comando mal escrito.
-                error_code: imprimir No hagas errores de escritura!
+                error_code: '{print} No hagas errores de escritura'
                 solution_text: Enseña a tus estudiantes a leer los mensajes de error. De esta forma ellos pueden encontrar por sí solos que es lo que está mal.
-                solution_code: imprimir ¡No cometas errores tipográficos!
+                solution_code: '{print} ¡No cometas errores tipográficos'
         -   title: Los estudiantes olvidan que el comando preguntar ha cambiado
             example:
                 error_text: En este nivel, los estudiantes aprender sobre variables. El comando preguntar requiere variables también, peroo los estudiantes olvidan esto.
-                error_code: preguntar ¿Qué te gustaría comer?
+                error_code: preguntar ¿Qué te gustaría comer
                 solution_text: En este nivel tienes que decirle a Hedy dónde debe guardar tu respuesta para ser usada luego. Esto se llama una variable.
-                solution_code: pedir es preguntar ¿Qué te gustaría comer?
+                solution_code: pedir {is} {ask} ¿Qué te gustaría comer
         -   title: Los alumnos intentan utilizar el comando `{echo}`
             example:
                 error_text: Para algunos estudiantes, puede ser frustrante aprender que el comando `{echo}` ya no funciona. Por eso es muy importante explicar las ventajas de usar variables. ¡Por ejemplo, puedes usar múltiples variables en un código y ponerlas donde quieras en una frase!
@@ -503,41 +503,41 @@ teacher-guide:
             example:
                 error_text: En el siguiente ejemplo, se usa la palabra 'nombre' como una variable, pero también como un texto normal. El resultado de este código será 'Hola mi Hedy es Hedy'.
                 error_code: |-
-                    nombre is Hedy
-                    print Hola mi nombre es nombre
+                    nombre {is} Hedy
+                    {print} Hola mi nombre es nombre
                 solution_text: Así que no uses una palabra que quieras usar en el texto como nombre de variable. En el nivel 4, esto se soluciona con comillas.
                 solution_code: |-
-                    nombre is Hedy
-                    print Hola soy nombre
+                    nombre {is} Hedy
+                    {print} Hola soy nombre
         -   title: Los estudiantes usan nombres de variables largos que contienen dos palabras.
             example:
                 error_text: Las variables deben nombrarse con una sola palabra. Puedes usar un guion bajo (_) para conectar dos palabras. Eso cuenta como una.
-                error_code: puerta escogida es preguntar ¿Qué puerta eliges?
+                error_code: puerta escogida es preguntar ¿Qué puerta eliges
                 solution_text: Añade un guion bajo.
-                solution_code: puerta_elegida es preguntar ¿qué puerta escoges?
+                solution_code: puerta_elegida {is} {ask} ¿qué puerta escoges
         -   title: Es posible que los estudiantes usen dos nombres diferentes para la misma variable
             example:
                 error_text: En este ejemplo, el estudiante ha usado 'horse' y 'name' para la misma variable.
                 error_code: |-
-                    caballo es preguntar ¿Cómo se llama tu caballo?
-                    imprimir Tu caballo se llama nombre
+                    caballo {is} {ask} ¿Cómo se llama tu caballo
+                    {print} Tu caballo se llama nombre
                 solution_text: Comprueba siempre cuando una variable tiene el mismo nombre en todo el código. Las pequeñas diferencias pueden ser difíciles de detectar (por ejemplo los plurales) pero interferirán con tu código.
                 solution_code: |-
-                    nombre es preguntar ¿Cómo se llama tu caballo?
-                    imprimit Tu caballo se llama nombre
+                    nombre {is} {ask} ¿Cómo se llama tu caballo
+                    {print} Tu caballo se llama nombre
     -   level: '3'
         sections:
         -   title: Los estudiantes intentan imprimir listas enteras
             example:
                 error_text: No se puede imprimir una lista. Con {at} {random} sólo puedes imprimir un elemento de la lista.
                 error_code: |-
-                    productos es manzanas, leche, chocolate
-                    imprimir productos
+                    productos {is} manzanas, leche, chocolate
+                    {print} productos
                 solution_text: Para imprimir una lista de todos los productos de la compra, simplemente tienes que ponerlos después de un comando `{print}`. Si no, puedes usar la lista para imprimir un objeto con `{at}` `{random}`.
                 solution_code: |-
                     {print} manzanas, leche, chocolate
 
-                    o
+                    #o
 
                     comestibles {is} manzanas, leche, chocolate
                     {print} comestibles {at} {random}
@@ -548,7 +548,7 @@ teacher-guide:
                     nombre {is} Hedy
                     {print} Hola mi nombre es nombre
 
-                    o
+                    #o
 
                     animal {is} rinoceronte, abeja, cisne
                     {print} El mejor animal es... animal {at} {random}
@@ -557,7 +557,7 @@ teacher-guide:
                     nombre {is} Hedy
                     {print} Hola soy nombre
 
-                    o
+                    #o
 
                     animales {is} rinoceronte, abeja, cisne
                     {print} El mejor animal es... animales {at} {random}
@@ -565,8 +565,8 @@ teacher-guide:
             example:
                 error_text: Como en el ejemplo
                 error_code: |-
-                    pájaros es gorrión, gaviota, petirrojo
-                    imprimir pájaros aleatorio
+                    pájaros {is} gorrión, gaviota, petirrojo
+                    {print} pájaros aleatorio
                 solution_text: Este problema se resuelve añadiendo la palabra en.
                 solution_code: |-
                     pájaros {is} gorrión, gaviota, petirrojo
@@ -589,8 +589,8 @@ teacher-guide:
                     {print} pizzas {at} {random}
                 solution_text: Tras cada objeto de tu lista, debería haber una coma
                 solution_code: |-
-                    pizzas es setas, de atún, cuatro estaciones
-                    imprime pizzas en aleatorio
+                    pizzas {is} setas, de atún, cuatro estaciones
+                    {print} pizzas {at} {random}
         -   title: Los alumnos intentan usar `{at}` `{random}` sin una lista
             example:
                 error_text: Por ejemplo
@@ -615,7 +615,7 @@ teacher-guide:
                     tu_nombre {is} {ask} ¿Quién eres tú?
                     {add} tu_nombre {to} nombres
                     {print} nombres {at} {random}
-        -   title: Los estudiantes olvidan utilizar to/from con add/remove
+        -   title: Los estudiantes olvidan utilizar `{to}`/`{from}` en `{add}`/`{remove}`
             example:
                 error_text: Sin a/de el comando añadir/borrar no funcionará.
                 error_code: |-
@@ -626,117 +626,117 @@ teacher-guide:
                     {print} Me encanta aventuras {at} {random}
                 solution_text: Hedy tiene que saber a qué lista debe añadirse/eliminarse el objeto.
                 solution_code: |-
-                    aventuras es historia, loro, dado
-                    opción es ¿Qué aventura te gusta más?
-                    añadir opción a aventuras
-                    borrar dado de aventuras
-                    imprimir Me encanta aventuras en aleatorio
+                    aventuras {is} historia, loro, dado
+                    opción {is} ¿Qué aventura te gusta más?
+                    {add} opción {to_list} aventuras
+                    {remove} dado {from} aventuras
+                    {print} Me encanta aventuras {at} {random}
     -   level: '4'
         sections:
         -   title: Los alumnos olvidan utilizar las comillas en ambos lados del texto
             example:
                 error_text: En este nivel imprimir y preguntar necesitan un conjunto de comillas. Una antes del texto y otra después.
                 error_code: |-
-                    imprimir Hola
-                    estado_animo es preguntar '¿Cómo estás?
+                    {print} Hola
+                    estado_animo {is} {ask} '¿Cómo estás?
                 solution_text: Añade las comillas correctas.
                 solution_code: |-
-                    imprimir 'Hola'
-                    estado_animo es preguntar '¿Cómo estás?'
+                    {print} 'Hola'
+                    estado_animo {is} {ask} '¿Cómo estás?'
         -   title: Los alumnos utilizan las comillas equivocadas
             example:
                 error_text: Es importante empezar tu clase comprobando si los alumnos saben como usar las comillas adecuadamente. Sino podrían usar las "comillas dobles" o las `torcidas`.
                 error_code: |-
-                    imprimir `Bienvenido al restaurante`
-                    comida es preguntar "¿Qué te gustaría pedir?"
+                    {print} `Bienvenido al restaurante`
+                    comida {is} {ask} "¿Qué te gustaría pedir?"
                 solution_text: 'Estas son las comillas correctas:'
                 solution_code: |-
-                    imprimir 'Bienvenido al restaurante'
-                    comida es preguntar '¿Qué te gustaría pedir?'
+                    {print} 'Bienvenido al restaurante'
+                    comida {is} {ask} '¿Qué te gustaría pedir?'
         -   title: Los alumnos utilizan un apóstrofe en su texto
             example:
                 error_text: Desde este nivel en adelante no se permiten los apóstrofes. Se suelen usar en inglés al escribir contracciones como you're, don't o what's.
-                error_code: imprimir 'No está permitido escribir esto'
+                error_code: "{print} 'No está permitido escribir esto'"
                 solution_text: Puedes elegir usar la gramática incorrecta y solo omitir el apóstrofe. O podrías usar el ` como un apóstrofe.
                 solution_code: |-
-                    imprimir 'Se permite que escribas esto (Youre)'
-                    imprimir 'Y también puedes escribir esto (you`re)'
+                    {print} 'Se permite que escribas esto (Youre)'
+                    {print} 'Y también puedes escribir esto (you`re)'
     -   level: '5'
         sections:
         -   title: Los alumnos olvidan utilizar `{print}` en un comando `{if}`
             example:
                 error_text: Después de que los alumnos usen `{if}` o `{else}` se olvidan de usar un segundo comando como `{print}` o `{ask}`.
                 error_code: |-
-                    si nombre es Hedy '¡Genial!'
-                    si no '¡Hedy es mejor!'
+                    {if} nombre {is} Hedy '¡Genial!'
+                    {else}  ¡Hedy {is} mejor!
                 solution_text: Añade el comando imprimir para arreglarlo.
                 solution_code: |-
-                    si nombre es Hedy imprimir '¡Genial!'
-                    si no imprimir '¡Hedy es mejor!'
+                    {if} nombre {is} Hedy {print} '¡Genial!'
+                    {else} {print} '¡Hedy es mejor!'
         -   title: Los alumnos podrían utilizar dos nombres distintos para la misma variable
             example:
                 error_text: En este ejemplo el alumno ha utilizado 'caballo' y 'nombre' para las mismas variables.
                 error_code: |-
-                    caballo es preguntar '¿Cómo se llama tu caballo?'
-                    si nombre es Hoguera imprimir 'mola'
-                    si no imprimir '¡no mola tanto!'
+                    caballo {is} {ask} '¿Cómo se llama tu caballo?'
+                    {if} nombre {is} Hoguera {print} 'mola'
+                    {else} {print} '¡no mola tanto!'
                 solution_text: Comprueba si la variable tiene el mismo nombre en todo el código. Las pequeñas diferencias pueden ser difíciles de encontrar (por ejemplo en los plurales) pero pueden interferir con el código.
                 solution_code: |-
-                    caballo es preguntar 'Cómo se llama tu caballo'
-                    si caballo es Hoguera imprimir '¡mola!'
-                    si no imprimir '¡no mola tanto!'
+                    caballo {is} {ask} 'Cómo se llama tu caballo'
+                    {if} caballo {is} Hoguera {print} '¡mola!'
+                    {else} {print} '¡no mola tanto!'
         -   title: Los estudiantes aún olvidan las comillas en ambos lados
             example:
                 error_text: Los códigos que usan el comando `if` pueden extenderse mucho y los alumnos tienden a olvidar usar comillas.
                 error_code: |-
-                    si nombre es Hedy imprimir divertido
-                    si no imprimir '¡meh!
+                    {if} nombre {is} Hedy {print} divertido
+                    {else} {print} '¡meh!
                 solution_text: Usa siempre dos comillas en un comando imprimir.
                 solution_code: |-
-                    si nombre es Hedy imprimir 'divertido'
-                    si no imprimir '¡meh!'
+                    {if} nombre {is} Hedy {print} 'divertido'
+                    {else} {print} '¡meh!'
         -   title: Los estudiantes usan comillas alredeor de los nombres de las variables
             example:
                 error_text: En este nivel no hay comillas alrededor de los nombres de variables.
                 error_code: |-
-                    si 'nombre' es 'Hedy' imprimir 'divertido'
-                    si no imprimir '¡meh!'
+                    {if}  nombre  {is} 'Hedy' {print} 'divertido'
+                    {else} {print} '¡meh!'
                 solution_text: Borra las comillas para hacer que el código funcione.
                 solution_code: |-
-                    si nombre es Hedy imprimir 'divertido'
-                    si no imprimir '¡meh!
+                    {if} nombre {is} Hedy {print} 'divertido'
+                    {else} {print} '¡meh!
         -   title: Los estudiantes usan nombres largos para las variables que contienen dos palabras
             example:
                 error_text: Una variable debería llamarse con una palabra. Puedes usar un guion bajo para conectar dos palabras. Eso cuenta como una.
-                error_code: puerta elegida es preguntar '¿Qué puerta eliges?'
+                error_code: puerta elegida es preguntar  ¿Qué puerta eliges?
                 solution_text: Añade un guion bajo.
-                solution_code: puerta_elegida es preguntar '¿qué puerta eliges?'
+                solution_code: puerta_elegida {is} {ask} '¿qué puerta eliges?'
         -   title: Los alumnos quieren varias respuestas correctas
             example:
                 error_text: Por ejemplo este alumno Hedy le dice a todos sus amigos que son divertidos, pero a otros compañeros les diría que no lo son.
-                error_code: si nombre es Jesse, David, Souf imprimir 'Eres divertido' si no imprimir 'No eres divertido'
+                error_code: "{if} nombre {is} Jesse, David, Souf imprimir  Eres divertido  {else} {print} 'No eres divertido'"
                 solution_text: |-
-                    Puedes usar el comando `in` para eso. Se explica en un nivel superior, pero ya funciona en el nivel 5.
-                    Otra solución es usar varios comandos si y no comando si no. La desventaja es que no le dirá a los otros compañeros que no son divertidos.
+                    Puedes usar el comando `{in}` para eso. Se explica en un nivel superior, pero ya funciona en el nivel 5.
+                    Otra solución es usar varios comandos `{if}` y no comando `{else}`. La desventaja es que no le dirá a los otros compañeros que no son divertidos.
                 solution_code: |-
-                    amigos es Jesse, David, Souf
-                    nombre es preguntar '¿Quién eres?'
-                    si nombre en amigos imprimir 'Eres divertido'
-                    sino imprimir 'No eres divertido'
+                    amigos {is} Jesse, David, Souf
+                    nombre {is} {ask} '¿Quién eres?'
+                    {if} nombre {in} amigos {print} 'Eres divertido'
+                    {else} {print} 'No eres divertido'
 
-                    o
+                    #o
 
-                    nombre es preguntar '¿Quién eres?'
-                    si nombre es Jesse imprimir 'Eres divertido'
-                    si nombre es David imprimir 'Eres divertido'
-                    si nombre es Souf imprimir 'Eres divertido'
+                    nombre {is} {ask} '¿Quién eres?'
+                    {if} nombre {is} Jesse {print} 'Eres divertido'
+                    {if} nombre {is} David {print} 'Eres divertido'
+                    {if} nombre {is} Souf {print} 'Eres divertido'
         -   title: Los alumnos hacen que el nombre de la variable sea el mismo que el valor en la sentencia `{if}`
             example:
                 error_text: En el siguiente ejemplo la contraseña es 'contraseña'. Esto hará que siempre sea correcta.
                 error_code: |-
-                    contraseña es preguntar '?Cuál es la contraseña?'
-                    si contraseña es contraseña imprimir 'Acceso permitido'
-                    si no imprimir '¡Acceso denegado!'
+                    contraseña {is} {ask} '?Cuál es la contraseña?'
+                    {if} contraseña {is} contraseña {print} 'Acceso permitido'
+                    {else} {print} '¡Acceso denegado!'
                 solution_text: Elige un nombre distinto para tu variable.
                 solution_code: |-
                     contraseña_secreta {is} {ask} 'Cuál es la contraseña'
@@ -747,109 +747,109 @@ teacher-guide:
         -   title: Los alumnos tienen problemas con las comillas
             example:
                 error_text: Algunos alumnos tienen problemas al añadir o no comillas. Si añades comillas, la pantalla de salida mostrará literalmente '5+5'.
-                error_code: imprimir '5 + 5'
+                error_code: "{print} '5 + 5'"
                 solution_text: En este código la pantalla de salida imprimirá '10'.
-                solution_code: print 5 + 5
+                solution_code: '{print} 5 + 5'
         -   title: Los alumnos tiene problemas con el concepto de hacer cálculos con una variable
             example:
                 error_text: 'Algunos alumnos tendrán dificultades al hacer cálculos con variables. Intenta enseñarles ejemplos muy sencillos, como:'
                 error_code: |-
-                    edad = preguntar '¿Cuántos años tienes?'
-                    imprimir 'El año que viene tendré ' edad + 1
+                    edad = {ask} '¿Cuántos años tienes?'
+                    {print} 'El año que viene tendré ' edad + 1
                 solution_text: O ve un paso más allá.
                 solution_code: |-
                     precio = 0
-                    imprimir 'Bienvenido a nuestro restaurante de hamburguesas'
-                    hamburguesa = preguntar '¿Quieres una hamburguesa?'
-                    si hamburguesa = sí precio = precio + 10
-                    bebida = preguntar '¿Quieres una bebida?'
-                    si bebida = sí precio = precio + 4
-                    imprimir 'Serán ' precio ' euros por favor'
+                    {print} 'Bienvenido a nuestro restaurante de hamburguesas'
+                    hamburguesa = {ask} '¿Quieres una hamburguesa?'
+                    {if} hamburguesa = sí precio = precio + 10
+                    bebida = {ask} '¿Quieres una bebida?'
+                    {if} bebida = sí precio = precio + 4
+                    {print} 'Serán ' precio ' euros por favor'
     -   level: '7'
         sections:
         -   title: Los alumnos olvidan una de las palabras en el comando repetir, u olvidan el comando imprimir
             example:
                 error_text: Asegúrate que los alumnos saben usar tanto el comando repetir completo y el comando imprimir.
                 error_code: |-
-                    repetir 3 veces 'Porque es un buen amigo'
-                    repetir 3 imprimir '¡Que nadie puede negar!'
+                    {repeat} 3 {times}  Porque él es un buen compañero
+                    {repeat} 3 imprimir
                 solution_text: 'Este es el código correcto:'
                 solution_code: |-
-                    repetir 3 veces imprimir 'Porque es un buen amigo'
-                    repetir 3 veces imprimir '¡Que nadie puede negar!'
+                    {repeat} 3 {times} {print} 'Porque es un buen amigo'
+                    {repeat} 3 {times} {print} '¡Que nadie puede negar!'
         -   title: Los alumnos intentan repetir varias líneas
             example:
                 error_text: En este nivel sólo puedes repetir una línea de código varias veces. En este código el alumno quiso imprimir 3 bebidas diferentes, pero no funcionará. Hará la pregunta 3 veces y sólo imprime la última respuesta.
                 error_code: |-
-                    repetir 3 veces bebida = preguntar '¿Qué te gustaría beber?'
-                    imprimir bebida
+                    {repeat} 3 {times} bebida = {ask} '¿Qué te gustaría beber?'
+                    {print} bebida
                 solution_text: Deberías ir al siguiente nivel para ser capaz de repetir varias líneas. Así que en este nivel tendrás que imprimir todo por separado.
                 solution_code: |-
-                    bebida = preguntar '¿Qué te gustaría beber?'
-                    imprimir bebida
-                    bebida = preguntar '¿Qué te gustaría beber?'
-                    imprimir bebida
-                    bebida = preguntar '¿Qué te gustaría beber?'
-                    imprimir bebida
+                    bebida = {ask} '¿Qué te gustaría beber?'
+                    {print} bebida
+                    bebida = {ask} '¿Qué te gustaría beber?'
+                    {print} bebida
+                    bebida = {ask} '¿Qué te gustaría beber?'
+                    {print} bebida
         -   title: Los alumnos hacen programas que tardan demasiado en ejecutar
             example:
                 error_text: En este nivel es muy fácil hacer códigos extensos. Los alumnos no tienen permitido hacer programas que tarden mucho en cargar (para proteger nuestros servidores).
-                error_code: repetir 100 veces imprimir '¿Cuántas veces puedo repetir esto?'
-                solution_text: Asegúrate que los códigos no son demasiado largos
-                solution_code: repetir 20 veces imprimir 'Esto es suficiente'
+                error_code: "{repeat} 100 {times} {print} '¿Cuántas veces puedo repetir esto?'"
+                solution_text: Asegúrate que el código no tarda mucho en ejecutarse
+                solution_code: "{repeat} 20 {times} {print} 'Esto es suficiente'"
     -   level: '8'
         sections:
         -   title: Los alumnos usan la sangría mal
             example:
                 error_text: La sangría es un nuevo concepto de este nivel, es complicada de usar para algunos alumnos. Asegúrate que practican algunos códigos sencillos antes de hacer un programa entero con ella.
                 error_code: |-
-                    repetir 3 veces
-                    imprimir 'hola'
+                    {repeat} 3 {times}
+                    {print} 'hola'
                 solution_text: 'Este es el código correcto:'
                 solution_code: |-
-                    repetir 3 veces
-                        imprimir 'hola'
+                    {repeat} 3 {times}
+                        {print} 'hola'
         -   title: Los alumnos sólo repiten 1 línea cuando quieren repetir varias líneas
             example:
                 error_text: Por ejemplo, en el siguiente código el alumno quiso coger los pedidos de bebida de 3 personas. Pero, en cambio, el programa preguntó 3 veces, pero sólo escribió un pedido.
                 error_code: |-
-                    repetir 3 veces
-                        bebida = preguntar '¿Qué quieres beber?'
-                    imprimir bebida
+                    {repeat} 3 {times}
+                        bebida = {ask} '¿Qué quieres beber?'
+                    {print} bebida
                 solution_text: |-
                     En el código correcto la tercera línea empieza también con sangría. Así pertenece al bloque repetir y por tanto se repetirá 3 veces.
                     Enseñar estas diferencias a los alumnos les puede ayudar a entender por qué necesitan sangría para hacer que sus programas funcionen.
                 solution_code: |-
-                    repetir 3 veces
-                        bebida = preguntar '¿Qué quieres beber?'
-                        imprimir bebida
+                    {repeat} 3 {times}
+                        bebida = {ask} '¿Qué quieres beber?'
+                        {print} bebida
         -   title: Los alumnos quieren anidar sentencias `{if}`, o poner sentencias `{if}` dentro de un bucle
             example:
                 error_text: |-
                     En este nivel los alumnos aún no tienen permitido poner sentencias `{if}` dentro de otras sentencias `{if}` o dentro de bucles repetir.
                     En este nivel esto está permitido.
                 error_code: |-
-                    cumpleaños = preguntar '¿Es tu cumpleaños?'
-                    si cumpleaños = sí
-                        repetir 3 veces
-                            imprimir '¡Hip Hip Hurra!'
+                    cumpleaños = {ask} '¿Es tu cumpleaños?'
+                    {if} cumpleaños = sí
+                        {repeat} 3 {times}
+                            {print} '¡Hip Hip Hurra!'
                 solution_text: 'Este es el código correcto para este nivel:'
                 solution_code: |-
-                    cumpleaños = preguntar '¿Es tu cumpleaños?'
-                    si cumpleaños = sí
-                        imprimir '¡Hip Hip Hurra!'
-                        imprimir '¡Hip Hip Hurra!'
-                        imprimir '¡Hip Hip Hurra!'
+                    cumpleaños = {ask} '¿Es tu cumpleaños?'
+                    {if} cumpleaños = sí
+                        {print} '¡Hip Hip Hurra!'
+                        {print} '¡Hip Hip Hurra!'
+                        {print} '¡Hip Hip Hurra!'
         -   title: Los alumnos hacen programas que tardan demasiado en ejecutar
             example:
                 error_text: En este nivel es muy fácil hacer códigos extensos. Los alumnos no tienen permitido hacer programas que tarden mucho en cargar (para proteger nuestros servidores).
                 error_code: |-
-                    repetir 100 veces
-                        imprimir '¿Cuántas veces puedo repetir esto?'
-                solution_text: Asegúrate que los códigos no son demasiado largos
+                    {repeat} 100 {times}
+                        {print} '¿Cuántas veces puedo repetir esto?'
+                solution_text: Asegúrate que el código no tarda mucho en ejecutarse
                 solution_code: |-
-                    repetir 20 veces
-                        imprimir 'Esto es suficiente'
+                    {repeat} 20 {times}
+                        {print} 'Esto es suficiente'
         -   title: Los alumnos usan el comando `{if}` para comprobar si el valor de la variable es el mismo que el nombre de la variable
             example:
                 error_text: |-
@@ -857,100 +857,100 @@ teacher-guide:
                     En la línea 2 se pide al ordenador comprobar si la variable contraseña es la misma que la variable contraseña, por lo que sí. Lo que significa que la respuesta siempre es sí.
                     Así que con este código la respuesta siempre será 'Puedes entrar' sin importar lo que el jugador ponga.
                 error_code: |-
-                    contraseña es preguntar '?Cuál es la contraseña?'
-                    si contraseña es contraseña
-                        imprimir 'Puedes entrar'
-                    si no
-                        imprimir 'No puedes entrar'
+                    contraseña {is} {ask} '?Cuál es la contraseña?'
+                    {if} contraseña {is} contraseña
+                        {print} 'Puedes entrar'
+                    {else}
+                        {print} 'No puedes entrar'
                 solution_text: Puedes arreglar este error añadiendo comillas. Así el ordenador sabe que la segunda contraseña en el `{if} contraseña {is} 'contraseña'` tiene un valor de cadena texto (como texto normal) y no el nombre de la variable.
                 solution_code: |-
-                    contraseña es preguntar '¿Cuál es la contraseña?'
-                    si contraseña es 'contraseña'
-                        imprimir 'Puedes entrar'
-                    si no
-                        imprimir 'No puedes entrar'
+                    contraseña {is} {ask} '¿Cuál es la contraseña?'
+                    {if} contraseña {is} 'contraseña'
+                        {print} 'Puedes entrar'
+                    {else}
+                        {print} 'No puedes entrar'
     -   level: '9'
         sections:
         -   title: Los alumnos cometen errores con la sangría
             example:
                 error_text: La parte más dificil sobre este nivel es conseguir la sangría correcta. A los alumnos les encanta anidar sentencias `{if}`, a veces incluso dentro de otras sentencias anidadas `{if}`. Llevar la cuenta de la sangría puede ser bastante difícil.
                 error_code: |-
-                    imprimir 'Robin está caminando por el centro'
-                    ubicación = preguntar '¿Va Robin a entrar a una tienda, o se va a casa?'
-                    si ubicación es tienda
-                        imprimir 'Entra en la tienda.'
-                        imprimir 'Robin ve un libro interesante'
-                        libro = preguntar '¿Va a comprar el libro?'
-                            si libro es sí
-                    imprimir 'Robin compra el libro y se va a casa'
-                    si no
-                        imprimir 'Robin sale de la tienda y se va a casa'
-                    si no
-                        imprimir 'Robin se va a casa'
+                    {print} 'Robin está caminando por el centro'
+                    ubicación = {ask} '¿Va Robin a entrar a una tienda, o se va a casa?'
+                    {if} ubicación {is} tienda
+                        {print} 'Entra en la tienda.'
+                        {print} 'Robin ve un libro interesante'
+                        libro = {ask} '¿Va a comprar el libro?'
+                            {if} libro {is} sí
+                    {print} 'Robin compra el libro y se va a casa'
+                    {else}
+                        {print} 'Robin sale de la tienda y se va a casa'
+                    {else}
+                        {print} 'Robin se va a casa'
                 solution_text: Este es el código correcto. Intenta llevar la cuenta de todas las diferentes construcciones al poner sentencias `{if}` dentro de otras sentencias `{if}`.
                 solution_code: |-
-                    imprimir 'Robin está caminando por el centro'
-                    ubicación = preguntar '¿Va Robin a entrar a una tienda, o se va a casa?'
-                    si ubicación es tienda
-                        imprimir 'Entra en la tienda.'
-                        imprimir 'Robin ve un libro interesante'
-                        libro = preguntar '¿Va a comprar el libro?'
-                        si libro es sí
-                            imprimir 'Robin compra el libro y se va a casa'
-                        si no
-                            imprimir 'Robin sale de la tienda y se va a casa'
-                    si no
-                        imprimir 'Robin se va a casa'
+                    {print} 'Robin está caminando por el centro'
+                    ubicación = {ask} '¿Va Robin a entrar a una tienda, o se va a casa?'
+                    {if} ubicación {is} tienda
+                        {print} 'Entra en la tienda.'
+                        {print} 'Robin ve un libro interesante'
+                        libro = {ask} '¿Va a comprar el libro?'
+                        {if} libro {is} sí
+                            {print} 'Robin compra el libro y se va a casa'
+                        {else}
+                            {print} 'Robin sale de la tienda y se va a casa'
+                    {else}
+                        {print} 'Robin se va a casa'
     -   level: '10'
         sections:
-        -   title: Los alumnos no utilizan correctamente el comando para
+        -   title: Los alumnos no utilizan correctamente el comando `{for}`
             example:
                 error_text: Con frecuencia vemos que los alumnos intentan imprimir la lista (animales, en el ejemplo) en vez de los objetos de la lista.
                 error_code: |-
-                    animales es perro, gato, pez globo
-                    para animal en animales
-                      imprimir 'Amo ' animales
+                    animales {is} perro, gato, pez globo
+                    {for} animal {in} animales
+                      {print} 'Amo ' animales
                 solution_text: La palabra animales de la última línea debería cambiarse por animal.
                 solution_code: |-
-                    animales es perro, gato, pez globo
-                    para animal en animales
-                      imprimir 'Amo ' animal
+                    animales {is} perro, gato, pez globo
+                    {for} animal {in} animales
+                      {print} 'Amo ' animal
         -   title: Los alumnos olvidan la sangría
             example:
                 error_text: Los alumnos tienden a olvidar el usar sangría tras un comando para.
                 error_code: |-
-                    animales es perro, gato, pez globo
-                    para animal en animales
-                    imprimir 'Amo ' animales
+                    animales {is} perro, gato, pez globo
+                    {for} animal {in} animales
+                    {print} 'Amo ' animales
                 solution_text: Debes usar sangría tras un comando para.
                 solution_code: |-
-                    animales es perro, gato, pez globo
-                    para animal en animales
-                      imprimir 'Amo ' animal
+                    animales {is} perro, gato, pez globo
+                    {for} animal {in} animales
+                      {print} 'Amo ' animal
     -   level: '11'
         sections:
         -   title: Los alumnos olvidan usar sangría
             example:
                 error_text: Asegúrate que los alumnos usan sangría.
                 error_code: |-
-                    para i en rango 1 a 5
-                    imprimir i
+                    {for} i {in} {range} 1 {to} 5
+                    {print} i
                 solution_text: 'Este es el código correcto:'
                 solution_code: |-
-                    para i en rango 1 a 5
-                        imprimir i
+                    {for} i {in} {range} 1 {to} 5
+                        {print} i
         -   title: Los alumnos no entienden la i
             example:
                 error_text: |-
                     Algunos alumnos no entienden que i es una variable. i es elegida, porque se usa en programación en Python, pero puedes también podrías utilizar otro nombre de variable.
                     Por ejemplo, este código:
                 error_code: |-
-                    para i en rango 1 a 5
-                    imprimir i
+                    {for} i {in} {range} 1 {to} 5
+                    {print} i
                 solution_text: También podría sustituirse por este código. Funciona igual.
                 solution_code: |-
-                    para plátano en rango 1 a 5
-                        imprimir plátano
+                    {for} plátano {in} {range} 1 {to} 5
+                        {print} plátano
     -   level: '12'
         sections:
         -   title: Los alumnos olvidan las comillas
@@ -974,77 +974,77 @@ teacher-guide:
                     En el siguiente ejemplo, no puedes hacer cálculos con el numero 25, porque está entre comillas.
                 error_code: |-
                     puntuación = '25'
-                    respuesta es preguntar '¿Quieres un punto?'
-                    si respuesta es 'sí'
+                    respuesta {is} {ask} '¿Quieres un punto?'
+                    {if} respuesta {is} 'sí'
                         puntuación = puntuación + 1
-                        imprimir puntuación
+                        {print} puntuación
                 solution_text: 'Este es el código correcto:'
                 solution_code: |-
                     puntuación = 25
-                    respuesta es preguntar '¿Quieres un punto?'
-                    si respuesta es 'sí'
+                    respuesta {is} {ask} '¿Quieres un punto?'
+                    {if} respuesta {is} 'sí'
                         puntuación = puntuación + 1
-                        imprimir puntuación
+                        {print} puntuación
         -   title: Los alumnos usan comas en vez de puntos en los números decimales
             example:
                 error_text: Los números decimales se pueden usar desde este nivel, pero no puedes usar comas.
-                error_code: imprimir 2,5 + 2,5
+                error_code: '{print} 2,5 + 2,5'
                 solution_text: 'Este es el código correcto:'
-                solution_code: imprimir 2.5 + 2.5
+                solution_code: '{print} 2.5 + 2.5'
     -   level: '13'
         sections:
-        -   title: Los alumnos confunden `and` con `or`
+        -   title: Los alumnos confunden `{and}` con `{or}`
             example:
                 error_text: Ambos comandos podrían parecer similares, pero su función es muy diferente.
                 error_code: |-
-                    juego es preguntar '¿Quieres jugar a un juego?'
-                    tiempo es preguntar '¿Tienes tiempo para jugar?'
-                    si juego es 'sí' o tiempo es 'sí'
-                        imprimir '¡Juguemos!'
+                    juego {is} {ask} '¿Quieres jugar a un juego?'
+                    tiempo {is} {ask} '¿Tienes tiempo para jugar?'
+                    {if} juego {is} 'sí' {or} tiempo {is} 'sí'
+                        {print} '¡Juguemos!'
                 solution_text: En este caso, la persona debería responder sí a ambas preguntas, así que debes usar `and`.
                 solution_code: |-
-                    juego es preguntar '¿Quieres jugar a un juego?'
-                    tiempo es preguntar '¿Tienes tiempo para jugar?'
-                    si juego es 'sí' y tiempo es 'sí'
-                        imprimir '¡Juguemos!'
+                    juego {is} {ask} '¿Quieres jugar a un juego?'
+                    tiempo {is} {ask} '¿Tienes tiempo para jugar?'
+                    {if} juego {is} 'sí' {and} tiempo {is} 'sí'
+                        {print} '¡Juguemos!'
     -   level: '14'
         sections:
         -   title: Los alumnos confunden los signos < y >
             example:
                 error_text: A menudo, los alumnos ya están familiarizados con estos signos de sus clases de matemáticas. Pero si tus alumnos no conocen todavía estos signos, quizá tengan un desafío con esto.
                 error_code: |-
-                    edad = preguntar '¿Cuántos años tienes?'
-                    si edad < 12
-                        imprimir '¡Eres mayor que yo!'
+                    edad = {ask} '¿Cuántos años tienes?'
+                    {if} edad < 12
+                        {print} '¡Eres mayor que yo!'
                 solution_text: 'Este es el código correcto:'
                 solution_code: |-
-                    edad = preguntar '¿Cuántos años tienes?'
-                    si edad > 12
-                        imprimir '¡Eres mayor que yo!'
+                    edad = {ask} '¿Cuántos años tienes?'
+                    {if} edad > 12
+                        {print} '¡Eres mayor que yo!'
         -   title: Los alumnos usan los signos incorrectos para `!=` `<=` y `>=`
             example:
                 error_text: Estos signos probablemente sean nuevos para la mayoría de los alumnos. Asegúrate de explicar estos signos a tus alumnos.
                 error_code: |-
-                    nombre = preguntar '¿Cómo te llamas?'
-                    si nombre =< 'Hedy'
-                        imprimir 'No eres Hedy'
+                    nombre = {ask} '¿Cómo te llamas?'
+                    {if} nombre =  'Hedy'
+                        {print} 'No eres Hedy'
                 solution_text: 'Este es el código correcto:'
                 solution_code: |-
-                    nombre = preguntar '¿Cómo te llamas?'
-                    si nombre != 'Hedy'
-                        imprimir 'No eres Hedy'
+                    nombre = {ask} '¿Cómo te llamas?'
+                    {if} nombre != 'Hedy'
+                        {print} 'No eres Hedy'
         -   title: Los alumnos olvidan usar el signo ==
             example:
                 error_text: En este nivel, los alumnos todavía pueden usar el = o es. Pero en otros niveles, o en Python, quizá encuentren problemas por eso. Así que es mejor enseñarles a usarlo.
                 error_code: |-
-                    nombre = preguntar '¿Cómo te llamas?'
-                    si nombre = 'Hedy'
-                        imprimir '¡Eres genial!'
+                    nombre = {ask} '¿Cómo te llamas?'
+                    {if} nombre = 'Hedy'
+                        {print} '¡Eres genial!'
                 solution_text: 'Este es el código correcto:'
                 solution_code: |-
-                    nombre = preguntar '¿Cómo te llamas?'
-                    si nombre == 'Hedy'
-                        imprimir '¡Eres genial!'
+                    nombre = {ask} '¿Cómo te llamas?'
+                    {if} nombre == 'Hedy'
+                        {print} '¡Eres genial!'
     -   level: '15'
         sections:
         -   title: Los alumnos olvidan la sangría en el bucle mientras
@@ -1052,15 +1052,15 @@ teacher-guide:
                 error_text: La sangría suele ser complicada para los alumnos.
                 error_code: |-
                     respuesta = 0
-                    mientras respuesta != 25
-                    respuesta = preguntar '¿Cuánto es 5 veces 5?'
-                    imprimir 'Se ha dado una respuesta correcta'
+                    {while} respuesta != 25
+                    respuesta = {ask} '¿Cuánto es 5 veces 5?'
+                    {print} 'Se ha dado una respuesta correcta'
                 solution_text: 'Este es el código correcto:'
                 solution_code: |-
                     respuesta = 0
-                    mientras respuesta != 25
-                        respuesta = preguntar '¿Cuánto es 5 veces 5?'
-                    imprimir 'Se ha dado una respuesta correcta'
+                    {while} respuesta != 25
+                        respuesta = {ask} '¿Cuánto es 5 veces 5?'
+                    {print} 'Se ha dado una respuesta correcta'
     -   level: '16'
         sections:
         -   title: Los alumnos olvidan los corchetes
@@ -1068,51 +1068,51 @@ teacher-guide:
                 error_text: Desde este nivel en adelante las listas deben ir entre corchetes.
                 error_code: |-
                     helado = 'fresa', 'chocolate'
-                    imprimir 'Me encanta el helado de ' helado[aleatorio]
+                    {print} 'Me encanta el helado de ' helado[{random}]
                 solution_text: 'Este es el código correcto:'
                 solution_code: |-
                     helado = ['fresa', 'chocolate']
-                    imprimir 'Me encanta el helado de ' helado[aleatorio]
+                    {print} 'Me encanta el helado de ' helado[{random}]
         -   title: Los alumnos usan los corchetes incorrectos
             example:
                 error_text: Desde este nivel en adelante las listas deben ir entre corchetes.
                 error_code: |-
-                    helado = ('fresa', 'chocolate'}
-                    imprimir 'Me encanta el helado de ' helado[aleatorio]
+                    helado = ('fresa', 'chocolate')
+                    {print} 'Me encanta el helado de ' helado[{random}]
                 solution_text: 'Este es el código correcto:'
                 solution_code: |-
                     helado = ['fresa', 'chocolate']
-                    imprimir 'Me encanta el helado de ' helado[aleatorio]
+                    {print} 'Me encanta el helado de ' helado[{random}]
         -   title: Los alumnos se olvidan las comillas mientras se centran los corchetes
             example:
                 error_text: A veces los alumnos están tan atentos al nuevo aspecto de la sintaxis, que se olvidan las comillas.
                 error_code: |-
                     helado = [fresa, chocolate]
-                    imprimir 'Me encanta el helado de ' helado[aleatorio]
+                    {print} 'Me encanta el helado de ' helado[{random}]
                 solution_text: 'Este es el código correcto:'
                 solution_code: |-
                     helado = ['fresa', 'chocolate']
-                    imprimir 'Me encanta el helado de ' helado[aleatorio]
+                    {print} 'Me encanta el helado de ' helado[{random}]
         -   title: Los alumnos todavía usan el viejo comando en aleatorio
             example:
                 error_text: A veces los alumnos están tan atentos al nuevo aspecto de la sintaxis, que se olvidan las comillas.
                 error_code: |-
                     helado = [fresa, chocolate]
-                    imprimir 'Me encanta el helado de ' helado en aleatorio
+                    {print} 'Me encanta el helado de ' helado en aleatorio
                 solution_text: 'Este es el código correcto:'
                 solution_code: |-
                     helado = ['fresa', 'chocolate']
-                    imprimir 'Me encanta el helado de ' helado[aleatorio]
+                    {print} 'Me encanta el helado de ' helado[{random}]
         -   title: Los alumnos se olvidan las comillas cuando se centran en los corchetes
             example:
                 error_text: A veces los alumnos están tan atentos al nuevo aspecto de la sintaxis, que se olvidan las comillas.
                 error_code: |-
                     helado = [fresa, chocolate]
-                    imprimir 'Me encanta el helado de ' helado[aleatorio]
+                    {print} 'Me encanta el helado de ' helado[{random}]
                 solution_text: 'Este es el código correcto:'
                 solution_code: |-
                     helado = ['fresa', 'chocolate']
-                    imprimir 'Me encanta el helado de ' helado[aleatorio]
+                    {print} 'Me encanta el helado de ' helado[{random}]
     -   level: '17'
         sections:
         -   title: Los alumnos usan `{elif}` como `{else}`, sin una condición
@@ -1146,40 +1146,40 @@ teacher-guide:
                         {print} '¡Estoy genial!'
                 solution_text: 'Este es el código correcto:'
                 solution_code: |-
-                    respuesta = preguntar '¿Qué tal estás?'
-                    si respuesta es 'genial':
-                        imprimir '¡Yo también!'
-                    sinosi respuesta es 'mal':
-                        imprimir '¡Deja que te anime!'
-                    sino:
-                        imprimir '¡Estoy genial!'
+                    respuesta = {ask} '¿Qué tal estás?'
+                    {if} respuesta {is} 'genial':
+                        {print} '¡Yo también!'
+                    {elif} respuesta {is} 'mal':
+                        {print} '¡Deja que te anime!'
+                    {else}:
+                        {print} '¡Estoy genial!'
     -   level: '18'
         sections:
         -   title: Los alumnos olvidan usar los paréntesis
             example:
                 error_text: Los alumnos olvidarán poner paréntesis alrededor de sus textos.
-                error_code: imprimir '¡mi nombre es Hedy!'
+                error_code: "{print} '¡mi nombre es Hedy!'"
                 solution_text: 'Este es el código correcto:'
-                solution_code: imprimir('¡mi nombre es Hedy!')
+                solution_code: "{print}('¡mi nombre es Hedy!')"
         -   title: Los alumnos todavía usarán el comando preguntar
             example:
                 error_text: El comando preguntar se ha usado desde el nivel 1. Así que puede ser complicado que los alumnos cambien a entrada en vez de preguntar.
                 error_code: |-
-                    imprimir('¡Mi nombre es Hedy!')
+                    {print}('¡Mi nombre es Hedy!')
                     nombre = preguntar('¿Cómo te llamas?')
-                    imprimir('Así que tu nombre es ', nombre)
+                    {print}('Así que tu nombre es ', nombre)
                 solution_text: 'Este es el código correcto:'
                 solution_code: |-
-                    imprimir('¡Mi nombre es Hedy!')
-                    nombre = entrada('¿Cómo te llamas?')
-                    imprimir('Así que tu nombre es ', nombre)
+                    {print}('¡Mi nombre es Hedy!')
+                    nombre = {input}('¿Cómo te llamas?')
+                    {print}('Así que tu nombre es ', nombre)
         -   title: Los alumnos quizá usen los paréntesis como comillas
             example:
                 error_text: Han aprendido a usar las variables fuera de las comillas, así que quizás hagan lo mismo con los paréntesis. Cuál no es la manera correcta de usarlos.
                 error_code: |-
                     temperatura = 25
-                    imprimir('Hay ') temperatura ('grados fuera')
+                    {print}('Hay ') temperatura ('grados fuera')
                 solution_text: 'Este es el código correcto:'
                 solution_code: |-
                     temperatura = 25
-                    imprimir('Hay ', temperatura, 'grados fuera')
+                    {print}('Hay ', temperatura, 'grados fuera')

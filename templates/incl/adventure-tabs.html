@@ -1,6 +1,6 @@
       {# TABS #}
-      <div id="adventures">
-        {% macro adventure_tab(tabname, title, selected, id, tab_class, index) %}
+      <div id="adventures" data-cy="adventures">
+        {% macro adventure_tab(tabname, title, selected, id, tab_class, checked, index) %}
             <div
                 class="tab {% if selected %}tab-selected{% endif %} flex items-center justify-center whitespace-nowrap {{ tab_class }}"
                 id="{{ id }}"
@@ -9,6 +9,9 @@
                 data-cy="{{ title if tab_class == 'teacher_tab' else tabname }}"
                 >
                 {{title}}
+                {% if checked %}
+                    <i class="fa-solid fa-square-check ltr:ml-2 rtl:mr-2 text-blue-600"></i>
+                {% endif %}
             </div>
         {% endmacro %}
 
@@ -16,20 +19,20 @@
         <div class="flex flex-row w-min" id="adventures_buttons">
             {% for adventure in adventures %}
                 {% if adventure.is_teacher_adventure %}
-                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'teacher_tab', loop.index ) }}
+                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'teacher_tab', adventure.is_checked, loop.index ) }}
                 {% elif adventure.is_command_adventure %}
-                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'command_tab', loop.index ) }}
+                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'command_tab', adventure.is_checked, loop.index ) }}
                 {% else %}
-                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, '', loop.index) }}
+                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, '', adventure.is_checked, loop.index) }}
                 {% endif %}
             {% endfor %}
             <!-- Add the tab for the parsons problem (if it exists) -->
             {% if parsons %}
-                {{ adventure_tab('parsons', _('parsons_title'), False, 'parsons', 'special_tab', adventures|length + 1 ) }}
+                {{ adventure_tab('parsons', _('parsons_title'), False, 'parsons', 'special_tab', False, adventures|length + 1 ) }}
             {% endif %}
             <!-- Add the tab for the quiz -->
             {% if quiz %}
-                {{ adventure_tab('quiz', _('quiz_tab'), False, 'quiz', 'special_tab', (adventures|length + (2 if parsons else 1)) ) }}
+                {{ adventure_tab('quiz', _('quiz_tab'), False, 'quiz', 'special_tab', False,(adventures|length + (2 if parsons else 1)) ) }}
             {% endif %}
         </div>
       </div>

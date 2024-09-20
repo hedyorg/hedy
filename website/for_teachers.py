@@ -1,6 +1,5 @@
 import collections
 from difflib import SequenceMatcher
-import json
 import os
 import re
 import uuid
@@ -31,8 +30,6 @@ from website.auth import (
     prepare_user_db,
     remember_current_user,
 )
-
-from .achievements import Achievements
 from .database import Database
 from .auth_pages import AuthModule
 from .website_module import WebsiteModule, route
@@ -44,10 +41,9 @@ for lang in hedy_content.ALL_LANGUAGES.keys():
 
 
 class ForTeachersModule(WebsiteModule):
-    def __init__(self, db: Database, achievements: Achievements, auth: AuthModule):
+    def __init__(self, db: Database, auth: AuthModule):
         super().__init__("teachers", __name__, url_prefix="/for-teachers")
         self.db = db
-        self.achievements = achievements
         self.auth = auth
 
     @route("/", methods=["GET"])
@@ -124,7 +120,7 @@ class ForTeachersModule(WebsiteModule):
             level['title'] = gettext('level') + ' ' + str(level['level'])
 
         subsection_titles = [x.get('title', '') for x in subsections + levels]
-
+        levels = hedy_content.deep_translate_keywords(levels, g.keyword_lang)
         return render_template("teacher-manual.html",
                                current_page="teacher-manual",
                                page_title=page_title,
@@ -157,13 +153,6 @@ class ForTeachersModule(WebsiteModule):
             survey_id, description, questions, total_questions, survey_later = self.class_survey(class_id)
 
         students = Class.get("students", [])
-
-        achievement = None
-        if len(students) > 20:
-            achievement = self.achievements.add_single_achievement(user["username"], "full_house")
-        if achievement:
-            achievement = json.dumps(achievement)
-
         invites = []
         for invite in self.db.get_class_invitations(Class["id"]):
             invites.append(
@@ -176,13 +165,11 @@ class ForTeachersModule(WebsiteModule):
             )
 
         student_overview_table, _, class_adventures_formatted, \
-            _, student_adventures, graph_students = self.get_grid_info(user, class_id, 1)
+            _, student_adventures, graph_students, students_info = self.get_grid_info(user, class_id, 1)
 
         teacher = user if Class["teacher"] == user["username"] else self.db.user_by_username(Class["teacher"])
         second_teachers = [teacher] + Class.get("second_teachers", [])
-        print('*'*100)
-        print(graph_students)
-        print('*'*100)
+
         if utils.is_testing_request(request):
             return make_response({
                 "students": graph_students,
@@ -195,7 +182,6 @@ class ForTeachersModule(WebsiteModule):
             "class-overview.html",
             current_page="for-teachers",
             page_title=gettext("title_class-overview"),
-            achievement=achievement,
             invites=invites,
             class_info={
                 "students": len(students),
@@ -221,7 +207,8 @@ class ForTeachersModule(WebsiteModule):
                     'level': level,
                     'graph_students': graph_students
                 }
-            }
+            },
+            students_info=students_info
         )
 
     def get_grid_info(self, user, class_id, level):
@@ -256,6 +243,24 @@ class ForTeachersModule(WebsiteModule):
 
         student_adventures = {}
         graph_students = []
+
+        students_info = {}
+        for student_username in students:
+            student = self.db.user_by_username(student_username)
+            # Fixme: The get_quiz_stats function requires a list of ids -> doesn't work on single string
+            quiz_scores = self.db.get_quiz_stats([student_username])
+            # Verify if the user did finish any quiz before getting the max() of the finished levels
+            finished_quizzes = any("finished" in x for x in quiz_scores)
+            highest_quiz = max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+            students_info[student_username] = {
+                "last_login": student["last_login"],
+                "highest_level": highest_quiz,
+                "adventures_ticked": 0
+            }
+
+        for student, info in students_info.items():
+            info["last_login"] = utils.localized_date_format(info.get("last_login", 0))
+
         for student in students:
             programs = self.db.last_level_programs_for_user(student, level)
             program_stats = self.db.get_program_stats_per_level(student, level)
@@ -291,6 +296,9 @@ class ForTeachersModule(WebsiteModule):
                     current_program = dict(level=str(program['level']), name=name,
                                            program=program['id'], ticked=current_adventure['ticked'])
 
+                    if current_adventure['ticked']:
+                        students_info[student]['adventures_ticked'] += 1
+
                     student_adventures[student_adventure_id] = current_program
             graph_students.append(
                 {
@@ -301,7 +309,8 @@ class ForTeachersModule(WebsiteModule):
                     "successful_runs": successful_runs
                 }
             )
-        return students, class_, class_adventures_formatted, adventure_names, student_adventures, graph_students
+        return students, class_, class_adventures_formatted, adventure_names, \
+            student_adventures, graph_students, students_info
 
     def is_program_modified(self, program, full_adventures, teacher_adventures):
         # a single adventure migh have several code snippets, formatted using markdown
@@ -370,6 +379,24 @@ class ForTeachersModule(WebsiteModule):
     def has_placeholder(self, code):
         return re.search(r'(?<![^ \n])(_)(?= |$)', code, re.M) is not None
 
+    @route("/check_adventure", methods=["POST"])
+    @requires_login
+    def check_adventure(self, user):
+        level = request.args.get('level')
+        student_name = request.args.get('student_name', type=str)
+        adventure_name = request.args.get('adventure_name', type=str)
+        program_id = request.args.get('program_id', type=str)
+        student_adventure_id = f"{student_name}-{adventure_name}-{level}"
+        current_adventure = self.db.student_adventure_by_id(student_adventure_id)
+        if not current_adventure:
+            # store the adventure in case it's not in the table
+            current_adventure = self.db.store_student_adventure(
+                dict(id=f"{student_adventure_id}", ticked=False, program_id=program_id))
+
+        self.db.update_student_adventure(student_adventure_id, current_adventure['ticked'])
+
+        return make_response({'message': 'success'})
+
     @route("/grid_overview/<class_id>/change_checkbox", methods=["POST"])
     @requires_login
     def change_checkbox(self, user, class_id):
@@ -377,7 +404,7 @@ class ForTeachersModule(WebsiteModule):
         student_name = request.args.get('student', type=str)
         adventure_name = request.args.get('adventure', type=str)
 
-        students, class_, class_adventures_formatted, adventure_names, _, _ = self.get_grid_info(
+        students, class_, class_adventures_formatted, adventure_names, _, _, _ = self.get_grid_info(
             user, class_id, level)
 
         adventure_names = {value: key for key, value in adventure_names.items()}
@@ -388,9 +415,9 @@ class ForTeachersModule(WebsiteModule):
 
         self.db.update_student_adventure(student_adventure_id, current_adventure['ticked'])
         student_overview_table, class_, class_adventures_formatted, \
-            adventure_names, student_adventures, _ = self.get_grid_info(user, class_id, level)
+            adventure_names, student_adventures, _, students_info = self.get_grid_info(user, class_id, level)
 
-        return jinja_partials.render_partial("customize-grid/partial-grid-table.html",
+        return jinja_partials.render_partial("customize-grid/partial-grid-tables.html",
                                              level=level,
                                              class_info={"id": class_id, "students": students, "name": class_["name"]},
                                              adventure_table={
@@ -398,7 +425,61 @@ class ForTeachersModule(WebsiteModule):
                                                  'adventures': class_adventures_formatted,
                                                  'student_adventures': student_adventures,
                                                  'level': level,
-                                             }
+                                             },
+                                             students_info=students_info
+                                             )
+
+    @route("/class/<class_id>/remove_student_modal/<student_id>", methods=["GET"])
+    @requires_teacher
+    def get_remove_student_modal(self, user, class_id, student_id):
+        level = request.args.get('level')
+        Class = self.db.get_class(session['class_id'])
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        modal_text = gettext('remove_student_prompt')
+        htmx_endpoint = f'/for-teachers/class/{class_id}/remove_student/{student_id}?level={level}'
+        htmx_target = "#adventure_overview"
+        hyperscript = "on htmx:afterRequest wait 150ms then hedyApp.initializeGraph()"
+
+        return render_partial('modal/htmx-modal-confirm.html',
+                              modal_text=modal_text,
+                              htmx_endpoint=htmx_endpoint,
+                              htmx_target=htmx_target,
+                              hyperscript=hyperscript)
+
+    @route("/class/<class_id>/remove_student/<student_id>", methods=["POST"])
+    @requires_login
+    def leave_class(self, user, class_id, student_id):
+        # We use the level to redraw the adventure table in the level
+        # the teacher was using before
+        level = request.args.get('level')
+        Class = self.db.get_class(class_id)
+        if not Class or not (utils.can_edit_class(user, Class)):
+            return make_response(gettext("ajax_error"), 400)
+
+        self.db.remove_student_from_class(Class["id"], student_id)
+        students, class_, class_adventures_formatted, \
+            adventure_names, student_adventures, graph_students, students_info = self.get_grid_info(
+                user, class_id, level)
+
+        return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
+                                             level=level,
+                                             class_info={"id": class_id, "students": students, "name": class_["name"]},
+                                             max_level=hedy.HEDY_MAX_LEVEL,
+                                             class_adventures=class_adventures_formatted,
+                                             adventure_names=adventure_names,
+                                             student_adventures=student_adventures,
+                                             adventure_table={
+                                                 'students': students,
+                                                 'adventures': class_adventures_formatted,
+                                                 'student_adventures': student_adventures,
+                                                 'graph_options': {
+                                                     'level': level,
+                                                     'graph_students': graph_students
+                                                 }
+                                             },
+                                             students_info=students_info
                                              )
 
     @route("/grid_overview/<class_id>/level", methods=["GET"])
@@ -406,7 +487,8 @@ class ForTeachersModule(WebsiteModule):
     def change_dropdown_level_class_overview(self, user, class_id):
         level = request.args.get('level')
         students, class_, class_adventures_formatted, \
-            adventure_names, student_adventures, graph_students = self.get_grid_info(user, class_id, level)
+            adventure_names, student_adventures, graph_students, students_info = self.get_grid_info(
+                user, class_id, level)
         adventure_names = {value: key for key, value in adventure_names.items()}
 
         return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
@@ -424,7 +506,8 @@ class ForTeachersModule(WebsiteModule):
                                                      'level': level,
                                                      'graph_students': graph_students
                                                  }
-                                             }
+                                             },
+                                             students_info=students_info
                                              )
 
     @route("/get_student_programs/<student>", methods=["GET"])
@@ -689,7 +772,7 @@ class ForTeachersModule(WebsiteModule):
             name = adv.short_name if from_sorted_adv_class else adv.get("name")
             if name == "parsons":
                 parsons_adv = adv
-            if name == "quiz":
+            if name == "":
                 quiz_adv = adv
 
         if parsons_adv:
@@ -827,8 +910,7 @@ class ForTeachersModule(WebsiteModule):
                               available_adventures=available_adventures,
                               class_id=session['class_id'])
 
-    @staticmethod
-    def migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden):
+    def migrate_quizzes_parsons_tabs(self, customizations, parsons_hidden, quizzes_hidden):
         """If the puzzles/quizzes were not migrated yet which is possible if the teacher didn't tweak
             the class customizations, if this is the case, we need to add them if possible."""
         migrated = customizations.get("quiz_parsons_tabs_migrated")
@@ -852,7 +934,7 @@ class ForTeachersModule(WebsiteModule):
 
             # Mark current customization as being migrated so that we don't do this step next time.
             customizations["quiz_parsons_tabs_migrated"] = 1
-            Database.update_class_customizations(Database, customizations)
+            self.db.update_class_customizations(customizations)
 
     def get_class_info(self, user, class_id, get_customizations=False):
         if hedy_content.Adventures(g.lang).has_adventures():
@@ -1194,11 +1276,8 @@ class ForTeachersModule(WebsiteModule):
         }
 
         self.db.update_class_customizations(customizations)
-
-        achievement = self.achievements.add_single_achievement(user["username"], "my_class_my_rules")
         response = {"success": gettext("class_customize_success")}
-        if achievement:
-            response["achievement"] = achievement
+
         return make_response(response, 200)
 
     @route("/create-accounts/<class_id>", methods=["GET"])

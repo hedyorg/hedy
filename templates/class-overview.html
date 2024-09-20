@@ -2,13 +2,6 @@
 
 {% block regular_content %}
 <div>
-    {% if achievement %}
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            hedyApp.showAchievements({{ achievement| safe }}, false, "");
-        });
-    </script>
-    {% endif %}
     <div class="flex flex-col gap-4">
         <button class="back-btn" id="go_back_button" data-cy="go_back_button" onclick="window.location.href = '/for-teachers'">
             <span class="fa fa-arrow-{% if g.dir == " ltr" %}right{% else %}left{% endif %}">&nbsp;</span>
@@ -16,22 +9,24 @@
         </button>
         <div id="survey" data-cy="survey" class="hidden"></div>
         {% if second_teacher %}<h1>{{_('role')}}: {{role}}</h1>{% endif %}
-        <div class="flex flex-row items-center justify-between">
+        <div class="flex flex-col md:flex-row items-left md:items-center justify-between">
             <h1>{{ class_info.name }}</h1>
-            <div class="flex gap-2">
-                <div class="items-center gap-2 ml-4 mr-4 align-middle">
+            <div class="flex flex-col md:flex-row gap-2">
+                <div class="items-center gap-2 md:ml-4 md:mr-4 align-middle">
                     {% if class_info.students > 0 %}
-                    <h2 id="survey_status_button" data-cy="survey_status_button">
+                    <h2 id="survey_status_button" class="hidden md:block" data-cy="survey_status_button">
                         {% if questions|length == 0 %}
                         {{_('survey_completed')}} ✅
                         {% else %}
                         <a class="cursor-pointer" hx-post="/for-teachers/load-survey/{{class_info.id}}" hx-target="#survey"
-                            hx-swap="outerHTML">{{_('survey')}} {{total_questions - questions|length}}/{{total_questions}}</a>
+                            hx-swap="outerHTML">
+                            {{_('survey')}} {{total_questions - questions|length}}/{{total_questions}}
+                        </a>
                         {% endif %}
                     </h2>
                     {% endif %}
                 </div>
-                <button class="green-btn" id="customize_class_button" data-cy="customize_class_button"
+                <button class="green-btn w-fit" id="customize_class_button" data-cy="customize_class_button"
                     onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">
                     {{_('customize_class')}}
                 </button>                
@@ -45,7 +40,8 @@
                             class_id=class_id,
                             level='1',
                             class_adventures=class_adventures,
-                            adventure_table=adventure_table)
+                            adventure_table=adventure_table,
+                            students_info=students_info)
         }}
         <!-- Second teachers' table -->
         {% if is_teacher and class_info.second_teachers %}
@@ -93,7 +89,7 @@
         </div>
       {% endif %}
       {% if class_info.teacher == username %}
-              <button class="green-btn w-40 mt-4" data-cy="add_second_teacher" _="on click call hedyApp.invite_student('{{class_info.id}}', {{_('second_teacher_prompt')|default(None)|tojson}}, '/invite-second-teacher')">{{_('invite_teacher')}}</button>
+              <button class="green-btn w-fit mt-4" data-cy="add_second_teacher" _="on click call hedyApp.invite_student('{{class_info.id}}', {{_('second_teacher_prompt')|default(None)|tojson}}, '/invite-second-teacher')">{{_('invite_teacher')}}</button>
       {% endif %}
       {% if invites %}
       <div data-cy="invites_block" class="pt-4 mb-6">

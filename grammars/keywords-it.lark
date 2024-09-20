@@ -5,7 +5,7 @@ _DEF: ("def" | "def") _SPACE?
 _RETURN: ("return" | "return") _SPACE?
 _PRINT: ("stampa" | "print") _SPACE?
 _PLAY: ("play" | "play") _SPACE
-_ASK: ("chiedi" | "ask") _SPACE?
+_ASK: ("chiedi" | "ask")
 _ECHO: ("eco" | "echo") _SPACE?
 _FORWARD: ("avanti" | "forward") _SPACE?
 _TURN: ("gira" | "turn") _SPACE?
@@ -26,9 +26,9 @@ _IS: _SPACE ("is" | "is") _SPACE
 _STANDALONE_IS: ("is" | "is")
 _SLEEP: ("dormi" | "sleep") _SPACE?
 _ADD_LIST: ("add" | "add") _SPACE
-_TO_LIST: _SPACE ("to" | "to") _SPACE
+_TO_LIST: _SPACE? ("to" | "to") _SPACE
 _REMOVE: ("rimuovi" | "remove") _SPACE
-_FROM: _SPACE ("da" | "from") _SPACE
+_FROM: _SPACE? ("da" | "from") _SPACE
 _AT: _SPACE ("at" | "at") _SPACE
 random: ("a caso" | "random") _SPACE?
 _IN: _SPACE ("in" | "in") _SPACE
@@ -49,7 +49,6 @@ _WHILE: ("mentre" | "while") _SPACE
 _LENGTH: "lunghezza" | "length"
 _COLOR : ("colore" | "color") _SPACE?
 _PRESSED: ("Premuto" | "pressed") _SPACE?
-_BUTTON: ("button" | "button") _SPACE?
 clear: ("Elimina" | "clear") _SPACE?
 TRUE: ("true" | "True" | "true" | "True") _SPACE?
 FALSE: ("false" | "False" | "false" | "False") _SPACE?

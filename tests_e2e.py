@@ -4,7 +4,6 @@ import collections
 import random
 import json
 import re
-import urllib.parse
 from http.cookies import SimpleCookie
 
 # *** LIBRARIES ***
@@ -280,60 +279,6 @@ class TestPages(AuthHelper):
         self.get_data('/cheatsheet/123', expect_http_code=404)
         self.get_data('/cheatsheet/panda', expect_http_code=404)
 
-    def test_highscore_pages(self):
-        # WHEN trying all languages to reach the highscore page
-        # THEN receive an OK response from the server
-        self.given_fresh_user_is_logged_in()
-        body = {'email': self.user['email'], 'keyword_language': self.user['keyword_language']}
-
-        for language in ALL_LANGUAGES.keys():
-            body['language'] = language
-            self.post_data('profile', body)
-            self.get_data("/highscores")
-
-    def test_valid_country_highscore_page(self):
-        # WHEN trying to reach the highscores page for a country with a profile country
-        # THEN receive an OK response from the server
-        self.given_fresh_user_is_logged_in()
-
-        # Add a country to the user profile
-        body = {
-            'email': self.user['email'],
-            'language': self.user['language'],
-            'keyword_language': self.user['keyword_language'],
-            'country': 'NL'
-        }
-        self.post_data('profile', body)
-
-        # Receive a valid response
-        self.get_data("/highscores/country")
-
-    def test_invalid_country_highscore_page(self):
-        # WHEN trying to reach the highscores page for a country without a profile country
-        # THEN receive an error response from the server
-        self.given_fresh_user_is_logged_in()
-        self.get_data("/highscores/country", expect_http_code=403)
-
-    def test_valid_class_highscore_page(self):
-        # WHEN a teacher is logged in and create a class
-        self.given_teacher_is_logged_in()
-        self.post_data('class', {'name': 'class1'})
-        Class = self.get_data('classes')[0]
-
-        # THEN a fresh user logs in and joins this class
-        self.given_fresh_user_is_logged_in()
-        self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
-
-        # THEN we can access the class highscore page
-        self.get_data("/highscores/class")
-
-    def test_invalid_class_highscore_page(self):
-        # WHEN a fresh user is not in a class
-        self.given_fresh_user_is_logged_in()
-
-        # THEN we can can't access the class highscore page
-        self.get_data("/highscores/class", expect_http_code=403)
-
     def test_valid_program_filtering_page(self):
         # WHEN a fresh user
         self.given_fresh_user_is_logged_in()
@@ -369,12 +314,10 @@ class TestPages(AuthHelper):
         pages = [
             '/',
             '/hedy',
-            '/landing-page',
             '/tutorial',
             '/explore',
             '/learn-more',
             '/programs',
-            '/my-achievements',
             '/my-profile']
 
         for language in ALL_LANGUAGES.keys():
@@ -511,81 +454,6 @@ class TestAuth(AuthHelper):
         self.assertEqual(hedy_cookie['httponly'], True)
         self.assertEqual(hedy_cookie['path'], '/')
         self.assertEqual(hedy_cookie['samesite'], 'Lax,')
-
-    def test_invalid_verify_email(self):
-        # GIVEN a new user
-        # (we create a new user to ensure that the verification flow hasn't been done for this user yet)
-        self.given_fresh_user_is_logged_in()
-
-        # WHEN submitting invalid verifications
-        invalid_verifications = [
-            # Missing token
-            {'username': self.username},
-            # Missing username
-            {'token': self.user['verify_token']},
-        ]
-
-        for invalid_verification in invalid_verifications:
-            # THEN receive an invalid response code from the server
-            self.get_data(
-                'auth/verify?' +
-                urllib.parse.urlencode(invalid_verification),
-                expect_http_code=400)
-
-        # WHEN submitting well-formed verifications with invalid values
-        incorrect_verifications = [
-            # Invalid username
-            {'username': 'foobar', 'token': self.user['verify_token']},
-            # Invalid token
-            {'username': self.username, 'token': 'foobar'}
-        ]
-
-        for incorrect_verification in incorrect_verifications:
-            # THEN receive a forbidden response code from the server
-            self.get_data(
-                'auth/verify?' +
-                urllib.parse.urlencode(incorrect_verification),
-                expect_http_code=403)
-
-    def test_verify_email(self):
-        # GIVEN a new user
-        # (we create a new user to ensure that the verification flow hasn't been done for this user yet)
-        self.given_fresh_user_is_logged_in()
-
-        # WHEN attepting to verify the user
-        # THEN receive a redirect from the server taking us to `/landing-page`
-        headers = self.get_data(
-            'auth/verify?' +
-            urllib.parse.urlencode(
-                {
-                    'username': self.username,
-                    'token': self.user['verify_token']}),
-            expect_http_code=302,
-            return_headers=True)
-        self.assertEqual(headers['location'], '/landing-page')
-
-        # WHEN attepting to verify the user again (the operation should be idempotent)
-        # THEN (again) receive a redirect from the server taking us to `/landing-page`
-        headers = self.get_data(
-            'auth/verify?' +
-            urllib.parse.urlencode(
-                {
-                    'username': self.username,
-                    'token': self.user['verify_token']}),
-            expect_http_code=302,
-            return_headers=True)
-        self.assertEqual(headers['location'], '/landing-page')
-
-        # WHEN retrieving profile to see that the user is no longer marked with
-        # `verification_pending`
-        self.given_specific_user_is_logged_in(self.username)
-        profile = self.get_data('profile')
-
-        # THEN check that the `verification_pending` has been removed from the user profile
-        self.assertNotIn('verification_pending', profile)
-
-        # FINALLY remove token from user since it's already been used.
-        self.user.pop('verify_token')
 
     def test_logout(self):
         # GIVEN a logged in user
@@ -1728,6 +1596,63 @@ class TestMultipleAccounts(AuthHelper):
             ]
         }
         self.post_data('for-teachers/create-accounts', body, expect_http_code=200)
+
+
+class TestHedyPage(AuthHelper):
+    def test_valid_parsons(self):
+        self.given_fresh_user_is_logged_in()
+
+        # WHEN attempting a parsons program
+        # THEN should store attempt and receive OK from server
+        body = {
+            'id': utils.random_id_generator(12),
+            'username': self.user['username'],
+            'level': 1,
+            'exercise': '1',
+            'order': ['1', '2', '3', '4'],
+            'correct': '1',
+            'timestamp': utils.timems()
+        }
+
+        self.post_data('store_parsons_order', body, expect_http_code=204)
+
+    def test_invalid_parsons(self):
+        self.given_fresh_user_is_logged_in()
+
+        invalid_bodies = [
+            {},
+            {
+                'id': str(utils.random_id_generator(12)),
+                'username': self.user,
+                'level': '1',
+                'exercise': '1',
+                'order': ['1', '2', '3', '4'],
+                'correct': '1',
+                'timestamp': utils.timems()
+            },
+            {
+                'id': str(utils.random_id_generator(12)),
+                'username': self.user,
+                'level': '1',
+                'exercise': '1',
+                'order': [1, 2, 3, 4],
+                'correct': '1',
+                'timestamp': utils.timems()
+            },
+            {
+                'id': str(utils.random_id_generator(12)),
+                'username': self.user,
+                'level': '1',
+                'exercise': 1,
+                'order': ['1', '2', '3', '4'],
+                'correct': '1',
+                'timestamp': utils.timems()
+            }
+        ]
+
+        for body in invalid_bodies:
+            self.post_data('store_parsons_order', body, expect_http_code=400)
+
 
 # *** CLEANUP OF USERS CREATED DURING THE TESTS ***
 

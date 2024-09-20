@@ -65,7 +65,7 @@ adventures:
                 story_text_3: |
                     Este é um exemplo do comando `{remove}` em sua história
 
-                    ### Exercise
+                    ### Exercício
                     Copie a sua história dos níveis anteriores para esse nível.
                     Nesse nível, você aprendeu 3 novos comandos: `{at} {random}` , `{add} {to_list}` e `{remove} {from}`.
                     Adicione novas linhas de código à sua história, usando cada um desses comandos novos pelo menos uma vez.
@@ -246,7 +246,7 @@ adventures:
         levels:
             3:
                 story_text: |
-                    ## Some a
+                    ## {add} {to_list}
                     Você pode adicionar itens a uma lista usando o comando `{add} {to_list}`. Basta digitar: `{add} pinguim {to_list} animais`, ou você pode usar o comando `{ask}` assim como no código exemplo.
                 example_code: |
                     ```
@@ -256,7 +256,7 @@ adventures:
                     {print} Eu escolho animais {at} {random}
                     ```
                 story_text_2: |
-                    ## Remova de
+                    ## {remove} {from}
                     Se você pode adicionar itens a uma lista, é claro que você também pode tirar. Isso é feito usando o comando `{remove} {from}`.
                 example_code_2: |
                     ```
@@ -302,7 +302,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## O comando pergunte
+                    ## O comando {ask}
                     Agora que você sabe usar o comando `{print}`, você está pronto(a) para aprender o próximo comando: `{ask}`. Com o comando `{ask}`, você pode fazer uma pergunta. Veja:
                 example_code: |
                     ```
@@ -351,8 +351,8 @@ adventures:
                     Copie o seu código da aba anterior e torne as variáveis interativas usando comandos `{ask}`.
                 example_code_2: |
                     ```
-                    animais_favoritos {is} {ask} Qual é o seu animal favorito?
-                    {print} Eu gosto de animais_favoritos
+                    animal_favorito {is} {ask} Qual é o seu animal favorito?
+                    {print} Eu gosto de animal_favorito
                     ```
             18:
                 story_text: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
@@ -1780,8 +1780,8 @@ adventures:
                     **Extra** Altere o código e deixe que a vidente preveja não apenas seu nome, mas também sua idade, seu time favorito ou algo mais sobre você.
             3:
                 story_text: |
-                    In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
-                    In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
+                    Nos níveis anteriores você criou sua primeira máquina de adivinhação, mas Hedy não conseguia prever nada, apenas usava {echo}.
+                    Neste nível você pode usar uma variável e o comando `{at} {random}` para realmente deixar Hedy escolher uma resposta para você. Confira este código, por exemplo:
                 example_code: |
                     ```
                     {print} Eu sou Hedy, a vidente!
@@ -1793,8 +1793,8 @@ adventures:
                     {print} respostas {at} {random}
                     ```
                 story_text_2: |
-                    ### Exercises
-                    Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
+                    ### Exercício
+                    Agora, Hedy só pode responder sim, não ou talvez. Você pode dar a Hedy mais opções de resposta, como 'definitivamente' ou '{ask} novamente'.
             4:
                 story_text: |
                     ### Exercício
@@ -2244,7 +2244,7 @@ adventures:
                     Lembre-se de começar cada linha com um comando `{print}`.
             2:
                 story_text: |
-                    Nesta casa mal-assombrada, você pode escolher seus montros com emojis. Mas claro, você também poderia usar palavras.
+                    Nesta casa mal-assombrada, você pode escolher seus monstros com emojis. Mas claro, você também poderia usar palavras.
                 example_code: |
                     ```
                     monstro_1 {is} 👻
@@ -2258,9 +2258,9 @@ adventures:
                     {print} Mas ao entrar, um monstro_3 te ataca!
                     ```
                 story_text_2: |
-                    ### Exercise
-                    In the example above the monsters are predetermined. So each time you run your code, the output is the same.
-                    Can you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?
+                    ### Exercício
+                    No exemplo acima os monstros são pré-determinados. Portanto, cada vez que você executa seu código, o resultado é o mesmo.
+                    Você pode adicionar comandos `{ask}` para tornar a casa mal-assombrada interativa e fazer com que os jogadores escolham os monstros que encontrarão?
                 example_code_2: |
                     ```
                     monstro_1 {is} _
@@ -2275,9 +2275,9 @@ adventures:
                     ```
             3:
                 story_text: |
-                    In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
-                    In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
-                    Let Hedy decide randomly!
+                    Nos níveis anteriores você fez uma introdução ao seu jogo de casa mal-assombrada, mas como você deve ter notado, a história sempre teria um final terrível.
+                    Neste nível você pode tornar sua história mais interativa alterando o resultado do jogo; às vezes você será comido, às vezes você escapará!
+                    Deixe Hedy decidir aleatoriamente!
                 example_code: |
                     ```
                     _ Escape da casa mal-assombrada!
@@ -2549,15 +2549,15 @@ adventures:
                     {else} {print} 'meh'
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Finish the example code by filling in the blanks with commands that you've learned.
-                    When you've finished the code, try to create a code of your own and use a question that you've thought of yourself.
+                    ### Exercício
+                    Complete o código exemplo preenchendo as lacunas com comandos que você aprendeu.
+                    Quando tiver terminado, tente criar seu próprio código com sua própria pergunta.
                 example_code_2: |
                     ```
-                    animals is dog, cow, sheep
-                    answer is ask 'What is your favorite animal?'
-                    _ answer _ animals _ 'Mine too!'
-                    _ _ 'My favorite animals are dogs, cows and sheep'
+                    animais {is} cachorro, vaca, ovelha
+                    resposta {is} {ask} 'Qual é o seu animal favorito?'
+                    _ resposta _ animais _ 'O meu também!'
+                    _ _ 'Meus animais favoritos são cachorros, vacas e ovelhas.'
                     ```
     is_command:
         name: '{is}'
@@ -2575,14 +2575,14 @@ adventures:
                     {print} nome tem idade anos
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Time to make your own variables!
-                    In the example code we made an example of the variable `favorite_animal`. In line 1 the variable is set, and in line 2 we haved used the variable in a print command.
-                    Firstly, finish our example by filling in your favorite animal in the blanks. Then make at least 3 of these codes yourself. Pick a variable, and set the variable with the {is} command. Then use it with a {print} command, just like we did.
+                    ### Exercício
+                    É hora de criar suas próprias variáveis!
+                    No código de exemplo fizemos um exemplo da variável `animal_favorito`. Na linha 1 a variável é definida, e na linha 2 usamos a variável em um comando de impressão.
+                    Em primeiro lugar, termine o nosso exemplo preenchendo o espaço em branco com o seu animal favorito. Então faça você mesmo pelo menos 3 desses códigos. Escolha uma variável e defina-a com o comando {is}. Em seguida, use-a com um comando {print}, assim como fizemos.
                 example_code_2: |
                     ```
-                    favorite_animal {is} _
-                    {print} I like favorite_animal
+                    animal_favorito {is} _
+                    {print} Eu gosto de animal_favorito
                     ```
             6:
                 story_text: |
@@ -2594,39 +2594,41 @@ adventures:
                     ```
             14:
                 story_text: |
-                    We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.
-                    The `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.
-                    If you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.
-                    The `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.
-                    If you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.
-                    You use these comparisons in an `{if}`, like this:
+                    Vamos aprender mais itens novos. Você já deve conhecê-los da matemática, o `<` e o `>`.
+                    O `<` verifica se o primeiro número é menor que o segundo. Por exemplo, idade `<` 12 verifica se idade é menor que 12.
+                    Se quiser verificar se o primeiro número é menor ou igual ao segundo, você pode usar `<=`. Exemplo: age `<=` 11.
+                    The `>` verifica se o primeiro número é maior que o segundo. Por exemplo, pontos `>` 10 verifica se pontos é maior que 10.
+                    Se quiser verificar se o primeiro número é maior ou igual ao segundo, você pode usar `>=`. Exemplo: pontos `>=` 11.
+                    Essas comparações podem ser usadas em um `{if}`, assim:
                 example_code: |
                     ```
-                    age = {ask} 'How old are you?'
-                    {if} age > 12
-                        {print} 'You are older than I am!'
+                    idade = {ask} 'Quantos anos você tem?'
+                    {if} idade > 12
+                        {print} 'Você é mais velho(a) que eu!'
+                    ```
+                    ```
+                    idade = {ask} 'Quantos anos você tem?'
+                    {if} idade < 12
+                        {print} 'Você é mais novo(a) que eu!'
+                    {else}
+                        {print} 'Você é mais velho(a) que eu!'
                     ```
                 story_text_2: |
-                    From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:
+                    Deste nível em diante, se quiser verificar uma igualdade exata, você pode usar dois sinais de igual. É assim na maioria das linguagens de programação:
                 example_code_2: |
                     ```
-                    name = {ask} 'What is your name?'
-                    {if} name == 'Hedy'
-                        {print} 'You are cool!'
+                    nome = {ask} 'Qual é o seu nome?'
+                    {if} nome == 'Hedy'
+                        {print} 'Você é legal!'
                     ```
                 story_text_3: |
-                    You can also compare if something is *not* equal to something else using `!=` like this:
+                    Você pode verificar se duas coisas são *diferentes* usando `!=`, desse jeito:
                 example_code_3: |
                     ```
-                    name = {ask} 'What is your name?'
-                    {if} name != 'Hedy'
-                        {print} 'You are not Hedy'
+                    nome = {ask} 'Qual é o seu nome?'
+                    {if} nome != 'Hedy'
+                        {print} 'Você não é Hedy'
                     ```
-
-                    {if} age < 13
-                        {print} 'You are younger than me!'
-                    {else}
-                        {print} 'You are older than me!'
     language:
         name: Língua
         default_save_name: Idioma
@@ -2666,9 +2668,9 @@ adventures:
                     {print} 'You gave ' score ' correct answers.'
                     ```
     maths:
-        name: maths
-        default_save_name: maths
-        description: Introducing maths
+        name: matemática
+        default_save_name: matemática
+        description: introduzindo matemática
         levels:
             6:
                 story_text: |
@@ -2680,17 +2682,18 @@ adventures:
                     That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ```
-                    {print} '5 plus 5 is ' 5 + 5
-                    {print} '5 minus 5 is ' 5 - 5
-                    {print} '5 times 5 is ' 5 * 5
+                    {print} '5 mais 5 é ' 5 + 5
+                    {print} '5 menos 5 é ' 5 - 5
+                    {print} '5 vezes 5 é ' 5 * 5
+                    {print} '5 dividido por 5 é ' 5 / 5
                     ```
             12:
                 story_text: |-
-                    **Decimal numbers**
-                    So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.
+                    **Números Decimais**
+                    Até o momento, Hedy não permitia números decimais como 1.5. Deste nível em diante, você poderá usá-los. Note que computadores usam `.` em números decimais.
                 example_code: |
                     ```
-                    {print} 'Two and a half plus two and a half is...'
+                    {print} 'Dois e meio mais dois e meio é...'
                     {print} 2.5 + 2.5
                     ```
                 story_text_2: |-
@@ -3088,13 +3091,13 @@ adventures:
                     {print} ('Early in the morning')
                     ```
     parrot:
-        name: Papagaio
-        default_save_name: Papagaio
-        description: Crie seu próprio papagaio de estimação online que irá copiar você!
+        name: Papagaia
+        default_save_name: Papagaia
+        description: Crie sua própria papagaia de estimação online que irá copiar você!
         levels:
             1:
                 story_text: |
-                    Crie seu próprio papagaio de estimação online que irá copiar você!
+                    Crie sua própria papagaia de estimação online que irá copiar você!
                 example_code: |
                     ```
                     {print} Sou Hedy, a papagaia
@@ -3104,9 +3107,9 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercício
-                    Copie o código exemplo à sua tela de entrada clicando no botão amarelo.
-                    Faça o papagaio perguntar outra coisa. Preencha as lacunas no exemplo!
-                    **Extra** Você também pode deixar o papagaio fazer múltiplas perguntas. Escreva mais algumas linhas de código embaixo de seu programa.
+                    Copie o código exemplo para sua tela de entrada clicando no botão amarelo.
+                    Faça a papagaia perguntar outra coisa. Preencha as lacunas no exemplo!
+                    **Extra** Você também pode deixar a papagaia fazer múltiplas perguntas. Escreva mais algumas linhas de código embaixo de seu programa.
                 example_code_2: |
                     ```
                     {print} Sou Hedy, a papagaia
@@ -3115,23 +3118,26 @@ adventures:
                     {echo}
             2:
                 story_text: |
-                    Crie seu próprio papagaio de estimação online que irá copiar você!
+                    Crie sua própria papagaia de estimação online que irá copiar você!
                 example_code: |
                     ```
                     {print} Sou Hedy, a papagaia
                     nome _ _ qual é o seu nome?
                     {print} nome
                     _
-                    {print} crrác
+                    {print} grasnido
                     _
                     {print} nome
                     ```
                 story_text_2: |
-                    ### Exercise
-                    You can use variables to make the parrot say more than only your name. Can you complete this code?
+                    ### Exercício
+                    Primeiramente, complete a linha 2 com os comando `{is}` e `{ask}`.
+                    Em seguida, coloque um comando `{sleep}` nas linhas 4 e 6 para que a papagaia fique quieta por um tempo.
+
+                    **Extra** Você consegue fazer a papagaia pedir mais do que apenas seu nome adicionando mais linhas de código?
             3:
                 story_text: |
-                    Ensine ao seu papagaio uma nova palavra com `{add}`.
+                    Ensine a sua papagaia uma nova palavra com `{add}`.
                     ### Exercício
                     Você consegue adicionar o comando `{add} {to_list}` de modo a fazer o código funcionar?
                 example_code: |
@@ -3287,12 +3293,12 @@ adventures:
                     {print} Bem-vindo(a) à Hedy!
                     ```
                 story_text_2: |
-                    ### Exercise
-                    In Hedy you will find exercises in every adventure. An exercise allows you to practise the new commands and concepts, and lets you give your own twist to the example codes.
-                    In this exercise you will see a pink blank space. You have to fill something in the place of the blank space before the code can be run.
+                    ### Exercício
+                    Em Hedy você encontrará exercícios em todas as aventuras. Um exercício permite que você pratique os novos comandos e conceitos além de permitir que você dê seu toque pessoal aos códigos de exemplo.
+                    Neste exercício você verá um espaço em branco de cor rosa. Você deve preencher algo no lugar do espaço em branco antes que o código possa ser executado.
 
-                    Fill in the `{print}` command in the blank space and then add five more lines of code. Each line has to start with a `{print}` command.
-                    Have fun!
+                    Coloque o comando `{print}` no espaço em branco e então adicione mais cinco linhas de código. Cada linha precisa começar com o comando `{print}`.
+                    Divirta-se!
                 example_code_2: |
                     ```
                     _ Olá!
@@ -3432,15 +3438,15 @@ adventures:
                     {print} Vou comer comida {at} {random} no almoço.
                     ```
                 story_text_3: |
-                    ### Exercise
-                    Try out the `{at} {random}` command by making your own gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
-                    Can you do it? We have already put the first lines into the example code.
+                    ### Exercício
+                    Experimente o comando `{at} {random}` criando seu próprio concurso de televisão onde você escolhe uma porta ou mala e ela contém um grande prêmio em dinheiro!
+                    Consegue fazer isso? Já colocamos as primeiras linhas no código de exemplo.
                 example_code_3: |
                     ```
-                    {print} The big gameshow!
-                    {print} There are 3 suitcases in front of you...
-                    chosen {is} {ask} Which suitcase do you choose?
-                    prices {is} _
+                    {print} O grande concurso de televisão!
+                    {print} Tem 3 malas na sua frente...
+                    escolhida {is} {ask} Qual mala você escolhe?
+                    premio_em_dinheiro {is} _
                     _
                     ```
             16:
@@ -3552,7 +3558,7 @@ adventures:
                     _ {print} 'Do you know the muffin man, who lives on Drury Lane?'
                     ```
     restaurant:
-        name: Restaurant
+        name: Restaurante
         default_save_name: Restaurante
         description: Crie seu próprio restaurante virtual
         levels:
@@ -3571,34 +3577,45 @@ adventures:
                     ```
             2:
                 story_text: |
-                    In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.
-                    Now you can use variables and Hedy can remember both the food and the drinks!
+                    No nível 2 você pode expandir seu restaurante usando variáveis. No nível 1, Hedy só conseguia executar {eco} no pedido uma vez e só se lembrava da última coisa que foi pedida.
+                    Agora você pode usar variáveis e Hedy poderá se lembrar tanto da comida quanto das bebidas!
                 example_code: |
                     ```
                     {print} Bem-vindo(a) ao restaurante da Hedy!
                     {print} Hoje estamos servimos pizza ou lasanha.
                     comida {is} {ask} O que você gostaria de comer?
-                    {print} Ótima escolha! comida é minha favorita!
-                    cobertura {is} {ask} Gostaria dela com carne ou com vegetais?
-                    {print} comida com cobertura a caminho!
+                    {print} Ótima escolha! Essa comida é minha favorita!
+                    acompanhamento {is} {ask} Gostaria da comida com carne ou com vegetais?
+                    {print} comida com acompanhamento a caminho!
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Can you make this code more elaborate? For example by adding drinks to the order? Or...?
+                    ### Exercício
+                    Copie o código do seu próprio restaurante do nível anterior para a tela de entrada abaixo.
+                    Corrija o código substituindo os comandos `{ask}` e `{echo}` e usando variáveis, como você aprendeu neste nível.
+
+                    Agora que seu código está funcionando novamente, é hora de adicionar algo mais.
+                    Veja a última linha do código de exemplo: `{print} comida com acompanhamento a caminho!`
+                    Nesta única linha foram utilizadas 2 variáveis para criar um resumo do pedido.
+                    Agora adicione seu próprio resumo das comidas e bebidas que o cliente pediu.
+
+                    **Extra** Agora que você aprendeu como usar variáveis, você pode usar quantas variáveis desejar em uma linha. Você pode adicionar mais variáveis ao seu código, como comer no local ou levar, dinheiro ou cartão, com ou sem canudo, etc.?
             3:
                 story_text: |
-                    Having trouble to decide what you wanna have for dinner? You can let Hedy choose for you!
-                    Simply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.
-                    You can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?
+                    Está tendo problemas para decidir o que quer jantar? Você pode deixar Hedy escolher por você!
+                    Basta adicionar listas de suas refeições favoritas (ou menos favoritas) e Hedy poderá escolher seu jantar aleatoriamente.
+                    Você também pode se divertir um pouco, deixando Hedy escolher o preço do seu jantar também! O que você vai conseguir?
                 example_code: |
                     ```
-                    dishes {is} spaghetti, brussels sprouts, hamburgers
-                    {print} You will have dishes {at} {random} tonight!
-                    prices {is} 1 euro, 10 euros, 100 euros
-                    {print} That will be prices {at} {random} please.
+                    pratos {is} espaguete, couve de Bruxelas, hambúrgueres
+                    {print} Você terá pratos {at} {random} esta noite!
+                    preços {is} 1 euro, 10 euros, 100 euros
+                    {print} Isso custará preços {at} {random}, por favor.
                     ```
                 story_text_2: |
-                    Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.
+                    ### Exercício
+                    Agora faça sua própria versão do restaurante aleatório.
+                    Faça você mesmo uma lista de entradas, pratos principais, sobremesas, bebidas e preços.
+                    Em seguida, use os comandos `{print}` e `{at} {random}` para informar ao cliente o que estará em seu menu esta noite.
                 example_code_2: |
                     ```
                     {print} Bem-vindo(a) ao seu próprio restaurante aleatório!
@@ -3814,9 +3831,9 @@ adventures:
                     {echo} então sua escolha foi:
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Instead of using words, you could also use emojis: ✊✋✌
-                    Can you create a code using emojis?
+                    ### Exercício
+                    Em vez de usar palavras, você também pode usar emojis: ✊✋✌
+                    Você consegue criar um código usando emojis?
                 example_code_2: |
                     ```
                     {print} o que você escolhe?
@@ -3825,7 +3842,7 @@ adventures:
                     ```
             2:
                 story_text: |
-                    In this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!
+                    Neste nível você pode praticar o uso das variáveis, então você poderá fazer o jogo da pedra, papel e tesoura no próximo nível!
                 example_code: |-
                     ```
                     escolha {is} pedra
@@ -4136,8 +4153,11 @@ adventures:
         levels:
             2:
                 story_text: |
-                    ## The sleep command
-                    Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.
+                    ## O comando {sleep}
+                    Outro novo comando neste nível é o `{sleep}`, que pausa seu programa por um tempo. Se você digitar um número ao lado direito do comando {sleep}, o programa fará uma pausa por um período em segundos corresponde a esse número.
+
+                    ### Exercício
+                    Pratique este novo comando criando seu próprio código no qual você usa o comando {sleep} pelo menos 3 vezes. O tempo de pausa deve ser diferente para cada vez que usar o comando {sleep}.
                 example_code: |
                     ```
                     {print} Minha cor favorita é...

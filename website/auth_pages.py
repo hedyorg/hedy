@@ -16,6 +16,7 @@ from website.auth import (
     check_password,
     create_recover_link,
     create_verify_link,
+    current_user,
     forget_current_user,
     is_admin,
     is_teacher,
@@ -27,6 +28,7 @@ from website.auth import (
     requires_login,
     send_email,
     send_email_template,
+    send_localized_email_template,
     validate_signup_data,
 )
 
@@ -223,9 +225,9 @@ class AuthModule(WebsiteModule):
         if not user:
             return make_response(gettext("username_invalid"), 403)
 
-        # If user is already verified -> re-direct to landing-page anyway
+        # If user is already verified -> re-direct to hedy page
         if "verification_pending" not in user:
-            return redirect("/landing-page")
+            return redirect("/hedy")
 
         # Verify the token
         if token != user["verification_pending"]:
@@ -239,7 +241,34 @@ class AuthModule(WebsiteModule):
         self.db.store_token({"id": cookie, "username": user["username"], "ttl": times() + SESSION_LENGTH})
         remember_current_user(user)
 
-        return redirect("/landing-page")
+        return redirect("/hedy")
+
+    @route("/turn-into-teacher", methods=['POST'])
+    def turn_into_teacher_account(self):
+        username = current_user()['username']
+        if not username:
+            return make_response(gettext("username_invalid"), 400)
+        user = self.db.user_by_username(username)
+        if not user:
+            return make_response(gettext("username_invalid"), 403)
+
+        # We update the user in the database and turn it into a teacher
+        self.db.update_user(user['username'], {"is_teacher": 1})
+
+        if user.get("email"):
+            try:
+                send_localized_email_template(
+                    locale=user["language"], template="welcome_teacher", email=user["email"], username=user["username"]
+                )
+            except Exception:
+                print(f"An error occurred when sending a welcome teacher mail to {user['email']}, "
+                      "changes still processed")
+
+        session.get('user')['is_teacher'] = True
+        session['welcome-teacher'] = True
+
+        # TODO: Redirect the user to a tutorial page
+        return make_response({'message': gettext('turned_into_teacher')}, 200)
 
     @route("/logout", methods=["POST"])
     def logout(self):
@@ -416,18 +445,6 @@ class AuthModule(WebsiteModule):
 
         return make_response({"message": gettext("password_resetted")}, 200)
 
-    @route("/request_teacher", methods=["POST"])
-    @requires_login
-    def request_teacher_account(self, user):
-        account = self.db.user_by_username(user["username"])
-        if account.get("is_teacher"):
-            return make_response(gettext("already_teacher"), 400)
-        if account.get("teacher_request"):
-            return make_response(gettext("already_teacher_request"), 400)
-
-        self.db.update_user(user["username"], {"teacher_request": True})
-        return make_response({"message": gettext("teacher_account_success")}, 200)
-
     def store_new_account(self, account, email):
         username, hashed, hashed_token = prepare_user_db(account["username"], account["password"])
         user = {
@@ -438,7 +455,7 @@ class AuthModule(WebsiteModule):
             "language": account["language"],
             "keyword_language": account["keyword_language"],
             "created": timems(),
-            "teacher_request": True if account.get("is_teacher") else None,
+            "is_teacher": True if account.get("is_teacher") else None,
             "verification_pending": hashed_token,
             "last_login": timems(),
             "pair_with_teacher": 1 if account.get("pair_with_teacher") else 0,
@@ -472,3 +489,42 @@ class AuthModule(WebsiteModule):
                 return user, make_response({gettext("mail_error_change_processed")}, 400)
             resp = make_response('', 200)
         return user, resp
+
+    @route('/public_profile', methods=['POST'])
+    @requires_login
+    def update_public_profile(self, user):
+        body = request.json
+
+        # Validations
+        if not isinstance(body, dict):
+            return make_response(gettext('ajax_error'), 400)
+        # The images are given as a "picture id" from 1 till 12
+        if not isinstance(body.get('image'), str) or int(body.get('image'), 0) not in [*range(1, 13)]:
+            return make_response(gettext('image_invalid'), 400)
+        if not isinstance(body.get('personal_text'), str):
+            return make_response(gettext('personal_text_invalid'), 400)
+        if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
+            return make_response(gettext('favourite_program_invalid'), 400)
+
+        # Verify that the set favourite program is actually from the user (and public)!
+        if 'favourite_program' in body:
+            program = self.db.program_by_id(body.get('favourite_program'))
+            if not program or program.get('username') != user['username'] or not program.get('public'):
+                return make_response(gettext('favourite_program_invalid'), 400)
+        current_profile = self.db.get_public_profile_settings(user['username'])
+
+        # Make sure the session value for the profile image is up-to-date
+        session['profile_image'] = body.get('image')
+
+        # If there is no current profile or if it doesn't have the tags list ->
+        # check if the user is a teacher / admin
+        if not current_profile or not current_profile.get('tags'):
+            body['tags'] = []
+            if is_teacher(user):
+                body['tags'].append('teacher')
+            if is_admin(user):
+                body['tags'].append('admin')
+
+        self.db.update_public_profile(user['username'], body)
+        response = {"message": gettext("public_profile_updated")}
+        return response

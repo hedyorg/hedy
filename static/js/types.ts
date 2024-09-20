@@ -84,10 +84,3 @@ export interface Program {
   code: string;
   adventure_name?: string;
 }
-
-/**
- * Definition of an achievement
- *
- * Array of [title, text, statistics].
- */
-export type Achievement = [string, string, string];

@@ -5,7 +5,7 @@ import * as Tone from 'tone'
 import { Tabs } from './tabs';
 import { MessageKey } from './message-translations';
 import { turtle_prefix, pressed_prefix, normal_prefix, music_prefix } from './pythonPrefixes'
-import { Achievement, Adventure, isServerSaveInfo, ServerSaveInfo } from './types';
+import { Adventure, isServerSaveInfo, ServerSaveInfo } from './types';
 import { startIntroTutorial } from './tutorials/tutorial';
 import { get_parsons_code, initializeParsons, loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
@@ -25,7 +25,6 @@ import { stopDebug } from "./debugging";
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
 import { initializeActivity } from './user-activity';
-
 export let theGlobalDebugger: any;
 export let theGlobalEditor: HedyEditor;
 export let theModalEditor: HedyEditor;
@@ -118,6 +117,7 @@ const slides_template = `
 </html>
 `;
 
+
 export interface InitializeAppOptions {
   readonly level: number;
   readonly keywordLanguage: string;
@@ -191,6 +191,7 @@ export interface InitializeCodePageOptions {
   readonly initial_tab: string;
   readonly current_user_name?: string;
   readonly suppress_save_and_load_for_slides?: boolean;
+  readonly enforce_developers_mode?: boolean;
 }
 
 /**
@@ -254,8 +255,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
         adventure.save_info = 'local-storage';
       }
     }
-
-    reconfigurePageBasedOnTab();
+    reconfigurePageBasedOnTab(options.enforce_developers_mode);
     checkNow();
     theLocalSaveWarning.switchTab();
   });
@@ -564,7 +564,7 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
           save_name: saveNameFromInput(),
         };
 
-        let response = await postJsonWithAchievements('/parse', data);
+        let response = await postJson('/parse', data);
         program_data = response;
         console.log('Response', response);
         if (response.Warning && $('#editor').is(":visible")) {
@@ -572,7 +572,7 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
           error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
         }
 
-        showAchievements(response.achievements, false, "");
+        
         if (adventure && response.save_info) {
           adventure.save_info = response.save_info;
           adventure.editor_contents = code;
@@ -616,7 +616,7 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
 }
 
 export async function saveMachineFiles() {
-  const response = await postJsonWithAchievements('/generate_machine_files', {
+  const response = await postJson('/generate_machine_files', {
     level: theLevel,
     code: get_active_and_trimmed_code(),
     lang: theLanguage,
@@ -626,86 +626,6 @@ export async function saveMachineFiles() {
     // Download the file
     window.location.replace('/download_machine_files/' + response.filename);
   }
-}
-
-// We've observed that this code may gets invoked 100s of times in quick succession. Don't
-// ever push the same achievement more than once per page load to avoid this.
-const ACHIEVEMENTS_PUSHED: Record<string, boolean> = {};
-
-export async function pushAchievement(achievement: string) {
-  if (ACHIEVEMENTS_PUSHED[achievement]) {
-    return;
-  }
-  ACHIEVEMENTS_PUSHED[achievement] = true;
-
-  try {
-    const response = await postJson('/achievements/push-achievement', { achievement });
-    showAchievements(response.achievements, false, "");
-  } catch {
-    // This might fail commonly with a 403 (not logged in). Ignore any errors anyway.
-  }
-}
-
-export function closeAchievement() {
-  $('#achievement_pop_up').hide();
-  if ($('#achievement_pop_up').attr('reload')) {
-    $('#achievement_pop_up').removeAttr('reload');
-    $('#achievement_pop_up').removeAttr('redirect');
-    return location.reload();
-  }
-  if ($('#achievement_pop_up').attr('redirect')) {
-    const redirect = <string>$('#achievement_pop_up').attr('redirect');
-    $('#achievement_pop_up').removeAttr('reload');
-    $('#achievement_pop_up').removeAttr('redirect');
-    return window.location.pathname = redirect;
-  }
-  // If for some reason both situation don't happen we still want to make sure the attributes are removed
-  $('#achievement_pop_up').removeAttr('reload');
-  $('#achievement_pop_up').removeAttr('redirect');
-}
-
-export async function showAchievements(achievements: Achievement[] | undefined, reload: boolean, redirect: string) {
-  if (!achievements || achievements.length === 0) {
-    return;
-  }
-
-  for (const achievement of achievements) {
-    await showAchievement(achievement);
-  }
-
-  if (reload) {
-    $('#achievement_pop_up').attr('reload', 'true');
-    setTimeout(function(){
-      $('#achievement_pop_up').removeAttr('reload');
-      $('#achievement_pop_up').removeAttr('redirect');
-      location.reload();
-     }, achievements.length * 3000);
-  }
-  if (redirect) {
-    $('#achievement_pop_up').attr('redirect', redirect);
-    setTimeout(function(){
-      $('#achievement_pop_up').removeAttr('reload');
-      $('#achievement_pop_up').removeAttr('redirect');
-      window.location.pathname = redirect;
-     }, achievements.length * 3000);
-  }
-}
-
-function showAchievement(achievement: Achievement) {
-  return new Promise<void>((resolve)=>{
-        $('#achievement_reached_title').text('"' + achievement[0] + '"');
-        $('#achievement_reached_text').text(achievement[1]);
-        $('#achievement_reached_statics').text(achievement[2]);
-        $('#achievement_pop_up').fadeIn(1000, function () {
-          setTimeout(function(){
-            $('#achievement_pop_up').fadeOut(1000);
-           }, 1000);
-        });
-        setTimeout(()=>{
-            resolve();
-        ;} , 1000
-        );
-    });
 }
 
 function removeBulb(){
@@ -791,8 +711,8 @@ export async function delete_program(id: string, prompt: string) {
     updateSelectOptions('adventure');
     // this function decreases the total programs saved
     updateProgramCount();
-    const response = await postJsonWithAchievements('/programs/delete', { id });    
-    showAchievements(response.achievement, true, "");
+    const response = await postJson('/programs/delete', { id });    
+    
     // issue request on the Bar component.
     modal.notifySuccess(response.message);
   });
@@ -814,7 +734,7 @@ export async function set_favourite_program(id: string, promptSet: string, promp
   let set = JSON.parse($('#favourite_program_container_' + id).attr("data-starred")?.toLowerCase() || "");
   await modal.confirmP(set ? promptUnset : promptSet);
   await tryCatchPopup(async () => {
-    const response = await postJsonWithAchievements('/programs/set_favourite', { id, set: !set });
+    const response = await postJson('/programs/set_favourite', { id, set: !set });
     // TODO: response with 200, assumed.
     set_favourite(id, !set)
     modal.notifySuccess(response.message);
@@ -833,14 +753,14 @@ function change_to_submitted (id: string) {
 
 export function submit_program (id: string) {
   tryCatchPopup(async () => {
-    await postJsonWithAchievements('/programs/submit', { id });
+    await postJson('/programs/submit', { id });
     change_to_submitted(id);
   });
 }
 
 export function unsubmit_program (id: string) {
   tryCatchPopup(async () => {
-    const response = await postJsonWithAchievements('/programs/unsubmit', { id });
+    const response = await postJson('/programs/unsubmit', { id });
     modal.notifySuccess(response.message);
   });
 }
@@ -853,7 +773,7 @@ export async function set_explore_favourite(id: string, favourite: number) {
   await modal.confirmP(prompt);
 
   await tryCatchPopup(async () => {
-    const response = await postJsonWithAchievements('/programs/set_hedy_choice', {
+    const response = await postJson('/programs/set_hedy_choice', {
       id: id,
       favourite: favourite
     });
@@ -867,7 +787,7 @@ export async function set_explore_favourite(id: string, favourite: number) {
 export function report_program(prompt: string, id: string) {
   tryCatchPopup(async () => {
     await modal.confirmP(prompt);
-    const response = await postJsonWithAchievements('/programs/report', { id });
+    const response = await postJson('/programs/report', { id });
     modal.notifySuccess(response.message);
   });
 }
@@ -901,7 +821,7 @@ export function copy_to_clipboard (string: string, prompt: string) {
  * Do a POST with the error to the server so we can log it
  */
 function reportClientError(level: number, code: string, client_error: string) {
-  postJsonWithAchievements('/report_error', {
+  postJson('/report_error', {
     level: `${level}`,
     code: code,
     page: window.location.href,
@@ -910,7 +830,7 @@ function reportClientError(level: number, code: string, client_error: string) {
 }
 
 window.onerror = function reportClientException(message, source, line_number, column_number, error) {
-  postJsonWithAchievements('/client_exception', {
+  postJson('/client_exception', {
     message: message,
     source: source,
     line_number: line_number,
@@ -988,7 +908,6 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 
   if (hasTurtle) {
     code_prefix += turtle_prefix;
-    resetTurtleTarget();
     $('#turtlecanvas').show();
   }
 
@@ -1061,8 +980,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         $('#stopit').hide();
         $('#runit').show();
         $('#runit').show();
-        if (Sk.execLimit != 1) {
-          pushAchievement("hedy_hacking");
+        if (Sk.execLimit != 1) {          
           return ClientMessages ['Program_too_long'];
         } else {
           return null;
@@ -1073,8 +991,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       // So: a very large limit in these levels, keep the limit on other ones.
       execLimit: (function () {
         const level = theLevel;
-        if (hasTurtle || hasMusic) {
-          // We don't want a timeout when using the turtle or music -> just set one for 10 minutes
+        if (hasTurtle || hasPressed || hasMusic) {
+          // We don't want a timeout when using the turtle, if_pressed or music -> just set one for 10 minutes
           return (6000000);
         }
         if (level < 7) {
@@ -1111,8 +1029,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       }
 
       // Check if the program was correct but the output window is empty: Return a warning
-      if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty') && !hasMusic) {
-        pushAchievement("error_or_empty");
+      if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty') && !hasMusic) {        
         error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);
         return;
       }
@@ -1203,6 +1120,9 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
     });
 
   } else {
+    // Disable continue button, until the current instruction is completed.
+    // The button is enabled again in incrementDebugLine()
+    document.getElementById('debug_continue')!.setAttribute('disabled', 'disabled');
     // maybe remove debug marker here
     return theGlobalDebugger.continueForward()
       .catch(function(err: any) {
@@ -1320,24 +1240,6 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   }
 }
 
-function resetTurtleTarget() {
-    if (Sk.TurtleGraphics !== undefined) {
-
-      let selector = Sk.TurtleGraphics.target;
-      let target = typeof selector === "string" ? document.getElementById(selector) : selector;
-      if (target !== null && target !== undefined){
-        // clear canvas container
-        while (target.firstChild) {
-          target.removeChild(target.firstChild);
-        }
-        return target;
-      }
-
-    }
-
-    return null;
-}
-
 function speak(text: string) {
   var selectedURI = $('#speak_dropdown').val();
   if (!selectedURI) { return; }
@@ -1349,7 +1251,6 @@ function speak(text: string) {
     utterance.rate = 0.9;
     speechSynthesis.speak(utterance);
   }
-  pushAchievement("make_some_noise");
 }
 
 function initializeSpeech() {
@@ -1409,7 +1310,7 @@ export function load_quiz(level: string) {
 
 export async function store_parsons_attempt(order: Array<string>, correct: boolean) {
   try {
-    await postJsonWithAchievements('/store_parsons_order', {
+    await postJson('/store_parsons_order', {
       level: theLevel,
       exercise: $('#next_parson_button').attr('current_exercise'),
       order: order,
@@ -1513,17 +1414,14 @@ export function setDevelopersMode(event='click', enforceDevMode: boolean) {
     case 'click':
       // Toggled
       enable = $('#developers_toggle').prop('checked');
-      if (enable) {
-        pushAchievement("lets_focus");
-      }
       break;
   }
-  window.localStorage.setItem('developer_mode', `${enable}`)
-  toggleDevelopersMode()
+  if (!enforceDevMode) window.localStorage.setItem('developer_mode', `${enable}`)
+  toggleDevelopersMode(!!enforceDevMode)
 }
 
-function toggleDevelopersMode() {
-  const enable = window.localStorage.getItem('developer_mode') === 'true';
+function toggleDevelopersMode(enforceDevMode: boolean) {
+  const enable = window.localStorage.getItem('developer_mode') === 'true' || enforceDevMode;
   // DevMode hides the tabs and makes resizable elements track the appropriate size.
   // (Driving from HTML attributes is more flexible on what gets resized, and avoids duplicating
   // size literals between HTML and JavaScript).
@@ -1537,29 +1435,29 @@ function toggleDevelopersMode() {
 }
 
 export function saveForTeacherTable(table: string) {
-  let open = window.localStorage.getItem(table);
+  let show_table = window.localStorage.getItem(table);
+  window.localStorage.setItem(table, (show_table !== 'true').toString())
   const arrow = document.querySelector('#' + table + '_arrow') as HTMLElement;
-  if (open == 'true'){
-    window.localStorage.setItem(table, 'false')
-    $('#' + table).hide();
-    arrow.classList.remove('rotate-180');
-  } else {
-    window.localStorage.setItem(table, 'true')
-    $('#' + table).show();
-    arrow.classList.add('rotate-180');
-  }
+  const table_ele = document.getElementById(table)!
+  const show_label = document.getElementById(table + '_show')!
+  const hide_label = document.getElementById(table + '_hide')!
+  table_ele.classList.toggle('hidden')
+  show_label.classList.toggle('hidden')
+  hide_label.classList.toggle('hidden')
+  arrow.classList.toggle('rotate-180');
 }
 
 export function getForTeacherTable(table: string) {
-  let open = window.localStorage.getItem(table);
-  const arrow = document.querySelector('#' + table + '_arrow') as HTMLElement;
-  if (open == 'true'){
-    $('#' + table).show();
-    arrow.classList.add('rotate-180');
-  } else {
-    $('#' + table).hide()
-    arrow.classList.remove('rotate-180');
-  }
+  let show_table = window.localStorage.getItem(table);
+  const table_ele = document.getElementById(table)!
+  const arrow = document.getElementById(table + '_arrow')!;
+  const show_label = document.getElementById(table + '_show')!
+  const hide_label = document.getElementById(table + '_hide')!
+
+  table_ele.classList.toggle('hidden', show_table !== 'true');
+  show_label.classList.toggle('hidden', show_table === 'true');
+  hide_label.classList.toggle('hidden', show_table !== 'true');
+  arrow.classList.toggle('rotate-180', show_table === 'true');
 }
 
 /**
@@ -1576,7 +1474,7 @@ export async function tryCatchErrorBox(cb: () => void | Promise<void>) {
 
 export function toggle_keyword_language(current_lang: string, new_lang: string) {
   tryCatchErrorBox(async () => {
-    const response = await postJsonWithAchievements('/translate_keywords', {
+    const response = await postJson('/translate_keywords', {
       code: theGlobalEditor.contents,
       start_lang: current_lang,
       goal_lang: new_lang,
@@ -1627,7 +1525,7 @@ export function toggle_blur_code() {
 
 export async function change_language(lang: string) {
   await tryCatchPopup(async () => {
-    const response = await postJsonWithAchievements('/change_language', { lang });
+    const response = await postJson('/change_language', { lang });
     if (response) {
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
@@ -1642,18 +1540,6 @@ export async function change_language(lang: string) {
     }
   });
 }
-
-/**
- * Post JSON, return the result on success, throw an exception on failure
- *
- * Automatically handles any achievements the server might send our way.
- */
-async function postJsonWithAchievements(url: string, data: any): Promise<any> {
-  const response = await postJson(url, data);
-  showAchievements(response.achievement, true, "");
-  return response;
-}
-
 
 function update_view(selector_container: string, new_lang: string) {
   $('#' + selector_container + ' > div').map(function() {
@@ -1826,11 +1712,11 @@ function updatePageElements() {
 /**
  * After switching tabs, show/hide elements
  */
-function reconfigurePageBasedOnTab() {
+function reconfigurePageBasedOnTab(enforceDevMode?: boolean) {
   resetWindow();
 
   updatePageElements();
-  toggleDevelopersMode();
+  toggleDevelopersMode(!!enforceDevMode);
   if (currentTab === 'parsons') {
     loadParsonsExercise(theLevel, 1);
     // remove the fixed height from the editor
@@ -1888,7 +1774,7 @@ function initializeHandInButton() {
         if (!saveInfo) {
           throw new Error('This program does not have an id');
         }
-        const response = await postJsonWithAchievements('/programs/submit', {
+        const response = await postJson('/programs/submit', {
           id: saveInfo.id,
         });
 
@@ -1987,7 +1873,7 @@ async function saveIfNecessary() {
 
   if (theUserIsLoggedIn && saveName) {
     const saveInfo = isServerSaveInfo(adventure.save_info) ? adventure.save_info : undefined;
-    const response = await postJsonWithAchievements('/programs', {
+    const response = await postJson('/programs', {
       level: theLevel,
       lang:  theLanguage,
       name:  saveName,
