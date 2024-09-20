@@ -425,7 +425,7 @@ levels:
             code: '{print} ''5 minus 5 to '' 5 - 5'
         4:
             header: Mnożenie
-            text: Jeśli chcesz wykonywać mnożenia, możesz użyć gwiazdki
+            text: Jeśli chcesz wykonywać mnożenie, możesz użyć gwiazdki.
             code: '{print} ''5 razy 5 to '' 5 * 5'
         5:
             header: Dzielenie
@@ -498,14 +498,14 @@ levels:
             debug: 'True'
         4:
             header: Powtórz polecenie ask
-            text: You can also repeat an `{ask}`, `{if}` or `{else}` command multiple times.
+            text: Możesz także wielokrotnie powtarzać polecenie `{ ask }`, `{ if }` lub `{ else }`.
             code: |-
                 {repeat} 2 {times} odpowiedź = {ask} 'Czy wiesz, że możesz zadać pytanie wiele razy?'
                 {if} odpowiedź {is} tak {repeat} 2 {times} {print} 'Już to wiedziałeś!'
                 {else} {repeat} 3 {times} {print} 'Nauczyłeś się czegoś nowego!'
         5:
-            header: Debugging
-            text: Let's debug this code!
+            header: Debuggowanie
+            text: Zdebuggujmy ten kod!
             code: |-
                 {print} Utknąłeś na bezludnej wyspie.
                 {repeat} 3 'Pomocy!'
@@ -524,22 +524,22 @@ levels:
     8:
         1:
             header: Witamy na poziomie 8
-            text: In this level you will learn to use indentation to make the `{repeat}`, `{if}` and `{else}` commands work for multiple lines of code.
+            text: Na tym poziomie nauczysz się używać wcięcia, aby polecenia `{repeat}`, `{if}` i `{else}` działały dla wielu wierszy kod.
         2:
             header: 'polecenia {repeat} przed'
             text: |-
-                In the previous levels, the `{repeat}` command looked like this:
+                Na poprzednich poziomach polecenie `{repeat}` wyglądało następująco:
 
-                You could only repeat one line of code.
+                Możesz powtórzyć tylko jeden wiersz kodu.
             code: '{repeat} 5 {times} {print} ''Pomocy!'''
             debug: 'True'
         3:
             header: 'Polecenia {repeat} teraz'
             text: |-
-                In this level you can repeat multiple lines of code. To do this you must tell the computer which lines belong together and should be repeated.
-                You do this by using indentation.
+                Na tym poziomie możesz powtórzyć wiele wierszy kodu. Aby to zrobić, musisz powiedzieć komputerowi, które linie należą do siebie i powinny zostać powtórzone.
+                Robisz to za pomocą wcięcia.
 
-                Use 4 spaces (or one tab) at the beginning of each line that you want to repeat, like this:
+                Użyj 4 spacji (lub jednego tab) na początku każdej linii, którą chcesz powtórzyć, w następujący sposób:
             code: |-
                 {repeat} 5 {times}
                     {print} 'Cześć wszystkim'
@@ -547,8 +547,8 @@ levels:
         4:
             header: 'Polecenia {repeat} teraz'
             text: |-
-                If you want to, you can continue after the `{repeat}` command without indentation.
-                The lines that do not start with indentation will not be repeated.
+                Jeśli chcesz, możesz kontynuować po poleceniu `{repeat}` bez wcięcia.
+                Linie, które nie zaczynają się od wcięcia, nie będą się powtarzać.
             code: |-
                 {repeat} 3 {times}
                     {print} 'Cześć!'
@@ -556,8 +556,8 @@ levels:
         5:
             header: polecenie if i else przed
             text: |-
-                The same goes for the `{if}` and `{else}` commands.
-                These were the commands before:
+                To samo dotyczy poleceń `{ if }` i` { else }`.
+                Były to polecenia wcześniej:
             code: |-
                 {if} imię{is} Hedy {print} 'fajnie'
                 {else} {print} 'boo!'
@@ -565,8 +565,8 @@ levels:
         6:
             header: Polecenie if i else teraz
             text: |-
-                These are the `{if}` and `{else}` commands now.
-                Each line after the `{if}` and `{else}` commands start with indentation.
+                Są to teraz polecenia `{ if }` i `{ else }`.
+                Każda linia po poleceniach '{ if }' i `{ else } `zaczyna się od wcięcia.
             code: |-
                 imię = {ask} 'Jak masz na imię?'
                 {if} imię {is} Hedy
@@ -575,16 +575,16 @@ levels:
                     {print} 'Witaj programisto!'
         7:
             header: zatrzymanie wcięcia
-            text: Just like with the `{repeat}` command, you can stop using indentation and the lines will always be shown. Not just if the statement is true.
+            text: Podobnie jak w przypadku polecenia `{repeat}`, możesz przestać używać wcięcia, a wiersze będą zawsze wyświetlane. Nie tylko jeśli stwierdzenie jest prawdziwe.
             code: "imię = {ask} 'jak masz na imię?'\n{if} imię {is} Hedy\n    {print} 'Witaj Hedy'\n{else}\n    {print} 'Witaj programisto!' \n{print} '3..2..1.. Zacznij programować!'"
         8:
             header: wyrażenie if wewnątrz wyrażenia if
             text: |-
-                You might have thought of trying to put an if command inside a repeat command, or inside another if command.
-                For now, this is not possible yet. In the higher levels, it will be allowed, but for now let's focus on practising the `{if}` `{else}` and `{repeat}` commands with proper indentation first.
+                Być może pomyślałeś o próbie umieszczenia polecenia if w poleceniu repeat lub w innym poleceniu if.
+                Na razie nie jest to jeszcze możliwe. Na wyższych poziomach będzie to dozwolone, ale na razie skupmy się na ćwiczeniu poleceń { if } `{ else }` i `{repeat}` z właściwym wcięciem pierwszy.
         9:
-            header: Debugging
-            text: Let's debug this code!
+            header: Debuggowanie
+            text: Zdebugguj ten kod!
             code: |-
                 {print} 'Automat biletowy busa HedyWheels
                 strefa_1 = Ratusz, biblioteka, kampus, rynek
@@ -612,12 +612,12 @@ levels:
         1:
             header: Witamy na poziomie 9
             text: |-
-                In this level you can use multiple lines of code after an `{if}` or after a `{repeat}` command.
+                Na tym poziomie możesz użyć wielu wierszy kodu po poleceniu `{ if }` lub po poleceniu `{repeat}`.
 
-                You can even put a `{repeat}` command within another `{repeat}`  command.
+                Możesz nawet umieścić polecenie `{repeat}` w innym poleceniu `{repeat}`.
         2:
             header: Wiele linii po `{repeat}`
-            text: You are allowed to combine `{repeat}` and `{if}` in this level.
+            text: Na tym poziomie możesz łączyć `{repeat}` i `{if}`.
             code: |-
                 {repeat} 3 {times}
                     posiłek = {ask} 'Co chcesz zjeść?'
@@ -627,15 +627,15 @@ levels:
                         {print} 'pizza jest lepsza'
         3:
             header: Wcięcie ma znaczenie!
-            text: Indentation is very important to tell the computer which lines should be repeated and which lines should only be ran once.
+            text: Wcięcie jest bardzo ważne, aby powiedzieć komputerowi, które linie należy powtórzyć, a które linie należy uruchomić tylko raz.
             code: |-
                 {repeat} 3 {times}
                     {print} 'Ta linia zostanie powtórzona...'
                     {print} 'Ta też...'
                 {print} 'ale ta nie będzie !'
         4:
-            header: Multiple lines after `{if}`
-            text: You can also use multiple lines after `{if}`
+            header: Wiele linii po `{ if }`
+            text: Możesz także użyć wielu linii po `{ if }`
             code: |-
                 kontynuować = {ask} 'Chcesz kontynuować?'
                 {if} kontynuować = tak
@@ -648,7 +648,7 @@ levels:
                     {print} 'nie chcesz kontynuować'
         5:
             header: Wcięcie ma znaczenie
-            text: Again, indentation is still very important and can make a big difference in the code.
+            text: Ponownie wcięcie jest nadal bardzo ważne i może mieć duży wpływ na kod.
             code: |-
                 kontynuować = {ask} 'Chcesz kontynuować?'
                 {if} kontynuować = tak
@@ -660,8 +660,8 @@ levels:
         6:
             header: "'{if}` wewnątrz `{repeat}`"
             text: |-
-                Now that you can use multiple lines of code after these command, you can also put them within each other.
-                Check it out:
+                Teraz, gdy możesz użyć wielu wierszy kodu po tym poleceniu, możesz również umieścić je w sobie.
+                Sprawdź to:
             code: |-
                 {repeat} 3 {times}
                     posiłek = {ask} 'Co chcesz zjeść?'
@@ -671,7 +671,7 @@ levels:
                         {print} 'pizza jest lepsza'
         7:
             header: Uważaj na wcięcie
-            text: Mind that the fourth and sixth line of this code starts with 8 spaces of indentation.
+            text: Pamiętaj, że czwarty i szósty wiersz tego kodu zaczyna się od 8 spacji wcięcia.
             code: |-
                 {repeat} 3 {times}
                     posiłek = {ask} 'Co chcesz zjeść?'
@@ -680,8 +680,8 @@ levels:
                     {else}
                         {print} 'pizza jest lepsza'
         8:
-            header: Debugging
-            text: Let's debug this code!
+            header: Debuggowanie
+            text: Zdebuggujmy ten kod!
             code: |-
                 {print} 'Witamy w HedyJumps, Twojej przygodzie - skok ze spadochronem!'
                 ludzie = {ask} 'Z iloma osobami skaczesz dzisiaj?
@@ -703,25 +703,25 @@ levels:
     10:
         1:
             header: Witamy na poziomie 10
-            text: 'In this level you will learn a new command: `{for}`.'
+            text: 'Na tym poziomie nauczysz się nowego polecenia: `{for}`.'
         2:
             header: polecenie for
-            text: With for you can make a list and use all items on that list. `{for}` creates a block, like repeat and if so all lines in the block need to start with indentation (4 spaces).
+            text: Za pomocą możesz zrobić listę i użyć wszystkich elementów z tej listy. `{for}` tworzy blok, jak powtórzenie, a jeśli tak, wszystkie linie w bloku muszą zaczynać się od wcięcia (4 spacje).
             code: |-
                 zwierzęta = pies, kot, kropelka
                 {for} zwierzę {in} zwierzęta
                     {print} 'Uwielbiam ' zwierzę
         3:
             header: Polecenie for
-            text: 'Here you see another example of the `{for}` command:'
+            text: 'Oto inny przykład polecenia `{for}`:'
             code: |-
                 dni = poniedziałek, wtorek, środa, czwartek, piątek, sobota, niedziela
                 imiona = mama, tata, Emma, Sophie
                 {for} dzień {in} dni
                     {print} imiona {at} {random} ' zmywa naczynia w ' dzień
         4:
-            header: Debugging
-            text: Let's debug this code
+            header: Debuggowanie
+            text: Zdebugguj ten kod
             code: |-
                 {print} 'Panie i Panowie!'
                 {print} 'Na jedną noc i jedną noc tylko w cyrku Hedy!'
@@ -741,12 +741,12 @@ levels:
         1:
             header: Witamy na poziomie 11
             text: |-
-                In this level, we add a new form of the `{for}` command. In earlier levels, we used for with a list, but we can also use for with numbers.
+                Na tym poziomie dodajemy nową formę polecenia `{for}`. Na wcześniejszych poziomach używaliśmy listy, ale możemy również używać liczb.
 
-                This way we don't need the `{repeat}` command anymore.
+                W ten sposób nie potrzebujemy już polecenia `{repeat}`.
         2:
             header: Polecenie for
-            text: 'This is what the new for command looks like:'
+            text: 'Tak wygląda nowa komenda:'
             code: |-
                 {for} licznik {in} {range} 1 {to} 10
                     {print} licznik
@@ -754,17 +754,17 @@ levels:
         3:
             header: Zmienna 'i'
             text: |-
-                In the previous slide the variable was named 'counter', because it was counting down.
-                You can of course use any name for the variable you want.
-                The standard name  for variables in this situation that is used in programming languages like Python is 'i'.
-                That looks like this:
+                W poprzednim slajdzie zmienna została nazwana 'counter', ponieważ odliczała.
+                Możesz oczywiście użyć dowolnej nazwy zmiennej, którą chcesz.
+                Standardowa nazwa zmiennych w tej sytuacji używana w językach programowania takich jak Python to „i”'.
+                To wygląda tak:
             code: |-
                 liczba = 10
                 {for} i {in} {range} 1 {to} 10
                     {print} i * liczba
         4:
-            header: Debugging
-            text: Let's debug this code!
+            header: Debuggowanie
+            text: Zdebugguj ten kod!
             code: |-
                 współczynnik {is} {ask} 'Jakiej tabeli mnożenia potrzebujesz?'
                 {repeat} {for} liczby{in} {range} 1 {to} 10 {times}
@@ -778,51 +778,51 @@ levels:
         1:
             header: Witamy na poziomie 12
             text: |-
-                From this level on you are allowed to use decimal numbers and there are some changes to the quotation marks.
-                You can also use functions from this level on!
+                Od tego poziomu możesz używać liczb dziesiętnych i istnieją pewne zmiany w cudzysłowie.
+                Możesz także korzystać z funkcji z tego poziomu!
         2:
             header: Cudzysłowie
             text: |-
-                This level makes some changes to the usage of quotation marks.
-                From now on, **all texts** need to be in quotation marks. This includes values of variables, items on lists and text after {if} commands.
+                Ten poziom wprowadza pewne zmiany w użyciu cudzysłowów.
+                Odtąd ** wszystkie teksty ** muszą znajdować się w cudzysłowie. Obejmuje to wartości zmiennych, pozycje na listach i tekst po poleceniach { if }.
             code: |-
                 imię = 'Robot Hedyt'
                 {print} 'Witaj ' imię
         3:
             header: Liczby dziesiętne
             text: |-
-                From this level on you are also allowed to use decimal numbers. This can make programs like your restaurant even better!
+                Od tego poziomu możesz także używać liczb dziesiętnych. Dzięki temu programy takie jak Twoja restauracja mogą być jeszcze lepsze!
 
-                Numbers do not need quotation marks.
+                Liczby nie potrzebują cudzysłowu.
             code: |-
                 {print} 'liczby dziesiętne muszą teraz używać kropki'
                 {print} 2.5 + 2.5
         4:
-            header: Functions!
+            header: Funkcje!
             text: |-
-                In this level you'll learn how to use functions. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again. To create a function, use define and give the function a name. Then put all the lines you want in the function in a indented block under the define line. Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
+                Na tym poziomie nauczysz się korzystać z funkcji. Funkcja to blok kodu, z którego można łatwo korzystać wiele razy. Korzystanie z funkcji pomaga nam organizować fragmenty kodu, które możemy używać wielokrotnie. Aby utworzyć funkcję, użyj zdefiniuj i nadaj funkcji nazwę. Następnie umieść wszystkie linie, które chcesz w funkcji, w wciętym bloku pod linią definiującą. Pozostaw jedną pustą linię w kodzie, aby wyglądała ładnie i schludnie. Świetna robota! Stworzyłeś funkcję!
 
-                Now, whenever we need that block of code, we just use call with the function's name to call it up! We don't have to type that block of code again.
+                Teraz, gdy potrzebujemy tego bloku kodu, po prostu używamy wywołania z nazwą funkcji, aby go wywołać! Nie musimy ponownie wpisywać tego bloku kodu.
         5:
             header: Gwiazdko gwiazdko świeć nam świeć!
             text: |-
                 W tym programie widzisz przykład funkcji.
                 Zobaczmy, co się stanie, jeśli wypełnisz resztę piosenki!
             code: |-
-                {define} twinkle
-                     {print} 'Twinkle'
+                {define} migocz
+                     {print} 'migocz'
                      {print} '...'
 
-                {call} twinkle
+                {call} migocz
                 {print} 'Up above the world so high'
-                {print} 'Like a diamond in the sky'
-                {call} twinkle
+                {print} 'Jak diament na niebie'
+                {call} migocz
         6:
             header: Funkcje
             text: Jak widać w przykładzie, funkcja jest blokiem kodu, który można wywołać w dowolnym momencie. Używasz `{define}`, aby ustawić funkcję i `{ call }`, aby z niej korzystać.
         7:
-            header: Debugging
-            text: Let's debug this code!
+            header: Debuggowanie
+            text: Zdebugguj ten kod!
             code: |-
                 {call} nowy_członek
                 {print} 'Witaj nowy członku!'
