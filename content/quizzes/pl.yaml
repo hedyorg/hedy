@@ -597,25 +597,25 @@ levels:
                     ```
                     {remove} walkers {from} yesterday
                     ```
-                feedback: yesterday is not a variable
+                feedback: wczoraj nie jest zmienną
             -   option: |-
                     ```
                     {add} walked_yesterday {to} walkers
                     ```
                 feedback: This increased the change that the person who walked yesterday now has to do it again. That's mean.
-            hint: The person who walked the dog yesterday should be removed from the list.
+            hint: Osoba, która wczoraj wyprowadziła psa, powinna zostać usunięta z listy.
             correct_answer: A
             question_score: '10'
     4:
         1:
-            question_text: Which of these is true?
+            question_text: Który z tych kodów jest poprawny?
             mp_choice_options:
             -   option: '```
 
                     {print} ''Jestem bardzo podekscytowany tym quizem!''
 
                     ```'
-                feedback: That's right
+                feedback: Dokładnie tak
             -   option: "```\n{print}Jestem bardzo podekscytowany tym quizem!\n```"
                 feedback: '{print} potrzebuje teraz cudzysłowu!'
             -   option: '```
@@ -630,11 +630,11 @@ levels:
 
                     ```'
                 feedback: ostrożnie, używając cudzysłowów i apostrofu
-            hint: In level 4 you need quotation marks for 2 commands.
+            hint: Na poziomie 4 potrzebujesz cudzysłowu dla 2 poleceń.
             correct_answer: A
             question_score: '10'
         2:
-            question_text: Which code uses the proper quotation marks?
+            question_text: Który kod używa odpowiednich cudzysłowów?
             mp_choice_options:
             -   option: |-
                     ```
@@ -655,23 +655,23 @@ levels:
                     ```
                     {print} ,hello,
                     ```
-                feedback: This is a comma, you need quotation marks.
-            hint: Pick the right quotation marks.
+                feedback: To przecinek, potrzebujesz cudzysłowu.
+            hint: Wybierz odpowiednie cudzysłowy.
             correct_answer: B
             question_score: '10'
         3:
-            question_text: Where are the quotation marks used correctly?
+            question_text: Gdzie znaki cudzysłowu zostały użyte poprawnie?
             mp_choice_options:
             -   option: |-
                     ```
                     {print} Hi Im Hedy
                     ```
-                feedback: Add quotation marks please!
+                feedback: Dodaj cudzysłowy!
             -   option: |-
                     ```
                     {print} 'Hi Im Hedy
                     ```
-                feedback: Both before and after the words you want to print should be a quotation mark.
+                feedback: Zarówno przed, jak i po słowach, które chcesz wydrukować, powinien być znakiem cudzysłowu.
             -   option: |-
                     ```
                     '{print} Hi Im Hedy'
@@ -682,96 +682,96 @@ levels:
                     {print} 'Hi Im Hedy'
                     ```
                 feedback: Perfect!
-            hint: Both before and after the words you want to print should be a quotation mark.
+            hint: Zarówno przed, jak i po słowach, które chcesz napisać (print), powinien być znakiem cudzysłowu.
             correct_answer: D
             question_score: '10'
         4:
-            question_text: Which statement is true?
+            question_text: Które wyrażenie jest prawdziwe?
             mp_choice_options:
-            -   option: 'You need quotation marks around the word `{print}`, like this: `''{print}''`.'
-                feedback: The quotation marks shouldn't be around the command itself.
-            -   option: You need quotation marks around the words you want to print.
+            -   option: 'Potrzebujesz cudzysłowu wokół słowa `{print}`, w następujący sposób: `''{print}''`.'
+                feedback: Znaki cudzysłowu nie powinny znajdować się wokół samego polecenia.
+            -   option: Potrzebujesz cudzysłowu wokół słów, które chcesz napisać (print).
                 feedback: Super!
-            -   option: You do not need quotation marks when using the `{ask}` command
-                feedback: Both `{print}` and `{ask}` require quotation marks
-            -   option: You can choose yourself whether to use quotation marks or not.
-                feedback: Unfortunately, Hedy is stricter than that.
-            hint: From level 4 on you need to use quotation marks.
+            -   option: Nie potrzebujesz cudzysłowu podczas korzystania z polecenia `{ask}`
+                feedback: Zarówno `{print}` i `{ask}` wymagają cudzysłowu
+            -   option: Możesz sam wybrać, czy chcesz użyć cudzysłowu, czy nie.
+                feedback: Niestety Hedy jest bardziej surowy.
+            hint: Od poziomu 4 musisz używać cudzysłowów.
             correct_answer: B
             question_score: '10'
         5:
-            question_text: What has to be changed in order for the game to work?
+            question_text: Co należy zmienić, aby gra działała?
             code: |-
-                options {is} rock, paper, scissors
-                {print} 'options {at} {random}'
+                opcje {is} kamień, papier, nożyczki
+                {print} 'opcje {at} {random}'
             mp_choice_options:
             -   option: |-
                     ```
                     '{print} options {at} {random}'
                     ```
-                feedback: Never put the quotation mark in front of the {print} command.
+                feedback: Nigdy nie umieszczaj znaku cudzysłowu przed poleceniem `{print}`.
             -   option: |-
                     ```
                     {print} 'options' {at} {random}
                     ```
-                feedback: options is a variable. You don't literally want to print 'options {at} {random}'.
+                feedback: opcje to zmienna. Nie chcesz dosłownie napisać (print) 'opcjie {at}{random}'.
             -   option: |-
                     ```
                     {print} options {at} {random}
                     ```
-                feedback: That's right
-            -   option: Nothing, the game already works!
-                feedback: Look carefully. There is an error.
-            hint: You don't want Hedy to literally print 'options {at} {random}', you want it to print 'rock' or 'paper' or 'scissors'.
+                feedback: Dokładnie tak
+            -   option: Nic, gra już działa!
+                feedback: Patrz uważnie. Wystąpił błąd.
+            hint: Nie chcesz, aby Hedy dosłownie napisała (print) 'opcje {at}{random} chcesz, aby napisała (print) 'kamień' lub 'papier' lub 'nożyczki'.
             correct_answer: C
             question_score: '10'
         6:
-            question_text: What would be a good next line in this code?
-            code: prices {is} 1 dollar, 100 dollars, 1 million dollars
+            question_text: Jaki byłby dobry następny wiersz w tym kodzie?
+            code: ceny {is} 1 dolar, 100 dolarów, 1 milion dolarów
             mp_choice_options:
             -   option: |-
                     ```
                     {print} 'You win...' prices {at} {random}
                     ```
-                feedback: Great! You get it!
+                feedback: Świetnie! Rozumiesz to!
             -   option: |-
                     ```
                     {print} You win... 'prices {at} {random}'
                     ```
-                feedback: Hedy will literally print 'prices {at} {random}'
+                feedback: Hedy dosłownie napisze (print) ceny {at}{random}''
             -   option: |-
                     ```
                     {print} You win... prices {at} {random}
                     ```
-                feedback: You need some quotation marks!
+                feedback: Potrzebujesz cudzysłowu!
             -   option: |-
                     ```
                     {print} 'You win... prices {at} {random}'
                     ```
-                feedback: Hedy will literally print 'prices {at} {random}''
+                feedback: Hedy dosłownie napisze (print) ceny {at}{random}''
             hint: 'Zastanów się: jaka jest zmienna i czy powinna znajdować się poza cudzysłowami? A jakie normalne słowa powinny być w środku?'
             correct_answer: A
             question_score: '10'
         7:
-            question_text: What's wrong with this code?
+            question_text: Co jest nie tak z tym kodem?
             code: |-
-                question {is} {ask} What do you want to know?
-                answers {is} yes, no, maybe
-                {print} answers {at} {random}
+                pytanie {is}{ask} Co chcesz wiedzieć?
+                odpowiedzi {is} tak, nie, może
+                {print} odpowiedzi {at} {random}
             mp_choice_options:
-            -   option: Quotation marks are missing in line 1
+            -   option: W wierszu 1 brakuje znaków cudzysłowu
                 feedback: Correct!
-            -   option: Quotation marks are missing in line 2
-                feedback: A variable doesn't need quotes
-            -   option: Quotation marks are missing in line 3
-                feedback: You don't want Hedy to literally print 'answers {at} {random}' so no quotation marks needed here!
-            -   option: Nothing, this code is good as is!
-                feedback: Look carefully. You missed a mistake!
-            hint: Check each line on whether they'd need quotation marks or not.
+            -   option: W wierszu 2 brakuje znaków cudzysłowu
+                feedback: Zmienna nie potrzebuje cudzysłowów
+            -   option: W wierszu 3 brakuje znaków cudzysłowu
+                feedback: Nie chcesz, aby Hedy dosłownie napisał (print) odpowiedzi {at}{random} , więc nie są tu potrzebne żadne cudzysłowy!
+            -   option: Nic, ten kod jest dobry, jaki jest!
+                feedback: Patrz uważnie. Przegapiłeś błąd!
+            hint: Sprawdź każdy wiersz, czy będą potrzebować cudzysłowu, czy nie.
             correct_answer: A
             question_score: '10'
         8:
-            question_text: What would be a good next line for this code?
+            question_text: Jaki byłby dobry następny wiersz dla tego kodu?
             code: |-
                 {print} 'Welcome at the money show!'
                 {print} 'In front of you are 3 doors'
@@ -781,12 +781,12 @@ levels:
                     ```
                     {print} So you pick door door
                     ```
-                feedback: We need quotation marks
+                feedback: Potrzebujemy cudzysłowów
             -   option: |-
                     ```
                     {print} 'So you pick ' door door
                     ```
-                feedback: If the player chooses door 3, Hedy will say 'So you pick 3 3
+                feedback: Jeśli gracz wybierze drzwi 3, Hedy powie „Więc wybierałeś 3 3
             -   option: |-
                     ```
                     {print} 'So you pick door ' door
