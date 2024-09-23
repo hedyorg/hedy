@@ -1,63 +1,126 @@
-<div id="share_modal" data-modal="true" class="hidden fixed w-screen h-screen z-40 inset-0">
-  <div class="absolute bg-black w-full h-full opacity-75" onclick="hedyApp.closeContainingModal(this)"></div>
-  <div class="absolute flex justify-center w-full h-full">
-    <div class="relative w-full max-w-xl bg-white border-2 border-blue-400 rounded-lg p-8 shadow-xl h-min mt-24">
-      <h2>{{_('share_your_program')}}</h2>
-
-      {% if username %}
-
-      <div class="grid grid-flow-row-dense gap-1 gap-x-4 w-full my-8">
-        {# Private #}
-        <div class="text-2xl col-start-1 row-span-2 ltr:text-right rtl:text-left text-bottom">
-          <input type="radio" id="share_private" name="public" value="0">
-        </div>
-        <div class="text-2xl col-start-2">
-          <label for="share-private">{{_('private')}}</label>
-        </div>
-        <div class="col-start-2">
-          {{_('only_you_can_see')}}
-        </div>
-
-        <div class="col-span-2 h-4"></div>
-
-        {# Private #}
-        <div class="text-2xl col-start-1 row-span-2 ltr:text-right rtl:text-left text-bottom">
-          <input type="radio" id="share_public" name="public" value="1">
-        </div>
-        <div class="text-2xl col-start-2">
-          <label for="share-public">{{_('public')}}</label>
-        </div>
-        <div class="col-start-2">
-          {{_('people_with_a_link')}}
-        </div>
-
-        <div class="col-start-1"></div>
-        <div class="col-start-2" data-view="if-public">
-          <div class="my-4">
-            {{_('share_by_giving_link')}}
+<div id="share_modal" data-modal="true" class="hidden fixed w-screen h-screen z-40 inset-0" _="on closeShareModal add .hidden to me">
+  <div class="fixed bg-black z-40 w-full h-full opacity-75" _="on click trigger closeShareModal"></div>
+  <div class="z-50 fixed flex justify-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style="max-height: 90%; max-width: 90%;">
+    <div class="relative w-full max-w-xl bg-white border-2 border-blue-400 rounded-lg p-4 shadow-xl h-min">
+      <div class="w-full flex flex-row">
+        <button class="p-3 w-1/2 items-center align-middle text-center flex justify-center cursor-pointer rounded-t-lg bg-gray-200 hover:bg-blue-300 transition-all ease-in duration-200"
+                id="share_button"
+                _="on click remove .hidden from #share
+                   then remove .bg-gray-200 from #hand-in-button
+                   then add .bg-gray-200 to me
+                   then add .hidden to #hand_in">
+          <h2 class="mb-0 text-xl text-center">{{_('share_your_program')}}</h2>
+        </button>
+        <button class="p-3 w-1/2 items-center align-middle text-center flex justify-center cursor-pointer rounded-t-lg hover:bg-blue-300 transition-all ease-in duration-200"
+              id="hand-in-button" {# Hyperscript doesnt like when ids have to many underscores, it seems #}
+              _="on click remove .hidden from #hand_in
+                then remove .bg-gray-200 from #share_button
+                then add .bg-gray-200 to me
+                then add .hidden to #share">
+          <h2 class="mb-0 text-xl text-center">{{_('hand_in_exercise')}}</h2>          
+        </button>
+      </div>
+      <div class="md:p-6 border-t-2 border-gray-200" id="share">
+        {% if username %}
+          <div class="flex flex-col gap-x-4 w-full my-3">
+            <div class="flex flex-col gap-2 mb-6">
+              <label class="text-2xl text-blue-900" for="program_name">Program name</label>
+              <input class="text-xl flex-1 px-4 py-2 text-gray-800 rounded-lg" for="program_name" />
+            </div>
+            <p class="mt-0 text-2xl mb-2  text-blue-900">Who can access this program</p>
+            {# Private #}
+            <div class="flex flex-row gap-4 mb-3">
+              <div class="mt-2">
+                <input type="radio" id="share_private" name="public" value="0">
+              </div>
+              <div class="flex flex-col">
+                <label for="share-private" class="text-xl  text-blue-900">{{_('private')}}</label>
+                <p class="mt-0">
+                  {{_('only_you_can_see')}}
+                </p>
+              </div>
+            </div>
+            {# Public #}
+            <div class="flex flex-row gap-4">
+              <div class="mt-2">
+                <input type="radio" id="share_public" name="public" value="1">
+              </div>
+              <div class="flex flex-col">
+                <label for="share-private" class="text-xl  text-blue-900">{{_('public')}}</label>
+                <p class="mt-0">
+                  {{_('people_with_a_link')}}
+                </p>
+                <div class="mt-2" data-view="if-public">
+                  <p class="mt-0">
+                    {{_('share_by_giving_link')}}
+                  </p>
+                  {% include 'incl/copy-url-bar.html' %}
+                </div>
+              </div>          
+            </div>                
           </div>
-
-          {% include 'incl/copy-url-bar.html' %}
+        {% else %} {# logged in? #}
+          <div class="mt-8">
+            <p>{{_('logged_in_to_share')}}</p>
+            <p><a href="/login">{{_('login')}}</a></p>
+          </div>
+        {% endif %}
+        <div class="flex justify-end mt-4">
+          <button class="blue-btn" _="on click trigger closeShareModal">{{_('close')}}</button>
         </div>
-
       </div>
-
-      {% else %} {# logged in? #}
-
-      <div class="mt-8">
-        <p>{{_('logged_in_to_share')}}</p>
-        <p><a href="/login">{{_('login')}}</a></p>
+      <div class="md:p-6 border-t-2 border-gray-200 hidden" id="hand_in">
+        {% if username and current_user_is_in_class %}
+          <div class="flex flex-col gap-x-4 w-full my-3">
+            <div data-view="if-not-submitted">
+              <div>{{_('this_turns_in_assignment')}}</div>
+      
+              <div class="flex my-8 bg-yellow-200 border-yellow-500 border rounded p-4">
+                <div>
+                  <span class="fa-regular fa-hand"></span>
+                </div>
+                <div class="flex-1 mx-4">
+                  {{_('make_sure_you_are_done')}}
+                </div>
+              </div>
+      
+              <div class="flex gap-8 items-center mt-4">
+                <button class="blue-btn" id="do_hand_in_button"> <span class="fa-regular fa-paper-plane mr-4"></span> {{_('hand_in')}}</button>
+                <a href="#" onclick="hedyApp.closeContainingModal(this); return false;">{{_('ill_work_some_more')}}</a>
+              </div>
+            </div>      
+            <div data-view="if-submitted">
+              <div class="my-4">
+                <p>{{_('submitted_header')}}</p>
+                <p>{{_('give_link_to_teacher')}}</p>
+              </div>
+      
+              <div data-view="if-public-url">
+                {% include 'incl/copy-url-bar.html' %}
+              </div>
+      
+              <div class="flex justify-end mt-4">
+                <button class="blue-btn" onclick="hedyApp.closeContainingModal(this);">{{_('close')}}</button>
+              </div>
+            </div>
+          </div>
+        {% elif username %} {# logged in/in class #}
+          <div>
+            {{_('not_in_class_no_handin')}}
+          </div>
+        {% else %} {# logged in/in class #}
+          <div class="mt-8">
+            <p>{{_('not_logged_in_handin')}}</p>
+            <p><a href="/login">{{_('login')}}</a></p>
+          </div>        
+        {% endif %}
+        <div class="flex justify-end mt-4">
+          <button class="blue-btn" _="on click trigger closeShareModal">{{_('close')}}</button>
+        </div>
       </div>
-
-      {% endif %}
-
-      <div class="flex justify-end">
-        <button class="blue-btn" onclick="hedyApp.closeContainingModal(this)">{{_('close')}}</button>
-      </div>
-
-      <div class="absolute right-0 top-0 m-8">
-        <a href="#" title="Close popup" onclick="hedyApp.closeContainingModal(this); return false;">
-          <span class="text-3xl text-gray-400 fa-solid fa-xmark"></span>
+      <div class="absolute right-0.5 top-0.5 m-1">
+        <a href="#" class="" title="Close popup" _="on click trigger closeShareModal">
+          <span class="text-3xl hover:text-red-400 text-gray-400 fa-solid fa-xmark"></span>
         </a>
       </div>
     </div>

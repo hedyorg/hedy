@@ -176,12 +176,12 @@ strong {
 .green-btn:hover:enabled,
 a.green-btn:hover {
   @apply bg-green-400 border-green-500;
-  @apply active:bg-green-700 active:border-green-700;
+  @apply active:bg-green-700 active:border-green-700 transition-all ease-in duration-200;
 }
 
 .red-btn {
   @apply btn-shape;
-  @apply bg-red-500 text-white border-red-500;
+  @apply bg-red-500 text-white border-red-500 transition-all ease-in duration-200;
 }
 
 .red-btn:hover {
@@ -191,7 +191,7 @@ a.green-btn:hover {
 
 .yellow-btn {
   @apply btn-shape;
-  @apply bg-yellow-500 text-black border-yellow-700;
+  @apply bg-yellow-500 text-black border-yellow-700 transition-all ease-in duration-200;
 }
 
 .yellow-btn:hover {
@@ -201,7 +201,7 @@ a.green-btn:hover {
 
 .pink-btn {
   @apply btn-shape;
-  @apply text-white bg-pink-400 border-pink-500;
+  @apply text-white bg-pink-400 border-pink-500 transition-all ease-in duration-200;
 }
 
 .pink-btn:hover {
@@ -211,7 +211,7 @@ a.green-btn:hover {
 
 .blue-btn {
   @apply btn-shape;
-  @apply bg-gray-200 text-blue-800 border-gray-200;
+  @apply bg-gray-200 text-blue-800 border-gray-200 transition-all ease-in duration-200;
 }
 
 .blue-btn:hover {
@@ -227,7 +227,7 @@ a.green-btn:hover {
 
 .gray-btn {
   @apply gray-btn-shape;
-  @apply bg-gray-300 text-gray-500;
+  @apply bg-gray-300 text-gray-500 transition-all ease-in duration-200;
 }
 
 .gray-btn:hover {

@@ -269,8 +269,6 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   }
 
   // Share/hand in modals
-  $('#share_program_button').on('click', () => $('#share_modal').show());
-  $('#hand_in_button').on('click', () => $('#hand_in_modal').show());
   initializeShareProgramButtons();
   initializeHandInButton();
 
