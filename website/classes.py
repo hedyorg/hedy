@@ -49,6 +49,39 @@ class ClassModule(WebsiteModule):
             "name": body["name"],
         }
 
+        # from auth, where we also use this for mailinglist subscriptions
+
+        from auth import MAILCHIMP_API_URL, MAILCHIMP_API_HEADERS
+        import requests
+
+        # endpoint: /lists/{list_id}/members/{subscriber_hash}/tags
+        # first part is already handled in auth!
+        
+
+        request_body = {"email_address": email, "status": "subscribed", "tags": [country, "teacher"]}
+        r = requests.post(MAILCHIMP_API_URL + "/members", headers=MAILCHIMP_API_HEADERS, data=json.dumps(request_body))
+
+        # Example code from the mailchip docs:
+        # https://mailchimp.com/developer/marketing/api/list-member-tags/
+
+
+
+        # import mailchimp_marketing as MailchimpMarketing
+        # from mailchimp_marketing.api_client import ApiClientError
+        #
+        # try:
+        #     client = MailchimpMarketing.Client()
+        #     client.set_config({
+        #         "api_key": "YOUR_API_KEY",
+        #         "server": "YOUR_SERVER_PREFIX"
+        #     })
+        #
+        #     response = client.lists.update_list_member_tags("list_id", "subscriber_hash",
+        #                                                     {"tags": [{"name": "name", "status": "active"}]})
+        #     print(response)
+        # except ApiClientError as error:
+        #     print("Error: {}".format(error.text))
+
         self.db.store_class(Class)
         response = {"id": Class["id"]}
         return make_response(response, 200)
