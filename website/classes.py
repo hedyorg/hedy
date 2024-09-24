@@ -56,15 +56,12 @@ class ClassModule(WebsiteModule):
 
         # endpoint: /lists/{list_id}/members/{subscriber_hash}/tags
         # first part is already handled in auth!
-        
 
         request_body = {"email_address": email, "status": "subscribed", "tags": [country, "teacher"]}
         r = requests.post(MAILCHIMP_API_URL + "/members", headers=MAILCHIMP_API_HEADERS, data=json.dumps(request_body))
 
         # Example code from the mailchip docs:
         # https://mailchimp.com/developer/marketing/api/list-member-tags/
-
-
 
         # import mailchimp_marketing as MailchimpMarketing
         # from mailchimp_marketing.api_client import ApiClientError
