@@ -3310,6 +3310,151 @@ class TestsLevel12(HedyTester):
             exception=hedy.exceptions.UnusedVariableException
         )
 
+    def test_unused_global_var_named_as_function_arg(self):
+        code = textwrap.dedent("""\
+        define add with n
+            return n + 1
+        n is 10
+        print call add with 2""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            exception=hedy.exceptions.UnusedVariableException
+        )
+
+    def test_unused_function_arg_named_as_global_var(self):
+        code = textwrap.dedent("""\
+        define add with n
+            x is 1
+            return x + 1
+        
+        x is 10
+        print x
+        print call add with 2""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            exception=hedy.exceptions.UnusedVariableException
+        )
+
+    def test_unused_global_var_named_as_function_local_var(self):
+        code = textwrap.dedent("""\
+            define add
+                x is 1
+                print x + 1 
+            x is 10
+            call add""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            exception=hedy.exceptions.UnusedVariableException
+        )
+
+    def test_unused_function_local_var_named_as_global_var(self):
+        code = textwrap.dedent("""\
+        define add
+            x is 1
+            print 'one'
+        x is 10
+        print x
+        call add""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            exception=hedy.exceptions.UnusedVariableException
+        )
+
+    def test_local_var_cannot_be_used_in_global_scope(self):
+        code = textwrap.dedent("""\
+        define add
+            x is 5
+            print x
+        print call add
+        print x + 1""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            exception=hedy.exceptions.UndefinedVarException
+        )
+
+    def test_global_var_can_be_used_in_local_scope_if_defined_before(self):
+        code = textwrap.dedent("""\
+        x is 5
+        define add
+            print x
+        call add""")
+
+        expected = textwrap.dedent("""\
+        x = Value(5, num_sys='Latin')
+        def add():
+          print(f'''{x}''')
+        add()""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=16,
+        )
+
+    def test_global_var_used_in_local_scope_if_defined_after_gives_error(self):
+        code = textwrap.dedent("""\
+        define add
+            print x
+        x is 5
+        call add""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            skip_faulty=False,
+            exception=exceptions.UnquotedTextException,
+        )
+
+    def test_global_var_should_not_shadow_local_var_in_func(self):
+        code = textwrap.dedent("""\
+        define turn
+            if x is pressed
+                print 'good'
+            else
+                print 'bad'
+        call turn
+        x is 1 + 1
+        print x""")
+
+        expected = textwrap.dedent("""\
+        def turn():
+          if_pressed_mapping = {"else": "if_pressed_default_else"}
+          global if_pressed_x_
+          if_pressed_mapping['x'] = 'if_pressed_x_'
+          def if_pressed_x_():
+            global x
+            print(f'''good''')
+          global if_pressed_else_
+          if_pressed_mapping['else'] = 'if_pressed_else_'
+          def if_pressed_else_():
+            global x
+            print(f'''bad''')
+          extensions.if_pressed(if_pressed_mapping)
+        turn()
+        x = Value(1 + 1, num_sys='Latin')
+        print(f'''{x}''')""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=16,
+        )
+
     def test_addition(self):
         code = textwrap.dedent("""\
         a = 5
