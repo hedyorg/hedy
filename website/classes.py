@@ -1,3 +1,4 @@
+import json
 import uuid
 
 from flask import make_response, redirect, request, session
@@ -53,34 +54,19 @@ class ClassModule(WebsiteModule):
 
         from auth import MAILCHIMP_API_URL, MAILCHIMP_API_HEADERS
         import requests
+        import hashlib
+
+        subscriber = user["email"].encode('utf-8')
+        subscriber_hash = hashlib.md5(subscriber)
 
         # endpoint: /lists/{list_id}/members/{subscriber_hash}/tags
         # first part is already handled in auth!
-        
 
-        request_body = {"email_address": email, "status": "subscribed", "tags": [country, "teacher"]}
+        request_body = {"subscriber_hash": subscriber_hash, "tags": ["class_created"]}
         r = requests.post(MAILCHIMP_API_URL + "/members", headers=MAILCHIMP_API_HEADERS, data=json.dumps(request_body))
 
-        # Example code from the mailchip docs:
-        # https://mailchimp.com/developer/marketing/api/list-member-tags/
 
 
-
-        # import mailchimp_marketing as MailchimpMarketing
-        # from mailchimp_marketing.api_client import ApiClientError
-        #
-        # try:
-        #     client = MailchimpMarketing.Client()
-        #     client.set_config({
-        #         "api_key": "YOUR_API_KEY",
-        #         "server": "YOUR_SERVER_PREFIX"
-        #     })
-        #
-        #     response = client.lists.update_list_member_tags("list_id", "subscriber_hash",
-        #                                                     {"tags": [{"name": "name", "status": "active"}]})
-        #     print(response)
-        # except ApiClientError as error:
-        #     print("Error: {}".format(error.text))
 
         self.db.store_class(Class)
         response = {"id": Class["id"]}
