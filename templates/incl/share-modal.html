@@ -25,7 +25,7 @@
           <div class="flex flex-col gap-x-4 w-full my-3">
             <div class="flex flex-col gap-2 mb-6">
               <label class="text-2xl text-blue-900" for="program_name">Program name</label>
-              <input class="text-xl flex-1 px-4 py-2 text-gray-800 rounded-lg" for="program_name" />
+              <input class="text-xl flex-1 px-4 py-2 text-gray-800 rounded-lg" for="program_name" id="program_name"/>
             </div>
             <p class="mt-0 text-2xl mb-2  text-blue-900">Who can access this program</p>
             {# Private #}
@@ -86,7 +86,7 @@
       
               <div class="flex gap-8 items-center mt-4">
                 <button class="blue-btn" id="do_hand_in_button"> <span class="fa-regular fa-paper-plane mr-4"></span> {{_('hand_in')}}</button>
-                <a href="#" onclick="hedyApp.closeContainingModal(this); return false;">{{_('ill_work_some_more')}}</a>
+                <a href="#" _="on click trigger closeShareModal">{{_('ill_work_some_more')}}</a>
               </div>
             </div>      
             <div data-view="if-submitted">
@@ -97,11 +97,7 @@
       
               <div data-view="if-public-url">
                 {% include 'incl/copy-url-bar.html' %}
-              </div>
-      
-              <div class="flex justify-end mt-4">
-                <button class="blue-btn" onclick="hedyApp.closeContainingModal(this);">{{_('close')}}</button>
-              </div>
+              </div>       
             </div>
           </div>
         {% elif username %} {# logged in/in class #}

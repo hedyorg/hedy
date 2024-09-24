@@ -103,7 +103,7 @@ export class Tabs {
       allTabs.addClass('not-selected-adv')
       tab.removeClass('not-selected-adv')
       tab.addClass('adv-selected');
-      let tab_title = document.getElementById('program_name')!
+      let tab_title = document.getElementById('adventure_name')!
       tab_title.textContent = tab.text().trim()
       const type = tab.data('type');
       tab_title.classList.remove('border-green-300', 'border-[#fdb2c5]', 'border-blue-300', 'border-blue-900')
