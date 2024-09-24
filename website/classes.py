@@ -54,20 +54,7 @@ class ClassModule(WebsiteModule):
 
         import os
 
-        MAILCHIMP_API_URL = None
-        MAILCHIMP_API_HEADERS = {}
-        if os.getenv("MAILCHIMP_API_KEY") and os.getenv("MAILCHIMP_AUDIENCE_ID"):
-            # The domain in the path is the server name, which is contained in the Mailchimp API key
-            MAILCHIMP_API_URL = (
-                "https://"
-                + os.getenv("MAILCHIMP_API_KEY").split("-")[1]
-                + ".api.mailchimp.com/3.0/lists/"
-                + os.getenv("MAILCHIMP_AUDIENCE_ID")
-            )
-            MAILCHIMP_API_HEADERS = {
-                "Content-Type": "application/json",
-                "Authorization": "apikey " + os.getenv("MAILCHIMP_API_KEY"),
-            }
+        from .auth import MAILCHIMP_API_URL, MAILCHIMP_API_HEADERS
 
         import requests
         import hashlib
