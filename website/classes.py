@@ -65,9 +65,6 @@ class ClassModule(WebsiteModule):
         request_body = {"subscriber_hash": subscriber_hash, "tags": ["class_created"]}
         r = requests.post(MAILCHIMP_API_URL + "/members", headers=MAILCHIMP_API_HEADERS, data=json.dumps(request_body))
 
-
-
-
         self.db.store_class(Class)
         response = {"id": Class["id"]}
         return make_response(response, 200)
