@@ -37,10 +37,10 @@
                 </button>
                 <div class="flex-initial"></div>
                 <div class="flex flex-1 items-center justify-center font-medium dark:text-white mx-1">
-                    <span class="text-lg text-center {% if not username %}hidden{% endif %}">
+                    <span class="text-lg text-center {% if not username %}hidden{% endif %} mx-2">
                         {{ progress.completed }}/{{ progress.total }}
                     </span>
-                    <span class="text-lg hidden md:block">
+                    <span class="text-lg hidden {% if username %}md:block{% endif %}">
                         {{_('complete')}}
                     </span>
                 </div>    
