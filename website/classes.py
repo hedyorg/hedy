@@ -52,18 +52,36 @@ class ClassModule(WebsiteModule):
 
         # from auth, where we also use this for mailinglist subscriptions
 
-        from auth import MAILCHIMP_API_URL, MAILCHIMP_API_HEADERS
+        import os
+
+        MAILCHIMP_API_URL = None
+        MAILCHIMP_API_HEADERS = {}
+        if os.getenv("MAILCHIMP_API_KEY") and os.getenv("MAILCHIMP_AUDIENCE_ID"):
+            # The domain in the path is the server name, which is contained in the Mailchimp API key
+            MAILCHIMP_API_URL = (
+                "https://"
+                + os.getenv("MAILCHIMP_API_KEY").split("-")[1]
+                + ".api.mailchimp.com/3.0/lists/"
+                + os.getenv("MAILCHIMP_AUDIENCE_ID")
+            )
+            MAILCHIMP_API_HEADERS = {
+                "Content-Type": "application/json",
+                "Authorization": "apikey " + os.getenv("MAILCHIMP_API_KEY"),
+            }
+
         import requests
         import hashlib
 
         subscriber = user["email"].encode('utf-8')
-        subscriber_hash = hashlib.md5(subscriber)
+        subscriber_hash = hashlib.md5(subscriber).hexdigest()
 
-        # endpoint: /lists/{list_id}/members/{subscriber_hash}/tags
-        # first part is already handled in auth!
+        # mailchimp docs: https://mailchimp.com/developer/marketing/api/list-member-tags/add-or-remove-member-tags/
 
-        request_body = {"subscriber_hash": subscriber_hash, "tags": ["class_created"]}
-        r = requests.post(MAILCHIMP_API_URL + "/members", headers=MAILCHIMP_API_HEADERS, data=json.dumps(request_body))
+        request_body = {"tags": [{"name": "class_created", "status": "active"}]}
+        try:
+            r = requests.post(MAILCHIMP_API_URL + f"/members/{subscriber_hash}/tags", headers=MAILCHIMP_API_HEADERS, data=json.dumps(request_body))
+        except Exception as E:
+            pass
 
         self.db.store_class(Class)
         response = {"id": Class["id"]}
