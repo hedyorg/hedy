@@ -26,7 +26,7 @@
             <div class="flex flex-row w-full mb-2">
                 <button data-cy="previous_adventure" id="previous_adventure" class="blue-btn flex flex-row gap-2 align-middle items-center flex-initial w-fit next-tab justify-self-end mb-1">
                     <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}"></span>
-                    <p class="m-0 p-0">{{_('previous_adventure')}}</p>
+                    <p class="m-0 p-0 hidden md:block">{{_('previous_adventure')}}</p>
                 </button>
                 <button data-cy="back_level" id="back_level" 
                         class="blue-btn flex-initial flex flex-row gap-2 align-middle items-center	 w-fit next-tab justify-self-end mb-1 hidden"
@@ -37,12 +37,15 @@
                 </button>
                 <div class="flex-initial"></div>
                 <div class="flex flex-1 items-center justify-center font-medium dark:text-white mx-1">
-                    <p class="text-lg text-center {% if not username %}hidden{% endif %}">
-                        {{ progress.completed }}/{{ progress.total }} {{_('complete')}}
-                    </p>
+                    <span class="text-lg text-center {% if not username %}hidden{% endif %}">
+                        {{ progress.completed }}/{{ progress.total }}
+                    </span>
+                    <span class="text-lg hidden md:block">
+                        {{_('complete')}}
+                    </span>
                 </div>    
                 <button data-cy="next_adventure" id="next_adventure" class="blue-btn flex flex-row gap-2 align-middle items-center flex-initial w-fit next-tab justify-self-end mb-1">
-                    <p class="m-0 p-0">{{_('next_adventure')}}</p>                    
+                    <p class="m-0 p-0 hidden md:block">{{_('next_adventure')}}</p>                    
                     <span class="fa fa-arrow-{% if g.dir == "ltr" %}right{% else %}left{% endif %}"></span>
                 </button>
                 <button data-cy="next_level" id="next_level"
