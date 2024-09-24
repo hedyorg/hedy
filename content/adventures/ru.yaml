@@ -14,11 +14,11 @@ adventures:
                     Вы используете `{echo}`, если хотите, чтобы главный герой был в конце предложения.
                 example_code: |
                     ```
-                    {ask} The main character of this story is
-                    {print} The main character is now going to walk in the forest
-                    {echo} They're a bit scared,
-                    {print} They hear crazy noises everywhere
-                    {print} They're afraid this is a haunted forest
+                    {ask} Главный герой этой истории - 
+                    {print} Главный герой собирается погулять по лесу
+                    {echo} Он немного напуган,
+                    {print} Повсюду слышно страшный шум
+                    {print} Он боится, что это лес с привидениями
                     ```
                 story_text_2: |
                     Можете ли вы создать свою собственную историю в Hedy, используя `{print}`, `{ask}` и `{echo}`?
@@ -31,12 +31,12 @@ adventures:
                     Затем вы можете поместить это имя в любое место в предложении.
                 example_code: |-
                     ```
-                    name {is} {ask} What is the name of the main character?
-                    {print} name is now going to run in the woods
-                    {print} name is a bit scared
-                    {print} Suddenly she hears a crazy noise...
+                    имя {is} {ask} Какое имя главного героя?
+                    {print} имя собирается погулять по лесу
+                    {print} имя немного напуган(а)
+                    {print} Повсюду слышно страшный шум...
                     {sleep}
-                    {print} name is afraid this is a haunted forest
+                    {print} имя боится, что это лес с привидениями
                     ```
                 story_text_2: |
                     ### Упражение
@@ -183,13 +183,13 @@ adventures:
                     ### Задание
 
                     Посмотрите на  <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf">рассказ</a> если вы его не видели раньше и убедитесь что ваш рассказ напечатан так же как и в книге.
-                example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
+                example_code: "```\nживотные = _ , _ , _ \n{print} 'Бурый мишка, Бурый мишка'\n{print} 'Что ты видишь?'\n```\n"
             12:
                 story_text: На этом уровне вы можете использовать кавычки для сохранения нескольких слов в переменной.
                 example_code: |
                     ```
-                    name = 'The Queen of England'
-                    {print} name ' was eating a piece of cake, when suddenly...'
+                    имя = 'Королева Англии'
+                    {print} имя ' ела кусочек торта, когда вдруг...'
                     ```
             13:
                 story_text: |
@@ -238,17 +238,17 @@ adventures:
                     {print}('Добро пожаловать в историю!')
                     ```
                 story_text_2: |
-                    ### Exercise 2
-                    We have already prepared an `{input}` for you. First, use the `name` variable in your story.
-                    Then add a second `{ask}` and use that variable as well.
-                    Tip: Remember the commas in a `{print}` between text and variables!
+                    ### Упражнение 2
+                    Мы уже подготовили `{input}` для тебя. Для начала, используй `name` переменную в своей истории.
+                    Затем добавь еще один `{ask}` и используй эту переменную снова.
+                    Совет: Не забывй про запятые в `{print}` между текстом и переменными!
                 example_code_2: |
                     ```
-                    naam = {input}("What's your name?")
-                    {print}('Welcome to this story!')
+                    имя = {input}("Как вас зовут?")
+                    {print}('Добро пожаловать в эту историю!')
                     ```
     add_remove_command:
-        name: '{add} {to} & {remove} {from}'
+        name: '{add} {to_list} & {remove} {from}'
         default_save_name: add_remove_command
         description: introducing add to and remove from
         levels:
@@ -2558,7 +2558,7 @@ adventures:
                     ### Exercise
                     Time to make your own variables!
                     In the example code we made an example of the variable `favorite_animal`. In line 1 the variable is set, and in line 2 we haved used the variable in a print command.
-                    Firstly, finish our example by filling in your favorite animal in the blanks. Then make at least 3 of these codes yourself. Pick a variable, and set the variable with the {is} command. Then use it with a {print} command, just like we did.
+                    Firstly, finish our example by filling in your favorite animal on the blank. Then make at least 3 of these codes yourself. Pick a variable, and set the variable with the {is} command. Then use it with a {print} command, just like we did.
                 example_code_2: |
                     ```
                     favorite_animal {is} _

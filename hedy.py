@@ -1499,12 +1499,16 @@ def process_characters_needing_escape(value):
 
 
 supported_quotes = {
-    "'": "'",  # single straight quotation marks
-    '"': '"',  # double straight quotation marks
-    '‘': '’',  # single curved quotation marks
-    "“": "”",  # double curved quotation marks or English quotes
-    "„": "“",  # inward double curved quotation marks or German quotes
-    "«": "»",  # guillemets or double angular marks or French quotes
+    "'": ["'"],  # single straight quotation marks
+    '"': ['"'],  # double straight quotation marks
+    '‘': ['’'],  # single curved quotation marks
+    "“": ["”"],  # double curved quotation marks or English quotes
+    "„": ["“",   # inward double curved quotation marks or German quotes
+          "”"],  # rightward double curved quotation marks or Polish quotes
+    '”': ['”'],  # rightward double curved quotation marks or Swedish/Finish quotes
+    "«": ["»"],  # guillemets or double angular marks or French quotes
+    "《": ["》"],  # Korean quotes
+    "「": ["」"],  # Japanese quotes
 }
 
 
@@ -1522,7 +1526,7 @@ def find_unquoted_segments(s):
             used_quote = c
             result += segment
             segment = c
-        elif used_quote and c == supported_quotes[used_quote]:
+        elif used_quote and c in supported_quotes[used_quote]:
             # if this is a valid closing quote, then empty the buffer as it holds a correctly quoted segment
             used_quote = None
             segment = ''
