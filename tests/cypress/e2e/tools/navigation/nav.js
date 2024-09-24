@@ -58,14 +58,8 @@ export function goToProfilePage()
     goToPage(Cypress.env('profile_page'));
 }
 
-export function goToHedyLevel2Page()
-{
-    goToPage(Cypress.env('hedy_level2_page'));
-}
-
-export function goToHedyLevel5Page()
-{
-    goToPage(Cypress.env('hedy_level5_page'));
+export function goToHedyLevel(level) {
+    goToPage(`${Cypress.env('hedy_page')}/${level}#default`);
 }
 
 export function goToAdminUsersPage()
@@ -97,7 +91,7 @@ export function goToEditAdventure()
     // takes the first adventures and goes to its edit page
     // It does not matter which adventure we take (we choose the first one)
     openAdventureView();
-    cy.getDataCy("edit_link_adventure").first().click();
+    cy.getDataCy('edit_link_adventure1').first().click();
 }
 
 export function goToExploreProgramsPage()

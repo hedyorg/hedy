@@ -1,5 +1,5 @@
 import { loginForStudent, loginForTeacher, logout } from "../tools/login/login";
-import { goToHedyLevel2Page, goToHedyPage } from "../tools/navigation/nav";
+import  { goToHedyLevel } from "../tools/navigation/nav";
 import { createClassAndAddStudents, addCustomizations } from '../tools/classes/class.js'
 
 describe('Test level dropdown', () => {
@@ -48,7 +48,7 @@ describe('Test level dropdown', () => {
     logout()
     loginForStudent(students[0]);
     cy.wait(500);
-    goToHedyLevel2Page();
+    goToHedyLevel(2);
 
     cy.getDataCy('dropdown_level_button').click();
     cy.getDataCy('level_button_4').should('not.be.disabled');

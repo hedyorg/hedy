@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-07-08 10:20+0000\n"
+"PO-Revision-Date: 2024-09-06 14:38+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: et <LL@li.org>\n"
 "Language: et\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -303,6 +303,10 @@ msgid "adventures_restored"
 msgstr "The default adventures have been restored!"
 
 #, fuzzy
+msgid "adventures_ticked"
+msgstr "Adventures ticked"
+
+#, fuzzy
 msgid "adventures_tried"
 msgstr "Adventures tried"
 
@@ -336,14 +340,6 @@ msgstr "Already have an account?"
 #, fuzzy
 msgid "already_program_running"
 msgstr "There is already a program running, finish that one first."
-
-#, fuzzy
-msgid "already_teacher"
-msgstr "You already have a teacher account."
-
-#, fuzzy
-msgid "already_teacher_request"
-msgstr "You already have a pending teacher request."
 
 #, fuzzy
 msgid "are_you_sure"
@@ -407,6 +403,9 @@ msgstr "Class successfully customized."
 #, fuzzy
 msgid "class_graph_explanation"
 msgstr "In this graph you can see represented the numbers of adventures your students have attempted (meaning they have done meaninful work in that adventure), with respect to the number of errors and successful runs."
+
+msgid "class_logs"
+msgstr "Last login"
 
 #, fuzzy
 msgid "class_name_duplicate"
@@ -575,10 +574,6 @@ msgstr "Create a new class"
 #, fuzzy
 msgid "create_multiple_accounts"
 msgstr "Create multiple accounts"
-
-#, fuzzy
-msgid "create_question"
-msgstr "Do you want to create one?"
 
 #, fuzzy
 msgid "create_student_account"
@@ -819,12 +814,6 @@ msgstr "Please select a valid experience, choose (Yes, No)."
 msgid "expiration_date"
 msgstr "Expiration date"
 
-msgid "explore_programs"
-msgstr "Uudista programme"
-
-msgid "explore_programs_logo_alt"
-msgstr "Avasta programme ikoon"
-
 #, fuzzy
 msgid "favorite_program"
 msgstr "Favorite program"
@@ -978,20 +967,28 @@ msgstr "Hedy logo"
 msgid "hedy_on_github"
 msgstr "Hedy on Github"
 
-#, fuzzy
-msgid "hedy_tutorial_logo_alt"
-msgstr "Start hedy tutorial"
-
 msgid "hello_logo"
 msgstr "Tere!"
+
+#, fuzzy
+msgid "hide_adventures"
+msgstr "Hide adventures"
 
 #, fuzzy
 msgid "hide_cheatsheet"
 msgstr "Hide cheatsheet"
 
 #, fuzzy
+msgid "hide_classes"
+msgstr "Hide classes"
+
+#, fuzzy
 msgid "hide_keyword_switcher"
 msgstr "Hide keyword switcher"
+
+#, fuzzy
+msgid "hide_slides"
+msgstr "Hide slides"
 
 #, fuzzy
 msgid "highest_level_reached"
@@ -1314,6 +1311,10 @@ msgid "mandatory_mode"
 msgstr "Mandatory developer's mode"
 
 #, fuzzy
+msgid "more_info"
+msgstr "More information"
+
+#, fuzzy
 msgid "more_options"
 msgstr "More options"
 
@@ -1413,12 +1414,12 @@ msgid "no_programs"
 msgstr "You have no programs yet."
 
 #, fuzzy
-msgid "no_public_profile"
-msgstr "You don't have a public profile text yet..."
-
-#, fuzzy
 msgid "no_shared_programs"
 msgstr "has no shared programs..."
+
+#, fuzzy
+msgid "no_students"
+msgstr "There are no students in this class"
 
 msgid "no_such_adventure"
 msgstr "Seda seiklust ei ole olemas!"
@@ -1479,8 +1480,9 @@ msgstr "Number of programs"
 msgid "ok"
 msgstr "OK"
 
+#, fuzzy
 msgid "one_level_error"
-msgstr ""
+msgstr "You need to select at least one level."
 
 #, fuzzy
 msgid "only_you_can_see"
@@ -2024,27 +2026,12 @@ msgid "star"
 msgstr "a star"
 
 #, fuzzy
-msgid "start_hedy_tutorial"
-msgstr "Start hedy tutorial"
-
-#, fuzzy
 msgid "start_learning"
 msgstr "Start learning"
 
 #, fuzzy
-msgid "start_programming"
-msgstr "Start programming"
-
-#, fuzzy
-msgid "start_programming_logo_alt"
-msgstr "Start programming"
-
-#, fuzzy
 msgid "start_quiz"
 msgstr "Start quiz"
-
-msgid "start_teacher_tutorial"
-msgstr "Alusta õpetajate juhendi läbi käimist"
 
 #, fuzzy
 msgid "start_teaching"
@@ -2074,6 +2061,14 @@ msgid "student"
 msgstr "Student"
 
 #, fuzzy
+msgid "student_adventures_table"
+msgstr "Student's Adventures"
+
+#, fuzzy
+msgid "student_adventures_table_explanation"
+msgstr "This table displays the programs created by students for each adventure in a level. By clicking the eye icon, you can view the program's page; after reviewing the program, you can tick the checkmark to indicate completion."
+
+#, fuzzy
 msgid "student_already_in_class"
 msgstr "This student is already in your class."
 
@@ -2081,9 +2076,16 @@ msgstr "This student is already in your class."
 msgid "student_already_invite"
 msgstr "This student already has a pending invitation."
 
+msgid "student_in_another_class"
+msgstr ""
+
 #, fuzzy
-msgid "student_not_allowed_in_class"
-msgstr "Student not allowed in class"
+msgid "student_information"
+msgstr "Student's Information"
+
+#, fuzzy
+msgid "student_information_explanation"
+msgstr "This table displays basic information about the students in your class. There are also several actions you can do in this table: change the password of a student by clicking the pencil icon, view the program's page of a student by clicking the code icon, and delete a student from the class by clicking the red bin icon."
 
 #, fuzzy
 msgid "student_not_existing"
@@ -2184,14 +2186,6 @@ msgid "teacher"
 msgstr "Õpetaja"
 
 #, fuzzy
-msgid "teacher_account_request"
-msgstr "You have a pending teacher account request"
-
-#, fuzzy
-msgid "teacher_account_success"
-msgstr "You successfully requested a teacher account."
-
-#, fuzzy
 msgid "teacher_invalid"
 msgstr "Your teacher value is invalid."
 
@@ -2206,9 +2200,6 @@ msgstr "Teacher manual"
 #, fuzzy
 msgid "teacher_signup_header"
 msgstr "Teacher"
-
-msgid "teacher_tutorial_logo_alt"
-msgstr "Õpetajate juhendi ikoon"
 
 msgid "teacher_welcome"
 msgstr "Tere tulemast Hedy juurde! Sul on nüüd õpetaja konto. See annab sulle võimaluse klasse luua ja õpilasi ühinema kutsuda."
@@ -2264,9 +2255,6 @@ msgstr "Hedy - Õpetajatele"
 msgid "title_join-class"
 msgstr "Hedy - Join class"
 
-msgid "title_landing-page"
-msgstr "Tere tulemast Hedy juurde!"
-
 msgid "title_learn-more"
 msgstr "Hedy - Rohkem infot"
 
@@ -2316,6 +2304,14 @@ msgstr "Translating Hedy"
 #, fuzzy
 msgid "translator"
 msgstr "Translator"
+
+#, fuzzy
+msgid "turned_into_teacher"
+msgstr "Congratulations! You successfully turned into a teacher."
+
+#, fuzzy
+msgid "tutorial"
+msgstr "Tutorial"
 
 msgid "tutorial_code_snippet"
 msgstr ""
@@ -2456,14 +2452,6 @@ msgid "walker_variable_role"
 msgstr "walker"
 
 #, fuzzy
-msgid "welcome"
-msgstr "Welcome"
-
-#, fuzzy
-msgid "welcome_back"
-msgstr "Welcome back"
-
-#, fuzzy
 msgid "what_is_your_role"
 msgstr "What is your role?"
 
@@ -2478,14 +2466,6 @@ msgstr "Please enter a year between 1900 and {current_year}."
 #, fuzzy
 msgid "yes"
 msgstr "Yes"
-
-#, fuzzy
-msgid "your_account"
-msgstr "Your profile"
-
-#, fuzzy
-msgid "your_last_program"
-msgstr "Your last saved program"
 
 #, fuzzy
 msgid "your_personal_text"
@@ -2596,9 +2576,6 @@ msgstr "Your program"
 
 #~ msgid "too_many_attempts"
 #~ msgstr "Too many attempts"
-
-#~ msgid "class_logs"
-#~ msgstr "Last login"
 
 #~ msgid "class_stats"
 #~ msgstr "Class statistics"
@@ -2807,21 +2784,63 @@ msgstr "Your program"
 #~ msgid "your_class"
 #~ msgstr "My classes"
 
-#~ msgid "developers_mode"
-#~ msgstr "Programmeerimis režiim"
+#~ msgid "create_question"
+#~ msgstr "Do you want to create one?"
 
-#~ msgid "read_code_label"
-#~ msgstr "Read aloud"
+#~ msgid "explore_programs"
+#~ msgstr "Uudista programme"
 
-#~ msgid "regress_button"
-#~ msgstr ""
+#~ msgid "explore_programs_logo_alt"
+#~ msgstr "Avasta programme ikoon"
 
-#~ msgid "tutorial"
-#~ msgstr "Tutorial"
+#~ msgid "hedy_tutorial_logo_alt"
+#~ msgstr "Start hedy tutorial"
 
-#~ msgid "index_button"
-#~ msgstr ""
+#~ msgid "no_public_profile"
+#~ msgstr "You don't have a public profile text yet..."
 
-#~ msgid "tooltip_level_locked"
-#~ msgstr "Your teacher disabled this level"
+#~ msgid "start_hedy_tutorial"
+#~ msgstr "Start hedy tutorial"
+
+#~ msgid "start_programming"
+#~ msgstr "Start programming"
+
+#~ msgid "start_programming_logo_alt"
+#~ msgstr "Start programming"
+
+#~ msgid "start_teacher_tutorial"
+#~ msgstr "Alusta õpetajate juhendi läbi käimist"
+
+#~ msgid "teacher_tutorial_logo_alt"
+#~ msgstr "Õpetajate juhendi ikoon"
+
+#~ msgid "title_landing-page"
+#~ msgstr "Tere tulemast Hedy juurde!"
+
+#~ msgid "welcome"
+#~ msgstr "Welcome"
+
+#~ msgid "welcome_back"
+#~ msgstr "Welcome back"
+
+#~ msgid "your_account"
+#~ msgstr "Your profile"
+
+#~ msgid "your_last_program"
+#~ msgstr "Your last saved program"
+
+#~ msgid "already_teacher"
+#~ msgstr "You already have a teacher account."
+
+#~ msgid "already_teacher_request"
+#~ msgstr "You already have a pending teacher request."
+
+#~ msgid "teacher_account_request"
+#~ msgstr "You have a pending teacher account request"
+
+#~ msgid "teacher_account_success"
+#~ msgstr "You successfully requested a teacher account."
+
+#~ msgid "student_not_allowed_in_class"
+#~ msgstr "Student not allowed in class"
 

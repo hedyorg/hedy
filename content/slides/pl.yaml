@@ -27,25 +27,25 @@ levels:
         5:
             header: Programowanie w Hedy
             text: W Hedy używamy specjalnych kodów, takich jak `{print}`.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} Witaj w Hedy!'
         6:
             header: Programowanie w Hedy
             text: Słowa kodowe będą wyświetlane na różowo.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} Witaj w Hedy!'
         7:
             header: Programowanie w Hedy
             text: Kod uruchamiamy przyciskiem Uruchom kod znajdującym się pod kodem.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} Witaj w Hedy!'
         8:
             header: Programowanie w Hedy
             text: Dane wyjściowe są wyświetlane po prawej stronie.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} Witaj w Hedy!'
         9:
             header: Programowanie w Hedy
             text: Dane wyjściowe mogą być również rysunkiem.
             code: |-
                 {forward} 100
-                {turn} left
+                {turn} {left}
     1:
         1:
             header: Witamy na poziomie 1!
@@ -59,14 +59,16 @@ levels:
                 Pierwszym kodem, którego możesz użyć na poziomie 1 jest `{print}`.
 
                 `{print}` służy do wyświetlania tekstu na ekranie.
-            code: '{print} Put text on the screen'
+            code: '{print} Pokaż tekst na ekranie'
         3:
             header: Komenda {print}
             text: |-
                 Możesz zmienić tekst po poleceniu wydruku, aby wypisać dowolny tekst.
 
                 Ewentualnie, możesz wypisać kilka linijek tekstu przez dodanie kolejnej linii kodu również zaczynającej się komendą `{print}`.
-            code: '{print} Put text on the screen'
+            code: '{print} Witaj w Hedy!
+
+                {print} Zacznij programować!'
         4:
             header: '{ask}'
             text: |-
@@ -74,22 +76,20 @@ levels:
 
                 `{ask}` służy do zadania pytania, na które użytkownik może odpowiedzieć.
             code: |-
-                {print} Welcome to your own rock scissors paper!
-                {ask} What will you choose?
+                {print} Witaj we własnej grze w kamień, papier i nożyce!
+                {ask} Co wybierzesz?
         5:
             header: '{echo}'
             text: |-
                 Jak mogliście zobaczyć w poprzednim przykładzie. Jeśli użyjecie komendy `{ask}`, możecie zadać pytanie.
-
                 Odpowiedź jednak nie wyświetla się na ekranie.
 
-                Jeśli chcecie, aby odpowiedź się wyświetliła, możecie użyć ostaniej komendy tego poziomu: `{echo}`.
-
+                Jeśli chcecie, aby odpowiedź się wyświetliła, możecie użyć ostatniej komendy tego poziomu: `{echo}`.
                 `{echo}` używa się, aby powtórzyć odpowiedź do pytania zadanego komendą `{ask}`.
             code: |-
-                {print} Hello!
-                {ask} What is your name?
-                {echo} hello
+                {print} Witaj!
+                {ask} Jak masz na imię?
+                {echo} witaj
         6:
             header: Programowanie!
             text: |-
@@ -108,216 +108,215 @@ levels:
             header: Rysowanie z żółwiem
             text: '`{forward}` służy do przesuwania żółwia do przodu.'
         10:
-            header: 'Rysowanie z żółwiem: {turn}'
+            header: 'Rysowanie za pomocą żółwia: {turn}'
             text: '`{turn}` służy do tego, aby żółw skręcił w lewo lub w prawo.'
             code: |-
                 {forward} 50
-                {turn} left
         11:
-            header: 'Drawing with the turtle: {turn}'
-            text: '`{turn}` is used to make the turtle turn left or right.'
+            header: 'Rysowanie za pomocą żółwia: {forward}'
+            text: '`{turn}` służy do tego, aby żółw mógł skręcać w lewo lub w prawo.'
             code: |-
                 {forward} 50
-                {turn} left
+                {turn} {left}
         12:
-            header: Debugging
-            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            header: Debuggowanie
+            text: Debuggowanie kodu oznacza pozbycie się błędów w kodzie. Zdebugujmy ten kod razem. Kliknij przycisk biedronki, aby uruchomić debugger.
             code: |-
-                I am DJ Hedy
-                {print} What song would you like to hear?
-                {ask} I like that song too!
-                {print} Next up... {echo}
+                Jestem DJ Hedy
+                {print} Jaką piosenkę chciałbyś usłyszeć?
+                {ask} Też lubię tę piosenkę!
+                {print} Następnie... {echo}
             debug: 'True'
         13:
-            header: Let the programming fun begin!
-            text: Enjoy the adventures in level 1!
+            header: Niech rozpocznie się zabawa z programowaniem!
+            text: Ciesz się przygodami na poziomie 1!
     2:
         1:
-            header: Welcome to level 2
+            header: Witaj na poziomie 2
             text: |-
-                In this level you will learn to use variables.
+                Na tym poziomie nauczysz się używać zmiennych.
 
-                A variable is a word that can be used to store information.
+                Zmienna to słowo, którego można użyć do przechowywania informacji.
 
-                For example: a name, age or favorite sports team.
+                Na przykład: imię, wiek lub ulubiona drużyna sportowa.
         2:
-            header: Variables
-            text: To make or 'set' a variable we use the `{is}` command
+            header: Zmienne
+            text: Aby utworzyć lub „ustawić” zmienną, używamy polecenia `{ is } `
             code: |-
-                name {is} Hedy
-                age {is} 15
-                {print} name is age years old
+                imię {is} Hedy
+                wiek {is} 15
+                {print} imię ma wiek lat
         3:
-            header: Interactive
+            header: Interaktywny
             text: |-
-                We can also set a variable by asking questions.
+                Możemy również ustawić zmienną, zadając pytania.
 
-                The answer to the question is stored in the variable.
+                Odpowiedź na pytanie jest przechowywana w zmiennej.
 
-                This way we don't need the `{echo}`  command.
+                W ten sposób nie potrzebujemy polecenia `{ echo }`.
             code: |-
-                name {is} {ask} What is your name?
-                {print} Hello name
+                imię {is} {ask} Jak masz na imię?
+                {print} Cześć imię
         4:
-            header: Multiple variables
-            text: Now that we use variables, we can use multiple variables instead of just one `{echo}`command.
+            header: Wiele zmiennych
+            text: Teraz, gdy używamy zmiennych, możemy użyć wielu zmiennych zamiast tylko jednego polecenia `{ echo }`.
             code: |-
-                name {is} {ask} What is your name?
-                {print} Hello name
-                age {is} {ask} How old are you?
-                {print} name is age years old.
+                imię {is} {ask} Jakie jest twoje imię?
+                {print} Cześć imię
+                wiek {is} {ask} Ile masz lat?
+                {print} imię ma wiek lat.
         5:
-            header: Sleep
-            text: You can also use the `{sleep}` command to pause the code for a while.
+            header: Polecenie sleep
+            text: Możesz także użyć polecenia `{ sleep }`, aby wstrzymać kod na chwilę.
             code: |-
-                {print} My favorite colour is...
+                {print} Mój ulubiony kolor to...
                 {sleep} 2
-                {print} green!
+                {print} zielony!
         6:
-            header: Sleep 5
+            header: Polecenie sleep 5
             text: |-
-                You can add a number after the `{sleep}` command if you want the pause to be longer.
+                Możesz dodać liczbę po poleceniu { sleep }`, jeśli chcesz, aby pauza była dłuższa.
 
-                If you want, you could even use a variable instead of a number to decide the duration of the sleep command.
+                Jeśli chcesz, możesz nawet użyć zmiennej zamiast liczby, aby zdecydować o czasie trwania polecenia sleep.
             code: |-
-                pause {is} 10
-                {print} My favorite colour is...
-                {sleep} pause
-                {print} green!
+                pauza {is} 10
+                {print} Mój ulubiony kolor to...
+                {sleep} pauza
+                {print} zielony!
         7:
-            header: Debugging
-            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            header: Debuggowanie
+            text: Debugowanie kodu oznacza pozbycie się błędów w kodzie. Zdebuggujmy ten kod razem. Kliknij przycisk biedronki, aby uruchomić debugger.
             code: |-
-                {print} Welcome to the donut shop!
-                filling {is} What kind of filling would you like?
-                {print} You have chosen... Filling! Yum!
-                topping {ask} What kind of topping would you like?
-                topping is delicious!
-                {print} I'll go get your donut. {sleep}
-                {print} Here you go! A filling donut with toping!
-                {ask} Have a nice day!
+                {print} Witamy w sklepie z pączkami!
+                nadzienie {is} Jakiego rodzaju nadzienie chciałbyś?
+                {print} Wybrałeś... nadzienie! Yum!
+                polewa {ask} Jaki rodzaj polewy chciałbyś?
+                polewa jest pyszna!
+                {print} Pójdę po twojego pączka. {sleep}
+                {print} Proszę bardzo! Pączek z nadzieniem i plewą!
+                {ask} Miłego dnia!
             debug: 'True'
         8:
-            header: Let the programming fun begin!
-            text: Enjoy the adventures in level 2!
+            header: Niech rozpocznie się przygoda z programowaniem!
+            text: Ciesz się przygodami na poziomie 2!
     3:
         1:
-            header: Welcome to level 3
-            text: In this level you'll learn how to make a list, add and remove items form your lists and pick a random item off that list.
+            header: Witaj na poziomie 3
+            text: Na tym poziomie dowiesz się, jak utworzyć listę, dodać i usunąć elementy z list oraz wybrać losowy element z tej listy.
         2:
-            header: Making a list
+            header: Tworzenie listy
             text: |-
-                You make a list with `{is}`.
+                Tworzysz listę za pomocą `{ is }`.
 
-                Separate the items on your list with a comma.
-            code: animals {is} dogs, cats, kangaroos
+                Oddziel elementy na liście przecinkiem.
+            code: zwierzęta {is} psy, koty, kangury
         3:
-            header: At random
+            header: Losowo
             text: |-
-                You can use the list with the `{at}` `{random}` command.
-                The computer will randomly pick one item of the list.
-                Every time you run this code the output will differ.
+                Możesz użyć listy za pomocą polecenia `{ at }` `{ random }`.
+                Komputer losowo wybierze jeden element listy.
+                Za każdym razem, gdy uruchamiasz ten kod, dane wyjściowe będą się różnić.
             code: |-
-                animals {is} dogs, cats, kangaroos
-                {print} animals {at} {random}
+                zwierzęta {is} psy, koty, kangury
+                {print} zwierzęta {at} {random}
         4:
-            header: At random in a sentence
-            text: You can use the `{at}` `{random}` command in a sentence as well.
+            header: Losowo w zdaniu
+            text: Możesz także użyć polecenia `{ at }` `{ random }` w zdaniu.
             code: |-
-                animals {is} dogs, cats, kangaroos
-                {print} My favorite animal is animals {at} {random}
+                zwierzęta {is} psy, koty, kangury
+                {print} Moim ulubionym zwierzęciem są zwierzęta {at} {random}
         5:
-            header: Add to
+            header: Dodaj do
             text: |-
-                You can add items to a list with the `{add}` `{to}` command.
+                Możesz dodać elementy do listy za pomocą polecenia `{ add }` `{ to }`.
 
-                You can choose what to add to the list or you can use the `{add}` `{to}` command in combination with the `{ask}` command.
-                This way you can let the player decide what to add to the list.
+                Możesz wybrać, co dodać do listy lub użyć polecenia `{ add }` `{ to }` w połączeniu z poleceniem` { ask } `.
+                W ten sposób możesz pozwolić graczowi zdecydować, co dodać do listy.
             code: |-
-                animals {is} dog, cat, kangaroo
-                like {is} {ask} What is your favorite animal?
-                {add} like {to_list} animals
-                {print} I choose animals {at} {random}
+                zwierzęta {is} pies, kot, kangur
+                lubić {is} {ask} Jakie jest twoje ulubione zwierzę?
+                {add} lubić {to_list} zwierzęta
+                {print} Wybieram zwierzęta {at} {random}
         6:
-            header: Remove from
+            header: Usuń z
             text: |-
-                The opposite of the `{add}` `{to}` command is the  `{remove}` `{from}` command.
-                This command removes an item from a list.
+                Przeciwieństwem polecenia `{add}` {to}` jest polecenie`{remove}` `{from}`.
+                To polecenie usuwa element z listy.
             code: |-
-                animals {is} dog, cat, kangaroo
-                dislike {is} {ask} What animal do you not like?
-                {remove} dislike {from} animals
-                {print} I choose animals {at} {random}
+                zwierzęta {is} pies, kot, kangur
+                nie_lubić {is} {ask} Jakiego zwierzęcia nie lubisz?
+                {remove} nie_lubić {from} zwierzęta
+                {print} Wybieram zwierzęta {at} {random}
         7:
-            header: Debugging
-            text: Let's debug this code!
+            header: Debuggowanie
+            text: Zdebugguj ten kod!
             editor: |-
-                music_genres {is} rock, pop, metal, indie, jazz
-                chosen_genre is music {at} {random}
-                {print} Let's listen to chosen genre
-                nice {ask} Do you like that genre?
-                {remove} chosen_genre {from} chosen_genre
-                second_choice {is} music_genres
-                {print} or do you prefer... second_choice {at} {random}
-                {remove} second_choice {to} music_genres
-                {print} I like music_genre {random} best!
+                gatunki_muzyki {is} rock, pop, metal, indie, jazz
+                wybrany_gatunek is muzyka {at} {random}
+                {print} Posłuchajmy wybranego gatunku
+                fajny {ask} Czy lubisz ten gatunek??
+                {remove} wybrany_gatunek {from} wybrany_gatunek
+                drugi_wybór {is} gatunki_muzyki
+                {print} a może wolisz... drugi_wybór {at} {random}
+                {remove}drugi_wybór {to} gatunki_muzyki
+                {print} Lubię gatunki_muzyki {random} best!
             debug: 'True'
         8:
-            header: Let's get to work!
-            text: Enjoy the adventures in level 3!
+            header: Zabierajmy się do roboty!
+            text: Ciesz się przygodami na poziomie 3!
     4:
         1:
-            header: Welcome to level 4
-            text: In this level you will learn how to use quotation marks.
-            code: '{print} ''print with quotes!'''
+            header: Witaj na poziomie 4
+            text: Na tym poziomie nauczysz się używać cudzysłowów.
+            code: '{print} ''polecenie print z cytatami!'''
         2:
-            header: Problem
-            text: 'In the previous levels, you might have come across this problem:'
+            header: problem
+            text: 'Na poprzednich poziomach mogłeś napotkać ten problem:'
             code: |-
-                name {is} Sophie
-                {print} My name is name
+                imię {is} Sophie
+                {print} Moje imię to imię
             debug: 'True'
         3:
-            header: Fixing it with quotation marks
+            header: Naprawianie go znakami cudzysłowu
             text: |-
-                In this level we will fix this problem by using quotation marks.
+                Na tym poziomie rozwiążemy ten problem za pomocą cudzysłowów.
 
-                This also makes our code look more like 'real' Python code.
+                To sprawia, że nasz kod wygląda bardziej jak „prawdziwy” kod Pythona.
         4:
-            header: Quotation marks with print
-            text: Each time you use the `{print}` command you need to put the text that you want to appear on the screen in quotation marks.
-            code: '{print} ''print with quotes!'''
+            header: Znaki cudzysłowu z poleceniem print
+            text: Za każdym razem, gdy używasz polecenia `{print}`, musisz umieścić tekst, który chcesz wyświetlać na ekranie, w cudzysłowie.
+            code: '{print} ''polecenie print z cytatami!'''
         5:
-            header: Quotation marks with ask
-            text: This also goes for the `{ask}` command.
-            code: name {is} {ask} 'name please?'
+            header: Znaki cudzysłowu z poleceniem ask
+            text: Dotyczy to również polecenia `{ ask }`.
+            code: imię {is} {ask} 'imię proszę?'
         6:
-            header: Quotation marks and variables
+            header: Znaki cudzysłowu i zmienne
             text: |-
-                You do not want variable names to be printed on the screen.
-                This is why variables should be left out of the quotation marks, like this:
+                Nie chcesz, aby nazwy zmiennych były wyświetlane na ekranie.
+                Dlatego zmienne należy pominąć w cudzysłowie, w następujący sposób:
             code: |-
-                name {is} Harry
-                {print} 'Hello ' name
+                imię {is} Harry
+                {print} 'Cześć ' imię
         7:
-            header: Quotation marks and variables
+            header: Znaki cudzysłowu i zmienne
             text: |-
-                When variable names are used in the middle of a sentence, you have to leave the variables out of the quotation marks.
-                The rest of the sentence however, does need quotation marks. That looks like this:
+                Gdy nazwy zmiennych są używane w środku zdania, należy pominąć zmienne w cudzysłowie.
+                Reszta zdania wymaga jednak cudzysłowu. To wygląda tak:
             code: |-
-                name {is} Harry
-                {print} 'Hello ' name ', how are you?'
+                imię {is} Harry
+                {print} 'Cześć ' imię ', jak się masz?'
         8:
-            header: Quotation marks and contractions
+            header: Znaki cudzysłowu i skrótowce
             text: |-
-                Be careful! Now that you are using quotation marks, you can't use apostrophes in contractions.
+                Bądź ostrożny! Teraz, gdy używasz cudzysłowu, nie możesz używać apostrofów w skurczach.
 
-                Please try to print a contraction like "you're" or "I'm" in the screen below and see what happens....
-            code: '{print} ''This won''t work!'''
+                Spróbuj wydrukować skurcz typu "you're" lub "I'm" na ekranie poniżej i zobacz, co się stanie....
+            code: '{print} ''To się nie uda!'''
             debug: 'True'
         9:
-            header: Ready, Set, Go!
-            text: Enjoy the adventures in level 4!
+            header: komenda Clear
+            text: "Na tym poziomie nauczysz się także polecenia { clear }.\nZa pomocą tego polecenia możesz wyczyścić cały tekst z ekranu wyjściowego.\n\nUważaj, aby zawsze używać polecenia uśpienia. Jeśli tego nie zrobisz, komputer wyczyści cały tekst, zanim będziesz mógł go przeczytać!"
             code: |-
                 {print} '3'
                 {clear}
@@ -325,564 +324,564 @@ levels:
                 {clear}
                 {print} '1'
                 {clear}
-                {print} 'SURPRISE!'
+                {print} 'NIESPODZIANKA!'
         10:
-            header: Debugging
-            text: Let's debug this code!
+            header: Debuggowanie
+            text: Zdebuggujmy ten kod!
             code: |-
                 {clear}
-                {print} What a nice day to go to the beach!
-                {ask} 'Do you want to build a sandcastle or swim in the ocean?'
-                {print} 'You would like to activity '
-                {print} 'I'd like to do that too'
-                {print} 'Look at these beautiful seashells!'
-                colors {is} 'orange, silver, white, brown'
-                {print} 'I love the colors {at} {random} one!'
-                choice {is} {ask} Which one do you like?
+                {print} Co za przyjemny dzień, żeby pójść na plażę!
+                {ask} 'Chcesz zbudować zamek z piasku lub popływać w oceanie?'
+                {print} 'Chciałbyś czynność '
+                {print} 'Też chciałbym to zrobić'
+                {print} 'Spójrz na te piękne muszle!'
+                kolory {is} 'pomarańczowy, srebrny, biały, brązowy'
+                {print} 'Uwielbiam kolory {at} {random}!'
+                wybór {is} {ask} Która ci się podoba?
             debug: 'True'
         11:
-            header: Ready, Set, Go!
-            text: Enjoy the adventures in level 4!
+            header: Do biegu, gotowi, start!
+            text: Ciesz się przygodami na poziomie 4!
     5:
         1:
-            header: Welcome to level 5
-            text: 'In this level you will learn to use 3 new commands: `{if}`, `{else}` and `{in}`.'
+            header: Witamy na poziomie 5
+            text: 'Na tym poziomie nauczysz się używać 3 nowych poleceń: `{ if }`, `{ else } `i` { w } `.'
         2:
             header: if
             text: |-
-                The `{if}` command allows you to choose between two options.
-                In this example the computer will print 'nice' if the given answer is Hedy.
-                If the answer is not Hedy, the computer will do nothing.
+                Polecenie `{ if }` pozwala wybrać jedną z dwóch opcji.
+                W tym przykładzie komputer wydrukuje 'ładnie', jeśli podana odpowiedź to Hedy.
+                Jeśli odpowiedź nie brzmi Hedy, komputer nic nie zrobi.
             code: |-
-                name {is} {ask} 'what is your name?'
-                {if} name {is} Hedy {print} 'nice'
+                imię {is} {ask} 'Jak masz na imię?'
+                {if} imię {is} Hedy {print} 'fajnie'
         3:
-            header: Don't forget to print
+            header: Nie zapomnij napisać
             text: |-
-                When using the `{if}` command, don't forget to use the `{print}` command.
-                This code will not work!
-            code: '{if} name {is} Hedy ''nice'''
+                Korzystając z polecenia `{ if }`, nie zapomnij użyć polecenia `{ print }`.
+                Ten kod nie będzie działał!
+            code: '{if} imię {is} Hedy ''fajnie'''
             debug: 'True'
         4:
-            header: else
+            header: Polecenie else
             text: |-
-                When using an `{if}` command, you can also add an `{else}` command.
-                If the answer is Hedy, the computer will print 'nice'.
-                But if the answer is something else the computer will print 'boo'
-            code: '{if} name {is} Hedy {print} ''nice'' {else} {print} ''boo!'''
+                Korzystając z polecenia `{ if }`, możesz również dodać polecenie `{ else }`.
+                Jeśli odpowiedź brzmi Hedy, komputer wyświetli 'fajnie'.
+                Ale jeśli odpowiedź jest czymś innym, komputer wyświetli „boo”'
+            code: '{if} imię {is} Hedy {print} ''fajnie'' {else} {print} ''boo!'''
         5:
-            header: Long lines
+            header: Długie linie
             text: |-
-                You might have noticed that your lines can get very long when you have both an `{if}` and an `{else}` command.
+                Być może zauważyłeś, że twoje linie mogą być bardzo długie, gdy masz zarówno polecenie `{ if }`, jak i polecenie `{ else }`.
 
-                You can choose to separate commands and put them on 2 lines, like this:
+                Możesz rozdzielić polecenia i umieścić je w 2 wierszach, takich jak:
             code: |-
-                {if} name {is} Hedy {print} 'nice'
+                {if} imię {is} Hedy {print} 'fajnie'
                 {else} {print} 'boo!'
         6:
-            header: Another new command
+            header: Kolejne nowe polecenie
             text: |-
-                If you have practised with the `{if}` and `{else}` commands, you can also try the `{in}` command.
+                Jeśli ćwiczyłeś z poleceniami `{ if }` i` { else } `, możesz także wypróbować polecenie` { in } `.
 
-                With `{in}` you can let the computer check if an item is in a list, for example:
+                Za pomocą `{ in }` możesz pozwolić komputerowi sprawdzić, czy element znajduje się na liście, na przykład:
 
-                Please note that Hedy is case sensitive. This means that if you answer "Green" instead of "green", Hedy will print "meh".
+                Pamiętaj, że Hedy jest wrażliwa na przypadki. Oznacza to, że jeśli odpowiesz „Zielony” zamiast „zielony”, Hedy wydrukuje „meh”".
             code: |-
-                pretty_colors {is} green, yellow
-                favorite_color {is} {ask} 'What is your favorite color?'
-                {if} favorite_color {in} pretty_colors {print} 'pretty!'
+                ładne_kolory {is} zielony, żółty
+                ulubiony_kolor {is} {ask} 'Jaki jest twój ulubiony kolor?'
+                {if} ulubiony_kolor {in} ładne_kolory {print} 'ładny!'
                 {else} {print} 'meh'
         7:
-            header: Debugging
-            text: Let's debug this code!
+            header: Debuggowanie
+            text: Zdebuggujmy ten kod!
             code: |-
-                {print} Welcome to HedyAir Security!
-                boarding_pass {is} {ask} 'Do you have your boarding pass?'
-                {if} bording_pass yes {print} Great!
-                {else} Please, get your boarding pass ready.
-                passport {is} 'Can I see your passport, please?'
-                {if} passport {is} yes 'thank you'
-                {else} 'You can't fly without a passport'
-                declare {is} {ask} Do you have anything to declare?
-                {if} declare {is} yes
-                item_to_declare {is} {ask} 'What would you like to declare'
-                {else} Alright
-                {print} Thank you. Please head to gate A22.'
+                {print} Witamy w HedyAir Security!
+                karta_pokładowa {is} {ask} 'Czy masz kartę pokładową??'
+                {if} karta_pokładowa tak {print} Wspaniale!
+                {else} Proszę przygotować kartę pokładową.
+                paszport {is} 'Czy mogę zobaczyć twój paszport?'
+                {if} paszport {is} tak 'dziękuję'
+                {else} 'Nie możesz latać bez paszportu'
+                zgłosić {is} {ask} Czy masz coś do zgłoszenia?
+                {if} zgłosić {is} tak
+                przedmioty_do_zgłoszenia {is} {ask} 'Co chciałbyś zgłosić'
+                {else} W porządku
+                {print} Dziękuję. Proszę przejść do bramy A22.'
             debug: 'True'
         8:
-            header: Let's go!
-            text: Enjoy the adventures in level 5!
+            header: Chodźmy!
+            text: Ciesz się przygodami na poziomie 5!
     6:
         1:
-            header: Welcome to level 6
-            text: In this level we are adding maths to our codes.
+            header: Witamy na poziomie 6
+            text: Na tym poziomie dodajemy matematykę do naszych kodów.
         2:
-            header: Addition
-            text: If you want to calculate an addition, simply use the plus sign.
-            code: '{print} ''5 plus 5 is '' 5 + 5'
+            header: Dodawanie
+            text: Jeśli chcesz obliczyć dodatek, po prostu użyj znaku plus.
+            code: '{print} ''5 dodać 5 to '' 5 + 5'
         3:
-            header: Subtraction
-            text: If you want to subtract, you can use the minus sign.
-            code: '{print} ''5 minus 5 is '' 5 - 5'
+            header: Odejmowanie
+            text: Jeśli chcesz odjąć, możesz użyć znaku minus.
+            code: '{print} ''5 minus 5 to '' 5 - 5'
         4:
-            header: Multiplication
-            text: If you want to do multiplications, you can use the asterisk.
-            code: '{print} ''5 times 5 is '' 5 * 5'
+            header: Mnożenie
+            text: Jeśli chcesz wykonywać mnożenie, możesz użyć gwiazdki.
+            code: '{print} ''5 razy 5 to '' 5 * 5'
         5:
-            header: Division
-            text: You can use the slash for division.
-            code: '{print} ''5 divided by 5 is '' 5 / 5'
+            header: Dzielenie
+            text: Możesz użyć ukośnika do podziału.
+            code: '{print} ''5 dzielone na 5 to '' 5 / 5'
         6:
-            header: Summary
-            text: In summary, you can use +, -, * and / to do maths.
+            header: Podsumowanie
+            text: Podsumowując, możesz używać +, -, * i / do matematyki.
             code: |-
-                {print} '5 plus 5 is ' 5 + 5
-                {print} '5 minus 5 is ' 5 - 5
-                {print} '5 times 5 is ' 5 * 5
-                {print} '5 divided by 5 is ' 5 / 5
+                {print} '5 dodać 5 to ' 5 + 5
+                {print} '5 minus 5 to ' 5 - 5
+                {print} '5 razy 5 to ' 5 * 5
+                {print} '5 dzielone na 5 to ' 5 / 5
         7:
-            header: The = symbol
+            header: Symbol =
             text: |-
-                From now on you can also use the = symbol instead of the `{is}` command.
-                This goes for both numbers and words, and it also goes after the `{if}` or `{else}` commands.
+                Odtąd możesz także używać symbolu = zamiast polecenia `{ is }`.
+                Dotyczy to zarówno liczb, jak i słów, a także poleceń `{ if }` lub `{ else }`.
             code: |-
-                name = Hedy
-                answer = 20 + 4
+                imię = Hedy
+                odpowiedź = 20 + 4
         8:
-            header: Calculations with variables
-            text: 'You can use calculations with numbers, but you can also use variables to do calculations, like this:'
+            header: Obliczenia ze zmiennymi
+            text: 'Możesz używać obliczeń z liczbami, ale możesz także używać zmiennych do wykonywania obliczeń, takich jak:'
             code: |-
-                number_1 = {ask} 'Fill in the first number:'
-                number_2 = {ask} 'Fill in the second number:'
-                correct_answer = number_1 * number_2
-                {print} number_1 ' times ' number_2 ' is ' correct_answer
+                liczba_1 = {ask} 'Wypełnij pierwszą liczbę:'
+                liczba_2 = {ask} 'Wypełnij druga liczbę:'
+                poprawna_odpowiedź = liczba_1 * liczba_2
+                {print} liczba_1 ' razy ' liczba_2 ' to ' poprawna_odpowiedź
         9:
-            header: Debugging
-            text: Let's debug this code!
+            header: Debuggowanie
+            text: Zdebugguj ten kod!
             code: |-
-                {print} 'This is the water park ticket machine'
-                {print} 'Price list: Children under 12 $3, Adults $5'
-                {print} 'Mondays are 25% off'
-                amount_of_children = 'How many kids tickets would you like?'
-                amount_of_adults = 'How many adult tickets would you like?'
-                day_of_the_week = {ask} 'What day is it?'
+                {print} 'To automat biletowy parku wodnego'
+                {print} 'Cennik: Dzieci poniżej 12 lat $ 3, Dorośli $ 5'
+                {print} 'Poniedziałki zniżka 25%'
+                liczba_dzieci = 'Ile biletów dla dzieci chciałbyś?'
+                liczba_dorosłych = 'Ile biletów dla dorosłych chciałbyś?'
+                dzień_tygodnia = {ask} 'Jaki jest dzień?'
                 {clear}
-                child_price = amount of children * 3
-                adult_price = amount_of_adults + 5
-                total_price = adult_price * child_price
-                {if} day {is} monday
-                total_price = total_price * 0.25
-                {print} 'That will be total_price please'
+                cena_dziecka = liczba_dzieci * 3
+                cena_dorosłych = liczba_dorosłych + 5
+                całkowita_cena = adult_price * child_price
+                {if} dzień {is} poniedziałek
+                całkowita_cena = całkowita_cena * 0.25
+                {print} 'Za wszystko należy się
             debug: 'True'
         10:
-            header: Let's get to work!
-            text: Enjoy the adventures in level 6!
+            header: Zabierajmy się do roboty!
+            text: Ciesz się przygodami na poziomie 6!
     7:
         1:
-            header: Welcome to level 7
-            text: In this level you will learn how to repeat a line of code as many times a you'd like.
+            header: Witamy na poziomie 7
+            text: Na tym poziomie nauczysz się powtarzać wiersz kodu tyle razy, ile chcesz.
         2:
-            header: repeat 3 times
+            header: powtórz 3 razy
             text: |-
-                If you want to repeat a line of code, you can use the `{repeat}` 3 `{times}` code.
-                If you want to repeat the line more times, simply change the number.
+                Jeśli chcesz powtórzyć wiersz kodu, możesz użyć kodu `{repeat}`3` { times }`.
+                Jeśli chcesz powtórzyć linię więcej razy, po prostu zmień liczbę.
 
-                For example: If you are programming a story where your character shouts for help for 5 times, it could look like this:
+                Na przykład: jeśli programujesz historię, w której twoja postać krzyczy o pomoc 5 razy, może to wyglądać następująco:
             code: |-
-                {print} 'The prince kept calling for help'
-                {repeat} 5 {times} {print} 'Help!'
-                {print} 'Why is nobody helping me?'
+                {print} 'Książę wciąż wołał o pomoc'
+                {repeat} 5 {times} {print} 'Pomocy!'
+                {print} 'Dlaczego nikt mi nie pomoże??'
         3:
-            header: Don't forget the print command
-            text: When using the repeat command, do not forget the `{print}` command.
-            code: '{repeat} 5 {times} ''Help!'''
+            header: Nie zapomnij polecenia print
+            text: Podczas korzystania z polecenia powtarzania nie zapomnij o poleceniu `{ print }`.
+            code: '{repeat} 5 {times} ''Pomocy!'''
             debug: 'True'
         4:
-            header: Repeat an ask command
-            text: You can also repeat an `{ask}`, `{if}` or `{else}` command multiple times.
+            header: Powtórz polecenie ask
+            text: Możesz także wielokrotnie powtarzać polecenie `{ ask }`, `{ if }` lub `{ else }`.
             code: |-
-                {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
-                {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
-                {else} {repeat} 3 {times} {print} 'You have learned something new!'
+                {repeat} 2 {times} odpowiedź = {ask} 'Czy wiesz, że możesz zadać pytanie wiele razy?'
+                {if} odpowiedź {is} tak {repeat} 2 {times} {print} 'Już to wiedziałeś!'
+                {else} {repeat} 3 {times} {print} 'Nauczyłeś się czegoś nowego!'
         5:
-            header: Debugging
-            text: Let's debug this code!
+            header: Debuggowanie
+            text: Zdebuggujmy ten kod!
             code: |-
-                {print} You gave stranded on a desert island.
-                {repeat} 3 'Help!'
-                rescued = {ask} Has anybody come to the rescue?
-                {if} rescued yes {is}
-                {print} Lucky!
-                {else} {repeat} 3 {times} 'HELP!'
-                rescued = 'What about now?'
-                {if} yes
-                {print} 'Hurray!
-                {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
+                {print} Utknąłeś na bezludnej wyspie.
+                {repeat} 3 'Pomocy!'
+                uratowany = {ask} Czy ktoś przyszedł na ratunek?
+                {if} uratowany tak {is}
+                {print} Szczęściarz
+                {else} {repeat} 3 {times} 'POMOCY!'
+                uratowany = 'A teraz?'
+                {if} tak
+                {print} 'Hurra!
+                {else} 'Szkoda... No cóż ... czas zbudować schronienie i znaleźć jedzenie.'
             debug: 'True'
         6:
-            header: Ready Set Go!
-            text: Enjoy the adventures in level 7!
+            header: Do biegu, gotowi, start!
+            text: Ciesz się przygodami na poziomie 7!
     8:
         1:
-            header: Welcome to level 8
-            text: In this level you will learn to use indentation to make the `{repeat}`, `{if}` and `{else}` commands work for multiple lines of code.
+            header: Witamy na poziomie 8
+            text: Na tym poziomie nauczysz się używać wcięcia, aby polecenia `{repeat}`, `{if}` i `{else}` działały dla wielu wierszy kod.
         2:
-            header: '{repeat} commands before'
+            header: 'polecenia {repeat} przed'
             text: |-
-                In the previous levels, the `{repeat}` command looked like this:
+                Na poprzednich poziomach polecenie `{repeat}` wyglądało następująco:
 
-                You could only repeat one line of code.
-            code: '{repeat} 5 {times} {print} ''Help!'''
+                Możesz powtórzyć tylko jeden wiersz kodu.
+            code: '{repeat} 5 {times} {print} ''Pomocy!'''
             debug: 'True'
         3:
-            header: '{repeat} commands now'
+            header: 'Polecenia {repeat} teraz'
             text: |-
-                In this level you can repeat multiple lines of code. To do this you must tell the computer which lines belong together and should be repeated.
-                You do this by using indentation.
+                Na tym poziomie możesz powtórzyć wiele wierszy kodu. Aby to zrobić, musisz powiedzieć komputerowi, które linie należą do siebie i powinny zostać powtórzone.
+                Robisz to za pomocą wcięcia.
 
-                Use 4 spaces (or one tab) at the beginning of each line that you want to repeat, like this:
+                Użyj 4 spacji (lub jednego tab) na początku każdej linii, którą chcesz powtórzyć, w następujący sposób:
             code: |-
                 {repeat} 5 {times}
-                    {print} 'Hello everyone'
-                    {print} 'This will be printed 5 times'
+                    {print} 'Cześć wszystkim'
+                    {print} 'Zostanie to napisane 5 razy ”'
         4:
-            header: '{repeat} commands now'
+            header: 'Polecenia {repeat} teraz'
             text: |-
-                If you want to, you can continue after the `{repeat}` command without indentation.
-                The lines that do not start with indentation will not be repeated.
+                Jeśli chcesz, możesz kontynuować po poleceniu `{repeat}` bez wcięcia.
+                Linie, które nie zaczynają się od wcięcia, nie będą się powtarzać.
             code: |-
                 {repeat} 3 {times}
-                    {print} 'Hello!'
-                {print} 'We are done repeating!'
+                    {print} 'Cześć!'
+                {print} 'Skończyliśmy powtarzać!'
         5:
-            header: if and else before
+            header: polecenie if i else przed
             text: |-
-                The same goes for the `{if}` and `{else}` commands.
-                These were the commands before:
+                To samo dotyczy poleceń `{ if }` i` { else }`.
+                Były to polecenia wcześniej:
             code: |-
-                {if} name {is} Hedy {print} 'nice'
+                {if} imię{is} Hedy {print} 'fajnie'
                 {else} {print} 'boo!'
             debug: 'True'
         6:
-            header: if and else now
+            header: Polecenie if i else teraz
             text: |-
-                These are the `{if}` and `{else}` commands now.
-                Each line after the `{if}` and `{else}` commands start with indentation.
+                Są to teraz polecenia `{ if }` i `{ else }`.
+                Każda linia po poleceniach '{ if }' i `{ else } `zaczyna się od wcięcia.
             code: |-
-                name = {ask} 'What is your name?'
-                {if} name {is} Hedy
-                    {print} 'Welcome Hedy'
+                imię = {ask} 'Jak masz na imię?'
+                {if} imię {is} Hedy
+                    {print} 'Witaj Hedy'
                 {else}
-                    {print} 'Welcome programmer!'
+                    {print} 'Witaj programisto!'
         7:
-            header: stopping the indentation
-            text: Just like with the `{repeat}` command, you can stop using indentation and the lines will always be shown. Not just if the statement is true.
-            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!' \n{print} '3..2..1.. Start programming!'"
+            header: zatrzymanie wcięcia
+            text: Podobnie jak w przypadku polecenia `{repeat}`, możesz przestać używać wcięcia, a wiersze będą zawsze wyświetlane. Nie tylko jeśli stwierdzenie jest prawdziwe.
+            code: "imię = {ask} 'jak masz na imię?'\n{if} imię {is} Hedy\n    {print} 'Witaj Hedy'\n{else}\n    {print} 'Witaj programisto!' \n{print} '3..2..1.. Zacznij programować!'"
         8:
-            header: if statements inside if statements
+            header: wyrażenie if wewnątrz wyrażenia if
             text: |-
-                You might have thought of trying to put an if command inside a repeat command, or inside another if command.
-                For now, this is not possible yet. In the higher levels, it will be allowed, but for now let's focus on practising the `{if}` `{else}` and `{repeat}` commands with proper indentation first.
+                Być może pomyślałeś o próbie umieszczenia polecenia if w poleceniu repeat lub w innym poleceniu if.
+                Na razie nie jest to jeszcze możliwe. Na wyższych poziomach będzie to dozwolone, ale na razie skupmy się na ćwiczeniu poleceń { if } `{ else }` i `{repeat}` z właściwym wcięciem pierwszy.
         9:
-            header: Debugging
-            text: Let's debug this code!
+            header: Debuggowanie
+            text: Zdebugguj ten kod!
             code: |-
-                {print} 'HedyWheels bus tickets machine'
-                zone_1 = Town Hall, Library, Campus, Market Place
-                zone_2 = Swimming Pool, Skate Park, Mall, Airport
-                destination = 'Where do you want to go?'
-                {if} destination {in} zone 1
-                {print} destination 'is in zone 1'
-                price = 3 euros
-                    {if} destination {is} zone_2
-                {print} destination 'is in zone 2'
-                price = 6
-                ticket_types = {ask} 'Press 1 for a single use ticket.
-                Press 2 for a round trip ticket:'
-                {if} ticket_type = 1
-                {print} 'You chose a single use ticket'
+                {print} 'Automat biletowy busa HedyWheels
+                strefa_1 = Ratusz, biblioteka, kampus, rynek
+                strefa_2 = Basen, Skate Park, centrum handlowe, lotnisko
+                miejsce_docelowe = 'Gdzie chcesz iść?'
+                {if} miejsce_docelowe {in} strefa 1
+                {print} miejsce_docelowe 'is w strefa 1'
+                cena = 3 euros
+                    {if} miejsce_docelowe {is} strefa_2
+                {print} miejsce_docelowe 'jest w strefa 2'
+                cena = 6
+                rodzaje_biletów = {ask} 'Naciśnij 1, aby uzyskać bilet jednorazowego użytku
+                Naciśnij 2, aby uzyskać bilet w obie strony:'
+                {if} rodzaje_biletów = 1
+                {print} 'Wybrałeś bilet jednorazowego użytku'
                 {else}
-                        {print} You chose a round trip ticket'
-                price * 2
-                {print} 'That will be ' price ' euros please'
+                        {print} Wybrałeś bilet w obie strony'
+                cena * 2
+                {print} 'Za wszystko należy się euro'
             debug: 'True'
         10:
-            header: Let's check out the adventures!
-            text: Enjoy the adventures in level 8!
+            header: Sprawdźmy przygody!
+            text: Ciesz się przygodami na poziomie 8!
     9:
         1:
-            header: Welcome to level 9
+            header: Witamy na poziomie 9
             text: |-
-                In this level you can use multiple lines of code after an `{if}` or after a `{repeat}` command.
+                Na tym poziomie możesz użyć wielu wierszy kodu po poleceniu `{ if }` lub po poleceniu `{repeat}`.
 
-                You can even put a `{repeat}` command within another `{repeat}`  command.
+                Możesz nawet umieścić polecenie `{repeat}` w innym poleceniu `{repeat}`.
         2:
-            header: Multiple lines after `{repeat}`
-            text: You are allowed to combine `{repeat}` and `{if}` in this level.
+            header: Wiele linii po `{repeat}`
+            text: Na tym poziomie możesz łączyć `{repeat}` i `{if}`.
             code: |-
                 {repeat} 3 {times}
-                    food = {ask} 'What do you want?'
-                    {if} food {is} pizza
-                        {print} 'nice!'
+                    posiłek = {ask} 'Co chcesz zjeść?'
+                    {if} posiłek {is} pizza
+                        {print} 'dobrze!'
                     {else}
-                        {print} 'pizza is better'
+                        {print} 'pizza jest lepsza'
         3:
-            header: Indentation matters!
-            text: Indentation is very important to tell the computer which lines should be repeated and which lines should only be ran once.
+            header: Wcięcie ma znaczenie!
+            text: Wcięcie jest bardzo ważne, aby powiedzieć komputerowi, które linie należy powtórzyć, a które linie należy uruchomić tylko raz.
             code: |-
                 {repeat} 3 {times}
-                    {print} 'This line will be repeated...'
-                    {print} 'This one too...'
-                {print} 'but this one will not!'
+                    {print} 'Ta linia zostanie powtórzona...'
+                    {print} 'Ta też...'
+                {print} 'ale ta nie będzie !'
         4:
-            header: Multiple lines after `{if}`
-            text: You can also use multiple lines after `{if}`
+            header: Wiele linii po `{ if }`
+            text: Możesz także użyć wielu linii po `{ if }`
             code: |-
-                continue = {ask} 'Do you want to continue?'
-                {if} continue = yes
-                    sure = {ask} 'Are you sure?'
-                    {if} sure {is} yes
-                        {print} 'We will continue'
+                kontynuować = {ask} 'Chcesz kontynuować?'
+                {if} kontynuować = tak
+                    pewien = {ask} 'Czy jesteś tego pewny?'
+                    {if} pewien {is} tak
+                        {print} 'będziemy kontynuować'
                     {else}
-                        {print} 'You are not sure'
+                        {print} 'Nie jesteś pewien'
                 {else}
-                    {print} 'You do not want to continue'
+                    {print} 'nie chcesz kontynuować'
         5:
-            header: Indentation matters
-            text: Again, indentation is still very important and can make a big difference in the code.
+            header: Wcięcie ma znaczenie
+            text: Ponownie wcięcie jest nadal bardzo ważne i może mieć duży wpływ na kod.
             code: |-
-                continue = {ask} 'Do you want to continue?'
-                {if} continue = yes
-                    sure = {ask} 'Are you sure?'
-                    {if} sure {is} yes
-                        {print} 'We will continue'
+                kontynuować = {ask} 'Chcesz kontynuować?'
+                {if} kontynuować = tak
+                    pewien = {ask} 'Jesteś tego pewny?'
+                    {if} pewien {is} tak
+                        {print} 'Będziemy kontynuować'
                 {else}
-                    {print} 'You are not sure'
+                    {print} 'Nie jesteś pewien'
         6:
-            header: An `{if}` inside a `{repeat}`
+            header: "'{if}` wewnątrz `{repeat}`"
             text: |-
-                Now that you can use multiple lines of code after these command, you can also put them within each other.
-                Check it out:
+                Teraz, gdy możesz użyć wielu wierszy kodu po tym poleceniu, możesz również umieścić je w sobie.
+                Sprawdź to:
             code: |-
                 {repeat} 3 {times}
-                    food = {ask} 'What do you want?'
-                    {if} food {is} pizza
-                        {print} 'nice!'
+                    posiłek = {ask} 'Co chcesz zjeść?'
+                    {if} posiłek {is} pizza
+                        {print} 'dobrze!'
                     {else}
-                        {print} 'pizza is better'
+                        {print} 'pizza jest lepsza'
         7:
-            header: Mind the indentation
-            text: Mind that the fourth and sixth line of this code starts with 8 spaces of indentation.
+            header: Uważaj na wcięcie
+            text: Pamiętaj, że czwarty i szósty wiersz tego kodu zaczyna się od 8 spacji wcięcia.
             code: |-
                 {repeat} 3 {times}
-                    food = {ask} 'What do you want?'
-                    {if} food {is} pizza
-                        {print} 'nice!'
+                    posiłek = {ask} 'Co chcesz zjeść?'
+                    {if} posiłek {is} pizza
+                        {print} 'dobrze!'
                     {else}
-                        {print} 'pizza is better'
+                        {print} 'pizza jest lepsza'
         8:
-            header: Debugging
-            text: Let's debug this code!
+            header: Debuggowanie
+            text: Zdebuggujmy ten kod!
             code: |-
-                {print} 'Welcome to HedyJumps, your parachute jump adventure!'
-                people = {ask} 'How many people are you jumping with today?
-                {print} 'We'll ask all of you some questions for safety reasons.'
-                extra_instructions_people = a, b
+                {print} 'Witamy w HedyJumps, Twojej przygodzie - skok ze spadochronem!'
+                ludzie = {ask} 'Z iloma osobami skaczesz dzisiaj?
+                {print} 'Zadamy wam kilka pytań ze względów bezpieczeństwa.'
+                dodatkowe_instrukcje_dla_ludzi= a, b
                 {repeat} 3 {times}
-                    name = {ask} 'What is your name?'
-                jumped_before = 'Have you ever done a parachute jump before, ' name '?'
-                {if} jumped_before  no
-                {print} 'No worries, you'll get an extra safety instruction in room 13'
-                {add} name {to} extra_instructions_people
+                    imię = {ask} 'Jak masz na imię?'
+                skakał_wcześniej = 'Czy kiedykolwiek wcześniej wykonywałeś skok ze spadochronem?, ' imię '?'
+                {if} skakał_wcześniej  nie
+                {print} 'Nie martw się, otrzymasz dodatkową instrukcję bezpieczeństwa w pokoju 13'
+                {add} imię {to} dodatkowe_instrukcje_dla_ludzi
                 {else}
-                {print} 'Fun!'
-                {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
+                {print} 'Super zabawa!'
+                {print} 'Dziękujemy za wypełnienie wszystkich pytań dotyczących bezpieczeństwa. Miłego skoku!'
             debug: 'True'
         9:
-            header: Let's go!
-            text: Enjoy the adventures in level 9!
+            header: Chodźmy!
+            text: Ciesz się przygodami na poziomie 9!
     10:
         1:
-            header: Welcome to level 10
-            text: 'In this level you will learn a new command: `{for}`.'
+            header: Witamy na poziomie 10
+            text: 'Na tym poziomie nauczysz się nowego polecenia: `{for}`.'
         2:
-            header: The for command
-            text: With for you can make a list and use all items on that list. `{for}` creates a block, like repeat and if so all lines in the block need to start with indentation (4 spaces).
+            header: polecenie for
+            text: Za pomocą możesz zrobić listę i użyć wszystkich elementów z tej listy. `{for}` tworzy blok, jak powtórzenie, a jeśli tak, wszystkie linie w bloku muszą zaczynać się od wcięcia (4 spacje).
             code: |-
-                animals = dog, cat, blobfish
-                {for} animal {in} animals
-                    {print} 'I love ' animal
+                zwierzęta = pies, kot, kropelka
+                {for} zwierzę {in} zwierzęta
+                    {print} 'Uwielbiam ' zwierzę
         3:
-            header: The for command
-            text: 'Here you see another example of the `{for}` command:'
+            header: Polecenie for
+            text: 'Oto inny przykład polecenia `{for}`:'
             code: |-
-                days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-                names = mom, dad, Emma, Sophie
-                {for} day {in} days
-                    {print} names {at} {random} ' does the dishes on ' day
+                dni = poniedziałek, wtorek, środa, czwartek, piątek, sobota, niedziela
+                imiona = mama, tata, Emma, Sophie
+                {for} dzień {in} dni
+                    {print} imiona {at} {random} ' zmywa naczynia w ' dzień
         4:
-            header: Debugging
-            text: Let's debug this code
+            header: Debuggowanie
+            text: Zdebugguj ten kod
             code: |-
-                {print} 'Ladies and gentlemen!'
-                {print} 'For one night and one night only in circus Hedy!'
-                acts = shoot out of a canon, walk the tightrope, pack themself in a suitcase,
-                people = Iris the Incredible Achmed the Amazing Francis the Fantastic
-                    {for} people {in} acts
-                chosen_person {is} people {random}
-                    chosen_person ' will ' act
-                {add} chosen_person {from} people
-                {print} 'Come and watch our show tonight!'
-                {print} 'Tickets are only available at the counter
+                {print} 'Panie i Panowie!'
+                {print} 'Na jedną noc i jedną noc tylko w cyrku Hedy!'
+                działania = strzelać z kanonu, chodzić po linie, pakować się w walizkę,
+                ludzie = Iris the Incredible Achmed the Amazing Francis the Fantastic
+                    {for} ludzie {in} działania
+                wybrana_osoba {is} ludzie {random}
+                    wybrana_osoba ' wykona ' 
+                {add} wybrana_osoba {from} ludzie
+                {print} 'Przyjdź i obejrzyj nasz program dziś wieczorem!'
+                {print} 'Bilety są dostępne tylko w kasie
             debug: 'True'
         5:
-            header: Time to program!
-            text: Enjoy the adventures in level 10!
+            header: Czas na programowanie!
+            text: Ciesz się przygodami na poziomie 10!
     11:
         1:
-            header: Welcome to level 11
+            header: Witamy na poziomie 11
             text: |-
-                In this level, we add a new form of the `{for}` command. In earlier levels, we used for with a list, but we can also use for with numbers.
+                Na tym poziomie dodajemy nową formę polecenia `{for}`. Na wcześniejszych poziomach używaliśmy listy, ale możemy również używać liczb.
 
-                This way we don't need the `{repeat}` command anymore.
+                W ten sposób nie potrzebujemy już polecenia `{repeat}`.
         2:
-            header: The for command
-            text: 'This is what the new for command looks like:'
+            header: Polecenie for
+            text: 'Tak wygląda nowa komenda:'
             code: |-
-                {for} counter {in} {range} 1 {to} 10
-                    {print} counter
-                {print} 'Ready or not. Here I come!'
+                {for} licznik {in} {range} 1 {to} 10
+                    {print} licznik
+                {print} 'Gotowy czy nie. Nadchodzę!'
         3:
-            header: the variable i
+            header: Zmienna 'i'
             text: |-
-                In the previous slide the variable was named 'counter', because it was counting down.
-                You can of course use any name for the variable you want.
-                The standard name  for variables in this situation that is used in programming languages like Python is 'i'.
-                That looks like this:
+                W poprzednim slajdzie zmienna została nazwana 'counter', ponieważ odliczała.
+                Możesz oczywiście użyć dowolnej nazwy zmiennej, którą chcesz.
+                Standardowa nazwa zmiennych w tej sytuacji używana w językach programowania takich jak Python to „i”'.
+                To wygląda tak:
             code: |-
-                number = 10
+                liczba = 10
                 {for} i {in} {range} 1 {to} 10
-                    {print} i * number
+                    {print} i * liczba
         4:
-            header: Debugging
-            text: Let's debug this code!
+            header: Debuggowanie
+            text: Zdebugguj ten kod!
             code: |-
-                factor {is} {ask} 'Which table of multiplication do you need?'
-                {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
-                    {print} This is the table of multiplications for factor
-                    {print} number ' x ' factor ' = ' i * factor
+                współczynnik {is} {ask} 'Jakiej tabeli mnożenia potrzebujesz?'
+                {repeat} {for} liczby{in} {range} 1 {to} 10 {times}
+                    {print} To jest tabela mnożników dla współczynnika
+                    {print} liczba ' x ' współczynnik ' = ' i * wspólczynnik
             debug: 'True'
         5:
-            header: Let's start programming!
-            text: Enjoy the adventures in level 11!
+            header: Zacznijmy programować!
+            text: Ciesz się przygodami na poziomie 11!
     12:
         1:
-            header: Welcome to level 12
+            header: Witamy na poziomie 12
             text: |-
-                From this level on you are allowed to use decimal numbers and there are some changes to the quotation marks.
-                You can also use functions from this level on!
+                Od tego poziomu możesz używać liczb dziesiętnych i istnieją pewne zmiany w cudzysłowie.
+                Możesz także korzystać z funkcji z tego poziomu!
         2:
-            header: Quotation marks
+            header: Cudzysłowie
             text: |-
-                This level makes some changes to the usage of quotation marks.
-                From now on, **all texts** need to be in quotation marks. This includes values of variables, items on lists and text after {if} commands.
+                Ten poziom wprowadza pewne zmiany w użyciu cudzysłowów.
+                Odtąd ** wszystkie teksty ** muszą znajdować się w cudzysłowie. Obejmuje to wartości zmiennych, pozycje na listach i tekst po poleceniach { if }.
             code: |-
-                name = 'Hedy the Robot'
-                {print} 'Hello ' name
+                imię = 'Robot Hedyt'
+                {print} 'Witaj ' imię
         3:
-            header: Decimal numbers
+            header: Liczby dziesiętne
             text: |-
-                From this level on you are also allowed to use decimal numbers. This can make programs like your restaurant even better!
+                Od tego poziomu możesz także używać liczb dziesiętnych. Dzięki temu programy takie jak Twoja restauracja mogą być jeszcze lepsze!
 
-                Numbers do not need quotation marks.
+                Liczby nie potrzebują cudzysłowu.
             code: |-
-                {print} 'decimal numbers now need to use a dot'
+                {print} 'liczby dziesiętne muszą teraz używać kropki'
                 {print} 2.5 + 2.5
         4:
-            header: Functions!
+            header: Funkcje!
             text: |-
-                In this level you'll learn how to use functions. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again. To create a function, use define and give the function a name. Then put all the lines you want in the function in a indented block under the define line. Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
+                Na tym poziomie nauczysz się korzystać z funkcji. Funkcja to blok kodu, z którego można łatwo korzystać wiele razy. Korzystanie z funkcji pomaga nam organizować fragmenty kodu, które możemy używać wielokrotnie. Aby utworzyć funkcję, użyj zdefiniuj i nadaj funkcji nazwę. Następnie umieść wszystkie linie, które chcesz w funkcji, w wciętym bloku pod linią definiującą. Pozostaw jedną pustą linię w kodzie, aby wyglądała ładnie i schludnie. Świetna robota! Stworzyłeś funkcję!
 
-                Now, whenever we need that block of code, we just use call with the function's name to call it up! We don't have to type that block of code again.
+                Teraz, gdy potrzebujemy tego bloku kodu, po prostu używamy wywołania z nazwą funkcji, aby go wywołać! Nie musimy ponownie wpisywać tego bloku kodu.
         5:
-            header: Twinkle Twinkle little star!
+            header: Gwiazdko gwiazdko świeć nam świeć!
             text: |-
-                In this program you see an example of a function.
-                Let's see what happens if you fill in the rest of the song!
+                W tym programie widzisz przykład funkcji.
+                Zobaczmy, co się stanie, jeśli wypełnisz resztę piosenki!
             code: |-
-                {define} twinkle
-                     {print} 'Twinkle'
+                {define} migocz
+                     {print} 'migocz'
                      {print} '...'
 
-                {call} twinkle
+                {call} migocz
                 {print} 'Up above the world so high'
-                {print} 'Like a diamond in the sky'
-                {call} twinkle
+                {print} 'Jak diament na niebie'
+                {call} migocz
         6:
-            header: Functions
-            text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
+            header: Funkcje
+            text: Jak widać w przykładzie, funkcja jest blokiem kodu, który można wywołać w dowolnym momencie. Używasz `{define}`, aby ustawić funkcję i `{ call }`, aby z niej korzystać.
         7:
-            header: Debugging
-            text: Let's debug this code!
+            header: Debuggowanie
+            text: Zdebugguj ten kod!
             code: |-
-                {call} new_member
-                {print} 'Hi new member!'
-                username = {ask} 'What is your username?'
-                password = 'What is your password?'
-                {print} 'Welcome to our club!'
+                {call} nowy_członek
+                {print} 'Witaj nowy członku!'
+                nazwa_użytkownika = {ask} 'Jaka jest twoja nazwa użytkownika?'
+                hasło = 'Jakie jest twoje hasło?'
+                {print} 'Witamy w naszym klubie!'
 
-                username = {ask} 'Please enter your username. Are you a new member? Type New Member'
-                {if} username = New Member
-                {call} new member
+                nazwa_użytkownika = {ask} 'Wprowadź swoją nazwę użytkownika. Czy jesteś nowym członkiem? Wpisz Nowy Członek'
+                {if} nazwa_użytkownika = nowy_członek
+                {call} nowy_członek
                     {else}
-                        password = {ask} 'Please enter password'
+                        hasło = {ask} 'Wprowadź hasło'
             debug: 'True'
         8:
-            header: Ready to try it out?
-            text: Enjoy the adventures in level 12!
+            header: Gotowy, aby to wypróbować?
+            text: Ciesz się przygodami na poziomie 12!
     13:
         1:
-            header: Welcome to level 13
+            header: Witamy na poziomie 13
             text: |-
                 We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two ifs but can use and and or.
                 From now on you could also use arguments in your functions.
         2:
-            header: The and command
+            header: Polecenie 'and'
             text: |-
                 The `{and}` command is always used in a combination with the {if} command.
                 This way you can check if 2 statements are true. For example:
             code: |-
-                name = {ask} 'what is your name?'
-                age = {ask} 'what is your age?'
-                {if} name {is} 'Hedy' {and} age {is} 2
-                    {print} 'You are the real Hedy!'
+                imię = {ask} 'Jak masz na imię?'
+                wiek = {ask} 'Ile masz lat?'
+                {if} imię {is} 'Hedy' {and} wiek {is} 2
+                    {print} 'Jesteś prawdziwym Hedy!'
         3:
-            header: The or command
+            header: Polecenie 'or'
             text: |-
                 The `{or}` works in the same way as the `{and}` command, but only 1 of the two statements has to be true.
 
                 Let's see what happens when you change the `{and}` for `{or}`.
             code: |-
-                name = {ask} 'what is your name?'
-                {if} name {is} 'Hedy' {or} name {is} 'hedy'
-                    {print} 'Welcome!!'
+                imię = {ask} 'Jak masz na imię?'
+                {if} imię  {is} 'Hedy' {or} imię  {is} 'hedy'
+                    {print} 'Witaj!!'
         4:
             header: Functions with arguments
             text: Now that you've learned how to use functions, you'll learn how to use a function with an **argument**. An argument is a variable that is used within a function. It is not used outside the function.
         5:
-            header: Example
+            header: Przykład
             text: |-
-                In this example you see how the argument 'place' is used in the function.
-                Run the code and change 'ocean' and 'sea' to something else, and see what happens.
+                W tym przykładzie widać, jak w funkcji używany jest argument 'place'.
+                Uruchom kod i zmień „ocean” i „morze” na coś innego i zobacz, co się stanie.
             code: |-
-                {define} song {with} place
-                    {print} 'My Bonnie is over the ' place
+                {define} piosenka {with} miejsce
+                    {print} 'Moja Bonnie jest w ' miejsce
 
-                {call} song {with} 'ocean'
-                {call} song {with} 'sea'
-                {call} song {with} 'ocean'
+                {call} piosenka  {with} 'ocean'
+                {call} piosenka  {with} 'morze'
+                {call} piosenka  {with} 'ocean'
         6:
-            header: Example with variable
+            header: Przykład ze zmienną
             text: |-
                 You can also combine functions with a question.
 
@@ -895,67 +894,67 @@ levels:
                 call song with answer
                 ```
             code: |-
-                {define} song {with} place
-                    {print} 'My Bonnie is over the ' place
+                {define} piosenka {with} miejsce
+                    {print} 'Moja Bonnie jest w ' miejsce
 
-                {call} song {with} 'ocean'
-                {call} song {with} 'sea'
-                {call} song {with} 'ocean'
+                {call} piosenka {with} 'ocean'
+                {call} piosenka {with} 'morze'
+                {call} piosenka {with} 'ocean'
         7:
-            header: Even more questions!
+            header: Jeszcze więcej pytań!
             text: |-
-                Now we have combined even more question with the function. Type this code and see what happens.
+                Teraz połączyliśmy jeszcze więcej pytań z funkcją. Wpisz ten kod i zobacz, co się stanie.
 
-                Note how the variables and the arguments have the same name. This is allowed.
-                Does it confuse you? Just use different names, that is allowed as well.
+                Zauważ, że zmienne i argumenty mają tę samą nazwę. To jest dozwolone.
+                Czy to cię myli? Po prostu używaj różnych nazw, to jest również dozwolone.
                 ```
-                define song with name, place
-                    print 'My ' name ' is ' place
+                zdefiniuj piosenkę z nazwą, miejsce
+                    print 'Moje ' imię ' to ' miejsce
 
-                name is ask 'Who?'
-                place is ask 'Where are they?'
-                call song with name, place
+                imię is ask 'Kto?'
+                miejsce is ask 'Gdzie jest?'
+                call song with nazwa, miejsce
                 ```
             code: |-
-                {define} song {with} place
-                    {print} 'My Bonnie is over the ' place
+                {define} piosenka {with} miejsce
+                    {print} 'Moja Bonnie jest w ' miejsce
 
-                {call} song {with} 'ocean'
-                {call} song {with} 'sea'
-                {call} song {with} 'ocean'
+                {call} piosenka {with} 'ocean'
+                {call} piosenka {with} 'morze'
+                {call} piosenka {with} 'ocean'
         8:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                {define} happiness {with} name
+                {define} szczęście {with} imię
                     {print} '🥳'
                 {play} G
                 {play} A
                 {play} B
-                {print} 'Party on, ' name
-                {define} sadness
+                {print} 'Impreza z, ' imię
+                {define} smutek
                 {print} '😞'
                 {play} E
                 {play} D
                 {play} C
-                {print} 'Hope you feel better, ' name
+                {print} 'Mam nadzieję, że czujesz się lepiej, ' imię
 
-                name = {ask} 'What is your' name '?'
-                mood = {ask} 'Are you happy or sad?'
-                {if} mood = happy
-                    {call} happiness {with} person
-                {else} mood = sad
-                    {define} sadness {to} name
+                 imię = {ask} 'jakie jest twoje' imię'?'
+                nastrój = {ask} Jesteś smutny czy szczęśliwy?'
+                {if} nastrój = szczęśliwy
+                    {call} szczęście {with} osoba
+                {else} nastrój = smutny
+                    {define} smutek {to} imię
             debug: 'True'
         9:
-            header: Let's go!
-            text: Enjoy the adventures in level 13!
+            header: Chodźmy!
+            text: Ciesz się przygodami na poziomie 13!
     14:
         1:
-            header: Welcome to level 14
+            header: Witamy na poziomie 14
             text: In this level you'll learn some new symbols that can help you improve your programs, like >. You will also learn to work with return values of a function.
         2:
-            header: Symbols
+            header: Symbole
             text: |-
                 These are the new symbols you can use:
 
@@ -969,13 +968,13 @@ levels:
 
                 You can use them like this:
             code: |-
-                age = {ask} 'How old are you?'
-                {if} age < 13
-                    {print} 'You are younger than me!'
+                wiek = {ask} 'Ile masz lat?'
+                {if} wiek  < 13
+                    {print} 'Jesteś młodszy ode mnie!'
                 {else}
-                    {print} 'You are older than me!'
+                    {print} 'Jesteś starszy ode mnie!'
         3:
-            header: Symbols
+            header: Symbole
             text: |-
                 You can also use:
 
@@ -985,17 +984,17 @@ levels:
 
                 == is used in `{if}` statements.
             code: |-
-                answer = {ask} 'Do you want to learn more?'
-                {if} answer == 'yes'
-                    {print} 'Go to the next adventure!'
-                {if} answer != 'yes'
-                    {print} 'That is a shame!'
+                odpowiedź = {ask} 'Chcesz dowiedzieć się więcej?'
+                {if} odpowiedź == 'tak'
+                    {print} 'Przejdź do następnej przygody!'
+                {if} odpowiedź != 'tak'
+                    {print} 'Szkoda!'
         4:
             header: Return value
             text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
         5:
-            header: Return value
-            text: For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
+            header: Wartość zwracana
+            text: Na przykład w tym kodzie funkcja oblicz_nowa_cena obliczy nową cenę dowolnego elementu. Daje ci nową cenę jako wartość zwrotu.
             code: |-
                 {define} calculate_new_price {with} amount, percentage
                     percentage = percentage / 100
@@ -1011,182 +1010,182 @@ levels:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                item = 'not bought'
-                {print} 'I would like to buy this item'
-                price == {ask} 'What is the price?'
-                {if} price less than or the same as 10
-                    {print} 'Thats a great deal!'
-                    item = 'bought'
-                {if} price is more than 10 {and} less than or the same as 20
-                    {print} 'Alright'
-                    item = 'bought'
-                {if} price is more than 20 {and} less than 50
-                    {print} 'That is a bit much!'
-                {if} price is more than or the same as 50
-                    {print} 'No way!'
-                {if} item =! bought
-                    {print} 'Shame.. I wont buy it'
+                przedmiot = 'nie kupiony'
+                {print} 'Chciałbym kupić ten przedmiot'
+                cena == {ask} 'Jaka jest cena?'
+                {if} cena mniejsza lub taka sama jak 10
+                    {print} 'To świetna okazja!'
+                    przedmiot = 'zakupiony'
+                {if} cena jest większa niż 10 {and} mniejsza lub taka sama jak 20
+                    {print} 'W porządku'
+                    przedmiot = 'zakupiony'
+                {if} cena jest większa niż 20 {and} mniejsza niż 50
+                    {print} 'To trochę za dużo!'
+                {if} cena jest większa lub taka sama jak 50
+                    {print} 'Nie ma mowy!'
+                {if}  przedmiot =! zakupiony
+                    {print} 'Szkoda.. Nie kupię tego'
                 {else}
-                    {print} 'I will buy it! Thank you!'
+                    {print} 'Kupię to! Dziękuję!'
             debug: 'True'
         7:
-            header: Let's get to work!
-            text: Enjoy the adventures in level 14!
+            header: Zabierajmy się do roboty!
+            text: Ciesz się przygodami na poziomie 14!
     15:
         1:
-            header: Welcome to level 15
+            header: Witamy na poziomie 15
             text: In this level you will learn about the `{while}` loop.
         2:
-            header: '{while}'
+            header: 'polecenie {while}'
             text: |-
                 We are going to learn a new loop, the while loop! The loop continues as long as the statement is true. So don't forget to change the value in the loop.
 
                 In the example code, we continue until a correct answer has been given. If the correct answer is never given, the loop will never end!
             code: |-
-                answer = 0
-                {while} answer != 25
-                    answer = {ask} 'What is 5 times 5?'
-                {print} 'A correct answer has been given'
+                odpowiedź = 0
+                {while} odpowiedź != 25
+                    odpowiedź = {ask} 'ile to jest 5 razy 5?'
+                {print} 'Podano poprawną odpowiedź'
         3:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                numbers = 1, 2
+                liczby = 1, 2
 
                 {for} i {in} {range} 3 {to} 50
-                    {add} x {to} numbers
+                    {add} x {to} liczby
                     i = + 1
 
-                random_number = numbers {random}
-                guesses = 10
+                losowa_liczba = liczby {random}
+                odgadnięcia = 10
 
-                {while} guess = 0
-                    answer = 'Guess my number:'
-                    {if} answer >= random_number
-                        {print} 'lower'
-                        guesses = guesses -1
-                    {if} answer > random_number
-                        {print} 'higher!'
-                        guesses = guesses
-                    {else} answer = random_number
-                        {print} 'correct'
-                        guesses = 10
+                {while} odgadnięcie = 0
+                    odpowiedź = 'Zgadnij moją liczbę:'
+                    {if} odpowiedź >= losowa_liczba
+                        {print} 'niższa'
+                        odgadnięcia = odgadnięcia -1
+                    {if} odpowiedź > losowa_liczba
+                        {print} 'wyższa!'
+                        odgadnięcia = odgadnięcia
+                    {else} odpowiedź = losowa_liczba
+                        {print} 'poprawnie'
+                        odgadnięcia = 10
 
             debug: 'True'
         4:
-            header: Let's try it out!
-            text: Enjoy the adventures in level 15!
+            header: Wypróbujmy to!
+            text: Ciesz się przygodami na poziomie 15!
     16:
         1:
-            header: Welcome to level 16
+            header: Witamy na poziomie 16
             text: In this level you will learn about the [square brackets] and how to use them.
         2:
-            header: Square brackets
+            header: Nawiasy kwadratowe
             text: We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels. We use square brackets to point out a place in a list. The at random command can not be used anymore.
             code: |-
-                friends = ['Ahmed', 'Ben', 'Cayden']
-                {print} friends[1] ' is the first friend on the list.'
-                {print} friends[2] ' is the second friend on the list.'
-                {print} friends[3] ' is the third friend on the list.'
-                #now we will match 2 lists using the variable i
-                lucky_numbers = [15, 18, 6]
+                przyjaciele = ['Ahmed', 'Ben', 'Cayden']
+                {print} przyjaciele[1] ' jest pierwszym przyjacielem na liście'
+                {print} przyjaciele[2] ' jest drugim przyjacielem na liście'
+                {print} przyjaciele[3] ' jest trzecim przyjacielem na liście.'
+                #teraz dopasujemy 2 listy za pomocą zmiennej i
+                szczęśliwe_liczby = [15, 18, 6]
                 {for} i {in} {range} 1 {to} 3
-                    {print} friends[i] 's lucky number is ' lucky_numbers[i]
+                    {print}przyjaciele[i] 's szczęśliwa liczba to ' szczęśliwe_liczby[i]
         3:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                {print} 'Friendship test'
-                {subjects} = ['song', 'movie', 'food', 'drink']
-                answers_player_1 = []
-                answers_player_2 = []
-                score = 100
+                {print} 'Test przyjaźni'
+                {subjects} = ['„piosenka”, „film”, „jedzenie”, „picie”']
+                odpowiedzi_gracza_1 = []
+                odpowiedzi_gracza_2 = []
+                wynik = 100
 
                 {for} i {in} {range} 1 {to} 4
-                    answer = {ask} 'what is your favorite ' subjects[i]
-                {add} answer {to} answers_player_1
+                    odpowiedź = {ask} 'Jaki jest twój ulubiony ' przedmioty[i]
+                {add} odpowiedź {to} odpowiedzi_gracza_1
 
-                {print} 'Player 2, your turn!'
+                {print} 'Graczu 2, teraz twoja kolej!'
                 {for} i {in} {range} 0 {to} 4
-                    answer_player_2 = {ask} 'what is player 1s favorite ' subjects
-                    {add} answer_player_2 {in} answers_player_2
-                    {if} answers_player_2[2] == answers_player_1[1]
-                        {print} 'Correct!'
+                    odpowiedź_gracza_2  = {ask} 'Jaki jest gracza 1 ulubiony' przedmioty[i]
+                    {add} odpowiedź_gracza_2  {in} odpowiedzi_gracza_2
+                    {if} odpowiedzi_gracza_2[2] == odpowiedzi_gracza_1[1]
+                        {print} 'Poprawnie!'
                     {else}
-                        {print} 'Wrong!'
-                    score = score - 25
+                        {print} 'Źle!'
+                    wynik = wynik - 25
 
-                {print} 'Player 2, you've scored ' score '%'
+                {print} 'Graczu 2, zdobyłeś punkty ' wynik '%'
 
-                {if} score = 100
-                    {print} 'You are an amazing friend'
-                {if} score < 100 {or} score >= 50
-                    {print} 'You could do better'
-                {else} score < 50
-                    {print} 'Do you even know this person?!'
+                {if} wynik = 100
+                    {print} 'Jesteś niesamowitym przyjacielem'
+                {if} wynik < 100 {or} wynik >= 50
+                    {print} 'Stać cię na więcej'
+                {else} wynik < 50
+                    {print} 'Czy znasz nawet tę osobę??!'
             debug: 'True'
         4:
-            text: Enjoy the adventures in level 16!
-            header: Let's try it out!
+            text: Ciesz się przygodami na poziomie 16!
+            header: Wypróbujmy to!
     17:
         1:
-            header: Welcome to level 17
+            header: Witamy na poziomie 17
             text: in this level you will learn how to use a colon and you will learn the elif command.
         2:
-            header: Colon
+            header: Dwukropek
             text: 'Now we are going to change indentation a little bit. Every time that we need an indentation, we need : at the line before the indentation.'
             code: |-
-                prices = ['1 million dollars', 'an apple pie', 'nothing']
-                your_price = prices[{random}]
-                {print} 'You win ' your_price
-                {if} your_price == '1 million dollars' :
-                    {print} 'Yeah! You are rich!'
+                nagrody= ['1 milion dolarów', 'jabłko', 'nic']
+                twoja_nagroda  = nagrody [{random}]
+                {print} 'Wygrywasz' twoja_nagroda 
+                {if} twoja_nagroda  == '1 milion dolarów' :
+                    {print} 'Tak! Jesteś bogaty!'
                 {else}:
-                    {print} 'Better luck next time..'
+                    {print} 'Powodzenia następnym razem..'
         3:
-            header: Elif
+            header: Polecenie elif
             text: 'In this level you can also use a new command: elif. elif is short for else if and you need it when you want to make 3 (or more!) options. Check it out!'
             code: |-
-                prices = ['1 million dollars', 'an apple pie', 'nothing']
-                your_price = prices[{random}]
-                {print} 'You win ' your_price
-                {if} your_price == '1 million dollars' :
-                    {print} 'Yeah! You are rich!'
-                {elif} your_price == 'an apple pie' :
-                    {print} 'Lovely, an apple pie!'
+                nagrody = ['1 milion dolarów', 'jabłko', 'nic']
+                twoja_nagroda = nagrody[{random}]
+                {print} 'Wygrywasz' twoja_nagroda  
+                {if} twoja_nagroda  == '1 milion dolarów' :
+                    {print} 'Tak! Jesteś bogaty!'
+                {elif} twoja_nagroda   == 'szarlotka' :
+                    {print} 'Cudownie, szarlotka!'
                 {else}:
-                    {print} 'Better luck next time..'
+                    {print} 'Powodzenia następnym razem..'
         4:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                {define} ask_direction
-                    direction = {ask} 'Where do you want to go?'
-                    {if} direction = 'backwards'
+                {define} zapytaj_o_kierunek
+                    kierunek = {ask} 'Gdzie chcesz się dostać?'
+                    {if} kierunek = 'wstecz'
                         {turn} 180
-                    {else} direction == 'right'
+                    {else} kierunek == 'prawo'
                         {turn} 90
-                    {else} direction == 'left'
+                    {else} kierunek == 'lewo'
                         {turn} 270
                         {forward} 100
 
-                continue = 'yes'
+                kontynuuj= 'tak'
 
-                {while} continue == 'yes'
-                    {print} ask_direction
+                {while} kontynuuj == 'tak'
+                    {print} zapytaj_o_kierunek
                     {sleep}
-                    continue = 'do you want to draw some more?'
+                    kontynuuj= 'czy chcesz narysować trochę więcej??'
                     {sleep}
             debug: 'True'
         5:
-            header: Let's try it out!
-            text: Enjoy the adventures in level 17!
+            header: Wypróbujmy to!
+            text: Ciesz się przygodami na poziomie 17!
     18:
         1:
-            header: Welcome to level 18
+            header: Witamy na poziomie 18
             text: Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.
         2:
-            header: The Python way
+            header: Sposób Pythona
             text: |-
                 We arrived at real Python code! That means we need to use parentheses with print and range from now on.
 
@@ -1197,5 +1196,5 @@ levels:
                 Click on the 'print' tab for all the examples.
             editor: /hedy/18
         3:
-            header: The very last adventures!
-            text: Enjoy the very last adventures in level 18!
+            header: Ostatnie przygody!
+            text: Ciesz się ostatnimi przygodami na poziomie 18!

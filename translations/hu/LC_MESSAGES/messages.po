@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-07-08 10:20+0000\n"
+"PO-Revision-Date: 2024-09-06 14:38+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: hu <LL@li.org>\n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -301,6 +301,10 @@ msgid "adventures_restored"
 msgstr "The default adventures have been restored!"
 
 #, fuzzy
+msgid "adventures_ticked"
+msgstr "Adventures ticked"
+
+#, fuzzy
 msgid "adventures_tried"
 msgstr "Adventures tried"
 
@@ -333,14 +337,6 @@ msgstr "Már van fiókod?"
 #, fuzzy
 msgid "already_program_running"
 msgstr "Start programming"
-
-#, fuzzy
-msgid "already_teacher"
-msgstr "You already have a teacher account."
-
-#, fuzzy
-msgid "already_teacher_request"
-msgstr "You already have a pending teacher request."
 
 msgid "are_you_sure"
 msgstr "Biztos vagy ebben? Ezt a műveletet nem lehet visszavonni."
@@ -399,6 +395,9 @@ msgstr "Az osztály beállításait mentettük."
 #, fuzzy
 msgid "class_graph_explanation"
 msgstr "In this graph you can see represented the numbers of adventures your students have attempted (meaning they have done meaninful work in that adventure), with respect to the number of errors and successful runs."
+
+msgid "class_logs"
+msgstr "Utolsó belépés"
 
 #, fuzzy
 msgid "class_name_duplicate"
@@ -560,10 +559,6 @@ msgstr "Új osztály létrehozása"
 #, fuzzy
 msgid "create_multiple_accounts"
 msgstr "Create multiple accounts"
-
-#, fuzzy
-msgid "create_question"
-msgstr "Do you want to create one?"
 
 #, fuzzy
 msgid "create_student_account"
@@ -795,14 +790,6 @@ msgid "expiration_date"
 msgstr "Expiration date"
 
 #, fuzzy
-msgid "explore_programs"
-msgstr "Explore programs"
-
-#, fuzzy
-msgid "explore_programs_logo_alt"
-msgstr "Explore programs"
-
-#, fuzzy
 msgid "favorite_program"
 msgstr "Favorite program"
 
@@ -954,20 +941,28 @@ msgstr "Hedy logo"
 msgid "hedy_on_github"
 msgstr "Hedy a Githubon"
 
-#, fuzzy
-msgid "hedy_tutorial_logo_alt"
-msgstr "Hedy bemutató indítása"
-
 msgid "hello_logo"
 msgstr "Helló!"
+
+#, fuzzy
+msgid "hide_adventures"
+msgstr "Hide adventures"
 
 #, fuzzy
 msgid "hide_cheatsheet"
 msgstr "Hide cheatsheet"
 
 #, fuzzy
+msgid "hide_classes"
+msgstr "Hide classes"
+
+#, fuzzy
 msgid "hide_keyword_switcher"
 msgstr "Hide keyword switcher"
+
+#, fuzzy
+msgid "hide_slides"
+msgstr "Hide slides"
 
 msgid "highest_level_reached"
 msgstr "A legmagasabb elért szint"
@@ -1271,6 +1266,10 @@ msgid "mandatory_mode"
 msgstr "Mandatory developer's mode"
 
 #, fuzzy
+msgid "more_info"
+msgstr "More information"
+
+#, fuzzy
 msgid "more_options"
 msgstr "More options"
 
@@ -1363,12 +1362,12 @@ msgid "no_programs"
 msgstr "Még nincs programod."
 
 #, fuzzy
-msgid "no_public_profile"
-msgstr "Public profile"
-
-#, fuzzy
 msgid "no_shared_programs"
 msgstr "has no shared programs..."
+
+#, fuzzy
+msgid "no_students"
+msgstr "There are no students in this class"
 
 #, fuzzy
 msgid "no_such_adventure"
@@ -1432,8 +1431,9 @@ msgstr "A programok száma"
 msgid "ok"
 msgstr "OK"
 
+#, fuzzy
 msgid "one_level_error"
-msgstr ""
+msgstr "You need to select at least one level."
 
 #, fuzzy
 msgid "only_you_can_see"
@@ -1955,27 +1955,11 @@ msgid "star"
 msgstr "csillag"
 
 #, fuzzy
-msgid "start_hedy_tutorial"
-msgstr "Hedy bemutató indítása"
-
-#, fuzzy
 msgid "start_learning"
 msgstr "Start learning"
 
-#, fuzzy
-msgid "start_programming"
-msgstr "Directly start programming"
-
-#, fuzzy
-msgid "start_programming_logo_alt"
-msgstr "Directly start programming"
-
 msgid "start_quiz"
 msgstr "Kvíz indítása"
-
-#, fuzzy
-msgid "start_teacher_tutorial"
-msgstr "Tanári bemutató indítása"
 
 #, fuzzy
 msgid "start_teaching"
@@ -2004,6 +1988,14 @@ msgid "student"
 msgstr "Student"
 
 #, fuzzy
+msgid "student_adventures_table"
+msgstr "Student's Adventures"
+
+#, fuzzy
+msgid "student_adventures_table_explanation"
+msgstr "This table displays the programs created by students for each adventure in a level. By clicking the eye icon, you can view the program's page; after reviewing the program, you can tick the checkmark to indicate completion."
+
+#, fuzzy
 msgid "student_already_in_class"
 msgstr "This student is already in your class."
 
@@ -2011,9 +2003,16 @@ msgstr "This student is already in your class."
 msgid "student_already_invite"
 msgstr "This student already has a pending invitation."
 
+msgid "student_in_another_class"
+msgstr ""
+
 #, fuzzy
-msgid "student_not_allowed_in_class"
-msgstr "Student not allowed in class"
+msgid "student_information"
+msgstr "Student's Information"
+
+#, fuzzy
+msgid "student_information_explanation"
+msgstr "This table displays basic information about the students in your class. There are also several actions you can do in this table: change the password of a student by clicking the pencil icon, view the program's page of a student by clicking the code icon, and delete a student from the class by clicking the red bin icon."
 
 #, fuzzy
 msgid "student_not_existing"
@@ -2113,14 +2112,6 @@ msgid "teacher"
 msgstr "Looks like you are not a teacher!"
 
 #, fuzzy
-msgid "teacher_account_request"
-msgstr "You have a pending teacher account request"
-
-#, fuzzy
-msgid "teacher_account_success"
-msgstr "You successfully requested a teacher account."
-
-#, fuzzy
 msgid "teacher_invalid"
 msgstr "Your teacher value is invalid."
 
@@ -2135,10 +2126,6 @@ msgstr "Teacher manual"
 #, fuzzy
 msgid "teacher_signup_header"
 msgstr "Teacher"
-
-#, fuzzy
-msgid "teacher_tutorial_logo_alt"
-msgstr "You have received an invitation to join class"
 
 #, fuzzy
 msgid "teacher_welcome"
@@ -2196,10 +2183,6 @@ msgstr "Hedy - Tanároknak"
 #, fuzzy
 msgid "title_join-class"
 msgstr "Hedy - Csatlakozás osztályhoz"
-
-#, fuzzy
-msgid "title_landing-page"
-msgstr "Üdvözlünk a Hedy oldalán!"
 
 #, fuzzy
 msgid "title_learn-more"
@@ -2260,6 +2243,14 @@ msgstr "A Hedy fordítása"
 #, fuzzy
 msgid "translator"
 msgstr "Translator"
+
+#, fuzzy
+msgid "turned_into_teacher"
+msgstr "Congratulations! You successfully turned into a teacher."
+
+#, fuzzy
+msgid "tutorial"
+msgstr "Bemutató"
 
 #, fuzzy
 msgid "tutorial_code_snippet"
@@ -2401,14 +2392,6 @@ msgid "walker_variable_role"
 msgstr "walker"
 
 #, fuzzy
-msgid "welcome"
-msgstr "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students."
-
-#, fuzzy
-msgid "welcome_back"
-msgstr "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students."
-
-#, fuzzy
 msgid "what_is_your_role"
 msgstr "What is your role?"
 
@@ -2421,14 +2404,6 @@ msgstr "Adj meg egy évet 1900 és {current_year} között"
 
 msgid "yes"
 msgstr "Igen"
-
-#, fuzzy
-msgid "your_account"
-msgstr "Nincs még fiókod?"
-
-#, fuzzy
-msgid "your_last_program"
-msgstr "Favourite program"
 
 #, fuzzy
 msgid "your_personal_text"
@@ -2539,9 +2514,6 @@ msgstr "Your program"
 
 #~ msgid "too_many_attempts"
 #~ msgstr "Túl sokszor próbálkoztál"
-
-#~ msgid "class_logs"
-#~ msgstr "Utolsó belépés"
 
 #~ msgid "class_stats"
 #~ msgstr "Show class statistics"
@@ -2747,21 +2719,63 @@ msgstr "Your program"
 #~ msgid "your_class"
 #~ msgstr "Osztályaim"
 
-#~ msgid "developers_mode"
-#~ msgstr "Programmer's mode"
+#~ msgid "create_question"
+#~ msgstr "Do you want to create one?"
 
-#~ msgid "read_code_label"
-#~ msgstr "Hangosan olvas"
+#~ msgid "explore_programs"
+#~ msgstr "Explore programs"
 
-#~ msgid "regress_button"
-#~ msgstr ""
+#~ msgid "explore_programs_logo_alt"
+#~ msgstr "Explore programs"
 
-#~ msgid "tutorial"
-#~ msgstr "Bemutató"
+#~ msgid "hedy_tutorial_logo_alt"
+#~ msgstr "Hedy bemutató indítása"
 
-#~ msgid "index_button"
-#~ msgstr ""
+#~ msgid "no_public_profile"
+#~ msgstr "Public profile"
 
-#~ msgid "tooltip_level_locked"
-#~ msgstr "Your teacher disabled this level"
+#~ msgid "start_hedy_tutorial"
+#~ msgstr "Hedy bemutató indítása"
+
+#~ msgid "start_programming"
+#~ msgstr "Directly start programming"
+
+#~ msgid "start_programming_logo_alt"
+#~ msgstr "Directly start programming"
+
+#~ msgid "start_teacher_tutorial"
+#~ msgstr "Tanári bemutató indítása"
+
+#~ msgid "teacher_tutorial_logo_alt"
+#~ msgstr "You have received an invitation to join class"
+
+#~ msgid "title_landing-page"
+#~ msgstr "Üdvözlünk a Hedy oldalán!"
+
+#~ msgid "welcome"
+#~ msgstr "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students."
+
+#~ msgid "welcome_back"
+#~ msgstr "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students."
+
+#~ msgid "your_account"
+#~ msgstr "Nincs még fiókod?"
+
+#~ msgid "your_last_program"
+#~ msgstr "Favourite program"
+
+#~ msgid "already_teacher"
+#~ msgstr "You already have a teacher account."
+
+#~ msgid "already_teacher_request"
+#~ msgstr "You already have a pending teacher request."
+
+#~ msgid "teacher_account_request"
+#~ msgstr "You have a pending teacher account request"
+
+#~ msgid "teacher_account_success"
+#~ msgstr "You successfully requested a teacher account."
+
+#~ msgid "student_not_allowed_in_class"
+#~ msgstr "Student not allowed in class"
 

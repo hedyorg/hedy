@@ -270,10 +270,12 @@ def load_saved_programs(level, into_adventures, preferential_program: Optional[P
             program = loaded_programs.get(adventure.name)
         if not program:
             continue
-
+        student_adventure_id = f"{current_user()['username']}-{program['adventure_name']}-{level}"
+        student_adventure = DATABASE.student_adventure_by_id(student_adventure_id)
         adventure.save_name = program.name
         adventure.editor_contents = program.code
         adventure.save_info = SaveInfo.from_program(program)
+        adventure.is_checked = (student_adventure and student_adventure['ticked']) is True
 
 
 def load_customized_adventures(level, customizations, into_adventures):
@@ -1352,7 +1354,6 @@ def hour_of_code(level, program_id=None):
         HOC_tracking_pixel=True,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
-        # enforce_developers_mode=enforce_developers_mode,
         enforce_developers_mode=enforce_developers_mode,
         loaded_program=loaded_program,
         adventures=adventures,
@@ -1376,6 +1377,7 @@ def hour_of_code(level, program_id=None):
             adventures=adventures,
             initial_tab=initial_tab,
             current_user_name=current_user()['username'],
+            enforce_developers_mode=enforce_developers_mode,
         ))
 
 
@@ -1531,7 +1533,6 @@ def index(level, program_id):
     enforce_developers_mode = False
     if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
         enforce_developers_mode = True
-
     hide_cheatsheet = False
     if 'other_settings' in customizations and 'hide_cheatsheet' in customizations['other_settings']:
         hide_cheatsheet = True
@@ -1607,6 +1608,7 @@ def index(level, program_id):
         adventures_for_index=adventures_for_index,
         # See initialize.ts
         javascript_page_options=dict(
+            enforce_developers_mode=enforce_developers_mode,
             page='code',
             level=level_number,
             lang=g.lang,
@@ -1661,6 +1663,12 @@ def view_program(user, id):
                     1)))
 
     result['code'] = code
+    student_adventure_id = f"{result['username']}-{result['adventure_name']}-{result['level']}"
+    student_adventure = DATABASE.student_adventure_by_id(student_adventure_id)
+    if not student_adventure:
+        # store the adventure in case it's not in the table
+        student_adventure = DATABASE.store_student_adventure(
+            dict(id=f"{student_adventure_id}", ticked=False, program_id=id))
 
     arguments_dict = {}
     arguments_dict['program_id'] = id
@@ -1670,15 +1678,15 @@ def view_program(user, id):
                                                editor_contents=code,
                                                )
     arguments_dict['editor_readonly'] = True
-
+    arguments_dict['student_adventure'] = student_adventure
     if "submitted" in result and result['submitted']:
         arguments_dict['show_edit_button'] = False
         arguments_dict['program_timestamp'] = utils.localized_date_format(result['date'])
     else:
         arguments_dict['show_edit_button'] = True
 
-    # Everything below this line has nothing to do with this page and it's silly
-    # that every page needs to put in so much effort to re-set it
+    arguments_dict['show_checkbox'] = is_teacher(user)\
+        and result['username'] in DATABASE.get_teacher_students(user['username'])
 
     return render_template("view-program-page.html",
                            blur_button_available=True,
@@ -2119,40 +2127,6 @@ def privacy():
                            content=privacy_translations)
 
 
-@app.route('/landing-page/', methods=['GET'], defaults={'first': False})
-@app.route('/landing-page/<first>', methods=['GET'])
-@requires_login
-def landing_page(user, first):
-    username = user['username']
-
-    user_info = DATABASE.get_public_profile_settings(username)
-    user_programs = DATABASE.programs_for_user(username)
-    programs = list(user_programs)
-    # Only return the last program of the user
-    last_program = None
-    if programs:
-        last_program = programs[:1][0]
-        for program in programs:
-            if not (program.get('is_modified') or 'is_modified' not in program):
-                programs.remove(program)
-
-    achievements = DATABASE.achievements_by_username(username)
-    user_from_db = DATABASE.user_by_username(username)
-    has_certificate = (achievements and 'achieved' in achievements
-                       and 'hedy_certificate' in achievements['achieved'])\
-        or user_from_db.get('certificate', False)
-
-    return render_template(
-        'landing-page.html',
-        first_time=True if first else False,
-        page_title=gettext('title_landing-page'),
-        user=user['username'],
-        user_info=user_info,
-        programs=programs,
-        last_program=last_program,
-        has_certificate=has_certificate)
-
-
 @app.route('/explore', methods=['GET'])
 def explore():
     if not current_user()['username']:
@@ -2324,10 +2298,10 @@ def store_parsons_order():
     attempt = {
         'id': utils.random_id_generator(12),
         'username': current_user()['username'] or f'anonymous:{utils.session_id()}',
-        'level': int(body['level']),
-        'exercise': int(body['exercise']),
+        'level': str(body['level']),
+        'exercise': str(body['exercise']),
         'order': body['order'],
-        'correct': 1 if body['correct'] else 0,
+        'correct': '1' if body['correct'] else '0',
         'timestamp': utils.timems()
     }
 

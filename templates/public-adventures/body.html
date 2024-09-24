@@ -5,6 +5,7 @@
         _="on load set $filtered to {}">
         <div id="search" class="w-full sm:basis-1/2">
             <input id="search_adventure"
+                data-cy="search_adventure"
                 type="search"
                 name="search"
                 value="{{currentSearch}}"
@@ -28,7 +29,7 @@
               </custom-select>
             </div>              
             <div id="languages" class="flex-1">
-              <custom-select id="language_select" data-label="{{ lang_to_sym(selectedLang) if selectedLang else _('select_lang') }}">
+              <custom-select id="language_select" data-cy="language_select" data-label="{{ lang_to_sym(selectedLang) if selectedLang else _('select_lang') }}">
                 <option
                         hx-post="/public-adventures/filter?lang=reset&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}"
                         hx-target="#public_adventures"
@@ -43,7 +44,7 @@
             </div>
                 
             <div id="tags" class="flex-1">
-              <custom-select data-type="multiple" id="tag_select" data-label="{{ _('select_tag') }}">
+              <custom-select data-type="multiple" id="tag_select" data-cy="tag_select" data-label="{{ _('select_tag') }}">
                 {% for tag in available_tags %}
                   {% set selected = tag in selectedTag %}
                   <option {% if selected %}selected{% endif %} 

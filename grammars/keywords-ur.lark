@@ -5,7 +5,7 @@ _DEF: ("def" | "def") _SPACE?
 _RETURN: ("return" | "return") _SPACE?
 _PRINT: ("دکھاؤ" | "print") _SPACE?
 _PLAY: ("play" | "play") _SPACE
-_ASK: ("بتاؤ" | "ask") _SPACE?
+_ASK: ("بتاؤ" | "ask")
 _ECHO: ("پکار" | "echo") _SPACE?
 _FORWARD: ("آگے" | "forward") _SPACE?
 _TURN: ("مڑو" | "turn") _SPACE?
@@ -26,9 +26,9 @@ _IS: _SPACE ("ہے" | "is") _SPACE
 _STANDALONE_IS: ("ہے" | "is")
 _SLEEP: ("آرام" | "sleep") _SPACE?
 _ADD_LIST: ("شامل" | "add") _SPACE
-_TO_LIST: _SPACE ("اندر" | "to") _SPACE
+_TO_LIST: _SPACE? ("اندر" | "to") _SPACE
 _REMOVE: ("نکالو" | "remove") _SPACE
-_FROM: _SPACE ("سے" | "from") _SPACE
+_FROM: _SPACE? ("سے" | "from") _SPACE
 _AT: _SPACE ("کوئی" | "at") _SPACE
 random: ("سا" | "random") _SPACE?
 _IN: _SPACE ("میں" | "in") _SPACE
@@ -49,7 +49,6 @@ _WHILE: ("جبتک" | "while") _SPACE
 _LENGTH: "لمبائی" | "length"
 _COLOR : ("رنگ" | "color") _SPACE?
 _PRESSED: ("دبا ہوا" | "pressed") _SPACE?
-_BUTTON: ("بٹن" | "button") _SPACE?
 clear: ("صاف" | "clear") _SPACE?
 TRUE: ("true" | "True" | "true" | "True") _SPACE?
 FALSE: ("false" | "False" | "false" | "False") _SPACE?

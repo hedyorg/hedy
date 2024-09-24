@@ -77,11 +77,11 @@ export function destroy_public(confirmation: string) {
   });
 }
 
-export async function request_teacher_account() {
+export async function turn_into_teacher_account() {
   tryCatchPopup(async () => {
-    const response = await postJson('/auth/request_teacher');
+    const response = await postJson('/auth/turn-into-teacher');
     modal.notifySuccess(response.message);
-    setTimeout (function () {location.reload ()}, 2000);
+    setTimeout (function () { redirect('for-teachers') }, 2000);
   });
 }
 
@@ -91,8 +91,9 @@ export function initializeFormSubmits() {
   $('form#signup').on('submit', async function (e) {
     e.preventDefault();
     tryCatchPopup(async () => {
-      await postNoResponse('/auth/signup', convertFormJSON($(this)));
-      afterLogin({"first_time": true});
+      const body = convertFormJSON($(this))
+      await postNoResponse('/auth/signup', body);      
+      afterLogin({"first_time": true, "is_teacher": "is_teacher" in body});
     });
   });
 
@@ -248,7 +249,7 @@ export function update_user_tags() {
  */
 async function afterLogin(loginData: Dict<boolean>) {
   const { url } = localLoadOnce(REDIRECT_AFTER_LOGIN_KEY) ?? {};
-  if (url) {
+  if (url && !loginData['first_time']) {
     window.location = url;
     return;
   }
@@ -260,9 +261,12 @@ async function afterLogin(loginData: Dict<boolean>) {
     return join_class(joinClass.id, joinClass.name);
   }
 
-  // If the user logs in for the first time -> redirect to the landing-page after signup
-  if (loginData['first_time']) {
-    return redirect('landing-page/1');
+  // If the user logs in for the first time and is a teacher -> redirect to the for teacher page
+  if (loginData['first_time'] && loginData['is_teacher']) {
+    return redirect('for-teachers');
+  // If it's a student, send him to the first level
+  } else if(loginData['first_time'] && !loginData['is_teacher']) {
+    return redirect('hedy/1')
   }
   // If the user is an admin -> re-direct to admin page after login
   if (loginData['admin']) {
@@ -274,5 +278,5 @@ async function afterLogin(loginData: Dict<boolean>) {
     return redirect('for-teachers');
   }
   // Otherwise, redirect to the programs page
-  redirect('landing-page');
+  redirect('');
 }

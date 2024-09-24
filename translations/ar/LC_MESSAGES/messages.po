@@ -8,16 +8,15 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-07-08 10:19+0000\n"
+"PO-Revision-Date: 2024-09-06 14:38+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: ar <LL@li.org>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=0 && n%100<=2 ? 4 : 5);\n"
-"X-Generator: Weblate 5.7-dev\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=0 && n%100<=2 ? 4 : 5);\n"
+"X-Generator: Weblate 5.8-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -288,6 +287,10 @@ msgid "adventures_restored"
 msgstr "The default adventures have been restored!"
 
 #, fuzzy
+msgid "adventures_ticked"
+msgstr "Adventures ticked"
+
+#, fuzzy
 msgid "adventures_tried"
 msgstr "Adventures tried"
 
@@ -317,14 +320,6 @@ msgstr "هل لديك حساب بالفعل؟"
 
 msgid "already_program_running"
 msgstr "هناك بالفعل برنامج اخر تحت التنفيذ، قم بانهاء ذلك البرنامج أولاً."
-
-#, fuzzy
-msgid "already_teacher"
-msgstr "You already have a teacher account."
-
-#, fuzzy
-msgid "already_teacher_request"
-msgstr "You already have a pending teacher request."
 
 msgid "are_you_sure"
 msgstr "هل أنت متأكد؟ لا يمكنك التراجع عن هذا الإجراء."
@@ -380,6 +375,9 @@ msgstr "تم انشاء التخصيصات للصف بنجاح."
 #, fuzzy
 msgid "class_graph_explanation"
 msgstr "In this graph you can see represented the numbers of adventures your students have attempted (meaning they have done meaninful work in that adventure), with respect to the number of errors and successful runs."
+
+msgid "class_logs"
+msgstr "اخر تسجيل دخول"
 
 msgid "class_name_duplicate"
 msgstr "لديك بالفعل صف بهذا الإسم."
@@ -528,10 +526,6 @@ msgstr "انشاء صف جديد"
 
 msgid "create_multiple_accounts"
 msgstr "انشاء عدة حسابات"
-
-#, fuzzy
-msgid "create_question"
-msgstr "Do you want to create one?"
 
 #, fuzzy
 msgid "create_student_account"
@@ -739,13 +733,6 @@ msgstr "الرجاء اختيار الخبرة بشكل صحيح (نعم ، لا
 msgid "expiration_date"
 msgstr "تاريخ انتهاء الصلاحية"
 
-msgid "explore_programs"
-msgstr "استكشف البرامج"
-
-#, fuzzy
-msgid "explore_programs_logo_alt"
-msgstr "استكشف البرامج"
-
 #, fuzzy
 msgid "favorite_program"
 msgstr "Favorite program"
@@ -885,18 +872,26 @@ msgstr "Hedy logo"
 msgid "hedy_on_github"
 msgstr "Hedy on Github"
 
-#, fuzzy
-msgid "hedy_tutorial_logo_alt"
-msgstr "بدء الدليل التوجيهي"
-
 msgid "hello_logo"
 msgstr "مرحبا!"
+
+#, fuzzy
+msgid "hide_adventures"
+msgstr "Hide adventures"
 
 msgid "hide_cheatsheet"
 msgstr "اخفاء ورقة الغش"
 
+#, fuzzy
+msgid "hide_classes"
+msgstr "Hide classes"
+
 msgid "hide_keyword_switcher"
 msgstr "اخفاء تبديل الكلمات المفتاحية"
+
+#, fuzzy
+msgid "hide_slides"
+msgstr "Hide slides"
 
 msgid "highest_level_reached"
 msgstr "أعلى مستوى تم الوصول له"
@@ -1178,6 +1173,10 @@ msgid "mandatory_mode"
 msgstr "وضع المبرمج الإلزامي"
 
 #, fuzzy
+msgid "more_info"
+msgstr "More information"
+
+#, fuzzy
 msgid "more_options"
 msgstr "More options"
 
@@ -1263,11 +1262,12 @@ msgstr "Starting in level 8, the line after `{if}` needs to start with 4 spaces.
 msgid "no_programs"
 msgstr "ليس لديك أي برامج بعد."
 
-msgid "no_public_profile"
-msgstr "ليس لديك نص ملف شخصي عام حتى الآن ..."
-
 msgid "no_shared_programs"
 msgstr "ليس لديه برامج تم مشاركتها..."
+
+#, fuzzy
+msgid "no_students"
+msgstr "There are no students in this class"
 
 msgid "no_such_adventure"
 msgstr "هذه المغامرة غير موجودة!"
@@ -1323,8 +1323,9 @@ msgstr "عدد البرامج"
 msgid "ok"
 msgstr "حسناً"
 
+#, fuzzy
 msgid "one_level_error"
-msgstr ""
+msgstr "You need to select at least one level."
 
 #, fuzzy
 msgid "only_you_can_see"
@@ -1789,25 +1790,12 @@ msgstr "مسافة إزاحة"
 msgid "star"
 msgstr "علامة النجمة"
 
-msgid "start_hedy_tutorial"
-msgstr "بدء الدليل التوجيهي"
-
 #, fuzzy
 msgid "start_learning"
 msgstr "Start learning"
 
-msgid "start_programming"
-msgstr "ابدأ البرمجة"
-
-#, fuzzy
-msgid "start_programming_logo_alt"
-msgstr "ابدأ البرمجة"
-
 msgid "start_quiz"
 msgstr "بدء الفحص السريع"
-
-msgid "start_teacher_tutorial"
-msgstr "بدء الدليل التوجيهي للمعلم"
 
 #, fuzzy
 msgid "start_teaching"
@@ -1832,15 +1820,30 @@ msgstr "نص"
 msgid "student"
 msgstr "طالب"
 
+#, fuzzy
+msgid "student_adventures_table"
+msgstr "Student's Adventures"
+
+#, fuzzy
+msgid "student_adventures_table_explanation"
+msgstr "This table displays the programs created by students for each adventure in a level. By clicking the eye icon, you can view the program's page; after reviewing the program, you can tick the checkmark to indicate completion."
+
 msgid "student_already_in_class"
 msgstr "هذا التلميذ بالفعل موجود في الصف الخاص بك."
 
 msgid "student_already_invite"
 msgstr "هذا التلميذ بالفعل لديه دعوة قيد الإنتظار."
 
+msgid "student_in_another_class"
+msgstr ""
+
 #, fuzzy
-msgid "student_not_allowed_in_class"
-msgstr "Student not allowed in class"
+msgid "student_information"
+msgstr "Student's Information"
+
+#, fuzzy
+msgid "student_information_explanation"
+msgstr "This table displays basic information about the students in your class. There are also several actions you can do in this table: change the password of a student by clicking the pencil icon, view the program's page of a student by clicking the code icon, and delete a student from the class by clicking the red bin icon."
 
 msgid "student_not_existing"
 msgstr "اسم المستخدم غير موجود."
@@ -1929,14 +1932,6 @@ msgstr "العلامات"
 msgid "teacher"
 msgstr "معلم"
 
-#, fuzzy
-msgid "teacher_account_request"
-msgstr "You have a pending teacher account request"
-
-#, fuzzy
-msgid "teacher_account_success"
-msgstr "You successfully requested a teacher account."
-
 msgid "teacher_invalid"
 msgstr "قيمة المعلم الخاصة بك غير صالحة."
 
@@ -1950,10 +1945,6 @@ msgstr "Teacher manual"
 #, fuzzy
 msgid "teacher_signup_header"
 msgstr "Teacher"
-
-#, fuzzy
-msgid "teacher_tutorial_logo_alt"
-msgstr "اضغط على \"الخطوة التالية\" لتبدأ كمعلم أو معلمة في هيدي!"
 
 msgid "teacher_welcome"
 msgstr "مرحباً في هيدي! بكل فخر أنت الآن تمتلك حساباً كمعلم وذا يسمح لك بانشاء صفوف ودعوة تلاميذ."
@@ -2002,9 +1993,6 @@ msgstr "هيدي - للمعلمين"
 msgid "title_join-class"
 msgstr "هيدي - انضم الى صف"
 
-msgid "title_landing-page"
-msgstr "مرحباً في هيدي!"
-
 msgid "title_learn-more"
 msgstr "هيدي - اعرف أكثر"
 
@@ -2051,6 +2039,14 @@ msgstr "Translating Hedy"
 #, fuzzy
 msgid "translator"
 msgstr "Translator"
+
+#, fuzzy
+msgid "turned_into_teacher"
+msgstr "Congratulations! You successfully turned into a teacher."
+
+#, fuzzy
+msgid "tutorial"
+msgstr "Tutorial"
 
 msgid "tutorial_code_snippet"
 msgstr ""
@@ -2180,12 +2176,6 @@ msgstr "Waiting for submit"
 msgid "walker_variable_role"
 msgstr "walker"
 
-msgid "welcome"
-msgstr "مرحباً"
-
-msgid "welcome_back"
-msgstr "مرحباً بعودتك"
-
 #, fuzzy
 msgid "what_is_your_role"
 msgstr "What is your role?"
@@ -2198,12 +2188,6 @@ msgstr "الرجاء ادخال سنة بين ١٩٩٠ و {current_year}."
 
 msgid "yes"
 msgstr "نعم"
-
-msgid "your_account"
-msgstr "ملفك الشخصي"
-
-msgid "your_last_program"
-msgstr "آخر برنامج تم حفظه"
 
 msgid "your_personal_text"
 msgstr "نصّك الشخصي..."
@@ -2313,9 +2297,6 @@ msgstr "Your program"
 
 #~ msgid "too_many_attempts"
 #~ msgstr "Too many attempts"
-
-#~ msgid "class_logs"
-#~ msgstr "اخر تسجيل دخول"
 
 #~ msgid "class_stats"
 #~ msgstr "احصائيات الصف"
@@ -2503,21 +2484,63 @@ msgstr "Your program"
 #~ msgid "number_achievements"
 #~ msgstr "Number of achievements"
 
-#~ msgid "developers_mode"
-#~ msgstr "وضع المبرمج"
+#~ msgid "create_question"
+#~ msgstr "Do you want to create one?"
 
-#~ msgid "read_code_label"
-#~ msgstr "القراءة بصوت عال"
+#~ msgid "explore_programs"
+#~ msgstr "استكشف البرامج"
 
-#~ msgid "regress_button"
-#~ msgstr ""
+#~ msgid "explore_programs_logo_alt"
+#~ msgstr "استكشف البرامج"
 
-#~ msgid "tutorial"
-#~ msgstr "Tutorial"
+#~ msgid "hedy_tutorial_logo_alt"
+#~ msgstr "بدء الدليل التوجيهي"
 
-#~ msgid "index_button"
-#~ msgstr ""
+#~ msgid "no_public_profile"
+#~ msgstr "ليس لديك نص ملف شخصي عام حتى الآن ..."
 
-#~ msgid "tooltip_level_locked"
-#~ msgstr "Your teacher disabled this level"
+#~ msgid "start_hedy_tutorial"
+#~ msgstr "بدء الدليل التوجيهي"
+
+#~ msgid "start_programming"
+#~ msgstr "ابدأ البرمجة"
+
+#~ msgid "start_programming_logo_alt"
+#~ msgstr "ابدأ البرمجة"
+
+#~ msgid "start_teacher_tutorial"
+#~ msgstr "بدء الدليل التوجيهي للمعلم"
+
+#~ msgid "teacher_tutorial_logo_alt"
+#~ msgstr "اضغط على \"الخطوة التالية\" لتبدأ كمعلم أو معلمة في هيدي!"
+
+#~ msgid "title_landing-page"
+#~ msgstr "مرحباً في هيدي!"
+
+#~ msgid "welcome"
+#~ msgstr "مرحباً"
+
+#~ msgid "welcome_back"
+#~ msgstr "مرحباً بعودتك"
+
+#~ msgid "your_account"
+#~ msgstr "ملفك الشخصي"
+
+#~ msgid "your_last_program"
+#~ msgstr "آخر برنامج تم حفظه"
+
+#~ msgid "already_teacher"
+#~ msgstr "You already have a teacher account."
+
+#~ msgid "already_teacher_request"
+#~ msgstr "You already have a pending teacher request."
+
+#~ msgid "teacher_account_request"
+#~ msgstr "You have a pending teacher account request"
+
+#~ msgid "teacher_account_success"
+#~ msgstr "You successfully requested a teacher account."
+
+#~ msgid "student_not_allowed_in_class"
+#~ msgstr "Student not allowed in class"
 

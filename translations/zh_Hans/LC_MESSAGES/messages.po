@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-07-08 13:09+0000\n"
-"Last-Translator: \"Zoom.Quiet\" <zoomquiet+gh@gmail.com>\n"
+"PO-Revision-Date: 2024-09-10 09:24+0000\n"
+"Last-Translator: \"zoom.quiet\" <zoomquiet+hedy@gmail.com>\n"
 "Language-Team: zh_Hans <LL@li.org>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -232,6 +232,9 @@ msgstr "每个 海蒂 级别都为学生提供内置练习，我们称之为冒�
 msgid "adventures_restored"
 msgstr "默认的冒险已经恢复。"
 
+msgid "adventures_ticked"
+msgstr "冒险已完成"
+
 msgid "adventures_tried"
 msgstr "尝试冒险"
 
@@ -258,12 +261,6 @@ msgstr "是否已经有账户?"
 
 msgid "already_program_running"
 msgstr "已经正在运行着一个程序，请先完成那个程序。"
-
-msgid "already_teacher"
-msgstr "你已经有了一个教师账户。"
-
-msgid "already_teacher_request"
-msgstr "你已经有一个待处理的教师请求。"
 
 msgid "are_you_sure"
 msgstr "你确定吗？ 你无法撤销此操作。"
@@ -312,6 +309,9 @@ msgstr "成功自定义课程。"
 
 msgid "class_graph_explanation"
 msgstr "在这张图表中，你可以看到学生尝试过的冒险次数（意味着他们在该次冒险中做了有意义的工作）以及错误次数和成功次数。"
+
+msgid "class_logs"
+msgstr "日志"
 
 msgid "class_name_duplicate"
 msgstr "您已经有一个同名的班级了。"
@@ -441,9 +441,6 @@ msgstr "创建一个新的教室"
 
 msgid "create_multiple_accounts"
 msgstr "创建多个帐户"
-
-msgid "create_question"
-msgstr "你想创建一个吗？"
 
 msgid "create_student_account"
 msgstr "创建一个账户"
@@ -628,12 +625,6 @@ msgstr "请选择有效的经验，选择（是，否）。"
 msgid "expiration_date"
 msgstr "过期日期"
 
-msgid "explore_programs"
-msgstr "探索程序"
-
-msgid "explore_programs_logo_alt"
-msgstr "浏览程序图标"
-
 msgid "favorite_program"
 msgstr "最喜欢的项目"
 
@@ -751,17 +742,23 @@ msgstr "海蒂标志"
 msgid "hedy_on_github"
 msgstr "海蒂在 Github 上"
 
-msgid "hedy_tutorial_logo_alt"
-msgstr "Hedy 教程的图标"
-
 msgid "hello_logo"
 msgstr "你好"
+
+msgid "hide_adventures"
+msgstr "隐藏探险"
 
 msgid "hide_cheatsheet"
 msgstr "隐藏备忘单"
 
+msgid "hide_classes"
+msgstr "隐藏课程"
+
 msgid "hide_keyword_switcher"
 msgstr "隐藏关键字切换器"
+
+msgid "hide_slides"
+msgstr "隐藏幻灯"
 
 msgid "highest_level_reached"
 msgstr "达到的最高等级"
@@ -1016,6 +1013,9 @@ msgstr "男"
 msgid "mandatory_mode"
 msgstr "强制开发者模式"
 
+msgid "more_info"
+msgstr "更多信息"
+
 msgid "more_options"
 msgstr "更多选项"
 
@@ -1094,11 +1094,11 @@ msgstr "从第 8 级开始，`{if}` 之后的代码需要放在下一行，并�
 msgid "no_programs"
 msgstr "还没有程序."
 
-msgid "no_public_profile"
-msgstr "你还没有公开的个人档案……"
-
 msgid "no_shared_programs"
 msgstr "没有共享程序..."
+
+msgid "no_students"
+msgstr "此班级还没有学生"
 
 msgid "no_such_adventure"
 msgstr "这个探险不存在！"
@@ -1149,7 +1149,7 @@ msgid "ok"
 msgstr "好的"
 
 msgid "one_level_error"
-msgstr ""
+msgstr "你需要至少选择一个级别。"
 
 msgid "only_you_can_see"
 msgstr "只有你可以看到该程序。"
@@ -1571,23 +1571,11 @@ msgstr "空格"
 msgid "star"
 msgstr "星号"
 
-msgid "start_hedy_tutorial"
-msgstr "开始 Hedy 教程"
-
 msgid "start_learning"
 msgstr "开始学习"
 
-msgid "start_programming"
-msgstr "开始编程"
-
-msgid "start_programming_logo_alt"
-msgstr "开始编程图标"
-
 msgid "start_quiz"
 msgstr "开始测验"
-
-msgid "start_teacher_tutorial"
-msgstr "开始教师教程"
 
 msgid "start_teaching"
 msgstr "开始教学"
@@ -1610,14 +1598,26 @@ msgstr "文本"
 msgid "student"
 msgstr "学生"
 
+msgid "student_adventures_table"
+msgstr "学生的探险"
+
+msgid "student_adventures_table_explanation"
+msgstr "此表显示学生为某一级别的每个冒险创建的程序。单击眼睛图标可查看程序页面；查看程序后，可勾选对勾以表示完成。"
+
 msgid "student_already_in_class"
 msgstr "该学生已在你的班级中。"
 
 msgid "student_already_invite"
 msgstr "该学生有待处理的邀请。"
 
-msgid "student_not_allowed_in_class"
-msgstr "学生不允许进入课堂"
+msgid "student_in_another_class"
+msgstr ""
+
+msgid "student_information"
+msgstr "学生信息"
+
+msgid "student_information_explanation"
+msgstr "此表显示你班级学生的基本信息。你还可以在此表中执行多项操作：单击铅笔图标可更改学生的密码，单击代码图标可查看学生的课程页面，单击红色垃圾箱图标可从班级中删除学生。"
 
 msgid "student_not_existing"
 msgstr "此用户名不存在。"
@@ -1694,12 +1694,6 @@ msgstr "标签"
 msgid "teacher"
 msgstr "教师"
 
-msgid "teacher_account_request"
-msgstr "您有一个待处理的教师账户申请"
-
-msgid "teacher_account_success"
-msgstr "你成功地申请了一个教师账户。"
-
 msgid "teacher_invalid"
 msgstr "你的教师值无效。"
 
@@ -1711,9 +1705,6 @@ msgstr "教师手册"
 
 msgid "teacher_signup_header"
 msgstr "教师"
-
-msgid "teacher_tutorial_logo_alt"
-msgstr "教师教程图标"
 
 msgid "teacher_welcome"
 msgstr "欢迎来到海蒂！ 您现在是教师帐户的自豪拥有者，该帐户允许您创建课程并邀请学生。"
@@ -1760,9 +1751,6 @@ msgstr "海蒂 - 教师专用"
 msgid "title_join-class"
 msgstr "海蒂 - 加入班级"
 
-msgid "title_landing-page"
-msgstr "欢迎来到海蒂！"
-
 msgid "title_learn-more"
 msgstr "海蒂 - 了解更多"
 
@@ -1807,6 +1795,12 @@ msgstr "翻译 海蒂"
 
 msgid "translator"
 msgstr "翻译"
+
+msgid "turned_into_teacher"
+msgstr "恭喜！你已成功晋升为教师。"
+
+msgid "tutorial"
+msgstr "教程"
 
 msgid "tutorial_code_snippet"
 msgstr ""
@@ -1915,12 +1909,6 @@ msgstr "等待提交"
 msgid "walker_variable_role"
 msgstr "漫游者"
 
-msgid "welcome"
-msgstr "欢迎"
-
-msgid "welcome_back"
-msgstr "欢迎回来"
-
 msgid "what_is_your_role"
 msgstr "你的角色是什么？"
 
@@ -1932,12 +1920,6 @@ msgstr "请输入介于 1900 和 {current_year} 之间的年份。"
 
 msgid "yes"
 msgstr "是的"
-
-msgid "your_account"
-msgstr "你的个人档案"
-
-msgid "your_last_program"
-msgstr "您上次保存的程序"
 
 msgid "your_personal_text"
 msgstr "你的个人文本..."
@@ -2046,9 +2028,6 @@ msgstr "你的程序"
 
 #~ msgid "too_many_attempts"
 #~ msgstr "Too many attempts"
-
-#~ msgid "class_logs"
-#~ msgstr "日志"
 
 #~ msgid "class_stats"
 #~ msgstr "班级统计数据"
@@ -2224,21 +2203,63 @@ msgstr "你的程序"
 #~ msgid "number_achievements"
 #~ msgstr "成就数"
 
-#~ msgid "developers_mode"
-#~ msgstr "程序员模式"
+#~ msgid "create_question"
+#~ msgstr "你想创建一个吗？"
 
-#~ msgid "read_code_label"
-#~ msgstr "大声读出来"
+#~ msgid "explore_programs"
+#~ msgstr "探索程序"
 
-#~ msgid "regress_button"
-#~ msgstr ""
+#~ msgid "explore_programs_logo_alt"
+#~ msgstr "浏览程序图标"
 
-#~ msgid "tutorial"
-#~ msgstr "教程"
+#~ msgid "hedy_tutorial_logo_alt"
+#~ msgstr "Hedy 教程的图标"
 
-#~ msgid "index_button"
-#~ msgstr ""
+#~ msgid "no_public_profile"
+#~ msgstr "你还没有公开的个人档案……"
 
-#~ msgid "tooltip_level_locked"
-#~ msgstr "你的老师禁用了这个级别"
+#~ msgid "start_hedy_tutorial"
+#~ msgstr "开始 Hedy 教程"
+
+#~ msgid "start_programming"
+#~ msgstr "开始编程"
+
+#~ msgid "start_programming_logo_alt"
+#~ msgstr "开始编程图标"
+
+#~ msgid "start_teacher_tutorial"
+#~ msgstr "开始教师教程"
+
+#~ msgid "teacher_tutorial_logo_alt"
+#~ msgstr "教师教程图标"
+
+#~ msgid "title_landing-page"
+#~ msgstr "欢迎来到海蒂！"
+
+#~ msgid "welcome"
+#~ msgstr "欢迎"
+
+#~ msgid "welcome_back"
+#~ msgstr "欢迎回来"
+
+#~ msgid "your_account"
+#~ msgstr "你的个人档案"
+
+#~ msgid "your_last_program"
+#~ msgstr "您上次保存的程序"
+
+#~ msgid "already_teacher"
+#~ msgstr "你已经有了一个教师账户。"
+
+#~ msgid "already_teacher_request"
+#~ msgstr "你已经有一个待处理的教师请求。"
+
+#~ msgid "teacher_account_request"
+#~ msgstr "您有一个待处理的教师账户申请"
+
+#~ msgid "teacher_account_success"
+#~ msgstr "你成功地申请了一个教师账户。"
+
+#~ msgid "student_not_allowed_in_class"
+#~ msgstr "学生不允许进入课堂"
 

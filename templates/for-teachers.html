@@ -24,7 +24,8 @@
         <button class="white-btn inline-flex items-center gap-2" data-cy="view_classes"
         _="on click hedyApp.saveForTeacherTable('classes_table')"
         >
-        <span>{{_('view_classes')}}</span>
+        <span id="classes_table_show" class="">{{_('view_classes')}}</span>
+        <span id="classes_table_hide" class="hidden">{{_('hide_classes')}}</span>
         <svg id="classes_table_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
           <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
         </svg>
@@ -36,14 +37,15 @@
       <h2 class="m-0 basis-1/12"> {{_('adventures')}} </h2>
       <div class="text-black basis-10/12">{{ _('adventures_info') }}</div>
       <div class="flex gap-3 justify-end basis-1/12">
-            <button id="create_adventure_button" class="green-btn inline-flex" 
+            <button id="create_adventure_button" data-cy="create_adventure_button" class="green-btn inline-flex" 
               _="on click
                 window.open('/for-teachers/customize-adventure', '_self')"
               data-cy="edit_link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
             {% if teacher_adventures %}
             <button class="white-btn inline-flex" id="view_adventures" data-cy="view_adventures"
             _="on click hedyApp.saveForTeacherTable('adventures_table')">
-            <span>{{_('view_adventures')}}</span>
+            <span id="adventures_table_show" class="">{{_('view_adventures')}}</span>
+            <span id="adventures_table_hide" class="hidden">{{_('hide_adventures')}}</span>
             <svg id="adventures_table_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
             </svg>
@@ -72,7 +74,8 @@
           _="on load hedyApp.getForTeacherTable('slides_table') end
           on click hedyApp.saveForTeacherTable('slides_table') end"
           >
-          <span>{{_('view_slides')}}</span>
+          <span id="slides_table_show">{{_('view_slides')}}</span>
+          <span id="slides_table_hide" class="hidden">{{_('hide_slides')}}</span>
           <svg id="slides_table_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
           </svg>
@@ -83,7 +86,7 @@
         <h2 class="m-0 basis-1/12"> {{_('public_content')}} </h2>
         <div class="text-black basis-10/12">{{ _('public_content_info') }}</div>
         <div class="flex gap-3 justify-end basis-1/12">
-              <button id="public_adventures_link" class="white-btn inline-flex items-center"
+              <button id="public_adventures_link" class="white-btn inline-flex items-center" data-cy="public_adventures_link"
             _="on click window.open('/public-adventures', '_self')">{{_('public_adventures')}}</button>
         </div>
       </div>

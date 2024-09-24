@@ -13,8 +13,21 @@
       </div>
       {% endif %}
   {% endif %}
-  <h1>{{initial_adventure.name}}</h1>
-  <h2 class="mt-0">{{_('level_title')}} {{level}}</h2>
+  <div class="flex flex-row gap-6 items-center">
+    <h1>{{initial_adventure.name}}</h1>
+    {% if show_checkbox %}
+      <input type="checkbox"
+        id="adventure_checkbox"
+        class="student_adventure_checkbox text-green-700 text-center p-3 text-lg cursor-pointer self-center {% if student_adventure.ticked %}fa-solid fa-check{% endif %} "
+        hx-post="/for-teachers/check_adventure?level={{ level }}&student_name={{ initial_adventure.username }}&adventure_name={{ initial_adventure.adventure_name }}&program_id={{ program_id }}"
+        hx-swap="none"
+        hx-disabled-elt="this"
+        {% if student_adventure.ticked %}checked{% endif %}
+        _="on click toggle .fa-solid .fa-check on me"
+      >
+    {% endif %}
+  </div>
+  <h2 class="p-0 m-0">{{_('level_title')}} {{level}}</h2>
   <div>{{_('by')}}
       <a {% if initial_adventure.public_profile %}onclick="window.open('/user/{{initial_adventure.username}}', '_self')"{% endif %} class="{% if initial_adventure.public_profile %}cursor-pointer{% else %}text-black{% endif %} no-underline">{{ initial_adventure.username }}</a>
   </div>

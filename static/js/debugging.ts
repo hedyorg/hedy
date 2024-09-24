@@ -270,7 +270,7 @@ export function stopDebug() {
     var stopButton = $('#debug_stop');
     var resetButton = $('#debug_restart');
     var runButtonContainer = $('#run_button_container');
-
+    document.getElementById('debug_continue')!.removeAttribute('disabled');
     $('#stopit').hide();
     $('#runit').show()
     runButtonContainer.show();
@@ -298,6 +298,7 @@ function clearDebugVariables() {
 }
 
 export function incrementDebugLine() {
+  document.getElementById('debug_continue')!.removeAttribute('disabled');
   const active_suspension = theGlobalDebugger.getActiveSuspension();
   const suspension_info = theGlobalDebugger.getSuspensionInfo(active_suspension);
   const lineNumber = suspension_info.lineno;

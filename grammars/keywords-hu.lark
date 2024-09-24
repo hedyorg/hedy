@@ -5,7 +5,7 @@ _DEF: ("def" | "def") _SPACE?
 _RETURN: ("return" | "return") _SPACE?
 _PRINT: ("kiír" | "print") _SPACE?
 _PLAY: ("play" | "play") _SPACE
-_ASK: ("kérdez" | "ask") _SPACE?
+_ASK: ("kérdez" | "ask")
 _ECHO: ("utánoz" | "echo") _SPACE?
 _FORWARD: ("előre" | "forward") _SPACE?
 _TURN: ("fordul" | "turn") _SPACE?
@@ -26,9 +26,9 @@ _IS: _SPACE ("egyenlő" | "is") _SPACE
 _STANDALONE_IS: ("egyenlő" | "is")
 _SLEEP: ("szundi" | "sleep") _SPACE?
 _ADD_LIST: ("beszúr" | "add") _SPACE
-_TO_LIST: _SPACE ("ebbe" | "to") _SPACE
+_TO_LIST: _SPACE? ("ebbe" | "to") _SPACE
 _REMOVE: ("kivesz" | "remove") _SPACE
-_FROM: _SPACE ("ebből" | "from") _SPACE
+_FROM: _SPACE? ("ebből" | "from") _SPACE
 _AT: _SPACE ("listából" | "at") _SPACE
 random: ("random" | "random") _SPACE?
 _IN: _SPACE ("eleme" | "in") _SPACE
@@ -49,7 +49,6 @@ _WHILE: ("amíg" | "while") _SPACE
 _LENGTH: "hossz" | "length"
 _COLOR : ("szín" | "color") _SPACE?
 _PRESSED: ("lenyomva" | "pressed") _SPACE?
-_BUTTON: ("gomb" | "button") _SPACE?
 clear: ("törlés" | "clear") _SPACE?
 TRUE: ("true" | "True" | "true" | "True") _SPACE?
 FALSE: ("false" | "False" | "false" | "False") _SPACE?

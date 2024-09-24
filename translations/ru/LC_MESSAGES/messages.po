@@ -8,16 +8,15 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-07-08 10:20+0000\n"
+"PO-Revision-Date: 2024-09-06 14:38+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: ru <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.7-dev\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.8-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -290,6 +289,10 @@ msgid "adventures_restored"
 msgstr "The default adventures have been restored!"
 
 #, fuzzy
+msgid "adventures_ticked"
+msgstr "Adventures ticked"
+
+#, fuzzy
 msgid "adventures_tried"
 msgstr "Adventures tried"
 
@@ -316,12 +319,6 @@ msgstr "У вас уже есть учётная запись?"
 
 msgid "already_program_running"
 msgstr "Какая-то программа уже исполняется, подождите когда она закончит выполнение."
-
-msgid "already_teacher"
-msgstr "У вас уже есть преподавательская учётная запись."
-
-msgid "already_teacher_request"
-msgstr "Вы уже запросили преподавательскую учётную запись."
 
 msgid "are_you_sure"
 msgstr "Вы уверены? Это действие невозможно будет отменить или откатить."
@@ -373,6 +370,9 @@ msgstr "Класс успешно настроен."
 #, fuzzy
 msgid "class_graph_explanation"
 msgstr "In this graph you can see represented the numbers of adventures your students have attempted (meaning they have done meaninful work in that adventure), with respect to the number of errors and successful runs."
+
+msgid "class_logs"
+msgstr "Журналы"
 
 msgid "class_name_duplicate"
 msgstr "У вас уже есть класс с таким именем."
@@ -518,9 +518,6 @@ msgstr "Создать новый класс"
 
 msgid "create_multiple_accounts"
 msgstr "Создание нескольких учетных записей"
-
-msgid "create_question"
-msgstr "Хотите ли вы его создать?"
 
 msgid "create_student_account"
 msgstr "Создать аккаунт"
@@ -717,12 +714,6 @@ msgstr "Пожалуйста, выберите действующий опыт, 
 msgid "expiration_date"
 msgstr "Срок действия"
 
-msgid "explore_programs"
-msgstr "Изучить программы"
-
-msgid "explore_programs_logo_alt"
-msgstr "Значок \"Обзор программ\""
-
 #, fuzzy
 msgid "favorite_program"
 msgstr "Favorite program"
@@ -850,17 +841,26 @@ msgstr "Логотип Хеди"
 msgid "hedy_on_github"
 msgstr "Hedy на Github"
 
-msgid "hedy_tutorial_logo_alt"
-msgstr "Иконка учебника Hedy"
-
 msgid "hello_logo"
 msgstr "Привет!"
+
+#, fuzzy
+msgid "hide_adventures"
+msgstr "Hide adventures"
 
 msgid "hide_cheatsheet"
 msgstr "Скрыть шпаргалку"
 
+#, fuzzy
+msgid "hide_classes"
+msgstr "Hide classes"
+
 msgid "hide_keyword_switcher"
 msgstr "Скрыть переключатель ключевых слов"
+
+#, fuzzy
+msgid "hide_slides"
+msgstr "Hide slides"
 
 msgid "highest_level_reached"
 msgstr "Достигнут высочайший уровень"
@@ -1137,6 +1137,10 @@ msgid "mandatory_mode"
 msgstr "Обязательный режим разработчика"
 
 #, fuzzy
+msgid "more_info"
+msgstr "More information"
+
+#, fuzzy
 msgid "more_options"
 msgstr "More options"
 
@@ -1220,11 +1224,12 @@ msgstr "Начиная с 8-го уровня, строка после `{if}` д
 msgid "no_programs"
 msgstr "У вас пока нет программ."
 
-msgid "no_public_profile"
-msgstr "У вас еще нет общедоступного текста профиля..."
-
 msgid "no_shared_programs"
 msgstr "нету общих программ..."
+
+#, fuzzy
+msgid "no_students"
+msgstr "There are no students in this class"
 
 msgid "no_such_adventure"
 msgstr "Этого приключения не существует!"
@@ -1278,8 +1283,9 @@ msgstr "Количество запущенных программ"
 msgid "ok"
 msgstr "OK"
 
+#, fuzzy
 msgid "one_level_error"
-msgstr ""
+msgstr "You need to select at least one level."
 
 msgid "only_you_can_see"
 msgstr "Только вы можете видеть эту программу."
@@ -1729,24 +1735,12 @@ msgstr "пространство"
 msgid "star"
 msgstr "звезда"
 
-msgid "start_hedy_tutorial"
-msgstr "Начать обучение"
-
 #, fuzzy
 msgid "start_learning"
 msgstr "Start learning"
 
-msgid "start_programming"
-msgstr "Начать программирование"
-
-msgid "start_programming_logo_alt"
-msgstr "Значок начала программирования"
-
 msgid "start_quiz"
 msgstr "Начать викторину"
-
-msgid "start_teacher_tutorial"
-msgstr "Начать обучение для учителей"
 
 #, fuzzy
 msgid "start_teaching"
@@ -1772,15 +1766,30 @@ msgstr "текст"
 msgid "student"
 msgstr "Student"
 
+#, fuzzy
+msgid "student_adventures_table"
+msgstr "Student's Adventures"
+
+#, fuzzy
+msgid "student_adventures_table_explanation"
+msgstr "This table displays the programs created by students for each adventure in a level. By clicking the eye icon, you can view the program's page; after reviewing the program, you can tick the checkmark to indicate completion."
+
 msgid "student_already_in_class"
 msgstr "Этот ученик уже учится в вашем классе."
 
 msgid "student_already_invite"
 msgstr "У этого студента уже есть ожидающее приглашение."
 
+msgid "student_in_another_class"
+msgstr ""
+
 #, fuzzy
-msgid "student_not_allowed_in_class"
-msgstr "Student not allowed in class"
+msgid "student_information"
+msgstr "Student's Information"
+
+#, fuzzy
+msgid "student_information_explanation"
+msgstr "This table displays basic information about the students in your class. There are also several actions you can do in this table: change the password of a student by clicking the pencil icon, view the program's page of a student by clicking the code icon, and delete a student from the class by clicking the red bin icon."
 
 msgid "student_not_existing"
 msgstr "Этого имени пользователя не существует."
@@ -1868,12 +1877,6 @@ msgstr "Tags"
 msgid "teacher"
 msgstr "Учитель"
 
-msgid "teacher_account_request"
-msgstr "У вас есть нерассмотренный запрос на учетную запись преподавателя"
-
-msgid "teacher_account_success"
-msgstr "Вы успешно запросили учетную запись учителя."
-
 msgid "teacher_invalid"
 msgstr "Значение вашего учителя недействительно."
 
@@ -1885,9 +1888,6 @@ msgstr "Руководство для учителей"
 
 msgid "teacher_signup_header"
 msgstr "Учитель"
-
-msgid "teacher_tutorial_logo_alt"
-msgstr "Иконка для учителя"
 
 msgid "teacher_welcome"
 msgstr "Добро пожаловать в Hedy! Теперь вы являетесь гордым владельцем учетной записи учителя, которая позволяет вам создавать классы и приглашать учеников."
@@ -1935,9 +1935,6 @@ msgstr "Hedy - Для учителей"
 msgid "title_join-class"
 msgstr "Hedy - Присоединиться к классу"
 
-msgid "title_landing-page"
-msgstr "Добро пожаловать в Hedy!"
-
 msgid "title_learn-more"
 msgstr "Hedy - Узнать больше"
 
@@ -1984,6 +1981,13 @@ msgstr "Перевод Hedy"
 #, fuzzy
 msgid "translator"
 msgstr "Translator"
+
+#, fuzzy
+msgid "turned_into_teacher"
+msgstr "Congratulations! You successfully turned into a teacher."
+
+msgid "tutorial"
+msgstr "Учебник"
 
 msgid "tutorial_code_snippet"
 msgstr ""
@@ -2107,12 +2111,6 @@ msgstr "Waiting for submit"
 msgid "walker_variable_role"
 msgstr "walker"
 
-msgid "welcome"
-msgstr "Добро пожаловать"
-
-msgid "welcome_back"
-msgstr "С возвращением"
-
 #, fuzzy
 msgid "what_is_your_role"
 msgstr "What is your role?"
@@ -2125,12 +2123,6 @@ msgstr "Пожалуйста, введите год между 1900 и {теку
 
 msgid "yes"
 msgstr "Да"
-
-msgid "your_account"
-msgstr "Ваш профиль"
-
-msgid "your_last_program"
-msgstr "Ваша последняя сохраненная программа"
 
 msgid "your_personal_text"
 msgstr "Ваш личный текст..."
@@ -2239,9 +2231,6 @@ msgstr "Ваша программа"
 
 #~ msgid "too_many_attempts"
 #~ msgstr "Слишком много попыток"
-
-#~ msgid "class_logs"
-#~ msgstr "Журналы"
 
 #~ msgid "class_stats"
 #~ msgstr "Статистика класса"
@@ -2432,21 +2421,63 @@ msgstr "Ваша программа"
 #~ msgid "number_achievements"
 #~ msgstr "Количество достижений"
 
-#~ msgid "developers_mode"
-#~ msgstr "Режим программиста"
+#~ msgid "create_question"
+#~ msgstr "Хотите ли вы его создать?"
 
-#~ msgid "read_code_label"
-#~ msgstr "Чтение вслух"
+#~ msgid "explore_programs"
+#~ msgstr "Изучить программы"
 
-#~ msgid "regress_button"
-#~ msgstr ""
+#~ msgid "explore_programs_logo_alt"
+#~ msgstr "Значок \"Обзор программ\""
 
-#~ msgid "tutorial"
-#~ msgstr "Учебник"
+#~ msgid "hedy_tutorial_logo_alt"
+#~ msgstr "Иконка учебника Hedy"
 
-#~ msgid "index_button"
-#~ msgstr ""
+#~ msgid "no_public_profile"
+#~ msgstr "У вас еще нет общедоступного текста профиля..."
 
-#~ msgid "tooltip_level_locked"
-#~ msgstr "Your teacher disabled this level"
+#~ msgid "start_hedy_tutorial"
+#~ msgstr "Начать обучение"
+
+#~ msgid "start_programming"
+#~ msgstr "Начать программирование"
+
+#~ msgid "start_programming_logo_alt"
+#~ msgstr "Значок начала программирования"
+
+#~ msgid "start_teacher_tutorial"
+#~ msgstr "Начать обучение для учителей"
+
+#~ msgid "teacher_tutorial_logo_alt"
+#~ msgstr "Иконка для учителя"
+
+#~ msgid "title_landing-page"
+#~ msgstr "Добро пожаловать в Hedy!"
+
+#~ msgid "welcome"
+#~ msgstr "Добро пожаловать"
+
+#~ msgid "welcome_back"
+#~ msgstr "С возвращением"
+
+#~ msgid "your_account"
+#~ msgstr "Ваш профиль"
+
+#~ msgid "your_last_program"
+#~ msgstr "Ваша последняя сохраненная программа"
+
+#~ msgid "already_teacher"
+#~ msgstr "У вас уже есть преподавательская учётная запись."
+
+#~ msgid "already_teacher_request"
+#~ msgstr "Вы уже запросили преподавательскую учётную запись."
+
+#~ msgid "teacher_account_request"
+#~ msgstr "У вас есть нерассмотренный запрос на учетную запись преподавателя"
+
+#~ msgid "teacher_account_success"
+#~ msgstr "Вы успешно запросили учетную запись учителя."
+
+#~ msgid "student_not_allowed_in_class"
+#~ msgstr "Student not allowed in class"
 

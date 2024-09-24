@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-07-08 10:20+0000\n"
+"PO-Revision-Date: 2024-09-06 14:38+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: tr <LL@li.org>\n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -289,6 +289,10 @@ msgid "adventures_restored"
 msgstr "Varsayılan maceralar geri yüklendi."
 
 #, fuzzy
+msgid "adventures_ticked"
+msgstr "Adventures ticked"
+
+#, fuzzy
 msgid "adventures_tried"
 msgstr "Adventures tried"
 
@@ -315,12 +319,6 @@ msgstr "Zaten bir hesabınız var mı?"
 
 msgid "already_program_running"
 msgstr "Şu anda çalışan bir program var, önce onu bitirin."
-
-msgid "already_teacher"
-msgstr "Zaten bir öğretmen hesabınız var."
-
-msgid "already_teacher_request"
-msgstr "Zaten bekleyen bir öğretmen talebiniz var."
 
 msgid "are_you_sure"
 msgstr "Emin misiniz? Bu işlemi geri alamazsınız."
@@ -371,6 +369,9 @@ msgstr "Sınıf başarıyla özelleştirildi."
 #, fuzzy
 msgid "class_graph_explanation"
 msgstr "In this graph you can see represented the numbers of adventures your students have attempted (meaning they have done meaninful work in that adventure), with respect to the number of errors and successful runs."
+
+msgid "class_logs"
+msgstr "Last login"
 
 msgid "class_name_duplicate"
 msgstr "Bu isimde bir sınıfınız zaten var."
@@ -514,9 +515,6 @@ msgstr "Yeni bir sınıf oluşturun"
 
 msgid "create_multiple_accounts"
 msgstr "Birden fazla hesap oluşturun"
-
-msgid "create_question"
-msgstr "Bir tane oluşturmak ister misiniz?"
 
 msgid "create_student_account"
 msgstr "Bir hesap oluşturun"
@@ -710,12 +708,6 @@ msgstr "Lütfen geçerli bir deneyim seçin, (Evet, Hayır) seçeneğini işaret
 msgid "expiration_date"
 msgstr "Son kullanma tarihi"
 
-msgid "explore_programs"
-msgstr "Programları keşfet"
-
-msgid "explore_programs_logo_alt"
-msgstr "Programları keşfet simgesi"
-
 msgid "favorite_program"
 msgstr "Favori program"
 
@@ -842,17 +834,26 @@ msgstr "Hedy logosu"
 msgid "hedy_on_github"
 msgstr "Github'da Hedy"
 
-msgid "hedy_tutorial_logo_alt"
-msgstr "Hedy öğretici simgesi"
-
 msgid "hello_logo"
 msgstr "Merhaba"
+
+#, fuzzy
+msgid "hide_adventures"
+msgstr "Hide adventures"
 
 msgid "hide_cheatsheet"
 msgstr "Kopya kağıdını gizle"
 
+#, fuzzy
+msgid "hide_classes"
+msgstr "Hide classes"
+
 msgid "hide_keyword_switcher"
 msgstr "Anahtar kelime değiştiriciyi gizle"
+
+#, fuzzy
+msgid "hide_slides"
+msgstr "Hide slides"
 
 msgid "highest_level_reached"
 msgstr "Ulaşılan en yüksek seviye"
@@ -1115,6 +1116,10 @@ msgid "mandatory_mode"
 msgstr "Zorunlu geliştirici kipi"
 
 #, fuzzy
+msgid "more_info"
+msgstr "More information"
+
+#, fuzzy
 msgid "more_options"
 msgstr "More options"
 
@@ -1196,11 +1201,12 @@ msgstr "8. seviyeden itibaren, `{if}`'den sonraki kodun bir sonraki satıra yerl
 msgid "no_programs"
 msgstr "Henüz hiç bir programınız yok."
 
-msgid "no_public_profile"
-msgstr "Henüz herkese açık bir profil metniniz yok..."
-
 msgid "no_shared_programs"
 msgstr "paylaşılan programı yok..."
+
+#, fuzzy
+msgid "no_students"
+msgstr "There are no students in this class"
 
 msgid "no_such_adventure"
 msgstr "Böyle bir macera bulunmuyor!"
@@ -1253,8 +1259,9 @@ msgstr "Çalıştırılan programların sayısı"
 msgid "ok"
 msgstr "TAMAM"
 
+#, fuzzy
 msgid "one_level_error"
-msgstr ""
+msgstr "You need to select at least one level."
 
 msgid "only_you_can_see"
 msgstr "Bu programı sadece siz görebilirsiniz."
@@ -1702,24 +1709,12 @@ msgstr "bir boşluk"
 msgid "star"
 msgstr "bir yıldız"
 
-msgid "start_hedy_tutorial"
-msgstr "Hedy öğreticisini başlat"
-
 #, fuzzy
 msgid "start_learning"
 msgstr "Start learning"
 
-msgid "start_programming"
-msgstr "Programlamaya başlayın"
-
-msgid "start_programming_logo_alt"
-msgstr "Programlamayı başlat simgesi"
-
 msgid "start_quiz"
 msgstr "Kısa sınavı başlatın"
-
-msgid "start_teacher_tutorial"
-msgstr "Öğretmen öğreticisini başlatın"
 
 #, fuzzy
 msgid "start_teaching"
@@ -1745,15 +1740,30 @@ msgstr "metin"
 msgid "student"
 msgstr "Student"
 
+#, fuzzy
+msgid "student_adventures_table"
+msgstr "Student's Adventures"
+
+#, fuzzy
+msgid "student_adventures_table_explanation"
+msgstr "This table displays the programs created by students for each adventure in a level. By clicking the eye icon, you can view the program's page; after reviewing the program, you can tick the checkmark to indicate completion."
+
 msgid "student_already_in_class"
 msgstr "Bu öğrenci zaten sizin sınıfınızda."
 
 msgid "student_already_invite"
 msgstr "Bu öğrencinin zaten bekleyen bir daveti var."
 
+msgid "student_in_another_class"
+msgstr ""
+
 #, fuzzy
-msgid "student_not_allowed_in_class"
-msgstr "Student not allowed in class"
+msgid "student_information"
+msgstr "Student's Information"
+
+#, fuzzy
+msgid "student_information_explanation"
+msgstr "This table displays basic information about the students in your class. There are also several actions you can do in this table: change the password of a student by clicking the pencil icon, view the program's page of a student by clicking the code icon, and delete a student from the class by clicking the red bin icon."
 
 msgid "student_not_existing"
 msgstr "Bu kullanıcı adı mevcut değil."
@@ -1841,12 +1851,6 @@ msgstr "Tags"
 msgid "teacher"
 msgstr "Öğretmen"
 
-msgid "teacher_account_request"
-msgstr "Bekleyen bir öğretmen hesabı talebiniz var"
-
-msgid "teacher_account_success"
-msgstr "Bir öğretmen hesabı talebiniz başarıyla alındı."
-
 msgid "teacher_invalid"
 msgstr "Öğretmen değeriniz geçersiz."
 
@@ -1858,9 +1862,6 @@ msgstr "Öğretmen kılavuzu"
 
 msgid "teacher_signup_header"
 msgstr "Öğretmen"
-
-msgid "teacher_tutorial_logo_alt"
-msgstr "Öğretmen öğretici simgesi"
 
 msgid "teacher_welcome"
 msgstr "Hedy'ye hoş geldiniz! Artık sınıflar oluşturmanıza ve öğrencileri davet etmenize olanak tanıyan bir öğretmen hesabının gururlu sahibisiniz."
@@ -1908,9 +1909,6 @@ msgstr "Hedy - Öğretmenler için"
 msgid "title_join-class"
 msgstr "Hedy - Sınıfa katılın"
 
-msgid "title_landing-page"
-msgstr "Hedy'ye hoş geldiniz!"
-
 msgid "title_learn-more"
 msgstr "Hedy - Daha fazlasını öğrenin"
 
@@ -1956,6 +1954,13 @@ msgstr "Hedy'nin çevirisini yapmak"
 
 msgid "translator"
 msgstr "Çevirmen"
+
+#, fuzzy
+msgid "turned_into_teacher"
+msgstr "Congratulations! You successfully turned into a teacher."
+
+msgid "tutorial"
+msgstr "Öğretici"
 
 msgid "tutorial_code_snippet"
 msgstr ""
@@ -2076,12 +2081,6 @@ msgstr "Waiting for submit"
 msgid "walker_variable_role"
 msgstr "walker"
 
-msgid "welcome"
-msgstr "Hoş geldiniz"
-
-msgid "welcome_back"
-msgstr "Tekrar hoş geldiniz"
-
 msgid "what_is_your_role"
 msgstr "Göreviniz nedir?"
 
@@ -2094,20 +2093,11 @@ msgstr "Lütfen 1900 ile {current_year} arasında bir yıl girin."
 msgid "yes"
 msgstr "Evet"
 
-msgid "your_account"
-msgstr "Profiliniz"
-
-msgid "your_last_program"
-msgstr "Son kaydettiğiniz program"
-
 msgid "your_personal_text"
 msgstr "Kişisel metniniz..."
 
 msgid "your_program"
 msgstr "Programınız"
-
-#~ msgid "class_logs"
-#~ msgstr "Last login"
 
 #~ msgid "class_stats"
 #~ msgstr "Show class statistics"
@@ -2379,21 +2369,63 @@ msgstr "Programınız"
 #~ msgid "number_achievements"
 #~ msgstr "Başarımların sayısı"
 
-#~ msgid "developers_mode"
-#~ msgstr "Programcı kipi"
+#~ msgid "create_question"
+#~ msgstr "Bir tane oluşturmak ister misiniz?"
 
-#~ msgid "read_code_label"
-#~ msgstr "Yüksek sesle oku"
+#~ msgid "explore_programs"
+#~ msgstr "Programları keşfet"
 
-#~ msgid "regress_button"
-#~ msgstr ""
+#~ msgid "explore_programs_logo_alt"
+#~ msgstr "Programları keşfet simgesi"
 
-#~ msgid "tutorial"
-#~ msgstr "Öğretici"
+#~ msgid "hedy_tutorial_logo_alt"
+#~ msgstr "Hedy öğretici simgesi"
 
-#~ msgid "index_button"
-#~ msgstr ""
+#~ msgid "no_public_profile"
+#~ msgstr "Henüz herkese açık bir profil metniniz yok..."
 
-#~ msgid "tooltip_level_locked"
-#~ msgstr "Your teacher disabled this level"
+#~ msgid "start_hedy_tutorial"
+#~ msgstr "Hedy öğreticisini başlat"
+
+#~ msgid "start_programming"
+#~ msgstr "Programlamaya başlayın"
+
+#~ msgid "start_programming_logo_alt"
+#~ msgstr "Programlamayı başlat simgesi"
+
+#~ msgid "start_teacher_tutorial"
+#~ msgstr "Öğretmen öğreticisini başlatın"
+
+#~ msgid "teacher_tutorial_logo_alt"
+#~ msgstr "Öğretmen öğretici simgesi"
+
+#~ msgid "title_landing-page"
+#~ msgstr "Hedy'ye hoş geldiniz!"
+
+#~ msgid "welcome"
+#~ msgstr "Hoş geldiniz"
+
+#~ msgid "welcome_back"
+#~ msgstr "Tekrar hoş geldiniz"
+
+#~ msgid "your_account"
+#~ msgstr "Profiliniz"
+
+#~ msgid "your_last_program"
+#~ msgstr "Son kaydettiğiniz program"
+
+#~ msgid "already_teacher"
+#~ msgstr "Zaten bir öğretmen hesabınız var."
+
+#~ msgid "already_teacher_request"
+#~ msgstr "Zaten bekleyen bir öğretmen talebiniz var."
+
+#~ msgid "teacher_account_request"
+#~ msgstr "Bekleyen bir öğretmen hesabı talebiniz var"
+
+#~ msgid "teacher_account_success"
+#~ msgstr "Bir öğretmen hesabı talebiniz başarıyla alındı."
+
+#~ msgid "student_not_allowed_in_class"
+#~ msgstr "Student not allowed in class"
 

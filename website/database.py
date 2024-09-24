@@ -324,9 +324,9 @@ class Database:
                                         'username': str,
                                         'level': str,
                                         'exercise': str,
-                                        'order': str,
+                                        'order': ListOf(str),
                                         'correct': str,
-                                        'timestamp': ListOf(int)
+                                        'timestamp': int
                                     }),
                                     )
         self.STUDENT_ADVENTURES = dynamo.Table(storage, "student_adventures", "id",
@@ -1155,7 +1155,7 @@ class Database:
         return f"{cal[0]}-{cal[1]:02d}"
 
     def get_username_role(self, username):
-        role = "teacher" if self.users.get({"username": username}).get("teacher_request") is True else "student"
+        role = "teacher" if self.users.get({"username": username}).get("is_teacher") == 1 else "student"
         return role
 
 

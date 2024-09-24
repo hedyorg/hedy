@@ -1,6 +1,6 @@
 import { loginForStudent, loginForTeacher } from '../../tools/login/login.js'
 import { ensureClass, openClassView, removeCustomizations, selectLevel } from "../../tools/classes/class";
-import { goToHedyLevel5Page } from '../../tools/navigation/nav.js';
+import { goToHedyLevel } from '../../tools/navigation/nav.js';
 
 const teachers = ["teacher1", "teacher4"];
 
@@ -36,11 +36,9 @@ teachers.forEach((teacher) => {
 
         // make sure they are visible
         loginForStudent();
-        cy.visit('/hedy/2#parsons');
-        cy.reload();
-        cy.getDataCy('dropdown_adventure_button').should('contain.text', 'Puzzle');
-        cy.getDataCy('next_adventure').click();
-        cy.getDataCy('dropdown_adventure_button').should('contain.text', 'Quiz');
+        goToHedyLevel(2);
+        cy.getDataCy('quiz').scrollIntoView().should('be.visible');
+        cy.getDataCy('parsons').scrollIntoView().should('be.visible');
       });
 
       it('Is able to disable all quizes and parsons', () => {
@@ -70,11 +68,9 @@ teachers.forEach((teacher) => {
           .should("not.exist")
 
         loginForStudent();
-        goToHedyLevel5Page();
-        cy.visit('/hedy/5#parsons');
-        cy.getDataCy('dropdown_adventure_button').should('contain.text', 'Introduction');
-        cy.visit('/hedy/5#quiz');
-        cy.getDataCy('dropdown_adventure_button').should('contain.text', 'Introduction');
+        goToHedyLevel(5);
+        cy.getDataCy('quiz').should('not.exist');
+        cy.getDataCy('parsons').should('not.exist');
       });
 
 

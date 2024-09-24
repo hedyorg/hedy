@@ -53,7 +53,6 @@ class SuperTeacherModule(WebsiteModule):
             "is_super_teacher",
             "program_count",
             "prog_experience",
-            "teacher_request",
             "experience_languages",
             "language",
             "keyword_language",
@@ -65,9 +64,8 @@ class SuperTeacherModule(WebsiteModule):
             data = pick(user, *fields)
             data["email_verified"] = not bool(data["verification_pending"])
             data["is_teacher"] = bool(data["is_teacher"])
-            if not data["is_teacher"] and not data["teacher_request"]:
+            if not data["is_teacher"]:
                 continue
-            data["teacher_request"] = True if data["teacher_request"] else None
             data["created"] = utils.timestamp_to_date(data["created"])
             data["last_login"] = utils.timestamp_to_date(data["last_login"]) if data.get("last_login") else None
             if category == "language":

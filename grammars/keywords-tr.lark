@@ -5,7 +5,7 @@ _DEF: ("tanı" | "def") _SPACE?
 _RETURN: ("geridön" | "return") _SPACE?
 _PRINT: ("yazdır" | "print") _SPACE?
 _PLAY: ("play" | "play") _SPACE
-_ASK: ("sor" | "ask") _SPACE?
+_ASK: ("sor" | "ask")
 _ECHO: ("yankıla" | "echo") _SPACE?
 _FORWARD: ("ileri" | "forward") _SPACE?
 _TURN: ("döndür" | "turn") _SPACE?
@@ -26,9 +26,9 @@ _IS: _SPACE ("eşit" | "is") _SPACE
 _STANDALONE_IS: ("eşit" | "is")
 _SLEEP: ("uyu" | "sleep") _SPACE?
 _ADD_LIST: ("ekle" | "add") _SPACE
-_TO_LIST: _SPACE ("şuraya" | "to") _SPACE
+_TO_LIST: _SPACE? ("şuraya" | "to") _SPACE
 _REMOVE: ("kaldır" | "remove") _SPACE
-_FROM: _SPACE ("şuradan" | "from") _SPACE
+_FROM: _SPACE? ("şuradan" | "from") _SPACE
 _AT: _SPACE ("içinden" | "at") _SPACE
 random: ("rastgele" | "random") _SPACE?
 _IN: _SPACE ("şunda" | "in") _SPACE
@@ -49,7 +49,6 @@ _WHILE: ("şu iken" | "while") _SPACE
 _LENGTH: "uzunluk" | "length"
 _COLOR : ("renk" | "color") _SPACE?
 _PRESSED: ("basılı" | "pressed") _SPACE?
-_BUTTON: ("düğme" | "button") _SPACE?
 clear: ("temizle" | "clear") _SPACE?
 TRUE: ("true" | "True" | "true" | "True") _SPACE?
 FALSE: ("false" | "False" | "false" | "False") _SPACE?

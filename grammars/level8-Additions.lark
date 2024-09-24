@@ -1,11 +1,11 @@
 command: += error_repeat_dep_8 | error_ifelse | if_pressed_without_else | if_pressed if_pressed_elses? | ifs elses? -= error_invalid_space | ifelse | error_else_no_if
 
 repeat.1: _REPEAT (INT | var_access) _TIMES _SPACE? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
-error_repeat_dep_8<old_rule_to_error repeat>
+error_repeat_dep_8:<old_rule_to_error repeat>
 
 // FH jan 2022 (#1817) we can allow unquoted rhs's again cause there now is a line break after
 // not sure of we want it, but we could
-equality_check: (textwithoutspaces | NUMBER) (_IS | _EQUALS) (textwithoutspaces | NUMBER) (_SPACE | textwithoutspaces | NUMBER)*
+equality_check: (textwithoutspaces | NUMBER) (_IS | _EQUALS) (textwithoutspaces | NUMBER | textwithinnerspaces) _SPACE?
 
 // from level 8 on if_pressed is implemented slightly differently
 if_pressed: _IF (LETTER_OR_NUMERAL | NAME) _IS _PRESSED _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
@@ -19,5 +19,5 @@ if_pressed_elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SP
 ifs: _IF condition _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 
 //the old 'flat' if-else is now an error
-error_ifelse<old_rule_to_error ifelse>
+error_ifelse:<old_rule_to_error ifelse>
 

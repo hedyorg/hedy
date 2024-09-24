@@ -188,13 +188,13 @@ class HedyTester(unittest.TestCase):
         return inspect.stack()[1][3]
 
     def is_not_turtle(self):
-        return (lambda result: not result.has_turtle)
+        return lambda result: not result.has_turtle
 
     def is_turtle(self):
-        return (lambda result: result.has_turtle)
+        return lambda result: result.has_turtle
 
-    def result_in(self, list):
-        return (lambda result: HedyTester.run_code(result) in list)
+    def result_in(self, list_):
+        return lambda result: HedyTester.run_code(result) in list_
 
     def exception_command(self, command):
         return lambda c: c.exception.arguments['command'] == command
@@ -408,35 +408,26 @@ class HedyTester(unittest.TestCase):
             return False
         return True
 
-    # The turtle commands get transpiled into big pieces of code that probably will change
-    # The followings methods abstract the specifics of the tranpilation and keep tests succinct
-    @staticmethod
-    def forward_transpiled(val, level):
-        return HedyTester.turtle_command_transpiled('forward', val, level)
+    def forward_transpiled(self, val):
+        return self.turtle_command_transpiled('forward', val)
+
+    def turn_transpiled(self, val):
+        return self.turtle_command_transpiled('right', val)
+
+    def turtle_command_transpiled(self, command, val):
+        suffix = '\ntime.sleep(0.1)' if command == 'forward' else ''
+        func = 'int_with_error' if self.level < 12 else 'number_with_error'
+
+        return textwrap.dedent(f"""\
+            __trtl = {func}({val}, {HedyTester.value_exception_transpiled()})
+            t.{command}(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))""") + suffix
 
     @staticmethod
-    def turn_transpiled(val, level):
-        return HedyTester.turtle_command_transpiled('right', val, level)
+    def sleep_transpiled(val):
+        return f"time.sleep(int_with_error({val}, {HedyTester.value_exception_transpiled()}))"
 
     @staticmethod
-    def turtle_command_transpiled(command, val, level):
-        suffix = ''
-        if command == 'forward':
-            suffix = '\n      time.sleep(0.1)'
-
-        func = 'int_with_error' if level < 12 else 'number_with_error'
-
-        return textwrap.dedent(f'''\
-      __trtl = {func}({val}, {HedyTester.value_exception_transpiled()})
-      t.{command}(min(600, __trtl) if __trtl > 0 else max(-600, __trtl)){suffix}''')
-
-    @staticmethod
-    def sleep_command_transpiled(val):
-        return textwrap.dedent(f'\
-          time.sleep(int_with_error({val}, {HedyTester.value_exception_transpiled()}))')
-
-    @staticmethod
-    def turtle_color_command_transpiled(val, lang="en"):
+    def color_transpiled(val, lang="en"):
         color_dict = {hedy_translation.translate_keyword_from_en(x, lang): x for x in hedy.english_colors}
         both_colors = hedy.command_make_color_local(lang)
 
@@ -450,31 +441,55 @@ class HedyTester(unittest.TestCase):
             __trtl = color_dict[__trtl]
         t.pencolor(__trtl)''')
 
-    @staticmethod
-    def input_transpiled(var_name, text):
+    def input_transpiled(self, var_name, text, bool_sys=None):
+        if self.level < 6:
+            return f"{var_name} = input(f'{text}')"
+        elif self.level < 12:
+            return textwrap.dedent(f"""\
+                {var_name} = input(f'{text}')
+                __ns = get_num_sys({var_name})
+                {var_name} = Value({var_name}, num_sys=__ns)""")
+        elif self.level < 15:
+            return textwrap.dedent(f"""\
+                {var_name} = input(f'''{text}''')
+                __ns = get_num_sys({var_name})
+                try:
+                  {var_name} = int({var_name})
+                except ValueError:
+                  try:
+                    {var_name} = float({var_name})
+                  except ValueError:
+                    pass
+                {var_name} = Value({var_name}, num_sys=__ns)""")
+        else:
+            bool_sys = bool_sys if bool_sys else "[{'True': True, 'False': False}, {'true': True, 'false': False}]"
+            return textwrap.dedent(f"""\
+                {var_name} = input(f'''{text}''')
+                __ns = get_num_sys({var_name})
+                __bs = None
+                try:
+                  {var_name} = int({var_name})
+                except ValueError:
+                  try:
+                    {var_name} = float({var_name})
+                  except ValueError:
+                    __b, __bs = get_value_and_bool_sys({var_name}, {bool_sys})
+                    if __b is not None:
+                      {var_name} = __b
+                {var_name} = Value({var_name}, num_sys=__ns, bool_sys=__bs)""")
+
+    def remove_transpiled(self, list_name, value):
+        data_part = '' if self.level < 6 else '.data'
         return textwrap.dedent(f"""\
-    {var_name} = input(f'''{text}''')
-    try:
-      {var_name} = int({var_name})
-    except ValueError:
-      try:
-        {var_name} = float({var_name})
-      except ValueError:
-        pass""")
+            try:
+              {list_name}{data_part}.remove({value})
+            except:
+              pass""")
 
     @staticmethod
-    def remove_transpiled(list_name, value):
+    def play_transpiled(arg):
         return textwrap.dedent(f"""\
-      try:
-        {list_name}.remove({value})
-      except:
-        pass""")
-
-    @staticmethod
-    def play_transpiled(arg, quotes=True):
-        argument = f"'{arg}'" if quotes else arg
-        return textwrap.dedent(f"""\
-            play(note_with_error({argument}, {HedyTester.value_exception_transpiled()}))
+            play(note_with_error(localize({arg}), {HedyTester.value_exception_transpiled()}))
             time.sleep(0.5)""")
 
     @staticmethod
@@ -485,18 +500,62 @@ class HedyTester(unittest.TestCase):
         except IndexError:
           raise Exception({HedyTester.index_exception_transpiled()})''')
 
-    @staticmethod
-    def int_cast_transpiled(val, quotes=True):
-        value = f"'{val}'" if quotes else val
-        return f'''int_with_error({value}, {HedyTester.value_exception_transpiled()})'''
+    def value(self, value, num_sys=None, bool_sys=None):
+        value_part = f"'{value}'" if self.level < 12 else str(value)
+        if num_sys:
+            num_sys = num_sys if num_sys[0] == num_sys[-1] == "'" else f"'{num_sys}'"
+        else:
+            str_value = str(value)
+            str_value = str_value[1:] if str_value and str_value[0] == '-' else str_value
+            if str_value.isnumeric():
+                num_sys = "'Latin'"
+        num_sys_part = f', num_sys={num_sys}' if num_sys else ''
+        bool_sys_part = f', bool_sys={bool_sys}' if bool_sys else ''
+        return f'Value({value_part}{num_sys_part}{bool_sys_part})'
+
+    def list_transpiled(self, *args, num_sys=None):
+        args_string = ', '.join([self.value(a, num_sys) for a in args])
+        return f'Value([{args_string}])'
+
+    def int_transpiled(self, value):
+        if self.level < 12 and str(value).isnumeric():
+            val = f"'{value}'"
+        else:
+            val = f'{value}'
+        return f'''int_with_error({val}, {HedyTester.value_exception_transpiled()})'''
 
     @staticmethod
-    def number_cast_transpiled(val, quotes=False):
-        value = f"'{val}'" if quotes else val
+    def number_transpiled(value):
         return f'''number_with_error({value}, {HedyTester.value_exception_transpiled()})'''
 
+    def for_loop(self, i, begin, end, num_sys="'Latin'"):
+        def for_loop_arg(arg):
+            if self.level >= 12:
+                return arg
+            elif str(arg).isnumeric():
+                return f'int({arg})'
+            else:
+                return self.int_transpiled(f'{arg}')
+
+        range_begin = f'{begin}' if str(begin).isnumeric() else f'{begin}.data'
+        range_end = f'{end}' if str(end).isnumeric() else f'{end}.data'
+        step_begin = for_loop_arg(range_begin)
+        step_end = for_loop_arg(range_end)
+        return textwrap.dedent(f"""\
+            __step = 1 if {step_begin} < {step_end} else -1
+            for {i} in {self.range_transpiled(range_begin, range_end, num_sys)}:""")
+
+    def range_transpiled(self, start, stop, num_sys):
+        if self.level < 12:
+            start_part = f'int({start})'
+            stop_part = f'int({stop})'
+        else:
+            start_part = start
+            stop_part = stop
+        return f"[Value(__rv, num_sys={num_sys}) for __rv in range({start_part}, {stop_part} + __step, __step)]"
+
     @staticmethod
-    def addition_transpiled(left, right):
+    def sum_transpiled(left, right):
         return f'''sum_with_error({left}, {right}, """Runtime Values Error""")'''
 
     @staticmethod
@@ -511,16 +570,33 @@ class HedyTester(unittest.TestCase):
     def return_transpiled(arg):
         return textwrap.dedent(f"""\
         try:
-          return int(f'''{arg}''')
+          return Value(int(f'''{arg}'''), num_sys=get_num_sys(f'''{arg}'''))
         except ValueError:
           try:
-            return float(f'''{arg}''')
+            return Value(float(f'''{arg}'''), num_sys=get_num_sys(f'''{arg}'''))
           except ValueError:
-            return f'''{arg}'''""")
+            return Value(f'''{arg}''')""")
+
+    def in_list_transpiled(self, val, list_name):
+        if self.level < 12:
+            data_part = '.data' if self.level > 5 else ''
+            return f"localize({val}) in [localize(__la{data_part}) for __la in {list_name}{data_part}]"
+        else:
+            return f"{val} in {list_name}.data"
+
+    def not_in_list_transpiled(self, val, list_name):
+        if self.level < 12:
+            data_part = '.data' if self.level > 5 else ''
+            return f"localize({val}) not in [localize(__la{data_part}) for __la in {list_name}{data_part}]"
+        else:
+            return f"{val} not in {list_name}.data"
+
+    @staticmethod
+    def bool_options(value):
+        return ('true', 'false') if value.islower() else ('True', 'False')
 
     # Used to overcome indentation issues when the above code is inserted
     # in test cases which use different indentation style (e.g. 2 or 4 spaces)
-
     @staticmethod
     def dedent(*args):
         return '\n'.join([textwrap.indent(textwrap.dedent(a[0]), a[1]) if isinstance(a, tuple) else textwrap.dedent(a)

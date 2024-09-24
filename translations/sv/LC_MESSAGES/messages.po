@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-07-08 10:20+0000\n"
+"PO-Revision-Date: 2024-09-06 14:38+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: sv <LL@li.org>\n"
 "Language: sv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -289,6 +289,10 @@ msgid "adventures_restored"
 msgstr "Standardäventyren har återställts."
 
 #, fuzzy
+msgid "adventures_ticked"
+msgstr "Adventures ticked"
+
+#, fuzzy
 msgid "adventures_tried"
 msgstr "Adventures tried"
 
@@ -315,12 +319,6 @@ msgstr "Har du redan ett konto?"
 
 msgid "already_program_running"
 msgstr "Det finns redan ett pågående program, avsluta det först."
-
-msgid "already_teacher"
-msgstr "Du har redan ett lärarkonto."
-
-msgid "already_teacher_request"
-msgstr "Du har redan en väntande lärarförfrågan."
 
 msgid "are_you_sure"
 msgstr "Är du säker? Du kan inte ångra den här åtgärden."
@@ -371,6 +369,9 @@ msgstr "Klassen har anpassats."
 #, fuzzy
 msgid "class_graph_explanation"
 msgstr "In this graph you can see represented the numbers of adventures your students have attempted (meaning they have done meaninful work in that adventure), with respect to the number of errors and successful runs."
+
+msgid "class_logs"
+msgstr "Loggar"
 
 msgid "class_name_duplicate"
 msgstr "Du har redan en klass med det namnet."
@@ -514,9 +515,6 @@ msgstr "Skapa en ny klass"
 
 msgid "create_multiple_accounts"
 msgstr "Skapa flera konton"
-
-msgid "create_question"
-msgstr "Vill du skapa en?"
 
 msgid "create_student_account"
 msgstr "Skapa ett konto"
@@ -711,12 +709,6 @@ msgstr "Välj en giltig erfarenhet, alltså (Ja, Nej)."
 msgid "expiration_date"
 msgstr "Förfallodatum"
 
-msgid "explore_programs"
-msgstr "Utforska program"
-
-msgid "explore_programs_logo_alt"
-msgstr "Utforska program-ikonen"
-
 msgid "favorite_program"
 msgstr "Favoritprogram"
 
@@ -843,17 +835,26 @@ msgstr "Hedy-logga"
 msgid "hedy_on_github"
 msgstr "Hedy på Github"
 
-msgid "hedy_tutorial_logo_alt"
-msgstr "Logga för Hedy-handledning"
-
 msgid "hello_logo"
 msgstr "hej"
+
+#, fuzzy
+msgid "hide_adventures"
+msgstr "Hide adventures"
 
 msgid "hide_cheatsheet"
 msgstr "Dölj lathund"
 
+#, fuzzy
+msgid "hide_classes"
+msgstr "Hide classes"
+
 msgid "hide_keyword_switcher"
 msgstr "Göm tangentbordsväxlaren"
+
+#, fuzzy
+msgid "hide_slides"
+msgstr "Hide slides"
 
 msgid "highest_level_reached"
 msgstr "Högsta uppnådda nivån"
@@ -1126,6 +1127,10 @@ msgid "mandatory_mode"
 msgstr "Obligatoriskt utvecklarläge"
 
 #, fuzzy
+msgid "more_info"
+msgstr "More information"
+
+#, fuzzy
 msgid "more_options"
 msgstr "More options"
 
@@ -1209,11 +1214,12 @@ msgstr "Från och med nivå 8 måste koden efter `{if}` placeras på nästa rad 
 msgid "no_programs"
 msgstr "Du har inga program än."
 
-msgid "no_public_profile"
-msgstr "Du har inte en offentlig profiltext än ..."
-
 msgid "no_shared_programs"
 msgstr "har inga delade program ..."
+
+#, fuzzy
+msgid "no_students"
+msgstr "There are no students in this class"
 
 msgid "no_such_adventure"
 msgstr "Det här äventyret finns inte!"
@@ -1266,8 +1272,9 @@ msgstr "Antal körda program"
 msgid "ok"
 msgstr "OK"
 
+#, fuzzy
 msgid "one_level_error"
-msgstr ""
+msgstr "You need to select at least one level."
 
 msgid "only_you_can_see"
 msgstr "Bara du kan se det här programmet."
@@ -1716,24 +1723,12 @@ msgstr "ett mellanslag"
 msgid "star"
 msgstr "en stjärna"
 
-msgid "start_hedy_tutorial"
-msgstr "Starta Hedy-handledning"
-
 #, fuzzy
 msgid "start_learning"
 msgstr "Start learning"
 
-msgid "start_programming"
-msgstr "Börja programmera"
-
-msgid "start_programming_logo_alt"
-msgstr "Ikonen Starta programmering"
-
 msgid "start_quiz"
 msgstr "Starta quiz"
-
-msgid "start_teacher_tutorial"
-msgstr "Starta lärarhandledning"
 
 #, fuzzy
 msgid "start_teaching"
@@ -1759,15 +1754,30 @@ msgstr "text"
 msgid "student"
 msgstr "Student"
 
+#, fuzzy
+msgid "student_adventures_table"
+msgstr "Student's Adventures"
+
+#, fuzzy
+msgid "student_adventures_table_explanation"
+msgstr "This table displays the programs created by students for each adventure in a level. By clicking the eye icon, you can view the program's page; after reviewing the program, you can tick the checkmark to indicate completion."
+
 msgid "student_already_in_class"
 msgstr "Den här eleven går redan i din klass."
 
 msgid "student_already_invite"
 msgstr "Eleven har redan en väntande inbjudan."
 
+msgid "student_in_another_class"
+msgstr ""
+
 #, fuzzy
-msgid "student_not_allowed_in_class"
-msgstr "Student not allowed in class"
+msgid "student_information"
+msgstr "Student's Information"
+
+#, fuzzy
+msgid "student_information_explanation"
+msgstr "This table displays basic information about the students in your class. There are also several actions you can do in this table: change the password of a student by clicking the pencil icon, view the program's page of a student by clicking the code icon, and delete a student from the class by clicking the red bin icon."
 
 msgid "student_not_existing"
 msgstr "Användarnamnet finns inte."
@@ -1855,12 +1865,6 @@ msgstr "Tags"
 msgid "teacher"
 msgstr "Lärare"
 
-msgid "teacher_account_request"
-msgstr "Du har en väntande begäran om lärarkonto"
-
-msgid "teacher_account_success"
-msgstr "Du har beställt ett lärarkonto."
-
 msgid "teacher_invalid"
 msgstr "Lärarvärdet är ogiltigt."
 
@@ -1872,9 +1876,6 @@ msgstr "Lärarhandledning"
 
 msgid "teacher_signup_header"
 msgstr "Lärare"
-
-msgid "teacher_tutorial_logo_alt"
-msgstr "Ikon för lärarhandledning"
 
 msgid "teacher_welcome"
 msgstr "Välkommen till Hedy! Du är nu den stolta ägaren av ett lärarkonto som ger dig möjlighet att skapa klasser och bjuda in elever."
@@ -1922,9 +1923,6 @@ msgstr "Hedy – För lärare"
 msgid "title_join-class"
 msgstr "Hedy - Gå med i klassen"
 
-msgid "title_landing-page"
-msgstr "Välkommen till Hedy!"
-
 msgid "title_learn-more"
 msgstr "Hedy - Lär dig mer"
 
@@ -1971,6 +1969,13 @@ msgstr "Översätta Hedy"
 #, fuzzy
 msgid "translator"
 msgstr "Translator"
+
+#, fuzzy
+msgid "turned_into_teacher"
+msgstr "Congratulations! You successfully turned into a teacher."
+
+msgid "tutorial"
+msgstr "Handledning"
 
 msgid "tutorial_code_snippet"
 msgstr ""
@@ -2093,12 +2098,6 @@ msgstr "Waiting for submit"
 msgid "walker_variable_role"
 msgstr "walker"
 
-msgid "welcome"
-msgstr "Välkommen"
-
-msgid "welcome_back"
-msgstr "Välkommen tillbaka"
-
 #, fuzzy
 msgid "what_is_your_role"
 msgstr "What is your role?"
@@ -2111,12 +2110,6 @@ msgstr "Mata in ett år mellan 1900 och {current_year}."
 
 msgid "yes"
 msgstr "Ja"
-
-msgid "your_account"
-msgstr "Din profil"
-
-msgid "your_last_program"
-msgstr "Ditt senast sparade program"
 
 msgid "your_personal_text"
 msgstr "Din personliga text ..."
@@ -2225,9 +2218,6 @@ msgstr "Ditt program"
 
 #~ msgid "too_many_attempts"
 #~ msgstr "Too many attempts"
-
-#~ msgid "class_logs"
-#~ msgstr "Loggar"
 
 #~ msgid "class_stats"
 #~ msgstr "Klasstatistik"
@@ -2409,21 +2399,63 @@ msgstr "Ditt program"
 #~ msgid "number_achievements"
 #~ msgstr "Antal prestationer"
 
-#~ msgid "developers_mode"
-#~ msgstr "Programmerarläge"
+#~ msgid "create_question"
+#~ msgstr "Vill du skapa en?"
 
-#~ msgid "read_code_label"
-#~ msgstr "Läs högt"
+#~ msgid "explore_programs"
+#~ msgstr "Utforska program"
 
-#~ msgid "regress_button"
-#~ msgstr ""
+#~ msgid "explore_programs_logo_alt"
+#~ msgstr "Utforska program-ikonen"
 
-#~ msgid "tutorial"
-#~ msgstr "Handledning"
+#~ msgid "hedy_tutorial_logo_alt"
+#~ msgstr "Logga för Hedy-handledning"
 
-#~ msgid "index_button"
-#~ msgstr ""
+#~ msgid "no_public_profile"
+#~ msgstr "Du har inte en offentlig profiltext än ..."
 
-#~ msgid "tooltip_level_locked"
-#~ msgstr "Your teacher disabled this level"
+#~ msgid "start_hedy_tutorial"
+#~ msgstr "Starta Hedy-handledning"
+
+#~ msgid "start_programming"
+#~ msgstr "Börja programmera"
+
+#~ msgid "start_programming_logo_alt"
+#~ msgstr "Ikonen Starta programmering"
+
+#~ msgid "start_teacher_tutorial"
+#~ msgstr "Starta lärarhandledning"
+
+#~ msgid "teacher_tutorial_logo_alt"
+#~ msgstr "Ikon för lärarhandledning"
+
+#~ msgid "title_landing-page"
+#~ msgstr "Välkommen till Hedy!"
+
+#~ msgid "welcome"
+#~ msgstr "Välkommen"
+
+#~ msgid "welcome_back"
+#~ msgstr "Välkommen tillbaka"
+
+#~ msgid "your_account"
+#~ msgstr "Din profil"
+
+#~ msgid "your_last_program"
+#~ msgstr "Ditt senast sparade program"
+
+#~ msgid "already_teacher"
+#~ msgstr "Du har redan ett lärarkonto."
+
+#~ msgid "already_teacher_request"
+#~ msgstr "Du har redan en väntande lärarförfrågan."
+
+#~ msgid "teacher_account_request"
+#~ msgstr "Du har en väntande begäran om lärarkonto"
+
+#~ msgid "teacher_account_success"
+#~ msgstr "Du har beställt ett lärarkonto."
+
+#~ msgid "student_not_allowed_in_class"
+#~ msgstr "Student not allowed in class"
 
