@@ -1444,7 +1444,7 @@ function toggleDevelopersMode(enforceDevMode: boolean) {
   // DevMode hides the tabs and makes resizable elements track the appropriate size.
   // (Driving from HTML attributes is more flexible on what gets resized, and avoids duplicating
   // size literals between HTML and JavaScript).
-  $('#adventures').toggle(!enable || currentTab === 'quiz' || currentTab === 'parsons');
+  $('#adventures_tab').toggle(!enable || currentTab === 'quiz' || currentTab === 'parsons');
   // Parsons dont need a fixed height
   if (currentTab === 'parsons') return
   $('[data-devmodeheight]').each((_, el) => {
