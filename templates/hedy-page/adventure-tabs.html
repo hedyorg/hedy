@@ -1,58 +1,10 @@
-<<<<<<< HEAD:templates/hedy-page/adventure-tabs.html
-{# TABS #}
-{% if not enforce_developers_mode %}
-      <div id="adventures">
-        {% macro adventure_tab(tabname, title, selected, id, tab_class, index) %}
-=======
-      {# TABS #}
-      <div id="adventures" data-cy="adventures">
-        {% macro adventure_tab(tabname, title, selected, id, tab_class, checked, index) %}
->>>>>>> main:templates/incl/adventure-tabs.html
-            <div
-                class="tab {% if selected and public_adventures_page %}tab-selected{% endif %} flex items-center justify-center whitespace-nowrap {{ tab_class }}"
-                id="{{ id }}"
-                tabindex="{{ index }}"
-                data-tab="{{ tabname }}"
-                data-cy="{{ title if tab_class == 'teacher_tab' else tabname }}"
-                >
-                {{title}}
-                {% if checked %}
-                    <i class="fa-solid fa-square-check ltr:ml-2 rtl:mr-2 text-blue-600"></i>
-                {% endif %}
-            </div>
-        {% endmacro %}
-<<<<<<< HEAD:templates/hedy-page/adventure-tabs.html
-=======
-
-        <div class="overflow-x-auto overflow-y-hidden px-2 pt-2">
-        <div class="flex flex-row w-min" id="adventures_buttons">
-            {% for adventure in adventures %}
-                {% if adventure.is_teacher_adventure %}
-                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'teacher_tab', adventure.is_checked, loop.index ) }}
-                {% elif adventure.is_command_adventure %}
-                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, 'command_tab', adventure.is_checked, loop.index ) }}
-                {% else %}
-                    {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, '', adventure.is_checked, loop.index) }}
-                {% endif %}
-            {% endfor %}
-            <!-- Add the tab for the parsons problem (if it exists) -->
-            {% if parsons %}
-                {{ adventure_tab('parsons', _('parsons_title'), False, 'parsons', 'special_tab', False, adventures|length + 1 ) }}
-            {% endif %}
-            <!-- Add the tab for the quiz -->
-            {% if quiz %}
-                {{ adventure_tab('quiz', _('quiz_tab'), False, 'quiz', 'special_tab', False,(adventures|length + (2 if parsons else 1)) ) }}
-            {% endif %}
-        </div>
-      </div>
->>>>>>> main:templates/incl/adventure-tabs.html
       {# PANES #}
       <div id="adventures_tab" data-cy="adventures_tab" class="w-full overflow-auto bg-white mb-5 shadow-md">
         {% for adventure in adventures %}
             <div
                 data-tabtarget="{{adventure.short_name}}" class="
                 {% if adventure.short_name != initial_tab %}hidden{% endif %}
-                turn-pre-into-ace show-copy-button p-4 text-adventure-copy"
+                turn-pre-into-ace show-copy-button text-adventure-copy"
                 value="{{_('put')}}"
                 >
                 <div id="adv_{{adventure.short_name}}" class="lg:flex lg:flex-row {% if adventure.is_teacher_adventure %}teacher-adv{% endif %}">
@@ -91,7 +43,7 @@
         </div>
         {% endfor %}
         {% if parsons %}
-            <div data-tabtarget="parsons" class="hidden p-4">
+            <div data-tabtarget="parsons" class="hidden">
                 <div>
                     {% include 'incl/parsons.html' %}
                 </div>
@@ -104,4 +56,3 @@
         {% endif %}
       </div>
     </div>
-{% endif %}
