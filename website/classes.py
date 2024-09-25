@@ -66,7 +66,8 @@ class ClassModule(WebsiteModule):
 
         request_body = {"tags": [{"name": "class_created", "status": "active"}]}
         try:
-            r = requests.post(MAILCHIMP_API_URL + f"/members/{subscriber_hash}/tags", headers=MAILCHIMP_API_HEADERS, data=json.dumps(request_body))
+            r = requests.post(MAILCHIMP_API_URL + f"/members/{subscriber_hash}/tags",
+                              headers=MAILCHIMP_API_HEADERS, data=json.dumps(request_body))
         except Exception as E:
             pass
 
