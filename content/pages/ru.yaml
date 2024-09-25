@@ -419,7 +419,7 @@ teacher-guide:
                 error_text: For example they type a sentence without using print.
                 error_code: Hedy не может напечатать это
                 solution_text: Teach your students to always start a line of code with a command.
-                solution_code: напечатать Хеди может напечатать это!
+                solution_code: '{print} Hedy может это напечатать!'
         -   title: Студенты используют заглавные буквы при наборе команд
             example:
                 error_text: Commands won't work if they are in capitals.
@@ -433,7 +433,7 @@ teacher-guide:
         -   title: Студенты используют эхо без вопроса
             example:
                 error_text: Echo is made to repeat an answer after an ask command. Without ask echo won't do anything.
-                error_code: эхо Ваше имя
+                error_code: '{echo} Ваше имя -'
                 solution_text: Add an ask command to make it work.
                 solution_code: |-
                     {ask} What's your name?
@@ -452,12 +452,12 @@ teacher-guide:
             example:
                 error_text: Often students love to try out big numbers when using the turtle, which causes the arrow to walk off the screen.
                 error_code: |-
-                    вперед 300
-                    поворот 90
-                solution_text: In the example. students tend to think that the turn command doesn't work. Eventhough is does work, but you can't see it happening off screen. Use smaller numbers to prevent this from happening.
+                    {forward} 300
+                    {turn} 90
+                solution_text: В этом примере ученики часто думают, что команда поворота не сработала, хотя на самом деле она выполнила то, что должна была. Что произошло, так это то, что черепаха вышла за пределы экрана. Используйте меньшие числа, чтобы это избежать.
                 solution_code: |-
-                    вперед 100
-                    поворот 90
+                    {forward} 100
+                    {turn} 90
         -   title: "Turtle: Students use the command backward, but that doesn't exist"
             example:
                 error_text: Назад - это не команда.
