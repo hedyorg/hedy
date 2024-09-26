@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-09-20 06:15+0000\n"
+"PO-Revision-Date: 2024-09-26 06:16+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: es <LL@li.org>\n"
 "Language: es\n"
@@ -25,152 +25,116 @@ msgstr "Hemos detectado que la variable `{name}` está siendo usada en la línea
 msgid "Cyclic Var Definition"
 msgstr "Hemos detectado que la variable `{variable}` está siendo usada en el lado derecho del comando `{is}` antes de ser inicializada. ¿Puedes darle un valor antes de usarla'"
 
-#, fuzzy
 msgid "Else Without If Error"
-msgstr "En la línea {line_number} has utilizado un `{else}` pero no hay ningún `{if}` en la línea anterior."
+msgstr "Detectamos que hay un `{else}`se utiliza antes de un `{if}`en línea {line_number}. ¿Puede intentar escribir un `{if}`antes del `{else}`?"
 
-#, fuzzy
 msgid "Function Undefined"
-msgstr "Has intentado utilizar la función {name}, pero no la has definido."
+msgstr "Detectamos que una función {name} está siendo utilizada sin ser definida. ¿Puede definir la función antes de que sea usada?"
 
-#, fuzzy
 msgid "Has Blanks"
-msgstr "Tu código es incompleto. Contiene huecos que debes reemplazar con código."
+msgstr "Detectamos que el código parece estar incompleto. ¿Puede rellenar los espacios en blanco con código?"
 
-#, fuzzy
 msgid "Incomplete"
-msgstr "¡Oops! ¡Has olvidado una parte de código! En la línea {line_number}, debes agregar texto después de `{incomplete_command}`."
+msgstr "Detectamos que parte del código parece estar faltando en el `{incomplete_command}` en la línea {line_number}. ¿Puede intentar agregar lo que falta?"
 
-#, fuzzy
 msgid "Incomplete Repeat"
-msgstr "Parece que olvidaste usar un `{command}` con el comando `{repeat}` que usaste en la línea {line_number}."
+msgstr "Detectamos que el `{repeat}` en la línea {line_number} está faltando un `{command}`comando. ¿Puede intentar agregarlo?"
 
-#, fuzzy
 msgid "Invalid"
-msgstr "`{invalid_command}` no es un comando de Hedy en nivel {level}. ¿Querías decir `{guessed_command}`?"
+msgstr "Detectamos que el comando `{invalid_command}' no es un comando de nivel Hedy {level}. ¿Puede intentar usar el comando `{guessed_command}'?"
 
-#, fuzzy
 msgid "Invalid Argument"
-msgstr "No puedes usar el comando `{command}` con `{invalid_argument}`. Intenta cambiar `{invalid_argument}` a {allowed_types}."
+msgstr "Hemos detectado que `{command}` no es utilizable con `{invalid_argument}`. ¿Puede intentar cambiar `{invalid_argument}`a {allowed_types}?"
 
-#, fuzzy
 msgid "Invalid Argument Type"
-msgstr "No puedes usar `{command}` con `{invalid_argument}` porque es {invalid_type}. Intenta cambiar `{invalid_argument}` a {allowed_types}."
+msgstr "Hemos detectado que el `{command}` no funciona con el `{invalid_argument}`, porque es {invalid_type}. ¿Puede intentar cambiar el `{invalid_argument}` a {allowed_types}?"
 
-#, fuzzy
 msgid "Invalid At Command"
-msgstr "El comando `{command}` no puede utilizarse a partir del nivel 16. Puedes usar corchetes para usar un elemento de una lista, por ejemplo `friends[i]`, `lucky_numbers[{random}]`."
+msgstr "Hemos detectado que `{command}`no puede ser utilizado a partir del nivel 16. ¿Se puede intentar usar corchetes para listas `[]`?"
 
-#, fuzzy
 msgid "Invalid Space"
-msgstr "¡Oops! Has comenzado una línea con un espacio en la línea {line_number}. Los espacios confunden a los ordenadores, ¿podrías quitarlos?"
+msgstr "Detectamos que la línea {line_number} comenzó con un espacio. ¿Puedes intentar eliminar el espacio?"
 
-#, fuzzy
 msgid "Invalid Type Combination"
-msgstr "No puedes usar `{invalid_argument}` y `{invalid_argument_2}` con `{command}` porque uno es {invalid_type} y el otro es {invalid_type_2}. Intenta cambiar `{invalid_argument}` a {invalid_type_2} o `{invalid_argument_2}` a {invalid_type}."
+msgstr "Hemos detectado que el `{invalid_argument}`y el `{invalid_argument_2}`no se pueden utilizar con el `{command}`, porque uno es {invalid_type} y el otro es {invalid_type_2}. ¿Puede intentar cambiar el `{invalid_argument}` a {invalid_type_2} o el ’{invalid_argument_2}`a {invalid_type}?"
 
-#, fuzzy
 msgid "Lonely Echo"
-msgstr "Has utilizado un `{echo}` antes de un `{ask}`, o un `{echo}` sin un `{ask}`. Coloca un `{ask}` antes del `{echo}`."
+msgstr "Detectamos que se está utilizando un `{echo}`antes o sin utilizar un `{ask}`. ¿Puede intentar escribir un `{ask}`antes del `{echo}`?"
 
-#, fuzzy
 msgid "Lonely Text"
-msgstr "Parece que olvidaste usar un comando con el texto que pusiste en la línea {line_number}"
+msgstr "Detectamos que el código parece estar faltando un comando con el texto que se utilizó en la línea {line_number}. ¿Puede intentar escribir el comando necesario con el texto?"
 
-#, fuzzy
 msgid "Missing Additional Command"
-msgstr "Parece que olvidaste terminar de escribir `{command}` en la línea {line_number}. Intenta añadir `{missing_command}` a tu código."
+msgstr "Detectamos que el código parece estar faltando un `{command}`en la línea {line_number}. ¿Puede intentar usar `{missing_command}` en su código?"
 
-#, fuzzy
 msgid "Missing Colon Error"
-msgstr "A partir del nivel 17, `{command}` necesita un `:`. Parece que olvidaste usar uno al final de la línea {line_number}."
+msgstr "Detectamos que `{command}`necesita un `:`al final de la línea {line_number}. A partir del nivel 17, ¿puedes empezar a añadir un «:» al final de la línea con comandos?"
 
-#, fuzzy
 msgid "Missing Command"
-msgstr "Parece que has olvidado de usar un comando en la línea {line_number}."
+msgstr "Detectamos que el código parece estar faltando un comando en la línea {line_number}. ¿Puedes intentar mirar la sección de ejercicios para encontrar qué comando usar?"
 
-#, fuzzy
 msgid "Missing Inner Command"
-msgstr "Parece que has olvidad usar un comando en el `{command}` que has usado en la línea {line_number}."
+msgstr "Detectamos que el código parece estar faltando un comando para la sentencia `{command}' en la línea {line_number}. ¿Puedes intentar mirar la sección de ejercicios para encontrar qué comando usar?"
 
-#, fuzzy
 msgid "Missing Square Brackets"
-msgstr "Parece que olvidaste usar corchetes `[]` alrededor de la lista que estabas creando en la línea {line_number}."
+msgstr "Hemos detectado que a la lista que ha creado en la línea {line_number} le faltan los corchetes `[]`. ¿Puede intentar añadir corchetes alrededor de `[]` a la lista?"
 
-#, fuzzy
 msgid "Missing Variable"
-msgstr "Parece que a tu `{command}` le falta una variable al principio de la línea."
+msgstr "Detectamos que `{command}` falta una variable al principio de la línea. ¿Puede intentar escribir la variable antes del `{command}`?"
 
-#, fuzzy
 msgid "Misspelled At Command"
-msgstr "Parece que haz escrito incorrectamente el comando `{command}`, en su lugar escribiste `{invalid_argument}` en la línea {line_number}."
+msgstr "Detectamos que `{invalid_argument}` parece tener un error ortográfico en la línea {line_number}. ¿Puede intentar escribir `{command}`en su lugar?"
 
-#, fuzzy
 msgid "No Indentation"
-msgstr "Has utilizado demasiado pocos espacios en la línea {line_number}. Has usado {leading_spaces} espacios, lo que es insuficiente. Empieza cada nuevo bloque con {indent_size} espacios más que la línea anterior."
+msgstr "Detectamos que parece haber demasiados espacios {leading_spaces} utilizados en la línea {line_number}. ¿Puede intentar aumentar el sangrado por {indent_size} para cada nuevo bloque?"
 
-#, fuzzy
 msgid "Non Decimal Variable"
-msgstr "En la línea {line_number}, ¡podrías haber intentado usar un número que a Hedy no le gusta mucho! Intente cambiarlo a un número decimal como 2."
+msgstr "¡Detectamos que en la línea {line_number} que utilizó un número Hedy no soporta! ¿Puede intentar un número decimal, como 2?"
 
-#, fuzzy
 msgid "Parse"
-msgstr "El servidor no puede traducir este programa de Hedy. Hay un error en la línea {location[0]}, carácter {location[1]}. Tu has ingresado `{character_found}`, pero eso no está permitido."
+msgstr "Detectamos que `{character_found}`se está utilizando en la línea {location[0]} que no está permitida. ¿Puedes intentar buscar un carácter extra o que falta en tu código?"
 
-#, fuzzy
 msgid "Pressit Missing Else"
-msgstr "Olvidaste añadir qué pasa cuando pulsas una tecla diferente, añade un `{else}` a tu código"
+msgstr "Detectamos que el código carece de un {else}`para manejar otras pulsaciones de teclas. ¿Puede intentar agregar un ‘{else}`a su código?"
 
-#, fuzzy
 msgid "Runtime Index Error"
-msgstr "Intentaste acceder a la lista {name} pero está vacía o el índice no está allí."
+msgstr "Detectamos que la lista {name} está vacía o su índice está ausente. ¿Puede asegurarse de que la lista no esté vacía o intentar escribir un número dentro del `[]' para el índice que falta?"
 
-#, fuzzy
 msgid "Runtime Value Error"
-msgstr "Mientras ejecutábamos tu programa, el comando `{command}` recibió el valor {value}, pero eso no está permitido. {tip}."
+msgstr "Detectamos que `{command}` recibió valor no permitido `{value}`. {tip}."
 
-#, fuzzy
 msgid "Runtime Values Error"
-msgstr "While running your program the command `{command}` received the values `{value}` and `{value}` which are not allowed. {tip}."
+msgstr "Detectamos que el `{command}` recibió valores no permitidos `{value}`y `{value}`. {tip}."
 
 msgid "Save Microbit code "
 msgstr "Guardar código Microbit"
 
-#, fuzzy
 msgid "Too Big"
-msgstr "¡Guau! ¡Tu programa tiene un impresionante número de {lines_of_code} líneas de código! Pero solo podemos procesar {max_lines} líneas en este nivel. Haz tu programa más pequeño e inténtalo de nuevo."
+msgstr "Detectamos que el programa tiene {lines_of_code} líneas, pero solo podemos procesar {max_lines} líneas. ¿Puede intentar acortar su programa?"
 
-#, fuzzy
 msgid "Too Few Indents"
-msgstr "Has usado muy pocos espacios en la línea {line_number}. Ha utilizado {leading_spaces} espacios, que son muy pocos."
+msgstr "Detectamos que la línea {line_number} tiene demasiados espacios ({leading_spaces}). ¿Puedes intentar agregar un espacio extra?"
 
-#, fuzzy
 msgid "Too Many Indents"
-msgstr "Has utilizado demasiados espacios intermedios en la línea {line_number}. Has utilizado {leading_spaces} espacios, que son demasiados."
+msgstr "Detectamos que la línea {line_number} tiene demasiados espacios ({leading_spaces}). ¿Puede intentar eliminar el espacio extra?"
 
-#, fuzzy
 msgid "Unexpected Indentation"
-msgstr "Has utilizado demasiados espacios en la línea {line_number}. Has usado {leading_spaces} espacios, lo que es insuficiente. Empieza cada nuevo bloque con {indent_size} espacios más que la línea anterior."
+msgstr "Detectamos que la línea {line_number} tiene demasiados espacios ({leading_spaces}). ¿Puedes intentar agregar {indent_size} más espacios por nuevo bloque?"
 
-#, fuzzy
 msgid "Unquoted Assignment"
-msgstr "A partir de este nivel, debes colocar el texto a la derecha de `{is}` entre comillas. Olvidaste eso para el texto {text}."
+msgstr "Detectamos que el texto a la derecha del `{is}`no está escrito entre comillas. Este nivel requiere que usted comience a escribir el texto entre comillas. Intenta hacer eso para el texto {text}"
 
-#, fuzzy
 msgid "Unquoted Equality Check"
-msgstr "¡Si quieres comprobar si una variable es igual a varias palabras, las palabras deben estar rodeadas por comillas!"
+msgstr "Detectamos que el código está tratando de comprobar si una variable equivale a varias palabras. ¿Puede intentar usar comillas para las palabras que desea comprobar?"
 
-#, fuzzy
 msgid "Unquoted Text"
-msgstr "¡Ten cuidado! Si `{ask}` o `{print}` algo, el texto debe estar rodeado de comillas. Has olvidado eso para el texto {unquotedtext}."
+msgstr "Detectamos que el texto de `{ask}`' o `{print}`' parece estar faltando sus comillas. ¿Puede intentar agregar comillas para {unquotedtext}?"
 
-#, fuzzy
 msgid "Unsupported Float"
-msgstr "Números no enteros no se soportan pero estarán disponibles en unos niveles. De momento, cambia `{value}` a un entero."
+msgstr "Detectamos que el código usa números no enteros que aún no son compatibles. ¿Puede intentar cambiar `{value}`a un entero?"
 
-#, fuzzy
 msgid "Unsupported String Value"
-msgstr "El texto no puede contener `{invalid_value}`."
+msgstr "Hemos detectado que el texto utiliza valores que no puede contener `{invalid_value}`. ¿Puede intentar eliminar el valor escrito o cambiar su tipo?"
 
 #, fuzzy
 msgid "Unused Variable"
@@ -687,7 +651,7 @@ msgid "feedback_message_error"
 msgstr "Algo salió mal, inténtalo de nuevo más tarde."
 
 msgid "feedback_message_success"
-msgstr "Gracias, recibimos sus comentarios y nos comunicaremos contigo si es necesario."
+msgstr "Gracias, hemos recibido sus comentarios y nos pondremos en contacto con usted si es necesario."
 
 msgid "feedback_modal_message"
 msgstr "Por favor envíanos un mensaje con una categoría. ¡Agradecemos su ayuda para mejorar Hedy!"
