@@ -2,6 +2,8 @@
 import base64
 import binascii
 import collections
+from functools import wraps
+from glob import glob
 import logging
 import datetime
 import os
@@ -83,7 +85,24 @@ app.json = JinjaCompatibleJsonProvider(app)
 # Most files should be loaded through the CDN which has its own caching period and invalidation.
 # Use 5 minutes as a reasonable default for all files we load elsewise.
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = datetime.timedelta(minutes=5)
+app.config["SERVER_NAME"] = "localhost:8080"
 
+for rule in app.url_map.iter_rules('static'):    
+    app.url_map._rules.remove(rule)
+app.url_map._rules_by_endpoint['static'] = []  
+app.view_functions["static"] = None
+app.static_folder='static'
+app.add_url_rule('/<path:filename>',
+                endpoint='static',
+                subdomain="<language>",
+                view_func=app.send_static_file)
+
+# optional. If not set, the above view_func will be passed <tenant> as a parameter.
+@app.url_value_preprocessor
+def before_route(endpoint, values):
+    if values is not None and endpoint == 'static':
+        values.pop('language', None)
+    setup_language(language=values.get('language', None))
 
 def get_locale():
     return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
@@ -396,13 +415,20 @@ else:
 
 
 @app.before_request
-def setup_language():
+def setup_language(language=None):
     # Determine the user's requested language code.
     #
     # If not in the request parameters, use the browser's accept-languages
     # header to do language negotiation. Can be changed in the session by
     # POSTing to `/change_language`, and be overwritten by remember_current_user().
-    if lang_from_request := request.args.get('language', None):
+    print(language)
+    if language:
+        session['lang'] = language
+    elif (lang_from_subdomain := request.url_rule.subdomain) and lang_from_subdomain != '<language>':
+        if lang_from_subdomain == 'zh_hans':
+            lang_from_subdomain = 'zh_Hans'
+        session['lang'] = lang_from_subdomain
+    elif lang_from_request := request.args.get('language', None):
         session['lang'] = lang_from_request
     if 'lang' not in session:
         session['lang'] = request.accept_languages.best_match(
@@ -1326,13 +1352,13 @@ def hour_of_code(level, program_id=None):
 # routing to index.html
 
 
-@app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'program_id': None})
-@app.route('/onlinemasters', methods=['GET'], defaults={'level': '1', 'program_id': None})
-@app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'program_id': None})
-@app.route('/hedy', methods=['GET'], defaults={'program_id': None, 'level': '1'})
-@app.route('/hedy/<int:level>', methods=['GET'], defaults={'program_id': None})
-@app.route('/hedy/<int:level>/<program_id>', methods=['GET'])
-def index(level, program_id):
+@app.route('/ontrack', methods=['GET'], defaults={'level': '1', 'program_id': None}, subdomain="<language>")
+@app.route('/onlinemasters', methods=['GET'], defaults={'level': '1', 'program_id': None}, subdomain="<language>")
+@app.route('/onlinemasters/<int:level>', methods=['GET'], defaults={'program_id': None}, subdomain="<language>")
+@app.route('/hedy', methods=['GET'], defaults={'program_id': None, 'level': '1'}, subdomain="<language>")
+@app.route('/hedy/<int:level>', methods=['GET'], defaults={'program_id': None}, subdomain="<language>")
+@app.route('/hedy/<int:level>/<program_id>', methods=['GET'], subdomain="<language>")
+def index(level, program_id, language='en'):
     try:
         level = int(level)
         if level < 1 or level > hedy.HEDY_MAX_LEVEL:
@@ -1554,8 +1580,8 @@ def index(level, program_id):
         ))
 
 
-@app.route('/hedy', methods=['GET'])
-def index_level():
+@app.route('/hedy', subdomain="<language>", methods=['GET'])
+def index_level(language):
     if current_user()['username']:
         highest_quiz = get_highest_quiz_level(current_user()['username'])
         # This function returns the character '-' in case there are no finished quizes
@@ -1565,10 +1591,13 @@ def index_level():
             level_rendered = hedy.HEDY_MAX_LEVEL
         else:
             level_rendered = highest_quiz + 1
-        return index(level_rendered, None)
+        return index(level_rendered, None, language)
     else:
-        return index(1, None)
+        return index(1, None, language)
 
+@app.route('/hedy', methods=['GET'])
+def index_test():
+    return index_level('en')
 
 @app.route('/hedy/<id>/view', methods=['GET'])
 @requires_login
@@ -2557,6 +2586,16 @@ def public_user_page(username):
         )
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
+@app.route('/community', subdomain="zh_hans", methods=['GET'])
+@app.route('/community/<section>', subdomain="zh_hans", methods=['GET'])
+def chinese_community(section='index'):
+    files = glob('templates/communities/zh_hans/*.html')
+    article_names = [os.path.basename(file).replace('.html', '') for file in files]    
+    return render_template(
+        f'communities/zh_hans/{section}.html',
+        article_names=article_names,
+        section=section
+    )
 
 def valid_invite_code(code):
     if not code:
