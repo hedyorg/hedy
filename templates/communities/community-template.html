@@ -1,0 +1,17 @@
+{% extends "auth.html" %}
+{% block regular_content %}
+<div class="flex flex-row gap-8 min-w-screen min-h-screen">
+    {# This is where the index will be #}
+    <div class="flex flex-col p-6 bg-gray-200 w-1/3">
+        {% for name in article_names %}
+            <div class="flex flex-row">
+                <div class="w-4">
+                    {% if name == section %}<i class="fa-solid fa-caret-right  text-blue-800"></i>{% endif %}
+                </div>
+                <a class="no-underline  text-blue-800" href="/community/{{ name }}">{% if name == 'index' %} {{_('Home')}} {% else %} {{ name }} {% endif %}</a>
+            </div>
+        {% endfor %}
+    </div>
+    {% block community_content %}{% endblock %}
+</div>
+{% endblock %}  
