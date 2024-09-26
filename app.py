@@ -87,22 +87,25 @@ app.json = JinjaCompatibleJsonProvider(app)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = datetime.timedelta(minutes=5)
 app.config["SERVER_NAME"] = "localhost:8080"
 
-for rule in app.url_map.iter_rules('static'):    
+for rule in app.url_map.iter_rules('static'):
     app.url_map._rules.remove(rule)
-app.url_map._rules_by_endpoint['static'] = []  
+app.url_map._rules_by_endpoint['static'] = []
 app.view_functions["static"] = None
-app.static_folder='static'
+app.static_folder = 'static'
 app.add_url_rule('/<path:filename>',
-                endpoint='static',
-                subdomain="<language>",
-                view_func=app.send_static_file)
+                 endpoint='static',
+                 subdomain="<language>",
+                 view_func=app.send_static_file)
 
 # optional. If not set, the above view_func will be passed <tenant> as a parameter.
+
+
 @app.url_value_preprocessor
 def before_route(endpoint, values):
     if values is not None and endpoint == 'static':
         values.pop('language', None)
     setup_language(language=values.get('language', None))
+
 
 def get_locale():
     return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
@@ -1595,9 +1598,11 @@ def index_level(language):
     else:
         return index(1, None, language)
 
+
 @app.route('/hedy', methods=['GET'])
 def index_test():
     return index_level('en')
+
 
 @app.route('/hedy/<id>/view', methods=['GET'])
 @requires_login
@@ -2586,16 +2591,18 @@ def public_user_page(username):
         )
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
+
 @app.route('/community', subdomain="zh_hans", methods=['GET'])
 @app.route('/community/<section>', subdomain="zh_hans", methods=['GET'])
 def chinese_community(section='index'):
     files = glob('templates/communities/zh_hans/*.html')
-    article_names = [os.path.basename(file).replace('.html', '') for file in files]    
+    article_names = [os.path.basename(file).replace('.html', '') for file in files]
     return render_template(
         f'communities/zh_hans/{section}.html',
         article_names=article_names,
         section=section
     )
+
 
 def valid_invite_code(code):
     if not code:
