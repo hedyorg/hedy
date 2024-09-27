@@ -1393,32 +1393,32 @@ levels:
         6:
             question_text: What will be the output from this code?
             code: |-
-                {print} 'The wheels on the bus go'
-                {repeat} 3 {times} {print} ' round and round'
+                {print} 'Les rodes de l'autobús van girant'
+                {repeat} 3 {times} {print} ' van rodant'
             mp_choice_options:
             -   option: |-
-                    the wheels on the bus go
-                    round and round
+                    Les rodes de l'autobús van girant
+                    van rodant
                 feedback: Only the second line is repeated 3 times
             -   option: |-
-                    the wheels on the bus go
-                    the wheels on the bus go
-                    the wheels on the bus go
-                    round and round
+                    les rodes de l'autobus van girant
+                    les rodes de l'autobus van girant
+                    les rodes de l'autobus van girant
+                    van rodant
                 feedback: Only the second line is repeated 3 times
             -   option: |-
-                    the wheels on the bus go
-                    round and round
-                    the wheels on the bus go
-                    round and round
-                    the wheels on the bus go
-                    round and round
+                    les rodes de l'autobús van girant
+                    van rodant
+                    les rodes de l'autobús van girant
+                    van rodan
+                    les rodes de l'autobús van girant
+                    van rodan
                 feedback: Only the second line is repeated 3 times
             -   option: |-
-                    the wheels on the bus go
-                    round and round
-                    round and round
-                    round and round
+                    les rodes de l'autobús van girant
+                    van rodant
+                    van rodant
+                    van rodant
                 feedback: All though the town! Perfect!
             hint: Only 'round and round' is repeated 3 times.
             correct_answer: D
@@ -1569,10 +1569,10 @@ levels:
                 feedback: This is not in the right order.
             -   option: |-
                     ```
-                    {repeat} 4 {times} 'if youre happy and you know it'
-                    {repeat} 2 times 'clap your hands'
-                    {print} 'and you really want to show it'
-                    {print} 'clap your hands'
+                    {repeat} 4 {times} 'si ets feliç i ho saps'
+                    {repeat} 2 times 'pica de mans'
+                    {print} 'i ho vols fer saber a tothom'
+                    {print} 'pica de mans'
                     ```
                 feedback: This is not in the right order.
             hint: Mind the order of the sentences.
@@ -2892,14 +2892,16 @@ levels:
         10:
             question_text: Which line of code should be filled in at the ??? to complete the song ?
             code: |-
-                actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
-                ???
-                    for i in range 0 to 1
-                        print 'if youre happy and you know it'
-                        print action
-                    print 'if youre happy and you know it and you really want to show it'
-                    print 'if youre happy and you know it'
-                    print action
+                ```
+                accions = "pica de mans", "pica de peus", "crida Hurra!"
+                _
+                    {for} i {in} {range} 0 {to} 1
+                        {print} "si ets feliç i ho saps"
+                        {print} accio
+                    {print} "si ets feliç i ho saps, i ho vols fer saber a tothom"
+                    {print} "si ets feliç i ho saps"
+                    {print} accio
+                ```
             mp_choice_options:
             -   option: for i in range 1 to 3
                 feedback: This is a hard one! All the actions on the list must be in the song.
