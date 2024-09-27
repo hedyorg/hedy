@@ -8,7 +8,7 @@
                 <div class="w-4">
                     {% if name == section %}<i class="fa-solid fa-caret-right  text-blue-800"></i>{% endif %}
                 </div>
-                <a class="no-underline  text-blue-800" href="/community/{{ name }}">{% if name == 'index' %} {{_('Home')}} {% else %} {{ name }} {% endif %}</a>
+                <a class="no-underline  text-blue-800" href="/community/{{ name }}">{% if name == 'index' %} {{_('nav_start')}} {% else %} {{ name }} {% endif %}</a>
             </div>
         {% endfor %}
     </div>
