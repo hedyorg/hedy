@@ -305,7 +305,7 @@ def task_extract():
 
             # Extract
             'pybabel extract -F babel.cfg -o messages.pot . --no-location --sort-output',
-            'pybabel update -i messages.pot -d translations -N --no-wrap',
+            'pybabel update -i messages.pot -d translations-raw -N --no-wrap',
 
             # Restore headers, remove tempfiles
             [python3, restore_po_header, 'messages.pot.tmp', 'messages.pot'],
@@ -315,6 +315,26 @@ def task_extract():
         ],
         # These commands print a bunch of progress to stderr that looks intimidating
         verbosity=0,
+    )
+
+
+def task_merge_translations():
+    """
+    Merge the translated content with the specified base language content.
+    """
+    yamls = glob('content-raw/*/*.yaml')
+    pos = glob('translations-raw/**/*.po')
+
+    return dict(
+        title=lambda _: 'Generate translated content',
+        file_dep=[
+            'tools/merge-translations.py',
+            *yamls,
+            *pos
+        ],
+        actions=[
+            [python3, 'tools/merge-translations.py']
+        ]
     )
 
 
@@ -349,7 +369,7 @@ def task_normalize_yaml():
     Makes indentation and key ordering uniform, even if the files get rewritten by
     Weblate.
     """
-    yamls = glob('content/**/*.yaml', recursive=True)
+    yamls = glob('content-raw/**/*.yaml', recursive=True)
 
     return dict(
         title=lambda _: 'Normalize YAML',
@@ -386,6 +406,7 @@ def task_frontend():
         task_dep=[
             'lezer_parsers',
             'tailwind',
+            'merge_translations',
             'typescript',
         ]
     )
