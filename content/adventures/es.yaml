@@ -625,7 +625,7 @@ adventures:
                     ¿Puedes completar la línea 10 para hacer que el código funcione?
 
                     ### Ejercicio 2
-                    Dale al jugador información cuando introduzcan una pregunta, por ejemplo `{print} '¡Correcto!'` o `{print} '¡Error! la respuesta correcta era ' respuesta_correcta`
+                    Dale al jugador información cuando introduzcan una pregunta, por ejemplo `{print}` '¡Correcto!' o `{print}` '¡Incorrecto! La respuesta correcta es ' respuesta_correcta
                 example_code: "```\npuntuación = 0\n{repeat} 10 {times}\n    números = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    número_1 = números {at} {random}\n    número_2 = números {at} {random}\n    respuesta_correcta = numero_1 * numero_2\n    {print} '¿Cuánto es 'número_1' multiplicado por 'número_2'?'\n    respuesta = {ask} 'Escriba su respuesta aquí...'\n    {print} 'Tu respuesta es ' respuesta\n    {if}_{is}_ \n        puntuación = puntuación + 1\n{print} '¡Buen trabajo! Tu puntuación es... 'puntuación' sobre 10!'\n```\n"
             10:
                 story_text: |
@@ -1027,8 +1027,7 @@ adventures:
                     {else}
                         días = 28
 
-                    {print} 'Aquí están todos los días de '
-                    mes
+                    {print} 'Aquí están todos los días de ' mes
                     {for} i {in} {range} 1 {to} días
                         {print} mes i
                     ```
@@ -1247,6 +1246,7 @@ adventures:
                     ¡Bienvenido a  Hedy! Aquí puedes aprender a cómo programar paso a paso.
 
                     ¡Prueba el código por ti mismo! El botón amarillo copia el código de ejemplo a tu bloque de programación.
+                    Después pulsa el botón verde 'Ejecutar código' debajo del campo de programación para ejecutar el código.
 
                     ¿Preparado? ¡Entonces ve a la siguiente pestaña para hacer tus propios códigos!
                 example_code: |
@@ -1606,7 +1606,7 @@ adventures:
                     Haz tu propia versión del programa. Primero haz una lista de los miembros de tu familia.
                     Luego piensa en una tarea que tenga que ser hecha, y deja que la computadora decida quien debe hacer la tarea con el comando `{at} {random}`.
 
-                    **Extra** ¿No quieres lavar los platos por ti mismo? Hackea el programa quitando tu nombre de la lista con `{remove} {from}`.
+                    **Extra** ¿No quieres lavar los platos por ti mismo? Hackea el programa quitando tu nombre de la lista con el comando `{remove}` `{from}`.
             4:
                 story_text: |
                     Usando comillas puedes hacer más interesante tu programa.
@@ -1919,10 +1919,9 @@ adventures:
         levels:
             12:
                 story_text: |
-                    En este nivel aprenderás a usar **funciones**. Una función es un bloque de código que se puede utilizar fácilmente varias veces. Usar funciones nos ayuda a organizar piezas de código que podamos usar de forma repetida.
-
-                    Para crear una función, usa `{define}` que da a la función un nombre. Luego pon todas las líneas que desees en la función en un bloque con sangría bajo la línea `{define}`.
+                    En este nivel aprenderás a usar **funciones**. Una función es un bloque de código que se puede utilizar fácilmente varias veces. Usar funciones nos ayuda a organizar piezas de código que podamos usar de forma repetida. Para crear una función, usa `{define}` que da a la función un nombre. Luego pon todas las líneas que desees en la función en un bloque con sangría bajo la línea `{define}`.
                     Deja una línea vacía en tu código para que parezca agradable y limpio. Y ya está, ¡Gran trabajo! ¡Has creado una función!
+
 
                     ¡Ahora, cuando necesitemos ese bloque de código, solo usamos <code>{call}</code> con el nombre de la función para llamarlo! No tenemos que volver a escribir ese bloque de código.
 
@@ -3507,7 +3506,7 @@ adventures:
         levels:
             7:
                 story_text: |
-                    ## ¡Repite! ¡Repite! ¡Repetir!
+                    ## ¡Repetir! ¡Repetir! ¡Repetir!
                     El nivel 7 añade el comando `{repeat}`.  `{repeat}` se puede utilizar para ejecutar una línea de código varias veces. Así:
 
                     ### Ejercicio
@@ -5074,28 +5073,26 @@ adventures:
 
                     Primero, define una función **por cada forma** que quieras usar en el brazalete. Después, añade las formas al brazalete como este:
 
-                    </div>
                     Programa de Diseño de Brazalete <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500"> 
                 example_code: |
                     Hint Bracelet Programa de diseño
                     ```
-                    {define} draw_a_square
-                    _ _ _
+                    {define} dibujar_un_cuadrado
+                    _
 
                     {color} blanco
                     {turn} -90
                     {forward} 300
                     {turn} 180
 
-
                     {for} i {in} {range} 1 {to} 5
-                        {color} gris
-                        {forward} 100
-                        shape = {ask} '¿Qué tipo de forma le gustaría a continuación en el brazalete?'
-                        chosen_color = {ask} '¿En qué color?'
-                        {color} chosen_color
-                        {if} forma = 'cuadrado'
-                            {call} draw_a_square
+                    	{color} gris
+                    	{forward} 100
+                    	forma= {ask} '¿Qué tipo de forma le gustaría a continuación en el brazalete?'
+                    	color_elegido = {ask} '¿En qué color?'
+                    	{color} color_elegido 
+                    	{if} forma = 'cuadrado'
+                    		{call} dibujar_un_cuadrado
                     ```
             13:
                 story_text: |
@@ -5121,21 +5118,22 @@ adventures:
                     {define} dibuja_una_casa {with} color_elegido
                     _
                     ```
-                    Hint Snow Storm
-                    ```
-                    {define} draw_snowflake {with} length, color
-                        _
 
-                    numbers = 10, 20, 30
-                    colors = _
+                    Tormenta de la Pista de Nieve
+                    ```
+                    {define} dibujar_copo_nieve {with} longitud, color
+                    	_
+
+                    números= 10, 20, 30
+                    colores = _
 
                     {for} i {in} {range} 1 {to} 5
-                        random_number = _
-                        random_color = _
-                        {call} draw_snowflake {with} random_number, random_color
-                        {color} white
-                        {turn} random_number * 5
-                        {forward} 80
+                    	número_aleatorio = _
+                    	color_aleatorio = _
+                    	{call} dibujar_copo_nieve {with} número_aleatorio , color_aleatorio
+                    	{color} blanco
+                    	{turn} número_aleatorio * 5
+                    	{forward} 80
                     ```
 
             14:

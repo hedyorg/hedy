@@ -714,7 +714,7 @@ teacher-guide:
         -   title: Los alumnos quieren varias respuestas correctas
             example:
                 error_text: Por ejemplo este alumno Hedy le dice a todos sus amigos que son divertidos, pero a otros compañeros les diría que no lo son.
-                error_code: "{if} nombre {is} Jesse, David, Souf imprimir  Eres divertido  {else} {print} 'No eres divertido'"
+                error_code: "{if} nombre {is} Jesse, David, Souf {print} 'Eres divertido' {else} {print} 'No eres divertido'"
                 solution_text: |-
                     Puedes usar el comando `{in}` para eso. Se explica en un nivel superior, pero ya funciona en el nivel 5.
                     Otra solución es usar varios comandos `{if}` y no comando `{else}`. La desventaja es que no le dirá a los otros compañeros que no son divertidos.
