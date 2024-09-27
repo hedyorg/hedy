@@ -113,7 +113,9 @@ export function initialize(options: InitializeOptions) {
     case 'my-profile':
       initializeMyProfilePage(options.javascriptPageOptions);
       break;
-
+    
+    case 'tryit':
+      initializeCodePage(options.javascriptPageOptions);
   }
 
   // FIXME: I think this might also be page-specific

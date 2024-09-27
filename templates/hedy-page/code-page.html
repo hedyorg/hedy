@@ -5,7 +5,7 @@
       <div class="bg-blue-500 border border-black rounded-lg px-8 py-4 text-center">
           <h2 id="tutorial_title" class="text-white"></h2>
           <p id="tutorial_text"></p>
-          <button id="tutorial_next_button" class="green-btn mt-4">{{_('next_step_tutorial')}}</button>
+          <button id="tutorial_next_button" class="green-btn-new mt-4">{{_('next_step_tutorial')}}</button>
       </div>
   </div>
 {% endif %}
@@ -24,12 +24,12 @@
     <!-- progress bar -->
         <div id="progress_bar" data-cy="progress_bar" class="w-full max-w-screen-2xl mx-auto mt-10">
             <div class="flex flex-row w-full mb-2">
-                <button data-cy="previous_adventure" id="previous_adventure" class="blue-btn flex flex-row gap-2 align-middle items-center flex-initial w-fit next-tab justify-self-end mb-1">
+                <button data-cy="previous_adventure" id="previous_adventure" class="blue-btn-new flex flex-row gap-2 align-middle items-center flex-initial w-fit next-tab justify-self-end mb-1">
                     <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}"></span>
                     <p class="m-0 p-0 hidden md:block">{{_('previous_adventure')}}</p>
                 </button>
                 <button data-cy="back_level" id="back_level" 
-                        class="blue-btn flex-initial flex flex-row gap-2 align-middle items-center	 w-fit next-tab justify-self-end mb-1 hidden"
+                        class="blue-btn-new flex-initial flex flex-row gap-2 align-middle items-center	 w-fit next-tab justify-self-end mb-1 hidden"
                         onclick="location.href = '/hedy/{{ level - 1 }}'"
                 >
                     <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}"></span>
@@ -44,12 +44,12 @@
                         {{_('complete')}}
                     </span>
                 </div>    
-                <button data-cy="next_adventure" id="next_adventure" class="blue-btn flex flex-row gap-2 align-middle items-center flex-initial w-fit next-tab justify-self-end mb-1">
+                <button data-cy="next_adventure" id="next_adventure" class="blue-btn-new flex flex-row gap-2 align-middle items-center flex-initial w-fit next-tab justify-self-end mb-1">
                     <p class="m-0 p-0 hidden md:block">{{_('next_adventure')}}</p>                    
                     <span class="fa fa-arrow-{% if g.dir == "ltr" %}right{% else %}left{% endif %}"></span>
                 </button>
                 <button data-cy="next_level" id="next_level"
-                        class="blue-btn flex-initial w-fit next-tab justify-self-end mb-1 hidden"
+                        class="blue-btn-new flex-initial w-fit next-tab justify-self-end mb-1 hidden"
                         onclick="location.href = '/hedy/{{ level + 1 }}'"
                 >
                     {{_('advance_button')|replace("{level}", level + 1)}}&nbsp;

@@ -119,7 +119,7 @@
         <form>
           <div class="my-2 flex">
             <input type="text" class="border border-green-400 rounded p-2 px-3 flex-1" placeholder="{{_('enter_text')}}">
-            <input type="submit" data-cy="submit_ask_modal" class="flex-0 green-btn ltr:ml-3 rtl:mr-3" value="{{_('enter')}}"></p>
+            <input type="submit" data-cy="submit_ask_modal" class="flex-0 green-btn-new ltr:ml-3 rtl:mr-3" value="{{_('enter')}}"></p>
           </div>
         </form>
       </div>
@@ -144,33 +144,33 @@
     <div id="button_row" class="flex flex-col gap-2 md:flex-row lg:flex-col xl:flex-row mb-4">
       <div class="flex flex-row gap-2">
         <div id="run_button_container" class="gap-2 flex flex-row flex-initial">
-            <button id="runit" data-cy="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
+            <button id="runit" data-cy="runit" class="green-btn-new" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
               <span class="fa fa-play ltr:mr-1 rtl:ml-1"></span>
               {{_('run_code_button')}}
             </button>
-            <button id="stopit" data-cy="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
+            <button id="stopit" data-cy="stopit" class="red-btn-new" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
             <div class="flex-1 md:hidden"></div>
-            <button id="debug_button" class="blue-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
+            <button id="debug_button" class="blue-btn-new" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
                 <span class="fa fa-bug ltr:mr-1 rtl:ml-1"></span>
                 {{_('debug')}}
              </button>
         </div>
         <div id="debug_container" class="flex-initial gap-2 inline-flex items-center">
-            <button id="debug_restart" class="green-btn hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
+            <button id="debug_restart" class="green-btn-new hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
               <span class="fa fa-repeat ltr:mr-1 rtl:ml-1"></span>
               {{_('restart')}}
             </button>
-            <button id="debug_stop" class="red-btn hidden" onclick="hedyApp.stopDebug()">
+            <button id="debug_stop" class="red-btn-new hidden" onclick="hedyApp.stopDebug()">
               <span class="fa fa-stop ltr:mr-1 rtl:ml-1"></span>
               {{_('stop')}}
             </button>
-            <button id="debug_continue" class="btn-shape bg-blue-400 hover:bg-blue-300 text-white hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "continue")'>
+            <button id="debug_continue" class="btn-shape-new bg-blue-400 hover:bg-blue-300 text-white hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "continue")'>
               <span class="fa fa-forward ltr:mr-1 rtl:ml-1 {% if g.dir == "rtl" %}rotate-180{% endif %}"></span>
               {{_('continue')}}
           </button>
         </div>
         <div id="clear_button_container" class="flex-initial lg:mt-0 inline-flex items-center">
-          <button id="clear" class="blue-btn h-full" onclick="hedyApp.emptyEditor()">
+          <button id="clear" class="blue-btn-new h-full" onclick="hedyApp.emptyEditor()">
             <span class="fa fa-broom ltr:mr-1 rtl:ml-1"></span>
             {{_('clear')}}
           </button>
@@ -181,7 +181,7 @@
         {% if raw or public_adventures_page %}
           <div _="on load hedyApp.setDevelopersMode('load', false)"></div>
         {% elif not enforce_developers_mode and not editor_readonly %}
-          <div class="blue-btn" id="developers_toggle_container">
+          <div class="blue-btn-new" id="developers_toggle_container">
             <label for="developers_toggle" class="flex flex-row items-center justify-center cursor-pointer">
                 <div class="relative">
                 <input id="developers_toggle" type="checkbox" class="sr-only"
@@ -207,38 +207,38 @@
     {% endif %}
     <div class="flex justify-between gap-2 items-start overflow-visible">
       <div id="saveMicrobitFilesContainer" {% if not microbit_feature %} class="hidden" {% endif %} >
-        <button id="runMicrobit" class="green-btn" onclick="hedyApp.saveMicrobit({{ level }});" > {{ _('Save Microbit code ') }}
+        <button id="runMicrobit" class="green-btn-new" onclick="hedyApp.saveMicrobit({{ level }});" > {{ _('Save Microbit code ') }}
             <img src="{{ static('/images/microbit_logo_icon_248480.png') }}" style="width: 25px; height: 25px; margin-left: 1px; display: inline;" alt=""/>
         </button>
       </div>
       <div id="save_files_container" class="hidden">
-        <button id="saveFiles" class="green-btn" onclick="hedyApp.saveMachineFiles();">💾</button>
+        <button id="saveFiles" class="green-btn-new" onclick="hedyApp.saveMachineFiles();">💾</button>
       </div>
-      <button id="next_parson_button" max_exercise="{{ parsons_exercises }}" class="green-btn ltr:ml-auto rtl:mr-auto" style="display: none;">{{_('next_exercise')}}</button>
+      <button id="next_parson_button" max_exercise="{{ parsons_exercises }}" class="green-btn-new ltr:ml-auto rtl:mr-auto" style="display: none;">{{_('next_exercise')}}</button>
       {% if show_edit_button %}
-          <button onclick="window.location = '/hedy/{{level}}/{{program_id}}'" class="blue-btn ltr:ml-4 rtl:mr-4">{{_('edit_code_button')}}</button>
+          <button onclick="window.location = '/hedy/{{level}}/{{program_id}}'" class="blue-btn-new ltr:ml-4 rtl:mr-4">{{_('edit_code_button')}}</button>
       {% else %}
           <img src="{{static('/images/Hedylightbulb_1.svg')}}" onclick="hedyApp.modalStepOne()" class="hidden h-28 -mt-2" id="repair_button" alt="{{_('repair_program_logo_alt')}}">
       {% endif %}
       {% if editor_readonly and is_admin %}
-              <button onclick="hedyApp.delete_program('{{ program_id }}', {{ 0 }}, '{{_('delete_confirm')}}')" class="red-btn">{{_('delete')}}</button>
+              <button onclick="hedyApp.delete_program('{{ program_id }}', {{ 0 }}, '{{_('delete_confirm')}}')" class="red-btn-new">{{_('delete')}}</button>
       {% endif %}
     </div>
   </div>
   <div class="order-3 lg:order-4" id="code_related_buttons">
     <div class="flex flex-col md:flex-row mb-4 gap-4">
-      <button id="hide_editor" class="blue-btn rounded items-center hidden lg:inline-block" onclick="hedyApp.hide_editor();">
+      <button id="hide_editor" class="blue-btn-new rounded items-center hidden lg:inline-block" onclick="hedyApp.hide_editor();">
         <i class="fa-solid fa-caret-left"></i>
         <span>Expand output</span>
       </button>
-      <button id="show_editor" class="blue-btn rounded items-center hidden lg:inline-block" onclick="hedyApp.show_editor();" style="display: none;">
+      <button id="show_editor" class="blue-btn-new rounded items-center hidden lg:inline-block" onclick="hedyApp.show_editor();" style="display: none;">
         <i class="fa-solid fa-caret-right"></i>
         <span>Show editor</span>
       </button>
       <div class="hidden lg:block lg:flex-1"></div>
       <div class="flex flex-row justify-between gap-2">
         <div id="read_outloud_button_container" class="dropdown relative">
-          <button id="read_outloud" data-cy="read_outloud" class="blue-btn rounded inline-flex items-center gap-2"
+          <button id="read_outloud" data-cy="read_outloud" class="blue-btn-new rounded inline-flex items-center gap-2"
           onclick="$('#speak_dropdown').slideToggle('medium');">
           <span class="fa fa-volume-high ltr:mr-1 rtl:ml-1"></span>
           <span>{{_('read_outloud')}}</span>
@@ -257,7 +257,7 @@
                 end">
           </div>
         </div>
-        <button id="share_program_button" class="blue-btn next-tab" _="on click remove .hidden from #share_modal">
+        <button id="share_program_button_new" class="blue-btn-new next-tab" _="on click remove .hidden from #share_modal">
           <i class="fa-solid fa-share-nodes ltr:mr-1 rtl:ml-1"></i>
           {{_('share')}}
         </button>

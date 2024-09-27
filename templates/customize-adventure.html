@@ -257,7 +257,7 @@ onclick="window.open('/for-teachers', '_self');">
     </div>
 
     <div class="tab_content preview hidden">
-              <div class="lg:flex lg:flex-row turn-pre-into-ace show-copy-button teacher-adv" value="{{_('put')}}">
+              <div class="lg:flex lg:flex-row turn-pre-into-ace show-copy-button teacher-adv">
                     <div class="w-full {% if adventure.example_code or adventure.is_teacher_adventure %}lg:w-1/2 {% endif %} p-2 ltr:mr-2 rtl:ml-2">
                         {{ content|safe }}
                     </div>
@@ -268,7 +268,7 @@ onclick="window.open('/for-teachers', '_self');">
                       </div>
                   {% endif %}
               </div>
-        {% include "hedy-page/editor-and-output.html" %}
+        {% include "incl/editor-and-output.html" %}
     </div>
 
     <div class="tab_content tips hidden">

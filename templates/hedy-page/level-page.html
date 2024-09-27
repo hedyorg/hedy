@@ -20,7 +20,7 @@
 <div class="mt-4 mb-1 mx-auto py-2 px-4 flex flex-col lg:flex-row gap-4 justify-start w-full max-w-screen-2xl">
   <div class="flex flex-row justify-between sm:justify-normal gap-4 hidden">
     {% if current_user_is_in_class %}
-    <button id="hand_in_button" class="blue-btn next-tab">
+    <button id="hand_in_button" class="blue-btn-new next-tab">
       <span class="fa fa-paper-plane ltr:mr-1 rtl:ml-1"></span>
       {{_('submit_program')}}
     </button>
@@ -41,7 +41,7 @@
   <div class="flex-1"></div>
   <div class="flex flex-col md:flex-row gap-4 md:items-center">
     <div class="flex flex-row gap-2">
-      <button class="blue-btn w-fit"
+      <button class="blue-btn-new w-fit"
       _="on click toggle .ltr:-translate-x-full .rtl:translate-x-full on #index_sidebar
       then toggle .hidden on #sidebar_bg
       wait 100ms
@@ -50,14 +50,14 @@
       See more adventures 
       <i class="fa-solid fa-book-open-reader"></i>
       </button>
-      <button class="blue-btn md:hidden" _="on click toggle .flex .hidden on #more_options">
+      <button class="blue-btn-new md:hidden" _="on click toggle .flex .hidden on #more_options">
         <i class="fa-solid fa-ellipsis-vertical"></i>
       </button>
     </div>
     <div class="hidden md:flex flex-row gap-2" id="more_options">
       {% if not hide_cheatsheet and cheatsheet %}
       <div class="dropdown relative" id="cheatsheet_dropdown_container">
-        <button class="blue-btn ltr:ml-1 rtl:mr-1 rounded inline-flex items-center gap-2" id="dropdown_cheatsheet_button"
+        <button class="blue-btn-new ltr:ml-1 rtl:mr-1 rounded inline-flex items-center gap-2" id="dropdown_cheatsheet_button"
           onclick="$('#cheatsheet_dropdown').slideToggle('medium');">
           <span class="fa fa-list ltr:mr-1 rtl:ml-1"></span>
           <span>{{_('cheatsheet_title')}}</span>
@@ -81,7 +81,7 @@
               {{ example.explanation|commonmark }}
             </div>
             <div class="flex-none">
-              <button class="yellow-btn tiny-btn" id="try_button{{ loop.index }}"
+              <button class="yellow-btn-new tiny-btn" id="try_button{{ loop.index }}"
                 onclick='hedyApp.tryPaletteCode({{example.demo_code|tojson}});'>
                 <span class="rtl:hidden">⇥</span>
                 <span class="ltr:hidden">⇤</span>
@@ -103,7 +103,7 @@
 {% block levelbody %}{% endblock %}
 </div>
 
-{% include 'incl/share-modal.html' %}
+{% include 'incl/share-modal-new.html' %}
 {% include 'incl/hand-in-modal.html' %}
 {% if HOC_tracking_pixel %}
   <img src="https://code.org/api/hour/begin_hedy_text.png" data-cy="tracking_pixel" alt="Tracking Pixel - Hour of code" height="1" width="1">

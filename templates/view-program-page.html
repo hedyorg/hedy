@@ -31,6 +31,6 @@
   <div>{{_('by')}}
       <a {% if initial_adventure.public_profile %}onclick="window.open('/user/{{initial_adventure.username}}', '_self')"{% endif %} class="{% if initial_adventure.public_profile %}cursor-pointer{% else %}text-black{% endif %} no-underline">{{ initial_adventure.username }}</a>
   </div>
-  {% include "hedy-page/editor-and-output.html" %}
+  {% include "incl/editor-and-output.html" %}
 </div>
 {% endblock %}

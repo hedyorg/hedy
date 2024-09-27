@@ -12,7 +12,6 @@ export interface TabEvents {
 
 export interface TabOptions {
   readonly initialTab?: string;
-  readonly level?: number;
 }
 
 /**
@@ -35,7 +34,6 @@ export interface TabOptions {
  */
 export class Tabs {
   private _currentTab: string = '';
-  private _currentLevel?: number;
 
   private tabEvents = new EventEmitter<TabEvents>({
     beforeSwitch: true,
@@ -43,26 +41,13 @@ export class Tabs {
   });
 
   constructor(options: TabOptions={}) {
-    this._currentLevel = options.level;
-    
     $('*[data-tab]').on('click', (e) => {
       const tab = $(e.target);
       const tabName = tab.data('tab') as string;
-      const level = tab.data('level')
+
       e.preventDefault();
-      if (this._currentLevel == Number(level))
-        this.switchToTab(tabName, Number(level), );
-      else
-        location.href = `/hedy/${level}#${tabName}`
+      this.switchToTab(tabName);
     });
-
-    $('#next_adventure').on('click', () => {
-      this.switchPreviousOrNext(true)
-    })
-
-    $('#previous_adventure').on('click', () => {
-      this.switchPreviousOrNext(false)
-    })
 
     // Determine initial tab
     // 1. Given by code
@@ -77,12 +62,12 @@ export class Tabs {
       initialTab = $('.tab:first').attr('data-tab');
     }
 
-    if (initialTab && this._currentLevel) {
-      this.switchToTab(initialTab, this._currentLevel);
+    if (initialTab) {
+      this.switchToTab(initialTab);
     }
   }
 
-  public switchToTab(tabName: string, level: number) {
+  public switchToTab(tabName: string) {
     const doSwitch = () => {
       const oldTab = this._currentTab;
       this._currentTab = tabName;
@@ -92,46 +77,16 @@ export class Tabs {
       if (window.history) { window.history.replaceState(null, '', '#' + hashFragment); }
 
       // Find the tab that leads to this selection, and its siblings
-      const tab = $(`*[data-tab="${tabName}"][data-level="${level}"]`);
+      const tab = $('*[data-tab="' + tabName + '"]');
       const allTabs = tab.siblings('*[data-tab]');
 
       // Find the target associated with this selection, and its siblings
       const target = $('*[data-tabtarget="' + tabName + '"]');
       const allTargets = target.siblings('*[data-tabtarget]');
 
-      allTabs.removeClass('adv-selected');
-      allTabs.addClass('not-selected-adv')
-      tab.removeClass('not-selected-adv')
-      tab.addClass('adv-selected');
-      let tab_title = document.getElementById('adventure_name')!
-      tab_title.textContent = tab.text().trim()
-      const type = tab.data('type');
-      tab_title.classList.remove('border-green-300', 'border-[#fdb2c5]', 'border-blue-300', 'border-blue-900')
-      if (type == 'teacher') {
-        tab_title.classList.add('border-green-300');
-      } else if(type == 'command') {
-        tab_title.classList.add('border-[#fdb2c5]')
-      } else if (type == 'special') {
-        tab_title.classList.add('border-blue-300')
-      } else {
-        tab_title.classList.add('border-blue-900')
-      }
-      
-      // Hide or show the next or previous level button in case we are in the first or last adventure
-      // And also depending in which level we are in
-      const previous: HTMLElement | null = document.querySelector(`[data-level="${tab.data('level')}"][tabindex="${Number(tab.attr('tabindex')) - 1}"]`)
-      if (previous) {
-        (document.querySelector('#previous_adventure > p') as HTMLElement).innerText = previous.innerText.trim()
-      }
-      document.getElementById('back_level')?.classList.toggle('hidden', tab.attr('tabindex') !== '1' || (this._currentLevel ?? 0) === 1)
-      document.getElementById('previous_adventure')?.classList.toggle('hidden', tab.attr('tabindex') === '1')      
-      
-      const next: HTMLElement | null = document.querySelector(`[data-level="${tab.data('level')}"][tabindex="${Number(tab.attr('tabindex')) + 1}"]`)
-      if (next) {
-        (document.querySelector('#next_adventure > p') as HTMLElement).innerText = next.innerText.trim()
-      }
-      document.getElementById('next_adventure')?.classList.toggle('hidden', next === null)
-      document.getElementById('next_level')?.classList.toggle('hidden', next !== null || (this._currentLevel ?? 0) == 18 || tab.data('tab') === 'quiz')
+      // Fix classes
+      allTabs.removeClass('tab-selected');
+      tab.addClass('tab-selected');
 
       allTargets.addClass('hidden');
       target.removeClass('hidden');
@@ -148,15 +103,6 @@ export class Tabs {
     }
   }
 
-  private switchPreviousOrNext(toNext: boolean) {
-    const selected = document.querySelector('.adv-selected') as HTMLElement
-    const i = parseInt(selected?.getAttribute('tabindex') || '0')
-    const next = document.querySelector(`li[tabindex='${i + (toNext ? 1 : -1)}'][data-level='${ selected.dataset['level']}']`) as HTMLElement
-    
-    this.switchToTab(next.dataset['tab']!, Number(next.dataset['level']!))
-    document.getElementById('layout')?.scrollIntoView({behavior: 'smooth'})
-  }
-
   public get currentTab() {
     return this._currentTab;
   }
@@ -171,18 +117,12 @@ export class Tabs {
   }
 }
 
-export function getNext() {
-  const selected = document.querySelector('.adv-selected')
+
+export function getPreviousAndNext() {
+  const selected = document.querySelector('.tab-selected')
   if (!selected) return []
   const i = parseInt(selected.getAttribute('tabindex') || '0')
-  const next = document.querySelector(`li[tabindex='${i+1}']`)
-  return next
-}
-
-export function getCurrentAdv() {
-  const selectedElement = document.querySelector('.adv-selected');
-  if (selectedElement) {
-    return selectedElement.textContent?.trim() ?? '';
-  }
-  return '';
+  const prev = document.querySelector(`.tab[tabindex='${i-1}']`)
+  const next = document.querySelector(`.tab[tabindex='${i+1}']`)
+  return [prev, next]
 }

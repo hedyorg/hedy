@@ -2,7 +2,7 @@ import { ClientMessages } from './client-messages';
 import { modal, error, success, tryCatchPopup } from './modal';
 import JSZip from "jszip";
 import * as Tone from 'tone'
-import { Tabs } from './tabs';
+import { SwitchTabsEvent, Tabs } from './tabs';
 import { MessageKey } from './message-translations';
 import { turtle_prefix, pressed_prefix, normal_prefix, music_prefix } from './pythonPrefixes'
 import { Adventure, isServerSaveInfo, ServerSaveInfo } from './types';
@@ -25,6 +25,7 @@ import { stopDebug } from "./debugging";
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
 import { initializeActivity } from './user-activity';
+import { IndexTabs, SwitchAdventureEvent } from './index-tabs';
 export let theGlobalDebugger: any;
 export let theGlobalEditor: HedyEditor;
 export let theModalEditor: HedyEditor;
@@ -184,7 +185,7 @@ export function initializeApp(options: InitializeAppOptions) {
 }
 
 export interface InitializeCodePageOptions {
-  readonly page: 'code';
+  readonly page: 'code' | 'tryit';
   readonly level: number;
   readonly lang: string;
   readonly adventures: Adventure[];
@@ -230,20 +231,28 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   const anchor = window.location.hash.substring(1);
 
   const validAnchor = [...Object.keys(theAdventures), 'parsons', 'quiz'].includes(anchor) ? anchor : undefined;
-
-  const tabs = new Tabs({
-    // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
-    // We click on `level` to load a program associated with level, if any.
-    initialTab: validAnchor ?? options.initial_tab,
-    level: options.level
-  });
+  let tabs: any;
+  if (options.page == 'tryit') {
+    tabs = new IndexTabs({
+      // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
+      // We click on `level` to load a program associated with level, if any.
+      initialTab: validAnchor ?? options.initial_tab,
+      level: options.level
+    });
+  } else {
+    tabs = new Tabs({
+      // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
+      // We click on `level` to load a program associated with level, if any.
+      initialTab: validAnchor ?? options.initial_tab,
+    });
+  }
 
   tabs.on('beforeSwitch', () => {
     // If there are unsaved changes, we warn the user before changing tabs.
     saveIfNecessary();
   });
 
-  tabs.on('afterSwitch', (ev) => {
+  tabs.on('afterSwitch', (ev: SwitchTabsEvent | SwitchAdventureEvent) => {
     currentTab = ev.newTab;
     const adventure = theAdventures[currentTab];
 
@@ -262,13 +271,15 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     theLocalSaveWarning.switchTab();
   });
 
-  initializeSpeech();
+  initializeSpeech(options.page === 'tryit');
 
   if (options.start_tutorial) {
     startIntroTutorial();
   }
 
   // Share/hand in modals
+  $('#share_program_button').on('click', () => $('#share_modal').show());
+  $('#hand_in_button').on('click', () => $('#hand_in_modal').show());
   initializeShareProgramButtons();
   initializeHandInButton();
 
@@ -423,16 +434,13 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
   // And add an overlay button to the editor if requested via a show-copy-button class, either
   // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
   if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
-    const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-2 ltr:mr-2 rtl:ml-2').appendTo(preview);
     const adventure = container.getAttribute('data-tabtarget')
-    let text = $(preview).attr('value') || $(container).attr('value')
-    if (!text){ text = 'Put' }
-    $('<button>')
-    .addClass('blue-btn')
-    .attr('data-cy', `paste_example_code_${adventure}`)
-    .append(`<span class="fa fa-paste ltr:mr-1 rtl:ml-1"></span>`)
-    .append(text)
-    .appendTo(buttonContainer).click(function() {
+    const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
+    let symbol = "⇥";
+    if (dir === "rtl") {
+      symbol = "⇤";
+    }
+    $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').attr('data-cy', `paste_example_code_${adventure}`).text(symbol).appendTo(buttonContainer).click(function() {
       if (!theGlobalEditor?.isReadOnly) {
         theGlobalEditor.contents = exampleEditor.contents + '\n';
       }
@@ -1247,8 +1255,9 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 }
 
 function speak(text: string) {
+  var selectedURI = $('#speak_dropdown').val();
   if (!selectedURI) { return; }
-  var voice = window.speechSynthesis.getVoices().filter(v => v.voiceURI === selectedURI.val())[0];
+  var voice = window.speechSynthesis.getVoices().filter(v => v.voiceURI === selectedURI)[0];
 
   if (voice) {
     let utterance = new SpeechSynthesisUtterance(text);
@@ -1258,7 +1267,7 @@ function speak(text: string) {
   }
 }
 
-function initializeSpeech() {
+function initializeSpeech(isTryit?: boolean) {
   // If we are running under cypress, always show the languages dropdown (even if the browser doesn't
   // have TTS capabilities), so that we can test if the logic for showing the dropdown at least runs
   // successfully.
@@ -1284,22 +1293,26 @@ function initializeSpeech() {
 
     if (voices.length > 0 || isBeingTested) {
       for (const voice of voices) {
-        $('#speak_dropdown').append(
-          $('<button>')
-            .attr('id', `speak_button_${voice.name}`)
-            .attr('onclick', `$('#speak_dropdown').slideUp('medium');`)
-            .attr('value', voice.voiceURI)
-            .addClass('flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white')
-            .css('width', '100%')
-            .text(voice.name)
-            .on('click', function () {
-              if (selectedURI){
-                selectedURI.find('span').remove();
-              }
-              selectedURI = $(this);
-              $(this).append(`<span class="fa fa-check"></span>`);
-            })
-          );
+        if (isTryit) {
+          $('#speak_dropdown').append(
+            $('<button>')
+              .attr('id', `speak_button_${voice.name}`)
+              .attr('onclick', `$('#speak_dropdown').slideUp('medium');`)
+              .attr('value', voice.voiceURI)
+              .addClass('flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white')
+              .css('width', '100%')
+              .text(voice.name)
+              .on('click', function () {
+                if (selectedURI){
+                  selectedURI.find('span').remove();
+                }
+                selectedURI = $(this);
+                $(this).append(`<span class="fa fa-check"></span>`);
+              })
+            );
+        } else {
+          $('#speak_dropdown').append($('<option>').attr('value', voice.voiceURI).text('📣 ' + voice.name));
+        }
       }
       $('#speak_container').show();
 
@@ -1445,6 +1458,8 @@ function toggleDevelopersMode(enforceDevMode: boolean) {
   // (Driving from HTML attributes is more flexible on what gets resized, and avoids duplicating
   // size literals between HTML and JavaScript).
   $('#adventures_tab').toggle(!enable || currentTab === 'quiz' || currentTab === 'parsons');
+  // this is for the new design, it needs to be removed once we ship it
+  $('#adventures').toggle(!enable || currentTab === 'quiz' || currentTab === 'parsons');
   // Parsons dont need a fixed height
   if (currentTab === 'parsons') return
   $('[data-devmodeheight]').each((_, el) => {
@@ -1577,17 +1592,21 @@ export function select_profile_image(image: number) {
 }
 
 export function hide_editor() {
+  $('#fold_in_toggle_container').hide(); // remove once we get rid of old version
   $('#hide_editor').hide();
   $('#code_editor').addClass('lg:hidden block');
   $('#code_output').addClass('lg:col-span-2');
   $('#show_editor').show();
+  $('#fold_out_toggle_container').show(); // remove once we get rid of old version
 }
 
 export function show_editor() {
+  $('#fold_out_toggle_container').hide(); // remove once we get rid of old version
   $('#show_editor').hide();
   $('#code_editor').removeClass('lg:hidden block');
   $('#code_output').removeClass('lg:col-span-2');
   $('#hide_editor').show();
+  $('#fold_in_toggle_container').show(); // remove once we get rid of old version
 }
 
 // See https://github.com/skulpt/skulpt/pull/579#issue-156538278 for the JS version of this code
@@ -1694,7 +1713,7 @@ function updatePageElements() {
   $('#editor_area').toggle(isCodeTab || currentTab === 'parsons');
   $('#editor').toggle(isCodeTab);
   $('#debug_container').toggle(isCodeTab);
-
+  $('#program_name_container').toggle(isCodeTab);
   theGlobalEditor.isReadOnly = false;
 
   const adventure = theAdventures[currentTab];
@@ -1706,8 +1725,9 @@ function updatePageElements() {
     // SHARING SETTINGS
     // Star on "share" button is filled if program is already public, outlined otherwise
     const isPublic = !!saveInfo.public;
-    changeIconButton(isPublic, 'share_program_button', 'fa-lock', 'fa-users')
-    $(`#share_${isPublic ? 'public' : 'private'}`).prop('checked', true);
+    $('#share_program_button')
+      .toggleClass('active-bluebar-btn', isPublic);
+    $(`#share-${isPublic ? 'public' : 'private'}`).prop('checked', true);
 
     // Show <...data-view="if-public-url"> only if we have a public url
     $('[data-view="if-public"]').toggle(isPublic);
@@ -1716,13 +1736,16 @@ function updatePageElements() {
 
     // Paper plane on "hand in" button is filled if program is already submitted, outlined otherwise
     const isSubmitted = !!saveInfo.submitted;
-    changeIconButton(isSubmitted, 'hand_in_button', 'fa-paper-plane', 'fa-check')
+    // Remove once we get rid of the old version
+    $('#hand_in_button')
+      .toggleClass('active-bluebar-btn', isSubmitted);
 
     // Show <...data-view="if-submitted"> only if we have a public url
     $('[data-view="if-submitted"]').toggle(isSubmitted);
     $('[data-view="if-not-submitted"]').toggle(!isSubmitted);
 
     theGlobalEditor.isReadOnly = isSubmitted;
+    // All of these are for the buttons added in the new version of the code-page
     $('#progress_bar').show()
     $('#program_name_container').show()
     $('#share_program_button').show()
@@ -1796,15 +1819,6 @@ function initializeShareProgramButtons() {
           throw new Error('This program does not have an id');
         }
         await postNoResponse(`/programs/share/${saveInfo.id}`, {})
-        const programPrivate = document.getElementById('share_private') as HTMLInputElement;
-        const programPublic = document.getElementById('share_public') as HTMLInputElement;
-        if (programPrivate && programPublic){
-          if (programPrivate.checked){
-            changeIconButton(false, 'share_program_button', 'fa-lock', 'fa-users')
-          } else if (programPublic.checked){
-            changeIconButton(true, 'share_program_button', 'fa-lock', 'fa-users')
-          }
-        }
       });
     }
   })
@@ -1834,22 +1848,6 @@ function initializeHandInButton() {
       });
   });
 }
-
-  function changeIconButton(status: boolean, buttonName: string, icon1: string, icon2: string) {
-    const button = document.getElementById(buttonName);
-    if (button) {
-      const iconSpan = button.querySelector('span');
-      if (iconSpan) {
-        if (status){
-          iconSpan.classList.remove(icon1);
-          iconSpan.classList.add(icon2);
-        } else {
-          iconSpan.classList.add(icon1);
-          iconSpan.classList.remove(icon2);
-        }
-      }
-    }
-  }
 
 /**
  * Initialize copy to clipboard buttons.
@@ -1973,19 +1971,6 @@ export function goToLevel(level: any) {
   }
   window.location.pathname = newPath
   window.location.hash = hash
-}
-
-export function scrollToLastClickedButton(dropdown_id: string) {
-  const lastClickedButtonId = localStorage.getItem(dropdown_id);
-  if (lastClickedButtonId) {
-    const button = document.getElementById(lastClickedButtonId);
-    if (button) {
-      const dropdown = document.getElementById(dropdown_id);
-      if (dropdown){
-        dropdown.scrollTop = button.offsetTop - dropdown.offsetTop;
-      }
-    }
-  }
 }
 
 export function emptyEditor() {
