@@ -145,7 +145,7 @@ def task_compile_babel():
     """Compile .po files for use with Babel."""
     return dict(
         title=lambda _: 'Compile Babel files',
-        file_dep=pofiles,
+        file_dep=mergedpofiles,
         actions=[
             'pybabel compile -f -d translations',
         ],
@@ -301,20 +301,40 @@ def task_extract():
         actions=[
             # Save current files
             'cp messages.pot messages.pot.tmp',
-            *[f'cp {pofile} {pofile}.tmp' for pofile in pofiles],
+            *[f'cp {pofile} {pofile}.tmp' for pofile in rawpofiles],
 
             # Extract
             'pybabel extract -F babel.cfg -o messages.pot . --no-location --sort-output',
-            'pybabel update -i messages.pot -d translations -N --no-wrap',
+            'pybabel update -i messages.pot -d translations-raw -N --no-wrap',
 
             # Restore headers, remove tempfiles
             [python3, restore_po_header, 'messages.pot.tmp', 'messages.pot'],
             'rm messages.pot.tmp',
-            *[[python3, restore_po_header, f'{pofile}.tmp', pofile] for pofile in pofiles],
-            *[f'rm {pofile}.tmp' for pofile in pofiles],
+            *[[python3, restore_po_header, f'{pofile}.tmp', pofile] for pofile in rawpofiles],
+            *[f'rm {pofile}.tmp' for pofile in rawpofiles],
         ],
         # These commands print a bunch of progress to stderr that looks intimidating
         verbosity=0,
+    )
+
+
+def task_merge_translations():
+    """
+    Merge the translated content with the specified base language content.
+    """
+    yamls = glob('content-raw/*/*.yaml')
+    pos = glob('translations-raw/**/*.po')
+
+    return dict(
+        title=lambda _: 'Generate translated content',
+        file_dep=[
+            'tools/merge-translations.py',
+            *yamls,
+            *pos
+        ],
+        actions=[
+            [python3, 'tools/merge-translations.py']
+        ]
     )
 
 
@@ -349,7 +369,7 @@ def task_normalize_yaml():
     Makes indentation and key ordering uniform, even if the files get rewritten by
     Weblate.
     """
-    yamls = glob('content/**/*.yaml', recursive=True)
+    yamls = glob('content-raw/**/*.yaml', recursive=True)
 
     return dict(
         title=lambda _: 'Normalize YAML',
@@ -386,6 +406,7 @@ def task_frontend():
         task_dep=[
             'lezer_parsers',
             'tailwind',
+            'merge_translations',
             'typescript',
         ]
     )
@@ -519,5 +540,6 @@ def is_running_on_heroku():
 
 # These are used in more than one task. Find all .po files, and calculate the
 # .mo files that would be generated from them.
-pofiles = glob('translations/*/*/*.po')
-mofiles = [replace_ext(f, '.mo') for f in pofiles]
+rawpofiles = glob('translations-raw/*/*/*.po')
+mergedpofiles = glob('translations/*/*/*.po')
+mofiles = [replace_ext(f, '.mo') for f in mergedpofiles]
