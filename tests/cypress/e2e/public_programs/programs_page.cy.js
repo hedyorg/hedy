@@ -3,7 +3,6 @@ import { executeHelloWorldProgram, deleteProgram } from "../tools/programs/progr
 import { loginForTeacher } from "../tools/login/login";
 import { navigateToClass } from "../tools/classes/class";
 import { makeProfilePublic } from "../tools/profile/profile";
-import { goToProgramsPage } from "../tools/navigation/nav";
 
 describe("General tests for my programs page (with both custom teacher and built-in adventure)", () => {
     const programName = "myTestProgram";
@@ -44,7 +43,7 @@ describe("General tests for my programs page (with both custom teacher and built
         cy.getDataCy(adventure).click();
         // Paste example code and modify code
         cy.getDataCy(`paste_example_code_${adventure}`).click();
-        cy.getDataCy('editor').click();
+        cy.get('#editor .cm-content').click();
         cy.focused().type('print Hello world\nask Hello world?');
         cy.getDataCy('runit').click();
         cy.wait(500);
@@ -151,7 +150,7 @@ describe("General tests for my programs page (with both custom teacher and built
 
     describe('Test filters', () => {
         beforeEach(() => {
-            goToProgramsPage();
+            cy.visit(`${Cypress.env('programs_page')}`);
         })
         it("The level filter should show the appropiate programs", ()=>{        
             // After selecting level 2 only the programs from level 2 should ve visible

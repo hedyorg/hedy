@@ -2,39 +2,7 @@ import { loginForStudent, loginForTeacher, logout } from "../tools/login/login";
 import  { goToHedyLevel } from "../tools/navigation/nav";
 import { createClassAndAddStudents, addCustomizations } from '../tools/classes/class.js'
 
-describe('Test level dropdown', () => {
-  it('Is able to click on all 18 levels as a guest', () => {  
-    goToHedyPage();
-    for (let level = 2; level <= 18; level++) {
-      cy.getDataCy('dropdown_level_button').click();
-      cy.getDataCy(`level_button_${level}`).click();
-    }
-    cy.getDataCy('dropdown_level_button').click();
-    cy.getDataCy(`level_button_1`).click();
-  })
-
-  it('Is able to click on all 18 levels as a student', () => {
-    loginForStudent();
-    goToHedyPage();
-    for (let level = 2; level <= 18; level++) {
-      cy.getDataCy('dropdown_level_button').click();
-      cy.getDataCy(`level_button_${level}`).click();
-    }
-    cy.getDataCy('dropdown_level_button').click();
-    cy.getDataCy(`level_button_1`).click();
-  })
-
-  it('Is able to click on all 18 levels as a teacher', () => {  
-    loginForTeacher();
-    goToHedyPage();
-    for (let level = 2; level <= 18; level++) {
-      cy.getDataCy('dropdown_level_button').click();
-      cy.getDataCy(`level_button_${level}`).click();
-    }
-    cy.getDataCy('dropdown_level_button').click();
-    cy.getDataCy(`level_button_1`).click();
-  })
-
+describe('Go to level dropdown', () => {
   it('Is not able to go to disabled level 7', () => {  
     cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
     

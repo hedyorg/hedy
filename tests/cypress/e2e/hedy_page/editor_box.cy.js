@@ -15,8 +15,8 @@ describe('Is able to type in the editor box', () => {
 
       cy.focused().type('print Hello world');
       codeMirrorContent().should('have.text', 'print Hello world');
-      cy.getDataCy('runit').click();
-      cy.getDataCy('output').should('contain.text', 'Hello world');
+      cy.get('#runit').click();
+      cy.get('#output').should('contain.text', 'Hello world');
     });
   }
 });
@@ -32,12 +32,12 @@ describe('Test editor box functionality', () => {
   it('Ask modal should hold input and the answer should be shown in output', () => {
     cy.focused().type('print Hello world\nask Hello!\necho');
     codeMirrorContent().should('have.text', 'print Hello worldask Hello!echo');
-    cy.getDataCy('runit').click();
-    cy.getDataCy('output').should('contain.text', 'Hello world');
-    cy.getDataCy('ask_modal').should('be.visible');
+    cy.get('#runit').click();
+    cy.get('#output').should('contain.text', 'Hello world');
+    cy.get('#ask_modal').should('be.visible');
     cy.get('#ask_modal > form > div > input[type="text"]').type('Hedy!');
     cy.get('#ask_modal > form > div > input[type="submit"]').click();
-    cy.getDataCy('output').should('contain.text', 'Hedy!');
+    cy.get('#output').should('contain.text', 'Hedy!');
   });
 
   it('Ask modal shpuld be shown even when editing the program after clicking run and not answering the modal', () => {
@@ -45,28 +45,28 @@ describe('Test editor box functionality', () => {
     cy.focused().type('print Hello world\nask Hello!');
     // the \n is not shown as a charecter when you get the text
     codeMirrorContent().should('have.text', 'print Hello worldask Hello!');
-    cy.getDataCy('runit').click();
-    cy.getDataCy('output').should('contain.text', 'Hello world');
-    cy.getDataCy('ask_modal').should('be.visible');
+    cy.get('#runit').click();
+    cy.get('#output').should('contain.text', 'Hello world');
+    cy.get('#ask_modal').should('be.visible');
 
     // Now we edit the program and the ask modal should be hidden
     codeMirrorContent().click();
     cy.focused().type('!');
 
-    cy.getDataCy('ask_modal').should('not.be.visible');
+    cy.get('#ask_modal').should('not.be.visible');
 
     // Running program again and it should show the modal
-    cy.getDataCy('runit').click();
-    cy.getDataCy('output').should('contain.text', 'Hello world');
-    cy.getDataCy('ask_modal').should('be.visible');
+    cy.get('#runit').click();
+    cy.get('#output').should('contain.text', 'Hello world');
+    cy.get('#ask_modal').should('be.visible');
   });
 
   it ('When making an error the error modal should be shown', () => {
     cy.focused().type('echo');
     codeMirrorContent().should('have.text', 'echo');
-    cy.getDataCy('runit').click();
+    cy.get('#runit').click();
 
-    cy.getDataCy('errorbox').should('be.visible');
+    cy.get('#errorbox').should('be.visible');
     // The error should be about the lonely echo
     cy.getDataCy('error_details').should('contain.text', 'echo');
   });
@@ -74,9 +74,9 @@ describe('Test editor box functionality', () => {
   it ('When making an error the keywords must be highligted', () => {
     cy.focused().type('prin Hello world');
     codeMirrorContent().should('have.text', 'prin Hello world');
-    cy.getDataCy('runit').click();
+    cy.get('#runit').click();
 
-    cy.getDataCy('errorbox').should('be.visible');
+    cy.get('#errorbox').should('be.visible');
     // The error should be about the lonely echo
     cy.getDataCy('error_details').should('contain.text', 'prin');
     cy.get('[data-cy="error_details"] span').should('have.class', 'command-highlighted');

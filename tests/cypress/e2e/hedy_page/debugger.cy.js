@@ -20,14 +20,14 @@ describe('Test editor box functionality', () => {
       .should('have.class', 'cm-debugger-current-line');
 
     cy.get('#debug_continue').click();
-    cy.getDataCy('output').should('contain.text', 'Hello world');
+    cy.get('#output').should('contain.text', 'Hello world');
 
     codeMirrorLines()
       .eq(1)
       .should('have.class', 'cm-debugger-current-line');
 
     cy.get('#debug_continue').click();
-    cy.getDataCy('ask_modal').should('be.visible');
+    cy.get('#ask_modal').should('be.visible');
     cy.get('#ask_modal > form > div > input[type="text"]').type('Hedy!');
     cy.get('#ask_modal > form > div > input[type="submit"]').click();
 
@@ -37,7 +37,7 @@ describe('Test editor box functionality', () => {
 
     cy.get('#debug_continue').click();
 
-    cy.getDataCy('output').should('contain.text', 'Hedy!');
+    cy.get('#output').should('contain.text', 'Hedy!');
   });
 
   it('Test is, ask and sleep level 2', () => {
@@ -54,7 +54,7 @@ describe('Test editor box functionality', () => {
       .should('have.class', 'cm-debugger-current-line');
 
     cy.get('#debug_continue').click();
-    cy.getDataCy('ask_modal').should('be.visible');
+    cy.get('#ask_modal').should('be.visible');
     cy.get('#ask_modal > form > div > input[type="text"]').type('Hedy');
     cy.get('#ask_modal > form > div > input[type="submit"]').click();
 
@@ -63,7 +63,7 @@ describe('Test editor box functionality', () => {
       .should('have.class', 'cm-debugger-current-line');
 
     cy.get('#debug_continue').click();
-    cy.getDataCy('output').should('contain.text', 'Hello Hedy');
+    cy.get('#output').should('contain.text', 'Hello Hedy');
 
     codeMirrorLines()
       .eq(2)
@@ -75,7 +75,7 @@ describe('Test editor box functionality', () => {
       .should('have.class', 'cm-debugger-current-line');
 
     cy.get('#debug_continue').click();
-    cy.getDataCy('output').should('contain.text', 'Hedy is 15 years old.');
+    cy.get('#output').should('contain.text', 'Hedy is 15 years old.');
   });
 
   it('Test sleep, clear level 4', () => {
@@ -92,7 +92,7 @@ describe('Test editor box functionality', () => {
       .should('have.class', 'cm-debugger-current-line');
 
     cy.get('#debug_continue').click();
-    cy.getDataCy('output').should('contain.text', '3');
+    cy.get('#output').should('contain.text', '3');
 
     codeMirrorLines()
       .eq(1)
@@ -106,7 +106,7 @@ describe('Test editor box functionality', () => {
       .should('have.class', 'cm-debugger-current-line');
 
     cy.get('#debug_continue').click();
-    cy.getDataCy('output').should('be.empty');
+    cy.get('#output').should('be.empty');
   });
 
   it('Test if and else level 5, with condition true', () => {
@@ -196,7 +196,7 @@ describe('Test editor box functionality', () => {
       expect(texts).to.deep.eq(['print', "'Hedy is fun'"])
     })
     cy.get('#debug_continue').click();
-    cy.getDataCy('output').should('contain.text', 'Hedy is fun');
+    cy.get('#output').should('contain.text', 'Hedy is fun');
 
     cy.get('.cm-debugger-current-line > span').then(els => {
       const texts = [...els].map(getText);
@@ -209,7 +209,7 @@ describe('Test editor box functionality', () => {
       expect(texts).to.deep.eq(['print', "'Hedy is fun'"])
     })
     cy.get('#debug_continue').click();
-    cy.getDataCy('output').should('contain.text', 'Hedy is fun\nHedy is fun');
+    cy.get('#output').should('contain.text', 'Hedy is fun\nHedy is fun');
 
     cy.get('.cm-debugger-current-line > span').then(els => {
       const texts = [...els].map(getText);
@@ -222,7 +222,7 @@ describe('Test editor box functionality', () => {
       expect(texts).to.deep.eq(['print', "'Hedy is fun'"])
     })
     cy.get('#debug_continue').click();
-    cy.getDataCy('output').should('contain.text', 'Hedy is fun\nHedy is fun\nHedy is fun');
+    cy.get('#output').should('contain.text', 'Hedy is fun\nHedy is fun\nHedy is fun');
   });
 
 
@@ -260,7 +260,7 @@ describe('Test editor box functionality', () => {
       expect(texts).to.deep.eq(['print', "'Hedy is fun'"])
     })
     cy.get('#debug_continue').click();
-    cy.getDataCy('output').should('contain.text', 'Hedy is fun');
+    cy.get('#output').should('contain.text', 'Hedy is fun');
   });
 
 
@@ -289,13 +289,13 @@ describe('Test editor box functionality', () => {
       .eq(1)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
-    cy.getDataCy('output').should('contain.text', 'a');
+    cy.get('#output').should('contain.text', 'a');
 
     codeMirrorLines()
       .eq(2)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
-    cy.getDataCy('output').should('contain.text', 'a\nb');
+    cy.get('#output').should('contain.text', 'a\nb');
 
     codeMirrorLines()
       .eq(0)
@@ -306,13 +306,13 @@ describe('Test editor box functionality', () => {
       .eq(1)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
-    cy.getDataCy('output').should('contain.text', 'a\nb\na');
+    cy.get('#output').should('contain.text', 'a\nb\na');
 
     codeMirrorLines()
       .eq(2)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
-    cy.getDataCy('output').should('contain.text', 'a\nb\na\nb');
+    cy.get('#output').should('contain.text', 'a\nb\na\nb');
   });
 
   it('Test if with condition true', () => {
@@ -334,7 +334,7 @@ describe('Test editor box functionality', () => {
       .eq(1)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
-    cy.getDataCy('output').should('contain.text', 'Welcome Hedy');
+    cy.get('#output').should('contain.text', 'Welcome Hedy');
   });
 
 
@@ -356,7 +356,7 @@ describe('Test editor box functionality', () => {
       .eq(3)
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
-    cy.getDataCy('output').should('contain.text', 'Not Hedy');
+    cy.get('#output').should('contain.text', 'Not Hedy');
   });
 
   it('Test repeat with blocks', () => {
@@ -428,7 +428,7 @@ describe('Test editor box functionality', () => {
       .should('have.class', 'cm-debugger-current-line');
     cy.get('#debug_continue').click();
 
-    cy.getDataCy('output').should('contain.text', 'nice!');
+    cy.get('#output').should('contain.text', 'nice!');
   });
 
   it('Test flat if split between lines', () => {
@@ -454,7 +454,7 @@ describe('Test editor box functionality', () => {
 
     cy.get('#debug_continue').click();
 
-    cy.getDataCy('output').should('contain.text', 'meh');
+    cy.get('#output').should('contain.text', 'meh');
   });
 
   it('Test repeat with flat if split between lines inside', () => {
@@ -492,7 +492,7 @@ describe('Test editor box functionality', () => {
 
     cy.get('#debug_continue').click();
 
-    cy.getDataCy('output').should('contain.text', 'a');
+    cy.get('#output').should('contain.text', 'a');
   });
 
   describe('Test play with no variables', () => {

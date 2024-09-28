@@ -1,7 +1,6 @@
-import { goToProgramsPage } from '../../tools/navigation/nav.js';
 
 export function codeEditorContent() {
-  return cy.get('#editor > .cm-editor > .cm-scroller > .cm-content');
+    return cy.get('#editor > .cm-editor > .cm-scroller > .cm-content');
 }
 
 export function executeHelloWorldProgram(name) {
@@ -9,7 +8,8 @@ export function executeHelloWorldProgram(name) {
     // make sure to navigate to the wanted program tab.
     cy.getDataCy(`${name}`).click();
     // Execute program to save it
-    cy.getDataCy('editor').click();
+    cy.get('#editor .cm-content').click();
+    // empty textarea
     cy.focused().clear()
     cy.focused().type('print Hello world');
     cy.get('#editor .cm-content').should('contain.text', 'print Hello world');
@@ -37,4 +37,4 @@ export function deleteProgram(name) {
             })
             }
         })
-}
+} 

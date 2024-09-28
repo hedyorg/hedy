@@ -5,27 +5,41 @@ import { createClassAndAddStudents, navigateToClass } from '../tools/classes/cla
 let classname;
 let students;
 
-it('Should be able to enforce developer mode as a teacher', () => {
-  loginForTeacher();
-  cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
+describe('Developers mode', () => {
+    beforeEach(() => {
+      loginForTeacher();
+    })
+    it('Should toggle on and off', () => {
+      goToHedyPage();
+      
+      cy.get('#toggle_circle').click(); // Developers mode is switched on
+      cy.get('#adventures').should('not.be.visible');
 
-  ({classname, students} = createClassAndAddStudents());
-  navigateToClass(classname);
+      cy.get('#toggle_circle').click(); // Developers mode is switched off
+      cy.get('#adventures').should('be.visible');
+    })
 
-  cy.getDataCy('customize_class_button').click();
-  cy.getDataCy('developers_mode')
-    .should("not.be.checked")
-    .click()
+    it('Should be enforced developer mode', () => {
+      cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
 
-  cy.getDataCy('developers_mode')
-    .should("be.checked")
-  
-  cy.wait(1000)
-  cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
+      ({classname, students} = createClassAndAddStudents());
+      navigateToClass(classname);
 
-  logout();
-  loginForStudent(students[0]);
-  goToHedyPage();
-  
-  cy.getDataCy('adventures_tab').should('not.exist');
+      cy.getDataCy('customize_class_button').click();
+      cy.get("#developers_mode")
+        .should("not.be.checked")
+        .click()
+
+      cy.get("#developers_mode")
+        .should("be.checked")
+      
+      cy.wait(1000)
+      cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
+
+      logout();
+      loginForStudent(students[0]);
+      goToHedyPage();
+      
+      cy.get('#adventures').should('not.be.visible');
+    })
 })

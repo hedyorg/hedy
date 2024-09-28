@@ -6,6 +6,6 @@ describe('the hedy page', () => {
   });
 
   it('has a dropdown to pick speech language', () => {
-    cy.getDataCy('read_outloud').should('be.visible');
+    cy.get('#speak_dropdown').should('be.visible');
   });
 });

@@ -13,7 +13,7 @@ describe("Testing subset passed through the URL", () => {
 
         it('has a tracking pixel', () => {
             goToPage(`/hour-of-code/${level}?subset=${subset.join(",")}`)
-            cy.getDataCy("tracking_pixel").should("exist")
+            cy.get("#tracking_pixel").should("exist")
         })
     }
 })

@@ -1952,7 +1952,7 @@ def render_code_in_editor(level):
         editor_contents=code)
     adventures = [a]
 
-    return render_template("hedy-page/code-page.html",
+    return render_template("code-page.html",
                            specific_adventure=True,
                            level_nr=str(level),
                            level=level,
@@ -2021,7 +2021,7 @@ def get_specific_adventure(name, level, mode):
     initial_tab = name
     initial_adventure = adventures[0]
 
-    return render_template("hedy-page/code-page.html",
+    return render_template("code-page.html",
                            specific_adventure=True,
                            level_nr=str(level),
                            commands=commands,
