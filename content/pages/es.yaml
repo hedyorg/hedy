@@ -91,7 +91,7 @@ start-sections:
     text: |-
         Bienvenido a Hedy, estamos encantados de ayudarle a empezar con Hedy.
 
-        Nuestro [Manual del Profesor](http://localhost:8080/for-teachers/manual) tiene una visión general de todas las características en detalle, pero esta página tiene un breve resumen para que sepa lo que es lo que antes de sumergirse.
+        Nuestro [Manual del Profesor](https://www.hedy.org/for-teachers/manual) tiene una visión general de todas las características en detalle, pero esta página tiene un breve resumen para que sepa lo que es lo que antes de sumergirse.
 
         Algunos aspectos destacados que son importantes saber:
         * ¡Hedy es una herramienta diseñada para ayudar a gestionar un aula de programación infantil! Usted puede crear sus propias clases, planes de lecciones y seguir cómo los niños están haciendo.
@@ -302,11 +302,11 @@ teacher-guide:
         text: |-
             Cada nivel contiene diferentes aventuras que puedes encontrar en las pestañas rosas. La primera pestaña rosa explica los nuevos comandos de este nivel.
             Las siguientes pestañas son aventuras que los alumnos pueden probar y hacer suyas.
-            Las aventuras están ordenadas de la más fácil a la más difícil, por lo que recomendamos empezar por la izquierda e ir avanzando hacia la derecha.
-            La última pestaña, "qué sigue", ofrece un pequeño adelanto de lo que aprenderás en el siguiente nivel. Por supuesto, puedes seleccionar las aventuras que quieres que tus alumnos hagan en cada nivel.
+            Las aventuras están ordenadas de la más fácil a la más difícil, así que te recomendamos que empieces por la izquierda y sigas hacia la derecha.
+            La última pestaña, «qué sigue», ofrece un pequeño adelanto de lo que aprenderás en el siguiente nivel. Por supuesto, puedes seleccionar las aventuras que quieres que tus alumnos hagan en cada nivel.
             No siempre tienen que hacer todas las aventuras. Cada aventura contiene un código de ejemplo, que los alumnos pueden probar con el botón verde.
             El código de ejemplo se copia en el campo de trabajo, donde los alumnos pueden probar el código y ajustarlo para hacerlo suyo.
-            Estimule a sus alumnos para que conviertan los códigos de ejemplo en sus propios proyectos, añadiendo sus propias ideas y creando su propia variación de la aventura.
+            Estimule a sus alumnos para que conviertan el código de ejemplo en sus propios proyectos, añadiendo sus propias ideas y creando su propia variación de la aventura.
     -   title: Concursos y rompecabezas
         text: |-
             Para evaluar si tus alumnos han aprendido toda la nueva información en el nivel, puedes permitirles que hagan un cuestionario.
@@ -419,9 +419,7 @@ teacher-guide:
 -   title: Errores frecuentes
     key: errores_comunes
     intro: |-
-        Tu puedes aprender de tus errores, especialmente programando!
-        Errar es inevitable y una gran oportunidad para aprender, pero para los profesores puede ser difícil encontrar la solución correcta a un error!
-        Especialmente mientras el código crece junto a al progreso de los niveles. Es por esto que hemos hecho una lista de los errores frecuentes en cada nivel y sus soluciones.
+        De los errores se aprende, sobre todo en programación. Cometer errores es inevitable y una gran oportunidad para aprender, pero para los profesores puede ser un reto encontrar la solución correcta a un error. Sobre todo porque los programas son cada vez más largos a medida que los alumnos avanzan de nivel. Por eso hemos elaborado una lista con los errores más frecuentes en cada nivel y sus soluciones.
     levels:
     -   level: '1'
         sections:
@@ -465,7 +463,7 @@ teacher-guide:
                 error_code: |-
                     {forward} 300
                     {turn} 90
-                solution_text: En el ejemplo, los alumnos tienden a pensar que el comando girar no funciona. Aunque sí funciona, no se puede ver que sucede fuera de la pantalla. Utiliza números más pequeños para evitar que esto ocurra.
+                solution_text: En el ejemplo, los estudiantes tienden a pensar que el comando de giro falló, a pesar de que hizo lo que se suponía que debía hacer. Lo que ocurrió es que la tortuga sobrepasó los límites de la pantalla. Utiliza números más pequeños para evitar que esto ocurra.
                 solution_code: |-
                     {forward} 100
                     {turn} 90
@@ -645,7 +643,7 @@ teacher-guide:
                     estado_animo {is} {ask} '¿Cómo estás?'
         -   title: Los alumnos utilizan las comillas equivocadas
             example:
-                error_text: Es importante empezar tu clase comprobando si los alumnos saben como usar las comillas adecuadamente. Sino podrían usar las "comillas dobles" o las `torcidas`.
+                error_text: Es importante empezar la clase comprobando si los alumnos saben escribir correctamente las comillas. En Hedy, los alumnos pueden utilizar comillas simples ('') y dobles («»). Por otro lado, los puntos suspensivos no se consideran comillas válidas (``).
                 error_code: |-
                     {print} `Bienvenido al restaurante`
                     comida {is} {ask} "¿Qué te gustaría pedir?"
@@ -687,7 +685,7 @@ teacher-guide:
                     {else} {print} '¡no mola tanto!'
         -   title: Los estudiantes aún olvidan las comillas en ambos lados
             example:
-                error_text: Los códigos que usan el comando `if` pueden extenderse mucho y los alumnos tienden a olvidar usar comillas.
+                error_text: El uso del comando `if` puede hacer que las líneas de código sean muy largas y los alumnos tienden a olvidar el uso de las comillas.
                 error_code: |-
                     {if} nombre {is} Hedy {print} divertido
                     {else} {print} '¡meh!
@@ -705,16 +703,16 @@ teacher-guide:
                 solution_code: |-
                     {if} nombre {is} Hedy {print} 'divertido'
                     {else} {print} '¡meh!
-        -   title: Los estudiantes usan nombres largos para las variables que contienen dos palabras
+        -   title: Los alumnos utilizan nombres de variables largos que contienen dos o más palabras
             example:
-                error_text: Una variable debería llamarse con una palabra. Puedes usar un guion bajo para conectar dos palabras. Eso cuenta como una.
+                error_text: Las variables en Hedy no pueden contener espacios, por lo que, con el fin de utilizar juntos varias palabras, los estudiantes necesitan para conectarlos utilizando guiones bajos (_)
                 error_code: puerta elegida es preguntar  ¿Qué puerta eliges?
                 solution_text: Añade un guion bajo.
                 solution_code: puerta_elegida {is} {ask} '¿qué puerta eliges?'
         -   title: Los alumnos quieren varias respuestas correctas
             example:
-                error_text: Por ejemplo este alumno Hedy le dice a todos sus amigos que son divertidos, pero a otros compañeros les diría que no lo son.
-                error_code: "{if} nombre {is} Jesse, David, Souf imprimir  Eres divertido  {else} {print} 'No eres divertido'"
+                error_text: Por ejemplo, este alumno quiere que Hedy diga a todos sus amigos que son graciosos, mientras que a otros compañeros debería decirles que no lo son.
+                error_code: "{if} nombre {is} Jesse, David, Souf {print} 'Eres divertido' {else} {print} 'No eres divertido'"
                 solution_text: |-
                     Puedes usar el comando `{in}` para eso. Se explica en un nivel superior, pero ya funciona en el nivel 5.
                     Otra solución es usar varios comandos `{if}` y no comando `{else}`. La desventaja es que no le dirá a los otros compañeros que no son divertidos.
@@ -793,7 +791,7 @@ teacher-guide:
                     {print} bebida
         -   title: Los alumnos hacen programas que tardan demasiado en ejecutar
             example:
-                error_text: En este nivel es muy fácil hacer códigos extensos. Los alumnos no tienen permitido hacer programas que tarden mucho en cargar (para proteger nuestros servidores).
+                error_text: En este nivel es muy fácil hacer programas que tarden mucho en completarse. Si el programa tarda demasiado, se detendrá, esto con la intención de evitar forzar la máquina al alumno.
                 error_code: "{repeat} 100 {times} {print} '¿Cuántas veces puedo repetir esto?'"
                 solution_text: Asegúrate que el código no tarda mucho en ejecutarse
                 solution_code: "{repeat} 20 {times} {print} 'Esto es suficiente'"
@@ -801,7 +799,7 @@ teacher-guide:
         sections:
         -   title: Los alumnos usan la sangría mal
             example:
-                error_text: La sangría es un nuevo concepto de este nivel, es complicada de usar para algunos alumnos. Asegúrate que practican algunos códigos sencillos antes de hacer un programa entero con ella.
+                error_text: La sangría es un concepto nuevo en este nivel, y para algunos alumnos puede resultar difícil de aprender. Asegúrate de que practiquen algunos ejemplos sencillos antes de hacer un programa completo con ella.
                 error_code: |-
                     {repeat} 3 {times}
                     {print} 'hola'
@@ -842,7 +840,7 @@ teacher-guide:
                         {print} '¡Hip Hip Hurra!'
         -   title: Los alumnos hacen programas que tardan demasiado en ejecutar
             example:
-                error_text: En este nivel es muy fácil hacer códigos extensos. Los alumnos no tienen permitido hacer programas que tarden mucho en cargar (para proteger nuestros servidores).
+                error_text: En este nivel es muy fácil hacer programas que tarden mucho en completarse. Si el programa tarda demasiado, se detendrá, esto con la intención de evitar forzar la máquina al alumno.
                 error_code: |-
                     {repeat} 100 {times}
                         {print} '¿Cuántas veces puedo repetir esto?'
@@ -853,9 +851,9 @@ teacher-guide:
         -   title: Los alumnos usan el comando `{if}` para comprobar si el valor de la variable es el mismo que el nombre de la variable
             example:
                 error_text: |-
-                    Hemos visto este error por algunos de nuestros alumnos. Hacen una contraseña para su ordenador, pero llaman a la contraseña 'contraseña'.
-                    En la línea 2 se pide al ordenador comprobar si la variable contraseña es la misma que la variable contraseña, por lo que sí. Lo que significa que la respuesta siempre es sí.
-                    Así que con este código la respuesta siempre será 'Puedes entrar' sin importar lo que el jugador ponga.
+                    Hemos observado un error común entre nuestros alumnos: intentan crear un programa que compruebe si hay una contraseña, pero hacen que la contraseña sea 'password'.
+                    En la línea 2 se pide al ordenador que compruebe si la variable contraseña es la misma que la variable contraseña, por lo tanto sí. Lo que significa que la respuesta es siempre sí.
+                    Así que con este código la respuesta siempre será 'Puedes entrar' sin importar lo que el jugador rellene.
                 error_code: |-
                     contraseña {is} {ask} '?Cuál es la contraseña?'
                     {if} contraseña {is} contraseña
