@@ -1812,7 +1812,7 @@ def tryit(level, program_id):
         "hedy-page/code-page.html",
         level_nr=str(level_number),
         level=level_number,
-        current_page='hedy',
+        current_page='tryit',
         max_level=max_level,
         prev_level=prev_level,
         next_level=next_level,

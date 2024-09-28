@@ -30,7 +30,7 @@
                 </button>
                 <button data-cy="back_level" id="back_level" 
                         class="blue-btn-new flex-initial flex flex-row gap-2 align-middle items-center	 w-fit next-tab justify-self-end mb-1 hidden"
-                        onclick="location.href = '/hedy/{{ level - 1 }}'"
+                        onclick="location.href = '/tryit/{{ level - 1 }}'"
                 >
                     <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}"></span>
                     <p class="m-0 p-0">{{_('advance_button')|replace("{level}", level - 1)}}</p>                    
