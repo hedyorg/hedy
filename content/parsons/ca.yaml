@@ -139,11 +139,11 @@ levels:
                 {repeat} 3 {times} {print} 'Daddy shark tututututudu'
                 {print} 'Daddy shark'
         2:
-            story: Crea la cançó "Les rodes de l'autobús fan voltes i voltes"
+            story: Crea la cançó "Les rodes de l'autobús van girant"
             code: |-
-                {print} "les rodes de l'autobús van"
-                {repeat} 3 {times} {print} "volt i rodó"
-                {print} "les rodes de l'autobús fan voltes"
+                {print} "les rodes de l'autobús girant"
+                {repeat} 3 {times} {print} "van rodant"
+                {print} "les rodes de l'autobús girant, van rodant, van rodant"
                 {print} "per tota la ciutat"
     8:
         1:
@@ -177,8 +177,8 @@ levels:
     10:
         1:
             story: |-
-                Ajuda aquesta família creant un calendari per saber qui està cuinant i què li toca a fer a cadascú aquesta setmana. Les comandes d'eliminació s'asseguren que ningú ha de cuinar dues vegades i per garantir un sopar diferent cada dia.
-                **Atenció!** l'ordre de les variables hauria de ser primer dies, després persones i finalment opcions_sopar. Això també convé a les línies amb ordres d'eliminació.
+                Ajuda aquesta família creant un calendari per saber qui està cuinant i què li toca a fer a cadascú aquesta setmana. Amb la comanda `{remove}` assegurem que ningú ha de cuinar dues vegades i per garantir un sopar diferent cada dia.
+                **Atenció!** L'ordre de les variables hauria de ser primer dies, després persones i finalment opcions_sopar. Això també implica a les línies amb la comanda `{remove}`.
             code: |-
                 dies = dilluns, dimarts, dimecres, dijous, divendres
                 persones = la mare, el pare, en Martí, l'Anna, la Júlia
@@ -215,7 +215,7 @@ levels:
         2:
             story: |-
                 Crea un programa que ens expliqui els resultats finals de la fira de la ciència. Primer defineix la variable concursants, després la variable lloc.
-                **Pista** La línia 5 hauria de ser la comanda sleep (dorm), i hauríeu d'acabar dient felicitats.
+                **Pista** La línia 5 hauria de tenir la comanda sleep (dorm), i hauries d'acabar amb un text de felicitació.
             code: |-
                 {print} 'And now we will reveal the results of the science fair'
                 contestants = Vivienne, Paul, Trixy, Bianca, Katya
@@ -228,7 +228,7 @@ levels:
     12:
         1:
             story: |-
-                Sing the song 'What shall we do with the drunken sailor'. In case you don't know it, the song goed like this:
+                Canta la cançó 'What shall we do with the drunken sailor' (Què farem amb el mariner borratxo). Si no la saps va així:
 
                 What will we do with the drunken sailor
                 What will we do with the drunken sailor
@@ -239,16 +239,16 @@ levels:
                 Way hey and up she rises
                 Early in the morning
             code: |-
-                verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'
-                {for} verse {in} verses
+                versos = 'What will we do with the drunken sailor', 'Way hey and up she rises'
+                {for} vers {in} versos
                     {for} count {in} {range} 1 {to} 3
-                        {print} verse
+                        {print} vers
                     {print} 'Early in the morning'
         2:
-            story: Play a game of Twister with us! First define the variable people, then limbs, then colors.
+            story: Juga al Twister amb nosaltres! Primer defineix la variable persones, després les extremitats i en acabat els colors.
             code: |-
-                people = 'Jess', 'Nick', 'Winston'
-                limbs = 'left hand', 'left foot', 'right hand', 'right foot'
-                colors = 'red', 'blue', 'green', 'yellow'
-                {for} person {in} people
-                    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}
+                gent = "Jordi", "Clark", "Omar"
+                extremitats = "mà esquerre", "peu esquerre", "mà dret", "peu dret"
+                colors = "red", "blue", "green", "yellow"
+                {for} person {in} gent
+                    {print} person ", posa el/la " extremitats {at} {random} " a " colors {at} {random}

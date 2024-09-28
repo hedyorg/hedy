@@ -95,6 +95,7 @@ adventures:
                     Torna als nivells anteriors i copia el teu codi de la història. Fes funcionar el codi en aquest nivell afegint cometes als llocs adequats.
                     Recorda: Les variables de la teva pròpia història han d'estar fora de les cometes. Igual que a la segona línia de l'exemple de codi. En aquesta línia, la variable nom es col·loca fora de les cometes.
                 example_code: |
+                    ```
                     nom {is} {ask} _ Com et dius? _
                     {print}  _ El protagonista es diu _ nom
                     _
@@ -104,6 +105,7 @@ adventures:
                     animals {is} 🦔, 🐿, 🦉, 🦇
                     {print} _ Sent el so de _ animals {at} {random}
                     {print} name _ li fa por que estigui en un bosc encantat _
+                    ```
             5:
                 story_text: |
                     En aquest nivell, pots programar diferents finals, cosa que farà que la teva història sigui encara més divertida.
@@ -177,9 +179,9 @@ adventures:
                         {print} 'Robin sees an interesting looking book'
                         book = {ask} 'Does Robin buy the book?'
                         {if} book {is} yes
-                            {print} 'Robin buys the book and goes home'
+                        _{print} 'Robin buys the book and goes home'
                         {else}
-                            {print} 'Robin leaves the shop and goes home'
+                        _{print} 'Robin leaves the shop and goes home'
                     {else}
                         {print} 'Robin goes home'
                     ```
@@ -188,23 +190,16 @@ adventures:
                     In this level you can use the {for} command in your story. In this way you could easily program the children's book 'brown bear, brown bear, what do you see'.
                 example_code: |
                     ```
-                    animals = red bird, black sheep, green frog, yellow duck, little child
-                    {print} 'brown bear'
-                    {print} 'brown bear'
-                    {print} 'What do you see?'
-                    {for} animal {in} animals
-                        {print} 'I see a ' animal ' looking at me'
-                        {print} animal
-                        {print} animal
-                        {print} 'What do you see?'
-                    {print} 'I see all the animals looking at me!'
+                    animals = _ , _ , _ 
+                    {print} 'Os bru, Os bru'
+                    {print} 'Què veus?'
                     ```
             12:
                 story_text: In this level you can use the quotation marks to save multiple words in a variable.
                 example_code: |
                     ```
                     nom = "La Reina d'Englaterra"
-                    {print} nom ' menjava un tall de pastís, quan de sopte...'
+                    {print} nom ' menjava un tall de pastís, quan de sopte…'
                     ```
             13:
                 story_text: |
@@ -264,9 +259,9 @@ adventures:
                     {print}('Benvingut a aquesta història!')
                     ```
     add_remove_command:
-        name: '{add} {to} & {remove} {from}'
+        name: '{add} {to_list} & {remove} {from}'
         default_save_name: comanda_afegir_borrar
-        description: Introduint afegeix i esborra de
+        description: Introduint {add} {to_list} i {remove} {from}
         levels:
             3:
                 story_text: |
@@ -305,7 +300,7 @@ adventures:
     and_or_command:
         name: '{and} & {or}'
         default_save_name: i o
-        description: Introduint i o
+        description: Introduint {and} & {or}
         levels:
             13:
                 story_text: |-
@@ -322,7 +317,7 @@ adventures:
     ask_command:
         name: '{ask}'
         default_save_name: comanda_pregunta
-        description: Introducció a la comanda preguntar
+        description: Introducció a la comanda {ask}
         levels:
             1:
                 story_text: |
@@ -334,8 +329,9 @@ adventures:
                     {ask} Com et dius?
                     ```
                 story_text_2: |
-                    ## The echo command
-                    If you want the computer to repeat the answer, you can use the `{echo}` command. The answer will then be echoed back at the end of the sentence, so in this example after hello.
+                    ## La comanda `{echo}`
+                    Si vols que l'ordinador et repeteixi la resposta, pots utilitzar l'ordre `{echo}`. La resposta es mostrarà al final de la frase, com en aquest exemple després d'hola.
+                    .
                 example_code_2: |
                     ```
                     {print} Hola!
@@ -375,8 +371,8 @@ adventures:
                     Copia el teu codi de la pestanya anterior i fes que les variables siguin interactives mitjançant la comanda `{ask}`.
                 example_code_2: |
                     ```
-                    animals_preferits {is} {ask} Quin són els teus animals preferits?
-                    {print} M'agrada els/les animals_preferits
+                    animal_preferit {is} {ask} Quin és el teu animal preferit?
+                    {print} M'agrada el animal_preferit
                     ```
             18:
                 story_text: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
@@ -389,7 +385,7 @@ adventures:
     blackjack:
         name: Blackjack
         default_save_name: Blackjack
-        description: Try to get as close to 21 as you can
+        description: Intenta apropar-te tant com puguis a 21
         levels:
             17:
                 story_text: |
@@ -577,19 +573,19 @@ adventures:
                         _
                     ```
     calculator:
-        name: Calculator
-        default_save_name: Calculator
-        description: Create a calculator
+        name: Calculadora
+        default_save_name: Calculadora
+        description: Crea una calculadora
         levels:
             6:
                 story_text: |
                     Now that you can do maths, you can make a calculator yourself!
                 example_code: |
                     ```
-                    number_1 {is} {ask} 'Fill in the first number:'
-                    number_2 {is} {ask} 'Fill in the second number:'
-                    correct_answer = number_1 * number_2
-                    {print} number_1 ' times ' number_2 ' is ' correct_answer
+                    nombre_1 = {ask} 'Escriu el primer nombre:'
+                    nombre_2 = {ask} 'Escriu el segon nombre:'
+                    resposta_correcta = nombre_1 * nombre_2
+                    {print} nombre_1 ' per ' nombre_2 ' és ' resposta_correcta
                     ```
                 story_text_2: |
                     ### Exercise
@@ -597,21 +593,23 @@ adventures:
                     Fill in the blanks to make it complete!
                 example_code_2: |
                     ```
-                    correct_answer = 11 * 27
-                    answer = {ask} 'How much is 11 times 27?'
-                    {if} answer {is} _ {print} 'good job!'
-                    {else} {print} 'Wrong! It was ' _
+                    resposta_correcta = 11 * 27
+                    resposta = {ask} 'Quant és 11 per 27?'
+                    {if} resposta {is} _ {print} 'Bona feina!'
+                    {else} {print} 'Incorrecte! Era ' _
                     ```
                 story_text_3: |
-                    You can also let the computer do random calculations on its own using {random}.
-                example_code_3: |
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    number_1 = _
-                    number_2 = _
-                    correct_answer = number_1 * number_2
-                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
+                    **Extra** També pots deixar que l'ordinador faci productes aleatoris per ell mateix utilitzant `{random}`.
+                example_code_3: |-
+                    ```
+                    nombres = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    nombre_1 = _
+                    nombre_2 = _
+                    resposta_correcta = nombre_1 * nombre_2
+                    resposta_dada = {ask} 'Quin és ' nombre_1 ' per ' nombre_2 '?'
                     {if} _
                     {else} _
+                    ```
             9:
                 story_text: |
                     In a previous level you've created a calculator, in this level you can expand that code so it asks multiple questions.
@@ -677,18 +675,26 @@ adventures:
                 example_code: |
                     ```
                     number = 10
-                    {for} i {in} {range} 1 to 10
+                    {for} i {in} {range} 1 {to} 10
                         {print} i * number
                     ```
             12:
                 story_text: |
-                    Now you can make a calculator that works for decimal numbers. Fill in the blanks to get it to work properly!
+                    En aquest nivell, pots fer una calculadora que funcioni amb nombres decimals.
+
+                    ### Exercici 1
+                    Omple els buits per completar la calculadora. Recorda utilitzar un punt i no una coma per als nombres decimals.
+
+                    ### Exercici 2
+                    Crea un nou programa de pràctica matemàtica, però ara utilitza nombres decimals. 
+                    Crea una llista de nombres, tria'n dos per multiplicar i deixa que el jugador respongui. 
+                    I, per descomptat, has de validar la resposta! **Extra** Augmenta la dificultat afegint vides: un jugador perd una vida per cada resposta incorrecta i el joc acaba després de tres respostes incorrectes.
                 example_code: |
                     ```
-                    number1 = {ask} 'What is the first number?'
-                    number2 = {ask} 'What is the second number?'
-                    answer = _
-                    {print} number1 ' plus ' number2 ' is ' answer
+                    nombre1 = {ask} 'Quin és el primer nombre?'
+                    nombre2 = {ask} 'Quin és el segon nombre?'
+                    resposta = _
+                    {print} nombre1 ' més ' nombre2 ' és ' _
                     ```
             13:
                 story_text: |
@@ -701,8 +707,8 @@ adventures:
                     Empty the programming field and create your own solution.
                 example_code: |
                     ```
-                    answer1 = {ask} 'What is 10 times 7?'
-                    answer2 = {ask} 'What is 6 times 7?'
+                    resposta1 = {ask} 'Quin és 10 per 7?'
+                    resposta2 = {ask} 'Quin és 6 per 7?'
                     {if} _ _ _ _ _ _ _
                         {print} _
                     ```
@@ -789,7 +795,7 @@ adventures:
     clear_command:
         name: '{clear}'
         default_save_name: clear_command
-        description: clear command
+        description: comanda {clear}
         levels:
             4:
                 story_text: |
@@ -809,85 +815,85 @@ adventures:
                     {print} 'SURPRISE!'
                     ```
     debugging:
-        name: debugging
-        default_save_name: debugging
-        description: debugging adventure
+        name: depuració
+        default_save_name: depuració
+        description: l'aventura de depurar
         levels:
             1:
                 story_text: |-
-                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
-                    That means that in these debugging adventures, we will show you code that does not work yet.
-                    You will have to figure out what's wrong and correct the mistakes.
+                    Benvingut a una aventura de depuració. Depurar un codi significa eliminar errors en el codi.
+                    Això vol dir que en aquestes aventures de depuració, t'ensenyarem codi que encara no funciona.
+                    Hauràs de descobrir què està malament i corregir els errors.
 
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercici
+                    Depura aquest codi. Bona sort!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Advertència! Aquest codi necessita ser depurat!**
                     ```
-                    {print} I love programming
-                    Do you love programming too?
+                    {print} M'encanta programar
+                    T'agrada programar també?
                     {echo}
-                    {print} What are your hobbies?
-                    {echo} Your hobbies are
+                    {print} Quins són les teves aficions?
+                    {echo} Les teves aficions són
                     ```
             2:
                 story_text: |-
-                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
-                    That means that in these debugging adventures, we will give you a code that does not work yet.
-                    You will have to figure out what's wrong and correct the mistakes.
+                    Benvingut a una aventura de depuració. Depurar un codi significa eliminar errors en el codi.
+                    Això vol dir que en aquestes aventures de depuració, et donarem un codi que encara no funciona.
+                    Hauràs de descobrir què està malament i corregir els errors.
 
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercici
+                    Depura aquest codi. Bona sort!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Advertència! Aquest codi necessita ser depurat!**
                     ```
-                    destination {ask} Where are you going on holidays?
-                    {print} The flight to dstination leaves at 3 pm.
-                    {ask} Did you check in your luggage yet?
+                    destinacio {ask} On vas de vacances?
+                    {print} El vol surt a les 3 de la tarda.
+                    {ask} Ja has fet el check-in del teu equipatge?
                     {echo}
-                    {print} Let me print your boarding pass for you.
+                    {print} Deixa'm imprimir-te la targeta d'embarcament.
                     {sleep}
-                    Here you go! Have a nice trip!
+                    Aquí tens! Que tinguis un bon viatge!
                     ```
             3:
                 story_text: |-
-                    Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
-                    That means that in these debugging adventures, we will give you a code that does not work yet.
-                    You will have to figure out what's wrong and correct the mistakes.
+                    Benvingut a una aventura de depuració. Depurar un codi significa eliminar errors en el codi.
+                    Això vol dir que en aquestes aventures de depuració, et donarem un codi que encara no funciona.
+                    Hauràs de descobrir què està malament i corregir els errors.
 
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercici
+                    Depura aquest codi. Bona sort!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Advertència! Aquest codi necessita ser depurat!**
                     ```
-                    movie_choices {is} dracula, fast and furious, home alone, barbie
-                    chosen_movie {is} movies {at} {random}
-                    {print} Tonight we will watch chosen _movies
-                    like {ask} Do you like that movie?
-                    {print} Tomorrow we will watch something else.
-                    {add} chosen_movie {to} movie_choices
-                    {print} Tomorrow we will watch tomorrows_movie
-                    tomorrows_movie {is} movie_choices {at} {random}
-                    I'll go get the popcorn! {print}
+                    opcions_pelicula {is} dracula, fast and furious, solo en casa, barbie 
+                    pelicula_escollida {is} movies {at} {random}
+                    {print} Aquesta nit veurem _pelicula_escollida
+                    com {ask} T'agrada aquesta pel·lícula?
+                    {print} Demà veurem una altra cosa.
+                    {add} pelicula_escollida {to_list} opcions_pelicula
+                    {print} Demà veurem pelicula_dema
+                    pelicula_dema {is} opcions_pelicula {at} {random}
+                    Aniré a buscar les crispetes! {print}
                     ```
             4:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercici
+                    Depura aquest codi. Bona sort!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Advertència! Aquest codi necessita ser depurat!**
                     ```
-                    {print} 'Welcome to the online library!
-                    {ask} What genre of books do you like?
-                    {print} You like genre
-                    author {is} {ask} 'Who's your favorite author?'
-                    {print} 'author is your favorite author'
-                    {print} Hmmm... i think you should try... books {at} {random}
+                    {print} 'Benvingut a la biblioteca en línia!'
+                    {ask} Quin gènere de llibres t'agrada?
+                    {print} T'agrada el gènere
+                    autor {is} {ask} 'Qui és el teu autor preferit?'
+                    {print} 'autor és el teu autor preferit'
+                    {print} Hmmm... crec que hauries de provar... llibres {at} {random}
                     ```
             5:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercici
+                    Depura aquest codi. Bona sort!
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -907,8 +913,8 @@ adventures:
                     ```
             6:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercici
+                    Depura aquest codi. Bona sort!
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -929,21 +935,21 @@ adventures:
                     ```
             7:
                 story_text: |-
-                    ### Exercise
-                    Surprise! This program looks more like an output than a code. And yet, we don't want you to just add `{print}` commands in front of each line.
-                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jaques)' by using the {repeat} command of course!
+                    ### Exercici
+                    Sorpresa! Aquest programa sembla més una sortida que un codi. I, tanmateix, no volem que simplement afegeixis comandes `{print}` davant de cada línia.
+                    Arregla aquest programa per convertir-lo en la cançó infantil 'Frère Jacques' utilitzant la comanda {repeat}, és clar!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Advertència! Aquest codi necessita ser depurat!**
                     ```
-                    Are you sleeping?
-                    Brother John!
-                    Morning bells are ringing!
-                    Ding, dang, dong!
+                    Frère Jacques, frère Jacques,
+                    Dormez-vous? Dormez-vous?
+                    Sonnez les matines! Sonnez les matines!
+                    Ding, dang, dong. Ding, dang, dong.
                     ```
             8:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercici
+                    Depura aquest codi. Bona sort!
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -967,287 +973,264 @@ adventures:
                     ```
             9:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercici
+                    Depura aquest codi. Bona sort!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Advertència! Aquest codi necessita ser depurat!**
                     ```
-                    {print} 'Welcome to our sandwich shop'
-                    amount 'How many sandwiches would you like to buy?'
-                    {repeat} amount {times}
-                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
-                    types_of_bread {is} white, wheat, rye, garlic, gluten free
-                    {if} chosen_bread in types_of_bread
-                    {print} 'Lovely!'
+                    {print} "Benvingut a la nostra botiga d'entrepans"
+                    quantitat "Quants entrepans t'agradaria comprar?"
+                    {repeat} quantitat {times}
+                    {ask} {is} {ask} "Quin tipus de pa t'agradaria per al teu entrepà?"
+                    tipus_de_pa {is} blanc, blat, sègol, all, sense gluten
+                    {if} pa_elegit in tipus_de_pa
+                    {print} "Excel·lent!"
                     {else}
-                    'I'm sorry we don't sell that'
-                    topping {is} {ask} 'What kind of topping would you like?'
-                    sauce {is} {ask} 'What kind of sauce would you like?'
-                    {print} One chosen_bread with topping and sauce.
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
+                    "Ho sento, no venem això"
+                    guarnicio {is} {ask} "Quin tipus de guarnició t'agradaria?"
+                    salsa {is} {ask} "Quin tipus de salsa t'agradaria?"
+                    {print} Un pa_elegit amb guarnicio i salsa.
+                    preu = quantitat * 6
+                    {print} "Seran " preu " euros, si us plau"
                     ```
-
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
             10:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercici
+                    Depura aquest codi. Bona sort!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Advertència! Aquest codi necessita ser depurat!**
                     ```
-                    names = Muad Hasan Samira Noura
-                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
-                    {for} name {is} names
-                    {print} At the beach name loves to activity at random
+                    noms = Muad Hasan Samira Noura
+                    activitats = volar un estel, anar a nedar, fer senderisme, posar-se moreno
+                    {for} nom {is} noms
+                    {print} A la platja, nom li encanta activity {at} {random}
                     ```
             11:
                 story_text: |-
-                    ### Exercise
-                    Debug this calender program. The output of this program is supposed to look like a list of dates.
-                    For example:
+                    ### Exercici
+                    Depura aquest programa de calendari. La sortida d'aquest programa hauria de semblar una llista de dates.
+                    Per exemple:
 
                     ```
-                    Hedy calender
-                    Here are all the days of November
-                    November 1
-                    November 2
-                    November 3
+                    Calendari de Hedy
+                    Tots els dies de novembre:
+                    1 de novembre
+                    2 de novembre
+                    3 de novembre
                     ```
-                    And so on.
+                    I així successivament.
 
-                    Mind that you have to test your code extra carefully for the month February, because the amount of days in this month changes in leap years.
+                    Tingues en compte que has de provar el teu codi amb molta cura per al mes de febrer, ja que la quantitat de dies en aquest mes canvia als anys de traspàs.
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Advertència! Aquest codi necessita ser depurat!**
                     ```
-                    print 'Hedy calender'
-                    months_with_31 days = January, March, May, July, September, October, December
-                    months_with_30_days = April, June, August, November
-                    month = ask 'Which month would you like to see?'
-                    if month in months_with_31_days
-                        days = 31
-                        if month in months_with30_days
-                            days = 30
-                    if month = February
-                        leap_years = 2020, 2024, 2028, 2036, 2040, 2044, 2028
-                        year = ask 'What year is it?'
-                    if year in leap_years
-                        days = 29
-                    else
-                        days = 28
+                    {print} "Calendari de Hedy"
+                    mesos_amb_31_dies = Gener, Març, Maig, Juliol, Setembre, Octubre, Desembre
+                    mesos_amb_30_dies = Abril, Juny, Agost, Novembre
+                    mes = {ask} "Quin mes t'agradaria veure?"
+                    {if} mes {in} mesos_amb_31_dies
+                        dies = 31
+                        {if} mes {in} mesos_amb_30_dies
+                            dies = 30
+                    {if} mes = Febrer
+                        anys_de_traspàs = 2020, 2024, 2028, 2036, 2040, 2044, 2028
+                        any = {ask} "Quin any és?"
+                    {if} any {in} anys_de_traspàs
+                        dies = 29
+                    {else}
+                        dies = 28
 
-                    print 'Here are all the days of ' moth
-                    for i in range 1 to days
-                        print month i
+                    {print} "Aquí tens tots els dies de " mse
+                    {for} i {in} {range} 1 {to} dies
+                        {print} mes i
                     ```
             12:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercici
+                    Depura aquest codi. Bona sort!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Advertència! Aquest codi necessita ser depurat!**
                     ```
-                    define greet
-                    greetings = 'Hello', 'Hi there', 'Goodevening'
-                        print greetings at random
+                    {define} saludar
+                    greetings = "Hola", "Hola a tots", "Bona tarda"
+                        {print} greetings {at} {random}
 
-                    define take_order
-                        food = ask 'What would you like to eat?'
-                        print 'One food'
-                        drink = 'What would you like to drink?'
-                        print 'One ' drink
-                        more = ask 'Would you like anything else?'
-                            if more is 'no'
-                        print 'Alright'
-                            else
-                            print 'And ' more
-                    print 'Thank you'
+                    {define} prendre_comanda
+                        menjar = {ask} "Què t'agradaria menjar?"
+                        {print} "Un menjar"
+                        beguda = "Què t'agradaria beure?"
+                        {print} "Una " beguda
+                        mes = {ask} "Vols alguna cosa més?"
+                            {if} mes {is} "no"
+                        {print} "Molt bé"
+                            {else}
+                            {print} "I " mes
+                    {print} "Gràcies"
 
-                    print 'Welcome to our restaurant'
-                    people = ask 'How many people are in your party tonight?'
-                    for i in range 0 to people
-                        call greet_costumer
+                    {print} "Benvingut al nostre restaurant"
+                    persones = {ask} "Quantes persones sou aquesta nit?"
+                    {for} i {in} {range} 0 {to} persones
+                        {call} saludar_client
                     ```
             13:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercici
+                    Depura aquest codi. Bona sort!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Advertència! Aquest codi necessita ser depurat!**
                     ```
-                    defin movie_recommendation with name
-                        action_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'
-                        romance_movies = 'Love Actually', 'The Notebook', 'Titanic'
-                        comedy_movies = 'Mr Bean' 'Barbie''Deadpool'
-                        kids_movies = 'Minions', 'Paddington', 'Encanto'
-                        if name is 'Camila' or name is 'Manuel'
-                            recommended_movie = kids_movie at random
-                        if name is 'Pedro' or 'Gabriella'
-                                mood = ask 'What you in the mood for?'
-                            if mood is 'action'
-                                recommended_movie = comedy_movies at random
-                            if mood is 'romance'
-                                recommended_movie = romance_movies
-                        if mood is 'comedy'
-                                recommended_movie = comedy_movies at random
+                    {define} recomanacio_pelicula {with} nom
+                        pelicules_accio = "Die Hard", "Fast and Furious", "Malditos Bastardos"
+                        pelicules_romantiques = "Love Actually", "Barcelona nit d'estiu", "Titanic"
+                        pelicules_comedia = "Mr Bean", "Barbie", "La casa en flames"
+                        pelicules_nens = "Tintin", "Les tres bessones", "Inside out"
+                        {if} nom {is} "Camila" {or} nom {is} "Manel"
+                            pelicula_recomanada = pelicules_nens {at} {random}
+                        {if} nom {is} "Pere" {or} "Gabriella"
+                                estat_d_ànim = {ask} "Quin estat d'ànim tens?"
+                            {if} estat_d_ànim {is} "acció"
+                                pelicula_recomanada = pelicules_accio {at} {random}
+                            {if} estat_d_ànim {is} "romantica"
+                                pelicula_recomanada = pelicules_romantiques
+                            {if} estat_d_ànim {is} "comedia"
+                                pelicula_recomanada = pelicules_comedia {at} {random}
 
-                    print 'I would recommend ' recommended_movie ' for ' name
+                    {print} "Et recomanaria " pelicula_recomanada " per " nom
 
-                    name = ask 'Who is watching?'
-                    recommendation = ask 'Would you like a recommendation?'
-                    if recommendaion is 'yes'
-                    print movie_recommendation with name
-                    else
-                    print 'No problem!'
+                    nom = {ask} "Qui està mirant?"
+                    recomanacio = {ask} "Vols una recomanació?"
+                    {if} recomanacio {is} "sí"
+                    {print} recomanacio_pelicula {with} nom
+                    {else}
+                    {print} "Cap problema!"
                     ```
             14:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercici
+                    Depura aquest codi. Bona sort!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Advertència! Aquest codi necessita ser depurat!**
                     ```
-                    define calculate_heartbeat
-                        print 'Press your fingertips gently against the side of your neck'
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
-                        heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
-                        if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
-                        else
-                            if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
-                            if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
+                    {define} calcular_pulsacions
+                        {print} "Pressiona els dits suaument contra el costat del teu coll"
+                        {print} "(just sota de la mandíbula)"
+                        {print} "Conta el nombre de pulsacions que sents durant 15 segons"
+                        pulsacions == {ask} "Quantes pulsacions sents en 15 segons?"
+                        pols = pulsacions * 4
+                        {print} "El teu pols és " pols
+                        {if} pols >= 60 {or} pols <= 100
+                            {print} "El teu pols sembla estar bé"
+                        {else}
+                            {if} pols > 60
+                                {print} "El teu pols sembla massa baix"
+                            {if} pols < 100
+                                {print} "El teu pols sembla massa alt"
+                            {print} "Potser hauries de contactar amb un professional mèdic"
 
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
-                        call measure_heartbeat
-                    else
-                        'no problem'
+                    mesurar_pulsacio = {ask} "Vols mesurar el teu pols?"
+                    {if} mesurar_pulsacio = "sí"
+                        {call} calcular_pulsacions
+                    {else}
+                        "Cap problema"
                     ```
-
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
-                        heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
-                        if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
-                        else
-                            if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
-                            if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
-
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
-                        call measure_heartbeat
-                    else
-                        'no problem'
             15:
                 story_text: |-
-                    ### Exercise
-                    Debug this random children's story. Good luck!
+                    ### Exercici
+                    Depura aquesta història infantil aleatòria. Bona sort!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Advertència! Aquest codi necessita ser depurat!**
                     ```
-                    names = 'Tanya', 'Romy', 'Kayla', 'Aldrin', 'Ali'
-                    verbs='walking', 'skipping', 'cycling', 'driving', 'running'
-                    locations = 'on a mountaintop', 'in the supermarket', 'to the swimming pool'
-                    hiding_spots = 'behind a tree', under a table', in a box'
-                    sounds = 'a trumpet', 'a car crash', 'thunder'
-                    causes_of_noise = 'a television', 'a kid with firecrackers', 'a magic elephant', 'a dream'
+                    noms = "Tanya", "Romy", "Kayla", "Aldrin", "Ali"
+                    verbs = "caminant", "saltant", "ciclant", "conduint", "corrent"
+                    llocs = "en un cim", "al supermercat", "cap a la piscina"
+                    llocs_on = "darrera d'un arbre", "sota d'una taula", "dins d'una caixa"
+                    sons = "una trompeta", "un xoc de cotxes", "un tro"
+                    causes_de_sorolls= "un televisor", "un nen amb petards", "un elefant màgic", "un somni"
 
-                    chosen_ name = names at random
-                    chosen_verb = verbs at random
-                    chosen_location = 'locations at random'
-                    chosen_sounds = noises at random
-                    chosen_spot = hiding_spots random
-                    chosen_causes = causes_of_noise at random
+                    elegit_nom = noms {at} {random}
+                    elegit_verb = verbs {at} {random}
+                    elegit_lloc = llocs {at} {random}
+                    elegit_so = sons {at} {random}
+                    elegit_lloc = llocs_on {random}
+                    elegit_causa = causes_de_sorolls {at} {random}
 
-                    print chosen_name ' was ' chosen_verb ' ' chosen_location
-                    print 'when they suddenly heard a sound like ' sounds at random
-                    print chosen_name ' looked around, but they couldn't discover where the noise came from'
-                    print chosen_name ' hid ' chosen_spot'
-                    print 'They tried to look around, but couldn't see anything from there'
-                    hidden = 'yes'
-                    while hidden = 'yes'
-                        print chosen_name 'still didn't see anything'
-                    answer = ask 'does ' chosen_name ' move from their hiding spot?'
-                        if answer = 'yes'
-                            hidden == 'no'
-                    print 'chosen_name moved from' chosen_spot
-                    print 'And then they saw it was just' chosen_cause
-                    print chosen_name 'laughed and went on with their day'
-                    print The End
+                    {print} elegit_nom " estava " elegit_verb " " elegit_lloc
+                    {print} "quan de sobte van sentir un so com " sounds {at} {random}
+                    {print} elegit_nom " va mirar al seu voltant, però no va poder descobrir d'on venia el soroll"
+                    {print} elegit_nom " es va amagar " elegit_lloc
+                    {print} "Van intentar mirar al seu voltant, però no van poder veure res des d'allà"
+                    amagat = "sí"
+                    {while} amagat = "sí"
+                        {print} elegit_nom " encara no veia res"
+                    resposta = {ask} "Es mou " elegit_nom " del seu lloc d'amagat?"
+                        {if} resposta = "sí"
+                            amagat == "no"
+                    {print} elegit_nom " es va moure de " elegit_lloc
+                    {print} "I llavors van veure que només era " elegit_causa
+                    {print} elegit_nom " va riure i va continuar amb el seu dia"
+                    {print} "Fi"
                     ```
             16:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
-                    Tip: Make sure that you only see your score once in the end.
+                    ### Exercici
+                    Depura aquest codi. Bona sort!
+                    Consell: Assegura't que només vegis la teva puntuació una vegada al final.
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Advertència! Aquest codi necessita ser depurat!**
                     ```
-                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
-                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
-                    score = 0
-                    for i in range 0 to 10
-                        answer = ask 'What's the capital of ' countries[i]
-                        correct = capital[i]
-                        if answer = correct
-                            print 'Correct!'
-                        score = score + 1
-                        else
-                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
-                        print 'You scored ' score ' out of 10'
+                    país = ['Països Baixos', 'Catalunya', 'Turquia', 'Zimbabwe', 'Tailàndia', 'País Basc', 'Perú', 'Austràlia', 'Índia', 'Romania']
+                    capitals = 'Amsterdam', 'Barcelona', 'Istanbul', 'Harare', 'Bangkok', 'Bilbao', 'Lima', 'Canberra', 'Nova Delhi', 'Bucarest'
+                    puntuació = 0
+                    {for} i {in} {range} 0 {to} 10
+                        resposta = {ask} 'Quina és la capital de ' país[i]
+                        correcte = capitals[i]
+                        {if} resposta = correcte
+                            {print} 'Correcte!'
+                        puntuació = puntuació + 1
+                        {else}
+                            {print} 'Incorrecte, ' capitals[i] ' és la capital de ' país[i]
+                    {print} 'Has obtingut ' puntuació ' de 10'
 
                     ```
             17:
                 story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
+                    ### Exercici
+                    Depura aquest codi. Bona sort!
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **Advertència! Aquest codi necessita ser depurat!**
                     ```
-                    define food_order
-                        toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                        size = ask 'big, medium or small?'
-                        number_of_pizza = ask 'How many these pizzas would you like?'
+                    {define} comanda_menjar
+                        ingredients = {ask} "de pepperoni, de tonyina, vegetariana o de formatge?"
+                        mida = {ask} "gran, mitjana o petita?"
+                        nombre_de_pizzas = {ask} "Quantes d'aquestes pizzes voldries?"
 
-                        print 'YOU ORDERED'
-                        print number_of_pizzas ' size  ' topping ' pizza'
+                        {print} "HAS ORDENAT"
+                        {print} nombre_de_pizzas " mida pizza " ingredients
 
-                    define drinks_order
-                        drink = ask 'water, coke, icetea, lemonade or coffee?'
-                        number_of_drinks = ask 'How many of these drinks would you like?'
+                    {define} comanda_beure
+                        beguda = {ask} "aigua, cola, te gelat, limonada o cafè?"
+                        nombre_de_bebides = {ask} "Quantes d'aquestes begudes voldries?"
 
-                        print 'YOU ORDERED'
-                        print number_of_drinks ' ' drink
+                        {print} "HAS ORDENAT"
+                        {print} nombre_de_bebides " " beguda
 
-                    'Welcome to Hedy pizza'
-                    more_food = ask 'Would you like to order a pizza?'
-                    while more_food = 'yes'
-                        return food_order
-                        more_food = ask 'Would you like to order a pizza?'
-                    more_drinks = ask 'Would you like to order some drinks?'
-                    while more_drinks == 'yes'
-                        call drink_order
-                        more_drinks == ask 'Would you like to order more drinks?'
+                    "Benvingut a Hedy pizza"
+                    més_comanda = {ask} "Voldries demanar una pizza?"
+                    {while} més_comanda = "sí"
+                        {return} comanda_menjar
+                        més_comanda = {ask} "Voldries demanar una pizza?"
+                    més_bebides = {ask} "Voldries demanar alguna beguda?"
+                    {while} més_bebides = "sí"
+                        {call} comanda_beure
+                        més_bebides = {ask} "Voldries demanar més begudes?"
 
 
-                    print 'Thanks for ordering!'
+                    {print} "Gràcies per la teva comanda!"
                     ```
             18:
                 story_text: |-
-                    ### Exercise
-                    Debug this Old MacDonald program from level 16. Good luck!
+                    ### Exercici
+                    Depura aquest programa d'Old MacDonald del nivell 16. Bona sort!
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -1273,11 +1256,12 @@ adventures:
         levels:
             1:
                 story_text: |
-                    Benvingut a Hedy!
+                    Benvingut a Hedy! Aquí pots aprendre a programar pas a pas.
 
-                    Per provar el codi tan sols has de fer clic al botó 'Executa' sota el bloc de programació.
+                    Prova el codi tu mateix! El botó groc copia el codi d'exemple al teu camp de programació.
+                    Després, prem el botó verd 'Executa codi' sota del camp de programació per executar el codi.
 
-                    Estàs llest?, ves a la següent pestanya per aprendre la teva primera comanda.
+                    Preparat? Ves a la pestanya següent per aprendre com fer el teu propi codi!
                 example_code: |
                     ```
                     {print} Hello world!
@@ -1341,9 +1325,9 @@ adventures:
                     Al nivell anterior has practicat amb `{ask}` i `{if}`. Ara per exemple pots preguntar als convidats què volen per menjar.
                     Encara, però no pots calcular el preu del sopar per tothom.
 
-                    El següent nivell serà possible utilitzar la suma, resta i la multiplicació als reus programes. D'aquesta manera podràs calcular preus al teu restaurant, també podràs afegir un codi secret per compartir-lo amb els teus amics i família.
+                    En aquest nivell serà possible utilitzar la suma, resta i la multiplicació als reus programes. D'aquesta manera podràs calcular preus al teu restaurant, també podràs afegir un codi secret per compartir-lo amb els teus amics i família.
 
-                    Una altra opció del següent nivell serà programar el teu propi joc matemàtic, per ajudar al teu germanet o germaneta a practicar les multiplicacions.
+                    Una altra opció d'aquest nivell serà programar el teu propi joc matemàtic, i podràs ajudar al teu germanet o germaneta a practicar les multiplicacions.
                     Descobreix-ho tu mateix!
                 example_code: |
                     ```
@@ -1356,7 +1340,7 @@ adventures:
                     {if} comanda  {is} patates preu_menjar {is} 2
                     beguda {is} {ask} 'Què voleu per beure?'
                     {if} beguda {is} aigua preu_beguda {is} 0
-                    else preu_beguda {is} 3
+                    {else} preu_beguda {is} 3
                     preu_total {is} preu_menjar + preu_beguda
                     {print} 'Seran ' preu_total ' euros, siusplau'
                     ```
@@ -1383,13 +1367,13 @@ adventures:
                     ```
             9:
                 story_text: |
-                    Bona feina! Has aconseguit un nou nivell! Al nivell anterior has aprés a fer servir múltiples línies de codi dins una comanda {if} o {repeat}. Encara, però no pots combinar-les...
-                    Bones notícies! En aquest nivell estarà permès situar un {if} dins d'un altre {if}, o dins d'una comanda {repeat}.
+                    Bona feina! Has aconseguit un nou nivell! Al nivell anterior has après a fer servir múltiples línies de codi dins una comanda {if} o {repeat}. Encara, però no pots combinar-les...
+                    Bones notícies! En aquest nivell estarà permès situar un {if} dins d'un altre {if}, o dins d'una comanda {repeat}. Posar un bloc de codi dins d'un altre bloc de codi es diu anidament.                     ```Posar un bloc de codi dins d'un altre bloc de codi es diu anidament.
                 example_code: |
                     ```
                     resposta = {ask} 'Estàs llest per aprendre una cosa nova?'
                     {if} resposta {is} si
-                    {print} 'Genial!, pots aprendre a fer servir la comanda repeteix dins la comanda si!'
+                    {print} 'Genial!, pots aprendre a fer servir la comanda repeat dins la comanda if!'
                         {print} 'Hurra!'
                         {print} 'Hurra!'
                         {print} 'Hurra!'
@@ -1397,12 +1381,12 @@ adventures:
                         {print} 'Potser hauràs de repassar el nivell anterior...'
             10:
                 story_text: |
-                    Ho estàs fent molt bé! Als nivells anteriors ens hem trobat amb un petit problema. Has après a repetir línies, però què passa si vols fer petits canvis a la línia.
-                    Per exemple si vols cantar la cançó "si ets feliç i ho saps". Tindrà el següent aspecte:
+                    Ho estàs fent molt bé! En els nivells anteriors encara ens vam haver d'enfrontar a un petit problema. Has après a repetir línies, però què passaria si volguessis canviar lleugerament la línia.
+                    Per exemple, si vols cantar la cançó 'Si ets feliç i ho saps'. Es veuria així:
 
-                    Si també vols el següent vers 'stomp your feet', i el següent, i el següent, hauràs de canviar el codi completament.
-                    En aquest nivell aprendràs la comanda `{for}`, que et permetrà fer una llista d'accions i repetir el codi amb una noca acció cada vegada!
-                    Fes-hi una ullada!
+                    Si també vols el següent vers 'pica de peus', i el següent, i el següent, hauries de canviar completament el codi.
+                    En aquest nivell, aprendràs la comanda `{for}`, que et permet fer una llista d'accions i repetir el codi amb una altra acció cada vegada!
+                    Fem-hi un cop d'ull!
                 example_code: |
                     ```
                     {repeat} 2 {times}
@@ -1447,7 +1431,7 @@ adventures:
                     ```
             14:
                 story_text: |
-                    Amb el programa següent pots calcular si has aprovat una assignatura (per tant, una nota superior o igual a 5).
+                    Amb el codi d'exemple pots calcular si has aprovat una assignatura (per tant, una nota superior o igual a 5).
                     Pots observar que aquest codi és extremadament ineficient, a causa de la longitud excessiva de la línia 5.
                     Totes les notes de l'1 al 5 s'han programat per separat. Estàs de sort, ja que en aquest nivell aprendràs a fer-ho molt més curt!
                 example_code: |
@@ -1469,13 +1453,13 @@ adventures:
                     Durant aquest nivell aprendràs una comanda que fa la vida fàcil amb tot això!
                 example_code: |
                     ```
-                    joc {is} 'en curs'
+                    joc = 'en curs'
                     {for} i {in} {range} 1 {to} 100
-                        {if} joc {is} 'en curs'
+                        {if} joc == 'en curs'
                             resposta = {ask} 'Vols continuar?'
-                            {if} resposta {is} 'no'
-                                joc {is} 'acabat'
-                            {if} resposta {is} 'si'
+                            {if} resposta == 'no'
+                                joc = 'acabat'
+                            {if} resposta == 'si'
                                 {print} D'acord continuem'
                     ```
             16:
@@ -1510,22 +1494,22 @@ adventures:
                     L'enhorabona! Has assolit l'últim nivell de Hedy! El codi has creat aquí pot ser copiat a entorns reals de Python com replit o PyCharm, i pots continuar aprenent allà!
                     Tingues en compte que aquell Python només pot llegir comandes en anglès, així que si has estat utilitzant altres llengües, ara les hauràs de posar en anglès.
     dice:
-        name: Dice
-        default_save_name: Dice
-        description: Make your own dice
+        name: Dau
+        default_save_name: Dau
+        description: Fes el teu dau
         levels:
             3:
                 story_text: |
-                    In this level we can choose from a list. With that we can let the computer choose one side of the die.
-                    Take a look at the games you have in your closet at home.
-                    Are there games with a (special) die? You can also copy it with this code.
-                    For example, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.
+                    En aquest nivell podem escollir des d'una llista. D'aquesta manera podem fer que l'ordinador tiri un dau.
+                    Busca i dona una ullada als jocs que tens a l'armari a casa.
+                    Tens jocs amb un algun dau normal? (o algun amb un dau especial?) Pots recrear-los amb el següent programa.
+                    Per exemple, el dau del joc del Pikomino té els números de l'1 al 5 i en lloc del 6 un cuc de terra dibuixat.
 
-                    ![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
+                    ![Dau del Pikomino amb cares de l'1 al 5 més un cuc](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
                 example_code: |
                     ```
-                    choices {is} 1, 2, 3, 4, 5, earthworm
-                    {print} choices {at} {random}
+                    opcions {is} 1, 2, 3, 4, 5, cuc
+                    {print} opcions {at} {random}!
                     ```
                 story_text_2: |
                     ### Exercise
@@ -1533,7 +1517,7 @@ adventures:
                     Or other special dice from a different game?
                 example_code_2: |
                     ```
-                    choices {is} _
+                    opcions {is} _
                     ```
             4:
                 story_text: |
@@ -1541,57 +1525,60 @@ adventures:
                     This time the sample code is not quite complete. Can you finish the code?
             5:
                 story_text: |
-                    You can also make a die again in this level using the `{if}`.
-                    Complete the sample code so that the code says "You can stop throwing" once you have thrown an earthworm.
+                    Afegirem les comandes `{if}` i `{else}` als nostres daus!
 
-                    But maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction, e.g. 'yes' for 6 and 'pity' for something else.
+                    ### Exercici
+                    Completa el codi d'exemple perquè el codi digui "Pots deixar de tirar" un cop hagis tirat un cuc. Ha de dir "Has de tornar a tirar" si has tirat qualsevol altra cosa.
+                    **Extra** Potser vols recrear un dau d'un joc completament diferent. També està bé! Llavors, crea la teva pròpia reacció, per exemple, 'sí' per a 6 i 'quina pena' per a qualsevol altra cosa.
                 example_code: |
                     ```
-                    choices {is} 1, 2, 3, 4, 5, earthworm
-                    throw {is} _
-                    {print} 'you have' _ 'thrown'
-                    {if} _ {is} earthworm {print} 'You can stop throwing.' _ {print} 'You have to hear it again!'
+                    opcions {is} 1, 2, 3, 4, 5, cuc
+                    tirada {is} opcions {at} {random}
+                    {print} 'Has tirat ' tirada
+                    _ tirada {is} cuc {print} 'Pots parar de tirar.'
+                    _ {print} 'Has de tornar a tirar'
                     ```
             6:
                 story_text: |
-                    You can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.
-                    You may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.
-                    This is the code to calculate points for one die:
+                    En aquest nivell pots tornar a fer el dau del Pikomino (dau del cuc de terra), ara, però calcularem quants punts s'han aconseguit tirant el dau.
+                    Com segurament ja saps, el cuc compta per 5 punts. Ara, després d'un llançament, pots calcular immediatament quants punts has aconseguit amb la tirada.
+                    Aquest és el codi per calcular els punts d'un dau:
 
-                    ### Exercise
-                    Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
+                    ### Exercici
+                    Pots fer el codi per obtenir la puntuació total per a 8 daus? Per fer-ho, hauràs de copiar i enganxar algunes línies del codi.
                 example_code: |
                     ```
-                    choices = 1, 2, 3, 4, 5, earthworm
-                    points = 0
-                    throw = choices {at} {random}
-                    {print} 'you threw' throw
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
-                    {print} 'those are' points ' point'
+                    opcions = 1, 2, 3, 4, 5, cuc
+                    punts= 0
+                    tirada = opcions {at} {random}
+                    {print} "Has tirat " tirada
+                    {if} tirada {is} cuc punts = punts+ 5 {else} punts = punts + tirada
+                    {print} "Això són " punts " punts "
                     ```
                 example_code_2: |
-                    Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
+                    Has aconseguit calcular la puntuació per a 8 daus? Segur que això ha fet que el copy-paste tregui fum, oi? Ara ho farem més fàcil que al nivell 7!
             7:
                 story_text: |
-                    You can also make a die again in level 5. With the `{repeat}` code you can easily roll a whole hand of dice.
-                    Try to finish the sample code! The dashes should contain multiple commands and characters.
+                    També pots fer un dau en aquest nivell. Amb la comanda`{repeat}` pots tirar fàcilment múltiples daus.
 
-                    But maybe you want to make a completely different die. Of course you can!
+                    ### Exercici
+                    Prova d'acabar el codi d'exemple! **Extra** Pensa en un joc que coneguis que impliqui un dau i programa'l utilitzant un `{repeat}`.
                 example_code: |
                     ```
-                    choices = 1, 2, 3, 4, 5, earthworm
-                    {repeat} _ _ {print} _ _ _
+                    opcions = 1, 2, 3, 4, 5, 6
+                    _ _ _ _ _ _ _
                     ```
             10:
                 story_text: |
-                    Is everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!
-                    Can you fill in the correct line of code on the blanks?
+                    ### Exercici
+                    Està tothom trigant massa a llençar els daus? En aquest nivell pots deixar que Hedy llenci tots els daus alhora!
+                    Canvia els noms pels noms dels teus amics o familiars i completa el codi.
                 example_code: |
                     ```
-                    players = Ann, John, Jesse
-                    choices = 1, 2, 3, 4, 5, 6
-                    _
-                        {print} player ' throws ' choices {at} {random}
+                    jugadors = Ann, John, Jesse
+                    opcions = 1, 2, 3, 4, 5, 6
+                    _ _ _ _
+                        {print} jugador ' tira ' opcions {at} {random}
                         {sleep}
                     ```
             15:
@@ -1619,9 +1606,9 @@ adventures:
                     {print} 'Yes! You have thrown 6 in ' tries ' tries.'
                     ```
     dishes:
-        name: Dishes?
-        default_save_name: Dishes
-        description: Use the computer to see who does the dishes (Start at level 2)
+        name: Plats?
+        default_save_name: Plats
+        description: Utilitza l'ordinador per veure qui renta els plats.
         levels:
             3:
                 story_text: |
@@ -1630,8 +1617,8 @@ adventures:
                     You first make a list of the members of your family. Then choose `{at} {random}` from the list.
                 example_code: |
                     ```
-                    people {is} mom, dad, Emma, Sophie
-                    {print} people {at} {random}
+                    gent {is} mama, papa, Emma, Sofia
+                    {print} gent {at} {random} li toca rentar plats
                     ```
                 story_text_2: |
                     Don't feel like doing the dishes yourself? Hack the program by removing your name from the list with the `{remove}` `{from}` command.
@@ -1645,10 +1632,10 @@ adventures:
                     Tip: Don't forget the quotation marks!
                 example_code: |
                     ```
-                    people {is} mom, dad, Emma, Sophie
-                    {print} _ the dishes are done by _
+                    gent {is} mama, papa, Emma, Sofia
+                    {print} _ els plats son rentats per _
                     {sleep}
-                    {print} people {at} _
+                    {print} gent {at} _
                     ```
             5:
                 story_text: |
@@ -1656,50 +1643,56 @@ adventures:
 
                     Can you finish the code so that it prints 'too bad' when it is your turn and otherwise 'yes!'?
                     Don't forget the quotes!
-                example_code: "```\npeople {is} mom, dad, Emma, Sophie\ndishwasher {is} people {at} {random}\n{if} dishwasher {is} Sophie {print} _ too bad I have to do the dishes _ \n{else} {print} 'luckily no dishes because' _ 'is already washing up'\n```\n"
+                example_code: "```\ngent {is} mama, papa, Emma, Sofia\nnetejador {is} gent {at} {random}\n_ netejador {is} Sofia {print} _ Pffff... em toca rentar plats _\n_ {print} 'per sort no hi ha plats perquè ' _ ' ja els està rentant'\n```\n"
             6:
                 story_text: |
                     How often is everyone going to do the dishes? Is that fair? You can count it in this level.
                 example_code: |
                     ```
-                    people = mom, dad, Emma, Sophie
-                    emma_washes = 0
-                    dishwasher = people {at} {random}
-                    {print} 'The dishwasher is' dishwasher
-                    {if} dishwasher {is} Emma emma_washes = emma_washes + 1
-                    {print} 'Emma will do the dishes this week' emma_washes 'times'
+                    persones = mama, papa, Emma, Sofia
+                    emma_renta = 0
+                    netejadora = persones {at} {random}
+                    {print} 'Li toca rentar plats a ' netejadora 
+                    {if} rentadora {is} Emma emma_renta = emma_renta + 1
+                    {print} 'Emma farà els plats aquesta setmana' emma_renta 'vegades'
                     ```
 
-                    Now you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.
-                    Do you make the code for the whole week?
+                    Ara pots copiar de la línia 3 a la 5 unes quantes vegades (pex. 7 vegades per fer una setmana).
+                    Pots fer el codi per calcular tota una setmana?
                 story_text_2: |
-                    If you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!
-                    To create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.
+                    Si tens molta mala sort, el programa anterior podria triar-te per a rentar plats de tota la setmana! I això no és just!
+                    Per crear un sistema més just, pots utilitzar l'ordre `{remove}` per eliminar la persona escollida de la llista. D'aquesta manera no haureu de tornar a rentar els plats fins que tothom hagi tingut el seu torn.
 
-                    Monday and tuesday are ready for you! Can you add the rest of the week?
-                    And... can you come up with a solution for when your list is empty?
+                    Dilluns i dimarts ja estan preparats per a tu! Pots afegir la resta de la setmana?
+                    I... pots trobar una solució per a quan la llista estigui buida?
                 example_code_2: |
                     ```
-                    people = mom, dad, Emma, Sophie
-                    dishwasher = people {at} {random}
-                    {print} 'Monday the dishes are done by: ' dishwasher
-                    {remove} dishwasher {from} people
-                    dishwasher = people {at} {random}
-                    {print} 'Tuesday the dishes are done by: ' dishwasher
-                    {remove} dishwasher {from} people
-                    dishwasher = people {at} {random}
+                    gent = mama, papa, Emma, Sofia
+                    netejador = gent {at} {random}
+                    {print} "Dilluns renta: " netejador
+                    {remove} netejador {from} gent
+                    netejador = gent {at} {random}
+                    {print} "Dimarts renta:: " netejador
+                    {remove} netejador {from} gent
                     ```
             7:
                 story_text: |
-                    With the `{repeat}` you can repeat pieces of code. You can use this to calculate who will be washing dishes for the entire week.
+                    Amb el `{repeat}` pots repetir fragments de codi. Pots utilitzar-ho per calcular qui rentarà els plats durant diversos dies!
+                    ### Exercici
+                    Utilitza l'ordre `{repeat}` per decidir qui ha de rentar els plats durant una setmana sencera. Cada espai en blanc s'ha d'omplir amb una comanda o número!
+                    **Extra** Pots pensar en altres tasques de la casa? Adapta el codi perquè decideixi sobre tres tasques domèstiques. No oblidis imprimir de quines tasques es refereix!
                 example_code: |
                     ```
-                    people = mom, dad, Emma, Sophie
-                    {repeat} _ _ {print} 'the dishwasher is' _
+                    gent = mama, papa, Emma, Sofia
+                    {repeat} _ _ {print} 'Rentar plats li toca a ' _ _ _
                     ```
             10:
                 story_text: |
-                    In this level you could make an even better dish washing shedule.
+                    En aquest nivell pots fer un horari per a tota la setmana d'una manera fàcil!
+
+                    ### Exercici
+                    Afegeix-hi una segona tasca, com passar l'aspiradora o endreçar, i assegura't que també estigui dividida durant tota la setmana.
+                    <br> **Extra** El programa no és just, pots tenir mala sort i haver de rentar durnat tota la setmana. Com pots fer el programa més just?
                 example_code: |
                     ```
                     days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
@@ -1709,8 +1702,8 @@ adventures:
                     ```
     elif_command:
         name: '{elif}'
-        default_save_name: elif
-        description: elif
+        default_save_name: sino
+        description: '{elif}'
         levels:
             17:
                 story_text: |
@@ -2610,7 +2603,7 @@ adventures:
     is_command:
         name: '{is}'
         default_save_name: comanda_es
-        description: Introducció a la comanda és
+        description: Introducció a la comanda {is}
         levels:
             2:
                 story_text: |
@@ -3139,7 +3132,7 @@ adventures:
     parrot:
         name: Lloro
         default_save_name: Parrot
-        description: Create your own online pet parrot that will copy you!
+        description: Crea el teu lloro i fes que repeteixi el que li dius!
         levels:
             1:
                 story_text: |
@@ -3162,7 +3155,8 @@ adventures:
                     {echo}
             2:
                 story_text: |
-                    Create your own online pet parrot that will copy you!
+                    En el nivell anterior has fet un lloro que repetia el que li deies. En aquest nivell farem que el lloro sigui interactiu utilitzant una variable i la comanda `{ask}` .
+                    També farem el lloro sigui més real afegint la comanda `{sleep}` després de dir una cosa.
                 example_code: |
                     ```
                     {print} Im Hedy the parrot
@@ -4389,14 +4383,14 @@ adventures:
                     Hint: Not all lines need indentation.
                 example_code: |
                     ```
-                    _ actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
-                    _ {for} action {in} actions
+                    _ accions = "pica de mans", "pica de peus", "crida Hurra!"
+                    _ {for} accio {in} accions
                     _ {for} i {in} {range} 1 {to} 2
-                    _ {print} 'if youre happy and you know it'
-                    _ {print} action
-                    _ {print} 'if youre happy and you know it and you really want to show it'
-                    _ {print} 'if youre happy and you know it'
-                    _ {print} action
+                    _ {print} "si ets feliç i ho saps"
+                    _ {print} accio
+                    _ {print} "si ets feliç i ho saps, i ho vols fer saber a tothom"
+                    _ {print} "si ets feliç i ho saps"
+                    _ {print} accio
                     ```
             13:
                 story_text: |
