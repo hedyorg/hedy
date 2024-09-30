@@ -196,8 +196,8 @@
 -   name: '{for} петља'
     explanation: Можемо користити `{for}` са `{range}`.
     demo_code: |-
-        {for} бројач {in} {range} 1 {до} 5
-            {print} бројач
+        {for} counter {in} {range} 1 {to} 5
+            {print} counter
 -   name: '{ask}'
     explanation: Питај за одговор на збир и провери да ли је тачан. Сада можемо одштампати 2 линије.
     demo_code: |-
@@ -229,8 +229,8 @@
 -   name: наводници у листи
     explanation: Листа са наводницима.
     demo_code: |-
-        суперхероји = 'Iron Man', 'Batman', 'Superman'
-        {print} суперхероји {на} {случајно}
+        superheroes = 'Iron Man', 'Batman', 'Superman'
+        {print} superheroes {at} {random}
 13:
 -   name: '{and}'
     explanation: Оба дела морају бити тачна.
@@ -335,9 +335,9 @@
 -   name: '{print}'
     explanation: Када користимо `{for}`, морамо ставити `:` иза `{for}` изјаве!
     demo_code: |-
-        {for} i {in} {range} 1 {до} 12:
+        {for} i {in} {range} 1 {to} 12:
             {print} i
-        {print} 'Спреман или не, ево ме!'
+        {print} 'Ready or not, here I come!'
 -   name: '{if}'
     explanation: Морамо урадити исто са свим нашим `{if}` изјавама.
     demo_code: |-
