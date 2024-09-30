@@ -164,6 +164,7 @@ class Database:
                                             'username': str,
                                         }))),
                                         'students': OptionalOf(SetOf(str)),
+                                        'last_viewed_level': OptionalOf(int)
                                     }),
                                     indexes=[
                                         dynamo.Index('teacher'),
@@ -873,6 +874,9 @@ class Database:
     def update_class_data(self, id, class_data):
         """Updates a class."""
         self.classes.update({"id": id}, class_data)
+
+    def update_last_viewed_level_in_class(self, id, level):
+        self.classes.update({"id": id}, {"last_viewed_level": level})
 
     def store_feedback(self, feedback):
         """Store a feedback message in the database"""
