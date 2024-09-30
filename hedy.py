@@ -520,10 +520,83 @@ class LookupEntry:
     name: str
     tree: Tree
     definition_line: int
-    access_line: int
     skip_hashing: bool
+    access_line: int = None
     type_: str = None
     currently_inferring: bool = False  # used to detect cyclic type inference
+
+    def is_func(self):
+        return '(' in self.name and '[' not in self.name
+
+    def is_var(self):
+        return '(' not in self.name and '[' not in self.name
+
+
+class LookupTable:
+    """The lookup table has a naive implementation of scopes: the start and end lines of every local scope is stored
+     in a list. Everything else falls in the global scope. Since local scopes cannot be nested, every line in the
+     code could either belong to one local scope or the global scope."""
+
+    def __init__(self, local_scopes, entries):
+        self.local_scopes = local_scopes
+        self.entries = entries
+        self.__local_scopes = local_scopes
+        self.__entries = entries
+
+    def get_all(self):
+        return self.__entries
+
+    def get_only_vars(self):
+        """Returns entries which do not represent list access or function definitions"""
+        return [e for e in self.__entries if e.is_var()]
+
+    def get_all_in_scope(self, access_line):
+        """Returns the lookup entries for the scope of the given access line."""
+        def get_matching_local_scope(line):
+            for (s, e) in self.__local_scopes:
+                if s <= line <= e:
+                    return s, e
+            return None
+
+        def in_global_scope(line):
+            return not [s for (s, e) in self.__local_scopes if s <= line <= e]
+
+        def is_func_definition(entry):
+            return entry.is_func() and entry.definition_line in [s for (s, _) in self.__local_scopes]
+
+        local_scope = get_matching_local_scope(access_line)
+        if local_scope:
+            start, end = local_scope
+            # if the variable is in local scope, return the whole local scope combined
+            # with the part of the global scope defined before the local scope
+            loc = [e for e in self.__entries if start <= e.definition_line <= end]
+            glo = [e for e in self.__entries if e.definition_line < start and in_global_scope(e.definition_line)]
+            return loc + glo
+
+        # if the variable is in the global scope, return the whole global scope
+        # combined with the function definitions
+        glo = [e for e in self.__entries if in_global_scope(e.definition_line)]
+        funcs = [e for e in self.__entries if is_func_definition(e)]
+        return glo + funcs
+
+    def get_matching(self, var, access_line):
+        """Returns the lookup entries that match the provided variable name. The access_line is needed to determine
+        the scope in which the variable is used. Note that in the lookup table, variables are escaped but functions
+        are not. In other words, the variable `sum` is stored as `_sum`, but the function `sum` is stored as `sum()`.
+        When calling this method, don't escape func names. """
+
+        def escape(arg):
+            arg = str(arg)
+            letter_or_underscore = r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]"
+            letter_or_numeral = r"[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]"
+            var_regex = fr"{letter_or_underscore}({letter_or_underscore}|{letter_or_numeral})*"
+            function_regex = fr"{var_regex}\("
+            if regex.match(function_regex, arg):
+                return escape_var(arg.split('(')[0])
+            return escape_var(arg)
+
+        entries_in_scope = self.get_all_in_scope(access_line)
+        return [entry for entry in entries_in_scope if escape(entry.name) == escape(var)]
 
 
 class TypedTree(Tree):
@@ -588,7 +661,8 @@ class LookupEntryCollector(visitors.Visitor):
     def __init__(self, level):
         super().__init__()
         self.level = level
-        self.lookup = []
+        self.local_scopes = []
+        self.lookup_entries = []
 
     def ask(self, tree):
         # in level 1 there is no variable name on the left side of the ask command
@@ -612,8 +686,10 @@ class LookupEntryCollector(visitors.Visitor):
     #         corresponding_lookup_entry.access_line = tree.meta.line
 
     def assign(self, tree):
-        var_name = tree.children[0].children[0]
-        self.add_to_lookup(var_name, tree.children[1], tree.meta.line)
+        # when the left-hand-side is a list access, let the 'list_access' child visit to add an entry to the lookup
+        if tree.children[0].data != 'list_access':
+            var_name = tree.children[0].children[0]
+            self.add_to_lookup(var_name, tree.children[1], tree.meta.line)
 
     def assign_list(self, tree):
         var_name = tree.children[0].children[0]
@@ -659,7 +735,9 @@ class LookupEntryCollector(visitors.Visitor):
         self.add_to_lookup(iterator, trimmed_tree, tree.meta.line)
 
     def define(self, tree):
-        self.add_to_lookup(str(tree.children[0].children[0]) + "()", tree, tree.meta.line)
+        func_name = str(tree.children[0].children[0])
+        self.add_local_scope(func_name, tree.meta.line, tree.meta.end_line)
+        self.add_to_lookup(func_name + "()", tree, tree.meta.line)
 
         # add arguments to lookup
         if tree.children[1].data == 'arguments':
@@ -668,21 +746,18 @@ class LookupEntryCollector(visitors.Visitor):
 
     def call(self, tree):
         function_name = tree.children[0].children[0]
-        names = [x.name for x in self.lookup]
+        names = [x.name for x in self.lookup_entries]
         if function_name + "()" not in names:
             raise exceptions.UndefinedFunctionException(function_name, tree.meta.line)
 
-        args_str = ""
-        if len(tree.children) > 1:
-            args_str = ", ".join(str(x.children[0]) if isinstance(x, Tree) else str(x)
-                                 for x in tree.children[1].children)
-        self.add_to_lookup(f"{function_name}({args_str})", tree, tree.meta.line)
-
-    def add_to_lookup(self, name, tree, definition_line=None, access_line=None, skip_hashing=False):
-        entry = LookupEntry(name, tree, definition_line, access_line, skip_hashing)
+    def add_to_lookup(self, name, tree, definition_line, skip_hashing=False):
+        entry = LookupEntry(name, tree, definition_line, skip_hashing)
         hashed_name = escape_var(entry)
         entry.name = hashed_name
-        self.lookup.append(entry)
+        self.lookup_entries.append(entry)
+
+    def add_local_scope(self, scope_name, start_line, end_line):
+        self.local_scopes.append((start_line, end_line))
 
 
 # The transformer traverses the whole AST and infers the type of each node. It alters the lookup table entries with
@@ -703,7 +778,7 @@ class TypeValidator(Transformer):
 
     def ask(self, tree):
         if self.level > 1:
-            self.save_type_to_lookup(tree.children[0].children[0], HedyType.input)
+            self.save_type_to_lookup(tree.children[0].children[0], tree.meta.line, HedyType.input)
         self.validate_args_type_allowed(Command.ask, tree.children[1:], tree.meta)
         return self.to_typed_tree(tree, HedyType.input)
 
@@ -736,7 +811,7 @@ class TypeValidator(Transformer):
     def assign(self, tree):
         try:
             type_ = self.get_type(tree.children[1])
-            self.save_type_to_lookup(tree.children[0].children[0], type_)
+            self.save_type_to_lookup(tree.children[0].children[0], tree.meta.line, type_)
         except hedy.exceptions.UndefinedVarException as ex:
             if self.level >= 12:
                 raise hedy.exceptions.UnquotedAssignTextException(
@@ -748,7 +823,7 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree, HedyType.none)
 
     def assign_list(self, tree):
-        self.save_type_to_lookup(tree.children[0].children[0], HedyType.list)
+        self.save_type_to_lookup(tree.children[0].children[0], tree.meta.line, HedyType.list)
         return self.to_typed_tree(tree, HedyType.list)
 
     def list_access(self, tree):
@@ -760,7 +835,7 @@ class TypeValidator(Transformer):
         else:
             # We want list access to be 1-based instead of 0-based, hence the -1
             name = f'{list_name}.data[int({tree.children[1]})-1]'
-        self.save_type_to_lookup(name, HedyType.any)
+        self.save_type_to_lookup(name, tree.meta.line, HedyType.any)
 
         return self.to_typed_tree(tree, HedyType.any)
 
@@ -798,7 +873,7 @@ class TypeValidator(Transformer):
         command = Command.for_list
         allowed_types = get_allowed_types(command, self.level)
         self.check_type_allowed(command, allowed_types, tree.children[1], tree.meta)
-        self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
+        self.save_type_to_lookup(tree.children[0].children[0], tree.meta.line, HedyType.any)
         return self.to_typed_tree(tree, HedyType.none)
 
     def for_loop(self, tree):
@@ -809,7 +884,7 @@ class TypeValidator(Transformer):
         self.check_type_allowed(command, allowed_types, tree.children[2], tree.meta)
 
         iterator = str(tree.children[0])
-        self.save_type_to_lookup(iterator, start_type)
+        self.save_type_to_lookup(iterator, tree.meta.line, start_type)
 
         return self.to_typed_tree(tree, HedyType.none)
 
@@ -945,7 +1020,7 @@ class TypeValidator(Transformer):
         # So, if it cannot be found in the lookup table, then it is an undefined variable for sure.
         if tree.data in ['var_access', 'var_access_print']:
             var_name = tree.children[0]
-            in_lookup, type_in_lookup = self.try_get_type_from_lookup(var_name)
+            in_lookup, type_in_lookup = self.try_get_type_from_lookup(var_name, tree.meta.line)
             if in_lookup:
                 return type_in_lookup
             else:
@@ -954,7 +1029,7 @@ class TypeValidator(Transformer):
         # TypedTree with type 'None' and 'string' could be in the lookup because of the grammar definitions
         # If the tree has more than 1 child, then it is not a leaf node, so do not search in the lookup
         if tree.type_ in [HedyType.none, HedyType.string] and len(tree.children) == 1:
-            in_lookup, type_in_lookup = self.try_get_type_from_lookup(tree.children[0])
+            in_lookup, type_in_lookup = self.try_get_type_from_lookup(tree.children[0], tree.meta.line)
             if in_lookup:
                 return type_in_lookup
         # If the value is not in the lookup or the type is other than 'None' or 'string', return evaluated type
@@ -965,7 +1040,7 @@ class TypeValidator(Transformer):
         if tree.data == 'var_access_print':
             # is there a variable that is mildly similar? if so, we probably meant that one
             minimum_distance_allowed = 4
-            for var_in_lookup in self.lookup:
+            for var_in_lookup in self.lookup.get_all_in_scope(tree.meta.line):
                 if calculate_minimum_distance(var_in_lookup.name, var_name) <= minimum_distance_allowed:
                     raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
 
@@ -979,10 +1054,9 @@ class TypeValidator(Transformer):
     def ignore_type(self, type_):
         return type_ in [HedyType.any, HedyType.none]
 
-    def save_type_to_lookup(self, name, inferred_type):
-        for entry in self.lookup:
-            if entry.name == escape_var(name):
-                entry.type_ = inferred_type
+    def save_type_to_lookup(self, name, line, inferred_type):
+        for entry in self.lookup.get_matching(name, line):
+            entry.type_ = inferred_type
 
     # Usually, variable definitions are sequential and by the time we need the type of a lookup entry, it would already
     #  be inferred. However, there are valid cases in which the lookup entries will be accessed before their type
@@ -992,8 +1066,8 @@ class TypeValidator(Transformer):
     #  In the above case, we visit `print i`, before the definition of i in the for cycle. In this case, the tree of
     #  lookup entry is used to infer the type and continue the started validation. This approach might cause issues
     #  in case of cyclic references, e.g. b is b + 1. The flag `inferring` is used as a guard against these cases.
-    def try_get_type_from_lookup(self, name):
-        matches = [entry for entry in self.lookup if entry.name == escape_var(name)]
+    def try_get_type_from_lookup(self, name, access_line):
+        matches = self.lookup.get_matching(name, access_line)
         if matches:
             match = matches[0]
             if not match.type_:
@@ -1172,20 +1246,16 @@ def all_commands(input_string, level, lang='en'):
 
 
 def all_variables(input_string, level, lang='en'):
-    """Return all variables used in a program string.
-
-    This function is still used by the roles of variables detection
-    """
+    """ Return all variables used in a program string.
+    This function is still used by the roles of variables detection """
     program_root = parse_input(input_string, level, lang)
     abstract_syntax_tree = ExtractAST().transform(program_root)
-    vars = set()
-    lookup = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
-    for x in lookup:
-        name = str(x.name)
-        if '[' not in name:  # we also stor list access but that is not needed here
-            vars.add(name)
 
-    return list(vars)
+    lookup = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
+
+    # list access and functions are intentionally omitted here
+    variables = [str(v.name) for v in lookup.get_only_vars()]
+    return list(set(variables))
 
 
 @v_args(meta=True)
@@ -1429,12 +1499,16 @@ def process_characters_needing_escape(value):
 
 
 supported_quotes = {
-    "'": "'",  # single straight quotation marks
-    '"': '"',  # double straight quotation marks
-    '‘': '’',  # single curved quotation marks
-    "“": "”",  # double curved quotation marks or English quotes
-    "„": "“",  # inward double curved quotation marks or German quotes
-    "«": "»",  # guillemets or double angular marks or French quotes
+    "'": ["'"],  # single straight quotation marks
+    '"': ['"'],  # double straight quotation marks
+    '‘': ['’'],  # single curved quotation marks
+    "“": ["”"],  # double curved quotation marks or English quotes
+    "„": ["“",   # inward double curved quotation marks or German quotes
+          "”"],  # rightward double curved quotation marks or Polish quotes
+    '”': ['”'],  # rightward double curved quotation marks or Swedish/Finish quotes
+    "«": ["»"],  # guillemets or double angular marks or French quotes
+    "《": ["》"],  # Korean quotes
+    "「": ["」"],  # Japanese quotes
 }
 
 
@@ -1452,7 +1526,7 @@ def find_unquoted_segments(s):
             used_quote = c
             result += segment
             segment = c
-        elif used_quote and c == supported_quotes[used_quote]:
+        elif used_quote and c in supported_quotes[used_quote]:
             # if this is a valid closing quote, then empty the buffer as it holds a correctly quoted segment
             used_quote = None
             segment = ''
@@ -1555,22 +1629,6 @@ class ConvertToPython(Transformer):
             name = '_' + name
         return name
 
-    def get_var_lookup_entries(self, var):
-        """ Returns the lookup entries that match the provided variable name. Note that in the lookup table, variables
-        are escaped but functions are not. In other words, the variable `sum` is stored as `_sum`, but the function
-        `sum` is stored as `sum()`. When calling this method, don't escape func names. """
-        def escape(arg):
-            arg = str(arg)
-            letter_or_underscore = r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]"
-            letter_or_numeral = r"[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]"
-            var_regex = fr"{letter_or_underscore}({letter_or_underscore}|{letter_or_numeral})*"
-            function_regex = fr"{var_regex}\("
-            if regex.match(function_regex, arg):
-                return escape_var(arg.split('(')[0])
-            return escape_var(arg)
-
-        return [entry for entry in self.lookup if escape(entry.name) == escape(var)]
-
     def is_var_defined_before_access(self, var, access_line, var_to_escape=''):
         """ Returns true if a variable is defined before being accessed. The `var_to_escape` parameter allows
         the ask command to force the left-hand-side variable to not be defined on the same line."""
@@ -1580,7 +1638,7 @@ class ConvertToPython(Transformer):
             else:
                 return entry.definition_line < line
 
-        matching_lookup_entries = self.get_var_lookup_entries(var)
+        matching_lookup_entries = self.lookup.get_matching(var, access_line)
         return any([e for e in matching_lookup_entries if is_before(e, access_line)])
 
     def is_variable(self, arg, access_line=100):
@@ -1593,7 +1651,7 @@ class ConvertToPython(Transformer):
          max lines of Hedy code. So, if it is not provided, there is no check on whether the var is defined."""
         # Unpacking is needed because sometimes a var reference is parsed as 'text' and transpiled to a LiteralValue
         var = self.unpack(arg)
-        entries = self.get_var_lookup_entries(var)
+        entries = self.lookup.get_matching(var, access_line)
         if entries:
             if not self.is_var_defined_before_access(var, access_line):
                 raise hedy.exceptions.AccessBeforeAssignException(var, access_line, entries[0].definition_line)
@@ -1674,7 +1732,7 @@ class ConvertToPython(Transformer):
            print What is your favorite color?
         In the print statement, `color` is not a var reference, but the literal string 'color'"""
 
-        matching_entries = self.get_var_lookup_entries(arg)
+        matching_entries = self.lookup.get_matching(arg, access_line)
         is_list = [e for e in matching_entries if e.type_ == HedyType.list and '[' not in e.name]
         is_var = not is_list and self.is_var_defined_before_access(arg, access_line, var_to_escape)
 
@@ -2094,7 +2152,7 @@ class ConvertToPython_4(ConvertToPython_3):
     def process_arg_for_fstring(self, name, access_line=100, var_to_escape=''):
         name = escape_var(self.unpack(name))
 
-        if self.is_variable(name):
+        if self.is_variable(name, access_line):
             return f"{{{name}}}"
 
         if is_quoted(name):
@@ -2246,7 +2304,7 @@ else:{self.add_debug_breakpoint()}
                 points = points + 1
          """
         lines = lines if isinstance(lines, list) else [lines]
-        variables = [e.name for e in self.lookup if '(' not in e.name and '[' not in e.name]
+        variables = [e.name for e in self.lookup.get_only_vars()]
         if variables and lines:
             variables = sorted(list(set(variables)))
             global_vars = f"global {', '.join(variables)}"
@@ -2330,7 +2388,7 @@ class ConvertToPython_6(ConvertToPython_5):
                 time.sleep(0.5)""") + self.add_debug_breakpoint()
 
     def process_arg_for_fstring(self, name, access_line=100, var_to_escape=''):
-        if self.is_variable(name) or self.is_list(name) or self.is_random(name):
+        if self.is_variable(name, access_line) or self.is_list(name) or self.is_random(name):
             return f"{{{escape_var(self.unpack(name))}}}"
         elif isinstance(name, LiteralValue):
             return self.process_literal_for_fstring(name)
@@ -2370,6 +2428,12 @@ class ConvertToPython_6(ConvertToPython_5):
             # And since equality does not have an f string and requires quotes to be added manually
             val = arg[1:-1] if is_quoted(arg) else arg
             return f"'{process_characters_needing_escape(str(val))}'"
+
+    def process_arg_for_func(self, arg, access_line):
+        if self.is_variable_with_definition(arg, access_line):
+            var_name = escape_var(self.unpack(arg))
+            return f"{var_name}"
+        return self.process_assign_argument(arg)
 
     def assign(self, meta, args):
         left_hand_side = args[0]
@@ -2833,7 +2897,7 @@ class ConvertToPython_12(ConvertToPython_11):
         return result
 
     def process_arg_for_fstring(self, name, access_line=100, var_to_escape=''):
-        if self.is_variable(name) or self.is_list(name) or self.is_random(name):
+        if self.is_variable(name, access_line) or self.is_list(name) or self.is_random(name):
             return f"{{{escape_var(self.unpack(name))}}}"
         elif isinstance(name, LiteralValue):
             return self.process_literal_for_fstring(name)
@@ -3017,8 +3081,8 @@ class ConvertToPython_12(ConvertToPython_11):
         function_name = self.unpack(args[0])
         self.try_register_variable_access(function_name, meta.line)
 
-        function_tree = [e.tree for e in self.lookup if e.name == function_name + "()"]
-        tree_arguments = [c for c in function_tree[0].children if c.data == 'arguments']
+        function_tree = self.lookup.get_matching(function_name, meta.line)
+        tree_arguments = [c for c in function_tree[0].tree.children if c.data == 'arguments']
 
         number_of_defined_arguments = 0 if tree_arguments == [] else len(tree_arguments[0].children)
         number_of_used_arguments = 0 if len(args) == 1 else len(args[1].children)
@@ -3032,7 +3096,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
         if len(args) > 1:
             flat_args = [x.children[0] if isinstance(x, Tree) else x for x in args[1].children]
-            args_str = ", ".join([self.process_assign_argument(a) for a in flat_args])
+            args_str = ", ".join([self.process_arg_for_func(a, meta.line) for a in flat_args])
             for a in args[1].children:
                 self.try_register_variable_access(str(self.unpack(a)), meta.line)
         else:
@@ -3163,7 +3227,7 @@ class ConvertToPython_16(ConvertToPython_15):
         index = self.unpack(args[1])
         self.check_variable_usage_and_definition(args[0:3], meta.line)
 
-        index = f'{index}.data' if self.is_variable(args[1]) else index
+        index = f'{index}.data' if self.is_variable(args[1], meta.line) else index
         left_side = f'{name}.data[int({index})-1]'
         right_side = self.process_literal_to_value(args[2]) if isinstance(args[2], LiteralValue) else args[2]
 
@@ -3951,11 +4015,11 @@ def is_program_complete(abstract_syntax_tree, level):
 def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
     visitor = LookupEntryCollector(level)
     visitor.visit_topdown(abstract_syntax_tree)
-    entries = visitor.lookup
+    lookup_table = LookupTable(visitor.local_scopes, visitor.lookup_entries)
 
-    TypeValidator(entries, level, lang, input_string).transform(abstract_syntax_tree)
+    TypeValidator(lookup_table, level, lang, input_string).transform(abstract_syntax_tree)
 
-    return entries
+    return lookup_table
 
 
 def create_AST(input_string, level, lang="en"):
@@ -3981,16 +4045,16 @@ def determine_roles(lookup, input_string, level, lang):
     all_vars = all_variables(input_string, level, lang)
     roles_dictionary = {}
     for var in all_vars:
-        assignments = [x for x in lookup if x.name == var]
+        assignments = [x for x in lookup.get_all() if x.name == var]
 
-        if (assignments[0].tree.data == 'for_list'):
+        if assignments[0].tree.data == 'for_list':
             roles_dictionary[var] = gettext('walker_variable_role')
-        elif (assignments[0].tree.data == 'for_loop'):
+        elif assignments[0].tree.data == 'for_loop':
             roles_dictionary[var] = gettext('stepper_variable_role')
-        elif (assignments[0].type_ == 'list'):
+        elif assignments[0].type_ == 'list':
             roles_dictionary[var] = gettext('list_variable_role')
-        elif (len(assignments) == 1):
-            if (assignments[0].type_ == 'input'):
+        elif len(assignments) == 1:
+            if assignments[0].type_ == 'input':
                 roles_dictionary[var] = gettext('input_variable_role')
             else:
                 roles_dictionary[var] = gettext('constant_variable_role')
@@ -4037,7 +4101,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
             source_map.set_python_output(python)
 
         if not unused_allowed:
-            for x in lookup_table:
+            for x in lookup_table.get_all():
                 if isinstance(x.name, str) and x.access_line is None and x.name != 'x__x__x__x':
                     x.name = re.sub(r'^_', '', x.name)
                     raise hedy.exceptions.UnusedVariableException(

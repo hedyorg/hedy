@@ -60,7 +60,7 @@ export function toggleVariableView(){
   if($('#variables #variable_list li').length == 0){
     $('#variable_button').hide();
   }
-  else{    
+  else{
     $('#variable_button').show();
     $('#variable_list').show();
     document.getElementById('variables_arrow')!.classList.remove('fa-angle-up');
@@ -171,7 +171,7 @@ export function initializeDebugger(options: InitializeDebuggerOptions) {
 
   if(options.level != 0){
     let level = options.level;
-    variable_view = level >= 2;  
+    variable_view = level >= 2;
   }
   initializeBreakpoints(options.editor);
 }
@@ -270,7 +270,7 @@ export function stopDebug() {
     var stopButton = $('#debug_stop');
     var resetButton = $('#debug_restart');
     var runButtonContainer = $('#run_button_container');
-    document.getElementById('debug_continue')!.removeAttribute('disabled');
+    document.getElementById('debug_continue')?.removeAttribute('disabled');
     $('#stopit').hide();
     $('#runit').show()
     runButtonContainer.show();
@@ -298,7 +298,7 @@ function clearDebugVariables() {
 }
 
 export function incrementDebugLine() {
-  document.getElementById('debug_continue')!.removeAttribute('disabled');
+  document.getElementById('debug_continue')?.removeAttribute('disabled');
   const active_suspension = theGlobalDebugger.getActiveSuspension();
   const suspension_info = theGlobalDebugger.getSuspensionInfo(active_suspension);
   const lineNumber = suspension_info.lineno;
@@ -321,17 +321,17 @@ export function incrementDebugLine() {
     const startingLine = map.python_range.from_line + theGlobalDebugger.get_code_starting_line();
     const finishingLine = map.python_range.to_line + theGlobalDebugger.get_code_starting_line();
     // Maybe we hit the correct mapping for this line
-    if (lineNumber >= startingLine && lineNumber <= finishingLine) { 
+    if (lineNumber >= startingLine && lineNumber <= finishingLine) {
       // Highlight whole line if it's a full command
-      if(fullLineCommands.includes(map.command)){        
-        // lines in ace start at 0       
+      if(fullLineCommands.includes(map.command)){
+        // lines in ace start at 0
         const lines = theGlobalEditor.contents.split('\n');
         const line = lines[map.hedy_range.from_line - 1];
         const ifMatches = ifRe.exec(line);
         const repeatMatches = repeatRe.exec(line);
         const elseMatches = elseRe.exec(line);
         if (ifMatches || repeatMatches || elseMatches) {
-          theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line, 
+          theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line,
             map.hedy_range.from_column, map.hedy_range.to_column - 1);
         } else {
           theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line);
@@ -345,20 +345,20 @@ export function incrementDebugLine() {
         } else {
           const fullLine = lines[map.hedy_range.from_line - 1];
           line = fullLine.substring(map.hedy_range.from_column - 1, map.hedy_range.to_column - 1);
-        }       
+        }
         const activeLine: string = theGlobalDebugger.get_source_line(lineNumber - 1);
 
         if (activeLine.match(/ *if/)) {
           const ifMatches = ifRe.exec(line);
           if (ifMatches) {
             const length = ifMatches[1].length;
-            theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line, map.hedy_range.from_column, map.hedy_range.from_column + length - 1);            
+            theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line, map.hedy_range.from_column, map.hedy_range.from_column + length - 1);
             break
           }
         } else if (activeLine.match(/ *for/)) {
           const repeatMatches = repeatRe.exec(line);
-          if (repeatMatches){            
-            const length = repeatMatches[1].length;            
+          if (repeatMatches){
+            const length = repeatMatches[1].length;
             theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line, map.hedy_range.from_column, map.hedy_range.from_column + length - 1);
             break
           }
