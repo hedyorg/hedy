@@ -26,7 +26,7 @@
             <div class="flex flex-row w-full mb-2">
                 <button data-cy="previous_adventure" id="previous_adventure" class="blue-btn-new flex flex-row gap-2 align-middle items-center flex-initial w-fit next-tab justify-self-end mb-1">
                     <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}"></span>
-                    <p class="m-0 p-0 hidden md:block">{{_('previous_adventure')}}</p>
+                    <p class="m-0 p-0 hidden md:block"></p>
                 </button>
                 <button data-cy="back_level" id="back_level" 
                         class="blue-btn-new flex-initial flex flex-row gap-2 align-middle items-center	 w-fit next-tab justify-self-end mb-1 hidden"
@@ -45,7 +45,7 @@
                     </span>
                 </div>    
                 <button data-cy="next_adventure" id="next_adventure" class="blue-btn-new flex flex-row gap-2 align-middle items-center flex-initial w-fit next-tab justify-self-end mb-1">
-                    <p class="m-0 p-0 hidden md:block">{{_('next_adventure')}}</p>                    
+                    <p class="m-0 p-0 hidden md:block"></p>                    
                     <span class="fa fa-arrow-{% if g.dir == "ltr" %}right{% else %}left{% endif %}"></span>
                 </button>
                 <button data-cy="next_level" id="next_level"
