@@ -1645,7 +1645,7 @@ def view_program(user, id):
         if adventure['name'] == result['adventure_name']:
             adventure_index = index
             break
-    
+
     next_program_id = None
     for i in range(adventure_index + 1, len(adventures_for_this_level)):
         next_adventure = adventures_for_this_level[i]
