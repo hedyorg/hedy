@@ -89,8 +89,8 @@ Lees de codes goed! Welke zijn er goed of fout.
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "🤔",
-    "code"      : "weer is zonnig, regen, wolken, onweer\nprint Bah! De computer loopt weer vast.",
-    "answer"    : "Fout. Je kan een lijst niet printen"
+    "code"      : "print 'Daar lopen twee lama's'",
+    "answer"    : "Fout. Er staat een aanhalingsteken tussen de enkele aanhalingstekens."
 }
 
 {
@@ -98,8 +98,8 @@ Lees de codes goed! Welke zijn er goed of fout.
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "🤔",
-    "code"      : "docenten is Hermans\nprint Vandaag alweer docenten at random",
-    "answer"    : "Fout, docenten is geen lijst"
+    "code"      : "print 'De lama wandelt op straat",
+    "answer"    : "Fout. De aanhalingstekens moeten altijd in paren gebruikt worden."
 }
 
 {
@@ -107,54 +107,32 @@ Lees de codes goed! Welke zijn er goed of fout.
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "🤔",
-    "code"      : "docenten is onweer, regen, ijzel\nprint Vandaag alweer docenten at random!",
-    "answer"    : "Goed, de naam hoeft niet te kloppen voor de computer."
-}
-
-### Avonturen
-
-[Teacher] Dit zijn alle avonturen zonder `add to` en `remove from`.[/Teacher]
-Dit is een goed moment voor deze avonturen:
-Introductie
-willekeurig
-Dobbelsteen
-Steen, papier, schaar
-Muziek
-Waarzegger
-Restaurant
-Spookhuis
-Afwas?
-
-### Lijsten aanpassen
-
-Tot nu toe hebben we lijsten steeds aan het begin van het programma ingesteld.
-
-```hedy
-antwoorden is ja, nee, misschien
-print Het antwoord is antwoorden at random
-```
-
-Maar soms wil je dat de gebruiker van een programma ook opties kan toevoegen.
-Dat doe je met een `add` en een `to` commando.
-
-```
-dieren is 🐿, 🦔, 🦇, 🦉
-dier is ask Wat zou het kunnen zijn?
-add dier to dieren
-print het was een dieren op willekeurig
-```
-
-Je kan ook iets uit een lijst verwijderen, met `remove` en `from`.
-
-#### Opdracht 4: Goed of fout?
+    "code"      : "print "Daar lopen twee oma's",
+    "answer"    : "Goed! Als je twee aanhalingstekens gebruikt dan kan je wel oma's schrijven."
 
 {
     "assignment": "MC-code",
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "🤔",
-    "code"      : "letters is a,b,c,d\nremove a to letters",
-    "answer"    : "Fout. Bij remove hoort from, niet to."
+    "code"      : "print 'De lama wandelt op straat'\nprint \"Wat een avontuur\"",
+    "answer"    : "Goed. Je mag aanhalingstekens door elkaar gebruiken, als ze per regel maar hetzelfde zijn!"
+}
+
+#### Ask
+
+Vergeet niet dat je ook bij `ask` aanhalingstekens gebruikt!
+
+#### Opdracht 3: Foutje?
+Lees de codes goed! Welke zijn er goed of fout.
+
+{
+    "assignment": "MC-code",
+    "options"   : ["Goed" , "Fout"],
+    "question"  : "Is deze code goed of fout?",
+    "icon"      : "🤔",
+    "code"      : "ask 'Daar lopen twee konijnen'",
+    "answer"    : "Fout. Vergeet niet bij ask een variabele te gebruiken!"
 }
 
 {
@@ -162,8 +140,8 @@ Je kan ook iets uit een lijst verwijderen, met `remove` en `from`.
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "🤔",
-    "code"      : "eten is pizza, friet, kapsalon\nremove kroket from eten",
-    "answer"    : "Goed, je mag iets verwijderen dat niet in de lijst zit."
+    "code"      : "naam is ask 'Hoe heet jij?'",
+    "answer"    : "Fout. Aanhalingstekens moeten altijd in paren gebruikt worden."
 }
 
 {
@@ -171,101 +149,74 @@ Je kan ook iets uit een lijst verwijderen, met `remove` en `from`.
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "🤔",
-    "code"      : "eten is pizza, friet, kapsalon\nadd pizza to eten",
-    "answer"    : "Goed, je mag iets toevoegen dat al in de lijst zit."
+    "code"      : "aantal is ask "Hoeveel capibara's lopen daar?\""",
+    "answer"    : "Goed."
 }
 
 
-#### Opdracht 5: Schrijf de code
+#### Opdracht 4: Schrijf de code
 
 Kijk goed naar de uitvoer, en schrijf er een passende code bij. 
-**Zorg ervoor dat er steeds minstens een willekeurige keuze in je programma zit, dus niet alleen een print!**
 
 {
     "assignment": "input",
     "icon"      : "🧑‍💻",
-    "output"    : "Welkom bij de bingoavond\nDe drie geluksnummers zijn:\n5 en 3 en 10",
-    "answer"    : "getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nprint Welkom bij de bingoavond\nprint De drie geluksnummers zijn:\nprint nummers at random en print nummers at random en print nummers at random",
-    "lines"     : 4
-}
-
-
-{
-    "assignment": "input",
-    "icon"      : "🧑‍💻",
-    "output"    : "We gaan vanavond naar de film.\nWe kiezen: Inside Out",
-    "answer"    : "films is Avengers, Barbie, Inside Out\nprint We gaan vanavond naar de film.\nWe kiezen: films at random",
+    "output"    : "Welkom bij de bingoavond\nHier komt het eerste getal...!",
+    "answer"    : "print 'Welkom bij de bingoavond'\nprint 'Hier komt het eerste getal!'",
     "lines"     : 2
 }
 
 
-#### Opdracht 6: Programmeerwoorden 
+{
+    "assignment": "input",
+    "icon"      : "🧑‍💻",
+    "output"    : "We gaan vanavond naar de film.\nWaar heb jij zin in?",
+    "answer"    : "print 'We gaan vanavond naar de film.'\nfilm is ask 'Waar heb jij zin in?'",
+    "lines"     : 2
+}
+
+
+#### Opdracht 5: Programmeerwoorden 
 
 We hebben deze les weer nieuwe programmeerwoorden geleerd! Leg ze uit je eigen woorden. 
 
 {
     "assignment": "define",
     "icon"      : "📖",
-    "question"  : "Wat betekent lijst?",
+    "question"  : "Wat zijn aanhalingstekens?",
     "lines"     : 1,
-    "answer"    : "Een variabele waarin meerdere waardes kunnen worden opgeslagen"
+    "answer"    : "Hoge komma's"
 }
 
 {
     "assignment": "define",
     "icon"      : "📖",
-    "question"  : "Wat betekent willekeurig?",
+    "question"  : "Waarvoor gebruiken we in Hedy aanhalingstekens?",
     "lines"     : 1,
-    "answer"    : "Iets dat door de computer wordt uitgekozen."
+    "answer"    : "Voor iets dat door de computer precies zo moet worden geprint."
 }
 
-{
-    "assignment": "define",
-    "icon"      : "📖",
-    "question"  : "Wat betekent toevoegen?",
-    "lines"     : 1,
-    "answer"    : "Iets in een lijst erbij zetten"
-}
 
 
 #### Opdracht 7: Codes
 
-De code `is` is in dit leven veranderd, en we hebben ook nieuwe codes geleerd. 
-Wat doen die? Leg het uit in je eigen woorden. 
+We hebben ook nieuwe codes geleerd in level 4.
 
 {
     "assignment": "define",
     "icon"      : "📖",
-    "question"  : "Wat doet het commando `is`? (Let op: `is` kan dus meerdere dingen doen!)",
+    "question"  : "Wat doet het commando `clear`? (Let op: `is` kan dus meerdere dingen doen!)",
     "lines"     : 1,
-    "answer"    : "Waarde (rechts van de is) opslaan in een variabele of lijst (links van de is)"
+    "answer"    : "Maakt het scherm leeg"
 }
 
 {
     "assignment": "define",
     "icon"      : "📖",
-    "question"  : "Wat doet het commando `add to`?",
+    "question"  : "Wat doet het commando `color`?",
     "lines"     : 1,
-    "answer"    : "Voeg iets aan een lijst toe. Het element om toe te voegen staat tussen `add` en `to`, en de lijst staat erachter."
+    "answer"    : "Verandert de kleur van de turtle"
 }
-
-{
-    "assignment": "define",
-    "icon"      : "📖",
-    "question"  : "Wat doet het commando `remove from`?",
-    "lines"     : 1,
-    "answer"    : "Verwijdert iets uit een lijst. Het element om te verwijderen staat tussen `add` en `to`, en de lijst staat erachter."
-}
-
-
-{
-    "assignment": "define",
-    "icon"      : "📖",
-    "question"  : "Wat doet het commando `at random`?",
-    "lines"     : 1,
-    "answer"    : "Kiest een willekeurig element uit de lijst."
-}
-
 
 ### Wat vond jij?
 

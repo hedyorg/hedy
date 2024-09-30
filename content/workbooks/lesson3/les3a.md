@@ -222,7 +222,7 @@ We hebben deze les weer nieuwe programmeerwoorden geleerd! Leg ze uit je eigen w
 
 #### Opdracht 7: Codes
 
-De code `is` is in dit leven veranderd, en we hebben ook nieuwe codes geleerd. 
+De code `is` is in dit level veranderd, en we hebben ook nieuwe codes geleerd. 
 Wat doen die? Leg het uit in je eigen woorden. 
 
 {
