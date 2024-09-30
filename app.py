@@ -1620,11 +1620,24 @@ def view_program(user, id):
         arguments_dict['program_timestamp'] = utils.localized_date_format(result['date'])
     else:
         arguments_dict['show_edit_button'] = True
-
-    arguments_dict['is_students_teacher'] = is_teacher(user)\
+    is_students_teacher = is_teacher(user)\
         and result['username'] in DATABASE.get_teacher_students(user['username'])
+    arguments_dict['is_students_teacher'] = is_students_teacher
 
-    
+    classes = DATABASE.get_student_classes_ids(result['username'])
+    next_classmate_adventure_id = None
+    if classes:
+        class_id = classes[0]
+        class_ = DATABASE.get_class(class_id) or {}
+        students = sorted(class_.get('students', []))
+        index = students.index(result['username'])
+        for student in students[index + 1:]:
+            id = f'{student}-{result['adventure_name']}-{result['level']}'
+            next_classmate_adventure = DATABASE.student_adventure_by_id(id) or {}
+            next_classmate_adventure_id = next_classmate_adventure.get('program_id')
+            if next_classmate_adventure_id:
+                break
+
     student_customizations = DATABASE.get_student_class_customizations(result['username'])
     adventure_index = 0
     adventures_for_this_level = student_customizations.get('sorted_adventures', {}).get(str(result['level']), [])
@@ -1652,6 +1665,7 @@ def view_program(user, id):
                            is_teacher=user['is_teacher'],
                            class_id=student_customizations['id'],
                            next_program_id=next_program_id,
+                           next_classmate_program_id=next_classmate_adventure_id,
                            **arguments_dict)
 
 
