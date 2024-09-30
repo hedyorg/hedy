@@ -79,7 +79,7 @@ def convert_json(json):
             if i < number_of_output_lines and not turtle:
                 if i == 0 and turtle:
                     output_line += '🐢'
-                output_line = output_line.ljust(76, '_')
+                output_line = output_line.ljust(90, '_')
 
             textfields += output_line + '\n'
 
