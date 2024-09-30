@@ -1621,8 +1621,26 @@ def view_program(user, id):
     else:
         arguments_dict['show_edit_button'] = True
 
-    arguments_dict['show_checkbox'] = is_teacher(user)\
+    arguments_dict['is_students_teacher'] = is_teacher(user)\
         and result['username'] in DATABASE.get_teacher_students(user['username'])
+
+    
+    student_customizations = DATABASE.get_student_class_customizations(result['username'])
+    adventure_index = 0
+    adventures_for_this_level = student_customizations.get('sorted_adventures', {}).get(str(result['level']), [])
+    for index, adventure in enumerate(adventures_for_this_level):
+        if adventure['name'] == result['adventure_name']:
+            adventure_index = index
+            break
+    
+    next_program_id = None
+    for i in range(adventure_index + 1, len(adventures_for_this_level)):
+        next_adventure = adventures_for_this_level[i]
+        next_adventure_id = f'{result['username']}-{next_adventure['name']}-{result['level']}'
+        next_student_adventure = DATABASE.student_adventure_by_id(next_adventure_id) or {}
+        next_program_id = next_student_adventure.get('program_id')
+        if next_program_id:
+            break
 
     return render_template("view-program-page.html",
                            blur_button_available=True,
@@ -1632,6 +1650,8 @@ def view_program(user, id):
                                level=int(result['level']),
                                code=code),
                            is_teacher=user['is_teacher'],
+                           class_id=student_customizations['id'],
+                           next_program_id=next_program_id,
                            **arguments_dict)
 
 
