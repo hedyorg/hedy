@@ -3,9 +3,10 @@ from workbook_rewriter import process_workbook
 
 current_directory = os.path.dirname(os.path.abspath(__file__))
 
-max_lesson = 3
+min_lesson = 4
+max_lesson = 5
 
-for lesson in range(1, max_lesson):
+for lesson in range(min_lesson, max_lesson):
     json_data = process_workbook(lesson, current_directory)
     print()
 

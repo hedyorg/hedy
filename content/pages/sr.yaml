@@ -2,7 +2,8 @@ title: Hedy документација
 home-sections:
 -   title: Текстуално програмирање учињено лаким!
     text: |-
-        Многе школе и наставници широм света желе да науче своје ученике програмирању. У почетку се то често ради са разиграним алатима, од робота Beebot до Scratch Junior или Scratch. Након коришћења таквих алата, деца често желе да пређу на моћније, текстуалне програмске језике, као што је Python.
+        Многе школе и наставници широм света желе да науче своје ученике програмирању. У почетку се то често ради са разиграним алатима, од робота Beebot до
+        Scratch Junior или Scratch. Након коришћења таквих алата, деца често желе да пређу на моћније, текстуалне програмске језике, као што је Python.
 
         Међутим, Python је тежак, јер је доступан само на енглеском и захтева од ученика да истовремено науче сложене програмске концепте и синтаксу.
         Hedy је лак начин да започнете са текстуалним програмским језицима! Hedy је бесплатан за коришћење, отвореног кода, и за разлику од било ког другог текстуалног програмског језика у три начина.
@@ -192,6 +193,7 @@ teacher-guide:
             <img src="https://github.com/hedyorg/hedy/assets/80678586/99a34dab-f112-459e-bfd1-07618be4715a" width = "1000">
             Ова функција вам омогућава да поставите праг за оцену квиза ваших ученика пре него што могу наставити на следећи ниво. На пример, ако унесете "80", ваши ученици морају постићи најмање 80% на квизу пре него што им буде дозвољено да пређу на следећи ниво. Ако нису испунили праг, није им дозвољено да наставе и морају поново полагати квиз.
             Не желите да користите праг? Нема бриге, само оставите овај одељак празан.
+
 
             **Остала подешавања**
             <img src="https://github.com/hedyorg/hedy/assets/80678586/a8491d67-6d6e-42a7-b672-fd3d083a76f8"/>
@@ -427,8 +429,8 @@ teacher-guide:
             example:
                 error_text: Често ученици воле да испробавају велике бројеве када користе корњачу, што узрокује да стрелица хода ван екрана.
                 error_code: |-
-                    {forward} 300
-                    {turn} 90
+                    {напред} 300
+                    {скрени} 90
                 solution_text: У примеру, ученици имају тенденцију да мисле да команда за окретање није успела; иако је урадила оно што је требало. Оно што се догодило је да је корњача прошла границе екрана. Користите мање бројеве да бисте то спречили.
                 solution_code: |-
                     {forward} 100
@@ -438,15 +440,15 @@ teacher-guide:
                 error_text: Backward није команда.
                 error_code: назад 100
                 solution_text: 'Да би корњача ишла уназад, користите команду {forward} и негативан број. На пример:'
-                solution_code: '{forward} -100'
+                solution_code: '{напред} -100'
     -   level: '2'
         sections:
         -   title: Ученици праве типографске грешке у својим командама
             example:
                 error_text: Hedy не може препознати команду са типографском грешком.
-                error_code: prinnt Don't make typos
+                error_code: prinnt Не прави грешке у куцању
                 solution_text: Научите своје ученике да читају поруке о грешкама. На тај начин могу сами открити шта је пошло наопако.
-                solution_code: "{print} Don't make typos"
+                solution_code: "{print} Не прави грешке у куцању"
         -   title: Ученици заборављају да је команда ask промењена
             example:
                 error_text: На овом нивоу ученици уче о променљивама. Команда ask такође захтева променљиву, али ученици то заборављају.
@@ -537,613 +539,613 @@ teacher-guide:
                     {print} птице {at} {random}
         -   title: Ученици заборављају да користе команду `{print}` када такође користе команду `{at}` `{random}`
             example:
-                error_text: Or they will sometimes put `{at}` `{random}` at the beginning of the line.
+                error_text: Или ће понекад ставити `{at}` `{random}` на почетак линије.
                 error_code: |-
-                    fruit {is} apple, cherry, banana
-                    fruit {at} {random}
-                solution_text: Emphasize to your students that you always need a print to print text.
+                    воће {is} јабука, трешња, банана
+                    воће {at} {random}
+                solution_text: Нагласите својим ученицима да увек треба да користе {print} за приказивање текста.
                 solution_code: |-
-                    fruit {is} apple, cherry, banana
-                    {print} fruit {at} {random}
-        -   title: Students forget to use commas in their lists
+                    воће {is} јабука, трешња, банана
+                    {print} воће {at} {random}
+        -   title: Ученици заборављају да користе зарезе у својим листама
             example:
-                error_text: In a list items are seperated with a comma.
+                error_text: У листи, ставке су одвојене зарезом.
                 error_code: |-
-                    pizzas {is} funghi tonno quattro stagioni
-                    {print} pizzas {at} {random}
-                solution_text: After each item on your list, there should be a comma
+                    пице {is} фунги тонно куатро стађони
+                    {print} пице {at} {random}
+                solution_text: После сваке ставке у листи треба да буде зарез
                 solution_code: |-
-                    pizzas {is} funghi, tonno, quattro stagioni
-                    {print} pizzas {at} {random}
-        -   title: Students try to use `{at}` `{random}` without a list
+                    пице {is} фунги, тонно, куатро стађони
+                    {print} пице {at} {random}
+        -   title: Ученици покушавају да користе `{at}` `{random}` без листе
             example:
-                error_text: For example
+                error_text: На пример
                 error_code: |-
-                    clubs {is} Manchester United
-                    {print} clubs {at} {random}
-                solution_text: Hedy can't print anything at random, because there is no list to choose from.
+                    клубови {is} Манчестер Јунајтед
+                    {print} клубови {at} {random}
+                solution_text: Хеди не може ништа да прикаже насумично, јер не постоји листа из које би бирала.
                 solution_code: |-
-                    clubs {is} Manchester United, Bayrn Munchen, FC Barcelona
-                    {print} clubs {at} {random}
-        -   title: Students try to use add/remove without a list
+                    клубови {is} Манчестер Јунајтед, Бајерн Минхен, ФК Барселона
+                    {print} клубови {at} {random}
+        -   title: Ученици покушавају да користе додавање/уклањање без листе
             example:
-                error_text: In the example below 'names' is not a list, but a variable. You cannot add anything to it.
+                error_text: У примеру испод 'имена' није листа, већ променљива. Не можете ништа додати у њу.
                 error_code: |-
-                    names {is} Jake
-                    your_name {is} {ask} Who are you?
-                    {add} your_name {to} names
-                    {print} names {at} {random}
-                solution_text: There has to be a list first, so you have to add a second name to turn names into a list, for example Amy. If you don't want amy on your list, you can use remove to remove it after.
+                    имена {is} Џејк
+                    твоје_име {is} {ask} Ко си ти?
+                    {add} твоје_име {to} имена
+                    {print} имена {at} {random}
+                solution_text: Прво мора постојати листа, тако да морате додати друго име да бисте претворили имена у листу, на пример Ејми. Ако не желите Ејми на својој листи, можете је уклонити касније.
                 solution_code: |-
-                    names {is} Jake, Amy
-                    your_name {is} {ask} Who are you?
-                    {add} your_name {to} names
-                    {print} names {at} {random}
-        -   title: Students forget to use to/from in add/remove
+                    имена {is} Џејк, Ејми
+                    твоје_име {is} {ask} Ко си ти?
+                    {add} твоје_име {to} имена
+                    {print} имена {at} {random}
+        -   title: Students forget to use `{to}`/`{from}` in `{add}`/`{remove}`
             example:
-                error_text: Without to/from the add/remove command won't work.
+                error_text: Без to/from команда за додавање/уклањање неће радити.
                 error_code: |-
-                    adventures {is} story, parrot, dice
-                    choice {is} Which adventure do you like best?
-                    {add} choice
-                    {remove} dice
-                    {print} I love adventures {at} {random}
-                solution_text: Hedy has to know which list the item should be added to/removed from.
+                    авантуре {is} прича, папагај, коцкице
+                    избор {is} Која авантура ти се највише допада?
+                    {add} избор
+                    {remove} коцкице
+                    {print} Волим авантуре {at} {random}
+                solution_text: Хеди мора знати у коју листу треба додати ставку/уклонити ставку.
                 solution_code: |-
-                    adventures {is} story, parrot, dice
-                    choice {is} Which adventure do you like best?
-                    {add} choice {to_list} adventures
-                    {remove} dice {from} adventures
-                    {print} I love adventures {at} {random}
+                    авантуре {is} прича, папагај, коцкице
+                    избор {is} Која авантура ти се највише допада?
+                    {add} избор {to_list} авантуре
+                    {remove} коцкице {from} авантуре
+                    {print} Волим авантуре {at} {random}
     -   level: '4'
         sections:
-        -   title: Students forget to use quotation marks on both sides of the text
+        -   title: Ученици заборављају да користе наводнике са обе стране текста
             example:
-                error_text: In this level print and ask need a set of quotation marks. One before of the text and one after.
+                error_text: На овом нивоу {print} и {ask} захтевају сет наводника. Један пре текста и један после.
                 error_code: |-
-                    {print} Hello
-                    mood {is} {ask} 'How are you?
-                solution_text: Add the correct quotation marks.
+                    {print} Здраво
+                    расположење {is} {ask} 'Како си?
+                solution_text: Додајте исправне наводнике.
                 solution_code: |-
-                    {print} 'Hello'
-                    mood {is} {ask} 'How are you?'
-        -   title: Students use the wrong quotation marks
+                    {print} 'Здраво'
+                    расположење {is} {ask} 'Како си?'
+        -   title: Ученици користе погрешне наводнике
             example:
-                error_text: It is important to start your lesson by checking if the students know how to type a quotation mark properly. Else they might use the "double quotes" or the skewed one `.
+                error_text: It is important to start your lesson by checking if the students know how to type a quotation mark properly. On Hedy, students might use single quotes ('') and double quotes (""). Backticks on the other hand, are not considered valid quotes (``).
                 error_code: |-
-                    {print} `Welcome to the restaurant`
-                    food {is} {ask} "What would you like to order?"
-                solution_text: 'These are the correct quotation marks:'
+                    {print} `Добродошли у ресторан`
+                    храна {is} {ask} "Шта бисте желели да наручите?"
+                solution_text: 'Ово су исправни наводници:'
                 solution_code: |-
-                    {print} 'Welcome to the restaurant'
-                    food {is} {ask} 'What would you like to order?'
-        -   title: Students use an apostrophe in their text
+                    {print} 'Добродошли у ресторан'
+                    храна {is} {ask} 'Шта бисте желели да наручите?'
+        -   title: Ученици користе апостроф у свом тексту
             example:
-                error_text: From this level on apostrophes are not allowed. They are often used in English when typing contractions like you're, don't or what's.
-                error_code: "{print} 'You're not allowed to type this'"
-                solution_text: You can choose to use the wrong grammar and just leave the apostrophe out. Or you could use the ` as an apostrophe.
+                error_text: Од овог нивоа апострофи нису дозвољени. Често се користе у енглеском језику када се пишу скраћенице као што су you're, don't или what's.
+                error_code: "{print} 'You`re not allowed to type this'"
+                solution_text: Можете одлучити да користите погрешну граматику и једноставно изоставите апостроф. Или можете користити ` као апостроф.
                 solution_code: |-
-                    {print} 'Youre allowed to type this'
-                    {print} 'And you`re able to do this'
+                    {print} 'Дозвољено ти је да укуцаш ово'
+                    {print} 'И можеш да урадиш ово'
     -   level: '5'
         sections:
-        -   title: Students forget to use `{print}` in an `{if}` command
+        -   title: Ученици заборављају да користе `{print}` у `{if}` команди
             example:
-                error_text: After students use `{if}` or `{else}` they forget to use a second command like `{print}` or `{ask}`.
+                error_text: Након што ученици користе `{if}` или `{else}`, заборављају да користе другу команду као што су `{print}` или `{ask}`.
                 error_code: |-
-                    {if} name {is} Hedy 'Great!'
-                    {else}  Hedy {is} better!
-                solution_text: Add the print command to fix it.
+                    {if} име {is} Хеди 'Сјајно!'
+                    {else} Хеди {is} боља!
+                solution_text: Додајте команду за приказивање да бисте је поправили.
                 solution_code: |-
-                    {if} name {is} Hedy {print} 'Great!'
-                    {else} {print} 'Hedy is better!'
-        -   title: Students might use two different names for the same variable
+                    {if} име {is} Хеди {print} 'Сјајно!'
+                    {else} {print} 'Хеди је боља!'
+        -   title: Ученици могу користити два различита имена за исту променљиву
             example:
-                error_text: In this example the student has used 'horse' and 'name' for the same variables.
+                error_text: У овом примеру ученик је користио 'коњ' и 'име' за исте променљиве.
                 error_code: |-
-                    horse {is} {ask} 'What is your horse called?'
-                    {if} name {is} Bonfire {print} 'cool'
-                    {else} {print} 'less cool!'
-                solution_text: Always check whether the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.
+                    коњ {is} {ask} 'Како се зове твој коњ?'
+                    {if} име {is} Бонфајр {print} 'кул'
+                    {else} {print} 'мање кул!'
+                solution_text: Увек проверавај да ли променљива има исто име кроз цео код. Мале разлике могу бити тешке за уочавање (на пример множина), али ће ометати рад кода.
                 solution_code: |-
-                    horse {is} {ask} 'What is your horse called'
-                    {if} horse {is} Bonfire {print} 'cool!'
-                    {else} {print} 'less cool!'
-        -   title: Students still forget the quotes on both sides
+                    коњ {is} {ask} 'Како се зове твој коњ'
+                    {if} коњ {is} Бонфајр {print} 'кул!'
+                    {else} {print} 'мање кул!'
+        -   title: Ученици и даље заборављају наводнике са обе стране
             example:
-                error_text: Using the `if` command can make the code lines very long and students tend to forget to use quotes.
+                error_text: Коришћење команде `if` може учинити линије кода веома дугим и ученици имају тенденцију да забораве да користе наводнике.
                 error_code: |-
-                    {if} name {is} Hedy {print} fun
-                    {else} {print} 'meh!
-                solution_text: Always use 2 quotes in a print command.
+                    {if} име {is} Хеди {print} забавно
+                    {else} {print} 'мех!
+                solution_text: Увек користи 2 наводника у команди за приказивање.
                 solution_code: |-
-                    {if} name {is} Hedy {print} 'fun'
-                    {else} {print} 'meh!'
-        -   title: Students use quotes around variable names
+                    {if} име {is} Хеди {print} 'забавно'
+                    {else} {print} 'мех!'
+        -   title: Ученици користе наводнике око имена променљивих
             example:
-                error_text: In this level there are no quotes around variable names.
+                error_text: На овом нивоу нема наводника око имена променљивих.
                 error_code: |-
-                    {if}  name  {is} 'Hedy' {print} 'fun'
-                    {else} {print} 'meh!'
-                solution_text: Remove the quotes to get the code to work.
+                    {if}  име  {is} 'Хеди' {print} 'забавно'
+                    {else} {print} 'мех!'
+                solution_text: Уклони наводнике да би код радио.
                 solution_code: |-
-                    {if} name {is} Hedy {print} 'fun'
-                    {else} {print} 'meh!
-        -   title: Students use long variable names containing two words
+                    {if} име {is} Хеди {print} 'забавно'
+                    {else} {print} 'мех!
+        -   title: Students use long variable names containing two or more words
             example:
-                error_text: A variable should be named with one word. You could use an underscore to connect two words. That counts as one.
-                error_code: chosen door is ask  Which door do you pick?
-                solution_text: Add an underscore.
-                solution_code: chosen_door {is} {ask} 'which door do you pick?'
-        -   title: Students want multiple answers to be correct
+                error_text: Variables in Hedy can't contain spaces, so, in order to use together several words, students need to connect them using underscores (_)
+                error_code: изабрана врата   Која врата бирате?
+                solution_text: Додај доњу црту.
+                solution_code: изабрана_врата {is} {ask} 'која врата бирате?'
+        -   title: Ученици желе да више одговора буде тачно
             example:
-                error_text: For example this student Hedy to tell all his friends that they are funny, but other classmates would be told that they are not.
-                error_code: "{if} name {is} Jesse, David, Souf print  You are funny  {else} {print} 'You are not funny'"
+                error_text: For example this student wants Hedy to tell all his friends that they are funny, while other classmates should be told that they are not.
+                error_code: "{if} name {is} Jesse, David, Souf {print} 'You are funny' {else} {print} 'You are not funny'"
                 solution_text: |-
-                    You could use the `in` command for that. It is explained in a higher level, but it does already work in level 5.
-                    Another solution is to use multiple if commands and no else command. The disadvantage is that it won't tell the other classmates that they are not funny.
+                    You could use the `{in}` command for that. While it is explained in a higher level, it does already work in level 5.
+                    Another solution is to use multiple `{if}` commands and no `{else}` command. The disadvantage is that it won't tell the other classmates that they are not funny.
                 solution_code: |-
-                    friends {is} Jesse, David, Souf
-                    name {is} {ask} 'Who are you?'
-                    {if} name {in} friends {print} 'You are funny'
-                    {else} {print} 'You are not funny'
+                    пријатељи {is} Џеси, Давид, Суф
+                    име {is} {ask} 'Ко си ти?'
+                    {if} име {in} пријатељи {print} 'Смешан си'
+                    {else} {print} 'Ниси смешан'
 
-                    # or
+                    # или
 
-                    name {is} {ask} 'Who are you?'
-                    {if} naam {is} Jesse {print} 'You are funny'
-                    {if} naam {is} David {print} 'You are funny'
-                    {if} naam {is} Souf {print} 'You are funny'
-        -   title: The students make the variable name the same as the value in the `{if}` statement
+                    име {is} {ask} 'Ко си ти?'
+                    {if} име {is} Џеси {print} 'Смешан си'
+                    {if} име {is} Давид {print} 'Смешан си'
+                    {if} име {is} Суф {print} 'Смешан си'
+        -   title: Ученици праве име променљиве исто као вредност у `{if}` изјави
             example:
-                error_text: In the example below the password is 'password'. This will result in it always being correct.
+                error_text: У примеру испод лозинка је 'лозинка'. Ово ће резултирати тиме да увек буде тачно.
                 error_code: |-
-                    password {is} {ask} 'What is the password?'
-                    {if} password {is} password {print} 'Access granted'
-                    {else} {print} 'Acces denied!'
-                solution_text: Pick a different name for your variable.
+                    лозинка {is} {ask} 'Која је лозинка?'
+                    {if} лозинка {is} лозинка {print} 'Приступ одобрен'
+                    {else} {print} 'Приступ одбијен!'
+                solution_text: Изабери друго име за своју променљиву.
                 solution_code: |-
-                    secret_password {is} {ask} 'What is the password'
-                    {if} secret_password {is} password {print} 'Access granted!'
-                    {else} {print} 'Access denied!'
+                    тајна_лозинка {is} {ask} 'Која је лозинка'
+                    {if} тајна_лозинка {is} лозинка {print} 'Приступ одобрен!'
+                    {else} {print} 'Приступ одбијен!'
     -   level: '6'
         sections:
-        -   title: Students struggle with quotation marks
+        -   title: Ученици се муче са наводницима
             example:
-                error_text: Some students struggle with adding quotation marks or not. If you add quotation marks, the output screen will literally show '5+5'.
+                error_text: Неки ученици се муче са додавањем наводника или не. Ако додаш наводнике, излазни екран ће буквално приказати '5+5'.
                 error_code: "{print} '5 + 5'"
-                solution_text: In this code the output screen will print '10'.
+                solution_text: У овом коду излазни екран ће приказати '10'.
                 solution_code: '{print} 5 + 5'
-        -   title: Students struggle with the concept of doing maths with a variable
+        -   title: Ученици се муче са концептом рачунања са променљивом
             example:
-                error_text: 'Some students will find it hard to do maths with variables. Try to show them very simple examples, like:'
+                error_text: 'Неки ученици ће сматрати да је тешко рачунати са променљивама. Покушај да им покажеш веома једноставне примере, као што су:'
                 error_code: |-
-                    age = {ask} 'How old are you?'
-                    {print} 'Next year you will be ' age + 1
-                solution_text: Or take it a step further like this.
+                    године = {ask} 'Колико имаш година?'
+                    {print} 'Следеће године ћеш имати ' године + 1
+                solution_text: Или направи корак даље овако.
                 solution_code: |-
-                    price = 0
-                    {print} 'Welcome to our burger restaurant'
-                    burger = {ask} 'Would you like a burger?'
-                    {if} burger = yes price = price + 10
-                    drink = {ask} 'Would you like a drink?'
-                    {if} drink = yes price = price + 4
-                    {print} 'That will be ' price ' euros please'
+                    цена = 0
+                    {print} 'Добродошли у наш ресторан са бургерима'
+                    бургер = {ask} 'Да ли желите бургер?'
+                    {if} бургер = да цена = цена + 10
+                    пиће = {ask} 'Да ли желите пиће?'
+                    {if} пиће = да цена = цена + 4
+                    {print} 'То ће бити ' цена ' евра, молим'
     -   level: '7'
         sections:
-        -   title: Students forget one of the word of the repeat command, or they forget the print command
+        -   title: Ученици заборављају једну од речи у команди за понављање, или заборављају команду за приказивање
             example:
-                error_text: Make sure that the students know to use both the full repeat command and the print command.
+                error_text: Увери се да ученици знају да користе и пуну команду за понављање и команду за приказивање.
                 error_code: |-
-                    {repeat} 3 {times}  For he`s a jolly good fellow
+                    {repeat} 3 {times} For he`s a jolly good fellow
                     {repeat} 3 print
-                solution_text: 'This is the correct code:'
+                solution_text: 'Ово је исправан код:'
                 solution_code: |-
-                    {repeat} 3 {times} {print} 'For he`s a jolly good fellow'
-                    {repeat} 3 {times} {print} 'Which nobody can deny!'
-        -   title: Students try to repeat multiple lines
+                    {repeat} 3 {times} {print} 'Јер он је весео добар друг'
+                    {repeat} 3 {times} {print} 'Што нико не може порећи!'
+        -   title: Студенти покушавају да понове више линија
             example:
-                error_text: In this level you can only repeat one line of code multiple times. In this code the student wanted to print 3 different drinks, but it won't work. It will ask the question 3 times and only print the last answer.
+                error_text: На овом нивоу можете понављати само једну линију кода више пута. У овом коду ученик је желео да испише 3 различита пића, али то неће радити. Питаће питање 3 пута и исписати само последњи одговор.
                 error_code: |-
-                    {repeat} 3 {times} drink = {ask} 'What would you like to drink?'
+                    {repeat} 3 {times} drink = {ask} 'Шта бисте желели да пијете?'
                     {print} drink
-                solution_text: You should go to the next level to be able to repeat multiple lines. So on this level you'll have to print everything seperately.
+                solution_text: Требало би да пређете на следећи ниво да бисте могли да понављате више линија. Дакле, на овом нивоу морате све исписати одвојено.
                 solution_code: |-
-                    drink = {ask} 'What would you like to drink?'
+                    drink = {ask} 'Шта бисте желели да пијете?'
                     {print} drink
-                    drink = {ask} 'What would you like to drink?'
+                    drink = {ask} 'Шта бисте желели да пијете?'
                     {print} drink
-                    drink = {ask} 'What would you like to drink?'
+                    drink = {ask} 'Шта бисте желели да пијете?'
                     {print} drink
-        -   title: Students make programs that take too long to run
+        -   title: Студенти праве програме који трају предуго да се изврше
             example:
-                error_text: In this level it's very easy to make long-running programs. The students aren't allowed to make programs that take to long to load (to save our servers).
-                error_code: "{repeat} 100 {times} {print} 'How many times can I repeat this?'"
-                solution_text: Make sure the programs aren't too long
-                solution_code: "{repeat} 20 {times} {print} 'This is enough'"
+                error_text: На овом нивоу је веома лако направити програме којима је потребно много времена да се заврше. Ако програм траје предуго, биће заустављен, са намером да се спречи оптерећење ученикове машине.
+                error_code: "{repeat} 100 {times} {print} 'Колико пута могу ово да поновим?'"
+                solution_text: Провери да се програм не извршава предуго
+                solution_code: "{repeat} 20 {times} {print} 'Ово је довољно'"
     -   level: '8'
         sections:
-        -   title: Students use the indentation wrong
+        -   title: Студенти погрешно користе увлачење
             example:
-                error_text: Indentation is a new concept in this level, that is hard to use for some students. Make sure they practise some simple snippets before making a whole program with it.
+                error_text: Увлачење је нови концепт на овом нивоу, и неким ученицима може бити тешко да га науче. Уверите се да вежбају неке једноставне примере пре него што направе цео програм са њим.
                 error_code: |-
                     {repeat} 3 {times}
-                    {print} 'hello'
-                solution_text: 'This is the correct code:'
+                    {print} 'здраво'
+                solution_text: 'Ово је исправан код:'
                 solution_code: |-
                     {repeat} 3 {times}
-                        {print} 'hello'
-        -   title: Students only repeat 1 line when they wanted to repeat multiple lines
+                        {print} 'здраво'
+        -   title: Студенти понове само једну линију када су желели да понове више линија
             example:
-                error_text: For instance, in the code below the student wanted to take the drinks order of 3 people. But instead the program asked 3 times, but only wrote down one order.
+                error_text: На пример, у коду испод ученик је желео да узме наруџбину пића за 3 особе. Али уместо тога, програм је питао 3 пута, али је записао само једну наруџбину.
                 error_code: |-
                     {repeat} 3 {times}
-                        drink = {ask} 'What would you like to drink?'
+                        drink = {ask} 'Шта бисте желели да пијете?'
                     {print} drink
                 solution_text: |-
-                    In the correct code the third line starts with indentation too. This way it belongs to the repeat block and therefore it will be repeated 3 times.
-                    Showing your students these differences can help them understand why we need indentation to make our programs work.
+                    У исправном коду трећа линија такође почиње са увлачењем. На тај начин припада блоку понављања и стога ће се поновити 3 пута.
+                    Показивање ових разлика вашим ученицима може им помоћи да разумеју зашто нам је потребно увлачење да би наши програми радили.
                 solution_code: |-
                     {repeat} 3 {times}
-                        drink = {ask} 'What would you like to drink?'
+                        drink = {ask} 'Шта бисте желели да пијете?'
                         {print} drink
-        -   title: Students want to nest `{if}` statements, or put `{if}` statements inside a loop
+        -   title: Студенти желе да угнезде {if} наредбе, или да ставе {if} наредбе унутар петље
             example:
                 error_text: |-
-                    In this level students aren't allowed yet to put `{if}` statements inside other `{if}` statements or inside repeat loops.
-                    In the next level this is allowed.
+                    На овом нивоу ученицима још није дозвољено да стављају `{if}` изјаве унутар других `{if}` изјава или унутар понављајућих петљи.
+                    На следећем нивоу ово је дозвољено.
                 error_code: |-
-                    birthday = {ask} 'Is it you birthday?'
-                    {if} birthday = yes
+                    birthday = {ask} 'Да ли ти је рођендан?'
+                    {if} birthday = да
                         {repeat} 3 {times}
-                            {print} 'Hip Hip Hooray!'
-                solution_text: 'This is the correct code for this level:'
+                            {print} 'Хип Хип Ура!'
+                solution_text: 'Ово је исправан код за овај ниво:'
                 solution_code: |-
-                    birthday = {ask} 'Is it you birthday?'
-                    {if} birthday = yes
-                        {print} 'Hip Hip Hooray!'
-                        {print} 'Hip Hip Hooray!'
-                        {print} 'Hip Hip Hooray!'
-        -   title: Students make programs that take too long to run
+                    birthday = {ask} 'Да ли ти је рођендан?'
+                    {if} birthday = да
+                        {print} 'Хип Хип Ура!'
+                        {print} 'Хип Хип Ура!'
+                        {print} 'Хип Хип Ура!'
+        -   title: Студенти праве програме који трају предуго да се изврше
             example:
-                error_text: In this level it's very easy to make long-running programs. The students aren't allowed to make programs that take to long to load (to save our servers).
+                error_text: На овом нивоу је веома лако направити програме којима је потребно много времена да се заврше. Ако програм траје предуго, биће заустављен, са намером да се спречи оптерећење ученикове машине.
                 error_code: |-
                     {repeat} 100 {times}
-                        {print} 'How many times can I repeat this?'
-                solution_text: Make sure the programs aren't too long
+                        {print} 'Колико пута могу ово да поновим?'
+                solution_text: Провери да се програм не извршава предуго
                 solution_code: |-
                     {repeat} 20 {times}
-                        {print} 'This is enough'
-        -   title: Students use the `{if}` command to check if the variable value is the same as the variable name
+                        {print} 'Ово је довољно'
+        -   title: Студенти користе {if} команду да провере да ли је вредност променљиве иста као име променљиве
             example:
                 error_text: |-
-                    We have seen this mistake by some of our students. They make a password for their computer, but they make the password 'password'.
-                    In line 2 the computer is asked to check whether the variable password is the same as the variable password, so itself. Which means the answer is always yes.
-                    So with this code the answer will always be 'You can come in' no matter what the player fills in.
+                    Приметили смо уобичајену грешку међу нашим ученицима: покушавају да направе програм који проверава лозинку, али праве лозинку 'password'.
+                    У линији 2 рачунар се пита да ли је променљива password иста као променљива password, дакле сама себи. Што значи да је одговор увек да.
+                    Дакле, са овим кодом одговор ће увек бити 'You can come in' без обзира шта играч унесе.
                 error_code: |-
-                    password {is} {ask} 'What is the password?'
+                    password {is} {ask} 'Која је лозинка?'
                     {if} password {is} password
-                        {print} 'You can come in'
+                        {print} 'Можеш ући'
                     {else}
-                        {print} 'You are not allowed'
-                solution_text: You can fix this mistake by adding quotation marks. This way the computer knows that the second password in `{if} password {is} 'password'` is a string value (so normal text) and not the variable name.
+                        {print} 'Није ти дозвољено'
+                solution_text: Можете исправити ову грешку додавањем наводника. На тај начин рачунар зна да је друга променљива password у `{if} password {is} 'password'` стринг вредност (дакле обичан текст), а не име променљиве.
                 solution_code: |-
-                    password {is} {ask} 'What is the password?'
-                    {if} password {is} 'password'
-                        {print} 'You can come in'
+                    password {is} {ask} 'Која је лозинка?'
+                    {if} password {is} 'лозинка'
+                        {print} 'Можеш ући'
                     {else}
-                        {print} 'You are not allowed'
+                        {print} 'Није ти дозвољено'
     -   level: '9'
         sections:
-        -   title: Students make mistakes with indentation
+        -   title: Студенти праве грешке са увлачењем
             example:
-                error_text: The hardest part about this level is getting the indentation right. Students love nesting `{if}` statements, sometimes even inside other nested `{if}` statements. Keeping track of indentation can get pretty tough.
+                error_text: Најтежи део овог нивоа је исправно увлачење. Студенти воле да угнезде {if} наредбе, понекад чак и унутар других угнеждених {if} наредби. Праћење увлачења може бити прилично тешко.
                 error_code: |-
-                    {print} 'Robin is walking downtown'
-                    location = {ask} 'Is Robin going into a shop, or does she go home?'
-                    {if} location {is} shop
-                        {print} 'She enters the shop.'
-                        {print} 'Robin sees an interesting looking book'
-                        book = {ask} 'Does Robin buy the book?'
-                            {if} book {is} yes
-                    {print} 'Robin buys the book and goes home'
+                    {print} 'Робин шета центром града'
+                    location = {ask} 'Да ли Робин улази у продавницу, или иде кући?'
+                    {if} location {is} продавница
+                        {print} 'Она улази у продавницу.'
+                        {print} 'Робин види занимљиву књигу'
+                        book = {ask} 'Да ли Робин купује књигу?'
+                            {if} book {is} да
+                    {print} 'Робин купује књигу и иде кући'
                     {else}
-                        {print} 'Robin leaves the shop and goes home'
+                        {print} 'Робин напушта продавницу и иде кући'
                     {else}
-                        {print} 'Robin goes home'
-                solution_text: This is the correct code. Try to keep track of all the different constructions when putting `{if}` statements inside other `{if}` statements.
+                        {print} 'Робин иде кући'
+                solution_text: Ово је исправан код. Покушај да пратиш све различите конструкције када стављаш {if} наредбе унутар других {if} наредби.
                 solution_code: |-
-                    {print} 'Robin is walking downtown'
-                    location = {ask} 'Is Robin going into a shop, or does she go home?'
-                    {if} location {is} shop
-                        {print} 'She enters the shop.'
-                        {print} 'Robin sees an interesting looking book'
-                        book = {ask} 'Does Robin buy the book?'
-                        {if} book {is} yes
-                            {print} 'Robin buys the book and goes home'
+                    {print} 'Робин шета центром града'
+                    location = {ask} 'Да ли Робин улази у продавницу, или иде кући?'
+                    {if} location {is} продавница
+                        {print} 'Она улази у продавницу.'
+                        {print} 'Робин види занимљиву књигу'
+                        book = {ask} 'Да ли Робин купује књигу?'
+                        {if} book {is} да
+                            {print} 'Робин купује књигу и иде кући'
                         {else}
-                            {print} 'Robin leaves the shop and goes home'
+                            {print} 'Робин напушта продавницу и иде кући'
                     {else}
-                        {print} 'Robin goes home'
+                        {print} 'Робин иде кући'
     -   level: '10'
         sections:
-        -   title: Students do not use the for command correctly
+        -   title: Студенти не користе {for} команду исправно
             example:
-                error_text: We often see that students try to print the list (in the example animals) instead of the items of the list.
+                error_text: Често видимо да студенти покушавају да одштампају листу (у примеру животиње) уместо ставке листе.
                 error_code: |-
-                    animals {is} dog, cat, blobfish
-                    {for} animal {in} animals
-                      {print} 'I love ' animals
-                solution_text: The word animals in the last line should be changed into animal.
+                    животиње {is} пас, мачка, blobfish
+                    {for} животиња {in} животиње
+                      {print} 'Волим ' животиње
+                solution_text: Реч животиње у последњој линији треба променити у животиња.
                 solution_code: |-
-                    animals {is} dog, cat, blobfish
-                    {for} animal {in} animals
-                      {print} 'I love ' animal
-        -   title: Students forget the indentation
+                    животиње {is} пас, мачка, blobfish
+                    {for} животиња {in} животиње
+                      {print} 'Волим ' животиња
+        -   title: Студенти заборављају увлачење
             example:
-                error_text: Students tend to forget to use indentation after a for command.
+                error_text: Студенти имају тенденцију да забораве да користе увлачење након команде for.
                 error_code: |-
-                    animals {is} dog, cat, blobfish
-                    {for} animal {in} animals
-                    {print} 'I love ' animals
-                solution_text: You should use indentation after a for command.
+                    животиње {is} пас, мачка, blobfish
+                    {for} животиња {in} животиње
+                    {print} 'Волим ' животиње
+                solution_text: Требало би да користите увлачење након команде for.
                 solution_code: |-
-                    animals {is} dog, cat, blobfish
-                    {for} animal {in} animals
-                      {print} 'I love ' animal
+                    животиње {is} пас, мачка, blobfish
+                    {for} животиња {in} животиње
+                      {print} 'Волим ' животиња
     -   level: '11'
         sections:
-        -   title: Students forget to use indentation
+        -   title: Студенти заборављају да користе увлачење
             example:
-                error_text: Make sure that the students use indentation.
+                error_text: Уверите се да студенти користе увлачење.
                 error_code: |-
                     {for} i {in} {range} 1 {to} 5
                     {print} i
-                solution_text: 'This is the correct code:'
+                solution_text: 'Ово је исправан код:'
                 solution_code: |-
                     {for} i {in} {range} 1 {to} 5
                         {print} i
-        -   title: Students don't understand the i
+        -   title: Студенти не разумеју i
             example:
                 error_text: |-
-                    Some students don't understand that i is a variable. i is chosen, because it is used in Python programming, but you could just as easily use a different variable name.
-                    For example, this code:
+                    Неки студенти не разумеју да је i променљива. i је изабрано, јер се користи у Python програмирању, али можете једнако лако користити и друго име променљиве.
+                    На пример, овај код:
                 error_code: |-
                     {for} i {in} {range} 1 {to} 5
                     {print} i
-                solution_text: Could just as well be replaced with this code. It works the same.
+                solution_text: Може једнако добро бити замењен овим кодом. Ради исто.
                 solution_code: |-
-                    {for} banana {in} {range} 1 {to} 5
-                        {print} banana
+                    {for} банана {in} {range} 1 {to} 5
+                        {print} банана
     -   level: '12'
         sections:
-        -   title: Students forget quotation marks
+        -   title: Студенти заборављају наводнике
             example:
-                error_text: Students need more quotation marks now than in the previous levels. In this example quotation marks were forgotten in the list and in the `{if}` command.
+                error_text: Студентима сада треба више наводника него у претходним нивоима. У овом примеру наводници су заборављени у листи и у команди `{if}`.
                 error_code: |-
-                    superheroes = Spiderman, Batman, Iron Man
-                    superhero = superheroes {at} {random}
-                    {if} superhero = Batman
-                        {print} 'IM BATMAN!'
-                solution_text: 'This is the correct code:'
+                    суперхероји = Спајдермен, Бетмен, Ајронмен
+                    суперхерој = суперхероји {at} {random}
+                    {if} суперхерој = Бетмен
+                        {print} 'ЈА САМ БЕТМЕН!'
+                solution_text: 'Ово је исправан код:'
                 solution_code: |-
-                    superheroes = 'Spiderman', 'Batman', 'Iron Man'
-                    superhero = superheroes {at} {random}
-                    {if} superhero {is} 'Batman'
-                        {print} 'IM BATMAN!'
-        -   title: Students use quotation marks on numbers they want to use for calculations
+                    суперхероји = 'Спајдермен', 'Бетмен', 'Ајронмен'
+                    суперхерој = суперхероји {at} {random}
+                    {if} суперхерој {is} 'Бетмен'
+                        {print} 'ЈА САМ БЕТМЕН!'
+        -   title: Студенти користе наводнике на бројевима које желе да користе за прорачуне
             example:
                 error_text: |-
-                    You can use quotation marks on numbers, but only if you want the computer to think of them as text. This means you can't do calculations with the number.
-                    In the example below, you can't do maths with the number 25, because it's in quotation marks.
+                    Можете користити наводнике на бројевима, али само ако желите да рачунар мисли о њима као о тексту. То значи да не можете радити прорачуне са тим бројем.
+                    У примеру испод, не можете радити математику са бројем 25, јер је у наводницима.
                 error_code: |-
                     score = '25'
-                    answer {is} {ask} 'Do you want a point?'
-                    {if} answer {is} 'yes'
+                    answer {is} {ask} 'Да ли желите поен?'
+                    {if} answer {is} 'да'
                         score = score + 1
                         {print} score
-                solution_text: 'This is the correct code:'
+                solution_text: 'Ово је исправан код:'
                 solution_code: |-
                     score = 25
-                    answer {is} {ask} 'Do you want a point?'
-                    {if} answer {is} 'yes'
+                    answer {is} {ask} 'Да ли желите поен?'
+                    {if} answer {is} 'да'
                         score = score + 1
                         {print} score
-        -   title: Students use commas instead of periods in decimal numbers
+        -   title: Студенти користе зарезе уместо тачака у децималним бројевима
             example:
-                error_text: Decimal numbers can be used from this level on, but you can't use commas.
+                error_text: Децимални бројеви могу се користити од овог нивоа, али не можете користити зарезе.
                 error_code: '{print} 2,5 + 2,5'
-                solution_text: 'This is the correct code:'
+                solution_text: 'Ово је исправан код:'
                 solution_code: '{print} 2.5 + 2.5'
     -   level: '13'
         sections:
-        -   title: Students confuse `and` with `or`
+        -   title: Студенти мешају `{and}` са `{or}`
             example:
-                error_text: Both commands might appear similar, but their functions are very different.
+                error_text: Обе команде могу изгледати слично, али њихове функције су веома различите.
                 error_code: |-
-                    game {is} {ask} 'Do you want to play a game?'
-                    time {is} {ask} 'Do you have time to play?'
-                    {if} game {is} 'yes' {or} time {is} 'yes'
-                        {print} 'Lets play!'
-                solution_text: In this case, the person should answer yes on both questions, so you should use `and`.
+                    game {is} {ask} 'Да ли желиш да се играмо?'
+                    time {is} {ask} 'Да ли имаш времена за игру?'
+                    {if} game {is} 'да' {or} time {is} 'да'
+                        {print} 'Хајде да се играмо!'
+                solution_text: У овом случају, особа треба да одговори да на оба питања, па треба да користиш `и`.
                 solution_code: |-
-                    game {is} {ask} 'Do you want to play a game?'
-                    time {is} {ask} 'Do you have time to play?'
-                    {if} game {is} 'yes' {and} time {is} 'yes'
-                        {print} 'Lets play!'
+                    game {is} {ask} 'Да ли желиш да се играмо?'
+                    time {is} {ask} 'Да ли имаш времена за игру?'
+                    {if} game {is} 'да' {and} time {is} 'да'
+                        {print} 'Хајде да се играмо!'
     -   level: '14'
         sections:
-        -   title: Students confuse the < and > signs
+        -   title: Ученици мешају знакове < и >
             example:
-                error_text: Often, students are already familiar with these signs from maths class. But if your students don't know these signs yet, they might have a challenge with it.
+                error_text: Често, ученици су већ упознати са овим знаковима из математике. Али ако твоји ученици још не знају ове знакове, можда ће имати потешкоћа са њима.
                 error_code: |-
-                    age = {ask} 'How old are you?'
+                    age = {ask} 'Колико имаш година?'
                     {if} age < 12
-                        {print} 'You are older than I am!'
-                solution_text: 'This is the correct code:'
+                        {print} 'Старији си од мене!'
+                solution_text: 'Ово је исправан код:'
                 solution_code: |-
-                    age = {ask} 'How old are you?'
+                    age = {ask} 'Колико имаш година?'
                     {if} age > 12
-                        {print} 'You are older than I am!'
-        -   title: Students use the wrong signs for `!=` `<=` and `>=`
+                        {print} 'Старији си од мене!'
+        -   title: Ученици користе погрешне знакове за `!=` `<=` и `>=`
             example:
-                error_text: These signs are probably new for most students. Make sure to explain these signs to your students.
+                error_text: Ови знакови су вероватно нови за већину ученика. Обавезно објасни ове знакове својим ученицима.
                 error_code: |-
-                    name = {ask} 'What is your name?'
+                    name = {ask} 'Како се зовеш?'
                     {if} name =  'Hedy'
-                        {print} 'You are not Hedy'
-                solution_text: 'This is the correct code:'
+                        {print} 'Ниси Hedy'
+                solution_text: 'Ово је исправан код:'
                 solution_code: |-
-                    name = {ask} 'What is your name?'
+                    name = {ask} 'Како се зовеш?'
                     {if} name != 'Hedy'
-                        {print} 'You are not Hedy'
-        -   title: Students forget to use the == sign
+                        {print} 'Ниси Hedy'
+        -   title: Ученици заборављају да користе знак ==
             example:
-                error_text: In this level, students are still allowed to use = or is. But on other levels, or in python, they might get in trouble for that. So it is best to train them to use it.
+                error_text: На овом нивоу, ученицима је још увек дозвољено да користе = или is. Али на другим нивоима, или у Python-у, могу имати проблема због тога. Зато је најбоље да их обучиш да га користе.
                 error_code: |-
-                    name = {ask} 'What is your name?'
+                    name = {ask} 'Како се зовеш?'
                     {if} name = 'Hedy'
-                        {print} 'You are cool!'
-                solution_text: 'This is the correct code:'
+                        {print} 'Кул си!'
+                solution_text: 'Ово је исправан код:'
                 solution_code: |-
-                    name = {ask} 'What is your name?'
+                    name = {ask} 'Како се зовеш?'
                     {if} name == 'Hedy'
-                        {print} 'You are cool!'
+                        {print} 'Кул си!'
     -   level: '15'
         sections:
-        -   title: Students forget indentation in the while loop
+        -   title: Ученици заборављају увлачење у while петљи
             example:
-                error_text: Indentation is often hard for students.
+                error_text: Увлачење је често тешко за ученике.
                 error_code: |-
-                    answer = 0
-                    {while} answer != 25
-                    answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
-                solution_text: 'This is the correct code:'
+                    одговор = 0
+                    {while} одговор != 25
+                    одговор = {ask} 'Колико је 5 пута 5?'
+                    {print} 'Дат је тачан одговор'
+                solution_text: 'Ово је тачан код:'
                 solution_code: |-
-                    answer = 0
-                    {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
+                    одговор = 0
+                    {while} одговор != 25
+                        одговор = {ask} 'Колико је 5 пута 5?'
+                    {print} 'Дат је тачан одговор'
     -   level: '16'
         sections:
-        -   title: Students forget the brackets
+        -   title: Студенти заборављају заграде
             example:
-                error_text: From this level on lists should be in brackets.
+                error_text: Од овог нивоа листе треба да буду у заградама.
                 error_code: |-
-                    icecream = 'starwberry', 'chocolate'
-                    {print} 'I love ' icecream[{random}] ' icecream'
-                solution_text: 'This is the correct code:'
+                    сладолед = 'јагода', 'чоколада'
+                    {print} 'Обожавам ' сладолед[{random}] ' сладолед'
+                solution_text: 'Ово је тачан код:'
                 solution_code: |-
-                    icecream = ['starwberry', 'chocolate']
-                    {print} 'I love ' icecream[{random}] ' icecream'
-        -   title: Students use the wrong brackets
+                    сладолед = ['јагода', 'чоколада']
+                    {print} 'Волим ' сладолед[{random}] ' сладолед'
+        -   title: Студенти користе погрешне заграде
             example:
-                error_text: From this level on lists should be in brackets.
+                error_text: Од овог нивоа листе треба да буду у заградама.
                 error_code: |-
-                    icecream = ('starwberry', 'chocolate')
-                    {print} 'I love ' icecream[{random}] ' icecream'
-                solution_text: 'This is the correct code:'
+                    сладолед = ('јагода', 'чоколада')
+                    {print} 'Волим ' сладолед[{random}] ' сладолед'
+                solution_text: 'Ово је исправан код:'
                 solution_code: |-
-                    icecream = ['starwberry', 'chocolate']
-                    {print} 'I love ' icecream[{random}] ' icecream'
-        -   title: Students forget the quotation marks while focussing on the brackets
+                    сладолед = ['јагода', 'чоколада']
+                    {print} 'Волим ' сладолед[{random}] ' сладолед'
+        -   title: Студенти заборављају наводнике док се фокусирају на заграде
             example:
-                error_text: Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
+                error_text: Студенти су понекад толико фокусирани на нови аспект синтаксе, да забораве на наводнике.
                 error_code: |-
-                    icecream = [starwberry, chocolate]
-                    {print} 'I love ' icecream[{random}] ' icecream'
-                solution_text: 'This is the correct code:'
+                    сладолед = [јагода, чоколада]
+                    {print} 'Волим ' сладолед[{random}] ' сладолед'
+                solution_text: 'Ово је исправан код:'
                 solution_code: |-
-                    icecream = ['starwberry', 'chocolate']
-                    {print} 'I love ' icecream[{random}] ' icecream'
-        -   title: Students still use the old at random command
+                    сладолед = ['јагода', 'чоколада']
+                    {print} 'Волим ' сладолед[{random}] ' сладолед'
+        -   title: Студенти и даље користе стару команду за случајни избор
             example:
-                error_text: Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
+                error_text: Студенти су понекад толико фокусирани на нови аспект синтаксе, да забораве на наводнике.
                 error_code: |-
-                    icecream = [starwberry, chocolate]
-                    {print} 'I love ' icecream at random ' icecream'
-                solution_text: 'This is the correct code:'
+                    сладолед = [јагода, чоколада]
+                    {print} 'Волим ' сладолед at random ' сладолед'
+                solution_text: 'Ово је исправан код:'
                 solution_code: |-
-                    icecream = ['starwberry', 'chocolate']
-                    {print} 'I love ' icecream[{random}] ' icecream'
-        -   title: Students forget the quotation marks while focussing on the brackets
+                    сладолед = ['јагода', 'чоколада']
+                    {print} 'Волим ' сладолед[{random}] ' сладолед'
+        -   title: Студенти заборављају наводнике док се фокусирају на заграде
             example:
-                error_text: Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
+                error_text: Студенти су понекад толико фокусирани на нови аспект синтаксе да забораве наводнике.
                 error_code: |-
-                    icecream = [starwberry, chocolate]
-                    {print} 'I love ' icecream[{random}] ' icecream'
-                solution_text: 'This is the correct code:'
+                    сладолед = [јагода, чоколада]
+                    {print} 'Волим ' сладолед[{random}] ' сладолед'
+                solution_text: 'Ово је исправан код:'
                 solution_code: |-
-                    icecream = ['starwberry', 'chocolate']
-                    {print} 'I love ' icecream[{random}] ' icecream'
+                    сладолед = ['јагода', 'чоколада']
+                    {print} 'Волим ' сладолед[{random}] ' сладолед'
     -   level: '17'
         sections:
-        -   title: Students use `{elif}` like `{else}`, so without a condition
+        -   title: Студенти користе `{elif}` као `{else}`, дакле без услова
             example:
-                error_text: The `{elif}` command needs a condition behind it. It cannot be used like `{else}`, without a condition.
+                error_text: Команда `{elif}` захтева услов иза себе. Не може се користити као `{else}`, без услова.
                 error_code: |-
-                    color = ask 'What is your favorite color?'
-                    {if} color == 'green':
-                        {print} 'green is nice'
+                    color = ask 'Која је твоја омиљена боја?'
+                    {if} color == 'зелена':
+                        {print} 'зелена је лепа'
                     {elif}:
-                        {print} 'I like green'
-                solution_text: 'This is the correct code:'
+                        {print} 'Мени се свиђа зелена'
+                solution_text: 'Ово је исправан код:'
                 solution_code: |-
-                    color = {ask} 'What is your favorite color?'
-                    {if} color == 'green':
-                        {print} 'green is nice'
-                    {elif} color == yellow:
-                        {print} 'yellow is alright'
+                    color = {ask} 'Која је твоја омиљена боја?'
+                    {if} color == 'зелена':
+                        {print} 'зелена је лепа'
+                    {elif} color == жута:
+                        {print} 'жута је у реду'
                     {else}:
-                        {print} 'I like green'
-        -   title: Students forget the colon
+                        {print} 'Мени се свиђа зелена'
+        -   title: Студенти заборављају двотачку
             example:
-                error_text: After each command that requires indentation, a colon should be used.
+                error_text: Након сваке команде која захтева увлачење, треба користити двотачку.
                 error_code: |-
-                    answer = ask 'How are you doing?'
-                    {if} answer {is} 'great'
-                        {print} 'Me too!'
-                    {elif} answer {is} 'bad'
-                        {print} 'Let me cheer you up!'
+                    answer = ask 'Како си?'
+                    {if} answer {is} 'одлично'
+                        {print} 'И ја сам!'
+                    {elif} answer {is} 'лоше'
+                        {print} 'Хајде да те развеселим!'
                     {else}
-                        {print} 'Im great!'
-                solution_text: 'This is the correct code:'
+                        {print} 'Ја сам одлично!'
+                solution_text: 'Ово је исправан код:'
                 solution_code: |-
-                    answer = {ask} 'How are you doing?'
-                    {if} answer {is} 'great':
-                        {print} 'Me too!'
-                    {elif} answer {is} 'bad':
-                        {print} 'Let me cheer you up!'
+                    answer = {ask} 'Како си?'
+                    {if} answer {is} 'одлично':
+                        {print} 'И ја сам!'
+                    {elif} answer {is} 'лоше':
+                        {print} 'Хајде да те развеселим!'
                     {else}:
-                        {print} 'Im great!'
+                        {print} 'Ја сам одлично!'
     -   level: '18'
         sections:
-        -   title: Students forget to use the brackets
+        -   title: Студенти заборављају да користе заграде
             example:
-                error_text: Students will forget to put brackets around their text.
-                error_code: "{print} 'my name is Hedy!'"
-                solution_text: 'This is the correct code:'
-                solution_code: "{print}('my name is Hedy!')"
-        -   title: Students will still use the ask command
+                error_text: Студенти ће заборавити да ставе заграде око свог текста.
+                error_code: "{print} 'моје име је Хеди!'"
+                solution_text: 'Ово је исправан код:'
+                solution_code: "{print}('моје име је Хеди!')"
+        -   title: Студенти ће и даље користити команду ask
             example:
-                error_text: The ask command has been used since level 1. So it might be hard for the students to switch to input instead of ask.
+                error_text: Команда ask се користи од нивоа 1. Зато може бити тешко за студенте да пређу на input уместо ask.
                 error_code: |-
-                    {print}('My name is Hedy!')
-                    name = ask('What is your name?')
-                    {print}('So your name is ', name)
-                solution_text: 'This is the correct code:'
+                    {print}('Моје име је Хеди!')
+                    name = ask('Како се зовеш?')
+                    {print}('Дакле, твоје име је ', name)
+                solution_text: 'Ово је исправан код:'
                 solution_code: |-
-                    {print}('My name is Hedy!')
-                    name = {input}('What is your name?')
-                    {print}('So your name is ', name)
-        -   title: Students might use the brackets as quotation marks
+                    {print}('Моје име је Хеди!')
+                    name = {input}('Како се зовеш?')
+                    {print}('Дакле, твоје име је ', name)
+        -   title: Студенти могу користити заграде као наводнике
             example:
-                error_text: They have learned to keep the variables outside of the quotation marks, so they might do the same with the brackets. Which is not the correct way to use them.
+                error_text: Научили су да држе променљиве ван наводника, па могу исто урадити и са заградама. Што није исправан начин коришћења.
                 error_code: |-
                     temperature = 25
-                    {print}('It is ') temperature ('degrees outside')
-                solution_text: 'This is the correct code:'
+                    {print}('Напољу је ') temperature ('степени')
+                solution_text: 'Ово је исправан код:'
                 solution_code: |-
                     temperature = 25
-                    {print}('It is ', temperature, 'degrees outside')
+                    {print}('Напољу је ', temperature, 'степени')

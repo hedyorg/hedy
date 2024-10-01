@@ -66,8 +66,10 @@ Vind je het lastig? Gebruik dan weer het stappenplan om variabele-uitvoer te voo
 {
     "assignment": "output",
     "icon"      : "💻",
-    "code"      : "weer is zonnig, regen, wolken, onweer\nprint Wat is het lekker weer vandaag!",
-    "answer"    : "Fout! Je kan een lijst niet printen",
+    "code"      : 
+"weer is zonnig, regen, wolken, onweer\n
+print Wat is het lekker weer vandaag!",
+    "answer"    : "Wat is het lekker weer vandaag!",
     "lines"     : 1
 }
 
@@ -220,7 +222,7 @@ We hebben deze les weer nieuwe programmeerwoorden geleerd! Leg ze uit je eigen w
 
 #### Opdracht 7: Codes
 
-De code `is` is in dit leven veranderd, en we hebben ook nieuwe codes geleerd. 
+De code `is` is in dit level veranderd, en we hebben ook nieuwe codes geleerd. 
 Wat doen die? Leg het uit in je eigen woorden. 
 
 {
