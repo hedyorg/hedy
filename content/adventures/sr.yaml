@@ -2026,19 +2026,19 @@ adventures:
                     Да би позвао функцију, више нам није потребна команда `{call}`. Само укуцај име функције.
                 example_code: |
                     ```
-                    {def} calculate_score(answer, correct_answer):
-                        {if} answer == correct_answer:
-                            score = 1
-                        {elif} answer == '?':
-                            score = 0
+                    {def} израчунај_поене(одговор, тачан_одговор):
+                        {if} одговор == тачан_одговор:
+                            поени = 1
+                        {elif} одговор == '?':
+                            поени = 0
                         {else}:
-                            score = -1
-                        {return} score
+                            поени = -1
+                        {return} поени
 
-                    answer = {input} ('Where can you find the Eiffel Tower?')
-                    correct_answer = 'Paris'
-                    score = calculate_score(answer, correct_answer)
-                    {print} ('Your score is... ', score)
+                    одговор = {input} ('Где се налази Ајфелова кула?')
+                    тачан_одговор = 'Париз'
+                    поени = израчунај_поене(одговор, тачан_одговор)
+                    {print} ('Ваш резултат је... ', поени)
                     ```
     guess_my_number:
         name: Погоди мој број
