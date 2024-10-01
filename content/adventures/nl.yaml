@@ -5365,97 +5365,96 @@ adventures:
 
             13:
                 story_text: |
-                  Our janitors have a big list of tasks. Some tasks are done everyday, others on a certain day, season or date. This is very confusing and leads to situations where some tasks are forgotten.
-                  Can you help by writing a program that'll print the correct tasklist for that day?
+                    Onze congiërges hebben een lange lijst met taken. Sommige taken worden elke dag uitgevoerd, andere op een bepaalde dag, seizoen of datum. Dit is erg verwarrend en leidt tot situaties waarin sommige taken vergeten worden.
+                    Kun je helpen door een programma te schrijven dat de juiste takenlijst voor die dag afdrukt?
 
-                  ### Exercise
-                  The program should:
-                  * Wish the janitor a goodmorning.
-                  * Ask the janitor what day of the week it is, which month and which day of the month.
-                  * Print the correct tasklist for that day.
+                    ### Oefening
+                    Het programma moet:
+                    * De congiërge een goede morgen wensen.
+                    * De congiërge vragen welke dag van de week het is, welke maand en welke dag van de maand.
+                    * De juiste takenlijst voor die dag afdrukken.
 
-                  The tasks that should be done:
-                  * Everyday tasks: mop the floor, clean the toilets, open the curtains
-                  * On mondays and thursdays: water the plants
-                  * On tuesday and fridays: mop the floors
-                  * On saturdays: wash the coffeemachine
-                  * On the first of each month: wash the windows
-                  * On the 7th of each month: refill the vending machines
-                  * On the 14th of each month: check the batteries for the fire alarms
-                  * Everyday in wintermonths: turn on the heaters
-                  * Everyday in summermonths: turn on the airconditioning
-
+                    De taken die gedaan moeten worden:
+                    * Dagelijkse taken: de vloer dweilen, de toiletten schoonmaken, de gordijnen openen
+                    * Op maandagen en donderdagen: de planten water geven
+                    * Op dinsdagen en vrijdagen: de vloeren dweilen
+                    * Op zaterdagen: de koffiemachine schoonmaken
+                    * Op de eerste dag van elke maand: de ramen wassen
+                    * Op de 7e dag van elke maand: de automaten bijvullen
+                    * Op de 14e dag van elke maand: de batterijen van de brandalarm controleren
+                    * Elke dag in de wintermaanden: de verwarming aanzetten
+                    * Elke dag in de zomermaanden: de airconditioning aanzetten
                 example_code: |
-                  The program should end like this:
+                  Het programma moet zo eindigen:
                     ```
-                    {call} make_tasklist {with} day, month, date
+                    {call} maak_takenlijst {with} dag, maand, datum
                     ```
 
             14:
                 story_text: |
-                    Our anesthesiologist has to calculate how much anesthetics to give our patients who'll undergo an operation. This depends on a couple of factors: weight, age, length of surgery and drug tolerance.
-                    Can you help our anesthesiologist by making a program that'll calculate the amount for them?
+                    Onze anesthesist moet berekenen hoeveel verdoving aan onze patiënten moet worden gegeven die een operatie ondergaan. Dit hangt af van een paar factoren: gewicht, leeftijd, duur van de operatie en medicijntolerantie.
+                    Kun je onze anesthesist helpen door een programma te maken dat de hoeveelheid kan berekenen?
 
-                    ### Exercise
-                    The program should:
-                    * Contain a function that calculates how much anesthetics should be given to the patient and returns the value.
-                    * The amount of anethetics in ml = weight of the patient in kilograms devided by 600.
-                    * If the patient is older than 80 this amount should be muliplied by 0.8.
-                    * If the patient is younger than 20 this amount should be multiplied by 1.2.
-                    * Then the amount is multiplied by the amount of minutes that the surgery takes.
-                    * If the drug tolerance from this patient is 'high', add 10 more ml.
-                    * If the drug tolerance is 'low', subtract 10 ml.
-                    * If the drug tolerance is 'normal', don't add or subtract anything.
-                    * When the program has calculated the amount of anestehics it returns the value, and tells the anesthesiologist how much anesthetics to administer.
+                    ### Oefening
+                    Het programma moet:
+                    * Een functie bevatten die berekent hoeveel verdoving aan de patiënt moet worden gegeven en de waarde retourneert.
+                    * De hoeveelheid verdoving in ml = gewicht van de patiënt in kilogram gedeeld door 600.
+                    * Als de patiënt ouder is dan 80, moet deze hoeveelheid worden vermenigvuldigd met 0,8.
+                    * Als de patiënt jonger is dan 20, moet deze hoeveelheid worden vermenigvuldigd met 1,2.
+                    * Vervolgens wordt de hoeveelheid vermenigvuldigd met de duur van de operatie in minuten.
+                    * Als de medicijntolerantie van deze patiënt 'hoog' is, voeg er dan 10 ml toe.
+                    * Als de medicijntolerantie 'laag' is, trek er dan 10 ml af.
+                    * Als de medicijntolerantie 'normaal' is, voeg er dan niets toe of trek er niets af.
+                    * Wanneer het programma de hoeveelheid verdoving heeft berekend, retourneert het de waarde en vertelt het de anesthesist hoeveel verdoving moet worden toegediend.
             15:
                 story_text: |
-                    After surgery our patients can sometimes experience a lot of pain. In those cases our patients can be given a morphine pump. They can administer some morphine themselves if they are in pain.
-                    These pumps need to be programmed very carefully, so that the patients don't give themselves too much morphine. Can you program a morphine pump for us?
+                    Na de operatie kunnen onze patiënten soms veel pijn ervaren. In die gevallen kan aan onze patiënten een morfinepomp worden gegeven. Zo kunnen ze zelf wat morfine toedienen als ze pijn hebben.
+                    Deze pompen moeten zeer zorgvuldig worden geprogrammeerd, zodat de patiënten zichzelf niet te veel morfine geven. Kun je een morfinepomp voor ons programmeren?
 
-                    ### Exercise
-                    The program should:
-                    * Ask the nurse how many milliliters of morphine the patient has already had today.
-                    * Tell the nurse to give the program to the patient
-                    * Ask the patient how much pain they are experiencing on a scale of to 10.
-                    * Tell the patient to press the x button if they would like some more morphine.
-                    * Call the function start_pump with arguments pain_level and morphine_level if x is pressed.
-                    * The function should print 'You will be administered 20 more ml of morphine' while the patients pain level is higher than or equal to 6 and the morphine level is lower than 120.
-                    * After administering new morphine the program should sleep for 2 minutes (while testing your program you can use 2 seconds).
-                    * After those 2 minutes, the morphine level should be updated (+20ml) and the pain level should be updated by asking the patient how they are feeling now.
-                    * If the morphine level is too high or the patient is no longer in pain, the program should tell the patients that they won't be getting more morphine. If they are in a lot of pain, tell them to call the nurse.
-                    * Tell the patient that the pump will be shut down now, and to press x if they need the pump to start again.
+                    ### Oefening
+                    Het programma moet:
+                    * De verpleegkundige vragen hoeveel milliliters morfine de patiënt vandaag al heeft gehad.
+                    * De verpleegkundige vertellen dat ze het programma aan de patiënt moeten geven.
+                    * De patiënt vragen hoeveel pijn ze ervaren op een schaal van 1 tot 10.
+                    * De patiënt vertellen dat ze op de x-knop moeten drukken als ze meer morfine willen.
+                    * De functie `start_pomp` aanroepen met de argumenten `pijn_niveau` en `morphine_niveau` als op x wordt gedrukt.
+                    * De functie moet 'U krijgt 20 ml morfine toegediend' afdrukken zolang het pijnniveau hoger is dan of gelijk aan 6 en het morfine niveau lager dan 120.
+                    * Na het toedienen van nieuwe morfine moet het programma 2 minuten wachten (bij het testen van je programma kun je 2 seconden gebruiken).
+                    * Na die 2 minuten moet het morfine niveau worden bijgewerkt (+20 ml) en moet het pijnniveau worden bijgewerkt door de patiënt te vragen hoe ze zich nu voelen.
+                    * Als het morfine niveau te hoog is of de patiënt geen pijn meer heeft, moet het programma de patiënt vertellen dat ze geen meer morfine zullen krijgen. Als ze veel pijn hebben, moeten ze de verpleegkundige bellen.
+                    * Vertel de patiënt dat de pomp nu zal worden uitgeschakeld en dat ze op x moeten drukken als ze willen dat de pomp opnieuw wordt gestart.
             16:
                 story_text: |
-                    Our medical students have to learn the medical terms for all the bodyparts. They seem to be struggling to remind all the anatomical names and they seem to find the studying very boring.
-                    Can you help them by creating a game that allows them to practise the medical terms?
+                    Onze geneeskundestudenten moeten de medische termen voor alle lichaamsdelen leren. Ze lijken moeite te hebben om alle anatomische namen te onthouden en vinden het studeren erg saai.
+                    Kun je ze helpen door een spel te creëren waarmee ze de medische termen kunnen oefenen?
 
-                    These are the terms that the students need to know: corpus = body, caput = head, ocolus = eye, nasus = nose, auris = ear, os = mouth, collum = neck, manus = hand, pectus = chest, humerus = shoulder, venter = stomach, tergum = back
+                    Dit zijn de termen die de studenten moeten weten: corpus = lichaam, caput = hoofd, ocolus = oog, nasus = neus, auris = oor, os = mond, collum = nek, manus = hand, pectus = borst, humerus = schouder, venter = maag, tergum = rug.
 
-                    ### Exercise
-                    The program should:
-                    * Be a game that allows the students to practise the medical terms.
-                    * Give the students a point and a compliment when they have got the right answer.
-                    * Take away a point and tell them the answer is incorrect when they have got the answer wrong.
-                    * Also show the students the correct answer for a couple of seconds if they have given the wrong answer, wipe the answer off the screen again and keep asking the question until they have got it right.
-                    * Keep playing until the student has answered all the questions correctly.
-                    * Show the final score to the student.
-                    * Give the student feedback based on their score: 12 points: Amazing!, 8 - 11 points: Good job, keep practising!, 7 or less: You should study more!
-
+                    ### Oefening
+                    Het programma moet:
+                    * Een spel zijn waarmee de studenten de medische termen kunnen oefenen.
+                    * De studenten een punt geven en een compliment geven wanneer ze het juiste antwoord hebben.
+                    * Een punt aftrekken en hen vertellen dat het antwoord onjuist is wanneer ze het verkeerde antwoord hebben gegeven.
+                    * Ook het juiste antwoord een paar seconden aan de studenten tonen als ze het verkeerde antwoord hebben gegeven, het antwoord weer van het scherm wissen en blijven vragen totdat ze het goed hebben.
+                    * Blijven spelen totdat de student alle vragen correct heeft beantwoord.
+                    * De eindscore aan de student tonen.
+                    * De student feedback geven op basis van hun score: 12 punten: Geweldig!, 8 - 11 punten: Goed gedaan, blijf oefenen!, 7 of minder: Je moet meer studeren!
             17:
                 story_text: |
-                    Our centre for burnwounds would like to lessen the workload by using an online triage tool. This way the patients can not only register their name and date of birth, but also what kind of burnwound they have (first, second or third degree) and advise on what to do next.
-                    Can you help them?
+                    Ons brandwondencentrum zou graag de werkdruk verminderen door een online triage-tool te gebruiken. Op deze manier kunnen patiënten niet alleen hun naam en geboortedatum registreren, maar ook welk soort brandwond ze hebben (eerste, tweede of derde graads) en advies over wat ze moeten doen.
+                    Kun je hen helpen?
 
-                    ### Exercise
-                    The program should:
-                    * Start with a greeting and simple registration of the patients name and date of birth
-                    * Preform a triage. Is the skin only red: first degree burn. Are there blisters: second degree burn. Is the skin gone/blackened/whitened from the burn: third degree burn.
-                    * Give the patient the appropriate advise. First degree: Cool the burn with water and apply some cream on it. You do not need to see a doctor. Second degree: The doctor will see you and prescribe a special cream. Please wait in the waiting area. Third degree: Please go the the service desk now. You will need urgent care a.s.a.p.
-                    Hint: please use the {elif} command and functions to create this code.
+                    ### Oefening
+                    Het programma moet:
+                    * Beginnen met een begroeting en eenvoudige registratie van de naam en geboortedatum van de patiënt.
+                    * Een triage uitvoeren. Is de huid alleen rood: eerste graads brandwond. Zijn er blaren: tweede graads brandwond. Is de huid weg/zwart/gekleurd door de brandwond: derde graads brandwond.
+                    * De patiënt het juiste advies geven. Eerste graads: Koel de brandwond met water en breng er wat zalf op aan. U hoeft geen dokter te zien. Tweede graads: De dokter zal u zien en een speciale zalf voorschrijven. Gelieve te wachten in de wachtruimte. Derde graads: Ga alstublieft direct naar de servicedesk. U heeft dringend zorg nodig.
+
+                    Hint: gebruik het {elif} commando en functies om deze code te maken.
                 example_code: |
-                    The end of your code should look like this
+                    De code moet zo eindigen:
                     ```
-                    {call} registration
-                    degree = {call} triage
-                    {call} advise {with} degree
+                    {call} registratie
+                    graad = {call} triage
+                    {call} advies {with} graad
                     ```
