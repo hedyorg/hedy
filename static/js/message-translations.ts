@@ -2004,7 +2004,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "tr": {
-    "CheckInternet": "İnternet bağlantınız doğru çalışıyor mu diye bir göz atın.",
+    "CheckInternet": "İnternet bağlantınızın çalışıp çalışmadığını kontrol edin.",
     "Connection_error": "Sunucuya ulaşamadık.",
     "Empty_output": "Bu kod çalışıyor ama hiçbir şey yazdırmıyor. Kodunuzda bir yazdırma komutu kullanın veya bir çıktı almak için kaplumbağayı kullanın.",
     "Errors_found": "Bir hata yaptınız! Endişelenmeyin, programı yine de çalıştırdık",
