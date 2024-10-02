@@ -1,0 +1,69 @@
+{% extends "hedy-page/level-page.html" %}
+{% block levelbody %}
+{% if intro_tutorial or tutorial %}
+<div id="tutorial_pop_up" class="z-50 fixed hidden" style="width: 500px; top: 20%; left: 50%; transform: translate(-50%, -50%);">
+      <div class="bg-blue-500 border border-black rounded-lg px-8 py-4 text-center">
+          <h2 id="tutorial_title" class="text-white"></h2>
+          <p id="tutorial_text"></p>
+          <button id="tutorial_next_button" class="green-btn-new mt-4">{{_('next_step_tutorial')}}</button>
+      </div>
+  </div>
+{% endif %}
+<div tabindex="0">
+    {# When we're NOT in adventure mode but DO have adventures, render them in tabs #}
+    {% if raw %}
+        {% if get_syntax_language(g.lang) != "en" and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) %}
+        <div class="flex justify-end mb-4">
+            {{ render_partial('htmx-language-switch-button.html', commands=commands) }}
+        </div>
+        {% endif %}
+    {% else %}
+        {% include "hedy-page/adventure-tabs.html" %}
+    {% endif %}
+        {% include "hedy-page/editor-and-output.html" %}
+    <!-- progress bar -->
+        <div id="progress_bar" data-cy="progress_bar" class="w-full max-w-screen-2xl mx-auto mt-10">
+            <div class="flex flex-row w-full mb-2">
+                <button data-cy="previous_adventure" id="previous_adventure" class="blue-btn-new flex flex-row gap-2 align-middle items-center flex-initial w-fit next-tab justify-self-end mb-1">
+                    <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}"></span>
+                    <p class="m-0 p-0 hidden md:block"></p>
+                </button>
+                <button data-cy="back_level" id="back_level" 
+                        class="blue-btn-new flex-initial flex flex-row gap-2 align-middle items-center	 w-fit next-tab justify-self-end mb-1 hidden"
+                        onclick="location.href = '/tryit/{{ level - 1 }}'"
+                >
+                    <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}"></span>
+                    <p class="m-0 p-0">{{_('advance_button')|replace("{level}", level - 1)}}</p>                    
+                </button>
+                <div class="flex-initial"></div>
+                <div class="flex flex-1 items-center justify-center font-medium dark:text-white mx-1">
+                    <span class="text-lg text-center {% if not username %}hidden{% endif %} mx-2">
+                        {{ progress.completed }}/{{ progress.total }}
+                    </span>
+                    <span class="text-lg hidden {% if username %}md:block{% endif %}">
+                        {{_('complete')}}
+                    </span>
+                </div>    
+                <button data-cy="next_adventure" id="next_adventure" class="blue-btn-new flex flex-row gap-2 align-middle items-center flex-initial w-fit next-tab justify-self-end mb-1">
+                    <p class="m-0 p-0 hidden md:block"></p>                    
+                    <span class="fa fa-arrow-{% if g.dir == "ltr" %}right{% else %}left{% endif %}"></span>
+                </button>
+                <button data-cy="next_level" id="next_level"
+                        class="blue-btn-new flex-initial w-fit next-tab justify-self-end mb-1 hidden"
+                        onclick="location.href = '/hedy/{{ level + 1 }}'"
+                >
+                    {{_('advance_button')|replace("{level}", level + 1)}}&nbsp;
+                    <span class="fa fa-arrow-{% if g.dir == "ltr" %}right{% else %}left{% endif %}"></span>
+                </button>
+            </div>
+            <div class="max-w-screen-2xl items-center justify-between mx-auto rounded-full h-2.5 bg-gray-300 {% if not username %}hidden{% endif %}">
+                <div class="rounded-full h-2.5 bg-green-600" style="width: {{ (progress.completed/progress.total * 100)|round(0) }}%"></div>
+            </div>
+        </div>
+    {% if latest and not raw %}
+      <div class="text-sm mt-10 ltr:mr-5 rtl:ml-5 font-extralight">
+      Latest update: {{latest}}
+      </div>
+    {% endif %}
+</div>
+{% endblock %}

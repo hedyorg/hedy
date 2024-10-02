@@ -21,7 +21,8 @@ export * from './tutorials/tutorial';
 export * from './teachers';
 export * from './initialize';
 export * from './debugging';
-export { getPreviousAndNext } from './tabs';
+export { getNext, getCurrentAdv } from './index-tabs';
+export { getPreviousAndNext } from './tabs'
 export * from './tailwind';
 export * from './public-adventures';
 export { loadParsonsExercise } from './parsons';
