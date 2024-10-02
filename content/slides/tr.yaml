@@ -31,7 +31,7 @@ levels:
         6:
             header: Hedy'de Programlama
             text: Kod kelimeleri pembe renkte gösterilecektir.
-            code: '{print} Welcome to Hedy!'
+            code: '{print} Hedy''e hoşgeldiniz!'
         7:
             header: Hedy'de Programlama
             text: Kodun altındaki Kodu çalıştır düğmesi ile kodu başlatıyoruz.
@@ -127,7 +127,7 @@ levels:
                 {print} What song would you like to hear?
                 {ask} I like that song too!
                 {print} Next up... {echo}
-            debug: true
+            debug: 'True'
         13:
             header: Let the programming fun begin!
             text: Enjoy the adventures in level 1!
@@ -196,7 +196,7 @@ levels:
                 {print} I'll go get your donut. {sleep}
                 {print} Here you go! A filling donut with toping!
                 {ask} Have a nice day!
-            debug: true
+            debug: 'True'
         8:
             header: Programlama eğlencesi başlasın!
             text: Seviye 2'deki maceraların tadını çıkarın!
@@ -261,7 +261,7 @@ levels:
                 {print} or do you prefer... second_choice {at} {random}
                 {remove} second_choice {to} music_genres
                 {print} I like music_genre {random} best!
-            debug: true
+            debug: 'True'
         8:
             header: Hadi işe koyulalım!
             text: Seviye 3'teki maceraların tadını çıkarın!
@@ -276,7 +276,7 @@ levels:
             code: |-
                 name {is} Sophie
                 {print} My name is name
-            debug: true
+            debug: 'True'
         3:
             header: Bunu tırnak işaretleri ile düzeltmek
             text: |-
@@ -314,7 +314,7 @@ levels:
 
                 Lütfen aşağıdaki ekranda "Hedy'nin" veya "TC'de" gibi bir özel isim veya kısaltma yazdırmayı deneyin ve ne olduğunu görün...
             code: '{print} ''This won''t work!'''
-            debug: true
+            debug: 'True'
         9:
             header: Temizle
             text: |-
@@ -343,7 +343,7 @@ levels:
                 colors {is} 'orange, silver, white, brown'
                 {print} 'I love the colors {at} {random} one!'
                 choice {is} {ask} Which one do you like?
-            debug: true
+            debug: 'True'
         11:
             header: Hazır Ol, Ayarla, Başla!
             text: Seviye 4'teki maceraların tadını çıkarın!
@@ -364,7 +364,7 @@ levels:
             header: Yazdırmayı unutmayın
             text: '`{if}` komutunu kullanırken, `{print}` komutunu kullanmayı unutmayın.'
             code: '{if} name {is} Hedy ''nice'''
-            debug: true
+            debug: 'True'
         4:
             header: değilse
             text: |-
@@ -410,7 +410,7 @@ levels:
                 item_to_declare {is} {ask} 'What would you like to declare'
                 {else} Alright
                 {print} Thank you. Please head to gate A22.'
-            debug: true
+            debug: 'True'
         8:
             header: Hadi başlayalım!
             text: Seviye 5'teki maceraların tadını çıkarın!
@@ -475,7 +475,7 @@ levels:
                 {if} day {is} monday
                 total_price = total_price * 0.25
                 {print} 'That will be total_price please'
-            debug: true
+            debug: 'True'
         10:
             header: Hadi işe koyulalım!
             text: Seviye 6'daki maceraların tadını çıkarın!
@@ -498,7 +498,7 @@ levels:
             header: Yazdır komutunu unutmayın
             text: tekrar komutunu kullanırken `{print}` komutunu unutmayın.
             code: '{repeat} 5 {times} ''Help!'''
-            debug: true
+            debug: 'True'
         4:
             header: Bir sor komutunu tekrarlayın
             text: Ayrıca bir `{ask}`, `{if}` veya `{else}` komutunu birden çok kez tekrarlayabilirsiniz.
@@ -520,7 +520,7 @@ levels:
                 {if} yes
                 {print} 'Hurray!
                 {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
-            debug: true
+            debug: 'True'
         6:
             header: Hazır ol Ayarla Başla!
             text: Seviye 7'deki maceraların tadını çıkarın!
@@ -535,7 +535,7 @@ levels:
 
                 Yalnızca bir satır kodu tekrarlayabilirsiniz.
             code: '{repeat} 5 {times} {print} ''Help!'''
-            debug: true
+            debug: 'True'
         3:
             header: şimdiki {repeat} komutları
             text: |-
@@ -564,7 +564,7 @@ levels:
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
-            debug: true
+            debug: 'True'
         6:
             header: şimdiki eğer ve değilse
             text: |-
@@ -607,7 +607,7 @@ levels:
                         {print} You chose a round trip ticket'
                 price * 2
                 {print} 'That will be ' price ' euros please'
-            debug: true
+            debug: 'True'
         10:
             header: Hadi maceralara bir göz atalım!
             text: Seviye 8'deki maceraların tadını çıkarın!
@@ -699,7 +699,7 @@ levels:
                 {else}
                 {print} 'Fun!'
                 {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
-            debug: true
+            debug: 'True'
         9:
             header: Hadi başlayalım!
             text: Seviye 9'daki maceraların tadını çıkarın!
@@ -736,7 +736,7 @@ levels:
                 {add} chosen_person {from} people
                 {print} 'Come and watch our show tonight!'
                 {print} 'Tickets are only available at the counter
-            debug: true
+            debug: 'True'
         5:
             header: Programlama zamanı!
             text: Seviye 10'daki maceraların tadını çıkarın!
@@ -773,7 +773,7 @@ levels:
                 {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
                     {print} This is the table of multiplications for factor
                     {print} number ' x ' factor ' = ' i * factor
-            debug: true
+            debug: 'True'
         5:
             header: Hadi programlamaya geçelim!
             text: Seviye 11'deki maceraların tadını çıkarın!
@@ -836,7 +836,7 @@ levels:
                 {call} new member
                     {else}
                         password = {ask} 'Please enter password'
-            debug: true
+            debug: 'True'
         8:
             header: Ready to try it out?
             text: Enjoy the adventures in level 12!
@@ -944,7 +944,7 @@ levels:
                     {call} happiness {with} person
                 {else} mood = sad
                     {define} sadness {to} name
-            debug: true
+            debug: 'True'
         9:
             header: Let's go!
             text: Enjoy the adventures in level 13!
@@ -1026,7 +1026,7 @@ levels:
                     {print} 'Shame.. I wont buy it'
                 {else}
                     {print} 'I will buy it! Thank you!'
-            debug: true
+            debug: 'True'
         7:
             header: Let's get to work!
             text: Enjoy the adventures in level 14!

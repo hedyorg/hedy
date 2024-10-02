@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-09-06 14:38+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"PO-Revision-Date: 2024-10-02 06:16+0000\n"
+"Last-Translator: ArtV11 <a.varan@student.vu.nl>\n"
 "Language-Team: tr <LL@li.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -19,77 +19,59 @@ msgstr ""
 "X-Generator: Weblate 5.8-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
-#, fuzzy
 msgid "Access Before Assign"
-msgstr "{name} değişkenini {access_line_number} numaralı satırda kullanmaya çalıştınız, ancak {definition_line_number} numaralı satırda ayarladınız. Bir değişkeni, onu kullanmadan önce ayarlayın."
+msgstr "Satır {access_line_number}'de/da {name} değişkeninin ayarlanmadan önce kullanıldığını tespit ettik. Değişkeni kullanmadan önce ayarlayabilir misiniz?"
 
-#, fuzzy
 msgid "Cyclic Var Definition"
-msgstr "`{is}` komutunun sağ tarafında kullanabilmeniz için `{variable}` adının daha önceden ayarlanması gerekir."
+msgstr "{variable} değişkeninin {is} komutunun sağ tarafında ayarlanmadan önce kullanıldığını tespit ettik. Değişkeni kullanılmadan önce ayarlayabilir misiniz?"
 
-#, fuzzy
 msgid "Else Without If Error"
-msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
+msgstr "Satır {line_number}'de/da `{if}`'den önce bir `{else}` kullanıldığını tespit ettik. `{else}`'den önce bir `{if}` ayarlamayı deneyebilir misiniz?"
 
-#, fuzzy
 msgid "Function Undefined"
-msgstr "You tried to use the function {name}, but you didn't define it."
+msgstr "{name} fonksiyonunun tanımlanmadan önce kullanıldığını tespit ettik. Fonksiyonu kullanılmadan önce tanımlayabilir misiniz?"
 
-#, fuzzy
 msgid "Has Blanks"
-msgstr "Kodunuz tamamlanmamış. Kod ile değiştirmeniz gereken boşluklar var."
+msgstr "Kodun tamamlanmamış gibi göründüğünü tespit ettik. Boşlukları doldurabilir misiniz?"
 
-#, fuzzy
 msgid "Incomplete"
-msgstr "Oops! Bir kod parçasını unuttunuz! {line_number} numaralı satırda, `{incomplete_command}` satırının arkasına metin girmeniz gerekir."
+msgstr "Satır {line_number}'deki/daki `{incomplete_command}` komutunun bir kısmının eksik olduğunu tespit ettik. Eksik olan kısmı eklemeyi deneyebilir misiniz?"
 
-#, fuzzy
 msgid "Incomplete Repeat"
-msgstr "Görünüşe göre {line_number} numaralı satırda kullandığınız `{repeat}` komutuyla birlikte bir komut kullanmayı unutmuşsunuz."
+msgstr "Satır {line_number}'daki `{repeat}` ifadesinin yanında bir `{command}` komutunun eksik olduğunu tespit ettik. Eksik komutu eklemeyi deneyebilir misiniz?"
 
-#, fuzzy
 msgid "Invalid"
-msgstr "`{invalid_command}` bir Hedy seviye {level} komutu değildir. `{guessed_command}` demek mi istediniz?"
+msgstr "`{invalid_command}` ifadesinin Hedy düzey {level} komutu olmadığını tespit ettik. `{guessed_command}` kullanmayı deneyebilir misiniz?"
 
-#, fuzzy
 msgid "Invalid Argument"
-msgstr "`{command}` komutunu `{invalid_argument}` ile kullanamazsınız. `{invalid_argument}` 'ı {allowed_types} olarak değiştirmeyi deneyin."
+msgstr "`{command}` komutunu `{invalid_argument}` ile kullanamazsınız. `{invalid_argument}` 'ı {allowed_types} olarak değiştirmeyi deneyebilir misiniz?"
 
-#, fuzzy
 msgid "Invalid Argument Type"
-msgstr "`{command}` komutu ile birlikte `{invalid_argument}` kullanamazsınız çünkü bu bir {invalid_type}. `{invalid_argument}` 'ı {allowed_types} olarak değiştirmeyi deneyin."
+msgstr "`{command}` ifadesinin `{invalid_argument}` ile çalışmadığını, çünkü {invalid_type} olduğunu tespit ettik. `{invalid_argument}`'ı {allowed_types} ile değiştirmeyi deneyebilir misiniz?"
 
-#, fuzzy
 msgid "Invalid At Command"
-msgstr "`{command}` komutu 16. seviyeden itibaren kullanılamaz. Bir listeden bir öğe kullanmak için köşeli parantez kullanabilirsiniz, örneğin `arkadaşlar[i]`, `şanslı_sayılar[{random}]`."
+msgstr "`{command}` ifadesinin 16. seviyeden itibaren kullanılamayabileceğini tespit ettik. Listeler için kare parantez `[]` kullanmayı deneyebilir misiniz?"
 
-#, fuzzy
 msgid "Invalid Space"
-msgstr "Oops! {line_number} numaralı satır boşlukla başladınız. Boşluklar bilgisayarların kafasını karıştırır, kaldırabilir misiniz?"
+msgstr "Satır {line_number}'in bir boşlukla başladığını tespit ettik. Boşluğu kaldırmayı deneyebilir misiniz?"
 
-#, fuzzy
 msgid "Invalid Type Combination"
-msgstr "`{command}` komutu ile `{invalid_argument}` ve `{invalid_argument_2}` kullanamazsınız çünkü biri bir {invalid_type} diğeri bir {invalid_type_2}. `{invalid_argument}` 'ı {invalid_type_2} olarak ya da `{invalid_argument_2}` 'ı {invalid_type} olarak değiştirmeyi deneyin."
+msgstr "`{invalid_argument}` ve `{invalid_argument_2}` ifadelerinin `{command}` ile kullanılamadığını tespit ettik, çünkü biri {invalid_type} ve diğeri {invalid_type_2}. `{invalid_argument}`'ı {invalid_type_2} veya `{invalid_argument_2}`'yi {invalid_type} ile değiştirmeyi deneyebilir misiniz?"
 
-#, fuzzy
 msgid "Lonely Echo"
-msgstr "Bir `{ask}`'dan önce bir `{echo}` veya `{ask}` olmadan bir `{echo}` kullandınız. `{echo}`'dan önce bir `{ask}` yerleştirin."
+msgstr "Bir {echo} ifadesinin {ask} kullanılmadan veya öncesinde kullanıldığını tespit ettik. {echo}'dan önce {ask} yazmayı deneyebilir misiniz?"
 
-#, fuzzy
 msgid "Lonely Text"
-msgstr "Görünüşe göre {line_number} numaralı satırda kullandığınız metinle birlikte bir komut kullanmayı unutmuşsunuz"
+msgstr "Kodun, satır {line_number}'de/da kullanılan metinle ilgili bir komut eksik olduğunu tespit ettik. Gerekli komutu metinle birlikte yazmayı deneyebilir misiniz?"
 
-#, fuzzy
 msgid "Missing Additional Command"
-msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+msgstr "Kodunun, satır {line_number}'de/da bir `{command}` eksik olduğunu tespit ettik. Kodunuzda `{missing_command}` kullanmayı deneyebilir misiniz?"
 
-#, fuzzy
 msgid "Missing Colon Error"
-msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
+msgstr "`{command}` ifadesesinin satır {line_number}'nin sonunda bir `:` işaretine ihtiyacı olduğunu tespit ettik. 17. seviyeden itibaren komutların sonuna `:` eklemeye başlayabilir misiniz?"
 
-#, fuzzy
 msgid "Missing Command"
-msgstr "Görünüşe göre {line_number} numaralı satırda bir komut kullanmayı unutmuşsunuz."
+msgstr "Kodunun, satır {line_number}'da bir komutun eksik olduğunu tespit ettik. Hangi komutu kullanmanız gerektiğini bulmak için macera bölümüne göz atmayı deneyebilir misiniz?"
 
 #, fuzzy
 msgid "Missing Inner Command"
@@ -135,21 +117,17 @@ msgstr "While running your program the command `{command}` received the value `{
 msgid "Runtime Values Error"
 msgstr "While running your program the command `{command}` received the values `{value}` and `{value}` which are not allowed. {tip}."
 
-#, fuzzy
 msgid "Save Microbit code "
-msgstr "Save Microbit code"
+msgstr "Microbit codenu kaydet"
 
-#, fuzzy
 msgid "Too Big"
-msgstr "Vay canına! Programınızda etkileyici sayıda {lines_of_code} kod satırı var! Ancak bu seviyede yalnızca {max_lines} satır işleyebiliyoruz. Programınızı biraz küçültün ve tekrar deneyin."
+msgstr "Programın {lines_of_code} satırdan oluştuğunu tespit ettik, ancak sadece {max_lines} kadar satır işleyebiliyoruz. Programınızı kısaltmayı deneyebilir misiniz?"
 
-#, fuzzy
 msgid "Too Few Indents"
-msgstr "You used too few leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too few."
+msgstr "Satır {line_number}'de/da çok az ({leading_spaces}) boşluk olduğunu tespit ettik. Ekstra bir boşluk eklemeyi deneyebilir misiniz?"
 
-#, fuzzy
 msgid "Too Many Indents"
-msgstr "You used too many leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too many."
+msgstr "Satır {line_number}'de/da çok fazla ({leading_spaces}) boşluk olduğunu tespit ettik. Fazladan olan boşlukları kaldırmayı deneyebilir misiniz?"
 
 #, fuzzy
 msgid "Unexpected Indentation"
@@ -2405,4 +2383,3 @@ msgstr "Programınız"
 
 #~ msgid "student_not_allowed_in_class"
 #~ msgstr "Student not allowed in class"
-
