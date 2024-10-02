@@ -145,7 +145,7 @@ def task_compile_babel():
     """Compile .po files for use with Babel."""
     return dict(
         title=lambda _: 'Compile Babel files',
-        file_dep=mergedpofiles,
+        file_dep=pofiles,
         actions=[
             'pybabel compile -f -d translations',
         ],
@@ -301,7 +301,7 @@ def task_extract():
         actions=[
             # Save current files
             'cp messages.pot messages.pot.tmp',
-            *[f'cp {pofile} {pofile}.tmp' for pofile in rawpofiles],
+            *[f'cp {pofile} {pofile}.tmp' for pofile in pofiles],
 
             # Extract
             'pybabel extract -F babel.cfg -o messages.pot . --no-location --sort-output',
@@ -310,30 +310,28 @@ def task_extract():
             # Restore headers, remove tempfiles
             [python3, restore_po_header, 'messages.pot.tmp', 'messages.pot'],
             'rm messages.pot.tmp',
-            *[[python3, restore_po_header, f'{pofile}.tmp', pofile] for pofile in rawpofiles],
-            *[f'rm {pofile}.tmp' for pofile in rawpofiles],
+            *[[python3, restore_po_header, f'{pofile}.tmp', pofile] for pofile in pofiles],
+            *[f'rm {pofile}.tmp' for pofile in pofiles],
         ],
         # These commands print a bunch of progress to stderr that looks intimidating
         verbosity=0,
     )
 
 
-def task_merge_translations():
+def task_generate_optional_yaml_schemas():
     """
-    Merge the translated content with the specified base language content.
+    Generate yaml schemas with all fields optional
     """
-    yamls = glob('content-raw/*/*.yaml')
-    pos = glob('translations-raw/**/*.po')
+    schemas = glob('content/*/*.schema.json')
 
     return dict(
-        title=lambda _: 'Generate translated content',
+        title=lambda _: 'Generate optional yaml schemas',
         file_dep=[
-            'tools/merge-translations.py',
-            *yamls,
-            *pos
+            'tools/generate-yaml-schemas.py',
+            *schemas
         ],
         actions=[
-            [python3, 'tools/merge-translations.py']
+            [python3, 'tools/generate-yaml-schemas.py']
         ]
     )
 
@@ -392,6 +390,7 @@ def task_backend():
     return dict(
         actions=None,
         task_dep=[
+            'generate_optional_yaml_schemas',
             'compile_babel',
             'generate_static_babel_content',
             'lark',
@@ -406,7 +405,6 @@ def task_frontend():
         task_dep=[
             'lezer_parsers',
             'tailwind',
-            'merge_translations',
             'typescript',
         ]
     )
@@ -540,6 +538,5 @@ def is_running_on_heroku():
 
 # These are used in more than one task. Find all .po files, and calculate the
 # .mo files that would be generated from them.
-rawpofiles = glob('translations-raw/*/*/*.po')
-mergedpofiles = glob('translations/*/*/*.po')
-mofiles = [replace_ext(f, '.mo') for f in mergedpofiles]
+pofiles = glob('translations/*/*/*.po')
+mofiles = [replace_ext(f, '.mo') for f in pofiles]

@@ -7,56 +7,68 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-09-27 06:17+0000\n"
-"Last-Translator: aniollidon <aniollidon@gmail.com>\n"
-"Language-Team: ca <LL@li.org>\n"
+"POT-Creation-Date: 2024-10-01 10:50+0300\n"
+"PO-Revision-Date: 2024-09-06 14:38+0000\n"
+"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language: ca\n"
+"Language-Team: ca <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
+#, fuzzy
 msgid "Access Before Assign"
-msgstr "Hem detectat que la variable `{name}`s'està fent servir a la línia {access_line_number} abans de definir-se. Pots definir-la abans d'usar-la?"
+msgstr "Has intentat utilitzar la variable {name} a la línia {access_line_number}, però l'ha definit a la línia {definition_line_number}. Defineix una variable abans d'utilitzar-la."
 
+#, fuzzy
 msgid "Cyclic Var Definition"
-msgstr "Hem detectat que la `{variable}` s'està fent servir a la dreta de la comanda `{is}` abans de definir-se. Pots definir la variable abans de fer-la servir?"
+msgstr "El nom `{variable}` ha de ser definit abans d'utilitzar-lo a la dreta de la comanda `{is}`."
 
+#, fuzzy
 msgid "Else Without If Error"
-msgstr "Hem detectat que hi ha un `{else}` en ús abans d'un `{if}` a la línia {line_number}. Pots provar d'escriure `{if}` abans de `{else}`?"
+msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
 
+#, fuzzy
 msgid "Function Undefined"
-msgstr "Hem detectat que la funció {name} s'està fent servir abans de definir-se. Pots definir-la abans d'usar-la?"
+msgstr "You tried to use the function {name}, but you didn't define it."
 
+#, fuzzy
 msgid "Has Blanks"
-msgstr "Hem detectat que el teu codi sembla incomplet. Pots assegurar-te que has omplert tots els espais en blanc?"
+msgstr "El teu codi està incomplert. Conté espais en blanc que has d'omplir amb codi."
 
+#, fuzzy
 msgid "Incomplete"
-msgstr "Hem detectat que falta una part del teu codi des de`{incomplete_command}` a la línia {line_number}. Pots intentar afegir allò que falta?"
+msgstr "Oops! Se t'ha oblidat una mica de codi! A la línia {line_number}, has d'introduir text després de `{incomplete_command}`."
 
+#, fuzzy
 msgid "Incomplete Repeat"
-msgstr "Hem detectat que al `{repeat}` de la línia {line_number} li falta una comanda`{command}`. Pots afegir-la?"
+msgstr "Sembla que t'has oblidat d'utilitzar una comanda amb la comanda `{repeat}` que està a la línia {line_number}."
 
+#, fuzzy
 msgid "Invalid"
-msgstr "Hem detectat que la comanda `{invalid_command}` no és vàlid en el nivell {level} de Hedy. Et serveix la comanda `{guessed_command}`?"
+msgstr "`{invalid_command}` no és una comanda de nivell {level} Hedy. Volies dir `{guessed_command}`?"
 
+#, fuzzy
 msgid "Invalid Argument"
-msgstr "Hem detectat que la comanda `{command}` no es pot fer servir amb `{invalid_argument}`. Pots canviar `{invalid_argument}` a {allowed_types}?"
+msgstr "No pots utilitzar la comanda `{command}` amb `{invalid_argument}`. Prova de canviar `{invalid_argument}` per {allowed_types}."
 
+#, fuzzy
 msgid "Invalid Argument Type"
-msgstr "Hem detectat que la comanda `{command}` no funciona amb `{invalid_argument}`, ja que és {invalid_type}. Pots provar de canviar `{invalid_argument}` a {allowed_types}?"
+msgstr "No pots utilitzar `{command}` amb `{invalid_argument}` perquè és {invalid_type}. Prova de canviar `{invalid_argument}` per {allowed_types}."
 
+#, fuzzy
 msgid "Invalid At Command"
-msgstr "Hem detectat que `{command}` no es pot fer servir des del nivell 16 endavant. Pots fer servir claudàtors`[]` a les llistes?"
+msgstr "La comanda `{command}` no es pot utilitzar a partir del nivell 16. Podeu utilitzar claudàtors per utilitzar un element d'una llista, per exemple `amics[i]`, `numeros_de la sort[{random}]`."
 
+#, fuzzy
 msgid "Invalid Space"
-msgstr "Hem detectat que a la línia {line_number} comença amb espai. Pots eliminar-lo?"
+msgstr "Vaja! Has començat una línia amb un espai a la línia {line_number}. Els espais confonen els ordinadors, el podries eliminar?"
 
+#, fuzzy
 msgid "Invalid Type Combination"
-msgstr "Hem detectat que `{invalid_argument}` i`{invalid_argument_2}` no es poden fer servir amb `{command}`, ja que un és {invalid_type} i l'altre és {invalid_type_2}. Pots provar de canviar `{invalid_argument}` a {invalid_type_2} o `{invalid_argument_2}` a {invalid_type}?"
+msgstr "No pots usar `{invalid_argument}` i `{invalid_argument_2}` amb `{command}` perquè un és {invalid_type} i l'altre és {invalid_type_2}. Prova a canviar `{invalid_argument}` per {invalid_type_2} o `{invalid_argument_2}` per {invalid_type}."
 
 #, fuzzy
 msgid "Lonely Echo"
@@ -1033,8 +1045,9 @@ msgstr "Inicia sessió al teu compte"
 msgid "login_to_save_your_work"
 msgstr "Inicia sessió per desar la teva feina"
 
+#, fuzzy
 msgid "logout"
-msgstr "Surt"
+msgstr "Log out"
 
 #, fuzzy
 msgid "longest_program"
@@ -1156,8 +1169,9 @@ msgstr "You are trying to use the keyword {orig_keyword}, but this keyword might
 msgid "multiple_levels_warning"
 msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
 
+#, fuzzy
 msgid "my_account"
-msgstr "El meu compte"
+msgstr "My account"
 
 #, fuzzy
 msgid "my_adventures"
@@ -1828,14 +1842,16 @@ msgstr "un espai"
 msgid "star"
 msgstr "un asterisc"
 
+#, fuzzy
 msgid "start_learning"
-msgstr "Comença a aprendre"
+msgstr "Start learning"
 
 msgid "start_quiz"
 msgstr "Comença el qüestionari"
 
+#, fuzzy
 msgid "start_teaching"
-msgstr "Comença a ensenyar-lo"
+msgstr "Start teaching"
 
 msgid "step_title"
 msgstr "Tasca"
@@ -1869,7 +1885,7 @@ msgid "student_already_invite"
 msgstr "Aquest alumne ja té una invitació pendent."
 
 msgid "student_in_another_class"
-msgstr ""
+msgstr "This student is in another class. Ask the student to leave all classes and try again."
 
 #, fuzzy
 msgid "student_information"
@@ -2537,4 +2553,7 @@ msgstr "El teu programa"
 
 #~ msgid "student_not_allowed_in_class"
 #~ msgstr "Student not allowed in class"
+
+#~ msgid "Boryana"
+#~ msgstr ""
 

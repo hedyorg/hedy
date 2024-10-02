@@ -6,6 +6,7 @@ import pickle
 import re
 import tempfile
 from . import querylog
+from collections.abc import Mapping
 
 from ruamel import yaml
 
@@ -59,14 +60,7 @@ class YamlFile:
         return YAML_FILES_CACHE[filename]
 
     def __init__(self, filename):
-        """Create a new YamlFile for the given filename.
-
-        try_pickle controls on whether we pickle or not. Can be
-        `True`, `False` or `None` -- in case of `None` pickling is
-        determined automatically based on whether or not we appear
-        to be running on Heroku. We don't pickle on dev workstations
-        because it creates a mess of files.
-        """
+        """Create a new YamlFile for the given filename."""
         self.filename = filename
         self.pickle_filename = path.join(tempfile.gettempdir(), 'hedy_pickles',
                                          f"{pathname_slug(self.filename)}.pickle")
@@ -138,11 +132,28 @@ class YamlFile:
     @querylog.timed_as('load_yaml_uncached')
     def load_uncached(self):
         """Load the source YAML file."""
+        file = self._load_yaml(self.filename)
+        base_filename = path.join(path.dirname(self.filename), 'en.yaml')
+        base_file = self._load_yaml(base_filename)
+        result = self._merge_dicts(file, base_file)
+        return result
+
+    def _load_yaml(self, filename):
         try:
-            with open(self.filename, "r", encoding="utf-8") as f:
+            with open(filename, 'r', encoding="utf-8") as f:
                 return yaml_loader.load(f)
         except IOError:
             return {}
+
+    def _merge_dicts(self, source, fallback):
+        """ Merges 2 dictionaries containing nested dictionaries """
+        for key, value in source.items():
+            if value and isinstance(value, Mapping):
+                returned = self._merge_dicts(value, fallback.get(key, {}))
+                fallback[key] = returned
+            else:
+                fallback[key] = source[key]
+        return fallback
 
     def _file_timestamp(self, filename):
         try:
