@@ -1943,7 +1943,7 @@ def view_program(user, id):
     next_program_id = None
     for i in range(adventure_index + 1, len(adventures_for_this_level)):
         next_adventure = adventures_for_this_level[i]
-        next_adventure_id = f'{result['username']}-{next_adventure['name']}-{result['level']}'
+        next_adventure_id = f"{result['username']}-{next_adventure['name']}-{result['level']}"
         next_student_adventure = DATABASE.student_adventure_by_id(next_adventure_id) or {}
         next_program_id = next_student_adventure.get('program_id')
         if next_program_id:
