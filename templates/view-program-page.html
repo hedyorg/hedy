@@ -28,11 +28,11 @@
       <div class="flex-1"></div>
       {% if next_program_id %}
       <a class="green-btn" href="/hedy/{{ next_program_id }}/view">
-        {{_('go_next')}}
+        {{_('next_adventure')}}
       </a>
       {% endif %}
       {% if next_classmate_program_id %}
-        <a class="green-btn" href="/hedy/{{ next_classmate_program_id }}/view">{{ _('go_to_next_student') }}</a>
+        <a class="green-btn" href="/hedy/{{ next_classmate_program_id }}/view">{{ _('next_student') }}</a>
       {% endif %}
       <a class="green-btn" href="/for-teachers/class/{{ class_id }}">
         {{_('back_to_class')}}
