@@ -1144,7 +1144,7 @@ levels:
             correct_answer: C
             question_score: '10'
         5:
-            question_text: Hoeveel moeten je betalen als je met 5 mensen komt eten?
+            question_text: Hoeveel moet je betalen als je met 5 mensen komt eten?
             code: |-
                 {print} 'Welkom in restaurant Hedy!'
                 mensen {is} {ask} 'Met hoeveel mensen komt u vanavond eten?'
@@ -1804,7 +1804,7 @@ levels:
                    eten = {ask} 'Wat wil je eten?'
                    {if} eten {is} friet
                        saus = {ask} 'Welke saus wil je?'
-                       {print} 'Een frietje met with ' saus
+                       {print} 'Een frietje met ' saus
                    {if} eten {is} pizza
                        beleg = {ask} 'Wat wil je erop?'
                        {print} 'Een pizza met ' beleg
@@ -1868,7 +1868,7 @@ levels:
                     actie = {ask} 'Openen of verkopen?'
                     {if} actie {is} verkopen
                         {print} 'Jij verkoop de koffer voor 500 dollar'
-                    {if} action {is} open
+                    {if} actie {is} open
                         {print} 'Je opent de koffer en wint een miljoen dollar!'
             mp_choice_options:
             -   option: Koffer 1, verkopen
@@ -2011,7 +2011,7 @@ levels:
             code: |-
                 leeftijd = {ask} 'Gefeliciteerd! Hoe oud ben je?'
                 zingen = {ask} 'Wil je dat we gaan zingen?'
-                if zingen {is} ja
+                {if} zingen {is} ja
                     {repeat} jaar {times}
                         {print} 'Hiep hiep hoera!'
             mp_choice_options:
@@ -2493,7 +2493,7 @@ levels:
             correct_answer: C
             question_score: '10'
         9:
-            question_text: Hoevaak roept Hedy 'Hieperdepiep Hoera'voor je?
+            question_text: Hoevaak roept Hedy 'Hieperdepiep Hoera' voor je?
             code: |-
                 leeftijd {is} {ask} 'Hoe oud ben je?'
                 {for} i {in} {range} 1 {to} leeftijd
@@ -2576,25 +2576,25 @@ levels:
             mp_choice_options:
             -   option: |-
                     ```
-                    smaken =  vanille, aarbeien, chocolade
+                    smaken =  vanille, aardbeien, chocolade
                     {print} 'Ik wil ' smaken {at} {random} 'ijs.'
                     ```
                 feedback: Alle smaakjes moeten binnen aanhalingstekens.
             -   option: |-
                     ```
-                    'smaken = vanille, aarbeien, chocolade'
+                    'smaken = vanille, aardbeien, chocolade'
                     {print} 'Ik wil ' smaken {at} {random} 'ijs.'
                     ```
                 feedback: Alle smaakjes moeten binnen aanhalingstekens
             -   option: |-
                     ```
-                    smaken =  'vanille', 'aarbeien', 'chocolade'
+                    smaken =  'vanille', 'aardbeien', 'chocolade'
                     {print} 'Ik wil ' smaken {at} {random} 'ijs.'
                     ```
                 feedback: Goed!
             -   option: |-
                     ```
-                    smaken = 'vanille, aarbeien, chocolade'
+                    smaken = 'vanille, aardbeien, chocolade'
                     {print} 'Ik wil ' smaken {at} {random} 'ijs.'
                     ```
                 feedback: All the different values of flavors should be in quotation marks.
@@ -2604,8 +2604,8 @@ levels:
         3:
             question_text: Wat is er mis met deze code?
             code: |-
-                leukste_dier = ask 'Wat vind jij het leukste dier?'
-                print 'Ik hou ook van ' leukstedier
+                leukste_dier = {ask} 'Wat vind jij het leukste dier?'
+                {print} 'Ik hou ook van ' leukstedier
             mp_choice_options:
             -   option: De naam van de variabele is anders in regel 1 dan in regel 2.
                 feedback: Correct!
@@ -2745,17 +2745,17 @@ levels:
                 feedback: Zo win je helaas geen prijzen
             -   option: |-
                     ```
-                    prizes = 'een miljoen euro, niets'
+                    prijzen = 'een miljoen euro, niets'
                     ```
                 feedback: Zo win je niets
             -   option: |-
                     ```
-                    prizes = 'one miljoen euro', 'niets'
+                    prijzen = 'one miljoen euro', 'niets'
                     ```
                 feedback: Winnaar!
             -   option: |-
                     ```
-                    'prizes' = 'een miljoen euro', 'niets'
+                    'prijzen' = 'een miljoen euro', 'niets'
                     ```
                 feedback: Zo win je niets
             hint: De items op de lijst moeten tussen aanhalingstekens
@@ -3386,10 +3386,10 @@ levels:
             question_text: Wat is er mis met deze code?
             code: |-
                 levens = 100
-                    {while} levens != 0
+                {while} levens != 0
                     antwoord = {ask} 'Ben je al boos?'
-                {if} antwoord == 'ja'
-                    levens = levens - 1
+                    {if} antwoord == 'ja'
+                        levens = levens - 1
             mp_choice_options:
             -   option: '{while} moet {if} zijn.'
                 feedback: Nee dat klopt niet
@@ -3406,7 +3406,7 @@ levels:
             question_text: Wat moet er in deze code veranderen?
             code: |-
                 {print} 'Raad mijn getal'
-                numemrs = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                nummers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                 nummer = nummers {at} {random}
                 game = 'aan'
                 {if} game == 'aan'
@@ -3455,12 +3455,12 @@ levels:
             question_text: Wat zegt de dieetapp als je 1600 caloriëen hebt gegeten die dag?
             code: |-
                 calorie = {ask} 'Hoeveel calorieën heb je vandaag gegeten?'
-                  {while} calorie <= 1000
-                      {print} 'Je kunt nog wat eten'
-                  {while} calorie > 1000 and calorie =< 2000
-                      {print} 'Prima'
-                  {while} calorie > 2000
-                      {print} 'Je hebt genoeg gehad'
+                {while} calorie <= 1000
+                    {print} 'Je kunt nog wat eten'
+                {while} calorie > 1000 {and} calorie =< 2000
+                    {print} 'Prima'
+                {while} calorie > 2000
+                    {print} 'Je hebt genoeg gehad'
             mp_choice_options:
             -   option: Niets. 1600 calorieën is niet geprogrammeerd
                 feedback: Nee
@@ -4034,12 +4034,12 @@ levels:
                 insects = ['🐝', '🦋', '🕷', '🐞']
                 your_favorite = {ask} 'what is your favorite insect?'
                 {for} insect in insects:
-                 {if} your_favorite == '🐝' {or} your_favorite == '🐞':
-                  {print} 'very useful'
-                 {elif} your_favorite == '🕷':
-                  {print} 'it can catch mosquitoes'
-                 {else}:
-                  {print} 'almost all insects can be useful one way or another'
+                    {if} your_favorite == '🐝' {or} your_favorite == '🐞':
+                        {print} 'very useful'
+                    {elif} your_favorite == '🕷':
+                        {print} 'it can catch mosquitoes'
+                    {else}:
+                        {print} 'almost all insects can be useful one way or another'
             mp_choice_options:
             -   option: '`{or}` cannot be used with `{if}`.'
                 feedback: Try again.

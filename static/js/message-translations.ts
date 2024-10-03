@@ -1257,9 +1257,9 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "Transpile_success": "Goed gedaan!\nGa zo door!\nTopper!\nSuper!\nBravo!",
     "Transpile_warning": "Let op!",
     "Unsaved_Changes": "Jouw programma is niet opgeslagen. Wil je weggaan zonder het op te slaan?",
-    "adventures_completed": "Adventuren afgerond: {number_of_adventures}",
+    "adventures_completed": "Avonturen afgerond: {number_of_adventures}",
     "adventures_restored": "De standaardavonturen zijn terug gezet.",
-    "adventures_tried": "Adventuren geprobeerd",
+    "adventures_tried": "Avonturen geprobeerd",
     "copy_link_to_share": "Kopieer link voor delen",
     "customization_deleted": "Personalisatie succesvol verwijderd.",
     "dice": "🎲",
@@ -2004,7 +2004,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "There are unsaved changes, are you sure you want to leave this page?"
   },
   "tr": {
-    "CheckInternet": "İnternet bağlantınız doğru çalışıyor mu diye bir göz atın.",
+    "CheckInternet": "İnternet bağlantınızın çalışıp çalışmadığını kontrol edin.",
     "Connection_error": "Sunucuya ulaşamadık.",
     "Empty_output": "Bu kod çalışıyor ama hiçbir şey yazdırmıyor. Kodunuzda bir yazdırma komutu kullanın veya bir çıktı almak için kaplumbağayı kullanın.",
     "Errors_found": "Bir hata yaptınız! Endişelenmeyin, programı yine de çalıştırdık",
