@@ -42,8 +42,9 @@ class AuthModule(WebsiteModule):
 
         self.db = db
 
+    @route("/login", methods=["POST"], subdomain="<language>")
     @route("/login", methods=["POST"])
-    def login(self):
+    def login(self, language='en'):
         body = request.json
         # Validations
         if not isinstance(body, dict):
@@ -111,8 +112,9 @@ class AuthModule(WebsiteModule):
         remember_current_user(user)
         return resp
 
+    @route("/signup", methods=["POST"], subdomain="<language>")
     @route("/signup", methods=["POST"])
-    def signup(self):
+    def signup(self, language='en'):
         body = request.json
         # Validations, mandatory fields
         if not isinstance(body, dict):
@@ -211,8 +213,9 @@ class AuthModule(WebsiteModule):
         remember_current_user(user)
         return resp
 
+    @route("/verify", methods=["GET"], subdomain="<language>")
     @route("/verify", methods=["GET"])
-    def verify_email(self):
+    def verify_email(self, language='en'):
         username = request.args.get("username", None)
         token = request.args.get("token", None)
         if not token:
@@ -243,8 +246,9 @@ class AuthModule(WebsiteModule):
 
         return redirect("/hedy")
 
+    @route("/turn-into-teacher", methods=['POST'], subdomain="<language>")
     @route("/turn-into-teacher", methods=['POST'])
-    def turn_into_teacher_account(self):
+    def turn_into_teacher_account(self, language='en'):
         username = current_user()['username']
         if not username:
             return make_response(gettext("username_invalid"), 400)
@@ -270,8 +274,9 @@ class AuthModule(WebsiteModule):
         # TODO: Redirect the user to a tutorial page
         return make_response({'message': gettext('turned_into_teacher')}, 200)
 
+    @route("/logout", methods=["POST"], subdomain="<language>")
     @route("/logout", methods=["POST"])
-    def logout(self):
+    def logout(self, language='en'):
         forget_current_user()
         if request.cookies.get(TOKEN_COOKIE_NAME):
             self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
@@ -282,25 +287,28 @@ class AuthModule(WebsiteModule):
             session["preview_teacher_mode"] = None
         return make_response('', 204)
 
+    @route("/destroy", methods=["POST"], subdomain="<language>")
     @route("/destroy", methods=["POST"])
     @requires_login
-    def destroy(self, user):
+    def destroy(self, user, language='en'):
         forget_current_user()
         self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         self.db.forget_user(user["username"])
         session[JUST_LOGGED_OUT] = True
         return make_response('', 204)
 
+    @route("/destroy_public", methods=["POST"], subdomain="<language>")
     @route("/destroy_public", methods=["POST"])
     @requires_login
-    def destroy_public(self, user):
+    def destroy_public(self, user, language='en'):
         self.db.forget_public_profile(user["username"])
         session.pop("profile_image", None)  # Delete profile image id if existing
         return make_response('', 204)
 
+    @route("/change_student_password", methods=["POST"], subdomain="<language>")
     @route("/change_student_password", methods=["POST"])
     @requires_login
-    def change_student_password(self, user):
+    def change_student_password(self, user, language='en'):
         body = request.json
         if not isinstance(body, dict):
             return make_response(gettext("ajax_error"), 400)
@@ -322,9 +330,10 @@ class AuthModule(WebsiteModule):
 
         return make_response({"success": gettext("password_change_success")}, 200)
 
+    @route("/change_password", methods=["POST"], subdomain="<language>")
     @route("/change_password", methods=["POST"])
     @requires_login
-    def change_password(self, user):
+    def change_password(self, user, language='en'):
         body = request.json
 
         if not isinstance(body, dict):
@@ -356,8 +365,9 @@ class AuthModule(WebsiteModule):
 
         return make_response({"message": gettext("password_updated")}, 200)
 
+    @route("/recover", methods=["POST"], subdomain="<language>")
     @route("/recover", methods=["POST"])
-    def recover(self):
+    def recover(self, language='en'):
         body = request.json
         # Validations
         if not isinstance(body, dict):
@@ -402,8 +412,9 @@ class AuthModule(WebsiteModule):
 
             return make_response({"message": gettext("sent_password_recovery")}, 200)
 
+    @route("/reset", methods=["POST"], subdomain="<language>")
     @route("/reset", methods=["POST"])
-    def reset(self):
+    def reset(self, language='en'):
         body = request.json
         # Validations
         if not isinstance(body, dict):
@@ -490,9 +501,10 @@ class AuthModule(WebsiteModule):
             resp = make_response('', 200)
         return user, resp
 
+    @route('/public_profile', methods=['POST'], subdomain="<language>")
     @route('/public_profile', methods=['POST'])
     @requires_login
-    def update_public_profile(self, user):
+    def update_public_profile(self, user, language='en'):
         body = request.json
 
         # Validations
