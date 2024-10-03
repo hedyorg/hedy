@@ -52,7 +52,7 @@ levels:
             story: |-
                 In een schaaktoernooi zijn nog drie spelers over.
                 Maak een programma dat beslist welke twee spelers als eerst tegen elkaar mogen schaken.
-                Print eerst de twee spelers die tegen elkaar spelen en print vervolgens de tegen wie de winnaar mag spelen.
+                Print eerst de twee spelers die tegen elkaar spelen en print vervolgens tegen wie de winnaar van dat potje moet spelen.
             code: |-
                 spelers {is} Freek, Bart, Emma
                 speler_1 {is} spelers {at} {random}
@@ -109,10 +109,10 @@ levels:
         2:
             story: Maak een programma dat je helpt berekenen hoeveel taarten je moet kopen voor iemands verjaardag.
             code: |-
-                {print} 'It is your birthday!'
-                people = {ask} 'How many people do you want to give a slice of cake?'
-                cakes_amount = people/8
-                {print} 'You will have to buy ' cakes_amount ' cakes'
+                {print} 'Het is jouw verjaardag!'
+                mensen = {ask} 'Hoeveel mensen wil je een stuk taart geven?'
+                aantal_stukken_taart = mensen/8
+                {print} 'Je moet ' cakes_amount ' taarten kopen.'
     7:
         1:
             story: Maak het baby shark liedje compleet. Eerst komt baby, dan mama tot slot papa haai.
@@ -159,7 +159,7 @@ levels:
                 {repeat} 3 {times}
                     nummer = nummers {at} {random}
                     correct_antwoord = 5 * nummer
-                    antwoord = {ask} 'Wat is 5 keer' nummer '?'
+                    antwoord = {ask} 'Wat is 5 keer ' nummer '?'
                     {if} antwoord = correct_antwoord
                         {print} 'Super!'
                     {else}
@@ -195,18 +195,18 @@ levels:
                     {remove} gekozen_diner {from} diner_opties
         2:
             story: |-
-                This make-over robot will decide your new hairstyle for you. If you do not agree with the first choice, you can try again.
-                **Mind** The variable people is defined in the first line. The variable hairstyles in the second.
+                Deze make-over robot beslist jouw nieuwe kapsel voor je. Als je het niet eens bent met de eerste keuze, kun je het opnieuw proberen.
+                **Let op** De lijstvariabele mensen is gedefinieerd in de eerste regel. De lijstvariabele haarstijl in de tweede.
             code: |-
                 mensen = Betty, Amanda, Marc
-                haarstijl = een kaal hoofd, een hanekam, een paardenstaart, stekeltjes
+                haarstijl = een kaal hoofd, een hanenkam, een paardenstaart, stekeltjes
                 {for} mens {in} mensen
                     {print} mens ' krijgt nu ' haarstijl {at} {random}
                     tevreden = {ask} mens ', ben je blij met deze keuze?'
                     {if} tevreden {is} ja
                         {print} 'Fantastisch'
                     {else}
-                        {print} 'We proberen het opniew... ' mens ' krijgt ' haarstijl {at} {random}
+                        {print} 'We proberen het opnieuw... ' mens ' krijgt ' haarstijl {at} {random}
     11:
         1:
             story: Maak een aftelklok voor oudjaarsavond! Het programma moet de getallen van 10 tot 1 één seconde tonen en je dan een gelukkig nieuwjaar wensen!
