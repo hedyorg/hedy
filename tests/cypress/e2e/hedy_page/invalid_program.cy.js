@@ -33,7 +33,7 @@ describe('Error code gives correct error', () => {
 
     it('Missing Command', () => {
         const error_code = "hello world"
-        const error_message = `We detected that the code seems to be missing a command on line 1. Can you try looking at the exercise section to find which command to use?`;
+        const error_message = `We detected that the code is missing a command on line 1. Can you try looking at the adventure section to find which command to use?`;
         goToHedyPage();
     
         cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').click();
@@ -47,7 +47,7 @@ describe('Error code gives correct error', () => {
 
     it('Invalid Argument Type', () => {
         const error_code = "forward lalala"
-        const error_message = `We detected that forward doesn't work with lalala because it is text. Can you try changing lalala to a number or input from ask?`;
+        const error_message = `We detected that forward can't be used with lalala because it is text. Can you try changing lalala to a number or input from ask?`;
         goToHedyPage();
 
         cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').click();
@@ -61,7 +61,7 @@ describe('Error code gives correct error', () => {
 
     it('Invalid Argument', () => {
         const error_code = "turn test"
-        const error_message = `We detected that turn is not usable with  test. Can you try changing  test to right or left?`;
+        const error_message = `We detected that turn can't be used with  test. Can you try changing  test to right or left?`;
         goToHedyPage();
     
         cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').click();
