@@ -1926,7 +1926,7 @@ def view_program(user, id):
         students = sorted(class_.get('students', []))
         index = students.index(result['username'])
         for student in students[index + 1:]:
-            id = f'{student}-{result['adventure_name']}-{result['level']}'
+            id = f"{student}-{result['adventure_name']}-{result['level']}"
             next_classmate_adventure = DATABASE.student_adventure_by_id(id) or {}
             next_classmate_adventure_id = next_classmate_adventure.get('program_id')
             if next_classmate_adventure_id:
