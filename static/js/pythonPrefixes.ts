@@ -23,7 +23,7 @@ t.hideturtle()
 t.penup()
 t.left(90)
 t.pendown()
-t.speed(3)
+t.speed(7)
 t.showturtle()
 `;
 
