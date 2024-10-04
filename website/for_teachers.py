@@ -147,7 +147,6 @@ class ForTeachersModule(WebsiteModule):
         questions = []
         survey_later = ""
         total_questions = ""
-        level = 1
 
         if Class.get("students"):
             survey_id, description, questions, total_questions, survey_later = self.class_survey(class_id)
@@ -163,9 +162,9 @@ class ForTeachersModule(WebsiteModule):
                     "expire_timestamp": utils.localized_date_format(invite["ttl"], short_format=True),
                 }
             )
-
+        level = Class.get('last_viewed_level', 1)
         student_overview_table, _, class_adventures_formatted, \
-            _, student_adventures, graph_students, students_info = self.get_grid_info(user, class_id, 1)
+            _, student_adventures, graph_students, students_info = self.get_grid_info(user, class_id, level)
 
         teacher = user if Class["teacher"] == user["username"] else self.db.user_by_username(Class["teacher"])
         second_teachers = [teacher] + Class.get("second_teachers", [])
@@ -183,6 +182,7 @@ class ForTeachersModule(WebsiteModule):
             current_page="for-teachers",
             page_title=gettext("title_class-overview"),
             invites=invites,
+            level=level,
             class_info={
                 "students": len(students),
                 "link": os.getenv("BASE_URL", "") + "/hedy/l/" + Class["link"],
@@ -490,7 +490,7 @@ class ForTeachersModule(WebsiteModule):
             adventure_names, student_adventures, graph_students, students_info = self.get_grid_info(
                 user, class_id, level)
         adventure_names = {value: key for key, value in adventure_names.items()}
-
+        self.db.update_last_viewed_level_in_class(class_id, int(level))
         return jinja_partials.render_partial("customize-grid/partial-grid-levels.html",
                                              level=level,
                                              class_info={"id": class_id, "students": students, "name": class_["name"]},
