@@ -1,6 +1,11 @@
 # Hedy - Les 1a
 
-[Teacher] Het doel van deze les is om de vijf codes uit level 1 van Hedy te leren kennen: `print`, `echo` en `ask` voor tekst en `forward` en `turn` voor het tekenen. [/Teacher]
+
+{
+    "teacher_note": " Het doel van deze les is om de vijf codes uit level 1 van Hedy te leren kennen: `print`, `echo` en `ask` voor tekst en `forward` en `turn` voor het tekenen. "
+}
+
+
 
 ## Printen en invoer
 
@@ -101,7 +106,8 @@ Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingev
 {
     "assignment": "output",
     "icon"      : "💻",
-    "code"      : "ask Hoe heet jij?\necho dus jij heet:",
+    "code"      : "ask Hoe heet jij?\n
+                    echo dus jij heet:",
     "answer"    : "dus jij heet: **naam**",
     "lines"     : 2
 }
@@ -109,7 +115,8 @@ Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingev
 {
     "assignment": "output",
     "icon"      : "💻",
-    "code"      : "ask Hoe heet jij?\necho Leuk om je te ontmoeten,",
+    "code"      : "ask Hoe heet jij?\n
+                    echo Leuk om je te ontmoeten,",
     "answer"    : "Leuk om je te ontmoeten, **naam**",
     "lines"     : 2
 }
@@ -228,7 +235,14 @@ Voorspel wat de uitvoer van deze codes is. Dat is bij de turtle of tekenschildpa
     "assignment": "output",
     "icon"      : "💻",
     "type"      : "turtle",
-    "code"      : "forward 100\nturn left\nforward 100\nturn left\nforward 100\nturn left\nforward 100\nturn left\n",
+    "code"      : "forward 100\n
+                    turn left\n
+                    forward 100\n
+                    turn left\n
+                    forward 100\n
+                    turn left\n
+                    forward 100\n
+                    turn left\n",
     "answer"    : "een vierkant",
     "lines"     : 5
 }
@@ -237,7 +251,14 @@ Voorspel wat de uitvoer van deze codes is. Dat is bij de turtle of tekenschildpa
     "assignment": "output",
     "icon"      : "💻",
     "type"      : "turtle",
-    "code"      : "forward 100\nturn left\nforward 100\nturn right\nforward 100\nturn left\nforward 100\nturn right\n",
+    "code"      : "forward 100\n
+                    turn left\n
+                    forward 100\n
+                    turn right\n
+                    forward 100\n
+                    turn left\n
+                    forward 100\n
+                    turn right\n",
     "answer"    : "een trapje (zonder onderkant)",
     "lines"     : 5
 }
@@ -246,7 +267,14 @@ Voorspel wat de uitvoer van deze codes is. Dat is bij de turtle of tekenschildpa
     "assignment": "output",
     "icon"      : "💻",
     "type"      : "turtle",
-    "code"      : "forward 100\nturn right\nforward 5\nturn right\nforward 100\nturn right\nforward 5\nturn right\n",
+    "code"      : "forward 100\n
+                    turn right\n
+                    forward 5\n
+                    turn right\n
+                    forward 100\n
+                    turn right\n
+                    forward 5\n
+                    turn right\n",
     "answer"    : "een hele smalle vierkant",
     "lines"     : 6
 }
@@ -260,7 +288,11 @@ We draaien het nu om! Je krijg een uitvoer en jij moet de code erbij schrijven.
     "assignment": "input",
     "icon"      : "🧑‍💻",
     "output"    : "_\n |\n |_________",
-    "answer"    : "forward 5\nturn right\nforward 10\nturn left\nforward 50\n",
+    "answer"    : "forward 5\n
+                    turn right\n
+                    forward 10\n
+                    turn left\n
+                    forward 50\n",
     "lines"     : 5
 }
 
@@ -275,7 +307,12 @@ We draaien het nu om! Je krijg een uitvoer en jij moet de code erbij schrijven.
 |        |\n
 |        |\n
 ---------\n",
-    "answer"    : "forward 50\nturn left\nforward 50\nturn left\nforward 50\nturn left\n",
+    "answer"    : "forward 50\n
+                    turn left\n
+                    forward 50\n
+                    turn left\n
+                    forward 50\n
+                    turn left\n",
     "lines"     : 8
 }
 

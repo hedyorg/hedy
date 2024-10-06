@@ -1,7 +1,6 @@
 # Hedy - Les 4a
 
-[Teacher] In level 4 leren leerlingen aanhalingstekens gebruiken in code. Dat is niet altijd de meest leuke les maar goed oefenen is wel nodig om latere frustratie te voorkomen.
-Om het leuker te maken kan je in deze les andere features aanbieden, zoals `clear` of een muziekopdracht.[/Teacher]
+
 
 ## Aanhalingstekens
 
@@ -30,10 +29,14 @@ Deze opdrachten doe je in twee stappen:
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
-print Hallo allemaal!nprint Welkom bij Hedy       ________________________________________
-                                                  ________________________________________
+print Hallo allemaal!                             ________________________________________
+print Welkom bij Hedy                             ________________________________________
+                                                  
 
 ```
+
+Vergeet niet deze opdrachten in twe stappen te doen, eerst de aanhalingstekens links.
+Dan de code rechts!
 
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
@@ -110,7 +113,17 @@ naam is ask 'Hoe heet jij?'
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
+**🤔 Vraag**: Is deze code goed of fout?
+```hedy
+aantal is ask "Hoeveel capibara's lopen daar?"
+```
+Antwoord: <br> 〇 Goed<br> 〇 Fout
 
+**🤔 Vraag**: Is deze code goed of fout?
+```hedy
+aantal is ask "Hoeveel capibara's lopen daar?"print 'Dat zijn er aantal'
+```
+Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 #### Opdracht 4: Schrijf de code
 
@@ -146,11 +159,11 @@ Antwoord: ______________________________________________________________________
 
 
 
-#### Opdracht 7: Codes
+#### Opdracht 6: Codes
 
 We hebben ook nieuwe codes geleerd in level 4.
 
-**📖 Vraag**: Wat doet het commando `clear`? (Let op: `is` kan dus meerdere dingen doen!)
+**📖 Vraag**: Wat doet het commando `clear`?
 Antwoord: ____________________________________________________________________________________________________<br>
 
 **📖 Vraag**: Wat doet het commando `color`?
@@ -186,5 +199,3 @@ ________________________________________________________________________________
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
  <br>
 
-
-``
