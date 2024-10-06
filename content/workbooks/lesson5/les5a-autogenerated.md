@@ -1,7 +1,5 @@
 # Hedy - Les 5a
 
-[Teacher] In level 5 leren leerlingen de `if` en `else` codes, die zijn vrij lastig omdat nu niet meer alles regels altijd worden uitgevoerd. [/Teacher]
-
 ## Aanhalingstekens
 
 Aan het einde van de les:
@@ -19,7 +17,7 @@ vriend is ask 'Hoe heet jij?'
 if vriend is Jasmijn print 'Hallo!' else print 'Nee, jij niet!'
 ```
 
-#### Opdracht 1a: Onderstreep de condities
+#### Opdracht 1: Onderstreep de condities
 
 Wat is een conditie? Onderstreep in deze codes steeds de conditie.
 
@@ -41,7 +39,7 @@ leeftijd is ask 'Hoe oud ben jij?'
 if leeftijd is 16 print 'Perfecto' else print 'Jij bent te jong!'
 ```
 
-#### Opdracht 1b: Omcirkel de juiste regels
+#### Opdracht 2: Omcirkel de juiste regels
 
 Welke code wordt uitgevoerd? Omcirkel alleen die stukken.
 Doe alsof het vandaag vrijdag is, en jij 12 jaar bent.
@@ -65,7 +63,7 @@ if leeftijd is 16 print 'Perfecto' else print 'Jij bent te jong!'
 ```
 
 
-#### Opdracht 2: Foutje?
+#### Opdracht 3: Foutje?
 Lees de codes goed! Welke zijn er goed of fout.
 
 **🤔 Vraag**: Is deze code goed of fout?
@@ -107,7 +105,7 @@ aantal is ask "Hoeveel capibara's lopen daar?"if aantal is 5 print 'Dat zijn er 
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 
-#### Opdracht 3: Voorspel de uitvoer
+#### Opdracht 4: Voorspel de uitvoer
 
 Wat is de uitvoer van deze programma's?
 Let op! Soms staat er random in een programma. Dan moet je zelf kiezen wat Hedy zou kiezen.

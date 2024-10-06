@@ -1,6 +1,10 @@
 # Hedy - Les 5a
 
-[Teacher] In level 5 leren leerlingen de `if` en `else` codes, die zijn vrij lastig omdat nu niet meer alles regels altijd worden uitgevoerd. [/Teacher]
+{
+    "teacher_note": "In level 5 leren leerlingen de `if` en `else` codes, die zijn vrij lastig omdat nu niet meer alles regels altijd worden uitgevoerd."
+}
+
+
 
 ## Aanhalingstekens
 
@@ -19,7 +23,7 @@ vriend is ask 'Hoe heet jij?'
 if vriend is Jasmijn print 'Hallo!' else print 'Nee, jij niet!'
 ```
 
-#### Opdracht 1a: Onderstreep de condities
+#### Opdracht 1: Onderstreep de condities
 
 Wat is een conditie? Onderstreep in deze codes steeds de conditie.
 
@@ -50,7 +54,7 @@ Wat is een conditie? Onderstreep in deze codes steeds de conditie.
     "answer"    : "print 'Jij bent te jong!'"
 }
 
-#### Opdracht 1b: Omcirkel de juiste regels
+#### Opdracht 2: Omcirkel de juiste regels
 
 Welke code wordt uitgevoerd? Omcirkel alleen die stukken.
 Doe alsof het vandaag vrijdag is, en jij 12 jaar bent.
@@ -83,7 +87,7 @@ Doe alsof het vandaag vrijdag is, en jij 12 jaar bent.
 }
 
 
-#### Opdracht 2: Foutje?
+#### Opdracht 3: Foutje?
 Lees de codes goed! Welke zijn er goed of fout.
 
 {
@@ -146,7 +150,7 @@ Lees de codes goed! Welke zijn er goed of fout.
 }
 
 
-#### Opdracht 3: Voorspel de uitvoer
+#### Opdracht 4: Voorspel de uitvoer
 
 Wat is de uitvoer van deze programma's? 
 Let op! Soms staat er random in een programma. Dan moet je zelf kiezen wat Hedy zou kiezen.
@@ -156,11 +160,42 @@ Er kunnen dan dus meerdere antwoorden goed zijn!
     "assignment": "output",
     "icon"      : "💻",
     "code"      : "docenten is Hermans, Merbis, Bagci, Senkal\n
-                    docent is docenten at random
+                    docent is docenten at random\n
                     if docent is Hermans print 'Hoera!'",
     "answer"    : "Hoera! of niks",
     "lines"     : 1
 }
+
+{
+    "assignment": "output",
+    "icon"      : "💻",
+    "code"      : "docenten is Hermans, Merbis, Bagci, Senkal\n
+                    docent is docenten at random\n
+                    if docent is Hermans print 'Jammer!' else print 'Hoera!'",
+    "answer"    : "Hoera! of 'Jammer'",
+    "lines"     : 1
+}
+
+{
+    "assignment": "output",
+    "icon"      : "💻",
+    "code"      : "getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n
+                    print 'Welkom bij de bingoavond'\n
+                    getal is getallen at random\n
+                    if getal is 10 print 'Gewonnen!' else print 'Helaas'\n
+    "answer"    : "Welkom bij de bingoavond\nGewonnen! of 'Helaas'",
+    "lines"     : 2
+}
+
+{
+    "assignment": "output",
+    "icon"      : "💻",
+    "code"      : "getal is ask 'Wat is jouw lievelingsgetal?'\n
+                    if getal is 10 print 'Mijne ook!'\n
+    "answer"    : "'Mijne ook!' of niks",
+    "lines"     : 1
+}
+
 
 
 #### Opdracht 5: Programmeerwoorden 
