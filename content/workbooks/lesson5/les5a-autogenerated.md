@@ -1,214 +1,143 @@
-# Hedy - Les 3a
+# Hedy - Les 5a
 
+## Aanhalingstekens
 
+Aan het einde van de les:
 
-## Lijsten en willekeurigheid
+* hoe je de computer kan laten reageren op invoer.
 
-Aan het einde van de les kun jij:
+### Keuzes maken
 
-* Meerdere dingen opslaan in een variabele, zo'n variabele heet een lijst.
-* Een verhaal maken waarin willekeurige dingen gebeuren.
-* Een tekening maken waarin willekeurige dingen verschijnen.
-
-### Variabelen
-
-Je hebt net op het bord de `is` opdracht gezien met een lijst.
-Met als bij een gewone variabele, slaan we iets op in een lijst met `is`.
+Tot nu toe voerde Hedy altijd alle regels code uit. Vanaf nu kan je met een `if` bepaalde regels uitvoeren, alleen in bepaalde gevallen.
+De code die je na `if` schrijft, noem je een conditie.
+In dit voorbeeld is de conditie `vriend is Jasmijn.`
 
 ```hedy
-vrienden is Mo, Layla, Denny
-print Ik ga vandaag naar vrienden at random
+vriend is ask 'Hoe heet jij?'
+if vriend is Jasmijn print 'Hallo!' else print 'Nee, jij niet!'
 ```
 
-#### Opdracht 1: Omcirkel het juiste stukje code
+#### Opdracht 1: Onderstreep de condities
+
+Wat is een conditie? Onderstreep in deze codes steeds de conditie.
 
 **◯ Opdracht**: Omcircel alle lijsten in deze code
 ```hedy
-vandaag is maandag
-klassen is 1HC, 1HB, 1HA
-lokalen is 011, 304, 305, OLC
+vandaag is ask 'Welke dag is het?'
+if vandaag is vrijdag print 'Ja' else print 'Nee'
 ```
 
-**◯ Opdracht**: Op welke plek in de code wordt er tekst uit een lijst gebruikt?
+**◯ Opdracht**: Omcircel alle lijsten in deze code
 ```hedy
-klassen is 1HC, 1HB, 1HA
-print vandaag heeft klassen at random vrij!
+vandaag is ask 'Welke dag is het?'
+if vandaag is zaterdag print 'Geen school vandaag' else print 'Helaas wel'
 ```
 
-#### Opdracht 2: Voorspel de uitvoer
-
-Vind je het lastig? Gebruik dan weer het stappenplan om variabele-uitvoer te voorspellen.
-
-1. Omcirkel de plek waar de lijst wordt ingesteld
-2. Omcirkel de plek waar de lijst wordt gebruikt
-3. Trek een lijn tussen deze plekken
-4. Bij een `at` `random` mag je zelf willekeurig iets uit de lijst kiezen.
-
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									                        Uitvoer:
+**◯ Opdracht**: Omcircel alle lijsten in deze code
 ```hedy
-docenten is Hermans, Merbis, Bagci, Senkal        ________________________________________
-print Vandaag les van docenten at random!         
-
+leeftijd is ask 'Hoe oud ben jij?'
+if leeftijd is 16 print 'Perfecto' else print 'Jij bent te jong!'
 ```
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									                        Uitvoer:
+#### Opdracht 2: Omcirkel de juiste regels
+
+Welke code wordt uitgevoerd? Omcirkel alleen die stukken.
+Doe alsof het vandaag vrijdag is, en jij 12 jaar bent.
+
+**◯ Opdracht**: Omcircel alle lijsten in deze code
 ```hedy
-docenten is Hermans, Merbis, Bagci, Senkal        ________________________________________
-print De docent vandaag is Hermans.               
-
+vandaag is ask 'Welke dag is het?'
+if vandaag is vrijdag print 'Ja' else print 'Nee'
 ```
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									                        Uitvoer:
+**◯ Opdracht**: Omcircel alle lijsten in deze code
 ```hedy
-weer is zonnig, regen, wolken, onweer             ________________________________________
-print Wat is het lekker weer vandaag!             
-
+vandaag is ask 'Welke dag is het?'
+if vandaag is zaterdag print 'Geen school vandaag' else print 'Helaas wel'
 ```
+
+**◯ Opdracht**: Omcircel alle lijsten in deze code
+```hedy
+leeftijd is ask 'Hoe oud ben jij?'
+if leeftijd is 16 print 'Perfecto' else print 'Jij bent te jong!'
+```
+
 
 #### Opdracht 3: Foutje?
 Lees de codes goed! Welke zijn er goed of fout.
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
-weer is zonnig, regen, wolken, onweer
-print Bah! De computer loopt weer vast.
+leeftijd is ask 'Hoe oud ben jij?'
+if leeftijd is 16 print 'Perfecto' else 'Jij bent te jong!'
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
-docenten is Hermans
-print Vandaag alweer docenten at random
+dier is ask 'Wat voor dier is dat?'
+if dier is Lama print 'Beeeee'
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
-docenten is onweer, regen, ijzel
-print Vandaag alweer docenten at random!
-```
-Antwoord: <br> 〇 Goed<br> 〇 Fout
-
-### Avonturen
-
-[Teacher] Dit zijn alle avonturen zonder `add to` en `remove from`.[/Teacher]
-Dit is een goed moment voor deze avonturen:
-Introductie
-willekeurig
-Dobbelsteen
-Steen, papier, schaar
-Muziek
-Waarzegger
-Restaurant
-Spookhuis
-Afwas?
-
-### Lijsten aanpassen
-
-Tot nu toe hebben we lijsten steeds aan het begin van het programma ingesteld.
-
-```hedy
-antwoorden is ja, nee, misschien
-print Het antwoord is antwoorden at random
-```
-
-Maar soms wil je dat de gebruiker van een programma ook opties kan toevoegen.
-Dat doe je met een `add` en een `to` commando.
-
-```
-dieren is 🐿, 🦔, 🦇, 🦉
-dier is ask Wat zou het kunnen zijn?
-add dier to dieren
-print het was een dieren op willekeurig
-```
-
-Je kan ook iets uit een lijst verwijderen, met `remove` en `from`.
-
-#### Opdracht 4: Goed of fout?
-
-**🤔 Vraag**: Is deze code goed of fout?
-```hedy
-letters is a,b,c,d
-remove a to letters
+print "Daar lopen twee oma's"
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
-eten is pizza, friet, kapsalon
-remove kroket from eten
+if naam Hedyprint 'Programmeren is leuk!'
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
-eten is pizza, friet, kapsalon
-add pizza to eten
+ask 'Hoe heet deze school?'if school is LK print 'Ja!' 
+```
+Antwoord: <br> 〇 Goed<br> 〇 Fout
+
+**🤔 Vraag**: Is deze code goed of fout?
+```hedy
+aantal is ask "Hoeveel capibara's lopen daar?"if aantal is 5 print 'Dat zijn er dan aantal'
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 
-#### Opdracht 5: Schrijf de code
+#### Opdracht 4: Voorspel de uitvoer
 
-Kijk goed naar de uitvoer, en schrijf er een passende code bij.
-**Zorg ervoor dat er steeds minstens een willekeurige keuze in je programma zit, dus niet alleen een print!**
+Wat is de uitvoer van deze programma's?
+Let op! Soms staat er random in een programma. Dan moet je zelf kiezen wat Hedy zou kiezen.
+Er kunnen dan dus meerdere antwoorden goed zijn!
 
-**🧑‍💻 Vraag**: Welke code hoort bij deze uitvoer? <br>
+**💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
-________________________________________          Welkom bij de bingoavond
-________________________________________          De drie geluksnummers zijn:
-________________________________________          5 en 3 en 10
-________________________________________
+docenten is Hermans, Merbis, Bagci, Senkal        ________________________________________
+docent is docenten at randomif docent is Hermans print 'Hoera!'
 
 ```
 
 
-**🧑‍💻 Vraag**: Welke code hoort bij deze uitvoer? <br>
-Code:									                        Uitvoer:
-```hedy
-________________________________________          We gaan vanavond naar de film.
-________________________________________          We kiezen: Inside Out
-________________________________________
-
-```
-
-
-#### Opdracht 6: Programmeerwoorden
+#### Opdracht 5: Programmeerwoorden
 
 We hebben deze les weer nieuwe programmeerwoorden geleerd! Leg ze uit je eigen woorden.
 
-**📖 Vraag**: Wat betekent lijst?
-Antwoord: ____________________________________________________________________________________________________<br>
-
-**📖 Vraag**: Wat betekent willekeurig?
-Antwoord: ____________________________________________________________________________________________________<br>
-
-**📖 Vraag**: Wat betekent toevoegen?
+**📖 Vraag**: Wat is een conditie?
 Antwoord: ____________________________________________________________________________________________________<br>
 
 
-#### Opdracht 7: Codes
 
-De code `is` is in dit level veranderd, en we hebben ook nieuwe codes geleerd.
-Wat doen die? Leg het uit in je eigen woorden.
+#### Opdracht 6: Codes
 
-**📖 Vraag**: Wat doet het commando `is`? (Let op: `is` kan dus meerdere dingen doen!)
+We hebben ook nieuwe codes geleerd in level 5.
+
+**📖 Vraag**: Wat doet het commando `if`? 
 Antwoord: ____________________________________________________________________________________________________<br>
 
-**📖 Vraag**: Wat doet het commando `add to`?
+**📖 Vraag**: Wat doet het commando `else`?
 Antwoord: ____________________________________________________________________________________________________<br>
-
-**📖 Vraag**: Wat doet het commando `remove from`?
-Antwoord: ____________________________________________________________________________________________________<br>
-
-
-**📖 Vraag**: Wat doet het commando `at random`?
-Antwoord: ____________________________________________________________________________________________________<br>
-
 
 ### Wat vond jij?
 
@@ -239,4 +168,3 @@ ________________________________________________________________________________
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
  <br>
-
