@@ -22,6 +22,15 @@ from flask_babel import gettext, format_date, format_datetime, format_timedelta
 from ruamel import yaml
 import commonmark
 
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
+# Implement the rate limiter
+limiter = Limiter(
+    get_remote_address,
+    storage_uri="memory://",
+)
+
 commonmark_parser = commonmark.Parser()
 commonmark_renderer = commonmark.HtmlRenderer()
 
