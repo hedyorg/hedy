@@ -31,7 +31,7 @@ Deze opdrachten doe je in twee stappen:
     "assignment": "output",
     "icon"      : "💻",
     "code"      : 
-                    "print Hallo allemaal!n
+                    "print Hallo allemaal!\n
                     print Welkom bij Hedy\n",
     "answer"    : 
                     "Hallo allemaal\n
