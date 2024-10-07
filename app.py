@@ -84,7 +84,9 @@ app.json = JinjaCompatibleJsonProvider(app)
 # Use 5 minutes as a reasonable default for all files we load elsewise.
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = datetime.timedelta(minutes=5)
 app.config["SERVER_NAME"] = "localhost:8080"  # TODO: this needs to be dynamic according to the server we're in.
-app.config['SESSION_COOKIE_DOMAIN'] = None
+app.config['SESSION_COOKIE_DOMAIN'] = ".localhost"
+app.config['SESSION_COOKIE_NAME'] = "localhost"
+app.config['REMEMBER_COOKIE_DOMAIN'] = "localhost"
 
 # We're adding a new URL rule for getting the static files from the server. If we don't do this
 # when using a subdomain getting them will fail.
