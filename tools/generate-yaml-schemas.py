@@ -3,7 +3,7 @@ import json
 
 
 def main():
-    schemas = glob(f'../content/*/*.schema.json')
+    schemas = glob('../content/*/*.schema.json')
     for schema_filename in schemas:
         with open(schema_filename, 'r', encoding='utf-8') as file:
             schema = json.load(file)
