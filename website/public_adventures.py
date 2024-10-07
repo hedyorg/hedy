@@ -1,6 +1,6 @@
 import uuid
 from flask import g, request, make_response
-from flask_babel import gettext
+from gettext_with_fallback import gettext
 import json
 
 import hedy

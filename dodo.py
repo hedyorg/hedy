@@ -305,7 +305,7 @@ def task_extract():
 
             # Extract
             'pybabel extract -F babel.cfg -o messages.pot . --no-location --sort-output',
-            'pybabel update -i messages.pot -d translations-raw -N --no-wrap',
+            'pybabel update -i messages.pot -d translations -N --no-wrap',
 
             # Restore headers, remove tempfiles
             [python3, restore_po_header, 'messages.pot.tmp', 'messages.pot'],

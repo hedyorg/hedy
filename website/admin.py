@@ -1,5 +1,5 @@
 from flask import make_response, request
-from flask_babel import gettext
+from gettext_with_fallback import gettext
 
 import utils
 from website.flask_helpers import render_template

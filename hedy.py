@@ -2,7 +2,7 @@ import textwrap
 from functools import lru_cache
 
 import lark
-from flask_babel import gettext
+from gettext_with_fallback import gettext
 from lark import Lark
 from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args

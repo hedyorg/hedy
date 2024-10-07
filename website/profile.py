@@ -3,7 +3,7 @@ import hashlib
 
 import requests
 from flask import make_response, request, session
-from flask_babel import gettext
+from gettext_with_fallback import gettext
 
 from safe_format import safe_format
 from hedy_content import ALL_KEYWORD_LANGUAGES, ALL_LANGUAGES, COUNTRIES

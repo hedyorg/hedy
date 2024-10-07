@@ -18,11 +18,9 @@ import traceback
 import collections
 
 from email_validator import EmailNotValidError, validate_email
-from flask_babel import gettext, format_date, format_datetime, format_timedelta
+from flask_babel import format_date, format_datetime, format_timedelta
+from gettext_with_fallback import gettext
 from ruamel import yaml
-from flask import g
-# from gettext import
-from flask_babel import gettext, get_domain
 import commonmark
 
 commonmark_parser = commonmark.Parser()
