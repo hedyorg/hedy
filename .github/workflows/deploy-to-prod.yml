@@ -18,6 +18,10 @@ jobs:
           heroku_app_name: hedy-beta
           heroku_email: felienne@gmail.com
       - name: "Send message on Discord"
-        uses: distributhor/workflow-webhook@v3
+        if: success()
+        uses: discord-actions/message@v2
         with:
-          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          username: "Github"
+          avatar: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+          message: "Deployed to hedy.org"
