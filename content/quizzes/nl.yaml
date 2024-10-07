@@ -529,7 +529,7 @@ levels:
             correct_answer: B
             question_score: '10'
         6:
-            question_text: Wat is het foutje in deze code?
+            question_text: Wat is er mis met deze code?
             code: |-
                 vraag {is} {ask} Wat wil je weten?
                 {print} vraag
@@ -567,7 +567,7 @@ levels:
             correct_answer: C
             question_score: '10'
         8:
-            question_text: Wat is de uitvoer van deze code?
+            question_text: Wat is het resultaat van deze code?
             code: |-
                 chips {is} naturel, paprika, cheese onion
                 {remove} naturel {from} chips
@@ -586,7 +586,7 @@ levels:
             correct_answer: D
             question_score: '10'
         9:
-            question_text: Wat is er fout in deze code?
+            question_text: Wat is er mis met deze code?
             code: |-
                 kleuren {is} blauw, paars, groen
                 gekozen_kleur {is} {ask} Welke kleur wil je echt niet?
@@ -1144,7 +1144,7 @@ levels:
             correct_answer: C
             question_score: '10'
         5:
-            question_text: Hoeveel moeten je betalen als je met 5 mensen komt eten?
+            question_text: Hoeveel moet je betalen als je met 5 mensen komt eten?
             code: |-
                 {print} 'Welkom in restaurant Hedy!'
                 mensen {is} {ask} 'Met hoeveel mensen komt u vanavond eten?'
@@ -1804,7 +1804,7 @@ levels:
                    eten = {ask} 'Wat wil je eten?'
                    {if} eten {is} friet
                        saus = {ask} 'Welke saus wil je?'
-                       {print} 'Een frietje met with ' saus
+                       {print} 'Een frietje met ' saus
                    {if} eten {is} pizza
                        beleg = {ask} 'Wat wil je erop?'
                        {print} 'Een pizza met ' beleg
@@ -1868,7 +1868,7 @@ levels:
                     actie = {ask} 'Openen of verkopen?'
                     {if} actie {is} verkopen
                         {print} 'Jij verkoop de koffer voor 500 dollar'
-                    {if} action {is} open
+                    {if} actie {is} open
                         {print} 'Je opent de koffer en wint een miljoen dollar!'
             mp_choice_options:
             -   option: Koffer 1, verkopen
@@ -2011,7 +2011,7 @@ levels:
             code: |-
                 leeftijd = {ask} 'Gefeliciteerd! Hoe oud ben je?'
                 zingen = {ask} 'Wil je dat we gaan zingen?'
-                if zingen {is} ja
+                {if} zingen {is} ja
                     {repeat} jaar {times}
                         {print} 'Hiep hiep hoera!'
             mp_choice_options:
@@ -2493,7 +2493,7 @@ levels:
             correct_answer: C
             question_score: '10'
         9:
-            question_text: Hoevaak roept Hedy 'Hieperdepiep Hoera'voor je?
+            question_text: Hoevaak roept Hedy 'Hieperdepiep Hoera' voor je?
             code: |-
                 leeftijd {is} {ask} 'Hoe oud ben je?'
                 {for} i {in} {range} 1 {to} leeftijd
@@ -2576,25 +2576,25 @@ levels:
             mp_choice_options:
             -   option: |-
                     ```
-                    smaken =  vanille, aarbeien, chocolade
+                    smaken =  vanille, aardbeien, chocolade
                     {print} 'Ik wil ' smaken {at} {random} 'ijs.'
                     ```
                 feedback: Alle smaakjes moeten binnen aanhalingstekens.
             -   option: |-
                     ```
-                    'smaken = vanille, aarbeien, chocolade'
+                    'smaken = vanille, aardbeien, chocolade'
                     {print} 'Ik wil ' smaken {at} {random} 'ijs.'
                     ```
                 feedback: Alle smaakjes moeten binnen aanhalingstekens
             -   option: |-
                     ```
-                    smaken =  'vanille', 'aarbeien', 'chocolade'
+                    smaken =  'vanille', 'aardbeien', 'chocolade'
                     {print} 'Ik wil ' smaken {at} {random} 'ijs.'
                     ```
                 feedback: Goed!
             -   option: |-
                     ```
-                    smaken = 'vanille, aarbeien, chocolade'
+                    smaken = 'vanille, aardbeien, chocolade'
                     {print} 'Ik wil ' smaken {at} {random} 'ijs.'
                     ```
                 feedback: All the different values of flavors should be in quotation marks.
@@ -2604,8 +2604,8 @@ levels:
         3:
             question_text: Wat is er mis met deze code?
             code: |-
-                leukste_dier = ask 'Wat vind jij het leukste dier?'
-                print 'Ik hou ook van ' leukstedier
+                leukste_dier = {ask} 'Wat vind jij het leukste dier?'
+                {print} 'Ik hou ook van ' leukstedier
             mp_choice_options:
             -   option: De naam van de variabele is anders in regel 1 dan in regel 2.
                 feedback: Correct!
@@ -2745,17 +2745,17 @@ levels:
                 feedback: Zo win je helaas geen prijzen
             -   option: |-
                     ```
-                    prizes = 'een miljoen euro, niets'
+                    prijzen = 'een miljoen euro, niets'
                     ```
                 feedback: Zo win je niets
             -   option: |-
                     ```
-                    prizes = 'one miljoen euro', 'niets'
+                    prijzen = 'one miljoen euro', 'niets'
                     ```
                 feedback: Winnaar!
             -   option: |-
                     ```
-                    'prizes' = 'een miljoen euro', 'niets'
+                    'prijzen' = 'een miljoen euro', 'niets'
                     ```
                 feedback: Zo win je niets
             hint: De items op de lijst moeten tussen aanhalingstekens
@@ -3386,10 +3386,10 @@ levels:
             question_text: Wat is er mis met deze code?
             code: |-
                 levens = 100
-                    {while} levens != 0
+                {while} levens != 0
                     antwoord = {ask} 'Ben je al boos?'
-                {if} antwoord == 'ja'
-                    levens = levens - 1
+                    {if} antwoord == 'ja'
+                        levens = levens - 1
             mp_choice_options:
             -   option: '{while} moet {if} zijn.'
                 feedback: Nee dat klopt niet
@@ -3406,7 +3406,7 @@ levels:
             question_text: Wat moet er in deze code veranderen?
             code: |-
                 {print} 'Raad mijn getal'
-                numemrs = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                nummers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                 nummer = nummers {at} {random}
                 game = 'aan'
                 {if} game == 'aan'
@@ -3455,12 +3455,12 @@ levels:
             question_text: Wat zegt de dieetapp als je 1600 caloriëen hebt gegeten die dag?
             code: |-
                 calorie = {ask} 'Hoeveel calorieën heb je vandaag gegeten?'
-                  {while} calorie <= 1000
-                      {print} 'Je kunt nog wat eten'
-                  {while} calorie > 1000 and calorie =< 2000
-                      {print} 'Prima'
-                  {while} calorie > 2000
-                      {print} 'Je hebt genoeg gehad'
+                {while} calorie <= 1000
+                    {print} 'Je kunt nog wat eten'
+                {while} calorie > 1000 {and} calorie =< 2000
+                    {print} 'Prima'
+                {while} calorie > 2000
+                    {print} 'Je hebt genoeg gehad'
             mp_choice_options:
             -   option: Niets. 1600 calorieën is niet geprogrammeerd
                 feedback: Nee
@@ -3494,7 +3494,7 @@ levels:
             question_score: '10'
     16:
         1:
-            question_text: Which command should be filled in on the blanks to print a random snack?
+            question_text: Welk commando moet je op de lege plekken invullen om een willekeurige snack te printen?
             code: |-
                 snacks = nachos, chips, cucumber, sweets
                 {print} _
@@ -3511,10 +3511,10 @@ levels:
             correct_answer: C
             question_score: '10'
         2:
-            question_text: What should be filled in on the blanks if you want a list of what chores are done by whom?
+            question_text: Wat moet je op de lege plekken invullen als je wilt weten welke klusjes door wie worden uitgevoerd?
             code: |-
-                friends = ['Wesley', 'Eric', 'Kaylee']
-                chores = [the cooking, the cleaning, nothing]
+                vrienden = ['Wesley', 'Eric', 'Kaylee']
+                klusjes = ['koken', 'schoonmaken', 'niks doen']
                 {for} i {in} {range} 1 {to} 3
                     {print}  _
             mp_choice_options:
@@ -3542,12 +3542,12 @@ levels:
             correct_answer: D
             question_score: '10'
         3:
-            question_text: What is a possible output for this program?
+            question_text: Wat is een mogelijk resultaat voor dit programma?
             code: |-
-                friends = ['Wesley', 'Eric', 'Kaylee']
-                chore = [the cooking, the cleaning, nothing]
+                vrienden = ['Wesley', 'Eric', 'Kaylee']
+                klusjes = ['koken', 'schoonmaken', 'niks doen']
                 {for} i {in} {range} 1 {to} 3
-                    {print}  friends[i] has to do chores[i]
+                    {print}  vrienden[i] ' moet ' klusjes[i]
             mp_choice_options:
             -   option: |-
                     ```
@@ -3581,7 +3581,7 @@ levels:
             correct_answer: A
             question_score: '10'
         4:
-            question_text: What is wrong with this code?
+            question_text: Wat is er mis met deze code?
             code: |-
                 friends = ['Jaylee', 'Erin', 'Fay']
                 lucky_numbers = [15, 18, 6]
@@ -3601,7 +3601,7 @@ levels:
             correct_answer: B
             question_score: '10'
         5:
-            question_text: Which line should be filled in in the blank?
+            question_text: Welke regel moet er op de lege plek worden ingevuld?
             code: |-
                 animals = ['dog', 'cow', 'horse']
                 _
@@ -3620,7 +3620,7 @@ levels:
             correct_answer: D
             question_score: '10'
         6:
-            question_text: Which statement is true?
+            question_text: Welke stelling is waar?
             code: |-
                 people = ['Chris', 'Jaylino', 'Ryan']
                 games = ['fortnite', 'minecraft', 'fifa']
@@ -3639,7 +3639,7 @@ levels:
             correct_answer: C
             question_score: '10'
         7:
-            question_text: What's wrong with this code?
+            question_text: Wat is er mis met deze code?
             code: |-
                 people = ['Savi', 'Senna', 'Fayenne']
                 transportation = ['bike', 'train', 'car']
@@ -3658,7 +3658,7 @@ levels:
             correct_answer: D
             question_score: '10'
         8:
-            question_text: Which of these codes belongs to this output?
+            question_text: Welke code hoort bij dit resultaat?
             code: |-
                 Macy and Kate get to go first
                 Lionell and Raj get to go second
@@ -3700,7 +3700,7 @@ levels:
             correct_answer: B
             question_score: '10'
         9:
-            question_text: What is a possible output for this code?
+            question_text: Wat is een mogelijk resultaat voor deze code?
             code: |-
                 countries = ['Canada', 'Zimbabwe', 'New Zealand']
                 {for} i {in} {range} 0 {to} 1
@@ -3733,7 +3733,7 @@ levels:
             correct_answer: A
             question_score: '10'
         10:
-            question_text: Which 3 lines will complete this code correctly?
+            question_text: Welke 3 regels maken deze code compleet?
             code: |-
                 {print} 'The book raffle will start soon'
                 {print} 'Get your tickets now!'
@@ -3775,7 +3775,7 @@ levels:
             question_score: '10'
     17:
         1:
-            question_text: What is the output of this code?
+            question_text: Wat is het resultaat van deze code?
             code: |-
                 minions = ['Bob', 'Kevin', 'Stuart']
                 {for} x in minions:
@@ -3809,7 +3809,7 @@ levels:
             correct_answer: B
             question_score: '10'
         2:
-            question_text: What is wrong with this code?
+            question_text: Wat is er mis met deze code?
             code: |-
                 seconds_minute = 60
                 minute_hour = 60
@@ -3834,7 +3834,7 @@ levels:
             correct_answer: D
             question_score: '10'
         3:
-            question_text: How many hedgehogs will this code print?
+            question_text: Hoeveel egels worden er met deze code geprint?
             code: |-
                 {for} x in range 1 to 3:
                   {for} y in range 1 to 2:
@@ -3876,7 +3876,7 @@ levels:
             correct_answer: C
             question_score: '10'
         4:
-            question_text: What is wrong with code?
+            question_text: Wat is er mis met deze code?
             code: |-
                 name_color = {ask} 'What is your favorite color?'
                 {if} name_color == 'red':
@@ -3902,7 +3902,7 @@ levels:
             correct_answer: D
             question_score: '10'
         5:
-            question_text: What is the output of this code?
+            question_text: Wat is het resultaat van deze code?
             code: |-
                 numbers = [7, 19, 29, 41, 53, 71, 79, 97]
                 {for} prime in numbers:
@@ -3967,7 +3967,7 @@ levels:
             correct_answer: A
             question_score: '10'
         6:
-            question_text: What is wrong with code?
+            question_text: Wat is er mis met deze code?
             code: |-
                 name = {ask} 'What is your name?'
                 {if} name == 'Hedy':
@@ -4029,17 +4029,17 @@ levels:
             correct_answer: C
             question_score: '10'
         8:
-            question_text: What is wrong with code?
+            question_text: Wat is er mis met deze code?
             code: |-
                 insects = ['🐝', '🦋', '🕷', '🐞']
                 your_favorite = {ask} 'what is your favorite insect?'
                 {for} insect in insects:
-                 {if} your_favorite == '🐝' {or} your_favorite == '🐞':
-                  {print} 'very useful'
-                 {elif} your_favorite == '🕷':
-                  {print} 'it can catch mosquitoes'
-                 {else}:
-                  {print} 'almost all insects can be useful one way or another'
+                    {if} your_favorite == '🐝' {or} your_favorite == '🐞':
+                        {print} 'very useful'
+                    {elif} your_favorite == '🕷':
+                        {print} 'it can catch mosquitoes'
+                    {else}:
+                        {print} 'almost all insects can be useful one way or another'
             mp_choice_options:
             -   option: '`{or}` cannot be used with `{if}`.'
                 feedback: Try again.
@@ -4053,7 +4053,7 @@ levels:
             correct_answer: C
             question_score: '10'
         9:
-            question_text: Which one of the codes below gave this output?
+            question_text: Welke van de onderstaande codes geeft dit resultaat?
             code: |-
                 -5 is negative
                 -4 is negative
@@ -4077,7 +4077,7 @@ levels:
             correct_answer: C
             question_score: '10'
         10:
-            question_text: What is wrong with this code?
+            question_text: Wat is er mis met deze code?
             code: |-
                 {for} number in range 1 to 5:
                   volume_room = num * num * num

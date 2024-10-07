@@ -2,7 +2,7 @@ import { ClientMessages } from './client-messages';
 import { modal, error, success, tryCatchPopup } from './modal';
 import JSZip from "jszip";
 import * as Tone from 'tone'
-import { Tabs } from './tabs';
+import { SwitchTabsEvent, Tabs } from './tabs';
 import { MessageKey } from './message-translations';
 import { turtle_prefix, pressed_prefix, normal_prefix, music_prefix } from './pythonPrefixes'
 import { Adventure, isServerSaveInfo, ServerSaveInfo } from './types';
@@ -25,6 +25,7 @@ import { stopDebug } from "./debugging";
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { initializeTranslation } from './lezer-parsers/tokens';
 import { initializeActivity } from './user-activity';
+import { IndexTabs, SwitchAdventureEvent } from './index-tabs';
 export let theGlobalDebugger: any;
 export let theGlobalEditor: HedyEditor;
 export let theModalEditor: HedyEditor;
@@ -51,6 +52,7 @@ export let theKeywordLanguage: string = 'en';
 let theStaticRoot: string = '';
 let currentTab: string;
 let theUserIsLoggedIn: boolean;
+let selectedURI: JQuery<HTMLElement>;
 //create a synth and connect it to the main output (your speakers)
 //const synth = new Tone.Synth().toDestination();
 
@@ -183,7 +185,7 @@ export function initializeApp(options: InitializeAppOptions) {
 }
 
 export interface InitializeCodePageOptions {
-  readonly page: 'code';
+  readonly page: 'code' | 'tryit';
   readonly level: number;
   readonly lang: string;
   readonly adventures: Adventure[];
@@ -229,19 +231,28 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   const anchor = window.location.hash.substring(1);
 
   const validAnchor = [...Object.keys(theAdventures), 'parsons', 'quiz'].includes(anchor) ? anchor : undefined;
-
-  const tabs = new Tabs({
-    // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
-    // We click on `level` to load a program associated with level, if any.
-    initialTab: validAnchor ?? options.initial_tab,
-  });
+  let tabs: any;
+  if (options.page == 'tryit') {
+    tabs = new IndexTabs({
+      // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
+      // We click on `level` to load a program associated with level, if any.
+      initialTab: validAnchor ?? options.initial_tab,
+      level: options.level
+    });
+  } else {
+    tabs = new Tabs({
+      // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
+      // We click on `level` to load a program associated with level, if any.
+      initialTab: validAnchor ?? options.initial_tab,
+    });
+  }
 
   tabs.on('beforeSwitch', () => {
     // If there are unsaved changes, we warn the user before changing tabs.
     saveIfNecessary();
   });
 
-  tabs.on('afterSwitch', (ev) => {
+  tabs.on('afterSwitch', (ev: SwitchTabsEvent | SwitchAdventureEvent) => {
     currentTab = ev.newTab;
     const adventure = theAdventures[currentTab];
 
@@ -260,7 +271,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     theLocalSaveWarning.switchTab();
   });
 
-  initializeSpeech();
+  initializeSpeech(options.page === 'tryit');
 
   if (options.start_tutorial) {
     startIntroTutorial();
@@ -281,6 +292,9 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
   // Save if program name is changed
   $('#program_name').on('blur', () => saveIfNecessary());
+
+  // Scroll to this level in the adventures side pane
+  document.getElementById(`level_${options.level}_header`)?.scrollIntoView({block: 'center'});
 }
 
 function attachMainEditorEvents(editor: HedyEditor) {
@@ -420,12 +434,12 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
   // And add an overlay button to the editor if requested via a show-copy-button class, either
   // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
   if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
+    const adventure = container.getAttribute('data-tabtarget')
     const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
     let symbol = "⇥";
     if (dir === "rtl") {
       symbol = "⇤";
     }
-    const adventure = container.getAttribute('data-tabtarget')
     $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').attr('data-cy', `paste_example_code_${adventure}`).text(symbol).appendTo(buttonContainer).click(function() {
       if (!theGlobalEditor?.isReadOnly) {
         theGlobalEditor.contents = exampleEditor.contents + '\n';
@@ -1253,7 +1267,7 @@ function speak(text: string) {
   }
 }
 
-function initializeSpeech() {
+function initializeSpeech(isTryit?: boolean) {
   // If we are running under cypress, always show the languages dropdown (even if the browser doesn't
   // have TTS capabilities), so that we can test if the logic for showing the dropdown at least runs
   // successfully.
@@ -1279,9 +1293,27 @@ function initializeSpeech() {
 
     if (voices.length > 0 || isBeingTested) {
       for (const voice of voices) {
-        $('#speak_dropdown').append($('<option>').attr('value', voice.voiceURI).text('📣 ' + voice.name));
+        if (isTryit) {
+          $('#speak_dropdown').append(
+            $('<button>')
+              .attr('id', `speak_button_${voice.name}`)
+              .attr('onclick', `$('#speak_dropdown').slideUp('medium');`)
+              .attr('value', voice.voiceURI)
+              .addClass('flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white')
+              .css('width', '100%')
+              .text(voice.name)
+              .on('click', function () {
+                if (selectedURI){
+                  selectedURI.find('span').remove();
+                }
+                selectedURI = $(this);
+                $(this).append(`<span class="fa fa-check"></span>`);
+              })
+            );
+        } else {
+          $('#speak_dropdown').append($('<option>').attr('value', voice.voiceURI).text('📣 ' + voice.name));
+        }
       }
-
       $('#speak_container').show();
 
       clearInterval(timer);
@@ -1425,6 +1457,8 @@ function toggleDevelopersMode(enforceDevMode: boolean) {
   // DevMode hides the tabs and makes resizable elements track the appropriate size.
   // (Driving from HTML attributes is more flexible on what gets resized, and avoids duplicating
   // size literals between HTML and JavaScript).
+  $('#adventures_tab').toggle(!enable || currentTab === 'quiz' || currentTab === 'parsons');
+  // this is for the new design, it needs to be removed once we ship it
   $('#adventures').toggle(!enable || currentTab === 'quiz' || currentTab === 'parsons');
   // Parsons dont need a fixed height
   if (currentTab === 'parsons') return
@@ -1558,17 +1592,21 @@ export function select_profile_image(image: number) {
 }
 
 export function hide_editor() {
-  $('#fold_in_toggle_container').hide();
-  $('#code_editor').toggle();
-  $('#code_output').addClass('col-span-2');
-  $('#fold_out_toggle_container').show();
+  $('#fold_in_toggle_container').hide(); // remove once we get rid of old version
+  $('#hide_editor').hide();
+  $('#code_editor').addClass('lg:hidden block');
+  $('#code_output').addClass('lg:col-span-2');
+  $('#show_editor').show();
+  $('#fold_out_toggle_container').show(); // remove once we get rid of old version
 }
 
 export function show_editor() {
-  $('#fold_out_toggle_container').hide();
-  $('#code_editor').toggle();
-  $('#code_output').removeClass('col-span-2');
-  $('#fold_in_toggle_container').show();
+  $('#fold_out_toggle_container').hide(); // remove once we get rid of old version
+  $('#show_editor').hide();
+  $('#code_editor').removeClass('lg:hidden block');
+  $('#code_output').removeClass('lg:col-span-2');
+  $('#hide_editor').show();
+  $('#fold_in_toggle_container').show(); // remove once we get rid of old version
 }
 
 // See https://github.com/skulpt/skulpt/pull/579#issue-156538278 for the JS version of this code
@@ -1698,6 +1736,7 @@ function updatePageElements() {
 
     // Paper plane on "hand in" button is filled if program is already submitted, outlined otherwise
     const isSubmitted = !!saveInfo.submitted;
+    // Remove once we get rid of the old version
     $('#hand_in_button')
       .toggleClass('active-bluebar-btn', isSubmitted);
 
@@ -1706,6 +1745,29 @@ function updatePageElements() {
     $('[data-view="if-not-submitted"]').toggle(!isSubmitted);
 
     theGlobalEditor.isReadOnly = isSubmitted;
+    // All of these are for the buttons added in the new version of the code-page
+    $('#progress_bar').show()
+    $('#program_name_container').show()
+    $('#share_program_button').show()
+    $('#read_outloud_button_container').show()
+    $('#cheatsheet_dropdown_container').show()
+    $('#commands_dropdown_container').show()
+    $('#hand_in_button').show()
+  }
+  if (currentTab === 'parsons'){    
+    $('#share_program_button').hide()
+    $('#read_outloud_button_container').hide()
+    $('#cheatsheet_dropdown_container').hide()
+    $('#commands_dropdown_container').show()
+    $('#hand_in_button').hide()
+    $('#clear').hide()
+  }
+  if (currentTab === 'quiz'){
+    $('#share_program_button').hide()
+    $('#read_outloud_button_container').hide()
+    $('#cheatsheet_dropdown_container').hide()
+    $('#commands_dropdown_container').hide()
+    $('#hand_in_button').hide()
   }
 }
 
@@ -1909,4 +1971,8 @@ export function goToLevel(level: any) {
   }
   window.location.pathname = newPath
   window.location.hash = hash
+}
+
+export function emptyEditor() {
+  theGlobalEditor.contents = ""
 }

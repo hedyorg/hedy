@@ -7,68 +7,56 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-01 10:50+0300\n"
-"PO-Revision-Date: 2024-09-06 14:38+0000\n"
+"POT-Creation-Date: 2000-01-01 00:00+0000\n"
+"PO-Revision-Date: 2024-10-04 04:50+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language: ca\n"
 "Language-Team: ca <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.8-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
-#, fuzzy
 msgid "Access Before Assign"
-msgstr "Has intentat utilitzar la variable {name} a la línia {access_line_number}, però l'ha definit a la línia {definition_line_number}. Defineix una variable abans d'utilitzar-la."
+msgstr "Hem detectat que la variable `{name}`s'està fent servir a la línia {access_line_number} abans de definir-se. Pots definir-la abans d'usar-la?"
 
-#, fuzzy
 msgid "Cyclic Var Definition"
-msgstr "El nom `{variable}` ha de ser definit abans d'utilitzar-lo a la dreta de la comanda `{is}`."
+msgstr "Hem detectat que la `{variable}` s'està fent servir a la dreta de la comanda `{is}` abans de definir-se. Pots definir la variable abans de fer-la servir?"
 
-#, fuzzy
 msgid "Else Without If Error"
-msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
+msgstr "Hem detectat que hi ha un `{else}` en ús abans d'un `{if}` a la línia {line_number}. Pots provar d'escriure `{if}` abans de `{else}`?"
 
-#, fuzzy
 msgid "Function Undefined"
-msgstr "You tried to use the function {name}, but you didn't define it."
+msgstr "Hem detectat que la funció {name} s'està fent servir abans de definir-se. Pots definir-la abans d'usar-la?"
 
-#, fuzzy
 msgid "Has Blanks"
-msgstr "El teu codi està incomplert. Conté espais en blanc que has d'omplir amb codi."
+msgstr "Hem detectat que el teu codi sembla incomplet. Pots assegurar-te que has omplert tots els espais en blanc?"
 
-#, fuzzy
 msgid "Incomplete"
-msgstr "Oops! Se t'ha oblidat una mica de codi! A la línia {line_number}, has d'introduir text després de `{incomplete_command}`."
+msgstr "Hem detectat que falta una part del teu codi des de`{incomplete_command}` a la línia {line_number}. Pots intentar afegir allò que falta?"
 
-#, fuzzy
 msgid "Incomplete Repeat"
-msgstr "Sembla que t'has oblidat d'utilitzar una comanda amb la comanda `{repeat}` que està a la línia {line_number}."
+msgstr "Hem detectat que al `{repeat}` de la línia {line_number} li falta una comanda`{command}`. Pots afegir-la?"
 
-#, fuzzy
 msgid "Invalid"
-msgstr "`{invalid_command}` no és una comanda de nivell {level} Hedy. Volies dir `{guessed_command}`?"
+msgstr "Hem detectat que la comanda `{invalid_command}` no és vàlid en el nivell {level} de Hedy. Et serveix la comanda `{guessed_command}`?"
 
-#, fuzzy
 msgid "Invalid Argument"
-msgstr "No pots utilitzar la comanda `{command}` amb `{invalid_argument}`. Prova de canviar `{invalid_argument}` per {allowed_types}."
+msgstr "Hem detectat que la comanda `{command}` no es pot fer servir amb `{invalid_argument}`. Pots canviar `{invalid_argument}` a {allowed_types}?"
 
-#, fuzzy
 msgid "Invalid Argument Type"
-msgstr "No pots utilitzar `{command}` amb `{invalid_argument}` perquè és {invalid_type}. Prova de canviar `{invalid_argument}` per {allowed_types}."
+msgstr "Hem detectat que la comanda `{command}` no funciona amb `{invalid_argument}`, ja que és {invalid_type}. Pots provar de canviar `{invalid_argument}` a {allowed_types}?"
 
-#, fuzzy
 msgid "Invalid At Command"
-msgstr "La comanda `{command}` no es pot utilitzar a partir del nivell 16. Podeu utilitzar claudàtors per utilitzar un element d'una llista, per exemple `amics[i]`, `numeros_de la sort[{random}]`."
+msgstr "Hem detectat que `{command}` no es pot fer servir des del nivell 16 endavant. Pots fer servir claudàtors`[]` a les llistes?"
 
-#, fuzzy
 msgid "Invalid Space"
-msgstr "Vaja! Has començat una línia amb un espai a la línia {line_number}. Els espais confonen els ordinadors, el podries eliminar?"
+msgstr "Hem detectat que a la línia {line_number} comença amb espai. Pots eliminar-lo?"
 
-#, fuzzy
 msgid "Invalid Type Combination"
-msgstr "No pots usar `{invalid_argument}` i `{invalid_argument_2}` amb `{command}` perquè un és {invalid_type} i l'altre és {invalid_type_2}. Prova a canviar `{invalid_argument}` per {invalid_type_2} o `{invalid_argument_2}` per {invalid_type}."
+msgstr "Hem detectat que `{invalid_argument}` i`{invalid_argument_2}` no es poden fer servir amb `{command}`, ja que un és {invalid_type} i l'altre és {invalid_type_2}. Pots provar de canviar `{invalid_argument}` a {invalid_type_2} o `{invalid_argument_2}` a {invalid_type}?"
 
 #, fuzzy
 msgid "Lonely Echo"
@@ -328,6 +316,9 @@ msgstr "A partir del nivell 2, cal utilitzar `{ask}` amb una variable. Exemple: 
 msgid "available_in"
 msgstr "Available in:"
 
+msgid "back_to_class"
+msgstr "Torna a la classe"
+
 msgid "become_a_sponsor"
 msgstr "Fes-te patrocinador"
 
@@ -421,6 +412,10 @@ msgid "classes_info"
 msgstr "Create a class to follow the progress of each student in dashboard, and to customize the adventures your students see, and even adding your own! You can create as many classes as you like, and each class can have multiple teachers each one with different roles. You can also add as many students as you want, but mind that each student can only be in one class at a time. You can find more information about classes in the <a href=\"https://hedy.org/for-teachers/manual/preparations#for-teachers\">teacher manual</a>."
 
 #, fuzzy
+msgid "clear"
+msgstr "Clear"
+
+#, fuzzy
 msgid "clone"
 msgstr "Clone"
 
@@ -443,6 +438,10 @@ msgstr "La comanda ja no és correcta"
 msgid "commands"
 msgstr "Comandes"
 
+#, fuzzy
+msgid "complete"
+msgstr "Completed"
+
 msgid "congrats_message"
 msgstr "Felicitats, {username}, has completat Hedy!"
 
@@ -456,6 +455,10 @@ msgstr "constant"
 
 msgid "content_invalid"
 msgstr "Aquesta aventura no és vàlida."
+
+#, fuzzy
+msgid "continue"
+msgstr "Continue"
 
 msgid "contributor"
 msgstr "Contribuïdor"
@@ -539,6 +542,10 @@ msgstr "Personalitza la classe"
 
 msgid "dash"
 msgstr "un guió"
+
+#, fuzzy
+msgid "debug"
+msgstr "Debug"
 
 msgid "default_401"
 msgstr "Sembla no estàs autoritzat..."
@@ -1045,9 +1052,8 @@ msgstr "Inicia sessió al teu compte"
 msgid "login_to_save_your_work"
 msgstr "Inicia sessió per desar la teva feina"
 
-#, fuzzy
 msgid "logout"
-msgstr "Log out"
+msgstr "Surt"
 
 #, fuzzy
 msgid "longest_program"
@@ -1169,9 +1175,8 @@ msgstr "You are trying to use the keyword {orig_keyword}, but this keyword might
 msgid "multiple_levels_warning"
 msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
 
-#, fuzzy
 msgid "my_account"
-msgstr "My account"
+msgstr "El meu compte"
 
 #, fuzzy
 msgid "my_adventures"
@@ -1220,6 +1225,10 @@ msgid "newline"
 msgstr "a new line"
 
 #, fuzzy
+msgid "next_adventure"
+msgstr "Next adventure"
+
+#, fuzzy
 msgid "next_exercise"
 msgstr "Next exercise"
 
@@ -1230,6 +1239,10 @@ msgstr "Next page"
 #, fuzzy
 msgid "next_step_tutorial"
 msgstr "Next step >>>"
+
+#, fuzzy
+msgid "next_student"
+msgstr "Next student"
 
 #, fuzzy
 msgid "no"
@@ -1582,6 +1595,10 @@ msgid "public_profile_updated"
 msgstr "Public profile updated, page will be re-loaded."
 
 #, fuzzy
+msgid "put"
+msgstr "Put"
+
+#, fuzzy
 msgid "question mark"
 msgstr "a question mark"
 
@@ -1698,6 +1715,10 @@ msgid "reset_view"
 msgstr "Reset"
 
 #, fuzzy
+msgid "restart"
+msgstr "Restart"
+
+#, fuzzy
 msgid "retrieve_adventure_error"
 msgstr "You're not allowed to view this adventure!"
 
@@ -1791,6 +1812,10 @@ msgstr "Ben aviat rebràs correu electrònic amb les instruccions per reiniciali
 msgid "settings"
 msgstr "La meva configuració personal"
 
+#, fuzzy
+msgid "share"
+msgstr "Share"
+
 msgid "share_by_giving_link"
 msgstr "Mostra el teu programa a altres persones donant-los el següent enllaç:"
 
@@ -1842,16 +1867,14 @@ msgstr "un espai"
 msgid "star"
 msgstr "un asterisc"
 
-#, fuzzy
 msgid "start_learning"
-msgstr "Start learning"
+msgstr "Comença a aprendre"
 
 msgid "start_quiz"
 msgstr "Comença el qüestionari"
 
-#, fuzzy
 msgid "start_teaching"
-msgstr "Start teaching"
+msgstr "Comença a ensenyar-lo"
 
 msgid "step_title"
 msgstr "Tasca"
@@ -1859,6 +1882,10 @@ msgstr "Tasca"
 #, fuzzy
 msgid "stepper_variable_role"
 msgstr "stepper"
+
+#, fuzzy
+msgid "stop"
+msgstr "Stop"
 
 msgid "stop_code_button"
 msgstr "Para el programa"
@@ -1884,6 +1911,7 @@ msgstr "Aquest alumne ja es troba a la vostra classe."
 msgid "student_already_invite"
 msgstr "Aquest alumne ja té una invitació pendent."
 
+#, fuzzy
 msgid "student_in_another_class"
 msgstr "This student is in another class. Ask the student to leave all classes and try again."
 
@@ -2371,9 +2399,6 @@ msgstr "El teu programa"
 #~ msgid "hide_quiz"
 #~ msgstr "Amaga el qüestionari"
 
-#~ msgid "back_to_class"
-#~ msgstr "Torna a la classe"
-
 #~ msgid "Locked Language Feature"
 #~ msgstr "Estàs utilitzant {concept}! És genial, però {concept} no està desbloquejat encara!, es desbloquejarà a nivells posteriors."
 
@@ -2554,6 +2579,12 @@ msgstr "El teu programa"
 #~ msgid "student_not_allowed_in_class"
 #~ msgstr "Student not allowed in class"
 
-#~ msgid "Boryana"
+#~ msgid "previous_adventure"
+#~ msgstr ""
+
+#~ msgid "go_next"
+#~ msgstr ""
+
+#~ msgid "go_to_next_student"
 #~ msgstr ""
 
