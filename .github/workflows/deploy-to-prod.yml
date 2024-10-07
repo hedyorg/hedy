@@ -17,3 +17,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: hedy-beta
           heroku_email: felienne@gmail.com
+      - name: "Send message on Discord"
+        uses: distributhor/workflow-webhook@v3
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
