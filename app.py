@@ -83,10 +83,6 @@ app.json = JinjaCompatibleJsonProvider(app)
 # Most files should be loaded through the CDN which has its own caching period and invalidation.
 # Use 5 minutes as a reasonable default for all files we load elsewise.
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = datetime.timedelta(minutes=5)
-app.config["SERVER_NAME"] = "localhost:8080"  # TODO: this needs to be dynamic according to the server we're in.
-app.config['SESSION_COOKIE_DOMAIN'] = ".localhost"
-app.config['SESSION_COOKIE_NAME'] = "localhost"
-app.config['REMEMBER_COOKIE_DOMAIN'] = "localhost"
 
 # We're adding a new URL rule for getting the static files from the server. If we don't do this
 # when using a subdomain getting them will fail.
@@ -3147,7 +3143,11 @@ if __name__ == '__main__':
         on_offline_mode()
 
     on_server_start()
-
+    app.config.update(
+        SERVER_NAME=config['domain_name'],
+        SESSION_COOKIE_DOMAIN=config['domain_name'],
+        SESSION_COOKIE_SAMESITE="Lax"
+    )
     # Set some default environment variables for development mode
     env_defaults = dict(
         BASE_URL=f"http://localhost:{config['port']}/",
