@@ -1952,41 +1952,41 @@ adventures:
                     ```
     functions:
         name: Funktionen
-        default_save_name: functions
-        description: functions
+        default_save_name: Funktionen
+        description: Funktionen
         levels:
             12:
                 story_text: |
-                    In this level you'll learn how to use **functions**. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again.
-                    To create a function, use `{define}` and give the function a name. Then put all the lines you want in the function in a indented block under the `{define}` line.
-                    Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
+                    In diesem Level lernst du, wie du **Funktionen** verwenden kannst. Eine Funktion ist ein Block code, der einfach öfter ausgeführt werden kann. Funktionen helfen uns dabei, Code zu organisieren, der immer wiederverwendet werden kann.
+                    Um eine Funktion zu erzeugen, benutze `{define}`und gib der Funktion einen Namen. Dann schreibe alle Zeilen, die in der Funktion sein sollen, in einen eingerückten Block unter der `{define}`Zeile.
+                    Lass eine Leerzeile in deinem Code, Damita alles Hübsch aussieht. Großartig! Du hast eine Funktion erzeugt.
 
-                    Now, whenever we need that block of code, we just use <code>{call}</code> with the function's name to call it up! We don't have to type that block of code again.
+                    Jetzt können wir jedes mal, wenn wir diesen Block Code benötigen, einfach <code>{call}</code> mit dem Namen der Funktion verwenden, um sie aufzurufen. Diesen Block Code müssen wir nicht immer wieder schreiben.
 
-                    Check out this example code of a game of Twister. The function 'turn' contains a block of code that chooses which limb should go where.
+                    Schau dir diesen Beispiel Code von einem Spiel Twister an. Die Funktion 'zug' enthält einen Block Code, der bestimmt, wohin welches Körperteil gehen soll.
 
-                    ### Exercise
-                    Finish this code by setting the 2 variables chosen_limb and chosen_color.
-                    Then, choose how many times you want to call the function to give the twister spinner a spin.
+                    ### Übung
+                    Vervollständige den Code, indem du die beiden Variablen gewähltes_körperteil und gewählte_farbe setzt.
+                    Wähle dann, wie oft du die Funktion aufrufen willst, dem Twister den richtige Dreh mit zu eben.
 
-                    ### Exercise 2
-                    Improve your code by adding a variable called 'people'. Use the variable to give all the players their own command in the game.
-                    For example: 'Ahmed, right hand on green' or 'Jessica, left foot on yellow'.
+                    ### Übung 2
+                    Verbessere deinen Code, indem du eine Variable 'personen" ergänzt. Benutzte die Variable, um allen Spielern ihre eigenen Befehle im Spiel zu geben.
+                    Zum Beispiel: 'Achmed, rechte Hand auf grün' oder 'Jessica, linker Fuß auf gelb'.
                 example_code: |
                     ```
-                    sides = 'left', 'right'
-                    limbs = 'hand', 'foot'
-                    colors = 'red', 'blue', 'green', 'yellow'
+                    seiten = 'links', 'rechts'
+                    körperteile = 'hand', 'fuß'
+                    farben = 'rot', 'blau', 'grün', 'gelb'
 
-                    {define} turn
-                        chosen_side = sides {at} {random}
-                        chosen_limb = limbs _
-                        chosen_color = colors _
-                        {print} chosen_side ' ' chosen_limb ' on ' chosen_color
+                    {define} zum
+                        gewählte_seite = seiten {at} {random}
+                        gewähltes_körperteil = Körpereile _
+                        gewählte_farbe = farben _
+                        {print} gewählte_seite ' ' gewähltes_körperteil ' on ' gewählte_farbe
 
-                    {print} 'Lets play a game of Twister!'
-                    {for} i {in} {range} 1 to _
-                        {call} turn
+                    {print} 'Lass uns eine Runde Twister spielen!'
+                    {for} i {in} {range} 1 {to} _
+                        {call} zug
                         {sleep} 2
                     ```
             13:
