@@ -487,10 +487,8 @@ def setup_language(language=None):
     # POSTing to `/change_language`, and be overwritten by remember_current_user().
     if language:
         session['lang'] = language
-    elif request.url_rule is not None and request.url_rule.subdomain != '<language>':
+    elif request.url_rule is not None and request.url_rule.subdomain not in ['<language>', '']:
         lang_from_subdomain = request.url_rule.subdomain
-        if lang_from_subdomain == '':
-            lang_from_subdomain = 'en'
         if lang_from_subdomain == 'zh_hans':
             lang_from_subdomain = 'zh_Hans'
         session['lang'] = lang_from_subdomain
