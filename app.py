@@ -101,7 +101,8 @@ app.add_url_rule('/<path:filename>',
 def before_route(endpoint, values):
     if values is not None and endpoint == 'static':
         values.pop('language', None)
-    setup_language(language=values.get('language', None))
+    if values is not None:
+        setup_language(language=values.get('language', None))
 
 
 def get_locale():
@@ -471,6 +472,12 @@ else:
         aws_helpers.s3_querylog_transmitter_from_env())
 
 
+"""
+NOTE: When I update the language using this URL, it gets saved in the personal
+preferences of the user, is that what we still want?
+"""
+
+
 @app.before_request
 def setup_language(language=None):
     # Determine the user's requested language code.
@@ -480,7 +487,10 @@ def setup_language(language=None):
     # POSTing to `/change_language`, and be overwritten by remember_current_user().
     if language:
         session['lang'] = language
-    elif (lang_from_subdomain := request.url_rule.subdomain) and lang_from_subdomain != '<language>':
+    elif request.url_rule is not None and request.url_rule.subdomain != '<language>':
+        lang_from_subdomain = request.url_rule.subdomain
+        if lang_from_subdomain == '':
+            lang_from_subdomain = 'en'
         if lang_from_subdomain == 'zh_hans':
             lang_from_subdomain = 'zh_Hans'
         session['lang'] = lang_from_subdomain
