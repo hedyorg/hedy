@@ -3,7 +3,7 @@ import uuid
 from typing import Optional
 
 from flask import g, make_response, request
-from flask_babel import gettext
+from gettext_with_fallback import gettext
 import jinja_partials
 import hedy_content
 

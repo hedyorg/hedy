@@ -11,7 +11,8 @@ import requests
 from botocore.exceptions import ClientError as email_error
 from botocore.exceptions import NoCredentialsError
 from flask import g, request, session, redirect
-from flask_babel import force_locale, gettext
+from flask_babel import force_locale
+from gettext_with_fallback import gettext
 
 import utils
 from config import config

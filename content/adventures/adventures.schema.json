@@ -3,20 +3,13 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "title": {
-      "type": "string",
-      "description": "Short title of the adventure"
-    },
-    "subtitle": {
-      "type": "string",
-      "description": "Slightly longer introductory description of the adventure"
-    },
     "adventures": {
       "type": "object",
       "description": "Individual adventures, key/value map",
       "additionalProperties": { "$ref": "#/definitions/Adventure" }
     }
   },
+  "required": ["adventures"],
   "definitions": {
     "Adventure": {
       "type": "object",
