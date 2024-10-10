@@ -45,6 +45,9 @@ line = '_' * 292 + '<br>\n'
 
 
 def convert_json(json):
+    if 'teacher_note' in json.keys():
+        return ''  # do not do anyhting for now
+
     assignment_type = json['assignment']
     template = templates[assignment_type]
 

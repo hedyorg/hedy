@@ -1,5 +1,7 @@
 # Hedy - Les 3a
 
+
+
 ## Lijsten en willekeurigheid
 
 Aan het einde van de les kun jij:
@@ -20,17 +22,17 @@ print Ik ga vandaag naar vrienden at random
 
 #### Opdracht 1: Omcirkel het juiste stukje code
 
-**◯ Opdracht**: Omcircel alle lijsten in deze code									
+**◯ Opdracht**: Omcircel alle lijsten in deze code
 ```hedy
 vandaag is maandag
 klassen is 1HC, 1HB, 1HA
-lokalen is 011, 304, 305, OLC							
+lokalen is 011, 304, 305, OLC
 ```
 
-**◯ Opdracht**: Op welke plek in de code wordt er tekst uit een lijst gebruikt?									
+**◯ Opdracht**: Op welke plek in de code wordt er tekst uit een lijst gebruikt?
 ```hedy
 klassen is 1HC, 1HB, 1HA
-print vandaag heeft klassen at random vrij!							
+print vandaag heeft klassen at random vrij!
 ```
 
 #### Opdracht 2: Voorspel de uitvoer
@@ -45,25 +47,25 @@ Vind je het lastig? Gebruik dan weer het stappenplan om variabele-uitvoer te voo
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
-docenten is Hermans, Merbis, Bagci, Senkal        __________________________
+docenten is Hermans, Merbis, Bagci, Senkal        ________________________________________
 print Vandaag les van docenten at random!         
-							
+
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
-docenten is Hermans, Merbis, Bagci, Senkal        __________________________
+docenten is Hermans, Merbis, Bagci, Senkal        ________________________________________
 print De docent vandaag is Hermans.               
-							
+
 ```
 
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
-weer is zonnig, regen, wolken, onweer             __________________________
+weer is zonnig, regen, wolken, onweer             ________________________________________
 print Wat is het lekker weer vandaag!             
-							
+
 ```
 
 #### Opdracht 3: Foutje?
@@ -72,26 +74,27 @@ Lees de codes goed! Welke zijn er goed of fout.
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
 weer is zonnig, regen, wolken, onweer
-print Bah! De computer loopt weer vast.							
+print Bah! De computer loopt weer vast.
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
 docenten is Hermans
-print Vandaag alweer docenten at random							
+print Vandaag alweer docenten at random
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
 docenten is onweer, regen, ijzel
-print Vandaag alweer docenten at random!							
+print Vandaag alweer docenten at random!
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 ### Avonturen
 
+[Teacher] Dit zijn alle avonturen zonder `add to` en `remove from`.[/Teacher]
 Dit is een goed moment voor deze avonturen:
 Introductie
 willekeurig
@@ -129,21 +132,21 @@ Je kan ook iets uit een lijst verwijderen, met `remove` en `from`.
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
 letters is a,b,c,d
-remove a to letters							
+remove a to letters
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
 eten is pizza, friet, kapsalon
-remove kroket from eten							
+remove kroket from eten
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
 eten is pizza, friet, kapsalon
-add pizza to eten							
+add pizza to eten
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
@@ -160,7 +163,7 @@ ________________________________________          Welkom bij de bingoavond
 ________________________________________          De drie geluksnummers zijn:
 ________________________________________          5 en 3 en 10
 ________________________________________
-							
+
 ```
 
 
@@ -170,7 +173,7 @@ Code:									                        Uitvoer:
 ________________________________________          We gaan vanavond naar de film.
 ________________________________________          We kiezen: Inside Out
 ________________________________________
-							
+
 ```
 
 
@@ -190,7 +193,7 @@ Antwoord: ______________________________________________________________________
 
 #### Opdracht 7: Codes
 
-De code `is` is in dit leven veranderd, en we hebben ook nieuwe codes geleerd.
+De code `is` is in dit level veranderd, en we hebben ook nieuwe codes geleerd.
 Wat doen die? Leg het uit in je eigen woorden.
 
 **📖 Vraag**: Wat doet het commando `is`? (Let op: `is` kan dus meerdere dingen doen!)
@@ -237,5 +240,3 @@ ________________________________________________________________________________
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
  <br>
 
-
-``
