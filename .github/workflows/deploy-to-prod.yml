@@ -17,3 +17,9 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: hedy-beta
           heroku_email: felienne@gmail.com
+      - name: "Send message on Discord"
+        if: success()
+        uses: discord-actions/message@v2
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          message: "Deployed to hedy.org"

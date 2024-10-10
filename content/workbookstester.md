@@ -1,135 +1,123 @@
-# Hedy - Les 4a
+# Hedy - Les 5a
 
-[Teacher] In level 4 leren leerlingen aanhalingstekens gebruiken in code. Dat is niet altijd de meest leuke les maar goed oefenen is wel nodig om latere frustratie te voorkomen.
-Om het leuker te maken kan je in deze les andere features aanbieden, zoals `clear` of een muziekopdracht.[/Teacher]
+[Teacher] In level 5 leren leerlingen de `if` en `else` codes, die zijn vrij lastig omdat nu niet meer alles regels altijd worden uitgevoerd. [/Teacher]
 
 ## Aanhalingstekens
 
 Aan het einde van de les:
 
-* snap jij waarom aanhalingstekens nodig zijn in programmeren.
-* kan jij aanhalingstekens op de goede plek in code zetten.
-* kan jij foutmeldingen over aanhalingstekens goed lezen.
+* hoe je de computer kan laten reageren op invoer.
 
-### Aanhalingstekens
+### Keuzes maken
 
-We hebben geleerd om aanhalingstekens te gebruiken, als iets letterlijk zo in beeld moet komen.
-We gebruiken aanhalingstekens bij `print` en bij `ask`.
+Tot nu toe voerde Hedy altijd alle regels code uit. Vanaf nu kan je met een `if` bepaalde regels uitvoeren, alleen in bepaalde gevallen.
+De code die je na `if` schrijft, noem je een conditie.
+In dit voorbeeld is de conditie `vriend is Jasmijn.`
 
 ```hedy
 vriend is ask 'Hoe heet jij?'
-print 'Leuk! Ik ga naar de stad met ' vriend
+if vriend is Jasmijn print 'Hallo!' else print 'Nee, jij niet!'
 ```
 
-#### Opdracht 1: Maak de code af.
+#### Opdracht 1a: Onderstreep de condities
 
-Deze opdrachten doe je in twee stappen:
-1. Zet op de juiste plekken aanhalingstekens in de code.
-2. Staat alles goed? Voorspel dan wat de uitvoer van de code is.
+Wat is een conditie? Onderstreep in deze codes steeds de conditie.
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									                        Uitvoer:
+**◯ Opdracht**: Omcircel alle lijsten in deze code
 ```hedy
-print Hallo allemaal!nprint Welkom bij Hedy       ________________________________________
-                                                  ________________________________________
-
+vandaag is ask 'Welke dag is het?'
+if vandaag is vrijdag print 'Ja' else print 'Nee'
 ```
 
-
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									                        Uitvoer:
+**◯ Opdracht**: Omcircel alle lijsten in deze code
 ```hedy
-naam is Hermans                                   ________________________________________
-lokaal is 305                                     
-print Vandaag hebben we les van naam in lokaal!   
-
+vandaag is ask 'Welke dag is het?'
+if vandaag is zaterdag print 'Geen school vandaag' else print 'Helaas wel'
 ```
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									                        Uitvoer:
+**◯ Opdracht**: Omcircel alle lijsten in deze code
 ```hedy
-docenten is Hermans, Merbis, Bagci, Senkal        ________________________________________
-print De docent vandaag is docenten at random.    
-
+leeftijd is ask 'Hoe oud ben jij?'
+if leeftijd is 16 print 'Perfecto' else print 'Jij bent te jong!'
 ```
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									                        Uitvoer:
+#### Opdracht 1b: Omcirkel de juiste regels
+
+Welke code wordt uitgevoerd? Omcirkel alleen die stukken.
+Doe alsof het vandaag vrijdag is, en jij 12 jaar bent.
+
+**◯ Opdracht**: Omcircel alle lijsten in deze code
 ```hedy
-weer is zonnig, regen, wolken, onweer             ________________________________________
-print Wat is het lekker weer vandaag!             
-
+vandaag is ask 'Welke dag is het?'
+if vandaag is vrijdag print 'Ja' else print 'Nee'
 ```
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									                        Uitvoer:
+**◯ Opdracht**: Omcircel alle lijsten in deze code
 ```hedy
-print Wat is het lekker weer vandaag!             ________________________________________
-naam is Bassie                                    
-
+vandaag is ask 'Welke dag is het?'
+if vandaag is zaterdag print 'Geen school vandaag' else print 'Helaas wel'
 ```
+
+**◯ Opdracht**: Omcircel alle lijsten in deze code
+```hedy
+leeftijd is ask 'Hoe oud ben jij?'
+if leeftijd is 16 print 'Perfecto' else print 'Jij bent te jong!'
+```
+
 
 #### Opdracht 2: Foutje?
 Lees de codes goed! Welke zijn er goed of fout.
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
-print 'Daar lopen twee lama's'
+leeftijd is ask 'Hoe oud ben jij?'
+if leeftijd is 16 print 'Perfecto' else 'Jij bent te jong!'
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
-print 'De lama wandelt op straat
+dier is ask 'Wat voor dier is dat?'
+if dier is Lama print 'Beeeee'
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
-print 'De lama wandelt op straat'
-print "Wat een avontuur"
-```
-Antwoord: <br> 〇 Goed<br> 〇 Fout
-
-#### Ask
-
-Vergeet niet dat je ook bij `ask` aanhalingstekens gebruikt!
-
-#### Opdracht 3: Foutje?
-Lees de codes goed! Welke zijn er goed of fout.
-
-**🤔 Vraag**: Is deze code goed of fout?
-```hedy
-ask 'Daar lopen twee konijnen'
+print "Daar lopen twee oma's"
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
-naam is ask 'Hoe heet jij?'
+if naam Hedyprint 'Programmeren is leuk!'
+```
+Antwoord: <br> 〇 Goed<br> 〇 Fout
+
+**🤔 Vraag**: Is deze code goed of fout?
+```hedy
+ask 'Hoe heet deze school?'if school is LK print 'Ja!' 
+```
+Antwoord: <br> 〇 Goed<br> 〇 Fout
+
+**🤔 Vraag**: Is deze code goed of fout?
+```hedy
+aantal is ask "Hoeveel capibara's lopen daar?"if aantal is 5 print 'Dat zijn er dan aantal'
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 
+#### Opdracht 3: Voorspel de uitvoer
 
-#### Opdracht 4: Schrijf de code
+Wat is de uitvoer van deze programma's?
+Let op! Soms staat er random in een programma. Dan moet je zelf kiezen wat Hedy zou kiezen.
+Er kunnen dan dus meerdere antwoorden goed zijn!
 
-Kijk goed naar de uitvoer, en schrijf er een passende code bij.
-
-**🧑‍💻 Vraag**: Welke code hoort bij deze uitvoer? <br>
+**💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
-________________________________________          Welkom bij de bingoavond
-________________________________________          Hier komt het eerste getal...!
-
-```
-
-
-**🧑‍💻 Vraag**: Welke code hoort bij deze uitvoer? <br>
-Code:									                        Uitvoer:
-```hedy
-________________________________________          We gaan vanavond naar de film.
-________________________________________          Waar heb jij zin in?
+docenten is Hermans, Merbis, Bagci, Senkal        ________________________________________
+docent is docenten at randomif docent is Hermans print 'Hoera!'
 
 ```
 
@@ -138,22 +126,19 @@ ________________________________________          Waar heb jij zin in?
 
 We hebben deze les weer nieuwe programmeerwoorden geleerd! Leg ze uit je eigen woorden.
 
-**📖 Vraag**: Wat zijn aanhalingstekens?
-Antwoord: ____________________________________________________________________________________________________<br>
-
-**📖 Vraag**: Waarvoor gebruiken we in Hedy aanhalingstekens?
+**📖 Vraag**: Wat is een conditie?
 Antwoord: ____________________________________________________________________________________________________<br>
 
 
 
-#### Opdracht 7: Codes
+#### Opdracht 6: Codes
 
-We hebben ook nieuwe codes geleerd in level 4.
+We hebben ook nieuwe codes geleerd in level 5.
 
-**📖 Vraag**: Wat doet het commando `clear`? (Let op: `is` kan dus meerdere dingen doen!)
+**📖 Vraag**: Wat doet het commando `if`? 
 Antwoord: ____________________________________________________________________________________________________<br>
 
-**📖 Vraag**: Wat doet het commando `color`?
+**📖 Vraag**: Wat doet het commando `else`?
 Antwoord: ____________________________________________________________________________________________________<br>
 
 ### Wat vond jij?
