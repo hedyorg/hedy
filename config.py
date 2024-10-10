@@ -7,6 +7,8 @@ athena_query = os.getenv('AWS_ATHENA_PREPARE_STATEMENT')
 
 config = {
     'port': os.getenv('PORT') or 8080,
+    # I can't reference a previous field, so copying and pasting here
+    'domain_name': os.getenv('DOMAIN_NAME') or f"localhost:{os.getenv('PORT') or 8080}",
     'session': {
         'cookie_name': 'hedy',
         # in minutes
