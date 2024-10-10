@@ -6,7 +6,7 @@
 
 
 
-## Aanhalingstekens
+## if else
 
 Aan het einde van de les:
 
@@ -29,7 +29,7 @@ Wat is een conditie? Onderstreep in deze codes steeds de conditie.
 
 {
     "assignment": "element selection",
-    "question"  : "Omcircel alle lijsten in deze code",
+    "question"  : "Onderstreep de conditie",
     "icon"      : "◯",
     "code"      :  "vandaag is ask 'Welke dag is het?'\n
                     if vandaag is vrijdag print 'Ja' else print 'Nee'",
@@ -38,7 +38,7 @@ Wat is een conditie? Onderstreep in deze codes steeds de conditie.
 
 {
     "assignment": "element selection",
-    "question"  : "Omcircel alle lijsten in deze code",
+    "question"  : "Onderstreep de conditie",
     "icon"      : "◯",
     "code"      :  "vandaag is ask 'Welke dag is het?'\n
                     if vandaag is zaterdag print 'Geen school vandaag' else print 'Helaas wel'",
@@ -47,7 +47,7 @@ Wat is een conditie? Onderstreep in deze codes steeds de conditie.
 
 {
     "assignment": "element selection",
-    "question"  : "Omcircel alle lijsten in deze code",
+    "question"  : "Onderstreep de conditie",
     "icon"      : "◯",
     "code"      :  "leeftijd is ask 'Hoe oud ben jij?'\n
                     if leeftijd is 16 print 'Perfecto' else print 'Jij bent te jong!'",
@@ -61,7 +61,7 @@ Doe alsof het vandaag vrijdag is, en jij 12 jaar bent.
 
 {
     "assignment": "element selection",
-    "question"  : "Omcircel alle lijsten in deze code",
+    "question"  : "Omcircel de code die wordt uitgevoerd",
     "icon"      : "◯",
     "code"      :  "vandaag is ask 'Welke dag is het?'\n
                     if vandaag is vrijdag print 'Ja' else print 'Nee'",
@@ -70,7 +70,7 @@ Doe alsof het vandaag vrijdag is, en jij 12 jaar bent.
 
 {
     "assignment": "element selection",
-    "question"  : "Omcircel alle lijsten in deze code",
+    "question"  : "Omcircel de code die wordt uitgevoerd",
     "icon"      : "◯",
     "code"      :  "vandaag is ask 'Welke dag is het?'\n
                     if vandaag is zaterdag print 'Geen school vandaag' else print 'Helaas wel'",
@@ -79,7 +79,7 @@ Doe alsof het vandaag vrijdag is, en jij 12 jaar bent.
 
 {
     "assignment": "element selection",
-    "question"  : "Omcircel alle lijsten in deze code",
+    "question"  : "Omcircel de code die wordt uitgevoerd",
     "icon"      : "◯",
     "code"      :  "leeftijd is ask 'Hoe oud ben jij?'\n
                     if leeftijd is 16 print 'Perfecto' else print 'Jij bent te jong!'",
@@ -182,7 +182,7 @@ Er kunnen dan dus meerdere antwoorden goed zijn!
     "code"      : "getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n
                     print 'Welkom bij de bingoavond'\n
                     getal is getallen at random\n
-                    if getal is 10 print 'Gewonnen!' else print 'Helaas'\n
+                    if getal is 10 print 'Gewonnen!' else print 'Helaas'\n",
     "answer"    : "Welkom bij de bingoavond\nGewonnen! of 'Helaas'",
     "lines"     : 2
 }
@@ -191,7 +191,7 @@ Er kunnen dan dus meerdere antwoorden goed zijn!
     "assignment": "output",
     "icon"      : "💻",
     "code"      : "getal is ask 'Wat is jouw lievelingsgetal?'\n
-                    if getal is 10 print 'Mijne ook!'\n
+                    if getal is 10 print 'Mijne ook!'\n",
     "answer"    : "'Mijne ook!' of niks",
     "lines"     : 1
 }
