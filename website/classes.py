@@ -24,8 +24,9 @@ class ClassModule(WebsiteModule):
         self.db = db
 
     @route("/", methods=["POST"])
+    @route("/", methods=["POST"], subdomain="<language>")
     @requires_teacher
-    def create_class(self, user):
+    def create_class(self, user, language="en"):
         body = request.json
         # Validations
         if not isinstance(body, dict):
@@ -54,8 +55,9 @@ class ClassModule(WebsiteModule):
         return make_response(response, 200)
 
     @route("/<class_id>", methods=["PUT"])
+    @route("/<class_id>", methods=["PUT"], subdomain="<language>")
     @requires_teacher
-    def update_class(self, user, class_id):
+    def update_class(self, user, class_id, language="en"):
         body = request.json
         # Validations
         if not isinstance(body, dict):
@@ -82,8 +84,9 @@ class ClassModule(WebsiteModule):
         return make_response('', 200)
 
     @route("/<class_id>", methods=["DELETE"])
+    @route("/<class_id>", methods=["DELETE"], subdomain="<language>")
     @requires_login
-    def delete_class(self, user, class_id):
+    def delete_class(self, user, class_id, language="en"):
         Class = self.db.get_class(class_id)
         if not Class:
             return make_response(gettext("no_such_class"), 404)
@@ -95,7 +98,8 @@ class ClassModule(WebsiteModule):
         return render_partial('htmx-classes-table.html', teacher_classes=teacher_classes)
 
     @route("/<class_id>/prejoin/<link>", methods=["GET"])
-    def prejoin_class(self, class_id, link):
+    @route("/<class_id>/prejoin/<link>", methods=["GET"], subdomain="<language>")
+    def prejoin_class(self, class_id, link, language="en"):
         Class = self.db.get_class(class_id)
         if not Class or Class["link"] != link:
             return utils.error_page(error=404, ui_message=gettext("invalid_class_link"))
@@ -118,8 +122,9 @@ class ClassModule(WebsiteModule):
         )
 
     @route('join/<class_id>', methods=["POST"])
+    @route('join/<class_id>', methods=["POST"], subdomain="<language>")
     @requires_login
-    def join_class_id(self, user, class_id):
+    def join_class_id(self, user, class_id, language="en"):
         Class = self.db.get_class(class_id)
         if not Class:
             # TODO: change to invalid_class; if necessary!
@@ -151,7 +156,8 @@ class ClassModule(WebsiteModule):
 
     # Legacy function; will be gradually replaced by the join_class_id
     @route("/join", methods=["POST"])
-    def join_class(self):
+    @route("/join", methods=["POST"], subdomain="<language>")
+    def join_class(self, language="en"):
         body = request.json
         Class = None
         if "id" in body:
@@ -179,8 +185,9 @@ class ClassModule(WebsiteModule):
         return make_response('', 200)
 
     @route("/<class_id>/student/<student_id>", methods=["DELETE"])
+    @route("/<class_id>/student/<student_id>", methods=["DELETE"], subdomain="<language>")
     @requires_login
-    def leave_class(self, user, class_id, student_id):
+    def leave_class(self, user, class_id, student_id, language="en"):
         Class = self.db.get_class(class_id)
         if not Class or not (utils.can_edit_class(user, Class)):
             return make_response(gettext("ajax_error"), 400)
@@ -190,8 +197,9 @@ class ClassModule(WebsiteModule):
         return make_response('', 200)
 
     @route("/<class_id>/second-teacher/<second_teacher>", methods=["DELETE"])
+    @route("/<class_id>/second-teacher/<second_teacher>", methods=["DELETE"], subdomain="<language>")
     @requires_login
-    def remove_second_teacher(self, user, class_id, second_teacher):
+    def remove_second_teacher(self, user, class_id, second_teacher, language="en"):
         Class = self.db.get_class(class_id)
         if not Class or Class["teacher"] != user["username"]:  # only teachers can remove second teachers.
             return make_response(gettext("ajax_error"), 400)
@@ -213,13 +221,15 @@ class MiscClassPages(WebsiteModule):
         self.db = db
 
     @route("/classes", methods=["GET"])
+    @route("/classes", methods=["GET"], subdomain="<language>")
     @requires_teacher
-    def get_classes(self, user):
+    def get_classes(self, user, language="en"):
         return make_response(self.db.get_teacher_classes(user["username"], True))
 
     @route("/duplicate_class", methods=["POST"])
+    @route("/duplicate_class", methods=["POST"], subdomain="<language>")
     @requires_teacher
-    def duplicate_class(self, user):
+    def duplicate_class(self, user, language="en"):
         body = request.json
         # Validations
         if not isinstance(body, dict):
@@ -277,8 +287,9 @@ class MiscClassPages(WebsiteModule):
         return make_response(response, 200)
 
     @route("/invite-student", methods=["POST"])
+    @route("/invite-student", methods=["POST"], subdomain="<language>")
     @requires_teacher
-    def invite_student(self, user):
+    def invite_student(self, user, language="en"):
         body = request.json
         # Validations
         if not isinstance(body, dict):
@@ -322,8 +333,9 @@ class MiscClassPages(WebsiteModule):
         return make_response('', 204)
 
     @route("/invite-second-teacher", methods=["POST"])
+    @route("/invite-second-teacher", methods=["POST"], subdomain="<language>")
     @requires_teacher
-    def invite_second_teacher(self, user):
+    def invite_second_teacher(self, user, language="en"):
         teacher = user
         body = request.json
         # Validations
@@ -369,8 +381,9 @@ class MiscClassPages(WebsiteModule):
         return make_response('', 204)
 
     @route("/remove_student_invite", methods=["POST"])
+    @route("/remove_student_invite", methods=["POST"], subdomain="<language>")
     @requires_login
-    def remove_invite(self, user):
+    def remove_invite(self, user, language="en"):
         body = request.json
         # Validations
         if not isinstance(body, dict):
@@ -394,7 +407,8 @@ class MiscClassPages(WebsiteModule):
         return make_response('', 204)
 
     @route("/hedy/l/<link_id>", methods=["GET"])
-    def resolve_class_link(self, link_id):
+    @route("/hedy/l/<link_id>", methods=["GET"], subdomain="<language>")
+    def resolve_class_link(self, link_id, language="en"):
         Class = self.db.resolve_class_link(link_id)
         if not Class:
             return utils.error_page(error=404, ui_message=gettext("invalid_class_link"))
