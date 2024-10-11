@@ -30,9 +30,10 @@ class ProfileModule(WebsiteModule):
         super().__init__("profile", __name__, url_prefix="/profile")
         self.db = db
 
+    @route("/", methods=["POST"], subdomain="<language>")
     @route("/", methods=["POST"])
     @requires_login
-    def update_profile(self, user):
+    def update_profile(self, user, language="en"):
         body = request.json
         if not isinstance(body, dict):
             return make_response(gettext("ajax_error"), 400)
@@ -135,9 +136,9 @@ class ProfileModule(WebsiteModule):
         remember_current_user(self.db.user_by_username(user["username"]))
         return make_response(resp, 200)
 
-    @route("/", methods=["GET"])
+    @route("/", methods=["GET"], subdomain="<language>")
     @requires_login
-    def get_profile(self, user):
+    def get_profile(self, user, language="en"):
         # The user object we got from 'requires_login' is not fully hydrated yet. Look up the database user.
         user = self.db.user_by_username(user["username"])
 

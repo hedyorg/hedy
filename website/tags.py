@@ -18,10 +18,12 @@ class TagsModule(WebsiteModule):
         super().__init__("tags", __name__, url_prefix="/tags")
         self.db = db
 
+    @route("/<adventure_id>", methods=["GET"], subdomain="<language>")
     @route("/<adventure_id>", methods=["GET"])
+    @route("/", methods=["GET"], defaults={"adventure_id": None}, subdomain="<language>")
     @route("/", methods=["GET"], defaults={"adventure_id": None})
     @requires_teacher
-    def get_public_tags(self, user, adventure_id):
+    def get_public_tags(self, user, adventure_id, language="en"):
         public_tags = self.db.read_public_tags()
         adventure_id = request.args.get("adventure_id")
         adventure = self.db.get_adventure(adventure_id)
@@ -32,10 +34,12 @@ class TagsModule(WebsiteModule):
         return jinja_partials.render_partial('htmx-tags-dropdown.html',
                                              tags=public_tags, adventure_id=adventure_id, creator=user)
 
+    @route("/create/<adventure_id>", methods=["POST"], subdomain="<language>")
     @route("/create/<adventure_id>", methods=["POST"])
+    @route("/create/<adventure_id>/<new_tag>", methods=["POST"], subdomain="<language>")
     @route("/create/<adventure_id>/<new_tag>", methods=["POST"])
     @requires_teacher
-    def create(self, user, adventure_id, new_tag=None):
+    def create(self, user, adventure_id, new_tag=None, language="en"):
         new_tag = new_tag or request.form.get("tag")
         if not new_tag:
             return utils.error_page(error=400, ui_message=gettext("no_tag"))
@@ -76,14 +80,15 @@ class TagsModule(WebsiteModule):
         return jinja_partials.render_partial('htmx-tags-list.html', tags=adventure_tags,
                                              adventure_id=adventure_id, creator=user["username"])
 
-    @route("/update/<tag>/<adventure_id>", methods=["PUT"])
-    def update(self, tag, adventure_id):
+    @route("/update/<tag>/<adventure_id>", methods=["PUT"], subdomain="<language>")
+    def update(self, tag, adventure_id, language="en"):
         # TODO: allow admin to update tags.
         pass
 
+    @route("/delete/<tag>/<adventure_id>", methods=["DELETE"], subdomain="<language>")
     @route("/delete/<tag>/<adventure_id>", methods=["DELETE"])
     @requires_teacher
-    def delete_from_adventure(self, user, tag, adventure_id):
+    def delete_from_adventure(self, user, tag, adventure_id, language="en"):
         if not tag:
             return utils.error_page(error=400, ui_message=gettext("no_tag"))
         if not adventure_id:
@@ -103,9 +108,10 @@ class TagsModule(WebsiteModule):
 
         return jinja_partials.render_partial('htmx-tags-dropdown-item.html', tag=db_tag, adventure_id=adventure_id)
 
+    @route("/delete/<tag>", methods=["DELETE"], subdomain="<language>")
     @route("/delete/<tag>", methods=["DELETE"])
     @requires_teacher
-    def delete_tag(self, user, tag):
+    def delete_tag(self, user, tag, language="en"):
         if not tag:
             return utils.error_page(error=400, ui_message=gettext("no_tag"))
 

@@ -10,9 +10,24 @@ class ParsonsModule(WebsiteModule):
 
         self.parsons = parsons
 
-    @route("/get-exercise/<int:level>/<int:exercise>", methods=["GET"], defaults={'keyword_lang': None})
+    @route(
+        "/get-exercise/<int:level>/<int:exercise>",
+        methods=["GET"],
+        defaults={"keyword_lang": None},
+        subdomain="<language>",
+    )
+    @route(
+        "/get-exercise/<int:level>/<int:exercise>",
+        methods=["GET"],
+        defaults={"keyword_lang": None},
+    )
+    @route(
+        "/get-exercise/<int:level>/<int:exercise>/<keyword_lang>",
+        methods=["GET"],
+        subdomain="<language>",
+    )
     @route("/get-exercise/<int:level>/<int:exercise>/<keyword_lang>", methods=["GET"])
-    def get_parsons_exercise(self, level, exercise, keyword_lang):
+    def get_parsons_exercise(self, level, exercise, keyword_lang, language="en"):
         if exercise > self.parsons[g.lang].get_highest_exercise_level(level) or exercise < 1:
             return make_response(gettext("exercise_doesnt_exist"), 400)
         if keyword_lang:

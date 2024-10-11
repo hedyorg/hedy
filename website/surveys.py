@@ -9,7 +9,8 @@ class SurveysModule(WebsiteModule):
         self.db = db
 
     @route("/submit-survey/<survey_id>", methods=['POST'])
-    def submit_survey(self, survey_id):
+    @route("/submit-survey/<survey_id>", methods=['POST'], subdomain="<language>")
+    def submit_survey(self, survey_id, language="en"):
         survey_done = True
         survey = self.db.get_survey(survey_id)
         db = survey.get('responses')
@@ -35,14 +36,16 @@ class SurveysModule(WebsiteModule):
         return ''
 
     @route("/skip-survey/<survey_id>", methods=['POST'])
-    def skip_survey(self, survey_id):
+    @route("/skip-survey/<survey_id>", methods=['POST'], subdomain="<language>")
+    def skip_survey(self, survey_id, language="en"):
         survey = self.db.get_survey(survey_id)
         if survey:
             self.db.add_skip_survey(survey_id)
         return ''
 
     @route("/remind-later-survey/<survey_id>", methods=['POST'])
-    def remind_later_survey(self, survey_id):
+    @route("/remind-later-survey/<survey_id>", methods=['POST'], subdomain="<language>")
+    def remind_later_survey(self, survey_id, language="en"):
         survey = self.db.get_survey(survey_id)
         if survey:
             self.db.add_remind_later_survey(survey_id)

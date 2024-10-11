@@ -33,8 +33,9 @@ class StatisticsModule(WebsiteModule):
         self.db = db
 
     @route("/program-stats", methods=["GET"])
+    @route("/program-stats", methods=["GET"], subdomain="<language>")
     @requires_admin
-    def get_program_stats(self, user):
+    def get_program_stats(self, user, language="en"):
         start_date = request.args.get("start", default=None, type=str)
         end_date = request.args.get("end", default=None, type=str)
 

@@ -38,7 +38,8 @@ class QuizModule(WebsiteModule):
         self.quizzes = quizzes
 
     @route("/begin/<int:level>", methods=["GET", "POST"])
-    def begin(self, level):
+    @route("/begin/<int:level>", methods=["GET", "POST"], subdomain="<language>")
+    def begin(self, level, language="en"):
         """Begin the quiz at a particular level.
 
         Initialize a new attempt, then redirect to the form that presents question 1.
@@ -48,7 +49,8 @@ class QuizModule(WebsiteModule):
         return redirect(url_for('.current_question'))
 
     @route("/current_question", methods=["GET"])
-    def current_question(self):
+    @route("/current_question", methods=["GET"], subdomain="<language>")
+    def current_question(self, language="en"):
         """Show the current question.
 
         The current question is taken from the user session.
@@ -64,7 +66,8 @@ class QuizModule(WebsiteModule):
                                question=question)
 
     @route("/preview-question/<int:level>/<int:question>", methods=["GET"])
-    def preview_question(self, level, question):
+    @route("/preview-question/<int:level>/<int:question>", methods=["GET"], subdomain="<language>")
+    def preview_question(self, level, question, language="en"):
         """Show a specific question, without requiring that the user is currently doing a quiz attempt."""
 
         # Make sure that we have progress, mark it as developer mode progress
@@ -79,7 +82,8 @@ class QuizModule(WebsiteModule):
         return self.current_question()
 
     @route("/submit_answer", methods=["POST"])
-    def submit_answer(self):
+    @route("/submit_answer", methods=["POST"], subdomain="<language>")
+    def submit_answer(self, language="en"):
         """Hit when an answer is submitted."""
         self.log_form()
         progress, question = self.current_progress_and_question()
@@ -121,7 +125,8 @@ class QuizModule(WebsiteModule):
         return redirect(url_for('.review_question' if question_finished else '.current_question'))
 
     @route("/review_question", methods=["GET"])
-    def review_question(self):
+    @route("/review_question", methods=["GET"], subdomain="<language>")
+    def review_question(self, language="en"):
         """Review the correct answer of the previous question."""
         progress, question = self.current_progress_and_question()
 
@@ -144,7 +149,8 @@ class QuizModule(WebsiteModule):
                                is_correct=is_correct)
 
     @route("/previous_question/<question_nr>", methods=["POST"])
-    def previous_question(self, question_nr):
+    @route("/previous_question/<question_nr>", methods=["POST"], subdomain="<language>")
+    def previous_question(self, question_nr, language="en"):
         progress, _ = self.current_progress_and_question()
         question = self.get_question(progress.level, int(question_nr))
 
@@ -157,7 +163,8 @@ class QuizModule(WebsiteModule):
                                question=question)
 
     @route("/next_question", methods=["POST"])
-    def next_question(self):
+    @route("/next_question", methods=["POST"], subdomain="<language>")
+    def next_question(self, language="en"):
         """Advance the progress object and redirect to the next question."""
         progress, _ = self.current_progress_and_question()
         progress.advance_cypress_page_counter()
@@ -170,7 +177,8 @@ class QuizModule(WebsiteModule):
             return redirect(url_for('.review_quiz'))
 
     @route("/review_quiz", methods=["GET"])
-    def review_quiz(self):
+    @route("/review_quiz", methods=["GET"], subdomain="<language>")
+    def review_quiz(self, language="en"):
         """Review the results of the quiz."""
         progress = self.current_progress()
         if not progress:
