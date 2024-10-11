@@ -549,100 +549,100 @@ export function add_account_placeholder() {
 
 export function generate_passwords() {
     if (!$('#passwords_toggle').is(":checked")) {
-        $('.passwords_input').val('');
-        $('.passwords_input').prop('disabled', false);
-        return;
+        $('#passwords_title').show();
+        $('#passwords_desc').show();
+        $('#username_desc').hide();
+        $('#passwords_tip').show();
+        $('#accounts_input').attr("placeholder", 'username1;password1\nusername2;password2\nusername3;password3');
+    } else {
+        $('#passwords_title').hide();
+        $('#passwords_tip').hide();
+        $('#passwords_desc').hide();
+        $('#username_desc').show();
+        $('#accounts_input').attr("placeholder", 'username1\nusername2\nusername3');
     }
-    $('.account_row').each(function () {
-        if ($(this).is(':visible')) {
-            $(this).find(':input').each(function () {
-                if ($(this).attr('id') == "password") {
-                    const random_password = generateRandomString(6);
-                    $(this).val(random_password);
-                }
-            });
-        }
-    });
-    $('.passwords_input').prop('disabled', true);
-}
-
-export function append_classname() {
-    const classname = <string>$('#classes').val();
-    $('.usernames_input').each(function () {
-        $(this).val($(this).val() + "_" + classname);
-    });
 }
 
 export function create_accounts(prompt: string) {
-    modal.confirm (prompt, function () {
-        $('#account_rows_container').find(':input').each(function () {
-            $(this).removeClass('border-2 border-red-500');
-            // Not really nice, but this removes the need for re-styling (a lot!)
-            $(this).removeAttr('required');
-        });
-        let accounts: {}[] = [];
-        $('.account_row').each(function () {
-            if ($(this).is(':visible')) { //We want to skip the hidden first "copy" row
-                let account: Record<string, string> = {};
-                $(this).find(':input').each(function () {
-                    account[$(this).attr("name") as string] = $(this).val() as string;
-                });
 
-                // Only push an account to the accounts object if it contains data
-                if (account['password'].length !== 0 || account['username'].length !== 0) {
-                    accounts.push(account);
-                }
-            }
-        });
+    modal.confirm (prompt, function () {
+        const className = $('#classes').val() as string;
+        const generatePasswords = $('#passwords_toggle').is(":checked") as boolean;
+        const accounts = $('#accounts_input').val() as string;
+        set_create_accounts_disabled(true);
         $.ajax({
             type: 'POST',
             url: '/for-teachers/create-accounts',
             data: JSON.stringify({
-                accounts: accounts
+                class: className,
+                generate_passwords: generatePasswords,
+                accounts: accounts,
             }),
-            contentType: 'application/json',
-            dataType: 'json'
+            contentType: 'application/json'
         }).done(function (response) {
+            set_create_accounts_disabled(false);
             if (response.error) {
-                modal.notifyError(response.error);
-                $('#account_rows_container').find(':input').each(function () {
-                    if ($(this).val() == response.value) {
-                        $(this).addClass('border-2 border-red-500');
+                let msg = response.error
+                modal.suffix (msg, "_", async function (input) {
+                    let data = (input as any);
+
+                    let result = [];
+                    var lines = accounts.split("\n")
+                    for (let line of lines) {
+                        if (generatePasswords) {
+                            var usr = line.trim()
+                            if (usr) {
+                                let res = data.only_duplicates === "non-unique" && !response.value.includes(usr) ? usr : usr + data.suffix;
+                                result.push(res);
+                            }
+                        } else {
+                            let parts = line.split(";");
+                            if (parts.length > 1) {
+                                let usr = parts[0].trim();
+                                if (usr) {
+                                    let res = data.only_duplicates === "non-unique" && !response.value.includes(usr) ? usr : usr + data.suffix;
+                                    let pwd = parts.slice(1).join('');
+                                    result.push(`${res};${pwd}`);
+                                }
+                            }
+                        }
                     }
+
+                    $('#accounts_input').val(result.join("\n"));
                 });
                 return;
             } else {
-                modal.notifySuccess(response.success);
-                if ($("input[name='download_credentials_checkbox']:checked").val() == "yes") {
-                    download_login_credentials(accounts);
-                }
-                $('#account_rows_container').find(':input').each(function () {
-                   $(this).val("");
-                });
+                let blob = new Blob([response], { type: "application/octetstream" });
+                let a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = "student-accounts.csv";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(a.href);
             }
         }).fail(function (err) {
+            set_create_accounts_disabled(false);
+            try {
+                // This endpoint has to return info about the error to direct the user
+                // If the error is JSON, combine its properties to form an error message
+                const parsed = JSON.parse(err.responseText);
+                if (parsed.error && parsed.value) {
+                    let msg = parsed.error + ' ' + parsed.value;
+                    modal.notifyError(msg);
+                    return;
+                }
+            } catch { }
+            // If the error is simple text (e.g. 'request invalid'), display it to the user
             modal.notifyError(err.responseText);
         });
     });
 }
 
-function download_login_credentials(accounts: any) {
-    // https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
-    let csvContent = "data:text/csv;charset=utf-8,";
-    csvContent += "Username, Password" + "\r\n";
-
-    accounts.forEach(function(account: any) {
-        let row = account.username + "," + account.password;
-        csvContent += row + "\r\n";
-    });
-
-    var encodedUri = encodeURI(csvContent);
-    var link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "accounts.csv");
-    document.body.appendChild(link); // Required for Firefox
-
-    link.click();
+function set_create_accounts_disabled(disable: boolean) {
+    $("#create_accounts_submit").prop("disabled", disable);
+    $("#accounts_input").prop("disabled", disable);
+    $("#passwords_toggle").prop("disabled", disable);
 }
 
 export function copy_join_link(link: string, success: string) {
@@ -654,16 +654,6 @@ export function copy_join_link(link: string, success: string) {
     document.execCommand("copy");
     document.body.removeChild(sampleTextarea);
     modal.notifySuccess(success);
-}
-
-// https://onlinewebtutorblog.com/how-to-generate-random-string-in-jquery-javascript/
-function generateRandomString(length: number) {
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (var i = 0; i < length; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
 }
 
 export interface InitializeTeacherPageOptions {
