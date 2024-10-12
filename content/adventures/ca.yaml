@@ -794,7 +794,7 @@ adventures:
                     ```
     clear_command:
         name: '{clear}'
-        default_save_name: clear_command
+        default_save_name: comanda_netejar
         description: comanda {clear}
         levels:
             4:
@@ -1724,7 +1724,7 @@ adventures:
     for_command:
         name: '{for}'
         default_save_name: for
-        description: for command
+        description: comanda {for}
         levels:
             10:
                 story_text: |-
@@ -1780,9 +1780,9 @@ adventures:
                         {print} (i)
                     ```
     fortune:
-        name: Fortune teller
-        default_save_name: Fortune Teller
-        description: Let Hedy predict the future
+        name: L'endeví
+        default_save_name: L'endeví
+        description: Deixa que Hedy predigui el futur
         levels:
             1:
                 story_text: |
@@ -1794,17 +1794,16 @@ adventures:
                     Like this:
                 example_code: |
                     ```
-                    {print} Hello, I'm Hedy the fortune teller!
-                    {ask} Who are you?
-                    {print} Let me take a look in my crystal ball
-                    {print} I see... I see...
-                    {echo} Your name is
+                    _ Hola, soc Hedy l'endevina
+                    _ Qui ets tu?
+                    _ Deixa'm donar una ullada a la meva bola de vidre
+                    _ Veig... Veig...
+                    _ El teu nom és
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Hedy now only tells you your name. Can you expand the code so that Hedy can predict more things about you?
-                    Obviously, Hedy isn't a very good fortune teller yet, as she can only repeat the answers that were given by the players!
-                    Take a look in level 2 to improve your fortune teller.
+                    ### Exercici
+                    Copia el codi d'exemple a la teva pantalla d'entrada i omple els espais en blanc per fer funcionar el teu codi.
+                    **Extra** Canvia el codi i deixa que l'endevina no només predigui el teu nom, sinó també la teva edat, el teu esport preferit o alguna altra cosa sobre tu mateix.
             3:
                 story_text: |
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
@@ -1831,14 +1830,14 @@ adventures:
                     Go back to the previous level and copy your fortune teller code. Make the code work in this level by adding quotation marks in the right spots.
                 example_code: |
                     ```
-                    _ Add the quotation marks to this code _
-                    {print} Im Hedy the fortune teller!
-                    question {is} {ask} What do you want to know?
-                    {print} This is your question:  question
-                    answers {is} yes, no, maybe
-                    {print} My crystal ball says...
+                    _ Agrega les cometes a aquest codi _
+                    {print} Sóc Hedy l'endevina!
+                    pregunta {is} {ask} Què vols saber?
+                    {print} Aquesta és la teva pregunta: · · pregunta
+                    resposta {is} si, no, potser
+                    {print} La meva bola de vidre diu...
                     {sleep} 2
-                    {print} answers {at} {random}
+                    {print} resposta {at} {random}
                     ```
             5:
                 story_text: |
