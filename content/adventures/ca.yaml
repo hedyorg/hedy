@@ -1711,26 +1711,26 @@ adventures:
                     Check it out!
                 example_code: |
                     ```
-                    prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '1 million dollars' :
-                        {print} 'Yeah! You are rich!'
-                    {elif} your_price == 'an apple pie' :
-                        {print} 'Lovely, an apple pie!'
+                    premis = ['1 milió d'euros', 'un pastís de poma, 'res']
+                    teu_premi = premis[{random}]
+                    {print} 'Has guanyat ' teu_premi
+                    {if} teu_premi == '1 milió d'euros' :
+                        {print} 'Visca! ets ric!'
+                    {elif} teu_premi == 'un pastís de poma' :
+                        {print} 'Bé, un pastís de poma!'
                     {else}:
-                        {print} 'Better luck next time..'
+                        {print} 'Més sort a la propera..'
                     ```
     for_command:
         name: '{for}'
-        default_save_name: for
+        default_save_name: per
         description: comanda {for}
         levels:
             10:
                 story_text: |-
-                    ## For
-                    In this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.
-                    `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces.
+                    ## Per
+                    En aquest nivell aprendrem una nova comanda anomenada `{for}`. Amb `{for}` pots fer una llista i utilitzar-ne tots els elements.
+                    `{for}` crea un bloc, com `{repeat}` i `{if}`, de manera que totes les línies del bloc han de començar amb 4 espais.
                 example_code: |
                     ```
                     animals = dog, cat, blobfish
