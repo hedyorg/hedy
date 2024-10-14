@@ -3,7 +3,7 @@ from difflib import SequenceMatcher
 import os
 import re
 import uuid
-
+from config import config
 from bs4 import BeautifulSoup
 from flask import g, make_response, request, session, url_for, redirect
 from jinja_partials import render_partial
@@ -189,7 +189,7 @@ class ForTeachersModule(WebsiteModule):
             invites=invites,
             class_info={
                 "students": len(students),
-                "link": os.getenv("BASE_URL", "") + "/hedy/l/" + Class["link"],
+                "link": config['domain_name'] + "/hedy/l/" + Class["link"],
                 "teacher": Class["teacher"],
                 "second_teachers": second_teachers,
                 "name": Class["name"],

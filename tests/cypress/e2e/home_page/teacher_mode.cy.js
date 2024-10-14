@@ -33,7 +33,7 @@ it('Is able to create a class adventure, public profile, in teacher preview mode
     goToTeachersPage();
     cy.get("view_class_link").should("not.exist");
     cy.get("view_adventures").should("not.exist");
-    cy.visit(`localhost:8080/user/${lowercaseUsername}`, { failOnStatusCode: false });
+    cy.visit(`${Cypress.config('baseUrl')}/user/${lowercaseUsername}`, { failOnStatusCode: false });
     cy.getDataCy('general_info').should("not.exist");
     cy.getDataCy('exit_teacher_mode_banner').click();
   });

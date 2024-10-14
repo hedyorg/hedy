@@ -14,6 +14,9 @@ from website.auth import (
     current_user,
     email_base_url,
     is_admin,
+    requires_admin,
+    requires_login,
+    requires_teacher,
     send_email,
 )
 
@@ -116,12 +119,14 @@ class ProgramsModule(WebsiteModule):
 
     @route("/list", methods=["GET"])
     @route("/list", methods=["GET"], subdomain="<language>")
+    @requires_login
     def list_programs(self, user, language="en"):
         # Filter by level, adventure, submitted, paginated.
         return make_response({"programs": self.db.programs_for_user(user["username"]).records})
 
     @route("/delete/", methods=["POST"])
     @route("/delete/", methods=["POST"], subdomain="<language>")
+    @requires_login
     def delete_program(self, user, language="en"):
         body = request.json
         if not isinstance(body.get("id"), str):
@@ -166,6 +171,7 @@ class ProgramsModule(WebsiteModule):
 
     @route("/", methods=["POST"])
     @route("/", methods=["POST"], subdomain="<language>")
+    @requires_login
     def save_program(self, user, language="en"):
         body = request.json
         if not isinstance(body, dict):
@@ -231,6 +237,7 @@ class ProgramsModule(WebsiteModule):
     )
     @route("/share/<program_id>/<second_teachers_programs>", methods=["POST"])
     @route("/share/<program_id>/<second_teachers_programs>", methods=["POST"], subdomain="<language>")
+    @requires_login
     def share_unshare_program(self, user, program_id, second_teachers_programs, language="en"):
         program = self.db.program_by_id(program_id)
         if not program or program["username"] != user["username"]:
@@ -264,6 +271,7 @@ class ProgramsModule(WebsiteModule):
 
     @route("/submit", methods=["POST"])
     @route("/submit", methods=["POST"], subdomain="<language>")
+    @requires_login
     def submit_program(self, user, language="en"):
         body = request.json
         if not isinstance(body, dict):
@@ -286,6 +294,7 @@ class ProgramsModule(WebsiteModule):
 
     @route("/unsubmit", methods=["POST"])
     @route("/unsubmit", methods=["POST"], subdomain="<language>")
+    @requires_teacher
     def unsubmit_program(self, user, language="en"):
         body = request.json
         if not isinstance(body, dict):
@@ -307,6 +316,7 @@ class ProgramsModule(WebsiteModule):
 
     @route("/set_favourite", methods=["POST"])
     @route("/set_favourite", methods=["POST"], subdomain="<language>")
+    @requires_login
     def set_favourite_program(self, user, language="en"):
         body = request.json
         if not isinstance(body, dict):
@@ -328,6 +338,7 @@ class ProgramsModule(WebsiteModule):
 
     @route("/set_hedy_choice", methods=["POST"])
     @route("/set_hedy_choice", methods=["POST"], subdomain="<language>")
+    @requires_admin
     def set_hedy_choice(self, user, language="en"):
         body = request.json
         if not isinstance(body, dict):
@@ -350,6 +361,7 @@ class ProgramsModule(WebsiteModule):
 
     @route("/report", methods=["POST"])
     @route("/report", methods=["POST"], subdomain="<language>")
+    @requires_login
     def report_program(self, user, language="en"):
         body = request.json
 
