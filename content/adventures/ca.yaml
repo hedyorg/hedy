@@ -1711,26 +1711,26 @@ adventures:
                     Check it out!
                 example_code: |
                     ```
-                    prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '1 million dollars' :
+                    prizes = ['1 million dollars', 'an apple pie', 'nothing']
+                    your_prize = prizes[{random}]
+                    {print} 'You win ' your_prize
+                    {if} your_prize == '1 million dollars' :
                         {print} 'Yeah! You are rich!'
-                    {elif} your_price == 'an apple pie' :
+                    {elif} your_prize == 'an apple pie' :
                         {print} 'Lovely, an apple pie!'
                     {else}:
                         {print} 'Better luck next time..'
                     ```
     for_command:
         name: '{for}'
-        default_save_name: for
+        default_save_name: per
         description: comanda {for}
         levels:
             10:
                 story_text: |-
-                    ## For
-                    In this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.
-                    `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with 4 spaces.
+                    ## Per
+                    En aquest nivell aprendrem una nova comanda anomenada `{for}`. Amb `{for}` pots fer una llista i utilitzar-ne tots els elements.
+                    `{for}` crea un bloc, com `{repeat}` i `{if}`, de manera que totes les línies del bloc han de començar amb 4 espais.
                 example_code: |
                     ```
                     animals = dog, cat, blobfish
@@ -1796,7 +1796,7 @@ adventures:
                     ```
                     _ Hola, soc Hedy l'endevina
                     _ Qui ets tu?
-                    _ Deixa'm donar una ullada a la meva bola de vidre
+                    _ Deixa'm donar una ullada a la meva bola de cristall
                     _ Veig... Veig...
                     _ El teu nom és
                     ```
@@ -1835,7 +1835,7 @@ adventures:
                     pregunta {is} {ask} Què vols saber?
                     {print} Aquesta és la teva pregunta: · · pregunta
                     resposta {is} si, no, potser
-                    {print} La meva bola de vidre diu...
+                    {print} La meva bola de cristall diu...
                     {sleep} 2
                     {print} resposta {at} {random}
                     ```
