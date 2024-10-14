@@ -278,10 +278,10 @@ adventures:
                     Ви можете додати елементи до списку за допомогою команди `{add} {to_list}`. Щоб додати елемент до списку, ви можете просто ввести: `{add} penguin {to_list} animals` або ви можете скористатися командою `{ask}`, як у прикладі коду.
                 example_code: |
                     ```
-                    тварини {is} собака, кіт, кенгуру
-                    like {is} {ask} Яка твоя улюблена тварина?
-                    {add} як {to_list} тварин
-                    {print} Я вибираю тварин {at} {random}
+                    animals {is} dog, cat, kangaroo
+                    like {is} {ask} What is your favorite animal?
+                    {add} like {to_list} animals
+                    {print} I choose animals {at} {random}
                     ```
                 story_text_2: |
                     ## Remove from

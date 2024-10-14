@@ -1711,15 +1711,15 @@ adventures:
                     Check it out!
                 example_code: |
                     ```
-                    premis = ['1 milió d'euros', 'un pastís de poma, 'res']
-                    teu_premi = premis[{random}]
-                    {print} 'Has guanyat ' teu_premi
-                    {if} teu_premi == '1 milió d'euros' :
-                        {print} 'Visca! ets ric!'
-                    {elif} teu_premi == 'un pastís de poma' :
-                        {print} 'Bé, un pastís de poma!'
+                    prizes = ['1 million dollars', 'an apple pie', 'nothing']
+                    your_prize = prizes[{random}]
+                    {print} 'You win ' your_prize
+                    {if} your_prize == '1 million dollars' :
+                        {print} 'Yeah! You are rich!'
+                    {elif} your_prize == 'an apple pie' :
+                        {print} 'Lovely, an apple pie!'
                     {else}:
-                        {print} 'Més sort a la propera..'
+                        {print} 'Better luck next time..'
                     ```
     for_command:
         name: '{for}'
