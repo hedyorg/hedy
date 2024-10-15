@@ -38,7 +38,6 @@ import utils
 from hedy_error import get_error_text
 from safe_format import safe_format
 from config import config
-
 from website.flask_helpers import render_template, proper_tojson, JinjaCompatibleJsonProvider
 from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, KEYWORDS_ADVENTURES, ALL_KEYWORD_LANGUAGES,
                           ALL_LANGUAGES, COUNTRIES, HOUR_OF_CODE_ADVENTURES)
@@ -447,34 +446,6 @@ Commonmark(app)
 
 # Explicitly substitute the flask gettext function with our custom definition which uses fallback languages
 app.jinja_env.globals.update(_=gettext)
-
-trans_cache = {}
-
-
-# def our_gettext(id):
-#     locale = session['lang']
-#     res = gettext(id)
-#     if locale != 'en' and res == id:
-#         with force_locale('en'):
-#             res = gettext(id)
-#     return res
-# global trans_cache
-#
-# locale = session['lang']
-#
-# if locale not in trans_cache.keys():
-#     lang_trans = get_translations()
-#     if locale != 'en':
-#         try:
-#             with force_locale('en'):
-#                 fallback_translation = get_translations()
-#                 lang_trans.add_fallback(fallback_translation)
-#         finally:
-#             force_locale(locale)
-#     trans_cache[locale] = lang_trans
-#
-# t = trans_cache[locale].gettext(x)
-# print(t)
 
 
 # We don't need to log in offline mode
@@ -2344,9 +2315,6 @@ def favicon():
 @app.route('/index.html')
 def main_page():
     sections = hedyweb.PageTranslations('start').get_page_translations(g.lang)['home-sections']
-
-    # my_test = gettext('no_programs')
-
     sections = sections[:]
 
     # Sections have 'title', 'text'
