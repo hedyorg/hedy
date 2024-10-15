@@ -268,14 +268,14 @@ adventures:
                     {print}('Ласкаво просимо до цієї історії!')
                     ```
     add_remove_command:
-        name: '{add} {to} & {remove} {from}'
-        default_save_name: add_remove_command
-        description: introducing add to and remove from
+        name: '{add} {to_list} & {remove} {from}'
+        default_save_name: javascript licenses api веб-сайт go1.13.8
+        description: '{add} {to_list} і {remove} {from}'
         levels:
             3:
                 story_text: |
-                    ## Add to
-                    You can add items to the list with the `{add} {to_list}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
+                    ## Додати до
+                    Ви можете додати елементи до списку за допомогою команди `{add} {to_list}`. Щоб додати елемент до списку, ви можете просто ввести: `{add} penguin {to_list} animals` або ви можете скористатися командою `{ask}`, як у прикладі коду.
                 example_code: |
                     ```
                     animals {is} dog, cat, kangaroo
@@ -4614,12 +4614,12 @@ adventures:
                 story_text: |
                     In level 1 the turtle could only turn left or right. That is a bit boring!
                     In level 2 he can point his nose in all directions. 
-                  
+
                     Use 90 degrees to turn a quarter, 180 to turn half, and a full circle is 360 degrees.
-                    
+
                     ### Exercise
                     This code now creates the letter T. Can you change it to make the letter B?
-                  
+
                     **Extra** Change the letter into a different letter, like the first one of your name. 
                     You can also make multiple letters, by setting the color to `{color}` `{white}` in between. 
 

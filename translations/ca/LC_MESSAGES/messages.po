@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-10-08 06:16+0000\n"
+"PO-Revision-Date: 2024-10-13 06:15+0000\n"
 "Last-Translator: aniollidon <aniollidon@gmail.com>\n"
 "Language-Team: ca <LL@li.org>\n"
 "Language: ca\n"
@@ -58,53 +58,42 @@ msgstr "Hem detectat que a la línia {line_number} comença amb espai. Pots elim
 msgid "Invalid Type Combination"
 msgstr "Hem detectat que `{invalid_argument}` i`{invalid_argument_2}` no es poden fer servir amb `{command}`, ja que un és {invalid_type} i l'altre és {invalid_type_2}. Pots provar de canviar `{invalid_argument}` a {invalid_type_2} o `{invalid_argument_2}` a {invalid_type}?"
 
-#, fuzzy
 msgid "Lonely Echo"
-msgstr "Has fet servir `{echo}` abans que `{ask}`, o has fet servir `{echo}` sense `{ask}`. Situa `{ask}` abans d'`{echo}`."
+msgstr "Hem detectat que un `{echo}` s'ha utilitzat abans o sense fer servir `{ask}`. Pots provar d'escriure un`{ask}` abans d'`{echo}`?"
 
-#, fuzzy
 msgid "Lonely Text"
-msgstr "Sembla que t'has oblidat d'utilitzar una comanda al text de la línia {line_number}"
+msgstr "Hem detectat al codi que fa falta una comanda dins el text de la línia {line_number}. Pots provar d'escriure dins el text la comanda que hi falta"
 
-#, fuzzy
 msgid "Missing Additional Command"
-msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+msgstr "Hem detectat al codi que fa falta una `{command}` a la línia {line_number}. Pots provar d'utilitzar `{missing_command}` al teu codi."
 
-#, fuzzy
 msgid "Missing Colon Error"
-msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
+msgstr "Hem detectat que `{command}` necessita dos punts (`:`) al final de la línia {line_number}. A partir del nivell 17, recordareu d'afegir `:` als finals de línies amb comandes?"
 
-#, fuzzy
 msgid "Missing Command"
-msgstr "Sembla que t'has oblidat d'usar una comanda a la línia {line_number}."
+msgstr "Hem detectat al codi que li falta una ordre a la línia {line_number}. Has revisat a la secció d'exercicis per trobar quina comanda utilitzar?"
 
-#, fuzzy
 msgid "Missing Inner Command"
-msgstr "Sembla que t'has oblidat d'utilitzar una comanda a la declaració `{command}` que has fet a la línia {line_number}."
+msgstr "Hem detectat al codi que fa falta una comanda per a la instrucció `{command}` a la línia {line_number}. Has revisat la secció d'exercicis per trobar quina comanda fa falta?"
 
-#, fuzzy
 msgid "Missing Square Brackets"
-msgstr "It looks like you forgot to use square brackets `[]` around the list you were creating on line {line_number}."
+msgstr "Hem detectat que a la llista que heu creat a la línia {line_number} li falten claudàtors `[]`. Pots provar d'afegir claudàtors `[]` al voltant de la llista?"
 
 #, fuzzy
 msgid "Missing Variable"
-msgstr "It looks like your `{command}` is missing a variable at the start of the line."
+msgstr "Sembla que a la vostra `{command}` li falta una variable a l'inici de la línia."
 
-#, fuzzy
 msgid "Misspelled At Command"
-msgstr "It looks like you might have misspelled the `{command}` command, instead you wrote `{invalid_argument}` in line {line_number}."
+msgstr "Hem detectat que `{invalid_argument}` sembla tenir un error ortogràfic a la línia {line_number}. Pots provar d'escriure `{command}` al seu lloc."
 
-#, fuzzy
 msgid "No Indentation"
-msgstr "Has utilitzat massa pocs espais a la línia {line_number}. N'has posat {leading_spaces}, i no són suficients. Inicia cada nou bloc amb {indent_size} espais més que la línia d'abans."
+msgstr "Hem detectat que sembla que hi ha massa pocs {leading_spaces} espais utilitzats a la línia {line_number}. Pots provar d'augmentar el sagnat {indent_size} per a cada bloc nou."
 
-#, fuzzy
 msgid "Non Decimal Variable"
-msgstr "At line {line_number}, you might have tried using a number which Hedy does not like very much! Try changing it to a decimal number like 2."
+msgstr "A la línia {line_number}, has utilitzat un número que a Hedy no funciona! Pots provar de canviar-lo a un nombre decimal, com el 2?"
 
-#, fuzzy
 msgid "Parse"
-msgstr "El codi que heu introduït no és un codi Hedy vàlid. Hi ha un error a la línia {location[0]}, a la posició {location[1]}. Apareix el caràcter `{character_found}` que no està permès."
+msgstr "Hem detectat que `{character_found}` s'està utilitzant a la línia {location[0]} que no està permès. Pots buscar quin caràcter falta o quin caràcter addicional hi ha al teu codi?"
 
 #, fuzzy
 msgid "Pressit Missing Else"
@@ -1461,13 +1450,11 @@ msgstr "percentage"
 msgid "period"
 msgstr "a period"
 
-#, fuzzy
 msgid "personal_text"
-msgstr "Personal text"
+msgstr "Text personal"
 
-#, fuzzy
 msgid "personal_text_invalid"
-msgstr "Your personal text is invalid."
+msgstr "El teu text personal no és vàlid."
 
 #, fuzzy
 msgid "phone_number"
@@ -1523,9 +1510,8 @@ msgstr "Private"
 msgid "profile_logo_alt"
 msgstr "Profile icon."
 
-#, fuzzy
 msgid "profile_picture"
-msgstr "Profile picture"
+msgstr "Foto de perfil"
 
 #, fuzzy
 msgid "profile_updated"
@@ -1582,17 +1568,15 @@ msgstr "You can also look for public adventures and use them as an example."
 msgid "public_invalid"
 msgstr "This agreement selection is invalid"
 
-#, fuzzy
 msgid "public_profile"
-msgstr "Public profile"
+msgstr "Perfil públic"
 
 #, fuzzy
 msgid "public_profile_info"
 msgstr "By selecting this box I make my profile visible for everyone. Be careful not to share personal information like your name or home address, because everyone will be able to see it!"
 
-#, fuzzy
 msgid "public_profile_updated"
-msgstr "Public profile updated, page will be re-loaded."
+msgstr "S'ha actualitzat el perfil públic, la pàgina es tornarà a carregar."
 
 #, fuzzy
 msgid "put"

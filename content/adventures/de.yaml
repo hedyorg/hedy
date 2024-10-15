@@ -1980,7 +1980,7 @@ adventures:
 
                     {define} zum
                         gewählte_seite = seiten {at} {random}
-                        gewähltes_körperteil = Körpereile _
+                        gewähltes_körperteil = körperteile _
                         gewählte_farbe = farben _
                         {print} gewählte_seite ' ' gewähltes_körperteil ' on ' gewählte_farbe
 
@@ -1991,23 +1991,23 @@ adventures:
                     ```
             13:
                 story_text: |
-                    Now that you've learned how to use functions, you'll learn how to use a function with an argument.
-                    An **argument** is a variable that is used within a function. It is not used outside the function.
+                    Nun, da du gelernt hast, wie Funktionen verwendet werden, wirst du lernen, wie du eine Funktion mit einem Argument verwenden kannst.
+                    EIn **Argument** ist eine Variable, die in einer Funktion verwendet wird. Ausserhalb der Funktion wird sie nicht verwendet.
 
-                    For example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.
-                    In this example code the argument `place` is used. Place is a variable that is only used in the function, so an argument.
-                    To use `place` we have programmed the line `define song with place`.
-                    When the function is called, computer will replace the argument `place`, with the piece of text after `call song with`.
+                    In diesem Code haben wir die beispielsweise die erste Strophe des Liedes 'My Bonnie is over the ocean' programmiert.
+                    Im Beispielcode wird das Argument `ort`verwendet. Ort ist eine Variable, die nur in der Funktion genutzt wird, also ein Argument.
+                    Um `ort`zu verwenden haben wir `{with}`nach `{define}`geschrieben.
+                    Wenn die Funktion aufgerufen wird, wird der Computer das Argument 'ort' mit dem Text nach `{call} lied {with}`ersetzen.
 
-                    ### Exercise
-                    The next verse of this song goes:
+                    ### Übung
+                    Die nächste Strophe des Liedes geht so:
 
                     Last night as I lay on my pillow
                     Last night as I lay on my bed
                     Last night as I lay on my pillow
                     I dreamed that my Bonnie is dead
 
-                    Can you program this verse in the same way as the example?
+                    Kannst Du diese Strophe so programmieren wie das Beispiel?
                 example_code: |
                     ```
                     {define} song {with} place
@@ -2019,55 +2019,55 @@ adventures:
                     ```
             14:
                 story_text: |
-                    In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you.
-                    You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
+                    Im letzten Level hast du gelernt, Funktionen zu erzeugen und mit Argumenten zu verwenden. Ein anderer wichtiger Nutzen einer Funktion ist, sie etwas für dich berechnen zu lassen.
+                    Du kannst die Funktion eine Berechnung anstellen lassen und dir das Ergebnis der Berechnung geben lassen. Das Ergebnis wird **rückgabe wert** genannt.
 
-                    For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
+                    In diesem Code beispielsweise wird die Funktion berechne_neuen_preis den neuen Preis eines Artikel berechnen. Sie gibt dir den neuen Preis des Artikels als Rückgabewert
 
-                    ### Exercise
-                    Finish this code. We have already made the variable new_price for you, you only need to set it.
-                    You should finish the line of code by calling the function that calculates the new price.
+                    ### Übung
+                    Vervollständige diesen Code. Wir haben schon die schon die Variable neuer_preis definiert, du musst sie nur noch richtig setzen.
+                    Du solltest die Codezeile fertigstellen, indem du die Funktion aufrufst, die den neuen Preis berechnet.
                 example_code: |
                     ```
-                    {define} calculate_new_price {with} amount, percentage
-                        percentage = percentage / 100
-                        discount_amount = amount * percentage
-                        return amount - discount_amount
+                    {define} berechne_neuen_preis {with} menge, prozent
+                        prozent = prozent / 100
+                        rabbat = menge * prozent
+                        {return} menge - rabatt
 
-                    old_price = {ask} 'How much is on the price tag?'
-                    discount = {ask} 'What percentage is the discount?'
+                    alter_preis = {ask} 'Wie ist der Listenpreis?'
+                    nachlass = {ask} 'Gibt es Prozente?'
 
-                    new_price = _ calculate_new_price {with} old_price, _
-                    {print} 'The new price is ' new_price ' dollar'
+                    neuer_preis = _ berechne_neuen_preis {with} alter_preis, _
+                    {print} 'Der neue Preis ist ' neuer_preis ' Euro'
                     ```
             18:
                 story_text: |
-                    Let's make functions the Pythons way! To define a function, we no longer use:
+                    Lass uns Funktionen verwenden, wie es in Python geht! Um eine Funktion zu definieren, benutzen wir nicht länger:
 
-                    `{define} name_function {with} argument_1, argument_2:`
+                    `{define} name_funktion {with} argument_1, argument_2:`
 
-                    but we use:
+                    sondern:
 
-                    `{def} name_function(argument_1, argument_2):`.
+                    `{def} name_funktion(argument_1, argument_2):`.
 
 
-                    If you don't want to use arguments, you just leave the space between the parantheses empty.
-                    To call a function, we don't need the `{call}` command anymore. You just type the name of the function.
+                    Wenn du keine Argumente verwenden willst, lässt du den Platz zwischen den Klammern einfach leer.
+                    Um eine Funktion aufzurufen, müssen wir den `{call}` Befehl nicht mehr verwenden. Schreib einfach den Namen der Funktion.
                 example_code: |
                     ```
-                    {def} calculate_score(answer, correct_answer):
-                        {if} answer == correct_answer:
-                            score = 1
-                        {elif} answer == '?':
-                            score = 0
+                    {def} berechne_punkte(antwort, richtige_antwort):
+                        {if} antwort == richtige_antwort:
+                            punkte = 1
+                        {elif} antwort == '?':
+                            punkte = 0
                         {else}:
-                            score = -1
-                        {return} score
+                            punkte = -1
+                        {return} punkte
 
-                    answer = {input} ('Where can you find the Eiffel Tower?')
-                    correct_answer = 'Paris'
-                    score = calculate_score(answer, correct_answer)
-                    {print} ('Your score is... ', score)
+                    antwort = {input} ('Wo findest du den Eiffelturm?')
+                    richtige_antwort = 'Paris'
+                    punkte = berechne_punkte(antwort, richtige_antwort)
+                    {print} ('Dein Punktestand ist... ', punkte)
                     ```
     guess_my_number:
         name: Guess my number
@@ -2235,23 +2235,23 @@ adventures:
     harry_potter:
         name: Harry Potter
         default_save_name: Harry Potter
-        description: Harry Potter adventures
+        description: Harry Potter Abenteuer
         levels:
             10:
                 story_text: |
-                    ### Exercise
-                    We can also make a Harry Potter themed fortune teller. Fill in blanks such that 9 lines are printed.
-                    **Extra** Change the theme of the fortune teller into something else, such as your favorite book, film or tv show.
+                    ### Übung
+                    Wir können auch ein Orakel im Harry Potter Stil machen. Fülle die Leerstellen aus, so dass 9 Zeilen ausgegeben werden.
+                    **Extra** Ändere die Sil des Orakels in dein Lieblingsbuch, -film oder -serie.
                 example_code: |
                     ```
-                    houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
-                    subjects = potions, defence against the dark arts, charms, transfiguration
-                    fears = Voldemort, spiders, failing your OWL test
-                    names = Harry, Ron, Hermione
+                    häuser = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
+                    fächer = Zaubertränke, Verteidigung gegen die dunklen Künste, Zauberkunst, Verwandlung
+                    ängste = Voldemort, Spinnen, Durchfallen beim OWL Test
+                    namen = Harry, Ron, Hermione
                     _
-                    _ {print} name ' is placed in ' houses {at} {random}
-                    _ {print} name ' is great at ' subjects {at} {random}
-                    _ {print} name 's greatest fear is ' fears {at} {random}
+                    _ {print} name ' is placed in ' häuser {at} {random}
+                    _ {print} name ' is great at ' fächer {at} {random}
+                    _ {print} name 's hat am meisten Angst vor ' ängste {at} {random}
                     ```
     haunted:
         name: Spukhaus
@@ -3992,19 +3992,11 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Bist du zu faul, um das Spiel selbst zu spielen? Lass Hedy es für dich spielen!
-                    Du musst nur die Namen der Spieler ausfüllen und sie bekommen eine zufällige Auswahl.
-
-                    ### Übung 1
-                    Vervollständige das Programm, indem du eine Liste von Namen ausfüllst.
-
-                    ### Übung 2
-                    Füge einen Computerspieler hinzu, der mit jedem Spieler auswählt.
-
-                    **(extra)** Gehe zurück zu deinem Code und entscheide, wer in jeder Runde gewinnt: der Computer oder die benannte Person.
+                    ### Übung
+                    In den vorherigen Leveln hast du oft dein eigenes Schere-Stein-Papier Spiel gemacht. Kann du den Code vervollständigen, indem du den `{for}`Befehl so zu verwenden, dass das Spiel funktioniert?
                 example_code: |
                     ```
-                    Auswahl = rock, paper, scissors
+                    Auswahl = Schere, Stein, Papier
                     Personen = _
                     {for} Spieler {in} Personen
                          {print} Spieler ' wählt ' Auswahl {at} {random}
@@ -4065,8 +4057,8 @@ adventures:
                     Mache den Stein, Schere, Papier Code interaktiv, in dem du den `{ask}` Befehl und eine Frage zu deinem Stein, Schere, Papier Code hinzufügst.
                 example_code: |
                     ```
-                    choice is _
-                    {print} I choose choice
+                    wahl {is} _
+                    {print} Ich wähle wahl
                     ```
     secret:
         name: Superspion
@@ -4870,8 +4862,8 @@ adventures:
                     ```
     turtle_draw_it:
         name: Zeichne!
-        default_save_name: Draw it
-        description: Draw this picture with the turtle
+        default_save_name: Zeichne
+        description: Zeichne dieses Bild mit der Schildkröte
         levels:
             1:
                 story_text: |
@@ -4981,12 +4973,12 @@ adventures:
                     </div>
             9:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Übung
+                    Mache die Zeichnungen mit der Schildkröte nach!
 
-                    **Extra** The number in brackets indicates in how many lines of code this figure can be drawn. Can you do it in the same amount of lines?
+                    **Extra** Die Zahl der Klammern zeigt an, wie viele Zeilen Code notwendig sind, die Zeichnung zu malen. Kannst du es mit derselben Anzahl von Zeilen machen?
 
-                    **Extra** Give the player a choice which country they would like to see the flag of.
+                    **Extra** Gib dem Spieler die Wahl, von welchem Land er die Flagge sehen will.
 
                     <div class="w-full flex flex-row gap-2">
                     Cross (7) <img src="https://github.com/hedyorg/hedy/assets/80678586/76e42c76-aa3f-4863-8eee-ead73c09a186" width="150">
@@ -5005,9 +4997,9 @@ adventures:
                     ```
                     land = {ask} 'Von welchem Land willst Du die Flagge sehen?'
                     {if} land {is} 'Deutschland'
-                        color_1 = Rot
-                        color_2 = Weiß
-                        color_3 = Schwarz
+                        farbe_1 = Rot
+                        farbe_2 = Weiß
+                        farbe_3 = Schwarz
                     ```
             10:
                 story_text: |
@@ -5019,10 +5011,10 @@ adventures:
                     Ampel <img src="https://github.com/hedyorg/hedy/assets/80678586/edbbb608-5ff8-4349-85a6-e47809adde43" width="100">
                     </div>
                 example_code: |
-                    Hinweis Verschachteltes Hexagon:
+                    Hinweis verschachteltes Hexagon:
                     ```
                     entfernungen = 100, 80, 60, 40, 20
-                    {for} Entfernung {in} entfernungen
+                    {for} entfernung {in} entfernungen
                     _
                     ```
 
@@ -5051,8 +5043,8 @@ adventures:
                     ```
             11:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Übung
+                    Mache die Zeichnungen mit der Schildkröte nach!
 
                     <div class="w-full flex flex-row gap-2">
                     Beehive (6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="150">
@@ -5060,92 +5052,93 @@ adventures:
                     Snowflake (13) <img src="https://github.com/hedyorg/hedy/assets/80678586/90f56bbb-86e5-448d-8aec-16f8c2c05cf2" width="150">
                     </div>
                 example_code: |
-                    Hint Beehive:
+                    Hinweis Bienenkorb:
                     ```
-                    {for} amount_of_combs {in} {range} 1 {to} _
-                        {for} walls_of_one_comb {in} {range} 1 {to} _
+                    {for} anzahl_von_waben {in} {range} 1 {to} _
+                        {for} wände_einer_wabe {in} {range} 1 {to} _
                             {forward} _
                             {turn} _
                         {forward} _
                         {turn} _
                     ```
 
-                    Hint Fan:
-                    Start out like the fan you made in level 7. Or take a peak at the hint for the beehive, because the codes are very similar.
+                    Hinweis Fächer:
+                    Beginne mit dem Fächer, den du in Level 7 gemacht hast. Oder wirf einen Blick auf den Hinweis für den Bienenkorb, weil der Code sehr ähnlich ist.
 
-                    Hint Snowflake: Start by making one 'leg' and repeat it 6 times.
+                    Hinweis Schneeflocke: Beginne, indem du einen 'Ast' machst und wiederhole es 6 Mal.
             12:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
-                    Hint: Bracelet designing program. Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
+                    ### Übung
+                    Mache die Zeichnung mit der Schildkröte nach!
+                    Hinweis: Armband Design Programm. Definiere zunächst eine Funktion **für jede Form**. Dann füge die Form so zum Armband hinzu::
                     </div>
-                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
+                    Armband Design Programm <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500"> 
                 example_code: |
+                    Hinweis Armband Design Programm
                     ```
-                    {define} draw_a_square
+                    {define} zeichne_ein_quadrat
                     _
 
-                    {color} white
+                    {color} weiss
                     {turn} -90
                     {forward} 300
                     {turn} 180
 
                     {for} i {in} {range} 1 {to} 5
-                        {color} gray
+                        {color} grau
                         {forward} 100
-                        shape = {ask} 'What kind of shape would you like next on the bracelet?'
-                        chosen_color = {ask} 'In which color?'
-                        {color} chosen_color
-                        {if} shape = 'square'
-                            {call} draw_a_square
+                        form = {ask} 'Welche Form möchtest du als nächstes mit deinem Armband haben?'
+                        gewählte_farbe = {ask} 'In welcher Farbe?'
+                        {color} gewählte_farbe
+                        {if} form = 'quadrat'
+                            {call} zeichne_ein_quadrat
                     ```
             13:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Übung
+                    Mache die Zeichnngen mit der Schildkröte nach!
 
-                    Street in different sizes <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
-                    Colored street  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
-                    Snow Storm <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
+                    Straße in verschiedenen Größen <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
+                    Gefärbte Straße  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
+                    Schneesturm <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
                 example_code: |
-                    Hint Street in different sizes
+                    Hinweis Straße in verschiedenen Größen
                     ```
-                    {define} draw_a_house {with} size
+                    {define} zeichne_ein_haus {with} größe
                     _
 
-                    {call} draw_a_house {with} 90
-                    {call} draw_a_house {with} 60
-                    {call} draw_a_house {with} 30
+                    {call} zeichne_ein_haus {with} 90
+                    {call} zeichne_ein_haus {with} 60
+                    {call} zeichne_ein_haus {with} 30
                     ```
 
-                    Hint Colored street
+                    Hinweis Farbige Straße
                     ```
-                    {define} draw_a_house {with} chosen_color
+                    {define} zeichne_ein_haus {with} gewählte_farbe
                     _
                     ```
 
-                    Hint Snow Storm
+                    Hinweis Schneesturm
                     ```
-                    {define} draw_snowflake {with} length, color
+                    {define} zeichne_schneeflocke {with} länge, farbe
                         _
 
-                    numbers = 10, 20, 30
-                    colors = _
+                    zahlen = 10, 20, 30
+                    färben = _
 
                     {for} i {in} {range} 1 {to} 5
-                        random_number = _
-                        random_color = _
-                        {call} draw_snowflake {with} random_number, random_color
-                        {color} white
-                        {turn} random_number * 5
+                        zufällige_zahl = _
+                        zufällige_farbe = _
+                        {call} zeichne_schneeflocke {with} zufällige_zahl, zufällige_farbe
+                        {color} weiß
+                        {turn} zufällige_zahl * 5
                         {forward} 80
                     ```
             14:
                 story_text: |
-                    ### Exercise
-                    Create a program that asks the player how many corners their figure should have and then creates that figure.
-                    The figure in the image is the output when the player fills in 10.
+                    ### Übung
+                    Schreibe ein Programm, das die Spieler fragt, wie viele Ecken ihre Figur haben soll und dann die Figur zeichnet.
+                    Die Figur im Bild ist die Ausgabe, wenn der Spieler eine 10 eingibt.
 
                     <div class="w-full flex flex-row gap-2">
                      <img src="https://github.com/hedyorg/hedy/assets/80678586/ee32f40e-dea1-4e7c-a813-3ef63671254b" width="300">
@@ -5153,41 +5146,41 @@ adventures:
                     </div>
                 example_code: |
                     ```
-                    {define} calculate_degrees {with} amount_of_corners
-                        _ 360 / amount_of_corners
+                    {define} berechne_winkel {with} anzahl_ecken
+                        _ 360 / anzahl_ecken
 
 
-                    {define} draw_figure {with} degrees
+                    {define} zeichne_figur {with} winkel
                         _
-                            {forward} 400/amount_of_corners
+                            {forward} 400/anzahl_ecken
                             {turn} _
 
-                    amount_of_corners = {ask} _
-                    degrees = {call} _ {with} _
+                    anzahl_ecken = {ask} _
+                    winkel = {call} _ {with} _
 
                     {call} _ {with}
                     {call} _ {with}
                     ```
             15:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
+                    ### Übung
+                    Mache die Zeichnungen mit der Schildkröte nach!
 
-                    Spiral <img src="https://github.com/hedyorg/hedy/assets/80678586/6943223c-018b-435b-a391-23723cc7a6ad" width="150">
+                    Spirale <img src="https://github.com/hedyorg/hedy/assets/80678586/6943223c-018b-435b-a391-23723cc7a6ad" width="150">
                 example_code: |
-                    Spiral
+                    Spirale
                     ```
-                    distance = 5
-                    {while} distance < 200
-                        distance = distance + 5
+                    entfernung = 5
+                    {while} entfernung < 200
+                        entfernung = entfernung + 5
                          _
                     ```
                 story_text_2: |
-                    Fan <img src="https://github.com/hedyorg/hedy/assets/80678586/cb671065-b47b-49f0-b298-dcbcd2a5e28f" width="150">
+                    Fächer <img src="https://github.com/hedyorg/hedy/assets/80678586/cb671065-b47b-49f0-b298-dcbcd2a5e28f" width="150">
                 example_code_2: |
-                    Fan
+                    Fächer
                     ```
-                    {define} draw_a_square {with} side
+                    {define} zeichne_ein_quadrat {with} seitenlänge
                     _
 
                     i = 100
@@ -5197,10 +5190,10 @@ adventures:
                         i = i - 3
                     ```
                 story_text_3: |
-                    Star <img src="https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93" width="150">
+                    Stern <img src="https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93" width="150">
                 example_code_3: |
-                    Star
-                    A star is usually drawn using 144-degree-turns. If you change this slightly to 143 degrees for example and repeat the pattern multiple times with a {while} loop you can make this figure.
+                    Stern
+                    Ein Star wird üblicherweise mit 144° Drehungen gezeichnet. Wenn du das zum Beispiel leicht in einen 143° Winkel abänderst und das Muster mehrfach mit einer {while} Schleife wiederholst, kannst du die gezeigte Figur zeichnen.
     while_command:
         name: '{while}'
         default_save_name: while_command

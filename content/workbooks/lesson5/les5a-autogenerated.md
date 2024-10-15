@@ -1,6 +1,9 @@
 # Hedy - Les 5a
 
-## Aanhalingstekens
+
+
+
+## if else
 
 Aan het einde van de les:
 
@@ -21,19 +24,19 @@ if vriend is Jasmijn print 'Hallo!' else print 'Nee, jij niet!'
 
 Wat is een conditie? Onderstreep in deze codes steeds de conditie.
 
-**◯ Opdracht**: Omcircel alle lijsten in deze code
+**◯ Opdracht**: Onderstreep de conditie
 ```hedy
 vandaag is ask 'Welke dag is het?'
 if vandaag is vrijdag print 'Ja' else print 'Nee'
 ```
 
-**◯ Opdracht**: Omcircel alle lijsten in deze code
+**◯ Opdracht**: Onderstreep de conditie
 ```hedy
 vandaag is ask 'Welke dag is het?'
 if vandaag is zaterdag print 'Geen school vandaag' else print 'Helaas wel'
 ```
 
-**◯ Opdracht**: Omcircel alle lijsten in deze code
+**◯ Opdracht**: Onderstreep de conditie
 ```hedy
 leeftijd is ask 'Hoe oud ben jij?'
 if leeftijd is 16 print 'Perfecto' else print 'Jij bent te jong!'
@@ -44,19 +47,19 @@ if leeftijd is 16 print 'Perfecto' else print 'Jij bent te jong!'
 Welke code wordt uitgevoerd? Omcirkel alleen die stukken.
 Doe alsof het vandaag vrijdag is, en jij 12 jaar bent.
 
-**◯ Opdracht**: Omcircel alle lijsten in deze code
+**◯ Opdracht**: Omcircel de code die wordt uitgevoerd
 ```hedy
 vandaag is ask 'Welke dag is het?'
 if vandaag is vrijdag print 'Ja' else print 'Nee'
 ```
 
-**◯ Opdracht**: Omcircel alle lijsten in deze code
+**◯ Opdracht**: Omcircel de code die wordt uitgevoerd
 ```hedy
 vandaag is ask 'Welke dag is het?'
 if vandaag is zaterdag print 'Geen school vandaag' else print 'Helaas wel'
 ```
 
-**◯ Opdracht**: Omcircel alle lijsten in deze code
+**◯ Opdracht**: Omcircel de code die wordt uitgevoerd
 ```hedy
 leeftijd is ask 'Hoe oud ben jij?'
 if leeftijd is 16 print 'Perfecto' else print 'Jij bent te jong!'
@@ -115,9 +118,40 @@ Er kunnen dan dus meerdere antwoorden goed zijn!
 Code:									                        Uitvoer:
 ```hedy
 docenten is Hermans, Merbis, Bagci, Senkal        ________________________________________
-docent is docenten at randomif docent is Hermans print 'Hoera!'
+docent is docenten at random                      
+if docent is Hermans print 'Hoera!'               
 
 ```
+
+**💻 Vraag**: Wat is de uitvoer van deze code? <br>
+Code:									                        Uitvoer:
+```hedy
+docenten is Hermans, Merbis, Bagci, Senkal        ________________________________________
+docent is docenten at random                      
+if docent is Hermans print 'Jammer!' else print 'Hoera!'
+
+```
+
+**💻 Vraag**: Wat is de uitvoer van deze code? <br>
+Code:									                        Uitvoer:
+```hedy
+getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10         ________________________________________
+print 'Welkom bij de bingoavond'                  ________________________________________
+getal is getallen at random                       
+if getal is 10 print 'Gewonnen!' else print 'Helaas'
+                                                  
+
+```
+
+**💻 Vraag**: Wat is de uitvoer van deze code? <br>
+Code:									                        Uitvoer:
+```hedy
+getal is ask 'Wat is jouw lievelingsgetal?'       ________________________________________
+if getal is 10 print 'Mijne ook!'                 
+                                                  
+
+```
+
 
 
 #### Opdracht 5: Programmeerwoorden
