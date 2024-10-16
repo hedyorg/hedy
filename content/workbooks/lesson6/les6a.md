@@ -4,9 +4,9 @@
     "teacher_note": "Dit is een toets voor leerlingen over level 1 t/m 5. We gebruiken wel overal de syntax van level 5, dus aanhalingstekens, en geen `echo` meer, anders wordt het verwarrend."
 }
 
-## Toets
+## SO
 
-We maken vandaag een toets op papier. Lees dit goed voor je begint:
+We maken vandaag een SO op papier. Lees dit goed voor je begint:
 
 * De toets telt voor 1/6e mee voor je cijfer 
 * We beginnen vandaag ook aan een huiswerk-opdracht. Die telt ook 1/6e mee.
@@ -14,7 +14,7 @@ We maken vandaag een toets op papier. Lees dit goed voor je begint:
 
 #### Codes herkennen
 
-Voor deze vragen moet jij stukjes code zoekn bij de juiste programmeerwoorden.
+Voor deze vragen moet jij stukjes code zoeken bij de juiste programmeerwoorden.
 Kijk goed **wat** je moet vinden, en omcirkel dat.
 
 {
