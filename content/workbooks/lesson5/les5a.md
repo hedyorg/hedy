@@ -52,6 +52,7 @@ Wat is een conditie? Onderstreep in deze codes steeds de conditie.
     "code"      :  "leeftijd is ask 'Hoe oud ben jij?'\n
                     if leeftijd is 16 print 'Perfecto' else print 'Jij bent te jong!'",
     "answer"    : "print 'Jij bent te jong!'"
+    "answer"    : "leeftijd is 18"
 }
 
 #### Opdracht 2: Omcirkel de juiste regels
