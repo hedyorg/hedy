@@ -318,6 +318,24 @@ def task_extract():
     )
 
 
+def task_generate_optional_yaml_schemas():
+    """
+    Generate yaml schemas with all fields optional
+    """
+    schemas = glob('content/*/*.schema.json')
+
+    return dict(
+        title=lambda _: 'Generate optional yaml schemas',
+        file_dep=[
+            'tools/generate-yaml-schemas.py',
+            *schemas
+        ],
+        actions=[
+            [python3, 'tools/generate-yaml-schemas.py']
+        ]
+    )
+
+
 def task_devserver():
     """Run a copy of the development server.
 
@@ -372,6 +390,7 @@ def task_backend():
     return dict(
         actions=None,
         task_dep=[
+            'generate_optional_yaml_schemas',
             'compile_babel',
             'generate_static_babel_content',
             'lark',

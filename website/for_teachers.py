@@ -7,7 +7,7 @@ import uuid
 from bs4 import BeautifulSoup
 from flask import g, make_response, request, session, url_for, redirect
 from jinja_partials import render_partial
-from flask_babel import gettext
+from gettext_with_fallback import gettext
 import jinja_partials
 
 import hedy
