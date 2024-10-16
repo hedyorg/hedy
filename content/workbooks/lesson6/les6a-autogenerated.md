@@ -1,9 +1,9 @@
 # Hedy - Toets Les 1 tot 5
 
 
-## Toets
+## SO
 
-We maken vandaag een toets op papier. Lees dit goed voor je begint:
+We maken vandaag een SO op papier. Lees dit goed voor je begint:
 
 * De toets telt voor 1/6e mee voor je cijfer
 * We beginnen vandaag ook aan een huiswerk-opdracht. Die telt ook 1/6e mee.
@@ -11,7 +11,7 @@ We maken vandaag een toets op papier. Lees dit goed voor je begint:
 
 #### Codes herkennen
 
-Voor deze vragen moet jij stukjes code zoekn bij de juiste programmeerwoorden.
+Voor deze vragen moet jij stukjes code zoeken bij de juiste programmeerwoorden.
 Kijk goed **wat** je moet vinden, en omcirkel dat.
 
 **◯ Opdracht**: Omcirkel alle **variabelen** in deze code.
@@ -33,10 +33,8 @@ weer is zonnig
 print 'het wordt vandaag ' weer
 ```
 
-<div style='page-break-before: always;'></div>
 
 **◯ Opdracht**: Omcirkel nu de stukken code waarin de waarde van een variabele **wordt gebruikt.**
-
 ```hedy
 naam is Ben
 print 'Hallo ik ben Ben'
@@ -67,8 +65,6 @@ naam is Bert
 if naam is Ernie print 'Jij bent oranje' else print 'Jij bent geel!'
 ```
 
-<div style='page-break-before: always;'></div>
-
 ### Goed of fout?
 
 **🤔 Vraag**: Is deze code goed of fout?
@@ -76,36 +72,36 @@ if naam is Ernie print 'Jij bent oranje' else print 'Jij bent geel!'
 concierge is Michael
 print Vandaag is concierge at random bij de receptie
 ```
-Antwoord: <br> 〇 Goed 〇 Fout
+Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
 klassen is 1, 2, 5, 8, 12, 24
 print De prijs valt op nummer .... klassen at random
 ```
-Antwoord: <br> 〇 Goed 〇 Fout
+Antwoord: <br> 〇 Goed<br> 〇 Fout
+
+
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
 naam is Gea
 print 'Goedemorgen ' voornaam!
 ```
-Antwoord: <br> 〇 Goed 〇 Fout
+Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
 print 'Daar staat een auto, fout geparkeerd!
 ```
-Antwoord: <br> 〇 Goed 〇 Fout
+Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
 print "De auto's staan op straat"
 print 'Dat mag niet!!'
 ```
-Antwoord: <br> 〇 Goed 〇 Fout
-
-<div style='page-break-before: always;'></div>
+Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 ### Voorspel de uitvoer
 
@@ -118,7 +114,7 @@ Denk eraan dat computers heel precies zijn, iedere spatie of punt of komma telt!
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
-weer is zonnig, regen, wolken, onweer             ________________________________________
+weer is zonnig, regen, wolken, onweer             ______________________________
 print 'Vandaag wordt het... ' weer at random!     
 
 ```
@@ -126,7 +122,7 @@ print 'Vandaag wordt het... ' weer at random!
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
-docenten is Hermans, Merbis, Bagci, Senkal        ________________________________________
+docenten is Hermans, Merbis, Bagci, Senkal        ___________________________
 docent is docenten at random                      
 if docent is Hermans print 'Jammer!'              
 
@@ -135,7 +131,7 @@ if docent is Hermans print 'Jammer!'
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
-toestand is ask Hoe gaat het met jou?             ________________________________________
+toestand is ask Hoe gaat het met jou?             ___________________________
 print 'Dus het gaat ' toestand ' met jou.'        
 
 ```
@@ -143,12 +139,10 @@ print 'Dus het gaat ' toestand ' met jou.'
 **💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
-getallen is 1, 2, 3                               ________________________________________
-print 'Welkom bij de bingoavond'                  ________________________________________
+getallen is 1, 2, 3                               ___________________________
+print 'Welkom bij de bingoavond'                  ___________________________
 getal is getallen at random                       
 if getal is 10 print 'Gewonnen!' else print 'Helaas'
-                                                  
-
 ```
 
 ### Commando's en programmeerwoorden
@@ -171,9 +165,7 @@ Antwoord: ______________________________________________________________________
 **📖 Vraag**: Wat doet het commando `______`?
 Antwoord: ____________________________________________________________________________________________________<br>
 
-<div style='page-break-before: always;'></div>
-
-Hetzelfde voor woorden. Eerst leg je twee woorden uit (variabele en lijst), dan kies je er zelf nog dire die je kan uitleggen.
+Hetzelfde voor woorden. Eerst leg je twee woorden uit (variabele en lijst), dan kies je er zelf nog drie die je kan uitleggen.
 
 **📖 Vraag**: Wat betekent het woord variabele?
 Antwoord: ____________________________________________________________________________________________________<br>
@@ -211,6 +203,5 @@ ________________________________________________________________________________
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
- <br>
+ 
 
