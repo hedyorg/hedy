@@ -29,7 +29,9 @@ print Ik ga vandaag naar vrienden at random
     "assignment": "element selection",
     "question"  : "Omcircel alle lijsten in deze code",
     "icon"      : "◯",
-    "code"      : "vandaag is maandag\nklassen is 1HC, 1HB, 1HA\nlokalen is 011, 304, 305, OLC",
+    "code"      : "vandaag is maandag\n
+                    klassen is 1HC, 1HB, 1HA\n
+                    lokalen is 011, 304, 305, OLC",
     "answer"    : "klassen en lokalen"
 }
 
