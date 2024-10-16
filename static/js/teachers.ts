@@ -549,17 +549,65 @@ export function add_account_placeholder() {
 
 export function generate_passwords() {
     if (!$('#passwords_toggle').is(":checked")) {
+        $('#passwords_toggle_text').text("Provide your own passwords")
         $('#passwords_title').show();
         $('#passwords_desc').show();
         $('#username_desc').hide();
-        $('#passwords_tip').show();
         $('#accounts_input').attr("placeholder", 'username1;password1\nusername2;password2\nusername3;password3');
     } else {
+        $('#passwords_toggle_text').text("Auto generate passwords")
         $('#passwords_title').hide();
-        $('#passwords_tip').hide();
         $('#passwords_desc').hide();
         $('#username_desc').show();
         $('#accounts_input').attr("placeholder", 'username1\nusername2\nusername3');
+    }
+}
+
+// TODO: Do we really need to use this weird setTimeout to get the whole text of the textarea?
+// Also, where should this addEventListener be?
+function update() {
+    const accounts = $('#accounts_input').val() as string;
+    const new_accounts = accounts.replace(/\t/g, ';');
+    $('#accounts_input').val(new_accounts);
+}
+
+const accounts_input = document.getElementById("accounts_input") as HTMLFormElement;
+if (accounts_input) {
+    accounts_input.addEventListener('paste', function() {
+        window.setTimeout(update, 100);
+    });
+}
+
+export function print_accounts() {
+    var divToPrint=document.getElementById("accounts_table");
+    let newWin = window.open("")!;
+    const css = `
+    <style>
+      @media print {
+        #accounts_table {
+          margin-top: 50px;
+          border-collapse: collapse;
+        }
+        #accounts_table td, th {
+          padding-left: 10px;
+          padding-right: 10px;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          font-size: 24px;
+          border: 1px solid gray;
+        }
+      }
+    </style>`;
+    newWin.document.write(divToPrint!.outerHTML + css);
+    newWin.print();
+    newWin.close();
+}
+
+function setVisible(visible: boolean) {
+    if (visible) {
+        $('#loading').removeClass('invisible');
+    } else {
+        $('#loading').addClass('invisible');
     }
 }
 
@@ -570,6 +618,9 @@ export function create_accounts(prompt: string) {
         const generatePasswords = $('#passwords_toggle').is(":checked") as boolean;
         const accounts = $('#accounts_input').val() as string;
         set_create_accounts_disabled(true);
+
+        setVisible(true);
+
         $.ajax({
             type: 'POST',
             url: '/for-teachers/create-accounts',
@@ -580,6 +631,7 @@ export function create_accounts(prompt: string) {
             }),
             contentType: 'application/json'
         }).done(function (response) {
+            setVisible(false);
             set_create_accounts_disabled(false);
             if (response.error) {
                 let msg = response.error
@@ -612,16 +664,24 @@ export function create_accounts(prompt: string) {
                 });
                 return;
             } else {
-                let blob = new Blob([response], { type: "application/octetstream" });
-                let a = document.createElement('a');
-                a.href = URL.createObjectURL(blob);
-                a.download = "student-accounts.csv";
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(a.href);
+                $('#accounts_form').addClass('hidden');
+                $('#accounts_results').removeClass('hidden');
+                $('#create_accounts_title').text('Successfully created student accounts');
+                $("tr:has(td)").remove();
+
+                let result = ""
+                for (let account of response['accounts']) {
+                    result += `
+                      <tr class="border border-gray-600">
+                        <td class="text-center px-4 py-2">${account['username']}</td>
+                        <td class="text-center px-4 py-2">${account['password']}</td>
+                      </tr>`;
+                }
+                $("#accounts_table").append(result);
+
             }
         }).fail(function (err) {
+            setVisible(false);
             set_create_accounts_disabled(false);
             try {
                 // This endpoint has to return info about the error to direct the user

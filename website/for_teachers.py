@@ -1356,9 +1356,8 @@ class ForTeachersModule(WebsiteModule):
             user = {'username': usr, 'password': pwd, 'language': g.lang, 'keyword_language': g.keyword_lang}
             store_new_student_account(self.db, user, teacher)
             self.db.add_student_to_class(body["class"], usr)
-        output = '\n'.join([f'{usr}{separator}{pwd}' for usr, pwd in accounts])
-
-        return send_file(io.BytesIO(output.encode('utf-8')), as_attachment=True, download_name='student-accounts.csv')
+        response = {"accounts": [{"username": usr, "password": pwd} for usr, pwd in accounts]}
+        return make_response(response, 200)
 
     def _extract_account_info(self, lines, separator):
         correct_lines: list[tuple[str, str]] = []
