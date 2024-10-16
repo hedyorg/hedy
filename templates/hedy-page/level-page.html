@@ -17,7 +17,7 @@
       </div>
   </div>
 {% endif %}
-<div class="mt-4 mb-1 mx-auto py-2 px-4 flex flex-col lg:flex-row gap-4 justify-start w-full max-w-screen-2xl">
+<div class="mt-4 mb-1 mx-auto py-2 px-4 lg:px-16 flex flex-col lg:flex-row gap-4 justify-start w-full max-w-screen-2xl">
   <div class="flex flex-row justify-between sm:justify-normal gap-4 hidden">
     {% if current_user_is_in_class %}
     <button id="hand_in_button" class="blue-btn-new next-tab">
@@ -99,7 +99,7 @@
   </div>
 </div>
 {% endif %}
-<div class="w-full max-w-screen-2xl mx-auto p-4" id="code_content_container">
+<div class="w-full max-w-screen-2xl mx-auto py-4 px-4 lg:px-16" id="code_content_container">
 {% block levelbody %}{% endblock %}
 </div>
 
