@@ -24,19 +24,20 @@ from .website_module import WebsiteModule, route
 class AdminModule(WebsiteModule):
     def __init__(self, db: Database):
         super().__init__("admin", __name__, url_prefix="/admin")
-
         self.db = db
 
     @route("/", methods=["GET"])
-    def get_admin_page(self):
+    @route("/", methods=["GET"], subdomain="<language>")
+    def get_admin_page(self, language="en"):
         # Todo TB: Why do we check for the testing_request here? (09-22)
         if not utils.is_testing_request(request) and not is_admin(current_user()):
             return utils.error_page(error=401, ui_message=gettext("unauthorized"))
         return render_template("admin/admin.html", page_title=gettext("title_admin"), current_page="admin")
 
     @route("/users", methods=["GET"])
+    @route("/users", methods=["GET"], subdomain="<language>")
     @requires_admin
-    def get_admin_users_page(self, user):
+    def get_admin_users_page(self, user, language="en"):
         category = request.args.get("filter", default=None, type=str)
         category = None if category == "null" else category
 
@@ -124,8 +125,9 @@ class AdminModule(WebsiteModule):
         )
 
     @route("/adventures", methods=["GET"])
+    @route("/adventures", methods=["GET"], subdomain="<language>")
     @requires_admin
-    def get_admin_adventures_page(self, user):
+    def get_admin_adventures_page(self, user, language="en"):
         all_adventures = sorted(self.db.all_adventures(), key=lambda d: d.get("date", 0), reverse=True)
         adventures = [
             {
@@ -146,8 +148,9 @@ class AdminModule(WebsiteModule):
             current_page="admin",
         )
 
+    @route("/mark-as-teacher/<username_teacher>", methods=["POST"], subdomain="<language>")
     @route("/mark-as-teacher/<username_teacher>", methods=["POST"])
-    def mark_as_teacher(self, username_teacher):
+    def mark_as_teacher(self, username_teacher, language="en"):
         user = current_user()
         # the user that wants to mark a teacher
         if (not is_admin(user) and not is_super_teacher(user)) and not utils.is_testing_request(request):
@@ -169,8 +172,9 @@ class AdminModule(WebsiteModule):
         return make_response('', 200)
 
     @route("/mark-super-teacher/<username_teacher>", methods=["POST"])
+    @route("/mark-super-teacher/<username_teacher>", methods=["POST"], subdomain="<language>")
     @requires_admin
-    def mark_super_teacher(self, user, username_teacher):
+    def mark_super_teacher(self, user, username_teacher, language="en"):
         # the user that wants to mark a teacher
         if not user and not utils.is_testing_request(request):
             return utils.error_page(error=401, ui_message=gettext("unauthorized"))
@@ -193,8 +197,9 @@ class AdminModule(WebsiteModule):
         return make_response(f"{username_teacher} is now a super-teacher.", 200)
 
     @route("/changeUserEmail", methods=["POST"])
+    @route("/changeUserEmail", methods=["POST"], subdomain="<language>")
     @requires_admin
-    def change_user_email(self, user):
+    def change_user_email(self, user, language="en"):
         body = request.json
 
         # Validations
@@ -234,8 +239,9 @@ class AdminModule(WebsiteModule):
         return make_response('', 200)
 
     @route("/getUserTags", methods=["POST"])
+    @route("/getUserTags", methods=["POST"], subdomain="<language>")
     @requires_admin
-    def get_user_tags(self, user):
+    def get_user_tags(self, user, language="en"):
         body = request.json
         user = self.db.get_public_profile_settings(body["username"].strip().lower())
         if not user:
@@ -243,8 +249,9 @@ class AdminModule(WebsiteModule):
         return make_response({"tags": user.get("tags", [])}, 200)
 
     @route("/updateUserTags", methods=["POST"])
+    @route("/updateUserTags", methods=["POST"], subdomain="<language>")
     @requires_admin
-    def update_user_tags(self, user):
+    def update_user_tags(self, user, language="en"):
         body = request.json
         db_user = self.db.get_public_profile_settings(body["username"].strip().lower())
         if not user:

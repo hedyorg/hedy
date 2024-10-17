@@ -23,8 +23,9 @@ class FeedbackModule(WebsiteModule):
         return cat in self.valid_categories
 
     @route("/", methods=["POST"])
+    @route("/", methods=["POST"], subdomain="<language>")
     @requires_teacher
-    def teacher_feedback(self, user):
+    def teacher_feedback(self, user, language="en"):
         body = request.form
         # Request validation
         if not body.get("message") or not body.get("category"):
@@ -53,8 +54,9 @@ class FeedbackModule(WebsiteModule):
         return response
 
     @route("/", methods=["GET"])
+    @route("/", methods=["GET"], subdomain="<language>")
     @requires_super_teacher
-    def get_feedback(self, user):
+    def get_feedback(self, user, language="en"):
         category = request.args.get('category') or ""
         if category and not self.is_valid_category(category):
             return gettext('feedback_message_error'), 400

@@ -32,8 +32,9 @@ class UserActivityModule(WebsiteModule):
         self.db = db
 
     @route("/", methods=["POST"])
+    @route("/", methods=["POST"], subdomain="<language>")
     @requires_login
-    def index(self, user):
+    def index(self, user, language="en"):
         # /tracking activity/
         user = self.db.user_by_username(user["username"])
         if not user:
