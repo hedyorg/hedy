@@ -1778,3 +1778,211 @@ workbooks:
             text      : "Waarom vond je juist die opdracht niet leuk?"
             lines     : 5
 
+    -   level: '4'
+        intro: |-
+          
+          ## Aanhalingstekens
+          
+          Aan het einde van de les:
+          
+          * snap jij waarom aanhalingstekens nodig zijn in programmeren.
+          * kan jij aanhalingstekens op de goede plek in code zetten.
+          * kan jij foutmeldingen over aanhalingstekens goed lezen.
+        exercises:
+
+        - type      : text
+          contents  : |-
+            ### Aanhalingstekens
+            
+            We hebben geleerd om aanhalingstekens te gebruiken, als iets letterlijk zo in beeld moet komen.
+            We gebruiken aanhalingstekens bij `print` en bij `ask`.
+          code      : |-
+            vriend is ask 'Hoe heet jij?'
+            print 'Leuk! Ik ga naar de stad met ' vriend
+
+        - type      : text
+          contents  : |-
+            #### Opdracht 1: Maak de code af.
+            Deze opdrachten doe je in twee stappen:
+            1. Zet op de juiste plekken aanhalingstekens in de code.
+            2. Staat alles goed? Voorspel dan wat de uitvoer van de code is.
+
+        - type      : output
+          code      : |-
+            print Hallo allemaal!
+            print Welkom bij Hedy
+          answer    : |-
+            Hallo allemaal
+            Welkom bij Hedy
+          lines     : 2
+
+        - type      : text
+          contents  : |-
+            Vergeet niet deze opdrachten in twee stappen te doen, eerst de aanhalingstekens links.
+            Dan de code rechts!
+
+        - type      : output
+          code      : |-
+            naam is Hermans
+            lokaal is 305
+            print Vandaag hebben we les van naam in lokaal!
+          answer    : "print Vandaag hebben we les van Hermans in 305!"
+          lines     : 1
+
+        - type      : output
+          code      : |-
+            docenten is Hermans, Merbis, Bagci, Senkal
+            print De docent vandaag is docenten at random.
+          answer    : "De docent vandaag is Hermans"
+          lines     : 1
+
+        - type      : output
+          code      : |-
+            weer is zonnig, regen, wolken, onweer
+            print Wat is het lekker weer vandaag!
+          answer    : "Wat is het lekker weer vandaag!"
+          lines     : 1
+
+        - type      : output
+          code      : |-
+            print Wat is het lekker weer vandaag!
+            naam is Bassie
+          answer    : "Wat is het lekker weer vandaag!"
+          lines     : 1
+
+        - type      : text
+          contents  : |-
+            #### Opdracht 2: Foutje?
+            Lees de codes goed! Welke zijn er goed of fout.
+
+
+        - type      : MC-code
+          options   : ["Goed" , "Fout"]
+          code      :  "print 'Daar lopen twee lama's'"
+          answer    : "Fout. Er staat een aanhalingsteken tussen de enkele aanhalingstekens."
+
+
+        - type      : MC-code
+          options   : ["Goed" , "Fout"]
+          code      : "print 'De lama wandelt op straat"
+          answer    : "Fout. De aanhalingstekens moeten altijd in paren gebruikt worden."
+
+        - type      : MC-code
+          options   : ["Goed" , "Fout"]
+          code      : |-
+                print "Daar lopen twee oma's"
+          answer    : "Goed! Als je twee aanhalingstekens gebruikt dan kan je wel oma's schrijven."
+
+        - type      : MC-code
+          options   : ["Goed" , "Fout"]
+          code      : |-
+            print 'De lama wandelt op straat'
+            print "Wat een avontuur"
+          answer    : "Goed. Je mag aanhalingstekens door elkaar gebruiken, als ze per regel maar hetzelfde zijn!"
+
+        - type      : text
+          contents  : |-
+            #### Ask
+            Vergeet niet dat je ook bij `ask` aanhalingstekens gebruikt!
+            
+            #### Opdracht 3: Foutje?
+            Lees de codes goed! Welke zijn er goed of fout.
+
+        - type      : MC-code
+          options   : ["Goed" , "Fout"]
+          code      : "ask 'Daar lopen twee konijnen'"
+          answer    : "Fout. Vergeet niet bij ask een variabele te gebruiken!"
+
+        - type      : MC-code
+          options   : ["Goed" , "Fout"]
+          code      : "naam is ask 'Hoe heet jij?'"
+          answer    : "Fout. Aanhalingstekens moeten altijd in paren gebruikt worden."
+
+
+        - type      : MC-code
+          options   : ["Goed" , "Fout"]
+          code      : |-
+            aantal is ask "Hoeveel capibara's lopen daar?"
+          answer    :  "Goed."
+
+        - type      : MC-code
+          options   : ["Goed" , "Fout"]
+          code      : |-
+            aantal is ask "Hoeveel capibara's lopen daar?"
+            print 'Dat zijn er aantal'
+          answer    : "Fout. Het woord aantal wordt geprint en niet de variabele"
+
+
+        - type      : text
+          contents  : |-
+            #### Opdracht 4: Schrijf de code
+            Kijk goed naar de uitvoer, en schrijf er een passende code bij.
+
+        - type: input
+          answer: |-
+            print 'Welkom bij de bingoavond'
+            print 'Hier komt het eerste getal!'
+          output: |-
+            Welkom bij de bingoavond
+            Hier komt het eerste getal...!
+
+        - type: input
+          answer: |-
+            print 'We gaan vanavond naar de film.'
+            film is ask 'Waar heb jij zin in?'
+          output: |-
+            We gaan vanavond naar de film.
+            Waar heb jij zin in?
+
+
+        - type      : text
+          contents  : |-
+            #### Opdracht 5: Programmeerwoorden
+            We hebben deze les weer nieuwe programmeerwoorden geleerd! Leg ze uit je eigen woorden.
+
+
+        - type      : define
+          word      : aanhalingstekens
+          answer    : "Hoge komma's, die je gebruikt als je iets letterlijk wilt printen."
+          lines     : 1
+
+        - type      : define
+          word      : het om aanhalingstekens te gebruiken in Hedy?
+          answer    : "Je gebruikt aanhalingstekens wanneer iets door de computer precies zo moet worden geprint."
+          lines     : 1
+
+
+        - type      : text
+          contents  : |-
+            #### Opdracht 6: Codes
+            We hebben ook nieuwe codes geleerd in level 4.
+
+        - type      : define
+          word      : het commando `clear`?
+          answer    : "Maakt het scherm leeg"
+          lines     : 1
+
+        - type      : define
+          word      : het commando `color`?
+          answer    : "Verandert de kleur van de turtle"
+          lines     : 1
+
+        - type      : text
+          contents  : |-
+            #### Wat vond jij?
+
+        - type      : question
+          text      : "Wat was de leukste opdracht van dit level?"
+          lines     : 1
+
+        - type      : question
+          text      : "Waarom vond je juist die opdracht leuk?"
+          lines     : 5
+
+        - type      : question
+          text      : "Welke opdracht was het minst leuk?"
+          lines     : 1
+
+        - type      : question
+          text      : "Waarom vond je juist die opdracht niet leuk?"
+          lines     : 5
