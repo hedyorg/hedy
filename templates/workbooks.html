@@ -1,0 +1,58 @@
+{% extends "auth.html" %}
+
+{% block full_width_content %}
+    <div class="bg-blue-200 mb-4">
+        <div class="py-4 flex items-center w-full copy-container mx-auto">
+            <div class="tracking-wide text-xl font-extralight">{{ page_title }}</div>
+        </div>
+    </div>
+    <div class="copy-container text-business-copy" id="teacher_documentation">
+        <div class="flex gap-8">
+            <div class="flex-1">
+                {% for level in workbooks.levels %}
+
+                    {% if level.intro %}
+                        <p>{{ level.intro|commonmark }}</p>
+                    {% endif %}
+
+                    {% for exercise in level.exercises %}
+                        {% if exercise.contents %}
+                            <p>{{ exercise.contents|commonmark }}</p>
+
+                        {% else %}
+
+                            <h4 id="{{exercise.title|slugify}}">{{ exercise.icon}} {{ exercise.title }}</h4>
+                            {{ exercise.text|commonmark }}
+
+                            <table>
+                                <tr>
+                                    <td width='750px'>
+                                        {% if exercise.code %}
+                                        <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
+                                            <pre class="common-mistakes" level="{{ level.level }}" style="font-size: 0.95em;">{{ exercise.code }}</pre>
+                                        </div>
+                                        {% endif %}
+                                    </td>
+                                    <td width='300px'>
+                                        <!-- questions have lines OR options -->
+                                        {% if exercise.lines %}
+                                            {% for line in exercise.lines %}
+                                                {{ line }} <br>
+                                            {% endfor %}
+                                        {% endif %}
+                                        {% if exercise.options %}
+                                            {{ exercise.options }} <br>
+                                        {% endif %}
+                                    </td></tr>
+                            </table>
+                        {% endif %}
+
+
+
+                    {% endfor %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

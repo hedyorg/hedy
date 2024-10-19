@@ -90,6 +90,32 @@ class ForTeachersModule(WebsiteModule):
                 welcome_teacher=welcome_teacher,
             ))
 
+    @route("/workbooks/<level>", methods=["GET"], defaults={'level': '1'})
+    def get_workbooks(self, level):
+        content = hedyweb.PageTranslations("workbooks").get_page_translations(g.lang)
+        workbooks = content['workbooks']
+        line = '_' * 50
+
+        for l in workbooks['levels']:
+            for exercise in l['exercises']:
+                if exercise['type'] == 'output':
+                    exercise['icon'] = '💻'
+                    exercise['text'] = '**Vraag**: Wat is de uitvoer van deze code?'
+                    exercise['title'] = 'Output'
+                    exercise['lines'] = [line for x in range(exercise['lines'])]
+
+                elif exercise['type'] == 'MC-code':
+                    exercise['title'] = 'Kies'
+                    exercise['icon'] = '🤔'
+                    exercise['text'] = '**Vraag**: Is deze code goed of fout?'
+                    exercise['options'] = '〇  ' + '〇  '.join(exercise['options'])
+
+        return render_template("workbooks.html",
+                               current_page="teacher-manual",
+                               page_title='Workbooks',
+                               workbooks=workbooks)
+
+
     @route("/manual", methods=["GET"], defaults={'section_key': 'intro'})
     @route("/manual/<section_key>", methods=["GET"])
     def get_teacher_manual(self, section_key):
