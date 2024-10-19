@@ -1329,6 +1329,202 @@ workbooks:
     -   level: '2'
         intro: |-
           ### Variabelen
+          
+          Aan het einde van de les kun jij:
+          
+          * Iets opslaan in een variabele
+          * Een verhaal en tekening maken waarin je een variabele gebruikt
+        exercises:
+        -   type      : text
+            contents  : |-
+              ### Variabele opslaan en gebruiken
+              
+              Je hebt net op het bord de `is` opdracht gezien. 
+              Een `is` opdracht slaat iets op in de computer, en geeft het een naam. We noemen dat een variabelen.
+              Wat in de variabele is opgeslagen noemen we de waarde van de variabele.
+            code: |-
+              naam is Mo
+              print naam
+        -   type      : text
+            contents  : |-
+              #### Opdracht 1: Omcirkel het juiste stukje code
+
+        - type      : circle
+          goal      : variabelen
+          code      : |-
+            naam is Hedy
+            print Hallo naam
+            leeftijd is 17
+            print Jij bent leeftijd jaar oud
+          answer    :  "Op alle regels"
+
+        - type      : circle
+          goal      : plekken waar een variabele **wordt ingesteld.**
+          code      : |-
+            naam is Hedy
+            print Hallo naam
+            leeftijd is 17
+            print Jij bent leeftijd jaar oud
+          answer    : "Op regel 1 en 3"
+
+        - type      : circle
+          goal      : plekken waar een variabele **wordt gebruikt.**
+          code      : |-
+            naam is Hedy
+            print Hallo naam
+            leeftijd is 17
+            print Jij bent leeftijd jaar oud
+          answer    : "Op regel 2 en 4"
+
+        - type      : text
+          contents  : |-
+            #### Opdracht 2: Voorspel de uitvoer           
+            Tip: Vind je het lastig om de uitvoer te voorspellen? Gebruik dan dit stappenplan:
+            
+            1. Omcirkel de plek waar een variabele wordt ingesteld
+            2. Omcirkel de plek waar de variabele wordt gebruikt
+            3. Trek een lijn tussen deze plekken
+            4. Zet de waarde (aan de rechterkant van de `is` op de plek van het gebruik).
+
+# TODO Voorbeeldje?
+
+        - type      : output
+          code      : |-
+            naam is Mo
+            print Goed bezig naam!
+          answer    : "Goed bezig Mo!"
+          lines     : 1
+
+        - type      : output
+          code      : |-
+            naam is Mo
+            print Goed bezig Mo!
+          answer    : "Goed bezig Mo!"
+          lines     : 1
+
+        - type      : output
+          code      : |-
+            voornaam is Layla
+            print Goedemorgen naam!
+          answer    : "Goedemorgen Layla!"
+          lines     : 1
+
+        - type      : text
+          contents  : |-
+            #### Opdracht 3: Foutje?
+            Lees de codes goed! Welke zijn er goed of fout.
+
+        - type      : MC-code
+          options   : ["Goed" , "Fout"]
+          code      : |-
+            achternaam is Jansen
+            print Goedemorgen naam!
+          answer    : "Goed"
+          
+        - type      : MC-code
+          options   : ["Goed" , "Fout"]
+          code      : |-
+            naam is
+            print Goedemorgen naam!
+          answer    : "Fout. naam wordt niet ingesteld"
+
+          
+        - type      : MC-code
+          options   : ["Goed" , "Fout"]
+          code      : |-
+            naam is Jansen
+            print Goedemorgen meneer naam!
+            print Hallo meneer naam!
+          answer    : "Goed. Je mag een variabele meer dan eens gebruiken"
+
+
+        - type      : text
+          contents  : |-
+
+            ### Invoer vragen
+            
+            Alleen tekst opslaan is nog niet krachtig. In level 1 hebben we de code `ask` gezien.
+            
+            Die code mag je nu combineren met een `is`. Dat gaat zo:
+          code      : |-
+            naam is ask Hoe heet jij?
+            
+        - type      : text
+          contents  : |-
+            ### Invoer laten zien
+
+            Je kan nu gewoon met een `print` het antwoord laten zien, zonder `echo`.
+          code      : |-
+            naam is ask Hoe heet jij?
+            print dus jij heet: naam
+            
+        - type      : text
+          contents  : |-
+            Als iemand die Maan heet deze code zou gebruiken, dan wordt de uitvoer: `dus jij heet: Maan`
+
+            #### Opdracht 4: Voorspel de uitvoer            
+            Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingevuld.
+
+        - type      : output
+          code      : |-
+            naam is ask Hoe heet jij?
+            print dus jij heet: naam
+          answer    : "Dus jij heet: **naam**"
+          lines     : 1
+
+
+        - type      : output
+          code      : |-
+            toestand is ask Hoe gaat het met jou?
+            print Dus het gaat toestand met jou
+          answer    : "Dus het gaat **goed** met jou"
+          lines     : 1
+
+        - type      : text
+          contents  : |-
+            #### Opdracht 5: Programmeer-woorden
+            We hebben deze les weer nieuwe woorden geleerd! Leg ze uit je eigen woorden.
+
+
+        - type      : define
+          word      : variabele
+          answer    : "Een naam die je geeft aan iets, bijv voornaam of leeftijd."
+          lines     : 1
+
+        - type      : define
+          word      : waarde
+          answer    : "Wat je opslaat in een variabele, bijv Henk of 12."
+          lines     : 1
+
+
+        - type      : define
+          word      : instellen
+          answer    : "Het instellen van een variabele met een is code"
+          lines     : 1
+
+        - type      : define
+          word      : interactief
+          answer    : "Een programma waarbij een gebruiker invoer kan geven."
+          lines     : 1
+
+        - type      : text
+          contents  : |-
+            #### Opdracht 6: Codes
+            We hebben nieuwe codes geleerd: `is`, `is ask` samen. Wat doen die? Leg het uit in je eigen woorden.
+
+
+        - type      : define
+          word      : het commando `is`
+          answer    : "Waarde (rechts van de is) opslaan in een variabele (links van de is)"
+          lines     : 1
+
+        - type      : define
+          word      : het commando `is ask`
+          answer    : "Vraagt om invoer van de gebruiker en die opslaan in de variabele links van de is."
+          lines     : 1
+
+
+
     -   level: '3'
         intro: |-
           ### Lijsten en willekeurigheid
@@ -1582,14 +1778,3 @@ workbooks:
             text      : "Waarom vond je juist die opdracht niet leuk?"
             lines     : 5
 
-
-#
-##          - type      : text
-##            contents  : |-
-#
-#
-##          - type      : output
-##            code      : |-
-##            answer    :
-##            lines     : 1
-#
