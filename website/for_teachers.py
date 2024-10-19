@@ -90,46 +90,57 @@ class ForTeachersModule(WebsiteModule):
                 welcome_teacher=welcome_teacher,
             ))
 
-    @route("/workbooks/<level>", methods=["GET"], defaults={'level': '1'})
+    @route("/workbooks/<level>", methods=["GET"])
     def get_workbooks(self, level):
         content = hedyweb.PageTranslations("workbooks").get_page_translations(g.lang)
         workbooks = content['workbooks']
         line = '_' * 50
+        workbook_for_level = workbooks['levels'][int(level)-1]
 
-        for l in workbooks['levels']:
-            for exercise in l['exercises']:
-                if exercise['type'] == 'output':
-                    exercise['title'] = 'Output'
-                    exercise['icon'] = '💻'
-                    exercise['text'] = '**Vraag**: Wat is de uitvoer van deze code?'
-                    exercise['lines'] = [line for x in range(exercise['lines'])]
+        for exercise in workbook_for_level['exercises']:
+            if exercise['type'] == 'output':
+                exercise['title'] = 'Output'
+                exercise['icon'] = '💻'
+                exercise['text'] = '**Vraag**: Wat is de uitvoer van deze code?'
+                exercise['lines'] = [line for x in range(exercise['lines'])]
 
-                elif exercise['type'] == 'input':
-                    exercise['title'] = 'Input'
-                    exercise['icon'] = '🧑‍💻'
-                    exercise['text'] = '**Vraag**: Welke code hoort bij deze uitvoer?'
-                    a = len(exercise['answer'].split('\n'))
+            if exercise['type'] == 'circle':
+                exercise['title'] = 'Aanwijzen'
+                exercise['icon'] = '◯'
+                exercise['text'] = f'**Vraag**: Omcirkel {exercise['goal']} in deze code:'
 
-                    exercise['lines'] = [line for x in range(a)]
+            elif exercise['type'] == 'input':
+                exercise['title'] = 'Input'
+                exercise['icon'] = '🧑‍💻'
+                exercise['text'] = '**Vraag**: Welke code hoort bij deze uitvoer?'
+                a = len(exercise['answer'].split('\n'))
+                exercise['lines'] = [line for x in range(a)]
 
-                elif exercise['type'] == 'MC-code':
-                    exercise['title'] = 'Kies'
-                    exercise['icon'] = '🤔'
-                    exercise['text'] = '**Vraag**: Is deze code goed of fout?'
-                    exercise['options'] = '〇  ' + '  〇  '.join(exercise['options'])
+            elif exercise['type'] == 'MC-code':
+                exercise['title'] = 'Kies'
+                exercise['icon'] = '🤔'
+                exercise['text'] = '**Vraag**: Is deze code goed of fout?'
+                # let op! op een dag willen we misschien wel ander soorten MC, dan moet
+                # deze tekst anders
+                exercise['options'] = '〇  ' + '  〇  '.join(exercise['options'])
 
-                elif exercise['type'] == 'define':
-                    exercise['title'] = 'Definiëer'
-                    exercise['icon'] = '💻' "📖"
-                    exercise['text'] = f'**Vraag**: Wat betekent {exercise['word']}'
-                    exercise['lines'] = [line for x in range(exercise['lines'])]
+            elif exercise['type'] == 'define':
+                exercise['title'] = 'Definiëer'
+                exercise['icon'] = '📖'
+                exercise['text'] = f'**Vraag**: Wat betekent {exercise['word']}'
+                exercise['lines'] = [line for x in range(exercise['lines'])]
 
+            elif exercise['type'] == 'question':
+                exercise['title'] = 'Open vraag'
+                exercise['icon'] = '✍️'
+                exercise['lines'] = [line for x in range(exercise['lines'])]
 
 
         return render_template("workbooks.html",
                                current_page="teacher-manual",
+                               level=level,
                                page_title=f'Workbook {level}',
-                               workbooks=workbooks)
+                               workbook=workbook_for_level)
 
 
     @route("/manual", methods=["GET"], defaults={'section_key': 'intro'})

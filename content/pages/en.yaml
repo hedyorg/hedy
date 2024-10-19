@@ -1188,6 +1188,7 @@ teacher-guide:
 
 workbooks:
     levels:
+    # TODO Les 1 is nog maar half af!!
     -   level: '1'
         intro: |-
           ### Printen en invoer
@@ -1325,6 +1326,9 @@ workbooks:
             word      : het commando `echo`
             answer    : "Herhaalt de invoer van de gebruiker."
             lines     : 1
+    -   level: '2'
+        intro: |-
+          ### Variabelen
     -   level: '3'
         intro: |-
           ### Lijsten en willekeurigheid
@@ -1344,45 +1348,248 @@ workbooks:
             code: |-
               vrienden is Mo, Layla, Denny
               print Ik ga vandaag naar vrienden at random
+
+          - type : text
+            contents  : |-
+              #### Opdracht 1: Omcirkel het juiste stukje code              
+
+          - type      : circle
+            goal      : lijsten
+            code      : |-
+                          vandaag is maandag
+                          klassen is 1HC, 1HB, 1HA
+                          lokalen is 011, 304, 305, OLC
+            answer    : "klassen en lokalen"
+
+          - type      : circle
+            goal      : plek(ken) waar tekst uit een lijst wordt gebruikt
+            code      : |-
+                        klassen is 1HC, 1HB, 1HA
+                        print vandaag heeft klassen at random vrij!
+            answer    : "Op het einde van regel 2"
+
+          - type      : text
+            contents  : |-
+              #### Opdracht 2: Voorspel de uitvoer
+              Vind je het lastig? Gebruik dan weer het stappenplan om variabele-uitvoer te voorspellen.
+              
+              1. Omcirkel de plek waar de lijst wordt ingesteld
+              2. Omcirkel de plek waar de lijst wordt gebruikt
+              3. Trek een lijn tussen deze plekken
+              4. Bij een `at` `random` mag je zelf willekeurig iets uit de lijst kiezen.
+
+          -   type      : output
+              code      : |-
+                docenten is Hermans, Merbis, Bagci, Senkal
+                print Vandaag les van docenten at random!
+              answer    : Vandaag les van **keuze uit docenten**
+              lines     : 1
+
+          -   type      : output
+              code      : |-
+                docenten is Hermans, Merbis, Bagci, Senkal
+                print De docent vandaag is Hermans.
+              answer    : De docent vandaag is Hermans.
+              lines     : 1
+
+          -   type      : output
+              code      : |-
+                weer is zonnig, regen, wolken, onweer
+                print Wat is het lekker weer vandaag!
+              answer    : Wat is het lekker weer vandaag!
+              lines     : 1
+
+          - type      : text
+            contents  : |-
+              #### Opdracht 3: Foutje?
+              Lees de codes goed! Welke zijn er goed of fout.
+
+          -   type      : MC-code
+              options   : ["Goed" , "Fout"]
+              code      : |-
+                weer is zonnig, regen, wolken, onweer
+                print Bah! De computer loopt weer vast.
+              answer    : "Fout. Je kan een lijst niet printen."
+
+          -   type      : MC-code
+              options   : ["Goed" , "Fout"]
+              code      : |-
+                docenten is Hermans
+                print Vandaag alweer docenten at random
+              answer    : "Fout, docenten is geen lijst"
+
+          -   type      : MC-code
+              options   : ["Goed" , "Fout"]
+              code      : |-
+                    docenten is onweer, regen, ijzel
+                    print Vandaag alweer docenten at random!
+              answer    : "Goed, de naam hoeft niet te kloppen voor de computer."
+          - type      : text
+            # [Teacher] Dit zijn alle avonturen zonder `add to` en `remove from`.[/Teacher]
+            # Misschien ook nog even mooier weergeven?
+            contents  : |-
+              ## Avonturen
+
+              Dit is een goed moment voor deze avonturen:
+              Introductie
+              Willekeurig
+              Dobbelsteen
+              Steen, papier, schaar
+              Muziek
+              Waarzegger
+              Restaurant
+              Spookhuis
+              Afwas?
+
+          - type      : text
+            contents  : |-
+              ### Lijsten aanpassen
+              
+              Tot nu toe hebben we lijsten steeds aan het begin van het programma ingesteld.
+            code  : |-              
+              antwoorden is ja, nee, misschien
+              print Het antwoord is antwoorden at random
+
+          - type      : text
+            contents  : |-
+              Maar soms wil je dat de gebruiker van een programma ook opties kan toevoegen.
+              Dat doe je met een `add` en een `to` commando. Je kan ook iets uit een lijst verwijderen, met `remove` en `from`.
+
+            code  : |-              
+
+              dieren is 🐿, 🦔, 🦇, 🦉
+              dier is ask Wat zou het kunnen zijn?
+              add dier to dieren
+              print het was een dieren op willekeurig
+
+
+          - type      : text
+            contents  : |-
+             #### Opdracht 4: Goed of fout?
+
+          -   type      : MC-code
+              options   : ["Goed" , "Fout"]
+              code      : |-
+                    letters is a,b,c,d
+                    remove a to letters
+              answer    :  "Fout. Bij remove hoort from, niet to."
+
+          -   type      : MC-code
+              options   : ["Goed" , "Fout"]
+              code      : |-
+                    eten is pizza, friet, kapsalon
+                    remove kroket from eten
+              answer    :   "Goed, je mag iets verwijderen dat niet in de lijst zit."
+
+          -   type      : MC-code
+              options   : ["Goed" , "Fout"]
+              code      : |-
+                    eten is pizza, friet, kapsalon
+                    add pizza to eten
+              answer    :   Goed, je mag iets toevoegen dat al in de lijst zit.
+
+          - type      : text
+            contents  : |-
+              #### Opdracht 5: Schrijf de code
+              Kijk goed naar de uitvoer, en schrijf er een passende code bij.
+              **Zorg ervoor dat er steeds minstens een willekeurige keuze in je programma zit, dus niet alleen een print!**
+
           - type: input
             answer: |-
               getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
               print Welkom bij de bingoavond
               print De drie geluksnummers zijn:
               print nummers at random en print nummers at random en print nummers at random
-            output: |- 
+            output: |-
               Welkom bij de bingoavond<br>
               De drie geluksnummers zijn:<br>
               5 en 3 en 10
 
+          - type: input
+            answer: |-
+              films is Avengers, Barbie, Inside Out
+              print We gaan vanavond naar de film.
+              We kiezen: films at random
+            output: |-
+              We gaan vanavond naar de film.<br>
+              We kiezen: Inside Out
 
-# TODO Les 1 is nog maar half af!!
+          - type      : text
+            contents  : |-
+              #### Opdracht 6: Programmeerwoorden
+              We hebben deze les weer nieuwe programmeerwoorden geleerd! Leg ze uit je eigen woorden.
+
+          -   type      : define
+              word      : lijst
+              answer    :  "Een variabele waarin meerdere waardes kunnen worden opgeslagen"
+              lines     : 1
+
+          -   type      : define
+              word      : willekeurig
+              answer    : "Iets dat door de computer wordt uitgekozen."
+              lines     : 1
+
+          -   type      : define
+              word      : toevoegen
+              answer    : "Iets in een lijst erbij zetten"
+              lines     : 1
+
+          - type      : text
+            contents  : |-
+              #### Opdracht 7: Codes
+
+              De code `is` is in dit level veranderd, en we hebben ook nieuwe codes geleerd.
+              Wat doen die? Leg het uit in je eigen woorden.
 
 
+          -   type      : define
+              word      : "het commando `is` (Let op: `is` kan dus meerdere dingen doen!)"
+              answer    : "Waarde (rechts van de is) opslaan in een variabele of lijst (links van de is)"
+              lines     : 1
 
-#        -   type      : text
-#            contents  : |-
+          -   type      : define
+              word      : "het commando `add to` "
+              answer    : "Voeg iets aan een lijst toe. Het element om toe te voegen staat tussen `add` en `to`, en de lijst staat erachter."
+              lines     : 1
+
+          -   type      : define
+              word      : "het commando `remove from` "
+              answer    : "Verwijdert iets uit een lijst. Het element om te verwijderen staat tussen `add` en `to`, en de lijst staat erachter."
+              lines     : 1
+
+          -   type      : define
+              word      : "het commando `at random` "
+              answer    : "Kiest een willekeurig element uit de lijst."
+              lines     : 1
+
+          - type      : text
+            contents  : |-
+              #### Wat vond jij?
+
+          - type      : question
+            text      : "Wat was de leukste opdracht van dit level?"
+            lines     : 1
+
+          - type      : question
+            text      : "Waarom vond je juist die opdracht leuk?"
+            lines     : 5
+
+          - type      : question
+            text      : "Welke opdracht was het minst leuk?"
+            lines     : 1
+
+          - type      : question
+            text      : "Waarom vond je juist die opdracht niet leuk?"
+            lines     : 5
+
+
 #
-#        -   type      : text
-#            contents  : |-
-
-
-#        -   type      : text
-#            contents  : |-
+##          - type      : text
+##            contents  : |-
 #
-#        -   type      : text
-#            contents  : |-
-
-
-#        -   type      : text
-#            contents  : |-
 #
-#        -   type      : text
-#            contents  : |-
-
-
-#        -   type      : text
-#            contents  : |-
+##          - type      : output
+##            code      : |-
+##            answer    :
+##            lines     : 1
 #
-#        -   type      : text
-#            contents  : |-
