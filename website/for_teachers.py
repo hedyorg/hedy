@@ -135,13 +135,11 @@ class ForTeachersModule(WebsiteModule):
                 exercise['icon'] = '✍️'
                 exercise['lines'] = [line for x in range(exercise['lines'])]
 
-
         return render_template("workbooks.html",
                                current_page="teacher-manual",
                                level=level,
                                page_title=f'Workbook {level}',
                                workbook=workbook_for_level)
-
 
     @route("/manual", methods=["GET"], defaults={'section_key': 'intro'})
     @route("/manual/<section_key>", methods=["GET"])
