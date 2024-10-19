@@ -1190,7 +1190,6 @@ workbooks:
     levels:
     -   level: '1'
         intro: |-
-          
           ### Printen en invoer
 
           Aan het einde van de les kun jij:
@@ -1201,14 +1200,14 @@ workbooks:
         exercises:
         -   type      : text
             contents  : |-
-                        ### Opdrachten
-                        Een computer doet niet zomaar zelf iets, je moet een computer altijd een opdracht geven. Zo'n opdracht heet commando. Om code uit te printen, gebruiken we de code `print`.
-              
-                        ### Tekst printen    
-                        Je hebt net op het bord de `print` opdracht gezien.
-                        Een `print` opdracht print een woord uit, als het tussen aanhalingstekens staat. Bijvoorbeeld zo `print hallo`.
+              ### Opdrachten
+              Een computer doet niet zomaar zelf iets, je moet een computer altijd een opdracht geven. Zo'n opdracht heet commando. Om code uit te printen, gebruiken we de code `print`.
+    
+              ### Tekst printen    
+              Je hebt net op het bord de `print` opdracht gezien.
+              Een `print` opdracht print een woord uit, als het tussen aanhalingstekens staat. Bijvoorbeeld zo `print hallo`.
 
-                        #### Opdracht 1: Voorspel de uitvoer
+              #### Opdracht 1: Voorspel de uitvoer
         -   type      : output
             code      : "print Hallo allemaal"
             answer    : "Hallo allemaal"
@@ -1221,9 +1220,9 @@ workbooks:
 
         -   type      : text
             contents  : |-
-                        #### Opdracht 2: Foutje?
-                        Soms sluipt er een foutje in je code. Dat is niet erg, maar Hedy kan je code dan niet goed lezen.
-                        Welke van deze code zijn fout, denk jij?
+              #### Opdracht 2: Foutje?
+              Soms sluipt er een foutje in je code. Dat is niet erg, maar Hedy kan je code dan niet goed lezen.
+              Welke van deze code zijn fout, denk jij?
 
         -   type      : MC-code
             options   : ["Goed" , "Fout"]
@@ -1232,42 +1231,42 @@ workbooks:
 
         -   type      : MC-code
             options   : ["Goed" , "Fout"]
-            code      : "prnt print"
+            code      : "print print"
             answer    : "Goed"
 
         -   type      : text
             contents  : |-                                   
-                          ### Invoer vragen
-                          
-                          Alleen tekst is een beetje saai. Je kan in Hedy ook om _invoer_ vragen. Invoer is tekst die je aan de computer geeft.
-                          De computer onthoudt die tekst en kan die later weer aan jou laten zien.
-                          Deze code toont de vraag 'Hoe heet jij?'
-                          
-                          ```hedy
-                          ask Hoe heet jij?
-                          ```
-                          
-                          ### Invoer laten zien
-                          
-                          Alleen een ask slaat het antwoord op, maar laat het niet zien. Daarvoor heb je de opdracht `echo` nodig. Die laat het antwoord zien op het einde van de zin.
-                          Bijvoorbeeld zo:
-                          
-                          ```hedy
-                          ask Hoe heet jij?
-                          echo dus jij heet: 
-                          ```
-                          
-                          Als iemand die Maan heet deze code zou gebruiken, dan wordt de uitvoer:
-                          
-                          ```
-                          dus jij heet: Maan
-                          ```
-                          
-                          Let op, het komt precies zo in beeld als het er staat, dus met hetzelfde hoofdlettergebruik en de dubbele punt erbij!
-                          
-                          #### Opdracht 3: Voorspel de uitvoer
-                          
-                          Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingevuld.
+              ### Invoer vragen
+              
+              Alleen tekst is een beetje saai. Je kan in Hedy ook om _invoer_ vragen. Invoer is tekst die je aan de computer geeft.
+              De computer onthoudt die tekst en kan die later weer aan jou laten zien.
+              Deze code toont de vraag 'Hoe heet jij?'
+              
+              ```hedy
+              ask Hoe heet jij?
+              ```
+              
+              ### Invoer laten zien
+              
+              Alleen een ask slaat het antwoord op, maar laat het niet zien. Daarvoor heb je de opdracht `echo` nodig. Die laat het antwoord zien op het einde van de zin.
+              Bijvoorbeeld zo:
+              
+              ```hedy
+              ask Hoe heet jij?
+              echo dus jij heet: 
+              ```
+              
+              Als iemand die Maan heet deze code zou gebruiken, dan wordt de uitvoer:
+              
+              ```
+              dus jij heet: Maan
+              ```
+              
+              Let op, het komt precies zo in beeld als het er staat, dus met hetzelfde hoofdlettergebruik en de dubbele punt erbij!
+              
+              #### Opdracht 3: Voorspel de uitvoer
+              
+              Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingevuld.
 
         -   type      : output
             code      : |-
@@ -1278,19 +1277,110 @@ workbooks:
 
         -   type      : output
             code      : |-
-                          ask Hoe heet jij?\n
+                          ask Hoe heet jij?
                           echo Leuk om je te ontmoeten,
             answer    : "Leuk om je te ontmoeten, **naam**"
             lines     : 2
 
 
 
+        -   type      : text
+            contents  : |-
+              #### Opdracht 4: Programmeer-woorden 
+  
+              Iedere les gaan we nieuwe woorden leren, deze les ook. Weet jij wat deze termen betekenen? Leg het uit je eigen woorden. 
+
+        -   type      : define
+            word      : commando
+            answer    : "Een opdracht die je aan de computer geeft, bijv print."
+            lines     : 1
+
+        -   type      : define
+            word      : invoer
+            answer    : "Wat je intikt, als Hedy een ask venster laat zien."
+            lines     : 1
+
+        -   type      : define
+            word      : uitvoer
+            answer    : "Wat Hedy op het scherm zet als je op Uitvoeren drukt, in het rechterscherm."
+            lines     : 1
+
+        -   type      : text
+            contents  : |-
+              #### Opdracht 5: Codes
+              
+              We hebben tot nu toe 3 codes geleerd: `print`, `ask` en `echo`. Wat doen die? Leg het uit in je eigen woorden. 
+              
+        -   type      : define
+            word      : het commando `print`
+            answer    : "Zet tekst op het scherm."
+            lines     : 1
+
+        -   type      : define
+            word      : het commando `ask`
+            answer    : "Vraagt om invoer van de gebruiker."
+            lines     : 1
+
+        -   type      : define
+            word      : het commando `echo`
+            answer    : "Herhaalt de invoer van de gebruiker."
+            lines     : 1
+    -   level: '3'
+        intro: |-
+          ### Lijsten en willekeurigheid
+          
+          Aan het einde van de les kun jij:
+          
+          * Meerdere dingen opslaan in een variabele, zo'n variabele heet een lijst.
+          * Een verhaal maken waarin willekeurige dingen gebeuren.
+          * Een tekening maken waarin willekeurige dingen verschijnen.
+
+        exercises:
+          - type : text
+            contents  : |-
+              ### Variabelen
+              Je hebt net op het bord de `is` opdracht gezien met een lijst. 
+              Net als bij een gewone variabele, slaan we iets op in een lijst met `is`.
+            code: |-
+              vrienden is Mo, Layla, Denny
+              print Ik ga vandaag naar vrienden at random
+          - type: input
+            answer: |-
+              getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+              print Welkom bij de bingoavond
+              print De drie geluksnummers zijn:
+              print nummers at random en print nummers at random en print nummers at random
+            output: |- 
+              Welkom bij de bingoavond<br>
+              De drie geluksnummers zijn:<br>
+              5 en 3 en 10
+
+
+# TODO Les 1 is nog maar half af!!
+
+
+
 #        -   type      : text
 #            contents  : |-
 #
 #        -   type      : text
 #            contents  : |-
+
+
+#        -   type      : text
+#            contents  : |-
 #
+#        -   type      : text
+#            contents  : |-
+
+
+#        -   type      : text
+#            contents  : |-
+#
+#        -   type      : text
+#            contents  : |-
+
+
 #        -   type      : text
 #            contents  : |-
 #

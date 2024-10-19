@@ -99,20 +99,36 @@ class ForTeachersModule(WebsiteModule):
         for l in workbooks['levels']:
             for exercise in l['exercises']:
                 if exercise['type'] == 'output':
+                    exercise['title'] = 'Output'
                     exercise['icon'] = '💻'
                     exercise['text'] = '**Vraag**: Wat is de uitvoer van deze code?'
-                    exercise['title'] = 'Output'
                     exercise['lines'] = [line for x in range(exercise['lines'])]
+
+                elif exercise['type'] == 'input':
+                    exercise['title'] = 'Input'
+                    exercise['icon'] = '🧑‍💻'
+                    exercise['text'] = '**Vraag**: Welke code hoort bij deze uitvoer?'
+                    a = len(exercise['answer'].split('\n'))
+
+                    exercise['lines'] = [line for x in range(a)]
 
                 elif exercise['type'] == 'MC-code':
                     exercise['title'] = 'Kies'
                     exercise['icon'] = '🤔'
                     exercise['text'] = '**Vraag**: Is deze code goed of fout?'
-                    exercise['options'] = '〇  ' + '〇  '.join(exercise['options'])
+                    exercise['options'] = '〇  ' + '  〇  '.join(exercise['options'])
+
+                elif exercise['type'] == 'define':
+                    exercise['title'] = 'Definiëer'
+                    exercise['icon'] = '💻' "📖"
+                    exercise['text'] = f'**Vraag**: Wat betekent {exercise['word']}'
+                    exercise['lines'] = [line for x in range(exercise['lines'])]
+
+
 
         return render_template("workbooks.html",
                                current_page="teacher-manual",
-                               page_title='Workbooks',
+                               page_title=f'Workbook {level}',
                                workbooks=workbooks)
 
 
