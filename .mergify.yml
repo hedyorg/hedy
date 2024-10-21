@@ -9,9 +9,9 @@ queue_rules:
       {{ title }} (#{{number}})
       {{ body }}
       {# Add co-author information at the end of the squash merge commit message #}
-      {% for co_author in co_authors | unique %}
+      {% for co_author in co_authors | unique -%}
       Co-Authored-By: {{ co_author.name }} <{{ co_author.email }}>
-      {% endfor %}
+      {% endfor -%}
       {# `Co-Authored-By` lines must the be last ones for GitHub to recognize them #}
 
 pull_request_rules:
