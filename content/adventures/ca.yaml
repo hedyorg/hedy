@@ -1854,13 +1854,13 @@ adventures:
                     El teu programa ha de tenir almenys 10 línies de codi i ha de contenir com a mínim una comanda '{if}' i '{else}'.
                 example_code: |
                     ```
-                    amics {is} Jordan, Llucía, David
-                    {print} 'Puc predir si demà guanyaràs la loteria!'
-                    persona {is} {ask} 'Qui ets tu?'
-                    resposta_bona {is} Visca! Has guanyat!, Segur que guanyaràs!, Tenim un guanyador!
-                    resposta_dolenta {is}Mala sort! Torna a provar!, Una altra persona guanyarà, Tu perdràs!
-                    {if} persona {in} amics {print} resposta_bona {at} {random}
-                    {else} {print} resposta_dolenta {at} {random}
+                    friends {is} Jordan, Lucy, Dave
+                    {print} 'I can predict if you will win the lottery tomorrow!'
+                    person {is} {ask} 'Who are you?'
+                    good_answer {is} Hurray! You win!, You will definitely win!, We have a winner!
+                    bad_answer {is} Bad luck! Try again!, Another person will win, You lose!
+                    {if} person {in} friends {print} good_answer {at} {random}
+                    {else} {print} bad_answer {at} {random}
                     ```
             6:
                 story_text: |
