@@ -3,9 +3,10 @@ from difflib import SequenceMatcher
 import os
 import re
 import uuid
+import io
 
 from bs4 import BeautifulSoup
-from flask import g, make_response, request, session, url_for, redirect
+from flask import g, make_response, request, session, url_for, redirect, send_file
 from jinja_partials import render_partial
 from flask_babel import gettext
 import jinja_partials
@@ -1299,44 +1300,97 @@ class ForTeachersModule(WebsiteModule):
         # Validations
         if not isinstance(body, dict):
             return make_response(gettext("ajax_error"), 400)
-        if not isinstance(body.get("accounts"), list):
+        if not isinstance(body.get("class"), str):
+            return make_response(gettext("request_invalid"), 400)
+        if not isinstance(body.get("generate_passwords"), bool):
+            return make_response(gettext("request_invalid"), 400)
+        if not isinstance(body.get("accounts"), str):
             return make_response(gettext("request_invalid"), 400)
 
-        if len(body.get("accounts", [])) < 1:
+        # Validation of accounts
+        lines = [line.strip() for line in body["accounts"].split("\n") if line.strip()]
+        if not lines:
             return make_response(gettext("no_accounts"), 400)
 
-        usernames = []
+        if len(lines) > 100:
+            return make_response("You cannot create more than 100 student accounts.", 400)
 
-        # Validation for correct types and duplicates
-        for account in body.get("accounts", []):
-            validation = validate_student_signup_data(account)
-            if validation:
-                return validation, 400
-            if account.get("username").strip().lower() in usernames:
-                return make_response({"error": gettext("unique_usernames"), "value": account.get("username")}, 200)
-            usernames.append(account.get("username").strip().lower())
+        # TODO: get proper gettext messages
+        separator = ';'
+        if body["generate_passwords"]:
+            usernames_with_separator = [usr for usr in lines if separator in usr]
+            if usernames_with_separator:
+                err = "Usernames cannot contain the symbol ;. Perhaps you want to supply your own passwords? If so, use the toggle to denote this. If this is not the case, remove the ; sign from the following usernames: {usernames}"
+                return make_response({"error": safe_format(err, usernames=', '.join(usernames_with_separator))}, 400)
 
-        # Validation for duplicates in the db
+            invalid_symbols_in_username = ['@', ':']
+            invalid_usernames = [usr for usr in lines if any(sym in usr for sym in invalid_symbols_in_username)]
+            if invalid_usernames:
+                err = "Usernames cannot contain the symbols ':' or '@'. Remove the symbols from following rows: {usernames}"
+                return make_response({"error": safe_format(err, usernames=', '.join(usernames_with_separator))}, 400)
+            accounts = [(user.lower(), utils.random_id_generator()) for user in lines]
+        else:
+            accounts, incorrect_lines = self._extract_account_info(lines, separator)
+            if incorrect_lines:
+                if all([separator not in line for line in incorrect_lines]):
+                    err = "It seems that none of the rows contain the symbol ;. Perhaps you want to let us auto generate passwords? If so, use the toggle to denote this. If this is not the case, use the ; sign to separate usernames and passwords on the following lines: {rows}"
+                    return make_response({"error": safe_format(err, rows=', '.join(incorrect_lines))}, 400)
+                else:
+                    err = "The following rows are missing a separator (;), so either the username or the password is missing: {rows}"
+                    return make_response({"error": safe_format(err, rows=', '.join(incorrect_lines))}, 400)
+            # Validation of passwords
+            invalid_passwords = [pwd for (_, pwd) in accounts if len(pwd) < 6]
+            if invalid_passwords:
+                err = "Passwords must be at least 6 characters long. The following rows have passwords with are shorter: {rows}"
+                return make_response({"error": safe_format(err, rows=', '.join(incorrect_lines))}, 400)
+
+        # Validation for duplicate usernames within the supplied input
+        usernames = [usr for (usr, _) in accounts]
+        duplicates_in_input = [usr for usr in usernames if usernames.count(usr) > 1]
+        if duplicates_in_input:
+            err = "You supplied the following usernames more than once: {usernames}"
+            return make_response({"error": safe_format(err, usernames=', '.join(list(set(duplicates_in_input))))}, 400)
+
+        # Validation for duplicate usernames in the db
+        duplicates_in_db = [usr for (usr, _) in accounts if self.db.user_by_username(usr)]
+        if duplicates_in_db:
+            err = "The following usernames are not available: {usernames}. You can change the accounts by appending an _ or the your class title to these account?"
+            return make_response({"error": safe_format(err, usernames=', '.join(duplicates_in_db))}, 400)
+
+        # Validation for correct class
         classes = self.db.get_teacher_classes(user["username"], False)
-        for account in body.get("accounts", []):
-            if account.get("class") and account["class"] not in [i.get("name") for i in classes]:
-                return make_response(gettext("request_invalid"), 404)
-            if self.db.user_by_username(account.get("username").strip().lower()):
-                return make_response(
-                    {"error": gettext("usernames_exist"), "value": account.get("username").strip().lower()}, 200)
+        classes = [c for c in classes if c["id"] == body["class"]]
+        if not classes:
+            return make_response(gettext("request_invalid"), 404)
+        # Note that the teacher creating the account might be a second teacher for the class
+        # In this case, we link the student account to the main teacher
+        class_ = classes[0]
+        teacher = class_.get("teacher")
 
-        # the following is due to the fact that the current user may be a second user.
-        teacher = classes[0].get("teacher") if len(classes) else user["username"]
         # Now -> actually store the users in the db
-        for account in body.get("accounts", []):
+        for usr, pwd in accounts:
             # Set the current teacher language and keyword language as new account language
-            account["language"] = g.lang
-            account["keyword_language"] = g.keyword_lang
-            store_new_student_account(self.db, account, teacher)
-            if account.get("class"):
-                class_id = [i.get("id") for i in classes if i.get("name") == account.get("class")][0]
-                self.db.add_student_to_class(class_id, account.get("username").strip().lower())
-        return make_response({"success": gettext("accounts_created")}, 200)
+            user = {'username': usr, 'password': pwd, 'language': g.lang, 'keyword_language': g.keyword_lang}
+            store_new_student_account(self.db, user, teacher)
+            self.db.add_student_to_class(body["class"], usr)
+        response = {"accounts": [{"username": usr, "password": pwd} for usr, pwd in accounts]}
+        return make_response(response, 200)
+
+    def _extract_account_info(self, lines, separator):
+        correct_lines: list[tuple[str, str]] = []
+        incorrect_lines = []
+        for line in lines:
+            account = line.split(separator)
+            if len(account) < 2:
+                incorrect_lines.append(line)
+            else:
+                usr = account[0].strip()
+                pwd = separator.join(account[1:]).strip()
+                if not usr or not pwd:
+                    incorrect_lines.append(line)
+                else:
+                    correct_lines.append((usr.lower(), pwd))
+        return correct_lines, incorrect_lines
 
     @route("/customize-adventure/view/<adventure_id>", methods=["GET"])
     @requires_login

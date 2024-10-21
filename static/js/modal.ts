@@ -53,6 +53,7 @@ class Modal {
     return this.alert(message, timeoutMs, true);
   }
 
+
   /**
    * Display a temporary popup
    */
@@ -185,7 +186,6 @@ class Modal {
       }
     });
   }
-
     public feedback(message: string) {
       this.hide();
       $('#modal_feedback_message').text(message);

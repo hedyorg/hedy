@@ -549,100 +549,127 @@ export function add_account_placeholder() {
 
 export function generate_passwords() {
     if (!$('#passwords_toggle').is(":checked")) {
-        $('.passwords_input').val('');
-        $('.passwords_input').prop('disabled', false);
-        return;
+        $('#passwords_toggle_text').text("Provide your own passwords")
+        $('#passwords_title').show();
+        $('#passwords_desc').show();
+        $('#username_desc').hide();
+        $('#accounts_input').attr("placeholder", 'username1;password1\nusername2;password2\nusername3;password3');
+    } else {
+        $('#passwords_toggle_text').text("Auto generate passwords")
+        $('#passwords_title').hide();
+        $('#passwords_desc').hide();
+        $('#username_desc').show();
+        $('#accounts_input').attr("placeholder", 'username1\nusername2\nusername3');
     }
-    $('.account_row').each(function () {
-        if ($(this).is(':visible')) {
-            $(this).find(':input').each(function () {
-                if ($(this).attr('id') == "password") {
-                    const random_password = generateRandomString(6);
-                    $(this).val(random_password);
-                }
-            });
-        }
-    });
-    $('.passwords_input').prop('disabled', true);
 }
 
-export function append_classname() {
-    const classname = <string>$('#classes').val();
-    $('.usernames_input').each(function () {
-        $(this).val($(this).val() + "_" + classname);
+// TODO: Do we really need to use this weird setTimeout to get the whole text of the textarea?
+// Also, where should this addEventListener be?
+function update() {
+    const accountsInput = $('#accounts_input').val() as string;
+    const newAccounts = accountsInput.replace(/\t/g, ';');
+    $('#accounts_input').val(newAccounts);
+}
+
+const accountsInput = document.getElementById("accounts_input") as HTMLFormElement;
+if (accountsInput) {
+    accountsInput.addEventListener('paste', function() {
+        window.setTimeout(update, 100);
     });
+}
+
+export function print_accounts() {
+    var divToPrint=document.getElementById("accounts_table");
+    let newWin = window.open("")!;
+    const css = `
+    <style>
+      @media print {
+        #accounts_table {
+          margin-top: 50px;
+          border-collapse: collapse;
+        }
+        #accounts_table td, th {
+          padding-left: 10px;
+          padding-right: 10px;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          font-size: 24px;
+          border: 1px solid gray;
+        }
+      }
+    </style>`;
+    newWin.document.write(divToPrint!.outerHTML + css);
+    newWin.print();
+    newWin.close();
+}
+
+function setLoadingVisibility(visible: boolean) {
+    if (visible) {
+        $('#loading').removeClass('invisible');
+    } else {
+        $('#loading').addClass('invisible');
+    }
+}
+
+function setCreateAccountsDisabled(disable: boolean) {
+    $("#create_accounts_submit").prop("disabled", disable);
+    $("#accounts_input").prop("disabled", disable);
+    $("#passwords_toggle").prop("disabled", disable);
 }
 
 export function create_accounts(prompt: string) {
     modal.confirm (prompt, function () {
-        $('#account_rows_container').find(':input').each(function () {
-            $(this).removeClass('border-2 border-red-500');
-            // Not really nice, but this removes the need for re-styling (a lot!)
-            $(this).removeAttr('required');
-        });
-        let accounts: {}[] = [];
-        $('.account_row').each(function () {
-            if ($(this).is(':visible')) { //We want to skip the hidden first "copy" row
-                let account: Record<string, string> = {};
-                $(this).find(':input').each(function () {
-                    account[$(this).attr("name") as string] = $(this).val() as string;
-                });
+        const className = $('#classes').val() as string;
+        const generatePasswords = $('#passwords_toggle').is(":checked") as boolean;
+        const accounts = $('#accounts_input').val() as string;
 
-                // Only push an account to the accounts object if it contains data
-                if (account['password'].length !== 0 || account['username'].length !== 0) {
-                    accounts.push(account);
-                }
-            }
-        });
+        setCreateAccountsDisabled(true);
+        setLoadingVisibility(true);
+
         $.ajax({
             type: 'POST',
             url: '/for-teachers/create-accounts',
             data: JSON.stringify({
-                accounts: accounts
+                class: className,
+                generate_passwords: generatePasswords,
+                accounts: accounts,
             }),
-            contentType: 'application/json',
-            dataType: 'json'
+            contentType: 'application/json'
         }).done(function (response) {
-            if (response.error) {
-                modal.notifyError(response.error);
-                $('#account_rows_container').find(':input').each(function () {
-                    if ($(this).val() == response.value) {
-                        $(this).addClass('border-2 border-red-500');
-                    }
-                });
-                return;
-            } else {
-                modal.notifySuccess(response.success);
-                if ($("input[name='download_credentials_checkbox']:checked").val() == "yes") {
-                    download_login_credentials(accounts);
-                }
-                $('#account_rows_container').find(':input').each(function () {
-                   $(this).val("");
-                });
+            setLoadingVisibility(false);
+            setCreateAccountsDisabled(false);
+
+            $('#accounts_form').addClass('hidden');
+            $('#accounts_results').removeClass('hidden');
+            $('#create_accounts_title').text('Successfully created student accounts');
+            $("tr:has(td)").remove();
+
+            let result = ""
+            for (let account of response['accounts']) {
+                result += `
+                  <tr class="border border-gray-600">
+                    <td class="text-center px-4 py-2">${account['username']}</td>
+                    <td class="text-center px-4 py-2">${account['password']}</td>
+                  </tr>`;
             }
+            $("#accounts_table").append(result);
         }).fail(function (err) {
+            setLoadingVisibility(false);
+            setCreateAccountsDisabled(false);
+
+            try {
+                // This endpoint has to return info about the error to direct the user
+                // If the error is JSON, combine its properties to form an error message
+                const parsed = JSON.parse(err.responseText);
+                if (parsed.error) {
+                    modal.notifyError(parsed.error, 0);
+                    return;
+                }
+            } catch { }
+            // If the error is simple text (e.g. 'request invalid'), display it to the user
             modal.notifyError(err.responseText);
         });
     });
-}
-
-function download_login_credentials(accounts: any) {
-    // https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
-    let csvContent = "data:text/csv;charset=utf-8,";
-    csvContent += "Username, Password" + "\r\n";
-
-    accounts.forEach(function(account: any) {
-        let row = account.username + "," + account.password;
-        csvContent += row + "\r\n";
-    });
-
-    var encodedUri = encodeURI(csvContent);
-    var link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "accounts.csv");
-    document.body.appendChild(link); // Required for Firefox
-
-    link.click();
 }
 
 export function copy_join_link(link: string, success: string) {
@@ -654,16 +681,6 @@ export function copy_join_link(link: string, success: string) {
     document.execCommand("copy");
     document.body.removeChild(sampleTextarea);
     modal.notifySuccess(success);
-}
-
-// https://onlinewebtutorblog.com/how-to-generate-random-string-in-jquery-javascript/
-function generateRandomString(length: number) {
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (var i = 0; i < length; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
 }
 
 export interface InitializeTeacherPageOptions {
