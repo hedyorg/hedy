@@ -3,13 +3,32 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "title": { "type": "string" },
-    "teacher-guide": { "type": "array", "items": { "$ref": "#/definitions/DocSection" } },
-    "learn-more-sections": { "$ref": "#/definitions/BasicSections" },
-    "join-sections": { "$ref": "#/definitions/BasicSections" },
-    "home-sections": { "$ref": "#/definitions/BasicSections" },
-    "start-sections": { "$ref": "#/definitions/BasicSections" },
-    "workbooks": { "type": "array", "items": { "$ref": "#/definitions/DocSection" } }
+    "title": {
+      "type": "string"
+    },
+    "teacher-guide": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DocSection"
+      }
+    },
+    "learn-more-sections": {
+      "$ref": "#/definitions/BasicSections"
+    },
+    "join-sections": {
+      "$ref": "#/definitions/BasicSections"
+    },
+    "home-sections": {
+      "$ref": "#/definitions/BasicSections"
+    },
+    "start-sections": {
+      "$ref": "#/definitions/BasicSections"
+    },
+    "workbooks": {
+      "levels": {
+        "type": "array"
+      }
+    }
   },
   "required": [
     "title", "teacher-guide", "learn-more-sections", "join-sections", "home-sections"
