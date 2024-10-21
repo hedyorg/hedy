@@ -94,7 +94,7 @@ class ForTeachersModule(WebsiteModule):
     def get_workbooks(self, level):
         content = hedyweb.PageTranslations("workbooks").get_page_translations(g.lang)
         workbooks = content['workbooks']
-        line = '_' * 50
+        line = '_' * 30
         workbook_for_level = workbooks['levels'][int(level)-1]
 
         for exercise in workbook_for_level['exercises']:

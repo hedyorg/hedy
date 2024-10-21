@@ -31,14 +31,14 @@
 
                             <table>
                                 <tr>
-                                     <td width='1500px'>
+                                     <td width='5000px'>
                                         {% if exercise.code %}
                                         <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
                                             <pre class="common-mistakes" level="{{ workbook.level }}" style="font-size: 0.95em;">{{ exercise.code }}</pre>
                                         </div>
                                         {% endif %}
                                     </td>
-                                    <td width='600px'>
+                                    <td width='600px' { text-align: left; }>
                                         <!-- questions have lines OR options -->
                                         {% if exercise.lines %}
                                             {% for line in exercise.lines %}
