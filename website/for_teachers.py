@@ -285,7 +285,7 @@ class ForTeachersModule(WebsiteModule):
                 name = adventure_names.get(program['adventure_name'], program['adventure_name'])
                 customized_level = class_adventures_formatted.get(str(program['level']))
                 if next((adventure for adventure in customized_level if adventure["name"] == name), False)\
-                        and self.is_program_modified(program, adventures, teacher_adventures):
+                        and program.get('is_modified'):
                     student_adventure_id = f"{student}-{program['adventure_name']}-{level}"
                     current_adventure = self.db.student_adventure_by_id(student_adventure_id)
                     if not current_adventure:
