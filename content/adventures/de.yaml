@@ -456,23 +456,23 @@ adventures:
             17:
                 story_text: |
                     ### Übung
-                    In diesem Abenteuer programmieren wir den zweiten Teil unseres Blackjack Spiels.
+                    In diesem Abenteuer programmieren wir den zweiten Teil unseres Blackjack-Spiels.
 
                     ***Füge das Programm aus dem vorherigen Abenteuer hier ein***
-                    Im vorherigen Abenteuer hast zu mit einer Liste von Variablen begonnen und eine Funktion geschrieben, die berechnet, wie viele Punkte eine Karte zählt. Kopiere dein Program und füge ihn hier ein. Beachte, dass du den Testteil nicht benötigst. Wenn du ihn noch nicht gelöscht hast, mache e jetzt.
+                    Im vorherigen Abenteuer hast du mit einer Liste von Variablen begonnen und eine Funktion geschrieben, die berechnet, wie viele Punkte eine Karte zählt. Kopiere dein Program und füge es hier ein. Beachte, dass du den Testteil nicht benötigst. Wenn du ihn noch nicht gelöscht hast, mache es jetzt.
 
                     ***Ergänze weitere Variablen***
                     Du hast schon die Listen `karten` und `bildkarten` und die Variable `karte_1` gesetzt. Erzeuge nach diesen Variablen noch 3 weitere: `karte_2`, `geber_karte_1` und `geber_karte_2`. Diese Variablen sind auf eine zufällige Karte aus der Liste der Karten gesetzt.
 
                     ***Zähle die Punkte zusammen***
-                    Um zu berechnen, wie viele Punkte du erreicht hast, rufen wir die Funktion mit `karte_1` und `karte_2` auf. Dann addieren wir die beiden Punktzahlen zusammen, um deine Gesamtpunkte zu bestimmen.
+                    Um zu berechnen, wie viele Punkte du erreicht hast, rufen wir die Funktion mit `karte_1` und `karte_2` auf. Dann addieren wir die beiden Punktzahlen, um deine Gesamtpunkte zu bestimmen.
                     Mache dasselbe für die Punkte des Gebers, aber stelle sicher, dass du die Karten des Gebers und nicht deine benutzt.
 
                     ***2 Asse***
                     Großartig! Fast alle Punkte können jetzt berechnet werden. Bis auf eine Ausnahme: 2 Asse. Wenn du 2 Asse bekommst, gibt es dafür 12 Punkte und nicht 22 (weil du mit 22 Punkten schon verloren hättest). Das gilt natürlich auch für den Geber.
 
                     ***Zeige den Punktestand***
-                    Zuletzt soll das Program noch ausgeben, welchen Karte du gezogen hast und wieviele Punkte es dafür gibt. Dann zeige, welche Karten der Geber hat und wie viele Punkte die zählen.
+                    Zuletzt soll das Program noch ausgeben, welchen Karte du gezogen hast und wieviele Punkte es dafür gibt. Dann zeige, welche Karten der Geber hat und wie viele Punkte sie zählen.
 
                     ***Weiter geht es mit dem nächsten Tab***
                     Ausgezeichnet! Du hast diesen Teil des Spiels beendet! Kopiere dein Programm und gehe zum nächsten Tab um zu lernen, wie du nach einer extra Karte fragen und den Gewinner bestimmen kannst.
@@ -512,21 +512,21 @@ adventures:
         levels:
             17:
                 story_text: |
-                    Beim den vorherigen Tabs hast du gelernt, wie du 2 zufällige Karten für dich und den Geber ziehen kannst und zu berechnen, wie viele Punkte ihr beiden habt.
+                    In den vorherigen Tabs hast du gelernt, wie du 2 zufällige Karten für dich und den Geber ziehen kannst und zu berechnen, wie viele Punkte ihr beiden habt.
                     In diesem Abenteuer fügen wir für dich und den Geber die Möglichkeit hinzu, nach einer weiteren Karte zu fragen.
 
                     ### Übung
-                    ***Füge dein Programm aus dem vorherigen Abenteuer ein*** Zunächst, kopiere das Programm aus dem vorherigen Tab und füge es hier ein.
+                    ***Füge dein Programm aus dem vorherigen Abenteuer ein*** Kopiere zunächst das Programm aus dem vorherigen Tab und füge es hier ein.
 
                     ***Extra Karte für dich*** Wenn du willst, kannst du eine weitere Karte bekommen, um mit deinen Gesamtpunkten so nah wie möglich an 21 zu kommen. Frage zuerst den Spieler, ob er noch eine Karte will.
                     Falls ja, wähle eine zufällige Karte und drucke, was gezogen wurde. Falls die Karte kein Ass ist, kannst du die Funktion aufrufen und die Punkte zu deinen Gesamtpunkten hinzuzählen.
                     Falls die Karte ein Ass ist, kannst du die Funktion nicht verwenden, weil ein Ass entweder 1 Punkt oder 11 Punkte zählen kann, abhängig davon, wie viele Punkte du bereits hast.
-                    Falls deine Gesamtpunkte weniger als 11 sind, sollte das Ass 11 Punkte zählen (weil das am nächsten an 21 ist). Also zählst du 11 Punkte zu deinen Gesamtpunkte hinzu.
+                    Falls deine Gesamtpunkte weniger als 11 sind, sollte das Ass 11 Punkte zählen (weil das am nächsten an 21 ist). Also zählst du 11 Punkte zu deinen Gesamtpunkten hinzu.
                     Falls du mehr als oder genau 11 Gesamtpunkte hast, sollte dein Ass 1 Punkt zählen (weil du nicht mehr als 21 Punkte haben solltest). Also zählst du 1 Punkt zu den Gesamtpunkten hinzu.
                     Zuletzt, drucke deine neue Gesamtpunktzahl.
 
                     ***Extra Karte für den Geber*** Der Geber kann auch eine extra Karte bekommen. Der Geber muss nicht gefragt werden, weil er immer eine extra Karte bekommt, wenn er weniger als 17 Gesamtpunkte hat.
-                    Kopiere den 'Extra Karte für dich' Code und füge ihn in den Geber Abschnitt ein. Dann ändere ihn, dass es für den Geber passt, eine extra Karte zu nehmen und die Punkte zu seinen Gesamtpunkten hinzugefügt zu bekommen
+                    Kopiere den 'Extra Karte für dich' Code und füge ihn in den Geber-Abschnitt ein. Dann ändere ihn, dass es für den Geber passt, eine extra Karte zu nehmen und die Punkte zu seinen Gesamtpunkten hinzugefügt zu bekommen
                 example_code: |
                     ```
                     # Füge dein Programm aus dem vorherigen Abenteuer hier ein
