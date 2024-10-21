@@ -102,6 +102,8 @@ class ForTeachersModule(WebsiteModule):
                 exercise['title'] = 'Output'
                 exercise['icon'] = '💻'
                 exercise['text'] = '**Vraag**: Wat is de uitvoer van deze code?'
+
+                # lines zou ik hier ook uit het antwoord kunnen uitrekenen!
                 exercise['lines'] = [line for x in range(exercise['lines'])]
 
             if exercise['type'] == 'circle':
@@ -127,7 +129,7 @@ class ForTeachersModule(WebsiteModule):
             elif exercise['type'] == 'define':
                 exercise['title'] = 'Definiëer'
                 exercise['icon'] = '📖'
-                exercise['text'] = f'**Vraag**: Wat betekent {exercise['word']}'
+                exercise['text'] = f'**Vraag**: Wat betekent {exercise['word']}?'
                 exercise['lines'] = [line for x in range(exercise['lines'])]
 
             elif exercise['type'] == 'question':
