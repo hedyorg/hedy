@@ -137,7 +137,7 @@ print Het antwoord is antwoorden at random
 ```
 
 Maar soms wil je dat de gebruiker van een programma ook opties kan toevoegen.
-Dat doe je met een `add` en een `to` commando.
+Dat doe je met een `add` en een `to` commando. Je kan ook iets uit een lijst verwijderen, met `remove` en `from`.
 
 ```
 dieren is 🐿, 🦔, 🦇, 🦉
@@ -146,7 +146,7 @@ add dier to dieren
 print het was een dieren op willekeurig
 ```
 
-Je kan ook iets uit een lijst verwijderen, met `remove` en `from`.
+
 
 #### Opdracht 4: Goed of fout?
 
