@@ -9,7 +9,7 @@
     "join-sections": { "$ref": "#/definitions/BasicSections" },
     "home-sections": { "$ref": "#/definitions/BasicSections" },
     "start-sections": { "$ref": "#/definitions/BasicSections" },
-    "workbooks": { "$ref": "#/definitions/BasicSections" }
+    "workbooks": { "type": "array", "items": { "$ref": "#/definitions/DocSection" } }
   },
   "required": [
     "title", "teacher-guide", "learn-more-sections", "join-sections", "home-sections"
