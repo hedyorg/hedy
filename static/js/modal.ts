@@ -8,7 +8,6 @@ class Modal {
     $('#modal_confirm_button').on('click', () => this.hide());
     $('#modal_no_button').on('click', () => this.hide());
     $('#modal_cancel_button').on('click', () => this.hide());
-    $('#modal_suffix_cancel_button').on('click', () => this.hide());
     $('#modal_copy_ok_button').on('click', () => this.hide());
     $('#modal_copy_close_button').on('click', () => this.hide());
     $('#modal_repair_button').on('click', () => this.hide());
@@ -29,7 +28,6 @@ class Modal {
     $('#modal_mask').hide();
     $('#modal_content').hide();
     $('#modal_prompt').hide();
-    $('#modal_suffix').hide();
     $('#modal_confirm').hide();
     $('#modal_copy').hide();
     $('#modal_repair').hide();
@@ -54,6 +52,7 @@ class Modal {
   public notifyError(message: string, timeoutMs: number = 5000) {
     return this.alert(message, timeoutMs, true);
   }
+
 
   /**
    * Display a temporary popup
@@ -187,34 +186,6 @@ class Modal {
       }
     });
   }
-
-  public suffix(message: string, defaultValue: string, confirmCb: (x: object) => void) {
-    this.hide();
-    $('#modal_suffix_text').text(message);
-    this.show();
-    $('#modal_suffix').show();
-    if (defaultValue) $('#modal_suffix_input').val(defaultValue);
-    // If there's a timeout from a previous modal that hasn't been cleared yet, clear it to avoid hiding the present message before its due time.
-    if(this._timeout) {
-      clearTimeout(this._timeout);
-      this._timeout = undefined;
-    }
-
-    // Since we need to close over the callback, replace the handler
-    $('#modal_suffix_ok_button').off('click').on('click', () => {
-      this.hide();
-
-      const value = $('#modal_suffix_input').val();
-      if (typeof value === 'string') {
-        // Always empty the value on success -> otherwise this value is shown on new prompt (without a page reload)
-        $('#modal_suffix_input').val('');
-
-        var duplicates = $("input[name='suffix']:checked").val();
-        confirmCb({ "suffix": value, "only_duplicates": duplicates });
-      }
-    });
-  }
-
     public feedback(message: string) {
       this.hide();
       $('#modal_feedback_message').text(message);

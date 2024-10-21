@@ -566,14 +566,14 @@ export function generate_passwords() {
 // TODO: Do we really need to use this weird setTimeout to get the whole text of the textarea?
 // Also, where should this addEventListener be?
 function update() {
-    const accounts = $('#accounts_input').val() as string;
-    const new_accounts = accounts.replace(/\t/g, ';');
-    $('#accounts_input').val(new_accounts);
+    const accountsInput = $('#accounts_input').val() as string;
+    const newAccounts = accountsInput.replace(/\t/g, ';');
+    $('#accounts_input').val(newAccounts);
 }
 
-const accounts_input = document.getElementById("accounts_input") as HTMLFormElement;
-if (accounts_input) {
-    accounts_input.addEventListener('paste', function() {
+const accountsInput = document.getElementById("accounts_input") as HTMLFormElement;
+if (accountsInput) {
+    accountsInput.addEventListener('paste', function() {
         window.setTimeout(update, 100);
     });
 }
@@ -603,7 +603,7 @@ export function print_accounts() {
     newWin.close();
 }
 
-function setVisible(visible: boolean) {
+function setLoadingVisibility(visible: boolean) {
     if (visible) {
         $('#loading').removeClass('invisible');
     } else {
@@ -611,15 +611,20 @@ function setVisible(visible: boolean) {
     }
 }
 
-export function create_accounts(prompt: string) {
+function setCreateAccountsDisabled(disable: boolean) {
+    $("#create_accounts_submit").prop("disabled", disable);
+    $("#accounts_input").prop("disabled", disable);
+    $("#passwords_toggle").prop("disabled", disable);
+}
 
+export function create_accounts(prompt: string) {
     modal.confirm (prompt, function () {
         const className = $('#classes').val() as string;
         const generatePasswords = $('#passwords_toggle').is(":checked") as boolean;
         const accounts = $('#accounts_input').val() as string;
-        set_create_accounts_disabled(true);
 
-        setVisible(true);
+        setCreateAccountsDisabled(true);
+        setLoadingVisibility(true);
 
         $.ajax({
             type: 'POST',
@@ -631,65 +636,33 @@ export function create_accounts(prompt: string) {
             }),
             contentType: 'application/json'
         }).done(function (response) {
-            setVisible(false);
-            set_create_accounts_disabled(false);
-            if (response.error) {
-                let msg = response.error
-                modal.suffix (msg, "_", async function (input) {
-                    let data = (input as any);
+            setLoadingVisibility(false);
+            setCreateAccountsDisabled(false);
 
-                    let result = [];
-                    var lines = accounts.split("\n")
-                    for (let line of lines) {
-                        if (generatePasswords) {
-                            var usr = line.trim()
-                            if (usr) {
-                                let res = data.only_duplicates === "non-unique" && !response.value.includes(usr) ? usr : usr + data.suffix;
-                                result.push(res);
-                            }
-                        } else {
-                            let parts = line.split(";");
-                            if (parts.length > 1) {
-                                let usr = parts[0].trim();
-                                if (usr) {
-                                    let res = data.only_duplicates === "non-unique" && !response.value.includes(usr) ? usr : usr + data.suffix;
-                                    let pwd = parts.slice(1).join('');
-                                    result.push(`${res};${pwd}`);
-                                }
-                            }
-                        }
-                    }
+            $('#accounts_form').addClass('hidden');
+            $('#accounts_results').removeClass('hidden');
+            $('#create_accounts_title').text('Successfully created student accounts');
+            $("tr:has(td)").remove();
 
-                    $('#accounts_input').val(result.join("\n"));
-                });
-                return;
-            } else {
-                $('#accounts_form').addClass('hidden');
-                $('#accounts_results').removeClass('hidden');
-                $('#create_accounts_title').text('Successfully created student accounts');
-                $("tr:has(td)").remove();
-
-                let result = ""
-                for (let account of response['accounts']) {
-                    result += `
-                      <tr class="border border-gray-600">
-                        <td class="text-center px-4 py-2">${account['username']}</td>
-                        <td class="text-center px-4 py-2">${account['password']}</td>
-                      </tr>`;
-                }
-                $("#accounts_table").append(result);
-
+            let result = ""
+            for (let account of response['accounts']) {
+                result += `
+                  <tr class="border border-gray-600">
+                    <td class="text-center px-4 py-2">${account['username']}</td>
+                    <td class="text-center px-4 py-2">${account['password']}</td>
+                  </tr>`;
             }
+            $("#accounts_table").append(result);
         }).fail(function (err) {
-            setVisible(false);
-            set_create_accounts_disabled(false);
+            setLoadingVisibility(false);
+            setCreateAccountsDisabled(false);
+
             try {
                 // This endpoint has to return info about the error to direct the user
                 // If the error is JSON, combine its properties to form an error message
                 const parsed = JSON.parse(err.responseText);
-                if (parsed.error && parsed.value) {
-                    let msg = parsed.error + ' ' + parsed.value;
-                    modal.notifyError(msg);
+                if (parsed.error) {
+                    modal.notifyError(parsed.error, 0);
                     return;
                 }
             } catch { }
@@ -697,12 +670,6 @@ export function create_accounts(prompt: string) {
             modal.notifyError(err.responseText);
         });
     });
-}
-
-function set_create_accounts_disabled(disable: boolean) {
-    $("#create_accounts_submit").prop("disabled", disable);
-    $("#accounts_input").prop("disabled", disable);
-    $("#passwords_toggle").prop("disabled", disable);
 }
 
 export function copy_join_link(link: string, success: string) {

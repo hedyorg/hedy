@@ -1312,33 +1312,50 @@ class ForTeachersModule(WebsiteModule):
         if not lines:
             return make_response(gettext("no_accounts"), 400)
 
+        if len(lines) > 100:
+            return make_response("You cannot create more than 100 student accounts.", 400)
+
         # TODO: get proper gettext messages
         separator = ';'
         if body["generate_passwords"]:
-            invalid_symbols = ['@', ':', separator]
-            invalid_usernames = [usr for usr in lines if any(sym in usr for sym in invalid_symbols)]
+            usernames_with_separator = [usr for usr in lines if separator in usr]
+            if usernames_with_separator:
+                err = "Usernames cannot contain the symbol ;. Perhaps you want to supply your own passwords? If so, use the toggle to denote this. If this is not the case, remove the ; sign from the following usernames: {usernames}"
+                return make_response({"error": safe_format(err, usernames=', '.join(usernames_with_separator))}, 400)
+
+            invalid_symbols_in_username = ['@', ':']
+            invalid_usernames = [usr for usr in lines if any(sym in usr for sym in invalid_symbols_in_username)]
             if invalid_usernames:
-                return make_response({"error": "Usernames cannot contain the symbols ';', ':' or '@'. The following rows have invalid usernames: ", "value": invalid_usernames}, 400)
+                err = "Usernames cannot contain the symbols ':' or '@'. Remove the symbols from following rows: {usernames}"
+                return make_response({"error": safe_format(err, usernames=', '.join(usernames_with_separator))}, 400)
             accounts = [(user.lower(), utils.random_id_generator()) for user in lines]
         else:
             accounts, incorrect_lines = self._extract_account_info(lines, separator)
             if incorrect_lines:
-                return make_response({"error": "Missing username or password for rows: ", "value": incorrect_lines}, 400)
+                if all([separator not in line for line in incorrect_lines]):
+                    err = "It seems that none of the rows contain the symbol ;. Perhaps you want to let us auto generate passwords? If so, use the toggle to denote this. If this is not the case, use the ; sign to separate usernames and passwords on the following lines: {rows}"
+                    return make_response({"error": safe_format(err, rows=', '.join(incorrect_lines))}, 400)
+                else:
+                    err = "The following rows are missing a separator (;), so either the username or the password is missing: {rows}"
+                    return make_response({"error": safe_format(err, rows=', '.join(incorrect_lines))}, 400)
             # Validation of passwords
             invalid_passwords = [pwd for (_, pwd) in accounts if len(pwd) < 6]
             if invalid_passwords:
-                return make_response({"error": "Passwords must be at least 6 chars. The following passwords are invalid: ", "value": invalid_passwords}, 400)
+                err = "Passwords must be at least 6 characters long. The following rows have passwords with are shorter: {rows}"
+                return make_response({"error": safe_format(err, rows=', '.join(incorrect_lines))}, 400)
 
         # Validation for duplicate usernames within the supplied input
         usernames = [usr for (usr, _) in accounts]
         duplicates_in_input = [usr for usr in usernames if usernames.count(usr) > 1]
         if duplicates_in_input:
-            return make_response({"error": gettext("You supplied the following usernames more than once: "), "value": list(set(duplicates_in_input))}, 400)
+            err = "You supplied the following usernames more than once: {usernames}"
+            return make_response({"error": safe_format(err, usernames=', '.join(list(set(duplicates_in_input))))}, 400)
 
         # Validation for duplicate usernames in the db
         duplicates_in_db = [usr for (usr, _) in accounts if self.db.user_by_username(usr)]
         if duplicates_in_db:
-            return make_response({"error": gettext(f"The following usernames are not available: {', '.join(duplicates_in_db)}. You can proceed by adding a suffix to these accounts or to all accounts. Enter a suffix here:"), "value": duplicates_in_db}, 200)
+            err = "The following usernames are not available: {usernames}. You can change the accounts by appending an _ or the your class title to these account?"
+            return make_response({"error": safe_format(err, usernames=', '.join(duplicates_in_db))}, 400)
 
         # Validation for correct class
         classes = self.db.get_teacher_classes(user["username"], False)
