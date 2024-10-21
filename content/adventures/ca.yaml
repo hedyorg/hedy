@@ -1841,15 +1841,26 @@ adventures:
                     ```
             5:
                 story_text: |
-                    In this level you'll learn to (secretly) tip the odds in your favor, when using the fortune teller!
-                    By using `{if}` and `{else}` you can make sure that you will always get a good fotune, while other people might not.
-                    Check out this example to find out how.
+                    ### Exercici
+                    En aquest codi d'exemple veuràs com fer un programa endeví que et permeti inclinar les possibilitats a favor teu. Aquest programa que fa trames sempre et diu que guanyaràs la loteria, però els teus amics mai guanyaran.
+
+                    Usa això per fer el teu propi programa, sigues creatiu! Per exemple, pots crear un codi que predigui que:
+                    * el teu equip esportiu preferit guanyarà a tots els seus contrincants!
+                    * s'elegirà la teva pel·lícula preferida com a pel·lícula de la nit!
+                    * guanyaràs entrades pel teu espectacle preferit!
+                    * ets el més bonic/a de tots/es, com el mirall màgic de la Blancaneu.
+                    Deixa que la teva imaginació faci el treball!
+
+                    El teu programa ha de tenir almenys 10 línies de codi i ha de contenir com a mínim una comanda '{if}' i '{else}'.
                 example_code: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    {print} 'I can predict if youll win the lottery tomorrow!'
-                    person {is} {ask} 'Who are you?'
-                    {if} person {is} Hedy {print} 'You will definitely win!🤩' {else} {print} 'Bad luck! Someone else will win!😭'
+                    amics {is} Jordan, Llucía, David
+                    {print} 'Puc predir si demà guanyaràs la loteria!'
+                    persona {is} {ask} 'Qui ets tu?'
+                    resposta_bona {is} Visca! Has guanyat!, Segur que guanyaràs!, Tenim un guanyador!
+                    resposta_dolenta {is}Mala sort! Torna a provar!, Una altra persona guanyarà, Tu perdràs!
+                    {if} persona {in} amics {print} resposta_bona {at} {random}
+                    {else} {print} resposta_dolenta {at} {random}
                     ```
             6:
                 story_text: |
@@ -1887,23 +1898,22 @@ adventures:
                     ```
             7:
                 story_text: |
-                    In this level you can use the `{repeat}` command to make your machine tell multiple fortunes at once.
+                    ### Exercici
+                    Finalitza aquest programa que et diu si el teu enamorat t'estima o no.
                 example_code: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    {print} 'You can ask 3 questions!'
-                    {repeat} 3 {times} question = {ask} 'What do you want to know?'
-                    answer = yes, no, maybe
-                    {repeat} 3 {times} {print} 'My crystal ball says... ' answer {at} {random}
+                    {print} 'Tinc una flor amb pètals màgics'
+                    {print} "Si agafes els pètals de la flor, et dirà si el teu amor també t'estima"
+                    quantitat = {ask} 'Quants pètals vols agafar?'
+                    options = t'estima, no t'estima
+                    _ _ _ _ options {at} {random}
                     ```
             8:
                 story_text: |
-                    In the previous levels you've learned how to use `{repeat}` to make the fortune teller answer 3 questions in a row, but we had a problem with printing the questions.
-                    Now that problem is solved, because of the new way of using the `{repeat}` command.
-                    In the next example you can have your fortune teller ask 3 questions and also print them!
+                    En el pròxim exemple pots fre que l'endeví et faci diverses preguntes i també que les imprimeixi!
 
-                    ### Exercise
-                    Can you fill in the `{repeat}` command correctly on the blanks?
+                    ### Exercici
+                    Pots posar les comandes correctes als forats en blanc?
                 example_code: |
                     ```
                     {print} 'I am Hedy the fortune teller!'
