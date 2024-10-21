@@ -19,7 +19,7 @@ import collections
 
 from email_validator import EmailNotValidError, validate_email
 from flask_babel import format_date, format_datetime, format_timedelta
-from gettext_with_fallback import gettext
+from website.flask_helpers import gettext_with_fallback as gettext
 from ruamel import yaml
 import commonmark
 

@@ -25,7 +25,7 @@ from flask import (Flask, Response, abort, after_this_request, g, jsonify, make_
                    redirect, request, send_file, url_for,
                    send_from_directory, session)
 from flask_babel import Babel
-from gettext_with_fallback import gettext
+from website.flask_helpers import gettext_with_fallback as gettext
 from website.flask_commonmark import Commonmark
 from flask_compress import Compress
 from urllib.parse import quote_plus

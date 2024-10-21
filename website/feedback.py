@@ -1,6 +1,6 @@
 
 from flask import request, make_response, render_template
-from gettext_with_fallback import gettext
+from website.flask_helpers import gettext_with_fallback as gettext
 import json
 import uuid
 from collections import defaultdict

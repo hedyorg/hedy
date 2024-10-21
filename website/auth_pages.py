@@ -1,7 +1,7 @@
 import datetime
 
 from flask import make_response, redirect, request, session
-from gettext_with_fallback import gettext
+from website.flask_helpers import gettext_with_fallback as gettext
 
 from config import config
 from safe_format import safe_format

@@ -1,7 +1,7 @@
 import hedy
 import hedy_translation
 import re
-from gettext_with_fallback import gettext
+from website.flask_helpers import gettext_with_fallback as gettext
 
 
 # TODO: we should not maintain a list like this. Translation of exception arguments should happen when the exception

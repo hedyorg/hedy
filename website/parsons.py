@@ -1,5 +1,5 @@
 from flask import g, make_response
-from gettext_with_fallback import gettext
+from website.flask_helpers import gettext_with_fallback as gettext
 
 from .website_module import WebsiteModule, route
 
