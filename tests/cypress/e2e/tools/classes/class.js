@@ -44,20 +44,22 @@ export function ensureClass()
 
 export function addStudents(classname, count) {
     const students = Array.from({length:count}, (_, index) => `student_${index}_${Math.random()}`)
-
     goToTeachersPage();
     cy.wait(500);
 
     openClassView(classname);
     cy.wait(500);
 
-   cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
+    cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
     cy.getDataCy('add_student').click();
     cy.getDataCy('create_accounts').click();
-    cy.wrap(students).each((student, index) => {
-      cy.getDataCy(`username_${index + 1}`).type(student);
-      cy.getDataCy(`password_${index + 1}`).type('123456');
-    })
+
+    cy.getDataCy('toggle_circle').click();
+    const accounts = students.map(function (s) {
+      return `${s};123456`;
+    }).join('\n');
+    cy.getDataCy('create_accounts_input').type(accounts);
+
     cy.getDataCy('create_accounts_button').click();
     cy.getDataCy('modal_yes_button').click();
 

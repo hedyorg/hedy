@@ -39,7 +39,7 @@
                     </span>
                 </div>
                 <div class="flex flex-row">
-                    <textarea id="accounts_input" name="Text1" cols="40" rows="5" placeholder="{{_('create_accounts_placeholder')}}"
+                    <textarea id="accounts_input" data-cy="create_accounts_input" cols="40" rows="7" placeholder="{{_('create_accounts_placeholder')}}"
                               required class="usernames_input w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"></textarea>
                     <input id="classes" name="class" value="{{current_class.id}}" disabled hidden>
                 </div>
@@ -59,7 +59,7 @@
             <button id="print_accounts" class="blue-btn px-4 mb-4" onclick="hedyApp.printAccounts()">
               {{_('print_accounts')}}
             </button>
-            <table id="accounts_table" class="w-full border border-gray-600">
+            <table id="accounts_table" data-cy="create_accounts_output" class="w-full border border-gray-600">
                 <tr class="">
                     <th class="px-10 py-2 text-center">{{_('username')}}</th>
                     <th class="px-10 py-2 text-center">{{_('password')}}</th>
