@@ -6,42 +6,40 @@
         <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
         {{_('go_back')}}
     </button>
-    <h2 id="create_accounts_title">Create student accounts for {{current_class.name}}</h2>
-    <div id="loading" class="invisible">
-        <div id="spinner"></div>
-    </div>
+    <h2 id="create_accounts_title">{{_('create_student_accounts')}} {{current_class.name}}</h2>
+    <h2 id="accounts_results_title" class="hidden">{{_('student_accounts_created')}}</h2>
     <div>
-        <form id="accounts_form" onsubmit="hedyApp.create_accounts('{{_('create_accounts_prompt')}}');event.preventDefault();">
+        <form id="accounts_form"
+              onsubmit="hedyApp.createAccounts('{{_('create_accounts_prompt')}}');event.preventDefault();">
 
             <div class="border rounded-lg px-20 py-2">
                 <div class="flex flex-row mt-4">
                     <div class="ltr:ml-auto flex flex-row items-center gap-2">
                         <label for="passwords_toggle" class="flex flex-row items-center justify-center cursor-pointer">
                             <div class="relative">
-                                <input id="passwords_toggle" type="checkbox" onclick="hedyApp.generate_passwords()" class="sr-only" checked/>
+                                <input id="passwords_toggle" type="checkbox" onclick="hedyApp.toggleAutoGeneratePasswords()" class="sr-only" checked/>
                                 <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner" id="dev_toggle"></div>
                                 <div class="toggle-circle absolute w-6 h-6 bg-white rounded-full shadow ltr:-left-1 rtl:-right-1 -top-1 transition" data-cy="toggle_circle"></div>
                             </div>
-                            <div id="passwords_toggle_text" class="ltr:ml-3 rtl:mr-3">Auto generate passwords</div>
+                            <div id="passwords_toggle_checked_text" class="ltr:ml-3 rtl:mr-3">{{_('use_generated_passwords')}}</div>
+                            <div id="passwords_toggle_unchecked_text" class="ltr:ml-3 rtl:mr-3 hidden">{{_('use_custom_passwords')}}</div>
                         </label>
                     </div>
                 </div>
                 <div class="flex flex-row w-full gap-4 mt-4 items-center">
                     <h3 class="w-full my-0 py-0">
-                        <span>Usernames</span>
-                        <span id="passwords_title" class="w-full my-0 py-0 hidden"> and passwords</span>
+                        <span id="usernames_title" class="w-full my-0 py-0">{{_('create_usernames_title')}}</span>
+                        <span id="passwords_title" class="w-full my-0 py-0 hidden">{{_('create_usernames_and_passwords_title')}}</span>
                     </h3>
                 </div>
                 <div class="flex flex-row w-full mb-4 mt-2 gap-4 items-center">
                     <span class="w-full my-0 py-0">
-                        <span id="username_desc">Enter one username per line.</span>
-                        <span id="passwords_desc" class="hidden">Enter one username and its respective password per line,
-                          separated by a semicolon (;). Make passwords random. Predictable passwords could lead to students
-                          gaining access to each other’s accounts.</span>
+                        <span id="usernames_desc">{{_('create_usernames_desc')}}</span>
+                        <span id="passwords_desc" class="hidden">{{_('create_usernames_and_passwords_desc')}}</span>
                     </span>
                 </div>
                 <div class="flex flex-row">
-                    <textarea id="accounts_input" name="Text1" cols="40" rows="5" placeholder="Enter one username per line"
+                    <textarea id="accounts_input" name="Text1" cols="40" rows="5" placeholder="{{_('create_accounts_placeholder')}}"
                               required class="usernames_input w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"></textarea>
                     <input id="classes" name="class" value="{{current_class.id}}" disabled hidden>
                 </div>
@@ -55,11 +53,16 @@
         </form>
 
         <div id="accounts_results" class="w-1/2 gap-4 mt-4 items-center hidden">
-            <button id="print_accounts" class="blue-btn px-4 mb-4" onclick="hedyApp.print_accounts()">Print</button>
+            <button id="copy_accounts" class="blue-btn px-4 mb-4" onclick="hedyApp.copyAccountsToClipboard('{{_('copy_clipboard')}}')">
+              {{_('copy_accounts_to_clipboard')}}
+            </button>
+            <button id="print_accounts" class="blue-btn px-4 mb-4" onclick="hedyApp.printAccounts()">
+              {{_('print_accounts')}}
+            </button>
             <table id="accounts_table" class="w-full border border-gray-600">
                 <tr class="">
-                    <th class="px-10 py-2 text-center">username</th>
-                    <th class="px-10 py-2 text-center">password</th>
+                    <th class="px-10 py-2 text-center">{{_('username')}}</th>
+                    <th class="px-10 py-2 text-center">{{_('password')}}</th>
                 </tr>
             </table>
         </div>

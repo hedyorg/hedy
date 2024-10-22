@@ -3,10 +3,9 @@ from difflib import SequenceMatcher
 import os
 import re
 import uuid
-import io
 
 from bs4 import BeautifulSoup
-from flask import g, make_response, request, session, url_for, redirect, send_file
+from flask import g, make_response, request, session, url_for, redirect
 from jinja_partials import render_partial
 from flask_babel import gettext
 import jinja_partials
@@ -27,7 +26,6 @@ from website.auth import (
     requires_login,
     requires_teacher,
     store_new_student_account,
-    validate_student_signup_data,
     prepare_user_db,
     remember_current_user,
 )
@@ -1290,7 +1288,10 @@ class ForTeachersModule(WebsiteModule):
         if not utils.can_edit_class(user, Class) and not is_admin(user):
             return utils.error_page(error=401, ui_message=gettext("no_such_class"))
 
-        return render_template("create-accounts.html", current_class=Class)
+        return render_template(
+            "create-accounts.html",
+            current_class=Class,
+            javascript_page_options=dict(page='create-accounts'))
 
     @route("/create-accounts", methods=["POST"])
     @requires_teacher
@@ -1307,57 +1308,70 @@ class ForTeachersModule(WebsiteModule):
         if not isinstance(body.get("accounts"), str):
             return make_response(gettext("request_invalid"), 400)
 
-        # Validation of accounts
+        # Validate number of accounts
         lines = [line.strip() for line in body["accounts"].split("\n") if line.strip()]
         if not lines:
             return make_response(gettext("no_accounts"), 400)
+        elif len(lines) > 100:
+            return make_response(gettext('too_many_accounts'), 400)
 
-        if len(lines) > 100:
-            return make_response("You cannot create more than 100 student accounts.", 400)
-
-        # TODO: get proper gettext messages
         separator = ';'
         if body["generate_passwords"]:
+            # If usernames contain a separator, probably the user forgot to check the auto-generate passwords
             usernames_with_separator = [usr for usr in lines if separator in usr]
             if usernames_with_separator:
-                err = "Usernames cannot contain the symbol ;. Perhaps you want to supply your own passwords? If so, use the toggle to denote this. If this is not the case, remove the ; sign from the following usernames: {usernames}"
-                return make_response({"error": safe_format(err, usernames=', '.join(usernames_with_separator))}, 400)
+                err = safe_format(gettext('username_contains_separator'), usernames=', '.join(usernames_with_separator))
+                return make_response({"error": err}, 400)
 
+            # Currently usernames cannot contain '@' and ':'
             invalid_symbols_in_username = ['@', ':']
             invalid_usernames = [usr for usr in lines if any(sym in usr for sym in invalid_symbols_in_username)]
             if invalid_usernames:
-                err = "Usernames cannot contain the symbols ':' or '@'. Remove the symbols from following rows: {usernames}"
-                return make_response({"error": safe_format(err, usernames=', '.join(usernames_with_separator))}, 400)
+                err = safe_format(gettext('username_contains_invalid_symbol'),
+                                  usernames=', '.join(usernames_with_separator))
+                return make_response({"error": err}, 400)
+
             accounts = [(user.lower(), utils.random_id_generator()) for user in lines]
         else:
+
             accounts, incorrect_lines = self._extract_account_info(lines, separator)
             if incorrect_lines:
+                # If lines don't have separators, probably the user forgot to uncheck the auto-generate passwords
                 if all([separator not in line for line in incorrect_lines]):
-                    err = "It seems that none of the rows contain the symbol ;. Perhaps you want to let us auto generate passwords? If so, use the toggle to denote this. If this is not the case, use the ; sign to separate usernames and passwords on the following lines: {rows}"
-                    return make_response({"error": safe_format(err, rows=', '.join(incorrect_lines))}, 400)
+                    err = safe_format(gettext('all_rows_missing_separator'), rows=', '.join(incorrect_lines))
+                    return make_response({"error": err}, 400)
                 else:
-                    err = "The following rows are missing a separator (;), so either the username or the password is missing: {rows}"
-                    return make_response({"error": safe_format(err, rows=', '.join(incorrect_lines))}, 400)
-            # Validation of passwords
+                    # If only some lines don't have separators, then the user made an error somewhere
+                    err = safe_format(gettext('some_rows_missing_separator'), rows=', '.join(incorrect_lines))
+                    return make_response({"error": err}, 400)
+
+            # Validate passwords length
             invalid_passwords = [pwd for (_, pwd) in accounts if len(pwd) < 6]
             if invalid_passwords:
-                err = "Passwords must be at least 6 characters long. The following rows have passwords with are shorter: {rows}"
-                return make_response({"error": safe_format(err, rows=', '.join(incorrect_lines))}, 400)
+                err = safe_format(gettext('passwords_too_short'), passwords=', '.join(invalid_passwords))
+                return make_response({"error": err}, 400)
 
-        # Validation for duplicate usernames within the supplied input
+        # Validate usernames length
+        invalid_usernames = [usr for (usr, _) in accounts if len(usr) < 3]
+        if invalid_usernames:
+            err = safe_format(gettext('usernames_too_short'), usernames=', '.join(invalid_usernames))
+            return make_response({"error": err}, 400)
+
+        # Validate that the user supplied no duplicate usernames
         usernames = [usr for (usr, _) in accounts]
         duplicates_in_input = [usr for usr in usernames if usernames.count(usr) > 1]
         if duplicates_in_input:
-            err = "You supplied the following usernames more than once: {usernames}"
-            return make_response({"error": safe_format(err, usernames=', '.join(list(set(duplicates_in_input))))}, 400)
+            err = safe_format(gettext('provided_username_duplicates'),
+                              usernames=', '.join(list(set(duplicates_in_input))))
+            return make_response({"error": err}, 400)
 
-        # Validation for duplicate usernames in the db
+        # Validate that the usernames do not exist in the db
         duplicates_in_db = [usr for (usr, _) in accounts if self.db.user_by_username(usr)]
         if duplicates_in_db:
-            err = "The following usernames are not available: {usernames}. You can change the accounts by appending an _ or the your class title to these account?"
-            return make_response({"error": safe_format(err, usernames=', '.join(duplicates_in_db))}, 400)
+            err = safe_format(gettext('usernames_unavailable'), usernames=', '.join(duplicates_in_db))
+            return make_response({"error": err}, 400)
 
-        # Validation for correct class
+        # Validate the class
         classes = self.db.get_teacher_classes(user["username"], False)
         classes = [c for c in classes if c["id"] == body["class"]]
         if not classes:
@@ -1367,7 +1381,7 @@ class ForTeachersModule(WebsiteModule):
         class_ = classes[0]
         teacher = class_.get("teacher")
 
-        # Now -> actually store the users in the db
+        # Now, actually store the users in the db
         for usr, pwd in accounts:
             # Set the current teacher language and keyword language as new account language
             user = {'username': usr, 'password': pwd, 'language': g.lang, 'keyword_language': g.keyword_lang}
@@ -1376,7 +1390,8 @@ class ForTeachersModule(WebsiteModule):
         response = {"accounts": [{"username": usr, "password": pwd} for usr, pwd in accounts]}
         return make_response(response, 200)
 
-    def _extract_account_info(self, lines, separator):
+    @staticmethod
+    def _extract_account_info(lines, separator):
         correct_lines: list[tuple[str, str]] = []
         incorrect_lines = []
         for line in lines:

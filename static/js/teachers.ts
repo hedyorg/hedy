@@ -10,6 +10,7 @@ import { addCurlyBracesToCode, addCurlyBracesToKeyword } from './adventure';
 import { autoSave } from './autosave';
 import { HedySelect } from './custom-elements';
 import { Chart } from 'chart.js';
+import { setLoadingVisibility } from './loading';
 
 declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
@@ -547,40 +548,27 @@ export function add_account_placeholder() {
   }
 }
 
-export function generate_passwords() {
-    if (!$('#passwords_toggle').is(":checked")) {
-        $('#passwords_toggle_text').text("Provide your own passwords")
-        $('#passwords_title').show();
-        $('#passwords_desc').show();
-        $('#username_desc').hide();
-        $('#accounts_input').attr("placeholder", 'username1;password1\nusername2;password2\nusername3;password3');
-    } else {
-        $('#passwords_toggle_text').text("Auto generate passwords")
+export function toggleAutoGeneratePasswords() {
+    if ($('#passwords_toggle').is(':checked')) {
+        $('#passwords_toggle_checked_text').show();
+        $('#passwords_toggle_unchecked_text').hide();
+        $('#usernames_title').show();
         $('#passwords_title').hide();
+        $('#usernames_desc').show();
         $('#passwords_desc').hide();
-        $('#username_desc').show();
-        $('#accounts_input').attr("placeholder", 'username1\nusername2\nusername3');
+    } else {
+        $('#passwords_toggle_checked_text').hide();
+        $('#passwords_toggle_unchecked_text').show();
+        $('#usernames_title').hide();
+        $('#passwords_title').show();
+        $('#usernames_desc').hide();
+        $('#passwords_desc').show();
     }
 }
 
-// TODO: Do we really need to use this weird setTimeout to get the whole text of the textarea?
-// Also, where should this addEventListener be?
-function update() {
-    const accountsInput = $('#accounts_input').val() as string;
-    const newAccounts = accountsInput.replace(/\t/g, ';');
-    $('#accounts_input').val(newAccounts);
-}
-
-const accountsInput = document.getElementById("accounts_input") as HTMLFormElement;
-if (accountsInput) {
-    accountsInput.addEventListener('paste', function() {
-        window.setTimeout(update, 100);
-    });
-}
-
-export function print_accounts() {
-    var divToPrint=document.getElementById("accounts_table");
-    let newWin = window.open("")!;
+export function printAccounts() {
+    var table = document.getElementById("accounts_table");
+    let newWindow = window.open("")!;
     const css = `
     <style>
       @media print {
@@ -598,32 +586,31 @@ export function print_accounts() {
         }
       }
     </style>`;
-    newWin.document.write(divToPrint!.outerHTML + css);
-    newWin.print();
-    newWin.close();
+    newWindow.document.write(table!.outerHTML + css);
+    newWindow.print();
+    newWindow.close();
 }
 
-function setLoadingVisibility(visible: boolean) {
-    if (visible) {
-        $('#loading').removeClass('invisible');
-    } else {
-        $('#loading').addClass('invisible');
+export function copyAccountsToClipboard(prompt: string) {
+    const selection = window.getSelection();
+    const table = document.getElementById("accounts_table");
+    if (selection && table) {
+        var range = document.createRange();
+        selection.empty();
+        range.selectNode(table);
+        selection.addRange(range)
+        document.execCommand('copy')
+        selection.empty();
+
+        modal.notifySuccess(prompt);
     }
 }
 
-function setCreateAccountsDisabled(disable: boolean) {
-    $("#create_accounts_submit").prop("disabled", disable);
-    $("#accounts_input").prop("disabled", disable);
-    $("#passwords_toggle").prop("disabled", disable);
-}
-
-export function create_accounts(prompt: string) {
+export function createAccounts(prompt: string) {
     modal.confirm (prompt, function () {
         const className = $('#classes').val() as string;
         const generatePasswords = $('#passwords_toggle').is(":checked") as boolean;
         const accounts = $('#accounts_input').val() as string;
-
-        setCreateAccountsDisabled(true);
         setLoadingVisibility(true);
 
         $.ajax({
@@ -636,32 +623,26 @@ export function create_accounts(prompt: string) {
             }),
             contentType: 'application/json'
         }).done(function (response) {
+
             setLoadingVisibility(false);
-            setCreateAccountsDisabled(false);
+            $('#accounts_form').hide();
+            $('#create_accounts_title').hide();
 
-            $('#accounts_form').addClass('hidden');
-            $('#accounts_results').removeClass('hidden');
-            $('#create_accounts_title').text('Successfully created student accounts');
+            $('#accounts_results').show();
+            $('#accounts_results_title').show();
             $("tr:has(td)").remove();
+            const accountsHtml = createHtmlForAccountsTable(response['accounts']);
+            $("#accounts_table").append(accountsHtml);
 
-            let result = ""
-            for (let account of response['accounts']) {
-                result += `
-                  <tr class="border border-gray-600">
-                    <td class="text-center px-4 py-2">${account['username']}</td>
-                    <td class="text-center px-4 py-2">${account['password']}</td>
-                  </tr>`;
-            }
-            $("#accounts_table").append(result);
         }).fail(function (err) {
             setLoadingVisibility(false);
-            setCreateAccountsDisabled(false);
 
             try {
-                // This endpoint has to return info about the error to direct the user
-                // If the error is JSON, combine its properties to form an error message
+                // This endpoint has to return error info to direct the user how to fix it
                 const parsed = JSON.parse(err.responseText);
                 if (parsed.error) {
+                    // Note the notification should not be closed automatically
+                    // because it contains feedback about broken records
                     modal.notifyError(parsed.error, 0);
                     return;
                 }
@@ -670,6 +651,26 @@ export function create_accounts(prompt: string) {
             modal.notifyError(err.responseText);
         });
     });
+}
+
+function createHtmlForAccountsTable(accounts: Array<any>) {
+    let result = ""
+    for (let account of accounts) {
+        result += `
+          <tr class="border border-gray-600">
+            <td class="text-center px-4 py-2">${account['username']}</td>
+            <td class="text-center px-4 py-2">${account['password']}</td>
+          </tr>`;
+    }
+    return result;
+}
+
+function onCreateAccountsPaste() {
+    // When copying data from Excel, the default column separator is a tab (\t).
+    // So, when text is pasted in the textarea for creating accounts, so we replace tabs with semicolons
+    const accountsInput = $('#accounts_input').val() as string;
+    const newAccounts = accountsInput.replace(/\t/g, ';');
+    $('#accounts_input').val(newAccounts);
 }
 
 export function copy_join_link(link: string, success: string) {
@@ -723,6 +724,21 @@ function setLevelStateIndicator(level: string) {
     } else {
       $('#state_accessible').removeClass('hidden');
     }
+  }
+}
+
+export interface InitializeCreateAccountsPageOptions {
+  readonly page: 'create-accounts';
+}
+
+export function initializeCreateAccountsPage(_options: InitializeCreateAccountsPageOptions) {
+  const accountsInput = document.getElementById("accounts_input") as HTMLFormElement;
+  if (accountsInput) {
+      // Apparently we need the setTimeout to get the whole text of the textarea because the event provides only
+      // the text that was in the clipboard which does not work in if the user is appending text and not replacing it.
+      accountsInput.addEventListener('paste', function() {
+          window.setTimeout(onCreateAccountsPaste, 100);
+      });
   }
 }
 

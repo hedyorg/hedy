@@ -304,20 +304,17 @@ kbd {
 }
 
 
-#spinner {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
+#loading_spinner {
+  border: 16px solid #f7f7f7;
+  border-top: 16px solid #2977ff;
   border-radius: 50%;
   width: 120px;
   height: 120px;
   z-index: 101;
   animation: spin 2s linear infinite;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: 50%;
-  margin-bottom: 50%;
-  transform: translate(-50%, -50%);
+  position: fixed;
+  top: calc(50% - 60px);
+  left: calc(50% - 60px);
 }
 
 @keyframes spin {
@@ -325,7 +322,7 @@ kbd {
   100% { transform: rotate(360deg); }
 }
 
-#loading {
+#loading_mask {
   display: block;
   position: absolute;
   top: 0;
