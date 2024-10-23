@@ -591,7 +591,7 @@ adventures:
                     Kun jij regel 10 afmaken zodat het programma werkt?
 
                     ### Opdracht 2
-                    Geef de speler feedback over een goed en over een fout antwoord, zoals `{print} 'Super!'` of `{print} 'Helaas, het goede antwoord was ' goede_antwoord`.
+                    Geef de speler feedback over een goed en over een fout antwoord, zoals `{print} 'Super!'` of `{print} 'Helaas! Het goede antwoord is ' goede_antwoord`.
                 example_code: |
                     ```
                     score = 0
@@ -1937,7 +1937,7 @@ adventures:
                         {print} gekozen_kant gekozen_ledemaat ' op ' gekozen_kleur
 
                     {print} 'Klaar voor een potje Twister?'
-                    {for} i {in} {range} 1 to _
+                    {for} i {in} {range} 1 {to} _
                         {call} draai
                         {sleep} 2
                     ```
@@ -2830,7 +2830,8 @@ adventures:
                     In plaats van noten zoals 'C5' of 'B8', kun je nu ook getallen spelen. Type bijvoorbeeld `{play} 1` voor de laagste noot, `{play} 70` voor de hoogste noot of elk willekeurig getal er tussenin.
 
                     ### Opdracht
-                    Dit vraagt om muzikale berekeningen! Probeer de voorbeeldcode een paar keer uit met verschillende startgetallen. Componeer daarna je eigen muziek door getallen te gebruiken!
+                    Dit vraagt om muzikale berekeningen! Probeer de voorbeeldcode een paar keer uit met verschillende startgetallen.
+                    Componeer daarna je eigen muziek door getallen te gebruiken!
                 example_code: |
                     ```
                     getal = {ask} 'Noem een getal tussen 1 en 67:'
@@ -4275,8 +4276,8 @@ adventures:
                     {print} 'veh heh het'
                     {print} 'al op de tafel gezet'
                     couplet = couplet + 1
-                    {sleep}
                     {print} 'Door naar het ' couplet 'e couplet'
+                    {sleep}
                     ```
                 story_text_2: "Dit kinderliedje telt van 10 visjes naar 1 visje. \nKopieer regel 2 tot en met 7 om het hele lied te maken!\n"
                 example_code_2: |
@@ -4342,7 +4343,7 @@ adventures:
                     ```
             11:
                 story_text: |
-                    In dit level kun je makkelijk (af)tellen in een liedje. Zo kun je bijvoorbeeld het kinderliedje '10 kleine visjes' programmeren.
+                    In dit level kun je makkelijk (af)tellen in een liedje, met gebruik van `{for}` met een `{range}`. Zo kun je bijvoorbeeld het kinderliedje '10 kleine visjes' programmeren.
 
                     ### Opdracht 1
                     Maak het liedje af. Zoek de tekst op als je die niet meer weet.
@@ -4532,7 +4533,7 @@ adventures:
                     # Roep de functie op
                     ```
             17:
-                example_code: "```\n# Paste your code here and make it level 17 proof\n\n# Create a function that detects if someone has won\n{define} detect_winner {with} field, sign:\n    {if} field[1] == field[2] {and} field[2] == field[3] {and} field[1] != '.':\n        game_over = 'yes'\n        {print} 'Player ' sign 'wins!'\n    {elif}:\n        _\n    {else}:\n        game_over = 'no'\n{return} _\n```\n"
+                example_code: "```\n# Plak hier jouw code en maak het \"level 17\" waardig\n\n# Creeer een functie zodat deze detecteert dat iemand heeft gewonnen\n{define} detect_winner {with} field, sign:\n    {if} field[1] == field[2] {and} field[2] == field[3] {and} field[1] != '.':\n        game_over = 'yes'\n        {print} 'Player ' sign 'wins!'\n    {elif}:\n        _\n    {else}:\n        game_over = 'no'\n{return} _\n```\n"
                 story_text: "In het vorige level heb je geleerd hoe je een boter-kaas-en-eieren spel maakt. Het spel werkt, maar is behoorlijk irritant omdat het je steeds vraagt of je al gewonnen hebt.\nNu we de '{elif}' opdracht hebben, kunnen we het spel laten beslissen of iemand gewonnen heeft. Het spel hoeft ons dan niet meer om informatie te vragen!\n\n### Opdracht\n***Plak je code*** Plak je code van het vorige level hier en maak het level 17 proof. In dit level heb je geleerd om een `:` te gebruiken elke keer dat je een codeblok maakt. Voeg de dubbele punten toe op de juiste plekken.\n\n***Maak een functie die detecteert of iemand gewonnen heeft*** We hebben de functie voor je gestart, plak deze onder de functie `print_field` en voltooi de functie. Je ziet dat dit eerste stukje code controleert of plek 1, 2 en 3 hetzelfde zijn, want als dat zo is, heb je er 3 op een rij.\nHet controleert ook of ze geen punt zijn, want als dat zo is, kan de lijn dezelfde symbolen bevatten, maar dat komt alleen omdat deze nog leeg is.\nAls aan al deze voorwaarden is voldaan, is het spel afgelopen en wordt de winnaar afgedrukt.\nVoltooi deze functie met alle mogelijke manieren om te winnen. Dit betekent dat je dit moet doen voor de andere 2 rijen, 3 kolommen en 2 diagonalen.\nAls je alle andere opties hebt voltooid, moet de functie de variabele `game_over` retourneren, zodat we deze in ons spel kunnen gebruiken.\n\n***Roep de functie aan in het spel*** Ga naar de regel`game_over = {ask} 'Heb je gewonnen?'` en verander het in `game_over = {call} detect_winner {with} field, sign`. Nu controleert de functie of er een winnaar is en hoeft het spel niet dat niet meer te vragen!\n\n***Geniet van je spel!*** Goed gedaan! Je hebt het spel geprogrammeerd! Veel plezier met spelen!\n"
     tic_2:
         name: Boter-kaas-en-eieren 2
@@ -4967,7 +4968,7 @@ adventures:
                 example_code: |
                     Hint voor de geneste vierkanten:
                     ```
-                    kleuren = {red}, {blue}, {orange}, {yellow}, {pink}, {purple}, {green}, {brown}, {black}
+                    kleuren = red, blue, orange, yellow, pink, purple, green, brown, black
                     afstand = 120
                     {repeat} 5 {times}
                     _
@@ -4976,9 +4977,9 @@ adventures:
                     ```
                     land = {ask} 'Van welk land wil je de vlag zien?'
                     {if} land {is} 'Nederland'
-                        kleur_1 = {red}
-                        kleur_2 = {white}
-                        kleur_3 = {blue}
+                        kleur_1 = red
+                        kleur_2 = white
+                        kleur_3 = blue
                     ```
             10:
                 story_text: |
@@ -4999,7 +5000,7 @@ adventures:
 
                     Hint voor het stoplicht:
                     ```
-                    kleuren = {red}, {yellow}, {green}
+                    kleuren = red, yellow, green
                     {for} kleur {in} kleuren
                         {color} _
                         {repeat} _
@@ -5052,21 +5053,18 @@ adventures:
 
                     Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500"> 
                 example_code: |
-                    Hint voor het ontwerpen van armbanden:
-
-                    Definieer eerst een functie **voor elke vorm** die je wilt gebruiken op de armband. Voeg daarna op deze manier vormen aan de armband toe:
-
+                    Hint voor het ontwerpen van armbanden. Definieer eerst een functie **voor elke vorm** die je wilt gebruiken op de armband. Voeg daarna op deze manier vormen aan de armband toe:
                     ```
                     {define} teken_een_vierkant
                     _
 
-                    {color} {white}
+                    {color} white
                     {turn} -90
                     {forward} 300
                     {turn} 180
 
                     {for} i {in} {range} 1 {to} 5
-                        {color} {gray}
+                        {color} gray
                         {forward} 100
                         gekozen_vorm = {ask} 'Wat voor vorm wil je op de armband?'
                         gekozen_kleur = {ask} 'In welke kleur?'
