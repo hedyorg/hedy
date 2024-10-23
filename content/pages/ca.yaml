@@ -597,7 +597,7 @@ teacher-guide:
                     mood {is} {ask} 'How are you?'
         -   title: Students use the wrong quotation marks
             example:
-                error_text: It is important to start your lesson by checking if the students know how to type a quotation mark properly. Else they might use the "double quotes" or the skewed one `.
+                error_text: És important començar la classe comprovant si els estudiants saben com escriure les cometes correctament. A Hedy, els estudiants poden usar cometes simples ('') i dobles (""). Per altra banda, els accents no es consideren cometes vàlides (``).
                 error_code: |-
                     {print} `Welcome to the restaurant`
                     food {is} {ask} "What would you like to order?"
@@ -657,19 +657,19 @@ teacher-guide:
                 solution_code: |-
                     {if} name {is} Hedy {print} 'fun'
                     {else} {print} 'meh!
-        -   title: Students use long variable names containing two words
+        -   title: Els estudiants usen noms de variables llargs que contenen dues o més paraules
             example:
-                error_text: A variable should be named with one word. You could use an underscore to connect two words. That counts as one.
+                error_text: Les variables a Hedy no poden contenir espais, així doncs, per tal d'usar diverses paraules juntes, els estudiants han de connectar-les usant guions baixos (_)
                 error_code: chosen door is ask  Which door do you pick?
                 solution_text: Add an underscore.
                 solution_code: chosen_door {is} {ask} 'which door do you pick?'
         -   title: Students want multiple answers to be correct
             example:
-                error_text: For example this student Hedy to tell all his friends that they are funny, but other classmates would be told that they are not.
+                error_text: Per exemple, aquest estudiant vol que Hedy li digui tots els seus amics que són divertits, mentre que als altres companys els hauria de dir que no ho són.
                 error_code: "{if} name {is} Jesse, David, Souf print  You are funny  {else} {print} 'You are not funny'"
                 solution_text: |-
-                    You could use the `in` command for that. It is explained in a higher level, but it does already work in level 5.
-                    Another solution is to use multiple if commands and no else command. The disadvantage is that it won't tell the other classmates that they are not funny.
+                    Pots usar la comanda '{in}' per això. Tot i que s'explica en un nivell superior, ja funciona a partir del nivell 5.
+                    Una altra solució és usar múltiples comandes '{if}' i cap comanda '{else}'. El desavantatge és que no podrà dir als altres companys que no són divertits.
                 solution_code: |-
                     friends {is} Jesse, David, Souf
                     name {is} {ask} 'Who are you?'
