@@ -8,36 +8,32 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-10-04 04:49+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"PO-Revision-Date: 2024-10-22 19:52+0000\n"
+"Last-Translator: Bế Trọng Nghĩa <benghia1st@gmail.com>\n"
 "Language-Team: vi <LL@li.org>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
-#, fuzzy
 msgid "Access Before Assign"
-msgstr "You tried to use the variable {name} on line {access_line_number}, but you set it on line {definition_line_number}. Set a variable before using it."
+msgstr "Chúng tôi phát hiện biến `{name}` được sử dụng trên dòng {access_line_number} trước khi được gán giá trị. Bạn có thể gán giá trị cho biến trước khi sử dụng không?"
 
 #, fuzzy
 msgid "Cyclic Var Definition"
-msgstr "The name `{variable}` needs to be set before you can use it on the right-hand side of the `{is}` command."
+msgstr "We detected that a variable `{variable}` is being used on the right-hand side of the `{is}` command before being set. Can you set the variable before it is used?"
 
-#, fuzzy
 msgid "Else Without If Error"
-msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
+msgstr "Chúng tôi phát hiện được lệnh `{else}` được sử dụng trước khi có lệnh `{if}` trên dòng {line_number}. Bạn có thể thử viết lệnh `{if}` trước lệnh `{else}` không?"
 
-#, fuzzy
 msgid "Function Undefined"
-msgstr "You tried to use the function {name}, but you didn't define it."
+msgstr "Chúng tôi phát hiện hàm {name} được sử dụng mà chưa được định nghĩa. Bạn có thể định nghĩa hàm trước khi sử dụng nó không?"
 
-#, fuzzy
 msgid "Has Blanks"
-msgstr "Your code is incomplete. It contains blanks that you have to replace with code."
+msgstr "Chúng tôi phát hiện chương trình của bạn chưa hoàn thiện. Bạn có thể viết thêm vào chỗ trống được không?"
 
 #, fuzzy
 msgid "Incomplete"
@@ -2826,4 +2822,3 @@ msgstr "Your program"
 
 #~ msgid "student_not_allowed_in_class"
 #~ msgstr "Student not allowed in class"
-
