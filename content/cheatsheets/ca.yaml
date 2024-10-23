@@ -25,32 +25,32 @@
         {turn} {right}
 2:
 -   name: '{is}'
-    explanation: Give a word a name to use in the program using `{is}`. You can choose the name yourself.
+    explanation: Assigna un nom a una paraula per usar en el programa amb `{is}`. Pots elegir el nom tu mateix.
     demo_code: |-
         nom {is} Hedy
         {print} hola nom
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`.
+    explanation: Demana alguna cosa amb `{ask}`. Alerta! Has de donar un nom a la resposta amb `{is}`.
     demo_code: |-
-        color {is} {ask} What is your favorite color?
-        {print} color is your favorite!
+        color {is} {ask} Quin és el teu color preferit?
+        {print} color és el seu preferit!
 -   name: '{sleep}'
-    explanation: '`{sleep}` let Hedy pause for a (couple of) second(s).'
+    explanation: 'Amb `{sleep}`, pots deixar que Hedy faci una pausa d''un (parell de) segon(s).'
     demo_code: |-
-        {print} Let me think for one second...
+        {print} Deixa’m pensar en un segon...
         {sleep}
-        {print} Hmm.. I need 3 more seconds...
+        {print} Hmm.. Necessito 3 segons més ...
         {sleep} 3
-        {print} Eureka! Ive got it!
--   name: '{is} with turtle'
-    explanation: Give a number a name using `{is}`. You can choose the name yourself.
+        {print} Eureka! Ho tinc!
+-   name: '{is} amb tortuga'
+    explanation: Dona un nom a un número usant `{is}`. Pots elegir el nom tu mateix.
     demo_code: |-
         angle {is} 90
         {turn} angle
         {forward} 100
 3:
--   name: Choose random
-    explanation: Choose a random word from a group with `{at}` and `{random}`.
+-   name: Tria l'atzar
+    explanation: Tria una paraula aleatòriament d'un grup usant `{at}` i `{random}`.
     demo_code: |-
         animals {is} dog, cat, kangaroo
         {print} animals {at} {random}
