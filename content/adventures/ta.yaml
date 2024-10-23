@@ -1,7 +1,7 @@
 adventures:
     story:
-        name: Story
-        description: Story
+        name: கதை
+        description: கதை
         levels:
             3:
                 example_code_2: "```\n{print} They hear a sound\nanimals {is} 🐿, 🦔, 🦇, 🦉\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was an animals {at} {random}\n```\n"
@@ -32,7 +32,7 @@ adventures:
                 story_text: "In this level you can use `{if}` and `{repeat}` commands inside other `{if}` and `{repeat}` commands. \nThis gives you many options and really helps you to make your story interactive.\n\n### Exercise 1\nFinish the code so the `{if}` works correctly.\n\n### Exercise 2\nAdd an `{if}` and `{else}` for the part of the story where Robin goes home too.\n\n### Exercise 3\nGo back to your level 8 story and use at least two `{if}`s inside another `{if}`.\n"
                 example_code: "```\n{print} 'Robin is walking downtown'\nlocation = {ask} 'Is Robin going into a shop, or does she go home?'\n{if} location {is} shop\n    {print} 'She enters the shop.'\n    {print} 'Robin sees an interesting looking book'\n    book = {ask} 'Does Robin buy the book?'\n    {if} book {is} yes\n    _ {print} 'Robin buys the book and goes home'\n    _ {else}\n    _ {print} 'Robin leaves the shop and goes home'\n{else}\n    {print} 'Robin goes home'\n```\n"
             1:
-                story_text: "In level 1 you can make a story with a different main character that you enter yourself.\n\nIn the first line, use `{ask}` and ask who the main character of the story will be.\n\nAfter that first line, start with `{print}` if the sentence needs to be printed.\nYou use `{echo}` if you want your main character to be at the end of the sentence.\n"
+                story_text: "நிலை 1-இல், நீங்களே உருவாக்கிய வேறொரு முக்கிய கதாபாத்திரத்தைக் கொண்டு கதையை உருவாக்கலாம்.\n\nமுதல் வரியில், `{ask}` என்கிற கட்டளையைப் பயன்படுத்தி, கதையின் முக்கிய கதாபாத்திரம் யார் என்று கேட்கவும்.\n\nஅந்த முதல் வரிக்குப்பின், வாக்கியத்தை அச்சிட வேண்டுமானால் `{print}` என்ற \nகட்டளையைக் கொண்டு தொடங்கவும்.\nஉங்கள் முக்கிய கதாபாத்திரம் வாக்கியத்தின் முடிவில் இருக்க வேண்டுமெனில் `{echo}` என்ற கட்டளையைப் பயன்படுத்தவும்.\n"
                 example_code: "```\n{ask} The main character of this story is\n{print} The main character is now going to walk in the forest\n{echo} They're a bit scared,\n{print} They hear crazy noises everywhere\n{print} They're afraid this is a haunted forest\n```\n"
                 story_text_2: "### Exercise\nNow create your own story of at least 6 lines of code.\nThis story cannot be the same as the example code.\nUse at least one `{ask}` and one `{echo}` command.\nYou can make it about any topic you like.\nIf you can't think of a topic, use one of our choices: going to the movies, a sports match or a day at the zoo.\n"
             8:
@@ -50,7 +50,7 @@ adventures:
             15:
                 story_text: "Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game == 'on'` so you can play until the game is over.\nOr you can use `{while} sword == 'lost'` so the player can't continue the game until they have found something.\n\n### Exercise\nThe example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.\n"
                 example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
-        default_save_name: Story
+        default_save_name: கதை
     ask_command:
         levels:
             1:
