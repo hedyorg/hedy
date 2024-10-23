@@ -655,9 +655,9 @@ export function createAccounts(prompt: string) {
 
 function createHtmlForAccountsTable(accounts: Array<any>) {
     let result = ""
-    for (let account of accounts) {
+    for (let [index, account] of accounts.entries()) {
         result += `
-          <tr class="border border-gray-600">
+          <tr class="${ index%2 ? 'bg-white' : 'bg-gray-200'}">
             <td class="text-center px-4 py-2">${account['username']}</td>
             <td class="text-center px-4 py-2">${account['password']}</td>
           </tr>`;

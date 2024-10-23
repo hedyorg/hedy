@@ -53,18 +53,22 @@
         </form>
 
         <div id="accounts_results" class="w-1/2 gap-4 mt-4 items-center hidden">
-            <button id="copy_accounts" class="blue-btn px-4 mb-4" onclick="hedyApp.copyAccountsToClipboard('{{_('copy_clipboard')}}')">
-              {{_('copy_accounts_to_clipboard')}}
-            </button>
-            <button id="print_accounts" class="blue-btn px-4 mb-4" onclick="hedyApp.printAccounts()">
-              {{_('print_accounts')}}
-            </button>
-            <table id="accounts_table" data-cy="create_accounts_output" class="w-full border border-gray-600">
-                <tr class="">
-                    <th class="px-10 py-2 text-center">{{_('username')}}</th>
-                    <th class="px-10 py-2 text-center">{{_('password')}}</th>
-                </tr>
-            </table>
+            <div class="flex flex-row gap-4">
+                <button id="copy_accounts" class="blue-btn px-4 mb-3" onclick="hedyApp.copyAccountsToClipboard('{{_('copy_clipboard')}}')">
+                  {{_('copy_accounts_to_clipboard')}}
+                </button>
+                <button id="print_accounts" class="blue-btn px-4 mb-3" onclick="hedyApp.printAccounts()">
+                  {{_('print_accounts')}}
+                </button>
+            </div>
+            <div class="overflow-x-auto rounded-lg shadow-lg">
+                <table id="accounts_table" data-cy="create_accounts_output" class="w-full border border-gray-400">
+                    <tr class="bg-blue-300 text-blue-900">
+                        <th class="px-10 py-2 text-center">{{_('username')}}</th>
+                        <th class="px-10 py-2 text-center">{{_('password')}}</th>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </div>
