@@ -1308,6 +1308,13 @@ class IsValid(Filter):
     def error_remove_missing_from(self, meta, args):
         raise exceptions.MissingAdditionalCommand(command='remove', missing_command='from', line_number=meta.line)
 
+    def error_add_missing_list(self, meta, args):
+        raise exceptions.IncompleteCommandException(incomplete_command='add', level=self.level, line_number=meta.line)
+
+    def error_remove_missing_list(self, meta, args):
+        raise exceptions.IncompleteCommandException(incomplete_command='remove', level=self.level,
+                                                    line_number=meta.line)
+
     def error_non_decimal(self, meta, args):
         raise exceptions.NonDecimalVariable(line_number=meta.line)
 
