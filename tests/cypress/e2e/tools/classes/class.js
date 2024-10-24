@@ -50,7 +50,6 @@ export function addStudents(classname, count) {
     openClassView(classname);
     cy.wait(500);
 
-    cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
     cy.getDataCy('add_student').click();
     cy.getDataCy('create_accounts').click();
 

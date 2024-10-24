@@ -586,7 +586,7 @@ export function printAccounts() {
         }
       }
     </style>`;
-    newWindow.document.write(table!.outerHTML + css);
+    newWindow.document.write(table?.outerHTML + css);
     newWindow.print();
     newWindow.close();
 }
@@ -607,10 +607,14 @@ export function copyAccountsToClipboard(prompt: string) {
 }
 
 export function createAccounts(prompt: string) {
-    modal.confirm (prompt, function () {
+    const accounts = $('#accounts_input').val() as string;
+    const numberOfAccounts = accounts.split('\n').filter(l => l.trim()).length;
+    const updatedPrompt = prompt.replace('{number_of_accounts}', numberOfAccounts.toString());
+
+    modal.confirm (updatedPrompt, function () {
         const className = $('#classes').val() as string;
         const generatePasswords = $('#passwords_toggle').is(":checked") as boolean;
-        const accounts = $('#accounts_input').val() as string;
+
         setLoadingVisibility(true);
 
         $.ajax({
@@ -733,13 +737,11 @@ export interface InitializeCreateAccountsPageOptions {
 
 export function initializeCreateAccountsPage(_options: InitializeCreateAccountsPageOptions) {
   const accountsInput = document.getElementById("accounts_input") as HTMLFormElement;
-  if (accountsInput) {
-      // Apparently we need the setTimeout to get the whole text of the textarea because the event provides only
-      // the text that was in the clipboard which does not work in if the user is appending text and not replacing it.
-      accountsInput.addEventListener('paste', function() {
-          window.setTimeout(onCreateAccountsPaste, 100);
-      });
-  }
+  // Apparently we need the setTimeout to get the whole text of the textarea because the event provides only
+  // the text that was in the clipboard which does not work in if the user is appending text and not replacing it.
+  accountsInput?.addEventListener('paste', function() {
+      window.setTimeout(onCreateAccountsPaste, 100);
+  });
 }
 
 export interface InitializeCustomizeClassPageOptions {
