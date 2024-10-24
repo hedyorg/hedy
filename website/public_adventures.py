@@ -82,7 +82,9 @@ class PublicAdventuresModule(WebsiteModule):
             self.customizations["available_levels"].update([int(adv_level) for adv_level in available_levels])
 
     @route("/", methods=["GET"])
+    @route("/", methods=["GET"], subdomain="<language>")
     @route("/filter", methods=["POST"])
+    @route("/filter", methods=["POST"], subdomain="<language>")
     @requires_teacher
     def filtering(self, user, index_page=False):
         index_page = request.method == "GET"
@@ -196,6 +198,7 @@ class PublicAdventuresModule(WebsiteModule):
         return response
 
     @route("/clone/<adventure_id>", methods=["POST"])
+    @route("/clone/<adventure_id>", methods=["POST"], subdomain="<language>")
     @requires_teacher
     def clone_adventure(self, user, adventure_id):
         # TODO: perhaps get it from self.adventures
@@ -259,7 +262,9 @@ class PublicAdventuresModule(WebsiteModule):
                 self.available_tags.update(adv_tags)
 
     @route("/flag/<adventure_id>", methods=["POST"])
+    @route("/flag/<adventure_id>", methods=["POST"], subdomain="<language>")
     @route("/flag/<adventure_id>/<flagged>", methods=["POST"])
+    @route("/flag/<adventure_id>/<flagged>", methods=["POST"], subdomain="<language>")
     @requires_teacher
     def flag_adventure(self, user, adventure_id, flagged=None):
         self.db.update_adventure(adventure_id, {"flagged": 0 if int(flagged) else 1})

@@ -118,14 +118,16 @@ class ProgramsModule(WebsiteModule):
         self.db = db
 
     @route("/list", methods=["GET"])
+    @route("/list", methods=["GET"], subdomain="<language>")
     @requires_login
-    def list_programs(self, user):
+    def list_programs(self, user, language="en"):
         # Filter by level, adventure, submitted, paginated.
         return make_response({"programs": self.db.programs_for_user(user["username"]).records})
 
     @route("/delete/", methods=["POST"])
+    @route("/delete/", methods=["POST"], subdomain="<language>")
     @requires_login
-    def delete_program(self, user):
+    def delete_program(self, user, language="en"):
         body = request.json
         if not isinstance(body.get("id"), str):
             return make_response(gettext("request_invalid"), 400)
@@ -150,7 +152,8 @@ class ProgramsModule(WebsiteModule):
         return make_response(resp, 200)
 
     @route("/duplicate-check", methods=["POST"])
-    def check_duplicate_program(self):
+    @route("/duplicate-check", methods=["POST"], subdomain="<language>")
+    def check_duplicate_program(self, language="en"):
         body = request.json
         if not isinstance(body, dict):
             return make_response(gettext("request_invalid"), 400)
@@ -167,8 +170,9 @@ class ProgramsModule(WebsiteModule):
         return make_response({"duplicate": False}, 200)
 
     @route("/", methods=["POST"])
+    @route("/", methods=["POST"], subdomain="<language>")
     @requires_login
-    def save_program(self, user):
+    def save_program(self, user, language="en"):
         body = request.json
         if not isinstance(body, dict):
             return make_response(gettext("request_invalid"), 400)
@@ -225,9 +229,16 @@ class ProgramsModule(WebsiteModule):
         }, 200)
 
     @route("/share/<program_id>", methods=['POST'], defaults={'second_teachers_programs': False})
+    @route(
+        "/share/<program_id>",
+        methods=['POST'],
+        defaults={'second_teachers_programs': False},
+        subdomain="<language>"
+    )
     @route("/share/<program_id>/<second_teachers_programs>", methods=["POST"])
+    @route("/share/<program_id>/<second_teachers_programs>", methods=["POST"], subdomain="<language>")
     @requires_login
-    def share_unshare_program(self, user, program_id, second_teachers_programs):
+    def share_unshare_program(self, user, program_id, second_teachers_programs, language="en"):
         program = self.db.program_by_id(program_id)
         if not program or program["username"] != user["username"]:
             return make_response(gettext("request_invalid"), 404)
@@ -259,8 +270,9 @@ class ProgramsModule(WebsiteModule):
                                              second_teachers_programs=second_teachers_programs == 'True')
 
     @route("/submit", methods=["POST"])
+    @route("/submit", methods=["POST"], subdomain="<language>")
     @requires_login
-    def submit_program(self, user):
+    def submit_program(self, user, language="en"):
         body = request.json
         if not isinstance(body, dict):
             return make_response(gettext("request_invalid"), 400)
@@ -281,8 +293,9 @@ class ProgramsModule(WebsiteModule):
         return make_response(response, 200)
 
     @route("/unsubmit", methods=["POST"])
+    @route("/unsubmit", methods=["POST"], subdomain="<language>")
     @requires_teacher
-    def unsubmit_program(self, user):
+    def unsubmit_program(self, user, language="en"):
         body = request.json
         if not isinstance(body, dict):
             return make_response(gettext("request_invalid"), 400)
@@ -302,8 +315,9 @@ class ProgramsModule(WebsiteModule):
         return make_response(response, 200)
 
     @route("/set_favourite", methods=["POST"])
+    @route("/set_favourite", methods=["POST"], subdomain="<language>")
     @requires_login
-    def set_favourite_program(self, user):
+    def set_favourite_program(self, user, language="en"):
         body = request.json
         if not isinstance(body, dict):
             return make_response(gettext("request_invalid"), 400)
@@ -323,8 +337,9 @@ class ProgramsModule(WebsiteModule):
             return make_response(gettext("request_invalid"), 400)
 
     @route("/set_hedy_choice", methods=["POST"])
+    @route("/set_hedy_choice", methods=["POST"], subdomain="<language>")
     @requires_admin
-    def set_hedy_choice(self, user):
+    def set_hedy_choice(self, user, language="en"):
         body = request.json
         if not isinstance(body, dict):
             return make_response(gettext("request_invalid"), 400)
@@ -345,8 +360,9 @@ class ProgramsModule(WebsiteModule):
         return make_response({"message": gettext("unfavourite_success")}, 200)
 
     @route("/report", methods=["POST"])
+    @route("/report", methods=["POST"], subdomain="<language>")
     @requires_login
-    def report_program(self, user):
+    def report_program(self, user, language="en"):
         body = request.json
 
         # Make sure the program actually exists and is public
