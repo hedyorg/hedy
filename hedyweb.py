@@ -8,7 +8,7 @@ from os import path
 class PageTranslations:
     def __init__(self, page):
         self.data = {}
-        if page in ['start', 'join', 'learn-more', 'for-teachers']:
+        if page in ['start', 'join', 'learn-more', 'for-teachers', 'workbooks']:
             translations = glob.glob('content/pages/*.yaml')
         else:
             translations = glob.glob('content/pages/' + page + '/*.yaml')
