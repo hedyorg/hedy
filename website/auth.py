@@ -326,20 +326,6 @@ def login_user_from_token_cookie():
         remember_current_user(user)
 
 
-def validate_student_signup_data(account):
-    if not isinstance(account.get("username"), str):
-        return gettext("username_invalid")
-    if "@" in account.get("username") or ":" in account.get("username"):
-        return gettext("username_special")
-    if len(account.get("username").strip()) < 3:
-        return gettext("username_three")
-    if not isinstance(account.get("password"), str):
-        return gettext("password_invalid")
-    if len(account.get("password")) < 6:
-        return gettext("passwords_six")
-    return None
-
-
 def validate_signup_data(account):
     if not isinstance(account.get("username"), str):
         return gettext("username_invalid")

@@ -518,6 +518,34 @@ class TestsLevel16(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
+    def test_change_list_item_to_list_access(self):
+        code = textwrap.dedent("""\
+        a = [1, 2]
+        b = [3, 4]
+        a[1] = b[2]""")
+
+        expected = self.dedent(
+            "a = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])",
+            "b = Value([Value(3, num_sys='Latin'), Value(4, num_sys='Latin')])",
+            self.list_access_transpiled('a.data[int(1)-1]'),
+            "a.data[int(1)-1] = b.data[int(2)-1]")
+
+        self.multi_level_tester(code=code, expected=expected)
+
+    def test_change_list_item_to_random_list_access(self):
+        code = textwrap.dedent("""\
+        a = [1, 2]
+        b = [3, 4]
+        a[1] = b[random]""")
+
+        expected = self.dedent(
+            "a = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])",
+            "b = Value([Value(3, num_sys='Latin'), Value(4, num_sys='Latin')])",
+            self.list_access_transpiled('a.data[int(1)-1]'),
+            "a.data[int(1)-1] = random.choice(b.data)")
+
+        self.multi_level_tester(code=code, expected=expected)
+
     def test_assign_list_missing_brackets_gives_error(self):
         code = textwrap.dedent("""\
         animals = 'chicken', 'horse', 'cow'

@@ -302,3 +302,34 @@ kbd {
     text-align: start;
   } 
 }
+
+
+#loading_spinner {
+  border: 16px solid #f7f7f7;
+  border-top: 16px solid #2977ff;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  z-index: 101;
+  animation: spin 2s linear infinite;
+  position: fixed;
+  top: calc(50% - 60px);
+  left: calc(50% - 60px);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#loading_mask {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(192, 192, 192, 0.5);
+}
+
