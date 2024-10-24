@@ -91,7 +91,7 @@
             </div>
             <div class="w-full p-2 mx-4">
                 <h2 class="px-8 pb-2">Filtering options</h2>
-                <select id="admin_filter_category" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded mr-4">
+                <select id="admin_filter_category" data-cy="admin_filter_category" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded mr-4">
                     <option value="created" {% if filter and filter == "created" %} selected {% endif %}>Created</option>
                     <option value="last_login" {% if filter and filter == "last_login" %} selected {% endif %}>Last login</option>
                     <option value="username" {% if filter and filter == "username" %} selected {% endif %}>Username</option>
@@ -113,12 +113,12 @@
                         {% endfor %}
                     </select>
                     <div id="date_filter_input" class="filter_input flex flex-row w-full" {% if filter and filter != "created" and filter != "last_login" %}style="display: none;"{% endif %}>
-                        <input type="date" id="admin_start_date" {% if start_date %} value="{{ start_date }}" {% endif %} class="inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-1 rtl:ml-1">
-                        <input type="date" id="admin_end_date" {% if end_date %} value="{{ end_date }}" {% endif %} class="inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2">
+                        <input type="date" id="admin_start_date" data-cy="admin_start_date" {% if start_date %} value="{{ start_date }}" {% endif %} class="inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-1 rtl:ml-1">
+                        <input type="date" id="admin_end_date" data-cy="admin_end_date" {% if end_date %} value="{{ end_date }}" {% endif %} class="inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2">
                     </div>
                     <div class="flex flex-row ltr:ml-auto rtl:mr-auto">
                         <button type="reset" class="red-btn mx-2" onclick="window.open('/admin/users', '_self');">Reset</button>
-                        <button type="submit" class="green-btn ltr:ml-2 rtl:mr-2 px-4">Filter</button>
+                        <button type="submit" class="green-btn ltr:ml-2 rtl:mr-2 px-4" data-cy="submit">Filter</button>
                     </div>
                 </div>
             </div>

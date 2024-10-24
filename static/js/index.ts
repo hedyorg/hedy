@@ -31,3 +31,4 @@ export * from './adventure';
 export * from './microbit';
 export * from './autosave';
 export * from './custom-elements';
+export * from './admin';
