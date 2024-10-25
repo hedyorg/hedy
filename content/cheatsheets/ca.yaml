@@ -74,37 +74,37 @@
         name {is} Hedy
         {print} 'my name is ' name
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
+    explanation: Demana alguna cosa amb `{ask}`.
     demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {print} color ' is your favorite!'
+        color {is} {ask} 'Quin és el teu color preferit?'
+        {print} color ' és el teu preferit!'
 5:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
+    explanation: Imprimeix un text literal usant cometes.
     demo_code: '{print} ''Hola benvingut a Hedy.'''
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
+    explanation: Demana alguna cosa amb `{ask}`.
     demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {print} color ' is your favorite!'
+        color {is} {ask} 'Quin és el teu color preferit?'
+        {print} color ' és el teu preferit!'
 -   name: '{if}'
-    explanation: Make a choice with `{if}`.
+    explanation: Fes una elecció amb `{if}`.
     demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
--   name: '{if} with turtle'
-    explanation: Make a choice with `{if}`.
+        color {is} {ask} 'Quin és el teu color preferit?'
+        {if} color {is} verd {print} 'que bonic!' {else} {print} 'no és tan bonic'
+-   name: '{if} amb tortuga'
+    explanation: Fes una elecció amb `{if}`.
     demo_code: |-
-        answer {is} {ask} 'How far should I walk?'
-        {if} answer {is} far {forward} 100 {else} {forward} 5
+        resposta {is} {ask} 'Com de lluny he de caminar?'
+        {if} resposta {is} lluny {forward} 100 {else} {forward} 5
 -   name: '{in}'
-    explanation: Check elements with `{in}`.
+    explanation: Comprova elements amb `{in}`.
     demo_code: |-
-        pretty_colors {is} green, yellow
-        color {is} {ask} 'What {is} your favorite color?'
-        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
+        colors_bonics {is} verd, groc
+        color {is} {ask} 'Quin és el teu color preferit?'
+        {if} color {in} colors_bonics {print} 'bonic!' {else} {print} 'meh'
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    explanation: Comprova si una tecla determinada del teclat està `{pressed}`.
     demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
 6:
 -   name: '{print}'
