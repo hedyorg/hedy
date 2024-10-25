@@ -1397,7 +1397,7 @@ workbooks:
           answer    : "Incorrect. Name is not set."
 
         - type      : MC-code
-          options   : ["Goed" , "Fout"]
+          options   : ["Correct" , "Incorrect"]
           code      : |-
             name is Johnson
             print Goodmorning mr name!
@@ -1491,201 +1491,199 @@ workbooks:
           - type : text
             contents  : |-
               #### Exercise 1: Mark the correct piece of the code
-# MARLEEN
           - type      : circle
             goal      : lists
             code      : |-
-                          vandaag is maandag
-                          klassen is 1HC, 1HB, 1HA
-                          lokalen is 011, 304, 305, OLC
-            answer    : "klassen en lokalen"
+                          today is monday
+                          classes is 1HC, 1HB, 1HA
+                          rooms is 011, 304, 305, 501
+            answer    : "classes and rooms"
           - type      : circle
-            goal      : plek(ken) waar tekst uit een lijst wordt gebruikt
+            goal      : place(s) where text from a list is being used
             code      : |-
-                        klassen is 1HC, 1HB, 1HA
-                        print vandaag heeft klassen at random vrij!
-            answer    : "Op het einde van regel 2"
+                        classes is 1HC, 1HB, 1HA
+                        print today classes at random gets a day off!
+            answer    : "The end of line 2"
           - type      : text
             contents  : |-
               #### Exercise 2: Predict the output
-              Vind je het lastig? Gebruik dan weer het stappenplan om variabele-uitvoer te voorspellen.
-              
-              1. Omcirkel de plek waar de lijst wordt ingesteld
-              2. Omcirkel de plek waar de lijst wordt gebruikt
-              3. Trek een lijn tussen deze plekken
-              4. Bij een `at` `random` mag je zelf willekeurig iets uit de lijst kiezen.
+              Having a hard time? Use these steps again to predict the output of the variable.
+              1. Mark the place where a variable is being set
+              2. Mark the place where a variable is being used
+              3. Draw a line between these two places
+              4. Pick a random item of the list when `at` `random` is used.
           -   type      : output
               code      : |-
-                docenten is Hermans, Merbis, Bagci, Senkal
-                print Vandaag les van docenten at random!
-              answer    : Vandaag les van **keuze uit docenten**
+                teachers is Hermans, Merbis, Bagci, Senkal
+                print Today teachers at random will be teaching you!
+              answer    : Today **pick a teacher** will be teaching you!
               lines     : 1
           -   type      : output
               code      : |-
-                docenten is Hermans, Merbis, Bagci, Senkal
-                print De docent vandaag is Hermans.
-              answer    : De docent vandaag is Hermans.
+                teachers is Hermans, Merbis, Bagci, Senkal
+                print Today's teacher is Hermans.
+              answer    : Today's teacher is Hermans.
               lines     : 1
           -   type      : output
               code      : |-
-                weer is zonnig, regen, wolken, onweer
-                print Wat is het lekker weer vandaag!
-              answer    : Wat is het lekker weer vandaag!
+                weather is sunny, rainy, cloudy, stormy
+                print What lovely weather today!
+              answer    : What lovely weather today!
               lines     : 1
           - type      : text
             contents  : |-
               #### Exercise 3: Error?
-              Lees de codes goed! Welke zijn er goed of fout.
+              Read the codes carefully. Which ones are correct?
           -   type      : MC-code
-              options   : ["Goed" , "Fout"]
+              options   : ["Correct" , "Incorrect"]
               code      : |-
-                weer is zonnig, regen, wolken, onweer
-                print Bah! De computer loopt weer vast.
-              answer    : "Fout. Je kan een lijst niet printen."
+                rocks is pebbles, stones, boulders
+                print I love programming! It rocks!
+              answer    : "Incorrect. You can't print a list"
           -   type      : MC-code
-              options   : ["Goed" , "Fout"]
+              options   : ["Correct" , "Incorrect"]
               code      : |-
-                docenten is Hermans
-                print Vandaag alweer docenten at random
-              answer    : "Fout, docenten is geen lijst"
+                teachers is Hermans
+                print It will be teachers at random today
+              answer    : "Incorrect. Teachers is not a list"
           -   type      : MC-code
-              options   : ["Goed" , "Fout"]
+              options   : ["Correct" , "Incorrect"]
               code      : |-
-                    docenten is onweer, regen, ijzel
-                    print Vandaag alweer docenten at random!
-              answer    : "Goed, de naam hoeft niet te kloppen voor de computer."
+                teachers is sunny, rainy, cloudy, stormy
+                print It will be teachers at random today
+              answer    : "Correct, the computer doesn't care if the variable name doesn't make sense."
           - type      : text
             # [Teacher] Dit zijn alle avonturen zonder `add to` en `remove from`.[/Teacher]
             # Misschien ook nog even mooier weergeven?
             contents  : |-
-              ## Avonturen
-              Dit is een goed moment voor deze avonturen:
-              Introductie
-              Willekeurig
-              Dobbelsteen
-              Steen, papier, schaar
-              Muziek
-              Waarzegger
+              ## Adventures
+              This is a good time to start with these adventures:
+              Introduction
+              Random
+              Dice
+              Rock, paper, scissors
+              Music
+              Fortune Teller
               Restaurant
-              Spookhuis
-              Afwas?
+              Haunted House
+              Dishes
           - type      : text
             contents  : |-
-              ### Lijsten aanpassen
+              ### Adjusting lists
               
-              Tot nu toe hebben we lijsten steeds aan het begin van het programma ingesteld.
-            code  : |-              
-              antwoorden is ja, nee, misschien
-              print Het antwoord is antwoorden at random
+              Up until now we have always set our lists at the beginning of a program.
+            code  : |-
+              answers is yes, no, maybe
+              print The answer is answers at random
           - type      : text
             contents  : |-
-              Maar soms wil je dat de gebruiker van een programma ook opties kan toevoegen.
-              Dat doe je met een `add` en een `to` commando. Je kan ook iets uit een lijst verwijderen, met `remove` en `from`.
+              But sometimes you want your user to add items to the list.
+              You can use the `add to` command for that. You can also remove items from the list with `remove from`.
 
             code  : |-              
-              dieren is 🐿, 🦔, 🦇, 🦉
-              dier is ask Wat zou het kunnen zijn?
-              add dier to dieren
-              print het was een dieren op willekeurig
+              animals is 🐿, 🦔, 🦇, 🦉
+              animal is ask What made that sound?
+              add animal to animals
+              print It was... animals at random
           - type      : text
             contents  : |-
-             #### Exercise 4: Goed of fout?
+             #### Exercise 4: Correct or incorrect?
 
           -   type      : MC-code
-              options   : ["Goed" , "Fout"]
+              options   : ["Correct" , "Incorrect"]
               code      : |-
                     letters is a,b,c,d
                     remove a to letters
-              answer    :  "Fout. Bij remove hoort from, niet to."
+              answer    :  "Incorrect. It is `remove from`, not `remove to`."
           -   type      : MC-code
-              options   : ["Goed" , "Fout"]
+              options   : ["Correct" , "Incorrect"]
               code      : |-
-                    eten is pizza, friet, kapsalon
-                    remove kroket from eten
-              answer    :   "Goed, je mag iets verwijderen dat niet in de lijst zit."
+                    food is pizza, fries, tacos
+                    remove burger from food
+              answer    :   "Correct, you are allowed to remove something that isn't on the list. But it doesn't make sense to do so"
           -   type      : MC-code
-              options   : ["Goed" , "Fout"]
+              options   : ["Correct" , "Incorrect"]
               code      : |-
-                    eten is pizza, friet, kapsalon
-                    add pizza to eten
-              answer    :   Goed, je mag iets toevoegen dat al in de lijst zit.
+                    food is pizza, fries, tacos
+                    add pizza to food
+              answer    :   "Correct, you are allowed to put something on a list twice or multiple times."
           - type      : text
             contents  : |-
-              #### Exercise 5: Schrijf de code
-              Kijk goed naar de uitvoer, en schrijf er een passende code bij.
-              **Zorg ervoor dat er steeds minstens een willekeurige keuze in je programma zit, dus niet alleen een print!**
+              #### Exercise 5: Write the code
+              Take a good look at the output and write a matching code for it.
+              **Make sure that your code contains at least one random choice, so don't just use print!**
           - type: input
             answer: |-
-              getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-              print Welkom bij de bingoavond
-              print De drie geluksnummers zijn:
-              print nummers at random en print nummers at random en print nummers at random
+              numbers is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+              print Welcome at bingo night!
+              print The 3 lucky numbers are:
+              print numbers at random and print numbers at random and print numbers at random
             output: |-
-              Welkom bij de bingoavond<br>
-              De drie geluksnummers zijn:<br>
-              5 en 3 en 10
+              Welcome at bingo night!<br>
+              The 3 lucky numbers are:<br>
+              5 and 3 and 10
           - type: input
             answer: |-
-              films is Avengers, Barbie, Inside Out
-              print We gaan vanavond naar de film.
-              We kiezen: films at random
+              movies is Avengers, Barbie, Inside Out
+              print We are going to watch a movie tonight.
+              print We will pick: movies at random
             output: |-
-              We gaan vanavond naar de film.<br>
-              We kiezen: Inside Out
+              We are going to watch a movie tonight.<br>
+              We will pick: Inside Out
 
           - type      : text
             contents  : |-
               #### Exercise 6: Programming words
-              We hebben deze les weer nieuwe programmeerwoorden geleerd! Leg ze uit je eigen woorden.
+              We have learned some new programming words again! Explain them in your own words.
 
           -   type      : define
-              word      : lijst
-              answer    :  "Een variabele waarin meerdere waardes kunnen worden opgeslagen"
+              word      : list
+              answer    :  "A variable in which multiple values are stored"
               lines     : 1
           -   type      : define
-              word      : willekeurig
-              answer    : "Iets dat door de computer wordt uitgekozen."
+              word      : random
+              answer    : "Picked by the computer."
               lines     : 1
           -   type      : define
-              word      : toevoegen
-              answer    : "Iets in een lijst erbij zetten"
+              word      : add
+              answer    : "putting something on a list"
               lines     : 1
           - type      : text
             contents  : |-
               #### Exercise 7: Codes
-              De code `is` is in dit level veranderd, en we hebben ook nieuwe codes geleerd.
-              Wat doen die? Leg het uit in je eigen woorden.
+              The `is` command has changed in this level and we have learned some new commands.
+              What do they do? Explain in your own words.
           -   type      : define
-              word      : "het commando `is` (Let op: `is` kan dus meerdere dingen doen!)"
-              answer    : "Waarde (rechts van de is) opslaan in een variabele of lijst (links van de is)"
+              word      : "The `is` command (Mind: `is` can now do multiple things!)"
+              answer    : "Saving the value (before the is) in a variable or list (after the is)"
               lines     : 1
           -   type      : define
-              word      : "het commando `add to` "
-              answer    : "Voeg iets aan een lijst toe. Het element om toe te voegen staat tussen `add` en `to`, en de lijst staat erachter."
+              word      : "The `add to` command "
+              answer    : "Adds an item to a list. It looks like this: add item to list"
               lines     : 1
           -   type      : define
-              word      : "het commando `remove from` "
-              answer    : "Verwijdert iets uit een lijst. Het element om te verwijderen staat tussen `add` en `to`, en de lijst staat erachter."
+              word      : "The `remove from` command "
+              answer    : "Removes an item from a list. It looks like this: remove item from list"
               lines     : 1
           -   type      : define
-              word      : "het commando `at random` "
-              answer    : "Kiest een willekeurig element uit de lijst."
+              word      : "The `at random` command "
+              answer    : "Picks a random item from a list."
               lines     : 1
           - type      : text
             contents  : |-
-              #### Wat vond jij?
+              #### What's your opinion?
 
           - type      : question
-            text      : "Wat was de leukste exercise van dit level?"
+            text      : "Which exercise did you like best in this level?"
             lines     : 1
           - type      : question
-            text      : "Waarom vond je juist die exercise leuk?"
+            text      : "What did you like about that exercise?"
             lines     : 5
           - type      : question
-            text      : "Welke exercise was het minst leuk?"
+            text      : "Which exercise did you like least in this level?"
             lines     : 1
           - type      : question
-            text      : "Waarom vond je juist die exercise niet leuk?"
+            text      : "What didn't you like about that exercise?"
             lines     : 5
     -   level: '4'
         intro: |-
@@ -1755,20 +1753,20 @@ workbooks:
             #### Exercise 2: Error?
             Lees de codes goed! Welke zijn er goed of fout.
         - type      : MC-code
-          options   : ["Goed" , "Fout"]
+          options   : ["Correct" , "Incorrect"]
           code      :  "print 'Daar lopen twee lama's'"
           answer    : "Fout. Er staat een aanhalingsteken tussen de enkele aanhalingstekens."
         - type      : MC-code
-          options   : ["Goed" , "Fout"]
+          options   : ["Correct" , "Incorrect"]
           code      : "print 'De lama wandelt op straat"
           answer    : "Fout. De aanhalingstekens moeten altijd in paren gebruikt worden."
         - type      : MC-code
-          options   : ["Goed" , "Fout"]
+          options   : ["Correct" , "Incorrect"]
           code      : |-
                 print "Daar lopen twee oma's"
           answer    : "Goed! Als je twee aanhalingstekens gebruikt dan kan je wel oma's schrijven."
         - type      : MC-code
-          options   : ["Goed" , "Fout"]
+          options   : ["Correct" , "Incorrect"]
           code      : |-
             print 'De lama wandelt op straat'
             print "Wat een avontuur"
@@ -1782,20 +1780,20 @@ workbooks:
             Lees de codes goed! Welke zijn er goed of fout.
 
         - type      : MC-code
-          options   : ["Goed" , "Fout"]
+          options   : ["Correct" , "Incorrect"]
           code      : "ask 'Daar lopen twee konijnen'"
           answer    : "Fout. Vergeet niet bij ask een variabele te gebruiken!"
         - type      : MC-code
-          options   : ["Goed" , "Fout"]
+          options   : ["Correct" , "Incorrect"]
           code      : "naam is ask 'Hoe heet jij?'"
           answer    : "Fout. Aanhalingstekens moeten altijd in paren gebruikt worden."
         - type      : MC-code
-          options   : ["Goed" , "Fout"]
+          options   : ["Correct" , "Incorrect"]
           code      : |-
             aantal is ask "Hoeveel capibara's lopen daar?"
           answer    :  "Goed."
         - type      : MC-code
-          options   : ["Goed" , "Fout"]
+          options   : ["Correct" , "Incorrect"]
           code      : |-
             aantal is ask "Hoeveel capibara's lopen daar?"
             print 'Dat zijn er aantal'
@@ -1930,35 +1928,35 @@ workbooks:
             Lees de codes goed! Welke zijn er goed of fout.
 
         - type      : MC-code
-          options   : ["Goed" , "Fout"]
+          options   : ["Correct" , "Incorrect"]
           code      : |-
-            leeftijd is ask 'Hoe oud ben jij?'                    
-            if leeftijd is 16 print 'Perfecto' else 'Jij bent te jong!'
+            age is ask 'How old are you?'
+            if age is 16 print 'Right on!' else 'You are too young!'
           answer    : "Fout. Er staat geen print achter else"
         - type      : MC-code
-          options   : ["Goed" , "Fout"]
+          options   : ["Correct" , "Incorrect"]
           code      : |-
             dier is ask 'Wat voor dier is dat?'                    
             if dier is Lama print 'Beeeee'
           answer    :  "Goed! Er hoeft geen else code te staan"
         - type      : MC-code
-          options   : ["Goed" , "Fout"]
+          options   : ["Correct" , "Incorrect"]
           code      : "print \"Daar lopen twee oma's\""
           answer    : "Goed! Als je twee aanhalingstekens gebruikt dan kan je wel oma's schrijven."
         - type      : MC-code
-          options   : ["Goed" , "Fout"]
+          options   : ["Correct" , "Incorrect"]
           code      : |-
             if naam Hedy 
             print 'Programmeren is leuk!'
           answer    : "Fout, de is mist."
         - type      : MC-code
-          options   : ["Goed" , "Fout"]
+          options   : ["Correct" , "Incorrect"]
           code      : |-
             ask 'Hoe heet deze school?'
             if school is LK print 'Ja!'
           answer    : "Fout. Er staat geen variabele bij ask."
         - type      : MC-code
-          options   : ["Goed" , "Fout"]
+          options   : ["Correct" ,Incorrect"t"]
           code      : |-
             aantal is ask "Hoeveel capibara's lopen daar?"
             if aantal is 5 print 'Dat zijn er dan aantal'

@@ -1597,7 +1597,7 @@ workbooks:
               dieren is 🐿, 🦔, 🦇, 🦉
               dier is ask Wat zou het kunnen zijn?
               add dier to dieren
-              print het was een dieren op willekeurig
+              print het was een dieren at random
           - type      : text
             contents  : |-
              #### Opdracht 4: Goed of fout?
@@ -1613,13 +1613,13 @@ workbooks:
               code      : |-
                     eten is pizza, friet, kapsalon
                     remove kroket from eten
-              answer    :   "Goed, je mag iets verwijderen dat niet in de lijst zit."
+              answer    :   "Goed, je mag iets verwijderen dat niet in de lijst zit. Maar dat heeft natuurlijk geen nut."
           -   type      : MC-code
               options   : ["Goed" , "Fout"]
               code      : |-
                     eten is pizza, friet, kapsalon
                     add pizza to eten
-              answer    :   Goed, je mag iets toevoegen dat al in de lijst zit.
+              answer    :   "Goed, je mag iets toevoegen dat al in de lijst zit. Dan staat het twee keer op de lijst."
           - type      : text
             contents  : |-
               #### Opdracht 5: Schrijf de code
@@ -1627,7 +1627,7 @@ workbooks:
               **Zorg ervoor dat er steeds minstens een willekeurige keuze in je programma zit, dus niet alleen een print!**
           - type: input
             answer: |-
-              getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+              nummers is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
               print Welkom bij de bingoavond
               print De drie geluksnummers zijn:
               print nummers at random en print nummers at random en print nummers at random
@@ -1639,7 +1639,7 @@ workbooks:
             answer: |-
               films is Avengers, Barbie, Inside Out
               print We gaan vanavond naar de film.
-              We kiezen: films at random
+              print We kiezen: films at random
             output: |-
               We gaan vanavond naar de film.<br>
               We kiezen: Inside Out
