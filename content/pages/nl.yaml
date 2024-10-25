@@ -1728,7 +1728,7 @@ workbooks:
             print Hallo allemaal!
             print Welkom bij Hedy
           answer    : |-
-            Hallo allemaal
+            Hallo allemaal!
             Welkom bij Hedy
           lines     : 2
         - type      : text
@@ -1741,7 +1741,7 @@ workbooks:
             naam is Hermans
             lokaal is 305
             print Vandaag hebben we les van naam in lokaal!
-          answer    : "print Vandaag hebben we les van Hermans in 305!"
+          answer    : "Vandaag hebben we les van Hermans in 305!"
           lines     : 1
         - type      : output
           code      : |-
@@ -1794,11 +1794,11 @@ workbooks:
 
         - type      : MC-code
           options   : ["Goed" , "Fout"]
-          code      : "ask 'Daar lopen twee konijnen'"
+          code      : "ask 'Zie jij die twee konijnen daar?'"
           answer    : "Fout. Vergeet niet bij ask een variabele te gebruiken!"
         - type      : MC-code
           options   : ["Goed" , "Fout"]
-          code      : "naam is ask 'Hoe heet jij?'"
+          code      : "naam is ask 'Hoe heet jij?"
           answer    : "Fout. Aanhalingstekens moeten altijd in paren gebruikt worden."
         - type      : MC-code
           options   : ["Goed" , "Fout"]
@@ -1819,7 +1819,7 @@ workbooks:
         - type: input
           answer: |-
             print 'Welkom bij de bingoavond'
-            print 'Hier komt het eerste getal!'
+            print 'Hier komt het eerste getal...!'
           output: |-
             Welkom bij de bingoavond
             Hier komt het eerste getal...!
