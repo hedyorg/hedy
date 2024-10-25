@@ -1187,23 +1187,23 @@ workbooks:
     levels:
     -   level: '1'
         intro: |-
-          ### Printen en invoer
-          Aan het einde van de les kun jij:
-          * Code schrijven die tekst print
-          * Een verhaal met invoer maken
+            ### Print and input
+            By the end of this lesson, you can:
+            * Write codes that print texts
+            * Create a story with input
         exercises:
         -   type      : text
             contents  : |-
-              ### Opdrachten
-              Een computer doet niet zomaar zelf iets, je moet een computer altijd een opdracht geven. Zo'n opdracht heet commando. Om code uit te printen, gebruiken we de code `print`.
+              ### Exercises
+              A computer does not just do something by itself. You must always give a computer a task. Such a task is called a command. To print out code, we use the command `print`.
     
-              ### Tekst printen    
-              Je hebt net op het bord de `print` opdracht gezien.
-              Een `print` opdracht print een woord uit, als het tussen aanhalingstekens staat. Bijvoorbeeld zo `print hallo`.
-              #### Opdracht 1: Voorspel de uitvoer
+              ### Printing text
+              On the screen you've just deen the `print` command.
+              A `print` command prints a word, when it's between quotation marks. For example `print hello`.
+              #### Exercise 1: Predict the output
         -   type      : output
-            code      : "print Hallo allemaal"
-            answer    : "Hallo allemaal"
+            code      : "print Hello everybody"
+            answer    : "Hello everybody"
             lines     : 1
         -   type      : output
             code      : "print goedemorgen"
@@ -1211,289 +1211,289 @@ workbooks:
             lines     : 1
         -   type      : text
             contents  : |-
-              #### Opdracht 2: Foutje?
-              Soms sluipt er een foutje in je code. Dat is niet erg, maar Hedy kan je code dan niet goed lezen.
-              Welke van deze code zijn fout, denk jij?
+              #### Exercise 2: Error?
+              Sometimes an error sneaks into your code. That's no big deal, but Hedy can't read your code properly then.
+              Which of these codes do you think are wrong?
         -   type      : MC-code
-            options   : ["Goed" , "Fout"]
-            code      : "prnt Hallo allemaal!"
-            answer    : "Fout"
+            options   : ["Right" , "Wrong"]
+            code      : "prnt Hello everybody!"
+            answer    : "Wrong"
         -   type      : MC-code
-            options   : ["Goed" , "Fout"]
+            options   : ["Right" , "Wrong"]
             code      : "print print"
-            answer    : "Goed"
+            answer    : "Right"
         -   type      : text
             contents  : |-                                   
-              ### Invoer vragen
-              
-              Alleen tekst is een beetje saai. Je kan in Hedy ook om _invoer_ vragen. Invoer is tekst die je aan de computer geeft.
-              De computer onthoudt die tekst en kan die later weer aan jou laten zien.
-              Deze code toont de vraag 'Hoe heet jij?'
-              
-              ```hedy
-              ask Hoe heet jij?
-              ```
-              
-              ### Invoer laten zien
-              
-              Alleen een ask slaat het antwoord op, maar laat het niet zien. Daarvoor heb je de opdracht `echo` nodig. Die laat het antwoord zien op het einde van de zin.
-              Bijvoorbeeld zo:
+              ### Asking for input
+
+              Only text is a bit boring. You can also ask for _input_ in Hedy. Input is text that you give to the computer.
+              The computer remembers that text and can show it to you later.
+              This code shows the question 'What is your name?'
               
               ```hedy
-              ask Hoe heet jij?
-              echo dus jij heet: 
+              ask What is your name?
               ```
               
-              Als iemand die Maan heet deze code zou gebruiken, dan wordt de uitvoer:
+              ### Showing input
+
+              The ask command saves the answer, but it doesn't show it yet. For that you'll need the `echo` command. `echo` will show the answer at the end of the sentence.
+              Like this:
+              
+              ```hedy
+              ask what is your name?
+              echo so your name is:
+              ```
+              
+              If someone called Olivia would use this code, the output would be:
               
               ```
-              dus jij heet: Maan
+              so your name is: Olivia
               ```
               
-              Let op, het komt precies zo in beeld als het er staat, dus met hetzelfde hoofdlettergebruik en de dubbele punt erbij!
+              Mind that the computer will print the text exactly as you've entered it. So with the colon and the same use of upper- or lowercase letters!
               
-              #### Opdracht 3: Voorspel de uitvoer
-              
-              Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingevuld.
+              #### Exercise 3: Predict the output
+
+              Predict the output of these codes. Pretend to have filled in your own name.
 
         -   type      : output
             code      : |-
-                          ask Hoe heet jij?
-                          echo dus jij heet:
-            answer    : "dus jij heet: **naam**"
+                          ask what is your name?
+                          echo so your name is:
+            answer    : "so your name is: **name**"
             lines     : 2
         -   type      : output
             code      : |-
-                          ask Hoe heet jij?
-                          echo Leuk om je te ontmoeten,
-            answer    : "Leuk om je te ontmoeten, **naam**"
+                          ask What is your name?
+                          echo Nice to meet you,
+            answer    : "Nice to meet you, **name**"
             lines     : 2
         -   type      : text
             contents  : |-
-              #### Opdracht 4: Programmeer-woorden 
-  
-              Iedere les gaan we nieuwe woorden leren, deze les ook. Weet jij wat deze termen betekenen? Leg het uit je eigen woorden. 
+              #### Exercise 4: Programming words
+
+              Every lesson we are going to learn new words, including this lesson. Do you know what these terms mean? Explain it from your own words.
         -   type      : define
-            word      : commando
-            answer    : "Een opdracht die je aan de computer geeft, bijv print."
+            word      : command
+            answer    : "A task you'll give to the computer, e.g. print."
             lines     : 1
         -   type      : define
-            word      : invoer
-            answer    : "Wat je intikt, als Hedy een ask venster laat zien."
+            word      : input
+            answer    : "What you type into the computer when Hedy shows an ask screen"
             lines     : 1
         -   type      : define
-            word      : uitvoer
-            answer    : "Wat Hedy op het scherm zet als je op Uitvoeren drukt, in het rechterscherm."
+            word      : output
+            answer    : "What Hedy shows in the right screen after you've pressed the 'run code' button."
             lines     : 1
         -   type      : text
             contents  : |-
-              #### Opdracht 5: Codes
+              #### Exercise 5: Codes
               
-              We hebben tot nu toe 3 codes geleerd: `print`, `ask` en `echo`. Wat doen die? Leg het uit in je eigen woorden. 
+              We have learned 3 codes so far: `print`, `ask` and `echo`. What so they do? Explain in your own words.
               
         -   type      : define
-            word      : het commando `print`
-            answer    : "Zet tekst op het scherm."
+            word      : the `print` command
+            answer    : "Shows text on the screen."
             lines     : 1
         -   type      : define
-            word      : het commando `ask`
-            answer    : "Vraagt om invoer van de gebruiker."
+            word      : the `ask` command
+            answer    : "Asks the user for input."
             lines     : 1
         -   type      : define
-            word      : het commando `echo`
-            answer    : "Herhaalt de invoer van de gebruiker."
+            word      : the `echo` command
+            answer    : "Repeats the user's input."
             lines     : 1
     -   level: '2'
         intro: |-
-          ### Variabelen
+          ### Variables
           
-          Aan het einde van de les kun jij:
+          By the end of this lesson, you can:
           
-          * Iets opslaan in een variabele
-          * Een verhaal en tekening maken waarin je een variabele gebruikt
+          * Save something in a variable
+          * Create a story or drawing using variabeles
         exercises:
         -   type      : text
             contents  : |-
-              ### Variabele opslaan en gebruiken
-              
-              Je hebt net op het bord de `is` opdracht gezien. 
-              Een `is` opdracht slaat iets op in de computer, en geeft het een naam. We noemen dat een variabelen.
-              Wat in de variabele is opgeslagen noemen we de waarde van de variabele.
+              ### Using variables
+
+              You've just seen the `is` command on the screen.
+              An `is` command saves something in the computer memory and gives it a name. We call this a variable.
+              What is saved in the variable is calles the value of the variable.
             code: |-
-              naam is Mo
-              print naam
+              name is Mo
+              print name
         -   type      : text
             contents  : |-
-              #### Opdracht 1: Omcirkel het juiste stukje code
+              #### Exercise 1: Mark the correct piece of the code
         - type      : circle
-          goal      : variabelen
+          goal      : variabeles
           code      : |-
-            naam is Hedy
-            print Hallo naam
-            leeftijd is 17
-            print Jij bent leeftijd jaar oud
-          answer    :  "Op alle regels"
+            name is Hedy
+            print Hello name
+            age is 17
+            print You are age years old
+          answer    :  "On all lines"
         - type      : circle
-          goal      : plekken waar een variabele **wordt ingesteld.**
+          goal      : places where the variable is **being set.**
           code      : |-
-            naam is Hedy
-            print Hallo naam
-            leeftijd is 17
-            print Jij bent leeftijd jaar oud
-          answer    : "Op regel 1 en 3"
+              name is Hedy
+              print Hello name
+              age is 17
+              print You are age years old
+          answer    : "Line 1 & 3"
         - type      : circle
-          goal      : plekken waar een variabele **wordt gebruikt.**
+          goal      : places where the variables are **being used.**
           code      : |-
-            naam is Hedy
-            print Hallo naam
-            leeftijd is 17
-            print Jij bent leeftijd jaar oud
-          answer    : "Op regel 2 en 4"
+              name is Hedy
+              print Hello name
+              age is 17
+              print You are age years old
+          answer    : "Line 2 and 4"
         - type      : text
           contents  : |-
-            #### Opdracht 2: Voorspel de uitvoer           
-            Tip: Vind je het lastig om de uitvoer te voorspellen? Gebruik dan dit stappenplan:
+            #### Exercise 2: Predict the output
+            Tip: Are you having a hard time predicting the output? Follow these steps:
             
-            1. Omcirkel de plek waar een variabele wordt ingesteld
-            2. Omcirkel de plek waar de variabele wordt gebruikt
-            3. Trek een lijn tussen deze plekken
-            4. Zet de waarde (aan de rechterkant van de `is` op de plek van het gebruik).
+            1. Mark the place where a variable is being set
+            2. Mark the place where a variable is being used
+            3. Draw a line between these two places
+            4. Write the value (what comes after `is`) in the place where the variable is being used.
 # TODO Voorbeeldje?
         - type      : output
           code      : |-
-            naam is Mo
-            print Goed bezig naam!
-          answer    : "Goed bezig Mo!"
+            name is Mo
+            print Great job name!
+          answer    : "Great job Mo!"
           lines     : 1
         - type      : output
           code      : |-
-            naam is Mo
-            print Goed bezig Mo!
-          answer    : "Goed bezig Mo!"
+            name is Mo
+            print Great job Mo!
+          answer    : "Great job Mo!"
           lines     : 1
         - type      : output
           code      : |-
-            voornaam is Layla
-            print Goedemorgen naam!
-          answer    : "Goedemorgen Layla!"
+            first_name is Layla
+            print Goodmorning first_name!
+          answer    : "Goodmorning Layla!"
           lines     : 1
         - type      : text
           contents  : |-
-            #### Opdracht 3: Foutje?
-            Lees de codes goed! Welke zijn er goed of fout.
+            #### Exercise 3: Error?
+            Read the codes carefully. Which ones are correct?
 
         - type      : MC-code
-          options   : ["Goed" , "Fout"]
+          options   : ["Correct" , "Incorrect"]
           code      : |-
-            achternaam is Jansen
-            print Goedemorgen naam!
-          answer    : "Goed"
+            surname is Johnson
+            print Goodmorning surname!
+          answer    : "Correct"
           
         - type      : MC-code
-          options   : ["Goed" , "Fout"]
+          options   : ["Correct" , "Incorrect"]
           code      : |-
-            naam is
-            print Goedemorgen naam!
-          answer    : "Fout. naam wordt niet ingesteld"
+            name is
+            print Goodmorning, name!
+          answer    : "Incorrect. Name is not set."
 
         - type      : MC-code
           options   : ["Goed" , "Fout"]
           code      : |-
-            naam is Jansen
-            print Goedemorgen meneer naam!
-            print Hallo meneer naam!
-          answer    : "Goed. Je mag een variabele meer dan eens gebruiken"
+            name is Johnson
+            print Goodmorning mr name!
+            print Hello mr name!
+          answer    : "Correct. You are allowed to use a variable multiple times."
         - type      : text
           contents  : |-
-            ### Invoer vragen
-            
-            Alleen tekst opslaan is nog niet krachtig. In level 1 hebben we de code `ask` gezien.
-            
-            Die code mag je nu combineren met een `is`. Dat gaat zo:
+            ### Asking for input
+
+            Just saving text isn't very useful. In level 1 we've seen the code `ask`.
+
+            From now on you are allowed to combine `ask` with `is`, like this:
           code      : |-
-            naam is ask Hoe heet jij?
+            name is ask What is your name?
             
         - type      : text
           contents  : |-
-            ### Invoer laten zien
-            Je kan nu gewoon met een `print` het antwoord laten zien, zonder `echo`.
+            ### Showing input
+            With variables, we do not need `echo` anymore. Just use `print` to show the answer.
           code      : |-
-            naam is ask Hoe heet jij?
-            print dus jij heet: naam
+            name is ask What is your name?
+            print so you are called: name
             
         - type      : text
           contents  : |-
-            Als iemand die Maan heet deze code zou gebruiken, dan wordt de uitvoer: `dus jij heet: Maan`
-            #### Opdracht 4: Voorspel de uitvoer            
-            Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingevuld.
+              If someone called Olivia would use this code, the output would be: `so you are called: Olivia`
+            #### Exercise 4: Predict the output
+            Predict these codes' output. Pretend to have used your own name.
         - type      : output
           code      : |-
-            naam is ask Hoe heet jij?
-            print dus jij heet: naam
-          answer    : "Dus jij heet: **naam**"
+            name is ask What is your name?
+            print so you are called: name
+          answer    : "so you are called: **name**"
           lines     : 1
         - type      : output
           code      : |-
-            toestand is ask Hoe gaat het met jou?
-            print Dus het gaat toestand met jou
-          answer    : "Dus het gaat **goed** met jou"
+            mood is ask How are you doing today?
+            print So you are feeling mood today
+          answer    : "So you are feeling **mood** today"
           lines     : 1
         - type      : text
           contents  : |-
-            #### Opdracht 5: Programmeer-woorden
-            We hebben deze les weer nieuwe woorden geleerd! Leg ze uit je eigen woorden.
+            #### Exercise 5: Programming words
+            We have learned some new words this level! Explain them in your own words.
         - type      : define
-          word      : variabele
-          answer    : "Een naam die je geeft aan iets, bijv voornaam of leeftijd."
+          word      : variable
+          answer    : "A name you give something, like a surname or an age."
           lines     : 1
         - type      : define
-          word      : waarde
-          answer    : "Wat je opslaat in een variabele, bijv Henk of 12."
+          word      : value
+          answer    : "What is saved in a variable, like Andrew or 12."
           lines     : 1
         - type      : define
-          word      : instellen
-          answer    : "Het instellen van een variabele met een is code"
+          word      : setting
+          answer    : "You can set a variable with an `is` command"
           lines     : 1
         - type      : define
-          word      : interactief
-          answer    : "Een programma waarbij een gebruiker invoer kan geven."
+          word      : interactive
+          answer    : "A program in which a user can give input."
           lines     : 1
         - type      : text
           contents  : |-
-            #### Opdracht 6: Codes
-            We hebben nieuwe codes geleerd: `is`, `is ask` samen. Wat doen die? Leg het uit in je eigen woorden.
+            #### Exercise 6: Codes
+            We have learned new commands: `is` and `is ask` together. What to they do? Explain in your own words.
         - type      : define
-          word      : het commando `is`
-          answer    : "Waarde (rechts van de is) opslaan in een variabele (links van de is)"
+          word      : the `is` command
+          answer    : "Saving a value (after the `is`) in a variable (before the `is`)"
           lines     : 1
         - type      : define
-          word      : het commando `is ask`
-          answer    : "Vraagt om invoer van de gebruiker en die opslaan in de variabele links van de is."
+          word      : the `is ask` command
+          answer    : "Asking the user for input and saving it in a variable."
           lines     : 1
     -   level: '3'
         intro: |-
-          ### Lijsten en willekeurigheid
-          Aan het einde van de les kun jij:
-          
-          * Meerdere dingen opslaan in een variabele, zo'n variabele heet een lijst.
-          * Een verhaal maken waarin willekeurige dingen gebeuren.
-          * Een tekening maken waarin willekeurige dingen verschijnen.
+          ### Lists and randomness
+          By the end of this lesson, you can:
+          * Save multiple items in a variable, this is called a list.
+          * Create a story in which random things will happen.
+          * Create a drawing in which random thing will be drawn.
+
         exercises:
           - type : text
             contents  : |-
-              ### Variabelen
-              Je hebt net op het bord de `is` opdracht gezien met een lijst. 
-              Net als bij een gewone variabele, slaan we iets op in een lijst met `is`.
+              ### Variables
+              You have just seen the `is` command being used with a list.
+              Just like with a regular variable, we use `is` to save something.
             code: |-
-              vrienden is Mo, Layla, Denny
-              print Ik ga vandaag naar vrienden at random
+              friends is Mo, Layla, Danny
+              print Today I will visit friends at random
 
           - type : text
             contents  : |-
-              #### Opdracht 1: Omcirkel het juiste stukje code              
-
+              #### Exercise 1: Mark the correct piece of the code
+# MARLEEN
           - type      : circle
-            goal      : lijsten
+            goal      : lists
             code      : |-
                           vandaag is maandag
                           klassen is 1HC, 1HB, 1HA
@@ -1507,7 +1507,7 @@ workbooks:
             answer    : "Op het einde van regel 2"
           - type      : text
             contents  : |-
-              #### Opdracht 2: Voorspel de uitvoer
+              #### Exercise 2: Predict the output
               Vind je het lastig? Gebruik dan weer het stappenplan om variabele-uitvoer te voorspellen.
               
               1. Omcirkel de plek waar de lijst wordt ingesteld
@@ -1534,7 +1534,7 @@ workbooks:
               lines     : 1
           - type      : text
             contents  : |-
-              #### Opdracht 3: Foutje?
+              #### Exercise 3: Error?
               Lees de codes goed! Welke zijn er goed of fout.
           -   type      : MC-code
               options   : ["Goed" , "Fout"]
@@ -1589,7 +1589,7 @@ workbooks:
               print het was een dieren op willekeurig
           - type      : text
             contents  : |-
-             #### Opdracht 4: Goed of fout?
+             #### Exercise 4: Goed of fout?
 
           -   type      : MC-code
               options   : ["Goed" , "Fout"]
@@ -1611,7 +1611,7 @@ workbooks:
               answer    :   Goed, je mag iets toevoegen dat al in de lijst zit.
           - type      : text
             contents  : |-
-              #### Opdracht 5: Schrijf de code
+              #### Exercise 5: Schrijf de code
               Kijk goed naar de uitvoer, en schrijf er een passende code bij.
               **Zorg ervoor dat er steeds minstens een willekeurige keuze in je programma zit, dus niet alleen een print!**
           - type: input
@@ -1635,7 +1635,7 @@ workbooks:
 
           - type      : text
             contents  : |-
-              #### Opdracht 6: Programmeerwoorden
+              #### Exercise 6: Programming words
               We hebben deze les weer nieuwe programmeerwoorden geleerd! Leg ze uit je eigen woorden.
 
           -   type      : define
@@ -1652,7 +1652,7 @@ workbooks:
               lines     : 1
           - type      : text
             contents  : |-
-              #### Opdracht 7: Codes
+              #### Exercise 7: Codes
               De code `is` is in dit level veranderd, en we hebben ook nieuwe codes geleerd.
               Wat doen die? Leg het uit in je eigen woorden.
           -   type      : define
@@ -1676,16 +1676,16 @@ workbooks:
               #### Wat vond jij?
 
           - type      : question
-            text      : "Wat was de leukste opdracht van dit level?"
+            text      : "Wat was de leukste exercise van dit level?"
             lines     : 1
           - type      : question
-            text      : "Waarom vond je juist die opdracht leuk?"
+            text      : "Waarom vond je juist die exercise leuk?"
             lines     : 5
           - type      : question
-            text      : "Welke opdracht was het minst leuk?"
+            text      : "Welke exercise was het minst leuk?"
             lines     : 1
           - type      : question
-            text      : "Waarom vond je juist die opdracht niet leuk?"
+            text      : "Waarom vond je juist die exercise niet leuk?"
             lines     : 5
     -   level: '4'
         intro: |-
@@ -1707,8 +1707,8 @@ workbooks:
             print 'Leuk! Ik ga naar de stad met ' vriend
         - type      : text
           contents  : |-
-            #### Opdracht 1: Maak de code af.
-            Deze opdrachten doe je in twee stappen:
+            #### Exercise 1: Maak de code af.
+            Deze exerciseen doe je in twee stappen:
             1. Zet op de juiste plekken aanhalingstekens in de code.
             2. Staat alles goed? Voorspel dan wat de uitvoer van de code is.
 
@@ -1722,7 +1722,7 @@ workbooks:
           lines     : 2
         - type      : text
           contents  : |-
-            Vergeet niet deze opdrachten in twee stappen te doen, eerst de aanhalingstekens links.
+            Vergeet niet deze exerciseen in twee stappen te doen, eerst de aanhalingstekens links.
             Dan de code rechts!
 
         - type      : output
@@ -1752,7 +1752,7 @@ workbooks:
           lines     : 1
         - type      : text
           contents  : |-
-            #### Opdracht 2: Foutje?
+            #### Exercise 2: Error?
             Lees de codes goed! Welke zijn er goed of fout.
         - type      : MC-code
           options   : ["Goed" , "Fout"]
@@ -1778,7 +1778,7 @@ workbooks:
             #### Ask
             Vergeet niet dat je ook bij `ask` aanhalingstekens gebruikt!
             
-            #### Opdracht 3: Foutje?
+            #### Exercise 3: Error?
             Lees de codes goed! Welke zijn er goed of fout.
 
         - type      : MC-code
@@ -1802,7 +1802,7 @@ workbooks:
           answer    : "Fout. Het woord aantal wordt geprint en niet de variabele"
         - type      : text
           contents  : |-
-            #### Opdracht 4: Schrijf de code
+            #### Exercise 4: Schrijf de code
             Kijk goed naar de uitvoer, en schrijf er een passende code bij.
 
         - type: input
@@ -1822,7 +1822,7 @@ workbooks:
             Waar heb jij zin in?
         - type      : text
           contents  : |-
-            #### Opdracht 5: Programmeerwoorden
+            #### Exercise 5: Programming words
             We hebben deze les weer nieuwe programmeerwoorden geleerd! Leg ze uit je eigen woorden.
         - type      : define
           word      : aanhalingstekens
@@ -1834,7 +1834,7 @@ workbooks:
           lines     : 1
         - type      : text
           contents  : |-
-            #### Opdracht 6: Codes
+            #### Exercise 6: Codes
             We hebben ook nieuwe codes geleerd in level 4.
         - type      : define
           word      : het commando `clear`?
@@ -1848,16 +1848,16 @@ workbooks:
           contents  : |-
             #### Wat vond jij?
         - type      : question
-          text      : "Wat was de leukste opdracht van dit level?"
+          text      : "Wat was de leukste exercise van dit level?"
           lines     : 1
         - type      : question
-          text      : "Waarom vond je juist die opdracht leuk?"
+          text      : "Waarom vond je juist die exercise leuk?"
           lines     : 5
         - type      : question
-          text      : "Welke opdracht was het minst leuk?"
+          text      : "Welke exercise was het minst leuk?"
           lines     : 1
         - type      : question
-          text      : "Waarom vond je juist die opdracht niet leuk?"
+          text      : "Waarom vond je juist die exercise niet leuk?"
           lines     : 5
     -   level: '5'
         intro: |-
@@ -1876,7 +1876,7 @@ workbooks:
             if vriend is Jasmijn print 'Hallo!' else print 'Nee, jij niet!'
         - type      : text
           contents  : |-
-            #### Opdracht 1: Onderstreep de condities
+            #### Exercise 1: Onderstreep de condities
             Wat is een conditie? Onderstreep in deze codes steeds de conditie.
         - type      : circle
           goal      : de conditie
@@ -1900,7 +1900,7 @@ workbooks:
           answer    : "leeftijd is 18"
         - type      : text
           contents  : |-
-            #### Opdracht 2: Omcirkel de juiste regels
+            #### Exercise 2: Mark the correct lines
             Welke code wordt uitgevoerd? Omcirkel alleen die stukken.
             Doe alsof het vandaag vrijdag is, en jij 12 jaar bent.
 
@@ -1926,7 +1926,7 @@ workbooks:
           answer    : "print 'Jij bent te jong!'"
         - type      : text
           contents  : |-
-            #### Opdracht 3: Foutje?
+            #### Exercise 3: Error?
             Lees de codes goed! Welke zijn er goed of fout.
 
         - type      : MC-code
@@ -1965,7 +1965,7 @@ workbooks:
           answer    : "Fout. Het woord aantal wordt geprint en niet de variabele"
         - type      : text
           contents  : |-
-            #### Opdracht 4: Voorspel de uitvoer
+            #### Exercise 4: Predict the output
             Wat is de uitvoer van deze programma's? 
             Let op! Soms staat er random in een programma. Dan moet je zelf kiezen wat Hedy zou kiezen.
             Er kunnen dan dus meerdere antwoorden goed zijn!
@@ -2002,7 +2002,7 @@ workbooks:
           lines     : 1
         - type      : text
           contents  : |-
-            #### Opdracht 5: Programmeerwoorden
+            #### Exercise 5: Programming words
             We hebben deze les weer nieuwe programmeerwoorden geleerd! Leg ze uit je eigen woorden.
 
         - type      : define
@@ -2011,7 +2011,7 @@ workbooks:
           lines     : 1
         - type      : text
           contents  : |-
-            #### Opdracht 6: Codes
+            #### Exercise 6: Codes
             We hebben ook nieuwe codes geleerd in level 5.
 
         - type      : define
@@ -2027,16 +2027,16 @@ workbooks:
             #### Wat vond jij?
 
         - type      : question
-          text      : "Wat was de leukste opdracht van dit level?"
+          text      : "Wat was de leukste exercise van dit level?"
           lines     : 1
         - type      : question
-          text      : "Waarom vond je juist die opdracht leuk?"
+          text      : "Waarom vond je juist die exercise leuk?"
           lines     : 5
         - type      : question
-          text      : "Welke opdracht was het minst leuk?"
+          text      : "Welke exercise was het minst leuk?"
           lines     : 1
         - type      : question
-          text      : "Waarom vond je juist die opdracht niet leuk?"
+          text      : "Waarom vond je juist die exercise niet leuk?"
           lines     : 5
     -   level: '6'
         intro: |-
@@ -2060,7 +2060,7 @@ workbooks:
             print '5 keer vijf is ' 5 * 5
         - type      : text
           contents  : |-
-            #### Opdracht 1: Uitvoer  
+            #### Exercise 1: Uitvoer
             Wat is de uitvoer van deze programma's?
         - type      : output
           code      : |-
@@ -2074,8 +2074,8 @@ workbooks:
           lines     : 3
         - type      : text
           contents  : |-
-            #### Opdracht 2: Rekenen
-            Deze opdracht doe je weer in stappen. 
+            #### Exercise 2: Rekenen
+            Deze exercise doe je weer in stappen.
             1. Maak eerst de codes af, op een logische manier door iets in te vullen op de streepjes.
             2. Is de code af? Vul dan in wat de uitvoer van de code wordt.
         - type      : output
@@ -2092,7 +2092,7 @@ workbooks:
           lines     : 4
         - type      : text
           contents  : |-
-            ### Opdracht 2: Rekenen met ask en variabelen
+            ### Exercise 2: Rekenen met ask en variabelen
             Je kan een rekensom ook opslaan in een variabele, vergelijken met een `ask` en een som uitvoeren in een `if`.
             Dat gaan we nu oefenen. 
             Voorspel wat de uitvoer van deze programma's is.
@@ -2131,7 +2131,7 @@ workbooks:
           lines     : 1
         - type      : text
           contents  : |-
-            ### Opdracht 3: Invoer
+            ### Exercise 3: Invoer
             Je krijgt nu weer een uitvoer te zien. Schrijf een programma dat bij deze uitvoer kan horen.
             Let op: vaak zijn er meerdere antwoorden goed, je mag zelf iets kiezen, als het maar kan.
             Kijk ook goed naar het aantal streepjes!
@@ -2153,7 +2153,7 @@ workbooks:
             14 is een willekeurig getal uit de tafel van 7
         - type      : text
           contents  : |-
-            #### Opdracht 4: Programmeerwoorden
+            #### Exercise 4: Programming words
             We hebben deze les nieuwe programmeertekens geleerd. We oefenen ze nog een keer.
         - type      : define
           word      : "keer"
@@ -2167,14 +2167,14 @@ workbooks:
           contents  : |-
             #### Wat vond jij?
         - type      : question
-          text      : "Wat was de leukste opdracht van dit level?"
+          text      : "Wat was de leukste exercise van dit level?"
           lines     : 1
         - type      : question
-          text      : "Waarom vond je juist die opdracht leuk?"
+          text      : "Waarom vond je juist die exercise leuk?"
           lines     : 5
         - type      : question
-          text      : "Welke opdracht was het minst leuk?"
+          text      : "Welke exercise was het minst leuk?"
           lines     : 1
         - type      : question
-          text      : "Waarom vond je juist die opdracht niet leuk?"
+          text      : "Waarom vond je juist die exercise niet leuk?"
           lines     : 5
