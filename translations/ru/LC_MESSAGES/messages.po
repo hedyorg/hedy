@@ -8,16 +8,15 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-10-04 04:49+0000\n"
+"PO-Revision-Date: 2024-10-25 06:21+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: ru <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.8-dev\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -42,7 +41,7 @@ msgstr "Ваша программа не готова. В ней есть про
 
 #, fuzzy
 msgid "Incomplete"
-msgstr "Ой-ой! На строке {line_number} нужно дописать что-то ещё после `{incomplete_command}`."
+msgstr "We detected that part of the code seems to be missing from the `{incomplete_command}` on line {line_number}. Can you try adding what's missing?"
 
 #, fuzzy
 msgid "Incomplete Repeat"
@@ -82,7 +81,7 @@ msgstr "Кажется, вы забыли использовать команд�
 
 #, fuzzy
 msgid "Missing Additional Command"
-msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+msgstr "We detected that the command `{command}` on line {line_number} is missing something. Can you try using `{missing_command}` in your code?"
 
 #, fuzzy
 msgid "Missing Colon Error"
@@ -196,13 +195,6 @@ msgid "account_overview"
 msgstr "Обзор учетной записи"
 
 #, fuzzy
-msgid "accounts_created"
-msgstr "Учетные записи успешно созданы."
-
-msgid "accounts_intro"
-msgstr "На этой странице вы можете создать учетные записи сразу для нескольких учеников. Они автоматически добавляются к текущему классу, поэтому убедитесь, что показанный выше класс - правильный! Каждое имя пользователя должно быть уникальным во всей системе Hedy. Вы можете использовать 'Постфикс имени класса', чтобы добавить имя вашего класса ко всем учетным записям. Если вы вводите пароли вручную, они должны быть <b>не менее</b> 6 символов."
-
-#, fuzzy
 msgid "actions"
 msgstr "Actions"
 
@@ -314,6 +306,10 @@ msgstr "Все"
 
 msgid "all_class_highscores"
 msgstr "Все учащиеся видны в рейтингах класса"
+
+#, fuzzy
+msgid "all_rows_missing_separator"
+msgstr "None of the rows contain a semicolon. Perhaps you want to let us auto generate passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, use a semicolon to separate usernames and passwords on the following lines: {rows}"
 
 msgid "already_account"
 msgstr "У вас уже есть учётная запись?"
@@ -480,6 +476,10 @@ msgstr "Continue"
 msgid "contributor"
 msgstr "Вкладчик"
 
+#, fuzzy
+msgid "copy_accounts_to_clipboard"
+msgstr "Copy to clipboard"
+
 msgid "copy_clipboard"
 msgstr "Успешно скопировано в буфер обмена"
 
@@ -514,8 +514,12 @@ msgstr "Создать аккаунт"
 msgid "create_accounts"
 msgstr "Создание аккаунтов"
 
+#, fuzzy
+msgid "create_accounts_placeholder"
+msgstr "Type the accounts or paste them from a spreadsheet"
+
 msgid "create_accounts_prompt"
-msgstr "Вы уверены, что хотите создать эти учетные записи?"
+msgstr "You will create {number_of_accounts} student accounts. Are you sure?"
 
 msgid "create_adventure"
 msgstr "Создать приключение"
@@ -523,20 +527,37 @@ msgstr "Создать приключение"
 msgid "create_class"
 msgstr "Создать новый класс"
 
-msgid "create_multiple_accounts"
-msgstr "Создание нескольких учетных записей"
-
 msgid "create_student_account"
 msgstr "Создать аккаунт"
 
 msgid "create_student_account_explanation"
 msgstr "Вы можете сохранять собственные программы, имея учетную запись."
 
+#, fuzzy
+msgid "create_student_accounts"
+msgstr "Create student accounts for"
+
 msgid "create_teacher_account"
 msgstr "Создайте учетную запись учителя"
 
 msgid "create_teacher_account_explanation"
 msgstr "Имея учетную запись учителя, вы можете сохранять свои программы и видеть результаты своих учеников."
+
+#, fuzzy
+msgid "create_usernames_and_passwords_desc"
+msgstr "Enter one username and password per line, separated by a semicolon. Or, if you have the data in a two-column spreadsheet, copy the file content and paste here."
+
+#, fuzzy
+msgid "create_usernames_and_passwords_title"
+msgstr "Usernames and passwords"
+
+#, fuzzy
+msgid "create_usernames_desc"
+msgstr "Enter one username per line or paste them from a spreadsheet."
+
+#, fuzzy
+msgid "create_usernames_title"
+msgstr "Usernames"
 
 msgid "creator"
 msgstr "Создатель"
@@ -648,9 +669,6 @@ msgstr "двойные кавычки"
 
 msgid "download"
 msgstr "Скачать"
-
-msgid "download_login_credentials"
-msgstr "Хотите ли вы загрузить учетные данные для входа в систему после создания учетных записей?"
 
 msgid "duplicate"
 msgstr "Дубликат"
@@ -794,9 +812,6 @@ msgstr "Пожалуйста, выберите правильный пол, вы
 
 msgid "general_settings"
 msgstr "Общие настройки"
-
-msgid "generate_passwords"
-msgstr "Генерировать пароли"
 
 msgid "get_certificate"
 msgstr "Получите свой сертификат!"
@@ -1380,6 +1395,10 @@ msgstr "Пароль обновлен."
 msgid "passwords_six"
 msgstr "Все пароли должны состоять из шести или более символов."
 
+#, fuzzy
+msgid "passwords_too_short"
+msgstr "Passwords must be at least 6 characters long. Correct the following passwords, so that they are at least 6 symbols: {passwords}"
+
 msgid "pending_invites"
 msgstr "Ожидающие приглашения"
 
@@ -1401,9 +1420,6 @@ msgstr "Ваш персональный текст неверен."
 #, fuzzy
 msgid "phone_number"
 msgstr "Phone number"
-
-msgid "postfix_classname"
-msgstr "Имя постфикса класса"
 
 msgid "preferred_keyword_language"
 msgstr "Предпочитаемый язык ключевых слов"
@@ -1432,6 +1448,10 @@ msgstr "Посмотреть предыдущие кампании"
 #, fuzzy
 msgid "previous_page"
 msgstr "Previous page"
+
+#, fuzzy
+msgid "print_accounts"
+msgstr "Print"
 
 msgid "print_logo"
 msgstr "печатать"
@@ -1475,6 +1495,10 @@ msgstr "Программы"
 
 msgid "prompt_join_class"
 msgstr "Вы хотите присоединиться к этому классу?"
+
+#, fuzzy
+msgid "provided_username_duplicates"
+msgstr "You supplied the following usernames more than once: {usernames}"
 
 msgid "public"
 msgstr "Общественный"
@@ -1596,9 +1620,6 @@ msgstr "Reset"
 
 msgid "reset_password"
 msgstr "Сброс пароля"
-
-msgid "reset_view"
-msgstr "Сброс"
 
 #, fuzzy
 msgid "restart"
@@ -1742,6 +1763,10 @@ msgstr "Solution Example"
 msgid "solution_example_explanation"
 msgstr "This is where the solution of your adventure goes. This can be used if you want to share this adventure with other teacher's, so they can know what your suggested solution is."
 
+#, fuzzy
+msgid "some_rows_missing_separator"
+msgstr "The following rows are missing a semicolon, so either the username or the password is missing: {rows}"
+
 msgid "something_went_wrong_keyword_parsing"
 msgstr "В вашем приключении есть ошибка, все ли ключевые слова правильно окружены { }?"
 
@@ -1782,6 +1807,10 @@ msgstr "текст"
 #, fuzzy
 msgid "student"
 msgstr "Student"
+
+#, fuzzy
+msgid "student_accounts_created"
+msgstr "Successfully created student accounts"
 
 #, fuzzy
 msgid "student_adventures_table"
@@ -1991,6 +2020,10 @@ msgid "token_invalid"
 msgstr "Ваш токен недействителен."
 
 #, fuzzy
+msgid "too_many_accounts"
+msgstr "You cannot create more than 100 student accounts."
+
+#, fuzzy
 msgid "tooltip_level_locked"
 msgstr "Your teacher disabled this level"
 
@@ -2033,9 +2066,6 @@ msgstr "Are you sure you want to unfavourite this program?"
 msgid "unfavourite_success"
 msgstr "Your program is unfavourited."
 
-msgid "unique_usernames"
-msgstr "Все имена пользователей должны быть уникальными."
-
 #, fuzzy
 msgid "unknown_variable_role"
 msgstr "unknown"
@@ -2069,6 +2099,14 @@ msgid "updating_indicator"
 msgstr "Updating"
 
 #, fuzzy
+msgid "use_custom_passwords"
+msgstr "Provide your own passwords"
+
+#, fuzzy
+msgid "use_generated_passwords"
+msgstr "Auto generate passwords"
+
+#, fuzzy
 msgid "use_of_blanks_exception"
 msgstr "Use of blanks in programs"
 
@@ -2092,6 +2130,14 @@ msgstr "Этот пользователь не существует или у н
 msgid "username"
 msgstr "Имя пользователя"
 
+#, fuzzy
+msgid "username_contains_invalid_symbol"
+msgstr "Usernames cannot contain the symbol ':' or '@'. Remove these symbols from following rows: {usernames}"
+
+#, fuzzy
+msgid "username_contains_separator"
+msgstr "Usernames cannot contain a semicolon. Perhaps you want to supply your own passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, remove the semicolon from the following usernames: {usernames}"
+
 msgid "username_empty"
 msgstr "Вы не ввели имя пользователя!"
 
@@ -2104,8 +2150,13 @@ msgstr "Имя пользователя не может содержать `:` �
 msgid "username_three"
 msgstr "Имя пользователя должно содержать не менее трех символов."
 
-msgid "usernames_exist"
-msgstr "Одно или несколько имен пользователей уже используются."
+#, fuzzy
+msgid "usernames_too_short"
+msgstr "Usernames must be at least 3 characters long. Correct the following usernames, so that they are 3 or more symbols: {usernames}"
+
+#, fuzzy
+msgid "usernames_unavailable"
+msgstr "The following usernames are not available: {usernames}. You can create similar accounts, for example, by appending an underscore or your class name."
 
 msgid "value"
 msgstr "Значение"
@@ -2499,4 +2550,31 @@ msgstr "Ваша программа"
 
 #~ msgid "student_not_allowed_in_class"
 #~ msgstr "Student not allowed in class"
+
+#~ msgid "accounts_created"
+#~ msgstr "Учетные записи успешно созданы."
+
+#~ msgid "accounts_intro"
+#~ msgstr "На этой странице вы можете создать учетные записи сразу для нескольких учеников. Они автоматически добавляются к текущему классу, поэтому убедитесь, что показанный выше класс - правильный! Каждое имя пользователя должно быть уникальным во всей системе Hedy. Вы можете использовать 'Постфикс имени класса', чтобы добавить имя вашего класса ко всем учетным записям. Если вы вводите пароли вручную, они должны быть <b>не менее</b> 6 символов."
+
+#~ msgid "create_multiple_accounts"
+#~ msgstr "Создание нескольких учетных записей"
+
+#~ msgid "download_login_credentials"
+#~ msgstr "Хотите ли вы загрузить учетные данные для входа в систему после создания учетных записей?"
+
+#~ msgid "generate_passwords"
+#~ msgstr "Генерировать пароли"
+
+#~ msgid "postfix_classname"
+#~ msgstr "Имя постфикса класса"
+
+#~ msgid "reset_view"
+#~ msgstr "Сброс"
+
+#~ msgid "unique_usernames"
+#~ msgstr "Все имена пользователей должны быть уникальными."
+
+#~ msgid "usernames_exist"
+#~ msgstr "Одно или несколько имен пользователей уже используются."
 

@@ -35,6 +35,6 @@ function_name: NAME -> text
 ?simple_expression:+= call
 ?turtle_color:+= call
 
-add: _ADD_LIST (atom | list_access | call) _TO_LIST var_access
-remove: _REMOVE (atom | list_access | call) _FROM var_access
+add: _ADD_LIST (atom | list_access | call) _TO_LIST _SPACE var_access
+remove: _REMOVE (atom | list_access | call) _FROM _SPACE var_access
 // ================================================================================

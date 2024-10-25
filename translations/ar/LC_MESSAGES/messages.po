@@ -8,16 +8,15 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-10-04 04:49+0000\n"
+"PO-Revision-Date: 2024-10-25 06:21+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: ar <LL@li.org>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=0 && n%100<=2 ? 4 : 5);\n"
-"X-Generator: Weblate 5.8-dev\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=0 && n%100<=2 ? 4 : 5);\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -42,7 +41,7 @@ msgstr "البرنامج الخاص بك غير مكتمل. عليك أن تست
 
 #, fuzzy
 msgid "Incomplete"
-msgstr "أوه! لقد نسيت أن تكمل جزءاً من البرنامج! في السطر رقم {line_number}، عليك أن تكمل كتابة الكود بعد `{incomplete_command}`."
+msgstr "We detected that part of the code seems to be missing from the `{incomplete_command}` on line {line_number}. Can you try adding what's missing?"
 
 #, fuzzy
 msgid "Incomplete Repeat"
@@ -82,7 +81,7 @@ msgstr "It looks like you forgot to use a command with the text you put in line 
 
 #, fuzzy
 msgid "Missing Additional Command"
-msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+msgstr "We detected that the command `{command}` on line {line_number} is missing something. Can you try using `{missing_command}` in your code?"
 
 #, fuzzy
 msgid "Missing Colon Error"
@@ -194,13 +193,6 @@ msgstr "Your function used the wrong number of arguments. You provided {used_num
 
 msgid "account_overview"
 msgstr "نظرة عامة على الحساب"
-
-#, fuzzy
-msgid "accounts_created"
-msgstr "تم إنشاء الحسابات بنجاح."
-
-msgid "accounts_intro"
-msgstr "في هذه الصفحة تستطيع انشاء حسابات لعدة تلاميذ في نفس الوقت. من الممكن أيضاً اضافتهم مباشرة إلى واحد من الصفوف الخاصة بك. عند الضغط على الزر الأخضر مع علامة ال +، يمكنك إضافة صفوف جديدة. يمكنك حذف صف معين عند الضغط على الإشارة الحمراء التابعة له. يجب عدم وجود صفوف فارغة عند الضغط على \"انشاء الحسابات\". الرجاء الإنتباه إلى أن كل اسم مستخدم و بريد إلكتروني يجب أن يكون لا نظير له، وأن كلمة المرور يجب أن تحتوي <b> على الأقل</b> على ستة أحرف."
 
 #, fuzzy
 msgid "actions"
@@ -315,6 +307,10 @@ msgstr "All"
 #, fuzzy
 msgid "all_class_highscores"
 msgstr "All students visible in class highscores"
+
+#, fuzzy
+msgid "all_rows_missing_separator"
+msgstr "None of the rows contain a semicolon. Perhaps you want to let us auto generate passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, use a semicolon to separate usernames and passwords on the following lines: {rows}"
 
 msgid "already_account"
 msgstr "هل لديك حساب بالفعل؟"
@@ -487,6 +483,10 @@ msgstr "Continue"
 msgid "contributor"
 msgstr "Contributor"
 
+#, fuzzy
+msgid "copy_accounts_to_clipboard"
+msgstr "Copy to clipboard"
+
 msgid "copy_clipboard"
 msgstr "تم النسخ الى الحافظة (ذاكرة التخزين المؤقت) بنجاح"
 
@@ -523,17 +523,18 @@ msgstr "انشاء حساب"
 msgid "create_accounts"
 msgstr "انشاء عدة حسابات"
 
+#, fuzzy
+msgid "create_accounts_placeholder"
+msgstr "Type the accounts or paste them from a spreadsheet"
+
 msgid "create_accounts_prompt"
-msgstr "هل أنت متأكد أنك تريد انشاء هذه الحسابات؟"
+msgstr "You will create {number_of_accounts} student accounts. Are you sure?"
 
 msgid "create_adventure"
 msgstr "انشاء مغامرة"
 
 msgid "create_class"
 msgstr "انشاء صف جديد"
-
-msgid "create_multiple_accounts"
-msgstr "انشاء عدة حسابات"
 
 #, fuzzy
 msgid "create_student_account"
@@ -544,12 +545,32 @@ msgid "create_student_account_explanation"
 msgstr "You can save your own programs with an account."
 
 #, fuzzy
+msgid "create_student_accounts"
+msgstr "Create student accounts for"
+
+#, fuzzy
 msgid "create_teacher_account"
 msgstr "Create a teacher account"
 
 #, fuzzy
 msgid "create_teacher_account_explanation"
 msgstr "With a teacher account, you can save your programs and see the results of your students."
+
+#, fuzzy
+msgid "create_usernames_and_passwords_desc"
+msgstr "Enter one username and password per line, separated by a semicolon. Or, if you have the data in a two-column spreadsheet, copy the file content and paste here."
+
+#, fuzzy
+msgid "create_usernames_and_passwords_title"
+msgstr "Usernames and passwords"
+
+#, fuzzy
+msgid "create_usernames_desc"
+msgstr "Enter one username per line or paste them from a spreadsheet."
+
+#, fuzzy
+msgid "create_usernames_title"
+msgstr "Usernames"
 
 msgid "creator"
 msgstr "مبتكر"
@@ -664,10 +685,6 @@ msgstr "علامة اقتباس مزدوجة"
 #, fuzzy
 msgid "download"
 msgstr "Download"
-
-#, fuzzy
-msgid "download_login_credentials"
-msgstr "Do you want to download the login credentials after the accounts creation?"
 
 #, fuzzy
 msgid "duplicate"
@@ -817,10 +834,6 @@ msgstr "الرجاء تحديد جنس صالح واختيار (أنثى ، ذك
 
 msgid "general_settings"
 msgstr "اعدادات عامة"
-
-#, fuzzy
-msgid "generate_passwords"
-msgstr "Generate passwords"
 
 #, fuzzy
 msgid "get_certificate"
@@ -1423,6 +1436,10 @@ msgstr "تم تحديث كلمة المرور."
 msgid "passwords_six"
 msgstr "كلمة المرور يجب أن تتكون من ستة أحرف أو أكثر."
 
+#, fuzzy
+msgid "passwords_too_short"
+msgstr "Passwords must be at least 6 characters long. Correct the following passwords, so that they are at least 6 symbols: {passwords}"
+
 msgid "pending_invites"
 msgstr "الدعوات قيد الإنتظار"
 
@@ -1446,10 +1463,6 @@ msgstr "النص الشخصي غير صالح."
 #, fuzzy
 msgid "phone_number"
 msgstr "Phone number"
-
-#, fuzzy
-msgid "postfix_classname"
-msgstr "Postfix classname"
 
 msgid "preferred_keyword_language"
 msgstr "اللغة المفضلة للأوامر البرمجية"
@@ -1478,6 +1491,10 @@ msgstr "عرض الحملات السابقة"
 #, fuzzy
 msgid "previous_page"
 msgstr "Previous page"
+
+#, fuzzy
+msgid "print_accounts"
+msgstr "Print"
 
 msgid "print_logo"
 msgstr "قول"
@@ -1523,6 +1540,10 @@ msgstr "البرامج"
 
 msgid "prompt_join_class"
 msgstr "هل تريد الإنضمام الى هذا الصف؟"
+
+#, fuzzy
+msgid "provided_username_duplicates"
+msgstr "You supplied the following usernames more than once: {usernames}"
 
 #, fuzzy
 msgid "public"
@@ -1652,9 +1673,6 @@ msgstr "Reset"
 
 msgid "reset_password"
 msgstr "اعادة ضبط كلمة المرور"
-
-msgid "reset_view"
-msgstr "اعادة ضبط"
 
 #, fuzzy
 msgid "restart"
@@ -1798,6 +1816,10 @@ msgid "solution_example_explanation"
 msgstr "This is where the solution of your adventure goes. This can be used if you want to share this adventure with other teacher's, so they can know what your suggested solution is."
 
 #, fuzzy
+msgid "some_rows_missing_separator"
+msgstr "The following rows are missing a semicolon, so either the username or the password is missing: {rows}"
+
+#, fuzzy
 msgid "something_went_wrong_keyword_parsing"
 msgstr "There is a mistake in your adventure, are all keywords correctly surrounded with { }?"
 
@@ -1837,6 +1859,10 @@ msgstr "نص"
 
 msgid "student"
 msgstr "طالب"
+
+#, fuzzy
+msgid "student_accounts_created"
+msgstr "Successfully created student accounts"
 
 #, fuzzy
 msgid "student_adventures_table"
@@ -2049,6 +2075,10 @@ msgid "token_invalid"
 msgstr "الرمز الخاص بك غير صالح."
 
 #, fuzzy
+msgid "too_many_accounts"
+msgstr "You cannot create more than 100 student accounts."
+
+#, fuzzy
 msgid "tooltip_level_locked"
 msgstr "Your teacher disabled this level"
 
@@ -2095,9 +2125,6 @@ msgstr "Are you sure you want to unfavourite this program?"
 msgid "unfavourite_success"
 msgstr "Your program is unfavourited."
 
-msgid "unique_usernames"
-msgstr "يجب أن تكون جميع أسماء المستخدمين لا نظير لها."
-
 #, fuzzy
 msgid "unknown_variable_role"
 msgstr "unknown"
@@ -2133,6 +2160,14 @@ msgid "updating_indicator"
 msgstr "Updating"
 
 #, fuzzy
+msgid "use_custom_passwords"
+msgstr "Provide your own passwords"
+
+#, fuzzy
+msgid "use_generated_passwords"
+msgstr "Auto generate passwords"
+
+#, fuzzy
 msgid "use_of_blanks_exception"
 msgstr "Use of blanks in programs"
 
@@ -2157,6 +2192,14 @@ msgstr "هذا الحساب إما غير موجود أو لا يوجد لديه
 msgid "username"
 msgstr "اسم المستخدم"
 
+#, fuzzy
+msgid "username_contains_invalid_symbol"
+msgstr "Usernames cannot contain the symbol ':' or '@'. Remove these symbols from following rows: {usernames}"
+
+#, fuzzy
+msgid "username_contains_separator"
+msgstr "Usernames cannot contain a semicolon. Perhaps you want to supply your own passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, remove the semicolon from the following usernames: {usernames}"
+
 msgid "username_empty"
 msgstr "لم تدخل اسم المستخدم!"
 
@@ -2169,8 +2212,13 @@ msgstr "اسم المستخدم لا يمكن أن يتضمن `:` أو `@`."
 msgid "username_three"
 msgstr "اسم المستخدم يجب أن يتكون من ثلاثة أحرف على الأقل."
 
-msgid "usernames_exist"
-msgstr "اسم مستخدم واحد أو أكثر قيد الاستخدام بالفعل."
+#, fuzzy
+msgid "usernames_too_short"
+msgstr "Usernames must be at least 3 characters long. Correct the following usernames, so that they are 3 or more symbols: {usernames}"
+
+#, fuzzy
+msgid "usernames_unavailable"
+msgstr "The following usernames are not available: {usernames}. You can create similar accounts, for example, by appending an underscore or your class name."
 
 #, fuzzy
 msgid "value"
@@ -2563,4 +2611,31 @@ msgstr "Your program"
 
 #~ msgid "student_not_allowed_in_class"
 #~ msgstr "Student not allowed in class"
+
+#~ msgid "accounts_created"
+#~ msgstr "تم إنشاء الحسابات بنجاح."
+
+#~ msgid "accounts_intro"
+#~ msgstr "في هذه الصفحة تستطيع انشاء حسابات لعدة تلاميذ في نفس الوقت. من الممكن أيضاً اضافتهم مباشرة إلى واحد من الصفوف الخاصة بك. عند الضغط على الزر الأخضر مع علامة ال +، يمكنك إضافة صفوف جديدة. يمكنك حذف صف معين عند الضغط على الإشارة الحمراء التابعة له. يجب عدم وجود صفوف فارغة عند الضغط على \"انشاء الحسابات\". الرجاء الإنتباه إلى أن كل اسم مستخدم و بريد إلكتروني يجب أن يكون لا نظير له، وأن كلمة المرور يجب أن تحتوي <b> على الأقل</b> على ستة أحرف."
+
+#~ msgid "create_multiple_accounts"
+#~ msgstr "انشاء عدة حسابات"
+
+#~ msgid "download_login_credentials"
+#~ msgstr "Do you want to download the login credentials after the accounts creation?"
+
+#~ msgid "generate_passwords"
+#~ msgstr "Generate passwords"
+
+#~ msgid "postfix_classname"
+#~ msgstr "Postfix classname"
+
+#~ msgid "reset_view"
+#~ msgstr "اعادة ضبط"
+
+#~ msgid "unique_usernames"
+#~ msgstr "يجب أن تكون جميع أسماء المستخدمين لا نظير لها."
+
+#~ msgid "usernames_exist"
+#~ msgstr "اسم مستخدم واحد أو أكثر قيد الاستخدام بالفعل."
 

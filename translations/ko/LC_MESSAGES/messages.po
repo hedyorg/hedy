@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-10-04 04:49+0000\n"
+"PO-Revision-Date: 2024-10-25 06:21+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: ko <LL@li.org>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -41,7 +41,7 @@ msgstr "코드가 불완전합니다. 코드로 대체해야하는 빈칸이 들
 
 #, fuzzy
 msgid "Incomplete"
-msgstr "이런! 코드를 조금 잊으셨군요! {line_number} 라인에서 `{incomplete_command}` 뒤에 텍스트를 입력해야 합니다."
+msgstr "We detected that part of the code seems to be missing from the `{incomplete_command}` on line {line_number}. Can you try adding what's missing?"
 
 #, fuzzy
 msgid "Incomplete Repeat"
@@ -81,7 +81,7 @@ msgstr "{line_number} 행에서 사용한 텍스트에 명령을 사용하지 �
 
 #, fuzzy
 msgid "Missing Additional Command"
-msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+msgstr "We detected that the command `{command}` on line {line_number} is missing something. Can you try using `{missing_command}` in your code?"
 
 #, fuzzy
 msgid "Missing Colon Error"
@@ -194,14 +194,6 @@ msgstr "Your function used the wrong number of arguments. You provided {used_num
 #, fuzzy
 msgid "account_overview"
 msgstr "계정 개요"
-
-#, fuzzy
-msgid "accounts_created"
-msgstr "성공적으로 계정이 생성되었습니다."
-
-#, fuzzy
-msgid "accounts_intro"
-msgstr "이 페이지에서 여러 학생들의 계정을 한 번에 만들 수 있다. 이것들은 현재 수업에 자동으로 추가되므로 위에 제시된 수업이 올바른 수업인지 확인하라! 전체 Hedy 시스템에서 모든 사용자 이름은 고유해야 한다. 'Postfix classname'을 사용하여 모든 계정에 자신의 수업 이름을 추가할 수 있다. 수동으로 비밀번호를 입력할 경우 <b>최소</b> 6자 이상이어야 한다."
 
 #, fuzzy
 msgid "actions"
@@ -333,6 +325,10 @@ msgstr "전체"
 #, fuzzy
 msgid "all_class_highscores"
 msgstr "전체 학생들이 하이 스코어으로 보이네요"
+
+#, fuzzy
+msgid "all_rows_missing_separator"
+msgstr "None of the rows contain a semicolon. Perhaps you want to let us auto generate passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, use a semicolon to separate usernames and passwords on the following lines: {rows}"
 
 #, fuzzy
 msgid "already_account"
@@ -525,6 +521,10 @@ msgid "contributor"
 msgstr "기여자"
 
 #, fuzzy
+msgid "copy_accounts_to_clipboard"
+msgstr "Copy to clipboard"
+
+#, fuzzy
 msgid "copy_clipboard"
 msgstr "클립보드에 성공적으로 복사되었습니다"
 
@@ -569,8 +569,12 @@ msgid "create_accounts"
 msgstr "여러 계정 만들기"
 
 #, fuzzy
+msgid "create_accounts_placeholder"
+msgstr "Type the accounts or paste them from a spreadsheet"
+
+#, fuzzy
 msgid "create_accounts_prompt"
-msgstr "이 계정들을 생성하시겠습니까?"
+msgstr "You will create {number_of_accounts} student accounts. Are you sure?"
 
 #, fuzzy
 msgid "create_adventure"
@@ -581,10 +585,6 @@ msgid "create_class"
 msgstr "새 수업 만들기"
 
 #, fuzzy
-msgid "create_multiple_accounts"
-msgstr "여러 계정 민들기"
-
-#, fuzzy
 msgid "create_student_account"
 msgstr "계정 만들기"
 
@@ -593,12 +593,32 @@ msgid "create_student_account_explanation"
 msgstr "계정으로 자신의 프로그램을 저장할 수 있습니다."
 
 #, fuzzy
+msgid "create_student_accounts"
+msgstr "Create student accounts for"
+
+#, fuzzy
 msgid "create_teacher_account"
 msgstr "선생님 계정 만들기"
 
 #, fuzzy
 msgid "create_teacher_account_explanation"
 msgstr "선생님 계정으로 프로그램을 저장하고 학생들의 결과를 볼 수 있습니다."
+
+#, fuzzy
+msgid "create_usernames_and_passwords_desc"
+msgstr "Enter one username and password per line, separated by a semicolon. Or, if you have the data in a two-column spreadsheet, copy the file content and paste here."
+
+#, fuzzy
+msgid "create_usernames_and_passwords_title"
+msgstr "Usernames and passwords"
+
+#, fuzzy
+msgid "create_usernames_desc"
+msgstr "Enter one username per line or paste them from a spreadsheet."
+
+#, fuzzy
+msgid "create_usernames_title"
+msgstr "Usernames"
 
 #, fuzzy
 msgid "creator"
@@ -735,10 +755,6 @@ msgstr "큰따옴표"
 #, fuzzy
 msgid "download"
 msgstr "다운로드"
-
-#, fuzzy
-msgid "download_login_credentials"
-msgstr "계정 생성 후 로그인 자격 증명을 다운로드하시겠습니까?"
 
 #, fuzzy
 msgid "duplicate"
@@ -915,10 +931,6 @@ msgstr "올바른 성별을 선택하고 (여성, 남성, 기타)를 선택하�
 #, fuzzy
 msgid "general_settings"
 msgstr "일반설정"
-
-#, fuzzy
-msgid "generate_passwords"
-msgstr "비밀번호 만들기"
 
 #, fuzzy
 msgid "get_certificate"
@@ -1628,6 +1640,10 @@ msgid "passwords_six"
 msgstr "All passwords need to be six characters or longer."
 
 #, fuzzy
+msgid "passwords_too_short"
+msgstr "Passwords must be at least 6 characters long. Correct the following passwords, so that they are at least 6 symbols: {passwords}"
+
+#, fuzzy
 msgid "pending_invites"
 msgstr "Pending invites"
 
@@ -1654,10 +1670,6 @@ msgstr "Your personal text is invalid."
 #, fuzzy
 msgid "phone_number"
 msgstr "Phone number"
-
-#, fuzzy
-msgid "postfix_classname"
-msgstr "Postfix classname"
 
 #, fuzzy
 msgid "preferred_keyword_language"
@@ -1690,6 +1702,10 @@ msgstr "View previous campaigns"
 #, fuzzy
 msgid "previous_page"
 msgstr "Previous page"
+
+#, fuzzy
+msgid "print_accounts"
+msgstr "Print"
 
 #, fuzzy
 msgid "print_logo"
@@ -1746,6 +1762,10 @@ msgstr "Programs"
 #, fuzzy
 msgid "prompt_join_class"
 msgstr "Do you want to join this class?"
+
+#, fuzzy
+msgid "provided_username_duplicates"
+msgstr "You supplied the following usernames more than once: {usernames}"
 
 #, fuzzy
 msgid "public"
@@ -1896,10 +1916,6 @@ msgstr "초기화하기"
 #, fuzzy
 msgid "reset_password"
 msgstr "비밀번호 초기화"
-
-#, fuzzy
-msgid "reset_view"
-msgstr "초기화하기"
 
 #, fuzzy
 msgid "restart"
@@ -2067,6 +2083,10 @@ msgid "solution_example_explanation"
 msgstr "This is where the solution of your adventure goes. This can be used if you want to share this adventure with other teacher's, so they can know what your suggested solution is."
 
 #, fuzzy
+msgid "some_rows_missing_separator"
+msgstr "The following rows are missing a semicolon, so either the username or the password is missing: {rows}"
+
+#, fuzzy
 msgid "something_went_wrong_keyword_parsing"
 msgstr "모험에 오류가 있습니다. 모든 키워드가 {}(으)로 올바르게 둘러싸여 있습니까?"
 
@@ -2113,6 +2133,10 @@ msgstr "텍스트"
 #, fuzzy
 msgid "student"
 msgstr "Student"
+
+#, fuzzy
+msgid "student_accounts_created"
+msgstr "Successfully created student accounts"
 
 #, fuzzy
 msgid "student_adventures_table"
@@ -2363,6 +2387,10 @@ msgid "token_invalid"
 msgstr "토큰이 올바르지 않습니다."
 
 #, fuzzy
+msgid "too_many_accounts"
+msgstr "You cannot create more than 100 student accounts."
+
+#, fuzzy
 msgid "tooltip_level_locked"
 msgstr "Your teacher disabled this level"
 
@@ -2413,10 +2441,6 @@ msgid "unfavourite_success"
 msgstr "Your program is unfavourited."
 
 #, fuzzy
-msgid "unique_usernames"
-msgstr "All usernames need to be unique."
-
-#, fuzzy
 msgid "unknown_variable_role"
 msgstr "unknown"
 
@@ -2453,6 +2477,14 @@ msgid "updating_indicator"
 msgstr "Updating"
 
 #, fuzzy
+msgid "use_custom_passwords"
+msgstr "Provide your own passwords"
+
+#, fuzzy
+msgid "use_generated_passwords"
+msgstr "Auto generate passwords"
+
+#, fuzzy
 msgid "use_of_blanks_exception"
 msgstr "Use of blanks in programs"
 
@@ -2481,6 +2513,14 @@ msgid "username"
 msgstr "Username"
 
 #, fuzzy
+msgid "username_contains_invalid_symbol"
+msgstr "Usernames cannot contain the symbol ':' or '@'. Remove these symbols from following rows: {usernames}"
+
+#, fuzzy
+msgid "username_contains_separator"
+msgstr "Usernames cannot contain a semicolon. Perhaps you want to supply your own passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, remove the semicolon from the following usernames: {usernames}"
+
+#, fuzzy
 msgid "username_empty"
 msgstr "You didn't enter an username!"
 
@@ -2497,8 +2537,12 @@ msgid "username_three"
 msgstr "Username must contain at least three characters."
 
 #, fuzzy
-msgid "usernames_exist"
-msgstr "One or more usernames is already in use."
+msgid "usernames_too_short"
+msgstr "Usernames must be at least 3 characters long. Correct the following usernames, so that they are 3 or more symbols: {usernames}"
+
+#, fuzzy
+msgid "usernames_unavailable"
+msgstr "The following usernames are not available: {usernames}. You can create similar accounts, for example, by appending an underscore or your class name."
 
 #, fuzzy
 msgid "value"
@@ -2734,4 +2778,31 @@ msgstr "Your program"
 
 #~ msgid "student_not_allowed_in_class"
 #~ msgstr "Student not allowed in class"
+
+#~ msgid "accounts_created"
+#~ msgstr "성공적으로 계정이 생성되었습니다."
+
+#~ msgid "accounts_intro"
+#~ msgstr "이 페이지에서 여러 학생들의 계정을 한 번에 만들 수 있다. 이것들은 현재 수업에 자동으로 추가되므로 위에 제시된 수업이 올바른 수업인지 확인하라! 전체 Hedy 시스템에서 모든 사용자 이름은 고유해야 한다. 'Postfix classname'을 사용하여 모든 계정에 자신의 수업 이름을 추가할 수 있다. 수동으로 비밀번호를 입력할 경우 <b>최소</b> 6자 이상이어야 한다."
+
+#~ msgid "create_multiple_accounts"
+#~ msgstr "여러 계정 민들기"
+
+#~ msgid "download_login_credentials"
+#~ msgstr "계정 생성 후 로그인 자격 증명을 다운로드하시겠습니까?"
+
+#~ msgid "generate_passwords"
+#~ msgstr "비밀번호 만들기"
+
+#~ msgid "postfix_classname"
+#~ msgstr "Postfix classname"
+
+#~ msgid "reset_view"
+#~ msgstr "초기화하기"
+
+#~ msgid "unique_usernames"
+#~ msgstr "All usernames need to be unique."
+
+#~ msgid "usernames_exist"
+#~ msgstr "One or more usernames is already in use."
 

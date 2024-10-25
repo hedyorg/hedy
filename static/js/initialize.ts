@@ -5,7 +5,7 @@ import { initializeApp, initializeCodePage, InitializeCodePageOptions, initializ
 import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
 import { logs } from './logs';
-import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions } from './teachers';
+import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions, initializeCreateAccountsPage, InitializeCreateAccountsPageOptions } from './teachers';
 import { initializeTutorial } from './tutorials/tutorial';
 
 export interface InitializeOptions {
@@ -52,6 +52,7 @@ type InitializePageOptions =
   | InitializeCodePageOptions
   | InitializeCustomizeClassPageOptions
   | InitializeTeacherPageOptions
+  | InitializeCreateAccountsPageOptions
   | InitializeViewProgramPageOptions
   | InitializeClassOverviewPageOptions
   | InitializeAdminUsersPageOptions
@@ -92,6 +93,10 @@ export function initialize(options: InitializeOptions) {
 
     case 'for-teachers':
       initializeTeacherPage(options.javascriptPageOptions);
+      break;
+
+    case 'create-accounts':
+      initializeCreateAccountsPage(options.javascriptPageOptions);
       break;
 
     case 'class-overview':
