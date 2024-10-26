@@ -741,15 +741,15 @@ adventures:
                     Tu y arrives ? Génial ! Veux-tu ajouter davantage de fonctions à ta calculatrice ? **Cette aventure se poursuit dans l'onglet suivant !**
                 example_code: |
                     ```
-                    {define} calculate_mean_grade
+                    {define} calculer_note_moyenne
                         total = 0
                         {for} i {in} {range} 1 {to} 4
                             grade = {ask} _
                             total = total + _
                             return _ / 4
 
-                    mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
+                    note_moyenne = {call} _
+                    {print} 'Ta note moyenne est ' note_moyenne
                     ```
             15:
                 story_text: |
@@ -907,9 +907,9 @@ adventures:
                     **Attention ! Ce code doit être débuggé !**
                     ```
                     {print} Bienvenue à la piscine Hedy !
-                    cours {is} {ask} "Es-tu ici pour un cours de natation ?"
+                    cours {is} {ask} "Es-tu ici pour participer à un cours ?"
                     {if} cours oui
-                    {print} "Génial ! Tu as cours !
+                    {print} "Génial ! Tu participes à un cours !
                     {print} {else} "Tu n'as pas cours"
                     réduction {is} {ask} "As-tu un code de réduction ?"
                     {if} réduction {is} oui
