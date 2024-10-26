@@ -2506,23 +2506,29 @@ adventures:
                     Hier ist ein Beispiel einer Funktion mit Argumenten, kombiniert mit dem {ask} Befehl.
                 example_code: |
                     ```
-                    {define} willkommensnachricht {with} titel, nachname, land, raumnummer
-                        {print} 'Willkommen im Hotel Hedy, ' titel ' ' Nachname
-                        gute_reise {is} {ask} 'Hattest du eine gute Reise aus ' land '?'
-                        {if} gute_reise {is} 'ja'
-                            {print} 'Wunderbar!'
+                    {define} welcome_message {with} title, last_name, country, room_number
+                        {print} 'Welcome to Hotel Hedy, ' title ' ' last_name
+                        nice_trip {is} {ask} 'Did you have a nice trip from, ' country '?'
+                        {if} nice_trip {is} 'yes'
+                            {print} 'Lovely!'
                         {else}
-                            {print} 'Das tut mir leid zu hören.'
-                            {print} 'Hoffentlich können Sie sich in ihrem Zimmer etwas entspannen.'
-                        {print} 'Ihre Zimmernummer ist ' zimmernummer
+                            {print} 'Sorry to hear that.'
+                            {print} 'Hopefully you can take a nice rest in you room.'
+                        {print} 'Your room number is ' room_number
 
-                    {print} 'Hallo. Bitte geben Sie Ihre Daten ein um einzuchecken.'
-                    titel = {ask} 'Wie werden Sie angeredet (Hr, Fr, Dr, usw.)?'
-                    name = {ask} 'Wie ist Ihr Nachname?'
-                    herkunftsland = {ask} 'Aus welchem Land kommen Sie?'
+                    {print} 'Hello. Please fill in your information to check in.'
+                    title = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'
+                    name = {ask} 'What is you last name?'
+                    homecountry = {ask} 'What country do you come from?'
 
-                    {call} willkommensnachricht {with} titel, name, herkunftsland, 105
+                    {call} welcome_message {with} title, name, homecountry, 105
                     ```
+
+                    title = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'
+                    name = {ask} 'What is you last name?'
+                    homecountry = {ask} 'What country do you come from?'
+
+                    {call} welcome_message {with} title, name, homecountry, 105
     if_command:
         name: '{if} & {else}'
         default_save_name: if_command
@@ -4385,15 +4391,15 @@ adventures:
                     In diesem Beispiel haben wir das 'My Bonnie' Programm verändert und interaktiv gemacht. Jetzt kannst du fragen, wo Bonnie ist.
                 example_code: |
                     ```
-                    {define} lied {with} ort
-                        {print} 'My Bonnie is ' out
+                    {define} song {with} place
+                        {print} 'My Bonnie is ' place
 
-                    gewählter_platz = {ask} 'Wo soll Bonnie sein?'
-                    synonym = {ask} 'Was ist ein anderes Wort dafür?'
+                    chosen_place = {ask} 'Where do you want Bonnie to be?'
+                    synonym = {ask} 'What is another word for that?'
 
-                    {call} lied {with} gewählter_ort
-                    {call} lied {with} synonym
-                    {call} lied {with} gewählter_ort
+                    {call} song {with} chosen_place
+                    {call} song {with} synonym
+                    {call} song {with} chosen_place
                     ```
             16:
                 story_text: |
