@@ -728,34 +728,28 @@ adventures:
                     ```
             14:
                 story_text: |
-                    In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra features.
+                    In diesem Abenteuer wirst du einen Taschenrechner bauen, der einen Notendurchschnitt für dich berechnet. Wenn du in funktionsfähig gemacht hast, kannst du zum nächsten Abenteuer weiter gehen, in dem du zwei extra Features ergänzen kannst.
 
-                    ### Exercise 1
-                    Fill in the blanks to get the calculator to work.
-                    * Start with the fourth line, add a question to figure out what grade the student got.
-                    * In the fifth line you'll want to calculate the total of all grades, so the total = total + grade.
-                    * Then we get to set the return value. We want to return the mean, so the total devided by the amount of tests (4).
-                    * Lastly we finish the code by calling the function in line 8.
+                    ### Übung 1
+                    Fülle die Leerstellen, um den Taschenrechner funktionsfähig zu machen.
+                    * Beginne mit der vierten Zeile, ergänze eine Frage, um herauszufinden, welche Note die Schüler:in bekommen hat.
+                    * In der fünften Zeile solltest du die Gesamtzahl aller Noten berechnen, also gesamt = gesamt + note
+                    * Dann setzen wir den Rückgabewert. Wir wollen den Durchschnitt zurückgeben, also gesamt geteilt durch die Anzahl Tests (4).
+                    * Zuletzt vervollständigen wir den Code indem wir die Funktion in Zeile 8 aufrufen.
 
-                    Did you get it? Awesome! Would you like to add even more to your calculator? **This adventure continues in the next tab!**
+                    Hast du es hingekriegt? Wirklich toll! Willst du noch andere Sachen mit deinem Taschenrechner machen? **Dieses Abenteuer geht auf dem nächsten Tab weiter!**
                 example_code: |
                     ```
-                    {define} calculate_mean_grade
-                        total = 0
+                    {define} berechne_notendurchschnitt
+                        gesamt = 0
                         {for} i {in} {range} 1 {to} 4
-                            grade = {ask} _
-                            total = total + _
+                            note = {ask} _
+                            gesamt = gesamt + _
                             return _ / 4
 
-                    mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
+                    notendurchschnitt = {call} _
+                    {print} 'Dein Notendurchschnitt ist ' notendurchschnitt
                     ```
-
-                            total = total + _
-                            return _ / 4
-
-                    mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
             15:
                 story_text: |
                     Du kannst die `{while}` Schleife zum Taschenrechnerspiel, was du im vorigen Level gelernt hast, hinzufügen.
@@ -789,22 +783,22 @@ adventures:
         levels:
             14:
                 story_text: |
-                    ### Exercise 2
-                    **This is the second part of this adventure.** The adventure starts in the previous tab.
-                    Of course, you don't always want to calculate the mean of 4 tests. You might want to calculate the mean of 10 tests or only 2...
-                    We can fix this problem by adding the argument and variable 'amount_of_tests'.
-                    * Start a new line on line 3. Set the amount_of_tests argument by asking the student how many tests they have made.
-                    * Change the 4 in line 4 to the new argument amount_of_tests.
-                    * Lastly, change the 4 in line 6 to amount_of_tests
+                    ### Übung 2
+                    **Das ist der zweite Teil dieses Abenteuers.** Das Abenteuer startet im vorherigen Tab.
+                    Natürlich willst du nicht immer nur den Durchschnitt von 4 Tests berechnen. Vielleicht willst du den Mittelwert von 10 Tests oder nur 2 berechnen?
+                    Du kannst das Problem beheben, indem du ein Argument und die Variable 'anzahl_von_tests' ergänzt.
+                    * Beginne eine neue Zeile in der Zeile 3. Setze die anzahl_von_tests indem du die Schüler:in danach fragst, wie viele Tests geschrieben wurden.
+                    * Ändere die 4 in der Zeile 4 in das neue Argument anzahl_von_tests.
+                    * Zuletzt ändere noch die 4 in der Zeile 6 in anzahl_von_tests.
 
-                    Try out your new program. Does it work?
+                    Versuche dein neues Programm. Funktioniert es?
 
-                    ### Exercise 3
-                    Did you want to make your program even better? Great! In the previous program you could only calculate the mean grade of 1 subject, but it would be better if you could calculate the mean grade for all subjects you want!
-                    We won't tell you how to do it, but we will give you one tip: Start your code in line 1 with: define calculate_mean_grade with subject.
+                    ### Übung 3
+                    Willst du dein Programm weiter verbessern? Großartig! Das letzte Programm konnte nur den Durchschnitt von einer Schüler:in berechnen. Es wäre aber besser, die Durchschnitt von allen Schüler:innen zu berechnen, die du willst.
+                    Wie sagen dir nicht, wie du es machen sollst, geben dir aber einen Hinweis: Beginne deinen Code in Zeile 1 mit {define} berechne_notendurchschnitt {with} schüler_in.
                 example_code: |
                     ```
-                    # Use your own code from the previous adventure.
+                    # Benutze deinen eigenen Code aus dem letzten Abenteuer.
                     ```
     clear_command:
         name: '{clear}'
@@ -1438,12 +1432,9 @@ adventures:
                     ```
             14:
                 story_text: |
-                    Wir lernen weitere neue Elemente kennen! Du kennst sie vielleicht schon aus der Mathematik, das `<` und das `>` Zeichen.
-                    Das `<` prüft, ob die erste Zahl kleiner ist als die zweite, so überprüft Alter `<` 12 zum Beispiel, ob Alter kleiner als 12 ist.
-                    Wenn du überprüfen willst, ob die erste Zahl kleiner oder gleich der zweiten ist, kannst du `<=` verwenden, zum Beispiel Alter `<=` 11.
-                    Das `>` prüft, ob die erste Zahl größer als die zweite ist, so überprüft Punkte `>` 10 zum Beispiel ob Punkte größer als 10 ist.
-                    Wenn du überprüfen willst, ob die erste Zahl größer oder gleich der zweiten ist, kannst du `>=` verwenden, also zum Beispiel Punkte `>=` 11.
-                    All diese Vergleiche kannst du mit einem `{if}` verwenden, das geht so:
+                    Mit dem Beispielcode kannst du berechnen, ob du in einem Fach bestanden hast (also eine 4 oder besser).
+                    Wie du siehst, ist dieser Code extrem ineffizient, wegen des langen Codes in Zeile 5.
+                    Die Noten 1 bis 4 wurden getrennt programmiert. Aber - Glück für dich, in diesem Level wirst du lernen, wie du ohne diesen extrem langen Code zurecht kommst.
                 example_code: |
                     ```
                     alter = {ask} 'Wie alt bist du?'
@@ -2084,26 +2075,26 @@ adventures:
         levels:
             14:
                 story_text: |
-                    In this level you can program the game 'Guess my number'
+                    In diesem Level kannst du das Spiel 'Errate meine Zahl' programmiere.
 
-                    ### Exercise
-                    Fill in the correct symbols on the blanks to get the game to work.
+                    ### Übung
+                    Ergänze die richtigen Zeichen in den Leerstellen, so dass das Spiel funktioniert
                 example_code: |
                     ```
-                    {print} 'Guess my number'
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    number = numbers {at} {random}
-                    game = 'on'
+                    {print} 'Errate meine Zahl'
+                    zahlen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    zahl = zahlen {at} {random}
+                    spiel = 'läuft'
                     {for} i {in} {range} 1 {to} 10
-                        {if} game == 'on'
-                            guess = {ask} 'Which number do you think it is?'
-                            {if} guess _ number
-                                {print} 'Lower!'
-                            {if} guess _ number
-                                {print} 'Higher!'
-                            {if} guess _ number
-                                {print} 'You win!'
-                                game = 'over'
+                        {if} spiel == 'läuft'
+                            vermutung = {ask} 'Welche Zahl meinst du ist es?'
+                            {if} vermutung _ zahl
+                                {print} 'Kleiner!'
+                            {if} vermutung _ zahl
+                                {print}  'Größer!'
+                            {if} vermutung _ zahl
+                                {print} 'Gewonnen!'
+                                spiel = 'vorbei'
                     ```
     hangman:
         name: Galgenmännchen
@@ -2326,6 +2317,12 @@ adventures:
                     In den vorherigen Leveln hast du eine Einleitung ins Spukhaus-Spiel gemacht, aber wie du vielleicht gemerkt hast war das Ender der Geschichte immer schrecklich.
                     In diesem Level kannst du die Geschichte interaktiver machen, indem du den Ausgang des Spiels änderst. Manchmal wirst du gefressen, manchmal kannst du entkommen!
                     Lass Hedy zufällig entscheiden!
+
+                    ### Übung
+                    Kopiere den Beispielcode und fülle die Leerstellen, so dass er funktioniert!
+
+                    **Extra** Die Geschichte ist ziemlich einfach. Vielleicht kannst du sie noch grusliger machen, indem du dir eine aufregendere Geschichte ausdenkst.
+                    Es gibt bisher auch nur sehr wenige verschiedene Enden, es gib ja nur drei Möglichkeiten, was hinter der Tür sein kann. Vielleicht fallen dir noch mehr Monster für die Liste ein!
                 example_code: |
                     ```
                     _ Entfliehe dem Spukhaus!
@@ -2368,7 +2365,7 @@ adventures:
                     Kannst du die 4 fehlenden Wörter finden, um den Code zu vervollständigen?
                 example_code: |
                     ```
-                    {print} 'Entkomme aus dem Spukhaus!'
+                    {print} 'Entkomme dem Spukhaus!'
                     {print} 'Es sind 3 Türen vor dir...'
                     Türen {is} 1, 2, 3
                     Monster {is} Werwolf, Mumie, Vampir, Zombie
@@ -2434,28 +2431,28 @@ adventures:
                     ```
             14:
                 story_text: |
-                    ### Exercise
-                    In this level you can use the `<` and `>` symbol to introduce lives to your game.
-                    Make sure the player loses a life when they come across the wrong monster and that the game stops if you have no lives left.
+                    ### Übung
+                    In diesem Level kannst du das `<` und `>` Symbol verwenden, um Leben in deinem Spiel zu verwenden.
+                    Stelle sicher, dass die Spieler:in ein Leben verliert, wenn sie auf das falsche Monster trifft und das Spiel vorbei ist, wenn keine Leben mehr übrig sind.
                 example_code: |
                     ```
-                    {print} 'Escape from the haunted house'
-                    lives = 3
-                    doors = 1, 2, 3
-                    monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
+                    {print} 'Entkomme dem Spukhaus'
+                    leben = 3
+                    türen = 1, 2, 3
+                    monsters = 'die böse Hexe', 'ein Zombie', 'einen schlafenden 3-köpfiger Hund'
                     {for} i {in} {range} 1 {to} 10
-                        {if} lives _
-                            good_door = doors {at} {random}
+                        {if} leben _
+                            richtige_tür = türen {at} {random}
                             monster = monsters {at} {random}
-                            chosen_door = {ask} 'Which door do you choose?'
-                            {if} good_door == chosen_door
-                                {print} 'You have chosen the correct door'
+                            gewählte_tür = {ask} 'Welche Tür nimmst du?'
+                            {if}richtige_tür == gewählte_tür
+                                {print} 'Du hast die richtige Tür gewählt'
                             {else}
-                                {print} 'You see...' monster
-                                {if} monster == 'a sleeping 3 headed dog'
-                                    {print} 'Pffieuw.... Its asleep'
+                                {print} 'Du siehst...' monster
+                                {if} monster == 'einen schlafenden 3-köpfigen Hund'
+                                    {print} 'Ahh.... Er schläft'
                                 {else}
-                                    {print} 'You lose one life'
+                                    {print} 'Du verlierst ein Leben'
                                     lives = _
                         {else}
                             {print} 'GAME OVER'
@@ -2664,22 +2661,22 @@ adventures:
                     Benutze diese Vergleiche so in einem `{if}`:
                 example_code: |
                     ```
-                    age = {ask} 'How old are you?'
-                    {if} age > 12
-                        {print} 'You are older than I am!'
+                    age = {ask} 'Wie alt bist du?'
+                    {if} alter > 12
+                        {print} 'Du bist älter als ich!'
                     ```
                     ```
-                    age = {ask} 'How old are you?'
-                    {if} age < 12
-                        {print} 'You are younger than me!'
+                    age = {ask} 'Wie alt bist du?'
+                    {if} alter < 12
+                        {print} 'Du bist jünger als ich!'
                     {else}
-                        {print} 'You are older than me!'
+                        {print} 'Du bist älter als ich!'
                     ```
                 story_text_2: |
                     Ab diesem Level kannst du zwei Gleichheitszeichen verwenden, um etwas zu vergleichen. Das ist in den meisten Programmiersprachen so:
                 example_code_2: |
                     ```
-                    name = {ask} 'Wie heisst du?'
+                    name = {ask} 'Wie heißt du?'
                     {if} name == 'Hedy'
                         {print} 'Du bist cool!'
                     ```
@@ -3270,26 +3267,26 @@ adventures:
                     ```
             14:
                 story_text: |
-                    ### Exercise
-                    In this level you can let Hedy tell you if you have saved up enough money!
-                    Finish this code by filling in the blanks!
+                    ### Übung
+                    In diesem Level kannst du dir von Hedy sagen lassen, ob du genug Geld gespart hast.
+                    Vervollständige den Code, in dem du die Leerstellen füllst.
                 example_code: |
                     ```
-                    _ calculate_budget with wish, money, allowance
-                        to_save = wish - money
-                        weeks = to_save / allowance
-                        {if} wish _ money
-                            {print} 'You need to save up some more!'
-                            {print} 'Youll need ' weeks ' more weeks.'
+                    _ berechne_budget {with} wunsch, erspartes, taschengeld
+                        zu_sparen = wunsch - erspartes
+                        wochen = zu_sparen / taschengeld
+                        {if} wunsch _ erspartes
+                            {print} 'Du musst noch weiter sparen!'
+                            {print} 'Du brauchst noch 'wochen ' Wochen.'
                         {else}
-                            {print} 'Great! You have enough'
-                            {print} 'Lets go shopping!'
+                            {print} 'Großartige! Du hast genug'
+                            {print} 'Kommt, wir gehen einkaufen!'
 
-                    money = {ask} 'How much money have you saved?'
-                    wish = {ask} 'How much money do you need?'
-                    allowance = {ask} 'How much pocket money do you get each week?'
+                    erspartes = {ask} 'Wie viel Geld hast du gespart?'
+                    wunsch = {ask} 'Wie viel Geld brauchst du?'
+                    taschengeld = {ask} 'Wie viel Taschengeld bekommst du jede Woche?'
 
-                    {call} calculate_budget with _, _, _
+                    {call} berechne_budget {with} _, _, _
                     ```
     pressit:
         name: Tastengedrücke
@@ -3383,6 +3380,7 @@ adventures:
         levels:
             14:
                 story_text: |
+                    ### Übung
                     In diesem Abenteuer kannst du dein eigenes Quiz machen! Füll alle Lücken aus, füge mehr Fragen hinzu und hab Spaß bei deinem eigenen Quiz!
                     Du kannst das Quiz machen über was du möchtest: dein Hobby, dein Lieblingstier, dein Lieblingsbuch, eigentlich über alles!
                 example_code: |
