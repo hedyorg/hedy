@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-10-04 04:49+0000\n"
+"PO-Revision-Date: 2024-10-25 06:21+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: nb_NO <LL@li.org>\n"
 "Language: nb_NO\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -41,7 +41,7 @@ msgstr "Koden din er uferdig. Den inneholder tomrom du må erstatte med kode."
 
 #, fuzzy
 msgid "Incomplete"
-msgstr "Oisann! Du glemte litt kode! På linje {line_number}, må du legge til tekst etter `{incomplete_command}`."
+msgstr "We detected that part of the code seems to be missing from the `{incomplete_command}` on line {line_number}. Can you try adding what's missing?"
 
 #, fuzzy
 msgid "Incomplete Repeat"
@@ -81,7 +81,7 @@ msgstr "It looks like you forgot to use a command with the text you put in line 
 
 #, fuzzy
 msgid "Missing Additional Command"
-msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+msgstr "We detected that the command `{command}` on line {line_number} is missing something. Can you try using `{missing_command}` in your code?"
 
 #, fuzzy
 msgid "Missing Colon Error"
@@ -313,8 +313,9 @@ msgstr "All"
 msgid "all_class_highscores"
 msgstr "All students visible in class highscores"
 
+#, fuzzy
 msgid "all_rows_missing_separator"
-msgstr ""
+msgstr "None of the rows contain a semicolon. Perhaps you want to let us auto generate passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, use a semicolon to separate usernames and passwords on the following lines: {rows}"
 
 msgid "already_account"
 msgstr "Har du allerede en konto?"
@@ -490,8 +491,9 @@ msgstr "Continue"
 msgid "contributor"
 msgstr "Contributor"
 
+#, fuzzy
 msgid "copy_accounts_to_clipboard"
-msgstr ""
+msgstr "Copy to clipboard"
 
 msgid "copy_clipboard"
 msgstr "Kopiert til utklippstavlen"
@@ -530,8 +532,9 @@ msgstr "Opprett konto"
 msgid "create_accounts"
 msgstr "Opprett flere kontoer"
 
+#, fuzzy
 msgid "create_accounts_placeholder"
-msgstr ""
+msgstr "Type the accounts or paste them from a spreadsheet"
 
 msgid "create_accounts_prompt"
 msgstr "You will create {number_of_accounts} student accounts. Are you sure?"
@@ -550,8 +553,9 @@ msgstr "Create an account"
 msgid "create_student_account_explanation"
 msgstr "You can save your own programs with an account."
 
+#, fuzzy
 msgid "create_student_accounts"
-msgstr ""
+msgstr "Create student accounts for"
 
 #, fuzzy
 msgid "create_teacher_account"
@@ -561,17 +565,21 @@ msgstr "Create a teacher account"
 msgid "create_teacher_account_explanation"
 msgstr "With a teacher account, you can save your programs and see the results of your students."
 
+#, fuzzy
 msgid "create_usernames_and_passwords_desc"
-msgstr ""
+msgstr "Enter one username and password per line, separated by a semicolon. Or, if you have the data in a two-column spreadsheet, copy the file content and paste here."
 
+#, fuzzy
 msgid "create_usernames_and_passwords_title"
-msgstr ""
+msgstr "Usernames and passwords"
 
+#, fuzzy
 msgid "create_usernames_desc"
-msgstr ""
+msgstr "Enter one username per line or paste them from a spreadsheet."
 
+#, fuzzy
 msgid "create_usernames_title"
-msgstr ""
+msgstr "Usernames"
 
 msgid "creator"
 msgstr "Skaper"
@@ -1456,8 +1464,9 @@ msgstr "Passord oppdatert."
 msgid "passwords_six"
 msgstr "Alle passord må være *minst* seks tegn langt."
 
+#, fuzzy
 msgid "passwords_too_short"
-msgstr ""
+msgstr "Passwords must be at least 6 characters long. Correct the following passwords, so that they are at least 6 symbols: {passwords}"
 
 msgid "pending_invites"
 msgstr "Ubesvarte invitasjoner"
@@ -1511,8 +1520,9 @@ msgstr "Se tidligere kampanjer"
 msgid "previous_page"
 msgstr "Previous page"
 
+#, fuzzy
 msgid "print_accounts"
-msgstr ""
+msgstr "Print"
 
 msgid "print_logo"
 msgstr "skriv"
@@ -1559,8 +1569,9 @@ msgstr "Program"
 msgid "prompt_join_class"
 msgstr "Vil du bli med i denne klassen?"
 
+#, fuzzy
 msgid "provided_username_duplicates"
-msgstr ""
+msgstr "You supplied the following usernames more than once: {usernames}"
 
 #, fuzzy
 msgid "public"
@@ -1841,8 +1852,9 @@ msgstr "Solution Example"
 msgid "solution_example_explanation"
 msgstr "This is where the solution of your adventure goes. This can be used if you want to share this adventure with other teacher's, so they can know what your suggested solution is."
 
+#, fuzzy
 msgid "some_rows_missing_separator"
-msgstr ""
+msgstr "The following rows are missing a semicolon, so either the username or the password is missing: {rows}"
 
 #, fuzzy
 msgid "something_went_wrong_keyword_parsing"
@@ -1888,8 +1900,9 @@ msgstr "tekst"
 msgid "student"
 msgstr "Student"
 
+#, fuzzy
 msgid "student_accounts_created"
-msgstr ""
+msgstr "Successfully created student accounts"
 
 #, fuzzy
 msgid "student_adventures_table"
@@ -2105,8 +2118,9 @@ msgstr "Hedy - Se eventyr"
 msgid "token_invalid"
 msgstr "Ugylig token."
 
+#, fuzzy
 msgid "too_many_accounts"
-msgstr ""
+msgstr "You cannot create more than 100 student accounts."
 
 #, fuzzy
 msgid "tooltip_level_locked"
@@ -2190,11 +2204,13 @@ msgstr "Oppdater offentlig profil"
 msgid "updating_indicator"
 msgstr "Updating"
 
+#, fuzzy
 msgid "use_custom_passwords"
-msgstr ""
+msgstr "Provide your own passwords"
 
+#, fuzzy
 msgid "use_generated_passwords"
-msgstr ""
+msgstr "Auto generate passwords"
 
 #, fuzzy
 msgid "use_of_blanks_exception"
@@ -2222,11 +2238,13 @@ msgstr "Denne brukeren eksisterer ikke, eller så har de ikke opprettet en offen
 msgid "username"
 msgstr "Brukernavn"
 
+#, fuzzy
 msgid "username_contains_invalid_symbol"
-msgstr ""
+msgstr "Usernames cannot contain the symbol ':' or '@'. Remove these symbols from following rows: {usernames}"
 
+#, fuzzy
 msgid "username_contains_separator"
-msgstr ""
+msgstr "Usernames cannot contain a semicolon. Perhaps you want to supply your own passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, remove the semicolon from the following usernames: {usernames}"
 
 msgid "username_empty"
 msgstr "Du skrev ikke inn et brukernavn!"
@@ -2240,11 +2258,13 @@ msgstr "Brukernavnet kan ikke inneholde `:` eller `@`."
 msgid "username_three"
 msgstr "Brukernavnet må være *minst* tre bokstaver langt."
 
+#, fuzzy
 msgid "usernames_too_short"
-msgstr ""
+msgstr "Usernames must be at least 3 characters long. Correct the following usernames, so that they are 3 or more symbols: {usernames}"
 
+#, fuzzy
 msgid "usernames_unavailable"
-msgstr ""
+msgstr "The following usernames are not available: {usernames}. You can create similar accounts, for example, by appending an underscore or your class name."
 
 #, fuzzy
 msgid "value"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-10-11 11:52+0000\n"
+"PO-Revision-Date: 2024-10-25 17:37+0000\n"
 "Last-Translator: Reno Tx <renotx@users.noreply.hosted.weblate.org>\n"
 "Language-Team: sr <LL@li.org>\n"
 "Language: sr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -35,7 +35,7 @@ msgid "Has Blanks"
 msgstr "Открили смо да код изгледа непотпун. Можете ли попунити празнине кодом?"
 
 msgid "Incomplete"
-msgstr "Открили смо да део кода изгледа недостаје у `{incomplete_command}` на линији {line_number}. Можете ли покушати да додате оно што недостаје?"
+msgstr "We detected that part of the code seems to be missing from the `{incomplete_command}` on line {line_number}. Can you try adding what's missing?"
 
 msgid "Incomplete Repeat"
 msgstr "Открили смо да `{repeat}` на линији {line_number} недостаје команда `{command}`. Можете ли покушати да је додате?"
@@ -65,7 +65,7 @@ msgid "Lonely Text"
 msgstr "Открили смо да код изгледа да недостаје команда са текстом који је коришћен у линији {line_number}. Можете ли покушати да напишете потребну команду са текстом"
 
 msgid "Missing Additional Command"
-msgstr "Открили смо да коду изгледа недостаје `{command}` на линији {line_number}. Можете ли покушати да користите `{missing_command}` у свом коду."
+msgstr "We detected that the command `{command}` on line {line_number} is missing something. Can you try using `{missing_command}` in your code?"
 
 msgid "Missing Colon Error"
 msgstr "Открили смо да `{command}` треба `:` на крају линије {line_number}. Почевши од нивоа 17, можете ли почети да додајете `:` на крају линије са командама?"
@@ -252,7 +252,7 @@ msgid "all_class_highscores"
 msgstr "Сви ученици видљиви у разредним најбољим резултатима"
 
 msgid "all_rows_missing_separator"
-msgstr ""
+msgstr "Нити један ред не садржи тачку зарез. Можда желите да нам дозволите да аутоматски генеришемо лозинке? Ако је тако, кликните на прекидач за лозинке и креирајте налоге поново. Ако то није случај, употребите тачку зарез да одвојите корисничка имена и лозинке на следећим линијама: {rows}"
 
 msgid "already_account"
 msgstr "Већ имате налог?"
@@ -399,7 +399,7 @@ msgid "contributor"
 msgstr "Сарадник"
 
 msgid "copy_accounts_to_clipboard"
-msgstr ""
+msgstr "Копирајте у клипборд"
 
 msgid "copy_clipboard"
 msgstr "Успешно копирано у клипборд"
@@ -435,7 +435,7 @@ msgid "create_accounts"
 msgstr "Креирај налоге"
 
 msgid "create_accounts_placeholder"
-msgstr ""
+msgstr "Унесите налоге или налепите их из табеле"
 
 msgid "create_accounts_prompt"
 msgstr "You will create {number_of_accounts} student accounts. Are you sure?"
@@ -453,7 +453,7 @@ msgid "create_student_account_explanation"
 msgstr "Можете сачувати своје програме са налогом."
 
 msgid "create_student_accounts"
-msgstr ""
+msgstr "Креирајте ученичке налоге за"
 
 msgid "create_teacher_account"
 msgstr "Направите налог за наставнике"
@@ -462,16 +462,16 @@ msgid "create_teacher_account_explanation"
 msgstr "Са налогом за наставнике, можете сачувати своје програме и видети резултате својих ученика."
 
 msgid "create_usernames_and_passwords_desc"
-msgstr ""
+msgstr "Унесите једно корисничко име и лозинку по линији, одвојене тачком зарез. Или, ако имате податке у табели са две колоне, копирајте садржај фајла и налепите овде."
 
 msgid "create_usernames_and_passwords_title"
-msgstr ""
+msgstr "Корисничка имена и лозинке"
 
 msgid "create_usernames_desc"
-msgstr ""
+msgstr "Унесите једно корисничко име по линији или их налепите из табеле."
 
 msgid "create_usernames_title"
-msgstr ""
+msgstr "Корисничка имена"
 
 msgid "creator"
 msgstr "Креатор"
@@ -1246,7 +1246,7 @@ msgid "passwords_six"
 msgstr "Све лозинке морају бити дуге најмање шест карактера."
 
 msgid "passwords_too_short"
-msgstr ""
+msgstr "Лозинке морају бити дуге најмање 6 карактера. Исправите следеће лозинке, тако да буду најмање 6 симбола: {passwords}"
 
 msgid "pending_invites"
 msgstr "Позиви на чекању"
@@ -1294,7 +1294,7 @@ msgid "previous_page"
 msgstr "Претходна страница"
 
 msgid "print_accounts"
-msgstr ""
+msgstr "Штампај"
 
 msgid "print_logo"
 msgstr "штампај"
@@ -1339,7 +1339,7 @@ msgid "prompt_join_class"
 msgstr "Да ли желите да се придружите овом разреду?"
 
 msgid "provided_username_duplicates"
-msgstr ""
+msgstr "Пружили сте следећа корисничка имена више од једном: {usernames}"
 
 msgid "public"
 msgstr "Јавно"
@@ -1582,7 +1582,7 @@ msgid "solution_example_explanation"
 msgstr "Овде иде решење ваше авантуре. Ово се може користити ако желите да поделите ову авантуру са другим наставницима, како би знали шта је ваше предложено решење."
 
 msgid "some_rows_missing_separator"
-msgstr ""
+msgstr "Следећи редови недостају тачку зарез, тако да недостаје или корисничко име или лозинка: {rows}"
 
 #, fuzzy
 msgid "something_went_wrong_keyword_parsing"
@@ -1622,7 +1622,7 @@ msgid "student"
 msgstr "Ученик"
 
 msgid "student_accounts_created"
-msgstr ""
+msgstr "Успешно креирани ученички налози"
 
 msgid "student_adventures_table"
 msgstr "Авантуре ученика"
@@ -1814,7 +1814,7 @@ msgid "token_invalid"
 msgstr "Ваш токен је неважећи."
 
 msgid "too_many_accounts"
-msgstr ""
+msgstr "Не можете креирати више од 100 ученичких налога."
 
 msgid "tooltip_level_locked"
 msgstr "Ваш наставник је онемогућио овај ниво"
@@ -1882,10 +1882,10 @@ msgid "updating_indicator"
 msgstr "Ажурирање"
 
 msgid "use_custom_passwords"
-msgstr ""
+msgstr "Пружите своје лозинке"
 
 msgid "use_generated_passwords"
-msgstr ""
+msgstr "Аутоматски генеришите лозинке"
 
 msgid "use_of_blanks_exception"
 msgstr "Употреба празнина у програмима"
@@ -1909,10 +1909,10 @@ msgid "username"
 msgstr "Корисничко име"
 
 msgid "username_contains_invalid_symbol"
-msgstr ""
+msgstr "Корисничка имена не могу садржати симбол ':' или '@'. Уклоните ове симболе из следећих редова: {usernames}"
 
 msgid "username_contains_separator"
-msgstr ""
+msgstr "Корисничка имена не могу садржати тачку зарез. Можда желите да пружите своје лозинке? Ако је тако, кликните на прекидач за лозинке и креирајте налоге поново. Ако то није случај, уклоните тачку зарез из следећих корисничких имена: {usernames}"
 
 msgid "username_empty"
 msgstr "Нисте унели корисничко име!"
@@ -1927,10 +1927,10 @@ msgid "username_three"
 msgstr "Корисничко име мора садржати најмање три карактера."
 
 msgid "usernames_too_short"
-msgstr ""
+msgstr "Корисничка имена морају бити дуга најмање 3 карактера. Исправите следећа корисничка имена, тако да буду 3 или више симбола: {usernames}"
 
 msgid "usernames_unavailable"
-msgstr ""
+msgstr "Следећа корисничка имена нису доступна: {usernames}. Можете креирати сличне налоге, на пример, додавањем доње црте или имена вашег часа."
 
 msgid "value"
 msgstr "Вредност"

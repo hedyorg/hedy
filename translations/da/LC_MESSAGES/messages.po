@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-10-04 04:50+0000\n"
+"PO-Revision-Date: 2024-10-25 06:21+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -41,7 +41,7 @@ msgstr "Your code is incomplete. It contains blanks that you have to replace wit
 
 #, fuzzy
 msgid "Incomplete"
-msgstr "Oops! You forgot a bit of code! On line {line_number}, you need to enter text behind `{incomplete_command}`."
+msgstr "We detected that part of the code seems to be missing from the `{incomplete_command}` on line {line_number}. Can you try adding what's missing?"
 
 #, fuzzy
 msgid "Incomplete Repeat"
@@ -81,7 +81,7 @@ msgstr "It looks like you forgot to use a command with the text you used in line
 
 #, fuzzy
 msgid "Missing Additional Command"
-msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+msgstr "We detected that the command `{command}` on line {line_number} is missing something. Can you try using `{missing_command}` in your code?"
 
 #, fuzzy
 msgid "Missing Colon Error"
@@ -327,8 +327,9 @@ msgstr "All"
 msgid "all_class_highscores"
 msgstr "All students visible in class highscores"
 
+#, fuzzy
 msgid "all_rows_missing_separator"
-msgstr ""
+msgstr "None of the rows contain a semicolon. Perhaps you want to let us auto generate passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, use a semicolon to separate usernames and passwords on the following lines: {rows}"
 
 #, fuzzy
 msgid "already_account"
@@ -346,9 +347,11 @@ msgstr "Are you sure? You cannot revert this action."
 msgid "ask_needs_var"
 msgstr "Starting in level 2, `{ask}` needs to be used with a variable. Example: name `{is}` `{ask}` What are you called?"
 
+#, fuzzy
 msgid "available_in"
 msgstr "Available in:"
 
+#, fuzzy
 msgid "back_to_class"
 msgstr "Go back to class"
 
@@ -404,6 +407,7 @@ msgstr "Class successfully customized."
 msgid "class_graph_explanation"
 msgstr "In this graph you can see represented the numbers of adventures your students have attempted (meaning they have done meaningful work in that adventure), with respect to the number of errors and successful runs."
 
+#, fuzzy
 msgid "class_logs"
 msgstr "Last Login"
 
@@ -519,8 +523,9 @@ msgstr "Continue"
 msgid "contributor"
 msgstr "Contributor"
 
+#, fuzzy
 msgid "copy_accounts_to_clipboard"
-msgstr ""
+msgstr "Copy to clipboard"
 
 #, fuzzy
 msgid "copy_clipboard"
@@ -566,8 +571,9 @@ msgstr "Create account"
 msgid "create_accounts"
 msgstr "Create accounts"
 
+#, fuzzy
 msgid "create_accounts_placeholder"
-msgstr ""
+msgstr "Type the accounts or paste them from a spreadsheet"
 
 #, fuzzy
 msgid "create_accounts_prompt"
@@ -589,8 +595,9 @@ msgstr "Create an account"
 msgid "create_student_account_explanation"
 msgstr "You can save your own programs with an account."
 
+#, fuzzy
 msgid "create_student_accounts"
-msgstr ""
+msgstr "Create student accounts for"
 
 #, fuzzy
 msgid "create_teacher_account"
@@ -600,17 +607,21 @@ msgstr "Create a teacher account"
 msgid "create_teacher_account_explanation"
 msgstr "With a teacher account, you can save your programs and see the results of your students."
 
+#, fuzzy
 msgid "create_usernames_and_passwords_desc"
-msgstr ""
+msgstr "Enter one username and password per line, separated by a semicolon. Or, if you have the data in a two-column spreadsheet, copy the file content and paste here."
 
+#, fuzzy
 msgid "create_usernames_and_passwords_title"
-msgstr ""
+msgstr "Usernames and passwords"
 
+#, fuzzy
 msgid "create_usernames_desc"
-msgstr ""
+msgstr "Enter one username per line or paste them from a spreadsheet."
 
+#, fuzzy
 msgid "create_usernames_title"
-msgstr ""
+msgstr "Usernames"
 
 #, fuzzy
 msgid "creator"
@@ -1351,6 +1362,7 @@ msgstr "More options"
 msgid "multiple_keywords_warning"
 msgstr "You are trying to use the keyword {orig_keyword}, but this keyword might have several meanings. Please choose the one you're trying to use from this list and copy paste it in your code, curly braces included: {keyword_list}"
 
+#, fuzzy
 msgid "multiple_levels_warning"
 msgstr "We've noticed you have both selected several levels and included code snippets in your adventure, this might cause issues with the syntax highlighter and the automatic translation of keywords"
 
@@ -1630,8 +1642,9 @@ msgstr "Password updated."
 msgid "passwords_six"
 msgstr "All passwords need to be six characters or longer."
 
+#, fuzzy
 msgid "passwords_too_short"
-msgstr ""
+msgstr "Passwords must be at least 6 characters long. Correct the following passwords, so that they are at least 6 symbols: {passwords}"
 
 #, fuzzy
 msgid "pending_invites"
@@ -1693,8 +1706,9 @@ msgstr "View previous campaigns"
 msgid "previous_page"
 msgstr "Previous page"
 
+#, fuzzy
 msgid "print_accounts"
-msgstr ""
+msgstr "Print"
 
 #, fuzzy
 msgid "print_logo"
@@ -1752,13 +1766,15 @@ msgstr "Programs"
 msgid "prompt_join_class"
 msgstr "Do you want to join this class?"
 
+#, fuzzy
 msgid "provided_username_duplicates"
-msgstr ""
+msgstr "You supplied the following usernames more than once: {usernames}"
 
 #, fuzzy
 msgid "public"
 msgstr "Public"
 
+#, fuzzy
 msgid "public_adventures"
 msgstr "Browse public adventures"
 
@@ -1981,6 +1997,7 @@ msgstr "Select"
 msgid "select_adventures"
 msgstr "Select adventures"
 
+#, fuzzy
 msgid "select_all"
 msgstr "Select all"
 
@@ -1988,6 +2005,7 @@ msgstr "Select all"
 msgid "select_lang"
 msgstr "Select language"
 
+#, fuzzy
 msgid "select_levels"
 msgstr "Select levels"
 
@@ -1995,6 +2013,7 @@ msgstr "Select levels"
 msgid "select_tag"
 msgstr "Select tag"
 
+#, fuzzy
 msgid "selected"
 msgstr "Selected"
 
@@ -2070,8 +2089,9 @@ msgstr "Solution Example"
 msgid "solution_example_explanation"
 msgstr "This is where the solution of your adventure goes. This can be used if you want to share this adventure with other teacher's, so they can know what your suggested solution is."
 
+#, fuzzy
 msgid "some_rows_missing_separator"
-msgstr ""
+msgstr "The following rows are missing a semicolon, so either the username or the password is missing: {rows}"
 
 #, fuzzy
 msgid "something_went_wrong_keyword_parsing"
@@ -2121,8 +2141,9 @@ msgstr "text"
 msgid "student"
 msgstr "Student"
 
+#, fuzzy
 msgid "student_accounts_created"
-msgstr ""
+msgstr "Successfully created student accounts"
 
 #, fuzzy
 msgid "student_adventures_table"
@@ -2212,6 +2233,7 @@ msgstr "Use a note between C0 and B9 or a number between 1 and 70"
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
 
+#, fuzzy
 msgid "suggestion_numbers_or_strings"
 msgstr "Try changing the values to be all text or all numbers"
 
@@ -2372,8 +2394,9 @@ msgstr "Hedy - View adventure"
 msgid "token_invalid"
 msgstr "Your token is invalid."
 
+#, fuzzy
 msgid "too_many_accounts"
-msgstr ""
+msgstr "You cannot create more than 100 student accounts."
 
 #, fuzzy
 msgid "tooltip_level_locked"
@@ -2461,11 +2484,13 @@ msgstr "Update public profile"
 msgid "updating_indicator"
 msgstr "Updating"
 
+#, fuzzy
 msgid "use_custom_passwords"
-msgstr ""
+msgstr "Provide your own passwords"
 
+#, fuzzy
 msgid "use_generated_passwords"
-msgstr ""
+msgstr "Auto generate passwords"
 
 #, fuzzy
 msgid "use_of_blanks_exception"
@@ -2495,11 +2520,13 @@ msgstr "This user either doesn't exist or doesn't have a public profile"
 msgid "username"
 msgstr "Username"
 
+#, fuzzy
 msgid "username_contains_invalid_symbol"
-msgstr ""
+msgstr "Usernames cannot contain the symbol ':' or '@'. Remove these symbols from following rows: {usernames}"
 
+#, fuzzy
 msgid "username_contains_separator"
-msgstr ""
+msgstr "Usernames cannot contain a semicolon. Perhaps you want to supply your own passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, remove the semicolon from the following usernames: {usernames}"
 
 #, fuzzy
 msgid "username_empty"
@@ -2517,11 +2544,13 @@ msgstr "Username cannot contain `:` or `@`."
 msgid "username_three"
 msgstr "Username must contain at least three characters."
 
+#, fuzzy
 msgid "usernames_too_short"
-msgstr ""
+msgstr "Usernames must be at least 3 characters long. Correct the following usernames, so that they are 3 or more symbols: {usernames}"
 
+#, fuzzy
 msgid "usernames_unavailable"
-msgstr ""
+msgstr "The following usernames are not available: {usernames}. You can create similar accounts, for example, by appending an underscore or your class name."
 
 #, fuzzy
 msgid "value"
