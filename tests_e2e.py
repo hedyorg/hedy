@@ -1584,16 +1584,19 @@ class TestMultipleAccounts(AuthHelper):
             self.post_data('for-teachers/create-accounts', invalid_body, expect_http_code=400)
 
     def test_create_accounts(self):
-        # GIVEN a new teacher
+        # GIVEN a new teacher with a new class
         self.given_fresh_teacher_is_logged_in()
+        class_ = self.post_data('class', {'name': 'class1'})
 
         # WHEN attempting to create a valid adventure
         # THEN receive an OK response with the server
         body = {
-            'accounts': [
-                {'username': 'panda', 'password': 'test123'},
-                {'username': 'panda2', 'password': 'test321'}
-            ]
+            'class': class_['id'],
+            'generate_passwords': False,
+            'accounts': '''
+                platypus;test123
+                platypus2;test321
+            '''
         }
         self.post_data('for-teachers/create-accounts', body, expect_http_code=200)
 

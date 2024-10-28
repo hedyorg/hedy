@@ -367,7 +367,8 @@ class TestsLevel5(HedyTester):
           x__x__x__x = '5'
         print(f'{{result}}')""")
 
-        self.single_level_tester(code=code, expected=expected, lang='da', output=f'num {else_} result is b')
+        self.single_level_tester(code=code, expected=expected, lang='da', translate=False,
+                                 output=f'num {else_} result is b')
 
     def test_if_equality_print_else_print(self):
         code = textwrap.dedent("""\

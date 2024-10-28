@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-09-27 06:17+0000\n"
-"Last-Translator: aniollidon <aniollidon@gmail.com>\n"
+"PO-Revision-Date: 2024-10-25 06:21+0000\n"
+"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: ca <LL@li.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -35,7 +35,7 @@ msgid "Has Blanks"
 msgstr "Hem detectat que el teu codi sembla incomplet. Pots assegurar-te que has omplert tots els espais en blanc?"
 
 msgid "Incomplete"
-msgstr "Hem detectat que falta una part del teu codi des de`{incomplete_command}` a la línia {line_number}. Pots intentar afegir allò que falta?"
+msgstr "We detected that part of the code seems to be missing from the `{incomplete_command}` on line {line_number}. Can you try adding what's missing?"
 
 msgid "Incomplete Repeat"
 msgstr "Hem detectat que al `{repeat}` de la línia {line_number} li falta una comanda`{command}`. Pots afegir-la?"
@@ -58,53 +58,41 @@ msgstr "Hem detectat que a la línia {line_number} comença amb espai. Pots elim
 msgid "Invalid Type Combination"
 msgstr "Hem detectat que `{invalid_argument}` i`{invalid_argument_2}` no es poden fer servir amb `{command}`, ja que un és {invalid_type} i l'altre és {invalid_type_2}. Pots provar de canviar `{invalid_argument}` a {invalid_type_2} o `{invalid_argument_2}` a {invalid_type}?"
 
-#, fuzzy
 msgid "Lonely Echo"
-msgstr "Has fet servir `{echo}` abans que `{ask}`, o has fet servir `{echo}` sense `{ask}`. Situa `{ask}` abans d'`{echo}`."
+msgstr "Hem detectat que un `{echo}` s'ha utilitzat abans o sense fer servir `{ask}`. Pots provar d'escriure un`{ask}` abans d'`{echo}`?"
 
-#, fuzzy
 msgid "Lonely Text"
-msgstr "Sembla que t'has oblidat d'utilitzar una comanda al text de la línia {line_number}"
+msgstr "Hem detectat al codi que fa falta una comanda dins el text de la línia {line_number}. Pots provar d'escriure dins el text la comanda que hi falta"
 
-#, fuzzy
 msgid "Missing Additional Command"
-msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+msgstr "We detected that the command `{command}` on line {line_number} is missing something. Can you try using `{missing_command}` in your code?"
 
-#, fuzzy
 msgid "Missing Colon Error"
-msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
+msgstr "Hem detectat que `{command}` necessita dos punts (`:`) al final de la línia {line_number}. A partir del nivell 17, recordareu d'afegir `:` als finals de línies amb comandes?"
 
-#, fuzzy
 msgid "Missing Command"
-msgstr "Sembla que t'has oblidat d'usar una comanda a la línia {line_number}."
+msgstr "Hem detectat al codi que li falta una ordre a la línia {line_number}. Has revisat a la secció d'exercicis per trobar quina comanda utilitzar?"
 
-#, fuzzy
 msgid "Missing Inner Command"
-msgstr "Sembla que t'has oblidat d'utilitzar una comanda a la declaració `{command}` que has fet a la línia {line_number}."
+msgstr "Hem detectat al codi que fa falta una comanda per a la instrucció `{command}` a la línia {line_number}. Has revisat la secció d'exercicis per trobar quina comanda fa falta?"
 
-#, fuzzy
 msgid "Missing Square Brackets"
-msgstr "It looks like you forgot to use square brackets `[]` around the list you were creating on line {line_number}."
+msgstr "Hem detectat que a la llista que heu creat a la línia {line_number} li falten claudàtors `[]`. Pots provar d'afegir claudàtors `[]` al voltant de la llista?"
 
-#, fuzzy
 msgid "Missing Variable"
-msgstr "It looks like your `{command}` is missing a variable at the start of the line."
+msgstr "Hem detectat que a la vostra `{command}` li falta una variable a l'inici de la línia. Pots provar d'escriure la variable abans de `{command}`?"
 
-#, fuzzy
 msgid "Misspelled At Command"
-msgstr "It looks like you might have misspelled the `{command}` command, instead you wrote `{invalid_argument}` in line {line_number}."
+msgstr "Hem detectat que `{invalid_argument}` sembla tenir un error ortogràfic a la línia {line_number}. Pots provar d'escriure `{command}` al seu lloc."
 
-#, fuzzy
 msgid "No Indentation"
-msgstr "Has utilitzat massa pocs espais a la línia {line_number}. N'has posat {leading_spaces}, i no són suficients. Inicia cada nou bloc amb {indent_size} espais més que la línia d'abans."
+msgstr "Hem detectat que sembla que hi ha massa pocs {leading_spaces} espais utilitzats a la línia {line_number}. Pots provar d'augmentar el sagnat {indent_size} per a cada bloc nou."
 
-#, fuzzy
 msgid "Non Decimal Variable"
-msgstr "At line {line_number}, you might have tried using a number which Hedy does not like very much! Try changing it to a decimal number like 2."
+msgstr "A la línia {line_number}, has utilitzat un número que a Hedy no funciona! Pots provar de canviar-lo a un nombre decimal, com el 2?"
 
-#, fuzzy
 msgid "Parse"
-msgstr "El codi que heu introduït no és un codi Hedy vàlid. Hi ha un error a la línia {location[0]}, a la posició {location[1]}. Apareix el caràcter `{character_found}` que no està permès."
+msgstr "Hem detectat que `{character_found}` s'està utilitzant a la línia {location[0]} que no està permès. Pots buscar quin caràcter falta o quin caràcter addicional hi ha al teu codi?"
 
 #, fuzzy
 msgid "Pressit Missing Else"
@@ -180,13 +168,6 @@ msgstr "Your function used the wrong number of arguments. You provided {used_num
 
 msgid "account_overview"
 msgstr "Visió general del compte"
-
-#, fuzzy
-msgid "accounts_created"
-msgstr "Els comptes s'han creat correctament."
-
-msgid "accounts_intro"
-msgstr "En aquesta pàgina pots crear comptes per a diversos estudiants alhora. S'afegiran automàticament a la classe actual. Així doncs, assegureu-vos que la classe que es mostra a dalt sigui la correcta! Cada nom d'usuari ha de ser únic a tot el sistema Hedy. Podeu prémer \"Afegir sufix classe\" per afegir el vostre nom de classe a tots els comptes. Si introduïu les contrasenyes manualment, aquestes hauran de tenir <b>almenys</b> 6 caràcters."
 
 #, fuzzy
 msgid "actions"
@@ -301,6 +282,10 @@ msgstr "Tot"
 msgid "all_class_highscores"
 msgstr "Fer visible tot l'alumnat al rànquing de la classe"
 
+#, fuzzy
+msgid "all_rows_missing_separator"
+msgstr "None of the rows contain a semicolon. Perhaps you want to let us auto generate passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, use a semicolon to separate usernames and passwords on the following lines: {rows}"
+
 msgid "already_account"
 msgstr "Ja tens un compte?"
 
@@ -315,6 +300,9 @@ msgstr "A partir del nivell 2, cal utilitzar `{ask}` amb una variable. Exemple: 
 
 msgid "available_in"
 msgstr "Available in:"
+
+msgid "back_to_class"
+msgstr "Torna a la classe"
 
 msgid "become_a_sponsor"
 msgstr "Fes-te patrocinador"
@@ -408,8 +396,9 @@ msgstr "Classes"
 msgid "classes_info"
 msgstr "Create a class to follow the progress of each student in dashboard, and to customize the adventures your students see, and even adding your own! You can create as many classes as you like, and each class can have multiple teachers each one with different roles. You can also add as many students as you want, but mind that each student can only be in one class at a time. You can find more information about classes in the <a href=\"https://hedy.org/for-teachers/manual/preparations#for-teachers\">teacher manual</a>."
 
+#, fuzzy
 msgid "clear"
-msgstr ""
+msgstr "Clear"
 
 #, fuzzy
 msgid "clone"
@@ -434,8 +423,9 @@ msgstr "La comanda ja no és correcta"
 msgid "commands"
 msgstr "Comandes"
 
+#, fuzzy
 msgid "complete"
-msgstr ""
+msgstr "Completed"
 
 msgid "congrats_message"
 msgstr "Felicitats, {username}, has completat Hedy!"
@@ -451,11 +441,16 @@ msgstr "constant"
 msgid "content_invalid"
 msgstr "Aquesta aventura no és vàlida."
 
+#, fuzzy
 msgid "continue"
-msgstr ""
+msgstr "Continue"
 
 msgid "contributor"
 msgstr "Contribuïdor"
+
+#, fuzzy
+msgid "copy_accounts_to_clipboard"
+msgstr "Copy to clipboard"
 
 msgid "copy_clipboard"
 msgstr "Copiat amb èxit al porta-retalls"
@@ -491,8 +486,12 @@ msgstr "Crear compte"
 msgid "create_accounts"
 msgstr "Crear comptes"
 
+#, fuzzy
+msgid "create_accounts_placeholder"
+msgstr "Type the accounts or paste them from a spreadsheet"
+
 msgid "create_accounts_prompt"
-msgstr "Estàs segur de que vols crear aquestes comptes?"
+msgstr "You will create {number_of_accounts} student accounts. Are you sure?"
 
 msgid "create_adventure"
 msgstr "Crear aventura"
@@ -500,20 +499,37 @@ msgstr "Crear aventura"
 msgid "create_class"
 msgstr "Crea una nova classe"
 
-msgid "create_multiple_accounts"
-msgstr "Crea múltiples comptes"
-
 msgid "create_student_account"
 msgstr "Crear un compte"
 
 msgid "create_student_account_explanation"
 msgstr "Pots guardar els teus programes si tens un compte."
 
+#, fuzzy
+msgid "create_student_accounts"
+msgstr "Create student accounts for"
+
 msgid "create_teacher_account"
 msgstr "Crea un compte de professorat"
 
 msgid "create_teacher_account_explanation"
 msgstr "Amb un compte de professorat, pots guardar els teus programes i veure els resultats dels teus alumnes."
+
+#, fuzzy
+msgid "create_usernames_and_passwords_desc"
+msgstr "Enter one username and password per line, separated by a semicolon. Or, if you have the data in a two-column spreadsheet, copy the file content and paste here."
+
+#, fuzzy
+msgid "create_usernames_and_passwords_title"
+msgstr "Usernames and passwords"
+
+#, fuzzy
+msgid "create_usernames_desc"
+msgstr "Enter one username per line or paste them from a spreadsheet."
+
+#, fuzzy
+msgid "create_usernames_title"
+msgstr "Usernames"
 
 msgid "creator"
 msgstr "Creador"
@@ -537,8 +553,9 @@ msgstr "Personalitza la classe"
 msgid "dash"
 msgstr "un guió"
 
+#, fuzzy
 msgid "debug"
-msgstr ""
+msgstr "Debug"
 
 msgid "default_401"
 msgstr "Sembla no estàs autoritzat..."
@@ -622,9 +639,6 @@ msgstr "cometes dobles"
 
 msgid "download"
 msgstr "Descàrrega"
-
-msgid "download_login_credentials"
-msgstr "Vols descarregar les credencials d'inici de sessió després de la creació dels comptes?"
 
 msgid "duplicate"
 msgstr "Duplica"
@@ -767,9 +781,6 @@ msgstr "Si us plau, selecciona un gènere vàlid, tria (Dona, Home o Altre)."
 
 msgid "general_settings"
 msgstr "Configuració general"
-
-msgid "generate_passwords"
-msgstr "Genera contrasenyes"
 
 msgid "get_certificate"
 msgstr "Aconsegueix el teu certificat!"
@@ -1218,6 +1229,10 @@ msgid "newline"
 msgstr "a new line"
 
 #, fuzzy
+msgid "next_adventure"
+msgstr "Next adventure"
+
+#, fuzzy
 msgid "next_exercise"
 msgstr "Next exercise"
 
@@ -1228,6 +1243,10 @@ msgstr "Next page"
 #, fuzzy
 msgid "next_step_tutorial"
 msgstr "Next step >>>"
+
+#, fuzzy
+msgid "next_student"
+msgstr "Next student"
 
 #, fuzzy
 msgid "no"
@@ -1431,6 +1450,10 @@ msgid "passwords_six"
 msgstr "All passwords need to be six characters or longer."
 
 #, fuzzy
+msgid "passwords_too_short"
+msgstr "Passwords must be at least 6 characters long. Correct the following passwords, so that they are at least 6 symbols: {passwords}"
+
+#, fuzzy
 msgid "pending_invites"
 msgstr "Pending invites"
 
@@ -1446,20 +1469,15 @@ msgstr "percentage"
 msgid "period"
 msgstr "a period"
 
-#, fuzzy
 msgid "personal_text"
-msgstr "Personal text"
+msgstr "Text personal"
 
-#, fuzzy
 msgid "personal_text_invalid"
-msgstr "Your personal text is invalid."
+msgstr "El teu text personal no és vàlid."
 
 #, fuzzy
 msgid "phone_number"
 msgstr "Phone number"
-
-msgid "postfix_classname"
-msgstr "Afegir sufix classe"
 
 #, fuzzy
 msgid "preferred_keyword_language"
@@ -1493,6 +1511,10 @@ msgstr "View previous campaigns"
 msgid "previous_page"
 msgstr "Previous page"
 
+#, fuzzy
+msgid "print_accounts"
+msgstr "Print"
+
 msgid "print_logo"
 msgstr "imprimir"
 
@@ -1508,9 +1530,8 @@ msgstr "Private"
 msgid "profile_logo_alt"
 msgstr "Profile icon."
 
-#, fuzzy
 msgid "profile_picture"
-msgstr "Profile picture"
+msgstr "Foto de perfil"
 
 #, fuzzy
 msgid "profile_updated"
@@ -1549,6 +1570,10 @@ msgid "prompt_join_class"
 msgstr "Do you want to join this class?"
 
 #, fuzzy
+msgid "provided_username_duplicates"
+msgstr "You supplied the following usernames more than once: {usernames}"
+
+#, fuzzy
 msgid "public"
 msgstr "Public"
 
@@ -1567,20 +1592,19 @@ msgstr "You can also look for public adventures and use them as an example."
 msgid "public_invalid"
 msgstr "This agreement selection is invalid"
 
-#, fuzzy
 msgid "public_profile"
-msgstr "Public profile"
+msgstr "Perfil públic"
 
 #, fuzzy
 msgid "public_profile_info"
 msgstr "By selecting this box I make my profile visible for everyone. Be careful not to share personal information like your name or home address, because everyone will be able to see it!"
 
-#, fuzzy
 msgid "public_profile_updated"
-msgstr "Public profile updated, page will be re-loaded."
+msgstr "S'ha actualitzat el perfil públic, la pàgina es tornarà a carregar."
 
+#, fuzzy
 msgid "put"
-msgstr ""
+msgstr "Put"
 
 #, fuzzy
 msgid "question mark"
@@ -1695,11 +1719,8 @@ msgid "reset_password"
 msgstr "Reset password"
 
 #, fuzzy
-msgid "reset_view"
-msgstr "Reset"
-
 msgid "restart"
-msgstr ""
+msgstr "Restart"
 
 #, fuzzy
 msgid "retrieve_adventure_error"
@@ -1795,8 +1816,9 @@ msgstr "Ben aviat rebràs correu electrònic amb les instruccions per reiniciali
 msgid "settings"
 msgstr "La meva configuració personal"
 
+#, fuzzy
 msgid "share"
-msgstr ""
+msgstr "Share"
 
 msgid "share_by_giving_link"
 msgstr "Mostra el teu programa a altres persones donant-los el següent enllaç:"
@@ -1840,6 +1862,10 @@ msgstr "Solution Example"
 msgid "solution_example_explanation"
 msgstr "This is where the solution of your adventure goes. This can be used if you want to share this adventure with other teacher's, so they can know what your suggested solution is."
 
+#, fuzzy
+msgid "some_rows_missing_separator"
+msgstr "The following rows are missing a semicolon, so either the username or the password is missing: {rows}"
+
 msgid "something_went_wrong_keyword_parsing"
 msgstr "Hi ha un error a la teva aventura, totes les paraules clau estan correctament envoltades amb { }?"
 
@@ -1856,7 +1882,7 @@ msgid "start_quiz"
 msgstr "Comença el qüestionari"
 
 msgid "start_teaching"
-msgstr "Comença a ensenyar-lo"
+msgstr "Comença a ensenyar"
 
 msgid "step_title"
 msgstr "Tasca"
@@ -1865,8 +1891,9 @@ msgstr "Tasca"
 msgid "stepper_variable_role"
 msgstr "stepper"
 
+#, fuzzy
 msgid "stop"
-msgstr ""
+msgstr "Stop"
 
 msgid "stop_code_button"
 msgstr "Para el programa"
@@ -1877,6 +1904,10 @@ msgstr "text"
 #, fuzzy
 msgid "student"
 msgstr "Student"
+
+#, fuzzy
+msgid "student_accounts_created"
+msgstr "Successfully created student accounts"
 
 #, fuzzy
 msgid "student_adventures_table"
@@ -1892,8 +1923,9 @@ msgstr "Aquest alumne ja es troba a la vostra classe."
 msgid "student_already_invite"
 msgstr "Aquest alumne ja té una invitació pendent."
 
+#, fuzzy
 msgid "student_in_another_class"
-msgstr ""
+msgstr "This student is in another class. Ask the student to leave all classes and try again."
 
 #, fuzzy
 msgid "student_information"
@@ -2085,6 +2117,10 @@ msgid "token_invalid"
 msgstr "El teu token és invàlid."
 
 #, fuzzy
+msgid "too_many_accounts"
+msgstr "You cannot create more than 100 student accounts."
+
+#, fuzzy
 msgid "tooltip_level_locked"
 msgstr "Your teacher disabled this level"
 
@@ -2126,9 +2162,6 @@ msgstr "Are you sure you want to unfavourite this program?"
 msgid "unfavourite_success"
 msgstr "Your program is unfavourited."
 
-msgid "unique_usernames"
-msgstr "Tots els noms d'usuari han de ser únics."
-
 #, fuzzy
 msgid "unknown_variable_role"
 msgstr "unknown"
@@ -2160,6 +2193,14 @@ msgstr "Actualitza el perfil públic"
 msgid "updating_indicator"
 msgstr "Actualitzant"
 
+#, fuzzy
+msgid "use_custom_passwords"
+msgstr "Provide your own passwords"
+
+#, fuzzy
+msgid "use_generated_passwords"
+msgstr "Auto generate passwords"
+
 msgid "use_of_blanks_exception"
 msgstr "Ús d'espais en blanc als programes"
 
@@ -2182,6 +2223,14 @@ msgstr "Aquest usuari no existeix o no té perfil públic"
 msgid "username"
 msgstr "Nom d'usuari"
 
+#, fuzzy
+msgid "username_contains_invalid_symbol"
+msgstr "Usernames cannot contain the symbol ':' or '@'. Remove these symbols from following rows: {usernames}"
+
+#, fuzzy
+msgid "username_contains_separator"
+msgstr "Usernames cannot contain a semicolon. Perhaps you want to supply your own passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, remove the semicolon from the following usernames: {usernames}"
+
 msgid "username_empty"
 msgstr "No has introduït un nom d'usuari!"
 
@@ -2194,8 +2243,13 @@ msgstr "El nom d'usuari no pot contenir `:` or `@`."
 msgid "username_three"
 msgstr "El nom d'usuari ha de contenir almenys tres caràcters."
 
-msgid "usernames_exist"
-msgstr "Un o més noms d'usuari ja estan en ús."
+#, fuzzy
+msgid "usernames_too_short"
+msgstr "Usernames must be at least 3 characters long. Correct the following usernames, so that they are 3 or more symbols: {usernames}"
+
+#, fuzzy
+msgid "usernames_unavailable"
+msgstr "The following usernames are not available: {usernames}. You can create similar accounts, for example, by appending an underscore or your class name."
 
 msgid "value"
 msgstr "Valor"
@@ -2379,9 +2433,6 @@ msgstr "El teu programa"
 #~ msgid "hide_quiz"
 #~ msgstr "Amaga el qüestionari"
 
-#~ msgid "back_to_class"
-#~ msgstr "Torna a la classe"
-
 #~ msgid "Locked Language Feature"
 #~ msgstr "Estàs utilitzant {concept}! És genial, però {concept} no està desbloquejat encara!, es desbloquejarà a nivells posteriors."
 
@@ -2562,9 +2613,30 @@ msgstr "El teu programa"
 #~ msgid "student_not_allowed_in_class"
 #~ msgstr "Student not allowed in class"
 
-#~ msgid "next_adventure"
-#~ msgstr ""
+#~ msgid "accounts_created"
+#~ msgstr "Els comptes s'han creat correctament."
 
-#~ msgid "previous_adventure"
-#~ msgstr ""
+#~ msgid "accounts_intro"
+#~ msgstr "En aquesta pàgina pots crear comptes per a diversos estudiants alhora. S'afegiran automàticament a la classe actual. Així doncs, assegureu-vos que la classe que es mostra a dalt sigui la correcta! Cada nom d'usuari ha de ser únic a tot el sistema Hedy. Podeu prémer \"Afegir sufix classe\" per afegir el vostre nom de classe a tots els comptes. Si introduïu les contrasenyes manualment, aquestes hauran de tenir <b>almenys</b> 6 caràcters."
+
+#~ msgid "create_multiple_accounts"
+#~ msgstr "Crea múltiples comptes"
+
+#~ msgid "download_login_credentials"
+#~ msgstr "Vols descarregar les credencials d'inici de sessió després de la creació dels comptes?"
+
+#~ msgid "generate_passwords"
+#~ msgstr "Genera contrasenyes"
+
+#~ msgid "postfix_classname"
+#~ msgstr "Afegir sufix classe"
+
+#~ msgid "reset_view"
+#~ msgstr "Reset"
+
+#~ msgid "unique_usernames"
+#~ msgstr "Tots els noms d'usuari han de ser únics."
+
+#~ msgid "usernames_exist"
+#~ msgstr "Un o més noms d'usuari ja estan en ús."
 

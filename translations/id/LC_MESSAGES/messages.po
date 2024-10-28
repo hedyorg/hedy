@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-09-06 14:38+0000\n"
+"PO-Revision-Date: 2024-10-25 06:21+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: id <LL@li.org>\n"
 "Language: id\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -53,7 +53,7 @@ msgstr "Kode Anda tidak lengkap. Ini berisi bagian kosong yang harus Anda ganti 
 
 #, fuzzy
 msgid "Incomplete"
-msgstr "Ups! Anda sedikit lupa kodenya! Pada baris {line_number}, Anda perlu memasukkan teks di belakang `{incomplete_command}`."
+msgstr "We detected that part of the code seems to be missing from the `{incomplete_command}` on line {line_number}. Can you try adding what's missing?"
 
 #, fuzzy
 msgid "Incomplete Repeat"
@@ -93,7 +93,7 @@ msgstr "Sepertinya Anda lupa menggunakan perintah dengan teks yang Anda gunakan 
 
 #, fuzzy
 msgid "Missing Additional Command"
-msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+msgstr "We detected that the command `{command}` on line {line_number} is missing something. Can you try using `{missing_command}` in your code?"
 
 #, fuzzy
 msgid "Missing Colon Error"
@@ -207,13 +207,6 @@ msgid "account_overview"
 msgstr "Ikhtisar akun"
 
 #, fuzzy
-msgid "accounts_created"
-msgstr "Akun yang berhasil dibuat."
-
-msgid "accounts_intro"
-msgstr "Di halaman ini Anda dapat membuat akun untuk beberapa siswa sekaligus. Ini secara otomatis ditambahkan ke kelas saat ini, jadi pastikan kelas yang ditampilkan di atas adalah kelas yang benar! Setiap nama pengguna harus unik di seluruh sistem Hedy. Anda dapat menggunakan 'Nama kelas Postfix' untuk menambahkan nama kelas Anda ke semua akun. Jika Anda memasukkan sandi secara manual, sandi tersebut harus <b>setidaknya</b> 6 karakter."
-
-#, fuzzy
 msgid "actions"
 msgstr "Actions"
 
@@ -325,6 +318,10 @@ msgstr "Semua"
 msgid "all_class_highscores"
 msgstr "Semua siswa terlihat di nilai tertinggi kelas"
 
+#, fuzzy
+msgid "all_rows_missing_separator"
+msgstr "None of the rows contain a semicolon. Perhaps you want to let us auto generate passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, use a semicolon to separate usernames and passwords on the following lines: {rows}"
+
 msgid "already_account"
 msgstr "Sudah memiliki akun?"
 
@@ -339,6 +336,9 @@ msgstr "Mulai level 2, `{ask}` perlu digunakan dengan variabel. Contoh: nama `{i
 
 msgid "available_in"
 msgstr "Available in:"
+
+msgid "back_to_class"
+msgstr "Kembali ke kelas"
 
 msgid "become_a_sponsor"
 msgstr "Menjadi sponsor"
@@ -432,8 +432,9 @@ msgstr "Classes"
 msgid "classes_info"
 msgstr "Create a class to follow the progress of each student in dashboard, and to customize the adventures your students see, and even adding your own! You can create as many classes as you like, and each class can have multiple teachers each one with different roles. You can also add as many students as you want, but mind that each student can only be in one class at a time. You can find more information about classes in the <a href=\"https://hedy.org/for-teachers/manual/preparations#for-teachers\">teacher manual</a>."
 
+#, fuzzy
 msgid "clear"
-msgstr ""
+msgstr "Clear"
 
 #, fuzzy
 msgid "clone"
@@ -458,8 +459,9 @@ msgstr "Perintah tidak benar lagi"
 msgid "commands"
 msgstr "Perintah"
 
+#, fuzzy
 msgid "complete"
-msgstr ""
+msgstr "Completed"
 
 msgid "congrats_message"
 msgstr "Selamat, {username}, Anda telah mencapai hasil berikut dengan Hedy!"
@@ -475,11 +477,16 @@ msgstr "constant"
 msgid "content_invalid"
 msgstr "Petualangan ini tidak valid."
 
+#, fuzzy
 msgid "continue"
-msgstr ""
+msgstr "Continue"
 
 msgid "contributor"
 msgstr "Penyumbang"
+
+#, fuzzy
+msgid "copy_accounts_to_clipboard"
+msgstr "Copy to clipboard"
 
 msgid "copy_clipboard"
 msgstr "Berhasil disalin ke clipboard"
@@ -515,8 +522,12 @@ msgstr "Membuat akun"
 msgid "create_accounts"
 msgstr "Buat akun"
 
+#, fuzzy
+msgid "create_accounts_placeholder"
+msgstr "Type the accounts or paste them from a spreadsheet"
+
 msgid "create_accounts_prompt"
-msgstr "Apakah Anda yakin ingin membuat akun-akun ini?"
+msgstr "You will create {number_of_accounts} student accounts. Are you sure?"
 
 msgid "create_adventure"
 msgstr "Ciptakan petualangan"
@@ -524,20 +535,37 @@ msgstr "Ciptakan petualangan"
 msgid "create_class"
 msgstr "Buat kelas baru"
 
-msgid "create_multiple_accounts"
-msgstr "Buat banyak akun"
-
 msgid "create_student_account"
 msgstr "Buat sebuah akun"
 
 msgid "create_student_account_explanation"
 msgstr "Anda dapat menyimpan program Anda sendiri dengan akun."
 
+#, fuzzy
+msgid "create_student_accounts"
+msgstr "Create student accounts for"
+
 msgid "create_teacher_account"
 msgstr "Buat akun guru"
 
 msgid "create_teacher_account_explanation"
 msgstr "Dengan akun guru, Anda dapat menyimpan program Anda dan melihat hasil siswa Anda."
+
+#, fuzzy
+msgid "create_usernames_and_passwords_desc"
+msgstr "Enter one username and password per line, separated by a semicolon. Or, if you have the data in a two-column spreadsheet, copy the file content and paste here."
+
+#, fuzzy
+msgid "create_usernames_and_passwords_title"
+msgstr "Usernames and passwords"
+
+#, fuzzy
+msgid "create_usernames_desc"
+msgstr "Enter one username per line or paste them from a spreadsheet."
+
+#, fuzzy
+msgid "create_usernames_title"
+msgstr "Usernames"
 
 msgid "creator"
 msgstr "Pencipta"
@@ -561,8 +589,9 @@ msgstr "Sesuaikan kelas"
 msgid "dash"
 msgstr "tanda pisah"
 
+#, fuzzy
 msgid "debug"
-msgstr ""
+msgstr "Debug"
 
 msgid "default_401"
 msgstr "Sepertinya Anda tidak berwenang..."
@@ -646,9 +675,6 @@ msgstr "kutip dua"
 
 msgid "download"
 msgstr "Unduh"
-
-msgid "download_login_credentials"
-msgstr "Apakah Anda ingin mengunduh kredensial login setelah pembuatan akun?"
 
 msgid "duplicate"
 msgstr "Duplikat"
@@ -790,9 +816,6 @@ msgstr "Silakan pilih jenis kelamin yang valid, pilih (Wanita, Pria, Lainnya)."
 
 msgid "general_settings"
 msgstr "Pengaturan Umum"
-
-msgid "generate_passwords"
-msgstr "Hasilkan kata sandi"
 
 msgid "get_certificate"
 msgstr "Dapatkan sertifikat Anda!"
@@ -1179,6 +1202,10 @@ msgstr "Ulangi kata sandi baru"
 msgid "newline"
 msgstr "baris baru"
 
+#, fuzzy
+msgid "next_adventure"
+msgstr "Next adventure"
+
 msgid "next_exercise"
 msgstr "Latihan selanjutnya"
 
@@ -1187,6 +1214,10 @@ msgstr "Halaman selanjutnya"
 
 msgid "next_step_tutorial"
 msgstr "Langkah selanjutnya >>>"
+
+#, fuzzy
+msgid "next_student"
+msgstr "Next student"
 
 msgid "no"
 msgstr "Tidak"
@@ -1349,6 +1380,10 @@ msgstr "Password berhasil diubah."
 msgid "passwords_six"
 msgstr "Semua kata sandi harus terdiri dari enam karakter atau lebih."
 
+#, fuzzy
+msgid "passwords_too_short"
+msgstr "Passwords must be at least 6 characters long. Correct the following passwords, so that they are at least 6 symbols: {passwords}"
+
 msgid "pending_invites"
 msgstr "Undangan yang tertunda"
 
@@ -1370,9 +1405,6 @@ msgstr "Teks pribadi Anda tidak valid."
 #, fuzzy
 msgid "phone_number"
 msgstr "Phone number"
-
-msgid "postfix_classname"
-msgstr "Nama kelas postfix"
 
 msgid "preferred_keyword_language"
 msgstr "Bahasa kata kunci pilihan"
@@ -1401,6 +1433,10 @@ msgstr "Lihat kampanye-kampanye sebelumnya"
 #, fuzzy
 msgid "previous_page"
 msgstr "Previous page"
+
+#, fuzzy
+msgid "print_accounts"
+msgstr "Print"
 
 msgid "print_logo"
 msgstr "cetak"
@@ -1444,6 +1480,10 @@ msgstr "Program terakhir yang dibagikan"
 msgid "prompt_join_class"
 msgstr "Apakah kamu ingin bergabung dengan kelas ini?"
 
+#, fuzzy
+msgid "provided_username_duplicates"
+msgstr "You supplied the following usernames more than once: {usernames}"
+
 msgid "public"
 msgstr "Publik"
 
@@ -1470,8 +1510,9 @@ msgstr "Dengan memilih kotak ini saya membuat profil saya terlihat oleh semua or
 msgid "public_profile_updated"
 msgstr "Profil publik diperbarui, halaman akan dimuat ulang."
 
+#, fuzzy
 msgid "put"
-msgstr ""
+msgstr "Put"
 
 msgid "question mark"
 msgstr "tanda tanya"
@@ -1562,11 +1603,9 @@ msgstr "Atur ulang"
 msgid "reset_password"
 msgstr "Set ulang password"
 
-msgid "reset_view"
-msgstr "Atur ulang"
-
+#, fuzzy
 msgid "restart"
-msgstr ""
+msgstr "Restart"
 
 msgid "retrieve_adventure_error"
 msgstr "Anda tidak diperbolehkan melihat petualangan ini!"
@@ -1656,8 +1695,9 @@ msgstr "Kamu harusnya akan segera menerima email dengan instruksi terkait bagaim
 msgid "settings"
 msgstr "Pengaturan pribadi saya"
 
+#, fuzzy
 msgid "share"
-msgstr ""
+msgstr "Share"
 
 msgid "share_by_giving_link"
 msgstr "Tunjukkan program Anda kepada orang lain dengan memberi mereka tautan di bawah ini:"
@@ -1701,6 +1741,10 @@ msgstr "Solution Example"
 msgid "solution_example_explanation"
 msgstr "This is where the solution of your adventure goes. This can be used if you want to share this adventure with other teacher's, so they can know what your suggested solution is."
 
+#, fuzzy
+msgid "some_rows_missing_separator"
+msgstr "The following rows are missing a semicolon, so either the username or the password is missing: {rows}"
+
 msgid "something_went_wrong_keyword_parsing"
 msgstr "Ada kesalahan dalam petualangan Anda, apakah semua kata kunci diapit oleh { } dengan benar?"
 
@@ -1728,8 +1772,9 @@ msgstr "Tugas"
 msgid "stepper_variable_role"
 msgstr "stepper"
 
+#, fuzzy
 msgid "stop"
-msgstr ""
+msgstr "Stop"
 
 msgid "stop_code_button"
 msgstr "Hentikan program"
@@ -1739,6 +1784,10 @@ msgstr "teks"
 
 msgid "student"
 msgstr "Siswa"
+
+#, fuzzy
+msgid "student_accounts_created"
+msgstr "Successfully created student accounts"
 
 #, fuzzy
 msgid "student_adventures_table"
@@ -1754,8 +1803,9 @@ msgstr "Siswa ini sudah ada di kelas Anda."
 msgid "student_already_invite"
 msgstr "Siswa ini sudah memiliki undangan yang menunggu keputusan."
 
+#, fuzzy
 msgid "student_in_another_class"
-msgstr ""
+msgstr "This student is in another class. Ask the student to leave all classes and try again."
 
 #, fuzzy
 msgid "student_information"
@@ -1944,6 +1994,10 @@ msgid "token_invalid"
 msgstr "Token Anda tidak valid."
 
 #, fuzzy
+msgid "too_many_accounts"
+msgstr "You cannot create more than 100 student accounts."
+
+#, fuzzy
 msgid "tooltip_level_locked"
 msgstr "Your teacher disabled this level"
 
@@ -1985,9 +2039,6 @@ msgstr "Are you sure you want to unfavourite this program?"
 msgid "unfavourite_success"
 msgstr "Your program is unfavourited."
 
-msgid "unique_usernames"
-msgstr "Semua nama pengguna harus unik."
-
 #, fuzzy
 msgid "unknown_variable_role"
 msgstr "unknown"
@@ -2019,6 +2070,14 @@ msgstr "Perbarui profil publik"
 msgid "updating_indicator"
 msgstr "Memperbarui"
 
+#, fuzzy
+msgid "use_custom_passwords"
+msgstr "Provide your own passwords"
+
+#, fuzzy
+msgid "use_generated_passwords"
+msgstr "Auto generate passwords"
+
 msgid "use_of_blanks_exception"
 msgstr "Penggunaan spasi dalam program"
 
@@ -2041,6 +2100,14 @@ msgstr "Pengguna ini tidak ada atau tidak memiliki profil publik"
 msgid "username"
 msgstr "Nama Pengguna"
 
+#, fuzzy
+msgid "username_contains_invalid_symbol"
+msgstr "Usernames cannot contain the symbol ':' or '@'. Remove these symbols from following rows: {usernames}"
+
+#, fuzzy
+msgid "username_contains_separator"
+msgstr "Usernames cannot contain a semicolon. Perhaps you want to supply your own passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, remove the semicolon from the following usernames: {usernames}"
+
 msgid "username_empty"
 msgstr "Anda tidak memasukkan nama pengguna!"
 
@@ -2053,8 +2120,13 @@ msgstr "Username tidak boleh berisi ':' atau '@'."
 msgid "username_three"
 msgstr "Nama pengguna harus mengandung setidaknya tiga karakter."
 
-msgid "usernames_exist"
-msgstr "Satu atau lebih nama pengguna sudah digunakan."
+#, fuzzy
+msgid "usernames_too_short"
+msgstr "Usernames must be at least 3 characters long. Correct the following usernames, so that they are 3 or more symbols: {usernames}"
+
+#, fuzzy
+msgid "usernames_unavailable"
+msgstr "The following usernames are not available: {usernames}. You can create similar accounts, for example, by appending an underscore or your class name."
 
 msgid "value"
 msgstr "Nilai"
@@ -2259,9 +2331,6 @@ msgstr "Program Anda"
 #~ msgid "hide_quiz"
 #~ msgstr "Sembunyikan kuis"
 
-#~ msgid "back_to_class"
-#~ msgstr "Kembali ke kelas"
-
 #~ msgid "Locked Language Feature"
 #~ msgstr "Anda menggunakan {concept}! Itu luar biasa, tapi {concept} belum dibuka! Ini akan dibuka di level selanjutnya."
 
@@ -2436,9 +2505,30 @@ msgstr "Program Anda"
 #~ msgid "student_not_allowed_in_class"
 #~ msgstr "Student not allowed in class"
 
-#~ msgid "next_adventure"
-#~ msgstr ""
+#~ msgid "accounts_created"
+#~ msgstr "Akun yang berhasil dibuat."
 
-#~ msgid "previous_adventure"
-#~ msgstr ""
+#~ msgid "accounts_intro"
+#~ msgstr "Di halaman ini Anda dapat membuat akun untuk beberapa siswa sekaligus. Ini secara otomatis ditambahkan ke kelas saat ini, jadi pastikan kelas yang ditampilkan di atas adalah kelas yang benar! Setiap nama pengguna harus unik di seluruh sistem Hedy. Anda dapat menggunakan 'Nama kelas Postfix' untuk menambahkan nama kelas Anda ke semua akun. Jika Anda memasukkan sandi secara manual, sandi tersebut harus <b>setidaknya</b> 6 karakter."
+
+#~ msgid "create_multiple_accounts"
+#~ msgstr "Buat banyak akun"
+
+#~ msgid "download_login_credentials"
+#~ msgstr "Apakah Anda ingin mengunduh kredensial login setelah pembuatan akun?"
+
+#~ msgid "generate_passwords"
+#~ msgstr "Hasilkan kata sandi"
+
+#~ msgid "postfix_classname"
+#~ msgstr "Nama kelas postfix"
+
+#~ msgid "reset_view"
+#~ msgstr "Atur ulang"
+
+#~ msgid "unique_usernames"
+#~ msgstr "Semua nama pengguna harus unik."
+
+#~ msgid "usernames_exist"
+#~ msgstr "Satu atau lebih nama pengguna sudah digunakan."
 

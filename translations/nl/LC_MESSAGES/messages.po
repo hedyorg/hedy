@@ -8,24 +8,22 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-10-03 00:12+0000\n"
-"Last-Translator: yoshi <yo-sh-i@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2024-10-25 06:21+0000\n"
+"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: nl <LL@li.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
-#, fuzzy
 msgid "Access Before Assign"
-msgstr "Je probeerde de variabele {name} te gebruiken op regel {access_line_number}, maar stelt de variabele in op regel {definition_line_number}. Stel een variabele in voor je die gebruikt."
+msgstr "We ontdekten dat een variabele `{name}` gebruikt wordt op lijn {access_line_number} voordat ze worden vastgezet. Kun je de variabele plaatsen voor het gebruikt wordt?"
 
-#, fuzzy
 msgid "Cyclic Var Definition"
-msgstr "De variabele `{variable}` moet worden ingesteld voor je die aan de rechterkant van een `{is}` mag gebruiken."
+msgstr "We ontdekten dat een variabele `{variable}` wordt gebruikt aan de rechterkant van de `{is}`-commando voor de instelling. Kun je de variabele plaatsen voor het gebruikt wordt?"
 
 #, fuzzy
 msgid "Else Without If Error"
@@ -41,7 +39,7 @@ msgstr "Je code is onvolledig. Er zijn nog invulplaatsen die je moet vervangen d
 
 #, fuzzy
 msgid "Incomplete"
-msgstr "Let op, je bent een stukje code vergeten. Op regel {line_number} moet er achter `{incomplete_command}` nog tekst komen."
+msgstr "We detected that part of the code seems to be missing from the `{incomplete_command}` on line {line_number}. Can you try adding what's missing?"
 
 #, fuzzy
 msgid "Incomplete Repeat"
@@ -81,7 +79,7 @@ msgstr "Het lijkt erop dat je bent vergeten bent een commando te gebruiken in de
 
 #, fuzzy
 msgid "Missing Additional Command"
-msgstr "Het lijkt erop dat je `{command}` niet volledig hebt geschreven op regel {line_number}. Probeer `{missing_command}` toe te voegen aan je code."
+msgstr "We detected that the command `{command}` on line {line_number} is missing something. Can you try using `{missing_command}` in your code?"
 
 #, fuzzy
 msgid "Missing Colon Error"
@@ -194,12 +192,6 @@ msgstr "Jouw functie gebruikt een verkeerd aantal argumenten. Jij gaf {used_numb
 msgid "account_overview"
 msgstr "Account overzicht"
 
-msgid "accounts_created"
-msgstr "Accounts waren succesvol aangemaakt."
-
-msgid "accounts_intro"
-msgstr "Op deze pagina kun je accounts aan maken voor meerdere studenten tegelijkertijd. Ze worden automatisch toegevoegd aan de huidige klas, controleer of dit klopt! Door op het groene kruisje rechtsonderin te klikken kun je meer rijen toevoegen. Met het rode kruisje kun je een rij weer verwijderen. Zorg ervoor dat alle rijen gevuld zijn voordat je klikt op Accounts aanmaken. Denk eraan dat elke gebruikersnaam uniek moet zijn. Ook moet het wachtwoord <b>minimaal</b> 6 tekens zijn."
-
 #, fuzzy
 msgid "actions"
 msgstr "Actions"
@@ -230,9 +222,8 @@ msgstr "Avontuur is gekopieerd"
 msgid "adventure_code_button"
 msgstr "Avonturencode"
 
-#, fuzzy
 msgid "adventure_codeblock_button"
-msgstr "Gebruik deze knop als je een codeblok wil maken om in jouw avontuur te gebruiken. Tip: put the selection at the end of the last line of the code block and <kbd>Enter</kbd> 3 times to type after a code block."
+msgstr "Gebruik deze knop als je een codeblok wil maken om in jouw avontuur te gebruiken. Tip: zet de selectie aan het einde van je laatste regel van het codeblok en druk 3 keer op <kbd>Enter</kbd> om na het codeblok tekst te typen."
 
 msgid "adventure_duplicate"
 msgstr "Je hebt al een avontuur met deze naam."
@@ -242,7 +233,7 @@ msgstr "Je hebt geen naam voor je avontuur ingevuld!"
 
 #, fuzzy
 msgid "adventure_exp_3"
-msgstr "Let erop dat je commando's altijd tussen { } zet, dan worden ze goed herkend. Je kunt de voorbeeld knop gebruiken om de opgemaakt versie van jouw avontuur te zien. Om jouw avontuur op een speciale pagina te zien kies je bekijk op de lerarenpagina."
+msgstr "Let erop dat je commando's altijd tussen { } zet, dan worden ze goed herkend. Je kunt de voorbeeld knop gebruiken om de opgemaakt versie van jouw avontuur te zien. Om jouw avontuur op een speciale pagina te zien kies je \"bekijk\" op de lerarenpagina."
 
 #, fuzzy
 msgid "adventure_exp_classes"
@@ -305,6 +296,10 @@ msgstr "Allemaal"
 msgid "all_class_highscores"
 msgstr "Alle leerlingen zichtbaar in klas highscores"
 
+#, fuzzy
+msgid "all_rows_missing_separator"
+msgstr "None of the rows contain a semicolon. Perhaps you want to let us auto generate passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, use a semicolon to separate usernames and passwords on the following lines: {rows}"
+
 msgid "already_account"
 msgstr "Heb je al een account?"
 
@@ -318,7 +313,10 @@ msgid "ask_needs_var"
 msgstr "Vanaf level 2 hoort `{ask}` met een variabele ervoor. Bijv: naam `{is}` `{ask}` Hoe heet jij?"
 
 msgid "available_in"
-msgstr "Available in:"
+msgstr "Beschikbaar in:"
+
+msgid "back_to_class"
+msgstr "Ga terug naar klas"
 
 msgid "become_a_sponsor"
 msgstr "Word sponsor"
@@ -405,8 +403,9 @@ msgstr "Klassen"
 msgid "classes_info"
 msgstr "Maak een klas aan om de voortgang van elke leerling te kunnen volgen op het dashboard, en om aanpassingen te maken aan avonturen die de leerlingen kunnen zien, maar ook het toevoegen van jouw eigen avonturen! Je kunt zoveel klassen aanmaken als je wilt, en elke klas kan meerdere leraren hebben met ieder een verschillende rol. Je kunt zoveel leerlingen toevoegen als je wilt, maar leerlingen kunnen alleen maar in 1 klas tegelijk zitten. Je kan meer informatie over klassen vinden in de <a href=\"https://hedy.org/for-teachers/manual/preparations#for-teachers\">docentenhandleiding</a>."
 
+#, fuzzy
 msgid "clear"
-msgstr ""
+msgstr "Clear"
 
 msgid "clone"
 msgstr "Kloon"
@@ -429,8 +428,9 @@ msgstr "Commando niet meer beschikbaar"
 msgid "commands"
 msgstr "Commando's"
 
+#, fuzzy
 msgid "complete"
-msgstr ""
+msgstr "Completed"
 
 msgid "congrats_message"
 msgstr "Gefeliciteerd, {username}, je hebt tot nu toe de volgende resultaten behaald met Hedy!"
@@ -446,11 +446,16 @@ msgstr "constant"
 msgid "content_invalid"
 msgstr "Dit avontuur is ongeldig."
 
+#, fuzzy
 msgid "continue"
-msgstr ""
+msgstr "Continue"
 
 msgid "contributor"
 msgstr "Hedy helper"
+
+#, fuzzy
+msgid "copy_accounts_to_clipboard"
+msgstr "Copy to clipboard"
 
 msgid "copy_clipboard"
 msgstr "De link is gekopieerd"
@@ -485,8 +490,12 @@ msgstr "Maak een account"
 msgid "create_accounts"
 msgstr "Accounts aanmaken"
 
+#, fuzzy
+msgid "create_accounts_placeholder"
+msgstr "Type the accounts or paste them from a spreadsheet"
+
 msgid "create_accounts_prompt"
-msgstr "Weet je zeker dat je deze accounts wilt aanmaken?"
+msgstr "You will create {number_of_accounts} student accounts. Are you sure?"
 
 msgid "create_adventure"
 msgstr "Maak nieuw avontuur"
@@ -494,20 +503,37 @@ msgstr "Maak nieuw avontuur"
 msgid "create_class"
 msgstr "Maak een klas aan"
 
-msgid "create_multiple_accounts"
-msgstr "Meerdere accounts aanmaken"
-
 msgid "create_student_account"
 msgstr "Maak een account"
 
 msgid "create_student_account_explanation"
 msgstr "Met een account kun je programma's opslaan."
 
+#, fuzzy
+msgid "create_student_accounts"
+msgstr "Create student accounts for"
+
 msgid "create_teacher_account"
 msgstr "Maak een lerarenaccount"
 
 msgid "create_teacher_account_explanation"
 msgstr "Met een lerarenaccount kun je leerlingen organiseren in klassen, eigen content in je klassen tonen, en resultaten van leerlingen inzien."
+
+#, fuzzy
+msgid "create_usernames_and_passwords_desc"
+msgstr "Enter one username and password per line, separated by a semicolon. Or, if you have the data in a two-column spreadsheet, copy the file content and paste here."
+
+#, fuzzy
+msgid "create_usernames_and_passwords_title"
+msgstr "Usernames and passwords"
+
+#, fuzzy
+msgid "create_usernames_desc"
+msgstr "Enter one username per line or paste them from a spreadsheet."
+
+#, fuzzy
+msgid "create_usernames_title"
+msgstr "Usernames"
 
 msgid "creator"
 msgstr "Maker"
@@ -531,8 +557,9 @@ msgstr "Klas personaliseren"
 msgid "dash"
 msgstr "een streepje"
 
+#, fuzzy
 msgid "debug"
-msgstr ""
+msgstr "Debug"
 
 msgid "default_401"
 msgstr "Jij mag niet bij deze pagina."
@@ -616,9 +643,6 @@ msgstr "twee hoge komma's"
 
 msgid "download"
 msgstr "Downloaden"
-
-msgid "download_login_credentials"
-msgstr "Wil je de login gegevens downloaden na het aanmaken van de accounts?"
 
 msgid "duplicate"
 msgstr "Dupliceren"
@@ -758,18 +782,14 @@ msgstr "Dit gender is niet geldig, kies uit (Meisje, Jongen, Anders)."
 msgid "general_settings"
 msgstr "Algemene instellingen"
 
-msgid "generate_passwords"
-msgstr "Genereer wachtwoorden"
-
 msgid "get_certificate"
 msgstr "Haal jouw certificaat!"
 
 msgid "give_link_to_teacher"
 msgstr "Geef de volgende link aan je leraar:"
 
-#, fuzzy
 msgid "go_back"
-msgstr "Go back"
+msgstr "Ga terug"
 
 msgid "go_back_to_main"
 msgstr "Ga terug naar de hoofdpagina"
@@ -1141,6 +1161,10 @@ msgstr "Herhaal nieuw wachtwoord"
 msgid "newline"
 msgstr "een enter"
 
+#, fuzzy
+msgid "next_adventure"
+msgstr "Next adventure"
+
 msgid "next_exercise"
 msgstr "Volgende opdracht"
 
@@ -1149,6 +1173,10 @@ msgstr "Volgende pagina"
 
 msgid "next_step_tutorial"
 msgstr "Volgende stap >>>"
+
+#, fuzzy
+msgid "next_student"
+msgstr "Next student"
 
 msgid "no"
 msgstr "Nee"
@@ -1307,6 +1335,10 @@ msgstr "Je wachtwoord is aangepast."
 msgid "passwords_six"
 msgstr "Alle wachtwoorden moeten 6 of meer karakters zijn."
 
+#, fuzzy
+msgid "passwords_too_short"
+msgstr "Passwords must be at least 6 characters long. Correct the following passwords, so that they are at least 6 symbols: {passwords}"
+
 msgid "pending_invites"
 msgstr "Openstaande uitnodigingen"
 
@@ -1328,9 +1360,6 @@ msgstr "Jouw persoonlijke tekst is ongeldig."
 #, fuzzy
 msgid "phone_number"
 msgstr "Phone number"
-
-msgid "postfix_classname"
-msgstr "Klasnaam achter gebruikersnaam"
 
 msgid "preferred_keyword_language"
 msgstr "Commando voorkeurstaal"
@@ -1357,6 +1386,10 @@ msgstr "Bekijk het nieuwsbrief archief"
 #, fuzzy
 msgid "previous_page"
 msgstr "Vorige pagina"
+
+#, fuzzy
+msgid "print_accounts"
+msgstr "Print"
 
 msgid "print_logo"
 msgstr "print"
@@ -1400,6 +1433,10 @@ msgstr "Programma's"
 msgid "prompt_join_class"
 msgstr "Wil jij je inschrijven voor deze klas?"
 
+#, fuzzy
+msgid "provided_username_duplicates"
+msgstr "You supplied the following usernames more than once: {usernames}"
+
 msgid "public"
 msgstr "Openbaar"
 
@@ -1425,8 +1462,9 @@ msgstr "Bij het selecteren van deze box maak je jouw profiel zichtbaar voor iede
 msgid "public_profile_updated"
 msgstr "Je openbare profiel is aangepast, pagina wordt herladen.."
 
+#, fuzzy
 msgid "put"
-msgstr ""
+msgstr "Put"
 
 msgid "question mark"
 msgstr "een vraagteken"
@@ -1516,11 +1554,9 @@ msgstr "Reset"
 msgid "reset_password"
 msgstr "Reset je wachtwoord"
 
-msgid "reset_view"
-msgstr "Reset"
-
+#, fuzzy
 msgid "restart"
-msgstr ""
+msgstr "Restart"
 
 msgid "retrieve_adventure_error"
 msgstr "Jij mag dit avontuur niet bekijken!"
@@ -1606,8 +1642,9 @@ msgstr "Je krijgt zo een mailtje met informatie over hoe je een nieuw wachtwoord
 msgid "settings"
 msgstr "Mijn gegevens"
 
+#, fuzzy
 msgid "share"
-msgstr ""
+msgstr "Share"
 
 msgid "share_by_giving_link"
 msgstr "Deel je programma met iemand door ze deze link te geven:"
@@ -1641,13 +1678,15 @@ msgstr "Voor elk niveau (level) in Hedy hebben we dia's (slides) gemaakt om jou 
 msgid "social_media"
 msgstr "Sociale media"
 
-#, fuzzy
 msgid "solution_example"
-msgstr "Solution Example"
+msgstr "Voorbeeld oplossing"
+
+msgid "solution_example_explanation"
+msgstr "Dit is plek om de oplossing van jouw avontuur op te schrijven. Dit is handig om te gebruiken wanneer je jouw avontuur wilt delen met andere leraren, zodat ze kunnen weten wat je voorgestelde oplossing is."
 
 #, fuzzy
-msgid "solution_example_explanation"
-msgstr "This is where the solution of your adventure goes. This can be used if you want to share this adventure with other teacher's, so they can know what your suggested solution is."
+msgid "some_rows_missing_separator"
+msgstr "The following rows are missing a semicolon, so either the username or the password is missing: {rows}"
 
 msgid "something_went_wrong_keyword_parsing"
 msgstr "Er zit een foutje in jouw avontuur, zijn alle commando's goed ingesloten met { }?"
@@ -1674,8 +1713,9 @@ msgstr "Opdracht"
 msgid "stepper_variable_role"
 msgstr "stepper"
 
+#, fuzzy
 msgid "stop"
-msgstr ""
+msgstr "Stop"
 
 msgid "stop_code_button"
 msgstr "Stop programma"
@@ -1685,6 +1725,10 @@ msgstr "tekst"
 
 msgid "student"
 msgstr "Leerling"
+
+#, fuzzy
+msgid "student_accounts_created"
+msgstr "Successfully created student accounts"
 
 msgid "student_adventures_table"
 msgstr "Leerling avonturen"
@@ -1880,6 +1924,10 @@ msgstr "Hedy - Avontuur bekijken"
 msgid "token_invalid"
 msgstr "Jouw token is ongeldig."
 
+#, fuzzy
+msgid "too_many_accounts"
+msgstr "You cannot create more than 100 student accounts."
+
 msgid "tooltip_level_locked"
 msgstr "Je leraar heeft dit level gesloten"
 
@@ -1892,9 +1940,8 @@ msgstr "Hedy vertalen"
 msgid "translator"
 msgstr "Vertaler"
 
-#, fuzzy
 msgid "turned_into_teacher"
-msgstr "Congratulations! You successfully turned into a teacher."
+msgstr "Gefeliciteerd! Je bent succesvol veranderd in een leraar."
 
 msgid "tutorial"
 msgstr "Tutorial"
@@ -1913,20 +1960,15 @@ msgstr "Oeps, Tutorial stap niet gevonden"
 msgid "unauthorized"
 msgstr "Jij hebt geen rechten voor deze pagina"
 
-#, fuzzy
 msgid "unfavourite_confirm"
-msgstr "Are you sure you want to unfavourite this program?"
+msgstr "Weet je zeker dat je dit programma 'niet favoriet' wilt maken?"
 
-#, fuzzy
 msgid "unfavourite_success"
-msgstr "Your program is unfavourited."
-
-msgid "unique_usernames"
-msgstr "Alle gebruikersnamen moeten uniek zijn."
+msgstr "Je programma is niet populair."
 
 #, fuzzy
 msgid "unknown_variable_role"
-msgstr "unknown"
+msgstr "onbekend"
 
 msgid "unlock_thresholds"
 msgstr "Ongrendel level scores"
@@ -1934,17 +1976,14 @@ msgstr "Ongrendel level scores"
 msgid "unsaved_class_changes"
 msgstr "Er zijn wijzigingen nog niet opgeslagen, weet je zeker dat je terug wilt gaan?"
 
-#, fuzzy
 msgid "unsubmit_program"
-msgstr "Unsubmit program"
+msgstr "Terugtrekken programma"
 
-#, fuzzy
 msgid "unsubmit_warning"
-msgstr "Are you sure you want to unsubmit this program?"
+msgstr "Weet je zeker dat je dit programma wilt intrekken?"
 
-#, fuzzy
 msgid "unsubmitted"
-msgstr "Unsubmitted"
+msgstr "Niet ingediend"
 
 msgid "update_adventure_prompt"
 msgstr "Weet je zeker dat je dit avontuur wilt bijwerken?"
@@ -1955,15 +1994,22 @@ msgstr "Openbaar profiel opslaan"
 msgid "updating_indicator"
 msgstr "Avonturen worden opgeslagen"
 
+#, fuzzy
+msgid "use_custom_passwords"
+msgstr "Provide your own passwords"
+
+#, fuzzy
+msgid "use_generated_passwords"
+msgstr "Auto generate passwords"
+
 msgid "use_of_blanks_exception"
 msgstr "Gebruik van spaties in programma's"
 
 msgid "use_of_nested_functions_exception"
 msgstr "Gebruik van genestte functies"
 
-#, fuzzy
 msgid "used_in"
-msgstr "Used in:"
+msgstr "Gebruikt in:"
 
 msgid "user"
 msgstr "gebruiker"
@@ -1977,6 +2023,14 @@ msgstr "Deze gebruiker bestaat niet of heeft geen openbaar profiel"
 msgid "username"
 msgstr "Gebruikersnaam"
 
+#, fuzzy
+msgid "username_contains_invalid_symbol"
+msgstr "Usernames cannot contain the symbol ':' or '@'. Remove these symbols from following rows: {usernames}"
+
+#, fuzzy
+msgid "username_contains_separator"
+msgstr "Usernames cannot contain a semicolon. Perhaps you want to supply your own passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, remove the semicolon from the following usernames: {usernames}"
+
 msgid "username_empty"
 msgstr "Je hebt geen gebruikersnaam ingevuld!"
 
@@ -1989,8 +2043,13 @@ msgstr "Er mag geen `:` of `@` in je gebruikersnaam zitten."
 msgid "username_three"
 msgstr "Je gebruikersnaam moet minstens 3 tekens hebben."
 
-msgid "usernames_exist"
-msgstr "Een of meerdere gebruikersnamen is al in gebruik."
+#, fuzzy
+msgid "usernames_too_short"
+msgstr "Usernames must be at least 3 characters long. Correct the following usernames, so that they are 3 or more symbols: {usernames}"
+
+#, fuzzy
+msgid "usernames_unavailable"
+msgstr "The following usernames are not available: {usernames}. You can create similar accounts, for example, by appending an underscore or your class name."
 
 msgid "value"
 msgstr "Waarde"
@@ -1998,20 +2057,17 @@ msgstr "Waarde"
 msgid "view_adventures"
 msgstr "Bekijk avonturen"
 
-#, fuzzy
 msgid "view_classes"
-msgstr "Bekijk klassen"
+msgstr "Bekijk de klassen"
 
 msgid "view_program"
 msgstr "Bekijk programma"
 
-#, fuzzy
 msgid "view_slides"
-msgstr "Bekijk de slides"
+msgstr "Bekijk de presentatie"
 
-#, fuzzy
 msgid "waiting_for_submit"
-msgstr "Nog niet ingeleverd"
+msgstr "Wachten op indienen"
 
 #, fuzzy
 msgid "walker_variable_role"
@@ -2194,9 +2250,6 @@ msgstr "Jouw programma"
 #~ msgid "try_it"
 #~ msgstr "Probeer het uit"
 
-#~ msgid "back_to_class"
-#~ msgstr "Ga terug naar klas"
-
 #~ msgid "Locked Language Feature"
 #~ msgstr "In jouw programma zit {concept}! Goed gedaan! Maar {concept} is nog niet beschikbaar. Dat komt in een later level."
 
@@ -2371,9 +2424,30 @@ msgstr "Jouw programma"
 #~ msgid "student_not_allowed_in_class"
 #~ msgstr "Leerling is niet toegestaan in de klas"
 
-#~ msgid "next_adventure"
-#~ msgstr ""
+#~ msgid "accounts_created"
+#~ msgstr "Accounts waren succesvol aangemaakt."
 
-#~ msgid "previous_adventure"
-#~ msgstr ""
+#~ msgid "accounts_intro"
+#~ msgstr "Op deze pagina kun je accounts aan maken voor meerdere studenten tegelijkertijd. Ze worden automatisch toegevoegd aan de huidige klas, controleer of dit klopt! Door op het groene kruisje rechtsonderin te klikken kun je meer rijen toevoegen. Met het rode kruisje kun je een rij weer verwijderen. Zorg ervoor dat alle rijen gevuld zijn voordat je klikt op Accounts aanmaken. Denk eraan dat elke gebruikersnaam uniek moet zijn. Ook moet het wachtwoord <b>minimaal</b> 6 tekens zijn."
+
+#~ msgid "create_multiple_accounts"
+#~ msgstr "Meerdere accounts aanmaken"
+
+#~ msgid "download_login_credentials"
+#~ msgstr "Wil je de login gegevens downloaden na het aanmaken van de accounts?"
+
+#~ msgid "generate_passwords"
+#~ msgstr "Genereer wachtwoorden"
+
+#~ msgid "postfix_classname"
+#~ msgstr "Klasnaam achter gebruikersnaam"
+
+#~ msgid "reset_view"
+#~ msgstr "Reset"
+
+#~ msgid "unique_usernames"
+#~ msgstr "Alle gebruikersnamen moeten uniek zijn."
+
+#~ msgid "usernames_exist"
+#~ msgstr "Een of meerdere gebruikersnamen is al in gebruik."
 

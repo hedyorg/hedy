@@ -1,6 +1,8 @@
 # Hedy - Les 2a
 
-[Teacher] In level 2 leren leerlingen de codes `is` en `is ask` [/Teacher]
+{
+    "teacher_note": "In level 2 leren leerlingen de codes `is` en `is ask`."
+}
 
 ## Variabelen
 
@@ -26,7 +28,10 @@ print naam
     "assignment": "element selection",
     "question"  : "Omcirkel alle variabelen in deze code.",
     "icon"      : "◯",
-    "code"      : "naam is Hedy\nprint Hallo naam\nleeftijd is 17\nprint Jij bent leeftijd jaar oud",
+    "code"      : "naam is Hedy\n
+                    print Hallo naam\n
+                    leeftijd is 17\n
+                    print Jij bent leeftijd jaar oud",
     "answer"    : "Op alle regels"
 }
 
@@ -34,7 +39,10 @@ print naam
     "assignment": "element selection",
     "question"  : "Omcirkel nu de stukken code waarin een variabele **wordt ingesteld.**",
     "icon"      : "◯",
-    "code"      : "naam is Hedy\nprint Hallo naam\nleeftijd is 17\nprint Jij bent leeftijd jaar oud",
+    "code"      : "naam is Hedy\n
+                    print Hallo naam\n
+                    leeftijd is 17\n
+                    print Jij bent leeftijd jaar oud",
     "answer"    : "Op regel 1 en 3"
 }
 
@@ -42,7 +50,10 @@ print naam
     "assignment": "element selection",
     "question"  : "Omcirkel nu de stukken code waarin de waarde van een variabele **wordt gebruikt.**",
     "icon"      : "◯",
-    "code"      : "naam is Hedy\nprint Hallo naam\nleeftijd is 17\nprint Jij bent leeftijd jaar oud",
+    "code"      : "naam is Hedy\n
+                    print Hallo naam\n
+                    leeftijd is 17\n
+                    print Jij bent leeftijd jaar oud",
     "answer"    : "Op regel 2 en 4"
 }
 
@@ -64,7 +75,8 @@ Voorbeeld:
 {
     "assignment": "output",
     "icon"      : "💻",
-    "code"      : "naam is Mo\nprint Goed bezig naam!",
+    "code"      : "naam is Mo\n
+                    print Goed bezig naam!",
     "answer"    : "Goed bezig Mo!",
     "lines"     : 1
 }
@@ -72,7 +84,8 @@ Voorbeeld:
 {
     "assignment": "output",
     "icon"      : "💻",
-    "code"      : "naam is Mo\nprint Goed bezig Mo!",
+    "code"      : "naam is Mo\n
+                    print Goed bezig Mo!",
     "answer"    : "Goed bezig Mo!",
     "lines"     : 1
 }
@@ -80,7 +93,8 @@ Voorbeeld:
 {
     "assignment": "output",
     "icon"      : "💻",
-    "code"      : "voornaam is Layla\nprint Goedemorgen naam!",
+    "code"      : "voornaam is Layla\n
+                    print Goedemorgen naam!",
     "answer"    : "Goedemorgen naam!",
     "lines"     : 1
 }
@@ -94,7 +108,8 @@ Lees de codes goed! Welke zijn er goed of fout.
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "🤔",
-    "code"      : "achternaam is Jansen\nprint Goedemorgen naam!",
+    "code"      : "achternaam is Jansen\n
+                    print Goedemorgen naam!",
     "answer"    : "Goed"
 }
 
@@ -103,7 +118,8 @@ Lees de codes goed! Welke zijn er goed of fout.
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "🤔",
-    "code"      : "naam is\nprint Goedemorgen naam!",
+    "code"      : "naam is\n
+                    print Goedemorgen naam!",
     "answer"    : "Fout"
 }
 
@@ -112,7 +128,9 @@ Lees de codes goed! Welke zijn er goed of fout.
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "🤔",
-    "code"      : "naam is Jansen\nprint Goedemorgen meneer naam!\nprint Hallo meneer naam!",
+    "code"      : "naam is Jansen\n
+                    print Goedemorgen meneer naam!\n
+                    print Hallo meneer naam!",
     "answer"    : "Goed"
 }
 
@@ -148,7 +166,8 @@ Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingev
 {
     "assignment": "output",
     "icon"      : "💻",
-    "code"      : "naam is ask Hoe heet jij?\nprint dus jij heet: naam",
+    "code"      : "naam is ask Hoe heet jij?\n
+                    print dus jij heet: naam",
     "answer"    : "dus jij heet: **naam**",
     "lines"     : 1
 }
@@ -156,7 +175,8 @@ Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingev
 {
     "assignment": "output",
     "icon"      : "💻",
-    "code"      : "toestand is ask Hoe gaat het met jou?\nprint Dus het gaat toestand met jou",
+    "code"      : "toestand is ask Hoe gaat het met jou?\n
+                    print Dus het gaat toestand met jou",
     "answer"    : " Dus het gaat **goed** met jou",
     "lines"     : 1
 }

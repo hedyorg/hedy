@@ -1,184 +1,206 @@
-# Hedy - Les 4a
+# Hedy - Toets Les 1 tot 5
 
-[Teacher] In level 4 leren leerlingen aanhalingstekens gebruiken in code. Dat is niet altijd de meest leuke les maar goed oefenen is wel nodig om latere frustratie te voorkomen.
-Om het leuker te maken kan je in deze les andere features aanbieden, zoals `clear` of een muziekopdracht.[/Teacher]
 
-## Aanhalingstekens
+## SO
 
-Aan het einde van de les:
+We maken vandaag een SO op papier. Lees dit goed voor je begint:
 
-* snap jij waarom aanhalingstekens nodig zijn in programmeren.
-* kan jij aanhalingstekens op de goede plek in code zetten.
-* kan jij foutmeldingen over aanhalingstekens goed lezen.
+* De toets telt voor 1/6e mee voor je cijfer
+* We beginnen vandaag ook aan een huiswerk-opdracht. Die telt ook 1/6e mee.
+* Lees goed wat je moet doen! Soms moet je twee dingen doen, vergeet dat dan niet!
 
-### Aanhalingstekens
+#### Codes herkennen
 
-We hebben geleerd om aanhalingstekens te gebruiken, als iets letterlijk zo in beeld moet komen.
-We gebruiken aanhalingstekens bij `print` en bij `ask`.
+Voor deze vragen moet jij stukjes code zoeken bij de juiste programmeerwoorden.
+Kijk goed **wat** je moet vinden, en omcirkel dat.
 
+**◯ Opdracht**: Omcirkel alle **variabelen** in deze code.
 ```hedy
-vriend is ask 'Hoe heet jij?'
-print 'Leuk! Ik ga naar de stad met ' vriend
+naam is Michael
+print 'Hallo ' naam
+leeftijd is 17
+print 'Jij bent ' leeftijd ' jaar oud'
 ```
 
-#### Opdracht 1: Maak de code af.
-
-Deze opdrachten doe je in twee stappen:
-1. Zet op de juiste plekken aanhalingstekens in de code.
-2. Staat alles goed? Voorspel dan wat de uitvoer van de code is.
-
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									                        Uitvoer:
+**◯ Opdracht**: Omcirkel alle **variabelen** in deze code.
 ```hedy
-print Hallo allemaal!nprint Welkom bij Hedy       ________________________________________
-                                                  ________________________________________
+print 'welkom bij dit avontuur' naamnaam is Harry
+```
 
+**◯ Opdracht**: Omcirkel nu de stukken code waarin de waarde van een variabele **wordt gebruikt.**
+```hedy
+weer is zonnig
+print 'het wordt vandaag ' weer
 ```
 
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									                        Uitvoer:
+**◯ Opdracht**: Omcirkel nu de stukken code waarin de waarde van een variabele **wordt gebruikt.**
 ```hedy
-naam is Hermans                                   ________________________________________
-lokaal is 305                                     
-print Vandaag hebben we les van naam in lokaal!   
-
+naam is Ben
+print 'Hallo ik ben Ben'
 ```
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									                        Uitvoer:
+**◯ Opdracht**: Op welke plek in de code wordt **er tekst uit een lijst geprint**?
 ```hedy
-docenten is Hermans, Merbis, Bagci, Senkal        ________________________________________
-print De docent vandaag is docenten at random.    
-
+winst is 10 euro, 5 euro, niks
+print 'Jij wint ' winst at random
 ```
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									                        Uitvoer:
+**◯ Opdracht**: Op welke plek in de code wordt **er tekst uit een lijst geprint**?
 ```hedy
-weer is zonnig, regen, wolken, onweer             ________________________________________
-print Wat is het lekker weer vandaag!             
-
+vrienden is Mo, Layla, Sem
+print vrienden at random ' gaat ook mee,'
 ```
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
-Code:									                        Uitvoer:
-```hedy
-print Wat is het lekker weer vandaag!             ________________________________________
-naam is Bassie                                    
 
+**◯ Opdracht**: Op welke plek in de code staat er een **conditie**?
+```hedy
+leeftijd is ask 'Hoe oud ben jij?'
+if leeftijd is 18 print 'Jij mag nu een biertje' else print 'Jij bent te jong!'
 ```
 
-#### Opdracht 2: Foutje?
-Lees de codes goed! Welke zijn er goed of fout.
+**◯ Opdracht**: Op welke plek in de code staat er een **conditie**?
+```hedy
+naam is Bert
+if naam is Ernie print 'Jij bent oranje' else print 'Jij bent geel!'
+```
+
+### Goed of fout?
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
-print 'Daar lopen twee lama's'
+concierge is Michael
+print Vandaag is concierge at random bij de receptie
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
-print 'De lama wandelt op straat
+klassen is 1, 2, 5, 8, 12, 24
+print De prijs valt op nummer .... klassen at random
+```
+Antwoord: <br> 〇 Goed<br> 〇 Fout
+
+
+
+**🤔 Vraag**: Is deze code goed of fout?
+```hedy
+naam is Gea
+print 'Goedemorgen ' voornaam!
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
-print 'De lama wandelt op straat'
-print "Wat een avontuur"
-```
-Antwoord: <br> 〇 Goed<br> 〇 Fout
-
-#### Ask
-
-Vergeet niet dat je ook bij `ask` aanhalingstekens gebruikt!
-
-#### Opdracht 3: Foutje?
-Lees de codes goed! Welke zijn er goed of fout.
-
-**🤔 Vraag**: Is deze code goed of fout?
-```hedy
-ask 'Daar lopen twee konijnen'
+print 'Daar staat een auto, fout geparkeerd!
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 **🤔 Vraag**: Is deze code goed of fout?
 ```hedy
-naam is ask 'Hoe heet jij?'
+print "De auto's staan op straat"
+print 'Dat mag niet!!'
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
+### Voorspel de uitvoer
 
+Bij deze opdracht moet je voorspellen wat de computer gaat doen.
+Denk eraan dat computers heel precies zijn, iedere spatie of punt of komma telt!
 
-#### Opdracht 4: Schrijf de code
+* Zit er een `ask` in de code? Kies dan zelf een antwoord.
+* Zit er een `random` in de code?  Kies dan een mogelijke keus van de computer.
 
-Kijk goed naar de uitvoer, en schrijf er een passende code bij.
-
-**🧑‍💻 Vraag**: Welke code hoort bij deze uitvoer? <br>
+**💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
-________________________________________          Welkom bij de bingoavond
-________________________________________          Hier komt het eerste getal...!
+weer is zonnig, regen, wolken, onweer             ______________________________
+print 'Vandaag wordt het... ' weer at random!     
 
 ```
 
-
-**🧑‍💻 Vraag**: Welke code hoort bij deze uitvoer? <br>
+**💻 Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
-________________________________________          We gaan vanavond naar de film.
-________________________________________          Waar heb jij zin in?
+docenten is Hermans, Merbis, Bagci, Senkal        ______________________________
+docent is docenten at random                      
+if docent is Hermans print 'Jammer!'              
 
 ```
 
+**💻 Vraag**: Wat is de uitvoer van deze code? <br>
+Code:									                        Uitvoer:
+```hedy
+toestand is ask Hoe gaat het met jou?             ______________________________
+print 'Dus het gaat ' toestand ' met jou.'        
 
-#### Opdracht 5: Programmeerwoorden
+```
 
-We hebben deze les weer nieuwe programmeerwoorden geleerd! Leg ze uit je eigen woorden.
+**💻 Vraag**: Wat is de uitvoer van deze code? <br>
+Code:									                        Uitvoer:
+```hedy
+getallen is 1, 2, 3                               ______________________________
+print 'Welkom bij de bingoavond'                  ______________________________
+getal is getallen at random                       
+if getal is 10 print 'Gewonnen!' else print 'Helaas'
+                                                  
 
-**📖 Vraag**: Wat zijn aanhalingstekens?
+```
+
+### Commando's en programmeerwoorden
+
+We hebben deze lessen veel nieuwe commando's en woorden geleerd.
+In deze opdracht mag je er twee commando's uitleggen (is en if). Kies er daarna drie die je nog weet, en leg die uit.
+
+**📖 Vraag**: Wat doet het commando `is`?
 Antwoord: ____________________________________________________________________________________________________<br>
 
-**📖 Vraag**: Waarvoor gebruiken we in Hedy aanhalingstekens?
+**📖 Vraag**: Wat doet het commando `if`?
+Antwoord: ____________________________________________________________________________________________________<br>
+
+**📖 Vraag**: Wat doet het commando `______`?
+Antwoord: ____________________________________________________________________________________________________<br>
+
+**📖 Vraag**: Wat doet het commando `______`?
+Antwoord: ____________________________________________________________________________________________________<br>
+
+**📖 Vraag**: Wat doet het commando `______`?
+Antwoord: ____________________________________________________________________________________________________<br>
+
+Hetzelfde voor woorden. Eerst leg je twee woorden uit (variabele en lijst), dan kies je er zelf nog drie die je kan uitleggen.
+
+**📖 Vraag**: Wat betekent het woord variabele?
+Antwoord: ____________________________________________________________________________________________________<br>
+
+**📖 Vraag**: Wat betekent het woord lijst?
+Antwoord: ____________________________________________________________________________________________________<br>
+
+**📖 Vraag**: Wat betekent het woord __________?
 Antwoord: ____________________________________________________________________________________________________<br>
 
 
-
-#### Opdracht 7: Codes
-
-We hebben ook nieuwe codes geleerd in level 4.
-
-**📖 Vraag**: Wat doet het commando `clear`? (Let op: `is` kan dus meerdere dingen doen!)
+**📖 Vraag**: Wat betekent het woord __________?
 Antwoord: ____________________________________________________________________________________________________<br>
 
-**📖 Vraag**: Wat doet het commando `color`?
+
+**📖 Vraag**: Wat betekent het woord __________?
 Antwoord: ____________________________________________________________________________________________________<br>
 
-### Wat vond jij?
+### De laatste vragen!
 
-**✍️ Vraag**: Wat was de leukste opdracht van dit level? <br>
 
+
+**✍️ Vraag**: Weet jij nog meer over programmeren met Hedy dan er in deze toets staat?
+Noem iets dat jij weet, maar niet in deze toets stond. Als het klopt, krijg je bonus. <br>
+
+____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
  <br>
 
-**✍️ Vraag**: Waarom vond je juist die opdracht leuk? <br>
+**✍️ Vraag**: Verzin een goede toetsvraag
+Wat had jij een goede vraag gevonden voor deze toets? Zet er ook het antwoord bij!  <br>
 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
- <br>
-
-**✍️ Vraag**: Welke opdracht was het minst leuk? <br>
-
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
- <br>
-
-**✍️ Vraag**: Waarom vond je juist die opdracht niet leuk? <br>
-
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>

@@ -1940,12 +1940,15 @@ def view_program(user, id, language="en"):
         result['username']) else None
 
     code = result['code']
-    if result.get("lang") != "en" and result.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
+    # if the snippet has blanks, it'll fail in the translation process
+    # so we just dont translate it if it has any
+    has_blanks = hedy.location_of_first_blank(code) > 0
+    if not has_blanks and result.get("lang") != "en" and result.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
         code = hedy_translation.translate_keywords(code, from_lang=result.get(
             'lang'), to_lang="en", level=int(result.get('level', 1)))
     # If the keyword language is non-English -> parse again to guarantee
     # completely localized keywords
-    if g.keyword_lang != "en":
+    if not has_blanks and g.keyword_lang != "en":
         code = hedy_translation.translate_keywords(
             code,
             from_lang="en",
@@ -1977,9 +1980,40 @@ def view_program(user, id, language="en"):
         arguments_dict['program_timestamp'] = utils.localized_date_format(result['date'])
     else:
         arguments_dict['show_edit_button'] = True
-
-    arguments_dict['show_checkbox'] = is_teacher(user)\
+    is_students_teacher = is_teacher(user)\
         and result['username'] in DATABASE.get_teacher_students(user['username'])
+    arguments_dict['is_students_teacher'] = is_students_teacher
+
+    classes = DATABASE.get_student_classes_ids(result['username'])
+    next_classmate_adventure_id = None
+    if classes:
+        class_id = classes[0]
+        class_ = DATABASE.get_class(class_id) or {}
+        students = sorted(class_.get('students', []))
+        index = students.index(result['username'])
+        for student in students[index + 1:]:
+            id = f"{student}-{result['adventure_name']}-{result['level']}"
+            next_classmate_adventure = DATABASE.student_adventure_by_id(id) or {}
+            next_classmate_adventure_id = next_classmate_adventure.get('program_id')
+            if next_classmate_adventure_id:
+                break
+
+    student_customizations = DATABASE.get_student_class_customizations(result['username'])
+    adventure_index = 0
+    adventures_for_this_level = student_customizations.get('sorted_adventures', {}).get(str(result['level']), [])
+    for index, adventure in enumerate(adventures_for_this_level):
+        if adventure['name'] == result['adventure_name']:
+            adventure_index = index
+            break
+
+    next_program_id = None
+    for i in range(adventure_index + 1, len(adventures_for_this_level)):
+        next_adventure = adventures_for_this_level[i]
+        next_adventure_id = f"{result['username']}-{next_adventure['name']}-{result['level']}"
+        next_student_adventure = DATABASE.student_adventure_by_id(next_adventure_id) or {}
+        next_program_id = next_student_adventure.get('program_id')
+        if next_program_id:
+            break
 
     return render_template("view-program-page.html",
                            blur_button_available=True,
@@ -1989,6 +2023,9 @@ def view_program(user, id, language="en"):
                                level=int(result['level']),
                                code=code),
                            is_teacher=user['is_teacher'],
+                           class_id=student_customizations['id'],
+                           next_program_id=next_program_id,
+                           next_classmate_program_id=next_classmate_adventure_id,
                            **arguments_dict)
 
 

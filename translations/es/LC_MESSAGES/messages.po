@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-10-03 00:12+0000\n"
-"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"PO-Revision-Date: 2024-10-25 17:37+0000\n"
+"Last-Translator: Kamborio <Kamborio15@users.noreply.hosted.weblate.org>\n"
 "Language-Team: es <LL@li.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -65,7 +65,7 @@ msgid "Lonely Text"
 msgstr "Detectamos que el código parece estar faltando un comando con el texto que se utilizó en la línea {line_number}. Puedes intentar escribir el comando necesario con el texto"
 
 msgid "Missing Additional Command"
-msgstr "Detectamos que el código parece estar faltando un `{command}`en la línea {line_number}. ¿Puedes intentar usar `{missing_command}` en su código."
+msgstr "Detectamos que el comando `{command}` en la línea {line_number} le falta algo. ¿Puede intentar usar `{missing_command}`en su código?"
 
 msgid "Missing Colon Error"
 msgstr "Detectamos que `{command}`necesita un `:`al final de la línea {line_number}. A partir del nivel 17, ¿puedes empezar a añadir un «:» al final de la línea con comandos?"
@@ -80,7 +80,7 @@ msgid "Missing Square Brackets"
 msgstr "Hemos detectado que a la lista que ha creado en la línea {line_number} le faltan los corchetes `[]`. ¿Puede intentar añadir corchetes alrededor de `[]` a la lista?"
 
 msgid "Missing Variable"
-msgstr "Detectamos que `{command}` falta una variable al principio de la línea. ¿Puedes intentar escribir la variable antes del `{command}`?"
+msgstr "Detectamos que a `{command}` le falta una variable al principio de la línea. ¿Puedes intentar escribir la variable antes del `{command}`?"
 
 msgid "Misspelled At Command"
 msgstr "Detectamos que `{invalid_argument}` parece tener un error ortográfico en la línea {line_number}. Puedes intentar escribir `{command}`en su lugar."
@@ -150,12 +150,6 @@ msgstr "Detectamos que la función {name} tiene un número incorrecto de argumen
 
 msgid "account_overview"
 msgstr "Resumen de cuenta"
-
-msgid "accounts_created"
-msgstr "Las cuentas han sido creadas con éxito."
-
-msgid "accounts_intro"
-msgstr "En esta página puede crear cuentas para varios estudiantes a la vez. Estos se agregan automáticamente a la clase actual, ¡así que asegúrese de que la clase que se muestra arriba sea la correcta! Cada nombre de usuario debe ser único en todo el sistema Hedy. Puede usar 'Postfix classname' para agregar su nombre de clase a todas las cuentas. Si ingresa manualmente las contraseñas, estas deben tener <b>al menos</b> 6 caracteres."
 
 msgid "actions"
 msgstr "Acciones"
@@ -256,6 +250,9 @@ msgstr "Todo/as"
 msgid "all_class_highscores"
 msgstr "Todos los estudiantes visibles en las puntuaciones más altas de la clase"
 
+msgid "all_rows_missing_separator"
+msgstr "Ninguna de las filas contiene un punto y coma. ¿Tal vez usted quiere que nosotros auto generar contraseñas? Si es así, haga clic en las contraseñas de conmutación y crear las cuentas de nuevo. Si no es así, use un punto y coma para separar los nombres de usuario y las contraseñas en las siguientes líneas: {rows}"
+
 msgid "already_account"
 msgstr "¿Ya tienes una cuenta?"
 
@@ -270,6 +267,9 @@ msgstr "A partir del nivel 2, `{ask}` debe utilizarse con una variable. Ejemplo:
 
 msgid "available_in"
 msgstr "Disponible en:"
+
+msgid "back_to_class"
+msgstr "Volver a la clase"
 
 msgid "become_a_sponsor"
 msgstr "Conviértete en patrocinador"
@@ -397,6 +397,9 @@ msgstr "Continuar"
 msgid "contributor"
 msgstr "Contribuidor"
 
+msgid "copy_accounts_to_clipboard"
+msgstr "Copiar al portapapeles"
+
 msgid "copy_clipboard"
 msgstr "Copiado al portapapeles"
 
@@ -430,8 +433,11 @@ msgstr "Crear cuenta"
 msgid "create_accounts"
 msgstr "Crear cuentas"
 
+msgid "create_accounts_placeholder"
+msgstr "Escribe las cuentas o pégalas desde una hoja de cálculo"
+
 msgid "create_accounts_prompt"
-msgstr "¿Estás seguro de que quieres crear estas cuentas?"
+msgstr "You will create {number_of_accounts} student accounts. Are you sure?"
 
 msgid "create_adventure"
 msgstr "Crear aventura"
@@ -439,20 +445,32 @@ msgstr "Crear aventura"
 msgid "create_class"
 msgstr "Crear nueva clase"
 
-msgid "create_multiple_accounts"
-msgstr "Crear múltiples cuentas"
-
 msgid "create_student_account"
 msgstr "Crear una cuenta"
 
 msgid "create_student_account_explanation"
 msgstr "Puedes guardar tus propios programas con una cuenta."
 
+msgid "create_student_accounts"
+msgstr "Crear cuenta de estudiante para"
+
 msgid "create_teacher_account"
 msgstr "Crear cuenta de profesor"
 
 msgid "create_teacher_account_explanation"
 msgstr "Con una cuenta de profesor, puedes guardar tus programas y ver los resultados de tus estudiantes."
+
+msgid "create_usernames_and_passwords_desc"
+msgstr "Introduce un nombre de usuario y contraseña por línea, separados por un punto y coma. O, si tienes los datos en una hoja de cálculo de dos columnas, copia el contenido del archivo y pégalo aquí."
+
+msgid "create_usernames_and_passwords_title"
+msgstr "Nombres de usuarios y contraseñas"
+
+msgid "create_usernames_desc"
+msgstr "Introduce un nombre de usuario por línea o pegalos desde una hoja de cálculo."
+
+msgid "create_usernames_title"
+msgstr "Nombres de usuario"
 
 msgid "creator"
 msgstr "Creador"
@@ -555,9 +573,6 @@ msgstr "una comilla doble"
 
 msgid "download"
 msgstr "Descargar"
-
-msgid "download_login_credentials"
-msgstr "¿Quieres descargar las credenciales de login tras la creación de cuentas?"
 
 msgid "duplicate"
 msgstr "Duplicar"
@@ -690,9 +705,6 @@ msgstr "Por favor, selecciona un género válido. Escoge (mujer, hombre, otro)."
 
 msgid "general_settings"
 msgstr "Configuración general"
-
-msgid "generate_passwords"
-msgstr "Generar contraseñas"
 
 msgid "get_certificate"
 msgstr "¡Obtén tu certificado!"
@@ -1064,6 +1076,9 @@ msgstr "Repite la nueva contraseña"
 msgid "newline"
 msgstr "un salto de línea"
 
+msgid "next_adventure"
+msgstr "Próxima aventura"
+
 msgid "next_exercise"
 msgstr "Siguiente ejercicio"
 
@@ -1072,6 +1087,9 @@ msgstr "Siguiente página"
 
 msgid "next_step_tutorial"
 msgstr "Siguiente paso >>>"
+
+msgid "next_student"
+msgstr "Siguiente alumno"
 
 msgid "no"
 msgstr "No"
@@ -1226,6 +1244,9 @@ msgstr "Contraseña actualizada."
 msgid "passwords_six"
 msgstr "Todas las contraseñas deben tener 6 carácteres o más."
 
+msgid "passwords_too_short"
+msgstr "Las contraseñas deben tener al menos 6 caracteres. Corrige las siguientes contraseñas, de modo que sean al menos 6 símbolos: {passwords}"
+
 msgid "pending_invites"
 msgstr "Invitaciones pendientes"
 
@@ -1246,9 +1267,6 @@ msgstr "Tu texto personal es inválido."
 
 msgid "phone_number"
 msgstr "Número de teléfono"
-
-msgid "postfix_classname"
-msgstr "Sufijo de nombre de clase"
 
 msgid "preferred_keyword_language"
 msgstr "Idioma preferido para las palabras clave"
@@ -1273,6 +1291,9 @@ msgstr "Ver campañas anteriores"
 
 msgid "previous_page"
 msgstr "Página anterior"
+
+msgid "print_accounts"
+msgstr "Imprimir"
 
 msgid "print_logo"
 msgstr "imprimir"
@@ -1315,6 +1336,9 @@ msgstr "Programas"
 
 msgid "prompt_join_class"
 msgstr "Deseas unirte a la clase?"
+
+msgid "provided_username_duplicates"
+msgstr "Ha proporcionado los siguientes nombres de usuario más de una vez: {usernames}"
 
 msgid "public"
 msgstr "Público"
@@ -1429,9 +1453,6 @@ msgstr "Restablecer"
 
 msgid "reset_password"
 msgstr "Establecer nueva contraseña"
-
-msgid "reset_view"
-msgstr "Resetear"
 
 msgid "restart"
 msgstr "Restablecer"
@@ -1559,6 +1580,9 @@ msgstr "Solución al ejemplo"
 msgid "solution_example_explanation"
 msgstr "Aquí es donde va la solución de tu aventura. Puedes utilizarlo si quieres compartir esta aventura con otros profesores, para que sepan cuál es la solución que propones."
 
+msgid "some_rows_missing_separator"
+msgstr "Las siguientes filas están faltando un punto y coma, por lo que falta el nombre de usuario o la contraseña: {rows}"
+
 msgid "something_went_wrong_keyword_parsing"
 msgstr "Hay un problema en tu aventura, ¿están todas las palabras clave correctamente rodeadas por { }?"
 
@@ -1594,6 +1618,9 @@ msgstr "texto"
 
 msgid "student"
 msgstr "Estudiante"
+
+msgid "student_accounts_created"
+msgstr "Cuentas de estudiantes creadas correctamente"
 
 msgid "student_adventures_table"
 msgstr "Las aventuras de los alumnos"
@@ -1784,6 +1811,9 @@ msgstr "Hedy - Ver aventura"
 msgid "token_invalid"
 msgstr "Tu token no es válido."
 
+msgid "too_many_accounts"
+msgstr "No se pueden crear más de 100 cuentas de estudiante."
+
 msgid "tooltip_level_locked"
 msgstr "Su profesor desactivó este nivel"
 
@@ -1822,9 +1852,6 @@ msgstr "¿Estás seguro de que quieres eliminar este programa como favorito?"
 msgid "unfavourite_success"
 msgstr "Su programa no es favorito."
 
-msgid "unique_usernames"
-msgstr "Los nombres de usuario deben ser únicos."
-
 msgid "unknown_variable_role"
 msgstr "desconocido"
 
@@ -1852,6 +1879,12 @@ msgstr "Actualizar perfil público"
 msgid "updating_indicator"
 msgstr "Actualizando"
 
+msgid "use_custom_passwords"
+msgstr "Proporcione sus propias contraseñas"
+
+msgid "use_generated_passwords"
+msgstr "Generar automáticamente contraseñas"
+
 msgid "use_of_blanks_exception"
 msgstr "Uso de espacios en blanco en los programas"
 
@@ -1873,6 +1906,12 @@ msgstr "Este usuario o bien no existe o no tiene un perfil público"
 msgid "username"
 msgstr "Usuario"
 
+msgid "username_contains_invalid_symbol"
+msgstr "Los nombres de usuario no pueden contener el símbolo ':' o '@'. Elimine estos símbolos de las siguientes filas: {usernames}"
+
+msgid "username_contains_separator"
+msgstr "Los nombres de usuario no pueden contener un punto y coma. ¿Quizás quiera proporcionar sus propias contraseñas? Si es así, haga clic en el interruptor de contraseñas y cree las cuentas de nuevo. Si este no es el caso, elimine el punto y coma de los siguientes nombres de usuario: {usernames}"
+
 msgid "username_empty"
 msgstr "¡No has introducido un nombre de usuario!"
 
@@ -1885,8 +1924,11 @@ msgstr "El nombre de usuario no puede contener los caracteres `:` o `@`."
 msgid "username_three"
 msgstr "El nombre de usuario debe contener al menos tres caracteres."
 
-msgid "usernames_exist"
-msgstr "Uno o más nombres de usuario ya están en uso."
+msgid "usernames_too_short"
+msgstr "Los nombres de usuario deben tener al menos 3 caracteres. Corrige los siguientes nombres de usuario, para que sean 3 o más símbolos: {usernames}"
+
+msgid "usernames_unavailable"
+msgstr "Los siguientes nombres de usuario no están disponibles: {usernames}. Puede crear cuentas similares, por ejemplo, añadiendo un subrayado o el nombre de su clase."
 
 msgid "value"
 msgstr "Valor"
@@ -2080,9 +2122,6 @@ msgstr "Tu programa"
 #~ msgid "hide_quiz"
 #~ msgstr "Ocultar cuestionario"
 
-#~ msgid "back_to_class"
-#~ msgstr "Volver a la clase"
-
 #~ msgid "Locked Language Feature"
 #~ msgstr "¡Estás usando {concept}! Es genial, pero ¡{concept} todavía no está desbloqueado! Se desbloqueará en un nivel posterior."
 
@@ -2257,9 +2296,30 @@ msgstr "Tu programa"
 #~ msgid "student_not_allowed_in_class"
 #~ msgstr "El alumno no autorizado en la clase"
 
-#~ msgid "next_adventure"
-#~ msgstr ""
+#~ msgid "accounts_created"
+#~ msgstr "Las cuentas han sido creadas con éxito."
 
-#~ msgid "previous_adventure"
-#~ msgstr ""
+#~ msgid "accounts_intro"
+#~ msgstr "En esta página puede crear cuentas para varios estudiantes a la vez. Estos se agregan automáticamente a la clase actual, ¡así que asegúrese de que la clase que se muestra arriba sea la correcta! Cada nombre de usuario debe ser único en todo el sistema Hedy. Puede usar 'Postfix classname' para agregar su nombre de clase a todas las cuentas. Si ingresa manualmente las contraseñas, estas deben tener <b>al menos</b> 6 caracteres."
+
+#~ msgid "create_multiple_accounts"
+#~ msgstr "Crear múltiples cuentas"
+
+#~ msgid "download_login_credentials"
+#~ msgstr "¿Quieres descargar las credenciales de login tras la creación de cuentas?"
+
+#~ msgid "generate_passwords"
+#~ msgstr "Generar contraseñas"
+
+#~ msgid "postfix_classname"
+#~ msgstr "Sufijo de nombre de clase"
+
+#~ msgid "reset_view"
+#~ msgstr "Resetear"
+
+#~ msgid "unique_usernames"
+#~ msgstr "Los nombres de usuario deben ser únicos."
+
+#~ msgid "usernames_exist"
+#~ msgstr "Uno o más nombres de usuario ya están en uso."
 

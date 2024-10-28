@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-09-06 14:38+0000\n"
+"PO-Revision-Date: 2024-10-25 06:21+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: uk <LL@li.org>\n"
 "Language: uk\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 #, fuzzy
@@ -41,7 +41,7 @@ msgstr "Ваш код є неповним. Він містить пробіли,
 
 #, fuzzy
 msgid "Incomplete"
-msgstr "Ой! Ви забули трохи коду! У рядку {line_number} потрібно ввести текст за `{incomplete_command}`."
+msgstr "We detected that part of the code seems to be missing from the `{incomplete_command}` on line {line_number}. Can you try adding what's missing?"
 
 #, fuzzy
 msgid "Incomplete Repeat"
@@ -81,7 +81,7 @@ msgstr "Схоже, що ви забули використати команду
 
 #, fuzzy
 msgid "Missing Additional Command"
-msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}."
+msgstr "We detected that the command `{command}` on line {line_number} is missing something. Can you try using `{missing_command}` in your code?"
 
 #, fuzzy
 msgid "Missing Colon Error"
@@ -193,13 +193,6 @@ msgstr "Your function used the wrong number of arguments. You provided {used_num
 
 msgid "account_overview"
 msgstr "Огляд облікового запису"
-
-#, fuzzy
-msgid "accounts_created"
-msgstr "Облікові записи успішно створено."
-
-msgid "accounts_intro"
-msgstr "На цій сторінці ви можете створити аккаунти для декількох учнів одночасно. Вони автоматично додаються до поточного класу, переконайтеся, що обраний клас є правильним! Натиснувши на зелений + в правому нижньому куті сторінки ви можете додати додаткові рядки. Видалити рядок можна, натиснувши відповідний червоний хрестик. Переконайтеся, що при натисканні кнопки \"Створити акаунт\" не залишилося порожніх рядків. Будь ласка, пам'ятайте, що кожне ім'я користувача повинно бути унікальним, а пароль повинен містити <b>не менше</b> 6 символів."
 
 #, fuzzy
 msgid "actions"
@@ -314,6 +307,10 @@ msgstr "Всі"
 msgid "all_class_highscores"
 msgstr "Усіх учнів видно в рейтингу успішності класу"
 
+#, fuzzy
+msgid "all_rows_missing_separator"
+msgstr "None of the rows contain a semicolon. Perhaps you want to let us auto generate passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, use a semicolon to separate usernames and passwords on the following lines: {rows}"
+
 msgid "already_account"
 msgstr "Вже маєте обліковий запис?"
 
@@ -328,6 +325,9 @@ msgstr "Починаючи з рівня 2, `{ask}` потрібно викор�
 
 msgid "available_in"
 msgstr "Available in:"
+
+msgid "back_to_class"
+msgstr "Поверніться до класу"
 
 msgid "become_a_sponsor"
 msgstr "Стати спонсором"
@@ -423,8 +423,9 @@ msgstr "Classes"
 msgid "classes_info"
 msgstr "Create a class to follow the progress of each student in dashboard, and to customize the adventures your students see, and even adding your own! You can create as many classes as you like, and each class can have multiple teachers each one with different roles. You can also add as many students as you want, but mind that each student can only be in one class at a time. You can find more information about classes in the <a href=\"https://hedy.org/for-teachers/manual/preparations#for-teachers\">teacher manual</a>."
 
+#, fuzzy
 msgid "clear"
-msgstr ""
+msgstr "Clear"
 
 #, fuzzy
 msgid "clone"
@@ -451,8 +452,9 @@ msgstr "Command not correct anymore"
 msgid "commands"
 msgstr "Команди"
 
+#, fuzzy
 msgid "complete"
-msgstr ""
+msgstr "Completed"
 
 msgid "congrats_message"
 msgstr "Вітаємо, {username}, ви успішно прошли курс Hedy!"
@@ -468,12 +470,17 @@ msgstr "constant"
 msgid "content_invalid"
 msgstr "Ця пригода є недійсною."
 
+#, fuzzy
 msgid "continue"
-msgstr ""
+msgstr "Continue"
 
 #, fuzzy
 msgid "contributor"
 msgstr "Дописувач"
+
+#, fuzzy
+msgid "copy_accounts_to_clipboard"
+msgstr "Copy to clipboard"
 
 msgid "copy_clipboard"
 msgstr "Успішно скопійовано до буфера обміну"
@@ -509,8 +516,12 @@ msgstr "Створити обліковий запис"
 msgid "create_accounts"
 msgstr "Створити акаунт"
 
+#, fuzzy
+msgid "create_accounts_placeholder"
+msgstr "Type the accounts or paste them from a spreadsheet"
+
 msgid "create_accounts_prompt"
-msgstr "Ви впевнені, що хочете створити ці акаунти?"
+msgstr "You will create {number_of_accounts} student accounts. Are you sure?"
 
 msgid "create_adventure"
 msgstr "Створіть пригоду"
@@ -518,20 +529,37 @@ msgstr "Створіть пригоду"
 msgid "create_class"
 msgstr "Створіть новий клас"
 
-msgid "create_multiple_accounts"
-msgstr "Створіть кілька акаунтів"
-
 msgid "create_student_account"
 msgstr "Створіть обліковий запис"
 
 msgid "create_student_account_explanation"
 msgstr "Ви можете зберігати власні програми якщо маєте обліковий запис."
 
+#, fuzzy
+msgid "create_student_accounts"
+msgstr "Create student accounts for"
+
 msgid "create_teacher_account"
 msgstr "Створіть обліковий запис викладача"
 
 msgid "create_teacher_account_explanation"
 msgstr "За допомогою облікового запису вчителя ви можете зберігати свої програми і бачити результати своїх учнів."
+
+#, fuzzy
+msgid "create_usernames_and_passwords_desc"
+msgstr "Enter one username and password per line, separated by a semicolon. Or, if you have the data in a two-column spreadsheet, copy the file content and paste here."
+
+#, fuzzy
+msgid "create_usernames_and_passwords_title"
+msgstr "Usernames and passwords"
+
+#, fuzzy
+msgid "create_usernames_desc"
+msgstr "Enter one username per line or paste them from a spreadsheet."
+
+#, fuzzy
+msgid "create_usernames_title"
+msgstr "Usernames"
 
 msgid "creator"
 msgstr "Автор"
@@ -555,8 +583,9 @@ msgstr "Кастомізація класу"
 msgid "dash"
 msgstr "тире"
 
+#, fuzzy
 msgid "debug"
-msgstr ""
+msgstr "Debug"
 
 msgid "default_401"
 msgstr "Схоже, ви не уповноважені..."
@@ -642,9 +671,6 @@ msgstr "подвійні лапки"
 
 msgid "download"
 msgstr "Завантажити"
-
-msgid "download_login_credentials"
-msgstr "Бажаєте завантажити логіни для входу після створення акаунтів?"
 
 msgid "duplicate"
 msgstr "Дублювання"
@@ -812,9 +838,6 @@ msgstr "Please select a valid gender, choose (Female, Male, Other)."
 
 msgid "general_settings"
 msgstr "Загальні налаштування"
-
-msgid "generate_passwords"
-msgstr "Згенерувати паролі"
 
 #, fuzzy
 msgid "get_certificate"
@@ -1273,6 +1296,10 @@ msgid "newline"
 msgstr "нова лінія"
 
 #, fuzzy
+msgid "next_adventure"
+msgstr "Next adventure"
+
+#, fuzzy
 msgid "next_exercise"
 msgstr "Next exercise"
 
@@ -1282,6 +1309,10 @@ msgstr "Next page"
 
 msgid "next_step_tutorial"
 msgstr "Наступний крок >>>"
+
+#, fuzzy
+msgid "next_student"
+msgstr "Next student"
 
 msgid "no"
 msgstr "Ні"
@@ -1479,6 +1510,10 @@ msgid "passwords_six"
 msgstr "All passwords need to be six characters or longer."
 
 #, fuzzy
+msgid "passwords_too_short"
+msgstr "Passwords must be at least 6 characters long. Correct the following passwords, so that they are at least 6 symbols: {passwords}"
+
+#, fuzzy
 msgid "pending_invites"
 msgstr "Pending invites"
 
@@ -1504,10 +1539,6 @@ msgstr "Ваш особистий текст є недійсним."
 #, fuzzy
 msgid "phone_number"
 msgstr "Phone number"
-
-#, fuzzy
-msgid "postfix_classname"
-msgstr "Postfix classname"
 
 #, fuzzy
 msgid "preferred_keyword_language"
@@ -1539,6 +1570,10 @@ msgstr "View previous campaigns"
 #, fuzzy
 msgid "previous_page"
 msgstr "Previous page"
+
+#, fuzzy
+msgid "print_accounts"
+msgstr "Print"
 
 msgid "print_logo"
 msgstr "друкуй"
@@ -1593,6 +1628,10 @@ msgid "prompt_join_class"
 msgstr "Бажаєте приєднатися до цього класу?"
 
 #, fuzzy
+msgid "provided_username_duplicates"
+msgstr "You supplied the following usernames more than once: {usernames}"
+
+#, fuzzy
 msgid "public"
 msgstr "Public"
 
@@ -1622,8 +1661,9 @@ msgstr "By selecting this box I make my profile visible for everyone. Be careful
 msgid "public_profile_updated"
 msgstr "Публічний профіль оновлено, сторінка буде перезавантажена."
 
+#, fuzzy
 msgid "put"
-msgstr ""
+msgstr "Put"
 
 msgid "question mark"
 msgstr "знак питання"
@@ -1736,11 +1776,9 @@ msgstr "Reset"
 msgid "reset_password"
 msgstr "Reset password"
 
-msgid "reset_view"
-msgstr "Перезавантажити"
-
+#, fuzzy
 msgid "restart"
-msgstr ""
+msgstr "Restart"
 
 #, fuzzy
 msgid "retrieve_adventure_error"
@@ -1851,8 +1889,9 @@ msgstr "You should soon receive an email with instructions on how to reset your 
 msgid "settings"
 msgstr "My personal settings"
 
+#, fuzzy
 msgid "share"
-msgstr ""
+msgstr "Share"
 
 #, fuzzy
 msgid "share_by_giving_link"
@@ -1902,6 +1941,10 @@ msgid "solution_example_explanation"
 msgstr "This is where the solution of your adventure goes. This can be used if you want to share this adventure with other teacher's, so they can know what your suggested solution is."
 
 #, fuzzy
+msgid "some_rows_missing_separator"
+msgstr "The following rows are missing a semicolon, so either the username or the password is missing: {rows}"
+
+#, fuzzy
 msgid "something_went_wrong_keyword_parsing"
 msgstr "There is a mistake in your adventure, are all keywords correctly surrounded with { }?"
 
@@ -1931,8 +1974,9 @@ msgstr "Assignment"
 msgid "stepper_variable_role"
 msgstr "stepper"
 
+#, fuzzy
 msgid "stop"
-msgstr ""
+msgstr "Stop"
 
 #, fuzzy
 msgid "stop_code_button"
@@ -1944,6 +1988,10 @@ msgstr "текст"
 #, fuzzy
 msgid "student"
 msgstr "Student"
+
+#, fuzzy
+msgid "student_accounts_created"
+msgstr "Successfully created student accounts"
 
 #, fuzzy
 msgid "student_adventures_table"
@@ -1961,8 +2009,9 @@ msgstr "This student is already in your class."
 msgid "student_already_invite"
 msgstr "This student already has a pending invitation."
 
+#, fuzzy
 msgid "student_in_another_class"
-msgstr ""
+msgstr "This student is in another class. Ask the student to leave all classes and try again."
 
 #, fuzzy
 msgid "student_information"
@@ -2179,6 +2228,10 @@ msgid "token_invalid"
 msgstr "Your token is invalid."
 
 #, fuzzy
+msgid "too_many_accounts"
+msgstr "You cannot create more than 100 student accounts."
+
+#, fuzzy
 msgid "tooltip_level_locked"
 msgstr "Your teacher disabled this level"
 
@@ -2223,10 +2276,6 @@ msgid "unfavourite_success"
 msgstr "Your program is unfavourited."
 
 #, fuzzy
-msgid "unique_usernames"
-msgstr "All usernames need to be unique."
-
-#, fuzzy
 msgid "unknown_variable_role"
 msgstr "unknown"
 
@@ -2263,6 +2312,14 @@ msgid "updating_indicator"
 msgstr "Updating"
 
 #, fuzzy
+msgid "use_custom_passwords"
+msgstr "Provide your own passwords"
+
+#, fuzzy
+msgid "use_generated_passwords"
+msgstr "Auto generate passwords"
+
+#, fuzzy
 msgid "use_of_blanks_exception"
 msgstr "Use of blanks in programs"
 
@@ -2288,6 +2345,14 @@ msgid "username"
 msgstr "Ім'я користувача"
 
 #, fuzzy
+msgid "username_contains_invalid_symbol"
+msgstr "Usernames cannot contain the symbol ':' or '@'. Remove these symbols from following rows: {usernames}"
+
+#, fuzzy
+msgid "username_contains_separator"
+msgstr "Usernames cannot contain a semicolon. Perhaps you want to supply your own passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, remove the semicolon from the following usernames: {usernames}"
+
+#, fuzzy
 msgid "username_empty"
 msgstr "You didn't enter an username!"
 
@@ -2304,8 +2369,12 @@ msgid "username_three"
 msgstr "Username must contain at least three characters."
 
 #, fuzzy
-msgid "usernames_exist"
-msgstr "One or more usernames is already in use."
+msgid "usernames_too_short"
+msgstr "Usernames must be at least 3 characters long. Correct the following usernames, so that they are 3 or more symbols: {usernames}"
+
+#, fuzzy
+msgid "usernames_unavailable"
+msgstr "The following usernames are not available: {usernames}. You can create similar accounts, for example, by appending an underscore or your class name."
 
 #, fuzzy
 msgid "value"
@@ -2514,9 +2583,6 @@ msgstr "Your program"
 #~ msgid "hide_quiz"
 #~ msgstr "Hide quiz"
 
-#~ msgid "back_to_class"
-#~ msgstr "Поверніться до класу"
-
 #~ msgid "Locked Language Feature"
 #~ msgstr "Ви використовуєте {concept}! Це чудово, але {concept} ще не розблоковано! Його буде розблоковано на наступному рівні."
 
@@ -2706,9 +2772,30 @@ msgstr "Your program"
 #~ msgid "student_not_allowed_in_class"
 #~ msgstr "Student not allowed in class"
 
-#~ msgid "next_adventure"
-#~ msgstr ""
+#~ msgid "accounts_created"
+#~ msgstr "Облікові записи успішно створено."
 
-#~ msgid "previous_adventure"
-#~ msgstr ""
+#~ msgid "accounts_intro"
+#~ msgstr "На цій сторінці ви можете створити аккаунти для декількох учнів одночасно. Вони автоматично додаються до поточного класу, переконайтеся, що обраний клас є правильним! Натиснувши на зелений + в правому нижньому куті сторінки ви можете додати додаткові рядки. Видалити рядок можна, натиснувши відповідний червоний хрестик. Переконайтеся, що при натисканні кнопки \"Створити акаунт\" не залишилося порожніх рядків. Будь ласка, пам'ятайте, що кожне ім'я користувача повинно бути унікальним, а пароль повинен містити <b>не менше</b> 6 символів."
+
+#~ msgid "create_multiple_accounts"
+#~ msgstr "Створіть кілька акаунтів"
+
+#~ msgid "download_login_credentials"
+#~ msgstr "Бажаєте завантажити логіни для входу після створення акаунтів?"
+
+#~ msgid "generate_passwords"
+#~ msgstr "Згенерувати паролі"
+
+#~ msgid "postfix_classname"
+#~ msgstr "Postfix classname"
+
+#~ msgid "reset_view"
+#~ msgstr "Перезавантажити"
+
+#~ msgid "unique_usernames"
+#~ msgstr "All usernames need to be unique."
+
+#~ msgid "usernames_exist"
+#~ msgstr "One or more usernames is already in use."
 

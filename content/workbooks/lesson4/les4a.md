@@ -1,7 +1,9 @@
 # Hedy - Les 4a
 
-[Teacher] In level 4 leren leerlingen aanhalingstekens gebruiken in code. Dat is niet altijd de meest leuke les maar goed oefenen is wel nodig om latere frustratie te voorkomen.
-Om het leuker te maken kan je in deze les andere features aanbieden, zoals `clear` of een muziekopdracht.[/Teacher]
+{
+    "teacher_note": "In level 4 leren leerlingen aanhalingstekens gebruiken in code. Dat is niet altijd de meest leuke les maar goed oefenen is wel nodig om latere frustratie te voorkomen.  Om het leuker te maken kan je in deze les andere features aanbieden, zoals `clear` of een muziekopdracht."
+}
+
 
 ## Aanhalingstekens
 
@@ -31,13 +33,16 @@ Deze opdrachten doe je in twee stappen:
     "assignment": "output",
     "icon"      : "💻",
     "code"      : 
-                    "print Hallo allemaal!n
+                    "print Hallo allemaal!\n
                     print Welkom bij Hedy\n",
     "answer"    : 
                     "Hallo allemaal\n
                     Welkom bij Hedy",
     "lines"     : 2
 }
+
+Vergeet niet deze opdrachten in twe stappen te doen, eerst de aanhalingstekens links.
+Dan de code rechts!
 
 
 {
@@ -115,7 +120,8 @@ Lees de codes goed! Welke zijn er goed of fout.
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "🤔",
-    "code"      : "print 'De lama wandelt op straat'\nprint \"Wat een avontuur\"",
+    "code"      : "print 'De lama wandelt op straat'\n
+                    print \"Wat een avontuur\"",
     "answer"    : "Goed. Je mag aanhalingstekens door elkaar gebruiken, als ze per regel maar hetzelfde zijn!"
 }
 
@@ -149,10 +155,19 @@ Lees de codes goed! Welke zijn er goed of fout.
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "🤔",
-    "code"      : "aantal is ask "Hoeveel capibara's lopen daar?\""",
+    "code"      : "aantal is ask \"Hoeveel capibara's lopen daar?\"",
     "answer"    : "Goed."
 }
 
+{
+    "assignment": "MC-code",
+    "options"   : ["Goed" , "Fout"],
+    "question"  : "Is deze code goed of fout?",
+    "icon"      : "🤔",
+    "code"      : "aantal is ask \"Hoeveel capibara's lopen daar?\"
+                   print 'Dat zijn er aantal'",
+    "answer"    : "Fout. Het woord aantal wordt geprint en niet de variabele"
+}
 
 #### Opdracht 4: Schrijf de code
 
@@ -161,8 +176,10 @@ Kijk goed naar de uitvoer, en schrijf er een passende code bij.
 {
     "assignment": "input",
     "icon"      : "🧑‍💻",
-    "output"    : "Welkom bij de bingoavond\nHier komt het eerste getal...!",
-    "answer"    : "print 'Welkom bij de bingoavond'\nprint 'Hier komt het eerste getal!'",
+    "output"    : "Welkom bij de bingoavond\n
+                    Hier komt het eerste getal...!",
+    "answer"    : "print 'Welkom bij de bingoavond'\n
+                    print 'Hier komt het eerste getal!'",
     "lines"     : 2
 }
 
@@ -170,8 +187,10 @@ Kijk goed naar de uitvoer, en schrijf er een passende code bij.
 {
     "assignment": "input",
     "icon"      : "🧑‍💻",
-    "output"    : "We gaan vanavond naar de film.\nWaar heb jij zin in?",
-    "answer"    : "print 'We gaan vanavond naar de film.'\nfilm is ask 'Waar heb jij zin in?'",
+    "output"    : "We gaan vanavond naar de film.\n
+                    Waar heb jij zin in?",
+    "answer"    : "print 'We gaan vanavond naar de film.'\n
+                    film is ask 'Waar heb jij zin in?'",
     "lines"     : 2
 }
 
@@ -198,14 +217,14 @@ We hebben deze les weer nieuwe programmeerwoorden geleerd! Leg ze uit je eigen w
 
 
 
-#### Opdracht 7: Codes
+#### Opdracht 6: Codes
 
 We hebben ook nieuwe codes geleerd in level 4.
 
 {
     "assignment": "define",
     "icon"      : "📖",
-    "question"  : "Wat doet het commando `clear`? (Let op: `is` kan dus meerdere dingen doen!)",
+    "question"  : "Wat doet het commando `clear`?",
     "lines"     : 1,
     "answer"    : "Maakt het scherm leeg"
 }
@@ -248,5 +267,3 @@ We hebben ook nieuwe codes geleerd in level 4.
     "lines"     : 5
 }
 
-
-``
