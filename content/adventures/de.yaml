@@ -2661,16 +2661,16 @@ adventures:
                     Benutze diese Vergleiche so in einem `{if}`:
                 example_code: |
                     ```
-                    age = {ask} 'Wie alt bist du?'
-                    {if} alter > 12
-                        {print} 'Du bist älter als ich!'
+                    age = {ask} 'How old are you?'
+                    {if} age > 12
+                        {print} 'You are older than I am!'
                     ```
                     ```
-                    age = {ask} 'Wie alt bist du?'
-                    {if} alter < 12
-                        {print} 'Du bist jünger als ich!'
+                    age = {ask} 'How old are you?'
+                    {if} age < 12
+                        {print} 'You are younger than me!'
                     {else}
-                        {print} 'Du bist älter als ich!'
+                        {print} 'You are older than me!'
                     ```
                 story_text_2: |
                     Ab diesem Level kannst du zwei Gleichheitszeichen verwenden, um etwas zu vergleichen. Das ist in den meisten Programmiersprachen so:
