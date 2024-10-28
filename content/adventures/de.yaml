@@ -321,9 +321,9 @@ adventures:
         levels:
             13:
                 story_text: |-
-                    We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but can use `{and}` and `{or}`.
+                    Jetzt lernen wir `{and}` und `{or}`! Wenn du zwei Aussagen prüfen willst, musst du nicht zwei `{if}`s verwenden, sondern `{and}` und `{or}`.
 
-                    If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
+                    Wenn du `{and}` verwendest, müssen beide Aussage links und rechts von `{and}` wahr sein. Wir können auch `{or}` verwenden. Dann muss nur eine Aussage wahr sein.
                 example_code: |
                     ```
                     name = {ask} 'Wie heißt du?'
@@ -1406,9 +1406,9 @@ adventures:
                     Du hast Level 11 erreicht, du machst das großartig! In den höheren Level konzentiert sich Hedy mehr und mehr darauf, dir die Programmiersprache Python beizubringen.
                     In Python gibt es keinen `{repeat}` Befehl, aber es gibt einen Befehl, der wie {repeat} funktioniert. Bist du neugierig darauf, herauszufinden, wie du `{repeat}` in der Python sagen kannst? Gehe rasch weiter, und finde es heraus!
             12:
-                story_text: |-
-                    **Dezimalzahlen**
-                    Bis jetzt konntest du mit Hedy keine Dezimalzahlen (das sind Kommazahlen) wie 1,5 verwenden, aber jetzt geht das. Denke jedoch daran, dass Hedy (wie viele andere Programmiersprachen auch) anstatt des Kommas einen Punkt (`.`) verwendet.
+                story_text: |
+                    Vielleicht hast du versucht Dezimalzahlen bei deinem Restaurant Abenteuer zu verwenden. Falls ja, hast du wahrscheinlich bemerkt, dass Hedy die noch nicht verstand und immer abgerundet hat.
+                    Ab diesem Level kannst du Dezimalzahlen verwenden.
                 example_code: |
                     ```
                     burger = 5
@@ -1418,16 +1418,23 @@ adventures:
                     drucke 'Das macht zusammen 'gesamt' Euro, bitte'
                     ```
             13:
-                story_text: |-
-                    Wir werden jetzt `{and}` und `{or}` lernen! Wenn du zwei Angaben überprüfen willst, musst du nicht zwei Mal `{if}` verwenden, sondern kannst `{and}` und `{or}` benutzen.
+                story_text: |
+                    In den vorherigen Leveln hast du gelernt, zwei `{if}`Befehle zu verschachteln. Das funktioniert, führt aber zu sehr langem und unhandlichen Code wie diesem:
 
-                    Wenn du `{and}` verwendest, müssen beide Angaben, also links und rechts vom `{and}`, wahr sein. Du kannst auch `{or}` verwenden. Dann muss nur eine der beiden Aussage wahr sein.
+                    Für dieses System musst du sowohl Benutzername als auch Passwort richtig eingeben.
+                    In diesem Level wirst du den `{and}` Befehl lernen, der diesen Code viel kürzer und verständlicher macht!
+                    Probier es aus!
                 example_code: |
                     ```
-                    name = {ask} 'Wie heißt du?'
-                    alter = {ask} 'Wie alt bist du?'
-                    {if} name {is} 'Hedy' {and} alter {is} 2
-                        {print} 'Du bist die echte Hedy!'
+                    benutzername = {ask} 'Was ist dein Benutzername?'
+                    passwort = {ask} 'Was ist dein Passwort?'
+                    {if} benutzername {is} 'Hedy'
+                        {if} passwort {is} 'geheim'
+                            {print} 'Willkommen Hedy!'
+                        {else}
+                            {print} 'Zugang verwehrt'
+                    {else}
+                        {print} 'Zugang verwehrt!'
                     ```
             14:
                 story_text: |
@@ -2493,10 +2500,10 @@ adventures:
         levels:
             13:
                 story_text: |
-                    In the previous adventure you have learned how to use an argument in a function, and you've learned how to combine it with an {ask}.
-                    You might have wondered why you would use functions, because the functions in the example were only one line of code.
-                    Now we will show you what a bigger function looks like and we will use multiple agruments now as well. You'll see how much better it is to use a function once the function gets bigger.
-                    Here is an example of a function with arguments combined with {ask} commands.
+                    Im letzten Abenteuer hast du gelernt, ein Argument in einer Funktion zu verwenden. Du hast auch glen, wie du das mit einem {ask} kombinieren kannst.
+                    Du hast dich vielleicht gefragt, warum du eine Funktion verwenden solltest, weil die Funktionen im Beispiel nur eine Zeile lange sind.
+                    Jetzt werden wir dir zeigen, wie größere Funktionen aussehen. Wir werden jetzt auch mehrere Argumente verwenden. Du wirst sehen, wie viel besser es ist, eine Funktion zu verwenden, wenn die Funktion größer wird.
+                    Hier ist ein Beispiel einer Funktion mit Argumenten, kombiniert mit dem {ask} Befehl.
                 example_code: |
                     ```
                     {define} welcome_message {with} title, last_name, country, room_number
@@ -2760,7 +2767,7 @@ adventures:
                 example_code_2: |
                     ```
                     a = 'Hallo '
-                    b = 'welt!'
+                    b = 'Welt!'
                     {print} a + b
                     ```
 
@@ -3429,37 +3436,37 @@ adventures:
                     ```
             12:
                 story_text: |
-                    **All texts need to be in quotation marks**
-                    For this level on you will also have to use quotation marks when storing a text with `=`:
+                    **Alle Texte müssen in Anführungszeichen stehen**
+                    Ab diesem Level musst du auch Anführungszeichen verwenden, um Text mit `=` zu speichern:
                 example_code: |
                     ```
-                    name = 'Hedy the Robot'
-                    {print} 'Hello ' name
+                    name = 'Hedy der Roboter'
+                    {print} 'Hallo ' name
                     ```
                 story_text_2: |
-                    **All items in lists need quotation marks too**
-                    Lists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.
-                    This allows you to save two words as 1 item on the list, for example 'Black Widow'.
+                    **Alle Helden in dieser Liste müssen auch in Anführungszeichen stehen**
+                    In Listen müssen Texte auch in Anführungszeichen stehen. Beachte, dass jeder einzelne Held in der Liste Anführungszeichen hat. 
+                    Damit kann der Name auch aus zwei Wörtern bestehen, wie zum Beispiel 'Silver Surfer'.
                 example_code_2: |
                     ```
-                    superheroes = 'Spiderman', 'Batman', 'Black Widow'
-                    {print} superheroes {at} {random}
+                    superhelden = 'Spiderman', 'Batman', 'Siver Surfer'
+                    {print} superhelden {at} {random}
                     ```
                 story_text_3: |
-                    **All text after `{if}` comparisons need quotation marks too**
+                    **Alle Texte nach `{if}` Vergleichen brauchen auch Anführungszeichen**
                 example_code_3: |
                     ```
-                    name = {ask} 'What is your name?'
-                    {if} name = 'Hedy the Robot'
-                        {print} 'Hi there!'
+                    name = {ask} 'Wie heißt du?'
+                    {if} name = 'Hedy der Roboter'
+                        {print} 'Hallo!!'
                     ```
                 story_text_4: |
-                    **Numbers don't need quotation marks**
-                    For numbers, you do not use quotation marks in the `=`:
+                    **Zahlen brauchen keine Anführungszeichen**
+                    Für Zahlen benutzen wir keine Anführungszeichen bei `=`:
                 example_code_4: |
                     ```
-                    score = 25
-                    {print} 'You got ' score
+                    punkte = 25
+                    {print} 'Du hast ' punkte
                     ```
     random_command:
         name: '{random}'
@@ -3870,6 +3877,10 @@ adventures:
                     mit Pommes und Pfannkuchen. Oder natürlich etwas ganz anderes!
                 example_code: |
                     ```
+                    preis = 10
+                    essen = {ask} 'Was willst du essen?'
+                    getränk = {ask} 'Was willst du trinken?'
+                    {if} essen {is} 'sandwich' _ getränk {is} 'saft'
                         {print} 'Das ist unser Rabattmenü'
                         preis = preis - 3
                     {if} getränk {is} 'Wasser' _ getränk {is} 'Saft'
@@ -4362,7 +4373,7 @@ adventures:
 
                     ### Übung
                     Kannst du die richtige Anzahl Leerzeichen zum Einrücken hinzufügen, damit das Lied richtig spielt?
-                    Tipp: Nicht jede Zeile braucht Einrückung.
+                    Hinweis: Nicht jede Zeile braucht Einrückung.
                 example_code: |
                     ```
                     Aktionen = 'klatsche in die Hand', 'stampfe mit dem Fuß', 'ruf Hurra'
@@ -4376,8 +4387,8 @@ adventures:
                     ```
             13:
                 story_text: |
-                    In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with {ask} commands as well?
-                    In this example we have changed the 'My Bonnie' program and made it interactive. You are now asked where Bonnie is.
+                    Im letzten Abenteuer hast du gelernt, wie du ein Argument in einer Funktion verwenden kannst. Aber wusstest du, dass du die Argumente auch mit dem {ask} Befehl kombinieren kannst?
+                    In diesem Beispiel haben wir das 'My Bonnie' Programm verändert und interaktiv gemacht. Jetzt kannst du fragen, wo Bonnie ist.
                 example_code: |
                     ```
                     {define} song {with} place
@@ -4450,19 +4461,23 @@ adventures:
         levels:
             12:
                 story_text: |
-                    Songs contain a lot of repetition. We can capture it with a function!
-                    ### Exercise
-                    Look at the example code with the function. Fill out the two lines so the full song is printed.
+                    In Liedern gibt es viele Wiederholungen. Das können wir mit Funktionen abbilden!
+                    ### Übung
+                    Schau die den Beispiel Code mit den Funktionen an. Füll die beiden Zeilen so, dass das ganze Lied gespielt wird.
                 example_code: |
                     ```
-                    {define} twinkle
-                        {print} 'Twinkle'
+                    {define} laterne
+                        {print} 'Laterne'
                         {print} '...'
 
-                    {call} twinkle
-                    {print} 'Up above the world so high'
-                    {print} 'Like a diamond in the sky'
+                    {define} brenne_auf
+                        {print} 'Brenne auf mein Licht,'
+
+                    {call} laterne
+                    {print} 'Sonne, Mond und Sterne'
+                    {call} brenne_auf
                     {call} _
+                    {print} 'Aber nur meine Liebe Laterne nicht'
                     ```
             16:
                 story_text: |
