@@ -137,6 +137,7 @@ class ProfileModule(WebsiteModule):
         return make_response(resp, 200)
 
     @route("/", methods=["GET"], subdomain="<language>")
+    @route("/", methods=["GET"])
     @requires_login
     def get_profile(self, user, language="en"):
         # The user object we got from 'requires_login' is not fully hydrated yet. Look up the database user.
