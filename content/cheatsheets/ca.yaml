@@ -216,3 +216,73 @@
         fruit = ['banana', 'apple', 'cherry']
         random_fruit = fruit[{random}]
         {print} random_fruit
+17:
+-   name: '{elif}'
+    explanation: '`{elif}`'
+    demo_code: "a = 2\n{if} a == 1:\n    {print} 'a is 1'\n{elif} a == 2:\n    {print} 'a is 2'\n{else}:\n    {print} 'a is not 1 or 2'"
+-   name: '{print}'
+    demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Ready or not, here I come!'"
+    explanation: When we use a `{for}`, we need to put a `:` behind the `{for}` statement!
+-   explanation: We need to do the same with all of our `{if}` statements.
+    name: '{if}'
+    demo_code: "color = {ask} 'What is your favorite color?'\n{if} color == 'green':\n    {print} 'Your favorite color is green'\n{else}:\n    {print} 'Your favorite color is not green'"
+18:
+-   name: '{print}'
+    explanation: After `{print}` you need to use parentheses.
+    demo_code: "{print}('hi!')"
+-   name: '{range}'
+    explanation: After `{range}` you need to use parentheses.
+    demo_code: "{for} i {in} {range} (1,10):\n    {print}('Hello, times ', i)"
+-   name: '{print} with var'
+    demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
+    explanation: With `{print}` you need to use parentheses and commas if you print more items.
+-   explanation: Use `{input}` instead of `{ask}` to ask something.
+    name: ask something with {input}
+    demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"
+13:
+-   explanation: Two parts both need to be correct.
+    demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {and} answer2 {is} 4\n    {print} 'Both answers are correct!'\n{else}\n    {print} 'At least one answer is wrong!'"
+    name: '{and}'
+-   demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {or} answer2 {is} 4\n    {print} 'At least one answer is correct!'\n{else}\n    {print} 'Both answers are wrong!'"
+    name: '{or}'
+    explanation: At least 1 of the two parts need to be correct. If both are correct, it is also fine.
+9:
+-   name: '{if} with multiple lines'
+    demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20\n    {print} 'Well done!!'\n    {print} 'The answer is indeed' answer\n{else}\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
+    explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.
+-   explanation: Repeat multiple lines.
+    name: '{repeat} with turtle'
+    demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+11:
+-   demo_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
+    explanation: We can use `{for}` with a `{range}`.
+    name: '{for} loop'
+-   name: '{ask}'
+    explanation: Ask for the answer to a sum and check if it is correct. We can now print 2 lines.
+    demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\n{else}\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
+14:
+-   explanation: We use the `<` to check if the first number is smaller than the second number.
+    demo_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'"
+    name: Smaller
+-   demo_code: "age = {ask} 'How old are you?'\n{if} age > 13\n    {print} 'You are older than me!'"
+    name: Bigger
+    explanation: We use the `>` to check if the first number is bigger than the second number.
+-   demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That is correct!'"
+    name: Equal
+    explanation: We use the `==` to check if two things are the same.
+-   explanation: We use the `!=` to check if two things are not the same.
+    name: Not equal
+    demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
+-   name: Smaller or equal
+    demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
+    explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
+-   demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
+    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
+    name: Bigger or equal
+15:
+-   demo_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
+    explanation: We can use the `{while}` loop with not equal.
+    name: '{while}'
+-   name: Smaller {while}
+    demo_code: "count = 1\n{while} count < 3\n    {print} 'We do this ' 3 - count ' more times'\n    count = count + 1\n{print} 'We are done'"
+    explanation: We can also use the `{while}` loop with `<` and `>`.
