@@ -27,19 +27,15 @@ levels:
         5:
             header: Programmering i Hedy
             text: I Hedy använder vi speciella koder, som `{print}`.
-            code: '{print} Welcome to Hedy!'
         6:
             header: Programmering i Hedy
             text: Kodord visas i rosa.
-            code: '{print} Welcome to Hedy!'
         7:
             header: Programmering i Hedy
             text: Vi startar koden med Kör kod-knappen under koden.
-            code: '{print} Welcome to Hedy!'
         8:
             header: Programmering i Hedy
             text: Utmatning visas till höger.
-            code: '{print} Welcome to Hedy!'
         9:
             header: Programmering i Hedy
             text: Utmatningen kan också vara en teckning.
@@ -59,7 +55,6 @@ levels:
 
                 `{print}` används för att visa text på skärmen.
             code: '{print} Put text on the screen'
-            header: '{print}'
         3:
             header: Kommandot {print}
             text: |-
@@ -72,8 +67,6 @@ levels:
                 Det andra kommandot som du kan använda på nivå 1 är `{ask}`.
 
                 `{ask}` används för att ställa en fråga som kan besvaras.
-            code: "{print} Welcome to your own rock scissors paper!\n{ask} What will you choose?"
-            header: '{ask}'
         5:
             text: |-
                 Du såg i förra exemplet att om du använder kommandot `{ask}` kan du ställa en fråga.
@@ -83,18 +76,14 @@ levels:
                 Om du vill att svaret ska visas kan du använda det sista kommandot på den här nivån: `{echo}`.
 
                 `{echo}` används för att upprepa svaret på en `{ask}`.
-            code: "{print} Hello!\n{ask} What is your name?\n{echo} hello"
-            header: '{echo}'
         6:
             header: Programmering!
             text: |-
                 Med `{print}`, `{ask}` och `{echo}` kan du redan skapa en liten berättelse.
                 Det här är ett bra tillfälle att prova äventyren Papegoja, Berättelse och Sten, sax, påse.
-            editor: /hedy/1
         7:
             header: Programmering!
             text: Äventyren visas i flikar.
-            editor: /hedy/1
         8:
             header: Programmering!
             text: De gula pilknapparna används för att kopiera exempel.
@@ -114,14 +103,6 @@ levels:
             code: |-
                 {forward} 50
                 {turn} left
-        12:
-            debug: 'True'
-            header: Debugging
-            code: "I am DJ Hedy\n{print} What song would you like to hear?\n{ask} I like that song too!\n{print} Next up... {echo}"
-            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
-        13:
-            text: Enjoy the adventures in level 1!
-            header: Let the programming fun begin!
     2:
         1:
             header: Välkommen till nivå 2
@@ -134,7 +115,6 @@ levels:
         2:
             header: Variabler
             text: För att skapa eller sätta en variabels värde använder vi kommandot `{is}`
-            code: "name {is} Hedy\nage {is} 15\n{print} name is age years old"
         3:
             header: Interaktiv
             text: |-
@@ -143,30 +123,21 @@ levels:
                 Svaret på frågan lagras i variabeln.
 
                 På så sätt behöver vi inte kommandot `{echo}`.
-            code: "name {is} {ask} What is your name?\n{print} Hello name"
         4:
             header: Flera variabler
             text: Nu när vi använder variabler kan vi använda flera variabler istället för bara ett `{echo}`-kommando.
-            code: "name {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old."
         5:
             header: Sov
             text: Du kan också använda kommandot `{sleep}` för att pausa koden ett tag.
-            code: "{print} My favorite colour is...\n{sleep} 2\n{print} green!"
         6:
             header: Sov 5
             text: |-
                 Du kan lägga till ett tal efter kommandot `{sleep}` om du vill att pausen ska vara längre.
 
                 Om du vill kan du även använda en variabel istället för ett tal för att bestämma längden på sov-kommandot.
-            code: "pause {is} 10\n{print} My favorite colour is...\n{sleep} pause\n{print} green!"
         8:
             header: Låt den roliga programmeringen börja!
             text: Ha det kul med äventyren på nivå 2!
-        7:
-            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
-            debug: 'True'
-            header: Debugging
-            code: "{print} Welcome to the donut shop!\nfilling {is} What kind of filling would you like?\n{print} You have chosen... Filling! Yum!\ntopping {ask} What kind of topping would you like?\ntopping is delicious!\n{print} I'll go get your donut. {sleep}\n{print} Here you go! A filling donut with toping!\n{ask} Have a nice day!"
     3:
         1:
             header: Välkommen till nivå 3
@@ -177,18 +148,15 @@ levels:
                 Du gör en lista med kommandot `{is}`.
 
                 Skriv kommatecken mellan elementen i listan.
-            code: animals {is} dogs, cats, kangaroos
         3:
             header: Slumpmässigt
             text: |-
                 Du kan använda listan med kommandot `{at}` `{random}`.
                 Datorn kommer slumpmässigt att välja ett element från listan.
                 Varje gång du kör denna kod kommer utskriften att skilja sig åt.
-            code: "animals {is} dogs, cats, kangaroos\n{print} animals {at} {random}"
         4:
             header: Slumpmässigt i en mening
             text: Du kan använda kommandot `{at} {random}` i en mening också.
-            code: "animals {is} dogs, cats, kangaroos\n{print} My favorite animal is animals {at} {random}"
         5:
             header: Lägg till i
             text: |-
@@ -196,31 +164,20 @@ levels:
 
                 Du kan välja vad som ska läggas till i listan eller så kan du använda kommandot `{add}` `{to}` i kombination med kommandot `{ask}`.
                 På så sätt kan du låta spelaren bestämma vad som ska läggas till i listan.
-            code: "animals {is} dog, cat, kangaroo\nlike {is} {ask} What is your favorite animal?\n{add} like {to_list} animals\n{print} I choose animals {at} {random}"
         6:
             header: Ta bort från
             text: |-
                 Motsatsen till kommandot `{add}` `{to}` är kommandot `{remove}` `{from}`.
                 Detta kommando tar bort ett element från en lista.
-            code: "animals {is} dog, cat, kangaroo\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}"
         8:
             header: Nu sätter vi igång!
             text: Ha det kul med äventyren på nivå 3!
-        7:
-            debug: 'True'
-            header: Debugging
-            text: Let's debug this code!
-            editor: "music_genres {is} rock, pop, metal, indie, jazz\nchosen_genre is music {at} {random}\n{print} Let's listen to chosen genre\nnice {ask} Do you like that genre?\n{remove} chosen_genre {from} chosen_genre\nsecond_choice {is} music_genres\n{print} or do you prefer... second_choice {at} {random}\n{remove} second_choice {to} music_genres\n{print} I like music_genre {random} best!"
     4:
         1:
             header: Välkommen till nivå 4
             text: På den här nivån får du lära dig använda citattecken.
-            code: "{print} 'print with quotes!'"
         2:
             text: 'På de tidigare nivåerna kan du ha stött på det här problemet:'
-            header: Problem
-            debug: 'True'
-            code: "name {is} Sophie\n{print} My name is name"
         3:
             header: Fixa det med citattecken
             text: |-
@@ -230,31 +187,25 @@ levels:
         4:
             header: Citattecken med skriv
             text: När du använder kommandot `{print}` måste du sätta texten som du vill ska visas på skärmen inom citattecken.
-            code: "{print} 'print with quotes!'"
         5:
             header: Citattecken med fråga
             text: Detta gäller också för kommandot `{fråga}`.
-            code: name {is} {ask} 'name please?'
         6:
             header: Citattecken och variabler
             text: |-
                 Du vill inte att variabelnamn ska skrivas ut på skärmen.
                 Det är därför variabler ska lämnas utanför citattecknen, så här:
-            code: "name {is} Harry\n{print} 'Hello ' name"
         7:
             header: Citattecken och variabler
             text: |-
                 När variabelnamn används inuti mening måste variablerna stå utanför citattecknen.
                 Resten av meningen behöver citattecken. Det ser ut så här:
-            code: "name {is} Harry\n{print} 'Hello ' name ', how are you?'"
         8:
             header: Citattecken och sammandragningar
             text: |-
                 Var försiktig! Nu när du använder citattecken kan du inte använda apostrofer i sammandragningar.
 
                 Försök att skriva ut en sammandragning som engelska "you're" eller "I'm" på skärmen nedan och se vad som händer …
-            debug: 'True'
-            code: "{print} 'This won't work!'"
         9:
             header: Rensa
             text: |-
@@ -262,15 +213,9 @@ levels:
                 Med det kommandot kan du sudda ut all text från din utdataskärm.
 
                 Var försiktig så att du alltid använder ett sov-kommando också. Om du inte gör det kommer datorn att sudda ut all text innan du hinner läsa den!
-            code: "{print} '3'\n{clear}\n{print} '2'\n{clear}\n{print} '1'\n{clear}\n{print} 'SURPRISE!'"
         11:
             header: Klara, färdiga, gå!
             text: Ha det kul med äventyren på nivå 4!
-        10:
-            header: Debugging
-            text: Let's debug this code!
-            code: "{clear}\n{print} What a nice day to go to the beach!\n{ask} 'Do you want to build a sandcastle or swim in the ocean?'\n{print} 'You would like to activity '\n{print} 'I'd like to do that too'\n{print} 'Look at these beautiful seashells!'\ncolors {is} 'orange, silver, white, brown'\n{print} 'I love the colors {at} {random} one!'\nchoice {is} {ask} Which one do you like?"
-            debug: 'True'
     5:
         1:
             header: Välkommen till nivå 5
@@ -281,26 +226,21 @@ levels:
                 Med kommandot `{if}` kan du välja mellan två alternativ.
                 I exemplet kommer datorn att skriva 'nice' om det givna svaret är Hedy.
                 Om svaret inte är Hedy kommer datorn inte att göra någonting.
-            code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'"
         3:
             header: Glöm inte att skriva ut
             text: Glöm inte att använda kommandot `{print}` när du använder kommandot `{if}`.
-            debug: 'True'
-            code: "{if} name {is} Hedy 'nice'"
         4:
             header: annars
             text: |-
                 När du använder ett `{if}`-kommando kan du också lägga till ett `{else}`-kommando.
                 Om svaret är Hedy kommer datorn att skriva 'nice'.
                 Men om svaret är något annat kommer datorn att skriva 'boo'.
-            code: "{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'"
         5:
             header: Långa rader
             text: |-
                 Du kanske har märkt att dina rader kan bli väldigt långa när du har både ett `{if}`- och ett `{else}`-kommando.
 
                 Du kan välja att dela upp kommandona på två rader, så här:
-            code: "{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'"
         6:
             header: Ett till nytt kommando
             text: |-
@@ -309,57 +249,37 @@ levels:
                 Med `{in}` kan du låta datorn kolla om ett element finns i en lista, t.ex:
 
                 Tänk på att Hedy är skiljer på stora och små bokstäver. Det betyder om du svarar "Grönt" istället för "grönt", kommer Hedy att skriva "meh".
-            code: "pretty_colors {is} green, yellow\nfavorite_color {is} {ask} 'What is your favorite color?'\n{if} favorite_color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'"
         8:
             header: Nu kör vi!
             text: Ha det kul med äventyren på nivå 5!
-        7:
-            text: Let's debug this code!
-            header: Debugging
-            code: "{print} Welcome to HedyAir Security!\nboarding_pass {is} {ask} 'Do you have your boarding pass?'\n{if} bording_pass yes {print} Great!\n{else} Please, get your boarding pass ready.\npassport {is} 'Can I see your passport, please?'\n{if} passport {is} yes 'thank you'\n{else} 'You can't fly without a passport'\ndeclare {is} {ask} Do you have anything to declare?\n{if} declare {is} yes\nitem_to_declare {is} {ask} 'What would you like to declare'\n{else} Alright\n{print} Thank you. Please head to gate A22.'"
-            debug: 'True'
     6:
         1:
             header: Välkommen till nivå 6
             text: På den här nivån lägger vi till matematik till vår kod.
         2:
             text: Om du vill addera så använder du helt enkelt plustecknet.
-            header: Addition
-            code: "{print} '5 plus 5 is ' 5 + 5"
         3:
             header: Subtraktion
             text: För att subtrahera använder du minustecknet.
-            code: "{print} '5 minus 5 is ' 5 - 5"
         4:
             header: Multiplikation
             text: Om du vill multiplicera kan du använda asterisk.
-            code: "{print} '5 times 5 is ' 5 * 5"
         5:
             text: Du kan använda snedstreck för division.
-            header: Division
-            code: "{print} '5 divided by 5 is ' 5 / 5"
         6:
             header: Sammanfattning
             text: Sammanfattningsvis kan du använda +, –, * och / för att räkna.
-            code: "{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n{print} '5 divided by 5 is ' 5 / 5"
         7:
             header: Symbolen =
             text: |-
                 Från och med nu kan du också använda likhetstecken (=) istället för `{is}`-kommandot.
                 Detta gäller både tal och ord, och det gäller även efter kommandona `{if}` eller `{else}`.
-            code: "name = Hedy\nanswer = 20 + 4"
         8:
             header: Beräkningar med variabler
             text: 'Du kan göra beräkningar med tal, men du kan också använda variabler för att göra beräkningar, t.ex. så här:'
-            code: "number_1 = {ask} 'Fill in the first number:'\nnumber_2 = {ask} 'Fill in the second number:'\ncorrect_answer = number_1 * number_2\n{print} number_1 ' times ' number_2 ' is ' correct_answer"
         10:
             header: Nu sätter vi igång!
             text: Ha det kul med äventyren på nivå 6!
-        9:
-            text: Let's debug this code!
-            code: "{print} 'This is the water park ticket machine'\n{print} 'Price list: Children under 12 $3, Adults $5'\n{print} 'Mondays are 25% off'\namount_of_children = 'How many kids tickets would you like?'\namount_of_adults = 'How many adult tickets would you like?'\nday_of_the_week = {ask} 'What day is it?'\n{clear}\nchild_price = amount of children * 3\nadult_price = amount_of_adults + 5\ntotal_price = adult_price * child_price\n{if} day {is} monday\ntotal_price = total_price * 0.25\n{print} 'That will be total_price please'"
-            header: Debugging
-            debug: 'True'
     7:
         1:
             header: Välkommen till nivå 7
@@ -371,24 +291,15 @@ levels:
                 Om du vill upprepa raden fler gånger ändrar du bara talet.
 
                 Till exempel: Om du programmerar en berättelse där din karaktär ropar på hjälp fem gånger, kan det se ut så här:
-            code: "{print} 'The prince kept calling for help'\n{repeat} 5 {times} {print} 'Help!'\n{print} 'Why is nobody helping me?'"
         3:
             header: Glöm inte kommandot skriv
             text: Glöm inte kommandot `{print}` när du använder kommandot upprepa.
-            debug: 'True'
-            code: "{repeat} 5 {times} 'Help!'"
         4:
             header: Upprepa ett fråga-kommando
             text: Du kan också upprepa ett `{ask}`-, `{if}`- eller `{else}`-kommando flera gånger.
-            code: "{repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'\n{if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'\n{else} {repeat} 3 {times} {print} 'You have learned something new!'"
         6:
             header: Klara, färdiga, gå!
             text: Ha det kul med äventyren på nivå 7!
-        5:
-            code: "{print} You gave stranded on a desert island.\n{repeat} 3 'Help!'\nrescued = {ask} Has anybody come to the rescue?\n{if} rescued yes {is}\n{print} Lucky!\n{else} {repeat} 3 {times} 'HELP!'\nrescued = 'What about now?'\n{if} yes\n{print} 'Hurray!\n{else} 'That's a shame... Oh well... time to build a shelter and find some food.'"
-            header: Debugging
-            text: Let's debug this code!
-            debug: 'True'
     8:
         1:
             header: Välkommen till nivå 8
@@ -399,8 +310,6 @@ levels:
                 På de tidigare nivåerna såg kommandot `{repeat}` ut så här:
 
                 Du kunde bara upprepa en kodrad.
-            debug: 'True'
-            code: "{repeat} 5 {times} {print} 'Help!'"
         3:
             header: '{repeat}-kommandon nu'
             text: |-
@@ -408,30 +317,24 @@ levels:
                 Det gör du genom att använda indrag.
 
                 Använd fyra blanksteg (eller en tabb) i början av varje rad som du vill upprepa, så här:
-            code: "{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This will be printed 5 times'"
         4:
             header: '{repeat}-kommandon nu'
             text: |-
                 Om du vill kan du fortsätta efter kommandot `{repeat}` utan indrag.
                 Rader utan indrag kommer inte att upprepas.
-            code: "{repeat} 3 {times}\n    {print} 'Hello!'\n{print} 'We are done repeating!'"
         5:
             header: om och annars förut
             text: |-
                 Detsamma gäller för kommandona `{if}` och `{else}`.
                 Dessa kommandon användes tidigare:
-            debug: 'True'
-            code: "{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'"
         6:
             header: om och annars nu
             text: |-
                 Så här är kommandona`{if}` och `{else}` nu.
                 Varje rad efter kommandona `{if}` och `{else}` börjar med indrag.
-            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!'"
         7:
             header: stoppa indraget
             text: Precis som med kommandot `{repeat}` kan du sluta använda indrag och raderna kommer alltid att visas, altså inte bara om påståendet är sant.
-            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!' \n{print} '3..2..1.. Start programming!'"
         8:
             header: if-satser inuti if-satser
             text: |-
@@ -440,11 +343,6 @@ levels:
         10:
             header: Vi kollar in äventyren!
             text: Ha det kul med äventyren på nivå 8!
-        9:
-            header: Debugging
-            text: Let's debug this code!
-            debug: 'True'
-            code: "{print} 'HedyWheels bus tickets machine'\nzone_1 = Town Hall, Library, Campus, Market Place\nzone_2 = Swimming Pool, Skate Park, Mall, Airport\ndestination = 'Where do you want to go?'\n{if} destination {in} zone 1\n{print} destination 'is in zone 1'\nprice = 3 euros\n    {if} destination {is} zone_2\n{print} destination 'is in zone 2'\nprice = 6\nticket_types = {ask} 'Press 1 for a single use ticket.\nPress 2 for a round trip ticket:'\n{if} ticket_type = 1\n{print} 'You chose a single use ticket'\n{else}\n        {print} You chose a round trip ticket'\nprice * 2\n{print} 'That will be ' price ' euros please'"
     9:
         1:
             header: Välkommen till nivå 9
@@ -455,37 +353,26 @@ levels:
         2:
             header: Flera rader efter `{repeat}`
             text: Du får ha flera rader efter `{repeat}`.
-            code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
         3:
             header: Indrag är viktigt!
             text: Indrag är mycket viktigt för att tala om för datorn vilka rader som ska upprepas och vilka rader som bara ska köras en gång.
-            code: "{repeat} 3 {times}\n    {print} 'This line will be repeated...'\n    {print} 'This one too...'\n{print} 'but this one will not!'"
         4:
             header: Flera rader efter `{if}`
             text: Du kan också ha flera rader efter `{if}`
-            code: "continue = {ask} 'Do you want to continue?'\n{if} continue = yes\n    sure = {ask} 'Are you sure?'\n    {if} sure {is} yes\n        {print} 'We will continue'\n    {else}\n        {print} 'You are not sure'\n{else}\n    {print} 'You do not want to continue'"
         5:
             header: Indrag är viktigt
             text: Indrag är fortfarande mycket viktigt och kan göra stor skillnad i koden.
-            code: "continue = {ask} 'Do you want to continue?'\n{if} continue = yes\n    sure = {ask} 'Are you sure?'\n    {if} sure {is} yes\n        {print} 'We will continue'\n{else}\n    {print} 'You are not sure'"
         6:
             header: Ett `{if}` inuti en `{repeat}`
             text: |-
                 Nu när du kan ha flera kodrader efter dessa kommandon kan du också placera dem inuti varann.
                 Kolla in det här:
-            code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
         7:
             header: Tänk på indraget
             text: Tänk på att den fjärde och sjätte raden i koden börjar med åtta mellanslag.
-            code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
         9:
             header: Nu kör vi!
             text: Ha det kul med äventyren på nivå 9!
-        8:
-            debug: 'True'
-            text: Let's debug this code!
-            code: "{print} 'Welcome to HedyJumps, your parachute jump adventure!'\npeople = {ask} 'How many people are you jumping with today?\n{print} 'We'll ask all of you some questions for safety reasons.'\nextra_instructions_people = a, b\n{repeat} 3 {times}\n    name = {ask} 'What is your name?'\njumped_before = 'Have you ever done a parachute jump before, ' name '?'\n{if} jumped_before  no\n{print} 'No worries, you'll get an extra safety instruction in room 13'\n{add} name {to} extra_instructions_people\n{else}\n{print} 'Fun!'\n{print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'"
-            header: Debugging
     10:
         1:
             header: Välkommen till nivå 10
@@ -493,19 +380,12 @@ levels:
         2:
             header: Kommandot 'för'
             text: Med 'för' kan du skapa en lista och använda alla element i listan. `{for}` skapar ett block, som 'upprepa' och 'om', så alla rader i blocket ska börja med indrag (fyra mellanslag).
-            code: "animals = dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal"
         3:
             header: Kommandot 'för'
             text: 'Här ser du ett annat exempel på kommandot `{for}`:'
-            code: "days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day"
         5:
             header: Dags att programmera!
             text: Ha det kul med äventyren på nivå 10!
-        4:
-            debug: 'True'
-            header: Debugging
-            text: Let's debug this code
-            code: "{print} 'Ladies and gentlemen!'\n{print} 'For one night and one night only in circus Hedy!'\nacts = shoot out of a canon, walk the tightrope, pack themself in a suitcase,\npeople = Iris the Incredible Achmed the Amazing Francis the Fantastic\n    {for} people {in} acts\nchosen_person {is} people {random}\n    chosen_person ' will ' act\n{add} chosen_person {from} people\n{print} 'Come and watch our show tonight!'\n{print} 'Tickets are only available at the counter"
     11:
         1:
             header: Välkommen till nivå 11
@@ -516,7 +396,6 @@ levels:
         2:
             header: Kommandot 'för'
             text: 'Så här ser det nya för-kommandot ut:'
-            code: "{for} counter {in} {range} 1 {to} 10\n    {print} counter\n{print} 'Ready or not. Here I come!'"
         3:
             header: variabeln i
             text: |-
@@ -524,15 +403,9 @@ levels:
                 Du kan naturligtvis använda vilket namn du vill för variabeln.
                 Standardnamnet för variabler i den här situationen som används i programspråk som Python är 'i'.
                 Det ser ut så här:
-            code: "number = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * number"
         5:
             header: Låt oss börja programmera!
             text: Ha det kul med äventyren på nivå 11!
-        4:
-            debug: 'True'
-            code: "factor {is} {ask} 'Which table of multiplication do you need?'\n{repeat} {for} numbers {in} {range} 1 {to} 10 {times}\n    {print} This is the table of multiplications for factor\n    {print} number ' x ' factor ' = ' i * factor"
-            text: Let's debug this code!
-            header: Debugging
     12:
         1:
             header: Välkommen till nivå 12
@@ -542,32 +415,12 @@ levels:
             text: |-
                 Den här nivån ändrar lite hur citattecken används.
                 Från och med nu måste ** alla texter ** vara inom citattecken. Detta gäller också värden för variabler, element i listor och text efter {if}-kommandon.
-            code: "name = 'Hedy the Robot'\n{print} 'Hello ' name"
         3:
             header: Decimaltal
             text: |-
                 Från och med denna nivå får du också använda decimaltal. Det kan göra program som din restaurang ännu bättre!
 
                 Siffror har inte citattecken.
-            code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
-        7:
-            header: Debugging
-            text: Let's debug this code!
-            code: "{call} new_member\n{print} 'Hi new member!'\nusername = {ask} 'What is your username?'\npassword = 'What is your password?'\n{print} 'Welcome to our club!'\n\nusername = {ask} 'Please enter your username. Are you a new member? Type New Member'\n{if} username = New Member\n{call} new member\n    {else}\n        password = {ask} 'Please enter password'"
-            debug: 'True'
-        8:
-            text: Enjoy the adventures in level 12!
-            header: Ready to try it out?
-        5:
-            header: Twinkle Twinkle little star!
-            text: "In this program you see an example of a function.\nLet's see what happens if you fill in the rest of the song!"
-            code: "{define} twinkle\n     {print} 'Twinkle'\n     {print} '...'\n\n{call} twinkle\n{print} 'Up above the world so high'\n{print} 'Like a diamond in the sky'\n{call} twinkle"
-        6:
-            header: Functions
-            text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
-        4:
-            text: "In this level you'll learn how to use functions. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again. To create a function, use define and give the function a name. Then put all the lines you want in the function in a indented block under the define line. Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!\n\nNow, whenever we need that block of code, we just use call with the function's name to call it up! We don't have to type that block of code again."
-            header: Functions!
     13:
         1:
             header: Välkommen till nivå 13
@@ -577,37 +430,12 @@ levels:
             text: |-
                 Kommandot `{och}` används alltid ihop med kommandot {if}.
                 På så sätt kan du kontrollera om två påståenden är sanna. Till exempel:
-            code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
         3:
             header: Kommandot 'eller'
             text: |-
                 Kommandot `{or}` fungerar på samma sätt som kommandot `{and}`, men bara ett av de två påståendena måste vara sant.
 
                 Låt oss se vad som händer när du byter `{and}` mot `{or}`.
-            code: "name = {ask} 'what is your name?'\n{if} name {is} 'Hedy' {or} name {is} 'hedy'\n    {print} 'Welcome!!'"
-        5:
-            header: Example
-            code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'"
-            text: "In this example you see how the argument 'place' is used in the function.\nRun the code and change 'ocean' and 'sea' to something else, and see what happens."
-        8:
-            header: Debugging
-            code: "{define} happiness {with} name\n    {print} '🥳'\n{play} G\n{play} A\n{play} B\n{print} 'Party on, ' name\n{define} sadness\n{print} '😞'\n{play} E\n{play} D\n{play} C\n{print} 'Hope you feel better, ' name\n\nname = {ask} 'What is your' name '?'\nmood = {ask} 'Are you happy or sad?'\n{if} mood = happy\n    {call} happiness {with} person\n{else} mood = sad\n    {define} sadness {to} name"
-            debug: 'True'
-            text: Let's debug this code!
-        9:
-            text: Enjoy the adventures in level 13!
-            header: Let's go!
-        4:
-            header: Functions with arguments
-            text: Now that you've learned how to use functions, you'll learn how to use a function with an **argument**. An argument is a variable that is used within a function. It is not used outside the function.
-        6:
-            text: "You can also combine functions with a question.\n\nWhat happens if you make these changes:\n```\ndefine song with place\n    print 'My Bonnie is ' place\n\nanswer is ask 'Where is my Bonnie?'\ncall song with answer\n```"
-            header: Example with variable
-            code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'"
-        7:
-            header: Even more questions!
-            code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'"
-            text: "Now we have combined even more question with the function. Type this code and see what happens.\n\nNote how the variables and the arguments have the same name. This is allowed.\nDoes it confuse you? Just use different names, that is allowed as well.\n```\ndefine song with name, place\n    print 'My ' name ' is ' place\n\nname is ask 'Who?'\nplace is ask 'Where are they?'\ncall song with name, place\n```"
     14:
         1:
             header: Välkommen till nivå 14
@@ -626,7 +454,6 @@ levels:
                   <= betyder mindre än eller lika med …
 
                 Du kan använda dem så här:
-            code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'"
         3:
             header: Symboler
             text: |-
@@ -637,22 +464,6 @@ levels:
                 != är inte lika med
 
                 == används i `{if}`-satser.
-            code: "answer = {ask} 'Do you want to learn more?'\n{if} answer == 'yes'\n    {print} 'Go to the next adventure!'\n{if} answer != 'yes'\n    {print} 'That is a shame!'"
-        6:
-            header: Debugging
-            text: Let's debug this code!
-            debug: 'True'
-            code: "item = 'not bought'\n{print} 'I would like to buy this item'\nprice == {ask} 'What is the price?'\n{if} price less than or the same as 10\n    {print} 'Thats a great deal!'\n    item = 'bought'\n{if} price is more than 10 {and} less than or the same as 20\n    {print} 'Alright'\n    item = 'bought'\n{if} price is more than 20 {and} less than 50\n    {print} 'That is a bit much!'\n{if} price is more than or the same as 50\n    {print} 'No way!'\n{if} item =! bought\n    {print} 'Shame.. I wont buy it'\n{else}\n    {print} 'I will buy it! Thank you!'"
-        5:
-            text: For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
-            header: Return value
-            code: "{define} calculate_new_price {with} amount, percentage\n    percentage = percentage / 100\n    discount_amount = amount * percentage\n    {return} amount - discount_amount\n\nold_price = {ask} 'How much is on the price tag?'\ndiscount = {ask} 'What percentage is the discount?'\n\nnew_price = {call} calculate_new_price {with} old_price, discount\n{print} 'The new price is ' new_price ' dollar'"
-        4:
-            header: Return value
-            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
-        7:
-            header: Let's get to work!
-            text: Enjoy the adventures in level 14!
     15:
         1:
             header: Välkommen till nivå 15
@@ -662,16 +473,9 @@ levels:
                 Vi ska lära oss en ny loop, medan-loopen! Loopen fortsätter så länge som påståendet är sant. Så glöm inte att ändra värdet inuti slingan.
 
                 I exempelkoden fortsätter vi tills ett korrekt svar har getts. Om det rätta svaret aldrig ges kommer loopen aldrig att avslutas!
-            header: '{while}'
-            code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
         4:
             header: Vi testar det!
             text: Ha det kul med äventyren på nivå 15!
-        3:
-            debug: 'True'
-            header: Debugging
-            text: Let's debug this code!
-            code: "numbers = 1, 2\n\n{for} i {in} {range} 3 {to} 50\n    {add} x {to} numbers\n    i = + 1\n\nrandom_number = numbers {random}\nguesses = 10\n\n{while} guess = 0\n    answer = 'Guess my number:'\n    {if} answer >= random_number\n        {print} 'lower'\n        guesses = guesses -1\n    {if} answer > random_number\n        {print} 'higher!'\n        guesses = guesses\n    {else} answer = random_number\n        {print} 'correct'\n        guesses = 10"
     16:
         1:
             header: Välkommen till nivå 16
@@ -679,15 +483,9 @@ levels:
         2:
             header: Hakparenteser
             text: Vi kommer att göra listor på Python-vis, med hakparenteser runt listorna! Vi behåller också citattecknen runt varje element, som vi har lärt oss i tidigare nivåer. Vi använder hakparenteser för att peka ut en plats i en lista. Kommandot 'på slump' kan inte användas längre.
-            code: "friends = ['Ahmed', 'Ben', 'Cayden']\n{print} friends[1] ' is the first friend on the list.'\n{print} friends[2] ' is the second friend on the list.'\n{print} friends[3] ' is the third friend on the list.'\n#now we will match 2 lists using the variable i\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} friends[i] 's lucky number is ' lucky_numbers[i]"
         4:
             header: Vi testar det!
             text: Ha det kul med äventyren på nivå 16!
-        3:
-            debug: 'True'
-            header: Debugging
-            text: Let's debug this code!
-            code: "{print} 'Friendship test'\n{subjects} = ['song', 'movie', 'food', 'drink']\nanswers_player_1 = []\nanswers_player_2 = []\nscore = 100\n\n{for} i {in} {range} 1 {to} 4\n    answer = {ask} 'what is your favorite ' subjects[i]\n{add} answer {to} answers_player_1\n\n{print} 'Player 2, your turn!'\n{for} i {in} {range} 0 {to} 4\n    answer_player_2 = {ask} 'what is player 1s favorite ' subjects\n    {add} answer_player_2 {in} answers_player_2\n    {if} answers_player_2[2] == answers_player_1[1]\n        {print} 'Correct!'\n    {else}\n        {print} 'Wrong!'\n    score = score - 25\n\n{print} 'Player 2, you've scored ' score '%'\n\n{if} score = 100\n    {print} 'You are an amazing friend'\n{if} score < 100 {or} score >= 50\n    {print} 'You could do better'\n{else} score < 50\n    {print} 'Do you even know this person?!'"
     17:
         1:
             header: Välkommen till nivå 17
@@ -695,19 +493,12 @@ levels:
         2:
             header: Kolon
             text: Nu ska vi ändra indraget lite grann. Varje gång vi behöver en indragning behöver vi kolon (:) på raden före indragningen.
-            code: "prices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{else}:\n    {print} 'Better luck next time..'"
         3:
             header: Annarsom
             text: 'På den här nivån kan du också använda ett nytt kommando: annarsom. annarsom är en sammandragning av ''annars om'' och du behöver det när du vill skapa tre (eller fler!) alternativ. Kolla in det här!'
-            code: "prices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'"
         4:
             header: Vi testar det!
             text: Ha det kul med äventyren på nivå 17!
-            debug: 'True'
-            code: "{define} ask_direction\n    direction = {ask} 'Where do you want to go?'\n    {if} direction = 'backwards'\n        {turn} 180\n    {else} direction == 'right'\n        {turn} 90\n    {else} direction == 'left'\n        {turn} 270\n        {forward} 100\n\ncontinue = 'yes'\n\n{while} continue == 'yes'\n    {print} ask_direction\n    {sleep}\n    continue = 'do you want to draw some more?'\n    {sleep}"
-        5:
-            header: Let's try it out!
-            text: Enjoy the adventures in level 17!
     18:
         1:
             header: Välkommen till nivå 18
@@ -722,7 +513,6 @@ levels:
                 Den sista ändringen vi behöver göra för att få Python-kod är att ändra ask till input.
 
                 Klicka på fliken 'print' för alla exempel.
-            editor: /hedy/18
         3:
             header: De allra sista äventyren!
             text: Njut av de allra sista äventyren på nivå 18!

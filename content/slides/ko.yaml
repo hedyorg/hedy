@@ -56,7 +56,6 @@ levels:
 
                 '{print}'는 화면에 텍스트를 표시하는 데 사용됩니다.
             code: '{print} Put text on the screen'
-            header: '{print}'
         3:
             header: '{print} 명령'
             text: |-
@@ -69,8 +68,6 @@ levels:
                 레벨 1에서 사용할 수 있는 두 번째 코드는 '{ask}'입니다.
 
                 '{ask}'는 대답할 수 있는 질문을 할 때 사용합니다.
-            header: '{ask}'
-            code: "{print} Welcome to your own rock scissors paper!\n{ask} What will you choose?"
         5:
             text: |-
                 앞의 예에서 볼 수 있듯이. {ask} 명령어를 사용하면 질문을 할 수 있다.
@@ -80,16 +77,12 @@ levels:
                 답을 보여주기를 원한다면 이 레벨의 마지막 명령어인 '{echo}'를 사용하면 됩니다.
 
                 '{quest}'는 '{ask}'의 답을 반복할 때 사용한다.
-            code: "{print} Hello!\n{ask} What is your name?\n{echo} hello"
-            header: '{echo}'
         6:
             header: 프로그래밍!
             text: "{print}, {ask}, {echo}를 사용하면 이미 작은 이야기를 만들 수 있습니다. \n앵무새 이야기와 바위, 가위바위보 모험을 해볼 좋은 때입니다."
-            editor: /hedy/1
         7:
             header: 프로그래밍!
             text: 모험은 탭에 표시됩니다.
-            editor: /hedy/1
         8:
             header: 프로그래밍!
             text: 노란색 화살표 버튼은 예제를 복사하는 데 사용할 수 있습니다.
@@ -109,14 +102,6 @@ levels:
             code: |-
                 {forward} 50
                 {turn} left
-        13:
-            text: Enjoy the adventures in level 1!
-            header: Let the programming fun begin!
-        12:
-            header: Debugging
-            code: "I am DJ Hedy\n{print} What song would you like to hear?\n{ask} I like that song too!\n{print} Next up... {echo}"
-            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
-            debug: 'True'
     2:
         1:
             header: 레벨 2에 오신 걸 환영합니다
@@ -124,7 +109,6 @@ levels:
         2:
             header: Variables (변수)
             text: 변수를 만들거나 설정하려면 '{is}' 명령을 사용합니다
-            code: "name {is} Hedy\nage {is} 15\n{print} name is age years old"
         3:
             header: Interactive (인터렉티브)
             text: |-
@@ -133,30 +117,20 @@ levels:
                 질문에 대한 답은 변수에 저장됩니다.
 
                 이렇게 하면 '{echo}' 명령이 필요 없습니다.
-            code: "name {is} {ask} What is your name?\n{print} Hello name"
         4:
             header: Multiple variables(다중변수)
             text: 이제 변수를 사용하므로 하나의 '{echo}' 명령 대신 여러 변수를 사용할 수 있습니다.
-            code: "name {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old."
         5:
             header: sleep (슬립)
             text: '`{sleep}` 명령어을 사용하여 코드를 잠시 중지할 수도 있습니다.'
-            code: "{print} My favorite colour is...\n{sleep} 2\n{print} green!"
         6:
             text: |-
                 일시정지 시간을 길게 하려면 `{sleep}`명령 뒤에 숫자를 추가할 수 있습니다.
 
                 원한다면 숫자 대신 변수를 사용하여 sleep 명령의 지속 시간을 결정할 수도 있습니다.
-            code: "pause {is} 10\n{print} My favorite colour is...\n{sleep} pause\n{print} green!"
-            header: Sleep 5
         8:
             header: 프로그래밍의 재미를 시작합시다!
             text: 레벨 2의 모험을 즐기세요!
-        7:
-            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
-            header: Debugging
-            code: "{print} Welcome to the donut shop!\nfilling {is} What kind of filling would you like?\n{print} You have chosen... Filling! Yum!\ntopping {ask} What kind of topping would you like?\ntopping is delicious!\n{print} I'll go get your donut. {sleep}\n{print} Here you go! A filling donut with toping!\n{ask} Have a nice day!"
-            debug: 'True'
     3:
         1:
             header: 레벨 3에 오신 것을 환영합니다
@@ -164,155 +138,100 @@ levels:
         2:
             header: 목록 만들기
             text: "{is}로 목록을 작성합니다. \n\n목록의 항목을 쉼표로 구분합니다."
-            code: animals {is} dogs, cats, kangaroos
         3:
             text: |-
                 목록은 '{at}' '{random}' 명령과 함께 사용할 수 있습니다.
                 컴퓨터는 목록에서 임의로 한 항목을 선택할 것이다.
                 이 코드를 실행할 때마다 출력이 달라집니다.
-            header: At random
-            code: "animals {is} dogs, cats, kangaroos\n{print} animals {at} {random}"
         4:
             header: At random in a sentence (문장에서 랜덤)
             text: 문장에서도 '{at}' '{random}' 명령을 사용할 수 있습니다.
-            code: "animals {is} dogs, cats, kangaroos\n{print} My favorite animal is animals {at} {random}"
         5:
             text: "{add} {to} 명령을 사용하여 목록에 항목을 추가할 수 있습니다. \n\n목록에 추가할 항목을 선택하거나 {add} {to} 명령을 {ask} 명령과 함께 사용할 수 있습니다. \n이렇게 하면 플레이어가 목록에 추가할 항목을 결정할 수 있습니다."
-            code: "animals {is} dog, cat, kangaroo\nlike {is} {ask} What is your favorite animal?\n{add} like {to_list} animals\n{print} I choose animals {at} {random}"
-            header: Add to
         6:
             header: 제거 대상
             text: |-
                 '{add}' '{to}' 명령의 반대는 '{remove}' '{from}' 명령입니다.
                 이 명령은 목록에서 항목을 제거합니다.
-            code: "animals {is} dog, cat, kangaroo\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}"
         8:
             header: 일을 시작하자!
             text: 레벨 3의 모험을 즐기세요!
-        7:
-            header: Debugging
-            text: Let's debug this code!
-            debug: 'True'
-            editor: "music_genres {is} rock, pop, metal, indie, jazz\nchosen_genre is music {at} {random}\n{print} Let's listen to chosen genre\nnice {ask} Do you like that genre?\n{remove} chosen_genre {from} chosen_genre\nsecond_choice {is} music_genres\n{print} or do you prefer... second_choice {at} {random}\n{remove} second_choice {to} music_genres\n{print} I like music_genre {random} best!"
     4:
         1:
             header: 레벨 4에 오신것을 환영합니다
             text: 이 레벨에서는 따옴표 사용법을 배우게 됩니다.
-            code: "{print} 'print with quotes!'"
         2:
             header: 문제
             text: '이전 레벨에서는 다음과 같은 문제가 발생했을 수 있습니다:'
-            code: "name {is} Sophie\n{print} My name is name"
-            debug: 'True'
         3:
             header: 따옴표로 고정하기
             text: "이 레벨에서 우리는 따옴표를 사용하여 이 문제를 해결할 것이다. \n\n이것은 또한 우리의 코드를 '진짜' 파이썬 코드처럼 보이게 한다."
         4:
             header: 인쇄된 따옴표
             text: '''{print}'' 명령을 사용할 때마다 화면에 나타날 텍스트를 따옴표로 표시해야 합니다.'
-            code: "{print} 'print with quotes!'"
         5:
             header: 따옴표에 quest가 있음
             text: 이는 '{ask}' 명령에도 적용됩니다.
-            code: name {is} {ask} 'name please?'
         6:
             header: 따옴표 및 변수
             text: "화면에 변수 이름이 인쇄되지 않도록 하려면 \n이와 같이 따옴표에서 변수를 제외해야 하는 이유입니다:"
-            code: "name {is} Harry\n{print} 'Hello ' name"
         7:
             header: 따옴표 및 변수
             text: "문장 중간에 변수 이름이 사용될 때는 따옴표에서 변수를 빼야 한다. \n그러나 나머지 문장에는 따옴표가 필요하다. 이는 다음과 같다:"
-            code: "name {is} Harry\n{print} 'Hello ' name ', how are you?'"
         8:
             header: 따옴표 및 축약
             text: "주의하세요! 따옴표를 사용하고 계시기 때문에 축약할 때 따옴표'를 사용할 수 없습니다. \n\n아래 화면에서 \"당신은\" 또는 \"나는\"과 같은 축약을 인쇄하고 어떻게 되는지 확인해보세요..."
-            debug: 'True'
-            code: "{print} 'This won't work!'"
         9:
             header: 분명한
             text: "이 레벨에서는 {clear} 명령어도 배울 것이다. \n이 명령어를 사용하면 출력 화면에서 모든 텍스트를 지울 수 있다. \n\n항상 sleep 명령어를 사용하도록 주의해야 한다. 그렇지 않으면 컴퓨터가 읽기 전에 모든 텍스트를 지울 것이다!"
-            code: "{print} '3'\n{clear}\n{print} '2'\n{clear}\n{print} '1'\n{clear}\n{print} 'SURPRISE!'"
         11:
             header: 자, 준비, 시작!
             text: 레벨 4의 모험을 즐기세요!
-        10:
-            header: Debugging
-            text: Let's debug this code!
-            code: "{clear}\n{print} What a nice day to go to the beach!\n{ask} 'Do you want to build a sandcastle or swim in the ocean?'\n{print} 'You would like to activity '\n{print} 'I'd like to do that too'\n{print} 'Look at these beautiful seashells!'\ncolors {is} 'orange, silver, white, brown'\n{print} 'I love the colors {at} {random} one!'\nchoice {is} {ask} Which one do you like?"
-            debug: 'True'
     5:
         1:
             header: 레벨 5에 오신것을 환영합니다
             text: 이 레벨에서는 '{if}', '{else}', '{in}' 등 3개의 새로운 명령어를 사용하는 법을 배우게 된다.
         2:
             text: "{if} 명령어를 사용하면 두 가지 옵션 중 하나를 선택할 수 있다. \n이 예제에서 컴퓨터는 주어진 답이 Hedy이면 nice를 출력할 것이다. \n만약 그 답이 Hedy가 아니라면 그 컴퓨터는 아무것도 하지 않을 것이다."
-            code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'"
-            header: if
         3:
             header: 인쇄하는 것을 잊지 마세요
             text: '''{if}'' 명령을 사용할 때는 ''{print}'' 명령을 사용하는 것을 잊지 마십시오.'
-            code: "{if} name {is} Hedy 'nice'"
-            debug: 'True'
         4:
             text: "'{if}' 명령어를 사용할 때는 '{else}' 명령어를 추가할 수도 있다. \n만약 그 답이 Hedy이면 컴퓨터는 nice를 출력할 것이다. \n그러나 만약 그 답이 다른 것이라면 컴퓨터는 boo를 출력할 것이다"
-            header: else
-            code: "{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'"
         5:
             header: 긴줄
             text: "{if} 명령어와 {else} 명령어가 둘 다 있을 때 줄이 매우 길어질 수 있음을 알아차렸을 수도 있다. \n\n명령어를 분리하여 다음과 같이 두 줄에 놓을 수 있다:"
-            code: "{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'"
         6:
             text: "{if} 명령어와 {else} 명령어를 연습했다면 {in} 명령어를 사용해 볼 수도 있다. \n\n{in}을(를) 사용하면 컴퓨터가 목록에 항목이 있는지 확인할 수 있다. \n\n예를 들어 Hedy는 대소문자를 구분합니다. 녹색 대신 녹색으로 대답하면 Hedy는 meh를 출력합니다."
-            header: Another new command
-            code: "pretty_colors {is} green, yellow\nfavorite_color {is} {ask} 'What is your favorite color?'\n{if} favorite_color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'"
         8:
             header: 가자!
             text: 레벨 5의 모험을 즐기세요!
-        7:
-            debug: 'True'
-            text: Let's debug this code!
-            header: Debugging
-            code: "{print} Welcome to HedyAir Security!\nboarding_pass {is} {ask} 'Do you have your boarding pass?'\n{if} bording_pass yes {print} Great!\n{else} Please, get your boarding pass ready.\npassport {is} 'Can I see your passport, please?'\n{if} passport {is} yes 'thank you'\n{else} 'You can't fly without a passport'\ndeclare {is} {ask} Do you have anything to declare?\n{if} declare {is} yes\nitem_to_declare {is} {ask} 'What would you like to declare'\n{else} Alright\n{print} Thank you. Please head to gate A22.'"
     6:
         1:
             header: 레벨 6에 오신것을 환영합니다
             text: 이 레벨에서 우리는 코드에 수학을 추가하고 있다.
         2:
             text: 덧셈을 계산하려면 더하기 기호를 사용하기만 하면 됩니다.
-            code: "{print} '5 plus 5 is ' 5 + 5"
-            header: Addition
         3:
             header: 뺄셈
             text: 빼기를 원한다면 빼기 기호를 사용하면 된다.
-            code: "{print} '5 minus 5 is ' 5 - 5"
         4:
             header: 곱셈
             text: 곱하기를 원하는 경우 별표를 사용할 수 있습니다.
-            code: "{print} '5 times 5 is ' 5 * 5"
         5:
             header: 나누기
             text: 슬래시를 분할에 사용할 수 있습니다.
-            code: "{print} '5 divided by 5 is ' 5 / 5"
         6:
             header: 요약
             text: 요약하면 +, -, * 및 /를 사용하여 수학을 할 수 있습니다.
-            code: "{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n{print} '5 divided by 5 is ' 5 / 5"
         7:
             text: "이제부터는 {is} 명령 대신 = 기호를 사용할 수도 있습니다. \n이것은 숫자와 단어 모두에 적용되며, {if} 또는 {flag} 명령 뒤에도 적용됩니다."
-            header: The = symbol
-            code: "name = Hedy\nanswer = 20 + 4"
         8:
             header: 변수를 이용한 계산
             text: '숫자와 함께 계산을 사용할 수도 있지만 변수를 사용하여 다음과 같은 계산을 수행할 수도 있습니다:'
-            code: "number_1 = {ask} 'Fill in the first number:'\nnumber_2 = {ask} 'Fill in the second number:'\ncorrect_answer = number_1 * number_2\n{print} number_1 ' times ' number_2 ' is ' correct_answer"
         10:
             header: 일을 시작하자!
             text: 레벨 6의 모험을 즐기세요!
-        9:
-            header: Debugging
-            text: Let's debug this code!
-            debug: 'True'
-            code: "{print} 'This is the water park ticket machine'\n{print} 'Price list: Children under 12 $3, Adults $5'\n{print} 'Mondays are 25% off'\namount_of_children = 'How many kids tickets would you like?'\namount_of_adults = 'How many adult tickets would you like?'\nday_of_the_week = {ask} 'What day is it?'\n{clear}\nchild_price = amount of children * 3\nadult_price = amount_of_adults + 5\ntotal_price = adult_price * child_price\n{if} day {is} monday\ntotal_price = total_price * 0.25\n{print} 'That will be total_price please'"
     7:
         1:
             header: 레벨 7에 오신것을 환영합니다
@@ -320,24 +239,15 @@ levels:
         2:
             header: 세 번을 되풀이하다
             text: "만약 한 줄의 코드를 반복하고 싶다면, {repeat} 3 {times} 코드를 사용할 수 있다. \n만약 한 줄을 더 반복하고 싶다면, 숫자를 바꾸기만 하면 된다. \n\n예를 들어, 만약 당신이 캐릭터가 도움을 요청하는 이야기를 5번 동안 프로그래밍한다면, 다음과 같이 보일 수 있다:"
-            code: "{print} 'The prince kept calling for help'\n{repeat} 5 {times} {print} 'Help!'\n{print} 'Why is nobody helping me?'"
         3:
             header: 인쇄 명령을 잊지 마십시오
             text: repeat 명령을 사용할 때 '{print}' 명령을 잊지 마십시오.
-            debug: 'True'
-            code: "{repeat} 5 {times} 'Help!'"
         4:
             header: 질문 명령 반복
             text: 또한 '{ask}', '{if}' 또는 '{else}' 명령을 여러 번 반복할 수 있습니다.
-            code: "{repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'\n{if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'\n{else} {repeat} 3 {times} {print} 'You have learned something new!'"
         6:
             header: 준비완료!
             text: 레벨 7의 모험을 즐기세요!
-        5:
-            header: Debugging
-            text: Let's debug this code!
-            debug: 'True'
-            code: "{print} You gave stranded on a desert island.\n{repeat} 3 'Help!'\nrescued = {ask} Has anybody come to the rescue?\n{if} rescued yes {is}\n{print} Lucky!\n{else} {repeat} 3 {times} 'HELP!'\nrescued = 'What about now?'\n{if} yes\n{print} 'Hurray!\n{else} 'That's a shame... Oh well... time to build a shelter and find some food.'"
     8:
         1:
             header: 레벨 8에 오신것을 환영합니다
@@ -345,40 +255,24 @@ levels:
         2:
             header: '{messages}개 이전의 명령'
             text: "이전 레벨에서 '{repeat}' 명령어는 다음과 같이 보였습니다. \n\n코드 한 줄만 반복할 수 있습니다."
-            debug: 'True'
-            code: "{repeat} 5 {times} {print} 'Help!'"
         3:
             header: 지금 {messages}개의 명령
             text: "이 레벨에서는 여러 줄의 코드를 반복할 수 있다. \n이를 위해서는 어떤 줄이 함께 속하므로 반복해야 하는지 컴퓨터에 말해야 한다. \n\n들여쓰기를 사용하여 이 작업을 수행한다. 반복할 각 줄의 맨 앞에 있는 4개의 공백(또는 하나의 탭)을 다음과 같이 사용한다:"
-            code: "{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This will be printed 5 times'"
         4:
             header: 지금 {messages}개의 명령
             text: "원한다면 들여쓰기 없이 '{repeat}' 명령 뒤에 계속 진행할 수 있다. \n들여쓰기로 시작하지 않는 행은 반복되지 않는다."
-            code: "{repeat} 3 {times}\n    {print} 'Hello!'\n{print} 'We are done repeating!'"
         5:
             text: "{if} 명령어와 {else} 명령어도 마찬가지이다. \n이전의 명령어는 다음과 같다:"
-            debug: 'True'
-            header: if and else before
-            code: "{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'"
         6:
             text: "이제 {if} 명령어와 {else} 명령어는 다음과 같다. \n{if} 명령어와 {else} 명령어 뒤의 각 행은 들여쓰기로 시작한다."
-            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!'"
-            header: if and else now
         7:
             header: 들여쓰기 중지
             text: '''{repeat}'' 명령어와 마찬가지로 들여쓰기 사용을 중지할 수 있으며 줄은 항상 표시됩니다. 문장이 참일 경우에만 해당되는 것은 아닙니다.'
-            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!' \n{print} '3..2..1.. Start programming!'"
         8:
             text: "repeat 명령어 안에 if 명령어를 넣거나, 다른 if 명령어 안에 if 명령어를 넣으려고 생각해봤을 것이다. \n지금으로서는 아직 불가능하다. 상위 단계에서는 가능하겠지만, 일단 적절한 들여쓰기를 가진 {if} {else} 명령어와 {repeat} 명령어를 연습하는 것에 집중하자."
-            header: if statements inside if statements
         10:
             header: 모험을 확인해 봅시다!
             text: 레벨 8의 모험을 즐기세요!
-        9:
-            text: Let's debug this code!
-            header: Debugging
-            code: "{print} 'HedyWheels bus tickets machine'\nzone_1 = Town Hall, Library, Campus, Market Place\nzone_2 = Swimming Pool, Skate Park, Mall, Airport\ndestination = 'Where do you want to go?'\n{if} destination {in} zone 1\n{print} destination 'is in zone 1'\nprice = 3 euros\n    {if} destination {is} zone_2\n{print} destination 'is in zone 2'\nprice = 6\nticket_types = {ask} 'Press 1 for a single use ticket.\nPress 2 for a round trip ticket:'\n{if} ticket_type = 1\n{print} 'You chose a single use ticket'\n{else}\n        {print} You chose a round trip ticket'\nprice * 2\n{print} 'That will be ' price ' euros please'"
-            debug: 'True'
     9:
         1:
             header: 레벨 9에 오신 걸 환영합니다
@@ -386,35 +280,22 @@ levels:
         2:
             header: '''{repeat}'' 뒤에 여러 줄이 있음'
             text: '''{repeat}'' 뒤에는 여러 줄을 사용할 수 있습니다.'
-            code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
         3:
             text: 들여쓰기는 어떤 선을 반복해야 하는지, 어떤 선을 한 번만 실행해야 하는지 컴퓨터에 알려주는 매우 중요합니다.
-            header: Indentation matters!
-            code: "{repeat} 3 {times}\n    {print} 'This line will be repeated...'\n    {print} 'This one too...'\n{print} 'but this one will not!'"
         4:
             header: '''{if}'' 뒤의 다중 행'
             text: '''{if}'' 뒤에 여러 줄을 사용할 수도 있습니다'
-            code: "continue = {ask} 'Do you want to continue?'\n{if} continue = yes\n    sure = {ask} 'Are you sure?'\n    {if} sure {is} yes\n        {print} 'We will continue'\n    {else}\n        {print} 'You are not sure'\n{else}\n    {print} 'You do not want to continue'"
         5:
             text: 다시 말하지만 들여쓰기는 여전히 매우 중요하며 코드에 큰 차이를 만들 수 있다.
-            code: "continue = {ask} 'Do you want to continue?'\n{if} continue = yes\n    sure = {ask} 'Are you sure?'\n    {if} sure {is} yes\n        {print} 'We will continue'\n{else}\n    {print} 'You are not sure'"
-            header: Indentation matters
         6:
             header: '{repeat} 안에 있는 {if}'
             text: "이제 이 명령어 뒤에 여러 줄의 코드를 사용할 수 있게 되었으므로, 서로 간에 코드를 넣을 수도 있습니다. \n이것을 확인해보세요:"
-            code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
         7:
             header: 움푹 들어간 곳에 주의하세요
             text: 이 코드의 네 번째 줄과 여섯 번째 줄은 8칸의 들여쓰기로 시작합니다.
-            code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
         9:
             header: 가자!
             text: 레벨 9의 모험을 즐기세요!
-        8:
-            debug: 'True'
-            header: Debugging
-            text: Let's debug this code!
-            code: "{print} 'Welcome to HedyJumps, your parachute jump adventure!'\npeople = {ask} 'How many people are you jumping with today?\n{print} 'We'll ask all of you some questions for safety reasons.'\nextra_instructions_people = a, b\n{repeat} 3 {times}\n    name = {ask} 'What is your name?'\njumped_before = 'Have you ever done a parachute jump before, ' name '?'\n{if} jumped_before  no\n{print} 'No worries, you'll get an extra safety instruction in room 13'\n{add} name {to} extra_instructions_people\n{else}\n{print} 'Fun!'\n{print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'"
     10:
         1:
             header: 레벨 10에 오신 것을 환영합니다
@@ -422,19 +303,11 @@ levels:
         2:
             header: 명령어
             text: With for you는 목록을 만들고 그 목록의 모든 항목을 사용할 수 있다. '{for}'는 반복과 같은 블록을 만들고, 만약 그렇다면 블록의 모든 줄은 들여쓰기(4칸)로 시작해야 한다.
-            code: "animals = dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal"
         3:
             header: 명령어
-            text: 'Here you see another example of the `{for}` command:'
-            code: "days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day"
         5:
             header: 프로그램 할 시간!
             text: 레벨 10의 모험을 즐기세요!
-        4:
-            header: Debugging
-            debug: 'True'
-            text: Let's debug this code
-            code: "{print} 'Ladies and gentlemen!'\n{print} 'For one night and one night only in circus Hedy!'\nacts = shoot out of a canon, walk the tightrope, pack themself in a suitcase,\npeople = Iris the Incredible Achmed the Amazing Francis the Fantastic\n    {for} people {in} acts\nchosen_person {is} people {random}\n    chosen_person ' will ' act\n{add} chosen_person {from} people\n{print} 'Come and watch our show tonight!'\n{print} 'Tickets are only available at the counter"
     11:
         1:
             header: 레벨 11에 오신 것을 환영합니다
@@ -442,19 +315,12 @@ levels:
         2:
             header: 명령어
             text: 'new for 명령어는 다음과 같습니다:'
-            code: "{for} counter {in} {range} 1 {to} 10\n    {print} counter\n{print} 'Ready or not. Here I come!'"
         3:
             header: 변수 i
             text: "이전 슬라이드에서 변수는 카운트다운을 하고 있었기 때문에 'counter'라고 이름 붙여졌다. \n물론 원하는 변수의 이름은 무엇이든 사용할 수 있다. \n이러한 상황에서 파이썬과 같은 프로그래밍 언어에서 사용되는 변수의 표준 명칭은 'i'이다. \n다음과 같다:"
-            code: "number = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * number"
         5:
             header: 프로그래밍 시작!
             text: 레벨 11의 모험을 즐기세요!
-        4:
-            text: Let's debug this code!
-            debug: 'True'
-            header: Debugging
-            code: "factor {is} {ask} 'Which table of multiplication do you need?'\n{repeat} {for} numbers {in} {range} 1 {to} 10 {times}\n    {print} This is the table of multiplications for factor\n    {print} number ' x ' factor ' = ' i * factor"
     12:
         1:
             header: 레벨 12에 오신 걸 환영합니다
@@ -462,29 +328,9 @@ levels:
         2:
             header: 따옴표
             text: "이 레벨은 따옴표의 사용에 약간의 변경을 가한다. \n이제부터는 **모든 텍스트**는 따옴표로 표시되어야 한다. 여기에는 변수 값, {if} 명령 뒤의 항목 및 목록의 항목이 포함된다."
-            code: "name = 'Hedy the Robot'\n{print} 'Hello ' name"
         3:
             header: 십진법
             text: "이 단계부터 당신은 또한 십진법 숫자를 사용할 수 있습니다. \n\n이것은 당신의 식당과 같은 프로그램들을 훨씬 더 좋게 만들 수 있습니다! 숫자는 따옴표를 만들지 않습니다."
-            code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
-        5:
-            text: "In this program you see an example of a function.\nLet's see what happens if you fill in the rest of the song!"
-            code: "{define} twinkle\n     {print} 'Twinkle'\n     {print} '...'\n\n{call} twinkle\n{print} 'Up above the world so high'\n{print} 'Like a diamond in the sky'\n{call} twinkle"
-            header: Twinkle Twinkle little star!
-        7:
-            debug: 'True'
-            text: Let's debug this code!
-            code: "{call} new_member\n{print} 'Hi new member!'\nusername = {ask} 'What is your username?'\npassword = 'What is your password?'\n{print} 'Welcome to our club!'\n\nusername = {ask} 'Please enter your username. Are you a new member? Type New Member'\n{if} username = New Member\n{call} new member\n    {else}\n        password = {ask} 'Please enter password'"
-            header: Debugging
-        8:
-            text: Enjoy the adventures in level 12!
-            header: Ready to try it out?
-        4:
-            header: Functions!
-            text: "In this level you'll learn how to use functions. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again. To create a function, use define and give the function a name. Then put all the lines you want in the function in a indented block under the define line. Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!\n\nNow, whenever we need that block of code, we just use call with the function's name to call it up! We don't have to type that block of code again."
-        6:
-            text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
-            header: Functions
     13:
         1:
             header: 레벨 13에 오신 것을 환영합니다
@@ -492,34 +338,9 @@ levels:
         2:
             header: 명령어와 명령어
             text: "'{and}' 명령어는 항상 {if} 명령어와 함께 사용된다. \n이 방법으로 두 문장이 참인지 확인할 수 있다. 예를 들어:"
-            code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
         3:
             header: 명령어
             text: "{or}는 {and} 명령어와 같은 방식으로 작동하지만 두 문장 중 하나만 참이어야 한다. \n\n{or}에 대한 {and}를 변경하면 어떤 일이 일어나는지 보자."
-            code: "name = {ask} 'what is your name?'\n{if} name {is} 'Hedy' {or} name {is} 'hedy'\n    {print} 'Welcome!!'"
-        6:
-            text: "You can also combine functions with a question.\n\nWhat happens if you make these changes:\n```\ndefine song with place\n    print 'My Bonnie is ' place\n\nanswer is ask 'Where is my Bonnie?'\ncall song with answer\n```"
-            code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'"
-            header: Example with variable
-        8:
-            text: Let's debug this code!
-            header: Debugging
-            code: "{define} happiness {with} name\n    {print} '🥳'\n{play} G\n{play} A\n{play} B\n{print} 'Party on, ' name\n{define} sadness\n{print} '😞'\n{play} E\n{play} D\n{play} C\n{print} 'Hope you feel better, ' name\n\nname = {ask} 'What is your' name '?'\nmood = {ask} 'Are you happy or sad?'\n{if} mood = happy\n    {call} happiness {with} person\n{else} mood = sad\n    {define} sadness {to} name"
-            debug: 'True'
-        4:
-            text: Now that you've learned how to use functions, you'll learn how to use a function with an **argument**. An argument is a variable that is used within a function. It is not used outside the function.
-            header: Functions with arguments
-        7:
-            header: Even more questions!
-            text: "Now we have combined even more question with the function. Type this code and see what happens.\n\nNote how the variables and the arguments have the same name. This is allowed.\nDoes it confuse you? Just use different names, that is allowed as well.\n```\ndefine song with name, place\n    print 'My ' name ' is ' place\n\nname is ask 'Who?'\nplace is ask 'Where are they?'\ncall song with name, place\n```"
-            code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'"
-        5:
-            header: Example
-            text: "In this example you see how the argument 'place' is used in the function.\nRun the code and change 'ocean' and 'sea' to something else, and see what happens."
-            code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'"
-        9:
-            text: Enjoy the adventures in level 13!
-            header: Let's go!
     14:
         1:
             header: 레벨 14에 오신 것을 환영합니다
@@ -538,7 +359,6 @@ levels:
                   <=>는 ...보다 작거나 같음을 의미합니다...
 
                 다음과 같이 사용할 수 있습니다:
-            code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'"
         3:
             header: Symbols (심볼)
             text: |-
@@ -549,38 +369,15 @@ levels:
                 != is not
 
                 == is used in `{if}` statements.
-            code: "answer = {ask} 'Do you want to learn more?'\n{if} answer == 'yes'\n    {print} 'Go to the next adventure!'\n{if} answer != 'yes'\n    {print} 'That is a shame!'"
-        5:
-            header: Return value
-            code: "{define} calculate_new_price {with} amount, percentage\n    percentage = percentage / 100\n    discount_amount = amount * percentage\n    {return} amount - discount_amount\n\nold_price = {ask} 'How much is on the price tag?'\ndiscount = {ask} 'What percentage is the discount?'\n\nnew_price = {call} calculate_new_price {with} old_price, discount\n{print} 'The new price is ' new_price ' dollar'"
-            text: For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
-        7:
-            header: Let's get to work!
-            text: Enjoy the adventures in level 14!
-        4:
-            header: Return value
-            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
-        6:
-            text: Let's debug this code!
-            header: Debugging
-            debug: 'True'
-            code: "item = 'not bought'\n{print} 'I would like to buy this item'\nprice == {ask} 'What is the price?'\n{if} price less than or the same as 10\n    {print} 'Thats a great deal!'\n    item = 'bought'\n{if} price is more than 10 {and} less than or the same as 20\n    {print} 'Alright'\n    item = 'bought'\n{if} price is more than 20 {and} less than 50\n    {print} 'That is a bit much!'\n{if} price is more than or the same as 50\n    {print} 'No way!'\n{if} item =! bought\n    {print} 'Shame.. I wont buy it'\n{else}\n    {print} 'I will buy it! Thank you!'"
     15:
         1:
             header: 레벨 15에 오신 것을 환영합니다
             text: 이 레벨에서 당신은 '{while}' 루프에 대해 배울 것이다.
         2:
             text: "우리는 새로운 순환 고리, while 순환 고리를 배울 거예요! 순환 고리는 문장이 참인 한 계속됩니다. 그러니 순환 고리의 값을 바꾸는 것을 잊지 마세요. \n\n예제 코드에서, 우리는 정답이 주어질 때까지 계속합니다. 만약 정답이 주어지지 않는다면, 순환 고리는 절대로 끝나지 않을 것입니다!"
-            header: '{while}'
-            code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
         4:
             header: 한번 해보자!
             text: 레벨 15의 모험을 즐기세요!
-        3:
-            debug: 'True'
-            text: Let's debug this code!
-            header: Debugging
-            code: "numbers = 1, 2\n\n{for} i {in} {range} 3 {to} 50\n    {add} x {to} numbers\n    i = + 1\n\nrandom_number = numbers {random}\nguesses = 10\n\n{while} guess = 0\n    answer = 'Guess my number:'\n    {if} answer >= random_number\n        {print} 'lower'\n        guesses = guesses -1\n    {if} answer > random_number\n        {print} 'higher!'\n        guesses = guesses\n    {else} answer = random_number\n        {print} 'correct'\n        guesses = 10"
     16:
         1:
             header: 레벨 16에 오신 것을 환영합니다
@@ -588,15 +385,9 @@ levels:
         2:
             header: 대괄호
             text: 우리는 목록을 파이썬 방식으로 만들 것이다. 우리는 또한 이전 레벨에서 배운 것처럼 각 항목의 주변에 따옴표를 유지한다. 우리는 목록의 한 자리를 가리킬 때 대괄호를 사용한다. at random 명령어는 더 이상 사용할 수 없다.
-            code: "friends = ['Ahmed', 'Ben', 'Cayden']\n{print} friends[1] ' is the first friend on the list.'\n{print} friends[2] ' is the second friend on the list.'\n{print} friends[3] ' is the third friend on the list.'\n#now we will match 2 lists using the variable i\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} friends[i] 's lucky number is ' lucky_numbers[i]"
         4:
             header: 한번 해보자!
             text: 레벨 16의 모험을 즐기세요!
-        3:
-            header: Debugging
-            text: Let's debug this code!
-            code: "{print} 'Friendship test'\n{subjects} = ['song', 'movie', 'food', 'drink']\nanswers_player_1 = []\nanswers_player_2 = []\nscore = 100\n\n{for} i {in} {range} 1 {to} 4\n    answer = {ask} 'what is your favorite ' subjects[i]\n{add} answer {to} answers_player_1\n\n{print} 'Player 2, your turn!'\n{for} i {in} {range} 0 {to} 4\n    answer_player_2 = {ask} 'what is player 1s favorite ' subjects\n    {add} answer_player_2 {in} answers_player_2\n    {if} answers_player_2[2] == answers_player_1[1]\n        {print} 'Correct!'\n    {else}\n        {print} 'Wrong!'\n    score = score - 25\n\n{print} 'Player 2, you've scored ' score '%'\n\n{if} score = 100\n    {print} 'You are an amazing friend'\n{if} score < 100 {or} score >= 50\n    {print} 'You could do better'\n{else} score < 50\n    {print} 'Do you even know this person?!'"
-            debug: 'True'
     17:
         1:
             header: 레벨 17에 오신 것을 환영합니다
@@ -604,19 +395,11 @@ levels:
         2:
             header: Colon (콜론)
             text: 이제 우리는 들여쓰기를 조금 바꿀 것이다. 들여쓰기가 필요할 때마다, 우리는 들여쓰기 전 줄에 다음이 필요하다.
-            code: "prices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{else}:\n    {print} 'Better luck next time..'"
         3:
             text: '이 레벨에서 당신은 또한 새로운 명령어를 사용할 수 있다: elif. elif는 다른 경우의 줄임말이고 당신이 3개 이상의 옵션을 만들고 싶을 때 그것이 필요하다. 그것을 확인해봐!'
-            code: "prices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'"
-            header: Elif
         5:
             header: 한번 해보자!
             text: 레벨 17의 모험을 즐기세요!
-        4:
-            text: Let's debug this code!
-            header: Debugging
-            code: "{define} ask_direction\n    direction = {ask} 'Where do you want to go?'\n    {if} direction = 'backwards'\n        {turn} 180\n    {else} direction == 'right'\n        {turn} 90\n    {else} direction == 'left'\n        {turn} 270\n        {forward} 100\n\ncontinue = 'yes'\n\n{while} continue == 'yes'\n    {print} ask_direction\n    {sleep}\n    continue = 'do you want to draw some more?'\n    {sleep}"
-            debug: 'True'
     18:
         1:
             header: 레벨 18에 오신 걸 환영합니다
@@ -624,7 +407,6 @@ levels:
         2:
             header: 파이썬 방식
             text: "우리는 진짜 파이썬 코드에 도착했다! 이제부터는 인쇄 범위와 함께 괄호를 사용해야 한다는 것을 의미한다. \n\n또한 두 개 이상의 항목을 인쇄하려면 쉼표로 구분해야 한다. \n\n파이썬 코드를 얻기 위해 마지막으로 해야 할 변경 사항은 질문을 입력으로 변경하는 것이다. \n\n모든 예제를 보려면 '인쇄' 탭을 클릭하십시오."
-            editor: /hedy/18
         3:
             header: 마지막 모험!
             text: 레벨 18의 마지막 모험을 즐겨보세요!

@@ -305,33 +305,3 @@
         fruit = ['banana', 'apple', 'cherry']
         random_fruit = fruit[random]
         {print} random_fruit
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: "a = 2\n{if} a == 1:\n    {print} 'a is 1'\n{elif} a == 2:\n    {print} 'a is 2'\n{else}:\n    {print} 'a is not 1 or 2'"
--   demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Ready or not, here I come!'"
-    name: '{print}'
-    explanation: When we use a `{for}`, we need to put a `:` behind the `{for}` statement!
--   name: '{if}'
-    explanation: We need to do the same with all of our `{if}` statements.
-    demo_code: "color = {ask} 'What is your favorite color?'\n{if} color == 'green':\n    {print} 'Your favorite color is green'\n{else}:\n    {print} 'Your favorite color is not green'"
-18:
--   explanation: After `{print}` you need to use parentheses.
-    name: '{print}'
-    demo_code: "{print}('hi!')"
--   name: '{range}'
-    explanation: After `{range}` you need to use parentheses.
-    demo_code: "{for} i {in} {range} (1,10):\n    {print}('Hello, times ', i)"
--   demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
-    explanation: With `{print}` you need to use parentheses and commas if you print more items.
-    name: '{print} with var'
--   explanation: Use `{input}` instead of `{ask}` to ask something.
-    name: ask something with {input}
-    demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"
-15:
--   demo_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
-    explanation: We can use the `{while}` loop with not equal.
-    name: '{while}'
--   name: Smaller {while}
-    demo_code: "count = 1\n{while} count < 3\n    {print} 'We do this ' 3 - count ' more times'\n    count = count + 1\n{print} 'We are done'"
-    explanation: We can also use the `{while}` loop with `<` and `>`.
