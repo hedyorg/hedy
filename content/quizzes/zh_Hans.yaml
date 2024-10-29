@@ -12,6 +12,8 @@ levels:
             -   option: 海蒂
                 feedback: 不是这个！
             hint: 它是以海蒂-拉玛的名字命名的。
+            correct_answer: A
+            question_score: '10'
         2:
             question_text: 哪些需要在空白处填写才能使文字你好！出现？
             code: ___ 你好！
@@ -25,6 +27,8 @@ levels:
             -   option: '`{ask}`'
                 feedback: 你可以使用 `{ask}` 来提问。
             hint: _你好世界！
+            correct_answer: B
+            question_score: '10'
         3:
             question_text: 如何询问某个人最喜欢的颜色是什么？
             mp_choice_options:
@@ -49,6 +53,8 @@ levels:
                     ```
                 feedback: '`{echo}` 会对你复述你的回答。'
             hint: 你可以用`{ask}`命令提问
+            question_score: '10'
+            correct_answer: C
         4:
             question_text: 这段代码哪里错了？
             code: |-
@@ -65,6 +71,8 @@ levels:
             -   option: 没有错！这代码很完美！
                 feedback: 错了，仔细看！
             hint: 第一行看上去不对
+            question_score: '10'
+            correct_answer: A
         5:
             question_text: 第二行缺少了哪个命令？
             code: |-
@@ -80,6 +88,8 @@ levels:
             -   option: '`{echo}`'
                 feedback: 马上！
             hint: 你想要在第二行的最后看到回答……
+            correct_answer: D
+            question_score: '10'
         6:
             question_text: 这段代码哪里错了？
             code: |-
@@ -97,6 +107,8 @@ levels:
             -   option: 第四行的`{print}`写错了。
                 feedback: 不，其他地方有错误
             hint: 检查`{print}`命令。
+            correct_answer: B
+            question_score: '10'
         7:
             question_text: 这段代码哪里错了？
             code: |-
@@ -114,6 +126,8 @@ levels:
             -   option: 没有！这代码很完美！
                 feedback: 正确！
             hint: 逐行检查代码
+            correct_answer: D
+            question_score: '10'
         8:
             question_text: 如何使用`{echo}`命令？
             mp_choice_options:
@@ -126,6 +140,8 @@ levels:
             -   option: 你可以用它让文本消失。
                 feedback: 不对……
             hint: '`{echo}`必须在`{ask}`命令之后使用。'
+            correct_answer: C
+            question_score: '10'
         9:
             question_text: 这段代码有什么错误？
             code: |-
@@ -142,6 +158,8 @@ levels:
             -   option: 没有。这代码很完美！
                 feedback: 仔细观察错误的地方……
             hint: '`{ask}`让你能提出一个问题'
+            correct_answer: B
+            question_score: '10'
         10:
             question_text: 运行此代码后，输出屏幕中将显示哪个输出？
             mp_choice_options:
@@ -157,6 +175,10 @@ levels:
                     Are you ready to go to level 2?
                     Yes!
                 feedback: 这里有两个`{echo}`命令
+            code: "{ask} Are you ready to go to level 2?\n{echo}\n{echo}"
+            hint: Let's go!
+            correct_answer: B
+            question_score: '10'
     2:
         1:
             question_text: 哪一句话是对的？
@@ -170,6 +192,8 @@ levels:
             -   option: 你可以用 `{sleep}` 命令清除屏幕上的文本。
                 feedback: 这不是`{sleep}`的作用。
             hint: '`{print}`的作用仍然和第1关中一样'
+            correct_answer: C
+            question_score: '10'
         2:
             question_text: 哪段代码是正确的？
             mp_choice_options:
@@ -194,6 +218,8 @@ levels:
                     ```
                 feedback: 用词对了，但是顺序不对！
             hint: '`{ask}`和第一关里用法不一样了'
+            correct_answer: A
+            question_score: '10'
         3:
             question_text: 如果你运行这段代码，它会输出什么？
             code: |-
@@ -209,6 +235,8 @@ levels:
             -   option: 马琳 去了市场，马琳 买了一个苹果。
                 feedback: “她”不会被替换成名字
             hint: “名字”会被替换成马琳
+            correct_answer: C
+            question_score: '10'
         4:
             question_text: 如果你运行这段代码，它会输出什么？
             code: |-
@@ -224,6 +252,8 @@ levels:
             -   option: 你好，我的 海蒂 是 海蒂
                 feedback: 正确，这个问题会在第四关解决！
             hint: 两个“名字”都会被替换成“海蒂”
+            correct_answer: D
+            question_score: '10'
         5:
             question_text: 当你使用 `{sleep}` 命令时会发生什么？
             mp_choice_options:
@@ -236,6 +266,8 @@ levels:
             -   option: 它用在程序结尾，让海蒂知道程序结束了
                 feedback: 不，它在代码结尾不会有任何用处
             hint: 电脑会在`{sleep}`命令处等待一秒
+            question_score: '10'
+            correct_answer: C
         6:
             question_text: 空白的一行应该填什么？
             code: |-
@@ -252,6 +284,8 @@ levels:
             -   option: '`{ask}`'
                 feedback: 这里没有问题需要问
             hint: 通过停顿制造紧张感……
+            question_score: '10'
+            correct_answer: A
         7:
             question_text: 第2行应该用什么命令？
             code: |-
@@ -280,6 +314,8 @@ levels:
                     ```
                 feedback: 可以简单点，直接写数字3
             hint: 你需要让电脑等待3秒
+            correct_answer: B
+            question_score: '10'
         8:
             question_text: 如何改正第一行的代码？
             code: |-
@@ -307,6 +343,8 @@ levels:
                     ```
                 feedback: '`{ask}`命令呢？'
             hint: 变量名需要放在最前面
+            question_score: '10'
+            correct_answer: C
         9:
             question_text: 这段代码有什么错误？
             code: |-
@@ -322,6 +360,8 @@ levels:
             -   option: 第2行应该是：`{sleep}` 我 喜欢 动物
                 feedback: 睡眠并非用来 `{print}` 文字
             hint: 你需要`{print}`“我 喜欢 狗”
+            correct_answer: B
+            question_score: '10'
         10:
             question_text: 第1行应该用什么命令？
             code: |-
@@ -351,6 +391,8 @@ levels:
                     ```
                 feedback: 对！
             hint: 你需要`{ask}`一个问题
+            correct_answer: D
+            question_score: '10'
     3:
         1:
             question_text: 你需要使用哪一个指令才能让海蒂随机选择东西呢?
@@ -364,6 +406,8 @@ levels:
             -   option: '`{at} {random}`'
                 feedback: 正确!
             hint: 任意表示没有计划的，随机性的。
+            correct_answer: D
+            question_score: '10'
         2:
             question_text: 这个程序有什么问题呢?
             code: |-
@@ -379,6 +423,8 @@ levels:
             -   option: '`{at} {random}` 的拼法不正确'
                 feedback: '`{at} {random}` 是正确的拼法'
             hint: 第一行似乎有什么问题
+            question_score: '10'
+            correct_answer: A
         3:
             question_text: 你该如何修复第二行的问题呢?
             code: |-
@@ -403,6 +449,8 @@ levels:
             -   option: 没事，这个代码是正确的!
                 feedback: 小心注意任何失误
             hint: 变数 (the list) 称作选项.
+            question_score: '10'
+            correct_answer: C
         4:
             question_text: 为了打印一个随机价格，第2行应该怎么改？
             code: |-
@@ -427,6 +475,8 @@ levels:
             -   option: 没事， 这代码没问题.
                 feedback: 注意任何你错过的失误!
             hint: 变数的名字是价格
+            correct_answer: B
+            question_score: '10'
         5:
             question_text: 这代码有什么问题呢?
             code: |-
@@ -444,6 +494,8 @@ levels:
             -   option: 没事， 这个代码很完美
                 feedback: 没错！
             hint: 这段代码甚至有错误吗？
+            question_score: '10'
+            correct_answer: D
         6:
             question_text: 这段代码有什么错误？
             code: |-
@@ -460,6 +512,8 @@ levels:
             -   option: 没什么！这个代码很好！
                 feedback: 事实上，第二行有一个错误。
             hint: 第二行有一些问题。
+            question_score: '10'
+            correct_answer: B
         7:
             question_text: '`{add}`命令有什么作用？'
             mp_choice_options:
@@ -472,6 +526,9 @@ levels:
             -   option: '`{add}` 命令打印你最喜欢的书。'
                 feedback: 不，它会将您最喜欢的书添加到列表中
             hint: '`{add}` 命令添加一本书，但哪一本书？'
+            correct_answer: C
+            question_score: '10'
+            code: "books {is} Harry Potter, The Hobbit, Green Eggs and Ham\nyour_book {is} {ask} What is your favorite book?\n{add} your_book {to} books\n{print} books {at} {random}"
         8:
             question_text: 这段代码的输出是什么？
             code: |-
@@ -489,6 +546,8 @@ levels:
             -   option: 酸奶油
                 feedback: 这是正确的！
             hint: 有 3 种口味，第 2 位被删除。 还剩下哪一个？
+            correct_answer: D
+            question_score: '10'
         9:
             question_text: 这段代码有什么问题？
             code: |-
@@ -506,6 +565,8 @@ levels:
             -   option: 没什么，这是正确的代码！
                 feedback: 找出错误！
             hint: 看第4行
+            correct_answer: C
+            question_score: '10'
         10:
             question_text: _ 上应该写什么？
             code: |-
@@ -536,6 +597,8 @@ levels:
                     ```
                 feedback: 这意味着增加了昨天走路的人现在必须再走一次的变化。
             hint: 昨天遛狗的人应该从名单中删除。
+            correct_answer: A
+            question_score: '10'
     4:
         1:
             question_text: 这些代码中哪一个是正确的？
@@ -561,6 +624,8 @@ levels:
                     ```
                 feedback: 使用引号和撇号时要小心
             hint: 在第 4 级中，你需要用引号来表示 2 个命令。
+            correct_answer: A
+            question_score: '10'
         2:
             question_text: 哪个代码使用了正确的引号？
             mp_choice_options:
@@ -585,6 +650,8 @@ levels:
                     ```
                 feedback: 这是一个逗号，你需要引号。
             hint: 选择正确的引号。
+            correct_answer: B
+            question_score: '10'
         3:
             question_text: 引号在哪儿使用正确？
             mp_choice_options:
@@ -609,6 +676,8 @@ levels:
                     ```
                 feedback: 完美！
             hint: 要打印的单词之前和之后都应该加引号。
+            correct_answer: D
+            question_score: '10'
         4:
             question_text: 哪个论述是对的？
             mp_choice_options:
@@ -621,6 +690,8 @@ levels:
             -   option: 你可以自行选择是否使用引号。
                 feedback: 不幸的是，海蒂 比这更严格。
             hint: 从第 4 级开始，需要使用引号。
+            correct_answer: B
+            question_score: '10'
         5:
             question_text: 为了让游戏正常运行，必须改变什么？
             code: |-
@@ -645,6 +716,8 @@ levels:
             -   option: 没什么，游戏已经可以玩了！
                 feedback: 仔细看。 还有错误。
             hint: 不希望 海蒂 按字面意思打印'选项 {at} {random}'，你是想它打印'rock'或'paper'或'scissors'。
+            correct_answer: C
+            question_score: '10'
         6:
             question_text: 这段代码中的下一行应该是什么？
             code: 价格 {is} 1 美元、100 美元、100 万美元
@@ -670,6 +743,8 @@ levels:
                     ```
                 feedback: 海蒂 会逐字打印 "prices {at} {random}"
             hint: 仔细想想：什么是变量？我们应该把它放在引号外吗？放在引号里面的普通的词汇有哪些？
+            question_score: '10'
+            correct_answer: A
         7:
             question_text: 这段代码有什么问题？
             code: |-
@@ -686,6 +761,8 @@ levels:
             -   option: 没什么，这段代码本来就很好！
                 feedback: 仔细地看。 你错过了一个错误！
             hint: 检查每一行是否需要引号。
+            correct_answer: A
+            question_score: '10'
         8:
             question_text: 这段代码的下一行应该是什么？
             code: |-
@@ -714,6 +791,8 @@ levels:
                     ```
                 feedback: 海蒂 会直接打印 '所以你选择门'
             hint: 第二个“门”字应该换成数字，第一个应该还是“门”字……
+            correct_answer: C
+            question_score: '10'
         9:
             question_text: 什么永远不会出现在你的输出屏幕上？
             code: |-
@@ -729,6 +808,8 @@ levels:
             -   option: 巴塞罗那足球俱乐部将赢得冠军联赛
                 feedback: 这是正确的。 它不在列表中
             hint: 海蒂 可以随机选择哪些选项？
+            correct_answer: D
+            question_score: '10'
         10:
             question_text: 哪个论述是对的？
             code: |-
@@ -745,6 +826,8 @@ levels:
             -   option: 没什么，这段代码没有错误
                 feedback: 你错过了一个！
             hint: 有一行需要引号，因为您希望它按字面意思打印。
+            correct_answer: B
+            question_score: '10'
     5:
         1:
             question_text: 应该在_上填写哪个命令？
@@ -762,6 +845,8 @@ levels:
             -   option: '`{else}`'
                 feedback: 这就对了!
             hint: 哪一个可以与`{if}`命令一起使用？
+            correct_answer: D
+            question_score: '10'
         2:
             question_text: 当您输入 海蒂 名字时，输出屏幕上会出现什么？
             code: |-
@@ -776,6 +861,9 @@ levels:
                 feedback: 不，它不打印名字
             -   option: Error
                 feedback: 幸好没有！
+            hint: '`{if}` name `{is}` Hedy `{print}` ...?'
+            question_score: '10'
+            correct_answer: A
         3:
             question_text: 正确的密码是什么？
             code: |-
@@ -792,6 +880,8 @@ levels:
             -   option: ALARM INTRUDER
                 feedback: 当输入错误的密码时会打印此信息！
             hint: '`{if}` 密码 `{is}` ... `{print}` ''正确！''！'''
+            correct_answer: B
+            question_score: '10'
         4:
             question_text: 输入错误密码时 海蒂 会打印什么？
             code: |-
@@ -808,6 +898,8 @@ levels:
             -   option: ALARM! INTRUDER!
                 feedback: 干的好!
             hint: 你计算机将对入侵者发出警报！
+            question_score: '10'
+            correct_answer: D
         5:
             question_text: 为什么当你输入'secret' 时，海蒂会说 '警报！入侵者'？
             code: |-
@@ -824,6 +916,8 @@ levels:
             -   option: 因为海蒂犯了一个错误
                 feedback: No, Hedy is right
             hint: 该单词的拼写必须完全相同。
+            correct_answer: A
+            question_score: '10'
         6:
             question_text: 最后一行问号处应该用哪个词？
             code: |-
@@ -854,6 +948,8 @@ levels:
                     ```
                 feedback: '`{print}` 已经存在，我们需要在它之前添加一个单词！'
             hint: '`{if}` 与...一起使用？'
+            question_score: '10'
+            correct_answer: C
         7:
             question_text: 问号的位置应该用哪个词？
             code: |-
@@ -871,6 +967,8 @@ levels:
             -   option: '`{print}`'
                 feedback: 超赞!
             hint: 在`{else}`之后是`{print}`命令
+            question_score: '10'
+            correct_answer: D
         8:
             question_text: 问号处应该填哪个词？
             code: |-
@@ -893,6 +991,8 @@ levels:
             -   option: '`{print}`'
                 feedback: 不，不是这样。
             hint: 变量名是什么？
+            question_score: '10'
+            correct_answer: B
         9:
             question_text: 你应该选择哪扇门逃生？
             code: |-
@@ -912,6 +1012,8 @@ levels:
             -   option: 这是一个陷阱，你永远都会被吃掉！
                 feedback: 幸运的是没有！
             hint: 其中一扇门将保证您的安全。
+            question_score: '10'
+            correct_answer: B
         10:
             question_text: 哪个怪物站在 1 号门后面？
             code: |-
@@ -931,6 +1033,8 @@ levels:
             -   option: 巨型蜘蛛
                 feedback: 不总是...
             hint: 注意最后 3 个词...怪物`{at} {random}`...
+            correct_answer: A
+            question_score: '10'
     6:
         1:
             question_text: 运行这段代码时 海蒂 的输出是什么？
@@ -944,6 +1048,9 @@ levels:
             -   option: '210'
                 feedback: 请注意，这是一个计算。
             hint: '`*` 用作乘号'
+            correct_answer: A
+            code: '{print} 2*10'
+            question_score: '10'
         2:
             question_text: 使用哪个符号进行添加？
             mp_choice_options:
@@ -955,6 +1062,9 @@ levels:
                 feedback: 不是这个
             -   option: '`+`'
                 feedback: 正确!
+            hint: It's the plus sign.
+            correct_answer: D
+            question_score: '10'
         3:
             question_text: 运行这段代码时 海蒂 的输出是什么？
             mp_choice_options:
@@ -967,6 +1077,9 @@ levels:
             -   option: 没什么，海蒂 会给出错误信息。
                 feedback: 不，海蒂 会逐字打印。
             hint: 注意引号！！
+            correct_answer: C
+            code: "{print} '3*10'"
+            question_score: '10'
         4:
             question_text: 金今年10岁了。 海蒂会为她打印什么？
             code: |-
@@ -984,6 +1097,8 @@ levels:
             -   option: 你的幸运数字是... 10
                 feedback: 她的幸运数字是名字乘年龄……
             hint: Kim 有 3 个字母，她今年 10 岁，所以：字母乘以年龄 = 3*10 = 30。
+            correct_answer: C
+            question_score: '10'
         5:
             question_text: 如果5个人在这家餐厅吃饭，总共要付多少钱？
             code: |-
@@ -1000,6 +1115,9 @@ levels:
                 feedback: '* 表示乘法。'
             -   option: 50 美元
                 feedback: Great!
+            question_score: '10'
+            correct_answer: D
+            hint: '`price` `is` `people` `times` 10'
         6:
             question_text: 这家虚拟餐厅一个汉堡要多少钱？
             code: |-
@@ -1018,6 +1136,8 @@ levels:
             -   option: 21 美元
                 feedback: 这是一个汉堡和薯条的价格！
             hint: 注意第四行。
+            correct_answer: A
+            question_score: '10'
         7:
             question_text: 为什么第 7 行显示“价格是价格 + 3”而不是“价格是 3”？
             code: |-
@@ -1040,6 +1160,8 @@ levels:
             -   option: 因为一开始的价格是0美元。
                 feedback: 确实如此，但不是原因
             hint: 价格不应该是3，而是比原来多了3美元
+            question_score: '10'
+            correct_answer: C
         8:
             question_text: 为什么这段代码不正确？
             code: |-
@@ -1057,6 +1179,8 @@ levels:
             -   option: 第2行中的变量不能称为答案，因为它与变量正确答案太相似。
                 feedback: 变量名可以相似，但不能是两个单词......
             hint: 检查变量的名称。
+            question_score: '10'
+            correct_answer: B
         9:
             question_text: 想象一下，你10分热爱足球，今天吃了 2 根香蕉并且洗手了 3 次。 那个愚蠢的算命先生认为你有多聪明？
             code: |-
@@ -1077,6 +1201,9 @@ levels:
                 feedback: 极好！ 你是百分百聪明的！
             -   option: 100%
                 feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            correct_answer: C
+            question_score: '10'
+            hint: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
         10:
             question_text: 哪个论述是对的？
             code: |-
@@ -1092,6 +1219,8 @@ levels:
             -   option: 在处理数字时只能使用 `=` 符号，而不能在处理单词时使用。
                 feedback: 还可以将 `=` 与单词一起使用。
             hint: '`{is}` 和 `=` 都是允许的'
+            correct_answer: B
+            question_score: '10'
     7:
         1:
             question_text: 使用这一关的repeat命令可以一次重复多少行？
@@ -1105,6 +1234,8 @@ levels:
             -   option: 无穷
                 feedback: 在此级别中，一次只能重复一行
             hint: 一次只能重复 1 行
+            correct_answer: B
+            question_score: '10'
         2:
             question_text: 哪个代码是正确的？
             mp_choice_options:
@@ -1129,6 +1260,8 @@ levels:
                     ```
                 feedback: 这是正确的！
             hint: 首先是`{repeat}`命令，然后是`{print}`命令
+            question_score: '10'
+            correct_answer: D
         3:
             question_text: 这段代码是对还是错？
             mp_choice_options:
@@ -1141,6 +1274,9 @@ levels:
             -   option: 错误，缺少`{print}`一词
                 feedback: 对了
             hint: 应该是： `{repeat}` 100 `{times}` `{print}` 'Hello'
+            correct_answer: D
+            code: "{repeat} 100 {times} 'Hello!'"
+            question_score: '10'
         4:
             question_text: 代码中哪个单词是错误的？
             code: |-
@@ -1156,6 +1292,8 @@ levels:
             -   option: '`{times}`'
                 feedback: '`{times}` 拼写正确'
             hint: 我错了，你不能在句子中使用撇号
+            correct_answer: A
+            question_score: '10'
         5:
             question_text: 这段代码是对还是错？
             code: '{repeat} 100 {times} {print} ''海蒂太棒了！'''
@@ -1165,6 +1303,8 @@ levels:
             -   option: 警告
                 feedback: 不是这个
             hint: 代码是正确的！
+            correct_answer: A
+            question_score: '10'
         6:
             question_text: 这段代码的输出是什么？
             code: |-
@@ -1204,6 +1344,8 @@ levels:
                     ```
                 feedback: 遍布整个城镇！ 完美的！
             hint: 只‘round and round'重复了3次。
+            question_score: '10'
+            correct_answer: D
         7:
             question_text: 这段代码的输出是什么？
             mp_choice_options:
@@ -1234,6 +1376,9 @@ levels:
                     摇滚你！
                 feedback: 注意 `{repeat}`命令
             hint: 注意`{repeat}`命令。
+            correct_answer: B
+            question_score: '10'
+            code: "{repeat} 2 {times} {print} 'We will'\n{print} 'ROCK YOU!'"
         8:
             question_text: 哪个海蒂代码会输出这个？
             mp_choice_options:
@@ -1269,6 +1414,9 @@ levels:
                     ```
                 feedback: 这不是正确的顺序.
             hint: 仅当您想连续多次执行同一行时才可以使用`{repeat}`。
+            correct_answer: A
+            code: "Here comes the sun\nDo do do do\nHere comes the sun\nAnd I say\nIts alright"
+            question_score: '10'
         9:
             question_text: 该输出属于什么 海蒂 代码？
             code: |-
@@ -1312,6 +1460,8 @@ levels:
                     ```
                 feedback: 完美
             hint: '''Help！'' 重复3次。'
+            correct_answer: D
+            question_score: '10'
         10:
             question_text: 哪个代码属于这个输出？
             mp_choice_options:
@@ -1344,6 +1494,9 @@ levels:
                     ```
                 feedback: 这顺序不正确。
             hint: 注意句子的顺序。
+            code: "if youre happy and you know it clap your hands\nif youre happy and you know it clap your hands\nif youre happy and you know it and you really want to show it\nif youre happy and you know it clap your hands"
+            correct_answer: B
+            question_score: '10'
     8:
         1:
             question_text: 这段代码会产生什么输出？
@@ -1370,6 +1523,8 @@ levels:
             -   option: "你好 \n你好 \n我是海蒂！\n我是海蒂！"
                 feedback: 所有内容都打印两次
             hint: 这两行都重复两次。
+            correct_answer: C
+            question_score: '10'
         2:
             question_text: 这段代码有什么问题？
             code: |-
@@ -1385,6 +1540,8 @@ levels:
             -   option: 第二行开头需要缩进四个空格。
                 feedback: 正确！
             hint: 第二行缺了什么？
+            correct_answer: D
+            question_score: '10'
         3:
             question_text: 运行该程序时会产生什么输出？
             code: |-
@@ -1417,6 +1574,8 @@ levels:
                     Baby shark
                 feedback: 什么是重复的，什么不是？
             hint: 什么是重复的，什么不是？
+            correct_answer: C
+            question_score: '10'
         4:
             question_text: 哪个输出是正确的？
             code: |-
@@ -1434,6 +1593,8 @@ levels:
             -   option: "孩子们去了：\n耶！ \n耶！  \n我们要去度假了!"
                 feedback: 最后一行也重复。
             hint: '`{repeat}`命令下的块重复两次。'
+            correct_answer: B
+            question_score: '10'
         5:
             question_text: 这段代码有什么问题？
             code: |-
@@ -1450,6 +1611,8 @@ levels:
             -   option: '`{ask}` 不再是一个命令'
                 feedback: 这不是真的
             hint: 缩进有问题
+            correct_answer: A
+            question_score: '10'
         7:
             question_text: 这段代码哪里错了？
             code: |-
@@ -1471,6 +1634,8 @@ levels:
             -   option: 第一个`{if}`命令的缩进错了。
                 feedback: 是的。
             hint: 注意观察缩进。
+            correct_answer: D
+            question_score: '10'
         8:
             question_text: 哪段代码中的缩进正确嘛？
             mp_choice_options:
@@ -1515,6 +1680,8 @@ levels:
                     ```
                 feedback: 您错了！
             hint: 如果这个人是对的，会发生什么？ 还有什么？
+            correct_answer: C
+            question_score: '10'
         9:
             question_text: 此代码中的哪一行应以 4 个空格开头？
             code: |-
@@ -1533,6 +1700,8 @@ levels:
             -   option: 第 3 和 第5行
                 feedback: 干的好!
             hint: '`{if}` 或 `{else}` 命令后面的行应以 4 个空格开头。'
+            correct_answer: D
+            question_score: '10'
         10:
             question_text: 哪个论述是对的？
             code: |-
@@ -1549,6 +1718,23 @@ levels:
             -   option: 第 3行应以 4 个空格开头
                 feedback: 你是对的！
             hint: 只有一行以 4 个空格开头，但是哪一行...？
+            question_score: '10'
+            correct_answer: D
+        6:
+            code: "{print} 'Welcome to restaurant Hedy'\n{repeat} 2 {times}\n    food {is} {ask} 'What do you want to eat?'\n    {print} food"
+            mp_choice_options:
+            -   feedback: There is no repetition in this answer.
+                option: "Welcome to restaurant Hedy\nPancakes"
+            -   option: "Welcome to restaurant Hedy\nWelcome to restaurant Hedy\nPancakes\nPancakes"
+                feedback: This answer also repeats the welcome message
+            -   option: "Welcome to restaurant Hedy\nWhat do you want to eat?\nWhat do you want to eat?\nPancakes\nPancakes"
+                feedback: Almost! But look at the question, it is not repeated.
+            -   feedback: Well done!
+                option: "Welcome to restaurant Hedy\nPancakes\nPancakes"
+            question_score: '10'
+            correct_answer: D
+            question_text: What will be the output of this code when we enter pancakes?
+            hint: The first sentence and question will not be repeated
     9:
         1:
             question_text: 这段代码有什么问题？
@@ -1572,6 +1758,8 @@ levels:
             -   option: 最后一个`{if}`命令中的缩进是错误的。
                 feedback: 这不是缩进。
             hint: 所有缩进均正确完成。
+            question_score: '10'
+            correct_answer: A
         2:
             question_text: 输入正确的密码后会显示什么？
             code: |-
@@ -1611,6 +1799,8 @@ levels:
                     ```
                 feedback: 正确！
             hint: '`{repeat}`命令下的所有东西都会重复两次。'
+            correct_answer: D
+            question_score: '10'
         3:
             question_text: 您应该选择哪个案例来赢得百万美元？
             code: |-
@@ -1638,6 +1828,8 @@ levels:
             -   option: 情况2,打开
                 feedback: 干得好！ 你赢了！
             hint: 遵循正确的道路
+            correct_answer: D
+            question_score: '10'
         4:
             question_text: 哪个论述是对的？
             code: |-
@@ -1660,6 +1852,8 @@ levels:
             -   option: 鞋号为 38 的灰姑娘得到的输出是“我会继续寻找”
                 feedback: 不，她得到了“❤️❤️❤️”
             hint: 无论你名字是什么，如果你的鞋码为 40，你都会收到“我会继续寻找”的消息。
+            correct_answer: C
+            question_score: '10'
         5:
             question_text: 哪个代码产生了这个输出？
             output: |-
@@ -1701,6 +1895,8 @@ levels:
                     ```
                 feedback: 此代码中有 2 个`{repeat}`命令。
             hint: 观察缩进
+            correct_answer: C
+            question_score: '10'
         6:
             question_text: 在哪些命令之后应该使用缩进（下一行以 4 个空格开始）？
             mp_choice_options:
@@ -1713,6 +1909,8 @@ levels:
             -   option: '`{if}` `{else}` `{repeat}` `{print}`'
                 feedback: 不使用`{print}`
             hint: 缩进发生在某些命令下方的行上
+            correct_answer: C
+            question_score: '10'
         7:
             question_text: 如果你点了一个中等大小的比萨和一杯可乐，你会得到5元的折扣。<br>但这段代码中存在一个错误！如何调试这段代码？
             code: |-
@@ -1754,6 +1952,8 @@ levels:
                     ```
                 feedback: 几乎正确。再看最后一行
             hint: 在每个`{if}`命令之后，下面的行应该缩进
+            correct_answer: A
+            question_score: '10'
         8:
             question_text: 这段代码有什么问题？
             code: "年龄={ask} ‘生日快乐!你多大了？’\n唱歌={ask}‘你想让我们唱歌吗？’\n\t{if} 唱歌{is} 是\n\t\t{repeat}岁{times}\n\t\t\t{print}‘加油’"
@@ -1767,6 +1967,8 @@ levels:
             -   option: 代码必须始终以第一行中的`{print}`命令开头
                 feedback: 那不是真的。
             hint: 这次缩进是正确的
+            correct_answer: B
+            question_score: '10'
         9:
             question_text: 在另一个`{if}`命令中可以放置多少个`{if}`命令？
             mp_choice_options:
@@ -1779,6 +1981,8 @@ levels:
             -   option: 无限，只要你继续正确使用缩进
                 feedback: 这是真的
             hint: 您可以将`{if}`命令放在`{if}`命令中。
+            question_score: '10'
+            correct_answer: D
         10:
             question_text: 哪种说法是正确的？
             code: |-
@@ -1795,6 +1999,8 @@ levels:
             -   option: 第 2 行应以 4 个空格开头，第 3 行应以 8 开头
                 feedback: 你是对的!
             hint: 第一行不以任何空格开头
+            question_score: '10'
+            correct_answer: D
     10:
         1:
             question_text: 如果我们想打印每份贺词，我们需要在 `_` 上填写什么？
@@ -1820,6 +2026,9 @@ levels:
                     ```
                 feedback: 差不多了!
             hint: 恭维列表中的每条恭维都是`{for}`...
+            code: "compliments = perfect, great job, amazing\n_\n    {print} compliment"
+            question_score: '10'
+            correct_answer: B
         2:
             question_text: 哪个输出是正确的?
             code: |-
@@ -1839,6 +2048,8 @@ levels:
                     我喜欢煎饼
                 feedback: Great!
             hint: 第 2 行表示餐食列表中的每餐。 所以每顿饭都会被打印出来。
+            correct_answer: D
+            question_score: '10'
         3:
             question_text: 哪个输出是正确的?
             code: |-
@@ -1859,6 +2070,8 @@ levels:
             -   option: 你还不知道。 因为{at}{random}选择其中一种动物。
                 feedback: 第 2 行{for}表示动物列表中的每个动物。 所以每只动物都被{print}了。
             hint: 第 2 行{for}表示动物列表中的每个动物。 所以每只动物都被打印了
+            question_score: '10'
+            correct_answer: C
         4:
             question_text: 这段代码有什么问题？
             code: |-
@@ -1875,6 +2088,8 @@ levels:
             -   option: 第 2 行应显示杂货而不是商品
                 feedback: 不，不是的。
             hint: 第 2 行显示杂货列表中的每一项  `{for}`
+            correct_answer: C
+            question_score: '10'
         5:
             question_text: 这些数字骰子的 `_` 上应该写什么字？
             mp_choice_options:
@@ -1887,6 +2102,9 @@ levels:
             -   option: 骰子
                 feedback: 查看变量的名称。
             hint: 海蒂需要选择一个数字 `{at} {random}`
+            question_score: '10'
+            code: "{print} 'Welcome to the digital dice!'\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\n{for} player {in} players\n    {print} player ' throws ' _ {at} {random}"
+            correct_answer: B
         6:
             question_text: 当您运行代码时，以下哪个答案是可能的结果？
             code: |-
@@ -1918,6 +2136,8 @@ levels:
                     ```
                 feedback: 惊人!
             hint: 每个玩家都会选择一个选项。 列表中第一个的玩家将先进行。
+            correct_answer: D
+            question_score: '10'
         7:
             question_text: 代码中的`_`应该是哪一行来决定这些人晚餐吃什么?
             code: |-
@@ -1947,6 +2167,8 @@ levels:
                     ```
                 feedback: 每个name都应该被告知他们晚餐吃什么。
             hint: 每个name都应该被告知他们晚餐吃什么。
+            correct_answer: A
+            question_score: '10'
         8:
             question_text: 这段代码中的`_`应该写什么，来决定你得到哪种颜色的衬衫？
             mp_choice_options:
@@ -1971,6 +2193,9 @@ levels:
                     ```
                 feedback: 没有名为 people 的变量..
             hint: 注意引号和变量名称
+            correct_answer: B
+            question_score: '10'
+            code: "names = Donna, Tommy, Ben\ncolors = blue, red, purple\n{for} name {in} names\n    {print} _"
         9:
             question_text: 当你运行程序时海蒂会问你的第一个问题是什么？
             code: |-
@@ -1990,6 +2215,8 @@ levels:
             -   option: 你不知道这一点。 海蒂 将选择`{at} {random}`.
                 feedback: 此代码中没有`{at} {random}`...
             hint: 从两个列表中选择第一个选项。
+            question_score: '10'
+            correct_answer: A
         10:
             question_text: 这段代码的真实情况是什么？
             code: |-
@@ -2007,6 +2234,8 @@ levels:
             -   option: 有人可能赢得两个奖品
                 feedback: 你懂了！
             hint: 尝试想象这段代码的输出。
+            question_score: '10'
+            correct_answer: D
     11:
         1:
             question_text: 空格处应该填什么？
@@ -2020,6 +2249,9 @@ levels:
             -   option: '`{for}`'
                 feedback: 不是
             hint: 你学了什么？
+            code: "{for} i {in} _ 1 {to} 10\n    {print} i"
+            correct_answer: B
+            question_score: '10'
         2:
             question_text: 这段代码会输出什么？
             mp_choice_options:
@@ -2046,6 +2278,9 @@ levels:
                     ```
                 feedback: 不是这个
             hint: 这些数字会如何显示在屏幕上？
+            code: "{for} i {in} {range} 1 {to} 3\n    {print} i"
+            question_score: '10'
+            correct_answer: A
         3:
             question_text: 哪段代码可以输出这个？
             output: |-
@@ -2085,6 +2320,8 @@ levels:
                     ```
                 feedback: i 是一个变量，不应该加引号
             hint: 先输出所有数字，再输出那句话
+            question_score: '10'
+            correct_answer: A
         4:
             question_text: 哪段代码可以输出这个？
             mp_choice_options:
@@ -2113,6 +2350,9 @@ levels:
                     ```
                 feedback: 对！
             hint: 这里需要用到计算…
+            question_score: '10'
+            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
+            correct_answer: D
         5:
             question_text: 这段代码哪里错了？
             mp_choice_options:
@@ -2125,6 +2365,9 @@ levels:
             -   option: 第二行开头需要缩进
                 feedback: 太棒了！
             hint: 缩进有地方不对
+            code: "{for} i {in} {range} 1 {to} 10\n{print} i"
+            correct_answer: D
+            question_score: '10'
         6:
             question_text: 当运行代码时，“Hello”一词在屏幕上出现了多少次？
             mp_choice_options:
@@ -2137,6 +2380,9 @@ levels:
             -   option: 永不
                 feedback: 'No'
             hint: 0也算。 所以 0,1,2 是 3 倍。
+            question_score: '10'
+            correct_answer: C
+            code: "{for} i {in} {range} 0 {to} 2\n    {print} 'Hello'"
         7:
             question_text: 空白处应该填什么？
             code: "{print} '欢迎来到海蒂快餐店'\npeople= {ask}'今晚有多少人会在这里吃饭？'\n_\n\tfood= {ask}'你想点些什么？'\n\t{print}food"
@@ -2162,6 +2408,8 @@ levels:
                     ```
                 feedback: 这一份订单太多了！
             hint: 使用变量 'people'
+            question_score: '10'
+            correct_answer: C
         8:
             question_text: 这段代码的输出是什么？
             mp_choice_options:
@@ -2187,6 +2435,9 @@ levels:
             -   option: '''hi''这个词会连续出现 25 次。'
                 feedback: 不，它只会出现 3 次。
             hint: 它并没说 `{print}` i
+            code: "{for} i {in} {range} 23 {to} 25\n    {print} 'hi'"
+            correct_answer: C
+            question_score: '10'
         9:
             question_text: 海蒂 唱了多少遍 Hip Hip Hooray？
             code: |-
@@ -2203,6 +2454,8 @@ levels:
             -   option: 这取决于你的年龄
                 feedback: 这是正确的！
             hint: '`{for}` 我 `{in}` `{range}` 1 `{to}` 年龄'
+            question_score: '10'
+            correct_answer: D
         10:
             question_text: 哪个代码属于这个输出？
             output: |-
@@ -2240,6 +2493,8 @@ levels:
                     ```
                 feedback: '`{range}` 0 `{to}` 3 是 4 倍.'
             hint: 注意缩进
+            question_score: '10'
+            correct_answer: B
     12:
         1:
             question_text: 哪个输出是正确的？
@@ -2260,6 +2515,8 @@ levels:
                     5
                 feedback: 干的好!
             hint: 两行都打印出来了！
+            correct_answer: D
+            question_score: '10'
         2:
             question_text: 这些代码中哪一个是正确的？
             mp_choice_options:
@@ -2288,6 +2545,8 @@ levels:
                     ````
                 feedback: 所有不同的口味值都应该用引号引起来。
             hint: 每个代码中第二行都是一样的，注意第一行
+            question_score: '10'
+            correct_answer: C
         3:
             question_text: 这段代码有什么问题？
             code: |-
@@ -2303,6 +2562,8 @@ levels:
             -   option: Nothing is wrong.
                 feedback: 这不是真的
             hint: 引号使用正确
+            correct_answer: A
+            question_score: '10'
         4:
             question_text: 哪些行需要引号才能使代码正常工作？
             code: |-
@@ -2320,6 +2581,8 @@ levels:
             -   option: All of the lines
                 feedback: 完美!
             hint: 第3行也需要引号吗？
+            correct_answer: D
+            question_score: '10'
         5:
             question_text: 当 007 输入正确的密码时，他们会得到什么输出？
             code: |-
@@ -2344,6 +2607,8 @@ levels:
             -   option: 明天10点去机场
                 feedback: 特工不会在这里抓到任何坏人
             hint: 正确的密码是 TOPSECRET
+            correct_answer: B
+            question_score: '10'
         6:
             question_text: 应该填写哪一行,在`_`?
             code: "{print}‘欢迎来到麦克海蒂！’\norder={ask}‘你想吃汉堡包还是薯条？’\n {if}订单=‘汉堡包’\n\t价格=12\n{if} 订单=‘薯条’\n\t价格=4\n饮料={ask}‘你想用2美元买一杯饮料吗？’\n{if}饮料=‘是的’\n...._\n{print}‘请付’price‘元， 谢谢！’"
@@ -2369,6 +2634,8 @@ levels:
                     ```
                 feedback: 差不多了！
             hint: 如果你只点薯条和饮料怎么办？
+            question_score: '10'
+            correct_answer: C
         7:
             question_text: 素食主义者会得到什么输出？
             code: |-
@@ -2407,6 +2674,8 @@ levels:
                     饼干
                 feedback: 差不多了，不过看一下列表中零食的顺序
             hint: 当您回答“素食主义者”时，哪些项目将从列表中删除？
+            correct_answer: A
+            question_score: '10'
         8:
             question_text: 哪些代码用于创建这个输出?
             mp_choice_options:
@@ -2431,6 +2700,9 @@ levels:
                     ```
                 feedback: 不
             hint: 7 被2除是 3.5
+            code: '3.5'
+            correct_answer: B
+            question_score: '10'
         9:
             question_text: 第1行`_`?处应该填写哪个代码？
             code: |-
@@ -2458,6 +2730,8 @@ levels:
                     ```
                 feedback: 你什么都没有得到
             hint: 列表中的项目应该用引号括起来
+            correct_answer: C
+            question_score: '10'
         10:
             question_text: 在`_`处填上哪一行代码，可以来完成这首歌?
             code: "动作们=‘拍手’， ‘跺脚’，‘喊万岁！’   \n_\n\t{for} i{in} {range}0{to} 1\n\t\t{print} ‘如果你很高兴，你也知道’\n\t\t{print} 动作\n\t{print} ‘如果你很高兴，你也知道，而且你真的想表现出来’\n\t{print} ‘如果你很高兴，你也知道’\n\t{print} 动作"
@@ -2483,6 +2757,8 @@ levels:
                     ```
                 feedback: 这是一个困难的问题! 列表上的所有动作都必须出现在歌曲里。
             hint: 这是一个困难的问题! 列表上的所有动作都必须出现在歌曲里。
+            question_score: '10'
+            correct_answer: B
     13:
         1:
             question_text: 在???处应该填上什么代码 ?
@@ -2509,6 +2785,8 @@ levels:
                     ```
                 feedback: 海蒂旨在两个答案都是 是 的时候唱歌
             hint: 海蒂只在你想听歌且是你生日那天的时候为你歌唱
+            correct_answer: C
+            question_score: '10'
         2:
             question_text: 在???的地方你遗漏掉了什么命令?
             code: |-
@@ -2526,6 +2804,8 @@ levels:
             -   option: '`{print}`'
                 feedback: 不
             hint: 素食主义者和穆斯林都不能吃香肠卷。
+            question_score: '10'
+            correct_answer: B
         3:
             question_text: 哪个输出是给没有折扣码的成员?
             code: |-
@@ -2545,6 +2825,8 @@ levels:
             -   option: 这里没有办法知道
                 feedback: 来! 仔细阅读这个问题
             hint: 注意第·3行的 `{or}` 命令
+            correct_answer: A
+            question_score: '10'
         4:
             question_text: 在石头剪刀布游戏中，哪一行代码应该紧随这一行?
             code: '{if} 电脑的选择 {is} ''石头'' {and} 你的选择 {is} ''布'''
@@ -2570,6 +2852,8 @@ levels:
                     ```
                 feedback: 再试一次！
             hint: 布包住石头
+            correct_answer: A
+            question_score: '10'
         5:
             question_text: 关于代码的说那，哪个是对的？
             code: |-
@@ -2585,6 +2869,8 @@ levels:
             -   option: 所有不叫灰姑娘，没有38号鞋的人都是王子的真爱
                 feedback: 王子比这更挑剔一点!
             hint: 两个表述必须都为真
+            question_score: '10'
+            correct_answer: C
         6:
             question_text: 关于这段代码的哪个陈述是正确的?
             code: |-
@@ -2609,6 +2895,8 @@ levels:
             -   option: Sophie是个戴眼镜的女孩
                 feedback: 干得漂亮!
             hint: 好好看看!或者你需要眼镜?
+            question_score: '10'
+            correct_answer: D
         7:
             question_text: 哪个说法是错的?
             code: |-
@@ -2634,6 +2922,8 @@ levels:
             -   option: 黄色的鸟今早喂过了
                 feedback: 这是真的
             hint: 仔细阅读最后4行
+            question_score: '10'
+            correct_answer: C
         8:
             question_text: 如果你点了爆米花但没有饮料，你会怎样?
             code: |-
@@ -2671,6 +2961,8 @@ levels:
                     享受电影吧
                 feedback: 你需要为你的爆米花付钱!
             hint: 爆米花 = 是 并且 饮料 = 不
+            question_score: '10'
+            correct_answer: B
         9:
             question_text: 这个代码哪里出问题了?
             code: |-
@@ -2710,6 +3002,8 @@ levels:
                     ```
                 feedback: 这不是我点的!
             hint: 第3行有一个错误
+            question_score: '10'
+            correct_answer: A
         10:
             question_text: 哪个命令需要出现在第8行???的地方？
             code: "{print} '欢迎来到本超市的商品查找机'\n项目 = {ask} '你来找什么商品?'\n烘焙 = 'bread', 'buns', 'muffins'\n饮料= 'soda', 'water', 'lemonade'\n零食= 'chips', 'nuts', 'dips'\n冷冻= 'fries', 'icecream', 'pizza'\n水果= 'bananas', 'apples', 'oranges'\n{if} 项目 {in} 零食??? 项目 {in} 饮料\n    {print} '在第三通道'\n{if} 项目 {in} 烘焙 {or} 项目  {in} 烘焙 \n    {print} '这件东西放在商店的后面'\n{if} 项目  {in} 水果\n    {print} '水果在收银台附近出售'"
@@ -2723,6 +3017,8 @@ levels:
             -   option: '`{if}`'
                 feedback: 不
             hint: 这个东西要么在零食清单上，要么在饮料清单上
+            question_score: '10'
+            correct_answer: B
     14:
         1:
             question_text: 空白处应该用哪个符号?
@@ -2736,6 +3032,9 @@ levels:
             -   option: '`=`'
                 feedback: 对!
             hint: 我们没有比较任何东西，只是询问一个姓名。
+            code: "name _ {ask} 'Who are you?'\n{if} name == 'Hedy'\n    {print} 'Me too!'"
+            question_score: '10'
+            correct_answer: D
         2:
             question_text: 下面哪个代码使用了正确的 = 或 == 符号?
             mp_choice_options:
@@ -2748,6 +3047,8 @@ levels:
             -   option: 答案 == {ask} '你做得怎么样?'
                 feedback: 不
             hint: 当你比较两个回答时，你应该使用==
+            correct_answer: C
+            question_score: '10'
         3:
             question_text: 这两个空格上应该填哪些符号?
             mp_choice_options:
@@ -2760,6 +3061,9 @@ levels:
             -   option: '`+` and `==`'
             hint: 这个俱乐部可容纳130人
             feedback: 不是这样的
+            question_score: '10'
+            code: "guests = {ask} 'How many people are at the party?'\n{if} guests _ 130\n    {print} 'You can come in!'\n{if} guests _ 130\n    {print} 'Im sorry, the club is full. '\n    {print} 'You have to wait for a guest to leave'"
+            correct_answer: C
         4:
             question_text: 这段代码有什么问题?
             code: |-
@@ -2780,6 +3084,8 @@ levels:
             -   option: 在第4行 <= 应该被替换为 >=
                 feedback: 不是这样的
             hint: 符号是正确的
+            correct_answer: B
+            question_score: '10'
         5:
             code: |-
                 age = {ask} '你多大了?'
@@ -2798,6 +3104,9 @@ levels:
             -   option: '`<= 12`'
                 feedback: 这些孩子年龄太小
             hint: '> 意思是大于'
+            question_text: Which symbol should be filled in on the blanks if the movie is suitable for kids for the age of 12 and up?
+            question_score: '10'
+            correct_answer: B
         6:
             question_text: 在这个烦人的游戏停止之前，你要说多少次你很烦?
             code: |-
@@ -2817,6 +3126,8 @@ levels:
             -   option: 2 次
                 feedback: 对了
             hint: '!= 意思是 ''不等于'''
+            question_score: '10'
+            correct_answer: D
         7:
             question_text: 这三个空格应该填什么?
             mp_choice_options:
@@ -2829,6 +3140,9 @@ levels:
             -   option: '`''Lower!''` 和 `''You win!''` 和 `''Higher!''`'
                 feedback: 这不太对。
             hint: 最后应该说你赢了。
+            question_score: '10'
+            code: "{print} 'Guess which number'\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber = numbers {at} {random}\ngame = 'on'\n{for} i {in} {range} 1 {to} 10\n    {if} game == 'on'\n        guess = {ask} 'Which number do you think it is?'\n        {if} guess < number\n            {print} _\n        {if} guess > number\n            {print} _\n        {if} guess == number\n            {print} _\n            game = 'over'"
+            correct_answer: B
         8:
             question_text: 关于过山车，哪个说法是正确的?
             mp_choice_options:
@@ -2840,6 +3154,10 @@ levels:
                 feedback: '> means greater than'
             -   option: 坐过山车没有长度限制
                 feedback: 这儿。
+            correct_answer: A
+            hint: '> means greater than'
+            code: "length = {ask} 'Please fill in your length in cm'\n{if} length < 120\n    {print} 'Sorry, you cannot go on this roller coaster.'\n{else}\n    {print} 'Enjoy the ride'"
+            question_score: '10'
         9:
             question_text: 根据这个手环，吃多少块巧克力会让你胃痛?
             code: |-
@@ -2860,6 +3178,8 @@ levels:
             -   option: 9或更多
                 feedback: 棒!
             hint: '> 8 意味着大于8'
+            question_score: '10'
+            correct_answer: D
         10:
             question_text: 空格里应该填什么?
             mp_choice_options:
@@ -2872,6 +3192,9 @@ levels:
             -   option: '''这是个平局'''
                 feedback: 不，不是的，一个玩家的分数更高
             hint: 你得最多的分数就能赢得比赛
+            correct_answer: B
+            code: "{print} 'Whoever gets the most points wins!'\n{if} points_player_1 < points_player_2\n    {print} _"
+            question_score: '10'
     15:
         1:
             question_text: 空格上应该用哪个符号?提示:你必须一直猜，直到猜对为止。
@@ -2890,6 +3213,8 @@ levels:
             -   option: '`=`'
                 feedback: 不是这样的
             hint: 继续猜，直到你说阿姆斯特丹
+            question_score: '10'
+            correct_answer: C
         2:
             question_text: 这些代码中哪一个使用了正确的符号?
             mp_choice_options:
@@ -2914,6 +3239,8 @@ levels:
                     ```
                 feedback: 缺少一个引号
             hint: 当你比较两个答案时，你应该使用==
+            question_score: '10'
+            correct_answer: C
         3:
             question_text: 这两个空白处应该填哪个命令?
             code: |-
@@ -2929,6 +3256,8 @@ levels:
             -   option: '`{range}`'
                 feedback: 不是这样的
             hint: 只要你不满17岁，你就不能进酒吧
+            question_score: '10'
+            correct_answer: B
         4:
             question_text: 这段代码有什么问题?
             code: |-
@@ -2951,6 +3280,8 @@ levels:
             -   option: 在第5行中应该使用`==`而不是`!=`
                 feedback: 你是正确的
             hint: 第5行有问题
+            question_score: '10'
+            correct_answer: D
         5:
             question_text: 什么应该放在空白处，使这个程序正确工作?
             code: |-
@@ -2984,6 +3315,8 @@ levels:
                     ```
                 feedback: 程序将开始倒计时
             hint: 每次湿润应该少一些
+            question_score: '10'
+            correct_answer: C
         6:
             question_text: 这段代码有什么问题?
             code: |-
@@ -3002,6 +3335,8 @@ levels:
             -   option: 第2行应该以较少的缩进开始
                 feedback: 这是正确的
             hint: 仔细察看这些缩进
+            correct_answer: D
+            question_score: '10'
         7:
             question_text: 这个程序应该如何改变才能正常工作?
             mp_choice_options:
@@ -3014,6 +3349,9 @@ levels:
             -   option: '... 将第4个 `{if}` 换成 `{while}`'
                 feedback: 这不是很正确。
             hint: 最后的时候应该说你赢了。
+            correct_answer: A
+            question_score: '10'
+            code: "{print} 'Guess which number'\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber = numbers {at} {random}\ngame = 'on'\n{if} game == 'on'\n    guess = {ask} 'Which number do you think it is?'\n    {if} guess < number\n        {print} _\n    {if} guess > number\n        {print} _\n    {if} guess == number\n        {print} _\n        game = 'over'"
         8:
             question_text: 关于这个自动厕所系统，哪个说法是正确的?
             mp_choice_options:
@@ -3026,6 +3364,9 @@ levels:
             -   option: 灯会一直亮着。
                 feedback: 这是不对的。
             hint: 当厕所被占用时，{while}命令之后的块继续运行。
+            question_score: '10'
+            code: "{while} toilet == 'occupied'\n    lights = 'on'\n    air_freshener_sprays = 'yes'\n    {sleep} 60\nlights = 'off'\nair_freshener_sprays = 'no'"
+            correct_answer: B
         9:
             question_text: 如果你今天摄入了1600卡路里，节食应用程序会怎么说?
             code: |-
@@ -3046,6 +3387,8 @@ levels:
             -   option: 你今天吃得够多了
                 feedback: 不
             hint: 1600在1000和2000之间
+            question_score: '10'
+            correct_answer: C
         10:
             question_text: 空格里应该填什么?提示:得分最多的玩家处于领先地位。
             mp_choice_options:
@@ -3070,6 +3413,9 @@ levels:
                     ```
                 feedback: 你应该填写名字，而不是数字
             hint: 你得最多的分数就能赢得比赛。你的名字应该出现在屏幕上
+            question_score: '10'
+            code: "name_player_1 = {ask} 'Name player 1:'\nname_player_2 = {ask} 'Name player 2:'\n{while} points_player_1 > points_player_2\n    {print} _ ' is in the lead right now!'"
+            correct_answer: A
     16:
         1:
             question_text: 在打印随机零食的空白处应该填写哪个命令?
@@ -3086,6 +3432,8 @@ levels:
             -   option: '`snacks[{at} {random}]`'
                 feedback: 我们不再需要 `at`
             hint: 我们不再使用 {at}
+            question_score: '10'
+            correct_answer: C
         2:
             question_text: 如果你想列一个列表，哪些家务，是由谁做的，你应该在空白处填什么?
             mp_choice_options:
@@ -3110,6 +3458,9 @@ levels:
                     ```
                 feedback: 太棒了!
             hint: '`i`告诉我们是列表中的哪一项。所以有朋友1做家务1等等。'
+            correct_answer: D
+            question_score: '10'
+            code: "friends = ['Wesley', 'Eric', 'Kaylee']\nchores = ['the cooking', 'the cleaning', 'nothing']\n{for} i {in} {range} 1 {to} 3\n    {print}  _"
         3:
             question_text: 这个程序可能的输出是什么?
             mp_choice_options:
@@ -3142,6 +3493,9 @@ levels:
                     ```
                 feedback: 不是这样的
             hint: 这不是随机的...
+            correct_answer: A
+            code: "friends = ['Wesley', 'Eric', 'Kaylee']\nchore = ['the cooking', 'the cleaning', 'nothing']\n{for} i {in} {range} 1 {to} 3\n    {print}  friends[i] has to do chores[i]"
+            question_score: '10'
         4:
             question_text: 这段代码有什么问题?
             code: |-
@@ -3160,6 +3514,8 @@ levels:
             -   option: 第3行的 {in} 应该去掉
                 feedback: 不是这样的
             hint: 第4行没有问题
+            correct_answer: B
+            question_score: '10'
         5:
             question_text: 空格里应该填哪一行?
             code: |-
@@ -3189,6 +3545,8 @@ levels:
                     ```
                 feedback: 干得漂亮!
             hint: 查看第1行，了解括号和引号的正确使用。
+            question_score: '10'
+            correct_answer: D
         6:
             question_text: 哪个说法是正确的?
             code: |-
@@ -3206,6 +3564,8 @@ levels:
             -   option: 这段代码不能工作。它会报错。
                 feedback: 代码是正确的。
             hint: 代码没有错误。
+            correct_answer: C
+            question_score: '10'
         7:
             question_text: 这段代码有什么问题？
             code: |-
@@ -3223,6 +3583,8 @@ levels:
             -   option: 第4行需要更多的引号。
                 feedback: 太棒了!
             hint: 在使用引号时犯了一个错误。
+            correct_answer: D
+            question_score: '10'
         8:
             question_text: 哪些代码属于这个输出?
             code: |-
@@ -3263,6 +3625,8 @@ levels:
                     ```
                 feedback: 这无法工作!
             hint: 如果你仔细看第一行，你会发现只有前两个答案可能是正确的。
+            correct_answer: B
+            question_score: '10'
         9:
             question_text: 这段代码的可能输出是什么?
             code: |-
@@ -3294,6 +3658,8 @@ levels:
                     ```
                 feedback: 它仅仅重复2次
             hint: Range 0 to 1 是2次
+            question_score: '10'
+            correct_answer: A
         10:
             question_text: 哪3行可以正确地完成这段代码?
             code: |-
@@ -3333,6 +3699,8 @@ levels:
                     ```
                 feedback: 太妙了!
             hint: 你需要使用 {remove} 命令
+            correct_answer: D
+            question_score: '10'
     17:
         1:
             question_text: 这段代码的输出是什么?
@@ -3366,6 +3734,8 @@ levels:
                     ```
                 feedback: 不要让字母循环。
             hint: 循环你的列表.
+            question_score: '10'
+            correct_answer: B
         2:
             question_text: 这段代码有什么问题?
             mp_choice_options:
@@ -3378,6 +3748,9 @@ levels:
             -   option: '`noleap_year`在两种情况下必须相同。'
                 feedback: 对!
             hint: 仔细阅读代码。
+            correct_answer: D
+            question_score: '10'
+            code: "seconds_minute = 60\nminute_hour = 60\nhour_day = 24\nleap_year = 366\nno_leap_year = 365\nyears = ask 'what year is it?'\n{if} years = 2024:\n print seconds_minute * minute_hour * hour_day * leap_year\n{else}:\n print seconds_minute * minute_hour * hour_day * noleap_year"
         3:
             question_text: 这段代码将打印多少只刺猬?
             mp_choice_options:
@@ -3414,6 +3787,9 @@ levels:
                     ```
                 feedback: 不是这样的。
             hint: 想想你需要重复多少次。
+            code: "{for} x in range 1 to 3:\n  {for} y in range 1 to 2:\n    {print} 🦔"
+            correct_answer: C
+            question_score: '10'
         4:
             question_text: 这段代码有什么问题?
             code: |-
@@ -3438,6 +3814,8 @@ levels:
             -   option: 在最后一行的`{elif}` 应该被替换为 `{else}`
                 feedback: 棒!
             hint: 想想 `{if}`, `{elif}`, `{else}`.
+            correct_answer: D
+            question_score: '10'
         5:
             question_text: 这段代码的输出是什么?
             code: |-
@@ -3501,6 +3879,8 @@ levels:
                     ```
                 feedback: 不是这样的。
             hint: 考虑你需要重复多少次，以及if和elif的值。
+            correct_answer: A
+            question_score: '10'
         6:
             question_text: 这段代码有什么问题?
             code: |-
@@ -3523,6 +3903,8 @@ levels:
             -   option: 最后一行有一个缩进错误。
                 feedback: 了不起!
             hint: 这里有个错误……
+            question_score: '10'
+            correct_answer: D
         7:
             question_text: 下面哪个代码会在屏幕上打印五次“结果是3”?
             mp_choice_options:
@@ -3559,6 +3941,8 @@ levels:
                     ```
                 feedback: 不是这样的。
             hint: 想想数学符号。
+            correct_answer: C
+            question_score: '10'
         8:
             question_text: 代码有什么问题?
             code: |-
@@ -3581,6 +3965,8 @@ levels:
             -   option: 最后一行有一个缩进错误。
                 feedback: 不.
             hint: 仔细阅读代码.
+            correct_answer: C
+            question_score: '10'
         9:
             question_text: 下面哪个代码给出了这个输出?
             code: |-
@@ -3603,6 +3989,8 @@ levels:
             -   option: "```\n {for} number in range -5 to 3:\n     {if} number < 0: \n      {print} number ' 是正数'\n     {elif} number <=0: \n     {print} number ' 是负数' \n     {else}: \n     {print} number ' 是0'\n```"
                 feedback: 不是这样的。
             hint: 仔细阅读代码。
+            correct_answer: C
+            question_score: '10'
         10:
             question_text: 这段代码有什么问题?
             code: |-
@@ -3625,3 +4013,5 @@ levels:
             -   option: 最后一行有一个缩进错误。
                 feedback: 不.
             hint: 仔细阅读代码.
+            question_score: '10'
+            correct_answer: C
