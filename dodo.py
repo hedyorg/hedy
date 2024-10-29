@@ -25,7 +25,7 @@ from os import path
 from glob import glob
 import sys
 import platform
-
+from config import config as CONFIG
 from doit.tools import LongRunning
 
 if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
@@ -336,7 +336,7 @@ def task_devserver():
             LongRunning([python3, 'app.py'], shell=False, env=dict(
                 os.environ,
                 # These are required to make some local features work.
-                BASE_URL="http://localhost:8080/",
+                BASE_URL=f"http://{CONFIG['domain_name']}",
                 ADMIN_USER="admin",))
         ],
         verbosity=2,  # show everything live

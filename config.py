@@ -2,13 +2,16 @@ import os
 import socket
 
 app_name = os.getenv('HEROKU_APP_NAME', socket.gethostname())
-dyno = os.getenv('DYNO')
+dyno = os.getenv('DYNO')  # if this env variable is set, it means we are in a Heroku
 athena_query = os.getenv('AWS_ATHENA_PREPARE_STATEMENT')
 
 config = {
-    'port': os.getenv('PORT') or 8080,
+    'port': os.getenv('PORT', 8080),
     # I can't reference a previous field, so copying and pasting here
-    'domain_name': os.getenv('DOMAIN_NAME') or f"localhost:{os.getenv('PORT') or 8080}",
+    'domain_name': (
+        f"{os.getenv('DOMAIN_NAME')}" if dyno  # if we are in localhost no need to add port
+        else f"{os.getenv('DOMAIN_NAME', 'localhost')}:{os.getenv('PORT', 8080)}"
+    ),
     'session': {
         'cookie_name': 'hedy',
         # in minutes
