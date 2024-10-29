@@ -24,7 +24,8 @@ from markupsafe import Markup
 from flask import (Flask, Response, abort, after_this_request, g, jsonify, make_response,
                    redirect, request, send_file, url_for,
                    send_from_directory, session)
-from flask_babel import Babel, gettext
+from flask_babel import Babel
+from website.flask_helpers import gettext_with_fallback as gettext
 from website.flask_commonmark import Commonmark
 from flask_compress import Compress
 from urllib.parse import quote_plus
@@ -442,6 +443,10 @@ if utils.is_heroku():
 
 Compress(app)
 Commonmark(app)
+
+# Explicitly substitute the flask gettext function with our custom definition which uses fallback languages
+app.jinja_env.globals.update(_=gettext)
+
 
 # We don't need to log in offline mode
 if utils.is_offline_mode():
@@ -2313,7 +2318,6 @@ def favicon():
 @app.route('/index.html')
 def main_page():
     sections = hedyweb.PageTranslations('start').get_page_translations(g.lang)['home-sections']
-
     sections = sections[:]
 
     # Sections have 'title', 'text'
