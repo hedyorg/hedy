@@ -313,6 +313,7 @@ adventures:
                     _
                     {print} Du bekommst einen geschmacksrichtungen {at} {random} Milchshake
                     ```
+        default_save_name: hinzufügen_entfernen_Befehl
     and_or_command:
         description: introducing and or
         levels:
@@ -328,6 +329,8 @@ adventures:
                     {if} name {is} 'Hedy' {and} alter {is} 2
                         {print} 'Du bist die echte Hedy!'
                     ```
+        name: '{and} & {or}'
+        default_save_name: und oder
     ask_command:
         default_save_name: frage_Befehl
         description: Einführung des {ask} Befehls
@@ -394,6 +397,7 @@ adventures:
                     name = {input}('Wie heißt du?')
                     {print}('Aha, dein Name ist ', name)
                     ```
+        name: '{ask}'
     blackjack:
         description: Versuche, so nah wie möglich an die 21 heran zu kommen
         levels:
@@ -442,6 +446,8 @@ adventures:
                     {print} 'Deine Karte ist ein(e) ' _
                     {print} 'Sie zählt  ' _ ' Punkte'.
                     ```
+        default_save_name: Blackjack
+        name: Blackjack
     blackjack_2:
         description: Blackjack Teil 2
         levels:
@@ -497,6 +503,8 @@ adventures:
                     {print} 'Du hast ' _ ' und ' _ ' gezogen. Das sind ' _ ' Punkte'
                     {print} 'Der Geber hat ' _ ' und ' _ ' gezogen. Das sind  ' _ ' Punkte'
                     ```
+        name: Blackjack 2
+        default_save_name: Blackjack_2
     blackjack_3:
         description: Blackjack Teil 3
         levels:
@@ -540,6 +548,8 @@ adventures:
                     {if} geber_gesamtpunkte < 17
                     _
                     ```
+        name: Blackjack 3
+        default_save_name: Blackjack_3
     blackjack_4:
         description: Blackjack Teil 4
         levels:
@@ -574,6 +584,8 @@ adventures:
                     {else}:
                         _
                     ```
+        name: Blackjack 4
+        default_save_name: Blackjack_4
     calculator:
         name: Taschenrechner
         default_save_name: Taschenrechner
@@ -746,6 +758,7 @@ adventures:
                     ### Exercise
                     Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
                     Then `{call}` the function.
+                example_code: "```\n{define} neue_Frage\n    Zahlen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    Zahl_1 = Zahlen {at} {random}\n    Zahl_2 = Zahlen {at} {random}\n    richtig = Zahl_1 * Zahl_2\n    Antwort = 0\n    _\n    _\n    _\n    {print} 'Gut gemacht!'\n\n{print} 'Gib 10 richtige Antworten, um zu gewinnen!'\n{for} i {in} {range} 1 {to} 10\n    _\n{print} 'Gewonnen!'\n```\n"
     calculator_2:
         name: Taschenrechner 2
         levels:
@@ -768,6 +781,8 @@ adventures:
                     ```
                     # Benutze deinen eigenen Code aus dem letzten Abenteuer.
                     ```
+        default_save_name: Taschenrechner 2
+        description: Taschenrechner 2
     clear_command:
         levels:
             4:
@@ -787,6 +802,9 @@ adventures:
                     {clear}
                     {print} 'ÜBERRASCHUNG!'
                     ```
+        default_save_name: löschen_Befehl
+        description: '{clear} Befehl'
+        name: '{clear}'
     debugging:
         levels:
             1:
@@ -1222,6 +1240,9 @@ adventures:
                         {print} 'dort ein ' geräusch
                         {print} 'überall ein ' geräusch geräusch
                     ```
+        description: Debugging-Abenteuer
+        name: Debugging
+        default_save_name: Debugging
     default:
         name: Einführung
         default_save_name: Einleitung
@@ -1340,22 +1361,28 @@ adventures:
                     Versuch es mal!
                 example_code: |
                     ```
-                    {repeat} 3 {times}
-                        bestellung = {ask} 'Was würden Sie gerne essen?'
-                        {if} bestellung {is} Pizza
-                            {print} 'schön!'
-                        {else}
-                            {print} 'Pizza ist leckerer'
-                    ```
+                    Antwort = {ask} 'Bist du bereit, etwas Neues zu lernen?'
+                    {if} Antwort {is} ja
+                        {print} 'Großartig! Du kannst nun lernen, wie man den Wiederholen-Befehl mit dem Wenn-Befehl zusammen benutzt!'
+                        {print} 'Hurra!'
+                        {print} 'Hurra!'
+                        {print} 'Hurra!'
+                    {else}
+                        {print} 'Vielleicht solltest du noch etwas mehr im vorherigen Level üben?'
             10:
-                story_text: |-
-                    In diesem Level lernen wir den neuen Befehl `{for}`. Mit `{for}` kannst du eine Liste machen und alle ihre Elemente verwenden.
-                    `{for}` erstellt einen Block, so wie `{repeat}` und `{if}`, daher müssen alle Zeilen in dem Block mit Leerzeichen beginnen.
+                story_text: |
+                    Du schlägst dich gut! In den vorherigen Leveln sind wir noch auf ein kleines Problem gestoßen. Du weißt jetzt, wie man Zeilen wiederholt, aber was, wenn du die Zeilen etwas verändern möchtest?
+                    Beispielsweise wenn du den Song 'if you're happy and you know it' singen möchtest. Das würde dann so aussehen:
+
+                    Wenn du also auch die Zeile 'stop your feet' möchtest, und die danach und danach und danach, musst du den Code komplett verändern.
+                    In diesem Level lernst du den `{for}` Befehl, mit dem du eine Liste von Aktionen anlegen kannst, die der Code dann jedes Mal mit einer weiteren Aktion wiederholt!
+                    Sieh dir das mal an!
                 example_code: |
                     ```
-                    tiere {is} Hund, Katze, Kugelfisch
-                    {for} tier {in} tiere
-                      {print} 'Ich mag ' tier
+                    {repeat} 2 {times}
+                        {print} 'if you're happy and you know it clap your hands'
+                    {print} 'if you're happy and you know it and you really want to show it'
+                    {print} 'if you're happy and you know it clap your hands'
                     ```
             11:
                 story_text: |
@@ -1409,23 +1436,27 @@ adventures:
                     {else}
                         {print} 'Du bist älter als ich!'
             15:
-                story_text: |-
-                    Wir lernen eine neue Schleife kennen, die `{while}`-Schleife! Wir setzen die Schleife so lange fort, wie die Aussage wahr ist!
-                    Also vergiss nicht den Wert innerhalb der Schleife zu ändern.
-
-                    Im Beispielcode fahren wir also fort, bis eine korrekte Antwort gegeben wurde.
-                    Wenn die richtige Antwort nie gegeben wird, endet die Schleife nie!
+                story_text: |
+                    Im unten gezeigten Spiel wurde der Code so erstellt, dass der Spieler so lange spielen kann, wie er will …
+                    Leider ist der Code ineffizient und viel zu lang. Und außerdem: Was ist, wenn der Spieler 101 Spiele statt nur 100 machen will?
+                    Du kannst nicht unendlich lange spielen?
+                    In diesem Level lernst du einen Befehl, der das alles deutlich leichter macht!
                 example_code: |
                     ```
-                    antwort = 0
-                    {while} antwort != 25
-                        antwort = {ask} 'Was macht 5 mal 5?'
-                    {print} 'Es wurde eine richtige Antwort abgegeben'
+                    Spiel = 'Start'
+                    {for} i {in} {range} 1 {to} 100
+                        {if} Spiel == 'Start'
+                            Antwort = {ask} 'Möchtest du weiterspielen?'
+                            {if} Antwort == 'nein'
+                                Spiel = 'abgeschlossen'
+                            {if} Antwort == 'ja'
+                                {print} 'Okay, spielen wir weiter'
                     ```
             16:
-                story_text: |-
-                    Wir setzen jetzt eckige Klammern um Listen, so wie das in Python gemacht wird! Außerdem müssen wir jetzt einfache Anführungszeichen (') um jedes Element einer Liste setzen, wie wir es in den vorherigen Leveln gelernt haben.
-                    Wir nutzen eckige Klammern um auf eine Stelle in einer Liste zu zeigen. Der {at} Befehl kann nicht mehr benutzt werden.
+                story_text: |
+                    In diesem Level nähern wir uns ein bisschen mehr echtem Python-Code. Außerdem lernst du, wie man zwei Listen miteinander verbindet.
+                    So kannst du einen Code programmieren, in dem ein Tier mit dem entsprechenden Tiergeräusch verbunden ist.
+                    Weil die zwei Codes unten … ganz offensichtlicher Blödsinn sind!
                 example_code: |
                     ```
                     freunde = ['Ahmed', 'Ben', 'Clemens']
