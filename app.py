@@ -472,12 +472,6 @@ else:
         aws_helpers.s3_querylog_transmitter_from_env())
 
 
-"""
-NOTE: When I update the language using this URL, it gets saved in the personal
-preferences of the user, is that what we still want?
-"""
-
-
 @app.before_request
 def setup_language(language=None):
     # Determine the user's requested language code.
@@ -489,8 +483,15 @@ def setup_language(language=None):
         session['lang'] = language
     elif request.url_rule is not None and request.url_rule.subdomain not in ['<language>', '']:
         lang_from_subdomain = request.url_rule.subdomain
-        if lang_from_subdomain == 'zh_hans':
-            lang_from_subdomain = 'zh_Hans'
+        index = lang_from_subdomain.find('_')
+        if index != -1:
+            if lang_from_subdomain in ["zh_hans", "zh_hant"]:
+                first_part = lang_from_subdomain[0:index]
+                second_part = lang_from_subdomain[index].upper()
+                third_part = lang_from_subdomain[index + 1:]
+                lang_from_subdomain = f'{first_part}{second_part}{third_part}'
+            else:
+                lang_from_subdomain = f'{lang_from_subdomain[0:index]}{lang_from_subdomain[index:].upper()}'
         session['lang'] = lang_from_subdomain
     elif lang_from_request := request.args.get('language', None):
         session['lang'] = lang_from_request
@@ -506,7 +507,8 @@ def setup_language(language=None):
     if request.args.get('keyword_language', None):
         session['keyword_lang'] = request.args.get('keyword_language', None)
     g.keyword_lang = session['keyword_lang']
-
+    logger.info(f'keyword lang {g.keyword_lang}')
+    logger.info(f'language {g.lang}')
     # Set the page direction -> automatically set it to "left-to-right"
     # Switch to "right-to-left" if one of the language is rtl according to Locale (from Babel) settings.
     # This is the only place to expand / shrink the list of RTL languages ->
