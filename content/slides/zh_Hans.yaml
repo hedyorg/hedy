@@ -43,6 +43,7 @@ levels:
         9:
             header: Hedy编程
             text: 输出也可以是一个图形。
+            code: "{forward} 100\n{turn} {left}"
     1:
         1:
             header: 欢迎来到第1级!
@@ -56,6 +57,7 @@ levels:
 
                 `{print}` 用于在屏幕上显示文本。
             code: '{print} Put text on the screen'
+            header: '{print}'
         3:
             header: '{print} 命令'
             text: |-
@@ -91,6 +93,7 @@ levels:
             text: |-
                 使用`{print}`, `{ask}` 和 `{echo}` ，您已经可以创建一个小故事了。
                 现在是尝试鹦鹉、故事和石头剪刀布冒险的好时机。
+            editor: /hedy/1
         7:
             header: 编程!
             text: 可以用标记黄色箭头的按钮复制例子。
@@ -98,15 +101,18 @@ levels:
         8:
             header: 用海龟绘图画画！
             text: 黄色箭头按钮可用于复制示例。
+            editor: /hedy#print_command
         9:
             header: 用海龟画画：{forward}
             text: '`{forward}` 用于让海龟向前移动。'
         10:
             header: '用海龟绘图画画: {turn}'
             text: '`{turn}` 用于让海龟向左转或向右转。'
+            code: '{forward} 50'
         11:
             header: 与乌龟一起画画：{turn}
             text: '`{turn}` 用于让海龟向左或向右转。'
+            code: "{forward} 50\n{turn} {left}"
         12:
             header: 调试
             text: 调试代码意味着消除代码中的错误。 我们一起调试一下这段代码。 单击瓢虫按钮启动调试器。
@@ -134,6 +140,7 @@ levels:
                 名字 {is} 海蒂
                 年龄 {is} 15
                 {print} 姓名年龄 岁
+            header: Variables
         3:
             header: 交互的
             text: |-
@@ -152,6 +159,7 @@ levels:
                 {print} 你好名字
                 年龄 {is} {ask} 你多大了？
                 {print} 姓名年龄 岁。
+            header: Multiple variables
         5:
             header: 暂停
             text: 您还可以使用`{sleep}` 命令暂停代码一段时间。
@@ -223,6 +231,7 @@ levels:
                 like {is} {ask} 你最喜欢的动物是什么？
                 {add} like {to_list} animals
                 {print} 我选择 animals {at} {random}
+            header: Add to
         6:
             header: 从......中去除
             text: |-
@@ -344,6 +353,7 @@ levels:
             code: |-
                 name {is} {ask} '你叫什么名字？'
                 {if} name {is} 海蒂 {print} '赞'
+            header: if
         3:
             header: 不要忘记打印
             text: |-
@@ -419,6 +429,7 @@ levels:
         5:
             text: 您可以使用斜杠进行除法。
             code: '{print} ''5 除以 5 is '' 5 / 5'
+            header: Division
         6:
             header: 总结
             text: 总之，您可以使用 +、-、* 和 / 来进行数学运算。
@@ -434,6 +445,7 @@ levels:
             code: |-
                 name = 海蒂
                 answer = 20 + 4
+            header: The = symbol
         8:
             header: 使用变量计算
             text: 你可以使用数字进行计算，但也可以使用变量进行计算，如下所示：
@@ -703,6 +715,7 @@ levels:
                 animals = 狗、猫、水滴鱼
                 {for} 动物 {in} animals
                      {print} '我爱' 动物
+            header: The for command
         3:
             text: 在这里您可以看到 `{for}` 命令的另一个示例：
             code: |-
@@ -710,6 +723,7 @@ levels:
                 命名 = 妈妈、爸爸、艾玛、苏菲
                 {for} day {in} days
                      {print} 命名 {at} {random} ' 在 ' day '洗碗'
+            header: The for command
         4:
             header: 调试
             text: 让我们调试代码
@@ -741,12 +755,15 @@ levels:
                 {for} counter {in} {range} 1 {to} 10
                     {print} counter
                 {print} '是否准备好, 现在开始!'
+            header: The for command
         3:
             text: |-
                 在上一张幻灯片中，变量被命名为 `'counter'`，因为它正在倒计时。
                 当然，可以为你想要的变量使用任何名称。
                 在这种情况下，Python 等编程语言中使用的变量的标准名称是`'i'`。
                 看起来像这样：
+            header: the variable i
+            code: "number = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * number"
         4:
             header: 调试
             text: 让我们调试代码!
@@ -957,6 +974,7 @@ levels:
                      {print} '你比我年轻！'
                 {else}
                      {print} '你比我大！'
+            header: Symbols
         3:
             text: |-
                 您还可以使用：
@@ -972,6 +990,7 @@ levels:
                      {print} '前往下一次冒险！'
                 {if} answer != '是'
                      {print} '这太可惜了！'
+            header: Symbols
         4:
             header: 返回值
             text: 在前面的级别中，您已经学习了创建函数并对其使用参数。函数的另一个重要用途是让它为您计算一些东西。你可以给函数一个计算，它会给你计算的答案。此答案称为**返回值**。
@@ -1028,6 +1047,7 @@ levels:
                 {while} answer != 25
                      answer = {ask} '5 乘以 5 是多少？'
                 {print} '已给出正确答案'
+            header: '{while}'
         3:
             code: |-
                 numbers = 1, 2
@@ -1051,6 +1071,8 @@ levels:
                         {print} '对了'
                         guesses = 10
             debug: '对的'
+            header: Debugging
+            text: Let's debug this code!
         4:
             header: 让我们开始尝试！
             text: 享受15级的冒险吧！
@@ -1101,6 +1123,8 @@ levels:
                 {else} score < 50
                     {print} '你真的认识这个人吗?!'
             debug: '对的'
+            header: Debugging
+            text: Let's debug this code!
         4:
             header: 让我们开始尝试！
             text: 享受16级的冒险吧！
@@ -1118,6 +1142,7 @@ levels:
                      {print}'是啊！ 你好有钱！'
                 {else}:
                      {print} '下次祝你好运..'
+            header: Colon
         3:
             header: 否则如果/Elif
             text: 在这个关卡中你还可以使用一个新命令：elif。 elif 是 else if 的缩写，当您想要创建 3 个（或更多！）选项时需要它。 一起来一探究竟！
@@ -1151,6 +1176,8 @@ levels:
                     continue = '你想再画一些吗?'
                     {sleep}
             debug: '对的'
+            text: Let's debug this code!
+            header: Debugging
         5:
             header: 我们来试一下！
             text: 享受第17关的冒险吧！
@@ -1168,6 +1195,7 @@ levels:
                 为了获取 Python 代码，我们需要进行的最后一个更改是将询问更改为输入。
 
                 单击 'print' 选项卡查看所有示例。
+            editor: /hedy/18
         3:
             header: 最后的冒险！
             text: 享受第 18 关的最后冒险吧！
