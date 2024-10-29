@@ -27,15 +27,19 @@ levels:
         5:
             header: Pemrograman di Hedy
             text: Di Hedy kami menggunakan kode khusus, seperti `{print}`.
+            code: '{print} Welcome to Hedy!'
         6:
             header: Pemrograman di Hedy
             text: Kata kode akan ditampilkan dalam warna merah muda.
+            code: '{print} Welcome to Hedy!'
         7:
             header: Pemrograman di Hedy
             text: Kami memulai kode dengan tombol Jalankan kode di bawah kode.
+            code: '{print} Welcome to Hedy!'
         8:
             header: Pemrograman di Hedy
             text: Output appears on the left-hand side.
+            code: '{print} Welcome to Hedy!'
         9:
             header: Pemrograman di Hedy
             text: Outputnya juga bisa berupa gambar.
@@ -54,6 +58,8 @@ levels:
                 Kode pertama yang bisa Anda gunakan di level 1 adalah `{print}`.
 
                 `{print}` digunakan untuk menampilkan teks di layar.
+            header: '{print}'
+            code: '{print} Show text on the screen'
         3:
             header: Perintah {print}
             text: |-
@@ -72,6 +78,7 @@ levels:
                 {print} Hello!
                 {ask} What is your name?
                 {echo} hello
+            header: '{ask}'
         5:
             text: |-
                 Seperti yang Anda lihat pada contoh sebelumnya. Jika Anda menggunakan perintah `{ask}`, Anda dapat mengajukan pertanyaan.
@@ -81,14 +88,18 @@ levels:
                 Jika Anda ingin jawabannya ditampilkan, Anda dapat menggunakan perintah terakhir pada level ini: `{echo}`.
 
                 `{echo}` digunakan untuk mengulang jawaban `{ask}`.
+            header: '{echo}'
+            code: "{print} Hello!\n{ask} What is your name?\n{echo} hello"
         6:
             header: Pemrograman!
             text: |-
                 Dengan `{print}`, `{ask}` dan `{echo}` Anda sudah bisa membuat sedikit cerita.
                 Ini saat yang tepat untuk mencoba petualangan Parrot, Story, dan Rock, Paper Scissors.
+            editor: /hedy/1
         7:
             header: Pemrograman!
             text: Petualangan ditampilkan di tab.
+            editor: /hedy/1
         8:
             header: Pemrograman!
             text: Tombol panah kuning dapat digunakan untuk menyalin contoh.
@@ -108,6 +119,14 @@ levels:
             code: |-
                 {forward} 50
                 {turn} left
+        12:
+            debug: 'True'
+            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            code: "I am DJ Hedy\n{print} What song would you like to hear?\n{ask} I like that song too!\n{print} Next up... {echo}"
+            header: Debugging
+        13:
+            header: Let the programming fun begin!
+            text: Enjoy the adventures in level 1!
     2:
         1:
             header: Selamat datang di level 2
@@ -120,6 +139,7 @@ levels:
         2:
             header: Variabel
             text: Untuk membuat atau 'mengatur' suatu variabel kita menggunakan perintah `{is}`
+            code: "name {is} Hedy\nage {is} 15\n{print} name is age years old"
         3:
             header: Interaktif
             text: |-
@@ -128,21 +148,30 @@ levels:
                 Jawaban atas pertanyaan disimpan dalam variabel.
 
                 Dengan cara ini kita tidak memerlukan perintah `{echo}`.
+            code: "name {is} {ask} What is your name?\n{print} Hello name"
         4:
             header: Banyak variabel
             text: Sekarang kita menggunakan variabel, kita bisa menggunakan beberapa variabel, bukan hanya satu perintah `{echo}`.
+            code: "name {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old."
         5:
             header: Tidur
             text: Anda juga dapat menggunakan perintah `{sleep}` untuk menjeda kode untuk sementara waktu.
+            code: "{print} My favorite colour is...\n{sleep} 2\n{print} green!"
         6:
             header: Tidur 5
             text: |-
                 Anda dapat menambahkan nomor setelah perintah `{sleep}` jika ingin jeda lebih lama.
 
                 Jika mau, Anda bahkan bisa menggunakan variabel alih-alih angka untuk menentukan durasi perintah sleep.
+            code: "pause {is} 10\n{print} My favorite colour is...\n{sleep} pause\n{print} green!"
         8:
             header: Biarkan kesenangan pemrograman dimulai!
             text: Nikmati petualangan di level 2!
+        7:
+            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            header: Debugging
+            debug: 'True'
+            code: "{print} Welcome to the donut shop!\nfilling {is} What kind of filling would you like?\n{print} You have chosen... Filling! Yum!\ntopping {ask} What kind of topping would you like?\ntopping is delicious!\n{print} I'll go get your donut. {sleep}\n{print} Here you go! A filling donut with toping!\n{ask} Have a nice day!"
     3:
         1:
             header: Selamat datang di level 3
@@ -153,15 +182,18 @@ levels:
                 Anda membuat daftar dengan `{is}`.
 
                 Pisahkan item di daftar Anda dengan koma.
+            code: animals {is} dogs, cats, kangaroos
         3:
             header: Secara acak
             text: |-
                 Anda dapat menggunakan daftar dengan perintah `{at}` `{random}`.
                 Komputer akan secara acak memilih satu item dari daftar.
                 Setiap kali Anda menjalankan kode ini, hasilnya akan berbeda.
+            code: "animals {is} dogs, cats, kangaroos\n{print} animals {at} {random}"
         4:
             header: Secara acak dalam sebuah kalimat
             text: Anda juga dapat menggunakan perintah `{at}` `{random}` dalam sebuah kalimat.
+            code: "animals {is} dogs, cats, kangaroos\n{print} My favorite animal is animals {at} {random}"
         5:
             header: Tambahkan ke
             text: |-
@@ -169,21 +201,31 @@ levels:
 
                 Anda dapat memilih apa yang ingin ditambahkan ke daftar atau Anda dapat menggunakan perintah `{add}` `{to}` yang dikombinasikan dengan perintah `{ask}`.
                 Dengan cara ini Anda dapat membiarkan pemain memutuskan apa yang akan ditambahkan ke daftar.
+            code: "animals {is} dog, cat, kangaroo\nlike {is} {ask} What is your favorite animal?\n{add} like {to_list} animals\n{print} I choose animals {at} {random}"
         6:
             header: Hapus dari
             text: |-
                 Kebalikan dari perintah `{add}` `{to}` adalah perintah `{remove}` `{from}`.
                 Perintah ini menghapus item dari daftar.
+            code: "animals {is} dog, cat, kangaroo\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}"
         8:
             header: Ayo mulai bekerja!
             text: Nikmati petualangan di level 3!
+        7:
+            debug: 'True'
+            header: Debugging
+            editor: "music_genres {is} rock, pop, metal, indie, jazz\nchosen_genre is music {at} {random}\n{print} Let's listen to chosen genre\nnice {ask} Do you like that genre?\n{remove} chosen_genre {from} chosen_genre\nsecond_choice {is} music_genres\n{print} or do you prefer... second_choice {at} {random}\n{remove} second_choice {to} music_genres\n{print} I like music_genre {random} best!"
+            text: Let's debug this code!
     4:
         1:
             header: Selamat datang di level 4
             text: Di level ini Anda akan belajar cara menggunakan tanda kutip.
+            code: "{print} 'print with quotes!'"
         2:
             header: Masalah
             text: 'Di level sebelumnya, Anda mungkin menemukan masalah ini:'
+            code: "name {is} Sophie\n{print} My name is name"
+            debug: 'True'
         3:
             header: Memperbaikinya dengan tanda kutip
             text: |-
@@ -193,25 +235,31 @@ levels:
         4:
             header: Tanda kutip dengan cetakan
             text: Setiap kali Anda menggunakan perintah `{print}` Anda harus meletakkan teks yang ingin Anda tampilkan di layar dalam tanda kutip.
+            code: "{print} 'print with quotes!'"
         5:
             header: Tanda kutip dengan tanya
             text: Ini juga berlaku untuk perintah `{ask}`.
+            code: name {is} {ask} 'name please?'
         6:
             header: Tanda kutip dan variabel
             text: |-
                 Anda tidak ingin nama variabel tercetak di layar.
                 Inilah sebabnya mengapa variabel harus dikeluarkan dari tanda kutip, seperti ini:
+            code: "name {is} Harry\n{print} 'Hello ' name"
         7:
             header: Tanda kutip dan variabel
             text: |-
                 Jika nama variabel digunakan di tengah kalimat, variabel tersebut harus dikeluarkan dari tanda kutip.
                 Namun sisa kalimatnya memerlukan tanda kutip. Itu terlihat seperti ini:
+            code: "name {is} Harry\n{print} 'Hello ' name ', how are you?'"
         8:
             header: Tanda kutip dan kontraksi
             text: |-
                 Hati-hati! Sekarang Anda menggunakan tanda kutip, Anda tidak dapat menggunakan tanda kutip dalam kontraksi.
 
                 Silakan coba mencetak kontraksi seperti "Anda" atau "Saya" pada layar di bawah ini dan lihat apa yang terjadi....
+            debug: 'True'
+            code: "{print} 'This won't work!'"
         9:
             header: Jelas
             text: |-
@@ -219,9 +267,15 @@ levels:
                 Dengan perintah ini Anda dapat menghapus semua teks dari layar keluaran Anda.
 
                 Berhati-hatilah agar Anda selalu menggunakan perintah tidur juga. Jika tidak, komputer akan menghapus semua teks sebelum Anda dapat membacanya!
+            code: "{print} '3'\n{clear}\n{print} '2'\n{clear}\n{print} '1'\n{clear}\n{print} 'SURPRISE!'"
         11:
             header: Siap, Bersiap, Ayo!
             text: Nikmati petualangan di level 4!
+        10:
+            text: Let's debug this code!
+            debug: 'True'
+            header: Debugging
+            code: "{clear}\n{print} What a nice day to go to the beach!\n{ask} 'Do you want to build a sandcastle or swim in the ocean?'\n{print} 'You would like to activity '\n{print} 'I'd like to do that too'\n{print} 'Look at these beautiful seashells!'\ncolors {is} 'orange, silver, white, brown'\n{print} 'I love the colors {at} {random} one!'\nchoice {is} {ask} Which one do you like?"
     5:
         1:
             header: Selamat datang di level 5
@@ -232,21 +286,26 @@ levels:
                 Perintah `{if}` memungkinkan Anda memilih di antara dua opsi.
                 Pada contoh ini komputer akan mencetak 'bagus' jika jawaban yang diberikan adalah Hedy.
                 Kalau jawabannya bukan Hedy, komputer tidak akan berbuat apa-apa.
+            code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'"
         3:
             header: Jangan lupa untuk mencetak
             text: Saat menggunakan perintah `{if}`, jangan lupa untuk menggunakan perintah `{print}`.
+            code: "{if} name {is} Hedy 'nice'"
+            debug: 'True'
         4:
             header: pula
             text: |-
                 Saat menggunakan perintah `{if}`, Anda juga dapat menambahkan perintah `{else}`.
                 Jika jawabannya Hedy, maka komputer akan mencetak 'bagus'.
                 Namun jika jawabannya lain komputer akan mencetak 'boo'
+            code: "{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'"
         5:
             header: Garis panjang
             text: |-
                 Anda mungkin memperhatikan bahwa baris Anda bisa menjadi sangat panjang ketika Anda memiliki perintah `{if}` dan `{else}` sekaligus.
 
                 Anda dapat memilih untuk memisahkan perintah dan menaruhnya dalam 2 baris, seperti ini:
+            code: "{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'"
         6:
             header: Perintah baru lainnya
             text: |-
@@ -255,9 +314,15 @@ levels:
                 Dengan `{in}` Anda dapat membiarkan komputer memeriksa apakah suatu item ada dalam daftar, misalnya:
 
                 Harap dicatat bahwa Hedy peka terhadap huruf besar-kecil. Artinya jika Anda menjawab "Hijau" dan bukan "hijau", Hedy akan mencetak "meh".
+            code: "pretty_colors {is} green, yellow\nfavorite_color {is} {ask} 'What is your favorite color?'\n{if} favorite_color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'"
         8:
             header: Ayo pergi!
             text: Nikmati petualangan di level 5!
+        7:
+            debug: 'True'
+            header: Debugging
+            text: Let's debug this code!
+            code: "{print} Welcome to HedyAir Security!\nboarding_pass {is} {ask} 'Do you have your boarding pass?'\n{if} bording_pass yes {print} Great!\n{else} Please, get your boarding pass ready.\npassport {is} 'Can I see your passport, please?'\n{if} passport {is} yes 'thank you'\n{else} 'You can't fly without a passport'\ndeclare {is} {ask} Do you have anything to declare?\n{if} declare {is} yes\nitem_to_declare {is} {ask} 'What would you like to declare'\n{else} Alright\n{print} Thank you. Please head to gate A22.'"
     6:
         1:
             header: Selamat datang di level 6
@@ -265,29 +330,41 @@ levels:
         2:
             header: Tambahan
             text: Jika ingin menghitung penjumlahan, cukup gunakan tanda tambah.
+            code: "{print} '5 plus 5 is ' 5 + 5"
         3:
             header: Pengurangan
             text: Jika ingin melakukan pengurangan, bisa menggunakan tanda minus.
+            code: "{print} '5 minus 5 is ' 5 - 5"
         4:
             header: Perkalian
             text: Jika ingin melakukan perkalian bisa menggunakan tanda bintang.
+            code: "{print} '5 times 5 is ' 5 * 5"
         5:
             header: Divisi
             text: Anda dapat menggunakan garis miring untuk pembagian.
+            code: "{print} '5 divided by 5 is ' 5 / 5"
         6:
             header: Ringkasan
             text: Singkatnya, Anda dapat menggunakan +, -, * dan / untuk mengerjakan matematika.
+            code: "{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n{print} '5 divided by 5 is ' 5 / 5"
         7:
             header: Simbol =
             text: |-
                 Mulai sekarang Anda juga dapat menggunakan simbol = sebagai ganti perintah `{is}`.
                 Ini berlaku untuk angka dan kata, dan juga setelah perintah `{if}` atau `{else}`.
+            code: "name = Hedy\nanswer = 20 + 4"
         8:
             header: Perhitungan dengan variabel
             text: 'Anda bisa menggunakan penghitungan dengan angka, namun Anda juga bisa menggunakan variabel untuk melakukan penghitungan, seperti ini:'
+            code: "number_1 = {ask} 'Fill in the first number:'\nnumber_2 = {ask} 'Fill in the second number:'\ncorrect_answer = number_1 * number_2\n{print} number_1 ' times ' number_2 ' is ' correct_answer"
         10:
             header: Ayo mulai bekerja!
             text: Nikmati petualangan di level 6!
+        9:
+            debug: 'True'
+            code: "{print} 'This is the water park ticket machine'\n{print} 'Price list: Children under 12 $3, Adults $5'\n{print} 'Mondays are 25% off'\namount_of_children = 'How many kids tickets would you like?'\namount_of_adults = 'How many adult tickets would you like?'\nday_of_the_week = {ask} 'What day is it?'\n{clear}\nchild_price = amount of children * 3\nadult_price = amount_of_adults + 5\ntotal_price = adult_price * child_price\n{if} day {is} monday\ntotal_price = total_price * 0.25\n{print} 'That will be total_price please'"
+            text: Let's debug this code!
+            header: Debugging
     7:
         1:
             header: Selamat datang di tingkat 7
@@ -299,15 +376,24 @@ levels:
                 Jika Anda ingin mengulangi baris tersebut lebih sering, cukup ubah nomornya.
 
                 Misalnya: Jika Anda memprogram cerita di mana karakter Anda berteriak minta tolong sebanyak 5 kali, tampilannya akan seperti ini:
+            code: "{print} 'The prince kept calling for help'\n{repeat} 5 {times} {print} 'Help!'\n{print} 'Why is nobody helping me?'"
         3:
             header: Jangan lupa print command
             text: Saat menggunakan perintah ulangi, jangan lupa perintah `{print}`.
+            code: "{repeat} 5 {times} 'Help!'"
+            debug: 'True'
         4:
             header: Ulangi perintah tanya
             text: Anda juga dapat mengulangi perintah `{ask}`, `{if}`, atau `{else}` beberapa kali.
+            code: "{repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'\n{if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'\n{else} {repeat} 3 {times} {print} 'You have learned something new!'"
         6:
             header: Siap Berangkat!
             text: Nikmati petualangan di level 7!
+        5:
+            text: Let's debug this code!
+            debug: 'True'
+            header: Debugging
+            code: "{print} You gave stranded on a desert island.\n{repeat} 3 'Help!'\nrescued = {ask} Has anybody come to the rescue?\n{if} rescued yes {is}\n{print} Lucky!\n{else} {repeat} 3 {times} 'HELP!'\nrescued = 'What about now?'\n{if} yes\n{print} 'Hurray!\n{else} 'That's a shame... Oh well... time to build a shelter and find some food.'"
     8:
         1:
             header: Selamat datang di level 8
@@ -318,6 +404,8 @@ levels:
                 Pada level sebelumnya, perintah `{repeat}` terlihat seperti ini:
 
                 Anda hanya dapat mengulang satu baris kode.
+            code: "{repeat} 5 {times} {print} 'Help!'"
+            debug: 'True'
         3:
             header: '{repeat} perintah sebelumnya'
             text: |-
@@ -325,24 +413,30 @@ levels:
                 Caranya dengan menggunakan indentasi.
 
                 Gunakan 4 spasi (atau satu tab) di awal setiap baris yang ingin Anda ulangi, seperti ini:
+            code: "{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This will be printed 5 times'"
         4:
             header: '{repeat} perintah sekarang'
             text: |-
                 Jika mau, Anda dapat melanjutkan setelah perintah `{repeat}` tanpa lekukan.
                 Garis yang tidak dimulai dengan lekukan tidak akan terulang.
+            code: "{repeat} 3 {times}\n    {print} 'Hello!'\n{print} 'We are done repeating!'"
         5:
             header: jika dan yang lain sebelumnya
             text: |-
                 Hal yang sama berlaku untuk perintah `{if}` dan `{else}`.
                 Ini adalah perintah sebelumnya:
+            debug: 'True'
+            code: "{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'"
         6:
             header: jika dan yang lain sekarang
             text: |-
                 Ini adalah perintah `{if}` dan `{else}` sekarang.
                 Setiap baris setelah perintah `{if}` dan `{else}` dimulai dengan indentasi.
+            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!'"
         7:
             header: menghentikan lekukan
             text: Sama seperti perintah `{repeat}`, Anda dapat berhenti menggunakan indentasi dan garis akan selalu ditampilkan. Bukan hanya jika pernyataan itu benar.
+            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!' \n{print} '3..2..1.. Start programming!'"
         8:
             header: pernyataan if di dalam pernyataan if
             text: |-
@@ -351,6 +445,11 @@ levels:
         10:
             header: Mari kita lihat petualangannya!
             text: Nikmati petualangan di level 8!
+        9:
+            debug: 'True'
+            header: Debugging
+            text: Let's debug this code!
+            code: "{print} 'HedyWheels bus tickets machine'\nzone_1 = Town Hall, Library, Campus, Market Place\nzone_2 = Swimming Pool, Skate Park, Mall, Airport\ndestination = 'Where do you want to go?'\n{if} destination {in} zone 1\n{print} destination 'is in zone 1'\nprice = 3 euros\n    {if} destination {is} zone_2\n{print} destination 'is in zone 2'\nprice = 6\nticket_types = {ask} 'Press 1 for a single use ticket.\nPress 2 for a round trip ticket:'\n{if} ticket_type = 1\n{print} 'You chose a single use ticket'\n{else}\n        {print} You chose a round trip ticket'\nprice * 2\n{print} 'That will be ' price ' euros please'"
     9:
         1:
             header: Selamat datang di level 9
@@ -361,26 +460,37 @@ levels:
         2:
             header: Beberapa baris setelah `{repeat}`
             text: Anda diperbolehkan menggunakan beberapa baris setelah `{repeat}`.
+            code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
         3:
             header: Indentasi itu penting!
             text: Indentasi sangat penting untuk memberitahu komputer jalur mana yang harus diulang dan jalur mana yang hanya boleh dijalankan satu kali.
+            code: "{repeat} 3 {times}\n    {print} 'This line will be repeated...'\n    {print} 'This one too...'\n{print} 'but this one will not!'"
         4:
             header: Beberapa baris setelah `{if}`
             text: Anda juga dapat menggunakan beberapa baris setelah `{if}`
+            code: "continue = {ask} 'Do you want to continue?'\n{if} continue = yes\n    sure = {ask} 'Are you sure?'\n    {if} sure {is} yes\n        {print} 'We will continue'\n    {else}\n        {print} 'You are not sure'\n{else}\n    {print} 'You do not want to continue'"
         5:
             header: Indentasi penting
             text: Sekali lagi, indentasi masih sangat penting dan dapat membuat perbedaan besar pada kode.
+            code: "continue = {ask} 'Do you want to continue?'\n{if} continue = yes\n    sure = {ask} 'Are you sure?'\n    {if} sure {is} yes\n        {print} 'We will continue'\n{else}\n    {print} 'You are not sure'"
         6:
             header: Sebuah `{if}` di dalam `{repeat}`
             text: |-
                 Sekarang Anda dapat menggunakan beberapa baris kode setelah perintah ini, Anda juga dapat menempatkannya di dalam satu sama lain.
                 Coba lihat:
+            code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
         7:
             header: Perhatikan lekukannya
             text: Ingatlah bahwa baris keempat dan keenam kode ini dimulai dengan 8 spasi indentasi.
+            code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
         9:
             header: Ayo pergi!
             text: Nikmati petualangan di level 9!
+        8:
+            text: Let's debug this code!
+            header: Debugging
+            code: "{print} 'Welcome to HedyJumps, your parachute jump adventure!'\npeople = {ask} 'How many people are you jumping with today?\n{print} 'We'll ask all of you some questions for safety reasons.'\nextra_instructions_people = a, b\n{repeat} 3 {times}\n    name = {ask} 'What is your name?'\njumped_before = 'Have you ever done a parachute jump before, ' name '?'\n{if} jumped_before  no\n{print} 'No worries, you'll get an extra safety instruction in room 13'\n{add} name {to} extra_instructions_people\n{else}\n{print} 'Fun!'\n{print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'"
+            debug: 'True'
     10:
         1:
             header: Selamat datang di level 10
@@ -388,12 +498,19 @@ levels:
         2:
             header: Perintah untuk
             text: Dengan for Anda dapat membuat daftar dan menggunakan semua item dalam daftar itu. `{for}` membuat blok, seperti pengulangan dan jika demikian, semua baris dalam blok harus diawali dengan indentasi (4 spasi).
+            code: "animals = dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal"
         3:
             header: Perintah untuk
             text: 'Di sini Anda melihat contoh lain dari perintah `{for}`:'
+            code: "days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day"
         5:
             header: Saatnya memprogram!
             text: Nikmati petualangan di level 10!
+        4:
+            header: Debugging
+            debug: 'True'
+            text: Let's debug this code
+            code: "{print} 'Ladies and gentlemen!'\n{print} 'For one night and one night only in circus Hedy!'\nacts = shoot out of a canon, walk the tightrope, pack themself in a suitcase,\npeople = Iris the Incredible Achmed the Amazing Francis the Fantastic\n    {for} people {in} acts\nchosen_person {is} people {random}\n    chosen_person ' will ' act\n{add} chosen_person {from} people\n{print} 'Come and watch our show tonight!'\n{print} 'Tickets are only available at the counter"
     11:
         1:
             header: Selamat datang di level 11
@@ -404,6 +521,7 @@ levels:
         2:
             header: Perintah untuk
             text: 'Seperti inilah tampilan perintah for yang baru:'
+            code: "{for} counter {in} {range} 1 {to} 10\n    {print} counter\n{print} 'Ready or not. Here I come!'"
         3:
             header: variabel i
             text: |-
@@ -411,9 +529,15 @@ levels:
                 Tentu saja Anda dapat menggunakan nama apa pun untuk variabel yang Anda inginkan.
                 Nama standar untuk variabel dalam situasi ini yang digunakan dalam bahasa pemrograman seperti Python adalah 'i'.
                 Itu terlihat seperti ini:
+            code: "number = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * number"
         5:
             header: Mari kita mulai pemrograman!
             text: Nikmati petualangan di level 11!
+        4:
+            header: Debugging
+            code: "factor {is} {ask} 'Which table of multiplication do you need?'\n{repeat} {for} numbers {in} {range} 1 {to} 10 {times}\n    {print} This is the table of multiplications for factor\n    {print} number ' x ' factor ' = ' i * factor"
+            text: Let's debug this code!
+            debug: 'True'
     12:
         1:
             header: Selamat datang di tingkat 12
@@ -425,12 +549,14 @@ levels:
             text: |-
                 Level ini membuat beberapa perubahan pada penggunaan tanda kutip.
                 Mulai sekarang, **semua teks** harus dalam tanda kutip. Ini termasuk nilai variabel, item pada daftar dan teks setelah perintah {if}.
+            code: "name = 'Hedy the Robot'\n{print} 'Hello ' name"
         3:
             header: Angka desimal
             text: |-
                 Mulai level ini Anda juga diperbolehkan menggunakan angka desimal. Ini dapat membuat program seperti restoran Anda menjadi lebih baik!
 
                 Angka tidak diberi tanda petik.
+            code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
         4:
             header: Fungsi!
             text: |-
@@ -441,12 +567,19 @@ levels:
             text: |-
                 Dalam program ini Anda melihat contoh suatu fungsi.
                 Mari kita lihat apa yang terjadi jika Anda mengisi sisa lagunya!
+            code: "{define} twinkle\n     {print} 'Twinkle'\n     {print} '...'\n\n{call} twinkle\n{print} 'Up above the world so high'\n{print} 'Like a diamond in the sky'\n{call} twinkle"
+            header: Twinkle Twinkle little star!
         6:
             header: Fungsi
             text: Seperti yang Anda lihat pada contoh, fungsi adalah blok kode yang dapat dipanggil kapan saja. Anda menggunakan `{define}` untuk menyetel fungsi dan `{call}` untuk menggunakannya.
         8:
             header: Siap mencobanya?
             text: Nikmati petualangan di level 12!
+        7:
+            text: Let's debug this code!
+            header: Debugging
+            debug: 'True'
+            code: "{call} new_member\n{print} 'Hi new member!'\nusername = {ask} 'What is your username?'\npassword = 'What is your password?'\n{print} 'Welcome to our club!'\n\nusername = {ask} 'Please enter your username. Are you a new member? Type New Member'\n{if} username = New Member\n{call} new member\n    {else}\n        password = {ask} 'Please enter password'"
     13:
         1:
             header: Selamat datang di level 13
@@ -458,12 +591,14 @@ levels:
             text: |-
                 Perintah `{and}` selalu digunakan bersama dengan perintah {if}.
                 Dengan cara ini Anda dapat memeriksa apakah 2 pernyataan benar. Misalnya:
+            code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
         3:
             header: Perintah atau
             text: |-
                 Perintah `{or}` bekerja dengan cara yang sama seperti perintah `{and}`, namun hanya 1 dari dua pernyataan yang harus benar.
 
                 Mari kita lihat apa yang terjadi jika Anda mengubah `{and}` menjadi `{or}`.
+            code: "name = {ask} 'what is your name?'\n{if} name {is} 'Hedy' {or} name {is} 'hedy'\n    {print} 'Welcome!!'"
         4:
             header: Fungsi dengan argumen
             text: Sekarang setelah Anda mempelajari cara menggunakan fungsi, Anda akan mempelajari cara menggunakan fungsi dengan **argumen**. Argumen adalah variabel yang digunakan dalam suatu fungsi. Itu tidak digunakan di luar fungsi.
@@ -472,6 +607,7 @@ levels:
             text: |-
                 Dalam contoh ini Anda melihat bagaimana argumen 'tempat' digunakan dalam fungsi.
                 Jalankan kode dan ubah 'ocean' dan 'sea' menjadi sesuatu yang lain, dan lihat apa yang terjadi.
+            code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'"
         6:
             header: Contoh dengan variabel
             text: |-
@@ -485,6 +621,7 @@ levels:
                 jawabannya adalah bertanya 'Di mana Bonnie saya?'
                 panggilan lagu dengan jawaban
                 ```
+            code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'"
         7:
             header: Lebih banyak pertanyaan lagi!
             text: |-
@@ -500,9 +637,15 @@ levels:
                 tempat bertanya 'Di mana mereka?'
                 panggil lagu dengan nama, tempat
                 ```
+            code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'"
         9:
             header: Ayo!
             text: Nikmati petualangan di level 13!
+        8:
+            debug: 'True'
+            text: Let's debug this code!
+            header: Debugging
+            code: "{define} happiness {with} name\n    {print} '🥳'\n{play} G\n{play} A\n{play} B\n{print} 'Party on, ' name\n{define} sadness\n{print} '😞'\n{play} E\n{play} D\n{play} C\n{print} 'Hope you feel better, ' name\n\nname = {ask} 'What is your' name '?'\nmood = {ask} 'Are you happy or sad?'\n{if} mood = happy\n    {call} happiness {with} person\n{else} mood = sad\n    {define} sadness {to} name"
     14:
         1:
             header: Selamat datang di level 14
@@ -521,6 +664,7 @@ levels:
                   <= berarti lebih kecil dari atau sama dengan...
 
                 Anda dapat menggunakannya seperti ini:
+            code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'"
         3:
             header: Simbol
             text: |-
@@ -531,15 +675,22 @@ levels:
                 != tidak
 
                 == digunakan dalam pernyataan `{if}`.
+            code: "answer = {ask} 'Do you want to learn more?'\n{if} answer == 'yes'\n    {print} 'Go to the next adventure!'\n{if} answer != 'yes'\n    {print} 'That is a shame!'"
         4:
             header: Nilai kembalian
             text: Pada level sebelumnya Anda telah belajar membuat fungsi dan menggunakan argumen dengannya. Kegunaan hebat lainnya dari suatu fungsi adalah membiarkannya menghitung sesuatu untuk Anda. Anda dapat memberikan fungsi perhitungan dan itu akan memberi Anda jawaban perhitungannya. Jawaban ini disebut **nilai kembalian**.
         5:
             header: Nilai kembalian
             text: Misalnya, dalam kode ini fungsi hitung_harga_baru akan menghitung harga baru suatu barang. Ini akan memberi Anda harga baru sebagai nilai pengembalian.
+            code: "{define} calculate_new_price {with} amount, percentage\n    percentage = percentage / 100\n    discount_amount = amount * percentage\n    {return} amount - discount_amount\n\nold_price = {ask} 'How much is on the price tag?'\ndiscount = {ask} 'What percentage is the discount?'\n\nnew_price = {call} calculate_new_price {with} old_price, discount\n{print} 'The new price is ' new_price ' dollar'"
         7:
             header: Ayo mulai bekerja!
             text: Nikmati petualangan di level 14!
+        6:
+            code: "item = 'not bought'\n{print} 'I would like to buy this item'\nprice == {ask} 'What is the price?'\n{if} price less than or the same as 10\n    {print} 'Thats a great deal!'\n    item = 'bought'\n{if} price is more than 10 {and} less than or the same as 20\n    {print} 'Alright'\n    item = 'bought'\n{if} price is more than 20 {and} less than 50\n    {print} 'That is a bit much!'\n{if} price is more than or the same as 50\n    {print} 'No way!'\n{if} item =! bought\n    {print} 'Shame.. I wont buy it'\n{else}\n    {print} 'I will buy it! Thank you!'"
+            debug: 'True'
+            text: Let's debug this code!
+            header: Debugging
     15:
         1:
             header: Selamat datang di level 15
@@ -549,9 +700,16 @@ levels:
                 Kita akan mempelajari perulangan baru, perulangan while! Perulangan akan terus berlanjut selama pernyataan tersebut benar. Jadi jangan lupa untuk mengubah nilai dalam loop.
 
                 Dalam kode contoh, kami melanjutkan hingga jawaban yang benar diberikan. Jika jawaban yang benar tidak pernah diberikan, perulangan tidak akan pernah berakhir!
+            header: '{while}'
+            code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
         4:
             header: Mari kita mencobanya!
             text: Nikmati petualangan di level 15!
+        3:
+            header: Debugging
+            text: Let's debug this code!
+            code: "numbers = 1, 2\n\n{for} i {in} {range} 3 {to} 50\n    {add} x {to} numbers\n    i = + 1\n\nrandom_number = numbers {random}\nguesses = 10\n\n{while} guess = 0\n    answer = 'Guess my number:'\n    {if} answer >= random_number\n        {print} 'lower'\n        guesses = guesses -1\n    {if} answer > random_number\n        {print} 'higher!'\n        guesses = guesses\n    {else} answer = random_number\n        {print} 'correct'\n        guesses = 10"
+            debug: 'True'
     16:
         1:
             header: Selamat datang di level 16
@@ -559,9 +717,15 @@ levels:
         2:
             header: Tanda kurung siku
             text: Kita akan membuat daftar dengan cara Python, dengan tanda kurung siku di sekeliling daftar! Kami juga menyimpan tanda kutip di sekitar setiap item seperti yang telah kami pelajari di level sebelumnya. Kami menggunakan tanda kurung siku untuk menunjukkan suatu tempat dalam daftar. Perintah secara acak tidak dapat digunakan lagi.
+            code: "friends = ['Ahmed', 'Ben', 'Cayden']\n{print} friends[1] ' is the first friend on the list.'\n{print} friends[2] ' is the second friend on the list.'\n{print} friends[3] ' is the third friend on the list.'\n#now we will match 2 lists using the variable i\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} friends[i] 's lucky number is ' lucky_numbers[i]"
         4:
             header: Mari kita mencobanya!
             text: Nikmati petualangan di level 16!
+        3:
+            debug: 'True'
+            header: Debugging
+            text: Let's debug this code!
+            code: "{print} 'Friendship test'\n{subjects} = ['song', 'movie', 'food', 'drink']\nanswers_player_1 = []\nanswers_player_2 = []\nscore = 100\n\n{for} i {in} {range} 1 {to} 4\n    answer = {ask} 'what is your favorite ' subjects[i]\n{add} answer {to} answers_player_1\n\n{print} 'Player 2, your turn!'\n{for} i {in} {range} 0 {to} 4\n    answer_player_2 = {ask} 'what is player 1s favorite ' subjects\n    {add} answer_player_2 {in} answers_player_2\n    {if} answers_player_2[2] == answers_player_1[1]\n        {print} 'Correct!'\n    {else}\n        {print} 'Wrong!'\n    score = score - 25\n\n{print} 'Player 2, you've scored ' score '%'\n\n{if} score = 100\n    {print} 'You are an amazing friend'\n{if} score < 100 {or} score >= 50\n    {print} 'You could do better'\n{else} score < 50\n    {print} 'Do you even know this person?!'"
     17:
         1:
             header: Selamat datang di level 17
@@ -569,11 +733,19 @@ levels:
         2:
             header: Tanda titik dua
             text: 'Sekarang kita akan mengubah indentasinya sedikit. Setiap kali kita memerlukan indentasi, kita memerlukan : pada baris sebelum indentasi.'
+            code: "prices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{else}:\n    {print} 'Better luck next time..'"
         3:
             text: 'Di level ini Anda juga bisa menggunakan perintah baru: elif. elif adalah kependekan dari else if dan Anda membutuhkannya ketika Anda ingin membuat 3 opsi (atau lebih!). Coba lihat!'
+            code: "prices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'"
+            header: Elif
         5:
             header: Mari kita coba!
             text: Nikmati petualangan di level 17!
+        4:
+            debug: 'True'
+            text: Let's debug this code!
+            header: Debugging
+            code: "{define} ask_direction\n    direction = {ask} 'Where do you want to go?'\n    {if} direction = 'backwards'\n        {turn} 180\n    {else} direction == 'right'\n        {turn} 90\n    {else} direction == 'left'\n        {turn} 270\n        {forward} 100\n\ncontinue = 'yes'\n\n{while} continue == 'yes'\n    {print} ask_direction\n    {sleep}\n    continue = 'do you want to draw some more?'\n    {sleep}"
     18:
         1:
             header: Selamat datang di level 18
@@ -588,6 +760,7 @@ levels:
                 Perubahan terakhir yang perlu kita lakukan untuk mendapatkan kode Python adalah mengubah permintaan menjadi input.
 
                 Klik pada tab 'cetak' untuk semua contoh.
+            editor: /hedy/18
         3:
             header: Petualangan terakhir!
             text: Nikmati petualangan terakhir di level 18!
