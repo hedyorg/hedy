@@ -2,25 +2,33 @@ levels:
     0:
         1:
             header: Hedy में आपका स्वागत है!
+            text: Hedy is a programming language।
         2:
             header: प्रोग्रामिंग
+            text: "Programming is giving instructions to a computer, using the language of the computer.\n\nSuch a language is called a \"programming language\"।"
         3:
             header: प्रोग्रामिंग भाषा
         4:
             header: प्रोग्रामिंग
         5:
             header: Hedy में प्रोग्रामिंग
+            text: In Hedy we use special codes, like `{print}`।
         6:
             header: Hedy में प्रोग्रामिंग
+            text: Code words will be shown in pink।
         8:
             text: Output appears on the left-hand side.
         9:
             code: |-
                 {forward} 100
                 {turn} left
+            text: The output can also be a drawing।
+        7:
+            text: We start the code with the Run code button underneath the code।
     1:
         2:
             header: 'Hedy level 1: {print}'
+            text: "The first code that you can use in level 1 is `{print}`.\n\n`{print}` is used to show text on the screen।"
         3:
             header: 'Hedy level 1: {ask}'
             text: |-
@@ -60,6 +68,13 @@ levels:
             code: |-
                 {forward} 50
                 {turn} left
+            text: '`{turn}` is used to make the turtle turn left or right।'
+        12:
+            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger।
+        1:
+            text: "We will start level 1 by making stories in Hedy!\n\nWe need three text codes to create interactive stories।"
+        10:
+            text: '`{forward}` is used to move the turtle forward।'
     2:
         3:
             text: |-
@@ -70,7 +85,145 @@ levels:
                 This way we don't need the `{echo}`  command.
         4:
             text: Now that we use variables, we can use multiple variables instead of just one `{echo}`command.
+            code: "name {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old।"
+        6:
+            text: "You can add a number after the `{sleep}` command if you want the pause to be longer.\n\nIf you want, you could even use a variable instead of a number to decide the duration of the sleep command।"
+        1:
+            text: "In this level you will learn to use variables.\n\nA variable is a word that can be used to store information.\n\nFor example: a name, age or favorite sports team।"
+        5:
+            text: You can also use the `{sleep}` command to pause the code for a while।
+        7:
+            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger।
     4:
         9:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
+        5:
+            text: This also goes for the `{ask}` command।
+        8:
+            text: "Be careful! Now that you are using quotation marks, you can't use apostrophes in contractions.\n\nPlease try to print a contraction like \"you're\" or \"I'm\" in the screen below and see what happens...।"
+        1:
+            text: In this level you will learn how to use quotation marks।
+        4:
+            text: Each time you use the `{print}` command you need to put the text that you want to appear on the screen in quotation marks।
+        3:
+            text: "In this level we will fix this problem by using quotation marks.\n\nThis also makes our code look more like 'real' Python code।"
+    5:
+        1:
+            text: 'In this level you will learn to use 3 new commands: `{if}`, `{else}` and `{in}`।'
+        6:
+            text: "If you have practised with the `{if}` and `{else}` commands, you can also try the `{in}` command.\n\nWith `{in}` you can let the computer check if an item is in a list, for example:\n\nPlease note that Hedy is case sensitive. This means that if you answer \"Green\" instead of \"green\", Hedy will print \"meh\"।"
+        2:
+            text: "The `{if}` command allows you to choose between two options.\nIn this example the computer will print 'nice' if the given answer is Hedy.\nIf the answer is not Hedy, the computer will do nothing।"
+    9:
+        3:
+            text: Indentation is very important to tell the computer which lines should be repeated and which lines should only be ran once।
+        7:
+            text: Mind that the fourth and sixth line of this code starts with 8 spaces of indentation।
+        2:
+            text: You are allowed to combine `{repeat}` and `{if}` in this level।
+        5:
+            text: Again, indentation is still very important and can make a big difference in the code।
+        1:
+            text: "In this level you can use multiple lines of code after an `{if}` or after a `{repeat}` command.\n\nYou can even put a `{repeat}` command within another `{repeat}`  command।"
+    15:
+        1:
+            text: In this level you will learn about the `{while}` loop।
+    17:
+        2:
+            text: 'Now we are going to change indentation a little bit. Every time that we need an indentation, we need : at the line before the indentation।'
+        1:
+            text: in this level you will learn how to use a colon and you will learn the elif command।
+    16:
+        1:
+            text: In this level you will learn about the [square brackets] and how to use them।
+        2:
+            text: We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels. We use square brackets to point out a place in a list. The at random command can not be used anymore।
+    3:
+        3:
+            text: "You can use the list with the `{at}` `{random}` command.\nThe computer will randomly pick one item of the list.\nEvery time you run this code the output will differ।"
+        2:
+            text: "You make a list with `{is}`.\n\nSeparate the items on your list with a comma।"
+        1:
+            text: In this level you'll learn how to make a list, add and remove items form your lists and pick a random item off that list।
+        5:
+            text: "You can add items to a list with the `{add}` `{to}` command.\n\nYou can choose what to add to the list or you can use the `{add}` `{to}` command in combination with the `{ask}` command.\nThis way you can let the player decide what to add to the list।"
+        6:
+            text: "The opposite of the `{add}` `{to}` command is the  `{remove}` `{from}` command.\nThis command removes an item from a list।"
+        4:
+            text: You can use the `{at}` `{random}` command in a sentence as well।
+    6:
+        3:
+            text: If you want to subtract, you can use the minus sign।
+        1:
+            text: In this level we are adding maths to our codes।
+        4:
+            text: If you want to do multiplications, you can use the asterisk।
+        2:
+            text: If you want to calculate an addition, simply use the plus sign।
+        7:
+            text: "From now on you can also use the = symbol instead of the `{is}` command.\nThis goes for both numbers and words, and it also goes after the `{if}` or `{else}` commands।"
+        5:
+            text: You can use the slash for division।
+        6:
+            text: In summary, you can use +, -, * and / to do maths।
+    10:
+        2:
+            text: With for you can make a list and use all items on that list. `{for}` creates a block, like repeat and if so all lines in the block need to start with indentation (4 spaces)।
+        1:
+            text: 'In this level you will learn a new command: `{for}`।'
+    7:
+        4:
+            text: You can also repeat an `{ask}`, `{if}` or `{else}` command multiple times।
+        1:
+            text: In this level you will learn how to repeat a line of code as many times a you'd like।
+        3:
+            text: When using the repeat command, do not forget the `{print}` command।
+    8:
+        1:
+            text: In this level you will learn to use indentation to make the `{repeat}`, `{if}` and `{else}` commands work for multiple lines of code।
+        6:
+            text: "These are the `{if}` and `{else}` commands now.\nEach line after the `{if}` and `{else}` commands start with indentation।"
+        2:
+            text: "In the previous levels, the `{repeat}` command looked like this:\n\nYou could only repeat one line of code।"
+        7:
+            text: Just like with the `{repeat}` command, you can stop using indentation and the lines will always be shown. Not just if the statement is true।
+        4:
+            text: "If you want to, you can continue after the `{repeat}` command without indentation.\nThe lines that do not start with indentation will not be repeated।"
+        8:
+            text: "You might have thought of trying to put an if command inside a repeat command, or inside another if command.\nFor now, this is not possible yet. In the higher levels, it will be allowed, but for now let's focus on practising the `{if}` `{else}` and `{repeat}` commands with proper indentation first।"
+    11:
+        1:
+            text: "In this level, we add a new form of the `{for}` command. In earlier levels, we used for with a list, but we can also use for with numbers.\n\nThis way we don't need the `{repeat}` command anymore।"
+    12:
+        2:
+            text: "This level makes some changes to the usage of quotation marks.\nFrom now on, **all texts** need to be in quotation marks. This includes values of variables, items on lists and text after {if} commands।"
+        3:
+            text: "From this level on you are also allowed to use decimal numbers. This can make programs like your restaurant even better!\n\nNumbers do not need quotation marks।"
+        4:
+            text: "In this level you'll learn how to use functions. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again. To create a function, use define and give the function a name. Then put all the lines you want in the function in a indented block under the define line. Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!\n\nNow, whenever we need that block of code, we just use call with the function's name to call it up! We don't have to type that block of code again।"
+        6:
+            text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it।
+    13:
+        5:
+            text: "In this example you see how the argument 'place' is used in the function.\nRun the code and change 'ocean' and 'sea' to something else, and see what happens।"
+        3:
+            text: "The `{or}` works in the same way as the `{and}` command, but only 1 of the two statements has to be true.\n\nLet's see what happens when you change the `{and}` for `{or}`।"
+        4:
+            text: Now that you've learned how to use functions, you'll learn how to use a function with an **argument**. An argument is a variable that is used within a function. It is not used outside the function।
+        1:
+            text: "We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two ifs but can use and and or.\nFrom now on you could also use arguments in your functions।"
+    14:
+        1:
+            text: In this level you'll learn some new symbols that can help you improve your programs, like >. You will also learn to work with return values of a function।
+        3:
+            text: "You can also use:\n\n== is the same as.\n\n!= is not\n\n== is used in `{if}` statements।"
+        4:
+            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**।
+        5:
+            text: For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value।
+    18:
+        1:
+            text: Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now।
+        2:
+            text: "We arrived at real Python code! That means we need to use parentheses with print and range from now on.\n\nAlso, if you want to print more than one item, you need to separate them by commas.\n\nThe final change we will need to make to get Python code is changing ask into input.\n\nClick on the 'print' tab for all the examples।"
