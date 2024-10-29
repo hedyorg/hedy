@@ -43,6 +43,7 @@ levels:
         9:
             header: Programar en Hedy
             text: La salida también puede ser un dibujo.
+            code: "{forward} 100\n{turn} {left}"
     1:
         1:
             header: ¡Bienvenido al nivel 1!
@@ -56,6 +57,7 @@ levels:
 
                 `{print}` se utiliza para mostrar texto en la pantalla.
             code: '{print} Put text on the screen'
+            header: '{print}'
         3:
             header: El comando {print}
             text: |-
@@ -73,6 +75,7 @@ levels:
             code: |-
                 {print} ¡Bienvenido/a a tu propio piedra papel tijera!
                 {ask} ¿Qué elegirás?
+            header: '{ask}'
         5:
             text: |-
                 Como puedes ver en el ejemplo anterior. Si usas el comando `{ask}`, puedes hacer una pregunta.
@@ -84,14 +87,17 @@ levels:
                 {print} ¡Hola!
                 {ask} ¿Cómo te llamas?
                 {echo} hola
+            header: '{echo}'
         6:
             header: ¡Programando!
             text: |-
                 Con `{print}`, `{ask}` y `{echo}` ya puedes crear una pequeña historia.
                 Este es un buen momento para probar las aventuras Loro, Cuento y Piedra, papel o tijera.
+            editor: /hedy/1
         7:
             header: ¡Programando!
             text: Las aventuras se muestran en pestañas.
+            editor: /hedy/1
         8:
             header: ¡Programación!
             text: Los botones de flecha amarillos se pueden utilizar para copiar ejemplos.
@@ -102,9 +108,11 @@ levels:
         10:
             header: 'Dibujando con la tortuga: {forward}'
             text: '`{forward}` se utiliza para mover la tortuga hacia adelante.'
+            code: '{forward} 50'
         11:
             header: 'Dibuja con la tortuga: {turn}'
             text: '`{turn}` se utiliza para hacer que la tortuga gire a la izquierda o a la derecha.'
+            code: "{forward} 50\n{turn} {left}"
         12:
             header: Depurar
             text: Depurar un código significa eliminar los errores en el código. Depuremos este código juntos. Haz clic en el botón de la mariquita para iniciar el depurador.
@@ -113,6 +121,7 @@ levels:
                 {print} ¿Qué canción quieres escuchar?
                 {ask} ¡También me gusta esa canción!
                 {print} La siguiente... {echo}
+            debug: 'True'
         13:
             header: ¡Que empiece la diversión de programar!
             text: ¡Disfruta las aventuras del nivel 1!
@@ -131,6 +140,7 @@ levels:
                 nombre {is} Hedy
                 edad {is} 15
                 {print} nombre tiene edad
+            header: Variables
         3:
             header: Interactivo
             text: |-
@@ -180,6 +190,7 @@ levels:
                 {print} Iré a por tu donut. {sleep}
                 {print} ¡Aquí lo tienes! ¡Un donut relleno con cobertura!
                 {ask} ¡Que tengas un buen día!
+            debug: 'True'
         8:
             header: ¡Que empiece la diversión de programar!
             text: ¡Disfruta las aventuras en el nivel 2!
@@ -244,6 +255,7 @@ levels:
                 {print} o prefieres... segunda_opcion {at} {random}
                 {remove} segunda_opcion {to} generos_musicales
                 {print} ¡Me gusta genero_musical {random} más!
+            debug: 'True'
         8:
             header: ¡Manos a la obra!
             text: ¡Disfruta las aventuras en el nivel 3!
@@ -258,6 +270,7 @@ levels:
             code: |-
                 nombre {is} Sophie
                 {print} Mi nombre es nombre
+            debug: 'True'
         3:
             header: Arreglarlo con comillas
             text: |-
@@ -295,6 +308,7 @@ levels:
 
                 Por favor intenta imprimir una contracción como "you're" o "I'm" en la pantalla de abajo y verás que sucede....
             code: '{print} ''¡Esto no'' funcionará!'''
+            debug: 'True'
         9:
             header: Limpiar
             text: |-
@@ -323,6 +337,7 @@ levels:
                 colores {is} 'naranja, plata, silver, blanco, marrón'
                 {print} 'Me encanta el colores {at} {random}!'
                 opcion {is} {ask} ¿Cuál quieres?
+            debug: 'True'
         11:
             header: ¡Preparados, Listos, Ya!
             text: ¡Disfruta las aventuras en el nivel 4!
@@ -345,6 +360,7 @@ levels:
                 Al usar el comando `{if}`, no te olvides de usar el comando `{print}`.
                 ¡Este código no funcionará!
             code: '{if} nombre {is} Hedy ''genial'''
+            debug: 'True'
         4:
             header: sino
             text: |-
@@ -455,6 +471,7 @@ levels:
                 {if} día {is} lunes
                 precio_total = precio_total * 0,25
                 {print} 'Este será el precio total por favor'
+            debug: 'True'
         10:
             header: ¡Manos a la obra!
             text: ¡Disfruta las aventuras en el nivel 6!
@@ -477,6 +494,7 @@ levels:
             header: No te olvides el comando imprimir
             text: Al usar el comando repetir, no te olvides el comando `{print}`.
             code: '{repeat} 5 {times} ''¡Ayuda!'''
+            debug: 'True'
         4:
             header: Repetir un comando preguntar
             text: También puedes repetir un comando `{ask}`, `{if}` or `{else}` varias veces.
@@ -498,6 +516,7 @@ levels:
                 {if} sí
                 {print} ¡Viva!
                 {else} 'Eso es una lástima... Bueno... es hora de construir un refugio y encontrar algo de comida'
+            debug: 'True'
         6:
             header: ¡Preparado Listo Ya!
             text: ¡Disfruta las aventuras en el nivel 7!
@@ -512,6 +531,7 @@ levels:
 
                 Sólo podías repetir una línea de código.
             code: '{repeat} 5 {times} {print} ''¡Ayuda!'''
+            debug: 'True'
         3:
             header: comandos {repeat} ahora
             text: |-
@@ -540,6 +560,7 @@ levels:
             code: |-
                 {if} nombre {is} Hedy {print} 'genial'
                 {else} {print} '¡boo!'
+            debug: 'True'
         6:
             header: ahora si y sino
             text: |-
@@ -582,6 +603,7 @@ levels:
                         {print} Elegiste un billete de ida y vuelta'
                 precio * 2
                 {print} 'Serán ' precio ' euros por favor'
+            debug: 'True'
         10:
             header: ¡Vamos a ver las aventuras!
             text: ¡Disfruta las aventuras en el nivel 8!
@@ -673,6 +695,7 @@ levels:
                 {else}
                 {print} 'Fun!'
                 {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
+            debug: 'True'
         9:
             header: ¡Vamos!
             text: ¡Disfruta las aventuras en el nivel 9!
@@ -746,6 +769,7 @@ levels:
                 {repeat} {for} números {in} {range} 1 {to} 10 {times}
                     {print} Esta es la tabla de multiplicaciones por un factor
                     {print} número ' x ' factor ' = ' i * factor
+            debug: 'True'
         5:
             header: ¡Comencemos a programar!
             text: ¡Disfruta las aventuras en el nivel 11!
@@ -810,6 +834,7 @@ levels:
                 {call} nuevo miembro
                     {else}
                         contraseña = {ask} 'Por favor, introduce contraseña'
+            debug: 'True'
         8:
             header: ¿Listo para probarlo?
             text: ¡Disfruta de las aventuras en el nivel 12!
@@ -919,6 +944,7 @@ levels:
                     {call} felicidad {with} persona
                 {else} estado = triste
                     {define} tristeza {to} nombre
+            debug: 'True'
         9:
             header: ¡Vamos!
             text: ¡Disfruta de las aventuras en el nivel 13!
@@ -1000,6 +1026,7 @@ levels:
                     {print} 'Vergüenza.. No lo voy a comprar.
                 {else}
                     {print} '¡Lo compraré! ¡Gracias!"
+            debug: 'True'
         7:
             header: ¡Manos a la obra!
             text: ¡Disfruta de las aventuras en el nivel 14!
@@ -1017,6 +1044,7 @@ levels:
                 {while} respuesta != 25
                     respuesta = {ask} '¿Cuánto es 5 veces 5?'
                 {print} 'Se ha dado una respuesta correcta'
+            header: '{while}'
         3:
             header: Depuración
             text: ¡Depuremos este código!
@@ -1164,6 +1192,7 @@ levels:
                 El cambio final que tenemos que hacer para conseguir el código Python es cambiar ask por entrada.
 
                 Haz clic en la pestaña 'imprimir' para todos los ejemplos.
+            editor: /hedy/18
         3:
             header: ¡Las últimas aventuras!
             text: ¡Disfruta las últimas aventuras en el nivel 18!
