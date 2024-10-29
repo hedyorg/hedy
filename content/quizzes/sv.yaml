@@ -12,6 +12,8 @@ levels:
             -   option: Heidi
                 feedback: Inte den här!
             hint: Det har fått sitt namn efter Hedy Lamarr.
+            correct_answer: A
+            question_score: '10'
         2:
             question_text: Vad behöver fyllas i för att visa texten Hej!?
             code: _ Hej!
@@ -25,6 +27,8 @@ levels:
             -   option: '`{ask}`'
                 feedback: Med `{ask}` kan du ställa en fråga.
             hint: _ Hej världen!
+            correct_answer: B
+            question_score: '10'
         3:
             question_text: Hur frågar man vad någons favoritfärg är?
             mp_choice_options:
@@ -49,6 +53,8 @@ levels:
                     ```
                 feedback: '`{echo}` upprepar ditt svar tillbaka till dig.'
             hint: Du kan fråga något med kommandot `{ask}`
+            question_score: '10'
+            correct_answer: C
         4:
             question_text: Vad är fel med den här koden?
             code: |-
@@ -65,6 +71,8 @@ levels:
             -   option: Ingenting! Koden är perfekt!
                 feedback: Fel – kolla noga!
             hint: Rad 1 verkar inte stämma
+            correct_answer: A
+            question_score: '10'
         5:
             question_text: Vilket kommando saknas på rad 2?
             code: |-
@@ -80,6 +88,8 @@ levels:
             -   option: '`{echo}`'
                 feedback: Just det!
             hint: Du vill ha svaret i slutet på rad 2 …
+            correct_answer: D
+            question_score: '10'
         6:
             question_text: Vad är det för fel på den här koden?
             code: |-
@@ -97,6 +107,8 @@ levels:
             -   option: På rad 4 är `{print}` felstavat.
                 feedback: Nej, felet är någon annanstans
             hint: Kolla `{print}`-kommandona.
+            correct_answer: B
+            question_score: '10'
         7:
             question_text: Vad är det för fel på den här koden?
             code: |-
@@ -114,6 +126,8 @@ levels:
             -   option: Ingenting! Koden är perfekt!
                 feedback: Rätt!
             hint: Kolla koden rad för rad
+            correct_answer: D
+            question_score: '10'
         8:
             question_text: Hur används kommandot `{echo}`?
             mp_choice_options:
@@ -126,6 +140,8 @@ levels:
             -   option: Du kan använda det för att få text att försvinna.
                 feedback: Det stämmer inte …
             hint: '`{echo}` används efter ett `{ask}`-kommando.'
+            question_score: '10'
+            correct_answer: C
         9:
             question_text: Vad är fel med den här koden?
             code: |-
@@ -142,6 +158,8 @@ levels:
             -   option: Ingenting. Koden är perfekt!
                 feedback: Leta noga efter misstaget …
             hint: '`{ask}` låter dig ställa en fråga'
+            correct_answer: B
+            question_score: '10'
         10:
             question_text: Vad kommer att visas på utdataskärmen när du har kört den här koden?
             mp_choice_options:
@@ -158,6 +176,9 @@ levels:
                     Yes!
                 feedback: There are two echo commands
             hint: Nu kör vi!
+            question_score: '10'
+            code: "{ask} Are you ready to go to level 2?\n{echo}\n{echo}"
+            correct_answer: B
     2:
         1:
             question_text: Vilket påstående stämmer?
@@ -171,6 +192,8 @@ levels:
             -   option: Med kommandot {sleep} kan du ta bort text från skärmen.
                 feedback: Det är inte så `{sleep}` fungerar.
             hint: '`{print}` fungerar fortfarande på samma sätt som på nivå 1'
+            correct_answer: C
+            question_score: '10'
         2:
             question_text: Vilken kod är rätt?
             mp_choice_options:
@@ -195,6 +218,8 @@ levels:
                     ```
                 feedback: Orden är rätt, men inte ordningen!
             hint: '`{ask}` fungerar inte som på nivå 1'
+            question_score: '10'
+            correct_answer: A
         3:
             question_text: Vad visas på skärmen när du kör den här koden?
             code: |-
@@ -210,6 +235,8 @@ levels:
             -   option: Marleen går till marknaden och Marleen köper ett äpple.
                 feedback: '"hon" ersätts inte med namnet'
             hint: Ordet namn ersätts med Marleen
+            correct_answer: C
+            question_score: '10'
         4:
             question_text: Vad ser du på skärmen när du kör den här koden?
             code: |-
@@ -225,6 +252,8 @@ levels:
             -   option: Hej mitt Hedy är Hedy
                 feedback: Stämmer – det misstaget kommer att rättas till på nivå 4!
             hint: '''namn'' ersätts med ''Hedy'' på båda ställena'
+            correct_answer: D
+            question_score: '10'
         5:
             question_text: Vad händer när du använder kommandot `{sleep}`?
             mp_choice_options:
@@ -237,6 +266,8 @@ levels:
             -   option: Du lägger det i slutet så Hedy vet att ditt program är slut
                 feedback: Nej, det skulle vara poänglöst i slutet av koden
             hint: Datorn väntar en sekund under kommandot `{sleep}`
+            correct_answer: C
+            question_score: '10'
         6:
             question_text: Vad ska stå på raderna?
             code: |-
@@ -253,6 +284,8 @@ levels:
             -   option: '`{ask}`'
                 feedback: Det finns ingen fråga att ställa
             hint: Pausa för dramatisk effekt …
+            correct_answer: A
+            question_score: '10'
         7:
             question_text: Vilket kommando ska användas på rad 2?
             code: |-
@@ -281,6 +314,8 @@ levels:
                     ```
                 feedback: Gör det lättare för dig genom att använda talet 3
             hint: Du vill att datorn ska vänta tre sekunder
+            question_score: '10'
+            correct_answer: B
         8:
             question_text: Hur skulle du rätta till den första kodraden?
             code: |-
@@ -308,6 +343,8 @@ levels:
                     ```
                 feedback: Var är kommandot `{ask}`?
             hint: Variabelnamnet ska komma först
+            question_score: '10'
+            correct_answer: C
         9:
             question_text: Vad är det som går fel i den här koden?
             code: |-
@@ -323,6 +360,8 @@ levels:
             -   option: 'Rad 2 ska vara: `{sleep}` Jag älskar djur'
                 feedback: Sov används inte för att `{print}` text
             hint: Du vill `{print}` 'Jag älskar hundar'
+            question_score: '10'
+            correct_answer: B
         10:
             question_text: Vilket kommando ska användas på rad 1?
             code: |-
@@ -352,6 +391,8 @@ levels:
                     ```
                 feedback: Det stämmer!
             hint: Du vill `{ask}` en fråga
+            question_score: '10'
+            correct_answer: D
     3:
         1:
             question_text: Vilka kommandon använder du för att låta Hedy välja något slumpmässigt?
@@ -365,6 +406,8 @@ levels:
             -   option: '`{at}` `{random}`'
                 feedback: Rätt!
             hint: Godtyckligt betyder utan plan eller slumpmässigt.
+            question_score: '10'
+            correct_answer: D
         2:
             question_text: Vad är det för fel på den här koden?
             code: |-
@@ -380,6 +423,8 @@ levels:
             -   option: '`{at} {random}` är felstavat'
                 feedback: '`{at} {random}` är rättstavat'
             hint: Det är något fel på rad 1
+            question_score: '10'
+            correct_answer: A
         3:
             question_text: Hur fixar man på rad 2?
             code: |-
@@ -404,6 +449,8 @@ levels:
             -   option: Ingenting, koden är rätt!
                 feedback: Leta noga efter felet
             hint: Variabeln (listan) heter alternativ.
+            correct_answer: C
+            question_score: '10'
         4:
             question_text: Vad ska ändras på rad 2 för att skriva ut ett slumpmässigt pris?
             code: |-
@@ -428,6 +475,8 @@ levels:
             -   option: Inget, den här koden är okej.
                 feedback: Leta noga efter misstaget som du missade!
             hint: Variabelnamnet är priser
+            question_score: '10'
+            correct_answer: B
         5:
             question_text: Vad är fel med den här koden?
             code: |-
@@ -445,6 +494,8 @@ levels:
             -   option: Inget, den här koden är perfekt
                 feedback: Det är rätt!
             hint: Har den här koden ens ett fel?
+            question_score: '10'
+            correct_answer: D
         6:
             question_text: Vad är fel med den här koden?
             code: |-
@@ -461,6 +512,8 @@ levels:
             -   option: Inget! Den här koden är perfekt!
                 feedback: Det är faktiskt ett fel på rad 2.
             hint: Det är något fel på rad 2.
+            correct_answer: B
+            question_score: '10'
         7:
             question_text: Vad gör kommandot `{add}`?
             code: |-
@@ -478,6 +531,8 @@ levels:
             -   option: Kommandot `{add}` skriver ut din favoritbok.
                 feedback: Nej, det lägger till din favoritbok i listan
             hint: Kommandot `{add}` lägger till en bok, men vilken?
+            correct_answer: C
+            question_score: '10'
         8:
             question_text: Vad blir resultatet av denna kod?
             code: |-
@@ -495,6 +550,8 @@ levels:
             -   option: gräddfil
                 feedback: Det stämmer!
             hint: Det finns tre smaker men två tas bort. Vilken blir kvar?
+            question_score: '10'
+            correct_answer: D
         9:
             question_text: Vad är det för fel på den här koden?
             code: |-
@@ -512,6 +569,8 @@ levels:
             -   option: Inget – koden är rätt!
                 feedback: Hitta felet!
             hint: Titta på rad 3
+            question_score: '10'
+            correct_answer: C
         10:
             question_text: Vad ska stå på _?
             code: |-
@@ -542,6 +601,8 @@ levels:
                     ```
                 feedback: Det ökade chansen att personen som gick igår nu måste göra det igen. Det är oschysst.
             hint: Personen som rastade hunden igår ska strykas från listan.
+            correct_answer: A
+            question_score: '10'
     4:
         1:
             question_text: Vilken kod är rätt?
@@ -567,6 +628,8 @@ levels:
                     ```
                 feedback: Nej, men två andra kommandon fungerar.
             hint: På nivå 4 behöver du citattecken för två kommandon.
+            correct_answer: A
+            question_score: '10'
         2:
             question_text: Vilken kod använder rätt citattecken?
             mp_choice_options:
@@ -591,6 +654,8 @@ levels:
                     ```
                 feedback: Detta är kommatecken men du behöver citattecken.
             hint: Välj rätt citattecken.
+            question_score: '10'
+            correct_answer: B
         3:
             question_text: Var används citattecken rätt?
             mp_choice_options:
@@ -615,6 +680,8 @@ levels:
                     ```
                 feedback: Perfekt!
             hint: Både före och efter de ord du vill skriva ut ska det finnas citattecken.
+            correct_answer: D
+            question_score: '10'
         4:
             question_text: Vilket påstående stämmer?
             mp_choice_options:
@@ -627,6 +694,8 @@ levels:
             -   option: Du kan själv välja om du vill använda citattecken eller inte.
                 feedback: Tyvärr är Hedy strängare än så.
             hint: Från och med nivå 4 måste du använda citattecken.
+            correct_answer: B
+            question_score: '10'
         5:
             question_text: Vad måste ändras för att spelet ska fungera?
             code: |-
@@ -651,6 +720,8 @@ levels:
             -   option: Inget, spelet fungerar redan!
                 feedback: Titta noga. Det finns ett fel.
             hint: Du vill inte att Hedy bokstavligen ska skriva ut 'alternativ {at} {random}' – du vill att Hedy ska skriva ut 'sten' eller 'påse' eller 'sax'.
+            correct_answer: C
+            question_score: '10'
         6:
             question_text: Vad skulle vara en bra nästa rad i den här koden?
             code: priser {is} 1 dollar, 100 dollar, 1 miljon dollar
@@ -676,6 +747,8 @@ levels:
                     ```
                 feedback: Hedy kommer bokstavligen att skriva ut 'priser {at} {random}''
             hint: 'Tänk efter: vad är en variabel och bör stå utanför citattecknen? Och vilka är normala ord som ska vara innanför?'
+            correct_answer: A
+            question_score: '10'
         7:
             question_text: Vad är det för fel på den här koden?
             code: |-
@@ -692,6 +765,8 @@ levels:
             -   option: Ingenting, den här koden är bra som den är!
                 feedback: Titta noga. Du missade ett fel!
             hint: Kontrollera varje rad för att se om det behövs citattecken eller inte.
+            correct_answer: A
+            question_score: '10'
         8:
             question_text: Vad skulle vara en bra nästa rad för den här koden?
             code: |-
@@ -720,6 +795,8 @@ levels:
                     ```
                 feedback: Hedy kommer bokstavligen att skriva ut 'Så du väljer dörr dörr
             hint: Det andra ordet dörr bör ersättas med siffran, det första bör fortfarande vara ordet dörr …
+            question_score: '10'
+            correct_answer: C
         9:
             question_text: Vad kommer aldrig att visas i utskriften?
             code: |-
@@ -735,6 +812,8 @@ levels:
             -   option: FC Barcelona kommer att vinna champions league
                 feedback: Det är rätt. Det finns inte i listan
             hint: Vilka alternativ har Hedy att slumpmässigt välja mellan?
+            correct_answer: D
+            question_score: '10'
         10:
             question_text: Vilket påstående stämmer?
             code: |-
@@ -751,6 +830,8 @@ levels:
             -   option: Inget, den här koden har inga fel
                 feedback: Du missade en sak!
             hint: En rad behöver citattecken eftersom den ska skrivas ut bokstavligt.
+            correct_answer: B
+            question_score: '10'
     5:
         1:
             question_text: Vilket kommando ska fyllas i på _?
@@ -768,6 +849,8 @@ levels:
             -   option: '`{else}`'
                 feedback: Det är rätt!
             hint: Vilket hör ihop med kommandot `{if}`?
+            question_score: '10'
+            correct_answer: D
         2:
             question_text: Vad visas på utdataskärmen när du matar in namnet Hedy?
             code: |-
@@ -783,6 +866,8 @@ levels:
             -   option: Fel
                 feedback: Lyckligtvis inte!
             hint: '`{if}` namn `{is}` Hedy `{print}` …?'
+            correct_answer: A
+            question_score: '10'
         3:
             question_text: Vad är rätt lösenord?
             code: |-
@@ -799,6 +884,8 @@ levels:
             -   option: ALARM INKRÄKTARE
                 feedback: Detta skrivs ut när du matar in fel lösenord!
             hint: '`{if}` lösenord `{is}` … `{print}` ''Rätt!''!'''
+            correct_answer: B
+            question_score: '10'
         4:
             question_text: Vad skriver Hedy ut när du matar in fel lösenord?
             code: |-
@@ -815,6 +902,8 @@ levels:
             -   option: ALARM! INKRÄKTARE!
                 feedback: Bra jobbat!
             hint: Din dator larmar om det kommer inkräktare!
+            correct_answer: D
+            question_score: '10'
         5:
             question_text: Varför kommer Hedy att säga 'ALARM! INKRÄKTARE' när du matar in 'hemligt'?
             code: |-
@@ -831,6 +920,8 @@ levels:
             -   option: För att Hedy gör fel
                 feedback: Nej, Hedy gör rätt
             hint: Stavningen av ordet måste vara exakt samma.
+            question_score: '10'
+            correct_answer: A
         6:
             question_text: Vilket ord ska stå på frågetecknets plats på sista raden?
             code: |-
@@ -861,6 +952,8 @@ levels:
                     ```
                 feedback: '`{print}` är redan där, vi behöver ett ord innan det!'
             hint: '`{if}` passar ihop med …?'
+            correct_answer: C
+            question_score: '10'
         7:
             question_text: Vilket ord ska det vara istället för frågetecknet?
             code: |-
@@ -878,6 +971,8 @@ levels:
             -   option: '`{print}`'
                 feedback: Toppen!
             hint: Efter `{else}` kommer ett `{print}` -kommando
+            correct_answer: D
+            question_score: '10'
         8:
             question_text: Vilket ord ska stå på frågetecknets plats?
             code: |-
@@ -900,6 +995,8 @@ levels:
             -   option: '`{print}`'
                 feedback: Nej, det är inte det.
             hint: Vad heter variabeln?
+            question_score: '10'
+            correct_answer: B
         9:
             question_text: Vilken dörr ska du välja för att fly?
             code: |-
@@ -919,6 +1016,8 @@ levels:
             -   option: Det är en fälla, du kommer alltid att bli uppäten!
                 feedback: Lyckligtvis inte!
             hint: En av dörrarna är säker.
+            question_score: '10'
+            correct_answer: B
         10:
             question_text: Vilket monster står bakom dörr 1?
             code: |-
@@ -938,6 +1037,8 @@ levels:
             -   option: jättespindel
                 feedback: Inte alltid …
             hint: Tänk på de tre sista orden … monster `{at} {random}`…
+            correct_answer: A
+            question_score: '10'
     6:
         1:
             question_text: Vad skriver Hedy ut när du kör den här koden?
@@ -951,6 +1052,9 @@ levels:
             -   option: '210'
                 feedback: Tänk på att det är en uträkning.
             hint: '`*` används som gångertecken'
+            correct_answer: A
+            question_score: '10'
+            code: '{print} 2*10'
         2:
             question_text: Vad använder du när du vill addera två tal?
             mp_choice_options:
@@ -963,6 +1067,8 @@ levels:
             -   option: '`+`'
                 feedback: Rätt!
             hint: Det är plustecknet.
+            question_score: '10'
+            correct_answer: D
         3:
             question_text: Vad skriver Hedy ut när du kör den här koden?
             mp_choice_options:
@@ -975,6 +1081,9 @@ levels:
             -   option: Inget, Hedy kommer att ge ett felmeddelande.
                 feedback: Nej, Hedy kommer att skriva ut det bokstavligen.
             hint: Tänk på citattecknen!!
+            correct_answer: C
+            code: "{print} '3*10'"
+            question_score: '10'
         4:
             question_text: Kim är 10 år gammal. Vad kommer Hedy att skriva ut för henne?
             code: |-
@@ -992,6 +1101,8 @@ levels:
             -   option: Ditt lyckotal är … 10
                 feedback: Hennes lyckotal är namn gånger ålder …
             hint: 'Kim har 3 bokstäver, hon är 10 år gammal så: bokstäver gånger ålder = 3*10 = 30.'
+            question_score: '10'
+            correct_answer: C
         5:
             question_text: Om 5 personer äter på denna restaurang, hur mycket måste de betala sammanlagt?
             code: |-
@@ -1008,6 +1119,9 @@ levels:
                 feedback: '* betyder multiplikation.'
             -   option: 50 dollar
                 feedback: Bra!
+            correct_answer: D
+            hint: '`price` `is` `people` `times` 10'
+            question_score: '10'
         6:
             question_text: Vad kostar en hamburgare i den här virtuella restaurangen?
             code: |-
@@ -1026,6 +1140,8 @@ levels:
             -   option: 21 dollar
                 feedback: Det är priset för en hamburgare och fries!
             hint: Tänk på den fjärde raden.
+            question_score: '10'
+            correct_answer: A
         7:
             question_text: Varför står det på rad 7 'pris är pris + 3' i stället för 'pris är 3'?
             code: |-
@@ -1048,6 +1164,8 @@ levels:
             -   option: Eftersom priset är 0 dollar till att börja med.
                 feedback: Det är sant, men det är inte anledningen
             hint: Priset ska inte vara 3, utan 3 dollar mer än det redan var
+            question_score: '10'
+            correct_answer: C
         8:
             question_text: Varför är den här koden fel?
             code: |-
@@ -1065,6 +1183,8 @@ levels:
             -   option: Variabeln på rad 2 kan inte heta svar, eftersom den är för lik variabeln rätt svar.
                 feedback: Variabelnamn kan likna varann men kan inte bestå av två ord …
             hint: Kontrollera variabelnamnen.
+            correct_answer: B
+            question_score: '10'
         9:
             question_text: Tänk dig att du älskar fotboll 10 av 10, har ätit 2 bananer och har tvättat händerna 3 gånger idag. Hur smart tror den fåniga spådamen att du är?
             code: |-
@@ -1086,6 +1206,8 @@ levels:
             -   option: 100%
                 feedback: (2 bananer + 3 hygien) * 10 fotboll = 5*10 =?
             hint: (2 bananer + 3 hygien) * 10 fotboll = 5*10 =?
+            correct_answer: C
+            question_score: '10'
         10:
             question_text: Vilket påstående stämmer?
             code: |-
@@ -1101,6 +1223,8 @@ levels:
             -   option: Du kan bara använda `=`-tecknet när du arbetar med siffror, inte med ord.
                 feedback: Du kan också använda `=` med ord.
             hint: '`{is}` och `=` är båda tillåtna'
+            correct_answer: B
+            question_score: '10'
     7:
         1:
             question_text: Hur många rader kan du upprepa samtidigt med repetera-kommandot på den här nivån?
@@ -1114,6 +1238,8 @@ levels:
             -   option: oändligt
                 feedback: På den här nivån kan du bara upprepa en rad i taget
             hint: Du kan bara upprepa en rad åt gången
+            correct_answer: B
+            question_score: '10'
         2:
             question_text: Vilken kod är rätt?
             mp_choice_options:
@@ -1138,6 +1264,8 @@ levels:
                     ```
                 feedback: Det är rätt!
             hint: Först kommandot upprepa, sedan kommandot `{print}`
+            question_score: '10'
+            correct_answer: D
         3:
             question_text: Är den här koden rätt eller fel?
             code: '{repeat} 100 {times} ''Hej!'''
@@ -1151,6 +1279,8 @@ levels:
             -   option: Fel; ordet `{print}` saknas
                 feedback: Rätt
             hint: 'Det ska vara: `{repeat}` 100 `{times}` `{print}` ''Hej'''
+            question_score: '10'
+            correct_answer: D
         4:
             question_text: Vilket ord är fel i koden?
             mp_choice_options:
@@ -1166,6 +1296,9 @@ levels:
             -   option: '`{times}`'
                 feedback: '`{times}` är rättstavat'
             hint: Jag har fel; du kan inte använda apostrofer
+            correct_answer: A
+            question_score: '10'
+            code: "{print} 'I'm blue'\n{repeat} 7 {times} {print} 'da ba dee, da ba da'"
         5:
             question_text: Är den här koden rätt eller fel?
             code: '{repeat} 100 {times} {print} ''Hedy är fantastiskt!'''
@@ -1175,6 +1308,8 @@ levels:
             -   option: Fel
                 feedback: Det är fel
             hint: Koden är rätt!
+            question_score: '10'
+            correct_answer: A
         6:
             question_text: Vad skriver den här koden ut?
             code: |-
@@ -1206,6 +1341,8 @@ levels:
                     runt runt runt
                 feedback: Genom hela staden! Perfekt!
             hint: Bara 'runt och runt' upprepas tre gånger.
+            correct_answer: D
+            question_score: '10'
         7:
             question_text: Vad kommer den här koden att skriva ut?
             mp_choice_options:
@@ -1229,6 +1366,9 @@ levels:
                     ROCK YOU!
                 feedback: Tänk på kommandot upprepa
             hint: Tänk på kommandot `{repeat}`.
+            code: "{repeat} 2 {times} {print} 'We will'\n{print} 'ROCK YOU!'"
+            question_score: '10'
+            correct_answer: B
         8:
             question_text: Vilken Hedy-kod ger den här utskriften?
             mp_choice_options:
@@ -1264,6 +1404,9 @@ levels:
                     ```
                 feedback: Detta är inte rätt ordning …
             hint: '`{repeat}` kan bara användas om du vill köra samma rad flera gånger.'
+            code: "Here comes the sun\nDo do do do\nHere comes the sun\nAnd I say\nIts alright"
+            question_score: '10'
+            correct_answer: A
         9:
             question_text: Vilken Hedy-kod ger den här utskriften?
             mp_choice_options:
@@ -1300,6 +1443,9 @@ levels:
                     ```
                 feedback: Perfekt
             hint: '''Help!'' upprepas 3 gånger.'
+            correct_answer: D
+            question_score: '10'
+            code: "Batman was flying through Gotham.\nWhen suddenly he heard someone screaming...\nHelp!\nHelp!\nHelp!\nPlease help me!"
         10:
             question_text: Vilken Hedy-kod ger den här utskriften?
             mp_choice_options:
@@ -1332,6 +1478,9 @@ levels:
                     ```
                 feedback: Detta är inte i rätt ordning.
             hint: Tänk på ordningen på meningarna.
+            question_score: '10'
+            code: "if youre happy and you know it clap your hands\nif youre happy and you know it clap your hands\nif youre happy and you know it and you really want to show it\nif youre happy and you know it clap your hands"
+            correct_answer: B
     8:
         1:
             question_text: Vad skriver den här koden ut?
@@ -1362,6 +1511,8 @@ levels:
                     Jag heter Hedy!
                 feedback: Allt skrivs ut två gånger
             hint: Båda raderna upprepas två gånger.
+            correct_answer: C
+            question_score: '10'
         2:
             question_text: Vad är fel med den här koden?
             code: |-
@@ -1377,6 +1528,8 @@ levels:
             -   option: Den andra raden ska börja med fyra mellanslag som indrag.
                 feedback: Rätt!
             hint: Saknas det något på andra raden?
+            question_score: '10'
+            correct_answer: D
         3:
             question_text: Vad skrivs ut när du kör det här programmet?
             mp_choice_options:
@@ -1405,6 +1558,9 @@ levels:
                     Baby shark
                 feedback: Vad som upprepas och vad som inte upprepas.
             hint: Vad är det som upprepas och vad är det som inte upprepas?
+            code: "{repeat} 3 {times}\n    {print} 'Baby shark tututudutudu'\n{print} 'Baby shark'"
+            correct_answer: C
+            question_score: '10'
         4:
             question_text: Vilken utskrift är korrekt?
             code: |-
@@ -1439,6 +1595,8 @@ levels:
                     Vi ska åka på semester!
                 feedback: Sista raden upprepas också.
             hint: Blocket under kommandot `{repeat}` upprepas två gånger.
+            question_score: '10'
+            correct_answer: B
         5:
             question_text: Vad är fel med den här koden?
             code: |-
@@ -1455,6 +1613,8 @@ levels:
             -   option: '`{ask}` är inte längre ett kommando'
                 feedback: Det stämmer inte
             hint: Något är fel med indragningen
+            correct_answer: A
+            question_score: '10'
         6:
             question_text: Vad blir utskriften från koden när vi matar in pannkakor?
             mp_choice_options:
@@ -1481,6 +1641,9 @@ levels:
                     Pannkakor
                 feedback: Bra jobbat!
             hint: Den första meningen och frågan kommer inte att upprepas
+            code: "{print} 'Welcome to restaurant Hedy'\n{repeat} 2 {times}\n    food {is} {ask} 'What do you want to eat?'\n    {print} food"
+            question_score: '10'
+            correct_answer: D
         7:
             question_text: Vad är fel med den här koden?
             code: |-
@@ -1502,6 +1665,8 @@ levels:
             -   option: Indraget är fel i det första `{if}`-kommandot.
                 feedback: Det stämmer.
             hint: Titta noga på indragningen.
+            correct_answer: D
+            question_score: '10'
         8:
             question_text: Vilken kod har rätt indragning?
             mp_choice_options:
@@ -1546,6 +1711,8 @@ levels:
                     ```
                 feedback: Du har fel!
             hint: Vad ska hända om personen har rätt? Och vad mer?
+            correct_answer: C
+            question_score: '10'
         9:
             question_text: Vilken rad i denna kod ska börja med fyra mellanslag?
             code: |-
@@ -1564,6 +1731,8 @@ levels:
             -   option: Rad 3 och 5
                 feedback: Bra jobbat!
             hint: Raderna efter ett `{if}`- eller `{else}`-kommando ska börja med fyra mellanslag.
+            correct_answer: D
+            question_score: '10'
         10:
             question_text: Vilket påstående stämmer?
             code: |-
@@ -1580,6 +1749,8 @@ levels:
             -   option: Rad 3 ska börja med fyra mellanslag
                 feedback: Du har rätt!
             hint: Bara en rad börjar med fyra mellanslag, men vilken …?
+            correct_answer: D
+            question_score: '10'
     9:
         1:
             question_text: Vad är fel med den här koden?
@@ -1603,6 +1774,8 @@ levels:
             -   option: Indraget är fel i det sista `{if}`-kommandot.
                 feedback: Det är inte indragningen.
             hint: Alla indragningar är rätt.
+            correct_answer: A
+            question_score: '10'
         2:
             question_text: Vad skrivs ut när du matar in rätt lösenord?
             code: |-
@@ -1642,6 +1815,8 @@ levels:
                     ```
                 feedback: Rätt!
             hint: Allt under kommandot `{repeat}` upprepas två gånger.
+            correct_answer: D
+            question_score: '10'
         3:
             question_text: Vilken låda ska du välja för att vinna en miljon dollar?
             code: |-
@@ -1669,6 +1844,8 @@ levels:
             -   option: låda 2, öppna
                 feedback: Bra jobbat! Du vinner!
             hint: Följ rätt väg
+            correct_answer: D
+            question_score: '10'
         4:
             question_text: Vilket påstående stämmer?
             code: |-
@@ -1691,6 +1868,8 @@ levels:
             -   option: Askungen med skostorlek 38 får svaret 'Jag fortsätter att leta'
                 feedback: Nej, hon får '❤️❤️❤️'
             hint: Oavsett vad du heter, om du har skostorlek 40 kommer du att få meddelandet 'Jag fortsätter att leta'.
+            question_score: '10'
+            correct_answer: C
         5:
             question_text: Vilken kod gav det här resultatet?
             output: |-
@@ -1732,6 +1911,8 @@ levels:
                     ```
                 feedback: Det finns två `{repeat}`-kommandon i den här koden.
             hint: Titta på indraget
+            correct_answer: C
+            question_score: '10'
         6:
             question_text: Efter vilket/vilka kommandon ska du använda indrag (börja nästa rad med 4 mellanslag)?
             mp_choice_options:
@@ -1744,6 +1925,8 @@ levels:
             -   option: '`{if}` `{else}` `{repeat}` `{print}`'
                 feedback: Inte med skriv
             hint: Indrag sker på raden under vissa kommandon
+            question_score: '10'
+            correct_answer: C
         7:
             question_text: Du får 5 dollar i rabatt om du beställer en mediumpizza med cola.<br>Men koden har ett fel! Hur kan man felsöka den?
             code: |-
@@ -1785,6 +1968,8 @@ levels:
                     ```
                 feedback: Nästan rätt, men titta på den sista raden.
             hint: Efter varje `{if}`-kommando ska raden nedanför dras in
+            question_score: '10'
+            correct_answer: A
         8:
             question_text: Vad är det för fel på den här koden?
             code: |-
@@ -1803,6 +1988,8 @@ levels:
             -   option: Koden måste alltid börja med ett `{print}`-kommando på första raden
                 feedback: Det stämmer inte.
             hint: Indragningen är rätt den här gången
+            correct_answer: B
+            question_score: '10'
         9:
             question_text: Hur många `{if}`-kommandon kan man ha inuti ett annat `{if}`-kommando?
             mp_choice_options:
@@ -1815,6 +2002,8 @@ levels:
             -   option: Oändligt, så länge du fortsätter att använda indrag på rätt sätt
                 feedback: Det är sant
             hint: Du kan ha ett `{if}`-kommando inuti ett `{if}`-kommando.
+            correct_answer: D
+            question_score: '10'
         10:
             question_text: Vilket påstående stämmer?
             code: |-
@@ -1831,6 +2020,8 @@ levels:
             -   option: rad 2 ska börja med fyra mellanslag och rad 3 med åtta
                 feedback: Du har rätt!
             hint: Den första raden börjar inte med några mellanslag
+            correct_answer: D
+            question_score: '10'
     10:
         1:
             question_text: Vad måste vi fylla i på `_` om vi vill skriva ut varje komplimang?
@@ -1860,6 +2051,8 @@ levels:
                     ```
                 feedback: Nästan framme!
             hint: '`{for}` varje komplimang i listan av komplimanger …'
+            correct_answer: B
+            question_score: '10'
         2:
             question_text: Vilken utskrift är korrekt?
             code: |-
@@ -1879,6 +2072,8 @@ levels:
                     Jag älskar pannkakor
                 feedback: Bra!
             hint: Rad 2 säger för varje mat i listan över maträtter. Så varje maträtt skrivs ut.
+            correct_answer: D
+            question_score: '10'
         3:
             question_text: Vilken utskrift är korrekt?
             code: |-
@@ -1899,6 +2094,8 @@ levels:
             -   option: Du vet inte än, eftersom den väljer ett av djuren {at} {random}.
                 feedback: Rad 2 säger {for} varje djur i listan över djuren. Så varje djur {print}s ut.
             hint: Rad 2 säger {for} varje djur i listan över djuren. Så varje djur skrivs ut
+            correct_answer: C
+            question_score: '10'
         4:
             question_text: Vad är det för fel på den här koden?
             code: |-
@@ -1915,6 +2112,8 @@ levels:
             -   option: På rad 2 ska det stå matvaror istället för mat
                 feedback: Nej, det ska det inte.
             hint: Rad 2 säger `{for}` varje mat i listan över matvaror
+            question_score: '10'
+            correct_answer: C
         5:
             question_text: Vilket ord ska stå på _ med dessa digitala tärningar?
             code: |-
@@ -1933,6 +2132,8 @@ levels:
             -   option: tärning
                 feedback: Titta på variablernas namn.
             hint: Hedy behöver välja ett tal `{at} {random}`
+            correct_answer: B
+            question_score: '10'
         6:
             question_text: Vilket av svaren nedan är möjligt när du kör koden?
             code: |-
@@ -1954,6 +2155,8 @@ levels:
                     Meredith väljer sax
                 feedback: Fantastiskt!
             hint: Varje spelare väljer ett alternativ. Den spelare som är först i listan börjar.
+            question_score: '10'
+            correct_answer: D
         7:
             question_text: Vilken rad skall finnas på _ i den här koden som bestämmer vad personerna skall äta till middag?
             code: |-
@@ -1983,6 +2186,8 @@ levels:
                     ```
                 feedback: Varje namn ska få veta vad de får till middag.
             hint: Varje namn ska få veta vad de får till middag.
+            correct_answer: A
+            question_score: '10'
         8:
             question_text: Vad ska stå på _ i den här koden som avgör vilken tröjfärg du får?
             code: |-
@@ -2012,6 +2217,8 @@ levels:
                     ```
                 feedback: Det finns ingen variabel som heter personer …
             hint: Tänk på citattecknen och namnen på variablerna
+            correct_answer: B
+            question_score: '10'
         9:
             question_text: Vad är det första Hedy kommer att fråga dig när du kör programmet?
             code: |-
@@ -2031,6 +2238,8 @@ levels:
             -   option: Det vet man inte. Hedy kommer att välja `{at} {random}`.
                 feedback: Det finns ingen `{at} {random}` i koden …
             hint: De första alternativen från båda listorna väljs.
+            correct_answer: A
+            question_score: '10'
         10:
             question_text: Vilket stämmer om den här koden?
             code: |-
@@ -2048,6 +2257,8 @@ levels:
             -   option: Någon kan vinna två priser
                 feedback: Du fattar!
             hint: Försök att tänka dig vad den här koden skriver ut.
+            correct_answer: D
+            question_score: '10'
     11:
         1:
             question_text: Vilket ord ska stå i stället för frågetecknet?
@@ -2064,6 +2275,9 @@ levels:
             -   option: '`{for}`'
                 feedback: Nej
             hint: Vad lärde du dig på den här nivån?
+            code: "{for} i {in} _ 1 {to} 10\n    {print} i"
+            correct_answer: B
+            question_score: '10'
         2:
             question_text: Vad blir utskriften från denna kod?
             mp_choice_options:
@@ -2078,6 +2292,10 @@ levels:
                 feedback: That's not it
             -   option: '123'
                 feedback: That's not it
+            correct_answer: A
+            hint: How do the numbers appear in the screen?
+            code: "{for} i {in} {range} 1 {to} 3\n    {print} i"
+            question_score: '10'
         4:
             mp_choice_options:
             -   option: |-
@@ -2105,6 +2323,10 @@ levels:
                     ```
                 feedback: That's right!
             hint: It has to be a calculation...
+            question_text: Which code was used to get this output?
+            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
+            correct_answer: D
+            question_score: '10'
         7:
             question_text: What should be on the place of the question mark?
             code: |-
@@ -2113,6 +2335,18 @@ levels:
                 _
                     mat = {ask} 'Vad skulle du vilja beställa?'
                     {print} mat
+            mp_choice_options:
+            -   option: "```\n{for} i {in} {range} 0 {to} 3\n```"
+                feedback: There's not always 3 people
+            -   feedback: The variable is not named guests
+                option: "```\n{for} i {in} {range} 1 {to} guests\n```"
+            -   option: "```\n{for} i {in} {range} 1 {to} people\n```"
+                feedback: Great!
+            -   option: "```\n{for} i {in} {range} 0 {to} people\n```"
+                feedback: That's one order too many!
+            correct_answer: C
+            hint: Use the variable 'people'
+            question_score: '10'
         8:
             mp_choice_options:
             -   option: |-
@@ -2129,6 +2363,11 @@ levels:
                 feedback: Correct
             -   option: The word 'hi' will appear 25 times in a row.
                 feedback: No it will only appear 3 times.
+            hint: It doesn't say `{print}` i
+            correct_answer: C
+            question_text: What will be the output from this code?
+            code: "{for} i {in} {range} 23 {to} 25\n    {print} 'hi'"
+            question_score: '10'
         9:
             code: |-
                 ålder = {ask} 'Hur gammal är du?'
@@ -2144,6 +2383,9 @@ levels:
             -   option: Det beror på hur gammal du är
                 feedback: Det stämmer!
             hint: '`{for}` i `{in}` `{range}` 1 `{to}` ålder'
+            correct_answer: D
+            question_text: How many times does Hedy chant Hip Hip Hooray?
+            question_score: '10'
         10:
             question_text: Vilken Hedy-kod ger den här utskriften?
             mp_choice_options:
@@ -2176,6 +2418,54 @@ levels:
                     ```
                 feedback: '`{range}` 0 `{to}` 3 är fyra gånger.'
             hint: Tänk på indragningen
+            question_score: '10'
+            output: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
+            correct_answer: B
+        6:
+            mp_choice_options:
+            -   option: 1 time
+                feedback: No
+            -   feedback: No
+                option: 2 times
+            -   feedback: That's right!
+                option: 3 times
+            -   option: Never
+                feedback: No
+            question_score: '10'
+            correct_answer: C
+            code: "{for} i {in} {range} 0 {to} 2\n    {print} 'Hello'"
+            question_text: How many times does the word Hello appear on your screen when you run the code?
+            hint: 0 also counts. So 0,1,2 that's 3 times.
+        5:
+            correct_answer: D
+            mp_choice_options:
+            -   feedback: No it doesn't.
+                option: The i in the last line need quotation marks
+            -   feedback: You could use 1 to 5 just as well!
+                option: You can't use `{range}` 1 `{to}` 5 only `{range}` 1 `{to}` 10
+            -   feedback: Not line 1...
+                option: Line 1 needs to start with an indention.
+            -   option: Line 2 needs to start with an indention
+                feedback: Perfect!
+            question_score: '10'
+            question_text: What's wrong with this code?
+            code: "{for} i {in} {range} 1 {to} 10\n{print} i"
+            hint: There is something wrong with the indention
+        3:
+            mp_choice_options:
+            -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n{print} 'Once I caught a fish alive!'\n```"
+                feedback: Perfect
+            -   option: "```\n{for} i {in} {range} 1 {to} 5\n{print} i\n{print} 'Once I caught a fish alive!'\n```"
+                feedback: This code won't work. You need an indent after {for}.
+            -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n    {print} 'Once I caught a fish alive!'\n```"
+                feedback: Now Hedy will count '1 Once I caught a fish alive!, 2 Once I caught a fish alive! etc.
+            -   feedback: i is a variable and shouldn't have quotation marks
+                option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} 'i'\n{print} 'Once I caught a fish alive!'\n```"
+            question_text: Which code was used to get this output?
+            question_score: '10'
+            hint: First all the numbers, then the sentence
+            correct_answer: A
+            output: "1\n2\n3\n4\n5\nOnce I caught a fish alive!"
     12:
         1:
             question_text: Vilken utskrift är rätt?
@@ -2196,6 +2486,8 @@ levels:
                     5
                 feedback: Bra jobbat!
             hint: Båda raderna skrivs ut!
+            correct_answer: D
+            question_score: '10'
         2:
             question_text: Vilken kod är rätt?
             mp_choice_options:
@@ -2224,6 +2516,8 @@ levels:
                     ```
                 feedback: Alla olika värden på smaker ska skrivas inom citattecken.
             hint: Den andra kodraden är samma i varje kod – var uppmärksam på den första raden
+            correct_answer: C
+            question_score: '10'
         3:
             question_text: Vad är fel med den här koden?
             code: |-
@@ -2239,6 +2533,8 @@ levels:
             -   option: Inget är fel.
                 feedback: Det stämmer inte
             hint: Citattecknen används korrekt
+            correct_answer: A
+            question_score: '10'
         4:
             question_text: På vilka rader behövs citattecken för att få koden att fungera?
             code: |-
@@ -2256,6 +2552,8 @@ levels:
             -   option: Alla rader
                 feedback: Perfekt!
             hint: Behöver rad 3 också citattecken?
+            correct_answer: D
+            question_score: '10'
         5:
             question_text: Vad får Agent007 för resultat när den anger rätt lösenord?
             code: |-
@@ -2279,6 +2577,9 @@ levels:
                 feedback: Agenten kommer inte att fånga några skurkar här
             -   option: Åk till flygplatsen i morgon kl. 10.00
                 feedback: Agenten kommer inte att fånga några skurkar här
+            correct_answer: B
+            hint: The correct password is TOPSECRET
+            question_score: '10'
         6:
             question_text: Vilken rad ska fyllas i vid ???
             code: |-
@@ -2314,6 +2615,8 @@ levels:
                     ```
                 feedback: Nästan framme!
             hint: Vad händer om du bara beställer pommes frites och en dricka?
+            correct_answer: C
+            question_score: '10'
         7:
             question_text: Vilken utskrift får en vegan?
             code: |-
@@ -2352,6 +2655,8 @@ levels:
                     kakor
                 feedback: Nästan klart, men titta på ordningen på snacksen i listan
             hint: Vilket element tas bort från listan när du svarar 'vegan'?
+            correct_answer: A
+            question_score: '10'
         8:
             question_text: Vilken kod användes för att skapa det här resultatet?
             mp_choice_options:
@@ -2376,6 +2681,9 @@ levels:
                     ```
                 feedback: Nej
             hint: 7 dividerat med 2 är 3.5
+            code: '3.5'
+            correct_answer: B
+            question_score: '10'
         9:
             question_text: Vilken kod ska fyllas i på rad 1 vid ???
             code: |-
@@ -2403,6 +2711,8 @@ levels:
                     ```
                 feedback: Du vann ingenting
             hint: Elementen i listan ska stå inom citattecken
+            question_score: '10'
+            correct_answer: C
         10:
             question_text: Vilken kodrad ska fyllas i vid ??? för att slutföra sången?
             code: |-
@@ -2436,6 +2746,8 @@ levels:
                     ```
                 feedback: Det här är en svår uppgift! Alla handlingar i listan måste finnas med i låten.
             hint: Det här är en svår uppgift! Alla handlingar på listan måste finnas med i låten.
+            question_score: '10'
+            correct_answer: B
     13:
         1:
             question_text: Vilken kod ska fyllas i vid ???
@@ -2470,6 +2782,8 @@ levels:
                     ```
                 feedback: Hedy sjunger bara om båda svaren är ja
             hint: Hedy sjunger om du vill höra en sång och det är din födelsedag
+            question_score: '10'
+            correct_answer: C
         2:
             question_text: Vilket kommando saknas i koden istället för ??? ?
             code: |-
@@ -2487,6 +2801,8 @@ levels:
             -   option: '`{print}`'
                 feedback: Nej
             hint: Varken veganer eller muslimer kan äta korv.
+            question_score: '10'
+            correct_answer: B
         3:
             question_text: Vilken utskrift får en medlem utan rabattkod?
             code: |-
@@ -2506,6 +2822,8 @@ levels:
             -   option: Det kan man inte veta
                 feedback: Det finns det! Läs frågan noggrant
             hint: Tänk på `{or}`-kommandot på rad 3
+            correct_answer: A
+            question_score: '10'
         4:
             question_text: Vilken kodrad ska följa den här raden i sten-sax-påse-spelet?
             code: '{if} datorns_val {is} ''sten'' {and} ditt_val {is} ''påse'''
@@ -2531,6 +2849,8 @@ levels:
                     ```
                 feedback: Försök igen!
             hint: Påse slår sten
+            correct_answer: A
+            question_score: '10'
         5:
             question_text: Vad stämmer om den här koden?
             code: |-
@@ -2546,6 +2866,8 @@ levels:
             -   option: Varje person som inte heter Askungen och inte har skostorlek 38 är den här prinsens enda sanna kärlek
                 feedback: Prinsen är lite mer kräsen än så!
             hint: Båda påståendena måste vara sanna
+            question_score: '10'
+            correct_answer: C
         6:
             question_text: Vilket påstående om den här koden är sant?
             code: |-
@@ -2570,6 +2892,8 @@ levels:
             -   option: Sophie är en tjej med glasögon
                 feedback: Bra jobbat!
             hint: Titta noga! Eller behöver du glasögon?
+            correct_answer: D
+            question_score: '10'
         7:
             question_text: Vilket påstående är falskt?
             code: |-
@@ -2595,6 +2919,8 @@ levels:
             -   option: Den gula fågeln fick mat i morse
                 feedback: Det stämmer
             hint: Läs de sista fyra raderna noga
+            correct_answer: C
+            question_score: '10'
         8:
             question_text: Vilken utskrift får man om man beställer popcorn men ingen dricka?
             code: |-
@@ -2632,6 +2958,8 @@ levels:
                     Njut av filmen
                 feedback: Du måste betala för dina popcorn!
             hint: popcorn = ja och dricka = nej
+            correct_answer: B
+            question_score: '10'
         9:
             question_text: Vad är fel med den här koden?
             code: |-
@@ -2671,6 +2999,8 @@ levels:
                     ```
                 feedback: Det här är inte vad jag beställde!
             hint: Det finns ett misstag på rad 3
+            correct_answer: A
+            question_score: '10'
         10:
             question_text: Vilket kommando ska finnas på rad 8 istället för ??? ?
             code: |-
@@ -2697,6 +3027,8 @@ levels:
             -   option: '`{if}`'
                 feedback: Nej
             hint: Elementet är antingen i listan med snacks eller i listan med drycker
+            question_score: '10'
+            correct_answer: B
     14:
         1:
             question_text: Vilken symbol ska användas på den tomma platsen?
@@ -2714,6 +3046,8 @@ levels:
             -   option: '`=`'
                 feedback: Rätt!
             hint: Vi jämför ingenting, vi frågar bara efter ett namn.
+            correct_answer: D
+            question_score: '10'
         2:
             question_text: Vilken kod använder symbolen = eller == på rätt sätt?
             mp_choice_options:
@@ -2726,6 +3060,8 @@ levels:
             -   option: svar == {ask} 'Hur mår du?'
                 feedback: Nej
             hint: När du jämför två svar ska du använda ==
+            correct_answer: C
+            question_score: '10'
         3:
             question_text: Vilka symboler ska fyllas i på de två tomma platserna?
             code: |-
@@ -2745,6 +3081,8 @@ levels:
             -   option: '`+` och `==`'
             hint: 130 personer får vistas i klubben
             feedback: Det är fel
+            question_score: '10'
+            correct_answer: C
         4:
             question_text: Vad är fel med den här koden?
             code: |-
@@ -2765,6 +3103,8 @@ levels:
             -   option: På rad 4 ska <= användas istället för >=
                 feedback: No that's not it
             hint: Symbolerna är rätt
+            question_score: '10'
+            correct_answer: B
         5:
             question_text: Vilken symbol ska det vara på den tomma platsen om filmen är tillåten för barn från 12 år och uppåt?
             code: |-
@@ -2784,6 +3124,8 @@ levels:
             -   option: '`<= 12`'
                 feedback: De här barnen är för unga
             hint: '> betyder större än'
+            question_score: '10'
+            correct_answer: B
         6:
             question_text: Hur många gånger måste du säga att du är irriterad innan det här störiga spelet slutar?
             code: |-
@@ -2803,6 +3145,8 @@ levels:
             -   option: Två gånger
                 feedback: Det stämmer
             hint: '!= betyder ''är inte'''
+            correct_answer: D
+            question_score: '10'
         7:
             question_text: Vad ska det stå på de tre tomma platserna?
             code: |-
@@ -2830,6 +3174,8 @@ levels:
             -   option: '`''Lägre!''` och `''Du vann!''` och `''Högre!''`'
                 feedback: Det är inte riktigt rätt.
             hint: Den sista ska säga att du vann.
+            correct_answer: B
+            question_score: '10'
         8:
             question_text: Vilket påstående stämmer om den här berg- och dalbanan?
             code: |-
@@ -2848,6 +3194,8 @@ levels:
             -   option: Det finns inga längdbegränsningar för att åka berg- och dalbana
                 feedback: There are.
             hint: '> betyder större än'
+            question_score: '10'
+            correct_answer: A
         9:
             question_text: Hur många chokladbitar ger dig ont i magen enligt denna fitbit?
             code: |-
@@ -2868,6 +3216,8 @@ levels:
             -   option: Nio eller fler
                 feedback: Bra!
             hint: '> 8 betyder fler än 8'
+            question_score: '10'
+            correct_answer: D
         10:
             question_text: Vad ska det stå i de tomma rutorna?
             code: |-
@@ -2884,6 +3234,8 @@ levels:
             -   option: '''Det är oavgjort'''
                 feedback: No it's not, one player has a higher score
             hint: Du vinner spelet genom att ha flest poäng
+            correct_answer: B
+            question_score: '10'
     15:
         1:
             code: |-
@@ -2891,11 +3243,36 @@ levels:
                 while answer _ 'Amsterdam'
                     answer = ask 'What is the capital city of the Netherlands?'
                 print 'You have given the correct answer'
+            question_text: 'Which symbol should be used on the blank? Tip: You must keep guessing until you get it right.'
+            question_score: '10'
+            correct_answer: C
+            mp_choice_options:
+            -   feedback: That is not right.
+                option: '`=!`'
+            -   option: '`==`'
+                feedback: You don't have to keep guessing if you've given the right answer.
+            -   feedback: Correct
+                option: '`!=`'
+            -   feedback: That's not it
+                option: '`=`'
+            hint: Keep guessing until you say Amsterdam
         3:
             question_text: Which command should be filled in on the two blanks?
             code: |-
                 _ age >= 18
                   print 'you are not allowed in this bar'
+            question_score: '10'
+            hint: You are not allowed in the bar as long as you are 17 or younger
+            correct_answer: B
+            mp_choice_options:
+            -   option: '`{in}`'
+                feedback: That's not it
+            -   option: '`{while}`'
+                feedback: You are right
+            -   option: '`{for}`'
+                feedback: That's not it
+            -   feedback: That's not it
+                option: '`{range}`'
         4:
             code: |-
                 options = 1, 2, 3, 4, 5, 6
@@ -2916,6 +3293,10 @@ levels:
                 feedback: That's not it
             -   option: In line 5 != should have been used instead of ==
                 feedback: You are correct
+            question_text: What's wrong with this code?
+            question_score: '10'
+            hint: There is something wrong in line 5
+            correct_answer: D
         5:
             code: |-
                 wetness = 10
@@ -2935,6 +3316,10 @@ levels:
                 feedback: You are correct!
             -   option: = wetness + 1
                 feedback: The program should count down
+            question_score: '10'
+            hint: wetness should get less each time
+            correct_answer: C
+            question_text: What should be placed on the blank to make this program work correctly?
         6:
             question_text: what is wrong with this code?
             code: |-
@@ -2952,6 +3337,9 @@ levels:
                 feedback: No that's not right
             -   option: Line 2 should start with less indentation
                 feedback: That is correct
+            question_score: '10'
+            hint: Look closely at the indentation
+            correct_answer: D
         7:
             question_text: How should this program be changed to that it works?
             mp_choice_options:
@@ -2963,8 +3351,25 @@ levels:
                 feedback: That's not quite right.
             -   option: '... change the fourth {if} into a {while}'
                 feedback: That's not quite right.
+            question_score: '10'
+            hint: The last one should say you win.
+            correct_answer: A
+            code: "{print} 'Guess which number'\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber = numbers {at} {random}\ngame = 'on'\n{if} game == 'on'\n    guess = {ask} 'Which number do you think it is?'\n    {if} guess < number\n        {print} _\n    {if} guess > number\n        {print} _\n    {if} guess == number\n        {print} _\n        game = 'over'"
         8:
             hint: The block after the while command keeps happening while the toilet is occupied.
+            mp_choice_options:
+            -   feedback: False!
+                option: The lights and air freshener will turn off after 1 minute
+            -   option: The air freshener sprays once every minute and the lights stay on the whole time while you are on the toilet
+                feedback: Great job
+            -   option: The air freshener sprays once you leave the toilet.
+                feedback: It only sprays when you're in there.
+            -   feedback: That wouldn't be right.
+                option: The lights will always stay on.
+            question_score: '10'
+            correct_answer: B
+            code: "{while} toilet == 'occupied'\n    lights = 'on'\n    air_freshener_sprays = 'yes'\n    {sleep} 60\nlights = 'off'\nair_freshener_sprays = 'no'"
+            question_text: Which statement is true about this automated toilet system?
         9:
             code: |-
                 chocolate = {ask} 'How many calories have you eaten today?'
@@ -2983,6 +3388,10 @@ levels:
                 feedback: Yes!
             -   option: You have eaten enough for today
                 feedback: 'No'
+            question_score: '10'
+            hint: 1600 is between 1000 and 2000
+            correct_answer: C
+            question_text: What will the diet app say if you have eaten 1600 calories today?
         10:
             mp_choice_options:
             -   option: name_player_1
@@ -2993,6 +3402,25 @@ levels:
                 feedback: You should fill in a name, not a number
             -   option: points_player_2
                 feedback: You should fill in a name, not a number
+            hint: You win the game by having the most points. Your name should appear on the screen
+            correct_answer: A
+            question_score: '10'
+            question_text: 'What should be filled in in the blanks? Tip: the player with the most points is in the lead.'
+            code: "name_player_1 = {ask} 'Name player 1:'\nname_player_2 = {ask} 'Name player 2:'\n{while} points_player_1 > points_player_2\n    {print} _ ' is in the lead right now!'"
+        2:
+            question_score: '10'
+            question_text: Which of these codes has used the correct symbol(s)?
+            mp_choice_options:
+            -   feedback: No
+                option: "```\n{while} name = Hedy\n```"
+            -   option: "```\n{while} age = 24\n```"
+                feedback: No
+            -   option: "```\n{while} time > 0\n```"
+                feedback: Yes!
+            -   option: "```\n{while} answer == yes'\n```"
+                feedback: A quotation mark is missing
+            hint: When you are comparing two answers you should use ==
+            correct_answer: C
     16:
         2:
             code: |-
@@ -3000,12 +3428,38 @@ levels:
                 chores = [the cooking, the cleaning, nothing]
                 {for} i {in} {range} 1 {to} 3
                     {print}  _
+            question_text: What should be filled in on the blanks if you want a list of what chores are done by whom?
+            mp_choice_options:
+            -   feedback: Mind the spacing.
+                option: "```\nfriends[i] has to do chores [i]\n```"
+            -   option: "```\nfriends[1] has to do chores[1]\n```"
+                feedback: It will print 3 times that Wesley has to do the cooking
+            -   feedback: The person has to do the chore, not the other way around
+                option: "```\nchores[i] ' has to do ' friends[random]\n```"
+            -   option: "```\nfriends[i] ' has to do ' chores[i]\n```"
+                feedback: Fantastic!
+            correct_answer: D
+            question_score: '10'
+            hint: '`i` tells us what item in the list it is. So friend 1 does chore 1 etc.'
         3:
             code: |-
                 friends = ['Wesley', 'Eric', 'Kaylee']
                 chore = [the cooking, the cleaning, nothing]
                 {for} i {in} {range} 1 {to} 3
                     {print}  friends[i] has to do chores[i]
+            mp_choice_options:
+            -   feedback: Super!
+                option: "```\nWesley has to do the cooking\nEric has to do the cleaning\nKaylee has to do nothing\n```"
+            -   option: "```\nKaylee has to do the cooking\nWesley has to do the cleaning\nEric has to do nothing\n```"
+                feedback: No, it is not random.
+            -   feedback: Poor Wesley!
+                option: "```\nWesley has to do the cooking\nWesley has to do the cleaning\nWesley has to do the nothing\n```"
+            -   option: "```\nWesley has to do the cooking\nWesley has to do the cooking\nWesley has to do the cooking\n```"
+                feedback: That's not it
+            question_text: What is a possible output for this program?
+            hint: It's not random...
+            correct_answer: A
+            question_score: '10'
         4:
             mp_choice_options:
             -   option: The variable in line 4 should be 'friend[i]', not 'friends[i]'
@@ -3016,6 +3470,11 @@ levels:
                 feedback: It's not a variable, it's just text.
             -   option: '{in} in line 3 should be removed'
                 feedback: That's not it
+            question_text: What is wrong with this code?
+            hint: There's nothing wrong with line 4
+            correct_answer: B
+            code: "friends = ['Jaylee', 'Erin', 'Fay']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 0 {to} 3\n    print 'the lucky number of ' friends[i]\n    print 'is ' lucky_numbers[i]"
+            question_score: '10'
         5:
             mp_choice_options:
             -   option: noises = ['moo', 'woof', 'neigh']
@@ -3026,3 +3485,248 @@ levels:
                 feedback: Don't forget the quotation marks!
             -   option: sounds = ['woof', 'moo', 'neigh']
                 feedback: Great job!
+            question_text: Which line should be filled in in the blank?
+            hint: Look at line 1 to see proper use of brackets and quotation marks.
+            question_score: '10'
+            correct_answer: D
+            code: "animals = ['dog', 'cow', 'horse']\n_\n{for} i {in} {range} 1 {to} 3\n    {print} 'the ' animals[i] ' says ' sounds[i]"
+        10:
+            code: "{print} 'The book raffle will start soon'\n{print} 'Get your tickets now!'\nbooks = ['Narnia', 'The Hobbit', 'Oliver Twist', 'Harry Potter', 'Green eggs and ham']\npeople = {ask} 'How many raffle tickets are sold?'\nlist_of_numbers = [1, 2]\n{for} i {in} {range} 3 {to} people\n    {add} i {to} list_of_numbers\n{for} i {in} {range} 1 {to} 5"
+            question_text: Which 3 lines will complete this code correctly?
+            mp_choice_options:
+            -   option: "```\nchosen_number = list_of_numbers at random\nprint books[i] ' will go to person number ' chosen_number\n{add} chosen_number {to} list_of_numbers\n```"
+                feedback: Almost there... but adding the winner to the list makes this raffle unfair
+            -   feedback: There is no list called 'person'
+                option: "```\nprint person[i] ' wins ' book[i]\n```"
+            -   option: "```\nchosen_number = list_of_numbers[people]\nprint books[people] ' will go to person number ' chosen_number\n{remove} chosen_number {from} list_of_numbers\n```"
+                feedback: This is not it.
+            -   option: "```\nchosen_number = list_of_numbers[random]\nprint books[i] ' will go to person number ' chosen_number\n{remove} chosen_number {from} list_of_numbers\n```"
+                feedback: Fantastic!
+            correct_answer: D
+            question_score: '10'
+            hint: You need to use the {remove} command
+        1:
+            mp_choice_options:
+            -   feedback: This is the old way.
+                option: '`snacks {at} {random}`'
+            -   feedback: The order is wrong.
+                option: '`[{random} snack]`'
+            -   option: '`snacks[{random}]`'
+                feedback: Correct
+            -   option: '`snacks[{at} {random}]`'
+                feedback: We do not need `at`anymore
+            code: "snacks = nachos, chips, cucumber, sweets\n{print} _"
+            question_text: Which command should be filled in on the blanks to print a random snack?
+            question_score: '10'
+            correct_answer: C
+            hint: We no longer use {at}
+        6:
+            correct_answer: C
+            mp_choice_options:
+            -   option: You are not allowed to use the variable o. It should be named i.
+                feedback: i is the most commonly used variable name in this case, but it's not mandatory to use i.
+            -   feedback: No, he likes minecraft.
+                option: The output will say that Jaylino likes fortnite.
+            -   feedback: Correct
+                option: The output will say that Ryan likes fifa
+            -   option: This code will not work. It will give and error.
+                feedback: No, the code is correct.
+            code: "people = ['Chris', 'Jaylino', 'Ryan']\ngames = ['fortnite', 'minecraft', 'fifa']\n{for} o {in} {range} 1 {to} 3\n  {print} people[o] ' likes ' games[o]"
+            question_score: '10'
+            hint: There is nothing wrong with this code.
+            question_text: Which statement is true?
+        7:
+            mp_choice_options:
+            -   feedback: That is not right.
+                option: Line 1 needs less quotation marks
+            -   feedback: It should not!
+                option: Line 3 should start with indentation
+            -   option: Line 4 should start without indentation
+                feedback: It should not
+            -   option: Line 4 needs more quotation marks.
+                feedback: Amazing!
+            code: "people = ['Savi', 'Senna', 'Fayenne']\ntransportation = ['bike', 'train', 'car']\n{for} i {in} {range} 1 {to} 3\n  {print} people[i] goes to school by transportation[i]"
+            question_text: What's wrong with this code?
+            correct_answer: D
+            hint: There is a mistake made in the usage of quotation marks.
+            question_score: '10'
+        8:
+            question_text: Which of these codes belongs to this output?
+            correct_answer: B
+            question_score: '10'
+            code: "Macy and Kate get to go first\nLionell and Raj get to go second\nKim and Leroy get to go third"
+            mp_choice_options:
+            -   option: "```\nteams = ['Macy and Kate', 'Lionell and Raj', 'Kim and Leroy']\nposition = ['first', 'second', 'third']\n{for} i {in} {range} 0 {to} 3\n{print} teams[random] ' get to go ' position[i]\n```"
+                feedback: This is not right
+            -   feedback: Amazing!
+                option: "```\nteams = ['Macy and Kate', 'Lionell and Raj', 'Kim and Leroy']\nposition = ['first', 'second', 'third']\n{for} i {in} {range} 1 {to} 3\n  {print} teams[i] ' get to go ' position[i]\n```"
+            -   feedback: This is not it.
+                option: "```\nteams = ['Macy', 'Kate', 'Lionell', 'Raj', 'Kim', 'Leroy']\nposition = ['first', 'second', 'third']\n{for} i {in} {range} 1 {to} 6\n  {print} teams[random] ' get to go ' position[random]\n```"
+            -   feedback: This is not going to work!
+                option: "```\nteams = ['Macy and Kate' 'Lionell and Raj' 'Kim and Leroy']\nposition = ['first' 'second' 'third']\n{for} teams {in} {range} 0 {to} 3\n    {print} teams[i] ' get to go ' position[i]\n```"
+            hint: If you look carefully at the first line, you'll see that only the first two answers are possibly correct.
+        9:
+            mp_choice_options:
+            -   option: "```\nI will travel to Canada\nI will travel to Canada\n```"
+                feedback: Great job!
+            -   feedback: It will be repeated twice
+                option: "```\nI will travel to Canada\n```"
+            -   feedback: This is not it.
+                option: "```\nI will travel to Canada, Zimbabwe and New Zealand\n```"
+            -   option: "```\nI will travel to Canada\nI will travel to Zimbabwe\nI will travel to New Zealand\n```"
+                feedback: It's only repeated twice
+            question_text: What is a possible output for this code?
+            correct_answer: A
+            code: "countries = ['Canada', 'Zimbabwe', 'New Zealand']\n{for} i {in} {range} 0 {to} 1\n  {print} 'I will travel to ' countries[random]"
+            hint: Range 0 to 1 is 2 times
+            question_score: '10'
+    17:
+        4:
+            correct_answer: D
+            mp_choice_options:
+            -   feedback: Try again.
+                option: The first `{elif}` should be used before the `print` command
+            -   feedback: From now on we can use elif multiple times.
+                option: '`{elif}` can only be used once'
+            -   option: '`==` used with `{elif}` should be replaced by `=`'
+                feedback: Not correct.
+            -   feedback: Great!
+                option: '`{elif}` in the last line should be replaced by `{else}`'
+            question_text: What is wrong with code?
+            question_score: '10'
+            hint: Think about `{if}`, `{elif}`, `{else}`.
+            code: "name_color = {ask} 'What is your favorite color?'\n{if} name_color == 'red':\n  {print} 'the color of a tomato'\n{elif} name_color == 'green':\n  {print} 'the color of an apple'\n{elif} name_color == 'blue':\n  {print} 'the color of a blueberry'\n{elif} name_color == 'yellow':\n  {print} 'the color of a banana'\n{elif}:\n  {print} 'this fruit-color does not exist'"
+        1:
+            mp_choice_options:
+            -   option: "```\nm i n i o n s\n```"
+                feedback: This is not it.
+            -   feedback: Correct!
+                option: "```\nBob\nKevin\nStuart\n```"
+            -   option: "```\nminions\nminions\nminions\n```"
+                feedback: Take a look at the content of your list.
+            -   option: "```\nB o b K e v i n S t u a r t\n```"
+                feedback: Do not loop through the letters.
+            question_score: '10'
+            hint: Loop through your list.
+            code: "minions = ['Bob', 'Kevin', 'Stuart']\n{for} x in minions:\n    {print} x"
+            question_text: What is the output of this code?
+            correct_answer: B
+        9:
+            mp_choice_options:
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number < 0: \n      {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
+                feedback: Try again!
+            -   feedback: That is not it.
+                option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number <= 0: \n     {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number >= 0: \n     {print} number ' is positive'\n     {elif} number < 0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
+                feedback: Very good!
+            -   option: "```\n {for} number in range -5 to 3:\n     {if} number < 0: \n      {print} number ' is positive'\n     {elif} number <=0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
+                feedback: That is not it.
+            code: "-5 is negative\n-4 is negative\n-3 is negative\n-2 is negative\n-1 is negative\n0 is positive\n1 is positive\n2 is positive\n3 is positive"
+            question_text: Which one of the codes below gave this output?
+            hint: Read the code carefully.
+            correct_answer: C
+            question_score: '10'
+        8:
+            mp_choice_options:
+            -   option: '`{or}` cannot be used with `{if}`.'
+                feedback: Try again.
+            -   option: In the `{for}` command `insect` should be `insects`.
+                feedback: Not true.
+            -   option: Nothing!
+                feedback: Well done!
+            -   feedback: Nope.
+                option: There is an indentation mistake in the last line.
+            code: "insects = ['🐝', '🦋', '🕷', '🐞']\nyour_favorite = {ask} 'what is your favorite insect?'\n{for} insect in insects:\n {if} your_favorite == '🐝' {or} your_favorite == '🐞':\n  {print} 'very useful'\n {elif} your_favorite == '🕷':\n  {print} 'it can catch mosquitoes'\n {else}:\n  {print} 'almost all insects can be useful one way or another'"
+            hint: Read the code carefully.
+            question_score: '10'
+            question_text: What is wrong with code?
+            correct_answer: C
+        3:
+            mp_choice_options:
+            -   feedback: Try again.
+                option: "```\n🦔\n🦔\n🦔\n```"
+            -   feedback: One more try.
+                option: "```\n🦔\n🦔\n```"
+            -   feedback: Well done!
+                option: "```\n🦔\n🦔\n🦔\n🦔\n🦔\n🦔\n```"
+            -   feedback: That is not it.
+                option: "```\n🦔\n🦔\n🦔\n🦔\n🦔\n```"
+            code: "{for} x in range 1 to 3:\n  {for} y in range 1 to 2:\n    {print} 🦔"
+            question_text: How many hedgehogs will this code print?
+            hint: Think about how many times you need repeating.
+            correct_answer: C
+            question_score: '10'
+        5:
+            question_score: '10'
+            mp_choice_options:
+            -   option: "```\n7\nanother number\nanother number\nanother number\nanother number\n71\n79\n97\n```"
+                feedback: Well done!
+            -   option: "```\nanother number\n19\n29\n41\n53\n71\n79\n97\n```"
+                feedback: Try again.
+            -   option: "```\n7\n19\n29\n41\n53\n71\n79\nanother number\n```"
+                feedback: One more try.
+            -   option: "```\n7\n19\n29\n41\n53\n71\n79\n97\n```"
+                feedback: That is not it.
+            code: "numbers = [7, 19, 29, 41, 53, 71, 79, 97]\n{for} prime in numbers:\n  {if} prime <= 10：\n    {print} prime\n  {elif} prime >= 60:\n    {print} prime\n  {elif} prime >= 90:\n    {print} prime\n  {else}:\n    {print} 'another number'"
+            question_text: What is the output of this code?
+            hint: Think about how many times you need repeating and the values of if and elif.
+            correct_answer: A
+        2:
+            mp_choice_options:
+            -   option: You cannot have so many variables.
+                feedback: This is not it.
+            -   feedback: Not true!
+                option: The way the variables are multiplied is incorrect.
+            -   feedback: Keep looking for the mistake.
+                option: One of the variables `noleap_year` does not belong with the `{if}` statement.
+            -   feedback: Correct!
+                option: The `noleap_year` has to be identical in both cases.
+            question_text: What is wrong with this code?
+            code: "seconds_minute = 60\nminute_hour = 60\nhour_day = 24\nleap_year = 366\nno_leap_year = 365\nyears = ask 'what year is it?'\n{if} years = 2024:\n print seconds_minute * minute_hour * hour_day * leap_year\n{else}:\n print seconds_minute * minute_hour * hour_day * noleap_year"
+            correct_answer: D
+            hint: Read the code carefully.
+            question_score: '10'
+        6:
+            mp_choice_options:
+            -   feedback: Try again.
+                option: '`{elif}` is missing.'
+            -   option: '`{else}` can only be used once.'
+                feedback: From now on we can use elif multiple times.
+            -   option: Nothing!
+                feedback: There is a mistake. Look carefully!
+            -   feedback: Amazing!
+                option: There is an indentation mistake in the last line.
+            code: "name = {ask} 'What is your name?'\n{if} name == 'Hedy':\n    password = {ask} 'What is your password?'\n    {if} password =='turtle123':\n        {print} 'Yey'\n    {else}:\n        {print} 'Access denied'\n{else}:\n {print} 'Go fish'"
+            question_text: What is wrong with code?
+            correct_answer: D
+            hint: There is a mistake somewhere...
+            question_score: '10'
+        7:
+            question_text: Which of the following codes will print five times 'the result is 3' on the screen?
+            mp_choice_options:
+            -   feedback: Try again!
+                option: "```\n numbers = [1, 2 , 3, 4, 5]\n {for} n in numbers：\n     result = n * 1\n {print} 'The result is ' result\n```"
+            -   option: "```\nnumbers = [1, 2, 3, 4, 5]\n {for} u in numbers：\n     number = u\n {print} 'The result is ' number\n```"
+                feedback: That is not it.
+            -   option: "```\nnumbers = [1, 2, 3, 4, 5]\n {for} number in numbers：\n     number = 3\n {print} 'The result is ' number\n```"
+                feedback: Very good!
+            -   feedback: That is not it.
+                option: "```\nnumbers = [1, 2 , 3, 4, 5]\n {for} n in numbers：\n     n = result\n {print} 'The result is ' result\n```"
+            hint: Think about mathematical symbols.
+            question_score: '10'
+            correct_answer: C
+        10:
+            mp_choice_options:
+            -   feedback: Try again.
+                option: The word num needs quotation marks.
+            -   feedback: Not true.
+                option: The `{if}` command is not used correctly.
+            -   option: Line 3 should be `volume_room = number * number * number`.
+                feedback: Well done!
+            -   option: There is an indentation mistake in the last line.
+                feedback: Nope.
+            hint: Read the code carefully.
+            question_score: '10'
+            question_text: What is wrong with this code?
+            code: "{for} number in range 1 to 5:\n  volume_room = num * num * num\n  {print} volume_room ' cubic meters'\n    {if} volume_room > 100:\n      {print} 'this is a large room'\n    {elif} volume_room < 100:\n      {print} 'small room but cosy'\n    {else}:\n      {print} 'i will look for something else'"
+            correct_answer: C
