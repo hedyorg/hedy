@@ -131,13 +131,6 @@ levels:
     7:
         1:
             story: Completa la cançó del Baby shark. Primer comença amb el Baby shark, després la mare (mommy shark) i finalment el pare (daddy shark).
-            code: |-
-                {repeat} 3 {times} {print} 'Baby shark tututututudu'
-                {print} 'Baby shark'
-                {repeat} 3 {times} {print} 'Mommy shark tututututudu'
-                {print} 'Mommy shark'
-                {repeat} 3 {times} {print} 'Daddy shark tututututudu'
-                {print} 'Daddy shark'
         2:
             story: Crea la cançó "Les rodes de l'autobús van girant"
             code: |-
@@ -146,9 +139,6 @@ levels:
                 {print} "les rodes de l'autobús girant, van rodant, van rodant"
                 {print} "per tota la ciutat"
     8:
-        1:
-            story: "You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.\nEither red, yellow or blue! Take a little pause after announcing a team."
-            code: "teams = red, yellow, blue\n{print} 'Red, Yellow or Blue?'\n{repeat} 5 {times}\n    {print} 'You are selected in team... '\n    {print} teams {at} {random}\n    {sleep} 2"
         2:
             story: Imprimeix el compte enrere per al joc de l'amagatall.
             code: |-
@@ -171,9 +161,6 @@ levels:
                         {print} 'Bona feina!'
                     {else}
                         {print} 'No! La resposta correcta és ' resposta_correcta
-        2:
-            story: "This code asks the costumers in a restaurant if they would like to order dessert. If they do, it asks them what kind of dessert. If they order tiramisu they are told that the tiramisu is sold out.\nCan you get the code to work?"
-            code: "order = {ask} 'Would you like to order dessert?'\n{if} order = yes\n    dessert = {ask} 'What kind of dessert would you like?'\n    {if} dessert = tiramisu\n        {print} 'Sorry, we are out of tiramisu.'\n    {else}\n        {print} 'One ' dessert ' coming right up!'\n{else}\n    {print} 'You dont want a dessert. No problem!'"
     10:
         1:
             story: |-
@@ -216,15 +203,6 @@ levels:
             story: |-
                 Crea un programa que ens expliqui els resultats finals de la fira de la ciència. Primer defineix la variable concursants, després la variable lloc.
                 **Pista** La línia 5 hauria de tenir la comanda sleep (dorm), i hauries d'acabar amb un text de felicitació.
-            code: |-
-                {print} 'And now we will reveal the results of the science fair'
-                contestants = Vivienne, Paul, Trixy, Bianca, Katya
-                place = 5
-                {for} contestant {in} contestants
-                    {sleep} 2
-                    {print} 'On number ' place ' has ended... ' contestant
-                    place = place - 1
-                {print} 'Congratulations!'
     12:
         1:
             story: |-

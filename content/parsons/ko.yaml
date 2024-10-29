@@ -60,14 +60,6 @@ levels:
                 체스 토너먼트에는 세 명의 선수가 남아 있다.
                 두 선수가 먼저 맞붙어야 할 상대를 결정하는 프로그램을 만드세요.
                 첫 번째 경기를 치른 두 명의 플레이어를 인쇄하는 것으로 시작한 다음 승자가 상대할 플레이어를 인쇄합니다.
-            code: |-
-                players {is} Liam, Noah, Sophie
-                player_1 {is} players {at} {random}
-                {remove} player_1 {from} players
-                player_2 {is} players {at} {random}
-                {print} player_1 ' first plays against ' player_2
-                {remove} player_2 {from} players
-                {print} 'The winner plays against ' players {at} {random}
     4:
         1:
             story: |-
@@ -119,28 +111,11 @@ levels:
                 {print} 'In catyears you are ' cat_age ' years old.'
         2:
             story: 생일 파티를 위해 몇 개의 케이크를 사야 하는지 계산할 수 있도록 도와주는 프로그램을 만드세요.
-            code: |-
-                {print} 'It is your birthday!'
-                people = {ask} 'How many people do you want to give a slice of cake?'
-                cakes_amount = people/8
-                {print} 'You will have to buy ' cakes_amount ' cakes'
     7:
         1:
             story: 아기 상어 노래를 완성하세요. 먼저 아기 상어, 그 다음에 엄마, 그리고 마지막으로 아빠 상어.
-            code: |-
-                {repeat} 3 {times} {print} 'Baby shark tututututudu'
-                {print} 'Baby shark'
-                {repeat} 3 {times} {print} 'Mommy shark tututututudu'
-                {print} 'Mommy shark'
-                {repeat} 3 {times} {print} 'Daddy shark tututututudu'
-                {print} 'Daddy shark'
         2:
             story: '''버스 바퀴는 돌고 돈다''라는 노래를 만들어 보세요'
-            code: |-
-                {print} 'the wheels on the bus go'
-                {repeat} 3 {times} {print} 'round and round'
-                {print} 'the wheels of the bus go round and round'
-                {print} 'all through the town'
     8:
         1:
             story: |-
@@ -155,115 +130,25 @@ levels:
                     sleep 2
         2:
             story: 숨바꼭질 게임의 카운트다운을 인쇄하세요.
-            code: |-
-                counter = 11
-                {repeat} 10 {times}
-                    counter = counter - 1
-                    {print} counter
-                    {sleep} 1
-                {print} 'Ready or not here I come!'
     9:
         1:
             story: 이 게임은 당신에게 세가지 수학과제를 줄 것이다. 매번 문제가 다르다. 당신은 순서를 알아낼 수 있습니까?
-            code: |-
-                numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                {repeat} 3 {times}
-                    number = numbers {at} {random}
-                    correct_answer = 5 * number
-                    answer = {ask} 'What is 5 times' number '?'
-                    {if} answer = correct_answer
-                        {print} 'Good job!'
-                    {else}
-                        {print} 'No! The correct answer is ' correct_answer
         2:
             story: |-
                 이 코드는 식당에 있는 고객들에게 디저트를 주문할 것인지를 물어봅니다. 만약 주문한다면, 어떤 디저트를 주문할 것인지를 물어봅니다. 만약 그들이 티라미수를 주문하면, 그들은 티라미수가 매진되었다는 말을 듣습니다.
                 코드를 작동시킬 수 있나요?
-            code: |-
-                order = {ask} 'Would you like to order dessert?'
-                {if} order = yes
-                    dessert = {ask} 'What kind of dessert would you like?'
-                    {if} dessert = tiramisu
-                        {print} 'Sorry, we are out of tiramisu.'
-                    {else}
-                        {print} 'One ' dessert ' coming right up!'
-                {else}
-                    {print} 'You dont want a dessert. No problem!'
     10:
         1:
             story: |-
                 누가 요리를 하고 있고 이번 주에 그들이 무엇을 만들어야 하는지에 대한 일정표를 만들어서 이 가족을 도와주세요. 제거 명령은 아무도 두 번 요리할 필요가 없도록 해주고 그들은 매일 다른 저녁식사를 하도록 해줍니다.
                 **Mind!** 변수 순서는 첫째 날, 그 다음에 사람, 그리고 마지막에 dinner_options이어야 합니다. 이 순서는 remove 명령이 있는 줄에도 적용됩니다.
-            code: |-
-                days = Monday, Tuesday, Wednesday, Thursday, Friday
-                people = mom, dad, Martin, Abby, Jesse
-                dinner_options = pizza, tacos, pancakes, a salad, lasagne
-                {for} day {in} days
-                    chosen_person = people {at} {random}
-                    chosen_dinner = dinner_options {at} {random}
-                    {print} 'On ' day ' ' chosen_person ' is making ' chosen_dinner
-                    {remove} chosen_person {from} people
-                    {remove} chosen_dinner {from} dinner_options
         2:
             story: |-
                 이 변신 로봇이 여러분의 새로운 머리 모양을 결정해 줄 것입니다. 만약 여러분이 첫 번째 선택에 동의하지 않는다면, 다시 시도해 볼 수 있습니다.
                 **Mind** 변수 사람은 첫 번째 줄에 정의하고, 두 번째 줄에 변수 머리 스타일을 정의합니다.
-            code: |-
-                people = Betty, Amanda, Marc
-                hairstyles = a bald head, a mohawk, a ponytail, spikes
-                {for} person {in} people
-                    {print} person ' will get ' hairstyles {at} {random}
-                    happy = {ask} person ', are you happy with this choice?'
-                    {if} happy {is} yes
-                        {print} 'Great'
-                    {else}
-                        {print} 'Lets try again... Then 'person ' will get ' hairstyles {at} {random}
     11:
         1:
             story: 새해 전날을 위한 카운트 다운 시계를 만드세요! 이 프로그램은 10부터 1까지의 숫자를 잠깐 동안 보여주고 나서 여러분에게 새해 복 많이 받으세요.
-            code: |-
-                {for} number {in} {range} 10 {to} 1
-                    {print} number
-                    {sleep}
-                    {clear}
-                {print} 'Happy New Year!'
-        2:
-            story: |-
-                Create a program that tells us the final results of the science fair. Firstly define the variable contestants, then the variable place.
-                **Hint** Line 5 should be the sleep command, and you should end with saying congratulations.
-            code: |-
-                {print} 'And now we will reveal the results of the science fair'
-                contestants = Vivienne, Paul, Trixy, Bianca, Katya
-                place = 5
-                {for} contestant {in} contestants
-                    {sleep} 2
-                    {print} 'On number ' place ' has ended... ' contestant
-                    place = place - 1
-                {print} 'Congratulations!'
     12:
-        1:
-            story: |-
-                Sing the song 'What shall we do with the drunken sailor'. In case you don't know it, the song goed like this:
-
-                What will we do with the drunken sailor
-                What will we do with the drunken sailor
-                What will we do with the drunken sailor
-                Early in the morning
-                Way hey and up she rises
-                Way hey and up she rises
-                Way hey and up she rises
-                Early in the morning
-            code: |-
-                verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'
-                {for} verse {in} verses
-                    {for} count {in} {range} 1 {to} 3
-                        {print} verse
-                    {print} 'Early in the morning'
         2:
             story: 우리와 함께 트위스터 게임을 해보세요! 먼저 가변적인 사람들을 정의하고, 팔다리, 그리고 색을 정의하세요.
-            code: |-
-                people = 'Jess', 'Nick', 'Winston'
-                limbs = 'left hand', 'left foot', 'right hand', 'right foot'
-                colors = 'red', 'blue', 'green', 'yellow'
-                {for} person {in} people
-                    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}

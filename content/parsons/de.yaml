@@ -122,13 +122,6 @@ levels:
     7:
         1:
             story: Vervollständige den Baby Shark Song. Zuerst kommt Baby Shark, dann Mommy und zum Schluss Daddy Shark.
-            code: |-
-                {repeat} 3 {times} {print} 'Baby shark tututututudu'
-                {print} 'Baby shark'
-                {repeat} 3 {times} {print} 'Mommy shark tututututudu'
-                {print} 'Mommy shark'
-                {repeat} 3 {times} {print} 'Daddy shark tututututudu'
-                {print} 'Daddy shark'
         2:
             story: Erstelle den Song 'Die Räder am Bus gehen rundherum'
             code: |-
@@ -160,16 +153,6 @@ levels:
     9:
         1:
             story: Dieses Spiel wird dir drei Mathe Aufgaben geben. Die Frage ist jedesmal anders. Kannst du die Reihenfolge herausfinden?
-            code: |-
-                numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                {repeat} 3 {times}
-                    number = numbers {at} {random}
-                    correct_answer = 5 * number
-                    answer = {ask} 'What is 5 times' number '?'
-                    {if} answer = correct_answer
-                        {print} 'Good job!'
-                    {else}
-                        {print} 'No! The correct answer is ' correct_answer
         2:
             story: |-
                 Dieser Code fragt die Kunden in einem Restaurant, ob sie Nachtisch bestellen wollen. Falls sie Nachtisch bestellen wollen, frag sie, was sie für einen Nachtisch wollen. Wenn sie Tiramisu bestellen, wird ihnen gesagt, dass es ausverkauft ist.
@@ -203,25 +186,9 @@ levels:
             story: |-
                 Dieser Friseur-Roboter wird für dich einen neuen Haarschnitt aussuchen. Wenn du mit der ersten Wahl nicht einverstanden bist, kannst du es nochmal versuchen.
                 **Achtung** Die Variable person wird in der ersten Zeile bestimmt. Die Variable frisur wird in der zweiten Zeile bestimmt.
-            code: |-
-                people = Betty, Amanda, Marc
-                hairstyles = a bald head, a mohawk, a ponytail, spikes
-                {for} person {in} people
-                    {print} person ' will get ' hairstyles {at} {random}
-                    happy = {ask} person ', are you happy with this choice?'
-                    {if} happy {is} yes
-                        {print} 'Great'
-                    {else}
-                        {print} 'Lets try again... Then 'person ' will get ' hairstyles {at} {random}
     11:
         1:
             story: Erzeuge die Countdown Uhr für Neujahr! Das Programm sollte die Zahlen 10 bis 1 für eine Sekunde zeigen und dir dann ein Frohes neues Jahr wünschen.
-            code: |-
-                {for} number {in} {range} 10 {to} 1
-                    {print} number
-                    {sleep}
-                    {clear}
-                {print} 'Happy New Year!'
         2:
             story: |-
                 Erstelle ein Programm, das uns die Ergebnisse der Wissenschaftsschau sagt. Definiere zuerst die Variable Teilnehmer, dann die Variable Platzierung.
@@ -248,17 +215,3 @@ levels:
                 Way hey and up she rises
                 Way hey and up she rises
                 Early in the morning
-            code: |-
-                verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'
-                {for} verse {in} verses
-                    {for} count {in} {range} 1 {to} 3
-                        {print} verse
-                    {print} 'Early in the morning'
-        2:
-            story: Play a game of Twister with us! First define the variable people, then limbs, then colors.
-            code: |-
-                people = 'Jess', 'Nick', 'Winston'
-                limbs = 'left hand', 'left foot', 'right hand', 'right foot'
-                colors = 'red', 'blue', 'green', 'yellow'
-                {for} person {in} people
-                    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}
