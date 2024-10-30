@@ -1,5 +1,8 @@
 import dataclasses
 import json
+
+from markupsafe import Markup
+
 from . import querylog
 
 import flask
@@ -41,7 +44,7 @@ def gettext_with_fallback(x):
     if locale != 'en' and res == x:
         with force_locale('en'):
             res = gettext(x)
-    return res
+    return Markup(res)
 
 
 class EnhancedJSONEncoder(json.JSONEncoder):
