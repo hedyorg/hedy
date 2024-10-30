@@ -1965,7 +1965,7 @@ def view_program(user, id):
                                level=int(result['level']),
                                code=code),
                            is_teacher=user['is_teacher'],
-                           class_id=student_customizations['id'],
+                           class_id=student_customizations.get('id'),
                            next_program_id=next_program_id,
                            next_classmate_program_id=next_classmate_adventure_id,
                            **arguments_dict)
