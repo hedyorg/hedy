@@ -417,6 +417,7 @@ adventures:
                     ```
                 story_text_3: |
                     **Extra** También puedes dejar que el ordenador haga productos aleatorios por sí mismo usando `{random}`.
+                example_code_3: "```\nnumeros = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumero_1 = _\nnumero_2 = _\nrespuesta_correcta = numero_1 * numero_2\nrespuesta_dada = {ask} '¿Cuánto es ' number_1 ' veces ' number_2 '?'\n{if} _\n{else} _\n```"
             9:
                 story_text: |
                     En el nivel anterior creaste una calculadora. En este nivel puedes ampliar el código para que haga varias preguntas.
@@ -497,6 +498,9 @@ adventures:
                     ### Exercise
                     Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
                     Then `{call}` the function.
+                example_code: "```\n{define} nueva_pregunta\n    numeros = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    numero_1 = numeros {at} {random}\n    numero_2 = numeros {at} {random}\n    correcta = numero_1 * numero_2\n    respuesta = 0\n    _\n    _\n    _\n    {print} '¡Bien hecho!'\n\n{print} 'Da 10 respuestas correctas para ganar!'\n{for} i {in} {range} 1 {to} 10\n    _\n{print} '¡Ganaste!'\n```\n"
+            10:
+                example_code: "```\nnumeros = 1, 2, 3\n{for} _\n    {for} _\n        respuesta = {ask} _\n        correcta = numero_1 * numero_2\n        {if} respuesta {is} correcta\n            {print} '¡Gran trabajo!'\n        {else}\n            {print} 'No es correcto. La respuesta correcta es ' correcta\n```\n"
     clear_command:
         default_save_name: comando_limpiar
         description: Comando {clear}
@@ -518,6 +522,7 @@ adventures:
                     {clear}
                     {print} '¡SORPRESA!'
                     ```
+        name: '{clear}'
     debugging:
         name: depurando
         default_save_name: depurando
@@ -1177,6 +1182,7 @@ adventures:
                 story_text: |
                     ¡Enhorabuena! Has alcanzado el último nivel de Hedy! El código que has creado aquí se puede copiar a entornos reales de Python como replit o PyCharm, ¡y puedes continuar aprendiendo allí!
                     Sin embargo ten en cuenta que Python sólo puede leer comando en inglés, así que si has estado usando otros idiomas, ahora los tendrás que cambiar a inglés.
+        default_save_name: intro
     dice:
         name: Dados
         default_save_name: Dados
@@ -1261,6 +1267,8 @@ adventures:
                         {print} jugador ' tiró un ' opciones {at} {random}
                         {sleep}
                     ```
+            15:
+                example_code: "```\nopciones = 1, 2, 3, 4, 5, 6\n{print} '¡Saca un 6 tan rápido como puedas!'\nlanzamientos = 0\nintentos = 0\n_\n_\n_\n_\n_\n{print} '¡Sí! Has sacado un 6 en ' intentos ' intentos.'\n```\n"
     dishes:
         name: ¿Platos?
         default_save_name: Platos
@@ -1363,6 +1371,8 @@ adventures:
                     {else}:
                         {print} 'Más suerte la próxima vez..'
                     ```
+        name: '{elif}'
+        description: '{elif}'
     for_command:
         default_save_name: para
         description: comando {for}
@@ -1378,6 +1388,7 @@ adventures:
                     {for} animal {in} animales
                         {print} 'Yo amo ' animal
                     ```
+                story_text_2: "### Ejercicio\nCompleta este código añadiendo `{for} accion {in} acciones` en la línea 2.\n"
             11:
                 story_text: |-
                     En este nivel, añadimos una nueva forma del `{for}`. En niveles anteriores, usamos `{for}` con una lista, pero también podemos usar `{for}` con números.
@@ -1399,6 +1410,10 @@ adventures:
                         {print} i
                     {print} '¡Preparado o no, allá voy!'
                     ```
+            18:
+                example_code: "```\n{for} i {in} {range}(1,5):\n    {print} (i)\n```\n"
+                story_text: "Por último, convertiremos `{for} i {in} {range} 1 a 5` en código real de Python, tal que así:\n"
+        name: '{for}'
     fortune:
         name: El adivino
         default_save_name: El adivino
@@ -1700,6 +1715,8 @@ adventures:
                     _ {print} nombre ' es mejor en ' asignaturas {at} {random}
                     _ {print} nombre ' su gran miedo es ' miedos {at} {random}
                     ```
+        name: Harry Potter
+        default_save_name: Harry Potter
     haunted:
         name: La Casa Embrujada
         default_save_name: La Casa Embrujada
@@ -1929,6 +1946,7 @@ adventures:
                     {else}
                         {print} 'No deseas continuar'
                     ```
+        name: '{if} & {else}'
     in_command:
         default_save_name: comando_en
         description: Introducción al comando {in}
@@ -1956,6 +1974,7 @@ adventures:
                     _ respuesta _ animales _ '¡También el mío!'
                     _ _ 'Mis animales preferidos son perros, vacas y ovejas'
                     ```
+        name: '{in}'
     is_command:
         default_save_name: comando_es
         description: introducción al comando {is}
@@ -2025,6 +2044,7 @@ adventures:
                     {if} nombre != 'Hedy'
                         {print} 'Tu no eres Hedy'
                     ```
+        name: '{is}'
     language:
         name: Idioma
         default_save_name: Idioma
@@ -2098,6 +2118,7 @@ adventures:
                     b = 'mundo!'
                     {print} a + b
                     ```
+                story_text_2: "**Cálculos con palabras**\nEn este nivel también puedes hacer sumas con palabras tal que así:"
     music:
         name: música
         default_save_name: música
@@ -2170,6 +2191,7 @@ adventures:
                     {print} 'Mary tenía un corderito'
                     {play} E
                     ```
+                story_text: "¡Utiliza el comando `{clear}` para crear una máquina de karaoke!\n\n### Ejercicio\nCompleta la versión de karaoke de 'Mary tenía una ovejita'.\nDespués, ¡crea una versión de karaoke de cualquier canción que te gustaría!\n"
             5:
                 story_text: |
                     No siempre tienes que usar el comando `{play}` para reproducir una canción entera, a veces solo quieres tocar una nota.
@@ -2271,6 +2293,18 @@ adventures:
                     {if} fuego _ 'sí'
                         {call} alarma_incendios
                     ```
+                story_text: "Puedes programar música por diversión, pero también puedes utilizar las notas musicales ¡para hacer algo útil como una alarma de incendios!\n\n### Ejercicio\n¡Asegúrate que la alarma de incendios suena cuando hay un incendio!\n"
+            12:
+                example_code: "```\n{define} primera_linea\n    {play} C\n    {play} C\n    {play} G\n    {play} G\n    {play} A\n    {play} A\n    {play} G\n    {sleep}\n\n{define} segunda_linea\n    {play} F\n    {play} F\n    {play} E\n    {play} E\n    {play} D\n    {play} D\n    {play} C\n    {sleep}\n\n{define} tercera_linea\n    {play} G\n    {play} G\n    {play} F\n    {play} F\n    {play} E\n    {play} E\n    {play} D\n    {sleep}\n\n{call} _\n{call} _\n{call} _\n{call} _\n{call} _\n{call} _\n```\n"
+            1:
+                example_code: "```\n{play} C4\n{play} D4\n{play} E4\n{play} F4\n{play} G4\n{play} A4\n{play} B4\n{play} C5\n```"
+            17:
+                example_code: "```\n{define} cancion_aterradora\n    {for} i {in} {range} 1 {to} 3\n        {play} G\n    {play} E\n    {sleep} 2\n    {for} i {in} {range} 1 {to} 3\n        {play} F\n    {play} D\n\nanimo = {ask} '¿Qué emociones estás sintiendo?'\n{if} animo {is} 'miedo'\n    {call} cancion_aterradora\n{elif} _\n```\n"
+            13:
+                example_code: "```\n{print} 'Yankee Doodle'\n{define} _ {with} nota_1, nota_2, nota_3\n    {play} C4\n    {play} C4\n    {play} D4\n    {play} E4\n    {play} _\n    {play} _\n    {play} _\n\n{call} linea_1 {with} 29, 31, 30\n{call} linea_1 {with} 29, 28, 0\n{call} linea_1 {with} 32, 31, 30\n\n{play} C4\n{play} B3\n{play} G3\n{play} A3\n{play} B3\n{play} C4\n{play} C4\n```\n"
+            15:
+                story_text: "**Precaución** ¡Esta aventura puede ser extremadamente molesta!\nTambién podemos utilizar el comando {while} para repetir una canción para siempre.\n\n### Ejercicio\nCompleta la canción interminable.\n"
+                example_code: "```\n{define} cancion\n    {play} _\n\nsi_o_no = {ask} '¿Quieres oír mi canción interminable?'\n{while} si_o_no = 'sí'\n    {call} cancion\n    {print} '🥳'\n```\n"
     parrot:
         name: Loro
         default_save_name: Loro
@@ -2409,6 +2443,7 @@ adventures:
 
                     ### Desafío
                     Copia las líneas varias veces para que así puedas hacer un dibujo más grande.
+                example_code_2: "```\n{if} y {is} {pressed} {forward} 15\n{else} {turn} 90\n```\n"
             7:
                 story_text: |
                     Ahora que ya has aprendido acerca de `{repeat}`, podemos presionar las teclas múltiples veces.
@@ -2417,6 +2452,7 @@ adventures:
                     ### Ejercicio
                     El código que viste en el nivel 5 solamente comprueba la tecla una sola vez. Copia el código de ejemplo y agrégale un `{repeat}`, así podrás presionar la tecla múltiples veces.
                     Usa este código para dibujar algo bonito.
+                example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
             9:
                 story_text: |
                     Ahora que sabes como combinar sentencias, puedes crear una herramienta de mecanografía con `{pressed}`
@@ -2480,6 +2516,7 @@ adventures:
                     nombre = 'Hedy'
                     {print}('Mi nombre es ', nombre)
                     ```
+        name: '{print}'
     quizmaster:
         name: Presentador
         default_save_name: Presentador
@@ -2605,6 +2642,7 @@ adventures:
                     premios {is} _
                     _
                     ```
+        name: '{random}'
     repeat_command:
         default_save_name: comando_repetir
         description: Comando {repeat}
@@ -2649,6 +2687,7 @@ adventures:
                         {else}
                             {print} 'la pizza es mejor'
                     ```
+        name: '{repeat}'
     repeat_command_2:
         default_save_name: comando_repetir_2
         description: '{repeat} comando 2'
@@ -2690,6 +2729,7 @@ adventures:
                     _ {print} 'El hombre magdalena'
                     _ {print} '¿Conoces al hombre magdalena, que vive en la Calle Drury?'
                     ```
+        name: '{repeat} 2'
     restaurant:
         name: Restaurante
         default_save_name: Restaurante
@@ -3214,6 +3254,7 @@ adventures:
                     {sleep} 2
                     {print} ¡verde!
                     ```
+        name: '{sleep}'
     songs:
         name: ¡Canta una canción!
         default_save_name: Canción
@@ -3405,6 +3446,8 @@ adventures:
                 story_text_2: |
                     ### Ejercicio
                     Este es el principio de una pequeña escalera, ¿Puedes hacer 5 escalones más?
+                example_code_2: "```\n{forward} 20\n{turn} {right}\n{forward} 20\n{turn} {left}\n{forward} 20\n```\n"
+                example_code: "```\n{forward} 100\n{turn} {left}\n```\n"
             2:
                 story_text: |
                     En el nivel 1 la tortuga sólo podía girar a izquierda o derecha. ¡Eso es un poco aburrido!
@@ -3433,6 +3476,7 @@ adventures:
                     {turn} ángulo
                     {forward} 25
                     ```
+                example_code: "```\n{forward} 20\n{turn} 90\n{forward} 20\n{turn} 180\n{forward} 100\n```\n"
             3:
                 story_text: |
                     En este nivel, puedes utilizar `{at} {random}` con la tortuga que dibuja. Una elección aleatoria hace que la tortuga camine por un camino diferente cada vez.
@@ -3460,6 +3504,7 @@ adventures:
                 story_text_2: |
                     También puedes cambiar los colores de las líneas con el comando `{color}`. Mira el ejemplo.
                     Puedes utilizar el comando `{color} {white}` para hacer líneas "invisibles". Puedes usar estas líneas blancas para mover la tortuga done quieras en la pantalla antes de empezar a dibujar.
+                example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
             5:
                 story_text: |
                     En nivel 5 puede elegir con `{if}`. Por ejemplo, entre diferentes tipos de figuras.
@@ -3545,6 +3590,7 @@ adventures:
                     Este código crea tres triángulos negros, cámbialo a cinco cuadrados rosados.
 
                      **Extra** Crea una figura de tu elección que consista de al menos dos tipos diferentes de formas.
+                example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
             10:
                 story_text: |
                     En este nivel puedes hacer que la tortuga dibuje una figura.
@@ -3938,6 +3984,8 @@ adventures:
                         respuesta = {ask} '¿Cuánto es 5 veces 5?'
                     {print} 'La respuesta es correcta'
                     ```
+        description: '{while}'
+        name: '{while}'
     years:
         name: Año Nuevo
         default_save_name: Cuenta atrás para el Año Nuevo
@@ -3968,3 +4016,70 @@ adventures:
         description: Blackjack parte 2
         default_save_name: Blackjack_2
         name: Blackjack 2
+    tic:
+        default_save_name: Tic
+        description: ¡Juega una partida de Tres en raya!
+        name: Tres en raya
+        levels:
+            16:
+                example_code: "```\n# Crea una lista llamada tablero\n_ = ['.', '.', '.', '.', '.', '.', '.', '.', '.']\n\n# Crea una función que imprima el tablero\n{define} imprimir_tablero\n    _\n    {print} 'TRES EN RAYA'\n    {print} tablero[1] tablero[2] tablero[3]\n    _\n    _\n\n# Llama la función\n```\n"
+    hotel:
+        name: hotel
+        description: hotel
+        default_save_name: hotel
+    calculator_2:
+        name: Calculadora 2
+        default_save_name: Calculadora 2
+        description: Calculadora 2
+        levels:
+            14:
+                example_code: "```\n# Utiliza tu propio código de la aventura anterior.\n```\n"
+    hangman:
+        name: Ahorcado
+        description: Adivina la palabra
+        default_save_name: Ahorcado
+    hangman_2:
+        name: Ahorcado 2
+        default_save_name: Ahorcado_2
+        description: Ahorcado 2
+    blackjack_3:
+        name: Blackjack 3
+        default_save_name: Blackjack_3
+        description: Blackjack parte 3
+        levels:
+            17:
+                example_code: "```\n# Pega tu código de la aventura anterior aquí\n\n# Carta extra para ti\nhit = {ask} _\n{if} hit == 'sí':\n    carta_3 = _\n    {print} _\n    {if} carta_3 _ 'As':\n        tus_puntos_3 = _\n        tu_total = _\n    {else}:\n       {if} tu_total _\n            _\n        {else}:\n            _\n    {print} _\n\n# Carta extra para el repartidor\n{if} repartidor_total < 17\n_\n```\n"
+    blackjack_4:
+        description: Blackjack parte 4
+        name: Blackjack 4
+        default_save_name: Blackjack_4
+        levels:
+            17:
+                example_code: "```\n# Pega tu código de la aventura anterior aquí\n\n# Decidir un ganador\n{if} _\n    {print} '¡Empate! ¡Juega de nuevo!'\n{elif} _\n    {print} '¡Ganaste!'\n{elif} _ :\n    {if} _:\n        {print} _\n    {else}:\n        {print} _\n{else}:\n    _\n```\n"
+    hangman_3:
+        name: Ahorcado 3
+        description: Ahorcado 3
+        levels:
+            17:
+                example_code: "```\n# Crea una función que dibuje el ahorcado\n{define} dibujar_ahorcado {with} paso:\n    {if} paso == 1:\n        {color} blanco\n        {forward} -100\n        {turn} 90\n        {forward} -50\n        {color} negro\n        {forward} 100\n        {forward} -50\n\n    {if} paso == 2:\n        _\n# Pega tu juego del ahorcado aquí\n\n```\n"
+        default_save_name: Ahorcado_3
+    simon_2:
+        default_save_name: Simón
+        name: Simón dice 2
+    simon_3:
+        default_save_name: Simón
+        name: Simón dice 3
+    tic_2:
+        default_save_name: Tic
+        description: ¡Juega una partida de Tres en raya!
+        name: Tres en raya 2
+    tic_3:
+        description: ¡Juega una partida de Tres en raya!
+        default_save_name: Tic
+        levels:
+            16:
+                example_code: "```\n# Pega tu código aquí\n\n# Utiliza esto para solucionar el error\n{if} _ = '.'\n    campo[eleccion] = signo\n{else}\n    {print} _\n    _\n```\n"
+        name: Tres en raya 3
+    simon:
+        default_save_name: Simón
+        name: Simón dice
