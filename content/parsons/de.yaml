@@ -122,6 +122,7 @@ levels:
     7:
         1:
             story: Vervollständige den Baby Shark Song. Zuerst kommt Baby Shark, dann Mommy und zum Schluss Daddy Shark.
+            code: "{repeat} 3 {times} {print} 'Babyhai tututututudu'\n{print} 'Baby shark'\n{repeat} 3 {times} {print} 'Mamahai tututututudu'\n{print} 'Mommy shark'\n{repeat} 3 {times} {print} 'Papahai tututututudu'\n{print} 'Papahai'"
         2:
             story: Erstelle den Song 'Die Räder am Bus gehen rundherum'
             code: |-
@@ -153,6 +154,7 @@ levels:
     9:
         1:
             story: Dieses Spiel wird dir drei Mathe Aufgaben geben. Die Frage ist jedesmal anders. Kannst du die Reihenfolge herausfinden?
+            code: "zahlen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n{repeat} 3 {times}\n    zahl = zahlen {at} {random}\n    richtige_antwort = 5 * zahl\n    antwort = {ask} 'Was ist 5 mal 'zahl'?'\n    {if} antwort = richtige_antwort\n        {print} 'Gut gemacht!'\n    {else}\n        {print} 'Nein! Die richtige Antwort ist 'richtige_antwort'.'"
         2:
             story: |-
                 Dieser Code fragt die Kunden in einem Restaurant, ob sie Nachtisch bestellen wollen. Falls sie Nachtisch bestellen wollen, frag sie, was sie für einen Nachtisch wollen. Wenn sie Tiramisu bestellen, wird ihnen gesagt, dass es ausverkauft ist.
@@ -186,9 +188,11 @@ levels:
             story: |-
                 Dieser Friseur-Roboter wird für dich einen neuen Haarschnitt aussuchen. Wenn du mit der ersten Wahl nicht einverstanden bist, kannst du es nochmal versuchen.
                 **Achtung** Die Variable person wird in der ersten Zeile bestimmt. Die Variable frisur wird in der zweiten Zeile bestimmt.
+            code: "personen = Betty, Amanda, Marc\nfrisuren = eine Glatze, ein Iro, ein Pferdeschwanz, Spikes\n{for} person {in} personen\n    {print} person ' bekommt ' frisuren {at} {random}\n    zufrieden = {ask} person ', bist du zufrieden mit dieser Wahl?'\n    {if} zufrieden {is} ja\n        {print} 'Super'\n    {else}\n        {print} 'Versuchen wir es nochmal … Dann bekommt 'person ' ' frisuren {at} {random}"
     11:
         1:
             story: Erzeuge die Countdown Uhr für Neujahr! Das Programm sollte die Zahlen 10 bis 1 für eine Sekunde zeigen und dir dann ein Frohes neues Jahr wünschen.
+            code: "{for} zahl {in} {range} 10 {to} 1\n    {print} zahl\n    {sleep}\n    {clear}\n{print} 'Frohes neues Jahr!'"
         2:
             story: |-
                 Erstelle ein Programm, das uns die Ergebnisse der Wissenschaftsschau sagt. Definiere zuerst die Variable Teilnehmer, dann die Variable Platzierung.

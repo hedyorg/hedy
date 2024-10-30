@@ -27,21 +27,25 @@ levels:
         5:
             header: Programmieren in Hedy
             text: In Hedy benutzen wir speziellen Code, wie `{print}`.
+            code: '{print} Willkommen bei Hedy!'
         6:
             header: Programmieren in Hedy
             text: Code-Wörter werden in pink angezeigt.
+            code: '{print} Willkommen bei Hedy!'
         7:
             header: Programmieren in Hedy
             text: Wir starten den Code mit dem Run code Knopf unter dem Code.
+            code: '{print} Willkommen bei Hedy!'
         8:
             header: Programmieren in Hedy
             text: Die Ausgabe erscheint auf der linken Seite.
+            code: '{print} Willkommen bei Hedy!'
         9:
             header: Programmieren in Hedy
             text: Die Ausgabe kann auch eine Zeichnung sein.
             code: |-
                 {forward} 100
-                {turn} left
+                {turn} {left}
     1:
         1:
             header: Willkommen in Level 1!
@@ -55,6 +59,7 @@ levels:
                 Den ersten Code, den du in Level 1 benutzen kannst, ist `{print}`.
 
                 `{print}` wird benutzt, um Text auf dem Bildschirm anzuzeigen.
+            code: '{print} Text auf Bilschirm anzeigen'
         3:
             header: 'Hedy Level 1: {ask}'
             text: |-
@@ -79,9 +84,11 @@ levels:
             text: |-
                 Mit `{print}`, `{ask}` und `{echo}` kannst du bereits eine kleine Geschichte erstellen.
                 Dies ist ein guter Zeitpunkt die Abenteuer Papagei, Geschichte und Stein Schere Papier zu versuchen.
+            code: "{print} Hallo!\n{ask} Wie heißt du?\n{echo} hallo"
         6:
             header: Programmieren!
             text: Abenteuer sind in den Tabs.
+            editor: /hedy/1
         7:
             header: Programmieren!
             text: Die gelben Pfeilknöpfe können zum Kopieren von Beispielen benutzt werden.
@@ -89,6 +96,7 @@ levels:
         8:
             header: Zeichnen mit der Schildkröte
             text: Nun da wir uns Text-Codes angeguckt haben, schauen wir uns als Nächstes Codes zum Zeichnen an.
+            editor: /hedy#Ausgabe_Befehl
         9:
             header: 'Zeichnen mit der Schildkröte: {forward}'
             text: '`{forward}` wird benutzt, um die Schildkröte vorwärts zu bewegen.'
@@ -101,13 +109,25 @@ levels:
         11:
             code: |-
                 {forward} 50
-                {turn} left
+                {turn} {left}
+            header: 'Zeichnen mit der Schildkröte: {turn}'
+            text: '`{turn}` wird benutzt, um die Schildkröte nach rechts oder links zu drehen.'
+        13:
+            header: Lass den Programmierspaß beginnen!
+            text: Genieß die Abenteuer in Level 1!
+        12:
+            debug: Wahr
+            text: Debugging von Code bedeutet, die Fehler im Code zu entfernen. Lass uns gemeinsam diesen Code debuggen. Klick auf den Marienkäfer, um den Debugger zu starten.
+            header: Debugging
+            code: "Ich bin DJ Hedy\n{print} Welches Lied würdest du gerne hören?\n{ask} Ich mag dieses Lied auch!\n{print} Als nächstes … {echo}"
     2:
         2:
             code: |-
                 name {is} Hedy
                 alter {is} 15
                 {print} name ist alter Jahre alt
+            text: Um eine Variable zu erstellen oder 'zu setzen', nutzen wir den `{is}` Befehl
+            header: Variablen
         3:
             text: |-
                 We can also set a variable by asking questions.
@@ -115,6 +135,8 @@ levels:
                 The answer to the question is stored in the variable.
 
                 This way we don't need the `{echo}`  command.
+            header: Interaktiv
+            code: "name {is} {ask} Wie heißt du?\n{print} Hallo name"
         4:
             text: Now that we use variables, we can use multiple variables instead of just one `{echo}`command.
             code: |-
@@ -122,21 +144,78 @@ levels:
                 {print} Hallo name
                 alter {is} {ask} Wie alt bist du?
                 {print} name ist alter Jahre alt.
+            header: Mehrere Variablen
         5:
             code: |-
                 {print} Meine Lieblingsfarbe ist...
                 {sleep} 2
                 {print} Grün!
+            text: Du kannst auch den `{sleep}` Befehl benutzen, um deinen Code für eine Weile zu pausieren.
+            header: Schlafen
         6:
             code: |-
                 pause {is} 10
                 {print} Meine Lieblingsfarbe ist...
                 {sleep} pause
                 {print} Grün!
+            header: Schlaf 5
+            text: "Du kannst eine Zahl hinter den`{sleep}` Befehl schreiben, wenn du die Pause länger machen möchtest.\n\nWenn du möchtest, kannst du sogar eine Variable statt einer Zahl nutzen, um die Länge des Schlafen-Befehls zu bestimmen."
+        7:
+            debug: Wahr
+            header: Debugging
+            code: "{print} Willkommen in Donut-Laden!\nFüllung {is} Welche Füllung möchtest du?\n{print} Du hast gewählt … Füllung! Lecker!\nTopping {ask} Welches Topping möchtest du?\nTopping ist lecker!\n{print} Ich hol dir deinen Donut. {sleep}\n{print} Bitteschön! A Füllung Donut mit Topping!\n{ask} Schönen Tag noch!"
+            text: Debugging eines Codes bedeutet, Fehler zu entfernen. Lass und diesen Code gemeinsam debuggen. Klick auf den Marienkäfer um den Debugger zu starten.
+        1:
+            header: Willkommen in Level 2
+            text: "In diesem Level lernst du, Variablen zu nutzen.\n\nEine Variable ist ein Wort, das genutzt werden kann, um Informationen zu speichern.\n\nZum Beispiel: Ein Name, Alter oder die Lieblingsmannschaft"
+        8:
+            text: Genieße die Abenteuer in Level 2!
+            header: Lass den Programmierspaß beginnen!
     3:
         4:
             text: Du kannst den `{at}` `{random}` Befehl auch in einem Satz benutzen.
+            header: Zufällig in einem Satz
+            code: "tiere {is} Hunde, Katzen, Kängurus\n{print} Meine Lieblingstiere sind tiere {at} {random}"
+        2:
+            text: "Du erstellst eine Liste mit`{is}`.\n\nTrenne die Elemente in deiner Liste mit einem Komma."
+            code: tiere {is} Hunde, Katzen, Kangurus
+            header: Eine Liste erstellen
+        6:
+            header: Entfernen von
+            code: "tiere {is} Hunde, Katzen, Kängurus\nnicht_mögen {is} {ask} Welche Tiere magst du nicht?\n{remove} nicht_mögen {from} tiere\n{print} Ich wähle tiere {at} {random}"
+            text: "Das Gegenstück zum `{add}` `{to}` Befehl ist der  `{remove}` `{from}` Befehl.\nDieser Befehlt entfernt ein Element von der Liste."
+        7:
+            debug: Wahr
+            header: Debugging
+            text: Lass uns den Code debuggen!
+            editor: "musik_genres {is} Rock, Pop, Metal, Indie, Jazz\nwahl_genre ist musik_genres {at} {random}\n{print} Hören wir uns wahl_genre an\ngut {ask} Magst du dieses Genre?\n{remove} wahl_genre {from} wahl_genre\nzweite_wahl {is} musik_genres\n{print} oder bevorzugst du … zweite_wahl {at} {random}\n{remove} zweite_wahl {to} musik_genres\n{print} Ich mag _genre {random} am liebsten!"
+        1:
+            header: Willkommen in Level 3
+            text: In diesem Level lernst du, wie du eine Liste erstellst, Elemente zu dieser Liste hinzufügst und entfernst und ein zufälliges Element aus der Liste auswählst.
+        8:
+            header: Legen wir los!
+            text: Genieße die Abenteuer in Level 3!
+        3:
+            text: "Du kannst die Liste mit dem `{at}` `{random}` Befehl nutzen.\nDer Computer wählt dann zufällig ein Element der Liste.\nJedes Mal, wenn du den Code ausführst, gibt er etwas anderes aus."
+            code: "tiere {is} Hunde, Katzen, Kängurus\n{print} tiere {at} {random}"
+            header: Zufällig
+        5:
+            code: "tiere {is} Hunde, Katzen, Kängurus\nmag {is} {ask} Welches ist dein Lieblingstier?\n{add} mag {to_list} tiere\n{print} Ich wähle tiere {at} {random}"
+            text: "Du kannst der Liste Elemente mit dem `{add}` `{to}` Befehl hinzufügen.\n\nDu kannst auswählen, was du zur Liste hingefügt wird oder den `{add}` `{to}` Befehlt in Kombination mit dem `{ask}` Befehl nutzen.\nSo kannst du den Spieler entscheiden lassen, was der Liste hinzugefügt wird."
+            header: Hinzufügen
     4:
         9:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
+        2:
+            text: 'In den vorherigen Leveln bist du vielleicht über folgendes Problem gestolpert:'
+            debug: Wahr
+            header: Problem
+            code: "name {is} Sophie\n{print} Mein Name ist name"
+        1:
+            header: Willkommen in Level 4
+            code: "{print} 'Schreib mit Anführungszeichen!'"
+            text: In diesem Level lernst du, wie du Anführungszeichen benutzt.
+        3:
+            header: Es mit Anführungszeichen beheben
+            text: "In diesem Level werden wir das Problem mithilfe von Anführungszeichen lösen.\n\nDamit sieht unser Code auch schon mehr nach 'echtem' Python-Code aus."
