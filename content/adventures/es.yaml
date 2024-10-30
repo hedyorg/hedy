@@ -321,6 +321,7 @@ adventures:
                     {if} nombre {is} 'Hedy' {and} edad {is} 2
                         {print} '¡Tú eres el verdadero Hedy!'
                     ```
+        name: '{and} y {or}'
     ask_command:
         default_save_name: comando_preguntar
         description: Introducción al comando {ask}
@@ -387,6 +388,7 @@ adventures:
                     nombre = {input}('¿Cómo te llamas?')
                     {print}('Así que te llamas ', nombre)
                     ```
+        name: '{ask}'
     calculator:
         name: Calculadora
         default_save_name: Calculadora
@@ -3954,3 +3956,15 @@ adventures:
                         {sleep}
                     {print} '¡Feliz año nuevo!
                     ```
+    blackjack:
+        name: Blackjack
+        default_save_name: Blackjack
+        description: Intenta acercarte lo más posible a 21
+        levels:
+            17:
+                story_text: "El Blackjack es un sencillo juego de cartas en el que tienes que acercarte lo más posible a 21 puntos. Tienes dos cartas. Cada carta vale su valor numérico, y las cartas de la cara (Jota, Reina y Rey) valen 10 puntos.\nEl As vale 1 u 11 puntos (puedes elegir). El crupier, tu oponente, también recibe dos cartas.\nSi quieres, puedes coger otra carta, y sus puntos se sumarán a tu total. El repartidor también puede elegir coger otra carta.\nPero ten cuidado de no conseguir más de 21 puntos, porque si lo haces, ¡pierdes!\nEl jugador que se acerque más a 21, sin pasarse, ¡gana!\n\n### Ejercicio\nEn esta aventura codificamos la primera parte de nuestro juego de Blackjack. Crearemos una función para calcular cuántos puntos vale una carta.\n\n***Establezcamos las variables***\nEmpieza haciendo una lista de todas las cartas, del 2 al As. Después haz una lista de las cartas con cara, es decir, Jota, Reina y Rey. Luego elige una carta al azar de la lista de cartas para que sea card_1.\n\n***Crear una función para calcular los puntos***\nCrea una función que calcule cuántos puntos vale una carta.\nTodas las cartas con cara valen 10 puntos, el As vale 11 y todas las demás cartas valen su numeral.\nDevuelve la variable `points` al final de la función.\n\n***Prueba de la función\nPrueba si tu función funciona correctamente. Termina la primera orden de impresión rellenando qué carta has sacado. Luego termina la segunda línea llamando a la función con carta_1.\nEjecuta el código un par de veces. ¿Estás satisfecho con los resultados? ¡Genial! ¡A continuación, puede eliminar la parte de prueba y pasar a la siguiente pestaña!\n"
+                example_code: "```\n{print} 'BLACKJACK'\n\n# Establece estas variables\ncard = _\nface_cards = _\ncard_1 =\n\n# Crea una función para calcular los puntos\n{define} calculate_points {with} card:\n    {if} card {in} face_cards:\n        points = _\n    {elif} _\n        _\n    {else}:\n        _\n    _ points\n\n# Prueba tu función\n{print} 'Tu carta es un ' _\n{print} 'Eso vale ' _ ' puntos'.\n```\n"
+    blackjack_2:
+        description: Blackjack parte 2
+        default_save_name: Blackjack_2
+        name: Blackjack 2
