@@ -1881,7 +1881,7 @@ workbooks:
             ### Keuzes maken
             Tot nu toe voerde Hedy altijd alle regels code uit. Vanaf nu kan je met een `if` bepaalde regels uitvoeren, alleen in bepaalde gevallen.
             De code die je na `if` schrijft, noem je een conditie.
-            In dit voorbeeld is de conditie `vriend is Jasmijn.`
+            In dit voorbeeld is de conditie `vriend is Jasmijn`.
           code      : |-
             vriend is ask 'Hoe heet jij?'
             if vriend is Jasmijn print 'Hallo!' else print 'Nee, jij niet!'
@@ -1894,21 +1894,21 @@ workbooks:
           code      : |-
             vandaag is ask 'Welke dag is het?'                    
             if vandaag is vrijdag print 'Ja' else print 'Nee'
-          answer    : "print 'Ja'"
+          answer    : "vandaag is vrijdag"
         - type      : circle
           goal      : de conditie
           code      : |-
             vandaag is ask 'Welke dag is het?'                    
             if vandaag is zaterdag print 'Geen school vandaag' 
             else print 'Helaas wel'
-          answer    : "print 'Helaas wel'"
+          answer    : "vandaag is zaterdag"
         - type      : circle
           goal      : de conditie
           code      : |-
             leeftijd is ask 'Hoe oud ben jij?'                    
-            if leeftijd is 16 print 'Perfecto' 
+            if leeftijd is 16 print 'Perfecto'
             else print 'Jij bent te jong!'
-          answer    : "leeftijd is 18"
+          answer    : "leeftijd is 16"
         - type      : text
           contents  : |-
             #### Opdracht 2: Omcirkel de juiste regels

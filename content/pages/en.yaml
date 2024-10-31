@@ -1859,61 +1859,60 @@ workbooks:
     -   level: '5'
         intro: |-
           ## if else
-          Aan het einde van de les:
-          * hoe je de computer kan laten reageren op invoer.
+          By the end of this lesson you can:
+          * let the computer react to different input.
         exercises:
         - type      : text
           contents  : |-
-            ### Keuzes maken
-            Tot nu toe voerde Hedy altijd alle regels code uit. Vanaf nu kan je met een `if` bepaalde regels uitvoeren, alleen in bepaalde gevallen.
-            De code die je na `if` schrijft, noem je een conditie.
-            In dit voorbeeld is de conditie `vriend is Jasmijn.`
+            ### Making choices
+            Up until now Hedy would always run each and every line of code. From now on you can let it only run certain lines in certain cases, with an `if`.
+            The code that follows behind the `if` is called a conditional.
+            In this example the conditional is `friend is Yasmine`.
           code      : |-
-            vriend is ask 'Hoe heet jij?'
-            if vriend is Jasmijn print 'Hallo!' else print 'Nee, jij niet!'
+            friend is ask "What's your name?"
+            if friend is Yasmine print "Hi Yasmine!" else print "No, I didn't mean you!"
         - type      : text
           contents  : |-
-            #### Exercise 1: Onderstreep de condities
-            Wat is een conditie? Onderstreep in deze codes steeds de conditie.
+            #### Exercise 1: Mark the conditions
+            What is a conditional? Mark the conditionals in the next codes!
         - type      : circle
-          goal      : de conditie
+          goal      : the conditional
           code      : |-
-            vandaag is ask 'Welke dag is het?'                    
-            if vandaag is vrijdag print 'Ja' else print 'Nee'
-          answer    : "print 'Ja'"
+            today is ask 'What day is it?'
+            if today is friday print 'Yay' else print 'No'
+          answer    : "today is friday"
         - type      : circle
-          goal      : de conditie
+          goal      : the conditional
           code      : |-
-            vandaag is ask 'Welke dag is het?'                    
-            if vandaag is zaterdag print 'Geen school vandaag' 
-            else print 'Helaas wel'
-          answer    : "print 'Helaas wel'"
+            today is ask 'What day is today?'
+            if today is saturday print 'No school today!'
+            else print 'You have to go to school'
+          answer    : "today is saturday"
         - type      : circle
-          goal      : de conditie
+          goal      : the conditional
           code      : |-
-            leeftijd is ask 'Hoe oud ben jij?'                    
-            if leeftijd is 16 print 'Perfecto' 
-            else print 'Jij bent te jong!'
-          answer    : "leeftijd is 18"
+            age is ask 'How old are you?'
+            if age is 16 print 'Perfecto'
+            else print 'You are too young!'
+          answer    : "age is 16"
         - type      : text
           contents  : |-
             #### Exercise 2: Mark the correct lines
-            Welke code wordt uitgevoerd? Omcirkel alleen die stukken.
-            Doe alsof het vandaag vrijdag is, en jij 12 jaar bent.
-
+            Which code will be ran? Mark only those parts.
+            Pretend that today is friday and you are 12 years old.
         - type      : circle
-          goal      : code die wordt **uitgevoerd**
+          goal      : the code that will be **run**
           code      : |-
-            vandaag is ask 'Welke dag is het?'                    
-            if vandaag is vrijdag print 'Ja' else print 'Nee'
-          answer    : "print 'Ja'"
+            today is ask 'What day is today?'
+            if today is friday print 'Yay' else print 'No'
+          answer    : "print 'Yay'"
         - type      : circle
-          goal      : code die wordt **uitgevoerd**
+          goal      : the code that will be **run**
           code      : |-
-            vandaag is ask 'Welke dag is het?'                    
-            if vandaag is zaterdag print 'Geen school vandaag' 
-            else print 'Helaas wel'
-          answer    : "print 'Helaas wel'"
+            today is ask 'What day is today?'
+            if today is saturday print 'No school today!'
+            else print 'You have to go to school'
+          answer    : "print 'You have to go to school'"
         - type      : circle
           goal      : code die wordt **uitgevoerd**
           code      : |-
