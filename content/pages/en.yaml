@@ -2067,107 +2067,108 @@ workbooks:
           lines     : 3
         - type      : text
           contents  : |-
-            #### Exercise 2: Rekenen
-            Deze exercise doe je weer in stappen.
-            1. Maak eerst de codes af, op een logische manier door iets in te vullen op de streepjes.
-            2. Is de code af? Vul dan in wat de uitvoer van de code wordt.
+            #### Exercise 2: Maths
+            Follow these steps to complete the exercise:
+            1. Finish the codes by filling in a sum on the lines. The codes have to make sense.
+            2. Finished? Fill in what you think the output of the code will be.
         - type      : output
           code      : |-
-            print 'vijf plus tien is ' ___
-            print 'zes min vijf is ' ___
-            print 'honderd gedeeld door vijf is ' ___
+            print 'five plus ten is ' ___
+            print 'six minus five is ' ___
+            print 'one hunderd diveded by five is ' ___
             ___ _________________________ 4 * 12
           answer    : |-
-            vijf plus tien is 50
-            zes min vijf is 1
-            honderd gedeeld door vijf is 20
-            vier keer twaalf is 48
+            five plus ten is 50
+            six minus five is 1
+            one hunderd devided by five is 20
+            four times twelve is 48
           lines     : 4
         - type      : text
           contents  : |-
-            ### Exercise 2: Rekenen met ask en variabelen
-            Je kan een rekensom ook opslaan in een variabele, vergelijken met een `ask` en een som uitvoeren in een `if`.
-            Dat gaan we nu oefenen. 
-            Voorspel wat de uitvoer van deze programma's is.
-            Bij een `ask` en `random` mag je zelf kiezen wat het antwoord wordt, maar het moet wel kunnen!
+            ### Exercise 2: Maths with ask and variables
+            You can also save a sum in a variable, compare it with an `ask` and run it with an `if`.
+            We'll practice that now.
+            Predict the output of these programs.
+            When `ask` and `random` are used, you can make up your own answers.
         - type      : output
           code      : |-
-            som = 2 * 5
-            print 'Het antwoord op deze som is ' som
+            sum = 2 * 5
+            print 'The answer to this sum is ' sum
           answer    : |-
-            Het antwoord op deze som is 10
+            The answer to this sum is 10
           lines     : 1
         - type      : output
           code      : |-
-            goede_antwoord = 142 / 2
-            jouw_antwoord = ask 'Wat is 142 gedeeld door twee?'
-            if goede_antwoord = jouw_antwoord
-            print 'Knap werk!'
-            else print 'Helaas pindakaas'
+            correct_answer = 142 / 2
+            your_answer = ask 'What is 142 divided by 2?'
+            if correct_answer is your_answer
+            print 'Great job'
+            else print 'Bummer!'
           answer    : |-
-            'Knap werk!' of 'Helaas pindakaas'
+            Great job! or Bummer!
           lines     : 1
         - type      : output
           code      : |-
-            getallen is 2, 4, 6, 7, 9, 11, 17
-            getal is getallen at random
-            print 'Hoeveel is ' getal ' keer 7?'
+            numbers is 2, 4, 6, 7, 9, 11, 17
+            number is numbers at random
+            print 'How much is ' number ' times 7?'
           answer    : |-
-            Hoeveel is 7 & 7? (of een ander getal uit 2, 4, 6, 9, 11, 17)
+            How much is 7 times 7? (or any other number from the list: 2, 4, 6, 9, 11, 17)
           lines     : 1
         - type      : output
           code      : |-
-            lievelings is ask 'Wat is je lievelingsgetal?'
-            print '3 keer ' lievelings ' is ' 3 * lievelings
+            favorite is ask 'What is your favorite number?'
+            print '3 times ' favorite ' is ' 3 * favorite
           answer    : |-
-            3 keer 6 (bijvoorbeeld) is 18
+            3 times 6 (for example) is 18
           lines     : 1
         - type      : text
           contents  : |-
-            ### Exercise 3: Invoer
-            Je krijgt nu weer een uitvoer te zien. Schrijf een programma dat bij deze uitvoer kan horen.
-            Let op: vaak zijn er meerdere antwoorden goed, je mag zelf iets kiezen, als het maar kan.
-            Kijk ook goed naar het aantal streepjes!
+            ### Exercise 3: Input
+            You'll be shown an output. Write a program that could produce this output.
+            Please note: Multiple answers can be correct. Choose whatever you want, as long as it's correct.
+            Fill up all the lines, so look carefully at the amount of lines!
         - type: input
           answer: |-
-            print 'Dit is een heel groot getal:' 4*17
+            print 'This is a very big number:' 4*17
           output: |-
-            Dit is een heel groot getal: 68
+            This is a very big number: 68
         - type: input
           answer: |-
-            print 1000/10 ' is het antwoord op 1000/10.
+            print 1000/10 ' is the answer to 1000/10.'
           output: |-
-            100 is het antwoord op 1000/10.
+            100 is the answer to 1000/10.
         - type: input
           answer: |-
-            getallen is 1,2,3,4,5,6,7,8,9,10
-            print getallen at random * 7 ' is een willekeurig getal uit de tafel van 7'
+            numbers is 1,2,3,4,5,6,7,8,9,10
+            print numbers at random * 7 ' is a random multiple of 7'
           output: |-
-            14 is een willekeurig getal uit de tafel van 7
+            14 is a random multiple of 7
         - type      : text
           contents  : |-
             #### Exercise 4: Programming words
-            We hebben deze les nieuwe programmeertekens geleerd. We oefenen ze nog een keer.
+            We have learned to use some new signs in our codes. Which signs are used in these cases?
         - type      : define
-          word      : "keer"
+          word      : "times"
           answer    : "*"
           lines     : 1
         - type      : define
-          word      : "gedeeld door"
+          word      : "devided by"
           answer    : "/"
           lines     : 1
         - type      : text
+        - type      : text
           contents  : |-
-            #### Wat vond jij?
+            #### What did you think?
         - type      : question
-          text      : "Wat was de leukste exercise van dit level?"
+          text      : "Which exercise did you like best this level?"
           lines     : 1
         - type      : question
-          text      : "Waarom vond je juist die exercise leuk?"
+          text      : "What did you like about it?"
           lines     : 5
         - type      : question
-          text      : "Welke exercise was het minst leuk?"
+          text      : "Which exercise did you like least this level?"
           lines     : 1
         - type      : question
-          text      : "Waarom vond je juist die exercise niet leuk?"
+          text      : "What didn't you like about it?"
           lines     : 5
