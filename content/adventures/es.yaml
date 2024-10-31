@@ -501,6 +501,7 @@ adventures:
                 example_code: "```\n{define} nueva_pregunta\n    numeros = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    numero_1 = numeros {at} {random}\n    numero_2 = numeros {at} {random}\n    correcta = numero_1 * numero_2\n    respuesta = 0\n    _\n    _\n    _\n    {print} '¡Bien hecho!'\n\n{print} 'Da 10 respuestas correctas para ganar!'\n{for} i {in} {range} 1 {to} 10\n    _\n{print} '¡Ganaste!'\n```\n"
             10:
                 example_code: "```\nnumeros = 1, 2, 3\n{for} _\n    {for} _\n        respuesta = {ask} _\n        correcta = numero_1 * numero_2\n        {if} respuesta {is} correcta\n            {print} '¡Gran trabajo!'\n        {else}\n            {print} 'No es correcto. La respuesta correcta es ' correcta\n```\n"
+                story_text: "¡Este juego de calculadora te ayuda a practicar las tablas de multiplicación!\n### Ejercicio\nRellena los huecos en blanco. Queremos que este programa pregunte al jugador las siguientes preguntas:\n```\n¿Cuánto es 1 veces 1?\n¿Cuánto es 1 veces 2?\n¿Cuánto es 1 veces 3?\n¿Cuánto es 2 veces 1?\n¿Cuánto es 2 veces 2?\n¿Cuánto es 2 veces 3?\n¿Cuánto es 3 veces 1?\n¿Cuánto es 3 veces 2?\n¿Cuánto es 3 veces 3?\n_\n```\n"
     clear_command:
         default_save_name: comando_limpiar
         description: Comando {clear}
@@ -1668,6 +1669,9 @@ adventures:
                     nuevo_precio = _ calcular_nuevo_precio {with} precio_anterior, _
                     {print} 'El nuevo precio es ' nuevo_precio ' dólares'
                     ```
+            18:
+                story_text: "¡Hagamos funciones a la manera de Python! Para definir una función ya no utilizaremos:\n\n`{define} name_function {with} argument_1, argument_2:`\n\npero utilizaremos:\n\n`{def} name_function(argument_1, argument_2):`.\n\n\nSi no quieres utilizar argumentos, deja un espacio vacío entre los paréntesis.\nPara llamar a una función, no necesitamos el comando `{call}` nunca más. Solo escribe el nombre de la función.\n"
+                example_code: "```\n{def} calcular_puntuacion(respuesta, respuesta_correcta):\n    {if} respuesta == respuesta_correcta:\n        puntuacion = 1\n    {elif} respuesta == '?':\n        puntuacion = 0\n    {else}:\n        puntuacion = -1\n    {return} puntuacion\n\nrespuesta = {input} ('¿Donde se encuentra la Torre Eiffel?')\nrespuesta_correcta = 'Paris'\npuntuacion = calcular_puntuacion(respuesta, respuesta_correcta)\n{print} ('Tu puntuación es... ', puntuacion)\n```\n"
     guess_my_number:
         name: Adivina mi número
         default_save_name: adivina mi número
@@ -1883,6 +1887,10 @@ adventures:
                         {print} '¡Habitación ' i
                         monstruo = monstruos {at} {random}
                     ```
+            14:
+                story_text: "### Ejercicio\nEn este nivel puedes utilizar los símbolos `<` y `>` para introducir vidas a tu juego.\nAsegúrate que el jugador pierde una vida cuando se encuentra con el monstruo equivocado y que el juego se pare si se ha quedado sin vidas.\n"
+            16:
+                story_text: "### Ejercicio\nEste juego de la casa encantada utiliza la conexión entre las listas que puedes usar en este nivel.\nPor ejemplo: todas las propiedades que pertenecen al zombi son las primeras en todas las listas, la bruja las segundas y el vampiro las terceras.\n¡Revisa el código y rellena  `weapons[i]`, `monsters[i]` , `bad_fate[i]`, `good_fate[i]`, `hint[i]` en los huecos correctos para hacer que el código funcione!\n"
     if_command:
         default_save_name: comando_si
         description: Introducción al comando {if}
@@ -3431,6 +3439,14 @@ adventures:
                     {print} 'Como un diamante en el cielo'
                     {call} _
                     ```
+                story_text: "Las canciones contienen un montón de repeticiones. ¡Podemos capturarlas en una función!\n### Ejercicio\nMira el código de ejemplo con la función. Rellena las dos líneas para que se imprima la canción entera.\n"
+            16:
+                example_code_2: "```\nobjeto = ['ruedas', 'puertas', _]\nmovimiento = [ 'gira y gira', 'abre y cierra', _]\n```\n"
+                story_text_2: "### Ejercicio 2\nAhora crea tu propio código para la canción infantil «Las ruedas del autobús» de la misma manera.\n"
+                story_text: "### Ejercicio\n¡Completa la canción infantil!\n"
+        default_save_name: Canción 2
+        name: ¡Canta una canción! 2
+        description: Canta una canción 2
     turtle:
         name: La tortuga
         default_save_name: Tortuga
@@ -4016,6 +4032,9 @@ adventures:
         description: Blackjack parte 2
         default_save_name: Blackjack_2
         name: Blackjack 2
+        levels:
+            17:
+                story_text: "### Ejercicio\nEn esta aventura programamos la segunda parte de nuestro juego de Blackjack.\n\n***Pega el código de tu aventura anterior***\nEn la aventura anterior has iniciado una lista de variables y creado una función para calcular cuantos puntos vale una carta. Copia tu código y pégalo aquí. Ten en cuenta que no necesitas la parte de prueba, así que si no la has eliminado ya, por favor hazlo ahora.\n\n***Añade más variables***\nYa has configurado las listas `cards` y `face_cards` y la variable `card_1`. Debajo de esas variables crea 3 más: `card_2`, `dealer_card_1` y `dealer_card_2`. Estas variables están configuradas a una carta aleatoria de la lista de cartas.\n\n***Sumar puntos***\nPara calcular cuantos puntos has conseguido llamamos a la función con la carta 1 y hacemos lo mismo con la carta 2. Después sumamos las puntuaciones de ambas para obtener el total.\nHaz lo mismo para los puntos del repartidos, ¡pero asegúrate que utilizas las cartas del repartidos y no las tuyas propias!\n\n***2 Ases***\n¡Lo estás haciendo genial! Se pueden calcular casi todas las puntuaciones. Solo hay una excepción: 2 Ases. Si consigues 2 Ases, tu puntuación total es 12 puntos y no 22 (¡porque con 22 puntos perderías!). Esto también ocurre con el crupier.\n\n***Mostrar la puntuación***\nPor último, quieres que el programa diga qué cartas has robado y cuántos puntos son. Después muestra qué cartas tiene el crupier y cuántos puntos tienen.\n\n***Continuar en la siguiente pestaña***\n¡Genial! Has completado esta parte del juego! Copia tu código y ve a la siguiente pestaña para aprender como pedir una carta extra y declarar un ganador.\n"
     tic:
         default_save_name: Tic
         description: ¡Juega una partida de Tres en raya!
@@ -4042,6 +4061,9 @@ adventures:
         name: Ahorcado 2
         default_save_name: Ahorcado_2
         description: Ahorcado 2
+        levels:
+            17:
+                example_code: "```\n# Pega tu código aquí\n\n# El juego\n{while} juego_terminado _\n    adivina = _\n    {if} _\n        {for} i {in} {range} 1 {to} cantidad_letras:\n            si respuesta[i] == adivina:\n                letras_adivinadas[i] = adivina\n        {print} _\n        {if} letras_adivinadas == _:\n            {print} _\n            juego_terminado = _\n    {else}:\n        {print} _\n        errores_cometidos _\n        {if} _ == 10:\n            {print} _\n            {print} _\n            _\n```\n"
     blackjack_3:
         name: Blackjack 3
         default_save_name: Blackjack_3
@@ -4056,6 +4078,7 @@ adventures:
         levels:
             17:
                 example_code: "```\n# Pega tu código de la aventura anterior aquí\n\n# Decidir un ganador\n{if} _\n    {print} '¡Empate! ¡Juega de nuevo!'\n{elif} _\n    {print} '¡Ganaste!'\n{elif} _ :\n    {if} _:\n        {print} _\n    {else}:\n        {print} _\n{else}:\n    _\n```\n"
+                story_text: "¡En las últimas 3 aventuras has creado un juego de blackjack que casi funciona! ¡Lo único que queda por hacer es decidir el ganador!\n\n### Ejercicio\n***Pega tu código de la aventura anterior*** Empieza pegando el código que has hecho hasta ahora en el campo de programación.\n\n***Decidir un ganador***\nLo primero de todo, si tú y el crupier teneis la misma puntuación, es un empate.\nEn segundo lugar, si el crupier tieme más de 21 puntos y tú no, tu ganas.\nTercero, si tanto tú como el crupier teneis menos de 22 puntos, tenemos que ver quien está más cerca a 21. Hacemos esto comparando quien tiene la puntuación mayor. Si tu puntuación es mayor que la del crupier, entonces eres el ganador. Si no, el crupier gana.\nPor último, en cualquier otra situación (p. ej., tu tienes más de 21 puntos y el crupier no, o ambos teneis más de 21 puntos) tú pierdes.\n\n***¡Disfruta del juego!***\n¿El juego funciona correctamente? ¡Increible! ¡Has hecho un gran trabajo! ¡Disfruta de tu juego!\nSi no funciona de inmediato, no te preocupes, quizá hayas cometido un error. Mantén la calma y depura tu código con el botón de la mariquita.\n"
     hangman_3:
         name: Ahorcado 3
         description: Ahorcado 3
