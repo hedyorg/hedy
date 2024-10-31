@@ -1306,9 +1306,7 @@ workbooks:
     -   level: '2'
         intro: |-
           ### Variables
-          
           By the end of this lesson, you can:
-          
           * Save something in a variable
           * Create a story or drawing using variabeles
         exercises:
@@ -1688,7 +1686,7 @@ workbooks:
     -   level: '4'
         intro: |-
           ## Quotation marks
-          By the end of this lessen you can:
+          By the end of this lesson, you can:
           * understand why quotation marks are needed in programming.
           * put quotation marks in the correct places.
           * understand error messages about wrongful use of quotation marks.
@@ -1859,7 +1857,7 @@ workbooks:
     -   level: '5'
         intro: |-
           ## if else
-          By the end of this lesson you can:
+          By the end of this lesson, you can:
           * let the computer react to different input.
         exercises:
         - type      : text
@@ -1901,144 +1899,143 @@ workbooks:
             Which code will be ran? Mark only those parts.
             Pretend that today is friday and you are 12 years old.
         - type      : circle
-          goal      : the code that will be **run**
+          goal      : the code that will be **printed**
           code      : |-
             today is ask 'What day is today?'
             if today is friday print 'Yay' else print 'No'
           answer    : "print 'Yay'"
         - type      : circle
-          goal      : the code that will be **run**
+          goal      : the code that will be **printed**
           code      : |-
             today is ask 'What day is today?'
             if today is saturday print 'No school today!'
             else print 'You have to go to school'
           answer    : "print 'You have to go to school'"
         - type      : circle
-          goal      : code die wordt **uitgevoerd**
+          goal      : the code that will be **printed**
           code      : |-
-            leeftijd is ask 'Hoe oud ben jij?'                    
-            if leeftijd is 16 print 'Perfecto' 
-            else print 'Jij bent te jong!'
-          answer    : "print 'Jij bent te jong!'"
+            age is ask 'How old are you?'
+            if age is 16 print 'Perfecto'
+            else print 'You are too young!'
+          answer    : "print 'You are too young!'"
         - type      : text
           contents  : |-
             #### Exercise 3: Error?
-            Lees de codes goed! Welke zijn er goed of fout.
+            Carefully read the codes! Which ones are correct?
 
         - type      : MC-code
           options   : ["Correct" , "Incorrect"]
           code      : |-
             age is ask 'How old are you?'
             if age is 16 print 'Right on!' else 'You are too young!'
-          answer    : "Fout. Er staat geen print achter else"
+          answer    : "Incorrect. There is no `print` after `else`"
         - type      : MC-code
           options   : ["Correct" , "Incorrect"]
           code      : |-
-            dier is ask 'Wat voor dier is dat?'                    
-            if dier is Lama print 'Beeeee'
-          answer    :  "Goed! Er hoeft geen else code te staan"
+            animal is ask 'What kind of animal is that?'
+            if animal is llama print 'Bahhhhh'
+          answer    :  "Correct! You don't always need an `else`"
         - type      : MC-code
           options   : ["Correct" , "Incorrect"]
-          code      : "print \"Daar lopen twee oma's\""
-          answer    : "Goed! Als je twee aanhalingstekens gebruikt dan kan je wel oma's schrijven."
-        - type      : MC-code
-          options   : ["Correct" , "Incorrect"]
-          code      : |-
-            if naam Hedy 
-            print 'Programmeren is leuk!'
-          answer    : "Fout, de is mist."
+          code      : "print \"I'm so happy!\""
+          answer    : "Correct! You can use the apostrophe when using the double quotes."
         - type      : MC-code
           options   : ["Correct" , "Incorrect"]
           code      : |-
-            ask 'Hoe heet deze school?'
-            if school is LK print 'Ja!'
-          answer    : "Fout. Er staat geen variabele bij ask."
+            if name Hedy
+            print 'Programming is fun!'
+          answer    : "Incorrect. There needs to be an `is` in the frist line."
+        - type      : MC-code
+          options   : ["Correct" , "Incorrect"]
+          code      : |-
+            ask 'What school do you go to?'
+            if school is LK print 'Yes!'
+          answer    : "Incorrect. There is no variable in the first line."
         - type      : MC-code
           options   : ["Correct" ,Incorrect"t"]
           code      : |-
-            aantal is ask "Hoeveel capibara's lopen daar?"
-            if aantal is 5 print 'Dat zijn er dan aantal'
-          answer    : "Fout. Het woord aantal wordt geprint en niet de variabele"
+            amount is ask "how many capybaras are over there?"
+            if amount is 5 print 'There are amount capybaras over there.'
+          answer    : "Incorrect. The variable amount will be printed as text."
         - type      : text
           contents  : |-
             #### Exercise 4: Predict the output
-            Wat is de uitvoer van deze programma's? 
-            Let op! Soms staat er random in een programma. Dan moet je zelf kiezen wat Hedy zou kiezen.
-            Er kunnen dan dus meerdere antwoorden goed zijn!
+            What will the output of these programs be?
+            Please note! Sometimes `random` is used in a program. You can choose a random item yourself.
+            This means multiple answers could be correct!
 
         - type      : output
           code      : |-
-            docenten is Hermans, Merbis, Bagci, Senkal                    
-            docent is docenten at random                    
-            if docent is Hermans print 'Hoera!'
-          answer    : "Hoera! of niks"
+            teachers is Hermans, Merbis, Bagci, Senkal
+            teacher is teachers at random
+            if teacher is Hermans print 'Hooray!'
+          answer    : "Hooray! or no output"
           lines     : 1
         - type      : output
           code      : |-
-            docenten is Hermans, Merbis, Bagci, Senkal                    
-            docent is docenten at random                    
-            if docent is Hermans print 'Jammer!' else print 'Hoera!'
-          answer    : "Hoera! of 'Jammer'"
+            teachers is Hermans, Merbis, Bagci, Senkal
+            teacher is teachers at random
+            if teacher is Hermans print 'Too bad!' else print 'Hooray!'
+          answer    : "Too bad! or Hooray!"
           lines     : 1
         - type      : output
           code      : |-
-            getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10                    
-            print 'Welkom bij de bingoavond'                    
-            getal is getallen at random                    
-            if getal is 10 print 'Gewonnen!' else print 'Helaas'
+            numbers is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+            print 'Welcome at bingo night!'
+            number is numbers at random
+            if number is 10 print 'I won!' else print 'Bummer'
           answer    : |-
-            Welkom bij de bingoavond
-            Gewonnen! of 'Helaas'
+            Welcome to bingo night!
+            I won! or Bummer
           lines     : 2
         - type      : output
           code      : |-
-            getal is ask 'Wat is jouw lievelingsgetal?'                    
-            if getal is 10 print 'Mijne ook!'
-          answer    : "'Mijne ook!' of niks"
+            number is ask 'What is your favorite number?'
+            if number is 10 print 'Mine too!'
+          answer    : "Mine too! or no output"
           lines     : 1
         - type      : text
           contents  : |-
             #### Exercise 5: Programming words
-            We hebben deze les weer nieuwe programmeerwoorden geleerd! Leg ze uit je eigen woorden.
+            We have learned some new programming words this lesson! Explain them in your own words.
 
         - type      : define
-          word      : conditie
-          answer    : "Iets dat waar of niet waar is. Het staat achter de code `if`"
+          word      : conditional
+          answer    : "Something that is true or flase. It follows behind the `if`."
           lines     : 1
         - type      : text
           contents  : |-
             #### Exercise 6: Codes
-            We hebben ook nieuwe codes geleerd in level 5.
+            We have also learned some new codes in level 5.
 
         - type      : define
-          word      : het commando `if`
-          answer    : "Bepaalt welke regel wordt uitgevoerd. Als de conditie waar is, wordt de code erachter uitgevoerd."
+          word      : the `if` command
+          answer    : "Decides which code will be run. If the conditional is true, the code behind it will be run."
           lines     : 1
         - type      : define
-          word      : het commando `else`
-          answer    : "Bepaalt welke regel wordt uitgevoerd. Als de conditie waar is, wordt de code erachter uitgevoerd."
+          word      : the `else` command
+          answer    : "Decides which code will be run. If the conditional is false, the code behind it will be run."
           lines     : 1
         - type      : text
           contents  : |-
-            #### Wat vond jij?
-
+            #### What do you think?
         - type      : question
-          text      : "Wat was de leukste exercise van dit level?"
+          text      : "Which exercise did you like best this level?"
           lines     : 1
         - type      : question
-          text      : "Waarom vond je juist die exercise leuk?"
+          text      : "What did you like about it?"
           lines     : 5
         - type      : question
-          text      : "Welke exercise was het minst leuk?"
+          text      : "Which exercise did you like least this level?"
           lines     : 1
         - type      : question
-          text      : "Waarom vond je juist die exercise niet leuk?"
+          text      : "What didn't you like about it?"
           lines     : 5
     -   level: '6'
         intro: |-
-          ## Rekenen
-          Aan het einde van de les weet jij:
-          * hoe je met Hedy kan rekenen
+          ## Maths
+          By the end of this lesson, you can:
+          * use maths in Hedy
         exercises:
         - type      : text
           contents  : |-
