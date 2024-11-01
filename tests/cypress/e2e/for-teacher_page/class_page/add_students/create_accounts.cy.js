@@ -1,58 +1,52 @@
-import {loginForTeacher} from '../../../tools/login/login.js'
-import {createClassAndAddStudents, navigateToClass} from '../../../tools/classes/class.js'
+import { loginForTeacher } from '../../../tools/login/login.js'
+import { createClassAndAddStudents, createClass, navigateToClass } from '../../../tools/classes/class.js'
 
-let classname;
-let students;
 const teachers = ["teacher1", "teacher4"];
-
-before(() => {
-  loginForTeacher();
-})
 
 beforeEach(() => {
   loginForTeacher();
-  navigateToClass(classname);
-  cy.getDataCy('add_student').click();
-  cy.getDataCy('create_accounts').click();
 })
 
 teachers.forEach((teacher) => {
   describe(`Testing creating accounts for ${teacher}`, () => {
-    it('Is able to download login credentials, generate passwords, click on go back button and see if students created in createClassAndAddStudents() are present', () => {
-      ({classname, students} = createClassAndAddStudents());
-      // download login credentials
-      cy.readFile('cypress/downloads/accounts.csv');
+    it('Is able to create student accounts with usernames', () => {
+      const className = createClass();
 
-      // generate passwords
-      cy.getDataCy('toggle_circle').click();
-      cy.getDataCy('password_1').should('have.length.greaterThan', 0);
+      navigateToClass(className);
+      cy.wait(500);
 
-      cy.getDataCy('go_back_button').click();
-      cy.url().should('include', 'class/'); 
+      cy.getDataCy('add_student').click();
+      cy.getDataCy('create_accounts').click();
 
-      cy.getDataCy(`student_${students[0]}`).should('contain.text', students[0])
+      const students = Array.from({length:5}, (_, index) => `student_${index}_${Math.random()}`)
+      cy.getDataCy('create_accounts_input').type(students.join('\n'));
+
+      cy.getDataCy('create_accounts_button').click();
+      cy.getDataCy('modal_yes_button').click();
+
+      ensureStudentsCreatedSuccessfully(students);
     })
 
-    it('Is able to add and remove a row and use the reset button', () => {
-      // testing add a row
-      cy.getDataCy('add_multiple_rows').click();
-      cy.getDataCy('username_6').should('have.value', '').should('have.value', '');
-      // testing removing a row
-      // fills in two rows
-      cy.getDataCy('username_1').type("student10");
-      cy.getDataCy('password_1').type("123456");
-      cy.getDataCy('username_2').type("student11");
-      cy.getDataCy('password_2').type("123456");
+    it('Is able to create student accounts with usernames and passwords', () => {
+      // This test is relying on the util method used to create a class with students
+      let {_, students} = createClassAndAddStudents();
 
-      // deletes the first row
-      cy.getDataCy('remove_student_1').click();
-      // check if the first row is now student11
-      cy.getDataCy('username_2').should('have.value', 'student11');
-      cy.getDataCy('username_3').should('have.value', '');
-      // testing reseting
-      cy.getDataCy('reset_button').click();
-      cy.getDataCy('username_2').should('have.value', '');
-      cy.getDataCy('username_3').should('have.value', '');
+      ensureStudentsCreatedSuccessfully(students);
     })
   })
 })
+
+function ensureStudentsCreatedSuccessfully(students)
+{
+  // Accounts are created successfully when the input textarea is hidden and the results table is displayed
+  cy.getDataCy('create_accounts_output').should('be.visible');
+  cy.getDataCy('create_accounts_input').should('not.be.visible');
+
+  // Go back to the class overview and check that all students appear in the class table
+  cy.getDataCy('go_back_button').click();
+  cy.url().should('include', 'class/');
+
+  cy.wrap(students).each((_, index) => {
+    cy.getDataCy(`student_${students[index]}`).should('contain.text', students[index])
+  });
+}
