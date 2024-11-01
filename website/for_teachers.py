@@ -98,7 +98,7 @@ class ForTeachersModule(WebsiteModule):
 
         for exercise in workbook_for_level['exercises']:
             if exercise['type'] == 'output':
-                exercise['title'] = 'Output'
+                exercise['title'] = gettext('Output')
                 exercise['icon'] = '💻'
                 exercise['text'] = '**Vraag**: Wat is de uitvoer van deze code?'
 
