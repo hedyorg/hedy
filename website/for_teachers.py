@@ -108,7 +108,8 @@ class ForTeachersModule(WebsiteModule):
             if exercise['type'] == 'circle':
                 exercise['title'] = 'Aanwijzen'
                 exercise['icon'] = '◯'
-                exercise['text'] = f'**Vraag**: Omcirkel {exercise['goal']} in deze code:'
+                goal = exercise['goal']
+                exercise['text'] = f'**Vraag**: Omcirkel {goal} in deze code:'
 
             elif exercise['type'] == 'input':
                 exercise['title'] = 'Input'
