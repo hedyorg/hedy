@@ -129,7 +129,8 @@ class ForTeachersModule(WebsiteModule):
             elif exercise['type'] == 'define':
                 exercise['title'] = 'Definiëer'
                 exercise['icon'] = '📖'
-                exercise['text'] = f'**Vraag**: Wat betekent {exercise['word']}?'
+                word = exercise['word']
+                exercise['text'] = f'**Vraag**: Wat betekent {word}?'
                 exercise['lines'] = [line for x in range(exercise['lines'])]
 
             elif exercise['type'] == 'question':
