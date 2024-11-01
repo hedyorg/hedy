@@ -100,7 +100,7 @@ class ForTeachersModule(WebsiteModule):
             if exercise['type'] == 'output':
                 exercise['title'] = gettext('Output')
                 exercise['icon'] = '💻'
-                exercise['text'] = '**Vraag**: Wat is de uitvoer van deze code?'
+                exercise['text'] = gettext('**Question**: What is the output of this code?')
 
                 # lines zou ik hier ook uit het antwoord kunnen uitrekenen!
                 exercise['lines'] = [line for x in range(exercise['lines'])]
