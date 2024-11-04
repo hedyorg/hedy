@@ -127,14 +127,14 @@ class ForTeachersModule(WebsiteModule):
                 exercise['options'] = '〇  ' + '  〇  '.join(exercise['options'])
 
             elif exercise['type'] == 'define':
-                exercise['title'] = gettext('workbook_define_question_title') #''
+                exercise['title'] = gettext('workbook_define_question_title')  # ''
                 exercise['icon'] = '📖'
                 word = exercise['word']
                 exercise['text'] = safe_format(gettext('workbook_define_question_text'), word=word)
                 exercise['lines'] = [line for x in range(exercise['lines'])]
 
             elif exercise['type'] == 'question':
-                exercise['title'] = gettext('workbook_open_question_title') # ''
+                exercise['title'] = gettext('workbook_open_question_title')  # ''
                 exercise['icon'] = '✍️'
                 exercise['lines'] = [line for x in range(exercise['lines'])]
 
