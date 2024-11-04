@@ -1670,7 +1670,7 @@ adventures:
                     {print} 'El nuevo precio es ' nuevo_precio ' dólares'
                     ```
             18:
-                story_text: "¡Hagamos funciones a la manera de Python! Para definir una función ya no utilizaremos:\n\n`{define} name_function {with} argument_1, argument_2:`\n\npero utilizaremos:\n\n`{def} name_function(argument_1, argument_2):`.\n\n\nSi no quieres utilizar argumentos, deja un espacio vacío entre los paréntesis.\nPara llamar a una función, no necesitamos el comando `{call}` nunca más. Solo escribe el nombre de la función.\n"
+                story_text: "¡Hagamos funciones al estilo de Python! Para definir una función ya no utilizaremos:\n\n`{define} name_function {with} argument_1, argument_2:`\n\npero utilizaremos:\n\n`{def} name_function(argument_1, argument_2):`.\n\n\nSi no quieres utilizar argumentos, deja un espacio vacío entre los paréntesis.\nPara llamar a una función, no necesitamos el comando `{call}` nunca más. Solo escribe el nombre de la función.\n"
                 example_code: "```\n{def} calcular_puntuacion(respuesta, respuesta_correcta):\n    {if} respuesta == respuesta_correcta:\n        puntuacion = 1\n    {elif} respuesta == '?':\n        puntuacion = 0\n    {else}:\n        puntuacion = -1\n    {return} puntuacion\n\nrespuesta = {input} ('¿Donde se encuentra la Torre Eiffel?')\nrespuesta_correcta = 'Paris'\npuntuacion = calcular_puntuacion(respuesta, respuesta_correcta)\n{print} ('Tu puntuación es... ', puntuacion)\n```\n"
     guess_my_number:
         name: Adivina mi número
@@ -2308,11 +2308,14 @@ adventures:
                 example_code: "```\n{play} C4\n{play} D4\n{play} E4\n{play} F4\n{play} G4\n{play} A4\n{play} B4\n{play} C5\n```"
             17:
                 example_code: "```\n{define} cancion_aterradora\n    {for} i {in} {range} 1 {to} 3\n        {play} G\n    {play} E\n    {sleep} 2\n    {for} i {in} {range} 1 {to} 3\n        {play} F\n    {play} D\n\nanimo = {ask} '¿Qué emociones estás sintiendo?'\n{if} animo {is} 'miedo'\n    {call} cancion_aterradora\n{elif} _\n```\n"
+                story_text: "Puedes utilizar {elif} para crear diferentes opciones.\n\n### Ejercicio\nPrimero, añade los dos puntos para hacer que el código funcione.\nDespués completa el código añadiendo al menos dos canciones más para otros estados de ánimo. Por ejemplo, una canción alegre y una canción furiosa.\n"
             13:
                 example_code: "```\n{print} 'Yankee Doodle'\n{define} _ {with} nota_1, nota_2, nota_3\n    {play} C4\n    {play} C4\n    {play} D4\n    {play} E4\n    {play} _\n    {play} _\n    {play} _\n\n{call} linea_1 {with} 29, 31, 30\n{call} linea_1 {with} 29, 28, 0\n{call} linea_1 {with} 32, 31, 30\n\n{play} C4\n{play} B3\n{play} G3\n{play} A3\n{play} B3\n{play} C4\n{play} C4\n```\n"
             15:
                 story_text: "**Precaución** ¡Esta aventura puede ser extremadamente molesta!\nTambién podemos utilizar el comando {while} para repetir una canción para siempre.\n\n### Ejercicio\nCompleta la canción interminable.\n"
                 example_code: "```\n{define} cancion\n    {play} _\n\nsi_o_no = {ask} '¿Quieres oír mi canción interminable?'\n{while} si_o_no = 'sí'\n    {call} cancion\n    {print} '🥳'\n```\n"
+            18:
+                story_text: "### Ejercicio\n¡Incluso en este último nivel de Hedy podemos hacer música! Cuidado con toda la sintaxis que ahora es necesaria.\nEcha un buen vistazo a como se definen y se llaman las funciones en el siguiente ejemplo.\n¡Completa la canción!\n"
     parrot:
         name: Loro
         default_save_name: Loro
@@ -2428,6 +2431,8 @@ adventures:
                     semanas = a_ahorrar / paga
                     {print} 'Podrás comprar un ' _ ' en ' _ ' semanas.'
                     ```
+            14:
+                story_text: "### Ejercicio\n¡En este nivel puedes dejar que Hedy te diga si has ahorrado suficiente dinero!\n¡Completa el código rellenando los huecos en blanco!\n"
     pressit:
         name: Presiónalo
         default_save_name: Presionado
@@ -2650,6 +2655,10 @@ adventures:
                     premios {is} _
                     _
                     ```
+            16:
+                story_text_2: "Ahora que has aprendido a utilizar los corchetes en las listas, ¡también puedes utilizar el comando {at} {random} al estilo Python!\n¡Simplemente escribe el nombre de tu lista con `[random]` detrás de ella!"
+                example_code_2: "```\nfruta = ['manzana', 'plátano', 'cereza']\n{print} fruta[random]\n```"
+                example_code: "```\namigos = ['Ahmed', 'Ben', 'Cayden']\n{print} amigos[1] ' es el primer amigo de la lista.'\n{print} amigos[2] ' es el segundo amigo de la lista.'\n{print} amigos[3] ' es el tercer amigo de la lista.'\n#ahora emparejaremos 2 listas utilizando la variable i\nnumeros_suerte = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'El número de la suerte de ' amigos[i] ' es ' numeros_suerte[i]\n```\n"
         name: '{random}'
     repeat_command:
         default_save_name: comando_repetir
@@ -3091,6 +3100,7 @@ adventures:
                     En este nivel podemos programar el juego de piedra, papel, tijera. Pero si quieres añadir texto, aquí también tienes que usar comillas.
                     ### Exercise
                     Fill in quotation marks on the blanks. Mind that the variable `choices` should be outside the quotes.
+                example_code: "```\nopciones {is} piedra, papel, tijeras\n{print} _El ordenador elige..._ opciones {at} {random}\n```\n"
             5:
                 story_text: |
                     En este nivel podemos determinar si es un empate o no. Para ello necesitas el nuevo código `{if}`.
@@ -4089,9 +4099,14 @@ adventures:
     simon_2:
         default_save_name: Simón
         name: Simón dice 2
+        description: Haz un juego de Simón dice
+        levels:
+            16:
+                example_code: "```\n# Pega tu código aquí\n\n\n# Crea una función que cree la secuencia_jugador\n{define} _\n    {for} _\n        _ '¿Cuál es el color número ' i '?'\n        {add} respuesta {to} _\n\n# Configurar\nnivel = _\njuego_terminado = _\n{print} _\n_ 1\n_\n```\n"
     simon_3:
         default_save_name: Simón
         name: Simón dice 3
+        description: Haz un juego de Simón dice
     tic_2:
         default_save_name: Tic
         description: ¡Juega una partida de Tres en raya!
@@ -4106,3 +4121,7 @@ adventures:
     simon:
         default_save_name: Simón
         name: Simón dice
+        levels:
+            16:
+                example_code: "```\n# Haz 2 listas\ncolores = _\n_ = ['vacía', 'lista']\n{remove} _ {from} secuencia_simon\n{remove} _\n\n# Crea una función que añada un color\n_ añadir_color_aleatorio\n    _\n    {add} _\n\n# Crea una función que muestre la secuencia_simon\n{define} _\n    {for} i {in} {range} 1 {to} _\n        {print} _\n        _\n        _\n\n# Prueba tu programa\n{call} _\n{call} mostrar_secuencia_simon {with} 1\n```\n"
+        description: Haz un juego de Simón dice
