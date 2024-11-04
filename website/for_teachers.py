@@ -98,43 +98,43 @@ class ForTeachersModule(WebsiteModule):
 
         for exercise in workbook_for_level['exercises']:
             if exercise['type'] == 'output':
-                exercise['title'] = gettext('Output')
+                exercise['title'] = gettext('workbook_output_question_title')
                 exercise['icon'] = '💻'
-                exercise['text'] = gettext('**Question**: What is the output of this code?')
+                exercise['text'] = gettext('workbook_output_question_text')
 
                 # lines zou ik hier ook uit het antwoord kunnen uitrekenen!
                 exercise['lines'] = [line for x in range(exercise['lines'])]
 
             if exercise['type'] == 'circle':
-                exercise['title'] = 'Aanwijzen'
+                exercise['title'] = gettext('workbook_circle_question_title')
                 exercise['icon'] = '◯'
                 goal = exercise['goal']
-                exercise['text'] = f'**Vraag**: Omcirkel {goal} in deze code:'
+                exercise['text'] = safe_format(gettext('workbook_circle_question_text'), goal=goal)
 
             elif exercise['type'] == 'input':
-                exercise['title'] = 'Input'
+                exercise['title'] = gettext('workbook_input_question_title')
                 exercise['icon'] = '🧑‍💻'
-                exercise['text'] = '**Vraag**: Welke code hoort bij deze uitvoer?'
+                exercise['text'] = gettext('workbook_input_question_text')
                 a = len(exercise['answer'].split('\n'))
                 exercise['lines'] = [line for x in range(a)]
 
             elif exercise['type'] == 'MC-code':
-                exercise['title'] = 'Kies'
+                exercise['title'] = gettext('workbook_multiple_choice_question_title')
                 exercise['icon'] = '🤔'
-                exercise['text'] = '**Vraag**: Is deze code goed of fout?'
+                exercise['text'] = gettext('workbook_multiple_choice_question_text')
                 # let op! op een dag willen we misschien wel ander soorten MC, dan moet
                 # deze tekst anders
                 exercise['options'] = '〇  ' + '  〇  '.join(exercise['options'])
 
             elif exercise['type'] == 'define':
-                exercise['title'] = 'Definiëer'
+                exercise['title'] = gettext('workbook_define_question_title') #''
                 exercise['icon'] = '📖'
                 word = exercise['word']
-                exercise['text'] = f'**Vraag**: Wat betekent {word}?'
+                exercise['text'] = safe_format(gettext('workbook_define_question_text'), word=word)
                 exercise['lines'] = [line for x in range(exercise['lines'])]
 
             elif exercise['type'] == 'question':
-                exercise['title'] = 'Open vraag'
+                exercise['title'] = gettext('workbook_open_question_title') # ''
                 exercise['icon'] = '✍️'
                 exercise['lines'] = [line for x in range(exercise['lines'])]
 
