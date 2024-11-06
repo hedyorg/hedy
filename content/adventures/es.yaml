@@ -3449,7 +3449,7 @@ adventures:
                 example_code: "```\nlíneas = ['Qué haremos con el marinero borracho', 'Afeitarle el vientre con una navaja oxidada', 'Meterlo en un barco largo hasta que esté sobrio']\n{for} línea {in} líneas _ \n    {for} i {in} {range} 1 {to} 3 _ \n        {print} _ línea _ \n    {print} 'pronto por la mañana'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'Ella se levanta de un camino de heno'\n    {print} 'pronto por la mañana'\n```\n"
             13:
                 story_text: "En la aventura anterior has aprendido a utilizar un argumento en una función pero, ¿sabías que también puedes combinarlos con el comando {ask}?\nEn este ejemplo hemos cambiado el programa 'Mi Bonnie' para hacerlo interactivo. Ahora te pregunta dónde está Bonnie.\n"
-                example_code: "```\n{define} cancion {with} lugar\n\t{print} 'Mi Bonnie está ' lugar\n\nlugar_elegido = {ask} '¿Dónde quieres que esté Bonnie?'\nsinonimo = {ask} '¿Qué otra palabra se usa para eso?'\n\n{call} cancion {with} lugar_elegido\n{call} cancion {with} sinonimo\n{call} cancion {with} lugar_elegido\n```\n"
+                example_code: "```\n{define} song {with} place\n    {print} 'My Bonnie is ' place\n\nchosen_place = {ask} 'Where do you want Bonnie to be?'\nsynonym = {ask} 'What is another word for that?'\n\n{call} song {with} chosen_place\n{call} song {with} synonym\n{call} song {with} chosen_place\n```\n"
     songs_2:
         levels:
             12:
