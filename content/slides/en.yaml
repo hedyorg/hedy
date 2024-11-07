@@ -235,13 +235,19 @@ levels:
                 A variable is a word that can be used to store information.
 
                 For example: a name, age or favorite sports team.
+            notes: |-
+                Students might have a hard time understanding the concept of a variable. We found that giving the students multiple examples of variables will help them grasp the concept better.
         2:
             header: Variables
-            text: To make or 'set' a variable we use the `{is}` command
+            text: To make or 'set' a variable we use the `{is}` command. The name of the variable comes before the `{is}` and the value of the variable behind it.
             code: |-
                 name {is} Hedy
                 age {is} 15
                 {print} name is age years old
+            notes: |-
+                Show the students how the variables work. Point out that the names of the variables in the last line are replaced with the values of the variable.
+                Ask students if they could think of another variable (length, shoe size, haircolor etc.) and add your own examples to the code.
+                The students can now make the Rock, paper, scissors adventure.
         3:
             header: Interactive
             text: |-
@@ -253,6 +259,9 @@ levels:
             code: |-
                 name {is} {ask} What is your name?
                 {print} Hello name
+            notes: |-
+                Now our programs can get really interactive. The user can give input that is used in the program.
+                Ask the students to come up with their own examples.
         4:
             header: Multiple variables
             text: Now that we use variables, we can use multiple variables instead of just one `{echo}` command.
@@ -261,6 +270,9 @@ levels:
                 {print} Hello name
                 age {is} {ask} How old are you?
                 {print} name is age years old.
+            notes: |-
+                Point out that the `{echo}` command is no longer needed, so it will no longer work in Hedy.
+                The students can now make Rock, Paper Scissors part 2 and Haunted House.
         5:
             header: Sleep
             text: You can also use the `{sleep}` command to pause the code for a while.
@@ -268,6 +280,9 @@ levels:
                 {print} My favorite colour is...
                 {sleep} 2
                 {print} green!
+            notes: |-
+                Show the students the sleep command. Ask them what they think the 2 stand for.
+                Change the 2 into another number to show that they can decide how long the code will be paused.
         6:
             header: Sleep 5
             text: |-
@@ -279,7 +294,66 @@ levels:
                 {print} My favorite colour is...
                 {sleep} pause
                 {print} green!
+            notes: |-
+                Show the code and if you want you can even change the 10 to an {ask} command.
+                The students can now work on these adventures: Parrot, Story, Music and Restaurant.
         7:
+            header: Drawing with variables
+            text: |-
+                In level 1 you've learned how to use {forward} 100.
+                Now you can use a variable too.
+            code: |-
+                distance {is} {ask} Hwo far should i go?
+                {forward} distance
+            notes: |-
+                Show the students that they can use variables with the drawing turtle now too!
+                Run the code multiple times with different answers, to show the use of variables.
+        8:
+            header: Drawing with degrees
+            text: |-
+                Before you could {turn} {left} or {turn} {right}, now we can use degrees!
+            code: |-
+                {forward} 100
+                {turn} 45
+                {forward} 100
+            notes: |-
+                Show the students the code. In the next slide we'll show multiple angles.
+        9:
+            header: Degrees
+            text: |-
+                A full circle is 360 degrees.
+                Half a circle is 180 degrees.
+                A right turn is 90 degrees.
+                A left turn is 270 degrees.
+
+                You can fill in any number you want.
+            code: |-
+                {turn} 90
+                {forward} 100
+            notes: |-
+                Make sure the students understand degrees. They may have learned this already in maths, but it might be completely new to them.
+                If the students have never heard of degrees before, it might be nice to show them a degree wheel. You could even print one out for them.
+                Use the example code on the slides to show the students multiple angles.
+        10:
+            header: Degrees and variables
+            text: |-
+                Degrees can be variables too!
+            code: |-
+                degrees {is} {ask} How many degrees should the turtle turn?
+                {turn} degrees
+                {forward} 100
+            notes: |-
+                Show the students that you can make the amount of degrees a variable as well.
+        11:
+            header: Drawing with color
+            text: |-
+                You can now use `{color}` to set a color when drawing.
+            code: |-
+                {color} green
+                {forward} 100
+            notes: |-
+                Show the students that they can use multiple colors. They can use the white color to make 'invisible' lines (as the background is white as well).
+        12:
             header: Debugging
             text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
             code: |-
@@ -292,9 +366,31 @@ levels:
                 {print} Here you go! A filling donut with toping!
                 {ask} Have a nice day!
             debug: 'True'
-        8:
-            header: Let the programming fun begin!
-            text: Enjoy the adventures in level 2!
+            notes: |-
+                The students can now finish all the adventures of this level.
+        13:
+            header: Let's review!
+            text: What did you learn today?
+            notes: |-
+                Ask the students to list what they've learned today.
+        14:
+            header: Let's review!
+            text: |-
+                Which adventure did you like best? Why?
+
+                Which adventure did you like least? Why?
+
+            notes: |-
+                Ask the students for their opinion.
+        15:
+            header: Show and tell!
+            text: Would anyone like to show the class a program they've made?
+            notes: |-
+                Let some students show their work to the class.
+        16:
+            header: Sneak peek into the next level...
+            text: |-
+                In the next level you'll learn how to make a list and let the computer pick a random item of that list!
     3:
         1:
             header: Welcome to level 3
