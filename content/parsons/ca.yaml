@@ -148,6 +148,9 @@ levels:
                      {print} comptador
                      {sleep} 1
                 {print} 'Llest o no, ves que vinc!'
+        1:
+            code: "equips = vermell, groc, blau\n{print} 'Vermell, Groc o Blau?'\n{repeat} 5 {times}\n    {print} \"Has estat assignat a l'equip... \"\n    {print} equips {at} {random}\n    {sleep} 2"
+            story: "Amb els teus companys voleu jugar a Pokémon Go! Crea un programa que decideixi a quin equip jugarà cada company. \nEls equips són: vermell, groc o blau! Fes una petita pausa després d'anunciar cada equip."
     9:
         1:
             story: Aquest joc et proporcionarà tres tasques matemàtiques. Cada vegada, però la pregunta serà diferent. Saps trobar-ne la comanda?
@@ -161,6 +164,9 @@ levels:
                         {print} 'Bona feina!'
                     {else}
                         {print} 'No! La resposta correcta és ' resposta_correcta
+        2:
+            story: "Aquest codi pregunta als clients d'un restaurant si volen demanar alguna cosa de postres. Si volen, els demana quin tipus de postres. Si demanen tiramisú, se'ls hi diu que el tiramisú s'ha acabat.\nPots fer que el codi funcioni?"
+            code: "comanda = {ask} \"Que voldria alguna cosa de postres?\"\n{if} comanda= sí\n    postre = {ask} 'Quin tipus de postre?'\n    {if} postre = tiramissú\n        {print} \"Ens sap greu, s'ha acabat el tiramissú\"\n    {else}\n        {print} \"Un \" postre \" en marxa!\"\n{else}\n    {print} \"Si no desitja postre, cap problema\""
     10:
         1:
             story: |-
@@ -203,6 +209,7 @@ levels:
             story: |-
                 Crea un programa que ens expliqui els resultats finals de la fira de la ciència. Primer defineix la variable concursants, després la variable lloc.
                 **Pista** La línia 5 hauria de tenir la comanda sleep (dorm), i hauries d'acabar amb un text de felicitació.
+            code: "{print} 'Ara revelarem els resultats de la fira de la ciència!'\nconcursants = Viviana, Pau, Trinni, Blanca, Katia\nlloc = 5\n{for} concursant {in} concursants\n    {sleep} 2\n    {print} 'A la posició ' lloc ' hi ha... ' concursant\n    lloc = lloc - 1\n{print} 'Enhorabona!'"
     12:
         1:
             story: |-

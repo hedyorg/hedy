@@ -232,6 +232,7 @@ adventures:
                             {print} ' No, no són a ' lloc
                     {print} 'Ja pots entrar a casa!'
                     ```
+                story_text: "Utilitzant el bucle `{while}` pots fer que les teves històries siguin més interessants. Per exemple, pots fer servir `{while} game == 'on'` per a poder jugar el joc fins que s'acabi.\nTambé pots fer servir `{while} sword == 'lost'` i així el jugador no podrà continuar el joc fins que trobi alguna cosa concreta.\n\n### Exercici\nAquest exemple mostra com usar el bucle `{while}` dins una història, Ara **pensa en un escenari propi** en què el jugador ha de trobar alguna cosa abans de poder continuar.\n"
             18:
                 example_code: |
                     ```
@@ -247,6 +248,7 @@ adventures:
                     nom = {input}("Com et dius?")
                     {print}('Benvingut a aquesta història!')
                     ```
+                story_text: "Ara imprimirem una nova història, però ara farem servir els parèntesis amb el `{print}`.\n\n### Exercici 1\nCrea un conte amb un mínim de 5 frases. Encara no has de fer servir 'nom'.\n"
     add_remove_command:
         default_save_name: comanda_afegir_borrar
         description: Introduint {add} {to_list} i {remove} {from}
@@ -285,6 +287,7 @@ adventures:
                     _
                     {print} T'ha tocat gustos {at} {random} milkshake
                     ```
+        name: '{add}{to_list} & {remove}{from}'
     and_or_command:
         default_save_name: i o
         description: Introduint {and} & {or}
@@ -301,6 +304,7 @@ adventures:
                     {if} nom {is} 'Hedy' {and} edat {is} 2
                         {print} 'Ets el veritable Hedy!'
                     ```
+        name: '{and} & {or}'
     ask_command:
         default_save_name: comanda_pregunta
         description: Introducció a la comanda {ask}
@@ -360,8 +364,18 @@ adventures:
                     animal_preferit {is} {ask} Quin és el teu animal preferit?
                     {print} M'agrada el animal_preferit
                     ```
+            18:
+                story_text: El canvi final que haurem de fer per obtenir codi Python és canviar `{ask}` per `{input}`.
+                example_code: "```\n{print}('El meu nom és Hedy!')\nnom = {input}('Com et dius?')\n{print}('El teu nom és ', nom)\n```\n"
+        name: '{ask}'
     blackjack:
         description: Intenta apropar-te tant com puguis a 21
+        default_save_name: Blackjack
+        levels:
+            17:
+                story_text: "El Blackjack és un joc de cartes senzill en el qual has d’apropar-te tant com puguis a 21 punts. Reps dues cartes. Cada carta val el seu valor numèric, i les figures (Sota, Reina i Rei) valen 10 punts.\nL'As val o bé 1 o bé 11 punts (pots triar). La banca, el teu oponent, qui reparteix, també rep dues cartes.\nSi ho vols, pots rebre una altra carta, i els seus punts s'afegiran al teu total. La banca també pot triar rebre una altra carta.\nPerò vigila de no superar els 21 punts, perquè si ho fas, perds!\nEl jugador que s’apropa més a 21, sense superar-lo, guanya!\n\n### Exercici\nEn aquesta aventura, codifiquem la primera part del nostre joc de Blackjack. Crearem una funció per calcular quants punts val una carta.\n\n***Defineix les variables***\nComença fent una llista de totes les cartes, del 2 a l'As. A continuació, fes una llista de les figures, és a dir, la Sota, la Reina i el Rei. Després tria una carta aleatòria de la llista de cartes per assignar-la a carta_1.\n\n***Crea una funció per calcular els punts***\nCrea una funció que calculi quants punts val una carta.\nTotes les figures valen 10 punts, l'As en val 11 i totes les altres cartes valen el seu número.\nRetorna la variable `points` al final de la funció.\n\n***Prova la funció***\nProva si la teva funció funciona correctament. Completa la primera comanda print omplint quina carta has tret. Aleshores completa la segona línia cridant la funció amb carta_1.\nExecuta el codi unes quantes vegades. Estàs satisfet amb els resultats? Genial! Aleshores pots eliminar la part de proves i avançar a la següent pestanya!\n"
+                example_code: "```\n{print} 'BLACKJACK'\n\n# Defineix les variables\ncartes = _\ncartes_obertes = _\ncarta_1 =\n\n# Crea una funció per a calcular els punts\n{define} calcular_punts {with} carta:\n    {if} carta {in} cartes_obertes:\n        points = _\n    {elif} _\n        _\n    {else}:\n        _\n    _ points\n\n# Testeja la teva funció\n{print} 'La teva carta és ' _\n{print} 'Aquesta carta val ' _ ' points'.\n```\n"
+        name: Blackjack
     calculator:
         name: Calculadora
         default_save_name: Calculadora
@@ -394,6 +408,8 @@ adventures:
                     {if} _
                     {else} _
                     ```
+                story_text_2: "### Exercici\nLa calculadora de més amunt calcularà la resposta per a tu, però també pots fer un programa per posar a prova les teves habilitats matemàtiques, com aquest:\nOmple els espais en blanc per completar-lo!\n"
+                story_text: "Ara que ja pots fer mates, pots fer la teva pròpia calculadora!\n"
             9:
                 story_text: |
                     In a previous level you've created a calculator, in this level you can expand that code so it asks multiple questions.
@@ -403,6 +419,7 @@ adventures:
 
                     ### Exercise 2
                     Give the player feedback when the enter an answer, like `{print} 'Correct!'` or `{print} 'Wrong! The correct answer is ' correct_answer`.
+                example_code: "```\npunts = 0\n{repeat} 10 {times}\n    nombres = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    nombre_1 = nombres {at} {random}\n    nombre_2 = nombres {at} {random}\n    resposta_correcta = nombre_1 * nombre_2\n    {print} 'Quant fa ' nombre_1 ' per ' nombre_2 '?'\n    answer = {ask} 'Escriu la teva resposta aquí...'\n    {print} 'La teva resposta és ' answer\n    {if} _ {is} _\n        punts = punts + 1\n{print} 'Bona feina! la teva puntuació és ... ' punts ' sobre 10!'\n```\n"
             12:
                 story_text: |
                     En aquest nivell, pots fer una calculadora que funcioni amb nombres decimals.
@@ -448,6 +465,9 @@ adventures:
 
                     mean_grade = {call} _
                     {print} 'Your mean grade is ' mean_grade
+            10:
+                story_text: "Aquest joc de la calculadora t'ajuda a practicar les taules de multiplicar!\n### Exercici\nOmple els espais en blanc. Volem que aquest programa faci aquestes preguntes al jugador:\n```\nQuant fa 1 per 1?\nQuant fa 1 per 2?\nQuant fa 1 per 3?\nQuant fa 2 per 1?\nQuant fa 2 per 2?\nQuant fa 2 per 3?\nQuant fa 3 per 1?\nQuant fa 3 per 2?\nQuant fa 3 per 3?\n_\n```\n"
+                example_code: "```\nnumeros = 1, 2, 3\n{for} _\n    {for} _\n        resposta = {ask} _\n        correcta = numero_1 * numero_2\n        {if} resposta {is} correcta\n            {print} 'Bona feina!'\n        {else}\n            {print} 'Això és incorrecte. La resposta correcta era ' correcta\n```\n"
     clear_command:
         default_save_name: comanda_netejar
         description: comanda {clear}
@@ -2437,3 +2457,27 @@ adventures:
                         {print} i
                     {print} 'Happy New Year!'
                     ```
+    blackjack_3:
+        levels:
+            17:
+                story_text: "A les pestanyes anteriors has après com tirar 2 cartes aleatòries per a tu i per la banca i com calcular quants punts heu aconseguit.\nEn aquesta aventura, afegim l'opció de demanar una carta extra tant per a tu com per la banca.\n\n### Exercici\n***Enganxa el teu codi de l’aventura anterior*** Primer, copia el teu codi de la pestanya anterior i enganxa’l aquí.\n\n***Carta extra per a tu*** Si vols, pots agafar una carta extra per apropar-te tant com sigui possible a 21. Primer, pregunta al jugador si vol una carta extra.\nSi la vol, escull una carta aleatòria i imprimeix quina carta ha tret. Si la carta no és un As, pots cridar la funció i afegir els punts al teu total.\nEn cas que la carta sigui un As, no pots utilitzar la funció, perquè l'As pot valdre o 1 punt o 11 punts, depenent de quants punts ja has aconseguit.\nSi el teu total és inferior a 11, vols que l'As valgui 11 punts (perquè això és més proper a 21). Per tant, afegeixes 11 punts al teu total.\nSi el total és més gran o igual a 11, vols que l'As valgui 1 punt (perquè no vols superar els 21 punts). Per tant, afegeixes 1 punt al teu total.\nFinalment, imprimeix el teu nou total de punts.\n\n***Carta extra per la banca*** La banca també pot agafar una carta extra. No cal preguntar-li, perquè sempre agafa una carta extra si el seu total és inferior a 17.\nCopia el codi de la 'Carta extra per a tu' i enganxa’l a la secció de la banca. Després modifica’l per adaptar-lo a la selecció de carta extra i a la suma de punts de la banca.\n"
+                example_code: "```\n# Enganxa el codi de l'aventura anterior aquí\n\n# Carta extra per tu\npujar_aposta = {ask} _\n{if} pujar_aposta == 'sí':\n    carta_3 = _\n    {print} _\n    {if} carta_3 _ 'As':\n        teus_punts_3 = _\n        teus_total = _\n    {else}:\n       {if} teus_total _\n            _\n        {else}:\n            _\n    {print} _\n\n# Carta extra per la banca\n{if} banca_total < 17\n_\n```\n"
+        description: Blackjack 3a part
+        name: Blackjack 3
+        default_save_name: Blackjack_3
+    blackjack_4:
+        levels:
+            17:
+                story_text: "A les últimes 3 aventures has creat gairebé un joc de blackjack funcional! Només falta decidir qui és el guanyador!\n\n### Exercici\n***Enganxa el teu codi de l’aventura anterior*** Comença enganxant el codi que has fet fins ara al teu camp de programació.\n\n***Decideix un guanyador***\nPrimer, si tu i la banca teniu la mateixa quantitat de punts, és un empat.\nEn segon lloc, si la banca té més de 21 punts i tu no, tu ets el guanyador.\nEn tercer lloc, si tant tu com la banca teniu menys de 22 punts, cal veure qui s'ha acostat més a 21. Ho fem comparant qui té la puntuació més alta. Si el teu total és superior al total de la banca, llavors tu ets el guanyador. Si no, guanya la banca.\nFinalment, en tots els altres escenaris (per exemple, tu tens més de 21 punts i la banca no, o tots dos teniu més de 21 punts) tu ets el perdedor.\n\n***Gaudeix del joc!***\nEl teu joc funciona correctament? Fantàstic! Has fet una gran feina! Gaudeix del teu joc!\nSi no funciona a la primera, no et preocupis, potser has comès un error. Mantén la calma i depura el teu codi amb el botó de l'insecte.\n"
+                example_code: "```\n# Enganxa el teu codi de l'aventura anterior aquí\n\n# Decideix el guanyador\n{if} _\n    {print} 'Hi ha un empat! Juga de nou!'\n{elif} _\n    {print} 'Has guanyat!'\n{elif} _ :\n    {if} _:\n        {print} _\n    {else}:\n        {print} _\n{else}:\n    _\n```\n"
+        name: Blackjack 4
+        default_save_name: Blackjack_4
+        description: Blackjack 4a part
+    blackjack_2:
+        levels:
+            17:
+                example_code: "```\n# Enganxa el codi de l'aventura anterior aquí\n\n# Afegeix les següents variables a la llista\ncarta_2 = _\ncarta_banca_1 = _\ncarta_banca_2 = _\n\n# Conta els teus punts\nteus_punts_1 = {call} _ {with} carta_1\nteus_punts_2 = _\nteus_total = _\n\n# Conta els punts de la banca\nbanca_punts_1 = _\n_\n_\n\n# 2 Asos\n{if} carta_1 == 'As' {and} _\n    teus_total = 12\n{if} carta_banca_1 _\n    banca_total = _\n\n# Mostra els punts\n{print} 'Has tret un ' _ ' i un ' _ '. Són ' _ ' punts'\n{print} 'La banca ha tret un ' _ ' i un ' _ '. Són ' _ ' punts'\n```\n"
+                story_text: "### Exercici\nEn aquesta aventura codifiquem la segona part del nostre joc de Blackjack.\n\n***Enganxa el teu codi de l’aventura anterior***\nA l’aventura anterior has començat una llista de variables i has creat una funció per calcular quants punts val una carta. Copia el teu codi i enganxa'l aquí. Tingues en compte que no necessites la part de proves, així que, si encara no l'has eliminat, fes-ho ara.\n\n***Afegeix més variables***\nJa has definit les llistes `cartes` i `cartes_obertes` i la variable `carta_1`. A sota d'aquestes variables, crea 3 variables més: `carta_2`, `carta_repartidor_1` i `carta_repartidor_2`. Aquestes variables s’assignen a una carta aleatòria de la llista de cartes.\n\n***Suma de punts***\nPer calcular quants punts has aconseguit, crida la funció amb la carta 1 i fes-ho de nou amb la carta 2. Aleshores suma aquests dos resultats per obtenir el teu total.\nFes el mateix per als punts de la banca, però assegura't d'utilitzar les cartes de la banca i no les teves!\n\n***2 Asos***\nHo estàs fent molt bé! Ja es poden calcular gairebé tots els punts. Només hi ha una excepció: 2 Asos. Si treus 2 Asos, el teu total és de 12 punts i no de 22 (perquè 22 punts significaria perdre!). Això, és clar, també s'aplica a la banca.\n\n***Mostra la puntuació***\nFinalment, vols que el programa t'indiqui quines cartes has tret i quants punts tens. A continuació, mostra quines cartes té la banca i quants punts té.\n\n***Continua a la següent pestanya***\nGenial! Has acabat aquesta part del joc! Copia el teu codi i ves a la següent pestanya per aprendre com demanar una carta extra i declarar un guanyador.\n"
+        name: Blackjack 2
+        default_save_name: Blackjack_2
+        description: Blackjack 2a part
