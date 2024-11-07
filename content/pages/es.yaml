@@ -1139,8 +1139,96 @@ workbooks:
             code: Imprimir Hola a todos
             answer: Hola a todos
             lines: '1'
+        -   type: resultado
+            code: imprimir goedemorgen
+            answer: goedemorgen
+            lines: '1'
+        -   type: texto
+            contents: "#### Ejercicio 2: ¿Error?\nA veces se cuela un error en tu código. No es gran cosa, pero Hedy no puede leer correctamente tu código.\n¿Cuál de estos programas piensas que está mal?"
+        -   options:
+            -   Correcto
+            -   Incorrecto
+            code: prnt ¡Hola a todos!
+            answer: Incorrecto
+        -   answer: Correcto
+            options:
+            -   Correcto
+            -   Incorrecto
+            code: imprimir imprimir
+        -   type: texto
+        -   answer: 'así que te llamas: **nombre**'
+            code: "preguntar ¿cómo te llamas?\neco así que te llamas:"
+            type: resultado
+            lines: '2'
+        -   lines: '2'
+            type: resultado
+            code: "preguntar ¿Cómo te llamas?\neco Encantado de conocerte,"
+            answer: Encantado de conocerte, **nombre**
+        -   contents: "#### Ejercicio 4: Palabras de programación\n\nEn cada lección vamos a aprender palabras nuevos, incluso en esta lección. ¿Sabes qué significan estos términos? Explícalo con tus propias palabras."
+            type: texto
+        -   type: definir
+            word: comando
+            answer: Una tarea que le darás al ordenador, p. ej., imprimir.
+            lines: '1'
+        -   answer: Que escribir en el ordenador cuando Hedy muestra una pantalla de pregunta
+            type: definir
+            lines: '1'
+            word: entrada
+        -   answer: Lo que Hedy muestra en la pantalla de la derecha después de que hayas pulsado el botón 'ejecutar código'.
+            lines: '1'
+            type: definir
+            word: resultado
+        -   type: texto
+            contents: "#### Ejercicio 5: Comandos\n\nYa hemos aprendido 3 comandos: `print`, `ask` y `echo`. ¿Qué hacen? Explícalo con tus propias palabras."
+        -   answer: Muestra texto por pantalla.
+            lines: '1'
+            type: definir
+            word: el comando `print`
+        -   lines: '1'
+            answer: Pide al usuario que introduzca datos.
+            type: definir
+            word: el comando `ask`
+        -   type: definir
+            word: el comando `echo`
+            answer: Repite los datos introducidos por el usuario.
+            lines: '1'
         intro: "### Imprimir e introducir\nAl final de esta lección, podrás:\n* Escribir código que imprima texto\n* Crear una historia con entrada"
-    -   {}
+    -   level: '2'
+        exercises:
+        -   type: texto
+            code: "nombre es Mo\nimprimir nombre"
+        -   type: texto
+            contents: '#### Ejercicio 1: Marca el fragmento de código correcto'
+        -   goal: variables
+            code: "nombre es Hedy\nimprimir Hola nombre\nedad es 17\nimprimir Tienes edad años"
+            answer: En todas las líneas
+            type: círculo
+        -   type: círculo
+            answer: Línea 1 & 3
+            goal: lugares donde la variable se **establece**
+        -   answer: Línea 2 y 4
+            type: círculo
+            goal: lugares donde las variables se **utilizan**
+        -   type: texto
+        -   answer: ¡Gran trabajo Mo!
+            code: "nombre es Mo\nimprimir ¡Buen trabajo nombre!"
+            lines: '1'
+            type: resultado
+        -   code: "nombre es Mo\nimprimir ¡Gran trabajo Mo!"
+            answer: ¡Gran trabajo Mo!
+            lines: '1'
+            type: resultado
+        -   type: resultado
+            lines: '1'
+        -   type: texto
+        -   options:
+            -   Correcto
+            -   Incorrecto
+            answer: Correcto
+        -   options:
+            -   Correcto
+            -   Incorrecto
+        intro: "### Variables\nAl final de esta lección, puedes:\n* Guardar algo en una variable\n* Crear una historia o dibujar utilizando variables"
     -   {}
     -   {}
     -   {}
