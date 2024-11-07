@@ -266,6 +266,7 @@
       level: {{ level|tojson|safe }},
       keyword_language: {{ g.keyword_lang|tojson|safe }},
       staticRoot: {{ static('')|tojson|safe }},
+      domainName: {{ config['SERVER_NAME']|tojson|safe }},
       {% if initialize_logs %}logs: true,{% endif %}
       javascriptPageOptions: {{ javascript_page_options|tojson|safe }},
       });</script>

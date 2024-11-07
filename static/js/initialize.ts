@@ -45,6 +45,11 @@ export interface InitializeOptions {
    */
   readonly staticRoot?: string;
 
+  /**
+   * The domain name used in this page, as set up in the back-end
+   */
+  readonly domainName: string;
+
   readonly javascriptPageOptions?: InitializePageOptions;
 }
 
@@ -77,6 +82,7 @@ export function initialize(options: InitializeOptions) {
     level: level,
     keywordLanguage: options.keyword_language,
     staticRoot: options.staticRoot,
+    domainName: options.domainName
   });
   initializeFormSubmits();
   initializeTutorial();

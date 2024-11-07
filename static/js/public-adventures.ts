@@ -28,8 +28,12 @@ document.addEventListener("updateTSCode", (e: any) => {
         const js = e.detail;
         updateURL();
         initialize({
-            lang: js.lang, level: parseInt(js.level), keyword_language: js.lang,
-            javascriptPageOptions: js
+            lang: js.lang,
+            level: parseInt(js.level),
+            keyword_language: js.lang,
+            domainName: js.domainName,
+            javascriptPageOptions: js,
+
         });
     }, 1000);
 })

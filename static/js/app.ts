@@ -53,6 +53,7 @@ let theStaticRoot: string = '';
 let currentTab: string;
 let theUserIsLoggedIn: boolean;
 let selectedURI: JQuery<HTMLElement>;
+let theDomainName: string = '';
 //create a synth and connect it to the main output (your speakers)
 //const synth = new Tone.Synth().toDestination();
 
@@ -123,10 +124,11 @@ const slides_template = `
 export interface InitializeAppOptions {
   readonly level: number;
   readonly keywordLanguage: string;
+  readonly domainName: string
   /**
    * The URL root where static content is hosted
    */
-  readonly staticRoot?: string;
+  readonly staticRoot?: string;  
 }
 
 /**
@@ -138,6 +140,7 @@ export function initializeApp(options: InitializeAppOptions) {
   theStaticRoot = options.staticRoot ?? '';
   // When we are in Alpha or in dev the static root already points to an internal directory
   theStaticRoot = theStaticRoot === '/' ? '' : theStaticRoot;
+  theDomainName = options.domainName;
   initializeCopyToClipboard();
 
   // Close the dropdown menu if the user clicks outside of it
@@ -1557,22 +1560,11 @@ export function toggle_blur_code() {
   }
 }
 
-export async function change_language(lang: string) {
-  await tryCatchPopup(async () => {
-    const response = await postJson('/change_language', { lang });
-    if (response) {
-      const queryString = window.location.search;
-      const urlParams = new URLSearchParams(queryString);
-
-      if (lang === 'en' || urlParams.get("language") !== null) {
-        urlParams.set("language", lang)
-        urlParams.set('keyword_language', lang);
-        window.location.search = urlParams.toString();
-      } else {
-        location.reload();
-      }
-    }
-  });
+export async function change_language(lang: string) { 
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  urlParams.set('keyword_language', lang);
+  location.href = `${location.protocol}//${lang}.${theDomainName}${location.pathname}?${urlParams.toString()}`
 }
 
 function update_view(selector_container: string, new_lang: string) {

@@ -158,6 +158,7 @@ class PublicAdventuresModule(WebsiteModule):
             level=level,
             adventures=adventures,
             initial_tab='',
+            domainName=config['domain_name'],
             current_user_name=user['username'],
         )
 
