@@ -1383,7 +1383,7 @@ class ForTeachersModule(WebsiteModule):
             invalid_usernames = [usr for usr in lines if any(sym in usr for sym in invalid_symbols_in_username)]
             if invalid_usernames:
                 err = safe_format(gettext('username_contains_invalid_symbol'),
-                                  usernames=', '.join(usernames_with_separator))
+                                  usernames=', '.join(invalid_usernames))
                 return make_response({"error": err}, 400)
 
             accounts = [(user.lower(), utils.random_id_generator()) for user in lines]

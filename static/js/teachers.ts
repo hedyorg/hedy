@@ -566,26 +566,39 @@ export function toggleAutoGeneratePasswords() {
     }
 }
 
-export function printAccounts() {
+export function printAccounts(title: string) {
     var table = document.getElementById("accounts_table");
     let newWindow = window.open("")!;
     const css = `
     <style>
-      @media print {
-        #accounts_table {
-          margin-top: 50px;
-          border-collapse: collapse;
-        }
-        #accounts_table td, th {
-          padding-left: 10px;
-          padding-right: 10px;
-          padding-top: 5px;
-          padding-bottom: 5px;
-          font-size: 24px;
-          border: 1px solid gray;
-        }
+      h1 {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
+        margin-left: 20px;
+        color: rgb(44 82 130);
+      }
+
+      #accounts_table {
+        border-collapse: collapse;
+      }
+
+      #accounts_table td, th {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+        font-size: 1.5rem;
+        border: 1px solid gray;
+        color: rgb(44 82 130);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
+        text-align: center;
       }
     </style>`;
+    newWindow.document.write(`
+        <div style="display: flex; margin-bottom: 20px;">
+          <img src="/images/hero-graphic/hero-graphic-empty.png" height="100">
+          <h1>${title}</h1>
+        </div>
+    `);
     newWindow.document.write(table?.outerHTML + css);
     newWindow.print();
     newWindow.close();
@@ -661,7 +674,8 @@ function createHtmlForAccountsTable(accounts: Array<any>) {
     let result = ""
     for (let [index, account] of accounts.entries()) {
         result += `
-          <tr class="${ index%2 ? 'bg-white' : 'bg-gray-200'}">
+          <tr class="${ index%2 ? 'bg-white' : 'bg-gray-200'} font-mono">
+            <td class="text-center px-4 py-2">hedy.org</td>
             <td class="text-center px-4 py-2">${account['username']}</td>
             <td class="text-center px-4 py-2">${account['password']}</td>
           </tr>`;
