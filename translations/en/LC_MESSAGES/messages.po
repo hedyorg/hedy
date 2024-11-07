@@ -34,7 +34,7 @@ msgid "Has Blanks"
 msgstr "We detected that the code seems to be incomplete. Can you fill in the blanks with code?"
 
 msgid "Incomplete"
-msgstr "We detected that part of the code seems to be missing from the `{incomplete_command}` on line {line_number}. Can you try adding the what's missing?"
+msgstr "We detected that part of the code seems to be missing from the `{incomplete_command}` on line {line_number}. Can you try adding what's missing?"
 
 msgid "Incomplete Repeat"
 msgstr "We detected that the `{repeat}` on line {line_number} is missing a `{command}` command. Can you try adding it?"
@@ -64,7 +64,7 @@ msgid "Lonely Text"
 msgstr "We detected that the code seems to be missing a command with the text that was used in line {line_number}. Can you try writing the needed command with the text"
 
 msgid "Missing Additional Command"
-msgstr "We detected that the code seems to be missing a `{command}` on line {line_number}. Can you try using `{missing_command}` in your code."
+msgstr "We detected that the command `{command}` on line {line_number} is missing something. Can you try using `{missing_command}` in your code?"
 
 msgid "Missing Colon Error"
 msgstr "We detected that `{command}` needs a `:` at the end of line {line_number}. Starting from level 17, can you start adding a `:` at the end of line with commands?"
@@ -149,12 +149,6 @@ msgstr "We detected that function {name} has wrong number of arguments which is 
 
 msgid "account_overview"
 msgstr "Account overview"
-
-msgid "accounts_created"
-msgstr "Accounts were successfully created."
-
-msgid "accounts_intro"
-msgstr "On this page you can create accounts for multiple students at once. These are automatically added to the current class, so make sure the class shown above is the right one! Every username needs to be unique in the entire Hedy system. You can use 'Postfix classname' to add your class name to all accounts. If you manually enter passwords, these need to be <b>at least</b> 6 characters."
 
 msgid "actions"
 msgstr "Actions"
@@ -255,6 +249,9 @@ msgstr "All"
 msgid "all_class_highscores"
 msgstr "All students visible in class highscores"
 
+msgid "all_rows_missing_separator"
+msgstr "None of the rows contain a semicolon. Perhaps you want to let us auto generate passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, use a semicolon to separate usernames and passwords on the following lines: {rows}"
+
 msgid "already_account"
 msgstr "Already have an account?"
 
@@ -269,6 +266,9 @@ msgstr "Starting in level 2, `{ask}` needs to be used with a variable. Example: 
 
 msgid "available_in"
 msgstr "Available in:"
+
+msgid "back_to_class"
+msgstr "Go back to class"
 
 msgid "become_a_sponsor"
 msgstr "Become a sponsor"
@@ -307,7 +307,7 @@ msgid "class_customize_success"
 msgstr "Class successfully customized."
 
 msgid "class_graph_explanation"
-msgstr "In this graph you can see represented the numbers of adventures your students have attempted (meaning they have done meaninful work in that adventure), with respect to the number of errors and successful runs."
+msgstr "In this graph you can see represented the numbers of adventures your students have attempted (meaning they have done meaningful work in that adventure), with respect to the number of errors and successful runs."
 
 msgid "class_logs"
 msgstr "Last Login"
@@ -351,6 +351,9 @@ msgstr "Classes"
 msgid "classes_info"
 msgstr "Create a class to follow the progress of each student in dashboard, and to customize the adventures your students see, and even adding your own! You can create as many classes as you like, and each class can have multiple teachers each one with different roles. You can also add as many students as you want, but mind that each student can only be in one class at a time. You can find more information about classes in the <a href=\"https://hedy.org/for-teachers/manual/preparations#for-teachers\">teacher manual</a>."
 
+msgid "clear"
+msgstr "Clear"
+
 msgid "clone"
 msgstr "Clone"
 
@@ -372,6 +375,9 @@ msgstr "Command not correct anymore"
 msgid "commands"
 msgstr "Commands"
 
+msgid "complete"
+msgstr "Completed"
+
 msgid "congrats_message"
 msgstr "Congratulations, {username}, you have reached the following results with Hedy!"
 
@@ -384,8 +390,14 @@ msgstr "constant"
 msgid "content_invalid"
 msgstr "This adventure is invalid."
 
+msgid "continue"
+msgstr "Continue"
+
 msgid "contributor"
 msgstr "Contributor"
+
+msgid "copy_accounts_to_clipboard"
+msgstr "Copy to clipboard"
 
 msgid "copy_clipboard"
 msgstr "Successfully copied to clipboard"
@@ -420,8 +432,11 @@ msgstr "Create account"
 msgid "create_accounts"
 msgstr "Create accounts"
 
+msgid "create_accounts_placeholder"
+msgstr "Type the accounts or paste them from a spreadsheet"
+
 msgid "create_accounts_prompt"
-msgstr "Are you sure you want to create these accounts?"
+msgstr "You will create {number_of_accounts} student accounts. Are you sure?"
 
 msgid "create_adventure"
 msgstr "Create adventure"
@@ -429,20 +444,32 @@ msgstr "Create adventure"
 msgid "create_class"
 msgstr "Create a new class"
 
-msgid "create_multiple_accounts"
-msgstr "Create multiple accounts"
-
 msgid "create_student_account"
 msgstr "Create an account"
 
 msgid "create_student_account_explanation"
 msgstr "You can save your own programs with an account."
 
+msgid "create_student_accounts"
+msgstr "Create student accounts for"
+
 msgid "create_teacher_account"
 msgstr "Create a teacher account"
 
 msgid "create_teacher_account_explanation"
 msgstr "With a teacher account, you can save your programs and see the results of your students."
+
+msgid "create_usernames_and_passwords_desc"
+msgstr "Enter one username and password per line, separated by a semicolon. Or, if you have the data in a two-column spreadsheet, copy the file content and paste here."
+
+msgid "create_usernames_and_passwords_title"
+msgstr "Usernames and passwords"
+
+msgid "create_usernames_desc"
+msgstr "Enter one username per line or paste them from a spreadsheet."
+
+msgid "create_usernames_title"
+msgstr "Usernames"
 
 msgid "creator"
 msgstr "Creator"
@@ -464,6 +491,9 @@ msgstr "Customize class"
 
 msgid "dash"
 msgstr "a dash"
+
+msgid "debug"
+msgstr "Debug"
 
 msgid "default_401"
 msgstr "Looks like you aren't authorized..."
@@ -542,9 +572,6 @@ msgstr "double quotes"
 
 msgid "download"
 msgstr "Download"
-
-msgid "download_login_credentials"
-msgstr "Do you want to download the login credentials after the accounts creation?"
 
 msgid "duplicate"
 msgstr "Duplicate"
@@ -637,7 +664,7 @@ msgid "feedback_message_error"
 msgstr "Something went wrong, please try again later."
 
 msgid "feedback_message_success"
-msgstr "Thank you, we recieved your feedback and will contact you if needed."
+msgstr "Thank you, we received your feedback and will contact you if needed."
 
 msgid "feedback_modal_message"
 msgstr "Please send us a message with a category. We appreciate your help to improve Hedy!"
@@ -677,9 +704,6 @@ msgstr "Please select a valid gender, choose (Female, Male, Other)."
 
 msgid "general_settings"
 msgstr "General settings"
-
-msgid "generate_passwords"
-msgstr "Generate passwords"
 
 msgid "get_certificate"
 msgstr "Get your certificate!"
@@ -1051,6 +1075,9 @@ msgstr "Repeat new password"
 msgid "newline"
 msgstr "a new line"
 
+msgid "next_adventure"
+msgstr "Next adventure"
+
 msgid "next_exercise"
 msgstr "Next exercise"
 
@@ -1059,6 +1086,9 @@ msgstr "Next page"
 
 msgid "next_step_tutorial"
 msgstr "Next step >>>"
+
+msgid "next_student"
+msgstr "Next student"
 
 msgid "no"
 msgstr "No"
@@ -1213,6 +1243,9 @@ msgstr "Password updated."
 msgid "passwords_six"
 msgstr "All passwords need to be six characters or longer."
 
+msgid "passwords_too_short"
+msgstr "Passwords must be at least 6 characters long. Correct the following passwords, so that they are at least 6 symbols: {passwords}"
+
 msgid "pending_invites"
 msgstr "Pending invites"
 
@@ -1233,9 +1266,6 @@ msgstr "Your personal text is invalid."
 
 msgid "phone_number"
 msgstr "Phone number"
-
-msgid "postfix_classname"
-msgstr "Postfix classname"
 
 msgid "preferred_keyword_language"
 msgstr "Preferred keyword language"
@@ -1260,6 +1290,12 @@ msgstr "View previous campaigns"
 
 msgid "previous_page"
 msgstr "Previous page"
+
+msgid "print_accounts"
+msgstr "Print"
+
+msgid "print_accounts_title"
+msgstr "Student accounts for hedy.org"
 
 msgid "print_logo"
 msgstr "print"
@@ -1303,6 +1339,9 @@ msgstr "Programs"
 msgid "prompt_join_class"
 msgstr "Do you want to join this class?"
 
+msgid "provided_username_duplicates"
+msgstr "You supplied the following usernames more than once: {usernames}"
+
 msgid "public"
 msgstr "Public"
 
@@ -1313,7 +1352,7 @@ msgid "public_content"
 msgstr "Public content"
 
 msgid "public_content_info"
-msgstr "You can also look for public adventures and use them as an example."
+msgstr "Here you can find our public adventures. These are adventures made by other teachers from all over the world. Take a look and feel free to use adventures in your own lessons."
 
 msgid "public_invalid"
 msgstr "This agreement selection is invalid"
@@ -1326,6 +1365,9 @@ msgstr "By selecting this box I make my profile visible for everyone. Be careful
 
 msgid "public_profile_updated"
 msgstr "Public profile updated, page will be re-loaded."
+
+msgid "put"
+msgstr "Put"
 
 msgid "question mark"
 msgstr "a question mark"
@@ -1414,8 +1456,8 @@ msgstr "Reset"
 msgid "reset_password"
 msgstr "Reset password"
 
-msgid "reset_view"
-msgstr "Reset"
+msgid "restart"
+msgstr "Restart"
 
 msgid "retrieve_adventure_error"
 msgstr "You're not allowed to view this adventure!"
@@ -1501,6 +1543,9 @@ msgstr "You should soon receive an email with instructions on how to reset your 
 msgid "settings"
 msgstr "My personal settings"
 
+msgid "share"
+msgstr "Share"
+
 msgid "share_by_giving_link"
 msgstr "Show your program to other people by giving them the link below:"
 
@@ -1537,6 +1582,9 @@ msgstr "Solution Example"
 msgid "solution_example_explanation"
 msgstr "This is where the solution of your adventure goes. This can be used if you want to share this adventure with other teacher's, so they can know what your suggested solution is."
 
+msgid "some_rows_missing_separator"
+msgstr "The following rows are missing a semicolon, so either the username or the password is missing: {rows}"
+
 msgid "something_went_wrong_keyword_parsing"
 msgstr "There is a mistake in your adventure, are all keywords correctly surrounded with { }?"
 
@@ -1561,6 +1609,9 @@ msgstr "Assignment"
 msgid "stepper_variable_role"
 msgstr "stepper"
 
+msgid "stop"
+msgstr "Stop"
+
 msgid "stop_code_button"
 msgstr "Stop program"
 
@@ -1569,6 +1620,9 @@ msgstr "text"
 
 msgid "student"
 msgstr "Student"
+
+msgid "student_accounts_created"
+msgstr "Successfully created student accounts"
 
 msgid "student_adventures_table"
 msgstr "Student's Adventures"
@@ -1759,6 +1813,9 @@ msgstr "Hedy - View adventure"
 msgid "token_invalid"
 msgstr "Your token is invalid."
 
+msgid "too_many_accounts"
+msgstr "You cannot create more than 100 student accounts."
+
 msgid "tooltip_level_locked"
 msgstr "Your teacher disabled this level"
 
@@ -1797,9 +1854,6 @@ msgstr "Are you sure you want to unfavourite this program?"
 msgid "unfavourite_success"
 msgstr "Your program is unfavourited."
 
-msgid "unique_usernames"
-msgstr "All usernames need to be unique."
-
 msgid "unknown_variable_role"
 msgstr "unknown"
 
@@ -1827,6 +1881,12 @@ msgstr "Update public profile"
 msgid "updating_indicator"
 msgstr "Updating"
 
+msgid "use_custom_passwords"
+msgstr "Provide your own passwords"
+
+msgid "use_generated_passwords"
+msgstr "Auto generate passwords"
+
 msgid "use_of_blanks_exception"
 msgstr "Use of blanks in programs"
 
@@ -1848,6 +1908,12 @@ msgstr "This user either doesn't exist or doesn't have a public profile"
 msgid "username"
 msgstr "Username"
 
+msgid "username_contains_invalid_symbol"
+msgstr "Usernames cannot contain the symbol ':' or '@'. Remove these symbols from following usernames: {usernames}"
+
+msgid "username_contains_separator"
+msgstr "Usernames cannot contain a semicolon. Perhaps you want to supply your own passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, remove the semicolon from the following usernames: {usernames}"
+
 msgid "username_empty"
 msgstr "You didn't enter an username!"
 
@@ -1860,8 +1926,11 @@ msgstr "Username cannot contain `:` or `@`."
 msgid "username_three"
 msgstr "Username must contain at least three characters."
 
-msgid "usernames_exist"
-msgstr "One or more usernames is already in use."
+msgid "usernames_too_short"
+msgstr "Usernames must be at least 3 characters long. Correct the following usernames, so that they are 3 or more symbols: {usernames}"
+
+msgid "usernames_unavailable"
+msgstr "The following usernames are not available: {usernames}. You can create similar accounts, for example, by appending an underscore or your class name."
 
 msgid "value"
 msgstr "Value"
@@ -1884,11 +1953,47 @@ msgstr "Waiting for submit"
 msgid "walker_variable_role"
 msgstr "walker"
 
+msgid "website"
+msgstr "Website"
+
 msgid "what_is_your_role"
 msgstr "What is your role?"
 
 msgid "what_should_my_code_do"
 msgstr "What should my code do?"
+
+msgid "workbook_circle_question_text"
+msgstr "**Question**: Circle {goal} in this code:"
+
+msgid "workbook_circle_question_title"
+msgstr "Assign"
+
+msgid "workbook_define_question_text"
+msgstr "**Question**: What does {word} mean?"
+
+msgid "workbook_define_question_title"
+msgstr "Define"
+
+msgid "workbook_input_question_text"
+msgstr "**Question**: Which code snippet produced this output?"
+
+msgid "workbook_input_question_title"
+msgstr "Input"
+
+msgid "workbook_multiple_choice_question_text"
+msgstr "**Question**: Is this code correct or does it have an error?"
+
+msgid "workbook_multiple_choice_question_title"
+msgstr "Choose"
+
+msgid "workbook_open_question_title"
+msgstr "Open-ended question"
+
+msgid "workbook_output_question_text"
+msgstr "**Question**: What is the output of this code?"
+
+msgid "workbook_output_question_title"
+msgstr "Output"
 
 msgid "year_invalid"
 msgstr "Please enter a year between 1900 and {current_year}."
@@ -2076,9 +2181,6 @@ msgstr "Your program"
 
 #~ msgid "unshare_success_detail"
 #~ msgstr "Program unshared successfully."
-
-#~ msgid "back_to_class"
-#~ msgstr "Go back to class"
 
 #~ msgid "Locked Language Feature"
 #~ msgstr "You are using {concept}! That is awesome, but {concept} is not unlocked yet! It will be unlocked in a later level."
@@ -2286,4 +2388,46 @@ msgstr "Your program"
 
 #~ msgid "student_not_allowed_in_class"
 #~ msgstr "Student not allowed in class"
+
+#~ msgid "previous_adventure"
+#~ msgstr ""
+
+#~ msgid "go_next"
+#~ msgstr "Go next"
+
+#~ msgid "go_to_next_student"
+#~ msgstr ""
+
+#~ msgid "accounts_created"
+#~ msgstr "Accounts were successfully created."
+
+#~ msgid "accounts_intro"
+#~ msgstr "On this page you can create accounts for multiple students at once. These are automatically added to the current class, so make sure the class shown above is the right one! Every username needs to be unique in the entire Hedy system. You can use 'Postfix classname' to add your class name to all accounts. If you manually enter passwords, these need to be <b>at least</b> 6 characters."
+
+#~ msgid "create_multiple_accounts"
+#~ msgstr "Create multiple accounts"
+
+#~ msgid "download_login_credentials"
+#~ msgstr "Do you want to download the login credentials after the accounts creation?"
+
+#~ msgid "generate_passwords"
+#~ msgstr "Generate passwords"
+
+#~ msgid "postfix_classname"
+#~ msgstr "Postfix classname"
+
+#~ msgid "reset_view"
+#~ msgstr "Reset"
+
+#~ msgid "unique_usernames"
+#~ msgstr "All usernames need to be unique."
+
+#~ msgid "usernames_exist"
+#~ msgstr "One or more usernames is already in use."
+
+#~ msgid "**Question**: What is the output of this code?"
+#~ msgstr "**Question**: What is the output of this code?"
+
+#~ msgid "Output"
+#~ msgstr "Output"
 

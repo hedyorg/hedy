@@ -1,0 +1,22 @@
+levels:
+    1:
+        2:
+            mp_choice_options:
+            -   feedback: '`{echo}` repeats a given answer.'
+                option: '`{echo}`'
+            -   option: '`{print}`'
+                feedback: Correct!
+            -   option: '`azul`'
+                feedback: Hello isn't a command.
+            -   feedback: With `{ask}`, you can ask a question.
+                option: '`{ask}`'
+        10:
+            mp_choice_options:
+            -   option: Are you ready to go to level 2?
+                feedback: There are two `{echo}` commands
+            -   feedback: Great job!
+                option: "Yes!\nYes!"
+            -   option: Ih!
+                feedback: There are two `{echo}` commands
+            -   option: "Are you ready to go to level 2?\nYes!"
+                feedback: There are two `{echo}` commands

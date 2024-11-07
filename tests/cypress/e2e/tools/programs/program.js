@@ -1,6 +1,6 @@
 
 export function codeEditorContent() {
-  return cy.get('#editor > .cm-editor > .cm-scroller > .cm-content');
+    return cy.get('#editor > .cm-editor > .cm-scroller > .cm-content');
 }
 
 export function executeHelloWorldProgram(name) {
@@ -37,4 +37,4 @@ export function deleteProgram(name) {
             })
             }
         })
-}
+} 

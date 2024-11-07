@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+{% block full_width_content %}
+{% if not raw %}
+{% if session.preview_class %}
+<div class="bg-red-500 text-white text-sm font-bold px-4 py-3" data-cy="preview_class_banner" role="alert">
+    <div class="text-center center-text">{{_('previewing_class').format(class_name=session.preview_class["name"])}} <a data-cy="exit_preview_class_banner" class="text-white" href="/for-teachers/clear-preview-class">{{_('exit_preview_mode')}}</a></div>
+</div>
+{% endif %}
+{% if customizations and customizations["teachers_adventure"] %}
+  <div class="bg-red-500 text-white text-sm font-bold px-4 py-3" data-cy="preview_adventure_banner" role="alert">
+      <div class="text-center center-text">{{_('previewing_adventure')}} 
+        {% if initial_adventure.author == username %}
+          <a class="text-white" href="/for-teachers/customize-adventure/{{initial_adventure.id}}">{{_('edit_adventure')}}</a>
+        {% else %}
+          <a class="text-white" href="/public-adventures">{{_('public_adventures')}}</a>
+        {% endif %}
+      </div>
+  </div>
+{% endif %}
+<div class="mt-4 mb-1 mx-auto py-2 px-4 flex flex-col lg:flex-row gap-4 justify-start w-full max-w-screen-2xl">
+  <div class="flex flex-row justify-between sm:justify-normal gap-4 hidden">
+    {% if current_user_is_in_class %}
+    <button id="hand_in_button" class="blue-btn-new next-tab">
+      <span class="fa fa-paper-plane ltr:mr-1 rtl:ml-1"></span>
+      {{_('submit_program')}}
+    </button>
+    {% endif %}
+  </div>
+  <div class="flex flex-row gap-4">
+    <div class="flex flex-col md:flex-row border-b-2 border-blue-900 md:gap-2">
+      <div class="text-4xl font-light text-blue-800">
+        {{ _('level_title') }} {{ level_nr }}
+        {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}
+      </div>
+      <span class="hidden md:block text-4xl font-light text-blue-800" >—</span>
+      <div id="adventure_name" type="text" class="text-4xl font-light text-blue-800">      
+      {{ initial_adventure.name }}
+      </div>
+    </div>
+  </div>
+  <div class="flex-1"></div>
+  <div class="flex flex-col md:flex-row gap-4 md:items-center">
+    <div class="flex flex-row gap-2">
+      <button class="blue-btn-new w-fit"
+      _="on click toggle .ltr:-translate-x-full .rtl:translate-x-full on #index_sidebar
+      then toggle .hidden on #sidebar_bg
+      wait 100ms
+      then toggle .opacity-0 on #sidebar_bg
+      then toggle .opacity-75 on #sidebar_bg">
+      See more adventures 
+      <i class="fa-solid fa-book-open-reader"></i>
+      </button>
+      <button class="blue-btn-new md:hidden" _="on click toggle .flex .hidden on #more_options">
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+      </button>
+    </div>
+    <div class="hidden md:flex flex-row gap-2" id="more_options">
+      {% if not hide_cheatsheet and cheatsheet %}
+      <div class="dropdown relative" id="cheatsheet_dropdown_container">
+        <button class="blue-btn-new ltr:ml-1 rtl:mr-1 rounded inline-flex items-center gap-2" id="dropdown_cheatsheet_button"
+          onclick="$('#cheatsheet_dropdown').slideToggle('medium');">
+          <span class="fa fa-list ltr:mr-1 rtl:ml-1"></span>
+          <span>{{_('cheatsheet_title')}}</span>
+          <svg id="cheatsheet_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+          </svg>
+        </button>
+        <div class="dropdown-menu dropdown-blue z-30 mt-2" id="cheatsheet_dropdown"
+          style="display: none; padding: 0px !important;"
+          _="on mutation of @style
+              set arrow to #cheatsheet_arrow
+              if *display == 'none'
+                  remove .rotate-180 from arrow
+              else if not arrow.classList.contains('rotate-180')
+                  add .rotate-180 to arrow
+              end">
+          <h2 class="px-2 py-6">{{_('cheatsheet_title')}}</h2>
+          {% for example in cheatsheet %}
+          <div class="flex justify-between items-center gap-4 px-4 py-8 border-t border-dashed border-blue-700">
+            <div class="flex-grow h-min min-w-80" tabindex=0>
+              {{ example.explanation|commonmark }}
+            </div>
+            <div class="flex-none">
+              <button class="yellow-btn-new tiny-btn" id="try_button{{ loop.index }}"
+                onclick='hedyApp.tryPaletteCode({{example.demo_code|tojson}});'>
+                <span class="rtl:hidden">⇥</span>
+                <span class="ltr:hidden">⇤</span>
+              </button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+      {% if get_syntax_language(g.lang) != "en" and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) %}
+        {{ render_partial('hedy-page/htmx-language-switch-button.html', commands=commands) }}
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endif %}
+<div class="w-full max-w-screen-2xl mx-auto p-4" id="code_content_container">
+{% block levelbody %}{% endblock %}
+</div>
+
+{% include 'incl/share-modal-new.html' %}
+{% include 'incl/hand-in-modal.html' %}
+{% if HOC_tracking_pixel %}
+  <img src="https://code.org/api/hour/begin_hedy_text.png" data-cy="tracking_pixel" alt="Tracking Pixel - Hour of code" height="1" width="1">
+{% endif %}
+{% endblock %}

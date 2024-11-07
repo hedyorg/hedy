@@ -1,6 +1,9 @@
 # Hedy - Les 3a
 
-[Teacher] In level 3 leren leerlingen werken met lijsten. Die worden ingesteld zoals een variabele, met `is`, en kan je uitlezen met `at random`. [/Teacher]
+{
+    "teacher_note": " In level 3 leren leerlingen werken met lijsten. Die worden ingesteld zoals een variabele, met `is`, en kan je uitlezen met `at random`."
+}
+
 
 ## Lijsten en willekeurigheid
 
@@ -26,7 +29,9 @@ print Ik ga vandaag naar vrienden at random
     "assignment": "element selection",
     "question"  : "Omcircel alle lijsten in deze code",
     "icon"      : "◯",
-    "code"      : "vandaag is maandag\nklassen is 1HC, 1HB, 1HA\nlokalen is 011, 304, 305, OLC",
+    "code"      : "vandaag is maandag\n
+                    klassen is 1HC, 1HB, 1HA\n
+                    lokalen is 011, 304, 305, OLC",
     "answer"    : "klassen en lokalen"
 }
 
@@ -34,7 +39,8 @@ print Ik ga vandaag naar vrienden at random
     "assignment": "element selection",
     "question"  : "Op welke plek in de code wordt er tekst uit een lijst gebruikt?",
     "icon"      : "◯",
-    "code"      : "klassen is 1HC, 1HB, 1HA\nprint vandaag heeft klassen at random vrij!",
+    "code"      : "klassen is 1HC, 1HB, 1HA\n
+                    print vandaag heeft klassen at random vrij!",
     "answer"    : "Op het einde van regel 2"
 }
 
@@ -50,7 +56,8 @@ Vind je het lastig? Gebruik dan weer het stappenplan om variabele-uitvoer te voo
 {
     "assignment": "output",
     "icon"      : "💻",
-    "code"      : "docenten is Hermans, Merbis, Bagci, Senkal\nprint Vandaag les van docenten at random!",
+    "code"      : "docenten is Hermans, Merbis, Bagci, Senkal\n
+                    print Vandaag les van docenten at random!",
     "answer"    : "Vandaag les van **keuze uit docenten**",
     "lines"     : 1
 }
@@ -58,7 +65,8 @@ Vind je het lastig? Gebruik dan weer het stappenplan om variabele-uitvoer te voo
 {
     "assignment": "output",
     "icon"      : "💻",
-    "code"      : "docenten is Hermans, Merbis, Bagci, Senkal\nprint De docent vandaag is Hermans.",
+    "code"      : "docenten is Hermans, Merbis, Bagci, Senkal\n
+                    print De docent vandaag is Hermans.",
     "answer"    : "De docent vandaag is Hermans",
     "lines"     : 1
 }
@@ -66,8 +74,9 @@ Vind je het lastig? Gebruik dan weer het stappenplan om variabele-uitvoer te voo
 {
     "assignment": "output",
     "icon"      : "💻",
-    "code"      : "weer is zonnig, regen, wolken, onweer\nprint Wat is het lekker weer vandaag!",
-    "answer"    : "Fout! Je kan een lijst niet printen",
+    "code"      :  "weer is zonnig, regen, wolken, onweer\n
+                    print Wat is het lekker weer vandaag!",
+    "answer"    : "Wat is het lekker weer vandaag!",
     "lines"     : 1
 }
 
@@ -79,7 +88,8 @@ Lees de codes goed! Welke zijn er goed of fout.
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "🤔",
-    "code"      : "weer is zonnig, regen, wolken, onweer\nprint Bah! De computer loopt weer vast.",
+    "code"      : "weer is zonnig, regen, wolken, onweer\n
+                    print Bah! De computer loopt weer vast.",
     "answer"    : "Fout. Je kan een lijst niet printen"
 }
 
@@ -88,7 +98,8 @@ Lees de codes goed! Welke zijn er goed of fout.
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "🤔",
-    "code"      : "docenten is Hermans\nprint Vandaag alweer docenten at random",
+    "code"      : "docenten is Hermans\n
+                    print Vandaag alweer docenten at random",
     "answer"    : "Fout, docenten is geen lijst"
 }
 
@@ -97,7 +108,8 @@ Lees de codes goed! Welke zijn er goed of fout.
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "🤔",
-    "code"      : "docenten is onweer, regen, ijzel\nprint Vandaag alweer docenten at random!",
+    "code"      : "docenten is onweer, regen, ijzel\n
+                    print Vandaag alweer docenten at random!",
     "answer"    : "Goed, de naam hoeft niet te kloppen voor de computer."
 }
 
@@ -125,7 +137,7 @@ print Het antwoord is antwoorden at random
 ```
 
 Maar soms wil je dat de gebruiker van een programma ook opties kan toevoegen.
-Dat doe je met een `add` en een `to` commando.
+Dat doe je met een `add` en een `to` commando. Je kan ook iets uit een lijst verwijderen, met `remove` en `from`.
 
 ```
 dieren is 🐿, 🦔, 🦇, 🦉
@@ -134,7 +146,7 @@ add dier to dieren
 print het was een dieren op willekeurig
 ```
 
-Je kan ook iets uit een lijst verwijderen, met `remove` en `from`.
+
 
 #### Opdracht 4: Goed of fout?
 
@@ -143,7 +155,8 @@ Je kan ook iets uit een lijst verwijderen, met `remove` en `from`.
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "🤔",
-    "code"      : "letters is a,b,c,d\nremove a to letters",
+    "code"      : "letters is a,b,c,d\n
+                    remove a to letters",
     "answer"    : "Fout. Bij remove hoort from, niet to."
 }
 
@@ -152,7 +165,8 @@ Je kan ook iets uit een lijst verwijderen, met `remove` en `from`.
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "🤔",
-    "code"      : "eten is pizza, friet, kapsalon\nremove kroket from eten",
+    "code"      : "eten is pizza, friet, kapsalon\n
+                    remove kroket from eten",
     "answer"    : "Goed, je mag iets verwijderen dat niet in de lijst zit."
 }
 
@@ -161,7 +175,8 @@ Je kan ook iets uit een lijst verwijderen, met `remove` en `from`.
     "options"   : ["Goed" , "Fout"],
     "question"  : "Is deze code goed of fout?",
     "icon"      : "🤔",
-    "code"      : "eten is pizza, friet, kapsalon\nadd pizza to eten",
+    "code"      : "eten is pizza, friet, kapsalon\n
+                    add pizza to eten",
     "answer"    : "Goed, je mag iets toevoegen dat al in de lijst zit."
 }
 
@@ -174,8 +189,13 @@ Kijk goed naar de uitvoer, en schrijf er een passende code bij.
 {
     "assignment": "input",
     "icon"      : "🧑‍💻",
-    "output"    : "Welkom bij de bingoavond\nDe drie geluksnummers zijn:\n5 en 3 en 10",
-    "answer"    : "getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nprint Welkom bij de bingoavond\nprint De drie geluksnummers zijn:\nprint nummers at random en print nummers at random en print nummers at random",
+    "output"    : "Welkom bij de bingoavond\n
+                    De drie geluksnummers zijn:\n
+                    5 en 3 en 10",
+    "answer"    : "getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n
+                    print Welkom bij de bingoavond\n
+                    print De drie geluksnummers zijn:\n
+                    print nummers at random en print nummers at random en print nummers at random",
     "lines"     : 4
 }
 
@@ -183,8 +203,11 @@ Kijk goed naar de uitvoer, en schrijf er een passende code bij.
 {
     "assignment": "input",
     "icon"      : "🧑‍💻",
-    "output"    : "We gaan vanavond naar de film.\nWe kiezen: Inside Out",
-    "answer"    : "films is Avengers, Barbie, Inside Out\nprint We gaan vanavond naar de film.\nWe kiezen: films at random",
+    "output"    : "We gaan vanavond naar de film.\n
+                    We kiezen: Inside Out",
+    "answer"    : "films is Avengers, Barbie, Inside Out\n
+                    print We gaan vanavond naar de film.\n
+                    We kiezen: films at random",
     "lines"     : 2
 }
 
@@ -220,7 +243,7 @@ We hebben deze les weer nieuwe programmeerwoorden geleerd! Leg ze uit je eigen w
 
 #### Opdracht 7: Codes
 
-De code `is` is in dit leven veranderd, en we hebben ook nieuwe codes geleerd. 
+De code `is` is in dit level veranderd, en we hebben ook nieuwe codes geleerd. 
 Wat doen die? Leg het uit in je eigen woorden. 
 
 {
@@ -287,5 +310,3 @@ Wat doen die? Leg het uit in je eigen woorden.
     "lines"     : 5
 }
 
-
-``

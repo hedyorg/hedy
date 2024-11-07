@@ -8,6 +8,11 @@ queue_rules:
     commit_message_template: |-
       {{ title }} (#{{number}})
       {{ body }}
+      {# Add co-author information at the end of the squash merge commit message #}
+      {% for co_author in co_authors | unique -%}
+      Co-Authored-By: {{ co_author.name }} <{{ co_author.email }}>
+      {% endfor -%}
+      {# `Co-Authored-By` lines must the be last ones for GitHub to recognize them #}
 
 pull_request_rules:
   - name: Automatic squash merge on approval

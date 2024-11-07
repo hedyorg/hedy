@@ -1,9 +1,14 @@
 import json
-import os
 import regex as re
-import yaml
 
+from os import chdir, listdir, path
 from definition import TRANSLATE_WORDS
+
+# Import packages from the website app (AutoPep8 will mess this up, so disable it)
+import sys
+sys.path.append(path.abspath(path.join(path.dirname(__file__), '..')))  # noqa
+from website.yaml_file import YamlFile  # noqa
+
 
 # destinations of files containing syntax highlighting rules
 OUTPUT_PATH_TRANSLATION = "highlighting/highlighting-trad.json"
@@ -14,7 +19,7 @@ KEYWORDS_PATTERN = '(\\w+).yaml$'
 
 
 def main():
-    os.chdir(os.path.dirname(__file__) + "/..")
+    chdir(path.dirname(__file__) + "/..")
 
     print("Generation of translations.....................", end="")
     language_keywords = get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN)
@@ -24,30 +29,6 @@ def main():
     print(" Done !")
 
 
-def get_yaml_content(file_name):
-    """Recover the content of YAML files
-
-    For each yaml file, the function returns a dictionary
-    containing the contents of the file.
-    All keys and values are strings
-
-    Arguments :
-        - file_name : str, The full path of the file
-
-    Returns a dict.
-    """
-
-    try:
-        with open(file_name, newline="", encoding='utf-8') as keywords_file:
-            yaml_file = yaml.safe_load(keywords_file)
-    except Exception as e:
-        raise RuntimeError(f'Unable to read file {file_name}') from e
-    commandes = {}
-    for k in yaml_file:
-        commandes[str(k)] = str(yaml_file[k])
-    return commandes
-
-
 def get_commands(language_code, keywords, keywords_ref, translate_words):
     """Create keyword translations
 
@@ -55,7 +36,7 @@ def get_commands(language_code, keywords, keywords_ref, translate_words):
     with the translation of the keyword, usable by the regex
 
     Arguments :
-        - language_code : str, Language code (for execption creation)
+        - language_code : str, Language code (for exception creation)
         - keywords : str, The yaml content of the language you want to translate
         - keywords_ref : str, The content of the reference language yaml
         - translate_words : str, List of keywords to be translated
@@ -111,14 +92,14 @@ def get_digits(keywords, keywords_ref):
 def get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN):
     tmp = {}
 
-    list_language_file = os.listdir(KEYWORDS_PATH)
+    list_language_file = listdir(KEYWORDS_PATH)
 
     # get content
     for language_file in list_language_file:
         # Only check *.yaml files
         if m := re.search(KEYWORDS_PATTERN, language_file):
             language_code = m.group(1)
-            tmp[language_code] = get_yaml_content(os.path.join(KEYWORDS_PATH, language_file))
+            tmp[language_code] = YamlFile.for_file(path.join(KEYWORDS_PATH, language_file))
 
     # english is ref
     reference = tmp["en"]

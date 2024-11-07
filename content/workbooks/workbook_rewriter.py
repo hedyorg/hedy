@@ -45,6 +45,9 @@ line = '_' * 292 + '<br>\n'
 
 
 def convert_json(json):
+    if 'teacher_note' in json.keys():
+        return ''  # do not do anyhting for now
+
     assignment_type = json['assignment']
     template = templates[assignment_type]
 
@@ -79,7 +82,7 @@ def convert_json(json):
             if i < number_of_output_lines and not turtle:
                 if i == 0 and turtle:
                     output_line += '🐢'
-                output_line = output_line.ljust(76, '_')
+                output_line = output_line.ljust(80, '_')
 
             textfields += output_line + '\n'
 

@@ -1,317 +1,307 @@
 levels:
     0:
         1:
-            header: Dobrodošli kod Hedy!
-            text: Hedy je programski jezik.
+            header: Добродошли у Хеди!
+            text: Хеди је програмски језик.
         2:
-            header: Programiranje
+            header: Програмирање
             text: |-
-                Programirati znači, kompjuteru dati direkcije preko jezika od kompjutera.
+                Програмирање је давање инструкција рачунару, користећи језик рачунара.
 
-                Takav jezik se zove "programski jezik".
+                Такав језик се зове "програмски језик".
         3:
-            header: Programming Language
+            header: Програмски језик
             text: |-
-                Maybe you already know some programming languages?
-                Some examples are:
+                Можда већ знате неке програмске језике?
+                Неки примери су:
                 * Scratch
                 * Python
                 * HTML
         4:
-            header: Programming
+            header: Програмирање
             text: |-
-                If you can program, you can do many cool things:
-                * Build interactive stories
-                * Create computer drawings and draw these on paper or fabric
-                * Build your own apps to use on your phone
+                Ако знате да програмирате, можете радити много кул ствари:
+                * Правити интерактивне приче
+                * Креирати рачунарске цртеже и цртати их на папиру или тканини
+                * Правити своје апликације за коришћење на телефону
         5:
-            header: Programming in Hedy
-            text: In Hedy we use special codes, like `{print}`.
-            code: '{print} Welcome to Hedy!'
+            header: Програмирање у Хедију
+            text: У Хедију користимо специјалне кодове, као што је `{print}`.
+            code: '{print} Добродошли у Хеди!'
         6:
-            header: Programming in Hedy
-            text: Code words will be shown in pink.
-            code: '{print} Welcome to Hedy!'
+            header: Програмирање у Хедију
+            text: Кодне речи ће бити приказане у розе боји.
+            code: '{print} Добродошли у Хеди!'
         7:
-            header: Programming in Hedy
-            text: We start the code with the Run code button underneath the code.
-            code: '{print} Welcome to Hedy!'
+            header: Програмирање у Хедију
+            text: Започињемо код са дугметом Run code испод кода.
+            code: '{print} Добродошли у Хеди!'
         8:
-            header: Programming in Hedy
-            text: Output appears on the left-hand side.
-            code: '{print} Welcome to Hedy!'
+            header: Програмирање у Хедију
+            text: Излаз се појављује на десној страни.
+            code: '{print} Добродошли у Хеди!'
         9:
-            header: Programming in Hedy
-            text: The output can also be a drawing.
-            code: |-
-                {forward} 100
-                {turn} left
+            header: Програмирање у Хедију
+            text: Излаз може бити и цртеж.
     1:
         1:
-            header: Welcome to level 1!
+            header: Добродошли на ниво 1!
             text: |-
-                We will start level 1 by making stories in Hedy!
+                Почећемо ниво 1 прављењем прича у Хедију!
 
-                We need three text codes to create interactive stories.
+                Потребна су нам три текстуална кода да бисмо креирали интерактивне приче.
         2:
-            header: 'Hedy level 1: {print}'
             text: |-
-                The first code that you can use in level 1 is `{print}`.
+                Први код који можете користити на нивоу 1 је `{print}`.
 
-                `{print}` is used to show text on the screen.
-            code: '{print} Show text on the screen'
+                `{print}` се користи за приказивање текста на екрану.
+            code: '{print} Прикажи текст на екрану'
         3:
-            header: 'Hedy level 1: {ask}'
+            header: 'Команда {print}'
             text: |-
-                The second code that you can use in level 1 is `{ask}`.
+                Можете променити текст после команде за приказивање у шта год желите.
 
-                `{ask}` is used to ask a question that can be answered.
+                Или можете приказати више линија додавањем још једне линије кода која такође почиње са `{print}`.
             code: |-
-                {print} Welcome to your own rock scissors paper!
-                {ask} What will you choose?
+                {print} Добродошли у Хеди!
+                {print} Почните да програмирате сада!
         4:
-            header: 'Hedy level 1: {echo}'
             text: |-
-                The final text code that you can use in level 1 is `{echo}`.
+                Други код који можете користити на нивоу 1 је `{ask}`.
 
-                `{echo}` is used to repeat the answer of an `{ask}`.
+                `{ask}` се користи за постављање питања на које се може одговорити.
             code: |-
-                {print} Hello!
-                {ask} What is your name?
-                {echo} hello
+                {print} Добродошли у вашу сопствену игру камен-маказе-папир!
+                {ask} Шта ћете изабрати?
         5:
-            header: Programming!
             text: |-
-                with `{print}`, `{ask}` and `{echo}` you can already create a little story.
-                This is a good time to try the Parrot, Story and Rock, Paper Scissors adventures.
+                Као што сте могли видети у претходном примеру. Ако користите команду `{ask}`, можете поставити питање.
+                Одговор, међутим, неће бити приказан на екрану.
+
+                Ако желите да се одговор прикаже, можете користити последњу команду овог нивоа: `{echo}`.
+                `{echo}` се користи за понављање одговора на `{ask}`.
             code: |-
-                {print} Hello!
-                {ask} What is your name?
-                {echo} hello
+                {print} Здраво!
+                {ask} Како се зовеш?
+                {echo} здраво
         6:
-            header: Programming!
-            text: Adventures are shown in tabs.
-            editor: /hedy/1
+            header: Програмирање!
+            text: "Са `{print}`, `{ask}` и `{echo}` већ можете креирати малу причу.\nОво је добро време да испробате авантуре Parrot, Story и Rock, Paper Scissors."
+            editor: /хеди/1
         7:
-            header: Programming!
-            text: The yellow arrow buttons can be used to copy examples.
-            editor: /hedy#print_command
+            header: Програмирање!
+            text: Авантуре су приказане у табовима.
         8:
-            header: Drawing with the turtle
-            text: Now that we have seen at text codes, we will now look at drawing codes next.
-            editor: /hedy#print_command
+            header: Програмирање!
+            text: Жуте стрелице могу се користити за копирање примера.
         9:
-            header: 'Drawing with the turtle: {forward}'
-            text: '`{forward}` is used to move the turtle forward.'
+            header: 'Цртање са корњачом'
+            text: 'Сада када смо видели текстуалне кодове, сада ћемо погледати кодове за цртање.'
         10:
-            header: 'Drawing with the turtle: {forward}'
-            text: '`{forward}` is used to move the turtle forward.'
-            code: '{forward} 50'
+            header: 'Цртање са корњачом: {forward}'
+            text: '`{forward}` се користи за померање корњаче напред.'
         11:
-            header: 'Drawing with the turtle: {turn}'
-            text: '`{turn}` is used to make the turtle turn left or right.'
-            code: |-
-                {forward} 50
-                {turn} left
+            header: 'Цртање са корњачом: {turn}'
+            text: '`{turn}` се користи за окретање корњаче лево или десно.'
         12:
-            header: Debugging
-            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            header: Отклањање грешака
+            text: Отклањање грешака у коду значи уклањање грешака у коду. Хајде да заједно отклонимо овај код. Кликните на дугме са бубамаром да бисте покренули отклањач грешака.
             code: |-
-                I am DJ Hedy
-                {print} What song would you like to hear?
-                {ask} I like that song too!
-                {print} Next up... {echo}
-            debug: 'True'
+                Ја сам DJ Хеди
+                {print} Коју песму желите да чујете?
+                {ask} И ја волим ту песму!
+                {print} Следеће... {echo}
+            debug: 'Истина'
         13:
-            header: Let the programming fun begin!
-            text: Enjoy the adventures in level 1!
+            header: Нека забава у програмирању почне!
+            text: Уживајте у авантурама на нивоу 1!
     2:
         1:
-            header: Welcome to level 2
+            header: Добродошли на ниво 2
             text: |-
-                In this level you will learn to use variables.
+                На овом нивоу ћете научити да користите променљиве.
 
-                A variable is a word that can be used to store information.
+                Променљива је реч која се може користити за чување информација.
 
-                For example: a name, age or favorite sports team.
+                На пример: име, године или омиљени спортски тим.
         2:
-            header: Variables
-            text: To make or 'set' a variable we use the `{is}` command
+            header: Променљиве
+            text: Да бисте направили или 'поставили' променљиву користимо команду `{is}`
             code: |-
-                name {is} Hedy
+                name {is} Хеди
                 age {is} 15
-                {print} name is age years old
+                {print} name is age година стар
         3:
-            header: Interactive
+            header: Интерактивно
             text: |-
-                We can also set a variable by asking questions.
+                Такође можемо поставити променљиву постављањем питања.
 
-                The answer to the question is stored in the variable.
+                Одговор на питање се чува у променљивој.
 
-                This way we don't need the `{echo}`  command.
+                На овај начин нам није потребна команда `{echo}`.
             code: |-
-                name {is} {ask} What is your name?
-                {print} Hello name
+                name {is} {ask} Како се зовеш?
+                {print} Здраво name
         4:
-            header: Multiple variables
-            text: Now that we use variables, we can use multiple variables instead of just one `{echo}`command.
+            header: Више променљивих
+            text: Сада када користимо променљиве, можемо користити више променљивих уместо само једне команде `{echo}`.
             code: |-
-                name {is} {ask} What is your name?
-                {print} Hello name
-                age {is} {ask} How old are you?
-                {print} name is age years old.
+                name {is} {ask} Како се зовеш?
+                {print} Здраво name
+                age {is} {ask} Колико имаш година?
+                {print} name is age година стар.
         5:
-            header: Sleep
-            text: You can also use the `{sleep}` command to pause the code for a while.
+            header: Пауза
+            text: Такође можете користити команду `{sleep}` да паузирате код на неко време.
             code: |-
-                {print} My favorite colour is...
+                {print} Моја омиљена боја је...
                 {sleep} 2
-                {print} green!
+                {print} зелена!
         6:
-            header: Sleep 5
+            header: Пауза 5
             text: |-
-                You can add a number after the `{sleep}` command if you want the pause to be longer.
+                Можете додати број после команде `{sleep}` ако желите да пауза буде дужа.
 
-                If you want, you could even use a variable instead of a number to decide the duration of the sleep command.
+                Ако желите, можете чак користити променљиву уместо броја да одредите трајање команде за паузу.
             code: |-
-                pause {is} 10
-                {print} My favorite colour is...
-                {sleep} pause
-                {print} green!
+                пауза {is} 10
+                {print} Моја омиљена боја је...
+                {sleep} пауза
+                {print} зелена!
         7:
-            header: Debugging
-            text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
+            header: Отклањање грешака
+            text: Отклањање грешака у коду значи уклањање грешака у коду. Хајде да заједно отклонимо овај код. Кликните на дугме са бубамаром да бисте покренули отклањач грешака.
             code: |-
-                {print} Welcome to the donut shop!
-                filling {is} What kind of filling would you like?
-                {print} You have chosen... Filling! Yum!
-                topping {ask} What kind of topping would you like?
-                topping is delicious!
-                {print} I'll go get your donut. {sleep}
-                {print} Here you go! A filling donut with toping!
-                {ask} Have a nice day!
-            debug: 'True'
+                {print} Добродошли у продавницу крофни!
+                фил {is} Који фил желите?
+                {print} Изабрали сте... Фил! Њам!
+                прелив {ask} Који прелив желите?
+                прелив је укусан!
+                {print} Идем по вашу крофну. {sleep}
+                {print} Ево је! Крофна са филом и преливом!
+                {ask} Пријатан дан!
+            debug: 'Истина'
         8:
-            header: Let the programming fun begin!
-            text: Enjoy the adventures in level 2!
+            header: Нека забава у програмирању почне!
+            text: Уживајте у авантурама на нивоу 2!
     3:
         1:
-            header: Welcome to level 3
-            text: In this level you'll learn how to make a list, add and remove items form your lists and pick a random item off that list.
+            header: Добродошли на ниво 3
+            text: На овом нивоу ћете научити како да направите листу, додате и уклоните ставке са својих листа и изаберете насумичну ставку са те листе.
         2:
-            header: Making a list
+            header: Прављење листе
             text: |-
-                You make a list with `{is}`.
+                Правите листу са `{is}`.
 
-                Separate the items on your list with a comma.
-            code: animals {is} dogs, cats, kangaroos
+                Одвојите ставке на својој листи зарезом.
+            code: животиње {is} пси, мачке, кенгури
         3:
-            header: At random
+            header: Насумично
             text: |-
-                You can use the list with the `{at}` `{random}` command.
-                The computer will randomly pick one item of the list.
-                Every time you run this code the output will differ.
+                Можете користити листу са командом `{at}` `{random}`.
+                Рачунар ће насумично изабрати једну ставку са листе.
+                Сваки пут када покренете овај код, излаз ће бити другачији.
             code: |-
-                animals {is} dogs, cats, kangaroos
-                {print} animals {at} {random}
+                животиње {is} пси, мачке, кенгури
+                {print} животиње {at} {random}
         4:
-            header: At random in a sentence
-            text: You can use the `{at}` `{random}` command in a sentence as well.
+            header: Насумично у реченици
+            text: Можете користити команду `{at}` `{random}` и у реченици.
             code: |-
-                animals {is} dogs, cats, kangaroos
-                {print} My favorite animal is animals {at} {random}
+                животиње {is} пси, мачке, кенгури
+                {print} Моја омиљена животиња је животиње {at} {random}
         5:
-            header: Add to
+            header: Додај у
             text: |-
-                You can add items to a list with the `{add}` `{to}` command.
+                Можете додати ставке на листу са командом `{add}` `{to}`.
 
-                You can choose what to add to the list or you can use the `{add}` `{to}` command in combination with the `{ask}` command.
-                This way you can let the player decide what to add to the list.
+                Можете изабрати шта да додате на листу или можете користити команду `{add}` `{to}` у комбинацији са командом `{ask}`.
+                На овај начин можете дозволити играчу да одлучи шта да дода на листу.
             code: |-
-                animals {is} dog, cat, kangaroo
-                like {is} {ask} What is your favorite animal?
-                {add} like {to_list} animals
-                {print} I choose animals {at} {random}
+                животиње {is} пас, мачка, кенгур
+                свиђање {is} {ask} Која је твоја омиљена животиња?
+                {add} свиђање {to_list} животиње
+                {print} Ја бирам животиње {at} {random}
         6:
-            header: Remove from
+            header: Уклони са
             text: |-
-                The opposite of the `{add}` `{to}` command is the  `{remove}` `{from}` command.
-                This command removes an item from a list.
+                Супротно од команде `{add}` `{to}` је команда `{remove}` `{from}`.
+                Ова команда уклања ставку са листе.
             code: |-
-                animals {is} dog, cat, kangaroo
-                dislike {is} {ask} What animal do you not like?
-                {remove} dislike {from} animals
-                {print} I choose animals {at} {random}
+                животиње {is} пас, мачка, кенгур
+                несвиђање {is} {ask} Која животиња ти се не свиђа?
+                {remove} несвиђање {from} животиње
+                {print} Ја бирам животиње {at} {random}
         7:
-            header: Debugging
-            text: Let's debug this code!
+            header: Отклањање грешака
+            text: Хајде да дебагујемо овај код!
             editor: |-
-                music_genres {is} rock, pop, metal, indie, jazz
-                chosen_genre is music {at} {random}
-                {print} Let's listen to chosen genre
-                nice {ask} Do you like that genre?
-                {remove} chosen_genre {from} chosen_genre
-                second_choice {is} music_genres
-                {print} or do you prefer... second_choice {at} {random}
-                {remove} second_choice {to} music_genres
-                {print} I like music_genre {random} best!
-            debug: 'True'
+                музички_жанрови {is} рок, поп, метал, инди, џез
+                изабрани_жанр је музика {at} {random}
+                {print} Хајде да слушамо изабрани жанр
+                лепо {ask} Да ли ти се свиђа тај жанр?
+                {remove} изабрани_жанр {from} изабрани_жанр
+                други_избор {is} музички_жанрови
+                {print} или више волиш... други_избор {at} {random}
+                {remove} други_избор {to} музички_жанрови
+                {print} Највише волим музички_жанр {random}!
+            debug: 'Истина'
         8:
-            header: Let's get to work!
-            text: Enjoy the adventures in level 3!
+            header: Хајде да радимо!
+            text: Уживајте у авантурама на нивоу 3!
     4:
         1:
-            header: Welcome to level 4
-            text: In this level you will learn how to use quotation marks.
-            code: '{print} ''print with quotes!'''
+            header: Добродошли на ниво 4
+            text: На овом нивоу ћете научити како да користите наводнике.
+            code: '{print} ''print са наводницима!'''
         2:
-            header: Problem
-            text: 'In the previous levels, you might have come across this problem:'
+            header: Проблем
+            text: 'У претходним нивоима, можда сте наишли на овај проблем:'
             code: |-
-                name {is} Sophie
-                {print} My name is name
-            debug: 'True'
+                name {is} Софи
+                {print} Моје име је name
+            debug: 'Истина'
         3:
-            header: Fixing it with quotation marks
+            header: Решавање проблема са наводницима
             text: |-
-                In this level we will fix this problem by using quotation marks.
+                На овом нивоу ћемо решити овај проблем коришћењем наводника.
 
-                This also makes our code look more like 'real' Python code.
+                Ово такође чини да наш код изгледа више као 'прави' Python код.
         4:
-            header: Quotation marks with print
-            text: Each time you use the `{print}` command you need to put the text that you want to appear on the screen in quotation marks.
-            code: '{print} ''print with quotes!'''
+            header: Наводници са print
+            text: Сваки пут када користите команду `{print}` потребно је да ставите текст који желите да се појави на екрану у наводнике.
+            code: '{print} ''print са наводницима!'''
         5:
-            header: Quotation marks with ask
-            text: This also goes for the `{ask}` command.
-            code: name {is} {ask} 'name please?'
+            header: Наводници са ask
+            text: Ово важи и за команду `{ask}`.
+            code: name {is} {ask} 'име молим?'
         6:
-            header: Quotation marks and variables
+            header: Наводници и променљиве
             text: |-
-                You do not want variable names to be printed on the screen.
-                This is why variables should be left out of the quotation marks, like this:
+                Не желите да се имена променљивих приказују на екрану.
+                Зато променљиве треба оставити ван наводника, овако:
             code: |-
-                name {is} Harry
-                {print} 'Hello ' name
+                name {is} Хари
+                {print} 'Здраво ' name
         7:
-            header: Quotation marks and variables
+            header: Наводници и променљиве
             text: |-
-                When variable names are used in the middle of a sentence, you have to leave the variables out of the quotation marks.
-                The rest of the sentence however, does need quotation marks. That looks like this:
+                Када се имена променљивих користе у средини реченице, морате оставити променљиве ван наводника.
+                Остатак реченице, међутим, треба да буде у наводницима. То изгледа овако:
             code: |-
-                name {is} Harry
-                {print} 'Hello ' name ', how are you?'
+                name {is} Хари
+                {print} 'Здраво ' name ', како си?'
         8:
-            header: Quotation marks and contractions
+            header: Наводници и скраћенице
             text: |-
-                Be careful! Now that you are using quotation marks, you can't use apostrophes in contractions.
+                Будите пажљиви! Сада када користите наводнике, не можете користити апострофе у скраћеницама.
 
-                Please try to print a contraction like "you're" or "I'm" in the screen below and see what happens....
-            code: '{print} ''This won''t work!'''
-            debug: 'True'
+                Молимо вас да покушате да прикажете скраћеницу као што је "you're" или "I'm" на екрану испод и видите шта се дешава....
+            code: '{print} ''Ово неће радити!'''
+            debug: 'Истина'
         9:
-            header: Ready, Set, Go!
-            text: Enjoy the adventures in level 4!
+            header: Очисти
+            text: "На овом нивоу ћете такође научити команду {clear}.\nПомоћу ове команде можете обрисати сав текст са вашег излазног екрана.\n\nБудите пажљиви да увек користите и команду sleep. Ако не користите, рачунар ће обрисати сав текст пре него што успете да га прочитате!"
             code: |-
                 {print} '3'
                 {clear}
@@ -319,568 +309,563 @@ levels:
                 {clear}
                 {print} '1'
                 {clear}
-                {print} 'SURPRISE!'
+                {print} 'ИЗНЕНАЂЕЊЕ!'
         10:
-            header: Debugging
-            text: Let's debug this code!
+            header: Отклањање грешака
+            text: Хајде да дебагујемо овај код!
             code: |-
                 {clear}
-                {print} What a nice day to go to the beach!
-                {ask} 'Do you want to build a sandcastle or swim in the ocean?'
-                {print} 'You would like to activity '
-                {print} 'I'd like to do that too'
-                {print} 'Look at these beautiful seashells!'
-                colors {is} 'orange, silver, white, brown'
-                {print} 'I love the colors {at} {random} one!'
-                choice {is} {ask} Which one do you like?
-            debug: 'True'
+                {print} Како леп дан за одлазак на плажу!
+                {ask} 'Да ли желиш да правиш замак од песка или да пливаш у океану?'
+                {print} 'Желиш да радиш активност '
+                {print} 'И ја бих то волео'
+                {print} 'Погледај ове прелепе шкољке!'
+                боје {is} 'наранџаста, сребрна, бела, браон'
+                {print} 'Волим боје {at} {random}!'
+                избор {is} {ask} Која ти се свиђа?
+            debug: 'Истина'
         11:
-            header: Ready, Set, Go!
-            text: Enjoy the adventures in level 4!
+            header: Спремни, пажња, сад!
+            text: Уживајте у авантурама на нивоу 4!
     5:
         1:
-            header: Welcome to level 5
-            text: 'In this level you will learn to use 3 new commands: `{if}`, `{else}` and `{in}`.'
+            header: Добродошли на ниво 5
+            text: 'На овом нивоу ћете научити да користите 3 нове команде: `{if}`, `{else}` и `{in}`.'
         2:
-            header: if
             text: |-
-                The `{if}` command allows you to choose between two options.
-                In this example the computer will print 'nice' if the given answer is Hedy.
-                If the answer is not Hedy, the computer will do nothing.
+                Команда `{if}` вам омогућава да бирате између две опције.
+                У овом примеру рачунар ће приказати 'nice' ако је дати одговор Hedy.
+                Ако одговор није Hedy, рачунар неће урадити ништа.
             code: |-
-                name {is} {ask} 'what is your name?'
-                {if} name {is} Hedy {print} 'nice'
+                name {is} {ask} 'како се зовеш?'
+                {if} name {is} Хеди {print} 'лепо'
         3:
-            header: Don't forget to print
+            header: Не заборавите да прикажете
             text: |-
-                When using the `{if}` command, don't forget to use the `{print}` command.
-                This code will not work!
-            code: '{if} name {is} Hedy ''nice'''
-            debug: 'True'
+                Када користите команду `{if}`, не заборавите да користите команду `{print}`.
+                Овај код неће радити!
+            code: '{if} name {is} Хеди ''лепо'''
+            debug: 'Истина'
         4:
-            header: else
+            header: иначе
             text: |-
-                When using an `{if}` command, you can also add an `{else}` command.
-                If the answer is Hedy, the computer will print 'nice'.
-                But if the answer is something else the computer will print 'boo'
-            code: '{if} name {is} Hedy {print} ''nice'' {else} {print} ''boo!'''
+                Када користите команду `{if}`, можете такође додати команду `{else}`.
+                Ако је одговор Hedy, рачунар ће приказати 'nice'.
+                Али ако је одговор нешто друго, рачунар ће приказати 'boo'
+            code: '{if} name {is} Хеди {print} ''лепо'' {else} {print} ''бу!'''
         5:
-            header: Long lines
+            header: Дуге линије
             text: |-
-                You might have noticed that your lines can get very long when you have both an `{if}` and an `{else}` command.
+                Можда сте приметили да ваше линије могу постати веома дуге када имате и команду `{if}` и команду `{else}`.
 
-                You can choose to separate commands and put them on 2 lines, like this:
+                Можете изабрати да раздвојите команде и ставите их на 2 линије, овако:
             code: |-
-                {if} name {is} Hedy {print} 'nice'
-                {else} {print} 'boo!'
+                {if} name {is} Хеди {print} 'лепо'
+                {else} {print} 'бу!'
         6:
-            header: Another new command
+            header: Још једна нова команда
             text: |-
-                If you have practised with the `{if}` and `{else}` commands, you can also try the `{in}` command.
+                Ако сте вежбали са командама `{if}` и `{else}`, можете такође пробати команду `{in}`.
 
-                With `{in}` you can let the computer check if an item is in a list, for example:
+                Са `{in}` можете дозволити рачунару да провери да ли је нека ставка у листи, на пример:
 
-                Please note that Hedy is case sensitive. This means that if you answer "Green" instead of "green", Hedy will print "meh".
+                Имајте на уму да је Hedy осетљива на велика и мала слова. То значи да ако одговорите "Green" уместо "green", Hedy ће приказати "meh".
             code: |-
-                pretty_colors {is} green, yellow
-                favorite_color {is} {ask} 'What is your favorite color?'
-                {if} favorite_color {in} pretty_colors {print} 'pretty!'
-                {else} {print} 'meh'
+                лепе_боје {is} зелена, жута
+                омиљена_боја {is} {ask} 'Која је твоја омиљена боја?'
+                {if} омиљена_боја {in} лепе_боје {print} 'лепо!'
+                {else} {print} 'мех'
         7:
-            header: Debugging
-            text: Let's debug this code!
+            header: Отклањање грешака
+            text: Хајде да дебагујемо овај код!
             code: |-
-                {print} Welcome to HedyAir Security!
-                boarding_pass {is} {ask} 'Do you have your boarding pass?'
-                {if} bording_pass yes {print} Great!
-                {else} Please, get your boarding pass ready.
-                passport {is} 'Can I see your passport, please?'
-                {if} passport {is} yes 'thank you'
-                {else} 'You can't fly without a passport'
-                declare {is} {ask} Do you have anything to declare?
+                {print} Добродошли у HedyAir Security!
+                boarding_pass {is} {ask} 'Да ли имате своју карту за укрцавање?'
+                {if} bording_pass yes {print} Одлично!
+                {else} Молимо вас, припремите своју карту за укрцавање.
+                passport {is} 'Могу ли видети ваш пасош, молим вас?'
+                {if} passport {is} yes 'хвала вам'
+                {else} 'Не можете летети без пасоша'
+                declare {is} {ask} Да ли имате нешто да пријавите?
                 {if} declare {is} yes
-                item_to_declare {is} {ask} 'What would you like to declare'
-                {else} Alright
-                {print} Thank you. Please head to gate A22.'
-            debug: 'True'
+                item_to_declare {is} {ask} 'Шта бисте желели да пријавите'
+                {else} У реду
+                {print} Хвала вам. Молимо вас, идите до капије A22.'
+            debug: 'Истина'
         8:
-            header: Let's go!
-            text: Enjoy the adventures in level 5!
+            header: Идемо!
+            text: Уживајте у авантурама на нивоу 5!
     6:
         1:
-            header: Welcome to level 6
-            text: In this level we are adding maths to our codes.
+            header: Добродошли на ниво 6
+            text: На овом нивоу додајемо математику у наше кодове.
         2:
-            header: Addition
-            text: If you want to calculate an addition, simply use the plus sign.
-            code: '{print} ''5 plus 5 is '' 5 + 5'
+            header: Сабирање
+            text: Ако желите да израчунате сабирање, једноставно користите знак плус.
+            code: '{print} ''5 плус 5 је '' 5 + 5'
         3:
-            header: Subtraction
-            text: If you want to subtract, you can use the minus sign.
-            code: '{print} ''5 minus 5 is '' 5 - 5'
+            header: Одузимање
+            text: Ако желите да одузимате, можете користити знак минус.
+            code: '{print} ''5 минус 5 је '' 5 - 5'
         4:
-            header: Multiplication
-            text: If you want to do multiplications, you can use the asterisk.
-            code: '{print} ''5 times 5 is '' 5 * 5'
+            header: Множење
+            text: Ако желите да множите, можете користити звездицу.
+            code: '{print} ''5 пута 5 је '' 5 * 5'
         5:
-            header: Division
-            text: You can use the slash for division.
-            code: '{print} ''5 divided by 5 is '' 5 / 5'
+            header: Дељење
+            text: Можете користити косу црту за дељење.
+            code: '{print} ''5 подељено од 5 је '' 5 / 5'
         6:
-            header: Summary
-            text: In summary, you can use +, -, * and / to do maths.
+            header: Резиме
+            text: У резимеу, можете користити +, -, * и / за математику.
             code: |-
-                {print} '5 plus 5 is ' 5 + 5
-                {print} '5 minus 5 is ' 5 - 5
-                {print} '5 times 5 is ' 5 * 5
-                {print} '5 divided by 5 is ' 5 / 5
+                {print} '5 плус 5 је ' 5 + 5
+                {print} '5 минус 5 је ' 5 - 5
+                {print} '5 пута 5 је ' 5 * 5
+                {print} '5 подељено од 5 је ' 5 / 5
         7:
-            header: The = symbol
+            header: Симбол =
             text: |-
-                From now on you can also use the = symbol instead of the `{is}` command.
-                This goes for both numbers and words, and it also goes after the `{if}` or `{else}` commands.
+                Од сада можете такође користити симбол = уместо команде `{is}`.
+                Ово важи и за бројеве и за речи, и такође важи након команди `{if}` или `{else}`.
             code: |-
-                name = Hedy
-                answer = 20 + 4
+                име = Хеди
+                одговор = 20 + 4
         8:
-            header: Calculations with variables
-            text: 'You can use calculations with numbers, but you can also use variables to do calculations, like this:'
+            header: Израчунавања са променљивама
+            text: 'Можете користити израчунавања са бројевима, али можете такође користити променљиве за израчунавања, овако:'
             code: |-
-                number_1 = {ask} 'Fill in the first number:'
-                number_2 = {ask} 'Fill in the second number:'
+                number_1 = {ask} 'Унесите први број:'
+                number_2 = {ask} 'Унесите други број:'
                 correct_answer = number_1 * number_2
-                {print} number_1 ' times ' number_2 ' is ' correct_answer
+                {print} number_1 ' пута ' number_2 ' је ' correct_answer
         9:
-            header: Debugging
-            text: Let's debug this code!
+            header: Отклањање грешака
+            text: Хајде да дебагујемо овај код!
             code: |-
-                {print} 'This is the water park ticket machine'
-                {print} 'Price list: Children under 12 $3, Adults $5'
-                {print} 'Mondays are 25% off'
-                amount_of_children = 'How many kids tickets would you like?'
-                amount_of_adults = 'How many adult tickets would you like?'
-                day_of_the_week = {ask} 'What day is it?'
+                {print} 'Ово је машина за карте за водени парк'
+                {print} 'Ценовник: Деца испод 12 година $3, Одрасли $5'
+                {print} 'Понедељком је попуст од 25%'
+                amount_of_children = 'Колико дечијих карата желите?'
+                amount_of_adults = 'Колико одраслих карата желите?'
+                day_of_the_week = {ask} 'Који је дан?'
                 {clear}
                 child_price = amount of children * 3
                 adult_price = amount_of_adults + 5
                 total_price = adult_price * child_price
                 {if} day {is} monday
                 total_price = total_price * 0.25
-                {print} 'That will be total_price please'
-            debug: 'True'
+                {print} 'То ће бити total_price молим вас'
+            debug: 'Истина'
         10:
-            header: Let's get to work!
-            text: Enjoy the adventures in level 6!
+            header: Хајде да радимо!
+            text: Уживајте у авантурама на нивоу 6!
     7:
         1:
-            header: Welcome to level 7
-            text: In this level you will learn how to repeat a line of code as many times a you'd like.
+            header: Добродошли на ниво 7
+            text: На овом нивоу ћете научити како да понављате линију кода онолико пута колико желите.
         2:
-            header: repeat 3 times
+            header: понови 3 пута
             text: |-
-                If you want to repeat a line of code, you can use the `{repeat}` 3 `{times}` code.
-                If you want to repeat the line more times, simply change the number.
+                Ако желите да поновите линију кода, можете користити код `{repeat}` 3 `{times}`.
+                Ако желите да поновите линију више пута, једноставно промените број.
 
-                For example: If you are programming a story where your character shouts for help for 5 times, it could look like this:
+                На пример: Ако програмирате причу у којој ваш лик виче за помоћ 5 пута, то би могло изгледати овако:
             code: |-
-                {print} 'The prince kept calling for help'
-                {repeat} 5 {times} {print} 'Help!'
-                {print} 'Why is nobody helping me?'
+                {print} 'Принц је наставио да зове у помоћ'
+                {repeat} 5 {times} {print} 'Помоћ!'
+                {print} 'Зашто ми нико не помаже?'
         3:
-            header: Don't forget the print command
-            text: When using the repeat command, do not forget the `{print}` command.
-            code: '{repeat} 5 {times} ''Help!'''
-            debug: 'True'
+            header: Не заборавите команду за приказивање
+            text: Када користите команду repeat, не заборавите команду `{print}`.
+            code: '{repeat} 5 {times} ''Помоћ!'''
+            debug: 'Истина'
         4:
-            header: Repeat an ask command
-            text: You can also repeat an `{ask}`, `{if}` or `{else}` command multiple times.
+            header: Поновите команду ask
+            text: Можете такође поновити команду `{ask}`, `{if}` или `{else}` више пута.
             code: |-
-                {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
-                {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
-                {else} {repeat} 3 {times} {print} 'You have learned something new!'
+                {repeat} 2 {times} answer = {ask} 'Да ли сте знали да можете поставити питање више пута?'
+                {if} answer {is} yes {repeat} 2 {times} {print} 'Већ сте то знали!'
+                {else} {repeat} 3 {times} {print} 'Научили сте нешто ново!'
         5:
-            header: Debugging
-            text: Let's debug this code!
+            header: Отклањање грешака
+            text: Хајде да дебагујемо овај код!
             code: |-
-                {print} You gave stranded on a desert island.
-                {repeat} 3 'Help!'
-                rescued = {ask} Has anybody come to the rescue?
+                {print} Заглавили сте на пустом острву.
+                {repeat} 3 'Помоћ!'
+                rescued = {ask} Да ли је неко дошао да вас спаси?
                 {if} rescued yes {is}
-                {print} Lucky!
-                {else} {repeat} 3 {times} 'HELP!'
-                rescued = 'What about now?'
+                {print} Срећник!
+                {else} {repeat} 3 {times} 'ПОМОЋ!'
+                rescued = 'Шта сада?'
                 {if} yes
-                {print} 'Hurray!
-                {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
-            debug: 'True'
+                {print} 'Ура!
+                {else} 'Штета... Па добро... време је да изградите склониште и пронађете храну.'
+            debug: 'Истина'
         6:
-            header: Ready Set Go!
-            text: Enjoy the adventures in level 7!
+            header: Припрема позор сад!
+            text: Уживајте у авантурама на нивоу 7!
     8:
         1:
-            header: Welcome to level 8
-            text: In this level you will learn to use indentation to make the `{repeat}`, `{if}` and `{else}` commands work for multiple lines of code.
+            header: Добродошли на ниво 8
+            text: На овом нивоу ћете научити да користите увлачење да би команде `{repeat}`, `{if}` и `{else}` радиле за више линија кода.
         2:
-            header: '{repeat} commands before'
+            header: '{repeat} команде пре'
             text: |-
-                In the previous levels, the `{repeat}` command looked like this:
+                На претходним нивоима, команда `{repeat}` изгледала је овако:
 
-                You could only repeat one line of code.
-            code: '{repeat} 5 {times} {print} ''Help!'''
-            debug: 'True'
+                Могли сте да поновите само једну линију кода.
+            code: '{repeat} 5 {times} {print} ''Помоћ!'''
+            debug: 'Истина'
         3:
-            header: '{repeat} commands now'
+            header: '{repeat} команде сада'
             text: |-
-                In this level you can repeat multiple lines of code. To do this you must tell the computer which lines belong together and should be repeated.
-                You do this by using indentation.
+                На овом нивоу можете поновити више линија кода. Да бисте то урадили, морате рећи рачунару које линије припадају заједно и треба да се понове.
+                То радите коришћењем увлачења.
 
-                Use 4 spaces (or one tab) at the beginning of each line that you want to repeat, like this:
+                Користите 4 размака (или један таб) на почетку сваке линије коју желите да поновите, овако:
             code: |-
                 {repeat} 5 {times}
-                    {print} 'Hello everyone'
-                    {print} 'This will be printed 5 times'
+                    {print} 'Здраво свима'
+                    {print} 'Ово ће бити штампано 5 пута'
         4:
-            header: '{repeat} commands now'
+            header: '{repeat} команде сада'
             text: |-
-                If you want to, you can continue after the `{repeat}` command without indentation.
-                The lines that do not start with indentation will not be repeated.
+                Ако желите, можете наставити након команде `{repeat}` без увлачења.
+                Линије које не почињу са увлачењем неће бити поновљене.
             code: |-
                 {repeat} 3 {times}
-                    {print} 'Hello!'
-                {print} 'We are done repeating!'
+                    {print} 'Здраво!'
+                {print} 'Завршили смо са понављањем!'
         5:
-            header: if and else before
+            header: if и else пре
             text: |-
-                The same goes for the `{if}` and `{else}` commands.
-                These were the commands before:
+                Исто важи и за команде `{if}` и `{else}`.
+                Ово су биле команде пре:
             code: |-
-                {if} name {is} Hedy {print} 'nice'
-                {else} {print} 'boo!'
-            debug: 'True'
+                {if} name {is} Хеди {print} 'лепо'
+                {else} {print} 'бу!'
+            debug: 'Истина'
         6:
-            header: if and else now
+            header: if и else сада
             text: |-
-                These are the `{if}` and `{else}` commands now.
-                Each line after the `{if}` and `{else}` commands start with indentation.
+                Ово су команде `{if}` и `{else}` сада.
+                Свака линија након команди `{if}` и `{else}` почиње са увлачењем.
             code: |-
-                name = {ask} 'What is your name?'
+                name = {ask} 'Како се зовеш?'
                 {if} name {is} Hedy
-                    {print} 'Welcome Hedy'
+                    {print} 'Добродошла, Hedy'
                 {else}
-                    {print} 'Welcome programmer!'
+                    {print} 'Добродошао, програмеру!'
         7:
-            header: stopping the indentation
-            text: Just like with the `{repeat}` command, you can stop using indentation and the lines will always be shown. Not just if the statement is true.
-            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!' \n{print} '3..2..1.. Start programming!'"
+            header: заустављање увлачења
+            text: Као и са командом `{repeat}`, можете престати да користите увлачење и линије ће увек бити приказане. Не само ако је изјава тачна.
+            code: "name = {ask} 'Како се зовеш?'\n{if} name {is} Hedy\n    {print} 'Добродошла, Hedy'\n{else}\n    {print} 'Добродошао, програмеру!' \n{print} '3..2..1.. Почни са програмирањем!'"
         8:
-            header: if statements inside if statements
+            header: if изјаве унутар if изјава
             text: |-
-                You might have thought of trying to put an if command inside a repeat command, or inside another if command.
-                For now, this is not possible yet. In the higher levels, it will be allowed, but for now let's focus on practising the `{if}` `{else}` and `{repeat}` commands with proper indentation first.
+                Можда сте помислили да покушате да ставите команду if унутар команде repeat, или унутар друге команде if.
+                За сада, ово још није могуће. На вишим нивоима, биће дозвољено, али за сада се фокусирајмо на вежбање команди `{if}` `{else}` и `{repeat}` са правилним увлачењем.
         9:
-            header: Debugging
-            text: Let's debug this code!
+            header: Отклањање грешака
+            text: Хајде да дебагујемо овај код!
             code: |-
-                {print} 'HedyWheels bus tickets machine'
-                zone_1 = Town Hall, Library, Campus, Market Place
-                zone_2 = Swimming Pool, Skate Park, Mall, Airport
-                destination = 'Where do you want to go?'
+                {print} 'HedyWheels машина за аутобуске карте'
+                zone_1 = Градска кућа, Библиотека, Кампус, Пијаца
+                zone_2 = Базен, Скејт парк, Тржни центар, Аеродром
+                destination = 'Где желите да идете?'
                 {if} destination {in} zone 1
-                {print} destination 'is in zone 1'
-                price = 3 euros
+                {print} destination 'је у зони 1'
+                price = 3 евра
                     {if} destination {is} zone_2
-                {print} destination 'is in zone 2'
+                {print} destination 'је у зони 2'
                 price = 6
-                ticket_types = {ask} 'Press 1 for a single use ticket.
-                Press 2 for a round trip ticket:'
+                ticket_types = {ask} 'Притисните 1 за карту за једнократну употребу.
+                Притисните 2 за повратну карту:'
                 {if} ticket_type = 1
-                {print} 'You chose a single use ticket'
+                {print} 'Изабрали сте карту за једнократну употребу'
                 {else}
-                        {print} You chose a round trip ticket'
+                        {print} Изабрали сте повратну карту'
                 price * 2
-                {print} 'That will be ' price ' euros please'
-            debug: 'True'
+                {print} 'То ће бити ' price ' евра молим вас'
+            debug: 'Истина'
         10:
-            header: Let's check out the adventures!
-            text: Enjoy the adventures in level 8!
+            header: Хајде да проверимо авантуре!
+            text: Уживајте у авантурама на нивоу 8!
     9:
         1:
-            header: Welcome to level 9
+            header: Добродошли на ниво 9
             text: |-
-                In this level you can use multiple lines of code after an `{if}` or after a `{repeat}` command.
+                На овом нивоу можете користити више линија кода након команде `{if}` или након команде `{repeat}`.
 
-                You can even put a `{repeat}` command within another `{repeat}`  command.
+                Можете чак ставити команду `{repeat}` унутар друге команде `{repeat}`.
         2:
-            header: Multiple lines after `{repeat}`
-            text: You are allowed to combine `{repeat}` and `{if}` in this level.
+            header: Више линија након `{repeat}`
+            text: Дозвољено вам је да комбинујете `{repeat}` и `{if}` на овом нивоу.
             code: |-
                 {repeat} 3 {times}
-                    food = {ask} 'What do you want?'
-                    {if} food {is} pizza
-                        {print} 'nice!'
+                    food = {ask} 'Шта желиш?'
+                    {if} food {is} пица
+                        {print} 'лепо!'
                     {else}
-                        {print} 'pizza is better'
+                        {print} 'пица је боља'
         3:
-            header: Indentation matters!
-            text: Indentation is very important to tell the computer which lines should be repeated and which lines should only be ran once.
+            header: Увлачење је важно!
+            text: Увлачење је веома важно да би се рачунару рекло које линије треба поновити, а које линије треба извршити само једном.
             code: |-
                 {repeat} 3 {times}
-                    {print} 'This line will be repeated...'
-                    {print} 'This one too...'
-                {print} 'but this one will not!'
+                    {print} 'Ова линија ће бити поновљена...'
+                    {print} 'И ова такође...'
+                {print} 'али ова неће!'
         4:
-            header: Multiple lines after `{if}`
-            text: You can also use multiple lines after `{if}`
+            header: Више линија након `{if}`
+            text: Можете такође користити више линија након `{if}`
             code: |-
-                continue = {ask} 'Do you want to continue?'
+                continue = {ask} 'Да ли желиш да наставиш?'
                 {if} continue = yes
-                    sure = {ask} 'Are you sure?'
+                    sure = {ask} 'Јеси ли сигуран?'
                     {if} sure {is} yes
-                        {print} 'We will continue'
+                        {print} 'Наставићемо'
                     {else}
-                        {print} 'You are not sure'
+                        {print} 'Ниси сигуран'
                 {else}
-                    {print} 'You do not want to continue'
+                    {print} 'Не желиш да наставиш'
         5:
-            header: Indentation matters
-            text: Again, indentation is still very important and can make a big difference in the code.
+            header: Увлачење је важно
+            text: Поново, увлачење је и даље веома важно и може направити велику разлику у коду.
             code: |-
-                continue = {ask} 'Do you want to continue?'
+                continue = {ask} 'Да ли желиш да наставиш?'
                 {if} continue = yes
-                    sure = {ask} 'Are you sure?'
+                    sure = {ask} 'Јеси ли сигуран?'
                     {if} sure {is} yes
-                        {print} 'We will continue'
+                        {print} 'Наставићемо'
                 {else}
-                    {print} 'You are not sure'
+                    {print} 'Ниси сигуран'
         6:
-            header: An `{if}` inside a `{repeat}`
+            header: Један `{if}` унутар једног `{repeat}`
             text: |-
-                Now that you can use multiple lines of code after these command, you can also put them within each other.
-                Check it out:
+                Сада када можете користити више линија кода након ових команди, можете их такође ставити једну унутар друге.
+                Погледајте:
             code: |-
                 {repeat} 3 {times}
-                    food = {ask} 'What do you want?'
-                    {if} food {is} pizza
-                        {print} 'nice!'
+                    food = {ask} 'Шта желиш?'
+                    {if} food {is} пица
+                        {print} 'лепо!'
                     {else}
-                        {print} 'pizza is better'
+                        {print} 'пица је боља'
         7:
-            header: Mind the indentation
-            text: Mind that the fourth and sixth line of this code starts with 8 spaces of indentation.
+            header: Пази на увлачење
+            text: Имајте на уму да четврта и шеста линија овог кода почињу са 8 размака увлачења.
             code: |-
                 {repeat} 3 {times}
-                    food = {ask} 'What do you want?'
-                    {if} food {is} pizza
-                        {print} 'nice!'
+                    food = {ask} 'Шта желиш?'
+                    {if} food {is} пица
+                        {print} 'лепо!'
                     {else}
-                        {print} 'pizza is better'
+                        {print} 'пица је боља'
         8:
-            header: Debugging
-            text: Let's debug this code!
+            header: Отклањање грешака
+            text: Хајде да дебагујемо овај код!
             code: |-
-                {print} 'Welcome to HedyJumps, your parachute jump adventure!'
-                people = {ask} 'How many people are you jumping with today?
-                {print} 'We'll ask all of you some questions for safety reasons.'
+                {print} 'Добродошли у HedyJumps, вашу авантуру са падобраном!'
+                people = {ask} 'Са колико људи данас скачете?
+                {print} 'Поставићемо вам свима нека питања из безбедносних разлога.'
                 extra_instructions_people = a, b
                 {repeat} 3 {times}
-                    name = {ask} 'What is your name?'
-                jumped_before = 'Have you ever done a parachute jump before, ' name '?'
+                    name = {ask} 'Како се зовеш?'
+                jumped_before = 'Да ли си икада раније скакао са падобраном, ' name '?'
                 {if} jumped_before  no
-                {print} 'No worries, you'll get an extra safety instruction in room 13'
+                {print} 'Без бриге, добићеш додатна безбедносна упутства у соби 13'
                 {add} name {to} extra_instructions_people
                 {else}
-                {print} 'Fun!'
-                {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
-            debug: 'True'
+                {print} 'Забавно!'
+                {print} 'Хвала вам што сте попунили безбедносна питања сви. Уживајте у скоку!'
+            debug: 'Истина'
         9:
-            header: Let's go!
-            text: Enjoy the adventures in level 9!
+            header: Идемо!
+            text: Уживајте у авантурама на нивоу 9!
     10:
         1:
-            header: Welcome to level 10
-            text: 'In this level you will learn a new command: `{for}`.'
+            header: Добродошли на ниво 10
+            text: 'На овом нивоу ћете научити нову команду: `{for}`.'
         2:
-            header: The for command
-            text: With for you can make a list and use all items on that list. `{for}` creates a block, like repeat and if so all lines in the block need to start with indentation (4 spaces).
+            header: Команда for
+            text: Са for можете направити листу и користити све ставке на тој листи. `{for}` креира блок, као repeat и if, тако да све линије у блоку морају почети са увлачењем (4 размака).
             code: |-
-                animals = dog, cat, blobfish
+                animals = пас, мачка, blobfish
                 {for} animal {in} animals
-                    {print} 'I love ' animal
+                    {print} 'Волим ' animal
         3:
-            header: The for command
-            text: 'Here you see another example of the `{for}` command:'
+            header: Команда for
+            text: 'Овде видите још један пример команде `{for}`:'
             code: |-
-                days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-                names = mom, dad, Emma, Sophie
+                days = Понедељак, Уторак, Среда, Четвртак, Петак, Субота, Недеља
+                names = мама, тата, Ема, Софи
                 {for} day {in} days
-                    {print} names {at} {random} ' does the dishes on ' day
+                    {print} names {at} {random} ' пере судове у ' day
         4:
-            header: Debugging
-            text: Let's debug this code
+            header: Отклањање грешака
+            text: Хајде да дебагујемо овај код
             code: |-
-                {print} 'Ladies and gentlemen!'
-                {print} 'For one night and one night only in circus Hedy!'
-                acts = shoot out of a canon, walk the tightrope, pack themself in a suitcase,
-                people = Iris the Incredible Achmed the Amazing Francis the Fantastic
+                {print} 'Даме и господо!'
+                {print} 'Само једну ноћ и само једну ноћ у циркусу Hedy!'
+                acts = пуцање из топа, ходање по ужету, паковање у кофер,
+                people = Ирис невероватна Ахмед невероватни Франсис фантастични
                     {for} people {in} acts
                 chosen_person {is} people {random}
-                    chosen_person ' will ' act
+                    chosen_person ' ће ' act
                 {add} chosen_person {from} people
-                {print} 'Come and watch our show tonight!'
-                {print} 'Tickets are only available at the counter
-            debug: 'True'
+                {print} 'Дођите и гледајте наш шоу вечерас!'
+                {print} 'Карте су доступне само на шалтеру
+            debug: 'Истина'
         5:
-            header: Time to program!
-            text: Enjoy the adventures in level 10!
+            header: Време је за програмирање!
+            text: Уживајте у авантурама на нивоу 10!
     11:
         1:
-            header: Welcome to level 11
+            header: Добродошли на ниво 11
             text: |-
-                In this level, we add a new form of the `{for}` command. In earlier levels, we used for with a list, but we can also use for with numbers.
+                На овом нивоу, додајемо нови облик команде `{for}`. На ранијим нивоима, користили смо for са листом, али можемо такође користити for са бројевима.
 
-                This way we don't need the `{repeat}` command anymore.
+                На овај начин нам више не треба команда `{repeat}`.
         2:
-            header: The for command
-            text: 'This is what the new for command looks like:'
+            header: Команда for
+            text: 'Овако изгледа нова команда for:'
             code: |-
                 {for} counter {in} {range} 1 {to} 10
                     {print} counter
-                {print} 'Ready or not. Here I come!'
+                {print} 'Спреман или не. Ево ме!'
         3:
-            header: the variable i
+            header: променљива i
             text: |-
-                In the previous slide the variable was named 'counter', because it was counting down.
-                You can of course use any name for the variable you want.
-                The standard name  for variables in this situation that is used in programming languages like Python is 'i'.
-                That looks like this:
-            code: |-
-                number = 10
-                {for} i {in} {range} 1 {to} 10
-                    {print} i * number
+                На претходном слајду променљива је названа 'counter', јер је одбројавала.
+                Наравно, можете користити било које име за променљиву које желите.
+                Стандардно име за променљиве у овој ситуацији које се користи у програмским језицима као што је Python је 'i'.
+                То изгледа овако:
         4:
-            header: Debugging
-            text: Let's debug this code!
+            header: Отклањање грешака
+            text: Хајде да дебагујемо овај код!
             code: |-
-                factor {is} {ask} 'Which table of multiplication do you need?'
+                factor {is} {ask} 'Коју табелу множења вам треба?'
                 {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
-                    {print} This is the table of multiplications for factor
+                    {print} Ово је табела множења за factor
                     {print} number ' x ' factor ' = ' i * factor
-            debug: 'True'
+            debug: 'Истина'
         5:
-            header: Let's start programming!
-            text: Enjoy the adventures in level 11!
+            header: Хајде да почнемо са програмирањем!
+            text: Уживај у авантурама на нивоу 11!
     12:
         1:
-            header: Welcome to level 12
+            header: Добродошли на ниво 12
             text: |-
-                From this level on you are allowed to use decimal numbers and there are some changes to the quotation marks.
-                You can also use functions from this level on!
+                Од овог нивоа вам је дозвољено да користите децималне бројеве и постоје неке промене у коришћењу наводника.
+                Такође можете користити функције од овог нивоа!
         2:
-            header: Quotation marks
+            header: Наводници
             text: |-
-                This level makes some changes to the usage of quotation marks.
-                From now on, **all texts** need to be in quotation marks. This includes values of variables, items on lists and text after {if} commands.
+                Овај ниво уводи неке промене у коришћење наводника.
+                Од сада, **сви текстови** морају бити у наводницима. Ово укључује вредности променљивих, ставке на листама и текст након команди {if}.
             code: |-
                 name = 'Hedy the Robot'
-                {print} 'Hello ' name
+                {print} 'Здраво ' name
         3:
-            header: Decimal numbers
+            header: Децимални бројеви
             text: |-
-                From this level on you are also allowed to use decimal numbers. This can make programs like your restaurant even better!
+                Од овог нивоа вам је такође дозвољено да користите децималне бројеве. Ово може учинити програме као што је ваш ресторан још бољим!
 
-                Numbers do not need quotation marks.
+                Бројеви не требају наводнике.
             code: |-
-                {print} 'decimal numbers now need to use a dot'
+                {print} 'децимални бројеви сада морају користити тачку'
                 {print} 2.5 + 2.5
         4:
-            header: Functions!
+            header: Функције!
             text: |-
-                In this level you'll learn how to use functions. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again. To create a function, use define and give the function a name. Then put all the lines you want in the function in a indented block under the define line. Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
+                На овом нивоу ћете научити како да користите функције. Функција је блок кода који можете лако користити више пута. Коришћење функција нам помаже да организујемо делове кода које можемо користити изнова и изнова. Да бисте креирали функцију, користите define и дајте функцији име. Затим ставите све линије које желите у функцију у блок са увлачењем испод линије define. Оставите једну празну линију у вашем коду да би изгледао лепо и уредно. Одлично! Креирали сте функцију!
 
-                Now, whenever we need that block of code, we just use call with the function's name to call it up! We don't have to type that block of code again.
+                Сада, кад год нам треба тај блок кода, само користимо call са именом функције да га позовемо! Не морамо поново да куцамо тај блок кода.
         5:
-            header: Twinkle Twinkle little star!
+            header: Сјајна, сјајна мала звездо!
             text: |-
-                In this program you see an example of a function.
-                Let's see what happens if you fill in the rest of the song!
+                У овом програму видите пример функције.
+                Хајде да видимо шта се дешава if попуните остатак песме!
             code: |-
-                {define} twinkle
-                     {print} 'Twinkle'
+                {define} трепћи
+                     {print} 'Трепћи'
                      {print} '...'
 
-                {call} twinkle
-                {print} 'Up above the world so high'
-                {print} 'Like a diamond in the sky'
-                {call} twinkle
+                {call} трепћи
+                {print} 'Горе изнад света тако високо'
+                {print} 'Као дијамант на небу'
+                {call} трепћи
         6:
-            header: Functions
-            text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
+            header: Функције
+            text: Као што сте могли видети у примеру, функција је блок кода који се може позвати у било ком тренутку. Користите `{define}` да поставите функцију и `{call}` да је користите.
         7:
-            header: Debugging
-            text: Let's debug this code!
+            header: Отклањање грешака
+            text: Хајде да дебагујемо овај код!
             code: |-
-                {call} new_member
-                {print} 'Hi new member!'
-                username = {ask} 'What is your username?'
-                password = 'What is your password?'
-                {print} 'Welcome to our club!'
+                {call} нови_члан
+                {print} 'Здраво нови члане!'
+                корисничко_име = {ask} 'Које је ваше корисничко име?'
+                лозинка = 'Која је ваша лозинка?'
+                {print} 'Добродошли у наш клуб!'
 
-                username = {ask} 'Please enter your username. Are you a new member? Type New Member'
-                {if} username = New Member
-                {call} new member
+                корисничко_име = {ask} 'Молимо унесите ваше корисничко име. Да ли сте нови члан? Укуцајте Нови Члан'
+                {if} корисничко_име = Нови Члан
+                {call} нови члан
                     {else}
-                        password = {ask} 'Please enter password'
-            debug: 'True'
+                        лозинка = {ask} 'Молимо унесите лозинку'
+            debug: 'Истина'
         8:
-            header: Ready to try it out?
-            text: Enjoy the adventures in level 12!
+            header: Спремни да пробате?
+            text: Уживај у авантурама на нивоу 12!
     13:
         1:
-            header: Welcome to level 13
+            header: Добродошли на ниво 13
             text: |-
-                We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two ifs but can use and and or.
-                From now on you could also use arguments in your functions.
+                Сада ћемо научити `{and}` и `{or}`! If желите да проверите две изјаве, не морате да користите два if-а, већ можете користити and и or.
+                Од сада можете такође користити аргументе у вашим функцијама.
         2:
-            header: The and command
+            header: Команда and
             text: |-
-                The `{and}` command is always used in a combination with the {if} command.
-                This way you can check if 2 statements are true. For example:
+                Команда `{and}` се увек користи у комбинацији са командом {if}.
+                На овај начин можете проверити if су 2 изјаве тачне. На пример:
             code: |-
-                name = {ask} 'what is your name?'
-                age = {ask} 'what is your age?'
+                name = {ask} 'како се зовеш?'
+                age = {ask} 'колико имаш година?'
                 {if} name {is} 'Hedy' {and} age {is} 2
-                    {print} 'You are the real Hedy!'
+                    {print} 'Ти си права Hedy!'
         3:
-            header: The or command
+            header: Команда or
             text: |-
-                The `{or}` works in the same way as the `{and}` command, but only 1 of the two statements has to be true.
+                Команда `{or}` ради на исти начин као и команда `{and}`, али само 1 од две изјаве мора бити тачна.
 
-                Let's see what happens when you change the `{and}` for `{or}`.
+                Хајде да видимо шта се дешава када замените `{and}` са `{or}`.
             code: |-
-                name = {ask} 'what is your name?'
+                name = {ask} 'како се зовеш?'
                 {if} name {is} 'Hedy' {or} name {is} 'hedy'
-                    {print} 'Welcome!!'
+                    {print} 'Добродошли!!'
         4:
-            header: Functions with arguments
-            text: Now that you've learned how to use functions, you'll learn how to use a function with an **argument**. An argument is a variable that is used within a function. It is not used outside the function.
+            header: Функције са аргументима
+            text: Сада када сте научили како да користите функције, научићете како да користите функцију са **аргументом**. Аргумент је променљива која се користи унутар функције. Не користи се ван функције.
         5:
-            header: Example
+            header: Пример
             text: |-
-                In this example you see how the argument 'place' is used in the function.
-                Run the code and change 'ocean' and 'sea' to something else, and see what happens.
+                У овом примеру видите како се аргумент 'place' користи у функцији.
+                Покрените код и промените 'ocean' и 'sea' у нешто друго, и видите шта се дешава.
             code: |-
                 {define} song {with} place
-                    {print} 'My Bonnie is over the ' place
+                    {print} 'Мој Бони је изнад ' place
 
-                {call} song {with} 'ocean'
-                {call} song {with} 'sea'
-                {call} song {with} 'ocean'
+                {call} song {with} 'океана'
+                {call} song {with} 'мора'
+                {call} song {with} 'океана'
         6:
-            header: Example with variable
+            header: Пример са променљивом
             text: |-
-                You can also combine functions with a question.
+                Такође можете комбиновати функције са питањем.
 
-                What happens if you make these changes:
+                Шта се дешава if направите ове промене:
                 ```
                 define song with place
                     print 'My Bonnie is ' place
@@ -890,18 +875,18 @@ levels:
                 ```
             code: |-
                 {define} song {with} place
-                    {print} 'My Bonnie is over the ' place
+                    {print} 'Мој Бони је изнад ' place
 
-                {call} song {with} 'ocean'
-                {call} song {with} 'sea'
-                {call} song {with} 'ocean'
+                {call} song {with} 'океана'
+                {call} song {with} 'мора'
+                {call} song {with} 'океана'
         7:
-            header: Even more questions!
+            header: Још више питања!
             text: |-
-                Now we have combined even more question with the function. Type this code and see what happens.
+                Сада смо комбиновали још више питања са функцијом. Унесите овај код и видите шта се дешава.
 
-                Note how the variables and the arguments have the same name. This is allowed.
-                Does it confuse you? Just use different names, that is allowed as well.
+                Обратите пажњу како променљиве и аргументи имају исто име. Ово је дозвољено.
+                Да ли вас збуњује? Само користите различита имена, то је такође дозвољено.
                 ```
                 define song with name, place
                     print 'My ' name ' is ' place
@@ -912,284 +897,281 @@ levels:
                 ```
             code: |-
                 {define} song {with} place
-                    {print} 'My Bonnie is over the ' place
+                    {print} 'Мој Бони је изнад ' place
 
-                {call} song {with} 'ocean'
-                {call} song {with} 'sea'
-                {call} song {with} 'ocean'
+                {call} song {with} 'океана'
+                {call} song {with} 'мора'
+                {call} song {with} 'океана'
         8:
-            header: Debugging
-            text: Let's debug this code!
+            header: Отклањање грешака
+            text: Хајде да дебагујемо овај код!
             code: |-
-                {define} happiness {with} name
+                {define} срећа {with} име
                     {print} '🥳'
                 {play} G
                 {play} A
                 {play} B
-                {print} 'Party on, ' name
-                {define} sadness
+                {print} 'Журка, ' име
+                {define} туга
                 {print} '😞'
                 {play} E
                 {play} D
                 {play} C
-                {print} 'Hope you feel better, ' name
+                {print} 'Надам се да ћеш се осећати боље, ' име
 
-                name = {ask} 'What is your' name '?'
-                mood = {ask} 'Are you happy or sad?'
-                {if} mood = happy
-                    {call} happiness {with} person
-                {else} mood = sad
-                    {define} sadness {to} name
-            debug: 'True'
+                име = {ask} 'Које је твоје' име '?'
+                расположење = {ask} 'Да ли си срећан или тужан?'
+                {if} расположење = срећан
+                    {call} срећа {with} особа
+                {else} расположење = тужан
+                    {define} туга {to} име
+            debug: 'Истина'
         9:
-            header: Let's go!
-            text: Enjoy the adventures in level 13!
+            header: Идемо!
+            text: Уживај у авантурама на нивоу 13!
     14:
         1:
-            header: Welcome to level 14
-            text: In this level you'll learn some new symbols that can help you improve your programs, like >. You will also learn to work with return values of a function.
+            header: Добродошли на ниво 14
+            text: На овом нивоу ћете научити неке нове симболе који вам могу помоћи да побољшате своје програме, као што је >. Такође ћете научити да радите са повратним вредностима функције.
         2:
-            header: Symbols
+            header: Симболи
             text: |-
-                These are the new symbols you can use:
+                Ово су нови симболи које можете користити:
 
-                  The >  means bigger than...
+                  > значи веће од...
 
-                  The >= means bigger than or the same as...
+                  >= значи веће или једнако...
 
-                  The <  means smaller than...
+                  < значи мање од...
 
-                  The <= means smaller than or the same as...
+                  <= значи мање или једнако...
 
-                You can use them like this:
+                Можете их користити овако:
             code: |-
-                age = {ask} 'How old are you?'
+                age = {ask} 'Колико имаш година?'
                 {if} age < 13
-                    {print} 'You are younger than me!'
+                    {print} 'Млађи си од мене!'
                 {else}
-                    {print} 'You are older than me!'
+                    {print} 'Старији си од мене!'
         3:
-            header: Symbols
+            header: Симболи
             text: |-
-                You can also use:
+                Такође можете користити:
 
-                == is the same as.
+                == је исто као.
 
-                != is not
+                != није
 
-                == is used in `{if}` statements.
+                == се користи у `{if}` изјавама.
             code: |-
-                answer = {ask} 'Do you want to learn more?'
-                {if} answer == 'yes'
-                    {print} 'Go to the next adventure!'
-                {if} answer != 'yes'
-                    {print} 'That is a shame!'
+                answer = {ask} 'Да ли желиш да научиш више?'
+                {if} answer == 'да'
+                    {print} 'Иди на следећу авантуру!'
+                {if} answer != 'да'
+                    {print} 'То је штета!'
         4:
-            header: Return value
-            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
+            header: Повратна вредност
+            text: На претходним нивоима сте научили да креирате функције и користите аргументе са њима. Још једна сјајна употреба функције је да јој дозволите да нешто израчуна за вас. Можете дати функцији прорачун и она ће вам дати одговор прорачуна. Овај одговор се зове **повратна вредност**.
         5:
-            header: Return value
-            text: For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
+            header: Повратна вредност
+            text: На пример, у овом коду функција calculate_new_price ће израчунати нову цену било ког предмета. Она ће вам дати нову цену као повратну вредност.
             code: |-
                 {define} calculate_new_price {with} amount, percentage
                     percentage = percentage / 100
                     discount_amount = amount * percentage
                     {return} amount - discount_amount
 
-                old_price = {ask} 'How much is on the price tag?'
-                discount = {ask} 'What percentage is the discount?'
+                old_price = {ask} 'Колико је на цени?'
+                discount = {ask} 'Који проценат је попуст?'
 
                 new_price = {call} calculate_new_price {with} old_price, discount
-                {print} 'The new price is ' new_price ' dollar'
+                {print} 'Нова цена је ' new_price ' долара'
         6:
-            header: Debugging
-            text: Let's debug this code!
+            header: Отклањање грешака
+            text: Хајде да дебагујемо овај код!
             code: |-
-                item = 'not bought'
-                {print} 'I would like to buy this item'
-                price == {ask} 'What is the price?'
-                {if} price less than or the same as 10
-                    {print} 'Thats a great deal!'
-                    item = 'bought'
-                {if} price is more than 10 {and} less than or the same as 20
-                    {print} 'Alright'
-                    item = 'bought'
-                {if} price is more than 20 {and} less than 50
-                    {print} 'That is a bit much!'
-                {if} price is more than or the same as 50
-                    {print} 'No way!'
-                {if} item =! bought
-                    {print} 'Shame.. I wont buy it'
+                предмет = 'није купљен'
+                {print} 'Желео бих да купим овај предмет'
+                цена == {ask} 'Која је цена?'
+                {if} цена мања или иста као 10
+                    {print} 'То је одлична понуда!'
+                    предмет = 'купљен'
+                {if} цена је више од 10 {and} мање или исто као 20
+                    {print} 'У реду'
+                    предмет = 'купљен'
+                {if} цена је више од 20 {and} мање од 50
+                    {print} 'То је мало превише!'
+                {if} цена је више или исто као 50
+                    {print} 'Никако!'
+                {if} предмет =! купљен
+                    {print} 'Штета.. Нећу га купити'
                 {else}
-                    {print} 'I will buy it! Thank you!'
-            debug: 'True'
+                    {print} 'Купићу га! Хвала!'
+            debug: 'Истина'
         7:
-            header: Let's get to work!
-            text: Enjoy the adventures in level 14!
+            header: Хајде да радимо!
+            text: Уживај у авантурама на нивоу 14!
     15:
         1:
-            header: Welcome to level 15
-            text: In this level you will learn about the `{while}` loop.
+            header: Добродошли на ниво 15
+            text: На овом нивоу ћете научити о `{while}` петљи.
         2:
-            header: '{while}'
             text: |-
-                We are going to learn a new loop, the while loop! The loop continues as long as the statement is true. So don't forget to change the value in the loop.
+                Научићемо нову петљу, while петљу! Петља се наставља све док је изјава тачна. Зато не заборавите да промените вредност у петљи.
 
-                In the example code, we continue until a correct answer has been given. If the correct answer is never given, the loop will never end!
+                У пример коду, настављамо док се не да тачан одговор. If тачан одговор никада није дат, петља се никада неће завршити!
             code: |-
                 answer = 0
                 {while} answer != 25
-                    answer = {ask} 'What is 5 times 5?'
-                {print} 'A correct answer has been given'
+                    answer = {ask} 'Колико је 5 пута 5?'
+                {print} 'Дат је тачан одговор'
         3:
-            header: Debugging
-            text: Let's debug this code!
+            header: Отклањање грешака
+            text: Хајде да дебагујемо овај код!
             code: |-
-                numbers = 1, 2
+                бројеви = 1, 2
 
                 {for} i {in} {range} 3 {to} 50
-                    {add} x {to} numbers
+                    {add} x {to} бројеви
                     i = + 1
 
-                random_number = numbers {random}
-                guesses = 10
+                случајни_број = бројеви {random}
+                погађања = 10
 
-                {while} guess = 0
-                    answer = 'Guess my number:'
-                    {if} answer >= random_number
-                        {print} 'lower'
-                        guesses = guesses -1
-                    {if} answer > random_number
-                        {print} 'higher!'
-                        guesses = guesses
-                    {else} answer = random_number
-                        {print} 'correct'
-                        guesses = 10
-
-            debug: 'True'
+                {while} погађање = 0
+                    одговор = 'Погоди мој број:'
+                    {if} одговор >= случајни_број
+                        {print} 'ниже'
+                        погађања = погађања -1
+                    {if} одговор > случајни_број
+                        {print} 'више!'
+                        погађања = погађања
+                    {else} одговор = случајни_број
+                        {print} 'тачно'
+                        погађања = 10
+            debug: 'Истина'
         4:
-            header: Let's try it out!
-            text: Enjoy the adventures in level 15!
+            header: Хајде да пробамо!
+            text: Уживај у авантурама на нивоу 15!
     16:
         1:
-            header: Welcome to level 16
-            text: In this level you will learn about the [square brackets] and how to use them.
+            header: Добродошли на ниво 16
+            text: На овом нивоу ћете научити о [угластим заградама] и како да их користите.
         2:
-            header: Square brackets
-            text: We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels. We use square brackets to point out a place in a list. The at random command can not be used anymore.
+            header: Угласте заграде
+            text: Направићемо листе на Python начин, са угластим заградама око листа! Такође задржавамо наводнике око сваке ставке као што смо научили на претходним нивоима. Користимо угласте заграде да означимо место у листи. Команда at random се више не може користити.
             code: |-
-                friends = ['Ahmed', 'Ben', 'Cayden']
-                {print} friends[1] ' is the first friend on the list.'
-                {print} friends[2] ' is the second friend on the list.'
-                {print} friends[3] ' is the third friend on the list.'
-                #now we will match 2 lists using the variable i
+                friends = ['Ахмед', 'Бен', 'Кајден']
+                {print} friends[1] ' је први пријатељ на листи.'
+                {print} friends[2] ' је други пријатељ на листи.'
+                {print} friends[3] ' је трећи пријатељ на листи.'
+                #сада ћемо упарити 2 листе користећи променљиву i
                 lucky_numbers = [15, 18, 6]
                 {for} i {in} {range} 1 {to} 3
-                    {print} friends[i] 's lucky number is ' lucky_numbers[i]
+                    {print} friends[i] 'срећан број је ' lucky_numbers[i]
         3:
-            header: Debugging
-            text: Let's debug this code!
+            header: Отклањање грешака
+            text: Хајде да дебагујемо овај код!
             code: |-
-                {print} 'Friendship test'
-                {subjects} = ['song', 'movie', 'food', 'drink']
-                answers_player_1 = []
-                answers_player_2 = []
-                score = 100
+                {print} 'Тест пријатељства'
+                {subjects} = ['песма', 'филм', 'храна', 'пиће']
+                одговори_играч_1 = []
+                одговори_играч_2 = []
+                резултат = 100
 
                 {for} i {in} {range} 1 {to} 4
-                    answer = {ask} 'what is your favorite ' subjects[i]
-                {add} answer {to} answers_player_1
+                    одговор = {ask} 'која је твоја омиљена ' subjects[i]
+                {add} одговор {to} одговори_играч_1
 
-                {print} 'Player 2, your turn!'
+                {print} 'Играч 2, твој ред!'
                 {for} i {in} {range} 0 {to} 4
-                    answer_player_2 = {ask} 'what is player 1s favorite ' subjects
-                    {add} answer_player_2 {in} answers_player_2
-                    {if} answers_player_2[2] == answers_player_1[1]
-                        {print} 'Correct!'
+                    одговор_играч_2 = {ask} 'која је омиљена ' subjects ' играча 1'
+                    {add} одговор_играч_2 {in} одговори_играч_2
+                    {if} одговори_играч_2[2] == одговори_играч_1[1]
+                        {print} 'Тачно!'
                     {else}
-                        {print} 'Wrong!'
-                    score = score - 25
+                        {print} 'Погрешно!'
+                    резултат = резултат - 25
 
-                {print} 'Player 2, you've scored ' score '%'
+                {print} 'Играч 2, освојио си ' резултат '%'
 
-                {if} score = 100
-                    {print} 'You are an amazing friend'
-                {if} score < 100 {or} score >= 50
-                    {print} 'You could do better'
-                {else} score < 50
-                    {print} 'Do you even know this person?!'
-            debug: 'True'
+                {if} резултат = 100
+                    {print} 'Ти си невероватан пријатељ'
+                {if} резултат < 100 {or} резултат >= 50
+                    {print} 'Могао би боље'
+                {else} резултат < 50
+                    {print} 'Да ли уопште познајеш ову особу?!'
+            debug: 'Истина'
         4:
-            text: Enjoy the adventures in level 16!
-            header: Let's try it out!
+            text: Уживај у авантурама на нивоу 16!
+            header: Хајде да пробамо!
     17:
         1:
-            header: Welcome to level 17
-            text: in this level you will learn how to use a colon and you will learn the elif command.
+            header: Добродошли на ниво 17
+            text: На овом нивоу ћете научити како да користите двотачку и научићете команду elif.
         2:
-            header: Colon
-            text: 'Now we are going to change indentation a little bit. Every time that we need an indentation, we need : at the line before the indentation.'
+            header: Двотачка
+            text: 'Сада ћемо мало променити увлачење. Сваки пут када нам треба увлачење, потребна нам је : на линији пре увлачења.'
             code: |-
-                prices = ['1 million dollars', 'an apple pie', 'nothing']
+                prices = ['1 милион долара', 'јабучна пита', 'ништа']
                 your_price = prices[{random}]
-                {print} 'You win ' your_price
-                {if} your_price == '1 million dollars' :
-                    {print} 'Yeah! You are rich!'
+                {print} 'Освајаш ' your_price
+                {if} your_price == '1 милион долара' :
+                    {print} 'Да! Богат си!'
                 {else}:
-                    {print} 'Better luck next time..'
+                    {print} 'Више среће следећи пут..'
         3:
-            header: Elif
-            text: 'In this level you can also use a new command: elif. elif is short for else if and you need it when you want to make 3 (or more!) options. Check it out!'
+            header: Иначе ако
+            text: 'На овом нивоу можете такође користити нову команду: elif. elif је скраћеница за else if и потребна вам је када желите да направите 3 (или више!) опција. Погледајте!'
             code: |-
-                prices = ['1 million dollars', 'an apple pie', 'nothing']
+                prices = ['1 милион долара', 'јабучна пита', 'ништа']
                 your_price = prices[{random}]
-                {print} 'You win ' your_price
-                {if} your_price == '1 million dollars' :
-                    {print} 'Yeah! You are rich!'
-                {elif} your_price == 'an apple pie' :
-                    {print} 'Lovely, an apple pie!'
+                {print} 'Освајаш ' your_price
+                {if} your_price == '1 милион долара' :
+                    {print} 'Да! Богат си!'
+                {elif} your_price == 'јабучна пита' :
+                    {print} 'Дивно, јабучна пита!'
                 {else}:
-                    {print} 'Better luck next time..'
+                    {print} 'Више среће следећи пут..'
         4:
-            header: Debugging
-            text: Let's debug this code!
+            header: Отклањање грешака
+            text: Хајде да дебагујемо овај код!
             code: |-
-                {define} ask_direction
-                    direction = {ask} 'Where do you want to go?'
-                    {if} direction = 'backwards'
+                {define} питај_правац
+                    правац = {ask} 'Куда желиш да идеш?'
+                    {if} правац = 'назад'
                         {turn} 180
-                    {else} direction == 'right'
+                    {else} правац == 'десно'
                         {turn} 90
-                    {else} direction == 'left'
+                    {else} правац == 'лево'
                         {turn} 270
                         {forward} 100
 
-                continue = 'yes'
+                настави = 'да'
 
-                {while} continue == 'yes'
-                    {print} ask_direction
+                {while} настави == 'да'
+                    {print} питај_правац
                     {sleep}
-                    continue = 'do you want to draw some more?'
+                    настави = 'да ли желиш да црташ још?'
                     {sleep}
-            debug: 'True'
+            debug: 'Истина'
         5:
-            header: Let's try it out!
-            text: Enjoy the adventures in level 17!
+            header: Хајде да пробамо!
+            text: Уживај у авантурама на нивоу 17!
     18:
         1:
-            header: Welcome to level 18
-            text: Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.
+            header: Добродошли на ниво 18
+            text: Честитамо! Достигли сте последњи ниво Хеди! Код који сте овде креирали можете копирати у праве Python окружења као што су replit или PyCharm, и можете наставити да учите тамо! Имајте на уму да Python може читати само команде на енглеском, па ако сте користили друге језике, сада ћете морати да пређете на енглески.
         2:
-            header: The Python way
+            header: Python начин
             text: |-
-                We arrived at real Python code! That means we need to use parentheses with print and range from now on.
+                Стигли смо до правог Python кода! То значи да од сада морамо користити заграде са print и range.
 
-                Also, if you want to print more than one item, you need to separate them by commas.
+                Такође, if желите да испишете више од једне ставке, морате их одвојити зарезима.
 
-                The final change we will need to make to get Python code is changing ask into input.
+                Последња промена коју ћемо морати да направимо да добијемо Python код је промена ask у input.
 
-                Click on the 'print' tab for all the examples.
-            editor: /hedy/18
+                Кликните на 'print' таб за све примере.
         3:
-            header: The very last adventures!
-            text: Enjoy the very last adventures in level 18!
+            header: Последње авантуре!
+            text: Уживајте у последњим авантурама на нивоу 18!

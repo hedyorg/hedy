@@ -11,7 +11,8 @@ import requests
 from botocore.exceptions import ClientError as email_error
 from botocore.exceptions import NoCredentialsError
 from flask import g, request, session, redirect
-from flask_babel import force_locale, gettext
+from flask_babel import force_locale
+from website.flask_helpers import gettext_with_fallback as gettext
 
 import utils
 from config import config
@@ -324,20 +325,6 @@ def login_user_from_token_cookie():
     user = g.db.user_by_username(token["username"])
     if user:
         remember_current_user(user)
-
-
-def validate_student_signup_data(account):
-    if not isinstance(account.get("username"), str):
-        return gettext("username_invalid")
-    if "@" in account.get("username") or ":" in account.get("username"):
-        return gettext("username_special")
-    if len(account.get("username").strip()) < 3:
-        return gettext("username_three")
-    if not isinstance(account.get("password"), str):
-        return gettext("password_invalid")
-    if len(account.get("password")) < 6:
-        return gettext("passwords_six")
-    return None
 
 
 def validate_signup_data(account):

@@ -131,24 +131,14 @@ levels:
     7:
         1:
             story: Completa la cançó del Baby shark. Primer comença amb el Baby shark, després la mare (mommy shark) i finalment el pare (daddy shark).
-            code: |-
-                {repeat} 3 {times} {print} 'Baby shark tututututudu'
-                {print} 'Baby shark'
-                {repeat} 3 {times} {print} 'Mommy shark tututututudu'
-                {print} 'Mommy shark'
-                {repeat} 3 {times} {print} 'Daddy shark tututututudu'
-                {print} 'Daddy shark'
         2:
-            story: Crea la cançó "Les rodes de l'autobús fan voltes i voltes"
+            story: Crea la cançó "Les rodes de l'autobús van girant"
             code: |-
-                {print} "les rodes de l'autobús van"
-                {repeat} 3 {times} {print} "volt i rodó"
-                {print} "les rodes de l'autobús fan voltes"
+                {print} "les rodes de l'autobús girant"
+                {repeat} 3 {times} {print} "van rodant"
+                {print} "les rodes de l'autobús girant, van rodant, van rodant"
                 {print} "per tota la ciutat"
     8:
-        1:
-            story: "You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.\nEither red, yellow or blue! Take a little pause after announcing a team."
-            code: "teams = red, yellow, blue\n{print} 'Red, Yellow or Blue?'\n{repeat} 5 {times}\n    {print} 'You are selected in team... '\n    {print} teams {at} {random}\n    {sleep} 2"
         2:
             story: Imprimeix el compte enrere per al joc de l'amagatall.
             code: |-
@@ -158,6 +148,9 @@ levels:
                      {print} comptador
                      {sleep} 1
                 {print} 'Llest o no, ves que vinc!'
+        1:
+            code: "equips = vermell, groc, blau\n{print} 'Vermell, Groc o Blau?'\n{repeat} 5 {times}\n    {print} \"Has estat assignat a l'equip... \"\n    {print} equips {at} {random}\n    {sleep} 2"
+            story: "Amb els teus companys voleu jugar a Pokémon Go! Crea un programa que decideixi a quin equip jugarà cada company. \nEls equips són: vermell, groc o blau! Fes una petita pausa després d'anunciar cada equip."
     9:
         1:
             story: Aquest joc et proporcionarà tres tasques matemàtiques. Cada vegada, però la pregunta serà diferent. Saps trobar-ne la comanda?
@@ -172,13 +165,13 @@ levels:
                     {else}
                         {print} 'No! La resposta correcta és ' resposta_correcta
         2:
-            story: "This code asks the costumers in a restaurant if they would like to order dessert. If they do, it asks them what kind of dessert. If they order tiramisu they are told that the tiramisu is sold out.\nCan you get the code to work?"
+            story: "Aquest codi pregunta als clients d'un restaurant si volen demanar alguna cosa de postres. Si volen, els demana quin tipus de postres. Si demanen tiramisú, se'ls hi diu que el tiramisú s'ha acabat.\nPots fer que el codi funcioni?"
             code: "order = {ask} 'Would you like to order dessert?'\n{if} order = yes\n    dessert = {ask} 'What kind of dessert would you like?'\n    {if} dessert = tiramisu\n        {print} 'Sorry, we are out of tiramisu.'\n    {else}\n        {print} 'One ' dessert ' coming right up!'\n{else}\n    {print} 'You dont want a dessert. No problem!'"
     10:
         1:
             story: |-
-                Ajuda aquesta família creant un calendari per saber qui està cuinant i què li toca a fer a cadascú aquesta setmana. Les comandes d'eliminació s'asseguren que ningú ha de cuinar dues vegades i per garantir un sopar diferent cada dia.
-                **Atenció!** l'ordre de les variables hauria de ser primer dies, després persones i finalment opcions_sopar. Això també convé a les línies amb ordres d'eliminació.
+                Ajuda aquesta família creant un calendari per saber qui està cuinant i què li toca a fer a cadascú aquesta setmana. Amb la comanda `{remove}` assegurem que ningú ha de cuinar dues vegades i per garantir un sopar diferent cada dia.
+                **Atenció!** L'ordre de les variables hauria de ser primer dies, després persones i finalment opcions_sopar. Això també implica a les línies amb la comanda `{remove}`.
             code: |-
                 dies = dilluns, dimarts, dimecres, dijous, divendres
                 persones = la mare, el pare, en Martí, l'Anna, la Júlia
@@ -215,20 +208,12 @@ levels:
         2:
             story: |-
                 Crea un programa que ens expliqui els resultats finals de la fira de la ciència. Primer defineix la variable concursants, després la variable lloc.
-                **Pista** La línia 5 hauria de ser la comanda sleep (dorm), i hauríeu d'acabar dient felicitats.
-            code: |-
-                {print} 'And now we will reveal the results of the science fair'
-                contestants = Vivienne, Paul, Trixy, Bianca, Katya
-                place = 5
-                {for} contestant {in} contestants
-                    {sleep} 2
-                    {print} 'On number ' place ' has ended... ' contestant
-                    place = place - 1
-                {print} 'Congratulations!'
+                **Pista** La línia 5 hauria de tenir la comanda sleep (dorm), i hauries d'acabar amb un text de felicitació.
+            code: "{print} 'Ara revelarem els resultats de la fira de la ciència!'\nconcursants = Viviana, Pau, Trinni, Blanca, Katia\nlloc = 5\n{for} concursant {in} concursants\n    {sleep} 2\n    {print} 'A la posició ' lloc ' hi ha... ' concursant\n    lloc = lloc - 1\n{print} 'Enhorabona!'"
     12:
         1:
             story: |-
-                Sing the song 'What shall we do with the drunken sailor'. In case you don't know it, the song goed like this:
+                Canta la cançó 'What shall we do with the drunken sailor' (Què farem amb el mariner borratxo). Si no la saps va així:
 
                 What will we do with the drunken sailor
                 What will we do with the drunken sailor
@@ -239,16 +224,16 @@ levels:
                 Way hey and up she rises
                 Early in the morning
             code: |-
-                verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'
-                {for} verse {in} verses
+                versos = 'What will we do with the drunken sailor', 'Way hey and up she rises'
+                {for} vers {in} versos
                     {for} count {in} {range} 1 {to} 3
-                        {print} verse
+                        {print} vers
                     {print} 'Early in the morning'
         2:
-            story: Play a game of Twister with us! First define the variable people, then limbs, then colors.
+            story: Juga al Twister amb nosaltres! Primer defineix la variable persones, després les extremitats i en acabat els colors.
             code: |-
-                people = 'Jess', 'Nick', 'Winston'
-                limbs = 'left hand', 'left foot', 'right hand', 'right foot'
-                colors = 'red', 'blue', 'green', 'yellow'
-                {for} person {in} people
-                    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}
+                gent = "Jordi", "Clark", "Omar"
+                extremitats = "mà esquerre", "peu esquerre", "mà dret", "peu dret"
+                colors = "red", "blue", "green", "yellow"
+                {for} person {in} gent
+                    {print} person ", posa el/la " extremitats {at} {random} " a " colors {at} {random}

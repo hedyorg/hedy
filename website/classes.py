@@ -3,7 +3,7 @@ import uuid
 
 from flask import make_response, redirect, request, session
 from jinja_partials import render_partial
-from flask_babel import gettext
+from website.flask_helpers import gettext_with_fallback as gettext
 
 import utils
 from config import config

@@ -35,7 +35,7 @@
         väri {is} {ask} Mikä on lempivärisi?
         {print} väri on lempivärisi!
 -   name: '{sleep}'
-    explanation: '`{sleep}` anna Hedyn pitää (muutama) sekunti taukoa.'
+    explanation: '`{sleep}`:lla voit antaa Hedyn pysähtyä pariksi sekunniksi.'
     demo_code: |-
         {print} Annas kun ajattelen sekunnin...
         {sleep}
@@ -104,8 +104,8 @@
         väri {is} {ask} 'Mikä on lempivärisi?'
         {if} väri {in} hienot_värit {print} 'hieno!' {else} {print} 'plääh'
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
+    explanation: Tarkista, onko näppäimistön tietty näppäin `{pressed}`.
+    demo_code: '{if} a {is} {pressed} {print} ''Painoit A!'' {else} {print} "Painoit toista näppäintä!"'
 6:
 -   name: '{print}'
     explanation: Tulosta tarkasti käyttäen heittomerkkejä.
@@ -115,7 +115,7 @@
     demo_code: |-
         vastaus = {ask} 'Paljonko on 10 plus 10?'
         {if} vastaus {is} 20 {print} 'Kyllä!' {else} {print} 'Oho'
--   name: '{ask} ja {if} kilpikonnan kanssa'
+-   name: '`{ask}` ja `{if}` kilpikonnan kanssa'
     explanation: Ask the user how many angles they want.
     demo_code: |-
         angles = {ask} 'How many angles?'
@@ -159,12 +159,12 @@
             {turn} 90
             {forward} 50
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    explanation: Tarkista, onko näppäimistön tietty näppäin `{pressed}`.
     demo_code: |-
         {if} a {is} {pressed}
-            {print} 'You pressed A!'
+            {print} 'Painoit A!'
         {else}
-            {print} 'You pressed another key!'
+            {print} 'Painoit toista näppäintä!'
 9:
 -   name: '{if} monelle riville'
     explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.
@@ -220,7 +220,7 @@
     demo_code: |-
         nimi = 'Hedy robotti'
         {print} 'Hei ' nimi
--   name: heittomerkit {if} vertailun jälkeen
+-   name: heittomerkit `{if}` vertailun jälkeen
     explanation: Teksti lainausmerkeissä komennon `{if}` jälkeen.
     demo_code: |-
         nimi = {ask} 'Kuka olet?'
@@ -316,52 +316,8 @@
         firstfruit = fruit[1]
         {print} firstfruit
 -   name: Get a random item from a list
-    explanation: To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!
+    explanation: Saadaksesi satunnaisen kohteen luettelosta käytämme [{random}], joten hedelmä[{random}] tarkoittaa, että ota satunnainen hedelmä luettelosta!
     demo_code: |-
         fruit = ['banana', 'apple', 'cherry']
         random_fruit = fruit[{random}]
         {print} random_fruit
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a is 1'
-        {elif} a == 2:
-            {print} 'a is 2'
-        {else}:
-            {print} 'a is not 1 or 2'
--   name: '{print}'
-    explanation: When we use a `{for}`, we need to put a `:` behind the `{for}` statement!
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'Ready or not, here I come!'
--   name: '{if}'
-    explanation: We need to do the same with all of our `{if}` statements.
-    demo_code: |-
-        color = {ask} 'What is your favorite color?'
-        {if} color == 'green':
-            {print} 'Your favorite color is green'
-        {else}:
-            {print} 'Your favorite color is not green'
-18:
--   name: '{print}'
-    explanation: After `{print}` you need to use parentheses.
-    demo_code: '{print}(''hi!'')'
--   name: '{range}'
-    explanation: After `{range}` you need to use parentheses.
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('Hello, times ', i)
--   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you print more items.
-    demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: ask something with {input}
-    explanation: Use `{input}` instead of `{ask}` to ask something.
-    demo_code: |-
-        name = {input}('What is your name?')
-        {print}('So your name is ', name)
