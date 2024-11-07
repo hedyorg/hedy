@@ -3,12 +3,17 @@ levels:
         1:
             header: Welcome to Hedy!
             text: Hedy is a programming language.
+            notes: |-
+                Ask your students to write down some words that they associate with programming. Do a quick round to hear the answers.
         2:
             header: Programming
             text: |-
                 Programming is giving instructions to a computer, using the language of the computer.
 
                 Such a language is called a "programming language".
+            notes: |-
+                Unfortunately, computers don't understand normal people language, like English, but they speak in their own language.
+                Don't panic, you don't have to type in a string of zeros and ones, but we are going to learn to give the computer instructions in a programming language.
         3:
             header: Programming Language
             text: |-
@@ -17,6 +22,8 @@ levels:
                 * Scratch
                 * Python
                 * HTML
+            notes: |-
+                Ask the students about their own programming experience, or if they perhaps know someone who works in IT.
         4:
             header: Programming
             text: |-
@@ -24,28 +31,50 @@ levels:
                 * Build interactive stories
                 * Create computer drawings and draw these on paper or fabric
                 * Build your own apps to use on your phone
+            notes: |-
+                This may sound really difficult, but we are going to learn programming step-by-step.
         5:
             header: Programming in Hedy
             text: In Hedy we use special codes, like `{print}`.
             code: '{print} Welcome to Hedy!'
+            notes: |-
+                Let's take a look at Hedy. In Hedy we use code words (commands) to give the computer an instruction.
+                We type these instructions in the left screen. This is what we call code, or a program.
         6:
             header: Programming in Hedy
             text: Code words will be shown in pink.
             code: '{print} Welcome to Hedy!'
+            notes: |-
+                As you can see, the code words (or commands) turn pink if you use them correctly.
         7:
             header: Programming in Hedy
             text: We start the code with the Run code button underneath the code.
             code: '{print} Welcome to Hedy!'
+            notes: |-
+                To make the computer follow the instructions you have to 'run' the code. Press the button to show the students what happens.
         8:
             header: Programming in Hedy
             text: Output appears on the right-hand side.
             code: '{print} Welcome to Hedy!'
+            notes: |-
+                When we run the code, output appears. Output is the result of running our program. The right screen where the output appears, is called the output screen.
         9:
             header: Programming in Hedy
             text: The output can also be a drawing.
             code: |-
                 {forward} 100
                 {turn} {left}
+            notes: |-
+                In Hedy we don't only make text appear, but output can also be a drawing, or....
+        10:
+            header: Programming in Hedy
+            text: Or the output can be music!
+            code: |-
+                {play} C4
+                {play} D4
+                {play} E4
+            notes: |-
+                Let's go to the first level to get started!
     1:
         1:
             header: Welcome to level 1!
@@ -60,6 +89,8 @@ levels:
 
                 `{print}` is used to show text on the screen.
             code: '{print} Show text on the screen'
+            notes: |-
+                Run the code to show the students what happens when a `print` code is run.
         3:
             header: The {print} command
             text: |-
@@ -69,6 +100,8 @@ levels:
             code: |-
                 {print} Welcome to Hedy!
                 {print} Start programming now!
+            notes: |-
+                Run the code and then change to code to something yourself. Show that you can print whatever you like.
         4:
             header: '{ask}'
             text: |-
@@ -78,46 +111,40 @@ levels:
             code: |-
                 {print} Welcome to your own rock scissors paper!
                 {ask} What will you choose?
+            notes: |-
+                Show that the computer now asks you a question. Fill in an answer and also show that once you fill in the answer, nothing happens.
+                Make your students aware that the computer will only follow your instructions, it will not do anything by itself. This means that if you want the computer to print the answer, you have to give that instruction.
         5:
             header: '{echo}'
             text: |-
-                As you could see in the previous example. If you use the `{ask}` command, you can ask a question.
-                The answer, however doesn't show in the output screen.
-
-                If you do want the answer to show, you can use the final command of this level: `{echo}`.
-                `{echo}` is used to repeat the answer of an `{ask}`.
+                To show the answer in the output screen, you can use: `{echo}`.
+                `{echo}` is never used by itself, always with an `{ask}`.
             code: |-
                 {print} Hello!
                 {ask} What is your name?
                 {echo} hello
+            notes: |-
+                To make the computer repeat the answer back to you, you use the `echo` command. Point out that the answer you've typed in will appear at the end of the sentence.
         6:
             header: Programming!
-            text: |-
-                With `{print}`, `{ask}` and `{echo}` you can already create a little story.
-                This is a good time to try the Parrot, Story and Rock, Paper Scissors adventures.
+            text: Here you can find a list of the adventures.
             editor: /hedy/1
+            notes: |-
+                Before we start, show the students the adventures. Don't forget to point out the exercises. This is where the students will have to read what to do exactly in an adventure.
         7:
-            header: Programming!
-            text: Adventures are shown in tabs.
-            editor: /hedy/1
-        8:
             header: Programming!
             text: The yellow arrow buttons can be used to copy examples.
             editor: /hedy#print_command
+            notes: |-
+                Lastly show the students that they can copy the example code into their programming field by pressing the yellow button.
+        8:
+            header: Let's get started!
+            text: |-
+                This is a good time to try the Parrot, Haunted House, Story and Rock, Paper Scissors adventures.
+            editor: /hedy/1
+            notes: |-
+                These are the first adventures to start with. Once (most of) the students are done, you can introduce the drawing turtle and the `{play}` command.
         9:
-            header: Drawing with the turtle
-            text: Now that we have seen at text codes, we will now look at drawing codes next.
-        10:
-            header: 'Drawing with the turtle: {forward}'
-            text: '`{forward}` is used to move the turtle forward.'
-            code: '{forward} 50'
-        11:
-            header: 'Drawing with the turtle: {turn}'
-            text: '`{turn}` is used to make the turtle turn left or right.'
-            code: |-
-                {forward} 50
-                {turn} {left}
-        12:
             header: Debugging
             text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
             code: |-
@@ -126,9 +153,79 @@ levels:
                 {ask} I like that song too!
                 {print} Next up... {echo}
             debug: 'True'
+        10:
+            header: Playing music
+            text: |-
+                Play musical notes with `{play}`
+                The notes go: C - D - E - F - G - A - B
+                Place a number behind the note to pick a scale, the scales go from 1 to 10.
+            code: |
+                {play} C4
+                {play} D4
+                {play} E4
+                {play} F4
+                {play} G4
+                {play} A4
+                {play} B4
+                {play} C5
+            notes: |-
+                Show the students how to use the `{play}` command in Hedy. This is also a good time to review the classroom rules about headphone usage.
+                The students can now continue with the music adventure.
+        11:
+            header: 'Drawing with the turtle: {forward}'
+            text: '`{forward}` is used to move the turtle forward.'
+            code: '{forward} 50'
+            notes: |-
+                Now that we have seen at text codes, we will now look at drawing codes next. Show the students how to use the forward command.
+        12:
+            header: 'Drawing with the turtle: {forward}'
+            text: 'How do we go backwards?'
+            code: '{forward} -50'
+            notes: |-
+                Ask the students if they have any idea how to go backwards. The answer is using a negative number, like -50.
         13:
-            header: Let the programming fun begin!
-            text: Enjoy the adventures in level 1!
+            header: 'Drawing with the turtle: {turn}'
+            text: '`{turn}` is used to make the turtle turn left or right.'
+            code: |-
+                {forward} 50
+                {turn} {left}
+        14:
+            header: Debugging
+            text: Using the debugger when drawing
+            code: |-
+                {forward} 50
+                {turn} {left}
+                {forward} 100
+                {turn} {left}
+                {forward} 50
+                {turn} {left}
+            debug: 'True'
+            notes: |-
+                The debugger can come in handy when making a drawing. The students can now continue with the rest of the adventures of this level.
+        15:
+            header: Let's review!
+            text: What did you learn today?
+            notes: |-
+                Ask the students to list what they've learned today.
+        16:
+            header: Let's review!
+            text: |-
+                Which adventure did you like best? Why?
+
+                Which adventure did you like least? Why?
+
+            notes: |-
+                Ask the students for their opinion.
+        17:
+            header: Show and tell!
+            text: Would anyone like to show the class a program they've made?
+            notes: |-
+                Let some students show their work to the class.
+        18:
+            header: Sneak peek into the next level...
+            text: |-
+                In the next level you'll learn how to use a variable to make your programs even more interactive!
+                And you'll learn to use the `{sleep}` command to pause your code!
     2:
         1:
             header: Welcome to level 2
