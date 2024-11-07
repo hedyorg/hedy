@@ -1,6 +1,5 @@
 import { modal } from './modal';
-import { showAchievements, theKeywordLanguage } from "./app";
-import { markUnsavedChanges, clearUnsavedChanges, hasUnsavedChanges } from './browser-helpers/unsaved-changes';
+import { theKeywordLanguage } from "./app";
 import { ClientMessages } from './client-messages';
 import DOMPurify from 'dompurify'
 import { startTeacherTutorial } from './tutorials/tutorial';
@@ -9,6 +8,9 @@ import { initializeTranslation } from './lezer-parsers/tokens';
 import { CustomWindow } from './custom-window';
 import { addCurlyBracesToCode, addCurlyBracesToKeyword } from './adventure';
 import { autoSave } from './autosave';
+import { HedySelect } from './custom-elements';
+import { Chart } from 'chart.js';
+import { setLoadingVisibility } from './loading';
 
 declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
@@ -25,11 +27,7 @@ export function create_class(class_name_prompt: string) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      if (response.achievement) {
-        showAchievements(response.achievement, false, '/for-teachers/customize-class/' + response.id);
-      } else {
-        window.location.pathname = '/for-teachers/customize-class/' + response.id ;
-      }
+      window.location.pathname = '/for-teachers/customize-class/' + response.id ;      
     }).fail(function(err) {
       return modal.notifyError(err.responseText);
     });
@@ -46,12 +44,8 @@ export function rename_class(id: string, class_name_prompt: string) {
           }),
           contentType: 'application/json',
           dataType: 'json'
-        }).done(function(response) {
-          if (response.achievement) {
-            showAchievements(response.achievement, true, "");
-          } else {
-            location.reload();
-          }
+        }).done(function() {
+          location.reload();
         }).fail(function(err) {
           return modal.notifyError(err.responseText);
         });
@@ -59,7 +53,7 @@ export function rename_class(id: string, class_name_prompt: string) {
 }
 
 export function duplicate_class(id: string, teacher_classes: string[], second_teacher_prompt: string, prompt: string, defaultValue: string = '') {
-  if (teacher_classes){
+  if (teacher_classes && !defaultValue){
     modal.confirm(second_teacher_prompt, function () {
       apiDuplicateClass(id, prompt, true, defaultValue);
     }, function () {
@@ -99,13 +93,24 @@ function apiDuplicateClass(id: string, prompt: string, second_teacher: boolean, 
             });
         }
       }
-      if (response.achievement) {
-            showAchievements(response.achievement, true, "");
-          } else {
-            location.reload();
-          }
+      location.reload();      
     }).fail(function(err) {
       return modal.notifyError(err.responseText);
+    });
+  });
+}
+
+export function delete_class(id: string, prompt: string) {
+  modal.confirm(prompt, function () {
+    $.ajax({
+      type: 'DELETE',
+      url: '/class/' + id,
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function () {
+      location.reload();      
+    }).fail(function (err) {
+      modal.notifyError(err.responseText);
     });
   });
 }
@@ -120,12 +125,8 @@ export function join_class(id: string, name: string) {
         name: name
       }),
       dataType: 'json'
-    }).done(function(response) {
-      if (response.achievement) {
-          showAchievements(response.achievement, false, '/programs');
-      } else {
-          window.location.pathname = '/programs';
-      }
+    }).done(function() {
+      window.location.pathname = '/programs';
     }).fail(function(err) {
       if (err.status == 403) { //The user is not logged in -> ask if they want to
          return modal.confirm (err.responseText, function () {
@@ -183,39 +184,21 @@ export function remove_student(class_id: string, student_id: string, prompt: str
       url: '/class/' + class_id + '/student/' + student_id,
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function(response) {
-      if (response.achievement) {
-          showAchievements(response.achievement, true, "");
-      } else {
-          location.reload();
-      }
+    }).done(function() {
+      location.reload();
     }).fail(function(err) {
         modal.notifyError(err.responseText);
     });
   });
 }
 
-function update_db_adventure(adventure_id: string) {
-  // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
-  const adventure_name = $('#custom_adventure_name').val();
-  let classes: string[] = [];
-  let levels: string[] = []
-
-  document.querySelectorAll('#levels_dropdown > .option.selected').forEach((el) => {
-    levels.push(el.getAttribute("data-value") as string)
-  })
-
-  document.querySelectorAll('#classes_dropdown > .option.selected').forEach((el) => {
-    classes.push(el.getAttribute("data-value") as string)
-  })
-
-  const language = document.querySelector('#languages_dropdown> .option.selected')!.getAttribute('data-value') as string
-
-  const content = DOMPurify.sanitize(window.ckEditor.getData());
-  
+function get_formatted_content(content: string, levels: string[], language: string) {
   const parser = new DOMParser();
   const html = parser.parseFromString(content, 'text/html');
-  const minLevel = Math.min(...levels.map((el) => Number(el)));
+  let minLevel = 1;
+  if (levels.length) {
+    minLevel = Math.min(...levels.map((el) => Number(el)));
+  } 
   let snippets: string[] = [] ;
   let snippetsFormatted: string[] = [];
   let keywords: string[] = []
@@ -248,6 +231,24 @@ function update_db_adventure(adventure_id: string) {
   }
   // We have to replace <br> for newlines, because the serializer swithces them around
   const formatted_content = html.getElementsByTagName('body')[0].outerHTML.replace(/<br>/g, '\n');
+  return formatted_content
+}
+
+function update_db_adventure(adventure_id: string) {
+  // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
+  const adventure_name = $('#custom_adventure_name').val();
+  const levels = (document.querySelector('#levels_dropdown') as HedySelect).selected
+  const classes = (document.querySelector('#classes_dropdown') as HedySelect).selected
+  const language = (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
+  if(levels.length === 0) {
+    modal.notifyError(ClientMessages['one_level_error']);
+    return;
+  }
+  const content = DOMPurify.sanitize(window.ckEditor.getData());
+  const solutionExampleCode = DOMPurify.sanitize(window.ckSolutionEditor.getData());
+  
+  const formatted_content = get_formatted_content(content, levels, language);
+  const formatted_solution_code = get_formatted_content(solutionExampleCode, levels, language);
   const agree_public = $('#agree_public').prop('checked');
 
   $.ajax({
@@ -258,6 +259,7 @@ function update_db_adventure(adventure_id: string) {
       name: adventure_name,
       content: content,
       formatted_content: formatted_content,
+      formatted_solution_code: formatted_solution_code,
       public: agree_public,
       language,
       classes,
@@ -345,6 +347,21 @@ export function preview_adventure() {
     });
 }
 
+export function delete_adventure(adventure_id: string, prompt: string) {
+  modal.confirm(prompt, function () {
+    $.ajax({
+      type: 'DELETE',
+      url: '/for-teachers/customize-adventure/' + adventure_id,
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function () {
+      window.location.href = '/for-teachers';
+    }).fail(function (err) {
+      modal.notifyError(err.responseText);
+    });
+  });
+}
+
 export function change_password_student(username: string, enter_password: string, password_prompt: string) {
     modal.prompt ( enter_password + " " + username + ":", '', function (password) {
         modal.confirm (password_prompt, function () {
@@ -382,7 +399,7 @@ export function show_doc_section(section_key: string) {
      $("#button-" + section_key).removeClass("green-btn");
      $("#button-" + section_key).addClass("blue-btn");
      $('.section').hide();
-     $ ('.common-mistakes-section').hide ();
+     $ ('.common_mistakes_section').hide ();
      $('#section-' + section_key).toggle();
    }
 }
@@ -423,12 +440,8 @@ export function save_customizations(class_id: string) {
       }),
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function (response) {
-      if (response.achievement) {
-          showAchievements(response.achievement, false, "");
-      }
+    }).done(function (response) {      
       modal.notifySuccess(response.success);
-      clearUnsavedChanges();
       $('#remove_customizations_button').removeClass('hidden');
     }).fail(function (err) {
       modal.notifyError(err.responseText);
@@ -439,13 +452,13 @@ export function restore_customization_to_default(prompt: string) {
     modal.confirm (prompt, async function () {
       // We need to know the current level that is selected by the user
       // so we can know which level to draw in the template  
-      let active_level_id : string = $('[id^=level-]')[0].id;
-      let active_level = active_level_id.split('-')[1]
+      let active_level_id : string = $('[id^=level_]')[0].id;
+      let active_level = active_level_id.split('_')[1]
       try {
         await htmx.ajax(
           'POST',
           `/for-teachers/restore-customizations?level=${active_level}`,
-          '#adventure-dragger'
+          '#adventure_dragger'
         )
         $('.other_settings_checkbox').prop('checked', false);
         // Remove the value from all input fields -> reset to text to show placeholder
@@ -471,7 +484,6 @@ export function restore_customization_to_default(prompt: string) {
 }
 
 export function enable_level(level: string) {
-    markUnsavedChanges();
     if ($('#enable_level_' + level).is(':checked')) {
       $('#opening_date_level_' + level).prop('disabled', false)
                                       .attr('type', 'text')
@@ -485,7 +497,7 @@ export function enable_level(level: string) {
                                        .val('');
     }
 
-    if ($('#level-' + level).is(':visible')) {
+    if ($('#level_' + level).is(':visible')) {
       setLevelStateIndicator(level);
     }
 }
@@ -503,123 +515,180 @@ export function setDateLevelInputColor(level: string) {
                                      .addClass('bg-gray-200')
   }
 
-  if ($('#level-' +  level).is(':visible')) {
+  if ($('#level_' +  level).is(':visible')) {
     setLevelStateIndicator(level);
   }
 }
 
 export function add_account_placeholder() {
-    let row = $("#account_row_unique").clone();
-    row.removeClass('hidden');
-    row.attr('id', "");
-    // Set all inputs except class to required
-    row.find(':input').each(function() {
-       if ($(this).prop('id') != 'classes') {
-           $(this).prop('required', true);
-       }
-    });
-    // Append 5 rows at once
-    for (let x = 0; x < 5; x++) {
-        row.clone().appendTo("#account_rows_container");
+  // Get the hidden row template
+  const rowTemplate = $('#account_row_unique').clone();
+  rowTemplate.removeClass('hidden');
+  rowTemplate.attr('id', "");
+
+  // Function to update data-cy attributes
+  function updateDataCyAttributes(row: JQuery<HTMLElement>, index: number) {
+      row.find('[data-cy]').each(function() {
+          const currentCy = $(this).attr('data-cy');
+          if (currentCy) {
+              const newCy = currentCy.replace(/_\d+$/, `_${index}`);
+              $(this).attr('data-cy', newCy);
+          }
+      });
+  }
+
+  // Get the current number of rows
+  const existingRowsCount = $('.account_row').length;
+
+  // Append 5 rows at once
+  for (let x = 0; x < 5; x++) {
+      const newRow = rowTemplate.clone();
+      updateDataCyAttributes(newRow, existingRowsCount + x + 1);
+      newRow.appendTo("#account_rows_container");
+  }
+}
+
+export function toggleAutoGeneratePasswords() {
+    if ($('#passwords_toggle').is(':checked')) {
+        $('#passwords_toggle_checked_text').show();
+        $('#passwords_toggle_unchecked_text').hide();
+        $('#usernames_title').show();
+        $('#passwords_title').hide();
+        $('#usernames_desc').show();
+        $('#passwords_desc').hide();
+    } else {
+        $('#passwords_toggle_checked_text').hide();
+        $('#passwords_toggle_unchecked_text').show();
+        $('#usernames_title').hide();
+        $('#passwords_title').show();
+        $('#usernames_desc').hide();
+        $('#passwords_desc').show();
     }
 }
 
-export function generate_passwords() {
-    if (!$('#passwords_toggle').is(":checked")) {
-        $('.passwords_input').val('');
-        $('.passwords_input').prop('disabled', false);
-        return;
+export function printAccounts(title: string) {
+    var table = document.getElementById("accounts_table");
+    let newWindow = window.open("")!;
+    const css = `
+    <style>
+      h1 {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
+        margin-left: 20px;
+        color: rgb(44 82 130);
+      }
+
+      #accounts_table {
+        border-collapse: collapse;
+      }
+
+      #accounts_table td, th {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+        font-size: 1.5rem;
+        border: 1px solid gray;
+        color: rgb(44 82 130);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
+        text-align: center;
+      }
+    </style>`;
+    newWindow.document.write(`
+        <div style="display: flex; margin-bottom: 20px;">
+          <img src="/images/hero-graphic/hero-graphic-empty.png" height="100">
+          <h1>${title}</h1>
+        </div>
+    `);
+    newWindow.document.write(table?.outerHTML + css);
+    newWindow.print();
+    newWindow.close();
+}
+
+export function copyAccountsToClipboard(prompt: string) {
+    const selection = window.getSelection();
+    const table = document.getElementById("accounts_table");
+    if (selection && table) {
+        var range = document.createRange();
+        selection.empty();
+        range.selectNode(table);
+        selection.addRange(range)
+        document.execCommand('copy')
+        selection.empty();
+
+        modal.notifySuccess(prompt);
     }
-    $('.account_row').each(function () {
-        if ($(this).is(':visible')) {
-            $(this).find(':input').each(function () {
-                if ($(this).attr('id') == "password") {
-                    const random_password = generateRandomString(6);
-                    $(this).val(random_password);
-                }
-            });
-        }
-    });
-    $('.passwords_input').prop('disabled', true);
 }
 
-export function append_classname() {
-    const classname = <string>$('#classes').val();
-    $('.usernames_input').each(function () {
-        $(this).val($(this).val() + "_" + classname);
-    });
-}
+export function createAccounts(prompt: string) {
+    const accounts = $('#accounts_input').val() as string;
+    const numberOfAccounts = accounts.split('\n').filter(l => l.trim()).length;
+    const updatedPrompt = prompt.replace('{number_of_accounts}', numberOfAccounts.toString());
 
-export function create_accounts(prompt: string) {
-    modal.confirm (prompt, function () {
-        $('#account_rows_container').find(':input').each(function () {
-            $(this).removeClass('border-2 border-red-500');
-            // Not really nice, but this removes the need for re-styling (a lot!)
-            $(this).removeAttr('required');
-        });
-        let accounts: {}[] = [];
-        $('.account_row').each(function () {
-            if ($(this).is(':visible')) { //We want to skip the hidden first "copy" row
-                let account: Record<string, string> = {};
-                $(this).find(':input').each(function () {
-                    account[$(this).attr("name") as string] = $(this).val() as string;
-                });
+    modal.confirm (updatedPrompt, function () {
+        const className = $('#classes').val() as string;
+        const generatePasswords = $('#passwords_toggle').is(":checked") as boolean;
 
-                // Only push an account to the accounts object if it contains data
-                if (account['password'].length !== 0 || account['username'].length !== 0) {
-                    accounts.push(account);
-                }
-            }
-        });
+        setLoadingVisibility(true);
+
         $.ajax({
             type: 'POST',
             url: '/for-teachers/create-accounts',
             data: JSON.stringify({
-                accounts: accounts
+                class: className,
+                generate_passwords: generatePasswords,
+                accounts: accounts,
             }),
-            contentType: 'application/json',
-            dataType: 'json'
+            contentType: 'application/json'
         }).done(function (response) {
-            if (response.error) {
-                modal.notifyError(response.error);
-                $('#account_rows_container').find(':input').each(function () {
-                    if ($(this).val() == response.value) {
-                        $(this).addClass('border-2 border-red-500');
-                    }
-                });
-                return;
-            } else {
-                modal.notifySuccess(response.success);
-                if ($("input[name='download_credentials_checkbox']:checked").val() == "yes") {
-                    download_login_credentials(accounts);
-                }
-                $('#account_rows_container').find(':input').each(function () {
-                   $(this).val("");
-                });
-            }
+
+            setLoadingVisibility(false);
+            $('#accounts_form').hide();
+            $('#create_accounts_title').hide();
+
+            $('#accounts_results').show();
+            $('#accounts_results_title').show();
+            $("tr:has(td)").remove();
+            const accountsHtml = createHtmlForAccountsTable(response['accounts']);
+            $("#accounts_table").append(accountsHtml);
+
         }).fail(function (err) {
+            setLoadingVisibility(false);
+
+            try {
+                // This endpoint has to return error info to direct the user how to fix it
+                const parsed = JSON.parse(err.responseText);
+                if (parsed.error) {
+                    // Note the notification should not be closed automatically
+                    // because it contains feedback about broken records
+                    modal.notifyError(parsed.error, 0);
+                    return;
+                }
+            } catch { }
+            // If the error is simple text (e.g. 'request invalid'), display it to the user
             modal.notifyError(err.responseText);
         });
     });
 }
 
-function download_login_credentials(accounts: any) {
-    // https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
-    let csvContent = "data:text/csv;charset=utf-8,";
-    csvContent += "Username, Password" + "\r\n";
+function createHtmlForAccountsTable(accounts: Array<any>) {
+    let result = ""
+    for (let [index, account] of accounts.entries()) {
+        result += `
+          <tr class="${ index%2 ? 'bg-white' : 'bg-gray-200'} font-mono">
+            <td class="text-center px-4 py-2">hedy.org</td>
+            <td class="text-center px-4 py-2">${account['username']}</td>
+            <td class="text-center px-4 py-2">${account['password']}</td>
+          </tr>`;
+    }
+    return result;
+}
 
-    accounts.forEach(function(account: any) {
-        let row = account.username + "," + account.password;
-        csvContent += row + "\r\n";
-    });
-
-    var encodedUri = encodeURI(csvContent);
-    var link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "accounts.csv");
-    document.body.appendChild(link); // Required for Firefox
-
-    link.click();
+function onCreateAccountsPaste() {
+    // When copying data from Excel, the default column separator is a tab (\t).
+    // So, when text is pasted in the textarea for creating accounts, so we replace tabs with semicolons
+    const accountsInput = $('#accounts_input').val() as string;
+    const newAccounts = accountsInput.replace(/\t/g, ';');
+    $('#accounts_input').val(newAccounts);
 }
 
 export function copy_join_link(link: string, success: string) {
@@ -631,16 +700,6 @@ export function copy_join_link(link: string, success: string) {
     document.execCommand("copy");
     document.body.removeChild(sampleTextarea);
     modal.notifySuccess(success);
-}
-
-// https://onlinewebtutorblog.com/how-to-generate-random-string-in-jquery-javascript/
-function generateRandomString(length: number) {
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (var i = 0; i < length; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
 }
 
 export interface InitializeTeacherPageOptions {
@@ -667,23 +726,36 @@ export function initializeTeacherPage(options: InitializeTeacherPageOptions) {
 }
 
 function setLevelStateIndicator(level: string) {
-  $('[id^=state-]').addClass('hidden');
+  $('[id^=state_]').addClass('hidden');
 
   if ($('#opening_date_level_' + level).is(':disabled')) {
-    $('#state-disabled').removeClass('hidden');
+    $('#state_disabled').removeClass('hidden');
   } else if($('#opening_date_level_' + level).val() === ''){
-    $('#state-accessible').removeClass('hidden');
+    $('#state_accessible').removeClass('hidden');
   } else {
     var date_string : string = $('#opening_date_level_' + level).val() as string;
     var input_date = new Date(date_string);
     var today_date = new Date();
     if (input_date > today_date) {
       $('#opening_date').text(date_string);
-      $('#state-future').removeClass('hidden');
+      $('#state_future').removeClass('hidden');
     } else {
-      $('#state-accessible').removeClass('hidden');
+      $('#state_accessible').removeClass('hidden');
     }
   }
+}
+
+export interface InitializeCreateAccountsPageOptions {
+  readonly page: 'create-accounts';
+}
+
+export function initializeCreateAccountsPage(_options: InitializeCreateAccountsPageOptions) {
+  const accountsInput = document.getElementById("accounts_input") as HTMLFormElement;
+  // Apparently we need the setTimeout to get the whole text of the textarea because the event provides only
+  // the text that was in the clipboard which does not work in if the user is appending text and not replacing it.
+  accountsInput?.addEventListener('paste', function() {
+      window.setTimeout(onCreateAccountsPaste, 100);
+  });
 }
 
 export interface InitializeCustomizeClassPageOptions {
@@ -693,31 +765,15 @@ export interface InitializeCustomizeClassPageOptions {
 
 export function initializeCustomizeClassPage(options: InitializeCustomizeClassPageOptions) {
   $(document).ready(function(){
-      // Use this to make sure that we return a prompt when a user leaves the page without saving
-      $( "input" ).on('change', function() {
-        markUnsavedChanges();
-      });
-
       $('#back_to_class').on('click', () => {
-        function backToClass() {
-            window.location.href = `/for-teachers/class/${options.class_id}`;
-        }
-
-        if (hasUnsavedChanges()) {
-            modal.confirm(ClientMessages.unsaved_class_changes, () => {
-                clearUnsavedChanges();
-                backToClass();
-            });
-        } else {
-            backToClass();
-        }
+        window.location.href = `/for-teachers/class/${options.class_id}`;
       });
 
       $('[id^=opening_date_level_]').each(function() {
         setDateLevelInputColor($(this).attr('level')!);
       })
 
-      $('#levels-dropdown').on('change', function(){
+      $('#levels_dropdown').on('change', function(){
           var level = $(this).val() as string;
           setLevelStateIndicator(level);
       });
@@ -725,7 +781,7 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
       // Autosave customize class page
       // the third argument is used to trigger a GET request on the specified element
       // if the trigger (input in this case) is changed.
-      autoSave("customize_class", null, {elementId: "levels-dropdown", trigger: "input"});
+      autoSave("customize_class", null, {elementId: "levels_dropdown", trigger: "input"});
 
   });
 }
@@ -735,17 +791,186 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
  */
 export interface InitializeClassOverviewPageOptions {
   readonly page: 'class-overview';
+  readonly graph_students: student[];
+  readonly level: number;
 }
 
 export function initializeClassOverviewPage(_options: InitializeClassOverviewPageOptions) {
-  $('.attribute').change(function() {
+  $('.attribute').change(function () {
     const attribute = $(this).attr('id');
-    if(!(this as HTMLInputElement).checked) {
-        $('#' + attribute + '_header').hide();
-        $('.' + attribute + '_cell').hide();
+    if (!(this as HTMLInputElement).checked) {
+      $('#' + attribute + '_header').hide();
+      $('.' + attribute + '_cell').hide();
     } else {
-        $('#' + attribute + '_header').show();
-        $('.' + attribute + '_cell').show();
+      $('#' + attribute + '_header').show();
+      $('.' + attribute + '_cell').show();
     }
+  });
+
+  initializeGraph()
+  // An ugly hack, but if someone goes back trhough the page, the cache
+  // causes the old version of the page to be shown
+  // So we hard reload it
+  window.addEventListener( "pageshow", function ( event ) {
+    var historyTraversal = event.persisted || 
+                           ( typeof window.performance != "undefined" && 
+                                window.performance.navigation.type === 2 );
+    if ( historyTraversal ) {
+      window.location.href = window.location.href
+    }
+  });
+}
+
+interface InitializeGraphOptions {
+  readonly graph_students: student[];
+  readonly level: number
+}
+
+interface student { 
+  adventures_tried: number,
+  number_of_errors: number,
+  successful_runs: number,
+  username: string,
+}
+
+interface dataPoint {
+  x: number,
+  y: number,
+  r: number,
+  successful_runs: number,
+  name: string
+}
+
+export function initializeGraph() {
+  const graphElement = document.getElementById('adventure_bubble') as HTMLCanvasElement
+  if (graphElement === undefined || graphElement === null) return;
+  const graphData: InitializeGraphOptions = JSON.parse(graphElement.dataset['graph'] || '') ;
+  
+  const students = graphData.graph_students
+  let data: dataPoint[] = students.map((student: student) => {    
+    let radius;
+    
+    if (student.successful_runs < 7)        radius = 7;
+    else if (student.successful_runs > 300) radius = 300;
+    else                                    radius = student.successful_runs;
+
+    return {
+      x: student.adventures_tried,
+      y: student.number_of_errors,
+      r: radius,
+      successful_runs: student.successful_runs,
+      name: student.username
+    }
+  });
+  new Chart(
+    graphElement,
+    {
+      type: 'bubble',
+      data: {
+        datasets: [
+          {
+            backgroundColor: '#c9dded',
+            borderColor: '#35a4ff',
+            data: data,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        onHover: (event, chartElement) => {
+          //@ts-ignore
+          event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default'
+        },
+        interaction: {
+          mode: 'point'
+        },
+        onClick: (_e, activePoints, chart) => {
+          if (activePoints.length === 0) return;
+          const item: dataPoint = chart.data.datasets[0].data[activePoints[0].index] as dataPoint
+          for(const point of activePoints) {
+            console.log(chart.data.datasets[0].data[point.index])
+          }
+          document.getElementById('programs_container')?.classList.remove('hidden')
+          htmx.ajax(
+            'GET',
+            `/for-teachers/get_student_programs/${item.name}`,
+            '#programs_container'
+          )
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: ClientMessages['adventures_tried'],
+              font: {
+                size: 15
+              }
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: ClientMessages['errors'],
+              font: {
+                size: 15
+              }
+            }
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: ClientMessages['graph_title'].replace('{level}', graphData.level.toString()),
+            font: {
+              size: 19
+            }
+          },
+          legend: {
+            display: false
+          },
+          tooltip: {
+            displayColors: false,
+            callbacks: {
+              title: (tooltipItems) => {
+                // A single point can have 2 data points associated.
+                const names = tooltipItems.map((currentValue) => {
+                  const item: dataPoint = currentValue.dataset.data[currentValue.dataIndex] as dataPoint
+                  return item.name
+                })
+                return names.join(', ')
+              },
+              label: (tooltipItem) => {
+                const item: dataPoint = tooltipItem.dataset.data[tooltipItem.dataIndex] as dataPoint
+                return [
+                  ClientMessages['adventures_completed'].replace('{number_of_adventures}', item.x.toString()),
+                  ClientMessages['number_of_errors'].replace('{number_of_errors}', item.y.toString()),
+                  ClientMessages['successful_runs'].replace('{successful_runs}', item.successful_runs.toString())
+                ]
+              }
+            }
+          }
+        }
+      },
+    }
+  );
+}
+
+export function invite_support_teacher(requester: string) {
+  modal.prompt(`Invite a teacher to support ${requester}.`, '', function (username) {
+    $.ajax({
+        type: 'POST',
+        url: "/super-teacher/invite-support",
+        data: JSON.stringify({
+          sourceUser: requester,
+          targetUser: username,
+        }),
+        contentType: 'application/json',
+        dataType: 'json'
+    }).done(function() {
+        location.reload();
+    }).fail(function(err) {
+        modal.notifyError(err.responseText);
+    });
   });
 }

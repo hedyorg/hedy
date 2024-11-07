@@ -5,7 +5,7 @@ _DEF: ("定义函数" | "def") _SPACE?
 _RETURN: ("返回" | "return") _SPACE?
 _PRINT: ("打印" | "print") _SPACE?
 _PLAY: ("运行" | "play") _SPACE
-_ASK: ("提问" | "ask") _SPACE?
+_ASK: ("提问" | "ask")
 _ECHO: ("回声" | "echo") _SPACE?
 _FORWARD: ("向前" | "forward") _SPACE?
 _TURN: ("旋转" | "turn") _SPACE?
@@ -26,9 +26,9 @@ _IS: _SPACE ("是" | "is") _SPACE
 _STANDALONE_IS: ("是" | "is")
 _SLEEP: ("睡眠" | "sleep") _SPACE?
 _ADD_LIST: ("加" | "add") _SPACE
-_TO_LIST: _SPACE ("到" | "to") _SPACE
+_TO_LIST: _SPACE? ("到" | "to")
 _REMOVE: ("移除" | "remove") _SPACE
-_FROM: _SPACE ("从" | "from") _SPACE
+_FROM: _SPACE? ("从" | "from")
 _AT: _SPACE ("在" | "at") _SPACE
 random: ("随机" | "random") _SPACE?
 _IN: _SPACE ("在里面" | "in") _SPACE
@@ -49,5 +49,6 @@ _WHILE: ("当" | "while") _SPACE
 _LENGTH: "长度" | "length"
 _COLOR : ("颜色" | "color") _SPACE?
 _PRESSED: ("按下" | "pressed") _SPACE?
-_BUTTON: ("按键" | "button") _SPACE?
 clear: ("清除" | "clear") _SPACE?
+TRUE: ("true" | "True" | "true" | "True") _SPACE?
+FALSE: ("false" | "False" | "false" | "False") _SPACE?

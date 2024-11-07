@@ -38,7 +38,28 @@ class TestsLevel1(HedyTester):
             expected=expected,
             output=output,
             expected_commands=expected_commands
+        )
 
+    def test_print_number(self):
+        code = "print 10"
+        expected = "print('10')"
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output='10',
+            expected_commands=[Command.print]
+        )
+
+    def test_print_number_arabic(self):
+        code = "print ١١"
+        expected = "print('١١')"
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output='١١',
+            expected_commands=[Command.print]
         )
 
     def test_print_no_space(self):
@@ -230,6 +251,19 @@ class TestsLevel1(HedyTester):
 
         self.single_level_tester(code=code, expected=expected, output=output, lang='ar')
 
+    def test_print_microbit(self):
+        code = "print a"
+        expected = "display.scroll('a')"
+
+        self.multi_level_tester(
+            code=code,
+            translate=False,
+            skip_faulty=False,
+            expected=expected,
+            max_level=3,
+            microbit=True
+        )
+
     #
     # ask tests
     #
@@ -286,9 +320,24 @@ class TestsLevel1(HedyTester):
             translate=False  # we are trying a Dutch keyword in en, can't be translated
         )
 
+    def test_ask_number(self):
+        code = "ask 42"
+        expected = "answer = input('42')"
+
+        self.single_level_tester(code=code, expected=expected)
+
+    def test_ask_arabic_number(self):
+        code = "ask ٢٣٤"
+        expected = "answer = input('٢٣٤')"
+
+        self.single_level_tester(code=code, expected=expected)
+
+    #
+    # play tests
+    #
     def test_play_no_args(self):
         code = "play "
-        expected = self.play_transpiled('C4')
+        expected = self.play_transpiled("'C4'")
 
         self.multi_level_tester(
             code=code,
@@ -299,7 +348,7 @@ class TestsLevel1(HedyTester):
 
     def test_play(self):
         code = "play A"
-        expected = self.play_transpiled('A')
+        expected = self.play_transpiled("'A'")
 
         self.multi_level_tester(
             code=code,
@@ -307,23 +356,9 @@ class TestsLevel1(HedyTester):
             expected=expected
         )
 
-    def test_print_microbit(self):
-        code = "print a"
-        expected = textwrap.dedent(f"""\
-                display.scroll('a')""")
-
-        self.multi_level_tester(
-            code=code,
-            translate=False,
-            skip_faulty=False,
-            expected=expected,
-            max_level=3,
-            microbit=True
-        )
-
     def test_play_lowercase(self):
         code = "play a"
-        expected = self.play_transpiled('A')
+        expected = self.play_transpiled("'A'")
 
         self.multi_level_tester(
             code=code,
@@ -333,13 +368,15 @@ class TestsLevel1(HedyTester):
 
     def test_play_int(self):
         code = "play 34"
-        expected = self.play_transpiled(34)
+        expected = self.play_transpiled("'34'")
 
-        self.multi_level_tester(
-            code=code,
-            translate=False,
-            expected=expected
-        )
+        self.multi_level_tester(code=code, expected=expected)
+
+    def test_play_int_arabic(self):
+        code = "play ١١"
+        expected = self.play_transpiled("'١١'")
+
+        self.multi_level_tester(code=code, expected=expected)
 
     def test_mixes_languages_nl_en(self):
         code = textwrap.dedent("""\
@@ -387,7 +424,7 @@ class TestsLevel1(HedyTester):
     #
     def test_forward(self):
         code = "forward 50"
-        expected = HedyTester.dedent(HedyTester.forward_transpiled(50, self.level))
+        expected = self.forward_transpiled(50)
 
         self.multi_level_tester(
             code=code,
@@ -398,7 +435,7 @@ class TestsLevel1(HedyTester):
 
     def test_forward_arabic_numeral(self):
         code = "forward ١١١١١١١"
-        expected = HedyTester.forward_transpiled(1111111, self.level)
+        expected = self.forward_transpiled(1111111)
 
         self.multi_level_tester(
             code=code,
@@ -409,7 +446,7 @@ class TestsLevel1(HedyTester):
 
     def test_forward_hindi_numeral(self):
         code = "forward ५५५"
-        expected = HedyTester.forward_transpiled(555, self.level)
+        expected = self.forward_transpiled(555)
 
         self.multi_level_tester(
             code=code,
@@ -482,7 +519,7 @@ class TestsLevel1(HedyTester):
         self.single_level_tester(code=code, expected=expected,
                                  extra_check_function=self.is_turtle())
 
-    def test_one_color_purple_nl(self):
+    def test_one_color_nl(self):
         code = "kleur paars"
         expected = "t.pencolor('purple')"
 
@@ -534,7 +571,6 @@ class TestsLevel1(HedyTester):
         )
 
     def test_turn_ar(self):
-        # doesn't translate, I don't know why!!
         code = "استدر يسار"
         expected = "t.left(90)"
 
@@ -615,10 +651,10 @@ class TestsLevel1(HedyTester):
             turn
             forward 100""")
 
-        expected = HedyTester.dedent(
-            HedyTester.forward_transpiled(50, self.level),
+        expected = self.dedent(
+            self.forward_transpiled(50),
             't.right(90)',
-            HedyTester.forward_transpiled(100, self.level))
+            self.forward_transpiled(100))
 
         self.multi_level_tester(
             code=code,
@@ -854,19 +890,16 @@ class TestsLevel1(HedyTester):
 
     def test_source_map(self):
         code = textwrap.dedent("""\
-        print Hallo welkom bij Hedy!
-        forward 50
-        ask Wat is je lievelingskleur
-        echo je lievelingskleur is""")
+            print Hallo welkom bij Hedy!
+            forward 50
+            ask Wat is je lievelingskleur
+            echo je lievelingskleur is""")
 
-        expected_code = HedyTester.dedent(f"""\
-        print('Hallo welkom bij Hedy!')
-        {HedyTester.indent(
-            HedyTester.forward_transpiled(50, self.level),
-            8, True)
-         }
-        answer = input('Wat is je lievelingskleur')
-        print('je lievelingskleur is '+answer)""")
+        expected_code = self.dedent(
+            "print('Hallo welkom bij Hedy!')",
+            self.forward_transpiled(50),
+            "answer = input('Wat is je lievelingskleur')",
+            "print('je lievelingskleur is '+answer)")
 
         expected_source_map = {
             '1/1-1/29': '1/1-1/32',
@@ -901,8 +934,8 @@ templates = [
 def valid_permutation(lines):
     orders = [order for _, order in lines]
     significant_orders = [x for x in orders if x > 0]  # -1 may be placed everywhere
-    list = [significant_orders[i] <= significant_orders[i+1] for i in range(len(significant_orders)-1)]
-    return all(list)
+    list_ = [significant_orders[i] <= significant_orders[i+1] for i in range(len(significant_orders)-1)]
+    return all(list_)
 
 
 class TestsHypothesisLevel1(HedyTester):

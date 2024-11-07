@@ -43,9 +43,6 @@ levels:
         9:
             header: Programmeren met Hedy
             text: De uitvoer kan ook een tekening zijn.
-            code: |-
-                {forward} 100
-                {turn} {left}
     1:
         1:
             header: Welkom bij level 1!
@@ -79,7 +76,6 @@ levels:
                 {print} Welkom bij je eigen steen papier schaar!
                 {ask} Wat is je keuze?
         5:
-            header: '{echo}'
             text: |-
                 Zoals je kon zien in het vorige voorbeeld. Als je het `{ask}` commando gebruikt kun je een vraag stellen.
                 Alleen wordt het antwoord niet gepresenteerd in het uitvoer scherm.
@@ -95,7 +91,6 @@ levels:
             text: |-
                 Met `{print}`, `{ask}` en `{echo}` kun je al een klein verhaal programmeren.
                 Dit is een goed moment om de Papegaai, Verhaal en Steen, Papier, Schaar avonturen te proberen.
-            editor: /hedy/1
         7:
             header: Programmeren maar!
             text: Avonturen worden in tabjes getoond.
@@ -110,13 +105,9 @@ levels:
         10:
             header: 'Tekenen met de schildpad: {forward}'
             text: '`{forward}` wordt gebruikt om de schildpad naar voren te bewegen.'
-            code: '{forward} 50'
         11:
             header: 'Tekenen met de schildpad: {turn}'
             text: '`{turn}` wordt gebruikt om de schildpad links of rechtsom te laten draaien.'
-            code: |-
-                {forward} 50
-                {turn} {left}
         12:
             header: Debugging (foutzoeken)
             text: Debugging van de code betekent het oplossen van fouten in de code. Laten we deze code samen debuggen. Klik op de ladybug knop (lieveheersbeestje) om de debugger te starten.
@@ -337,7 +328,6 @@ levels:
                 kleuren {is} 'oranje, zilver, wit, bruin'
                 {print} 'Ik houd van kleuren {at} {random} !'
                 keuze {is} {ask} Welke kleur vind jij mooi?
-            debug: 'True'
         11:
             header: Klaar voor de start? Af!
             text: Veel plezier met de avonturen in level 4!
@@ -360,7 +350,6 @@ levels:
                 Als je een `{if}` commando gebruikt, vergeet dan niet om ook een `{print}` commando te gebruiken.
                 Deze code werkt niet!
             code: '{if} naam {is} Hedy ''leuk'''
-            debug: 'True'
         4:
             header: '{else}'
             text: |-
@@ -406,7 +395,6 @@ levels:
                 aangeef_voorwerp {is} {ask} 'Wat wilt U aangeven'
                 {else} OK
                 {print} Dank U. Gaat U naar gate A22 alstublieft.'
-            debug: 'True'
         8:
             header: Werken maar!
             text: Veel plezier met de avonturen in level 5!
@@ -417,11 +405,9 @@ levels:
         2:
             header: Optellen
             text: Wil je optellen, dan gebruik je het plusteken.
-            code: '{print} ''5 plus 5 is '' 5 + 5'
         3:
             header: Aftrekken
             text: Wil je twee getallen van elkaar aftrekken, gebruik dan het minteken.
-            code: '{print} ''5 minus 5 is '' 5 - 5'
         4:
             header: Vermenigvuldigen
             text: Wil je vermenigvuldigen, gebruik dan het sterretje.
@@ -471,7 +457,6 @@ levels:
                 {if} dag {is} maandag
                 totaal = total_price * 0.25
                 {print} 'Totaal prijs is totaal'
-            debug: 'True'
         10:
             header: Aan de slag!
             text: Veel plezier met de avonturen in level 6!
@@ -493,8 +478,6 @@ levels:
         3:
             header: Vergeet print niet
             text: Als je {repeat} gebruikt, vergeet dan {print} niet.
-            code: '{repeat} 5 {times} ''Help!'''
-            debug: 'True'
         4:
             header: '{repeat} met {ask}'
             text: Je kunt {repeat} ook gebruiken met `{ask}`, `{if}` of `{else}`.
@@ -516,7 +499,6 @@ levels:
                 {if} ja
                 {print} 'Hoera!
                 {else} 'Dat is jammer.. Nou ja... tijd om een hut te bouwen en wat eten te zoeken.'
-            debug: 'True'
         6:
             header: Klaar voor de start? Af!
             text: Veel plezier met de avonturen in level 7!
@@ -530,8 +512,6 @@ levels:
                 Voor dit level zag `{repeat}` er zo uit:
 
                 Je kon het maar gebruiken over 1 regel.
-            code: '{repeat} 5 {times} {print} ''Help!'''
-            debug: 'True'
         3:
             header: '{repeat} nu'
             text: |-
@@ -560,7 +540,6 @@ levels:
             code: |-
                 {if} naam {is} Hedy {print} 'leuk'
                 {else} {print} 'minder leuk!'
-            debug: 'True'
         6:
             header: '{if} en {else} nu'
             text: |-
@@ -603,7 +582,6 @@ levels:
                         {print} Je koos voor een retour ticket'
                 prijs * 2
                 {print} 'Dat wordt dan ' prijs ' euro alstublieft'
-            debug: 'True'
         10:
             header: Op naar de avonturen!
             text: Veel plezier met de avonturen in level 8!
@@ -695,7 +673,6 @@ levels:
                 {else}
                 {print} 'Gaaf!'
                 {print} 'Bedankt voor het invullen allemaal! Veel plezier vandaag!'
-            debug: 'True'
         9:
             header: Doen!
             text: Veel plezier met de avonturen in level 9!
@@ -732,7 +709,6 @@ levels:
                 {add} gekozen_persoon {from} mensen
                 {print} 'Komt dat zien! Alleen vanavond!'
                 {print} 'Laatste tickets verkrijgbaar aan de kassa
-            debug: 'True'
         5:
             header: Programmeertijd!
             text: Veel plezier met de avonturen in level 10!
@@ -754,10 +730,6 @@ levels:
                 Je kunt een variabele natuurlijk alle namen geven die je wil.
                 In Python is de standaard naam die in deze situatie voor variabelen gebruikt wordt 'i'.
                 Dat ziet er zo uit:
-            code: |-
-                number = 10
-                {for} i {in} {range} 1 {to} 10
-                    {print} i * number
         4:
             header: Debugging (foutzoeken)
             text: Laten we deze code debuggen!
@@ -766,7 +738,6 @@ levels:
                 {repeat} {for} nummers {in} {range} 1 {to} 10 {times}
                     {print} Dit is de tafel van factor
                     {print} nummer ' x ' factor ' = ' i * factor
-            debug: 'True'
         5:
             header: Lekker programmeren!
             text: Veel plezier met de avonturen in level 11!
@@ -831,7 +802,6 @@ levels:
                 {call} nieuw lid
                     {else}
                         wachtwoord = {ask} 'Voer je wachtwoord in'
-            debug: 'True'
         8:
             header: Klaar om het te gaan proberen?
             text: Veel plezier met de avonturen in level 12!
@@ -935,7 +905,6 @@ levels:
                     {call} blijdschap {with} persoon
                 {else} gevoel = verdrietig
                     {define} verdriet {to} naam
-            debug: 'True'
         9:
             header: Doen!
             text: Veel plezier met de avonturen in level 13!
@@ -1017,7 +986,6 @@ levels:
                     {print} 'Jammer... ik koop het niet'
                 {else}
                     {print} 'Ik koop het! Bedankt!'
-            debug: 'True'
         7:
             header: Aan het werk!!
             text: Veel plezier met de avonturen in level 14!
@@ -1026,7 +994,6 @@ levels:
             header: Welkom bij level 15
             text: In dit level leer je over de `{while}` lus.
         2:
-            header: '{while}'
             text: |-
                 Nu gaan we een nieuwe lus leren: De {while} lus! We gaan door zo lang het statement dat we hebben waar is. Vergeet dus niet in de loop de waarde te veranderen.
 
@@ -1037,7 +1004,6 @@ levels:
                     answer = {ask} 'Hoeveel is 5 maal 5?'
                 {print} 'Je antwoord is goed'
         3:
-            header: Debugging
             text: Laten we deze code debuggen!
             code: |-
                 getallen = 1, 2
@@ -1060,8 +1026,6 @@ levels:
                     {else} antwoord = random_getal
                         {print} 'Goedzo! Je hebt het geraden'
                         gokjes = 10
-
-            debug: 'True'
         4:
             header: Proberen maar!
             text: Veel plezier met de avonturen in level 15!
@@ -1082,7 +1046,6 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                     {print} vrienden[i] 'zijn geluks nummer is ' geluks_nummers[i]
         3:
-            header: Debugging
             text: Laten we deze code debuggen!
             code: |-
                 {print} 'Test je vriendschap'
@@ -1113,7 +1076,6 @@ levels:
                     {print} 'Dat kan beter'
                 {else} score < 50
                     {print} 'Jij noemt jezelf een vriend(in)?!'
-            debug: 'True'
         4:
             header: Proberen maar!
             text: Veel plezier met de avonturen in level 16!
@@ -1141,12 +1103,11 @@ levels:
                 {print} 'Je wint ' jouw_prijs
                 {if} jouw_prijs== '1 miljoen' :
                     {print} 'Yess! Je bent rijk!'
-                {elif} your_price == 'een appeltaart' :
+                {elif} jouw_prijs == 'een appeltaart' :
                     {print} 'Heerlijk, een appeltaart!'
                 {else}:
                     {print} 'Meer geluk volgende keer..'
         4:
-            header: Debugging
             text: Laten we deze code debuggen!
             code: |-
                 {define} vraag_richting
@@ -1166,7 +1127,6 @@ levels:
                     {sleep}
                     doorspelen = 'Wil je nog iets tekenen?'
                     {sleep}
-            debug: 'True'
         5:
             header: Aan het werk!
             text: Veel plezier met de avonturen in level 17!
@@ -1184,7 +1144,6 @@ levels:
                 Tot slot moeten we het commando {ask} veranderen in {input}.
 
                 Klik op het tabje '{print}' voor alle voorbeelden.
-            editor: /hedy/18
         3:
             header: De laatste avonturen!
             text: Veel plezier bij de laatste avonturen in level 18!

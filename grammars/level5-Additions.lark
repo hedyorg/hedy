@@ -4,21 +4,18 @@ _empty_program: (_EOL | _SPACE)*
 _non_empty_program: _EOL* (command | error_invalid) _SPACE* (_EOL+ command _SPACE*)* _EOL* //lines may end on spaces and might be separated by many newlines
 
 //placing assign after print means print is will print 'is' and print is Felienne will print 'is Felienne'
-command: += assign_button | if_pressed_else | error_if_pressed_missing_else | if_pressed_without_else | ifelse | ifs | error_else_no_if -= error_invalid >> assign
-_if_less_command: print | ask | play | turtle | assign_button | assign_list | add | remove | sleep | error_print_no_quotes | assign
+command: += if_pressed_else | error_if_pressed_missing_else | if_pressed_without_else | ifelse | ifs | error_else_no_if -= error_invalid >> assign
+_if_less_command: print | ask | play | turtle | assign_list | add | remove | sleep | error_print_no_quotes | assign
 
 // error_invalid is moved from to command to program, so that command rules have priority over error_invalid
 // We give the error_invalid rule below a priority of -100,
 // just to be sure that if Lark tries to resolve ambiguity, error_invalid will be considered last
 error_invalid.-100: textwithoutspaces _SPACE* (quoted_text | textwithspaces)?
 
-//todo: list_access_var can be merged with var? would simplify rewriting a bit, some duplication now in processing
-list_access_var: var _IS var _AT (INT | random)
-assign_button: NAME _IS _BUTTON
 assign_list: var _IS textwithspaces (_COMMA textwithspaces)+
 assign: var _IS (list_access | textwithspaces)
 
-error_print_no_quotes: _PRINT (textwithoutspaces | list_access | var_access) (_SPACE (textwithoutspaces | list_access | var_access))*  -> error_print_nq
+error_print_no_quotes: _PRINT (textwithoutspaces | list_access | var_access) (_SPACE (textwithoutspaces | list_access | var_access))* -> error_print_nq
 
 // new commands for level 5
 if_pressed_else: _IF (LETTER_OR_NUMERAL | var) _IS _PRESSED _EOL* _if_less_command (_SPACE+ _EOL* | _SPACE* _EOL+) _ELSE (_SPACE+ _EOL* | _SPACE* _EOL+) _if_less_command
@@ -36,17 +33,22 @@ condition_spaces: textwithoutspaces _IS textwithoutspaces (_SPACE textwithoutspa
 condition: equality_check | in_list_check | not_in_list_check
 equality_check: (textwithoutspaces | INT) _IS (quoted_text | textwithoutspaces | INT) //TODO FH nov 2021: not super pretty that this is textwithoutquotes for both a var and also a textual constant, level 12 handles this nicer now, could be done here too
 
-
 in_list_check: textwithoutspaces _IN var_access
 not_in_list_check: textwithoutspaces _NOT_IN var_access
 
 nospace: /[^\n, ]/
 
-textwithspaces: /(?:[^#\n،,，、 ]| (?!else|başka|faese|अन्यथा|否则|muuten|muidu|senão|ellers|alie|altfel|иначе|inače|altrimenti|інакше|lainnya|arall|annars|değilse|anders|ndryshe|inaczej|sinon|ไม่อย่างนั้น|sonst|లేకపోతే|sino|ورنہ|وکھرا|אחרת|وإلا))+/ -> text //anything can be parsed except for a newline and a comma for list separators
-//a space is allowed, but it may not be followed by an else. The part " (?!else))" means space not followed by (negative look ahead) else
-//That is because allowing else in strings leads to issue #303
-textwithoutspaces: /(?:[^#\n،,，、 *+\-\/eidіиlలేไamfnsbअ否אو]|א(?!חרת )|و(?!إلا |کھرا |رنہ)|否(?!则 )|अ(?!न्यथा )|и(?!наче )|m(?!uidu |uuten )|d(?!eğilse )|b(?!aşka )|n(?!dryshe )|ไ(?!ม่อย่างนั้น )|l(?!ainnya )|f(?!aese )|e(?!lse |llers )|s(?!inon |enão |ino |onst )|і(?!накше )|i(?!naczej |nače )|లే (?!కపోతే )|a(?!nders |lie |ltfel |ltrimenti |nnars |rall ))+/ _END_BLOCK* -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
-//the part e(?!lse)|i(?!f)) means e not followed by lse, and i not followed by f
-// this is because allowing else and if in invalid leads to ambiguity in the grammar
-// note that the i's look similar but are not: inaczej versus інакше!
+// A space is allowed, but it may not be followed by an else.
+// The '<expand_keyword else>' part will be processed to all values of the else keyword for the given language.
+// The ' (?!...)" is a negative look ahead and means space not followed by an 'else'
+// This is required because allowing 'else' in strings leads to issue #303
+textwithspaces: /(?:[^#\n،,，、 ]| (?!<expand_keyword else>))+/ -> text
 
+// Exactly like textwithspaces, but a space not allowed at its end
+textwithinnerspaces: /(?:[^#\n،,，、 ]| (?!<expand_keyword else>))*[^#\n،,，、 ]/ -> text
+
+// The keyword 'else' is not allowed because it leads to ambiguity in the grammar
+// The '<expand_keyword_first else>' part will be processed to all first letters of the the else keyword for the given language, e.g. 'ea', 'ei', 'eи'
+// The '<expand_keyword_not_followed_by_space else>' part will be processed to the first letter followed by a negative look ahead of the rest of the keyword and space.
+// For example, 'e(?!lse |llers )' for Danish and `e(?!lse )|и(?!наче)` for Bulgarian. It means that 'e' cannot be followed by 'lse ' or 'llers ' and that 'и' cannot be followed by 'наче '.
+textwithoutspaces: /(?:[^#\n،,，、 *+\-\/<expand_keyword_first else>]|<expand_keyword_not_followed_by_space else>)+/ _END_BLOCK* -> text

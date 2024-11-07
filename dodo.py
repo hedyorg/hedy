@@ -103,10 +103,11 @@ def task_tailwind():
     return dict(
         file_dep=[
             *glob('templates/**/*.html'),
+            *glob('templates/*.html'),
             *glob('main/**/*.md'),
             *glob('content/**/*.md'),
             # exclude files generated for translations
-            *[file for file in glob('static/js/*.ts') if file not in \
+            *[file for file in glob('static/js/*.ts') if file not in
                 ['static/js/message-translations.ts', 'static/js/client-messages.ts']
               ],
             'build-tools/heroku/tailwind/styles.css',
@@ -317,6 +318,24 @@ def task_extract():
     )
 
 
+def task_generate_optional_yaml_schemas():
+    """
+    Generate yaml schemas with all fields optional
+    """
+    schemas = glob('content/*/*.schema.json')
+
+    return dict(
+        title=lambda _: 'Generate optional yaml schemas',
+        file_dep=[
+            'tools/generate-yaml-schemas.py',
+            *schemas
+        ],
+        actions=[
+            [python3, 'tools/generate-yaml-schemas.py']
+        ]
+    )
+
+
 def task_devserver():
     """Run a copy of the development server.
 
@@ -371,6 +390,7 @@ def task_backend():
     return dict(
         actions=None,
         task_dep=[
+            'generate_optional_yaml_schemas',
             'compile_babel',
             'generate_static_babel_content',
             'lark',

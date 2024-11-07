@@ -4,7 +4,6 @@ import collections
 import random
 import json
 import re
-import urllib.parse
 from http.cookies import SimpleCookie
 
 # *** LIBRARIES ***
@@ -108,7 +107,7 @@ class AuthHelper(unittest.TestCase):
         body = {
             'username': username,
             'email': username + '@hedy.com',
-            'language': 'nl',
+            'language': 'en',
             'keyword_language': 'en',
             'agree_terms': 'yes',
             'password': 'foobar',
@@ -170,7 +169,15 @@ class AuthHelper(unittest.TestCase):
 
         Need to log in again to refresh the session.
         """
-        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
+        self.post_data('admin/mark-as-teacher/' + self.username, {'is_teacher': True})
+        return self.login_user(self.username)
+
+    def make_current_user_super_teacher(self):
+        """Mark the current user as super-teacher.
+
+        Need to log in again to refresh the session.
+        """
+        self.post_data('admin/mark-super-teacher/' + self.username, {})
         return self.login_user(self.username)
 
     def given_user_is_logged_in(self):
@@ -272,60 +279,6 @@ class TestPages(AuthHelper):
         self.get_data('/cheatsheet/123', expect_http_code=404)
         self.get_data('/cheatsheet/panda', expect_http_code=404)
 
-    def test_highscore_pages(self):
-        # WHEN trying all languages to reach the highscore page
-        # THEN receive an OK response from the server
-        self.given_fresh_user_is_logged_in()
-        body = {'email': self.user['email'], 'keyword_language': self.user['keyword_language']}
-
-        for language in ALL_LANGUAGES.keys():
-            body['language'] = language
-            self.post_data('profile', body)
-            self.get_data("/highscores")
-
-    def test_valid_country_highscore_page(self):
-        # WHEN trying to reach the highscores page for a country with a profile country
-        # THEN receive an OK response from the server
-        self.given_fresh_user_is_logged_in()
-
-        # Add a country to the user profile
-        body = {
-            'email': self.user['email'],
-            'language': self.user['language'],
-            'keyword_language': self.user['keyword_language'],
-            'country': 'NL'
-        }
-        self.post_data('profile', body)
-
-        # Receive a valid response
-        self.get_data("/highscores/country")
-
-    def test_invalid_country_highscore_page(self):
-        # WHEN trying to reach the highscores page for a country without a profile country
-        # THEN receive an error response from the server
-        self.given_fresh_user_is_logged_in()
-        self.get_data("/highscores/country", expect_http_code=403)
-
-    def test_valid_class_highscore_page(self):
-        # WHEN a teacher is logged in and create a class
-        self.given_teacher_is_logged_in()
-        self.post_data('class', {'name': 'class1'})
-        Class = self.get_data('classes')[0]
-
-        # THEN a fresh user logs in and joins this class
-        self.given_fresh_user_is_logged_in()
-        self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
-
-        # THEN we can access the class highscore page
-        self.get_data("/highscores/class")
-
-    def test_invalid_class_highscore_page(self):
-        # WHEN a fresh user is not in a class
-        self.given_fresh_user_is_logged_in()
-
-        # THEN we can can't access the class highscore page
-        self.get_data("/highscores/class", expect_http_code=403)
-
     def test_valid_program_filtering_page(self):
         # WHEN a fresh user
         self.given_fresh_user_is_logged_in()
@@ -361,12 +314,10 @@ class TestPages(AuthHelper):
         pages = [
             '/',
             '/hedy',
-            '/landing-page',
             '/tutorial',
             '/explore',
             '/learn-more',
             '/programs',
-            '/my-achievements',
             '/my-profile']
 
         for language in ALL_LANGUAGES.keys():
@@ -403,7 +354,7 @@ class TestSessionVariables(AuthHelper):
         self.assertIn('session', test_body)
         self.assertIn('session_id', test_body['session'])
         self.assertIn('test_session', test_body['session'])
-        self.assertEquals(test_body['session']['session_id'], session['id'])
+        self.assertEqual(test_body['session']['session_id'], session['id'])
 
         # WHEN getting session variables from the main environment
         body = self.get_data('/session_main')
@@ -503,81 +454,6 @@ class TestAuth(AuthHelper):
         self.assertEqual(hedy_cookie['httponly'], True)
         self.assertEqual(hedy_cookie['path'], '/')
         self.assertEqual(hedy_cookie['samesite'], 'Lax,')
-
-    def test_invalid_verify_email(self):
-        # GIVEN a new user
-        # (we create a new user to ensure that the verification flow hasn't been done for this user yet)
-        self.given_fresh_user_is_logged_in()
-
-        # WHEN submitting invalid verifications
-        invalid_verifications = [
-            # Missing token
-            {'username': self.username},
-            # Missing username
-            {'token': self.user['verify_token']},
-        ]
-
-        for invalid_verification in invalid_verifications:
-            # THEN receive an invalid response code from the server
-            self.get_data(
-                'auth/verify?' +
-                urllib.parse.urlencode(invalid_verification),
-                expect_http_code=400)
-
-        # WHEN submitting well-formed verifications with invalid values
-        incorrect_verifications = [
-            # Invalid username
-            {'username': 'foobar', 'token': self.user['verify_token']},
-            # Invalid token
-            {'username': self.username, 'token': 'foobar'}
-        ]
-
-        for incorrect_verification in incorrect_verifications:
-            # THEN receive a forbidden response code from the server
-            self.get_data(
-                'auth/verify?' +
-                urllib.parse.urlencode(incorrect_verification),
-                expect_http_code=403)
-
-    def test_verify_email(self):
-        # GIVEN a new user
-        # (we create a new user to ensure that the verification flow hasn't been done for this user yet)
-        self.given_fresh_user_is_logged_in()
-
-        # WHEN attepting to verify the user
-        # THEN receive a redirect from the server taking us to `/landing-page`
-        headers = self.get_data(
-            'auth/verify?' +
-            urllib.parse.urlencode(
-                {
-                    'username': self.username,
-                    'token': self.user['verify_token']}),
-            expect_http_code=302,
-            return_headers=True)
-        self.assertEqual(headers['location'], '/landing-page')
-
-        # WHEN attepting to verify the user again (the operation should be idempotent)
-        # THEN (again) receive a redirect from the server taking us to `/landing-page`
-        headers = self.get_data(
-            'auth/verify?' +
-            urllib.parse.urlencode(
-                {
-                    'username': self.username,
-                    'token': self.user['verify_token']}),
-            expect_http_code=302,
-            return_headers=True)
-        self.assertEqual(headers['location'], '/landing-page')
-
-        # WHEN retrieving profile to see that the user is no longer marked with
-        # `verification_pending`
-        self.given_specific_user_is_logged_in(self.username)
-        profile = self.get_data('profile')
-
-        # THEN check that the `verification_pending` has been removed from the user profile
-        self.assertNotIn('verification_pending', profile)
-
-        # FINALLY remove token from user since it's already been used.
-        self.user.pop('verify_token')
 
     def test_logout(self):
         # GIVEN a logged in user
@@ -904,7 +780,12 @@ class TestAuth(AuthHelper):
         self.given_user_is_logged_in()
 
         # Create a program -> make sure it is not public
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
+        program = {'code': 'print testing programs creation',
+                   'name': 'program 1',
+                   'level': 1,
+                   'adventure_name': 'default',
+                   'shared': False
+                   }
         program_id = self.post_data('programs', program)['id']
 
         # WHEN attempting to create a public profile with invalid bodies
@@ -941,13 +822,19 @@ class TestAuth(AuthHelper):
         self.given_user_is_logged_in()
 
         # Create a program that is public -> can be set as favourite on the public profile
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': True}
+        program = {'code': 'print testing programs creation',
+                   'name': 'program 1',
+                   'level': 1,
+                   'adventure_name': 'default',
+                   'shared': True
+                   }
         program_id = self.post_data('programs', program)['id']
 
         public_profile = {
             'image': '9',
             'personal_text': 'welcome to my profile!',
-            'favourite_program': program_id}
+            'favourite_program': program_id
+        }
 
         # WHEN creating a new public profile with favourite program
         # THEN receive an OK response code from the server
@@ -1027,7 +914,13 @@ class TestProgram(AuthHelper):
         self.given_fresh_user_is_logged_in()
 
         # WHEN submitting a valid program
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
+        program = {
+            'code': 'print testing programs creation',
+            'name': 'program 1',
+            'level': 1,
+            'adventure_name': 'default',
+            'shared': False
+        }
         # THEN receive an OK response code from the server
         program = self.post_data('programs', program)
         # THEN verify that the returned program has both a name and an id
@@ -1066,7 +959,13 @@ class TestProgram(AuthHelper):
     def test_valid_make_program_public(self):
         # GIVEN a logged in user with at least one program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
+        program = {
+            'code': 'print testing programs creation',
+            'name': 'program 1',
+            'level': 1,
+            'adventure_name': 'default',
+            'shared': False
+        }
         program_id = self.post_data('programs', program)['id']
 
         # WHEN making a program public
@@ -1089,7 +988,13 @@ class TestProgram(AuthHelper):
     def test_valid_make_program_private(self):
         # GIVEN a logged in user with at least one public program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
+        program = {
+            'code': 'print testing programs creation',
+            'name': 'program 1',
+            'level': 1,
+            'adventure_name': 'default',
+            'shared': False
+        }
         program_id = self.post_data('programs', program)['id']
         self.post_data('programs/share/' + program_id + '/0', {'id': program_id})
 
@@ -1113,7 +1018,13 @@ class TestProgram(AuthHelper):
     def test_invalid_delete_program(self):
         # GIVEN a logged in user with at least one program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
+        program = {
+            'code': 'print testing programs creation',
+            'name': 'program 1',
+            'level': 1,
+            'adventure_name': 'default',
+            'shared': False
+        }
         self.post_data('programs', program)['id']
         program_id = '123456'
 
@@ -1124,7 +1035,13 @@ class TestProgram(AuthHelper):
     def test_valid_delete_program(self):
         # GIVEN a logged in user with at least one program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
+        program = {
+            'code': 'print testing programs creation',
+            'name': 'program 1',
+            'level': 1,
+            'adventure_name': 'default',
+            'shared': False
+        }
         program_id = self.post_data('programs', program)['id']
 
         # WHEN deleting a program
@@ -1139,7 +1056,13 @@ class TestProgram(AuthHelper):
     def test_destroy_account_with_programs(self):
         # GIVEN a logged in user with at least one program
         self.given_user_is_logged_in()
-        program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
+        program = {
+            'code': 'print testing programs creation',
+            'name': 'program 1',
+            'level': 1,
+            'adventure_name': 'default',
+            'shared': False
+        }
         self.post_data('programs', program)['id']
 
         # WHEN deleting the user account
@@ -1338,9 +1261,10 @@ class TestClasses(AuthHelper):
         # THEN the class should contain a student with valid fields
         self.assertEqual(len(Class_data['students']), 1)
         class_student = Class_data['students'][0]
-        self.assertEqual(class_student['highest_level'], "-")
+        self.assertEqual(class_student['adventures_tried'], 0)
         self.assertEqual(class_student['programs'], 0)
-        self.assertIsInstance(class_student['last_login'], str)
+        self.assertEqual(class_student['number_of_errors'], 0)
+        self.assertEqual(class_student['successful_runs'], 0)
         self.assertEqual(class_student['username'], student['username'])
 
         # WHEN retrieving the student's programs
@@ -1360,10 +1284,22 @@ class TestClasses(AuthHelper):
         self.given_fresh_user_is_logged_in()
         self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
         # GIVEN a student with two programs, one public and one private
-        public_program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': False}
+        public_program = {
+            'code': 'print testing programs creation',
+            'name': 'program 1',
+            'level': 1,
+            'adventure_name': 'default',
+            'shared': False
+        }
         public_program_id = self.post_data('programs', public_program)['id']
         self.post_data('programs/share/' + public_program_id + '/False', {'id': public_program_id})
-        private_program = {'code': 'hello world', 'name': 'program 2', 'level': 2, 'shared': False}
+        private_program = {
+            'code': 'print testing programs creation',
+            'name': 'program 2',
+            'level': 2,
+            'adventure_name': 'default',
+            'shared': False
+        }
         self.post_data('programs', private_program)['id']
 
         # GIVEN the aforementioned teacher
@@ -1648,18 +1584,78 @@ class TestMultipleAccounts(AuthHelper):
             self.post_data('for-teachers/create-accounts', invalid_body, expect_http_code=400)
 
     def test_create_accounts(self):
-        # GIVEN a new teacher
+        # GIVEN a new teacher with a new class
         self.given_fresh_teacher_is_logged_in()
+        class_ = self.post_data('class', {'name': 'class1'})
 
         # WHEN attempting to create a valid adventure
         # THEN receive an OK response with the server
         body = {
-            'accounts': [
-                {'username': 'panda', 'password': 'test123'},
-                {'username': 'panda2', 'password': 'test321'}
-            ]
+            'class': class_['id'],
+            'generate_passwords': False,
+            'accounts': '''
+                platypus;test123
+                platypus2;test321
+            '''
         }
         self.post_data('for-teachers/create-accounts', body, expect_http_code=200)
+
+
+class TestHedyPage(AuthHelper):
+    def test_valid_parsons(self):
+        self.given_fresh_user_is_logged_in()
+
+        # WHEN attempting a parsons program
+        # THEN should store attempt and receive OK from server
+        body = {
+            'id': utils.random_id_generator(12),
+            'username': self.user['username'],
+            'level': 1,
+            'exercise': '1',
+            'order': ['1', '2', '3', '4'],
+            'correct': '1',
+            'timestamp': utils.timems()
+        }
+
+        self.post_data('store_parsons_order', body, expect_http_code=204)
+
+    def test_invalid_parsons(self):
+        self.given_fresh_user_is_logged_in()
+
+        invalid_bodies = [
+            {},
+            {
+                'id': str(utils.random_id_generator(12)),
+                'username': self.user,
+                'level': '1',
+                'exercise': '1',
+                'order': ['1', '2', '3', '4'],
+                'correct': '1',
+                'timestamp': utils.timems()
+            },
+            {
+                'id': str(utils.random_id_generator(12)),
+                'username': self.user,
+                'level': '1',
+                'exercise': '1',
+                'order': [1, 2, 3, 4],
+                'correct': '1',
+                'timestamp': utils.timems()
+            },
+            {
+                'id': str(utils.random_id_generator(12)),
+                'username': self.user,
+                'level': '1',
+                'exercise': 1,
+                'order': ['1', '2', '3', '4'],
+                'correct': '1',
+                'timestamp': utils.timems()
+            }
+        ]
+
+        for body in invalid_bodies:
+            self.post_data('store_parsons_order', body, expect_http_code=400)
+
 
 # *** CLEANUP OF USERS CREATED DURING THE TESTS ***
 

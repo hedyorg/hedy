@@ -250,7 +250,6 @@ adventures:
                     {print}('欢迎来到这个故事！')
                     ```
     add_remove_command:
-        name: '{add} {to_list} & {remove} {from}'
         default_save_name: 添加_删除_命令
         description: 简介 {add}{to_list}和{remove}{from}
         levels:
@@ -278,18 +277,7 @@ adventures:
                 story_text_3: |
                     ### 练习
                     在这个虚拟餐厅中尝试新命令。将玩家想要的口味添加到列表中，并删除他们过敏的口味。
-                example_code_3: |
-                    ```
-                    {print} Mystery milkshake
-                    flavors {is} strawberry, chocolate, vanilla
-                    hope {is} {ask} What flavor are you hoping for?
-                    _
-                    allergies {is} {ask} Are you allergic to any flavors?
-                    _
-                    {print} You get a flavors {at} {random} milkshake
-                    ```
     and_or_command:
-        name: '{and} & {or}'
         default_save_name: 与和或
         description: 介绍{and}和{or}
         levels:
@@ -306,7 +294,6 @@ adventures:
                         {print} '你就是真的海蒂!'
                     ```
     ask_command:
-        name: '{ask}'
         default_save_name: 提问命令
         description: '{ask}命令介绍'
         levels:
@@ -317,7 +304,7 @@ adventures:
                 example_code: |
                     ```
                     {print} 你好!
-                    {ask}你叫什么名字?
+                    {ask} 你叫什么名字?
                     ```
                 story_text_2: |
                     ##  `{echo}` 指令
@@ -400,169 +387,6 @@ adventures:
                     ***Test the function***
                     Test if your function is working properly. Finish the first print command by filling in which card you've drawn. Then finish the second line by calling the function with card_1.
                     Run the code a couple of times. Are you happy with the results? Great! Then you can remove the testing part and move on the the next tab!
-                example_code: |
-                    ```
-                    {print} 'BLACKJACK'
-
-                    # Set these variables
-                    cards = _
-                    face_cards = _
-                    card_1 =
-
-                    # Create a function to calculate the points
-                    {define} calculate_points {with} card:
-                        {if} card {in} face_cards:
-                            points = _
-                        {elif} _
-                            _
-                        {else}:
-                            _
-                        _ points
-
-                    # Test your function
-                    {print} 'Your card is a ' _
-                    {print} 'That is worth ' _ ' points'.
-                    ```
-    blackjack_2:
-        name: Blackjack 2
-        default_save_name: Blackjack_2
-        description: Blackjack part 2
-        levels:
-            17:
-                story_text: |
-                    ### Exercise
-                    In this adventure we code the second part of our Blackjack game.
-
-                    ***Paste your code from the previous adventure***
-                    In the previous adventure you've started a list of variables and created a function to calculate how many points a card is worth. Copy your code and paste it here. Mind that you don't need the testing part, so if you haven't removed that yet, please do so now.
-
-                    ***Add more variables***
-                    You have already set the lists `cards` and `face_cards` and the variable `card_1`. Underneath those variables create 3 more variables: `card_2`, dealer_card_1` and `dealer_card_2`. These variables are all set to a random card from the list of cards.
-
-                    ***Add up points***
-                    To calculate how many points you have scored we call the function with card 1 and we do it again for card 2. Then we add both these scores together to get your total.
-                    Do the same thing for the dealers points, but be sure to use the dealer's cards and not your own!
-
-                    ***2 Aces***
-                    You're doing great! Almost all scores can be calculated now. There is only one exception: 2 Aces. If you get 2 Aces, your total is 12 points and not 22 (because 22 points would be losing!). This of course also goes for the dealer.
-
-                    ***Show the score***
-                    Lastly, you want to tell the program to tell you which cards you have drawn and how many points that is. Then show which cards the dealer has and how many points they have.
-
-                    ***Continue in the next tab***
-                    Great! You have finished this part of the game! Copy your code and go to the next tab to learn how to ask for an extra card and to declare a winner.
-                example_code: |
-                    ```
-                    # Paste your code from the previous adventure here
-
-                    # Add these variables to the list of variables
-                    card_2 = _
-                    dealer_card_1 = _
-                    dealer_card_2 = _
-
-                    # Add up your points
-                    your_points_1 = {call} _ {with} card_1
-                    your_points_2 = _
-                    your_total = _
-
-                    # Add up the dealers points
-                    dealer_points_1 = _
-                    _
-                    _
-
-                    # 2 Aces
-                    {if} card_1 == 'Ace' {and} _
-                        your_total = 12
-                    {if} dealer_card_1 _
-                        dealer_total = _
-
-                    # Show the score
-                    {print} 'You have drawn a ' _ ' and a ' _ '. That is ' _ ' points'
-                    {print} 'The dealer has drawn a ' _ ' and a ' _ '. That is ' _ ' points'
-                    ```
-    blackjack_3:
-        name: Blackjack 3
-        default_save_name: Blackjack_3
-        description: Blackjack part 3
-        levels:
-            17:
-                story_text: |
-                    In the previous tabs you have learned how to draw 2 random cards for yourself and for the dealer and to calculate how many points you both got.
-                    In this adventure we add the option to ask for an extra card for both you and the dealer.
-
-                    ### Exercise
-                    ***Paste your code from the previous adventure*** Firstly, copy your code from the previous tab and paste it here.
-
-                    ***Extra card for you*** If you want, you can get an extra card to get your total as close to 21 as possible. First ask the player if they want an extra card.
-                    If they do, pick a random card and print what they have drawn. If the card is not an Ace, you can call the function and add the points to your total.
-                    In case the card is an Ace, you can't use the function, because the Ace can be either 1 point or 11 points, depending on how many points you already have earned.
-                    If your total is less than 11, you want the ace to be 11 points (because this is closest to 21). So you add 11 points to your total.
-                    If the total is more than or equal to 11, you want the ace to be 1 point (because you don't want more than 21 points). So you add 1 point to your total.
-                    Lastly, print your new total of points.
-
-                    ***Extra card for the dealer*** The dealer can also get an extra card. The dealer doesn't need to be asked, because they always get an extra card if their total is less than 17.
-                    Copy the 'Extra card for you code' and paste it in the dealers section. Then change it to fit the dealer picking an extra card and getting points added to their total.
-                example_code: |
-                    ```
-                    # Paste your code from the previous adventure here
-
-                    # Extra card for you
-                    hit = {ask} _
-                    {if} hit == 'yes':
-                        card_3 = _
-                        {print} _
-                        {if} card_3 _ 'Ace':
-                            your_points_3 = _
-                            your_total = _
-                        {else}:
-                           {if} your_total _
-                                _
-                            {else}:
-                                _
-                        {print} _
-
-                    # Extra card for the dealer
-                    {if} dealer_total < 17
-                    _
-                    ```
-    blackjack_4:
-        name: Blackjack 4
-        default_save_name: Blackjack_4
-        description: Blackjack part 4
-        levels:
-            17:
-                story_text: |
-                    In the last 3 adventures you have alsmost created a working blackjack game! The only thing left to do is to decide a winner!
-
-                    ### Exercise
-                    ***Paste your code from the previous adventure*** Start by pasting the code that you've made so far into your programming field.
-
-                    ***Decide a winner***
-                    Firstly, if you and the dealer have an equal amount of points, it's a draw.
-                    Secondly, if the dealer has more than 21 points and you don't, you are the winner.
-                    Thirdly, if both you and the dealer have less than 22 points, we have to see who came closest to 21. We do that by comparing who has the highest score. Is your total higher than the dealer's total, then you are the winner. If not, the dealer wins.
-                    Lastly, in all other scenarios (e.g. you have more than 21 points and the dealer doesn't, or you both have more than 21 points) you are the loser.
-
-                    ***Enjoy the game!***
-                    Does your game work properly? Amazing! You have done a great job! Enjoy your game!
-                    If it doesn't work right away, no worries, you might have made a mistake. Just keep calm and bebug your code using the ladybug button.
-                example_code: |
-                    ```
-                    # Paste your code from the previous adventure here
-
-                    # Decide a winner
-                    {if} _
-                        {print} 'Its a draw! Play again!'
-                    {elif} _
-                        {print} 'You win!'
-                    {elif} _ :
-                        {if} _:
-                            {print} _
-                        {else}:
-                            {print} _
-                    {else}:
-                        _
-                    ```
     calculator:
         name: 计算器
         default_save_name: 计算器
@@ -603,7 +427,7 @@ adventures:
                     ```
             9:
                 story_text: |
-                    在上一个级别中，您创建了一个计算器，在此级别中，可以扩展该代码，以便它询问多个问题。
+                    在上一个级别中，您创建了一个计算器。在此级别中，可以扩展该代码，以便它询问多个问题。
 
                     ### 练习1
                     您可以完成第10行以使代码工作吗？
@@ -624,35 +448,6 @@ adventures:
                         {if} _ {is} _
                             分数 = 分数 + 1
                     {print} '做得好！你的分数是' 分数 '分，满分是10分！'
-                    ```
-            10:
-                story_text: |
-                    This calculator game helps you practise your tables of multiplication!
-                    ### Exercise
-                    Fill in the blanks. We want this program to ask the player these questions:
-                    ```
-                    How much is 1 times 1?
-                    How much is 1 times 2?
-                    How much is 1 times 3?
-                    How much is 2 times 1?
-                    How much is 2 times 2?
-                    How much is 2 times 3?
-                    How much is 3 times 1?
-                    How much is 3 times 2?
-                    How much is 3 times 3?
-                    _
-                    ```
-                example_code: |
-                    ```
-                    numbers = 1, 2, 3
-                    {for} _
-                        {for} _
-                            answer = {ask} _
-                            correct = number_1 * number_2
-                            {if} answer {is} correct
-                                {print} 'Great job!'
-                            {else}
-                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |
@@ -722,17 +517,11 @@ adventures:
                         {for} i {in} {range} 1 {to} 4
                             grade = {ask} _
                             total = total + _
-                            return _ / 4
+                            {return} _ / 4
 
                     mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
+                    {print} '你的平均成绩是' mean_grade
                     ```
-
-                            total = total + _
-                            return _ / 4
-
-                    mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
             15:
                 story_text: |
                     您可以添加 `{while}` 循环到您已经在上一级中学过的计算器游戏中去。 
@@ -741,24 +530,6 @@ adventures:
                     ### 练习
                     在函数中添加`{while}`循环，询问玩家数1乘以数2是多少，并打印他们的答案。
                     然后`{call}`（调用）函数。
-                example_code: |
-                    ```
-                    {define} new_question
-                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        number_1 = numbers {at} {random}
-                        number_2 = numbers {at} {random}
-                        correct = number_1 * number_2
-                        answer = 0
-                        _
-                        _
-                        _
-                        {print} 'Well done!'
-
-                    {print} 'Give 10 correct answers to win!'
-                    {for} i {in} {range} 1 {to} 10
-                        _
-                    {print} 'You win!'
-                    ```
     calculator_2:
         name: 计算器2
         default_save_name: 计算器2
@@ -784,7 +555,6 @@ adventures:
                     # 使用你在之前挑战中的代码。
                     ```
     clear_command:
-        name: '{clear}'
         default_save_name: 清屏命令
         description: '{clear}命令'
         levels:
@@ -1196,10 +966,6 @@ adventures:
                     然后按下编程字段下的绿色“运行代码”按钮来运行代码。
 
                     准备好了吗?然后转到下一个选项卡学习如何制作自己的代码!
-                example_code: |
-                    ```
-                    {print} Hello world!
-                    ```
             2:
                 story_text: |
                     恭喜！ 您已达到第 2 级。希望您已经编写了一些很棒的代码！
@@ -1645,9 +1411,6 @@ adventures:
                         {print} 名字们 {at} {random} '负责在' 日期 '洗碗'
                     ```
     elif_command:
-        name: '{elif}'
-        default_save_name: elif
-        description: '{elif}'
         levels:
             17:
                 story_text: |
@@ -1666,8 +1429,6 @@ adventures:
                         {print} '祝你下次好运..'
                     ```
     for_command:
-        name: '{for}'
-        default_save_name: for
         description: '{for}指令'
         levels:
             10:
@@ -1681,24 +1442,10 @@ adventures:
                     {for} animal {in} animals
                         {print} '我喜欢' animal
                     ```
-                story_text_2: |
-                    ### Exercise
-                    Finish this code by adding `{for} action {in} actions` to line 2.
-                example_code_2: |
-                    ```
-                    actions = clap your hands, stomp your feet, shout Hurray!
-                    _
-                        {repeat} 2 {times}
-                            {print} 'If youre happy and you know it, ' action
-                            {sleep} 2
-                        {print} 'If youre happy and you know it, and you really want to show it'
-                        {print} 'If youre happy and you know it, ' action
-                        {sleep} 3
-                    ```
             11:
                 story_text: |-
                     在本关中，我们增加了一种新的`{for}`形式。在前面的关卡中，我们将`{for}`用于列表，我们也可以将`{for}`用于数字。
-                    我们通过添加一个变量名，在其后面接着`{in}``{range}`。然后我们写上数字来开始，`{to}`来作为数字的终点。
+                    我们通过添加一个变量名，在其后面接着`{in} {range}`。然后我们写上数字来开始，`{to}`来作为数字的终点。
 
                     尝试这个例子，看看会发生什么! 在这一关卡中，你将需要在`{for}`语句下面的行中使用缩进。
                 example_code: |
@@ -1715,14 +1462,6 @@ adventures:
                     {for} i {in} {range} 1 {to} 10:
                         {print} i
                     {print} '准备好了吗？我来了！'
-                    ```
-            18:
-                story_text: |
-                    Lastly, we'll turn `{for} i {in} {range} 1 to 5` into real Python code, like this:
-                example_code: |
-                    ```
-                    {for} i {in} {range}(1,5):
-                        {print} (i)
                     ```
     fortune:
         name: 算命
@@ -1880,9 +1619,6 @@ adventures:
                     {print} 命运 {at} {random}
                     ```
     functions:
-        name: functions
-        default_save_name: functions
-        description: functions
         levels:
             12:
                 story_text: |
@@ -1907,38 +1643,18 @@ adventures:
                     limbs = '手', '足'
                     colors = '红', '蓝', '绿', '黄'
 
-                    {define} 转
+                    {define} turn
                         chosen_side = sides {at} {random}
                         chosen_limb = limbs _
                         chosen_color = colors _
                         {print} chosen_side ' ' chosen_limb ' 在' chosen_color
 
                     {print} '让我们来玩扭扭游戏!'
-                    {for} i {in} {range} 1 to _
-                        {call} 转
+                    {for} i {in} {range} 1 {to} _
+                        {call} turn
                         {sleep} 2
                     ```
             13:
-                story_text: |
-                    现在您已经学习了如何使用函数，您将学习如何使用带参数的函数。
-                    **参数**是在函数中使用的变量。它不会在函数之外使用。
-
-                    例如，在这个代码中，我们编写了歌曲“My Bonnie is over the ocean”的第一节。
-                    在这个示例代码中使用了参数`place`。place是一个只在函数中使用的变量，所以是一个参数。
-                    为了使用`place`，我们编写了一行`define song with place`。
-                    当函数被调用时，计算机将用`call song with`后的一段文本替换参数`place`。
-
-                    ### 练习
-                    这首歌的下一节是:
-
-                    ```not_hedy_code
-                    昨晚我躺在枕头上的时候
-                    昨晚我躺在床上的时候
-                    昨晚我躺在枕头上的时候
-                    我梦见我的邦妮死去了
-                    ```
-
-                    你能用和示例同样的方法编写这段诗句吗?
                 example_code: |
                     ```
                     {define} song {with} place
@@ -1963,42 +1679,13 @@ adventures:
                     {define} 计算新价格 {with} 金额, 折扣
                         折扣 = 折扣 / 100
                         折扣金额 = 金额 * 折扣
-                        return 金额 - 折扣金额
+                        {return} 金额 - 折扣金额
 
                     之前的价格 = {ask} '标价上是多少钱?'
                     打折 = {ask} '有多少百分比的折扣?'
 
                     新价格 = _ 计算新价格 {with} 之前的价格, _
                     {print} '新价格是' 新价格 ' 美元'
-                    ```
-            18:
-                story_text: |
-                    Let's make functions the Pythons way! To define a function, we no longer use:
-
-                    `{define} name_function {with} argument_1, argument_2:`
-
-                    but we use:
-
-                    `{def} name_function(argument_1, argument_2):`.
-
-
-                    If you don't want to use arguments, you just leave the space between the parantheses empty.
-                    To call a function, we don't need the `{call}` command anymore. You just type the name of the function.
-                example_code: |
-                    ```
-                    {def} calculate_score(answer, correct_answer):
-                        {if} answer == correct_answer:
-                            score = 1
-                        {elif} answer == '?':
-                            score = 0
-                        {else}:
-                            score = -1
-                        {return} score
-
-                    answer = {input} ('Where can you find the Eiffel Tower?')
-                    correct_answer = 'Paris'
-                    score = calculate_score(answer, correct_answer)
-                    {print} ('Your score is... ', score)
                     ```
     guess_my_number:
         name: 猜猜我的数字
@@ -2027,141 +1714,6 @@ adventures:
                             {if} guess _ number
                                 {print} 'You win!'
                                 game = 'over'
-                    ```
-    hangman:
-        name: Hangman
-        default_save_name: Hangman
-        description: Guess the word
-        levels:
-            17:
-                story_text: |
-                    In this adventure we program a game of hangman. First we make some preparations, then we program the game and in the third part we add a drawing with the turtle.
-
-                    ### Exercise
-                    ***Set the variables*** In this game of hangman, Player 1 chooses an answer and Player 2 has to guess the letters in this answer.
-                    To let the computer know all the letters in the word, we will turn the answer into a list of letters. We also do this with the guesses Player 2 makes.
-                    We will start the game with 2 empty lists. We have made an empty list for the variable answer for you. Now make an empty list for guessed_letters as well.
-                    Then we fill in how many mistakes were made. At the start of the game, this should be 0.
-                    The variable `amount_letters` tells us how many letters are in the answer. Ask Player 1 to tell us how many letters their word has.
-                    Lastly we tell the computer if the game is over. We use the variable `game_over` and set it to `False`.
-
-                    ***Choosing the answer*** We want Player 1 to be able to choose the answer. We'll ask them, as many times as necessary, what the next letter is.
-                    Then we add that letter to the answer. Lastly, we add an empty _ to the list of guessed letters, so we get as many _s as there are letters in the answer.
-
-                    ***Player 2's turn***
-                    Tell Player 2 its their turn. Then tell Player 2 how many letters there are in the answer. Finally, print the list of `guessed_letters`.
-
-                    ***Go to the next tab*** Now that all the starting variables are set, we can start programming the game itself. Check out the next tab to learn how!
-                example_code: |
-                    ```
-                    print 'Hangman!'
-
-                    # Set the variables
-                    answer = []
-                    guessed_letters = _
-                    mistakes_made = _
-                    amount_letters = {ask} _
-                    _ = 'False'
-
-                    # Choosing the answer
-                    {for} _
-                        letter = {ask} 'Player 1, what is letter ' i '?'
-                        _
-                        {add} '_' {to} _
-
-                    # Player 2 turn
-                    print _
-                    print _
-                    print guessed_letters
-                    ```
-    hangman_2:
-        name: Hangman 2
-        default_save_name: Hangman_2
-        description: Hangman 2
-        levels:
-            17:
-                story_text: |
-                    Now it's time to program the hangman game.
-
-                    ### Exercise
-
-                    ***Paste your code*** Copy your code from the previous tab and paste the code in the programming field.
-
-                    ***The game*** This games continues playing until Player 2 is game over. Fill in the while command accordingly. Now, Player 2 is allowed to guess a letter, so ask Player 2 to guess a letter.
-                    We need to check if their answer is correct, so check if their `guess` is (somewhere) in the (list) `answer`. Then we let the computer figure out which of the letter(s) is the guess. We have already programmed that part for you.
-                    Next we want to compliment the player for finding a correct letter and we want to print the list `guessed_letters`, so the player can see their progress.
-
-                    The next part we're going to program is what happens when the player has guessed all of the letters. So if their list of `guessed_letters` is the same as our list `answer`.
-                    If the lists are the same, congratulate Player 2 with their victory and set the variable `game_over` to `True`.
-
-                    Next we'll program what happens when Player 2 guesses wrong (so the `{else}` command). First, tell the player that their guess was wrong. Then increase the `mistakes_made` variable by 1.
-
-                    For the last part we'll program what happens when Player 2 has made 10 mistakes. We'll print that Player 1 has won the game. Then we'll print the correct answer. And finally, we'll set our `game_over` variable to `True`, so the game stops.
-
-                    ***Go to the next tab*** Amazing work! Your game is playable, but wouldn't it be fun if the hangman was actually drawn when Player 2 makes a mistake..?
-                example_code: |
-                    ```
-                    # Paste your code here
-
-                    # The game
-                    {while} game_over _
-                        guess = _
-                        {if} _
-                            {for} i {in} {range} 1 {to} amount_letters:
-                                if answer[i] == guess:
-                                    guessed_letters[i] = guess
-                            {print} _
-                            {if} guessed_letters == _:
-                                {print} _
-                                game_over = _
-                        {else}:
-                            {print} _
-                            mistakes_made _
-                            {if} _ == 10:
-                                {print} _
-                                {print} _
-                                _
-                    ```
-    hangman_3:
-        name: Hangman 3
-        default_save_name: Hangman_3
-        description: Hangman 3
-        levels:
-            17:
-                story_text: |
-                    In a game of hangman the mistakes are shown by drawing a part of the hangman each time a mistake has been made.
-                    We now add those drawings with our turtle!
-
-                    ### Exercise
-                    ***Create a function that draws the hangman*** Create a function that draws the hangman in 10 steps. We have already made step 1 for you.
-
-                    ***Test the function*** Test the function by calling the function with 10. If you are happy with the function, remove the line that calls the function for now. We will call the function when the player makes a mistake.
-
-                    ***Paste your hangman game under your function*** Go back to the previous tab and copy your hangman game. Paste the game underneath your function.
-
-                    ***Call the function when the player makes a mistake*** Under the line `mistakes_made = mistakes_made + 1` we will call the function. We want the turtle to take the same amount of steps as the player has made mistakes, so we call the function with `mistakes_made` as argument.
-
-                    ***Enjoy your game!***
-                    <div class="w-full flex flex-row gap-2">
-                        The hangman could look like this <img src="https://github.com/hedyorg/hedy/assets/80678586/d385b691-5701-4342-b5d9-dfae1589c129" width="100">
-                    </div>
-                example_code: |
-                    ```
-                    # Create a function that draws the hangman
-                    {define} draw_hangman {with} step:
-                        {if} step == 1:
-                            {color} white
-                            {forward} -100
-                            {turn} 90
-                            {forward} -50
-                            {color} black
-                            {forward} 100
-                            {forward} -50
-
-                        {if} step == 2:
-                            _
-                    # Paste your hangman game here
-
                     ```
     harry_potter:
         name: 哈利·波特
@@ -2397,33 +1949,6 @@ adventures:
                     这个鬼屋游戏使你可以使用在这个关卡中的列表之间的联系。
                     例如:所有怪物的属性在所有列表中僵尸排名第一，女巫第二，吸血鬼第三。
                     检查代码并填入  `weapons[i]`, `monsters[i]` , `bad_fate[i]`, `good_fate[i]`, `hint[i]` 在对的空白处，使代码工作!
-                example_code: |
-                    ```
-                    numbers = [1, 2, 3]
-                    i = numbers[{random}]
-                    hint = ['growling', 'a cackling laugh', 'fluttering batwings']
-                    monsters = ['zombie', 'witch', 'vampire']
-                    bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
-                    good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
-                    weapons = ['ham', 'lighter', 'garlic']
-                    {print} 'You are standing in front of an old mansion'
-                    {print} 'Something is not right here'
-                    {print} 'You hear ' _
-                    {print} 'You are going to explore it'
-                    {print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'
-                    your_weapon = {ask} 'What do you bring with you?'
-                    {print} 'With your ' your_weapon ' you enter the living room'
-                    {print} 'There you find a ' _
-                    needed_weapon = _
-                    {if} your_weapon == needed_weapon
-                        {print} 'You use your ' your_weapon
-                        {print} _
-                        {print} 'YOU WIN!'
-                    {else}
-                        {print} 'You have chosen the wrong weapon...'
-                        {print} _
-                        {print} 'GAME OVER'
-                    ```
     hotel:
         name: 旅馆
         default_save_name: 旅馆
@@ -2461,7 +1986,6 @@ adventures:
 
                     {call} 欢迎信息 {with} 称谓, 姓氏, 祖国, 105
     if_command:
-        name: '{if} & {else}'
         default_save_name: if_命令
         description: 介绍{if}命令
         levels:
@@ -2487,12 +2011,6 @@ adventures:
                 story_text_3: |
                     ### 练习
                     尝试使用`{if}`和`{else}`创建自己的代码。如果需要，可以使用示例代码。
-                example_code_3: |
-                    ```
-                    answer {is} {ask} '2 + 2 = ?'
-                    _ _ _ 4 _ 'Great job!'
-                    _ _ 'No 2 + 2 = 4'
-                    ```
             8:
                 story_text: |
                     ## If... Else...
@@ -2525,7 +2043,6 @@ adventures:
                         {print} '你不想继续'
                     ```
     in_command:
-        name: '{in}'
         default_save_name: in_命令
         description: 介绍{in}命令
         levels:
@@ -2553,7 +2070,6 @@ adventures:
                     _ _ '我最喜欢的动物是狗, 牛, 羊。'
                     ```
     is_command:
-        name: '{is}'
         default_save_name: is_命令
         description: 介绍 {is}命令
         levels:
@@ -2569,9 +2085,9 @@ adventures:
                     ```
                 story_text_2: |
                     ### 练习
-                    是时候创建自己的变量了!
-                    在示例代码中，我们以变量“动物”为例。在第1行中设置了变量，在第2行中，我们在`{print}`命令中使用了变量。
-                    首先，在空白处填上你最喜欢的动物，完成我们的例子。然后自己编写至少3个这样的代码。选择一个变量，并使用`{is}`命令设置该变量。然后使用`{print}`命令，就像我们所做的那样。
+                    是时候创建自己的变量了！
+                    在示例代码中，我们创建了一个变量 `favorite_animal` 的示例。在第 1 行中设置了变量，在第 2 行中我们在 `{print}` 命令中使用该变量。
+                    首先，通过在空白处填写您最喜欢的动物来完成我们的示例。然后自己创建至少 3 个这样的代码。选择一个变量，并使用 `{is}` 命令设置该变量。然后像我们一样，使用 `{print}` 命令使用它。
                 example_code_2: |
                     ```
                     最喜爱的动物 {is} _
@@ -2580,11 +2096,6 @@ adventures:
             6:
                 story_text: |
                     我们还更改了在变量中存储单词的方式!当我们在变量中存储名称或数字时，你现在可以使用`=`而不是`{is}`，如下所示:
-                example_code: |
-                    ```
-                    name = Hedy
-                    answer = 20 + 4
-                    ```
             14:
                 story_text: |
                     我们将学习更多的新项目。你可能已经从数学中知道了它们，`<` 和 `>`。
@@ -2696,12 +2207,6 @@ adventures:
                 story_text_2: |-
                     **单词数学**
                     在这个级别中，你还可以用这样的单词做加法:
-                example_code_2: |
-                    ```
-                    a = 'Hello '
-                    b = 'world!'
-                    {print} a + b
-                    ```
     music:
         name: 音乐
         default_save_name: 音乐
@@ -2719,32 +2224,10 @@ adventures:
                     ### 练习
                     尝试示例代码，然后使用它!你能创造自己的旋律吗?
                     在下一关，你将学习如何播放一些现有的歌曲。
-                example_code: |-
-                    ```
-                    {play} C4
-                    {play} D4
-                    {play} E4
-                    {play} F4
-                    {play} G4
-                    {play} A4
-                    {play} B4
-                    {play} C5
-                    ```
             2:
                 story_text: |
                     ### Exercise
                     把歌唱完!我们已经开始为一些旋律编码。
-                example_code: |
-                    ```
-                    {print} Old Mac Donald had a farm
-                    {play} C5
-                    {play} C5
-                    {play} C5
-                    {play} G4
-                    {play} A4
-                    {play} A4
-                    {play} G4
-                    ```
                 story_text_2: 正如您所看到的，您还可以使用`{sleep}`命令在歌曲中添加一点暂停。
                 example_code_2: |
                     ```
@@ -2767,13 +2250,6 @@ adventures:
                     ### 练习
                     示例代码创建了一个随机旋律，但它非常短，并且没有使用很多音符。
                     在列表中添加更多的音符，并通过多次复制最后一行来创建更长的旋律。
-                example_code: |
-                    ```
-                    notes {is} A4, B4, C4
-                    {play} notes {at} {random}
-                    {play} notes {at} {random}
-                    {play} notes {at} {random}
-                    ```
             4:
                 story_text: |
                     使用`{clear}`命令创建卡拉ok机!
@@ -2781,28 +2257,6 @@ adventures:
                     ### 练习
                     完成卡拉ok版的“玛丽有一只小羊羔”。
                     然后，创建一个卡拉ok版本的任何你喜欢歌曲!
-                example_code: |
-                    ```
-                    {print} 'Mary had a little lamb'
-                    {play} E
-                    {play} D
-                    {play} C
-                    {play} D
-                    {play} E
-                    {play} E
-                    {play} E
-                    {clear}
-                    {print} 'Little lamb, little lamb'
-                    {play} D
-                    {play} D
-                    {play} D
-                    {play} E
-                    {play} E
-                    {play} E
-                    {clear}
-                    {print} 'Mary had a little lamb'
-                    {play} E
-                    ```
             5:
                 story_text: |
                     你不必总是使用`{play}`命令来播放整首歌，有时你只想播放一个音符。
@@ -2843,33 +2297,12 @@ adventures:
                     ### 练习
                     使用`{repeat}`命令完成“Twinkle Twinkle Little Star”的代码。
                     然后回到你在之前关卡中所创造的歌曲中。你能把这些代码也缩短吗?
-                example_code: |
-                    ```
-                    {print} 'Twinkle Twinkle Little Star'
-                    {repeat} 2 {times} {play} C4
-                    {repeat} 2 {times} {play} G4
-                    _
-                    ```
             8:
                 story_text: |
                     现在我们可以对多行使用`{repeat}`命令，我们可以更轻松地制作歌曲!
 
                     ### 练习
                     完成兄弟约翰的歌(弗拉德·雅克)。不要忘记使用`{repeat}`!
-                example_code: |
-                    ```
-                    {print} 'Brother John'
-                    {repeat} 2 {times}
-                        {play} C
-                        {play} D
-                        {play} E
-                        {play} C
-                    {repeat} 2 {times}
-                        {play} E
-                        {play} F
-                        {play} G
-                        {sleep} 1
-                    ```
             9:
                 story_text: |
                     从这个级别开始，您可以在`{repeat}`命令中使用`{repeat}`命令。
@@ -2899,45 +2332,6 @@ adventures:
                     ### 练习
                     完成《闪烁小星星》这首歌。
                     然后回头看看你之前在关卡中编写的所有歌曲，你是否也可以使用函数将这些代码变得更好更短?
-                example_code: |
-                    ```
-                    {define} first_line
-                        {play} C
-                        {play} C
-                        {play} G
-                        {play} G
-                        {play} A
-                        {play} A
-                        {play} G
-                        {sleep}
-
-                    {define} second_line
-                        {play} F
-                        {play} F
-                        {play} E
-                        {play} E
-                        {play} D
-                        {play} D
-                        {play} C
-                        {sleep}
-
-                    {define} third_line
-                        {play} G
-                        {play} G
-                        {play} F
-                        {play} F
-                        {play} E
-                        {play} E
-                        {play} D
-                        {sleep}
-
-                    {call} _
-                    {call} _
-                    {call} _
-                    {call} _
-                    {call} _
-                    {call} _
-                    ```
             13:
                 story_text: |
                     您可以使用带有参数的函数来处理歌词几乎相同但每次略有不同的歌曲。
@@ -2946,30 +2340,6 @@ adventures:
                     ### 练习
                     你能唱完Yankee Doodle 的歌吗？
                     你能想出另一首歌以这种方式编程吗？
-                example_code: |
-                    ```
-                    {print} 'Yankee Doodle'
-                    {define} _ {with} note_1, note_2, note_3
-                        {play} C4
-                        {play} C4
-                        {play} D4
-                        {play} E4
-                        {play} _
-                        {play} _
-                        {play} _
-
-                    {call} line_1 {with} 29, 31, 30
-                    {call} line_1 {with} 29, 28, 0
-                    {call} line_1 {with} 32, 31, 30
-
-                    {play} C4
-                    {play} B3
-                    {play} G3
-                    {play} A3
-                    {play} B3
-                    {play} C4
-                    {play} C4
-                    ```
             14:
                 story_text: |
                     你可以为音乐编程取乐，但你也可以用音符制作一些有用的东西，比如火警!
@@ -2991,106 +2361,6 @@ adventures:
                     着火 = {ask} '现在着火了吗?'
                     {if} 着火 _ 'yes'
                         {call} 火警
-                    ```
-            15:
-                story_text: |
-                    **Warning** This adventure can become extremely annoying!
-                    We can also use the {while} command to repeat a song forever.
-
-                    ### Exercise
-                    Finish the never-ending song.
-                example_code: |
-                    ```
-                    {define} song
-                        {play} _
-
-                    yes_or_no = {ask} 'Do you want to hear my never-ending song?'
-                    {while} yes_or_no = 'yes'
-                        {call} song
-                        {print} '🥳'
-                    ```
-            16:
-                story_text: |
-                    Upgrade your Old MacDonald code!
-
-                    ### Exercise
-                    Take your code from the 'Sing a Song' adventure and add musical notes to it!
-                    You can make a function for each line in the song and call that function after the line is printed.
-                    We defined the first line for you and called it in the code. Can you finish the whole song?
-                example_code: |
-                    ```
-                    {define} line_1
-                        {for} i {in} {range} 1 {to} 3
-                            {play} G
-                        {play} D
-                        {for} i {in} {range} 1 {to} 2
-                            {play} E
-                        {play} D
-
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
-                    for i in range 1 to 3
-                        animal = animals[i]
-                        sound = sounds[i]
-                        print 'Old MacDonald had a farm'
-                        call line_1
-                        print 'E I E I O!'
-                        _
-                    ```
-            17:
-                story_text: |
-                    You can use the {elif} to create different options.
-
-                    ### Exercise
-                    Firstly, add colons to get the code to work.
-                    Then finish this code by adding at least 2 other songs for other moods. For example a happy song and an angry song.
-                example_code: |
-                    ```
-                    {define} scary_song
-                        {for} i {in} {range} 1 {to} 3
-                            {play} G
-                        {play} E
-                        {sleep} 2
-                        {for} i {in} {range} 1 {to} 3
-                            {play} F
-                        {play} D
-
-                    mood = {ask} 'Which emotion are you feeling?'
-                    {if} mood {is} 'fear'
-                        {call} scary_song
-                    {elif} _
-                    ```
-            18:
-                story_text: |
-                    ### Exercise
-                    Even in this last level of Hedy we can make some music! Be careful of all the syntax that is needed now.
-                    Take a good look at how the functions are defined and called upon in the example code.
-                    Finish the song!
-                example_code: |
-                    ```
-                    {def} line_1():
-                        {for} i {in} {range}(1, 5):
-                            {play} A
-                        {play} D
-                        {play} F
-                        {play} A
-
-                    {def} line_2():
-                        {for} i {in} {range}(1, 5):
-                            {play} G
-                        {play} C
-                        {play} E
-                        {play} G
-
-                    {def} line_3():
-                    _
-
-                    {print} ('The drunken sailor')
-                    {print} ('What shall we do with the drunken sailor?')
-                    line_1()
-                    line_2()
-                    line_3()
-                    {print} ('Early in the morning')
                     ```
     parrot:
         name: 鹦鹉
@@ -3250,11 +2520,6 @@ adventures:
 
                     ### 练习
                     复制几次路线，这样你就可以创建一个更大的图纸。
-                example_code_2: |
-                    ```
-                    {if} y {is} {pressed} {forward} 15
-                    {else} {turn} 90
-                    ```
             7:
                 story_text: |
                     现在您已经了解了`{repeat}`，我们可以多次按键。
@@ -3263,10 +2528,6 @@ adventures:
                     ### 练习
                     你在第5关看到的代码只检查一次按键。复制示例代码并添加`{repeat}`，这样您就可以多次按下这些键。
                     使用这段代码来画一些漂亮的东西。
-                example_code: |
-                    ```
-                    {if} x {is} {pressed} {forward} 15 {else} {turn} 90
-                    ```
             9:
                 story_text: |
                     现在你知道了如何组合语句，你可以用`{pressed}`创建一个触摸类型工具。
@@ -3276,8 +2537,6 @@ adventures:
                     **额外**在每个字母之后清除屏幕，并显示用户他们得了多少分。
                 example_code: "```\n积分 = 0\n字母们 = a, b, c, d, e\n{repeat} 10{times}\n    字母 = _ _ _ \n    {print} '按下字母' 字母\n    {if} 字母{is} {pressed}\n    _\n    _\n    _\n```\n"
     print_command:
-        name: '{print}'
-        default_save_name: print
         description: 介绍print命令
         levels:
             1:
@@ -3414,7 +2673,6 @@ adventures:
                     {print} '你得到' score
                     ```
     random_command:
-        name: '{random}'
         default_save_name: random_命令
         description: 介绍 at random 命令
         levels:
@@ -3471,7 +2729,6 @@ adventures:
                     {print} fruit[random]
                     ```
     repeat_command:
-        name: '{repeat}'
         default_save_name: repeat_命令
         description: '{repeat}命令'
         levels:
@@ -3515,7 +2772,6 @@ adventures:
                     {else}
                         {print} 'Maybe you should practice some more in the previous level'
     repeat_command_2:
-        name: '{repeat} 2'
         default_save_name: repeat_命令_2
         description: '{repeat} 命令 2'
         levels:
@@ -3656,13 +2912,6 @@ adventures:
 
                     **额外**你是否对问题和适当的回应进行了编程?然后尝试在代码中添加更多的`{if}`和`{else}`命令。
                     尝试在代码中的每个`{ask}`命令之后添加一个`{if}`，以使代码尽可能具有交互性!
-                example_code: |
-                    ```
-                    drinks_in_stock {is} water, lemonade, cola, orange juice
-                    drink {is} {ask} 'What would you like to drink?'
-                    {if} drink {in} drinks_in_stock {print} 'One ' drink 'coming up!'
-                    {else} {print} 'Sorry, we do not sell that'
-                    ```
             6:
                 story_text: |
                     在这个级别中，你可以使用数学来计算顾客点餐的总价格，这可以使你的虚拟餐厅更加逼真。
@@ -3859,10 +3108,10 @@ adventures:
                     ```
             2:
                 story_text: |
-                    在这个关卡中，你可以练习使用变量，这样你就可以在下一个关卡中制作石头、剪刀、布游戏!
+                    在这一关中，您可以练习使用变量，以便在下一关中制作石头、剪刀、布游戏！
                     ### 练习
-                    通过在空格上填写**变量**来完成代码。
-                    这个游戏不是很互动，但是不用担心!在下一个选项卡中，您将学习如何使用`{ask}`命令和变量来使您的游戏具有互动性!
+                    通过在空白处填写**变量**来完成代码。
+                    这个游戏的互动性不强，但不用担心！在下一个选项卡中，您将学习如何使用变量和`{ask}`命令让您的游戏具有互动性！
                 example_code: |-
                     ```
                     选择 {is} 石头
@@ -3892,11 +3141,6 @@ adventures:
                     在这一级，我们可以进一步对石头剪刀布游戏编程。但是如果你想要添加文字，你同样需要使用引号。
                     ### 练习
                     Fill in quotation marks on the blanks. Mind that the variable `choices` should be outside the quotes.
-                example_code: |
-                    ```
-                    choices {is} rock, paper, scissors
-                    {print} _The computer chooses..._ choices {at} {random}
-                    ```
             5:
                 story_text: |
                     在这一阶段，我们可以决定胜负。为此，您需要新的`{if}`代码。
@@ -3926,22 +3170,6 @@ adventures:
                     你能完成代码吗？程序必须能判断赢家以及对应的组合是什么。
 
                      **另外** 想玩多玩几个游戏吗？拓展代码，以便您可以多玩几个回合。您甚至可以使用 `{ask}` 询问用户他们想玩多少回合。
-                example_code: |
-                    ```
-                    choices = rock, paper, scissors
-                    your_choice {is} {ask} 'What do you choose?'
-                    {print} 'You choose ' your_choice
-                    computer_choice {is} choices {at} {random}
-                    {print} 'The computer chooses ' computer_choice
-                    {if} computer_choice {is} your_choice
-                        {print} 'Tie'
-                    {if} computer_choice {is} rock
-                        {if} your_choice {is} paper
-                            {print} 'You win!'
-                        {if} your_choice {is} scissors
-                            {print} 'You lose!'
-                    # finish this code
-                    ```
             10:
                 story_text: |
                     ### 练习
@@ -4058,138 +3286,7 @@ adventures:
                     {else}
                         {print} '10.00去火车站'
                     ```
-    simon:
-        name: Simon Says
-        default_save_name: Simon
-        description: Make a game of Simon Says
-        levels:
-            16:
-                story_text: |
-                    Let's make a game of Simon Says! Simon Says is a memory game in which the player will be given a color. They have to repeat that color back.
-                    If they get it right a color is added to the sequence, so they now have to remember 2 colors, then 3, then 4 etc. the game stops as soon as the player makes a mistake.
-
-                    ### Exercise
-                    In this first part of the Simon Says adventure, we'll let the computer pick a random color and add it to a list.
-
-                    ***Make 2 lists*** First, make a list called `colors` and fill it with the colors red, yellow, green and blue.
-                    Then make a list called `simon_sequence`. This list will be used as the answer.
-                    At the start of the game this lists need to be empty. unfortunately, we can't create an empty list (yet), so we'll fill it with the words 'empty' and 'list' and we'll remove them from the list immediately.
-
-                    ***Create a function that adds a color to the sequence*** Now that we have an empty list called simon_sequence, we can start filling it with random colors.
-                    We do that with a function, so we can call it everytime there's a new level in our game. Create a function called `add_random_color`.
-                    Then create the variable random_color and set it to a random color. Next, add this random color to the simon_sequence.
-
-                    ***Create a function that shows the simon_sequence*** Start by naming the new function `show_simon_sequence` with `level` as an argument. Now we want to show as many colors as the level we are in (in level 1 you see 1 color, in level 2 you see 2 colors etc).
-                    So we repeat `level` times, to print the `simon_sequence[i]`. Each time a color is shown, wait for 1 second and then clear the screen.
-
-                    ***Test your program*** Before you go to the next level, test if the functions are working by calling both of the functions. If they're working you should see a random color in your output screen.
-                    Remove this testing part of your code, copy the code and continue to the next tab to learn more about the simon says game!
-                example_code: |
-                    ```
-                    # Make 2 lists
-                    colors = _
-                    _ = ['empty', 'list']
-                    {remove} _ {from} simon_sequence
-                    {remove} _
-
-                    # Create a function that adds a color
-                    _ add_random_color
-                        _
-                        {add} _
-
-                    # Create a function that shows the simon_sequence
-                    {define} _
-                        {for} i {in} {range} 1 {to} _
-                            {print} _
-                            _
-                            _
-
-                    # Test your program
-                    {call} _
-                    {call} show_simon_sequence {with} 1
-                    ```
-    simon_2:
-        name: Simon Says 2
-        default_save_name: Simon
-        description: Make a game of Simon Says
-        levels:
-            16:
-                story_text: |
-                    We'll continue with our Simon Says game!
-
-                    ### Exercise
-                    ***Paste your code here*** Paste your code from the previous level here. Don't forget to remove the part that was just used for testing the functions.
-
-                    ***Create a function that creates the player_sequence*** The list `player_sequence` is used to capture the answers of the player. First we define the function with the argument level.
-                    Next, we ask level times what the color is that they choose. We call that variable `answer`. Then we add the variable `answer` to the list player_sequence.
-
-                    ***Setting up the game*** Before we program the game in the next tab, we'll need some starting variables. First, we'll set the variable `level` to 1 and the variable `game_over` to False.
-                    Then we make an introduction for the game. We'll print 'Welcome to Simon Says!' and clear the screen after 1 second.
-
-                    ***Continue to the next tab to finish the game!**** Don't forget to copy your code and take it with you to the next tab.
-                example_code: |
-                    ```
-                    # Paste your code here
-
-
-                    # Create a function that creates the player_sequence
-                    {define} _
-                        {for} _
-                            _ 'What is color number ' i '?'
-                            {add} answer {to} _
-
-                    # Set up
-                    level = _
-                    game_over = _
-                    {print} _
-                    _ 1
-                    _
-                    ```
-    simon_3:
-        name: Simon Says 3
-        default_save_name: Simon
-        description: Make a game of Simon Says
-        levels:
-            16:
-                story_text: |
-                    In this tab we'll program the game of Simon Says!
-
-                    ### Exercise
-                    ***Paste your code*** Copy your code from the previous tab and paste it here.
-
-                    ***Program the game*** We start by making sure the game goes on while the game isn't over. Then we print what level the player is on, we use the variable level for that. We only show that for 1 second and then we clear the screen again.
-                    Now, we have to create the empty list player_sequence. We've already programmed how to fill the list, with our function `player_sequence`, but we never made the list itself. To create the list we use the same trick as we did in the previous tab.
-                    We'll make a list with the words 'empty' and 'list' on it, and then we remove both these words. Next, we'll call all of the 3 functions that we've created.
-                    Lastly, we'll have to check if the player gave the correct answers (so if the player_sequence and the simon_sequence are the same).
-                    If that's the case, we'll compliment the player. Wait for 1 second and increase the level with 1.
-                    Did the player give the wrong answer, we'll tell them and end the game by setting game_over to 'True'
-
-                    ***Enjoy your game!*** Great job! Does your game not work? Use the ladybug button to debug your code!
-                example_code: |
-                    ```
-                    # Paste your code here
-
-                    # The game
-                    {while} game_over _
-                        {print} _
-                        _
-                        _
-                        _ = ['empty', 'list']
-                        {remove} _
-                        {remove} _
-                        {call} _
-                        {call} _ {with} _
-                        {call} _ {with} _
-                        {if} player_sequence == _
-                            _
-                            _
-                            _
-                        {else}
-                            _
-                            game_over = _
-                    ```
     sleep_command:
-        name: '{sleep}'
         default_save_name: sleep_命令
         description: 介绍 {sleep} 命令
         levels:
@@ -4307,18 +3404,6 @@ adventures:
                 story_text: |
                     在前面的冒险中，您已经学习了如何在函数中使用参数，但是你知道你也可以将它们与`{ask}`命令结合使用吗?
                     在这个例子中，我们改变了“我的邦妮”程序，使其具有互动性。你现在要问的是邦妮在哪里。
-                example_code: |
-                    ```
-                    {define} song {with} place
-                        {print} 'My Bonnie is ' place
-
-                    chosen_place = {ask} 'Where do you want Bonnie to be?'
-                    synonym = {ask} 'What is another word for that?'
-
-                    {call} song {with} chosen_place
-                    {call} song {with} synonym
-                    {call} song {with} chosen_place
-                    ```
             16:
                 story_text: |
                     在这个关卡中，你可以更快地编写一首像OldMacDonald这样的歌曲。你可以把正确的动物和正确的声音联系起来，只要把它们放在列表的同一位置。
@@ -4396,177 +3481,6 @@ adventures:
                     {print} '好像一颗钻石'
                     {call} _
                     ```
-            16:
-                story_text: |
-                    ### Exercise
-                    Finish the nursery rhyme!
-                example_code: |
-                    ```
-                    number = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
-                    object = ['on his drum', 'on his shoe', 'on his knee', 'on his door', 'on his hive', 'on his sticks', 'up in heaven', 'on his gate', 'on his vine', 'once again']
-
-                    _
-                        {print} 'This old man'
-                        {print} 'He played ' _
-                        {print} 'He played knick-knack ' _
-                        {print} 'With a knick-knack paddywhack'
-                        {print} 'Give the dog a bone'
-                        {print} 'This old man came rolling home'
-                        {sleep} 8
-                        {clear}
-                    ```
-                story_text_2: |
-                    ### Exersice 2
-                    Now create your own code for the nursery rhyme 'The wheels on the bus' on the same way!
-                example_code_2: |
-                    ```
-                    object = ['wheels', 'doors', _]
-                    movement = [ 'round and round', 'open and shut', _]
-                    ```
-    tic:
-        name: Tic-Tac-Toe
-        default_save_name: Tic
-        description: Play a game of Tic Tac Toe!
-        levels:
-            16:
-                story_text: |
-                    Let's program a game of tic-tac-toe!
-
-                    ### Exercise
-                    In this adventure we'll start with creating an empty field.
-
-                    ***Create a list called field*** This list will be our playing field. This list is filled with 9 dots, since there are no x's and o's yet at the start of our game.
-
-                    ***Create a function that prints the field*** Firstly, clear the screen so the old playing fields will be removed. Then we print the first line of our Tic Tac Toe field. This line constists of the first 3 spots in our list field.
-                    We have already programmed this line for you. Now finish the field by printing spot 4, 5, and 6 on the second row and spot 7, 8 and 9 in the third row.
-
-                    ***Call the function that prints the field*** Now call the function.
-                    <div class="w-full flex flex-row gap-2">
-                        Run the code. Your output should look like this: <img src="https://github.com/hedyorg/hedy/assets/80678586/bcbd156e-4b48-4e82-84ae-f86d21b0cbcc" width="100">
-                    </div>
-
-                    ***Continue in the next tab*** In the next tab you'll learn how to program the game itself.
-                example_code: |
-                    ```
-                    # Create a list called field
-                    _ = ['.', '.', '.', '.', '.', '.', '.', '.', '.']
-
-                    # Create a function that prints the field
-                    {define} print_field
-                        _
-                        {print} 'TIC TAC TOE'
-                        {print} field[1] field[2] field[3]
-                        _
-                        _
-
-                    # Call the function
-                    ```
-            17:
-                story_text: |
-                    In the previous level you've learned how to make a tic-tac-toe game. The game works, but is quite annoying as it keeps asking you if you've won yet.
-                    Now that we have the {elif} command, we can let the game decide if someone has won and it can stop asking us!
-
-                    ### Exercise
-                    ***Paste your code*** Paste your code from the previous level here and make it level 17 proof. In this level you've learned to use a colon everytime you create a block of code. Please add the colons in the correct spots.
-
-                    ***Create a function that detects if someone's won*** We have started the function for you, paste it under the function `print_field` and finish the function. You can see that this first piece of code checks to see if spot 1, 2 and 3 are the same, because if they are you have 3 in a row.
-                    It also checks if they are not a dot, because if they are, the line might have the same symbols on them, but that's just because it's still empty.
-                    If all these conditions are met, the game is over and the winner is printed.
-                    Finish this function with all possible ways to win. This means you have to make this for the other 2 rows, 3 columns and 2 diagonals.
-                    If you've finished all the other options, the function should return the variable `game_over` so we can use it in our game.
-
-                    ***Call the function in the game*** Go to the line `game_over = {ask} 'Did you win?'` and change it to `game_over = {call} detect_winner {with} field, sign`. Now the function will check if there's a winner and the game doesn't need to keep asking anymore!
-
-                    ***Enjoy your game!*** Great job! You have finished the game! Enjoy playing it!
-
-                example_code: |
-                    ```
-                    # Paste your code here and make it level 17 proof
-
-                    # Create a function that detects if someone has won
-                    {define} detect_winner {with} field, sign:
-                        {if} field[1] == field[2] {and} field[2] == field[3] {and} field[1] != '.':
-                            game_over = 'yes'
-                            {print} 'Player ' sign 'wins!'
-                        {elif}:
-                            _
-                        {else}:
-                            game_over = 'no'
-                    {return} _
-                    ```
-    tic_2:
-        name: Tic-Tac-Toe 2
-        default_save_name: Tic
-        description: Play a game of Tic Tac Toe!
-        levels:
-            16:
-                story_text: |
-                    In the previous adventure you've learned how to create a playing field. Now you'll learn how to create the game!
-
-                    ### Exercise
-                    ***Paste your code*** Start by pasting your code from the previous adventure here.
-
-                    ***Add variables*** Underneath your list called `field` we'll add 2 more variables that we'll need to program the game.
-                    The variable `game_over` tells us if the game is over, and should be 'no' at the start of the game.
-                    The variable `sign` tells us if it's the turn of player x or player o. Set the variable to 'x'.
-
-                    ***The game*** First use a {while} command, to make sure the game keeps on playing the variable while game_over is set to no.
-                    During the game, we first ask the player which spot they choose. Then we change the field with the number they chose into their sign.
-                    Then we print the field again and we ask the player if they've won yet. Lastly we want to switch whose turn it is, so if the sign is 'x' it should be 'o' and the other way around.
-
-                    ***Test your game*** Does your game work? Great, have fun playing the game! If not, use the ladybug button to debug your code.
-                    You might have noticed one mistake in the code though, you can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and steal their spot.
-                    That's not fair! Go to the next tab to learn how to fix this problem.
-                example_code: |
-                    ```
-                    # Paste your code from the previous adventure here
-
-                    # Add variables
-                    game_over = _
-                    sign = _
-
-                    # The game
-                    {while} _
-                        choice = _ 'Player ' sign '_?'
-                        field[choice] = _
-                        _ print_field
-                        game_over = {ask} _
-                        {if} sign = 'o'
-                            sign = _
-                        _
-                            sign = _
-                    ```
-    tic_3:
-        name: Tic-Tac-Toe 3
-        default_save_name: Tic
-        description: Play a game of Tic Tac Toe!
-        levels:
-            16:
-                story_text: |
-                    You might have noticed one mistake in the code you've made in the previous adventure. You can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and steal their spot.
-                    That's not fair! In this tab we'll fix that mistake.
-
-                    ### Exercise
-                    ***Paste your code here*** Paste your code from the previous adventure here.
-
-                    ***Fix the mistake*** To fix the mistake we replace the line that says `field[choice] = sign`. This turns any spot that the player has chosen into their sign.
-                    Go to the header that says 'Use this to fix the mistake' and finish the code. We first want to check if the chosen spot is still empty, so `if field[choice] = '.'`. If that is the case, you are allowed to take it.
-                    Then we make an else command and print 'Sorry, this spot is already taken' if the spot is not empty. Lastly, we add a {sleep} command, so the players can actually read the text before it gets cleared again.
-                    Now copy this piece of code and replace the line `field[choice] = sign` with this new piece of code.
-
-                    ***Play your game!*** Now the game should work properly! Good job!
-                    The only flaw is that you can get a bit annoyed that the game keeps asking you if you've won yet. Do you want to fix that? Go to level 17 and we'll fix it!
-                example_code: |
-                    ```
-                    # Paste your code here
-
-                    # Use this to fix the mistake
-                    {if} _ = '.'
-                        field[choice] = sign
-                    {else}
-                        {print} _
-                        _
-                    ```
     turtle:
         name: 海龟
         default_save_name: 海龟
@@ -4579,42 +3493,32 @@ adventures:
                     使用`{forward}`你可以向前画一条线。它后面的数字决定了海龟会走多远。`{turn} {right}`是顺时针转四分之一圈，`{turn} {left}`是逆时针转。
 
                     如果你想向后退，你可以使用`{forward}`命令，但要用一个负数。因此，比如说`{forward} -100`
-                example_code: |
-                    ```
-                    {forward} 100
-                    {turn} {left}
-                    ```
                 story_text_2: |
                     ### 练习
                     让我们开始画一个小楼梯。你能使它有5个台阶吗？
-                example_code_2: |
-                    ```
-                    {forward} 20
-                    {turn} {right}
-                    {forward} 20
-                    {turn} {left}
-                    {forward} 20
-                    ```
             2:
                 story_text: |
-                    在这一级，你可以使用变量来使海龟互动。例如，你可以问玩家海龟必须走多少步。
-                example_code: |
-                    ```
-                    答案 {is} {ask} 海龟应该走多少步？
-                    {forward}答案
-                    ```
-                story_text_2: |
-                    此外，在第1级，海龟只能左转或右转。这有点无聊！
-                    在第2级，它可以转向任何方向。
+                    在第 1 级中，乌龟只能向左或向右转。这有点无聊！
+                    在第 2 级中，他可以将鼻子指向所有方向。
 
-                    用90来转1/4圈。我们管这个叫角度。完整转一圈是360度。
+                    使用 90 度旋转四分之一，180 度旋转一半，一整圈是 360 度。
 
                     ### 练习
-                    你能用这段代码来画一个图形吗？比如三角形或者圆形？
+                    此代码现在创建字母 T。你能改变它来制作字母 B 吗？
+
+                    **额外**将字母更改为不同的字母，例如你名字的第一个字母。
+                    你还可以通过将颜色设置为 `{color}` `{white}` 来制作多个字母。 
+                story_text_2: |
+                    您可以使用变量来让乌龟 `turn`. 
+
+                    ### 练习
+                    更改代码，使其创建一个三角形。提示：您只需在一个地方更改代码。
                 example_code_2: |
                     ```
-                    {print} 正在画图
+                    {print} 绘制图形
                     角度 {is} 90
+                    {turn} 角度
+                    {forward} 25
                     {turn} 角度
                     {forward} 25
                     {turn} 角度
@@ -4647,17 +3551,6 @@ adventures:
                 story_text_2: |
                     你也可以用命令`{color}` ，改变线条的颜色。请看这个例子。
                     你还可以用命令`{color} {white}`来制作 "看不见的 "线条。你可以用这些白线在开始绘图前将乌龟移到屏幕的任何地方。
-                example_code_2: |
-                    ```
-                    {color} {white}
-                    {forward} -80
-                    {color} {green}
-                    {forward} 50
-                    {color} {yellow}
-                    {forward} 50
-                    {color} {red}
-                    {forward} 50
-                    ```
             5:
                 story_text: |
                     在第5级，你可以用`{if}`来做出选择。比如选择不同类型的图案。
@@ -4724,14 +3617,6 @@ adventures:
                     ```
                 story_text_2: |
                     **另外**我们现在还可以改进之前的能画不同图案的程序。完成这段代码，你就能画出任何你想要的多边形！
-                example_code_2: |
-                    ```
-                    figure = {ask} 'How many angles should I draw?'
-                    angle = 360 / figure
-                    {repeat} figure {times}
-                        {turn} _
-                        {forward} _
-                    ```
             9:
                 story_text: |
                     我们现在可以在 `{repeat}`中使用 `{repeat}`了，我们可以创建更复杂的图形了。
@@ -4740,17 +3625,6 @@ adventures:
                     这段代码能画三个黑色的三角形，把它改成能画出五个粉红色方块。
 
                     **（另外）** 你自己编码画出一个的至少由两种不同图形类型组成的图形。
-                example_code: |
-                    ```
-                    {color} {black}
-                    {repeat} 3 {times}
-                        {repeat} 3 {times}
-                            {forward} 10
-                            {turn} 120
-                        {color} {white}
-                        {forward} 50
-                        {color} {black}
-                    ```
             10:
                 story_text: |
                     在这个关卡中，你可以让乌龟画一个图形。
@@ -4780,18 +3654,6 @@ adventures:
                     ###练习3
                     用不同的图形创建您自己的绘图。
                     使用`{repeat}`更改图形的数量，并使用`{define}`更改图形的形状。
-                example_code: |
-                    ```
-                    {define} square
-                        {repeat} 4 {times}
-                            {turn} _
-                            {forward} _
-                    {call} square
-                    {forward} 50
-                    {call} square
-                    {forward} 50
-                    {call} square
-                    ```
     turtle_draw_it:
         name: 绘画!
         default_save_name: 绘画
@@ -4918,20 +3780,20 @@ adventures:
                     旗子 <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
                     </div>
                 example_code: |
-                    Hint for the nested squares:
+                    嵌套方块的提示:
                     ```
-                    colors = red, blue, orange, yellow, pink, purple, green, brown, black
-                    distance = 120
-                    repeat 5 times
+                    colord = 红色, 蓝色, 橙色, 黄色, 粉色, 紫色, 绿色, 棕色,黑色
+                    距离 = 120
+                    {repeat} 5 {times}
                     _
                     ```
-                    Hint for the flags:
+                    标志提示:
                     ```
-                    country = ask 'which country would you like to see the flag of?'
-                    if country is 'the Netherlands'
-                        color_1 = red
-                        color_2 = white
-                        color_3 = blue
+                    country = {ask} '您想看到哪个国家的国旗?'
+                    {if} country {is} '荷兰'
+                         coler_1 = 红色
+                         coler_1 = 白色
+                         coler_1 = 蓝色
                     ```
             10:
                 story_text: |
@@ -5067,7 +3929,6 @@ adventures:
                         {turn} random_number * 5
                         {forward} 80
                     ```
-
             14:
                 story_text: |
                     ### 练习
@@ -5129,9 +3990,7 @@ adventures:
                     星星
                     星星通常是用144度旋转来画的。例如，如果您将其稍微更改为143度，并使用`{while}`循环重复该模式多次，则可以得到此图。
     while_command:
-        name: '{while}'
         default_save_name: while_命令
-        description: '{while}'
         levels:
             15:
                 story_text: |-

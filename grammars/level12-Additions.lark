@@ -5,17 +5,18 @@ assign_list: var (_IS| _EQUALS) (text_in_quotes|NUMBER) (_COMMA (text_in_quotes|
 ?atom: NUMBER | _MINUS NUMBER | var_access | text_in_quotes //unsupported numbers are gone, we can now allow floats with NUMBER
 ?print_expression: var_access_print | error_unsupported_number | NUMBER
 
-equality_check: (list_access | var_access | text_in_quotes | NUMBER) (_IS| _EQUALS) (list_access | var_access | text_in_quotes | NUMBER)
+equality_check: (list_access | var_access | text_in_quotes | NUMBER) (_IS| _EQUALS) (list_access | var_access | text_in_quotes | NUMBER) _SPACE?
 
 in_list_check: (list_access | var_access | text_in_quotes | NUMBER) _IN var_access
+not_in_list_check: (list_access | var_access | text_in_quotes | NUMBER) _NOT_IN var_access
 sleep: _SLEEP (NUMBER | list_access | var_access | expression)?
 
 // all literal strings have to be quoted now, so arithmetic operators don't need to be excluded anymore
-text_with_spaces_without_single_quotes: /(?:[^\n،,' ]| (?!else|başka|अन्यथा|否则|ellers|anders|sinon|sino|وإلا))+/ -> text
-text_with_spaces_without_double_quotes: /(?:[^\n،," ]| (?!else|başka|अन्यथा|否则|ellers|anders|sinon|sino|وإلا))+/ -> text
+text_with_spaces_without_single_quotes: /(?:[^\n،,' ]| (?!<expand_keyword else>))+/ -> text
+text_with_spaces_without_double_quotes: /(?:[^\n،," ]| (?!<expand_keyword else>))+/ -> text
 text_in_quotes: _SINGLE_QUOTE text_with_spaces_without_single_quotes? _SINGLE_QUOTE | _DOUBLE_QUOTE text_with_spaces_without_double_quotes? _DOUBLE_QUOTE
 
-// FUNCTIONS ======================================== =============================
+// FUNCTIONS =====================================================================
 command:+= call | error_nested_define | return
 _non_empty_program: _EOL* (define | command | error_invalid) _SPACE* (_EOL+ (define | command) _SPACE*)* _EOL* //lines may end on spaces and might be separated by many newlines
 
@@ -34,6 +35,6 @@ function_name: NAME -> text
 ?simple_expression:+= call
 ?turtle_color:+= call
 
-add: _ADD_LIST (call | some_spaces) _TO_LIST var_access
-remove: _REMOVE (call | some_spaces) _FROM var_access
+add: _ADD_LIST (atom | list_access | call) _TO_LIST _SPACE var_access
+remove: _REMOVE (atom | list_access | call) _FROM _SPACE var_access
 // ================================================================================

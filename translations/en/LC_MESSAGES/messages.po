@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2000-01-01 00:00+0000\n"
+"POT-Creation-Date: 2024-06-26 16:04+0200\n"
 "PO-Revision-Date: 2000-01-01 00:00+0000\n"
 "Last-Translator: Someone <someone@example.com>\n"
 "Language: en\n"
@@ -19,154 +19,136 @@ msgstr ""
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
-msgstr "You tried to use the variable {name} on line {access_line_number}, but you set it on line {definition_line_number}. Set a variable before using it."
+msgstr "We detected that a variable `{name}` is being used on line {access_line_number} before being set. Can you set the variable before it is used?"
 
 msgid "Cyclic Var Definition"
-msgstr "The name `{variable}` needs to be set before you can use it on the right-hand side of the `{is}` command."
+msgstr "We detected that a variable `{variable}` is being used on the right-hand side of the `{is}` command before being set. Can you set the variable before it is used?"
 
 msgid "Else Without If Error"
-msgstr "On line {line_number} you used an `{else}` but there is no `{if}` on the line before it."
+msgstr "We detected that there is an `{else}` being used before an `{if}` on line {line_number}. Can you try writing an `{if}` before the `{else}`?"
 
 msgid "Function Undefined"
-msgstr "You tried to use the function {name}, but you didn't define it."
+msgstr "We detected that a function {name} is being used without being defined. Can you define the function before it is used?"
 
 msgid "Has Blanks"
-msgstr "Your code is incomplete. It contains blanks that you have to replace with code."
+msgstr "We detected that the code seems to be incomplete. Can you fill in the blanks with code?"
 
 msgid "Incomplete"
-msgstr "Oops! You forgot a bit of code! On line {line_number}, you need to enter text behind `{incomplete_command}`."
+msgstr "We detected that part of the code seems to be missing from the `{incomplete_command}` on line {line_number}. Can you try adding what's missing?"
 
 msgid "Incomplete Repeat"
-msgstr "It looks like you forgot to use a `{command}` with the `{repeat}` command you used on line {line_number}."
+msgstr "We detected that the `{repeat}` on line {line_number} is missing a `{command}` command. Can you try adding it?"
 
 msgid "Invalid"
-msgstr "`{invalid_command}` is not a Hedy level {level} command. Did you mean `{guessed_command}`?"
+msgstr "We detected that `{invalid_command}` is not a Hedy level {level} command. Can you try using `{guessed_command}`?"
 
 msgid "Invalid Argument"
-msgstr "You cannot use the command `{command}` with `{invalid_argument}`. Try changing `{invalid_argument}` to {allowed_types}."
+msgstr "We detected that `{command}` is not usable with `{invalid_argument}`. Can you try changing `{invalid_argument}` to {allowed_types}?"
 
 msgid "Invalid Argument Type"
-msgstr "You cannot use `{command}` with `{invalid_argument}` because it is {invalid_type}. Try changing `{invalid_argument}` to {allowed_types}."
+msgstr "We detected that `{command}` doesn't work with `{invalid_argument}` because it is {invalid_type}. Can you try changing `{invalid_argument}` to {allowed_types}?"
 
 msgid "Invalid At Command"
-msgstr "The `{command}` command may not be used from level 16 onward. You can use square brackets to use an element from a list, for example `friends[i]`, `lucky_numbers[{random}]`."
+msgstr "We detected that `{command}` may not be used from level 16 onward. Can you try using square brackets `[]` for lists?"
 
 msgid "Invalid Space"
-msgstr "Oops! You started a line with a space on line {line_number}. Spaces confuse computers, can you remove it?"
+msgstr "We detected that line {line_number} started with a space. Can you try removing the space?"
 
 msgid "Invalid Type Combination"
-msgstr "You cannot use `{invalid_argument}` and `{invalid_argument_2}` with `{command}` because one is {invalid_type} and the other is {invalid_type_2}. Try changing `{invalid_argument}` to {invalid_type_2} or `{invalid_argument_2}` to {invalid_type}."
+msgstr "We detected that `{invalid_argument}` and `{invalid_argument_2}` cannot be used with `{command}` because one is {invalid_type} and the other is {invalid_type_2}. Can you try changing `{invalid_argument}` to {invalid_type_2} or `{invalid_argument_2}` to {invalid_type}?"
 
 msgid "Lonely Echo"
-msgstr "You used an `{echo}` before an `{ask}`, or an `{echo}` without an `{ask}`. Place an `{ask}` before the `{echo}`."
+msgstr "We detected that an `{echo}` is being used before or without using an `{ask}`. Can you try writing an `{ask}` before the `{echo}`?"
 
 msgid "Lonely Text"
-msgstr "It looks like you forgot to use a command with the text you used in line {line_number}"
+msgstr "We detected that the code seems to be missing a command with the text that was used in line {line_number}. Can you try writing the needed command with the text"
 
 msgid "Missing Additional Command"
-msgstr "It looks like you forgot to complete writing `{command}` on line {line_number}. Try adding `{missing_command}` to your code."
+msgstr "We detected that the command `{command}` on line {line_number} is missing something. Can you try using `{missing_command}` in your code?"
 
 msgid "Missing Colon Error"
-msgstr "Starting at level 17, `{command}` needs a `:`. It looks like you forgot to use one at the end of line {line_number}."
+msgstr "We detected that `{command}` needs a `:` at the end of line {line_number}. Starting from level 17, can you start adding a `:` at the end of line with commands?"
 
 msgid "Missing Command"
-msgstr "It looks like you forgot to use a command on line {line_number}."
+msgstr "We detected that the code seems to be missing a command on line {line_number}. Can you try looking at the exercise section to find which command to use?"
 
 msgid "Missing Inner Command"
-msgstr "It looks like you forgot to use a command with the `{command}` statement you used on line {line_number}."
+msgstr "We detected that the code seems to be missing a command for the `{command}` statement on line {line_number}. Can you try looking at the exercise section to find which command to use?"
 
 msgid "Missing Square Brackets"
-msgstr "It looks like you forgot to use square brackets `[]` around the list you were creating on line {line_number}."
+msgstr "We detected that the list you created on line {line_number} is missing square brackets `[]`. Can you try adding square brackets around `[]` the list?"
 
 msgid "Missing Variable"
-msgstr "It looks like your `{command}` is missing a variable at the start of the line."
+msgstr "We detected that `{command}` is missing a variable at the start of the line. Can you try writing the variable before the `{command}?`"
 
 msgid "Misspelled At Command"
-msgstr "It looks like you might have misspelled the `{command}` command, instead you wrote `{invalid_argument}` in line {line_number}."
+msgstr "We detected that `{invalid_argument}` seems to have a spelling mistake on line {line_number}. Can you try writing `{command}` instead."
 
 msgid "No Indentation"
-msgstr "You used too few spaces in line {line_number}. You used {leading_spaces} spaces, which is not enough. Start every new block with {indent_size} spaces more than the line before."
+msgstr "We detected that there seems to be too few {leading_spaces} spaces used on line {line_number}. Can you try increasing indentation by {indent_size} for each new block."
 
 msgid "Non Decimal Variable"
-msgstr "At line {line_number}, you might have tried using a number which Hedy does not like very much! Try changing it to a decimal number like 2."
+msgstr "We detected that at line {line_number} you used a number Hedy does not support! Can you try a decimal number, like 2?"
 
 msgid "Parse"
-msgstr "The code you entered is not valid Hedy code. There is a mistake on line {location[0]}, at position {location[1]}. You typed `{character_found}`, but that is not allowed."
+msgstr "We detected that `{character_found}` is being used on line {location[0]} which is not allowed. Can you try looking for a missing or an extra character on your code?"
 
 msgid "Pressit Missing Else"
-msgstr "You forgot to add what happens when you press a different key, add an `{else}` to your code"
+msgstr "We detected that the code is missing an `{else}` to handle other key presses. Can you try adding an `{else}` to your code?"
 
 msgid "Runtime Index Error"
-msgstr "You tried to access the list {name} but it is either empty or the index is not there."
+msgstr "We detected that the list {name} is empty or its index is missing. Can you make sure that the list is not empty or try writing a number inside the `[]` for the missing index?"
 
 msgid "Runtime Value Error"
-msgstr "While running your program the command `{command}` received the value `{value}` which is not allowed. {tip}."
+msgstr "We detected that `{command}` received disallowed value `{value}`. {tip}."
 
 msgid "Runtime Values Error"
-msgstr "While running your program the command `{command}` received the values `{value}` and `{value}` which are not allowed. {tip}."
+msgstr "We detected that `{command}` received disallowed values `{value}` and `{value}`. {tip}."
 
 msgid "Save Microbit code "
 msgstr "Save Microbit code"
 
 msgid "Too Big"
-msgstr "Wow! Your program has an impressive {lines_of_code} lines of code! But we can only process {max_lines} lines in this level. Make your program smaller and try again."
+msgstr "We detected that the program has {lines_of_code} lines, but we can only process {max_lines} lines. Can you try to shorten your program?"
 
 msgid "Too Few Indents"
-msgstr "You used too few leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too few."
+msgstr "We detected that line {line_number} has too few ({leading_spaces}) spaces. Can you try to add an extra space?"
 
 msgid "Too Many Indents"
-msgstr "You used too many leading spaces in line {line_number}. You used {leading_spaces} spaces, which is too many."
+msgstr "We detected that line {line_number} has too many ({leading_spaces}) spaces. Can you try to remove the extra space?"
 
 msgid "Unexpected Indentation"
-msgstr "You used too many spaces in line {line_number}. You used {leading_spaces} spaces, which is too much. Start every new block with {indent_size} spaces more than the line before."
+msgstr "We detected that line {line_number} has too many ({leading_spaces}) spaces. Can you try adding {indent_size} more spaces per new block?"
 
 msgid "Unquoted Assignment"
-msgstr "From this level, you need to place texts to the right of the `{is}` between quotes. You forgot that for the text {text}."
+msgstr "We detected that the text to the right of the `{is}` is not written between quotes. This level requires you to start writing the text between quotes. Try doing that for the text {text}"
 
 msgid "Unquoted Equality Check"
-msgstr "If you want to check if a variable is equal to multiple words, the words should be surrounded by quotation marks!"
+msgstr "We detected that the code is trying to check if a variable equals multiple words. Can you try using quotation marks for the words you want to check?"
 
 msgid "Unquoted Text"
-msgstr "Be careful. If you `{ask}` or `{print}` something, the text should start and finish with a quotation mark. You forgot that for the text {unquotedtext}."
+msgstr "We detected that text for `{ask}` or `{print}` seems to be missing their quotation marks. Can you try adding quotes for {unquotedtext}?"
 
 msgid "Unsupported Float"
-msgstr "Non-integer numbers are not supported yet but they will be in a few levels. For now change `{value}` to an integer."
+msgstr "We detected that the code uses non-integer numbers which are not supported yet. Can you try changing `{value}` to an integer?"
 
 msgid "Unsupported String Value"
-msgstr "Text values cannot contain `{invalid_value}`."
+msgstr "We detected that text uses values it cannot contain `{invalid_value}`. Can you try removing the written value or change its type?"
 
 msgid "Unused Variable"
-msgstr "You defined the variable {variable_name} on line {line_number}, but you did not use it."
+msgstr "We detected that variable {variable_name} defined on line {line_number}, but not used. Can you try using the defined variable or remove it?"
 
 msgid "Var Undefined"
-msgstr "You tried to use the variable `{name}`, but you didn't set it. It is also possible that you were trying to use the word `{name}` but forgot quotation marks."
+msgstr "We detected that variable `{name}` is being used before being set. Can you set the variable before it is used or use quotation marks for `{name}`?"
 
 msgid "Wrong Level"
-msgstr "That was correct Hedy code, but not at the right level. You wrote `{offending_keyword}` for level {working_level}. Tip: {tip}"
+msgstr "We detected that the written code is correct Hedy code, but `{offending_keyword}` is used on level {working_level}. {tip}"
 
 msgid "Wrong Number of Arguments"
-msgstr "Your function used the wrong number of arguments. You provided {used_number} but the function {name} needs {defined_number}"
+msgstr "We detected that function {name} has wrong number of arguments which is {used_number}. Can you try writing {defined_number} instead?"
 
 msgid "account_overview"
 msgstr "Account overview"
-
-msgid "accounts_created"
-msgstr "Accounts were successfully created."
-
-msgid "accounts_intro"
-msgstr "On this page you can create accounts for multiple students at once. These are automatically added to the current class, so make sure the class shown above is the right one! Every username needs to be unique in the entire Hedy system. You can use 'Postfix classname' to add your class name to all accounts. If you manually enter passwords, these need to be <b>at least</b> 6 characters."
-
-msgid "achievement_earned"
-msgstr "You've earned an achievement!"
-
-msgid "achievements"
-msgstr "achievements"
-
-msgid "achievements_check_icon_alt"
-msgstr "Achievement check icon"
-
-msgid "achievements_logo_alt"
-msgstr "Achievement logo"
 
 msgid "actions"
 msgstr "Actions"
@@ -176,9 +158,6 @@ msgstr "Add"
 
 msgid "add_students"
 msgstr "Add students"
-
-msgid "add_students_options"
-msgstr "Add students options"
 
 msgid "add_your_language"
 msgstr "Add your language!"
@@ -213,6 +192,9 @@ msgstr "Make sure you always surround keywords with { } when you write them outs
 msgid "adventure_exp_classes"
 msgstr "Your adventure is used within the following classes"
 
+msgid "adventure_flagged"
+msgstr "The adventure was flagged successfully."
+
 msgid "adventure_id_invalid"
 msgstr "This adventure id is invalid."
 
@@ -234,11 +216,20 @@ msgstr "The adventure has been updated!"
 msgid "adventures"
 msgstr "Adventures"
 
+msgid "adventures_completed"
+msgstr "Adventures completed: {number_of_adventures}"
+
 msgid "adventures_info"
 msgstr "Each Hedy level has built-in exercises for students, which we call adventures. You can create your own adventures and add them to your classes. With your own adventures you can create adventures that are relevant and interesting for your students. You can find more information about creating your own adventures <a href=\"https://hedy.org/for-teachers/manual/features\">here</a>."
 
 msgid "adventures_restored"
 msgstr "The default adventures have been restored."
+
+msgid "adventures_ticked"
+msgstr "Adventures ticked"
+
+msgid "adventures_tried"
+msgstr "Adventures tried"
 
 msgid "ago"
 msgstr "{timestamp} ago"
@@ -258,26 +249,14 @@ msgstr "All"
 msgid "all_class_highscores"
 msgstr "All students visible in class highscores"
 
+msgid "all_rows_missing_separator"
+msgstr "None of the rows contain a semicolon. Perhaps you want to let us auto generate passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, use a semicolon to separate usernames and passwords on the following lines: {rows}"
+
 msgid "already_account"
 msgstr "Already have an account?"
 
 msgid "already_program_running"
 msgstr "There is already a program running, finish that one first."
-
-msgid "already_teacher"
-msgstr "You already have a teacher account."
-
-msgid "already_teacher_request"
-msgstr "You already have a pending teacher request."
-
-msgid "amount_created"
-msgstr "programs created"
-
-msgid "amount_saved"
-msgstr "programs saved"
-
-msgid "amount_submitted"
-msgstr "programs submitted"
 
 msgid "are_you_sure"
 msgstr "Are you sure? You cannot revert this action."
@@ -287,6 +266,9 @@ msgstr "Starting in level 2, `{ask}` needs to be used with a variable. Example: 
 
 msgid "available_in"
 msgstr "Available in:"
+
+msgid "back_to_class"
+msgstr "Go back to class"
 
 msgid "become_a_sponsor"
 msgstr "Become a sponsor"
@@ -324,8 +306,11 @@ msgstr "You are already a student of class"
 msgid "class_customize_success"
 msgstr "Class successfully customized."
 
-msgid "class_live"
-msgstr "Live statistics"
+msgid "class_graph_explanation"
+msgstr "In this graph you can see represented the numbers of adventures your students have attempted (meaning they have done meaningful work in that adventure), with respect to the number of errors and successful runs."
+
+msgid "class_logs"
+msgstr "Last Login"
 
 msgid "class_name_duplicate"
 msgstr "You already have a class with this name."
@@ -339,8 +324,8 @@ msgstr "This class name is invalid."
 msgid "class_name_prompt"
 msgstr "Please enter the name of the new class"
 
-msgid "class_overview"
-msgstr "Class overview"
+msgid "class_performance_graph"
+msgstr "Class performance graph"
 
 msgid "class_survey_description"
 msgstr "We would like to get a better overview of our Hedy users. By providing these answers, you would help improve Hedy. Thank you!"
@@ -366,6 +351,9 @@ msgstr "Classes"
 msgid "classes_info"
 msgstr "Create a class to follow the progress of each student in dashboard, and to customize the adventures your students see, and even adding your own! You can create as many classes as you like, and each class can have multiple teachers each one with different roles. You can also add as many students as you want, but mind that each student can only be in one class at a time. You can find more information about classes in the <a href=\"https://hedy.org/for-teachers/manual/preparations#for-teachers\">teacher manual</a>."
 
+msgid "clear"
+msgstr "Clear"
+
 msgid "clone"
 msgstr "Clone"
 
@@ -387,8 +375,8 @@ msgstr "Command not correct anymore"
 msgid "commands"
 msgstr "Commands"
 
-msgid "common_errors"
-msgstr "Common errors"
+msgid "complete"
+msgstr "Completed"
 
 msgid "congrats_message"
 msgstr "Congratulations, {username}, you have reached the following results with Hedy!"
@@ -396,11 +384,20 @@ msgstr "Congratulations, {username}, you have reached the following results with
 msgid "connect_guest_teacher"
 msgstr "I would like to be connected with a guest teacher who can give a few lessons"
 
+msgid "constant_variable_role"
+msgstr "constant"
+
 msgid "content_invalid"
 msgstr "This adventure is invalid."
 
+msgid "continue"
+msgstr "Continue"
+
 msgid "contributor"
 msgstr "Contributor"
+
+msgid "copy_accounts_to_clipboard"
+msgstr "Copy to clipboard"
 
 msgid "copy_clipboard"
 msgstr "Successfully copied to clipboard"
@@ -429,17 +426,17 @@ msgstr "Country"
 msgid "country_invalid"
 msgstr "Please select a valid country."
 
-msgid "country_title"
-msgstr "Country"
-
 msgid "create_account"
 msgstr "Create account"
 
 msgid "create_accounts"
 msgstr "Create accounts"
 
+msgid "create_accounts_placeholder"
+msgstr "Type the accounts or paste them from a spreadsheet"
+
 msgid "create_accounts_prompt"
-msgstr "Are you sure you want to create these accounts?"
+msgstr "You will create {number_of_accounts} student accounts. Are you sure?"
 
 msgid "create_adventure"
 msgstr "Create adventure"
@@ -447,26 +444,32 @@ msgstr "Create adventure"
 msgid "create_class"
 msgstr "Create a new class"
 
-msgid "create_multiple_accounts"
-msgstr "Create multiple accounts"
-
-msgid "create_public_profile"
-msgstr "Create public profile"
-
-msgid "create_question"
-msgstr "Do you want to create one?"
-
 msgid "create_student_account"
 msgstr "Create an account"
 
 msgid "create_student_account_explanation"
 msgstr "You can save your own programs with an account."
 
+msgid "create_student_accounts"
+msgstr "Create student accounts for"
+
 msgid "create_teacher_account"
 msgstr "Create a teacher account"
 
 msgid "create_teacher_account_explanation"
 msgstr "With a teacher account, you can save your programs and see the results of your students."
+
+msgid "create_usernames_and_passwords_desc"
+msgstr "Enter one username and password per line, separated by a semicolon. Or, if you have the data in a two-column spreadsheet, copy the file content and paste here."
+
+msgid "create_usernames_and_passwords_title"
+msgstr "Usernames and passwords"
+
+msgid "create_usernames_desc"
+msgstr "Enter one username per line or paste them from a spreadsheet."
+
+msgid "create_usernames_title"
+msgstr "Usernames"
 
 msgid "creator"
 msgstr "Creator"
@@ -488,6 +491,9 @@ msgstr "Customize class"
 
 msgid "dash"
 msgstr "a dash"
+
+msgid "debug"
+msgstr "Debug"
 
 msgid "default_401"
 msgstr "Looks like you aren't authorized..."
@@ -524,6 +530,9 @@ msgstr "Delete public profile"
 
 msgid "delete_success"
 msgstr "Program deleted successfully."
+
+msgid "delete_tag_prompt"
+msgstr "Are you sure you want to delete this tag?"
 
 msgid "destroy_profile"
 msgstr "Delete profile"
@@ -564,9 +573,6 @@ msgstr "double quotes"
 msgid "download"
 msgstr "Download"
 
-msgid "download_login_credentials"
-msgstr "Do you want to download the login credentials after the accounts creation?"
-
 msgid "duplicate"
 msgstr "Duplicate"
 
@@ -606,6 +612,9 @@ msgstr "Enter your answer here..."
 msgid "error_logo_alt"
 msgstr "Error logo"
 
+msgid "errors"
+msgstr "Errors"
+
 msgid "exclamation mark"
 msgstr "an exclamation mark"
 
@@ -629,15 +638,6 @@ msgstr "Please select a valid experience, choose (Yes, No)."
 
 msgid "expiration_date"
 msgstr "Expiration date"
-
-msgid "explore_explanation"
-msgstr "On this page you can look through programs created by other Hedy users. You can filter on both a Hedy level and adventure. Click on \"View program\" to open a program and run it. Programs with a red header contain a mistake. You can still open the program, but running it will result in an error. You can of course try to fix it! If the creator has a public profile you can click their username to visit their profile. There you will find all their shared programs and much more!"
-
-msgid "explore_programs"
-msgstr "Explore programs"
-
-msgid "explore_programs_logo_alt"
-msgstr "Explore programs icon"
 
 msgid "favorite_program"
 msgstr "Favorite program"
@@ -664,13 +664,16 @@ msgid "feedback_message_error"
 msgstr "Something went wrong, please try again later."
 
 msgid "feedback_message_success"
-msgstr "Thank you, we recieved your feedback and will contact you if needed."
+msgstr "Thank you, we received your feedback and will contact you if needed."
 
 msgid "feedback_modal_message"
 msgstr "Please send us a message with a category. We appreciate your help to improve Hedy!"
 
 msgid "female"
 msgstr "Female"
+
+msgid "flag_adventure_prompt"
+msgstr "Do you want to flag this adventure so that we check its appropriateness?"
 
 msgid "float"
 msgstr "a number"
@@ -699,14 +702,8 @@ msgstr "Gender"
 msgid "gender_invalid"
 msgstr "Please select a valid gender, choose (Female, Male, Other)."
 
-msgid "general"
-msgstr "General"
-
 msgid "general_settings"
 msgstr "General settings"
-
-msgid "generate_passwords"
-msgstr "Generate passwords"
 
 msgid "get_certificate"
 msgstr "Get your certificate!"
@@ -729,8 +726,8 @@ msgstr "Go to quiz result"
 msgid "goto_profile"
 msgstr "Go to my profile"
 
-msgid "grid_overview"
-msgstr "Overview of programs per adventure"
+msgid "graph_title"
+msgstr "Errors per adventure completed on level {level}"
 
 msgid "hand_in"
 msgstr "Hand in"
@@ -744,9 +741,6 @@ msgstr "How have you heard about Hedy?"
 msgid "heard_about_invalid"
 msgstr "Please select a valid way you heard about us."
 
-msgid "hedy_achievements"
-msgstr "Hedy achievements"
-
 msgid "hedy_choice_title"
 msgstr "Hedy's Choice"
 
@@ -759,35 +753,29 @@ msgstr "Hedy logo"
 msgid "hedy_on_github"
 msgstr "Hedy on Github"
 
-msgid "hedy_tutorial_logo_alt"
-msgstr "Hedy tutorial icon"
-
 msgid "hello_logo"
 msgstr "hello"
 
-msgid "hidden"
-msgstr "Hidden"
+msgid "hide_adventures"
+msgstr "Hide adventures"
 
 msgid "hide_cheatsheet"
 msgstr "Hide cheatsheet"
 
+msgid "hide_classes"
+msgstr "Hide classes"
+
 msgid "hide_keyword_switcher"
 msgstr "Hide keyword switcher"
+
+msgid "hide_slides"
+msgstr "Hide slides"
 
 msgid "highest_level_reached"
 msgstr "Highest level reached"
 
 msgid "highest_quiz_score"
 msgstr "Highest quiz score"
-
-msgid "highscore_explanation"
-msgstr "On this page you can view the current Highscores, based on the amount of achievements gathered. View the ranking for either all users, your country or your class. Click on a username to view their public profile."
-
-msgid "highscore_no_public_profile"
-msgstr "You don't have a public profile and are therefore not listed on the highscores. Do you wish to create one?"
-
-msgid "highscores"
-msgstr "Highscores"
 
 msgid "hint"
 msgstr "Hint?"
@@ -815,6 +803,9 @@ msgstr "Incorrect Indentation"
 
 msgid "input"
 msgstr "input from `{ask}`"
+
+msgid "input_variable_role"
+msgstr "input"
 
 msgid "integer"
 msgstr "a number"
@@ -885,20 +876,8 @@ msgstr "Please select a valid language."
 msgid "languages"
 msgstr "Which of these programming languages have you used before?"
 
-msgid "last_achievement"
-msgstr "Last earned achievement"
-
 msgid "last_edited"
 msgstr "Last edited"
-
-msgid "last_error"
-msgstr "Last error"
-
-msgid "last_login"
-msgstr "Last login"
-
-msgid "last_program"
-msgstr "Last program"
 
 msgid "last_update"
 msgstr "Last update"
@@ -939,8 +918,8 @@ msgstr "Link"
 msgid "list"
 msgstr "a list"
 
-msgid "live_dashboard"
-msgstr "Live Dashboard"
+msgid "list_variable_role"
+msgstr "list"
 
 msgid "logged_in_to_share"
 msgstr "You must be logged in to save and share a program."
@@ -1045,6 +1024,9 @@ msgstr "Male"
 msgid "mandatory_mode"
 msgstr "Mandatory developer's mode"
 
+msgid "more_info"
+msgstr "More information"
+
 msgid "more_options"
 msgstr "More options"
 
@@ -1056,9 +1038,6 @@ msgstr "We've noticed you have both selected several levels and included code sn
 
 msgid "my_account"
 msgstr "My account"
-
-msgid "my_achievements"
-msgstr "My achievements"
 
 msgid "my_adventures"
 msgstr "My adventures"
@@ -1096,6 +1075,9 @@ msgstr "Repeat new password"
 msgid "newline"
 msgstr "a new line"
 
+msgid "next_adventure"
+msgstr "Next adventure"
+
 msgid "next_exercise"
 msgstr "Next exercise"
 
@@ -1104,6 +1086,9 @@ msgstr "Next page"
 
 msgid "next_step_tutorial"
 msgstr "Next step >>>"
+
+msgid "next_student"
+msgstr "Next student"
 
 msgid "no"
 msgstr "No"
@@ -1117,29 +1102,23 @@ msgstr "There are no accounts to create."
 msgid "no_adventures_yet"
 msgstr "There are no public adventures yet..."
 
-msgid "no_certificate"
-msgstr "This user hasn't earned the Hedy Certificate of Completion"
-
 msgid "no_more_flat_if"
 msgstr "Starting in level 8, the code after `{if}` needs to be placed on the next line and start with 4 spaces."
 
 msgid "no_programs"
 msgstr "There are no programs."
 
-msgid "no_public_profile"
-msgstr "You don't have a public profile text yet..."
-
 msgid "no_shared_programs"
 msgstr "has no shared programs..."
+
+msgid "no_students"
+msgstr "There are no students in this class"
 
 msgid "no_such_adventure"
 msgstr "This adventure doesn't exist!"
 
 msgid "no_such_class"
 msgstr "No such Hedy class."
-
-msgid "no_such_highscore"
-msgstr "Highscores"
 
 msgid "no_such_level"
 msgstr "No such Hedy level!"
@@ -1149,6 +1128,9 @@ msgstr "No such Hedy program!"
 
 msgid "no_tag"
 msgstr "No tag provided!"
+
+msgid "not_adventure_yet"
+msgstr "You must fill in an adventure name first"
 
 msgid "not_enrolled"
 msgstr "Looks like you are not in this class!"
@@ -1168,17 +1150,20 @@ msgstr "Looks like you are not a teacher!"
 msgid "number"
 msgstr "a number"
 
-msgid "number_achievements"
-msgstr "Number of achievements"
-
 msgid "number_lines"
 msgstr "Number of lines"
+
+msgid "number_of_errors"
+msgstr "Number of errors: {number_of_errors}"
 
 msgid "number_programs"
 msgstr "Number of programs ran"
 
 msgid "ok"
 msgstr "OK"
+
+msgid "one_level_error"
+msgstr "You need to select at least one level."
 
 msgid "only_you_can_see"
 msgstr "Only you can see this program."
@@ -1219,9 +1204,6 @@ msgstr "You already have a program with this name, saving this program will repl
 msgid "owner"
 msgstr "Owner"
 
-msgid "page"
-msgstr "page"
-
 msgid "page_not_found"
 msgstr "We couldn't find that page!"
 
@@ -1261,6 +1243,9 @@ msgstr "Password updated."
 msgid "passwords_six"
 msgstr "All passwords need to be six characters or longer."
 
+msgid "passwords_too_short"
+msgstr "Passwords must be at least 6 characters long. Correct the following passwords, so that they are at least 6 symbols: {passwords}"
+
 msgid "pending_invites"
 msgstr "Pending invites"
 
@@ -1269,9 +1254,6 @@ msgstr "Other people with a link can see this program. It also can be found on t
 
 msgid "percentage"
 msgstr "percentage"
-
-msgid "percentage_achieved"
-msgstr "Achieved by {percentage}% of the users"
 
 msgid "period"
 msgstr "a period"
@@ -1285,9 +1267,6 @@ msgstr "Your personal text is invalid."
 msgid "phone_number"
 msgstr "Phone number"
 
-msgid "postfix_classname"
-msgstr "Postfix classname"
-
 msgid "preferred_keyword_language"
 msgstr "Preferred keyword language"
 
@@ -1297,6 +1276,9 @@ msgstr "Preferred language"
 msgid "preview"
 msgstr "Preview"
 
+msgid "preview_teacher_mode"
+msgstr "This account is for you to try out Hedy, note that you need to sign out and create an actual account to save your progress."
+
 msgid "previewing_adventure"
 msgstr "Previewing adventure"
 
@@ -1305,6 +1287,15 @@ msgstr "You are previewing class <em>{class_name}</em> as a teacher."
 
 msgid "previous_campaigns"
 msgstr "View previous campaigns"
+
+msgid "previous_page"
+msgstr "Previous page"
+
+msgid "print_accounts"
+msgstr "Print"
+
+msgid "print_accounts_title"
+msgstr "Student accounts for hedy.org"
 
 msgid "print_logo"
 msgstr "print"
@@ -1345,17 +1336,11 @@ msgstr "Please select a valid programming language."
 msgid "programs"
 msgstr "Programs"
 
-msgid "programs_created"
-msgstr "Programs created"
-
-msgid "programs_saved"
-msgstr "Programs saved"
-
-msgid "programs_submitted"
-msgstr "Programs submitted"
-
 msgid "prompt_join_class"
 msgstr "Do you want to join this class?"
+
+msgid "provided_username_duplicates"
+msgstr "You supplied the following usernames more than once: {usernames}"
 
 msgid "public"
 msgstr "Public"
@@ -1367,7 +1352,7 @@ msgid "public_content"
 msgstr "Public content"
 
 msgid "public_content_info"
-msgstr "You can also look for public adventures and use them as an example."
+msgstr "Here you can find our public adventures. These are adventures made by other teachers from all over the world. Take a look and feel free to use adventures in your own lessons."
 
 msgid "public_invalid"
 msgstr "This agreement selection is invalid"
@@ -1380,6 +1365,9 @@ msgstr "By selecting this box I make my profile visible for everyone. Be careful
 
 msgid "public_profile_updated"
 msgstr "Public profile updated, page will be re-loaded."
+
+msgid "put"
+msgstr "Put"
 
 msgid "question mark"
 msgstr "a question mark"
@@ -1444,11 +1432,14 @@ msgstr "Are you sure you want to report this program?"
 msgid "report_success"
 msgstr "This program has been reported"
 
+msgid "request_invalid"
+msgstr "Request invalid"
+
 msgid "request_teacher"
-msgstr "Would you like to apply for a teacher's account?"
+msgstr "Would you like to become a teacher?"
 
 msgid "request_teacher_account"
-msgstr "Request teacher account"
+msgstr "Become a teacher"
 
 msgid "required_field"
 msgstr "Fields marked with an * are required"
@@ -1465,8 +1456,8 @@ msgstr "Reset"
 msgid "reset_password"
 msgstr "Reset password"
 
-msgid "reset_view"
-msgstr "Reset"
+msgid "restart"
+msgstr "Restart"
 
 msgid "retrieve_adventure_error"
 msgstr "You're not allowed to view this adventure!"
@@ -1482,9 +1473,6 @@ msgstr "Role"
 
 msgid "run_code_button"
 msgstr "Run code"
-
-msgid "runs_over_time"
-msgstr "Runs over time"
 
 msgid "save_parse_warning"
 msgstr "This program contains an error, are you sure you want to save it?"
@@ -1555,6 +1543,9 @@ msgstr "You should soon receive an email with instructions on how to reset your 
 msgid "settings"
 msgstr "My personal settings"
 
+msgid "share"
+msgstr "Share"
+
 msgid "share_by_giving_link"
 msgstr "Show your program to other people by giving them the link below:"
 
@@ -1585,6 +1576,15 @@ msgstr "For each level of Hedy, we have created slides to help you teach. The sl
 msgid "social_media"
 msgstr "Social media"
 
+msgid "solution_example"
+msgstr "Solution Example"
+
+msgid "solution_example_explanation"
+msgstr "This is where the solution of your adventure goes. This can be used if you want to share this adventure with other teacher's, so they can know what your suggested solution is."
+
+msgid "some_rows_missing_separator"
+msgstr "The following rows are missing a semicolon, so either the username or the password is missing: {rows}"
+
 msgid "something_went_wrong_keyword_parsing"
 msgstr "There is a mistake in your adventure, are all keywords correctly surrounded with { }?"
 
@@ -1594,29 +1594,23 @@ msgstr "a space"
 msgid "star"
 msgstr "a star"
 
-msgid "start_hedy_tutorial"
-msgstr "Start hedy tutorial"
-
 msgid "start_learning"
 msgstr "Start learning"
 
-msgid "start_programming"
-msgstr "Start programming"
-
-msgid "start_programming_logo_alt"
-msgstr "Start programming icon"
-
 msgid "start_quiz"
 msgstr "Start quiz"
-
-msgid "start_teacher_tutorial"
-msgstr "Start teacher tutorial"
 
 msgid "start_teaching"
 msgstr "Start teaching"
 
 msgid "step_title"
 msgstr "Assignment"
+
+msgid "stepper_variable_role"
+msgstr "stepper"
+
+msgid "stop"
+msgstr "Stop"
 
 msgid "stop_code_button"
 msgstr "Stop program"
@@ -1627,20 +1621,29 @@ msgstr "text"
 msgid "student"
 msgstr "Student"
 
+msgid "student_accounts_created"
+msgstr "Successfully created student accounts"
+
+msgid "student_adventures_table"
+msgstr "Student's Adventures"
+
+msgid "student_adventures_table_explanation"
+msgstr "This table displays the programs created by students for each adventure in a level. By clicking the eye icon, you can view the program's page; after reviewing the program, you can tick the checkmark to indicate completion."
+
 msgid "student_already_in_class"
 msgstr "This student is already in your class."
 
 msgid "student_already_invite"
 msgstr "This student already has a pending invitation."
 
-msgid "student_details"
-msgstr "Student details"
+msgid "student_in_another_class"
+msgstr "This student is in another class. Ask the student to leave all classes and try again."
 
-msgid "student_list"
-msgstr "Student list"
+msgid "student_information"
+msgstr "Student's Information"
 
-msgid "student_not_allowed_in_class"
-msgstr "Student not allowed in class"
+msgid "student_information_explanation"
+msgstr "This table displays basic information about the students in your class. There are also several actions you can do in this table: change the password of a student by clicking the pencil icon, view the program's page of a student by clicking the code icon, and delete a student from the class by clicking the red bin icon."
 
 msgid "student_not_existing"
 msgstr "This username doesn't exist."
@@ -1675,11 +1678,14 @@ msgstr "Subscribe"
 msgid "subscribe_newsletter"
 msgstr "Subscribe to the newsletter"
 
+msgid "successful_runs"
+msgstr "Successful runs: {successful_runs}"
+
 msgid "suggestion_color"
 msgstr "Try using another color"
 
 msgid "suggestion_note"
-msgstr "Use a note between C0 and B9 or a number between 1 and 70"
+msgstr "Try using a note between C0 and B9 or a number between 1 and 70"
 
 msgid "suggestion_number"
 msgstr "Try changing the value to a number"
@@ -1714,12 +1720,6 @@ msgstr "Tags"
 msgid "teacher"
 msgstr "Teacher"
 
-msgid "teacher_account_request"
-msgstr "You have a pending teacher account request"
-
-msgid "teacher_account_success"
-msgstr "You successfully requested a teacher account."
-
 msgid "teacher_invalid"
 msgstr "Your teacher value is invalid."
 
@@ -1731,9 +1731,6 @@ msgstr "Teacher manual"
 
 msgid "teacher_signup_header"
 msgstr "Teacher"
-
-msgid "teacher_tutorial_logo_alt"
-msgstr "Teacher tutorial icon"
 
 msgid "teacher_welcome"
 msgstr "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students."
@@ -1759,17 +1756,8 @@ msgstr "This turns in your assignment to your teacher."
 msgid "title"
 msgstr "Title"
 
-msgid "title_achievements"
-msgstr "Hedy - My achievements"
-
 msgid "title_admin"
 msgstr "Hedy - Administrator page"
-
-msgid "title_class grid_overview"
-msgstr "Hedy - Grid overview"
-
-msgid "title_class live_statistics"
-msgstr "Hedy - Live Statistics"
 
 msgid "title_class-overview"
 msgstr "Hedy - Class overview"
@@ -1788,9 +1776,6 @@ msgstr "Hedy - For teachers"
 
 msgid "title_join-class"
 msgstr "Hedy - Join class"
-
-msgid "title_landing-page"
-msgstr "Welcome to Hedy!"
 
 msgid "title_learn-more"
 msgstr "Hedy - Learn more"
@@ -1828,6 +1813,9 @@ msgstr "Hedy - View adventure"
 msgid "token_invalid"
 msgstr "Your token is invalid."
 
+msgid "too_many_accounts"
+msgstr "You cannot create more than 100 student accounts."
+
 msgid "tooltip_level_locked"
 msgstr "Your teacher disabled this level"
 
@@ -1839,6 +1827,9 @@ msgstr "Translating Hedy"
 
 msgid "translator"
 msgstr "Translator"
+
+msgid "turned_into_teacher"
+msgstr "Congratulations! You successfully turned into a teacher."
 
 msgid "tutorial"
 msgstr "Tutorial"
@@ -1863,8 +1854,8 @@ msgstr "Are you sure you want to unfavourite this program?"
 msgid "unfavourite_success"
 msgstr "Your program is unfavourited."
 
-msgid "unique_usernames"
-msgstr "All usernames need to be unique."
+msgid "unknown_variable_role"
+msgstr "unknown"
 
 msgid "unlock_thresholds"
 msgstr "Unlock level thresholds"
@@ -1890,6 +1881,12 @@ msgstr "Update public profile"
 msgid "updating_indicator"
 msgstr "Updating"
 
+msgid "use_custom_passwords"
+msgstr "Provide your own passwords"
+
+msgid "use_generated_passwords"
+msgstr "Auto generate passwords"
+
 msgid "use_of_blanks_exception"
 msgstr "Use of blanks in programs"
 
@@ -1911,6 +1908,12 @@ msgstr "This user either doesn't exist or doesn't have a public profile"
 msgid "username"
 msgstr "Username"
 
+msgid "username_contains_invalid_symbol"
+msgstr "Usernames cannot contain the symbol ':' or '@'. Remove these symbols from following usernames: {usernames}"
+
+msgid "username_contains_separator"
+msgstr "Usernames cannot contain a semicolon. Perhaps you want to supply your own passwords? If so, click the passwords toggle and create the accounts again. If this is not the case, remove the semicolon from the following usernames: {usernames}"
+
 msgid "username_empty"
 msgstr "You didn't enter an username!"
 
@@ -1923,8 +1926,11 @@ msgstr "Username cannot contain `:` or `@`."
 msgid "username_three"
 msgstr "Username must contain at least three characters."
 
-msgid "usernames_exist"
-msgstr "One or more usernames is already in use."
+msgid "usernames_too_short"
+msgstr "Usernames must be at least 3 characters long. Correct the following usernames, so that they are 3 or more symbols: {usernames}"
+
+msgid "usernames_unavailable"
+msgstr "The following usernames are not available: {usernames}. You can create similar accounts, for example, by appending an underscore or your class name."
 
 msgid "value"
 msgstr "Value"
@@ -1941,11 +1947,14 @@ msgstr "View program"
 msgid "view_slides"
 msgstr "View slides"
 
-msgid "welcome"
-msgstr "Welcome"
+msgid "waiting_for_submit"
+msgstr "Waiting for submit"
 
-msgid "welcome_back"
-msgstr "Welcome back"
+msgid "walker_variable_role"
+msgstr "walker"
+
+msgid "website"
+msgstr "Website"
 
 msgid "what_is_your_role"
 msgstr "What is your role?"
@@ -1953,23 +1962,44 @@ msgstr "What is your role?"
 msgid "what_should_my_code_do"
 msgstr "What should my code do?"
 
-msgid "whole_world"
-msgstr "The world"
+msgid "workbook_circle_question_text"
+msgstr "**Question**: Circle {goal} in this code:"
+
+msgid "workbook_circle_question_title"
+msgstr "Assign"
+
+msgid "workbook_define_question_text"
+msgstr "**Question**: What does {word} mean?"
+
+msgid "workbook_define_question_title"
+msgstr "Define"
+
+msgid "workbook_input_question_text"
+msgstr "**Question**: Which code snippet produced this output?"
+
+msgid "workbook_input_question_title"
+msgstr "Input"
+
+msgid "workbook_multiple_choice_question_text"
+msgstr "**Question**: Is this code correct or does it have an error?"
+
+msgid "workbook_multiple_choice_question_title"
+msgstr "Choose"
+
+msgid "workbook_open_question_title"
+msgstr "Open-ended question"
+
+msgid "workbook_output_question_text"
+msgstr "**Question**: What is the output of this code?"
+
+msgid "workbook_output_question_title"
+msgstr "Output"
 
 msgid "year_invalid"
 msgstr "Please enter a year between 1900 and {current_year}."
 
 msgid "yes"
 msgstr "Yes"
-
-msgid "your_account"
-msgstr "Your profile"
-
-msgid "your_class"
-msgstr "Your class"
-
-msgid "your_last_program"
-msgstr "Your last saved program"
 
 msgid "your_personal_text"
 msgstr "Your personal text..."
@@ -2085,9 +2115,6 @@ msgstr "Your program"
 #~ msgid "too_many_attempts"
 #~ msgstr "Too many attempts"
 
-#~ msgid "class_logs"
-#~ msgstr "Logs"
-
 #~ msgid "class_stats"
 #~ msgstr "Class statistics"
 
@@ -2155,9 +2182,6 @@ msgstr "Your program"
 #~ msgid "unshare_success_detail"
 #~ msgstr "Program unshared successfully."
 
-#~ msgid "back_to_class"
-#~ msgstr "Go back to class"
-
 #~ msgid "Locked Language Feature"
 #~ msgstr "You are using {concept}! That is awesome, but {concept} is not unlocked yet! It will be unlocked in a later level."
 
@@ -2172,4 +2196,238 @@ msgstr "Your program"
 
 #~ msgid "variables"
 #~ msgstr "Variables"
+
+#~ msgid "add_students_options"
+#~ msgstr "Add students options"
+
+#~ msgid "class_live"
+#~ msgstr "Live statistics"
+
+#~ msgid "class_overview"
+#~ msgstr "Class overview"
+
+#~ msgid "last_login"
+#~ msgstr "Last login"
+
+#~ msgid "page"
+#~ msgstr "page"
+
+#~ msgid "student_list"
+#~ msgstr "Student list"
+
+#~ msgid "title_class grid_overview"
+#~ msgstr "Hedy - Grid overview"
+
+#~ msgid "title_class live_statistics"
+#~ msgstr "Hedy - Live Statistics"
+
+#~ msgid "tips"
+#~ msgstr ""
+
+#~ msgid "amount_created"
+#~ msgstr "programs created"
+
+#~ msgid "amount_saved"
+#~ msgstr "programs saved"
+
+#~ msgid "common_errors"
+#~ msgstr "Common errors"
+
+#~ msgid "grid_overview"
+#~ msgstr "Overview of programs per adventure"
+
+#~ msgid "last_error"
+#~ msgstr "Last error"
+
+#~ msgid "last_program"
+#~ msgstr "Last program"
+
+#~ msgid "live_dashboard"
+#~ msgstr "Live Dashboard"
+
+#~ msgid "runs_over_time"
+#~ msgstr "Runs over time"
+
+#~ msgid "student_details"
+#~ msgstr "Student details"
+
+#~ msgid "explore_explanation"
+#~ msgstr "On this page you can look through programs created by other Hedy users. You can filter on both a Hedy level and adventure. Click on \"View program\" to open a program and run it. Programs with a red header contain a mistake. You can still open the program, but running it will result in an error. You can of course try to fix it! If the creator has a public profile you can click their username to visit their profile. There you will find all their shared programs and much more!"
+
+#~ msgid "achievement_earned"
+#~ msgstr "You've earned an achievement!"
+
+#~ msgid "achievements"
+#~ msgstr "achievements"
+
+#~ msgid "achievements_check_icon_alt"
+#~ msgstr "Achievement check icon"
+
+#~ msgid "achievements_logo_alt"
+#~ msgstr "Achievement logo"
+
+#~ msgid "amount_submitted"
+#~ msgstr "programs submitted"
+
+#~ msgid "country_title"
+#~ msgstr "Country"
+
+#~ msgid "create_public_profile"
+#~ msgstr "Create public profile"
+
+#~ msgid "general"
+#~ msgstr "General"
+
+#~ msgid "hedy_achievements"
+#~ msgstr "Hedy achievements"
+
+#~ msgid "hidden"
+#~ msgstr "Hidden"
+
+#~ msgid "highscore_explanation"
+#~ msgstr "On this page you can view the current Highscores, based on the amount of achievements gathered. View the ranking for either all users, your country or your class. Click on a username to view their public profile."
+
+#~ msgid "highscore_no_public_profile"
+#~ msgstr "You don't have a public profile and are therefore not listed on the highscores. Do you wish to create one?"
+
+#~ msgid "highscores"
+#~ msgstr "Highscores"
+
+#~ msgid "last_achievement"
+#~ msgstr "Last earned achievement"
+
+#~ msgid "my_achievements"
+#~ msgstr "My achievements"
+
+#~ msgid "no_certificate"
+#~ msgstr "This user hasn't earned the Hedy Certificate of Completion"
+
+#~ msgid "no_such_highscore"
+#~ msgstr "Highscores"
+
+#~ msgid "number_achievements"
+#~ msgstr "Number of achievements"
+
+#~ msgid "percentage_achieved"
+#~ msgstr "Achieved by {percentage}% of the users"
+
+#~ msgid "programs_created"
+#~ msgstr "Programs created"
+
+#~ msgid "programs_saved"
+#~ msgstr "Programs saved"
+
+#~ msgid "programs_submitted"
+#~ msgstr "Programs submitted"
+
+#~ msgid "title_achievements"
+#~ msgstr "Hedy - My achievements"
+
+#~ msgid "whole_world"
+#~ msgstr "The world"
+
+#~ msgid "your_class"
+#~ msgstr "Your class"
+
+#~ msgid "create_question"
+#~ msgstr "Do you want to create one?"
+
+#~ msgid "explore_programs"
+#~ msgstr "Explore programs"
+
+#~ msgid "explore_programs_logo_alt"
+#~ msgstr "Explore programs icon"
+
+#~ msgid "hedy_tutorial_logo_alt"
+#~ msgstr "Hedy tutorial icon"
+
+#~ msgid "no_public_profile"
+#~ msgstr "You don't have a public profile text yet..."
+
+#~ msgid "start_hedy_tutorial"
+#~ msgstr "Start hedy tutorial"
+
+#~ msgid "start_programming"
+#~ msgstr "Start programming"
+
+#~ msgid "start_programming_logo_alt"
+#~ msgstr "Start programming icon"
+
+#~ msgid "start_teacher_tutorial"
+#~ msgstr "Start teacher tutorial"
+
+#~ msgid "teacher_tutorial_logo_alt"
+#~ msgstr "Teacher tutorial icon"
+
+#~ msgid "title_landing-page"
+#~ msgstr "Welcome to Hedy!"
+
+#~ msgid "welcome"
+#~ msgstr "Welcome"
+
+#~ msgid "welcome_back"
+#~ msgstr "Welcome back"
+
+#~ msgid "your_account"
+#~ msgstr "Your profile"
+
+#~ msgid "your_last_program"
+#~ msgstr "Your last saved program"
+
+#~ msgid "already_teacher"
+#~ msgstr "You already have a teacher account."
+
+#~ msgid "already_teacher_request"
+#~ msgstr "You already have a pending teacher request."
+
+#~ msgid "teacher_account_request"
+#~ msgstr "You have a pending teacher account request"
+
+#~ msgid "teacher_account_success"
+#~ msgstr "You successfully requested a teacher account."
+
+#~ msgid "student_not_allowed_in_class"
+#~ msgstr "Student not allowed in class"
+
+#~ msgid "previous_adventure"
+#~ msgstr ""
+
+#~ msgid "go_next"
+#~ msgstr "Go next"
+
+#~ msgid "go_to_next_student"
+#~ msgstr ""
+
+#~ msgid "accounts_created"
+#~ msgstr "Accounts were successfully created."
+
+#~ msgid "accounts_intro"
+#~ msgstr "On this page you can create accounts for multiple students at once. These are automatically added to the current class, so make sure the class shown above is the right one! Every username needs to be unique in the entire Hedy system. You can use 'Postfix classname' to add your class name to all accounts. If you manually enter passwords, these need to be <b>at least</b> 6 characters."
+
+#~ msgid "create_multiple_accounts"
+#~ msgstr "Create multiple accounts"
+
+#~ msgid "download_login_credentials"
+#~ msgstr "Do you want to download the login credentials after the accounts creation?"
+
+#~ msgid "generate_passwords"
+#~ msgstr "Generate passwords"
+
+#~ msgid "postfix_classname"
+#~ msgstr "Postfix classname"
+
+#~ msgid "reset_view"
+#~ msgstr "Reset"
+
+#~ msgid "unique_usernames"
+#~ msgstr "All usernames need to be unique."
+
+#~ msgid "usernames_exist"
+#~ msgstr "One or more usernames is already in use."
+
+#~ msgid "**Question**: What is the output of this code?"
+#~ msgstr "**Question**: What is the output of this code?"
+
+#~ msgid "Output"
+#~ msgstr "Output"
 

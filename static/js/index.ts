@@ -19,10 +19,10 @@ export * from './statistics';
 export * from './logs';
 export * from './tutorials/tutorial';
 export * from './teachers';
-export * from './browser-helpers/unsaved-changes';
 export * from './initialize';
 export * from './debugging';
-export { getPreviousAndNext } from './tabs';
+export { getNext, getCurrentAdv } from './index-tabs';
+export { getPreviousAndNext } from './tabs'
 export * from './tailwind';
 export * from './public-adventures';
 export { loadParsonsExercise } from './parsons';
@@ -30,3 +30,5 @@ export * from './user-activity';
 export * from './adventure';
 export * from './microbit';
 export * from './autosave';
+export * from './custom-elements';
+export * from './admin';

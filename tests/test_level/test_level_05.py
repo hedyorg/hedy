@@ -25,29 +25,30 @@ class TestsLevel5(HedyTester):
     # if tests
     #
     @parameterized.expand(HedyTester.commands_level_4)
-    def test_if_equality_linebreak_print(self,  hedy, python):
+    def test_if_equality_linebreak_print(self, hedy_, python):
         # line breaks after if-condition are allowed
         code = textwrap.dedent(f"""\
         naam is Hedy
         if naam is Hedy
-        {hedy}""")
+        {hedy_}""")
 
         expected = textwrap.dedent(f"""\
         naam = 'Hedy'
-        if naam == 'Hedy':
+        if localize(naam) == localize('Hedy'):
           {python}""")
 
         self.single_level_tester(code=code, expected=expected, unused_allowed=True)
 
     def test_if_equality_trailing_space_linebreak_print(self):
-        code = textwrap.dedent("""\
+        value = 'trailing_space  '
+        code = textwrap.dedent(f"""\
         naam is James
-        if naam is trailing_space
+        if naam is {value}
         print 'shaken'""")
 
         expected = textwrap.dedent("""\
         naam = 'James'
-        if naam == 'trailing_space':
+        if localize(naam) == localize('trailing_space'):
           print(f'shaken')""")
 
         self.single_level_tester(code=code, expected=expected)
@@ -60,23 +61,24 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'James'
-        if naam == 'James Bond':
+        if localize(naam) == localize('James Bond'):
           print(f'shaken')""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=7)
+        self.single_level_tester(code=code, expected=expected)
 
     def test_if_equality_unquoted_rhs_with_space_and_trailing_space_linebreak_print(self):
-        code = textwrap.dedent("""\
+        value = 'trailing space  '
+        code = textwrap.dedent(f"""\
         naam is James
-        if naam is trailing space
+        if naam is {value}
         print 'shaken'""")
 
         expected = textwrap.dedent("""\
         naam = 'James'
-        if naam == 'trailing space':
+        if localize(naam) == localize('trailing space'):
           print(f'shaken')""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=7)
+        self.single_level_tester(code=code, expected=expected)
 
     def test_if_2_vars_equality_print(self):
         code = textwrap.dedent("""\
@@ -87,81 +89,32 @@ class TestsLevel5(HedyTester):
         expected = textwrap.dedent("""\
         jouwkeuze = 'schaar'
         computerkeuze = 'schaar'
-        if computerkeuze == jouwkeuze:
+        if localize(computerkeuze) == localize(jouwkeuze):
           print(f'gelijkspel!')""")
 
         self.single_level_tester(code=code, expected=expected, output='gelijkspel!')
 
-    def test_if_not_in_list_print(self):
+    def test_if_arabic_number_equals_latin_number(self):
         code = textwrap.dedent("""\
-        items is red, green
-        selected is red
-        if selected not in items print 'not found!'
-        else print 'found'""")
+        if ١١ is 11 print 'correct'""")
 
         expected = textwrap.dedent("""\
-        items = ['red', 'green']
-        selected = 'red'
-        if selected not in items:
-          print(f'not found!')
-        else:
-          print(f'found')""")
+        if localize('١١') == localize('11'):
+          print(f'correct')""")
 
-        self.multi_level_tester(
-            max_level=7,
-            code=code,
-            expected=expected,
-            output='found'
-        )
+        self.single_level_tester(code=code, expected=expected, output='correct')
 
-    def test_if_not_in_list_in_print(self):
+    def test_if_arabic_var_equals_latin_number(self):
         code = textwrap.dedent("""\
-        items is red, green
-        selected is purple
-        if selected not in items print 'not found!'
-        else print 'found'""")
+        a is ١١
+        if a is 11 print 'correct'""")
 
         expected = textwrap.dedent("""\
-        items = ['red', 'green']
-        selected = 'purple'
-        if selected not in items:
-          print(f'not found!')
-        else:
-          print(f'found')""")
+        a = '١١'
+        if localize(a) == localize('11'):
+          print(f'correct')""")
 
-        self.multi_level_tester(
-            max_level=7,
-            code=code,
-            expected=expected,
-            output='not found!'
-        )
-
-    def test_if_in_list_print(self):
-        code = textwrap.dedent("""\
-        items is red, green
-        selected is red
-        if selected in items print 'found!'""")
-
-        expected = textwrap.dedent("""\
-        items = ['red', 'green']
-        selected = 'red'
-        if selected in items:
-          print(f'found!')""")
-
-        self.multi_level_tester(
-            max_level=7,
-            code=code,
-            expected=expected,
-            output='found!',
-            expected_commands=['is', 'is', 'if', 'in', 'print']
-        )
-
-    def test_if_in_undefined_list(self):
-        code = textwrap.dedent("""\
-        selected is red
-        if selected in items print 'found!'""")
-
-        self.multi_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException, max_level=7)
+        self.single_level_tester(code=code, expected=expected, output='correct')
 
     def test_if_equality_unquoted_rhs_with_space_print_gives_error(self):
         code = textwrap.dedent("""\
@@ -179,11 +132,10 @@ class TestsLevel5(HedyTester):
             SkippedMapping(SourceRange(3, 1, 3, 37), hedy.exceptions.UnquotedEqualityCheckException),
         ]
 
-        self.multi_level_tester(
+        self.single_level_tester(
             code=code,
             expected=expected,
-            skipped_mappings=skipped_mappings,
-            max_level=7
+            skipped_mappings=skipped_mappings
         )
 
     def test_if_equality_unquoted_rhs_with_space_and_following_command_print_gives_error(self):
@@ -204,11 +156,10 @@ class TestsLevel5(HedyTester):
             SkippedMapping(SourceRange(4, 1, 4, 15), hedy.exceptions.InvalidCommandException)
         ]
 
-        self.multi_level_tester(
+        self.single_level_tester(
             code=code,
             expected=expected,
-            skipped_mappings=skipped_mappings,
-            max_level=7
+            skipped_mappings=skipped_mappings
         )
 
     def test_if_equality_unquoted_rhs_with_space_assign_gives_error(self):
@@ -227,11 +178,10 @@ class TestsLevel5(HedyTester):
             SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException)
         ]
 
-        self.multi_level_tester(
+        self.single_level_tester(
             code=code,
             expected=expected,
-            skipped_mappings=skipped_mappings,
-            max_level=7
+            skipped_mappings=skipped_mappings
         )
 
     @parameterized.expand(HedyTester.quotes)
@@ -242,7 +192,7 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent(f"""\
         naam = 'James'
-        if naam == 'James Bond':
+        if localize(naam) == localize('James Bond'):
           print(f'shaken')""")
 
         self.single_level_tester(
@@ -258,7 +208,7 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent(f"""\
         naam = 'James'
-        if naam == 'Bond James Bond':
+        if localize(naam) == localize('Bond James Bond'):
           print(f'shaken')""")
 
         self.single_level_tester(code=code, expected=expected)
@@ -270,7 +220,7 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent(f"""\
         name = input(f'what is your name?')
-        if name == 'Hedy':
+        if localize(name) == localize('Hedy'):
           print(f'nice')
         else:
           print(f'boo!')""")
@@ -287,7 +237,7 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent(f"""\
         answer = 'no'
-        if answer == 'He said "no"':
+        if localize(answer) == localize('He said "no"'):
           print(f'no')""")
 
         self.single_level_tester(
@@ -302,7 +252,7 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent(f"""\
         answer = 'no'
-        if answer == 'He said \\'no\\'':
+        if localize(answer) == localize('He said \\'no\\''):
           print(f'no')""")
 
         self.single_level_tester(code=code, expected=expected)
@@ -315,23 +265,19 @@ class TestsLevel5(HedyTester):
         expected = textwrap.dedent("""\
         a = 'test'
         b = '15'
-        if a == b:
+        if localize(a) == localize(b):
           c = '1'""")
 
         self.single_level_tester(code=code, expected=expected, unused_allowed=True)
 
     def test_quoted_ask(self):
-        code = textwrap.dedent("""\
-        szogek is ask 'Hello'""")
-
+        code = "szogek is ask 'Hello'"
         expected = "szogek = input(f'Hello')"
 
-        self.multi_level_tester(code=code,
-                                expected=expected,
-                                max_level=11,
-                                unused_allowed=True)
+        self.single_level_tester(code=code, expected=expected, unused_allowed=True)
 
     def test_equality_with_lists_gives_error(self):
+        # Lists can be compared for equality starting with level 14
         code = textwrap.dedent("""\
         n is 1, 2
         m is 1, 2
@@ -371,6 +317,59 @@ class TestsLevel5(HedyTester):
     #
     # if else tests
     #
+    def test_if_assign_else_assign(self):
+        code = textwrap.dedent("""\
+        num is 0
+        if num is 0 result is num else result is b
+        print result""")
+
+        expected = textwrap.dedent("""\
+        num = '0'
+        if localize(num) == localize('0'):
+          result = num
+        else:
+          result = 'b'
+        print(f'{result}')""")
+
+        self.single_level_tester(code=code, expected=expected, output='0')
+
+    @parameterized.expand(['ellers', 'else'])
+    def test_if_assign_else_assign_danish(self, else_):
+        code = textwrap.dedent(f"""\
+        num is 0
+        if num is 0 result is num {else_} result is b
+        print result""")
+
+        expected = textwrap.dedent("""\
+        num = '0'
+        if localize(num) == localize('0'):
+          result = num
+        else:
+          result = 'b'
+        print(f'{result}')""")
+
+        self.single_level_tester(code=code, expected=expected, lang='da', output='0', translate=False)
+
+    @parameterized.expand(['иначе', 'sinon'])
+    def test_if_assign_danish(self, else_):
+        # The supplied keywords are the values for `else` in other lang than Danish.
+        # So, instead of an if-else, this is an if-statement with a assignment containing spaces.
+        code = textwrap.dedent(f"""\
+        num is 0
+        if num is 0 result is num {else_} result is b
+        print result""")
+
+        expected = textwrap.dedent(f"""\
+        num = '0'
+        if localize(num) == localize('0'):
+          result = 'num {else_} result is b'
+        else:
+          x__x__x__x = '5'
+        print(f'{{result}}')""")
+
+        self.single_level_tester(code=code, expected=expected, lang='da', translate=False,
+                                 output=f'num {else_} result is b')
+
     def test_if_equality_print_else_print(self):
         code = textwrap.dedent("""\
         naam is Hedy
@@ -378,7 +377,7 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'Hedy'
-        if naam == 'Hedy':
+        if localize(naam) == localize('Hedy'):
           print(f'leuk')
         else:
           print(f'minder leuk')""")
@@ -392,7 +391,7 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent("""\
         kleur = input(f'Wat is je lievelingskleur?')
-        if kleur == 'groen':
+        if localize(kleur) == localize('groen'):
           print(f'mooi!')
         else:
           print(f'niet zo mooi')""")
@@ -407,7 +406,7 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent("""\
         kleur = 'geel'
-        if kleur == 'groen':
+        if localize(kleur) == localize('groen'):
           antwoord = 'ok'
         else:
           antwoord = 'stom'
@@ -416,20 +415,20 @@ class TestsLevel5(HedyTester):
         self.single_level_tester(code=code, expected=expected)
 
     def test_if_equality_trailing_space_linebreak_print_else(self):
-        # this code has a space at the end of line 2
-        code = textwrap.dedent("""\
+        value = 'trailing space  '
+        code = textwrap.dedent(f"""\
         naam is James
-        if naam is trailing space
+        if naam is {value} 
         print 'shaken' else print 'biertje!'""")
 
         expected = textwrap.dedent("""\
         naam = 'James'
-        if naam == 'trailing space':
+        if localize(naam) == localize('trailing space'):
           print(f'shaken')
         else:
           print(f'biertje!')""")
 
-        self.multi_level_tester(max_level=7, code=code, expected=expected)
+        self.single_level_tester(code=code, expected=expected)
 
     def test_if_equality_print_linebreak_else_print(self):
         # line break before else is allowed
@@ -440,7 +439,7 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'Hedy'
-        if naam == 'Hedy':
+        if localize(naam) == localize('Hedy'):
           print(f'leuk')
         else:
           print(f'minder leuk')""")
@@ -456,7 +455,7 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'Hedy'
-        if naam == 'Hedy':
+        if localize(naam) == localize('Hedy'):
           print(f'leuk')
         else:
           print(f'minder leuk')""")
@@ -472,7 +471,7 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'Hedy'
-        if naam == 'Hedy':
+        if localize(naam) == localize('Hedy'):
           print(f'leuk')
         else:
           print(f'minder leuk')""")
@@ -487,12 +486,12 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'James'
-        if naam == 'James Bond':
+        if localize(naam) == localize('James Bond'):
           print(f'shaken')
         else:
           print(f'biertje!')""")
 
-        self.multi_level_tester(max_level=7, code=code, expected=expected)
+        self.single_level_tester(code=code, expected=expected)
 
     def test_two_ifs_assign_no_following(self):
         code = textwrap.dedent("""\
@@ -500,7 +499,7 @@ class TestsLevel5(HedyTester):
         drink is water""")
 
         expected = textwrap.dedent("""\
-        if 'order' == 'fries':
+        if localize('order') == localize('fries'):
           price = '5'
         else:
           x__x__x__x = '5'
@@ -515,7 +514,7 @@ class TestsLevel5(HedyTester):
         print drink""")
 
         expected = textwrap.dedent("""\
-        if 'order' == 'fries':
+        if localize('order') == localize('fries'):
           price = '5'
         else:
           x__x__x__x = '5'
@@ -533,7 +532,7 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'Hedy'
-        if naam == 'Hedy':
+        if localize(naam) == localize('Hedy'):
           print(f'leuk')
         else:
           print(f'minder leuk')""")
@@ -542,15 +541,15 @@ class TestsLevel5(HedyTester):
 
     def test_if_with_negative_number(self):
         code = textwrap.dedent("""\
-      antwoord is -10
-      if antwoord is -10 print 'Nice' else print 'Oh no'""")
+            antwoord is -10
+            if antwoord is -10 print 'Nice' else print 'Oh no'""")
 
         expected = textwrap.dedent("""\
-      antwoord = '-10'
-      if antwoord == '-10':
-        print(f'Nice')
-      else:
-        print(f'Oh no')""")
+            antwoord = '-10'
+            if localize(antwoord) == localize('-10'):
+              print(f'Nice')
+            else:
+              print(f'Oh no')""")
 
         self.single_level_tester(code=code, expected=expected, output='Nice')
 
@@ -564,7 +563,7 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'Hedy'
-        if naam == 'Hedy':
+        if localize(naam) == localize('Hedy'):
           print(f'leuk')
         else:
           print(f'minder leuk')""")
@@ -582,7 +581,7 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'Hedy'
-        if naam == 'Hedy':
+        if localize(naam) == localize('Hedy'):
           print(f'leuk')
         else:
           print(f'minder leuk')""")
@@ -599,7 +598,7 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'Hedy'
-        if naam == 'Hedy':
+        if localize(naam) == localize('Hedy'):
           print(f'leuk')
         else:
           print(f'minder leuk')""")
@@ -615,13 +614,14 @@ class TestsLevel5(HedyTester):
         else
         print 'luckily no dishes because' dishwasher 'is already washing up'""")
 
-        expected = HedyTester.dedent("people = ['mom', 'dad', 'Emma', 'Sophie']",
-                                     HedyTester.list_access_transpiled('random.choice(people)'),
-                                     "dishwasher = random.choice(people)",
-                                     "if dishwasher == 'Sophie':",
-                                     ("print(f'too bad I have to do the dishes')", '  '),
-                                     "else:",
-                                     ("print(f'luckily no dishes because{dishwasher}is already washing up')", '  '))
+        expected = self.dedent(
+            "people = ['mom', 'dad', 'Emma', 'Sophie']",
+            self.list_access_transpiled('random.choice(people)'),
+            "dishwasher = random.choice(people)",
+            "if localize(dishwasher) == localize('Sophie'):",
+            ("print(f'too bad I have to do the dishes')", '  '),
+            "else:",
+            ("print(f'luckily no dishes because{dishwasher}is already washing up')", '  '))
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -633,7 +633,7 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent(f"""\
         naam = 'James'
-        if naam == 'James Bond':
+        if localize(naam) == localize('James Bond'):
           print(f'shaken')
         else:
           print(f'biertje!')""")
@@ -648,12 +648,12 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'James'
-        if naam == 'James \\'Bond\\'':
+        if localize(naam) == localize('James \\'Bond\\''):
           print(f'shaken')
         else:
           print(f'biertje!')""")
 
-        self.multi_level_tester(max_level=7, code=code, expected=expected)
+        self.single_level_tester(code=code, expected=expected)
 
     def test_if_equality_text_with_spaces_and_double_quotes_linebreak_print_else_print(self):
         code = textwrap.dedent("""\
@@ -663,12 +663,12 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'James'
-        if naam == 'James "Bond"':
+        if localize(naam) == localize('James "Bond"'):
           print(f'shaken')
         else:
           print(f'biertje!')""")
 
-        self.multi_level_tester(max_level=7, code=code, expected=expected)
+        self.single_level_tester(code=code, expected=expected)
 
     def test_if_equality_print_else_print_bengali(self):
         code = textwrap.dedent("""\
@@ -677,7 +677,7 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent("""\
         নাম = input(f'আপনার নাম কি?')
-        if নাম == 'হেডি':
+        if localize(নাম) == localize('হেডি'):
           print(f'ভালো!')
         else:
           print(f'মন্দ')""")
@@ -703,6 +703,128 @@ class TestsLevel5(HedyTester):
         )
 
     #
+    # in/not in tests
+    #
+    def test_if_var_in_list_print(self):
+        code = textwrap.dedent("""\
+        items is red, green
+        selected is red
+        if selected in items print 'found!'""")
+
+        expected = textwrap.dedent(f"""\
+        items = ['red', 'green']
+        selected = 'red'
+        if {self.in_list_transpiled('selected', 'items')}:
+          print(f'found!')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output='found!',
+            expected_commands=['is', 'is', 'if', 'in', 'print']
+        )
+
+    def test_if_var_in_list_print_else(self):
+        code = textwrap.dedent("""\
+        items is red, green
+        selected is red
+        if selected in items print 'found!'
+        else print 'not found'""")
+
+        expected = textwrap.dedent(f"""\
+        items = ['red', 'green']
+        selected = 'red'
+        if {self.in_list_transpiled('selected', 'items')}:
+          print(f'found!')
+        else:
+          print(f'not found')""")
+
+        self.single_level_tester(code=code, expected=expected, output='found!')
+
+    def test_if_var_not_in_list_print_else(self):
+        code = textwrap.dedent("""\
+        items is red, green
+        selected is purple
+        if selected not in items print 'not found!'
+        else print 'found'""")
+
+        expected = textwrap.dedent(f"""\
+        items = ['red', 'green']
+        selected = 'purple'
+        if {self.not_in_list_transpiled('selected', 'items')}:
+          print(f'not found!')
+        else:
+          print(f'found')""")
+
+        self.single_level_tester(code=code, expected=expected, output='not found!')
+
+    def test_if_ar_number_list_with_latin_numbers(self):
+        code = textwrap.dedent("""\
+        a is 11, 22, 33
+        if ١١ in a print 'correct'""")
+
+        expected = textwrap.dedent(f"""\
+        a = ['11', '22', '33']
+        if {self.in_list_transpiled("'١١'", 'a')}:
+          print(f'correct')""")
+
+        self.single_level_tester(code=code, expected=expected, output='correct')
+
+    def test_if_ar_number_not_list_with_latin_numbers(self):
+        code = textwrap.dedent("""\
+        a is 22, 33, 44
+        if ١١ not in a print 'correct'""")
+
+        expected = textwrap.dedent(f"""\
+        a = ['22', '33', '44']
+        if {self.not_in_list_transpiled("'١١'", 'a')}:
+          print(f'correct')""")
+
+        self.single_level_tester(code=code, expected=expected, output='correct')
+
+    @parameterized.expand(HedyTester.quotes)
+    def test_if_quoted_text_in_list_print(self, q):
+        code = textwrap.dedent(f"""\
+        items is red, green
+        if {q}red{q} in items print 'found!'""")
+
+        expected = textwrap.dedent(f"""\
+        items = ['red', 'green']
+        if {self.in_list_transpiled(f"'red'", 'items')}:
+          print(f'found!')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output='found!',
+            expected_commands=['is', 'if', 'in', 'print']
+        )
+
+    @parameterized.expand(HedyTester.quotes)
+    def test_if_quoted_text_not_in_list_print(self, q):
+        code = textwrap.dedent(f"""\
+        items is red, green
+        if {q}blue{q} not in items print 'not found!'""")
+
+        expected = textwrap.dedent(f"""\
+        items = ['red', 'green']
+        if {self.not_in_list_transpiled(f"'blue'", 'items')}:
+          print(f'not found!')""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output='not found!'
+        )
+
+    def test_if_in_undefined_list(self):
+        code = textwrap.dedent("""\
+        selected is red
+        if selected in items print 'found!'""")
+
+        self.multi_level_tester(code=code, exception=hedy.exceptions.UndefinedVarException, max_level=7)
+
+    #
     # combined tests
     #
 
@@ -713,14 +835,14 @@ class TestsLevel5(HedyTester):
         if name is Hedy print 'nice!'
         if name in names print 'nice!'""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         names = ['Hedy', 'Lamar']
         name = input(f'What is a name you like?')
-        if name == 'Hedy':
+        if localize(name) == localize('Hedy'):
           print(f'nice!')
         else:
           x__x__x__x = '5'
-        if name in names:
+        if {self.in_list_transpiled('name', 'names')}:
           print(f'nice!')""")
 
         self.single_level_tester(code=code, expected=expected)
@@ -733,7 +855,7 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent("""\
         antw = input(f'wat kies jij')
-        if antw == 'schaar':
+        if localize(antw) == localize('schaar'):
           print(f'gelijk spel!')
         else:
           x__x__x__x = '5'
@@ -753,18 +875,17 @@ class TestsLevel5(HedyTester):
         expected = textwrap.dedent("""\
         print(f'Welkom bij McHedy')
         eten = input(f'Wat wilt u eten?')
-        if eten == 'friet':
+        if localize(eten) == localize('friet'):
           saus = input(f'Welke saus wilt u bij de friet?')
         else:
           x__x__x__x = '5'
-        if eten == 'pizza':
+        if localize(eten) == localize('pizza'):
           topping = input(f'Welke topping wilt u op de pizza?')
         else:
           x__x__x__x = '5'
         print(f'{eten}')""")
 
-        self.single_level_tester(code=code,
-                                 expected=expected, translate=False, unused_allowed=True)
+        self.single_level_tester(code=code, expected=expected, translate=False, unused_allowed=True)
 
     def test_onno_3372_else(self):
         code = textwrap.dedent("""\
@@ -774,7 +895,7 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent("""\
         antw = input(f'wat kies jij')
-        if antw == 'schaar':
+        if localize(antw) == localize('schaar'):
           print(f'gelijk spel!')
         else:
           print(f'')
@@ -792,11 +913,11 @@ class TestsLevel5(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = input(f'hoe heet jij?')
-        if naam == 'Hedy':
+        if localize(naam) == localize('Hedy'):
           print(f'leuk')
         else:
           x__x__x__x = '5'
-        if naam == 'Python':
+        if localize(naam) == localize('Python'):
           print(f'ook leuk')
         else:
           print(f'minder leuk!')""")
@@ -811,14 +932,14 @@ class TestsLevel5(HedyTester):
         if name is Hedy print 'nice!' else print 'meh'
         if name in names print 'nice!' else print 'meh'""")
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(f"""\
         names = ['Hedy', 'Lamar']
         name = input(f'What is a name you like?')
-        if name == 'Hedy':
+        if localize(name) == localize('Hedy'):
           print(f'nice!')
         else:
           print(f'meh')
-        if name in names:
+        if {self.in_list_transpiled('name', 'names')}:
           print(f'nice!')
         else:
           print(f'meh')""")
@@ -827,58 +948,58 @@ class TestsLevel5(HedyTester):
 
     def test_turn_if_forward(self):
         code = textwrap.dedent("""\
-        angle is 90, 180, 270
-        direction is angle at random
-        turn direction
-        if direction is 180 forward 100""")
+            angle is 90, 180, 270
+            direction is angle at random
+            turn direction
+            if direction is 180 forward 100""")
 
-        expected = HedyTester.dedent(
+        expected = self.dedent(
             """\
             angle = ['90', '180', '270']""",
-            HedyTester.list_access_transpiled('random.choice(angle)'),
+            self.list_access_transpiled('random.choice(angle)'),
             "direction = random.choice(angle)",
-            HedyTester.turn_transpiled('direction', self.level),
-            "if direction == '180':",
-            (HedyTester.forward_transpiled(100, self.level), '  '))
+            self.turn_transpiled('direction'),
+            "if localize(direction) == localize('180'):",
+            (self.forward_transpiled(100), '  '))
 
         self.single_level_tester(code=code, expected=expected)
 
     def test_turn_if_forward_else_forward(self):
         code = textwrap.dedent("""\
-        angle is 90, 180, 270
-        direction is angle at random
-        if direction is 180 forward direction
-        else turn direction""")
+            angle is 90, 180, 270
+            direction is angle at random
+            if direction is 180 forward direction
+            else turn direction""")
 
-        expected = HedyTester.dedent(
+        expected = self.dedent(
             """\
             angle = ['90', '180', '270']""",
-            HedyTester.list_access_transpiled('random.choice(angle)'),
+            self.list_access_transpiled('random.choice(angle)'),
             "direction = random.choice(angle)",
-            "if direction == '180':",
-            (HedyTester.forward_transpiled('direction', self.level), '  '),
+            "if localize(direction) == localize('180'):",
+            (self.forward_transpiled('direction'), '  '),
             "else:",
-            (HedyTester.turn_transpiled('direction', self.level), '  '))
+            (self.turn_transpiled('direction'), '  '))
 
         self.single_level_tester(code=code, expected=expected)
 
     def test_list_access_index(self):
         code = textwrap.dedent("""\
-        friends is Hedy, Lola, Frida
-        friend is friends at 2
-        print friend""")
+            friends is Hedy, Lola, Frida
+            friend is friends at 2
+            print friend""")
 
-        expected = HedyTester.dedent("friends = ['Hedy', 'Lola', 'Frida']",
-                                     HedyTester.list_access_transpiled('friends[int(2)-1]'),
-                                     "friend = friends[int(2)-1]",
-                                     "print(f'{friend}')")
+        expected = self.dedent(
+            "friends = ['Hedy', 'Lola', 'Frida']",
+            self.list_access_transpiled('friends[int(2)-1]'),
+            "friend = friends[int(2)-1]",
+            "print(f'{friend}')")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.single_level_tester(code=code, expected=expected)
 
     #
     # negative tests
     #
-
     def test_if_indent_gives_parse_error(self):
         code = textwrap.dedent("""\
         option is ask 'Rock Paper or Scissors?'
@@ -895,11 +1016,10 @@ class TestsLevel5(HedyTester):
             SkippedMapping(SourceRange(3, 1, 3, 23), hedy.exceptions.InvalidSpaceException),
         ]
 
-        self.multi_level_tester(
+        self.single_level_tester(
             code=code,
             expected=expected,
-            skipped_mappings=skipped_mappings,
-            max_level=7
+            skipped_mappings=skipped_mappings
         )
 
     def test_line_with_if_with_space_gives_invalid(self):
@@ -918,11 +1038,10 @@ class TestsLevel5(HedyTester):
             SkippedMapping(SourceRange(3, 1, 3, 45), hedy.exceptions.InvalidSpaceException),
         ]
 
-        self.multi_level_tester(
+        self.single_level_tester(
             code=code,
             expected=expected,
-            skipped_mappings=skipped_mappings,
-            max_level=7)
+            skipped_mappings=skipped_mappings)
 
     def test_pront_should_suggest_print(self):
         code = textwrap.dedent("""\
@@ -944,51 +1063,7 @@ class TestsLevel5(HedyTester):
             skipped_mappings=skipped_mappings
         )
 
-    def test_print_no_quotes(self):
-        code = textwrap.dedent("""\
-        print 'Hoi ik ben Hedy de Waarzegger
-        print 'Ik kan voorspellen wie morgen de loterij wint!'
-        naam is ask 'Wie ben jij?'
-        prind skipping""")
-
-        expected = textwrap.dedent("""\
-        pass
-        print(f'Ik kan voorspellen wie morgen de loterij wint!')
-        naam = input(f'Wie ben jij?')
-        pass""")
-
-        skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 37), hedy.exceptions.UnquotedTextException),
-            SkippedMapping(SourceRange(4, 1, 4, 15), hedy.exceptions.InvalidCommandException)
-        ]
-
-        self.single_level_tester(
-            code=code,
-            expected=expected,
-            skipped_mappings=skipped_mappings
-        )
-
-    def test_print_quote_gives_exception(self):
-        code = textwrap.dedent("""\
-        print 'what's your name?'
-        prind skipping""")
-
-        expected = textwrap.dedent("""\
-        pass
-        pass""")
-
-        skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 26), hedy.exceptions.UnquotedTextException),
-            SkippedMapping(SourceRange(2, 1, 2, 15), hedy.exceptions.InvalidCommandException)
-        ]
-
-        self.single_level_tester(
-            code=code,
-            expected=expected,
-            skipped_mappings=skipped_mappings
-        )
-
-    def test_ask_with_quote(self):
+    def test_ask_with_unescaped_quote_gives_error(self):
         code = textwrap.dedent("""\
         name is ask 'what's your name?'
         print name""")
@@ -1000,29 +1075,13 @@ class TestsLevel5(HedyTester):
             max_level=17
         )
 
-    def test_if_equality_print_backtick_text_gives_error(self):
-        code = textwrap.dedent("""\
-        prind skipping
-        if 1 is 1 print `yay!` else print `nay`""")
-
-        expected = textwrap.dedent("""\
-        pass
-        if '1' == '1':
-          pass
-        else:
-          pass""")
-
-        skipped_mappings = [
-            SkippedMapping(SourceRange(1, 1, 1, 15), hedy.exceptions.InvalidCommandException),
-            SkippedMapping(SourceRange(2, 11, 2, 23), hedy.exceptions.UnquotedTextException),
-            SkippedMapping(SourceRange(2, 29, 2, 40), hedy.exceptions.UnquotedTextException),
-        ]
+    def test_print_backtick_text_gives_error(self):
+        code = "print `nay`"
 
         self.multi_level_tester(
-            max_level=5,
+            max_level=17,
             code=code,
-            expected=expected,
-            skipped_mappings=skipped_mappings
+            exception=hedy.exceptions.UnquotedTextException
         )
 
     def test_if_fix_nl(self):
@@ -1031,13 +1090,13 @@ class TestsLevel5(HedyTester):
             als naam is 5 print 'leuk'
             print 'minder leuk!'""")
 
-        expected = HedyTester.dedent("""\
-        naam = '5'
-        if naam == '5':
-          print(f'leuk')
-        else:
-          x__x__x__x = '5'
-        print(f'minder leuk!')""")
+        expected = self.dedent("""\
+            naam = '5'
+            if localize(naam) == localize('5'):
+              print(f'leuk')
+            else:
+              x__x__x__x = '5'
+            print(f'minder leuk!')""")
 
         self.multi_level_tester(
             max_level=5,
@@ -1055,7 +1114,7 @@ class TestsLevel5(HedyTester):
         code = textwrap.dedent("""\
         if x is pressed print 'it is a letter key' else print 'it is another letter key'""")
 
-        expected = HedyTester.dedent("""\
+        expected = self.dedent("""\
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1067,32 +1126,78 @@ class TestsLevel5(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
-    def test_if_pressed_x_is_variable(self):
+    def test_if_pressed_x_is_var(self):
         code = textwrap.dedent("""\
         x is a
         if x is pressed print 'it is a letter key' else print 'it is another letter key'
         print x""")
 
-        expected = HedyTester.dedent("""\
+        expected = self.dedent("""\
         x = 'a'
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
         def if_pressed_x_():
+          global x
           print(f'it is a letter key')
         def if_pressed_else_():
+          global x
           print(f'it is another letter key')
         extensions.if_pressed(if_pressed_mapping)
         print(f'{x}')""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=7)
+        self.single_level_tester(code=code, expected=expected)
+
+    def test_if_pressed_x_is_var_and_var_reassignment(self):
+        code = textwrap.dedent("""\
+        x is a
+        if x is pressed x is great else x is not great
+        print x""")
+
+        expected = self.dedent("""\
+        x = 'a'
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_x_():
+          global x
+          x = 'great'
+        def if_pressed_else_():
+          global x
+          x = 'not great'
+        extensions.if_pressed(if_pressed_mapping)
+        print(f'{x}')""")
+
+        self.single_level_tester(code=code, expected=expected)
+
+    def test_if_pressed_x_is_var_and_new_var_assignment(self):
+        code = textwrap.dedent("""\
+        x is a
+        if x is pressed m is great else m is not great
+        print m""")
+
+        expected = self.dedent("""\
+        x = 'a'
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_x_():
+          global m, x
+          m = 'great'
+        def if_pressed_else_():
+          global m, x
+          m = 'not great'
+        extensions.if_pressed(if_pressed_mapping)
+        print(f'{m}')""")
+
+        self.single_level_tester(code=code, expected=expected)
 
     def test_double_if_pressed(self):
         code = textwrap.dedent("""\
         if x is pressed print 'first key' else print 'something else'
         if y is pressed print 'second key' else print 'something else'""")
 
-        expected = HedyTester.dedent("""\
+        expected = self.dedent("""\
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1117,7 +1222,7 @@ class TestsLevel5(HedyTester):
         if x is pressed
         print 'it is a letter key' else print 'something else'""")
 
-        expected = HedyTester.dedent("""\
+        expected = self.dedent("""\
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1133,7 +1238,7 @@ class TestsLevel5(HedyTester):
         code = textwrap.dedent("""\
         if 1 is pressed print 'it is a number key' else print 'something else'""")
 
-        expected = HedyTester.dedent("""\
+        expected = self.dedent("""\
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['1'] = 'if_pressed_1_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1149,7 +1254,7 @@ class TestsLevel5(HedyTester):
         code = textwrap.dedent("""\
         if x       is pressed print 'trailing spaces!' else print 'something else'""")
 
-        expected = HedyTester.dedent("""\
+        expected = self.dedent("""\
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1166,7 +1271,7 @@ class TestsLevel5(HedyTester):
         if x is pressed print 'x is pressed!'
         else print 'x is not pressed!'""")
 
-        expected = HedyTester.dedent("""\
+        expected = self.dedent("""\
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1185,7 +1290,7 @@ class TestsLevel5(HedyTester):
         else
         print 'x is not pressed!'""")
 
-        expected = HedyTester.dedent("""\
+        expected = self.dedent("""\
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1203,7 +1308,7 @@ class TestsLevel5(HedyTester):
         print 'x is pressed!'
         else print 'x is not pressed!'""")
 
-        expected = HedyTester.dedent("""\
+        expected = self.dedent("""\
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1221,7 +1326,7 @@ class TestsLevel5(HedyTester):
         else
         print 'x is not pressed!'""")
 
-        expected = HedyTester.dedent("""\
+        expected = self.dedent("""\
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1239,7 +1344,7 @@ class TestsLevel5(HedyTester):
         print 'x is pressed!'
         else print 'x is not pressed!'""")
 
-        expected = HedyTester.dedent("""\
+        expected = self.dedent("""\
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1252,19 +1357,19 @@ class TestsLevel5(HedyTester):
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
     def test_if_pressed_else_with_turtle(self):
-        self.maxDiff = None
         code = textwrap.dedent("""\
-        if x is pressed forward 25 else turn 90""")
+            if x is pressed forward 25 else turn 90""")
 
-        expected = HedyTester.dedent(f"""\
-if_pressed_mapping = {{"else": "if_pressed_default_else"}}
-if_pressed_mapping['x'] = 'if_pressed_x_'
-if_pressed_mapping['else'] = 'if_pressed_else_'
-def if_pressed_x_():
-{HedyTester.indent(HedyTester.forward_transpiled(25, self.level))}
-def if_pressed_else_():
-{HedyTester.indent(HedyTester.turn_transpiled(90, self.level))}
-extensions.if_pressed(if_pressed_mapping)""")
+        expected = self.dedent(
+            f"""\
+            if_pressed_mapping = {{"else": "if_pressed_default_else"}}
+            if_pressed_mapping['x'] = 'if_pressed_x_'
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            def if_pressed_x_():""",
+            (self.forward_transpiled(25), '  '),
+            "def if_pressed_else_():",
+            (self.turn_transpiled(90), '  '),
+            "extensions.if_pressed(if_pressed_mapping)")
 
         self.multi_level_tester(
             code=code,
@@ -1382,10 +1487,11 @@ extensions.if_pressed(if_pressed_mapping)""")
             answer is ask 'What is the capital of Zimbabwe?'
             if answer is Harare play C6""")
 
-        expected = HedyTester.dedent(f"""\
+        expected = self.dedent(
+            f"""\
             answer = input(f'What is the capital of Zimbabwe?')
-            if answer == 'Harare':""",
-                                     (self.play_transpiled('C6'), '  '))
+            if localize(answer) == localize('Harare'):""",
+            (self.play_transpiled("'C6'"), '  '))
 
         self.single_level_tester(
             code=code,
@@ -1397,13 +1503,13 @@ extensions.if_pressed(if_pressed_mapping)""")
             answer is ask 'What is the capital of Zimbabwe?'
             if answer is Harare play C6 else play C1""")
 
-        expected = HedyTester.dedent(
+        expected = self.dedent(
             f"""\
             answer = input(f'What is the capital of Zimbabwe?')
-            if answer == 'Harare':""",
-            (self.play_transpiled('C6'), '  '),
+            if localize(answer) == localize('Harare'):""",
+            (self.play_transpiled("'C6'"), '  '),
             "else:",
-            (self.play_transpiled('C1'), '  '))
+            (self.play_transpiled("'C1'"), '  '))
 
         self.single_level_tester(
             code=code,

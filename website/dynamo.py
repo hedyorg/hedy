@@ -3,6 +3,7 @@ import copy
 import functools
 import json
 import logging
+import math
 import numbers
 import os
 import threading
@@ -10,6 +11,7 @@ import time
 import random
 import datetime
 import collections
+import re
 from abc import ABCMeta
 from dataclasses import dataclass
 from typing import List, Optional
@@ -92,7 +94,7 @@ class KeySchema:
                     or (self.partition_key == names[1] and self.sort_key == names[0]))
         return False
 
-    def fully_matches(self, data):
+    def contains_both_keys(self, data):
         """Return whether all keys in are in the data."""
         return (self.partition_key in data and
                 (not self.sort_key or self.sort_key in data))
@@ -153,11 +155,23 @@ class ResultPage:
     """
 
     records: List[dict]
-    next_page_token: Optional[str]
+    prev_page_token: Optional[str] = None
+    next_page_token: Optional[str] = None
+
+    # Holds a reference to a PaginationKey object, which can be used to calculate
+    # pagination keys for arbitrary elements from the result set if desired.
+    #
+    # This object may not always be present; it mostly exists for `get_page()` to
+    # be able to use the same pagination key as expected by `get_many()`.
+    pagination_key: Optional['PaginationKey'] = None
 
     @property
     def has_next_page(self):
         return bool(self.next_page_token)
+
+    @property
+    def has_prev_page(self):
+        return bool(self.prev_page_token)
 
     def __iter__(self):
         return iter(self.records)
@@ -181,8 +195,16 @@ class Cancel(metaclass=ABCMeta):
         return TimeoutCancellation(datetime.datetime.now() + duration)
 
     @staticmethod
+    def after_seconds(seconds):
+        return TimeoutCancellation(datetime.datetime.now() + datetime.timedelta(seconds=seconds))
+
+    @staticmethod
     def never():
-        return NeverCancellation()
+        return CallableCancellation(lambda: False)
+
+    @staticmethod
+    def immediate():
+        return CallableCancellation(lambda: True)
 
     def is_cancelled(self):
         ...
@@ -198,11 +220,14 @@ class TimeoutCancellation(Cancel):
         return datetime.datetime.now() >= self.deadline
 
 
-class NeverCancellation(Cancel):
-    """Never cancellation."""
+class CallableCancellation(Cancel):
+    """Use a callable as a cancellation token."""
+
+    def __init__(self, cb):
+        self.cb = cb
 
     def is_cancelled(self):
-        return False
+        return self.cb()
 
 
 class Table:
@@ -217,14 +242,22 @@ class Table:
           project the full set of attributes. Indexes can have a partition and their
           own sort keys.
         - sort_key: a field that is the sort key for the table.
+        - Types: a dictionary of field name to type object, to validate fields against.
+          Does not have to be exhaustive, but it must include all the indexed fields.
+          You can use: str, list, bool, bytes, int, float, numbers.Number, dict, list,
+          string_set, number_set, binary_set (last 3 declared in this module).
     """
 
-    def __init__(self, storage: TableStorage, table_name, partition_key, sort_key=None, indexes=None):
+    def __init__(self, storage: TableStorage, table_name, partition_key, types=None, sort_key=None, indexes=None):
         self.key_schema = KeySchema(partition_key, sort_key)
         self.storage = storage
         self.table_name = table_name
         self.indexes = indexes or []
         self.indexed_fields = set()
+        if types is not None:
+            self.types = Validator.ensure_all(types)
+        else:
+            self.types = None
 
         all_schemas = [self.key_schema] + [i.key_schema for i in self.indexes]
         for schema in all_schemas:
@@ -235,7 +268,12 @@ class Table:
         part_names = reverse_index((index.index_name, index.key_schema.partition_key) for index in self.indexes)
         duped = [names for names in part_names.values() if len(names) > 1]
         if duped:
-            raise RuntimeError(f'Table {self.table_name}: indexes with the same partition key: {duped}')
+            raise ValueError(f'Table {self.table_name}: indexes with the same partition key: {duped}')
+
+        # Check to make sure all indexed fields have a declared type
+        if self.types:
+            if undeclared := [f for f in self.indexed_fields if f not in self.types]:
+                raise ValueError(f'Declare the type of these fields which are used as keys: {", ".join(undeclared)}')
 
     @querylog.timed_as("db_get")
     def get(self, key):
@@ -249,10 +287,12 @@ class Table:
         if isinstance(lookup, TableLookup):
             return self.storage.get_item(lookup.table_name, lookup.key)
         if isinstance(lookup, IndexLookup):
+            pagination_key = PaginationKey.from_index(lookup.key.keys(), lookup.sort_key, self.key_schema)
             return first_or_none(
                 self.storage.query_index(
                     lookup.table_name, lookup.index_name, lookup.key, sort_key=lookup.sort_key, limit=1,
                     keys_only=lookup.keys_only, table_key_names=self.key_schema.key_names,
+                    pagination_key=pagination_key,
                 )[0]
             )
         assert False
@@ -261,12 +301,22 @@ class Table:
     def batch_get(self, keys):
         """Return a number of items by (primary+sort) key from the database.
 
-        Keys can be either:
-            - A dictionary, mapping some identifier to a database (dictionary) key
-            - A list of database keys
+        The 'keys' argument can be one of 3 different types. Depending on the type
+        of the input, a different output will be returned. The supported types are:
 
-        Depending on the input, returns either a dictionary with the same keys,
-        or a list in the same order as the input list.
+        - Input: a list of database keys
+          Example Input: `[{ 'id': 'a' }, { 'id': 'b' }]`
+          Response: a list with the actual records
+          Example Output: `[{ 'id': 'a', 'field': 'b', 'more': 'c', ... }, ...]`.
+
+        - Input: a dictionary, mapping some chosen identifier to a database (dictionary) key.
+          Example Input: `{ 'record1': { 'id': 'a' }, 'record2': { 'id': 'b' }`
+          Response: a dictionary with the same keys and the actual records as values.
+          Example Output: `{ 'record1': { 'id': 'a', 'field': 'b', 'more': 'c', ... }, ... }`.
+
+        - Input: a ResultPage obtained from `get_many()`.
+          Response: behaves like the "list" input case, but returns a `ResultPage` with
+          the `prev_page_token` and `next_page_token` fields populated.
 
         Each key must be a dict with a single entry which references the
         partition key. This is currently not supporting index lookups.
@@ -274,21 +324,26 @@ class Table:
         querylog.log_counter(f"db_batch_get:{self.table_name}")
         input_is_dict = isinstance(keys, dict)
 
+        # We normalize to a dict here, then maybe pull it out again to a list later
         keys_dict = keys if input_is_dict else {f'k{i}': k for i, k in enumerate(keys)}
 
-        lookups = {k: self._determine_lookup(key, many=False) for k, key in keys_dict.items()}
-        if any(not isinstance(lookup, TableLookup) for lookup in lookups.values()):
-            raise RuntimeError(f'batch_get must query table, not indexes, in: {keys}')
-        if not lookups:
-            return {} if input_is_dict else []
-        first_lookup = next(iter(lookups.values()))
+        # We only try a table lookup
+        non_matching_keys = [k for k in keys_dict.values() if not self.key_schema.contains_both_keys(k)]
+        if non_matching_keys:
+            raise ValueError(f'batch_get keys must contain {self.key_schema}, found: {non_matching_keys}')
 
         resp_dict = self.storage.batch_get_item(
-            first_lookup.table_name, {k: l.key for k, l in lookups.items()}, table_key_names=self.key_schema.key_names)
+            self.table_name,
+            {k: self.key_schema.extract(l) for k, l in keys_dict.items()},
+            table_key_names=self.key_schema.key_names)
+
         if input_is_dict:
             return {k: resp_dict.get(k) for k in keys.keys()}
         else:
-            return [resp_dict.get(f'k{i}') for i in range(len(keys))]
+            items = [resp_dict.get(f'k{i}') for i in range(len(keys))]
+            if isinstance(keys, ResultPage):
+                return ResultPage(items, keys.prev_page_token, keys.next_page_token)
+            return items
 
     @querylog.timed_as("db_get_many")
     def get_many(self, key, reverse=False, limit=None, pagination_token=None, filter=None):
@@ -298,34 +353,52 @@ class Table:
         partition key or an index key.
 
         `get_many` reads up to 1MB of data from the database, or a maximum of `limit`
-        records, whichever one is hit first.
+        records, whichever one is hit first. 'filter' is a dictionary of values
+        that will be applied server-side after reading. The response may contain
+        less than `limit` rows if 'filter' is used.
 
-        After reading, the items can be filtered by passing conditions in 'filter'.
-        Filtering happens after reading, and saves bytes sent over the wire. It is still
-        important to pick a good key to read.
+        Filtering saves bytes sent over the wire, but still costs time and
+        money, and may lead in receiving nearly no records. It is still
+        important to pick a good key/index to read.
+
+        'filter' is a dictionary with a set of values that will be applied as a server-side
+        filter. The values should be either literal strings, ints or bools that are compared to the
+        values in the database literally, or instances of subclasses of `DynamoCondition`; currently
+        only `Between` exists as a Condition class.
+
+        The result object will have `next_page_token` and `prev_page_token` members
+        which can be used to paginate through the result set.
         """
         querylog.log_counter(f"db_get_many:{self.table_name}")
 
+        inverse_page, pagination_token = decode_page_token(pagination_token)
+        if inverse_page:
+            reverse = not reverse
+
         lookup = self._determine_lookup(key, many=True)
         if isinstance(lookup, TableLookup):
+            pagination_key = PaginationKey.from_table(self.key_schema)
             items, next_page_token = self.storage.query(
                 lookup.table_name,
                 lookup.key,
                 sort_key=self.key_schema.sort_key,
                 reverse=reverse,
-                limit=limit,
-                pagination_token=decode_page_token(pagination_token),
+                limit=limit + 1 if limit else None,
+                pagination_key=pagination_key,
+                pagination_token=pagination_token,
                 filter=filter
             )
         elif isinstance(lookup, IndexLookup):
+            pagination_key = PaginationKey.from_index(lookup.key.keys(), lookup.sort_key, self.key_schema)
             items, next_page_token = self.storage.query_index(
                 lookup.table_name,
                 lookup.index_name,
                 lookup.key,
                 sort_key=lookup.sort_key,
                 reverse=reverse,
-                limit=limit,
-                pagination_token=decode_page_token(pagination_token),
+                limit=limit + 1 if limit else None,
+                pagination_key=pagination_key,
+                pagination_token=pagination_token,
                 keys_only=lookup.keys_only,
                 table_key_names=self.key_schema.key_names,
                 filter=filter,
@@ -333,7 +406,110 @@ class Table:
         else:
             assert False
         querylog.log_counter(f"db_get_many_items:{self.table_name}", len(items))
-        return ResultPage(items, encode_page_token(next_page_token))
+
+        # If we had a limit, we added 1 to it just to see if we didn't accidentally fetch exactly
+        # as many items as the database had available. Slice back to the exactly requested amount.
+        if limit and len(items) > limit:
+            items = items[:limit]
+            next_page_token = pagination_key.extract_dict(items[-1])
+        prev_page_token = pagination_key.extract_dict(items[0]) if items and pagination_token else None
+
+        # If we fetched a "previous page", we did a query using reverse=True. reverse again to get
+        # the items back in the original order, and swap the prev and next page tokens.
+        if inverse_page:
+            items.reverse()
+            next_page_token, prev_page_token = prev_page_token, next_page_token
+
+        return ResultPage(
+            items,
+            encode_page_token(prev_page_token, True),
+            encode_page_token(next_page_token, False),
+            pagination_key=pagination_key)
+
+    def get_page(self, key, limit, reverse=False, pagination_token=None, server_side_filter=None,
+                 client_side_filter=None, timeout=5, fetch_factor=1.0):
+        """Like `get_many()`, but may do multiple calls to the server to try and fill up the page to 'limit'.
+
+        `get_many()` does one call, and may return up to 'limit' items. If that happens, `get_page()`
+        will continue to make calls to fetch more items in order to return exactly 'limit' items,
+        or the timeout is hit.
+
+        'server_side_filter' is a dictionary with a set of values that will be applied as a server-side
+        filter. The values should be either literal strings, ints or bools that are compared to the
+        values in the database literally, or instances of subclasses of `DynamoCondition`; currently
+        only `Between` exists as a Condition class.
+
+        'client_side_filter' should be either a dictionary of values, or a callable that will be called
+        for every row. If it is a dictionary, the values in the dictionary must match the values
+        in the records; if it is a callable, it will be invoked for every row and the callable
+        should return True or False to indicate whether that row should be included.
+
+        'fetch_factor' controls how many items are fetched per batch in order to try and fill
+        'limit' items. Combination with an estimate of how many rows would be
+        rejected due to filtering, this can be used to reduce the amount of individual queries
+        necessary in order to come up with a given set of items (reducing latency slightly).
+        """
+        if limit <= 0:
+            raise ValueError('limit must be positive')
+        items = []
+        cancel = Cancel.after_seconds(timeout) if not isinstance(timeout, Cancel) else timeout
+        predicate = make_predicate(client_side_filter)
+
+        batch_size = math.ceil(limit * max(1.0, fetch_factor))
+
+        # We need to know if we're doing a prevpage query or not.
+        inverse_page, initial_pagination_token = decode_page_token(pagination_token)
+
+        curr_pagination_token = pagination_token
+        dropped_remaining_in_this_page = False
+        first_page = None
+        while len(items) < limit:
+            space_remaining = limit - len(items)
+
+            page = self.get_many(key, reverse=reverse, limit=batch_size,
+                                 pagination_token=curr_pagination_token, filter=server_side_filter)
+            if not first_page:
+                first_page = page
+            selected_in_this_page = [row for row in page if predicate(row)]
+
+            if inverse_page:
+                # They're already in the right order, but they need to go in the right place as well
+                items = selected_in_this_page[-space_remaining:] + items
+            else:  # Forward
+                items.extend(selected_in_this_page[:space_remaining])
+            dropped_remaining_in_this_page = len(selected_in_this_page) > space_remaining
+
+            curr_pagination_token = page.next_page_token if not inverse_page else page.prev_page_token
+            if not curr_pagination_token or cancel.is_cancelled():
+                break
+
+        if inverse_page:
+            if dropped_remaining_in_this_page:
+                prev_page_token = page.pagination_key.extract_dict(items[0])
+            else:
+                # Need to decode because it will be re-encoded below
+                prev_page_token = decode_page_token(page.prev_page_token)[1] if page.prev_page_token else None
+
+            # The last element of the first page marks our next_page_token. If this page is empty for
+            # some reason, we just pretend that the initial pagination token is our forward pagination token.
+            # Not entirely correct (we'll drop 1 element) but at least it gets us back into the flow.
+            next_page_token = page.pagination_key.extract_dict(
+                first_page[-1]) if first_page else initial_pagination_token
+        else:
+            if dropped_remaining_in_this_page:
+                next_page_token = page.pagination_key.extract_dict(items[-1])
+            else:
+                # Need to decode because it will be re-encoded below
+                next_page_token = decode_page_token(page.next_page_token)[1] if page.next_page_token else None
+
+            # The first element of the first page marks our prev_page_token
+            prev_page_token = page.pagination_key.extract_dict(
+                first_page[0]) if first_page and pagination_token else None
+
+        return ResultPage(
+            items,
+            encode_page_token(prev_page_token, True),
+            encode_page_token(next_page_token, False))
 
     def get_all(self, key, reverse=False, batch_size=None):
         """Return an iterator that will iterate over all elements in the table matching the query.
@@ -345,9 +521,10 @@ class Table:
     @querylog.timed_as("db_create")
     def create(self, data):
         """Put a single complete record into the database."""
-        if not self.key_schema.fully_matches(data):
+        if not self.key_schema.contains_both_keys(data):
             raise ValueError(f"Expecting fields {self.key_schema} in create() call, got: {data}")
         self._validate_indexable_fields(data, False)
+        self._validate_types(data, full=True)
 
         querylog.log_counter(f"db_create:{self.table_name}")
         self.storage.put(self.table_name, self.key_schema.extract(data), data)
@@ -368,6 +545,14 @@ class Table:
         querylog.log_counter(f"db_update:{self.table_name}")
         self._validate_indexable_fields(updates, True)
         self._validate_key(key)
+        self._validate_types(updates, full=False)
+
+        updating_keys = set(updates.keys()) & set(self.key_schema.key_names)
+        if updating_keys:
+            raise RuntimeError(' '.join([
+                'update() may not include a key field in the \'updates\' field',
+                f'({updating_keys} may not be part of {updates};',
+                'did you accidentally pass an entire record to update()?)']))
 
         return self.storage.update(self.table_name, key, updates)
 
@@ -404,12 +589,35 @@ class Table:
 
     @querylog.timed_as("db_scan")
     def scan(self, limit=None, pagination_token=None):
-        """Reads the entire table into memory."""
+        """Reads the entire table into memory.
+
+        If 'limit' is given, there looks to be a desire to do proper pagination.
+        To make the 'next_page_token' behavior more nicely for user code, we
+        query 1 record more than expected, and use that to make sure we don't
+        return a 'next_page_token' if the page would have been empty anyway.
+        """
         querylog.log_counter("db_scan:" + self.table_name)
+        pagination_key = PaginationKey.from_table(self.key_schema)
+        inverse_page, pagination_token = decode_page_token(pagination_token)
+        if inverse_page:
+            raise ValueError('Scanning in reverse is not possible')
+
         items, next_page_token = self.storage.scan(
-            self.table_name, limit=limit, pagination_token=decode_page_token(pagination_token)
+            self.table_name,
+            limit=limit + 1 if limit else None,
+            pagination_token=pagination_token,
+            pagination_key=pagination_key,
         )
-        return ResultPage(items, encode_page_token(next_page_token))
+
+        if limit:
+            # Set the next_page_token only if we retrieved N+1 items (there is an actual next page).
+            has_more_items = len(items) > limit
+            items = items[:limit]
+            next_page_token = pagination_key.extract_dict(items[-1]) if has_more_items else None
+
+        return ResultPage(items,
+                          next_page_token=encode_page_token(next_page_token, False),
+                          pagination_key=pagination_key)
 
     @querylog.timed_as("db_describe")
     def item_count(self):
@@ -423,7 +631,7 @@ class Table:
         # We do a regular table lookup if both the table partition and sort keys occur in the given key.
         if self.key_schema.matches(key_data):
             # Sanity check that if we expect to query 1 element, we must pass a sort key if defined
-            if not many and not self.key_schema.fully_matches(key_data):
+            if not many and not self.key_schema.contains_both_keys(key_data):
                 raise RuntimeError(
                     f"Looking up one value, but missing sort key: {self.key_schema.sort_key} in {key_data}")
 
@@ -441,7 +649,7 @@ class Table:
             f"Table {self.table_name} can be queried using one of {str_schemas}. Got {tuple(key_data.keys())}")
 
     def _validate_key(self, key):
-        if not self.key_schema.fully_matches(key):
+        if not self.key_schema.contains_both_keys(key):
             raise ValueError(f"key fields incorrect: {key} not containing {self.key_schema}")
         if any(not v for v in key.values()):
             raise ValueError(f"key fields cannot be empty: {key}")
@@ -465,6 +673,39 @@ class Table:
             raise ValueError('Trying to insert %r into table %s, but %s is a Partition or Sort Key of the table itself '
                              ' or an index, so must be of type string, number or binary.'
                              % ({field: value}, self.table_name, field))
+
+    def _validate_types(self, data, full):
+        """Validate the types in the record according to the 'self.types' map.
+
+        If 'full=True' we will use the declared keys as a basis (making sure
+        the record is complete). If full=False, we only use the given keys,
+        making sure the updates are valid.
+        """
+        if self.types is None:
+            return
+
+        keys_to_validate = self.types.keys() if full else data.keys()
+
+        for field in keys_to_validate:
+            validator = self.types.get(field)
+            if not validator:
+                continue
+
+            value = data.get(field)
+            if not validate_value_against_validator(value, validator):
+                raise ValueError(f'In {data}, value of {field} should be {validator} (got {value})')
+
+
+def validate_value_against_validator(value, validator: 'Validator'):
+    """Validate a value against a validator.
+
+    A validator can be a built-in class representing a type, like 'str'
+    or 'int'.
+    """
+    if isinstance(value, DynamoUpdate):
+        return value.validate_against_type(validator)
+    else:
+        return validator.is_valid(value)
 
 
 DDB_SERIALIZER = TypeSerializer()
@@ -533,7 +774,7 @@ class AwsDynamoStorage(TableStorage):
 
         return ret
 
-    def query(self, table_name, key, sort_key, reverse, limit, pagination_token, filter=None):
+    def query(self, table_name, key, sort_key, reverse, limit, pagination_token, pagination_key, filter=None):
         key_expression, attr_values, attr_names = self._prep_query_data(key, sort_key)
 
         if filter:
@@ -564,7 +805,7 @@ class AwsDynamoStorage(TableStorage):
         return items, next_page_token
 
     def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None,
-                    keys_only=None, table_key_names=None, filter=None):
+                    pagination_key=None, keys_only=None, table_key_names=None, filter=None):
         # keys_only is ignored here -- that's only necessary for the in-memory implementation.
         # In an actual DDB table, that's an attribute of the index itself
 
@@ -600,26 +841,34 @@ class AwsDynamoStorage(TableStorage):
         return items, next_page_token
 
     def _prep_query_data(self, key, sort_key=None, is_key_expression=True):
-        eq_conditions, special_conditions = DynamoCondition.partition(key)
+        """Build a DynamoDB condition expression from a dictionary mapping fields to values.
+
+        The values may be literals, in which case we will render an `=` condition,
+        or it may be a `DynamoCondition` subclass for more complex conditions.
+
+        Field names are escaped in order to make them not conflict with
+        built-in words.
+
+        Returns a triple of (expression, values, names):
+
+        - expression: a string containing placeholders like `#myfield = :myfield`.
+        - names: a dict mapping `#myfield` placeholders to `my-field` field names.
+        - values: a dict mapping `:myfield` placeholders to their serialized values.
+        """
+        conditions = DynamoCondition.make_conditions(key)
         if is_key_expression:
-            validate_only_sort_key(special_conditions, sort_key)
+            validate_only_sort_key(conditions, sort_key)
 
-        # We must escape field names with a '#' because Dynamo is unhappy
-        # with fields called 'level' etc:
-        # https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-        # This escapes too much, but at least it's easy.
+        escaped_names = {k: slugify(k) for k in conditions.keys()}
 
-        key_expression = " AND ".join(
-            [f"#{field} = :{field}" for field in eq_conditions.keys()]
-            + [cond.to_dynamo_expression(field) for field, cond in special_conditions.items()]
-        )
+        key_expression = " AND ".join(cond.to_dynamo_expression(escaped_names[field])
+                                      for field, cond in conditions.items())
 
-        attr_values = {f":{field}": DDB_SERIALIZER.serialize(key[field]) for field in eq_conditions.keys()}
-        for field, cond in special_conditions.items():
-            attr_values.update(cond.to_dynamo_values(field))
+        attr_values = {}
+        for field, cond in conditions.items():
+            attr_values.update(cond.to_dynamo_values(escaped_names[field]))
 
-        attr_names = {"#" + field: field for field in key.keys()}
-
+        attr_names = {f'#{e}': k for k, e in escaped_names.items()}
         return key_expression, attr_values, attr_names
 
     def put(self, table_name, _key, data):
@@ -648,7 +897,7 @@ class AwsDynamoStorage(TableStorage):
         result = self.db.describe_table(TableName=make_table_name(self.db_prefix, table_name))
         return result["Table"]["ItemCount"]
 
-    def scan(self, table_name, limit, pagination_token):
+    def scan(self, table_name, limit, pagination_token, pagination_key):
         result = self.db.scan(
             **notnone(
                 TableName=make_table_name(self.db_prefix, table_name),
@@ -680,6 +929,53 @@ class AwsDynamoStorage(TableStorage):
             return None
 
         return {k: replace_decimals(DDB_DESERIALIZER.deserialize(v)) for k, v in data.items()}
+
+
+class PaginationKey:
+    """The fields that are involved in pagination for a table or index.
+
+    A pagination key in Dynamo is a dictionary involving the keys of the "last
+    evaluated item" in a result set; by passing it to a query, the query will
+    continue up *just after* that element.
+
+    This holds an ordered list of the partition and sort keys, in the order
+    `[index_pk, index_sk, table_pk, table_sk]` (duplicates and unused keys
+    will be removed).
+
+    This class is used for 2 purposes:
+
+    1. To extract pagination keys (dicts) from DynamoDB records: the prev_page_token
+       will be extracted from first element in a page, and the next_page_token
+       will be extracted from the last element in a page.
+    2. To extract key values in an ordered list from in-memory database records.
+       By extracting the values in order into a Python list, we can use the `<`
+       operation to compare elements. This is used for the in-memory implementation
+       of pagination.
+    """
+    @staticmethod
+    def from_table(table_key_schema: KeySchema):
+        return PaginationKey(table_key_schema.key_names)
+
+    @staticmethod
+    def from_index(index_key_names, index_sort_key_name, table_key_schema: KeySchema):
+        keys = [q for q in index_key_names if q != index_sort_key_name]
+        if index_sort_key_name is not None:
+            keys.append(index_sort_key_name)
+        for t in table_key_schema.key_names:
+            if t not in keys:
+                keys.append(t)
+        return PaginationKey(keys)
+
+    def __init__(self, key_names):
+        self.key_names = key_names
+
+    def extract_ordered(self, row):
+        """Extract all fields in the key from a row, returning them ordered."""
+        return [row[k] for k in self.key_names]
+
+    def extract_dict(self, row):
+        """Extract all fields in the key from a row, returning them as a dict."""
+        return {k: row[k] for k in self.key_names}
 
 
 class Lock:
@@ -730,17 +1026,14 @@ class MemoryStorage(TableStorage):
         return {k: self.get_item(table_name, key) for k, key in keys_map.items()}
 
     @lock.synchronized
-    def query(self, table_name, key, sort_key, reverse, limit, pagination_token, filter=None):
-        eq_conditions, special_conditions = DynamoCondition.partition(key)
-        validate_only_sort_key(special_conditions, sort_key)
+    def query(self, table_name, key, sort_key, reverse, limit, pagination_token, filter=None, pagination_key=None):
+        key_conditions = DynamoCondition.make_conditions(key)
+        validate_only_sort_key(key_conditions, sort_key)
 
-        if filter:
-            filter_eq_conditions, filter_special_conditions = DynamoCondition.partition(filter)
-        else:
-            filter_eq_conditions, filter_special_conditions = {}, {}
+        filter_conditions = DynamoCondition.make_conditions(filter or {})
 
         records = self.tables.get(table_name, [])
-        filtered = [r for r in records if self._query_matches(r, eq_conditions, special_conditions)]
+        filtered = [r for r in records if self._query_matches(r, key_conditions)]
 
         if sort_key:
             filtered.sort(key=lambda x: x[sort_key])
@@ -748,52 +1041,45 @@ class MemoryStorage(TableStorage):
         if reverse:
             filtered.reverse()
 
-        # Pagination token
-        def extract_key(i, record):
-            ret = {k: record[k] for k in key.keys()}
-            if sort_key is None:
-                ret["offset"] = i
+        ordered_pagination_token = pagination_key.extract_ordered(pagination_token) if pagination_token else None
+
+        def before_pagination_token(row):
+            candidate = pagination_key.extract_ordered(row)
+            if reverse:
+                return candidate >= ordered_pagination_token
             else:
-                ret[sort_key] = record[sort_key]
-            return ret
+                return candidate <= ordered_pagination_token
 
-        def orderable(key):
-            partition_key = [k for k in key.keys() if k != sort_key][0]
-            second_key = [k for k in key.keys() if k != partition_key][0]
-            return (key[partition_key], key[second_key])
-
-        def before_or_equal(key0, key1):
-            k0 = orderable(key0)
-            k1 = orderable(key1)
-            return k0 <= k1 if not reverse or not sort_key else k1 <= k0
-
-        with_keys = [(extract_key(i, r), r) for i, r in enumerate(filtered)]
-        while pagination_token and with_keys and before_or_equal(with_keys[0][0], pagination_token):
-            with_keys.pop(0)
+        while ordered_pagination_token and filtered and before_pagination_token(filtered[0]):
+            filtered.pop(0)
 
         next_page_key = None
-        if limit and limit < len(with_keys):
-            with_keys = with_keys[:limit]
-            next_page_key = with_keys[-1][0]
+        # DynamoDB will return a 'next_page_key' if there are exactly as many items in the table as requested
+        if limit and limit <= len(filtered):
+            filtered = filtered[:limit]
+            next_page_key = pagination_key.extract_dict(filtered[-1])
 
         # Do a final filtering to mimic DynamoDB FilterExpression
         return copy.deepcopy([record
-                              for _, record in with_keys
-                              if self._query_matches(record, filter_eq_conditions, filter_special_conditions)
+                              for record in filtered
+                              if self._query_matches(record, filter_conditions)
                               ]), next_page_key
 
     # NOTE: on purpose not @synchronized here
     def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None,
-                    keys_only=None, table_key_names=None, query_index=None, filter=None):
-        # If keys_only, we project down to the index + table keys
-        # In a REAL dynamo table, the index just wouldn't have more data. The in-memory table has everything,
-        # so we need to drop some data so programmers don't accidentally rely on it.
+                    pagination_key=None, keys_only=None, table_key_names=None, query_index=None, filter=None):
+        """Query an index.
 
+        - keys: the key values. May or may not contain the sort key, but it must at least contain the partition key.
+        - sort_key: the field name of the sort key.
+        - table_key_names: the keys in the table key, in order [partition, sort].
+        """
         records, next_page_token = self.query(
             table_name, keys,
             sort_key=sort_key,
             reverse=reverse,
             limit=limit,
+            pagination_key=pagination_key,
             pagination_token=pagination_token,
             filter=filter,
         )
@@ -802,6 +1088,9 @@ class MemoryStorage(TableStorage):
             return records, next_page_token
 
         # In a keys_only index, we retain all fields that are in either a table or index key
+        # If keys_only, we project down to the index + table keys
+        # In a REAL dynamo table, the index just wouldn't have more data. The in-memory table has everything,
+        # so we need to drop some data so programmers don't accidentally rely on it.
         keys_to_retain = set(list(keys.keys()) + ([sort_key] if sort_key else []) + table_key_names)
         return [{key: record[key] for key in keys_to_retain} for record in records], next_page_token
 
@@ -875,21 +1164,26 @@ class MemoryStorage(TableStorage):
         return len(self.tables.get(table_name, []))
 
     @lock.synchronized
-    def scan(self, table_name, limit, pagination_token):
+    def scan(self, table_name, limit, pagination_token, pagination_key):
         items = self.tables.get(table_name, [])[:]
 
-        start_index = 0
-        if pagination_token:
-            start_index = pagination_token["offset"]
-            items = items[pagination_token["offset"]:]
+        ordered_pagination_token = pagination_key.extract_ordered(pagination_token) if pagination_token else None
 
-        next_page_token = None
-        if limit and limit < len(items):
-            next_page_token = {"offset": start_index + limit}
+        def before_pagination_token(row):
+            candidate = pagination_key.extract_ordered(row)
+            return candidate <= ordered_pagination_token
+
+        while ordered_pagination_token and items and before_pagination_token(items[0]):
+            items.pop(0)
+
+        next_page_key = None
+        # DynamoDB will return a 'next_page_key' if there are exactly as many items in the table as requested
+        if limit and limit <= len(items):
             items = items[:limit]
+            next_page_key = pagination_key.extract_dict(items[-1])
 
         items = copy.deepcopy(items)
-        return items, next_page_token
+        return items, next_page_key
 
     def _find_index(self, records, key):
         for i, v in enumerate(records):
@@ -900,10 +1194,8 @@ class MemoryStorage(TableStorage):
     def _eq_matches(self, record, key):
         return all(record.get(k) == v for k, v in key.items())
 
-    def _query_matches(self, record, eq, conds):
-        return all(record.get(k) == v for k, v in eq.items()) and all(
-            cond.matches(record.get(k)) for k, cond in conds.items()
-        )
+    def _query_matches(self, record, conds):
+        return all(cond.matches(record.get(k)) for k, cond in conds.items())
 
     def _flush(self):
         if self.filename:
@@ -937,6 +1229,9 @@ class DynamoUpdate:
     def to_dynamo(self):
         raise NotImplementedError()
 
+    def validate_against_type(self, validator):
+        raise NotImplementedError()
+
 
 class DynamoIncrement(DynamoUpdate):
     def __init__(self, delta=1):
@@ -947,6 +1242,12 @@ class DynamoIncrement(DynamoUpdate):
             "Action": "ADD",
             "Value": {"N": str(self.delta)},
         }
+
+    def validate_against_type(self, validator):
+        return validate_value_against_validator(self.delta, validator)
+
+    def __repr__(self):
+        return f'Inc({self.delta})'
 
 
 class DynamoAddToStringSet(DynamoUpdate):
@@ -960,6 +1261,13 @@ class DynamoAddToStringSet(DynamoUpdate):
             "Action": "ADD",
             "Value": {"SS": list(self.elements)},
         }
+
+    def validate_against_type(self, validator):
+        # The validator should be SetOf(...)
+        return validate_value_against_validator(set(self.elements), validator)
+
+    def __repr__(self):
+        return f'Add{self.elements}'
 
 
 class DynamoAddToNumberSet(DynamoUpdate):
@@ -977,6 +1285,13 @@ class DynamoAddToNumberSet(DynamoUpdate):
             "Value": {"NS": [str(x) for x in self.elements]},
         }
 
+    def validate_against_type(self, validator):
+        # The validator should be SetOf(...)
+        return validate_value_against_validator(set(self.elements), validator)
+
+    def __repr__(self):
+        return f'Add{self.elements}'
+
 
 class DynamoAddToList(DynamoUpdate):
     """Add one or more elements to a list."""
@@ -984,11 +1299,18 @@ class DynamoAddToList(DynamoUpdate):
     def __init__(self, *elements):
         self.elements = elements
 
+    def validate_against_type(self, validator):
+        # The validator should be ListOf(...)
+        return validate_value_against_validator(list(self.elements), validator)
+
     def to_dynamo(self):
         return {
             "Action": "ADD",
             "Value": {"L": [DDB_SERIALIZER.serialize(x) for x in self.elements]},
         }
+
+    def __repr__(self):
+        return f'Add{self.elements}'
 
 
 class DynamoRemoveFromStringSet(DynamoUpdate):
@@ -1002,6 +1324,13 @@ class DynamoRemoveFromStringSet(DynamoUpdate):
             "Action": "DELETE",
             "Value": {"SS": list(self.elements)},
         }
+
+    def validate_against_type(self, validator):
+        # The validator should be SetOf(...)
+        return validate_value_against_validator(set(self.elements), validator)
+
+    def __repr__(self):
+        return f'Remove{self.elements}'
 
 
 class DynamoCondition:
@@ -1025,17 +1354,30 @@ class DynamoCondition:
         raise NotImplementedError()
 
     @staticmethod
-    def partition(key):
-        """Partition a dictionary into 2 dictionaries.
+    def make_conditions(key):
+        """Turn a dict of values into a dict of DynamoConditions.
 
-        The first one will contain all elements for which the values are
-        NOT of type DynamoCondition. The other one will contain all the elements
-        for which the value ARE DynamoConditions.
+        Non-DynamoConditions are returned into instances of Equals.
         """
-        eq_conditions = {k: v for k, v in key.items() if not isinstance(v, DynamoCondition)}
-        special_conditions = {k: v for k, v in key.items() if isinstance(v, DynamoCondition)}
+        return {k: v if isinstance(v, DynamoCondition) else Equals(v) for k, v in key.items()}
 
-        return (eq_conditions, special_conditions)
+
+class Equals(DynamoCondition):
+    """Assert that a value is equal to another value."""
+
+    def __init__(self, value):
+        self.value = value
+
+    def to_dynamo_expression(self, field_name):
+        return f"#{field_name} = :{field_name}"
+
+    def to_dynamo_values(self, field_name):
+        return {
+            f':{field_name}': DDB_SERIALIZER.serialize(self.value),
+        }
+
+    def matches(self, value):
+        return value == self.value
 
 
 class Between(DynamoCondition):
@@ -1101,23 +1443,40 @@ class CustomEncoder(json.JSONEncoder):
 
 
 def validate_only_sort_key(conds, sort_key):
-    """Check that only the sort key is used in the given key conditions."""
-    if sort_key and set(conds.keys()) - {sort_key}:
-        raise RuntimeError(f"Conditions only allowed on sort key {sort_key}, got: {list(conds)}")
+    """Check that non-Equals conditions are only used on the sort key."""
+    non_equals_fields = [k for k, v in conds.items() if not isinstance(v, Equals)]
+    if sort_key and set(non_equals_fields) - {sort_key}:
+        raise RuntimeError(f"Non-Equals conditions only allowed on sort key {sort_key}, got: {list(conds)}")
 
 
-def encode_page_token(x):
-    """Encode a compound key page token (dict) to a string."""
+def encode_page_token(x, inverted):
+    """Encode a compound key page token (dict) to a string.
+
+    'inverted' indicates whether the page token goes in the other direction
+    than the normally accepted query direction. If the query normally goes
+    forward, a query with an inverted page token would go backwards; but if the
+    query normally goes backwards (reverse=True), a query with an inverted page token
+    would go forward.
+    """
     if x is None:
         return None
-    return base64.urlsafe_b64encode(json.dumps(x).encode("utf-8")).decode("ascii")
+    return ('-' if inverted else '') + base64.urlsafe_b64encode(json.dumps(x).encode("utf-8")).decode("ascii")
 
 
 def decode_page_token(x):
-    """Decode string page token to compound key (dict)."""
+    """Decode string page token to compound key (dict), and its inversion bit.
+
+    'inverse' is not the same as 'reverse'. 'reverse' is the order the user wants
+    the rows from Dynamo in. 'inverse' is whether the order we're currently querying in
+    is the opposite of the desired 'reverse' order or not.
+    """
     if x is None:
-        return None
-    return json.loads(base64.urlsafe_b64decode(x.encode("ascii")).decode("utf-8"))
+        return False, None
+    inverted = False
+    if x.startswith('-'):
+        inverted = True
+        x = x[1:]
+    return inverted, json.loads(base64.urlsafe_b64decode(x.encode("ascii")).decode("utf-8"))
 
 
 def notnone(**kwargs):
@@ -1300,3 +1659,178 @@ def reverse_index(xs):
     for key, value in xs:
         ret[value].append(key)
     return ret
+
+
+def make_predicate(obj):
+    if obj is None:
+        return lambda row: True
+    if callable(obj):
+        return obj
+    if isinstance(obj, dict):
+        return lambda row: all(row.get(key) == value for key, value in obj.items())
+    raise ValueError(f'Not a valid client_side_filter: {obj}')
+
+
+class Validator(metaclass=ABCMeta):
+    """Base class for validators.
+
+    Subclasses should implement 'is_valid' and '__str__'.
+    """
+
+    @staticmethod
+    def ensure(validator):
+        """Turn the given value into a validator."""
+        if validator is True:
+            return Any()
+        if isinstance(validator, Validator):
+            return validator
+        if type(validator) is type:
+            return InstanceOf(validator)
+        if callable(validator):
+            return Predicate(validator)
+        raise ValueError(f'Not sure how to treat {validator} as a validator')
+
+    @staticmethod
+    def ensure_all(validator_dict):
+        if str in validator_dict.keys() and len(validator_dict.keys()) > 1:
+            raise ValueError(f'If you specify str as part of the validation, you cant define more type checks.\
+                              You dindt do that for {validator_dict}')
+        type_dict = {}
+        for k, v in validator_dict.items():
+            if k is str:
+                type_dict[Validator.ensure(k)] = Validator.ensure(v)
+            elif isinstance(k, str):
+                type_dict[k] = Validator.ensure(v)
+            else:
+                raise ValueError(f'Key values should be of type str or instances of string.\
+                                 {k} does not comply with that')
+        return type_dict
+
+    def is_valid(self, value):
+        ...
+
+    def __str__(self):
+        ...
+
+
+class Any(Validator):
+    """Validator which allows any type."""
+
+    def is_valid(self, value):
+        return True
+
+    def __str__(self):
+        return 'any value'
+
+
+class InstanceOf(Validator):
+    """Validator which checks if a value is an instance of a type."""
+
+    def __init__(self, type):
+        self.type = type
+
+    def is_valid(self, value):
+        return isinstance(value, self.type)
+
+    def __str__(self):
+        return f'instance of {self.type}'
+
+
+class EitherOf(Validator):
+    """Validator wihch checks if a value is instance of one of several types"""
+
+    def __init__(self, *types):
+        self.validators = [Validator.ensure(type) for type in types]
+
+    def is_valid(self, value):
+        return any(validator.is_valid(value) for validator in self.validators)
+
+    def __str__(self):
+        return f'matches one of {self.validators}'
+
+
+class Predicate(Validator):
+    """Validator which calls an arbitrary callback."""
+
+    def __init__(self, fn):
+        self.fn = fn
+
+    def is_valid(self, value):
+        return self.fn(value)
+
+    def __str__(self):
+        return f'matches {self.fn}'
+
+
+class OptionalOf(Validator):
+    """Validator which matches either None or an inner validator."""
+
+    def __init__(self, inner):
+        self.inner = Validator.ensure(inner)
+
+    def is_valid(self, value):
+        return value is None or self.inner.is_valid(value)
+
+    def __str__(self):
+        return f'optional {self.inner}'
+
+
+class SetOf(Validator):
+    """Validator which matches a set matching inner validators."""
+
+    def __init__(self, inner):
+        self.inner = Validator.ensure(inner)
+
+    def is_valid(self, value):
+        return isinstance(value, set) and all(self.inner.is_valid(x) for x in value)
+
+    def __str__(self):
+        return f'set of {self.inner}'
+
+
+class ListOf(Validator):
+    """Validator which matches a list matching inner validators."""
+
+    def __init__(self, inner):
+        self.inner = Validator.ensure(inner)
+
+    def is_valid(self, value):
+        return isinstance(value, list) and all(self.inner.is_valid(x) for x in value)
+
+    def __str__(self):
+        return f'list of {self.inner}'
+
+
+class RecordOf(Validator):
+    """Validator which matches a record with inner validators."""
+
+    def __init__(self, inner):
+        self.inner = Validator.ensure_all(inner)
+
+    def is_valid(self, value):
+        return (isinstance(value, dict)
+                and all(validator.is_valid(value.get(key)) for key, validator in self.inner.items()))
+
+    def __str__(self):
+        return f'{self.inner}'
+
+
+class DictOf(Validator):
+    """ Validator wich matches dictionaries of any string to inner validators """
+
+    def __init__(self, inner):
+        self.inner = Validator.ensure_all(inner)
+
+    def is_valid(self, value):
+        if not isinstance(value, dict):
+            return False
+        first_type = list(self.inner.keys())[0]
+        return all(first_type.is_valid(k) and self.inner.get(first_type).is_valid(v) for k, v in value.items())
+
+    def __str__(self):
+        return f'list of {self.inner}'
+
+
+def slugify(x):
+    """Strips special characters from Dynamo identifiers."""
+    return re.sub(r'[^a-zA-Z0-9_.-]', '_', x)

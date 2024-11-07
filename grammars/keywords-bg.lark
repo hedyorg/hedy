@@ -5,7 +5,7 @@ _DEF: ("деф" | "def") _SPACE?
 _RETURN: ("върни" | "return") _SPACE?
 _PRINT: ("принтирай" | "print") _SPACE?
 _PLAY: ("play" | "play") _SPACE
-_ASK: ("попитай" | "ask") _SPACE?
+_ASK: ("попитай" | "ask")
 _ECHO: ("покажи" | "echo") _SPACE?
 _FORWARD: ("напред" | "forward") _SPACE?
 _TURN: ("завий" | "turn") _SPACE?
@@ -26,9 +26,9 @@ _IS: _SPACE ("е" | "is") _SPACE
 _STANDALONE_IS: ("е" | "is")
 _SLEEP: ("спи" | "sleep") _SPACE?
 _ADD_LIST: ("добави" | "add") _SPACE
-_TO_LIST: _SPACE ("до" | "to") _SPACE
+_TO_LIST: _SPACE? ("до" | "to")
 _REMOVE: ("премахни" | "remove") _SPACE
-_FROM: _SPACE ("от" | "from") _SPACE
+_FROM: _SPACE? ("от" | "from")
 _AT: _SPACE ("в" | "at") _SPACE
 random: ("произволно" | "random") _SPACE?
 _IN: _SPACE ("в" | "in") _SPACE
@@ -49,5 +49,6 @@ _WHILE: ("докато" | "while") _SPACE
 _LENGTH: "дължина" | "length"
 _COLOR : ("цвят" | "color") _SPACE?
 _PRESSED: ("натиснат" | "pressed") _SPACE?
-_BUTTON: ("button" | "button") _SPACE?
 clear: ("изчисти" | "clear") _SPACE?
+TRUE: ("вярно" | "Вярно" | "true" | "True") _SPACE?
+FALSE: ("невярно" | "Невярно" | "false" | "False") _SPACE?

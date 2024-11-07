@@ -9,12 +9,39 @@
       </div>
       {% if is_teacher %}
       <div class="text-center">
-        <button class="green-btn" data-cy="unsubmit-btn" onclick="hedyApp.modal.confirm ('{{_('unsubmit_warning')}}', function () {hedyApp.unsubmit_program ('{{initial_adventure.id}}', {{ loop_index }})})">{{_('unsubmit_program')}}</button>
+        <button class="green-btn" data-cy="unsubmit_btn" onclick="hedyApp.modal.confirm ('{{_('unsubmit_warning')}}', function () {hedyApp.unsubmit_program ('{{initial_adventure.id}}', {{ loop_index }})})">{{_('unsubmit_program')}}</button>
       </div>
       {% endif %}
   {% endif %}
-  <h1>{{initial_adventure.name}}</h1>
-  <h2 class="mt-0">{{_('level_title')}} {{level}}</h2>
+  <div class="flex flex-row gap-6 items-center">
+    <h1>{{initial_adventure.name}}</h1>
+    {% if is_students_teacher %}
+      <input type="checkbox"
+        id="adventure_checkbox"
+        class="student_adventure_checkbox text-green-700 text-center p-3 text-lg cursor-pointer self-center {% if student_adventure.ticked %}fa-solid fa-check{% endif %} "
+        hx-post="/for-teachers/check_adventure?level={{ level }}&student_name={{ initial_adventure.username }}&adventure_name={{ initial_adventure.adventure_name }}&program_id={{ program_id }}"
+        hx-swap="none"
+        hx-disabled-elt="this"
+        {% if student_adventure.ticked %}checked{% endif %}
+        _="on click toggle .fa-solid .fa-check on me"
+      >
+      <div class="flex-1"></div>
+      {% if next_program_id %}
+      <a class="green-btn" href="/hedy/{{ next_program_id }}/view">
+        {{_('next_adventure')}}
+      </a>
+      {% endif %}
+      {% if next_classmate_program_id %}
+        <a class="green-btn" href="/hedy/{{ next_classmate_program_id }}/view">{{ _('next_student') }}</a>
+      {% endif %}
+      {% if class_id %}
+        <a class="green-btn" href="/for-teachers/class/{{ class_id }}">
+          {{_('back_to_class')}}
+        </a>
+      {% endif %}
+    {% endif %}
+  </div>
+  <h2 class="p-0 m-0">{{_('level_title')}} {{level}}</h2>
   <div>{{_('by')}}
       <a {% if initial_adventure.public_profile %}onclick="window.open('/user/{{initial_adventure.username}}', '_self')"{% endif %} class="{% if initial_adventure.public_profile %}cursor-pointer{% else %}text-black{% endif %} no-underline">{{ initial_adventure.username }}</a>
   </div>

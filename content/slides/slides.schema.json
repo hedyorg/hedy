@@ -1,0 +1,50 @@
+{
+  "title": "JSON Schema for Hedy Slides",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "levels": {
+      "type": "object",
+      "description": "Levels with exercise for the Hedy Slides",
+      "additionalProperties": {
+        "$ref": "#/definitions/Level"
+      }
+    }
+  },
+  "required": [
+    "levels"
+  ],
+  "definitions": {
+    "Level": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/Exercise"
+      }
+    },
+    "Exercise": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "editor": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "debug": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "header",
+        "text"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

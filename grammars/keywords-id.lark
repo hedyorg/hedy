@@ -5,7 +5,7 @@ _DEF: ("def" | "def") _SPACE?
 _RETURN: ("return" | "return") _SPACE?
 _PRINT: ("cetak" | "print") _SPACE?
 _PLAY: ("play" | "play") _SPACE
-_ASK: ("tanya" | "ask") _SPACE?
+_ASK: ("tanya" | "ask")
 _ECHO: ("gaungkan" | "echo") _SPACE?
 _FORWARD: ("maju" | "forward") _SPACE?
 _TURN: ("belok" | "turn") _SPACE?
@@ -26,9 +26,9 @@ _IS: _SPACE ("adalah" | "is") _SPACE
 _STANDALONE_IS: ("adalah" | "is")
 _SLEEP: ("tidur" | "sleep") _SPACE?
 _ADD_LIST: ("tambah" | "add") _SPACE
-_TO_LIST: _SPACE ("ke" | "to") _SPACE
+_TO_LIST: _SPACE? ("ke" | "to")
 _REMOVE: ("hapus" | "remove") _SPACE
-_FROM: _SPACE ("dari" | "from") _SPACE
+_FROM: _SPACE? ("dari" | "from")
 _AT: _SPACE ("secara" | "at") _SPACE
 random: ("acak" | "random") _SPACE?
 _IN: _SPACE ("dalam" | "in") _SPACE
@@ -49,5 +49,6 @@ _WHILE: ("selama" | "while") _SPACE
 _LENGTH: "panjang" | "length"
 _COLOR : ("warna" | "color") _SPACE?
 _PRESSED: ("pressed" | "pressed") _SPACE?
-_BUTTON: ("button" | "button") _SPACE?
 clear: ("clear" | "clear") _SPACE?
+TRUE: ("true" | "True" | "true" | "True") _SPACE?
+FALSE: ("false" | "False" | "false" | "False") _SPACE?

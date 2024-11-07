@@ -1,6 +1,6 @@
 import uuid
 from flask import g, request, make_response
-from flask_babel import gettext
+from website.flask_helpers import gettext_with_fallback as gettext
 import json
 
 import hedy
@@ -11,7 +11,6 @@ from website.auth import requires_teacher
 from website.flask_helpers import render_template
 from jinja_partials import render_partial
 
-from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
 from safe_format import safe_format
@@ -21,11 +20,10 @@ invite_length = config["session"]["invite_length"] * 60
 
 
 class PublicAdventuresModule(WebsiteModule):
-    def __init__(self, db: Database, achievements: Achievements):
+    def __init__(self, db: Database):
         super().__init__("public_adventures", __name__, url_prefix="/public-adventures")
 
         self.db = db
-        self.achievements = achievements
         self.adventures = {}
         self.customizations = {"available_levels": set()}
         self.available_languages = set()
@@ -53,6 +51,7 @@ class PublicAdventuresModule(WebsiteModule):
 
             content = safe_format(adventure.get('formatted_content', adventure['content']),
                                   **hedy_content.KEYWORDS.get(g.keyword_lang))
+
             current_adventure = {
                 "id": adventure.get("id"),
                 "name": adventure.get("name"),
@@ -68,6 +67,7 @@ class PublicAdventuresModule(WebsiteModule):
                 "tags": adv_tags,
                 "text": content,
                 "is_teacher_adventure": True,
+                "flagged": adventure.get("flagged", 0),
             }
 
             # save adventures for later usage.
@@ -88,6 +88,7 @@ class PublicAdventuresModule(WebsiteModule):
         index_page = request.method == "GET"
 
         level = int(request.args["level"]) if request.args.get("level") else 1
+        adventure = request.args.get("adventure", "")
         language = request.args.get("lang", "")
         tag = request.args.get("tag", "")
         search = request.form.get("search", request.args.get("search", ""))
@@ -164,6 +165,7 @@ class PublicAdventuresModule(WebsiteModule):
             teacher_adventures=adventures,
             available_languages=self.available_languages,
             available_tags=self.available_tags,
+            selectedAdventure=adventure,
             selectedLevel=level,
             selectedLang=language,
             # selectedTag=",".join(self.selectedTag),
@@ -189,7 +191,7 @@ class PublicAdventuresModule(WebsiteModule):
             javascript_page_options=js,
         )
 
-        response = make_response(temp)
+        response = make_response(temp, 200)
         response.headers["HX-Trigger"] = json.dumps({"updateTSCode": js})
         return response
 
@@ -201,12 +203,12 @@ class PublicAdventuresModule(WebsiteModule):
         if not current_adventure:
             return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
         elif current_adventure["creator"] == user["username"]:
-            return gettext("adventure_duplicate"), 400
+            return make_response(gettext("adventure_duplicate"), 400)
 
         adventures = self.db.get_teacher_adventures(user["username"])
         for adventure in adventures:
             if adventure["name"] == current_adventure["name"]:
-                return gettext("adventure_duplicate"), 400
+                return make_response(gettext("adventure_duplicate"), 400)
 
         level = current_adventure.get("level")
         adventure = {
@@ -225,6 +227,7 @@ class PublicAdventuresModule(WebsiteModule):
             "language": current_adventure.get("language", g.lang),
             "tags": current_adventure.get("tags", []),
             "is_teacher_adventure": True,
+            "solution_example": current_adventure.get("solution_example", ""),
         }
 
         self.db.update_adventure(adventure_id, {"cloned_times": current_adventure.get("cloned_times", 0) + 1})
@@ -240,7 +243,6 @@ class PublicAdventuresModule(WebsiteModule):
                     # Replace the old adventure with the new adventure
                     self.adventures[_level][i] = adventure
                     break
-        # TODO: add achievement
         return render_partial('htmx-adventure-card.html', user=user, adventure=adventure, level=level,)
 
     def update_filters(self, adventures,  to_filter):
@@ -255,3 +257,10 @@ class PublicAdventuresModule(WebsiteModule):
             else:
                 adv_tags = adventure.get("tags", [])
                 self.available_tags.update(adv_tags)
+
+    @route("/flag/<adventure_id>", methods=["POST"])
+    @route("/flag/<adventure_id>/<flagged>", methods=["POST"])
+    @requires_teacher
+    def flag_adventure(self, user, adventure_id, flagged=None):
+        self.db.update_adventure(adventure_id, {"flagged": 0 if int(flagged) else 1})
+        return gettext("adventure_flagged"), 200

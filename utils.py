@@ -1,4 +1,4 @@
-from flask import session, request, jsonify, make_response
+from flask import session, request, make_response
 from website.flask_helpers import render_template
 from bs4 import BeautifulSoup
 import contextlib
@@ -18,7 +18,8 @@ import traceback
 import collections
 
 from email_validator import EmailNotValidError, validate_email
-from flask_babel import gettext, format_date, format_datetime, format_timedelta
+from flask_babel import format_date, format_datetime, format_timedelta
+from website.flask_helpers import gettext_with_fallback as gettext
 from ruamel import yaml
 import commonmark
 
@@ -329,8 +330,10 @@ def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=No
     if error not in [400, 403, 404, 500, 401]:
         error = 404
     default = gettext('default_404')
+    error_image = error
     if error == 401:
         default = gettext('default_401')
+        error_image = 403
     if error == 403:
         default = gettext('default_403')
     elif error == 500:
@@ -343,12 +346,12 @@ def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=No
 
     if request.accept_mimetypes.accept_json and not request.accept_mimetypes.accept_html:
         # Produce a JSON response instead of an HTML response
-        return jsonify({"code": error,
-                        "error": default,
-                        "exception": traceback.format_exception(type(exception), exception, exception.__traceback__) if exception else None}), error
+        return make_response({"code": error,
+                              "error": default,
+                              "exception": traceback.format_exception(type(exception), exception, exception.__traceback__) if exception else None}, error)
 
-    return render_template("error-page.html", menu=menu, error=error, iframe=iframe,
-                           page_error=page_error or ui_message or '', default=default), error
+    return render_template("error-page.html", menu=menu, error_image=error_image, iframe=iframe,
+                           page_error=page_error or ui_message or default or '', default=default), error
 
 
 def session_id():
@@ -360,12 +363,9 @@ def session_id():
             session['session_id'] = uuid.uuid4().hex
     return session['session_id']
 
-
-def add_pending_achievement(data):
-    session['pending_achievements'] = session.get('pending_achievements', []) + [data]
-
-
 # https://github.com/python-babel/babel/issues/454
+
+
 def customize_babel_locale(custom_locales: dict):
     from babel.core import get_global
     db = get_global('likely_subtags')

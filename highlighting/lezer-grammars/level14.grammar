@@ -1,38 +1,18 @@
-@top Program { eol* (Command eol+)* Command? }
+@top Program { newline* (Command newline+)* Command? }
 
 Command {
     Assign | AssignList | Ask | Clear |Print | Play | Turtle | Sleep | Add | Remove | If | Else | Repeat | For | Define | Call | Return | ErrorInvalid
 }
 
-@local tokens {    
-    singleQuoteStringEnd { "'" | "\n" }
-    @else singleQuoteStringContent
-  }
-  
-  @skip {} {
-    singleQuotedString { "'" (singleQuoteStringContent)* singleQuoteStringEnd }
-}
-
-@local tokens {    
-    doubleQuoteStringEnd { '"' | "\n" }
-    @else doubleQuoteStringContent
-  }
-  
-  @skip {} {
-    doubleQuotedString { '"' (doubleQuoteStringContent)* doubleQuoteStringEnd }
-}
-
-String { doubleQuotedString | singleQuotedString }
-
-
 Print { print+ ( ListAccess | Expression )+ }
 Ask { Text (is+ | Op<"=">) ask+ ( ListAccess | Expression )+ }
 
-AssignList { Text (is+ | Op<"=">) (Text+ | Number ) ~ambig  (Comma (Text+ | Number ))+ }
+// Commas in every language are allowed
+AssignList { Text (is+ | Op<"=">) (String | Number ) ~ambig  (Op<',' | '،' | '，' | '、' > (String | Number ))+ }
 Assign { (Text | ListAccess) (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
 Sleep { sleep+ (Expression | ListAccess )? }
 ListAccess { Text at+ (random+ | Text | Number) }
-Add { add+ (Expression ) toList+ Text }
+Add { add+ (Expression ) to_list+ Text }
 Remove { remove+ (Expression ) from+ Text }
 Clear { clear+ }
 Play { play+ (ListAccess | Expression) }
@@ -63,7 +43,7 @@ Define { define+ Text (with+  Arguments)? }
 Call { call+ Text (with+ Arguments)? }
 Return { returns+ ( ListAccess | Expression )+ }
 
-Arguments { argument !comma (Comma argument)* }
+Arguments { argument !comma (Op<',' | '،' | '，' | '、' > argument)* }
 argument { Expression | ListAccess }
 
 ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
@@ -113,7 +93,7 @@ Expression {
     add[@name="add"],
     from[@name="from"],
     remove[@name="remove"],
-    toList[@name="toList"],
+    to_list[@name="to_list"],
     clear[@name="clear"],    
     ins[@name="in"],
     not_in[@name="not_in"],
@@ -131,13 +111,27 @@ Expression {
         Number,
         Text
     }
+    symbol { $[%&().:;?@\[\]\\\^\{\}`~$_] }
     Comment { "#" ![\n]* }
-    eol { "\n" }
-    Comma { $[,،，、] } // every language comma is valid here
-    Text { ![^\n,،，、 '"#+\-*/=><!]+ } // a little bit of a hack not to parse commas never, but lezer adds them as error nodes, so it still
+    newline { '\n' }
+    // A char can be anything that goes after the character ! (A1)
+    // Excluding the commas in different languages:
+    // ، (U+00060C) ，(U+00FF0C) 、 (U+003001)
+    // We are also excluding the arab and Pajabi numeral systems.
+    identifierChar { 
+        @asciiLetter | 
+        $[\u{0000a1}-\u{00060b}] | $[\u{00060d}-\u{000659}] |
+        $[\u{000670}-\u{0006EF}] | $[\u{0006FA}-\u{003000}] |
+        $[\u{003002}-\u{00ff0b}] | $[\u{00ff0d}-\u{10ffff}]
+    }
+    Text { (identifierChar | symbol | digit)+ }
     space { " " }
     digit { $[٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹0123456789] } // latin, arab and pa_PK (Panjabi) scripts
     Number { digit+ ("." digit+)? }
+    String {
+        '"' ( ![\\\n"] )* '"' |
+        "'" ( ![\\\n'] )* "'"
+    } 
 }
 
 @skip { Comment | space }

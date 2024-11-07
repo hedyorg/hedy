@@ -5,7 +5,7 @@ import { initializeApp, initializeCodePage, InitializeCodePageOptions, initializ
 import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
 import { logs } from './logs';
-import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions } from './teachers';
+import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions, initializeCreateAccountsPage, InitializeCreateAccountsPageOptions } from './teachers';
 import { initializeTutorial } from './tutorials/tutorial';
 
 export interface InitializeOptions {
@@ -52,6 +52,7 @@ type InitializePageOptions =
   | InitializeCodePageOptions
   | InitializeCustomizeClassPageOptions
   | InitializeTeacherPageOptions
+  | InitializeCreateAccountsPageOptions
   | InitializeViewProgramPageOptions
   | InitializeClassOverviewPageOptions
   | InitializeAdminUsersPageOptions
@@ -66,8 +67,14 @@ type InitializePageOptions =
 export function initialize(options: InitializeOptions) {
   setClientMessageLanguage(options.lang);
 
+  let level = options.level;
+
+  if (!level && options.javascriptPageOptions?.page == "customize-adventure") {
+    level = options.javascriptPageOptions.level
+  }
+
   initializeApp({
-    level: options.level,
+    level: level,
     keywordLanguage: options.keyword_language,
     staticRoot: options.staticRoot,
   });
@@ -86,6 +93,10 @@ export function initialize(options: InitializeOptions) {
 
     case 'for-teachers':
       initializeTeacherPage(options.javascriptPageOptions);
+      break;
+
+    case 'create-accounts':
+      initializeCreateAccountsPage(options.javascriptPageOptions);
       break;
 
     case 'class-overview':
@@ -107,7 +118,9 @@ export function initialize(options: InitializeOptions) {
     case 'my-profile':
       initializeMyProfilePage(options.javascriptPageOptions);
       break;
-
+    
+    case 'tryit':
+      initializeCodePage(options.javascriptPageOptions);
   }
 
   // FIXME: I think this might also be page-specific

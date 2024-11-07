@@ -101,7 +101,7 @@
     explanation: בדוק פריטים באמצעות `{in}`.
     demo_code: |-
         צבעים_יפים {is} ירוק, צהוב
-        צבע {is} {ask} 'מה {is} הצבע האהוב עליך?'
+        צבע {is} {ask} 'מה הצבע האהוב עליך?'
         {if} צבע {in} צבעים_יפים {print} 'יפה!' {else} {print} 'טוב נו...'
 -   name: '{pressed}'
     explanation: בדוק אם מקש נתון במקלדת כן `{pressed}`.
@@ -159,12 +159,12 @@
             {turn} 90
             {forward} 50
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    explanation: בדוק האם המקש הנתון במקלדת הוא `{pressed}`.
     demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'You pressed A!'
+        {if} א {is} {pressed}
+            {print} 'לחצת על א'
         {else}
-            {print} 'You pressed another key!'
+            {print} 'לחצת על מקש אחר!'
 9:
 -   name: '{if} עם מספר שורות'
     explanation: קבלו את התשובה למספר שאלות עם `{ask}` ובדקו שהיא נכונה. עכשיו ביכולתנו להדפיס מספר שורות.
@@ -220,7 +220,7 @@
     demo_code: |-
         שם = 'הֶדִי הרובוטית'
         {print} 'שלום ' שם
--   name: מירכאות אחרי בדיקה עם {if}
+-   name: מירכאות אחרי בדיקה עם `{if}`.
     explanation: טקסט במירכאות אחרי `{if}`.
     demo_code: |-
         שם = {ask} 'מה שמך?'
@@ -287,22 +287,6 @@
         age = {ask} 'How old are you?'
         {if} age >= 14
             {print} 'You are older than me!'
-15:
--   name: '{while}'
-    explanation: We can use the `{while}` loop with not equal.
-    demo_code: |-
-        answer = 0
-        {while} answer != 25
-            answer = {ask} 'What is 5 times 5?'
-        {print} 'A correct answer has been given'
--   name: Smaller {while}
-    explanation: We can also use the `{while}` loop with `<` and `>`.
-    demo_code: |-
-        count = 1
-        {while} count < 3
-            {print} 'We do this ' 3 - count ' more times'
-            count = count + 1
-        {print} 'We are done'
 16:
 -   name: square brackets
     explanation: Lists with square brackets.
@@ -316,52 +300,8 @@
         firstfruit = fruit[1]
         {print} firstfruit
 -   name: Get a random item from a list
-    explanation: To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!
+    explanation: כדי לקבל פריט רנדומאלי מרשימה אנחנו משתמשים ב{random} כך ש - פירות[{random}] פירושו, קבל פריט רנדומאלי מרשימת הפירות!
     demo_code: |-
         fruit = ['banana', 'apple', 'cherry']
         random_fruit = fruit[random]
         {print} random_fruit
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a is 1'
-        {elif} a == 2:
-            {print} 'a is 2'
-        {else}:
-            {print} 'a is not 1 or 2'
--   name: '{print}'
-    explanation: When we use a `{for}`, we need to put a `:` behind the `{for}` statement!
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'Ready or not, here I come!'
--   name: '{if}'
-    explanation: We need to do the same with all of our `{if}` statements.
-    demo_code: |-
-        color = {ask} 'What is your favorite color?'
-        {if} color == 'green':
-            {print} 'Your favorite color is green'
-        {else}:
-            {print} 'Your favorite color is not green'
-18:
--   name: '{print}'
-    explanation: After `{print}` you need to use parentheses.
-    demo_code: '{print}(''hi!'')'
--   name: '{range}'
-    explanation: After `{range}` you need to use parentheses.
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('Hello, times ', i)
--   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you print more items.
-    demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: ask something with {input}
-    explanation: Use `{input}` instead of `{ask}` to ask something.
-    demo_code: |-
-        name = {input}('What is your name?')
-        {print}('So your name is ', name)

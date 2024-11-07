@@ -70,7 +70,7 @@ jobs:
     #----------------------------------------------------------------------
     #  Set up cache so that running snippet tests is somewhat cheap
     - name: Calculate hedy cache key
-      run: "echo value=$(ls -1 hedy.py grammars/* | sort | xargs tail -n 99999999 | sha256sum | cut -f 1 -d ' ') >> $GITHUB_OUTPUT"
+      run: "echo value=$(ls -1 hedy.py hedy_*.py grammars/* | sort | xargs tail -n 99999999 | sha256sum | cut -f 1 -d ' ') >> $GITHUB_OUTPUT"
       id: hedy_cache_key
     - name: Cache hedy test runs
       uses: actions/cache@v3
@@ -111,7 +111,7 @@ jobs:
     - name: Prevent updates and merge conflicts until merged
       run: |
         # Have to lock each component individually. Not in the UI, but using the CLI we do.
-        for component in glossary adventures keywords achievements quizzes commands client-messages web-texts webpages parsons tutorials slides; do
+        for component in glossary adventures keywords quizzes commands client-messages web-texts webpages parsons tutorials slides; do
           wlc lock hedy/$component
         done
 

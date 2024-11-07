@@ -11,7 +11,8 @@ import requests
 from botocore.exceptions import ClientError as email_error
 from botocore.exceptions import NoCredentialsError
 from flask import g, request, session, redirect
-from flask_babel import force_locale, gettext
+from flask_babel import force_locale
+from website.flask_helpers import gettext_with_fallback as gettext
 
 import utils
 from config import config
@@ -102,7 +103,7 @@ def remember_current_user(db_user):
     session["keyword_lang"] = db_user.get("keyword_language", "en")
 
     # Prepare the cached user object
-    session["user"] = pick(db_user, "username", "email", "is_teacher", "second_teacher_in")
+    session["user"] = pick(db_user, "username", "email", "is_teacher", "second_teacher_in", "is_super_teacher")
     session["user"]["second_teacher_in"] = db_user.get("second_teacher_in", [])
     # Classes is a set in dynamo, but it must be converted to an array otherwise it cannot be stored in a session
     session["user"]["classes"] = list(db_user.get("classes", []))
@@ -155,7 +156,6 @@ def is_user_logged_in():
 def forget_current_user():
     session.pop("user", None)  # We are not interested in the value of the use key.
     session.pop("messages", None)  # Delete messages counter for current user if existed
-    session.pop("achieved", None)  # Delete session achievements if existing
     session.pop("keyword_lang", None)  # Delete session keyword language if existing
     session.pop("profile_image", None)  # Delete profile image id if existing
 
@@ -184,6 +184,11 @@ def is_second_teacher(user, class_id=None):
     if not class_id:
         return bool(user.get("second_teacher_in", False))
     return is_teacher(user) and class_id in user.get("second_teacher_in", [])
+
+
+def is_super_teacher(user):
+    # the `is_super_teacher` field is either `0`, `1` or not present.
+    return bool(user.get("is_super_teacher", False))
 
 
 def has_public_profile(user):
@@ -226,9 +231,7 @@ def requires_login(f):
 
     @wraps(f)
     def inner(*args, **kws):
-        print('session before', session)
         just_logged_out = session.pop(JUST_LOGGED_OUT, False)
-        print('session after', session)
         if not is_user_logged_in():
             return redirect('/') if just_logged_out else utils.error_page(error=401)
         # The reason we pass by keyword argument is to make this
@@ -289,6 +292,22 @@ def requires_teacher(f):
     return inner
 
 
+def requires_super_teacher(f):
+    """Similar to 'requires_login', but also tests that the user is a super teacher.
+
+    The decorated function MUST declare an argument named 'user'.
+    """
+
+    @wraps(f)
+    def inner(*args, **kws):
+        just_logged_out = session.pop(JUST_LOGGED_OUT, False)
+        if not is_user_logged_in() or not is_super_teacher(current_user()):
+            return redirect('/') if just_logged_out else utils.error_page(error=401, ui_message=gettext("unauthorized"))
+        return f(*args, user=current_user(), **kws)
+
+    return inner
+
+
 def login_user_from_token_cookie():
     """Use the long-term token cookie in the user's request to try and look them up, if not already logged in."""
     if is_user_logged_in():
@@ -306,20 +325,6 @@ def login_user_from_token_cookie():
     user = g.db.user_by_username(token["username"])
     if user:
         remember_current_user(user)
-
-
-def validate_student_signup_data(account):
-    if not isinstance(account.get("username"), str):
-        return gettext("username_invalid")
-    if "@" in account.get("username") or ":" in account.get("username"):
-        return gettext("username_special")
-    if len(account.get("username").strip()) < 3:
-        return gettext("username_three")
-    if not isinstance(account.get("password"), str):
-        return gettext("password_invalid")
-    if len(account.get("password")) < 6:
-        return gettext("passwords_six")
-    return None
 
 
 def validate_signup_data(account):

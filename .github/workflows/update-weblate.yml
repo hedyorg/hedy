@@ -59,16 +59,43 @@ jobs:
         fi
 
         # Have to lock each component individually. Not in the UI, but using the CLI we do.
-        for component in glossary adventures keywords achievements quizzes commands client-messages web-texts webpages parsons tutorials slides; do
+        # (NOTE: this list is also below!)
+        for component in glossary adventures keywords quizzes commands client-messages web-texts webpages parsons tutorials slides; do
           wlc lock hedy/$component
         done
 
         wlc pull
+
+        # 'commit' seems to be an async process, as sometimes nothing is pushed if we run this
+        # too quickly in succession. Add a short sleep to reduce chances of this happening.
+        # https://github.com/WeblateOrg/weblate/issues/12400
         wlc commit
+        sleep 30
+
         wlc push
-        # On our repo, 'wlc reset' consistently times out the TCP connection after waiting
-        # for 5 minutes. The actual reset does seem to work, so we just don't wait for the
-        # command to finish, otherwise all our workflow executions show errors.
+        sleep 60
+
+    - name: Confirm that Weblate created a new PR
+      run: |
+        prs=$(gh pr -R hedyorg/hedy list -q '.[] | select(.title | contains("Translations update"))' --json title)
+        if [[ "$prs" == "" ]]; then
+          echo "Weblate didn't create a PR! Not resetting because that would lose changes!"
+
+          # Unlock each component again so we don't stay locked
+          # (NOTE: this list is also above!)
+          for component in glossary adventures keywords quizzes commands client-messages web-texts webpages parsons tutorials slides; do
+            wlc unlock hedy/$component
+          done
+
+          exit 1
+        fi
+      env:
+        GH_TOKEN: ${{ github.token }}
+
+    - name: Make Weblate forget its commits
+      run: |
+        # 'wlc reset' always leads to ConnectionAborted, so don't wait for it.
+        # https://github.com/WeblateOrg/weblate/issues/11368
         wlc reset &
         sleep 10
 
