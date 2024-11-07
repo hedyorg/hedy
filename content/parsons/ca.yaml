@@ -166,7 +166,7 @@ levels:
                         {print} 'No! La resposta correcta és ' resposta_correcta
         2:
             story: "Aquest codi pregunta als clients d'un restaurant si volen demanar alguna cosa de postres. Si volen, els demana quin tipus de postres. Si demanen tiramisú, se'ls hi diu que el tiramisú s'ha acabat.\nPots fer que el codi funcioni?"
-            code: "comanda = {ask} \"Que voldria alguna cosa de postres?\"\n{if} comanda= sí\n    postre = {ask} 'Quin tipus de postre?'\n    {if} postre = tiramissú\n        {print} \"Ens sap greu, s'ha acabat el tiramissú\"\n    {else}\n        {print} \"Un \" postre \" en marxa!\"\n{else}\n    {print} \"Si no desitja postre, cap problema\""
+            code: "order = {ask} 'Would you like to order dessert?'\n{if} order = yes\n    dessert = {ask} 'What kind of dessert would you like?'\n    {if} dessert = tiramisu\n        {print} 'Sorry, we are out of tiramisu.'\n    {else}\n        {print} 'One ' dessert ' coming right up!'\n{else}\n    {print} 'You dont want a dessert. No problem!'"
     10:
         1:
             story: |-
