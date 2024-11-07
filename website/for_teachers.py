@@ -89,6 +89,61 @@ class ForTeachersModule(WebsiteModule):
                 welcome_teacher=welcome_teacher,
             ))
 
+    @route("/workbooks/<level>", methods=["GET"])
+    def get_workbooks(self, level):
+        content = hedyweb.PageTranslations("workbooks").get_page_translations(g.lang)
+        workbooks = content['workbooks']
+        line = '_' * 30
+        workbook_for_level = workbooks['levels'][int(level)-1]
+
+        for exercise in workbook_for_level['exercises']:
+            if exercise['type'] == 'output':
+                exercise['title'] = gettext('workbook_output_question_title')
+                exercise['icon'] = '💻'
+                exercise['text'] = gettext('workbook_output_question_text')
+
+                # lines zou ik hier ook uit het antwoord kunnen uitrekenen!
+                exercise['lines'] = [line for x in range(exercise['lines'])]
+
+            if exercise['type'] == 'circle':
+                exercise['title'] = gettext('workbook_circle_question_title')
+                exercise['icon'] = '◯'
+                goal = exercise['goal']
+                exercise['text'] = safe_format(gettext('workbook_circle_question_text'), goal=goal)
+
+            elif exercise['type'] == 'input':
+                exercise['title'] = gettext('workbook_input_question_title')
+                exercise['icon'] = '🧑‍💻'
+                exercise['text'] = gettext('workbook_input_question_text')
+                a = len(exercise['answer'].split('\n'))
+                exercise['lines'] = [line for x in range(a)]
+
+            elif exercise['type'] == 'MC-code':
+                exercise['title'] = gettext('workbook_multiple_choice_question_title')
+                exercise['icon'] = '🤔'
+                exercise['text'] = gettext('workbook_multiple_choice_question_text')
+                # let op! op een dag willen we misschien wel ander soorten MC, dan moet
+                # deze tekst anders
+                exercise['options'] = '〇  ' + '  〇  '.join(exercise['options'])
+
+            elif exercise['type'] == 'define':
+                exercise['title'] = gettext('workbook_define_question_title')  # ''
+                exercise['icon'] = '📖'
+                word = exercise['word']
+                exercise['text'] = safe_format(gettext('workbook_define_question_text'), word=word)
+                exercise['lines'] = [line for x in range(exercise['lines'])]
+
+            elif exercise['type'] == 'question':
+                exercise['title'] = gettext('workbook_open_question_title')  # ''
+                exercise['icon'] = '✍️'
+                exercise['lines'] = [line for x in range(exercise['lines'])]
+
+        return render_template("workbooks.html",
+                               current_page="teacher-manual",
+                               level=level,
+                               page_title=f'Workbook {level}',
+                               workbook=workbook_for_level)
+
     @route("/manual", methods=["GET"], defaults={'section_key': 'intro'})
     @route("/manual/<section_key>", methods=["GET"])
     def get_teacher_manual(self, section_key):
@@ -1328,7 +1383,7 @@ class ForTeachersModule(WebsiteModule):
             invalid_usernames = [usr for usr in lines if any(sym in usr for sym in invalid_symbols_in_username)]
             if invalid_usernames:
                 err = safe_format(gettext('username_contains_invalid_symbol'),
-                                  usernames=', '.join(usernames_with_separator))
+                                  usernames=', '.join(invalid_usernames))
                 return make_response({"error": err}, 400)
 
             accounts = [(user.lower(), utils.random_id_generator()) for user in lines]
