@@ -1870,6 +1870,7 @@ class ConvertToPython_1(ConvertToPython):
                                         indent=False, is_debug=self.is_debug, location="after")
         return self.make_forward(int(self.unpack(args[0])))
 
+
     def color(self, meta, args):
         if not args:
             return f"t.pencolor('black'){self.add_debug_breakpoint()}"  # no arguments defaults to black ink
@@ -2675,6 +2676,10 @@ class ConvertToPython_10(ConvertToPython_8_9):
         body = add_sleep_to_command(body, True, self.is_debug, location="after")
 
         return f"for {times} in {list_name}:{self.add_debug_breakpoint()}\n{body}"
+
+    def goto(self, meta, args):
+        return f't.goto({args[0]}, {args[1]})'
+
 
 
 @v_args(meta=True)

@@ -7,7 +7,7 @@ print: _PRINT (text)?
 _color_literal : black | blue | brown | gray | green | orange | pink | purple | red | white | yellow
 ask: _ASK _SPACE? (text)?
 echo: _ECHO (text)?
-turtle: _FORWARD ((NUMBER | text))? -> forward | _TURN ((left | right ))? -> turn | _COLOR (_color_literal | text)? -> color
+turtle: _FORWARD ((NUMBER | text))? -> forward | _TURN ((left | right ))? -> turn | _COLOR (_color_literal | text)?
 error_invalid_space: _SPACE any
 
 // We give the error_invalid rule below a priority of -100,
