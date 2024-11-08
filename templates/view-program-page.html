@@ -34,9 +34,11 @@
       {% if next_classmate_program_id %}
         <a class="green-btn" href="/hedy/{{ next_classmate_program_id }}/view">{{ _('next_student') }}</a>
       {% endif %}
-      <a class="green-btn" href="/for-teachers/class/{{ class_id }}">
-        {{_('back_to_class')}}
-      </a>
+      {% if class_id %}
+        <a class="green-btn" href="/for-teachers/class/{{ class_id }}">
+          {{_('back_to_class')}}
+        </a>
+      {% endif %}
     {% endif %}
   </div>
   <h2 class="p-0 m-0">{{_('level_title')}} {{level}}</h2>

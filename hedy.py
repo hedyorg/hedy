@@ -2,7 +2,7 @@ import textwrap
 from functools import lru_cache
 
 import lark
-from flask_babel import gettext
+from website.flask_helpers import gettext_with_fallback as gettext
 from lark import Lark
 from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
@@ -1307,6 +1307,13 @@ class IsValid(Filter):
 
     def error_remove_missing_from(self, meta, args):
         raise exceptions.MissingAdditionalCommand(command='remove', missing_command='from', line_number=meta.line)
+
+    def error_add_missing_list(self, meta, args):
+        raise exceptions.IncompleteCommandException(incomplete_command='add', level=self.level, line_number=meta.line)
+
+    def error_remove_missing_list(self, meta, args):
+        raise exceptions.IncompleteCommandException(incomplete_command='remove', level=self.level,
+                                                    line_number=meta.line)
 
     def error_non_decimal(self, meta, args):
         raise exceptions.NonDecimalVariable(line_number=meta.line)

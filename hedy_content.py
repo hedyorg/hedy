@@ -30,7 +30,9 @@ CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK',
 CUSTOM_LANGUAGE_TRANSLATIONS = {'kmr': 'Kurdî (Tirkiye)',
                                 'tl': 'ᜆᜄᜎᜓᜄ᜔',
                                 'peo': 'Old Persian',
-                                'iba': 'Iban'}
+                                'iba': 'Iban',
+                                'kab': 'Taqbaylit',
+                                }
 
 customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
 

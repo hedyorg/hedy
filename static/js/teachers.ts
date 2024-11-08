@@ -10,6 +10,7 @@ import { addCurlyBracesToCode, addCurlyBracesToKeyword } from './adventure';
 import { autoSave } from './autosave';
 import { HedySelect } from './custom-elements';
 import { Chart } from 'chart.js';
+import { setLoadingVisibility } from './loading';
 
 declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
@@ -547,102 +548,147 @@ export function add_account_placeholder() {
   }
 }
 
-export function generate_passwords() {
-    if (!$('#passwords_toggle').is(":checked")) {
-        $('.passwords_input').val('');
-        $('.passwords_input').prop('disabled', false);
-        return;
+export function toggleAutoGeneratePasswords() {
+    if ($('#passwords_toggle').is(':checked')) {
+        $('#passwords_toggle_checked_text').show();
+        $('#passwords_toggle_unchecked_text').hide();
+        $('#usernames_title').show();
+        $('#passwords_title').hide();
+        $('#usernames_desc').show();
+        $('#passwords_desc').hide();
+    } else {
+        $('#passwords_toggle_checked_text').hide();
+        $('#passwords_toggle_unchecked_text').show();
+        $('#usernames_title').hide();
+        $('#passwords_title').show();
+        $('#usernames_desc').hide();
+        $('#passwords_desc').show();
     }
-    $('.account_row').each(function () {
-        if ($(this).is(':visible')) {
-            $(this).find(':input').each(function () {
-                if ($(this).attr('id') == "password") {
-                    const random_password = generateRandomString(6);
-                    $(this).val(random_password);
-                }
-            });
-        }
-    });
-    $('.passwords_input').prop('disabled', true);
 }
 
-export function append_classname() {
-    const classname = <string>$('#classes').val();
-    $('.usernames_input').each(function () {
-        $(this).val($(this).val() + "_" + classname);
-    });
+export function printAccounts(title: string) {
+    var table = document.getElementById("accounts_table");
+    let newWindow = window.open("")!;
+    const css = `
+    <style>
+      h1 {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
+        margin-left: 20px;
+        color: rgb(44 82 130);
+      }
+
+      #accounts_table {
+        border-collapse: collapse;
+      }
+
+      #accounts_table td, th {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+        font-size: 1.5rem;
+        border: 1px solid gray;
+        color: rgb(44 82 130);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
+        text-align: center;
+      }
+    </style>`;
+    newWindow.document.write(`
+        <div style="display: flex; margin-bottom: 20px;">
+          <img src="/images/hero-graphic/hero-graphic-empty.png" height="100">
+          <h1>${title}</h1>
+        </div>
+    `);
+    newWindow.document.write(table?.outerHTML + css);
+    newWindow.print();
+    newWindow.close();
 }
 
-export function create_accounts(prompt: string) {
-    modal.confirm (prompt, function () {
-        $('#account_rows_container').find(':input').each(function () {
-            $(this).removeClass('border-2 border-red-500');
-            // Not really nice, but this removes the need for re-styling (a lot!)
-            $(this).removeAttr('required');
-        });
-        let accounts: {}[] = [];
-        $('.account_row').each(function () {
-            if ($(this).is(':visible')) { //We want to skip the hidden first "copy" row
-                let account: Record<string, string> = {};
-                $(this).find(':input').each(function () {
-                    account[$(this).attr("name") as string] = $(this).val() as string;
-                });
+export function copyAccountsToClipboard(prompt: string) {
+    const selection = window.getSelection();
+    const table = document.getElementById("accounts_table");
+    if (selection && table) {
+        var range = document.createRange();
+        selection.empty();
+        range.selectNode(table);
+        selection.addRange(range)
+        document.execCommand('copy')
+        selection.empty();
 
-                // Only push an account to the accounts object if it contains data
-                if (account['password'].length !== 0 || account['username'].length !== 0) {
-                    accounts.push(account);
-                }
-            }
-        });
+        modal.notifySuccess(prompt);
+    }
+}
+
+export function createAccounts(prompt: string) {
+    const accounts = $('#accounts_input').val() as string;
+    const numberOfAccounts = accounts.split('\n').filter(l => l.trim()).length;
+    const updatedPrompt = prompt.replace('{number_of_accounts}', numberOfAccounts.toString());
+
+    modal.confirm (updatedPrompt, function () {
+        const className = $('#classes').val() as string;
+        const generatePasswords = $('#passwords_toggle').is(":checked") as boolean;
+
+        setLoadingVisibility(true);
+
         $.ajax({
             type: 'POST',
             url: '/for-teachers/create-accounts',
             data: JSON.stringify({
-                accounts: accounts
+                class: className,
+                generate_passwords: generatePasswords,
+                accounts: accounts,
             }),
-            contentType: 'application/json',
-            dataType: 'json'
+            contentType: 'application/json'
         }).done(function (response) {
-            if (response.error) {
-                modal.notifyError(response.error);
-                $('#account_rows_container').find(':input').each(function () {
-                    if ($(this).val() == response.value) {
-                        $(this).addClass('border-2 border-red-500');
-                    }
-                });
-                return;
-            } else {
-                modal.notifySuccess(response.success);
-                if ($("input[name='download_credentials_checkbox']:checked").val() == "yes") {
-                    download_login_credentials(accounts);
-                }
-                $('#account_rows_container').find(':input').each(function () {
-                   $(this).val("");
-                });
-            }
+
+            setLoadingVisibility(false);
+            $('#accounts_form').hide();
+            $('#create_accounts_title').hide();
+
+            $('#accounts_results').show();
+            $('#accounts_results_title').show();
+            $("tr:has(td)").remove();
+            const accountsHtml = createHtmlForAccountsTable(response['accounts']);
+            $("#accounts_table").append(accountsHtml);
+
         }).fail(function (err) {
+            setLoadingVisibility(false);
+
+            try {
+                // This endpoint has to return error info to direct the user how to fix it
+                const parsed = JSON.parse(err.responseText);
+                if (parsed.error) {
+                    // Note the notification should not be closed automatically
+                    // because it contains feedback about broken records
+                    modal.notifyError(parsed.error, 0);
+                    return;
+                }
+            } catch { }
+            // If the error is simple text (e.g. 'request invalid'), display it to the user
             modal.notifyError(err.responseText);
         });
     });
 }
 
-function download_login_credentials(accounts: any) {
-    // https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
-    let csvContent = "data:text/csv;charset=utf-8,";
-    csvContent += "Username, Password" + "\r\n";
+function createHtmlForAccountsTable(accounts: Array<any>) {
+    let result = ""
+    for (let [index, account] of accounts.entries()) {
+        result += `
+          <tr class="${ index%2 ? 'bg-white' : 'bg-gray-200'} font-mono">
+            <td class="text-center px-4 py-2">hedy.org</td>
+            <td class="text-center px-4 py-2">${account['username']}</td>
+            <td class="text-center px-4 py-2">${account['password']}</td>
+          </tr>`;
+    }
+    return result;
+}
 
-    accounts.forEach(function(account: any) {
-        let row = account.username + "," + account.password;
-        csvContent += row + "\r\n";
-    });
-
-    var encodedUri = encodeURI(csvContent);
-    var link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "accounts.csv");
-    document.body.appendChild(link); // Required for Firefox
-
-    link.click();
+function onCreateAccountsPaste() {
+    // When copying data from Excel, the default column separator is a tab (\t).
+    // So, when text is pasted in the textarea for creating accounts, so we replace tabs with semicolons
+    const accountsInput = $('#accounts_input').val() as string;
+    const newAccounts = accountsInput.replace(/\t/g, ';');
+    $('#accounts_input').val(newAccounts);
 }
 
 export function copy_join_link(link: string, success: string) {
@@ -654,16 +700,6 @@ export function copy_join_link(link: string, success: string) {
     document.execCommand("copy");
     document.body.removeChild(sampleTextarea);
     modal.notifySuccess(success);
-}
-
-// https://onlinewebtutorblog.com/how-to-generate-random-string-in-jquery-javascript/
-function generateRandomString(length: number) {
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (var i = 0; i < length; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
 }
 
 export interface InitializeTeacherPageOptions {
@@ -707,6 +743,19 @@ function setLevelStateIndicator(level: string) {
       $('#state_accessible').removeClass('hidden');
     }
   }
+}
+
+export interface InitializeCreateAccountsPageOptions {
+  readonly page: 'create-accounts';
+}
+
+export function initializeCreateAccountsPage(_options: InitializeCreateAccountsPageOptions) {
+  const accountsInput = document.getElementById("accounts_input") as HTMLFormElement;
+  // Apparently we need the setTimeout to get the whole text of the textarea because the event provides only
+  // the text that was in the clipboard which does not work in if the user is appending text and not replacing it.
+  accountsInput?.addEventListener('paste', function() {
+      window.setTimeout(onCreateAccountsPaste, 100);
+  });
 }
 
 export interface InitializeCustomizeClassPageOptions {

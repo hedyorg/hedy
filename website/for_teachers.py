@@ -7,7 +7,7 @@ import uuid
 from bs4 import BeautifulSoup
 from flask import g, make_response, request, session, url_for, redirect
 from jinja_partials import render_partial
-from flask_babel import gettext
+from website.flask_helpers import gettext_with_fallback as gettext
 import jinja_partials
 
 import hedy
@@ -26,7 +26,6 @@ from website.auth import (
     requires_login,
     requires_teacher,
     store_new_student_account,
-    validate_student_signup_data,
     prepare_user_db,
     remember_current_user,
 )
@@ -89,6 +88,61 @@ class ForTeachersModule(WebsiteModule):
                 page='for-teachers',
                 welcome_teacher=welcome_teacher,
             ))
+
+    @route("/workbooks/<level>", methods=["GET"])
+    def get_workbooks(self, level):
+        content = hedyweb.PageTranslations("workbooks").get_page_translations(g.lang)
+        workbooks = content['workbooks']
+        line = '_' * 30
+        workbook_for_level = workbooks['levels'][int(level)-1]
+
+        for exercise in workbook_for_level['exercises']:
+            if exercise['type'] == 'output':
+                exercise['title'] = gettext('workbook_output_question_title')
+                exercise['icon'] = '💻'
+                exercise['text'] = gettext('workbook_output_question_text')
+
+                # lines zou ik hier ook uit het antwoord kunnen uitrekenen!
+                exercise['lines'] = [line for x in range(exercise['lines'])]
+
+            if exercise['type'] == 'circle':
+                exercise['title'] = gettext('workbook_circle_question_title')
+                exercise['icon'] = '◯'
+                goal = exercise['goal']
+                exercise['text'] = safe_format(gettext('workbook_circle_question_text'), goal=goal)
+
+            elif exercise['type'] == 'input':
+                exercise['title'] = gettext('workbook_input_question_title')
+                exercise['icon'] = '🧑‍💻'
+                exercise['text'] = gettext('workbook_input_question_text')
+                a = len(exercise['answer'].split('\n'))
+                exercise['lines'] = [line for x in range(a)]
+
+            elif exercise['type'] == 'MC-code':
+                exercise['title'] = gettext('workbook_multiple_choice_question_title')
+                exercise['icon'] = '🤔'
+                exercise['text'] = gettext('workbook_multiple_choice_question_text')
+                # let op! op een dag willen we misschien wel ander soorten MC, dan moet
+                # deze tekst anders
+                exercise['options'] = '〇  ' + '  〇  '.join(exercise['options'])
+
+            elif exercise['type'] == 'define':
+                exercise['title'] = gettext('workbook_define_question_title')  # ''
+                exercise['icon'] = '📖'
+                word = exercise['word']
+                exercise['text'] = safe_format(gettext('workbook_define_question_text'), word=word)
+                exercise['lines'] = [line for x in range(exercise['lines'])]
+
+            elif exercise['type'] == 'question':
+                exercise['title'] = gettext('workbook_open_question_title')  # ''
+                exercise['icon'] = '✍️'
+                exercise['lines'] = [line for x in range(exercise['lines'])]
+
+        return render_template("workbooks.html",
+                               current_page="teacher-manual",
+                               level=level,
+                               page_title=f'Workbook {level}',
+                               workbook=workbook_for_level)
 
     @route("/manual", methods=["GET"], defaults={'section_key': 'intro'})
     @route("/manual/<section_key>", methods=["GET"])
@@ -1289,7 +1343,10 @@ class ForTeachersModule(WebsiteModule):
         if not utils.can_edit_class(user, Class) and not is_admin(user):
             return utils.error_page(error=401, ui_message=gettext("no_such_class"))
 
-        return render_template("create-accounts.html", current_class=Class)
+        return render_template(
+            "create-accounts.html",
+            current_class=Class,
+            javascript_page_options=dict(page='create-accounts'))
 
     @route("/create-accounts", methods=["POST"])
     @requires_teacher
@@ -1299,44 +1356,111 @@ class ForTeachersModule(WebsiteModule):
         # Validations
         if not isinstance(body, dict):
             return make_response(gettext("ajax_error"), 400)
-        if not isinstance(body.get("accounts"), list):
+        if not isinstance(body.get("class"), str):
+            return make_response(gettext("request_invalid"), 400)
+        if not isinstance(body.get("generate_passwords"), bool):
+            return make_response(gettext("request_invalid"), 400)
+        if not isinstance(body.get("accounts"), str):
             return make_response(gettext("request_invalid"), 400)
 
-        if len(body.get("accounts", [])) < 1:
+        # Validate number of accounts
+        lines = [line.strip() for line in body["accounts"].split("\n") if line.strip()]
+        if not lines:
             return make_response(gettext("no_accounts"), 400)
+        elif len(lines) > 100:
+            return make_response(gettext('too_many_accounts'), 400)
 
-        usernames = []
+        separator = ';'
+        if body["generate_passwords"]:
+            # If usernames contain a separator, probably the user forgot to check the auto-generate passwords
+            usernames_with_separator = [usr for usr in lines if separator in usr]
+            if usernames_with_separator:
+                err = safe_format(gettext('username_contains_separator'), usernames=', '.join(usernames_with_separator))
+                return make_response({"error": err}, 400)
 
-        # Validation for correct types and duplicates
-        for account in body.get("accounts", []):
-            validation = validate_student_signup_data(account)
-            if validation:
-                return validation, 400
-            if account.get("username").strip().lower() in usernames:
-                return make_response({"error": gettext("unique_usernames"), "value": account.get("username")}, 200)
-            usernames.append(account.get("username").strip().lower())
+            # Currently usernames cannot contain '@' and ':'
+            invalid_symbols_in_username = ['@', ':']
+            invalid_usernames = [usr for usr in lines if any(sym in usr for sym in invalid_symbols_in_username)]
+            if invalid_usernames:
+                err = safe_format(gettext('username_contains_invalid_symbol'),
+                                  usernames=', '.join(invalid_usernames))
+                return make_response({"error": err}, 400)
 
-        # Validation for duplicates in the db
+            accounts = [(user.lower(), utils.random_id_generator()) for user in lines]
+        else:
+
+            accounts, incorrect_lines = self._extract_account_info(lines, separator)
+            if incorrect_lines:
+                # If lines don't have separators, probably the user forgot to uncheck the auto-generate passwords
+                if all([separator not in line for line in incorrect_lines]):
+                    err = safe_format(gettext('all_rows_missing_separator'), rows=', '.join(incorrect_lines))
+                    return make_response({"error": err}, 400)
+                else:
+                    # If only some lines don't have separators, then the user made an error somewhere
+                    err = safe_format(gettext('some_rows_missing_separator'), rows=', '.join(incorrect_lines))
+                    return make_response({"error": err}, 400)
+
+            # Validate passwords length
+            invalid_passwords = [pwd for (_, pwd) in accounts if len(pwd) < 6]
+            if invalid_passwords:
+                err = safe_format(gettext('passwords_too_short'), passwords=', '.join(invalid_passwords))
+                return make_response({"error": err}, 400)
+
+        # Validate usernames length
+        invalid_usernames = [usr for (usr, _) in accounts if len(usr) < 3]
+        if invalid_usernames:
+            err = safe_format(gettext('usernames_too_short'), usernames=', '.join(invalid_usernames))
+            return make_response({"error": err}, 400)
+
+        # Validate that the user supplied no duplicate usernames
+        usernames = [usr for (usr, _) in accounts]
+        duplicates_in_input = [usr for usr in usernames if usernames.count(usr) > 1]
+        if duplicates_in_input:
+            err = safe_format(gettext('provided_username_duplicates'),
+                              usernames=', '.join(list(set(duplicates_in_input))))
+            return make_response({"error": err}, 400)
+
+        # Validate that the usernames do not exist in the db
+        duplicates_in_db = [usr for (usr, _) in accounts if self.db.user_by_username(usr)]
+        if duplicates_in_db:
+            err = safe_format(gettext('usernames_unavailable'), usernames=', '.join(duplicates_in_db))
+            return make_response({"error": err}, 400)
+
+        # Validate the class
         classes = self.db.get_teacher_classes(user["username"], False)
-        for account in body.get("accounts", []):
-            if account.get("class") and account["class"] not in [i.get("name") for i in classes]:
-                return make_response(gettext("request_invalid"), 404)
-            if self.db.user_by_username(account.get("username").strip().lower()):
-                return make_response(
-                    {"error": gettext("usernames_exist"), "value": account.get("username").strip().lower()}, 200)
+        classes = [c for c in classes if c["id"] == body["class"]]
+        if not classes:
+            return make_response(gettext("request_invalid"), 404)
+        # Note that the teacher creating the account might be a second teacher for the class
+        # In this case, we link the student account to the main teacher
+        class_ = classes[0]
+        teacher = class_.get("teacher")
 
-        # the following is due to the fact that the current user may be a second user.
-        teacher = classes[0].get("teacher") if len(classes) else user["username"]
-        # Now -> actually store the users in the db
-        for account in body.get("accounts", []):
+        # Now, actually store the users in the db
+        for usr, pwd in accounts:
             # Set the current teacher language and keyword language as new account language
-            account["language"] = g.lang
-            account["keyword_language"] = g.keyword_lang
-            store_new_student_account(self.db, account, teacher)
-            if account.get("class"):
-                class_id = [i.get("id") for i in classes if i.get("name") == account.get("class")][0]
-                self.db.add_student_to_class(class_id, account.get("username").strip().lower())
-        return make_response({"success": gettext("accounts_created")}, 200)
+            user = {'username': usr, 'password': pwd, 'language': g.lang, 'keyword_language': g.keyword_lang}
+            store_new_student_account(self.db, user, teacher)
+            self.db.add_student_to_class(body["class"], usr)
+        response = {"accounts": [{"username": usr, "password": pwd} for usr, pwd in accounts]}
+        return make_response(response, 200)
+
+    @staticmethod
+    def _extract_account_info(lines, separator):
+        correct_lines: list[tuple[str, str]] = []
+        incorrect_lines = []
+        for line in lines:
+            account = line.split(separator)
+            if len(account) < 2:
+                incorrect_lines.append(line)
+            else:
+                usr = account[0].strip()
+                pwd = separator.join(account[1:]).strip()
+                if not usr or not pwd:
+                    incorrect_lines.append(line)
+                else:
+                    correct_lines.append((usr.lower(), pwd))
+        return correct_lines, incorrect_lines
 
     @route("/customize-adventure/view/<adventure_id>", methods=["GET"])
     @requires_login

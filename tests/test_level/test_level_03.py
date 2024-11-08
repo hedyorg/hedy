@@ -931,6 +931,20 @@ class TestsLevel3(HedyTester):
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
+    def test_add_to_list_without_list_gives_error(self):
+        code = textwrap.dedent("""\
+        animals is dog, cat, kangaroo
+        add favorite to
+        print animals at random""")
+
+        self.multi_level_tester(
+            max_level=11,
+            skip_faulty=False,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.IncompleteCommandException
+        )
+
     def test_remove_from_list_with_input_var_gives_error(self):
         code = textwrap.dedent("""\
         colors is ask 'What are the colors?'
@@ -956,6 +970,20 @@ class TestsLevel3(HedyTester):
             code=code,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.MissingAdditionalCommand
+        )
+
+    def test_remove_from_list_without_list_gives_error(self):
+        code = textwrap.dedent("""\
+        animals is dog, cat, kangaroo
+        remove dog from
+        print animals at random""")
+
+        self.multi_level_tester(
+            max_level=11,
+            skip_faulty=False,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.IncompleteCommandException
         )
 
     #
