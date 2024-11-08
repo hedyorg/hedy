@@ -1561,10 +1561,28 @@ export function toggle_blur_code() {
 }
 
 export async function change_language(lang: string) { 
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  urlParams.set('keyword_language', lang);
-  location.href = `${location.protocol}//${lang}.${theDomainName}${location.pathname}?${urlParams.toString()}`
+  if (theDomainName.includes('localhost')) {
+    await tryCatchPopup(async () => {
+      const response = await postJson('/change_language', { lang });
+      if (response) {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+  
+        if (lang === 'en' || urlParams.get("language") !== null) {
+          urlParams.set("language", lang)
+          urlParams.set('keyword_language', lang);
+          window.location.search = urlParams.toString();
+        } else {
+          location.reload();
+        }
+      }
+    });
+  } else {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    urlParams.set('keyword_language', lang);
+    location.href = `${location.protocol}//${lang}.${theDomainName}${location.pathname}?${urlParams.toString()}`
+  }
 }
 
 function update_view(selector_container: string, new_lang: string) {
