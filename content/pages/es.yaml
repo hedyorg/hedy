@@ -202,7 +202,7 @@ teacher-guide:
             ¿No quieres fijar fechas de apertura? No hay problema, simplemente deja esta sección en blanco.
 
             **Desbloquear umbrales de nivel**
-            <img src="https://github.com/hedyorg/hedy/assets/80678586/99a34dab-f112-459e-bfd1-07618be4715a" ancho = "1000">
+            <img src="https://github.com/hedyorg/hedy/assets/80678586/99a34dab-f112-459e-bfd1-07618be4715a" witdh= "1000">
             Esta característica le permite establecer un umbral para la calificación del examen de sus estudiantes, antes de que puedan continuar al siguiente nivel. Por ejemplo, si ingresa "80", sus estudiantes deben obtener al menos un 80 % en el cuestionario antes de poder pasar al siguiente nivel. Si no han alcanzado el umbral, no podrán continuar y deberán volver a realizar el cuestionario.
             ¿No quieres utilizar el umbral? No te preocupes, simplemente mantén esta sección en blanco.
 
@@ -215,7 +215,7 @@ teacher-guide:
             Si desea que todos sus alumnos sean visibles en la puntuación más alta de la clase, puede seleccionar la segunda opción.
             Con todas las demás opciones, puede optar por ocultar algunas funciones o contenido para sus alumnos, esto podría ayudarlos a concentrarse más.
 
-            **Ahorrar**
+            **Guardar**
             <img src="https://github.com/hedyorg/hedy/assets/80678586/df179df3-3073-4d15-bba6-62e58fb675be" width="300">
             No olvide guardar los cambios cuando haya terminado de personalizar su clase.
     -   title: Cuentas de Estudiantes
@@ -231,7 +231,7 @@ teacher-guide:
             Los estudiantes pueden conectarse con el nombre de usuario y contraseña que elegiste. Después, ellos pueden cambiar su nombre de usuario o contraseña si quieren, manteniéndose en tu clase.
             Este <a href="https://www.youtube.com/watch?v=eEQvik-Ce5M" target="_blank">vídeo</a> muestra cómo agregar estudiantes a tu clase de la manera más rápida y fácil.
             También puedes invitar manualmente a un alumno a tu clase con el botón 'Invitar por nombre de usuario'.
-    -   title: Escoger lenguage preferido
+    -   title: Establecer idioma preferido
         text: |-
             Cuando los alumnos crean sus perfiles deben escoger su 'idioma preferido'. Hedy siempre cargará utilizando este idioma.
             El idioma siempre se podrá modificar a posteriori navegando a ' Mi cuenta' y 'Mis opciones personales'.
@@ -1210,11 +1210,11 @@ workbooks:
         -   type: círculo
             answer: Línea 1 & 3
             goal: lugares donde se **establece** la variable
-            code: "nombre es Hedy\nimprimir Hola nombre\nedad es 17\nImprimir Tienes años"
+            code: "nombre es Hedy\nimprimir Hola nombre\nedad es 17\nImprimir Tienes edad años"
         -   answer: Línea 2 y 4
             type: círculo
             goal: lugares donde las variables se **utilizan**
-            code: "nombre es Hedy\nimprimir Hola nombre\n\"edad\" es 17\nimprimir Tienes \"edad\" años"
+            code: "nombre es Hedy\nimprimir Hola nombre\nedad es 17\nimprimir Tienes edad años"
         -   type: texto
             contents: "##### Ejercicio 2: Predecir el resultado\nConsejo: ¿Te cuesta predecir la salida? Sigue estos pasos:\n\n1. Marcar el lugar donde se establece una variable\n2. Marcar el lugar donde se utiliza una variable\n3. Trazar una línea entre estos dos lugares\n4. Escriba el valor (lo que viene después de `es`) en el lugar donde se utiliza la variable."
         -   answer: ¡Gran trabajo Mo!
@@ -1230,6 +1230,7 @@ workbooks:
             code: "first_name es Layla\nprint ¡Buenos días nombre!"
             answer: ¡Buenos días Layla!
         -   type: texto
+            contents: "#### Ejercicio 3: ¿Error?\nLee los programas cuidadosamente ¿Cuáles son los correctos?"
         -   options:
             -   Correcto
             -   Incorrecto
@@ -1237,8 +1238,119 @@ workbooks:
         -   options:
             -   Correcto
             -   Incorrecto
+            answer: Incorrecto. Nombre no está establecido.
+        -   options:
+            -   Correcto
+            -   Incorrecto
+            answer: Correcto. Se permite que utilices una variable varias veces.
+        -   type: texto
+            code: nombre es preguntar ¿Cómo te llamas?
+        -   type: texto
+            code: "nombre es preguntar ¿Cómo te llamas?\nimprimir así que te llamas: nombre"
+            contents: "### Mostrar entrada de datos\nCon las variables, ya no necesitamos más `echo`. Simplemente utilizar `print` para mostrar la respuesta."
+        -   type: texto
+        -   code: "nombre es preguntar ¿Cómo te llamas?\nimprimir así que te llamas: nombre"
+            lines: '1'
+            type: resultado
+        -   code: "animo es preguntar ¿Qué tal estas hoy?\nimprimir Así que hoy te sientes animo"
+            type: resultado
+            lines: '1'
+        -   type: texto
+            contents: "#### Ejercicio 5: Vocabulario de programación\n¡Hemos aprendido nuevas palabras en este nivel! Explícalas con tus propias palabras."
+        -   type: definir
+            word: variable
+            answer: Nombre que se le da a algo, como un apellido o una edad.
+            lines: '1'
+        -   type: definir
+            word: valor
+            lines: '1'
+            answer: Lo que se guarda en una variable, como Andrés o 12.
+        -   word: ajuste
+            lines: '1'
+            type: definir
+            answer: Puedes establecer una variable con un comando `is`
+        -   type: definir
+            answer: Un programa en el que un usuario puede hacer aportaciones.
+            lines: '1'
+            word: interactivo
+        -   type: texto
+            contents: "#### Ejercicio 6: Comandos\nHemos aprendido nuevos comandos: `is` y `is ask` juntos. ¿Qué hacen? Explícalo con tus propias palabras."
+        -   type: definir
+            word: el comando `is`
+            answer: Guardar un valor (tras `is`) en una variable (antes de `is`)
+            lines: '1'
+        -   answer: Pedir al usuario que introduzca datos y guardarlos en una variable.
+            type: definir
+            word: el comando `is ask`
+            lines: '1'
         intro: "### Variables\nAl final de esta lección, puedes:\n* Guardar algo en una variable\n* Crear una historia o dibujar utilizando variables"
-    -   {}
+    -   level: '3'
+        exercises:
+        -   code: "amigos es Mo, Layla, Danny\nimprimir Hoy visitaré amigos en aleatorio"
+            type: texto
+            contents: "### Variables\nAcabas de ver el comando `is`utilizado con una lista.\nComo cualquier otra variable, utilizamos `is`para guardar algo."
+        -   type: texto
+            contents: '#### Ejercicio 1: Marca el fragmento de código correcto'
+        -   type: círculo
+            goal: listas
+            code: "hoy es lunes\nclases es 1HC, 1HB, 1HA\naulas es 011, 304, 305, 501"
+            answer: clases y aulas
+        -   goal: lugar(es) donde se utiliza el texto de una lista
+            code: "clases es 1HC, 1HB, 1HA\nimprimir ¡hoy clases en aleatorio tienen el día libre!"
+            type: círculo
+            answer: El final de la línea 2
+        -   type: texto
+        -   lines: '1'
+            type: resultado
+        -   answer: La profesora de hoy es Hermans.
+            type: resultado
+            lines: '1'
+        -   code: "tiempo es soleado, lluvioso, nublado, tormentoso\nimprimir ¡Qué maravilloso día tiempo!"
+            answer: ¡Qué maravilloso día tiempo!
+            lines: '1'
+            type: resultado
+        -   type: texto
+            contents: "#### Ejercicio 3: ¿Error?\nLee los programas cuidadosamente ¿Cuáles son los correctos?"
+        -   options:
+            -   Correcto
+            -   Incorrecto
+            answer: Incorrecto. No puedes imprimir una lista
+        -   options:
+            -   Correcto
+            -   Incorrecto
+            answer: Incorrecto. Profesores no es una lista
+        -   options:
+            -   Correcto
+            -   Incorrecto
+            code: "profesores es soleado, lluvioso, nublado, tormentoso\nimprimir Hoy será profesores en aleatorio"
+            answer: Correcto, al ordenador no le importa si el nombre de variable no tiene sentido.
+        -   type: texto
+        -   code: "respuestas es sí, no, quizás\nimprimir La respuesta es respuestas en aleatorio"
+            contents: "### Ajustar listas\n\nHasta ahora siempre hemos establecido nuestras listas al inicio del programa."
+            type: texto
+        -   type: texto
+            contents: "Pero a veces quieres que el usuario añada elementos a la lista.\nPuedes utilizar el comando `añadir a`para ello. También puedes eliminar elementos de la lista con `borrar de`."
+        -   type: texto
+            contents: '#### Ejercicio 4: Correcto o incorrecto?'
+        -   options:
+            -   Correcto
+            -   Incorrecto
+            answer: Incorrecto. Es `borrar de`, no `borrar a`.
+            code: "letras es a,b,c,d\nborrar a a letras"
+        -   options:
+            -   Correcto
+            -   Incorrecto
+            code: "comida es pizza, patatas, tacos\nborrar hamburguesa de comida"
+            answer: Correcto, se permite que borres algo que no está en la lista. Pero no tiene sentido hacerlo
+        -   code: "comida es pizza, patatas, tacos\nañadir pizza a comida"
+            answer: Correcto, se permite que añadas algo a una lista dos o varias veces.
+            options:
+            -   Correcto
+            -   Incorrecto
+        -   type: texto
+        -   type: entrada de datos
+        -   type: entrada de datos
+        -   type: texto
     -   {}
     -   {}
     -   exercises:
