@@ -59,6 +59,8 @@ export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
             editorType = EditorType.CHEATSHEET;
         } else if ($(preview).hasClass('parsons')) {
             editorType = EditorType.PARSONS;
+        } else if ($(preview).hasClass('workbook')){
+            editorType = EditorType.WORKBOOK
         } else {
             editorType = EditorType.EXAMPLE;
         }
@@ -168,6 +170,16 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 case EditorType.PARSONS:
                     theme[".cm-scroller"] = { "overflow": "auto", "min-height": "3.5rem" }
                     extensions.push(EditorView.theme(theme));
+                    break;
+                case EditorType.WORKBOOK:
+                    theme["&"] = {
+                        background: '#272822',
+                        fontSize: '15.2px',
+                        color: 'white',
+                        borderRadius: '4px',
+                        marginRight: '5px'
+                    }
+                    extensions.push([EditorView.theme(theme)])
                     break;
                 case EditorType.COMMON_MISTAKES: 
                     theme["&"] = {
