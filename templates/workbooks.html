@@ -16,10 +16,10 @@
                 {% for exercise in workbook.exercises %}
                     {% if exercise.contents %}
                         <p>{{ exercise.contents|commonmark }}</p>
-                        <!-- contents kan ook nog een code blok hebben --!>
+                        <!-- contents kan ook nog een code blok hebben -->
                         {% if exercise.code %}
                             <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-                                <pre class="common-mistakes" level="{{ workbook.level }}" style="font-size: 0.95em;">{{ exercise.code }}</pre>
+                                <pre class="workbook" level="{{ workbook.level }}" style="font-size: 0.95em;">{{ exercise.code }}</pre>
                             </div>
                         {% endif %}
 
@@ -33,8 +33,8 @@
                                 <tr>
                                      <td width='5000px'>
                                         {% if exercise.code %}
-                                        <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-                                            <pre class="common-mistakes" level="{{ workbook.level }}" style="font-size: 0.95em;">{{ exercise.code }}</pre>
+                                        <div class="w-full lg:w-2/3 turn-pre-into-ace my-5">
+                                            <pre class="workbook" level="{{ workbook.level }}" style="font-size: 0.95em;">{{ exercise.code }}</pre>
                                         </div>
                                         {% endif %}
                                     </td>
