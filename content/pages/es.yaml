@@ -599,11 +599,11 @@ teacher-guide:
                 solution_code: |-
                     {print} 'Bienvenido al restaurante'
                     comida {is} {ask} '¿Qué te gustaría pedir?'
-        -   title: Los alumnos utilizan un apóstrofe en su texto
+        -   title: Los alumnos utilizan un apóstrofo en su texto
             example:
-                error_text: Desde este nivel en adelante no se permiten los apóstrofes. Se suelen usar en inglés al escribir contracciones como you're, don't o what's.
+                error_text: Desde este nivel en adelante no se permiten los apóstrofos. Se suelen usar en inglés al escribir contracciones como you're, don't o what's.
                 error_code: "{print} 'No está permitido escribir esto'"
-                solution_text: Puedes elegir usar la gramática incorrecta y solo omitir el apóstrofe. O podrías usar el ` como un apóstrofe.
+                solution_text: Puedes elegir usar la gramática incorrecta y solo omitir el apóstrofo. O podrías utilizar el ` como un apóstrofo.
                 solution_code: |-
                     {print} 'Se permite que escribas esto (Youre)'
                     {print} 'Y también puedes escribir esto (you`re)'
@@ -1216,7 +1216,7 @@ workbooks:
             goal: lugares donde las variables se **utilizan**
             code: "nombre es Hedy\nimprimir Hola nombre\nedad es 17\nimprimir Tienes edad años"
         -   type: texto
-            contents: "##### Ejercicio 2: Predecir el resultado\nConsejo: ¿Te cuesta predecir la salida? Sigue estos pasos:\n\n1. Marcar el lugar donde se establece una variable\n2. Marcar el lugar donde se utiliza una variable\n3. Trazar una línea entre estos dos lugares\n4. Escriba el valor (lo que viene después de `es`) en el lugar donde se utiliza la variable."
+            contents: "##### Ejercicio 2: Predecir el resultado\nConsejo: ¿Te cuesta predecir el resultado? Sigue estos pasos:\n\n1. Marcar el lugar donde se establece una variable\n2. Marcar el lugar donde se utiliza una variable\n3. Trazar una línea entre estos dos lugares\n4. Escriba el valor (lo que viene después de `es`) en el lugar donde se utiliza la variable."
         -   answer: ¡Gran trabajo Mo!
             code: "nombre es Mo\nimprimir ¡Buen trabajo nombre!"
             lines: '1'
@@ -1256,7 +1256,7 @@ workbooks:
             code: "nombre es preguntar ¿Cómo te llamas?\nimprimir así que te llamas: nombre"
             contents: "### Mostrar entrada\nCon las variables, ya no necesitamos más `eco`. Simplemente utiliza `imprimir` para mostrar la respuesta."
         -   type: texto
-            contents: "Si alguien llamado Olivia utilizase este código, el resultado sería: `así que te llamas: Olivia`\n### Ejercicio 4: Predecir el resultado\nPredice la salida de estos programas. Imagina que has utilizado tu propio nombre."
+            contents: "Si alguien llamado Olivia utilizase este código, el resultado sería: `así que te llamas: Olivia`\n### Ejercicio 4: Predecir el resultado\nPredice el resultado de estos programas. Imagina que has utilizado tu propio nombre."
         -   code: "nombre es preguntar ¿Cómo te llamas?\nimprimir así que te llamas: nombre"
             lines: '1'
             type: resultado
@@ -1310,7 +1310,7 @@ workbooks:
             type: círculo
             answer: El final de la línea 2
         -   type: texto
-            contents: "##### Ejercicio 2: Predecir el resultado\n¿Te cuesta predecir la salida? Sigue estos pasos de nuevo para predecir el resultado de la variable:\n1. Marcar el lugar donde se establece una variable\n2. Marcar el lugar donde se utiliza una variable\n3. Trazar una línea entre estos dos lugares\n4. Elige un elemento aleatorio de la lista cuando se utiliza `en` `aleatorio`."
+            contents: "##### Ejercicio 2: Predecir el resultado\n¿Te cuesta predecir el resultado? Sigue estos pasos de nuevo para predecir el resultado de la variable:\n1. Marcar el lugar donde se establece una variable\n2. Marcar el lugar donde se utiliza una variable\n3. Trazar una línea entre estos dos lugares\n4. Elige un elemento aleatorio de la lista cuando se utiliza `en` `aleatorio`."
         -   lines: '1'
             type: resultado
             code: "profesores es Hermans, Merbis, Bagci, Senkal\nimprimir ¡Hoy te darán clase preforesores en aleatorio!"
@@ -1415,12 +1415,12 @@ workbooks:
             type: texto
         -   type: pregunta
             lines: '1'
-            text: ¿Cuál ha sido el ejercicio de este nivel que más te ha gustado?
+            text: ¿Qué ejercicio te ha gustado más de este nivel?
         -   text: ¿Qué te ha gustado de este ejercicio?
             type: pregunta
             lines: '5'
         -   lines: '1'
-            text: ¿Cuál ha sido el ejercicio de este nivel que menos te ha gustado?
+            text: ¿Qué ejercicio te ha gustado menos de este nivel?
             type: pregunta
         -   type: pregunta
             text: ¿Qué no te ha gustado de ese ejercicio?
@@ -1429,9 +1429,9 @@ workbooks:
     -   exercises:
         -   type: texto
             code: "amigo es preguntar '¿cómo te llamas?'\nimprimir '¡Genial! Iré al centro comercial con ' amigo"
-            contents: "### Comillas\n\nHemos aprendido a usar comillas, cuando un texto necesita aparecer literalmente de esa manera en la pantalla.\nUtilizamos comillas con `print` y `ask'."
+            contents: "### Comillas\n\nHemos aprendido a usar comillas, cuando un texto necesita aparecer literalmente de esa manera en la pantalla.\nUtilizamos comillas con `imprimir` y `preguntar'."
         -   type: texto
-            contents: "##### Ejercicio 1: Terminar el código.\nRealice este ejercicio en dos pasos:\n1. Coloque las comillas correctamente en el código.\n2. ¿Lo hiciste? Entonces predecir la salida de este código."
+            contents: "##### Ejercicio 1: Terminar el código.\nRealiza este ejercicio en dos pasos:\n1. Coloca las comillas correctamente en el código.\n2. ¿Lo hiciste? Entonces predice el resultado de este código."
         -   answer: "¡Hola a todos!\nBienvenido a Hedy"
             lines: '2'
             type: resultado
@@ -1459,7 +1459,7 @@ workbooks:
         -   options:
             -   Correcto
             -   Incorrecto
-            answer: Incorrecto. No puedes utilizar un apóstrofe cuando utilizas las comillas simples.
+            answer: Incorrecto. No puedes utilizar un apóstrofo cuando utilizas las comillas simples.
             type: Código MC
             code: imprimir 'Iré al zoológico mañana'
         -   options:
@@ -1472,7 +1472,7 @@ workbooks:
             -   Correcto
             -   Incorrecto
             code: imprimir "Creo que daré de comer a la llama"
-            answer: ¡Correcto! Puedes utilizar el apóstrofe cuando utilices las comillas dobles.
+            answer: ¡Correcto! Puedes utilizar el apóstrofo cuando utilizas las comillas dobles.
             type: Código MC
         -   options:
             -   Correcto
@@ -1481,7 +1481,7 @@ workbooks:
             answer: ¡Correcto! No tienes que utilizar las mismas comillas en cada frase, pero te lo recomendamos
             type: Código MC
         -   type: texto
-            contents: "#### Preguntar\n¡Recuerda utilizar comillas después de 'preguntar' también!\n\n#### Ejercicio 3: ¿Error?\n¡Lea los programas cuidadosamente! ¿Cuáles son correctos?"
+            contents: "#### Preguntar\n¡Recuerda utilizar comillas después de `preguntar` también!\n\n#### Ejercicio 3: ¿Error?\n¡Lee los programas cuidadosamente! ¿Cuáles son correctos?"
         -   options:
             -   Correcto
             -   Incorrecto
@@ -1518,7 +1518,7 @@ workbooks:
             type: texto
         -   type: definir
             word: comillas
-            answer: Apóstrofes que utilizas para imprimir o decir algo.
+            answer: Apóstrofos que utilizas para imprimir o decir algo.
             lines: '1'
         -   word: ¿cómo utilizar las comillas en Hedy?
             answer: Puedes utilizar las comillas cuando quieras imprimir el texto literal en la pantalla
@@ -1538,11 +1538,11 @@ workbooks:
             contents: '#### ¿Qué opinas?'
         -   type: pregunta
             lines: '1'
-            text: ¿Cuál ha sido el ejercicio de este nivel que más te ha gustado?
+            text: ¿Qué ejercicio te ha gustado más de este nivel?
         -   type: pregunta
             text: ¿Qué te ha gustado?
             lines: '5'
-        -   text: ¿Cuál ha sido el ejercicio de este nivel que menos te ha gustado?
+        -   text: ¿Qué ejercicio te ha gustado menos de este nivel?
             lines: '1'
             type: pregunta
         -   text: ¿Qué no te ha gustado?
@@ -1560,29 +1560,29 @@ workbooks:
             contents: "#### Ejercicio 1: Marca las condiciones\n¿Qué es una condicional? ¡Marca las condicionales en los siguientes programas!"
         -   answer: hoy es viernes
             goal: la condicional
-            code: "hoy es pregunta '¿Qué día es?'\nsi hoy es viernes imprime 'Sí' si no imprime 'No'"
+            code: "hoy es preguntar '¿Qué día es?'\nsi hoy es viernes imprimir 'Sí' sino imprimir 'No'"
             type: círculo
         -   type: círculo
             goal: la condicional
-            code: "hoy es pregunta '¿Qué día es hoy?'\nsi hoy es sábado imprime 'Hoy no hay colegio' si\nno imprime 'Tienes que ir al colegio'"
-            answer: Hoy es sábado
+            code: "hoy es preguntar '¿Qué día es hoy?'\nsi hoy es sábado imprimir '¡Hoy no hay colegio!'\nsino imprimir 'Tienes que ir al colegio'"
+            answer: hoy es sábado
         -   goal: la condicional
             answer: edad es 16
             type: círculo
-            code: "La edad es preguntar '¿Cuántos años tienes?'\nSi la edad es 16, imprima 'Perfecto'\nde lo contrario imprime '¡Eres demasiado joven!'"
+            code: "edad es preguntar '¿Cuántos años tienes?'\nSi edad es 16 imprimir 'Perfecto'\nsino imprimir '¡Eres demasiado joven!'"
         -   type: texto
             contents: "##### Ejercicio 2: Marcar las líneas correctas\n ¿Qué código se ejecutará? Marque solo esas partes.\nFinge que hoy es viernes y tienes 12 años."
         -   type: círculo
             goal: el código que se **imprimirá**
-            code: "Hoy pregunta '¿Qué día es hoy?'\nsi hoy es viernes imprimir 'Yay' otra impresión 'No'"
+            code: "hoy es preguntar '¿Qué día es hoy?'\nsi hoy es viernes imprimir 'Viva' sino imprimir 'No'"
             answer: imprimir '¡hurra!'
         -   type: círculo
             goal: el código que se **imprimirá**
-            code: "Hoy es preguntar '¿Qué día es hoy?'\nsi hoy es sábado imprimir 'No hay escuela hoy!'\nelse print 'Tienes que ir a la escuela'"
+            code: "hoy es preguntar '¿Qué día es hoy?'\nsi hoy es sábado imprimir '¡No hay escuela hoy!'\nsino imprimir 'Tienes que ir a la escuela'"
             answer: imprimir 'Tienes que ir a la escuela'
         -   type: círculo
             goal: el código que se **imprimirá**
-            code: "La edad es preguntar '¿Cuántos años tienes?'\nSi la edad es 16, imprima 'Perfecto'\nde lo contrario imprime '¡Eres demasiado joven!'"
+            code: "edad es preguntar '¿Cuántos años tienes?'\nsi edad es 16 imprimir 'Perfecto'\nsino imprimir '¡Eres demasiado joven!'"
             answer: imprimir '¡Eres demasiado joven!'
         -   type: texto
             contents: "#### Ejercicio 3: ¿Error?\n¡Lee atentamente los programas! ¿Cuáles son los correctos?"
@@ -1591,43 +1591,71 @@ workbooks:
             -   Correcto
             -   Incorrecto
             code: "La edad es preguntar '¿Cuántos años tienes?'\nSi la edad es 16, escribe \"¡Correcto!\". De lo contrario, \"¡Eres demasiado joven!\""
-            answer: Incorrecto. No hay ningún `print` después de `else`
+            answer: Incorrecto. No hay ningún `imprimir` después de `sino`
         -   type: Código MC
             options:
             -   Correcto
             -   Incorrecto
-            answer: ¡Correcto! No siempre necesitas un `else`
-            code: "animal es preguntar '¿Qué clase de animal es ese?'\nSi el animal es una llama, escribe 'Bahhhhh'"
+            answer: ¡Correcto! No siempre necesitas un `sino`
+            code: "animal es preguntar '¿Qué clase de animal es ese?'\nsi animal es llama, imprimir 'Bahhhhh'"
         -   type: Código MC
             options:
             -   Correcto
             -   Incorrecto
             answer: ¡Correcto! Puedes utilizar el apóstrofo cuando uses comillas dobles.
+            code: imprimir "¡Estoy tan feliz!"
         -   type: Código MC
+            options:
+            -   Correcto
+            -   Incorrecto
+            answer: Incorrecto. Tiene que haber un `es`en la primera línea.
+            code: "si nombre Hedy\nimprimir '¡Programar es divertido!'"
         -   type: Código MC
-            code: "Pregunta '¿A qué escuela vas?'\nSi la escuela es LK imprime '¡Sí!'"
+            code: "preguntar '¿A qué escuela vas?'\nsi escuela es LK imprimir '¡Sí!'"
+            options:
+            -   Correcto
+            -   Incorrecto
+            answer: Incorrecto. No hay variables en la primera línea.
         -   type: Código MC
-            code: "cantidad es preguntar \"¿cuántos capybaras hay por ahí?\"\nsi la cantidad es 5 imprimir 'Hay cantidad capybaras por allí.'"
-        -   contents: "#### Ejercicio 4: Predecir la salida\n¿Cuál será la salida de estos programas?\n¡Atención! A veces se utiliza `random` en un programa. Puedes elegir tú mismo un elemento aleatorio.\n¡Esto significa que varias respuestas pueden ser correctas!"
-        -   code: "Los profesores son Hermans, Merbis, Bagci, Senkal\nEl profesor es un profesor al azar\nsi el maestro es Hermans imprimir '¡Viva!'"
+            code: "cantidad es preguntar \"¿cuántos capibaras hay por ahí?\"\nsi cantidad es 5 imprimir 'Hay cantidad capibaras por allí.'"
+            options:
+            -   Correcto
+            -   Incorrecto
+            answer: Incorrecto. La variable cantidad se imprime como texto.
+        -   contents: "#### Ejercicio 4: Predecir el resultado\n¿Cuál será el resultado de estos programas?\n¡Atención! A veces se utiliza `aleatorio` en un programa. Puedes elegir tú mismo un elemento aleatorio.\n¡Esto significa que varias respuestas pueden ser correctas!"
+            type: texto
+        -   code: "profesores es Hermans, Merbis, Bagci, Senkal\nprofesor es profesores en aleatorio\nsi profesor es Hermans imprimir '¡Viva!'"
+            type: resultado
+            answer: ¡Hurra! o sin resultado
+            lines: '1'
         -   lines: '1'
             answer: ¡Que mal! o ¡Hurra!
-            code: "Los profesores son Hermans, Merbis, Bagci, Senkal\nEl profesor es profesor al azar\nSi el profesor es Hermans, escriba \"¡Qué lástima!\". De lo contrario, escriba \"¡Viva!\""
+            code: "profesores es Hermans, Merbis, Bagci, Senkal\nprofesor es profesore en aleatorio\nsi profesor es Hermans, imprimir \"¡Qué lástima!\" sino imprimir \"¡Viva!\""
+            type: resultado
         -   lines: '2'
             type: resultado
-            answer: "¡Bienvenido a la noche del bingo!\n¡Gané! o ¡Qué pena!"
-            code: "números es 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nimprimir 'Bienvenido a la noche de bingo!'\nnúmero es números aleatorios\nsi el número es 10, imprime 'He ganado!' o imprime 'Bummer'"
+            answer: "¡Bienvenido a la noche del bingo!\n¡Gané! o Qué pena"
+            code: "números es 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nimprimir '¡Bienvenido a la noche de bingo!'\nnúmero es números en aleatorio\nsi número es 10 imprimir '¡Gané!' o imprimir 'Que pena'"
         -   type: resultado
             lines: '1'
-            code: "número es preguntar '¿Cuál es tu número favorito?'\nsi el número es 10, imprime '¡También mío!'"
+            code: "número es preguntar '¿Cuál es tu número favorito?'\nsi número es 10, imprimir '¡El mío también!'"
+            answer: ¡También el mio! o sin resultado
         -   type: texto
-        -   answer: Algo que es true o false. Sigue detrás del `if`.
-        -   {}
+            contents: "#### Ejercicio 5: Vocabulario de programación\n¡Hemos aprendido nuevo vocabulario de programación en esta lección! Explícalo con tus propias palabras."
+        -   answer: Algo que es verdadero o falso. Sigue detrás del `si`.
+            type: definir
+            word: conditional
+            lines: '1'
+        -   type: texto
+            contents: "#### Ejercicio 6: Comandos\nHemos aprendido algunos comandos nuevos en el nivel 5."
         -   word: el comando `si`
             lines: '1'
+            answer: Decide qué código se ejecutará. Si el condicional es verdadero, se ejecutará el código que hay detrás.
+            type: definir
         -   type: definir
             lines: '1'
             word: el comando `sino`
+            answer: Decide qué código se ejecutará. Si el condicional es falso, se ejecutará el código que hay detrás.
         -   type: texto
             contents: '#### ¿Qué opinas?'
         -   type: pregunta
@@ -1636,7 +1664,7 @@ workbooks:
         -   text: ¿Qué te ha gustado?
             lines: '5'
             type: pregunta
-        -   text: ¿Cuál ha sido el ejercicio de este nivel que menos te ha gustado?
+        -   text: ¿Qué ejercicio te ha gustado menos de este nivel?
             lines: '1'
             type: pregunta
         -   type: pregunta
@@ -1647,30 +1675,37 @@ workbooks:
             code: imprimir 'cinco veces cinco es ' 5 * 5
             contents: "### Matemáticas\nHacer cálculos es una tarea importante para los ordenadores.\n\nLa suma se realiza con el signo más normal: `5 + 5`.\nLa resta también se hace con el signo menos normal: `5 - 5`.\nCon las multiplicaciones puede parecer un poco diferente de lo habitual, utilizamos el asterisco (por encima del 8): `5 * 5`.\nLa división se hace con la barra diagonal: `5 / 5`.\n\nTen en cuenta que el código matemático no necesita comillas."
         -   type: texto
+            contents: "#### Ejercicio 1: Predice el resultado\n¿Cuál crees que será el resultado de estos programas?"
         -   lines: '3'
             type: resultado
+            answer: "dos más diez es 20\n25 es 30 menos 5\n5"
+            code: "imprimir 'dos más diez es ' 2 * 10\nimprimir 5 * 5 ' es 30 menos 5'\nimprimir 10 / 2"
         -   type: texto
             contents: "#### Ejercicio 2: Matemáticas\nSigue estos pasos para completar el ejercicio:\n1. Termina los programas rellenando una suma en las líneas. El código tiene que tener sentido.\n2. ¿Has terminado? Escribe cuál crees que será el resultado del código."
         -   type: resultado
             lines: '4'
-            code: "imprimir 'cinco más diez es ' __\nimprimir 'seis menos cinco es ' ___\nImprimir 'un centenar de diveded por cinco es ' ___\n___ _________________________ 4 * 12"
+            code: "imprimir 'cinco más diez es ' __\nimprimir 'seis menos cinco es ' ___\nimprimir 'cien dividido por cinco es ' ___\n___ _________________________ 4 * 12"
+            answer: "cinco más diez es 50\nseis menos cinco es 1\ncien dividido entre cinco es 20\ncuatro veces doce es 48"
         -   type: texto
-            contents: "### Ejercicio 2: Matemáticas con preguntas y variables\nTambién puede guardar una suma en una variable, compararla con un `ask', y ejecutarla con un if.\nVamos a practicar eso ahora.\nPredecir el resultado de estos programas.\nCuando se utiliza el método 'ask' y 'random', puedes inventar tus propias respuestas."
+            contents: "### Ejercicio 2: Matemáticas con preguntar y variables\nTambién puede guardar una suma en una variable, compararla con `preguntar' y ejecutarla con un `si`.\nVamos a practicar eso ahora.\nPredice el resultado de estos programas.\nCuando se utilizan `preguntar`y `aleatorio`, puedes inventarte tus propias respuestas."
         -   type: resultado
             lines: '1'
             answer: La respuesta a la suma es 10
+            code: "suma = 2 * 5\nimprimir 'La respuesta a esta suma es ' suma"
         -   type: resultado
             answer: ¡Gran trajabo! o ¡Mala suerte!
             lines: '1'
-            code: "correct_answer = 142 / 2\nyour_answer = preguntar 'Cuanto es 142 dividido por 2?'\nsi la respuesta correcta es su respuesta\nimprimir 'Gran trabajo'\nOtra impresión '¡Qué pena!'"
+            code: "respuesta_correcta = 142 / 2\ntu_respuesta = preguntar '¿Cuánto es 142 dividido por 2?'\nsi respuesta_correcta es tu_respuesta\nimprimir 'Gran trabajo'\nsino imprimir '¡Qué pena!'"
         -   type: resultado
             lines: '1'
+            answer: '¿Cuánto es 7 veces 7? (o cualquier otro número de la lista: 2, 4, 6, 9, 11, 17)'
+            code: "numeros es 2, 4, 6, 7, 9, 11, 17\nnumero es numeros en aleatorio\nimprimir '¿Cuánto es ' numero ' veces 7?'"
         -   answer: 3 veces 6 (por ejemplo) es 18
             lines: '1'
             type: resultado
             code: "favorito es preguntar '¿Cuál es tu número favorito?'\nimprimir '3 veces ' favorito ' es ' 3 * favorito"
         -   type: texto
-            contents: "### Ejercicio 3: Entrada\nSe le mostrará una salida. Escribe un programa que pueda producir esta salida.\nNota: Varias respuestas pueden ser correctas. Elige la que quieras, siempre que sea correcta.\nRellena todas las líneas, ¡así que fíjate bien en la cantidad de líneas!"
+            contents: "### Ejercicio 3: Entrada\nSe te mostrará un resultado. Escribe un programa que pueda producir este resultado.\nTen en cuenta: Varias respuestas pueden ser correctas. Elige la que quieras, siempre que sea correcta.\nRellena todas las líneas, ¡así que fíjate bien en la cantidad de líneas!"
         -   type: entrada
             answer: imprimir 'Este es un número muy grande:' 4*17
             output: 'Este es un número muy grande: 68'
@@ -1694,12 +1729,12 @@ workbooks:
             contents: '#### ¿Qué te pareció?'
         -   lines: '1'
             type: pregunta
-            text: ¿Qué ejercicio te gustó más en este nivel?
+            text: ¿Qué ejercicio te ha gustado más de este nivel?
         -   text: ¿Qué te ha gustado?
             type: pregunta
             lines: '5'
         -   lines: '1'
-            text: ¿Qué ejercicio te gustó menos de este nivel ?
+            text: ¿Qué ejercicio te ha gustado menos de este nivel?
             type: pregunta
         -   text: ¿Qué no te ha gustado?
             lines: '5'
