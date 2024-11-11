@@ -1133,10 +1133,10 @@ workbooks:
     levels:
     -   level: '1'
         exercises:
-        -   contents: "### Ejercicios\nUn ordenador no hace algo por sí mismo. Siempre debe darle una tarea a un ordenador. Tal tarea se llama comando. Para imprimir el código, utilizamos el comando `print`.\n\n### Impresión de texto\nEn la pantalla acaba de leer el comando «imprimir».\nUn comando `print` imprime una palabra, cuando está entre comillas. Por ejemplo `print hello`.\n##### Ejercicio 1: Predecir el resultado"
+        -   contents: "### Ejercicios\nUn ordenador no hace algo por sí mismo. Siempre debe darle una tarea a un ordenador. Dicha tarea se denomina comando. Para imprimir el código, utilizamos el comando `imprimir`.\n\n### Imprimir texto\nEn la pantalla acabas de leer el comando `imprimir`.\nUn comando `imprimir` imprime una palabra, cuando está entre comillas. Por ejemplo `imprimir hola`.\n##### Ejercicio 1: Predecir el resultado"
             type: texto
         -   type: resultado
-            code: Imprimir Hola a todos
+            code: imprimir Hola a todos
             answer: Hola a todos
             lines: '1'
         -   type: resultado
@@ -1158,7 +1158,7 @@ workbooks:
             code: imprimir imprimir
             type: Código MC
         -   type: texto
-            contents: "### Pedir aportaciones\n\nSólo texto es un poco aburrido. También puede pedir _entrada_ en Hedy. Input es el texto que le das al ordenador.\nEl ordenador recuerda ese texto y te lo puede mostrar más tarde.\nEste código muestra la pregunta ``¿Cuál es tu nombre?\n\n```hedy\npregunta ¿Cuál es tu nombre?\n```\n\n### Mostrando entrada\n\nEl comando ask guarda la respuesta, pero no la muestra todavía. Para eso necesitarás el comando `echo`. `echo` mostrará la respuesta al final de la frase.\nAsí:\n\n``hedy\npregunta ¿cuál es tu nombre?\necho así que tu nombre es:\n```\n\nSi alguien llamado Olivia usara este código, la salida sería:\n\n```\nasí que te llamas Olivia\n```\n\nTen en cuenta que el ordenador imprimirá el texto exactamente como lo has introducido. Por tanto, ¡con los dos puntos y el mismo uso de mayúsculas o minúsculas!\n\n#### Ejercicio 3: Predecir la salida\n\nPredice la salida de estos programas. Imagina que has introducido tu propio nombre."
+            contents: "### Pedir información\n\nSolo el texto es un poco aburrido. También puedes pedir _entrada_ en Hedy. Entrada es el texto que le das al ordenador.\nEl ordenador recuerda ese texto y te lo puede mostrar más tarde.\nEste código muestra la pregunta '¿Cómo te llamas?'\n\n```hedy\npreguntar ¿Cómo te llamas?\n```\n\n### Mostrar la entrada\n\nEl comando preguntar guarda la respuesta, pero no la muestra todavía. Para eso necesitarás el comando `eco`. `eco` mostrará la respuesta al final de la frase.\nAsí:\n\n```hedy\npreguntar ¿cómo te llamas?\neco así que te llamas:\n```\n\nSi alguien llamado Olivia usara este código, el resultado sería:\n\n```hedy\nasí que te llamas Olivia\n```\n\nTen en cuenta que el ordenador imprimirá el texto exactamente como lo has introducido. Por tanto, ¡con los dos puntos y el mismo uso de mayúsculas o minúsculas!\n\n#### Ejercicio 3: Predecir el resultado\n\nPredice el resultado de estos programas. Imagina que has introducido tu propio nombre."
         -   answer: 'así que te llamas: **nombre**'
             code: "preguntar ¿cómo te llamas?\neco así que te llamas:"
             type: resultado
@@ -1167,13 +1167,13 @@ workbooks:
             type: resultado
             code: "preguntar ¿Cómo te llamas?\neco Encantado de conocerte,"
             answer: Encantado de conocerte, **nombre**
-        -   contents: "#### Ejercicio 4: Palabras de programación\n\nEn cada lección vamos a aprender palabras nuevos, incluso en esta lección. ¿Sabes qué significan estos términos? Explícalo con tus propias palabras."
+        -   contents: "#### Ejercicio 4: Vocabulario de programación\n\nEn cada lección vamos a aprender palabras nuevas, incluso en esta lección. ¿Sabes qué significan estos términos? Explícalo con tus propias palabras."
             type: texto
         -   type: definir
             word: comando
             answer: Una tarea que le darás al ordenador, p. ej., imprimir.
             lines: '1'
-        -   answer: Que escribir en el ordenador cuando Hedy muestra una pantalla de pregunta
+        -   answer: Lo que escribes en el ordenador cuando Hedy muestra una pantalla de pregunta
             type: definir
             lines: '1'
             word: entrada
@@ -1182,25 +1182,25 @@ workbooks:
             type: definir
             word: resultado
         -   type: texto
-            contents: "#### Ejercicio 5: Comandos\n\nYa hemos aprendido 3 comandos: `print`, `ask` y `echo`. ¿Qué hacen? Explícalo con tus propias palabras."
+            contents: "#### Ejercicio 5: Comandos\n\nYa hemos aprendido 3 comandos: `imprimir`, `preguntar` y `eco`. ¿Qué hacen? Explícalo con tus propias palabras."
         -   answer: Muestra texto por pantalla.
             lines: '1'
             type: definir
-            word: el comando `print`
+            word: el comando `imprimir`
         -   lines: '1'
             answer: Pide al usuario que introduzca datos.
             type: definir
-            word: el comando `ask`
+            word: el comando `preguntar`
         -   type: definir
-            word: el comando `echo`
+            word: el comando `eco`
             answer: Repite los datos introducidos por el usuario.
             lines: '1'
-        intro: "### Imprimir e introducir\nAl final de esta lección, podrás:\n* Escribir código que imprima texto\n* Crear una historia con entrada"
+        intro: "### Imprimir y entrada\nAl final de esta lección, podrás:\n* Escribir código que imprima texto\n* Crear una historia con entrada"
     -   level: '2'
         exercises:
         -   type: texto
             code: "nombre es Mo\nimprimir nombre"
-            contents: "### Uso de variables\n\nAcabas de ver el comando «es en la pantalla.\nUn comando \"is\" guarda algo en la memoria de la computadora y le asigna un nombre. Lo llamamos variable.\nLo que se guarda en la variable se llama valor de la variable."
+            contents: "### Uso de variables\n\nAcabas de ver el comando `es` en la pantalla.\nUn comando `es` guarda algo en la memoria del ordenador y le asigna un nombre. Lo llamamos variable.\nLo que se guarda en la variable se llama valor de la variable."
         -   type: texto
             contents: '#### Ejercicio 1: Marca el fragmento de código correcto'
         -   goal: variables
@@ -1208,10 +1208,10 @@ workbooks:
             answer: En todas las líneas
             type: círculo
         -   type: círculo
-            answer: Línea 1 & 3
+            answer: Líneas 1 & 3
             goal: lugares donde se **establece** la variable
             code: "nombre es Hedy\nimprimir Hola nombre\nedad es 17\nImprimir Tienes edad años"
-        -   answer: Línea 2 y 4
+        -   answer: Líneas 2 y 4
             type: círculo
             goal: lugares donde las variables se **utilizan**
             code: "nombre es Hedy\nimprimir Hola nombre\nedad es 17\nimprimir Tienes edad años"
@@ -1227,7 +1227,7 @@ workbooks:
             type: resultado
         -   type: resultado
             lines: '1'
-            code: "first_name es Layla\nprint ¡Buenos días nombre!"
+            code: "nombre es Layla\nimprimir ¡Buenos días nombre!"
             answer: ¡Buenos días Layla!
         -   type: texto
             contents: "#### Ejercicio 3: ¿Error?\nLee los programas cuidadosamente ¿Cuáles son los correctos?"
@@ -1235,26 +1235,33 @@ workbooks:
             -   Correcto
             -   Incorrecto
             answer: Correcto
+            code: "apellido es Johnson\nimprimir ¡Buenos días apellido!"
         -   options:
             -   Correcto
             -   Incorrecto
             answer: Incorrecto. Nombre no está establecido.
+            code: "nombre es\nimprimir ¡Buenos días, nombre!"
         -   options:
             -   Correcto
             -   Incorrecto
             answer: Correcto. Se permite que utilices una variable varias veces.
+            code: "nombre es Johnson\nimprimir ¡Buenos días mr nombre!\nimprimir ¡Hola mr nombre!"
         -   type: texto
             code: nombre es preguntar ¿Cómo te llamas?
+            contents: "### Pedir información\n\nSolo guardar texto no es muy útil. En el nivel 1 hemos visto el comando `preguntar`.\n\nDesde ahora se permite que combines `preguntar`con `es`, tal que así:"
         -   type: texto
             code: "nombre es preguntar ¿Cómo te llamas?\nimprimir así que te llamas: nombre"
-            contents: "### Mostrar entrada de datos\nCon las variables, ya no necesitamos más `echo`. Simplemente utilizar `print` para mostrar la respuesta."
+            contents: "### Mostrar entrada\nCon las variables, ya no necesitamos más `eco`. Simplemente utiliza `imprimir` para mostrar la respuesta."
         -   type: texto
+            contents: "Si alguien llamado Olivia utilizase este código, el resultado sería: `así que te llamas: Olivia`\n### Ejercicio 4: Predecir el resultado\nPredice la salida de estos programas. Imagina que has utilizado tu propio nombre."
         -   code: "nombre es preguntar ¿Cómo te llamas?\nimprimir así que te llamas: nombre"
             lines: '1'
             type: resultado
+            answer: 'así que te llamas: **nombre**'
         -   code: "animo es preguntar ¿Qué tal estas hoy?\nimprimir Así que hoy te sientes animo"
             type: resultado
             lines: '1'
+            answer: Así que hoy te sientes **animo**
         -   type: texto
             contents: "#### Ejercicio 5: Vocabulario de programación\n¡Hemos aprendido nuevas palabras en este nivel! Explícalas con tus propias palabras."
         -   type: definir
@@ -1268,27 +1275,27 @@ workbooks:
         -   word: ajuste
             lines: '1'
             type: definir
-            answer: Puedes establecer una variable con un comando `is`
+            answer: Puedes establecer una variable con un comando `es`
         -   type: definir
-            answer: Un programa en el que un usuario puede hacer aportaciones.
+            answer: Un programa en el que un usuario puede introducir datos.
             lines: '1'
             word: interactivo
         -   type: texto
-            contents: "#### Ejercicio 6: Comandos\nHemos aprendido nuevos comandos: `is` y `is ask` juntos. ¿Qué hacen? Explícalo con tus propias palabras."
+            contents: "#### Ejercicio 6: Comandos\nHemos aprendido nuevos comandos: `es` y `es preguntar` juntos. ¿Qué hacen? Explícalo con tus propias palabras."
         -   type: definir
-            word: el comando `is`
-            answer: Guardar un valor (tras `is`) en una variable (antes de `is`)
+            word: el comando `es`
+            answer: Guardar un valor (tras `es`) en una variable (antes de `es`)
             lines: '1'
         -   answer: Pedir al usuario que introduzca datos y guardarlos en una variable.
             type: definir
-            word: el comando `is ask`
+            word: el comando `es preguntar`
             lines: '1'
         intro: "### Variables\nAl final de esta lección, puedes:\n* Guardar algo en una variable\n* Crear una historia o dibujar utilizando variables"
     -   level: '3'
         exercises:
         -   code: "amigos es Mo, Layla, Danny\nimprimir Hoy visitaré amigos en aleatorio"
             type: texto
-            contents: "### Variables\nAcabas de ver el comando `is`utilizado con una lista.\nComo cualquier otra variable, utilizamos `is`para guardar algo."
+            contents: "### Variables\nAcabas de ver el comando `es`utilizado con una lista.\nComo cualquier otra variable, utilizamos `es`para guardar algo."
         -   type: texto
             contents: '#### Ejercicio 1: Marca el fragmento de código correcto'
         -   type: círculo
@@ -1300,11 +1307,15 @@ workbooks:
             type: círculo
             answer: El final de la línea 2
         -   type: texto
+            contents: "##### Ejercicio 2: Predecir el resultado\n¿Te cuesta predecir la salida? Sigue estos pasos de nuevo para predecir el resultado de la variable:\n1. Marcar el lugar donde se establece una variable\n2. Marcar el lugar donde se utiliza una variable\n3. Trazar una línea entre estos dos lugares\n4. Elige un elemento aleatorio de la lista cuando se utiliza `en` `aleatorio`."
         -   lines: '1'
             type: resultado
-        -   answer: La profesora de hoy es Hermans.
+            code: "profesores es Hermans, Merbis, Bagci, Senkal\nimprimir ¡Hoy te darán clase preforesores en aleatorio!"
+            answer: ¡Hoy te darán clase **elige un profesor**!
+        -   answer: El profesor de hoy es Hermans.
             type: resultado
             lines: '1'
+            code: "profesores es Hermans, Merbis, Bagci, Senkal\nimprimir El profesor de hoy es Hermans."
         -   code: "tiempo es soleado, lluvioso, nublado, tormentoso\nimprimir ¡Qué maravilloso día tiempo!"
             answer: ¡Qué maravilloso día tiempo!
             lines: '1'
@@ -1315,23 +1326,27 @@ workbooks:
             -   Correcto
             -   Incorrecto
             answer: Incorrecto. No puedes imprimir una lista
+            code: "rocas es guijarros, piedras, cantos rodados\nimprimir ¡Me encanta programar! ¡Esto rocas!"
         -   options:
             -   Correcto
             -   Incorrecto
             answer: Incorrecto. Profesores no es una lista
+            code: "profesores es Hermans\nimprimir Hoy será profesores en aleatorio"
         -   options:
             -   Correcto
             -   Incorrecto
             code: "profesores es soleado, lluvioso, nublado, tormentoso\nimprimir Hoy será profesores en aleatorio"
             answer: Correcto, al ordenador no le importa si el nombre de variable no tiene sentido.
         -   type: texto
+            contents: "## Aventuras\nEs un buen momento para empezar con estas aventuras:\nIntroducción\nAleatorio\nDados\nPiedra, papel, tijera\nMúsica\nEl adivino\nRestaurante\nLa casa embrujada\nPlatos"
         -   code: "respuestas es sí, no, quizás\nimprimir La respuesta es respuestas en aleatorio"
             contents: "### Ajustar listas\n\nHasta ahora siempre hemos establecido nuestras listas al inicio del programa."
             type: texto
         -   type: texto
-            contents: "Pero a veces quieres que el usuario añada elementos a la lista.\nPuedes utilizar el comando `añadir a`para ello. También puedes eliminar elementos de la lista con `borrar de`."
+            contents: "Pero a veces quieres que el usuario añada elementos a la lista.\nPuedes utilizar el comando `añadir a` para ello. También puedes eliminar elementos de la lista con `borrar de`."
+            code: "animales es 🐿, 🦔, 🦇, 🦉\nanimal es preguntar ¿Qué hace ese sonido?\nañadir animal a animales\nimprimir Fue... animales en aleatorio"
         -   type: texto
-            contents: '#### Ejercicio 4: Correcto o incorrecto?'
+            contents: '#### Ejercicio 4: ¿Correcto o incorrecto?'
         -   options:
             -   Correcto
             -   Incorrecto
@@ -1348,11 +1363,177 @@ workbooks:
             -   Correcto
             -   Incorrecto
         -   type: texto
+            contents: "#### Ejercicio5: Escribe el código\nEcha un buen vistazo al resultado y escribe un código correspondiente a él.\n**Asegúrate que tu código contiene al menos una opción aleatoria, ¡así no utilizaras solo imprimir!**"
         -   type: entrada de datos
+            output: "¡Bienvenido a la noche de bingo!<br>\nLos 3 números de la suerte son:<br>\n5 y 3 y 10"
+            answer: "numeros es 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nimprimir ¡Bienvenido a la noche de bingo!\nimprimir Los 3 números de la suerte son:\nimprimir numeros en aleatorio y imprimir numeros en aleatorio y imprimir numeros en aleatorio"
         -   type: entrada de datos
+            output: "Esta noche vamos a ver una película.<br>\nElegimos: Al revés"
+            answer: "peliculas es Los vengadores, Barbie, Al revés\nimprimir Esta noche vamos a ver una película.\nimprimir Elegimos: peliculas en aleatorio"
         -   type: texto
-    -   {}
-    -   {}
+            contents: "#### Ejercicio 6: Vocabulario de programación\n¡Hemos vuelto a aprender nuevas palabras de programación! Explícalas con tus propias palabras."
+        -   type: definir
+            word: lista
+            answer: Una variable en la que almacenar varios valores
+            lines: '1'
+        -   word: aleatorio
+            answer: Elegido por el ordenador.
+            lines: '1'
+            type: definir
+        -   lines: '1'
+            type: definir
+            word: añadir
+            answer: poner algo en una lista
+        -   type: texto
+            contents: "#### Ejercicio 7: Comandos\nEl comando `es` ha cambiado en este nivel y hemos aprendido algunos comandos nuevos.\n¿Qué hacen? Explícalo con tus propias palabras."
+        -   type: definir
+            word: 'El comando `es`(Ten en cuenta: ¡ahora `es` puede hacer muchas cosas!)'
+            answer: Guardar el valor (antes de es) en una variable o lista (tras es)
+            lines: '1'
+        -   type: definir
+            word: 'El comando `añadir a` '
+            answer: 'Añadir un elemento a una lista. Tiene el siguiente aspecto: añadir elemento a lista'
+            lines: '1'
+        -   answer: 'Eliminar un elemento de una lista. Tiene el siguiente aspecto: eliminar elemento de lista'
+            lines: '1'
+            type: definir
+            word: 'El comando `borrar de` '
+        -   type: definir
+            word: 'El comando `en aleatorio` '
+            answer: Elige un elemento aleatorio de una lista.
+            lines: '1'
+        -   contents: '#### ¿Qué opinas?'
+            type: texto
+        -   type: pregunta
+            lines: '1'
+            text: ¿Cuál ha sido el ejercicio de este nivel que más te ha gustado?
+        -   text: ¿Qué te ha gustado de este ejercicio?
+            type: pregunta
+            lines: '5'
+        -   lines: '1'
+            text: ¿Cuál ha sido el ejercicio de este nivel que menos te ha gustado?
+            type: pregunta
+        -   type: pregunta
+            text: ¿Qué no te ha gustado de ese ejercicio?
+            lines: '5'
+        intro: "### Listas y aleatoriedad\nAl final de esta lección, puedes:\n* Guardar varios elementos en una variable, lo que denomina una lista.\n* Crear una historio en la que ocurren cosas aleatorias.\n* Crear un dibujo en el que se dibujan cosas aleatorias."
+    -   exercises:
+        -   type: texto
+            code: "amigo es preguntar '¿cómo te llamas?'\nimprimir '¡Genial! Iré al centro comercial con ' amigo"
+        -   type: texto
+        -   answer: "¡Hola a todos!\nBienvenido a Hedy"
+            lines: '2'
+            type: resultado
+            code: "imprimir ¡Hola a todos!\nimprimir Bienvenido a Hedy"
+        -   contents: No te olvides de hacer ambos pasos de este ejercicio. Pon las comillas en el lado izquierdo y el código en el lado derecho.
+            type: texto
+        -   answer: ¡Hoy Hermans imparte la clase en el aula 305!
+            lines: '1'
+            type: resultado
+            code: "nombre es Hermans\nclase es 305\nimprimir ¡Hoy nombre imparte la clase en el aula clase!"
+        -   answer: Hoy da clase Hermans
+            lines: '1'
+            type: resultado
+            code: "profesores es Hermans, Merbis, Bagci, Senkal\nimprimir Hoy da clase profesores en aleatorio."
+        -   type: resultado
+            code: "rocas es guijarros, piedras, cantos rodados\nimprimir ¡Me encanta programar! ¡Esto rocas!"
+            answer: ¡Me encanta programar! Esto rocas
+            lines: '1'
+        -   code: "imprimir ¡Hoy hace un tiempo estupendo!\nnombre es Bozo"
+            answer: ¡Hoy hace un tiempo estupendo!
+            lines: '1'
+            type: resultado
+        -   contents: "#### Ejercicio 2: ¿Error?\nLee los programas cuidadosamente ¿Cuáles son los correctos?"
+            type: texto
+        -   options:
+            -   Correcto
+            -   Incorrecto
+            answer: Incorrecto. No puedes utilizar un apóstrofe cuando utilizas las comillas simples.
+        -   options:
+            -   Correcto
+            -   Incorrecto
+            answer: Incorrecto. Necesitas comillas al final de la frase.
+            code: imprimir 'He visto una llama en el zoo
+        -   options:
+            -   Correcto
+            -   Incorrecto
+            code: imprimir "Creo que daré de comer a la llama"
+            answer: ¡Correcto! Puedes utilizar el apóstrofe cuando utilices las comillas dobles.
+        -   options:
+            -   Correcto
+            -   Incorrecto
+            code: "imprimir 'La llama se escapó a la calle'\nimprimir \"Qué aventura\""
+            answer: ¡Correcto! No tienes que utilizar las mismas comillas en cada frase, pero te lo recomendamos
+        -   type: texto
+        -   options:
+            -   Correcto
+            -   Incorrecto
+            code: preguntar '¿Ves esos dos conejos?'
+            answer: Incorrecto. ¡Recuerda utilizar una variable con preguntar!
+        -   answer: Incorrecto. Necesitas un par de comillas.
+            code: nombre es preguntar 'Cómo te llamas
+            options:
+            -   Correcto
+            -   Incorrecto
+        -   code: dueño es preguntar "¿Es esa la capibara de Jack o de Lucy?"
+            answer: Correcto.
+            options:
+            -   Correcto
+            -   Incorrecto
+        -   code: "dueño es preguntar \"¿Es esa la capibara de Jack o de Lucy?\"\nimprimir 'Es de dueño'"
+            options:
+            -   Correcto
+            -   Incorrecto
+            answer: Incorrecto. Se imprimirá la palabra 'dueño', no el valor de la variable
+        -   type: texto
+            contents: "#### Ejercicio 4: Escribe el código\nEcha un vistazo al resultado y escribe un código que se ajuste a él."
+        -   output: "Bienvenido a la noche de bingo\n¡Aquí viene el primer número...!"
+            answer: "imprimir 'Bienvenido a la noche de bingo'\nimprimir '¡Aquí viene el primer número...!'"
+            type: entrada
+        -   output: "Esta noche vamos a ir al cine\n¿Qué tipo de película te apetece?"
+            answer: "imprimir 'Esta noche vamos a ir al cine'\npelicula es preguntar '¿Qué tipo de película te apetece?'"
+            type: entrada
+        -   contents: "#### Ejercicio 5: Vocabulario de programación\n¡Hemos aprendido nuevas palabras de programación! Explícalas con tus propias palabras."
+            type: texto
+        -   type: definir
+            word: comillas
+            answer: Apóstrofes que utilizas para imprimir o decir algo.
+            lines: '1'
+        -   word: ¿cómo utilizar las comillas en Hedy?
+            answer: Puedes utilizar las comillas cuando quieras imprimir el texto literal en la pantalla
+            lines: '1'
+            type: definir
+        -   contents: "#### Ejercicio 6: Comandos\nTambién hemos aprendido algunos comandos nuevos en el nivel 4."
+            type: texto
+        -   type: definir
+            lines: '1'
+            word: el comando `limpiar`
+            answer: Vacía la pantalla
+        -   type: definir
+            answer: cambia el color de la tortuga
+            lines: '1'
+            word: el comando `color`
+        -   type: texto
+            contents: '#### ¿Qué opinas?'
+        -   type: pregunta
+            lines: '1'
+            text: ¿Cuál ha sido el ejercicio de este nivel que más te ha gustado?
+        -   type: pregunta
+            text: ¿Qué te ha gustado?
+            lines: '5'
+        -   text: ¿Cuál ha sido el ejercicio de este nivel que menos te ha gustado?
+            lines: '1'
+            type: pregunta
+        -   text: ¿Qué no te ha gustado?
+            lines: '5'
+            type: pregunta
+        level: '4'
+    -   level: '5'
+        intro: "## si sino\nAl final de esta lección, puedes:\n* deja que el ordenador reaccione a diferentes entradas."
+        exercises:
+        -   type: texto
+            code: "amigo es preguntar \"¿Cómo te llamas?\"\nsi amigo es Yasmine imprimir \"¡Hola Yasmine!\" sino imprimir \"¡No, no me refería a ti!\""
+        -   type: texto
     -   exercises:
         -   {}
         -   {}
@@ -1379,12 +1560,12 @@ workbooks:
         -   lines: '1'
             type: pregunta
             text: ¿Qué ejercicio te gustó más en este nivel?
-        -   text: ¿Qué te gustó?
+        -   text: ¿Qué te ha gustado?
             type: pregunta
             lines: '5'
         -   lines: '1'
             text: ¿Qué ejercicio te gustó menos de este nivel ?
             type: pregunta
-        -   text: ¿Qué no te gustó?
+        -   text: ¿Qué no te ha gustado?
             lines: '5'
             type: pregunta
