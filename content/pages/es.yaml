@@ -1554,13 +1554,14 @@ workbooks:
         intro: "## si sino\nAl final de esta lección, puedes:\n* deja que el ordenador reaccione a diferentes entradas."
         exercises:
         -   type: texto
-            code: "Un amigo te pregunta: \"¿Cómo te llamas?\"\nSi tu amiga es Yasmine, escribe \"¡Hola Yasmine!\". De lo contrario, escribe \"¡No, no me refería a ti!\""
-            contents: "### Haciendo elecciones\nHasta ahora Hedy siempre ejecutaba todas y cada una de las líneas de código. A partir de ahora puedes dejar que sólo ejecute ciertas líneas en ciertos casos, con un `if`.\nEl código que sigue detrás del `if` se llama condicional.\nEn este ejemplo la condicional es `amiga es Yasmine`."
+            code: "amigo es preguntar \"¿Cómo te llamas?\"\nsi amigo es Yasmine imprimir \"¡Hola Yasmine!\" sino imprimir \"¡No, no me refería a ti!\""
+            contents: "### Tomando decisiones\nHasta ahora Hedy siempre ejecutaba todas y cada una de las líneas de código. A partir de ahora puedes dejar que sólo ejecute ciertas líneas en ciertos casos, con un `si`.\nEl código que sigue detrás del `si` se llama condicional.\nEn este ejemplo la condición es `amigo es Yasmine`."
         -   type: texto
             contents: "#### Ejercicio 1: Marca las condiciones\n¿Qué es una condicional? ¡Marca las condicionales en los siguientes programas!"
         -   answer: hoy es viernes
-            goal: la  condicional
+            goal: la condicional
             code: "hoy es pregunta '¿Qué día es?'\nsi hoy es viernes imprime 'Sí' si no imprime 'No'"
+            type: círculo
         -   type: círculo
             goal: la condicional
             code: "hoy es pregunta '¿Qué día es hoy?'\nsi hoy es sábado imprime 'Hoy no hay colegio' si\nno imprime 'Tienes que ir al colegio'"
@@ -1581,23 +1582,81 @@ workbooks:
             answer: imprimir 'Tienes que ir a la escuela'
         -   type: círculo
             goal: el código que se **imprimirá**
+        -   {}
+        -   {}
+        -   {}
+        -   {}
+        -   {}
+        -   {}
+        -   {}
+        -   {}
+        -   {}
+        -   lines: '1'
+            answer: ¡Que mal! o ¡Hurra!
+        -   lines: '2'
+            type: resultado
+        -   type: resultado
+            lines: '1'
+        -   type: texto
+        -   {}
+        -   {}
+        -   word: el comando `si`
+            lines: '1'
+        -   type: definir
+            lines: '1'
+            word: el comando `sino`
+        -   type: texto
+            contents: '#### ¿Qué opinas?'
+        -   type: pregunta
+            text: ¿Cuál ha sido el ejercicio de este nivel que más te ha gustado?
+            lines: '1'
+        -   text: ¿Qué te ha gustado?
+            lines: '5'
+            type: pregunta
+        -   text: ¿Cuál ha sido el ejercicio de este nivel que menos te ha gustado?
+            lines: '1'
+            type: pregunta
+        -   type: pregunta
+            lines: '5'
+            text: ¿Qué no te ha gustado?
     -   exercises:
-        -   {}
-        -   {}
-        -   {}
-        -   {}
-        -   {}
-        -   {}
-        -   {}
-        -   {}
-        -   {}
-        -   {}
-        -   {}
-        -   {}
-        -   {}
-        -   {}
-        -   {}
-        -   {}
+        -   type: texto
+            code: imprimir 'cinco veces cinco es ' 5 * 5
+        -   type: texto
+        -   lines: '3'
+            type: resultado
+        -   type: texto
+        -   type: resultado
+            lines: '4'
+        -   type: texto
+        -   type: resultado
+            lines: '1'
+            answer: La respuesta a la suma es 10
+        -   type: resultado
+            answer: ¡Gran trajabo! o ¡Mala suerte!
+            lines: '1'
+        -   type: resultado
+            lines: '1'
+        -   answer: 3 veces 6 (por ejemplo) es 18
+            lines: '1'
+            type: resultado
+            code: "favorito es preguntar '¿Cuál es tu número favorito?'\nimprimir '3 veces ' favorito ' es ' 3 * favorito"
+        -   type: texto
+        -   type: entrada
+            answer: imprimir 'Este es un número muy grande:' 4*17
+            output: 'Este es un número muy grande: 68'
+        -   type: entrada
+            answer: imprimir 1000/10 ' es la respuesta a 1000/10.'
+            output: 100 es la respuesta a 1000/10.
+        -   type: entrada
+            answer: "numeros is 1,2,3,4,5,6,7,8,9,10\nimprimir numeros en aleatoio * 7 ' es un múltiplo aleatorio de 7'"
+            output: 14 es un múltiplo aleatorio de 7
+        -   type: texto
+            contents: "#### Ejercicio 4: Vocabulario de programación\nHemos aprendido a utilizar algunos signos nuevos en nuestro código. ¿Qué signos se utilizan en qué casos?"
+        -   type: definir
+            word: veces
+            lines: '1'
+            answer: '*'
         -   word: dividido por
             type: definir
             answer: /
@@ -1616,3 +1675,5 @@ workbooks:
         -   text: ¿Qué no te ha gustado?
             lines: '5'
             type: pregunta
+        intro: "## Matemáticas\nAl final de esta lección, puedes:\n* utilizar las matemáticas en Hedy"
+        level: '6'
