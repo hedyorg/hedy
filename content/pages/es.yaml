@@ -324,7 +324,7 @@ teacher-guide:
         text: Para los profesores también es posible crear su propia aventura. Este <a href="https://www.youtube.com/watch?v=A0zbXpxX4q4" target="_blank">video</a> te muestra como crear tu propia aventura como un profesor y añadirla a tu(s) clase(s).
     -   title: Aventuras públicas
         text: |-
-            ¿Te gustaría usar aventuras hechas por otros profesores? Entonces puedes visitar nuestra <a href="https://hedy.org/public-adventures" target="_blank">página de aventuras públicas</a>. Aquí puedes encontrar todas las aventuras hechas por otros profesores de todo el mundo. Para encontrar un buen ajuste para ti, puedes seleccionar un nivel, idioma e incluso una etiqueta. ¿Has encontrado una aventura que te gustaría usar? Entonces puedes pulsar 'clon' para hacer una copia de esa aventura a tu propia cuenta. Puedes editar el clon a tu gusto y añadir la aventura a tu clase de la misma manera que lo harías en tus propias aventuras. No puede editar el original, por lo que siempre estará a salvo. ¿Has creado una aventura que te gustaría añadir a las aventuras públicas? Marque la casilla que hace su aventura disponible públicamente al crear
+            ¿Te gustaría utilizar aventuras creadas por otros profesores? Entonces puedes visitar nuestra <a href="https://hedy.org/public-adventures" target="_blank"> página de aventuras públicas</a>. Aquí puedes encontrar todas las aventuras creadas por otros profesores de todo el mundo. Para encontrar la que mejor se adapte a ti, puedes seleccionar un nivel, un idioma e incluso una etiqueta. ¿Has encontrado una aventura que te gustaría utilizar? Luego puedes presionar "clonar" para hacer una copia de esa aventura en tu propia cuenta. Puedes editar el clon a tu gusto y agregar la aventura a tu clase de la misma manera que lo harías con tus propias aventuras. No puedes editar el original, por lo que el original siempre estará seguro. ¿Has creado una aventura tú mismo que te gustaría agregar a las aventuras públicas? ¡Marca la casilla que hace que tu aventura esté disponible públicamente al crear la aventura!
     -   title: Explorar página
         text: "En la página <a href=\"https://hedy.org/explore\" target=\"_blank\">explorar</a> se puede ver el trabajo de otros usuarios de Hedy. Puedes probar sus programas y usarlos como inspiración para crear algo genial.\nTambién puede agregar un programa que ha hecho a la página de exploración usted mismo haciendo clic en 'Guardar y compartir código' en la pantalla de codificación o ir a Mis programas y hacer clic en 'Compartir'.\n ¿Ya no quieres compartir tu trabajo? Simplemente ve a 'Mis programas' y haz clic en 'Unshare'.\nSi desea más información sobre la página de exploración, consulte este <a href=\"https://www.youtube.com/watch?v=26boFjqvS5Q\" target=\"_blank\">vídeo</a>."
     -   title: Mis logros
@@ -1236,16 +1236,19 @@ workbooks:
             -   Incorrecto
             answer: Correcto
             code: "apellido es Johnson\nimprimir ¡Buenos días apellido!"
+            type: Código MC
         -   options:
             -   Correcto
             -   Incorrecto
             answer: Incorrecto. Nombre no está establecido.
             code: "nombre es\nimprimir ¡Buenos días, nombre!"
+            type: Código MC
         -   options:
             -   Correcto
             -   Incorrecto
             answer: Correcto. Se permite que utilices una variable varias veces.
             code: "nombre es Johnson\nimprimir ¡Buenos días mr nombre!\nimprimir ¡Hola mr nombre!"
+            type: Código MC
         -   type: texto
             code: nombre es preguntar ¿Cómo te llamas?
             contents: "### Pedir información\n\nSolo guardar texto no es muy útil. En el nivel 1 hemos visto el comando `preguntar`.\n\nDesde ahora se permite que combines `preguntar`con `es`, tal que así:"
@@ -1327,16 +1330,19 @@ workbooks:
             -   Incorrecto
             answer: Incorrecto. No puedes imprimir una lista
             code: "rocas es guijarros, piedras, cantos rodados\nimprimir ¡Me encanta programar! ¡Esto rocas!"
+            type: Código MC
         -   options:
             -   Correcto
             -   Incorrecto
             answer: Incorrecto. Profesores no es una lista
             code: "profesores es Hermans\nimprimir Hoy será profesores en aleatorio"
+            type: Código MC
         -   options:
             -   Correcto
             -   Incorrecto
             code: "profesores es soleado, lluvioso, nublado, tormentoso\nimprimir Hoy será profesores en aleatorio"
             answer: Correcto, al ordenador no le importa si el nombre de variable no tiene sentido.
+            type: Código MC
         -   type: texto
             contents: "## Aventuras\nEs un buen momento para empezar con estas aventuras:\nIntroducción\nAleatorio\nDados\nPiedra, papel, tijera\nMúsica\nEl adivino\nRestaurante\nLa casa embrujada\nPlatos"
         -   code: "respuestas es sí, no, quizás\nimprimir La respuesta es respuestas en aleatorio"
@@ -1352,16 +1358,19 @@ workbooks:
             -   Incorrecto
             answer: Incorrecto. Es `borrar de`, no `borrar a`.
             code: "letras es a,b,c,d\nborrar a a letras"
+            type: Código MC
         -   options:
             -   Correcto
             -   Incorrecto
             code: "comida es pizza, patatas, tacos\nborrar hamburguesa de comida"
             answer: Correcto, se permite que borres algo que no está en la lista. Pero no tiene sentido hacerlo
+            type: Código MC
         -   code: "comida es pizza, patatas, tacos\nañadir pizza a comida"
             answer: Correcto, se permite que añadas algo a una lista dos o varias veces.
             options:
             -   Correcto
             -   Incorrecto
+            type: Código MC
         -   type: texto
             contents: "#### Ejercicio5: Escribe el código\nEcha un buen vistazo al resultado y escribe un código correspondiente a él.\n**Asegúrate que tu código contiene al menos una opción aleatoria, ¡así no utilizaras solo imprimir!**"
         -   type: entrada de datos
@@ -1420,7 +1429,9 @@ workbooks:
     -   exercises:
         -   type: texto
             code: "amigo es preguntar '¿cómo te llamas?'\nimprimir '¡Genial! Iré al centro comercial con ' amigo"
+            contents: "### Comillas\n\nHemos aprendido a usar comillas, cuando un texto necesita aparecer literalmente de esa manera en la pantalla.\nUtilizamos comillas con `print` y `ask'."
         -   type: texto
+            contents: "##### Ejercicio 1: Terminar el código.\nRealice este ejercicio en dos pasos:\n1. Coloque las comillas correctamente en el código.\n2. ¿Lo hiciste? Entonces predecir la salida de este código."
         -   answer: "¡Hola a todos!\nBienvenido a Hedy"
             lines: '2'
             type: resultado
@@ -1449,42 +1460,52 @@ workbooks:
             -   Correcto
             -   Incorrecto
             answer: Incorrecto. No puedes utilizar un apóstrofe cuando utilizas las comillas simples.
+            type: Código MC
+            code: imprimir 'Iré al zoológico mañana'
         -   options:
             -   Correcto
             -   Incorrecto
             answer: Incorrecto. Necesitas comillas al final de la frase.
             code: imprimir 'He visto una llama en el zoo
+            type: Código MC
         -   options:
             -   Correcto
             -   Incorrecto
             code: imprimir "Creo que daré de comer a la llama"
             answer: ¡Correcto! Puedes utilizar el apóstrofe cuando utilices las comillas dobles.
+            type: Código MC
         -   options:
             -   Correcto
             -   Incorrecto
             code: "imprimir 'La llama se escapó a la calle'\nimprimir \"Qué aventura\""
             answer: ¡Correcto! No tienes que utilizar las mismas comillas en cada frase, pero te lo recomendamos
+            type: Código MC
         -   type: texto
+            contents: "#### Preguntar\n¡Recuerda utilizar comillas después de 'preguntar' también!\n\n#### Ejercicio 3: ¿Error?\n¡Lea los programas cuidadosamente! ¿Cuáles son correctos?"
         -   options:
             -   Correcto
             -   Incorrecto
             code: preguntar '¿Ves esos dos conejos?'
             answer: Incorrecto. ¡Recuerda utilizar una variable con preguntar!
+            type: Código MC
         -   answer: Incorrecto. Necesitas un par de comillas.
             code: nombre es preguntar 'Cómo te llamas
             options:
             -   Correcto
             -   Incorrecto
+            type: Código MC
         -   code: dueño es preguntar "¿Es esa la capibara de Jack o de Lucy?"
             answer: Correcto.
             options:
             -   Correcto
             -   Incorrecto
+            type: Código MC
         -   code: "dueño es preguntar \"¿Es esa la capibara de Jack o de Lucy?\"\nimprimir 'Es de dueño'"
             options:
             -   Correcto
             -   Incorrecto
             answer: Incorrecto. Se imprimirá la palabra 'dueño', no el valor de la variable
+            type: Código MC
         -   type: texto
             contents: "#### Ejercicio 4: Escribe el código\nEcha un vistazo al resultado y escribe un código que se ajuste a él."
         -   output: "Bienvenido a la noche de bingo\n¡Aquí viene el primer número...!"
@@ -1528,12 +1549,38 @@ workbooks:
             lines: '5'
             type: pregunta
         level: '4'
+        intro: "## Comillas\nAl final de esta lección, puedes:\n* entender por qué se necesitan comillas en la programación.\n* poner comillas en los lugares correctos.\n* comprender los mensajes de error sobre el uso indebido de las comillas."
     -   level: '5'
         intro: "## si sino\nAl final de esta lección, puedes:\n* deja que el ordenador reaccione a diferentes entradas."
         exercises:
         -   type: texto
-            code: "amigo es preguntar \"¿Cómo te llamas?\"\nsi amigo es Yasmine imprimir \"¡Hola Yasmine!\" sino imprimir \"¡No, no me refería a ti!\""
+            code: "Un amigo te pregunta: \"¿Cómo te llamas?\"\nSi tu amiga es Yasmine, escribe \"¡Hola Yasmine!\". De lo contrario, escribe \"¡No, no me refería a ti!\""
+            contents: "### Haciendo elecciones\nHasta ahora Hedy siempre ejecutaba todas y cada una de las líneas de código. A partir de ahora puedes dejar que sólo ejecute ciertas líneas en ciertos casos, con un `if`.\nEl código que sigue detrás del `if` se llama condicional.\nEn este ejemplo la condicional es `amiga es Yasmine`."
         -   type: texto
+            contents: "#### Ejercicio 1: Marca las condiciones\n¿Qué es una condicional? ¡Marca las condicionales en los siguientes programas!"
+        -   answer: hoy es viernes
+            goal: la  condicional
+            code: "hoy es pregunta '¿Qué día es?'\nsi hoy es viernes imprime 'Sí' si no imprime 'No'"
+        -   type: círculo
+            goal: la condicional
+            code: "hoy es pregunta '¿Qué día es hoy?'\nsi hoy es sábado imprime 'Hoy no hay colegio' si\nno imprime 'Tienes que ir al colegio'"
+            answer: Hoy es sábado
+        -   goal: la condicional
+            answer: edad es 16
+            type: círculo
+            code: "La edad es preguntar '¿Cuántos años tienes?'\nSi la edad es 16, imprima 'Perfecto'\nde lo contrario imprime '¡Eres demasiado joven!'"
+        -   type: texto
+            contents: "##### Ejercicio 2: Marcar las líneas correctas\n ¿Qué código se ejecutará? Marque solo esas partes.\nFinge que hoy es viernes y tienes 12 años."
+        -   type: círculo
+            goal: el código que se **imprimirá**
+            code: "Hoy pregunta '¿Qué día es hoy?'\nsi hoy es viernes imprimir 'Yay' otra impresión 'No'"
+            answer: imprimir '¡hurra!'
+        -   type: círculo
+            goal: el código que se **imprimirá**
+            code: "Hoy es preguntar '¿Qué día es hoy?'\nsi hoy es sábado imprimir 'No hay escuela hoy!'\nelse print 'Tienes que ir a la escuela'"
+            answer: imprimir 'Tienes que ir a la escuela'
+        -   type: círculo
+            goal: el código que se **imprimirá**
     -   exercises:
         -   {}
         -   {}
