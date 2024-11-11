@@ -20,6 +20,7 @@ levels:
                 {ask} 你准备好参加派对了吗？
                 {ask} 你想听什么歌？
                 {echo} 很棒的选择！我喜欢这首歌
+            story: 您在 DJ 台点播一首歌曲。创建一个程序，询问您是否准备好参加派对，然后询问您想听哪首歌。
     2:
         1:
             code: |-
@@ -27,12 +28,14 @@ levels:
                 电影 {is} 刺猬索尼克2
                 {print} 我们要看电影
                 {print} 玩得愉快！
+            story: "你和你的朋友将要观看 Netflix。\n显示你将要观看的电影，并祝观众玩得开心！"
         2:
             code: |-
                 {print} 欢迎来到我们的玩具店
                 玩具 {is} {ask} 你想买什么？
                 {print}玩具已添加到您的购物车中。
                 {print} 感谢您与我们一起购物！
+            story: 这是一家玩具店的网上商店。创建一个程序，让客户可以将商品添加到购物车中。
     4:
         1:
             story: |-
@@ -44,6 +47,9 @@ levels:
                 {print} “这将是你的第一只神奇宝贝！”
                 {sleep}
                 {print} 口袋妖怪 {at} {random}
+        2:
+            story: 创建一个彩票，让您可以选择可能赢得的额外奖品。
+            code: "prizes {is} 汽车,仓鼠,100 万欧元\nprize {is} {ask} '您想赢得什么？'\n{add} prize {to_list} 奖品\n{print} '您赢得了' prizes {at} {random}"
     6:
         1:
             code: |-
@@ -52,6 +58,10 @@ levels:
                 猫的年龄 = 年龄 * 5
                 {print}“在狗年里，你已经'dog_age'岁了。”
                 {print} “在猫年里，你已经'cat_age'岁了。”
+            story: "编写一个程序来计算您的狗和猫年龄。\n首先询问用户的年龄并开始计算。\n首先计算狗的年龄，然后计算猫的年龄。\n向用户显示不同的年龄。"
+        2:
+            story: 创建一个程序，帮助您计算应该为生日聚会购买多少个蛋糕。
+            code: "{print} '今天是你的生日！'\npeople = {ask} '你想给多少人分一块蛋糕？'\ncakes_amount = people/8\n{print} '你将不得不购买 ' cakes_amount ' 个蛋糕'"
     7:
         2:
             code: |-
@@ -59,6 +69,10 @@ levels:
                 {repeat} 3 {times} {print} 'round and round'
                 {print} 'the wheels of the bus go round and round'
                 {print} 'all through the town'
+            story: 创作歌曲《公共汽车的轮子转啊转》
+        1:
+            story: 完成小鲨鱼歌曲。首先是小鲨鱼，然后是妈妈，最后是爸爸鲨鱼。
+            code: "{repeat} 3 {times} {print} '小鲨鱼tututututudu'\n{print} '小鲨鱼'\n{repeat} 3 {times} {print} '妈妈鲨鱼tututututudu'\n{print} '妈妈鲨鱼'\n{repeat} 3 {times} {print} '爸爸鲨鱼tututututudu'\n{print} '爸爸鲨鱼'"
     8:
         2:
             story: Print the countdown for a  game of hide and seek.
@@ -69,20 +83,29 @@ levels:
                   {print} 计数器
                   {sleep} 1
                 {print} “准备好了，我来不来！”
+        1:
+            story: "你和其他四个朋友正在玩 Pokémon Go！创建一个程序来决定你们每个人将加入哪个队伍。\n红色、黄色或蓝色！宣布队伍后稍作休息。"
+            code: "团队 = 红色,黄色,蓝色\n{print} '红色、黄色还是蓝色？'\n{repeat} 5 {times}\n     {print} '您被选入团队... '\n     {print} 团队 {at} {random}\n     {sleep} 2"
     9:
         2:
             story: |-
                 此代码询问餐厅的顾客是否要订购甜点。如果他们这样做，它会问他们什么样的甜点。如果他们订购提拉米苏，他们会被告知提拉米苏已经售罄。
                 你能让代码工作吗？
+            code: "order = {ask} '您要点甜点吗？'\n{if} order = 是\n    dessert = {ask} '您要点什么甜点？'\n    {if} dessert = 提拉米苏\n        {print} '抱歉，提拉米苏卖完了。'\n    {else}\n        {print} '马上上一道'甜点'！'\n    {else}\n        {print} '您不需要甜点。没问题！'"
+        1:
+            story: 这个游戏会给你三道数学作业，每次的题目都不一样，你能找出顺序吗？
+            code: "numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n{repeat} 3 {times}\n    number = numbers {at} {random}\n    correct_answer = 5 * number\n    answer = {ask} '5 次' number ' 是多少？'\n    {if} answer = correct_answer\n        {print} '做得好！'\n    {else}\n        {print} '不！正确答案是 ' correct_answer"
     10:
         1:
             story: |-
                 通过制定一个时间表来帮助这个家庭摆脱困境，确定谁在做饭以及他们本周应该做什么。 `{remove}` 命令确保没有人需要做饭两次，这样每天都有不同的晚餐。
                 **注意！** 变量顺序应该是先是哪一天，然后是人，最后是晚餐选项。 这也适用于带有`{remove}` 命令的行。
+            code: "days = 星期一,星期二,星期三,星期四,星期五\npeople = 妈妈,爸爸,马丁,艾比,杰西\ndinner_options = 披萨,玉米饼,煎饼,沙拉,千层面\n{for} day {in} days\n    chosen_person = people {at} {random}\n    chosen_dinner = dinner_options {at} {random}\n    {print} '在 ' day ' ' chosen_person ' 正在做 ' chosen_dinner\n    {remove} chosen_person {from} people\n    {remove} chosen_dinner {from} dinner_options"
         2:
             story: |-
                 这个化妆机器人将为您决定您的新发型。如果您不同意第一个选择，可以重试。
                 **头脑**变量人定义在第一行。第二个中的可变发型。
+            code: "people = Betty,Amanda,Marc\nhairstyles = 秃头,莫霍克发型,马尾辫,尖刺\n{for} person {in} people\n    {print} person ' 将获得 ' 发型 {at} {random}\n    happy = {ask} person '，您对这个选择满意吗？'\n    {if} happy {is} yes\n        {print} '太好了'\n    {else}\n        {print} '让我们再试一次... 然后 'person ' 将获得 ' 发型 {at} {random}"
     11:
         1:
             story: 创建除夕倒计时！程序应该在一秒钟内显示从10到1的数字，然后祝你新年快乐。
@@ -96,6 +119,7 @@ levels:
             story: |-
                 创建一个程序，告诉我们科学集市的最终结果。首先定义变量参赛者，然后定义变量位置。
                 **提示** 第 5 行应该是睡眠命令，而且你应该以表示祝贺结束。
+            code: "{print} '现在我们将公布科学展览的结果'\ncontestants = Vivienne,Paul,Trixy,Bianca,Katya\n名次 = 5\n{for} contestant {in} contestants\n    {sleep} 2\n    {print} '第 ' 名次 ' 的比赛已经结束...' 参赛者\n    名次 = 名次 - 1\n{print} '恭喜！'"
     12:
         1:
             story: |-
@@ -109,5 +133,24 @@ levels:
                 她冉冉升起
                 她冉冉升起
                 清晨
+            code: "verses = '我们该怎么处置这个醉酒的水手', '她好嗨，然后站了起来'\n{for} verse {in} verses\n    {for} count {in} {range} 1 {to} 3\n        {print} verse\n    {print} '一大早'"
         2:
             story: 和我们一起玩龙卷风游戏！首先定义可变的人，然后是四肢，然后是颜色。
+            code: "people = 'Jess', 'Nick', 'Winston'\nlimbs = '左手', '左脚', '右手', '右脚'\ncolors = '红色', '蓝色', '绿色', '黄色'\n{for} person {in} people\n    {print} person '，将您的 ' limbs {at} {random} ' 放在 ' colors {at} {random} 上"
+    3:
+        2:
+            story: 创建一个程序，为您随机选择一顿饭。列出食物和配料清单，让程序决定您要吃什么！
+            code: "食物 {is} 披萨、冰淇淋、沙拉、三明治\n配料 {is} 巧克力、奶酪、金枪鱼、糖屑\n{print} 您今天的随机餐是...\n{sleep} 2\n{print} 食物 {at} {random} 配料 {at} {random}"
+        1:
+            story: "霍格沃茨的新学年开始了！\n分院帽的工作就是把你分到不同的学院。\n你会被分到哪个学院？你是格兰芬多、赫奇帕奇、拉文克劳还是斯莱特林。\n在分院帽揭晓你的学院之前，你可以告诉它不要选择其中一个学院。"
+            code: "{print} 分院帽已准备好将您分入霍格沃茨学院。\nhouses {is} 格兰芬多、赫奇帕夫、拉文克劳、斯莱特林\ndislike {is} {ask} 有哪些学院您不想加入？\n{remove} dislike {from} houses\n{print} 不讨厌吧？最好是... houses {at} {random}"
+        3:
+            story: "在国际象棋锦标赛中，剩下三名选手。\n创建一个程序来决定哪两名选手必须先对决。\n首先打印参加第一场比赛的两名选手，然后打印获胜者将与哪名选手对决。"
+            code: "玩家 {is} Liam、Noah、Sophie\nplayer_1 {is} 玩家 {at} {random}\n{remove} player_1 {from} 玩家\nplayer_2 {is} 玩家 {at} {random}\n{print} player_1 ' 首先与 ' player_2 比赛\n{remove} player_2 {from} 玩家\n{print} ' 获胜者与 ' 玩家 {at} {random} 比赛"
+    5:
+        2:
+            story: 创建一个数学游戏。
+            code: "{print} '解答这个问题'\n答案 {is} {ask} '88 - 16 = ?'\n{if} 答案 {is} 72 {print} '正确！'\n{else} {print} '错误！答案是 72'"
+        1:
+            story: "编写一个程序来检查你最喜欢的电影是否已经在计算机的列表中。\n如果是，则打印出你很有品味，否则将电影添加到列表中。"
+            code: "favorite_movies {is} 蝙蝠侠、蜘蛛侠、复仇者联盟、侏罗纪公园\nmovie {is} {ask} “你最喜欢的电影是什么？”\n{if} movie {in} favorite_movies {print} “你很有品味！”\n{else} {print} “很遗憾你最喜欢的电影不在列表中，我们会立即添加它！”\n{add} movie {to_list} favorite_movies"
