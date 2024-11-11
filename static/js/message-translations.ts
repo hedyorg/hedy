@@ -1100,7 +1100,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "adventures_completed": "Adventures completed: {number_of_adventures}",
     "adventures_restored": "The default adventures have been restored.",
     "adventures_tried": "Adventures tried",
-    "copy_link_to_share": "Copy link to share",
+    "copy_link_to_share": "Nɣel aseɣwen ara tebḍuḍ",
     "customization_deleted": "Customizations successfully deleted.",
     "dice": "🎲",
     "directly_available": "Directly open",
