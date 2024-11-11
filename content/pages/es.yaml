@@ -1582,23 +1582,46 @@ workbooks:
             answer: imprimir 'Tienes que ir a la escuela'
         -   type: círculo
             goal: el código que se **imprimirá**
-        -   {}
-        -   {}
-        -   {}
-        -   {}
-        -   {}
-        -   {}
-        -   {}
-        -   {}
-        -   {}
+            code: "La edad es preguntar '¿Cuántos años tienes?'\nSi la edad es 16, imprima 'Perfecto'\nde lo contrario imprime '¡Eres demasiado joven!'"
+            answer: imprimir '¡Eres demasiado joven!'
+        -   type: texto
+            contents: "#### Ejercicio 3: ¿Error?\n¡Lee atentamente los programas! ¿Cuáles son los correctos?"
+        -   type: Código MC
+            options:
+            -   Correcto
+            -   Incorrecto
+            code: "La edad es preguntar '¿Cuántos años tienes?'\nSi la edad es 16, escribe \"¡Correcto!\". De lo contrario, \"¡Eres demasiado joven!\""
+            answer: Incorrecto. No hay ningún `print` después de `else`
+        -   type: Código MC
+            options:
+            -   Correcto
+            -   Incorrecto
+            answer: ¡Correcto! No siempre necesitas un `else`
+            code: "animal es preguntar '¿Qué clase de animal es ese?'\nSi el animal es una llama, escribe 'Bahhhhh'"
+        -   type: Código MC
+            options:
+            -   Correcto
+            -   Incorrecto
+            answer: ¡Correcto! Puedes utilizar el apóstrofo cuando uses comillas dobles.
+        -   type: Código MC
+        -   type: Código MC
+            code: "Pregunta '¿A qué escuela vas?'\nSi la escuela es LK imprime '¡Sí!'"
+        -   type: Código MC
+            code: "cantidad es preguntar \"¿cuántos capybaras hay por ahí?\"\nsi la cantidad es 5 imprimir 'Hay cantidad capybaras por allí.'"
+        -   contents: "#### Ejercicio 4: Predecir la salida\n¿Cuál será la salida de estos programas?\n¡Atención! A veces se utiliza `random` en un programa. Puedes elegir tú mismo un elemento aleatorio.\n¡Esto significa que varias respuestas pueden ser correctas!"
+        -   code: "Los profesores son Hermans, Merbis, Bagci, Senkal\nEl profesor es un profesor al azar\nsi el maestro es Hermans imprimir '¡Viva!'"
         -   lines: '1'
             answer: ¡Que mal! o ¡Hurra!
+            code: "Los profesores son Hermans, Merbis, Bagci, Senkal\nEl profesor es profesor al azar\nSi el profesor es Hermans, escriba \"¡Qué lástima!\". De lo contrario, escriba \"¡Viva!\""
         -   lines: '2'
             type: resultado
+            answer: "¡Bienvenido a la noche del bingo!\n¡Gané! o ¡Qué pena!"
+            code: "números es 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nimprimir 'Bienvenido a la noche de bingo!'\nnúmero es números aleatorios\nsi el número es 10, imprime 'He ganado!' o imprime 'Bummer'"
         -   type: resultado
             lines: '1'
+            code: "número es preguntar '¿Cuál es tu número favorito?'\nsi el número es 10, imprime '¡También mío!'"
         -   type: texto
-        -   {}
+        -   answer: Algo que es true o false. Sigue detrás del `if`.
         -   {}
         -   word: el comando `si`
             lines: '1'
@@ -1608,7 +1631,7 @@ workbooks:
         -   type: texto
             contents: '#### ¿Qué opinas?'
         -   type: pregunta
-            text: ¿Cuál ha sido el ejercicio de este nivel que más te ha gustado?
+            text: ¿Qué ejercicio te ha gustado más de este nivel?
             lines: '1'
         -   text: ¿Qué te ha gustado?
             lines: '5'
@@ -1622,19 +1645,24 @@ workbooks:
     -   exercises:
         -   type: texto
             code: imprimir 'cinco veces cinco es ' 5 * 5
+            contents: "### Matemáticas\nHacer cálculos es una tarea importante para los ordenadores.\n\nLa suma se realiza con el signo más normal: `5 + 5`.\nLa resta también se hace con el signo menos normal: `5 - 5`.\nCon las multiplicaciones puede parecer un poco diferente de lo habitual, utilizamos el asterisco (por encima del 8): `5 * 5`.\nLa división se hace con la barra diagonal: `5 / 5`.\n\nTen en cuenta que el código matemático no necesita comillas."
         -   type: texto
         -   lines: '3'
             type: resultado
         -   type: texto
+            contents: "#### Ejercicio 2: Matemáticas\nSigue estos pasos para completar el ejercicio:\n1. Termina los programas rellenando una suma en las líneas. El código tiene que tener sentido.\n2. ¿Has terminado? Escribe cuál crees que será el resultado del código."
         -   type: resultado
             lines: '4'
+            code: "imprimir 'cinco más diez es ' __\nimprimir 'seis menos cinco es ' ___\nImprimir 'un centenar de diveded por cinco es ' ___\n___ _________________________ 4 * 12"
         -   type: texto
+            contents: "### Ejercicio 2: Matemáticas con preguntas y variables\nTambién puede guardar una suma en una variable, compararla con un `ask', y ejecutarla con un if.\nVamos a practicar eso ahora.\nPredecir el resultado de estos programas.\nCuando se utiliza el método 'ask' y 'random', puedes inventar tus propias respuestas."
         -   type: resultado
             lines: '1'
             answer: La respuesta a la suma es 10
         -   type: resultado
             answer: ¡Gran trajabo! o ¡Mala suerte!
             lines: '1'
+            code: "correct_answer = 142 / 2\nyour_answer = preguntar 'Cuanto es 142 dividido por 2?'\nsi la respuesta correcta es su respuesta\nimprimir 'Gran trabajo'\nOtra impresión '¡Qué pena!'"
         -   type: resultado
             lines: '1'
         -   answer: 3 veces 6 (por ejemplo) es 18
@@ -1642,6 +1670,7 @@ workbooks:
             type: resultado
             code: "favorito es preguntar '¿Cuál es tu número favorito?'\nimprimir '3 veces ' favorito ' es ' 3 * favorito"
         -   type: texto
+            contents: "### Ejercicio 3: Entrada\nSe le mostrará una salida. Escribe un programa que pueda producir esta salida.\nNota: Varias respuestas pueden ser correctas. Elige la que quieras, siempre que sea correcta.\nRellena todas las líneas, ¡así que fíjate bien en la cantidad de líneas!"
         -   type: entrada
             answer: imprimir 'Este es un número muy grande:' 4*17
             output: 'Este es un número muy grande: 68'
