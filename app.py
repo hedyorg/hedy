@@ -485,18 +485,9 @@ def setup_language(language=None):
     # header to do language negotiation. Can be changed in the session by
     # POSTing to `/change_language`, and be overwritten by remember_current_user().
     if language:
-        session['lang'] = language
+        session['lang'] = get_correct_lang_key(language)
     elif request.url_rule is not None and request.url_rule.subdomain not in ['<language>', '']:
-        lang_from_subdomain = request.url_rule.subdomain
-        index = lang_from_subdomain.find('_')
-        if index != -1:
-            if lang_from_subdomain in ["zh_hans", "zh_hant"]:
-                first_part = lang_from_subdomain[0:index]
-                second_part = lang_from_subdomain[index].upper()
-                third_part = lang_from_subdomain[index + 1:]
-                lang_from_subdomain = f'{first_part}{second_part}{third_part}'
-            else:
-                lang_from_subdomain = f'{lang_from_subdomain[0:index]}{lang_from_subdomain[index:].upper()}'
+        lang_from_subdomain = get_correct_lang_key(request.url_rule.subdomain)
         session['lang'] = lang_from_subdomain
     elif lang_from_request := request.args.get('language', None):
         session['lang'] = lang_from_request
@@ -526,6 +517,23 @@ def setup_language(language=None):
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
         return make_response(gettext("request_invalid"), 404)
+
+# When languages come from the subdomain, they do in lowercase,
+# but the keys are partially in uppercase sometimes
+
+
+def get_correct_lang_key(language: str):
+    index = language.find('_')
+    if index != -1:
+        if language in ["zh_hans", "zh_hant"]:
+            first_part = language[0:index]
+            second_part = language[index + 1].upper()
+            third_part = language[index + 2:]
+            return f'{first_part}_{second_part}{third_part}'
+        else:
+            return f'{language[0:index]}{language[index:].upper()}'
+    else:
+        return language
 
 
 if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
