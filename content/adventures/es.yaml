@@ -630,7 +630,7 @@ adventures:
             7:
                 story_text: |-
                     ### Ejercicio
-                    Sorpresa! Este programa parece mas una salida que un código. Y aún, no queremos que solo agregues comandos `{print}` frente a cada linea.
+                    Sorpresa! Este programa parece más un resultado que un código. Y aún, no queremos que solo agregues comandos `{print}` frente a cada linea.
                     Arregla este programa para convertirlo en the nursery rhyme 'Brother John (Frère Jaques)' usando por su puesto el comando {repeat} !
                 example_code: |
                     **¡Atención! Este código necesita ser depurado!**
@@ -702,7 +702,7 @@ adventures:
             11:
                 story_text: |-
                     ### Ejercicio
-                    Depura este programa de calendario. Se supone que la salida de este programa debe parecerse a una lista de fechas.
+                    Depura este programa de calendario. Se supone que el resultado de este programa debe parecerse a una lista de fechas.
                     Por ejemplo:
 
                     ```
@@ -1392,7 +1392,7 @@ adventures:
                     {for} animal {in} animales
                         {print} 'Yo amo ' animal
                     ```
-                story_text_2: "### Ejercicio\nCompleta este código añadiendo `{for} accion {in} acciones` en la línea 2.\n"
+                story_text_2: "### Ejercicio\nCompleta este código añadiendo `{for} accion {in} acciones` acciones en la línea 2.\n"
                 example_code_2: "```\nacciones = aplaudir con tus manos, pisa con tus pies, ¡grita Hurra!\n_\n    {repeat} 2 {times}\n        {print} 'si estás feliz y lo sabes, ' accion\n        {sleep} 2\n    {print} 'Si en verdad estas contento tu sonrisa es el reflejo'\n    {print} 'Si estás feliz y lo sabes, ' accion\n    {sleep} 3\n```\n"
             11:
                 story_text: |-
@@ -1896,6 +1896,7 @@ adventures:
                 example_code: "```\n{print} 'Escapa de la casa encantada'\nvidas = 3\npuertas = 1, 2, 3\nmonstruos = 'la bruja malvada', 'un zombi', 'un perro de 3 cabezas dormido'\n{for} i {in} {range} 1 {to} 10\n    {if} vidas _\n        puerta_buena = puerta {at} {random}\n        monstruo = monstruos {at} {random}\n        puerta_seleccionada = {ask} '¿Qué puerta eliges?'\n        {if} puerta_buena == puerta_seleccionada\n            {print} 'Has elegido la puerta correcta'\n        {else}\n            {print} 'Ves...' monstruo\n            {if} monstruo == 'un perro de 3 cabezas dormido'\n                {print} 'Pffieuw.... Está dormido'\n            {else}\n                {print} 'Pierdes una vida'\n                vidas = _\n    {else}\n        {print} 'SE ACABÓ EL JUEGO'\n```\n"
             16:
                 story_text: "### Ejercicio\nEste juego de la casa encantada utiliza la conexión entre las listas que puedes usar en este nivel.\nPor ejemplo: todas las propiedades que pertenecen al zombi son las primeras en todas las listas, la bruja las segundas y el vampiro las terceras.\n¡Revisa el código y rellena  `weapons[i]`, `monsters[i]` , `bad_fate[i]`, `good_fate[i]`, `hint[i]` en los huecos correctos para hacer que el código funcione!\n"
+                example_code: "```\nnumeros = [1, 2, 3]\ni = numeros[{random}]\nsugerencia = ['gruñir', 'una carcajada', 'aleteo de alas de murciélago']\nmonstruos= ['zombi', 'bruja', 'vampiro']\nmal_destino = ['Se comen tu cerebro', 'Estás maldecido para siempre', 'Te muerden']\nbuen_destino = ['Lanzas el jamón. El zombi se distrae y empieza a comérselo.', 'Prendes fuego a las cortinas. La brujaThe witch huye por miedo al fuego', 'El vampiro odia el ajo y huye']\narmas = ['jamón', 'mechero', 'ajo']\n{print} 'Te encuentras frente a una mansión antigua'\n{print} 'Algo no va bien aquí'\n{print} 'Oyes ' _\n{print} 'Vas a explorar qué es'\n{print} 'Entras en la cocina y ves un mechero, un jamón crudo y un ajo.'\ntu_arma = {ask} '¿Qué traes contigo?'\n{print} 'Con tu ' tu_arma ' entras en el salón'\n{print} 'Allí te encuentras un ' _\narma_necesaria = _\n{if} tu_arma == arma_necesaria\n    {print} 'Utilizas tu ' tu_arma\n    {print} _\n    {print} '¡GANASTE!'\n{else}\n    {print} 'Es elegido el arma equivocada...'\n    {print} _\n    {print} 'FIN DEL JUEGO'\n```\n"
     if_command:
         default_save_name: comando_si
         description: Introducción al comando {if}
@@ -2313,6 +2314,7 @@ adventures:
                 story_text: "'Utiliza las funciones en tus canciones! Como puedes ver en el código de ejemplo, puedes hacer una función por cada estrofa de Estrellita Dónde Estás. Una vez que has programado las tres primeras estrofas, todo lo que tienes que hacer es llamar a las funciones en el orden en el que quieres que suenen.\n\n### Ejercicio\nCompleta la canción Estrellita Dónde Estás.\nDespués echa un vistazo a las canciones que has programado en los niveles anteriores, ¿puedes mejorar y acortar también esos códigos utilizando las funciones?\n"
             1:
                 example_code: "```\n{play} C4\n{play} D4\n{play} E4\n{play} F4\n{play} G4\n{play} A4\n{play} B4\n{play} C5\n```"
+                story_text: "¡En este nivel aprenderás a como utilizar el comando `{play}` para tocar una nota!\n\nEscribe `{play}` seguido de la nota que quieras tocar. La escala es C-D-E-F-G-A-B.\nComo puedes ver hay 7 letras diferentes, pero podemos tocar más que solo 7 notas.\nEscribe un número entre 1 y 10 detras de la letra para elegir la escala, por ejemplo, después de B4 viene C5.\nC1 es la nota más grave que puedes tocar, C10 es la más aguda.\n\n### Ejercicio\n¡Prueba el código de ejemplo y después juega con él! ¿Puedes crear tu propia melodía?\nEn el siguiente nivel aprenderás a como tocar algunas canciones existentes."
             17:
                 example_code: "```\n{define} cancion_aterradora\n    {for} i {in} {range} 1 {to} 3\n        {play} G\n    {play} E\n    {sleep} 2\n    {for} i {in} {range} 1 {to} 3\n        {play} F\n    {play} D\n\nanimo = {ask} '¿Qué emociones estás sintiendo?'\n{if} animo {is} 'miedo'\n    {call} cancion_aterradora\n{elif} _\n```\n"
                 story_text: "Puedes utilizar {elif} para crear diferentes opciones.\n\n### Ejercicio\nPrimero, añade los dos puntos para hacer que el código funcione.\nDespués completa el código añadiendo al menos dos canciones más para otros estados de ánimo. Por ejemplo, una canción alegre y una canción furiosa.\n"
@@ -2324,8 +2326,10 @@ adventures:
                 example_code: "```\n{define} cancion\n    {play} _\n\nsi_o_no = {ask} '¿Quieres oír mi canción interminable?'\n{while} si_o_no = 'sí'\n    {call} cancion\n    {print} '🥳'\n```\n"
             18:
                 story_text: "### Ejercicio\n¡Incluso en este último nivel de Hedy podemos hacer música! Cuidado con toda la sintaxis que ahora es necesaria.\nEcha un buen vistazo a como se definen y se llaman las funciones en el siguiente ejemplo.\n¡Completa la canción!\n"
+                example_code: "```\n{def} linea_1():\n    {for} i {in} {range}(1, 5):\n        {play} A\n    {play} D\n    {play} F\n    {play} A\n\n{def} linea_2():\n    {for} i {in} {range}(1, 5):\n        {play} G\n    {play} C\n    {play} E\n    {play} G\n\n{def} linea_3():\n_\n\n{print} ('El marinero borracho')\n{print} ('¿Qué haremos con el marinero borracho?')\nlinea_1()\nlinea_2()\nlinea_3()\n{print} ('Temprano en la mañana')\n```\n"
             16:
                 story_text: "¡Mejora tu código de Viejo MacDonald!\n\n### Ejercicio\n¡Coge tu código de la aventura 'Canta una canción' y añádele notas musicales!\nPuedes hacer una función por cada estrofa de la canción y llamar a esa función después de que se imprima la estrofa.\nHemos definido la primera estrofa y la hemos llamado en el código por ti. ¿Puedes completar la canción completa?\n"
+                example_code: "```\n{define} linea_1\n    {for} i {in} {range} 1 {to} 3\n        {play} G\n    {play} D\n    {for} i {in} {range} 1 {to} 2\n        {play} E\n    {play} D\n\nanimales = ['cerdo', 'perro', 'vaca']\nsonidos = ['oink', 'woof', 'moo']\nde i en rango 1 a 3\n    animal = animales[i]\n    sonido = sonidos[i]\n    imprimir 'Old MacDonald tenía una granja'\n    llamar linea_1\n    imprimir 'E I E I O!'\n    _\n```\n"
     parrot:
         name: Loro
         default_save_name: Loro
@@ -2443,8 +2447,9 @@ adventures:
                     ```
             14:
                 story_text: "### Ejercicio\n¡En este nivel puedes dejar que Hedy te diga si has ahorrado suficiente dinero!\n¡Completa el código rellenando los huecos en blanco!\n"
+                example_code: "```\n_ calcular_presupuesto {with} deseo, dinero, asignación\n    para_ahorrar = deseo - dinero\n    semanas = para_ahorrar / asignación\n    {if} deseo _ dinero\n        {print} '¡Tienes que ahorrar un poco más!'\n        {print} 'Necesitarás ' semanas ' semanas más.'\n    {else}\n        {print} '¡Genial! Tienes suficiente'\n        {print} '¡Vayamos de compras!'\n\ndinero = {ask} '¿Cuánto dinero has ahorrado?'\ndeseo = {ask} '¿Cuánto dinero necesitas?'\nasignación = {ask} '¿Cuánto dinero ahorras cada semana?'\n\n{call} _\n```\n"
     pressit:
-        name: Presiónalo
+        name: pulsaciones de teclas
         default_save_name: Presionado
         description: ¡Intenta vincular una tecla del teclado a un comando!
         levels:
@@ -2590,12 +2595,12 @@ adventures:
                     ```
                 story_text_2: |
                     ## Contracciones
-                    ¡Importante! Ten en cuenta que estamos usando comillas, Hedy se confundirá cuando uses el apóstrofe para contracciones como I'm o What's.
-                    Asegúrate de eliminar esos apóstrofes y cambia la ortografía a I am o What is.
-                    Comprueba el código de ejemplo para ver la forma incorrecta de usar los apóstrofes.
+                    ¡Importante! Ten en cuenta que estamos usando comillas, Hedy se confundirá cuando uses el apóstrofo para contracciones como I'm o What's.
+                    Asegúrate de eliminar esos apóstrofos y cambia la ortografía a I am o What is.
+                    Comprueba el código de ejemplo para ver la forma incorrecta de usar los apóstrofos.
                 example_code_2: |
                     ```
-                    _ Esta es la manera incorrecta de usar apóstrofes _
+                    _ Esta es la manera incorrecta de usar apóstrofos _
                     {print} 'I'm babysitting my sister's kids'
                     {print} 'What's more fun than that?'
                     ```
@@ -3469,6 +3474,7 @@ adventures:
                 example_code_2: "```\nobjeto = ['ruedas', 'puertas', _]\nmovimiento = [ 'gira y gira', 'abre y cierra', _]\n```\n"
                 story_text_2: "### Ejercicio 2\nAhora crea tu propio código para la canción infantil «Las ruedas del autobús» de la misma manera.\n"
                 story_text: "### Ejercicio\n¡Completa la canción infantil!\n"
+                example_code: "```\nnumero = ['uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez']\nobjeto = ['en su tambor', 'en su zapato', 'en su rodilla', 'en su puerta', 'en su colmena', 'en sus bastones', 'arriba en el cielo', 'en su portal', 'en su viña', 'una vez más']\n\n_\n    {print} 'Este viejo hombre'\n    {print} 'Él tocó ' _\n    {print} 'Él tocó knick-knack ' _\n    {print} 'Con un knick-knack paddywhack'\n    {print} 'Le da un hueso al can'\n    {print} 'Este viejo hombre vino rodando a casa'\n    {sleep} 8\n    {clear}\n```\n"
         default_save_name: Canción 2
         name: ¡Canta una canción! 2
         description: Canta una canción 2
@@ -4068,8 +4074,10 @@ adventures:
         levels:
             16:
                 example_code: "```\n# Crea una lista llamada tablero\n_ = ['.', '.', '.', '.', '.', '.', '.', '.', '.']\n\n# Crea una función que imprima el tablero\n{define} imprimir_tablero\n    _\n    {print} 'TRES EN RAYA'\n    {print} tablero[1] tablero[2] tablero[3]\n    _\n    _\n\n# Llama la función\n```\n"
+                story_text: "¡Programemos un juego de Tres en raya!\n\n### Ejercicio\nEn esta aventura comenzaremos creando un tablero vacío.\n\n***Crea una lista llamada tablero*** Esta lista será nuestro tablero de juego. Esta lista está rellena con 9 puntos, ya que todavía no hay 'x' ó 'o' al inicio de nuestro juego.\n\n***Llama una función que imprima el tablero*** Lo primero, limpia la pantalla para que los tableros de juego anteriores se borren. Entonces imprimimos la primera línea de nuestro tablero de Tres en raya. Esta línea consiste en las primeras 3 posiciones de nuestra lista de tablero.\nYa hemos programado esta línea por ti. Ahora completa el trablero imprimiendo las posiciones 4, 5 y 6 en la segunda fila y las posiciones 7, 8 y 9 en la tercera fila.\n\n***Llama a la función que imprime el tablero*** Ahora llama a la función.\n<div class=\"w-full flex flex-row gap-2\">\n\tEjecuta el código. Tu resultado debería parecerse a esto: <img src=\"https://github.com/hedyorg/hedy/assets/80678586/bcbd156e-4b48-4e82-84ae-f86d21b0cbcc\" width=\"100\">\n</div>\n\n***Continua en la siguiente pestaña*** En la siguiente pestaña aprenderás a como programa el juego en sí.\n"
             17:
                 example_code: "```\n# Pega tu código aquí y haz que sea a prueba del nivel 17\n\n# Crea una función que detecte si alguien ha ganado\n{define} detectar_ganador {with} tablero, signo:\n    {if} tablero[1] == tablero[2] {and} tablero[2] == tablero[3] {and} tablero[1] != '.':\n        juego_terminado = 'sí'\n        {print} '¡Jugador ' signo ' gana!'\n    {elif}:\n        _\n    {else}:\n        juego_terminado = 'no'\n{return} _\n```\n"
+                story_text: "En el nivel anterior hemos aprendido a como hacer un juego de Tres en raya. El juego funciona, pero es bastante molesto que siga preguntando si ya has ganado.\nAhora que tenemos el comando {elif}, ¡podemos dejar que el juego decida si alguien ha ganado y puede dejar de preguntarnos!\n\n### Ejercicio\n***Pega tu código*** Pega tu código del nivel anterior aquí y hazlo a prueba del nivel 17. En este nivel has aprendido a usar los dos puntos cada vez que creas un bloque de código. Por favor añade los dos puntos en los lugares correctos.\n\n***Crea una función que detecte si alguien ha ganado*** Hemos comenzado la función por ti, pégala debajo de la función `print_field` y acaba la función. Puedes ver que este primer fragmento de código comprueba si las posiciones 1, 2 y 3 son iguales, porque si lo son tienes 3 en fila.\nTambién comprueba si no son un punto, porque si lo son, en la línea podría tener los mismos símbolos en ellos, pero eso es porque todavía está vacía.\nSi se cumplen todas las condiciones, el juego se termina y se imprime al ganador.\nCompleta esta función con todas las posibles maneras de ganar. esto significa que tiene que hacer esto para las otras 2 filas, 3 columnas y 2 diagonales.\nSi has completado todas las demás posiciones, la función debería devolver la variable `game_over` para que la podamos utilizar en nuestro juego.\n\n***Llama la función en el juego*** Ve a la línea `game_over = {ask} 'Did you win?'` y cámbiala a `game_over = {call} detect_winner {with} field, sign`. ¡Ahora la función comprobará si hay un ganador y el juego no tiene que seguir preguntándolo nunca más!\n\n***¡Disfruta de tu juego!*** ¡Gran trabajo! ¡Has completado el juego! ¡Disfruta jugándolo!\n"
     hotel:
         name: hotel
         description: hotel
@@ -4077,6 +4085,7 @@ adventures:
         levels:
             13:
                 story_text: "En la aventura anterior has aprendido a utilizar un argumento en una función, y has aprendido a cómo combinarlo con un {ask}.\nTe estarás preguntando por qué utilizar las funciones, porque en el ejemplo las funciones en el son de una línea de código.\nAhora te mostraremos como es una función más grande y también utilizaremos varios argumentos. Verás como es mucho mejor utilizar una función una vez que se vuelve más grande.\nAquí tienes un ejemplo de una función con argumentos combinada con comandos {ask}.\n"
+                example_code: "```\n{define} mensaje_bienvenida {with} titulo, apellido, pais, numero_habitacion\n    {print} 'Bienvenido al Hotel Hedy, ' titulo ' ' apellido\n    buen_viaje {is} {ask} '¿Tuviste un buen viaje desde ' pais '?'\n    {if} buen_viaje {is} 'sí'\n        {print} '¡Maravilloso!'\n    {else}\n        {print} 'Siento oir eso.'\n        {print} 'Espero que puedas tener un buen descanso en tu habitación'\n    {print} 'Tu número de habitación es ' numero_habitacion\n\n{print} 'Hola. Por favor, rellena tu información para registrarte.'\ntitulo = {ask} '¿Cuál es tu título (Sr., Sra., Dña., D., etc.)?'\nnombre = {ask} '¿Cómo te apellidas?'\npais_procedencia = {ask} '¿De qué país procede?'\n\n{call} mensaje_bienvenida {with} titulo, nombre, pais_procedencia, 105\n```\n\ntitulo = {ask} '¿Cuál es tu título (Sr., Sra., Dña., D., etc.)?'\nnombre = {ask} '¿Cómo te apellidas?'\npais_procedencia = {ask} '¿De qué país procede?'\n\n{call} mensaje_bienvenida {with} titulo, nombre, pais_procedencia, 105\n"
     calculator_2:
         name: Calculadora 2
         default_save_name: Calculadora 2
@@ -4123,7 +4132,7 @@ adventures:
         levels:
             17:
                 example_code: "```\n# Crea una función que dibuje el ahorcado\n{define} dibujar_ahorcado {with} paso:\n    {if} paso == 1:\n        {color} blanco\n        {forward} -100\n        {turn} 90\n        {forward} -50\n        {color} negro\n        {forward} 100\n        {forward} -50\n\n    {if} paso == 2:\n        _\n# Pega tu juego del ahorcado aquí\n\n```\n"
-                story_text: "En el juego del ahorcado, los errores se muestran dibujando una parte del ahorcado cada vez que se comete un error.\n¡Ahora añadimos esos dibujos con nuestra tortuga!\n\n# ## Ejercicio\n***Crea una función que dibuje al ahorcado*** Crea una función que dibuje al ahorcado en 10 pasos. Ya hemos realizado el paso 1 para ti.\n\n***Prueba la función*** Prueba la función llamándola con 10. Si estás conforme con la función, elimina la línea que la llama por ahora. Llamaremos a la función cuando el jugador cometa un error.\n\n***Pega tu juego del ahorcado debajo de tu función*** Vuelve a la pestaña anterior y copia tu juego del ahorcado. Pega el juego debajo de tu función.\n\n***Llamar a la función cuando el jugador comete un error*** En la línea `mistakes_made = errors_made + 1` llamaremos a la función. Queremos que la tortuga dé la misma cantidad de pasos que errores ha cometido el jugador, por lo que llamamos a la función con `mistakes_made` como argumento.\n\n***¡Disfruta tu juego!***\n<div class=\"w-full flex flex-row gap-2\">\n    El ahorcado podría verse así: <img src=\"https://github.com/hedyorg/hedy/assets/80678586/d385b691-5701-4342-b5d9-dfae1589c129\" width=\"100\">\n</div>\n"
+                story_text: "En el juego del ahorcado, los errores se muestran dibujando una parte del ahorcado cada vez que se comete un error.\n¡Ahora añadimos esos dibujos con nuestra tortuga!\n\n# ## Ejercicio\n***Crea una función que dibuje al ahorcado*** Crea una función que dibuje al ahorcado en 10 pasos. Ya hemos realizado el paso 1 para ti.\n\n***Prueba la función*** Prueba la función llamándola con 10. Si estás conforme con la función, elimina la línea que la llama por ahora. Llamaremos a la función cuando el jugador cometa un error.\n\n***Pega tu juego del ahorcado debajo de tu función*** Vuelve a la pestaña anterior y copia tu juego del ahorcado. Pega el juego debajo de tu función.\n\n***Llamar a la función cuando el jugador comete un error*** En la línea `mistakes_made = mistakes_made + 1` llamaremos a la función. Queremos que la tortuga dé la misma cantidad de pasos que errores ha cometido el jugador, por lo que llamamos a la función con `mistakes_made` como argumento.\n\n***¡Disfruta tu juego!***\n<div class=\"w-full flex flex-row gap-2\">\n    El ahorcado podría verse así: <img src=\"https://github.com/hedyorg/hedy/assets/80678586/d385b691-5701-4342-b5d9-dfae1589c129\" width=\"100\">\n</div>\n"
         default_save_name: Ahorcado_3
     simon_2:
         default_save_name: Simón
@@ -4132,6 +4141,7 @@ adventures:
         levels:
             16:
                 example_code: "```\n# Pega tu código aquí\n\n\n# Crea una función que cree la secuencia_jugador\n{define} _\n    {for} _\n        _ '¿Cuál es el color número ' i '?'\n        {add} respuesta {to} _\n\n# Configurar\nnivel = _\njuego_terminado = _\n{print} _\n_ 1\n_\n```\n"
+                story_text: "¡Continuaremos con nuestro juego de Simón dice!\n\n### Ejercicio\n***Pega tu código aquí*** Pega tu código del nivel anterior aquí. No olvides eliminar la parte que se utilizaba para probar las funciones.\n\n***Crea una función que cree la secuencia_jugador*** La lista `player_sequence` se utiliza para capturar las respuestas del jugador. Primero, definimos la función con el nivel de argumento.\nDespués, preguntamos a nivel de veces qué color han elegido. Llamamos a esa variable `answer`. Después añadimos la variable `answer` a la lista secuencia_jugador.\n\n***Configurar el juego*** Antes de que programemos el juego en la siguiente pestaña, necesitaremos algunas variables iniciales. Primero, estableceremos la variable `level` a 1 y la variable `game_over` a Falso.\nEntonces haremos una introducción para el juego. Imprimiremos '¡Bienvenido a Simón dice!' y limpiaremos la pantalla tras 1 segundo.\n\n***¡Continua a la siguiente pestaña para completar el juego!**** No olvides copiar tu código y llevártelo a la siguiente pestaña.\n"
     simon_3:
         default_save_name: Simón
         name: Simón dice 3
@@ -4139,6 +4149,7 @@ adventures:
         levels:
             16:
                 example_code: "```\n# Pega tu código aquí\n\n# El juego\n{while} juego_terminado _\n    {print} _\n    _\n    _\n    _ = ['vacía', 'lista']\n    {remove} _\n    {remove} _\n    {call} _\n    {call} _ {with} _\n    {call} _ {with} _\n    {if} secuencia_jugador == _\n        _\n        _\n        _\n    {else}\n        _\n        juego_terminado = _\n```\n"
+                story_text: "¡En esta pestaña programaremos el juego de Simón dice!\n\n### Ejercicio\n***Pega tu código*** Copia tu código de la pestaña anterior y pégalo aquí.\n\n***Programa el juego*** Empezamos asegurándonos que el juego continúa mientras no se termine. Después imprimimos en qué nivel está el jugador, utilizamos la variable para ello. Solo mostramos eso durante 1 segundo y después volvemos a limpiar la pantalla.\nAhora, tenemos que crear la lista vacía secuencia_jugador. Ya hemos programado como rellenar la lista, con nuestra función `player_sequence`, pero nunca hemos hecho la propia lista. Para crear la lista utilizamos el mismo truco que hicimos en la pestaña anterior.\nHaremos un lista con las palabras 'vacía' y 'lista' en ella, y entonces eliminamos ambas palabras. Después, llamaremos a las 3 funciones que hemos creado.\nPor último, tendremos que comprobar si el jugador ha dado las respuestas correctas (por lo que la secuencia_jugador y la secuencia_simon son las mismas).\nSi ese es el caso, If that's the case, elogiaremos al jugador. Espera 1 segundo y aumenta el nivel en 1.\n¿Ha dado el jugador una respuesta incorrecta? Se lo diremos y terminaremos el juego estableciendo juego_terminado a 'Verdadero'\n\n***¡Disfruta del juego!*** ¡Gran trabajo! ¿No funciona tu juego? ¡Utiliza el botón con el icono de la mariquita para depurar tu código!\n"
     tic_2:
         default_save_name: Tic
         description: ¡Juega una partida de Tres en raya!
@@ -4146,12 +4157,14 @@ adventures:
         levels:
             16:
                 example_code: "```\n# Pega tu código de la ventura anterior aquí\n\n# Añadir variables\njuego_terminado = _\nsigno = _\n\n# El juego\n{while} _\n    opcion = _ '¿Jugador ' signo '_?'\n    tablero[opcion] = _\n    _ imprimir_tablero\n    juego_terminado = {ask} _\n    {if} signo = 'o'\n        signo = _\n    _\n        signo = _\n```\n"
+                story_text: "En la aventura anterior hemos aprendido a cómo crear un terreno de juego. ¡Ahora aprenderás a cómo crear el juego!\n\n### Ejercicio\n***Pega tu código*** Empieza pegando tu código de la aventura anterior aquí.\n\n***Añade variables*** Debajo de tu lista llamada `field` añadiremos 2 variables más que necesitaremos para programar el juego.\nLa variable `game_over` nos dice si el juego se ha terminado, y debería ser 'no' al inicio del juego.\nLa variable `sign` nos dice si es el turno del jugador x o del jugador o. Establece la variable a 'x'.\n\n***El juego*** Primero utiliza el comando {while}, para asegurar que el juego sigue en curso mientras la variable juego_terminado esté establecida en no.\nDurante el juego, primero preguntamos al jugador que celda elige. Entonces cambiamos el campo con el número que eligan en su signo.\nDespués imprimimos el tablero de nuevo y preguntamos al jugador si ya ha ganado. Por último queremos cambiar a quien le toca, así que si el signo es 'x' debería cambiar a 'o' y a la inversa.\n\n***Prueba tu juego*** ¿Funciona? Genial, ¡diviértete jugando al juego! Si no, utiliza el botón con el icono de la mariquita para depurar tu código.\nSin embargo te habrás dado cuenta de un error en código, ¡puedes robar la celda del otro jugador! Si el otro elige la celda 1, simplemente puedes introducir 1 tras él y robarle su celda.\n¡Eso no es justo! Ve a la siguiente pestaña para aprender cólo arreglar este problema.\n"
     tic_3:
         description: ¡Juega una partida de Tres en raya!
         default_save_name: Tic
         levels:
             16:
                 example_code: "```\n# Pega tu código aquí\n\n# Utiliza esto para solucionar el error\n{if} _ = '.'\n    campo[eleccion] = signo\n{else}\n    {print} _\n    _\n```\n"
+                story_text: "Habrás notado un error en el código que hiciste en la aventura anterior. ¡Puedes robar la celda de otro jugador! Si el otro jugador elige la celda 1, simplemente puedes introducir 1 tras él y robarle su celda.\n¡Eso no es justo! En esta pestaña arreglaremos este error.\n\n### Ejercicio\n***Pega tu código aquí*** Pega tu código de la aventura anterior aquí.\n\n***Arregla el error*** Para arreglar el error reemplazamos la línea que dice `field[choice] = sign`. Esto convierte cualquier celda que el jugador haya elegido en su signo.\nVe a la cabecera que dice 'Utiliza esto para solucionar el error' y completa el código. Primero queremos comprobar si la celda elegida está todavía vacía, tal que `if field[choice] = '.'`. Si este es el caso, se te permite ocuparla.\nDespués, hacemos un comando sino e imprimimos 'Lo sentimos, esta celda ya está ocupada' si la celda no está vacía. Por último, añadimos un comando {sleep} , para que los jugadores puedan leer el texto antes de que se borre de nuevo.\nAhora copia este fragmento de código y reemplaza la línea `field[choice] = sign` con este nuevo fragmento de código.\n\n***¡Juega a tu juego!*** ¡Ahora el juego debería de funcionar correctamente! ¡Buen trabajo!\nEl único defecto es que te puede molestar un poco que el juego te pregunte continuamente si ya has ganado. ¿Quieres corregir esto? ¡Ve al nivel 17 y lo arreglaremos!\n"
         name: Tres en raya 3
     simon:
         default_save_name: Simón
@@ -4159,4 +4172,5 @@ adventures:
         levels:
             16:
                 example_code: "```\n# Haz 2 listas\ncolores = _\n_ = ['vacía', 'lista']\n{remove} _ {from} secuencia_simon\n{remove} _\n\n# Crea una función que añada un color\n_ añadir_color_aleatorio\n    _\n    {add} _\n\n# Crea una función que muestre la secuencia_simon\n{define} _\n    {for} i {in} {range} 1 {to} _\n        {print} _\n        _\n        _\n\n# Prueba tu programa\n{call} _\n{call} mostrar_secuencia_simon {with} 1\n```\n"
+                story_text: "¡Hagamos un juego de Simón dice! Simón dice es un juego de memoria en el que a cada jugador se le da un color. Ellos tienen que repetir ese color de nuevo.\nSi lo consigues correctamente se añade un color a la secuencia, por lo que ahora tienen que recordar 2 colores, después 3, después 4, etc. El juego se para tan pronto como un jugador cometa un fallo.\n\n### Ejercicio\nEn esta primera parte de la aventura de Simón dice, dejaremos que el ordenador elija un color aleatorio y lo añada a la lista.\n\n***Haz 2 listas*** Primero, haz una lista llamada `colors` y rellenala con los colores rojo, amarillo, verde y azul.\nDespués haz una lista llamada `simon_sequence`. Esta lista se utilizará como la respuesta.\nAl inicio del juego, esta lista debe estar vacía. Por desgracia, no podemos crear una lista vacía (todavía), así que primero la rellenaremos con las palabras 'vacía' y 'lista' y las eliminaremos inmediatamente de la lista.\n\n***Crear una función que añada un color a la secuencia*** Ahora que tenemos una lista vacia llamada secuencia_simon, podemos empezar a rellenarla con colores aleatorios.\nEsto lo hacemos con una función, así que podemos llamarla cada vez que haya un nivel nuevo en nuestro juego. Crea una función llamada `add_random_color`.\nEntonces crea la variable color_aleatorio y establécela a un color aleatorio. Después, añade este color aleatorio a la secuencia_simon.\n\n***Crea una función que muestre la secuencia_simon*** Empieza nombrando la nueva función `show_simon_sequence` con `level` como argumento. Ahora queremos mostrar cuantos colores como el nivel en el que estemos (en el nivel 1 veremos 1 color, 2 colores para el nivel 2, etc.).\nAsí que repetimos tantas veces `level`, para imprimir `simon_sequence[i]`. Cada vez que se muestra un color, espero 1 segundo y borra la pantalla.\n\n***Prueba tu juego*** Antes de pasar al siguiente nivel, prueba si las funciones funcionan llamándolas a ambas. Si funcionan, deberías ver un color aleatorio en tu pantalla de resultado.\n¡Elimina la parte de prueba de tu código, copia el código y continúa a la siguiente pestaña para aprender más sobre el juego de Simón dice!\n"
         description: Haz un juego de Simón dice
