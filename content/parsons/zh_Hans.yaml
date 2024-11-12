@@ -49,7 +49,7 @@ levels:
                 {print} 口袋妖怪 {at} {random}
         2:
             story: 创建一个彩票，让您可以选择可能赢得的额外奖品。
-            code: "prizes {is} 汽车,仓鼠,100 万欧元\nprize {is} {ask} '您想赢得什么？'\n{add} prize {to_list} 奖品\n{print} '您赢得了' prizes {at} {random}"
+            code: "prizes {is} car, hamster, 1 million euros\nprize {is} {ask} 'What would you like to win?'\n{add} prize {to_list} prizes\n{print} 'You won a ' prizes {at} {random}"
     6:
         1:
             code: |-
@@ -91,7 +91,7 @@ levels:
             story: |-
                 此代码询问餐厅的顾客是否要订购甜点。如果他们这样做，它会问他们什么样的甜点。如果他们订购提拉米苏，他们会被告知提拉米苏已经售罄。
                 你能让代码工作吗？
-            code: "order = {ask} '您要点甜点吗？'\n{if} order = 是\n    dessert = {ask} '您要点什么甜点？'\n    {if} dessert = 提拉米苏\n        {print} '抱歉，提拉米苏卖完了。'\n    {else}\n        {print} '马上上一道'甜点'！'\n    {else}\n        {print} '您不需要甜点。没问题！'"
+            code: "order = {ask} 'Would you like to order dessert?'\n{if} order = yes\n    dessert = {ask} 'What kind of dessert would you like?'\n    {if} dessert = tiramisu\n        {print} 'Sorry, we are out of tiramisu.'\n    {else}\n        {print} 'One ' dessert ' coming right up!'\n{else}\n    {print} 'You dont want a dessert. No problem!'"
         1:
             story: 这个游戏会给你三道数学作业，每次的题目都不一样，你能找出顺序吗？
             code: "numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n{repeat} 3 {times}\n    number = numbers {at} {random}\n    correct_answer = 5 * number\n    answer = {ask} '5 次' number ' 是多少？'\n    {if} answer = correct_answer\n        {print} '做得好！'\n    {else}\n        {print} '不！正确答案是 ' correct_answer"
@@ -105,7 +105,7 @@ levels:
             story: |-
                 这个化妆机器人将为您决定您的新发型。如果您不同意第一个选择，可以重试。
                 **头脑**变量人定义在第一行。第二个中的可变发型。
-            code: "people = Betty,Amanda,Marc\nhairstyles = 秃头,莫霍克发型,马尾辫,尖刺\n{for} person {in} people\n    {print} person ' 将获得 ' 发型 {at} {random}\n    happy = {ask} person '，您对这个选择满意吗？'\n    {if} happy {is} yes\n        {print} '太好了'\n    {else}\n        {print} '让我们再试一次... 然后 'person ' 将获得 ' 发型 {at} {random}"
+            code: "people = Betty, Amanda, Marc\nhairstyles = a bald head, a mohawk, a ponytail, spikes\n{for} person {in} people\n    {print} person ' will get ' hairstyles {at} {random}\n    happy = {ask} person ', are you happy with this choice?'\n    {if} happy {is} yes\n        {print} 'Great'\n    {else}\n        {print} 'Lets try again... Then 'person ' will get ' hairstyles {at} {random}"
     11:
         1:
             story: 创建除夕倒计时！程序应该在一秒钟内显示从10到1的数字，然后祝你新年快乐。
@@ -119,7 +119,7 @@ levels:
             story: |-
                 创建一个程序，告诉我们科学集市的最终结果。首先定义变量参赛者，然后定义变量位置。
                 **提示** 第 5 行应该是睡眠命令，而且你应该以表示祝贺结束。
-            code: "{print} '现在我们将公布科学展览的结果'\ncontestants = Vivienne,Paul,Trixy,Bianca,Katya\n名次 = 5\n{for} contestant {in} contestants\n    {sleep} 2\n    {print} '第 ' 名次 ' 的比赛已经结束...' 参赛者\n    名次 = 名次 - 1\n{print} '恭喜！'"
+            code: "{print} 'And now we will reveal the results of the science fair'\ncontestants = Vivienne, Paul, Trixy, Bianca, Katya\nplace = 5\n{for} contestant {in} contestants\n    {sleep} 2\n    {print} 'On number ' place ' has ended... ' contestant\n    place = place - 1\n{print} 'Congratulations!'"
     12:
         1:
             story: |-
@@ -136,7 +136,7 @@ levels:
             code: "verses = '我们该怎么处置这个醉酒的水手', '她好嗨，然后站了起来'\n{for} verse {in} verses\n    {for} count {in} {range} 1 {to} 3\n        {print} verse\n    {print} '一大早'"
         2:
             story: 和我们一起玩龙卷风游戏！首先定义可变的人，然后是四肢，然后是颜色。
-            code: "people = 'Jess', 'Nick', 'Winston'\nlimbs = '左手', '左脚', '右手', '右脚'\ncolors = '红色', '蓝色', '绿色', '黄色'\n{for} person {in} people\n    {print} person '，将您的 ' limbs {at} {random} ' 放在 ' colors {at} {random} 上"
+            code: "people = 'Jess', 'Nick', 'Winston'\nlimbs = 'left hand', 'left foot', 'right hand', 'right foot'\ncolors = 'red', 'blue', 'green', 'yellow'\n{for} person {in} people\n    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}"
     3:
         2:
             story: 创建一个程序，为您随机选择一顿饭。列出食物和配料清单，让程序决定您要吃什么！
