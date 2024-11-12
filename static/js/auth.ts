@@ -119,7 +119,14 @@ export function initializeFormSubmits() {
       const response = await postJson('/profile', convertFormJSON($(this)));
       if (response.reload) {
         modal.notifySuccess(response.message, 2000);
-        setTimeout (function () {location.reload ()}, 2000);
+        setTimeout (function () {
+          if (response["new_lang"]) {
+            const new_lang = response["new_lang"]
+            location.href = `${location.protocol}//${new_lang}.${theDomainName}/my-profile`
+          } else {
+            location.reload ()
+          }
+        }, 2000);
       } else {
         modal.notifySuccess(response.message);
       }

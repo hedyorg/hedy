@@ -130,6 +130,7 @@ class ProfileModule(WebsiteModule):
         if session["lang"] != body["language"] or session["keyword_lang"] != body["keyword_language"]:
             resp["message"] = gettext("profile_updated_reload")
             resp["reload"] = True
+            resp["new_lang"] = body["language"]
         else:
             resp["message"] = gettext("profile_updated")
 
