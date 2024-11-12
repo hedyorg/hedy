@@ -49,11 +49,11 @@ let theAdventures: Record<string, Adventure> = {};
 export let theLevel: number = 0;
 export let theLanguage: string = '';
 export let theKeywordLanguage: string = 'en';
+export let theDomainName: string = '';
 let theStaticRoot: string = '';
 let currentTab: string;
 let theUserIsLoggedIn: boolean;
 let selectedURI: JQuery<HTMLElement>;
-let theDomainName: string = '';
 //create a synth and connect it to the main output (your speakers)
 //const synth = new Tone.Synth().toDestination();
 

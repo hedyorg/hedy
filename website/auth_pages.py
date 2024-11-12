@@ -92,7 +92,7 @@ class AuthModule(WebsiteModule):
         if user.get("teacher") and user.get("verification_pending"):
             self.db.update_user(user["username"], {"verification_pending": None})
             resp_body = {"first_time": True}
-
+        resp_body['lang'] = user.get('language', 'en')
         resp = make_response(resp_body)
         # We set the cookie to expire in a year,
         # just so that the browser won't invalidate it if the same cookie gets renewed by constant use.

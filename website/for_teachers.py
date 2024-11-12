@@ -666,9 +666,9 @@ class ForTeachersModule(WebsiteModule):
         return redirect("/for-teachers")
 
     @route("/exit-preview-teacher-mode", methods=["GET"])
-    @route("/exit-preview-teacher-mode", methods=["GET"], subdomain="<subdomaon>")
+    @route("/exit-preview-teacher-mode", methods=["GET"], subdomain="<language>")
     # Note: we explicitly do not need login here, anyone can exit preview mode
-    def exit_teacher_mode(self):
+    def exit_teacher_mode(self, language="en"):
         self.auth.logout()
         return redirect("/hedy")
 
