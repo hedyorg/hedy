@@ -338,16 +338,15 @@ class TestsLevel11(HedyTester):
                     print 'no!'""")
 
         expected = self.dedent(
-            self.for_loop('i', 1, 10),
+            "global_scope_ = dict()",
+            self.for_loop('i', 1, 10, scope='global_scope_'),
             ("""\
             if_pressed_mapping = {"else": "if_pressed_default_else"}
             if_pressed_mapping['p'] = 'if_pressed_p_'
             def if_pressed_p_():
-              global i
               print(f'press')
             if_pressed_mapping['else'] = 'if_pressed_else_'
             def if_pressed_else_():
-              global i
               print(f'no!')
             extensions.if_pressed(if_pressed_mapping)
             time.sleep(0.1)""", '  '))
@@ -356,3 +355,31 @@ class TestsLevel11(HedyTester):
             code=code,
             expected=expected,
         )
+
+    def test_if_pressed_in_for_loop(self):
+        code = textwrap.dedent("""\
+        for i in range 1 to 10
+            print i
+            if i is pressed
+                r = 'Yes'
+            else
+                r = 'No'
+            print r""")
+
+        expected = self.dedent(
+            "global_scope_ = dict()",
+            self.for_loop('i', 1, 10, scope='global_scope_'),
+            ("""\
+            print(f'{global_scope_.get("i") or i}')
+            if_pressed_mapping = {"else": "if_pressed_default_else"}
+            if_pressed_mapping[(global_scope_.get("i") or i).data] = 'if_pressed_i_'
+            def if_pressed_i_():
+              global_scope_["r"] = Value('\\'Yes\\'')
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            def if_pressed_else_():
+              global_scope_["r"] = Value('\\'No\\'')
+            extensions.if_pressed(if_pressed_mapping)
+            print(f'{global_scope_.get("r") or r}')
+            time.sleep(0.1)""", '  '))
+
+        self.single_level_tester(code=code, expected=expected)
