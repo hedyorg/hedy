@@ -13,13 +13,13 @@ adventures:
                     Після першого рядка почніть з `{print}`, якщо речення потрібно вивести на екран.
                     Використовуйте `{echo}`, якщо ви хочете, щоб ваш головний герой знаходився в кінці речення.
                 example_code: |
-                    ```
-                    {ask} Головним героєм цієї історії є
-                    {print} Головний герой тепер збирається прогулятися лісом
-                    {echo} Він трохи наляканий,
-                    {print} Він чує божевільні звуки звідусіль
-                    {print} Він боїться, що це ліс з привидами
-                    ```
+                    й й
+                    {ask} Головний герой цієї історії
+                    {print} Головний герой тепер збирається ходити в ліс
+                    {echo} Вони трохи рубають,
+                    {print} Вони чують божевільні шуми всюди
+                    {print} Вони бояться це лісовий ліс
+                    й й
                 story_text_2: |
                     ### Вправа
                     Тепер створіть власну історію з щонайменше 6 рядків коду.
@@ -35,14 +35,14 @@ adventures:
 
                     Потім ви можете вставити це ім'я в будь-яке місце в реченні.
                 example_code: |-
-                    ```
-                    імя {is} {ask} Як звати головного героя?
-                    {print} імя зараз побіжить лісом
-                    {print} iмя трохи боїться.
-                    {print} Раптом він чує божевільний шум...
+                    й й
+                    {is} {ask} Що таке ім'я основного персонажа?
+                    {print} назва тепер збирається запустити в лісах
+                    {print} назва трохи рубається
+                    {print} Suddenly вона чує божевільний...
                     {sleep}
-                    {print} iмя боїться, що це ліс з привидами.
-                    ```
+                    {print} назва боїться це лісовий ліс
+                    й й
                 story_text_2: |
                     ### Вправа
                     Тепер настав час додати змінні до вашої власної історії, яку ви створили на попередньому рівні.
@@ -57,18 +57,18 @@ adventures:
                     На третьому рівні ви можете зробити свою історію веселішою. Ви можете використовувати випадковість для будь-якого монстра, тварини або іншої перешкоди, наприклад, так:
                 example_code: |
                     ```
-                    тварини {is} 🦔, 🐿, 🦉, 🦇
-                    {print} Тепер він чує звуки тварини {at} {random}
+                    тварини {є} 🦔, 🐿, 🦉, 🦇
+                    {print} Тепер вони чують звуки тварин {at} {random}
                     ```
                 story_text_2: |
                     Команда `{add}` також може стати в нагоді у вашій історії.
                 example_code_2: |
                     ```
-                    {print} Він чує звук
+                    {print} Вони чують звук
                     тварини {is} 🐿, 🦔, 🦇, 🦉
-                    тварина {is} {ask} Як ти думаєш, яка це істота?
-                    {add} тварина {to_list} тварини
-                    {print} це була тварини {at} {random}
+                    тварина {is} {ask}, запитати Як ви думаєте, що це?
+                    {add} {to_list} тварин
+                    {print} це були тварини {at} {random}
                     ```
                 story_text_3: |
                     Ось приклад команди `{remove}` у вашій історії
@@ -126,7 +126,7 @@ adventures:
                     {print} мення 'гуляє лісом'
                     {print} 'зустрічає монстра'
                     кінець {is} {ask} 'Ви хочете гарний чи поганий кінець?'
-                    {if} кінець {is} хороший {print} мення 'бере меч і монстр швидко тікає'
+                    {if} {is} хороший {print} мення 'бере меч і монстр швидко тікає'
                     {else} {print} "Монстр з'їдає" мення
                     ```
             7:
@@ -158,7 +158,7 @@ adventures:
                     ```
                     {print} 'О, ні! Тиранозавр наближається!'
                     кінець = {ask} 'Ви хочете щасливий чи сумний кінець?'
-                     {if} кінець {is} щасливий
+                     {if} {is} щасливий
                         {print} 'Якраз вчасно, Річард стрибає назад у машину часу!'
                         {print} _
                     {else}
@@ -790,12 +790,13 @@ adventures:
                     **Десяткові числа**
                     До цього часу Hedy не дозволяла використовувати десяткові числа, такі як 1,5, але тепер ми це дозволяємо. Зауважте, що комп'ютери використовують символ `.` для десяткових чисел.
                 example_code: |
-                    ```
-                    {print} 'Two and a half plus two and a half is...'
-                    {print} 2.5 + 2.5
-                    ```
-
-                    {print} 2.5 + 2.5
+                    й й
+                    бургер = 5
+                    пн = 2
+                    загальний = бургер + напій
+                    Друк «Ви замовляєте бургер і напій»
+                    друк 'Чи коштує ' загальний ' доларів будь ласка Р
+                    й й
             13:
                 story_text: "Зараз ми будемо вивчати `{and}` та `{or}`! Якщо ви хочете перевірити два оператори, вам не обов'язково використовувати два `{if}`, ви можете використовувати `{and}` і `{or}`. \n\nЯкщо ви використовуєте `{and}`, обидва оператори, зліва і справа від `{and}`, повинні бути істинними. Ми також можемо використовувати `{or}`. Тоді лише одне твердження має бути правильним."
                 example_code: |
@@ -961,11 +962,12 @@ adventures:
                 example_code: "```\npeople {is} mom, dad, Emma, Sophie\ndishwasher {is} people {at} {random}\n{if} dishwasher {is} Sophie {print} _ too bad I have to do the dishes _ \n{else} {print} 'luckily no dishes because' _ 'is already washing up'\n```\n"
             6:
                 story_text_2: |
-                    If you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!
-                    To create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.
+                    Якщо ви не впевнені, що попередня програма може вибрати для вас, щоб зробити страви протягом всього тижня! Це не ярмарок!
+                    Щоб створити чесну систему, ви можете використовувати команду `{remove}` для видалення обраної особи зі списку. Так ви не повинні робити страви знову до тих пір, поки що кожен знайде щось.
 
-                    Monday and tuesday are ready for you! Can you add the rest of the week?
-                    And... can you come up with a solution for when your list is empty?
+                    З понеділка по п'ятницю! Чи можна додати решту тижня?
+                    І ви можете придумати, коли ваш список порожній?
+                    ?
                 example_code_2: |
                     ```
                     people = mom, dad, Emma, Sophie
@@ -1465,21 +1467,21 @@ adventures:
             14:
                 example_code: |
                     ```
-                    _ calculate_budget with wish, money, allowance
-                        to_save = wish - money
-                        weeks = to_save / allowance
-                        {if} wish _ money
-                            {print} 'You need to save up some more!'
-                            {print} 'Youll need ' weeks ' more weeks.'
+                    _ розрахунок_бюджету {with} бажанням, грошима, надбавкою
+                        to_save = бажання - гроші
+                        тижнів = to_save / надбавка
+                        {if} хоче _ грошей
+                            {print} "Вам потрібно ще трохи заощадити!"
+                            {print} "Вам знадобиться " тижнів " більше тижнів.'
                         {else}
-                            {print} 'Great! You have enough'
-                            {print} 'Lets go shopping!'
+                            {print} "Чудово! Тобі досить'
+                            {print} "Ходімо за покупками!"
 
-                    money = {ask} 'How much money have you saved?'
-                    wish = {ask} 'How much money do you need?'
-                    allowance = {ask} 'How much pocket money do you get each week?'
+                    money = {ask} 'Скільки грошей ви заощадили?'
+                    wish = {ask} 'Скільки грошей вам потрібно?'
+                    allowance = {ask} 'Скільки кишенькових грошей ви отримуєте щотижня?'
 
-                    {call} calculate_budget with _, _, _
+                    {call} _
                     ```
     pressit:
         levels:
@@ -1511,25 +1513,24 @@ adventures:
         levels:
             7:
                 story_text: |
-                    ## Repeat! Repeat! Repeat!
-                    Level 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times. Like this:
+                    ## Повторіть! Повторіть! Повторіть!
+                    Рівень 7 додає команду `{repeat}`. `{repeat}` можна використовувати для виконання одного рядка коду кілька разів. як це:
 
-                    ### Exercise
-                    Play around with the repeat command. Can you make the happy birthday song in only 3 lines of code instead of 4 now?
+                    ### Вправи
+                    Пограйте з командою `{repeat}`. Чи можете ви створити пісню з днем народження лише в 3 рядках коду замість 4 зараз?
             9:
                 story_text: |
                     Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...
                     Good news! In this level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command. Putting a block of code inside another block of code is called nesting.                     ``` Putting a block of code inside another block of code is called nesting.
                 example_code: |
-                    ```
-                    answer = {ask} 'Are you ready to learn something new?'
-                    {if} answer {is} yes
-                        {print} 'Great! You can learn to use the repeat command in the if command!'
-                        {print} 'Hooray!'
-                        {print} 'Hooray!'
-                        {print} 'Hooray!'
+                    й й
+                    {repeat} 3 {times}
+                    замовлення = {ask} 'Що б ви хотіли замовити? Р
+                    {if} замовлення {is} піца
+                    {print} "Yammie Р
                     {else}
-                        {print} 'Maybe you should practice some more in the previous level'
+                    {print} 'pizza краще! Р
+                    й й
     repeat_command_2:
         description: repeat command 2
         levels:
@@ -1645,27 +1646,27 @@ adventures:
                     Наприклад, ви можете "`{ask}` соус, `{if}` хтось замовить картоплю фрі, але ви не будете цього робити, `{if}` хтось замовить піцу!
                     Перевірте приклад і спробуйте це у своєму власному віртуальному ресторані!
                 example_code: |
-                    ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    people = {ask} 'How many people will be joining us today?'
-                    {print} 'Great!'
-                    price = 0
-                    {repeat} people {times}
-                        food = {ask} 'What would you like to order?'
-                        {print} food
-                        {if} food {is} fries
-                            price = price + 3
-                            sauce = {ask} 'What kind of sauce would you like with your fries?'
-                            {if} sauce {is} no
-                                {print} 'no sauce'
-                            {else}
-                                price = price + 1
-                                {print} 'with ' sauce
-                        {if} food {is} pizza
-                            price = price + 4
-                    {print} 'That will be ' price ' dollar'
-                    {print} 'Enjoy your meal!'
-                    ```
+                    й й
+                    {print} 'Велком в ресторан Chez Hedy! Р
+                    люди = {ask} "Як багато людей будуть приєднатися до нас сьогодні? Р
+                    {print} 'Великий! Р
+                    ціна = 0
+                    {repeat} люди {times}
+                    _ їжа = {ask} 'Що б ви хотіли замовити? Р
+                    _ {print} їжа
+                    {if} {is} fries
+                    _ ціна = ціна + 3
+                    _ соус = {ask} 'Що б ви хотіли б з вигодою? Р
+                    _ {if} соус {is} немає
+                    _ {print} 'но соус Р
+                    {else}
+                    Ціна = ціна + 1
+                    _ {print} "з соусом "
+                    {if} їжа {is} піца
+                    _ ціна = ціна + 4
+                    {print} 'Ця буде ' ціна ' долар Р
+                    {print} 'Знайди своє харчування! Р
+                    й й
             10:
                 story_text: |
                     In this level you'll learn how to easily {ask} your guests' orders in a short code.
@@ -1693,21 +1694,12 @@ adventures:
                 story_text: |
                     Ми можемо використовувати`{for} i {in} {range} 1 {to} 5` для `{print}` виведення замовлень від декількох клієнтів у впорядкованому вигляді.
                 example_code: |
-                    ```
-                    {print} 'Welcome to Restaurant Hedy!'
-                    people = {ask} 'For how many people would you like to order?'
-                    {for} i {in} {range} 1 {to} people
-                        {print} 'Order number ' i
-                        food = {ask} 'What would you like to eat?'
-                        {print} food
-                        {if} food {is} fries
-                            sauce = {ask} 'What kind of sauce would you like with that?'
-                            {print} sauce
-                        drinks = {ask} 'What would you like to drink?'
-                        {print} drinks
-                    price = 4 * people
-                    {print} 'That will be ' price ' dollars, please!'
-                    ```
+                    й й
+                    {print} 'Велком до ресторану Hedy! Р
+                    люди = {ask} 'Для того, як багато людей хотіли б замовити? Р
+                    {print} 'Так ви хочете замовити для людей ' Р
+                    {print} "Пойти!"
+                    й й
             12:
                 story_text: |
                     From this level on you can use decimal numbers to make you menu more realistic.
@@ -1958,15 +1950,15 @@ adventures:
                 story_text: |
                     In a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!
                 example_code: |
-                    ```
-                    verse = 99
-                    {repeat} 99 {times}
-                        {print} verse ' bottles of beer on the wall'
-                        {print} verse ' bottles of beer'
-                        {print} 'Take one down, pass it around'
-                        verse = verse - 1
-                        {print} verse ' bottles of beer on the wall'
-                    ```
+                    й й
+                    вірші = 99
+                    _ 99 {times}
+                    {print} вірші ' пляшки пива на стіні Р
+                    {print} вірші ' пляшки пива Р
+                    {print} 'Зробити один вниз, пропустити його навколо'
+                    вірші = вірші - 1
+                    {print} вірші ' пляшки пива на стіні Р
+                    й й
             10:
                 story_text: |
                     У цьому рівні ви з легкістю зможете зробити дитячу пісеньку "П'ять маленьких мавпочок". Чи зможете ви скласти останній приспів?
@@ -1974,40 +1966,9 @@ adventures:
                     Або ви можете зробити старого Макдональда з усіма різними тваринами.
                 example_code: |
                     ```
-                    monkeys = 5, 4, 3, 2
-                    {for} monkey {in} monkeys
-                        {print} monkey ' little monkeys jumping on the bed'
-                        {print} 'One fell off and bumped his head'
-                        {print} 'Mama called the doctor and the doctor said'
-                        {print} 'NO MORE MONKEYS JUMPING ON THE BED!'
-                    ```
-
-                    ```
-                    sharks = baby, mommy, daddy, grandma, grandpa
-                    {for} shark {in} sharks
-                        {print} shark 'tututututudu'
-                        {print} shark 'tututututudu'
-                        {print} shark 'tututututudu'
-                        {print} shark
-                    ```
-                    ```
-                    animals = pig, dog, cow
-                    {for} animal {in} animals
-                        {if} animal {is} pig
-                            sound = oink
-                        {if} animal {is} dog
-                            sound = woof
-                        {if} animal {is} cow
-                            sound = moo
-                        {print} 'Old MacDonald had a farm'
-                        {print} 'E I E I O!'
-                        {print} 'and on that farm he had a ' animal
-                        {print} 'E I E I O!'
-                        {print} 'with a ' sound sound ' here'
-                        {print} 'and a ' sound sound ' there'
-                        {print} 'here a ' sound
-                        {print} 'there a ' sound
-                        {print} 'everywhere a ' sound sound
+                    родина = дитина, мама, тато, бабуся, дідусь
+                    _ _ _ _ 
+                      {print} _
                     ```
                 story_text_2: |
                     ### Exercise 2
@@ -2052,8 +2013,10 @@ adventures:
                     If you want to go backwards, you use the `{forward}` command but with a negative number. So for example `{forward} -100`
             3:
                 story_text: |
-                    In this level you can use use `{at} {random}` with the drawing turtle. A random choice makes the turtle walk a different path each time.
-                    Use `{at} {random}` to choose a value from a list. You can copy and paste lines 2 and 3 to create a longer random path.
+                    На цьому рівні ви можете використовувати `{at} {random}` із малюнком черепахи. Випадковий вибір змушує черепаху щоразу йти іншим шляхом.
+                    Використовуйте `{at} {random}`, щоб вибрати значення зі списку.
+                    ### Вправи
+                    Чи можете ви скопіювати та вставити рядки 2 і 3, щоб створити довший випадковий шлях?
             4:
                 example_code: |
                     ```
