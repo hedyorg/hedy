@@ -50,13 +50,16 @@ function convertFormJSON(form: JQuery<HTMLElement>) {
   return result;
 }
 
-function redirect(where: string) {
-  where = '/' + where;
-  window.location.pathname = where;
+function redirect(where: string, lang?: string) {
+  if (/^localhost:\d\d\d\d|(\d+\.\d+\.\d+\.\d+:\d\d\d\d)$/.test(theDomainName)) {
+    window.location.href = `http://${theDomainName}/${where}${lang ? `?lang=${lang}` : ''}`
+  } else {
+    const protocol = location.protocol
+    window.location.href = `${protocol}//${lang ? '.' + lang : ''}${theDomainName}/${where}`;
+  }
 }
 
 // *** User POST without data ***
-
 export async function logout() {
   await postNoResponse('/auth/logout');
   window.location.reload();
@@ -94,7 +97,7 @@ export function initializeFormSubmits() {
     tryCatchPopup(async () => {
       const body = convertFormJSON($(this))
       await postNoResponse('/auth/signup', body);      
-      afterLogin({"first_time": true, "is_teacher": "is_teacher" in body, "lang": body["lang"]});
+      afterLogin({"first_time": true, "is_teacher": "is_teacher" in body, "lang": body["language"] || "en"});
     });
   });
 
@@ -259,9 +262,9 @@ export function update_user_tags() {
  * - Check if we were supposed to be joining a class. If so, join it.
  * - Otherwise redirect to "my programs".
  */
-async function afterLogin(loginData: Dict<boolean>) {
+async function afterLogin(loginData: Dict<boolean|string>) {
   const { url } = localLoadOnce(REDIRECT_AFTER_LOGIN_KEY) ?? {};
-  const userLang = loginData['lang']  
+  const userLang: string = loginData['lang']  as string
   if (url && !loginData['first_time']) {
     const urlObject = new URL(url);
     window.location.href = `${urlObject.protocol}//${userLang}.${theDomainName}${urlObject.pathname}${urlObject.search !== ""  ? "?" + urlObject.search : ''}`;
@@ -277,19 +280,23 @@ async function afterLogin(loginData: Dict<boolean>) {
 
   // If the user logs in for the first time and is a teacher -> redirect to the for teacher page
   if (loginData['first_time'] && loginData['is_teacher']) {
-    window.location.href = `${location.protocol}//${userLang}.${theDomainName}/for-teachers`
+    redirect('for-teachers', userLang)   
+    return
   // If it's a student, send him to the first level
   } else if(loginData['first_time'] && !loginData['is_teacher']) {
-    window.location.href = `${location.protocol}//${userLang}.${theDomainName}/hedy/1`
+    redirect('hedy/1', userLang)
+    return
   }
   // If the user is an admin -> re-direct to admin page after login
   if (loginData['admin']) {
-    window.location.href = `${location.protocol}//${userLang}.${theDomainName}/admin`
+    redirect('admin', userLang)
+    return
   }
 
   // If the user is a teacher -> re-direct to for-teachers page after login
   if (loginData['teacher']) {
-    window.location.href = `${location.protocol}//${userLang}.${theDomainName}/for-teachers`
+    redirect('for-teachers', userLang)
+    return
   }
   // Otherwise, redirect to the programs page
   redirect('');
