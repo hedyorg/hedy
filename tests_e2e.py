@@ -453,7 +453,7 @@ class TestAuth(AuthHelper):
         self.assertNotEqual(hedy_cookie, None)
         self.assertEqual(hedy_cookie['httponly'], True)
         self.assertEqual(hedy_cookie['path'], '/')
-        self.assertEqual(hedy_cookie['samesite'], 'Lax,')
+        self.assertEqual(hedy_cookie['samesite'], 'Strict,')
 
     def test_logout(self):
         # GIVEN a logged in user
